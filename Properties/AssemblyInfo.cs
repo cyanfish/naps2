@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NAPS (Not Another PDF Scanner)")]
+[assembly: AssemblyTitle("NAPS2 (Not Another PDF Scanner 2)")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NAPS (Not Another PDF Scanner)")]
-[assembly: AssemblyCopyright("Copyright ©  2009 Pavel Sorejs")]
+[assembly: AssemblyProduct("NAPS2 (Not Another PDF Scanner 2)")]
+[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, 2012-2013 Ben Olden-Cooligan")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("0.9.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

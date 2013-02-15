@@ -266,7 +266,7 @@ namespace NAPS
             this.Controls.Add(this.toolStripContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FDesktop";
-            this.Text = "NotAnotherPdfScanner2";
+            this.Text = "Not Another PDF Scanner 2";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tStrip.ResumeLayout(false);
             this.tStrip.PerformLayout();
