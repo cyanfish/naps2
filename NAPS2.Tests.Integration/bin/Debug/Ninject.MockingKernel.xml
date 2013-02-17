@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ninject.MockingKernel</name>
+    </assembly>
+    <members>
+        <member name="T:Ninject.MockingKernel.ExtensionsForBindingSyntax">
+            <summary>
+            Extensions for the fluent binding syntax API.
+            </summary>
+        </member>
+        <member name="M:Ninject.MockingKernel.ExtensionsForBindingSyntax.ToMock``1(Ninject.Syntax.IBindingToSyntax{``0})">
+            <summary>
+            Indicates that the service should be bound to a mocked instance of the specified type.
+            </summary>
+            <typeparam name="T">The service that is being mocked.</typeparam>
+            <param name="builder">The builder that is building the binding.</param>
+            <returns>The syntax for adding more information to the binding.</returns>
+        </member>
+        <member name="T:Ninject.MockingKernel.IMockProviderCallbackProvider">
+            <summary>
+            Provides a callback that creates a provider which creates the mock.
+            </summary>
+        </member>
+        <member name="M:Ninject.MockingKernel.IMockProviderCallbackProvider.GetCreationCallback">
+            <summary>
+            Gets a callback that creates an instance of the <see cref="T:Ninject.Activation.IProvider"/> that creates the mock.
+            </summary>
+            <returns> The created callback.</returns>
+        </member>
+        <member name="T:Ninject.MockingKernel.MockingKernel">
+            <summary>
+            A kernel that will create mocked instances (via Moq) for any service that is
+            requested for which no binding is registered.
+            </summary>
+        </member>
+        <member name="M:Ninject.MockingKernel.MockingKernel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.MockingKernel.MockingKernel"/> class.
+            </summary>
+        </member>
+        <member name="M:Ninject.MockingKernel.MockingKernel.#ctor(Ninject.INinjectSettings,Ninject.Modules.INinjectModule[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.MockingKernel.MockingKernel"/> class.
+            </summary>
+            <param name="settings">The configuration to use.</param>
+            <param name="modules">The modules to load into the kernel.</param>
+        </member>
+        <member name="M:Ninject.MockingKernel.MockingKernel.Reset">
+            <summary>
+            Clears the kernel's cache, immediately deactivating all activated instances regardless of scope.
+            This does not remove any modules, extensions, or bindings.
+            </summary>
+        </member>
+        <member name="M:Ninject.MockingKernel.MockingKernel.AddComponents">
+            <summary>
+            Adds components to the kernel during startup.
+            </summary>
+        </member>
+        <member name="T:Ninject.MockingKernel.MockMissingBindingResolver">
+            <summary>
+            Missing binding resolver that creates a mock for every none self bindable type.
+            </summary>
+        </member>
+        <member name="F:Ninject.MockingKernel.MockMissingBindingResolver.mockProviderCallbackProvider">
+            <summary>
+            The call back provider for creating the mock provider.
+            </summary>
+        </member>
+        <member name="M:Ninject.MockingKernel.MockMissingBindingResolver.#ctor(Ninject.MockingKernel.IMockProviderCallbackProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.MockingKernel.MockMissingBindingResolver"/> class.
+            </summary>
+            <param name="mockProviderCallbackProvider">The mock provider callback provider.</param>
+        </member>
+        <member name="M:Ninject.MockingKernel.MockMissingBindingResolver.Resolve(Ninject.Infrastructure.Multimap{System.Type,Ninject.Planning.Bindings.IBinding},Ninject.Activation.IRequest)">
+            <summary>
+            Returns any bindings from the specified collection that match the specified request.
+            </summary>
+            <param name="bindings">The multimap of all registered bindings.</param>
+            <param name="request">The request in question.</param>
+            <returns>The series of matching bindings.</returns>
+        </member>
+        <member name="M:Ninject.MockingKernel.MockMissingBindingResolver.TypeIsInterfaceOrAbstract(System.Type)">
+            <summary>
+            Returns a value indicating whether the specified service is self-bindable.
+            </summary>
+            <param name="service">The service.</param>
+            <returns><see langword="True"/> if the type is self-bindable; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="T:Ninject.MockingKernel.SingletonSelfBindingResolver">
+            <summary>
+            Resolver for self bindable types. Binds them as singleton to self.
+            </summary>
+        </member>
+        <member name="F:Ninject.MockingKernel.SingletonSelfBindingResolver.selfBindingResolver">
+            <summary>
+            The SelfBindingResolver that is used to create bindings for self bindable types.
+            </summary>
+        </member>
+        <member name="M:Ninject.MockingKernel.SingletonSelfBindingResolver.Resolve(Ninject.Infrastructure.Multimap{System.Type,Ninject.Planning.Bindings.IBinding},Ninject.Activation.IRequest)">
+            <summary>
+            Returns any bindings from the specified collection that match the specified request.
+            </summary>
+            <param name="bindings">The multimap of all registered bindings.</param>
+            <param name="request">The request in question.</param>
+            <returns>The series of matching bindings.</returns>
+        </member>
+    </members>
+</doc>

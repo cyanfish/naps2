@@ -87,15 +87,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
-    <Compile Include="IDriverFactory.cs" />
-    <Compile Include="DefaultScanDriverFactory.cs" />
+    <Compile Include="Scan\Driver\IDriverFactory.cs" />
+    <Compile Include="Scan\Driver\DefaultScanDriverFactory.cs" />
     <Compile Include="Dependencies.cs" />
-    <Compile Include="IPdfExporter.cs" />
-    <Compile Include="IScanDriverFactory.cs" />
-    <Compile Include="PdfInfo.cs" />
-    <Compile Include="PdfSharpExporter.cs" />
-    <Compile Include="ScanDriverException.cs" />
-    <Compile Include="TwainScanDriver.cs" />
+    <Compile Include="Pdf\IPdfExporter.cs" />
+    <Compile Include="Scan\Driver\IScanDriverFactory.cs" />
+    <Compile Include="Pdf\PdfInfo.cs" />
+    <Compile Include="Pdf\PdfSharpExporter.cs" />
+    <Compile Include="Scan\Driver\ScanDriverException.cs" />
+    <Compile Include="Scan\Driver.Twain\TwainScanDriver.cs" />
     <Compile Include="CPageSizes.cs" />
     <Compile Include="CScannedImage.cs" />
     <Compile Include="Exceptions\EScannerOffline.cs" />
@@ -105,12 +105,12 @@
     <Compile Include="FAbout.Designer.cs">
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="IScanDevice.cs" />
-    <Compile Include="IScanDriver.cs" />
-    <Compile Include="IScannedImage.cs" />
-    <Compile Include="IScanSettings.cs" />
-    <Compile Include="MAPI\IEmailer.cs" />
-    <Compile Include="DriverFactory.cs" />
+    <Compile Include="Scan\IScanDevice.cs" />
+    <Compile Include="Scan\Driver\IScanDriver.cs" />
+    <Compile Include="Scan\IScannedImage.cs" />
+    <Compile Include="Scan\IScanSettings.cs" />
+    <Compile Include="Email\IEmailer.cs" />
+    <Compile Include="Scan\Driver\DriverFactory.cs" />
     <Compile Include="twain\CDIBUtils.cs" />
     <Compile Include="twain\CTWAINAPI.cs" />
     <Compile Include="twain\FTwainGui.cs">
@@ -119,7 +119,7 @@
     <Compile Include="twain\FTwainGui.Designer.cs">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </Compile>
-    <Compile Include="WiaScanDriver.cs" />
+    <Compile Include="Scan\Driver.Wia\WiaScanDriver.cs" />
     <Compile Include="wia\CWIAAPI.cs" />
     <Compile Include="CScanSettings.cs" />
     <Compile Include="CSettings.cs" />
@@ -172,9 +172,9 @@
     <Compile Include="ILProfileIcons.Designer.cs">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
     </Compile>
-    <Compile Include="MAPI\MAPIEmailer.cs" />
-    <Compile Include="MAPI\MAPIFileDesc.cs" />
-    <Compile Include="MAPI\MAPIMessage.cs" />
+    <Compile Include="Email\MAPIEmailer.cs" />
+    <Compile Include="Email\MAPIFileDesc.cs" />
+    <Compile Include="Email\MAPIMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FAbout.resx">
@@ -314,6 +314,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="M:\Development\Projects\NAPS\NAPS2.Tests.Integration\NAPS.Tests.Integration.nunit" total="10" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-02-17" time="18:08:46">
+  <environment nunit-version="2.6.2.12296" clr-version="2.0.50727.6400" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.2\bin" machine-name="BEN-N56VZ" user="Ben" user-domain="BEN-N56VZ" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Project" name="M:\Development\Projects\NAPS\NAPS2.Tests.Integration\NAPS.Tests.Integration.nunit" executed="True" result="Success" success="True" time="0.629" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\NAPS2.Tests.Integration.dll" executed="True" result="Success" success="True" time="0.473" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="NAPS2" executed="True" result="Success" success="True" time="0.473" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="0.472" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Integration" executed="True" result="Success" success="True" time="0.472" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="PdfSharpExporterTests" executed="True" result="Success" success="True" time="0.470" asserts="0">
+                        <results>
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Cancel_DoesntContinue" executed="True" result="Success" success="True" time="0.181" asserts="1" />
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Cancel_ReturnsFalse" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Normal_CreatesFile" executed="True" result="Success" success="True" time="0.175" asserts="2" />
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Normal_ReturnsTrue" executed="True" result="Success" success="True" time="0.039" asserts="1" />
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Progress_IsLinear" executed="True" result="Success" success="True" time="0.053" asserts="4" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="Assembly" name="M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\NAPS2.Tests.Integration.dll" executed="True" result="Success" success="True" time="0.130" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="NAPS2" executed="True" result="Success" success="True" time="0.129" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="0.129" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Integration" executed="True" result="Success" success="True" time="0.129" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="PdfSharpExporterTests" executed="True" result="Success" success="True" time="0.129" asserts="0">
+                        <results>
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Cancel_DoesntContinue" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Cancel_ReturnsFalse" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Normal_CreatesFile" executed="True" result="Success" success="True" time="0.038" asserts="2" />
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Normal_ReturnsTrue" executed="True" result="Success" success="True" time="0.041" asserts="1" />
+                          <test-case name="NAPS2.Tests.Integration.PdfSharpExporterTests.IPdfExporterTests.Export_Progress_IsLinear" executed="True" result="Success" success="True" time="0.038" asserts="4" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

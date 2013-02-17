@@ -1,0 +1,17 @@
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\NAPS2.Tests.Integration.dll
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\NAPS2.Tests.Integration.pdb
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\NAPS2.exe
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\Ninject.dll
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\Interop.WIA.dll
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\PdfSharp.dll
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\NAPS2.pdb
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\Ninject.pdb
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\Ninject.xml
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\obj\Debug\NAPS2.Tests.Integration.csprojResolveAssemblyReference.cache
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\obj\Debug\NAPS2.Tests.Integration.dll
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\obj\Debug\NAPS2.Tests.Integration.pdb
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\nunit.framework.dll
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\nunit.framework.xml
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\Ninject.MockingKernel.dll
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\Ninject.MockingKernel.pdb
+M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\Ninject.MockingKernel.xml
