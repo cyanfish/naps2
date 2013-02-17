@@ -68,6 +68,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net35\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.MockingKernel">
+      <HintPath>..\packages\Ninject.MockingKernel.3.0.0.5\lib\net35-full\Ninject.MockingKernel.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp, Version=0.9.653.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\PdfSharp.dll</HintPath>
@@ -81,6 +87,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
+    <Compile Include="Dependencies.cs" />
+    <Compile Include="IPdfExporter.cs" />
+    <Compile Include="PdfInfo.cs" />
+    <Compile Include="PdfSharpExporter.cs" />
     <Compile Include="ScanDriverException.cs" />
     <Compile Include="TwainScanDriver.cs" />
     <Compile Include="CPageSizes.cs" />
@@ -228,6 +238,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="NAPS_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

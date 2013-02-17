@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+using Ninject;
+
 namespace NAPS
 {
     static class Program
@@ -15,7 +17,8 @@ namespace NAPS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FDesktop(new MAPIEmailer()));
+
+            Application.Run(Dependencies.Kernel.Get<FDesktop>());
         }
     }
 }

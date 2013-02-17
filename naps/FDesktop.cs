@@ -8,12 +8,17 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
+
 using NAPS.wia;
 using NAPS.twain;
-using WIA;
 using NAPS.Email;
+
+using Ninject;
+
+using WIA;
 
 namespace NAPS
 {
@@ -243,7 +248,7 @@ namespace NAPS
 
         private void exportPDF(string filename)
         {
-            FPDFSave pdfdialog = new FPDFSave();
+            FPDFSave pdfdialog = Dependencies.Kernel.Get<FPDFSave>();
             pdfdialog.Filename = filename;
             pdfdialog.Images = images.Values;
             pdfdialog.ShowDialog(this);
