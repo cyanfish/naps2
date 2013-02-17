@@ -2757,7 +2757,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Ben Olden-Cooligan</td><td>0</td><td/><td>1897995061</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Ben Olden-Cooligan</td><td>0</td><td/><td>-1994308597</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>1898043893</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>1898043893</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION35</td><td>1033</td><td>Microsoft .NET Framework 3.5 needs to be installed for this installation to continue.</td><td>0</td><td/><td>1898031669</td></row>
@@ -3859,8 +3859,8 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>1898043893</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>1898043893</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>1898043893</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://sourceforge.net/projects/naps2/</td><td>0</td><td/><td>1897996981</td></row>
-		<row><td>ID_STRING3</td><td>1033</td><td>Ben Olden-Cooligan</td><td>0</td><td/><td>1898033941</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.BenOlden-Cooligan.com</td><td>0</td><td/><td>-1994308597</td></row>
+		<row><td>ID_STRING3</td><td>1033</td><td>Ben Olden-Cooligan</td><td>0</td><td/><td>-1994308597</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>1898043893</td></row>
 	</table>
 
@@ -3968,7 +3968,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>M:\Development\SVN\NAPS\naps\gfx\scanner-app.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>M:\Development\Projects\NAPS\naps\gfx\scanner-app.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
