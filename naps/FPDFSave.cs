@@ -30,14 +30,14 @@ namespace NAPS
             document.Layout = PdfSharp.Pdf.IO.PdfWriterLayout.Compact;
             document.Info.Title = "Scanned Image";
             document.Info.Subject = "Scanned Image";
-            document.Info.Author = "NAPS";
+            document.Info.Author = "NAPS2";
             int i = 1;
             foreach (CScannedImage img in Images)
             {
                 ThreadStart setstatus = delegate { this.SetStatus(i, Images.Count); };
                 this.Invoke(setstatus);
 
-                using (Bitmap baseImage = img.GetBaseImage())
+                using (Bitmap baseImage = img.GetImage())
                 {
                     double realWidth = baseImage.Width / baseImage.HorizontalResolution * 72;
                     double realHeight = baseImage.Height / baseImage.VerticalResolution * 72;

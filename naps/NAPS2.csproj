@@ -81,6 +81,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
+    <Compile Include="ScanDriverException.cs" />
+    <Compile Include="TwainScanDriver.cs" />
     <Compile Include="CPageSizes.cs" />
     <Compile Include="CScannedImage.cs" />
     <Compile Include="Exceptions\EScannerOffline.cs" />
@@ -90,8 +92,12 @@
     <Compile Include="FAbout.Designer.cs">
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="IScanDevice.cs" />
+    <Compile Include="IScanDriver.cs" />
     <Compile Include="IScannedImage.cs" />
+    <Compile Include="IScanSettings.cs" />
     <Compile Include="MAPI\IEmailer.cs" />
+    <Compile Include="ScanDriverFactory.cs" />
     <Compile Include="twain\CDIBUtils.cs" />
     <Compile Include="twain\CTWAINAPI.cs" />
     <Compile Include="twain\FTwainGui.cs">
@@ -100,6 +106,7 @@
     <Compile Include="twain\FTwainGui.Designer.cs">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </Compile>
+    <Compile Include="WiaScanDriver.cs" />
     <Compile Include="wia\CWIAAPI.cs" />
     <Compile Include="CScanSettings.cs" />
     <Compile Include="CSettings.cs" />

@@ -31,7 +31,7 @@ namespace NAPS
 
         private void thumbnailList1_ItemActivate(object sender, EventArgs e)
         {
-            FViewer viewer = new FViewer(images[(int)thumbnailList1.SelectedItems[0].Tag].GetBaseImage());
+            FViewer viewer = new FViewer(images[(int)thumbnailList1.SelectedItems[0].Tag].GetImage());
             viewer.ShowDialog();
         }
 
@@ -304,7 +304,7 @@ namespace NAPS
 
                     if (images.Count == 1)
                     {
-                        using (Bitmap baseImage = images.Values[0].GetBaseImage())
+                        using (Bitmap baseImage = images.Values[0].GetImage())
                         {
                             baseImage.Save(sd.FileName);
                         }
@@ -313,7 +313,7 @@ namespace NAPS
 
                     if (sd.FilterIndex == 7)
                     {
-                        var bitmaps = images.Values.Select(x => x.GetBaseImage()).ToArray();
+                        var bitmaps = images.Values.Select(x => x.GetImage()).ToArray();
                         CTiffHelper.SaveMultipage(bitmaps, sd.FileName);
                         foreach (Bitmap bitmap in bitmaps)
                         {
@@ -325,7 +325,7 @@ namespace NAPS
                     foreach (CScannedImage img in images.Values)
                     {
                         string filename = Path.GetDirectoryName(sd.FileName) + "\\" + Path.GetFileNameWithoutExtension(sd.FileName) + i.ToString().PadLeft(3, '0') + Path.GetExtension(sd.FileName);
-                        using (Bitmap baseImage = img.GetBaseImage())
+                        using (Bitmap baseImage = img.GetImage())
                         {
                             baseImage.Save(filename);
                         }

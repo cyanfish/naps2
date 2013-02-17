@@ -73,7 +73,7 @@ namespace NAPS
             }
         }
 
-        public Bitmap GetBaseImage()
+        public Bitmap GetImage()
         {
             if (bitDepth == CScanSettings.BitDepth.BLACKWHITE)
             {
@@ -117,7 +117,7 @@ namespace NAPS
 
         public void RotateFlip(RotateFlipType rotateFlipType)
         {
-            using (var img = GetBaseImage())
+            using (var img = GetImage())
             {
                 img.RotateFlip(rotateFlipType);
                 thumbnail = resizeBitmap(img, thumbnailWidth, thumbnailHeight);
