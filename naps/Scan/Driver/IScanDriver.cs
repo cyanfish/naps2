@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace NAPS
+namespace NAPS.Scan.Driver
 {
     /// <summary>
     /// An interface for document scanning drivers (e.g. WIA, TWAIN).

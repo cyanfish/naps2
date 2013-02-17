@@ -11,6 +11,8 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 
+using NAPS.Scan;
+
 namespace NAPS
 {
     public class CScannedImage : IScannedImage

@@ -7,7 +7,7 @@ using System.Text;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace NAPS
+namespace NAPS.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {

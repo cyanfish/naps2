@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using NAPS;
+using NAPS.Pdf;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Integration

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace NAPS
+namespace NAPS.Scan
 {
     public interface IScannedImage : IDisposable
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace NAPS
+namespace NAPS.Scan
 {
     public interface IScanSettings
     {

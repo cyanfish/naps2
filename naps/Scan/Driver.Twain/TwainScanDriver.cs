@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NAPS
+namespace NAPS.Scan.Driver.Twain
 {
     public class TwainScanDriver : IScanDriver
     {

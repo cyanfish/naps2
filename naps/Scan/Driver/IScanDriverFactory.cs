@@ -1,5 +1,5 @@
 ﻿using System;
-namespace NAPS
+namespace NAPS.Scan.Driver
 {
     public interface IScanDriverFactory : IDriverFactory<IScanDriver>
     {

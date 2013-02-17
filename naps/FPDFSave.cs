@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
+using NAPS.Pdf;
+
 namespace NAPS
 {
     public partial class FPDFSave : Form

@@ -5,7 +5,10 @@ using System.Text;
 
 using Ninject.Modules;
 using Ninject;
+
 using NAPS.Email;
+using NAPS.Pdf;
+using NAPS.Scan.Driver;
 
 namespace NAPS
 {
