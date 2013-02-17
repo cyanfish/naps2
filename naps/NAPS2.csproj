@@ -87,8 +87,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
+    <Compile Include="IDriverFactory.cs" />
+    <Compile Include="DefaultScanDriverFactory.cs" />
     <Compile Include="Dependencies.cs" />
     <Compile Include="IPdfExporter.cs" />
+    <Compile Include="IScanDriverFactory.cs" />
     <Compile Include="PdfInfo.cs" />
     <Compile Include="PdfSharpExporter.cs" />
     <Compile Include="ScanDriverException.cs" />
@@ -107,7 +110,7 @@
     <Compile Include="IScannedImage.cs" />
     <Compile Include="IScanSettings.cs" />
     <Compile Include="MAPI\IEmailer.cs" />
-    <Compile Include="ScanDriverFactory.cs" />
+    <Compile Include="DriverFactory.cs" />
     <Compile Include="twain\CDIBUtils.cs" />
     <Compile Include="twain\CTWAINAPI.cs" />
     <Compile Include="twain\FTwainGui.cs">
@@ -237,7 +240,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="NAPS_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

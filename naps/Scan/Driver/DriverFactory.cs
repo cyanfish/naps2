@@ -6,32 +6,19 @@ using System.Text;
 namespace NAPS
 {
     /// <summary>
-    /// Manages implementors of IScanDriver. Drivers are specified by their name (e.g. "wia" or "twain").
+    /// Manages implementors of T. Drivers are specified by their name.
     /// Drivers can be added or removed by calling RegisterDriver or UnregisterDriver, respectively.
     /// Once a driver has been registered, an instance can be created by calling CreateDriver.
     /// </summary>
-    public class ScanDriverFactory
+    public class DriverFactory<T> : IDriverFactory<T>
     {
-        /// <summary>
-        /// Gets the default driver factory. The initially registered drivers are "wia" and "twain".
-        /// </summary>
-        public static ScanDriverFactory Default { get; private set; }
-
-        static ScanDriverFactory()
-        {
-            Default = new ScanDriverFactory();
-            Default.RegisterDriver(WiaScanDriver.DRIVER_NAME, typeof(WiaScanDriver));
-            Default.RegisterDriver(TwainScanDriver.DRIVER_NAME, typeof(TwainScanDriver));
-            Default.DefaultDriverName = WiaScanDriver.DRIVER_NAME;
-        }
-
         private Dictionary<string, Type> types = new Dictionary<string, Type>();
 
         /// <summary>
         /// Registers a driver. Subsequent calls to CreateDriver with the driver's name will return an instance of the specified driver.
         /// </summary>
         /// <param name="driverName">The driver's name (case sensitive).</param>
-        /// <param name="type">The driver's class. It must implement IScanDriver.</param>
+        /// <param name="type">The driver's class. It must implement T.</param>
         public void RegisterDriver(string driverName, Type type)
         {
             if (driverName == null)
@@ -42,9 +29,9 @@ namespace NAPS
             {
                 throw new ArgumentNullException("type");
             }
-            if (!typeof(IScanDriver).IsAssignableFrom(type))
+            if (!typeof(T).IsAssignableFrom(type))
             {
-                throw new ArgumentException("The driver class must implement IScanDriver.");
+                throw new ArgumentException("The driver class must implement " + typeof(T).Name + ".");
             }
             if (types[driverName] != null)
             {
@@ -87,7 +74,7 @@ namespace NAPS
         /// </summary>
         /// <param name="driverName">The driver's name (case sensitive).</param>
         /// <returns>The driver instance.</returns>
-        public IScanDriver CreateDriver(string driverName)
+        public T CreateDriver(string driverName)
         {
             Type type = null;
             if (driverName != null)
@@ -106,7 +93,7 @@ namespace NAPS
                     throw new ArgumentException("The driver '" + driverName + "' could not be found, and the default driver '" + DefaultDriverName + "' could not be found either.");
                 }
             }
-            return (IScanDriver)type.GetConstructor(new Type[] { }).Invoke(null, new object[] { });
+            return (T)type.GetConstructor(new Type[] { }).Invoke(null, new object[] { });
         }
     }
 }

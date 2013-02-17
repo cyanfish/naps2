@@ -24,6 +24,7 @@ namespace NAPS
             {
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
                 Bind<IEmailer>().To<MAPIEmailer>();
+                Bind<IScanDriverFactory>().To<DefaultScanDriverFactory>();
             }
         }
     }
