@@ -374,7 +374,7 @@ namespace NAPS.wia
 
                         result.SetResolution((float)horizontalRes, (float)verticalRes);
 
-                        return new CScannedImage(result, settings.Depth, settings.HighQuality);
+                        return new CScannedImage(result, settings.Depth, settings.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg);
                     }
                 }
             }

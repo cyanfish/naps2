@@ -1,4 +1,4 @@
-NAPS (Not Another PDF Scanner)
+NAPS 2 (Not Another PDF Scanner 2)
 Copyright (C) 2009  Pavel Sorejs
 Copyright (C) 2012-2013 Ben Olden-Cooligan
 

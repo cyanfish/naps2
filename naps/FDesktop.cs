@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
@@ -312,16 +313,11 @@ namespace NAPS
 
                     if (sd.FilterIndex == 7)
                     {
-                        Image[] imgs = new Image[images.Count];
-                        foreach (CScannedImage img in images.Values)
+                        var bitmaps = images.Values.Select(x => x.GetBaseImage()).ToArray();
+                        CTiffHelper.SaveMultipage(bitmaps, sd.FileName);
+                        foreach (Bitmap bitmap in bitmaps)
                         {
-                            imgs[i] = img.GetBaseImage();
-                            i++;
-                        }
-                        CTiffHelper.SaveMultipage(imgs, sd.FileName);
-                        foreach (Bitmap img in imgs)
-                        {
-                            img.Dispose();
+                            bitmap.Dispose();
                         }
                         return;
                     }

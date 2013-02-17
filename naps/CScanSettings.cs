@@ -50,106 +50,33 @@ namespace NAPS
             TWAIN
         }
 
-        private string deviceID;
-        private Driver deviceDriver;
+        public HorizontalAlign PageAlign { get; set; }
 
-        private ScanSource source;
-        private DPI resolution;
-        private int brightnes;
-        private int contrast;
-        private bool showScanUI;
-        private BitDepth depth;
-        private int iconID;
-        private string displayName;
-        private CPageSizes.PageSize pageSize;
-        private HorizontalAlign pageAlign;
-        private Scale afterScanScale;
+        public Scale AfterScanScale { get; set; }
 
-        private bool highQuality;
+        public CPageSizes.PageSize PageSize { get; set; }
 
-        public HorizontalAlign PageAlign
-        {
-            get { return pageAlign; }
-            set { pageAlign = value; }
-        }
+        public bool ShowScanUI { get; set; }
 
-        public Scale AfterScanScale
-        {
-            get { return afterScanScale; }
-            set { afterScanScale = value; }
-        }
+        public string DisplayName { get; set; }
 
-        public CPageSizes.PageSize PageSize
-        {
-            get { return pageSize; }
-            set { pageSize = value; }
-        }
+        public int IconID { get; set; }
 
-        public bool ShowScanUI
-        {
-            get { return showScanUI; }
-            set { showScanUI = value; }
-        }
+        public BitDepth Depth { get; set; }
 
-        public string DisplayName
-        {
-            get { return displayName; }
-            set { displayName = value; }
-        }
+        public string DeviceID { get; set; }
 
-        public int IconID
-        {
-            get { return iconID; }
-            set { iconID = value; }
-        }
+        public Driver DeviceDriver { get; set; }
 
-        public BitDepth Depth
-        {
-            get { return depth; }
-            set { depth = value; }
-        }
+        public ScanSource Source { get; set; }
 
-        public string DeviceID
-        {
-            get{ return deviceID;}
-            set{deviceID = value;}
-        }
+        public DPI Resolution { get; set; }
 
-        public Driver DeviceDriver
-        {
-            get { return deviceDriver; }
-            set { deviceDriver = value; }
-        }
-        
-        public ScanSource Source
-        {
-            get { return source; }
-            set { source = value; }
-        }
+        public int Contrast { get; set; }
 
-        public DPI Resolution
-        {
-            get { return resolution; }
-            set { resolution = value; }
-        }
+        public int Brightness { get; set; }
 
-        public int Contrast
-        {
-            get { return contrast; }
-            set { contrast = value; }
-        }
-
-        public int Brightness
-        {
-            get { return brightnes; }
-            set { brightnes = value; }
-        }
-
-        public bool HighQuality
-        {
-            get { return highQuality; }
-            set { highQuality = value; }
-        }
+        public bool HighQuality { get; set; }
 
         public CScanSettings()
         {

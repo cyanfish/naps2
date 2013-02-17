@@ -90,6 +90,7 @@
     <Compile Include="FAbout.Designer.cs">
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="IScannedImage.cs" />
     <Compile Include="MAPI\IEmailer.cs" />
     <Compile Include="twain\CDIBUtils.cs" />
     <Compile Include="twain\CTWAINAPI.cs" />

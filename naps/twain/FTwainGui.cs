@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace NAPS.twain
 {
@@ -67,8 +68,11 @@ namespace NAPS.twain
                         {
                             IntPtr img = (IntPtr)pics[i];
                             int bitcount = 0;
-                            Bitmap bmp = CDIBUtils.BitmapFromDIB(img, out bitcount);
-                            bitmaps.Add(new CScannedImage(bmp,bitcount == 1 ? CScanSettings.BitDepth.BLACKWHITE : CScanSettings.BitDepth.C24BIT, settings.HighQuality));
+
+                            using (Bitmap bmp = CDIBUtils.BitmapFromDIB(img, out bitcount))
+                            {
+                                bitmaps.Add(new CScannedImage(bmp, bitcount == 1 ? CScanSettings.BitDepth.BLACKWHITE : CScanSettings.BitDepth.C24BIT, settings.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg));
+                            }
                         }
                         this.Close();
                         break;
