@@ -1,3 +1,4 @@
+using NAPS.Email;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -14,7 +15,7 @@ namespace NAPS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FDesktop());
+            Application.Run(new FDesktop(new MAPIEmailer()));
         }
     }
 }

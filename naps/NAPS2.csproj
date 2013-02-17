@@ -16,8 +16,9 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -89,6 +90,7 @@
     <Compile Include="FAbout.Designer.cs">
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="MAPI\IEmailer.cs" />
     <Compile Include="twain\CDIBUtils.cs" />
     <Compile Include="twain\CTWAINAPI.cs" />
     <Compile Include="twain\FTwainGui.cs">
@@ -149,9 +151,9 @@
     <Compile Include="ILProfileIcons.Designer.cs">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
     </Compile>
-    <Compile Include="MAPI\CMAPI.cs" />
-    <Compile Include="MAPI\CMapiFileDesc.cs" />
-    <Compile Include="MAPI\CMapiMessage.cs" />
+    <Compile Include="MAPI\MAPIEmailer.cs" />
+    <Compile Include="MAPI\MAPIFileDesc.cs" />
+    <Compile Include="MAPI\MAPIMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FAbout.resx">
@@ -216,6 +218,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="NAPS_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -274,7 +277,7 @@
     <Content Include="lib\Interop.WIA.dll" />
     <Content Include="lib\PdfSharp.dll" />
     <Content Include="scanner-app.ico" />
-    <Content Include="Setup\gpl.txt" />
+    <Content Include="Setup\license.txt" />
     <Content Include="Setup\setup.iss" />
     <Content Include="Setup\wiaaut.dll" />
   </ItemGroup>

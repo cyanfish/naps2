@@ -2,10 +2,10 @@ using System;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace NAPS.MAPI
+namespace NAPS.Email
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    class CMapiFileDesc
+    internal class MAPIFileDesc
     {
         public int reserved;
         public int flags;

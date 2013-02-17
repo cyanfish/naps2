@@ -12,15 +12,19 @@ using PdfSharp.Drawing;
 using NAPS.wia;
 using NAPS.twain;
 using WIA;
+using NAPS.Email;
 
 namespace NAPS
 {
     public partial class FDesktop : Form
     {
         private SortedList<int,CScannedImage> images;
-        public FDesktop()
+        private readonly IEmailer emailer;
+
+        public FDesktop(IEmailer emailer)
         {
             InitializeComponent();
+            this.emailer = emailer;
             images = new SortedList<int, CScannedImage>();
         }
 
@@ -341,7 +345,7 @@ namespace NAPS
             {
                 string path = Application.StartupPath + "\\Scan.pdf";
                 exportPDF(path);
-                MAPI.CMAPI.SendMail(path, "");
+                emailer.SendEmail(path, "");
                 File.Delete(path);
             }
         }

@@ -2,29 +2,29 @@ using System;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace NAPS.MAPI
+namespace NAPS.Email
 {
-    class CMAPI
+    public class MAPIEmailer : IEmailer
     {
         private const int MAPI_LOGON_UI = 0x00000001;
         private const int MAPI_DIALOG = 0x00000008;
 
-        public static int SendMail(string strAttachmentFileName, string strSubject)
+        public bool SendEmail(string attachmentFileName, string subject)
         {
             IntPtr session = new IntPtr(0);
             IntPtr winhandle = new IntPtr(0);
 
-            CMapiMessage msg = new CMapiMessage();
-            msg.subject = strSubject;
+            MAPIMessage msg = new MAPIMessage();
+            msg.subject = subject;
 
-            int sizeofMapiDesc = Marshal.SizeOf(typeof(CMapiFileDesc));
+            int sizeofMapiDesc = Marshal.SizeOf(typeof(MAPIFileDesc));
             IntPtr pMapiDesc = Marshal.AllocHGlobal(sizeofMapiDesc);
 
-            CMapiFileDesc fileDesc = new CMapiFileDesc();
+            MAPIFileDesc fileDesc = new MAPIFileDesc();
             fileDesc.position = -1;
             int ptr = (int)pMapiDesc;
 
-            string strPath = strAttachmentFileName;
+            string strPath = attachmentFileName;
             fileDesc.name = Path.GetFileName(strPath);
             fileDesc.path = strPath;
             Marshal.StructureToPtr(fileDesc, (IntPtr)ptr, false);
@@ -32,10 +32,10 @@ namespace NAPS.MAPI
             msg.files = pMapiDesc;
             msg.fileCount = 1;
 
-            return MAPISendMail(session, winhandle, msg, MAPI_LOGON_UI | MAPI_DIALOG, 0);
+            return MAPISendMail(session, winhandle, msg, MAPI_LOGON_UI | MAPI_DIALOG, 0) == 0;
         }
 
         [DllImport("MAPI32.DLL")]
-        private static extern int MAPISendMail(IntPtr sess, IntPtr hwnd,CMapiMessage message, int flg, int rsv);
+        private static extern int MAPISendMail(IntPtr sess, IntPtr hwnd, MAPIMessage message, int flg, int rsv);
     }
 }

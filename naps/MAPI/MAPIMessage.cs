@@ -2,10 +2,10 @@ using System;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace NAPS.MAPI
+namespace NAPS.Email
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    class CMapiMessage
+    internal class MAPIMessage
     {
         public int reserved;
         public string subject;
