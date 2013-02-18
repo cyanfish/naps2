@@ -91,7 +91,7 @@ namespace NAPS2.twain
 
                             using (Bitmap bmp = CDIBUtils.BitmapFromDIB(img, out bitcount))
                             {
-                                bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? CScanSettings.BitDepth.BLACKWHITE : CScanSettings.BitDepth.C24BIT, settings.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg));
+                                bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BLACKWHITE : ScanBitDepth.C24BIT, settings.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg));
                             }
                         }
                         this.Close();

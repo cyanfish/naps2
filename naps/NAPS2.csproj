@@ -87,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
+    <Compile Include="Scan\ExtendedScanSettings.cs" />
+    <Compile Include="Scan\ScanSettings.cs" />
+    <Compile Include="Scan\Driver.Exceptions\NoDevicesFoundException.cs" />
+    <Compile Include="Scan\Driver.Exceptions\DeviceOfflineException.cs" />
+    <Compile Include="Scan\Driver.Exceptions\DeviceNotFoundException.cs" />
+    <Compile Include="Scan\Driver.Wia\CWIAAPI.cs" />
     <Compile Include="Scan\IExtendedScanSettings.cs" />
     <Compile Include="Scan\Driver\IDriverFactory.cs" />
     <Compile Include="Scan\Driver\DefaultScanDriverFactory.cs" />
@@ -95,9 +101,10 @@
     <Compile Include="Scan\Driver\IScanDriverFactory.cs" />
     <Compile Include="Pdf\PdfInfo.cs" />
     <Compile Include="Pdf\PdfSharpExporter.cs" />
-    <Compile Include="Scan\Driver\ScanDriverException.cs" />
+    <Compile Include="Scan\Driver.Exceptions\ScanDriverException.cs" />
     <Compile Include="Scan\Driver.Twain\TwainScanDriver.cs" />
     <Compile Include="CPageSizes.cs" />
+    <Compile Include="Scan\ScanDevice.cs" />
     <Compile Include="Scan\ScannedImage.cs" />
     <Compile Include="Exceptions\EScannerOffline.cs" />
     <Compile Include="FAbout.cs">

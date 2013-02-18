@@ -16,6 +16,7 @@
     GNU General Public License for more details.
 */
 
+using NAPS2.Scan;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -80,7 +81,7 @@ namespace NAPS2
 
         public int IconID { get; set; }
 
-        public BitDepth Depth { get; set; }
+        public ScanBitDepth Depth { get; set; }
 
         public string DeviceID { get; set; }
 
@@ -101,7 +102,7 @@ namespace NAPS2
             ShowScanUI = false;
             DisplayName = "";
             IconID = 0;
-            Depth = BitDepth.C24BIT;
+            Depth = ScanBitDepth.C24BIT;
             DeviceID = "";
             Source = ScanSource.GLASS;
             Resolution = DPI.DPI200;

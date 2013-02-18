@@ -25,6 +25,7 @@ using System.Text;
 using System.Windows.Forms;
 using NAPS2.wia;
 using NAPS2.twain;
+using NAPS2.Scan;
 
 namespace NAPS2
 {
@@ -113,7 +114,7 @@ namespace NAPS2
             scanSettings.DeviceID = currentDeviceID;
             scanSettings.Source = (CScanSettings.ScanSource)cmbSource.SelectedIndex;
             scanSettings.ShowScanUI = rdbNativeWIA.Checked;
-            scanSettings.Depth = (CScanSettings.BitDepth)cmbDepth.SelectedIndex;
+            scanSettings.Depth = (ScanBitDepth)cmbDepth.SelectedIndex;
             scanSettings.Resolution = (CScanSettings.DPI)cmbResolution.SelectedIndex;
             scanSettings.Brightness = trBrightness.Value;
             scanSettings.Contrast = trContrast.Value;

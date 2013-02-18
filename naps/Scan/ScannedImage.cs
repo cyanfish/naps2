@@ -27,7 +27,7 @@ namespace NAPS2.Scan
 {
     public class ScannedImage : IScannedImage
     {
-        private CScanSettings.BitDepth bitDepth;
+        private ScanBitDepth bitDepth;
         private ImageFormat imageFormat;
 
         private Bitmap baseImage;
@@ -61,13 +61,13 @@ namespace NAPS2.Scan
             return result;
         }
 
-        public ScannedImage(Bitmap img, CScanSettings.BitDepth bitDepth, ImageFormat imageFormat)
+        public ScannedImage(Bitmap img, ScanBitDepth bitDepth, ImageFormat imageFormat)
         {
             this.bitDepth = bitDepth;
             this.imageFormat = imageFormat;
             thumbnail = resizeBitmap(img, thumbnailWidth, thumbnailHeight);
 
-            if (bitDepth == CScanSettings.BitDepth.BLACKWHITE)
+            if (bitDepth == ScanBitDepth.BLACKWHITE)
             {
                 SetBaseImage(CImageHelper.CopyToBpp((Bitmap)img, 1));
             }
@@ -87,7 +87,7 @@ namespace NAPS2.Scan
 
         public Bitmap GetImage()
         {
-            if (bitDepth == CScanSettings.BitDepth.BLACKWHITE)
+            if (bitDepth == ScanBitDepth.BLACKWHITE)
             {
                 return baseImage;
             }
@@ -99,7 +99,7 @@ namespace NAPS2.Scan
 
         private void SetBaseImage(Bitmap bitmap)
         {
-            if (bitDepth == CScanSettings.BitDepth.BLACKWHITE)
+            if (bitDepth == ScanBitDepth.BLACKWHITE)
             {
                 baseImage = bitmap;
             }
