@@ -8,7 +8,7 @@
     <ProjectGuid>{EAC4A133-93BE-4400-BFA9-CEB1615693C4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NAPS</RootNamespace>
+    <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
     <ApplicationIcon>scanner-app.ico</ApplicationIcon>
     <FileUpgradeFlags>

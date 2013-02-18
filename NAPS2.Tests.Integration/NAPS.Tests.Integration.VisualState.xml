@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]M:\Development\Projects\NAPS\NAPS2.Tests.Integration\NAPS.Tests.Integration.nunit</TopNode>
+  <SelectedNode>[0-1000]M:\Development\Projects\NAPS\NAPS2.Tests.Integration\NAPS.Tests.Integration.nunit</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]M:\Development\Projects\NAPS\NAPS2.Tests.Integration\NAPS.Tests.Integration.nunit" Expanded="true" />
+    <Node UniqueName="[0-1007]M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\NAPS2.Tests.Integration.dll" Expanded="true" />
+    <Node UniqueName="[0-1008]NAPS2" Expanded="true" />
+    <Node UniqueName="[0-1009]NAPS2.Tests" Expanded="true" />
+    <Node UniqueName="[0-1010]NAPS2.Tests.Integration" Expanded="true" />
+    <Node UniqueName="[0-1001]NAPS2.Tests.Integration.PdfSharpExporterTests" Expanded="true" />
+    <Node UniqueName="[0-1017]M:\Development\Projects\NAPS\NAPS2.Tests.Integration\bin\Debug\NAPS2.Tests.Integration.dll" Expanded="true" />
+    <Node UniqueName="[0-1018]NAPS2" Expanded="true" />
+    <Node UniqueName="[0-1019]NAPS2.Tests" Expanded="true" />
+    <Node UniqueName="[0-1020]NAPS2.Tests.Integration" Expanded="true" />
+    <Node UniqueName="[0-1011]NAPS2.Tests.Integration.PdfSharpExporterTests" Expanded="true" />
+  </Nodes>
+</VisualState>

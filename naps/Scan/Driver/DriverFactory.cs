@@ -36,26 +36,26 @@ namespace NAPS2.Scan.Driver
         /// Registers a driver. Subsequent calls to CreateDriver with the driver's name will return an instance of the specified driver.
         /// </summary>
         /// <param name="driverName">The driver's name (case sensitive).</param>
-        /// <param name="type">The driver's class. It must implement T.</param>
-        public void RegisterDriver(string driverName, Type type)
+        /// <param name="driverType">The driver's class. It must implement T.</param>
+        public void RegisterDriver(string driverName, Type driverType)
         {
             if (driverName == null)
             {
                 throw new ArgumentNullException("driverName");
             }
-            if (type == null)
+            if (driverType == null)
             {
                 throw new ArgumentNullException("type");
             }
-            if (!typeof(T).IsAssignableFrom(type))
+            if (!typeof(T).IsAssignableFrom(driverType))
             {
                 throw new ArgumentException("The driver class must implement " + typeof(T).Name + ".");
             }
-            if (types[driverName] != null)
+            if (types.ContainsKey(driverName))
             {
                 throw new ArgumentException("The driver '" + driverName + "' has already been registered. Call UnregisterDriver first.");
             }
-            types[driverName] = type;
+            types[driverName] = driverType;
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace NAPS2.Scan.Driver
             {
                 throw new ArgumentNullException("driverName");
             }
-            types[driverName] = null;
+            types.Remove(driverName);
         }
 
         /// <summary>
@@ -95,23 +95,26 @@ namespace NAPS2.Scan.Driver
         public T CreateDriver(string driverName)
         {
             Type type = null;
-            if (driverName != null)
+            if (driverName != null && types.ContainsKey(driverName))
             {
                 type = types[driverName];
             }
-            if (type == null)
+            else
             {
                 if (DefaultDriverName == null)
                 {
                     throw new ArgumentException("The driver '" + driverName + "' could not be found and no default driver was specified.");
                 }
-                type = types[DefaultDriverName];
-                if (type == null)
+                if (types.ContainsKey(DefaultDriverName))
+                {
+                    type = types[DefaultDriverName];
+                }
+                else
                 {
                     throw new ArgumentException("The driver '" + driverName + "' could not be found, and the default driver '" + DefaultDriverName + "' could not be found either.");
                 }
             }
-            return (T)type.GetConstructor(new Type[] { }).Invoke(null, new object[] { });
+            return (T)type.GetConstructor(new Type[] { }).Invoke(new object[] { });
         }
     }
 }
