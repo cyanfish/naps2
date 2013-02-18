@@ -56,5 +56,10 @@ namespace NAPS2.Scan.Driver
         /// <exception cref="ScanDriverException">Throws a ScanDriverException if an error occurs while scanning.</exception>
         /// /// <exception cref="InvalidOperationException">Throws an InvalidOperationException if ScanSettings or DialogParent has not been set.</exception>
         List<IScannedImage> Scan();
+
+        /// <summary>
+        /// Gets the name used to look up the driver in the IScanDriverFactory.
+        /// </summary>
+        string DriverName { get; }
     }
 }

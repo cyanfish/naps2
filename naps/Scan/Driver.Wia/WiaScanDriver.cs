@@ -27,6 +27,11 @@ namespace NAPS2.Scan.Driver.Wia
     {
         public const string DRIVER_NAME = "wia";
 
+        public string DriverName
+        {
+            get { return DRIVER_NAME; }
+        }
+
         public ScanSettings ScanSettings { get; set; }
 
         public System.Windows.Forms.IWin32Window DialogParent { get; set; }
