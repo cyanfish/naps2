@@ -34,7 +34,7 @@ namespace NAPS2.Scan.Driver
         /// This must be set before calling Scan.
         /// Some drivers may check for particular implementors and use further information than provided by IScanSettings.
         /// </summary>
-        IScanSettings ScanSettings { set; }
+        ScanSettings ScanSettings { set; }
 
         /// <summary>
         /// Sets the parent window used when creating dialogs. This must be set before calling PromptForDevice or Scan.
@@ -47,7 +47,7 @@ namespace NAPS2.Scan.Driver
         /// <returns>The selected device, or null if no device was selected.</returns>
         /// <exception cref="ScanDriverException">Throws a ScanDriverException if an error occurs when reading the available devices.</exception>
         /// <exception cref="InvalidOperationException">Throws an InvalidOperationException if DialogParent has not been set.</exception>
-        IScanDevice PromptForDevice();
+        ScanDevice PromptForDevice();
 
         /// <summary>
         /// Scans one or more images, interacting with the user as necessary.

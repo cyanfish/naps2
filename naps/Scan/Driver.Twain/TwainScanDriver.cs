@@ -27,11 +27,11 @@ namespace NAPS2.Scan.Driver.Twain
     {
         public const string DRIVER_NAME = "twain";
 
-        public IScanSettings ScanSettings { get; set; }
+        public ScanSettings ScanSettings { get; set; }
 
         public System.Windows.Forms.IWin32Window DialogParent { get; set; }
 
-        public IScanDevice PromptForDevice()
+        public ScanDevice PromptForDevice()
         {
             throw new NotImplementedException();
         }

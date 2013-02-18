@@ -54,8 +54,8 @@ namespace NAPS2.Scan.Driver.Wia
 
         private Device device;
 
-        private IScanSettings settings;
-        private IExtendedScanSettings settingsExt;
+        private ScanSettings settings;
+        private ExtendedScanSettings settingsExt;
 
         public static string SelectDeviceUI()
         {
@@ -112,10 +112,10 @@ namespace NAPS2.Scan.Driver.Wia
             return "";
         }
 
-        public CWIAAPI(IScanSettings settings)
+        public CWIAAPI(ScanSettings settings)
         {
             this.settings = settings;
-            this.settingsExt = settings as IExtendedScanSettings;
+            this.settingsExt = settings as ExtendedScanSettings;
             DeviceManager manager = new DeviceManagerClass();
             foreach (DeviceInfo info in manager.DeviceInfos)
             {

@@ -93,7 +93,6 @@
     <Compile Include="Scan\Driver.Exceptions\DeviceOfflineException.cs" />
     <Compile Include="Scan\Driver.Exceptions\DeviceNotFoundException.cs" />
     <Compile Include="Scan\Driver.Wia\CWIAAPI.cs" />
-    <Compile Include="Scan\IExtendedScanSettings.cs" />
     <Compile Include="Scan\Driver\IDriverFactory.cs" />
     <Compile Include="Scan\Driver\DefaultScanDriverFactory.cs" />
     <Compile Include="Dependencies.cs" />
@@ -113,10 +112,8 @@
     <Compile Include="FAbout.Designer.cs">
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="Scan\IScanDevice.cs" />
     <Compile Include="Scan\Driver\IScanDriver.cs" />
     <Compile Include="Scan\IScannedImage.cs" />
-    <Compile Include="Scan\IScanSettings.cs" />
     <Compile Include="Email\IEmailer.cs" />
     <Compile Include="Scan\Driver\DriverFactory.cs" />
     <Compile Include="twain\CDIBUtils.cs" />

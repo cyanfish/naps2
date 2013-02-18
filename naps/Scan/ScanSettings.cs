@@ -5,9 +5,9 @@ using System.Text;
 
 namespace NAPS2.Scan
 {
-    public class ScanSettings : IScanSettings
+    public class ScanSettings
     {
-        public IScanDevice Device { get; set; }
+        public ScanDevice Device { get; set; }
 
         public string DisplayName { get; set; }
     }
