@@ -38,12 +38,38 @@ namespace NAPS2.Scan.Driver.Wia
 
         public ScanDevice PromptForDevice()
         {
-            throw new NotImplementedException();
+            if (DialogParent == null)
+            {
+                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
+            }
+            return WiaApi.SelectDeviceUI();
         }
 
         public List<IScannedImage> Scan()
         {
-            throw new NotImplementedException();
+            if (ScanSettings == null)
+            {
+                throw new InvalidOperationException("IScanDriver.ScanSettings must be specified before calling Scan().");
+            }
+            if (DialogParent == null)
+            {
+                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
+            }
+            var result = new List<IScannedImage>();
+            var api = new WiaApi(ScanSettings);
+            // TODO: Only scan once with ScanSource.GLASS
+            // TODO: How to handle that if UseNativeUI is specified?
+            // TODO: Send progress event (or something) to update thumbnail/scan UI
+            while (true)
+            {
+                var image = api.GetImage();
+                if (image == null)
+                {
+                    break;
+                }
+                result.Add(image);
+            }
+            return result;
         }
     }
 }

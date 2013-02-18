@@ -28,7 +28,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Scan.Driver.Wia
 {
-    internal class CWIAAPI
+    internal class WiaApi
     {
         private const int DEV_NAME = 7;
         private const int HORIZONTAL_FEED_SIZE = 3076;
@@ -57,7 +57,7 @@ namespace NAPS2.Scan.Driver.Wia
         private ScanSettings settings;
         private ExtendedScanSettings settingsExt;
 
-        public static string SelectDeviceUI()
+        public static ScanDevice SelectDeviceUI()
         {
             CommonDialogClass WIACommonDialog = new CommonDialogClass();
             try
@@ -67,7 +67,7 @@ namespace NAPS2.Scan.Driver.Wia
                 {
                     return null;
                 }
-                return d.DeviceID;
+                return new ScanDevice(d.DeviceID, GetDeviceName(d.DeviceID), WiaScanDriver.DRIVER_NAME);
             }
             catch (System.Runtime.InteropServices.COMException e)
             {
@@ -112,7 +112,7 @@ namespace NAPS2.Scan.Driver.Wia
             return "";
         }
 
-        public CWIAAPI(ScanSettings settings)
+        public WiaApi(ScanSettings settings)
         {
             this.settings = settings;
             this.settingsExt = settings as ExtendedScanSettings;
