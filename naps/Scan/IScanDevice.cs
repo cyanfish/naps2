@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NAPS.Scan
+namespace NAPS2.Scan
 {
     public interface IScanDevice
     {

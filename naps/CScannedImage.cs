@@ -23,9 +23,9 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 
-using NAPS.Scan;
+using NAPS2.Scan;
 
-namespace NAPS
+namespace NAPS2
 {
     public class CScannedImage : IScannedImage
     {

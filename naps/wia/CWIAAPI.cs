@@ -24,7 +24,7 @@ using System.Drawing.Imaging;
 
 using WIA;
 
-namespace NAPS.wia
+namespace NAPS2.wia
 {
     class CWIAAPI
     {

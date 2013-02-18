@@ -20,7 +20,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace NAPS.Email
+namespace NAPS2.Email
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     internal class MAPIFileDesc

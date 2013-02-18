@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 */
 
-namespace NAPS
+namespace NAPS2
 {
     partial class FManageProfiles
     {
@@ -59,7 +59,7 @@ namespace NAPS
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.ilProfileIcons = new NAPS.ILProfileIcons(this.components);
+            this.ilProfileIcons = new NAPS2.ILProfileIcons(this.components);
             this.SuspendLayout();
             // 
             // lvProfiles

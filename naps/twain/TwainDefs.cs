@@ -20,7 +20,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace NAPS.twain
+namespace NAPS2.twain
 {
 
 public class TwProtocol

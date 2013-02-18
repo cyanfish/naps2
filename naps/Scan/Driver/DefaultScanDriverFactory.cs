@@ -20,10 +20,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NAPS.Scan.Driver.Wia;
-using NAPS.Scan.Driver.Twain;
+using NAPS2.Scan.Driver.Wia;
+using NAPS2.Scan.Driver.Twain;
 
-namespace NAPS.Scan.Driver
+namespace NAPS2.Scan.Driver
 {
     public class DefaultScanDriverFactory : DriverFactory<IScanDriver>, IScanDriverFactory
     {

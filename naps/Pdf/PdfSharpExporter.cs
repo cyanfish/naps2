@@ -25,7 +25,7 @@ using System.Text;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace NAPS.Pdf
+namespace NAPS2.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {

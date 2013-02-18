@@ -23,7 +23,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace NAPS.twain
+namespace NAPS2.twain
 {
     public class CDIBUtils
     {

@@ -19,7 +19,7 @@
 using System;
 using System.Drawing;
 
-namespace NAPS.Scan
+namespace NAPS2.Scan
 {
     public interface IScannedImage : IDisposable
     {

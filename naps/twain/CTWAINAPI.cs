@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace NAPS.twain
+namespace NAPS2.twain
 {
     public class CTWAINAPI
     {

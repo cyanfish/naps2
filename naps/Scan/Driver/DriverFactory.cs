@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NAPS.Scan.Driver
+namespace NAPS2.Scan.Driver
 {
     /// <summary>
     /// Manages implementors of T. Drivers are specified by their name.

@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 */
 
-namespace NAPS
+namespace NAPS2
 {
     partial class FChooseIcon
     {
@@ -48,7 +48,7 @@ namespace NAPS
         {
             this.components = new System.ComponentModel.Container();
             this.iconList = new System.Windows.Forms.ListView();
-            this.ilProfileIcons = new NAPS.ILProfileIcons(this.components);
+            this.ilProfileIcons = new NAPS2.ILProfileIcons(this.components);
             this.SuspendLayout();
             // 
             // iconList

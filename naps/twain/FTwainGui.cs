@@ -26,7 +26,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 
-namespace NAPS.twain
+namespace NAPS2.twain
 {
     public partial class FTwainGui : Form, IMessageFilter
     {

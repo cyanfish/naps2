@@ -20,7 +20,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace NAPS.Email
+namespace NAPS2.Email
 {
     public class MAPIEmailer : IEmailer
     {

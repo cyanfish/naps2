@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 */
 
-namespace NAPS.twain
+namespace NAPS2.twain
 {
     partial class FTwainGui
     {

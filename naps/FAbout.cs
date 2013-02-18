@@ -23,7 +23,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace NAPS
+namespace NAPS2
 {
     partial class FAbout : Form
     {

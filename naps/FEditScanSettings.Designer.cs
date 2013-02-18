@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 */
 
-namespace NAPS
+namespace NAPS2
 {
     partial class FEditScanSettings
     {
@@ -81,7 +81,7 @@ namespace NAPS
             this.cbHighQuality = new System.Windows.Forms.CheckBox();
             this.txtBrightness = new System.Windows.Forms.TextBox();
             this.txtContrast = new System.Windows.Forms.TextBox();
-            this.ilProfileIcons = new NAPS.ILProfileIcons(this.components);
+            this.ilProfileIcons = new NAPS2.ILProfileIcons(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).BeginInit();

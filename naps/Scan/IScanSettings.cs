@@ -17,7 +17,7 @@
 */
 
 using System;
-namespace NAPS.Scan
+namespace NAPS2.Scan
 {
     public interface IScanSettings
     {

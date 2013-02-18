@@ -24,11 +24,11 @@ using System.Text;
 using Ninject.Modules;
 using Ninject;
 
-using NAPS.Email;
-using NAPS.Pdf;
-using NAPS.Scan.Driver;
+using NAPS2.Email;
+using NAPS2.Pdf;
+using NAPS2.Scan.Driver;
 
-namespace NAPS
+namespace NAPS2
 {
     class Dependencies
     {

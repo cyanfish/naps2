@@ -23,10 +23,10 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using NAPS.wia;
-using NAPS.twain;
+using NAPS2.wia;
+using NAPS2.twain;
 
-namespace NAPS
+namespace NAPS2
 {
     public partial class FEditScanSettings : Form
     {

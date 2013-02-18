@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NAPS.Scan.Driver
+namespace NAPS2.Scan.Driver
 {
     public class ScanDriverException : Exception
     {

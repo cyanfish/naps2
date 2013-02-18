@@ -22,7 +22,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace NAPS.Pdf
+namespace NAPS2.Pdf
 {
     public interface IPdfExporter
     {

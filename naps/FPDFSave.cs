@@ -28,9 +28,9 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-using NAPS.Pdf;
+using NAPS2.Pdf;
 
-namespace NAPS
+namespace NAPS2
 {
     public partial class FPDFSave : Form
     {

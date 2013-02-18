@@ -23,7 +23,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
 
-namespace NAPS
+namespace NAPS2
 {
     class CSettings
     {

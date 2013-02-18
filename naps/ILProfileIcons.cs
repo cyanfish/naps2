@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace NAPS
+namespace NAPS2
 {
     public partial class ILProfileIcons : Component
     {

@@ -22,7 +22,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace NAPS
+namespace NAPS2
 {
 	public class FViewer : Form
 	{

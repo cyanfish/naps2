@@ -18,7 +18,7 @@
 
 using System;
 
-namespace NAPS.Email
+namespace NAPS2.Email
 {
     public interface IEmailer
     {

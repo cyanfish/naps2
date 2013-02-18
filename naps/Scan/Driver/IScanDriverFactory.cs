@@ -17,7 +17,7 @@
 */
 
 using System;
-namespace NAPS.Scan.Driver
+namespace NAPS2.Scan.Driver
 {
     public interface IScanDriverFactory : IDriverFactory<IScanDriver>
     {

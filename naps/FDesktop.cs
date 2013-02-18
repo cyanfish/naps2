@@ -30,15 +30,15 @@ using System.Threading;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 
-using NAPS.wia;
-using NAPS.twain;
-using NAPS.Email;
+using NAPS2.wia;
+using NAPS2.twain;
+using NAPS2.Email;
 
 using Ninject;
 
 using WIA;
 
-namespace NAPS
+namespace NAPS2
 {
     public partial class FDesktop : Form
     {

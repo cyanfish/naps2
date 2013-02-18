@@ -24,7 +24,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace NAPS
+namespace NAPS2
 {
     public partial class FChooseProfile : Form
     {

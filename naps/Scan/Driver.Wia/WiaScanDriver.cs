@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NAPS.Scan.Driver.Wia
+namespace NAPS2.Scan.Driver.Wia
 {
     public class WiaScanDriver : IScanDriver
     {

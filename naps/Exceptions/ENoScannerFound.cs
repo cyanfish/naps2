@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NAPS.Exceptions
+namespace NAPS2.Exceptions
 {
     class ENoScannerFound : Exception
     {

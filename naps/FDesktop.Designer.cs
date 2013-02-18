@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 */
 
-namespace NAPS
+namespace NAPS2
 {
     partial class FDesktop
     {
@@ -66,7 +66,7 @@ namespace NAPS
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsExit = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.thumbnailList1 = new NAPS.ThumbnailList();
+            this.thumbnailList1 = new NAPS2.ThumbnailList();
             this.tStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();

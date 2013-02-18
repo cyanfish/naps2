@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 */
 
-namespace NAPS
+namespace NAPS2
 {
     partial class ILProfileIcons
     {

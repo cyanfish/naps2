@@ -23,7 +23,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 
-namespace NAPS
+namespace NAPS2
 {
     class CImageHelper
     {

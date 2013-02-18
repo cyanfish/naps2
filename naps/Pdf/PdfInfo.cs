@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NAPS.Pdf
+namespace NAPS2.Pdf
 {
     public class PdfInfo
     {
