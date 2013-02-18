@@ -24,6 +24,8 @@ using System.Drawing.Imaging;
 
 using WIA;
 
+using NAPS2.Scan;
+
 namespace NAPS2.wia
 {
     class CWIAAPI
@@ -323,7 +325,7 @@ namespace NAPS2.wia
             }
         }*/
 
-        public CScannedImage GetImage()
+        public ScannedImage GetImage()
         {
             CommonDialogClass WIACommonDialog = new CommonDialogClass();
             Image output;
@@ -392,7 +394,7 @@ namespace NAPS2.wia
 
                         result.SetResolution((float)horizontalRes, (float)verticalRes);
 
-                        return new CScannedImage(result, settings.Depth, settings.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg);
+                        return new ScannedImage(result, settings.Depth, settings.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg);
                     }
                 }
             }

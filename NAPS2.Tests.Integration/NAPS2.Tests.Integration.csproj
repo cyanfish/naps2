@@ -55,7 +55,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="IPdfExporterTests.cs" />
+    <Compile Include="BasePdfExporterTests.cs" />
     <Compile Include="PdfSharpExporterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -22,6 +22,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
+using NAPS2.Scan;
+
 namespace NAPS2.twain
 {
     public class CTWAINAPI
@@ -61,7 +63,7 @@ namespace NAPS2.twain
             }
         }
 
-        public List<CScannedImage> Scan()
+        public List<ScannedImage> Scan()
         {
             FTwainGui fg = new FTwainGui(settings);
             fg.TwainIface = tw;

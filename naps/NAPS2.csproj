@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
+    <Compile Include="Scan\IExtendedScanSettings.cs" />
     <Compile Include="Scan\Driver\IDriverFactory.cs" />
     <Compile Include="Scan\Driver\DefaultScanDriverFactory.cs" />
     <Compile Include="Dependencies.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="Scan\Driver\ScanDriverException.cs" />
     <Compile Include="Scan\Driver.Twain\TwainScanDriver.cs" />
     <Compile Include="CPageSizes.cs" />
-    <Compile Include="CScannedImage.cs" />
+    <Compile Include="Scan\ScannedImage.cs" />
     <Compile Include="Exceptions\EScannerOffline.cs" />
     <Compile Include="FAbout.cs">
       <SubType>Form</SubType>

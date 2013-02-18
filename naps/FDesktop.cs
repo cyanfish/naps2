@@ -33,6 +33,7 @@ using PdfSharp.Drawing;
 using NAPS2.wia;
 using NAPS2.twain;
 using NAPS2.Email;
+using NAPS2.Scan;
 
 using Ninject;
 
@@ -42,14 +43,14 @@ namespace NAPS2
 {
     public partial class FDesktop : Form
     {
-        private SortedList<int,CScannedImage> images;
+        private SortedList<int,ScannedImage> images;
         private readonly IEmailer emailer;
 
         public FDesktop(IEmailer emailer)
         {
             InitializeComponent();
             this.emailer = emailer;
-            images = new SortedList<int, CScannedImage>();
+            images = new SortedList<int, ScannedImage>();
         }
 
         private void thumbnailList1_ItemActivate(object sender, EventArgs e)
@@ -90,7 +91,7 @@ namespace NAPS2
                 return;
             }
 
-            CScannedImage img = api.GetImage();
+            ScannedImage img = api.GetImage();
 
             if (img != null)
             {
@@ -129,8 +130,8 @@ namespace NAPS2
                 return;
             }
 
-            List<CScannedImage> scanned = twa.Scan();
-            foreach (CScannedImage bmp in scanned)
+            List<ScannedImage> scanned = twa.Scan();
+            foreach (ScannedImage bmp in scanned)
             {
                 int next = images.Count > 0 ? images.Keys[images.Count - 1] + 1 : 0;
                 images.Add(next, bmp);
@@ -189,7 +190,7 @@ namespace NAPS2
                     foreach (ListViewItem it in thumbnailList1.SelectedItems)
                     {
                         int before = getImageBefore((int)it.Tag);
-                        CScannedImage temp = images[before];
+                        ScannedImage temp = images[before];
                         images[before] = images[(int)it.Tag];
                         images[(int)it.Tag] = temp;
                         thumbnailList1.Items[thumbnailList1.Items.IndexOf(it) - 1].Selected = true;
@@ -211,7 +212,7 @@ namespace NAPS2
                     {
                         ListViewItem it = thumbnailList1.SelectedItems[i];
                         int after = getImageAfter((int)it.Tag);
-                        CScannedImage temp = images[after];
+                        ScannedImage temp = images[after];
                         images[after] = images[(int)it.Tag];
                         images[(int)it.Tag] = temp;
                         thumbnailList1.Items[thumbnailList1.Items.IndexOf(it) + 1].Selected = true;
@@ -345,7 +346,7 @@ namespace NAPS2
                         return;
                     }
 
-                    foreach (CScannedImage img in images.Values)
+                    foreach (ScannedImage img in images.Values)
                     {
                         string filename = Path.GetDirectoryName(sd.FileName) + "\\" + Path.GetFileNameWithoutExtension(sd.FileName) + i.ToString().PadLeft(3, '0') + Path.GetExtension(sd.FileName);
                         using (Bitmap baseImage = img.GetImage())

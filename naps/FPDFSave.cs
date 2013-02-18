@@ -29,6 +29,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 using NAPS2.Pdf;
+using NAPS2.Scan;
 
 namespace NAPS2
 {
@@ -45,7 +46,7 @@ namespace NAPS2
 
         public string Filename { get; set; }
 
-        public IList<CScannedImage> Images { get; set; }
+        public IList<ScannedImage> Images { get; set; }
 
         private void exportPDFProcess()
         {

@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace NAPS2.Tests.Integration
 {
-    public abstract class IPdfExporterTests
+    public abstract class BasePdfExporterTests
     {
         private readonly String pdfPath = "test/test.pdf";
         protected IPdfExporter pdfExporter;
@@ -17,6 +17,7 @@ namespace NAPS2.Tests.Integration
         [SetUp]
         public virtual void SetUp()
         {
+            pdfExporter = GetPdfExporter();
             info = new PdfInfo
             {
                 Author = "Test Author",
@@ -39,6 +40,8 @@ namespace NAPS2.Tests.Integration
                 File.Delete(pdfPath);
             }
         }
+
+        public abstract IPdfExporter GetPdfExporter();
 
         private Bitmap ColorBitmap(int w, int h, Color color)
         {

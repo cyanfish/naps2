@@ -24,6 +24,8 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
+using NAPS2.Scan;
+
 namespace NAPS2
 {
     public partial class ThumbnailList : ListView
@@ -34,7 +36,7 @@ namespace NAPS2
             this.LargeImageList = ilThumbnailList;
         }
 
-        public void UpdateImages(SortedList<int,CScannedImage> images)
+        public void UpdateImages(SortedList<int,ScannedImage> images)
         {
             ilThumbnailList.Images.Clear();
             this.Clear();
@@ -46,7 +48,7 @@ namespace NAPS2
             }
         }
 
-        public void UpdateView(SortedList<int, CScannedImage> images)
+        public void UpdateView(SortedList<int, ScannedImage> images)
         {
             ilThumbnailList.Images.Clear();
             foreach (int id in images.Keys)

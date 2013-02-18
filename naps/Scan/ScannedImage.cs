@@ -23,11 +23,9 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 
-using NAPS2.Scan;
-
-namespace NAPS2
+namespace NAPS2.Scan
 {
-    public class CScannedImage : IScannedImage
+    public class ScannedImage : IScannedImage
     {
         private CScanSettings.BitDepth bitDepth;
         private ImageFormat imageFormat;
@@ -63,7 +61,7 @@ namespace NAPS2
             return result;
         }
 
-        public CScannedImage(Bitmap img, CScanSettings.BitDepth bitDepth, ImageFormat imageFormat)
+        public ScannedImage(Bitmap img, CScanSettings.BitDepth bitDepth, ImageFormat imageFormat)
         {
             this.bitDepth = bitDepth;
             this.imageFormat = imageFormat;

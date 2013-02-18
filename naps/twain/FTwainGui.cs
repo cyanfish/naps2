@@ -26,6 +26,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 
+using NAPS2.Scan;
+
 namespace NAPS2.twain
 {
     public partial class FTwainGui : Form, IMessageFilter
@@ -36,13 +38,13 @@ namespace NAPS2.twain
         public FTwainGui(CScanSettings settings)
         {
             InitializeComponent();
-            bitmaps = new List<CScannedImage>();
+            bitmaps = new List<ScannedImage>();
             this.settings = settings;
         }
 
-        private List<CScannedImage> bitmaps;
+        private List<ScannedImage> bitmaps;
 
-        public List<CScannedImage> Bitmaps
+        public List<ScannedImage> Bitmaps
         {
             get { return bitmaps; }
         }
@@ -89,7 +91,7 @@ namespace NAPS2.twain
 
                             using (Bitmap bmp = CDIBUtils.BitmapFromDIB(img, out bitcount))
                             {
-                                bitmaps.Add(new CScannedImage(bmp, bitcount == 1 ? CScanSettings.BitDepth.BLACKWHITE : CScanSettings.BitDepth.C24BIT, settings.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg));
+                                bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? CScanSettings.BitDepth.BLACKWHITE : CScanSettings.BitDepth.C24BIT, settings.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg));
                             }
                         }
                         this.Close();
