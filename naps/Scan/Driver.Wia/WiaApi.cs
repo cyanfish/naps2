@@ -398,7 +398,9 @@ namespace NAPS2.Scan.Driver.Wia
 
                         result.SetResolution((float)horizontalRes, (float)verticalRes);
 
-                        return new ScannedImage(result, settingsExt.BitDepth, settingsExt.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg);
+                        var bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24BIT;
+                        var imageFormat = settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg;
+                        return new ScannedImage(result, bitDepth, imageFormat);
                     }
                 }
             }

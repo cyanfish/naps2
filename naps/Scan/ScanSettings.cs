@@ -10,5 +10,7 @@ namespace NAPS2.Scan
         public ScanDevice Device { get; set; }
 
         public string DisplayName { get; set; }
+
+        public bool MaxQuality { get; set; }
     }
 }

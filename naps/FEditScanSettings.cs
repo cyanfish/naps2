@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using NAPS2.wia;
@@ -53,7 +54,26 @@ namespace NAPS2
         {
             InitializeComponent();
 
-            cmbPage.Items.AddRange(CPageSizes.GetPageSizeList());
+            AddEnumItems<ScanHorizontalAlign>(cmbAlign);
+            AddEnumItems<ScanBitDepth>(cmbDepth);
+            AddEnumItems<ScanPageSize>(cmbPage);
+            AddEnumItems<ScanDPI>(cmbResolution);
+            AddEnumItems<ScanScale>(cmbScale);
+            AddEnumItems<ScanSource>(cmbSource);
+        }
+
+        private void AddEnumItems<T>(ComboBox combo)
+        {
+            foreach (var item in Enum.GetValues(typeof(T)))
+            {
+                combo.Items.Add(item);
+            }
+            combo.Format += Combo_Format;
+        }
+
+        void Combo_Format(object sender, ListControlConvertEventArgs e)
+        {
+            e.Value = ((Enum)e.ListItem).Description();
         }
 
         private void chooseWIA()
@@ -208,7 +228,7 @@ namespace NAPS2
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanSettings.IconID];
             txtName.Text = ScanSettings.DisplayName;
             cmbSource.SelectedIndex = (int)ScanSettings.Source;
-            
+
 
             cmbDepth.SelectedIndex = (int)ScanSettings.Depth;
             cmbResolution.SelectedIndex = (int)ScanSettings.Resolution;

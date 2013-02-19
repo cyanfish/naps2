@@ -129,10 +129,6 @@ namespace NAPS2
             // 
             this.cmbSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSource.FormattingEnabled = true;
-            this.cmbSource.Items.AddRange(new object[] {
-            "Glass",
-            "Feeder",
-            "Duplex"});
             this.cmbSource.Location = new System.Drawing.Point(15, 214);
             this.cmbSource.Name = "cmbSource";
             this.cmbSource.Size = new System.Drawing.Size(183, 21);
@@ -194,10 +190,6 @@ namespace NAPS2
             this.cmbDepth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDepth.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbDepth.FormattingEnabled = true;
-            this.cmbDepth.Items.AddRange(new object[] {
-            "24 bit Color",
-            "Grayscale",
-            "Black & White"});
             this.cmbDepth.Location = new System.Drawing.Point(235, 214);
             this.cmbDepth.Name = "cmbDepth";
             this.cmbDepth.Size = new System.Drawing.Size(183, 21);
@@ -227,12 +219,6 @@ namespace NAPS2
             this.cmbResolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbResolution.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbResolution.FormattingEnabled = true;
-            this.cmbResolution.Items.AddRange(new object[] {
-            "100 dpi",
-            "200 dpi",
-            "300 dpi",
-            "600 dpi",
-            "1200 dpi"});
             this.cmbResolution.Location = new System.Drawing.Point(15, 294);
             this.cmbResolution.Name = "cmbResolution";
             this.cmbResolution.Size = new System.Drawing.Size(183, 21);
@@ -328,10 +314,6 @@ namespace NAPS2
             this.cmbAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAlign.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbAlign.FormattingEnabled = true;
-            this.cmbAlign.Items.AddRange(new object[] {
-            "Left",
-            "Center",
-            "Right"});
             this.cmbAlign.Location = new System.Drawing.Point(235, 254);
             this.cmbAlign.Name = "cmbAlign";
             this.cmbAlign.Size = new System.Drawing.Size(183, 21);
@@ -351,11 +333,6 @@ namespace NAPS2
             this.cmbScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbScale.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbScale.FormattingEnabled = true;
-            this.cmbScale.Items.AddRange(new object[] {
-            "1:1",
-            "1:2",
-            "1:4",
-            "1:8"});
             this.cmbScale.Location = new System.Drawing.Point(235, 294);
             this.cmbScale.Name = "cmbScale";
             this.cmbScale.Size = new System.Drawing.Size(183, 21);
@@ -407,7 +384,7 @@ namespace NAPS2
             this.cbHighQuality.AutoSize = true;
             this.cbHighQuality.Location = new System.Drawing.Point(15, 373);
             this.cbHighQuality.Name = "cbHighQuality";
-            this.cbHighQuality.Size = new System.Drawing.Size(81, 17);
+            this.cbHighQuality.Size = new System.Drawing.Size(156, 17);
             this.cbHighQuality.TabIndex = 30;
             this.cbHighQuality.Text = "Maximum quality (large files)";
             this.cbHighQuality.UseVisualStyleBackColor = true;

@@ -38,12 +38,29 @@ namespace NAPS2.Scan.Driver.Twain
 
         public ScanDevice PromptForDevice()
         {
-            throw new NotImplementedException();
+            if (DialogParent == null)
+            {
+                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
+            }
+            var deviceId = TwainApi.SelectDeviceUI();
+            var deviceName = deviceId;
+            return new ScanDevice(deviceId, deviceName, DRIVER_NAME);
         }
 
         public List<IScannedImage> Scan()
         {
-            throw new NotImplementedException();
+            if (ScanSettings == null)
+            {
+                throw new InvalidOperationException("IScanDriver.ScanSettings must be specified before calling Scan().");
+            }
+            if (DialogParent == null)
+            {
+                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
+            }
+            var api = new TwainApi(ScanSettings);
+            // TODO: Progress
+            // TODO: Cool idea: maybe return an IEnumerable (via yield)
+            return api.Scan();
         }
     }
 }

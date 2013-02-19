@@ -87,12 +87,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
+    <Compile Include="Scan\Driver.Twain\DibUtils.cs" />
+    <Compile Include="Scan\Driver.Twain\TwainApi.cs" />
+    <Compile Include="Scan\Driver.Twain\FTwainGui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scan\Driver.Twain\FTwainGui.Designer.cs">
+      <DependentUpon>FTwainGui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scan\Driver.Twain\TwainDefs.cs" />
+    <Compile Include="Scan\Driver.Twain\TwainLib.cs" />
     <Compile Include="Scan\ExtendedScanSettings.cs" />
     <Compile Include="Scan\ScanSettings.cs" />
     <Compile Include="Scan\Driver.Exceptions\NoDevicesFoundException.cs" />
     <Compile Include="Scan\Driver.Exceptions\DeviceOfflineException.cs" />
     <Compile Include="Scan\Driver.Exceptions\DeviceNotFoundException.cs" />
-    <Compile Include="Scan\Driver.Wia\CWIAAPI.cs" />
+    <Compile Include="Scan\Driver.Wia\WiaApi.cs" />
     <Compile Include="Scan\Driver\IDriverFactory.cs" />
     <Compile Include="Scan\Driver\DefaultScanDriverFactory.cs" />
     <Compile Include="Dependencies.cs" />
@@ -221,6 +231,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scan\Driver.Twain\FTwainGui.resx">
+      <DependentUpon>FTwainGui.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ThumbnailList.resx">
