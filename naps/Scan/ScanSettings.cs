@@ -11,6 +11,8 @@ namespace NAPS2.Scan
 
         public string DisplayName { get; set; }
 
+        public int IconID { get; set; }
+
         public bool MaxQuality { get; set; }
     }
 }

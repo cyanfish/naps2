@@ -24,17 +24,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using NAPS2.wia;
-using NAPS2.twain;
 using NAPS2.Scan;
+using NAPS2.Scan.Driver;
+using NAPS2.Scan.Driver.Wia;
+using NAPS2.Scan.Driver.Twain;
 
 namespace NAPS2
 {
     public partial class FEditScanSettings : Form
     {
-        private CScanSettings scanSettings;
+        private readonly IScanDriverFactory driverFactory;
 
-        private string currentDeviceID;
+        private ScanSettings scanSettings;
+
+        private ScanDevice currentDevice;
+        private int iconID;
         private bool result = false;
 
         private bool suppressChangeEvent = false;
@@ -44,16 +48,16 @@ namespace NAPS2
             get { return result; }
         }
 
-        public CScanSettings ScanSettings
+        public ScanSettings ScanSettings
         {
             get { return scanSettings; }
             set { scanSettings = value; }
         }
 
-        public FEditScanSettings()
+        public FEditScanSettings(IScanDriverFactory driverFactory)
         {
             InitializeComponent();
-
+            this.driverFactory = driverFactory;
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
             AddEnumItems<ScanPageSize>(cmbPage);
@@ -76,42 +80,19 @@ namespace NAPS2
             e.Value = ((Enum)e.ListItem).Description();
         }
 
-        private void chooseWIA()
+        private void choose(string driverName)
         {
-            string devID;
+            IScanDriver driver = driverFactory.CreateDriver(driverName);
             try
             {
-                devID = CWIAAPI.SelectDeviceUI();
+                ScanDevice device = driver.PromptForDevice();
+                txtDevice.Text = device.Name;
+                currentDevice = device;
             }
-            catch (Exceptions.ENoScannerFound)
+            catch (ScanDriverException e)
             {
-                MessageBox.Show("No device found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exceptions.EScannerOffline)
-            {
-                MessageBox.Show("Device offline.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (devID != null)
-            {
-                CWIAAPI api = new CWIAAPI(devID);
-                txtDevice.Text = api.DeviceName;
-                currentDeviceID = devID;
-            }
-        }
-
-        private void chooseTWAIN()
-        {
-            Twain tw = new Twain();
-            if (!tw.Init(this.Handle))
-            {
-                MessageBox.Show("No device found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            tw.Select();
-            txtDevice.Text = tw.GetCurrentName();
-            currentDeviceID = tw.GetCurrentName();
         }
 
         private void btnChooseDevice_Click(object sender, EventArgs e)
@@ -119,9 +100,9 @@ namespace NAPS2
             try
             {
                 if (rdWIA.Checked == true)
-                    chooseWIA();
+                    choose(WiaScanDriver.DRIVER_NAME);
                 else
-                    chooseTWAIN();
+                    choose(TwainScanDriver.DRIVER_NAME);
             }
             catch (Exception)
             {
@@ -131,24 +112,40 @@ namespace NAPS2
 
         private void saveSettings()
         {
-            scanSettings.DeviceID = currentDeviceID;
-            scanSettings.Source = (CScanSettings.ScanSource)cmbSource.SelectedIndex;
-            scanSettings.ShowScanUI = rdbNativeWIA.Checked;
-            scanSettings.Depth = (ScanBitDepth)cmbDepth.SelectedIndex;
-            scanSettings.Resolution = (CScanSettings.DPI)cmbResolution.SelectedIndex;
-            scanSettings.Brightness = trBrightness.Value;
-            scanSettings.Contrast = trContrast.Value;
-            scanSettings.DisplayName = txtName.Text;
-            scanSettings.PageSize = (CPageSizes.PageSize)cmbPage.SelectedIndex;
-            scanSettings.AfterScanScale = (CScanSettings.Scale)cmbScale.SelectedIndex;
-            scanSettings.PageAlign = (CScanSettings.HorizontalAlign)cmbAlign.SelectedIndex;
-            scanSettings.DeviceDriver = rdWIA.Checked ? CScanSettings.Driver.WIA : CScanSettings.Driver.TWAIN;
-            scanSettings.HighQuality = cbHighQuality.Checked;
+            if (rdbNativeWIA.Checked)
+            {
+                scanSettings = new ScanSettings
+                {
+                    Device = currentDevice,
+                    DisplayName = txtName.Text,
+                    IconID = iconID,
+                    MaxQuality = cbHighQuality.Checked
+                };
+            }
+            else
+            {
+                scanSettings = new ExtendedScanSettings
+                {
+                    Device = currentDevice,
+                    DisplayName = txtName.Text,
+                    IconID = iconID,
+                    MaxQuality = cbHighQuality.Checked,
+                    
+                    AfterScanScale = (ScanScale)cmbScale.SelectedIndex,
+                    BitDepth = (ScanBitDepth)cmbDepth.SelectedIndex,
+                    Brightness = trBrightness.Value,
+                    Contrast = trContrast.Value,
+                    PageAlign = (ScanHorizontalAlign)cmbAlign.SelectedIndex,
+                    PageSize = (ScanPageSize)cmbPage.SelectedIndex,
+                    Resolution = (ScanDPI)cmbResolution.SelectedIndex,
+                    Source = (ScanSource)cmbSource.SelectedIndex
+                };
+            }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (currentDeviceID == null || currentDeviceID == "")
+            if (currentDevice == null)
             {
                 MessageBox.Show("No device selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -179,48 +176,8 @@ namespace NAPS2
             cmbScale.Enabled = rdbConfig.Checked;
             trBrightness.Enabled = rdbConfig.Checked;
             trContrast.Enabled = rdbConfig.Checked;
-        }
-
-        private void loadWIA()
-        {
-            currentDeviceID = ScanSettings.DeviceID;
-            CWIAAPI api;
-            try
-            {
-                api = new CWIAAPI(ScanSettings.DeviceID);
-            }
-            catch (Exceptions.EScannerNotFound)
-            {
-                MessageBox.Show("Device not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                ScanSettings.DeviceID = "";
-                currentDeviceID = "";
-                txtDevice.Text = "";
-                return;
-            }
-            txtDevice.Text = api.DeviceName;
-        }
-
-        private void loadTWAIN()
-        {
-            Twain tw = new Twain();
-            if (!tw.Init(this.Handle))
-            {
-                MessageBox.Show("No device found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                ScanSettings.DeviceID = "";
-                currentDeviceID = "";
-                txtDevice.Text = "";
-                return;
-            }
-            if (!tw.SelectByName(ScanSettings.DeviceID))
-            {
-                MessageBox.Show("Device not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                ScanSettings.DeviceID = "";
-                currentDeviceID = "";
-                txtDevice.Text = "";
-                return;
-            }
-            txtDevice.Text = tw.GetCurrentName();
-            currentDeviceID = tw.GetCurrentName();
+            txtBrightness.Enabled = rdbConfig.Checked;
+            txtContrast.Enabled = rdbConfig.Checked;
         }
 
         private void FEditScanSettings_Load(object sender, EventArgs e)
@@ -240,7 +197,7 @@ namespace NAPS2
 
             cbHighQuality.Checked = ScanSettings.HighQuality;
 
-            if (ScanSettings.DeviceDriver == CScanSettings.Driver.WIA)
+            if (ScanSettings.DeviceDriver == ScanSettings.Driver.WIA)
             {
                 suppressChangeEvent = true;
                 rdWIA.Checked = true;
@@ -260,7 +217,7 @@ namespace NAPS2
 
             if (ScanSettings.DeviceID != "")
             {
-                if (ScanSettings.DeviceDriver == CScanSettings.Driver.WIA)
+                if (ScanSettings.DeviceDriver == ScanSettings.Driver.WIA)
                     loadWIA();
                 else
                     loadTWAIN();

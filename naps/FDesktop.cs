@@ -30,10 +30,9 @@ using System.Threading;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 
-using NAPS2.wia;
-using NAPS2.twain;
 using NAPS2.Email;
 using NAPS2.Scan;
+using NAPS2.Scan.Driver;
 
 using Ninject;
 
@@ -43,14 +42,16 @@ namespace NAPS2
 {
     public partial class FDesktop : Form
     {
-        private SortedList<int,ScannedImage> images;
+        private List<IScannedImage> images;
         private readonly IEmailer emailer;
+        private readonly IScanDriverFactory driverFactory;
 
-        public FDesktop(IEmailer emailer)
+        public FDesktop(IScanDriverFactory driverFactory, IEmailer emailer)
         {
             InitializeComponent();
+            this.driverFactory = driverFactory;
             this.emailer = emailer;
-            images = new SortedList<int, ScannedImage>();
+            images = new List<IScannedImage>();
         }
 
         private void thumbnailList1_ItemActivate(object sender, EventArgs e)
@@ -78,65 +79,16 @@ namespace NAPS2
             updateView();*/
         }
 
-        private void scanWIA(CScanSettings Profile)
+        private void scan(ScanSettings Profile)
         {
-            CWIAAPI api;
-            try
-            {
-                api = new CWIAAPI(Profile);
-            }
-            catch (Exceptions.EScannerNotFound)
-            {
-                MessageBox.Show("Device not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            IScanDriver driver = driverFactory.CreateDriver(Profile.Device.DriverName);
+            driver.DialogParent = this;
+            driver.ScanSettings = Profile;
 
-            ScannedImage img = api.GetImage();
+            var images = driver.Scan();
 
-            if (img != null)
-            {
-                int next = images.Count > 0 ? images.Keys[images.Count - 1] + 1 : 0;
-                images.Add(next, img);
-            }
             thumbnailList1.UpdateImages(images);
             Application.DoEvents();
-
-            if (Profile.Source != CScanSettings.ScanSource.GLASS)
-            {
-                while (img != null)
-                {
-                    img = api.GetImage();
-                    if (img != null)
-                    {
-                        int next = images.Count > 0 ? images.Keys[images.Count - 1] + 1 : 0;
-                        images.Add(next, img);
-                    }
-                    thumbnailList1.UpdateImages(images);
-                    Application.DoEvents();
-                }
-            }
-        }
-
-        private void scanTWAIN(CScanSettings profile)
-        {
-            CTWAINAPI twa;
-            try
-            {
-                twa = new CTWAINAPI(profile, this);
-            }
-            catch (Exceptions.EScannerNotFound)
-            {
-                MessageBox.Show("Device not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            List<ScannedImage> scanned = twa.Scan();
-            foreach (ScannedImage bmp in scanned)
-            {
-                int next = images.Count > 0 ? images.Keys[images.Count - 1] + 1 : 0;
-                images.Add(next, bmp);
-            }
-            thumbnailList1.UpdateImages(images);
         }
 
         private void deleteItems()
@@ -145,11 +97,10 @@ namespace NAPS2
             {
                 if (MessageBox.Show(string.Format("Do you really want to delete {0} items?", thumbnailList1.SelectedItems.Count), "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    foreach (ListViewItem delitem in thumbnailList1.SelectedItems)
+                    foreach (int index in thumbnailList1.SelectedIndices)
                     {
-                        int key = (int)delitem.Tag;
-                        images[key].Dispose();
-                        images.Remove(key);
+                        images[index].Dispose();
+                        images.RemoveAt(index);
                     }
                     thumbnailList1.UpdateImages(images);
                 }
@@ -284,7 +235,7 @@ namespace NAPS2
             if (prof.Profile == null)
                 return;
 
-            if (prof.Profile.DeviceDriver == CScanSettings.Driver.WIA)
+            if (prof.Profile.DeviceDriver == ScanSettings.Driver.WIA)
                 scanWIA(prof.Profile);
             else
                 scanTWAIN(prof.Profile);

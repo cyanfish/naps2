@@ -22,33 +22,34 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
+using NAPS2.Scan;
 
 namespace NAPS2
 {
     class CSettings
     {
-        private const string PROFILES_FILE = "profiles.xml";
+        private const string PROFILES_FILE = "profiles2.xml";
 
-        public static List<CScanSettings> LoadProfiles()
+        public static List<ScanSettings> LoadProfiles()
         {
             if (File.Exists(Application.StartupPath + "\\" + PROFILES_FILE))
             {
                 Stream strFile = File.OpenRead(Application.StartupPath + "\\" + PROFILES_FILE);
-                XmlSerializer serializer = new XmlSerializer(typeof(List<CScanSettings>));
-                List<CScanSettings> ret = (List<CScanSettings>)serializer.Deserialize(strFile);
+                XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
+                List<ScanSettings> ret = (List<ScanSettings>)serializer.Deserialize(strFile);
                 strFile.Close();
                 return ret;
             }
             else
             {
-                return new List<CScanSettings>();
+                return new List<ScanSettings>();
             }
         }
 
-        public static void SaveProfiles(List<CScanSettings> profiles)
+        public static void SaveProfiles(List<ScanSettings> profiles)
         {
             Stream strFile = File.Open(Application.StartupPath + "\\" + PROFILES_FILE,FileMode.Create);
-            XmlSerializer serializer = new XmlSerializer(typeof(List<CScanSettings>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
             serializer.Serialize(strFile, profiles);
             strFile.Close();
         }

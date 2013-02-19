@@ -17,8 +17,6 @@ namespace NAPS2.Scan
 
         public ScanBitDepth BitDepth { get; set; }
 
-        public int IconID { get; set; }
-
         public ScanHorizontalAlign PageAlign { get; set; }
 
         public ScanPageSize PageSize { get; set; }

@@ -36,24 +36,23 @@ namespace NAPS2
             this.LargeImageList = ilThumbnailList;
         }
 
-        public void UpdateImages(SortedList<int,ScannedImage> images)
+        public void UpdateImages(List<IScannedImage> images)
         {
             ilThumbnailList.Images.Clear();
             this.Clear();
-            foreach (int id in images.Keys)
+            foreach (var img in images)
             {
-                ilThumbnailList.Images.Add(images[id].Thumbnail);
+                ilThumbnailList.Images.Add(img.Thumbnail);
                 ListViewItem item = this.Items.Add("", ilThumbnailList.Images.Count - 1);
-                item.Tag = id;
             }
         }
 
-        public void UpdateView(SortedList<int, ScannedImage> images)
+        public void UpdateView(List<IScannedImage> images)
         {
             ilThumbnailList.Images.Clear();
-            foreach (int id in images.Keys)
+            foreach (var img in images)
             {
-                ilThumbnailList.Images.Add(images[id].Thumbnail);
+                ilThumbnailList.Images.Add(img.Thumbnail);
             }
         }
 

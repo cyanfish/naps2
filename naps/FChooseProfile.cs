@@ -16,6 +16,7 @@
     GNU General Public License for more details.
 */
 
+using NAPS2.Scan;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,11 +29,11 @@ namespace NAPS2
 {
     public partial class FChooseProfile : Form
     {
-        private List<CScanSettings> settings;
+        private List<ScanSettings> settings;
 
-        private CScanSettings profile;
+        private ScanSettings profile;
 
-        public CScanSettings Profile
+        public ScanSettings Profile
         {
             get { return profile; }
         }
@@ -46,7 +47,7 @@ namespace NAPS2
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
             settings = CSettings.LoadProfiles();
-            foreach (CScanSettings profile in settings)
+            foreach (ScanSettings profile in settings)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
             }

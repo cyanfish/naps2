@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
+    <Compile Include="CScanSettings.cs" />
     <Compile Include="Scan\Driver.Twain\DibUtils.cs" />
     <Compile Include="Scan\Driver.Twain\TwainApi.cs" />
     <Compile Include="Scan\Driver.Twain\FTwainGui.cs">
@@ -112,10 +113,8 @@
     <Compile Include="Pdf\PdfSharpExporter.cs" />
     <Compile Include="Scan\Driver.Exceptions\ScanDriverException.cs" />
     <Compile Include="Scan\Driver.Twain\TwainScanDriver.cs" />
-    <Compile Include="CPageSizes.cs" />
     <Compile Include="Scan\ScanDevice.cs" />
     <Compile Include="Scan\ScannedImage.cs" />
-    <Compile Include="Exceptions\EScannerOffline.cs" />
     <Compile Include="FAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,22 +125,9 @@
     <Compile Include="Scan\IScannedImage.cs" />
     <Compile Include="Email\IEmailer.cs" />
     <Compile Include="Scan\Driver\DriverFactory.cs" />
-    <Compile Include="twain\CDIBUtils.cs" />
-    <Compile Include="twain\CTWAINAPI.cs" />
-    <Compile Include="twain\FTwainGui.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="twain\FTwainGui.Designer.cs">
-      <DependentUpon>FTwainGui.cs</DependentUpon>
-    </Compile>
     <Compile Include="Scan\Driver.Wia\WiaScanDriver.cs" />
-    <Compile Include="wia\CWIAAPI.cs" />
-    <Compile Include="CScanSettings.cs" />
     <Compile Include="CSettings.cs" />
     <Compile Include="CTiffHelper.cs" />
-    <Compile Include="Exceptions\ENoScannerFound.cs" />
-    <Compile Include="Exceptions\EPaperJam.cs" />
-    <Compile Include="Exceptions\EScannerNotFound.cs" />
     <Compile Include="FChooseIcon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,10 +227,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="twain\FTwainGui.resx">
-      <DependentUpon>FTwainGui.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="UTiffViewer.resx">
       <DependentUpon>UTiffViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -275,8 +257,6 @@
     <Compile Include="ThumbnailList.Designer.cs">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </Compile>
-    <Compile Include="twain\TwainDefs.cs" />
-    <Compile Include="twain\TwainLib.cs" />
     <Compile Include="UTiffViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
