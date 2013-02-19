@@ -109,27 +109,22 @@ namespace NAPS2
 
         private int getImageBefore(int id)
         {
-            int ret = 0;
-            foreach (int cid in images.Keys)
+            var before = id - 1;
+            if (before <= 0)
             {
-                if (cid == id)
-                    return ret;
-                ret = cid;
+                before = images.Count - 1;
             }
-            return 0;
+            return before;
         }
 
         private int getImageAfter(int id)
         {
-            bool found = false;
-            foreach (int cid in images.Keys)
+            var after = id + 1;
+            if (after >= images.Count)
             {
-                if (found)
-                    return cid;
-                if (cid == id)
-                    found = true;
+                after = 0;
             }
-            return 0;
+            return after;
         }
 
         private void moveUp()
@@ -141,7 +136,7 @@ namespace NAPS2
                     foreach (ListViewItem it in thumbnailList1.SelectedItems)
                     {
                         int before = getImageBefore((int)it.Tag);
-                        ScannedImage temp = images[before];
+                        IScannedImage temp = images[before];
                         images[before] = images[(int)it.Tag];
                         images[(int)it.Tag] = temp;
                         thumbnailList1.Items[thumbnailList1.Items.IndexOf(it) - 1].Selected = true;
@@ -163,7 +158,7 @@ namespace NAPS2
                     {
                         ListViewItem it = thumbnailList1.SelectedItems[i];
                         int after = getImageAfter((int)it.Tag);
-                        ScannedImage temp = images[after];
+                        IScannedImage temp = images[after];
                         images[after] = images[(int)it.Tag];
                         images[(int)it.Tag] = temp;
                         thumbnailList1.Items[thumbnailList1.Items.IndexOf(it) + 1].Selected = true;
@@ -220,7 +215,7 @@ namespace NAPS2
         {
             FPDFSave pdfdialog = Dependencies.Kernel.Get<FPDFSave>();
             pdfdialog.Filename = filename;
-            pdfdialog.Images = images.Values;
+            pdfdialog.Images = images;
             pdfdialog.ShowDialog(this);
         }
 
@@ -235,10 +230,7 @@ namespace NAPS2
             if (prof.Profile == null)
                 return;
 
-            if (prof.Profile.DeviceDriver == ScanSettings.Driver.WIA)
-                scanWIA(prof.Profile);
-            else
-                scanTWAIN(prof.Profile);
+            scan(prof.Profile);
         }
 
         private void tsSavePDF_Click(object sender, EventArgs e)
@@ -279,7 +271,7 @@ namespace NAPS2
 
                     if (images.Count == 1)
                     {
-                        using (Bitmap baseImage = images.Values[0].GetImage())
+                        using (Bitmap baseImage = images[0].GetImage())
                         {
                             baseImage.Save(sd.FileName);
                         }
@@ -288,7 +280,7 @@ namespace NAPS2
 
                     if (sd.FilterIndex == 7)
                     {
-                        var bitmaps = images.Values.Select(x => x.GetImage()).ToArray();
+                        var bitmaps = images.Select(x => x.GetImage()).ToArray();
                         CTiffHelper.SaveMultipage(bitmaps, sd.FileName);
                         foreach (Bitmap bitmap in bitmaps)
                         {
@@ -297,7 +289,7 @@ namespace NAPS2
                         return;
                     }
 
-                    foreach (ScannedImage img in images.Values)
+                    foreach (ScannedImage img in images)
                     {
                         string filename = Path.GetDirectoryName(sd.FileName) + "\\" + Path.GetFileNameWithoutExtension(sd.FileName) + i.ToString().PadLeft(3, '0') + Path.GetExtension(sd.FileName);
                         using (Bitmap baseImage = img.GetImage())

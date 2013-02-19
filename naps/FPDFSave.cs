@@ -46,7 +46,7 @@ namespace NAPS2
 
         public string Filename { get; set; }
 
-        public IList<ScannedImage> Images { get; set; }
+        public IList<IScannedImage> Images { get; set; }
 
         private void exportPDFProcess()
         {

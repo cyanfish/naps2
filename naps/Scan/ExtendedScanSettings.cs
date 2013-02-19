@@ -23,7 +23,7 @@ namespace NAPS2.Scan
 
         public ScanDPI Resolution { get; set; }
 
-        public ScanSource Source { get; set; }
+        public ScanSource PaperSource { get; set; }
     }
 
     public enum ScanSource

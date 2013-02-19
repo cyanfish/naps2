@@ -256,13 +256,13 @@ namespace NAPS2.Scan.Driver.Wia
             int pageWidth = pageSize.Width * resolution / 1000;
             int pageHeight = pageSize.Height * resolution / 1000;
             int horizontalSize = 0;
-            if (settingsExt.Source == ScanSource.GLASS)
+            if (settingsExt.PaperSource == ScanSource.GLASS)
                 horizontalSize = getDeviceIntProperty(HORIZONTAL_BED_SIZE);
             else
                 horizontalSize = getDeviceIntProperty(HORIZONTAL_FEED_SIZE);
 
             int verticalSize = 0;
-            if (settingsExt.Source == ScanSource.GLASS)
+            if (settingsExt.PaperSource == ScanSource.GLASS)
                 verticalSize = getDeviceIntProperty(VERTICAL_BED_SIZE);
             else
                 verticalSize = getDeviceIntProperty(VERTICAL_FEED_SIZE);
@@ -289,7 +289,7 @@ namespace NAPS2.Scan.Driver.Wia
 
         private void setupDevice()
         {
-            switch (settingsExt.Source)
+            switch (settingsExt.PaperSource)
             {
                 case ScanSource.GLASS:
                     setDeviceIntProperty(2, PAPER_SOURCE);

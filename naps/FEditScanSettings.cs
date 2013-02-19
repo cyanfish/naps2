@@ -138,7 +138,7 @@ namespace NAPS2
                     PageAlign = (ScanHorizontalAlign)cmbAlign.SelectedIndex,
                     PageSize = (ScanPageSize)cmbPage.SelectedIndex,
                     Resolution = (ScanDPI)cmbResolution.SelectedIndex,
-                    Source = (ScanSource)cmbSource.SelectedIndex
+                    PaperSource = (ScanSource)cmbSource.SelectedIndex
                 };
             }
         }
@@ -184,25 +184,32 @@ namespace NAPS2
         {
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanSettings.IconID];
             txtName.Text = ScanSettings.DisplayName;
-            cmbSource.SelectedIndex = (int)ScanSettings.Source;
+            txtDevice.Text = ScanSettings.Device.Name;
+            currentDevice = ScanSettings.Device;
+            iconID = ScanSettings.IconID;
 
+            var scanSettingsExt = ScanSettings as ExtendedScanSettings;
 
-            cmbDepth.SelectedIndex = (int)ScanSettings.Depth;
-            cmbResolution.SelectedIndex = (int)ScanSettings.Resolution;
-            txtContrast.Text = ScanSettings.Contrast.ToString();
-            txtBrightness.Text = ScanSettings.Brightness.ToString();
-            cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
-            cmbScale.SelectedIndex = (int)ScanSettings.AfterScanScale;
-            cmbAlign.SelectedIndex = (int)ScanSettings.PageAlign;
+            if (scanSettingsExt != null)
+            {
+                cmbSource.SelectedIndex = (int)scanSettingsExt.PaperSource;
+                cmbDepth.SelectedIndex = (int)scanSettingsExt.BitDepth;
+                cmbResolution.SelectedIndex = (int)scanSettingsExt.Resolution;
+                txtContrast.Text = scanSettingsExt.Contrast.ToString();
+                txtBrightness.Text = scanSettingsExt.Brightness.ToString();
+                cmbPage.SelectedIndex = (int)scanSettingsExt.PageSize;
+                cmbScale.SelectedIndex = (int)scanSettingsExt.AfterScanScale;
+                cmbAlign.SelectedIndex = (int)scanSettingsExt.PageAlign;
+            }
 
-            cbHighQuality.Checked = ScanSettings.HighQuality;
+            cbHighQuality.Checked = ScanSettings.MaxQuality;
 
-            if (ScanSettings.DeviceDriver == ScanSettings.Driver.WIA)
+            if (ScanSettings.Device.DriverName == WiaScanDriver.DRIVER_NAME)
             {
                 suppressChangeEvent = true;
                 rdWIA.Checked = true;
                 suppressChangeEvent = false;
-                if (ScanSettings.ShowScanUI)
+                if (scanSettingsExt == null)
                     rdbNativeWIA.Checked = true;
                 else
                     rdbConfig.Checked = true;
@@ -213,14 +220,6 @@ namespace NAPS2
                 rdbNativeWIA.Checked = true;
                 rdbNativeWIA.Enabled = rdWIA.Checked;
                 rdbConfig.Enabled = rdWIA.Checked;
-            }
-
-            if (ScanSettings.DeviceID != "")
-            {
-                if (ScanSettings.DeviceDriver == ScanSettings.Driver.WIA)
-                    loadWIA();
-                else
-                    loadTWAIN();
             }
         }
 
@@ -242,8 +241,8 @@ namespace NAPS2
                 rdbNativeWIA.Checked = true;
                 rdbNativeWIA.Enabled = rdWIA.Checked;
                 rdbConfig.Enabled = rdWIA.Checked;
-                ScanSettings.DeviceID = "";
-                currentDeviceID = "";
+                ScanSettings.Device = null;
+                currentDevice = null;
                 txtDevice.Text = "";
             }
         }
