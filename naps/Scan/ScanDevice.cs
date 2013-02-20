@@ -14,8 +14,12 @@ namespace NAPS2.Scan
             DriverName = driverName;
         }
 
-        public string ID { get; private set; }
-        public string Name { get; private set; }
-        public string DriverName { get; private set; }
+        public ScanDevice()
+        {
+        }
+
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string DriverName { get; set; }
     }
 }

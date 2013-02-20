@@ -34,13 +34,24 @@ namespace NAPS2.Scan.Driver.Twain
 
         public static string SelectDeviceUI()
         {
-            Twain tw = new Twain();
-            if (!tw.Init(Application.OpenForms[0].Handle))
+            try
             {
-                throw new NoDevicesFoundException();
+                Twain tw = new Twain();
+                if (!tw.Init(Application.OpenForms[0].Handle))
+                {
+                    throw new NoDevicesFoundException();
+                }
+                tw.Select();
+                return tw.GetCurrentName();
             }
-            tw.Select();
-            return tw.GetCurrentName();
+            catch (ScanDriverException e)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ScanDriverException(e);
+            }
         }
 
         public TwainApi(ScanSettings settings)

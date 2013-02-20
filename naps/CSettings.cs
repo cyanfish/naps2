@@ -34,24 +34,26 @@ namespace NAPS2
         {
             if (File.Exists(Application.StartupPath + "\\" + PROFILES_FILE))
             {
-                Stream strFile = File.OpenRead(Application.StartupPath + "\\" + PROFILES_FILE);
-                XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
-                List<ScanSettings> ret = (List<ScanSettings>)serializer.Deserialize(strFile);
-                strFile.Close();
-                return ret;
+                try
+                {
+                    using (Stream strFile = File.OpenRead(Application.StartupPath + "\\" + PROFILES_FILE))
+                    {
+                        XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
+                        return (List<ScanSettings>)serializer.Deserialize(strFile);
+                    }
+                }
+                catch (Exception) { }
             }
-            else
-            {
-                return new List<ScanSettings>();
-            }
+            return new List<ScanSettings>();
         }
 
         public static void SaveProfiles(List<ScanSettings> profiles)
         {
-            Stream strFile = File.Open(Application.StartupPath + "\\" + PROFILES_FILE,FileMode.Create);
-            XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
-            serializer.Serialize(strFile, profiles);
-            strFile.Close();
+            using (Stream strFile = File.Open(Application.StartupPath + "\\" + PROFILES_FILE, FileMode.Create))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
+                serializer.Serialize(strFile, profiles);
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace NAPS2
         private void btnAdd_Click(object sender, EventArgs e)
         {
             FEditScanSettings fedit = Dependencies.Kernel.Get<FEditScanSettings>();
-            fedit.ScanSettings = new ScanSettings();
+            fedit.ScanSettings = new ExtendedScanSettings();
             fedit.ShowDialog();
             if (fedit.Result)
             {

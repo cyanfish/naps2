@@ -95,7 +95,7 @@ namespace NAPS2
             this.txtDevice.Name = "txtDevice";
             this.txtDevice.ReadOnly = true;
             this.txtDevice.Size = new System.Drawing.Size(226, 20);
-            this.txtDevice.TabIndex = 0;
+            this.txtDevice.TabIndex = 3;
             // 
             // label1
             // 
@@ -111,7 +111,7 @@ namespace NAPS2
             this.btnChooseDevice.Location = new System.Drawing.Point(247, 95);
             this.btnChooseDevice.Name = "btnChooseDevice";
             this.btnChooseDevice.Size = new System.Drawing.Size(102, 23);
-            this.btnChooseDevice.TabIndex = 2;
+            this.btnChooseDevice.TabIndex = 4;
             this.btnChooseDevice.Text = "Choose device";
             this.btnChooseDevice.UseVisualStyleBackColor = true;
             this.btnChooseDevice.Click += new System.EventHandler(this.btnChooseDevice_Click);
@@ -132,14 +132,14 @@ namespace NAPS2
             this.cmbSource.Location = new System.Drawing.Point(15, 214);
             this.cmbSource.Name = "cmbSource";
             this.cmbSource.Size = new System.Drawing.Size(183, 21);
-            this.cmbSource.TabIndex = 4;
+            this.cmbSource.TabIndex = 7;
             // 
             // btnOK
             // 
             this.btnOK.Location = new System.Drawing.Point(262, 396);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 5;
+            this.btnOK.TabIndex = 18;
             this.btnOK.Text = "Ok";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -159,10 +159,11 @@ namespace NAPS2
             this.rdbConfig.Location = new System.Drawing.Point(0, 3);
             this.rdbConfig.Name = "rdbConfig";
             this.rdbConfig.Size = new System.Drawing.Size(136, 17);
-            this.rdbConfig.TabIndex = 1;
+            this.rdbConfig.TabIndex = 5;
             this.rdbConfig.TabStop = true;
             this.rdbConfig.Text = "Use predefined settings";
             this.rdbConfig.UseVisualStyleBackColor = true;
+            this.rdbConfig.CheckedChanged += new System.EventHandler(this.rdbConfig_CheckedChanged);
             // 
             // rdbNativeWIA
             // 
@@ -170,7 +171,7 @@ namespace NAPS2
             this.rdbNativeWIA.Location = new System.Drawing.Point(220, 3);
             this.rdbNativeWIA.Name = "rdbNativeWIA";
             this.rdbNativeWIA.Size = new System.Drawing.Size(114, 17);
-            this.rdbNativeWIA.TabIndex = 0;
+            this.rdbNativeWIA.TabIndex = 6;
             this.rdbNativeWIA.TabStop = true;
             this.rdbNativeWIA.Text = "Use native WIA UI";
             this.rdbNativeWIA.UseVisualStyleBackColor = true;
@@ -193,7 +194,7 @@ namespace NAPS2
             this.cmbDepth.Location = new System.Drawing.Point(235, 214);
             this.cmbDepth.Name = "cmbDepth";
             this.cmbDepth.Size = new System.Drawing.Size(183, 21);
-            this.cmbDepth.TabIndex = 10;
+            this.cmbDepth.TabIndex = 8;
             // 
             // label4
             // 
@@ -212,7 +213,7 @@ namespace NAPS2
             this.cmbPage.Location = new System.Drawing.Point(15, 254);
             this.cmbPage.Name = "cmbPage";
             this.cmbPage.Size = new System.Drawing.Size(183, 21);
-            this.cmbPage.TabIndex = 12;
+            this.cmbPage.TabIndex = 9;
             // 
             // cmbResolution
             // 
@@ -222,7 +223,7 @@ namespace NAPS2
             this.cmbResolution.Location = new System.Drawing.Point(15, 294);
             this.cmbResolution.Name = "cmbResolution";
             this.cmbResolution.Size = new System.Drawing.Size(183, 21);
-            this.cmbResolution.TabIndex = 14;
+            this.cmbResolution.TabIndex = 11;
             // 
             // label5
             // 
@@ -249,7 +250,7 @@ namespace NAPS2
             this.trBrightness.Minimum = -1000;
             this.trBrightness.Name = "trBrightness";
             this.trBrightness.Size = new System.Drawing.Size(139, 45);
-            this.trBrightness.TabIndex = 16;
+            this.trBrightness.TabIndex = 13;
             this.trBrightness.TickFrequency = 200;
             this.trBrightness.Scroll += new System.EventHandler(this.trBrightness_Scroll);
             // 
@@ -269,7 +270,7 @@ namespace NAPS2
             this.trContrast.Minimum = -1000;
             this.trContrast.Name = "trContrast";
             this.trContrast.Size = new System.Drawing.Size(139, 45);
-            this.trContrast.TabIndex = 19;
+            this.trContrast.TabIndex = 15;
             this.trContrast.TickFrequency = 200;
             this.trContrast.Scroll += new System.EventHandler(this.trContrast_Scroll);
             // 
@@ -278,7 +279,7 @@ namespace NAPS2
             this.btnCancel.Location = new System.Drawing.Point(343, 396);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 20;
+            this.btnCancel.TabIndex = 19;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -307,7 +308,7 @@ namespace NAPS2
             this.txtName.Location = new System.Drawing.Point(15, 25);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(334, 20);
-            this.txtName.TabIndex = 24;
+            this.txtName.TabIndex = 0;
             // 
             // cmbAlign
             // 
@@ -317,7 +318,7 @@ namespace NAPS2
             this.cmbAlign.Location = new System.Drawing.Point(235, 254);
             this.cmbAlign.Name = "cmbAlign";
             this.cmbAlign.Size = new System.Drawing.Size(183, 21);
-            this.cmbAlign.TabIndex = 26;
+            this.cmbAlign.TabIndex = 10;
             // 
             // label9
             // 
@@ -336,7 +337,7 @@ namespace NAPS2
             this.cmbScale.Location = new System.Drawing.Point(235, 294);
             this.cmbScale.Name = "cmbScale";
             this.cmbScale.Size = new System.Drawing.Size(183, 21);
-            this.cmbScale.TabIndex = 28;
+            this.cmbScale.TabIndex = 12;
             // 
             // label10
             // 
@@ -362,7 +363,7 @@ namespace NAPS2
             this.rdTWAIN.Location = new System.Drawing.Point(220, 4);
             this.rdTWAIN.Name = "rdTWAIN";
             this.rdTWAIN.Size = new System.Drawing.Size(92, 17);
-            this.rdTWAIN.TabIndex = 1;
+            this.rdTWAIN.TabIndex = 2;
             this.rdTWAIN.TabStop = true;
             this.rdTWAIN.Text = "TWAIN Driver";
             this.rdTWAIN.UseVisualStyleBackColor = true;
@@ -373,7 +374,7 @@ namespace NAPS2
             this.rdWIA.Location = new System.Drawing.Point(4, 4);
             this.rdWIA.Name = "rdWIA";
             this.rdWIA.Size = new System.Drawing.Size(77, 17);
-            this.rdWIA.TabIndex = 0;
+            this.rdWIA.TabIndex = 1;
             this.rdWIA.TabStop = true;
             this.rdWIA.Text = "WIA Driver";
             this.rdWIA.UseVisualStyleBackColor = true;
@@ -385,7 +386,7 @@ namespace NAPS2
             this.cbHighQuality.Location = new System.Drawing.Point(15, 373);
             this.cbHighQuality.Name = "cbHighQuality";
             this.cbHighQuality.Size = new System.Drawing.Size(156, 17);
-            this.cbHighQuality.TabIndex = 30;
+            this.cbHighQuality.TabIndex = 17;
             this.cbHighQuality.Text = "Maximum quality (large files)";
             this.cbHighQuality.UseVisualStyleBackColor = true;
             // 
@@ -394,7 +395,7 @@ namespace NAPS2
             this.txtBrightness.Location = new System.Drawing.Point(160, 334);
             this.txtBrightness.Name = "txtBrightness";
             this.txtBrightness.Size = new System.Drawing.Size(38, 20);
-            this.txtBrightness.TabIndex = 31;
+            this.txtBrightness.TabIndex = 14;
             this.txtBrightness.Text = "0";
             this.txtBrightness.TextChanged += new System.EventHandler(this.txtBrightness_TextChanged);
             // 
@@ -403,12 +404,13 @@ namespace NAPS2
             this.txtContrast.Location = new System.Drawing.Point(380, 334);
             this.txtContrast.Name = "txtContrast";
             this.txtContrast.Size = new System.Drawing.Size(38, 20);
-            this.txtContrast.TabIndex = 32;
+            this.txtContrast.TabIndex = 16;
             this.txtContrast.Text = "0";
             this.txtContrast.TextChanged += new System.EventHandler(this.txtContrast_TextChanged);
             // 
             // FEditScanSettings
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 429);

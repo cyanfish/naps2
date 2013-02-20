@@ -88,6 +88,8 @@
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
     <Compile Include="CScanSettings.cs" />
+    <Compile Include="Scan\Driver.Stub\StubScanDriver.cs" />
+    <Compile Include="Scan\Driver.Stub\StubScanDriverFactory.cs" />
     <Compile Include="Scan\Driver.Twain\DibUtils.cs" />
     <Compile Include="Scan\Driver.Twain\TwainApi.cs" />
     <Compile Include="Scan\Driver.Twain\FTwainGui.cs">

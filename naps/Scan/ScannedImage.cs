@@ -67,6 +67,10 @@ namespace NAPS2.Scan
             this.imageFormat = imageFormat;
             thumbnail = resizeBitmap(img, thumbnailWidth, thumbnailHeight);
 
+            // Draw outline on thumbnail
+            Graphics g = Graphics.FromImage(thumbnail);
+            g.DrawRectangle(Pens.Black, 0, 0, thumbnail.Width - 1, thumbnail.Height - 1);
+
             if (bitDepth == ScanBitDepth.BLACKWHITE)
             {
                 SetBaseImage(CImageHelper.CopyToBpp((Bitmap)img, 1));
@@ -110,7 +114,7 @@ namespace NAPS2.Scan
                     baseImageEncoded.Dispose();
                 }
                 baseImageEncoded = new MemoryStream();
-                baseImage.Save(baseImageEncoded, imageFormat);
+                bitmap.Save(baseImageEncoded, imageFormat);
             }
         }
 

@@ -35,9 +35,8 @@ namespace NAPS2
     {
         private readonly IScanDriverFactory driverFactory;
 
-        private ScanSettings scanSettings;
-
         private ScanDevice currentDevice;
+
         private int iconID;
         private bool result = false;
 
@@ -48,11 +47,7 @@ namespace NAPS2
             get { return result; }
         }
 
-        public ScanSettings ScanSettings
-        {
-            get { return scanSettings; }
-            set { scanSettings = value; }
-        }
+        public ScanSettings ScanSettings { get; set; }
 
         public FEditScanSettings(IScanDriverFactory driverFactory)
         {
@@ -64,6 +59,35 @@ namespace NAPS2
             AddEnumItems<ScanDPI>(cmbResolution);
             AddEnumItems<ScanScale>(cmbScale);
             AddEnumItems<ScanSource>(cmbSource);
+        }
+
+        private string DeviceDriverName
+        {
+            get
+            {
+                return rdTWAIN.Checked ? TwainScanDriver.DRIVER_NAME : WiaScanDriver.DRIVER_NAME;
+            }
+            set
+            {
+                if (value == TwainScanDriver.DRIVER_NAME)
+                {
+                    rdTWAIN.Checked = true;
+                }
+                else
+                {
+                    rdWIA.Checked = true;
+                }
+            }
+        }
+
+        public ScanDevice CurrentDevice
+        {
+            get { return currentDevice; }
+            set
+            {
+                currentDevice = value;
+                txtDevice.Text = (value == null ? "" : value.Name);
+            }
         }
 
         private void AddEnumItems<T>(ComboBox combo)
@@ -85,9 +109,9 @@ namespace NAPS2
             IScanDriver driver = driverFactory.CreateDriver(driverName);
             try
             {
+                driver.DialogParent = this;
                 ScanDevice device = driver.PromptForDevice();
-                txtDevice.Text = device.Name;
-                currentDevice = device;
+                CurrentDevice = device;
             }
             catch (ScanDriverException e)
             {
@@ -97,26 +121,16 @@ namespace NAPS2
 
         private void btnChooseDevice_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (rdWIA.Checked == true)
-                    choose(WiaScanDriver.DRIVER_NAME);
-                else
-                    choose(TwainScanDriver.DRIVER_NAME);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("An unknown error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            choose(DeviceDriverName);
         }
 
         private void saveSettings()
         {
             if (rdbNativeWIA.Checked)
             {
-                scanSettings = new ScanSettings
+                ScanSettings = new ScanSettings
                 {
-                    Device = currentDevice,
+                    Device = CurrentDevice,
                     DisplayName = txtName.Text,
                     IconID = iconID,
                     MaxQuality = cbHighQuality.Checked
@@ -124,13 +138,13 @@ namespace NAPS2
             }
             else
             {
-                scanSettings = new ExtendedScanSettings
+                ScanSettings = new ExtendedScanSettings
                 {
-                    Device = currentDevice,
+                    Device = CurrentDevice,
                     DisplayName = txtName.Text,
                     IconID = iconID,
                     MaxQuality = cbHighQuality.Checked,
-                    
+
                     AfterScanScale = (ScanScale)cmbScale.SelectedIndex,
                     BitDepth = (ScanBitDepth)cmbDepth.SelectedIndex,
                     Brightness = trBrightness.Value,
@@ -145,7 +159,7 @@ namespace NAPS2
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (currentDevice == null)
+            if (CurrentDevice == null)
             {
                 MessageBox.Show("No device selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -166,26 +180,44 @@ namespace NAPS2
             this.Close();
         }
 
+        private void rdbConfig_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateEnabledControls();
+        }
+
         private void rdbNativeWIA_CheckedChanged(object sender, EventArgs e)
         {
-            cmbSource.Enabled = rdbConfig.Checked;
-            cmbResolution.Enabled = rdbConfig.Checked;
-            cmbPage.Enabled = rdbConfig.Checked;
-            cmbDepth.Enabled = rdbConfig.Checked;
-            cmbAlign.Enabled = rdbConfig.Checked;
-            cmbScale.Enabled = rdbConfig.Checked;
-            trBrightness.Enabled = rdbConfig.Checked;
-            trContrast.Enabled = rdbConfig.Checked;
-            txtBrightness.Enabled = rdbConfig.Checked;
-            txtContrast.Enabled = rdbConfig.Checked;
+            UpdateEnabledControls();
+        }
+
+        private void UpdateEnabledControls()
+        {
+            if (!suppressChangeEvent)
+            {
+                suppressChangeEvent = true;
+                bool configEnabled = rdWIA.Checked;
+                rdbConfig.Enabled = configEnabled;
+                rdbNativeWIA.Enabled = configEnabled;
+                bool enabled = rdbConfig.Checked && rdWIA.Checked;
+                cmbSource.Enabled = enabled;
+                cmbResolution.Enabled = enabled;
+                cmbPage.Enabled = enabled;
+                cmbDepth.Enabled = enabled;
+                cmbAlign.Enabled = enabled;
+                cmbScale.Enabled = enabled;
+                trBrightness.Enabled = enabled;
+                trContrast.Enabled = enabled;
+                txtBrightness.Enabled = enabled;
+                txtContrast.Enabled = enabled;
+                suppressChangeEvent = false;
+            }
         }
 
         private void FEditScanSettings_Load(object sender, EventArgs e)
         {
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanSettings.IconID];
             txtName.Text = ScanSettings.DisplayName;
-            txtDevice.Text = ScanSettings.Device.Name;
-            currentDevice = ScanSettings.Device;
+            CurrentDevice = ScanSettings.Device;
             iconID = ScanSettings.IconID;
 
             var scanSettingsExt = ScanSettings as ExtendedScanSettings;
@@ -204,7 +236,7 @@ namespace NAPS2
 
             cbHighQuality.Checked = ScanSettings.MaxQuality;
 
-            if (ScanSettings.Device.DriverName == WiaScanDriver.DRIVER_NAME)
+            if (CurrentDevice == null || CurrentDevice.DriverName != TwainScanDriver.DRIVER_NAME)
             {
                 suppressChangeEvent = true;
                 rdWIA.Checked = true;
@@ -218,9 +250,9 @@ namespace NAPS2
             {
                 rdTWAIN.Checked = true;
                 rdbNativeWIA.Checked = true;
-                rdbNativeWIA.Enabled = rdWIA.Checked;
-                rdbConfig.Enabled = rdWIA.Checked;
             }
+
+            UpdateEnabledControls();
         }
 
         private void pctIcon_DoubleClick(object sender, EventArgs e)
@@ -238,12 +270,9 @@ namespace NAPS2
         {
             if (!suppressChangeEvent)
             {
-                rdbNativeWIA.Checked = true;
-                rdbNativeWIA.Enabled = rdWIA.Checked;
-                rdbConfig.Enabled = rdWIA.Checked;
                 ScanSettings.Device = null;
-                currentDevice = null;
-                txtDevice.Text = "";
+                CurrentDevice = null;
+                UpdateEnabledControls();
             }
         }
 

@@ -56,7 +56,7 @@ namespace NAPS2
 
         private void thumbnailList1_ItemActivate(object sender, EventArgs e)
         {
-            FViewer viewer = new FViewer(images[(int)thumbnailList1.SelectedItems[0].Tag].GetImage());
+            FViewer viewer = new FViewer(images[(int)thumbnailList1.SelectedIndices[0]].GetImage());
             viewer.ShowDialog();
         }
 
@@ -174,7 +174,7 @@ namespace NAPS2
             if (thumbnailList1.SelectedItems.Count > 0)
             {
                 foreach (ListViewItem it in thumbnailList1.SelectedItems)
-                { 
+                {
                     images[(int)it.Tag].RotateFlip(RotateFlipType.Rotate270FlipNone);
                 }
                 updateView();
