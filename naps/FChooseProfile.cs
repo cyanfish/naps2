@@ -55,8 +55,11 @@ namespace NAPS2
 
         private void lvProfiles_ItemActivate(object sender, EventArgs e)
         {
-            profile = settings[lvProfiles.SelectedItems[0].Index];
-            this.Close();
+            if (lvProfiles.SelectedIndices.Count > 0)
+            {
+                profile = settings[lvProfiles.SelectedIndices[0]];
+                this.Close();
+            }
         }
     }
 }

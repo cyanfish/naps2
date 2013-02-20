@@ -47,6 +47,15 @@ namespace NAPS2
             }
         }
 
+        public void AddImages(List<IScannedImage> images)
+        {
+            foreach (var img in images)
+            {
+                ilThumbnailList.Images.Add(img.Thumbnail);
+                ListViewItem item = this.Items.Add("", ilThumbnailList.Images.Count - 1);
+            }
+        }
+
         public void UpdateView(List<IScannedImage> images)
         {
             ilThumbnailList.Images.Clear();

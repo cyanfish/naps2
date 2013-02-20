@@ -56,8 +56,11 @@ namespace NAPS2
 
         private void thumbnailList1_ItemActivate(object sender, EventArgs e)
         {
-            FViewer viewer = new FViewer(images[(int)thumbnailList1.SelectedIndices[0]].GetImage());
-            viewer.ShowDialog();
+            if (thumbnailList1.SelectedIndices.Count > 0)
+            {
+                FViewer viewer = new FViewer(images[thumbnailList1.SelectedIndices[0]].GetImage());
+                viewer.ShowDialog();
+            }
         }
 
         private void updateView()
@@ -85,9 +88,10 @@ namespace NAPS2
             driver.DialogParent = this;
             driver.ScanSettings = Profile;
 
-            var images = driver.Scan();
+            var newImages = driver.Scan();
+            images.AddRange(newImages);
+            thumbnailList1.AddImages(newImages);
 
-            thumbnailList1.UpdateImages(images);
             Application.DoEvents();
         }
 
@@ -110,7 +114,7 @@ namespace NAPS2
         private int getImageBefore(int id)
         {
             var before = id - 1;
-            if (before <= 0)
+            if (before < 0)
             {
                 before = images.Count - 1;
             }
@@ -131,19 +135,14 @@ namespace NAPS2
         {
             if (thumbnailList1.SelectedItems.Count > 0)
             {
-                if (thumbnailList1.SelectedItems[0].Index > 0)
+                foreach (int i in thumbnailList1.SelectedIndices)
                 {
-                    foreach (ListViewItem it in thumbnailList1.SelectedItems)
-                    {
-                        int before = getImageBefore((int)it.Tag);
-                        IScannedImage temp = images[before];
-                        images[before] = images[(int)it.Tag];
-                        images[(int)it.Tag] = temp;
-                        thumbnailList1.Items[thumbnailList1.Items.IndexOf(it) - 1].Selected = true;
-                        it.Selected = false;
-                    }
-                    updateView();
+                    int before = getImageBefore(i);
+                    var img = images[i];
+                    images.RemoveAt(i);
+                    images.Insert(before, img);
                 }
+                thumbnailList1.UpdateImages(images);
             }
         }
 
@@ -151,20 +150,23 @@ namespace NAPS2
         {
             if (thumbnailList1.SelectedItems.Count > 0)
             {
-                if (thumbnailList1.SelectedItems[thumbnailList1.SelectedItems.Count - 1].Index < images.Count - 1)
+                var selected = thumbnailList1.SelectedItems.OfType<ListViewItem>().Select(x => x.ImageList.Images[x.ImageIndex]).ToList();
+                for (int j = thumbnailList1.SelectedIndices.Count - 1; j >= 0; j--)
                 {
-
-                    for (int i = thumbnailList1.SelectedItems.Count - 1; i >= 0; i--)
+                    int i = thumbnailList1.SelectedIndices[j];
+                    int after = getImageAfter(i);
+                    var img = images[i];
+                    images.RemoveAt(i);
+                    images.Insert(after, img);
+                }
+                thumbnailList1.UpdateImages(images);
+                thumbnailList1.SelectedIndices.Clear();
+                foreach (ListViewItem item in thumbnailList1.Items)
+                {
+                    if (selected.Contains(item.ImageList.Images[item.ImageIndex]))
                     {
-                        ListViewItem it = thumbnailList1.SelectedItems[i];
-                        int after = getImageAfter((int)it.Tag);
-                        IScannedImage temp = images[after];
-                        images[after] = images[(int)it.Tag];
-                        images[(int)it.Tag] = temp;
-                        thumbnailList1.Items[thumbnailList1.Items.IndexOf(it) + 1].Selected = true;
-                        it.Selected = false;
+                        item.Selected = true;
                     }
-                    updateView();
                 }
             }
         }

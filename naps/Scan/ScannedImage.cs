@@ -37,24 +37,30 @@ namespace NAPS2.Scan
         private const int thumbnailWidth = 128;
         private const int thumbnailHeight = 128;
 
-        private static Bitmap resizeBitmap(Bitmap b, int nWidth, int nHeight)
+        private static Bitmap resizeBitmap(Bitmap b, int newWidth, int newHeight)
         {
-            Bitmap result = new Bitmap(nWidth, nHeight);
+            Bitmap result = new Bitmap(newWidth, newHeight);
             Graphics g = Graphics.FromImage((Image)result);
+
+            int left, top, width, height;
 
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             if (b.Width > b.Height)
             {
-                double nheight = (double)b.Height * ((double)nWidth / (double)b.Width);
-                double ntop = ((double)nHeight - nheight) / 2;
-                g.DrawImage(b, 0, (int)ntop, nWidth, (int)nheight);
+                width = newWidth;
+                height = (int)(b.Height * ((double)newWidth / (double)b.Width));
+                left = 0;
+                top = (newHeight - height) / 2;
             }
             else
             {
-                double nwidth = (double)b.Width * ((double)nHeight / (double)b.Height);
-                double nleft = ((double)nWidth - nwidth) / 2;
-                g.DrawImage(b, (int)nleft, 0, (int)nwidth, nHeight);
+                width = (int)(b.Width * ((double)newHeight / (double)b.Height));
+                height = newHeight;
+                left = (newWidth - width) / 2;
+                top = 0;
             }
+            g.DrawImage(b, left, top, width, height);
+            g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
 
             g.Dispose();
 
@@ -66,10 +72,6 @@ namespace NAPS2.Scan
             this.bitDepth = bitDepth;
             this.imageFormat = imageFormat;
             thumbnail = resizeBitmap(img, thumbnailWidth, thumbnailHeight);
-
-            // Draw outline on thumbnail
-            Graphics g = Graphics.FromImage(thumbnail);
-            g.DrawRectangle(Pens.Black, 0, 0, thumbnail.Width - 1, thumbnail.Height - 1);
 
             if (bitDepth == ScanBitDepth.BLACKWHITE)
             {
