@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NAPS2.Tests.Unit")]
+[assembly: AssemblyTitle("NAPS2.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NAPS2.Tests.Unit")]
+[assembly: AssemblyProduct("NAPS2.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3fa39e5d-2e4c-47cd-8f66-e6e808bc0231")]
+[assembly: Guid("d196c9bc-b093-417a-8383-ea8e1df00367")]
 
 // Version information for an assembly consists of the following four values:
 //

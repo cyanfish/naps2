@@ -29,9 +29,14 @@ namespace NAPS2.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {
+        protected PdfDocument CreatePdfDocument()
+        {
+            return new PdfDocument();
+        }
+
         public bool Export(string path, List<Image> images, PdfInfo info, Func<int, bool> progressCallback)
         {
-            PdfDocument document = new PdfDocument();
+            PdfDocument document = CreatePdfDocument();
             document.Layout = PdfSharp.Pdf.IO.PdfWriterLayout.Compact;
             document.Info.Author = info.Author;
             document.Info.Creator = info.Creator;

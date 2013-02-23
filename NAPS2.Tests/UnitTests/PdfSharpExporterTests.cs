@@ -7,10 +7,10 @@ using NUnit.Framework;
 
 namespace NAPS2.Tests.Integration
 {
-    public abstract class BasePdfExporterTests
+    public abstract class PdfSharpExporterTests
     {
         private readonly String pdfPath = "test/test.pdf";
-        protected IPdfExporter pdfExporter;
+        protected PdfSharpExporter pdfExporter;
         private PdfInfo info;
         private List<Image> images;
 
