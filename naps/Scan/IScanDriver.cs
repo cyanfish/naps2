@@ -22,7 +22,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace NAPS2.Scan.Driver
+namespace NAPS2.Scan
 {
     /// <summary>
     /// An interface for document scanning drivers (e.g. WIA, TWAIN).

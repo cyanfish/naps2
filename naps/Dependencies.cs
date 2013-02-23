@@ -26,8 +26,10 @@ using Ninject;
 
 using NAPS2.Email;
 using NAPS2.Pdf;
-using NAPS2.Scan.Driver;
-using NAPS2.Scan.Driver.Stub;
+using NAPS2.Scan;
+using NAPS2.Scan.Wia;
+using NAPS2.Scan.Twain;
+using NAPS2.Scan.Stub;
 
 namespace NAPS2
 {
@@ -46,8 +48,13 @@ namespace NAPS2
             {
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
                 Bind<IEmailer>().To<MAPIEmailer>();
-                //Bind<IScanDriverFactory>().To<DefaultScanDriverFactory>();
-                Bind<IScanDriverFactory>().To<StubScanDriverFactory>();
+#if DEBUG
+                Bind<IScanDriver>().To<StubWiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
+                Bind<IScanDriver>().To<StubTwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
+#else
+                Bind<IScanDriver>().To<WiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
+                Bind<IScanDriver>().To<TwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
+#endif
             }
         }
     }

@@ -17,23 +17,34 @@
 */
 
 using System;
-namespace NAPS2.Scan.Driver
-{
-    public interface IDriverFactory<T>
-    {
-        /// <summary>
-        /// Creates an instance of a driver.
-        /// If the driver has not been registered, a default may be provided.
-        /// </summary>
-        /// <param name="driverName">The driver's name (case sensitive).</param>
-        /// <returns>The driver instance.</returns>
-        T CreateDriver(string driverName);
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-        /// <summary>
-        /// Determines if a driver has been registered.
-        /// </summary>
-        /// <param name="driverName">The driver's name (case sensitive).</param>
-        /// <returns>True if the driver has been registered.</returns>
-        bool HasDriver(string driverName);
+namespace NAPS2.Scan
+{
+    public class ScanDriverException : Exception
+    {
+        private const string DEFAULT_MESSAGE = "An error occured with the scanning driver.";
+
+        public ScanDriverException()
+            : base(DEFAULT_MESSAGE)
+        {
+        }
+
+        public ScanDriverException(string message)
+            : base(message)
+        {
+        }
+
+        public ScanDriverException(Exception innerException)
+            : base(DEFAULT_MESSAGE, innerException)
+        {
+        }
+
+        public ScanDriverException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
     }
 }

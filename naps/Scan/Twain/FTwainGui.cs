@@ -28,7 +28,7 @@ using System.Drawing.Imaging;
 
 using NAPS2.Scan;
 
-namespace NAPS2.Scan.Driver.Twain
+namespace NAPS2.Scan.Twain
 {
     internal partial class FTwainGui : Form, IMessageFilter
     {

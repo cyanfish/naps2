@@ -25,16 +25,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using NAPS2.Scan;
-using NAPS2.Scan.Driver;
-using NAPS2.Scan.Driver.Wia;
-using NAPS2.Scan.Driver.Twain;
+using NAPS2.Scan.Wia;
+using NAPS2.Scan.Twain;
+using Ninject;
 
 namespace NAPS2
 {
     public partial class FEditScanSettings : Form
     {
-        private readonly IScanDriverFactory driverFactory;
-
         private ScanDevice currentDevice;
 
         private int iconID;
@@ -49,10 +47,9 @@ namespace NAPS2
 
         public ScanSettings ScanSettings { get; set; }
 
-        public FEditScanSettings(IScanDriverFactory driverFactory)
+        public FEditScanSettings()
         {
             InitializeComponent();
-            this.driverFactory = driverFactory;
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
             AddEnumItems<ScanPageSize>(cmbPage);
@@ -106,7 +103,7 @@ namespace NAPS2
 
         private void choose(string driverName)
         {
-            IScanDriver driver = driverFactory.CreateDriver(driverName);
+            IScanDriver driver = Dependencies.Kernel.Get<IScanDriver>(driverName);
             try
             {
                 driver.DialogParent = this;

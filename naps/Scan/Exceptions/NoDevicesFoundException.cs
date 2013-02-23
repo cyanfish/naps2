@@ -20,17 +20,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NAPS2.Scan.Driver.Wia;
-using NAPS2.Scan.Driver.Twain;
 
-namespace NAPS2.Scan.Driver
+namespace NAPS2.Scan
 {
-    public class DefaultScanDriverFactory : DriverFactory<IScanDriver>, IScanDriverFactory
+    public class NoDevicesFoundException : ScanDriverException
     {
-        public DefaultScanDriverFactory() {
-            RegisterDriver(WiaScanDriver.DRIVER_NAME, typeof(WiaScanDriver));
-            RegisterDriver(TwainScanDriver.DRIVER_NAME, typeof(TwainScanDriver));
-            DefaultDriverName = WiaScanDriver.DRIVER_NAME;
+        private const string DEFAULT_MESSAGE = "No scanning device was found.";
+
+        public NoDevicesFoundException()
+            : base(DEFAULT_MESSAGE)
+        {
+        }
+
+        public NoDevicesFoundException(string message)
+            : base(message)
+        {
+        }
+
+        public NoDevicesFoundException(Exception innerException)
+            : base(DEFAULT_MESSAGE, innerException)
+        {
+        }
+
+        public NoDevicesFoundException(string message, Exception innerException)
+            : base(message, innerException)
+        {
         }
     }
 }

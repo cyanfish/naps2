@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 */
 
-namespace NAPS2.Scan.Driver.Twain
+namespace NAPS2.Scan.Twain
 {
     partial class FTwainGui
     {

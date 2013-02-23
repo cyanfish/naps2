@@ -20,7 +20,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace NAPS2.Scan.Driver.Twain
+namespace NAPS2.Scan.Twain
 {
 
     internal class TwProtocol

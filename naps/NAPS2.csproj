@@ -88,33 +88,29 @@
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
     <Compile Include="CScanSettings.cs" />
-    <Compile Include="Scan\Driver.Stub\StubScanDriver.cs" />
-    <Compile Include="Scan\Driver.Stub\StubScanDriverFactory.cs" />
-    <Compile Include="Scan\Driver.Twain\DibUtils.cs" />
-    <Compile Include="Scan\Driver.Twain\TwainApi.cs" />
-    <Compile Include="Scan\Driver.Twain\FTwainGui.cs">
+    <Compile Include="Scan\Stub\StubScanDriver.cs" />
+    <Compile Include="Scan\Twain\DibUtils.cs" />
+    <Compile Include="Scan\Twain\TwainApi.cs" />
+    <Compile Include="Scan\Twain\FTwainGui.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Scan\Driver.Twain\FTwainGui.Designer.cs">
+    <Compile Include="Scan\Twain\FTwainGui.Designer.cs">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </Compile>
-    <Compile Include="Scan\Driver.Twain\TwainDefs.cs" />
-    <Compile Include="Scan\Driver.Twain\TwainLib.cs" />
+    <Compile Include="Scan\Twain\TwainDefs.cs" />
+    <Compile Include="Scan\Twain\TwainLib.cs" />
     <Compile Include="Scan\ExtendedScanSettings.cs" />
     <Compile Include="Scan\ScanSettings.cs" />
-    <Compile Include="Scan\Driver.Exceptions\NoDevicesFoundException.cs" />
-    <Compile Include="Scan\Driver.Exceptions\DeviceOfflineException.cs" />
-    <Compile Include="Scan\Driver.Exceptions\DeviceNotFoundException.cs" />
-    <Compile Include="Scan\Driver.Wia\WiaApi.cs" />
-    <Compile Include="Scan\Driver\IDriverFactory.cs" />
-    <Compile Include="Scan\Driver\DefaultScanDriverFactory.cs" />
+    <Compile Include="Scan\Exceptions\NoDevicesFoundException.cs" />
+    <Compile Include="Scan\Exceptions\DeviceOfflineException.cs" />
+    <Compile Include="Scan\Exceptions\DeviceNotFoundException.cs" />
+    <Compile Include="Scan\Wia\WiaApi.cs" />
     <Compile Include="Dependencies.cs" />
     <Compile Include="Pdf\IPdfExporter.cs" />
-    <Compile Include="Scan\Driver\IScanDriverFactory.cs" />
     <Compile Include="Pdf\PdfInfo.cs" />
     <Compile Include="Pdf\PdfSharpExporter.cs" />
-    <Compile Include="Scan\Driver.Exceptions\ScanDriverException.cs" />
-    <Compile Include="Scan\Driver.Twain\TwainScanDriver.cs" />
+    <Compile Include="Scan\Exceptions\ScanDriverException.cs" />
+    <Compile Include="Scan\Twain\TwainScanDriver.cs" />
     <Compile Include="Scan\ScanDevice.cs" />
     <Compile Include="Scan\ScannedImage.cs" />
     <Compile Include="FAbout.cs">
@@ -123,11 +119,10 @@
     <Compile Include="FAbout.Designer.cs">
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="Scan\Driver\IScanDriver.cs" />
+    <Compile Include="Scan\IScanDriver.cs" />
     <Compile Include="Scan\IScannedImage.cs" />
     <Compile Include="Email\IEmailer.cs" />
-    <Compile Include="Scan\Driver\DriverFactory.cs" />
-    <Compile Include="Scan\Driver.Wia\WiaScanDriver.cs" />
+    <Compile Include="Scan\Wia\WiaScanDriver.cs" />
     <Compile Include="CSettings.cs" />
     <Compile Include="CTiffHelper.cs" />
     <Compile Include="FChooseIcon.cs">
@@ -221,7 +216,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scan\Driver.Twain\FTwainGui.resx">
+    <EmbeddedResource Include="Scan\Twain\FTwainGui.resx">
       <DependentUpon>FTwainGui.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

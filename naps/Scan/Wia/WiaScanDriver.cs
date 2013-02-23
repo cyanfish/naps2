@@ -21,11 +21,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NAPS2.Scan.Driver.Twain
+namespace NAPS2.Scan.Wia
 {
-    public class TwainScanDriver : IScanDriver
+    public class WiaScanDriver : IScanDriver
     {
-        public const string DRIVER_NAME = "twain";
+        public const string DRIVER_NAME = "wia";
 
         public string DriverName
         {
@@ -42,9 +42,7 @@ namespace NAPS2.Scan.Driver.Twain
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
             }
-            var deviceId = TwainApi.SelectDeviceUI();
-            var deviceName = deviceId;
-            return new ScanDevice(deviceId, deviceName, DRIVER_NAME);
+            return WiaApi.SelectDeviceUI();
         }
 
         public List<IScannedImage> Scan()
@@ -57,10 +55,21 @@ namespace NAPS2.Scan.Driver.Twain
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
-            var api = new TwainApi(ScanSettings);
-            // TODO: Progress
-            // TODO: Cool idea: maybe return an IEnumerable (via yield)
-            return api.Scan();
+            var result = new List<IScannedImage>();
+            var api = new WiaApi(ScanSettings);
+            // TODO: Only scan once with ScanSource.GLASS
+            // TODO: How to handle that if UseNativeUI is specified?
+            // TODO: Send progress event (or something) to update thumbnail/scan UI
+            while (true)
+            {
+                var image = api.GetImage();
+                if (image == null)
+                {
+                    break;
+                }
+                result.Add(image);
+            }
+            return result;
         }
     }
 }

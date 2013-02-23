@@ -21,28 +21,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NAPS2.Scan.Driver
+namespace NAPS2.Scan
 {
-    public class ScanDriverException : Exception
+    public class DeviceNotFoundException : ScanDriverException
     {
-        private const string DEFAULT_MESSAGE = "An error occured with the scanning driver.";
+        private const string DEFAULT_MESSAGE = "The selected scanner could not be found.";
 
-        public ScanDriverException()
+        public DeviceNotFoundException()
             : base(DEFAULT_MESSAGE)
         {
         }
 
-        public ScanDriverException(string message)
+        public DeviceNotFoundException(string message)
             : base(message)
         {
         }
 
-        public ScanDriverException(Exception innerException)
+        public DeviceNotFoundException(Exception innerException)
             : base(DEFAULT_MESSAGE, innerException)
         {
         }
 
-        public ScanDriverException(string message, Exception innerException)
+        public DeviceNotFoundException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

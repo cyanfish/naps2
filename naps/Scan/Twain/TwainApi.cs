@@ -24,7 +24,7 @@ using System.Text;
 
 using NAPS2.Scan;
 
-namespace NAPS2.Scan.Driver.Twain
+namespace NAPS2.Scan.Twain
 {
     internal class TwainApi
     {

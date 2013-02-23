@@ -32,7 +32,7 @@ using PdfSharp.Drawing;
 
 using NAPS2.Email;
 using NAPS2.Scan;
-using NAPS2.Scan.Driver;
+using NAPS2.Scan;
 
 using Ninject;
 
@@ -44,12 +44,10 @@ namespace NAPS2
     {
         private List<IScannedImage> images;
         private readonly IEmailer emailer;
-        private readonly IScanDriverFactory driverFactory;
 
-        public FDesktop(IScanDriverFactory driverFactory, IEmailer emailer)
+        public FDesktop(IEmailer emailer)
         {
             InitializeComponent();
-            this.driverFactory = driverFactory;
             this.emailer = emailer;
             images = new List<IScannedImage>();
         }
@@ -68,23 +66,9 @@ namespace NAPS2
             thumbnailList1.UpdateView(images);
         }
 
-        private void demoScan()
-        {
-            /*string path = Application.StartupPath + "\\demo";
-            string[] files = Directory.GetFiles(path);
-            Array.Sort(files);
-            foreach (string file in files)
-            {
-                int next = images.Count > 0 ? images.Keys[images.Count - 1] + 1 : 0;
-                Image img = Image.FromFile(file);
-                images.Add(next, img);
-            }
-            updateView();*/
-        }
-
         private void scan(ScanSettings Profile)
         {
-            IScanDriver driver = driverFactory.CreateDriver(Profile.Device.DriverName);
+            IScanDriver driver = Dependencies.Kernel.Get<IScanDriver>(Profile.Device.DriverName);
             driver.DialogParent = this;
             driver.ScanSettings = Profile;
 

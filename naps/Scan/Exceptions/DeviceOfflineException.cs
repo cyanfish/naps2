@@ -17,9 +17,34 @@
 */
 
 using System;
-namespace NAPS2.Scan.Driver
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace NAPS2.Scan
 {
-    public interface IScanDriverFactory : IDriverFactory<IScanDriver>
+    public class DeviceOfflineException : ScanDriverException
     {
+        private const string DEFAULT_MESSAGE = "The selected scanner is offline.";
+
+        public DeviceOfflineException()
+            : base(DEFAULT_MESSAGE)
+        {
+        }
+
+        public DeviceOfflineException(string message)
+            : base(message)
+        {
+        }
+
+        public DeviceOfflineException(Exception innerException)
+            : base(DEFAULT_MESSAGE, innerException)
+        {
+        }
+
+        public DeviceOfflineException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
     }
 }

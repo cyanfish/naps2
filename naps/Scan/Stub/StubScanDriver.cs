@@ -1,21 +1,28 @@
-﻿using System;
+﻿using NAPS2.Scan.Wia;
+using NAPS2.Scan.Twain;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 
-namespace NAPS2.Scan.Driver.Stub
+namespace NAPS2.Scan.Stub
 {
     class StubScanDriver : IScanDriver
     {
+        protected StubScanDriver(string driverName)
+        {
+            this.DriverName = driverName;
+        }
+
         public ScanSettings ScanSettings { get; set; }
 
         public System.Windows.Forms.IWin32Window DialogParent { get; set; }
 
         public ScanDevice PromptForDevice()
         {
-            return new ScanDevice("test", "Test Scanner", "stub");
+            return new ScanDevice("test", "Test Scanner", DriverName);
         }
 
         public List<IScannedImage> Scan()
@@ -30,9 +37,22 @@ namespace NAPS2.Scan.Driver.Stub
             };
         }
 
-        public string DriverName
+        public string DriverName { get; private set; }
+    }
+
+    class StubWiaScanDriver : StubScanDriver
+    {
+        public StubWiaScanDriver()
+            : base(WiaScanDriver.DRIVER_NAME)
         {
-            get { return "stub"; }
+        }
+    }
+
+    class StubTwainScanDriver : StubScanDriver
+    {
+        public StubTwainScanDriver()
+            : base(TwainScanDriver.DRIVER_NAME)
+        {
         }
     }
 }

@@ -23,7 +23,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace NAPS2.Scan.Driver.Twain
+namespace NAPS2.Scan.Twain
 {
     internal class DibUtils
     {

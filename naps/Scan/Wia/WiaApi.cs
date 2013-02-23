@@ -26,7 +26,7 @@ using WIA;
 
 using NAPS2.Scan;
 
-namespace NAPS2.Scan.Driver.Wia
+namespace NAPS2.Scan.Wia
 {
     internal class WiaApi
     {
