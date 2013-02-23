@@ -28,8 +28,8 @@
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2012SpringLimited\InstallShield.targets"/>
 	<ItemGroup>
-		<ProjectReference Include="..\naps\NAPS2.csproj">
-			<Name>NAPS2</Name>
+		<ProjectReference Include="..\NAPS2\NAPS2.csproj">
+			<Name>NAPS21</Name>
 			<Project>{EAC4A133-93BE-4400-BFA9-CEB1615693C4}</Project>
 		</ProjectReference>
 	</ItemGroup>

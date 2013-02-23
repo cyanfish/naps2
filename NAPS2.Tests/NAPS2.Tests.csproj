@@ -67,7 +67,7 @@
     <Folder Include="Unit\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\naps\NAPS2.csproj">
+    <ProjectReference Include="..\NAPS2\NAPS2.csproj">
       <Project>{eac4a133-93be-4400-bfa9-ceb1615693c4}</Project>
       <Name>NAPS2</Name>
     </ProjectReference>

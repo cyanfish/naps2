@@ -340,7 +340,8 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>NAPS2.Primary_output</td><td>{C50EDF44-DFA9-4948-8EAB-FCEDB3BD0A5F}</td><td>INSTALLDIR</td><td>2</td><td/><td>naps2.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td>{0028C026-692A-439F-BDC5-0CAACFBC60B7}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>NAPS2.Primary_output</td><td>{6807DD2B-FCA7-4A3D-98DA-52C6797E82E6}</td><td>INSTALLDIR</td><td>2</td><td/><td>naps2.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1049,6 +1050,7 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1856,6 +1858,7 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>NAPS2.Primary_output</td></row>
 	</table>
 
@@ -1871,7 +1874,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>naps2.primary_output</td><td>NAPS2.Primary_output</td><td>NAPS2.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;NAPS2&gt;|Built</td><td>3</td><td/></row>
+		<row><td>naps2.primary_output</td><td>NAPS2.Primary_output</td><td>NAPS2.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;NAPS21&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2128,7 +2131,8 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>NAPS2.Primary_output</td><td/><td/><td>_83BF6587_3008_4F81_AA99_A294FC07805C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_9B3D2FA6_F1C5_4D7F_AD60_F85BAF6251F0_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>NAPS2.Primary_output</td><td/><td/><td>_13DC65BD_347F_4AD4_B221_1365C66A5CAE_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2446,6 +2450,7 @@
 		<row><td>ISProjectDataFolder</td><td/><td/><td>1</td></row>
 		<row><td>ISProjectFolder</td><td/><td/><td>1</td></row>
 		<row><td>NAPS2</td><td>naps\NAPS2.csproj</td><td/><td>2</td></row>
+		<row><td>NAPS21</td><td>NAPS2\NAPS2.csproj</td><td/><td>2</td></row>
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
 		<row><td>WindowsFolder</td><td/><td/><td>1</td></row>
@@ -3859,7 +3864,7 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>1898043893</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>1898043893</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>1898043893</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://www.BenOlden-Cooligan.com</td><td>0</td><td/><td>-1994308597</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://sourceforge.net/projects/naps2/</td><td>0</td><td/><td>-1188996945</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Ben Olden-Cooligan</td><td>0</td><td/><td>-1994308597</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>1898043893</td></row>
 	</table>
@@ -3968,7 +3973,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>M:\Development\Projects\NAPS\naps\gfx\scanner-app.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProjectFolder&gt;..\NAPS2\gfx\scanner-app.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4554,9 +4559,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>NAPS2.Primary_output</td><td/><td>cylans_1_cylan_software</td><td>2</td></row>
-		<row><td>FileKey2</td><td>NAPS2.Primary_output</td><td/><td>naps2</td><td>2</td></row>
-		<row><td>_Built</td><td>NAPS2.Primary_output</td><td/><td>naps2</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4642,7 +4644,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>naps2</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>NAPS2.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
