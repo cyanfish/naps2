@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NAPS2 (Not Another PDF Scanner 2)")]
-[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, 2012-2013 Ben Olden-Cooligan")]
+[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, Copyright © 2012-2013 Ben Olden-Cooligan")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

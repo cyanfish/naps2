@@ -41,18 +41,6 @@ namespace NAPS2.Tests
             }
         }
 
-        public abstract IPdfExporter GetPdfExporter();
-
-        private Bitmap ColorBitmap(int w, int h, Color color)
-        {
-            Bitmap result = new Bitmap(w, h);
-            using (Graphics g = Graphics.FromImage(result))
-            {
-                g.FillRectangle(new SolidBrush(color), 0, 0, w, h);
-            }
-            return result;
-        }
-
         [TearDown]
         public void TearDown()
         {
@@ -63,6 +51,18 @@ namespace NAPS2.Tests
                 img.Dispose();
             }
             images = null;
+        }
+
+        public abstract IPdfExporter GetPdfExporter();
+
+        private Bitmap ColorBitmap(int w, int h, Color color)
+        {
+            Bitmap result = new Bitmap(w, h);
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                g.FillRectangle(new SolidBrush(color), 0, 0, w, h);
+            }
+            return result;
         }
 
         [Test]

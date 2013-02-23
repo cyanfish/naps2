@@ -7,7 +7,7 @@ using NAPS2.Scan.Driver.Twain;
 
 namespace NAPS2.Tests.Unit
 {
-    [TestFixture(Category = "Fast,Driver")]
+    [TestFixture(Category = "Unit,Fast,Driver")]
     public class DefaultScanDriverFactoryTests
     {
         private DefaultScanDriverFactory factory;

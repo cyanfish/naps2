@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace NAPS2.Tests.Integration
 {
-    [TestFixture(Category = "Fast,Pdf")]
+    [TestFixture(Category = "Integration,Fast,Pdf")]
     public class PdfSharpExporterTests : BasePdfExporterTests
     {
         public override void SetUp()
