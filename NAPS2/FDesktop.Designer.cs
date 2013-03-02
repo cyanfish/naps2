@@ -57,14 +57,15 @@ namespace NAPS2
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsMoveUp = new System.Windows.Forms.ToolStripButton();
             this.tsMoveDown = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsRotateLeft = new System.Windows.Forms.ToolStripButton();
             this.tsRotateRight = new System.Windows.Forms.ToolStripButton();
+            this.tsFlip = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsExit = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.thumbnailList1 = new NAPS2.ThumbnailList();
             this.tStrip.SuspendLayout();
@@ -86,18 +87,19 @@ namespace NAPS2
             this.toolStripSeparator4,
             this.tsMoveUp,
             this.tsMoveDown,
-            this.toolStripSeparator3,
+            this.toolStripSeparator1,
             this.tsRotateLeft,
             this.tsRotateRight,
+            this.tsFlip,
             this.toolStripSeparator2,
+            this.tsDelete,
+            this.toolStripSeparator3,
             this.tsProfiles,
-            this.tsAbout,
-            this.toolStripSeparator1,
-            this.tsExit});
+            this.tsAbout});
             this.tStrip.Location = new System.Drawing.Point(3, 0);
             this.tStrip.Name = "tStrip";
             this.tStrip.ShowItemToolTips = false;
-            this.tStrip.Size = new System.Drawing.Size(918, 54);
+            this.tStrip.Size = new System.Drawing.Size(1000, 54);
             this.tStrip.TabIndex = 12;
             this.tStrip.Text = "Main toolbar";
             // 
@@ -119,7 +121,7 @@ namespace NAPS2
             // 
             // tsSavePDF
             // 
-            this.tsSavePDF.Image = ((System.Drawing.Image)(resources.GetObject("tsSavePDF.Image")));
+            this.tsSavePDF.Image = global::NAPS2.Icons.file_extension_pdf;
             this.tsSavePDF.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsSavePDF.Name = "tsSavePDF";
             this.tsSavePDF.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
@@ -130,7 +132,7 @@ namespace NAPS2
             // 
             // tsSaveImage
             // 
-            this.tsSaveImage.Image = ((System.Drawing.Image)(resources.GetObject("tsSaveImage.Image")));
+            this.tsSaveImage.Image = global::NAPS2.Icons.picture;
             this.tsSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsSaveImage.Name = "tsSaveImage";
             this.tsSaveImage.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
@@ -141,12 +143,12 @@ namespace NAPS2
             // 
             // tsPDFEmail
             // 
-            this.tsPDFEmail.Image = ((System.Drawing.Image)(resources.GetObject("tsPDFEmail.Image")));
+            this.tsPDFEmail.Image = global::NAPS2.Icons.email_attach;
             this.tsPDFEmail.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsPDFEmail.Name = "tsPDFEmail";
             this.tsPDFEmail.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsPDFEmail.Size = new System.Drawing.Size(97, 51);
-            this.tsPDFEmail.Text = "PDF && Email";
+            this.tsPDFEmail.Size = new System.Drawing.Size(84, 51);
+            this.tsPDFEmail.Text = "Email PDF";
             this.tsPDFEmail.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsPDFEmail.Click += new System.EventHandler(this.tsPDFEmail_Click);
             // 
@@ -157,7 +159,7 @@ namespace NAPS2
             // 
             // tsMoveUp
             // 
-            this.tsMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("tsMoveUp.Image")));
+            this.tsMoveUp.Image = global::NAPS2.Icons.arrow_up;
             this.tsMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsMoveUp.Name = "tsMoveUp";
             this.tsMoveUp.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
@@ -168,7 +170,7 @@ namespace NAPS2
             // 
             // tsMoveDown
             // 
-            this.tsMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("tsMoveDown.Image")));
+            this.tsMoveDown.Image = global::NAPS2.Icons.arrow_down;
             this.tsMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsMoveDown.Name = "tsMoveDown";
             this.tsMoveDown.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
@@ -177,14 +179,14 @@ namespace NAPS2
             this.tsMoveDown.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsMoveDown.Click += new System.EventHandler(this.tsMoveDown_Click);
             // 
-            // toolStripSeparator3
+            // toolStripSeparator1
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 54);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 54);
             // 
             // tsRotateLeft
             // 
-            this.tsRotateLeft.Image = ((System.Drawing.Image)(resources.GetObject("tsRotateLeft.Image")));
+            this.tsRotateLeft.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise;
             this.tsRotateLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsRotateLeft.Name = "tsRotateLeft";
             this.tsRotateLeft.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
@@ -195,7 +197,7 @@ namespace NAPS2
             // 
             // tsRotateRight
             // 
-            this.tsRotateRight.Image = ((System.Drawing.Image)(resources.GetObject("tsRotateRight.Image")));
+            this.tsRotateRight.Image = global::NAPS2.Icons.arrow_rotate_clockwise;
             this.tsRotateRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsRotateRight.Name = "tsRotateRight";
             this.tsRotateRight.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
@@ -204,10 +206,37 @@ namespace NAPS2
             this.tsRotateRight.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsRotateRight.Click += new System.EventHandler(this.tsRotateRight_Click);
             // 
+            // tsFlip
+            // 
+            this.tsFlip.Image = global::NAPS2.Icons.arrow_switch;
+            this.tsFlip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsFlip.Name = "tsFlip";
+            this.tsFlip.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsFlip.Size = new System.Drawing.Size(56, 51);
+            this.tsFlip.Text = "Flip";
+            this.tsFlip.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 54);
+            // 
+            // tsDelete
+            // 
+            this.tsDelete.Image = global::NAPS2.Icons.cross;
+            this.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDelete.Name = "tsDelete";
+            this.tsDelete.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsDelete.Size = new System.Drawing.Size(64, 51);
+            this.tsDelete.Text = "Delete";
+            this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 54);
             // 
             // tsProfiles
             // 
@@ -231,33 +260,17 @@ namespace NAPS2
             this.tsAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 54);
-            // 
-            // tsExit
-            // 
-            this.tsExit.Image = ((System.Drawing.Image)(resources.GetObject("tsExit.Image")));
-            this.tsExit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsExit.Name = "tsExit";
-            this.tsExit.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsExit.Size = new System.Drawing.Size(56, 51);
-            this.tsExit.Text = "Exit";
-            this.tsExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsExit.Click += new System.EventHandler(this.tsExit_Click);
-            // 
             // toolStripContainer1
             // 
             // 
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(922, 472);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1014, 472);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(922, 526);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1014, 526);
             this.toolStripContainer1.TabIndex = 13;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -270,7 +283,7 @@ namespace NAPS2
             this.thumbnailList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.thumbnailList1.Location = new System.Drawing.Point(0, 0);
             this.thumbnailList1.Name = "thumbnailList1";
-            this.thumbnailList1.Size = new System.Drawing.Size(922, 472);
+            this.thumbnailList1.Size = new System.Drawing.Size(1014, 472);
             this.thumbnailList1.TabIndex = 7;
             this.thumbnailList1.UseCompatibleStateImageBehavior = false;
             this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
@@ -280,7 +293,7 @@ namespace NAPS2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(922, 526);
+            this.ClientSize = new System.Drawing.Size(1014, 526);
             this.Controls.Add(this.toolStripContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FDesktop";
@@ -304,20 +317,21 @@ namespace NAPS2
         private System.Windows.Forms.ToolStripButton tsSavePDF;
         private System.Windows.Forms.ToolStripButton tsSaveImage;
         private System.Windows.Forms.ToolStripButton tsPDFEmail;
-        private System.Windows.Forms.ToolStripButton tsMoveUp;
-        private System.Windows.Forms.ToolStripButton tsMoveDown;
-        private System.Windows.Forms.ToolStripButton tsRotateLeft;
-        private System.Windows.Forms.ToolStripButton tsRotateRight;
-        private System.Windows.Forms.ToolStripButton tsProfiles;
-        private System.Windows.Forms.ToolStripButton tsAbout;
-        private System.Windows.Forms.ToolStripButton tsExit;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private ThumbnailList thumbnailList1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton tsMoveUp;
+        private System.Windows.Forms.ToolStripButton tsMoveDown;
+        private System.Windows.Forms.ToolStripButton tsRotateRight;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton tsRotateLeft;
+        private System.Windows.Forms.ToolStripButton tsFlip;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton tsDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton tsProfiles;
+        private System.Windows.Forms.ToolStripButton tsAbout;
     }
 }
 

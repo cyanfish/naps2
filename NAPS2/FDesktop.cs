@@ -32,151 +32,107 @@ using PdfSharp.Drawing;
 
 using NAPS2.Email;
 using NAPS2.Scan;
-using NAPS2.Scan;
 
 using Ninject;
 
 using WIA;
+using System.Drawing.Imaging;
 
 namespace NAPS2
 {
     public partial class FDesktop : Form
     {
-        private List<IScannedImage> images;
+        private ScannedImageList imageList;
         private readonly IEmailer emailer;
 
         public FDesktop(IEmailer emailer)
         {
             InitializeComponent();
             this.emailer = emailer;
-            images = new List<IScannedImage>();
+            imageList = new ScannedImageList();
         }
 
-        private void thumbnailList1_ItemActivate(object sender, EventArgs e)
+        private IEnumerable<int> SelectedIndices
         {
-            if (thumbnailList1.SelectedIndices.Count > 0)
+            get
             {
-                FViewer viewer = new FViewer(images[thumbnailList1.SelectedIndices[0]].GetImage());
-                viewer.ShowDialog();
+                return thumbnailList1.SelectedIndices.OfType<int>();
+            }
+            set
+            {
+                thumbnailList1.SelectedIndices.Clear();
+                foreach (int i in value)
+                {
+                    thumbnailList1.SelectedIndices.Add(i);
+                }
             }
         }
 
-        private void updateView()
+        private void UpdateThumbnails()
         {
-            thumbnailList1.UpdateView(images);
+            thumbnailList1.UpdateImages(imageList.Images);
         }
 
-        private void scan(ScanSettings Profile)
+        private void UpdateThumbnails(IEnumerable<int> selection)
+        {
+            UpdateThumbnails();
+            SelectedIndices = selection;
+        }
+
+        private void Scan(ScanSettings Profile)
         {
             IScanDriver driver = Dependencies.Kernel.Get<IScanDriver>(Profile.Device.DriverName);
             driver.DialogParent = this;
             driver.ScanSettings = Profile;
 
             var newImages = driver.Scan();
-            images.AddRange(newImages);
-            thumbnailList1.AddImages(newImages);
-
-            Application.DoEvents();
+            imageList.Images.AddRange(newImages);
+            UpdateThumbnails();
         }
 
-        private void deleteItems()
+        private void Delete()
         {
-            if (thumbnailList1.SelectedItems.Count > 0)
+            if (SelectedIndices.Any())
             {
-                if (MessageBox.Show(string.Format("Do you really want to delete {0} items?", thumbnailList1.SelectedItems.Count), "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (MessageBox.Show(string.Format("Are you sure you want to delete {0} item(s)?", SelectedIndices.Count()), "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    foreach (int index in thumbnailList1.SelectedIndices)
-                    {
-                        images[index].Dispose();
-                        images.RemoveAt(index);
-                    }
-                    thumbnailList1.UpdateImages(images);
+                    imageList.Delete(SelectedIndices);
+                    UpdateThumbnails();
                 }
             }
         }
 
-        private int getImageBefore(int id)
+        private void MoveDown()
         {
-            var before = id - 1;
-            if (before < 0)
-            {
-                before = images.Count - 1;
-            }
-            return before;
+            UpdateThumbnails(imageList.MoveDown(SelectedIndices));
         }
 
-        private int getImageAfter(int id)
+        private void MoveUp()
         {
-            var after = id + 1;
-            if (after >= images.Count)
-            {
-                after = 0;
-            }
-            return after;
+            UpdateThumbnails(imageList.MoveUp(SelectedIndices));
         }
 
-        private void moveUp()
+        private void RotateLeft()
         {
-            if (thumbnailList1.SelectedItems.Count > 0)
-            {
-                foreach (int i in thumbnailList1.SelectedIndices)
-                {
-                    int before = getImageBefore(i);
-                    var img = images[i];
-                    images.RemoveAt(i);
-                    images.Insert(before, img);
-                }
-                thumbnailList1.UpdateImages(images);
-            }
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone));
         }
 
-        private void moveDown()
+        private void RotateRight()
         {
-            if (thumbnailList1.SelectedItems.Count > 0)
-            {
-                var selected = thumbnailList1.SelectedItems.OfType<ListViewItem>().Select(x => x.ImageList.Images[x.ImageIndex]).ToList();
-                for (int j = thumbnailList1.SelectedIndices.Count - 1; j >= 0; j--)
-                {
-                    int i = thumbnailList1.SelectedIndices[j];
-                    int after = getImageAfter(i);
-                    var img = images[i];
-                    images.RemoveAt(i);
-                    images.Insert(after, img);
-                }
-                thumbnailList1.UpdateImages(images);
-                thumbnailList1.SelectedIndices.Clear();
-                foreach (ListViewItem item in thumbnailList1.Items)
-                {
-                    if (selected.Contains(item.ImageList.Images[item.ImageIndex]))
-                    {
-                        item.Selected = true;
-                    }
-                }
-            }
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone));
         }
 
-        private void rotateLeft()
+        private void Flip()
         {
-            if (thumbnailList1.SelectedItems.Count > 0)
-            {
-                foreach (ListViewItem it in thumbnailList1.SelectedItems)
-                {
-                    images[(int)it.Tag].RotateFlip(RotateFlipType.Rotate270FlipNone);
-                }
-                updateView();
-            }
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipX));
         }
 
-        private void rotateRight()
+        private void exportPDF(string filename)
         {
-            if (thumbnailList1.SelectedItems.Count > 0)
-            {
-                foreach (ListViewItem it in thumbnailList1.SelectedItems)
-                {
-                    images[(int)it.Tag].RotateFlip(RotateFlipType.Rotate90FlipNone);
-                }
-                updateView();
-            }
+            FPDFSave pdfdialog = Dependencies.Kernel.Get<FPDFSave>();
+            pdfdialog.Filename = filename;
+            pdfdialog.Images = imageList.Images;
+            pdfdialog.ShowDialog(this);
         }
 
         private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
@@ -184,25 +140,30 @@ namespace NAPS2
             switch (e.KeyCode)
             {
                 case Keys.Delete:
-                    deleteItems();
+                    Delete();
                     break;
                 case Keys.Left:
                     if (e.Control)
-                        moveUp();
+                    {
+                        MoveUp();
+                    }
                     break;
                 case Keys.Right:
                     if (e.Control)
-                        moveDown();
+                    {
+                        MoveDown();
+                    }
                     break;
             }
         }
 
-        private void exportPDF(string filename)
+        private void thumbnailList1_ItemActivate(object sender, EventArgs e)
         {
-            FPDFSave pdfdialog = Dependencies.Kernel.Get<FPDFSave>();
-            pdfdialog.Filename = filename;
-            pdfdialog.Images = images;
-            pdfdialog.ShowDialog(this);
+            if (SelectedIndices.Any())
+            {
+                FViewer viewer = new FViewer(imageList.Images[SelectedIndices.First()].GetImage());
+                viewer.ShowDialog();
+            }
         }
 
         private void tsScan_Click(object sender, EventArgs e)
@@ -216,14 +177,13 @@ namespace NAPS2
             if (prof.Profile == null)
                 return;
 
-            scan(prof.Profile);
+            Scan(prof.Profile);
         }
 
         private void tsSavePDF_Click(object sender, EventArgs e)
         {
-            if (images.Count > 0)
+            if (imageList.Images.Count > 0)
             {
-
                 SaveFileDialog sd = new SaveFileDialog();
                 sd.OverwritePrompt = true;
                 sd.AddExtension = true;
@@ -238,7 +198,7 @@ namespace NAPS2
 
         private void tsSaveImage_Click(object sender, EventArgs e)
         {
-            if (images.Count > 0)
+            if (imageList.Images.Count > 0)
             {
                 SaveFileDialog sd = new SaveFileDialog();
                 sd.OverwritePrompt = true;
@@ -246,27 +206,31 @@ namespace NAPS2
                 sd.Filter = "Bitmap Files (*.bmp)|*.bmp" +
                 "|Enhanced Windows MetaFile (*.emf)|*.emf" +
                 "|Exchangeable Image File (*.exif)|*.exif" +
-                "|Gif Files (*.gif)|*.gif|JPEG Files (*.jpg)|*.jpg" +
-                "|PNG Files (*.png)|*.png|TIFF Files (*.tif)|*.tif";
-                sd.DefaultExt = "png";
-                sd.FilterIndex = 6;
+                "|Gif Files (*.gif)|*.gif" +
+                "|JPEG Files (*.(*.jpg, *.jpeg)|*.jpg;*.jpeg" +
+                "|PNG Files (*.png)|*.png" +
+                "|TIFF Files (*.tiff, *.tif)|*.tiff;*.tif";
+                sd.DefaultExt = "jpg";
+                sd.FilterIndex = 4;
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
+                    ImageFormat format = GetImageFormat(sd.FileName);
+
                     int i = 0;
 
-                    if (images.Count == 1)
+                    if (imageList.Images.Count == 1)
                     {
-                        using (Bitmap baseImage = images[0].GetImage())
+                        using (Bitmap baseImage = imageList.Images[0].GetImage())
                         {
-                            baseImage.Save(sd.FileName);
+                            baseImage.Save(sd.FileName, format);
                         }
                         return;
                     }
 
-                    if (sd.FilterIndex == 7)
+                    if (format == ImageFormat.Tiff)
                     {
-                        var bitmaps = images.Select(x => x.GetImage()).ToArray();
+                        var bitmaps = imageList.Images.Select(x => x.GetImage()).ToArray();
                         CTiffHelper.SaveMultipage(bitmaps, sd.FileName);
                         foreach (Bitmap bitmap in bitmaps)
                         {
@@ -275,12 +239,12 @@ namespace NAPS2
                         return;
                     }
 
-                    foreach (ScannedImage img in images)
+                    foreach (ScannedImage img in imageList.Images)
                     {
                         string filename = Path.GetDirectoryName(sd.FileName) + "\\" + Path.GetFileNameWithoutExtension(sd.FileName) + i.ToString().PadLeft(3, '0') + Path.GetExtension(sd.FileName);
                         using (Bitmap baseImage = img.GetImage())
                         {
-                            baseImage.Save(filename);
+                            baseImage.Save(filename, format);
                         }
                         i++;
                     }
@@ -288,9 +252,37 @@ namespace NAPS2
             }
         }
 
+        private ImageFormat GetImageFormat(string fileName)
+        {
+            string extension = Path.GetExtension(fileName);
+            switch (extension.ToLower())
+            {
+                case ".bmp":
+                    return ImageFormat.Bmp;
+                case ".emf":
+                    return ImageFormat.Emf;
+                case ".gif":
+                    return ImageFormat.Gif;
+                case ".ico":
+                    return ImageFormat.Icon;
+                case ".jpg":
+                case ".jpeg":
+                    return ImageFormat.Jpeg;
+                case ".png":
+                    return ImageFormat.Png;
+                case ".tif":
+                case ".tiff":
+                    return ImageFormat.Tiff;
+                case ".wmf":
+                    return ImageFormat.Wmf;
+                default:
+                    return ImageFormat.Jpeg;
+            }
+        }
+
         private void tsPDFEmail_Click(object sender, EventArgs e)
         {
-            if (images.Count > 0)
+            if (imageList.Images.Count > 0)
             {
                 string path = Application.StartupPath + "\\Scan.pdf";
                 exportPDF(path);
@@ -299,40 +291,44 @@ namespace NAPS2
             }
         }
 
+        private void tsFlip_Click(object sender, EventArgs e)
+        {
+            Flip();
+        }
+
+        private void tsDelete_Click(object sender, EventArgs e)
+        {
+            Delete();
+        }
+
         private void tsMoveUp_Click(object sender, EventArgs e)
         {
-            moveUp();
+            MoveUp();
         }
 
         private void tsMoveDown_Click(object sender, EventArgs e)
         {
-            moveDown();
+            MoveDown();
         }
 
         private void tsRotateLeft_Click(object sender, EventArgs e)
         {
-            rotateLeft();
+            RotateLeft();
         }
 
         private void tsRotateRight_Click(object sender, EventArgs e)
         {
-            rotateRight();
+            RotateRight();
         }
 
         private void tsProfiles_Click(object sender, EventArgs e)
         {
-            FManageProfiles pmanager = new FManageProfiles();
-            pmanager.ShowDialog();
+            new FManageProfiles().ShowDialog();
         }
 
         private void tsAbout_Click(object sender, EventArgs e)
         {
             new FAbout().ShowDialog();
-        }
-
-        private void tsExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

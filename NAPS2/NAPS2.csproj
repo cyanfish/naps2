@@ -88,6 +88,12 @@
   <ItemGroup>
     <Compile Include="CImageHelper.cs" />
     <Compile Include="CScanSettings.cs" />
+    <Compile Include="Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ScannedImageList.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />
@@ -207,6 +213,10 @@
       <DependentUpon>FViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Icons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ILProfileIcons.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
@@ -292,6 +302,23 @@
     <Content Include="gfx\window_fullscreen.png" />
     <Content Include="lib\Interop.WIA.dll" />
     <Content Include="lib\PdfSharp.dll" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\arrow_rotate_anticlockwise.png" />
+    <None Include="Resources\arrow_rotate_clockwise.png" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\transform_flip.png" />
+    <None Include="Resources\file_extension_pdf.png" />
+    <None Include="Resources\email_attach.png" />
+    <None Include="Resources\picture.png" />
+    <None Include="Resources\info_rhombus.png" />
+    <None Include="Resources\arrow_out.png" />
+    <None Include="Resources\zoom_in.png" />
+    <None Include="Resources\zoom_out.png" />
+    <None Include="Resources\pdf_email.png" />
+    <None Include="Resources\arrow_up.png" />
+    <None Include="Resources\arrow_down.png" />
+    <None Include="Resources\blueprints.png" />
+    <None Include="Resources\arrow_switch.png" />
     <Content Include="scanner-app.ico" />
     <Content Include="Setup\license.txt" />
     <Content Include="Setup\setup.iss" />
