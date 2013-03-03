@@ -57,7 +57,7 @@ namespace NAPS2
                 Subject = "Scanned Image",
                 Author = "NAPS2"
             };
-            var imgs = Images.Select(x => (Image) x.GetImage()).ToList();
+            var imgs = Images.Select(x => (Image)x.GetImage()).ToList();
             pdfExporter.Export(Filename, imgs, info, num =>
             {
                 Invoke(new ThreadStart(() => SetStatus(num, imgs.Count)));
@@ -68,12 +68,12 @@ namespace NAPS2
 
         void FPDFSave_Shown(object sender, EventArgs e)
         {
-            new Thread(new ThreadStart(() => exportPDFProcess())).Start();
+            new Thread(exportPDFProcess).Start();
         }
 
         public void SetStatus(int count, int total)
         {
-            lblStatus.Text = count.ToString() + " of " + total.ToString();
+            lblStatus.Text = count.ToString("G") + " of " + total.ToString("G");
             Application.DoEvents();
         }
     }

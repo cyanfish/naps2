@@ -228,8 +228,8 @@ namespace NAPS2
                 cmbSource.SelectedIndex = (int)scanSettingsExt.PaperSource;
                 cmbDepth.SelectedIndex = (int)scanSettingsExt.BitDepth;
                 cmbResolution.SelectedIndex = (int)scanSettingsExt.Resolution;
-                txtContrast.Text = scanSettingsExt.Contrast.ToString();
-                txtBrightness.Text = scanSettingsExt.Brightness.ToString();
+                txtContrast.Text = scanSettingsExt.Contrast.ToString("G");
+                txtBrightness.Text = scanSettingsExt.Brightness.ToString("G");
                 cmbPage.SelectedIndex = (int)scanSettingsExt.PageSize;
                 cmbScale.SelectedIndex = (int)scanSettingsExt.AfterScanScale;
                 cmbAlign.SelectedIndex = (int)scanSettingsExt.PageAlign;
@@ -291,7 +291,7 @@ namespace NAPS2
 
         private void trBrightness_Scroll(object sender, EventArgs e)
         {
-            txtBrightness.Text = trBrightness.Value.ToString();
+            txtBrightness.Text = trBrightness.Value.ToString("G");
         }
 
         private void txtContrast_TextChanged(object sender, EventArgs e)
@@ -308,7 +308,7 @@ namespace NAPS2
 
         private void trContrast_Scroll(object sender, EventArgs e)
         {
-            txtContrast.Text = trContrast.Value.ToString();
+            txtContrast.Text = trContrast.Value.ToString("G");
         }
     }
 }

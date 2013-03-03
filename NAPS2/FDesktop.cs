@@ -44,14 +44,13 @@ namespace NAPS2
 {
     public partial class FDesktop : Form, IScanReceiver
     {
-        private ScannedImageList imageList;
+        private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly IEmailer emailer;
 
         public FDesktop(IEmailer emailer)
         {
             InitializeComponent();
             this.emailer = emailer;
-            imageList = new ScannedImageList();
         }
 
         private IEnumerable<int> SelectedIndices
@@ -195,12 +194,12 @@ namespace NAPS2
                 sd.Filter = "Bitmap Files (*.bmp)|*.bmp" +
                 "|Enhanced Windows MetaFile (*.emf)|*.emf" +
                 "|Exchangeable Image File (*.exif)|*.exif" +
-                "|Gif Files (*.gif)|*.gif" +
-                "|JPEG Files (*.(*.jpg, *.jpeg)|*.jpg;*.jpeg" +
-                "|PNG Files (*.png)|*.png" +
-                "|TIFF Files (*.tiff, *.tif)|*.tiff;*.tif";
+                "|GIF File (*.gif)|*.gif" +
+                "|JPEG File (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
+                "|PNG File (*.png)|*.png" +
+                "|TIFF File (*.tiff, *.tif)|*.tiff;*.tif";
                 sd.DefaultExt = "jpg";
-                sd.FilterIndex = 4;
+                sd.FilterIndex = 5;
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
@@ -230,7 +229,7 @@ namespace NAPS2
 
                     foreach (ScannedImage img in imageList.Images)
                     {
-                        string filename = Path.GetDirectoryName(sd.FileName) + "\\" + Path.GetFileNameWithoutExtension(sd.FileName) + i.ToString().PadLeft(3, '0') + Path.GetExtension(sd.FileName);
+                        string filename = Path.GetDirectoryName(sd.FileName) + "\\" + Path.GetFileNameWithoutExtension(sd.FileName) + i.ToString("D3") + Path.GetExtension(sd.FileName);
                         using (Bitmap baseImage = img.GetImage())
                         {
                             baseImage.Save(filename, format);

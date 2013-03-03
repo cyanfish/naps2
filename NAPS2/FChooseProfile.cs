@@ -43,10 +43,7 @@ namespace NAPS2
                 {
                     return profileManager.Profiles[lvProfiles.SelectedIndices[0]];
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
         }
 
@@ -83,7 +80,7 @@ namespace NAPS2
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnScan_Click(object sender, EventArgs e)
