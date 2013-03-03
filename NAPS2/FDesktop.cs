@@ -86,9 +86,16 @@ namespace NAPS2
             driver.DialogParent = this;
             driver.ScanSettings = Profile;
 
-            var newImages = driver.Scan();
-            imageList.Images.AddRange(newImages);
-            UpdateThumbnails();
+            try
+            {
+                var newImages = driver.Scan();
+                imageList.Images.AddRange(newImages);
+                UpdateThumbnails();
+            }
+            catch (ScanDriverException e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Delete()

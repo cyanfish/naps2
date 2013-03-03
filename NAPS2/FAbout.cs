@@ -31,12 +31,9 @@ namespace NAPS2
         public FAbout()
         {
             InitializeComponent();
-            this.Text = AssemblyTitle;
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright.Replace(", ", "\r\n");
-            //this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            this.labelCopyright.Text = AssemblyCopyright.Replace(", ", "\r\n").Replace("; ", "\r\n\r\n");
         }
 
         #region Assembly Attribute Accessors
@@ -119,5 +116,10 @@ namespace NAPS2
         }
 
         #endregion
+
+        private void labelVersion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

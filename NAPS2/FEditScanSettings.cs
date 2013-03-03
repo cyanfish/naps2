@@ -109,7 +109,10 @@ namespace NAPS2
             {
                 driver.DialogParent = this;
                 ScanDevice device = driver.PromptForDevice();
-                CurrentDevice = device;
+                if (device != null)
+                {
+                    CurrentDevice = device;
+                }
             }
             catch (ScanDriverException e)
             {

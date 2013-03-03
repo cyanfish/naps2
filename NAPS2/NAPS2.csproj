@@ -129,7 +129,7 @@
     <Compile Include="Scan\IScannedImage.cs" />
     <Compile Include="Email\IEmailer.cs" />
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="ProfileManager.cs" />
     <Compile Include="TiffHelper.cs" />
     <Compile Include="FChooseIcon.cs">
       <SubType>Form</SubType>
@@ -285,8 +285,8 @@
     <Content Include="Resources\scanner-large.png" />
     <Content Include="Resources\scanner.ico" />
     <Content Include="Resources\scanner.png" />
-    <Content Include="lib\Interop.WIA.dll" />
-    <Content Include="lib\PdfSharp.dll" />
+    <Content Include="Setup\lib\Interop.WIA.dll" />
+    <Content Include="Setup\lib\PdfSharp.dll" />
     <None Include="Resources\information.png" />
     <None Include="Resources\arrow_rotate_anticlockwise.png" />
     <None Include="Resources\arrow_rotate_clockwise.png" />
@@ -307,7 +307,7 @@
     <None Include="Resources\zoom_actual.png" />
     <Content Include="Setup\license.txt" />
     <Content Include="Setup\setup.iss" />
-    <Content Include="Setup\wiaaut.dll" />
+    <Content Include="Setup\lib\wiaaut.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

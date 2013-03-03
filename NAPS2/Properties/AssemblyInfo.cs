@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NAPS2 (Not Another PDF Scanner 2)")]
-[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, Copyright © 2012 Michael Adams, Copyright © 2012-2013 Ben Olden-Cooligan")]
+[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, Copyright © 2012 Michael Adams, Copyright © 2012-2013 Ben Olden-Cooligan; Icons used with permission from http://www.fatcow.com/free-icons")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -48,5 +48,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("0.9.*")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.10.*")]
+[assembly: AssemblyFileVersion("0.10.*")]

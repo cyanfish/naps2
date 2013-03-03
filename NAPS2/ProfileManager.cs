@@ -33,21 +33,50 @@ namespace NAPS2
         private static readonly string ProfilesFileName = "profiles.xml";
         private static readonly string ProfilesPath = Path.Combine(ProfilesFolder, ProfilesFileName);
 
+        private static readonly string OldProfilesPath = Path.Combine(Application.StartupPath, "profiles.xml");
+
         public static List<ScanSettings> LoadProfiles()
         {
-            if (File.Exists(ProfilesPath))
+            List<ScanSettings> profiles;
+            TryLoadProfiles(ProfilesPath, out profiles);
+            if (profiles == null)
+            {
+                // Try migrating from an older version
+                TryLoadProfiles(OldProfilesPath, out profiles);
+                if (profiles != null)
+                {
+                    SaveProfiles(profiles);
+                    try
+                    {
+                        File.Delete(OldProfilesPath);
+                    }
+                    catch (Exception) { }
+                }
+            }
+            if (profiles == null)
+            {
+                profiles = new List<ScanSettings>();
+            }
+            return profiles;
+        }
+
+        private static bool TryLoadProfiles(string profilesPath, out List<ScanSettings> profiles)
+        {
+            profiles = null;
+            if (File.Exists(profilesPath))
             {
                 try
                 {
-                    using (Stream strFile = File.OpenRead(ProfilesPath))
+                    using (Stream strFile = File.OpenRead(profilesPath))
                     {
                         XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
-                        return (List<ScanSettings>)serializer.Deserialize(strFile);
+                        profiles = (List<ScanSettings>)serializer.Deserialize(strFile);
+                        return true;
                     }
                 }
                 catch (Exception) { }
             }
-            return new List<ScanSettings>();
+            return false;
         }
 
         public static void SaveProfiles(List<ScanSettings> profiles)
