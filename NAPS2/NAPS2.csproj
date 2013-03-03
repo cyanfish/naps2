@@ -280,10 +280,22 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\cancel-small.png" />
+    <None Include="Resources\cross-small.png" />
+    <None Include="Resources\add-small.png" />
+    <None Include="Resources\accept-small.png" />
+    <None Include="Resources\pencil-small.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\accept.png" />
+    <None Include="Resources\pencil.png" />
+    <None Include="Resources\blueprints-small.png" />
     <Content Include="Resources\scanner-app.ico" />
     <Content Include="Resources\scanner-large.png" />
     <Content Include="Resources\scanner.ico" />
     <Content Include="Resources\scanner.png" />
+    <None Include="Resources\tick.png" />
+    <None Include="Resources\tick-small.png" />
     <Content Include="Setup\lib\Interop.WIA.dll" />
     <Content Include="Setup\lib\PdfSharp.dll" />
     <None Include="Resources\information.png" />

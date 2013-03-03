@@ -94,12 +94,11 @@ namespace NAPS2
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(348, 130);
-            this.okButton.MaximumSize = new System.Drawing.Size(1000, 24);
-            this.okButton.MinimumSize = new System.Drawing.Size(0, 24);
+            this.okButton.Location = new System.Drawing.Point(351, 130);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 24);
+            this.okButton.Size = new System.Drawing.Size(72, 24);
             this.okButton.TabIndex = 29;
             this.okButton.Text = "&OK";
             // 

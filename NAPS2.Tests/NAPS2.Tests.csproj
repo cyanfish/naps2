@@ -62,6 +62,7 @@
     <Compile Include="Unit\ScannedImageListTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NAPS2.Tests.nunit" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
