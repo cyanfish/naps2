@@ -27,7 +27,7 @@ using NAPS2.Scan;
 
 namespace NAPS2
 {
-    public class Settings
+    public class ProfileManager
     {
         private static readonly string ProfilesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
         private static readonly string ProfilesFileName = "profiles.xml";
@@ -52,6 +52,10 @@ namespace NAPS2
 
         public static void SaveProfiles(List<ScanSettings> profiles)
         {
+            if (!Directory.Exists(ProfilesFolder))
+            {
+                Directory.CreateDirectory(ProfilesFolder);
+            }
             using (Stream strFile = File.Open(ProfilesPath, FileMode.Create))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
