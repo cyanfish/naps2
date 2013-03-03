@@ -19,8 +19,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
 
 namespace NAPS2.Scan.Wia
 {
@@ -35,7 +34,7 @@ namespace NAPS2.Scan.Wia
 
         public ScanSettings ScanSettings { get; set; }
 
-        public System.Windows.Forms.IWin32Window DialogParent { get; set; }
+        public IWin32Window DialogParent { get; set; }
 
         public ScanDevice PromptForDevice()
         {
@@ -63,7 +62,7 @@ namespace NAPS2.Scan.Wia
             // TODO: Send progress event (or something) to update thumbnail/scan UI
             while (true)
             {
-                var image = api.GetImage();
+                ScannedImage image = api.GetImage();
                 if (image == null)
                 {
                     break;

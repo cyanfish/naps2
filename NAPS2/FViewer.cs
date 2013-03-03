@@ -17,18 +17,16 @@
     GNU General Public License for more details.
 */
 
-using System;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace NAPS2
 {
     public class FViewer : Form
     {
-        private TiffViewerCtl.TiffViewerCtl tiffViewer1;
         private readonly Container components = null;
+        private TiffViewerCtl.TiffViewerCtl tiffViewer1;
 
         public FViewer(Image obrazek)
         {
@@ -60,7 +58,7 @@ namespace NAPS2
         /// </summary>
         private void InitializeComponent()
         {
-            System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(FViewer));
+            var resources = new System.Resources.ResourceManager(typeof(FViewer));
             this.tiffViewer1 = new TiffViewerCtl.TiffViewerCtl();
             this.SuspendLayout();
             // 

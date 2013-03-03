@@ -18,14 +18,13 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using WIA;
-
-using NAPS2.Scan;
 
 namespace NAPS2.Scan.Wia
 {
@@ -53,14 +52,35 @@ namespace NAPS2.Scan.Wia
 
         private const uint UI_CANCELED = 0x80210064;
 
-        private Device device;
+        private readonly Device device;
 
-        private ScanSettings settings;
-        private ExtendedScanSettings settingsExt;
+        private readonly ScanSettings settings;
+        private readonly ExtendedScanSettings settingsExt;
+
+        public WiaApi(ScanSettings settings)
+        {
+            this.settings = settings;
+            settingsExt = settings as ExtendedScanSettings;
+            DeviceManager manager = new DeviceManagerClass();
+            foreach (DeviceInfo info in manager.DeviceInfos)
+            {
+                if (info.DeviceID == settings.Device.ID)
+                {
+                    device = info.Connect();
+                    return;
+                }
+            }
+            throw new DeviceNotFoundException();
+        }
+
+        public string DeviceName
+        {
+            get { return getDeviceProperty(DEV_NAME); }
+        }
 
         public static ScanDevice SelectDeviceUI()
         {
-            CommonDialogClass WIACommonDialog = new CommonDialogClass();
+            var WIACommonDialog = new CommonDialogClass();
             try
             {
                 Device d = WIACommonDialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
@@ -70,7 +90,7 @@ namespace NAPS2.Scan.Wia
                 }
                 return new ScanDevice(d.DeviceID, GetDeviceName(d.DeviceID), WiaScanDriver.DRIVER_NAME);
             }
-            catch (System.Runtime.InteropServices.COMException e)
+            catch (COMException e)
             {
                 if ((uint)e.ErrorCode == NO_DEVICE_FOUND)
                 {
@@ -94,7 +114,7 @@ namespace NAPS2.Scan.Wia
             {
                 if (info.DeviceID == deviceID)
                 {
-                    var device = info.Connect();
+                    Device device = info.Connect();
                     return getDeviceProperty(device, DEV_NAME);
                 }
             }
@@ -103,7 +123,7 @@ namespace NAPS2.Scan.Wia
 
         private static string getDeviceProperty(Device device, int propid)
         {
-            foreach (WIA.Property property in device.Properties)
+            foreach (Property property in device.Properties)
             {
                 if (property.PropertyID == propid)
                 {
@@ -113,22 +133,6 @@ namespace NAPS2.Scan.Wia
             return "";
         }
 
-        public WiaApi(ScanSettings settings)
-        {
-            this.settings = settings;
-            this.settingsExt = settings as ExtendedScanSettings;
-            DeviceManager manager = new DeviceManagerClass();
-            foreach (DeviceInfo info in manager.DeviceInfos)
-            {
-                if (info.DeviceID == settings.Device.ID)
-                {
-                    device = info.Connect();
-                    return;
-                }
-            }
-            throw new DeviceNotFoundException();
-        }
-
         private string getDeviceProperty(int propid)
         {
             return getDeviceProperty(device, propid);
@@ -136,7 +140,7 @@ namespace NAPS2.Scan.Wia
 
         private int getDeviceIntProperty(int propid)
         {
-            foreach (WIA.Property property in device.Properties)
+            foreach (Property property in device.Properties)
             {
                 if (property.PropertyID == propid)
                 {
@@ -149,7 +153,7 @@ namespace NAPS2.Scan.Wia
         private void setDeviceIntProperty(int value, int propid)
         {
             object objprop = value;
-            foreach (WIA.Property property in device.Properties)
+            foreach (Property property in device.Properties)
             {
                 if (property.PropertyID == propid)
                 {
@@ -160,7 +164,7 @@ namespace NAPS2.Scan.Wia
 
         private void setItemIntProperty(Item item, int value, int propid)
         {
-            foreach (WIA.Property property in item.Properties)
+            foreach (Property property in item.Properties)
             {
                 if (property.PropertyID == propid)
                 {
@@ -179,7 +183,7 @@ namespace NAPS2.Scan.Wia
 
         private void setItemIntProperty(Item item, int value, int expectedMin, int expectedMax, int propid)
         {
-            foreach (WIA.Property property in item.Properties)
+            foreach (Property property in item.Properties)
             {
                 if (property.PropertyID == propid)
                 {
@@ -201,11 +205,6 @@ namespace NAPS2.Scan.Wia
                     }
                 }
             }
-        }
-
-        public string DeviceName
-        {
-            get { return getDeviceProperty(DEV_NAME); }
         }
 
         private void setupItem(Item item)
@@ -332,7 +331,7 @@ namespace NAPS2.Scan.Wia
 
         public ScannedImage GetImage()
         {
-            CommonDialogClass WIACommonDialog = new CommonDialogClass();
+            var WIACommonDialog = new CommonDialogClass();
             Image output;
 
             Items items = device.Items;
@@ -342,7 +341,7 @@ namespace NAPS2.Scan.Wia
                 {
                     items = WIACommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent, WiaImageBias.MaximizeQuality, true, true, true);
                 }
-                catch (System.Runtime.InteropServices.COMException e)
+                catch (COMException e)
                 {
                     if ((uint)e.ErrorCode == UI_CANCELED)
                         return null;
@@ -356,14 +355,14 @@ namespace NAPS2.Scan.Wia
 
             try
             {
-                ImageFile file = (ImageFile)WIACommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
+                var file = (ImageFile)WIACommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
                 if (file == null)
                 {
                     // User cancelled
                     return null;
                 }
 
-                using (System.IO.MemoryStream stream = new System.IO.MemoryStream((byte[])file.FileData.get_BinaryData()))
+                using (var stream = new MemoryStream((byte[])file.FileData.get_BinaryData()))
                 using (output = Image.FromStream(stream))
                 {
 
@@ -391,21 +390,21 @@ namespace NAPS2.Scan.Wia
                     double horizontalRes = output.HorizontalResolution / koef;
                     double verticalRes = output.VerticalResolution / koef;
 
-                    using (Bitmap result = new Bitmap((int)realWidth, (int)realHeight))
-                    using (Graphics g = Graphics.FromImage((Image)result))
+                    using (var result = new Bitmap((int)realWidth, (int)realHeight))
+                    using (Graphics g = Graphics.FromImage(result))
                     {
-                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                         g.DrawImage(output, 0, 0, (int)realWidth, (int)realHeight);
 
                         result.SetResolution((float)horizontalRes, (float)verticalRes);
 
-                        var bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24BIT;
-                        var imageFormat = settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg;
+                        ScanBitDepth bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24BIT;
+                        ImageFormat imageFormat = settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg;
                         return new ScannedImage(result, bitDepth, imageFormat);
                     }
                 }
             }
-            catch (System.Runtime.InteropServices.COMException e)
+            catch (COMException e)
             {
                 if ((uint)e.ErrorCode == ERROR_OUT_OF_PAPER)
                 {
@@ -413,7 +412,7 @@ namespace NAPS2.Scan.Wia
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("General scanning error!", "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                    MessageBox.Show("General scanning error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
             }

@@ -19,8 +19,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace NAPS2.Scan
@@ -43,6 +41,11 @@ namespace NAPS2.Scan
         IWin32Window DialogParent { set; }
 
         /// <summary>
+        /// Gets the name used to look up the driver in the IScanDriverFactory.
+        /// </summary>
+        string DriverName { get; }
+
+        /// <summary>
         /// Prompts the user (via a dialog) to select a scanning device.
         /// </summary>
         /// <returns>The selected device, or null if no device was selected.</returns>
@@ -57,10 +60,5 @@ namespace NAPS2.Scan
         /// <exception cref="ScanDriverException">Throws a ScanDriverException if an error occurs while scanning.</exception>
         /// /// <exception cref="InvalidOperationException">Throws an InvalidOperationException if ScanSettings or DialogParent has not been set.</exception>
         List<IScannedImage> Scan();
-
-        /// <summary>
-        /// Gets the name used to look up the driver in the IScanDriverFactory.
-        /// </summary>
-        string DriverName { get; }
     }
 }

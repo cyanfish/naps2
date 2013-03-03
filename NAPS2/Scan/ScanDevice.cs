@@ -17,11 +17,6 @@
     GNU General Public License for more details.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace NAPS2.Scan
 {
     public class ScanDevice

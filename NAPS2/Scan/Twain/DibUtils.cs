@@ -19,9 +19,6 @@
 
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Twain
@@ -46,9 +43,9 @@ namespace NAPS2.Scan.Twain
             IntPtr bmpptr = GlobalLock(dibhand);
             IntPtr pixptr = GetPixelInfo(bmpptr);
             BitmapInfoHeader binfo = GetDibInfo(bmpptr);
-            float resx = (float)binfo.biXPelsPerMeter * 0.0254f;
-            float resy = (float)binfo.biYPelsPerMeter * 0.0254f;
-            Bitmap _scannedImage = new Bitmap(binfo.biWidth, binfo.biHeight);
+            float resx = binfo.biXPelsPerMeter * 0.0254f;
+            float resy = binfo.biYPelsPerMeter * 0.0254f;
+            var _scannedImage = new Bitmap(binfo.biWidth, binfo.biHeight);
             Graphics scannedImageGraphics = Graphics.FromImage(_scannedImage);
             IntPtr hdc = scannedImageGraphics.GetHdc();
             SetDIBitsToDevice(hdc, 0, 0, binfo.biWidth, binfo.biHeight, 0, 0, 0, binfo.biHeight, pixptr, bmpptr, 0);
@@ -63,12 +60,12 @@ namespace NAPS2.Scan.Twain
         //THIS METHOD GETS THE POINTER TO THE BITMAP HEADER INFO
         private static IntPtr GetPixelInfo(IntPtr bmpPtr)
         {
-            BitmapInfoHeader bmi = (BitmapInfoHeader)Marshal.PtrToStructure(bmpPtr, typeof(BitmapInfoHeader));
+            var bmi = (BitmapInfoHeader)Marshal.PtrToStructure(bmpPtr, typeof(BitmapInfoHeader));
 
             if (bmi.biSizeImage == 0)
                 bmi.biSizeImage = (uint)(((((bmi.biWidth * bmi.biBitCount) + 31) & ~31) >> 3) * bmi.biHeight);
 
-            int p = (int)bmi.biClrUsed;
+            var p = (int)bmi.biClrUsed;
             if ((p == 0) && (bmi.biBitCount <= 8))
                 p = 1 << bmi.biBitCount;
             p = (p * 4) + (int)bmi.biSize + (int)bmpPtr;
@@ -78,7 +75,7 @@ namespace NAPS2.Scan.Twain
         //THIS METHOD GETS THE POINTER TO THE BITMAP HEADER INFO
         private static BitmapInfoHeader GetDibInfo(IntPtr bmpPtr)
         {
-            BitmapInfoHeader bmi = (BitmapInfoHeader)Marshal.PtrToStructure(bmpPtr, typeof(BitmapInfoHeader));
+            var bmi = (BitmapInfoHeader)Marshal.PtrToStructure(bmpPtr, typeof(BitmapInfoHeader));
             return bmi;
         }
     }

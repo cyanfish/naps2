@@ -19,8 +19,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
 
 namespace NAPS2.Scan.Twain
 {
@@ -35,7 +34,7 @@ namespace NAPS2.Scan.Twain
 
         public ScanSettings ScanSettings { get; set; }
 
-        public System.Windows.Forms.IWin32Window DialogParent { get; set; }
+        public IWin32Window DialogParent { get; set; }
 
         public ScanDevice PromptForDevice()
         {
@@ -43,8 +42,8 @@ namespace NAPS2.Scan.Twain
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
             }
-            var deviceId = TwainApi.SelectDeviceUI();
-            var deviceName = deviceId;
+            string deviceId = TwainApi.SelectDeviceUI();
+            string deviceName = deviceId;
             return new ScanDevice(deviceId, deviceName, DRIVER_NAME);
         }
 

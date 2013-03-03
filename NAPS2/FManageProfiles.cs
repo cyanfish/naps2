@@ -17,15 +17,10 @@
     GNU General Public License for more details.
 */
 
-using NAPS2.Scan;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using NAPS2.Scan;
 using Ninject;
 
 namespace NAPS2
@@ -42,13 +37,13 @@ namespace NAPS2
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void loadList()
         {
             lvProfiles.Items.Clear();
-            foreach (var profile in profileManager.Profiles)
+            foreach (ScanSettings profile in profileManager.Profiles)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
             }
@@ -57,7 +52,7 @@ namespace NAPS2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FEditScanSettings fedit = KernelManager.Kernel.Get<FEditScanSettings>();
+            var fedit = KernelManager.Kernel.Get<FEditScanSettings>();
             fedit.ScanSettings = new ExtendedScanSettings();
             fedit.ShowDialog();
             if (fedit.Result)
@@ -73,7 +68,7 @@ namespace NAPS2
             if (lvProfiles.SelectedItems.Count > 0)
             {
                 int profileIndex = lvProfiles.SelectedItems[0].Index;
-                FEditScanSettings fedit = KernelManager.Kernel.Get<FEditScanSettings>();
+                var fedit = KernelManager.Kernel.Get<FEditScanSettings>();
                 fedit.ScanSettings = profileManager.Profiles[profileIndex];
                 fedit.ShowDialog();
                 if (fedit.Result)

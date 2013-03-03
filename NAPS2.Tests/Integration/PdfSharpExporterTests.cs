@@ -17,10 +17,6 @@
     GNU General Public License for more details.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using NAPS2.Pdf;
 using NUnit.Framework;
 

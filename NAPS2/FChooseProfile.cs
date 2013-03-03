@@ -17,14 +17,9 @@
     GNU General Public License for more details.
 */
 
-using NAPS2.Scan;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
+using NAPS2.Scan;
 using Ninject;
 
 namespace NAPS2
@@ -34,6 +29,14 @@ namespace NAPS2
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IScanReceiver scanReceiver;
+
+        public FChooseProfile(IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver)
+        {
+            this.profileManager = profileManager;
+            this.scanPerformer = scanPerformer;
+            this.scanReceiver = scanReceiver;
+            InitializeComponent();
+        }
 
         private ScanSettings SelectedProfile
         {
@@ -47,14 +50,6 @@ namespace NAPS2
             }
         }
 
-        public FChooseProfile(IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver)
-        {
-            this.profileManager = profileManager;
-            this.scanPerformer = scanPerformer;
-            this.scanReceiver = scanReceiver;
-            InitializeComponent();
-        }
-
         private void FChooseProfile_Load(object sender, EventArgs e)
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
@@ -64,7 +59,7 @@ namespace NAPS2
         private void UpdateProfiles()
         {
             lvProfiles.Items.Clear();
-            foreach (var profile in profileManager.Profiles)
+            foreach (ScanSettings profile in profileManager.Profiles)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
             }

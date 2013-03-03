@@ -29,9 +29,9 @@ namespace NAPS2.Tests
     public abstract class BasePdfExporterTests
     {
         private readonly String pdfPath = "test/test.pdf";
-        protected IPdfExporter pdfExporter;
-        private PdfInfo info;
         private List<Image> images;
+        private PdfInfo info;
+        protected IPdfExporter pdfExporter;
 
         [SetUp]
         public virtual void SetUp()
@@ -65,7 +65,7 @@ namespace NAPS2.Tests
         {
             pdfExporter = null;
             info = null;
-            foreach (var img in images)
+            foreach (Image img in images)
             {
                 img.Dispose();
             }
@@ -76,7 +76,7 @@ namespace NAPS2.Tests
 
         private Bitmap ColorBitmap(int w, int h, Color color)
         {
-            Bitmap result = new Bitmap(w, h);
+            var result = new Bitmap(w, h);
             using (Graphics g = Graphics.FromImage(result))
             {
                 g.FillRectangle(new SolidBrush(color), 0, 0, w, h);
@@ -95,14 +95,14 @@ namespace NAPS2.Tests
         [Test]
         public void Export_Normal_ReturnsTrue()
         {
-            var result = pdfExporter.Export(pdfPath, images, info, num => true);
+            bool result = pdfExporter.Export(pdfPath, images, info, num => true);
             Assert.IsTrue(result);
         }
 
         [Test]
         public void Export_Progress_IsLinear()
         {
-            var i = 0;
+            int i = 0;
             pdfExporter.Export(pdfPath, images, info, num =>
             {
                 Assert.AreEqual(++i, num);
@@ -126,7 +126,7 @@ namespace NAPS2.Tests
         [Test]
         public void Export_Cancel_ReturnsFalse()
         {
-            var result = pdfExporter.Export(pdfPath, images, info, num => false);
+            bool result = pdfExporter.Export(pdfPath, images, info, num => false);
             Assert.IsFalse(result);
         }
     }

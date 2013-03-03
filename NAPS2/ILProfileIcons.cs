@@ -17,12 +17,7 @@
     GNU General Public License for more details.
 */
 
-using System;
-using System.Windows.Forms;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace NAPS2
 {

@@ -1,4 +1,4 @@
-/*
+﻿/*
     NAPS2 (Not Another PDF Scanner 2)
     http://sourceforge.net/projects/naps2/
     
@@ -18,7 +18,6 @@
 */
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 

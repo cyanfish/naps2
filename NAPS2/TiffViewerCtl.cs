@@ -18,32 +18,51 @@
 */
 
 using System;
-using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Windows.Forms;
 
 namespace TiffViewerCtl
 {
-    public class TiffViewerCtl : System.Windows.Forms.UserControl
+    public class TiffViewerCtl : UserControl
     {
-        private TiffViewer.TiffViewer tiffviewer1;
+        private readonly Container components = null;
+        private Image image;
         private ToolStrip tStrip;
-        private ToolStripButton tsZoomPlus;
-        private ToolStripLabel tsZoom;
-        private ToolStripButton tsZoomOut;
-        private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton tsStretch;
+        private TiffViewer.TiffViewer tiffviewer1;
         private ToolStripContainer toolStripContainer1;
+        private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton tsStretch;
+        private ToolStripLabel tsZoom;
         private ToolStripButton tsZoomActual;
-        private System.ComponentModel.Container components = null;
+        private ToolStripButton tsZoomOut;
+        private ToolStripButton tsZoomPlus;
 
         public TiffViewerCtl()
         {
             InitializeComponent();
             tsStretch_Click(null, null);
+        }
+
+        public Image Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
+                tiffviewer1.Image = value;
+                if (value == null)
+                {
+                    tStrip.Enabled = false;
+
+                }
+                else
+                {
+                    tStrip.Enabled = true;
+                }
+                AdjustZoom();
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -58,6 +77,52 @@ namespace TiffViewerCtl
             base.Dispose(disposing);
         }
 
+
+        private void TiffViewer_SizeChanged(object sender, EventArgs e)
+        {
+            AdjustZoom();
+        }
+
+        private void AdjustZoom()
+        {
+            if (tsStretch.Checked)
+            {
+                double containerWidth = Math.Max(tiffviewer1.Width - 20, 0);
+                double containerHeight = Math.Max(tiffviewer1.Height - 20, 0);
+                double zoomX = containerWidth / tiffviewer1.ImageWidth * 100;
+                double zoomY = containerHeight / tiffviewer1.ImageHeight * 100;
+                tiffviewer1.Zoom = (int)Math.Min(zoomX, zoomY);
+                tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
+            }
+        }
+
+        private void tsZoomPlus_Click(object sender, EventArgs e)
+        {
+            tiffviewer1.Zoom += 10;
+            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
+        }
+
+        private void tsZoomOut_Click(object sender, EventArgs e)
+        {
+            tiffviewer1.Zoom -= 10;
+            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
+        }
+
+        private void tsStretch_Click(object sender, EventArgs e)
+        {
+            tsStretch.Checked = !tsStretch.Checked;
+        }
+
+        private void tsStretch_CheckedChanged(object sender, EventArgs e)
+        {
+            AdjustZoom();
+        }
+
+        private void tsZoomActual_Click(object sender, EventArgs e)
+        {
+            tiffviewer1.Zoom = 100;
+            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
+        }
 
         #region Component Designer generated code
         /// <summary> 
@@ -86,13 +151,13 @@ namespace TiffViewerCtl
             // 
             this.tStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.tStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsStretch,
-            this.toolStripSeparator1,
-            this.tsZoomActual,
-            this.tsZoomPlus,
-            this.tsZoomOut,
-            this.toolStripSeparator2,
-            this.tsZoom});
+                this.tsStretch,
+                this.toolStripSeparator1,
+                this.tsZoomActual,
+                this.tsZoomPlus,
+                this.tsZoomOut,
+                this.toolStripSeparator2,
+                this.tsZoom});
             this.tStrip.Location = new System.Drawing.Point(3, 0);
             this.tStrip.Name = "tStrip";
             this.tStrip.Size = new System.Drawing.Size(182, 25);
@@ -205,74 +270,5 @@ namespace TiffViewerCtl
 
         }
         #endregion
-
-        private Image image;
-
-        private void TiffViewer_SizeChanged(object sender, System.EventArgs e)
-        {
-            AdjustZoom();
-        }
-
-        private void AdjustZoom()
-        {
-            if (tsStretch.Checked)
-            {
-                double containerWidth = Math.Max(tiffviewer1.Width - 20, 0);
-                double containerHeight = Math.Max(tiffviewer1.Height - 20, 0);
-                double zoomX = containerWidth / tiffviewer1.ImageWidth * 100;
-                double zoomY = containerHeight / tiffviewer1.ImageHeight * 100;
-                this.tiffviewer1.Zoom = (int)Math.Min(zoomX, zoomY);
-                tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
-            }
-        }
-
-        public Image Image
-        {
-            get { return image; }
-            set
-            {
-                image = value;
-                this.tiffviewer1.Image = value;
-                if (value == null)
-                {
-                    tStrip.Enabled = false;
-
-                }
-                else
-                {
-                    tStrip.Enabled = true;
-                }
-                AdjustZoom();
-            }
-        }
-
-        private void tsZoomPlus_Click(object sender, EventArgs e)
-        {
-            tiffviewer1.Zoom += 10;
-            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
-        }
-
-        private void tsZoomOut_Click(object sender, EventArgs e)
-        {
-            tiffviewer1.Zoom -= 10;
-            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
-        }
-
-        private void tsStretch_Click(object sender, EventArgs e)
-        {
-            tsStretch.Checked = !tsStretch.Checked;
-        }
-
-        private void tsStretch_CheckedChanged(object sender, EventArgs e)
-        {
-            AdjustZoom();
-        }
-
-        private void tsZoomActual_Click(object sender, EventArgs e)
-        {
-            tiffviewer1.Zoom = 100;
-            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
-        }
-
     }
 }

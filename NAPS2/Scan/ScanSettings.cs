@@ -17,10 +17,6 @@
     GNU General Public License for more details.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace NAPS2.Scan

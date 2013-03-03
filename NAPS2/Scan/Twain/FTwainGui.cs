@@ -18,23 +18,21 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.ComponentModel;
-using System.Data;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Imaging;
-
-using NAPS2.Scan;
+using System.Windows.Forms;
 
 namespace NAPS2.Scan.Twain
 {
     internal partial class FTwainGui : Form, IMessageFilter
     {
-        private bool activated = false;
-        private ScanSettings settings;
+        private readonly List<IScannedImage> bitmaps;
+        private readonly ScanSettings settings;
+        private bool activated;
+        private bool msgfilter;
+        private Twain tw;
 
         public FTwainGui(ScanSettings settings)
         {
@@ -42,8 +40,6 @@ namespace NAPS2.Scan.Twain
             bitmaps = new List<IScannedImage>();
             this.settings = settings;
         }
-
-        private List<IScannedImage> bitmaps;
 
         public List<IScannedImage> Bitmaps
         {
@@ -67,7 +63,7 @@ namespace NAPS2.Scan.Twain
                     {
                         EndingScan();
                         tw.CloseSrc();
-                        this.Close();
+                        Close();
                         break;
                     }
                 case TwainCommand.CloseOk:
@@ -87,7 +83,7 @@ namespace NAPS2.Scan.Twain
                         tw.CloseSrc();
                         for (int i = 0; i < pics.Count; i++)
                         {
-                            IntPtr img = (IntPtr)pics[i];
+                            var img = (IntPtr)pics[i];
                             int bitcount = 0;
 
                             using (Bitmap bmp = DibUtils.BitmapFromDIB(img, out bitcount))
@@ -95,7 +91,7 @@ namespace NAPS2.Scan.Twain
                                 bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BLACKWHITE : ScanBitDepth.C24BIT, settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg));
                             }
                         }
-                        this.Close();
+                        Close();
                         break;
                     }
             }
@@ -109,13 +105,10 @@ namespace NAPS2.Scan.Twain
             {
                 Application.RemoveMessageFilter(this);
                 msgfilter = false;
-                this.Enabled = true;
-                this.Activate();
+                Enabled = true;
+                Activate();
             }
         }
-
-        private bool msgfilter;
-        private Twain tw;
 
         private void FTwainGui_Activated(object sender, EventArgs e)
         {
@@ -124,7 +117,7 @@ namespace NAPS2.Scan.Twain
             activated = true;
             if (!msgfilter)
             {
-                this.Enabled = false;
+                Enabled = false;
                 msgfilter = true;
                 Application.AddMessageFilter(this);
             }

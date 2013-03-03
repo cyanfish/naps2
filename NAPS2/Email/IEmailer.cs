@@ -17,8 +17,6 @@
     GNU General Public License for more details.
 */
 
-using System;
-
 namespace NAPS2.Email
 {
     public interface IEmailer

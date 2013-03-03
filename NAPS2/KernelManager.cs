@@ -17,31 +17,25 @@
     GNU General Public License for more details.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Ninject.Modules;
-using Ninject;
-
 using NAPS2.Email;
 using NAPS2.Pdf;
 using NAPS2.Scan;
-using NAPS2.Scan.Wia;
-using NAPS2.Scan.Twain;
 using NAPS2.Scan.Stub;
+using NAPS2.Scan.Twain;
+using NAPS2.Scan.Wia;
+using Ninject;
+using Ninject.Modules;
 
 namespace NAPS2
 {
     static class KernelManager
     {
-        public static IKernel Kernel { get; private set; }
-
         static KernelManager()
         {
             Kernel = new StandardKernel(new DependenciesModule());
         }
+
+        public static IKernel Kernel { get; private set; }
 
         private class DependenciesModule : NinjectModule
         {

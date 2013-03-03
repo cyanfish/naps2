@@ -38,6 +38,11 @@ namespace NAPS2.Scan.Twain
     {
         private const short CountryUSA = 1;
         private const short LanguageUSA = 13;
+        private readonly TwIdentity appid;
+        private readonly TwIdentity srcds;
+        private TwEvent evtmsg;
+        private IntPtr hwnd;
+        private WINMSG winmsg;
 
         public Twain()
         {
@@ -59,6 +64,18 @@ namespace NAPS2.Scan.Twain
             srcds.Id = IntPtr.Zero;
 
             evtmsg.EventPtr = Marshal.AllocHGlobal(Marshal.SizeOf(winmsg));
+        }
+
+        public static int ScreenBitDepth
+        {
+            get
+            {
+                IntPtr screenDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);
+                int bitDepth = GetDeviceCaps(screenDC, 12);
+                bitDepth *= GetDeviceCaps(screenDC, 14);
+                DeleteDC(screenDC);
+                return bitDepth;
+            }
         }
 
         ~Twain()
@@ -106,7 +123,7 @@ namespace NAPS2.Scan.Twain
             {
                 return true;
             }
-            TwRC rc = TwRC.Success;
+            var rc = TwRC.Success;
             while (rc == TwRC.Success)
             {
                 rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwDAT.Identity, TwMSG.GetNext, srcds);
@@ -137,7 +154,7 @@ namespace NAPS2.Scan.Twain
             if (rc != TwRC.Success)
                 throw new InvalidOperationException("DSMident call falied");
 
-            TwUserInterface guif = new TwUserInterface();
+            var guif = new TwUserInterface();
             guif.ShowUI = 1;
             guif.ModalUI = 1;
             guif.ParentHand = hwnd;
@@ -151,20 +168,20 @@ namespace NAPS2.Scan.Twain
 
         public ArrayList TransferPictures()
         {
-            ArrayList pics = new ArrayList();
+            var pics = new ArrayList();
             if (srcds.Id == IntPtr.Zero)
                 return pics;
 
             TwRC rc;
             IntPtr hbitmap = IntPtr.Zero;
-            TwPendingXfers pxfr = new TwPendingXfers();
+            var pxfr = new TwPendingXfers();
 
             do
             {
                 pxfr.Count = 0;
                 hbitmap = IntPtr.Zero;
 
-                TwImageInfo iinf = new TwImageInfo();
+                var iinf = new TwImageInfo();
                 rc = DSiinf(appid, srcds, TwDG.Image, TwDAT.ImageInfo, TwMSG.Get, iinf);
                 if (rc != TwRC.Success)
                 {
@@ -231,7 +248,7 @@ namespace NAPS2.Scan.Twain
             TwRC rc;
             if (srcds.Id != IntPtr.Zero)
             {
-                TwUserInterface guif = new TwUserInterface();
+                var guif = new TwUserInterface();
                 rc = DSuserif(appid, srcds, TwDG.Control, TwDAT.UserInterface, TwMSG.DisableDS, guif);
                 rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwDAT.Identity, TwMSG.CloseDS, srcds);
             }
@@ -245,12 +262,6 @@ namespace NAPS2.Scan.Twain
                 rc = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwDAT.Parent, TwMSG.CloseDSM, ref hwnd);
             appid.Id = IntPtr.Zero;
         }
-
-        private IntPtr hwnd;
-        private TwIdentity appid;
-        private TwIdentity srcds;
-        private TwEvent evtmsg;
-        private WINMSG winmsg;
 
         // ------ DSM entry point DAT_ variants:
         [DllImport("twain_32.dll", EntryPoint = "#1")]
@@ -306,18 +317,6 @@ namespace NAPS2.Scan.Twain
 
         [DllImport("gdi32.dll", ExactSpelling = true)]
         private static extern bool DeleteDC(IntPtr hdc);
-
-        public static int ScreenBitDepth
-        {
-            get
-            {
-                IntPtr screenDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);
-                int bitDepth = GetDeviceCaps(screenDC, 12);
-                bitDepth *= GetDeviceCaps(screenDC, 14);
-                DeleteDC(screenDC);
-                return bitDepth;
-            }
-        }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4)]
         internal struct WINMSG

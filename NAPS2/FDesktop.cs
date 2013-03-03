@@ -19,33 +19,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Threading;
-
-using PdfSharp.Pdf;
-using PdfSharp.Drawing;
-
+using System.Linq;
+using System.Windows.Forms;
 using NAPS2.Email;
 using NAPS2.Scan;
-
 using Ninject;
-
-using WIA;
-using System.Drawing.Imaging;
 using Ninject.Parameters;
 
 namespace NAPS2
 {
     public partial class FDesktop : Form, IScanReceiver
     {
-        private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly IEmailer emailer;
+        private readonly ScannedImageList imageList = new ScannedImageList();
 
         public FDesktop(IEmailer emailer)
         {
@@ -69,6 +58,12 @@ namespace NAPS2
             }
         }
 
+        public void ReceiveScan(IEnumerable<IScannedImage> scannedImages)
+        {
+            imageList.Images.AddRange(scannedImages);
+            UpdateThumbnails();
+        }
+
         private void UpdateThumbnails()
         {
             thumbnailList1.UpdateImages(imageList.Images);
@@ -78,12 +73,6 @@ namespace NAPS2
         {
             UpdateThumbnails();
             SelectedIndices = selection;
-        }
-
-        public void ReceiveScan(IEnumerable<IScannedImage> scannedImages)
-        {
-            imageList.Images.AddRange(scannedImages);
-            UpdateThumbnails();
         }
 
         private void Delete()
@@ -125,7 +114,7 @@ namespace NAPS2
 
         private void exportPDF(string filename)
         {
-            FPDFSave pdfdialog = KernelManager.Kernel.Get<FPDFSave>();
+            var pdfdialog = KernelManager.Kernel.Get<FPDFSave>();
             pdfdialog.Filename = filename;
             pdfdialog.Images = imageList.Images;
             pdfdialog.ShowDialog(this);
@@ -157,14 +146,14 @@ namespace NAPS2
         {
             if (SelectedIndices.Any())
             {
-                FViewer viewer = new FViewer(imageList.Images[SelectedIndices.First()].GetImage());
+                var viewer = new FViewer(imageList.Images[SelectedIndices.First()].GetImage());
                 viewer.ShowDialog();
             }
         }
 
         private void tsScan_Click(object sender, EventArgs e)
         {
-            FChooseProfile prof = KernelManager.Kernel.Get<FChooseProfile>(new ConstructorArgument("scanReceiver", this));
+            var prof = KernelManager.Kernel.Get<FChooseProfile>(new ConstructorArgument("scanReceiver", this));
             prof.ShowDialog();
         }
 
@@ -172,7 +161,7 @@ namespace NAPS2
         {
             if (imageList.Images.Count > 0)
             {
-                SaveFileDialog sd = new SaveFileDialog();
+                var sd = new SaveFileDialog();
                 sd.OverwritePrompt = true;
                 sd.AddExtension = true;
                 sd.Filter = "PDF document (*.pdf)|*.pdf";
@@ -188,7 +177,7 @@ namespace NAPS2
         {
             if (imageList.Images.Count > 0)
             {
-                SaveFileDialog sd = new SaveFileDialog();
+                var sd = new SaveFileDialog();
                 sd.OverwritePrompt = true;
                 sd.AddExtension = true;
                 sd.Filter = "Bitmap Files (*.bmp)|*.bmp" +
@@ -218,7 +207,7 @@ namespace NAPS2
 
                     if (format == ImageFormat.Tiff)
                     {
-                        var bitmaps = imageList.Images.Select(x => x.GetImage()).ToArray();
+                        Bitmap[] bitmaps = imageList.Images.Select(x => x.GetImage()).ToArray();
                         TiffHelper.SaveMultipage(bitmaps, sd.FileName);
                         foreach (Bitmap bitmap in bitmaps)
                         {

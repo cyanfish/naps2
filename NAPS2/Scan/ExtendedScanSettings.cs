@@ -18,11 +18,9 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 
 namespace NAPS2.Scan
 {
@@ -138,7 +136,7 @@ namespace NAPS2.Scan
 
         public static string Description(this Enum enumValue)
         {
-            var attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+            object[] attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
             if (attrs.Length == 0)
             {
                 return null;

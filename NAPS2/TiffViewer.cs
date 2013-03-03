@@ -18,29 +18,25 @@
 */
 
 using System;
-using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Printing;
-using System.Data;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using System.IO;
 
 namespace TiffViewer
 {
-    public class TiffViewer : System.Windows.Forms.UserControl
+    public class TiffViewer : UserControl
     {
-        private System.Windows.Forms.PictureBox pbox;
-        private System.ComponentModel.Container components = null;
+        private readonly Container components = null;
+
+        private Image image;
+        private PictureBox pbox;
+        private int xzoom;
 
         public TiffViewer()
         {
             InitializeComponent();
         }
-
-        private Image image;
-        private int xzoom;
 
         public Image Image
         {
@@ -96,11 +92,11 @@ namespace TiffViewer
                 if (image != null)
                 {
                     xzoom = Math.Max(Math.Min(value, 1000), 10);
-                    double displayWidth = (double)image.Width * ((double)xzoom / 100);
-                    double displayHeight = (double)image.Height * ((double)xzoom / 100) * ((double)image.HorizontalResolution / (double)image.VerticalResolution);
-                    Bitmap result = new Bitmap((int)displayWidth, (int)displayHeight);
+                    double displayWidth = image.Width * ((double)xzoom / 100);
+                    double displayHeight = image.Height * ((double)xzoom / 100) * (image.HorizontalResolution / (double)image.VerticalResolution);
+                    var result = new Bitmap((int)displayWidth, (int)displayHeight);
                     Graphics g = Graphics.FromImage(result);
-                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     g.DrawImage(image, 0, 0, (int)displayWidth, (int)displayHeight);
 
                     pbox.Image = result;
@@ -163,8 +159,5 @@ namespace TiffViewer
 
         }
         #endregion
-
-
-
     }
 }

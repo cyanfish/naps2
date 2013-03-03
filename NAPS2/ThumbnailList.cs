@@ -17,14 +17,8 @@
     GNU General Public License for more details.
 */
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-
 using NAPS2.Scan;
 
 namespace NAPS2
@@ -34,24 +28,24 @@ namespace NAPS2
         public ThumbnailList()
         {
             InitializeComponent();
-            this.LargeImageList = ilThumbnailList;
+            LargeImageList = ilThumbnailList;
         }
 
         public void UpdateImages(List<IScannedImage> images)
         {
             ilThumbnailList.Images.Clear();
-            this.Clear();
-            foreach (var img in images)
+            Clear();
+            foreach (IScannedImage img in images)
             {
                 ilThumbnailList.Images.Add(img.Thumbnail);
-                ListViewItem item = this.Items.Add("", ilThumbnailList.Images.Count - 1);
+                ListViewItem item = Items.Add("", ilThumbnailList.Images.Count - 1);
             }
         }
 
         public void UpdateView(List<IScannedImage> images)
         {
             ilThumbnailList.Images.Clear();
-            foreach (var img in images)
+            foreach (IScannedImage img in images)
             {
                 ilThumbnailList.Images.Add(img.Thumbnail);
             }
@@ -59,7 +53,7 @@ namespace NAPS2
 
         public void ClearItems()
         {
-            this.Clear();
+            Clear();
             ilThumbnailList.Images.Clear();
         }
     }

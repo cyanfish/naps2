@@ -18,8 +18,8 @@
 */
 
 using System;
-using System.Runtime.InteropServices;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace NAPS2.Email
 {
@@ -30,18 +30,18 @@ namespace NAPS2.Email
 
         public bool SendEmail(string attachmentFileName, string subject)
         {
-            IntPtr session = new IntPtr(0);
-            IntPtr winhandle = new IntPtr(0);
+            var session = new IntPtr(0);
+            var winhandle = new IntPtr(0);
 
-            MAPIMessage msg = new MAPIMessage();
+            var msg = new MAPIMessage();
             msg.subject = subject;
 
             int sizeofMapiDesc = Marshal.SizeOf(typeof(MAPIFileDesc));
             IntPtr pMapiDesc = Marshal.AllocHGlobal(sizeofMapiDesc);
 
-            MAPIFileDesc fileDesc = new MAPIFileDesc();
+            var fileDesc = new MAPIFileDesc();
             fileDesc.position = -1;
-            int ptr = (int)pMapiDesc;
+            var ptr = (int)pMapiDesc;
 
             string strPath = attachmentFileName;
             fileDesc.name = Path.GetFileName(strPath);

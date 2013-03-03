@@ -18,12 +18,9 @@
 */
 
 using System;
-using System.IO;
 using System.Drawing;
-using System.Collections.Generic;
 using System.Drawing.Imaging;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
+using System.IO;
 
 namespace NAPS2
 {
@@ -40,9 +37,9 @@ namespace NAPS2
                     if (bmp.Length == 1)
                     {
 
-                        EncoderParameters iparams = new EncoderParameters(1);
+                        var iparams = new EncoderParameters(1);
                         Encoder iparam = Encoder.Compression;
-                        EncoderParameter iparamPara = new EncoderParameter(iparam, (long)(EncoderValue.CompressionLZW));
+                        var iparamPara = new EncoderParameter(iparam, (long)(EncoderValue.CompressionLZW));
                         iparams.Param[0] = iparamPara;
                         bmp[0].Save(location, codecInfo, iparams);
 
@@ -55,7 +52,7 @@ namespace NAPS2
                         Encoder compressionEncoder;
                         EncoderParameter SaveEncodeParam;
                         EncoderParameter CompressionEncodeParam;
-                        EncoderParameters EncoderParams = new EncoderParameters(2);
+                        var EncoderParams = new EncoderParameters(2);
 
                         saveEncoder = Encoder.SaveFlag;
                         compressionEncoder = Encoder.Compression;
@@ -91,7 +88,7 @@ namespace NAPS2
 
 
                 }
-                catch (System.Exception ee)
+                catch (Exception ee)
                 {
                     throw new Exception(ee.Message + "  Error in saving as multipage ");
                 }
@@ -106,7 +103,7 @@ namespace NAPS2
 
             for (int i = 0; i < info.Length; i++)
             {
-                string EnumName = type.ToString();
+                string EnumName = type;
                 if (info[i].FormatDescription.Equals(EnumName))
                 {
                     return info[i];

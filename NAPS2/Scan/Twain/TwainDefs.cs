@@ -19,7 +19,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace NAPS2.Scan.Twain
 {
@@ -282,11 +281,11 @@ namespace NAPS2.Scan.Twain
 
         public float ToFloat()
         {
-            return (float)Whole + ((float)Frac / 65536.0f);
+            return Whole + (Frac / 65536.0f);
         }
         public void FromFloat(float f)
         {
-            int i = (int)((f * 65536.0f) + 0.5f);
+            var i = (int)((f * 65536.0f) + 0.5f);
             Whole = (short)(i >> 16);
             Frac = (ushort)(i & 0x0000ffff);
         }
@@ -307,7 +306,7 @@ namespace NAPS2.Scan.Twain
             Handle = Twain.GlobalAlloc(0x42, 6);
             IntPtr pv = Twain.GlobalLock(Handle);
             Marshal.WriteInt16(pv, 0, (short)TwType.Int16);
-            Marshal.WriteInt32(pv, 2, (int)sval);
+            Marshal.WriteInt32(pv, 2, sval);
             Twain.GlobalUnlock(Handle);
         }
         ~TwCapability()

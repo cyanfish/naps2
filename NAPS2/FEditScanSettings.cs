@@ -18,16 +18,10 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using NAPS2.Scan;
-using NAPS2.Scan.Wia;
 using NAPS2.Scan.Twain;
+using NAPS2.Scan.Wia;
 using Ninject;
 
 namespace NAPS2
@@ -37,16 +31,9 @@ namespace NAPS2
         private ScanDevice currentDevice;
 
         private int iconID;
-        private bool result = false;
+        private bool result;
 
-        private bool suppressChangeEvent = false;
-
-        public bool Result
-        {
-            get { return result; }
-        }
-
-        public ScanSettings ScanSettings { get; set; }
+        private bool suppressChangeEvent;
 
         public FEditScanSettings()
         {
@@ -58,6 +45,13 @@ namespace NAPS2
             AddEnumItems<ScanScale>(cmbScale);
             AddEnumItems<ScanSource>(cmbSource);
         }
+
+        public bool Result
+        {
+            get { return result; }
+        }
+
+        public ScanSettings ScanSettings { get; set; }
 
         private string DeviceDriverName
         {
@@ -90,7 +84,7 @@ namespace NAPS2
 
         private void AddEnumItems<T>(ComboBox combo)
         {
-            foreach (var item in Enum.GetValues(typeof(T)))
+            foreach (object item in Enum.GetValues(typeof(T)))
             {
                 combo.Items.Add(item);
             }
@@ -104,7 +98,7 @@ namespace NAPS2
 
         private void choose(string driverName)
         {
-            IScanDriver driver = KernelManager.Kernel.Get<IScanDriver>(driverName);
+            var driver = KernelManager.Kernel.Get<IScanDriver>(driverName);
             try
             {
                 driver.DialogParent = this;
@@ -173,12 +167,12 @@ namespace NAPS2
             }
             result = true;
             saveSettings();
-            this.Close();
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void rdbConfig_CheckedChanged(object sender, EventArgs e)
@@ -258,7 +252,7 @@ namespace NAPS2
 
         private void pctIcon_DoubleClick(object sender, EventArgs e)
         {
-            FChooseIcon fic = new FChooseIcon();
+            var fic = new FChooseIcon();
             fic.ShowDialog();
             if (fic.IconID > -1)
             {

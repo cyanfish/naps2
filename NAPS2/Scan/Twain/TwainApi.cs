@@ -18,42 +18,16 @@
 */
 
 using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
-
-using NAPS2.Scan;
+using System.Windows.Forms;
 
 namespace NAPS2.Scan.Twain
 {
     internal class TwainApi
     {
-        Twain tw;
-        IWin32Window parent;
-        ScanSettings settings;
-
-        public static string SelectDeviceUI()
-        {
-            try
-            {
-                Twain tw = new Twain();
-                if (!tw.Init(Application.OpenForms[0].Handle))
-                {
-                    throw new NoDevicesFoundException();
-                }
-                tw.Select();
-                return tw.GetCurrentName();
-            }
-            catch (ScanDriverException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new ScanDriverException(e);
-            }
-        }
+        readonly IWin32Window parent;
+        readonly ScanSettings settings;
+        readonly Twain tw;
 
         public TwainApi(ScanSettings settings)
         {
@@ -75,9 +49,31 @@ namespace NAPS2.Scan.Twain
             }
         }
 
+        public static string SelectDeviceUI()
+        {
+            try
+            {
+                var tw = new Twain();
+                if (!tw.Init(Application.OpenForms[0].Handle))
+                {
+                    throw new NoDevicesFoundException();
+                }
+                tw.Select();
+                return tw.GetCurrentName();
+            }
+            catch (ScanDriverException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ScanDriverException(e);
+            }
+        }
+
         public List<IScannedImage> Scan()
         {
-            FTwainGui fg = new FTwainGui(settings);
+            var fg = new FTwainGui(settings);
             fg.TwainIface = tw;
             fg.ShowDialog(parent);
             return fg.Bitmaps;

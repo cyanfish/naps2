@@ -17,23 +17,18 @@
     GNU General Public License for more details.
 */
 
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using NAPS2.Pdf;
-using NUnit.Framework;
-using NAPS2.Scan;
 using System.Linq;
-using System.Collections;
+using NAPS2.Scan;
+using NUnit.Framework;
 
 namespace NAPS2.Tests.Unit
 {
     [TestFixture(Category = "Unit,Fast")]
     public class ScannedImageListTests
     {
-        private ScannedImageList imageList;
-
         [SetUp]
         public void SetUp()
         {
@@ -45,6 +40,8 @@ namespace NAPS2.Tests.Unit
         {
             imageList = null;
         }
+
+        private ScannedImageList imageList;
 
         private void AddImages(int items)
         {
@@ -64,14 +61,14 @@ namespace NAPS2.Tests.Unit
             get
             {
                 yield return new TestCaseData(0, new int[] { }, new int[] { }, new int[] { }).SetName("Do nothing (no items)");
-                yield return new TestCaseData(1, new int[] { }, new int[] { 0 }, new int[] { }).SetName("Do nothing (no selection)");
-                yield return new TestCaseData(1, new int[] { 0 }, new int[] { 0 }, new int[] { 0 }).SetName("Do nothing (1 item)");
-                yield return new TestCaseData(2, new int[] { 1 }, new int[] { 0, 1 }, new int[] { 1 }).SetName("Do nothing (bottom item)");
-                yield return new TestCaseData(2, new int[] { 0 }, new int[] { 1, 0 }, new int[] { 1 }).SetName("Move 1");
-                yield return new TestCaseData(3, new int[] { 0, 2 }, new int[] { 1, 0, 2 }, new int[] { 1, 2 }).SetName("Move 1/2");
-                yield return new TestCaseData(3, new int[] { 0, 1 }, new int[] { 2, 0, 1 }, new int[] { 1, 2 }).SetName("Move 2/2");
-                yield return new TestCaseData(3, new int[] { 1, 2 }, new int[] { 0, 1, 2 }, new int[] { 1, 2 }).SetName("Move none (bottom 2)");
-                yield return new TestCaseData(3, new int[] { 0, 1, 2 }, new int[] { 0, 1, 2 }, new int[] { 0, 1, 2 }).SetName("Move none (all 3)");
+                yield return new TestCaseData(1, new int[] { }, new[] { 0 }, new int[] { }).SetName("Do nothing (no selection)");
+                yield return new TestCaseData(1, new[] { 0 }, new[] { 0 }, new[] { 0 }).SetName("Do nothing (1 item)");
+                yield return new TestCaseData(2, new[] { 1 }, new[] { 0, 1 }, new[] { 1 }).SetName("Do nothing (bottom item)");
+                yield return new TestCaseData(2, new[] { 0 }, new[] { 1, 0 }, new[] { 1 }).SetName("Move 1");
+                yield return new TestCaseData(3, new[] { 0, 2 }, new[] { 1, 0, 2 }, new[] { 1, 2 }).SetName("Move 1/2");
+                yield return new TestCaseData(3, new[] { 0, 1 }, new[] { 2, 0, 1 }, new[] { 1, 2 }).SetName("Move 2/2");
+                yield return new TestCaseData(3, new[] { 1, 2 }, new[] { 0, 1, 2 }, new[] { 1, 2 }).SetName("Move none (bottom 2)");
+                yield return new TestCaseData(3, new[] { 0, 1, 2 }, new[] { 0, 1, 2 }, new[] { 0, 1, 2 }).SetName("Move none (all 3)");
             }
         }
 
@@ -79,7 +76,7 @@ namespace NAPS2.Tests.Unit
         public void MoveDown_Cases_NewSelectionCorrect(int items, int[] selection, int[] expectedItems, int[] expectedSelection)
         {
             AddImages(items);
-            var newSelection = imageList.MoveDown(selection);
+            IEnumerable<int> newSelection = imageList.MoveDown(selection);
             CollectionAssert.AreEquivalent(expectedSelection, newSelection, "Selection not correct");
         }
 
@@ -96,14 +93,14 @@ namespace NAPS2.Tests.Unit
             get
             {
                 yield return new TestCaseData(0, new int[] { }, new int[] { }, new int[] { }).SetName("Do nothing (no items)");
-                yield return new TestCaseData(1, new int[] { }, new int[] { 0 }, new int[] { }).SetName("Do nothing (no selection)");
-                yield return new TestCaseData(1, new int[] { 0 }, new int[] { 0 }, new int[] { 0 }).SetName("Do nothing (1 item)");
-                yield return new TestCaseData(2, new int[] { 1 }, new int[] { 1, 0 }, new int[] { 0 }).SetName("Move 1");
-                yield return new TestCaseData(2, new int[] { 0 }, new int[] { 0, 1 }, new int[] { 0 }).SetName("Do nothing (top item)");
-                yield return new TestCaseData(3, new int[] { 0, 2 }, new int[] { 0, 2, 1 }, new int[] { 0, 1 }).SetName("Move 1/2");
-                yield return new TestCaseData(3, new int[] { 0, 1 }, new int[] { 0, 1, 2 }, new int[] { 0, 1 }).SetName("Move none (bottom 2)");
-                yield return new TestCaseData(3, new int[] { 1, 2 }, new int[] { 1, 2, 0 }, new int[] { 0, 1 }).SetName("Move 2/2");
-                yield return new TestCaseData(3, new int[] { 0, 1, 2 }, new int[] { 0, 1, 2 }, new int[] { 0, 1, 2 }).SetName("Move none (all 3)");
+                yield return new TestCaseData(1, new int[] { }, new[] { 0 }, new int[] { }).SetName("Do nothing (no selection)");
+                yield return new TestCaseData(1, new[] { 0 }, new[] { 0 }, new[] { 0 }).SetName("Do nothing (1 item)");
+                yield return new TestCaseData(2, new[] { 1 }, new[] { 1, 0 }, new[] { 0 }).SetName("Move 1");
+                yield return new TestCaseData(2, new[] { 0 }, new[] { 0, 1 }, new[] { 0 }).SetName("Do nothing (top item)");
+                yield return new TestCaseData(3, new[] { 0, 2 }, new[] { 0, 2, 1 }, new[] { 0, 1 }).SetName("Move 1/2");
+                yield return new TestCaseData(3, new[] { 0, 1 }, new[] { 0, 1, 2 }, new[] { 0, 1 }).SetName("Move none (bottom 2)");
+                yield return new TestCaseData(3, new[] { 1, 2 }, new[] { 1, 2, 0 }, new[] { 0, 1 }).SetName("Move 2/2");
+                yield return new TestCaseData(3, new[] { 0, 1, 2 }, new[] { 0, 1, 2 }, new[] { 0, 1, 2 }).SetName("Move none (all 3)");
             }
         }
 
@@ -111,7 +108,7 @@ namespace NAPS2.Tests.Unit
         public void MoveUp_Cases_NewSelectionCorrect(int items, int[] selection, int[] expectedItems, int[] expectedSelection)
         {
             AddImages(items);
-            var newSelection = imageList.MoveUp(selection);
+            IEnumerable<int> newSelection = imageList.MoveUp(selection);
             CollectionAssert.AreEquivalent(expectedSelection, newSelection, "Selection not correct");
         }
 
@@ -129,10 +126,10 @@ namespace NAPS2.Tests.Unit
             {
                 yield return new TestCaseData(0, new int[] { }).SetName("Do nothing (no items)");
                 yield return new TestCaseData(1, new int[] { }).SetName("Do nothing (no selection)");
-                yield return new TestCaseData(1, new int[] { 0 }).SetName("Flip 1/1");
-                yield return new TestCaseData(2, new int[] { 0 }).SetName("Flip 1/2 (first)");
-                yield return new TestCaseData(2, new int[] { 1 }).SetName("Flip 1/2 (last)");
-                yield return new TestCaseData(2, new int[] { 0, 1 }).SetName("Flip 2/2");
+                yield return new TestCaseData(1, new[] { 0 }).SetName("Flip 1/1");
+                yield return new TestCaseData(2, new[] { 0 }).SetName("Flip 1/2 (first)");
+                yield return new TestCaseData(2, new[] { 1 }).SetName("Flip 1/2 (last)");
+                yield return new TestCaseData(2, new[] { 0, 1 }).SetName("Flip 2/2");
             }
         }
 
@@ -140,7 +137,7 @@ namespace NAPS2.Tests.Unit
         public void RotateFlip_Cases_NewSelectionCorrect(int items, int[] selection)
         {
             AddImages(items);
-            var newSelection = imageList.RotateFlip(selection, RotateFlipType.Rotate90FlipNone);
+            IEnumerable<int> newSelection = imageList.RotateFlip(selection, RotateFlipType.Rotate90FlipNone);
             CollectionAssert.AreEquivalent(selection, newSelection);
         }
 
@@ -160,7 +157,7 @@ namespace NAPS2.Tests.Unit
         {
             AddImages(items);
             imageList.RotateFlip(selection, RotateFlipType.Rotate90FlipNone);
-            var notSelected = Enumerable.Range(0, items).Except(selection);
+            IEnumerable<int> notSelected = Enumerable.Range(0, items).Except(selection);
             foreach (int i in notSelected)
             {
                 Assert.AreEqual(((ScannedImageStub)imageList.Images[i]).RotateFlipCalled, 0);
@@ -173,10 +170,10 @@ namespace NAPS2.Tests.Unit
             {
                 yield return new TestCaseData(0, new int[] { }).SetName("Do nothing (no items)");
                 yield return new TestCaseData(1, new int[] { }).SetName("Do nothing (no selection)");
-                yield return new TestCaseData(1, new int[] { 0 }).SetName("Delete 1/1");
-                yield return new TestCaseData(2, new int[] { 0 }).SetName("Delete 1/2 (first)");
-                yield return new TestCaseData(2, new int[] { 1 }).SetName("Delete 1/2 (last)");
-                yield return new TestCaseData(2, new int[] { 0, 1 }).SetName("Delete 2/2");
+                yield return new TestCaseData(1, new[] { 0 }).SetName("Delete 1/1");
+                yield return new TestCaseData(2, new[] { 0 }).SetName("Delete 1/2 (first)");
+                yield return new TestCaseData(2, new[] { 1 }).SetName("Delete 1/2 (last)");
+                yield return new TestCaseData(2, new[] { 0, 1 }).SetName("Delete 2/2");
             }
         }
 
@@ -184,7 +181,7 @@ namespace NAPS2.Tests.Unit
         public void Delete_Cases_DisposeCalled(int items, int[] selection)
         {
             AddImages(items);
-            var images = imageList.Images.ToList();
+            List<IScannedImage> images = imageList.Images.ToList();
             imageList.Delete(selection);
             foreach (int i in selection)
             {
@@ -196,9 +193,9 @@ namespace NAPS2.Tests.Unit
         public void Delete_Cases_ItemsCorrect(int items, int[] selection)
         {
             AddImages(items);
-            var images = imageList.Images.ToList();
+            List<IScannedImage> images = imageList.Images.ToList();
             imageList.Delete(selection);
-            var notSelected = Enumerable.Range(0, items).Except(selection);
+            IEnumerable<int> notSelected = Enumerable.Range(0, items).Except(selection);
             AssertItems(notSelected);
         }
 
@@ -206,9 +203,9 @@ namespace NAPS2.Tests.Unit
         public void Delete_Cases_DisposeNotCalled(int items, int[] selection)
         {
             AddImages(items);
-            var images = imageList.Images.ToList();
+            List<IScannedImage> images = imageList.Images.ToList();
             imageList.Delete(selection);
-            var notSelected = Enumerable.Range(0, items).Except(selection);
+            IEnumerable<int> notSelected = Enumerable.Range(0, items).Except(selection);
             foreach (int i in notSelected)
             {
                 Assert.False(((ScannedImageStub)images[i]).DisposeCalled);

@@ -17,11 +17,8 @@
     GNU General Public License for more details.
 */
 
-using NAPS2.Email;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-
 using Ninject;
 
 namespace NAPS2

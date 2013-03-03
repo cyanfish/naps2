@@ -19,10 +19,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using NAPS2.Scan;
 
 namespace NAPS2
@@ -36,10 +35,6 @@ namespace NAPS2
         private static readonly string OldProfilesPath = Path.Combine(Application.StartupPath, "profiles.xml");
 
         private List<ScanSettings> profiles;
-
-        public ProfileManager()
-        {
-        }
 
         public List<ScanSettings> Profiles
         {
@@ -86,7 +81,7 @@ namespace NAPS2
             }
             using (Stream strFile = File.Open(ProfilesPath, FileMode.Create))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
+                var serializer = new XmlSerializer(typeof(List<ScanSettings>));
                 serializer.Serialize(strFile, profiles);
             }
         }
@@ -100,7 +95,7 @@ namespace NAPS2
                 {
                     using (Stream strFile = File.OpenRead(profilesPath))
                     {
-                        XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
+                        var serializer = new XmlSerializer(typeof(List<ScanSettings>));
                         profiles = (List<ScanSettings>)serializer.Deserialize(strFile);
                         return true;
                     }

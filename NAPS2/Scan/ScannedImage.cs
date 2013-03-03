@@ -17,56 +17,23 @@
     GNU General Public License for more details.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing.Imaging;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 
 namespace NAPS2.Scan
 {
     public class ScannedImage : IScannedImage
     {
-        private ScanBitDepth bitDepth;
-        private ImageFormat imageFormat;
+        private const int thumbnailWidth = 128;
+        private const int thumbnailHeight = 128;
+        private readonly ScanBitDepth bitDepth;
+        private readonly ImageFormat imageFormat;
 
         private Bitmap baseImage;
         private MemoryStream baseImageEncoded;
         private Bitmap thumbnail;
-
-        private const int thumbnailWidth = 128;
-        private const int thumbnailHeight = 128;
-
-        private static Bitmap resizeBitmap(Bitmap b, int newWidth, int newHeight)
-        {
-            Bitmap result = new Bitmap(newWidth, newHeight);
-            Graphics g = Graphics.FromImage((Image)result);
-
-            int left, top, width, height;
-
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            if (b.Width > b.Height)
-            {
-                width = newWidth;
-                height = (int)(b.Height * ((double)newWidth / (double)b.Width));
-                left = 0;
-                top = (newHeight - height) / 2;
-            }
-            else
-            {
-                width = (int)(b.Width * ((double)newHeight / (double)b.Height));
-                height = newHeight;
-                left = (newWidth - width) / 2;
-                top = 0;
-            }
-            g.DrawImage(b, left, top, width, height);
-            g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
-
-            g.Dispose();
-
-            return result;
-        }
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, ImageFormat imageFormat)
         {
@@ -76,7 +43,7 @@ namespace NAPS2.Scan
 
             if (bitDepth == ScanBitDepth.BLACKWHITE)
             {
-                SetBaseImage(ImageHelper.CopyToBpp((Bitmap)img, 1));
+                SetBaseImage(ImageHelper.CopyToBpp(img, 1));
             }
             else
             {
@@ -104,23 +71,6 @@ namespace NAPS2.Scan
             }
         }
 
-        private void SetBaseImage(Bitmap bitmap)
-        {
-            if (bitDepth == ScanBitDepth.BLACKWHITE)
-            {
-                baseImage = bitmap;
-            }
-            else
-            {
-                if (baseImageEncoded != null)
-                {
-                    baseImageEncoded.Dispose();
-                }
-                baseImageEncoded = new MemoryStream();
-                bitmap.Save(baseImageEncoded, imageFormat);
-            }
-        }
-
         public void Dispose()
         {
             if (baseImage != null)
@@ -136,11 +86,58 @@ namespace NAPS2.Scan
 
         public void RotateFlip(RotateFlipType rotateFlipType)
         {
-            using (var img = GetImage())
+            using (Bitmap img = GetImage())
             {
                 img.RotateFlip(rotateFlipType);
                 thumbnail = resizeBitmap(img, thumbnailWidth, thumbnailHeight);
                 SetBaseImage(img);
+            }
+        }
+
+        private static Bitmap resizeBitmap(Bitmap b, int newWidth, int newHeight)
+        {
+            var result = new Bitmap(newWidth, newHeight);
+            Graphics g = Graphics.FromImage(result);
+
+            int left, top, width, height;
+
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            if (b.Width > b.Height)
+            {
+                width = newWidth;
+                height = (int)(b.Height * (newWidth / (double)b.Width));
+                left = 0;
+                top = (newHeight - height) / 2;
+            }
+            else
+            {
+                width = (int)(b.Width * (newHeight / (double)b.Height));
+                height = newHeight;
+                left = (newWidth - width) / 2;
+                top = 0;
+            }
+            g.DrawImage(b, left, top, width, height);
+            g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
+
+            g.Dispose();
+
+            return result;
+        }
+
+        private void SetBaseImage(Bitmap bitmap)
+        {
+            if (bitDepth == ScanBitDepth.BLACKWHITE)
+            {
+                baseImage = bitmap;
+            }
+            else
+            {
+                if (baseImageEncoded != null)
+                {
+                    baseImageEncoded.Dispose();
+                }
+                baseImageEncoded = new MemoryStream();
+                bitmap.Save(baseImageEncoded, imageFormat);
             }
         }
     }

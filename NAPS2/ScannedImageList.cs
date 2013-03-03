@@ -17,12 +17,10 @@
     GNU General Public License for more details.
 */
 
-using NAPS2.Scan;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using NAPS2.Scan;
 
 namespace NAPS2
 {
@@ -45,7 +43,7 @@ namespace NAPS2
             {
                 if (i != lowerBound++)
                 {
-                    var img = Images[i];
+                    IScannedImage img = Images[i];
                     Images.RemoveAt(i);
                     Images.Insert(i - 1, img);
                     newSelection[j++] = i - 1;
@@ -67,7 +65,7 @@ namespace NAPS2
             {
                 if (i != upperBound--)
                 {
-                    var img = Images[i];
+                    IScannedImage img = Images[i];
                     Images.RemoveAt(i);
                     Images.Insert(i + 1, img);
                     newSelection[j++] = i + 1;
@@ -91,7 +89,7 @@ namespace NAPS2
 
         public void Delete(IEnumerable<int> selection)
         {
-            foreach (var img in Images.ElementsAt(selection))
+            foreach (IScannedImage img in Images.ElementsAt(selection))
             {
                 img.Dispose();
             }

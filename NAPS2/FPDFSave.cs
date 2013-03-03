@@ -17,18 +17,12 @@
     GNU General Public License for more details.
 */
 
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-
 using NAPS2.Pdf;
 using NAPS2.Scan;
 
@@ -42,7 +36,7 @@ namespace NAPS2
         {
             InitializeComponent();
             this.pdfExporter = pdfExporter;
-            this.Shown += FPDFSave_Shown;
+            Shown += FPDFSave_Shown;
         }
 
         public string Filename { get; set; }
@@ -51,19 +45,19 @@ namespace NAPS2
 
         private void exportPDFProcess()
         {
-            PdfInfo info = new PdfInfo
+            var info = new PdfInfo
             {
                 Title = "Scanned Image",
                 Subject = "Scanned Image",
                 Author = "NAPS2"
             };
-            var imgs = Images.Select(x => (Image)x.GetImage()).ToList();
+            List<Image> imgs = Images.Select(x => (Image)x.GetImage()).ToList();
             pdfExporter.Export(Filename, imgs, info, num =>
             {
                 Invoke(new ThreadStart(() => SetStatus(num, imgs.Count)));
                 return true;
             });
-            Invoke(new ThreadStart(this.Close));
+            Invoke(new ThreadStart(Close));
         }
 
         void FPDFSave_Shown(object sender, EventArgs e)

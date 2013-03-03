@@ -17,14 +17,13 @@
     GNU General Public License for more details.
 */
 
-using NAPS2.Scan.Wia;
-using NAPS2.Scan.Twain;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
+using NAPS2.Scan.Twain;
+using NAPS2.Scan.Wia;
 
 namespace NAPS2.Scan.Stub
 {
@@ -32,12 +31,12 @@ namespace NAPS2.Scan.Stub
     {
         protected StubScanDriver(string driverName)
         {
-            this.DriverName = driverName;
+            DriverName = driverName;
         }
 
         public ScanSettings ScanSettings { get; set; }
 
-        public System.Windows.Forms.IWin32Window DialogParent { get; set; }
+        public IWin32Window DialogParent { get; set; }
 
         public ScanDevice PromptForDevice()
         {
@@ -46,7 +45,7 @@ namespace NAPS2.Scan.Stub
 
         public List<IScannedImage> Scan()
         {
-            Bitmap bitmap = new Bitmap(600, 800);
+            var bitmap = new Bitmap(600, 800);
             Graphics g = Graphics.FromImage(bitmap);
             g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
             g.DrawString(new Random().Next().ToString(), new Font("Times New Roman", 80), Brushes.Black, 0, 350);

@@ -18,11 +18,7 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace NAPS2
@@ -31,22 +27,22 @@ namespace NAPS2
     {
         private int iconID;
 
-        public int IconID
-        {
-            get { return iconID; }
-            set { iconID = value; }
-        }
-
         public FChooseIcon()
         {
             InitializeComponent();
             iconID = -1;
         }
 
+        public int IconID
+        {
+            get { return iconID; }
+            set { iconID = value; }
+        }
+
         private void listView1_ItemActivate(object sender, EventArgs e)
         {
             iconID = iconList.SelectedItems[0].Index;
-            this.Close();
+            Close();
         }
 
         private void FChooseIcon_Load(object sender, EventArgs e)
