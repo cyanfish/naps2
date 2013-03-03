@@ -280,25 +280,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gfx\acroread.png" />
-    <Content Include="gfx\down.png" />
-    <Content Include="gfx\exit.png" />
-    <Content Include="gfx\icons.ico" />
-    <Content Include="gfx\icons.png" />
-    <Content Include="gfx\images.png" />
-    <Content Include="gfx\info.png" />
-    <Content Include="gfx\kbackgammon_engine.ico" />
-    <Content Include="gfx\pdf_email.png" />
-    <Content Include="gfx\rleft.png" />
-    <Content Include="gfx\rright.png" />
-    <Content Include="gfx\scanner-app.ico" />
+    <Content Include="Resources\scanner-app.ico" />
     <Content Include="Resources\scanner-large.png" />
     <Content Include="Resources\scanner.ico" />
     <Content Include="Resources\scanner.png" />
-    <Content Include="gfx\up.png" />
-    <Content Include="gfx\viewmag+.png" />
-    <Content Include="gfx\viewmag-.png" />
-    <Content Include="gfx\window_fullscreen.png" />
     <Content Include="lib\Interop.WIA.dll" />
     <Content Include="lib\PdfSharp.dll" />
     <None Include="Resources\information.png" />
