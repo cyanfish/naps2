@@ -47,7 +47,7 @@ namespace NAPS2
         private void FChooseProfile_Load(object sender, EventArgs e)
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
-            settings = CSettings.LoadProfiles();
+            settings = Settings.LoadProfiles();
             foreach (ScanSettings profile in settings)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);

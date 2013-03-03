@@ -62,7 +62,7 @@ namespace NAPS2
             {
                 this.profiles.Add(fedit.ScanSettings);
                 loadList();
-                CSettings.SaveProfiles(profiles);
+                Settings.SaveProfiles(profiles);
             }
         }
 
@@ -78,7 +78,7 @@ namespace NAPS2
                 {
                     loadList();
                     lvProfiles.SelectedIndices.Add(profileIndex);
-                    CSettings.SaveProfiles(profiles);
+                    Settings.SaveProfiles(profiles);
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace NAPS2
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
-            this.profiles = CSettings.LoadProfiles();
+            this.profiles = Settings.LoadProfiles();
             loadList();
         }
 
@@ -106,7 +106,7 @@ namespace NAPS2
                 {
                     profiles.RemoveAt(lvProfiles.SelectedItems[0].Index);
                     loadList();
-                    CSettings.SaveProfiles(profiles);
+                    Settings.SaveProfiles(profiles);
                     lvProfiles_SelectedIndexChanged(null, null);
                 }
             }

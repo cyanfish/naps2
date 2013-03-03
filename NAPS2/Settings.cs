@@ -27,17 +27,19 @@ using NAPS2.Scan;
 
 namespace NAPS2
 {
-    class CSettings
+    public class Settings
     {
-        private const string PROFILES_FILE = "profiles2.xml";
+        private static readonly string ProfilesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
+        private static readonly string ProfilesFileName = "profiles.xml";
+        private static readonly string ProfilesPath = Path.Combine(ProfilesFolder, ProfilesFileName);
 
         public static List<ScanSettings> LoadProfiles()
         {
-            if (File.Exists(Application.StartupPath + "\\" + PROFILES_FILE))
+            if (File.Exists(ProfilesPath))
             {
                 try
                 {
-                    using (Stream strFile = File.OpenRead(Application.StartupPath + "\\" + PROFILES_FILE))
+                    using (Stream strFile = File.OpenRead(ProfilesPath))
                     {
                         XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
                         return (List<ScanSettings>)serializer.Deserialize(strFile);
@@ -50,7 +52,7 @@ namespace NAPS2
 
         public static void SaveProfiles(List<ScanSettings> profiles)
         {
-            using (Stream strFile = File.Open(Application.StartupPath + "\\" + PROFILES_FILE, FileMode.Create))
+            using (Stream strFile = File.Open(ProfilesPath, FileMode.Create))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
                 serializer.Serialize(strFile, profiles);

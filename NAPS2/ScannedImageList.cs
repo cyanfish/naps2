@@ -91,10 +91,11 @@ namespace NAPS2
 
         public void Delete(IEnumerable<int> selection)
         {
+            int offset = 0;
             foreach (int i in selection.OrderBy(x => x))
             {
-                Images[i].Dispose();
-                Images.RemoveAt(i);
+                Images[i - offset].Dispose();
+                Images.RemoveAt(i - offset++);
             }
         }
 

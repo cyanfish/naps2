@@ -232,7 +232,7 @@ namespace NAPS2
                     if (format == ImageFormat.Tiff)
                     {
                         var bitmaps = imageList.Images.Select(x => x.GetImage()).ToArray();
-                        CTiffHelper.SaveMultipage(bitmaps, sd.FileName);
+                        TiffHelper.SaveMultipage(bitmaps, sd.FileName);
                         foreach (Bitmap bitmap in bitmaps)
                         {
                             bitmap.Dispose();

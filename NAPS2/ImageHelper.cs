@@ -26,36 +26,36 @@ using System.Drawing.Imaging;
 
 namespace NAPS2
 {
-    class CImageHelper
+    public class ImageHelper
     {
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        public static extern bool DeleteObject(IntPtr hObject);
+        private static extern bool DeleteObject(IntPtr hObject);
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern IntPtr GetDC(IntPtr hwnd);
+        private static extern IntPtr GetDC(IntPtr hwnd);
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        public static extern IntPtr CreateCompatibleDC(IntPtr hdc);
+        private static extern IntPtr CreateCompatibleDC(IntPtr hdc);
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern int ReleaseDC(IntPtr hwnd, IntPtr hdc);
+        private static extern int ReleaseDC(IntPtr hwnd, IntPtr hdc);
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        public static extern int DeleteDC(IntPtr hdc);
+        private static extern int DeleteDC(IntPtr hdc);
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        public static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
+        private static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        public static extern int BitBlt(IntPtr hdcDst, int xDst, int yDst, int w, int h, IntPtr hdcSrc, int xSrc, int ySrc, int rop);
-        static int SRCCOPY = 0x00CC0020;
+        private static extern int BitBlt(IntPtr hdcDst, int xDst, int yDst, int w, int h, IntPtr hdcSrc, int xSrc, int ySrc, int rop);
+        private static int SRCCOPY = 0x00CC0020;
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        static extern IntPtr CreateDIBSection(IntPtr hdc, ref BITMAPINFO bmi, uint Usage, out IntPtr bits, IntPtr hSection, uint dwOffset);
-        static uint BI_RGB = 0;
-        static uint DIB_RGB_COLORS = 0;
+        private static extern IntPtr CreateDIBSection(IntPtr hdc, ref BITMAPINFO bmi, uint Usage, out IntPtr bits, IntPtr hSection, uint dwOffset);
+        private static uint BI_RGB = 0;
+        private static uint DIB_RGB_COLORS = 0;
         [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-        public struct BITMAPINFO
+        private struct BITMAPINFO
         {
             public uint biSize;
             public int biWidth, biHeight;
@@ -67,7 +67,7 @@ namespace NAPS2
             public uint[] cols;
         }
 
-        static uint MAKERGB(int r, int g, int b)
+        private static uint MAKERGB(int r, int g, int b)
         {
             return ((uint)(b & 255)) | ((uint)((r & 255) << 8)) | ((uint)((g & 255) << 16));
         }

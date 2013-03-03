@@ -27,7 +27,7 @@ namespace NAPS2
 {
 	public class FViewer : Form
 	{
-		private TiffViewerCtl.UTiffViewerCtl tiffViewer1;
+		private TiffViewerCtl.TiffViewerCtl tiffViewer1;
 		private System.ComponentModel.Container components = null;
 
 		public FViewer(Image obrazek)
@@ -61,7 +61,7 @@ namespace NAPS2
 		private void InitializeComponent()
 		{
 			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(FViewer));
-			this.tiffViewer1 = new TiffViewerCtl.UTiffViewerCtl();
+			this.tiffViewer1 = new TiffViewerCtl.TiffViewerCtl();
 			this.SuspendLayout();
 			// 
 			// tiffViewer1

@@ -59,13 +59,12 @@
     <Compile Include="Base\BasePdfExporterTests.cs" />
     <Compile Include="Integration\PdfSharpExporterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\ScannedImageListTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Unit\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\NAPS2\NAPS2.csproj">
       <Project>{eac4a133-93be-4400-bfa9-ceb1615693c4}</Project>

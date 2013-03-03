@@ -86,8 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CImageHelper.cs" />
-    <Compile Include="CScanSettings.cs" />
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -129,8 +128,8 @@
     <Compile Include="Scan\IScannedImage.cs" />
     <Compile Include="Email\IEmailer.cs" />
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
-    <Compile Include="CSettings.cs" />
-    <Compile Include="CTiffHelper.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="TiffHelper.cs" />
     <Compile Include="FChooseIcon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,12 +233,12 @@
       <SubType>Designer</SubType>
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UTiffViewer.resx">
-      <DependentUpon>UTiffViewer.cs</DependentUpon>
+    <EmbeddedResource Include="TiffViewer.resx">
+      <DependentUpon>TiffViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UTiffViewerCtl.resx">
-      <DependentUpon>UTiffViewerCtl.cs</DependentUpon>
+    <EmbeddedResource Include="TiffViewerCtl.resx">
+      <DependentUpon>TiffViewerCtl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -263,10 +262,10 @@
     <Compile Include="ThumbnailList.Designer.cs">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UTiffViewer.cs">
+    <Compile Include="TiffViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UTiffViewerCtl.cs">
+    <Compile Include="TiffViewerCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -293,9 +292,9 @@
     <Content Include="gfx\rleft.png" />
     <Content Include="gfx\rright.png" />
     <Content Include="gfx\scanner-app.ico" />
-    <Content Include="gfx\scanner-large.png" />
-    <Content Include="gfx\scanner.ico" />
-    <Content Include="gfx\scanner.png" />
+    <Content Include="Resources\scanner-large.png" />
+    <Content Include="Resources\scanner.ico" />
+    <Content Include="Resources\scanner.png" />
     <Content Include="gfx\up.png" />
     <Content Include="gfx\viewmag+.png" />
     <Content Include="gfx\viewmag-.png" />
@@ -319,6 +318,7 @@
     <None Include="Resources\arrow_down.png" />
     <None Include="Resources\blueprints.png" />
     <None Include="Resources\arrow_switch.png" />
+    <None Include="Resources\zoom_actual.png" />
     <Content Include="scanner-app.ico" />
     <Content Include="Setup\license.txt" />
     <Content Include="Setup\setup.iss" />

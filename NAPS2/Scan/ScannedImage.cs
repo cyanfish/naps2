@@ -76,7 +76,7 @@ namespace NAPS2.Scan
 
             if (bitDepth == ScanBitDepth.BLACKWHITE)
             {
-                SetBaseImage(CImageHelper.CopyToBpp((Bitmap)img, 1));
+                SetBaseImage(ImageHelper.CopyToBpp((Bitmap)img, 1));
             }
             else
             {

@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2
 {
-    class CTiffHelper
+    class TiffHelper
     {
         public static bool SaveMultipage(Image[] bmp, string location)
         {
