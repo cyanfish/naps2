@@ -161,10 +161,12 @@ namespace NAPS2
         {
             if (imageList.Images.Count > 0)
             {
-                var sd = new SaveFileDialog();
-                sd.OverwritePrompt = true;
-                sd.AddExtension = true;
-                sd.Filter = "PDF document (*.pdf)|*.pdf";
+                var sd = new SaveFileDialog
+                    {
+                        OverwritePrompt = true,
+                        AddExtension = true,
+                        Filter = "PDF document (*.pdf)|*.pdf"
+                    };
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
@@ -177,18 +179,20 @@ namespace NAPS2
         {
             if (imageList.Images.Count > 0)
             {
-                var sd = new SaveFileDialog();
-                sd.OverwritePrompt = true;
-                sd.AddExtension = true;
-                sd.Filter = "Bitmap Files (*.bmp)|*.bmp" +
-                "|Enhanced Windows MetaFile (*.emf)|*.emf" +
-                "|Exchangeable Image File (*.exif)|*.exif" +
-                "|GIF File (*.gif)|*.gif" +
-                "|JPEG File (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
-                "|PNG File (*.png)|*.png" +
-                "|TIFF File (*.tiff, *.tif)|*.tiff;*.tif";
-                sd.DefaultExt = "jpg";
-                sd.FilterIndex = 5;
+                var sd = new SaveFileDialog
+                    {
+                        OverwritePrompt = true,
+                        AddExtension = true,
+                        Filter = "Bitmap Files (*.bmp)|*.bmp" +
+                                 "|Enhanced Windows MetaFile (*.emf)|*.emf" +
+                                 "|Exchangeable Image File (*.exif)|*.exif" +
+                                 "|GIF File (*.gif)|*.gif" +
+                                 "|JPEG File (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
+                                 "|PNG File (*.png)|*.png" +
+                                 "|TIFF File (*.tiff, *.tif)|*.tiff;*.tif",
+                        DefaultExt = "jpg",
+                        FilterIndex = 5
+                    };
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
@@ -207,9 +211,9 @@ namespace NAPS2
 
                     if (format == ImageFormat.Tiff)
                     {
-                        Bitmap[] bitmaps = imageList.Images.Select(x => x.GetImage()).ToArray();
+                        Image[] bitmaps = imageList.Images.Select(x => x.GetImage()).ToArray();
                         TiffHelper.SaveMultipage(bitmaps, sd.FileName);
-                        foreach (Bitmap bitmap in bitmaps)
+                        foreach (Image bitmap in bitmaps)
                         {
                             bitmap.Dispose();
                         }

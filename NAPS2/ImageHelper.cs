@@ -18,7 +18,9 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2
@@ -87,16 +89,18 @@ namespace NAPS2
             // Step (2): create the monochrome bitmap.
             // "BitmapInfo" is an interop-struct which we define below.
             // In GDI terms, it's a BITMAPHEADERINFO followed by an array of two RGBQUADs
-            var bmi = new BitmapInfo();
-            bmi.biSize = 40; // the size of the BITMAPHEADERINFO struct
-            bmi.biWidth = w;
-            bmi.biHeight = h;
-            bmi.biPlanes = 1; // "planes" are confusing. We always use just 1. Read MSDN for more info.
-            bmi.biBitCount = (short)bpp; // ie. 1bpp or 8bpp
-            bmi.biCompression = BI_RGB; // ie. the pixels in our RGBQUAD table are stored as RGBs, not palette indexes
-            bmi.biSizeImage = (uint)(((w + 7) & 0xFFFFFFF8) * h / 8);
-            bmi.biXPelsPerMeter = 1000000; // not really important
-            bmi.biYPelsPerMeter = 1000000; // not really important
+            var bmi = new BitmapInfo
+                {
+                    biSize = 40, // the size of the BITMAPHEADERINFO struct
+                    biWidth = w,
+                    biHeight = h,
+                    biPlanes = 1, // "planes" are confusing. We always use just 1. Read MSDN for more info.
+                    biBitCount = (short)bpp, // ie. 1bpp or 8bpp
+                    biCompression = BI_RGB, // ie. the pixels in our RGBQUAD table are stored as RGBs, not palette indexes
+                    biSizeImage = (uint)(((w + 7) & 0xFFFFFFF8) * h / 8),
+                    biXPelsPerMeter = 1000000, // not really important
+                    biYPelsPerMeter = 1000000 // not really important
+                };
             // Now for the colour table.
             uint ncols = (uint)1 << bpp; // 2 colours for 1bpp; 256 colours for 8bpp
             bmi.biClrUsed = ncols;

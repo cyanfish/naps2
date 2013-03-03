@@ -17,17 +17,20 @@
     GNU General Public License for more details.
 */
 
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 
 namespace NAPS2.Scan
 {
     public class ScannedImage : IScannedImage
     {
-        private const int thumbnailWidth = 128;
-        private const int thumbnailHeight = 128;
+        private const int THUMBNAIL_WIDTH = 128;
+        private const int THUMBNAIL_HEIGHT = 128;
         private readonly ScanBitDepth bitDepth;
         private readonly ImageFormat imageFormat;
 
@@ -39,16 +42,9 @@ namespace NAPS2.Scan
         {
             this.bitDepth = bitDepth;
             this.imageFormat = imageFormat;
-            thumbnail = resizeBitmap(img, thumbnailWidth, thumbnailHeight);
+            thumbnail = ResizeBitmap(img, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
 
-            if (bitDepth == ScanBitDepth.BLACKWHITE)
-            {
-                SetBaseImage(ImageHelper.CopyToBpp(img, 1));
-            }
-            else
-            {
-                SetBaseImage(img);
-            }
+            SetBaseImage(bitDepth == ScanBitDepth.BlackWhite ? ImageHelper.CopyToBpp(img, 1) : img);
         }
 
         public Bitmap Thumbnail
@@ -61,7 +57,7 @@ namespace NAPS2.Scan
 
         public Bitmap GetImage()
         {
-            if (bitDepth == ScanBitDepth.BLACKWHITE)
+            if (bitDepth == ScanBitDepth.BlackWhite)
             {
                 return baseImage;
             }
@@ -89,12 +85,12 @@ namespace NAPS2.Scan
             using (Bitmap img = GetImage())
             {
                 img.RotateFlip(rotateFlipType);
-                thumbnail = resizeBitmap(img, thumbnailWidth, thumbnailHeight);
+                thumbnail = ResizeBitmap(img, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
                 SetBaseImage(img);
             }
         }
 
-        private static Bitmap resizeBitmap(Bitmap b, int newWidth, int newHeight)
+        private static Bitmap ResizeBitmap(Bitmap b, int newWidth, int newHeight)
         {
             var result = new Bitmap(newWidth, newHeight);
             Graphics g = Graphics.FromImage(result);
@@ -126,7 +122,7 @@ namespace NAPS2.Scan
 
         private void SetBaseImage(Bitmap bitmap)
         {
-            if (bitDepth == ScanBitDepth.BLACKWHITE)
+            if (bitDepth == ScanBitDepth.BlackWhite)
             {
                 baseImage = bitmap;
             }

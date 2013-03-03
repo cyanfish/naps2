@@ -19,7 +19,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Scan.Twain
 {
@@ -73,8 +75,7 @@ namespace NAPS2.Scan.Twain
 
         public List<IScannedImage> Scan()
         {
-            var fg = new FTwainGui(settings);
-            fg.TwainIface = tw;
+            var fg = new FTwainGui(settings) { TwainIface = tw };
             fg.ShowDialog(parent);
             return fg.Bitmaps;
         }

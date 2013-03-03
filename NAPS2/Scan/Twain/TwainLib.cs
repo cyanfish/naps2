@@ -19,6 +19,8 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -36,8 +38,8 @@ namespace NAPS2.Scan.Twain
 
     internal class Twain
     {
-        private const short CountryUSA = 1;
-        private const short LanguageUSA = 13;
+        private const short COUNTRY_USA = 1;
+        private const short LANGUAGE_USA = 13;
         private readonly TwIdentity appid;
         private readonly TwIdentity srcds;
         private TwEvent evtmsg;
@@ -46,22 +48,26 @@ namespace NAPS2.Scan.Twain
 
         public Twain()
         {
-            appid = new TwIdentity();
-            appid.Id = IntPtr.Zero;
-            appid.Version.MajorNum = 1;
-            appid.Version.MinorNum = 1;
-            appid.Version.Language = LanguageUSA;
-            appid.Version.Country = CountryUSA;
-            appid.Version.Info = "Hack 1";
-            appid.ProtocolMajor = TwProtocol.Major;
-            appid.ProtocolMinor = TwProtocol.Minor;
-            appid.SupportedGroups = (int)(TwDG.Image | TwDG.Control);
-            appid.Manufacturer = "NETMaster";
-            appid.ProductFamily = "Freeware";
-            appid.ProductName = "Hack";
+            appid = new TwIdentity
+                {
+                    Id = IntPtr.Zero,
+                    Version =
+                        {
+                            MajorNum = 1,
+                            MinorNum = 1,
+                            Language = LANGUAGE_USA,
+                            Country = COUNTRY_USA,
+                            Info = "Hack 1"
+                        },
+                    ProtocolMajor = TwProtocol.MAJOR,
+                    ProtocolMinor = TwProtocol.MINOR,
+                    SupportedGroups = (int)(TwDG.Image | TwDG.Control),
+                    Manufacturer = "NETMaster",
+                    ProductFamily = "Freeware",
+                    ProductName = "Hack"
+                };
 
-            srcds = new TwIdentity();
-            srcds.Id = IntPtr.Zero;
+            srcds = new TwIdentity { Id = IntPtr.Zero };
 
             evtmsg.EventPtr = Marshal.AllocHGlobal(Marshal.SizeOf(winmsg));
         }
@@ -86,18 +92,18 @@ namespace NAPS2.Scan.Twain
         public bool Init(IntPtr hwndp)
         {
             Finish();
-            TwRC rc = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwDAT.Parent, TwMSG.OpenDSM, ref hwndp);
-            if (rc == TwRC.Success)
+            TwReturnCode returnCode = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.OpenDSM, ref hwndp);
+            if (returnCode == TwReturnCode.Success)
             {
-                rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwDAT.Identity, TwMSG.GetFirst, srcds);
-                if (rc == TwRC.Success)
+                returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetFirst, srcds);
+                if (returnCode == TwReturnCode.Success)
                 {
                     hwnd = hwndp;
                     return true;
                 }
                 else
                 {
-                    rc = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwDAT.Parent, TwMSG.CloseDSM, ref hwndp);
+                    returnCode = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.CloseDSM, ref hwndp);
                     return false;
                 }
             }
@@ -106,7 +112,7 @@ namespace NAPS2.Scan.Twain
 
         public void Select()
         {
-            TwRC rc;
+            TwReturnCode returnCode;
             CloseSrc();
             if (appid.Id == IntPtr.Zero)
             {
@@ -114,7 +120,7 @@ namespace NAPS2.Scan.Twain
                 if (appid.Id == IntPtr.Zero)
                     return;
             }
-            rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwDAT.Identity, TwMSG.UserSelect, srcds);
+            returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.UserSelect, srcds);
         }
 
         public bool SelectByName(string name)
@@ -123,10 +129,10 @@ namespace NAPS2.Scan.Twain
             {
                 return true;
             }
-            var rc = TwRC.Success;
-            while (rc == TwRC.Success)
+            var rc = TwReturnCode.Success;
+            while (rc == TwReturnCode.Success)
             {
-                rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwDAT.Identity, TwMSG.GetNext, srcds);
+                rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetNext, srcds);
                 if (srcds.ProductName == name)
                 {
                     return true;
@@ -142,7 +148,7 @@ namespace NAPS2.Scan.Twain
 
         public void Acquire()
         {
-            TwRC rc;
+            TwReturnCode returnCode;
             CloseSrc();
             if (appid.Id == IntPtr.Zero)
             {
@@ -150,16 +156,16 @@ namespace NAPS2.Scan.Twain
                 if (appid.Id == IntPtr.Zero)
                     throw new InvalidOperationException("Init call falied");
             }
-            rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwDAT.Identity, TwMSG.OpenDS, srcds);
-            if (rc != TwRC.Success)
+            returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.OpenDS, srcds);
+            if (returnCode != TwReturnCode.Success)
                 throw new InvalidOperationException("DSMident call falied");
 
             var guif = new TwUserInterface();
             guif.ShowUI = 1;
             guif.ModalUI = 1;
             guif.ParentHand = hwnd;
-            rc = DSuserif(appid, srcds, TwDG.Control, TwDAT.UserInterface, TwMSG.EnableDS, guif);
-            if (rc != TwRC.Success)
+            returnCode = DSuserif(appid, srcds, TwDG.Control, TwData.UserInterface, TwMessageCode.EnableDS, guif);
+            if (returnCode != TwReturnCode.Success)
             {
                 CloseSrc();
                 throw new InvalidOperationException("DSuserif call falied");
@@ -172,7 +178,7 @@ namespace NAPS2.Scan.Twain
             if (srcds.Id == IntPtr.Zero)
                 return pics;
 
-            TwRC rc;
+            TwReturnCode returnCode;
             IntPtr hbitmap = IntPtr.Zero;
             var pxfr = new TwPendingXfers();
 
@@ -182,22 +188,22 @@ namespace NAPS2.Scan.Twain
                 hbitmap = IntPtr.Zero;
 
                 var iinf = new TwImageInfo();
-                rc = DSiinf(appid, srcds, TwDG.Image, TwDAT.ImageInfo, TwMSG.Get, iinf);
-                if (rc != TwRC.Success)
+                returnCode = DSiinf(appid, srcds, TwDG.Image, TwData.ImageInfo, TwMessageCode.Get, iinf);
+                if (returnCode != TwReturnCode.Success)
                 {
                     CloseSrc();
                     return pics;
                 }
 
-                rc = DSixfer(appid, srcds, TwDG.Image, TwDAT.ImageNativeXfer, TwMSG.Get, ref hbitmap);
-                if (rc != TwRC.XferDone)
+                returnCode = DSixfer(appid, srcds, TwDG.Image, TwData.ImageNativeXfer, TwMessageCode.Get, ref hbitmap);
+                if (returnCode != TwReturnCode.XferDone)
                 {
                     CloseSrc();
                     return pics;
                 }
 
-                rc = DSpxfer(appid, srcds, TwDG.Control, TwDAT.PendingXfers, TwMSG.EndXfer, pxfr);
-                if (rc != TwRC.Success)
+                returnCode = DSpxfer(appid, srcds, TwDG.Control, TwData.PendingXfers, TwMessageCode.EndXfer, pxfr);
+                if (returnCode != TwReturnCode.Success)
                 {
                     CloseSrc();
                     return pics;
@@ -207,7 +213,7 @@ namespace NAPS2.Scan.Twain
             }
             while (pxfr.Count != 0);
 
-            rc = DSpxfer(appid, srcds, TwDG.Control, TwDAT.PendingXfers, TwMSG.Reset, pxfr);
+            returnCode = DSpxfer(appid, srcds, TwDG.Control, TwData.PendingXfers, TwMessageCode.Reset, pxfr);
             return pics;
         }
 
@@ -228,16 +234,16 @@ namespace NAPS2.Scan.Twain
 
             Marshal.StructureToPtr(winmsg, evtmsg.EventPtr, false);
             evtmsg.Message = 0;
-            TwRC rc = DSevent(appid, srcds, TwDG.Control, TwDAT.Event, TwMSG.ProcessEvent, ref evtmsg);
-            if (rc == TwRC.NotDSEvent)
+            TwReturnCode returnCode = DSevent(appid, srcds, TwDG.Control, TwData.Event, TwMessageCode.ProcessEvent, ref evtmsg);
+            if (returnCode == TwReturnCode.NotDSEvent)
                 return TwainCommand.Not;
-            if (evtmsg.Message == (short)TwMSG.XFerReady)
+            if (evtmsg.Message == (short)TwMessageCode.XFerReady)
                 return TwainCommand.TransferReady;
-            if (evtmsg.Message == (short)TwMSG.CloseDSReq)
+            if (evtmsg.Message == (short)TwMessageCode.CloseDSReq)
                 return TwainCommand.CloseRequest;
-            if (evtmsg.Message == (short)TwMSG.CloseDSOK)
+            if (evtmsg.Message == (short)TwMessageCode.CloseDSOK)
                 return TwainCommand.CloseOk;
-            if (evtmsg.Message == (short)TwMSG.DeviceEvent)
+            if (evtmsg.Message == (short)TwMessageCode.DeviceEvent)
                 return TwainCommand.DeviceEvent;
 
             return TwainCommand.Null;
@@ -245,55 +251,55 @@ namespace NAPS2.Scan.Twain
 
         public void CloseSrc()
         {
-            TwRC rc;
+            TwReturnCode returnCode;
             if (srcds.Id != IntPtr.Zero)
             {
                 var guif = new TwUserInterface();
-                rc = DSuserif(appid, srcds, TwDG.Control, TwDAT.UserInterface, TwMSG.DisableDS, guif);
-                rc = DSMident(appid, IntPtr.Zero, TwDG.Control, TwDAT.Identity, TwMSG.CloseDS, srcds);
+                returnCode = DSuserif(appid, srcds, TwDG.Control, TwData.UserInterface, TwMessageCode.DisableDS, guif);
+                returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.CloseDS, srcds);
             }
         }
 
         public void Finish()
         {
-            TwRC rc;
+            TwReturnCode returnCode;
             CloseSrc();
             if (appid.Id != IntPtr.Zero)
-                rc = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwDAT.Parent, TwMSG.CloseDSM, ref hwnd);
+                returnCode = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.CloseDSM, ref hwnd);
             appid.Id = IntPtr.Zero;
         }
 
         // ------ DSM entry point DAT_ variants:
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSMparent([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwDAT dat, TwMSG msg, ref IntPtr refptr);
+        private static extern TwReturnCode DSMparent([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, ref IntPtr refptr);
 
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSMident([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwDAT dat, TwMSG msg, [In, Out] TwIdentity idds);
+        private static extern TwReturnCode DSMident([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwIdentity idds);
 
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSMstatus([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwDAT dat, TwMSG msg, [In, Out] TwStatus dsmstat);
+        private static extern TwReturnCode DSMstatus([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwStatus dsmstat);
 
         // ------ DSM entry point DAT_ variants to DS:
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSuserif([In, Out] TwIdentity origin, [In, Out] TwIdentity dest, TwDG dg, TwDAT dat, TwMSG msg, TwUserInterface guif);
+        private static extern TwReturnCode DSuserif([In, Out] TwIdentity origin, [In, Out] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, TwUserInterface guif);
 
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSevent([In, Out] TwIdentity origin, [In, Out] TwIdentity dest, TwDG dg, TwDAT dat, TwMSG msg, ref TwEvent evt);
+        private static extern TwReturnCode DSevent([In, Out] TwIdentity origin, [In, Out] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, ref TwEvent evt);
 
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSstatus([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwDAT dat, TwMSG msg, [In, Out] TwStatus dsmstat);
+        private static extern TwReturnCode DSstatus([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwStatus dsmstat);
 
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DScap([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwDAT dat, TwMSG msg, [In, Out] TwCapability capa);
+        private static extern TwReturnCode DScap([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwCapability capa);
 
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSiinf([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwDAT dat, TwMSG msg, [In, Out] TwImageInfo imginf);
+        private static extern TwReturnCode DSiinf([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwImageInfo imginf);
 
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSixfer([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwDAT dat, TwMSG msg, ref IntPtr hbitmap);
+        private static extern TwReturnCode DSixfer([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, ref IntPtr hbitmap);
 
         [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwRC DSpxfer([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwDAT dat, TwMSG msg, [In, Out] TwPendingXfers pxfr);
+        private static extern TwReturnCode DSpxfer([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwPendingXfers pxfr);
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
         internal static extern IntPtr GlobalAlloc(int flags, int size);

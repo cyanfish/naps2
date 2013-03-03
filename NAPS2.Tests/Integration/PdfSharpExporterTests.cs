@@ -17,7 +17,11 @@
     GNU General Public License for more details.
 */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using NAPS2.Pdf;
+using NAPS2.Tests.Base;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Integration

@@ -17,6 +17,9 @@
     GNU General Public License for more details.
 */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using NAPS2.Email;
 using NAPS2.Pdf;
 using NAPS2.Scan;

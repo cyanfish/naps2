@@ -18,6 +18,8 @@
 */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Twain
@@ -25,8 +27,8 @@ namespace NAPS2.Scan.Twain
 
     internal class TwProtocol
     {									// TWON_PROTOCOL...
-        public const short Major = 1;
-        public const short Minor = 9;
+        public const short MAJOR = 1;
+        public const short MINOR = 9;
     }
 
     [Flags]
@@ -37,7 +39,7 @@ namespace NAPS2.Scan.Twain
         Audio = 0x0004
     }
 
-    internal enum TwDAT : short
+    internal enum TwData : short
     {									// DAT_....
         Null = 0x0000,
         Capability = 0x0001,
@@ -71,7 +73,7 @@ namespace NAPS2.Scan.Twain
         SetupFileXfer2 = 0x0301
     }
 
-    internal enum TwMSG : short
+    internal enum TwMessageCode : short
     {									// MSG_.....
         Null = 0x0000,
         Get = 0x0001,
@@ -121,7 +123,7 @@ namespace NAPS2.Scan.Twain
         PassThru = 0x0901
     }
 
-    internal enum TwRC : short
+    internal enum TwReturnCode : short
     {									// TWRC_....
         Success = 0x0000,
         Failure = 0x0001,
@@ -135,7 +137,7 @@ namespace NAPS2.Scan.Twain
         DataNotAvailable = 0x0009
     }
 
-    internal enum TwCC : short
+    internal enum TwConditionCode : short
     {									// TWCC_....
         Success = 0x0000,
         Bummer = 0x0001,
@@ -238,7 +240,7 @@ namespace NAPS2.Scan.Twain
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
     internal class TwStatus
     {									// TW_STATUS
-        public short ConditionCode;		// TwCC
+        public short ConditionCode;		// TwConditionCode
         public short Reserved;
     }
 

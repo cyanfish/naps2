@@ -19,7 +19,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Scan
 {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NAPS2
@@ -16,10 +17,7 @@ namespace NAPS2
 
         public static IEnumerable<T> ElementsAt<T>(this IList<T> list, IEnumerable<int> indices)
         {
-            foreach (int i in indices)
-            {
-                yield return list[i];
-            }
+            return indices.Select(i => list[i]);
         }
     }
 }

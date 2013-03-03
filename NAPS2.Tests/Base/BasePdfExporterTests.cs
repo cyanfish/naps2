@@ -21,14 +21,15 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using NAPS2.Pdf;
 using NUnit.Framework;
 
-namespace NAPS2.Tests
+namespace NAPS2.Tests.Base
 {
     public abstract class BasePdfExporterTests
     {
-        private readonly String pdfPath = "test/test.pdf";
+        private const String PDF_PATH = "test/test.pdf";
         private List<Image> images;
         private PdfInfo info;
         protected IPdfExporter pdfExporter;
@@ -54,9 +55,9 @@ namespace NAPS2.Tests
             {
                 Directory.CreateDirectory("test");
             }
-            if (File.Exists(pdfPath))
+            if (File.Exists(PDF_PATH))
             {
-                File.Delete(pdfPath);
+                File.Delete(PDF_PATH);
             }
         }
 
@@ -87,15 +88,15 @@ namespace NAPS2.Tests
         [Test]
         public void Export_Normal_CreatesFile()
         {
-            Assert.IsFalse(File.Exists(pdfPath), "Error setting up test (test file not deleted)");
-            pdfExporter.Export(pdfPath, images, info, num => true);
-            Assert.IsTrue(File.Exists(pdfPath));
+            Assert.IsFalse(File.Exists(PDF_PATH), "Error setting up test (test file not deleted)");
+            pdfExporter.Export(PDF_PATH, images, info, num => true);
+            Assert.IsTrue(File.Exists(PDF_PATH));
         }
 
         [Test]
         public void Export_Normal_ReturnsTrue()
         {
-            bool result = pdfExporter.Export(pdfPath, images, info, num => true);
+            bool result = pdfExporter.Export(PDF_PATH, images, info, num => true);
             Assert.IsTrue(result);
         }
 
@@ -103,7 +104,7 @@ namespace NAPS2.Tests
         public void Export_Progress_IsLinear()
         {
             int i = 0;
-            pdfExporter.Export(pdfPath, images, info, num =>
+            pdfExporter.Export(PDF_PATH, images, info, num =>
             {
                 Assert.AreEqual(++i, num);
                 return true;
@@ -115,7 +116,7 @@ namespace NAPS2.Tests
         public void Export_Cancel_DoesntContinue()
         {
             bool first = true;
-            pdfExporter.Export(pdfPath, images, info, num =>
+            pdfExporter.Export(PDF_PATH, images, info, num =>
             {
                 Assert.IsTrue(first);
                 first = false;
@@ -126,7 +127,7 @@ namespace NAPS2.Tests
         [Test]
         public void Export_Cancel_ReturnsFalse()
         {
-            bool result = pdfExporter.Export(pdfPath, images, info, num => false);
+            bool result = pdfExporter.Export(PDF_PATH, images, info, num => false);
             Assert.IsFalse(result);
         }
     }

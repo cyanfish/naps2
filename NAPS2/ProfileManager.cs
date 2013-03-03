@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using NAPS2.Scan;
@@ -28,8 +29,8 @@ namespace NAPS2
 {
     public class ProfileManager : IProfileManager
     {
+        private const string ProfilesFileName = "profiles.xml";
         private static readonly string ProfilesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
-        private static readonly string ProfilesFileName = "profiles.xml";
         private static readonly string ProfilesPath = Path.Combine(ProfilesFolder, ProfilesFileName);
 
         private static readonly string OldProfilesPath = Path.Combine(Application.StartupPath, "profiles.xml");
@@ -51,11 +52,11 @@ namespace NAPS2
         public void Load()
         {
             profiles = null;
-            TryLoadProfiles(ProfilesPath, out profiles);
+            TryLoadProfiles(ProfilesPath);
             if (profiles == null)
             {
                 // Try migrating from an older version
-                TryLoadProfiles(OldProfilesPath, out profiles);
+                TryLoadProfiles(OldProfilesPath);
                 if (profiles != null)
                 {
                     Save();
@@ -86,7 +87,7 @@ namespace NAPS2
             }
         }
 
-        private bool TryLoadProfiles(string profilesPath, out List<ScanSettings> profiles)
+        private void TryLoadProfiles(string profilesPath)
         {
             profiles = null;
             if (File.Exists(profilesPath))
@@ -97,12 +98,10 @@ namespace NAPS2
                     {
                         var serializer = new XmlSerializer(typeof(List<ScanSettings>));
                         profiles = (List<ScanSettings>)serializer.Deserialize(strFile);
-                        return true;
                     }
                 }
                 catch (Exception) { }
             }
-            return false;
         }
     }
 }

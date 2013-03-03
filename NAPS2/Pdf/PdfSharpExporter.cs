@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
@@ -30,8 +31,7 @@ namespace NAPS2.Pdf
     {
         public bool Export(string path, List<Image> images, PdfInfo info, Func<int, bool> progressCallback)
         {
-            var document = new PdfDocument();
-            document.Layout = PdfWriterLayout.Compact;
+            var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
             document.Info.Author = info.Author;
             document.Info.Creator = info.Creator;
             document.Info.Keywords = info.Keywords;

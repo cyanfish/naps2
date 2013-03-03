@@ -18,6 +18,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace NAPS2.Scan
 
         public ScanPageSize PageSize { get; set; }
 
-        public ScanDPI Resolution { get; set; }
+        public ScanDpi Resolution { get; set; }
 
         public ScanSource PaperSource { get; set; }
     }
@@ -46,57 +47,57 @@ namespace NAPS2.Scan
     public enum ScanSource
     {
         [Description("Glass")]
-        GLASS,
+        Glass,
         [Description("Feeder")]
-        FEEDER,
+        Feeder,
         [Description("Duplex")]
-        DUPLEX
+        Duplex
     }
 
     public enum ScanBitDepth
     {
         [Description("24-bit Color")]
-        C24BIT,
+        C24Bit,
         [Description("Grayscale")]
-        GRAYSCALE,
+        Grayscale,
         [Description("Black & White")]
-        BLACKWHITE
+        BlackWhite
     }
 
-    public enum ScanDPI
+    public enum ScanDpi
     {
         [Description("100 dpi")]
-        DPI100,
+        Dpi100,
         [Description("200 dpi")]
-        DPI200,
+        Dpi200,
         [Description("300 dpi")]
-        DPI300,
+        Dpi300,
         [Description("600 dpi")]
-        DPI600,
+        Dpi600,
         [Description("1200 dpi")]
-        DPI1200
+        Dpi1200
     }
 
     public enum ScanHorizontalAlign
     {
         [Description("Left")]
-        LEFT,
+        Left,
         [Description("Center")]
-        CENTER,
+        Center,
         [Description("Right")]
-        RIGHT
+        Right
     }
 
     public enum ScanScale
     {
         [Description("1:1")]
-        ONETOONE,
+        OneToOne,
         [Description("1:2")]
-        ONETOTWO,
+        OneToTwo,
         [Description("1:4")]
-        ONETOFOUR,
+        OneToFour,
         [Description("1:8")]
-        ONETOEIGHT
+        OneToEight
     }
 
     public enum ScanPageSize
@@ -108,9 +109,9 @@ namespace NAPS2.Scan
         [Description("A3 (297x420 mm)")]
         A3,
         [Description("US Legal (8.5x14 in)")]
-        LEGAL,
+        Legal,
         [Description("US Letter (8.5x11 in)")]
-        LETTER
+        Letter
     }
 
     public static class ScanEnumExtensions
@@ -125,9 +126,9 @@ namespace NAPS2.Scan
                     return new Size(8267, 11692);
                 case ScanPageSize.A3:
                     return new Size(11692, 16535);
-                case ScanPageSize.LEGAL:
+                case ScanPageSize.Legal:
                     return new Size(8500, 14000);
-                case ScanPageSize.LETTER:
+                case ScanPageSize.Letter:
                     return new Size(8500, 11000);
                 default:
                     throw new ArgumentException();

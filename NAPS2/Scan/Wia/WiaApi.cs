@@ -18,12 +18,14 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
+using NAPS2.Scan.Exceptions;
 using WIA;
 
 namespace NAPS2.Scan.Wia
@@ -75,15 +77,15 @@ namespace NAPS2.Scan.Wia
 
         public string DeviceName
         {
-            get { return getDeviceProperty(DEV_NAME); }
+            get { return GetDeviceProperty(DEV_NAME); }
         }
 
         public static ScanDevice SelectDeviceUI()
         {
-            var WIACommonDialog = new CommonDialogClass();
+            var wiaCommonDialog = new CommonDialogClass();
             try
             {
-                Device d = WIACommonDialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
+                Device d = wiaCommonDialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
                 if (d == null)
                 {
                     return null;
@@ -96,14 +98,11 @@ namespace NAPS2.Scan.Wia
                 {
                     throw new NoDevicesFoundException();
                 }
-                else if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                if ((uint)e.ErrorCode == ERROR_OFFLINE)
                 {
                     throw new DeviceOfflineException();
                 }
-                else
-                {
-                    throw new ScanDriverException(e);
-                }
+                throw new ScanDriverException(e);
             }
         }
 
@@ -115,13 +114,13 @@ namespace NAPS2.Scan.Wia
                 if (info.DeviceID == deviceID)
                 {
                     Device device = info.Connect();
-                    return getDeviceProperty(device, DEV_NAME);
+                    return GetDeviceProperty(device, DEV_NAME);
                 }
             }
             throw new DeviceNotFoundException();
         }
 
-        private static string getDeviceProperty(Device device, int propid)
+        private static string GetDeviceProperty(Device device, int propid)
         {
             foreach (Property property in device.Properties)
             {
@@ -133,12 +132,12 @@ namespace NAPS2.Scan.Wia
             return "";
         }
 
-        private string getDeviceProperty(int propid)
+        private string GetDeviceProperty(int propid)
         {
-            return getDeviceProperty(device, propid);
+            return GetDeviceProperty(device, propid);
         }
 
-        private int getDeviceIntProperty(int propid)
+        private int GetDeviceIntProperty(int propid)
         {
             foreach (Property property in device.Properties)
             {
@@ -150,7 +149,7 @@ namespace NAPS2.Scan.Wia
             return 0;
         }
 
-        private void setDeviceIntProperty(int value, int propid)
+        private void SetDeviceIntProperty(int value, int propid)
         {
             object objprop = value;
             foreach (Property property in device.Properties)
@@ -162,7 +161,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void setItemIntProperty(Item item, int value, int propid)
+        private void SetItemIntProperty(Item item, int value, int propid)
         {
             foreach (Property property in item.Properties)
             {
@@ -181,7 +180,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void setItemIntProperty(Item item, int value, int expectedMin, int expectedMax, int propid)
+        private void SetItemIntProperty(Item item, int value, int expectedMin, int expectedMax, int propid)
         {
             foreach (Property property in item.Properties)
             {
@@ -207,47 +206,47 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void setupItem(Item item)
+        private void SetupItem(Item item)
         {
             int resolution = 0;
             switch (settingsExt.BitDepth)
             {
-                case ScanBitDepth.GRAYSCALE:
-                    setItemIntProperty(item, 2, DATA_TYPE);
+                case ScanBitDepth.Grayscale:
+                    SetItemIntProperty(item, 2, DATA_TYPE);
                     break;
-                case ScanBitDepth.C24BIT:
-                    setItemIntProperty(item, 3, DATA_TYPE);
+                case ScanBitDepth.C24Bit:
+                    SetItemIntProperty(item, 3, DATA_TYPE);
                     break;
-                case ScanBitDepth.BLACKWHITE:
-                    setItemIntProperty(item, 0, DATA_TYPE);
+                case ScanBitDepth.BlackWhite:
+                    SetItemIntProperty(item, 0, DATA_TYPE);
                     break;
             }
 
             switch (settingsExt.Resolution)
             {
-                case ScanDPI.DPI100:
-                    setItemIntProperty(item, 100, VERTICAL_RESOLUTION);
-                    setItemIntProperty(item, 100, HORIZONTAL_RESOLUTION);
+                case ScanDpi.Dpi100:
+                    SetItemIntProperty(item, 100, VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 100, HORIZONTAL_RESOLUTION);
                     resolution = 100;
                     break;
-                case ScanDPI.DPI200:
-                    setItemIntProperty(item, 200, VERTICAL_RESOLUTION);
-                    setItemIntProperty(item, 200, HORIZONTAL_RESOLUTION);
+                case ScanDpi.Dpi200:
+                    SetItemIntProperty(item, 200, VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 200, HORIZONTAL_RESOLUTION);
                     resolution = 200;
                     break;
-                case ScanDPI.DPI300:
-                    setItemIntProperty(item, 300, VERTICAL_RESOLUTION);
-                    setItemIntProperty(item, 300, HORIZONTAL_RESOLUTION);
+                case ScanDpi.Dpi300:
+                    SetItemIntProperty(item, 300, VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 300, HORIZONTAL_RESOLUTION);
                     resolution = 300;
                     break;
-                case ScanDPI.DPI600:
-                    setItemIntProperty(item, 600, VERTICAL_RESOLUTION);
-                    setItemIntProperty(item, 600, HORIZONTAL_RESOLUTION);
+                case ScanDpi.Dpi600:
+                    SetItemIntProperty(item, 600, VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 600, HORIZONTAL_RESOLUTION);
                     resolution = 600;
                     break;
-                case ScanDPI.DPI1200:
-                    setItemIntProperty(item, 1200, VERTICAL_RESOLUTION);
-                    setItemIntProperty(item, 1200, HORIZONTAL_RESOLUTION);
+                case ScanDpi.Dpi1200:
+                    SetItemIntProperty(item, 1200, VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 1200, HORIZONTAL_RESOLUTION);
                     resolution = 120;
                     break;
             }
@@ -255,50 +254,41 @@ namespace NAPS2.Scan.Wia
             Size pageSize = settingsExt.PageSize.ToSize();
             int pageWidth = pageSize.Width * resolution / 1000;
             int pageHeight = pageSize.Height * resolution / 1000;
-            int horizontalSize = 0;
-            if (settingsExt.PaperSource == ScanSource.GLASS)
-                horizontalSize = getDeviceIntProperty(HORIZONTAL_BED_SIZE);
-            else
-                horizontalSize = getDeviceIntProperty(HORIZONTAL_FEED_SIZE);
+            int horizontalSize = GetDeviceIntProperty(settingsExt.PaperSource == ScanSource.Glass ? HORIZONTAL_BED_SIZE : HORIZONTAL_FEED_SIZE);
 
-            int verticalSize = 0;
-            if (settingsExt.PaperSource == ScanSource.GLASS)
-                verticalSize = getDeviceIntProperty(VERTICAL_BED_SIZE);
-            else
-                verticalSize = getDeviceIntProperty(VERTICAL_FEED_SIZE);
+            int verticalSize = GetDeviceIntProperty(settingsExt.PaperSource == ScanSource.Glass ? VERTICAL_BED_SIZE : VERTICAL_FEED_SIZE);
 
             int pagemaxwidth = horizontalSize * resolution / 1000;
             int pagemaxheight = verticalSize * resolution / 1000;
 
-
             int horizontalPos = 0;
-            if (settingsExt.PageAlign == ScanHorizontalAlign.CENTER)
+            if (settingsExt.PageAlign == ScanHorizontalAlign.Center)
                 horizontalPos = (pagemaxwidth - pageWidth) / 2;
-            else if (settingsExt.PageAlign == ScanHorizontalAlign.LEFT)
+            else if (settingsExt.PageAlign == ScanHorizontalAlign.Left)
                 horizontalPos = (pagemaxwidth - pageWidth);
 
             pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
             pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
 
-            setItemIntProperty(item, pageWidth, HORIZONTAL_EXTENT);
-            setItemIntProperty(item, pageHeight, VERTICAL_EXTENT);
-            setItemIntProperty(item, horizontalPos, HORIZONTAL_START);
-            setItemIntProperty(item, settingsExt.Contrast, -1000, 1000, CONTRAST);
-            setItemIntProperty(item, settingsExt.Brightness, -1000, 1000, BRIGHTNESS);
+            SetItemIntProperty(item, pageWidth, HORIZONTAL_EXTENT);
+            SetItemIntProperty(item, pageHeight, VERTICAL_EXTENT);
+            SetItemIntProperty(item, horizontalPos, HORIZONTAL_START);
+            SetItemIntProperty(item, settingsExt.Contrast, -1000, 1000, CONTRAST);
+            SetItemIntProperty(item, settingsExt.Brightness, -1000, 1000, BRIGHTNESS);
         }
 
-        private void setupDevice()
+        private void SetupDevice()
         {
             switch (settingsExt.PaperSource)
             {
-                case ScanSource.GLASS:
-                    setDeviceIntProperty(2, PAPER_SOURCE);
+                case ScanSource.Glass:
+                    SetDeviceIntProperty(2, PAPER_SOURCE);
                     break;
-                case ScanSource.FEEDER:
-                    setDeviceIntProperty(1, PAPER_SOURCE);
+                case ScanSource.Feeder:
+                    SetDeviceIntProperty(1, PAPER_SOURCE);
                     break;
-                case ScanSource.DUPLEX:
-                    setDeviceIntProperty(4, PAPER_SOURCE);
+                case ScanSource.Duplex:
+                    SetDeviceIntProperty(4, PAPER_SOURCE);
                     break;
             }
         }
@@ -331,15 +321,14 @@ namespace NAPS2.Scan.Wia
 
         public ScannedImage GetImage()
         {
-            var WIACommonDialog = new CommonDialogClass();
-            Image output;
+            var wiaCommonDialog = new CommonDialogClass();
 
             Items items = device.Items;
             if (settingsExt == null)
             {
                 try
                 {
-                    items = WIACommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent, WiaImageBias.MaximizeQuality, true, true, true);
+                    items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent, WiaImageBias.MaximizeQuality, true, true, true);
                 }
                 catch (COMException e)
                 {
@@ -349,13 +338,13 @@ namespace NAPS2.Scan.Wia
             }
             else
             {
-                setupDevice();
-                setupItem(items[1]);
+                SetupDevice();
+                SetupItem(items[1]);
             }
 
             try
             {
-                var file = (ImageFile)WIACommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
+                var file = (ImageFile)wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
                 if (file == null)
                 {
                     // User cancelled
@@ -363,44 +352,46 @@ namespace NAPS2.Scan.Wia
                 }
 
                 using (var stream = new MemoryStream((byte[])file.FileData.get_BinaryData()))
-                using (output = Image.FromStream(stream))
                 {
-
-                    double koef = 1;
-
-                    switch (settingsExt.AfterScanScale)
+                    using (Image output = Image.FromStream(stream))
                     {
-                        case ScanScale.ONETOONE:
-                            koef = 1;
-                            break;
-                        case ScanScale.ONETOTWO:
-                            koef = 2;
-                            break;
-                        case ScanScale.ONETOFOUR:
-                            koef = 4;
-                            break;
-                        case ScanScale.ONETOEIGHT:
-                            koef = 8;
-                            break;
-                    }
 
-                    double realWidth = output.Width / koef;
-                    double realHeight = output.Height / koef;
+                        double koef = 1;
 
-                    double horizontalRes = output.HorizontalResolution / koef;
-                    double verticalRes = output.VerticalResolution / koef;
+                        switch (settingsExt.AfterScanScale)
+                        {
+                            case ScanScale.OneToOne:
+                                koef = 1;
+                                break;
+                            case ScanScale.OneToTwo:
+                                koef = 2;
+                                break;
+                            case ScanScale.OneToFour:
+                                koef = 4;
+                                break;
+                            case ScanScale.OneToEight:
+                                koef = 8;
+                                break;
+                        }
 
-                    using (var result = new Bitmap((int)realWidth, (int)realHeight))
-                    using (Graphics g = Graphics.FromImage(result))
-                    {
-                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        g.DrawImage(output, 0, 0, (int)realWidth, (int)realHeight);
+                        double realWidth = output.Width / koef;
+                        double realHeight = output.Height / koef;
 
-                        result.SetResolution((float)horizontalRes, (float)verticalRes);
+                        double horizontalRes = output.HorizontalResolution / koef;
+                        double verticalRes = output.VerticalResolution / koef;
 
-                        ScanBitDepth bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24BIT;
-                        ImageFormat imageFormat = settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg;
-                        return new ScannedImage(result, bitDepth, imageFormat);
+                        using (var result = new Bitmap((int)realWidth, (int)realHeight))
+                        using (Graphics g = Graphics.FromImage(result))
+                        {
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.DrawImage(output, 0, 0, (int)realWidth, (int)realHeight);
+
+                            result.SetResolution((float)horizontalRes, (float)verticalRes);
+
+                            ScanBitDepth bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24Bit;
+                            ImageFormat imageFormat = settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg;
+                            return new ScannedImage(result, bitDepth, imageFormat);
+                        }
                     }
                 }
             }
@@ -412,8 +403,7 @@ namespace NAPS2.Scan.Wia
                 }
                 else
                 {
-                    MessageBox.Show("General scanning error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return null;
+                    throw new ScanDriverException();
                 }
             }
         }

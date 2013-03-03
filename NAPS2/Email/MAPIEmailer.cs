@@ -18,7 +18,9 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Email
@@ -33,14 +35,12 @@ namespace NAPS2.Email
             var session = new IntPtr(0);
             var winhandle = new IntPtr(0);
 
-            var msg = new MAPIMessage();
-            msg.subject = subject;
+            var msg = new MAPIMessage { subject = subject };
 
             int sizeofMapiDesc = Marshal.SizeOf(typeof(MAPIFileDesc));
             IntPtr pMapiDesc = Marshal.AllocHGlobal(sizeofMapiDesc);
 
-            var fileDesc = new MAPIFileDesc();
-            fileDesc.position = -1;
+            var fileDesc = new MAPIFileDesc { position = -1 };
             var ptr = (int)pMapiDesc;
 
             string strPath = attachmentFileName;

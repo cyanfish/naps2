@@ -22,6 +22,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NAPS2.Scan.Twain
@@ -81,14 +82,13 @@ namespace NAPS2.Scan.Twain
                         ArrayList pics = tw.TransferPictures();
                         EndingScan();
                         tw.CloseSrc();
-                        for (int i = 0; i < pics.Count; i++)
+                        foreach (IntPtr img in pics)
                         {
-                            var img = (IntPtr)pics[i];
                             int bitcount = 0;
 
-                            using (Bitmap bmp = DibUtils.BitmapFromDIB(img, out bitcount))
+                            using (Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount))
                             {
-                                bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BLACKWHITE : ScanBitDepth.C24BIT, settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg));
+                                bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg));
                             }
                         }
                         Close();

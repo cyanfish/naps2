@@ -18,7 +18,9 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Twain
@@ -35,26 +37,26 @@ namespace NAPS2.Scan.Twain
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
         internal static extern IntPtr GlobalFree(IntPtr handle);
-        
+
         //THIS METHOD SAVES THE CONTENTS OF THE DIB POINTER INTO A BITMAP OBJECT
-        public static Bitmap BitmapFromDIB(IntPtr pDIB, out int bitdepth)
+        public static Bitmap BitmapFromDib(IntPtr pDib, out int bitdepth)
         {
-            IntPtr dibhand = pDIB;
+            IntPtr dibhand = pDib;
             IntPtr bmpptr = GlobalLock(dibhand);
             IntPtr pixptr = GetPixelInfo(bmpptr);
             BitmapInfoHeader binfo = GetDibInfo(bmpptr);
             float resx = binfo.biXPelsPerMeter * 0.0254f;
             float resy = binfo.biYPelsPerMeter * 0.0254f;
-            var _scannedImage = new Bitmap(binfo.biWidth, binfo.biHeight);
-            Graphics scannedImageGraphics = Graphics.FromImage(_scannedImage);
+            var scannedImage = new Bitmap(binfo.biWidth, binfo.biHeight);
+            Graphics scannedImageGraphics = Graphics.FromImage(scannedImage);
             IntPtr hdc = scannedImageGraphics.GetHdc();
             SetDIBitsToDevice(hdc, 0, 0, binfo.biWidth, binfo.biHeight, 0, 0, 0, binfo.biHeight, pixptr, bmpptr, 0);
             scannedImageGraphics.ReleaseHdc(hdc);
             GlobalFree(dibhand);
             scannedImageGraphics.Dispose();
             bitdepth = binfo.biBitCount;
-            _scannedImage.SetResolution(resx, resy);
-            return _scannedImage;
+            scannedImage.SetResolution(resx, resy);
+            return scannedImage;
         }
 
         //THIS METHOD GETS THE POINTER TO THE BITMAP HEADER INFO

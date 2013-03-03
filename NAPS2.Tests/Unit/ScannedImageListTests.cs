@@ -17,6 +17,7 @@
     GNU General Public License for more details.
 */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -193,7 +194,6 @@ namespace NAPS2.Tests.Unit
         public void Delete_Cases_ItemsCorrect(int items, int[] selection)
         {
             AddImages(items);
-            List<IScannedImage> images = imageList.Images.ToList();
             imageList.Delete(selection);
             IEnumerable<int> notSelected = Enumerable.Range(0, items).Except(selection);
             AssertItems(notSelected);

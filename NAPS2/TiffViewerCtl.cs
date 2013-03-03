@@ -18,18 +18,20 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
-namespace TiffViewerCtl
+namespace NAPS2
 {
     public class TiffViewerCtl : UserControl
     {
         private readonly Container components = null;
         private Image image;
         private ToolStrip tStrip;
-        private TiffViewer.TiffViewer tiffviewer1;
+        private TiffViewer tiffviewer1;
         private ToolStripContainer toolStripContainer1;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
@@ -52,15 +54,7 @@ namespace TiffViewerCtl
             {
                 image = value;
                 tiffviewer1.Image = value;
-                if (value == null)
-                {
-                    tStrip.Enabled = false;
-
-                }
-                else
-                {
-                    tStrip.Enabled = true;
-                }
+                tStrip.Enabled = value != null;
                 AdjustZoom();
             }
         }
@@ -92,20 +86,20 @@ namespace TiffViewerCtl
                 double zoomX = containerWidth / tiffviewer1.ImageWidth * 100;
                 double zoomY = containerHeight / tiffviewer1.ImageHeight * 100;
                 tiffviewer1.Zoom = (int)Math.Min(zoomX, zoomY);
-                tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
+                tsZoom.Text = tiffviewer1.Zoom.ToString("G") + "%";
             }
         }
 
         private void tsZoomPlus_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom += 10;
-            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
+            tsZoom.Text = tiffviewer1.Zoom.ToString("G") + "%";
         }
 
         private void tsZoomOut_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom -= 10;
-            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
+            tsZoom.Text = tiffviewer1.Zoom.ToString("G") + "%";
         }
 
         private void tsStretch_Click(object sender, EventArgs e)
@@ -121,7 +115,7 @@ namespace TiffViewerCtl
         private void tsZoomActual_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom = 100;
-            tsZoom.Text = tiffviewer1.Zoom.ToString() + "%";
+            tsZoom.Text = tiffviewer1.Zoom.ToString("G") + "%";
         }
 
         #region Component Designer generated code
@@ -139,7 +133,7 @@ namespace TiffViewerCtl
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsZoom = new System.Windows.Forms.ToolStripLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.tiffviewer1 = new TiffViewer.TiffViewer();
+            this.tiffviewer1 = new TiffViewer();
             this.tsZoomActual = new System.Windows.Forms.ToolStripButton();
             this.tStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();

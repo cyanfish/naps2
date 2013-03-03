@@ -18,9 +18,11 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 
 namespace NAPS2
 {
@@ -32,7 +34,7 @@ namespace NAPS2
             {
                 try
                 {
-                    ImageCodecInfo codecInfo = getCodecForstring("TIFF");
+                    ImageCodecInfo codecInfo = GetCodecForString("TIFF");
 
                     if (bmp.Length == 1)
                     {
@@ -52,7 +54,7 @@ namespace NAPS2
                         Encoder compressionEncoder;
                         EncoderParameter SaveEncodeParam;
                         EncoderParameter CompressionEncodeParam;
-                        var EncoderParams = new EncoderParameters(2);
+                        var encoderParams = new EncoderParameters(2);
 
                         saveEncoder = Encoder.SaveFlag;
                         compressionEncoder = Encoder.Compression;
@@ -60,11 +62,11 @@ namespace NAPS2
                         // Save the first page (frame).
                         SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
                         CompressionEncodeParam = new EncoderParameter(compressionEncoder, (long)EncoderValue.CompressionLZW);
-                        EncoderParams.Param[0] = CompressionEncodeParam;
-                        EncoderParams.Param[1] = SaveEncodeParam;
+                        encoderParams.Param[0] = CompressionEncodeParam;
+                        encoderParams.Param[1] = SaveEncodeParam;
 
                         File.Delete(location);
-                        bmp[0].Save(location, codecInfo, EncoderParams);
+                        bmp[0].Save(location, codecInfo, encoderParams);
 
 
                         for (int i = 1; i < bmp.Length; i++)
@@ -74,15 +76,15 @@ namespace NAPS2
 
                             SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);
                             CompressionEncodeParam = new EncoderParameter(compressionEncoder, (long)EncoderValue.CompressionLZW);
-                            EncoderParams.Param[0] = CompressionEncodeParam;
-                            EncoderParams.Param[1] = SaveEncodeParam;
-                            bmp[0].SaveAdd(bmp[i], EncoderParams);
+                            encoderParams.Param[0] = CompressionEncodeParam;
+                            encoderParams.Param[1] = SaveEncodeParam;
+                            bmp[0].SaveAdd(bmp[i], encoderParams);
 
                         }
 
                         SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.Flush);
-                        EncoderParams.Param[0] = SaveEncodeParam;
-                        bmp[0].SaveAdd(EncoderParams);
+                        encoderParams.Param[0] = SaveEncodeParam;
+                        bmp[0].SaveAdd(encoderParams);
                     }
                     return true;
 
@@ -97,14 +99,14 @@ namespace NAPS2
                 return false;
 
         }
-        private static ImageCodecInfo getCodecForstring(string type)
+        private static ImageCodecInfo GetCodecForString(string type)
         {
             ImageCodecInfo[] info = ImageCodecInfo.GetImageEncoders();
 
             for (int i = 0; i < info.Length; i++)
             {
-                string EnumName = type;
-                if (info[i].FormatDescription.Equals(EnumName))
+                string enumName = type;
+                if (info[i].FormatDescription.Equals(enumName))
                 {
                     return info[i];
                 }

@@ -18,8 +18,11 @@
 */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using Ninject;
@@ -41,7 +44,7 @@ namespace NAPS2
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
             AddEnumItems<ScanPageSize>(cmbPage);
-            AddEnumItems<ScanDPI>(cmbResolution);
+            AddEnumItems<ScanDpi>(cmbResolution);
             AddEnumItems<ScanScale>(cmbScale);
             AddEnumItems<ScanSource>(cmbSource);
         }
@@ -146,7 +149,7 @@ namespace NAPS2
                     Contrast = trContrast.Value,
                     PageAlign = (ScanHorizontalAlign)cmbAlign.SelectedIndex,
                     PageSize = (ScanPageSize)cmbPage.SelectedIndex,
-                    Resolution = (ScanDPI)cmbResolution.SelectedIndex,
+                    Resolution = (ScanDpi)cmbResolution.SelectedIndex,
                     PaperSource = (ScanSource)cmbSource.SelectedIndex
                 };
             }
