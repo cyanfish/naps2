@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
@@ -33,7 +34,6 @@ namespace NAPS2
             InitializeComponent();
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright.Replace(", ", "\r\n").Replace("; ", "\r\n\r\n");
         }
 
         #region Assembly Attribute Accessors
@@ -117,9 +117,14 @@ namespace NAPS2
 
         #endregion
 
-        private void labelVersion_Click(object sender, EventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            Process.Start(linkLabel1.Text);
+        }
 
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(linkLabel2.Text);
         }
     }
 }

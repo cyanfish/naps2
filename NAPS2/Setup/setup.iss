@@ -17,7 +17,8 @@ OutputBaseFilename=naps2-setup-{#AppVersion}
 Compression=lzma
 SolidCompression=yes
 
-LicenseFile=license.txt
+LicenseFile=license.txt     
+UninstallDisplayIcon={app}\scanner-app.ico
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -30,10 +31,10 @@ Source: "..\bin\Release\NAPS2.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\Release\PdfSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\Release\Interop.WIA.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\Release\Ninject.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Resources\scanner-app.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\wiaaut.dll"; DestDir: "{sys}"; Flags: regserver
 
 [Icons]
 Name: "{group}\NAPS2"; Filename: "{app}\NAPS2.exe"
-Name: "{group}\{cm:UninstallProgram,NAPS2}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\NAPS2"; Filename: "{app}\NAPS2.exe"; Tasks: desktopicon
 

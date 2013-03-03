@@ -10,8 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Resources\scanner-app.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
