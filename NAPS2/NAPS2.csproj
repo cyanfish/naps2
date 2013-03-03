@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EAC4A133-93BE-4400-BFA9-CEB1615693C4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NAPS2</RootNamespace>
+    <AssemblyName>NAPS2</AssemblyName>
+    <ApplicationIcon>Resources\scanner-app.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <WebPage>publish.htm</WebPage>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>0.9.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>C8F5581951AECD73BCA215500C4A83D3DCBE30C2</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>NAPS_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net35\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.MockingKernel">
+      <HintPath>..\packages\Ninject.MockingKernel.3.0.0.5\lib\net35-full\Ninject.MockingKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=0.9.653.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImageHelper.cs" />
+    <Compile Include="Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ScannedImageList.cs" />
+    <Compile Include="Scan\Stub\StubScanDriver.cs" />
+    <Compile Include="Scan\Twain\DibUtils.cs" />
+    <Compile Include="Scan\Twain\TwainApi.cs" />
+    <Compile Include="Scan\Twain\FTwainGui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scan\Twain\FTwainGui.Designer.cs">
+      <DependentUpon>FTwainGui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scan\Twain\TwainDefs.cs" />
+    <Compile Include="Scan\Twain\TwainLib.cs" />
+    <Compile Include="Scan\ExtendedScanSettings.cs" />
+    <Compile Include="Scan\ScanSettings.cs" />
+    <Compile Include="Scan\Exceptions\NoDevicesFoundException.cs" />
+    <Compile Include="Scan\Exceptions\DeviceOfflineException.cs" />
+    <Compile Include="Scan\Exceptions\DeviceNotFoundException.cs" />
+    <Compile Include="Scan\Wia\WiaApi.cs" />
+    <Compile Include="Dependencies.cs" />
+    <Compile Include="Pdf\IPdfExporter.cs" />
+    <Compile Include="Pdf\PdfInfo.cs" />
+    <Compile Include="Pdf\PdfSharpExporter.cs" />
+    <Compile Include="Scan\Exceptions\ScanDriverException.cs" />
+    <Compile Include="Scan\Twain\TwainScanDriver.cs" />
+    <Compile Include="Scan\ScanDevice.cs" />
+    <Compile Include="Scan\ScannedImage.cs" />
+    <Compile Include="FAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FAbout.Designer.cs">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scan\IScanDriver.cs" />
+    <Compile Include="Scan\IScannedImage.cs" />
+    <Compile Include="Email\IEmailer.cs" />
+    <Compile Include="Scan\Wia\WiaScanDriver.cs" />
+    <Compile Include="ProfileManager.cs" />
+    <Compile Include="TiffHelper.cs" />
+    <Compile Include="FChooseIcon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FChooseIcon.Designer.cs">
+      <DependentUpon>FChooseIcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FChooseProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FChooseProfile.Designer.cs">
+      <DependentUpon>FChooseProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FEditScanSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FEditScanSettings.Designer.cs">
+      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FManageProfiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FManageProfiles.Designer.cs">
+      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FDesktop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FDesktop.Designer.cs">
+      <DependentUpon>FDesktop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FPDFSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FPDFSave.Designer.cs">
+      <DependentUpon>FPDFSave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ILProfileIcons.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ILProfileIcons.Designer.cs">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Email\MAPIEmailer.cs" />
+    <Compile Include="Email\MAPIFileDesc.cs" />
+    <Compile Include="Email\MAPIMessage.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FAbout.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FChooseIcon.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FChooseIcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FChooseProfile.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FChooseProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FEditScanSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FManageProfiles.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FDesktop.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FDesktop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FPDFSave.resx">
+      <DependentUpon>FPDFSave.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FViewer.resx">
+      <DependentUpon>FViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ILProfileIcons.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scan\Twain\FTwainGui.resx">
+      <DependentUpon>FTwainGui.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThumbnailList.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ThumbnailList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiffViewer.resx">
+      <DependentUpon>TiffViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiffViewerCtl.resx">
+      <DependentUpon>TiffViewerCtl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ThumbnailList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ThumbnailList.Designer.cs">
+      <DependentUpon>ThumbnailList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiffViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiffViewerCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WIA">
+      <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\scanner-app.ico" />
+    <Content Include="Resources\scanner-large.png" />
+    <Content Include="Resources\scanner.ico" />
+    <Content Include="Resources\scanner.png" />
+    <Content Include="Setup\lib\Interop.WIA.dll" />
+    <Content Include="Setup\lib\PdfSharp.dll" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\arrow_rotate_anticlockwise.png" />
+    <None Include="Resources\arrow_rotate_clockwise.png" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\transform_flip.png" />
+    <None Include="Resources\file_extension_pdf.png" />
+    <None Include="Resources\email_attach.png" />
+    <None Include="Resources\picture.png" />
+    <None Include="Resources\info_rhombus.png" />
+    <None Include="Resources\arrow_out.png" />
+    <None Include="Resources\zoom_in.png" />
+    <None Include="Resources\zoom_out.png" />
+    <None Include="Resources\pdf_email.png" />
+    <None Include="Resources\arrow_up.png" />
+    <None Include="Resources\arrow_down.png" />
+    <None Include="Resources\blueprints.png" />
+    <None Include="Resources\arrow_switch.png" />
+    <None Include="Resources\zoom_actual.png" />
+    <Content Include="Setup\license.txt" />
+    <Content Include="Setup\setup.iss" />
+    <Content Include="Setup\lib\wiaaut.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

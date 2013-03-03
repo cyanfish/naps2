@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]M:\Development\Projects\NAPS\NAPS2.Tests\NAPS2.Tests.nunit</TopNode>
+  <SelectedNode>[0-1000]M:\Development\Projects\NAPS\NAPS2.Tests\NAPS2.Tests.nunit</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]M:\Development\Projects\NAPS\NAPS2.Tests\NAPS2.Tests.nunit" Expanded="true" />
+    <Node UniqueName="[0-1007]M:\Development\Projects\NAPS\NAPS2.Tests\bin\Debug\NAPS2.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1008]NAPS2" Expanded="true" />
+    <Node UniqueName="[0-1009]NAPS2.Tests" Expanded="true" />
+    <Node UniqueName="[0-1010]NAPS2.Tests.Integration" Expanded="true" />
+    <Node UniqueName="[0-1001]NAPS2.Tests.Integration.PdfSharpExporterTests" Expanded="true" />
+  </Nodes>
+</VisualState>
