@@ -34,11 +34,11 @@ using NAPS2.Scan.Stub;
 
 namespace NAPS2
 {
-    class Dependencies
+    static class KernelManager
     {
         public static IKernel Kernel { get; private set; }
 
-        static Dependencies()
+        static KernelManager()
         {
             Kernel = new StandardKernel(new DependenciesModule());
         }
@@ -47,6 +47,8 @@ namespace NAPS2
         {
             public override void Load()
             {
+                Bind<IScanPerformer>().To<ScanPerformer>();
+                Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
                 Bind<IEmailer>().To<MAPIEmailer>();
 #if DEBUG

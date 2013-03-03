@@ -25,30 +25,49 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Ninject;
 
 namespace NAPS2
 {
     public partial class FChooseProfile : Form
     {
-        private List<ScanSettings> settings;
+        private readonly IProfileManager profileManager;
+        private readonly IScanPerformer scanPerformer;
+        private readonly IScanReceiver scanReceiver;
 
-        private ScanSettings profile;
-
-        public ScanSettings Profile
+        private ScanSettings SelectedProfile
         {
-            get { return profile; }
+            get
+            {
+                if (lvProfiles.SelectedIndices.Count == 1)
+                {
+                    return profileManager.Profiles[lvProfiles.SelectedIndices[0]];
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
-        public FChooseProfile()
+        public FChooseProfile(IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver)
         {
+            this.profileManager = profileManager;
+            this.scanPerformer = scanPerformer;
+            this.scanReceiver = scanReceiver;
             InitializeComponent();
         }
 
         private void FChooseProfile_Load(object sender, EventArgs e)
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
-            settings = ProfileManager.LoadProfiles();
-            foreach (ScanSettings profile in settings)
+            UpdateProfiles();
+        }
+
+        private void UpdateProfiles()
+        {
+            lvProfiles.Items.Clear();
+            foreach (var profile in profileManager.Profiles)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
             }
@@ -56,11 +75,49 @@ namespace NAPS2
 
         private void lvProfiles_ItemActivate(object sender, EventArgs e)
         {
-            if (lvProfiles.SelectedIndices.Count > 0)
+            if (SelectedProfile != null)
             {
-                profile = settings[lvProfiles.SelectedIndices[0]];
-                this.Close();
+                PerformScan();
             }
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            PerformScan();
+        }
+
+        private void PerformScan()
+        {
+            if (profileManager.Profiles.Count == 0)
+            {
+                var editSettingsForm = KernelManager.Kernel.Get<FEditScanSettings>();
+                editSettingsForm.ScanSettings = new ExtendedScanSettings();
+                editSettingsForm.ShowDialog();
+                if (editSettingsForm.Result)
+                {
+                    profileManager.Profiles.Add(editSettingsForm.ScanSettings);
+                    profileManager.Save();
+                    UpdateProfiles();
+                    lvProfiles.SelectedIndices.Add(0);
+                }
+            }
+            if (SelectedProfile == null)
+            {
+                MessageBox.Show("Select a profile before clicking Scan.", "Choose Profile", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            scanPerformer.PerformScan(SelectedProfile, this, scanReceiver);
+        }
+
+        private void btnProfiles_Click(object sender, EventArgs e)
+        {
+            KernelManager.Kernel.Get<FManageProfiles>().ShowDialog();
+            UpdateProfiles();
         }
     }
 }

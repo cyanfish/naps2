@@ -38,10 +38,11 @@ using Ninject;
 
 using WIA;
 using System.Drawing.Imaging;
+using Ninject.Parameters;
 
 namespace NAPS2
 {
-    public partial class FDesktop : Form
+    public partial class FDesktop : Form, IScanReceiver
     {
         private ScannedImageList imageList;
         private readonly IEmailer emailer;
@@ -80,22 +81,10 @@ namespace NAPS2
             SelectedIndices = selection;
         }
 
-        private void Scan(ScanSettings Profile)
+        public void ReceiveScan(IEnumerable<IScannedImage> scannedImages)
         {
-            IScanDriver driver = Dependencies.Kernel.Get<IScanDriver>(Profile.Device.DriverName);
-            driver.DialogParent = this;
-            driver.ScanSettings = Profile;
-
-            try
-            {
-                var newImages = driver.Scan();
-                imageList.Images.AddRange(newImages);
-                UpdateThumbnails();
-            }
-            catch (ScanDriverException e)
-            {
-                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            imageList.Images.AddRange(scannedImages);
+            UpdateThumbnails();
         }
 
         private void Delete()
@@ -137,7 +126,7 @@ namespace NAPS2
 
         private void exportPDF(string filename)
         {
-            FPDFSave pdfdialog = Dependencies.Kernel.Get<FPDFSave>();
+            FPDFSave pdfdialog = KernelManager.Kernel.Get<FPDFSave>();
             pdfdialog.Filename = filename;
             pdfdialog.Images = imageList.Images;
             pdfdialog.ShowDialog(this);
@@ -176,16 +165,8 @@ namespace NAPS2
 
         private void tsScan_Click(object sender, EventArgs e)
         {
-            //demoScan();
-            //return;
-
-            FChooseProfile prof = new FChooseProfile();
+            FChooseProfile prof = KernelManager.Kernel.Get<FChooseProfile>(new ConstructorArgument("scanReceiver", this));
             prof.ShowDialog();
-
-            if (prof.Profile == null)
-                return;
-
-            Scan(prof.Profile);
         }
 
         private void tsSavePDF_Click(object sender, EventArgs e)
@@ -331,7 +312,7 @@ namespace NAPS2
 
         private void tsProfiles_Click(object sender, EventArgs e)
         {
-            new FManageProfiles().ShowDialog();
+            KernelManager.Kernel.Get<FManageProfiles>().ShowDialog();
         }
 
         private void tsAbout_Click(object sender, EventArgs e)

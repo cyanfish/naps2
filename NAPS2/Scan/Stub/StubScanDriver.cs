@@ -52,7 +52,7 @@ namespace NAPS2.Scan.Stub
             g.DrawString(new Random().Next().ToString(), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
             return new List<IScannedImage>
             {
-                new ScannedImage(bitmap, ScanBitDepth.C24BIT, ImageFormat.Jpeg)
+                new ScannedImage(bitmap, ScanBitDepth.C24BIT, ScanSettings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg)
             };
         }
 

@@ -74,7 +74,6 @@ namespace NAPS2
             listViewItem5,
             listViewItem6});
             this.lvProfiles.Location = new System.Drawing.Point(12, 12);
-            this.lvProfiles.MultiSelect = false;
             this.lvProfiles.Name = "lvProfiles";
             this.lvProfiles.Size = new System.Drawing.Size(563, 80);
             this.lvProfiles.TabIndex = 0;

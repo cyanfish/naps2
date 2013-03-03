@@ -37,7 +37,7 @@ namespace NAPS2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(Dependencies.Kernel.Get<FDesktop>());
+            Application.Run(KernelManager.Kernel.Get<FDesktop>());
         }
     }
 }

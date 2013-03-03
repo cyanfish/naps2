@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Ninject;
@@ -31,10 +32,11 @@ namespace NAPS2
 {
     public partial class FManageProfiles : Form
     {
-        private List<ScanSettings> profiles;
+        private readonly IProfileManager profileManager;
 
-        public FManageProfiles()
+        public FManageProfiles(IProfileManager profileManager)
         {
+            this.profileManager = profileManager;
             InitializeComponent();
         }
 
@@ -46,7 +48,7 @@ namespace NAPS2
         private void loadList()
         {
             lvProfiles.Items.Clear();
-            foreach (ScanSettings profile in profiles)
+            foreach (var profile in profileManager.Profiles)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
             }
@@ -55,14 +57,14 @@ namespace NAPS2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FEditScanSettings fedit = Dependencies.Kernel.Get<FEditScanSettings>();
+            FEditScanSettings fedit = KernelManager.Kernel.Get<FEditScanSettings>();
             fedit.ScanSettings = new ExtendedScanSettings();
             fedit.ShowDialog();
             if (fedit.Result)
             {
-                this.profiles.Add(fedit.ScanSettings);
+                profileManager.Profiles.Add(fedit.ScanSettings);
                 loadList();
-                ProfileManager.SaveProfiles(profiles);
+                profileManager.Save();
             }
         }
 
@@ -71,21 +73,27 @@ namespace NAPS2
             if (lvProfiles.SelectedItems.Count > 0)
             {
                 int profileIndex = lvProfiles.SelectedItems[0].Index;
-                FEditScanSettings fedit = Dependencies.Kernel.Get<FEditScanSettings>();
-                fedit.ScanSettings = profiles[profileIndex];
+                FEditScanSettings fedit = KernelManager.Kernel.Get<FEditScanSettings>();
+                fedit.ScanSettings = profileManager.Profiles[profileIndex];
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
+                    profileManager.Profiles[profileIndex] = fedit.ScanSettings;
+                    profileManager.Save();
                     loadList();
                     lvProfiles.SelectedIndices.Add(profileIndex);
-                    ProfileManager.SaveProfiles(profiles);
+                }
+                else
+                {
+                    // Rollback
+                    profileManager.Load();
                 }
             }
         }
 
         private void lvProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnEdit.Enabled = lvProfiles.SelectedItems.Count > 0;
+            btnEdit.Enabled = lvProfiles.SelectedItems.Count == 1;
             btnDelete.Enabled = lvProfiles.SelectedItems.Count > 0;
         }
 
@@ -94,7 +102,6 @@ namespace NAPS2
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
-            this.profiles = ProfileManager.LoadProfiles();
             loadList();
         }
 
@@ -102,11 +109,20 @@ namespace NAPS2
         {
             if (lvProfiles.SelectedItems.Count > 0)
             {
-                if (MessageBox.Show("Do you really want to delete " + profiles[lvProfiles.SelectedItems[0].Index].DisplayName + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                string label;
+                if (lvProfiles.SelectedIndices.Count == 1)
                 {
-                    profiles.RemoveAt(lvProfiles.SelectedItems[0].Index);
+                    label = "the profile \"" + profileManager.Profiles[lvProfiles.SelectedIndices[0]].DisplayName + "\"";
+                }
+                else
+                {
+                    label = lvProfiles.SelectedIndices.Count + " profiles";
+                }
+                if (MessageBox.Show("Are you sure want to delete " + label + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    profileManager.Profiles.RemoveAll(lvProfiles.SelectedIndices.OfType<int>());
+                    profileManager.Save();
                     loadList();
-                    ProfileManager.SaveProfiles(profiles);
                     lvProfiles_SelectedIndexChanged(null, null);
                 }
             }

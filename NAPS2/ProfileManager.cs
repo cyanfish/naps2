@@ -27,7 +27,7 @@ using NAPS2.Scan;
 
 namespace NAPS2
 {
-    public class ProfileManager
+    public class ProfileManager : IProfileManager
     {
         private static readonly string ProfilesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
         private static readonly string ProfilesFileName = "profiles.xml";
@@ -35,9 +35,27 @@ namespace NAPS2
 
         private static readonly string OldProfilesPath = Path.Combine(Application.StartupPath, "profiles.xml");
 
-        public static List<ScanSettings> LoadProfiles()
+        private List<ScanSettings> profiles;
+
+        public ProfileManager()
         {
-            List<ScanSettings> profiles;
+        }
+
+        public List<ScanSettings> Profiles
+        {
+            get
+            {
+                if (profiles == null)
+                {
+                    Load();
+                }
+                return profiles;
+            }
+        }
+
+        public void Load()
+        {
+            profiles = null;
             TryLoadProfiles(ProfilesPath, out profiles);
             if (profiles == null)
             {
@@ -45,22 +63,35 @@ namespace NAPS2
                 TryLoadProfiles(OldProfilesPath, out profiles);
                 if (profiles != null)
                 {
-                    SaveProfiles(profiles);
+                    Save();
                     try
                     {
                         File.Delete(OldProfilesPath);
                     }
-                    catch (Exception) { }
+                    catch (IOException) { }
                 }
             }
             if (profiles == null)
             {
                 profiles = new List<ScanSettings>();
+                Save();
             }
-            return profiles;
         }
 
-        private static bool TryLoadProfiles(string profilesPath, out List<ScanSettings> profiles)
+        public void Save()
+        {
+            if (!Directory.Exists(ProfilesFolder))
+            {
+                Directory.CreateDirectory(ProfilesFolder);
+            }
+            using (Stream strFile = File.Open(ProfilesPath, FileMode.Create))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
+                serializer.Serialize(strFile, profiles);
+            }
+        }
+
+        private bool TryLoadProfiles(string profilesPath, out List<ScanSettings> profiles)
         {
             profiles = null;
             if (File.Exists(profilesPath))
@@ -77,19 +108,6 @@ namespace NAPS2
                 catch (Exception) { }
             }
             return false;
-        }
-
-        public static void SaveProfiles(List<ScanSettings> profiles)
-        {
-            if (!Directory.Exists(ProfilesFolder))
-            {
-                Directory.CreateDirectory(ProfilesFolder);
-            }
-            using (Stream strFile = File.Open(ProfilesPath, FileMode.Create))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<ScanSettings>));
-                serializer.Serialize(strFile, profiles);
-            }
         }
     }
 }

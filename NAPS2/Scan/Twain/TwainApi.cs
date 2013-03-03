@@ -45,7 +45,7 @@ namespace NAPS2.Scan.Twain
                 tw.Select();
                 return tw.GetCurrentName();
             }
-            catch (ScanDriverException e)
+            catch (ScanDriverException)
             {
                 throw;
             }

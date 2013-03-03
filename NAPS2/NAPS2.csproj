@@ -86,13 +86,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionExtensions.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
+    <Compile Include="IProfileManager.cs" />
+    <Compile Include="IScanPerformer.cs" />
+    <Compile Include="IScanReceiver.cs" />
     <Compile Include="ScannedImageList.cs" />
+    <Compile Include="ScanPerformer.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />
@@ -110,7 +115,7 @@
     <Compile Include="Scan\Exceptions\DeviceOfflineException.cs" />
     <Compile Include="Scan\Exceptions\DeviceNotFoundException.cs" />
     <Compile Include="Scan\Wia\WiaApi.cs" />
-    <Compile Include="Dependencies.cs" />
+    <Compile Include="KernelManager.cs" />
     <Compile Include="Pdf\IPdfExporter.cs" />
     <Compile Include="Pdf\PdfInfo.cs" />
     <Compile Include="Pdf\PdfSharpExporter.cs" />
@@ -290,14 +295,17 @@
     <None Include="Resources\accept.png" />
     <None Include="Resources\pencil.png" />
     <None Include="Resources\blueprints-small.png" />
+    <None Include="Resources\scanner-48.png" />
+    <None Include="Resources\scanner-72.png" />
+    <None Include="Resources\scanner-64.png" />
     <Content Include="Resources\scanner-app.ico" />
     <Content Include="Resources\scanner-large.png" />
     <Content Include="Resources\scanner.ico" />
     <Content Include="Resources\scanner.png" />
     <None Include="Resources\tick.png" />
     <None Include="Resources\tick-small.png" />
-    <Content Include="Setup\lib\Interop.WIA.dll" />
-    <Content Include="Setup\lib\PdfSharp.dll" />
+    <None Include="Setup\lib\Interop.WIA.dll" />
+    <None Include="Setup\lib\PdfSharp.dll" />
     <None Include="Resources\information.png" />
     <None Include="Resources\arrow_rotate_anticlockwise.png" />
     <None Include="Resources\arrow_rotate_clockwise.png" />
@@ -318,7 +326,7 @@
     <None Include="Resources\zoom_actual.png" />
     <Content Include="Setup\license.txt" />
     <Content Include="Setup\setup.iss" />
-    <Content Include="Setup\lib\wiaaut.dll" />
+    <None Include="Setup\lib\wiaaut.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

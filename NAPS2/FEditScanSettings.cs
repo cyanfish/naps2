@@ -104,7 +104,7 @@ namespace NAPS2
 
         private void choose(string driverName)
         {
-            IScanDriver driver = Dependencies.Kernel.Get<IScanDriver>(driverName);
+            IScanDriver driver = KernelManager.Kernel.Get<IScanDriver>(driverName);
             try
             {
                 driver.DialogParent = this;
