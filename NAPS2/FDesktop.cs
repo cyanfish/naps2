@@ -132,7 +132,7 @@ namespace NAPS2
 
         private void Flip()
         {
-            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipX));
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY));
         }
 
         private void exportPDF(string filename)
