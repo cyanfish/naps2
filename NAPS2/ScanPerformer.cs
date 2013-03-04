@@ -18,7 +18,11 @@ namespace NAPS2
 
             try
             {
-                scanReceiver.ReceiveScan(driver.Scan());
+                foreach (IScannedImage scannedImage in driver.Scan())
+                {
+                    scanReceiver.ReceiveScannedImage(scannedImage);
+                    Application.DoEvents();
+                }
             }
             catch (ScanDriverException e)
             {

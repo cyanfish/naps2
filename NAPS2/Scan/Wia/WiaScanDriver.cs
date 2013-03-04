@@ -46,7 +46,7 @@ namespace NAPS2.Scan.Wia
             return WiaApi.SelectDeviceUI();
         }
 
-        public List<IScannedImage> Scan()
+        public IEnumerable<IScannedImage> Scan()
         {
             if (ScanSettings == null)
             {
@@ -58,9 +58,6 @@ namespace NAPS2.Scan.Wia
             }
             var result = new List<IScannedImage>();
             var api = new WiaApi(ScanSettings);
-            // TODO: Only scan once with ScanSource.GLASS
-            // TODO: How to handle that if UseNativeUI is specified?
-            // TODO: Send progress event (or something) to update thumbnail/scan UI
             while (true)
             {
                 ScannedImage image = api.GetImage();
@@ -68,9 +65,13 @@ namespace NAPS2.Scan.Wia
                 {
                     break;
                 }
-                result.Add(image);
+                yield return image;
+                var extSettings = ScanSettings as ExtendedScanSettings;
+                if (extSettings != null && extSettings.PaperSource == ScanSource.Glass)
+                {
+                    break;
+                }
             }
-            return result;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace NAPS2.Scan.Twain
             return new ScanDevice(deviceId, deviceName, DRIVER_NAME);
         }
 
-        public List<IScannedImage> Scan()
+        public IEnumerable<IScannedImage> Scan()
         {
             if (ScanSettings == null)
             {
@@ -59,8 +59,6 @@ namespace NAPS2.Scan.Twain
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
             var api = new TwainApi(ScanSettings);
-            // TODO: Progress
-            // TODO: Cool idea: maybe return an IEnumerable (via yield)
             return api.Scan();
         }
     }

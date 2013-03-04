@@ -58,9 +58,9 @@ namespace NAPS2
             }
         }
 
-        public void ReceiveScan(IEnumerable<IScannedImage> scannedImages)
+        public void ReceiveScannedImage(IScannedImage scannedImage)
         {
-            imageList.Images.AddRange(scannedImages);
+            imageList.Images.Add(scannedImage);
             UpdateThumbnails();
         }
 

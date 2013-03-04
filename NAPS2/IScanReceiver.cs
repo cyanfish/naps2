@@ -7,6 +7,6 @@ namespace NAPS2
 {
     public interface IScanReceiver
     {
-        void ReceiveScan(IEnumerable<IScannedImage> scannedImages);
+        void ReceiveScannedImage(IScannedImage scannedImage);
     }
 }
