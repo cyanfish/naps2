@@ -127,9 +127,9 @@ namespace NAPS2
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(149, 121);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 13);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 31;
-            this.label1.Text = "Icons used with permission from:";
+            this.label1.Text = "Icons from:";
             // 
             // linkLabel2
             // 

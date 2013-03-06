@@ -65,6 +65,10 @@ namespace NAPS2
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
             }
+            if (profileManager.Profiles.Count == 1)
+            {
+                lvProfiles.Items[0].Selected = true;
+            }
         }
 
         private void lvProfiles_ItemActivate(object sender, EventArgs e)

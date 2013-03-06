@@ -63,7 +63,7 @@ namespace NAPS2
             this.lvProfiles.MultiSelect = false;
             this.lvProfiles.Name = "lvProfiles";
             this.lvProfiles.Size = new System.Drawing.Size(563, 80);
-            this.lvProfiles.TabIndex = 0;
+            this.lvProfiles.TabIndex = 3;
             this.lvProfiles.UseCompatibleStateImageBehavior = false;
             this.lvProfiles.ItemActivate += new System.EventHandler(this.lvProfiles_ItemActivate);
             // 
@@ -78,7 +78,7 @@ namespace NAPS2
             this.btnScan.Name = "btnScan";
             this.btnScan.Padding = new System.Windows.Forms.Padding(0, 2, 0, 6);
             this.btnScan.Size = new System.Drawing.Size(117, 118);
-            this.btnScan.TabIndex = 4;
+            this.btnScan.TabIndex = 0;
             this.btnScan.Text = "&Scan";
             this.btnScan.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnScan.UseVisualStyleBackColor = false;
@@ -93,7 +93,7 @@ namespace NAPS2
             this.btnProfiles.Name = "btnProfiles";
             this.btnProfiles.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.btnProfiles.Size = new System.Drawing.Size(128, 32);
-            this.btnProfiles.TabIndex = 5;
+            this.btnProfiles.TabIndex = 1;
             this.btnProfiles.Text = "Manage &Profiles";
             this.btnProfiles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnProfiles.UseVisualStyleBackColor = true;
@@ -102,15 +102,13 @@ namespace NAPS2
             // btnDone
             // 
             this.btnDone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnDone.Image = global::NAPS2.Icons.tick_small;
             this.btnDone.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDone.Location = new System.Drawing.Point(481, 98);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.btnDone.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.btnDone.Size = new System.Drawing.Size(94, 32);
-            this.btnDone.TabIndex = 6;
+            this.btnDone.TabIndex = 2;
             this.btnDone.Text = "&Done";
-            this.btnDone.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDone.UseVisualStyleBackColor = true;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 

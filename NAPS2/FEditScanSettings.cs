@@ -108,6 +108,11 @@ namespace NAPS2
                 ScanDevice device = driver.PromptForDevice();
                 if (device != null)
                 {
+                    if (string.IsNullOrEmpty(txtName.Text) ||
+                        CurrentDevice != null && CurrentDevice.Name == txtName.Text)
+                    {
+                        txtName.Text = device.Name;
+                    }
                     CurrentDevice = device;
                 }
             }
