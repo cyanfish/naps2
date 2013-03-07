@@ -298,6 +298,8 @@
     <None Include="Resources\scanner-48.png" />
     <None Include="Resources\scanner-72.png" />
     <None Include="Resources\scanner-64.png" />
+    <None Include="Resources\arrow_down_small.png" />
+    <None Include="Resources\arrow_up_small.png" />
     <Content Include="Resources\scanner-app.ico" />
     <Content Include="Resources\scanner-large.png" />
     <Content Include="Resources\scanner.ico" />
