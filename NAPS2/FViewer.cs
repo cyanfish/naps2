@@ -61,8 +61,8 @@ namespace NAPS2
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.Resources.ResourceManager(typeof(FViewer));
-            this.tiffViewer1 = new TiffViewerCtl();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FViewer));
+            this.tiffViewer1 = new NAPS2.TiffViewerCtl();
             this.SuspendLayout();
             // 
             // tiffViewer1

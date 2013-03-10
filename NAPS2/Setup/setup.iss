@@ -13,7 +13,7 @@ AppUpdatesURL=http://www.sourceforge.net/projects/naps2
 DefaultDirName={pf}\NAPS2
 DefaultGroupName=NAPS2
 OutputDir=../publish
-OutputBaseFilename=naps2-setup-{#AppVersion}
+OutputBaseFilename=naps2-{#AppVersion}-setup       
 Compression=lzma
 SolidCompression=yes
 

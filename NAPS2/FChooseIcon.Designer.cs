@@ -48,6 +48,7 @@ namespace NAPS2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FChooseIcon));
             this.iconList = new System.Windows.Forms.ListView();
             this.ilProfileIcons = new NAPS2.ILProfileIcons(this.components);
             this.SuspendLayout();
@@ -70,8 +71,9 @@ namespace NAPS2
             this.ClientSize = new System.Drawing.Size(316, 302);
             this.Controls.Add(this.iconList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FChooseIcon";
-            this.Text = "FChooseIcon";
+            this.Text = "Choose Icon";
             this.Load += new System.EventHandler(this.FChooseIcon_Load);
             this.ResumeLayout(false);
 

@@ -30,7 +30,11 @@ namespace NAPS2
     public class ProfileManager : IProfileManager
     {
         private const string ProfilesFileName = "profiles.xml";
+#if STANDALONE
+        private static readonly string ProfilesFolder = Application.StartupPath;
+#else
         private static readonly string ProfilesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
+#endif
         private static readonly string ProfilesPath = Path.Combine(ProfilesFolder, ProfilesFileName);
 
         private static readonly string OldProfilesPath = Path.Combine(Application.StartupPath, "profiles.xml");
