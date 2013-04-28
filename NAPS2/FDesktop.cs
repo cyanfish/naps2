@@ -87,6 +87,12 @@ namespace NAPS2
             }
         }
 
+        private void SelectAll()
+        {
+            int i = 0;
+            UpdateThumbnails(imageList.Images.Select(x => i++));
+        }
+
         private void MoveDown()
         {
             UpdateThumbnails(imageList.MoveDown(SelectedIndices));
@@ -137,6 +143,12 @@ namespace NAPS2
                     if (e.Control)
                     {
                         MoveDown();
+                    }
+                    break;
+                case Keys.A:
+                    if (e.Control)
+                    {
+                        SelectAll();
                     }
                     break;
             }
