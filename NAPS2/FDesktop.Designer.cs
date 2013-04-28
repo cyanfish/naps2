@@ -62,6 +62,7 @@ namespace NAPS2
             this.tStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.tStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsScan,
+            this.tsProfiles,
             this.toolStripSeparator5,
             this.tsSavePDF,
             this.tsSaveImage,
@@ -76,12 +77,11 @@ namespace NAPS2
             this.toolStripSeparator2,
             this.tsDelete,
             this.toolStripSeparator3,
-            this.tsProfiles,
             this.tsAbout});
             this.tStrip.Location = new System.Drawing.Point(3, 0);
             this.tStrip.Name = "tStrip";
             this.tStrip.ShowItemToolTips = false;
-            this.tStrip.Size = new System.Drawing.Size(1000, 54);
+            this.tStrip.Size = new System.Drawing.Size(969, 54);
             this.tStrip.TabIndex = 12;
             this.tStrip.Text = "Main toolbar";
             // 
