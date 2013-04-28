@@ -59,7 +59,7 @@ namespace NAPS2.Scan
         {
             if (bitDepth == ScanBitDepth.BlackWhite)
             {
-                return baseImage;
+                return (Bitmap)baseImage.Clone();
             }
             else
             {
@@ -124,7 +124,7 @@ namespace NAPS2.Scan
         {
             if (bitDepth == ScanBitDepth.BlackWhite)
             {
-                baseImage = bitmap;
+                baseImage = (Bitmap)bitmap.Clone();
             }
             else
             {
