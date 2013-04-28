@@ -68,7 +68,18 @@ namespace NAPS2.Scan.Wia
             {
                 if (info.DeviceID == settings.Device.ID)
                 {
-                    device = info.Connect();
+                    try
+                    {
+                        device = info.Connect();
+                    }
+                    catch (COMException e)
+                    {
+                        if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                        {
+                            throw new DeviceOfflineException();
+                        }
+                        throw new ScanDriverException(e);
+                    }
                     return;
                 }
             }
@@ -321,29 +332,28 @@ namespace NAPS2.Scan.Wia
 
         public ScannedImage GetImage()
         {
-            var wiaCommonDialog = new CommonDialogClass();
-
-            Items items = device.Items;
-            if (settingsExt == null)
-            {
-                try
-                {
-                    items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent, WiaImageBias.MaximizeQuality, true, true, true);
-                }
-                catch (COMException e)
-                {
-                    if ((uint)e.ErrorCode == UI_CANCELED)
-                        return null;
-                }
-            }
-            else
-            {
-                SetupDevice();
-                SetupItem(items[1]);
-            }
-
             try
             {
+                var wiaCommonDialog = new CommonDialogClass();
+
+                Items items = device.Items;
+                if (settingsExt == null)
+                {
+                    try
+                    {
+                        items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent, WiaImageBias.MaximizeQuality, true, true, true);
+                    }
+                    catch (COMException e)
+                    {
+                        if ((uint)e.ErrorCode == UI_CANCELED)
+                            return null;
+                    }
+                }
+                else
+                {
+                    SetupDevice();
+                    SetupItem(items[1]);
+                }
                 var file = (ImageFile)wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
                 if (file == null)
                 {
@@ -401,9 +411,13 @@ namespace NAPS2.Scan.Wia
                 {
                     return null;
                 }
+                else if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                {
+                    throw new DeviceOfflineException();
+                }
                 else
                 {
-                    throw new ScanDriverException();
+                    throw new ScanDriverException(e);
                 }
             }
         }
