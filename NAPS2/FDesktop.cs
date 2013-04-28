@@ -75,6 +75,18 @@ namespace NAPS2
             SelectedIndices = selection;
         }
 
+        private void Clear()
+        {
+            if (imageList.Images.Count > 0)
+            {
+                if (MessageBox.Show(string.Format("Are you sure you want to clear {0} item(s)?", imageList.Images.Count), "Clear", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+                    UpdateThumbnails();
+                }
+            }
+        }
+
         private void Delete()
         {
             if (SelectedIndices.Any())
@@ -89,8 +101,7 @@ namespace NAPS2
 
         private void SelectAll()
         {
-            int i = 0;
-            UpdateThumbnails(imageList.Images.Select(x => i++));
+            UpdateThumbnails(Enumerable.Range(0, imageList.Images.Count));
         }
 
         private void MoveDown()
@@ -287,6 +298,11 @@ namespace NAPS2
         private void tsFlip_Click(object sender, EventArgs e)
         {
             Flip();
+        }
+
+        private void tsClear_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
 
         private void tsDelete_Click(object sender, EventArgs e)

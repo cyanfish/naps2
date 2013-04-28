@@ -32,6 +32,7 @@ namespace NAPS2
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripButton();
+            this.tsProfiles = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsSavePDF = new System.Windows.Forms.ToolStripButton();
             this.tsSaveImage = new System.Windows.Forms.ToolStripButton();
@@ -44,11 +45,11 @@ namespace NAPS2
             this.tsRotateRight = new System.Windows.Forms.ToolStripButton();
             this.tsFlip = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsDelete = new System.Windows.Forms.ToolStripButton();
+            this.tsClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsProfiles = new System.Windows.Forms.ToolStripButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.tsDelete = new System.Windows.Forms.ToolStripButton();
             this.thumbnailList1 = new NAPS2.ThumbnailList();
             this.tStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -76,12 +77,13 @@ namespace NAPS2
             this.tsFlip,
             this.toolStripSeparator2,
             this.tsDelete,
+            this.tsClear,
             this.toolStripSeparator3,
             this.tsAbout});
             this.tStrip.Location = new System.Drawing.Point(3, 0);
             this.tStrip.Name = "tStrip";
             this.tStrip.ShowItemToolTips = false;
-            this.tStrip.Size = new System.Drawing.Size(969, 54);
+            this.tStrip.Size = new System.Drawing.Size(1027, 54);
             this.tStrip.TabIndex = 12;
             this.tStrip.Text = "Main toolbar";
             // 
@@ -95,6 +97,17 @@ namespace NAPS2
             this.tsScan.Text = "Scan";
             this.tsScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsScan.Click += new System.EventHandler(this.tsScan_Click);
+            // 
+            // tsProfiles
+            // 
+            this.tsProfiles.Image = ((System.Drawing.Image)(resources.GetObject("tsProfiles.Image")));
+            this.tsProfiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsProfiles.Name = "tsProfiles";
+            this.tsProfiles.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsProfiles.Size = new System.Drawing.Size(70, 51);
+            this.tsProfiles.Text = "Profiles";
+            this.tsProfiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsProfiles.Click += new System.EventHandler(this.tsProfiles_Click);
             // 
             // toolStripSeparator5
             // 
@@ -204,32 +217,21 @@ namespace NAPS2
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 54);
             // 
-            // tsDelete
+            // tsClear
             // 
-            this.tsDelete.Image = global::NAPS2.Icons.cross;
-            this.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsDelete.Size = new System.Drawing.Size(64, 51);
-            this.tsDelete.Text = "Delete";
-            this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
+            this.tsClear.Image = global::NAPS2.Icons.cancel;
+            this.tsClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsClear.Name = "tsClear";
+            this.tsClear.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsClear.Size = new System.Drawing.Size(58, 51);
+            this.tsClear.Text = "Clear";
+            this.tsClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsClear.Click += new System.EventHandler(this.tsClear_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 54);
-            // 
-            // tsProfiles
-            // 
-            this.tsProfiles.Image = ((System.Drawing.Image)(resources.GetObject("tsProfiles.Image")));
-            this.tsProfiles.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsProfiles.Name = "tsProfiles";
-            this.tsProfiles.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsProfiles.Size = new System.Drawing.Size(70, 51);
-            this.tsProfiles.Text = "Profiles";
-            this.tsProfiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsProfiles.Click += new System.EventHandler(this.tsProfiles_Click);
             // 
             // tsAbout
             // 
@@ -248,11 +250,11 @@ namespace NAPS2
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1014, 472);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1065, 472);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(1014, 526);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1065, 526);
             this.toolStripContainer1.TabIndex = 13;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -260,12 +262,23 @@ namespace NAPS2
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
             // 
+            // tsDelete
+            // 
+            this.tsDelete.Image = global::NAPS2.Icons.cross;
+            this.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDelete.Name = "tsDelete";
+            this.tsDelete.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsDelete.Size = new System.Drawing.Size(64, 51);
+            this.tsDelete.Text = "Delete";
+            this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
+            // 
             // thumbnailList1
             // 
             this.thumbnailList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.thumbnailList1.Location = new System.Drawing.Point(0, 0);
             this.thumbnailList1.Name = "thumbnailList1";
-            this.thumbnailList1.Size = new System.Drawing.Size(1014, 472);
+            this.thumbnailList1.Size = new System.Drawing.Size(1065, 472);
             this.thumbnailList1.TabIndex = 7;
             this.thumbnailList1.UseCompatibleStateImageBehavior = false;
             this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
@@ -275,7 +288,7 @@ namespace NAPS2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1014, 526);
+            this.ClientSize = new System.Drawing.Size(1065, 526);
             this.Controls.Add(this.toolStripContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FDesktop";
@@ -310,10 +323,11 @@ namespace NAPS2
         private System.Windows.Forms.ToolStripButton tsRotateLeft;
         private System.Windows.Forms.ToolStripButton tsFlip;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton tsDelete;
+        private System.Windows.Forms.ToolStripButton tsClear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton tsProfiles;
         private System.Windows.Forms.ToolStripButton tsAbout;
+        private System.Windows.Forms.ToolStripButton tsDelete;
     }
 }
 
