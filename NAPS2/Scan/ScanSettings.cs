@@ -34,5 +34,7 @@ namespace NAPS2.Scan
         public int IconID { get; set; }
 
         public bool MaxQuality { get; set; }
+
+        public bool IsDefault { get; set; }
     }
 }

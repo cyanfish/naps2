@@ -29,5 +29,6 @@ namespace NAPS2
         List<ScanSettings> Profiles { get; }
         void Load();
         void Save();
+        void SetDefault(ScanSettings defaultProfile);
     }
 }

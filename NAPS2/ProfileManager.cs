@@ -53,6 +53,15 @@ namespace NAPS2
             }
         }
 
+        public void SetDefault(ScanSettings defaultProfile)
+        {
+            foreach (ScanSettings profile in profiles)
+            {
+                profile.IsDefault = false;
+            }
+            defaultProfile.IsDefault = true;
+        }
+
         public void Load()
         {
             profiles = null;
