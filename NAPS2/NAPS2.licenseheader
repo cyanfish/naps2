@@ -1,4 +1,6 @@
-﻿/*
+extensions: designer.cs generated.cs
+extensions: .cs
+/*
     NAPS2 (Not Another PDF Scanner 2)
     http://sourceforge.net/projects/naps2/
     
@@ -17,17 +19,3 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using NAPS2.Scan;
-
-namespace NAPS2
-{
-    public interface IProfileManager
-    {
-        List<ScanSettings> Profiles { get; }
-        void Load();
-        void Save();
-    }
-}
