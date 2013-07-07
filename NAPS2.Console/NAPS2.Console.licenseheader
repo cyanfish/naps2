@@ -1,3 +1,5 @@
+extensions: designer.cs generated.cs
+extensions: .cs
 /*
     NAPS2 (Not Another PDF Scanner 2)
     http://sourceforge.net/projects/naps2/
@@ -17,15 +19,3 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 */
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace NAPS2.Email
-{
-    public interface IEmailer
-    {
-        bool SendEmail(string attachmentFileName, string subject);
-    }
-}
