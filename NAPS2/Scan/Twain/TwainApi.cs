@@ -31,11 +31,6 @@ namespace NAPS2.Scan.Twain
         readonly ScanSettings settings;
         readonly Twain tw;
 
-        public TwainApi(ScanSettings settings)
-        {
-            this.settings = settings;
-        }
-
         public TwainApi(ScanSettings settings, IWin32Window pForm)
         {
             parent = pForm;
