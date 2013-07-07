@@ -24,14 +24,26 @@ using System.Linq;
 
 namespace NAPS2.Scan.Exceptions
 {
-    public abstract class ScanDriverException : Exception
+    public class ScanDriverUnknownException : ScanDriverException
     {
-        protected ScanDriverException(string message)
+        private const string DEFAULT_MESSAGE = "An error occured with the scanning driver.";
+
+        public ScanDriverUnknownException()
+            : base(DEFAULT_MESSAGE)
+        {
+        }
+
+        public ScanDriverUnknownException(string message)
             : base(message)
         {
         }
 
-        protected ScanDriverException(string message, Exception innerException)
+        public ScanDriverUnknownException(Exception innerException)
+            : base(DEFAULT_MESSAGE, innerException)
+        {
+        }
+
+        public ScanDriverUnknownException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

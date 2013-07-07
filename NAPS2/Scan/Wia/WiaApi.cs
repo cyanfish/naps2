@@ -79,7 +79,7 @@ namespace NAPS2.Scan.Wia
                         {
                             throw new DeviceOfflineException();
                         }
-                        throw new ScanDriverException(e);
+                        throw new ScanDriverUnknownException(e);
                     }
                     return;
                 }
@@ -114,7 +114,7 @@ namespace NAPS2.Scan.Wia
                 {
                     throw new DeviceOfflineException();
                 }
-                throw new ScanDriverException(e);
+                throw new ScanDriverUnknownException(e);
             }
         }
 
@@ -421,7 +421,7 @@ namespace NAPS2.Scan.Wia
                 }
                 else
                 {
-                    throw new ScanDriverException(e);
+                    throw new ScanDriverUnknownException(e);
                 }
             }
         }

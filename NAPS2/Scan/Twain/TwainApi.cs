@@ -65,7 +65,7 @@ namespace NAPS2.Scan.Twain
             }
             catch (Exception e)
             {
-                throw new ScanDriverException(e);
+                throw new ScanDriverUnknownException(e);
             }
         }
 
