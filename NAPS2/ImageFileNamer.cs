@@ -15,6 +15,7 @@ namespace NAPS2
         {
             if (imageCount == 0)
             {
+                // Skip the unnecesary logic below if there are no images
                 return Enumerable.Empty<string>();
             }
 

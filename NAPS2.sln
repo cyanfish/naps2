@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F6CC4F
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Console", "NAPS2.Console\NAPS2.Console.csproj", "{2A321772-75B2-4601-A718-AF0A2370E6A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,12 @@ Global
 		{11FC4BE1-882D-4ABA-8781-2F3F77DF9453}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11FC4BE1-882D-4ABA-8781-2F3F77DF9453}.Standalone|Any CPU.ActiveCfg = Debug|Any CPU
 		{11FC4BE1-882D-4ABA-8781-2F3F77DF9453}.Standalone|Any CPU.Build.0 = Debug|Any CPU
+		{2A321772-75B2-4601-A718-AF0A2370E6A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A321772-75B2-4601-A718-AF0A2370E6A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A321772-75B2-4601-A718-AF0A2370E6A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A321772-75B2-4601-A718-AF0A2370E6A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A321772-75B2-4601-A718-AF0A2370E6A8}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
+		{2A321772-75B2-4601-A718-AF0A2370E6A8}.Standalone|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

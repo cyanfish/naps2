@@ -34,18 +34,6 @@ namespace NAPS2
         [STAThread]
         static void Main(string[] args)
         {
-            if (args.Length > 1)
-            {
-                var options = new AutomatedScanningOptions();
-                if (!CommandLine.Parser.Default.ParseArguments(args, options))
-                {
-                    return;
-                }
-                var scanning = KernelManager.Kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
-                scanning.Execute();
-                return;
-            }
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

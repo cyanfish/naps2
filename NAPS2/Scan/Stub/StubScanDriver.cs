@@ -29,7 +29,7 @@ using NAPS2.Scan.Wia;
 
 namespace NAPS2.Scan.Stub
 {
-    class StubScanDriver : IScanDriver
+    public class StubScanDriver : IScanDriver
     {
         protected StubScanDriver(string driverName)
         {
@@ -64,7 +64,7 @@ namespace NAPS2.Scan.Stub
         public string DriverName { get; private set; }
     }
 
-    class StubWiaScanDriver : StubScanDriver
+    public class StubWiaScanDriver : StubScanDriver
     {
         public StubWiaScanDriver()
             : base(WiaScanDriver.DRIVER_NAME)
@@ -72,7 +72,7 @@ namespace NAPS2.Scan.Stub
         }
     }
 
-    class StubTwainScanDriver : StubScanDriver
+    public class StubTwainScanDriver : StubScanDriver
     {
         public StubTwainScanDriver()
             : base(TwainScanDriver.DRIVER_NAME)

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using CommandLine;
+using CommandLine.Text;
 
 namespace NAPS2
 {
@@ -23,6 +23,15 @@ namespace NAPS2
 
         [Option('d', "delay", DefaultValue = 0, HelpText = "The delay (in milliseconds) before each page is scanned.")]
         public int Delay { get; set; }
+
+        [ParserState]
+        public IParserState LastParserState { get; set; }
+
+        [HelpOption]
+        public string GetUsage()
+        {
+            return HelpText.AutoBuild(this, current => HelpText.DefaultParsingErrorsHandler(this, current));
+        }
 
         // TODO: PDF/Image/ImageFormat
     }
