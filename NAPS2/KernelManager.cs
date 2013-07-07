@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using NAPS2.Email;
 using NAPS2.Pdf;
@@ -28,8 +29,11 @@ using NAPS2.Scan.Stub;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using Ninject;
+using Ninject.Activation;
 using Ninject.Modules;
 using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 namespace NAPS2
 {
@@ -50,7 +54,7 @@ namespace NAPS2
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
                 Bind<IEmailer>().To<MAPIEmailer>();
-                Bind<Logger>().ToConstant(LogManager.GetLogger("NAPS2"));
+                Bind<Logger>().ToMethod(GetLogger).InSingletonScope();
 #if DEBUG && false
                 Bind<IScanDriver>().To<StubWiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
                 Bind<IScanDriver>().To<StubTwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
@@ -58,6 +62,21 @@ namespace NAPS2
                 Bind<IScanDriver>().To<WiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
                 Bind<IScanDriver>().To<TwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
 #endif
+            }
+
+            private Logger GetLogger(IContext arg)
+            {
+                var config = new LoggingConfiguration();
+                var target = new FileTarget
+                {
+                    FileName = Path.Combine(Paths.AppData, "errorlog.txt"),
+                    Layout = "${longdate} ${message} ${exception:format=tostring}"
+                };
+                config.AddTarget("errorlogfile", target);
+                var rule = new LoggingRule("*", LogLevel.Debug, target);
+                config.LoggingRules.Add(rule);
+                LogManager.Configuration = config;
+                return LogManager.GetLogger("NAPS2");
             }
         }
     }

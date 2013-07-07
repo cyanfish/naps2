@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Scan.Wia
 {
@@ -44,7 +45,18 @@ namespace NAPS2.Scan.Wia
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
             }
-            return WiaApi.SelectDeviceUI();
+            try
+            {
+                return WiaApi.SelectDeviceUI();
+            }
+            catch (ScanDriverException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ScanDriverUnknownException(e);
+            }
         }
 
         public IEnumerable<IScannedImage> Scan()
@@ -58,10 +70,34 @@ namespace NAPS2.Scan.Wia
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
             var result = new List<IScannedImage>();
-            var api = new WiaApi(ScanSettings);
+            WiaApi api;
+            try
+            {
+                api = new WiaApi(ScanSettings);
+            }
+            catch (ScanDriverException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ScanDriverUnknownException(e);
+            }
             while (true)
             {
-                ScannedImage image = api.GetImage();
+                ScannedImage image;
+                try
+                {
+                    image = api.GetImage();
+                }
+                catch (ScanDriverException)
+                {
+                    throw;
+                }
+                catch (Exception e)
+                {
+                    throw new ScanDriverUnknownException(e);
+                }
                 if (image == null)
                 {
                     break;

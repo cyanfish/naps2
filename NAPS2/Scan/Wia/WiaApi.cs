@@ -342,11 +342,12 @@ namespace NAPS2.Scan.Wia
                 {
                     try
                     {
-                        items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent, WiaImageBias.MaximizeQuality, true, true, true);
+                        items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent,
+                            WiaImageBias.MaximizeQuality, true, true, true);
                     }
                     catch (COMException e)
                     {
-                        if ((uint)e.ErrorCode == UI_CANCELED)
+                        if ((uint) e.ErrorCode == UI_CANCELED)
                             return null;
                     }
                 }
@@ -355,14 +356,15 @@ namespace NAPS2.Scan.Wia
                     SetupDevice();
                     SetupItem(items[1]);
                 }
-                var file = (ImageFile)wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
+                var file =
+                    (ImageFile) wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
                 if (file == null)
                 {
                     // User cancelled
                     return null;
                 }
 
-                using (var stream = new MemoryStream((byte[])file.FileData.get_BinaryData()))
+                using (var stream = new MemoryStream((byte[]) file.FileData.get_BinaryData()))
                 {
                     using (Image output = Image.FromStream(stream))
                     {
@@ -388,19 +390,19 @@ namespace NAPS2.Scan.Wia
                             }
                         }
 
-                        double realWidth = output.Width / koef;
-                        double realHeight = output.Height / koef;
+                        double realWidth = output.Width/koef;
+                        double realHeight = output.Height/koef;
 
-                        double horizontalRes = output.HorizontalResolution / koef;
-                        double verticalRes = output.VerticalResolution / koef;
+                        double horizontalRes = output.HorizontalResolution/koef;
+                        double verticalRes = output.VerticalResolution/koef;
 
-                        using (var result = new Bitmap((int)realWidth, (int)realHeight))
+                        using (var result = new Bitmap((int) realWidth, (int) realHeight))
                         using (Graphics g = Graphics.FromImage(result))
                         {
                             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            g.DrawImage(output, 0, 0, (int)realWidth, (int)realHeight);
+                            g.DrawImage(output, 0, 0, (int) realWidth, (int) realHeight);
 
-                            result.SetResolution((float)horizontalRes, (float)verticalRes);
+                            result.SetResolution((float) horizontalRes, (float) verticalRes);
 
                             ScanBitDepth bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24Bit;
                             ImageFormat imageFormat = settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg;
@@ -411,11 +413,11 @@ namespace NAPS2.Scan.Wia
             }
             catch (COMException e)
             {
-                if ((uint)e.ErrorCode == ERROR_OUT_OF_PAPER)
+                if ((uint) e.ErrorCode == ERROR_OUT_OF_PAPER)
                 {
                     return null;
                 }
-                else if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                else if ((uint) e.ErrorCode == ERROR_OFFLINE)
                 {
                     throw new DeviceOfflineException();
                 }

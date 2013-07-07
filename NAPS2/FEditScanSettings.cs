@@ -27,11 +27,14 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using Ninject;
+using NLog;
 
 namespace NAPS2
 {
     public partial class FEditScanSettings : Form
     {
+        private readonly Logger logger;
+
         private ScanDevice currentDevice;
 
         private int iconID;
@@ -39,8 +42,9 @@ namespace NAPS2
 
         private bool suppressChangeEvent;
 
-        public FEditScanSettings()
+        public FEditScanSettings(Logger logger)
         {
+            this.logger = logger;
             InitializeComponent();
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
@@ -119,6 +123,10 @@ namespace NAPS2
             }
             catch (ScanDriverException e)
             {
+                if (e is ScanDriverUnknownException)
+                {
+                    logger.ErrorException(e.Message, e.InnerException);
+                }
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

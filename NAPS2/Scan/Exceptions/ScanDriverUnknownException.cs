@@ -28,16 +28,6 @@ namespace NAPS2.Scan.Exceptions
     {
         private const string DEFAULT_MESSAGE = "An error occured with the scanning driver.";
 
-        public ScanDriverUnknownException()
-            : base(DEFAULT_MESSAGE)
-        {
-        }
-
-        public ScanDriverUnknownException(string message)
-            : base(message)
-        {
-        }
-
         public ScanDriverUnknownException(Exception innerException)
             : base(DEFAULT_MESSAGE, innerException)
         {

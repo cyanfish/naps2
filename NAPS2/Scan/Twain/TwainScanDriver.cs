@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Scan.Twain
 {
@@ -44,9 +45,20 @@ namespace NAPS2.Scan.Twain
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
             }
-            string deviceId = TwainApi.SelectDeviceUI();
-            string deviceName = deviceId;
-            return new ScanDevice(deviceId, deviceName, DRIVER_NAME);
+            try
+            {
+                string deviceId = TwainApi.SelectDeviceUI();
+                string deviceName = deviceId;
+                return new ScanDevice(deviceId, deviceName, DRIVER_NAME);
+            }
+            catch (ScanDriverException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ScanDriverUnknownException(e);
+            }
         }
 
         public IEnumerable<IScannedImage> Scan()
@@ -59,8 +71,19 @@ namespace NAPS2.Scan.Twain
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
-            var api = new TwainApi(ScanSettings, DialogParent);
-            return api.Scan();
+            try
+            {
+                var api = new TwainApi(ScanSettings, DialogParent);
+                return api.Scan();
+            }
+            catch (ScanDriverException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ScanDriverUnknownException(e);
+            }
         }
     }
 }

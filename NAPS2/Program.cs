@@ -21,9 +21,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using Ninject;
 using Ninject.Parameters;
+using NLog;
 
 namespace NAPS2
 {
@@ -38,7 +40,14 @@ namespace NAPS2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            Application.ThreadException += UnhandledException;
+
             Application.Run(KernelManager.Kernel.Get<FDesktop>());
+        }
+
+        private static void UnhandledException(object sender, ThreadExceptionEventArgs threadExceptionEventArgs)
+        {
+            KernelManager.Kernel.Get<Logger>().FatalException("An error occurred that caused the application to close.", threadExceptionEventArgs.Exception);
         }
     }
 }

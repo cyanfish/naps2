@@ -25,16 +25,19 @@ using System.Windows.Forms;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using Ninject;
+using NLog;
 
 namespace NAPS2
 {
     public class ScanPerformer : IScanPerformer
     {
         private readonly IKernel kernel;
+        private readonly Logger logger;
 
-        public ScanPerformer(IKernel kernel)
+        public ScanPerformer(IKernel kernel, Logger logger)
         {
             this.kernel = kernel;
+            this.logger = logger;
         }
 
         public void PerformScan(ScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver)
@@ -53,6 +56,10 @@ namespace NAPS2
             }
             catch (ScanDriverException e)
             {
+                if (e is ScanDriverUnknownException)
+                {
+                    logger.ErrorException(e.Message, e.InnerException);
+                }
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
