@@ -7,7 +7,7 @@ using CommandLine;
 
 namespace NAPS2
 {
-    public class AutomatedScanningParameters
+    public class AutomatedScanningOptions
     {
         [Option('o', "output", Required = true, HelpText = "The path to the file to save.")]
         public string OutputPath { get; set; }

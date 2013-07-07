@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Ninject;
+using Ninject.Parameters;
 
 namespace NAPS2
 {
@@ -31,8 +32,20 @@ namespace NAPS2
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            if (args.Length > 1)
+            {
+                var options = new AutomatedScanningOptions();
+                if (!CommandLine.Parser.Default.ParseArguments(args, options))
+                {
+                    return;
+                }
+                var scanning = KernelManager.Kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
+                scanning.Execute();
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

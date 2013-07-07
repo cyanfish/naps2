@@ -98,7 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutomatedScanning.cs" />
-    <Compile Include="AutomatedScanningParameters.cs" />
+    <Compile Include="AutomatedScanningOptions.cs" />
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="ImageFileNamer.cs" />
     <Compile Include="ImageHelper.cs" />
