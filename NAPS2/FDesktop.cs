@@ -34,12 +34,14 @@ namespace NAPS2
     public partial class FDesktop : Form, IScanReceiver
     {
         private readonly IEmailer emailer;
+        private readonly ImageFileNamer imageFileNamer;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IEmailer emailer)
+        public FDesktop(IEmailer emailer, ImageFileNamer imageFileNamer)
         {
             InitializeComponent();
             this.emailer = emailer;
+            this.imageFileNamer = imageFileNamer;
         }
 
         private IEnumerable<int> SelectedIndices
@@ -220,12 +222,13 @@ namespace NAPS2
                         return;
                     }
 
+                    var fileNames = imageFileNamer.GetFileNames(sd.FileName, imageList.Images.Count).GetEnumerator();
                     foreach (ScannedImage img in imageList.Images)
                     {
-                        string filename = Path.GetDirectoryName(sd.FileName) + "\\" + Path.GetFileNameWithoutExtension(sd.FileName) + i.ToString("D3") + Path.GetExtension(sd.FileName);
                         using (Bitmap baseImage = img.GetImage())
                         {
-                            baseImage.Save(filename, format);
+                            baseImage.Save(fileNames.Current, format);
+                            fileNames.MoveNext();
                         }
                         i++;
                     }
