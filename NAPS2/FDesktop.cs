@@ -34,14 +34,14 @@ namespace NAPS2
     public partial class FDesktop : Form, IScanReceiver
     {
         private readonly IEmailer emailer;
-        private readonly ImageFileNamer imageFileNamer;
+        private readonly ImageSaver imageSaver;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IEmailer emailer, ImageFileNamer imageFileNamer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver)
         {
             InitializeComponent();
             this.emailer = emailer;
-            this.imageFileNamer = imageFileNamer;
+            this.imageSaver = imageSaver;
         }
 
         private IEnumerable<int> SelectedIndices
@@ -221,69 +221,8 @@ namespace NAPS2
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
-                    ImageFormat format = GetImageFormat(sd.FileName);
-
-                    int i = 0;
-
-                    if (imageList.Images.Count == 1)
-                    {
-                        using (Bitmap baseImage = imageList.Images[0].GetImage())
-                        {
-                            baseImage.Save(sd.FileName, format);
-                        }
-                        return;
-                    }
-
-                    if (format == ImageFormat.Tiff)
-                    {
-                        Image[] bitmaps = imageList.Images.Select(x => x.GetImage()).ToArray();
-                        TiffHelper.SaveMultipage(bitmaps, sd.FileName);
-                        foreach (Image bitmap in bitmaps)
-                        {
-                            bitmap.Dispose();
-                        }
-                        return;
-                    }
-
-                    var fileNames = imageFileNamer.GetFileNames(sd.FileName, imageList.Images.Count).GetEnumerator();
-                    foreach (ScannedImage img in imageList.Images)
-                    {
-                        using (Bitmap baseImage = img.GetImage())
-                        {
-                            fileNames.MoveNext();
-                            baseImage.Save(fileNames.Current, format);
-                        }
-                        i++;
-                    }
+                    imageSaver.SaveImages(sd.FileName, imageList.Images);
                 }
-            }
-        }
-
-        private ImageFormat GetImageFormat(string fileName)
-        {
-            string extension = Path.GetExtension(fileName);
-            switch (extension.ToLower())
-            {
-                case ".bmp":
-                    return ImageFormat.Bmp;
-                case ".emf":
-                    return ImageFormat.Emf;
-                case ".gif":
-                    return ImageFormat.Gif;
-                case ".ico":
-                    return ImageFormat.Icon;
-                case ".jpg":
-                case ".jpeg":
-                    return ImageFormat.Jpeg;
-                case ".png":
-                    return ImageFormat.Png;
-                case ".tif":
-                case ".tiff":
-                    return ImageFormat.Tiff;
-                case ".wmf":
-                    return ImageFormat.Wmf;
-                default:
-                    return ImageFormat.Jpeg;
             }
         }
 
@@ -291,7 +230,7 @@ namespace NAPS2
         {
             if (imageList.Images.Count > 0)
             {
-                string path = Application.StartupPath + "\\Scan.pdf";
+                string path = Paths.AppData + "\\Scan.pdf";
                 exportPDF(path);
                 emailer.SendEmail(path, "");
                 File.Delete(path);

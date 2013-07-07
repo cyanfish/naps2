@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="ImageSaver.cs" />
     <Compile Include="ImageFileNamer.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="Icons.Designer.cs">
@@ -109,6 +110,7 @@
     <Compile Include="IProfileManager.cs" />
     <Compile Include="IScanPerformer.cs" />
     <Compile Include="IScanReceiver.cs" />
+    <Compile Include="Paths.cs" />
     <Compile Include="ScannedImageList.cs" />
     <Compile Include="ScanPerformer.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
