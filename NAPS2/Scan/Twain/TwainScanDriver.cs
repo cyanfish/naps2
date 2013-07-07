@@ -58,7 +58,7 @@ namespace NAPS2.Scan.Twain
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
-            var api = new TwainApi(ScanSettings);
+            var api = new TwainApi(ScanSettings, DialogParent);
             return api.Scan();
         }
     }
