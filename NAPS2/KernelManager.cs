@@ -70,7 +70,9 @@ namespace NAPS2
                 var target = new FileTarget
                 {
                     FileName = Path.Combine(Paths.AppData, "errorlog.txt"),
-                    Layout = "${longdate} ${message} ${exception:format=tostring}"
+                    Layout = "${longdate} ${message} ${exception:format=tostring}",
+                    ArchiveAboveSize = 100000,
+                    MaxArchiveFiles = 5
                 };
                 config.AddTarget("errorlogfile", target);
                 var rule = new LoggingRule("*", LogLevel.Debug, target);
