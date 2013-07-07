@@ -13,18 +13,26 @@ namespace NAPS2
     {
         public IEnumerable<string> GetFileNames(string baseFileName, int imageCount)
         {
-            // Get the strings that surround the number (if any)
+            if (imageCount == 0)
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            // Split the baseFileName into two parts, between which the number (if any) will be placed
             string prefix = Path.GetDirectoryName(baseFileName) + "\\" + Path.GetFileNameWithoutExtension(baseFileName);
             string postfix = Path.GetExtension(baseFileName);
 
-            int digits = 0; // The number of digits in each number (everything should be zero-padded to this)
-            if (imageCount > 1) // Don't show any digits at all if there's only one image
+            if (imageCount == 1)
             {
-                // Otherwise, use the number of digits in the number (2-9 -> 1, 10-99 -> 2, 100-999 -> 3, etc.)
-                digits = (int) Math.Floor(Math.Log10(digits)) + 1;
+                // Don't show any number at all if there's only one image
+                return Enumerable.Repeat(prefix + postfix, 1);
             }
 
-            return Enumerable.Range(1, imageCount).Select(i => i.ToString("D" + digits));
+            // The number of digits in each number (everything should be zero-padded to this)
+            // Based on the number of images, e.g. (2-9 images -> 1 digit, 10-99 -> 2, 100-999 -> 3, etc.)
+            int digits = (int)Math.Floor(Math.Log10(imageCount)) + 1;
+
+            return Enumerable.Range(1, imageCount).Select(i => prefix + i.ToString("D" + digits) + postfix);
         }
     }
 }

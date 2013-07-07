@@ -250,8 +250,8 @@ namespace NAPS2
                     {
                         using (Bitmap baseImage = img.GetImage())
                         {
-                            baseImage.Save(fileNames.Current, format);
                             fileNames.MoveNext();
+                            baseImage.Save(fileNames.Current, format);
                         }
                         i++;
                     }
