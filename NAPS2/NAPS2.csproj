@@ -86,6 +86,9 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net35\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.1.2\lib\net40\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp, Version=0.9.653.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Setup\lib\PdfSharp.dll</HintPath>
@@ -113,6 +116,7 @@
     <Compile Include="Paths.cs" />
     <Compile Include="ScannedImageList.cs" />
     <Compile Include="ScanPerformer.cs" />
+    <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />
