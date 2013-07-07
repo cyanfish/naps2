@@ -358,20 +358,23 @@ namespace NAPS2.Scan.Wia
 
                         double koef = 1;
 
-                        switch (settingsExt.AfterScanScale)
+                        if (settingsExt != null)
                         {
-                            case ScanScale.OneToOne:
-                                koef = 1;
-                                break;
-                            case ScanScale.OneToTwo:
-                                koef = 2;
-                                break;
-                            case ScanScale.OneToFour:
-                                koef = 4;
-                                break;
-                            case ScanScale.OneToEight:
-                                koef = 8;
-                                break;
+                            switch (settingsExt.AfterScanScale)
+                            {
+                                case ScanScale.OneToOne:
+                                    koef = 1;
+                                    break;
+                                case ScanScale.OneToTwo:
+                                    koef = 2;
+                                    break;
+                                case ScanScale.OneToFour:
+                                    koef = 4;
+                                    break;
+                                case ScanScale.OneToEight:
+                                    koef = 8;
+                                    break;
+                            }
                         }
 
                         double realWidth = output.Width / koef;
