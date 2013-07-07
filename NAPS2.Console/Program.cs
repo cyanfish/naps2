@@ -22,9 +22,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Ninject;
 using Ninject.Parameters;
+using NLog;
 
 namespace NAPS2.Console
 {
@@ -32,13 +34,21 @@ namespace NAPS2.Console
     {
         static void Main(string[] args)
         {
-            var options = new AutomatedScanningOptions();
-            if (!CommandLine.Parser.Default.ParseArguments(args, options))
+            try
             {
-                return;
+                var options = new AutomatedScanningOptions();
+                if (!CommandLine.Parser.Default.ParseArguments(args, options))
+                {
+                    return;
+                }
+                var scanning = KernelManager.Kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
+                scanning.Execute();
             }
-            var scanning = KernelManager.Kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
-            scanning.Execute();
+            catch (Exception ex)
+            {
+                KernelManager.Kernel.Get<Logger>().FatalException("An error occurred that caused the console application to close.", ex);
+                System.Console.WriteLine("An unexpected error occurred.");
+            }
         }
     }
 }

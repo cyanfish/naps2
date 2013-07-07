@@ -113,6 +113,7 @@
     <Compile Include="IProfileManager.cs" />
     <Compile Include="IScanPerformer.cs" />
     <Compile Include="IScanReceiver.cs" />
+    <Compile Include="LoggerFactory.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="ScannedImageList.cs" />
     <Compile Include="ScanPerformer.cs" />
