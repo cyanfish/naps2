@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Email;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Stub;
@@ -30,7 +29,7 @@ using NAPS2.Scan.Wia;
 using Ninject;
 using Ninject.Modules;
 
-namespace NAPS2
+namespace NAPS2.Console
 {
     static class KernelManager
     {
@@ -48,7 +47,6 @@ namespace NAPS2
                 Bind<IScanPerformer>().To<ScanPerformer>();
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
-                Bind<IEmailer>().To<MAPIEmailer>();
 #if DEBUG
                 Bind<IScanDriver>().To<StubWiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
                 Bind<IScanDriver>().To<StubTwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);

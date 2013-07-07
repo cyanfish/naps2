@@ -30,9 +30,16 @@ namespace NAPS2
 {
     public class ScanPerformer : IScanPerformer
     {
+        private readonly IKernel kernel;
+
+        public ScanPerformer(IKernel kernel)
+        {
+            this.kernel = kernel;
+        }
+
         public void PerformScan(ScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver)
         {
-            var driver = KernelManager.Kernel.Get<IScanDriver>(scanSettings.Device.DriverName);
+            var driver = kernel.Get<IScanDriver>(scanSettings.Device.DriverName);
             driver.DialogParent = dialogParent;
             driver.ScanSettings = scanSettings;
 

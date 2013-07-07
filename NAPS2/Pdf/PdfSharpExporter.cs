@@ -30,7 +30,7 @@ namespace NAPS2.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {
-        public bool Export(string path, List<Image> images, PdfInfo info, Func<int, bool> progressCallback)
+        public bool Export(string path, IEnumerable<Image> images, PdfInfo info, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
             document.Info.Author = info.Author;

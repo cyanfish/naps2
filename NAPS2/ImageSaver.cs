@@ -39,23 +39,28 @@ namespace NAPS2
             this.imageFileNamer = imageFileNamer;
         }
 
-        public void SaveImages(string fileName, ICollection<IScannedImage> images)
+        /// <summary>
+        /// Saves the provided collection of images to a file with the given name. The image type is inferred from the file extension.
+        /// If multiple images are provided, they will be saved to files with numeric identifiers, e.g. img1.jpg, img2.jpg, etc..
+        /// </summary>
+        /// <param name="fileName">The name of the file to save. For multiple images, this is modified by appending a number before the extension.</param>
+        /// <param name="images">The collection of images to save.</param>
+        /// <param name="overwritePredicate">A predicate that, given the full name/path of a file that already exists, returns true if it should be overwritten, or false if it should be skipped.</param>
+        public void SaveImages(string fileName, ICollection<IScannedImage> images, Func<string, bool> overwritePredicate)
         {
             ImageFormat format = GetImageFormat(fileName);
 
-            int i = 0;
-
-            if (images.Count == 1)
-            {
-                using (Bitmap baseImage = images.First().GetImage())
-                {
-                    baseImage.Save(fileName, format);
-                }
-                return;
-            }
-
             if (format == ImageFormat.Tiff)
             {
+                if (File.Exists(fileName))
+                {
+                    // Overwrite?
+                    if (!overwritePredicate(Path.GetFullPath(fileName)))
+                    {
+                        // No, so skip it
+                        return;
+                    }
+                }
                 Image[] bitmaps = images.Select(x => x.GetImage()).ToArray();
                 TiffHelper.SaveMultipage(bitmaps, fileName);
                 foreach (Image bitmap in bitmaps)
@@ -71,9 +76,17 @@ namespace NAPS2
                 using (Bitmap baseImage = img.GetImage())
                 {
                     fileNames.MoveNext();
+                    if (File.Exists(fileNames.Current))
+                    {
+                        // Overwrite?
+                        if (!overwritePredicate(Path.GetFullPath(fileNames.Current)))
+                        {
+                            // No, so skip it
+                            continue;
+                        }
+                    }
                     baseImage.Save(fileNames.Current, format);
                 }
-                i++;
             }
         }
 

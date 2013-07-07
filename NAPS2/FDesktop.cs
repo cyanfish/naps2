@@ -222,7 +222,32 @@ namespace NAPS2
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
-                    imageSaver.SaveImages(sd.FileName, imageList.Images);
+                    try
+                    {
+                        imageSaver.SaveImages(sd.FileName, imageList.Images, path =>
+                        {
+                            if (imageList.Images.Count == 1)
+                            {
+                                // One image, so the file name is the same and the save dialog already prompted the user to overwrite
+                                return true;
+                            }
+                            switch (
+                                MessageBox.Show(
+                                    string.Format("The file {0} already exists. Do you want to overwrite it?", path),
+                                    "Overwrite File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning))
+                            {
+                                case DialogResult.Yes:
+                                    return true;
+                                case DialogResult.No:
+                                    return false;
+                                default:
+                                    throw new InvalidOperationException("User cancelled");
+                            }
+                        });
+                    }
+                    catch (InvalidOperationException)
+                    {
+                    }
                 }
             }
         }

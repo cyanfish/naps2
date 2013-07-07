@@ -40,7 +40,9 @@ namespace NAPS2
             }
 
             // Split the baseFileName into two parts, between which the number (if any) will be placed
-            string prefix = Path.GetDirectoryName(baseFileName) + "\\" + Path.GetFileNameWithoutExtension(baseFileName);
+            string name = Path.GetFileNameWithoutExtension(baseFileName);
+            string dir = Path.GetDirectoryName(baseFileName);
+            string prefix = string.IsNullOrEmpty(dir) ? name : dir + "\\" + name;
             string postfix = Path.GetExtension(baseFileName);
 
             if (imageCount == 1)

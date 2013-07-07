@@ -32,17 +32,13 @@ namespace NAPS2.Console
     {
         static void Main(string[] args)
         {
-            if (args.Length > 0)
+            var options = new AutomatedScanningOptions();
+            if (!CommandLine.Parser.Default.ParseArguments(args, options))
             {
-                var options = new AutomatedScanningOptions();
-                if (!CommandLine.Parser.Default.ParseArguments(args, options))
-                {
-                    return;
-                }
-                var scanning = KernelManager.Kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
-                scanning.Execute();
                 return;
             }
+            var scanning = KernelManager.Kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
+            scanning.Execute();
         }
     }
 }

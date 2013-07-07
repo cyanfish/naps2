@@ -117,5 +117,13 @@ namespace NAPS2.Tests.Unit
             var result = namer.GetFileNames(BaseFileName, 100);
             Assert.AreEqual(@"C:\something\base001.jpg", result.ElementAt(0));
         }
+
+        [Test]
+        public void GetFileNames_RelativePath_StaysRelative()
+        {
+            var namer = new ImageFileNamer();
+            var result = namer.GetFileNames("base.jpg", 1);
+            Assert.AreEqual(@"base.jpg", result.ElementAt(0));
+        }
     }
 }
