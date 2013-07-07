@@ -47,7 +47,7 @@ namespace NAPS2.Console
                 Bind<IScanPerformer>().To<ScanPerformer>();
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
-#if DEBUG
+#if DEBUG && false
                 Bind<IScanDriver>().To<StubWiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
                 Bind<IScanDriver>().To<StubTwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
 #else
