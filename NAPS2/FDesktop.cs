@@ -4,6 +4,7 @@
     
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
+    Copyright (C) 2013       Peter De Leeuw
     Copyright (C) 2012-2013  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
@@ -16,7 +17,6 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 */
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -77,6 +77,18 @@ namespace NAPS2
             SelectedIndices = selection;
         }
 
+        private void Clear()
+        {
+            if (imageList.Images.Count > 0)
+            {
+                if (MessageBox.Show(string.Format("Are you sure you want to clear {0} item(s)?", imageList.Images.Count), "Clear", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+                    UpdateThumbnails();
+                }
+            }
+        }
+
         private void Delete()
         {
             if (SelectedIndices.Any())
@@ -87,6 +99,11 @@ namespace NAPS2
                     UpdateThumbnails();
                 }
             }
+        }
+
+        private void SelectAll()
+        {
+            UpdateThumbnails(Enumerable.Range(0, imageList.Images.Count));
         }
 
         private void MoveDown()
@@ -139,6 +156,12 @@ namespace NAPS2
                     if (e.Control)
                     {
                         MoveDown();
+                    }
+                    break;
+                case Keys.A:
+                    if (e.Control)
+                    {
+                        SelectAll();
                     }
                     break;
             }
@@ -278,6 +301,11 @@ namespace NAPS2
         private void tsFlip_Click(object sender, EventArgs e)
         {
             Flip();
+        }
+
+        private void tsClear_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
 
         private void tsDelete_Click(object sender, EventArgs e)

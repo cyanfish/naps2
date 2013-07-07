@@ -1,6 +1,6 @@
 @echo off
 cd %~dp0
-set VERSION=1.0b1
+set VERSION=1.0b2
 set OUTFOLDER=..\publish\%VERSION%
 set TEMPFOLDER=%OUTFOLDER%\naps2-%VERSION%-standalone
 set OUTFILE=..\publish\%VERSION%\naps2-%VERSION%-standalone.zip

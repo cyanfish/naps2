@@ -1,3 +1,5 @@
+extensions: designer.cs generated.cs
+extensions: .cs
 /*
     NAPS2 (Not Another PDF Scanner 2)
     http://sourceforge.net/projects/naps2/
@@ -17,26 +19,3 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using Ninject;
-
-namespace NAPS2
-{
-    static class Program
-    {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            Application.Run(KernelManager.Kernel.Get<FDesktop>());
-        }
-    }
-}

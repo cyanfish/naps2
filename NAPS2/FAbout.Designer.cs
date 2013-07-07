@@ -1,22 +1,3 @@
-/*
-    NAPS2 (Not Another PDF Scanner 2)
-    http://sourceforge.net/projects/naps2/
-    
-    Copyright (C) 2009       Pavel Sorejs
-    Copyright (C) 2012       Michael Adams
-    Copyright (C) 2012-2013  Ben Olden-Cooligan
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public License
-    as published by the Free Software Foundation; either version 2
-    of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-*/
-
 namespace NAPS2
 {
     partial class FAbout
@@ -86,17 +67,17 @@ namespace NAPS2
             this.labelCopyright.Location = new System.Drawing.Point(149, 69);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 12, 3, 0);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(214, 39);
+            this.labelCopyright.Size = new System.Drawing.Size(214, 52);
             this.labelCopyright.TabIndex = 28;
-            this.labelCopyright.Text = "Copyright © 2009 Pavel Sorejs\r\nCopyright © 2012 Michael Adams\r\nCopyright © 2012-2" +
-    "013 Ben Olden-Cooligan";
+            this.labelCopyright.Text = "Copyright © 2009 Pavel Sorejs\r\nCopyright © 2012 Michael Adams\r\nCopyright © 2013 P" +
+    "eter De Leeuw\r\nCopyright © 2012-2013 Ben Olden-Cooligan";
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(351, 130);
+            this.okButton.Location = new System.Drawing.Point(351, 140);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(72, 24);
             this.okButton.TabIndex = 29;
@@ -125,7 +106,7 @@ namespace NAPS2
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(149, 121);
+            this.label1.Location = new System.Drawing.Point(149, 133);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 31;
@@ -134,7 +115,7 @@ namespace NAPS2
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(150, 136);
+            this.linkLabel2.Location = new System.Drawing.Point(150, 146);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(171, 13);
             this.linkLabel2.TabIndex = 32;
@@ -146,7 +127,7 @@ namespace NAPS2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 166);
+            this.ClientSize = new System.Drawing.Size(435, 176);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.okButton);

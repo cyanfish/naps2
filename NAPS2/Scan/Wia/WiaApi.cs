@@ -4,6 +4,7 @@
     
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
+    Copyright (C) 2013       Peter De Leeuw
     Copyright (C) 2012-2013  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
@@ -16,7 +17,6 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 */
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -68,7 +68,18 @@ namespace NAPS2.Scan.Wia
             {
                 if (info.DeviceID == settings.Device.ID)
                 {
-                    device = info.Connect();
+                    try
+                    {
+                        device = info.Connect();
+                    }
+                    catch (COMException e)
+                    {
+                        if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                        {
+                            throw new DeviceOfflineException();
+                        }
+                        throw new ScanDriverException(e);
+                    }
                     return;
                 }
             }
@@ -321,29 +332,28 @@ namespace NAPS2.Scan.Wia
 
         public ScannedImage GetImage()
         {
-            var wiaCommonDialog = new CommonDialogClass();
-
-            Items items = device.Items;
-            if (settingsExt == null)
-            {
-                try
-                {
-                    items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent, WiaImageBias.MaximizeQuality, true, true, true);
-                }
-                catch (COMException e)
-                {
-                    if ((uint)e.ErrorCode == UI_CANCELED)
-                        return null;
-                }
-            }
-            else
-            {
-                SetupDevice();
-                SetupItem(items[1]);
-            }
-
             try
             {
+                var wiaCommonDialog = new CommonDialogClass();
+
+                Items items = device.Items;
+                if (settingsExt == null)
+                {
+                    try
+                    {
+                        items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent, WiaImageBias.MaximizeQuality, true, true, true);
+                    }
+                    catch (COMException e)
+                    {
+                        if ((uint)e.ErrorCode == UI_CANCELED)
+                            return null;
+                    }
+                }
+                else
+                {
+                    SetupDevice();
+                    SetupItem(items[1]);
+                }
                 var file = (ImageFile)wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
                 if (file == null)
                 {
@@ -404,9 +414,13 @@ namespace NAPS2.Scan.Wia
                 {
                     return null;
                 }
+                else if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                {
+                    throw new DeviceOfflineException();
+                }
                 else
                 {
-                    throw new ScanDriverException();
+                    throw new ScanDriverException(e);
                 }
             }
         }

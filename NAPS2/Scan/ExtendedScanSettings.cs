@@ -4,6 +4,7 @@
     
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
+    Copyright (C) 2013       Peter De Leeuw
     Copyright (C) 2012-2013  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
@@ -16,7 +17,6 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 */
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

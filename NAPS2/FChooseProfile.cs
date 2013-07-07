@@ -4,6 +4,7 @@
     
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
+    Copyright (C) 2013       Peter De Leeuw
     Copyright (C) 2012-2013  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
@@ -16,7 +17,6 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 */
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +64,10 @@ namespace NAPS2
             foreach (ScanSettings profile in profileManager.Profiles)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
+                if (profile.IsDefault)
+                {
+                    lvProfiles.Items[lvProfiles.Items.Count - 1].Selected = true;
+                }
             }
             if (profileManager.Profiles.Count == 1)
             {
@@ -109,6 +113,8 @@ namespace NAPS2
                 MessageBox.Show("Select a profile before clicking Scan.", "Choose Profile", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            profileManager.SetDefault(SelectedProfile);
+            profileManager.Save();
             scanPerformer.PerformScan(SelectedProfile, this, scanReceiver);
         }
 
