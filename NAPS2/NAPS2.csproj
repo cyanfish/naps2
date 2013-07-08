@@ -359,6 +359,7 @@
     <None Include="Resources\blueprints.png" />
     <None Include="Resources\arrow_switch.png" />
     <None Include="Resources\zoom_actual.png" />
+    <None Include="Resources\world.png" />
     <Content Include="Setup\license.txt" />
     <Content Include="Setup\setup.iss" />
     <None Include="Setup\lib\wiaaut.dll" />

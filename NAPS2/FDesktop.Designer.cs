@@ -30,6 +30,7 @@ namespace NAPS2
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripButton();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();
@@ -49,13 +50,30 @@ namespace NAPS2
             this.tsClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsLangEnglish = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsLangFrench = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsLangSpanish = new System.Windows.Forms.ToolStripMenuItem();
             this.thumbnailList1 = new NAPS2.ThumbnailList();
-            this.tStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            this.tStrip.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
+            resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
+            resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
             // 
             // tStrip
             // 
@@ -79,6 +97,7 @@ namespace NAPS2
             this.tsDelete,
             this.tsClear,
             this.toolStripSeparator3,
+            this.toolStripDropDownButton1,
             this.tsAbout});
             this.tStrip.Name = "tStrip";
             this.tStrip.ShowItemToolTips = false;
@@ -209,19 +228,35 @@ namespace NAPS2
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
-            // toolStripContainer1
+            // toolStripDropDownButton1
             // 
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsLangEnglish,
+            this.tsLangFrench,
+            this.tsLangSpanish});
+            this.toolStripDropDownButton1.Image = global::NAPS2.Icons.world;
+            resources.ApplyResources(this.toolStripDropDownButton1, "toolStripDropDownButton1");
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.toolStripDropDownButton1.ShowDropDownArrow = false;
             // 
-            // toolStripContainer1.ContentPanel
+            // tsLangEnglish
             // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
-            resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
-            resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
-            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.tsLangEnglish.Name = "tsLangEnglish";
+            resources.ApplyResources(this.tsLangEnglish, "tsLangEnglish");
+            this.tsLangEnglish.Click += new System.EventHandler(this.tsLangEnglish_Click);
             // 
-            // toolStripContainer1.TopToolStripPanel
+            // tsLangFrench
             // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
+            this.tsLangFrench.Name = "tsLangFrench";
+            resources.ApplyResources(this.tsLangFrench, "tsLangFrench");
+            this.tsLangFrench.Click += new System.EventHandler(this.tsLangFrench_Click);
+            // 
+            // tsLangSpanish
+            // 
+            this.tsLangSpanish.Name = "tsLangSpanish";
+            resources.ApplyResources(this.tsLangSpanish, "tsLangSpanish");
+            this.tsLangSpanish.Click += new System.EventHandler(this.tsLangSpanish_Click);
             // 
             // thumbnailList1
             // 
@@ -238,13 +273,13 @@ namespace NAPS2
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "FDesktop";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.tStrip.ResumeLayout(false);
-            this.tStrip.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            this.tStrip.ResumeLayout(false);
+            this.tStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -272,6 +307,10 @@ namespace NAPS2
         private System.Windows.Forms.ToolStripButton tsProfiles;
         private System.Windows.Forms.ToolStripButton tsAbout;
         private System.Windows.Forms.ToolStripButton tsDelete;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem tsLangEnglish;
+        private System.Windows.Forms.ToolStripMenuItem tsLangFrench;
+        private System.Windows.Forms.ToolStripMenuItem tsLangSpanish;
     }
 }
 

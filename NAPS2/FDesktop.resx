@@ -117,49 +117,140 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Name" xml:space="preserve">
+    <value>toolStripContainer1.BottomToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Parent" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="thumbnailList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="thumbnailList1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="thumbnailList1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1129, 472</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;thumbnailList1.Name" xml:space="preserve">
+    <value>thumbnailList1</value>
+  </data>
+  <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
+    <value>NAPS2.ThumbnailList, NAPS2, Version=2.0.4937.27007, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
+    <value>toolStripContainer1.ContentPanel</value>
+  </data>
+  <data name="&gt;&gt;thumbnailList1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1129, 472</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
+    <value>toolStripContainer1.ContentPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripContentPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Parent" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.ContentPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="toolStripContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Name" xml:space="preserve">
+    <value>toolStripContainer1.LeftToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Parent" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="toolStripContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Name" xml:space="preserve">
+    <value>toolStripContainer1.RightToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1129, 526</value>
+  </data>
+  <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="toolStripContainer1.Text" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
   <metadata name="tStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>152, 17</value>
   </metadata>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        fz/IxusXRQQgAAAAAElFTkSuQmCC
+        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
+        xoVrU2pOAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -358,6 +449,36 @@
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
   </data>
+  <data name="tsLangEnglish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsLangEnglish.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="tsLangFrench.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsLangFrench.Text" xml:space="preserve">
+    <value>Francais</value>
+  </data>
+  <data name="tsLangSpanish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsLangSpanish.Text" xml:space="preserve">
+    <value>Espanol</value>
+  </data>
+  <data name="toolStripDropDownButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 51</value>
+  </data>
+  <data name="toolStripDropDownButton1.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="toolStripDropDownButton1.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageAboveText</value>
+  </data>
   <data name="tsAbout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -414,9 +535,8 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1027, 54</value>
+    <value>1110, 54</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
@@ -434,96 +554,6 @@
   </data>
   <data name="&gt;&gt;tStrip.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Name" xml:space="preserve">
-    <value>toolStripContainer1.BottomToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Parent" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="thumbnailList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="thumbnailList1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="thumbnailList1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1065, 472</value>
-  </data>
-  <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;thumbnailList1.Name" xml:space="preserve">
-    <value>thumbnailList1</value>
-  </data>
-  <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.ThumbnailList, NAPS2, Version=2.0.4936.35473, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
-    <value>toolStripContainer1.ContentPanel</value>
-  </data>
-  <data name="&gt;&gt;thumbnailList1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1065, 472</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
-    <value>toolStripContainer1.ContentPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripContentPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Parent" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="toolStripContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Name" xml:space="preserve">
-    <value>toolStripContainer1.LeftToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Parent" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="toolStripContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Name" xml:space="preserve">
-    <value>toolStripContainer1.RightToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1065, 526</value>
-  </data>
-  <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="toolStripContainer1.Text" xml:space="preserve">
-    <value>toolStripContainer1</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.TopToolStripPanel</value>
@@ -556,7 +586,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1065, 526</value>
+    <value>1129, 526</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -692,6 +722,30 @@
   </data>
   <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripDropDownButton1.Name" xml:space="preserve">
+    <value>toolStripDropDownButton1</value>
+  </data>
+  <data name="&gt;&gt;toolStripDropDownButton1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsLangEnglish.Name" xml:space="preserve">
+    <value>tsLangEnglish</value>
+  </data>
+  <data name="&gt;&gt;tsLangEnglish.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsLangFrench.Name" xml:space="preserve">
+    <value>tsLangFrench</value>
+  </data>
+  <data name="&gt;&gt;tsLangFrench.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsLangSpanish.Name" xml:space="preserve">
+    <value>tsLangSpanish</value>
+  </data>
+  <data name="&gt;&gt;tsLangSpanish.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FDesktop</value>

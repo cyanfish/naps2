@@ -22,8 +22,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Email;
 using NAPS2.Scan;
@@ -306,6 +308,27 @@ namespace NAPS2
         private void tsAbout_Click(object sender, EventArgs e)
         {
             new FAbout().ShowDialog();
+        }
+
+        private void tsLangEnglish_Click(object sender, EventArgs e)
+        {
+            SetCulture("en-US");
+        }
+
+        private void tsLangFrench_Click(object sender, EventArgs e)
+        {
+            SetCulture("fr-FR");
+        }
+
+        private void tsLangSpanish_Click(object sender, EventArgs e)
+        {
+            SetCulture("es-ES");
+        }
+
+        private static void SetCulture(string cultureId)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureId);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureId);
         }
     }
 }
