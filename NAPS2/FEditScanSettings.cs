@@ -34,6 +34,7 @@ namespace NAPS2
     public partial class FEditScanSettings : Form
     {
         private readonly Logger logger;
+        private readonly IErrorOutput errorOutput;
 
         private ScanDevice currentDevice;
 
@@ -42,9 +43,10 @@ namespace NAPS2
 
         private bool suppressChangeEvent;
 
-        public FEditScanSettings(Logger logger)
+        public FEditScanSettings(Logger logger, IErrorOutput errorOutput)
         {
             this.logger = logger;
+            this.errorOutput = errorOutput;
             InitializeComponent();
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
@@ -127,7 +129,7 @@ namespace NAPS2
                 {
                     logger.ErrorException(e.Message, e.InnerException);
                 }
-                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorOutput.DisplayError(e.Message);
             }
         }
 
@@ -173,13 +175,13 @@ namespace NAPS2
         {
             if (CurrentDevice == null)
             {
-                MessageBox.Show("No device selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorOutput.DisplayError("No device selected.");
                 return;
             }
 
             if (txtName.Text == "")
             {
-                MessageBox.Show("Name missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorOutput.DisplayError("Name missing.");
                 return;
             }
             result = true;

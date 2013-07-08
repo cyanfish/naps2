@@ -54,6 +54,7 @@ namespace NAPS2
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
                 Bind<IEmailer>().To<MAPIEmailer>();
+                Bind<IErrorOutput>().To<MessageBoxErrorOutput>();
                 Bind<Logger>().ToMethod(LoggerFactory.GetLogger).InSingletonScope();
 #if DEBUG && false
                 Bind<IScanDriver>().To<StubWiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);

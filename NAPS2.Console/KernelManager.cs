@@ -48,6 +48,7 @@ namespace NAPS2.Console
                 Bind<IScanPerformer>().To<ScanPerformer>();
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
+                Bind<IErrorOutput>().To<ConsoleErrorOutput>();
                 Bind<Logger>().ToMethod(LoggerFactory.GetLogger).InSingletonScope();
 #if DEBUG && false
                 Bind<IScanDriver>().To<StubWiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);

@@ -37,18 +37,20 @@ namespace NAPS2.Console
         private readonly IPdfExporter pdfExporter;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
+        private readonly IErrorOutput errorOutput;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput)
         {
             this.options = options;
             this.imageSaver = imageSaver;
             this.pdfExporter = pdfExporter;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
+            this.errorOutput = errorOutput;
         }
 
         public void Execute()
@@ -73,7 +75,7 @@ namespace NAPS2.Console
         {
             if (scannedImages.Count == 0)
             {
-                System.Console.WriteLine("No scanned pages to export.");
+                errorOutput.DisplayError("No scanned pages to export.");
                 return;
             }
 
@@ -112,7 +114,7 @@ namespace NAPS2.Console
         {
             if (!options.ForceOverwrite)
             {
-                System.Console.WriteLine("File already exists. Use --force to overwrite. Path: {0}", path);
+                errorOutput.DisplayError(string.Format("File already exists. Use --force to overwrite. Path: {0}", path));
             }
             if (options.ForceOverwrite && options.Verbose)
             {
@@ -136,18 +138,26 @@ namespace NAPS2.Console
                 Subject = "Scanned Image",
                 Author = "NAPS2"
             };
-            pdfExporter.Export(options.OutputPath, scannedImages.Select(x => (Image) x.GetImage()), pdfInfo, i =>
+
+            try
             {
+                pdfExporter.Export(options.OutputPath, scannedImages.Select(x => (Image)x.GetImage()), pdfInfo, i =>
+                {
+                    if (options.Verbose)
+                    {
+                        System.Console.WriteLine("Exported page {0} of {1}.", i, scannedImages.Count);
+                    }
+                    return true;
+                });
+
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine("Exported page {0} of {1}.", i, scannedImages.Count);
+                    System.Console.WriteLine("Successfully saved PDF file to {0}", options.OutputPath);
                 }
-                return true;
-            });
-
-            if (options.Verbose)
+            }
+            catch (UnauthorizedAccessException)
             {
-                System.Console.WriteLine("Successfully saved PDF file to {0}", options.OutputPath);
+                errorOutput.DisplayError("You don't have permission to save files at this location.");
             }
         }
 
@@ -159,7 +169,7 @@ namespace NAPS2.Console
             }
 
             scannedImages = new List<IScannedImage>();
-            IWin32Window parentWindow = new Form {Visible = false};
+            IWin32Window parentWindow = new Form { Visible = false };
             foreach (int i in Enumerable.Range(1, options.Number))
             {
                 if (options.Delay > 0)
@@ -205,8 +215,8 @@ namespace NAPS2.Console
             }
             catch (InvalidOperationException)
             {
-                System.Console.WriteLine("The specified profile is unavailable or ambiguous.");
-                System.Console.WriteLine("Use the --profile option to specify a profile by name.");
+                errorOutput.DisplayError("The specified profile is unavailable or ambiguous.\r\n"
+                        + "Use the --profile option to specify a profile by name.");
                 profile = null;
                 return false;
             }
