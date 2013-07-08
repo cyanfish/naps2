@@ -41,93 +41,54 @@ namespace NAPS2
             // 
             // labelProductName
             // 
-            this.labelProductName.AutoSize = true;
-            this.labelProductName.Location = new System.Drawing.Point(149, 12);
-            this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            resources.ApplyResources(this.labelProductName, "labelProductName");
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(88, 13);
-            this.labelProductName.TabIndex = 27;
-            this.labelProductName.Text = "AssemblyProduct";
-            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelVersion
             // 
-            this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(149, 28);
-            this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            resources.ApplyResources(this.labelVersion, "labelVersion");
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(86, 13);
-            this.labelVersion.TabIndex = 25;
-            this.labelVersion.Text = "AssemblyVersion";
-            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelCopyright
             // 
-            this.labelCopyright.AutoSize = true;
-            this.labelCopyright.Location = new System.Drawing.Point(149, 69);
-            this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 12, 3, 0);
+            resources.ApplyResources(this.labelCopyright, "labelCopyright");
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(214, 52);
-            this.labelCopyright.TabIndex = 28;
-            this.labelCopyright.Text = "Copyright © 2009 Pavel Sorejs\r\nCopyright © 2012 Michael Adams\r\nCopyright © 2013 P" +
-    "eter De Leeuw\r\nCopyright © 2012-2013 Ben Olden-Cooligan";
             // 
             // okButton
             // 
-            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            resources.ApplyResources(this.okButton, "okButton");
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(351, 140);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(72, 24);
-            this.okButton.TabIndex = 29;
-            this.okButton.Text = "&OK";
             // 
             // logoPictureBox
             // 
-            this.logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
-            this.logoPictureBox.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.logoPictureBox, "logoPictureBox");
             this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(128, 128);
-            this.logoPictureBox.TabIndex = 26;
             this.logoPictureBox.TabStop = false;
             // 
             // linkLabel1
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(150, 42);
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(193, 13);
-            this.linkLabel1.TabIndex = 30;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "http://sourceforge.com/projects/naps2";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(149, 133);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "Icons from:";
             // 
             // linkLabel2
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(150, 146);
+            resources.ApplyResources(this.linkLabel2, "linkLabel2");
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(171, 13);
-            this.linkLabel2.TabIndex = 32;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "http://www.fatcow.com/free-icons";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // FAbout
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 176);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.okButton);
@@ -140,11 +101,8 @@ namespace NAPS2
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FAbout";
-            this.Padding = new System.Windows.Forms.Padding(9);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "About";
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

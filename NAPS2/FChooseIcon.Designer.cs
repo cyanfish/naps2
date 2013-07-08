@@ -36,25 +36,19 @@ namespace NAPS2
             // 
             // iconList
             // 
-            this.iconList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconList.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.iconList, "iconList");
             this.iconList.MultiSelect = false;
             this.iconList.Name = "iconList";
-            this.iconList.Size = new System.Drawing.Size(316, 302);
-            this.iconList.TabIndex = 0;
             this.iconList.UseCompatibleStateImageBehavior = false;
             this.iconList.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
             // 
             // FChooseIcon
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(316, 302);
             this.Controls.Add(this.iconList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FChooseIcon";
-            this.Text = "Choose Icon";
             this.Load += new System.EventHandler(this.FChooseIcon_Load);
             this.ResumeLayout(false);
 

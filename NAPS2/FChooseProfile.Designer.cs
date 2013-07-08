@@ -40,75 +40,48 @@ namespace NAPS2
             // lvProfiles
             // 
             this.lvProfiles.HideSelection = false;
-            this.lvProfiles.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.lvProfiles, "lvProfiles");
             this.lvProfiles.MultiSelect = false;
             this.lvProfiles.Name = "lvProfiles";
-            this.lvProfiles.Size = new System.Drawing.Size(563, 80);
-            this.lvProfiles.TabIndex = 3;
             this.lvProfiles.UseCompatibleStateImageBehavior = false;
             this.lvProfiles.ItemActivate += new System.EventHandler(this.lvProfiles_ItemActivate);
             // 
             // btnScan
             // 
             this.btnScan.BackColor = System.Drawing.SystemColors.Control;
-            this.btnScan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.btnScan, "btnScan");
             this.btnScan.Image = global::NAPS2.Icons.scanner_72;
-            this.btnScan.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnScan.Location = new System.Drawing.Point(581, 12);
             this.btnScan.Name = "btnScan";
-            this.btnScan.Padding = new System.Windows.Forms.Padding(0, 2, 0, 6);
-            this.btnScan.Size = new System.Drawing.Size(117, 118);
-            this.btnScan.TabIndex = 0;
-            this.btnScan.Text = "&Scan";
-            this.btnScan.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnScan.UseVisualStyleBackColor = false;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // btnProfiles
             // 
-            this.btnProfiles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            resources.ApplyResources(this.btnProfiles, "btnProfiles");
             this.btnProfiles.Image = global::NAPS2.Icons.blueprints_small;
-            this.btnProfiles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProfiles.Location = new System.Drawing.Point(12, 98);
             this.btnProfiles.Name = "btnProfiles";
-            this.btnProfiles.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.btnProfiles.Size = new System.Drawing.Size(128, 32);
-            this.btnProfiles.TabIndex = 1;
-            this.btnProfiles.Text = "Manage &Profiles";
-            this.btnProfiles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnProfiles.UseVisualStyleBackColor = true;
             this.btnProfiles.Click += new System.EventHandler(this.btnProfiles_Click);
             // 
             // btnDone
             // 
-            this.btnDone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnDone.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDone.Location = new System.Drawing.Point(481, 98);
+            resources.ApplyResources(this.btnDone, "btnDone");
             this.btnDone.Name = "btnDone";
-            this.btnDone.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.btnDone.Size = new System.Drawing.Size(94, 32);
-            this.btnDone.TabIndex = 2;
-            this.btnDone.Text = "&Done";
             this.btnDone.UseVisualStyleBackColor = true;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // FChooseProfile
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 142);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.btnProfiles);
             this.Controls.Add(this.btnScan);
             this.Controls.Add(this.lvProfiles);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FChooseProfile";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Choose Profile";
             this.Load += new System.EventHandler(this.FChooseProfile_Load);
             this.ResumeLayout(false);
 

@@ -68,22 +68,16 @@ namespace NAPS2
             // 
             // tiffViewer1
             // 
-            this.tiffViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.tiffViewer1, "tiffViewer1");
             this.tiffViewer1.Image = null;
-            this.tiffViewer1.Location = new System.Drawing.Point(0, 0);
             this.tiffViewer1.Name = "tiffViewer1";
-            this.tiffViewer1.Size = new System.Drawing.Size(656, 654);
-            this.tiffViewer1.TabIndex = 0;
             // 
             // FViewer
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(656, 654);
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.tiffViewer1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FViewer";
             this.ShowInTaskbar = false;
-            this.Text = "Preview";
             this.ResumeLayout(false);
 
         }
