@@ -32,11 +32,13 @@ namespace NAPS2
     public partial class FPDFSave : Form
     {
         private readonly IPdfExporter pdfExporter;
+        private readonly IErrorOutput errorOutput;
 
-        public FPDFSave(IPdfExporter pdfExporter)
+        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput)
         {
             InitializeComponent();
             this.pdfExporter = pdfExporter;
+            this.errorOutput = errorOutput;
             Shown += FPDFSave_Shown;
         }
 
@@ -54,11 +56,19 @@ namespace NAPS2
             };
             List<Image> imgs = Images.Select(x => (Image)x.GetImage()).ToList();
 
-            pdfExporter.Export(Filename, imgs, info, num =>
+            try
             {
-                Invoke(new ThreadStart(() => SetStatus(num, imgs.Count)));
-                return true;
-            });
+                pdfExporter.Export(Filename, imgs, info, num =>
+                {
+                    Invoke(new ThreadStart(() => SetStatus(num, imgs.Count)));
+                    return true;
+                });
+            }
+            catch (UnauthorizedAccessException)
+            {
+                errorOutput.DisplayError("You don't have permission to save files at this location.");
+            }
+
             Invoke(new ThreadStart(Close));
         }
 

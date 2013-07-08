@@ -138,18 +138,26 @@ namespace NAPS2.Console
                 Subject = "Scanned Image",
                 Author = "NAPS2"
             };
-            pdfExporter.Export(options.OutputPath, scannedImages.Select(x => (Image) x.GetImage()), pdfInfo, i =>
+
+            try
             {
+                pdfExporter.Export(options.OutputPath, scannedImages.Select(x => (Image)x.GetImage()), pdfInfo, i =>
+                {
+                    if (options.Verbose)
+                    {
+                        System.Console.WriteLine("Exported page {0} of {1}.", i, scannedImages.Count);
+                    }
+                    return true;
+                });
+
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine("Exported page {0} of {1}.", i, scannedImages.Count);
+                    System.Console.WriteLine("Successfully saved PDF file to {0}", options.OutputPath);
                 }
-                return true;
-            });
-
-            if (options.Verbose)
+            }
+            catch (UnauthorizedAccessException)
             {
-                System.Console.WriteLine("Successfully saved PDF file to {0}", options.OutputPath);
+                errorOutput.DisplayError("You don't have permission to save files at this location.");
             }
         }
 
@@ -161,7 +169,7 @@ namespace NAPS2.Console
             }
 
             scannedImages = new List<IScannedImage>();
-            IWin32Window parentWindow = new Form {Visible = false};
+            IWin32Window parentWindow = new Form { Visible = false };
             foreach (int i in Enumerable.Range(1, options.Number))
             {
                 if (options.Delay > 0)

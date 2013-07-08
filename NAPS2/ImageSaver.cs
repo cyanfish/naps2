@@ -33,10 +33,12 @@ namespace NAPS2
     public class ImageSaver
     {
         private readonly ImageFileNamer imageFileNamer;
+        private readonly IErrorOutput errorOutput;
 
-        public ImageSaver(ImageFileNamer imageFileNamer)
+        public ImageSaver(ImageFileNamer imageFileNamer, IErrorOutput errorOutput)
         {
             this.imageFileNamer = imageFileNamer;
+            this.errorOutput = errorOutput;
         }
 
         /// <summary>
@@ -48,45 +50,52 @@ namespace NAPS2
         /// <param name="overwritePredicate">A predicate that, given the full name/path of a file that already exists, returns true if it should be overwritten, or false if it should be skipped.</param>
         public void SaveImages(string fileName, ICollection<IScannedImage> images, Func<string, bool> overwritePredicate)
         {
-            ImageFormat format = GetImageFormat(fileName);
-
-            if (format == ImageFormat.Tiff)
+            try
             {
-                if (File.Exists(fileName))
-                {
-                    // Overwrite?
-                    if (!overwritePredicate(Path.GetFullPath(fileName)))
-                    {
-                        // No, so skip it
-                        return;
-                    }
-                }
-                Image[] bitmaps = images.Select(x => x.GetImage()).ToArray();
-                TiffHelper.SaveMultipage(bitmaps, fileName);
-                foreach (Image bitmap in bitmaps)
-                {
-                    bitmap.Dispose();
-                }
-                return;
-            }
+                ImageFormat format = GetImageFormat(fileName);
 
-            var fileNames = imageFileNamer.GetFileNames(fileName, images.Count).GetEnumerator();
-            foreach (ScannedImage img in images)
-            {
-                using (Bitmap baseImage = img.GetImage())
+                if (format == ImageFormat.Tiff)
                 {
-                    fileNames.MoveNext();
-                    if (File.Exists(fileNames.Current))
+                    if (File.Exists(fileName))
                     {
                         // Overwrite?
-                        if (!overwritePredicate(Path.GetFullPath(fileNames.Current)))
+                        if (!overwritePredicate(Path.GetFullPath(fileName)))
                         {
                             // No, so skip it
-                            continue;
+                            return;
                         }
                     }
-                    baseImage.Save(fileNames.Current, format);
+                    Image[] bitmaps = images.Select(x => x.GetImage()).ToArray();
+                    TiffHelper.SaveMultipage(bitmaps, fileName);
+                    foreach (Image bitmap in bitmaps)
+                    {
+                        bitmap.Dispose();
+                    }
+                    return;
                 }
+
+                var fileNames = imageFileNamer.GetFileNames(fileName, images.Count).GetEnumerator();
+                foreach (ScannedImage img in images)
+                {
+                    using (Bitmap baseImage = img.GetImage())
+                    {
+                        fileNames.MoveNext();
+                        if (File.Exists(fileNames.Current))
+                        {
+                            // Overwrite?
+                            if (!overwritePredicate(Path.GetFullPath(fileNames.Current)))
+                            {
+                                // No, so skip it
+                                continue;
+                            }
+                        }
+                        baseImage.Save(fileNames.Current, format);
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                errorOutput.DisplayError("You don't have permission to save files at this location.");
             }
         }
 
