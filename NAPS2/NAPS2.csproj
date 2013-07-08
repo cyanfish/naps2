@@ -113,6 +113,11 @@
     <Compile Include="IProfileManager.cs" />
     <Compile Include="IScanPerformer.cs" />
     <Compile Include="IScanReceiver.cs" />
+    <Compile Include="Lang\en\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="ScannedImageList.cs" />
@@ -244,6 +249,10 @@
     <EmbeddedResource Include="ILProfileIcons.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\en\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
