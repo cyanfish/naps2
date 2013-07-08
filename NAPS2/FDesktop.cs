@@ -31,6 +31,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Email;
+using NAPS2.Lang;
 using NAPS2.Scan;
 using Ninject;
 using Ninject.Parameters;
@@ -46,8 +47,22 @@ namespace NAPS2
         public FDesktop(IEmailer emailer, ImageSaver imageSaver)
         {
             InitializeComponent();
+            InitLanguageDropdown();
             this.emailer = emailer;
             this.imageSaver = imageSaver;
+        }
+
+        private void InitLanguageDropdown()
+        {
+            var resourceManager = Languages.ResourceManager;
+            var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            foreach (DictionaryEntry entry in resourceSet)
+            {
+                var langCode = (string)entry.Key;
+                var langName = (string)entry.Value;
+                var button = new ToolStripMenuItem(langName, null, (sender, args) => SetCulture(langCode));
+                toolStripDropDownButton1.DropDownItems.Add(button);
+            }
         }
 
         private IEnumerable<int> SelectedIndices
@@ -313,21 +328,6 @@ namespace NAPS2
             new FAbout().ShowDialog();
         }
 
-        private void tsLangEnglish_Click(object sender, EventArgs e)
-        {
-            SetCulture("en-US");
-        }
-
-        private void tsLangFrench_Click(object sender, EventArgs e)
-        {
-            SetCulture("fr-FR");
-        }
-
-        private void tsLangSpanish_Click(object sender, EventArgs e)
-        {
-            SetCulture("es-ES");
-        }
-
         private void SetCulture(string cultureId)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureId);
@@ -337,6 +337,7 @@ namespace NAPS2
             // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live
             Controls.RemoveAll();
             InitializeComponent();
+            InitLanguageDropdown();
             UpdateThumbnails();
         }
     }

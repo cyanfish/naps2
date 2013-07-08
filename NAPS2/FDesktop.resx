@@ -139,18 +139,11 @@
   <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
     <value>toolStripSeparator4</value>
-  </data>
-  <data name="tsLangFrench.Text" xml:space="preserve">
-    <value>Francais</value>
   </data>
   <data name="tsClear.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -186,8 +179,8 @@
   <data name="&gt;&gt;tsFlip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 526</value>
+  <data name="tsRotateRight.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="tsFlip.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -195,7 +188,7 @@
   <data name="tsAbout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAB+pJREFUWEelVwlUVOcVNsdjT805ERkYMFab1FiJhihYo5ZgLIKRGFyiyQATwBjX
+        vgAADr4B6kKxwAAAB+pJREFUWEelVwlUVOcVNsdjT805ERkYMFab1FiJhihYo5ZgLIKRGFyiyQATwBjX
         oHErccV9ixIicUFAQBhWWXQwxp0qyyAgq4MDDKtRIIoU1KhETb7e+94bEGaMtr3nfOe8udt3//uv0+NF
         Reb6XR9z97gV5p8cKTVzT0EfRXIH+HdfjxTIPI+UWronrGBfKez/lpfk00PekHkkaa28j2H6nhL4pd5A
         SEE7Iksf41DRI4QWPERw/gMEZNzBQlUNJu3Ih5WPGpaeSVqO5Rxiqv9eeso8EkOZeElCPRIrgbQ6IP0n
@@ -259,7 +252,7 @@
   <data name="tsProfiles.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAByxJREFUWEedlmtQlNcZx+20/ZiZfpGv/dBmbLyFmHTafupMzKASEBDYC2CaJmJE
+        vgAADr4B6kKxwAAAByxJREFUWEedlmtQlNcZx+20/ZiZfpGv/dBmbLyFmHTafupMzKASEBDYC2CaJmJE
         BMRbbSdpkzb1SlKNXJc7uuzCIuIlTUy94I37srCwLOwimiCXXQTNpdOZoPz7f86GBPBdUM/Mf857zvue
         8/zP8/ze3XfRY7afvJBuPReafhIr02xYuc2GFZT0C+n5tBr2VXWyR2Crp2vPSPAapw9Wxygq7cM40ToM
         i30EVRxrydo+Ckv7CKo7RvGXaidWpJhruc+PA9s9eVssJ6/kpusOXULYgYvw/hcIO3gREVn1iPygHhEz
@@ -293,9 +286,6 @@
         AABJRU5ErkJggg==
 </value>
   </data>
-  <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 51</value>
-  </data>
   <data name="&gt;&gt;tsLangFrench.Name" xml:space="preserve">
     <value>tsLangFrench</value>
   </data>
@@ -304,6 +294,9 @@
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -341,35 +334,32 @@
   <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Parent" xml:space="preserve">
     <value>toolStripContainer1</value>
   </data>
+  <data name="tsMoveUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 51</value>
+  </data>
   <data name="&gt;&gt;tsPDFEmail.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripDropDownButton1.Text" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
   <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.BottomToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;tsRotateLeft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsMoveDown.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="tsMoveUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 51</value>
+  <data name="tsPDFEmail.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="tStrip.Text" xml:space="preserve">
     <value>Main toolbar</value>
   </data>
   <data name="tsFlip.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
-  </data>
-  <data name="tsLangSpanish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 472</value>
   </data>
   <data name="thumbnailList1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -383,8 +373,8 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FDesktop</value>
   </data>
-  <data name="tsRotateRight.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
   </data>
   <data name="&gt;&gt;tStrip.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -407,14 +397,18 @@
   <data name="tsAbout.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
   <data name="tsLangSpanish.Text" xml:space="preserve">
     <value>Espanol</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
   </data>
-  <data name="tsLangEnglish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+  <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
   <data name="&gt;&gt;tsLangSpanish.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -440,14 +434,17 @@
   <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;tStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
-    <value>toolStripContainer1.ContentPanel</value>
+  <data name="tsLangEnglish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="&gt;&gt;thumbnailList1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.RightToolStripPanel</value>
@@ -473,8 +470,8 @@
   <data name="tsLangFrench.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
-  <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1129, 472</value>
   </data>
   <data name="tsSaveImage.Text" xml:space="preserve">
     <value>Save Images</value>
@@ -542,6 +539,43 @@
   <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        rkJggg==
+</value>
+  </data>
   <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -602,8 +636,8 @@
   <data name="tsSaveImage.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 51</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tsLangSpanish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
   </data>
   <data name="tsClear.Text" xml:space="preserve">
     <value>Clear</value>
@@ -645,10 +679,10 @@
     <value>Scan</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.ThumbnailList, NAPS2, Version=2.0.4937.27851, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.ThumbnailList, NAPS2, Version=2.0.4937.32265, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;tsRotateLeft.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1129, 526</value>
   </data>
   <data name="&gt;&gt;tsDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -662,17 +696,17 @@
   <data name="thumbnailList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;tsMoveUp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;thumbnailList1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Parent" xml:space="preserve">
     <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
+    <value>toolStripContainer1.ContentPanel</value>
   </data>
   <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1129, 526</value>
@@ -692,45 +726,11 @@
   <data name="tsRotateRight.Text" xml:space="preserve">
     <value>Rotate Right</value>
   </data>
-  <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        rkJggg==
-</value>
+  <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 51</value>
   </data>
-  <data name="tsPDFEmail.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="tsLangFrench.Text" xml:space="preserve">
+    <value>Francais</value>
   </data>
   <data name="tsDelete.Text" xml:space="preserve">
     <value>Delete</value>
@@ -741,8 +741,8 @@
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
+    <value>toolStripContainer1</value>
   </data>
   <data name="tsScan.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
@@ -754,7 +754,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>fr-FR</value>
+    <value>fr</value>
   </metadata>
   <metadata name="tStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>152, 17</value>

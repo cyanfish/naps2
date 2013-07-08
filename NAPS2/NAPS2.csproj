@@ -120,6 +120,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Lang\Languages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Languages.resx</DependentUpon>
+    </Compile>
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="MessageBoxErrorOutput.cs" />
     <Compile Include="Paths.cs" />
@@ -256,6 +261,10 @@
     <EmbeddedResource Include="Lang\en\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Languages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Languages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
