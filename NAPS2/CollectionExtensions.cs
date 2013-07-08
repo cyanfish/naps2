@@ -19,6 +19,7 @@
 */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,7 +27,15 @@ namespace NAPS2
 {
     public static class CollectionExtensions
     {
-        public static void RemoveAll<T>(this IList<T> list, IEnumerable<int> indices)
+        public static void RemoveAll(this IList list)
+        {
+            foreach (int i in Enumerable.Range(0, list.Count))
+            {
+                list.RemoveAt(0);
+            }
+        }
+
+        public static void RemoveAll(this IList list, IEnumerable<int> indices)
         {
             int offset = 0;
             foreach (int i in indices.OrderBy(x => x))

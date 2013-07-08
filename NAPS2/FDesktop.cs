@@ -19,12 +19,15 @@
 */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Email;
@@ -325,10 +328,16 @@ namespace NAPS2
             SetCulture("es-ES");
         }
 
-        private static void SetCulture(string cultureId)
+        private void SetCulture(string cultureId)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureId);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureId);
+
+            // Update localized values
+            // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live
+            Controls.RemoveAll();
+            InitializeComponent();
+            UpdateThumbnails();
         }
     }
 }
