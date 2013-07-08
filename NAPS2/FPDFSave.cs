@@ -53,6 +53,7 @@ namespace NAPS2
                 Author = "NAPS2"
             };
             List<Image> imgs = Images.Select(x => (Image)x.GetImage()).ToList();
+
             pdfExporter.Export(Filename, imgs, info, num =>
             {
                 Invoke(new ThreadStart(() => SetStatus(num, imgs.Count)));

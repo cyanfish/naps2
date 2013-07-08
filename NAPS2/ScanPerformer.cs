@@ -33,11 +33,13 @@ namespace NAPS2
     {
         private readonly IKernel kernel;
         private readonly Logger logger;
+        private readonly IErrorOutput errorOutput;
 
-        public ScanPerformer(IKernel kernel, Logger logger)
+        public ScanPerformer(IKernel kernel, Logger logger, IErrorOutput errorOutput)
         {
             this.kernel = kernel;
             this.logger = logger;
+            this.errorOutput = errorOutput;
         }
 
         public void PerformScan(ScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver)
@@ -60,7 +62,7 @@ namespace NAPS2
                 {
                     logger.ErrorException(e.Message, e.InnerException);
                 }
-                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorOutput.DisplayError(e.Message);
             }
         }
     }

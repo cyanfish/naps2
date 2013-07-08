@@ -37,18 +37,20 @@ namespace NAPS2.Console
         private readonly IPdfExporter pdfExporter;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
+        private readonly IErrorOutput errorOutput;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput)
         {
             this.options = options;
             this.imageSaver = imageSaver;
             this.pdfExporter = pdfExporter;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
+            this.errorOutput = errorOutput;
         }
 
         public void Execute()
@@ -73,7 +75,7 @@ namespace NAPS2.Console
         {
             if (scannedImages.Count == 0)
             {
-                System.Console.WriteLine("No scanned pages to export.");
+                errorOutput.DisplayError("No scanned pages to export.");
                 return;
             }
 
@@ -112,7 +114,7 @@ namespace NAPS2.Console
         {
             if (!options.ForceOverwrite)
             {
-                System.Console.WriteLine("File already exists. Use --force to overwrite. Path: {0}", path);
+                errorOutput.DisplayError(string.Format("File already exists. Use --force to overwrite. Path: {0}", path));
             }
             if (options.ForceOverwrite && options.Verbose)
             {
@@ -205,8 +207,8 @@ namespace NAPS2.Console
             }
             catch (InvalidOperationException)
             {
-                System.Console.WriteLine("The specified profile is unavailable or ambiguous.");
-                System.Console.WriteLine("Use the --profile option to specify a profile by name.");
+                errorOutput.DisplayError("The specified profile is unavailable or ambiguous.\r\n"
+                        + "Use the --profile option to specify a profile by name.");
                 profile = null;
                 return false;
             }

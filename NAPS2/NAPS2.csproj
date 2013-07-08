@@ -56,6 +56,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>C8F5581951AECD73BCA215500C4A83D3DCBE30C2</ManifestCertificateThumbprint>
@@ -74,7 +75,7 @@
     <DefineConstants>TRACE;STANDALONE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -102,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="IErrorOutput.cs" />
     <Compile Include="ImageSaver.cs" />
     <Compile Include="ImageFileNamer.cs" />
     <Compile Include="ImageHelper.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="IScanPerformer.cs" />
     <Compile Include="IScanReceiver.cs" />
     <Compile Include="LoggerFactory.cs" />
+    <Compile Include="MessageBoxErrorOutput.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="ScannedImageList.cs" />
     <Compile Include="ScanPerformer.cs" />
