@@ -26,6 +26,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Console.Lang.Resources;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 
@@ -75,13 +76,13 @@ namespace NAPS2.Console
         {
             if (scannedImages.Count == 0)
             {
-                errorOutput.DisplayError("No scanned pages to export.");
+                errorOutput.DisplayError(ConsoleResources.NoPagesToExport);
                 return;
             }
 
             if (options.Verbose)
             {
-                System.Console.WriteLine("Exporting...");
+                System.Console.WriteLine(ConsoleResources.Exporting);
             }
 
             string extension = Path.GetExtension(options.OutputPath);
@@ -106,7 +107,7 @@ namespace NAPS2.Console
 
             if (options.Verbose)
             {
-                System.Console.WriteLine("Finished saving images to {0}", options.OutputPath);
+                System.Console.WriteLine(ConsoleResources.FinishedSavingImages, options.OutputPath);
             }
         }
 
@@ -114,11 +115,11 @@ namespace NAPS2.Console
         {
             if (!options.ForceOverwrite)
             {
-                errorOutput.DisplayError(string.Format("File already exists. Use --force to overwrite. Path: {0}", path));
+                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
             }
             if (options.ForceOverwrite && options.Verbose)
             {
-                System.Console.WriteLine("Overwriting: {0}", path);
+                System.Console.WriteLine(ConsoleResources.Overwriting, path);
             }
         }
 
@@ -134,9 +135,9 @@ namespace NAPS2.Console
             }
             var pdfInfo = new PdfInfo
             {
-                Title = "Scanned Image",
-                Subject = "Scanned Image",
-                Author = "NAPS2"
+                Title = ConsoleResources.ScannedImage,
+                Subject = ConsoleResources.ScannedImage,
+                Author = ConsoleResources.NAPS2
             };
 
             try
@@ -145,19 +146,19 @@ namespace NAPS2.Console
                 {
                     if (options.Verbose)
                     {
-                        System.Console.WriteLine("Exported page {0} of {1}.", i, scannedImages.Count);
+                        System.Console.WriteLine(ConsoleResources.ExportedPage, i, scannedImages.Count);
                     }
                     return true;
                 });
 
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine("Successfully saved PDF file to {0}", options.OutputPath);
+                    System.Console.WriteLine(ConsoleResources.SuccessfullySavedPdf, options.OutputPath);
                 }
             }
             catch (UnauthorizedAccessException)
             {
-                errorOutput.DisplayError("You don't have permission to save files at this location.");
+                errorOutput.DisplayError(ConsoleResources.DontHavePermission);
             }
         }
 
@@ -165,7 +166,7 @@ namespace NAPS2.Console
         {
             if (options.Verbose)
             {
-                System.Console.WriteLine("Beginning scan...");
+                System.Console.WriteLine(ConsoleResources.BeginningScan);
             }
 
             scannedImages = new List<IScannedImage>();
@@ -176,19 +177,19 @@ namespace NAPS2.Console
                 {
                     if (options.Verbose)
                     {
-                        System.Console.WriteLine("Waiting {0}ms...", options.Delay);
+                        System.Console.WriteLine(ConsoleResources.Waiting, options.Delay);
                     }
                     Thread.Sleep(options.Delay);
                 }
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine("Starting scan {0} of {1}...", i, options.Number);
+                    System.Console.WriteLine(ConsoleResources.StartingScan, i, options.Number);
                 }
                 pagesScanned = 0;
                 scanPerformer.PerformScan(profile, parentWindow, this);
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine("{0} page(s) scanned.", pagesScanned);
+                    System.Console.WriteLine(ConsoleResources.PagesScanned, pagesScanned);
                 }
             }
         }
@@ -215,8 +216,7 @@ namespace NAPS2.Console
             }
             catch (InvalidOperationException)
             {
-                errorOutput.DisplayError("The specified profile is unavailable or ambiguous.\r\n"
-                        + "Use the --profile option to specify a profile by name.");
+                errorOutput.DisplayError(ConsoleResources.ProfileUnavailableOrAmbiguous);
                 profile = null;
                 return false;
             }
