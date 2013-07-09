@@ -120,6 +120,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Lang\Resources\SettingsResources.Designer.cs">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Lang\Resources\MiscResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -131,6 +136,7 @@
     <Compile Include="ScannedImageList.cs" />
     <Compile Include="ScanPerformer.cs" />
     <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
+    <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />
@@ -261,6 +267,10 @@
     <EmbeddedResource Include="Lang\LanguageResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LanguageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\MiscResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

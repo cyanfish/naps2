@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan
 {
@@ -47,72 +48,72 @@ namespace NAPS2.Scan
 
     public enum ScanSource
     {
-        [Description("Glass")]
+        [LocalizedDescription(typeof(SettingsResources), "Source_Glass")]
         Glass,
-        [Description("Feeder")]
+        [LocalizedDescription(typeof(SettingsResources), "Source_Feeder")]
         Feeder,
-        [Description("Duplex")]
+        [LocalizedDescription(typeof(SettingsResources), "Source_Duplex")]
         Duplex
     }
 
     public enum ScanBitDepth
     {
-        [Description("24-bit Color")]
+        [LocalizedDescription(typeof(SettingsResources), "BitDepth_24Color")]
         C24Bit,
-        [Description("Grayscale")]
+        [LocalizedDescription(typeof(SettingsResources), "BitDepth_8Grayscale")]
         Grayscale,
-        [Description("Black & White")]
+        [LocalizedDescription(typeof(SettingsResources), "BitDepth_1BlackAndWhite")]
         BlackWhite
     }
 
     public enum ScanDpi
     {
-        [Description("100 dpi")]
+        [LocalizedDescription(typeof(SettingsResources), "Dpi_100")]
         Dpi100,
-        [Description("200 dpi")]
+        [LocalizedDescription(typeof(SettingsResources), "Dpi_200")]
         Dpi200,
-        [Description("300 dpi")]
+        [LocalizedDescription(typeof(SettingsResources), "Dpi_300")]
         Dpi300,
-        [Description("600 dpi")]
+        [LocalizedDescription(typeof(SettingsResources), "Dpi_600")]
         Dpi600,
-        [Description("1200 dpi")]
+        [LocalizedDescription(typeof(SettingsResources), "Dpi_1200")]
         Dpi1200
     }
 
     public enum ScanHorizontalAlign
     {
-        [Description("Left")]
+        [LocalizedDescription(typeof(SettingsResources), "HorizontalAlign_Left")]
         Left,
-        [Description("Center")]
+        [LocalizedDescription(typeof(SettingsResources), "HorizontalAlign_Center")]
         Center,
-        [Description("Right")]
+        [LocalizedDescription(typeof(SettingsResources), "HorizontalAlign_Right")]
         Right
     }
 
     public enum ScanScale
     {
-        [Description("1:1")]
+        [LocalizedDescription(typeof(SettingsResources), "Scale_1_1")]
         OneToOne,
-        [Description("1:2")]
+        [LocalizedDescription(typeof(SettingsResources), "Scale_1_2")]
         OneToTwo,
-        [Description("1:4")]
+        [LocalizedDescription(typeof(SettingsResources), "Scale_1_4")]
         OneToFour,
-        [Description("1:8")]
+        [LocalizedDescription(typeof(SettingsResources), "Scale_1_8")]
         OneToEight
     }
 
     public enum ScanPageSize
     {
-        [Description("A5 (148x210 mm)")]
-        A5,
-        [Description("A4 (210x297 mm)")]
-        A4,
-        [Description("A3 (297x420 mm)")]
-        A3,
-        [Description("US Legal (8.5x14 in)")]
+        [LocalizedDescription(typeof(SettingsResources), "PageSize_Letter")]
+        Letter,
+        [LocalizedDescription(typeof(SettingsResources), "PageSize_Legal")]
         Legal,
-        [Description("US Letter (8.5x11 in)")]
-        Letter
+        [LocalizedDescription(typeof(SettingsResources), "PageSize_A5")]
+        A5,
+        [LocalizedDescription(typeof(SettingsResources), "PageSize_A4")]
+        A4,
+        [LocalizedDescription(typeof(SettingsResources), "PageSize_A3")]
+        A3
     }
 
     public static class ScanEnumExtensions
