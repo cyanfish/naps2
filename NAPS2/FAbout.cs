@@ -25,6 +25,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 
 namespace NAPS2
 {
@@ -34,7 +35,7 @@ namespace NAPS2
         {
             InitializeComponent();
             labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
+            labelVersion.Text = String.Format(MiscResources.Version, AssemblyVersion);
         }
 
         #region Assembly Attribute Accessors

@@ -47,13 +47,13 @@ namespace NAPS2
 
         public IList<IScannedImage> Images { get; set; }
 
-        private void exportPDFProcess()
+        private void ExportPdfProcess()
         {
             var info = new PdfInfo
             {
-                Title = "Scanned Image",
-                Subject = "Scanned Image",
-                Author = "NAPS2"
+                Title = MiscResources.ScannedImage,
+                Subject = MiscResources.ScannedImage,
+                Author = MiscResources.NAPS2
             };
             List<Image> imgs = Images.Select(x => (Image)x.GetImage()).ToList();
 
@@ -67,7 +67,7 @@ namespace NAPS2
             }
             catch (UnauthorizedAccessException)
             {
-                errorOutput.DisplayError("You don't have permission to save files at this location.");
+                errorOutput.DisplayError(MiscResources.DontHavePermission);
             }
 
             Invoke(new ThreadStart(Close));
@@ -75,7 +75,7 @@ namespace NAPS2
 
         void FPDFSave_Shown(object sender, EventArgs e)
         {
-            new Thread(exportPDFProcess).Start();
+            new Thread(ExportPdfProcess).Start();
         }
 
         public void SetStatus(int count, int total)

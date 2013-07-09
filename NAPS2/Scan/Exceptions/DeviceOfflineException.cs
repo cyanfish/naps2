@@ -21,15 +21,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan.Exceptions
 {
     public class DeviceOfflineException : ScanDriverException
     {
-        private const string DEFAULT_MESSAGE = "The selected scanner is offline.";
-
         public DeviceOfflineException()
-            : base(DEFAULT_MESSAGE)
+            : base(MiscResources.DeviceOffline)
         {
         }
 
@@ -39,7 +38,7 @@ namespace NAPS2.Scan.Exceptions
         }
 
         public DeviceOfflineException(Exception innerException)
-            : base(DEFAULT_MESSAGE, innerException)
+            : base(MiscResources.DeviceOffline, innerException)
         {
         }
 

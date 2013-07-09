@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Twain;
@@ -175,13 +176,13 @@ namespace NAPS2
         {
             if (CurrentDevice == null)
             {
-                errorOutput.DisplayError("No device selected.");
+                errorOutput.DisplayError(MiscResources.NoDeviceSelected);
                 return;
             }
 
             if (txtName.Text == "")
             {
-                errorOutput.DisplayError("Name missing.");
+                errorOutput.DisplayError(MiscResources.NameMissing);
                 return;
             }
             result = true;

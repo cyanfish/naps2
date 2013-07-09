@@ -26,6 +26,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 
 namespace NAPS2
@@ -95,7 +96,7 @@ namespace NAPS2
             }
             catch (UnauthorizedAccessException)
             {
-                errorOutput.DisplayError("You don't have permission to save files at this location.");
+                errorOutput.DisplayError(MiscResources.DontHavePermission);
             }
         }
 

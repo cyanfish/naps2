@@ -133,6 +133,33 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected scanner could not be found..
+        /// </summary>
+        internal static string DeviceNotFound {
+            get {
+                return ResourceManager.GetString("DeviceNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected scanner is offline..
+        /// </summary>
+        internal static string DeviceOffline {
+            get {
+                return ResourceManager.GetString("DeviceOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have permission to save files at this location..
+        /// </summary>
+        internal static string DontHavePermission {
+            get {
+                return ResourceManager.GetString("DontHavePermission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -214,6 +241,42 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name missing..
+        /// </summary>
+        internal static string NameMissing {
+            get {
+                return ResourceManager.GetString("NameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NAPS2.
+        /// </summary>
+        internal static string NAPS2 {
+            get {
+                return ResourceManager.GetString("NAPS2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No device selected..
+        /// </summary>
+        internal static string NoDeviceSelected {
+            get {
+                return ResourceManager.GetString("NoDeviceSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No scanning device was found..
+        /// </summary>
+        internal static string NoDevicesFound {
+            get {
+                return ResourceManager.GetString("NoDevicesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overwrite File.
         /// </summary>
         internal static string OverwriteFile {
@@ -232,11 +295,38 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scanned Image.
+        /// </summary>
+        internal static string ScannedImage {
+            get {
+                return ResourceManager.GetString("ScannedImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a profile before clicking Scan..
         /// </summary>
         internal static string SelectProfileBeforeScan {
             get {
                 return ResourceManager.GetString("SelectProfileBeforeScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred with the scanning driver..
+        /// </summary>
+        internal static string UnknownDriverError {
+            get {
+                return ResourceManager.GetString("UnknownDriverError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version {0}.
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
     }
