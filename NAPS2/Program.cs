@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.WinForms;
 using Ninject;
 using Ninject.Parameters;
 using NLog;

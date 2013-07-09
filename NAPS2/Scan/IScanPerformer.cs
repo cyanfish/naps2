@@ -21,12 +21,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Scan;
+using System.Windows.Forms;
 
-namespace NAPS2
+namespace NAPS2.Scan
 {
-    public interface IScanReceiver
+    public interface IScanPerformer
     {
-        void ReceiveScannedImage(IScannedImage scannedImage);
+        void PerformScan(ScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver);
     }
 }

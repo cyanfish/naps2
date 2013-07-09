@@ -22,12 +22,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using Ninject;
 using NLog;
 
-namespace NAPS2
+namespace NAPS2.Scan
 {
     public class ScanPerformer : IScanPerformer
     {

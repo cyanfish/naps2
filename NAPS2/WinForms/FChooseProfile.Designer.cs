@@ -1,4 +1,8 @@
-namespace NAPS2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NAPS2.WinForms
 {
     partial class FChooseProfile
     {

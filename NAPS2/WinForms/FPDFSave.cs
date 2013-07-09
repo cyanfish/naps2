@@ -28,7 +28,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 
-namespace NAPS2
+namespace NAPS2.WinForms
 {
     public partial class FPDFSave : Form
     {

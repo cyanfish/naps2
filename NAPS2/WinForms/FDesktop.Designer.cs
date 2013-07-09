@@ -1,4 +1,8 @@
-namespace NAPS2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NAPS2.WinForms
 {
     partial class FDesktop
     {
@@ -31,7 +35,7 @@ namespace NAPS2
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.thumbnailList1 = new NAPS2.ThumbnailList();
+            this.thumbnailList1 = new ThumbnailList();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripButton();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();

@@ -25,8 +25,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Scan;
+using NAPS2.Scan.Twain;
 
-namespace NAPS2.Scan.Twain
+namespace NAPS2.WinForms
 {
     internal partial class FTwainGui : Form, IMessageFilter
     {

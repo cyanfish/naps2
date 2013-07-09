@@ -26,7 +26,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using Ninject;
 
-namespace NAPS2
+namespace NAPS2.WinForms
 {
     public partial class FChooseProfile : Form
     {

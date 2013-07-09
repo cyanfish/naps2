@@ -21,13 +21,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Email;
@@ -37,7 +34,7 @@ using NAPS2.Scan;
 using Ninject;
 using Ninject.Parameters;
 
-namespace NAPS2
+namespace NAPS2.WinForms
 {
     public partial class FDesktop : Form, IScanReceiver
     {

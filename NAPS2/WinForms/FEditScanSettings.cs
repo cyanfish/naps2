@@ -30,7 +30,7 @@ using NAPS2.Scan.Wia;
 using Ninject;
 using NLog;
 
-namespace NAPS2
+namespace NAPS2.WinForms
 {
     public partial class FEditScanSettings : Form
     {

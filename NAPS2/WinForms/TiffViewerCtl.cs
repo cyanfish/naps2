@@ -25,7 +25,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace NAPS2
+namespace NAPS2.WinForms
 {
     public class TiffViewerCtl : UserControl
     {

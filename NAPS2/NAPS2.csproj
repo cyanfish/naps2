@@ -113,8 +113,8 @@
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
     <Compile Include="IProfileManager.cs" />
-    <Compile Include="IScanPerformer.cs" />
-    <Compile Include="IScanReceiver.cs" />
+    <Compile Include="Scan\IScanPerformer.cs" />
+    <Compile Include="Scan\IScanReceiver.cs" />
     <Compile Include="Lang\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,17 +133,17 @@
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="MessageBoxErrorOutput.cs" />
     <Compile Include="Paths.cs" />
-    <Compile Include="ScannedImageList.cs" />
-    <Compile Include="ScanPerformer.cs" />
+    <Compile Include="Scan\ScannedImageList.cs" />
+    <Compile Include="Scan\ScanPerformer.cs" />
     <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
     <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />
-    <Compile Include="Scan\Twain\FTwainGui.cs">
+    <Compile Include="WinForms\FTwainGui.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Scan\Twain\FTwainGui.Designer.cs">
+    <Compile Include="WinForms\FTwainGui.Designer.cs">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </Compile>
     <Compile Include="Scan\Twain\TwainDefs.cs" />
@@ -162,10 +162,10 @@
     <Compile Include="Scan\Twain\TwainScanDriver.cs" />
     <Compile Include="Scan\ScanDevice.cs" />
     <Compile Include="Scan\ScannedImage.cs" />
-    <Compile Include="FAbout.cs">
+    <Compile Include="WinForms\FAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FAbout.Designer.cs">
+    <Compile Include="WinForms\FAbout.Designer.cs">
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
     <Compile Include="Scan\IScanDriver.cs" />
@@ -174,43 +174,43 @@
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
     <Compile Include="ProfileManager.cs" />
     <Compile Include="TiffHelper.cs" />
-    <Compile Include="FChooseIcon.cs">
+    <Compile Include="WinForms\FChooseIcon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FChooseIcon.Designer.cs">
+    <Compile Include="WinForms\FChooseIcon.Designer.cs">
       <DependentUpon>FChooseIcon.cs</DependentUpon>
     </Compile>
-    <Compile Include="FChooseProfile.cs">
+    <Compile Include="WinForms\FChooseProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FChooseProfile.Designer.cs">
+    <Compile Include="WinForms\FChooseProfile.Designer.cs">
       <DependentUpon>FChooseProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="FEditScanSettings.cs">
+    <Compile Include="WinForms\FEditScanSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FEditScanSettings.Designer.cs">
+    <Compile Include="WinForms\FEditScanSettings.Designer.cs">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="FManageProfiles.cs">
+    <Compile Include="WinForms\FManageProfiles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FManageProfiles.Designer.cs">
+    <Compile Include="WinForms\FManageProfiles.Designer.cs">
       <DependentUpon>FManageProfiles.cs</DependentUpon>
     </Compile>
-    <Compile Include="FDesktop.cs">
+    <Compile Include="WinForms\FDesktop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FDesktop.Designer.cs">
+    <Compile Include="WinForms\FDesktop.Designer.cs">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </Compile>
-    <Compile Include="FPDFSave.cs">
+    <Compile Include="WinForms\FPDFSave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FPDFSave.Designer.cs">
+    <Compile Include="WinForms\FPDFSave.Designer.cs">
       <DependentUpon>FPDFSave.cs</DependentUpon>
     </Compile>
-    <Compile Include="FViewer.cs">
+    <Compile Include="WinForms\FViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ILProfileIcons.cs">
@@ -224,35 +224,35 @@
     <Compile Include="Email\MAPIMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FAbout.resx">
+    <EmbeddedResource Include="WinForms\FAbout.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FChooseIcon.resx">
+    <EmbeddedResource Include="WinForms\FChooseIcon.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FChooseIcon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FChooseProfile.resx">
+    <EmbeddedResource Include="WinForms\FChooseProfile.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FChooseProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FEditScanSettings.resx">
+    <EmbeddedResource Include="WinForms\FEditScanSettings.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FManageProfiles.resx">
+    <EmbeddedResource Include="WinForms\FManageProfiles.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FManageProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FDesktop.resx">
+    <EmbeddedResource Include="WinForms\FDesktop.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FPDFSave.resx">
+    <EmbeddedResource Include="WinForms\FPDFSave.resx">
       <DependentUpon>FPDFSave.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FViewer.resx">
+    <EmbeddedResource Include="WinForms\FViewer.resx">
       <DependentUpon>FViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -281,19 +281,19 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scan\Twain\FTwainGui.resx">
+    <EmbeddedResource Include="WinForms\FTwainGui.resx">
       <DependentUpon>FTwainGui.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.resx">
+    <EmbeddedResource Include="WinForms\ThumbnailList.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TiffViewer.resx">
+    <EmbeddedResource Include="WinForms\TiffViewer.resx">
       <DependentUpon>TiffViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TiffViewerCtl.resx">
+    <EmbeddedResource Include="WinForms\TiffViewerCtl.resx">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -314,16 +314,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ThumbnailList.cs">
+    <Compile Include="WinForms\ThumbnailList.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ThumbnailList.Designer.cs">
+    <Compile Include="WinForms\ThumbnailList.Designer.cs">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </Compile>
-    <Compile Include="TiffViewer.cs">
+    <Compile Include="WinForms\TiffViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TiffViewerCtl.cs">
+    <Compile Include="WinForms\TiffViewerCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -395,9 +395,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Lang\tmx\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

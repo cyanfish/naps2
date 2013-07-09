@@ -24,7 +24,7 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan;
 
-namespace NAPS2
+namespace NAPS2.WinForms
 {
     public partial class ThumbnailList : ListView
     {

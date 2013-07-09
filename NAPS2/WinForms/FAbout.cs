@@ -27,7 +27,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 
-namespace NAPS2
+namespace NAPS2.WinForms
 {
     partial class FAbout : Form
     {
