@@ -32,6 +32,7 @@ using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Email;
 using NAPS2.Lang;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using Ninject;
 using Ninject.Parameters;
@@ -55,7 +56,7 @@ namespace NAPS2
         private void InitLanguageDropdown()
         {
             // Read a list of languages from the Languages.resx file
-            var resourceManager = Languages.ResourceManager;
+            var resourceManager = LanguageResources.ResourceManager;
             var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             foreach (DictionaryEntry entry in resourceSet)
             {
@@ -107,7 +108,7 @@ namespace NAPS2
         {
             if (imageList.Images.Count > 0)
             {
-                if (MessageBox.Show(string.Format("Are you sure you want to clear {0} item(s)?", imageList.Images.Count), "Clear", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (MessageBox.Show(string.Format(MiscResources.ConfirmClearItems, imageList.Images.Count), MiscResources.Clear, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
                     UpdateThumbnails();
@@ -119,7 +120,7 @@ namespace NAPS2
         {
             if (SelectedIndices.Any())
             {
-                if (MessageBox.Show(string.Format("Are you sure you want to delete {0} item(s)?", SelectedIndices.Count()), "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, SelectedIndices.Count()), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     imageList.Delete(SelectedIndices);
                     UpdateThumbnails();
@@ -157,7 +158,7 @@ namespace NAPS2
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY));
         }
 
-        private void exportPDF(string filename)
+        private void ExportPDF(string filename)
         {
             var pdfdialog = KernelManager.Kernel.Get<FPDFSave>();
             pdfdialog.Filename = filename;
@@ -216,12 +217,12 @@ namespace NAPS2
                     {
                         OverwritePrompt = true,
                         AddExtension = true,
-                        Filter = "PDF document (*.pdf)|*.pdf"
+                        Filter = MiscResources.FileTypePdf + "|*.pdf"
                     };
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
-                    exportPDF(sd.FileName);
+                    ExportPDF(sd.FileName);
                 }
             }
         }
@@ -234,13 +235,13 @@ namespace NAPS2
                     {
                         OverwritePrompt = true,
                         AddExtension = true,
-                        Filter = "Bitmap Files (*.bmp)|*.bmp" +
-                                 "|Enhanced Windows MetaFile (*.emf)|*.emf" +
-                                 "|Exchangeable Image File (*.exif)|*.exif" +
-                                 "|GIF File (*.gif)|*.gif" +
-                                 "|JPEG File (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
-                                 "|PNG File (*.png)|*.png" +
-                                 "|TIFF File (*.tiff, *.tif)|*.tiff;*.tif",
+                        Filter = MiscResources.FileTypeBmp + "|*.bmp|" +
+                                 MiscResources.FileTypeEmf + "|*.emf|" +
+                                 MiscResources.FileTypeExif + "|*.exif|" +
+                                 MiscResources.FileTypeGif + "|*.gif|" +
+                                 MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
+                                 MiscResources.FileTypePng + "|*.png|" +
+                                 MiscResources.FileTypeTiff + "|*.tiff;*.tif",
                         DefaultExt = "jpg",
                         FilterIndex = 5
                     };
@@ -258,8 +259,8 @@ namespace NAPS2
                             }
                             switch (
                                 MessageBox.Show(
-                                    string.Format("The file {0} already exists. Do you want to overwrite it?", path),
-                                    "Overwrite File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning))
+                                    string.Format(MiscResources.ConfirmOverwriteFile, path),
+                                    MiscResources.OverwriteFile, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning))
                             {
                                 case DialogResult.Yes:
                                     return true;
@@ -282,7 +283,7 @@ namespace NAPS2
             if (imageList.Images.Count > 0)
             {
                 string path = Paths.AppData + "\\Scan.pdf";
-                exportPDF(path);
+                ExportPDF(path);
                 emailer.SendEmail(path, "");
                 File.Delete(path);
             }

@@ -69,7 +69,6 @@ namespace NAPS2.Scan.Wia
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
-            var result = new List<IScannedImage>();
             WiaApi api;
             try
             {

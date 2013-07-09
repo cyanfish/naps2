@@ -115,10 +115,15 @@
     <Compile Include="IProfileManager.cs" />
     <Compile Include="IScanPerformer.cs" />
     <Compile Include="IScanReceiver.cs" />
-    <Compile Include="Lang\Languages.Designer.cs">
+    <Compile Include="Lang\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Languages.resx</DependentUpon>
+      <DependentUpon>LanguageResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\MiscResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiscResources.resx</DependentUpon>
     </Compile>
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="MessageBoxErrorOutput.cs" />
@@ -253,9 +258,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lang\Languages.resx">
+    <EmbeddedResource Include="Lang\LanguageResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Languages.Designer.cs</LastGenOutput>
+      <LastGenOutput>LanguageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MiscResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -377,7 +386,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Lang\res\" />
     <Folder Include="Lang\tmx\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

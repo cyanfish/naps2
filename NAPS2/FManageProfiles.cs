@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using Ninject;
 
@@ -106,16 +107,10 @@ namespace NAPS2
         {
             if (lvProfiles.SelectedItems.Count > 0)
             {
-                string label;
-                if (lvProfiles.SelectedIndices.Count == 1)
-                {
-                    label = "the profile \"" + profileManager.Profiles[lvProfiles.SelectedIndices[0]].DisplayName + "\"";
-                }
-                else
-                {
-                    label = lvProfiles.SelectedIndices.Count + " profiles";
-                }
-                if (MessageBox.Show("Are you sure want to delete " + label + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                string message = lvProfiles.SelectedIndices.Count == 1
+                    ? string.Format(MiscResources.ConfirmDeleteSingleProfile, profileManager.Profiles[lvProfiles.SelectedIndices[0]].DisplayName)
+                    : string.Format(MiscResources.ConfirmDeleteMultipleProfiles, lvProfiles.SelectedIndices.Count);
+                if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
                     profileManager.Profiles.RemoveAll(lvProfiles.SelectedIndices.OfType<int>());
                     profileManager.Save();

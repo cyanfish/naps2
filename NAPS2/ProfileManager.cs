@@ -25,18 +25,24 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using NAPS2.Scan;
+using NLog;
 
 namespace NAPS2
 {
     public class ProfileManager : IProfileManager
     {
-        private const string ProfilesFileName = "profiles.xml";
+        private const string PROFILES_FILE_NAME = "profiles.xml";
 
-        private static readonly string ProfilesPath = Path.Combine(Paths.AppData, ProfilesFileName);
+        private static readonly string ProfilesPath = Path.Combine(Paths.AppData, PROFILES_FILE_NAME);
 
-        private static readonly string OldProfilesPath = Path.Combine(Application.StartupPath, "profiles.xml");
+        private readonly Logger logger;
 
         private List<ScanSettings> profiles;
+
+        public ProfileManager(Logger logger)
+        {
+            this.logger = logger;
+        }
 
         public List<ScanSettings> Profiles
         {
@@ -65,20 +71,6 @@ namespace NAPS2
             TryLoadProfiles(ProfilesPath);
             if (profiles == null)
             {
-                // Try migrating from an older version
-                TryLoadProfiles(OldProfilesPath);
-                if (profiles != null)
-                {
-                    Save();
-                    try
-                    {
-                        File.Delete(OldProfilesPath);
-                    }
-                    catch (IOException) { }
-                }
-            }
-            if (profiles == null)
-            {
                 profiles = new List<ScanSettings>();
                 Save();
             }
@@ -102,11 +94,14 @@ namespace NAPS2
                 {
                     using (Stream strFile = File.OpenRead(profilesPath))
                     {
-                        var serializer = new XmlSerializer(typeof(List<ScanSettings>));
-                        profiles = (List<ScanSettings>)serializer.Deserialize(strFile);
+                        var serializer = new XmlSerializer(typeof (List<ScanSettings>));
+                        profiles = (List<ScanSettings>) serializer.Deserialize(strFile);
                     }
                 }
-                catch (Exception) { }
+                catch (Exception ex)
+                {
+                    logger.ErrorException("Error loading profile.", ex);
+                }
             }
         }
     }

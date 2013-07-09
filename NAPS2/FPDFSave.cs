@@ -24,6 +24,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 
@@ -79,7 +80,7 @@ namespace NAPS2
 
         public void SetStatus(int count, int total)
         {
-            lblStatus.Text = count.ToString("G") + " of " + total.ToString("G");
+            lblStatus.Text = string.Format(MiscResources.PdfStatus, count.ToString("G"), total.ToString("G"));
             Application.DoEvents();
         }
     }

@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using Ninject;
 
@@ -111,7 +112,7 @@ namespace NAPS2
             }
             if (SelectedProfile == null)
             {
-                MessageBox.Show("Select a profile before clicking Scan.", "Choose Profile", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             profileManager.SetDefault(SelectedProfile);

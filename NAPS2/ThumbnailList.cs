@@ -41,7 +41,7 @@ namespace NAPS2
             foreach (IScannedImage img in images)
             {
                 ilThumbnailList.Images.Add(img.Thumbnail);
-                ListViewItem item = Items.Add("", ilThumbnailList.Images.Count - 1);
+                Items.Add("", ilThumbnailList.Images.Count - 1);
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 
 namespace NAPS2
 {
@@ -9,7 +10,7 @@ namespace NAPS2
     {
         public void DisplayError(string errorMessage)
         {
-            MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

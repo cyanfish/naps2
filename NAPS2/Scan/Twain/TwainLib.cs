@@ -161,10 +161,12 @@ namespace NAPS2.Scan.Twain
             if (returnCode != TwReturnCode.Success)
                 throw new InvalidOperationException("DSMident call falied");
 
-            var guif = new TwUserInterface();
-            guif.ShowUI = 1;
-            guif.ModalUI = 1;
-            guif.ParentHand = hwnd;
+            var guif = new TwUserInterface
+            {
+                ShowUI = 1,
+                ModalUI = 1,
+                ParentHand = hwnd
+            };
             returnCode = DSuserif(appid, srcds, TwDG.Control, TwData.UserInterface, TwMessageCode.EnableDS, guif);
             if (returnCode != TwReturnCode.Success)
             {
