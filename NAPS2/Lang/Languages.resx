@@ -117,31 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="de" xml:space="preserve">
-    <value>Deutsch</value>
-  </data>
   <data name="en" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="es" xml:space="preserve">
+  <data name="_de" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="_es" xml:space="preserve">
     <value>Español</value>
   </data>
-  <data name="fr" xml:space="preserve">
+  <data name="_fr" xml:space="preserve">
     <value>Français</value>
   </data>
-  <data name="hi" xml:space="preserve">
+  <data name="_hi" xml:space="preserve">
     <value>हिन्दी</value>
   </data>
-  <data name="it" xml:space="preserve">
+  <data name="_it" xml:space="preserve">
     <value>Italiano</value>
   </data>
-  <data name="pl" xml:space="preserve">
+  <data name="_pl" xml:space="preserve">
     <value>Polski</value>
   </data>
-  <data name="ru" xml:space="preserve">
+  <data name="_ru" xml:space="preserve">
     <value>Русский язык</value>
   </data>
-  <data name="uk" xml:space="preserve">
+  <data name="_uk" xml:space="preserve">
     <value>Українська</value>
   </data>
 </root>

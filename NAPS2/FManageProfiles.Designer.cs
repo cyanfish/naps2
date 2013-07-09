@@ -41,13 +41,6 @@ namespace NAPS2
             // lvProfiles
             // 
             this.lvProfiles.HideSelection = false;
-            this.lvProfiles.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("lvProfiles.Items"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("lvProfiles.Items1"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("lvProfiles.Items2"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("lvProfiles.Items3"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("lvProfiles.Items4"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("lvProfiles.Items5")))});
             resources.ApplyResources(this.lvProfiles, "lvProfiles");
             this.lvProfiles.Name = "lvProfiles";
             this.lvProfiles.UseCompatibleStateImageBehavior = false;

@@ -54,14 +54,19 @@ namespace NAPS2
 
         private void InitLanguageDropdown()
         {
+            // Read a list of languages from the Languages.resx file
             var resourceManager = Languages.ResourceManager;
             var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             foreach (DictionaryEntry entry in resourceSet)
             {
                 var langCode = (string)entry.Key;
                 var langName = (string)entry.Value;
-                var button = new ToolStripMenuItem(langName, null, (sender, args) => SetCulture(langCode));
-                toolStripDropDownButton1.DropDownItems.Add(button);
+                // Allow languages to be easily excluded from the list by prefixing the code with "_"
+                if (!langCode.StartsWith("_"))
+                {
+                    var button = new ToolStripMenuItem(langName, null, (sender, args) => SetCulture(langCode));
+                    toolStripDropDownButton1.DropDownItems.Add(button);
+                }
             }
         }
 

@@ -130,13 +130,10 @@
     <value>6, 0, 3, 0</value>
   </data>
   <data name="labelProductName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>0, 13</value>
   </data>
   <data name="labelProductName.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
-  </data>
-  <data name="labelProductName.Text" xml:space="preserve">
-    <value>AssemblyProduct</value>
   </data>
   <data name="labelProductName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -163,13 +160,10 @@
     <value>6, 0, 3, 0</value>
   </data>
   <data name="labelVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+    <value>0, 13</value>
   </data>
   <data name="labelVersion.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
-  </data>
-  <data name="labelVersion.Text" xml:space="preserve">
-    <value>AssemblyVersion</value>
   </data>
   <data name="labelVersion.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
