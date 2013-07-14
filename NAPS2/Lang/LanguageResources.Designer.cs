@@ -79,6 +79,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Français.
+        /// </summary>
+        internal static string _fr {
+            get {
+                return ResourceManager.GetString("_fr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to हिन्दी.
         /// </summary>
         internal static string _hi {
@@ -129,15 +138,6 @@ namespace NAPS2.Lang {
         internal static string en {
             get {
                 return ResourceManager.GetString("en", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Français.
-        /// </summary>
-        internal static string fr {
-            get {
-                return ResourceManager.GetString("fr", resourceCulture);
             }
         }
     }
