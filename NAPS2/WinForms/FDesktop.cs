@@ -40,18 +40,25 @@ namespace NAPS2.WinForms
     {
         private readonly IEmailer emailer;
         private readonly ImageSaver imageSaver;
+        private readonly StringWrapper stringWrapper;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper)
         {
-            InitializeComponent();
-            InitLanguageDropdown();
             this.emailer = emailer;
             this.imageSaver = imageSaver;
+            this.stringWrapper = stringWrapper;
+            InitializeComponent();
+            InitLanguageDropdown();
         }
 
         private void InitLanguageDropdown()
         {
+            foreach (var btn in tStrip.Items.OfType<ToolStripButton>())
+            {
+                btn.Text = stringWrapper.Wrap(btn.Text, 80, CreateGraphics(), btn.Font);
+            }
+
             // Read a list of languages from the Languages.resx file
             var resourceManager = LanguageResources.ResourceManager;
             var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);

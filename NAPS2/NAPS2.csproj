@@ -140,6 +140,7 @@
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />
+    <Compile Include="StringWrapper.cs" />
     <Compile Include="WinForms\FTwainGui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,7 +226,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.pseudo.resx" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.uk.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.pseudo.resx" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
     <EmbeddedResource Include="WinForms\FAbout.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
