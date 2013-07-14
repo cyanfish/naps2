@@ -49,16 +49,21 @@ namespace NAPS2.WinForms
             this.imageSaver = imageSaver;
             this.stringWrapper = stringWrapper;
             InitializeComponent();
+        }
+
+        private void FDesktop_Load(object sender, EventArgs e)
+        {
+            PostInitializeComponent();
+        }
+
+        private void PostInitializeComponent()
+        {
+            RelayoutToolbar();
             InitLanguageDropdown();
         }
 
         private void InitLanguageDropdown()
         {
-            foreach (var btn in tStrip.Items.OfType<ToolStripButton>())
-            {
-                btn.Text = stringWrapper.Wrap(btn.Text, 80, CreateGraphics(), btn.Font);
-            }
-
             // Read a list of languages from the Languages.resx file
             var resourceManager = LanguageResources.ResourceManager;
             var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
@@ -73,6 +78,33 @@ namespace NAPS2.WinForms
                     var button = new ToolStripMenuItem(langName, null, (sender, args) => SetCulture(langCode));
                     toolStripDropDownButton1.DropDownItems.Add(button);
                 }
+            }
+        }
+
+        private void RelayoutToolbar()
+        {
+            // Wrap text as necessary
+            foreach (var btn in tStrip.Items.OfType<ToolStripButton>())
+            {
+                btn.Text = stringWrapper.Wrap(btn.Text, 80, CreateGraphics(), btn.Font);
+            }
+            // Reset padding
+            SetToolbarButtonPadding(new Padding(10, 0, 10, 0));
+            // Recalculate visibility for the below check
+            Application.DoEvents();
+            // Check if toolbar buttons are overflowing
+            if (tStrip.Items.OfType<ToolStripButton>().Any(btn => !btn.Visible))
+            {
+                // Shrink the padding to help the buttons fit
+                SetToolbarButtonPadding(new Padding(5, 0, 5, 0));
+            }
+        }
+
+        private void SetToolbarButtonPadding(Padding padding)
+        {
+            foreach (var btn in tStrip.Items.OfType<ToolStripButton>())
+            {
+                btn.Padding = padding;
             }
         }
 
@@ -348,7 +380,7 @@ namespace NAPS2.WinForms
             // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live
             Controls.RemoveAll();
             InitializeComponent();
-            InitLanguageDropdown();
+            PostInitializeComponent();
             UpdateThumbnails();
         }
     }

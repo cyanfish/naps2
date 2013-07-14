@@ -138,7 +138,7 @@
     <value>0, 0</value>
   </data>
   <data name="thumbnailList1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 472</value>
+    <value>1184, 472</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
@@ -148,7 +148,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2, Version=2.0.4943.30716, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2, Version=2.0.4943.31117, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -157,7 +157,7 @@
     <value>0</value>
   </data>
   <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 472</value>
+    <value>1184, 472</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -202,7 +202,7 @@
     <value>2</value>
   </data>
   <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 526</value>
+    <value>1184, 526</value>
   </data>
   <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -216,38 +216,38 @@
   <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAcmSURBVFhHrVdtTJPrGXYG50fMth+eac6PTXf84XHRGOey
-        H87okmVbjPHrGNjRRJcdc6bzJOISJydm8SseQVE8wpSD46NIRaFwWCYC7YAWLFBoodAPaCmlFNtS2oJW
-        +0177X7e9/UcE6GUbVdy5en7vs9zXfdz38/79HkXpYqdO3em5eXlna2trW1+/PixrKKiQlpWVsaxuLhY
-        WlpaKj9+/HgOdf0eP+J/wN27d3+Wk5Pz8ZUrVzIuXryYce7cuX1ZWVnZ09PTSIZIJIJjx441btu27aP9
-        +/en79mzJ2P37t0fb968+bcku5xXnwcnTpz4Y2trazwUCuFtxmIxwSY54vE41z8QCHzDiYkJHD169BHJ
-        p/Euc+O7VVVVGkELr1+/xuTkJDweD0cmNB9ZP6/Xy7V+v19QAgoLCxMrVqz4neAzJxbfvHmzmQ1gAlRf
-        iEQilJeXL5hsHBtvt9u5ABoaGuKkf5C3SYLt27dnRqNR6HQ6lJSUoKamBhKJZMFk41ggnZ2dXAC0QA0k
-        /xPeJQmWLl26vqWl5QVLHy3G/zoDDx48YGnH2NgYV8a1a9feI/nv8C7z4MyZM3Usarlcjjt37qCoqGjB
-        ZMGLxWIkEgkUFBRESHY/r54CNm7c+IfR0VGufvTuIz8/f8G8ceMGlEolWDkPHTqkIdn3efXU8D6l0MXe
-        AlaCy5cvIzs7O2VevXoVt27dgsvlQldXF1atWpUr6KaOI0eOlLvdbmi1Wty7d4+bFaUyJbKyKRQK+Hw+
-        nDp1ykVyv+JVF4B169btqayshF7Xjz5NN9TdnSmzV92FQeMAZDIpPvzwp2KSW/D2vKSurq4+Fo3AZHFC
-        0jSAr/+t51g3D1kfiVQHWfsQgrQLisUViV27dv1F0E0NW7Zs2dmmaE14fAF8lt+N608dKG1zcyxrd0P0
-        zI1y5bdk1+w+e16imMB9uRsniwyobDBye0BZaamZZN/j1VNARkbGZ2xgQ7sF5yU29E3MoN8VQ/9EDAPu
-        GHSTMegnZ74hu9bRffZcS/3Y76qBIM7d53d1+m+JpKWl/VyQnx+5ubllbGBuhRr5cg/Ujhi6nkegIvY4
-        IlA7I9C4ot+SrnsY6Vk39WFstcWQeV8L31QA01M+thF9KsjPiyUtLTJ1IBDDJ180o0oXIPMoOlkAjii6
-        nTGoaZYajmROs+4l9tB1uz2CppEwnphCeGqJ4PNHZmgMTi4LtA7yBP3kWLNmzY9HR62v+vRO/PmuGtLR
-        GJT2KDqex6Aic2akppJo3DPopfT3Edvp2eOhMAp7A7iteo3rSj++aH+FTMk4aqSDXACZmZlSkl/CuyTB
-        jh07PqJ/dVRLh3Cx3onWMZrZOAVA5irXDHrIWOMhYy/PFipPpTmMUkMIxbogCvsC+LKHgujw42+yKfw1
-        v40LgDY0B8n/iHdJgtOnT19jA/KqdSjoegnFeAxtVIIOMu+m2Wq8cWin4tBNx6GgYOoowK9tUUisUQok
-        ApExhKL+IO5QEDe6AvjTbSUsVi9EZSXsPPAbwWZu0BYsi4TjOF/ej9s9QVRTauU0SxWbuY/MyVj3MgHV
-        dALNHuJkAjJ3HPWOGQqESkG1FxnD+IrLRBBnJaNoaBumpEawYcOGzwWb2bFy5cr39DrtpMk6hfPVFhT0
-        hnCfXqdqEpWRgdIT54y7XgBKYudLoIPaZ3RUbPECT51x1FEQjygTJfoQ/q4J4FKzD0X/NHBlSE9Prxas
-        ZsemTZt+HQ6+QuOzEVxocOGrgTDKB8OotsZQ70xwJrS+oA4ApA/KNtfS2kMn3W/10d7hSqDWNgOxKUKl
-        CCFXFcDVhwNcAHTQNZHN3BvSwYMHs1hHs9WDrDItcmgP+FLpxT/UUxDrX6DW7McTqx8tY36oxv3ofe5H
-        N7Vyun5K92voOetXrJlCfocX1xUenH1kguhfOi6ApsZGdi74Be82CyhF3AJk0Jsn6BUyQtJooNaAWiJr
-        a5pov5fSvi+Q/WZk9zkK/SRNPNu7bQiGopxmR0cHli9ffkiwexcHDhy4xs7+wWAQ8ZkIDWFHcWJCIBJM
-        Zx7Ehb5sTJyO5S8QDoYQDoUhlUqxbNmyDMHuXbAAnE4nbDYb2InobVqtVu7/PRnC4TB3BuROUzY7pFop
-        SrQlEPeIYX9uZydjFkC6YPcu9u3bd40dwywWC4aHh9+h2WzG+Pg43mSJfQkx0zffDyxI1s8ybMGYaQwn
-        5SfxgfEDrG9aTyXVo6GeC2DuDOzduzebRT80NITBwcFZaTAYOLLfb/oZjUbuHmvf9BsxjaBGVYPDzYeR
-        rciGbcQGOmMkXwNbt2492d/fj5GREZhMpgWRZedtmswm2Cw22IfssFvscDgcuHDhgp9sfsm7zY4f0Jvw
-        5OHDh6AvYDYg8f+gqEyES5cuxVavXl1IHt/nrebGD4kHFi9efJj4+/lIfVPhYSL7LlhDfAuLFv0HSGbG
-        MahRzVwAAAAASUVORK5CYII=
+        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
+        xhmj9VTdAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -565,7 +565,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 526</value>
+    <value>1184, 526</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -590,6 +590,9 @@
         AAAAAAAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIADAADAAwAAwAMAAMADAADAAwAAgAMAAIAB
         AACAAQAAgAMAAA==
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Not Another PDF Scanner 2</value>
