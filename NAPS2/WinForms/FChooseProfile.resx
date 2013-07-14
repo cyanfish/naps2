@@ -125,8 +125,8 @@
   <data name="btnProfiles.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Choose Profile</value>
+  <data name="lvProfiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -134,9 +134,6 @@
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnDone.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnProfiles.Name" xml:space="preserve">
-    <value>btnProfiles</value>
   </data>
   <data name="btnProfiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 32</value>
@@ -153,11 +150,8 @@
   <data name="btnDone.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 32</value>
   </data>
-  <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.ILProfileIcons, NAPS2, Version=2.0.4937.27155, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
-    <value>btnDone</value>
+  <data name="&gt;&gt;lvProfiles.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -168,11 +162,8 @@
   <data name="btnScan.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 118</value>
   </data>
-  <data name="&gt;&gt;lvProfiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnProfiles.Text" xml:space="preserve">
-    <value>Manage &amp;Profiles</value>
+  <data name="&gt;&gt;btnProfiles.Name" xml:space="preserve">
+    <value>btnProfiles</value>
   </data>
   <data name="lvProfiles.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -201,11 +192,14 @@
   <data name="btnScan.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;lvProfiles.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="btnProfiles.Text" xml:space="preserve">
+    <value>Manage &amp;Profiles</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;btnScan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnScan.Parent" xml:space="preserve">
     <value>$this</value>
@@ -228,6 +222,9 @@
   <data name="btnProfiles.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 98</value>
   </data>
+  <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
+    <value>NAPS2.ILProfileIcons, NAPS2, Version=2.0.4943.31330, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;lvProfiles.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -239,9 +236,6 @@
   </data>
   <data name="btnProfiles.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
-    <value>ilProfileIcons</value>
   </data>
   <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -255,11 +249,17 @@
   <data name="&gt;&gt;btnProfiles.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btnScan.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 2, 0, 6</value>
+  </data>
   <data name="&gt;&gt;btnProfiles.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnScan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lvProfiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
+    <value>ilProfileIcons</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -288,20 +288,20 @@
   <data name="btnDone.Text" xml:space="preserve">
     <value>&amp;Done</value>
   </data>
-  <data name="btnScan.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 2, 0, 6</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Choose Profile</value>
   </data>
   <data name="btnScan.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="lvProfiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+  <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
+    <value>btnDone</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>fr-FR</value>
+    <value>uk</value>
   </metadata>
   <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
