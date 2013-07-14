@@ -100,9 +100,9 @@ namespace NAPS2.WinForms
             // 
             // cmbSource
             // 
+            resources.ApplyResources(this.cmbSource, "cmbSource");
             this.cmbSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSource.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbSource, "cmbSource");
             this.cmbSource.Name = "cmbSource";
             // 
             // btnOK
@@ -114,9 +114,9 @@ namespace NAPS2.WinForms
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.rdbConfig);
             this.panel1.Controls.Add(this.rdbNativeWIA);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // rdbConfig
@@ -142,8 +142,8 @@ namespace NAPS2.WinForms
             // 
             // cmbDepth
             // 
-            this.cmbDepth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbDepth, "cmbDepth");
+            this.cmbDepth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDepth.FormattingEnabled = true;
             this.cmbDepth.Name = "cmbDepth";
             // 
@@ -154,15 +154,15 @@ namespace NAPS2.WinForms
             // 
             // cmbPage
             // 
-            this.cmbPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbPage, "cmbPage");
+            this.cmbPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPage.FormattingEnabled = true;
             this.cmbPage.Name = "cmbPage";
             // 
             // cmbResolution
             // 
-            this.cmbResolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbResolution, "cmbResolution");
+            this.cmbResolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbResolution.FormattingEnabled = true;
             this.cmbResolution.Name = "cmbResolution";
             // 
@@ -225,8 +225,8 @@ namespace NAPS2.WinForms
             // 
             // cmbAlign
             // 
-            this.cmbAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbAlign, "cmbAlign");
+            this.cmbAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAlign.FormattingEnabled = true;
             this.cmbAlign.Name = "cmbAlign";
             // 
@@ -237,8 +237,8 @@ namespace NAPS2.WinForms
             // 
             // cmbScale
             // 
-            this.cmbScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbScale, "cmbScale");
+            this.cmbScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbScale.FormattingEnabled = true;
             this.cmbScale.Name = "cmbScale";
             // 
@@ -249,9 +249,9 @@ namespace NAPS2.WinForms
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.rdTWAIN);
             this.panel2.Controls.Add(this.rdWIA);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // rdTWAIN

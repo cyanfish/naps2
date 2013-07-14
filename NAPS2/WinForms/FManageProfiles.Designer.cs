@@ -44,8 +44,8 @@ namespace NAPS2.WinForms
             // 
             // lvProfiles
             // 
-            this.lvProfiles.HideSelection = false;
             resources.ApplyResources(this.lvProfiles, "lvProfiles");
+            this.lvProfiles.HideSelection = false;
             this.lvProfiles.Name = "lvProfiles";
             this.lvProfiles.UseCompatibleStateImageBehavior = false;
             this.lvProfiles.ItemActivate += new System.EventHandler(this.lvProfiles_ItemActivate);
@@ -62,16 +62,16 @@ namespace NAPS2.WinForms
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::NAPS2.Icons.pencil_small;
             resources.ApplyResources(this.btnEdit, "btnEdit");
+            this.btnEdit.Image = global::NAPS2.Icons.pencil_small;
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::NAPS2.Icons.cross_small;
             resources.ApplyResources(this.btnDelete, "btnDelete");
+            this.btnDelete.Image = global::NAPS2.Icons.cross_small;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);

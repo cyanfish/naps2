@@ -63,7 +63,7 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FViewer));
-            this.tiffViewer1 = new TiffViewerCtl();
+            this.tiffViewer1 = new NAPS2.WinForms.TiffViewerCtl();
             this.SuspendLayout();
             // 
             // tiffViewer1
