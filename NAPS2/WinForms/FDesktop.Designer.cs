@@ -107,14 +107,14 @@ namespace NAPS2.WinForms
             // 
             resources.ApplyResources(this.tsScan, "tsScan");
             this.tsScan.Name = "tsScan";
-            this.tsScan.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsScan.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsScan.Click += new System.EventHandler(this.tsScan_Click);
             // 
             // tsProfiles
             // 
             resources.ApplyResources(this.tsProfiles, "tsProfiles");
             this.tsProfiles.Name = "tsProfiles";
-            this.tsProfiles.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsProfiles.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsProfiles.Click += new System.EventHandler(this.tsProfiles_Click);
             // 
             // toolStripSeparator5
@@ -127,7 +127,7 @@ namespace NAPS2.WinForms
             this.tsSavePDF.Image = global::NAPS2.Icons.file_extension_pdf;
             resources.ApplyResources(this.tsSavePDF, "tsSavePDF");
             this.tsSavePDF.Name = "tsSavePDF";
-            this.tsSavePDF.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsSavePDF.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsSavePDF.Click += new System.EventHandler(this.tsSavePDF_Click);
             // 
             // tsSaveImage
@@ -135,7 +135,7 @@ namespace NAPS2.WinForms
             this.tsSaveImage.Image = global::NAPS2.Icons.picture;
             resources.ApplyResources(this.tsSaveImage, "tsSaveImage");
             this.tsSaveImage.Name = "tsSaveImage";
-            this.tsSaveImage.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsSaveImage.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsSaveImage.Click += new System.EventHandler(this.tsSaveImage_Click);
             // 
             // tsPDFEmail
@@ -143,7 +143,7 @@ namespace NAPS2.WinForms
             this.tsPDFEmail.Image = global::NAPS2.Icons.email_attach;
             resources.ApplyResources(this.tsPDFEmail, "tsPDFEmail");
             this.tsPDFEmail.Name = "tsPDFEmail";
-            this.tsPDFEmail.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsPDFEmail.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsPDFEmail.Click += new System.EventHandler(this.tsPDFEmail_Click);
             // 
             // toolStripSeparator4
@@ -156,7 +156,7 @@ namespace NAPS2.WinForms
             this.tsMoveUp.Image = global::NAPS2.Icons.arrow_up;
             resources.ApplyResources(this.tsMoveUp, "tsMoveUp");
             this.tsMoveUp.Name = "tsMoveUp";
-            this.tsMoveUp.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsMoveUp.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsMoveUp.Click += new System.EventHandler(this.tsMoveUp_Click);
             // 
             // tsMoveDown
@@ -164,7 +164,7 @@ namespace NAPS2.WinForms
             this.tsMoveDown.Image = global::NAPS2.Icons.arrow_down;
             resources.ApplyResources(this.tsMoveDown, "tsMoveDown");
             this.tsMoveDown.Name = "tsMoveDown";
-            this.tsMoveDown.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsMoveDown.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsMoveDown.Click += new System.EventHandler(this.tsMoveDown_Click);
             // 
             // toolStripSeparator1
@@ -177,7 +177,7 @@ namespace NAPS2.WinForms
             this.tsRotateLeft.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise;
             resources.ApplyResources(this.tsRotateLeft, "tsRotateLeft");
             this.tsRotateLeft.Name = "tsRotateLeft";
-            this.tsRotateLeft.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsRotateLeft.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsRotateLeft.Click += new System.EventHandler(this.tsRotateLeft_Click);
             // 
             // tsRotateRight
@@ -185,7 +185,7 @@ namespace NAPS2.WinForms
             this.tsRotateRight.Image = global::NAPS2.Icons.arrow_rotate_clockwise;
             resources.ApplyResources(this.tsRotateRight, "tsRotateRight");
             this.tsRotateRight.Name = "tsRotateRight";
-            this.tsRotateRight.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsRotateRight.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsRotateRight.Click += new System.EventHandler(this.tsRotateRight_Click);
             // 
             // tsFlip
@@ -193,7 +193,7 @@ namespace NAPS2.WinForms
             this.tsFlip.Image = global::NAPS2.Icons.arrow_switch;
             resources.ApplyResources(this.tsFlip, "tsFlip");
             this.tsFlip.Name = "tsFlip";
-            this.tsFlip.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsFlip.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
             // 
             // toolStripSeparator2
@@ -206,7 +206,7 @@ namespace NAPS2.WinForms
             this.tsDelete.Image = global::NAPS2.Icons.cross;
             resources.ApplyResources(this.tsDelete, "tsDelete");
             this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsDelete.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
             // 
             // tsClear
@@ -214,7 +214,7 @@ namespace NAPS2.WinForms
             this.tsClear.Image = global::NAPS2.Icons.cancel;
             resources.ApplyResources(this.tsClear, "tsClear");
             this.tsClear.Name = "tsClear";
-            this.tsClear.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsClear.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsClear.Click += new System.EventHandler(this.tsClear_Click);
             // 
             // toolStripSeparator3
@@ -227,14 +227,14 @@ namespace NAPS2.WinForms
             this.toolStripDropDownButton1.Image = global::NAPS2.Icons.world;
             resources.ApplyResources(this.toolStripDropDownButton1, "toolStripDropDownButton1");
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.toolStripDropDownButton1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.toolStripDropDownButton1.ShowDropDownArrow = false;
             // 
             // tsAbout
             // 
             resources.ApplyResources(this.tsAbout, "tsAbout");
             this.tsAbout.Name = "tsAbout";
-            this.tsAbout.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
             // thumbnailList1
