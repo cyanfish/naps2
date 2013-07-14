@@ -140,11 +140,7 @@ namespace NAPS2.Scan
         public static string Description(this Enum enumValue)
         {
             object[] attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if (attrs.Length == 0)
-            {
-                return null;
-            }
-            return attrs.OfType<DescriptionAttribute>().Single().Description;
+            return attrs.Cast<DescriptionAttribute>().Select(x => x.Description).SingleOrDefault();
         }
     }
 }
