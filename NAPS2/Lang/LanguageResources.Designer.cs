@@ -124,20 +124,20 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Українська.
-        /// </summary>
-        internal static string _uk {
-            get {
-                return ResourceManager.GetString("_uk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         internal static string en {
             get {
                 return ResourceManager.GetString("en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Українська.
+        /// </summary>
+        internal static string uk {
+            get {
+                return ResourceManager.GetString("uk", resourceCulture);
             }
         }
     }
