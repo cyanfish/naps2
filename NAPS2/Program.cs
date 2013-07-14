@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -37,7 +38,9 @@ namespace NAPS2
         /// </summary>
         [STAThread]
         static void Main()
-        {
+      {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

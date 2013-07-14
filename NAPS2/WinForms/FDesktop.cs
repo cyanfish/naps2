@@ -59,6 +59,7 @@ namespace NAPS2.WinForms
             {
                 var langCode = (string)entry.Key;
                 var langName = (string)entry.Value;
+
                 // Allow languages to be easily excluded from the list by prefixing the code with "_"
                 if (!langCode.StartsWith("_"))
                 {

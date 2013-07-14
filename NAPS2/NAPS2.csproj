@@ -113,6 +113,76 @@
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
     <Compile Include="IProfileManager.cs" />
+    <Compile Include="Lang\Resources\fr\FAbout.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FAbout.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\FChooseIcon.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FChooseIcon.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\FChooseProfile.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FChooseProfile.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\FDesktop.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FDesktop.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\FEditScanSettings.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FEditScanSettings.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\FManageProfiles.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FManageProfiles.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\FPDFSave.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FPDFSave.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\FTwainGui.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FTwainGui.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\FViewer.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FViewer.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\MiscResources.fr.Designer.cs">
+      <DependentUpon>MiscResources.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\ThumbnailList.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThumbnailList.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\TiffViewer.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TiffViewer.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\TiffViewerCtl.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TiffViewerCtl.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lang\Resources\fr\SettingsResources.fr.Designer.cs">
+      <DependentUpon>SettingsResources.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Scan\IScanPerformer.cs" />
     <Compile Include="Scan\IScanReceiver.cs" />
     <Compile Include="Lang\LanguageResources.Designer.cs">
@@ -224,6 +294,76 @@
     <Compile Include="Email\MAPIMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Lang\Resources\fr\FAbout.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FAbout.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\FChooseIcon.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FChooseIcon.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\FChooseProfile.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FChooseProfile.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\FDesktop.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FDesktop.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\FEditScanSettings.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FEditScanSettings.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\FManageProfiles.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FManageProfiles.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\FPDFSave.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FPDFSave.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\FTwainGui.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FTwainGui.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\FViewer.fr.resx">
+      <CustomToolNamespace>NAPS2.WinForms</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FViewer.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\MiscResources.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MiscResources.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\ThumbnailList.fr.resx">
+      <CustomToolNamespace>NAPS2.Lang.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ThumbnailList.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\TiffViewer.fr.resx">
+      <CustomToolNamespace>NAPS2.Lang.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TiffViewer.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\TiffViewerCtl.fr.resx">
+      <CustomToolNamespace>NAPS2.Lang.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TiffViewerCtl.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\fr\SettingsResources.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsResources.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.pseudo.resx" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.pseudo.resx" />
     <EmbeddedResource Include="WinForms\FAbout.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -271,6 +411,7 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SettingsResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>NAPS2.Lang.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\MiscResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -302,6 +443,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Lang\tmx\fr.tmx" />
     <None Include="NAPS2.licenseheader" />
     <None Include="app.config" />
     <None Include="packages.config" />

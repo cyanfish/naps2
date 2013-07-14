@@ -112,36 +112,99 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="en" xml:space="preserve">
-    <value>English</value>
+  <data name="ChooseProfile" xml:space="preserve">
+    <value>[Cĥőőşę Přőƒįľę !!! !!!]</value>
   </data>
-  <data name="_de" xml:space="preserve">
-    <value>Deutsch</value>
+  <data name="Clear" xml:space="preserve">
+    <value>[Cľęäř !!! !!! !!! !!!]</value>
   </data>
-  <data name="_es" xml:space="preserve">
-    <value>Español</value>
+  <data name="ConfirmClearItems" xml:space="preserve">
+    <value>[Åřę yőū şūřę yőū ŵäŉŧ ŧő čľęäř {0} įŧęm(ş)? !!! !!!]</value>
   </data>
-  <data name="fr" xml:space="preserve">
-    <value>Français</value>
+  <data name="ConfirmDeleteItems" xml:space="preserve">
+    <value>[Åřę yőū şūřę yőū ŵäŉŧ ŧő đęľęŧę {0} įŧęm(ş)? !!! !!!]</value>
   </data>
-  <data name="_hi" xml:space="preserve">
-    <value>हिन्दी</value>
+  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+    <value>[Åřę yőū şūřę yőū ŵäŉŧ ŧő đęľęŧę {0} přőƒįľęş? !!! !!!]</value>
   </data>
-  <data name="_it" xml:space="preserve">
-    <value>Italiano</value>
+  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+    <value>[Åřę yőū şūřę yőū ŵäŉŧ ŧő đęľęŧę ŧĥę přőƒįľę {0}? !!! !!! !!!]</value>
   </data>
-  <data name="_pl" xml:space="preserve">
-    <value>Polski</value>
+  <data name="ConfirmOverwriteFile" xml:space="preserve">
+    <value>[Ŧĥę ƒįľę {0} äľřęäđy ęχįşŧş. Đő yőū ŵäŉŧ ŧő ővęřŵřįŧę įŧ? !!! !!! !!!]</value>
   </data>
-  <data name="_ru" xml:space="preserve">
-    <value>Русский язык</value>
+  <data name="Delete" xml:space="preserve">
+    <value>[Đęľęŧę !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="_uk" xml:space="preserve">
-    <value>Українська</value>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>[Ŧĥę şęľęčŧęđ şčäŉŉęř čőūľđ ŉőŧ þę ƒőūŉđ. !!! !!!]</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>[Ŧĥę şęľęčŧęđ şčäŉŉęř įş őƒƒľįŉę. !!! !!!]</value>
+  </data>
+  <data name="DontHavePermission" xml:space="preserve">
+    <value>[Ÿőū đőŉ'ŧ ĥävę pęřmįşşįőŉ ŧő şävę ƒįľęş äŧ ŧĥįş ľőčäŧįőŉ. !!! !!! !!!]</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>[Ēřřőř !!! !!! !!! !!!]</value>
+  </data>
+  <data name="FileTypeBmp" xml:space="preserve">
+    <value>[ßįŧmäp Fįľęş (*.þmp) !!! !!!]</value>
+  </data>
+  <data name="FileTypeEmf" xml:space="preserve">
+    <value>[Ēŉĥäŉčęđ Ŵįŉđőŵş MęŧäFįľę (*.ęmƒ) !!! !!!]</value>
+  </data>
+  <data name="FileTypeExif" xml:space="preserve">
+    <value>[Ēχčĥäŉģęäþľę Ĩmäģę Fįľę (*.ęχįƒ) !!! !!!]</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>[ĞĨF Fįľę (*.ģįƒ) !!! !!!]</value>
+  </data>
+  <data name="FileTypeJpeg" xml:space="preserve">
+    <value>[ĴPĒĞ Fįľę (*.ĵpģ, *.ĵpęģ) !!! !!!]</value>
+  </data>
+  <data name="FileTypePdf" xml:space="preserve">
+    <value>[PĐF đőčūmęŉŧ (*.pđƒ) !!! !!!]</value>
+  </data>
+  <data name="FileTypePng" xml:space="preserve">
+    <value>[PŃĞ Fįľę (*.pŉģ) !!! !!!]</value>
+  </data>
+  <data name="FileTypeTiff" xml:space="preserve">
+    <value>[ŦĨFF Fįľę (*.ŧįƒƒ, *.ŧįƒ) !!! !!!]</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>[Ńämę mįşşįŉģ. !!! !!!]</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>[ŃÅPŜ2 !!! !!! !!! !!!]</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>[Ńő đęvįčę şęľęčŧęđ. !!! !!!]</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>[Ńő şčäŉŉįŉģ đęvįčę ŵäş ƒőūŉđ. !!! !!!]</value>
+  </data>
+  <data name="OverwriteFile" xml:space="preserve">
+    <value>[Øvęřŵřįŧę Fįľę !!! !!!]</value>
+  </data>
+  <data name="PdfStatus" xml:space="preserve">
+    <value>[{0} őƒ {1} !!! !!!]</value>
+  </data>
+  <data name="ScannedImage" xml:space="preserve">
+    <value>[Ŝčäŉŉęđ Ĩmäģę !!! !!!]</value>
+  </data>
+  <data name="SelectProfileBeforeScan" xml:space="preserve">
+    <value>[Ŝęľęčŧ ä přőƒįľę þęƒőřę čľįčĸįŉģ Ŝčäŉ. !!! !!!]</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>[Åŉ ęřřőř őččūřřęđ ŵįŧĥ ŧĥę şčäŉŉįŉģ đřįvęř. !!! !!!]</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>[Vęřşįőŉ {0} !!! !!!]</value>
   </data>
 </root>
