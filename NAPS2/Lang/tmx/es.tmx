@@ -1,549 +1,549 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
-  <header creationtool="Translate Toolkit - po2tmx" creationtoolversion="1.9.0" segtype="sentence" o-tmf="UTF-8" adminlang="en" srclang="en" datatype="PlainText"/>
+  <header creationtool="Translate Toolkit - po2tmx" creationtoolversion="1.9.0" segtype="sentence" o-tmf="UTF-8" adminlang="en" srclang="en-US" datatype="PlainText"/>
   <body>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>About</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Sobre</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Add</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Añadir</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>An error occurred with the scanning driver</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Ha ocurrido un error con el controlador del escaner</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Are you sure you want to clear {0} item(s)?</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>¿Estas seguro de limpiar {0} cosas?</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Are you sure you want to delete the profile {0}?</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>¿Estas seguro de borror el perfile {0}?</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Are you sure you want to delete {0} item(s)?</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>¿Estas seguro de borrar {0} cosas?</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Are you sure you want to delete {0} profiles?</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>¿Estas seguro de borrar {0} perfiles?</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Bit depth</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Produndidad Bit</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Bitmap Files (*.bmp)</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Ficheros Birmap (*.bmp)</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Black &amp; White</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Blanco y Negro</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Brightness</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Brillo</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Cancel</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Cancelar</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Center</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Centro</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Choose Icon</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Elige Icono</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Choose Profile</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Elige Perfil</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Choose device</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Elige dispositivo</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Clear</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Limpiar</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Contrast</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Contraste</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Delete</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Borrar</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Device</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Dispositivo</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Display name</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Nombre mostrado</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Done</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Echo</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Duplex</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Duplicado</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Edit</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Editar</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Email PDF</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Enviar por correo-e PDF</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Error</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Error</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Feeder</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Cargador</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Glass</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Cristal</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Grayscale</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Escala de grises</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Icons from</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Iconos de </seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Language</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Idioma</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Left</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Izquierda</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Main toolbar</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Barra de herramientas principal</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Manage Profiles</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Gestionar Perfiles</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Maximum quality (large files)</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Maxima Calidad (Ficheros Grandes)</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Move Down</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Bajar</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Move Up</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Subir</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Name missing</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Falta nombre</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>No device selected</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>No se ha seleccionado dispositivo</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>No scanning device was found</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>No se ha encontrado escaner</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>OK</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>SI</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Overwrite File</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Sobrescribir archivo</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Page size</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Tamaño de pagina</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Paper source</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Origen del papel</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Preview</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Previsualiza</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Profile settings</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Configuracion de perfil</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Profiles</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Perfiles</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Resolution</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Resolucion</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Right</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Derecha</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Rotate Left</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Rotar a la izquierda</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Rotate Right</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Rotar a la derecha</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Save Images</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Guardar imagenes</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Save PDF</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Guardar PDF</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Saving to PDF</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Guardando a PDF</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Scale</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Escalar</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Scan</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Escanear</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Scanned Image</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Imagen escaneada</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Select a profile before clicking Scan</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Selecciona un perfil antes de escanear</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>TWAIN Driver</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Contraldor TWAIN</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>The file {0} already exists. Do you want to overwrite it?</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>El archivo {0} ya existe. ¿Quieres sobreescribirlo?</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>The selected scanner could not be found</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>No se ha encontrado el escaner seleccionado</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>The selected scanner is offline</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>El escaner seleccionado esta inactivo</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Use native WIA UI</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Usar UI nativo WIA</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Use predefined settings</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Usar configuracion predefinida</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>WIA Driver</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Controlador WIA</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>Waiting for TWAIN to complete</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>Esperado por TWAIN a completar</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>You don't have permission to save files at this location</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>No tienes permisos para guardar archivos en esa localizacion</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en">
+      <tuv xml:lang="en-US">
         <seg>{0} of {1}</seg>
       </tuv>
-      <tuv xml:lang="es_ES">
+      <tuv xml:lang="es">
         <seg>{0} de {1}</seg>
       </tuv>
     </tu>
