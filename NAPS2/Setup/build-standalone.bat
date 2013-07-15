@@ -1,6 +1,6 @@
 @echo off
 cd %~dp0
-set VERSION=2.0
+set VERSION=2.1
 set OUTFOLDER=..\publish\%VERSION%
 set TEMPFOLDER=%OUTFOLDER%\naps2-%VERSION%-standalone
 set OUTFILE=..\publish\%VERSION%\naps2-%VERSION%-standalone.zip
@@ -8,6 +8,10 @@ set BINFOLDER=..\bin\Standalone
 set CMDBINFOLDER=..\..\NAPS2.Console\bin\Standalone
 mkdir %OUTFOLDER%
 mkdir %TEMPFOLDER%
+mkdir %TEMPFOLDER%\es
+mkdir %TEMPFOLDER%\uk
+copy %BINFOLDER%\es\NAPS2.resources.dll %TEMPFOLDER%\es
+copy %BINFOLDER%\uk\NAPS2.resources.dll %TEMPFOLDER%\uk
 copy %BINFOLDER%\NAPS2.exe %TEMPFOLDER%
 copy %BINFOLDER%\PdfSharp.dll %TEMPFOLDER%
 copy %BINFOLDER%\Interop.WIA.dll %TEMPFOLDER%
