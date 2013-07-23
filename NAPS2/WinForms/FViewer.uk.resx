@@ -136,7 +136,7 @@
         <value>tiffViewer1</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-        <value>NAPS2.TiffViewerCtl, NAPS2, Version=2.0.4936.35473, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2, Version=2.0.4943.31330, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
         <value>$this</value>
@@ -146,6 +146,9 @@
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
+    </metadata>
+    <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>uk</value>
     </metadata>
     <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
         <value>5, 13</value>

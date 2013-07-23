@@ -358,7 +358,7 @@
         <value>79, 51</value>
     </data>
     <data name="tsMoveUp.Text" xml:space="preserve">
-        <value>Пересунути нижче</value>
+        <value>Пересунути вище</value>
     </data>
     <data name="tsMoveUp.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>

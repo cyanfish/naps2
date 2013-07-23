@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -124,12 +128,14 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Пристрій:</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnChooseDevice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnChooseDevice.Text" xml:space="preserve">
     <value>Вибір пристрою</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 13</value>
@@ -137,17 +143,23 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Подача паперу:</value>
   </data>
-  <data name="cmbSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
+  <data name="btnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 394</value>
+  <data name="rdbConfig.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdbConfig.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 17</value>
   </data>
   <data name="rdbConfig.Text" xml:space="preserve">
     <value>Попередньо визначені параметри</value>
+  </data>
+  <data name="rdbNativeWIA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdbNativeWIA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>207, 3</value>
   </data>
   <data name="rdbNativeWIA.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 17</value>
@@ -156,10 +168,10 @@
     <value>Рідний інтерфейс сканера WIA UI</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>439, 25</value>
+    <value>405, 25</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 198</value>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
@@ -167,11 +179,8 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Глибина кольору:</value>
   </data>
-  <data name="cmbDepth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 214</value>
-  </data>
-  <data name="cmbDepth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
@@ -179,11 +188,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Розмір сторінки:</value>
   </data>
-  <data name="cmbPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
-  </data>
-  <data name="cmbResolution.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 13</value>
@@ -191,17 +197,20 @@
   <data name="label5.Text" xml:space="preserve">
     <value>Роздільна здатність:</value>
   </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Яскравість:</value>
   </data>
-  <data name="trBrightness.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 45</value>
+  <data name="trBrightness.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 318</value>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 13</value>
@@ -209,17 +218,11 @@
   <data name="label7.Text" xml:space="preserve">
     <value>Контрастність:</value>
   </data>
-  <data name="trContrast.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 334</value>
-  </data>
-  <data name="trContrast.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 45</value>
+  <data name="trContrast.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>379, 394</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Скасувати</value>
@@ -284,8 +287,11 @@
         RK5CYII=
 </value>
   </data>
-  <data name="pctIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 25</value>
+  <data name="pctIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 13</value>
@@ -293,17 +299,8 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Назва:</value>
   </data>
-  <data name="txtName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 20</value>
-  </data>
-  <data name="cmbAlign.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 254</value>
-  </data>
-  <data name="cmbAlign.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
-  </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 238</value>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 13</value>
@@ -311,14 +308,8 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Горизонтальне вирівнювання:</value>
   </data>
-  <data name="cmbScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 294</value>
-  </data>
-  <data name="cmbScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
-  </data>
-  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 278</value>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
@@ -326,29 +317,35 @@
   <data name="label10.Text" xml:space="preserve">
     <value>Масштабувати:</value>
   </data>
+  <data name="rdTWAIN.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdTWAIN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>207, 4</value>
+  </data>
   <data name="rdTWAIN.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
   </data>
   <data name="rdTWAIN.Text" xml:space="preserve">
     <value>TWAIN драйвер</value>
   </data>
-  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 23</value>
+  <data name="rdWIA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdWIA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 17</value>
+  </data>
+  <data name="rdWIA.Text" xml:space="preserve">
+    <value>WIA драйвер</value>
+  </data>
+  <data name="cbHighQuality.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cbHighQuality.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 17</value>
   </data>
   <data name="cbHighQuality.Text" xml:space="preserve">
     <value>Максимальна якість (великий розмір)</value>
-  </data>
-  <data name="txtBrightness.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 334</value>
-  </data>
-  <data name="txtContrast.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 334</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>466, 429</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -373,6 +370,9 @@
         AAAAAAAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIADAADAAwAAwAMAAMADAADAAwAAgAMAAIAB
         AACAAQAAgAMAAA==
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Налаштовування профілю</value>

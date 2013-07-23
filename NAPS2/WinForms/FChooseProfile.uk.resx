@@ -122,13 +122,17 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnProfiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 32</value>
+    <value>159, 32</value>
   </data>
   <data name="btnProfiles.Text" xml:space="preserve">
     <value>Керування профілями</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnDone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnDone.Text" xml:space="preserve">
-    <value>Зроблено!</value>
+    <value>Завершити</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

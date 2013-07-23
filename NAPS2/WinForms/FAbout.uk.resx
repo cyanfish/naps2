@@ -128,7 +128,7 @@
 Авторські права належать Ben Olden-Cooligan, 2012-2013 </value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 140</value>
+    <value>367, 140</value>
   </data>
   <data name="logoPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -297,8 +297,14 @@
         RK5CYII=
 </value>
   </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Піктограми взяті з:</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>452, 176</value>
+    <value>451, 176</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Про програму</value>
