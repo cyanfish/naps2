@@ -135,6 +135,7 @@ namespace NAPS2.WinForms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TiffViewer));
             this.pbox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbox)).BeginInit();
             this.SuspendLayout();
@@ -142,21 +143,16 @@ namespace NAPS2.WinForms
             // pbox
             // 
             this.pbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbox.Location = new System.Drawing.Point(10, 10);
+            resources.ApplyResources(this.pbox, "pbox");
             this.pbox.Name = "pbox";
-            this.pbox.Size = new System.Drawing.Size(120, 128);
-            this.pbox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbox.TabIndex = 0;
             this.pbox.TabStop = false;
             // 
-            // UTiffViewer
+            // TiffViewer
             // 
-            this.AutoScroll = true;
+            resources.ApplyResources(this, "$this");
             this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.pbox);
-            this.Name = "UTiffViewer";
-            this.Padding = new System.Windows.Forms.Padding(0, 0, 10, 10);
-            this.Size = new System.Drawing.Size(544, 520);
+            this.Name = "TiffViewer";
             ((System.ComponentModel.ISupportInitialize)(this.pbox)).EndInit();
             this.ResumeLayout(false);
 

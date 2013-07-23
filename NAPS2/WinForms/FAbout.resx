@@ -129,9 +129,6 @@
   <data name="okButton.Text" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="linkLabel2.Text" xml:space="preserve">
-    <value>http://www.fatcow.com/free-icons</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -328,8 +325,8 @@
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 13</value>
   </data>
-  <data name="labelCopyright.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="&gt;&gt;labelProductName.Name" xml:space="preserve">
     <value>labelProductName</value>
@@ -389,8 +386,8 @@
   <data name="labelVersion.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="linkLabel2.Text" xml:space="preserve">
+    <value>http://www.fatcow.com/free-icons</value>
   </data>
   <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 24</value>
@@ -409,6 +406,9 @@
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
+  </data>
+  <data name="labelCopyright.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
   <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -537,6 +537,6 @@ Copyright © 2012-2013 Ben Olden-Cooligan</value>
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>uk</value>
+    <value>ru</value>
   </metadata>
 </root>

@@ -131,16 +131,17 @@ namespace NAPS2.WinForms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TiffViewerCtl));
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsStretch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsZoomActual = new System.Windows.Forms.ToolStripButton();
             this.tsZoomPlus = new System.Windows.Forms.ToolStripButton();
             this.tsZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsZoom = new System.Windows.Forms.ToolStripLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.tiffviewer1 = new TiffViewer();
-            this.tsZoomActual = new System.Windows.Forms.ToolStripButton();
+            this.tiffviewer1 = new NAPS2.WinForms.TiffViewer();
             this.tStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -149,69 +150,64 @@ namespace NAPS2.WinForms
             // 
             // tStrip
             // 
-            this.tStrip.Dock = System.Windows.Forms.DockStyle.None;
+            resources.ApplyResources(this.tStrip, "tStrip");
             this.tStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.tsStretch,
-                this.toolStripSeparator1,
-                this.tsZoomActual,
-                this.tsZoomPlus,
-                this.tsZoomOut,
-                this.toolStripSeparator2,
-                this.tsZoom});
-            this.tStrip.Location = new System.Drawing.Point(3, 0);
+            this.tsStretch,
+            this.toolStripSeparator1,
+            this.tsZoomActual,
+            this.tsZoomPlus,
+            this.tsZoomOut,
+            this.toolStripSeparator2,
+            this.tsZoom});
             this.tStrip.Name = "tStrip";
-            this.tStrip.Size = new System.Drawing.Size(182, 25);
-            this.tStrip.TabIndex = 7;
-            this.tStrip.Text = "toolStrip1";
             // 
             // tsStretch
             // 
             this.tsStretch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsStretch.Image = global::NAPS2.Icons.arrow_out;
-            this.tsStretch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.tsStretch, "tsStretch");
             this.tsStretch.Name = "tsStretch";
-            this.tsStretch.Size = new System.Drawing.Size(23, 22);
-            this.tsStretch.Text = "toolStripButton1";
-            this.tsStretch.ToolTipText = "Scale";
             this.tsStretch.CheckedChanged += new System.EventHandler(this.tsStretch_CheckedChanged);
             this.tsStretch.Click += new System.EventHandler(this.tsStretch_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // tsZoomActual
+            // 
+            this.tsZoomActual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsZoomActual.Image = global::NAPS2.Icons.zoom_actual;
+            resources.ApplyResources(this.tsZoomActual, "tsZoomActual");
+            this.tsZoomActual.Name = "tsZoomActual";
+            this.tsZoomActual.Click += new System.EventHandler(this.tsZoomActual_Click);
             // 
             // tsZoomPlus
             // 
             this.tsZoomPlus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsZoomPlus.Image = global::NAPS2.Icons.zoom_in;
-            this.tsZoomPlus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.tsZoomPlus, "tsZoomPlus");
             this.tsZoomPlus.Name = "tsZoomPlus";
-            this.tsZoomPlus.Size = new System.Drawing.Size(23, 22);
-            this.tsZoomPlus.ToolTipText = "Zoom in";
             this.tsZoomPlus.Click += new System.EventHandler(this.tsZoomPlus_Click);
             // 
             // tsZoomOut
             // 
             this.tsZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsZoomOut.Image = global::NAPS2.Icons.zoom_out;
-            this.tsZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.tsZoomOut, "tsZoomOut");
             this.tsZoomOut.Name = "tsZoomOut";
-            this.tsZoomOut.Size = new System.Drawing.Size(23, 22);
-            this.tsZoomOut.ToolTipText = "Zoom out";
             this.tsZoomOut.Click += new System.EventHandler(this.tsZoomOut_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // tsZoom
             // 
             this.tsZoom.Name = "tsZoom";
-            this.tsZoom.Size = new System.Drawing.Size(35, 22);
-            this.tsZoom.Text = "100%";
-            this.tsZoom.ToolTipText = "Zoom";
+            resources.ApplyResources(this.tsZoom, "tsZoom");
             // 
             // toolStripContainer1
             // 
@@ -219,13 +215,9 @@ namespace NAPS2.WinForms
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.tiffviewer1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 527);
-            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
+            resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(784, 552);
-            this.toolStripContainer1.TabIndex = 8;
-            this.toolStripContainer1.Text = "toolStripContainer1";
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
@@ -233,31 +225,16 @@ namespace NAPS2.WinForms
             // 
             // tiffviewer1
             // 
-            this.tiffviewer1.AutoScroll = true;
+            resources.ApplyResources(this.tiffviewer1, "tiffviewer1");
             this.tiffviewer1.BackColor = System.Drawing.Color.White;
-            this.tiffviewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tiffviewer1.Location = new System.Drawing.Point(0, 0);
             this.tiffviewer1.Name = "tiffviewer1";
-            this.tiffviewer1.Padding = new System.Windows.Forms.Padding(0, 0, 10, 10);
-            this.tiffviewer1.Size = new System.Drawing.Size(784, 527);
-            this.tiffviewer1.TabIndex = 0;
             this.tiffviewer1.Zoom = 0;
             // 
-            // tsZoomActual
-            // 
-            this.tsZoomActual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsZoomActual.Image = global::NAPS2.Icons.zoom_actual;
-            this.tsZoomActual.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsZoomActual.Name = "tsZoomActual";
-            this.tsZoomActual.Size = new System.Drawing.Size(23, 22);
-            this.tsZoomActual.ToolTipText = "Zoom out";
-            this.tsZoomActual.Click += new System.EventHandler(this.tsZoomActual_Click);
-            // 
-            // UTiffViewerCtl
+            // TiffViewerCtl
             // 
             this.Controls.Add(this.toolStripContainer1);
-            this.Name = "UTiffViewerCtl";
-            this.Size = new System.Drawing.Size(784, 552);
+            this.Name = "TiffViewerCtl";
+            resources.ApplyResources(this, "$this");
             this.SizeChanged += new System.EventHandler(this.TiffViewer_SizeChanged);
             this.tStrip.ResumeLayout(false);
             this.tStrip.PerformLayout();

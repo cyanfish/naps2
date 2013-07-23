@@ -35,6 +35,7 @@ namespace NAPS2.WinForms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripButton();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();
@@ -55,7 +56,6 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -75,6 +75,14 @@ namespace NAPS2.WinForms
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
+            // 
+            // thumbnailList1
+            // 
+            resources.ApplyResources(this.thumbnailList1, "thumbnailList1");
+            this.thumbnailList1.Name = "thumbnailList1";
+            this.thumbnailList1.UseCompatibleStateImageBehavior = false;
+            this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
+            this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
             // 
             // tStrip
             // 
@@ -236,14 +244,6 @@ namespace NAPS2.WinForms
             this.tsAbout.Name = "tsAbout";
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
-            // 
-            // thumbnailList1
-            // 
-            resources.ApplyResources(this.thumbnailList1, "thumbnailList1");
-            this.thumbnailList1.Name = "thumbnailList1";
-            this.thumbnailList1.UseCompatibleStateImageBehavior = false;
-            this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
-            this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
             // 
             // FDesktop
             // 

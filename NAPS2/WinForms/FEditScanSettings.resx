@@ -130,10 +130,6 @@
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
@@ -152,6 +148,7 @@
   <data name="&gt;&gt;label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
@@ -189,11 +186,8 @@
   <data name="&gt;&gt;cmbPage.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdTWAIN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="cmbResolution.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 396</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -234,14 +228,17 @@
   <data name="&gt;&gt;trBrightness.Name" xml:space="preserve">
     <value>trBrightness</value>
   </data>
-  <data name="&gt;&gt;cmbDepth.Name" xml:space="preserve">
-    <value>cmbDepth</value>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdWIA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+  <data name="txtBrightness.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;cmbResolution.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -270,17 +267,14 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
-  <data name="trContrast.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
   <data name="&gt;&gt;btnChooseDevice.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 396</value>
   </data>
-  <data name="cmbPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 254</value>
+  <data name="&gt;&gt;trContrast.Name" xml:space="preserve">
+    <value>trContrast</value>
   </data>
   <data name="&gt;&gt;cmbResolution.Name" xml:space="preserve">
     <value>cmbResolution</value>
@@ -299,6 +293,9 @@
   </data>
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbResolution.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 294</value>
   </data>
   <data name="&gt;&gt;cmbDepth.Parent" xml:space="preserve">
     <value>$this</value>
@@ -327,8 +324,8 @@
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>334, 23</value>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="txtBrightness.Location" type="System.Drawing.Point, System.Drawing">
     <value>160, 334</value>
@@ -353,9 +350,6 @@
   </data>
   <data name="trBrightness.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
-  </data>
-  <data name="rdbNativeWIA.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -384,9 +378,6 @@
   <data name="cmbScale.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="rdTWAIN.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -408,14 +399,11 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Display name:</value>
   </data>
-  <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Brightness:</value>
   </data>
   <data name="cmbAlign.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
-  </data>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -426,11 +414,14 @@
   <data name="rdWIA.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 17</value>
   </data>
-  <data name="&gt;&gt;rdTWAIN.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;btnChooseDevice.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Page size:</value>
+  </data>
+  <data name="txtDevice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 98</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 140</value>
@@ -525,8 +516,8 @@
   <data name="&gt;&gt;label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmbSource.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="txtName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
     <value>ilProfileIcons</value>
@@ -555,8 +546,8 @@
   <data name="trContrast.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 45</value>
   </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
   </data>
   <data name="&gt;&gt;cmbResolution.ZOrder" xml:space="preserve">
     <value>16</value>
@@ -567,8 +558,8 @@
   <data name="cmbAlign.Location" type="System.Drawing.Point, System.Drawing">
     <value>235, 254</value>
   </data>
-  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="&gt;&gt;cmbDepth.Name" xml:space="preserve">
+    <value>cmbDepth</value>
   </data>
   <data name="trBrightness.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 334</value>
@@ -612,6 +603,9 @@
   <data name="cmbAlign.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
+  <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
+    <value>rdbConfig</value>
+  </data>
   <data name="&gt;&gt;pctIcon.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -645,11 +639,11 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Horizontal align:</value>
   </data>
-  <data name="&gt;&gt;cmbResolution.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cmbSource.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+  <data name="&gt;&gt;cmbScale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtBrightness.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -663,17 +657,17 @@
   <data name="cmbAlign.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 21</value>
   </data>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
   <data name="btnChooseDevice.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 23</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 238</value>
+  <data name="&gt;&gt;rdTWAIN.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Contrast:</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="&gt;&gt;cbHighQuality.Parent" xml:space="preserve">
     <value>$this</value>
@@ -702,8 +696,8 @@
   <data name="cmbSource.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 21</value>
   </data>
-  <data name="cmbResolution.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 294</value>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
@@ -726,17 +720,20 @@
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;cmbResolution.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="cmbResolution.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="rdbNativeWIA.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;btnChooseDevice.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>&amp;Cancel</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
+  </data>
+  <data name="trBrightness.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 45</value>
   </data>
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -747,14 +744,14 @@
   <data name="&gt;&gt;rdTWAIN.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="rdbConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 17</value>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;txtBrightness.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
-    <value>rdbConfig</value>
+  <data name="&gt;&gt;txtDevice.Name" xml:space="preserve">
+    <value>txtDevice</value>
   </data>
   <data name="&gt;&gt;cmbScale.Parent" xml:space="preserve">
     <value>$this</value>
@@ -765,11 +762,11 @@
   <data name="&gt;&gt;cmbPage.Name" xml:space="preserve">
     <value>cmbPage</value>
   </data>
-  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+  <data name="cmbDepth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>235, 214</value>
   </data>
-  <data name="txtBrightness.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="cmbSource.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 214</value>
@@ -816,9 +813,6 @@
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="pctIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>370, 25</value>
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
   </data>
@@ -846,8 +840,8 @@
         AACAAQAAgAMAAA==
 </value>
   </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="trContrast.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="&gt;&gt;pctIcon.Name" xml:space="preserve">
     <value>pctIcon</value>
@@ -858,8 +852,8 @@
   <data name="&gt;&gt;txtName.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="cbHighQuality.Text" xml:space="preserve">
-    <value>Maximum quality (large files)</value>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Scale:</value>
   </data>
   <data name="&gt;&gt;txtBrightness.Parent" xml:space="preserve">
     <value>$this</value>
@@ -870,6 +864,9 @@
   <data name="txtContrast.Location" type="System.Drawing.Point, System.Drawing">
     <value>380, 334</value>
   </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Device:</value>
   </data>
@@ -879,20 +876,23 @@
   <data name="txtDevice.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 20</value>
   </data>
-  <data name="cmbDepth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 214</value>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
   <data name="&gt;&gt;cmbAlign.Name" xml:space="preserve">
     <value>cmbAlign</value>
   </data>
-  <data name="txtName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="cbHighQuality.Text" xml:space="preserve">
+    <value>Maximum quality (large files)</value>
+  </data>
+  <data name="rdbConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 17</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
   </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Scale:</value>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 238</value>
   </data>
   <data name="&gt;&gt;label10.Parent" xml:space="preserve">
     <value>$this</value>
@@ -903,8 +903,8 @@
   <data name="rdbNativeWIA.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 17</value>
   </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Brightness:</value>
+  <data name="&gt;&gt;cmbResolution.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -912,14 +912,14 @@
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
   </data>
-  <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="rdWIA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
   </data>
   <data name="&gt;&gt;rdbNativeWIA.Name" xml:space="preserve">
     <value>rdbNativeWIA</value>
   </data>
-  <data name="&gt;&gt;trContrast.Name" xml:space="preserve">
-    <value>trContrast</value>
+  <data name="cmbPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 254</value>
   </data>
   <data name="cbHighQuality.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 373</value>
@@ -927,8 +927,8 @@
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 198</value>
   </data>
-  <data name="&gt;&gt;trContrast.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;rdTWAIN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>432, 429</value>
@@ -942,14 +942,14 @@
   <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="trBrightness.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 45</value>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;cmbScale.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;trContrast.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="cbHighQuality.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -960,11 +960,11 @@
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;txtDevice.Name" xml:space="preserve">
-    <value>txtDevice</value>
+  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 396</value>
+  <data name="rdbNativeWIA.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
     <value>rdWIA</value>
@@ -981,14 +981,14 @@
   <data name="&gt;&gt;rdbConfig.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="txtDevice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 98</value>
+  <data name="rdWIA.Text" xml:space="preserve">
+    <value>WIA Driver</value>
   </data>
   <data name="&gt;&gt;btnChooseDevice.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="pctIcon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>370, 25</value>
   </data>
   <data name="&gt;&gt;rdbNativeWIA.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1020,8 +1020,8 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cmbScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 21</value>
@@ -1032,8 +1032,8 @@
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdWIA.Text" xml:space="preserve">
-    <value>WIA Driver</value>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>334, 23</value>
   </data>
   <data name="txtName.Size" type="System.Drawing.Size, System.Drawing">
     <value>334, 20</value>
@@ -1042,7 +1042,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>uk</value>
+    <value>ru</value>
   </metadata>
   <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

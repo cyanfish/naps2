@@ -33,13 +33,14 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThumbnailList));
             this.ilThumbnailList = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // ilThumbnailList
             // 
             this.ilThumbnailList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.ilThumbnailList.ImageSize = new System.Drawing.Size(128, 128);
+            resources.ApplyResources(this.ilThumbnailList, "ilThumbnailList");
             this.ilThumbnailList.TransparentColor = System.Drawing.Color.Transparent;
             this.ResumeLayout(false);
 
