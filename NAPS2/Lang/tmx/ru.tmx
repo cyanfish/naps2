@@ -7,7 +7,7 @@
             <tuv xml:lang="en-US">
                 <seg>100 dpi</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>100 т/д</seg>
             </tuv>
         </tu>
@@ -16,7 +16,7 @@
             <tuv xml:lang="en-US">
                 <seg>1200 dpi</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>1200 т/д</seg>
             </tuv>
         </tu>
@@ -25,7 +25,7 @@
             <tuv xml:lang="en-US">
                 <seg>200 dpi</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>200 т/д</seg>
             </tuv>
         </tu>
@@ -34,8 +34,8 @@
             <tuv xml:lang="en-US">
                 <seg>24-bit Color</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>24-біт Колір</seg>
+            <tuv xml:lang="ru">
+                <seg>24-біт Цвет</seg>
             </tuv>
         </tu>
         <tu>
@@ -43,7 +43,7 @@
             <tuv xml:lang="en-US">
                 <seg>300 dpi</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>300 т/д</seg>
             </tuv>
         </tu>
@@ -52,7 +52,7 @@
             <tuv xml:lang="en-US">
                 <seg>600 dpi</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>600 т/д</seg>
             </tuv>
         </tu>
@@ -61,7 +61,7 @@
             <tuv xml:lang="en-US">
                 <seg>A3 (297x420 mm)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>A3 (297 x 420 мм)</seg>
             </tuv>
         </tu>
@@ -70,7 +70,7 @@
             <tuv xml:lang="en-US">
                 <seg>A4 (210x297 mm)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>A4 (210 x 297 мм)</seg>
             </tuv>
         </tu>
@@ -79,7 +79,7 @@
             <tuv xml:lang="en-US">
                 <seg>A5 (148x210 mm)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>A5 (148 x 210 мм)</seg>
             </tuv>
         </tu>
@@ -89,8 +89,8 @@
             <tuv xml:lang="en-US">
                 <seg>About</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Про програму</seg>
+            <tuv xml:lang="ru">
+                <seg>О программе</seg>
             </tuv>
         </tu>
         <tu>
@@ -98,8 +98,8 @@
             <tuv xml:lang="en-US">
                 <seg>Add</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Додати</seg>
+            <tuv xml:lang="ru">
+                <seg>Добавить</seg>
             </tuv>
         </tu>
         <tu>
@@ -107,8 +107,8 @@
             <tuv xml:lang="en-US">
                 <seg>An error occurred with the scanning driver</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Помилка драйвера сканування</seg>
+            <tuv xml:lang="ru">
+                <seg>Ощибка драйвера сканирования</seg>
             </tuv>
         </tu>
         <tu>
@@ -116,8 +116,8 @@
             <tuv xml:lang="en-US">
                 <seg>Are you sure you want to clear {0} item(s)?</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Ви справді бажаєте почистити профіль(лі) {0}?</seg>
+            <tuv xml:lang="ru">
+                <seg>Желаете очистить профиль(ли) {0}?</seg>
             </tuv>
         </tu>
         <tu>
@@ -125,8 +125,8 @@
             <tuv xml:lang="en-US">
                 <seg>Are you sure you want to delete the profile {0}?</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Ви дійсно хочете видалити профіль {0}?</seg>
+            <tuv xml:lang="ru">
+                <seg>Удалить выбранный профиль{0}?</seg>
             </tuv>
         </tu>
         <tu>
@@ -134,8 +134,8 @@
             <tuv xml:lang="en-US">
                 <seg>Are you sure you want to delete {0} item(s)?</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Ви справді бажаєте видалити {0} профілі(в)?</seg>
+            <tuv xml:lang="ru">
+                <seg>Удалить {0} выбраный(ых)?</seg>
             </tuv>
         </tu>
         <tu>
@@ -143,8 +143,8 @@
             <tuv xml:lang="en-US">
                 <seg>Are you sure you want to delete {0} profiles?</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Ви справді бажаєте видалити {0} профілів?</seg>
+            <tuv xml:lang="ru">
+                <seg>Удалить {0} выбранных?</seg>
             </tuv>
         </tu>
         <tu>
@@ -152,8 +152,8 @@
             <tuv xml:lang="en-US">
                 <seg>Bit depth</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Глибина кольору</seg>
+            <tuv xml:lang="ru">
+                <seg>Глубина цвета</seg>
             </tuv>
         </tu>
         <tu>
@@ -161,8 +161,8 @@
             <tuv xml:lang="en-US">
                 <seg>Bitmap Files (*.bmp)</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Файли зображень mspaint *.bmp</seg>
+            <tuv xml:lang="ru">
+                <seg>Файли несжатых рисунков (*.bmp)</seg>
             </tuv>
         </tu>
         <tu>
@@ -170,8 +170,8 @@
             <tuv xml:lang="en-US">
                 <seg>Black &amp; White</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Чорно-біле</seg>
+            <tuv xml:lang="ru">
+                <seg>Чёрно-белое</seg>
             </tuv>
         </tu>
         <tu>
@@ -179,8 +179,8 @@
             <tuv xml:lang="en-US">
                 <seg>Brightness</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Яскравість</seg>
+            <tuv xml:lang="ru">
+                <seg>Яркость</seg>
             </tuv>
         </tu>
         <tu>
@@ -188,8 +188,8 @@
             <tuv xml:lang="en-US">
                 <seg>Cancel</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Скасувати</seg>
+            <tuv xml:lang="ru">
+                <seg>Отменить</seg>
             </tuv>
         </tu>
         <tu>
@@ -197,8 +197,8 @@
             <tuv xml:lang="en-US">
                 <seg>Center</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Центрувати</seg>
+            <tuv xml:lang="ru">
+                <seg>Центрировать</seg>
             </tuv>
         </tu>
         <tu>
@@ -206,8 +206,8 @@
             <tuv xml:lang="en-US">
                 <seg>Choose Icon</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Вибрати піктограму</seg>
+            <tuv xml:lang="ru">
+                <seg>Вибрать пиктограмму</seg>
             </tuv>
         </tu>
         <tu>
@@ -216,8 +216,8 @@
             <tuv xml:lang="en-US">
                 <seg>Choose Profile</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Виберіть профіль</seg>
+            <tuv xml:lang="ru">
+                <seg>Виберите профиль</seg>
             </tuv>
         </tu>
         <tu>
@@ -225,8 +225,8 @@
             <tuv xml:lang="en-US">
                 <seg>Choose device</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Вибір пристрою</seg>
+            <tuv xml:lang="ru">
+                <seg>Вибор сканера</seg>
             </tuv>
         </tu>
         <tu>
@@ -235,8 +235,8 @@
             <tuv xml:lang="en-US">
                 <seg>Clear</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Очистити</seg>
+            <tuv xml:lang="ru">
+                <seg>Очистить документ</seg>
             </tuv>
         </tu>
         <tu>
@@ -244,8 +244,8 @@
             <tuv xml:lang="en-US">
                 <seg>Contrast</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Контрастність</seg>
+            <tuv xml:lang="ru">
+                <seg>Контрастность</seg>
             </tuv>
         </tu>
         <tu>
@@ -253,8 +253,8 @@
             <tuv xml:lang="en-US">
                 <seg>Copyright © 2009 Pavel Sorejs</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Авторські права належать Pavel Sorejs, 2009</seg>
+            <tuv xml:lang="ru">
+                <seg>Авторские права принадлежат Pavel Sorejs, 2009</seg>
             </tuv>
         </tu>
         <tu>
@@ -262,8 +262,8 @@
             <tuv xml:lang="en-US">
                 <seg>Copyright © 2012 Michael Adams</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Авторські права належать Michael Adams, 2012</seg>
+            <tuv xml:lang="ru">
+                <seg>Авторские права принадлежать Michael Adams, 2012</seg>
             </tuv>
         </tu>
         <tu>
@@ -271,8 +271,8 @@
             <tuv xml:lang="en-US">
                 <seg>Copyright © 2012-2013 Ben Olden-Cooligan</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Авторські права належать Ben Olden-Cooligan, 2012-2013 </seg>
+            <tuv xml:lang="ru">
+                <seg>Авторские права принадлежать Ben Olden-Cooligan, 2012-2013 </seg>
             </tuv>
         </tu>
         <tu>
@@ -280,8 +280,8 @@
             <tuv xml:lang="en-US">
                 <seg>Copyright © 2013 Peter De Leeuw</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Авторські права належать Peter De Leeuw, 2013</seg>
+            <tuv xml:lang="ru">
+                <seg>Авторские права принадлежат Peter De Leeuw, 2013</seg>
             </tuv>
         </tu>
         <tu>
@@ -291,8 +291,8 @@
             <tuv xml:lang="en-US">
                 <seg>Delete</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Видалити</seg>
+            <tuv xml:lang="ru">
+                <seg>Удалить выбранные страницы</seg>
             </tuv>
         </tu>
         <tu>
@@ -300,8 +300,8 @@
             <tuv xml:lang="en-US">
                 <seg>Device</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Пристрій</seg>
+            <tuv xml:lang="ru">
+                <seg>Устройство</seg>
             </tuv>
         </tu>
         <tu>
@@ -309,8 +309,8 @@
             <tuv xml:lang="en-US">
                 <seg>Display name</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Назва</seg>
+            <tuv xml:lang="ru">
+                <seg>Название</seg>
             </tuv>
         </tu>
         <tu>
@@ -318,8 +318,8 @@
             <tuv xml:lang="en-US">
                 <seg>Done</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Завершити</seg>
+            <tuv xml:lang="ru">
+                <seg>Завершить</seg>
             </tuv>
         </tu>
         <tu>
@@ -327,8 +327,8 @@
             <tuv xml:lang="en-US">
                 <seg>Duplex</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Двосторонній</seg>
+            <tuv xml:lang="ru">
+                <seg>Двусторонняя</seg>
             </tuv>
         </tu>
         <tu>
@@ -336,8 +336,8 @@
             <tuv xml:lang="en-US">
                 <seg>Edit</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Редагувати</seg>
+            <tuv xml:lang="ru">
+                <seg>Редактировать</seg>
             </tuv>
         </tu>
         <tu>
@@ -345,8 +345,8 @@
             <tuv xml:lang="en-US">
                 <seg>Email PDF</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>PDF поштою</seg>
+            <tuv xml:lang="ru">
+                <seg>отправить PDF почтой</seg>
             </tuv>
         </tu>
         <tu>
@@ -354,8 +354,8 @@
             <tuv xml:lang="en-US">
                 <seg>Enhanced Windows MetaFile (*.emf)</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Розширений метафайл (*.emf)</seg>
+            <tuv xml:lang="ru">
+                <seg>Разширенный метафайл (*.emf)</seg>
             </tuv>
         </tu>
         <tu>
@@ -363,8 +363,8 @@
             <tuv xml:lang="en-US">
                 <seg>Error</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Помилка</seg>
+            <tuv xml:lang="ru">
+                <seg>Ошибка</seg>
             </tuv>
         </tu>
         <tu>
@@ -372,7 +372,7 @@
             <tuv xml:lang="en-US">
                 <seg>Exchangeable Image File (*.exif)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg/>
             </tuv>
         </tu>
@@ -381,7 +381,7 @@
             <tuv xml:lang="en-US">
                 <seg>FTwainGui</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg/>
             </tuv>
         </tu>
@@ -390,7 +390,7 @@
             <tuv xml:lang="en-US">
                 <seg>Feeder</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>Автоподача</seg>
             </tuv>
         </tu>
@@ -399,8 +399,8 @@
             <tuv xml:lang="en-US">
                 <seg>Flip</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Відзеркалити</seg>
+            <tuv xml:lang="ru">
+                <seg>Отзеркалити</seg>
             </tuv>
         </tu>
         <tu>
@@ -408,7 +408,7 @@
             <tuv xml:lang="en-US">
                 <seg>GIF File (*.gif)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>GIF файл (*.gif)</seg>
             </tuv>
         </tu>
@@ -417,8 +417,8 @@
             <tuv xml:lang="en-US">
                 <seg>Glass</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Зі скла</seg>
+            <tuv xml:lang="ru">
+                <seg>Со стекла</seg>
             </tuv>
         </tu>
         <tu>
@@ -426,8 +426,8 @@
             <tuv xml:lang="en-US">
                 <seg>Grayscale</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Відтінки сірого</seg>
+            <tuv xml:lang="ru">
+                <seg>Оттенки серого</seg>
             </tuv>
         </tu>
         <tu>
@@ -435,8 +435,8 @@
             <tuv xml:lang="en-US">
                 <seg>Horizontal align</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Горизонтальне вирівнювання</seg>
+            <tuv xml:lang="ru">
+                <seg>Горизонтальное выравнивание</seg>
             </tuv>
         </tu>
         <tu>
@@ -444,8 +444,8 @@
             <tuv xml:lang="en-US">
                 <seg>Icons from</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Піктограми взяті з</seg>
+            <tuv xml:lang="ru">
+                <seg>Пиктограммы взяты с</seg>
             </tuv>
         </tu>
         <tu>
@@ -453,7 +453,7 @@
             <tuv xml:lang="en-US">
                 <seg>JPEG File (*.jpg, *.jpeg)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>JPEG файл (*.jpg, *.jpeg)</seg>
             </tuv>
         </tu>
@@ -462,8 +462,8 @@
             <tuv xml:lang="en-US">
                 <seg>Language</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Мова</seg>
+            <tuv xml:lang="ru">
+                <seg>Язык</seg>
             </tuv>
         </tu>
         <tu>
@@ -471,8 +471,8 @@
             <tuv xml:lang="en-US">
                 <seg>Left</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Вліво</seg>
+            <tuv xml:lang="ru">
+                <seg>Повернуть влево</seg>
             </tuv>
         </tu>
         <tu>
@@ -480,8 +480,8 @@
             <tuv xml:lang="en-US">
                 <seg>Main toolbar</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Головна панель інструментів</seg>
+            <tuv xml:lang="ru">
+                <seg>Главная панэль инструментов</seg>
             </tuv>
         </tu>
         <tu>
@@ -489,8 +489,8 @@
             <tuv xml:lang="en-US">
                 <seg>Manage Profiles</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Керування профілями</seg>
+            <tuv xml:lang="ru">
+                <seg>Управление профилями</seg>
             </tuv>
         </tu>
         <tu>
@@ -498,8 +498,8 @@
             <tuv xml:lang="en-US">
                 <seg>Maximum quality (large files)</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Максимальна якість (великий розмір)</seg>
+            <tuv xml:lang="ru">
+                <seg>Максимальное качество (болшой розмер)</seg>
             </tuv>
         </tu>
         <tu>
@@ -507,8 +507,8 @@
             <tuv xml:lang="en-US">
                 <seg>Move Down</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Пересунути нижче</seg>
+            <tuv xml:lang="ru">
+                <seg>Передвинуть страницу ниже</seg>
             </tuv>
         </tu>
         <tu>
@@ -516,8 +516,8 @@
             <tuv xml:lang="en-US">
                 <seg>Move Up</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Пересунути вище</seg>
+            <tuv xml:lang="ru">
+                <seg>Передвинуть страницу выше</seg>
             </tuv>
         </tu>
         <tu>
@@ -525,8 +525,8 @@
             <tuv xml:lang="en-US">
                 <seg>NAPS2</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg></seg>
+            <tuv xml:lang="ru">
+                <seg/>
             </tuv>
         </tu>
         <tu>
@@ -534,8 +534,8 @@
             <tuv xml:lang="en-US">
                 <seg>Name missing</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Відсутнє ім'я</seg>
+            <tuv xml:lang="ru">
+                <seg>Пропущено имя</seg>
             </tuv>
         </tu>
         <tu>
@@ -543,8 +543,8 @@
             <tuv xml:lang="en-US">
                 <seg>No device selected</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Не вибраний пристрій</seg>
+            <tuv xml:lang="ru">
+                <seg>Не выбран сканер</seg>
             </tuv>
         </tu>
         <tu>
@@ -552,8 +552,8 @@
             <tuv xml:lang="en-US">
                 <seg>No scanning device was found</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Не знайдено жодного сканера</seg>
+            <tuv xml:lang="ru">
+                <seg>Не найдено сканеров</seg>
             </tuv>
         </tu>
         <tu>
@@ -561,8 +561,8 @@
             <tuv xml:lang="en-US">
                 <seg>Not Another PDF Scanner 2</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg></seg>
+            <tuv xml:lang="ru">
+                <seg/>
             </tuv>
         </tu>
         <tu>
@@ -572,7 +572,7 @@
             <tuv xml:lang="en-US">
                 <seg>OK</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>OK</seg>
             </tuv>
         </tu>
@@ -581,8 +581,8 @@
             <tuv xml:lang="en-US">
                 <seg>Overwrite File</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Перезаписати файл</seg>
+            <tuv xml:lang="ru">
+                <seg>Перезаписать файл</seg>
             </tuv>
         </tu>
         <tu>
@@ -590,7 +590,7 @@
             <tuv xml:lang="en-US">
                 <seg>PDF document (*.pdf)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>PDF документ (*.pdf)</seg>
             </tuv>
         </tu>
@@ -599,7 +599,7 @@
             <tuv xml:lang="en-US">
                 <seg>PNG File (*.png)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>PNG файл (*.png)</seg>
             </tuv>
         </tu>
@@ -608,8 +608,8 @@
             <tuv xml:lang="en-US">
                 <seg>Page size</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Розмір сторінки</seg>
+            <tuv xml:lang="ru">
+                <seg>Размер страницы</seg>
             </tuv>
         </tu>
         <tu>
@@ -617,8 +617,8 @@
             <tuv xml:lang="en-US">
                 <seg>Paper source</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Подача паперу</seg>
+            <tuv xml:lang="ru">
+                <seg>Подача листов</seg>
             </tuv>
         </tu>
         <tu>
@@ -626,8 +626,8 @@
             <tuv xml:lang="en-US">
                 <seg>Preview</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Перегляд</seg>
+            <tuv xml:lang="ru">
+                <seg>Предпросмотр</seg>
             </tuv>
         </tu>
         <tu>
@@ -635,8 +635,8 @@
             <tuv xml:lang="en-US">
                 <seg>Profile settings</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Налаштовування профілю</seg>
+            <tuv xml:lang="ru">
+                <seg>Настройки профиля</seg>
             </tuv>
         </tu>
         <tu>
@@ -645,8 +645,8 @@
             <tuv xml:lang="en-US">
                 <seg>Profiles</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Профілі</seg>
+            <tuv xml:lang="ru">
+                <seg>Профили</seg>
             </tuv>
         </tu>
         <tu>
@@ -654,8 +654,8 @@
             <tuv xml:lang="en-US">
                 <seg>Resolution</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Роздільна здатність</seg>
+            <tuv xml:lang="ru">
+                <seg>Разрешение т/д</seg>
             </tuv>
         </tu>
         <tu>
@@ -663,8 +663,8 @@
             <tuv xml:lang="en-US">
                 <seg>Right</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Вправо</seg>
+            <tuv xml:lang="ru">
+                <seg>Повернуть страницу вправо</seg>
             </tuv>
         </tu>
         <tu>
@@ -672,8 +672,8 @@
             <tuv xml:lang="en-US">
                 <seg>Rotate Left</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Обернути ліворуч</seg>
+            <tuv xml:lang="ru">
+                <seg>Повенуть страницу влево</seg>
             </tuv>
         </tu>
         <tu>
@@ -681,8 +681,8 @@
             <tuv xml:lang="en-US">
                 <seg>Rotate Right</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Обернути праворуч</seg>
+            <tuv xml:lang="ru">
+                <seg>Повернуть вправо</seg>
             </tuv>
         </tu>
         <tu>
@@ -690,8 +690,8 @@
             <tuv xml:lang="en-US">
                 <seg>Save Images</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Зберегти як зображення</seg>
+            <tuv xml:lang="ru">
+                <seg>Сохранить как изображения</seg>
             </tuv>
         </tu>
         <tu>
@@ -699,8 +699,8 @@
             <tuv xml:lang="en-US">
                 <seg>Save PDF</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Зберегти PDF</seg>
+            <tuv xml:lang="ru">
+                <seg>Сохранить PDF</seg>
             </tuv>
         </tu>
         <tu>
@@ -708,8 +708,8 @@
             <tuv xml:lang="en-US">
                 <seg>Saving to PDF</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Зберігання у PDF</seg>
+            <tuv xml:lang="ru">
+                <seg>Сохраняется PDF</seg>
             </tuv>
         </tu>
         <tu>
@@ -717,8 +717,8 @@
             <tuv xml:lang="en-US">
                 <seg>Scale</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Масштабувати</seg>
+            <tuv xml:lang="ru">
+                <seg>Масштабировать</seg>
             </tuv>
         </tu>
         <tu>
@@ -727,8 +727,8 @@
             <tuv xml:lang="en-US">
                 <seg>Scan</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Сканувати</seg>
+            <tuv xml:lang="ru">
+                <seg>Сканировать</seg>
             </tuv>
         </tu>
         <tu>
@@ -736,8 +736,8 @@
             <tuv xml:lang="en-US">
                 <seg>Scanned Image</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Зіскановане зображення</seg>
+            <tuv xml:lang="ru">
+                <seg>Отсканированные изображения</seg>
             </tuv>
         </tu>
         <tu>
@@ -745,8 +745,8 @@
             <tuv xml:lang="en-US">
                 <seg>Select a profile before clicking Scan</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Виберіть профіль перед скануванням</seg>
+            <tuv xml:lang="ru">
+                <seg>Выберите профиль перед сканированием</seg>
             </tuv>
         </tu>
         <tu>
@@ -754,7 +754,7 @@
             <tuv xml:lang="en-US">
                 <seg>TIFF File (*.tiff, *.tif)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>TIFF файл (*.tiff, *.tif)</seg>
             </tuv>
         </tu>
@@ -763,7 +763,7 @@
             <tuv xml:lang="en-US">
                 <seg>TWAIN Driver</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>TWAIN драйвер</seg>
             </tuv>
         </tu>
@@ -772,8 +772,8 @@
             <tuv xml:lang="en-US">
                 <seg>The file {0} already exists. Do you want to overwrite it?</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Файл {0} вже існує. Перезаписати його?</seg>
+            <tuv xml:lang="ru">
+                <seg>Файл {0} существует. Перезаписать його?</seg>
             </tuv>
         </tu>
         <tu>
@@ -781,8 +781,8 @@
             <tuv xml:lang="en-US">
                 <seg>The selected scanner could not be found</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Не знайдено вибраний сканер</seg>
+            <tuv xml:lang="ru">
+                <seg>НЕ найден выбранный сканер</seg>
             </tuv>
         </tu>
         <tu>
@@ -790,8 +790,8 @@
             <tuv xml:lang="en-US">
                 <seg>The selected scanner is offline</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Вибраний сканер відключений</seg>
+            <tuv xml:lang="ru">
+                <seg>Выбранный сканер отключён</seg>
             </tuv>
         </tu>
         <tu>
@@ -799,7 +799,7 @@
             <tuv xml:lang="en-US">
                 <seg>US Legal (8.5x14 in)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg/>
             </tuv>
         </tu>
@@ -808,7 +808,7 @@
             <tuv xml:lang="en-US">
                 <seg>US Letter (8.5x11 in)</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg/>
             </tuv>
         </tu>
@@ -817,7 +817,7 @@
             <tuv xml:lang="en-US">
                 <seg>Use native WIA UI</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg>Рідний інтерфейс сканера WIA UI</seg>
             </tuv>
         </tu>
@@ -826,8 +826,8 @@
             <tuv xml:lang="en-US">
                 <seg>Use predefined settings</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Попередньо визначені параметри</seg>
+            <tuv xml:lang="ru">
+                <seg>Предустановленные параметри</seg>
             </tuv>
         </tu>
         <tu>
@@ -835,8 +835,8 @@
             <tuv xml:lang="en-US">
                 <seg>Version {0}</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Версія {0}</seg>
+            <tuv xml:lang="ru">
+                <seg>Версия {0}</seg>
             </tuv>
         </tu>
         <tu>
@@ -844,8 +844,8 @@
             <tuv xml:lang="en-US">
                 <seg>WIA Driver</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>WIA драйвер</seg>
+            <tuv xml:lang="ru">
+                <seg>TWAIN драйвер</seg>
             </tuv>
         </tu>
         <tu>
@@ -853,8 +853,8 @@
             <tuv xml:lang="en-US">
                 <seg>Waiting for TWAIN to complete</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>Очікування завершення від TWAIN</seg>
+            <tuv xml:lang="ru">
+                <seg>Ожидание завершения работы TWAIN</seg>
             </tuv>
         </tu>
         <tu>
@@ -862,8 +862,8 @@
             <tuv xml:lang="en-US">
                 <seg>You don't have permission to save files at this location</seg>
             </tuv>
-            <tuv xml:lang="uk">
-                <seg>У вас немає прав для створення файлів у цьому каталозі.</seg>
+            <tuv xml:lang="ru">
+                <seg>Нет прав на запись в этом каталоге.</seg>
             </tuv>
         </tu>
         <tu>
@@ -871,7 +871,7 @@
             <tuv xml:lang="en-US">
                 <seg>http://sourceforge.com/projects/naps2</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg/>
             </tuv>
         </tu>
@@ -880,7 +880,7 @@
             <tuv xml:lang="en-US">
                 <seg>http://www.fatcow.com/free-icons</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg/>
             </tuv>
         </tu>
@@ -889,7 +889,7 @@
             <tuv xml:lang="en-US">
                 <seg>{0} of {1}</seg>
             </tuv>
-            <tuv xml:lang="uk">
+            <tuv xml:lang="ru">
                 <seg/>
             </tuv>
         </tu>

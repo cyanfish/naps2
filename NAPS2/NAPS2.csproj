@@ -386,6 +386,7 @@
     </EmbeddedResource>
     <None Include="Lang\tmx\empty.tmx" />
     <None Include="Lang\tmx\es.tmx" />
+    <None Include="Lang\tmx\ru.tmx" />
     <None Include="Lang\tmx\uk.tmx" />
     <None Include="NAPS2.licenseheader" />
     <None Include="app.config" />
