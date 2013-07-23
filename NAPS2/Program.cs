@@ -38,9 +38,15 @@ namespace NAPS2
         /// </summary>
         [STAThread]
         static void Main()
-      {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr");
+        {
+            var cultureId = KernelManager.Kernel.Get<UserConfigManager>().Config.Culture;
+            if (cultureId != null)
+            {
+                var culture = new CultureInfo(cultureId);
+                Thread.CurrentThread.CurrentUICulture = culture;
+                Thread.CurrentThread.CurrentCulture = culture;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

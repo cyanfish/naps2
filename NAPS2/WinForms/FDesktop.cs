@@ -41,13 +41,15 @@ namespace NAPS2.WinForms
         private readonly IEmailer emailer;
         private readonly ImageSaver imageSaver;
         private readonly StringWrapper stringWrapper;
+        private readonly UserConfigManager userConfigManager;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
             this.stringWrapper = stringWrapper;
+            this.userConfigManager = userConfigManager;
             InitializeComponent();
         }
 
@@ -373,6 +375,8 @@ namespace NAPS2.WinForms
 
         private void SetCulture(string cultureId)
         {
+            userConfigManager.Config.Culture = cultureId;
+            userConfigManager.Save();
             Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureId);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureId);
 
