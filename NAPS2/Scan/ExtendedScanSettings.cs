@@ -29,6 +29,16 @@ namespace NAPS2.Scan
 {
     public class ExtendedScanSettings : ScanSettings
     {
+        public ExtendedScanSettings()
+        {
+            // Set defaults
+            BitDepth = ScanBitDepth.C24Bit;
+            PageAlign = ScanHorizontalAlign.Center;
+            PageSize = ScanPageSize.Letter;
+            Resolution = ScanDpi.Dpi200;
+            PaperSource = ScanSource.Glass;
+        }
+
         public ScanScale AfterScanScale { get; set; }
 
         public int Brightness { get; set; }
