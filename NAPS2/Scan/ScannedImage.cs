@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -35,9 +36,10 @@ namespace NAPS2.Scan
         private readonly ScanBitDepth bitDepth;
         private readonly ImageFormat imageFormat;
 
-        private Bitmap baseImage;
-        private MemoryStream baseImageEncoded;
-        private Bitmap thumbnail;
+        private readonly Bitmap thumbnail;
+        private readonly Bitmap baseImage;
+        private readonly MemoryStream baseImageEncoded;
+        private RotateFlipType transform = RotateFlipType.RotateNoneFlipNone;
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, ImageFormat imageFormat)
         {
@@ -45,7 +47,19 @@ namespace NAPS2.Scan
             this.imageFormat = imageFormat;
             thumbnail = ResizeBitmap(img, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
 
-            SetBaseImage(bitDepth == ScanBitDepth.BlackWhite ? ImageHelper.CopyToBpp(img, 1) : img);
+            if (bitDepth == ScanBitDepth.BlackWhite)
+            {
+                baseImage = (Bitmap)ImageHelper.CopyToBpp(img, 1).Clone();
+            }
+            else
+            {
+                if (baseImageEncoded != null)
+                {
+                    baseImageEncoded.Dispose();
+                }
+                baseImageEncoded = new MemoryStream();
+                img.Save(baseImageEncoded, imageFormat);
+            }
         }
 
         public Bitmap Thumbnail
@@ -58,14 +72,9 @@ namespace NAPS2.Scan
 
         public Bitmap GetImage()
         {
-            if (bitDepth == ScanBitDepth.BlackWhite)
-            {
-                return (Bitmap)baseImage.Clone();
-            }
-            else
-            {
-                return new Bitmap(baseImageEncoded);
-            }
+            var bitmap = bitDepth == ScanBitDepth.BlackWhite ? (Bitmap)baseImage.Clone() : new Bitmap(baseImageEncoded);
+            bitmap.RotateFlip(transform);
+            return bitmap;
         }
 
         public void Dispose()
@@ -83,12 +92,48 @@ namespace NAPS2.Scan
 
         public void RotateFlip(RotateFlipType rotateFlipType)
         {
-            using (Bitmap img = GetImage())
+            transform = CombineTransform(transform, rotateFlipType);
+            thumbnail.RotateFlip(rotateFlipType);
+        }
+
+        private static RotateFlipType CombineTransform(RotateFlipType currentTransform, RotateFlipType nextTransform)
+        {
+            // There should be no actual flips (just rotations of varying degrees), so this code is simplified
+            Debug.Assert((int)currentTransform < 4);
+            Debug.Assert((int)nextTransform < 4);
+            return FromRotation(GetRotation(currentTransform) + GetRotation(nextTransform));
+        }
+
+        private static int GetRotation(RotateFlipType rotateFlipType)
+        {
+            switch (rotateFlipType)
             {
-                img.RotateFlip(rotateFlipType);
-                thumbnail = ResizeBitmap(img, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
-                SetBaseImage(img);
+                case RotateFlipType.RotateNoneFlipNone:
+                    return 0;
+                case RotateFlipType.Rotate90FlipNone:
+                    return 1;
+                case RotateFlipType.Rotate180FlipNone:
+                    return 2;
+                case RotateFlipType.Rotate270FlipNone:
+                    return 3;
             }
+            throw new ArgumentException();
+        }
+
+        private static RotateFlipType FromRotation(int rotation)
+        {
+            switch (rotation % 4)
+            {
+                case 0:
+                    return RotateFlipType.RotateNoneFlipNone;
+                case 1:
+                    return RotateFlipType.Rotate90FlipNone;
+                case 2:
+                    return RotateFlipType.Rotate180FlipNone;
+                case 3:
+                    return RotateFlipType.Rotate270FlipNone;
+            }
+            throw new ArgumentException();
         }
 
         private static Bitmap ResizeBitmap(Bitmap b, int newWidth, int newHeight)
@@ -119,23 +164,6 @@ namespace NAPS2.Scan
             g.Dispose();
 
             return result;
-        }
-
-        private void SetBaseImage(Bitmap bitmap)
-        {
-            if (bitDepth == ScanBitDepth.BlackWhite)
-            {
-                baseImage = (Bitmap)bitmap.Clone();
-            }
-            else
-            {
-                if (baseImageEncoded != null)
-                {
-                    baseImageEncoded.Dispose();
-                }
-                baseImageEncoded = new MemoryStream();
-                bitmap.Save(baseImageEncoded, imageFormat);
-            }
         }
     }
 }
