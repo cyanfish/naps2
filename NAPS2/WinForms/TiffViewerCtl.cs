@@ -87,20 +87,25 @@ namespace NAPS2.WinForms
                 double zoomX = containerWidth / tiffviewer1.ImageWidth * 100;
                 double zoomY = containerHeight / tiffviewer1.ImageHeight * 100;
                 tiffviewer1.Zoom = (int)Math.Min(zoomX, zoomY);
-                tsZoom.Text = tiffviewer1.Zoom.ToString("P");
+                UpdateZoomText();
             }
+        }
+
+        private void UpdateZoomText()
+        {
+            tsZoom.Text = (tiffviewer1.Zoom/100.0).ToString("P");
         }
 
         private void tsZoomPlus_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom += 10;
-            tsZoom.Text = tiffviewer1.Zoom.ToString("P");
+            UpdateZoomText();
         }
 
         private void tsZoomOut_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom -= 10;
-            tsZoom.Text = tiffviewer1.Zoom.ToString("P");
+            UpdateZoomText();
         }
 
         private void tsStretch_Click(object sender, EventArgs e)
@@ -116,7 +121,7 @@ namespace NAPS2.WinForms
         private void tsZoomActual_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom = 100;
-            tsZoom.Text = tiffviewer1.Zoom.ToString("P");
+            UpdateZoomText();
         }
 
         #region Component Designer generated code
