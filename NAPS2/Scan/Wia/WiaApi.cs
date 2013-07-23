@@ -405,8 +405,7 @@ namespace NAPS2.Scan.Wia
                             result.SetResolution((float) horizontalRes, (float) verticalRes);
 
                             ScanBitDepth bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24Bit;
-                            ImageFormat imageFormat = settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg;
-                            return new ScannedImage(result, bitDepth, imageFormat);
+                            return new ScannedImage(result, bitDepth, settings.MaxQuality);
                         }
                     }
                 }

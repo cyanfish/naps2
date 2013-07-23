@@ -57,8 +57,7 @@ namespace NAPS2.Scan.Stub
             Graphics g = Graphics.FromImage(bitmap);
             g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
             g.DrawString(new Random().Next().ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
-            var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit,
-                                         ScanSettings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg);
+            var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, ScanSettings.MaxQuality);
             return image;
         }
 

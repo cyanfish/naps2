@@ -34,41 +34,57 @@ namespace NAPS2.Scan
         private const int THUMBNAIL_WIDTH = 128;
         private const int THUMBNAIL_HEIGHT = 128;
         private readonly ScanBitDepth bitDepth;
-        private readonly ImageFormat imageFormat;
 
-        private readonly Bitmap thumbnail;
         private readonly Bitmap baseImage;
         private readonly MemoryStream baseImageEncoded;
         private RotateFlipType transform = RotateFlipType.RotateNoneFlipNone;
 
-        public ScannedImage(Bitmap img, ScanBitDepth bitDepth, ImageFormat imageFormat)
+        public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
             this.bitDepth = bitDepth;
-            this.imageFormat = imageFormat;
-            thumbnail = ResizeBitmap(img, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+            Thumbnail = ResizeBitmap(img, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
 
+            // Store the image in as little space as possible
             if (bitDepth == ScanBitDepth.BlackWhite)
             {
+                // Store as a 1-bit bitmap
+                // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
                 baseImage = (Bitmap)ImageHelper.CopyToBpp(img, 1).Clone();
+            }
+            else if (highQuality)
+            {
+                // Store as PNG
+                // Lossless, but some images (color/grayscale) take up lots of storage
+                baseImageEncoded = EncodeBitmap(img, ImageFormat.Png);
             }
             else
             {
-                if (baseImageEncoded != null)
+                // Store as PNG/JPEG depending on which is smaller
+                var pngEncoded = EncodeBitmap(img, ImageFormat.Png);
+                var jpegEncoded = EncodeBitmap(img, ImageFormat.Jpeg);
+                if (pngEncoded.Length <= jpegEncoded.Length)
                 {
-                    baseImageEncoded.Dispose();
+                    // Probably a black and white image (e.g. from TWAIN or native WIA), which PNG compresses well vs. JPEG
+                    baseImageEncoded = pngEncoded;
+                    jpegEncoded.Dispose();
                 }
-                baseImageEncoded = new MemoryStream();
-                img.Save(baseImageEncoded, imageFormat);
+                else
+                {
+                    // Probably a color or grayscale image, which JPEG compresses well vs. PNG
+                    baseImageEncoded = jpegEncoded;
+                    pngEncoded.Dispose();
+                }
             }
         }
 
-        public Bitmap Thumbnail
+        private static MemoryStream EncodeBitmap(Bitmap bitmap, ImageFormat imageFormat)
         {
-            get
-            {
-                return thumbnail;
-            }
+            var encoded = new MemoryStream();
+            bitmap.Save(encoded, imageFormat);
+            return encoded;
         }
+
+        public Bitmap Thumbnail { get; private set; }
 
         public Bitmap GetImage()
         {
@@ -87,13 +103,13 @@ namespace NAPS2.Scan
             {
                 baseImageEncoded.Dispose();
             }
-            thumbnail.Dispose();
+            Thumbnail.Dispose();
         }
 
         public void RotateFlip(RotateFlipType rotateFlipType)
         {
             transform = CombineTransform(transform, rotateFlipType);
-            thumbnail.RotateFlip(rotateFlipType);
+            Thumbnail.RotateFlip(rotateFlipType);
         }
 
         private static RotateFlipType CombineTransform(RotateFlipType currentTransform, RotateFlipType nextTransform)

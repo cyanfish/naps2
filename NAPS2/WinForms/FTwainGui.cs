@@ -91,7 +91,7 @@ namespace NAPS2.WinForms
 
                             using (Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount))
                             {
-                                bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality ? ImageFormat.Png : ImageFormat.Jpeg));
+                                bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality));
                             }
                         }
                         Close();
