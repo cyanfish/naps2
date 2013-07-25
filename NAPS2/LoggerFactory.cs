@@ -19,7 +19,7 @@ namespace NAPS2
                 MaxArchiveFiles = 5
             };
             config.AddTarget("errorlogfile", target);
-            var rule = new LoggingRule("*", LogLevel.Debug, target);
+            var rule = new LoggingRule("*", LogLevel.Trace, target);
             config.LoggingRules.Add(rule);
             LogManager.Configuration = config;
             return LogManager.GetLogger("NAPS2");
