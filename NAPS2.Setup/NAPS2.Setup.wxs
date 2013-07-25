@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="9C8E5A71-564D-441B-8084-CDA1BCF3E451" Name="NAPS2" Language="1033" Version="2.2.4952.28362" Manufacturer="Ben Olden-Cooligan" UpgradeCode="5c405ee6-e89d-49f5-be25-478637f161a0">
+  <Product
+      Id="*"
+      Name="NAPS2"
+      Language="1033"
+      Version="2.4.4952.28362"
+      Manufacturer="Ben Olden-Cooligan"
+      UpgradeCode="FEB82971-B3E6-4F19-9684-1D543E644D73">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <Media Id="1" Cabinet="NAPS2.cab" EmbedCab="yes" />
+
+    <Icon Id="icon.ico" SourceFile="..\NAPS2\Resources\scanner.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+    
+    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
 
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
     <UIRef Id="WixUI_InstallDir" />
@@ -42,6 +53,8 @@
         <File Source="..\NAPS2\Resources\scanner-app.ico" />
         <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
         <File Source="..\NAPS2.Console\bin\Release\CommandLine.dll" />
+        <!-- License -->
+        <File Source="..\NAPS2\Setup\license.txt" />
       </Component>
     </DirectoryRef>
 
