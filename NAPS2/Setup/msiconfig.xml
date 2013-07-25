@@ -1,0 +1,35 @@
+<MsiWrapper>
+  <Installer>
+    <IconFile Detect="" Value="F:\Devel\VS\NAPS2\NAPS2\Resources\scanner-app.ico" />
+    <Output FileName="F:\Devel\VS\NAPS2\NAPS2\publish\2.2\naps2-2.2-setup.msi" />
+    <UpgradeCode Value="{88143cb1-7ea0-48f4-8a65-55200d8b9187}" />
+    <Manufacturer Detect="registry" Value="Ben Olden-Cooligan" />
+    <ProductVersion Detect="" Value="2.2.4952.28362" />
+    <ProductName Detect="registry" Value="NAPS2 2.2" />
+    <Comments Detect="registry" Value="" />
+    <Contact Detect="registry" Value="" />
+    <HelpLink Detect="registry" Value="http://www.sourceforge.net/projects/naps2" />
+    <UpdateLink Detect="registry" Value="http://www.sourceforge.net/projects/naps2" />
+    <AboutLink Detect="registry" Value="http://www.sourceforge.net/projects/naps2" />
+  </Installer>
+  <WrappedInstaller>
+    <Executable FileName="F:\Devel\VS\NAPS2\NAPS2\publish\2.2\naps2-2.2-setup.exe" />
+    <ApplicationId Value="NAPS2 (Not Another PDF Scanner 2)_is1" />
+    <Install>
+      <Arguments Value="/VERYSILENT /SUPPRESSMSGBOXES">
+        <UILevelNone Value="" />
+        <UILevelBasic Value="" />
+        <UILevelReduced Value="" />
+        <UILevelFull Value="" />
+      </Arguments>
+    </Install>
+    <Uninstall>
+      <Arguments Value="/VERYSILENT /SUPPRESSMSGBOXES">
+        <UILevelNone Value="" />
+        <UILevelBasic Value="" />
+        <UILevelReduced Value="" />
+        <UILevelFull Value="" />
+      </Arguments>
+    </Uninstall>
+  </WrappedInstaller>
+</MsiWrapper>

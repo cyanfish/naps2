@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="9C8E5A71-564D-441B-8084-CDA1BCF3E451" Name="NAPS2" Language="1033" Version="2.2.4952.28362" Manufacturer="Ben Olden-Cooligan" UpgradeCode="5c405ee6-e89d-49f5-be25-478637f161a0">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Media Id="1" Cabinet="NAPS2.cab" EmbedCab="yes" />
+
+    <Feature Id="MainApplication" Title="NAPS2" Level="1">
+      <ComponentRef Id="Exec" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentGroupRef Id="LangComponents" />
+    </Feature>
+
+    <ComponentGroup Id="LangComponents">
+      <ComponentRef Id="LangComponent_es" />
+      <ComponentRef Id="LangComponent_ru" />
+      <ComponentRef Id="LangComponent_uk" />
+    </ComponentGroup>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="NAPS2" />
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuDir" Name="NAPS2" />
+      </Directory>
+    </Directory>
+
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="Exec" Guid="3ED24800-E1D9-4D64-A106-6DC3597D9266">
+        <!-- EXEs -->
+        <File Source="..\NAPS2\bin\Release\NAPS2.exe" />
+        <File Source="..\NAPS2.Console\bin\Release\NAPS2.Console.exe" />
+        <!-- Dependencies -->
+        <File Source="..\NAPS2\bin\Release\PdfSharp.dll" />
+        <File Source="..\NAPS2\bin\Release\Interop.WIA.dll" />
+        <File Source="..\NAPS2\bin\Release\Ninject.dll" />
+        <File Source="..\NAPS2\bin\Release\NLog.dll" />
+        <File Source="..\NAPS2\Resources\scanner-app.ico" />
+        <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
+        <File Source="..\NAPS2.Console\bin\Release\CommandLine.dll" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Directory Id="LangFolder_es" Name="es">
+        <Component Id="LangComponent_es">
+          <File Source="..\NAPS2\bin\Release\es\NAPS2.resources.dll" Id="LangFile_es" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_ru" Name="ru">
+        <Component Id="LangComponent_ru">
+          <File Source="..\NAPS2\bin\Release\ru\NAPS2.resources.dll" Id="LangFile_ru" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_uk" Name="uk">
+        <Component Id="LangComponent_uk">
+          <File Source="..\NAPS2\bin\Release\uk\NAPS2.resources.dll" Id="LangFile_uk" />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ProgramMenuDir">
+      <Component Id="ApplicationShortcut" Guid="F5122C0C-7DCA-4D0A-AF70-C87C972267AB">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="NAPS2"
+                  Description="Not Another PDF Scanner 2"
+                  Target="[INSTALLFOLDER]NAPS2.exe"
+                  WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="ProgramMenuDir" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\NAPS2" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+  </Product>
+</Wix>
