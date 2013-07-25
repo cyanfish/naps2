@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Email;
@@ -74,8 +75,11 @@ namespace NAPS2.WinForms
                 var langCode = (string)entry.Key;
                 var langName = (string)entry.Value;
 
-                // Allow languages to be easily excluded from the list by prefixing the code with "_"
-                if (!langCode.StartsWith("_"))
+                // Only include those languages for which localized resources exist
+                string localizedResourcesPath =
+                    Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "", langCode,
+                        "NAPS2.resources.dll");
+                if (langCode == "en" || File.Exists(localizedResourcesPath))
                 {
                     var button = new ToolStripMenuItem(langName, null, (sender, args) => SetCulture(langCode));
                     toolStripDropDownButton1.DropDownItems.Add(button);
