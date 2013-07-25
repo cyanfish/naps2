@@ -23,20 +23,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
-using NLog;
 
 namespace NAPS2.Scan.Wia
 {
     public class WiaScanDriver : IScanDriver
     {
         public const string DRIVER_NAME = "wia";
-
-        private readonly Logger logger;
-
-        public WiaScanDriver(Logger logger)
-        {
-            this.logger = logger;
-        }
 
         public string DriverName
         {
@@ -80,7 +72,7 @@ namespace NAPS2.Scan.Wia
             WiaApi api;
             try
             {
-                api = new WiaApi(ScanSettings, logger);
+                api = new WiaApi(ScanSettings);
             }
             catch (ScanDriverException)
             {
@@ -90,40 +82,32 @@ namespace NAPS2.Scan.Wia
             {
                 throw new ScanDriverUnknownException(e);
             }
-            logger.Trace("Beginning WIA scan");
             while (true)
             {
                 ScannedImage image;
                 try
                 {
-                    logger.Trace("Reading image from WIA API");
                     image = api.GetImage();
                 }
                 catch (ScanDriverException)
                 {
-                    logger.Trace("ScanDriverException");
                     throw;
                 }
                 catch (Exception e)
                 {
-                    logger.Trace("ScanDriverUnknownException");
                     throw new ScanDriverUnknownException(e);
                 }
                 if (image == null)
                 {
-                    logger.Trace("Null image from WIA API, ending scan");
                     break;
                 }
-                logger.Trace("Yielding image");
                 yield return image;
                 var extSettings = ScanSettings as ExtendedScanSettings;
                 if (extSettings != null && extSettings.PaperSource == ScanSource.Glass)
                 {
-                    logger.Trace("PaperSource is Glass, ending scan after first image");
                     break;
                 }
             }
-            logger.Trace("Scan ended");
         }
     }
 }

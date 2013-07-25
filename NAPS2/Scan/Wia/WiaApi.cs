@@ -27,7 +27,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using NAPS2.Scan.Exceptions;
-using NLog;
 using WIA;
 
 namespace NAPS2.Scan.Wia
@@ -56,17 +55,14 @@ namespace NAPS2.Scan.Wia
 
         private const uint UI_CANCELED = 0x80210064;
 
-        private readonly Logger logger;
-
         private readonly Device device;
 
         private readonly ScanSettings settings;
         private readonly ExtendedScanSettings settingsExt;
 
-        public WiaApi(ScanSettings settings, Logger logger)
+        public WiaApi(ScanSettings settings)
         {
             this.settings = settings;
-            this.logger = logger;
             settingsExt = settings as ExtendedScanSettings;
             DeviceManager manager = new DeviceManagerClass();
             foreach (DeviceInfo info in manager.DeviceInfos)
@@ -309,39 +305,31 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void EnumerateOptions()
+        /*private void EnumerateOptions()
         {
-            logger.Debug("Device properties:");
             foreach (Property prop in device.Properties)
             {
                 if (!prop.IsReadOnly)
                 {
-                    logger.Debug(string.Format("DEV-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
+                    System.Diagnostics.Debug.WriteLine(string.Format("DEV-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
                 }
                 else
                 {
-                    logger.Debug(string.Format("(RO)DEV-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
+                    System.Diagnostics.Debug.WriteLine(string.Format("(RO)DEV-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
                 }
             }
-            foreach (Item item in device.Items)
+            foreach (Property prop in items[1].Properties)
             {
-                logger.Debug("Item properties:");
-                foreach (Property prop in item.Properties)
+                if (!prop.IsReadOnly)
                 {
-                    if (!prop.IsReadOnly)
-                    {
-                        logger.Debug(string.Format("IT-{0}:{1}={2}", prop.PropertyID, prop.Name,
-                            prop.get_Value()));
-                    }
-                    else
-                    {
-                        logger.Debug(string.Format("(RO)IT-{0}:{1}={2}", prop.PropertyID,
-                            prop.Name, prop.get_Value()));
-                    }
+                    System.Diagnostics.Debug.WriteLine(string.Format("IT-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(string.Format("(RO)IT-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
                 }
             }
-            logger.Debug("Finished enumerating properties");
-        }
+        }*/
 
         public ScannedImage GetImage()
         {
@@ -352,7 +340,6 @@ namespace NAPS2.Scan.Wia
                 Items items = device.Items;
                 if (settingsExt == null)
                 {
-                    logger.Trace("Showing native UI, reading items");
                     try
                     {
                         items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent,
@@ -361,26 +348,18 @@ namespace NAPS2.Scan.Wia
                     catch (COMException e)
                     {
                         if ((uint) e.ErrorCode == UI_CANCELED)
-                        {
-                            logger.Trace("UI canceled, returning null");
                             return null;
-                        }
                     }
                 }
                 else
                 {
-                    logger.Trace("Setting up from profile settings");
                     SetupDevice();
-                    logger.Trace("Item count: " + items.Count);
                     SetupItem(items[1]);
                 }
-                EnumerateOptions();
-                logger.Trace("Reading image file");
                 var file =
                     (ImageFile) wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
                 if (file == null)
                 {
-                    logger.Trace("Null file, returning null");
                     // User cancelled
                     return null;
                 }
@@ -426,7 +405,6 @@ namespace NAPS2.Scan.Wia
                             result.SetResolution((float) horizontalRes, (float) verticalRes);
 
                             ScanBitDepth bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24Bit;
-                            logger.Trace("Returning scanned image");
                             return new ScannedImage(result, bitDepth, settings.MaxQuality);
                         }
                     }
@@ -436,17 +414,14 @@ namespace NAPS2.Scan.Wia
             {
                 if ((uint) e.ErrorCode == ERROR_OUT_OF_PAPER)
                 {
-                    logger.Trace("Out of paper, returning null");
                     return null;
                 }
                 else if ((uint) e.ErrorCode == ERROR_OFFLINE)
                 {
-                    logger.Trace("DeviceOfflineException");
                     throw new DeviceOfflineException();
                 }
                 else
                 {
-                    logger.Trace("ScanDriverUnknownException");
                     throw new ScanDriverUnknownException(e);
                 }
             }
