@@ -482,6 +482,7 @@
     <None Include="Resources\tick.png" />
     <None Include="Resources\tick-small.png" />
     <None Include="Setup\build-standalone.bat" />
+    <None Include="Setup\copy-msi.bat" />
     <None Include="Setup\lib\Interop.WIA.dll" />
     <None Include="Setup\lib\PdfSharp.dll" />
     <None Include="Resources\information.png" />
