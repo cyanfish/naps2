@@ -489,6 +489,7 @@
     <Compile Include="WinForms\TiffViewerCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <None Include="Setup\license.rtf" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WIA">

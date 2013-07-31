@@ -27,7 +27,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]                                                           
-Source: "..\bin\Release\es\NAPS2.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "..\bin\Release\es\NAPS2.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion  
+Source: "..\bin\Release\it\NAPS2.resources.dll"; DestDir: "{app}\it"; Flags: ignoreversion
 Source: "..\bin\Release\ru\NAPS2.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
 Source: "..\bin\Release\uk\NAPS2.resources.dll"; DestDir: "{app}\uk"; Flags: ignoreversion
 Source: "..\bin\Release\NAPS2.exe"; DestDir: "{app}"; Flags: ignoreversion

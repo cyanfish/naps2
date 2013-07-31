@@ -12,6 +12,7 @@ mkdir %TEMPFOLDER%\es
 mkdir %TEMPFOLDER%\ru
 mkdir %TEMPFOLDER%\uk
 copy %BINFOLDER%\es\NAPS2.resources.dll %TEMPFOLDER%\es
+copy %BINFOLDER%\it\NAPS2.resources.dll %TEMPFOLDER%\it
 copy %BINFOLDER%\ru\NAPS2.resources.dll %TEMPFOLDER%\ru
 copy %BINFOLDER%\uk\NAPS2.resources.dll %TEMPFOLDER%\uk
 copy %BINFOLDER%\NAPS2.exe %TEMPFOLDER%
