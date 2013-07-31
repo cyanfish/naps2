@@ -120,22 +120,22 @@
   <data name="en" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="_de" xml:space="preserve">
+  <data name="de" xml:space="preserve">
     <value>Deutsch</value>
   </data>
   <data name="es" xml:space="preserve">
     <value>Español</value>
   </data>
-  <data name="_fr" xml:space="preserve">
+  <data name="fr" xml:space="preserve">
     <value>Français</value>
   </data>
-  <data name="_hi" xml:space="preserve">
+  <data name="hi" xml:space="preserve">
     <value>हिन्दी</value>
   </data>
-  <data name="_it" xml:space="preserve">
+  <data name="it" xml:space="preserve">
     <value>Italiano</value>
   </data>
-  <data name="_pl" xml:space="preserve">
+  <data name="pl" xml:space="preserve">
     <value>Polski</value>
   </data>
   <data name="ru" xml:space="preserve">

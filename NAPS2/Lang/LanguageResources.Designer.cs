@@ -63,45 +63,9 @@ namespace NAPS2.Lang {
         /// <summary>
         ///   Looks up a localized string similar to Deutsch.
         /// </summary>
-        internal static string _de {
+        internal static string de {
             get {
-                return ResourceManager.GetString("_de", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Français.
-        /// </summary>
-        internal static string _fr {
-            get {
-                return ResourceManager.GetString("_fr", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to हिन्दी.
-        /// </summary>
-        internal static string _hi {
-            get {
-                return ResourceManager.GetString("_hi", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Italiano.
-        /// </summary>
-        internal static string _it {
-            get {
-                return ResourceManager.GetString("_it", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Polski.
-        /// </summary>
-        internal static string _pl {
-            get {
-                return ResourceManager.GetString("_pl", resourceCulture);
+                return ResourceManager.GetString("de", resourceCulture);
             }
         }
         
@@ -120,6 +84,42 @@ namespace NAPS2.Lang {
         internal static string es {
             get {
                 return ResourceManager.GetString("es", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Français.
+        /// </summary>
+        internal static string fr {
+            get {
+                return ResourceManager.GetString("fr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to हिन्दी.
+        /// </summary>
+        internal static string hi {
+            get {
+                return ResourceManager.GetString("hi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Italiano.
+        /// </summary>
+        internal static string it {
+            get {
+                return ResourceManager.GetString("it", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Polski.
+        /// </summary>
+        internal static string pl {
+            get {
+                return ResourceManager.GetString("pl", resourceCulture);
             }
         }
         
