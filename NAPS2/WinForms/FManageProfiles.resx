@@ -121,20 +121,17 @@
   <data name="btnAdd.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="btnDelete.Text" xml:space="preserve">
-    <value>&amp;Delete</value>
-  </data>
   <data name="btnOK.Text" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
   <data name="btnEdit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
+  <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="&gt;&gt;btnAdd.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="lvProfiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -170,11 +167,11 @@
   <data name="btnAdd.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 12, 0</value>
   </data>
-  <data name="btnOK.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="&gt;&gt;lvProfiles.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>500, 98</value>
+  <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -197,6 +194,9 @@
   </data>
   <data name="&gt;&gt;btnAdd.Name" xml:space="preserve">
     <value>btnAdd</value>
+  </data>
+  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 32</value>
   </data>
   <data name="btnAdd.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 98</value>
@@ -228,9 +228,6 @@
   <data name="&gt;&gt;btnEdit.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="btnEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 32</value>
-  </data>
   <data name="btnDelete.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
@@ -253,10 +250,10 @@
     <value>&amp;Add</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.ILProfileIcons, NAPS2, Version=2.1.4952.26857, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.ILProfileIcons, NAPS2, Version=2.2.4960.27033, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lvProfiles.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>&amp;Delete</value>
   </data>
   <data name="&gt;&gt;lvProfiles.Name" xml:space="preserve">
     <value>lvProfiles</value>
@@ -267,20 +264,23 @@
   <data name="btnEdit.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 12, 0</value>
   </data>
+  <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
     <value>ilProfileIcons</value>
   </data>
-  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 32</value>
+  <data name="btnOK.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 98</value>
   </data>
   <data name="&gt;&gt;btnEdit.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -291,11 +291,11 @@
   <data name="&gt;&gt;btnAdd.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 98</value>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>500, 98</value>
   </data>
-  <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="btnEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 32</value>
   </data>
   <data name="btnEdit.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -303,8 +303,8 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Profiles</value>
@@ -312,14 +312,14 @@
   <data name="btnAdd.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 32</value>
   </data>
-  <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="lvProfiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ru</value>
+    <value>it</value>
   </metadata>
   <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>19, 22</value>
