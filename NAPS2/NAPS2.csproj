@@ -227,16 +227,21 @@
     <Compile Include="Email\MAPIMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.de.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.es.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.it.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.pseudo.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.ru.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.uk.resx" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.de.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.es.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.it.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.pseudo.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.ru.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
+    <EmbeddedResource Include="WinForms\FAbout.de.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.es.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -252,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.uk.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FChooseIcon.de.resx">
+      <DependentUpon>FChooseIcon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FChooseIcon.es.resx">
       <DependentUpon>FChooseIcon.cs</DependentUpon>
@@ -269,6 +277,9 @@
     <EmbeddedResource Include="WinForms\FChooseIcon.uk.resx">
       <DependentUpon>FChooseIcon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FChooseProfile.de.resx">
+      <DependentUpon>FChooseProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FChooseProfile.es.resx">
       <DependentUpon>FChooseProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +296,9 @@
     <EmbeddedResource Include="WinForms\FChooseProfile.uk.resx">
       <DependentUpon>FChooseProfile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FDesktop.de.resx">
+      <DependentUpon>FDesktop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.es.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
@@ -296,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.uk.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEditScanSettings.de.resx">
+      <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditScanSettings.es.resx">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
@@ -312,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditScanSettings.uk.resx">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FManageProfiles.de.resx">
+      <DependentUpon>FManageProfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FManageProfiles.es.resx">
       <DependentUpon>FManageProfiles.cs</DependentUpon>
@@ -333,6 +353,9 @@
     <EmbeddedResource Include="WinForms\FManageProfiles.uk.resx">
       <DependentUpon>FManageProfiles.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPDFSave.de.resx">
+      <DependentUpon>FPDFSave.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPDFSave.es.resx">
       <DependentUpon>FPDFSave.cs</DependentUpon>
     </EmbeddedResource>
@@ -349,6 +372,9 @@
     <EmbeddedResource Include="WinForms\FPDFSave.uk.resx">
       <DependentUpon>FPDFSave.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FTwainGui.de.resx">
+      <DependentUpon>FTwainGui.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FTwainGui.es.resx">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </EmbeddedResource>
@@ -360,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FTwainGui.uk.resx">
       <DependentUpon>FTwainGui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FViewer.de.resx">
+      <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FViewer.es.resx">
       <DependentUpon>FViewer.cs</DependentUpon>
@@ -407,6 +436,9 @@
     <EmbeddedResource Include="WinForms\FViewer.uk.resx">
       <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ThumbnailList.de.resx">
+      <DependentUpon>ThumbnailList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\ThumbnailList.es.resx">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
@@ -423,6 +455,9 @@
     <EmbeddedResource Include="WinForms\ThumbnailList.uk.resx">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\TiffViewer.de.resx">
+      <DependentUpon>TiffViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewer.es.resx">
       <DependentUpon>TiffViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -438,6 +473,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewer.uk.resx">
       <DependentUpon>TiffViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\TiffViewerCtl.de.resx">
+      <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewerCtl.es.resx">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
@@ -460,6 +498,7 @@
     <EmbeddedResource Include="WinForms\TiffViewerCtl.uk.resx">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Lang\tmx\de.tmx" />
     <None Include="Lang\tmx\empty.tmx" />
     <None Include="Lang\tmx\es.tmx" />
     <None Include="Lang\tmx\it.tmx" />

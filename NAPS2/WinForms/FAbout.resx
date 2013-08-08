@@ -537,6 +537,6 @@ Copyright © 2012-2013 Ben Olden-Cooligan</value>
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ru</value>
+    <value>de</value>
   </metadata>
 </root>
