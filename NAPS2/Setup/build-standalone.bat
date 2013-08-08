@@ -8,7 +8,9 @@ set BINFOLDER=..\bin\Standalone
 set CMDBINFOLDER=..\..\NAPS2.Console\bin\Standalone
 mkdir %OUTFOLDER%
 mkdir %TEMPFOLDER%
+mkdir %TEMPFOLDER%\de
 mkdir %TEMPFOLDER%\es
+mkdir %TEMPFOLDER%\it
 mkdir %TEMPFOLDER%\ru
 mkdir %TEMPFOLDER%\uk
 copy %BINFOLDER%\de\NAPS2.resources.dll %TEMPFOLDER%\de
