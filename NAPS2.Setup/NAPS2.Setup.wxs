@@ -26,6 +26,7 @@
     </Feature>
 
     <ComponentGroup Id="LangComponents">
+      <ComponentRef Id="LangComponent_de" />
       <ComponentRef Id="LangComponent_es" />
       <ComponentRef Id="LangComponent_it" />
       <ComponentRef Id="LangComponent_ru" />
@@ -60,6 +61,11 @@
     </DirectoryRef>
 
     <DirectoryRef Id="INSTALLFOLDER">
+      <Directory Id="LangFolder_de" Name="de">
+        <Component Id="LangComponent_de">
+          <File Source="..\NAPS2\bin\Release\de\NAPS2.resources.dll" Id="LangFile_de" />
+        </Component>
+      </Directory>
       <Directory Id="LangFolder_es" Name="es">
         <Component Id="LangComponent_es">
           <File Source="..\NAPS2\bin\Release\es\NAPS2.resources.dll" Id="LangFile_es" />
