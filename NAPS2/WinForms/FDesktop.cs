@@ -78,8 +78,8 @@ namespace NAPS2.WinForms
 
                 // Only include those languages for which localized resources exist
                 string localizedResourcesPath =
-                    Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "", Path.Combine(langCode,
-                        "NAPS2.resources.dll"));
+                    Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "", langCode,
+                        "NAPS2.resources.dll");
                 if (langCode == "en" || File.Exists(localizedResourcesPath))
                 {
                     var button = new ToolStripMenuItem(langName, null, (sender, args) => SetCulture(langCode));
