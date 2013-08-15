@@ -44,14 +44,16 @@ namespace NAPS2.WinForms
         private readonly ImageSaver imageSaver;
         private readonly StringWrapper stringWrapper;
         private readonly UserConfigManager userConfigManager;
+        private readonly AppConfigManager appConfigManager;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
             this.stringWrapper = stringWrapper;
             this.userConfigManager = userConfigManager;
+            this.appConfigManager = appConfigManager;
             InitializeComponent();
         }
 
@@ -391,6 +393,17 @@ namespace NAPS2.WinForms
             InitializeComponent();
             PostInitializeComponent();
             UpdateThumbnails();
+        }
+
+        private void FDesktop_Shown(object sender, EventArgs e)
+        {
+            // If configured (e.g. by a business), show a customizable message box on application startup.
+            var appConfig = appConfigManager.Config;
+            if (!string.IsNullOrWhiteSpace(appConfig.StartupMessageText))
+            {
+                MessageBox.Show(appConfig.StartupMessageText, appConfig.StartupMessageTitle, MessageBoxButtons.OK,
+                    appConfig.StartupMessageIcon);
+            }
         }
     }
 }

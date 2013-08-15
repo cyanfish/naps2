@@ -104,8 +104,11 @@
   <ItemGroup>
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Config\ConfigManager.cs" />
+    <Compile Include="Config\AppConfig.cs" />
+    <Compile Include="Config\AppConfigManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="CultureInitializer.cs" />
     <Compile Include="IErrorOutput.cs" />
     <Compile Include="ImageSaver.cs" />
     <Compile Include="ImageFileNamer.cs" />
@@ -555,6 +558,9 @@
     <None Include="Resources\scanner-48.png" />
     <None Include="Resources\scanner-72.png" />
     <None Include="Resources\scanner-64.png" />
+    <Content Include="appsettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\scanner-app.ico" />
     <Content Include="Resources\scanner-large.png" />
     <Content Include="Resources\scanner.ico" />
