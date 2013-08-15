@@ -26,6 +26,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Console.Lang.Resources;
 using NAPS2.Pdf;
 using NAPS2.Scan;

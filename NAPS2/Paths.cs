@@ -23,19 +23,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-#if STANDALONE
 using System.Windows.Forms;
-#endif
 
 namespace NAPS2
 {
     public static class Paths
     {
+        private static readonly string ExecutablePath = Application.StartupPath;
+
 #if STANDALONE
-        private static readonly string AppDataPath = Application.StartupPath;
+        private static readonly string AppDataPath = ExecutablePath;
 #else
         private static readonly string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif
+
         public static string AppData
         {
             get
@@ -45,6 +46,18 @@ namespace NAPS2
                     Directory.CreateDirectory(AppDataPath);
                 }
                 return AppDataPath;
+            }
+        }
+
+        public static string Executable
+        {
+            get
+            {
+                if (!Directory.Exists(ExecutablePath))
+                {
+                    Directory.CreateDirectory(ExecutablePath);
+                }
+                return ExecutablePath;
             }
         }
     }

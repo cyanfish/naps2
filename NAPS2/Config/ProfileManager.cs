@@ -1,4 +1,4 @@
-﻿/*
+/*
     NAPS2 (Not Another PDF Scanner 2)
     http://sourceforge.net/projects/naps2/
     
@@ -20,16 +20,30 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 using NAPS2.Scan;
+using NLog;
 
-namespace NAPS2
+namespace NAPS2.Config
 {
-    public interface IProfileManager
+    public class ProfileManager : ConfigManager<List<ScanSettings>>, IProfileManager
     {
-        List<ScanSettings> Profiles { get; }
-        void Load();
-        void Save();
-        void SetDefault(ScanSettings defaultProfile);
+        public ProfileManager(Logger logger)
+            : base("profiles.xml", Paths.AppData, Paths.Executable, logger)
+        {
+        }
+
+        public List<ScanSettings> Profiles { get { return Config;  } }
+
+        public void SetDefault(ScanSettings defaultProfile)
+        {
+            foreach (ScanSettings profile in Profiles)
+            {
+                profile.IsDefault = false;
+            }
+            defaultProfile.IsDefault = true;
+        }
     }
 }

@@ -23,27 +23,30 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using NAPS2.Scan;
 using NLog;
 
-namespace NAPS2
+namespace NAPS2.Config
 {
-    public class UserConfigManager
+    public class ConfigManager<T> where T : class, new()
     {
-        private const string CONFIG_FILE_NAME = "config.xml";
-
-        private static readonly string ConfigPath = Path.Combine(Paths.AppData, CONFIG_FILE_NAME);
+        private readonly string primaryConfigPath;
+        private readonly string secondaryConfigPath;
 
         private readonly Logger logger;
 
-        private UserConfig config;
+        private T config;
 
-        public UserConfigManager(Logger logger)
+        public ConfigManager(string configFileName, string primaryFolder, string secondaryFolder, Logger logger)
         {
+            primaryConfigPath = Path.Combine(primaryFolder, configFileName);
+            if (secondaryFolder != null)
+            {
+                secondaryConfigPath = Path.Combine(secondaryFolder, configFileName);
+            }
             this.logger = logger;
         }
 
-        public UserConfig Config
+        protected T Config
         {
             get
             {
@@ -58,17 +61,20 @@ namespace NAPS2
         public void Load()
         {
             config = null;
-            TryLoadConfig(ConfigPath);
+            TryLoadConfig(primaryConfigPath);
             if (config == null)
             {
-                config = new UserConfig();
-                Save();
+                TryLoadConfig(secondaryConfigPath);
+            }
+            if (config == null)
+            {
+                config = new T();
             }
         }
 
         public void Save()
         {
-            using (Stream strFile = File.Open(ConfigPath, FileMode.Create))
+            using (Stream strFile = File.Open(primaryConfigPath, FileMode.Create))
             {
                 var serializer = new XmlSerializer(typeof(UserConfig));
                 serializer.Serialize(strFile, config);
@@ -84,8 +90,8 @@ namespace NAPS2
                 {
                     using (Stream strFile = File.OpenRead(configPath))
                     {
-                        var serializer = new XmlSerializer(typeof (UserConfig));
-                        config = (UserConfig)serializer.Deserialize(strFile);
+                        var serializer = new XmlSerializer(typeof (T));
+                        config = (T)serializer.Deserialize(strFile);
                     }
                 }
                 catch (Exception ex)

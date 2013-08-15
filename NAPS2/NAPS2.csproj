@@ -104,8 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionExtensions.cs" />
-    <Compile Include="UserConfig.cs" />
-    <Compile Include="UserConfigManager.cs" />
+    <Compile Include="Config\ConfigManager.cs" />
+    <Compile Include="Config\UserConfig.cs" />
+    <Compile Include="Config\UserConfigManager.cs" />
     <Compile Include="IErrorOutput.cs" />
     <Compile Include="ImageSaver.cs" />
     <Compile Include="ImageFileNamer.cs" />
@@ -115,7 +116,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
-    <Compile Include="IProfileManager.cs" />
+    <Compile Include="Config\IProfileManager.cs" />
     <Compile Include="Scan\IScanPerformer.cs" />
     <Compile Include="Scan\IScanReceiver.cs" />
     <Compile Include="Lang\LanguageResources.Designer.cs">
@@ -176,7 +177,7 @@
     <Compile Include="Scan\IScannedImage.cs" />
     <Compile Include="Email\IEmailer.cs" />
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
-    <Compile Include="ProfileManager.cs" />
+    <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="TiffHelper.cs" />
     <Compile Include="WinForms\FChooseIcon.cs">
       <SubType>Form</SubType>

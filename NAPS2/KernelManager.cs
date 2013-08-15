@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NAPS2.Config;
 using NAPS2.Email;
 using NAPS2.Pdf;
 using NAPS2.Scan;
