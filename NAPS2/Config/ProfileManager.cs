@@ -55,17 +55,20 @@ namespace NAPS2.Config
             var deprecatedSerializer = new XmlSerializer(typeof(List<ScanSettings>));
             var profiles = (List<ScanSettings>)deprecatedSerializer.Deserialize(configFileStream);
 
-            // Okay, we've read the old version of profiles.txt. Since we're going to eventually change it to the new version, make a backup.
+            // Okay, we've read the old version of profiles.txt. Since we're going to eventually change it to the new version, make a backup in case the user downgrades.
             File.Copy(primaryConfigPath, primaryConfigPath + ".bak", true);
 
             return profiles.Select(profile =>
             {
                 if (profile.DriverName == null && profile.Device != null)
                 {
+                    // Ignore "Obsolete" attribute on ScanDevice.DriverName (the property is only used here for compatibility)
+#pragma warning disable 618
                     // Copy the DriverName to the new property
                     profile.DriverName = profile.Device.DriverName;
                     // This old property is unused, so remove its value
                     profile.Device.DriverName = null;
+#pragma warning restore 618
                 }
                 if (!(profile is ExtendedScanSettings))
                 {

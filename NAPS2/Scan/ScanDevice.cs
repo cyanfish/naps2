@@ -40,9 +40,7 @@ namespace NAPS2.Scan
 
         public string Name { get; set; }
 
-        /// <summary>
-        /// DEPRECATED! This property only exists for compatibility when reading profiles.xml from an older version.
-        /// </summary>
+        [Obsolete("This property only exists for compatibility when reading profiles.xml from an older version. Use ExtendedScanSettings.DriverName instead.")]
         public string DriverName { get; set; }
     }
 }
