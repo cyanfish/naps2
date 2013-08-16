@@ -29,8 +29,8 @@ namespace NAPS2.Config
 {
     public class ConfigManager<T> where T : class, new()
     {
-        private readonly string primaryConfigPath;
-        private readonly string secondaryConfigPath;
+        protected readonly string primaryConfigPath;
+        protected readonly string secondaryConfigPath;
 
         private readonly Logger logger;
 
@@ -58,7 +58,7 @@ namespace NAPS2.Config
             }
         }
 
-        public void Load()
+        public virtual void Load()
         {
             config = null;
             TryLoadConfig(primaryConfigPath);
@@ -76,9 +76,15 @@ namespace NAPS2.Config
         {
             using (Stream strFile = File.Open(primaryConfigPath, FileMode.Create))
             {
-                var serializer = new XmlSerializer(typeof(UserConfig));
+                var serializer = new XmlSerializer(typeof(T));
                 serializer.Serialize(strFile, config);
             }
+        }
+
+        protected virtual T Deserialize(Stream configFileStream)
+        {
+            var serializer = new XmlSerializer(typeof(T));
+            return (T)serializer.Deserialize(configFileStream);
         }
 
         private void TryLoadConfig(string configPath)
@@ -88,10 +94,9 @@ namespace NAPS2.Config
             {
                 try
                 {
-                    using (Stream strFile = File.OpenRead(configPath))
+                    using (Stream configFileStream = File.OpenRead(configPath))
                     {
-                        var serializer = new XmlSerializer(typeof (T));
-                        config = (T)serializer.Deserialize(strFile);
+                        config = Deserialize(configFileStream);
                     }
                 }
                 catch (Exception ex)

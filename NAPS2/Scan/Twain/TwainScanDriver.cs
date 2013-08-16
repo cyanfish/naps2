@@ -35,7 +35,7 @@ namespace NAPS2.Scan.Twain
             get { return DRIVER_NAME; }
         }
 
-        public ScanSettings ScanSettings { get; set; }
+        public ExtendedScanSettings ScanSettings { get; set; }
 
         public IWin32Window DialogParent { get; set; }
 
@@ -49,7 +49,7 @@ namespace NAPS2.Scan.Twain
             {
                 string deviceId = TwainApi.SelectDeviceUI();
                 string deviceName = deviceId;
-                return new ScanDevice(deviceId, deviceName, DRIVER_NAME);
+                return new ScanDevice(deviceId, deviceName);
             }
             catch (ScanDriverException)
             {

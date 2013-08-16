@@ -57,13 +57,11 @@ namespace NAPS2.Scan.Wia
 
         private readonly Device device;
 
-        private readonly ScanSettings settings;
-        private readonly ExtendedScanSettings settingsExt;
+        private readonly ExtendedScanSettings settings;
 
-        public WiaApi(ScanSettings settings)
+        public WiaApi(ExtendedScanSettings settings)
         {
             this.settings = settings;
-            settingsExt = settings as ExtendedScanSettings;
             DeviceManager manager = new DeviceManagerClass();
             foreach (DeviceInfo info in manager.DeviceInfos)
             {
@@ -102,7 +100,7 @@ namespace NAPS2.Scan.Wia
                 {
                     return null;
                 }
-                return new ScanDevice(d.DeviceID, GetDeviceName(d.DeviceID), WiaScanDriver.DRIVER_NAME);
+                return new ScanDevice(d.DeviceID, GetDeviceName(d.DeviceID));
             }
             catch (COMException e)
             {
@@ -221,7 +219,7 @@ namespace NAPS2.Scan.Wia
         private void SetupItem(Item item)
         {
             int resolution = 0;
-            switch (settingsExt.BitDepth)
+            switch (settings.BitDepth)
             {
                 case ScanBitDepth.Grayscale:
                     SetItemIntProperty(item, 2, DATA_TYPE);
@@ -234,7 +232,7 @@ namespace NAPS2.Scan.Wia
                     break;
             }
 
-            switch (settingsExt.Resolution)
+            switch (settings.Resolution)
             {
                 case ScanDpi.Dpi100:
                     SetItemIntProperty(item, 100, VERTICAL_RESOLUTION);
@@ -263,20 +261,20 @@ namespace NAPS2.Scan.Wia
                     break;
             }
 
-            Size pageSize = settingsExt.PageSize.ToSize();
+            Size pageSize = settings.PageSize.ToSize();
             int pageWidth = pageSize.Width * resolution / 1000;
             int pageHeight = pageSize.Height * resolution / 1000;
-            int horizontalSize = GetDeviceIntProperty(settingsExt.PaperSource == ScanSource.Glass ? HORIZONTAL_BED_SIZE : HORIZONTAL_FEED_SIZE);
+            int horizontalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? HORIZONTAL_BED_SIZE : HORIZONTAL_FEED_SIZE);
 
-            int verticalSize = GetDeviceIntProperty(settingsExt.PaperSource == ScanSource.Glass ? VERTICAL_BED_SIZE : VERTICAL_FEED_SIZE);
+            int verticalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? VERTICAL_BED_SIZE : VERTICAL_FEED_SIZE);
 
             int pagemaxwidth = horizontalSize * resolution / 1000;
             int pagemaxheight = verticalSize * resolution / 1000;
 
             int horizontalPos = 0;
-            if (settingsExt.PageAlign == ScanHorizontalAlign.Center)
+            if (settings.PageAlign == ScanHorizontalAlign.Center)
                 horizontalPos = (pagemaxwidth - pageWidth) / 2;
-            else if (settingsExt.PageAlign == ScanHorizontalAlign.Left)
+            else if (settings.PageAlign == ScanHorizontalAlign.Left)
                 horizontalPos = (pagemaxwidth - pageWidth);
 
             pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
@@ -285,13 +283,13 @@ namespace NAPS2.Scan.Wia
             SetItemIntProperty(item, pageWidth, HORIZONTAL_EXTENT);
             SetItemIntProperty(item, pageHeight, VERTICAL_EXTENT);
             SetItemIntProperty(item, horizontalPos, HORIZONTAL_START);
-            SetItemIntProperty(item, settingsExt.Contrast, -1000, 1000, CONTRAST);
-            SetItemIntProperty(item, settingsExt.Brightness, -1000, 1000, BRIGHTNESS);
+            SetItemIntProperty(item, settings.Contrast, -1000, 1000, CONTRAST);
+            SetItemIntProperty(item, settings.Brightness, -1000, 1000, BRIGHTNESS);
         }
 
         private void SetupDevice()
         {
-            switch (settingsExt.PaperSource)
+            switch (settings.PaperSource)
             {
                 case ScanSource.Glass:
                     SetDeviceIntProperty(2, PAPER_SOURCE);
@@ -338,7 +336,7 @@ namespace NAPS2.Scan.Wia
                 var wiaCommonDialog = new CommonDialogClass();
 
                 Items items = device.Items;
-                if (settingsExt == null)
+                if (settings.UseNativeUI)
                 {
                     try
                     {
@@ -347,7 +345,7 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (COMException e)
                     {
-                        if ((uint) e.ErrorCode == UI_CANCELED)
+                        if ((uint)e.ErrorCode == UI_CANCELED)
                             return null;
                     }
                 }
@@ -357,23 +355,23 @@ namespace NAPS2.Scan.Wia
                     SetupItem(items[1]);
                 }
                 var file =
-                    (ImageFile) wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
+                    (ImageFile)wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
                 if (file == null)
                 {
                     // User cancelled
                     return null;
                 }
 
-                using (var stream = new MemoryStream((byte[]) file.FileData.get_BinaryData()))
+                using (var stream = new MemoryStream((byte[])file.FileData.get_BinaryData()))
                 {
                     using (Image output = Image.FromStream(stream))
                     {
 
                         double koef = 1;
 
-                        if (settingsExt != null)
+                        if (!settings.UseNativeUI)
                         {
-                            switch (settingsExt.AfterScanScale)
+                            switch (settings.AfterScanScale)
                             {
                                 case ScanScale.OneToOne:
                                     koef = 1;
@@ -390,21 +388,21 @@ namespace NAPS2.Scan.Wia
                             }
                         }
 
-                        double realWidth = output.Width/koef;
-                        double realHeight = output.Height/koef;
+                        double realWidth = output.Width / koef;
+                        double realHeight = output.Height / koef;
 
-                        double horizontalRes = output.HorizontalResolution/koef;
-                        double verticalRes = output.VerticalResolution/koef;
+                        double horizontalRes = output.HorizontalResolution / koef;
+                        double verticalRes = output.VerticalResolution / koef;
 
-                        using (var result = new Bitmap((int) realWidth, (int) realHeight))
+                        using (var result = new Bitmap((int)realWidth, (int)realHeight))
                         using (Graphics g = Graphics.FromImage(result))
                         {
                             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            g.DrawImage(output, 0, 0, (int) realWidth, (int) realHeight);
+                            g.DrawImage(output, 0, 0, (int)realWidth, (int)realHeight);
 
-                            result.SetResolution((float) horizontalRes, (float) verticalRes);
+                            result.SetResolution((float)horizontalRes, (float)verticalRes);
 
-                            ScanBitDepth bitDepth = settingsExt != null ? settingsExt.BitDepth : ScanBitDepth.C24Bit;
+                            ScanBitDepth bitDepth = settings.UseNativeUI ? ScanBitDepth.C24Bit : settings.BitDepth;
                             return new ScannedImage(result, bitDepth, settings.MaxQuality);
                         }
                     }
@@ -412,11 +410,11 @@ namespace NAPS2.Scan.Wia
             }
             catch (COMException e)
             {
-                if ((uint) e.ErrorCode == ERROR_OUT_OF_PAPER)
+                if ((uint)e.ErrorCode == ERROR_OUT_OF_PAPER)
                 {
                     return null;
                 }
-                else if ((uint) e.ErrorCode == ERROR_OFFLINE)
+                else if ((uint)e.ErrorCode == ERROR_OFFLINE)
                 {
                     throw new DeviceOfflineException();
                 }

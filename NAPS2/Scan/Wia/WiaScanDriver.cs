@@ -35,7 +35,7 @@ namespace NAPS2.Scan.Wia
             get { return DRIVER_NAME; }
         }
 
-        public ScanSettings ScanSettings { get; set; }
+        public ExtendedScanSettings ScanSettings { get; set; }
 
         public IWin32Window DialogParent { get; set; }
 

@@ -1,24 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<AppConfig>
+<AppConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DefaultCulture></DefaultCulture>
   <StartupMessageTitle></StartupMessageTitle>
   <StartupMessageText></StartupMessageText>
   <StartupMessageIcon>Information</StartupMessageIcon>
-  <DefaultScanSettings>
-    <ExtendedScanSettings>
-      <Device>
-        <DriverName>wia</DriverName>
-      </Device>
-      <IconID>0</IconID>
-      <MaxQuality>false</MaxQuality>
-      <AfterScanScale>OneToOne</AfterScanScale>
-      <Brightness>0</Brightness>
-      <Contrast>0</Contrast>
-      <BitDepth>C24Bit</BitDepth>
-      <PageAlign>Left</PageAlign>
-      <PageSize>Letter</PageSize>
-      <Resolution>Dpi100</Resolution>
-      <PaperSource>Glass</PaperSource>
-    </ExtendedScanSettings>
-  </DefaultScanSettings>
+  <DefaultProfileSettings xsi:type="ExtendedScanSettings">
+    <DriverName>wia</DriverName>
+    <UseNativeUI>false</UseNativeUI>
+    <IconID>0</IconID>
+    <MaxQuality>false</MaxQuality>
+    <AfterScanScale>OneToOne</AfterScanScale>
+    <Brightness>0</Brightness>
+    <Contrast>0</Contrast>
+    <BitDepth>C24Bit</BitDepth>
+    <PageAlign>Left</PageAlign>
+    <PageSize>Letter</PageSize>
+    <Resolution>Dpi100</Resolution>
+    <PaperSource>Glass</PaperSource>
+  </DefaultProfileSettings>
 </AppConfig>

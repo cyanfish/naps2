@@ -57,7 +57,7 @@ namespace NAPS2.Console
 
         public void Execute()
         {
-            ScanSettings profile;
+            ExtendedScanSettings profile;
             if (!GetProfile(out profile))
             {
                 return;
@@ -163,7 +163,7 @@ namespace NAPS2.Console
             }
         }
 
-        private void PerformScan(ScanSettings profile)
+        private void PerformScan(ExtendedScanSettings profile)
         {
             if (options.Verbose)
             {
@@ -195,7 +195,7 @@ namespace NAPS2.Console
             }
         }
 
-        private bool GetProfile(out ScanSettings profile)
+        private bool GetProfile(out ExtendedScanSettings profile)
         {
             try
             {

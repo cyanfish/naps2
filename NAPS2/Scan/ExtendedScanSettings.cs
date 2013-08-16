@@ -39,6 +39,8 @@ namespace NAPS2.Scan
             PaperSource = ScanSource.Glass;
         }
 
+        public bool UseNativeUI { get; set; }
+
         public ScanScale AfterScanScale { get; set; }
 
         public int Brightness { get; set; }

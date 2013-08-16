@@ -26,11 +26,10 @@ namespace NAPS2.Scan
 {
     public class ScanDevice
     {
-        public ScanDevice(string id, string name, string driverName)
+        public ScanDevice(string id, string name)
         {
             ID = id;
             Name = name;
-            DriverName = driverName;
         }
 
         public ScanDevice()
@@ -38,7 +37,12 @@ namespace NAPS2.Scan
         }
 
         public string ID { get; set; }
+
         public string Name { get; set; }
+
+        /// <summary>
+        /// DEPRECATED! This property only exists for compatibility when reading profiles.xml from an older version.
+        /// </summary>
         public string DriverName { get; set; }
     }
 }

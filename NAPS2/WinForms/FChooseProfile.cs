@@ -43,7 +43,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        private ScanSettings SelectedProfile
+        private ExtendedScanSettings SelectedProfile
         {
             get
             {
@@ -64,7 +64,7 @@ namespace NAPS2.WinForms
         private void UpdateProfiles()
         {
             lvProfiles.Items.Clear();
-            foreach (ScanSettings profile in profileManager.Profiles)
+            foreach (var profile in profileManager.Profiles)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
                 if (profile.IsDefault)

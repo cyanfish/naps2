@@ -33,12 +33,12 @@ namespace NAPS2.WinForms
     internal partial class FTwainGui : Form, IMessageFilter
     {
         private readonly List<IScannedImage> bitmaps;
-        private readonly ScanSettings settings;
+        private readonly ExtendedScanSettings settings;
         private bool activated;
         private bool msgfilter;
         private Twain tw;
 
-        public FTwainGui(ScanSettings settings)
+        public FTwainGui(ExtendedScanSettings settings)
         {
             InitializeComponent();
             bitmaps = new List<IScannedImage>();

@@ -30,10 +30,10 @@ namespace NAPS2.Scan.Twain
     internal class TwainApi
     {
         readonly IWin32Window parent;
-        readonly ScanSettings settings;
+        readonly ExtendedScanSettings settings;
         readonly Twain tw;
 
-        public TwainApi(ScanSettings settings, IWin32Window pForm)
+        public TwainApi(ExtendedScanSettings settings, IWin32Window pForm)
         {
             parent = pForm;
             tw = new Twain();

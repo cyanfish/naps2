@@ -27,9 +27,9 @@ namespace NAPS2.Config
 {
     public interface IProfileManager
     {
-        List<ScanSettings> Profiles { get; }
+        List<ExtendedScanSettings> Profiles { get; }
         void Load();
         void Save();
-        void SetDefault(ScanSettings defaultProfile);
+        void SetDefault(ExtendedScanSettings defaultProfile);
     }
 }

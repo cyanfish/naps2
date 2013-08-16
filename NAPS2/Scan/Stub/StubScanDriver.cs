@@ -37,13 +37,13 @@ namespace NAPS2.Scan.Stub
             DriverName = driverName;
         }
 
-        public ScanSettings ScanSettings { get; set; }
+        public ExtendedScanSettings ScanSettings { get; set; }
 
         public IWin32Window DialogParent { get; set; }
 
         public ScanDevice PromptForDevice()
         {
-            return new ScanDevice("test", "Test Scanner", DriverName);
+            return new ScanDevice("test", "Test Scanner");
         }
 
         public IEnumerable<IScannedImage> Scan()

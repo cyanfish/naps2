@@ -24,22 +24,71 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.Scan;
+using NAPS2.Scan.Wia;
 using NLog;
 
 namespace NAPS2.Config
 {
-    public class ProfileManager : ConfigManager<List<ScanSettings>>, IProfileManager
+    public class ProfileManager : ConfigManager<List<ExtendedScanSettings>>, IProfileManager
     {
         public ProfileManager(Logger logger)
             : base("profiles.xml", Paths.AppData, Paths.Executable, logger)
         {
         }
 
-        public List<ScanSettings> Profiles { get { return Config;  } }
+        public List<ExtendedScanSettings> Profiles { get { return Config; } }
 
-        public void SetDefault(ScanSettings defaultProfile)
+        protected override List<ExtendedScanSettings> Deserialize(Stream configFileStream)
         {
-            foreach (ScanSettings profile in Profiles)
+            var serializer = new XmlSerializer(typeof(List<ExtendedScanSettings>));
+            try
+            {
+                return (List<ExtendedScanSettings>)serializer.Deserialize(configFileStream);
+            }
+            catch (InvalidOperationException)
+            {
+                // Continue, and try to read using the old serializer now
+                configFileStream.Seek(0, SeekOrigin.Begin);
+            }
+
+            // For compatibility with profiles.xml from old versions, load ScanSettings instead of ExtendedScanSettings (which is used exclusively now)
+            var deprecatedSerializer = new XmlSerializer(typeof(List<ScanSettings>));
+            var profiles = (List<ScanSettings>)deprecatedSerializer.Deserialize(configFileStream);
+
+            // Okay, we've read the old version of profiles.txt. Since we're going to eventually change it to the new version, make a backup.
+            File.Copy(primaryConfigPath, primaryConfigPath + ".bak", true);
+
+            return profiles.Select(profile =>
+            {
+                if (profile.DriverName == null && profile.Device != null)
+                {
+                    // Copy the DriverName to the new property
+                    profile.DriverName = profile.Device.DriverName;
+                    // This old property is unused, so remove its value
+                    profile.Device.DriverName = null;
+                }
+                if (!(profile is ExtendedScanSettings))
+                {
+                    // Everything should be ExtendedScanSettings now
+                    return new ExtendedScanSettings
+                    {
+                        Device = profile.Device,
+                        DriverName = profile.DriverName,
+                        DisplayName = profile.DisplayName,
+                        MaxQuality = profile.MaxQuality,
+                        IsDefault = profile.IsDefault,
+                        IconID = profile.IconID,
+                        // If the driver is WIA and the profile type is not Extended, that meant the native UI was to be used
+                        UseNativeUI = profile.DriverName == WiaScanDriver.DRIVER_NAME
+                    };
+                }
+                return (ExtendedScanSettings)profile;
+            }).ToList();
+        }
+
+        public void SetDefault(ExtendedScanSettings defaultProfile)
+        {
+            foreach (ExtendedScanSettings profile in Profiles)
             {
                 profile.IsDefault = false;
             }

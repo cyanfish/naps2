@@ -41,9 +41,9 @@ namespace NAPS2.Scan
             this.errorOutput = errorOutput;
         }
 
-        public void PerformScan(ScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver)
+        public void PerformScan(ExtendedScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver)
         {
-            var driver = kernel.Get<IScanDriver>(scanSettings.Device.DriverName);
+            var driver = kernel.Get<IScanDriver>(scanSettings.DriverName);
             driver.DialogParent = dialogParent;
             driver.ScanSettings = scanSettings;
 

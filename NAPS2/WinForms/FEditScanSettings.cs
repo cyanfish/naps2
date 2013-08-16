@@ -29,6 +29,7 @@ using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using Ninject;
 using NLog;
+using WIA;
 
 namespace NAPS2.WinForms
 {
@@ -62,7 +63,7 @@ namespace NAPS2.WinForms
             get { return result; }
         }
 
-        public ScanSettings ScanSettings { get; set; }
+        public ExtendedScanSettings ScanSettings { get; set; }
 
         private string DeviceDriverName
         {
@@ -107,7 +108,7 @@ namespace NAPS2.WinForms
             e.Value = ((Enum)e.ListItem).Description();
         }
 
-        private void choose(string driverName)
+        private void ChooseDevice(string driverName)
         {
             var driver = KernelManager.Kernel.Get<IScanDriver>(driverName);
             try
@@ -136,40 +137,29 @@ namespace NAPS2.WinForms
 
         private void btnChooseDevice_Click(object sender, EventArgs e)
         {
-            choose(DeviceDriverName);
+            ChooseDevice(DeviceDriverName);
         }
 
-        private void saveSettings()
+        private void SaveSettings()
         {
-            if (rdbNativeWIA.Checked)
+            ScanSettings = new ExtendedScanSettings
             {
-                ScanSettings = new ScanSettings
-                {
-                    Device = CurrentDevice,
-                    DisplayName = txtName.Text,
-                    IconID = iconID,
-                    MaxQuality = cbHighQuality.Checked
-                };
-            }
-            else
-            {
-                ScanSettings = new ExtendedScanSettings
-                {
-                    Device = CurrentDevice,
-                    DisplayName = txtName.Text,
-                    IconID = iconID,
-                    MaxQuality = cbHighQuality.Checked,
+                Device = CurrentDevice,
+                DriverName = DeviceDriverName,
+                DisplayName = txtName.Text,
+                IconID = iconID,
+                MaxQuality = cbHighQuality.Checked,
+                UseNativeUI = rdbNativeWIA.Checked,
 
-                    AfterScanScale = (ScanScale)cmbScale.SelectedIndex,
-                    BitDepth = (ScanBitDepth)cmbDepth.SelectedIndex,
-                    Brightness = trBrightness.Value,
-                    Contrast = trContrast.Value,
-                    PageAlign = (ScanHorizontalAlign)cmbAlign.SelectedIndex,
-                    PageSize = (ScanPageSize)cmbPage.SelectedIndex,
-                    Resolution = (ScanDpi)cmbResolution.SelectedIndex,
-                    PaperSource = (ScanSource)cmbSource.SelectedIndex
-                };
-            }
+                AfterScanScale = (ScanScale)cmbScale.SelectedIndex,
+                BitDepth = (ScanBitDepth)cmbDepth.SelectedIndex,
+                Brightness = trBrightness.Value,
+                Contrast = trContrast.Value,
+                PageAlign = (ScanHorizontalAlign)cmbAlign.SelectedIndex,
+                PageSize = (ScanPageSize)cmbPage.SelectedIndex,
+                Resolution = (ScanDpi)cmbResolution.SelectedIndex,
+                PaperSource = (ScanSource)cmbSource.SelectedIndex
+            };
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -186,7 +176,7 @@ namespace NAPS2.WinForms
                 return;
             }
             result = true;
-            saveSettings();
+            SaveSettings();
             Close();
         }
 
@@ -230,42 +220,33 @@ namespace NAPS2.WinForms
 
         private void FEditScanSettings_Load(object sender, EventArgs e)
         {
+            // Don't trigger any onChange events
+            suppressChangeEvent = true;
+
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanSettings.IconID];
             txtName.Text = ScanSettings.DisplayName;
             CurrentDevice = ScanSettings.Device;
             iconID = ScanSettings.IconID;
 
-            var scanSettingsExt = ScanSettings as ExtendedScanSettings;
-
-            if (scanSettingsExt != null)
-            {
-                cmbSource.SelectedIndex = (int)scanSettingsExt.PaperSource;
-                cmbDepth.SelectedIndex = (int)scanSettingsExt.BitDepth;
-                cmbResolution.SelectedIndex = (int)scanSettingsExt.Resolution;
-                txtContrast.Text = scanSettingsExt.Contrast.ToString("G");
-                txtBrightness.Text = scanSettingsExt.Brightness.ToString("G");
-                cmbPage.SelectedIndex = (int)scanSettingsExt.PageSize;
-                cmbScale.SelectedIndex = (int)scanSettingsExt.AfterScanScale;
-                cmbAlign.SelectedIndex = (int)scanSettingsExt.PageAlign;
-            }
+            cmbSource.SelectedIndex = (int)ScanSettings.PaperSource;
+            cmbDepth.SelectedIndex = (int)ScanSettings.BitDepth;
+            cmbResolution.SelectedIndex = (int)ScanSettings.Resolution;
+            txtContrast.Text = ScanSettings.Contrast.ToString("G");
+            txtBrightness.Text = ScanSettings.Brightness.ToString("G");
+            cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
+            cmbScale.SelectedIndex = (int)ScanSettings.AfterScanScale;
+            cmbAlign.SelectedIndex = (int)ScanSettings.PageAlign;
 
             cbHighQuality.Checked = ScanSettings.MaxQuality;
 
-            if (CurrentDevice == null || CurrentDevice.DriverName != TwainScanDriver.DRIVER_NAME)
-            {
-                suppressChangeEvent = true;
-                rdWIA.Checked = true;
-                suppressChangeEvent = false;
-                if (scanSettingsExt == null)
-                    rdbNativeWIA.Checked = true;
-                else
-                    rdbConfig.Checked = true;
-            }
-            else
-            {
-                rdTWAIN.Checked = true;
-                rdbNativeWIA.Checked = true;
-            }
+            // The setter updates the driver selection checkboxes
+            DeviceDriverName = ScanSettings.DriverName;
+
+            rdbNativeWIA.Checked = ScanSettings.UseNativeUI;
+            rdbConfig.Checked = !ScanSettings.UseNativeUI;
+
+            // Start triggering onChange events again
+            suppressChangeEvent = false;
 
             UpdateEnabledControls();
         }

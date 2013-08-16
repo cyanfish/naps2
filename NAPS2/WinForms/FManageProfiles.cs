@@ -32,10 +32,12 @@ namespace NAPS2.WinForms
     public partial class FManageProfiles : Form
     {
         private readonly IProfileManager profileManager;
+        private readonly AppConfigManager appConfigManager;
 
-        public FManageProfiles(IProfileManager profileManager)
+        public FManageProfiles(IProfileManager profileManager, AppConfigManager appConfigManager)
         {
             this.profileManager = profileManager;
+            this.appConfigManager = appConfigManager;
             InitializeComponent();
         }
 
@@ -47,7 +49,7 @@ namespace NAPS2.WinForms
         private void loadList()
         {
             lvProfiles.Items.Clear();
-            foreach (ScanSettings profile in profileManager.Profiles)
+            foreach (var profile in profileManager.Profiles)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
             }
@@ -57,7 +59,7 @@ namespace NAPS2.WinForms
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var fedit = KernelManager.Kernel.Get<FEditScanSettings>();
-            fedit.ScanSettings = new ExtendedScanSettings();
+            fedit.ScanSettings = appConfigManager.Config.DefaultProfileSettings ?? new ExtendedScanSettings();
             fedit.ShowDialog();
             if (fedit.Result)
             {
