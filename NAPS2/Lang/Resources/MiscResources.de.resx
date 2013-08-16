@@ -121,7 +121,7 @@
         <value>Profil wählen</value>
     </data>
     <data name="Clear" xml:space="preserve">
-        <value>Löschen</value>
+        <value>Alles Löschen</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
         <value>Möchten Sie wirklich {0} Seite(n) löschen?</value>
@@ -163,19 +163,19 @@
         <value>Exchangeable Image File (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
-        <value>GIF File (*.gif)</value>
+        <value>GIF Datei (*.gif)</value>
     </data>
     <data name="FileTypeJpeg" xml:space="preserve">
-        <value>JPEG File (*.jpg, *.jpeg)</value>
+        <value>JPEG Datei (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF document (*.pdf)</value>
+        <value>PDF Dokument (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>PNG File (*.png)</value>
+        <value>PNG Datei (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>TIFF Datei (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
         <value>Name fehlt.</value>

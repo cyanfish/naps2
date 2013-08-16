@@ -319,7 +319,7 @@
         <value>tsScan</value>
     </data>
     <data name="tsMoveDown.Text" xml:space="preserve">
-        <value>Runter</value>
+        <value>Nach oben</value>
     </data>
     <data name="&gt;&gt;tsDelete.Name" xml:space="preserve">
         <value>tsDelete</value>
@@ -600,7 +600,7 @@
         <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="tsClear.Text" xml:space="preserve">
-        <value>Löschen</value>
+        <value>Alles Löschen</value>
     </data>
     <data name="&gt;&gt;tsSavePDF.Name" xml:space="preserve">
         <value>tsSavePDF</value>
