@@ -164,11 +164,7 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (CurrentDevice == null)
-            {
-                errorOutput.DisplayError(MiscResources.NoDeviceSelected);
-                return;
-            }
+            // Note: If CurrentDevice is null, that's fine. A prompt will be shown when scanning.
 
             if (txtName.Text == "")
             {

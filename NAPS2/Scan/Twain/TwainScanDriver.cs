@@ -37,6 +37,8 @@ namespace NAPS2.Scan.Twain
 
         public ExtendedScanSettings ScanSettings { get; set; }
 
+        public ScanDevice ScanDevice { get; set; }
+
         public IWin32Window DialogParent { get; set; }
 
         public ScanDevice PromptForDevice()
@@ -67,13 +69,17 @@ namespace NAPS2.Scan.Twain
             {
                 throw new InvalidOperationException("IScanDriver.ScanSettings must be specified before calling Scan().");
             }
+            if (ScanDevice == null)
+            {
+                throw new InvalidOperationException("IScanDriver.ScanDevice must be specified before calling Scan().");
+            }
             if (DialogParent == null)
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
             try
             {
-                var api = new TwainApi(ScanSettings, DialogParent);
+                var api = new TwainApi(ScanSettings, ScanDevice, DialogParent);
                 return api.Scan();
             }
             catch (ScanDriverException)

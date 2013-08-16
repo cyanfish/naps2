@@ -33,7 +33,7 @@ namespace NAPS2.Scan.Twain
         readonly ExtendedScanSettings settings;
         readonly Twain tw;
 
-        public TwainApi(ExtendedScanSettings settings, IWin32Window pForm)
+        public TwainApi(ExtendedScanSettings settings, ScanDevice device, IWin32Window pForm)
         {
             parent = pForm;
             tw = new Twain();
@@ -42,7 +42,7 @@ namespace NAPS2.Scan.Twain
             {
                 throw new DeviceNotFoundException();
             }
-            if (!tw.SelectByName(settings.Device.ID))
+            if (!tw.SelectByName(device.ID))
             {
                 throw new DeviceNotFoundException();
             }

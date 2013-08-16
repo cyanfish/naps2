@@ -46,6 +46,22 @@ namespace NAPS2.Scan
             var driver = kernel.Get<IScanDriver>(scanSettings.DriverName);
             driver.DialogParent = dialogParent;
             driver.ScanSettings = scanSettings;
+            if (scanSettings.Device == null)
+            {
+                // The profile has no device specified, so prompt the user to choose one
+                var device = driver.PromptForDevice();
+                if (device == null)
+                {
+                    // User cancelled
+                    return;
+                }
+                driver.ScanDevice = device;
+            }
+            else
+            {
+                // The profile has a device specified, so use it
+                driver.ScanDevice = scanSettings.Device;
+            }
 
             try
             {

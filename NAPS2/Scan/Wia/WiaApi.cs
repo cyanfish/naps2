@@ -59,13 +59,13 @@ namespace NAPS2.Scan.Wia
 
         private readonly ExtendedScanSettings settings;
 
-        public WiaApi(ExtendedScanSettings settings)
+        public WiaApi(ExtendedScanSettings settings, ScanDevice scanDevice)
         {
             this.settings = settings;
             DeviceManager manager = new DeviceManagerClass();
             foreach (DeviceInfo info in manager.DeviceInfos)
             {
-                if (info.DeviceID == settings.Device.ID)
+                if (info.DeviceID == scanDevice.ID)
                 {
                     try
                     {

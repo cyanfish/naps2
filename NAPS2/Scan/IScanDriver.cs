@@ -34,9 +34,14 @@ namespace NAPS2.Scan
         /// <summary>
         /// Sets the settings used by the driver for scanning.
         /// This must be set before calling Scan.
-        /// Some drivers may check for particular implementors and use further information than provided by IScanSettings.
         /// </summary>
         ExtendedScanSettings ScanSettings { set; }
+
+        /// <summary>
+        /// Sets the device used by the driver for scanning.
+        /// This must be set before calling Scan.
+        /// </summary>
+        ScanDevice ScanDevice { set; }
 
         /// <summary>
         /// Sets the parent window used when creating dialogs. This must be set before calling PromptForDevice or Scan.
