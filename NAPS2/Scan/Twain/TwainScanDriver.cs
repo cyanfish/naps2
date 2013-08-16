@@ -50,6 +50,10 @@ namespace NAPS2.Scan.Twain
             try
             {
                 string deviceId = TwainApi.SelectDeviceUI();
+                if (deviceId == null)
+                {
+                    return null;
+                }
                 string deviceName = deviceId;
                 return new ScanDevice(deviceId, deviceName);
             }

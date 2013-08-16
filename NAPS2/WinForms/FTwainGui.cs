@@ -27,11 +27,14 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
+using NLog;
 
 namespace NAPS2.WinForms
 {
     internal partial class FTwainGui : Form, IMessageFilter
     {
+        private readonly Logger logger;
+
         private readonly List<IScannedImage> bitmaps;
         private readonly ExtendedScanSettings settings;
         private bool activated;
@@ -124,7 +127,20 @@ namespace NAPS2.WinForms
                 msgfilter = true;
                 Application.AddMessageFilter(this);
             }
-            tw.Acquire();
+            try
+            {
+                if (!tw.Acquire())
+                {
+                    EndingScan();
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.ErrorException("An error occurred while interacting with TWAIN.", ex);
+                EndingScan();
+                Close();
+            }
         }
     }
 }

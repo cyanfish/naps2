@@ -55,7 +55,10 @@ namespace NAPS2.Scan.Twain
             {
                 throw new NoDevicesFoundException();
             }
-            tw.Select();
+            if (!tw.Select())
+            {
+                return null;
+            }
             return tw.GetCurrentName();
         }
 

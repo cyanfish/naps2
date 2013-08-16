@@ -111,7 +111,7 @@ namespace NAPS2.Scan.Twain
             return false;
         }
 
-        public void Select()
+        public bool Select()
         {
             TwReturnCode returnCode;
             CloseSrc();
@@ -119,9 +119,10 @@ namespace NAPS2.Scan.Twain
             {
                 Init(hwnd);
                 if (appid.Id == IntPtr.Zero)
-                    return;
+                    return false;
             }
             returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.UserSelect, srcds);
+            return returnCode == TwReturnCode.Success;
         }
 
         public bool SelectByName(string name)
@@ -147,7 +148,7 @@ namespace NAPS2.Scan.Twain
             return srcds.ProductName;
         }
 
-        public void Acquire()
+        public bool Acquire()
         {
             TwReturnCode returnCode;
             CloseSrc();
@@ -171,8 +172,13 @@ namespace NAPS2.Scan.Twain
             if (returnCode != TwReturnCode.Success)
             {
                 CloseSrc();
+                if (returnCode == TwReturnCode.Cancel)
+                {
+                    return false;
+                }
                 throw new InvalidOperationException("DSuserif call falied");
             }
+            return true;
         }
 
         public ArrayList TransferPictures()
