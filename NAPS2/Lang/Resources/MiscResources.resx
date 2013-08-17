@@ -207,4 +207,7 @@
   <data name="Version" xml:space="preserve">
     <value>Version {0}</value>
   </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>An error occurred while trying to send an email.</value>
+  </data>
 </root>

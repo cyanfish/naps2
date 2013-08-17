@@ -23,10 +23,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace NAPS2.Email
+namespace NAPS2.Email.Mapi
 {
+    // A MAPI structure describing an email message and its metadata.
+    // Documented at: http://msdn.microsoft.com/en-us/library/windows/desktop/dd296732%28v=vs.85%29.aspx
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    internal class MAPIMessage
+    internal class MapiMessage
     {
         public int reserved;
         public string subject;

@@ -109,6 +109,13 @@
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
     <Compile Include="CultureInitializer.cs" />
+    <Compile Include="Email\EmailMessage.cs" />
+    <Compile Include="Email\EmailRecipient.cs" />
+    <Compile Include="Email\EmailRecipientType.cs" />
+    <Compile Include="Email\Exceptions\MapiException.cs" />
+    <Compile Include="Email\Exceptions\EmailException.cs" />
+    <Compile Include="Email\Mapi\MapiRecipClass.cs" />
+    <Compile Include="Email\Mapi\MapiRecipDesc.cs" />
     <Compile Include="IErrorOutput.cs" />
     <Compile Include="ImageSaver.cs" />
     <Compile Include="ImageFileNamer.cs" />
@@ -226,9 +233,9 @@
     <Compile Include="ILProfileIcons.Designer.cs">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
     </Compile>
-    <Compile Include="Email\MAPIEmailer.cs" />
-    <Compile Include="Email\MAPIFileDesc.cs" />
-    <Compile Include="Email\MAPIMessage.cs" />
+    <Compile Include="Email\Mapi\MapiEmailer.cs" />
+    <Compile Include="Email\Mapi\MapiFileDesc.cs" />
+    <Compile Include="Email\Mapi\MapiMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.de.resx" />

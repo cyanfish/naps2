@@ -30,11 +30,13 @@ using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Email;
+using NAPS2.Email.Exceptions;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using Ninject;
 using Ninject.Parameters;
+using NLog;
 
 namespace NAPS2.WinForms
 {
@@ -45,15 +47,19 @@ namespace NAPS2.WinForms
         private readonly StringWrapper stringWrapper;
         private readonly UserConfigManager userConfigManager;
         private readonly AppConfigManager appConfigManager;
+        private readonly Logger logger;
+        private readonly IErrorOutput errorOutput;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
             this.stringWrapper = stringWrapper;
             this.userConfigManager = userConfigManager;
             this.appConfigManager = appConfigManager;
+            this.errorOutput = errorOutput;
+            this.logger = logger;
             InitializeComponent();
         }
 
@@ -330,7 +336,18 @@ namespace NAPS2.WinForms
             {
                 string path = Paths.AppData + "\\Scan.pdf";
                 ExportPDF(path);
-                emailer.SendEmail(path, "");
+                try
+                {
+                    emailer.SendEmail(new EmailMessage
+                    {
+                        AttachmentFilePaths = new List<string> { path },
+                    });
+                }
+                catch (EmailException ex)
+                {
+                    logger.ErrorException(ex.Message, ex);
+                    errorOutput.DisplayError(ex.Message);
+                }
                 File.Delete(path);
             }
         }

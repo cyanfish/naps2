@@ -160,6 +160,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while trying to send an email..
+        /// </summary>
+        internal static string EmailError {
+            get {
+                return ResourceManager.GetString("EmailError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
