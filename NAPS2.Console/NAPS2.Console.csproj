@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="AutomatedScanning.cs" />
     <Compile Include="AutomatedScanningOptions.cs" />
+    <Compile Include="CommandLineOptions.cs" />
     <Compile Include="ConsoleErrorOutput.cs" />
     <Compile Include="KernelManager.cs" />
     <Compile Include="Lang\Resources\ConsoleResources.Designer.cs">

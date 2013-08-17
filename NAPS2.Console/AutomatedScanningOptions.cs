@@ -22,19 +22,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CommandLine;
-using CommandLine.Text;
 
 namespace NAPS2.Console
 {
-    public class AutomatedScanningOptions
+    public class AutomatedScanningOptions : CommandLineOptions
     {
-        [Option('o', "output", Required = true, HelpText = "The path to the file to save.")]
+        [Option('o', "output", HelpText = "The name and path of the file to save." +
+                                          "The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
+                                          "You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
         public string OutputPath { get; set; }
 
-        [Option('p', "profile", HelpText = "The name of the profile to use for scanning. If not specified, the most-recently-used profile from the GUI is selected.")]
+        [Option('p', "profile", HelpText = "The name of the profile to use for scanning." +
+                                           "If not specified, the most-recently-used profile from the GUI is selected.")]
         public string ProfileName { get; set; }
 
-        [Option('v', "verbose", HelpText = "Display progress information. If not specified, no output is displayed if the scan is successful.")]
+        [Option('v', "verbose", HelpText = "Display progress information." +
+                                           "If not specified, no output is displayed if the scan is successful.")]
         public bool Verbose { get; set; }
 
         [Option('n', "number", DefaultValue = 1, HelpText = "The number of scans to perform.")]
@@ -43,19 +46,38 @@ namespace NAPS2.Console
         [Option('d', "delay", DefaultValue = 0, HelpText = "The delay (in milliseconds) between each scan.")]
         public int Delay { get; set; }
 
-        [Option('f', "force", HelpText = "Overwrite existing files. If not specified, any files that already exist will not be changed.")]
+        [Option('f', "force", HelpText = "Overwrite existing files." +
+                                         "If not specified, any files that already exist will not be changed.")]
         public bool ForceOverwrite { get; set; }
 
         [Option('w', "wait", HelpText = "After finishing, wait for user input (enter/return) before exiting.")]
         public bool WaitForEnter { get; set; }
 
-        [ParserState]
-        public IParserState LastParserState { get; set; }
+        [Option('e', "email", HelpText = "The name of the file to attach to an email." +
+                                         "The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
+                                         "You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
+        public string EmailFileName { get; set; }
 
-        [HelpOption]
-        public string GetUsage()
-        {
-            return HelpText.AutoBuild(this, current => HelpText.DefaultParsingErrorsHandler(this, current));
-        }
+        [Option("subject", HelpText = "The email message's subject." +
+                                      "You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
+                                      "Requires -e/--email.")]
+        public string EmailSubject { get; set; }
+
+        [Option("body", HelpText = "The email message's body text." +
+                                   "You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
+                                   "Requires -e/--email.")]
+        public string EmailBody { get; set; }
+
+        [Option("to", HelpText = "A comma-separated list of email addresses of the recipients." +
+                                 "Requires -e/--email.")]
+        public string EmailTo { get; set; }
+
+        [Option("cc", HelpText = "A comma-separated list of email addresses of the recipients." +
+                                 "Requires -e/--email.")]
+        public string EmailCc { get; set; }
+
+        [Option("bcc", HelpText = "A comma-separated list of email addresses of the recipients." +
+                                  "Requires -e/--email.")]
+        public string EmailBcc { get; set; }
     }
 }
