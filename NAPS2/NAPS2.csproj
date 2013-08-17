@@ -318,9 +318,6 @@
     <EmbeddedResource Include="WinForms\FEditScanSettings.de.resx">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.en.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditScanSettings.es.resx">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </EmbeddedResource>

@@ -62,7 +62,7 @@ namespace NAPS2.Config
         {
             config = null;
             TryLoadConfig(primaryConfigPath);
-            if (config == null)
+            if (config == null && secondaryConfigPath != null)
             {
                 TryLoadConfig(secondaryConfigPath);
             }
