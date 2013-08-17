@@ -26,6 +26,7 @@ copy %BINFOLDER%\NLog.dll %TEMPFOLDER%
 copy %CMDBINFOLDER%\NAPS2.Console.exe %TEMPFOLDER%
 copy %CMDBINFOLDER%\CommandLine.dll %TEMPFOLDER%
 copy ..\Resources\scanner-app.ico %TEMPFOLDER%
+copy ..\appsettings.xml %TEMPFOLDER%
 copy lib\wiaaut.dll %TEMPFOLDER%
 del %OUTFILE%
 7z a %OUTFILE% %TEMPFOLDER%\*

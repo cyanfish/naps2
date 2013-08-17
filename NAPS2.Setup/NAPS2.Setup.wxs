@@ -55,6 +55,8 @@
         <File Source="..\NAPS2\Resources\scanner-app.ico" />
         <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
         <File Source="..\NAPS2.Console\bin\Release\CommandLine.dll" />
+        <!-- Configuration -->
+        <File Source="..\NAPS2\appsettings.xml" />
         <!-- License -->
         <File Source="..\NAPS2\Setup\license.txt" />
       </Component>
