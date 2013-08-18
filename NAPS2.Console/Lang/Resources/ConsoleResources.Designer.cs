@@ -61,6 +61,24 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attaching {0}....
+        /// </summary>
+        internal static string Attaching {
+            get {
+                return ResourceManager.GetString("Attaching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaching the previously exported PDF....
+        /// </summary>
+        internal static string AttachingExportedPDF {
+            get {
+                return ResourceManager.GetString("AttachingExportedPDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Beginning scan....
         /// </summary>
         internal static string BeginningScan {
@@ -88,6 +106,24 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email not sent..
+        /// </summary>
+        internal static string EmailNotSent {
+            get {
+                return ResourceManager.GetString("EmailNotSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email successfully sent..
+        /// </summary>
+        internal static string EmailSent {
+            get {
+                return ResourceManager.GetString("EmailSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when trying to delete a temporary directory..
         /// </summary>
         internal static string ErrorDeletingTempDir {
@@ -111,6 +147,24 @@ namespace NAPS2.Console.Lang.Resources {
         internal static string Exporting {
             get {
                 return ResourceManager.GetString("Exporting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting images for use as an attachment....
+        /// </summary>
+        internal static string ExportingImagesToAttach {
+            get {
+                return ResourceManager.GetString("ExportingImagesToAttach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting PDF for use as an attachment....
+        /// </summary>
+        internal static string ExportingPDFToAttach {
+            get {
+                return ResourceManager.GetString("ExportingPDFToAttach", resourceCulture);
             }
         }
         
@@ -201,6 +255,15 @@ namespace NAPS2.Console.Lang.Resources {
         internal static string ScannedImage {
             get {
                 return ResourceManager.GetString("ScannedImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending email....
+        /// </summary>
+        internal static string SendingEmail {
+            get {
+                return ResourceManager.GetString("SendingEmail", resourceCulture);
             }
         }
         

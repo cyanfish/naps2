@@ -60,6 +60,14 @@ namespace NAPS2.Console
             this.emailer = emailer;
         }
 
+        private void OutputVerbose(string value, params object[] args)
+        {
+            if (options.Verbose)
+            {
+                Console.WriteLine(value, args);
+            }
+        }
+
         public void Execute()
         {
             if (!ValidateOptions())
@@ -99,10 +107,8 @@ namespace NAPS2.Console
                 return;
             }
 
-            if (options.Verbose)
-            {
-                Console.WriteLine(ConsoleResources.Emailing);
-            }
+
+            OutputVerbose(ConsoleResources.Emailing);
 
             var message = new EmailMessage
             {
@@ -120,29 +126,65 @@ namespace NAPS2.Console
             tempFolder.Create();
             try
             {
-
-                if (IsPdfFile(options.EmailFileName))
+                string targetPath = Path.Combine(tempFolder.FullName, options.EmailFileName);
+                if (IsPdfFile(targetPath))
                 {
-                    // TODO
+                    if (options.OutputPath != null && IsPdfFile(options.OutputPath))
+                    {
+                        // The scan has already been exported to PDF, so use that file
+                        OutputVerbose(ConsoleResources.AttachingExportedPDF, options.EmailFileName);
+                        message.Attachments.Add(new EmailAttachment
+                        {
+                            FilePath = options.OutputPath,
+                            AttachmentName = options.EmailFileName
+                        });
+                    }
+                    else
+                    {
+                        // The scan hasn't bee exported to PDF yet, so it needs to be exported to the temp folder
+                        OutputVerbose(ConsoleResources.ExportingPDFToAttach);
+                        DoExportToPdf(targetPath);
+                        // Attach the PDF file
+                        AttachFilesInFolder(tempFolder, message);
+                    }
                 }
                 else
                 {
-                    // TODO
+                    // Export the images to the temp folder
+                    // Don't bother to re-use previously exported images, because the possible different formats and multiple files makes it non-trivial,
+                    // and exporting is pretty cheap anyway
+                    OutputVerbose(ConsoleResources.ExportingImagesToAttach);
+                    DoExportToImageFiles(targetPath);
+                    // Attach the image file(s)
+                    AttachFilesInFolder(tempFolder, message);
                 }
 
-                foreach (var file in tempFolder.EnumerateFiles())
+                OutputVerbose(ConsoleResources.SendingEmail);
+                if (emailer.SendEmail(message))
                 {
-                    message.AttachmentFilePaths.Add(file.FullName);
+                    OutputVerbose(ConsoleResources.EmailSent);
                 }
-
-                // TODO: Error check inside SendEmail
-                emailer.SendEmail(message);
-
-                // TODO: Maybe more to do here?
+                else
+                {
+                    OutputVerbose(ConsoleResources.EmailNotSent);
+                }
             }
             finally
             {
                 tempFolder.Delete(true);
+            }
+        }
+
+        private void AttachFilesInFolder(DirectoryInfo folder, EmailMessage message)
+        {
+            foreach (var file in folder.EnumerateFiles())
+            {
+                OutputVerbose(ConsoleResources.Attaching, file.Name);
+                message.Attachments.Add(new EmailAttachment
+                {
+                    FilePath = file.FullName,
+                    AttachmentName = file.Name
+                });
             }
         }
 
@@ -177,10 +219,7 @@ namespace NAPS2.Console
                 return;
             }
 
-            if (options.Verbose)
-            {
-                Console.WriteLine(ConsoleResources.Exporting);
-            }
+            OutputVerbose(ConsoleResources.Exporting);
 
             if (IsPdfFile(options.OutputPath))
             {
@@ -201,16 +240,18 @@ namespace NAPS2.Console
 
         private void ExportToImageFiles()
         {
-            imageSaver.SaveImages(options.OutputPath, scannedImages, path =>
+            DoExportToImageFiles(options.OutputPath);
+
+            OutputVerbose(ConsoleResources.FinishedSavingImages, options.OutputPath);
+        }
+
+        private void DoExportToImageFiles(string outputPath)
+        {
+            imageSaver.SaveImages(outputPath, scannedImages, path =>
             {
                 NotifyOverwrite(path);
                 return options.ForceOverwrite;
             });
-
-            if (options.Verbose)
-            {
-                Console.WriteLine(ConsoleResources.FinishedSavingImages, options.OutputPath);
-            }
         }
 
         private void NotifyOverwrite(string path)
@@ -219,9 +260,9 @@ namespace NAPS2.Console
             {
                 errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
             }
-            if (options.ForceOverwrite && options.Verbose)
+            if (options.ForceOverwrite)
             {
-                Console.WriteLine(ConsoleResources.Overwriting, path);
+                OutputVerbose(ConsoleResources.Overwriting, path);
             }
         }
 
@@ -235,28 +276,12 @@ namespace NAPS2.Console
                     return;
                 }
             }
-            var pdfInfo = new PdfInfo
-            {
-                Title = ConsoleResources.ScannedImage,
-                Subject = ConsoleResources.ScannedImage,
-                Author = ConsoleResources.NAPS2
-            };
 
             try
             {
-                pdfExporter.Export(options.OutputPath, scannedImages.Select(x => (Image)x.GetImage()), pdfInfo, i =>
-                {
-                    if (options.Verbose)
-                    {
-                        Console.WriteLine(ConsoleResources.ExportedPage, i, scannedImages.Count);
-                    }
-                    return true;
-                });
+                DoExportToPdf(options.OutputPath);
 
-                if (options.Verbose)
-                {
-                    Console.WriteLine(ConsoleResources.SuccessfullySavedPdf, options.OutputPath);
-                }
+                OutputVerbose(ConsoleResources.SuccessfullySavedPdf, options.OutputPath);
             }
             catch (UnauthorizedAccessException)
             {
@@ -264,12 +289,24 @@ namespace NAPS2.Console
             }
         }
 
+        private void DoExportToPdf(string outputPath)
+        {
+            var pdfInfo = new PdfInfo
+            {
+                Title = ConsoleResources.ScannedImage,
+                Subject = ConsoleResources.ScannedImage,
+                Author = ConsoleResources.NAPS2
+            };
+            pdfExporter.Export(outputPath, scannedImages.Select(x => (Image)x.GetImage()), pdfInfo, i =>
+            {
+                OutputVerbose(ConsoleResources.ExportedPage, i, scannedImages.Count);
+                return true;
+            });
+        }
+
         private void PerformScan(ExtendedScanSettings profile)
         {
-            if (options.Verbose)
-            {
-                Console.WriteLine(ConsoleResources.BeginningScan);
-            }
+            OutputVerbose(ConsoleResources.BeginningScan);
 
             scannedImages = new List<IScannedImage>();
             IWin32Window parentWindow = new Form { Visible = false };
@@ -277,22 +314,13 @@ namespace NAPS2.Console
             {
                 if (options.Delay > 0)
                 {
-                    if (options.Verbose)
-                    {
-                        Console.WriteLine(ConsoleResources.Waiting, options.Delay);
-                    }
+                    OutputVerbose(ConsoleResources.Waiting, options.Delay);
                     Thread.Sleep(options.Delay);
                 }
-                if (options.Verbose)
-                {
-                    Console.WriteLine(ConsoleResources.StartingScan, i, options.Number);
-                }
+                OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
                 pagesScanned = 0;
                 scanPerformer.PerformScan(profile, parentWindow, this);
-                if (options.Verbose)
-                {
-                    Console.WriteLine(ConsoleResources.PagesScanned, pagesScanned);
-                }
+                OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }
 

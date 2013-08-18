@@ -109,11 +109,10 @@
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
     <Compile Include="CultureInitializer.cs" />
+    <Compile Include="Email\EmailAttachment.cs" />
     <Compile Include="Email\EmailMessage.cs" />
     <Compile Include="Email\EmailRecipient.cs" />
     <Compile Include="Email\EmailRecipientType.cs" />
-    <Compile Include="Email\Exceptions\MapiException.cs" />
-    <Compile Include="Email\Exceptions\EmailException.cs" />
     <Compile Include="Email\Mapi\MapiRecipClass.cs" />
     <Compile Include="Email\Mapi\MapiRecipDesc.cs" />
     <Compile Include="IErrorOutput.cs" />

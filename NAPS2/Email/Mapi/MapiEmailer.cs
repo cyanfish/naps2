@@ -23,7 +23,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using NAPS2.Email.Exceptions;
+using NAPS2.Lang.Resources;
+using NLog;
 
 namespace NAPS2.Email.Mapi
 {
@@ -60,6 +61,15 @@ namespace NAPS2.Email.Mapi
         [DllImport("MAPI32.DLL")]
         private static extern int MAPISendMail(IntPtr session, IntPtr hwnd, MapiMessage message, int flags, int reserved);
 
+        private readonly Logger logger;
+        private readonly IErrorOutput errorOutput;
+
+        public MapiEmailer(IErrorOutput errorOutput, Logger logger)
+        {
+            this.errorOutput = errorOutput;
+            this.logger = logger;
+        }
+
         /// <summary>
         /// Sends an email described by the given message object.
         /// </summary>
@@ -69,11 +79,11 @@ namespace NAPS2.Email.Mapi
         public bool SendEmail(EmailMessage message)
         {
             // Translate files & recipients to unmanaged MAPI structures
-            var files = message.AttachmentFilePaths.Select(path => new MapiFileDesc
+            var files = message.Attachments.Select(attachment => new MapiFileDesc
             {
                 position = -1,
-                path = path,
-                name = Path.GetFileName(path)
+                path = attachment.FilePath,
+                name = attachment.AttachmentName
             }).ToArray();
             var recips = message.Recipients.Select(recipient => new MapiRecipDesc
             {
@@ -116,7 +126,9 @@ namespace NAPS2.Email.Mapi
             }
             if (returnCode != SUCCESS)
             {
-                throw new EmailException(new MapiException(returnCode));
+                logger.Error("Error sending email. MAPI error code: ", returnCode);
+                errorOutput.DisplayError(MiscResources.EmailError);
+                return false;
             }
             return true;
         }

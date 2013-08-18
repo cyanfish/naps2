@@ -30,7 +30,6 @@ using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Email;
-using NAPS2.Email.Exceptions;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
@@ -336,19 +335,14 @@ namespace NAPS2.WinForms
             {
                 string path = Paths.AppData + "\\Scan.pdf";
                 ExportPDF(path);
-                try
+                emailer.SendEmail(new EmailMessage
                 {
-                    emailer.SendEmail(new EmailMessage
-                    {
-                        AttachmentFilePaths = new List<string> { path },
-                    });
-                    // TODO: Move exception logic into Emailer (see ScanPerformer)
-                }
-                catch (EmailException ex)
-                {
-                    logger.ErrorException(ex.Message, ex);
-                    errorOutput.DisplayError(ex.Message);
-                }
+                    Attachments = new List<EmailAttachment> { new EmailAttachment
+                        {
+                            FilePath = path,
+                            AttachmentName = Path.GetFileName(path)
+                        } },
+                });
                 File.Delete(path);
             }
         }

@@ -24,6 +24,7 @@ using System.IO;
 using System.Linq;
 using NAPS2.Config;
 using NAPS2.Email;
+using NAPS2.Email.Mapi;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Stub;
@@ -54,7 +55,7 @@ namespace NAPS2
                 Bind<IScanPerformer>().To<ScanPerformer>();
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
-                Bind<IEmailer>().To<MAPIEmailer>();
+                Bind<IEmailer>().To<MapiEmailer>();
                 Bind<IErrorOutput>().To<MessageBoxErrorOutput>();
                 Bind<Logger>().ToMethod(LoggerFactory.GetLogger).InSingletonScope();
 #if DEBUG && false

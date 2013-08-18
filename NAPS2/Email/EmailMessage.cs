@@ -10,7 +10,7 @@ namespace NAPS2.Email
         public EmailMessage()
         {
             Recipients = new List<EmailRecipient>();
-            AttachmentFilePaths = new List<string>();
+            Attachments = new List<EmailAttachment>();
         }
 
         public string Subject { get; set; }
@@ -19,7 +19,7 @@ namespace NAPS2.Email
 
         public List<EmailRecipient> Recipients { get; set; }
 
-        public List<string> AttachmentFilePaths { get; set; }
+        public List<EmailAttachment> Attachments { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the email should be sent automatically without prompting the user to make changes first.
