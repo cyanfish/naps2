@@ -126,7 +126,7 @@ namespace NAPS2.Email.Mapi
             }
             if (returnCode != SUCCESS)
             {
-                logger.Error("Error sending email. MAPI error code: ", returnCode);
+                logger.Error("Error sending email. MAPI error code: {0}", returnCode);
                 errorOutput.DisplayError(MiscResources.EmailError);
                 return false;
             }

@@ -190,6 +190,10 @@ namespace NAPS2.Console
 
         private void AddRecipients(EmailMessage message, string addresses, EmailRecipientType recipientType)
         {
+            if (string.IsNullOrWhiteSpace(addresses))
+            {
+                return;
+            }
             foreach (string address in addresses.Split(','))
             {
                 message.Recipients.Add(new EmailRecipient

@@ -35,9 +35,9 @@ namespace NAPS2.Console
     {
         static void Main(string[] args)
         {
+            var options = new AutomatedScanningOptions();
             try
             {
-                var options = new AutomatedScanningOptions();
                 if (!CommandLine.Parser.Default.ParseArguments(args, options))
                 {
                     return;
@@ -49,6 +49,10 @@ namespace NAPS2.Console
             {
                 KernelManager.Kernel.Get<Logger>().FatalException("An error occurred that caused the console application to close.", ex);
                 System.Console.WriteLine(ConsoleResources.UnexpectedError);
+                if (options.WaitForEnter)
+                {
+                    System.Console.ReadLine();
+                }
             }
         }
     }

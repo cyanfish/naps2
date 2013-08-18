@@ -22,6 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Email;
+using NAPS2.Email.Mapi;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Stub;
@@ -46,6 +48,7 @@ namespace NAPS2.Console
         {
             public override void Load()
             {
+                Bind<IEmailer>().To<MapiEmailer>();
                 Bind<IScanPerformer>().To<ScanPerformer>();
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
