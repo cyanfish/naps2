@@ -198,6 +198,7 @@ namespace NAPS2.Console
             {
                 message.Recipients.Add(new EmailRecipient
                 {
+                    Name = address.Trim(),
                     Address = address.Trim(),
                     Type = recipientType
                 });
