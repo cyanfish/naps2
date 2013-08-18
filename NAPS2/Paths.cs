@@ -37,6 +37,8 @@ namespace NAPS2
         private static readonly string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif
 
+        private static readonly string TempPath = Path.Combine(AppDataPath, "tmp");
+
         public static string AppData
         {
             get
@@ -58,6 +60,18 @@ namespace NAPS2
                     Directory.CreateDirectory(ExecutablePath);
                 }
                 return ExecutablePath;
+            }
+        }
+
+        public static string Temp
+        {
+            get
+            {
+                if (!Directory.Exists(TempPath))
+                {
+                    Directory.CreateDirectory(TempPath);
+                }
+                return TempPath;
             }
         }
     }

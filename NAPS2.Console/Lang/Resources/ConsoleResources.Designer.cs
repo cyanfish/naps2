@@ -79,6 +79,24 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Emailing....
+        /// </summary>
+        internal static string Emailing {
+            get {
+                return ResourceManager.GetString("Emailing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when trying to delete a temporary directory..
+        /// </summary>
+        internal static string ErrorDeletingTempDir {
+            get {
+                return ResourceManager.GetString("ErrorDeletingTempDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exported page {0} of {1}..
         /// </summary>
         internal static string ExportedPage {
@@ -124,11 +142,29 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No scanned pages to email..
+        /// </summary>
+        internal static string NoPagesToEmail {
+            get {
+                return ResourceManager.GetString("NoPagesToEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No scanned pages to export..
         /// </summary>
         internal static string NoPagesToExport {
             get {
                 return ResourceManager.GetString("NoPagesToExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one of the -o/--output or -e/--email options must be specified..
+        /// </summary>
+        internal static string OutputOrEmailRequired {
+            get {
+                return ResourceManager.GetString("OutputOrEmailRequired", resourceCulture);
             }
         }
         

@@ -28,14 +28,18 @@ using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Console.Lang.Resources;
+using NAPS2.Email;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 
 namespace NAPS2.Console
 {
+    using Console = System.Console;
+
     public class AutomatedScanning : IScanReceiver
     {
         private readonly ImageSaver imageSaver;
+        private readonly IEmailer emailer;
         private readonly IPdfExporter pdfExporter;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
@@ -45,7 +49,7 @@ namespace NAPS2.Console
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -53,10 +57,16 @@ namespace NAPS2.Console
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
+            this.emailer = emailer;
         }
 
         public void Execute()
         {
+            if (!ValidateOptions())
+            {
+                return;
+            }
+
             ExtendedScanSettings profile;
             if (!GetProfile(out profile))
             {
@@ -65,12 +75,98 @@ namespace NAPS2.Console
 
             PerformScan(profile);
 
-            ExportScannedImages();
+            if (options.OutputPath != null)
+            {
+                ExportScannedImages();
+            }
+
+            if (options.EmailFileName != null)
+            {
+                EmailScannedImages();
+            }
 
             if (options.WaitForEnter)
             {
-                System.Console.ReadLine();
+                Console.ReadLine();
             }
+        }
+
+        private void EmailScannedImages()
+        {
+            if (scannedImages.Count == 0)
+            {
+                errorOutput.DisplayError(ConsoleResources.NoPagesToEmail);
+                return;
+            }
+
+            if (options.Verbose)
+            {
+                Console.WriteLine(ConsoleResources.Emailing);
+            }
+
+            var message = new EmailMessage
+            {
+                Subject = options.EmailSubject ?? "",
+                BodyText = options.EmailBody,
+                AutoSend = options.EmailAutoSend,
+                SilentSend = options.EmailSilentSend
+            };
+
+            AddRecipients(message, options.EmailTo, EmailRecipientType.To);
+            AddRecipients(message, options.EmailCc, EmailRecipientType.Cc);
+            AddRecipients(message, options.EmailBcc, EmailRecipientType.Bcc);
+
+            var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
+            tempFolder.Create();
+            try
+            {
+
+                if (IsPdfFile(options.EmailFileName))
+                {
+                    // TODO
+                }
+                else
+                {
+                    // TODO
+                }
+
+                foreach (var file in tempFolder.EnumerateFiles())
+                {
+                    message.AttachmentFilePaths.Add(file.FullName);
+                }
+
+                // TODO: Error check inside SendEmail
+                emailer.SendEmail(message);
+
+                // TODO: Maybe more to do here?
+            }
+            finally
+            {
+                tempFolder.Delete(true);
+            }
+        }
+
+        private void AddRecipients(EmailMessage message, string addresses, EmailRecipientType recipientType)
+        {
+            foreach (string address in addresses.Split(','))
+            {
+                message.Recipients.Add(new EmailRecipient
+                {
+                    Address = address.Trim(),
+                    Type = recipientType
+                });
+            }
+        }
+
+        public bool ValidateOptions()
+        {
+            // Most validation is done by the CommandLineParser library, but some constraints that can't be represented by that API need to be checked here
+            if (options.OutputPath == null && options.EmailFileName == null)
+            {
+                errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequired);
+                return false;
+            }
+            return true;
         }
 
         private void ExportScannedImages()
@@ -83,12 +179,10 @@ namespace NAPS2.Console
 
             if (options.Verbose)
             {
-                System.Console.WriteLine(ConsoleResources.Exporting);
+                Console.WriteLine(ConsoleResources.Exporting);
             }
 
-            string extension = Path.GetExtension(options.OutputPath);
-            Debug.Assert(extension != null);
-            if (extension.ToLower() == ".pdf")
+            if (IsPdfFile(options.OutputPath))
             {
                 ExportToPdf();
             }
@@ -96,6 +190,13 @@ namespace NAPS2.Console
             {
                 ExportToImageFiles();
             }
+        }
+
+        private bool IsPdfFile(string path)
+        {
+            string extension = Path.GetExtension(path);
+            Debug.Assert(extension != null);
+            return extension.ToLower() == ".pdf";
         }
 
         private void ExportToImageFiles()
@@ -108,7 +209,7 @@ namespace NAPS2.Console
 
             if (options.Verbose)
             {
-                System.Console.WriteLine(ConsoleResources.FinishedSavingImages, options.OutputPath);
+                Console.WriteLine(ConsoleResources.FinishedSavingImages, options.OutputPath);
             }
         }
 
@@ -120,7 +221,7 @@ namespace NAPS2.Console
             }
             if (options.ForceOverwrite && options.Verbose)
             {
-                System.Console.WriteLine(ConsoleResources.Overwriting, path);
+                Console.WriteLine(ConsoleResources.Overwriting, path);
             }
         }
 
@@ -147,14 +248,14 @@ namespace NAPS2.Console
                 {
                     if (options.Verbose)
                     {
-                        System.Console.WriteLine(ConsoleResources.ExportedPage, i, scannedImages.Count);
+                        Console.WriteLine(ConsoleResources.ExportedPage, i, scannedImages.Count);
                     }
                     return true;
                 });
 
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine(ConsoleResources.SuccessfullySavedPdf, options.OutputPath);
+                    Console.WriteLine(ConsoleResources.SuccessfullySavedPdf, options.OutputPath);
                 }
             }
             catch (UnauthorizedAccessException)
@@ -167,7 +268,7 @@ namespace NAPS2.Console
         {
             if (options.Verbose)
             {
-                System.Console.WriteLine(ConsoleResources.BeginningScan);
+                Console.WriteLine(ConsoleResources.BeginningScan);
             }
 
             scannedImages = new List<IScannedImage>();
@@ -178,19 +279,19 @@ namespace NAPS2.Console
                 {
                     if (options.Verbose)
                     {
-                        System.Console.WriteLine(ConsoleResources.Waiting, options.Delay);
+                        Console.WriteLine(ConsoleResources.Waiting, options.Delay);
                     }
                     Thread.Sleep(options.Delay);
                 }
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine(ConsoleResources.StartingScan, i, options.Number);
+                    Console.WriteLine(ConsoleResources.StartingScan, i, options.Number);
                 }
                 pagesScanned = 0;
                 scanPerformer.PerformScan(profile, parentWindow, this);
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine(ConsoleResources.PagesScanned, pagesScanned);
+                    Console.WriteLine(ConsoleResources.PagesScanned, pagesScanned);
                 }
             }
         }

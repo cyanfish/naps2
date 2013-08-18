@@ -55,7 +55,7 @@ namespace NAPS2
             {
                 ImageFormat format = GetImageFormat(fileName);
 
-                if (format == ImageFormat.Tiff)
+                if (Equals(format, ImageFormat.Tiff))
                 {
                     if (File.Exists(fileName))
                     {
@@ -66,7 +66,7 @@ namespace NAPS2
                             return;
                         }
                     }
-                    Image[] bitmaps = images.Select(x => x.GetImage()).ToArray();
+                    Image[] bitmaps = images.Select(x => (Image)x.GetImage()).ToArray();
                     TiffHelper.SaveMultipage(bitmaps, fileName);
                     foreach (Image bitmap in bitmaps)
                     {

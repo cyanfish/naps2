@@ -342,6 +342,7 @@ namespace NAPS2.WinForms
                     {
                         AttachmentFilePaths = new List<string> { path },
                     });
+                    // TODO: Move exception logic into Emailer (see ScanPerformer)
                 }
                 catch (EmailException ex)
                 {

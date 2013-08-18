@@ -22,7 +22,7 @@ namespace NAPS2.Email
         public List<string> AttachmentFilePaths { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the email should be sent automatically without promting the user to make changes first.
+        /// Gets or sets a value indicating whether the email should be sent automatically without prompting the user to make changes first.
         /// </summary>
         public bool AutoSend { get; set; }
 
