@@ -33,6 +33,7 @@ namespace NAPS2.Console
 {
     static class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             var options = new AutomatedScanningOptions();
