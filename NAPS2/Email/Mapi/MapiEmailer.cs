@@ -34,7 +34,7 @@ namespace NAPS2.Email.Mapi
         // http://msdn.microsoft.com/en-us/library/windows/desktop/dd296721%28v=vs.85%29.aspx
 
         [DllImport("MAPI32.DLL")]
-        private static extern int MAPISendMail(IntPtr session, IntPtr hwnd, MapiMessage message, int flags, int reserved);
+        private static extern MapiSendMailReturnCode MAPISendMail(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);
 
         private readonly Logger logger;
         private readonly IErrorOutput errorOutput;
@@ -92,14 +92,14 @@ namespace NAPS2.Email.Mapi
             }
 
             // Send the message
-            var returnCode = (MapiSendMailReturnCodes)MAPISendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, (int)flags, 0);
+            var returnCode = MAPISendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
 
             // Process the result
-            if (returnCode == MapiSendMailReturnCodes.UserAbort)
+            if (returnCode == MapiSendMailReturnCode.UserAbort)
             {
                 return false;
             }
-            if (returnCode != MapiSendMailReturnCodes.Success)
+            if (returnCode != MapiSendMailReturnCode.Success)
             {
                 logger.Error("Error sending email. MAPI error code: {0}", returnCode);
                 errorOutput.DisplayError(MiscResources.EmailError);
