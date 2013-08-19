@@ -113,8 +113,10 @@
     <Compile Include="Email\EmailMessage.cs" />
     <Compile Include="Email\EmailRecipient.cs" />
     <Compile Include="Email\EmailRecipientType.cs" />
+    <Compile Include="Email\Mapi\MapiSendMailReturnCodes.cs" />
     <Compile Include="Email\Mapi\MapiRecipClass.cs" />
     <Compile Include="Email\Mapi\MapiRecipDesc.cs" />
+    <Compile Include="Email\Mapi\MapiSendMailFlags.cs" />
     <Compile Include="IErrorOutput.cs" />
     <Compile Include="ImageSaver.cs" />
     <Compile Include="ImageFileNamer.cs" />

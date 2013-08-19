@@ -32,31 +32,6 @@ namespace NAPS2.Email.Mapi
     {
         // MAPISendMail is documented at:
         // http://msdn.microsoft.com/en-us/library/windows/desktop/dd296721%28v=vs.85%29.aspx
-        // Flags and return codes are documented at:
-        // http://msdn.microsoft.com/en-us/library/windows/desktop/hh707275%28v=vs.85%29.aspx
-
-        #region MAPISendMail flags
-
-        private const int NONE = 0;
-
-        /// <summary>
-        /// Prompt the user for credentials if necessary.
-        /// </summary>
-        private const int MAPI_LOGON_UI = 1;
-
-        /// <summary>
-        /// Prompt the user to customize the message before sending.
-        /// </summary>
-        private const int MAPI_DIALOG = 8;
-
-        #endregion
-
-        #region MAPISendMail return codes
-
-        private const int SUCCESS = 0;
-        private const int MAPI_E_USER_ABORT = 1;
-
-        #endregion
 
         [DllImport("MAPI32.DLL")]
         private static extern int MAPISendMail(IntPtr session, IntPtr hwnd, MapiMessage message, int flags, int reserved);
@@ -106,25 +81,25 @@ namespace NAPS2.Email.Mapi
             };
 
             // Determine the flags used to send the message
-            int flags = NONE;
+            var flags = MapiSendMailFlags.None;
             if (!message.AutoSend)
             {
-                flags |= MAPI_DIALOG;
+                flags |= MapiSendMailFlags.Dialog;
             }
             if (!message.AutoSend || !message.SilentSend)
             {
-                flags |= MAPI_LOGON_UI;
+                flags |= MapiSendMailFlags.LogonUI;
             }
 
             // Send the message
-            int returnCode = MAPISendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
+            var returnCode = (MapiSendMailReturnCodes)MAPISendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, (int)flags, 0);
 
             // Process the result
-            if (returnCode == MAPI_E_USER_ABORT)
+            if (returnCode == MapiSendMailReturnCodes.UserAbort)
             {
                 return false;
             }
-            if (returnCode != SUCCESS)
+            if (returnCode != MapiSendMailReturnCodes.Success)
             {
                 logger.Error("Error sending email. MAPI error code: {0}", returnCode);
                 errorOutput.DisplayError(MiscResources.EmailError);
