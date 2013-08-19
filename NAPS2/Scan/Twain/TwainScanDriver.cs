@@ -23,12 +23,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
+using NLog;
 
 namespace NAPS2.Scan.Twain
 {
     public class TwainScanDriver : IScanDriver
     {
         public const string DRIVER_NAME = "twain";
+
+        private readonly Logger logger;
+
+        public TwainScanDriver(Logger logger)
+        {
+            this.logger = logger;
+        }
 
         public string DriverName
         {
@@ -83,7 +91,7 @@ namespace NAPS2.Scan.Twain
             }
             try
             {
-                var api = new TwainApi(ScanSettings, ScanDevice, DialogParent);
+                var api = new TwainApi(ScanSettings, ScanDevice, DialogParent, logger);
                 return api.Scan();
             }
             catch (ScanDriverException)
