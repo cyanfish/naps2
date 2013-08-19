@@ -41,11 +41,12 @@ namespace NAPS2.WinForms
         private bool msgfilter;
         private Twain tw;
 
-        public FTwainGui(ExtendedScanSettings settings)
+        public FTwainGui(ExtendedScanSettings settings, Logger logger)
         {
             InitializeComponent();
             bitmaps = new List<IScannedImage>();
             this.settings = settings;
+            this.logger = logger;
         }
 
         public List<IScannedImage> Bitmaps
