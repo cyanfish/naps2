@@ -82,11 +82,14 @@ namespace NAPS2.Console
 
         [Option("autosend", HelpText = "Actually send the email immediately after scanning completes without prompting the user for changes." +
                                        " However, this may prompt the user to login. To avoid that, use --silentsend." +
+                                       " Note that Outlook may still require user interaction to send an email, regardless of --autosend or --silentsend options." +
                                        " Requires -e/--email.")]
         public bool EmailAutoSend { get; set; }
 
         [Option("silentsend", HelpText = "Doesn't prompt the user to login when --autosend is specified." +
-                                         " This may result in failure if authentication is required.")]
+                                         " This may result in failure if authentication is required." +
+                                         " Note that Outlook may still require user interaction to send an email, regardless of --autosend or --silentsend options." +
+                                         " Requires --autosend.")]
         public bool EmailSilentSend { get; set; }
     }
 }
