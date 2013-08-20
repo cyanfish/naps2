@@ -49,9 +49,13 @@ namespace NAPS2.WinForms
             UpdateProfiles();
 
             new LayoutManager(this)
-                .Bind(lvProfiles).WidthToForm().HeightToForm()
-                .Bind(btnDone, btnProfiles).BottomToForm()
-                .Bind(btnDone, btnScan).RightToForm()
+                .Bind(lvProfiles)
+                    .WidthToForm()
+                    .HeightToForm()
+                .Bind(btnDone, btnProfiles)
+                    .BottomToForm()
+                .Bind(btnDone, btnScan)
+                    .RightToForm()
                 .Activate();
         }
 
