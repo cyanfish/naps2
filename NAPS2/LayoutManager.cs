@@ -36,6 +36,9 @@ namespace NAPS2
     /// </summary>
     public class LayoutManager
     {
+        /// <summary>
+        /// A list of controls and their bindings at the time of activation, in a topological order
+        /// </summary>
         private readonly List<KeyValuePair<Control, HashSet<Binding>>> activatedControlBindings = new List<KeyValuePair<Control, HashSet<Binding>>>();
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace NAPS2
         }
 
         /// <summary>
-        /// Activates the LayoutManager. This performs dependency analysis and starts listening for the form's Resize event.
+        /// Activates the LayoutManager. This performs dependency analysis and starts listening for the form's Resize event (upon which the layout will be updated).
         /// The relative positions of bound controls is determined by the offset at activation.
         /// For example, if a control's right side is bound to the form's right side and its right side is 12 pixels to the
         /// left of the form's right side, that 12 pixel difference will be maintained by the LayoutManager.
@@ -84,7 +87,7 @@ namespace NAPS2
         {
             if (!Activated)
             {
-                Form.Resize += FormResize;
+                Form.Resize += OnFormResize;
                 Activated = true;
 
                 // Prepare a dependency graph for the controls 
@@ -161,13 +164,25 @@ namespace NAPS2
         {
             if (Activated)
             {
-                Form.Resize -= FormResize;
+                Form.Resize -= OnFormResize;
                 Activated = false;
             }
         }
 
-        private void FormResize(object sender, EventArgs eventArgs)
+        private void OnFormResize(object sender, EventArgs args)
         {
+            UpdateLayout();
+        }
+
+        /// <summary>
+        /// Immediately updates the layout of bound controls. This is automatically triggered by the form's Resize event if the LayoutManager is activated.
+        /// </summary>
+        public void UpdateLayout()
+        {
+            if (!Activated)
+            {
+                throw new InvalidOperationException("The LayoutManaged can't update the layout without being activated first.");
+            }
             foreach (var pair in activatedControlBindings)
             {
                 var control = pair.Key;
