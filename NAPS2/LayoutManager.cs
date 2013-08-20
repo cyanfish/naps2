@@ -345,6 +345,36 @@ namespace NAPS2
                 }
                 return this;
             }
+
+            public BindingSyntax WidthToForm()
+            {
+                return WidthTo(() => layoutManager.Form.Width);
+            }
+
+            public BindingSyntax HeightToForm()
+            {
+                return HeightTo(() => layoutManager.Form.Height);
+            }
+
+            public BindingSyntax LeftToForm()
+            {
+                return LeftTo(() => layoutManager.Form.Left);
+            }
+
+            public BindingSyntax RightToForm()
+            {
+                return RightTo(() => layoutManager.Form.Right);
+            }
+
+            public BindingSyntax TopToForm()
+            {
+                return TopTo(() => layoutManager.Form.Top);
+            }
+
+            public BindingSyntax BottomToForm()
+            {
+                return BottomTo(() => layoutManager.Form.Bottom);
+            }
         }
     }
 }
