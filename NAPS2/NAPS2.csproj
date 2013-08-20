@@ -117,6 +117,7 @@
     <Compile Include="Email\Mapi\MapiRecipClass.cs" />
     <Compile Include="Email\Mapi\MapiRecipDesc.cs" />
     <Compile Include="Email\Mapi\MapiSendMailFlags.cs" />
+    <Compile Include="IconButtonSizer.cs" />
     <Compile Include="IErrorOutput.cs" />
     <Compile Include="ImageSaver.cs" />
     <Compile Include="ImageFileNamer.cs" />

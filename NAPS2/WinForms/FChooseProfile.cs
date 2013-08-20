@@ -34,13 +34,25 @@ namespace NAPS2.WinForms
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IScanReceiver scanReceiver;
+        private readonly IconButtonSizer iconButtonSizer;
 
-        public FChooseProfile(IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver)
+        public FChooseProfile(IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver, IconButtonSizer iconButtonSizer)
         {
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.scanReceiver = scanReceiver;
+            this.iconButtonSizer = iconButtonSizer;
             InitializeComponent();
+        }
+
+        private void FChooseProfile_Load(object sender, EventArgs e)
+        {
+            lvProfiles.LargeImageList = ilProfileIcons.IconsList;
+            UpdateProfiles();
+
+            iconButtonSizer.WidthOffset = 35;
+            iconButtonSizer.PaddingRight = 4;
+            iconButtonSizer.ResizeButtons(btnProfiles);
         }
 
         private ExtendedScanSettings SelectedProfile
@@ -53,12 +65,6 @@ namespace NAPS2.WinForms
                 }
                 return null;
             }
-        }
-
-        private void FChooseProfile_Load(object sender, EventArgs e)
-        {
-            lvProfiles.LargeImageList = ilProfileIcons.IconsList;
-            UpdateProfiles();
         }
 
         private void UpdateProfiles()
