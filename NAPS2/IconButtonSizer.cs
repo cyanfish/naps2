@@ -20,9 +20,18 @@ namespace NAPS2
             var buttonWidth = maxTextWidth + WidthOffset; // Fixed offset based on icon width and ideal padding
             foreach (var btn in buttons)
             {
-                btn.Width = buttonWidth;
+                if (MaxWidth != 0 && buttonWidth > MaxWidth)
+                {
+                    // Set the button to be at least its necessary size (for sure), and at most the specified MaxWidth (preferably)
+                    btn.Width = Math.Max(MaxWidth, ButtonTextWidth(btn) + WidthOffset);
+                }
+                else
+                {
+                    // Set the button to be the same width as the largest button
+                    btn.Width = buttonWidth;
+                }
                 // Update the padding so that the text center is in the same place on each button
-                int rightPadding = PaddingRight + (maxTextWidth - ButtonTextWidth(btn)) / 2;
+                int rightPadding = PaddingRight + (btn.Width - WidthOffset - ButtonTextWidth(btn)) / 2;
                 btn.Padding = new Padding(btn.Padding.Left, btn.Padding.Top, rightPadding, btn.Padding.Bottom);
             }
         }
@@ -30,5 +39,7 @@ namespace NAPS2
         public int WidthOffset { get; set; }
 
         public int PaddingRight { get; set; }
+
+        public int MaxWidth { get; set; }
     }
 }

@@ -66,6 +66,7 @@ namespace NAPS2.WinForms
 
             iconButtonSizer.WidthOffset = 35;
             iconButtonSizer.PaddingRight = 4;
+            iconButtonSizer.MaxWidth = 100;
             iconButtonSizer.ResizeButtons(btnAdd, btnEdit, btnDelete);
 
             lm.UpdateLayout();
