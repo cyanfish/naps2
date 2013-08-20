@@ -12,9 +12,9 @@ namespace NAPS2
             ElementSize = Marshal.SizeOf(typeof(T));
             if (array != null)
             {
-                T[] arrayVal = array as T[] ?? array.ToArray();
+                var arrayVal = array as IList<T> ?? array.ToList();
 
-                Length = arrayVal.Length;
+                Length = arrayVal.Count;
                 Size = ElementSize * Length;
                 Pointer = Marshal.AllocHGlobal(Size);
 

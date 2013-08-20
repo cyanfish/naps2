@@ -56,7 +56,6 @@ namespace NAPS2.WinForms
             this.ShowInTaskbar = false;
             this.Activated += new System.EventHandler(this.FTwainGui_Activated);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
