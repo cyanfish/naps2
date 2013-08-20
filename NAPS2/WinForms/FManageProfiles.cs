@@ -62,8 +62,6 @@ namespace NAPS2.WinForms
                     .LeftTo(() => btnAdd.Right)
                 .Bind(btnDelete)
                     .LeftTo(() => btnEdit.Right)
-                .Bind(this)
-                    .WidthTo(() => Math.Max(this.Width, btnDelete.Right + 100))
                 .Activate();
 
             iconButtonSizer.WidthOffset = 35;
