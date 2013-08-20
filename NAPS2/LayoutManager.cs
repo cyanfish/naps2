@@ -292,7 +292,7 @@ namespace NAPS2
                 return layoutManager;
             }
 
-            public BindingSyntax Width(Expression<Func<int>> widthFunc)
+            public BindingSyntax WidthTo(Expression<Func<int>> widthFunc)
             {
                 foreach (var control in controls)
                 {
@@ -301,7 +301,7 @@ namespace NAPS2
                 return this;
             }
 
-            public BindingSyntax Height(Expression<Func<int>> widthFunc)
+            public BindingSyntax HeightTo(Expression<Func<int>> widthFunc)
             {
                 foreach (var control in controls)
                 {
@@ -310,7 +310,7 @@ namespace NAPS2
                 return this;
             }
 
-            public BindingSyntax Left(Expression<Func<int>> widthFunc)
+            public BindingSyntax LeftTo(Expression<Func<int>> widthFunc)
             {
                 foreach (var control in controls)
                 {
@@ -319,7 +319,7 @@ namespace NAPS2
                 return this;
             }
 
-            public BindingSyntax Right(Expression<Func<int>> widthFunc)
+            public BindingSyntax RightTo(Expression<Func<int>> widthFunc)
             {
                 foreach (var control in controls)
                 {
@@ -328,7 +328,7 @@ namespace NAPS2
                 return this;
             }
 
-            public BindingSyntax Top(Expression<Func<int>> widthFunc)
+            public BindingSyntax TopTo(Expression<Func<int>> widthFunc)
             {
                 foreach (var control in controls)
                 {
@@ -337,7 +337,7 @@ namespace NAPS2
                 return this;
             }
 
-            public BindingSyntax Bottom(Expression<Func<int>> widthFunc)
+            public BindingSyntax BottomTo(Expression<Func<int>> widthFunc)
             {
                 foreach (var control in controls)
                 {
