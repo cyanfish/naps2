@@ -176,14 +176,13 @@ namespace NAPS2
 
             public List<Control> Dependencies { get; private set; }
 
-            protected override Expression VisitConstant(ConstantExpression node)
+            protected override Expression VisitMember(MemberExpression node)
             {
-                var control = node.Value as Control;
-                if (control != null)
+                if (typeof(Control).IsAssignableFrom(node.Expression.Type))
                 {
-                    Dependencies.Add(control);
+                    Dependencies.Add(((Expression<Func<Control>>)Expression.Lambda(Expression.Convert(node.Expression, typeof(Control)))).Compile()());
                 }
-                return base.VisitConstant(node);
+                return base.VisitMember(node);
             }
         }
 
