@@ -152,9 +152,12 @@
     <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
     <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
+    <Compile Include="Unmanaged.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />
     <Compile Include="StringWrapper.cs" />
+    <Compile Include="UnmanagedArray.cs" />
+    <Compile Include="UnmanagedBase.cs" />
     <Compile Include="WinForms\FTwainGui.cs">
       <SubType>Form</SubType>
     </Compile>

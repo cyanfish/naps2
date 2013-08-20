@@ -49,87 +49,73 @@ namespace NAPS2.Email.Mapi
         /// Sends an email described by the given message object.
         /// </summary>
         /// <param name="message">The object describing the email message.</param>
-        /// <exception cref="EmailException">Throws an EmailException if an error occurred.</exception>
         /// <returns>Returns true if the message was sent, false if the user aborted.</returns>
         public bool SendEmail(EmailMessage message)
         {
             // Translate files & recipients to unmanaged MAPI structures
-            var files = message.Attachments.Select(attachment => new MapiFileDesc
+            using (var files = Unmanaged.CopyOf(GetFiles(message)))
+            using (var recips = Unmanaged.CopyOf(GetRecips(message)))
+            {
+                // Create a MAPI structure for the entirety of the message
+                var mapiMessage = new MapiMessage
+                {
+                    subject = message.Subject,
+                    noteText = message.BodyText,
+                    recips = recips,
+                    recipCount = recips.Length,
+                    files = files,
+                    fileCount = files.Length
+                };
+
+                // Determine the flags used to send the message
+                var flags = MapiSendMailFlags.None;
+                if (!message.AutoSend)
+                {
+                    flags |= MapiSendMailFlags.Dialog;
+                }
+                if (!message.AutoSend || !message.SilentSend)
+                {
+                    flags |= MapiSendMailFlags.LogonUI;
+                }
+
+                // Send the message
+                var returnCode = MAPISendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
+
+                // Process the result
+                if (returnCode == MapiSendMailReturnCode.UserAbort)
+                {
+                    return false;
+                }
+                if (returnCode != MapiSendMailReturnCode.Success)
+                {
+                    logger.Error("Error sending email. MAPI error code: {0}", returnCode);
+                    errorOutput.DisplayError(MiscResources.EmailError);
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        private static MapiRecipDesc[] GetRecips(EmailMessage message)
+        {
+            return message.Recipients.Select(recipient => new MapiRecipDesc
+            {
+                name = recipient.Name,
+                address = "SMTP:" + recipient.Address,
+                recipClass = recipient.Type == EmailRecipientType.Cc ? MapiRecipClass.Cc
+                    : recipient.Type == EmailRecipientType.Bcc ? MapiRecipClass.Bcc
+                        : MapiRecipClass.To
+            }).ToArray();
+        }
+
+        private static MapiFileDesc[] GetFiles(EmailMessage message)
+        {
+            return message.Attachments.Select(attachment => new MapiFileDesc
             {
                 position = -1,
                 path = attachment.FilePath,
                 name = attachment.AttachmentName
             }).ToArray();
-            var recips = message.Recipients.Select(recipient => new MapiRecipDesc
-            {
-                name = recipient.Name,
-                address = "SMTP:" + recipient.Address,
-                recipClass = recipient.Type == EmailRecipientType.Cc ? MapiRecipClass.Cc
-                           : recipient.Type == EmailRecipientType.Bcc ? MapiRecipClass.Bcc
-                           : MapiRecipClass.To
-            }).ToArray();
-
-            // Create a MAPI structure for the entirety of the message
-            var mapiMessage = new MapiMessage
-            {
-                subject = message.Subject,
-                noteText = message.BodyText,
-                recips = ToUnmanagedArray(recips),
-                recipCount = recips.Length,
-                files = ToUnmanagedArray(files),
-                fileCount = files.Length
-            };
-
-            // Determine the flags used to send the message
-            var flags = MapiSendMailFlags.None;
-            if (!message.AutoSend)
-            {
-                flags |= MapiSendMailFlags.Dialog;
-            }
-            if (!message.AutoSend || !message.SilentSend)
-            {
-                flags |= MapiSendMailFlags.LogonUI;
-            }
-
-            // Send the message
-            var returnCode = MAPISendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
-
-            // Process the result
-            if (returnCode == MapiSendMailReturnCode.UserAbort)
-            {
-                return false;
-            }
-            if (returnCode != MapiSendMailReturnCode.Success)
-            {
-                logger.Error("Error sending email. MAPI error code: {0}", returnCode);
-                errorOutput.DisplayError(MiscResources.EmailError);
-                return false;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Allocates an unmanaged array and populates it with the content of the given managed array.
-        /// </summary>
-        /// <typeparam name="T">The type of the array's elements.</typeparam>
-        /// <param name="managedArray">The array from which to copy the content.</param>
-        /// <returns>A pointer to the start of the unmanaaged array.</returns>
-        private IntPtr ToUnmanagedArray<T>(IList<T> managedArray)
-        {
-            int elementSize = Marshal.SizeOf(typeof(T));
-
-            // Allocate the unmanaged array
-            int arraySize = managedArray.Count * elementSize;
-            IntPtr unmanagedArray = Marshal.AllocHGlobal(arraySize);
-
-            // Populate it from the content of the managed array
-            for (int i = 0; i < managedArray.Count; ++i)
-            {
-                int ptrOffset = i * elementSize;
-                Marshal.StructureToPtr(managedArray[i], unmanagedArray + ptrOffset, false);
-            }
-
-            return unmanagedArray;
         }
     }
 }
