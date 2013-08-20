@@ -43,6 +43,18 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
+        private void FChooseProfile_Load(object sender, EventArgs e)
+        {
+            lvProfiles.LargeImageList = ilProfileIcons.IconsList;
+            UpdateProfiles();
+
+            new LayoutManager(this)
+                .Bind(lvProfiles).Width(() => Width).Height(() => Height)
+                .Bind(btnDone, btnProfiles).Bottom(() => Bottom)
+                .Bind(btnDone, btnScan).Right(() => Right)
+                .Activate();
+        }
+
         private ExtendedScanSettings SelectedProfile
         {
             get
@@ -53,12 +65,6 @@ namespace NAPS2.WinForms
                 }
                 return null;
             }
-        }
-
-        private void FChooseProfile_Load(object sender, EventArgs e)
-        {
-            lvProfiles.LargeImageList = ilProfileIcons.IconsList;
-            UpdateProfiles();
         }
 
         private void UpdateProfiles()
