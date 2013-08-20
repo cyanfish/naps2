@@ -10,8 +10,7 @@ namespace NAPS2
 {
     public class LayoutManager
     {
-        //private List<Binding> activatedBindings = new List<Binding>();
-        private List<KeyValuePair<Control, HashSet<Binding>>> activatedControlBindings = new List<KeyValuePair<Control, HashSet<Binding>>>();
+        private readonly List<KeyValuePair<Control, HashSet<Binding>>> activatedControlBindings = new List<KeyValuePair<Control, HashSet<Binding>>>();
 
         public LayoutManager(Form form)
         {
