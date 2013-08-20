@@ -50,9 +50,27 @@ namespace NAPS2.WinForms
             btnDelete.Enabled = false;
             LoadProfileList();
 
+            var lm = new LayoutManager(this)
+                .Bind(lvProfiles)
+                    .WidthToForm()
+                    .HeightToForm()
+                .Bind(btnAdd, btnEdit, btnDelete, btnOK)
+                    .BottomToForm()
+                .Bind(btnOK)
+                    .RightToForm()
+                .Bind(btnEdit)
+                    .LeftTo(() => btnAdd.Right)
+                .Bind(btnDelete)
+                    .LeftTo(() => btnEdit.Right)
+                .Bind(this)
+                    .WidthTo(() => Math.Max(this.Width, btnDelete.Right + 100))
+                .Activate();
+
             iconButtonSizer.WidthOffset = 35;
             iconButtonSizer.PaddingRight = 4;
             iconButtonSizer.ResizeButtons(btnAdd, btnEdit, btnDelete);
+
+            lm.UpdateLayout();
         }
 
         private void btnOK_Click(object sender, EventArgs e)

@@ -306,6 +306,9 @@
         AACAAQAAgAMAAA==
 </value>
   </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>550, 181</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Profiles</value>
   </data>
@@ -313,7 +316,7 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.ILProfileIcons, NAPS2, Version=2.4.4980.25558, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.ILProfileIcons, NAPS2, Version=2.4.4980.27263, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FManageProfiles</value>
