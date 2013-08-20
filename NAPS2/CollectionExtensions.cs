@@ -48,5 +48,42 @@ namespace NAPS2
         {
             return indices.Select(i => list[i]);
         }
+
+        /// <summary>
+        /// Adds a key-value pair to the multi-dictionary.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public static void AddMulti<TKey, TValue>(this Dictionary<TKey, HashSet<TValue>> dict, TKey key, TValue value)
+        {
+            if (!dict.ContainsKey(key))
+            {
+                dict[key] = new HashSet<TValue>();
+            }
+            dict[key].Add(value);
+        }
+
+        /// <summary>
+        /// Adds an enumeration of key-value pairs to the multi-dictionary.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <param name="key"></param>
+        /// <param name="values"></param>
+        public static void AddMulti<TKey, TValue>(this Dictionary<TKey, HashSet<TValue>> dict, TKey key, IEnumerable<TValue> values)
+        {
+            if (!dict.ContainsKey(key))
+            {
+                dict[key] = new HashSet<TValue>();
+            }
+            foreach (var value in values)
+            {
+                dict[key].Add(value);
+            }
+        }
     }
 }

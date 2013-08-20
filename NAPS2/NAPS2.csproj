@@ -127,6 +127,7 @@
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
     <Compile Include="Config\IProfileManager.cs" />
+    <Compile Include="LayoutManager.cs" />
     <Compile Include="Scan\IScanPerformer.cs" />
     <Compile Include="Scan\IScanReceiver.cs" />
     <Compile Include="Lang\LanguageResources.Designer.cs">
