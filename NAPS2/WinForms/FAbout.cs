@@ -41,6 +41,8 @@ namespace NAPS2.WinForms
             // Some of the localization tools I use don't handle line breaks consistently.
             // This compensates by replacing "\n" with actual line breaks. --Ben
             labelCopyright.Text = labelCopyright.Text.Replace("\\n", "\n");
+            // Grow the form to fit the copyright text if necessary
+            Width = Math.Max(Width, labelCopyright.Right + 25);
         }
 
         #region Assembly Attribute Accessors
