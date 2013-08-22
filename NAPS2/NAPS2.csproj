@@ -546,6 +546,10 @@
       <SubType>UserControl</SubType>
     </Compile>
     <None Include="Setup\license.rtf" />
+    <None Include="Setup\naps2.ps1" />
+    <None Include="Setup\ps.bat" />
+    <None Include="Setup\Publish-NAPS2.ps1" />
+    <None Include="Setup\Update-Language.ps1" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WIA">
@@ -580,8 +584,6 @@
     <Content Include="Resources\scanner.png" />
     <None Include="Resources\tick.png" />
     <None Include="Resources\tick-small.png" />
-    <None Include="Setup\build-standalone.bat" />
-    <None Include="Setup\copy-msi.bat" />
     <None Include="Setup\lib\Interop.WIA.dll" />
     <None Include="Setup\lib\PdfSharp.dll" />
     <None Include="Resources\information.png" />
