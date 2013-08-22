@@ -150,6 +150,9 @@
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
     </metadata>
+    <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>ru</value>
+    </metadata>
     <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
         <value>6, 13</value>
     </data>
@@ -186,7 +189,7 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.ILProfileIcons, NAPS2, Version=2.0.4936.35473, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.ILProfileIcons, NAPS2, Version=2.1.4952.26857, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FChooseIcon</value>

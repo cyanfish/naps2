@@ -117,44 +117,44 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="&gt;&gt;tiffViewer1.Name" xml:space="preserve">
+        <value>tiffViewer1</value>
+    </data>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     <data name="tiffViewer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
         <value>Fill</value>
     </data>
-    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="tiffViewer1.Location" type="System.Drawing.Point, System.Drawing">
-        <value>0, 0</value>
+    <data name="&gt;&gt;$this.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="tiffViewer1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>656, 654</value>
+    <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
+        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2, Version=2.1.4952.26857, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     <data name="tiffViewer1.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
     </data>
-    <data name="&gt;&gt;tiffViewer1.Name" xml:space="preserve">
-        <value>tiffViewer1</value>
-    </data>
-    <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2, Version=2.0.4943.31330, Culture=neutral, PublicKeyToken=null</value>
-    </data>
-    <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
-        <value>$this</value>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+        <value>656, 654</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-        <value>True</value>
-    </metadata>
-    <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-        <value>uk</value>
-    </metadata>
-    <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
-        <value>5, 13</value>
+    <data name="tiffViewer1.Location" type="System.Drawing.Point, System.Drawing">
+        <value>0, 0</value>
     </data>
-    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <data name="&gt;&gt;$this.Name" xml:space="preserve">
+        <value>FViewer</value>
+    </data>
+    <data name="$this.Text" xml:space="preserve">
+        <value>Previsualiza</value>
+    </data>
+    <data name="tiffViewer1.Size" type="System.Drawing.Size, System.Drawing">
         <value>656, 654</value>
+    </data>
+    <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
+        <value>$this</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
@@ -179,13 +179,13 @@
         AACAAQAAgAMAAA==
 </value>
     </data>
-    <data name="$this.Text" xml:space="preserve">
-        <value>Previsualiza</value>
+    <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
+        <value>5, 13</value>
     </data>
-    <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FViewer</value>
-    </data>
-    <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
+    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>True</value>
+    </metadata>
+    <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>ru</value>
+    </metadata>
 </root>
