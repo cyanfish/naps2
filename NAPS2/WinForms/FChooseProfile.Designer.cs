@@ -43,8 +43,8 @@ namespace NAPS2.WinForms
             // 
             // lvProfiles
             // 
-            resources.ApplyResources(this.lvProfiles, "lvProfiles");
             this.lvProfiles.HideSelection = false;
+            resources.ApplyResources(this.lvProfiles, "lvProfiles");
             this.lvProfiles.MultiSelect = false;
             this.lvProfiles.Name = "lvProfiles";
             this.lvProfiles.UseCompatibleStateImageBehavior = false;
@@ -52,8 +52,8 @@ namespace NAPS2.WinForms
             // 
             // btnScan
             // 
-            resources.ApplyResources(this.btnScan, "btnScan");
             this.btnScan.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.btnScan, "btnScan");
             this.btnScan.Image = global::NAPS2.Icons.scanner_72;
             this.btnScan.Name = "btnScan";
             this.btnScan.UseVisualStyleBackColor = false;
@@ -82,7 +82,6 @@ namespace NAPS2.WinForms
             this.Controls.Add(this.btnProfiles);
             this.Controls.Add(this.btnScan);
             this.Controls.Add(this.lvProfiles);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FChooseProfile";

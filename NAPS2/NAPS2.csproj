@@ -117,6 +117,7 @@
     <Compile Include="Email\Mapi\MapiRecipClass.cs" />
     <Compile Include="Email\Mapi\MapiRecipDesc.cs" />
     <Compile Include="Email\Mapi\MapiSendMailFlags.cs" />
+    <Compile Include="IconButtonSizer.cs" />
     <Compile Include="IErrorOutput.cs" />
     <Compile Include="ImageSaver.cs" />
     <Compile Include="ImageFileNamer.cs" />
@@ -127,6 +128,7 @@
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
     <Compile Include="Config\IProfileManager.cs" />
+    <Compile Include="LayoutManager.cs" />
     <Compile Include="Scan\IScanPerformer.cs" />
     <Compile Include="Scan\IScanReceiver.cs" />
     <Compile Include="Lang\LanguageResources.Designer.cs">

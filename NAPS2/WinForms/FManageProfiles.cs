@@ -33,12 +33,43 @@ namespace NAPS2.WinForms
     {
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;
+        private readonly IconButtonSizer iconButtonSizer;
 
-        public FManageProfiles(IProfileManager profileManager, AppConfigManager appConfigManager)
+        public FManageProfiles(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;
+            this.iconButtonSizer = iconButtonSizer;
             InitializeComponent();
+        }
+
+        private void FManageProfiles_Load(object sender, EventArgs e)
+        {
+            lvProfiles.LargeImageList = ilProfileIcons.IconsList;
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
+            LoadProfileList();
+
+            var lm = new LayoutManager(this)
+                .Bind(lvProfiles)
+                    .WidthToForm()
+                    .HeightToForm()
+                .Bind(btnAdd, btnEdit, btnDelete, btnOK)
+                    .BottomToForm()
+                .Bind(btnOK)
+                    .RightToForm()
+                .Bind(btnEdit)
+                    .LeftTo(() => btnAdd.Right)
+                .Bind(btnDelete)
+                    .LeftTo(() => btnEdit.Right)
+                .Activate();
+
+            iconButtonSizer.WidthOffset = 35;
+            iconButtonSizer.PaddingRight = 4;
+            iconButtonSizer.MaxWidth = 100;
+            iconButtonSizer.ResizeButtons(btnAdd, btnEdit, btnDelete);
+
+            lm.UpdateLayout();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -46,7 +77,7 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void loadList()
+        private void LoadProfileList()
         {
             lvProfiles.Items.Clear();
             foreach (var profile in profileManager.Profiles)
@@ -64,7 +95,7 @@ namespace NAPS2.WinForms
             if (fedit.Result)
             {
                 profileManager.Profiles.Add(fedit.ScanSettings);
-                loadList();
+                LoadProfileList();
                 profileManager.Save();
             }
         }
@@ -81,7 +112,7 @@ namespace NAPS2.WinForms
                 {
                     profileManager.Profiles[profileIndex] = fedit.ScanSettings;
                     profileManager.Save();
-                    loadList();
+                    LoadProfileList();
                     lvProfiles.SelectedIndices.Add(profileIndex);
                 }
                 else
@@ -98,14 +129,6 @@ namespace NAPS2.WinForms
             btnDelete.Enabled = lvProfiles.SelectedItems.Count > 0;
         }
 
-        private void FManageProfiles_Load(object sender, EventArgs e)
-        {
-            lvProfiles.LargeImageList = ilProfileIcons.IconsList;
-            btnEdit.Enabled = false;
-            btnDelete.Enabled = false;
-            loadList();
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (lvProfiles.SelectedItems.Count > 0)
@@ -117,7 +140,7 @@ namespace NAPS2.WinForms
                 {
                     profileManager.Profiles.RemoveAll(lvProfiles.SelectedIndices.OfType<int>());
                     profileManager.Save();
-                    loadList();
+                    LoadProfileList();
                     lvProfiles_SelectedIndexChanged(null, null);
                 }
             }

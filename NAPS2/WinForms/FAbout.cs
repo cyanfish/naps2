@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -36,24 +37,34 @@ namespace NAPS2.WinForms
             InitializeComponent();
             labelProductName.Text = AssemblyProduct;
             labelVersion.Text = String.Format(MiscResources.Version, AssemblyVersion);
+
+            // Some of the localization tools I use don't handle line breaks consistently.
+            // This compensates by replacing "\n" with actual line breaks. --Ben
+            labelCopyright.Text = labelCopyright.Text.Replace("\\n", "\n");
         }
 
         #region Assembly Attribute Accessors
+
+        private static string GetAssemblyAttributeValue<T>(Func<T, string> selector)
+        {
+            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(T), false);
+            if (attributes.Length == 0)
+            {
+                return "";
+            }
+            return selector((T)attributes[0]);
+        }
 
         public string AssemblyTitle
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-                if (attributes.Length > 0)
+                string title = GetAssemblyAttributeValue<AssemblyTitleAttribute>(x => x.Title);
+                if (string.IsNullOrEmpty(title))
                 {
-                    var titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
-                    {
-                        return titleAttribute.Title;
-                    }
+                    title = Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
                 }
-                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return title;
             }
         }
 
@@ -69,12 +80,7 @@ namespace NAPS2.WinForms
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
+                return GetAssemblyAttributeValue<AssemblyDescriptionAttribute>(x => x.Description);
             }
         }
 
@@ -82,12 +88,7 @@ namespace NAPS2.WinForms
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyProductAttribute)attributes[0]).Product;
+                return GetAssemblyAttributeValue<AssemblyProductAttribute>(x => x.Product);
             }
         }
 
@@ -95,12 +96,7 @@ namespace NAPS2.WinForms
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+                return GetAssemblyAttributeValue<AssemblyCopyrightAttribute>(x => x.Copyright);
             }
         }
 
@@ -108,12 +104,7 @@ namespace NAPS2.WinForms
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
+                return GetAssemblyAttributeValue<AssemblyCompanyAttribute>(x => x.Company);
             }
         }
 

@@ -58,6 +58,54 @@ namespace NAPS2.WinForms
             AddEnumItems<ScanSource>(cmbSource);
         }
 
+        private void FEditScanSettings_Load(object sender, EventArgs e)
+        {
+            // Don't trigger any onChange events
+            suppressChangeEvent = true;
+
+            pctIcon.Image = ilProfileIcons.IconsList.Images[ScanSettings.IconID];
+            txtName.Text = ScanSettings.DisplayName;
+            CurrentDevice = ScanSettings.Device;
+            iconID = ScanSettings.IconID;
+
+            cmbSource.SelectedIndex = (int)ScanSettings.PaperSource;
+            cmbDepth.SelectedIndex = (int)ScanSettings.BitDepth;
+            cmbResolution.SelectedIndex = (int)ScanSettings.Resolution;
+            txtContrast.Text = ScanSettings.Contrast.ToString("G");
+            txtBrightness.Text = ScanSettings.Brightness.ToString("G");
+            cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
+            cmbScale.SelectedIndex = (int)ScanSettings.AfterScanScale;
+            cmbAlign.SelectedIndex = (int)ScanSettings.PageAlign;
+
+            cbHighQuality.Checked = ScanSettings.MaxQuality;
+
+            // The setter updates the driver selection checkboxes
+            DeviceDriverName = ScanSettings.DriverName;
+
+            rdbNativeWIA.Checked = ScanSettings.UseNativeUI;
+            rdbConfig.Checked = !ScanSettings.UseNativeUI;
+
+            // Start triggering onChange events again
+            suppressChangeEvent = false;
+
+            UpdateEnabledControls();
+
+            new LayoutManager(this)
+                .Bind(txtName, txtDevice, panel1, panel2)
+                    .WidthToForm()
+                .Bind(pctIcon, btnChooseDevice)
+                    .RightToForm()
+                .Bind(cmbAlign, cmbDepth, cmbPage, cmbResolution, cmbScale, cmbSource, trBrightness, trContrast)
+                    .WidthTo(() => Width / 2)
+                .Bind(rdTWAIN, rdbNativeWIA, label3, cmbDepth, label9, cmbAlign, label10, cmbScale, label7, trContrast, btnOK, btnCancel)
+                    .LeftTo(() => Width / 2)
+                .Bind(txtBrightness)
+                    .LeftTo(() => trBrightness.Right)
+                .Bind(txtContrast)
+                    .LeftTo(() => trContrast.Right)
+                .Activate();
+        }
+
         public bool Result
         {
             get { return result; }
@@ -212,39 +260,6 @@ namespace NAPS2.WinForms
                 txtContrast.Enabled = enabled;
                 suppressChangeEvent = false;
             }
-        }
-
-        private void FEditScanSettings_Load(object sender, EventArgs e)
-        {
-            // Don't trigger any onChange events
-            suppressChangeEvent = true;
-
-            pctIcon.Image = ilProfileIcons.IconsList.Images[ScanSettings.IconID];
-            txtName.Text = ScanSettings.DisplayName;
-            CurrentDevice = ScanSettings.Device;
-            iconID = ScanSettings.IconID;
-
-            cmbSource.SelectedIndex = (int)ScanSettings.PaperSource;
-            cmbDepth.SelectedIndex = (int)ScanSettings.BitDepth;
-            cmbResolution.SelectedIndex = (int)ScanSettings.Resolution;
-            txtContrast.Text = ScanSettings.Contrast.ToString("G");
-            txtBrightness.Text = ScanSettings.Brightness.ToString("G");
-            cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
-            cmbScale.SelectedIndex = (int)ScanSettings.AfterScanScale;
-            cmbAlign.SelectedIndex = (int)ScanSettings.PageAlign;
-
-            cbHighQuality.Checked = ScanSettings.MaxQuality;
-
-            // The setter updates the driver selection checkboxes
-            DeviceDriverName = ScanSettings.DriverName;
-
-            rdbNativeWIA.Checked = ScanSettings.UseNativeUI;
-            rdbConfig.Checked = !ScanSettings.UseNativeUI;
-
-            // Start triggering onChange events again
-            suppressChangeEvent = false;
-
-            UpdateEnabledControls();
         }
 
         private void pctIcon_DoubleClick(object sender, EventArgs e)
