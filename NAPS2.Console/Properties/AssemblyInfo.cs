@@ -1,4 +1,4 @@
-﻿/*
+/*
     NAPS2 (Not Another PDF Scanner 2)
     http://sourceforge.net/projects/naps2/
     
@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NAPS2 (Not Another PDF Scanner 2)")]
-[assembly: AssemblyCopyright("Copyright © 2009-2013 NAPS & NAPS2 Contributors")]
+[assembly: AssemblyCopyright("Copyright � 2009-2013 NAPS & NAPS2 Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -49,8 +49,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2.4.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

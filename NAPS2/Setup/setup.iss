@@ -38,7 +38,8 @@ Source: "..\bin\Release\Interop.WIA.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\Release\Ninject.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\Release\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion     
 Source: "..\Resources\scanner-app.ico"; DestDir: "{app}"; Flags: ignoreversion 
-Source: "..\appsettings.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\appsettings.xml"; DestDir: "{app}"; Flags: ignoreversion           
+Source: "license.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\NAPS2.Console\bin\Release\NAPS2.Console.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\NAPS2.Console\bin\Release\CommandLine.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\wiaaut.dll"; DestDir: "{sys}"; Flags: regserver
