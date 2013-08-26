@@ -33,16 +33,20 @@ namespace NAPS2.Scan
     {
         private const int THUMBNAIL_WIDTH = 128;
         private const int THUMBNAIL_HEIGHT = 128;
-        private readonly ScanBitDepth bitDepth;
 
+        // The image's bit depth (or C24Bit if unknown)
+        private readonly ScanBitDepth bitDepth;
+        // Only one of the following (baseImage/baseImageEncoded) should have a value for any particular ScannedImage
         private readonly Bitmap baseImage;
         private readonly MemoryStream baseImageEncoded;
+        // Store a base image and transform pair (rather than doing the actual transform on the base image)
+        // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private RotateFlipType transform = RotateFlipType.RotateNoneFlipNone;
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
             this.bitDepth = bitDepth;
-            Thumbnail = ResizeBitmap(img, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+            Thumbnail = GetThumbnail(img);
 
             // Store the image in as little space as possible
             if (bitDepth == ScanBitDepth.BlackWhite)
@@ -50,6 +54,8 @@ namespace NAPS2.Scan
                 // Store as a 1-bit bitmap
                 // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
                 baseImage = (Bitmap)ImageHelper.CopyToBpp(img, 1).Clone();
+                // Note that if a black and white image comes from native WIA, bitDepth is unknown,
+                // so the image will be png-encoded below instead of using a 1-bit bitmap
             }
             else if (highQuality)
             {
@@ -64,7 +70,7 @@ namespace NAPS2.Scan
                 var jpegEncoded = EncodeBitmap(img, ImageFormat.Jpeg);
                 if (pngEncoded.Length <= jpegEncoded.Length)
                 {
-                    // Probably a black and white image (e.g. from TWAIN or native WIA), which PNG compresses well vs. JPEG
+                    // Probably a black and white image (from native WIA, so bitDepth is unknown), which PNG compresses well vs. JPEG
                     baseImageEncoded = pngEncoded;
                     jpegEncoded.Dispose();
                 }
@@ -115,7 +121,7 @@ namespace NAPS2.Scan
         private static RotateFlipType CombineTransform(RotateFlipType currentTransform, RotateFlipType nextTransform)
         {
             // There should be no actual flips (just rotations of varying degrees), so this code is simplified
-            Debug.Assert((int)currentTransform < 4);
+            Debug.Assert((int)currentTransform < 4); // 0-3 are rotations of varying degrees (0, 90, 180, 270)
             Debug.Assert((int)nextTransform < 4);
             return FromRotation(GetRotation(currentTransform) + GetRotation(nextTransform));
         }
@@ -152,33 +158,49 @@ namespace NAPS2.Scan
             throw new ArgumentException();
         }
 
-        private static Bitmap ResizeBitmap(Bitmap b, int newWidth, int newHeight)
+        /// <summary>
+        /// Gets a bitmap resized to fit within a thumbnail rectangle, including a border around the picture.
+        /// </summary>
+        /// <param name="b">The bitmap to resize.</param>
+        /// <returns>The thumbnail bitmap.</returns>
+        private static Bitmap GetThumbnail(Bitmap b)
         {
-            var result = new Bitmap(newWidth, newHeight);
-            Graphics g = Graphics.FromImage(result);
-
-            int left, top, width, height;
-
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            if (b.Width > b.Height)
+            var result = new Bitmap(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+            using (Graphics g = Graphics.FromImage(result))
             {
-                width = newWidth;
-                height = (int)(b.Height * (newWidth / (double)b.Width));
-                left = 0;
-                top = (newHeight - height) / 2;
-            }
-            else
-            {
-                width = (int)(b.Width * (newHeight / (double)b.Height));
-                height = newHeight;
-                left = (newWidth - width) / 2;
-                top = 0;
-            }
-            g.DrawImage(b, left, top, width, height);
-            g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
+                // The location and dimensions of the old bitmap, scaled and positioned within the thumbnail bitmap
+                int left, top, width, height;
 
-            g.Dispose();
+                // We want a nice thumbnail, so use the maximum quality interpolation
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
+                if (b.Width > b.Height)
+                {
+                    // Fill the new bitmap's width
+                    width = THUMBNAIL_WIDTH;
+                    left = 0;
+                    // Scale the drawing height to match the original bitmap's aspect ratio
+                    height = (int)(b.Height * (THUMBNAIL_WIDTH / (double)b.Width));
+                    // Center the drawing vertically
+                    top = (THUMBNAIL_HEIGHT - height) / 2;
+                }
+                else
+                {
+                    // Fill the new bitmap's height
+                    height = THUMBNAIL_HEIGHT;
+                    top = 0;
+                    // Scale the drawing width to match the original bitmap's aspect ratio
+                    width = (int)(b.Width * (THUMBNAIL_HEIGHT / (double)b.Height));
+                    // Center the drawing horizontally
+                    left = (THUMBNAIL_WIDTH - width) / 2;
+                }
+
+                // Draw the original bitmap onto the new bitmap, using the calculated location and dimensions
+                // Note that there may be some padding if the aspect ratios don't match
+                g.DrawImage(b, left, top, width, height);
+                // Draw a border around the orignal bitmap's content, inside the padding
+                g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
+            }
             return result;
         }
     }
