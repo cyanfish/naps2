@@ -97,6 +97,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to עברית.
+        /// </summary>
+        internal static string he {
+            get {
+                return ResourceManager.GetString("he", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to हिन्दी.
         /// </summary>
         internal static string hi {
