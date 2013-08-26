@@ -27,7 +27,7 @@ using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
-    public class FViewer : Form
+    public class FViewer : FormBase
     {
         private readonly Container components = null;
         private TiffViewerCtl tiffViewer1;

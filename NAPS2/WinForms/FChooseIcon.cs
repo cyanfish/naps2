@@ -26,7 +26,7 @@ using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
-    public partial class FChooseIcon : Form
+    public partial class FChooseIcon : FormBase
     {
         private int iconID;
 
@@ -51,7 +51,7 @@ namespace NAPS2.WinForms
         private void FChooseIcon_Load(object sender, EventArgs e)
         {
             iconList.LargeImageList = ilProfileIcons.IconsList;
-            int  i = 0;
+            int i = 0;
             foreach (Image icon in ilProfileIcons.IconsList.Images)
             {
                 iconList.Items.Add("", i);

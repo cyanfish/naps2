@@ -33,7 +33,7 @@ using WIA;
 
 namespace NAPS2.WinForms
 {
-    public partial class FEditScanSettings : Form
+    public partial class FEditScanSettings : FormBase
     {
         private readonly Logger logger;
         private readonly IErrorOutput errorOutput;

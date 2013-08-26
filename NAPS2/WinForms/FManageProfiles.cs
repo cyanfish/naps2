@@ -29,7 +29,7 @@ using Ninject;
 
 namespace NAPS2.WinForms
 {
-    public partial class FManageProfiles : Form
+    public partial class FManageProfiles : FormBase
     {
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;

@@ -29,7 +29,7 @@ using Ninject;
 
 namespace NAPS2.WinForms
 {
-    public partial class FChooseProfile : Form
+    public partial class FChooseProfile : FormBase
     {
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;

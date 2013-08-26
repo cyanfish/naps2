@@ -31,7 +31,7 @@ using NLog;
 
 namespace NAPS2.WinForms
 {
-    internal partial class FTwainGui : Form, IMessageFilter
+    internal partial class FTwainGui : FormBase, IMessageFilter
     {
         private readonly Logger logger;
 

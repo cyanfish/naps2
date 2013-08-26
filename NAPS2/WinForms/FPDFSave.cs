@@ -30,7 +30,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.WinForms
 {
-    public partial class FPDFSave : Form
+    public partial class FPDFSave : FormBase
     {
         private readonly IPdfExporter pdfExporter;
         private readonly IErrorOutput errorOutput;
