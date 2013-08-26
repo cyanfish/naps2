@@ -517,6 +517,29 @@
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
         <value>435, 176</value>
     </data>
+    <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAD///8B////Af///wH///8BAAAAHwAAADEAAAAzAAAAMwAAADMAAAAxAAAAH////wH///8B////Af//
+        /wH///8B////Af///wEAAAAPAAAAM5pRE6utWhT5rVkS/61ZEv+tWRL/rVoU+ZpRE6sAAAAzAAAAD///
+        /wH///8B////Af///wEAAAAPcz4Qa61aE//KiUj/4K1u/+a3e//mt3r/5rd7/+Ctbv/KiUj/rVoT/3M+
+        EGsAAAAP////Af///wH///8Bcz4Qa7FgGf/apGT/4bFy/9+sa//cpmP/3KVg/9ymY//frGz/4bFy/9qk
+        ZP+xYBn/cz4Qa////wH///8BAAAAH65bFP/Yn17/36xr/92oZv/s0LD/////////////////2qNe/92o
+        Zv/frGv/2J9e/65bFP8AAAAf////AZtTFKnFgj7/3Kdm/9qjYv/ZoV7/1pxV/+zQsP//////1JVL/9ef
+        Wv/ZomD/2qNi/9ynZv/Fgj7/m1MUqf///wGuWxb51ZxY/9mgXP/Xnlr/151Y/9WYT//sz6///////9OU
+        Sf/WnFf/155a/9eeWv/ZoFz/1ZxY/65bFvn///8Br1sV/9efWv/UmlX/1JlU/9SYUv/Rk0n/682s////
+        ///Qj0P/05dR/9SZVP/UmVT/1JpV/9efWv+vWxX/////Aa5bFP/ap2n/0pVN/9KVTv/SlEz/z45C/+nK
+        qP//////zos9/9GTS//SlU7/0pVO/9KVTf/ap2n/rlsU/////wGuWhP/3q94/86ORv/PkEj/z49H/8yI
+        Pf///////////8uHO//Ojkf/z5BJ/8+QSP/Ojkb/3q94/65aE/////8BrVoS+eS+lv/MiT3/zYpB/82L
+        Qf/Lhzv/x38t/8d9K//Khjj/zYtB/82MQ//NikH/zIk9/+S+lv+tWhL5////Aa9cFJXVpnv/2ahv/8iE
+        Nv/Jhjn/x4Iz/+jKqf//////xoAv/8mGOv/Jhjr/yIQ2/9mob//Vpnv/r1wUlf///wH///8BsV4Z/+jL
+        rv/Xomn/xX0t/8V7Kv/nyKf//////8N5J//Gfi//xn4u/9eiaf/oy67/sV4Z/////wH///8B////AbBd
+        FUe3bCz/5MOg/+G7kP/Okk7/wngl/8BxG//Deir/z5NR/+G7kP/kw6D/t2ws/7BdFUf///8B////Af//
+        /wH///8BsF0VR7FeGv/Mk2D/4sCd/+rPsP/qzrD/6s+x/+LAnf/Mk2D/sV4a/7BdFUf///8B////Af//
+        /wH///8B////Af///wH///8Br1wUla5ZEfetWBD/rVgP/61YEP+uWRH3r1wUlf///wH///8B////Af//
+        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        //8AAP//AAD//w==
+</value>
+    </data>
     <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>9, 9, 9, 9</value>
     </data>

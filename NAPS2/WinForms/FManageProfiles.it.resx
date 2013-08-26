@@ -283,26 +283,26 @@
         <value>587, 142</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAFxcXPldXV6RYWFilV1dXpFZWVqRUVFSkVFRUpFRUVKRSUlKkUlJSpFRSVKRcVlymRkRGnQAA
-        AC8AAAAAAAAAAI2NjcHm5ub/3t7e/97e3v/d3d3/3d3d/9/f3//f39//3Nzc/93c3f/Y2tj/pNKk/8rY
-        yv9KSEqZAAAAAAAAAAChoaHN5+jo/+Hj5f/g4uT/6Orr//n6/P/+/////f////T29//l5un/097X/2vO
-        bv+63Lr/ZWBlpAAAAAAAAAAAsLCwzf36+P/l1s//49TM/+ja0v/s39j/697Z/+ve2P/r3tf/5tjQ/+PU
-        zP/t3t3//////2NjY6IAAAAAAAAAAKKjprLx18H/7MGL//XWpP/44rb/+enD//nt0f/568z/+ea7//bc
-        rf/00Zz/57uL//Hl4P9KTE6DAAAAAAAAAABnaW1z8NfD//LIj//74bX//uvH///xzf//8MT//+2+//3n
-        t//63qr/+NOZ/+q8i//a09D+ExYWQgAAAAAAAAAAMDQ0PuXXzv3uyJ3//ObF//zoyv/87ND//OvL//rg
-        sv/316H/9s+W//PEhf/txZ//s7K03gAAABAAAAAAAAAAAAAPDxHOysjl5byb//zkw//75sn/++fM//vp
-        z//758n/+N20//bTpP/uv4v/7s+2/4eKjLAAAAAAAAAAAAAAAAAAAAAAmpueqe7Lr//217P/++TI//vl
-        yf/75sr/++bK//vlyv/85cr/7cSe/+nVyv9RU1V/AAAAAAAAAAAAAAAAAAAAAFhbXV7s3tX/5MOq/+fN
-        t//nzrj/5865/+fOuP/nzbf/58y1/+XHsP/NysjtExMTMQAAAAAAAAAAAAAAAAAAAAAREREsu7y987Gx
-        s/+kpKX/paWm/6Wlpv+lpab/paWm/6SjpP/Lzc//cnJzvAAAAAEAAAAAAAAAAAAAAAAAAAAAV1dXfNDQ
-        0P+JiYr/iYmK/4qKi/+Kiov/ioqL/4qKi/+Hh4j/pqam/7e3t/YEBAQ4AAAAAAAAAAAAAAAAAAAAELCw
-        sNm3t7f/mpqa/56env+enp7/np6e/56env+enp7/np6e/5qamv/S0tL/SUlJkwAAAAAAAAAAAAAAADo6
-        Olb09PT/ra2t/6mpqf+oqKj/p6en/6enp/+np6f/p6en/6qqqv+lpaX/2dnZ/6qqqt8AAAAXAAAAAAAA
-        AABLS0tT8/Pz/O7u7vzn5+f69PT0//j4+P/39/f/+Pj4//r6+v/s7Oz95OTk+vj4+P+enp7JAAAADQAA
-        AAAAAAAAAAAAAZKSkiaNjY00c3NzMKampqHi4uLl2dnZ3tnZ2eDKysrbS0tLYUhISC1KSkozDQ0NEwAA
-        AAAAAAAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIADAADAAwAAwAMAAMADAADAAwAAgAMAAIAB
-        AACAAQAAgAMAAA==
+        <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAxAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAL////wH///8B////Af//
+        /wH///8BrHE086tuMf+qay3/qmwv/6ptMf+qbTH/qm0x/6psL/+qay3/q24x/6twNPH///8B////Af//
+        /wH///8B////AatuMf/ur2D///fe/+mpW//qq17/6qtf/+qrXv/pqVr///fe/+6vYP+rbjD/AAAAMwAA
+        ADMAAAAzAAAAMwAAACOqay3///bd//zt0v/879X//fHZ//3w1//87tT//O3S//zt0f//9t3/qGkr/6tu
+        Mf+qbC//qmst/6tuL/+gaTDBqmwu/+iwaP/97tT/3ZxP/96gVP/dnlL//e/W/9qXR//87dH/565n/6Vm
+        KP/ur2L/6qlb///23P/0wYD/q20v/6psL//ntHL//vHY/9mcUv/boVn/26BY/9mcUf/979X//O3S/+ay
+        b/+jYyT///Xc//zt0v/87M////Xa/6lrLP+qbC//6Ld4//7x2P/VmlP/2J9a/9ifW//WnFb/3a1w//7v
+        1f/ntXb/pGMk///02//irGj/++vO//LMmP+qayz/qmwv/+e5f///8df/0JVP/9ObV//Tm1j/0ppV/9CV
+        Tv//89r/5rl//6VmJ//doFT//fDW//zs0f/uwYn/qmst/6psLv/nu4T//vDV/8qPSv/NlVL/16Zo/+i/
+        i//ovon/5ryG/+m/iv+mZyr/2qBa/9SXTv/979T/7sWQ/6prLf+qbC7/5b2K//3u0v//8db/xY1I/+bA
+        jv+/iU//pmco/6VkJv/pxZT/pmcq/9WdWP/Rlk////LZ/+7Klv+qbC7/qmss/+XAjv/97ND/u4E6///w
+        1f/szaP/pWUm/9uiWv/oyJz/z6Ju/7+JTf/pwY3/6L+K/+a8hv/pwIr/q20v/6prK///9dr//ezO//3s
+        z//+7tL/686m/6VjIv/oyqD/zqFu/7FzMf/ow5D/wIlQ/6ZnKP+lZCb/68aV/6xuMP+rbS7/5suj///1
+        2f/ixZr/48ad/+XJof/nzKT/zaNx/65uKv//9Nr/5sOS/6ZmJ//co1r/6cqe/9Onc/+tcDKtrnE0satt
+        Lv+qayv/qmsr/6prLP+qair/p2Uk/8eYZf//89f///DU/+TDlv+lYyP/6cyi/9Kndf+rbi+n////Af//
+        /wH///8B////Af///wH///8BrW8x/+nQqf//+d//48ac/+PHnv/myqL/6M+n/9Gqev+rbS+n////Af//
+        /wH///8B////Af///wH///8B////Aa5yNK+rbC7/wY5Y/6lpKv+qayz/q2wu/6xtL/+tbzGt////Af//
+        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        //8AAP//AAD//w==
 </value>
     </data>
     <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
@@ -315,7 +315,7 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.ILProfileIcons, NAPS2, Version=2.4.4980.27263, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.ILProfileIcons, NAPS2, Version=2.4.4982.26671, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FManageProfiles</value>
