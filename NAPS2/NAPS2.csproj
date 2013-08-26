@@ -518,6 +518,7 @@
     <None Include="Lang\tmx\de.tmx" />
     <None Include="Lang\tmx\empty.tmx" />
     <None Include="Lang\tmx\es.tmx" />
+    <None Include="Lang\tmx\he.tmx" />
     <None Include="Lang\tmx\it.tmx" />
     <None Include="Lang\tmx\ru.tmx" />
     <None Include="Lang\tmx\uk.tmx" />
