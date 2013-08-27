@@ -633,7 +633,7 @@
         <tu>
             <prop name="Ref#1">FEditScanSettings.resx$$this.Text$Message</prop>
             <tuv xml:lang="en-US">
-                <seg>Profile settings</seg>
+                <seg>Profile Settings</seg>
             </tuv>
             <tuv xml:lang="de">
                 <seg>Profileinstellungen</seg>
