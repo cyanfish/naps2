@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Config\IProfileManager.cs" />
     <Compile Include="LayoutManager.cs" />
+    <Compile Include="Scan\FileBasedScannedImage.cs" />
     <Compile Include="Scan\IScanPerformer.cs" />
     <Compile Include="Scan\IScanReceiver.cs" />
     <Compile Include="Lang\LanguageResources.Designer.cs">
@@ -149,11 +150,14 @@
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="MessageBoxErrorOutput.cs" />
     <Compile Include="Paths.cs" />
+    <Compile Include="Scan\ScannedImageHelper.cs" />
     <Compile Include="Scan\ScannedImageList.cs" />
     <Compile Include="Scan\ScanPerformer.cs" />
     <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
     <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
+    <Compile Include="Scan\TransformationHelper.cs" />
+    <Compile Include="Scan\ThumbnailHelper.cs" />
     <Compile Include="Unmanaged.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />

@@ -39,6 +39,8 @@ namespace NAPS2
 
         private static readonly string TempPath = Path.Combine(AppDataPath, "tmp");
 
+        private static readonly string RecoveryPath = Path.Combine(AppDataPath, "recovery");
+
         public static string AppData
         {
             get
@@ -72,6 +74,18 @@ namespace NAPS2
                     Directory.CreateDirectory(TempPath);
                 }
                 return TempPath;
+            }
+        }
+
+        public static string Recovery
+        {
+            get
+            {
+                if (!Directory.Exists(RecoveryPath))
+                {
+                    Directory.CreateDirectory(RecoveryPath);
+                }
+                return RecoveryPath;
             }
         }
     }
