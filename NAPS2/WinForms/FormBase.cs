@@ -18,6 +18,7 @@ namespace NAPS2.WinForms
         {
             bool isRTL = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
             RightToLeft = isRTL ? RightToLeft.Yes : RightToLeft.No;
+            RightToLeftLayout = isRTL;
         }
     }
 }
