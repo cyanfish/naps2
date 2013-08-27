@@ -27,7 +27,7 @@ using NLog;
 
 namespace NAPS2.Config
 {
-    public class ConfigManager<T> where T : class
+    public abstract class ConfigManager<T> where T : class
     {
         protected readonly string primaryConfigPath;
         protected readonly string secondaryConfigPath;
