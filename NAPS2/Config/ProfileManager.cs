@@ -32,7 +32,7 @@ namespace NAPS2.Config
     public class ProfileManager : ConfigManager<List<ExtendedScanSettings>>, IProfileManager
     {
         public ProfileManager(Logger logger)
-            : base("profiles.xml", Paths.AppData, Paths.Executable, logger)
+            : base("profiles.xml", Paths.AppData, Paths.Executable, logger, () => new List<ExtendedScanSettings>())
         {
         }
 
@@ -75,6 +75,7 @@ namespace NAPS2.Config
                     // Everything should be ExtendedScanSettings now
                     return new ExtendedScanSettings
                     {
+                        Version = ExtendedScanSettings.CURRENT_VERSION,
                         Device = profile.Device,
                         DriverName = profile.DriverName,
                         DisplayName = profile.DisplayName,

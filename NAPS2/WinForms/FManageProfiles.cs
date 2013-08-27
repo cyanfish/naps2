@@ -91,7 +91,7 @@ namespace NAPS2.WinForms
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var fedit = Kernel.Get<FEditScanSettings>();
-            fedit.ScanSettings = appConfigManager.Config.DefaultProfileSettings ?? new ExtendedScanSettings();
+            fedit.ScanSettings = appConfigManager.Config.DefaultProfileSettings ?? new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
             fedit.ShowDialog();
             if (fedit.Result)
             {

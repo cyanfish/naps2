@@ -118,7 +118,7 @@ namespace NAPS2.WinForms
             if (profileManager.Profiles.Count == 0)
             {
                 var editSettingsForm = Kernel.Get<FEditScanSettings>();
-                editSettingsForm.ScanSettings = new ExtendedScanSettings();
+                editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
                 editSettingsForm.ShowDialog();
                 if (editSettingsForm.Result)
                 {

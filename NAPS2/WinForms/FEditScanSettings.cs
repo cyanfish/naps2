@@ -193,6 +193,8 @@ namespace NAPS2.WinForms
         {
             ScanSettings = new ExtendedScanSettings
             {
+                Version = ExtendedScanSettings.CURRENT_VERSION,
+
                 Device = CurrentDevice,
                 DriverName = DeviceDriverName,
                 DisplayName = txtName.Text,

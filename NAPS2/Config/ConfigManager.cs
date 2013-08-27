@@ -27,16 +27,17 @@ using NLog;
 
 namespace NAPS2.Config
 {
-    public class ConfigManager<T> where T : class, new()
+    public class ConfigManager<T> where T : class
     {
         protected readonly string primaryConfigPath;
         protected readonly string secondaryConfigPath;
 
         private readonly Logger logger;
+        private readonly Func<T> factory;
 
         private T config;
 
-        public ConfigManager(string configFileName, string primaryFolder, string secondaryFolder, Logger logger)
+        public ConfigManager(string configFileName, string primaryFolder, string secondaryFolder, Logger logger, Func<T> factory)
         {
             primaryConfigPath = Path.Combine(primaryFolder, configFileName);
             if (secondaryFolder != null)
@@ -44,6 +45,7 @@ namespace NAPS2.Config
                 secondaryConfigPath = Path.Combine(secondaryFolder, configFileName);
             }
             this.logger = logger;
+            this.factory = factory;
         }
 
         protected T Config
@@ -68,7 +70,7 @@ namespace NAPS2.Config
             }
             if (config == null)
             {
-                config = new T();
+                config = factory();
             }
         }
 

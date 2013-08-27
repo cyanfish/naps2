@@ -28,10 +28,10 @@ namespace NAPS2.Config
     public class UserConfigManager : ConfigManager<UserConfig>
     {
         public UserConfigManager(Logger logger)
-            : base("config.xml", Paths.AppData, Paths.Executable, logger)
+            : base("config.xml", Paths.AppData, Paths.Executable, logger, () => new UserConfig { Version = UserConfig.CURRENT_VERSION })
         {
         }
 
-        public new UserConfig Config { get { return base.Config; }}
+        public new UserConfig Config { get { return base.Config; } }
     }
 }

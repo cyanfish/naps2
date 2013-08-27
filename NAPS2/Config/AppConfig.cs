@@ -31,6 +31,10 @@ namespace NAPS2.Config
 {
     public class AppConfig
     {
+        public const int CURRENT_VERSION = 1;
+
+        public int Version { get; set; }
+
         public string DefaultCulture { get; set; }
 
         public string StartupMessageTitle { get; set; }

@@ -29,6 +29,8 @@ namespace NAPS2.Scan
 {
     public class ExtendedScanSettings : ScanSettings
     {
+        public const int CURRENT_VERSION = 1;
+
         public ExtendedScanSettings()
         {
             // Set defaults
@@ -38,6 +40,8 @@ namespace NAPS2.Scan
             Resolution = ScanDpi.Dpi200;
             PaperSource = ScanSource.Glass;
         }
+
+        public int Version { get; set; }
 
         public bool UseNativeUI { get; set; }
 
