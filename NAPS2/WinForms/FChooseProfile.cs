@@ -29,14 +29,15 @@ using Ninject;
 
 namespace NAPS2.WinForms
 {
-    public partial class FChooseProfile : Form
+    public partial class FChooseProfile : FormBase
     {
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IScanReceiver scanReceiver;
         private readonly IconButtonSizer iconButtonSizer;
 
-        public FChooseProfile(IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver, IconButtonSizer iconButtonSizer)
+        public FChooseProfile(IKernel kernel, IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver, IconButtonSizer iconButtonSizer)
+            : base(kernel)
         {
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
@@ -116,7 +117,7 @@ namespace NAPS2.WinForms
         {
             if (profileManager.Profiles.Count == 0)
             {
-                var editSettingsForm = KernelManager.Kernel.Get<FEditScanSettings>();
+                var editSettingsForm = Kernel.Get<FEditScanSettings>();
                 editSettingsForm.ScanSettings = new ExtendedScanSettings();
                 editSettingsForm.ShowDialog();
                 if (editSettingsForm.Result)
@@ -139,7 +140,7 @@ namespace NAPS2.WinForms
 
         private void btnProfiles_Click(object sender, EventArgs e)
         {
-            KernelManager.Kernel.Get<FManageProfiles>().ShowDialog();
+            Kernel.Get<FManageProfiles>().ShowDialog();
             UpdateProfiles();
         }
     }

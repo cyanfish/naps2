@@ -24,21 +24,25 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.WinForms;
+using Ninject;
+using Ninject.Parameters;
 using NLog;
 
 namespace NAPS2.Scan.Twain
 {
     internal class TwainApi
     {
+        private readonly IKernel kernel;
         private readonly Logger logger;
         readonly IWin32Window parent;
         readonly ExtendedScanSettings settings;
         readonly Twain tw;
 
-        public TwainApi(ExtendedScanSettings settings, ScanDevice device, IWin32Window pForm, Logger logger)
+        public TwainApi(ExtendedScanSettings settings, ScanDevice device, IWin32Window pForm, IKernel kernel)
         {
             parent = pForm;
-            this.logger = logger;
+            this.kernel = kernel;
+            this.logger = kernel.Get<Logger>();
             tw = new Twain();
             this.settings = settings;
             if (!tw.Init(parent.Handle))
@@ -67,7 +71,8 @@ namespace NAPS2.Scan.Twain
 
         public List<IScannedImage> Scan()
         {
-            var fg = new FTwainGui(settings, logger) { TwainIface = tw };
+            var fg = kernel.Get<FTwainGui>(new ConstructorArgument("settings", settings));
+            fg.TwainIface = tw;
             fg.ShowDialog(parent);
             return fg.Bitmaps;
         }

@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
+using Ninject;
 using NLog;
 
 namespace NAPS2.Scan.Twain
@@ -31,11 +32,11 @@ namespace NAPS2.Scan.Twain
     {
         public const string DRIVER_NAME = "twain";
 
-        private readonly Logger logger;
+        private readonly IKernel kernel;
 
-        public TwainScanDriver(Logger logger)
+        public TwainScanDriver(IKernel kernel)
         {
-            this.logger = logger;
+            this.kernel = kernel;
         }
 
         public string DriverName
@@ -91,7 +92,7 @@ namespace NAPS2.Scan.Twain
             }
             try
             {
-                var api = new TwainApi(ScanSettings, ScanDevice, DialogParent, logger);
+                var api = new TwainApi(ScanSettings, ScanDevice, DialogParent, kernel);
                 return api.Scan();
             }
             catch (ScanDriverException)

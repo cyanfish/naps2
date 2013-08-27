@@ -27,15 +27,17 @@ using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Pdf;
 using NAPS2.Scan;
+using Ninject;
 
 namespace NAPS2.WinForms
 {
-    public partial class FPDFSave : Form
+    public partial class FPDFSave : FormBase
     {
         private readonly IPdfExporter pdfExporter;
         private readonly IErrorOutput errorOutput;
 
-        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput)
+        public FPDFSave(IKernel kernel, IPdfExporter pdfExporter, IErrorOutput errorOutput)
+            : base(kernel)
         {
             InitializeComponent();
             this.pdfExporter = pdfExporter;

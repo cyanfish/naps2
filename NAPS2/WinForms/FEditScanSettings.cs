@@ -33,7 +33,7 @@ using WIA;
 
 namespace NAPS2.WinForms
 {
-    public partial class FEditScanSettings : Form
+    public partial class FEditScanSettings : FormBase
     {
         private readonly Logger logger;
         private readonly IErrorOutput errorOutput;
@@ -45,7 +45,8 @@ namespace NAPS2.WinForms
 
         private bool suppressChangeEvent;
 
-        public FEditScanSettings(Logger logger, IErrorOutput errorOutput)
+        public FEditScanSettings(IKernel kernel, Logger logger, IErrorOutput errorOutput)
+            : base(kernel)
         {
             this.logger = logger;
             this.errorOutput = errorOutput;
@@ -158,7 +159,7 @@ namespace NAPS2.WinForms
 
         private void ChooseDevice(string driverName)
         {
-            var driver = KernelManager.Kernel.Get<IScanDriver>(driverName);
+            var driver = Kernel.Get<IScanDriver>(driverName);
             try
             {
                 driver.DialogParent = this;
@@ -264,7 +265,7 @@ namespace NAPS2.WinForms
 
         private void pctIcon_DoubleClick(object sender, EventArgs e)
         {
-            var fic = new FChooseIcon();
+            var fic = Kernel.Get<FChooseIcon>();
             fic.ShowDialog();
             if (fic.IconID > -1)
             {

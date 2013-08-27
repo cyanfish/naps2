@@ -160,6 +160,9 @@
     <Compile Include="StringWrapper.cs" />
     <Compile Include="UnmanagedArray.cs" />
     <Compile Include="UnmanagedBase.cs" />
+    <Compile Include="WinForms\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WinForms\FTwainGui.cs">
       <SubType>Form</SubType>
     </Compile>

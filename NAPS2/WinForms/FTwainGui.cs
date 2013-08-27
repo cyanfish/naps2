@@ -27,11 +27,12 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
+using Ninject;
 using NLog;
 
 namespace NAPS2.WinForms
 {
-    internal partial class FTwainGui : Form, IMessageFilter
+    internal partial class FTwainGui : FormBase, IMessageFilter
     {
         private readonly Logger logger;
 
@@ -41,7 +42,8 @@ namespace NAPS2.WinForms
         private bool msgfilter;
         private Twain tw;
 
-        public FTwainGui(ExtendedScanSettings settings, Logger logger)
+        public FTwainGui(IKernel kernel, ExtendedScanSettings settings, Logger logger)
+            : base(kernel)
         {
             InitializeComponent();
             bitmaps = new List<IScannedImage>();

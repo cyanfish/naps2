@@ -23,14 +23,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Ninject;
 
 namespace NAPS2.WinForms
 {
-    public partial class FChooseIcon : Form
+    public partial class FChooseIcon : FormBase
     {
         private int iconID;
 
-        public FChooseIcon()
+        public FChooseIcon(IKernel kernel)
+            : base(kernel)
         {
             InitializeComponent();
             iconID = -1;
@@ -51,7 +53,7 @@ namespace NAPS2.WinForms
         private void FChooseIcon_Load(object sender, EventArgs e)
         {
             iconList.LargeImageList = ilProfileIcons.IconsList;
-            int  i = 0;
+            int i = 0;
             foreach (Image icon in ilProfileIcons.IconsList.Images)
             {
                 iconList.Items.Add("", i);

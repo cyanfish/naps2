@@ -24,18 +24,20 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Ninject;
 
 namespace NAPS2.WinForms
 {
-    public class FViewer : Form
+    public class FViewer : FormBase
     {
         private readonly Container components = null;
         private TiffViewerCtl tiffViewer1;
 
-        public FViewer(Image obrazek)
+        public FViewer(IKernel kernel, Image image)
+            : base(kernel)
         {
             InitializeComponent();
-            tiffViewer1.Image = obrazek;
+            tiffViewer1.Image = image;
         }
 
         protected override void Dispose(bool disposing)

@@ -29,13 +29,14 @@ using Ninject;
 
 namespace NAPS2.WinForms
 {
-    public partial class FManageProfiles : Form
+    public partial class FManageProfiles : FormBase
     {
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;
         private readonly IconButtonSizer iconButtonSizer;
 
-        public FManageProfiles(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer)
+        public FManageProfiles(IKernel kernel, IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer)
+            : base(kernel)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;
@@ -89,7 +90,7 @@ namespace NAPS2.WinForms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var fedit = KernelManager.Kernel.Get<FEditScanSettings>();
+            var fedit = Kernel.Get<FEditScanSettings>();
             fedit.ScanSettings = appConfigManager.Config.DefaultProfileSettings ?? new ExtendedScanSettings();
             fedit.ShowDialog();
             if (fedit.Result)
@@ -105,7 +106,7 @@ namespace NAPS2.WinForms
             if (lvProfiles.SelectedItems.Count > 0)
             {
                 int profileIndex = lvProfiles.SelectedItems[0].Index;
-                var fedit = KernelManager.Kernel.Get<FEditScanSettings>();
+                var fedit = Kernel.Get<FEditScanSettings>();
                 fedit.ScanSettings = profileManager.Profiles[profileIndex];
                 fedit.ShowDialog();
                 if (fedit.Result)

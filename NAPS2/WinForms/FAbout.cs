@@ -27,12 +27,14 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
+using Ninject;
 
 namespace NAPS2.WinForms
 {
-    partial class FAbout : Form
+    partial class FAbout : FormBase
     {
-        public FAbout()
+        public FAbout(IKernel kernel)
+            : base(kernel)
         {
             InitializeComponent();
             labelProductName.Text = AssemblyProduct;

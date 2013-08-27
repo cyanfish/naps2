@@ -39,7 +39,7 @@ using NLog;
 
 namespace NAPS2.WinForms
 {
-    public partial class FDesktop : Form, IScanReceiver
+    public partial class FDesktop : FormBase, IScanReceiver
     {
         private readonly IEmailer emailer;
         private readonly ImageSaver imageSaver;
@@ -50,7 +50,8 @@ namespace NAPS2.WinForms
         private readonly IErrorOutput errorOutput;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger)
+        public FDesktop(IKernel kernel, IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger)
+            : base(kernel)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -211,7 +212,7 @@ namespace NAPS2.WinForms
 
         private void ExportPDF(string filename)
         {
-            var pdfdialog = KernelManager.Kernel.Get<FPDFSave>();
+            var pdfdialog = Kernel.Get<FPDFSave>();
             pdfdialog.Filename = filename;
             pdfdialog.Images = imageList.Images;
             pdfdialog.ShowDialog(this);
@@ -249,14 +250,14 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                var viewer = new FViewer(imageList.Images[SelectedIndices.First()].GetImage());
+                var viewer = Kernel.Get<FViewer>(new ConstructorArgument("image", imageList.Images[SelectedIndices.First()].GetImage()));
                 viewer.ShowDialog();
             }
         }
 
         private void tsScan_Click(object sender, EventArgs e)
         {
-            var prof = KernelManager.Kernel.Get<FChooseProfile>(new ConstructorArgument("scanReceiver", this));
+            var prof = Kernel.Get<FChooseProfile>(new ConstructorArgument("scanReceiver", this));
             prof.ShowDialog();
         }
 
@@ -384,12 +385,12 @@ namespace NAPS2.WinForms
 
         private void tsProfiles_Click(object sender, EventArgs e)
         {
-            KernelManager.Kernel.Get<FManageProfiles>().ShowDialog();
+            Kernel.Get<FManageProfiles>().ShowDialog();
         }
 
         private void tsAbout_Click(object sender, EventArgs e)
         {
-            new FAbout().ShowDialog();
+            Kernel.Get<FAbout>().ShowDialog();
         }
 
         private void SetCulture(string cultureId)
