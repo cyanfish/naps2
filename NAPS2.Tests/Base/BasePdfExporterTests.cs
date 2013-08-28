@@ -53,7 +53,13 @@ namespace NAPS2.Tests.Base
                 ColorBitmap(100, 100, Color.Red),
                 ColorBitmap(100, 100, Color.Yellow),
                 ColorBitmap(200, 100, Color.Green),
-            }.Select(x => (IScannedImage)new ScannedImage(x, ScanBitDepth.C24Bit, false)).ToList();
+            }.Select(bitmap =>
+            {
+                using (bitmap)
+                {
+                    return (IScannedImage)new ScannedImage(bitmap, ScanBitDepth.C24Bit, false);
+                }
+            }).ToList();
             if (!Directory.Exists("test"))
             {
                 Directory.CreateDirectory("test");
@@ -69,7 +75,7 @@ namespace NAPS2.Tests.Base
         {
             pdfExporter = null;
             info = null;
-            foreach (Image img in images)
+            foreach (IScannedImage img in images)
             {
                 img.Dispose();
             }
