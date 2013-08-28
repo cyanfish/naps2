@@ -41,7 +41,7 @@ namespace NAPS2.Scan
             {
                 if (_recoveryFolder == null)
                 {
-                    _recoveryFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
+                    _recoveryFolder = new DirectoryInfo(Path.Combine(Paths.Recovery, Path.GetRandomFileName()));
                     _recoveryFolder.Create();
                 }
                 return _recoveryFolder;
@@ -55,6 +55,7 @@ namespace NAPS2.Scan
         // The image's bit depth (or C24Bit if unknown)
         private readonly ScanBitDepth bitDepth;
         // Store the actual image on disk
+        private readonly ImageFormat baseImageFileFormat;
         private readonly string baseImageFilePath;
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
@@ -66,21 +67,41 @@ namespace NAPS2.Scan
             this.logger = logger;
             Thumbnail = ThumbnailHelper.GetThumbnail(img);
 
-            baseImageFilePath = Path.Combine(RecoveryFolder.FullName, (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture));
-
             Bitmap baseImage;
             MemoryStream baseImageEncoded;
-            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded);
+            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
+
+            baseImageFilePath = Path.Combine(RecoveryFolder.FullName, (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture)) + GetExtension(baseImageFileFormat);
 
             if (baseImage != null)
             {
-                baseImage.Save(baseImageFilePath, ImageFormat.MemoryBmp);
+                // TODO: If I'm stuck using PNG anyway, then don't treat B&W specially
+                baseImage.Save(baseImageFilePath, baseImageFileFormat);
+                baseImage.Dispose();
             }
             else
             {
                 Debug.Assert(baseImageEncoded != null);
-                baseImageEncoded.CopyTo(new FileStream(baseImageFilePath, FileMode.CreateNew));
+                using (var fs = new FileStream(baseImageFilePath, FileMode.CreateNew))
+                {
+                    baseImageEncoded.Seek(0, SeekOrigin.Begin);
+                    baseImageEncoded.CopyTo(fs);
+                }
+                baseImageEncoded.Dispose();
             }
+        }
+
+        private string GetExtension(ImageFormat imageFormat)
+        {
+            if (Equals(imageFormat, ImageFormat.Png))
+            {
+                return ".png";
+            }
+            if (Equals(imageFormat, ImageFormat.Jpeg))
+            {
+                return ".jpg";
+            }
+            throw new ArgumentException();
         }
 
         public Bitmap Thumbnail { get; private set; }

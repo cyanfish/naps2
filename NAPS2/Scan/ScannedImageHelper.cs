@@ -10,10 +10,12 @@ namespace NAPS2.Scan
 {
     internal static class ScannedImageHelper
     {
-        public static void GetSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, out Bitmap bitmap, out MemoryStream encodedBitmap)
+        public static void GetSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, out Bitmap bitmap, out MemoryStream encodedBitmap, out ImageFormat imageFormat)
         {
+            // Defaults for out arguments
             bitmap = null;
             encodedBitmap = null;
+            imageFormat = ImageFormat.Png;
 
             // Store the image in as little space as possible
             if (bitDepth == ScanBitDepth.BlackWhite)
@@ -46,6 +48,7 @@ namespace NAPS2.Scan
                     // Probably a color or grayscale image, which JPEG compresses well vs. PNG
                     encodedBitmap = jpegEncoded;
                     pngEncoded.Dispose();
+                    imageFormat = ImageFormat.Jpeg;
                 }
             }
         }

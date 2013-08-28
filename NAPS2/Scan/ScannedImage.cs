@@ -44,7 +44,8 @@ namespace NAPS2.Scan
         {
             this.bitDepth = bitDepth;
             Thumbnail = ThumbnailHelper.GetThumbnail(img);
-            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded);
+            ImageFormat imageFormat;
+            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out imageFormat);
         }
 
         public Bitmap Thumbnail { get; private set; }

@@ -264,6 +264,7 @@ namespace NAPS2.WinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "FDesktop";
+            this.Closed += new System.EventHandler(this.FDesktop_Closed);
             this.Load += new System.EventHandler(this.FDesktop_Load);
             this.Shown += new System.EventHandler(this.FDesktop_Shown);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);

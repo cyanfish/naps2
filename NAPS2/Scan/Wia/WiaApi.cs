@@ -58,10 +58,12 @@ namespace NAPS2.Scan.Wia
         private readonly Device device;
 
         private readonly ExtendedScanSettings settings;
+        private readonly IScannedImageFactory scannedImageFactory;
 
-        public WiaApi(ExtendedScanSettings settings, ScanDevice scanDevice)
+        public WiaApi(ExtendedScanSettings settings, ScanDevice scanDevice, IScannedImageFactory scannedImageFactory)
         {
             this.settings = settings;
+            this.scannedImageFactory = scannedImageFactory;
             DeviceManager manager = new DeviceManagerClass();
             foreach (DeviceInfo info in manager.DeviceInfos)
             {
@@ -329,7 +331,7 @@ namespace NAPS2.Scan.Wia
             }
         }*/
 
-        public ScannedImage GetImage()
+        public IScannedImage GetImage()
         {
             try
             {
@@ -403,7 +405,7 @@ namespace NAPS2.Scan.Wia
                             result.SetResolution((float)horizontalRes, (float)verticalRes);
 
                             ScanBitDepth bitDepth = settings.UseNativeUI ? ScanBitDepth.C24Bit : settings.BitDepth;
-                            return new ScannedImage(result, bitDepth, settings.MaxQuality);
+                            return scannedImageFactory.Create(result, bitDepth, settings.MaxQuality);
                         }
                     }
                 }

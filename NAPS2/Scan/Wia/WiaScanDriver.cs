@@ -28,6 +28,13 @@ namespace NAPS2.Scan.Wia
 {
     public class WiaScanDriver : IScanDriver
     {
+        private readonly IScannedImageFactory scannedImageFactory;
+
+        public WiaScanDriver(IScannedImageFactory scannedImageFactory)
+        {
+            this.scannedImageFactory = scannedImageFactory;
+        }
+
         public const string DRIVER_NAME = "wia";
 
         public string DriverName
@@ -78,7 +85,7 @@ namespace NAPS2.Scan.Wia
             WiaApi api;
             try
             {
-                api = new WiaApi(ScanSettings, ScanDevice);
+                api = new WiaApi(ScanSettings, ScanDevice, scannedImageFactory);
             }
             catch (ScanDriverException)
             {
@@ -90,7 +97,7 @@ namespace NAPS2.Scan.Wia
             }
             while (true)
             {
-                ScannedImage image;
+                IScannedImage image;
                 try
                 {
                     image = api.GetImage();
@@ -108,8 +115,7 @@ namespace NAPS2.Scan.Wia
                     break;
                 }
                 yield return image;
-                var extSettings = ScanSettings as ExtendedScanSettings;
-                if (extSettings != null && extSettings.PaperSource == ScanSource.Glass)
+                if (ScanSettings.PaperSource == ScanSource.Glass)
                 {
                     break;
                 }

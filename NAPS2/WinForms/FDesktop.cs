@@ -418,5 +418,11 @@ namespace NAPS2.WinForms
                     appConfig.StartupMessageIcon);
             }
         }
+
+        private void FDesktop_Closed(object sender, EventArgs e)
+        {
+            // TODO: Add a closing confirmation
+            imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+        }
     }
 }

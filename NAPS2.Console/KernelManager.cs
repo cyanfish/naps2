@@ -48,6 +48,7 @@ namespace NAPS2.Console
         {
             public override void Load()
             {
+                Bind<IScannedImageFactory>().To<FileBasedScannedImageFactory>();
                 Bind<IEmailer>().To<MapiEmailer>();
                 Bind<IScanPerformer>().To<ScanPerformer>();
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
@@ -55,8 +56,8 @@ namespace NAPS2.Console
                 Bind<IErrorOutput>().To<ConsoleErrorOutput>();
                 Bind<Logger>().ToMethod(LoggerFactory.GetLogger).InSingletonScope();
 #if DEBUG && false
-                Bind<IScanDriver>().To<StubWiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
-                Bind<IScanDriver>().To<StubTwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
+                Bind<IScanDriver>().To<StubScanDriver>().Named(WiaScanDriver.DRIVER_NAME).WithConstructorArgument("driverName", WiaScanDriver.DRIVER_NAME);
+                Bind<IScanDriver>().To<StubScanDriver>().Named(TwainScanDriver.DRIVER_NAME).WithConstructorArgument("driverName", TwainScanDriver.DRIVER_NAME);
 #else
                 Bind<IScanDriver>().To<WiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
                 Bind<IScanDriver>().To<TwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);

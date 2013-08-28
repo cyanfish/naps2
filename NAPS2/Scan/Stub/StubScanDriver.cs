@@ -32,9 +32,12 @@ namespace NAPS2.Scan.Stub
 {
     public class StubScanDriver : IScanDriver
     {
-        protected StubScanDriver(string driverName)
+        private readonly IScannedImageFactory scannedImageFactory;
+
+        public StubScanDriver(string driverName, IScannedImageFactory scannedImageFactory)
         {
             DriverName = driverName;
+            this.scannedImageFactory = scannedImageFactory;
         }
 
         public ExtendedScanSettings ScanSettings { get; set; }
@@ -53,32 +56,16 @@ namespace NAPS2.Scan.Stub
             yield return MakeImage();
         }
 
-        private ScannedImage MakeImage()
+        private IScannedImage MakeImage()
         {
             var bitmap = new Bitmap(600, 800);
             Graphics g = Graphics.FromImage(bitmap);
             g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
             g.DrawString(new Random().Next().ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
-            var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, ScanSettings.MaxQuality);
+            var image = scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, ScanSettings.MaxQuality);
             return image;
         }
 
         public string DriverName { get; private set; }
-    }
-
-    public class StubWiaScanDriver : StubScanDriver
-    {
-        public StubWiaScanDriver()
-            : base(WiaScanDriver.DRIVER_NAME)
-        {
-        }
-    }
-
-    public class StubTwainScanDriver : StubScanDriver
-    {
-        public StubTwainScanDriver()
-            : base(TwainScanDriver.DRIVER_NAME)
-        {
-        }
     }
 }

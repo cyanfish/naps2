@@ -76,7 +76,7 @@ namespace NAPS2
                 }
 
                 var fileNames = imageFileNamer.GetFileNames(fileName, images.Count).GetEnumerator();
-                foreach (ScannedImage img in images)
+                foreach (IScannedImage img in images)
                 {
                     using (Bitmap baseImage = img.GetImage())
                     {

@@ -35,6 +35,7 @@ namespace NAPS2.WinForms
     internal partial class FTwainGui : FormBase, IMessageFilter
     {
         private readonly Logger logger;
+        private readonly IScannedImageFactory scannedImageFactory;
 
         private readonly List<IScannedImage> bitmaps;
         private readonly ExtendedScanSettings settings;
@@ -42,13 +43,14 @@ namespace NAPS2.WinForms
         private bool msgfilter;
         private Twain tw;
 
-        public FTwainGui(IKernel kernel, ExtendedScanSettings settings, Logger logger)
+        public FTwainGui(IKernel kernel, ExtendedScanSettings settings, Logger logger, IScannedImageFactory scannedImageFactory)
             : base(kernel)
         {
             InitializeComponent();
             bitmaps = new List<IScannedImage>();
             this.settings = settings;
             this.logger = logger;
+            this.scannedImageFactory = scannedImageFactory;
         }
 
         public List<IScannedImage> Bitmaps
@@ -97,7 +99,7 @@ namespace NAPS2.WinForms
 
                             using (Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount))
                             {
-                                bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality));
+                                bitmaps.Add(scannedImageFactory.Create(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality));
                             }
                         }
                         Close();
