@@ -79,6 +79,7 @@ namespace NAPS2.Config
             using (Stream strFile = File.Open(primaryConfigPath, FileMode.Create))
             {
                 var serializer = new XmlSerializer(typeof(T));
+                // TODO: Rather than overwrite, do the write-to-temp/move song-and-dance to avoid corruption
                 serializer.Serialize(strFile, config);
             }
         }

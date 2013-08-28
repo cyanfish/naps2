@@ -173,6 +173,12 @@
     <Compile Include="WinForms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="WinForms\FRecover.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FRecover.Designer.cs">
+      <DependentUpon>FRecover.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FTwainGui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -401,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPDFSave.uk.resx">
       <DependentUpon>FPDFSave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FRecover.resx">
+      <DependentUpon>FRecover.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FTwainGui.de.resx">
       <DependentUpon>FTwainGui.cs</DependentUpon>

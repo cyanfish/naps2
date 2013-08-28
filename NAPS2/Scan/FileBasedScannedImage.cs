@@ -33,7 +33,7 @@ namespace NAPS2.Scan
 {
     public class FileBasedScannedImage : IScannedImage
     {
-        private const string LOCK_FILE_NAME = ".lock";
+        public const string LOCK_FILE_NAME = ".lock";
 
         private static DirectoryInfo _recoveryFolder;
         private static FileInfo _recoveryLockFile;
@@ -60,8 +60,6 @@ namespace NAPS2.Scan
 
         private readonly Logger logger;
 
-        // The image's bit depth (or C24Bit if unknown)
-        private readonly ScanBitDepth bitDepth;
         // Store the actual image on disk
         private readonly ImageFormat baseImageFileFormat;
         private readonly string baseImageFileName;
@@ -72,7 +70,6 @@ namespace NAPS2.Scan
 
         public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, Logger logger)
         {
-            this.bitDepth = bitDepth;
             this.logger = logger;
             Thumbnail = ThumbnailHelper.GetThumbnail(img);
 
@@ -103,6 +100,8 @@ namespace NAPS2.Scan
             _recoveryIndexManager.Index.Images.Add(new RecoveryIndexImage
             {
                 FileName = baseImageFileName,
+                BitDepth = (int)bitDepth,
+                HighQuality = highQuality,
                 Transform = (int)transform
             });
             _recoveryIndexManager.Save();

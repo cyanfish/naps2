@@ -9,5 +9,9 @@ namespace NAPS2.Scan
         public string FileName { get; set; }
 
         public int Transform { get; set; }
+
+        public int BitDepth { get; set; }
+
+        public bool HighQuality { get; set; }
     }
 }
