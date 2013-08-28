@@ -155,6 +155,7 @@
     <Compile Include="Scan\RecoveryIndex.cs" />
     <Compile Include="Scan\RecoveryIndexImage.cs" />
     <Compile Include="Scan\RecoveryIndexManager.cs" />
+    <Compile Include="Scan\RecoveryManager.cs" />
     <Compile Include="Scan\ScannedImageFactory.cs" />
     <Compile Include="Scan\ScannedImageHelper.cs" />
     <Compile Include="Scan\ScannedImageList.cs" />

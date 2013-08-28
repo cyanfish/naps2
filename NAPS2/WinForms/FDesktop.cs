@@ -49,9 +49,10 @@ namespace NAPS2.WinForms
         private readonly Logger logger;
         private readonly IErrorOutput errorOutput;
         private readonly IScannedImageFactory scannedImageFactory;
+        private readonly RecoveryManager recoveryManager;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IKernel kernel, IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger, IScannedImageFactory scannedImageFactory)
+        public FDesktop(IKernel kernel, IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager)
             : base(kernel)
         {
             this.emailer = emailer;
@@ -62,6 +63,7 @@ namespace NAPS2.WinForms
             this.errorOutput = errorOutput;
             this.logger = logger;
             this.scannedImageFactory = scannedImageFactory;
+            this.recoveryManager = recoveryManager;
             InitializeComponent();
         }
 
@@ -424,76 +426,11 @@ namespace NAPS2.WinForms
             }
 
             // Allow scanned images to be recovered in case of an unexpected close
-            var recovery = new DirectoryInfo(Paths.Recovery);
-            FileStream lockFile = null;
-            var mostRecentRecovery = recovery.EnumerateDirectories().OrderByDescending(x => x.LastWriteTime).FirstOrDefault(
-                folder =>
-                {
-                    try
-                    {
-                        lockFile = new FileStream(
-                            Path.Combine(folder.FullName, FileBasedScannedImage.LOCK_FILE_NAME), FileMode.Open);
-                        return true;
-                    }
-                    catch (Exception ex)
-                    {
-                        return false;
-                    }
-                });
-            if (mostRecentRecovery != null)
+            foreach (IScannedImage scannedImage in recoveryManager.RecoverScannedImages())
             {
-                try
-                {
-                    var recoveryIndexManager = new RecoveryIndexManager(mostRecentRecovery);
-                    int imageCount = recoveryIndexManager.Index.Images.Count;
-                    if (imageCount > 0)
-                    {
-                        // If there are no images, do nothing. Don't delete the folder in case the index was corrupted somehow.
-                        var recoveryPromptForm = Kernel.Get<FRecover>(new ConstructorArgument("imageCount", imageCount),
-                            new ConstructorArgument("scannedDateTime", mostRecentRecovery.LastWriteTime));
-                        switch (recoveryPromptForm.ShowDialog())
-                        {
-                            case DialogResult.Yes:
-                                foreach (RecoveryIndexImage indexImage in recoveryIndexManager.Index.Images)
-                                {
-                                    using (var bitmap = new Bitmap(Path.Combine(mostRecentRecovery.FullName, indexImage.FileName)))
-                                    {
-                                        var scannedImage = scannedImageFactory.Create(bitmap,
-                                            (ScanBitDepth)indexImage.BitDepth, indexImage.HighQuality);
-                                        scannedImage.RotateFlip((RotateFlipType)indexImage.Transform);
-                                        imageList.Images.Add(scannedImage);
-                                    }
-                                }
-                                UpdateThumbnails();
-                                lockFile.Dispose();
-                                try
-                                {
-                                    mostRecentRecovery.Delete(true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    logger.ErrorException("Error deleting recovery folder.", ex);
-                                }
-                                break;
-                            case DialogResult.No:
-                                lockFile.Dispose();
-                                try
-                                {
-                                    mostRecentRecovery.Delete(true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    logger.ErrorException("Error deleting recovery folder.", ex);
-                                }
-                                break;
-                        }
-                    }
-                }
-                finally
-                {
-                    lockFile.Dispose();
-                }
+                imageList.Images.Add(scannedImage);
             }
+            UpdateThumbnails();
         }
 
         private void FDesktop_Closed(object sender, EventArgs e)
