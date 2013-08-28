@@ -9,6 +9,10 @@ namespace NAPS2.WinForms
 {
     public class FormBase : Form
     {
+        public FormBase()
+        {
+        }
+
         public FormBase(IKernel kernel)
         {
             Kernel = kernel;
