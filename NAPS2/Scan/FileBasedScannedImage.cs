@@ -165,5 +165,13 @@ namespace NAPS2.Scan
             }
             _recoveryIndexManager.Save();
         }
+
+        public void MovedTo(int index)
+        {
+            var indexImage = _recoveryIndexManager.Index.Images.Single(x => x.FileName == baseImageFileName);
+            _recoveryIndexManager.Index.Images.Remove(indexImage);
+            _recoveryIndexManager.Index.Images.Insert(index, indexImage);
+            _recoveryIndexManager.Save();
+        }
     }
 }

@@ -27,7 +27,6 @@ namespace NAPS2.Scan
 {
     public class ScannedImageList
     {
-
         public ScannedImageList()
         {
             Images = new List<IScannedImage>();
@@ -47,6 +46,7 @@ namespace NAPS2.Scan
                     IScannedImage img = Images[i];
                     Images.RemoveAt(i);
                     Images.Insert(i - 1, img);
+                    img.MovedTo(i - 1);
                     newSelection[j++] = i - 1;
                 }
                 else
@@ -69,6 +69,7 @@ namespace NAPS2.Scan
                     IScannedImage img = Images[i];
                     Images.RemoveAt(i);
                     Images.Insert(i + 1, img);
+                    img.MovedTo(i + 1);
                     newSelection[j++] = i + 1;
                 }
                 else

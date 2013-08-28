@@ -238,6 +238,10 @@ namespace NAPS2.Tests.Unit
             RotateFlipCalled += 1;
         }
 
+        public void MovedTo(int index)
+        {
+        }
+
         public void Dispose()
         {
             DisposeCalled = true;

@@ -76,5 +76,10 @@ namespace NAPS2.Scan
             transform = TransformationHelper.CombineRotation(transform, rotateFlipType);
             Thumbnail.RotateFlip(rotateFlipType);
         }
+
+        public void MovedTo(int index)
+        {
+            // Do nothing, this is only important for FileBasedScannedImage
+        }
     }
 }

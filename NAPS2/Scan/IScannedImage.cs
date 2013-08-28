@@ -43,5 +43,11 @@ namespace NAPS2.Scan
         /// </summary>
         /// <param name="rotateFlipType">The transformation type.</param>
         void RotateFlip(RotateFlipType rotateFlipType);
+
+        /// <summary>
+        /// Indicates the the scanned image has been moved to the given position in the scanned image list.
+        /// </summary>
+        /// <param name="index">The index at which the image was inserted after being removed.</param>
+        void MovedTo(int index);
     }
 }
