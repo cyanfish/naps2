@@ -49,6 +49,7 @@ namespace NAPS2.Scan
         }
 
         private static int _recoveryFileNumber = 1;
+        private static int _recoveryImageCount = 0;
 
         private readonly Logger logger;
 
@@ -89,6 +90,8 @@ namespace NAPS2.Scan
                 }
                 baseImageEncoded.Dispose();
             }
+
+            _recoveryImageCount++;
         }
 
         private string GetExtension(ImageFormat imageFormat)
@@ -118,10 +121,14 @@ namespace NAPS2.Scan
             Thumbnail.Dispose();
             try
             {
-                File.Delete(baseImageFilePath);
-                if (RecoveryFolder.Exists && RecoveryFolder.GetFiles().Length == 0)
+                if (File.Exists(baseImageFilePath))
                 {
-                    RecoveryFolder.Delete();
+                    File.Delete(baseImageFilePath);
+                    _recoveryImageCount--;
+                    if (_recoveryImageCount == 0)
+                    {
+                        RecoveryFolder.Delete(true);
+                    }
                 }
             }
             catch (IOException ex)
