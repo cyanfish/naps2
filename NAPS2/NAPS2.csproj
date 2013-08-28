@@ -129,9 +129,9 @@
     </Compile>
     <Compile Include="Config\IProfileManager.cs" />
     <Compile Include="LayoutManager.cs" />
-    <Compile Include="Scan\FileBasedScannedImage.cs" />
-    <Compile Include="Scan\FileBasedScannedImageFactory.cs" />
-    <Compile Include="Scan\IScannedImageFactory.cs" />
+    <Compile Include="Scan\Images\FileBasedScannedImage.cs" />
+    <Compile Include="Scan\Images\FileBasedScannedImageFactory.cs" />
+    <Compile Include="Scan\Images\IScannedImageFactory.cs" />
     <Compile Include="Scan\IScanPerformer.cs" />
     <Compile Include="Scan\IScanReceiver.cs" />
     <Compile Include="Lang\LanguageResources.Designer.cs">
@@ -152,19 +152,19 @@
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="MessageBoxErrorOutput.cs" />
     <Compile Include="Paths.cs" />
-    <Compile Include="Scan\RecoveryIndex.cs" />
-    <Compile Include="Scan\RecoveryIndexImage.cs" />
-    <Compile Include="Scan\RecoveryIndexManager.cs" />
-    <Compile Include="Scan\RecoveryManager.cs" />
-    <Compile Include="Scan\ScannedImageFactory.cs" />
-    <Compile Include="Scan\ScannedImageHelper.cs" />
-    <Compile Include="Scan\ScannedImageList.cs" />
+    <Compile Include="Scan\Recovery\RecoveryIndex.cs" />
+    <Compile Include="Scan\Recovery\RecoveryIndexImage.cs" />
+    <Compile Include="Scan\Recovery\RecoveryIndexManager.cs" />
+    <Compile Include="Scan\Recovery\RecoveryManager.cs" />
+    <Compile Include="Scan\Images\ScannedImageFactory.cs" />
+    <Compile Include="Scan\Images\ScannedImageHelper.cs" />
+    <Compile Include="Scan\Images\ScannedImageList.cs" />
     <Compile Include="Scan\ScanPerformer.cs" />
     <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
     <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
-    <Compile Include="Scan\TransformationHelper.cs" />
-    <Compile Include="Scan\ThumbnailHelper.cs" />
+    <Compile Include="Scan\Images\TransformationHelper.cs" />
+    <Compile Include="Scan\Images\ThumbnailHelper.cs" />
     <Compile Include="Unmanaged.cs" />
     <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainApi.cs" />
@@ -201,7 +201,7 @@
     <Compile Include="Scan\Exceptions\ScanDriverException.cs" />
     <Compile Include="Scan\Twain\TwainScanDriver.cs" />
     <Compile Include="Scan\ScanDevice.cs" />
-    <Compile Include="Scan\ScannedImage.cs" />
+    <Compile Include="Scan\Images\ScannedImage.cs" />
     <Compile Include="WinForms\FAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,7 +209,7 @@
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
     <Compile Include="Scan\IScanDriver.cs" />
-    <Compile Include="Scan\IScannedImage.cs" />
+    <Compile Include="Scan\Images\IScannedImage.cs" />
     <Compile Include="Email\IEmailer.cs" />
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
     <Compile Include="Config\ProfileManager.cs" />

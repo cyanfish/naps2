@@ -27,6 +27,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Scan.Images;
 using WIA;
 
 namespace NAPS2.Scan.Wia

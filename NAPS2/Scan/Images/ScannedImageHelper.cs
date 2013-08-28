@@ -4,9 +4,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Text;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Images
 {
     internal static class ScannedImageHelper
     {

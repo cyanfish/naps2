@@ -26,6 +26,7 @@ using NAPS2.Email;
 using NAPS2.Email.Mapi;
 using NAPS2.Pdf;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 using NAPS2.Scan.Stub;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;

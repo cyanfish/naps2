@@ -26,6 +26,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using Ninject;
 using NLog;

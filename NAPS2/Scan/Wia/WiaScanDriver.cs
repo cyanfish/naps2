@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Scan.Images;
 
 namespace NAPS2.Scan.Wia
 {

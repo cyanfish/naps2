@@ -25,6 +25,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 

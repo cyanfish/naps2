@@ -28,6 +28,7 @@ using System.Linq;
 using System.Text;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 
 namespace NAPS2
 {

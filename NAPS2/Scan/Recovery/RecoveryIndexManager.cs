@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using NAPS2.Config;
-using Ninject;
-using NLog;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Recovery
 {
     public class RecoveryIndexManager : ConfigManager<RecoveryIndex>
     {

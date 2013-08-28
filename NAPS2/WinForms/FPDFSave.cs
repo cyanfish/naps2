@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Pdf;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 using Ninject;
 
 namespace NAPS2.WinForms

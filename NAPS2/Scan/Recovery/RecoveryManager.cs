@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using NAPS2.Scan.Images;
 using NAPS2.WinForms;
 using Ninject;
 using Ninject.Parameters;
 using NLog;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Recovery
 {
     public class RecoveryManager
     {

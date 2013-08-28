@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Images
 {
     public class ScannedImageList
     {

@@ -22,14 +22,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using NAPS2.Scan.Recovery;
 using NLog;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Images
 {
     public class FileBasedScannedImage : IScannedImage
     {

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Recovery
 {
     public class RecoveryIndex
     {

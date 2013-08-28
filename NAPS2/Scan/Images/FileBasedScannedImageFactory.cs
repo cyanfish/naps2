@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using NLog;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Images
 {
     public class FileBasedScannedImageFactory : IScannedImageFactory
     {

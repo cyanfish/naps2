@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Images
 {
     internal static class ThumbnailHelper
     {

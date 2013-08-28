@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Unit

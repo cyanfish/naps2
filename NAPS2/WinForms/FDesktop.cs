@@ -33,6 +33,8 @@ using NAPS2.Email;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Recovery;
 using Ninject;
 using Ninject.Parameters;
 using NLog;

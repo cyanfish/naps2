@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Recovery
 {
     public class RecoveryIndexImage
     {

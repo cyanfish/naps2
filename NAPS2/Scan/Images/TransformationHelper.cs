@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 
-namespace NAPS2.Scan
+namespace NAPS2.Scan.Images
 {
     internal static class TransformationHelper
     {
