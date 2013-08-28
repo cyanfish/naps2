@@ -4,13 +4,14 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
 using Ninject;
 using Ninject.Parameters;
 using NLog;
 
-namespace NAPS2.Scan.Recovery
+namespace NAPS2.Recovery
 {
     public class RecoveryManager
     {

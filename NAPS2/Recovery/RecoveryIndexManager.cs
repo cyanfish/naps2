@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using NAPS2.Config;
 
-namespace NAPS2.Scan.Recovery
+namespace NAPS2.Recovery
 {
     public class RecoveryIndexManager : ConfigManager<RecoveryIndex>
     {

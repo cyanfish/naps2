@@ -26,7 +26,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using NAPS2.Scan.Recovery;
+using NAPS2.Recovery;
 using NLog;
 
 namespace NAPS2.Scan.Images

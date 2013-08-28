@@ -152,10 +152,10 @@
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="MessageBoxErrorOutput.cs" />
     <Compile Include="Paths.cs" />
-    <Compile Include="Scan\Recovery\RecoveryIndex.cs" />
-    <Compile Include="Scan\Recovery\RecoveryIndexImage.cs" />
-    <Compile Include="Scan\Recovery\RecoveryIndexManager.cs" />
-    <Compile Include="Scan\Recovery\RecoveryManager.cs" />
+    <Compile Include="Recovery\RecoveryIndex.cs" />
+    <Compile Include="Recovery\RecoveryIndexImage.cs" />
+    <Compile Include="Recovery\RecoveryIndexManager.cs" />
+    <Compile Include="Recovery\RecoveryManager.cs" />
     <Compile Include="Scan\Images\ScannedImageFactory.cs" />
     <Compile Include="Scan\Images\ScannedImageHelper.cs" />
     <Compile Include="Scan\Images\ScannedImageList.cs" />
