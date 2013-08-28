@@ -6,9 +6,19 @@ using NLog.Targets;
 
 namespace NAPS2
 {
-    public static class LoggerFactory
+    public class LoggerFactory
     {
-        public static Logger GetLogger(IContext arg)
+        private static LoggerFactory _current = new LoggerFactory();
+
+        public static LoggerFactory Current
+        {
+            get
+            {
+                return new LoggerFactory();
+            }
+        }
+
+        public virtual Logger GetLogger()
         {
             var config = new LoggingConfiguration();
             var target = new FileTarget

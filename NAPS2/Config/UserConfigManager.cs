@@ -27,8 +27,8 @@ namespace NAPS2.Config
 {
     public class UserConfigManager : ConfigManager<UserConfig>
     {
-        public UserConfigManager(Logger logger)
-            : base("config.xml", Paths.AppData, Paths.Executable, logger, () => new UserConfig { Version = UserConfig.CURRENT_VERSION })
+        public UserConfigManager()
+            : base("config.xml", Paths.AppData, Paths.Executable, () => new UserConfig { Version = UserConfig.CURRENT_VERSION })
         {
         }
 

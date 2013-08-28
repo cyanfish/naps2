@@ -14,9 +14,8 @@ namespace NAPS2.Scan
         private const string INDEX_FILE_NAME = "index.xml";
 
         public RecoveryIndexManager(DirectoryInfo recoveryFolder)
-            : base(INDEX_FILE_NAME, recoveryFolder.FullName, null, KernelManager.Kernel.Get<Logger>(), () => new RecoveryIndex { Version = RecoveryIndex.CURRENT_VERSION })
+            : base(INDEX_FILE_NAME, recoveryFolder.FullName, null, () => new RecoveryIndex { Version = RecoveryIndex.CURRENT_VERSION })
         {
-            // TODO: Make LoggerFactory non-static, with a Current property
         }
 
         public RecoveryIndex Index

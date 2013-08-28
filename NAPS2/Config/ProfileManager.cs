@@ -31,8 +31,8 @@ namespace NAPS2.Config
 {
     public class ProfileManager : ConfigManager<List<ExtendedScanSettings>>, IProfileManager
     {
-        public ProfileManager(Logger logger)
-            : base("profiles.xml", Paths.AppData, Paths.Executable, logger, () => new List<ExtendedScanSettings>())
+        public ProfileManager()
+            : base("profiles.xml", Paths.AppData, Paths.Executable, () => new List<ExtendedScanSettings>())
         {
         }
 

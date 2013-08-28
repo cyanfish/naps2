@@ -37,15 +37,15 @@ namespace NAPS2.Config
 
         private T config;
 
-        public ConfigManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Logger logger, Func<T> factory)
+        public ConfigManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Func<T> factory)
         {
             primaryConfigPath = Path.Combine(recoveryFolderPath, indexFileName);
             if (secondaryFolder != null)
             {
                 secondaryConfigPath = Path.Combine(secondaryFolder, indexFileName);
             }
-            this.logger = logger;
             this.factory = factory;
+            logger = LoggerFactory.Current.GetLogger();
         }
 
         protected T Config

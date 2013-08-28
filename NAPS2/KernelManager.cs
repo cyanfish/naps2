@@ -58,7 +58,7 @@ namespace NAPS2
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
                 Bind<IEmailer>().To<MapiEmailer>();
                 Bind<IErrorOutput>().To<MessageBoxErrorOutput>();
-                Bind<Logger>().ToMethod(LoggerFactory.GetLogger).InSingletonScope();
+                Bind<Logger>().ToMethod(ctx => LoggerFactory.Current.GetLogger()).InSingletonScope();
 #if DEBUG && false
                 Bind<IScanDriver>().To<StubScanDriver>().Named(WiaScanDriver.DRIVER_NAME).WithConstructorArgument("driverName", WiaScanDriver.DRIVER_NAME);
                 Bind<IScanDriver>().To<StubScanDriver>().Named(TwainScanDriver.DRIVER_NAME).WithConstructorArgument("driverName", TwainScanDriver.DRIVER_NAME);
