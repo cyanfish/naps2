@@ -25,7 +25,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
-namespace NAPS2
+namespace NAPS2.ImportExport.Images
 {
     class TiffHelper
     {

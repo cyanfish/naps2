@@ -21,7 +21,7 @@ namespace NAPS2.Scan.Images
             {
                 // Store as a 1-bit bitmap
                 // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
-                bitmap = (Bitmap)ImageHelper.CopyToBpp(sourceImage, 1).Clone();
+                bitmap = (Bitmap)BitmapHelper.CopyToBpp(sourceImage, 1).Clone();
                 // Note that if a black and white image comes from native WIA, bitDepth is unknown,
                 // so the image will be png-encoded below instead of using a 1-bit bitmap
             }

@@ -22,13 +22,12 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
-namespace NAPS2.Pdf
+namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {

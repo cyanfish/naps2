@@ -22,9 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
-namespace NAPS2
+namespace NAPS2.ImportExport.Images
 {
     /// <summary>
     /// Determines file names for images from a set of scans based on the number of images (e.g. abc1.jpg vs abc001.jpg).

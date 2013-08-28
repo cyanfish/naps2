@@ -25,12 +25,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Text;
 using NAPS2.Lang.Resources;
-using NAPS2.Scan;
 using NAPS2.Scan.Images;
 
-namespace NAPS2
+namespace NAPS2.ImportExport.Images
 {
     public class ImageSaver
     {

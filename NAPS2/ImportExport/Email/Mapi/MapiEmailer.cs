@@ -20,13 +20,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using NAPS2.Lang.Resources;
 using NLog;
 
-namespace NAPS2.Email.Mapi
+namespace NAPS2.ImportExport.Email.Mapi
 {
     public class MapiEmailer : IEmailer
     {

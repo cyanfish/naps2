@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NAPS2.Email.Mapi
+namespace NAPS2.ImportExport.Email.Mapi
 {
     /// <summary>
     /// MAPI constants indicating the sender or recipient type.

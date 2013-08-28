@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NAPS2.ImportExport.Images;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Unit

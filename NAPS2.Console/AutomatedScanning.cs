@@ -28,8 +28,9 @@ using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Console.Lang.Resources;
-using NAPS2.Email;
-using NAPS2.Pdf;
+using NAPS2.ImportExport.Email;
+using NAPS2.ImportExport.Images;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 

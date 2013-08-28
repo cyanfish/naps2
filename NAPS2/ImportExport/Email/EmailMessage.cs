@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace NAPS2.Email
+namespace NAPS2.ImportExport.Email
 {
     public class EmailMessage
     {

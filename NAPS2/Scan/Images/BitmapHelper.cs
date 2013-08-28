@@ -24,9 +24,9 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace NAPS2
+namespace NAPS2.Scan.Images
 {
-    public class ImageHelper
+    internal class BitmapHelper
     {
         private const int SRCCOPY = 0x00CC0020;
         private const uint BI_RGB = 0;
