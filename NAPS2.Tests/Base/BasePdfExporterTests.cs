@@ -24,6 +24,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using NAPS2.Pdf;
+using NAPS2.Scan;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Base
@@ -31,7 +32,7 @@ namespace NAPS2.Tests.Base
     public abstract class BasePdfExporterTests
     {
         private const String PDF_PATH = "test/test.pdf";
-        private List<Image> images;
+        private List<IScannedImage> images;
         private PdfInfo info;
         protected IPdfExporter pdfExporter;
 
@@ -47,11 +48,11 @@ namespace NAPS2.Tests.Base
                 Subject = "Test Subject",
                 Title = "Test Title"
             };
-            images = new List<Image> {
+            images = new List<Bitmap> {
                 ColorBitmap(100, 100, Color.Red),
                 ColorBitmap(100, 100, Color.Yellow),
                 ColorBitmap(200, 100, Color.Green),
-            };
+            }.Select(x => (IScannedImage)new ScannedImage(x, ScanBitDepth.C24Bit, false)).ToList();
             if (!Directory.Exists("test"))
             {
                 Directory.CreateDirectory("test");

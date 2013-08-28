@@ -57,13 +57,11 @@ namespace NAPS2.WinForms
                 Subject = MiscResources.ScannedImage,
                 Author = MiscResources.NAPS2
             };
-            List<Image> imgs = Images.Select(x => (Image)x.GetImage()).ToList();
-
             try
             {
-                pdfExporter.Export(Filename, imgs, info, num =>
+                pdfExporter.Export(Filename, Images, info, num =>
                 {
-                    Invoke(new ThreadStart(() => SetStatus(num, imgs.Count)));
+                    Invoke(new ThreadStart(() => SetStatus(num, Images.Count)));
                     return true;
                 });
             }

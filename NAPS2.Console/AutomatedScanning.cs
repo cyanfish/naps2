@@ -302,7 +302,7 @@ namespace NAPS2.Console
                 Subject = ConsoleResources.ScannedImage,
                 Author = ConsoleResources.NAPS2
             };
-            pdfExporter.Export(outputPath, scannedImages.Select(x => (Image)x.GetImage()), pdfInfo, i =>
+            pdfExporter.Export(outputPath, scannedImages, pdfInfo, i =>
             {
                 OutputVerbose(ConsoleResources.ExportedPage, i, scannedImages.Count);
                 return true;

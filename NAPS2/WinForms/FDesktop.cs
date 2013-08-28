@@ -250,8 +250,11 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                var viewer = Kernel.Get<FViewer>(new ConstructorArgument("image", imageList.Images[SelectedIndices.First()].GetImage()));
-                viewer.ShowDialog();
+                using (var image = imageList.Images[SelectedIndices.First()].GetImage())
+                {
+                    var viewer = Kernel.Get<FViewer>(new ConstructorArgument("image", image));
+                    viewer.ShowDialog();
+                }
             }
         }
 

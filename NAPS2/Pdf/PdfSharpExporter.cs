@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Scan;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
@@ -30,7 +31,7 @@ namespace NAPS2.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {
-        public bool Export(string path, IEnumerable<Image> images, PdfInfo info, Func<int, bool> progressCallback)
+        public bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
             document.Info.Author = info.Author;
@@ -39,20 +40,23 @@ namespace NAPS2.Pdf
             document.Info.Subject = info.Subject;
             document.Info.Title = info.Title;
             int i = 1;
-            foreach (Image img in images)
+            foreach (IScannedImage scannedImage in images)
             {
-                if (!progressCallback(i))
+                using (Image img = scannedImage.GetImage())
                 {
-                    return false;
+                    if (!progressCallback(i))
+                    {
+                        return false;
+                    }
+                    double realWidth = img.Width / img.HorizontalResolution * 72;
+                    double realHeight = img.Height / img.VerticalResolution * 72;
+                    PdfPage newPage = document.AddPage();
+                    newPage.Width = (int)realWidth;
+                    newPage.Height = (int)realHeight;
+                    XGraphics gfx = XGraphics.FromPdfPage(newPage);
+                    gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
+                    i++;
                 }
-                double realWidth = img.Width / img.HorizontalResolution * 72;
-                double realHeight = img.Height / img.VerticalResolution * 72;
-                PdfPage newPage = document.AddPage();
-                newPage.Width = (int)realWidth;
-                newPage.Height = (int)realHeight;
-                XGraphics gfx = XGraphics.FromPdfPage(newPage);
-                gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
-                i++;
             }
             document.Save(path);
             return true;

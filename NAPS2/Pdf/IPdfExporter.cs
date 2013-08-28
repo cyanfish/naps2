@@ -22,11 +22,12 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Scan;
 
 namespace NAPS2.Pdf
 {
     public interface IPdfExporter
     {
-        bool Export(string path, IEnumerable<Image> images, PdfInfo info, Func<int, bool> progressCallback);
+        bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, Func<int, bool> progressCallback);
     }
 }
