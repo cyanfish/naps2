@@ -33,7 +33,12 @@ namespace NAPS2.Scan
 {
     public class FileBasedScannedImage : IScannedImage
     {
+        private const string LOCK_FILE_NAME = ".lock";
+
         private static DirectoryInfo _recoveryFolder;
+        private static FileInfo _recoveryLockFile;
+        private static FileStream _recoveryLock;
+        private static RecoveryIndexManager _recoveryIndexManager;
 
         private static DirectoryInfo RecoveryFolder
         {
@@ -43,13 +48,15 @@ namespace NAPS2.Scan
                 {
                     _recoveryFolder = new DirectoryInfo(Path.Combine(Paths.Recovery, Path.GetRandomFileName()));
                     _recoveryFolder.Create();
+                    _recoveryLockFile = new FileInfo(Path.Combine(_recoveryFolder.FullName, LOCK_FILE_NAME));
+                    _recoveryLock = _recoveryLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                    _recoveryIndexManager = new RecoveryIndexManager(_recoveryFolder);
                 }
                 return _recoveryFolder;
             }
         }
 
         private static int _recoveryFileNumber = 1;
-        private static int _recoveryImageCount = 0;
 
         private readonly Logger logger;
 
@@ -57,6 +64,7 @@ namespace NAPS2.Scan
         private readonly ScanBitDepth bitDepth;
         // Store the actual image on disk
         private readonly ImageFormat baseImageFileFormat;
+        private readonly string baseImageFileName;
         private readonly string baseImageFilePath;
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
@@ -72,7 +80,8 @@ namespace NAPS2.Scan
             MemoryStream baseImageEncoded;
             ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
 
-            baseImageFilePath = Path.Combine(RecoveryFolder.FullName, (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture)) + GetExtension(baseImageFileFormat);
+            baseImageFileName = (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture) + GetExtension(baseImageFileFormat);
+            baseImageFilePath = Path.Combine(RecoveryFolder.FullName, baseImageFileName);
 
             if (baseImage != null)
             {
@@ -91,7 +100,12 @@ namespace NAPS2.Scan
                 baseImageEncoded.Dispose();
             }
 
-            _recoveryImageCount++;
+            _recoveryIndexManager.Index.Images.Add(new RecoveryIndexImage
+            {
+                FileName = baseImageFileName,
+                Transform = (int)transform
+            });
+            _recoveryIndexManager.Save();
         }
 
         private string GetExtension(ImageFormat imageFormat)
@@ -124,9 +138,11 @@ namespace NAPS2.Scan
                 if (File.Exists(baseImageFilePath))
                 {
                     File.Delete(baseImageFilePath);
-                    _recoveryImageCount--;
-                    if (_recoveryImageCount == 0)
+                    _recoveryIndexManager.Index.Images.RemoveAll(x => x.FileName == baseImageFileName);
+                    _recoveryIndexManager.Save();
+                    if (_recoveryIndexManager.Index.Images.Count == 0)
                     {
+                        _recoveryLock.Dispose();
                         RecoveryFolder.Delete(true);
                     }
                 }
@@ -142,6 +158,12 @@ namespace NAPS2.Scan
             // There should be no actual flips (just rotations of varying degrees), so this code is simplified
             transform = TransformationHelper.CombineRotation(transform, rotateFlipType);
             Thumbnail.RotateFlip(rotateFlipType);
+
+            foreach (var indexImage in _recoveryIndexManager.Index.Images.Where(x => x.FileName == baseImageFileName))
+            {
+                indexImage.Transform = (int)transform;
+            }
+            _recoveryIndexManager.Save();
         }
     }
 }

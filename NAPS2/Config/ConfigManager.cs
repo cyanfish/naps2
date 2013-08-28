@@ -37,12 +37,12 @@ namespace NAPS2.Config
 
         private T config;
 
-        public ConfigManager(string configFileName, string primaryFolder, string secondaryFolder, Logger logger, Func<T> factory)
+        public ConfigManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Logger logger, Func<T> factory)
         {
-            primaryConfigPath = Path.Combine(primaryFolder, configFileName);
+            primaryConfigPath = Path.Combine(recoveryFolderPath, indexFileName);
             if (secondaryFolder != null)
             {
-                secondaryConfigPath = Path.Combine(secondaryFolder, configFileName);
+                secondaryConfigPath = Path.Combine(secondaryFolder, indexFileName);
             }
             this.logger = logger;
             this.factory = factory;
