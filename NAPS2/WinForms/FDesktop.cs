@@ -406,6 +406,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
             PostInitializeComponent();
             UpdateThumbnails();
+            Focus();
         }
 
         private void FDesktop_Shown(object sender, EventArgs e)
