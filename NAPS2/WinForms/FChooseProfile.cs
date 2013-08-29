@@ -50,7 +50,7 @@ namespace NAPS2.WinForms
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
             UpdateProfiles();
 
-            iconButtonSizer.WidthOffset = 35;
+            iconButtonSizer.WidthOffset = 20;
             iconButtonSizer.PaddingRight = 4;
             iconButtonSizer.ResizeButtons(btnProfiles);
 
