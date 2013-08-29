@@ -413,9 +413,11 @@ namespace NAPS2.WinForms
             // Update localized values
             // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live
             Controls.RemoveAll();
+            UpdateRTL();
             InitializeComponent();
             PostInitializeComponent();
             UpdateThumbnails();
+            Focus();
         }
 
         private void FDesktop_Shown(object sender, EventArgs e)

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Label = System.Reflection.Emit.Label;
 
 namespace NAPS2
 {
@@ -10,7 +13,13 @@ namespace NAPS2
     {
         private static int ButtonTextWidth(Button x)
         {
-            return (int)Math.Ceiling(x.CreateGraphics().MeasureString(x.Text, x.Font).Width);
+            int oldWidth = x.Width;
+            x.AutoSize = true;
+            x.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            int width = x.Width;
+            x.AutoSize = false;
+            x.Width = oldWidth;
+            return width;
         }
 
         public void ResizeButtons(params Button[] buttons)

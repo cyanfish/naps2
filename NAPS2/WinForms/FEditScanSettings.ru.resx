@@ -276,9 +276,6 @@
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
         <value>23</value>
     </data>
-    <data name="rdbConfig.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
     <data name="rdbConfig.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
@@ -286,7 +283,7 @@
         <value>0, 3</value>
     </data>
     <data name="rdbConfig.Size" type="System.Drawing.Size, System.Drawing">
-        <value>136, 17</value>
+        <value>183, 17</value>
     </data>
     <data name="rdbConfig.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
@@ -306,9 +303,6 @@
     <data name="&gt;&gt;rdbConfig.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="rdbNativeWIA.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
     <data name="rdbNativeWIA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
@@ -316,7 +310,7 @@
         <value>220, 3</value>
     </data>
     <data name="rdbNativeWIA.Size" type="System.Drawing.Size, System.Drawing">
-        <value>114, 17</value>
+        <value>182, 17</value>
     </data>
     <data name="rdbNativeWIA.TabIndex" type="System.Int32, mscorlib">
         <value>6</value>
@@ -896,17 +890,14 @@
     <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
-    <data name="rdTWAIN.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
     <data name="rdTWAIN.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <data name="rdTWAIN.Location" type="System.Drawing.Point, System.Drawing">
-        <value>220, 4</value>
+        <value>195, 4</value>
     </data>
     <data name="rdTWAIN.Size" type="System.Drawing.Size, System.Drawing">
-        <value>92, 17</value>
+        <value>136, 17</value>
     </data>
     <data name="rdTWAIN.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
@@ -926,9 +917,6 @@
     <data name="&gt;&gt;rdTWAIN.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="rdWIA.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
     <data name="rdWIA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
@@ -936,7 +924,7 @@
         <value>4, 4</value>
     </data>
     <data name="rdWIA.Size" type="System.Drawing.Size, System.Drawing">
-        <value>77, 17</value>
+        <value>135, 17</value>
     </data>
     <data name="rdWIA.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
@@ -1103,12 +1091,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.ILProfileIcons, NAPS2, Version=2.4.4982.26671, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.ILProfileIcons, NAPS2, Version=2.4.4989.31092, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FEditScanSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2, Version=2.4.4989.31092, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

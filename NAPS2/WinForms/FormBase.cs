@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -11,15 +12,24 @@ namespace NAPS2.WinForms
     {
         public FormBase()
         {
+            UpdateRTL();
         }
 
         public FormBase(IKernel kernel)
+            : this()
         {
             Kernel = kernel;
             Load += OnLoad;
         }
 
         public IKernel Kernel { get; private set; }
+
+        protected void UpdateRTL()
+        {
+            bool isRTL = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
+            RightToLeft = isRTL ? RightToLeft.Yes : RightToLeft.No;
+            RightToLeftLayout = isRTL;
+        }
 
         private void OnLoad(object sender, EventArgs eventArgs)
         {
