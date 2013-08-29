@@ -28,7 +28,7 @@ namespace NAPS2.Config
     {
         public UserConfig()
         {
-            FormStates = new List<KeyValuePair<string, FormState>>();
+            FormStates = new List<FormState>();
         }
 
         public const int CURRENT_VERSION = 1;
@@ -37,6 +37,6 @@ namespace NAPS2.Config
 
         public string Culture { get; set; }
 
-        public List<KeyValuePair<string, FormState>> FormStates { get; set; }
+        public List<FormState> FormStates { get; set; }
     }
 }

@@ -54,6 +54,8 @@ namespace NAPS2
             {
                 Bind<IScanPerformer>().To<ScanPerformer>();
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
+                Bind<AppConfigManager>().ToSelf().InSingletonScope();
+                Bind<UserConfigManager>().ToSelf().InSingletonScope();
                 Bind<IPdfExporter>().To<PdfSharpExporter>();
                 Bind<IEmailer>().To<MapiEmailer>();
                 Bind<IErrorOutput>().To<MessageBoxErrorOutput>();

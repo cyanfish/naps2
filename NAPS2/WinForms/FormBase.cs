@@ -10,11 +10,15 @@ namespace NAPS2.WinForms
 {
     public class FormBase : Form
     {
+        private bool loaded = false;
+
         public FormBase(IKernel kernel)
         {
             Kernel = kernel;
             Load += OnLoad;
             Closed += OnClosed;
+            Resize += OnResize;
+            Move += OnMove;
         }
 
         public IKernel Kernel { get; private set; }
@@ -31,6 +35,7 @@ namespace NAPS2.WinForms
                     WindowState = FormWindowState.Maximized;
                 }
             }
+            loaded = true;
         }
 
         private UserConfigManager UserConfigManager
@@ -41,7 +46,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private List<KeyValuePair<string, FormState>> FormStates
+        private List<FormState> FormStates
         {
             get
             {
@@ -53,21 +58,41 @@ namespace NAPS2.WinForms
         {
             get
             {
-                return FormStates.Where(x => x.Key == Name).Select(x => x.Value).SingleOrDefault();
+                var state = FormStates.SingleOrDefault(x => x.Name == Name);
+                if (state == null)
+                {
+                    state = new FormState { Name = Name };
+                    FormStates.Add(state);
+                }
+                return state;
+            }
+        }
+
+        private void OnResize(object sender, EventArgs eventArgs)
+        {
+            if (loaded)
+            {
+                FormState.Maximized = (WindowState == FormWindowState.Maximized);
+                if (WindowState == FormWindowState.Normal)
+                {
+                    FormState.Size = Size;
+                }
+            }
+        }
+
+        private void OnMove(object sender, EventArgs eventArgs)
+        {
+            if (loaded)
+            {
+                if (WindowState == FormWindowState.Normal)
+                {
+                    FormState.Location = Location;
+                }
             }
         }
 
         private void OnClosed(object sender, EventArgs eventArgs)
         {
-            var formState = FormState;
-            if (formState == null)
-            {
-                formState = new FormState();
-                FormStates.Add(new KeyValuePair<string, FormState>(Name, formState));
-            }
-            formState.Location = Location;
-            formState.Size = Size;
-            formState.Maximized = (WindowState == FormWindowState.Maximized);
             UserConfigManager.Save();
         }
     }
