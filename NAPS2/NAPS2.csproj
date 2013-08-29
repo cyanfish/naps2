@@ -108,6 +108,7 @@
     <Compile Include="Config\AppConfigManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="Config\FormState.cs" />
     <Compile Include="CultureInitializer.cs" />
     <Compile Include="ImportExport\Email\EmailAttachment.cs" />
     <Compile Include="ImportExport\Email\EmailMessage.cs" />

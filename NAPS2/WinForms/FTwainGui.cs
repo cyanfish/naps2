@@ -45,7 +45,6 @@ namespace NAPS2.WinForms
         private Twain tw;
 
         public FTwainGui(IKernel kernel, ExtendedScanSettings settings, Logger logger, IScannedImageFactory scannedImageFactory)
-            : base(kernel)
         {
             InitializeComponent();
             bitmaps = new List<IScannedImage>();

@@ -33,8 +33,7 @@ namespace NAPS2.WinForms
 {
     partial class FAbout : FormBase
     {
-        public FAbout(IKernel kernel)
-            : base(kernel)
+        public FAbout()
         {
             InitializeComponent();
             labelProductName.Text = AssemblyProduct;

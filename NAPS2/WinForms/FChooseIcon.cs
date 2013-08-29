@@ -31,8 +31,7 @@ namespace NAPS2.WinForms
     {
         private int iconID;
 
-        public FChooseIcon(IKernel kernel)
-            : base(kernel)
+        public FChooseIcon()
         {
             InitializeComponent();
             iconID = -1;

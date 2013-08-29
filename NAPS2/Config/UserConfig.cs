@@ -26,10 +26,17 @@ namespace NAPS2.Config
 {
     public class UserConfig
     {
+        public UserConfig()
+        {
+            FormStates = new List<FormState>();
+        }
+
         public const int CURRENT_VERSION = 1;
 
         public int Version { get; set; }
 
         public string Culture { get; set; }
+
+        public List<FormState> FormStates { get; set; }
     }
 }
