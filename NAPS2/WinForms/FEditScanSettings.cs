@@ -45,8 +45,7 @@ namespace NAPS2.WinForms
 
         private bool suppressChangeEvent;
 
-        public FEditScanSettings(IKernel kernel, Logger logger, IErrorOutput errorOutput)
-            : base(kernel)
+        public FEditScanSettings(Logger logger, IErrorOutput errorOutput)
         {
             this.logger = logger;
             this.errorOutput = errorOutput;

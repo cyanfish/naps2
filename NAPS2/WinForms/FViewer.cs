@@ -33,8 +33,7 @@ namespace NAPS2.WinForms
         private readonly Container components = null;
         private TiffViewerCtl tiffViewer1;
 
-        public FViewer(IKernel kernel, Image image)
-            : base(kernel)
+        public FViewer(Image image)
         {
             InitializeComponent();
             tiffViewer1.Image = image;

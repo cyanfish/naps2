@@ -35,8 +35,7 @@ namespace NAPS2.WinForms
         private readonly AppConfigManager appConfigManager;
         private readonly IconButtonSizer iconButtonSizer;
 
-        public FManageProfiles(IKernel kernel, IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer)
-            : base(kernel)
+        public FManageProfiles(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;

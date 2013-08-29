@@ -42,8 +42,7 @@ namespace NAPS2.WinForms
         private bool msgfilter;
         private Twain tw;
 
-        public FTwainGui(IKernel kernel, ExtendedScanSettings settings, Logger logger)
-            : base(kernel)
+        public FTwainGui(ExtendedScanSettings settings, Logger logger)
         {
             InitializeComponent();
             bitmaps = new List<IScannedImage>();

@@ -50,8 +50,7 @@ namespace NAPS2.WinForms
         private readonly IErrorOutput errorOutput;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IKernel kernel, IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger)
-            : base(kernel)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;

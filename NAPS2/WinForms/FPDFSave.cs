@@ -36,8 +36,7 @@ namespace NAPS2.WinForms
         private readonly IPdfExporter pdfExporter;
         private readonly IErrorOutput errorOutput;
 
-        public FPDFSave(IKernel kernel, IPdfExporter pdfExporter, IErrorOutput errorOutput)
-            : base(kernel)
+        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput)
         {
             InitializeComponent();
             this.pdfExporter = pdfExporter;

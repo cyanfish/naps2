@@ -12,16 +12,19 @@ namespace NAPS2.WinForms
     {
         private bool loaded = false;
 
-        public FormBase(IKernel kernel)
+        public FormBase()
         {
-            Kernel = kernel;
             Load += OnLoad;
             Closed += OnClosed;
             Resize += OnResize;
             Move += OnMove;
         }
 
-        public IKernel Kernel { get; private set; }
+        [Inject]
+        public IKernel Kernel { get; set; }
+
+        [Inject]
+        public UserConfigManager UserConfigManager { get; set; }
 
         private void OnLoad(object sender, EventArgs eventArgs)
         {
@@ -36,14 +39,6 @@ namespace NAPS2.WinForms
                 }
             }
             loaded = true;
-        }
-
-        private UserConfigManager UserConfigManager
-        {
-            get
-            {
-                return Kernel.Get<UserConfigManager>();
-            }
         }
 
         private List<FormState> FormStates

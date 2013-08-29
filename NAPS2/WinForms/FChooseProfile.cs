@@ -36,8 +36,7 @@ namespace NAPS2.WinForms
         private readonly IScanReceiver scanReceiver;
         private readonly IconButtonSizer iconButtonSizer;
 
-        public FChooseProfile(IKernel kernel, IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver, IconButtonSizer iconButtonSizer)
-            : base(kernel)
+        public FChooseProfile(IProfileManager profileManager, IScanPerformer scanPerformer, IScanReceiver scanReceiver, IconButtonSizer iconButtonSizer)
         {
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
