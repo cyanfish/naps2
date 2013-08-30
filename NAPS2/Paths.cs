@@ -37,7 +37,7 @@ namespace NAPS2
         private static readonly string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif
 
-        private static readonly string TempPath = Path.Combine(AppDataPath, "tmp");
+        private static readonly string TempPath = Path.Combine(AppDataPath, "temp");
 
         private static readonly string RecoveryPath = Path.Combine(AppDataPath, "recovery");
 
@@ -45,11 +45,7 @@ namespace NAPS2
         {
             get
             {
-                if (!Directory.Exists(AppDataPath))
-                {
-                    Directory.CreateDirectory(AppDataPath);
-                }
-                return AppDataPath;
+                return EnsureFolderExists(AppDataPath);
             }
         }
 
@@ -57,11 +53,7 @@ namespace NAPS2
         {
             get
             {
-                if (!Directory.Exists(ExecutablePath))
-                {
-                    Directory.CreateDirectory(ExecutablePath);
-                }
-                return ExecutablePath;
+                return EnsureFolderExists(ExecutablePath);
             }
         }
 
@@ -69,11 +61,7 @@ namespace NAPS2
         {
             get
             {
-                if (!Directory.Exists(TempPath))
-                {
-                    Directory.CreateDirectory(TempPath);
-                }
-                return TempPath;
+                return EnsureFolderExists(TempPath);
             }
         }
 
@@ -81,12 +69,17 @@ namespace NAPS2
         {
             get
             {
-                if (!Directory.Exists(RecoveryPath))
-                {
-                    Directory.CreateDirectory(RecoveryPath);
-                }
-                return RecoveryPath;
+                return EnsureFolderExists(RecoveryPath);
             }
+        }
+
+        private static string EnsureFolderExists(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+            return folderPath;
         }
     }
 }
