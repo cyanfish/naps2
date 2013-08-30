@@ -147,4 +147,7 @@
   <data name="he" xml:space="preserve">
     <value>עברית</value>
   </data>
+  <data name="ca" xml:space="preserve">
+    <value>Català</value>
+  </data>
 </root>

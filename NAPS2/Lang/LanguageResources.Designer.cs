@@ -61,6 +61,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Català.
+        /// </summary>
+        internal static string ca {
+            get {
+                return ResourceManager.GetString("ca", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deutsch.
         /// </summary>
         internal static string de {
