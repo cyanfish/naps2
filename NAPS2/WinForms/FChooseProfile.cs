@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        private void FChooseProfile_Load(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs e)
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
             UpdateProfiles();

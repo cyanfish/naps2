@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace NAPS2.WinForms
         {
             UpdateRTL();
 
-            Load += OnLoad;
+            Load += OnLoadInternal;
             Closed += OnClosed;
             Resize += OnResize;
             Move += OnMove;
@@ -35,6 +36,11 @@ namespace NAPS2.WinForms
         {
             get
             {
+                if (UserConfigManager == null)
+                {
+                    // Should only occur with the designer
+                    return new List<FormState>();
+                }
                 return UserConfigManager.Config.FormStates;
             }
         }
@@ -62,10 +68,22 @@ namespace NAPS2.WinForms
             RightToLeftLayout = isRTL;
         }
 
+        /// <summary>
+        /// Descendant forms should override this instead of subscribing to the Load event when logic needs
+        /// to be performed before the form is resized (e.g. setting up LayoutManager).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        protected virtual void OnLoad(object sender, EventArgs eventArgs)
+        {
+        }
+
         #region Event Handlers
 
-        private void OnLoad(object sender, EventArgs eventArgs)
+        private void OnLoadInternal(object sender, EventArgs eventArgs)
         {
+            OnLoad(sender, eventArgs);
+
             var formState = FormState;
             if (formState != null)
             {

@@ -95,7 +95,6 @@ namespace NAPS2.WinForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FManageProfiles";
-            this.Load += new System.EventHandler(this.FManageProfiles_Load);
             this.ResumeLayout(false);
 
         }

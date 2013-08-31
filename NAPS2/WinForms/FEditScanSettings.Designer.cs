@@ -324,7 +324,6 @@ namespace NAPS2.WinForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FEditScanSettings";
-            this.Load += new System.EventHandler(this.FEditScanSettings_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).EndInit();

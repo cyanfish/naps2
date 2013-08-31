@@ -181,7 +181,7 @@ namespace NAPS2
         {
             if (!Activated)
             {
-                throw new InvalidOperationException("The LayoutManaged can't update the layout without being activated first.");
+                throw new InvalidOperationException("The LayoutManager can't update the layout without being activated first.");
             }
             foreach (var pair in activatedControlBindings)
             {
@@ -501,7 +501,7 @@ namespace NAPS2
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax LeftToForm()
             {
-                return LeftTo(() => layoutManager.Form.Left);
+                return LeftTo(() => 0);
             }
 
             /// <summary>
@@ -510,7 +510,7 @@ namespace NAPS2
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax RightToForm()
             {
-                return RightTo(() => layoutManager.Form.Right);
+                return RightTo(() => layoutManager.Form.Width);
             }
 
             /// <summary>
@@ -519,7 +519,7 @@ namespace NAPS2
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax TopToForm()
             {
-                return TopTo(() => layoutManager.Form.Top);
+                return TopTo(() => 0);
             }
 
             /// <summary>
@@ -528,7 +528,7 @@ namespace NAPS2
             /// <returns>An object that provides an interface to describe bindings.</returns>
             public BindingSyntax BottomToForm()
             {
-                return BottomTo(() => layoutManager.Form.Bottom);
+                return BottomTo(() => layoutManager.Form.Height);
             }
         }
     }

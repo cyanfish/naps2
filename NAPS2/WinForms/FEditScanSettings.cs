@@ -58,7 +58,7 @@ namespace NAPS2.WinForms
             AddEnumItems<ScanSource>(cmbSource);
         }
 
-        private void FEditScanSettings_Load(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs e)
         {
             // Don't trigger any onChange events
             suppressChangeEvent = true;
@@ -93,11 +93,11 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(txtName, txtDevice, panel1, panel2)
                     .WidthToForm()
-                .Bind(pctIcon, btnChooseDevice)
+                .Bind(pctIcon, btnChooseDevice, btnOK, btnCancel)
                     .RightToForm()
                 .Bind(cmbAlign, cmbDepth, cmbPage, cmbResolution, cmbScale, cmbSource, trBrightness, trContrast)
                     .WidthTo(() => Width / 2)
-                .Bind(rdTWAIN, rdbNativeWIA, label3, cmbDepth, label9, cmbAlign, label10, cmbScale, label7, trContrast, btnOK, btnCancel)
+                .Bind(rdTWAIN, rdbNativeWIA, label3, cmbDepth, label9, cmbAlign, label10, cmbScale, label7, trContrast)
                     .LeftTo(() => Width / 2)
                 .Bind(txtBrightness)
                     .LeftTo(() => trBrightness.Right)

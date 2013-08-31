@@ -43,7 +43,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        private void FManageProfiles_Load(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs e)
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
             btnEdit.Enabled = false;

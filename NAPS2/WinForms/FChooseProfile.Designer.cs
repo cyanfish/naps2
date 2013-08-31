@@ -85,7 +85,6 @@ namespace NAPS2.WinForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FChooseProfile";
-            this.Load += new System.EventHandler(this.FChooseProfile_Load);
             this.ResumeLayout(false);
 
         }
