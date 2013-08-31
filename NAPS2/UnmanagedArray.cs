@@ -26,11 +26,6 @@ namespace NAPS2
             }
         }
 
-        ~UnmanagedArray()
-        {
-            Dispose();
-        }
-
         /// <summary>
         /// Gets the size of each element in the unmanaged array in bytes.
         /// </summary>

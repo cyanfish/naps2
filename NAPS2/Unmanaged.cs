@@ -37,11 +37,6 @@ namespace NAPS2
             }
         }
 
-        ~Unmanaged()
-        {
-            Dispose();
-        }
-
         protected override T GetValue()
         {
             if (Pointer == IntPtr.Zero)

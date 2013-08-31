@@ -9,6 +9,11 @@ namespace NAPS2
     {
         private bool disposed;
 
+        ~UnmanagedBase()
+        {
+            Dispose();
+        }
+
         /// <summary>
         /// Gets the size of the unmanaged structure in bytes. If the structure is null, this is zero.
         /// </summary>
