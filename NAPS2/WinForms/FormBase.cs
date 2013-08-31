@@ -87,7 +87,12 @@ namespace NAPS2.WinForms
             var formState = FormState;
             if (formState != null)
             {
-                Location = formState.Location;
+                if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(formState.Location)))
+                {
+                    // Only move to the specified location if it's onscreen
+                    // It might be offscreen if the user has disconnected a monitor
+                    Location = formState.Location;
+                }
                 Size = formState.Size;
                 if (formState.Maximized)
                 {
