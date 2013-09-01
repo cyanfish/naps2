@@ -35,6 +35,8 @@ namespace NAPS2.WinForms
 
         protected bool RestoreFormState { get; set; }
 
+        protected bool SaveFormState { get; set; }
+
         #region Helper Properties
 
         private List<FormState> FormStates
@@ -89,33 +91,38 @@ namespace NAPS2.WinForms
         {
             OnLoad(sender, eventArgs);
 
-            var formState = FormState;
-            if (formState != null && RestoreFormState)
+            if (FormState != null && RestoreFormState)
             {
-                if (!formState.Location.IsEmpty)
-                {
-                    if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(formState.Location)))
-                    {
-                        // Only move to the specified location if it's onscreen
-                        // It might be offscreen if the user has disconnected a monitor
-                        Location = formState.Location;
-                    }
-                }
-                if (!formState.Size.IsEmpty)
-                {
-                    Size = formState.Size;
-                }
-                if (formState.Maximized)
-                {
-                    WindowState = FormWindowState.Maximized;
-                }
+                DoRestoreFormState();
             }
             loaded = true;
         }
 
+        protected void DoRestoreFormState()
+        {
+            FormState formState = FormState;
+            if (!formState.Location.IsEmpty)
+            {
+                if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(formState.Location)))
+                {
+                    // Only move to the specified location if it's onscreen
+                    // It might be offscreen if the user has disconnected a monitor
+                    Location = formState.Location;
+                }
+            }
+            if (!formState.Size.IsEmpty)
+            {
+                Size = formState.Size;
+            }
+            if (formState.Maximized)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+        }
+
         private void OnResize(object sender, EventArgs eventArgs)
         {
-            if (loaded)
+            if (loaded && SaveFormState)
             {
                 FormState.Maximized = (WindowState == FormWindowState.Maximized);
                 if (WindowState == FormWindowState.Normal)
@@ -127,7 +134,7 @@ namespace NAPS2.WinForms
 
         private void OnMove(object sender, EventArgs eventArgs)
         {
-            if (loaded)
+            if (loaded && SaveFormState)
             {
                 if (WindowState == FormWindowState.Normal)
                 {
@@ -138,7 +145,10 @@ namespace NAPS2.WinForms
 
         private void OnClosed(object sender, EventArgs eventArgs)
         {
-            UserConfigManager.Save();
+            if (SaveFormState)
+            {
+                UserConfigManager.Save();
+            }
         }
 
         #endregion
