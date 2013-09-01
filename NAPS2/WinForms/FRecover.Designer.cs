@@ -41,8 +41,8 @@
             this.lblPrompt.Name = "lblPrompt";
             this.lblPrompt.Size = new System.Drawing.Size(372, 46);
             this.lblPrompt.TabIndex = 0;
-            this.lblPrompt.Text = "{0} images scanned on {1} at {2} may not have been saved, and are recoverable. Do" +
-    " you want to recover them?";
+            this.lblPrompt.Text = "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. " +
+    "Do you want to recover them?";
             // 
             // btnRecover
             // 
