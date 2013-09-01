@@ -28,6 +28,7 @@ cp "..\..\NAPS2.Setup\bin\Release\NAPS2.Setup.msi" ($PublishDir + "naps2-$Versio
 # Standalone ZIP
 $StandaloneDir = $PublishDir + "naps2-$Version-standalone\"
 $StandaloneZip = $PublishDir + "naps2-$Version-standalone.zip"
+$Standalone7z = $PublishDir + "naps2-$Version-standalone.7z"
 if (Test-Path $StandaloneDir) {
     rmdir $StandaloneDir -Recurse
 }
@@ -50,5 +51,9 @@ foreach ($File in ("..\Resources\scanner-app.ico", "..\appsettings.xml", "lib\wi
 if (Test-Path $StandaloneZip) {
     rm $StandaloneZip
 }
+if (Test-Path $Standalone7z) {
+    rm $Standalone7z
+}
 & (Get-7z-Path) a $StandaloneZip $($StandaloneDir + "*")
+& (Get-7z-Path) a $Standalone7z $($StandaloneDir + "*")
 rmdir -Recurse $StandaloneDir
