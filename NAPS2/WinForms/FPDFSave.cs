@@ -42,6 +42,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
             this.pdfExporter = pdfExporter;
             this.errorOutput = errorOutput;
+            RestoreFormState = false;
             Shown += FPDFSave_Shown;
         }
 

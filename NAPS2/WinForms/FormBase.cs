@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace NAPS2.WinForms
         {
             UpdateRTL();
 
+            RestoreFormState = true;
+
             Load += OnLoadInternal;
             Closed += OnClosed;
             Resize += OnResize;
@@ -29,6 +32,8 @@ namespace NAPS2.WinForms
 
         [Inject]
         public UserConfigManager UserConfigManager { get; set; }
+
+        protected bool RestoreFormState { get; set; }
 
         #region Helper Properties
 
@@ -85,15 +90,21 @@ namespace NAPS2.WinForms
             OnLoad(sender, eventArgs);
 
             var formState = FormState;
-            if (formState != null)
+            if (formState != null && RestoreFormState)
             {
-                if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(formState.Location)))
+                if (!formState.Location.IsEmpty)
                 {
-                    // Only move to the specified location if it's onscreen
-                    // It might be offscreen if the user has disconnected a monitor
-                    Location = formState.Location;
+                    if (Screen.AllScreens.Any(x => x.WorkingArea.Contains(formState.Location)))
+                    {
+                        // Only move to the specified location if it's onscreen
+                        // It might be offscreen if the user has disconnected a monitor
+                        Location = formState.Location;
+                    }
                 }
-                Size = formState.Size;
+                if (!formState.Size.IsEmpty)
+                {
+                    Size = formState.Size;
+                }
                 if (formState.Maximized)
                 {
                     WindowState = FormWindowState.Maximized;

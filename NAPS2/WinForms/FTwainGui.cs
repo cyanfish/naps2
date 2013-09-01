@@ -51,6 +51,7 @@ namespace NAPS2.WinForms
             this.settings = settings;
             this.logger = logger;
             this.scannedImageFactory = scannedImageFactory;
+            RestoreFormState = false;
         }
 
         public List<IScannedImage> Bitmaps
