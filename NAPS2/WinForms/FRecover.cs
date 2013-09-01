@@ -9,10 +9,11 @@ using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
-    public partial class FRecover : Form
+    public partial class FRecover : FormBase
     {
         public FRecover(int imageCount, DateTime scannedDateTime)
         {
+            RestoreFormState = false;
             InitializeComponent();
             AcceptButton = btnRecover;
             CancelButton = btnCancel;
