@@ -62,13 +62,10 @@ namespace NAPS2.Config
             {
                 if (profile.DriverName == null && profile.Device != null)
                 {
-                    // Ignore "Obsolete" attribute on ScanDevice.DriverName (the property is only used here for compatibility)
-#pragma warning disable 618
                     // Copy the DriverName to the new property
                     profile.DriverName = profile.Device.DriverName;
                     // This old property is unused, so remove its value
                     profile.Device.DriverName = null;
-#pragma warning restore 618
                 }
                 if (!(profile is ExtendedScanSettings))
                 {
