@@ -100,9 +100,9 @@ namespace NAPS2.Scan.Images
             _recoveryIndexManager.Index.Images.Add(new RecoveryIndexImage
             {
                 FileName = baseImageFileName,
-                BitDepth = (int)bitDepth,
+                BitDepth = bitDepth,
                 HighQuality = highQuality,
-                Transform = (int)transform
+                Transform = transform
             });
             _recoveryIndexManager.Save();
         }
@@ -160,7 +160,7 @@ namespace NAPS2.Scan.Images
 
             foreach (var indexImage in _recoveryIndexManager.Index.Images.Where(x => x.FileName == baseImageFileName))
             {
-                indexImage.Transform = (int)transform;
+                indexImage.Transform = transform;
             }
             _recoveryIndexManager.Save();
         }

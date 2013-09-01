@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NAPS2.Scan;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace NAPS2.Recovery
@@ -8,9 +10,9 @@ namespace NAPS2.Recovery
     {
         public string FileName { get; set; }
 
-        public int Transform { get; set; }
+        public RotateFlipType Transform { get; set; }
 
-        public int BitDepth { get; set; }
+        public ScanBitDepth BitDepth { get; set; }
 
         public bool HighQuality { get; set; }
     }

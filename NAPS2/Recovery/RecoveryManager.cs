@@ -94,9 +94,8 @@ namespace NAPS2.Recovery
                     string imagePath = Path.Combine(folderToRecoverFrom.FullName, indexImage.FileName);
                     using (var bitmap = new Bitmap(imagePath))
                     {
-                        var scannedImage = scannedImageFactory.Create(bitmap,
-                            (ScanBitDepth)indexImage.BitDepth, indexImage.HighQuality);
-                        scannedImage.RotateFlip((RotateFlipType)indexImage.Transform);
+                        var scannedImage = scannedImageFactory.Create(bitmap, indexImage.BitDepth, indexImage.HighQuality);
+                        scannedImage.RotateFlip(indexImage.Transform);
                         yield return scannedImage;
                     }
                 }
