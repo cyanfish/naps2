@@ -85,7 +85,7 @@ namespace NAPS2.WinForms
             // Read a list of languages from the Languages.resx file
             var resourceManager = LanguageResources.ResourceManager;
             var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-            foreach (DictionaryEntry entry in resourceSet)
+            foreach (DictionaryEntry entry in resourceSet.Cast<DictionaryEntry>().OrderBy(x => x.Value))
             {
                 var langCode = (string)entry.Key;
                 var langName = (string)entry.Value;
