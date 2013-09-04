@@ -65,6 +65,7 @@
     <Compile Include="Integration\PdfSharpExporterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\ImageFileNamerTests.cs" />
+    <Compile Include="Unit\ScannedImageImporterTests.cs" />
     <Compile Include="Unit\ScannedImageListTests.cs" />
   </ItemGroup>
   <ItemGroup>
