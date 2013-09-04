@@ -24,6 +24,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using NAPS2.Console.DI;
 using NAPS2.Console.Lang.Resources;
 using Ninject;
 using Ninject.Parameters;

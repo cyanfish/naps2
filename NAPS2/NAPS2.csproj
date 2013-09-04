@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="DI\CommonModule.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Config\AppConfigManager.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Config\UserConfigManager.cs" />
     <Compile Include="Config\FormState.cs" />
     <Compile Include="CultureInitializer.cs" />
+    <Compile Include="DI\WinFormsModule.cs" />
     <Compile Include="ImportExport\Email\EmailAttachment.cs" />
     <Compile Include="ImportExport\Email\EmailMessage.cs" />
     <Compile Include="ImportExport\Email\EmailRecipient.cs" />
@@ -199,7 +201,7 @@
     <Compile Include="Scan\Exceptions\DeviceOfflineException.cs" />
     <Compile Include="Scan\Exceptions\DeviceNotFoundException.cs" />
     <Compile Include="Scan\Wia\WiaApi.cs" />
-    <Compile Include="KernelManager.cs" />
+    <Compile Include="DI\KernelManager.cs" />
     <Compile Include="ImportExport\Pdf\IPdfExporter.cs" />
     <Compile Include="ImportExport\Pdf\PdfInfo.cs" />
     <Compile Include="ImportExport\Pdf\PdfSharpExporter.cs" />

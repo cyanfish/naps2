@@ -72,7 +72,8 @@
     <Compile Include="AutomatedScanningOptions.cs" />
     <Compile Include="CommandLineOptions.cs" />
     <Compile Include="ConsoleErrorOutput.cs" />
-    <Compile Include="KernelManager.cs" />
+    <Compile Include="DI\ConsoleModule.cs" />
+    <Compile Include="DI\KernelManager.cs" />
     <Compile Include="Lang\Resources\ConsoleResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
