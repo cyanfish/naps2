@@ -120,8 +120,12 @@
     <Compile Include="ImportExport\Email\Mapi\MapiSendMailFlags.cs" />
     <Compile Include="IconButtonSizer.cs" />
     <Compile Include="IErrorOutput.cs" />
+    <Compile Include="ImportExport\Images\ImageImporter.cs" />
     <Compile Include="ImportExport\Images\ImageSaver.cs" />
     <Compile Include="ImportExport\Images\ImageFileNamer.cs" />
+    <Compile Include="ImportExport\IScannedImageImporter.cs" />
+    <Compile Include="ImportExport\Pdf\PdfSharpImporter.cs" />
+    <Compile Include="ImportExport\ScannedImageImporter.cs" />
     <Compile Include="Scan\Images\BitmapHelper.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -684,6 +688,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\blueprints-small.ico" />
+    <Content Include="Resources\folder_picture.png" />
     <Content Include="Resources\information-small.ico" />
     <Content Include="Resources\information-small.png" />
     <Content Include="Resources\scanner-app.ico" />

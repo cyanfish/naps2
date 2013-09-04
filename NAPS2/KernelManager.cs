@@ -23,8 +23,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
+using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -53,6 +55,9 @@ namespace NAPS2
         {
             public override void Load()
             {
+                Bind<IScannedImageImporter>().To<ScannedImageImporter>().When(x => x.Parameters.Count == 0);
+                Bind<IScannedImageImporter>().To<PdfSharpImporter>().Named("pdf");
+                Bind<IScannedImageImporter>().To<ImageImporter>().Named("image");
                 Bind<IScannedImageFactory>().To<FileBasedScannedImageFactory>();
                 Bind<IScanPerformer>().To<ScanPerformer>();
                 Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
