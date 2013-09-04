@@ -9,6 +9,7 @@ using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Stub;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using Ninject.Modules;
@@ -20,7 +21,7 @@ namespace NAPS2.DI
     {
         public override void Load()
         {
-            Bind<IScannedImageImporter>().To<ScannedImageImporter>().When(x => x.Parameters.Count == 0);
+            Bind<IScannedImageImporter>().To<ScannedImageImporter>().When(x => true); // Fix so that this binding is only used when no name is specified
             Bind<IScannedImageImporter>().To<PdfSharpImporter>().Named("pdf");
             Bind<IScannedImageImporter>().To<ImageImporter>().Named("image");
             Bind<IScannedImageFactory>().To<FileBasedScannedImageFactory>();
