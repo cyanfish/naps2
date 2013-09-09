@@ -619,11 +619,14 @@
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Lang\tmx\ca.tmx" />
+    <None Include="Lang\tmx\cs.tmx" />
     <None Include="Lang\tmx\de.tmx" />
     <None Include="Lang\tmx\empty.tmx" />
     <None Include="Lang\tmx\es.tmx" />
+    <None Include="Lang\tmx\fr.tmx" />
     <None Include="Lang\tmx\he.tmx" />
     <None Include="Lang\tmx\it.tmx" />
+    <None Include="Lang\tmx\pl.tmx" />
     <None Include="Lang\tmx\ru.tmx" />
     <None Include="Lang\tmx\uk.tmx" />
     <None Include="NAPS2.licenseheader" />
