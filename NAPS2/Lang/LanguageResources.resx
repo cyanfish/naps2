@@ -150,4 +150,7 @@
   <data name="ca" xml:space="preserve">
     <value>Català</value>
   </data>
+  <data name="cs" xml:space="preserve">
+    <value>Čeština</value>
+  </data>
 </root>

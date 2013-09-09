@@ -70,6 +70,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Čeština.
+        /// </summary>
+        internal static string cs {
+            get {
+                return ResourceManager.GetString("cs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deutsch.
         /// </summary>
         internal static string de {
