@@ -9,13 +9,13 @@ namespace NAPS2.Update
 {
     public class AutoUpdater
     {
-        private readonly UserConfigManager _userConfigManager;
-        private readonly AppConfigManager _appConfigManager;
+        private readonly UserConfigManager userConfigManager;
+        private readonly AppConfigManager appConfigManager;
 
         public AutoUpdater(UserConfigManager userConfigManager, AppConfigManager appConfigManager)
         {
-            _userConfigManager = userConfigManager;
-            _appConfigManager = appConfigManager;
+            this.userConfigManager = userConfigManager;
+            this.appConfigManager = appConfigManager;
         }
 
         public void OnApplicationStart()
