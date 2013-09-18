@@ -172,6 +172,12 @@
     <Compile Include="StringWrapper.cs" />
     <Compile Include="UnmanagedArray.cs" />
     <Compile Include="UnmanagedBase.cs" />
+    <Compile Include="Update\AutoUpdater.cs" />
+    <Compile Include="Update\AutoUpdateStatus.cs" />
+    <Compile Include="Update\ICurrentVersionSource.cs" />
+    <Compile Include="Update\IUrlStreamReader.cs" />
+    <Compile Include="Update\IUrlTextReader.cs" />
+    <Compile Include="Update\ILatestVersionSource.cs" />
     <Compile Include="WinForms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>

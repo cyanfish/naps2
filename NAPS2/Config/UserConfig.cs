@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Update;
 
 namespace NAPS2.Config
 {
@@ -31,12 +32,16 @@ namespace NAPS2.Config
             FormStates = new List<FormState>();
         }
 
-        public const int CURRENT_VERSION = 1;
+        public const int CURRENT_VERSION = 2;
 
         public int Version { get; set; }
 
         public string Culture { get; set; }
 
         public List<FormState> FormStates { get; set; }
+
+        public AutoUpdateStatus AutoUpdate { get; set; }
+
+        public DateTime? LastUpdateCheckDate { get; set; }
     }
 }

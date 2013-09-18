@@ -26,12 +26,13 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using NAPS2.Scan;
+using NAPS2.Update;
 
 namespace NAPS2.Config
 {
     public class AppConfig
     {
-        public const int CURRENT_VERSION = 1;
+        public const int CURRENT_VERSION = 2;
 
         public int Version { get; set; }
 
@@ -44,5 +45,7 @@ namespace NAPS2.Config
         public MessageBoxIcon StartupMessageIcon { get; set; }
 
         public ExtendedScanSettings DefaultProfileSettings { get; set; }
+
+        public AutoUpdateStatus AutoUpdate { get; set; }
     }
 }
