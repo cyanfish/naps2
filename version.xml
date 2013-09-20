@@ -4,24 +4,24 @@
 		<Edition>InstallerEXE</Edition>
 		<LatestVersion>2.6</LatestVersion>
 		<FileName>naps2-{0}-setup.exe</FileName>
-		<DownloadUrl>https://downloads.sourceforge.net/project/naps2/{0}/{1}/download</DownloadUrl>
+		<DownloadUrl>http://sourceforge.net/projects/naps2/files/{0}/{1}/download</DownloadUrl>
 	</VersionInfo>
 	<VersionInfo>
 		<Edition>InstallerMSI</Edition>
 		<LatestVersion>2.6</LatestVersion>
 		<FileName>naps2-{0}-setup.msi</FileName>
-		<DownloadUrl>https://downloads.sourceforge.net/project/naps2/{0}/{1}/download</DownloadUrl>
+		<DownloadUrl>http://sourceforge.net/projects/naps2/files/{0}/{1}/download</DownloadUrl>
 	</VersionInfo>
 	<VersionInfo>
 		<Edition>StandaloneZIP</Edition>
 		<LatestVersion>2.6</LatestVersion>
 		<FileName>naps2-{0}-standalone.zip</FileName>
-		<DownloadUrl>https://downloads.sourceforge.net/project/naps2/{0}/{1}/download</DownloadUrl>
+		<DownloadUrl>http://sourceforge.net/projects/naps2/files/{0}/{1}/download</DownloadUrl>
 	</VersionInfo>
 	<VersionInfo>
 		<Edition>Standalone7Z</Edition>
 		<LatestVersion>2.6</LatestVersion>
 		<FileName>naps2-{0}-standalone.7z</FileName>
-		<DownloadUrl>https://downloads.sourceforge.net/project/naps2/{0}/{1}/download</DownloadUrl>
+		<DownloadUrl>http://sourceforge.net/projects/naps2/files/{0}/{1}/download</DownloadUrl>
 	</VersionInfo>
 </ArrayOfVersionInfo>
