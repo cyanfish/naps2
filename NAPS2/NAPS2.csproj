@@ -173,8 +173,12 @@
     <Compile Include="UnmanagedArray.cs" />
     <Compile Include="UnmanagedBase.cs" />
     <Compile Include="Update\AutoUpdater.cs" />
+    <Compile Include="Update\AutoUpdaterUI.cs" />
     <Compile Include="Update\AutoUpdateStatus.cs" />
     <Compile Include="Update\Edition.cs" />
+    <Compile Include="Update\IAutoUpdater.cs" />
+    <Compile Include="Update\UpdateInfo.cs" />
+    <Compile Include="Update\UrlFileDownloader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
     <Compile Include="Update\IAutoInstaller.cs" />
     <Compile Include="Update\ICurrentVersionSource.cs" />

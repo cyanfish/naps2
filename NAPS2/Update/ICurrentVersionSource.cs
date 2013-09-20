@@ -7,6 +7,6 @@ namespace NAPS2.Update
 {
     public interface ICurrentVersionSource
     {
-        string GetCurrentVersion();
+        Version GetCurrentVersion();
     }
 }

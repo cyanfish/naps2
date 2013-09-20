@@ -7,6 +7,6 @@ namespace NAPS2.Update
 {
     public interface IUrlFileDownloader
     {
-        void DownloadFile(string targetPath);
+        void DownloadFile(string url, string targetPath);
     }
 }

@@ -1,35 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Deployment.Application;
 using System.Linq;
-using System.Text;
-using NAPS2.Config;
+using System.Threading.Tasks;
 
 namespace NAPS2.Update
 {
-    public class AutoUpdater
+    public class AutoUpdater : IAutoUpdater
     {
-        private readonly UserConfigManager userConfigManager;
-        private readonly AppConfigManager appConfigManager;
+        private static readonly Edition Edition = Edition.
+#if STANDALONE // TODO: Provide more variables to differentiate between all 4 editions
+StamdaloneZIP
+#else
+InstallerEXE
+#endif
+;
 
-        public AutoUpdater(UserConfigManager userConfigManager, AppConfigManager appConfigManager)
+        private readonly ILatestVersionSource latestVersionSource;
+
+        public AutoUpdater(ILatestVersionSource latestVersionSource)
         {
-            this.userConfigManager = userConfigManager;
-            this.appConfigManager = appConfigManager;
+            this.latestVersionSource = latestVersionSource;
         }
 
-        public void OnApplicationStart()
+        public Task<UpdateInfo> CheckForUpdate()
         {
-            PromptToEnableAutomaticUpdates();
-            CheckForUpdate();
+            return new Task<UpdateInfo>(() =>
+            {
+                //var versionInfos = await latestVersionSource.GetLatestVersionInfo();
+                return new UpdateInfo
+                {
+
+                };
+            });
         }
 
-        private void PromptToEnableAutomaticUpdates()
+        public void DownloadUpdate(UpdateInfo updateInfo, string downloadPath = null)
         {
             throw new NotImplementedException();
         }
 
-        private void CheckForUpdate()
+        public void InstallUpdate(string installerPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DownloadAndInstallUpdate(UpdateInfo updateInfo)
         {
             throw new NotImplementedException();
         }

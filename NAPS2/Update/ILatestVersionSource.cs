@@ -8,6 +8,6 @@ namespace NAPS2.Update
 {
     public interface ILatestVersionSource
     {
-        Task<string> GetLatestVersion();
+        Task<List<VersionInfo>> GetLatestVersionInfo();
     }
 }

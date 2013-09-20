@@ -14,10 +14,30 @@ namespace NAPS2.Tests.Integration
         [Test]
         public void GetLatestVersion_ReadsVersionFromSourceforge()
         {
-            const string versionFileUrl = "https://sourceforge.net/p/naps2/code/ci/master/tree/version.txt?format=raw";
-            var source = new LatestVersionSource(versionFileUrl, new UrlTextReader(new UrlStreamReader()));
-            var version = source.GetLatestVersion().Result;
-            Assert.AreEqual(version, "2.6");
+            const string versionFileUrl = "https://sourceforge.net/p/naps2/code/ci/master/tree/version.xml?format=raw";
+            const int editionCount = 4;
+
+            var source = new LatestVersionSource(versionFileUrl, new UrlStreamReader());
+            var versionInfos = source.GetLatestVersionInfo().Result;
+
+            // Only assert against vague characteristics of the version infos
+            // This way, the test doesn't break when properties are changed in the normal
+            // operation of publishing new versions
+
+            // Check that all editions are read
+            Assert.AreEqual(editionCount, versionInfos.Count);
+            // Check that all editions are unique
+            Assert.AreEqual(editionCount, versionInfos.GroupBy(x => x.Edition).Count());
+            foreach (var versionInfo in versionInfos)
+            {
+                // Check that all properties are read (i.e. not null)
+                Assert.NotNull(versionInfo.DownloadUrl);
+                Assert.NotNull(versionInfo.FileName);
+                Assert.NotNull(versionInfo.LatestVersion);
+                // Check that string format arguments have been replaced
+                Assert.False(versionInfo.DownloadUrl.Contains("{"));
+                Assert.False(versionInfo.FileName.Contains("{"));
+            }
         }
     }
 }
