@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BasePdfExporterTests.cs" />
+    <Compile Include="Integration\AutoUpdaterTests.cs" />
     <Compile Include="Integration\LatestVersionSourceTests.cs" />
     <Compile Include="Integration\PdfSharpExporterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

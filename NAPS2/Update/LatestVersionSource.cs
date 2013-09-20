@@ -24,7 +24,7 @@ namespace NAPS2.Update
 
         public Task<List<VersionInfo>> GetLatestVersionInfo()
         {
-            var task = new Task<List<VersionInfo>>(() =>
+            return Task.Factory.StartNew(() =>
             {
                 var stream = urlStreamReader.OpenStream(versionFileUrl);
                 var versionInfos = (List<VersionInfo>)VersionInfoSerializer.Value.Deserialize(stream);
@@ -39,8 +39,6 @@ namespace NAPS2.Update
                 }
                 return versionInfos;
             });
-            task.Start();
-            return task;
         }
     }
 }

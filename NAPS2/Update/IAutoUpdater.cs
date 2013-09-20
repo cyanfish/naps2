@@ -9,8 +9,8 @@ namespace NAPS2.Update
     public interface IAutoUpdater
     {
         Task<UpdateInfo> CheckForUpdate();
-        void DownloadUpdate(UpdateInfo updateInfo, string downloadPath = null);
-        void InstallUpdate(string installerPath);
-        void DownloadAndInstallUpdate(UpdateInfo updateInfo);
+        Task<bool> DownloadUpdate(VersionInfo versionInfo, string savePath);
+        Task<bool> InstallUpdate(string installerPath);
+        Task<bool> DownloadAndInstallUpdate(VersionInfo versionInfo);
     }
 }

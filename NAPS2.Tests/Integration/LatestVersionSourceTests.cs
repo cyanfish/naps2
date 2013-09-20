@@ -31,9 +31,9 @@ namespace NAPS2.Tests.Integration
             foreach (var versionInfo in versionInfos)
             {
                 // Check that all properties are read (i.e. not null)
-                Assert.NotNull(versionInfo.DownloadUrl);
-                Assert.NotNull(versionInfo.FileName);
-                Assert.NotNull(versionInfo.LatestVersion);
+                Assert.False(string.IsNullOrWhiteSpace(versionInfo.DownloadUrl));
+                Assert.False(string.IsNullOrWhiteSpace(versionInfo.FileName));
+                Assert.False(string.IsNullOrWhiteSpace(versionInfo.LatestVersion));
                 // Check that string format arguments have been replaced
                 Assert.False(versionInfo.DownloadUrl.Contains("{"));
                 Assert.False(versionInfo.FileName.Contains("{"));
