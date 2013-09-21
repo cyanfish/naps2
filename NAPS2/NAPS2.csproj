@@ -187,7 +187,6 @@
     <Compile Include="Update\UpdateInfo.cs" />
     <Compile Include="Update\UrlFileDownloader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
-    <Compile Include="Update\IAutoInstaller.cs" />
     <Compile Include="Update\ICurrentVersionSource.cs" />
     <Compile Include="Update\IUrlFileDownloader.cs" />
     <Compile Include="Update\IUrlStreamReader.cs" />
