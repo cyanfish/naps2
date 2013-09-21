@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="DI\CommonModule.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Config\AppConfigManager.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Config\UserConfigManager.cs" />
     <Compile Include="Config\FormState.cs" />
     <Compile Include="CultureInitializer.cs" />
+    <Compile Include="DI\WinFormsModule.cs" />
     <Compile Include="ImportExport\Email\EmailAttachment.cs" />
     <Compile Include="ImportExport\Email\EmailMessage.cs" />
     <Compile Include="ImportExport\Email\EmailRecipient.cs" />
@@ -120,8 +122,12 @@
     <Compile Include="ImportExport\Email\Mapi\MapiSendMailFlags.cs" />
     <Compile Include="IconButtonSizer.cs" />
     <Compile Include="IErrorOutput.cs" />
+    <Compile Include="ImportExport\Images\ImageImporter.cs" />
     <Compile Include="ImportExport\Images\ImageSaver.cs" />
     <Compile Include="ImportExport\Images\ImageFileNamer.cs" />
+    <Compile Include="ImportExport\IScannedImageImporter.cs" />
+    <Compile Include="ImportExport\Pdf\PdfSharpImporter.cs" />
+    <Compile Include="ImportExport\ScannedImageImporter.cs" />
     <Compile Include="Scan\Images\BitmapHelper.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -213,7 +219,7 @@
     <Compile Include="Scan\Exceptions\DeviceOfflineException.cs" />
     <Compile Include="Scan\Exceptions\DeviceNotFoundException.cs" />
     <Compile Include="Scan\Wia\WiaApi.cs" />
-    <Compile Include="KernelManager.cs" />
+    <Compile Include="DI\KernelManager.cs" />
     <Compile Include="ImportExport\Pdf\IPdfExporter.cs" />
     <Compile Include="ImportExport\Pdf\PdfInfo.cs" />
     <Compile Include="ImportExport\Pdf\PdfSharpExporter.cs" />
@@ -846,6 +852,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\blueprints-small.ico" />
+    <Content Include="Resources\folder_picture.png" />
     <Content Include="Resources\information-small.ico" />
     <Content Include="Resources\information-small.png" />
     <Content Include="Resources\scanner-app.ico" />

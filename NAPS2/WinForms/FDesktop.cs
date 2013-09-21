@@ -29,6 +29,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.Lang;
@@ -45,6 +46,7 @@ namespace NAPS2.WinForms
     public partial class FDesktop : FormBase, IScanReceiver
     {
         private readonly IEmailer emailer;
+        private readonly IScannedImageImporter scannedImageImporter;
         private readonly ImageSaver imageSaver;
         private readonly StringWrapper stringWrapper;
         private readonly UserConfigManager userConfigManager;
@@ -55,7 +57,7 @@ namespace NAPS2.WinForms
         private readonly RecoveryManager recoveryManager;
         private readonly ScannedImageList imageList = new ScannedImageList();
 
-        public FDesktop(IKernel kernel, IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager)
+        public FDesktop(IKernel kernel, IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -66,6 +68,7 @@ namespace NAPS2.WinForms
             this.logger = logger;
             this.scannedImageFactory = scannedImageFactory;
             this.recoveryManager = recoveryManager;
+            this.scannedImageImporter = scannedImageImporter;
             InitializeComponent();
         }
 
@@ -153,6 +156,7 @@ namespace NAPS2.WinForms
 
         private void UpdateThumbnails()
         {
+            // TODO: Make incremental updates (i.e. appends) faster if there are many images
             thumbnailList1.UpdateImages(imageList.Images);
         }
 
@@ -445,6 +449,25 @@ namespace NAPS2.WinForms
         {
             // TODO: Add a closing confirmation
             imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+        }
+
+        private void tsImport_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog
+            {
+                Multiselect = true,
+                CheckFileExists = true
+            };
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                foreach (var fileName in ofd.FileNames)
+                {
+                    var images = scannedImageImporter.Import(fileName);
+                    imageList.Images.AddRange(images);
+                    // Update after each file to provide some kind of progress indication if there are a lot of files
+                    UpdateThumbnails();
+                }
+            }
         }
     }
 }
