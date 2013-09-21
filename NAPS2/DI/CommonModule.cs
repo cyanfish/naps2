@@ -22,7 +22,6 @@ namespace NAPS2.DI
     {
         public override void Load()
         {
-
             // Import
             Bind<IScannedImageImporter>().To<ScannedImageImporter>().When(x => true); // Fix so that this binding is only used when no name is specified
             Bind<IScannedImageImporter>().To<PdfSharpImporter>().Named("pdf");
@@ -55,15 +54,25 @@ namespace NAPS2.DI
             Bind<IUrlFileDownloader>().To<UrlFileDownloader>();
             Bind<IUrlStreamReader>().To<UrlStreamReader>();
             Bind<IUrlTextReader>().To<UrlTextReader>();
-#if STANDALONE
-            Bind<Edition>().ToConstant(Edition.StandaloneZIP); // TODO: Match against all 4 editions
-#else
-            Bind<Edition>().ToConstant(Edition.InstallerEXE);
-#endif
-
+            Bind<Edition>().ToConstant(GetEdition());
 
             // Misc
             Bind<Logger>().ToMethod(ctx => LoggerFactory.Current.GetLogger()).InSingletonScope();
+        }
+
+        private Edition GetEdition()
+        {
+#if STANDALONE_ZIP
+            return Edition.StandaloneZIP;
+#elif STANDALONE_7Z
+            return Edition.Standalone7Z;
+#elif INSTALLER_EXE
+            return Edition.InstallerEXE;
+#elif INSTALLER_MSI
+            return Edition.InstallerMSI;
+#else // Debug
+            return Edition.InstallerEXE;
+#endif
         }
     }
 }
