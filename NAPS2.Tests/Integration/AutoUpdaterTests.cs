@@ -19,7 +19,7 @@ namespace NAPS2.Tests.Integration
         {
             const string versionFileUrl = "https://sourceforge.net/p/naps2/code/ci/master/tree/version.xml?format=raw";
             autoUpdater = new AutoUpdater(new LatestVersionSource(versionFileUrl, new UrlStreamReader()),
-                new CurrentVersionSource(), new UrlFileDownloader(new UrlStreamReader()));
+                new CurrentVersionSource(), new UrlFileDownloader(new UrlStreamReader()), Edition.InstallerEXE);
         }
 
         [TearDown]

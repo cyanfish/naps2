@@ -11,23 +11,17 @@ namespace NAPS2.Update
 {
     public class AutoUpdater : IAutoUpdater
     {
-        private const Edition CURRENT_EDITION = Edition.
-#if STANDALONE // TODO: Provide more variables to differentiate between all 4 editions
-StamdaloneZIP
-#else
-InstallerEXE
-#endif
-;
-
         private readonly ILatestVersionSource latestVersionSource;
         private readonly ICurrentVersionSource currentVersionSource;
         private readonly IUrlFileDownloader urlFileDownloader;
+        private readonly Edition edition;
 
-        public AutoUpdater(ILatestVersionSource latestVersionSource, ICurrentVersionSource currentVersionSource, IUrlFileDownloader urlFileDownloader)
+        public AutoUpdater(ILatestVersionSource latestVersionSource, ICurrentVersionSource currentVersionSource, IUrlFileDownloader urlFileDownloader, Edition edition)
         {
             this.latestVersionSource = latestVersionSource;
             this.currentVersionSource = currentVersionSource;
             this.urlFileDownloader = urlFileDownloader;
+            this.edition = edition;
         }
 
         public Task<UpdateInfo> CheckForUpdate()
@@ -35,7 +29,7 @@ InstallerEXE
             return Task.Factory.StartNew(() =>
             {
                 var versionInfos = latestVersionSource.GetLatestVersionInfo().Result;
-                var currentEditionVersionInfo = versionInfos.Single(x => x.Edition == CURRENT_EDITION);
+                var currentEditionVersionInfo = versionInfos.Single(x => x.Edition == edition);
                 return new UpdateInfo
                 {
                     HasUpdate = new Version(currentEditionVersionInfo.LatestVersion) > currentVersionSource.GetCurrentVersion(),
@@ -51,7 +45,7 @@ InstallerEXE
                 // Store to a temp file while downloading
                 string tempPath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
 
-                urlFileDownloader.DownloadFile(versionInfo.DownloadUrl, savePath);
+                urlFileDownloader.DownloadFile(versionInfo.DownloadUrl, tempPath);
 
                 // Now that the download is complete, rename/move the temp file
                 File.Move(tempPath, savePath);
