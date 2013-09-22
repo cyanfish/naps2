@@ -17,7 +17,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -25,7 +25,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'InstallerEXE|x86'">
-    <OutputPath>bin\x86\InstallerEXE\</OutputPath>
+    <OutputPath>bin\InstallerEXE\</OutputPath>
     <DefineConstants>TRACE;INSTALLER INSTALLER_EXE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -34,7 +34,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StandaloneZIP|x86'">
-    <OutputPath>bin\x86\StandaloneZIP\</OutputPath>
+    <OutputPath>bin\StandaloneZIP\</OutputPath>
     <DefineConstants>TRACE;STANDALONE STANDALONE_ZIP</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -44,7 +44,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'InstallerMSI|x86'">
-    <OutputPath>bin\x86\InstallerMSI\</OutputPath>
+    <OutputPath>bin\InstallerMSI\</OutputPath>
     <DefineConstants>TRACE;INSTALLER INSTALLER_MSI</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -53,7 +53,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Standalone7Z|x86'">
-    <OutputPath>bin\x86\Standalone7Z\</OutputPath>
+    <OutputPath>bin\Standalone7Z\</OutputPath>
     <DefineConstants>TRACE;STANDALONE STANDALONE_7Z</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
