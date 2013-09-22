@@ -201,6 +201,7 @@
     <Compile Include="Update\CurrentVersionSource.cs" />
     <Compile Include="Update\Edition.cs" />
     <Compile Include="Update\IAutoUpdater.cs" />
+    <Compile Include="Update\IAutoUpdaterClient.cs" />
     <Compile Include="Update\UpdateInfo.cs" />
     <Compile Include="Update\UrlFileDownloader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
@@ -212,6 +213,12 @@
     <Compile Include="Update\LatestVersionSource.cs" />
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
+    <Compile Include="WinForms\FUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FUpdate.Designer.cs">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +334,39 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.pseudo.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.ru.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
+    <EmbeddedResource Include="WinForms\FUpdate.ca.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.cs.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.de.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.es.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.fr.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.he.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.it.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.pl.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.ru.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.uk.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.ca.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
     </EmbeddedResource>

@@ -61,6 +61,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automatic Updates.
+        /// </summary>
+        internal static string AutoUpdates {
+            get {
+                return ResourceManager.GetString("AutoUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose Profile.
         /// </summary>
         internal static string ChooseProfile {
@@ -160,11 +169,38 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        internal static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download and Install.
+        /// </summary>
+        internal static string DownloadAndInstall {
+            get {
+                return ResourceManager.GetString("DownloadAndInstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to send an email..
         /// </summary>
         internal static string EmailError {
             get {
                 return ResourceManager.GetString("EmailError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want NAPS2 to automatically check for updates?.
+        /// </summary>
+        internal static string EnableAutoUpdates {
+            get {
+                return ResourceManager.GetString("EnableAutoUpdates", resourceCulture);
             }
         }
         
@@ -286,6 +322,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Now.
+        /// </summary>
+        internal static string NotNow {
+            get {
+                return ResourceManager.GetString("NotNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overwrite File.
         /// </summary>
         internal static string OverwriteFile {
@@ -327,6 +372,15 @@ namespace NAPS2.Lang.Resources {
         internal static string UnknownDriverError {
             get {
                 return ResourceManager.GetString("UnknownDriverError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A newer version of NAPS2 is available. Do you want to update now?.
+        /// </summary>
+        internal static string UpdateNow {
+            get {
+                return ResourceManager.GetString("UpdateNow", resourceCulture);
             }
         }
         
