@@ -44,9 +44,13 @@ function Set-NAPS2-Version {
 function Build-NAPS2 {
     $msbuild = Get-MSBuild-Path
     Get-Process | where { $_.ProcessName -eq "NAPS2.vshost" } | kill
+    "Building EXE"
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerEXE
+    "Building MSI"
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerMSI
+    "Building ZIP"
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=StandaloneZIP
+    "Building 7Z"
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone7Z
 }
 
