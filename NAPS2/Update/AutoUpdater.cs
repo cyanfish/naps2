@@ -69,7 +69,7 @@ namespace NAPS2.Update
             });
         }
 
-        public Task<bool> InstallUpdate(string installerPath)
+        public Task<bool> InstallUpdate(string installerPath, string arguments = null)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -82,8 +82,14 @@ namespace NAPS2.Update
                 {
                     throw new ArgumentException("The installer could not be started because it is not an executable.");
                 }
-                var process = new Process();
-                process.StartInfo.FileName = installerPath;
+                var process = new Process
+                {
+                    StartInfo =
+                    {
+                        FileName = installerPath,
+                        Arguments = arguments ?? ""
+                    }
+                };
                 if (!process.Start())
                 {
                     return false;
@@ -106,7 +112,7 @@ namespace NAPS2.Update
                     {
                         return false;
                     }
-                    if (!InstallUpdate(savePath).Result)
+                    if (!InstallUpdate(savePath, versionInfo.InstallArguments).Result)
                     {
                         return false;
                     }

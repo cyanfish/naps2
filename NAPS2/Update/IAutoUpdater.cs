@@ -10,7 +10,7 @@ namespace NAPS2.Update
     {
         Task<UpdateInfo> CheckForUpdate();
         Task<bool> DownloadUpdate(VersionInfo versionInfo, string savePath);
-        Task<bool> InstallUpdate(string installerPath);
+        Task<bool> InstallUpdate(string installerPath, string arguments = null);
         Task<bool> DownloadAndInstallUpdate(VersionInfo versionInfo);
     }
 }

@@ -5,6 +5,7 @@
 		<LatestVersion>2.6</LatestVersion>
 		<FileName>naps2-{0}-setup.exe</FileName>
 		<DownloadUrl>https://downloads.sourceforge.net/project/naps2/{0}/{1}/download</DownloadUrl>
+		<InstallArguments>/SILENT</InstallArguments>
 	</VersionInfo>
 	<VersionInfo>
 		<Edition>InstallerMSI</Edition>

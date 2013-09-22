@@ -14,5 +14,7 @@ namespace NAPS2.Update
         public string FileName { get; set; }
 
         public string DownloadUrl { get; set; }
+
+        public string InstallArguments { get; set; }
     }
 }

@@ -14,7 +14,9 @@ namespace NAPS2.Tests.Integration
     {
         private AutoUpdater GetAutoUpdater(Edition edition)
         {
-            const string versionFileUrl = "https://sourceforge.net/p/naps2/code/ci/master/tree/version.xml?format=raw";
+            //const string versionFileUrl = "https://sourceforge.net/p/naps2/code/ci/master/tree/version.xml?format=raw";
+            // TODO: Make these tests fully offline (configurable, preferably)
+            string versionFileUrl = "file://" + Path.Combine(Environment.CurrentDirectory, "../../../version.xml");
             return new AutoUpdater(new LatestVersionSource(versionFileUrl, new UrlStreamReader()),
                 new CurrentVersionSource(), new UrlFileDownloader(new UrlStreamReader()), edition);
         }
@@ -52,7 +54,7 @@ namespace NAPS2.Tests.Integration
         }
 
         [Test]
-        [Ignore("Avoid excessive downloads")]
+        //[Ignore("Avoid excessive downloads")]
         public void DownloadAndInstallUpdate_InstallsUpdate()
         {
             var autoUpdater = GetAutoUpdater(Edition.InstallerEXE);
