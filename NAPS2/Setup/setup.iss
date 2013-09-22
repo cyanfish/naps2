@@ -27,26 +27,26 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]                                                                                        
-Source: "..\bin\Release\ca\NAPS2.resources.dll"; DestDir: "{app}\ca"; Flags: ignoreversion     
-Source: "..\bin\Release\cs\NAPS2.resources.dll"; DestDir: "{app}\cs"; Flags: ignoreversion     
-Source: "..\bin\Release\de\NAPS2.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion  
-Source: "..\bin\Release\es\NAPS2.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion     
-Source: "..\bin\Release\fr\NAPS2.resources.dll"; DestDir: "{app}\fr"; Flags: ignoreversion 
-Source: "..\bin\Release\he\NAPS2.resources.dll"; DestDir: "{app}\he"; Flags: ignoreversion  
-Source: "..\bin\Release\it\NAPS2.resources.dll"; DestDir: "{app}\it"; Flags: ignoreversion 
-Source: "..\bin\Release\pl\NAPS2.resources.dll"; DestDir: "{app}\pl"; Flags: ignoreversion
-Source: "..\bin\Release\ru\NAPS2.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
-Source: "..\bin\Release\uk\NAPS2.resources.dll"; DestDir: "{app}\uk"; Flags: ignoreversion
-Source: "..\bin\Release\NAPS2.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\Release\PdfSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\Release\Interop.WIA.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\Release\Ninject.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\Release\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion     
+Source: "..\bin\InstallerEXE\ca\NAPS2.resources.dll"; DestDir: "{app}\ca"; Flags: ignoreversion     
+Source: "..\bin\InstallerEXE\cs\NAPS2.resources.dll"; DestDir: "{app}\cs"; Flags: ignoreversion     
+Source: "..\bin\InstallerEXE\de\NAPS2.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion  
+Source: "..\bin\InstallerEXE\es\NAPS2.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion     
+Source: "..\bin\InstallerEXE\fr\NAPS2.resources.dll"; DestDir: "{app}\fr"; Flags: ignoreversion 
+Source: "..\bin\InstallerEXE\he\NAPS2.resources.dll"; DestDir: "{app}\he"; Flags: ignoreversion  
+Source: "..\bin\InstallerEXE\it\NAPS2.resources.dll"; DestDir: "{app}\it"; Flags: ignoreversion 
+Source: "..\bin\InstallerEXE\pl\NAPS2.resources.dll"; DestDir: "{app}\pl"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\ru\NAPS2.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\uk\NAPS2.resources.dll"; DestDir: "{app}\uk"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\NAPS2.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\PdfSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\Interop.WIA.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\Ninject.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion     
 Source: "..\Resources\scanner-app.ico"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "..\appsettings.xml"; DestDir: "{app}"; Flags: ignoreversion           
 Source: "license.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\NAPS2.Console\bin\Release\NAPS2.Console.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\NAPS2.Console\bin\Release\CommandLine.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\NAPS2.Console\bin\InstallerEXE\CommandLine.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\wiaaut.dll"; DestDir: "{sys}"; Flags: regserver
 
 [Icons]

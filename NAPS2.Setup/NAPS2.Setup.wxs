@@ -50,16 +50,16 @@
     <DirectoryRef Id="INSTALLFOLDER">
       <Component Id="Exec" Guid="3ED24800-E1D9-4D64-A106-6DC3597D9266">
         <!-- EXEs -->
-        <File Source="..\NAPS2\bin\Release\NAPS2.exe" />
-        <File Source="..\NAPS2.Console\bin\Release\NAPS2.Console.exe" />
+        <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.exe" />
+        <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe" />
         <!-- Dependencies -->
-        <File Source="..\NAPS2\bin\Release\PdfSharp.dll" />
-        <File Source="..\NAPS2\bin\Release\Interop.WIA.dll" />
-        <File Source="..\NAPS2\bin\Release\Ninject.dll" />
-        <File Source="..\NAPS2\bin\Release\NLog.dll" />
+        <File Source="..\NAPS2\bin\InstallerMSI\PdfSharp.dll" />
+        <File Source="..\NAPS2\bin\InstallerMSI\Interop.WIA.dll" />
+        <File Source="..\NAPS2\bin\InstallerMSI\Ninject.dll" />
+        <File Source="..\NAPS2\bin\InstallerMSI\NLog.dll" />
         <File Source="..\NAPS2\Resources\scanner-app.ico" />
         <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
-        <File Source="..\NAPS2.Console\bin\Release\CommandLine.dll" />
+        <File Source="..\NAPS2.Console\bin\InstallerMSI\CommandLine.dll" />
         <!-- Configuration -->
         <File Source="..\NAPS2\appsettings.xml" />
         <!-- License -->
@@ -70,52 +70,52 @@
     <DirectoryRef Id="INSTALLFOLDER">
       <Directory Id="LangFolder_ca" Name="ca">
         <Component Id="LangComponent_ca">
-          <File Source="..\NAPS2\bin\Release\ca\NAPS2.resources.dll" Id="LangFile_ca" />
+          <File Source="..\NAPS2\bin\InstallerMSI\ca\NAPS2.resources.dll" Id="LangFile_ca" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_cs" Name="cs">
         <Component Id="LangComponent_cs">
-          <File Source="..\NAPS2\bin\Release\cs\NAPS2.resources.dll" Id="LangFile_cs" />
+          <File Source="..\NAPS2\bin\InstallerMSI\cs\NAPS2.resources.dll" Id="LangFile_cs" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_de" Name="de">
         <Component Id="LangComponent_de">
-          <File Source="..\NAPS2\bin\Release\de\NAPS2.resources.dll" Id="LangFile_de" />
+          <File Source="..\NAPS2\bin\InstallerMSI\de\NAPS2.resources.dll" Id="LangFile_de" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_es" Name="es">
         <Component Id="LangComponent_es">
-          <File Source="..\NAPS2\bin\Release\es\NAPS2.resources.dll" Id="LangFile_es" />
+          <File Source="..\NAPS2\bin\InstallerMSI\es\NAPS2.resources.dll" Id="LangFile_es" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_fr" Name="fr">
         <Component Id="LangComponent_fr">
-          <File Source="..\NAPS2\bin\Release\fr\NAPS2.resources.dll" Id="LangFile_fr" />
+          <File Source="..\NAPS2\bin\InstallerMSI\fr\NAPS2.resources.dll" Id="LangFile_fr" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_he" Name="he">
         <Component Id="LangComponent_he">
-          <File Source="..\NAPS2\bin\Release\he\NAPS2.resources.dll" Id="LangFile_he" />
+          <File Source="..\NAPS2\bin\InstallerMSI\he\NAPS2.resources.dll" Id="LangFile_he" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_it" Name="it">
         <Component Id="LangComponent_it">
-          <File Source="..\NAPS2\bin\Release\it\NAPS2.resources.dll" Id="LangFile_it" />
+          <File Source="..\NAPS2\bin\InstallerMSI\it\NAPS2.resources.dll" Id="LangFile_it" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_pl" Name="pl">
         <Component Id="LangComponent_pl">
-          <File Source="..\NAPS2\bin\Release\pl\NAPS2.resources.dll" Id="LangFile_pl" />
+          <File Source="..\NAPS2\bin\InstallerMSI\pl\NAPS2.resources.dll" Id="LangFile_pl" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_ru" Name="ru">
         <Component Id="LangComponent_ru">
-          <File Source="..\NAPS2\bin\Release\ru\NAPS2.resources.dll" Id="LangFile_ru" />
+          <File Source="..\NAPS2\bin\InstallerMSI\ru\NAPS2.resources.dll" Id="LangFile_ru" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_uk" Name="uk">
         <Component Id="LangComponent_uk">
-          <File Source="..\NAPS2\bin\Release\uk\NAPS2.resources.dll" Id="LangFile_uk" />
+          <File Source="..\NAPS2\bin\InstallerMSI\uk\NAPS2.resources.dll" Id="LangFile_uk" />
         </Component>
       </Directory>
     </DirectoryRef>

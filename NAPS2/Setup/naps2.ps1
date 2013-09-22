@@ -11,8 +11,8 @@ function Get-Inno-Path {
 }
 
 function Get-NAPS2-Version {
-    & (Get-MSBuild-Path) ..\NAPS2.csproj /v:q /p:Configuration=Release | Out-Null
-    $Version = [Reflection.AssemblyName]::GetAssemblyName([IO.Path]::Combine($pwd, "..\bin\Release\NAPS2.exe")).Version
+    & (Get-MSBuild-Path) ..\NAPS2.csproj /v:q /p:Configuration=Debug | Out-Null
+    $Version = [Reflection.AssemblyName]::GetAssemblyName([IO.Path]::Combine($pwd, "..\bin\Debug\NAPS2.exe")).Version
     $VersionStr = "" + $Version.Major + "." + $Version.Minor
     $VersionStr
 }
@@ -44,8 +44,10 @@ function Set-NAPS2-Version {
 function Build-NAPS2 {
     $msbuild = Get-MSBuild-Path
     Get-Process | where { $_.ProcessName -eq "NAPS2.vshost" } | kill
-    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Release
-    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone
+    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerEXE
+    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerMSI
+    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=StandaloneZIP
+    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone7Z
 }
 
 function Get-NAPS2-Languages {
