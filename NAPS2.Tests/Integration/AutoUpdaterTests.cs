@@ -12,25 +12,17 @@ namespace NAPS2.Tests.Integration
     [TestFixture(Category = "Integration,Slow")]
     public class AutoUpdaterTests
     {
-        private AutoUpdater autoUpdater;
-
-        [SetUp]
-        public void SetUp()
+        private AutoUpdater GetAutoUpdater(Edition edition)
         {
             const string versionFileUrl = "https://sourceforge.net/p/naps2/code/ci/master/tree/version.xml?format=raw";
-            autoUpdater = new AutoUpdater(new LatestVersionSource(versionFileUrl, new UrlStreamReader()),
-                new CurrentVersionSource(), new UrlFileDownloader(new UrlStreamReader()), Edition.InstallerEXE);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            autoUpdater = null;
+            return new AutoUpdater(new LatestVersionSource(versionFileUrl, new UrlStreamReader()),
+                new CurrentVersionSource(), new UrlFileDownloader(new UrlStreamReader()), edition);
         }
 
         [Test]
         public void CheckForUpdate_ReturnsNoUpdate()
         {
+            var autoUpdater = GetAutoUpdater(Edition.InstallerEXE);
             var updateInfo = autoUpdater.CheckForUpdate().Result;
 
             // Since we're (presumably) running from up-to-date source, the version should be up-to-date or newer
@@ -40,8 +32,10 @@ namespace NAPS2.Tests.Integration
         }
 
         [Test]
+        [Ignore("Avoid excessive downloads")]
         public void DownloadUpdate_DownloadsUpdate()
         {
+            var autoUpdater = GetAutoUpdater(Edition.InstallerEXE);
             var updateInfo = autoUpdater.CheckForUpdate().Result;
             string savePath = updateInfo.VersionInfo.FileName;
             CleanupFile(savePath);
@@ -55,6 +49,16 @@ namespace NAPS2.Tests.Integration
             {
                 CleanupFile(savePath);
             }
+        }
+
+        [Test]
+        [Ignore("Avoid excessive downloads")]
+        public void DownloadAndInstallUpdate_InstallsUpdate()
+        {
+            var autoUpdater = GetAutoUpdater(Edition.InstallerEXE);
+            var updateInfo = autoUpdater.CheckForUpdate().Result;
+            var result = autoUpdater.DownloadAndInstallUpdate(updateInfo.VersionInfo).Result;
+            Assert.True(result);
         }
 
         private static void CleanupFile(string path)

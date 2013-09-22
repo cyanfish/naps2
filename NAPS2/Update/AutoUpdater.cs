@@ -47,6 +47,21 @@ namespace NAPS2.Update
 
                 urlFileDownloader.DownloadFile(versionInfo.DownloadUrl, tempPath);
 
+                // Handle the somewhat tricky situation where the file to save to already exists
+                if (File.Exists(savePath))
+                {
+                    // Try overwriting the file, which should work if it isn't locked by another process
+                    try
+                    {
+                        File.Delete(savePath);
+                    }
+                    catch (IOException)
+                    {
+                        File.Delete(tempPath);
+                        return false;
+                    }
+                }
+
                 // Now that the download is complete, rename/move the temp file
                 File.Move(tempPath, savePath);
 
@@ -63,27 +78,17 @@ namespace NAPS2.Update
                     throw new ArgumentNullException("installerPath");
                 }
                 var extension = Path.GetExtension(installerPath).ToLowerInvariant();
-                if (extension != "exe" && extension != "msi")
+                if (extension != ".exe" && extension != ".msi")
                 {
                     throw new ArgumentException("The installer could not be started because it is not an executable.");
                 }
                 var process = new Process();
-                process.Exited += (sender, args) =>
-                {
-                    lock (process)
-                    {
-                        Monitor.Pulse(process);
-                    }
-                };
                 process.StartInfo.FileName = installerPath;
-                lock (process)
+                if (!process.Start())
                 {
-                    if (!process.Start())
-                    {
-                        return false;
-                    }
-                    Monitor.Wait(process);
+                    return false;
                 }
+                process.WaitForExit();
                 return process.ExitCode == 0;
             });
         }
@@ -92,16 +97,25 @@ namespace NAPS2.Update
         {
             return Task.Factory.StartNew(() =>
             {
-                var savePath = Path.Combine(Paths.Temp, versionInfo.FileName);
-                if (!DownloadUpdate(versionInfo, savePath).Result)
+                var saveFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+                var savePath = Path.Combine(saveFolder, versionInfo.FileName);
+                Directory.CreateDirectory(saveFolder);
+                try
                 {
-                    return false;
+                    if (!DownloadUpdate(versionInfo, savePath).Result)
+                    {
+                        return false;
+                    }
+                    if (!InstallUpdate(savePath).Result)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                if (!InstallUpdate(savePath).Result)
+                finally
                 {
-                    return false;
+                    Directory.Delete(saveFolder, true);
                 }
-                return true;
             });
         }
     }
