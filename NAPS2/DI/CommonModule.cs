@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using NAPS2.Config;
 using NAPS2.ImportExport;
@@ -50,7 +51,8 @@ namespace NAPS2.DI
             // Update
             Bind<IAutoUpdater>().To<AutoUpdater>();
             Bind<ICurrentVersionSource>().To<CurrentVersionSource>();
-            Bind<ILatestVersionSource>().To<LatestVersionSource>();
+            // TODO: Link to web
+            Bind<ILatestVersionSource>().To<LatestVersionSource>().WithConstructorArgument("versionFileUrl", "file://" + Path.Combine(Environment.CurrentDirectory, "../../../version.xml"));
             Bind<IUrlFileDownloader>().To<UrlFileDownloader>();
             Bind<IUrlStreamReader>().To<UrlStreamReader>();
             Bind<IUrlTextReader>().To<UrlTextReader>();

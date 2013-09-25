@@ -21,6 +21,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -37,13 +38,14 @@ using NAPS2.Lang.Resources;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
+using NAPS2.Update;
 using Ninject;
 using Ninject.Parameters;
 using NLog;
 
 namespace NAPS2.WinForms
 {
-    public partial class FDesktop : FormBase, IScanReceiver
+    public partial class FDesktop : FormBase, IScanReceiver, IAutoUpdaterClient
     {
         private readonly IEmailer emailer;
         private readonly IScannedImageImporter scannedImageImporter;
@@ -56,8 +58,9 @@ namespace NAPS2.WinForms
         private readonly IScannedImageFactory scannedImageFactory;
         private readonly RecoveryManager recoveryManager;
         private readonly ScannedImageList imageList = new ScannedImageList();
+        private readonly AutoUpdaterUI autoUpdaterUI;
 
-        public FDesktop(IKernel kernel, IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter)
+        public FDesktop(IKernel kernel, IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, Logger logger, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -69,6 +72,7 @@ namespace NAPS2.WinForms
             this.scannedImageFactory = scannedImageFactory;
             this.recoveryManager = recoveryManager;
             this.scannedImageImporter = scannedImageImporter;
+            this.autoUpdaterUI = autoUpdaterUI;
             InitializeComponent();
         }
 
@@ -443,6 +447,9 @@ namespace NAPS2.WinForms
                 imageList.Images.Add(scannedImage);
             }
             UpdateThumbnails();
+
+            // Automatic updates
+            autoUpdaterUI.OnApplicationStart(this);
         }
 
         private void FDesktop_Closed(object sender, EventArgs e)
@@ -468,6 +475,25 @@ namespace NAPS2.WinForms
                     UpdateThumbnails();
                 }
             }
+        }
+
+        public void UpdateAvailable(VersionInfo versionInfo)
+        {
+            Invoke(new Action(() => autoUpdaterUI.PerformUpdate(this, versionInfo)));
+        }
+
+        public void InstallComplete()
+        {
+            Invoke(new Action(() =>
+            {
+                switch (MessageBox.Show(MiscResources.InstallCompletePromptRestart, MiscResources.InstallComplete, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    case DialogResult.Yes:
+                        Close(); // TODO: This close might be canceled. Handle that.
+                        Process.Start(Application.ExecutablePath);
+                        break;
+                }
+            }));
         }
     }
 }

@@ -286,6 +286,42 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installation Complete.
+        /// </summary>
+        internal static string InstallComplete {
+            get {
+                return ResourceManager.GetString("InstallComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installation complete. Do you want to restart NAPS2 now?.
+        /// </summary>
+        internal static string InstallCompletePromptRestart {
+            get {
+                return ResourceManager.GetString("InstallCompletePromptRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installation failed..
+        /// </summary>
+        internal static string InstallFailed {
+            get {
+                return ResourceManager.GetString("InstallFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installation Failed.
+        /// </summary>
+        internal static string InstallFailedTitle {
+            get {
+                return ResourceManager.GetString("InstallFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name missing..
         /// </summary>
         internal static string NameMissing {

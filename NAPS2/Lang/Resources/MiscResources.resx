@@ -228,4 +228,16 @@
   <data name="UpdateNow" xml:space="preserve">
     <value>A newer version of NAPS2 is available. Do you want to update now?</value>
   </data>
+  <data name="InstallComplete" xml:space="preserve">
+    <value>Installation Complete</value>
+  </data>
+  <data name="InstallCompletePromptRestart" xml:space="preserve">
+    <value>Installation complete. Do you want to restart NAPS2 now?</value>
+  </data>
+  <data name="InstallFailed" xml:space="preserve">
+    <value>Installation failed.</value>
+  </data>
+  <data name="InstallFailedTitle" xml:space="preserve">
+    <value>Installation Failed</value>
+  </data>
 </root>

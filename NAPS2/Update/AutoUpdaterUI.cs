@@ -13,7 +13,7 @@ namespace NAPS2.Update
 {
     public class AutoUpdaterUI
     {
-        private static readonly TimeSpan UpdateCheckInterval = TimeSpan.FromDays(7);
+        private static readonly TimeSpan UpdateCheckInterval = TimeSpan.FromDays(0);
 
         private readonly UserConfigManager userConfigManager;
         private readonly AppConfigManager appConfigManager;
@@ -73,13 +73,24 @@ namespace NAPS2.Update
             }
         }
 
-        public void PerformUpdate(VersionInfo versionInfo)
+        public void PerformUpdate(IAutoUpdaterClient client, VersionInfo versionInfo)
         {
             switch (kernel.Get<FUpdate>().ShowDialog())
             {
                 case DialogResult.Yes: // Install
                     // TODO: The app process might need to be killed/restarted before/after installing
-                    autoUpdater.DownloadAndInstallUpdate(versionInfo);
+                    autoUpdater.DownloadAndInstallUpdate(versionInfo).ContinueWith(result =>
+                    {
+                        if (result.Result)
+                        {
+                            client.InstallComplete();
+                        }
+                        else
+                        {
+                            MessageBox.Show(MiscResources.InstallFailed, MiscResources.InstallFailedTitle,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    });
                     break;
                 case DialogResult.OK: // Download
                     var saveDialog = new SaveFileDialog
@@ -88,6 +99,7 @@ namespace NAPS2.Update
                     };
                     if (saveDialog.ShowDialog() == DialogResult.OK)
                     {
+                        // TODO: Display progress while downloading
                         autoUpdater.DownloadUpdate(versionInfo, saveDialog.FileName);
                     }
                     break;

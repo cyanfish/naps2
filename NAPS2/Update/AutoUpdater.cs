@@ -32,7 +32,7 @@ namespace NAPS2.Update
                 var currentEditionVersionInfo = versionInfos.Single(x => x.Edition == edition);
                 return new UpdateInfo
                 {
-                    HasUpdate = new Version(currentEditionVersionInfo.LatestVersion) > currentVersionSource.GetCurrentVersion(),
+                    HasUpdate = true,//new Version(currentEditionVersionInfo.LatestVersion) > currentVersionSource.GetCurrentVersion(),
                     VersionInfo = currentEditionVersionInfo
                 };
             });

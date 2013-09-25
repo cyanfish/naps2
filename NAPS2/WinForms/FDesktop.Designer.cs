@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Update;
 
 namespace NAPS2.WinForms
 {
-    partial class FDesktop
+    partial class FDesktop : IAutoUpdaterClient
     {
         /// <summary>
         /// Required designer variable.
