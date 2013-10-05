@@ -79,6 +79,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dansk.
+        /// </summary>
+        internal static string da {
+            get {
+                return ResourceManager.GetString("da", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deutsch.
         /// </summary>
         internal static string de {

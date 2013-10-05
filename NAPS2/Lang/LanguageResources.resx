@@ -153,4 +153,7 @@
   <data name="cs" xml:space="preserve">
     <value>Čeština</value>
   </data>
+  <data name="da" xml:space="preserve">
+    <value>Dansk</value>
+  </data>
 </root>
