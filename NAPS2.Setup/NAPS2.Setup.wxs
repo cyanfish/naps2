@@ -26,6 +26,7 @@
     </Feature>
 
     <ComponentGroup Id="LangComponents">
+      <ComponentRef Id="LangComponent_bg" />
       <ComponentRef Id="LangComponent_ca" />
       <ComponentRef Id="LangComponent_cs" />
       <ComponentRef Id="LangComponent_da" />
@@ -35,6 +36,8 @@
       <ComponentRef Id="LangComponent_he" />
       <ComponentRef Id="LangComponent_it" />
       <ComponentRef Id="LangComponent_pl" />
+      <ComponentRef Id="LangComponent_pt_BR" />
+      <ComponentRef Id="LangComponent_pt_PT" />
       <ComponentRef Id="LangComponent_ru" />
       <ComponentRef Id="LangComponent_uk" />
     </ComponentGroup>
@@ -69,6 +72,11 @@
     </DirectoryRef>
 
     <DirectoryRef Id="INSTALLFOLDER">
+      <Directory Id="LangFolder_bg" Name="bg">
+        <Component Id="LangComponent_bg">
+          <File Source="..\NAPS2\bin\Release\bg\NAPS2.resources.dll" Id="LangFile_bg" />
+        </Component>
+      </Directory>
       <Directory Id="LangFolder_ca" Name="ca">
         <Component Id="LangComponent_ca">
           <File Source="..\NAPS2\bin\Release\ca\NAPS2.resources.dll" Id="LangFile_ca" />
@@ -112,6 +120,16 @@
       <Directory Id="LangFolder_pl" Name="pl">
         <Component Id="LangComponent_pl">
           <File Source="..\NAPS2\bin\Release\pl\NAPS2.resources.dll" Id="LangFile_pl" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_pt_BR" Name="pt_BR">
+        <Component Id="LangComponent_pt_BR">
+          <File Source="..\NAPS2\bin\Release\pt-BR\NAPS2.resources.dll" Id="LangFile_pt_BR" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_pt_PT" Name="pt_PT">
+        <Component Id="LangComponent_pt_PT">
+          <File Source="..\NAPS2\bin\Release\pt-PT\NAPS2.resources.dll" Id="LangFile_pt_PT" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_ru" Name="ru">
