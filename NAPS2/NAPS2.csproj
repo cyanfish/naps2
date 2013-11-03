@@ -800,6 +800,7 @@
     <EmbeddedResource Include="WinForms\TiffViewerCtl.uk.resx">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Lang\tmx\bg.tmx" />
     <None Include="Lang\tmx\ca.tmx" />
     <None Include="Lang\tmx\cs.tmx" />
     <None Include="Lang\tmx\de.tmx" />
@@ -810,6 +811,8 @@
     <None Include="Lang\tmx\he.tmx" />
     <None Include="Lang\tmx\it.tmx" />
     <None Include="Lang\tmx\pl.tmx" />
+    <None Include="Lang\tmx\pt-BR.tmx" />
+    <None Include="Lang\tmx\pt-PT.tmx" />
     <None Include="Lang\tmx\ru.tmx" />
     <None Include="Lang\tmx\uk.tmx" />
     <None Include="NAPS2.licenseheader" />
