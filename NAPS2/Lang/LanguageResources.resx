@@ -156,4 +156,13 @@
   <data name="da" xml:space="preserve">
     <value>Dansk</value>
   </data>
+  <data name="bg" xml:space="preserve">
+    <value>български</value>
+  </data>
+  <data name="pt_BR" xml:space="preserve">
+    <value>Português (Brasil)</value>
+  </data>
+  <data name="pt_PT" xml:space="preserve">
+    <value>Português (Portugal)</value>
+  </data>
 </root>

@@ -160,7 +160,7 @@
         <value>1</value>
     </data>
     <data name="btnAdd.Text" xml:space="preserve">
-        <value>&amp;Add</value>
+        <value>Incluir</value>
     </data>
     <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -193,7 +193,7 @@
         <value>2</value>
     </data>
     <data name="btnEdit.Text" xml:space="preserve">
-        <value>&amp;Edit</value>
+        <value>&amp;Editar</value>
     </data>
     <data name="btnEdit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -226,7 +226,7 @@
         <value>3</value>
     </data>
     <data name="btnDelete.Text" xml:space="preserve">
-        <value>&amp;Delete</value>
+        <value>Eliminar</value>
     </data>
     <data name="btnDelete.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -309,7 +309,7 @@
         <value>550, 181</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Profiles</value>
+        <value>Perfis</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

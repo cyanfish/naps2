@@ -118,37 +118,37 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Black &amp; White</value>
+        <value>Preto e Branco</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit Color</value>
+        <value>cor de 24 bits</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Grayscale</value>
+        <value>Escala de cinza</value>
     </data>
     <data name="Dpi_100" xml:space="preserve">
-        <value>100 dpi</value>
+        <value>100 ppp</value>
     </data>
     <data name="Dpi_1200" xml:space="preserve">
-        <value>1200 dpi</value>
+        <value>1200 ppp</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
-        <value>200 dpi</value>
+        <value>200 ppp</value>
     </data>
     <data name="Dpi_300" xml:space="preserve">
-        <value>300 dpi</value>
+        <value>300 ppp</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
-        <value>600 dpi</value>
+        <value>600 ppp</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Center</value>
+        <value>Centrar</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Left</value>
+        <value>Esquerda</value>
     </data>
     <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Right</value>
+        <value>Direita</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
         <value>A3 (297x420 mm)</value>
@@ -160,10 +160,10 @@
         <value>A5 (148x210 mm)</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>US Legal (8.5x14 pol)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>US Letter (8.5x11 pol)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>
@@ -181,9 +181,9 @@
         <value>Duplex</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Feeder</value>
+        <value>Alimentador</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
-        <value>Glass</value>
+        <value>Vidro</value>
     </data>
 </root>

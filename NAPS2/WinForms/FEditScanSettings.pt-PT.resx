@@ -157,7 +157,7 @@
         <value>1</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Device:</value>
+        <value>Dispositivo:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -184,7 +184,7 @@
         <value>4</value>
     </data>
     <data name="btnChooseDevice.Text" xml:space="preserve">
-        <value>Choose device</value>
+        <value>Escolha o dispositivo</value>
     </data>
     <data name="&gt;&gt;btnChooseDevice.Name" xml:space="preserve">
         <value>btnChooseDevice</value>
@@ -214,7 +214,7 @@
         <value>3</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Paper source:</value>
+        <value>Origem do papel:</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -289,7 +289,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Use predefined settings</value>
+        <value>Usar configura\'e7\'e3o pr\'e9-definida</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -316,7 +316,7 @@
         <value>6</value>
     </data>
     <data name="rdbNativeWIA.Text" xml:space="preserve">
-        <value>Use native WIA UI</value>
+        <value>Usar WIA UI nativo</value>
     </data>
     <data name="&gt;&gt;rdbNativeWIA.Name" xml:space="preserve">
         <value>rdbNativeWIA</value>
@@ -367,7 +367,7 @@
         <value>9</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Bit depth:</value>
+        <value>Qualidade:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -421,7 +421,7 @@
         <value>11</value>
     </data>
     <data name="label4.Text" xml:space="preserve">
-        <value>Page size:</value>
+        <value>Tamanho da folha:</value>
     </data>
     <data name="&gt;&gt;label4.Name" xml:space="preserve">
         <value>label4</value>
@@ -499,7 +499,7 @@
         <value>13</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Resolution:</value>
+        <value>Resolu\'e7\'e3o:</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -529,7 +529,7 @@
         <value>15</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Brightness:</value>
+        <value>Brilho:</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -583,7 +583,7 @@
         <value>18</value>
     </data>
     <data name="label7.Text" xml:space="preserve">
-        <value>Contrast:</value>
+        <value>Contraste:</value>
     </data>
     <data name="&gt;&gt;label7.Name" xml:space="preserve">
         <value>label7</value>
@@ -634,7 +634,7 @@
         <value>19</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>&amp;Cancel</value>
+        <value>&amp;Cancelar</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -747,7 +747,7 @@
         <value>23</value>
     </data>
     <data name="label8.Text" xml:space="preserve">
-        <value>Display name:</value>
+        <value>Nome a exibir:</value>
     </data>
     <data name="&gt;&gt;label8.Name" xml:space="preserve">
         <value>label8</value>
@@ -822,7 +822,7 @@
         <value>25</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Horizontal align:</value>
+        <value>Alinhamento horizontal:</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>
@@ -876,7 +876,7 @@
         <value>27</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Scale:</value>
+        <value>Escala:</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>
@@ -903,7 +903,7 @@
         <value>2</value>
     </data>
     <data name="rdTWAIN.Text" xml:space="preserve">
-        <value>TWAIN Driver</value>
+        <value>Driver TWAIN</value>
     </data>
     <data name="&gt;&gt;rdTWAIN.Name" xml:space="preserve">
         <value>rdTWAIN</value>
@@ -930,7 +930,7 @@
         <value>1</value>
     </data>
     <data name="rdWIA.Text" xml:space="preserve">
-        <value>WIA Driver</value>
+        <value>Driver WIA</value>
     </data>
     <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
         <value>rdWIA</value>
@@ -981,7 +981,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>Maximum quality (large files)</value>
+        <value>Alta qualidade (ficheiros grandes)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>
@@ -1085,7 +1085,7 @@
         <value>400, 468</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Profile Settings</value>
+        <value>Configurar Perfil</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

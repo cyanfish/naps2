@@ -118,10 +118,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ChooseProfile" xml:space="preserve">
-        <value>Choose Profile</value>
+        <value>Escolha o perfil</value>
     </data>
     <data name="Clear" xml:space="preserve">
-        <value>Clear</value>
+        <value>Limpar</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
         <value>Are you sure you want to clear {0} item(s)?</value>
@@ -139,70 +139,70 @@
         <value>The file {0} already exists. Do you want to overwrite it?</value>
     </data>
     <data name="Delete" xml:space="preserve">
-        <value>Delete</value>
+        <value>Eliminar</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>The selected scanner could not be found.</value>
+        <value>O scanner escolhido n\'e3o foi encontrado.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>The selected scanner is offline.</value>
+        <value>O scanner escolhido est\'e1 offline.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>You don't have permission to save files at this location.</value>
+        <value>N\'e3o tem permiss\'e3o para salvar o ficheiro neste local.</value>
     </data>
     <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Erro</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Bitmap Files (*.bmp)</value>
+        <value>Ficheiro Bitmap (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
-        <value>Enhanced Windows MetaFile (*.emf)</value>
+        <value>Ficheiro EMF (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
-        <value>Exchangeable Image File (*.exif)</value>
+        <value>Ficheiro EXIF</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
-        <value>GIF File (*.gif)</value>
+        <value>Ficheiro GIF (*.gif)</value>
     </data>
     <data name="FileTypeJpeg" xml:space="preserve">
-        <value>JPEG File (*.jpg, *.jpeg)</value>
+        <value>Ficheiro JPG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF document (*.pdf)</value>
+        <value>Documento PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>PNG File (*.png)</value>
+        <value>Ficheiro PNG (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>Ficheiro TIFF (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
-        <value>Name missing.</value>
+        <value>Falta o nome.</value>
     </data>
     <data name="NAPS2" xml:space="preserve">
         <value>NAPS2</value>
     </data>
     <data name="NoDeviceSelected" xml:space="preserve">
-        <value>No device selected.</value>
+        <value>Nenhum dispositivo escolhido.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>No scanning device was found.</value>
+        <value>Nenhum scanner foi encontrado.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
-        <value>Overwrite File</value>
+        <value>O ficheiro j\'e1 existe. Deseja substituir?</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
         <value>{0} of {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
-        <value>Scanned Image</value>
+        <value>Imagem digitalizada</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Select a profile before clicking Scan.</value>
+        <value>Escolha um perfil antes de clicar Scan.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>An error occurred with the scanning driver.</value>
+        <value>Ocorreu um erro com o driver do scanner.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Version {0}</value>
