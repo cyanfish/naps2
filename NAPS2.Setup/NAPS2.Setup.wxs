@@ -8,7 +8,7 @@
       Manufacturer="Ben Olden-Cooligan"
       UpgradeCode="FEB82971-B3E6-4F19-9684-1D543E644D73">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-    <Media Id="1" Cabinet="NAPS2.cab" EmbedCab="yes" />
+    <Media Id="1" Cabinet="NAPS2.cab" EmbedCab="yes" CompressionLevel="medium" />
 
     <Icon Id="icon.ico" SourceFile="..\NAPS2\Resources\scanner.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
