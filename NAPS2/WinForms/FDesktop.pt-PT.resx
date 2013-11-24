@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="tsMoveUp.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="toolStripContainer1.Location" type="System.Drawing.Point, System.Drawing">
+        <value>0, 0</value>
+    </data>
+    <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 54</value>
+    </data>
+    <data name="tsMoveDown.Size" type="System.Drawing.Size, System.Drawing">
+        <value>95, 51</value>
+    </data>
+    <data name="&gt;&gt;tsMoveDown.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
+        <value>56, 51</value>
+    </data>
+    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
+        <value>13</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Name" xml:space="preserve">
+        <value>toolStripContainer1.BottomToolStripPanel</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+        <value>toolStripSeparator4</value>
+    </data>
+    <data name="tsClear.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="&gt;&gt;tsClear.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>83, 51</value>
+    </data>
+    <data name="tsScan.Size" type="System.Drawing.Size, System.Drawing">
+        <value>56, 51</value>
+    </data>
+    <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
+        <value>3, 0</value>
+    </data>
+    <data name="tsDelete.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="&gt;&gt;tsClear.Name" xml:space="preserve">
+        <value>tsClear</value>
+    </data>
+    <data name="&gt;&gt;tsSaveImage.Name" xml:space="preserve">
+        <value>tsSaveImage</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
+        <value>toolStripSeparator5</value>
+    </data>
+    <data name="&gt;&gt;tsFlip.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+        <value>1184, 526</value>
+    </data>
+    <data name="tsFlip.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsAbout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        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
+        IxsWLIMQ5PMAAAAASUVORK5CYII=
+</value>
+    </data>
+    <data name="tsFlip.Text" xml:space="preserve">
+        <value>Rodar</value>
+    </data>
+    <data name="$this.Text" xml:space="preserve">
+        <value>Not Another PDF Scanner 2</value>
+    </data>
+    <data name="&gt;&gt;tsPDFEmail.Name" xml:space="preserve">
+        <value>tsPDFEmail</value>
+    </data>
+    <data name="tsDelete.Size" type="System.Drawing.Size, System.Drawing">
+        <value>64, 51</value>
+    </data>
+    <data name="tsSavePDF.Text" xml:space="preserve">
+        <value>Salvar PDF</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
+        <value>toolStripContainer1</value>
+    </data>
+    <data name="toolStripContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+        <value>Fill</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="tsProfiles.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        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
+        AABJRU5ErkJggg==
+</value>
+    </data>
+    <data name="tsRotateLeft.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 54</value>
+    </data>
+    <data name="&gt;&gt;thumbnailList1.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+        <value>6, 13</value>
+    </data>
+    <data name="tsAbout.Text" xml:space="preserve">
+        <value>Sobre</value>
+    </data>
+    <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
+        <value>88, 51</value>
+    </data>
+    <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="tsProfiles.Text" xml:space="preserve">
+        <value>Perfis</value>
+    </data>
+    <data name="tsRotateLeft.Text" xml:space="preserve">
+        <value>Rodar para a esquerda</value>
+    </data>
+    <data name="tsSavePDF.Size" type="System.Drawing.Size, System.Drawing">
+        <value>79, 51</value>
+    </data>
+    <data name="&gt;&gt;tsScan.Name" xml:space="preserve">
+        <value>tsScan</value>
+    </data>
+    <data name="tsMoveDown.Text" xml:space="preserve">
+        <value>Mover para baixo</value>
+    </data>
+    <data name="&gt;&gt;tsDelete.Name" xml:space="preserve">
+        <value>tsDelete</value>
+    </data>
+    <data name="tsClear.Size" type="System.Drawing.Size, System.Drawing">
+        <value>58, 51</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Parent" xml:space="preserve">
+        <value>toolStripContainer1</value>
+    </data>
+    <data name="tsProfiles.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="toolStripDropDownButton1.Text" xml:space="preserve">
+        <value>Idioma</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAByhJREFUWEetV21Mk+sZdgbnR8y2H55pzo9Nd/zhcdEY57IfzuiSZVuM8esY2NFE
+        lx1zpvMk4hInJ2bxKx5BUTyCyoHx0SqiUDgsE4H2UIpYoNBCoR/QUkoptqW0Ba32m/ba/bzv6zkmQinb
+        ruTK0/d9n+e67ue+n/fp8y5IFdu3b0/Ly8s7XVtb2/zo0SPZ/fv3peXl5RxLSkqkZWVliqNHj+ZQ1x/w
+        I/4H3Llz5xc5OTkfX7p0KeP8+fMZZ86c2ZOVlZU9NTWFZIhEIjhy5Ejjli1bPtq7d2/6rl27Mnbu3Pnx
+        xo0bf0+yS3n1OXDs2LE/t7S0xEOhEN5mLBYTbJIjHo9z/QOBwLccHx/H4cOHH5J8Gu8yO75fVVWlEbTw
+        +vVrTExMwOPxcGRCc5H183q9XOv3+wUl4Pbt24lly5b9QfCZFQuvX7/ezAYwAaovRCIRxGLxvMnGsfF2
+        u50LoKGhIU76+3mbJNi6dWtmNBqFTqdDaWkpampqIJFI5k02jgXS0dHBBUAL1EDyP+NdkmDx4sVr5XL5
+        C5Y+Woz/dQbu3buHwsJCjI6OcmVcvXr1XZL/Hu8yB06dOlXHolYoFLh16xaKiormTRZ8RUUFEokECgoK
+        IiS7l1dPAevXr//TyMgIVz9695Gfnz9vXrt2DUqlEqycBw4c0JDs+7x6anifUuhibwErwcWLF5GdnZ0y
+        L1++jBs3bsDlcqGzsxMrVqzIFXRTx6FDh8RutxtarRZ3797lZkWpTImsbK2trfD5fDhx4oSL5H7Dq84D
+        a9as2VVZWQm9rg+9mi6ouzpSZo+6EwPGfshkUnz44c8rSG7e2/Oiurq6+lg0ApPFCUlTP77+Rs+xbg6y
+        PhKpDrK2QQRpFxSLRYkdO3b8TdBNDZs2bdreIv8m4fEF8Fl+F64+caDsqZtjeZsbomduiJXfkV2z++x5
+        aes4ihVuHC8yoLLByO0B5WVlZpJ9j1dPARkZGZ+xgQ1tFpyV2NA7Po0+Vwx94zH0u2PQTcSgn5j+luxa
+        R/fZcy31Y7+r+oM4U8zv6vTfEklLS/ulID83cnNzy9nA3Ptq5Cs8UDti6HwegYrY7YhA7YxA44p+R7ru
+        ZqRnXdSHscUWQ2axFr7JAKYmfWwj+lSQnxOL5HKZOhCI4ZMvmlGlC5B5FB0sAEcUXc4Y1DRLDUcyp1n3
+        ELvpus0eQdNwGI9NITyxRPD5QzM0BieXBVoHeYJ+cqxateqnIyPWV716J/56Rw3pSAxKexTtz2NQkTkz
+        UlNJNO5p9FD6e4lt9OzRYBiFPQHcVL3GVaUfX7S9QqZkDDXSAS6AzMxMKckv4l2SYNu2bR/RvzqqpYM4
+        X+9EyyjNbIwCIHOVaxrdZKzxkLGXp5zKU2kOo8wQQokuiMLeAL7spiDa/fiHbBJ/z3/KBUAbmoPkf8K7
+        JMHJkyevsAF51ToUdL5E61gMT6kE7WTeRbPVeOPQTsahm4qjlYKpowC/tkUhsUYpkAhExhCK+oK4RUFc
+        6wzgLzeVsFi9KC0pZueB3wk2s4O2YFkkHMdZcR9udgdRTalV0CxVbOY+Midj3csEVFMJNHuIEwnI3HHU
+        O6YpECoF1V5kDOMrLhNBnJaMoOHpECU1gnXr1n0u2MyM5cuXv6fXaSdM1kmcrbagoCeEYnqdqklURgZK
+        T5wz7nwBKIkdL4F2ap/RUVHuBZ4446ijIB5SJkr1IdzWBHCh2Yeifxm4MqSnp1cLVjNjw4YNvw0HX6Hx
+        2TDONbjwVX8Y4oEwqq0x1DsTnAmtL6gDAOmDss21tPbQQfdbfLR3uBKotU2jwhShUoSQqwrg8oN+LgA6
+        6JrIZvYNaf/+/Vmso9nqQVa5Fjm0B3yp9OKf6klU6F+g1uzHY6sf8lE/VGN+9Dz3o4taBV0/ofs19Jz1
+        K9FMIr/di6utHpx+aILo3zougKbGRnYu+BXvNgMoRdwCZNCbx+kVMkLSaKDWgFoia2uaaL+X0r4vkP1m
+        ZPc5Cv0kTTzbumwIhqKcZnt7O5YuXXpAsHsX+/btu8LO/sFgEPHpCA1hR3FiQiASTGcOxIW+bEycjuUv
+        EA6GEA6FIZVKsWTJkgzB7l2wAJxOJ2w2G9iJ6G1arVbu/z0ZwuEwdwbkTlM2O6RaKUq1pajoroD9uZ2d
+        jFkA6YLdu9izZ88VdgyzWCwYGhp6h2azGWNjY3iTJfYlxEzffD+wIFk/y5AFo6ZRHFccxwfGD7C2aS2V
+        VI+Gei6A2TOwe/fubBb94OAgBgYGZqTBYODIfr/pZzQauXusfdNv2DSMGlUNDjYfRHZrNmzDNtAZI/ka
+        2Lx58/G+vj4MDw/DZDLNiyw7b9NkNsFmscE+aIfdYofD4cC5c+f8ZPNr3m1m/IjehMcPHjwAfQGzAYn/
+        B0XlIly4cCG2cuXKQvL4IW81O35M3Ldw4cKDxD/OReqbCg8S2XfBKuJbWLDgP+S/xg21o9XBAAAAAElF
+        TkSuQmCC
+</value>
+    </data>
+    <data name="tsMoveDown.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="tsMoveUp.Size" type="System.Drawing.Size, System.Drawing">
+        <value>79, 51</value>
+    </data>
+    <data name="tsFlip.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="&gt;&gt;tsPDFEmail.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="thumbnailList1.Location" type="System.Drawing.Point, System.Drawing">
+        <value>0, 0</value>
+    </data>
+    <data name="tsPDFEmail.Size" type="System.Drawing.Size, System.Drawing">
+        <value>84, 51</value>
+    </data>
+    <data name="tsDelete.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="&gt;&gt;$this.Name" xml:space="preserve">
+        <value>FDesktop</value>
+    </data>
+    <data name="tsRotateRight.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="&gt;&gt;tStrip.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Name" xml:space="preserve">
+        <value>tStrip</value>
+    </data>
+    <data name="tStrip.Text" xml:space="preserve">
+        <value>Menu principal</value>
+    </data>
+    <data name="tsProfiles.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="tsPDFEmail.Text" xml:space="preserve">
+        <value>Enviar PDF por Email</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Name" xml:space="preserve">
+        <value>toolStripContainer1.LeftToolStripPanel</value>
+    </data>
+    <data name="tsAbout.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
+        <value>7</value>
+    </data>
+    <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
+        <value>toolStripContainer1.ContentPanel</value>
+    </data>
+    <data name="tsScan.Text" xml:space="preserve">
+        <value>Digitalizar</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+        <value>toolStripSeparator3</value>
+    </data>
+    <data name="&gt;&gt;tsProfiles.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsMoveUp.Name" xml:space="preserve">
+        <value>tsMoveUp</value>
+    </data>
+    <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+        <value>toolStripSeparator2</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
+        <value>toolStripContainer1.ContentPanel</value>
+    </data>
+    <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
+        <value>12</value>
+    </data>
+    <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
+        <value>1110, 54</value>
+    </data>
+    <data name="tsMoveUp.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="toolStripDropDownButton1.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="&gt;&gt;tsRotateRight.Name" xml:space="preserve">
+        <value>tsRotateRight</value>
+    </data>
+    <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
+        <value>1184, 472</value>
+    </data>
+    <data name="tsSaveImage.Text" xml:space="preserve">
+        <value>Salvar imagens</value>
+    </data>
+    <data name="&gt;&gt;tsSaveImage.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsMoveDown.Name" xml:space="preserve">
+        <value>tsMoveDown</value>
+    </data>
+    <data name="&gt;&gt;toolStripDropDownButton1.Name" xml:space="preserve">
+        <value>toolStripDropDownButton1</value>
+    </data>
+    <data name="&gt;&gt;thumbnailList1.Name" xml:space="preserve">
+        <value>thumbnailList1</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;tsRotateRight.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="toolStripDropDownButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsAbout.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="tsSaveImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+        <value>toolStripContainer1.TopToolStripPanel</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.ContentPanel.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 54</value>
+    </data>
+    <data name="tsAbout.Size" type="System.Drawing.Size, System.Drawing">
+        <value>64, 51</value>
+    </data>
+    <data name="&gt;&gt;tsSavePDF.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;$this.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Name" xml:space="preserve">
+        <value>toolStripContainer1.RightToolStripPanel</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="thumbnailList1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>1184, 472</value>
+    </data>
+    <data name="tsRotateRight.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="tsRotateLeft.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="tsClear.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="tsSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="tsProfiles.Size" type="System.Drawing.Size, System.Drawing">
+        <value>70, 51</value>
+    </data>
+    <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAFxcXPldXV6RYWFilV1dXpFZWVqRUVFSkVFRUpFRUVKRSUlKkUlJSpFRSVKRcVlymRkRGnQAA
+        AC8AAAAAAAAAAI2NjcHm5ub/3t7e/97e3v/d3d3/3d3d/9/f3//f39//3Nzc/93c3f/Y2tj/pNKk/8rY
+        yv9KSEqZAAAAAAAAAAChoaHN5+jo/+Hj5f/g4uT/6Orr//n6/P/+/////f////T29//l5un/097X/2vO
+        bv+63Lr/ZWBlpAAAAAAAAAAAsLCwzf36+P/l1s//49TM/+ja0v/s39j/697Z/+ve2P/r3tf/5tjQ/+PU
+        zP/t3t3//////2NjY6IAAAAAAAAAAKKjprLx18H/7MGL//XWpP/44rb/+enD//nt0f/568z/+ea7//bc
+        rf/00Zz/57uL//Hl4P9KTE6DAAAAAAAAAABnaW1z8NfD//LIj//74bX//uvH///xzf//8MT//+2+//3n
+        t//63qr/+NOZ/+q8i//a09D+ExYWQgAAAAAAAAAAMDQ0PuXXzv3uyJ3//ObF//zoyv/87ND//OvL//rg
+        sv/316H/9s+W//PEhf/txZ//s7K03gAAABAAAAAAAAAAAAAPDxHOysjl5byb//zkw//75sn/++fM//vp
+        z//758n/+N20//bTpP/uv4v/7s+2/4eKjLAAAAAAAAAAAAAAAAAAAAAAmpueqe7Lr//217P/++TI//vl
+        yf/75sr/++bK//vlyv/85cr/7cSe/+nVyv9RU1V/AAAAAAAAAAAAAAAAAAAAAFhbXV7s3tX/5MOq/+fN
+        t//nzrj/5865/+fOuP/nzbf/58y1/+XHsP/NysjtExMTMQAAAAAAAAAAAAAAAAAAAAAREREsu7y987Gx
+        s/+kpKX/paWm/6Wlpv+lpab/paWm/6SjpP/Lzc//cnJzvAAAAAEAAAAAAAAAAAAAAAAAAAAAV1dXfNDQ
+        0P+JiYr/iYmK/4qKi/+Kiov/ioqL/4qKi/+Hh4j/pqam/7e3t/YEBAQ4AAAAAAAAAAAAAAAAAAAAELCw
+        sNm3t7f/mpqa/56env+enp7/np6e/56env+enp7/np6e/5qamv/S0tL/SUlJkwAAAAAAAAAAAAAAADo6
+        Olb09PT/ra2t/6mpqf+oqKj/p6en/6enp/+np6f/p6en/6qqqv+lpaX/2dnZ/6qqqt8AAAAXAAAAAAAA
+        AABLS0tT8/Pz/O7u7vzn5+f69PT0//j4+P/39/f/+Pj4//r6+v/s7Oz95OTk+vj4+P+enp7JAAAADQAA
+        AAAAAAAAAAAAAZKSkiaNjY00c3NzMKampqHi4uLl2dnZ3tnZ2eDKysrbS0tLYUhISC1KSkozDQ0NEwAA
+        AAAAAAAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIADAADAAwAAwAMAAMADAADAAwAAgAMAAIAB
+        AACAAQAAgAMAAA==
+</value>
+    </data>
+    <data name="tsSaveImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="tsSaveImage.Size" type="System.Drawing.Size, System.Drawing">
+        <value>96, 51</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="tsClear.Text" xml:space="preserve">
+        <value>Limpar</value>
+    </data>
+    <data name="&gt;&gt;tsSavePDF.Name" xml:space="preserve">
+        <value>tsSavePDF</value>
+    </data>
+    <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 54</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+        <value>toolStripContainer1</value>
+    </data>
+    <data name="&gt;&gt;tsAbout.Name" xml:space="preserve">
+        <value>tsAbout</value>
+    </data>
+    <data name="tsMoveUp.Text" xml:space="preserve">
+        <value>Mover para cima</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+        <value>toolStripSeparator1</value>
+    </data>
+    <data name="tsMoveDown.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="&gt;&gt;tsProfiles.Name" xml:space="preserve">
+        <value>tsProfiles</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Parent" xml:space="preserve">
+        <value>toolStripContainer1</value>
+    </data>
+    <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
+        <value>NAPS2.WinForms.ThumbnailList, NAPS2, Version=2.2.4952.27619, Culture=neutral, PublicKeyToken=null</value>
+    </data>
+    <data name="&gt;&gt;tsRotateLeft.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsDelete.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Parent" xml:space="preserve">
+        <value>toolStripContainer1.TopToolStripPanel</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.ContentPanel.Parent" xml:space="preserve">
+        <value>toolStripContainer1</value>
+    </data>
+    <data name="thumbnailList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+        <value>Fill</value>
+    </data>
+    <data name="&gt;&gt;tsMoveUp.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
+        <value>4</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>1184, 526</value>
+    </data>
+    <data name="&gt;&gt;tsFlip.Name" xml:space="preserve">
+        <value>tsFlip</value>
+    </data>
+    <data name="tsPDFEmail.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.ContentPanel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripContentPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripDropDownButton1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="tsRotateRight.Text" xml:space="preserve">
+        <value>Rodar para a direita</value>
+    </data>
+    <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
+        <value>96, 51</value>
+    </data>
+    <data name="tsPDFEmail.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsDelete.Text" xml:space="preserve">
+        <value>Eliminar</value>
+    </data>
+    <data name="&gt;&gt;tsRotateLeft.Name" xml:space="preserve">
+        <value>tsRotateLeft</value>
+    </data>
+    <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 54</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
+        <value>toolStripContainer1</value>
+    </data>
+    <data name="tsScan.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
+    <data name="&gt;&gt;tsScan.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>True</value>
+    </metadata>
+    <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>ru</value>
+    </metadata>
+    <metadata name="tStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <value>152, 17</value>
+    </metadata>
+</root>

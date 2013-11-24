@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ChooseProfile" xml:space="preserve">
+        <value>Escolha o perfil</value>
+    </data>
+    <data name="Clear" xml:space="preserve">
+        <value>Limpar</value>
+    </data>
+    <data name="ConfirmClearItems" xml:space="preserve">
+        <value>Are you sure you want to clear {0} item(s)?</value>
+    </data>
+    <data name="ConfirmDeleteItems" xml:space="preserve">
+        <value>Are you sure you want to delete {0} item(s)?</value>
+    </data>
+    <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+        <value>Are you sure you want to delete {0} profiles?</value>
+    </data>
+    <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+        <value>Are you sure you want to delete the profile {0}?</value>
+    </data>
+    <data name="ConfirmOverwriteFile" xml:space="preserve">
+        <value>The file {0} already exists. Do you want to overwrite it?</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Eliminar</value>
+    </data>
+    <data name="DeviceNotFound" xml:space="preserve">
+        <value>O scanner escolhido n\'e3o foi encontrado.</value>
+    </data>
+    <data name="DeviceOffline" xml:space="preserve">
+        <value>O scanner escolhido est\'e1 offline.</value>
+    </data>
+    <data name="DontHavePermission" xml:space="preserve">
+        <value>N\'e3o tem permiss\'e3o para salvar o ficheiro neste local.</value>
+    </data>
+    <data name="Error" xml:space="preserve">
+        <value>Erro</value>
+    </data>
+    <data name="FileTypeBmp" xml:space="preserve">
+        <value>Ficheiro Bitmap (*.bmp)</value>
+    </data>
+    <data name="FileTypeEmf" xml:space="preserve">
+        <value>Ficheiro EMF (*.emf)</value>
+    </data>
+    <data name="FileTypeExif" xml:space="preserve">
+        <value>Ficheiro EXIF</value>
+    </data>
+    <data name="FileTypeGif" xml:space="preserve">
+        <value>Ficheiro GIF (*.gif)</value>
+    </data>
+    <data name="FileTypeJpeg" xml:space="preserve">
+        <value>Ficheiro JPG (*.jpg, *.jpeg)</value>
+    </data>
+    <data name="FileTypePdf" xml:space="preserve">
+        <value>Documento PDF (*.pdf)</value>
+    </data>
+    <data name="FileTypePng" xml:space="preserve">
+        <value>Ficheiro PNG (*.png)</value>
+    </data>
+    <data name="FileTypeTiff" xml:space="preserve">
+        <value>Ficheiro TIFF (*.tiff, *.tif)</value>
+    </data>
+    <data name="NameMissing" xml:space="preserve">
+        <value>Falta o nome.</value>
+    </data>
+    <data name="NAPS2" xml:space="preserve">
+        <value>NAPS2</value>
+    </data>
+    <data name="NoDeviceSelected" xml:space="preserve">
+        <value>Nenhum dispositivo escolhido.</value>
+    </data>
+    <data name="NoDevicesFound" xml:space="preserve">
+        <value>Nenhum scanner foi encontrado.</value>
+    </data>
+    <data name="OverwriteFile" xml:space="preserve">
+        <value>O ficheiro j\'e1 existe. Deseja substituir?</value>
+    </data>
+    <data name="PdfStatus" xml:space="preserve">
+        <value>{0} of {1}</value>
+    </data>
+    <data name="ScannedImage" xml:space="preserve">
+        <value>Imagem digitalizada</value>
+    </data>
+    <data name="SelectProfileBeforeScan" xml:space="preserve">
+        <value>Escolha um perfil antes de clicar Scan.</value>
+    </data>
+    <data name="UnknownDriverError" xml:space="preserve">
+        <value>Ocorreu um erro com o driver do scanner.</value>
+    </data>
+    <data name="Version" xml:space="preserve">
+        <value>Version {0}</value>
+    </data>
+    <data name="EmailError" xml:space="preserve">
+        <value>An error occurred while trying to send an email.</value>
+    </data>
+</root>

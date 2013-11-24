@@ -13,7 +13,7 @@ function Get-Inno-Path {
 function Get-NAPS2-Version {
     & (Get-MSBuild-Path) ..\NAPS2.csproj /v:q /p:Configuration=Release | Out-Null
     $Version = [Reflection.AssemblyName]::GetAssemblyName([IO.Path]::Combine($pwd, "..\bin\Release\NAPS2.exe")).Version
-    $VersionStr = "" + $Version.Major + "." + $Version.Minor
+    $VersionStr = "" + $Version.Major + "." + $Version.Minor + "." + $Version.Build
     $VersionStr
 }
 
