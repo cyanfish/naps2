@@ -112,6 +112,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NAPS2.Core\NAPS2.Core.csproj">
+      <Project>{968378FA-A649-4058-A928-1FCD97B23070}</Project>
+      <Name>NAPS2.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NAPS2\NAPS2.csproj">
       <Project>{eac4a133-93be-4400-bfa9-ceb1615693c4}</Project>
       <Name>NAPS2</Name>

@@ -48,7 +48,9 @@ namespace NAPS2
 
             Application.ThreadException += UnhandledException;
 
-            Application.Run(KernelManager.Kernel.Get<FDesktop>());
+            Log.Logger = new NLogLogger();
+            var formFactory = KernelManager.Kernel.Get<IFormFactory>();
+            Application.Run(formFactory.Create<FDesktop>());
         }
 
         private static void UnhandledException(object sender, ThreadExceptionEventArgs threadExceptionEventArgs)

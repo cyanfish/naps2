@@ -24,9 +24,9 @@ namespace NAPS2.DI
         public override void Load()
         {
             // Import
-            Bind<IScannedImageImporter>().To<ScannedImageImporter>().When(x => true); // Fix so that this binding is only used when no name is specified
-            Bind<IScannedImageImporter>().To<PdfSharpImporter>().Named("pdf");
-            Bind<IScannedImageImporter>().To<ImageImporter>().Named("image");
+            Bind<IScannedImageImporter>().To<ScannedImageImporter>();
+            Bind<IPdfImporter>().To<PdfSharpImporter>();
+            Bind<IImageImporter>().To<ImageImporter>();
 
             // Export
             Bind<IPdfExporter>().To<PdfSharpExporter>();
@@ -39,6 +39,7 @@ namespace NAPS2.DI
             Bind<IScanDriver>().To<StubScanDriver>().Named(WiaScanDriver.DRIVER_NAME).WithConstructorArgument("driverName", WiaScanDriver.DRIVER_NAME);
             Bind<IScanDriver>().To<StubScanDriver>().Named(TwainScanDriver.DRIVER_NAME).WithConstructorArgument("driverName", TwainScanDriver.DRIVER_NAME);
 #else
+            Bind<IScanDriverFactory>().To<NinjectScanDriverFactory>();
             Bind<IScanDriver>().To<WiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
             Bind<IScanDriver>().To<TwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
 #endif
@@ -59,7 +60,8 @@ namespace NAPS2.DI
             Bind<Edition>().ToConstant(GetEdition());
 
             // Misc
-            Bind<Logger>().ToMethod(ctx => LoggerFactory.Current.GetLogger()).InSingletonScope();
+            Bind<IFormFactory>().To<NinjectFormFactory>();
+            Bind<ILogger>().To<NLogLogger>().InSingletonScope();
         }
 
         private Edition GetEdition()
