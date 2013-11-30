@@ -28,8 +28,8 @@ namespace NAPS2.Console
     public class AutomatedScanningOptions : CommandLineOptions
     {
         [Option('o', "output", HelpText = "The name and path of the file to save." +
-                                          " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
-                                          " You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
+                                          " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG).")]
+        //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
         public string OutputPath { get; set; }
 
         [Option('p', "profile", HelpText = "The name of the profile to use for scanning." +
@@ -54,17 +54,17 @@ namespace NAPS2.Console
         public bool WaitForEnter { get; set; }
 
         [Option('e', "email", HelpText = "The name of the file to attach to an email." +
-                                         " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
-                                         " You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
+                                         " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG).")]
+        //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
         public string EmailFileName { get; set; }
 
         [Option("subject", HelpText = "The email message's subject." +
-                                      " You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
+            //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
                                       " Requires -e/--email.")]
         public string EmailSubject { get; set; }
 
         [Option("body", HelpText = "The email message's body text." +
-                                   " You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
+            //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
                                    " Requires -e/--email.")]
         public string EmailBody { get; set; }
 

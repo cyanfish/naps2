@@ -89,7 +89,7 @@ namespace NAPS2.WinForms
             var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             foreach (DictionaryEntry entry in resourceSet.Cast<DictionaryEntry>().OrderBy(x => x.Value))
             {
-                var langCode = (string)entry.Key;
+                var langCode = ((string)entry.Key).Replace("_", "-");
                 var langName = (string)entry.Value;
 
                 // Only include those languages for which localized resources exist

@@ -139,6 +139,7 @@ namespace NAPS2.Scan.Images
                     {
                         _recoveryLock.Dispose();
                         RecoveryFolder.Delete(true);
+                        _recoveryFolder = null;
                     }
                 }
             }

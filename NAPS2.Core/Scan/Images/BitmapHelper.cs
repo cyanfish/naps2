@@ -140,6 +140,7 @@ namespace NAPS2.Scan.Images
             BitBlt(hdc0, 0, 0, w, h, hdc, 0, 0, SRCCOPY);
             // Step (4): convert this monochrome hbitmap back into a Bitmap:
             Bitmap b0 = Image.FromHbitmap(hbm0);
+            b0.SetResolution(b.HorizontalResolution, b.VerticalResolution);
             //
             // Finally some cleanup.
             DeleteDC(hdc);
