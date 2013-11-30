@@ -49,7 +49,7 @@ function Build-NAPS2 {
 }
 
 function Get-NAPS2-Languages {
-    Get-ChildItem ..\Lang\tmx\ |
-        foreach { $_.Name -replace ".tmx", "" } |
-        where { $_ -ne "empty" }
+    Get-ChildItem ..\Lang\po\ |
+        foreach { $_.Name -replace ".po", "" } |
+        where { $_ -ne "templatest" }
 }
