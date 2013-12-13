@@ -903,7 +903,7 @@
         <value>2</value>
     </data>
     <data name="rdTWAIN.Text" xml:space="preserve">
-        <value>TWAIN драйвер </value>
+        <value>TWAIN драйвер</value>
     </data>
     <data name="&gt;&gt;rdTWAIN.Name" xml:space="preserve">
         <value>rdTWAIN</value>
@@ -930,7 +930,7 @@
         <value>1</value>
     </data>
     <data name="rdWIA.Text" xml:space="preserve">
-        <value>WIA драйвер </value>
+        <value>WIA драйвер</value>
     </data>
     <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
         <value>rdWIA</value>

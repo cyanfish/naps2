@@ -124,7 +124,7 @@
         <value>Vymazat</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Are you sure you want to clear {0} item(s)?</value>
+        <value>Opravdu si přejete smazat položku {0}?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
         <value>Opravdu si přejete smazat položku {0}?</value>
@@ -148,7 +148,7 @@
         <value>Vybraný skener je vypnutý.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Nemáte oprávnění zapisovat do tohoto umístění..</value>
+        <value>Nemáte oprávnění zapisovat do tohoto umístění.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Chyba</value>
@@ -202,7 +202,7 @@
         <value>Vyberte profil před spuštěním skenování.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Došlo k chybě s ovladačem skeneru..</value>
+        <value>Došlo k chybě s ovladačem skeneru.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Verze {0}</value>

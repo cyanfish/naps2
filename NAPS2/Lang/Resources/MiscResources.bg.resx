@@ -136,7 +136,7 @@
         <value>Сигурни ли сте, че искате да изтриете профилът {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Вече има файл "%1". Искате ли да бъде презаписан?</value>
+        <value>Вече има файл '%1'. Искате ли да бъде презаписан?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Изтрий</value>
@@ -175,7 +175,7 @@
         <value>PNG файл  (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF файл  (*.tiff, *.tif)</value>
+        <value>TIFF файл (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
         <value>Липсва име.</value>
@@ -199,7 +199,7 @@
         <value>Сканирано изображение</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Избери Профил преди да натиснеш "Сканиране".</value>
+        <value>Избери Профил преди да натиснеш 'Сканиране'.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>Проблем с драйвера на скенера.</value>

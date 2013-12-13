@@ -208,6 +208,6 @@
         <value>Versione {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>An error occurred while trying to send an email.</value>
+        <value>Si è verificato un errore durante l'invio di una email.</value>
     </data>
 </root>

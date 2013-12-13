@@ -151,13 +151,13 @@
         <value>ימין</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x240 מ"מ)</value>
+        <value>A3 (297x240 מ\"מ)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 מ"מ)</value>
+        <value>A4 (210x297 מ\"מ)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 מ"מ)</value>
+        <value>A5 (148x210 מ\"מ)</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>נייר US Legal (8.5x14 in)</value>

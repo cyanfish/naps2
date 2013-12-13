@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-10 00:50+0000\n"
-"PO-Revision-Date: 2013-11-10 00:17+0000\n"
+"PO-Revision-Date: 2013-12-13 18:20+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: bg\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1384042647.0\n"
+"X-POOTLE-MTIME: 1386958811.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -349,19 +349,19 @@ msgstr "Сканирано изображение"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Избери Профил преди да натиснеш \"Сканиране\""
+msgstr "Избери Профил преди да натиснеш 'Сканиране'"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr "TIFF файл  (*.tiff, *.tif)"
+msgstr "TIFF файл (*.tiff, *.tif)"
 
 #: FEditScanSettings.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
-msgstr "TWAIN драйвер "
+msgstr "TWAIN драйвер"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Вече има файл \"%1\". Искате ли да бъде презаписан?"
+msgstr "Вече има файл '%1'. Искате ли да бъде презаписан?"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -393,7 +393,7 @@ msgstr "Версия {0}"
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
-msgstr "WIA драйвер "
+msgstr "WIA драйвер"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"

@@ -316,7 +316,7 @@
         <value>6</value>
     </data>
     <data name="rdbNativeWIA.Text" xml:space="preserve">
-        <value>Рідний інтерфейс сканера WIA UI</value>
+        <value>Использовать собственный интерфейс WIA</value>
     </data>
     <data name="&gt;&gt;rdbNativeWIA.Name" xml:space="preserve">
         <value>rdbNativeWIA</value>
@@ -930,7 +930,7 @@
         <value>1</value>
     </data>
     <data name="rdWIA.Text" xml:space="preserve">
-        <value>TWAIN драйвер</value>
+        <value>Драйвер WIA</value>
     </data>
     <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
         <value>rdWIA</value>

@@ -148,7 +148,7 @@
         <value>FViewer</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Pr\'e9-visualizar</value>
+        <value>Pré-visualizar</value>
     </data>
     <data name="tiffViewer1.Size" type="System.Drawing.Size, System.Drawing">
         <value>656, 654</value>

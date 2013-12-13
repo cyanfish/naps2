@@ -289,7 +289,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Usar configura\'e7\'e3o pr\'e9-definida</value>
+        <value>Usar configuração pré-definida</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -499,7 +499,7 @@
         <value>13</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Resolu\'e7\'e3o:</value>
+        <value>Resolução:</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>

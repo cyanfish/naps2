@@ -124,7 +124,7 @@
         <value>Очистить документ</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Желаете очистить профиль(ли) {0}?</value>
+        <value>Вы уверены, что хотите удалить {0} объект(ов)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
         <value>Удалить {0} выбраный(ых)?</value>
@@ -133,7 +133,7 @@
         <value>Удалить {0} выбранных?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Удалить выбранный профиль{0}?</value>
+        <value>Удалить профиль {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
         <value>Файл {0} существует. Перезаписать його?</value>
@@ -148,13 +148,13 @@
         <value>Выбранный сканер отключён.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Нет прав на запись в этом каталоге..</value>
+        <value>Нет прав на запись в этом каталоге.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Ошибка</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Файли несжатых рисунков (*.bmp)</value>
+        <value>Файлы несжатых рисунков (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
         <value>Разширенный метафайл (*.emf)</value>
@@ -202,12 +202,12 @@
         <value>Выберите профиль перед сканированием.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Ощибка драйвера сканирования.</value>
+        <value>Ошибка драйвера сканирования.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Версия {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>An error occurred while trying to send an email.</value>
+        <value>Произошла ошибка при попытке отправить e-mail.</value>
     </data>
 </root>
