@@ -35,10 +35,14 @@ namespace NAPS2.ImportExport.Images
                 for (int i = 0; i < toImport.GetFrameCount(FrameDimension.Page); ++i)
                 {
                     toImport.SelectActiveFrame(FrameDimension.Page, i);
-                    // Disable high quality, since it's too awkward to show a UI and it should be the best choice in most cases
-                    yield return scannedImageFactory.Create((Bitmap)toImport.Clone(), ScanBitDepth.C24Bit, false);
+                    yield return scannedImageFactory.Create((Bitmap)toImport.Clone(), ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat));
                 }
             }
+        }
+
+        private bool IsLossless(ImageFormat format)
+        {
+            return Equals(format, ImageFormat.Bmp) || Equals(format, ImageFormat.Png);
         }
     }
 }
