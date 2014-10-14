@@ -147,7 +147,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomActual.ToolTipText" xml:space="preserve">
-        <value>Zoom out</value>
+        <value>Reduzir o zoom</value>
     </data>
     <data name="tsZoomPlus.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -156,7 +156,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
-        <value>Zoom in</value>
+        <value>Aumentar o zoom</value>
     </data>
     <data name="tsZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -165,7 +165,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-        <value>Zoom out</value>
+        <value>Reduzir o zoom</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>
@@ -177,7 +177,7 @@
         <value>100%</value>
     </data>
     <data name="tsZoom.ToolTipText" xml:space="preserve">
-        <value>Zoom</value>
+        <value>Ampliar</value>
     </data>
     <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 0</value>

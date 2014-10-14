@@ -415,7 +415,7 @@
         <value>ImageAboveText</value>
     </data>
     <data name="tsPDFEmail.Text" xml:space="preserve">
-        <value>שליחת PDF בדוא"ל</value>
+        <value>שליחת PDF בדוא\"ל</value>
     </data>
     <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Name" xml:space="preserve">
         <value>toolStripContainer1.LeftToolStripPanel</value>

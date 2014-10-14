@@ -1,0 +1,421 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+
+#: SettingsResources.resx$Dpi_100$Message
+msgid "100 dpi"
+msgstr ""
+
+#: SettingsResources.resx$Dpi_1200$Message
+msgid "1200 dpi"
+msgstr ""
+
+#: SettingsResources.resx$Dpi_200$Message
+msgid "200 dpi"
+msgstr ""
+
+#: SettingsResources.resx$BitDepth_24Color$Message
+msgid "24-bit Color"
+msgstr ""
+
+#: SettingsResources.resx$Dpi_300$Message
+msgid "300 dpi"
+msgstr ""
+
+#: SettingsResources.resx$Dpi_600$Message
+msgid "600 dpi"
+msgstr ""
+
+#: SettingsResources.resx$PageSize_A3$Message
+msgid "A3 (297x420 mm)"
+msgstr ""
+
+#: SettingsResources.resx$PageSize_A4$Message
+msgid "A4 (210x297 mm)"
+msgstr ""
+
+#: SettingsResources.resx$PageSize_A5$Message
+msgid "A5 (148x210 mm)"
+msgstr ""
+
+#: FDesktop.resx$tsAbout.Text$Message
+#: FAbout.resx$$this.Text$Message
+msgid "About"
+msgstr ""
+
+#: FManageProfiles.resx$btnAdd.Text$Message
+msgid "Add"
+msgstr ""
+
+#: MiscResources.resx$EmailError$Message
+msgid "An error occurred while trying to send an email"
+msgstr ""
+
+#: MiscResources.resx$UnknownDriverError$Message
+msgid "An error occurred with the scanning driver"
+msgstr ""
+
+#: MiscResources.resx$ConfirmClearItems$Message
+msgid "Are you sure you want to clear {0} item(s)?"
+msgstr ""
+
+#: MiscResources.resx$ConfirmDeleteSingleProfile$Message
+msgid "Are you sure you want to delete the profile {0}?"
+msgstr ""
+
+#: MiscResources.resx$ConfirmDeleteItems$Message
+msgid "Are you sure you want to delete {0} item(s)?"
+msgstr ""
+
+#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
+msgid "Are you sure you want to delete {0} profiles?"
+msgstr ""
+
+#: FEditScanSettings.resx$label3.Text$Message
+msgid "Bit depth"
+msgstr ""
+
+#: MiscResources.resx$FileTypeBmp$Message
+msgid "Bitmap Files (*.bmp)"
+msgstr ""
+
+#: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
+msgid "Black & White"
+msgstr ""
+
+#: FEditScanSettings.resx$label6.Text$Message
+msgid "Brightness"
+msgstr ""
+
+#: FEditScanSettings.resx$btnCancel.Text$Message
+msgid "Cancel"
+msgstr ""
+
+#: SettingsResources.resx$HorizontalAlign_Center$Message
+msgid "Center"
+msgstr ""
+
+#: FChooseIcon.resx$$this.Text$Message
+msgid "Choose Icon"
+msgstr ""
+
+#: MiscResources.resx$ChooseProfile$Message
+#: FChooseProfile.resx$$this.Text$Message
+msgid "Choose Profile"
+msgstr ""
+
+#: FEditScanSettings.resx$btnChooseDevice.Text$Message
+msgid "Choose device"
+msgstr ""
+
+#: MiscResources.resx$Clear$Message
+#: FDesktop.resx$tsClear.Text$Message
+msgid "Clear"
+msgstr ""
+
+#: FEditScanSettings.resx$label7.Text$Message
+msgid "Contrast"
+msgstr ""
+
+#: FAbout.resx$labelCopyright.Text$Message
+msgid "Copyright © 2009 Pavel Sorejs"
+msgstr ""
+
+#: FAbout.resx__1$labelCopyright.Text$Message
+msgid "Copyright © 2012 Michael Adams"
+msgstr ""
+
+#: FAbout.resx__3$labelCopyright.Text$Message
+msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+msgstr ""
+
+#: FAbout.resx__2$labelCopyright.Text$Message
+msgid "Copyright © 2013 Peter De Leeuw"
+msgstr ""
+
+#: MiscResources.resx$Delete$Message
+#: FDesktop.resx$tsDelete.Text$Message
+msgid "Delete"
+msgstr ""
+
+#: FEditScanSettings.resx$label1.Text$Message
+msgid "Device"
+msgstr ""
+
+#: FEditScanSettings.resx$label8.Text$Message
+msgid "Display name"
+msgstr ""
+
+#: FChooseProfile.resx$btnDone.Text$Message
+msgid "Done"
+msgstr ""
+
+#: SettingsResources.resx$Source_Duplex$Message
+msgid "Duplex"
+msgstr ""
+
+#: FManageProfiles.resx$btnEdit.Text$Message
+msgid "Edit"
+msgstr ""
+
+#: FDesktop.resx$tsPDFEmail.Text$Message
+msgid "Email PDF"
+msgstr ""
+
+#: MiscResources.resx$FileTypeEmf$Message
+msgid "Enhanced Windows MetaFile (*.emf)"
+msgstr ""
+
+#: MiscResources.resx$Error$Message
+msgid "Error"
+msgstr ""
+
+#: MiscResources.resx$FileTypeExif$Message
+msgid "Exchangeable Image File (*.exif)"
+msgstr ""
+
+#: SettingsResources.resx$Source_Feeder$Message
+msgid "Feeder"
+msgstr ""
+
+#: FDesktop.resx$tsFlip.Text$Message
+msgid "Flip"
+msgstr ""
+
+#: MiscResources.resx$FileTypeGif$Message
+msgid "GIF File (*.gif)"
+msgstr ""
+
+#: SettingsResources.resx$Source_Glass$Message
+msgid "Glass"
+msgstr ""
+
+#: SettingsResources.resx$BitDepth_8Grayscale$Message
+msgid "Grayscale"
+msgstr ""
+
+#: FEditScanSettings.resx$label9.Text$Message
+msgid "Horizontal align"
+msgstr ""
+
+#: FAbout.resx$label1.Text$Message
+msgid "Icons from"
+msgstr ""
+
+#: MiscResources.resx$FileTypeJpeg$Message
+msgid "JPEG File (*.jpg, *.jpeg)"
+msgstr ""
+
+#: FDesktop.resx$toolStripDropDownButton1.Text$Message
+msgid "Language"
+msgstr ""
+
+#: SettingsResources.resx$HorizontalAlign_Left$Message
+msgid "Left"
+msgstr ""
+
+#: FDesktop.resx$tStrip.Text$Message
+msgid "Main toolbar"
+msgstr ""
+
+#: FChooseProfile.resx$btnProfiles.Text$Message
+msgid "Manage Profiles"
+msgstr ""
+
+#: FEditScanSettings.resx$cbHighQuality.Text$Message
+msgid "Maximum quality (large files)"
+msgstr ""
+
+#: FDesktop.resx$tsMoveDown.Text$Message
+msgid "Move Down"
+msgstr ""
+
+#: FDesktop.resx$tsMoveUp.Text$Message
+msgid "Move Up"
+msgstr ""
+
+#: MiscResources.resx$NAPS2$Message
+msgid "NAPS2"
+msgstr ""
+
+#: MiscResources.resx$NameMissing$Message
+msgid "Name missing"
+msgstr ""
+
+#: MiscResources.resx$NoDeviceSelected$Message
+msgid "No device selected"
+msgstr ""
+
+#: MiscResources.resx$NoDevicesFound$Message
+msgid "No scanning device was found"
+msgstr ""
+
+#: FDesktop.resx$$this.Text$Message
+msgid "Not Another PDF Scanner 2"
+msgstr ""
+
+#: FEditScanSettings.resx$btnOK.Text$Message
+#: FManageProfiles.resx$btnOK.Text$Message
+#: FAbout.resx$okButton.Text$Message
+msgid "OK"
+msgstr ""
+
+#: MiscResources.resx$OverwriteFile$Message
+msgid "Overwrite File"
+msgstr ""
+
+#: MiscResources.resx$FileTypePdf$Message
+msgid "PDF document (*.pdf)"
+msgstr ""
+
+#: MiscResources.resx$FileTypePng$Message
+msgid "PNG File (*.png)"
+msgstr ""
+
+#: FEditScanSettings.resx$label4.Text$Message
+msgid "Page size"
+msgstr ""
+
+#: FEditScanSettings.resx$label2.Text$Message
+msgid "Paper source"
+msgstr ""
+
+#: FViewer.resx$$this.Text$Message
+msgid "Preview"
+msgstr ""
+
+#: FEditScanSettings.resx$$this.Text$Message
+msgid "Profile Settings"
+msgstr ""
+
+#: FManageProfiles.resx$$this.Text$Message
+#: FDesktop.resx$tsProfiles.Text$Message
+msgid "Profiles"
+msgstr ""
+
+#: FEditScanSettings.resx$label5.Text$Message
+msgid "Resolution"
+msgstr ""
+
+#: SettingsResources.resx$HorizontalAlign_Right$Message
+msgid "Right"
+msgstr ""
+
+#: FDesktop.resx$tsRotateLeft.Text$Message
+msgid "Rotate Left"
+msgstr ""
+
+#: FDesktop.resx$tsRotateRight.Text$Message
+msgid "Rotate Right"
+msgstr ""
+
+#: FDesktop.resx$tsSaveImage.Text$Message
+msgid "Save Images"
+msgstr ""
+
+#: FDesktop.resx$tsSavePDF.Text$Message
+msgid "Save PDF"
+msgstr ""
+
+#: FPDFSave.resx$label1.Text$Message
+msgid "Saving to PDF"
+msgstr ""
+
+#: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
+#: FEditScanSettings.resx$label10.Text$Message
+msgid "Scale"
+msgstr ""
+
+#: FChooseProfile.resx$btnScan.Text$Message
+#: FDesktop.resx$tsScan.Text$Message
+msgid "Scan"
+msgstr ""
+
+#: MiscResources.resx$ScannedImage$Message
+msgid "Scanned Image"
+msgstr ""
+
+#: MiscResources.resx$SelectProfileBeforeScan$Message
+msgid "Select a profile before clicking Scan"
+msgstr ""
+
+#: MiscResources.resx$FileTypeTiff$Message
+msgid "TIFF File (*.tiff, *.tif)"
+msgstr ""
+
+#: FEditScanSettings.resx$rdTWAIN.Text$Message
+msgid "TWAIN Driver"
+msgstr ""
+
+#: MiscResources.resx$ConfirmOverwriteFile$Message
+msgid "The file {0} already exists. Do you want to overwrite it?"
+msgstr ""
+
+#: MiscResources.resx$DeviceNotFound$Message
+msgid "The selected scanner could not be found"
+msgstr ""
+
+#: MiscResources.resx$DeviceOffline$Message
+msgid "The selected scanner is offline"
+msgstr ""
+
+#: SettingsResources.resx$PageSize_Legal$Message
+msgid "US Legal (8.5x14 in)"
+msgstr ""
+
+#: SettingsResources.resx$PageSize_Letter$Message
+msgid "US Letter (8.5x11 in)"
+msgstr ""
+
+#: FEditScanSettings.resx$rdbNativeWIA.Text$Message
+msgid "Use native WIA UI"
+msgstr ""
+
+#: FEditScanSettings.resx$rdbConfig.Text$Message
+msgid "Use predefined settings"
+msgstr ""
+
+#: MiscResources.resx$Version$Message
+msgid "Version {0}"
+msgstr ""
+
+#: FEditScanSettings.resx$rdWIA.Text$Message
+msgid "WIA Driver"
+msgstr ""
+
+#: FTwainGui.resx$label1.Text$Message
+msgid "Waiting for TWAIN to complete"
+msgstr ""
+
+#: MiscResources.resx$DontHavePermission$Message
+msgid "You don't have permission to save files at this location"
+msgstr ""
+
+#: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
+msgid "Zoom"
+msgstr ""
+
+#: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
+msgid "Zoom in"
+msgstr ""
+
+#: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
+#: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
+msgid "Zoom out"
+msgstr ""
+
+#: FAbout.resx$linkLabel1.Text$Message
+msgid "http://sourceforge.com/projects/naps2"
+msgstr ""
+
+#: FAbout.resx$linkLabel2.Text$Message
+msgid "http://www.fatcow.com/free-icons"
+msgstr ""
+
+#: MiscResources.resx$PdfStatus$Message
+msgid "{0} of {1}"
+msgstr ""
+

@@ -118,28 +118,28 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Чёрно-белое</value>
+        <value>Чёрно-белый</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-біт Цвет</value>
+        <value>24 бита, цвет</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Оттенки серого</value>
     </data>
     <data name="Dpi_100" xml:space="preserve">
-        <value>100 т/д</value>
+        <value>100 dpi</value>
     </data>
     <data name="Dpi_1200" xml:space="preserve">
-        <value>1200 т/д</value>
+        <value>1200 dpi</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
-        <value>200 т/д</value>
+        <value>200 dpi</value>
     </data>
     <data name="Dpi_300" xml:space="preserve">
-        <value>300 т/д</value>
+        <value>300 dpi</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
-        <value>600 т/д</value>
+        <value>600 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Центрировать</value>
@@ -151,13 +151,13 @@
         <value>Повернуть страницу вправо</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297 x 420 мм)</value>
+        <value>A3 (297x420 мм)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210 x 297 мм)</value>
+        <value>A4 (210x297 мм)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148 x 210 мм)</value>
+        <value>A5 (148x210 мм)</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>US Legal (8.5x14 in)</value>
