@@ -446,7 +446,8 @@ namespace NAPS2.WinForms
             UpdateThumbnails();
 
             // Automatic updates
-            autoUpdaterUI.OnApplicationStart(this);
+            // Not yet enabled
+            // autoUpdaterUI.OnApplicationStart(this);
         }
 
         private void FDesktop_Closed(object sender, EventArgs e)
