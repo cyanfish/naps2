@@ -150,13 +150,17 @@ namespace NAPS2.WinForms
         public void ReceiveScannedImage(IScannedImage scannedImage)
         {
             imageList.Images.Add(scannedImage);
-            UpdateThumbnails();
+            AppendThumbnail(scannedImage);
         }
 
         private void UpdateThumbnails()
         {
-            // TODO: Make incremental updates (i.e. appends) faster if there are many images
             thumbnailList1.UpdateImages(imageList.Images);
+        }
+
+        private void AppendThumbnail(IScannedImage scannedImage)
+        {
+            thumbnailList1.AppendImage(scannedImage);
         }
 
         private void UpdateThumbnails(IEnumerable<int> selection)
@@ -191,7 +195,7 @@ namespace NAPS2.WinForms
 
         private void SelectAll()
         {
-            UpdateThumbnails(Enumerable.Range(0, imageList.Images.Count));
+            SelectedIndices = Enumerable.Range(0, imageList.Images.Count);
         }
 
         private void MoveDown()
@@ -467,10 +471,15 @@ namespace NAPS2.WinForms
             {
                 foreach (var fileName in ofd.FileNames)
                 {
+                    // TODO: Run in thread, and show a dialog (just like exporting)
+                    // Need to provide count somehow (progress callback). count = # files or # pages
                     var images = scannedImageImporter.Import(fileName);
-                    imageList.Images.AddRange(images);
-                    // Update after each file to provide some kind of progress indication if there are a lot of files
-                    UpdateThumbnails();
+                    foreach (var img in images)
+                    {
+                        imageList.Images.Add(img);
+                        AppendThumbnail(img);
+                        thumbnailList1.Refresh();
+                    }
                 }
             }
         }

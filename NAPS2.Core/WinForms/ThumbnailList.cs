@@ -40,9 +40,14 @@ namespace NAPS2.WinForms
             Clear();
             foreach (IScannedImage img in images)
             {
-                ilThumbnailList.Images.Add(img.Thumbnail);
-                Items.Add("", ilThumbnailList.Images.Count - 1);
+                AppendImage(img);
             }
+        }
+
+        public void AppendImage(IScannedImage img)
+        {
+            ilThumbnailList.Images.Add(img.Thumbnail);
+            Items.Add("", ilThumbnailList.Images.Count - 1);
         }
 
         public void UpdateView(List<IScannedImage> images)
