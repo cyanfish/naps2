@@ -107,7 +107,7 @@ namespace NAPS2.WinForms
         private void RelayoutToolbar()
         {
             // Wrap text as necessary
-            foreach (var btn in tStrip.Items.OfType<ToolStripButton>())
+            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
             {
                 btn.Text = stringWrapper.Wrap(btn.Text, 80, CreateGraphics(), btn.Font);
             }
@@ -116,7 +116,7 @@ namespace NAPS2.WinForms
             // Recalculate visibility for the below check
             Application.DoEvents();
             // Check if toolbar buttons are overflowing
-            if (tStrip.Items.OfType<ToolStripButton>().Any(btn => !btn.Visible))
+            if (tStrip.Items.OfType<ToolStripItem>().Any(btn => !btn.Visible))
             {
                 // Shrink the padding to help the buttons fit
                 SetToolbarButtonPadding(new Padding(5, 0, 5, 0));
@@ -125,7 +125,7 @@ namespace NAPS2.WinForms
 
         private void SetToolbarButtonPadding(Padding padding)
         {
-            foreach (var btn in tStrip.Items.OfType<ToolStripButton>())
+            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
             {
                 btn.Padding = padding;
             }
