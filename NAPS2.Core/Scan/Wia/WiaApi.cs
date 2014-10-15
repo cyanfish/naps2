@@ -312,7 +312,7 @@ namespace NAPS2.Scan.Wia
                     SetDeviceIntProperty(SOURCE_FEEDER, PAPER_SOURCE);
                     break;
                 case ScanSource.Duplex:
-                    SetDeviceIntProperty(SOURCE_DUPLEX, PAPER_SOURCE);
+                    SetDeviceIntProperty(SOURCE_DUPLEX | SOURCE_FEEDER, PAPER_SOURCE);
                     break;
             }
         }
