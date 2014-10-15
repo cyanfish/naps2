@@ -173,10 +173,13 @@ namespace NAPS2.WinForms
 
         private void UpdateImageCounts()
         {
-            tsSavePDFAll.Text = string.Format(MiscResources.AllCount, imageList.Images.Count);
-            tsSavePDFAll.Enabled = imageList.Images.Any();
-            tsSavePDFSelected.Text = string.Format(MiscResources.SelectedCount, SelectedIndices.Count());
-            tsSavePDFSelected.Enabled = SelectedIndices.Any();
+            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text =
+                string.Format(MiscResources.AllCount, imageList.Images.Count);
+            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = imageList.Images.Any();
+
+            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text =
+                string.Format(MiscResources.SelectedCount, SelectedIndices.Count());
+            tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = SelectedIndices.Any();
         }
 
         private void Clear()
@@ -233,11 +236,11 @@ namespace NAPS2.WinForms
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY));
         }
 
-        private void ExportPDF(string filename, IEnumerable<IScannedImage> images)
+        private void ExportPDF(string filename, List<IScannedImage> images)
         {
             var pdfdialog = FormFactory.Create<FPDFSave>();
             pdfdialog.Filename = filename;
-            pdfdialog.Images = images.ToList();
+            pdfdialog.Images = images;
             pdfdialog.ShowDialog(this);
         }
 
@@ -296,10 +299,10 @@ namespace NAPS2.WinForms
 
         private void tsSavePDFSelected_Click(object sender, EventArgs e)
         {
-            SavePDF(imageList.Images.ElementsAt(SelectedIndices));
+            SavePDF(imageList.Images.ElementsAt(SelectedIndices).ToList());
         }
 
-        private void SavePDF(IEnumerable<IScannedImage> images)
+        private void SavePDF(List<IScannedImage> images)
         {
             if (images.Any())
             {
@@ -317,9 +320,19 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsSaveImage_Click(object sender, EventArgs e)
+        private void tsSaveImagesAll_Click(object sender, EventArgs e)
         {
-            if (imageList.Images.Count > 0)
+            SaveImages(imageList.Images);
+        }
+
+        private void tsSaveImagesSelected_Click(object sender, EventArgs e)
+        {
+            SaveImages(imageList.Images.ElementsAt(SelectedIndices).ToList());
+        }
+
+        private void SaveImages(List<IScannedImage> images)
+        {
+            if (images.Any())
             {
                 var sd = new SaveFileDialog
                     {
@@ -340,9 +353,9 @@ namespace NAPS2.WinForms
                 {
                     try
                     {
-                        imageSaver.SaveImages(sd.FileName, imageList.Images, path =>
+                        imageSaver.SaveImages(sd.FileName, images, path =>
                         {
-                            if (imageList.Images.Count == 1)
+                            if (images.Count() == 1)
                             {
                                 // One image, so the file name is the same and the save dialog already prompted the user to overwrite
                                 return true;
@@ -368,12 +381,22 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsPDFEmail_Click(object sender, EventArgs e)
+        private void tsEmailPDFAll_Click(object sender, EventArgs e)
         {
-            if (imageList.Images.Count > 0)
+            EmailPDF(imageList.Images);
+        }
+
+        private void tsEmailPDFSelected_Click(object sender, EventArgs e)
+        {
+            EmailPDF(imageList.Images.ElementsAt(SelectedIndices).ToList());
+        }
+
+        private void EmailPDF(List<IScannedImage> images)
+        {
+            if (images.Any())
             {
                 string path = Paths.AppData + "\\Scan.pdf";
-                //ExportPDF(path);
+                ExportPDF(path, images);
                 emailer.SendEmail(new EmailMessage
                 {
                     Attachments = new List<EmailAttachment> { new EmailAttachment

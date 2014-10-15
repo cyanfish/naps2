@@ -37,6 +37,7 @@ namespace NAPS2.WinForms
 
         public FChooseProfile(IFormFactory formFactory, IProfileManager profileManager, IScanPerformer scanPerformer, IconButtonSizer iconButtonSizer)
         {
+            this.formFactory = formFactory;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.iconButtonSizer = iconButtonSizer;

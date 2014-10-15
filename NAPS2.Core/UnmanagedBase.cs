@@ -52,7 +52,7 @@ namespace NAPS2
 
         public void Dispose()
         {
-            if (Pointer != IntPtr.Zero)
+            if (Pointer != IntPtr.Zero && !disposed)
             {
                 DestroyStructures();
                 Marshal.FreeHGlobal(Pointer);

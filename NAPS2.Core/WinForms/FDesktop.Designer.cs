@@ -44,8 +44,12 @@ namespace NAPS2.WinForms
             this.tsdSavePDF = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsSavePDFAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSavePDFSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSaveImage = new System.Windows.Forms.ToolStripButton();
-            this.tsPDFEmail = new System.Windows.Forms.ToolStripButton();
+            this.tsdSaveImages = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsSaveImagesAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSaveImagesSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsdEmailPDF = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsEmailPDFAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsEmailPDFSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.tsImport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsdRotate = new System.Windows.Forms.ToolStripDropDownButton();
@@ -91,8 +95,8 @@ namespace NAPS2.WinForms
             this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
             this.thumbnailList1.SelectedIndexChanged += new System.EventHandler(this.thumbnailList1_SelectedIndexChanged);
             this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
-            this.thumbnailList1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.thumbnailList1_MouseMove);
             this.thumbnailList1.MouseLeave += new System.EventHandler(this.thumbnailList1_MouseLeave);
+            this.thumbnailList1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.thumbnailList1_MouseMove);
             // 
             // tStrip
             // 
@@ -103,8 +107,8 @@ namespace NAPS2.WinForms
             this.tsProfiles,
             this.toolStripSeparator5,
             this.tsdSavePDF,
-            this.tsSaveImage,
-            this.tsPDFEmail,
+            this.tsdSaveImages,
+            this.tsdEmailPDF,
             this.tsImport,
             this.toolStripSeparator4,
             this.tsdRotate,
@@ -162,21 +166,51 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsSavePDFSelected, "tsSavePDFSelected");
             this.tsSavePDFSelected.Click += new System.EventHandler(this.tsSavePDFSelected_Click);
             // 
-            // tsSaveImage
+            // tsdSaveImages
             // 
-            this.tsSaveImage.Image = global::NAPS2.Icons.picture;
-            resources.ApplyResources(this.tsSaveImage, "tsSaveImage");
-            this.tsSaveImage.Name = "tsSaveImage";
-            this.tsSaveImage.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsSaveImage.Click += new System.EventHandler(this.tsSaveImage_Click);
+            this.tsdSaveImages.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsSaveImagesAll,
+            this.tsSaveImagesSelected});
+            this.tsdSaveImages.Image = global::NAPS2.Icons.picture;
+            resources.ApplyResources(this.tsdSaveImages, "tsdSaveImages");
+            this.tsdSaveImages.Name = "tsdSaveImages";
+            this.tsdSaveImages.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsdSaveImages.ShowDropDownArrow = false;
             // 
-            // tsPDFEmail
+            // tsSaveImagesAll
             // 
-            this.tsPDFEmail.Image = global::NAPS2.Icons.email_attach;
-            resources.ApplyResources(this.tsPDFEmail, "tsPDFEmail");
-            this.tsPDFEmail.Name = "tsPDFEmail";
-            this.tsPDFEmail.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsPDFEmail.Click += new System.EventHandler(this.tsPDFEmail_Click);
+            this.tsSaveImagesAll.Name = "tsSaveImagesAll";
+            resources.ApplyResources(this.tsSaveImagesAll, "tsSaveImagesAll");
+            this.tsSaveImagesAll.Click += new System.EventHandler(this.tsSaveImagesAll_Click);
+            // 
+            // tsSaveImagesSelected
+            // 
+            this.tsSaveImagesSelected.Name = "tsSaveImagesSelected";
+            resources.ApplyResources(this.tsSaveImagesSelected, "tsSaveImagesSelected");
+            this.tsSaveImagesSelected.Click += new System.EventHandler(this.tsSaveImagesSelected_Click);
+            // 
+            // tsdEmailPDF
+            // 
+            this.tsdEmailPDF.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsEmailPDFAll,
+            this.tsEmailPDFSelected});
+            this.tsdEmailPDF.Image = global::NAPS2.Icons.email_attach;
+            resources.ApplyResources(this.tsdEmailPDF, "tsdEmailPDF");
+            this.tsdEmailPDF.Name = "tsdEmailPDF";
+            this.tsdEmailPDF.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsdEmailPDF.ShowDropDownArrow = false;
+            // 
+            // tsEmailPDFAll
+            // 
+            this.tsEmailPDFAll.Name = "tsEmailPDFAll";
+            resources.ApplyResources(this.tsEmailPDFAll, "tsEmailPDFAll");
+            this.tsEmailPDFAll.Click += new System.EventHandler(this.tsEmailPDFAll_Click);
+            // 
+            // tsEmailPDFSelected
+            // 
+            this.tsEmailPDFSelected.Name = "tsEmailPDFSelected";
+            resources.ApplyResources(this.tsEmailPDFSelected, "tsEmailPDFSelected");
+            this.tsEmailPDFSelected.Click += new System.EventHandler(this.tsEmailPDFSelected_Click);
             // 
             // tsImport
             // 
@@ -328,8 +362,6 @@ namespace NAPS2.WinForms
 
         private System.Windows.Forms.ToolStrip tStrip;
         private System.Windows.Forms.ToolStripButton tsScan;
-        private System.Windows.Forms.ToolStripButton tsSaveImage;
-        private System.Windows.Forms.ToolStripButton tsPDFEmail;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private ThumbnailList thumbnailList1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
@@ -354,6 +386,12 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripDropDownButton tsdReorder;
         private System.Windows.Forms.ToolStripMenuItem tsInterleave;
         private System.Windows.Forms.ToolStripMenuItem tsDeinterleave;
+        private System.Windows.Forms.ToolStripDropDownButton tsdSaveImages;
+        private System.Windows.Forms.ToolStripMenuItem tsSaveImagesAll;
+        private System.Windows.Forms.ToolStripMenuItem tsSaveImagesSelected;
+        private System.Windows.Forms.ToolStripDropDownButton tsdEmailPDF;
+        private System.Windows.Forms.ToolStripMenuItem tsEmailPDFAll;
+        private System.Windows.Forms.ToolStripMenuItem tsEmailPDFSelected;
     }
 }
 
