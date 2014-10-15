@@ -48,6 +48,10 @@ namespace NAPS2.Scan.Wia
         private const int CONTRAST = 6155;
         private const int HORIZONTAL_START = 6149;
 
+        private const int SOURCE_FEEDER = 1;
+        private const int SOURCE_FLATBED = 2;
+        private const int SOURCE_DUPLEX = 4;
+
         private const uint ERROR_OUT_OF_PAPER = 0x80210003;
         private const uint NO_DEVICE_FOUND = 0x80210015;
         private const uint ERROR_OFFLINE = 0x80210005;
@@ -302,13 +306,13 @@ namespace NAPS2.Scan.Wia
             switch (settings.PaperSource)
             {
                 case ScanSource.Glass:
-                    SetDeviceIntProperty(2, PAPER_SOURCE);
+                    SetDeviceIntProperty(SOURCE_FLATBED, PAPER_SOURCE);
                     break;
                 case ScanSource.Feeder:
-                    SetDeviceIntProperty(1, PAPER_SOURCE);
+                    SetDeviceIntProperty(SOURCE_FEEDER, PAPER_SOURCE);
                     break;
                 case ScanSource.Duplex:
-                    SetDeviceIntProperty(4, PAPER_SOURCE);
+                    SetDeviceIntProperty(SOURCE_DUPLEX, PAPER_SOURCE);
                     break;
             }
         }
