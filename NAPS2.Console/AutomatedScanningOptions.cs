@@ -36,6 +36,11 @@ namespace NAPS2.Console
                                            " If not specified, the most-recently-used profile from the GUI is selected.")]
         public string ProfileName { get; set; }
 
+        [Option('i', "import", HelpText = "The name and path of one or more pdf/image files to import." +
+                                          " Imported files are prepended to the output in the order they are specified." +
+                                          " Multiple files are separated by a semicolon (\";\").")]
+        public string ImportPath { get; set; }
+
         [Option('v', "verbose", HelpText = "Display progress information." +
                                            " If not specified, no output is displayed if the scan is successful.")]
         public bool Verbose { get; set; }

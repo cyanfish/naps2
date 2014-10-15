@@ -28,6 +28,7 @@ using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Console.Lang.Resources;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -46,12 +47,14 @@ namespace NAPS2.Console
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IErrorOutput errorOutput;
+        private readonly IScannedImageImporter scannedImageImporter;
+        private readonly ILogger logger;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -60,6 +63,8 @@ namespace NAPS2.Console
             this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
             this.emailer = emailer;
+            this.scannedImageImporter = scannedImageImporter;
+            this.logger = logger;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -77,13 +82,23 @@ namespace NAPS2.Console
                 return;
             }
 
-            ExtendedScanSettings profile;
-            if (!GetProfile(out profile))
+            scannedImages = new List<IScannedImage>();
+
+            if (options.ImportPath != null)
             {
-                return;
+                ImportImages();
             }
 
-            PerformScan(profile);
+            if (options.Number > 0)
+            {
+                ExtendedScanSettings profile;
+                if (!GetProfile(out profile))
+                {
+                    return;
+                }
+
+                PerformScan(profile);
+            }
 
             if (options.OutputPath != null)
             {
@@ -98,6 +113,30 @@ namespace NAPS2.Console
             if (options.WaitForEnter)
             {
                 Console.ReadLine();
+            }
+        }
+
+        private void ImportImages()
+        {
+            OutputVerbose(ConsoleResources.Importing);
+
+            var filePaths = options.ImportPath.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            int i = 0;
+            foreach (var filePath in filePaths)
+            {
+                i++;
+                try
+                {
+                    var images = scannedImageImporter.Import(filePath);
+                    scannedImages.AddRange(images);
+                }
+                catch (Exception ex)
+                {
+                    logger.ErrorException(string.Format(ConsoleResources.ErrorImporting, filePath), ex);
+                    errorOutput.DisplayError(string.Format(ConsoleResources.ErrorImporting, filePath));
+                    continue;
+                }
+                OutputVerbose(ConsoleResources.ImportedFile, i, filePaths.Length);
             }
         }
 
@@ -315,7 +354,6 @@ namespace NAPS2.Console
         {
             OutputVerbose(ConsoleResources.BeginningScan);
 
-            scannedImages = new List<IScannedImage>();
             IWin32Window parentWindow = new Form { Visible = false };
             foreach (int i in Enumerable.Range(1, options.Number))
             {

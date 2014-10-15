@@ -109,6 +109,7 @@
     <EmbeddedResource Include="Lang\Resources\ConsoleResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ConsoleResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

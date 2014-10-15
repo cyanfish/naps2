@@ -198,4 +198,13 @@
   <data name="SendingEmail" xml:space="preserve">
     <value>Sending email...</value>
   </data>
+  <data name="ErrorImporting" xml:space="preserve">
+    <value>Error importing file. Path: {0}</value>
+  </data>
+  <data name="ImportedFile" xml:space="preserve">
+    <value>Imported file {0} of {1}.</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importing...</value>
+  </data>
 </root>
