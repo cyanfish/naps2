@@ -241,6 +241,11 @@ namespace NAPS2.Scan.Wia
                     SetItemIntProperty(item, 100, HORIZONTAL_RESOLUTION);
                     resolution = 100;
                     break;
+                case ScanDpi.Dpi150:
+                    SetItemIntProperty(item, 150, VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 150, HORIZONTAL_RESOLUTION);
+                    resolution = 150;
+                    break;
                 case ScanDpi.Dpi200:
                     SetItemIntProperty(item, 200, VERTICAL_RESOLUTION);
                     SetItemIntProperty(item, 200, HORIZONTAL_RESOLUTION);
