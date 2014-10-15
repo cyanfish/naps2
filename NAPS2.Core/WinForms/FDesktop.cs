@@ -537,5 +537,15 @@ namespace NAPS2.WinForms
         {
             UpdateThumbnails(imageList.Deinterleave(SelectedIndices));
         }
+
+        private void thumbnailList1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Cursor = thumbnailList1.GetItemAt(e.X, e.Y) == null ? Cursors.Default : Cursors.Hand;
+        }
+
+        private void thumbnailList1_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
     }
 }

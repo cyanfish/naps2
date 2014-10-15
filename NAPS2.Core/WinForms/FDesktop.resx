@@ -216,38 +216,38 @@
   <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        ZcWVKMHnUQAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAcoSURBVFhHrVdtTFNZGnYMrh8xu/vDWc38mNEdfzhuNMZ1
+        sz8co5NMZibG+DUGdjTRyazZ1XUScRNXJmbiVxxBURQYZHD5KIooFIbZEYF2gSIWKLRQ6Ae0lFKKbSlt
+        Qav9pn32PfdeZ0yEUnb3SZ6c3nvPeZ73vO+5p+fOSxRbt25NysrKOlldXd14//596Z07dyQlJSUcCwsL
+        JcXFxbLDhw9nUNdf8iP+B+Tl5f0+IyPjswsXLqScPXs25dSpU7vS0tLSJycnEQ+hUAiHDh2q37Rp06e7
+        d+9O3rFjR8r27ds/W79+/ccku5hXnwVHjhz5orm5ORoIBPAqI5GIYBMf0WiU6+/z+X7i2NgYDh48eI/k
+        k3iXmfGLiooKlaCFFy9eYHx8HC6XiyMTmo2sn9vt5lqv1ysoAZTR2JIlSz4RfGbE/KtXrzayAUyA6guR
+        SITS0tI5k41j461WKxdAXV1dlPT38jZxsHnz5tRwOAyNRoOioiJUVVVBLBbPmWwcC6S9vZ0LgBaojuR/
+        y7vEwcKFC1c3NTU9ZemjxfhfZ+D27dvIz8/HyMgIV8aVK1feJPk3eJdZcOLEiRoWtUwmQ3Z2NgoKCuZM
+        FnxZWRlisRhyc3NDJLubV08Aa9eu/Xx4eJirH737yMnJmTOvXLkCuVwOVs59+/apSPYtXj0xvEUpdLC3
+        gJXg/PnzSE9PT5gXL17EtWvX4HA40NHRgWXLlmUKuonjwIEDpU6nE2q1Gjdv3uRmRalMiKxsLS0t8Hg8
+        OHbsmIPkPuBV54BVq1btKC8vh1bTix5VJ5Sd7QmzW9mBfn0fpFIJ3nvvd2UkN+fteUFNTU1tJByCwWSH
+        uKEP3/9by7FmFrI+YokG0tYB+GkXzMv7NrZt27a/C7qJYcOGDVt//FdNzOXx4cucTlx+aEPxIyfHklYn
+        RI+dKJX/THbN7rPnRS1juCVz4miBDuV1em4PKCkuNpLsm7x6AkhJSfmSDaxrNeG02IKesSn0OiLoHYug
+        zxmBZjwC7fjUT2TXGrrPnqupH/td0efHqVv8rk7/LaGkpKQ/CPKzIzMzs4QNzLyjRI7MBaUtgo4nISiI
+        XbYQlPYQVI7wz6TrLkZ61kl9GJstEaTeUsMz4cPkhIdtRH8R5GfFgqYmqdLni+DP3zSiQuMj8zDaWQC2
+        MDrtEShpliqOZE6z7iZ20XWrNYSGoSAeGAJ4aArhq3tGqHR2Lgu0DrIE/fhYsWLFO8PD5uc9Wjv+lqeE
+        ZDgCuTWMticRKMicGSmpJCrnFLop/T3EVnp2fyCI/G4frite4LLci29anyNVPIoqST8XQGpqqoTkF/Au
+        cbBly5ZP6V8dlZIBnK21o3mEZjZKAZC5wjGFLjJWucjYzbOJylNuDKJYF0Chxo/8Hh9udFEQbV58LZ3A
+        P3IecQHQhmYj+bd5lzg4fvz4JTYgq1KD3I5naBmN4BGVoI3MO2m2KncU6okoNJNRtFAwNRTg95YwxOYw
+        BRKCSB9AQa8f2RTElQ4f/npdDpPZjewbWew88JFgMzNoC5aGglGcLu3F9S4/Kim1Mpqlgs3cQ+ZkrHkW
+        g2IyhkYXcTwGqTOKWtsUBUKloNqL9EF8x2XCj5PiYdQ9GqSkhrBmzZqvBJvpsXTp0je1GvW4wTyB05Um
+        5HYHcItep0oSlZKB3BXljDueAnJi+zOgjdrHdFRscgMP7VHUUBD3KBNF2gC+VflwrtGDgh90XBmSk5Mr
+        BavpsW7dug+D/ueofzyEM3UOfNcXRGl/EJXmCGrtMc6E1heUPoD0QdnmWlp7aKf7zR7aOxwxVFumUGYI
+        USkCyFT4cPFuHxcAHcsMZDPzhrR379401tFodiGtRI0M2gNuyN34p3ICZdqnqDZ68cDsRdOIF4pRL7qf
+        eNFJrYyuH9L9KnrO+hWqJpDT5sblFhdO3jNA9KOGC6Chvp6dC/7Iu00DShG3ABm0xjF6hfQQ1+uo1aGa
+        yNqqBtrvJbTvC2S/Gdl9jkI/cQPP1k4L/IEwp9nW1obFixfvE+xex549ey6xs7/f70d0KkRD2FGcGBOI
+        GNOZBVGhLxsTpWP5UwT9AQQDQUgkEixatChFsHsdLAC73Q6LxQJ2InqVZrOZ+3+Ph2AwyJ0BudOUxQqJ
+        WoIidRHKuspgfWJlJ2MWQLJg9zp27dp1iR3DTCYTBgcHX6PRaMTo6CheZol9CTHTl98PLEjWzzRowohh
+        BEdlR/Gu/l2sblhNJdWirpYLYOYM7Ny5M51FPzAwgP7+/mmp0+k4st8v++n1eu4ea1/2GzIMoUpRhf2N
+        +5Hekg7LkAV0xoi/BjZu3Hi0t7cXQ0NDMBgMcyLLzqs0GA2wmCywDlhhNVlhs9lw5swZL9m8z7tNj1/T
+        m/Dg7t27oC9gNiD2/6CoRIRz585Fli9fnk8ev+KtZsZviHvmz5+/n/in2Uh9E+F+IvsuWEF8BfPm/QdW
+        UMV95uJ8gAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -314,6 +314,18 @@
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
   </data>
+  <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsSavePDFAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsSavePDFSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
   <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -365,6 +377,33 @@
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
   </data>
+  <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="tsRotateLeft.Text" xml:space="preserve">
+    <value>Rotate Left</value>
+  </data>
+  <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="tsRotateRight.Text" xml:space="preserve">
+    <value>Rotate Right</value>
+  </data>
+  <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="tsFlip.Text" xml:space="preserve">
+    <value>Flip</value>
+  </data>
   <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -402,13 +441,13 @@
     <value>ImageAboveText</value>
   </data>
   <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>139, 22</value>
   </data>
   <data name="tsInterleave.Text" xml:space="preserve">
     <value>Interleave</value>
   </data>
   <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>139, 22</value>
   </data>
   <data name="tsDeinterleave.Text" xml:space="preserve">
     <value>Deinterleave</value>
@@ -523,7 +562,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1099, 54</value>
+    <value>1068, 54</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -566,45 +605,6 @@
   </data>
   <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSavePDFAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSavePDFSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
-  </data>
-  <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsRotateLeft.Text" xml:space="preserve">
-    <value>Rotate Left</value>
-  </data>
-  <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsRotateRight.Text" xml:space="preserve">
-    <value>Rotate Right</value>
-  </data>
-  <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsFlip.Text" xml:space="preserve">
-    <value>Flip</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -744,6 +744,18 @@
   <data name="&gt;&gt;tsdReorder.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tsInterleave.Name" xml:space="preserve">
+    <value>tsInterleave</value>
+  </data>
+  <data name="&gt;&gt;tsInterleave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsDeinterleave.Name" xml:space="preserve">
+    <value>tsDeinterleave</value>
+  </data>
+  <data name="&gt;&gt;tsDeinterleave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
   </data>
@@ -779,18 +791,6 @@
   </data>
   <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsInterleave.Name" xml:space="preserve">
-    <value>tsInterleave</value>
-  </data>
-  <data name="&gt;&gt;tsInterleave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsDeinterleave.Name" xml:space="preserve">
-    <value>tsDeinterleave</value>
-  </data>
-  <data name="&gt;&gt;tsDeinterleave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FDesktop</value>

@@ -5,7 +5,7 @@ using NAPS2.Update;
 
 namespace NAPS2.WinForms
 {
-    partial class FDesktop : IAutoUpdaterClient
+    partial class FDesktop
     {
         /// <summary>
         /// Required designer variable.
@@ -55,14 +55,14 @@ namespace NAPS2.WinForms
             this.tsMoveUp = new System.Windows.Forms.ToolStripButton();
             this.tsMoveDown = new System.Windows.Forms.ToolStripButton();
             this.tsdReorder = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsInterleave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsDeinterleave = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsDelete = new System.Windows.Forms.ToolStripButton();
             this.tsClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.tsInterleave = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsDeinterleave = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -91,6 +91,8 @@ namespace NAPS2.WinForms
             this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
             this.thumbnailList1.SelectedIndexChanged += new System.EventHandler(this.thumbnailList1_SelectedIndexChanged);
             this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
+            this.thumbnailList1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.thumbnailList1_MouseMove);
+            this.thumbnailList1.MouseLeave += new System.EventHandler(this.thumbnailList1_MouseLeave);
             // 
             // tStrip
             // 
@@ -249,6 +251,18 @@ namespace NAPS2.WinForms
             this.tsdReorder.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsdReorder.ShowDropDownArrow = false;
             // 
+            // tsInterleave
+            // 
+            this.tsInterleave.Name = "tsInterleave";
+            resources.ApplyResources(this.tsInterleave, "tsInterleave");
+            this.tsInterleave.Click += new System.EventHandler(this.tsInterleave_Click);
+            // 
+            // tsDeinterleave
+            // 
+            this.tsDeinterleave.Name = "tsDeinterleave";
+            resources.ApplyResources(this.tsDeinterleave, "tsDeinterleave");
+            this.tsDeinterleave.Click += new System.EventHandler(this.tsDeinterleave_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -289,18 +303,6 @@ namespace NAPS2.WinForms
             this.tsAbout.Name = "tsAbout";
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
-            // 
-            // tsInterleave
-            // 
-            this.tsInterleave.Name = "tsInterleave";
-            resources.ApplyResources(this.tsInterleave, "tsInterleave");
-            this.tsInterleave.Click += new System.EventHandler(this.tsInterleave_Click);
-            // 
-            // tsDeinterleave
-            // 
-            this.tsDeinterleave.Name = "tsDeinterleave";
-            resources.ApplyResources(this.tsDeinterleave, "tsDeinterleave");
-            this.tsDeinterleave.Click += new System.EventHandler(this.tsDeinterleave_Click);
             // 
             // FDesktop
             // 
