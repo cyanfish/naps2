@@ -101,6 +101,7 @@ namespace NAPS2.ImportExport.Pdf
             }
 
             var bitmap = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            // TODO: Set resolution based on page size and image size
 
             RgbToBitmapUnmanaged(height, width, bitmap, buffer);
 
