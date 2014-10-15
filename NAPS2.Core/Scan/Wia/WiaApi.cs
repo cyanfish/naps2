@@ -202,7 +202,10 @@ namespace NAPS2.Scan.Wia
                     int expectedRange = expectedMax - expectedMin;
                     int actualRange = property.SubTypeMax - property.SubTypeMin;
                     int actualValue = expectedAbs * actualRange / expectedRange + property.SubTypeMin;
-                    actualValue -= actualValue % property.SubTypeStep;
+                    if (property.SubTypeStep != 0)
+                    {
+                        actualValue -= actualValue % property.SubTypeStep;
+                    }
                     actualValue = Math.Min(actualValue, property.SubTypeMax);
                     actualValue = Math.Max(actualValue, property.SubTypeMin);
                     object objprop = actualValue;
