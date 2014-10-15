@@ -135,7 +135,7 @@ namespace NAPS2.WinForms
         {
             get
             {
-                return thumbnailList1.SelectedIndices.OfType<int>();
+                return thumbnailList1.SelectedIndices.Cast<int>();
             }
             set
             {
@@ -156,17 +156,27 @@ namespace NAPS2.WinForms
         private void UpdateThumbnails()
         {
             thumbnailList1.UpdateImages(imageList.Images);
+            UpdateImageCounts();
         }
 
         private void AppendThumbnail(IScannedImage scannedImage)
         {
             thumbnailList1.AppendImage(scannedImage);
+            UpdateImageCounts();
         }
 
         private void UpdateThumbnails(IEnumerable<int> selection)
         {
             UpdateThumbnails();
             SelectedIndices = selection;
+        }
+
+        private void UpdateImageCounts()
+        {
+            tsSavePDFAll.Text = string.Format(MiscResources.AllCount, imageList.Images.Count);
+            tsSavePDFAll.Enabled = imageList.Images.Any();
+            tsSavePDFSelected.Text = string.Format(MiscResources.SelectedCount, SelectedIndices.Count());
+            tsSavePDFSelected.Enabled = SelectedIndices.Any();
         }
 
         private void Clear()
@@ -223,11 +233,11 @@ namespace NAPS2.WinForms
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY));
         }
 
-        private void ExportPDF(string filename)
+        private void ExportPDF(string filename, IEnumerable<IScannedImage> images)
         {
             var pdfdialog = FormFactory.Create<FPDFSave>();
             pdfdialog.Filename = filename;
-            pdfdialog.Images = imageList.Images;
+            pdfdialog.Images = images.ToList();
             pdfdialog.ShowDialog(this);
         }
 
@@ -279,20 +289,30 @@ namespace NAPS2.WinForms
             prof.ShowDialog();
         }
 
-        private void tsSavePDF_Click(object sender, EventArgs e)
+        private void tsSavePDFAll_Click(object sender, EventArgs e)
         {
-            if (imageList.Images.Count > 0)
+            SavePDF(imageList.Images);
+        }
+
+        private void tsSavePDFSelected_Click(object sender, EventArgs e)
+        {
+            SavePDF(imageList.Images.ElementsAt(SelectedIndices));
+        }
+
+        private void SavePDF(IEnumerable<IScannedImage> images)
+        {
+            if (images.Any())
             {
                 var sd = new SaveFileDialog
-                    {
-                        OverwritePrompt = true,
-                        AddExtension = true,
-                        Filter = MiscResources.FileTypePdf + "|*.pdf"
-                    };
+                {
+                    OverwritePrompt = true,
+                    AddExtension = true,
+                    Filter = MiscResources.FileTypePdf + "|*.pdf"
+                };
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
-                    ExportPDF(sd.FileName);
+                    ExportPDF(sd.FileName, images);
                 }
             }
         }
@@ -353,7 +373,7 @@ namespace NAPS2.WinForms
             if (imageList.Images.Count > 0)
             {
                 string path = Paths.AppData + "\\Scan.pdf";
-                ExportPDF(path);
+                //ExportPDF(path);
                 emailer.SendEmail(new EmailMessage
                 {
                     Attachments = new List<EmailAttachment> { new EmailAttachment
@@ -501,6 +521,21 @@ namespace NAPS2.WinForms
                         break;
                 }
             }));
+        }
+
+        private void thumbnailList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateImageCounts();
+        }
+
+        private void tsInterleave_Click(object sender, EventArgs e)
+        {
+            UpdateThumbnails(imageList.Interleave(SelectedIndices));
+        }
+
+        private void tsDeinterleave_Click(object sender, EventArgs e)
+        {
+            UpdateThumbnails(imageList.Deinterleave(SelectedIndices));
         }
     }
 }

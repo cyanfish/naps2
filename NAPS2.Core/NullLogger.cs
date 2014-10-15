@@ -14,5 +14,9 @@ namespace NAPS2
         public void ErrorException(string message, Exception exception)
         {
         }
+
+        public void FatalException(string message, Exception exception)
+        {
+        }
     }
 }

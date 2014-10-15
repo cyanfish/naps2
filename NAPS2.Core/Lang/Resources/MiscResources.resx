@@ -240,4 +240,10 @@
   <data name="InstallFailedTitle" xml:space="preserve">
     <value>Installation Failed</value>
   </data>
+  <data name="AllCount" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
 </root>

@@ -39,5 +39,10 @@ namespace NAPS2
         {
             logger.ErrorException(message, exception);
         }
+
+        public void FatalException(string message, Exception exception)
+        {
+            logger.FatalException(message, exception);
+        }
     }
 }

@@ -255,6 +255,7 @@
     <EmbeddedResource Include="Icons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ILProfileIcons.resx">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
@@ -969,18 +970,16 @@
     <None Include="Resources\arrow_out.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arrow_rotate_anticlockwise.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\arrow_rotate_clockwise.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\arrow_switch.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\arrow_up.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\arrow_rotate_anticlockwise.png" />
+    <None Include="Resources\arrow_rotate_clockwise.png" />
+    <None Include="Resources\arrow_switch.png" />
+    <None Include="Resources\arrow_rotate_anticlockwise-small.png" />
+    <None Include="Resources\arrow_rotate_clockwise-small.png" />
+    <None Include="Resources\arrow_switch-small.png" />
+    <None Include="Resources\arrow_refresh.png" />
     <Content Include="Resources\blueprints-small.ico" />
     <Content Include="Resources\folder_picture.png" />
     <Content Include="Resources\information-small.ico" />

@@ -55,7 +55,7 @@ namespace NAPS2
 
         private static void UnhandledException(object sender, ThreadExceptionEventArgs threadExceptionEventArgs)
         {
-            KernelManager.Kernel.Get<Logger>().FatalException("An error occurred that caused the application to close.", threadExceptionEventArgs.Exception);
+            KernelManager.Kernel.Get<ILogger>().FatalException("An error occurred that caused the application to close.", threadExceptionEventArgs.Exception);
         }
     }
 }
