@@ -48,7 +48,7 @@ namespace NAPS2.WinForms
 
         private static string GetAssemblyAttributeValue<T>(Func<T, string> selector)
         {
-            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(T), false);
+            object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(T), false);
             if (attributes.Length == 0)
             {
                 return "";
@@ -63,7 +63,7 @@ namespace NAPS2.WinForms
                 string title = GetAssemblyAttributeValue<AssemblyTitleAttribute>(x => x.Title);
                 if (string.IsNullOrEmpty(title))
                 {
-                    title = Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                    title = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().CodeBase);
                 }
                 return title;
             }
@@ -73,7 +73,7 @@ namespace NAPS2.WinForms
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return Assembly.GetEntryAssembly().GetName().Version.ToString();
             }
         }
 
