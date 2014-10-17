@@ -25,7 +25,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Clock.Pdf;
 using NAPS2.Scan.Images;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
