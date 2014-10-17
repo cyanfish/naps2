@@ -40,6 +40,7 @@ namespace NAPS2.WinForms
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripButton();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();
+            this.tsOcr = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsdSavePDF = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsSavePDFAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,6 +106,7 @@ namespace NAPS2.WinForms
             this.tStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsScan,
             this.tsProfiles,
+            this.tsOcr,
             this.toolStripSeparator5,
             this.tsdSavePDF,
             this.tsdSaveImages,
@@ -137,6 +139,14 @@ namespace NAPS2.WinForms
             this.tsProfiles.Name = "tsProfiles";
             this.tsProfiles.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsProfiles.Click += new System.EventHandler(this.tsProfiles_Click);
+            // 
+            // tsOcr
+            // 
+            this.tsOcr.Image = global::NAPS2.Icons.text;
+            resources.ApplyResources(this.tsOcr, "tsOcr");
+            this.tsOcr.Name = "tsOcr";
+            this.tsOcr.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsOcr.Click += new System.EventHandler(this.tsOcr_Click);
             // 
             // toolStripSeparator5
             // 
@@ -392,6 +402,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripDropDownButton tsdEmailPDF;
         private System.Windows.Forms.ToolStripMenuItem tsEmailPDFAll;
         private System.Windows.Forms.ToolStripMenuItem tsEmailPDFSelected;
+        private System.Windows.Forms.ToolStripButton tsOcr;
     }
 }
 

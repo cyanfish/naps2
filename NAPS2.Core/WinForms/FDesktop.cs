@@ -570,5 +570,11 @@ namespace NAPS2.WinForms
         {
             Cursor = Cursors.Default;
         }
+
+        private void tsOcr_Click(object sender, EventArgs e)
+        {
+            // TODO: Conditional
+            FormFactory.Create<FOcrDownload>().ShowDialog();
+        }
     }
 }
