@@ -29,7 +29,7 @@ namespace NAPS2.DI
             Bind<IImageImporter>().To<ImageImporter>();
 
             // Export
-            Bind<IPdfExporter>().To<PdfSharpExporter>();
+            Bind<IPdfExporter>().To<TestOcrExporter>();
             Bind<IEmailer>().To<MapiEmailer>();
 
             // Scan

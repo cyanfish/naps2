@@ -52,6 +52,7 @@
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="ImportExport\Pdf\TestOcrExporter.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="NullLogger.cs" />
     <Compile Include="Scan\IScanDriverFactory.cs" />
