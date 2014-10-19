@@ -43,5 +43,9 @@ namespace NAPS2.Config
         public AutoUpdateStatus AutoUpdate { get; set; }
 
         public DateTime? LastUpdateCheckDate { get; set; }
+
+        public bool EnableOcr { get; set; }
+
+        public string OcrLanguageCode { get; set; }
     }
 }

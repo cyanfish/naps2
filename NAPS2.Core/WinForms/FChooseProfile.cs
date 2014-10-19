@@ -30,14 +30,12 @@ namespace NAPS2.WinForms
 {
     public partial class FChooseProfile : FormBase
     {
-        private readonly IFormFactory formFactory;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IconButtonSizer iconButtonSizer;
 
-        public FChooseProfile(IFormFactory formFactory, IProfileManager profileManager, IScanPerformer scanPerformer, IconButtonSizer iconButtonSizer)
+        public FChooseProfile(IProfileManager profileManager, IScanPerformer scanPerformer, IconButtonSizer iconButtonSizer)
         {
-            this.formFactory = formFactory;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.iconButtonSizer = iconButtonSizer;
@@ -117,7 +115,7 @@ namespace NAPS2.WinForms
         {
             if (profileManager.Profiles.Count == 0)
             {
-                var editSettingsForm = formFactory.Create<FEditScanSettings>();
+                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
                 editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
                 editSettingsForm.ShowDialog();
                 if (editSettingsForm.Result)

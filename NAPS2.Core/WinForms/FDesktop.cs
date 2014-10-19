@@ -35,6 +35,7 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
+using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -55,8 +56,9 @@ namespace NAPS2.WinForms
         private readonly RecoveryManager recoveryManager;
         private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly AutoUpdaterUI autoUpdaterUI;
+        private readonly OcrDependencyManager ocrDependencyManager;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -68,6 +70,7 @@ namespace NAPS2.WinForms
             this.recoveryManager = recoveryManager;
             this.scannedImageImporter = scannedImageImporter;
             this.autoUpdaterUI = autoUpdaterUI;
+            this.ocrDependencyManager = ocrDependencyManager;
             InitializeComponent();
         }
 
@@ -579,8 +582,18 @@ namespace NAPS2.WinForms
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
-            // TODO: Conditional
-            FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
+            if (ocrDependencyManager.IsExecutableDownloaded && ocrDependencyManager.GetDownloadedLanguages().Any())
+            {
+                FormFactory.Create<FOcrSetup>().ShowDialog();
+            }
+            else
+            {
+                FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
+                if (ocrDependencyManager.IsExecutableDownloaded && ocrDependencyManager.GetDownloadedLanguages().Any())
+                {
+                    FormFactory.Create<FOcrSetup>().ShowDialog();
+                }
+            }
         }
     }
 }

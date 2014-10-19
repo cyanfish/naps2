@@ -17,17 +17,15 @@ namespace NAPS2.WinForms
         private static readonly string DownloadBase = @"file://C:\Users\Ben\Documents\naps2\tesseract-3.0.2\traineddata\";
 
         private readonly OcrDependencyManager ocrDependencyManager;
-        private readonly IFormFactory formFactory;
 
-        public FOcrLanguageDownload(OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
+        public FOcrLanguageDownload(OcrDependencyManager ocrDependencyManager)
         {
             this.ocrDependencyManager = ocrDependencyManager;
-            this.formFactory = formFactory;
             InitializeComponent();
 
             // Add missing languages to the list of language options
             // Special case for English: sorted first, and checked by default
-            var languageOptions = this.ocrDependencyManager.GetMissingLanguages().OrderBy(x => x.Code == "eng" ? "aaa" : x.Code);
+            var languageOptions = this.ocrDependencyManager.GetMissingLanguages().OrderBy(x => x.Code == "eng" ? "AAA" : x.LangName);
             foreach (var languageOption in languageOptions)
             {
                 var item = new ListViewItem { Text = languageOption.LangName, Tag = languageOption };
@@ -79,7 +77,7 @@ namespace NAPS2.WinForms
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            var progressForm = formFactory.Create<FDownloadProgress>();
+            var progressForm = FormFactory.Create<FDownloadProgress>();
             if (!ocrDependencyManager.IsExecutableDownloaded)
             {
                 progressForm.QueueFile(DownloadBase, ocrDependencyManager.ExecutableFileName, tempPath =>
@@ -102,7 +100,6 @@ namespace NAPS2.WinForms
             }
             Close();
             progressForm.ShowDialog();
-            // TODO: Show something else
         }
 
         private static void DecompressFile(string sourcePath, string destPath)

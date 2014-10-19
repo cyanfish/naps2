@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDownloadProgress));
             this.progressBarSub = new System.Windows.Forms.ProgressBar();
             this.btnCancel = new System.Windows.Forms.Button();
             this.labelSub = new System.Windows.Forms.Label();
@@ -37,61 +38,42 @@
             // 
             // progressBarSub
             // 
-            this.progressBarSub.Location = new System.Drawing.Point(12, 77);
+            resources.ApplyResources(this.progressBarSub, "progressBarSub");
             this.progressBarSub.Name = "progressBarSub";
-            this.progressBarSub.Size = new System.Drawing.Size(417, 38);
             this.progressBarSub.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBarSub.TabIndex = 0;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(354, 121);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // labelSub
             // 
-            this.labelSub.AutoSize = true;
-            this.labelSub.Location = new System.Drawing.Point(12, 118);
+            resources.ApplyResources(this.labelSub, "labelSub");
             this.labelSub.Name = "labelSub";
-            this.labelSub.Size = new System.Drawing.Size(65, 13);
-            this.labelSub.TabIndex = 2;
-            this.labelSub.Text = "{0} / {1} MB";
             // 
             // labelTop
             // 
-            this.labelTop.AutoSize = true;
-            this.labelTop.Location = new System.Drawing.Point(12, 53);
+            resources.ApplyResources(this.labelTop, "labelTop");
             this.labelTop.Name = "labelTop";
-            this.labelTop.Size = new System.Drawing.Size(67, 13);
-            this.labelTop.TabIndex = 4;
-            this.labelTop.Text = "{0} / {1} files";
             // 
             // progressBarTop
             // 
-            this.progressBarTop.Location = new System.Drawing.Point(14, 12);
+            resources.ApplyResources(this.progressBarTop, "progressBarTop");
             this.progressBarTop.Name = "progressBarTop";
-            this.progressBarTop.Size = new System.Drawing.Size(417, 38);
             this.progressBarTop.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBarTop.TabIndex = 3;
             // 
             // FDownloadProgress
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 156);
             this.Controls.Add(this.labelTop);
             this.Controls.Add(this.progressBarTop);
             this.Controls.Add(this.labelSub);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.progressBarSub);
-            this.MaximumSize = new System.Drawing.Size(1000, 195);
-            this.MinimumSize = new System.Drawing.Size(350, 195);
             this.Name = "FDownloadProgress";
-            this.Text = "Download Progress";
             this.ResumeLayout(false);
             this.PerformLayout();
 

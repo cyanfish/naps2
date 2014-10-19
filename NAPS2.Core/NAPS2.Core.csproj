@@ -223,6 +223,12 @@
     <Compile Include="WinForms\FOcrLanguageDownload.Designer.cs">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\FOcrSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FOcrSetup.Designer.cs">
+      <DependentUpon>FOcrSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -592,6 +598,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.resx">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FOcrSetup.resx">
+      <DependentUpon>FOcrSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPDFSave.bg.resx">
       <DependentUpon>FPDFSave.cs</DependentUpon>

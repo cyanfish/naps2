@@ -16,6 +16,7 @@ namespace NAPS2.WinForms
             UpdateRTL();
 
             RestoreFormState = true;
+            SaveFormState = true;
 
             Load += OnLoadInternal;
             Closed += OnClosed;
