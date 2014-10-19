@@ -111,22 +111,24 @@ namespace NAPS2.ImportExport.Pdf
             var buffer = image.Stream.UnfilteredValue;
 
             Bitmap bitmap;
-
+            ScanBitDepth bitDepth;
             switch (bitsPerComponent)
             {
                 case 8:
                     bitmap = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+                    bitDepth = ScanBitDepth.C24Bit;
                     RgbToBitmapUnmanaged(height, width, bitmap, buffer);
                     break;
                 case 1:
                     bitmap = new Bitmap(width, height, PixelFormat.Format1bppIndexed);
+                    bitDepth = ScanBitDepth.BlackWhite;
                     BlackAndWhiteToBitmapUnmanaged(height, width, bitmap, buffer);
                     break;
                 default:
                     throw new NotImplementedException("Unsupported image encoding (expected 24 bpp or 1bpp)");
             }
 
-            return scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, true);
+            return scannedImageFactory.Create(bitmap, bitDepth, true);
         }
 
         private static void RgbToBitmapUnmanaged(int height, int width, Bitmap bitmap, byte[] rgbBuffer)
