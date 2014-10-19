@@ -40,6 +40,8 @@ namespace NAPS2
 
         private static readonly string RecoveryPath = Path.Combine(AppDataPath, "recovery");
 
+        private static readonly string ComponentsPath = Path.Combine(AppDataPath, "components");
+
         public static string AppData
         {
             get
@@ -69,6 +71,14 @@ namespace NAPS2
             get
             {
                 return EnsureFolderExists(RecoveryPath);
+            }
+        }
+
+        public static string Components
+        {
+            get
+            {
+                return EnsureFolderExists(ComponentsPath);
             }
         }
 

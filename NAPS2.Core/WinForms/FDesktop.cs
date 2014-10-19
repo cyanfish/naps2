@@ -574,7 +574,7 @@ namespace NAPS2.WinForms
         private void tsOcr_Click(object sender, EventArgs e)
         {
             // TODO: Conditional
-            FormFactory.Create<FOcrLanguages>().ShowDialog();
+            FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
         }
     }
 }

@@ -55,6 +55,8 @@
     <Compile Include="ImportExport\Pdf\TestOcrExporter.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="NullLogger.cs" />
+    <Compile Include="Ocr\OcrLanguage.cs" />
+    <Compile Include="Ocr\OcrLanguageManager.cs" />
     <Compile Include="Scan\IScanDriverFactory.cs" />
     <Compile Include="CultureInitializer.cs" />
     <Compile Include="IconButtonSizer.cs" />
@@ -209,11 +211,11 @@
     <Compile Include="WinForms\FManageProfiles.Designer.cs">
       <DependentUpon>FManageProfiles.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\FOcrLanguages.cs">
+    <Compile Include="WinForms\FOcrLanguageDownload.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\FOcrLanguages.Designer.cs">
-      <DependentUpon>FOcrLanguages.cs</DependentUpon>
+    <Compile Include="WinForms\FOcrLanguageDownload.Designer.cs">
+      <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FormBase.cs">
       <SubType>Form</SubType>
@@ -579,8 +581,8 @@
     <EmbeddedResource Include="WinForms\FManageProfiles.uk.resx">
       <DependentUpon>FManageProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FOcrLanguages.resx">
-      <DependentUpon>FOcrLanguages.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FOcrLanguageDownload.resx">
+      <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPDFSave.bg.resx">
       <DependentUpon>FPDFSave.cs</DependentUpon>
@@ -1024,6 +1026,7 @@
     <None Include="Resources\blueprints.png" />
     <None Include="Resources\blueprints-small.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

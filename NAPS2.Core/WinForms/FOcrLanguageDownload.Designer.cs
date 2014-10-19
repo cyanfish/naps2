@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.WinForms
 {
-    partial class FOcrLanguages
+    partial class FOcrLanguageDownload
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FOcrLanguages));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FOcrLanguageDownload));
             this.label3 = new System.Windows.Forms.Label();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -74,7 +74,7 @@
             resources.ApplyResources(this.labelSizeEstimate, "labelSizeEstimate");
             this.labelSizeEstimate.Name = "labelSizeEstimate";
             // 
-            // FOcrLanguages
+            // FOcrLanguageDownload
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,7 +84,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.label3);
-            this.Name = "FOcrLanguages";
+            this.Name = "FOcrLanguageDownload";
             this.ResumeLayout(false);
             this.PerformLayout();
 

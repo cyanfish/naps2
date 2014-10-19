@@ -285,7 +285,7 @@
     <value>OCR Download</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FOcrLanguages</value>
+    <value>FOcrLanguageDownload</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
