@@ -91,6 +91,7 @@ namespace NAPS2.WinForms
             labelSub.Text = string.Format(MiscResources.SizeProgress, currentFileProgress.ToString("f1"), currentFileSize.ToString("f1"));
             progressBarSub.Maximum = (int)(currentFileSize);
             progressBarSub.Value = (int)(currentFileProgress);
+            Refresh();
         }
 
         private class QueueItem

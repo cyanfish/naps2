@@ -6,9 +6,29 @@ using System.Text;
 
 namespace NAPS2.Ocr
 {
-    public class OcrLanguageManager
+    public class OcrDependencyManager
     {
-        public DirectoryInfo GetTessdataDir()
+        public DirectoryInfo GetExecutableDir()
+        {
+            var dir = new DirectoryInfo(Path.Combine(Paths.Components, "tesseract-3.0.2"));
+            if (!dir.Exists)
+            {
+                dir.Create();
+            }
+            return dir;
+        }
+
+        public string ExecutableFileName
+        {
+            get { return "tesseract.exe.gz"; }
+        }
+
+        public double ExecutableFileSize
+        {
+            get { return 1.02; }
+        }
+
+        public DirectoryInfo GetLanguageDir()
         {
             var dir = new DirectoryInfo(Path.Combine(Paths.Components, "tesseract-3.0.2", "tessdata"));
             if (!dir.Exists)
@@ -16,6 +36,11 @@ namespace NAPS2.Ocr
                 dir.Create();
             }
             return dir;
+        }
+
+        public bool IsExecutableDownloaded
+        {
+            get { return new FileInfo(Path.Combine(GetExecutableDir().FullName, "tesseract.exe")).Exists; }
         }
 
         public IEnumerable<OcrLanguage> GetDownloadedLanguages()
@@ -32,7 +57,7 @@ namespace NAPS2.Ocr
 
         private HashSet<string> GetDownloadedCodes()
         {
-            var tessdataFolder = GetTessdataDir();
+            var tessdataFolder = GetLanguageDir();
             if (!tessdataFolder.Exists)
             {
                 return new HashSet<string>();

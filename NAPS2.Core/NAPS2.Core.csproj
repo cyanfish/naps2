@@ -56,7 +56,7 @@
     <Compile Include="Log.cs" />
     <Compile Include="NullLogger.cs" />
     <Compile Include="Ocr\OcrLanguage.cs" />
-    <Compile Include="Ocr\OcrLanguageManager.cs" />
+    <Compile Include="Ocr\OcrDependencyManager.cs" />
     <Compile Include="Scan\IScanDriverFactory.cs" />
     <Compile Include="CultureInitializer.cs" />
     <Compile Include="IconButtonSizer.cs" />

@@ -16,18 +16,18 @@ namespace NAPS2.WinForms
     {
         private static readonly string DownloadBase = @"file://C:\Users\Ben\Documents\naps2\tesseract-3.0.2\traineddata\";
 
-        private readonly OcrLanguageManager ocrLanguageManager;
+        private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IFormFactory formFactory;
 
-        public FOcrLanguageDownload(OcrLanguageManager ocrLanguageManager, IFormFactory formFactory)
+        public FOcrLanguageDownload(OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
         {
-            this.ocrLanguageManager = ocrLanguageManager;
+            this.ocrDependencyManager = ocrDependencyManager;
             this.formFactory = formFactory;
             InitializeComponent();
 
             // Add missing languages to the list of language options
             // Special case for English: sorted first, and checked by default
-            var languageOptions = this.ocrLanguageManager.GetMissingLanguages().OrderBy(x => x.Code == "eng" ? "aaa" : x.Code);
+            var languageOptions = this.ocrDependencyManager.GetMissingLanguages().OrderBy(x => x.Code == "eng" ? "aaa" : x.Code);
             foreach (var languageOption in languageOptions)
             {
                 var item = new ListViewItem { Text = languageOption.LangName, Tag = languageOption };
@@ -56,9 +56,13 @@ namespace NAPS2.WinForms
 
         private void UpdateView()
         {
-            double langDownloadSize =
+            double downloadSize =
                 lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => ((OcrLanguage)x.Tag).Size).Sum();
-            labelSizeEstimate.Text = string.Format(MiscResources.EstimatedDownloadSize, langDownloadSize.ToString("f1"));
+            if (!ocrDependencyManager.IsExecutableDownloaded)
+            {
+                downloadSize += ocrDependencyManager.ExecutableFileSize;
+            }
+            labelSizeEstimate.Text = string.Format(MiscResources.EstimatedDownloadSize, downloadSize.ToString("f1"));
 
             btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked);
         }
@@ -76,15 +80,24 @@ namespace NAPS2.WinForms
         private void btnDownload_Click(object sender, EventArgs e)
         {
             var progressForm = formFactory.Create<FDownloadProgress>();
+            if (!ocrDependencyManager.IsExecutableDownloaded)
+            {
+                progressForm.QueueFile(DownloadBase, ocrDependencyManager.ExecutableFileName, tempPath =>
+                {
+                    string exeFilePath = Path.Combine(ocrDependencyManager.GetExecutableDir().FullName,
+                        ocrDependencyManager.ExecutableFileName.Replace(".gz", ""));
+                    DecompressFile(tempPath, exeFilePath);
+                });
+            }
             foreach (
                 var lang in
                     lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => (OcrLanguage)x.Tag))
             {
                 progressForm.QueueFile(DownloadBase, lang.Filename, tempPath =>
                 {
-                    string langFilePath = Path.Combine(ocrLanguageManager.GetTessdataDir().FullName,
+                    string langFilePath = Path.Combine(ocrDependencyManager.GetLanguageDir().FullName,
                         lang.Filename.Replace(".gz", ""));
-                    Decompress(tempPath, langFilePath);
+                    DecompressFile(tempPath, langFilePath);
                 });
             }
             Close();
@@ -92,7 +105,7 @@ namespace NAPS2.WinForms
             // TODO: Show something else
         }
 
-        private static void Decompress(string sourcePath, string destPath)
+        private static void DecompressFile(string sourcePath, string destPath)
         {
             using (FileStream inFile = new FileInfo(sourcePath).OpenRead())
             {
