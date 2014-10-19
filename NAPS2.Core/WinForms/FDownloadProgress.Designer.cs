@@ -28,47 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.progressBarSub = new System.Windows.Forms.ProgressBar();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.labelSub = new System.Windows.Forms.Label();
+            this.labelTop = new System.Windows.Forms.Label();
+            this.progressBarTop = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
-            // progressBar1
+            // progressBarSub
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 12);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(417, 38);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 0;
+            this.progressBarSub.Location = new System.Drawing.Point(12, 77);
+            this.progressBarSub.Name = "progressBarSub";
+            this.progressBarSub.Size = new System.Drawing.Size(417, 38);
+            this.progressBarSub.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBarSub.TabIndex = 0;
             // 
-            // button1
+            // btnCancel
             // 
-            this.button1.Location = new System.Drawing.Point(354, 56);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(354, 121);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // labelSub
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "{0} / {1} MB";
+            this.labelSub.AutoSize = true;
+            this.labelSub.Location = new System.Drawing.Point(12, 118);
+            this.labelSub.Name = "labelSub";
+            this.labelSub.Size = new System.Drawing.Size(65, 13);
+            this.labelSub.TabIndex = 2;
+            this.labelSub.Text = "{0} / {1} MB";
+            // 
+            // labelTop
+            // 
+            this.labelTop.AutoSize = true;
+            this.labelTop.Location = new System.Drawing.Point(12, 53);
+            this.labelTop.Name = "labelTop";
+            this.labelTop.Size = new System.Drawing.Size(67, 13);
+            this.labelTop.TabIndex = 4;
+            this.labelTop.Text = "{0} / {1} files";
+            // 
+            // progressBarTop
+            // 
+            this.progressBarTop.Location = new System.Drawing.Point(14, 12);
+            this.progressBarTop.Name = "progressBarTop";
+            this.progressBarTop.Size = new System.Drawing.Size(417, 38);
+            this.progressBarTop.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBarTop.TabIndex = 3;
             // 
             // FDownloadProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 91);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.progressBar1);
-            this.MaximumSize = new System.Drawing.Size(1000, 130);
-            this.MinimumSize = new System.Drawing.Size(0, 130);
+            this.ClientSize = new System.Drawing.Size(441, 156);
+            this.Controls.Add(this.labelTop);
+            this.Controls.Add(this.progressBarTop);
+            this.Controls.Add(this.labelSub);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.progressBarSub);
+            this.MaximumSize = new System.Drawing.Size(1000, 195);
+            this.MinimumSize = new System.Drawing.Size(350, 195);
             this.Name = "FDownloadProgress";
             this.Text = "Download Progress";
             this.ResumeLayout(false);
@@ -78,8 +99,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBarSub;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label labelSub;
+        private System.Windows.Forms.Label labelTop;
+        private System.Windows.Forms.ProgressBar progressBarTop;
     }
 }

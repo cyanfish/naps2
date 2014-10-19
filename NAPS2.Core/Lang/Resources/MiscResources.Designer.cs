@@ -232,6 +232,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} / {1} files.
+        /// </summary>
+        internal static string FilesProgress {
+            get {
+                return ResourceManager.GetString("FilesProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitmap Files (*.bmp).
         /// </summary>
         internal static string FileTypeBmp {
@@ -426,6 +435,15 @@ namespace NAPS2.Lang.Resources {
         internal static string SelectProfileBeforeScan {
             get {
                 return ResourceManager.GetString("SelectProfileBeforeScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} / {1} MB.
+        /// </summary>
+        internal static string SizeProgress {
+            get {
+                return ResourceManager.GetString("SizeProgress", resourceCulture);
             }
         }
         

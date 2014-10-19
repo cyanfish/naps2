@@ -199,6 +199,12 @@
     <Compile Include="WinForms\FDesktop.Designer.cs">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\FDownloadProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FDownloadProgress.Designer.cs">
+      <DependentUpon>FDownloadProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FEditScanSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -488,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.uk.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FDownloadProgress.resx">
+      <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditScanSettings.bg.resx">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>

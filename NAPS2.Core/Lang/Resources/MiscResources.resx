@@ -249,4 +249,10 @@
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Estimated download size: {0} MB</value>
   </data>
+  <data name="FilesProgress" xml:space="preserve">
+    <value>{0} / {1} files</value>
+  </data>
+  <data name="SizeProgress" xml:space="preserve">
+    <value>{0} / {1} MB</value>
+  </data>
 </root>
