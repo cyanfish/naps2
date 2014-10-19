@@ -47,6 +47,7 @@
             resources.ApplyResources(this.btnDownload, "btnDownload");
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // btnCancel
             // 

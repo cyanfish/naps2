@@ -54,7 +54,7 @@ namespace NAPS2.WinForms
             var next = filesToDownload[filesDownloaded];
             next.TempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             Directory.CreateDirectory(next.TempFolder);
-            client.DownloadFile(new Uri(new Uri(next.Root), next.Filename), Path.Combine(next.TempFolder, next.Filename));
+            client.DownloadFileAsync(new Uri(new Uri(next.Root), next.Filename), Path.Combine(next.TempFolder, next.Filename));
         }
 
         public void QueueFile(string root, string filename, Action<string> fileCallback)
@@ -78,6 +78,8 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Activate();
 
+            DisplayProgress();
+
             StartNextDownload();
         }
 
@@ -87,8 +89,8 @@ namespace NAPS2.WinForms
             progressBarTop.Maximum = filesToDownload.Count;
             progressBarTop.Value = filesDownloaded;
             labelSub.Text = string.Format(MiscResources.SizeProgress, currentFileProgress.ToString("f1"), currentFileSize.ToString("f1"));
-            progressBarSub.Maximum = (int)(currentFileSize * 100);
-            progressBarSub.Value = (int)(currentFileProgress * 100);
+            progressBarSub.Maximum = (int)(currentFileSize);
+            progressBarSub.Value = (int)(currentFileProgress);
         }
 
         private class QueueItem

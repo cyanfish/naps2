@@ -8,6 +8,16 @@ namespace NAPS2.Ocr
 {
     public class OcrLanguageManager
     {
+        public DirectoryInfo GetTessdataDir()
+        {
+            var dir = new DirectoryInfo(Path.Combine(Paths.Components, "tesseract-3.0.2", "tessdata"));
+            if (!dir.Exists)
+            {
+                dir.Create();
+            }
+            return dir;
+        }
+
         public IEnumerable<OcrLanguage> GetDownloadedLanguages()
         {
             var downloadedCodes = GetDownloadedCodes();
@@ -20,9 +30,9 @@ namespace NAPS2.Ocr
             return AllLanguages.Where(x => !downloadedCodes.Contains(x.Code));
         }
 
-        private static HashSet<string> GetDownloadedCodes()
+        private HashSet<string> GetDownloadedCodes()
         {
-            var tessdataFolder = new DirectoryInfo(Path.Combine(Paths.Components, "tesseract-ocr", "tessdata"));
+            var tessdataFolder = GetTessdataDir();
             if (!tessdataFolder.Exists)
             {
                 return new HashSet<string>();

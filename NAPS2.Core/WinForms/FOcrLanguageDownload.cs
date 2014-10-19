@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -12,16 +14,20 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrLanguageDownload : FormBase
     {
-        private readonly OcrLanguageManager _ocrLanguageManager;
+        private static readonly string DownloadBase = @"file://C:\Users\Ben\Documents\naps2\tesseract-3.0.2\traineddata\";
 
-        public FOcrLanguageDownload(OcrLanguageManager ocrLanguageManager)
+        private readonly OcrLanguageManager ocrLanguageManager;
+        private readonly IFormFactory formFactory;
+
+        public FOcrLanguageDownload(OcrLanguageManager ocrLanguageManager, IFormFactory formFactory)
         {
-            _ocrLanguageManager = ocrLanguageManager;
+            this.ocrLanguageManager = ocrLanguageManager;
+            this.formFactory = formFactory;
             InitializeComponent();
 
             // Add missing languages to the list of language options
             // Special case for English: sorted first, and checked by default
-            var languageOptions = _ocrLanguageManager.GetMissingLanguages().OrderBy(x => x.Code == "eng" ? "aaa" : x.Code);
+            var languageOptions = this.ocrLanguageManager.GetMissingLanguages().OrderBy(x => x.Code == "eng" ? "aaa" : x.Code);
             foreach (var languageOption in languageOptions)
             {
                 var item = new ListViewItem { Text = languageOption.LangName, Tag = languageOption };
@@ -65,6 +71,39 @@ namespace NAPS2.WinForms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            var progressForm = formFactory.Create<FDownloadProgress>();
+            foreach (
+                var lang in
+                    lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => (OcrLanguage)x.Tag))
+            {
+                progressForm.QueueFile(DownloadBase, lang.Filename, tempPath =>
+                {
+                    string langFilePath = Path.Combine(ocrLanguageManager.GetTessdataDir().FullName,
+                        lang.Filename.Replace(".gz", ""));
+                    Decompress(tempPath, langFilePath);
+                });
+            }
+            Close();
+            progressForm.ShowDialog();
+            // TODO: Show something else
+        }
+
+        private static void Decompress(string sourcePath, string destPath)
+        {
+            using (FileStream inFile = new FileInfo(sourcePath).OpenRead())
+            {
+                using (FileStream outFile = File.Create(destPath))
+                {
+                    using (GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress))
+                    {
+                        decompress.CopyTo(outFile);
+                    }
+                }
+            }
         }
     }
 }
