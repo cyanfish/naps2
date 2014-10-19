@@ -223,6 +223,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estimated download size: {0} MB.
+        /// </summary>
+        internal static string EstimatedDownloadSize {
+            get {
+                return ResourceManager.GetString("EstimatedDownloadSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitmap Files (*.bmp).
         /// </summary>
         internal static string FileTypeBmp {

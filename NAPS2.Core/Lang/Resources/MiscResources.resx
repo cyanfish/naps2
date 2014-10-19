@@ -246,4 +246,7 @@
   <data name="SelectedCount" xml:space="preserve">
     <value>Selected ({0})</value>
   </data>
+  <data name="EstimatedDownloadSize" xml:space="preserve">
+    <value>Estimated download size: {0} MB</value>
+  </data>
 </root>

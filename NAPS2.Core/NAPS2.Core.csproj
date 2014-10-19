@@ -209,11 +209,11 @@
     <Compile Include="WinForms\FManageProfiles.Designer.cs">
       <DependentUpon>FManageProfiles.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\FOcrDownload.cs">
+    <Compile Include="WinForms\FOcrLanguages.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\FOcrDownload.Designer.cs">
-      <DependentUpon>FOcrDownload.cs</DependentUpon>
+    <Compile Include="WinForms\FOcrLanguages.Designer.cs">
+      <DependentUpon>FOcrLanguages.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FormBase.cs">
       <SubType>Form</SubType>
@@ -579,8 +579,8 @@
     <EmbeddedResource Include="WinForms\FManageProfiles.uk.resx">
       <DependentUpon>FManageProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FOcrDownload.resx">
-      <DependentUpon>FOcrDownload.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FOcrLanguages.resx">
+      <DependentUpon>FOcrLanguages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPDFSave.bg.resx">
       <DependentUpon>FPDFSave.cs</DependentUpon>
