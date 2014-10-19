@@ -49,7 +49,6 @@ namespace NAPS2.WinForms
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly ImageSaver imageSaver;
         private readonly StringWrapper stringWrapper;
-        private readonly UserConfigManager userConfigManager;
         private readonly AppConfigManager appConfigManager;
         private readonly IErrorOutput errorOutput;
         private readonly IScannedImageFactory scannedImageFactory;
@@ -58,12 +57,11 @@ namespace NAPS2.WinForms
         private readonly AutoUpdaterUI autoUpdaterUI;
         private readonly OcrDependencyManager ocrDependencyManager;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, UserConfigManager userConfigManager, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
             this.stringWrapper = stringWrapper;
-            this.userConfigManager = userConfigManager;
             this.appConfigManager = appConfigManager;
             this.errorOutput = errorOutput;
             this.scannedImageFactory = scannedImageFactory;
@@ -465,8 +463,8 @@ namespace NAPS2.WinForms
 
         private void SetCulture(string cultureId)
         {
-            userConfigManager.Config.Culture = cultureId;
-            userConfigManager.Save();
+            UserConfigManager.Config.Culture = cultureId;
+            UserConfigManager.Save();
             Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureId);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureId);
 

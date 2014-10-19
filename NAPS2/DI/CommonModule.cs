@@ -8,6 +8,7 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Stub;
@@ -29,8 +30,9 @@ namespace NAPS2.DI
             Bind<IImageImporter>().To<ImageImporter>();
 
             // Export
-            Bind<IPdfExporter>().To<TestOcrExporter>();
+            Bind<IPdfExporter>().To<PdfSharpExporter>();
             Bind<IEmailer>().To<MapiEmailer>();
+            Bind<IOcrEngine>().To<TesseractOcrEngine>();
 
             // Scan
             Bind<IScannedImageFactory>().To<FileBasedScannedImageFactory>();
@@ -47,7 +49,7 @@ namespace NAPS2.DI
             // Config
             Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
             Bind<AppConfigManager>().ToSelf().InSingletonScope();
-            Bind<UserConfigManager>().ToSelf().InSingletonScope();
+            Bind<IUserConfigManager>().To<UserConfigManager>().InSingletonScope();
 
             // Update
             Bind<IAutoUpdater>().To<AutoUpdater>();

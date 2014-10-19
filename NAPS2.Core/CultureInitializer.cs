@@ -9,10 +9,10 @@ namespace NAPS2
 {
     public class CultureInitializer
     {
-        private readonly UserConfigManager userConfigManager;
+        private readonly IUserConfigManager userConfigManager;
         private readonly AppConfigManager appConfigManager;
 
-        public CultureInitializer(UserConfigManager userConfigManager, AppConfigManager appConfigManager)
+        public CultureInitializer(IUserConfigManager userConfigManager, AppConfigManager appConfigManager)
         {
             this.userConfigManager = userConfigManager;
             this.appConfigManager = appConfigManager;

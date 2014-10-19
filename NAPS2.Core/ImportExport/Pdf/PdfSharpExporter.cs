@@ -22,8 +22,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Config;
+using NAPS2.Ocr;
 using NAPS2.Scan.Images;
 using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
@@ -31,6 +34,15 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {
+        private readonly IUserConfigManager userConfigManager;
+        private readonly IOcrEngine ocrEngine;
+
+        public PdfSharpExporter(IOcrEngine ocrEngine, IUserConfigManager userConfigManager)
+        {
+            this.ocrEngine = ocrEngine;
+            this.userConfigManager = userConfigManager;
+        }
+
         public bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
@@ -44,16 +56,35 @@ namespace NAPS2.ImportExport.Pdf
             {
                 using (Image img = scannedImage.GetImage())
                 {
+                    OcrResult ocrResult = null;
+                    if (userConfigManager.Config.EnableOcr && ocrEngine.CanProcess(userConfigManager.Config.OcrLanguageCode))
+                    {
+                        ocrResult = ocrEngine.ProcessImage(img, userConfigManager.Config.OcrLanguageCode);
+                    }
+
                     if (!progressCallback(i))
                     {
                         return false;
                     }
-                    double realWidth = img.Width / img.HorizontalResolution * 72;
-                    double realHeight = img.Height / img.VerticalResolution * 72;
+                    float hAdjust = 72 / img.HorizontalResolution;
+                    float vAdjust = 72 / img.VerticalResolution;
+                    double realWidth = img.Width * hAdjust;
+                    double realHeight = img.Height * vAdjust;
                     PdfPage newPage = document.AddPage();
                     newPage.Width = (int)realWidth;
                     newPage.Height = (int)realHeight;
                     XGraphics gfx = XGraphics.FromPdfPage(newPage);
+                    if (ocrResult != null)
+                    {
+                        var tf = new XTextFormatter(gfx);
+                        foreach (var element in ocrResult.Elements)
+                        {
+                            var b = element.Bounds;
+                            var adjustedBounds = new RectangleF(b.X * hAdjust, b.Y * vAdjust, b.Width * hAdjust, b.Height * vAdjust);
+                            int fontSize = Math.Max(10, element.Bounds.Height);
+                            tf.DrawString(element.Text, new XFont("Times New Roman", fontSize, XFontStyle.Regular), XBrushes.Transparent, adjustedBounds);
+                        }
+                    }
                     gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
                     i++;
                 }

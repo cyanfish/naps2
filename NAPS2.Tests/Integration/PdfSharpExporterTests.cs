@@ -20,8 +20,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using NAPS2.Config;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Ocr;
 using NAPS2.Tests.Base;
 using NUnit.Framework;
 
@@ -37,7 +40,33 @@ namespace NAPS2.Tests.Integration
 
         public override IPdfExporter GetPdfExporter()
         {
-            return new PdfSharpExporter();
+            return new PdfSharpExporter(new StubOcrEngine(), new StubUserConfigManager());
+        }
+
+        public class StubUserConfigManager : IUserConfigManager
+        {
+            public UserConfig Config { get { return new UserConfig(); } }
+
+            public void Load()
+            {
+            }
+
+            public void Save()
+            {
+            }
+        }
+
+        public class StubOcrEngine : IOcrEngine
+        {
+            public bool CanProcess(string langCode)
+            {
+                return false;
+            }
+
+            public OcrResult ProcessImage(Image image, string langCode)
+            {
+                return null;
+            }
         }
     }
 }

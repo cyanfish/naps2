@@ -22,7 +22,7 @@ namespace NAPS2
         {
             var form = kernel.Get<T>();
             form.FormFactory = kernel.Get<IFormFactory>();
-            form.UserConfigManager = kernel.Get<UserConfigManager>();
+            form.UserConfigManager = kernel.Get<IUserConfigManager>();
             return form;
         }
     }

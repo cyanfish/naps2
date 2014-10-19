@@ -12,12 +12,12 @@ namespace NAPS2.Update
     {
         private static readonly TimeSpan UpdateCheckInterval = TimeSpan.FromDays(0);
 
-        private readonly UserConfigManager userConfigManager;
+        private readonly IUserConfigManager userConfigManager;
         private readonly AppConfigManager appConfigManager;
         private readonly IAutoUpdater autoUpdater;
         private readonly IFormFactory formFactory;
 
-        public AutoUpdaterUI(UserConfigManager userConfigManager, AppConfigManager appConfigManager, IAutoUpdater autoUpdater, IFormFactory formFactory)
+        public AutoUpdaterUI(IUserConfigManager userConfigManager, AppConfigManager appConfigManager, IAutoUpdater autoUpdater, IFormFactory formFactory)
         {
             this.userConfigManager = userConfigManager;
             this.appConfigManager = appConfigManager;

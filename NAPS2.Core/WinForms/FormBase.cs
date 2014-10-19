@@ -26,7 +26,7 @@ namespace NAPS2.WinForms
 
         public IFormFactory FormFactory { get; set; }
 
-        public UserConfigManager UserConfigManager { get; set; }
+        public IUserConfigManager UserConfigManager { get; set; }
 
         protected bool RestoreFormState { get; set; }
 
