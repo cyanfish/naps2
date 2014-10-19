@@ -26,7 +26,8 @@ namespace NAPS2.WinForms
                 .Bind(comboLanguages, btnCancel, btnOK)
                     .RightToForm()
                 .Bind(comboLanguages)
-                    .WidthToForm();
+                    .WidthToForm()
+                .Activate();
 
             LoadLanguages();
             comboLanguages.DisplayMember = "LangName";
