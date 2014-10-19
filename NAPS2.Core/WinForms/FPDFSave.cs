@@ -53,7 +53,8 @@ namespace NAPS2.WinForms
             {
                 Title = MiscResources.ScannedImage,
                 Subject = MiscResources.ScannedImage,
-                Author = MiscResources.NAPS2
+                Author = MiscResources.NAPS2,
+                Creator = MiscResources.NAPS2
             };
             try
             {

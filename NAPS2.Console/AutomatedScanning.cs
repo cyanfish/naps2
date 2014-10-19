@@ -341,7 +341,8 @@ namespace NAPS2.Console
             {
                 Title = ConsoleResources.ScannedImage,
                 Subject = ConsoleResources.ScannedImage,
-                Author = ConsoleResources.NAPS2
+                Author = ConsoleResources.NAPS2,
+                Creator = ConsoleResources.NAPS2
             };
             pdfExporter.Export(outputPath, scannedImages, pdfInfo, i =>
             {
