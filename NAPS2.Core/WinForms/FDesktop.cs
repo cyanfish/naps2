@@ -156,13 +156,13 @@ namespace NAPS2.WinForms
         private void UpdateThumbnails()
         {
             thumbnailList1.UpdateImages(imageList.Images);
-            UpdateImageCounts();
+            UpdateToolbar();
         }
 
         private void AppendThumbnail(IScannedImage scannedImage)
         {
             thumbnailList1.AppendImage(scannedImage);
-            UpdateImageCounts();
+            UpdateToolbar();
         }
 
         private void UpdateThumbnails(IEnumerable<int> selection)
@@ -171,15 +171,21 @@ namespace NAPS2.WinForms
             SelectedIndices = selection;
         }
 
-        private void UpdateImageCounts()
+        private void UpdateToolbar()
         {
+            // "All" dropdown items
             tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text =
                 string.Format(MiscResources.AllCount, imageList.Images.Count);
             tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = imageList.Images.Any();
 
+            // "Selected" dropdown items
             tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text =
                 string.Format(MiscResources.SelectedCount, SelectedIndices.Count());
             tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = SelectedIndices.Any();
+
+            // Top-level toolbar actions
+            tsdRotate.Enabled = tsMoveUp.Enabled = tsMoveDown.Enabled = tsDelete.Enabled = SelectedIndices.Any();
+            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsClear.Enabled = imageList.Images.Any();
         }
 
         private void Clear()
@@ -548,7 +554,7 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateImageCounts();
+            UpdateToolbar();
         }
 
         private void tsInterleave_Click(object sender, EventArgs e)

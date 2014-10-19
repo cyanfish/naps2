@@ -216,38 +216,38 @@
   <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        BaPFQU6O6j0AAAAASUVORK5CYII=
+        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
+        xTXH40ykAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -326,6 +326,18 @@
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
   </data>
+  <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsSavePDFAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsSavePDFSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
   <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -338,6 +350,18 @@
   <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
+  <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsSaveImagesAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
   <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -349,6 +373,18 @@
   </data>
   <data name="tsdSaveImages.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
+  </data>
+  <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsEmailPDFAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsEmailPDFSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
   </data>
   <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -376,6 +412,33 @@
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
+  </data>
+  <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsRotateLeft.Text" xml:space="preserve">
+    <value>Rotate Left</value>
+  </data>
+  <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsRotateRight.Text" xml:space="preserve">
+    <value>Rotate Right</value>
+  </data>
+  <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsFlip.Text" xml:space="preserve">
+    <value>Flip</value>
   </data>
   <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -412,6 +475,18 @@
   </data>
   <data name="tsMoveDown.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
+  </data>
+  <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="tsInterleave.Text" xml:space="preserve">
+    <value>Interleave</value>
+  </data>
+  <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="tsDeinterleave.Text" xml:space="preserve">
+    <value>Deinterleave</value>
   </data>
   <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -523,7 +598,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1155, 54</value>
+    <value>1124, 54</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -566,81 +641,6 @@
   </data>
   <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSavePDFAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSavePDFSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
-  </data>
-  <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSaveImagesAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
-  </data>
-  <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsEmailPDFAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsEmailPDFSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
-  </data>
-  <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsRotateLeft.Text" xml:space="preserve">
-    <value>Rotate Left</value>
-  </data>
-  <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsRotateRight.Text" xml:space="preserve">
-    <value>Rotate Right</value>
-  </data>
-  <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsFlip.Text" xml:space="preserve">
-    <value>Flip</value>
-  </data>
-  <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsInterleave.Text" xml:space="preserve">
-    <value>Interleave</value>
-  </data>
-  <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsDeinterleave.Text" xml:space="preserve">
-    <value>Deinterleave</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
