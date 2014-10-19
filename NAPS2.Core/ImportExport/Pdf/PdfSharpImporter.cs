@@ -159,7 +159,7 @@ namespace NAPS2.ImportExport.Pdf
             BitmapData data = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format1bppIndexed);
             try
             {
-                int bytesPerRow = (width + 1) / 8;
+                int bytesPerRow = (width - 1) / 8 + 1;
                 for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < bytesPerRow; x++)
