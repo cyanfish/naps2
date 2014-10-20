@@ -37,6 +37,10 @@ namespace NAPS2.WinForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctxView = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripButton();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();
@@ -71,6 +75,7 @@ namespace NAPS2.WinForms
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.tStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,6 +95,7 @@ namespace NAPS2.WinForms
             // 
             // thumbnailList1
             // 
+            this.thumbnailList1.ContextMenuStrip = this.contextMenuStrip;
             resources.ApplyResources(this.thumbnailList1, "thumbnailList1");
             this.thumbnailList1.Name = "thumbnailList1";
             this.thumbnailList1.UseCompatibleStateImageBehavior = false;
@@ -98,6 +104,34 @@ namespace NAPS2.WinForms
             this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
             this.thumbnailList1.MouseLeave += new System.EventHandler(this.thumbnailList1_MouseLeave);
             this.thumbnailList1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.thumbnailList1_MouseMove);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctxView,
+            this.ctxSelectAll,
+            this.ctxCopy});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // ctxView
+            // 
+            resources.ApplyResources(this.ctxView, "ctxView");
+            this.ctxView.Name = "ctxView";
+            this.ctxView.Click += new System.EventHandler(this.ctxView_Click);
+            // 
+            // ctxSelectAll
+            // 
+            this.ctxSelectAll.Name = "ctxSelectAll";
+            resources.ApplyResources(this.ctxSelectAll, "ctxSelectAll");
+            this.ctxSelectAll.Click += new System.EventHandler(this.ctxSelectAll_Click);
+            // 
+            // ctxCopy
+            // 
+            this.ctxCopy.Name = "ctxCopy";
+            resources.ApplyResources(this.ctxCopy, "ctxCopy");
+            this.ctxCopy.Click += new System.EventHandler(this.ctxCopy_Click);
             // 
             // tStrip
             // 
@@ -362,6 +396,7 @@ namespace NAPS2.WinForms
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            this.contextMenuStrip.ResumeLayout(false);
             this.tStrip.ResumeLayout(false);
             this.tStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -403,6 +438,10 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsEmailPDFAll;
         private System.Windows.Forms.ToolStripMenuItem tsEmailPDFSelected;
         private System.Windows.Forms.ToolStripButton tsOcr;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ctxView;
+        private System.Windows.Forms.ToolStripMenuItem ctxSelectAll;
+        private System.Windows.Forms.ToolStripMenuItem ctxCopy;
     }
 }
 

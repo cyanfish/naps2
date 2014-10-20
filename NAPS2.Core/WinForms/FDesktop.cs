@@ -21,6 +21,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -148,6 +149,11 @@ namespace NAPS2.WinForms
             }
         }
 
+        private IEnumerable<IScannedImage> SelectedImages
+        {
+            get { return imageList.Images.ElementsAt(SelectedIndices); }
+        }
+
         public void ReceiveScannedImage(IScannedImage scannedImage)
         {
             imageList.Images.Add(scannedImage);
@@ -187,6 +193,10 @@ namespace NAPS2.WinForms
             // Top-level toolbar actions
             tsdRotate.Enabled = tsMoveUp.Enabled = tsMoveDown.Enabled = tsDelete.Enabled = SelectedIndices.Any();
             tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsClear.Enabled = imageList.Images.Any();
+
+            // Context-menu actions
+            ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
+            ctxSelectAll.Enabled = imageList.Images.Any();
         }
 
         private void Clear()
@@ -270,16 +280,15 @@ namespace NAPS2.WinForms
                         MoveDown();
                     }
                     break;
-                case Keys.A:
-                    if (e.Control)
-                    {
-                        SelectAll();
-                    }
-                    break;
             }
         }
 
         private void thumbnailList1_ItemActivate(object sender, EventArgs e)
+        {
+            PreviewImage();
+        }
+
+        private void PreviewImage()
         {
             if (SelectedIndices.Any())
             {
@@ -306,7 +315,7 @@ namespace NAPS2.WinForms
 
         private void tsSavePDFSelected_Click(object sender, EventArgs e)
         {
-            SavePDF(imageList.Images.ElementsAt(SelectedIndices).ToList());
+            SavePDF(SelectedImages.ToList());
         }
 
         private void SavePDF(List<IScannedImage> images)
@@ -334,7 +343,7 @@ namespace NAPS2.WinForms
 
         private void tsSaveImagesSelected_Click(object sender, EventArgs e)
         {
-            SaveImages(imageList.Images.ElementsAt(SelectedIndices).ToList());
+            SaveImages(SelectedImages.ToList());
         }
 
         private void SaveImages(List<IScannedImage> images)
@@ -395,7 +404,7 @@ namespace NAPS2.WinForms
 
         private void tsEmailPDFSelected_Click(object sender, EventArgs e)
         {
-            EmailPDF(imageList.Images.ElementsAt(SelectedIndices).ToList());
+            EmailPDF(SelectedImages.ToList());
         }
 
         private void EmailPDF(List<IScannedImage> images)
@@ -591,6 +600,56 @@ namespace NAPS2.WinForms
                 {
                     FormFactory.Create<FOcrSetup>().ShowDialog();
                 }
+            }
+        }
+
+        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!imageList.Images.Any())
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ctxSelectAll_Click(object sender, EventArgs e)
+        {
+            SelectAll();
+        }
+
+        private void ctxView_Click(object sender, EventArgs e)
+        {
+            PreviewImage();
+        }
+
+        private void ctxCopy_Click(object sender, EventArgs e)
+        {
+            CopyImages();
+        }
+
+        private void CopyImages()
+        {
+            if (SelectedIndices.Any())
+            {
+                var images = SelectedImages.Select(x => x.GetImage()).ToList();
+                IDataObject ido = new DataObject();
+                ido.SetData(DataFormats.Bitmap, true, images.First());
+                var rtfEncodedImages = "{" + string.Join(@"\par", images.Select(GetRtfEncodedImage)) + "}";
+                ido.SetData(DataFormats.Rtf, true, rtfEncodedImages);
+                Clipboard.SetDataObject(ido);
+            }
+        }
+
+        private static string GetRtfEncodedImage(Image image)
+        {
+            using (var stream = new MemoryStream())
+            {
+                image.Save(stream, image.RawFormat);
+                string hexString = BitConverter.ToString(stream.ToArray(), 0).Replace("-", string.Empty);
+
+                return @"{\pict\pngblip\picw" +
+                       image.Width + @"\pich" + image.Height +
+                       @"\picwgoa" + image.Width + @"\pichgoa" + image.Height +
+                       @"\hex " + hexString + "}";
             }
         }
     }
