@@ -30,15 +30,15 @@ namespace NAPS2.ImportExport.Pdf
 
         public IEnumerable<IScannedImage> Import(string filePath)
         {
-            PdfDocument document = PdfReader.Open(filePath);
-            if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
-            {
-                errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
-                return Enumerable.Empty<IScannedImage>();
-            }
-
             try
             {
+                PdfDocument document = PdfReader.Open(filePath);
+                if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
+                {
+                    errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
+                    return Enumerable.Empty<IScannedImage>();
+                }
+
                 return document.Pages.Cast<PdfPage>().SelectMany(GetImagesFromPage).ToList();
             }
             catch (Exception e)
