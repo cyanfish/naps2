@@ -41,6 +41,12 @@ namespace NAPS2.ImportExport.Pdf
 
                 return document.Pages.Cast<PdfPage>().SelectMany(GetImagesFromPage).ToList();
             }
+            catch (NotImplementedException e)
+            {
+                errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
+                Log.ErrorException("Error importing PDF file.", e);
+                return Enumerable.Empty<IScannedImage>();
+            }
             catch (Exception e)
             {
                 errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
