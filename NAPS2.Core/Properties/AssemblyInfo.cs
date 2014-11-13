@@ -1,4 +1,4 @@
-ï»¿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NAPS2.Core")]
-[assembly: AssemblyCopyright("Copyright Â© 2009 Pavel Sorejs, Copyright Â© 2012 Michael Adams, Copyright Â© 2013 Peter De Leeuw, Copyright Â© 2012-2014 Ben Olden-Cooligan; Icons from http://www.fatcow.com/free-icons")]
+[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, Copyright © 2012 Michael Adams, Copyright © 2013 Peter De Leeuw, Copyright © 2012-2014 Ben Olden-Cooligan; Icons from http://www.fatcow.com/free-icons")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
