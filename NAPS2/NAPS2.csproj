@@ -10,8 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>scanner-app.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -172,6 +171,7 @@
     </Content>
     <None Include="Setup\lib\Interop.WIA.dll" />
     <None Include="Setup\lib\PdfSharp.dll" />
+    <Content Include="scanner-app.ico" />
     <Content Include="Setup\license.txt" />
     <Content Include="Setup\setup.iss" />
     <None Include="Setup\lib\wiaaut.dll" />

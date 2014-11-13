@@ -47,7 +47,7 @@ function Publish-NAPS2-Standalone {
             cp $File.FullName $StandaloneDir
         }
     }
-    foreach ($File in ("..\Resources\scanner-app.ico", "..\appsettings.xml", "lib\wiaaut.dll", "license.txt")) {
+    foreach ($File in ("..\..\NAPS2.Core\Resources\scanner-app.ico", "..\appsettings.xml", "lib\wiaaut.dll", "license.txt")) {
         cp $File $StandaloneDir
     }
     if (Test-Path $ArchiveFile) {
