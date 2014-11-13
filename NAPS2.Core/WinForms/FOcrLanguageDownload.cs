@@ -14,7 +14,7 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrLanguageDownload : FormBase
     {
-        private static readonly string DownloadBase = @"file://C:\Users\Ben\Documents\naps2\tesseract-3.0.2\traineddata\";
+        private static readonly string DownloadBase = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.02/{0}/download";
 
         private readonly OcrDependencyManager ocrDependencyManager;
 

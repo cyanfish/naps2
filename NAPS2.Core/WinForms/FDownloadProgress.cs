@@ -31,7 +31,15 @@ namespace NAPS2.WinForms
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            filesDownloaded++;
+            if (e.Error != null)
+            {
+                hasError = true;
+                Log.ErrorException("Error downloading file: " + filesToDownload[filesDownloaded].Filename, e.Error);
+            }
+            else
+            {
+                filesDownloaded++;
+            }
             currentFileProgress = 0;
             currentFileSize = 0;
             DisplayProgress();
@@ -40,6 +48,14 @@ namespace NAPS2.WinForms
 
         private void StartNextDownload()
         {
+            if (hasError)
+            {
+                var prev = filesToDownload[filesDownloaded];
+                Directory.Delete(prev.TempFolder, true);
+                Close();
+                MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (filesDownloaded > 0)
             {
                 var prev = filesToDownload[filesDownloaded - 1];
@@ -54,7 +70,7 @@ namespace NAPS2.WinForms
             var next = filesToDownload[filesDownloaded];
             next.TempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             Directory.CreateDirectory(next.TempFolder);
-            client.DownloadFileAsync(new Uri(new Uri(next.Root), next.Filename), Path.Combine(next.TempFolder, next.Filename));
+            client.DownloadFileAsync(new Uri(string.Format(next.Root, next.Filename)), Path.Combine(next.TempFolder, next.Filename));
         }
 
         public void QueueFile(string root, string filename, Action<string> fileCallback)
@@ -66,6 +82,7 @@ namespace NAPS2.WinForms
         private int filesDownloaded = 0;
         private double currentFileSize = 0.0;
         private double currentFileProgress = 0.0;
+        private bool hasError;
 
         private readonly WebClient client = new WebClient();
 
@@ -88,7 +105,7 @@ namespace NAPS2.WinForms
             labelTop.Text = string.Format(MiscResources.FilesProgress, filesDownloaded, filesToDownload.Count);
             progressBarTop.Maximum = filesToDownload.Count;
             progressBarTop.Value = filesDownloaded;
-            labelSub.Text = string.Format(MiscResources.SizeProgress, currentFileProgress.ToString("f1"), currentFileSize.ToString("f1"));
+            labelSub.Text = string.Format(MiscResources.SizeProgress, (currentFileProgress / 1000000.0).ToString("f1"), (currentFileSize / 1000000.0).ToString("f1"));
             progressBarSub.Maximum = (int)(currentFileSize);
             progressBarSub.Value = (int)(currentFileProgress);
             Refresh();

@@ -196,6 +196,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download Error.
+        /// </summary>
+        internal static string DownloadError {
+            get {
+                return ResourceManager.GetString("DownloadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to send an email..
         /// </summary>
         internal static string EmailError {
@@ -228,6 +237,15 @@ namespace NAPS2.Lang.Resources {
         internal static string EstimatedDownloadSize {
             get {
                 return ResourceManager.GetString("EstimatedDownloadSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more files could not be downloaded..
+        /// </summary>
+        internal static string FilesCouldNotBeDownloaded {
+            get {
+                return ResourceManager.GetString("FilesCouldNotBeDownloaded", resourceCulture);
             }
         }
         
