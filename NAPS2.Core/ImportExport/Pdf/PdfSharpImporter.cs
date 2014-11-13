@@ -84,11 +84,11 @@ namespace NAPS2.ImportExport.Pdf
                     switch (xObject.Elements.GetName("/Filter"))
                     {
                         case "/DCTDecode":
-                            yield return ExportJpegImage(xObject);
+                            yield return ExportJpegImage(page, xObject);
                             break;
 
                         case "/FlateDecode":
-                            yield return ExportAsPngImage(xObject);
+                            yield return ExportAsPngImage(page, xObject);
                             break;
 
                         default:
@@ -98,17 +98,18 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
 
-        private IScannedImage ExportJpegImage(PdfDictionary image)
+        private IScannedImage ExportJpegImage(PdfPage page, PdfDictionary image)
         {
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using (var memoryStream = new MemoryStream(image.Stream.Value))
             {
                 var bitmap = new Bitmap(memoryStream);
+                bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
                 return scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, false);
             }
         }
 
-        private IScannedImage ExportAsPngImage(PdfDictionary image)
+        private IScannedImage ExportAsPngImage(PdfPage page, PdfDictionary image)
         {
             int width = image.Elements.GetInteger(PdfImage.Keys.Width);
             int height = image.Elements.GetInteger(PdfImage.Keys.Height);
@@ -134,6 +135,7 @@ namespace NAPS2.ImportExport.Pdf
                     throw new NotImplementedException("Unsupported image encoding (expected 24 bpp or 1bpp)");
             }
 
+            bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
             return scannedImageFactory.Create(bitmap, bitDepth, true);
         }
 
