@@ -40,7 +40,7 @@ function Publish-NAPS2-Standalone {
     foreach ($LanguageCode in Get-NAPS2-Languages) {
         $LangDir = $StandaloneDir + "$LanguageCode\"
         mkdir $LangDir
-        cp ($BinDir + "$LanguageCode\NAPS2.resources.dll") $LangDir
+        cp ($BinDir + "$LanguageCode\NAPS2.Core.resources.dll") $LangDir
     }
     foreach ($Dir in ($BinDir, $CmdBinDir)) {
         foreach ($File in (Get-ChildItem $Dir | where { $_.Name -match '(?<!vshost)\.(exe|dll)$' })) {
