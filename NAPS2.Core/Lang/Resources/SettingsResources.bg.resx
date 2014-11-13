@@ -132,6 +132,9 @@
     <data name="Dpi_1200" xml:space="preserve">
         <value>1200 dpi</value>
     </data>
+    <data name="Dpi_150" xml:space="preserve">
+        <value>150 dpi</value>
+    </data>
     <data name="Dpi_200" xml:space="preserve">
         <value>200 dpi</value>
     </data>
