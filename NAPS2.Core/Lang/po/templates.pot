@@ -59,7 +59,9 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr ""
@@ -154,7 +156,7 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr ""
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
 msgstr ""
 
 #: FAbout.resx__2$labelCopyright.Text$Message
@@ -165,6 +167,7 @@ msgstr ""
 msgid "Deinterleave"
 msgstr ""
 
+#: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
@@ -187,8 +190,13 @@ msgid "Done"
 msgstr ""
 
 #: MiscResources.resx$Download$Message
+#: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 msgid "Download"
+msgstr ""
+
+#: MiscResources.resx$DownloadError$Message
+msgid "Download Error"
 msgstr ""
 
 #: FDownloadProgress.resx$$this.Text$Message
@@ -227,10 +235,6 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr ""
-
-#: FTwainGui.resx$$this.Text$Message
-msgid "FTwainGui"
 msgstr ""
 
 #: SettingsResources.resx$Source_Feeder$Message
@@ -373,6 +377,10 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+#: MiscResources.resx$FilesCouldNotBeDownloaded$Message
+msgid "One or more files could not be downloaded"
+msgstr ""
+
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
 msgstr ""
@@ -468,6 +476,8 @@ msgstr ""
 msgid "Select one or more languages"
 msgstr ""
 
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
@@ -556,6 +566,14 @@ msgstr ""
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom out"
+msgstr ""
+
+#: FAbout.resx$linkLabel1.Text$Message
+msgid "http://sourceforge.com/projects/naps2"
+msgstr ""
+
+#: FAbout.resx$linkLabel2.Text$Message
+msgid "http://www.fatcow.com/free-icons"
 msgstr ""
 
 #: MiscResources.resx$SizeProgress$Message

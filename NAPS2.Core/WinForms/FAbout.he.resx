@@ -196,7 +196,10 @@
         <value>28</value>
     </data>
     <data name="labelCopyright.Text" xml:space="preserve">
-        <value>כל הזכויות שמורות © 2009 Pavel Sorejs\nכל הזכויות שמורות © 2012 Michael Adams\nכל הזכויות שמורות © 2013 Peter De Leeuw\nכל הזכויות שמורות © 2012-2013 Ben Olden-Cooligan</value>
+        <value>Copyright © 2009 Pavel Sorejs
+Copyright © 2012 Michael Adams
+Copyright © 2013 Peter De Leeuw
+Copyright © 2012-2014 Ben Olden-Cooligan</value>
     </data>
     <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
         <value>labelCopyright</value>
@@ -553,6 +556,6 @@
         <value>FAbout</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.29730, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

@@ -117,93 +117,6 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <metadata name="tStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-        <value>342, 54</value>
-    </metadata>
-    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="tsStretch.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-        <value>Magenta</value>
-    </data>
-    <data name="tsStretch.Size" type="System.Drawing.Size, System.Drawing">
-        <value>23, 22</value>
-    </data>
-    <data name="tsStretch.Text" xml:space="preserve">
-        <value>toolStripButton1</value>
-    </data>
-    <data name="tsStretch.ToolTipText" xml:space="preserve">
-        <value>Měřítko</value>
-    </data>
-    <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>6, 25</value>
-    </data>
-    <data name="tsZoomActual.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-        <value>Magenta</value>
-    </data>
-    <data name="tsZoomActual.Size" type="System.Drawing.Size, System.Drawing">
-        <value>23, 22</value>
-    </data>
-    <data name="tsZoomActual.ToolTipText" xml:space="preserve">
-        <value>Zoom out</value>
-    </data>
-    <data name="tsZoomPlus.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-        <value>Magenta</value>
-    </data>
-    <data name="tsZoomPlus.Size" type="System.Drawing.Size, System.Drawing">
-        <value>23, 22</value>
-    </data>
-    <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
-        <value>Zoom in</value>
-    </data>
-    <data name="tsZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-        <value>Magenta</value>
-    </data>
-    <data name="tsZoomOut.Size" type="System.Drawing.Size, System.Drawing">
-        <value>23, 22</value>
-    </data>
-    <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-        <value>Zoom out</value>
-    </data>
-    <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-        <value>6, 25</value>
-    </data>
-    <data name="tsZoom.Size" type="System.Drawing.Size, System.Drawing">
-        <value>35, 22</value>
-    </data>
-    <data name="tsZoom.Text" xml:space="preserve">
-        <value>100%</value>
-    </data>
-    <data name="tsZoom.ToolTipText" xml:space="preserve">
-        <value>Zoom</value>
-    </data>
-    <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
-        <value>3, 0</value>
-    </data>
-    <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-        <value>151, 25</value>
-    </data>
-    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
-        <value>7</value>
-    </data>
-    <data name="tStrip.Text" xml:space="preserve">
-        <value>toolStrip1</value>
-    </data>
-    <data name="&gt;&gt;tStrip.Name" xml:space="preserve">
-        <value>tStrip</value>
-    </data>
-    <data name="&gt;&gt;tStrip.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;tStrip.Parent" xml:space="preserve">
-        <value>toolStripContainer1.TopToolStripPanel</value>
-    </data>
-    <data name="&gt;&gt;tStrip.ZOrder" xml:space="preserve">
-        <value>0</value>
-    </data>
     <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Name" xml:space="preserve">
         <value>toolStripContainer1.BottomToolStripPanel</value>
     </data>
@@ -216,12 +129,15 @@
     <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
+    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     <data name="tiffviewer1.AutoScroll" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     <data name="tiffviewer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
         <value>Fill</value>
     </data>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
     <data name="tiffviewer1.Location" type="System.Drawing.Point, System.Drawing">
         <value>0, 0</value>
     </data>
@@ -238,7 +154,7 @@
         <value>tiffviewer1</value>
     </data>
     <data name="&gt;&gt;tiffviewer1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.TiffViewer, NAPS2, Version=2.1.4952.26857, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.TiffViewer, NAPS2.Core, Version=3.0.1.29730, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tiffviewer1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -297,8 +213,83 @@
     <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
         <value>8</value>
     </data>
-    <data name="toolStripContainer1.Text" xml:space="preserve">
-        <value>toolStripContainer1</value>
+    <metadata name="tStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <value>342, 54</value>
+    </metadata>
+    <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsStretch.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsStretch.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsStretch.ToolTipText" xml:space="preserve">
+        <value>Měřítko</value>
+    </data>
+    <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 25</value>
+    </data>
+    <data name="tsZoomActual.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsZoomActual.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsZoomActual.ToolTipText" xml:space="preserve">
+        <value>Zoom out</value>
+    </data>
+    <data name="tsZoomPlus.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsZoomPlus.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
+        <value>Zoom in</value>
+    </data>
+    <data name="tsZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsZoomOut.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsZoomOut.ToolTipText" xml:space="preserve">
+        <value>Zoom out</value>
+    </data>
+    <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 25</value>
+    </data>
+    <data name="tsZoom.Size" type="System.Drawing.Size, System.Drawing">
+        <value>35, 22</value>
+    </data>
+    <data name="tsZoom.Text" xml:space="preserve">
+        <value>100%</value>
+    </data>
+    <data name="tsZoom.ToolTipText" xml:space="preserve">
+        <value>Zoom</value>
+    </data>
+    <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
+        <value>3, 0</value>
+    </data>
+    <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
+        <value>151, 25</value>
+    </data>
+    <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
+        <value>7</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Name" xml:space="preserve">
+        <value>tStrip</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Parent" xml:space="preserve">
+        <value>toolStripContainer1.TopToolStripPanel</value>
+    </data>
+    <data name="&gt;&gt;tStrip.ZOrder" xml:space="preserve">
+        <value>0</value>
     </data>
     <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
         <value>toolStripContainer1.TopToolStripPanel</value>
@@ -326,9 +317,6 @@
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
-    </metadata>
-    <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-        <value>ru</value>
     </metadata>
     <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
         <value>784, 552</value>

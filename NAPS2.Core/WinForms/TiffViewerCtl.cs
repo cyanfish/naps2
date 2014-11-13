@@ -132,6 +132,8 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TiffViewerCtl));
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.tiffviewer1 = new NAPS2.WinForms.TiffViewer();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsStretch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -140,13 +142,32 @@ namespace NAPS2.WinForms
             this.tsZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsZoom = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.tiffviewer1 = new NAPS2.WinForms.TiffViewer();
-            this.tStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            this.tStrip.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.tiffviewer1);
+            resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
+            resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
+            // 
+            // tiffviewer1
+            // 
+            resources.ApplyResources(this.tiffviewer1, "tiffviewer1");
+            this.tiffviewer1.BackColor = System.Drawing.Color.White;
+            this.tiffviewer1.Name = "tiffviewer1";
+            this.tiffviewer1.Zoom = 0;
             // 
             // tStrip
             // 
@@ -209,40 +230,19 @@ namespace NAPS2.WinForms
             this.tsZoom.Name = "tsZoom";
             resources.ApplyResources(this.tsZoom, "tsZoom");
             // 
-            // toolStripContainer1
-            // 
-            // 
-            // toolStripContainer1.ContentPanel
-            // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.tiffviewer1);
-            resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
-            resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
-            this.toolStripContainer1.Name = "toolStripContainer1";
-            // 
-            // toolStripContainer1.TopToolStripPanel
-            // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
-            // 
-            // tiffviewer1
-            // 
-            resources.ApplyResources(this.tiffviewer1, "tiffviewer1");
-            this.tiffviewer1.BackColor = System.Drawing.Color.White;
-            this.tiffviewer1.Name = "tiffviewer1";
-            this.tiffviewer1.Zoom = 0;
-            // 
             // TiffViewerCtl
             // 
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "TiffViewerCtl";
             resources.ApplyResources(this, "$this");
             this.SizeChanged += new System.EventHandler(this.TiffViewer_SizeChanged);
-            this.tStrip.ResumeLayout(false);
-            this.tStrip.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            this.tStrip.ResumeLayout(false);
+            this.tStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }
