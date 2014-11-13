@@ -10,9 +10,9 @@ namespace NAPS2.ImportExport.Images
 {
     public class ImageImporter : IImageImporter
     {
-        private readonly ScannedImageFactory scannedImageFactory;
+        private readonly IScannedImageFactory scannedImageFactory;
 
-        public ImageImporter(ScannedImageFactory scannedImageFactory)
+        public ImageImporter(IScannedImageFactory scannedImageFactory)
         {
             this.scannedImageFactory = scannedImageFactory;
         }

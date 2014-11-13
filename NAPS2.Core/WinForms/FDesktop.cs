@@ -493,6 +493,8 @@ namespace NAPS2.WinForms
 
         private void FDesktop_Shown(object sender, EventArgs e)
         {
+            UpdateToolbar();
+
             // If configured (e.g. by a business), show a customizable message box on application startup.
             var appConfig = appConfigManager.Config;
             if (!string.IsNullOrWhiteSpace(appConfig.StartupMessageText))
