@@ -4,9 +4,9 @@
 
 function Update-Lang {
     param([Parameter(Position=0)] [String] $LanguageCode)
-    foreach ($ResourceFolder in ("..\Lang\Resources\", "..\WinForms\")) {
+    foreach ($ResourceFolder in ("..\..\NAPS2.Core\Lang\Resources\", "..\..\NAPS2.Core\WinForms\")) {
         foreach ($ResourceFile in (Get-ChildItem $ResourceFolder | where { $_.Name -match '^[a-zA-Z-]+\.resx$' })) {
-            & "C:\Program Files\RTT\RTT64.exe" /S"$($ResourceFile.FullName)" /T"$($ResourceFile.FullName -replace '\.resx$', ".$LanguageCode.resx" )" /M"..\Lang\po\$LanguageCode.po" /O"NUL"
+            & "C:\Program Files\RTT\RTT64.exe" /S"$($ResourceFile.FullName)" /T"$($ResourceFile.FullName -replace '\.resx$', ".$LanguageCode.resx" )" /M"..\..\NAPS2.Core\Lang\po\$LanguageCode.po" /O"NUL"
         }
     }
 }

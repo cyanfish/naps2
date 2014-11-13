@@ -55,7 +55,7 @@ function Build-NAPS2 {
 }
 
 function Get-NAPS2-Languages {
-    Get-ChildItem ..\Lang\po\ |
+    Get-ChildItem ..\..\NAPS2.Core\Lang\po\ |
         foreach { $_.Name -replace ".po", "" } |
         where { $_ -ne "templatest" } |
         where { $_ -ne "en" }
