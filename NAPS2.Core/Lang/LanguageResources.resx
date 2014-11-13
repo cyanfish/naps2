@@ -165,4 +165,7 @@
   <data name="pt_PT" xml:space="preserve">
     <value>Português (Portugal)</value>
   </data>
+  <data name="hu" xml:space="preserve">
+    <value>Magyar</value>
+  </data>
 </root>
