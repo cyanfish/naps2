@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2013  Ben Olden-Cooligan
+    Copyright (C) 2012-2014  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NAPS2 (Not Another PDF Scanner 2)")]
-[assembly: AssemblyCopyright("Copyright © 2009-2013 NAPS & NAPS2 Contributors")]
+[assembly: AssemblyCopyright("Copyright © 2009-2014 NAPS & NAPS2 Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
