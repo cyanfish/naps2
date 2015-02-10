@@ -110,6 +110,13 @@ namespace NAPS2.Console
                 EmailScannedImages();
             }
 
+            foreach (var image in scannedImages)
+            {
+                image.Dispose();
+            }
+
+            scannedImages = null;
+
             if (options.WaitForEnter)
             {
                 Console.ReadLine();
