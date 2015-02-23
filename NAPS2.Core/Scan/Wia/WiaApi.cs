@@ -5,7 +5,8 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2015       Phil Walter
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -39,6 +40,8 @@ namespace NAPS2.Scan.Wia
         private const int HORIZONTAL_BED_SIZE = 3074;
         private const int VERTICAL_BED_SIZE = 3075;
         private const int PAPER_SOURCE = 3088;
+        private const int DOCUMENT_HANDLING_CAPABILITIES = 3086;
+        private const int PAGES = 3096;
         private const int DATA_TYPE = 4103;
         private const int VERTICAL_RESOLUTION = 6148;
         private const int HORIZONTAL_RESOLUTION = 6147;
@@ -303,6 +306,15 @@ namespace NAPS2.Scan.Wia
 
         private void SetupDevice()
         {
+            if (settings.PaperSource != ScanSource.Glass)
+            {
+                int capabilities = GetDeviceIntProperty(DOCUMENT_HANDLING_CAPABILITIES);
+                if ((capabilities & SOURCE_FEEDER) != 0)
+                {
+                    SetDeviceIntProperty(1, PAGES);
+                }
+            }
+
             switch (settings.PaperSource)
             {
                 case ScanSource.Glass:
