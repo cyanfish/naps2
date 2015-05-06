@@ -116,7 +116,7 @@ namespace NAPS2.Scan.Wia
                     break;
                 }
                 yield return image;
-                if (ScanSettings.PaperSource == ScanSource.Glass)
+                if (ScanSettings.PaperSource == ScanSource.Glass || !api.SupportsFeeder)
                 {
                     break;
                 }

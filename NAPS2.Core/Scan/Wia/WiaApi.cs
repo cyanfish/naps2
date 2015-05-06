@@ -304,15 +304,20 @@ namespace NAPS2.Scan.Wia
             SetItemIntProperty(item, settings.Brightness, -1000, 1000, BRIGHTNESS);
         }
 
-        private void SetupDevice()
+        public bool SupportsFeeder
         {
-            if (settings.PaperSource != ScanSource.Glass)
+            get
             {
                 int capabilities = GetDeviceIntProperty(DOCUMENT_HANDLING_CAPABILITIES);
-                if ((capabilities & SOURCE_FEEDER) != 0)
-                {
-                    SetDeviceIntProperty(1, PAGES);
-                }
+                return (capabilities & SOURCE_FEEDER) != 0;
+            }
+        }
+
+        private void SetupDevice()
+        {
+            if (settings.PaperSource != ScanSource.Glass && SupportsFeeder)
+            {
+                SetDeviceIntProperty(1, PAGES);
             }
 
             switch (settings.PaperSource)
