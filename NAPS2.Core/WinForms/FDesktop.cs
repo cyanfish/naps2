@@ -57,8 +57,11 @@ namespace NAPS2.WinForms
         private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly AutoUpdaterUI autoUpdaterUI;
         private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly IconButtonSizer iconButtonSizer;
+        private readonly IProfileManager profileManager;
+        private readonly IScanPerformer scanPerformer;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IconButtonSizer iconButtonSizer, IProfileManager profileManager, IScanPerformer scanPerformer)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -70,6 +73,9 @@ namespace NAPS2.WinForms
             this.scannedImageImporter = scannedImageImporter;
             this.autoUpdaterUI = autoUpdaterUI;
             this.ocrDependencyManager = ocrDependencyManager;
+            this.iconButtonSizer = iconButtonSizer;
+            this.profileManager = profileManager;
+            this.scanPerformer = scanPerformer;
             InitializeComponent();
         }
 
@@ -82,6 +88,11 @@ namespace NAPS2.WinForms
         {
             RelayoutToolbar();
             InitLanguageDropdown();
+
+            iconButtonSizer.WidthOffset = 22;
+            iconButtonSizer.PaddingRight = 4;
+            iconButtonSizer.MaxWidth = 200;
+            iconButtonSizer.ResizeButtons(btnQuickScan);
         }
 
         private void InitLanguageDropdown()
@@ -197,6 +208,9 @@ namespace NAPS2.WinForms
             // Context-menu actions
             ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
             ctxSelectAll.Enabled = imageList.Images.Any();
+
+            // Other buttons
+            btnQuickScan.Visible = !imageList.Images.Any();
         }
 
         private void Clear()
@@ -653,6 +667,23 @@ namespace NAPS2.WinForms
                        @"\picwgoa" + image.Width + @"\pichgoa" + image.Height +
                        @"\hex " + hexString + "}";
             }
+        }
+
+        private void btnQuickScan_Click(object sender, EventArgs e)
+        {
+            if (profileManager.Profiles.Count == 0)
+            {
+                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+                editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
+                editSettingsForm.ShowDialog();
+                if (!editSettingsForm.Result)
+                {
+                    return;
+                }
+                profileManager.Profiles.Add(editSettingsForm.ScanSettings);
+                profileManager.Save();
+            }
+            scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
         }
     }
 }

@@ -37,6 +37,22 @@ namespace NAPS2.Config
 
         public List<ExtendedScanSettings> Profiles { get { return Config; } }
 
+        public ExtendedScanSettings DefaultProfile
+        {
+            get
+            {
+                return Profiles.FirstOrDefault(x => x.IsDefault) ?? Profiles.LastOrDefault();
+            }
+            set
+            {
+                foreach (ExtendedScanSettings profile in Profiles)
+                {
+                    profile.IsDefault = false;
+                }
+                value.IsDefault = true;
+            }
+        }
+
         protected override List<ExtendedScanSettings> Deserialize(Stream configFileStream)
         {
             var serializer = new XmlSerializer(typeof(List<ExtendedScanSettings>));
@@ -84,15 +100,6 @@ namespace NAPS2.Config
                 }
                 return (ExtendedScanSettings)profile;
             }).ToList();
-        }
-
-        public void SetDefault(ExtendedScanSettings defaultProfile)
-        {
-            foreach (ExtendedScanSettings profile in Profiles)
-            {
-                profile.IsDefault = false;
-            }
-            defaultProfile.IsDefault = true;
         }
     }
 }

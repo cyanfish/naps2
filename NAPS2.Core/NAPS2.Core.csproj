@@ -1418,6 +1418,7 @@
     <Content Include="Resources\scanner-large.png" />
     <Content Include="Resources\scanner.ico" />
     <Content Include="Resources\scanner.png" />
+    <None Include="Resources\control_play_blue.png" />
     <None Include="Resources\zoom_out.png" />
     <None Include="Resources\zoom_in.png" />
     <None Include="Resources\zoom_actual.png" />

@@ -36,6 +36,7 @@ namespace NAPS2.WinForms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.btnQuickScan = new System.Windows.Forms.Button();
             this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxView = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,6 +85,7 @@ namespace NAPS2.WinForms
             // 
             // toolStripContainer1.ContentPanel
             // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnQuickScan);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
@@ -92,6 +94,14 @@ namespace NAPS2.WinForms
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
+            // 
+            // btnQuickScan
+            // 
+            this.btnQuickScan.Image = global::NAPS2.Icons.control_play_blue;
+            resources.ApplyResources(this.btnQuickScan, "btnQuickScan");
+            this.btnQuickScan.Name = "btnQuickScan";
+            this.btnQuickScan.UseVisualStyleBackColor = true;
+            this.btnQuickScan.Click += new System.EventHandler(this.btnQuickScan_Click);
             // 
             // thumbnailList1
             // 
@@ -442,6 +452,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem ctxView;
         private System.Windows.Forms.ToolStripMenuItem ctxSelectAll;
         private System.Windows.Forms.ToolStripMenuItem ctxCopy;
+        private System.Windows.Forms.Button btnQuickScan;
     }
 }
 
