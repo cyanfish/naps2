@@ -9,5 +9,7 @@
         public string LangName { get; set; }
 
         public double Size { get; set; }
+
+        public string Sha1 { get; set; }
     }
 }

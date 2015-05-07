@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
@@ -31,10 +32,16 @@ namespace NAPS2.WinForms
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            var file = filesToDownload[filesDownloaded];
             if (e.Error != null)
             {
                 hasError = true;
-                Log.ErrorException("Error downloading file: " + filesToDownload[filesDownloaded].Filename, e.Error);
+                Log.ErrorException("Error downloading file: " + file.Filename, e.Error);
+            }
+            else if (file.Sha1 != CalculateSha1((Path.Combine(file.TempFolder, file.Filename))))
+            {
+                hasError = true;
+                Log.Error("Error downloading file (invalid checksum): " + file.Filename);
             }
             else
             {
@@ -44,6 +51,19 @@ namespace NAPS2.WinForms
             currentFileSize = 0;
             DisplayProgress();
             StartNextDownload();
+        }
+
+        private string CalculateSha1(string filePath)
+        {
+            using (var sha = new SHA1Managed())
+            {
+                using (FileStream stream = File.OpenRead(filePath))
+                {
+                    byte[] checksum = sha.ComputeHash(stream);
+                    string str = BitConverter.ToString(checksum).Replace("-", String.Empty).ToLowerInvariant();
+                    return str;
+                }
+            }
         }
 
         private void StartNextDownload()
@@ -73,9 +93,9 @@ namespace NAPS2.WinForms
             client.DownloadFileAsync(new Uri(string.Format(next.Root, next.Filename)), Path.Combine(next.TempFolder, next.Filename));
         }
 
-        public void QueueFile(string root, string filename, Action<string> fileCallback)
+        public void QueueFile(string root, string filename, string sha1, Action<string> fileCallback)
         {
-            filesToDownload.Add(new QueueItem { Root = root, Filename = filename, FileCallback = fileCallback });
+            filesToDownload.Add(new QueueItem { Root = root, Filename = filename, Sha1 = sha1, FileCallback = fileCallback });
         }
 
         private readonly List<QueueItem> filesToDownload = new List<QueueItem>();
@@ -118,6 +138,8 @@ namespace NAPS2.WinForms
             public string Filename { get; set; }
 
             public string TempFolder { get; set; }
+
+            public string Sha1 { get; set; }
 
             public Action<string> FileCallback { get; set; }
         }

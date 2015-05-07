@@ -80,7 +80,7 @@ namespace NAPS2.WinForms
             var progressForm = FormFactory.Create<FDownloadProgress>();
             if (!ocrDependencyManager.IsExecutableDownloaded)
             {
-                progressForm.QueueFile(DownloadBase, ocrDependencyManager.ExecutableFileName, tempPath =>
+                progressForm.QueueFile(DownloadBase, ocrDependencyManager.ExecutableFileName, ocrDependencyManager.ExecutableFileSha1, tempPath =>
                 {
                     string exeFilePath = Path.Combine(ocrDependencyManager.GetExecutableDir().FullName,
                         ocrDependencyManager.ExecutableFileName.Replace(".gz", ""));
@@ -91,7 +91,7 @@ namespace NAPS2.WinForms
                 var lang in
                     lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => (OcrLanguage)x.Tag))
             {
-                progressForm.QueueFile(DownloadBase, lang.Filename, tempPath =>
+                progressForm.QueueFile(DownloadBase, lang.Filename, lang.Sha1, tempPath =>
                 {
                     string langFilePath = Path.Combine(ocrDependencyManager.GetLanguageDir().FullName,
                         lang.Filename.Replace(".gz", ""));
