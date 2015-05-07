@@ -13,6 +13,7 @@ namespace NAPS2.Ocr
 {
     public class TesseractOcrEngine : IOcrEngine
     {
+        private const int TESSERACT_TIMEOUT_MS = 20 * 1000;
         private readonly OcrDependencyManager ocrDependencyManager;
 
         public TesseractOcrEngine(OcrDependencyManager ocrDependencyManager)
@@ -53,7 +54,19 @@ namespace NAPS2.Ocr
                     Log.Error("Couldn't start OCR process.");
                     return null;
                 }
-                tesseractProcess.WaitForExit();
+                if (!tesseractProcess.WaitForExit(TESSERACT_TIMEOUT_MS))
+                {
+                    Log.Error("OCR process timed out.");
+                    try
+                    {
+                        tesseractProcess.Kill();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.ErrorException("Error killing OCR process", e);
+                    }
+                    return null;
+                }
                 XDocument hocrDocument = XDocument.Load(tempHocrFilePath + ".html");
                 return new OcrResult
                 {
@@ -61,6 +74,11 @@ namespace NAPS2.Ocr
                         .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
                         .Select(x => new OcrResultElement { Text = x.Value, Bounds = GetBounds(x.Attribute("title")) })
                 };
+            }
+            catch (Exception e)
+            {
+                Log.ErrorException("Error running OCR", e);
+                return null;
             }
             finally
             {
