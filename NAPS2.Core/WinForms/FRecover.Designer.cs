@@ -50,7 +50,7 @@
             this.btnRecover.Name = "btnRecover";
             this.btnRecover.Size = new System.Drawing.Size(120, 30);
             this.btnRecover.TabIndex = 1;
-            this.btnRecover.Text = "Recover";
+            this.btnRecover.Text = "&Recover";
             this.btnRecover.UseVisualStyleBackColor = true;
             this.btnRecover.Click += new System.EventHandler(this.btnRecover_Click);
             // 
@@ -60,7 +60,7 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(120, 30);
             this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
+            this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -70,7 +70,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 30);
             this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Not Now";
+            this.btnCancel.Text = "&Not Now";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
