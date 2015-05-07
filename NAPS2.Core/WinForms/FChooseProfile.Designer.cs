@@ -54,9 +54,9 @@ namespace NAPS2.WinForms
             // 
             this.btnScan.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.btnScan, "btnScan");
-            this.btnScan.Image = global::NAPS2.Icons.scanner_72;
+            this.btnScan.Image = global::NAPS2.Icons.control_play_blue;
             this.btnScan.Name = "btnScan";
-            this.btnScan.UseVisualStyleBackColor = false;
+            this.btnScan.UseVisualStyleBackColor = true;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // btnProfiles

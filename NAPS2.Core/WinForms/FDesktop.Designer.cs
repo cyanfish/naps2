@@ -97,7 +97,7 @@ namespace NAPS2.WinForms
             // 
             // btnQuickScan
             // 
-            this.btnQuickScan.Image = global::NAPS2.Icons.control_play_blue;
+            this.btnQuickScan.Image = global::NAPS2.Icons.control_play_blue_small;
             resources.ApplyResources(this.btnQuickScan, "btnQuickScan");
             this.btnQuickScan.Name = "btnQuickScan";
             this.btnQuickScan.UseVisualStyleBackColor = true;

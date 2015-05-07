@@ -57,7 +57,7 @@ namespace NAPS2.WinForms
                 .Bind(lvProfiles)
                     .WidthToForm()
                     .HeightToForm()
-                .Bind(btnDone, btnProfiles)
+                .Bind(btnProfiles)
                     .BottomToForm()
                 .Bind(btnDone, btnScan)
                     .RightToForm()
