@@ -38,13 +38,12 @@ namespace NAPS2.DI
             Bind<IScannedImageFactory>().To<FileBasedScannedImageFactory>();
             Bind<IScanPerformer>().To<ScanPerformer>();
 #if DEBUG && false
-            Bind<IScanDriver>().To<StubScanDriver>().Named(WiaScanDriver.DRIVER_NAME).WithConstructorArgument("driverName", WiaScanDriver.DRIVER_NAME);
-            Bind<IScanDriver>().To<StubScanDriver>().Named(TwainScanDriver.DRIVER_NAME).WithConstructorArgument("driverName", TwainScanDriver.DRIVER_NAME);
+            Bind<IScanDriverFactory>().To<StubScanDriverFactory>();
 #else
             Bind<IScanDriverFactory>().To<NinjectScanDriverFactory>();
+#endif
             Bind<IScanDriver>().To<WiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
             Bind<IScanDriver>().To<TwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
-#endif
 
             // Config
             Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
