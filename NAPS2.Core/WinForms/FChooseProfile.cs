@@ -118,13 +118,14 @@ namespace NAPS2.WinForms
                 var editSettingsForm = FormFactory.Create<FEditScanSettings>();
                 editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
                 editSettingsForm.ShowDialog();
-                if (editSettingsForm.Result)
+                if (!editSettingsForm.Result)
                 {
-                    profileManager.Profiles.Add(editSettingsForm.ScanSettings);
-                    profileManager.Save();
-                    UpdateProfiles();
-                    lvProfiles.SelectedIndices.Add(0);
+                    return;
                 }
+                profileManager.Profiles.Add(editSettingsForm.ScanSettings);
+                profileManager.Save();
+                UpdateProfiles();
+                lvProfiles.SelectedIndices.Add(0);
             }
             if (SelectedProfile == null)
             {
