@@ -168,4 +168,10 @@
   <data name="hu" xml:space="preserve">
     <value>Magyar</value>
   </data>
+  <data name="hr" xml:space="preserve">
+    <value>Hrvatski</value>
+  </data>
+  <data name="nl" xml:space="preserve">
+    <value>Nederlands</value>
+  </data>
 </root>
