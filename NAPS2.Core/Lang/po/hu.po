@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-13 08:19+0000\n"
-"PO-Revision-Date: 2014-11-13 08:20+0000\n"
-"Last-Translator: Ben <blue0fish@gmail.com>\n"
+"POT-Creation-Date: 2014-11-13 22:01+0000\n"
+"PO-Revision-Date: 2015-05-01 20:51+0000\n"
+"Last-Translator: cyjambo <cyjambo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1415866810.0\n"
+"X-POOTLE-MTIME: 1430513504.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -24,7 +24,7 @@ msgstr "1200 dpi"
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr ""
+msgstr "150 dpi"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
@@ -45,7 +45,7 @@ msgstr "600 dpi"
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr ""
+msgstr "Az NAPS2 újabb verziója elérhető. Frissítsen most?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -68,10 +68,12 @@ msgstr "Névjegy"
 msgid "Add"
 msgstr "Új"
 
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
-msgstr ""
+msgstr "Mind ({0})"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -99,7 +101,7 @@ msgstr "Biztos hogy törli mind a(z) {0} profilt?"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr ""
+msgstr "Automatikus frissítések"
 
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
@@ -152,7 +154,7 @@ msgstr "Kontraszt"
 
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
-msgstr ""
+msgstr "Másolás"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
@@ -163,8 +165,8 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Minden jog fenntartva © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
-msgstr "Minden jog fenntartva © 2012-2013 Ben Olden-Cooligan"
+msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
+msgstr "Minden jog fenntartva © 2012-2014 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -172,8 +174,9 @@ msgstr "Minden jog fenntartva © 2013 Peter De Leeuw"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr ""
+msgstr "Elhagyás"
 
+#: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
@@ -190,24 +193,30 @@ msgstr "Név"
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr ""
+"Szeretnéd, ha a NAPS2 automatikusan ellenőrizné az elérhető frissítéseket?"
 
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
 msgstr "Kész"
 
 #: MiscResources.resx$Download$Message
+#: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 msgid "Download"
-msgstr ""
+msgstr "Letöltés"
+
+#: MiscResources.resx$DownloadError$Message
+msgid "Download Error"
+msgstr "Letöltési hiba"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr ""
+msgstr "Letöltési folyamat"
 
 #: MiscResources.resx$DownloadAndInstall$Message
 #: FUpdate.resx$btnInstall.Text$Message
 msgid "Download and Install"
-msgstr ""
+msgstr "Letöltés és telepítés"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -232,15 +241,11 @@ msgstr "Hiba"
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 msgid "Estimated download size: {0} MB"
-msgstr ""
+msgstr "Becsült letöltési méret: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
 msgstr "EXIF fájl (*.exif)"
-
-#: FTwainGui.resx$$this.Text$Message
-msgid "FTwainGui"
-msgstr ""
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -256,7 +261,7 @@ msgstr "GIF fájl (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr ""
+msgstr "További nyelvek beszerzése"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -276,27 +281,27 @@ msgstr "Ikonok forrása"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
-msgstr ""
+msgstr "Importálás"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
-msgstr ""
+msgstr "A telepítés befejeződött"
 
 #: MiscResources.resx$InstallFailedTitle$Message
 msgid "Installation Failed"
-msgstr ""
+msgstr "A telepítés sikertelen"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr ""
+msgstr "A telepítés sikeres. Újra szeretnéd indítani a NAPS2 programot most?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
-msgstr ""
+msgstr "A telepítés sikertelen"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr ""
+msgstr "Átrendezés"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -316,7 +321,7 @@ msgstr "Eszöztár"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr ""
+msgstr "A PDF-ek kereshetővé tétele karakterfelismeréssel"
 
 #: FChooseProfile.resx$btnProfiles.Text$Message
 msgid "Manage Profiles"
@@ -357,23 +362,23 @@ msgstr "Not Another PDF Scanner 2"
 #: MiscResources.resx$NotNow$Message
 #: FUpdate.resx$btnCancel.Text$Message
 msgid "Not Now"
-msgstr ""
+msgstr "Most nem"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr ""
+msgstr "Karakterfelismerés"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr ""
+msgstr "OCR Letöltés"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr ""
+msgstr "OCR Telepítés"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr ""
+msgstr "Karakterfelismerés nyelve"
 
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
@@ -381,6 +386,10 @@ msgstr ""
 #: FOcrSetup.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Ok"
+
+#: MiscResources.resx$FilesCouldNotBeDownloaded$Message
+msgid "One or more files could not be downloaded"
+msgstr "Egy vagy több fájlt nem sikerült letölteni"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -417,7 +426,7 @@ msgstr "Profilok"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
-msgstr ""
+msgstr "Rendezés"
 
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
@@ -429,7 +438,7 @@ msgstr "Jobbra"
 
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
-msgstr ""
+msgstr "Forgatás"
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
@@ -467,7 +476,7 @@ msgstr "Beolvasott kép"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
-msgstr ""
+msgstr "Összes kijelölése"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
@@ -475,12 +484,14 @@ msgstr "Válasszon profilt a képolvasás elött"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr ""
+msgstr "Válasszon ki legalább egy nyelvet."
 
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
-msgstr ""
+msgstr "Kiválasztva ({0})"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -492,11 +503,13 @@ msgstr "TWAIN meghajtó"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file "{0}" could not be imported"
-msgstr ""
+msgstr "A \"{0}\" fájl nem importálható."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
+"A \"{0}\" fájlt nem lehet importálni. Csak a NAPS2 által generált PDF fájlokat "
+"lehet importálni"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -520,7 +533,7 @@ msgstr "US Letter (8.5x11 in)"
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
-msgstr ""
+msgstr "NAPS2 frissítése"
 
 #: FEditScanSettings.resx$rdbNativeWIA.Text$Message
 msgid "Use native WIA UI"
@@ -533,6 +546,8 @@ msgstr "A következő bállítások használata"
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
 msgstr ""
+"Az karakterfelismerés használatához le kell tölteni az összes szkennelési "
+"nyelvet"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -540,7 +555,7 @@ msgstr "Verzió: {0}"
 
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
-msgstr ""
+msgstr "Nézet"
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -567,16 +582,27 @@ msgstr "Nagyobb"
 msgid "Zoom out"
 msgstr "Kisebb"
 
+#: FAbout.resx$linkLabel1.Text$Message
+msgid "http://sourceforge.com/projects/naps2"
+msgstr "http://sourceforge.com/projects/naps2"
+
+#: FAbout.resx$linkLabel2.Text$Message
+msgid "http://www.fatcow.com/free-icons"
+msgstr "http://www.fatcow.com/free-icons"
+
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgress$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
-msgstr ""
+msgstr "{0} / {1} files"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} / {1}"
+
+#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+#~ msgstr "Minden jog fenntartva © 2012-2013 Ben Olden-Cooligan"

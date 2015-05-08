@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-10 00:50+0000\n"
-"PO-Revision-Date: 2013-12-13 19:03+0000\n"
-"Last-Translator: Ben <blue0fish@gmail.com>\n"
+"POT-Creation-Date: 2014-11-13 22:01+0000\n"
+"PO-Revision-Date: 2015-01-03 18:57+0000\n"
+"Last-Translator: Vladimir <zlatev.email@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1386961412.0\n"
+"X-POOTLE-MTIME: 1420311432.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -21,6 +21,10 @@ msgstr "100 dpi"
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
 msgstr "1200 dpi"
+
+#: SettingsResources.resx$Dpi_150$Message
+msgid "150 dpi"
+msgstr "100 dpi"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
@@ -37,6 +41,11 @@ msgstr "300 dpi"
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
 msgstr "600 dpi"
+
+#: MiscResources.resx$UpdateNow$Message
+#: FUpdate.resx$lblPrompt.Text$Message
+msgid "A newer version of NAPS2 is available. Do you want to update now?"
+msgstr "Налична е нова версия на NAPS2. Искате ли да направите ъпдейт сега ?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -59,9 +68,16 @@ msgstr "Относно"
 msgid "Add"
 msgstr "Добави"
 
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
+msgid "All ({0})"
+msgstr "Всички ({0})"
+
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr ""
+msgstr "Грешка при изпращане на имейл"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
@@ -83,13 +99,17 @@ msgstr "Сигурни ли сте, че искате да изтриете {0} 
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "Сигурни ли сте, че искате да изтриете {0} профила ?"
 
+#: MiscResources.resx$AutoUpdates$Message
+msgid "Automatic Updates"
+msgstr "Автоматично обновяване"
+
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Дълбочина на цвета:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "Bitmap Files (*.bmp)"
+msgstr "Bitmap файл (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
@@ -100,6 +120,9 @@ msgid "Brightness"
 msgstr "Яркост"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Откажи"
 
@@ -129,6 +152,10 @@ msgstr "Изчисти"
 msgid "Contrast"
 msgstr "Контраст"
 
+#: FDesktop.resx$ctxCopy.Text$Message
+msgid "Copy"
+msgstr "Копирай"
+
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
 msgstr "Copyright © 2009 Pavel Sorejs"
@@ -138,13 +165,19 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
 msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Copyright © 2013 Peter De Leeuw"
 
+# Need some more information what does exactly this function do ?
+#: FDesktop.resx$tsDeinterleave.Text$Message
+msgid "Deinterleave"
+msgstr "Deinterleave"
+
+#: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
@@ -158,9 +191,32 @@ msgstr "Устройство"
 msgid "Display name"
 msgstr "Име за показване"
 
+#: MiscResources.resx$EnableAutoUpdates$Message
+msgid "Do you want NAPS2 to automatically check for updates?"
+msgstr "Искате ли NAPS2 автоматично да проверява за ъпдейти ?"
+
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
 msgstr "Готово"
+
+#: MiscResources.resx$Download$Message
+#: FUpdate.resx$btnDownload.Text$Message
+#: FOcrLanguageDownload.resx$btnDownload.Text$Message
+msgid "Download"
+msgstr "Сваляне"
+
+#: MiscResources.resx$DownloadError$Message
+msgid "Download Error"
+msgstr "Грешка при сваляне"
+
+#: FDownloadProgress.resx$$this.Text$Message
+msgid "Download Progress"
+msgstr "Напредък на свалянето"
+
+#: MiscResources.resx$DownloadAndInstall$Message
+#: FUpdate.resx$btnInstall.Text$Message
+msgid "Download and Install"
+msgstr "Свали и инсталирай"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -170,7 +226,7 @@ msgstr "Двустранно"
 msgid "Edit"
 msgstr "Редактиране"
 
-#: FDesktop.resx$tsPDFEmail.Text$Message
+#: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
 msgstr "Изпрати PDF по имейл"
 
@@ -182,13 +238,18 @@ msgstr "Подобрен Windows MetaFile (*.emf)"
 msgid "Error"
 msgstr "Грешка"
 
+#: MiscResources.resx$EstimatedDownloadSize$Message
+#: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
+msgid "Estimated download size: {0} MB"
+msgstr "Приблизителен размер за сваляне: {0} MB"
+
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
 msgstr "Exchangeable Image File (*.exif)"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Feeder"
+msgstr "Захранваща тава за листи"
 
 #: FDesktop.resx$tsFlip.Text$Message
 msgid "Flip"
@@ -197,6 +258,10 @@ msgstr "Обръщане"
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
 msgstr "GIF файл  (*.gif)"
+
+#: FOcrSetup.resx$linkGetLanguages.Text$Message
+msgid "Get more languages"
+msgstr "Инсталирай други езици"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -214,6 +279,30 @@ msgstr "Хоризонтално подравняване"
 msgid "Icons from"
 msgstr "Икони от"
 
+#: FDesktop.resx$tsImport.Text$Message
+msgid "Import"
+msgstr "Внасяне"
+
+#: MiscResources.resx$InstallComplete$Message
+msgid "Installation Complete"
+msgstr "Инсталацията е завършена"
+
+#: MiscResources.resx$InstallFailedTitle$Message
+msgid "Installation Failed"
+msgstr "Неуспешна инсталация"
+
+#: MiscResources.resx$InstallCompletePromptRestart$Message
+msgid "Installation complete. Do you want to restart NAPS2 now?"
+msgstr "Инсталацията е завършена. Искате ли да рестартирате NAPS2 сега ?"
+
+#: MiscResources.resx$InstallFailed$Message
+msgid "Installation failed"
+msgstr "Неуспешна инсталация"
+
+#: FDesktop.resx$tsInterleave.Text$Message
+msgid "Interleave"
+msgstr "Interleave"
+
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG файл (*.jpg, *.jpeg)"
@@ -229,6 +318,10 @@ msgstr "Ляво"
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
 msgstr "Основна лента с инструменти"
+
+#: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
+msgid "Make PDFs searchable using OCR"
+msgstr "Създай PDF с възможност за търсене посредством OCR"
 
 #: FChooseProfile.resx$btnProfiles.Text$Message
 msgid "Manage Profiles"
@@ -266,11 +359,37 @@ msgstr "Не бе открито устройство за сканиране"
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
 
+#: MiscResources.resx$NotNow$Message
+#: FUpdate.resx$btnCancel.Text$Message
+msgid "Not Now"
+msgstr "Не сега"
+
+#: FDesktop.resx$tsOcr.Text$Message
+msgid "OCR"
+msgstr "OCR"
+
+#: FOcrLanguageDownload.resx$$this.Text$Message
+msgid "OCR Download"
+msgstr "Сваляне на OCR"
+
+#: FOcrSetup.resx$$this.Text$Message
+msgid "OCR Setup"
+msgstr "Настройки на OCR"
+
+#: FOcrSetup.resx$label1.Text$Message
+msgid "OCR language"
+msgstr "Език на OCR"
+
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
+
+#: MiscResources.resx$FilesCouldNotBeDownloaded$Message
+msgid "One or more files could not be downloaded"
+msgstr "Един или няколко файла не могат да бъдат свалени"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -305,6 +424,10 @@ msgstr "Настройки на профила"
 msgid "Profiles"
 msgstr "Профили"
 
+#: FDesktop.resx$tsdReorder.Text$Message
+msgid "Reorder"
+msgstr "Пренареждане"
+
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Резолюция"
@@ -312,6 +435,10 @@ msgstr "Резолюция"
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Дясно"
+
+#: FDesktop.resx$tsdRotate.Text$Message
+msgid "Rotate"
+msgstr "Завъртане"
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
@@ -321,11 +448,11 @@ msgstr "Завъртане наляво"
 msgid "Rotate Right"
 msgstr "Завъртане надясно"
 
-#: FDesktop.resx$tsSaveImage.Text$Message
+#: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
 msgstr "Запис на изображенията"
 
-#: FDesktop.resx$tsSavePDF.Text$Message
+#: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
 msgstr "Запис на PDF"
 
@@ -347,9 +474,24 @@ msgstr "Сканиране"
 msgid "Scanned Image"
 msgstr "Сканирано изображение"
 
+#: FDesktop.resx$ctxSelectAll.Text$Message
+msgid "Select All"
+msgstr "Избери всички"
+
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
 msgstr "Избери Профил преди да натиснеш 'Сканиране'"
+
+#: FOcrLanguageDownload.resx$label3.Text$Message
+msgid "Select one or more languages"
+msgstr "Избери един или повече езици"
+
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
+msgid "Selected ({0})"
+msgstr "Избрани ({0})"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -357,11 +499,21 @@ msgstr "TIFF файл (*.tiff, *.tif)"
 
 #: FEditScanSettings.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
-msgstr "TWAIN драйвер"
+msgstr "Файлът \"{0}\" не може да бъде внесен"
+
+#: MiscResources.resx$ImportErrorCouldNot$Message
+msgid "The file "{0}" could not be imported"
+msgstr "Файлът \"{0}\" не може да бъде внесен"
+
+#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
+msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr ""
+"Файлът \"{0}\" не може да бъде внесен. Само PDF файлове, създадени от NAPS2, "
+"могат да бъдат внесени"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Вече има файл '%1'. Искате ли да бъде презаписан?"
+msgstr "Вече има файл {0} . Искате ли да бъде презаписан?"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -373,11 +525,15 @@ msgstr "Избраният скенер е не е достъпен"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x14 in)"
+msgstr "US Legal (8.5x14 инча)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "US Писмо (8.5x14 in)"
+
+#: FUpdate.resx$$this.Text$Message
+msgid "Update NAPS2"
+msgstr "Ъпдeйт на NAPS2 "
 
 #: FEditScanSettings.resx$rdbNativeWIA.Text$Message
 msgid "Use native WIA UI"
@@ -387,9 +543,19 @@ msgstr "Използвай вградения WIA интерфейс"
 msgid "Use predefined settings"
 msgstr "Използвай готови настройки"
 
+#: FOcrLanguageDownload.resx$label1.Text$Message
+msgid "Using OCR requires you to download each language you want to scan"
+msgstr ""
+"За използването на OCR е нужно да свалите всеки от езиците, които искате да "
+"сканирате "
+
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
 msgstr "Версия {0}"
+
+#: FDesktop.resx$ctxView.Text$Message
+msgid "View"
+msgstr "Изглед"
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -405,16 +571,16 @@ msgstr "Нямате права за създаването на файлове 
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
-msgstr ""
+msgstr "Увеличаване/Намаляване"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom in"
-msgstr ""
+msgstr "Увеличаване"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom out"
-msgstr ""
+msgstr "Намаляване"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://sourceforge.com/projects/naps2"
@@ -424,9 +590,22 @@ msgstr "http://sourceforge.com/projects/naps2"
 msgid "http://www.fatcow.com/free-icons"
 msgstr "http://www.fatcow.com/free-icons"
 
+#: MiscResources.resx$SizeProgress$Message
+#: FDownloadProgress.resx$labelSub.Text$Message
+msgid "{0} / {1} MB"
+msgstr "{0} / {1} MB"
+
+#: MiscResources.resx$FilesProgress$Message
+#: FDownloadProgress.resx$labelTop.Text$Message
+msgid "{0} / {1} files"
+msgstr "{0} / {1} файлове"
+
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} от {1}"
+
+#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+#~ msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
 
 #~ msgid "FTwainGui"
 #~ msgstr "FTwainGui"

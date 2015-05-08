@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-10 00:50+0000\n"
+"POT-Creation-Date: 2014-11-13 22:01+0000\n"
 "PO-Revision-Date: 2013-11-12 03:13+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,10 @@ msgstr "100 dpi"
 msgid "1200 dpi"
 msgstr "1200 dpi"
 
+#: SettingsResources.resx$Dpi_150$Message
+msgid "150 dpi"
+msgstr ""
+
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
 msgstr "200 dpi"
@@ -37,6 +41,11 @@ msgstr "300 dpi"
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
 msgstr "600 dpi"
+
+#: MiscResources.resx$UpdateNow$Message
+#: FUpdate.resx$lblPrompt.Text$Message
+msgid "A newer version of NAPS2 is available. Do you want to update now?"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -58,6 +67,13 @@ msgstr "O programu"
 #: FManageProfiles.resx$btnAdd.Text$Message
 msgid "Add"
 msgstr "Přidat"
+
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
+msgid "All ({0})"
+msgstr ""
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -83,6 +99,10 @@ msgstr "Opravdu si přejete smazat položku {0}?"
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "Jste si jisti, že chcete smazat profily {0}? "
 
+#: MiscResources.resx$AutoUpdates$Message
+msgid "Automatic Updates"
+msgstr ""
+
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Bitová hloubka"
@@ -100,6 +120,9 @@ msgid "Brightness"
 msgstr "Jas"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -129,6 +152,10 @@ msgstr "Vymazat"
 msgid "Contrast"
 msgstr "Kontrast"
 
+#: FDesktop.resx$ctxCopy.Text$Message
+msgid "Copy"
+msgstr ""
+
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
 msgstr ""
@@ -138,13 +165,18 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr ""
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
 msgstr ""
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr ""
 
+#: FDesktop.resx$tsDeinterleave.Text$Message
+msgid "Deinterleave"
+msgstr ""
+
+#: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
@@ -158,9 +190,32 @@ msgstr "Zařízení"
 msgid "Display name"
 msgstr "Zobrazované jméno"
 
+#: MiscResources.resx$EnableAutoUpdates$Message
+msgid "Do you want NAPS2 to automatically check for updates?"
+msgstr ""
+
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
 msgstr "Hotovo"
+
+#: MiscResources.resx$Download$Message
+#: FUpdate.resx$btnDownload.Text$Message
+#: FOcrLanguageDownload.resx$btnDownload.Text$Message
+msgid "Download"
+msgstr ""
+
+#: MiscResources.resx$DownloadError$Message
+msgid "Download Error"
+msgstr ""
+
+#: FDownloadProgress.resx$$this.Text$Message
+msgid "Download Progress"
+msgstr ""
+
+#: MiscResources.resx$DownloadAndInstall$Message
+#: FUpdate.resx$btnInstall.Text$Message
+msgid "Download and Install"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -170,7 +225,7 @@ msgstr "Duplexní"
 msgid "Edit"
 msgstr "Upravit"
 
-#: FDesktop.resx$tsPDFEmail.Text$Message
+#: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
 msgstr "PDF e-mailem"
 
@@ -181,6 +236,11 @@ msgstr "Rozšířený Windows MetaFile (*.emf)"
 #: MiscResources.resx$Error$Message
 msgid "Error"
 msgstr "Chyba"
+
+#: MiscResources.resx$EstimatedDownloadSize$Message
+#: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
+msgid "Estimated download size: {0} MB"
+msgstr ""
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -198,6 +258,10 @@ msgstr "Překlopit"
 msgid "GIF File (*.gif)"
 msgstr "Soubor GIF (*.gif)"
 
+#: FOcrSetup.resx$linkGetLanguages.Text$Message
+msgid "Get more languages"
+msgstr ""
+
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
 msgstr "Sklo"
@@ -214,6 +278,30 @@ msgstr "Překlopit vodorovně"
 msgid "Icons from"
 msgstr "Ikony z"
 
+#: FDesktop.resx$tsImport.Text$Message
+msgid "Import"
+msgstr ""
+
+#: MiscResources.resx$InstallComplete$Message
+msgid "Installation Complete"
+msgstr ""
+
+#: MiscResources.resx$InstallFailedTitle$Message
+msgid "Installation Failed"
+msgstr ""
+
+#: MiscResources.resx$InstallCompletePromptRestart$Message
+msgid "Installation complete. Do you want to restart NAPS2 now?"
+msgstr ""
+
+#: MiscResources.resx$InstallFailed$Message
+msgid "Installation failed"
+msgstr ""
+
+#: FDesktop.resx$tsInterleave.Text$Message
+msgid "Interleave"
+msgstr ""
+
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "Soubor JPEG (*.jpg, *.jpeg) "
@@ -229,6 +317,10 @@ msgstr "Vlevo"
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
 msgstr "Hlavní panel"
+
+#: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
+msgid "Make PDFs searchable using OCR"
+msgstr ""
 
 #: FChooseProfile.resx$btnProfiles.Text$Message
 msgid "Manage Profiles"
@@ -266,11 +358,37 @@ msgstr "Nenalezeno žádné skenovací zařízení"
 msgid "Not Another PDF Scanner 2"
 msgstr ""
 
+#: MiscResources.resx$NotNow$Message
+#: FUpdate.resx$btnCancel.Text$Message
+msgid "Not Now"
+msgstr ""
+
+#: FDesktop.resx$tsOcr.Text$Message
+msgid "OCR"
+msgstr ""
+
+#: FOcrLanguageDownload.resx$$this.Text$Message
+msgid "OCR Download"
+msgstr ""
+
+#: FOcrSetup.resx$$this.Text$Message
+msgid "OCR Setup"
+msgstr ""
+
+#: FOcrSetup.resx$label1.Text$Message
+msgid "OCR language"
+msgstr ""
+
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
+
+#: MiscResources.resx$FilesCouldNotBeDownloaded$Message
+msgid "One or more files could not be downloaded"
+msgstr ""
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -305,6 +423,10 @@ msgstr "Nastavení profilu"
 msgid "Profiles"
 msgstr "Profily"
 
+#: FDesktop.resx$tsdReorder.Text$Message
+msgid "Reorder"
+msgstr ""
+
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Rozlišení"
@@ -312,6 +434,10 @@ msgstr "Rozlišení"
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Vpravo"
+
+#: FDesktop.resx$tsdRotate.Text$Message
+msgid "Rotate"
+msgstr ""
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
@@ -321,11 +447,11 @@ msgstr "Otočit vlevo"
 msgid "Rotate Right"
 msgstr "Otočit vpravo"
 
-#: FDesktop.resx$tsSaveImage.Text$Message
+#: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
 msgstr "Uložit obrázek"
 
-#: FDesktop.resx$tsSavePDF.Text$Message
+#: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
 msgstr "Uložit PDF"
 
@@ -347,9 +473,24 @@ msgstr "Skenovat"
 msgid "Scanned Image"
 msgstr "Naskenovaný obrázek"
 
+#: FDesktop.resx$ctxSelectAll.Text$Message
+msgid "Select All"
+msgstr ""
+
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
 msgstr "Vyberte profil před spuštěním skenování"
+
+#: FOcrLanguageDownload.resx$label3.Text$Message
+msgid "Select one or more languages"
+msgstr ""
+
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
+msgid "Selected ({0})"
+msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -358,6 +499,14 @@ msgstr "Soubor TIFF (*.tiff, *.tif)"
 #: FEditScanSettings.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
 msgstr "Ovladač TWAIN"
+
+#: MiscResources.resx$ImportErrorCouldNot$Message
+msgid "The file "{0}" could not be imported"
+msgstr ""
+
+#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
+msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr ""
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -379,6 +528,10 @@ msgstr ""
 msgid "US Letter (8.5x11 in)"
 msgstr ""
 
+#: FUpdate.resx$$this.Text$Message
+msgid "Update NAPS2"
+msgstr ""
+
 #: FEditScanSettings.resx$rdbNativeWIA.Text$Message
 msgid "Use native WIA UI"
 msgstr "Použít nativní WIA UI"
@@ -387,9 +540,17 @@ msgstr "Použít nativní WIA UI"
 msgid "Use predefined settings"
 msgstr "Použít defaultní nastavení"
 
+#: FOcrLanguageDownload.resx$label1.Text$Message
+msgid "Using OCR requires you to download each language you want to scan"
+msgstr ""
+
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
 msgstr "Verze {0}"
+
+#: FDesktop.resx$ctxView.Text$Message
+msgid "View"
+msgstr ""
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -422,6 +583,16 @@ msgstr ""
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
+msgstr ""
+
+#: MiscResources.resx$SizeProgress$Message
+#: FDownloadProgress.resx$labelSub.Text$Message
+msgid "{0} / {1} MB"
+msgstr ""
+
+#: MiscResources.resx$FilesProgress$Message
+#: FDownloadProgress.resx$labelTop.Text$Message
+msgid "{0} / {1} files"
 msgstr ""
 
 #: MiscResources.resx$PdfStatus$Message

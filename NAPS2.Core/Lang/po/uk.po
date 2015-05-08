@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-10 00:50+0000\n"
+"POT-Creation-Date: 2014-11-13 22:01+0000\n"
 "PO-Revision-Date: 2013-11-10 00:30+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,11 @@ msgstr "100 т/д"
 msgid "1200 dpi"
 msgstr "1200 т/д"
 
+#: SettingsResources.resx$Dpi_150$Message
+#, fuzzy
+msgid "150 dpi"
+msgstr "100 т/д"
+
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
 msgstr "200 т/д"
@@ -37,6 +42,11 @@ msgstr "300 т/д"
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
 msgstr "600 т/д"
+
+#: MiscResources.resx$UpdateNow$Message
+#: FUpdate.resx$lblPrompt.Text$Message
+msgid "A newer version of NAPS2 is available. Do you want to update now?"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -58,6 +68,13 @@ msgstr "Про програму"
 #: FManageProfiles.resx$btnAdd.Text$Message
 msgid "Add"
 msgstr "Додати"
+
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
+msgid "All ({0})"
+msgstr ""
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -83,6 +100,10 @@ msgstr "Ви справді бажаєте видалити {0} профілі(�
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "Ви справді бажаєте видалити {0} профілів?"
 
+#: MiscResources.resx$AutoUpdates$Message
+msgid "Automatic Updates"
+msgstr ""
+
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Глибина кольору"
@@ -100,6 +121,9 @@ msgid "Brightness"
 msgstr "Яскравість"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -129,6 +153,10 @@ msgstr "Очистити"
 msgid "Contrast"
 msgstr "Контрастність"
 
+#: FDesktop.resx$ctxCopy.Text$Message
+msgid "Copy"
+msgstr ""
+
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
 msgstr "Авторські права належать Pavel Sorejs, 2009"
@@ -138,13 +166,19 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Авторські права належать Michael Adams, 2012"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+#, fuzzy
+msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
 msgstr "Авторські права належать Ben Olden-Cooligan, 2012-2013 "
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Авторські права належать Peter De Leeuw, 2013"
 
+#: FDesktop.resx$tsDeinterleave.Text$Message
+msgid "Deinterleave"
+msgstr ""
+
+#: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
@@ -158,9 +192,32 @@ msgstr "Пристрій"
 msgid "Display name"
 msgstr "Назва"
 
+#: MiscResources.resx$EnableAutoUpdates$Message
+msgid "Do you want NAPS2 to automatically check for updates?"
+msgstr ""
+
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
 msgstr "Завершити"
+
+#: MiscResources.resx$Download$Message
+#: FUpdate.resx$btnDownload.Text$Message
+#: FOcrLanguageDownload.resx$btnDownload.Text$Message
+msgid "Download"
+msgstr ""
+
+#: MiscResources.resx$DownloadError$Message
+msgid "Download Error"
+msgstr ""
+
+#: FDownloadProgress.resx$$this.Text$Message
+msgid "Download Progress"
+msgstr ""
+
+#: MiscResources.resx$DownloadAndInstall$Message
+#: FUpdate.resx$btnInstall.Text$Message
+msgid "Download and Install"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -170,7 +227,7 @@ msgstr "Двосторонній"
 msgid "Edit"
 msgstr "Редагувати"
 
-#: FDesktop.resx$tsPDFEmail.Text$Message
+#: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
 msgstr "PDF поштою"
 
@@ -181,6 +238,11 @@ msgstr "Розширений метафайл (*.emf)"
 #: MiscResources.resx$Error$Message
 msgid "Error"
 msgstr "Помилка"
+
+#: MiscResources.resx$EstimatedDownloadSize$Message
+#: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
+msgid "Estimated download size: {0} MB"
+msgstr ""
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -198,6 +260,10 @@ msgstr "Відзеркалити"
 msgid "GIF File (*.gif)"
 msgstr "GIF файл (*.gif)"
 
+#: FOcrSetup.resx$linkGetLanguages.Text$Message
+msgid "Get more languages"
+msgstr ""
+
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
 msgstr "Зі скла"
@@ -214,6 +280,30 @@ msgstr "Горизонтальне вирівнювання"
 msgid "Icons from"
 msgstr "Піктограми взяті з"
 
+#: FDesktop.resx$tsImport.Text$Message
+msgid "Import"
+msgstr ""
+
+#: MiscResources.resx$InstallComplete$Message
+msgid "Installation Complete"
+msgstr ""
+
+#: MiscResources.resx$InstallFailedTitle$Message
+msgid "Installation Failed"
+msgstr ""
+
+#: MiscResources.resx$InstallCompletePromptRestart$Message
+msgid "Installation complete. Do you want to restart NAPS2 now?"
+msgstr ""
+
+#: MiscResources.resx$InstallFailed$Message
+msgid "Installation failed"
+msgstr ""
+
+#: FDesktop.resx$tsInterleave.Text$Message
+msgid "Interleave"
+msgstr ""
+
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG файл (*.jpg, *.jpeg)"
@@ -229,6 +319,10 @@ msgstr "Вліво"
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
 msgstr "Головна панель інструментів"
+
+#: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
+msgid "Make PDFs searchable using OCR"
+msgstr ""
 
 #: FChooseProfile.resx$btnProfiles.Text$Message
 msgid "Manage Profiles"
@@ -266,11 +360,37 @@ msgstr "Не знайдено жодного сканера"
 msgid "Not Another PDF Scanner 2"
 msgstr ""
 
+#: MiscResources.resx$NotNow$Message
+#: FUpdate.resx$btnCancel.Text$Message
+msgid "Not Now"
+msgstr ""
+
+#: FDesktop.resx$tsOcr.Text$Message
+msgid "OCR"
+msgstr ""
+
+#: FOcrLanguageDownload.resx$$this.Text$Message
+msgid "OCR Download"
+msgstr ""
+
+#: FOcrSetup.resx$$this.Text$Message
+msgid "OCR Setup"
+msgstr ""
+
+#: FOcrSetup.resx$label1.Text$Message
+msgid "OCR language"
+msgstr ""
+
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
+
+#: MiscResources.resx$FilesCouldNotBeDownloaded$Message
+msgid "One or more files could not be downloaded"
+msgstr ""
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -305,6 +425,10 @@ msgstr "Налаштовування профілю"
 msgid "Profiles"
 msgstr "Профілі"
 
+#: FDesktop.resx$tsdReorder.Text$Message
+msgid "Reorder"
+msgstr ""
+
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Роздільна здатність"
@@ -312,6 +436,10 @@ msgstr "Роздільна здатність"
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Вправо"
+
+#: FDesktop.resx$tsdRotate.Text$Message
+msgid "Rotate"
+msgstr ""
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
@@ -321,11 +449,11 @@ msgstr "Обернути ліворуч"
 msgid "Rotate Right"
 msgstr "Обернути праворуч"
 
-#: FDesktop.resx$tsSaveImage.Text$Message
+#: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
 msgstr "Зберегти як зображення"
 
-#: FDesktop.resx$tsSavePDF.Text$Message
+#: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
 msgstr "Зберегти PDF"
 
@@ -347,9 +475,24 @@ msgstr "Сканувати"
 msgid "Scanned Image"
 msgstr "Зіскановане зображення"
 
+#: FDesktop.resx$ctxSelectAll.Text$Message
+msgid "Select All"
+msgstr ""
+
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
 msgstr "Виберіть профіль перед скануванням"
+
+#: FOcrLanguageDownload.resx$label3.Text$Message
+msgid "Select one or more languages"
+msgstr ""
+
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
+msgid "Selected ({0})"
+msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -358,6 +501,14 @@ msgstr "TIFF файл (*.tiff, *.tif)"
 #: FEditScanSettings.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
 msgstr "TWAIN драйвер"
+
+#: MiscResources.resx$ImportErrorCouldNot$Message
+msgid "The file "{0}" could not be imported"
+msgstr ""
+
+#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
+msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr ""
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -379,6 +530,10 @@ msgstr ""
 msgid "US Letter (8.5x11 in)"
 msgstr ""
 
+#: FUpdate.resx$$this.Text$Message
+msgid "Update NAPS2"
+msgstr ""
+
 #: FEditScanSettings.resx$rdbNativeWIA.Text$Message
 msgid "Use native WIA UI"
 msgstr "Рідний інтерфейс сканера WIA UI"
@@ -387,9 +542,17 @@ msgstr "Рідний інтерфейс сканера WIA UI"
 msgid "Use predefined settings"
 msgstr "Попередньо визначені параметри"
 
+#: FOcrLanguageDownload.resx$label1.Text$Message
+msgid "Using OCR requires you to download each language you want to scan"
+msgstr ""
+
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
 msgstr "Версія {0}"
+
+#: FDesktop.resx$ctxView.Text$Message
+msgid "View"
+msgstr ""
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -424,6 +587,19 @@ msgstr ""
 msgid "http://www.fatcow.com/free-icons"
 msgstr ""
 
+#: MiscResources.resx$SizeProgress$Message
+#: FDownloadProgress.resx$labelSub.Text$Message
+msgid "{0} / {1} MB"
+msgstr ""
+
+#: MiscResources.resx$FilesProgress$Message
+#: FDownloadProgress.resx$labelTop.Text$Message
+msgid "{0} / {1} files"
+msgstr ""
+
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr ""
+
+#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+#~ msgstr "Авторські права належать Ben Olden-Cooligan, 2012-2013 "

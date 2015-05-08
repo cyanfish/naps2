@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-10 00:50+0000\n"
+"POT-Creation-Date: 2014-11-13 22:01+0000\n"
 "PO-Revision-Date: 2013-11-10 00:21+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,10 @@ msgstr "100 ppp"
 msgid "1200 dpi"
 msgstr "1200 ppp"
 
+#: SettingsResources.resx$Dpi_150$Message
+msgid "150 dpi"
+msgstr ""
+
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
 msgstr "200 ppp"
@@ -37,6 +41,11 @@ msgstr "300 ppp"
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
 msgstr "600 ppp"
+
+#: MiscResources.resx$UpdateNow$Message
+#: FUpdate.resx$lblPrompt.Text$Message
+msgid "A newer version of NAPS2 is available. Do you want to update now?"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -58,6 +67,13 @@ msgstr "À propos de"
 #: FManageProfiles.resx$btnAdd.Text$Message
 msgid "Add"
 msgstr "Ajouter"
+
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
+msgid "All ({0})"
+msgstr ""
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -83,6 +99,10 @@ msgstr "Êtes-vous sûr de vouloir supprimer {0} élément(s) ?"
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "Êtes-vous certain de vouloir supprimer {0} profil(s) ?"
 
+#: MiscResources.resx$AutoUpdates$Message
+msgid "Automatic Updates"
+msgstr ""
+
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Profondeur d'échantillonnage"
@@ -100,6 +120,9 @@ msgid "Brightness"
 msgstr "Luminosité"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -129,6 +152,10 @@ msgstr "Effacer"
 msgid "Contrast"
 msgstr "Contraste"
 
+#: FDesktop.resx$ctxCopy.Text$Message
+msgid "Copy"
+msgstr ""
+
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
 msgstr "Copyright © 2009 Pavel Sorejs"
@@ -138,13 +165,18 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
-msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
+msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
+msgstr ""
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Copyright © 2013 Peter De Leeuw"
 
+#: FDesktop.resx$tsDeinterleave.Text$Message
+msgid "Deinterleave"
+msgstr ""
+
+#: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
@@ -158,9 +190,32 @@ msgstr "Périphérique"
 msgid "Display name"
 msgstr "Affiche le nom"
 
+#: MiscResources.resx$EnableAutoUpdates$Message
+msgid "Do you want NAPS2 to automatically check for updates?"
+msgstr ""
+
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
 msgstr "Terminé"
+
+#: MiscResources.resx$Download$Message
+#: FUpdate.resx$btnDownload.Text$Message
+#: FOcrLanguageDownload.resx$btnDownload.Text$Message
+msgid "Download"
+msgstr ""
+
+#: MiscResources.resx$DownloadError$Message
+msgid "Download Error"
+msgstr ""
+
+#: FDownloadProgress.resx$$this.Text$Message
+msgid "Download Progress"
+msgstr ""
+
+#: MiscResources.resx$DownloadAndInstall$Message
+#: FUpdate.resx$btnInstall.Text$Message
+msgid "Download and Install"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -170,7 +225,7 @@ msgstr "Recto-verso"
 msgid "Edit"
 msgstr "Éditer"
 
-#: FDesktop.resx$tsPDFEmail.Text$Message
+#: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
 msgstr "envoyer le PDF par courriel"
 
@@ -181,6 +236,11 @@ msgstr "Métafichier Windows (*.emf)"
 #: MiscResources.resx$Error$Message
 msgid "Error"
 msgstr "Erreur"
+
+#: MiscResources.resx$EstimatedDownloadSize$Message
+#: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
+msgid "Estimated download size: {0} MB"
+msgstr ""
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -198,6 +258,10 @@ msgstr "Retourner"
 msgid "GIF File (*.gif)"
 msgstr "Fichier GIF (*.gif)"
 
+#: FOcrSetup.resx$linkGetLanguages.Text$Message
+msgid "Get more languages"
+msgstr ""
+
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
 msgstr "Vitre"
@@ -214,6 +278,30 @@ msgstr "Alignement horizontal"
 msgid "Icons from"
 msgstr "Icônes venant de"
 
+#: FDesktop.resx$tsImport.Text$Message
+msgid "Import"
+msgstr ""
+
+#: MiscResources.resx$InstallComplete$Message
+msgid "Installation Complete"
+msgstr ""
+
+#: MiscResources.resx$InstallFailedTitle$Message
+msgid "Installation Failed"
+msgstr ""
+
+#: MiscResources.resx$InstallCompletePromptRestart$Message
+msgid "Installation complete. Do you want to restart NAPS2 now?"
+msgstr ""
+
+#: MiscResources.resx$InstallFailed$Message
+msgid "Installation failed"
+msgstr ""
+
+#: FDesktop.resx$tsInterleave.Text$Message
+msgid "Interleave"
+msgstr ""
+
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "Fichier JPEG (*.jpg, *.jpeg)"
@@ -229,6 +317,10 @@ msgstr "Gauche"
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
 msgstr "Barre d'outils principale"
+
+#: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
+msgid "Make PDFs searchable using OCR"
+msgstr ""
 
 #: FChooseProfile.resx$btnProfiles.Text$Message
 msgid "Manage Profiles"
@@ -266,11 +358,37 @@ msgstr "Aucun scanner trouvé"
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
 
+#: MiscResources.resx$NotNow$Message
+#: FUpdate.resx$btnCancel.Text$Message
+msgid "Not Now"
+msgstr ""
+
+#: FDesktop.resx$tsOcr.Text$Message
+msgid "OCR"
+msgstr ""
+
+#: FOcrLanguageDownload.resx$$this.Text$Message
+msgid "OCR Download"
+msgstr ""
+
+#: FOcrSetup.resx$$this.Text$Message
+msgid "OCR Setup"
+msgstr ""
+
+#: FOcrSetup.resx$label1.Text$Message
+msgid "OCR language"
+msgstr ""
+
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
+
+#: MiscResources.resx$FilesCouldNotBeDownloaded$Message
+msgid "One or more files could not be downloaded"
+msgstr ""
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -305,6 +423,10 @@ msgstr "Paramètres du profil"
 msgid "Profiles"
 msgstr "Profils"
 
+#: FDesktop.resx$tsdReorder.Text$Message
+msgid "Reorder"
+msgstr ""
+
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Résolution"
@@ -312,6 +434,10 @@ msgstr "Résolution"
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Droite"
+
+#: FDesktop.resx$tsdRotate.Text$Message
+msgid "Rotate"
+msgstr ""
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
@@ -321,11 +447,11 @@ msgstr "Tourner à gauche"
 msgid "Rotate Right"
 msgstr "Tourner à droite"
 
-#: FDesktop.resx$tsSaveImage.Text$Message
+#: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
 msgstr "Enregistrer les images"
 
-#: FDesktop.resx$tsSavePDF.Text$Message
+#: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
 msgstr "Enregistrer le PDF"
 
@@ -347,9 +473,24 @@ msgstr "Numériser"
 msgid "Scanned Image"
 msgstr "Image numérisée"
 
+#: FDesktop.resx$ctxSelectAll.Text$Message
+msgid "Select All"
+msgstr ""
+
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
 msgstr "Choisissez un profil avant de numériser"
+
+#: FOcrLanguageDownload.resx$label3.Text$Message
+msgid "Select one or more languages"
+msgstr ""
+
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
+msgid "Selected ({0})"
+msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -358,6 +499,14 @@ msgstr "Fichier TIFF (*.tiff, *.tif)"
 #: FEditScanSettings.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
 msgstr "Pilote TWAIN"
+
+#: MiscResources.resx$ImportErrorCouldNot$Message
+msgid "The file "{0}" could not be imported"
+msgstr ""
+
+#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
+msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgstr ""
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -379,6 +528,10 @@ msgstr "US Legal (8.5x14 in)"
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 in)"
 
+#: FUpdate.resx$$this.Text$Message
+msgid "Update NAPS2"
+msgstr ""
+
 #: FEditScanSettings.resx$rdbNativeWIA.Text$Message
 msgid "Use native WIA UI"
 msgstr "Utiliser l'interface WIA native"
@@ -387,9 +540,17 @@ msgstr "Utiliser l'interface WIA native"
 msgid "Use predefined settings"
 msgstr "Utiliser une configuration prédéfinie"
 
+#: FOcrLanguageDownload.resx$label1.Text$Message
+msgid "Using OCR requires you to download each language you want to scan"
+msgstr ""
+
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
 msgstr "Version {0}"
+
+#: FDesktop.resx$ctxView.Text$Message
+msgid "View"
+msgstr ""
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -424,9 +585,22 @@ msgstr "http://sourceforge.com/projects/naps2"
 msgid "http://www.fatcow.com/free-icons"
 msgstr "http://www.fatcow.com/free-icons"
 
+#: MiscResources.resx$SizeProgress$Message
+#: FDownloadProgress.resx$labelSub.Text$Message
+msgid "{0} / {1} MB"
+msgstr ""
+
+#: MiscResources.resx$FilesProgress$Message
+#: FDownloadProgress.resx$labelTop.Text$Message
+msgid "{0} / {1} files"
+msgstr ""
+
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} sur {1}"
+
+#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
+#~ msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
 
 #~ msgid "FTwainGui"
 #~ msgstr "Interface TWAIN"
