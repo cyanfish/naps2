@@ -184,7 +184,7 @@
         <value>4</value>
     </data>
     <data name="btnChooseDevice.Text" xml:space="preserve">
-        <value>Elige dispositivo</value>
+        <value>Seleccione un dispositivo</value>
     </data>
     <data name="&gt;&gt;btnChooseDevice.Name" xml:space="preserve">
         <value>btnChooseDevice</value>
@@ -262,7 +262,7 @@
         <value>18</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>SI</value>
+        <value>Aceptar</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -289,7 +289,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Usar configuracion predefinida</value>
+        <value>Usar configuración predefinida</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -316,7 +316,7 @@
         <value>6</value>
     </data>
     <data name="rdbNativeWIA.Text" xml:space="preserve">
-        <value>Usar UI nativo WIA</value>
+        <value>Usar interfaz nativo WIA</value>
     </data>
     <data name="&gt;&gt;rdbNativeWIA.Name" xml:space="preserve">
         <value>rdbNativeWIA</value>
@@ -367,7 +367,7 @@
         <value>9</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Produndidad Bit:</value>
+        <value>Profundidad de bit:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -421,7 +421,7 @@
         <value>11</value>
     </data>
     <data name="label4.Text" xml:space="preserve">
-        <value>Tamaño de pagina:</value>
+        <value>Tamaño de página:</value>
     </data>
     <data name="&gt;&gt;label4.Name" xml:space="preserve">
         <value>label4</value>
@@ -499,7 +499,7 @@
         <value>13</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Resolucion:</value>
+        <value>Resolución:</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -822,7 +822,7 @@
         <value>25</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Horizontal align:</value>
+        <value>Alineación horizontal:</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>
@@ -903,7 +903,7 @@
         <value>2</value>
     </data>
     <data name="rdTWAIN.Text" xml:space="preserve">
-        <value>Contraldor TWAIN</value>
+        <value>Controlador TWAIN</value>
     </data>
     <data name="&gt;&gt;rdTWAIN.Name" xml:space="preserve">
         <value>rdTWAIN</value>
@@ -981,7 +981,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>Maxima Calidad (Ficheros Grandes)</value>
+        <value>Máxima calidad (ficheros grandes)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>
@@ -1085,7 +1085,7 @@
         <value>400, 468</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Configuracion de perfil</value>
+        <value>Configuración de perfil</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

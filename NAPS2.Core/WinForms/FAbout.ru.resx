@@ -196,10 +196,7 @@
         <value>28</value>
     </data>
     <data name="labelCopyright.Text" xml:space="preserve">
-        <value>Copyright © 2009 Pavel Sorejs
-Copyright © 2012 Michael Adams
-Copyright © 2013 Peter De Leeuw
-Copyright © 2012-2014 Ben Olden-Cooligan</value>
+        <value>Авторские права принадлежат Pavel Sorejs, 2009\nАвторские права принадлежат Michael Adams, 2012\nАвторские права принадлежат Peter De Leeuw, 2013\nАвторские права принадлежат Ben Olden-Cooligan, 2012-2014</value>
     </data>
     <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
         <value>labelCopyright</value>
@@ -470,7 +467,7 @@ Copyright © 2012-2014 Ben Olden-Cooligan</value>
         <value>31</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Пиктограммы взяты с:</value>
+        <value>Значки взяты с:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>

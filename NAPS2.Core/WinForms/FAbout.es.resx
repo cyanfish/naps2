@@ -196,10 +196,7 @@
         <value>28</value>
     </data>
     <data name="labelCopyright.Text" xml:space="preserve">
-        <value>Copyright © 2009 Pavel Sorejs
-Copyright © 2012 Michael Adams
-Copyright © 2013 Peter De Leeuw
-Copyright © 2012-2014 Ben Olden-Cooligan</value>
+        <value>Derechos reservados © 2009 Pavel Sorejs\nDerechos reservados © 2012 Michael Adams\nDerechos reservados © 2013 Peter De Leeuw\nDerechos reservados © 2012-2013 Ben Olden-Cooligan</value>
     </data>
     <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
         <value>labelCopyright</value>
@@ -229,7 +226,7 @@ Copyright © 2012-2014 Ben Olden-Cooligan</value>
         <value>29</value>
     </data>
     <data name="okButton.Text" xml:space="preserve">
-        <value>SI</value>
+        <value>Aceptar</value>
     </data>
     <data name="&gt;&gt;okButton.Name" xml:space="preserve">
         <value>okButton</value>
@@ -550,7 +547,7 @@ Copyright © 2012-2014 Ben Olden-Cooligan</value>
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Sobre</value>
+        <value>Acerca</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FAbout</value>

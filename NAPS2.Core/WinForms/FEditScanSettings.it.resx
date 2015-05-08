@@ -184,7 +184,7 @@
         <value>4</value>
     </data>
     <data name="btnChooseDevice.Text" xml:space="preserve">
-        <value>Scegli dispositivo</value>
+        <value>Scegli Dispositivo</value>
     </data>
     <data name="&gt;&gt;btnChooseDevice.Name" xml:space="preserve">
         <value>btnChooseDevice</value>
@@ -421,7 +421,7 @@
         <value>11</value>
     </data>
     <data name="label4.Text" xml:space="preserve">
-        <value>Dimensioni pagina:</value>
+        <value>Dimensione pagina:</value>
     </data>
     <data name="&gt;&gt;label4.Name" xml:space="preserve">
         <value>label4</value>
@@ -529,7 +529,7 @@
         <value>15</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Brillantezza:</value>
+        <value>Luminosità:</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -903,7 +903,7 @@
         <value>2</value>
     </data>
     <data name="rdTWAIN.Text" xml:space="preserve">
-        <value>TWAIN Driver</value>
+        <value>Driver TWAIN</value>
     </data>
     <data name="&gt;&gt;rdTWAIN.Name" xml:space="preserve">
         <value>rdTWAIN</value>

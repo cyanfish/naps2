@@ -1377,7 +1377,6 @@
     <None Include="Lang\po\pl.po" />
     <None Include="Lang\po\pt-BR.po" />
     <None Include="Lang\po\pt-PT.po" />
-    <None Include="Lang\po\ro.po" />
     <None Include="Lang\po\ru.po" />
     <None Include="Lang\po\templates.pot" />
     <None Include="Lang\po\uk.po" />

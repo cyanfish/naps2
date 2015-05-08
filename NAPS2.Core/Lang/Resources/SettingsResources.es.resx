@@ -118,31 +118,31 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Blanco y Negro</value>
+        <value>Blanco y negro</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit Color</value>
+        <value>Color de 24 bits</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Escala de grises</value>
     </data>
     <data name="Dpi_100" xml:space="preserve">
-        <value>100 dpi</value>
+        <value>100 ppp</value>
     </data>
     <data name="Dpi_1200" xml:space="preserve">
-        <value>1200 dpi</value>
+        <value>1200 ppp</value>
     </data>
     <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+        <value>150 ppp</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
-        <value>200 dpi</value>
+        <value>200 ppp</value>
     </data>
     <data name="Dpi_300" xml:space="preserve">
-        <value>300 dpi</value>
+        <value>300 ppp</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
-        <value>600 dpi</value>
+        <value>600 ppp</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Centro</value>
@@ -154,19 +154,19 @@
         <value>Derecha</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 mm)</value>
+        <value>A3 (297 x 420 mm)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
+        <value>A4 (210 x 297 mm)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 mm)</value>
+        <value>A5 (148 x 210 mm)</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>Oficio (356 x 216 mm)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>Carta (279 x 216 mm)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>
@@ -181,10 +181,10 @@
         <value>1:8</value>
     </data>
     <data name="Source_Duplex" xml:space="preserve">
-        <value>Duplicado</value>
+        <value>Dúplex</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Cargador</value>
+        <value>Alimentador</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
         <value>Cristal</value>

@@ -118,10 +118,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Monocromatico</value>
+        <value>Bianco e nero</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>Colori 24-bit</value>
+        <value>Colore a 24-bit</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Scala di grigi</value>
@@ -184,7 +184,7 @@
         <value>Fronte/Retro</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Alimentatore</value>
+        <value>Caricatore</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
         <value>Piano</value>

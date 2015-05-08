@@ -183,7 +183,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Elige Icono</value>
+        <value>Seleccione un ícono</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

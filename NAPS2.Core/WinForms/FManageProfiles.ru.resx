@@ -226,7 +226,7 @@
         <value>3</value>
     </data>
     <data name="btnDelete.Text" xml:space="preserve">
-        <value>Удалить выбранные страницы</value>
+        <value>Отображаемое имя</value>
     </data>
     <data name="btnDelete.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>

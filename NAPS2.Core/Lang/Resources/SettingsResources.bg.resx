@@ -133,7 +133,7 @@
         <value>1200 dpi</value>
     </data>
     <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+        <value>100 dpi</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
         <value>200 dpi</value>
@@ -163,7 +163,7 @@
         <value>A5 (148 x 210 мм)</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>US Legal (8.5x14 инча)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
         <value>US Писмо (8.5x14 in)</value>
@@ -184,7 +184,7 @@
         <value>Двустранно</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Feeder</value>
+        <value>Захранваща тава за листи</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
         <value>Стъкло</value>

@@ -150,7 +150,7 @@
         <value>1</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Cancelar</value>
+        <value>&amp;Cancelar</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -204,7 +204,7 @@
         <value>4</value>
     </data>
     <data name="labelTop.Text" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} archivos</value>
     </data>
     <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
         <value>labelTop</value>
@@ -255,12 +255,12 @@
         <value>350, 195</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Download Progress</value>
+        <value>Progreso de la descarga</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FDownloadProgress</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.22698, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

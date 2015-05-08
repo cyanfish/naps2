@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+    <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,134 +59,134 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
             </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Black &amp; White</value>
-  </data>
-  <data name="BitDepth_24Color" xml:space="preserve">
-    <value>24-bit Color</value>
-  </data>
-  <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Grayscale</value>
-  </data>
-  <data name="Dpi_100" xml:space="preserve">
-    <value>100 dpi</value>
-  </data>
-  <data name="Dpi_1200" xml:space="preserve">
-    <value>1200 dpi</value>
-  </data>
-  <data name="Dpi_150" xml:space="preserve">
-    <value>150 dpi</value>
-  </data>
-  <data name="Dpi_200" xml:space="preserve">
-    <value>200 dpi</value>
-  </data>
-  <data name="Dpi_300" xml:space="preserve">
-    <value>300 dpi</value>
-  </data>
-  <data name="Dpi_600" xml:space="preserve">
-    <value>600 dpi</value>
-  </data>
-  <data name="HorizontalAlign_Center" xml:space="preserve">
-    <value>Center</value>
-  </data>
-  <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Left</value>
-  </data>
-  <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Right</value>
-  </data>
-  <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (297x420 mm)</value>
-  </data>
-  <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (210x297 mm)</value>
-  </data>
-  <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (148x210 mm)</value>
-  </data>
-  <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
-  </data>
-  <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
-  </data>
-  <data name="Scale_1_1" xml:space="preserve">
-    <value>1:1</value>
-  </data>
-  <data name="Scale_1_2" xml:space="preserve">
-    <value>1:2</value>
-  </data>
-  <data name="Scale_1_4" xml:space="preserve">
-    <value>1:4</value>
-  </data>
-  <data name="Scale_1_8" xml:space="preserve">
-    <value>1:8</value>
-  </data>
-  <data name="Source_Duplex" xml:space="preserve">
-    <value>Duplex</value>
-  </data>
-  <data name="Source_Feeder" xml:space="preserve">
-    <value>Feeder</value>
-  </data>
-  <data name="Source_Glass" xml:space="preserve">
-    <value>Glass</value>
-  </data>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
+        <value>Crno/bijelo</value>
+    </data>
+    <data name="BitDepth_24Color" xml:space="preserve">
+        <value>24-bit Boja</value>
+    </data>
+    <data name="BitDepth_8Grayscale" xml:space="preserve">
+        <value>Sivi tonovi</value>
+    </data>
+    <data name="Dpi_100" xml:space="preserve">
+        <value>100 dpi</value>
+    </data>
+    <data name="Dpi_1200" xml:space="preserve">
+        <value>1200 dpi</value>
+    </data>
+    <data name="Dpi_150" xml:space="preserve">
+        <value>150 dpi</value>
+    </data>
+    <data name="Dpi_200" xml:space="preserve">
+        <value>200 dpi</value>
+    </data>
+    <data name="Dpi_300" xml:space="preserve">
+        <value>300 dpi</value>
+    </data>
+    <data name="Dpi_600" xml:space="preserve">
+        <value>600 dpi</value>
+    </data>
+    <data name="HorizontalAlign_Center" xml:space="preserve">
+        <value>Sredina</value>
+    </data>
+    <data name="HorizontalAlign_Left" xml:space="preserve">
+        <value>Lijevo</value>
+    </data>
+    <data name="HorizontalAlign_Right" xml:space="preserve">
+        <value>Desno</value>
+    </data>
+    <data name="PageSize_A3" xml:space="preserve">
+        <value>A3 (297x420 mm)</value>
+    </data>
+    <data name="PageSize_A4" xml:space="preserve">
+        <value>A4 (210x297 mm)</value>
+    </data>
+    <data name="PageSize_A5" xml:space="preserve">
+        <value>A5 (148x210 mm)</value>
+    </data>
+    <data name="PageSize_Legal" xml:space="preserve">
+        <value>US Legal (8.5x14 in)</value>
+    </data>
+    <data name="PageSize_Letter" xml:space="preserve">
+        <value>US Letter (8.5x11 in)</value>
+    </data>
+    <data name="Scale_1_1" xml:space="preserve">
+        <value>1:1</value>
+    </data>
+    <data name="Scale_1_2" xml:space="preserve">
+        <value>1:2</value>
+    </data>
+    <data name="Scale_1_4" xml:space="preserve">
+        <value>1:4</value>
+    </data>
+    <data name="Scale_1_8" xml:space="preserve">
+        <value>1:8</value>
+    </data>
+    <data name="Source_Duplex" xml:space="preserve">
+        <value>Dvostrano</value>
+    </data>
+    <data name="Source_Feeder" xml:space="preserve">
+        <value>Feeder</value>
+    </data>
+    <data name="Source_Glass" xml:space="preserve">
+        <value>Staklo</value>
+    </data>
 </root>

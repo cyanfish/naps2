@@ -118,37 +118,37 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ChooseProfile" xml:space="preserve">
-        <value>Виберите профиль</value>
+        <value>Выбор профиля</value>
     </data>
     <data name="Clear" xml:space="preserve">
-        <value>Очистить документ</value>
+        <value>Удалить все страницы</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
         <value>Вы уверены, что хотите удалить {0} объект(ов)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Удалить {0} выбраный(ых)?</value>
+        <value>Вы уверены, что хотите удалить {0} объект(ов)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Удалить {0} выбранных?</value>
+        <value>Вы уверены, что хотите удалить выбранные профили {0}?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Удалить профиль {0}?</value>
+        <value>Вы уверены, что хотите удалить профиль {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Файл {0} существует. Перезаписать його?</value>
+        <value>Файл {0} уже существует. Перезаписать его?</value>
     </data>
     <data name="Delete" xml:space="preserve">
-        <value>Удалить выбранные страницы</value>
+        <value>Отображаемое имя</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>НЕ найден выбранный сканер.</value>
+        <value>Не найден выбранный сканер.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
         <value>Выбранный сканер отключён.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Нет прав на запись в этом каталоге.</value>
+        <value>У вас нет прав на запись в это место.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Ошибка</value>
@@ -157,7 +157,7 @@
         <value>Файлы несжатых рисунков (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
-        <value>Разширенный метафайл (*.emf)</value>
+        <value>Расширенный метафайл (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
         <value>Exchangeable Image File (*.exif)</value>
@@ -178,7 +178,7 @@
         <value>TIFF файл (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
-        <value>Пропущено имя.</value>
+        <value>Не указано имя.</value>
     </data>
     <data name="NAPS2" xml:space="preserve">
         <value>NAPS2</value>
@@ -187,13 +187,13 @@
         <value>Не выбран сканер.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>Не найдено сканеров.</value>
+        <value>Сканеры не найдены.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
-        <value>Перезаписать файл</value>
+        <value>Заменить файл</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
-        <value>{0} of {1}</value>
+        <value>{0} из {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
         <value>Отсканированные изображения</value>
@@ -211,49 +211,49 @@
         <value>Произошла ошибка при попытке отправить e-mail.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Automatic Updates</value>
+        <value>Автоматическое обновление</value>
     </data>
     <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>Загрузка и установка</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>Download and Install</value>
+        <value>Загрузка и установка</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Do you want NAPS2 to automatically check for updates?</value>
+        <value>Включить автоматическое обновление NAPS2?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Not Now</value>
+        <value>Не сейчас</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>A newer version of NAPS2 is available. Do you want to update now?</value>
+        <value>Доступна новая версия NAPS2. Хотите обновить сейчас?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Installation Complete</value>
+        <value>Установка завершена</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Installation complete. Do you want to restart NAPS2 now?</value>
+        <value>Установка завершена. Перезапустить NAPS2?</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installation failed.</value>
+        <value>Ошибка установки.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installation Failed</value>
+        <value>Ошибка установки</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Все ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Выбранные ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>Примерный размер загрузки: {0} Мб</value>
     </data>
     <data name="FilesProgress" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} файлов</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
-        <value>{0} / {1} MB</value>
+        <value>{0} / {1} Мб</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
         <value>The file "{0}" could not be imported.</value>
@@ -262,9 +262,9 @@
         <value>The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
-        <value>Download Error</value>
+        <value>Ошибка загрузки</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>One or more files could not be downloaded.</value>
+        <value>Один или несколько файлов не могут быть загружены.</value>
     </data>
 </root>

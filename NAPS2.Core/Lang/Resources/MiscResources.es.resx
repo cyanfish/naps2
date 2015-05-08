@@ -118,64 +118,64 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ChooseProfile" xml:space="preserve">
-        <value>Elige Perfil</value>
+        <value>Seleccione un perfil</value>
     </data>
     <data name="Clear" xml:space="preserve">
         <value>Limpiar</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>¿Estas seguro de limpiar {0} cosas?</value>
+        <value>¿Está seguro que desea limpiar {0} ítem(s)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>¿Estas seguro de borrar {0} cosas?</value>
+        <value>¿Está seguro que desea borrar {0} item(s)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>¿Estas seguro de borrar {0} perfiles?</value>
+        <value>¿Está seguro que desea borrar {0} perfiles?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>¿Estas seguro de borror el perfile {0}?</value>
+        <value>¿Está seguro que desea borrar el perfil {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>El archivo {0} ya existe. ¿Quieres sobreescribirlo?</value>
+        <value>El archivo {0} ya existe. ¿Desea sobreescribirlo?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Borrar</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>No se ha encontrado el escaner seleccionado.</value>
+        <value>No se ha encontrado el escáner seleccionado.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>El escaner seleccionado esta inactivo.</value>
+        <value>El escáner seleccionado está inactivo.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>No tienes permisos para guardar archivos en esa localizacion.</value>
+        <value>No tienes permisos para guardar archivos en esa ubicación.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Error</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Ficheros Birmap (*.bmp)</value>
+        <value>Imagen BMP (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
-        <value>Enhanced Windows MetaFile (*.emf)</value>
+        <value>Metaarchivo mejorado de Windows (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
-        <value>Exchangeable Image File (*.exif)</value>
+        <value>Archivo de Imagen Intercambiable (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
-        <value>GIF File (*.gif)</value>
+        <value>Imagen GIF (*.gif)</value>
     </data>
     <data name="FileTypeJpeg" xml:space="preserve">
-        <value>JPEG File (*.jpg, *.jpeg)</value>
+        <value>Imagen JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF document (*.pdf)</value>
+        <value>Documento PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>PNG File (*.png)</value>
+        <value>Imagen PNG (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>Imagen TIFF (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
         <value>Falta nombre.</value>
@@ -184,13 +184,13 @@
         <value>NAPS2</value>
     </data>
     <data name="NoDeviceSelected" xml:space="preserve">
-        <value>No se ha seleccionado dispositivo.</value>
+        <value>No ha seleccionado ningún dispositivo.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>No se ha encontrado escaner.</value>
+        <value>No se ha encontrado escáner.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
-        <value>Sobrescribir archivo</value>
+        <value>Sobreescribir archivo</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
         <value>{0} de {1}</value>
@@ -202,55 +202,55 @@
         <value>Selecciona un perfil antes de escanear.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Ha ocurrido un error con el controlador del escaner.</value>
+        <value>Ha ocurrido un error con el controlador del escáner.</value>
     </data>
     <data name="Version" xml:space="preserve">
-        <value>Version {0}</value>
+        <value>Versión {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>An error occurred while trying to send an email.</value>
+        <value>Ocurrió un error al intentar enviar el correo electrónico.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Automatic Updates</value>
+        <value>Actualizaciones automáticas</value>
     </data>
     <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>Descargar</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>Download and Install</value>
+        <value>Descargar e instalar</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Do you want NAPS2 to automatically check for updates?</value>
+        <value>¿Desea que NAPS2 busque actualizaciones automáticamente?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Not Now</value>
+        <value>Ahora no</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>A newer version of NAPS2 is available. Do you want to update now?</value>
+        <value>Una versión de NAPS2 está disponible. ¿Desea realizar la actualización ahora?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Installation Complete</value>
+        <value>Instalación completa</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Installation complete. Do you want to restart NAPS2 now?</value>
+        <value>Instalación completa. ¿Desea reiniciar NAPS2 ahora?</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installation failed.</value>
+        <value>La instalación ha fallado.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installation Failed</value>
+        <value>Instalación falló</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Todo ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Seleccionado ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>Tamaño estimado de la descarga: {0} MB</value>
     </data>
     <data name="FilesProgress" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} archivos</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
         <value>{0} / {1} MB</value>
@@ -262,9 +262,9 @@
         <value>The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
-        <value>Download Error</value>
+        <value>Error de descarga</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>One or more files could not be downloaded.</value>
+        <value>Uno o más archivos no han podido ser descargados.</value>
     </data>
 </root>

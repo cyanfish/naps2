@@ -121,7 +121,7 @@
         <value>Чёрно-белый</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24 бита, цвет</value>
+        <value>24-х битный цвет</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Оттенки серого</value>
@@ -151,10 +151,10 @@
         <value>Повернуть влево</value>
     </data>
     <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Повернуть страницу вправо</value>
+        <value>Вправо</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 мм)</value>
+        <value>A3 (297 x 420 мм)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
         <value>A4 (210x297 мм)</value>
@@ -181,10 +181,10 @@
         <value>1:8</value>
     </data>
     <data name="Source_Duplex" xml:space="preserve">
-        <value>Двусторонняя</value>
+        <value>Двухстороннее сканирование</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Автоподача</value>
+        <value>Устройство подачи</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
         <value>Со стекла</value>

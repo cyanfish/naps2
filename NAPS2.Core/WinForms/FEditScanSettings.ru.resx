@@ -184,7 +184,7 @@
         <value>4</value>
     </data>
     <data name="btnChooseDevice.Text" xml:space="preserve">
-        <value>Вибор сканера</value>
+        <value>Выбор сканера</value>
     </data>
     <data name="&gt;&gt;btnChooseDevice.Name" xml:space="preserve">
         <value>btnChooseDevice</value>
@@ -214,7 +214,7 @@
         <value>3</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Подача листов:</value>
+        <value>Источник бумаги:</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -289,7 +289,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Предустановленные параметри</value>
+        <value>Предустановленные параметры</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -499,7 +499,7 @@
         <value>13</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Разрешение т/д:</value>
+        <value>Разрешение:</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -583,7 +583,7 @@
         <value>18</value>
     </data>
     <data name="label7.Text" xml:space="preserve">
-        <value>Контрастность:</value>
+        <value>Контраст:</value>
     </data>
     <data name="&gt;&gt;label7.Name" xml:space="preserve">
         <value>label7</value>
@@ -981,7 +981,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>Максимальное качество (болшой розмер)</value>
+        <value>Максимальное качество (большой размер)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>

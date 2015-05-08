@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+    <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,212 +59,212 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
             </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="ChooseProfile" xml:space="preserve">
-    <value>Choose Profile</value>
-  </data>
-  <data name="Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Are you sure you want to clear {0} item(s)?</value>
-  </data>
-  <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Are you sure you want to delete {0} item(s)?</value>
-  </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Are you sure you want to delete {0} profiles?</value>
-  </data>
-  <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>Are you sure you want to delete the profile {0}?</value>
-  </data>
-  <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>The file {0} already exists. Do you want to overwrite it?</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="DeviceNotFound" xml:space="preserve">
-    <value>The selected scanner could not be found.</value>
-  </data>
-  <data name="DeviceOffline" xml:space="preserve">
-    <value>The selected scanner is offline.</value>
-  </data>
-  <data name="DontHavePermission" xml:space="preserve">
-    <value>You don't have permission to save files at this location.</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="FileTypeBmp" xml:space="preserve">
-    <value>Bitmap Files (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Enhanced Windows MetaFile (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Exchangeable Image File (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF File (*.gif)</value>
-  </data>
-  <data name="FileTypeJpeg" xml:space="preserve">
-    <value>JPEG File (*.jpg, *.jpeg)</value>
-  </data>
-  <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF document (*.pdf)</value>
-  </data>
-  <data name="FileTypePng" xml:space="preserve">
-    <value>PNG File (*.png)</value>
-  </data>
-  <data name="FileTypeTiff" xml:space="preserve">
-    <value>TIFF File (*.tiff, *.tif)</value>
-  </data>
-  <data name="NameMissing" xml:space="preserve">
-    <value>Name missing.</value>
-  </data>
-  <data name="NAPS2" xml:space="preserve">
-    <value>NAPS2</value>
-  </data>
-  <data name="NoDeviceSelected" xml:space="preserve">
-    <value>No device selected.</value>
-  </data>
-  <data name="NoDevicesFound" xml:space="preserve">
-    <value>No scanning device was found.</value>
-  </data>
-  <data name="OverwriteFile" xml:space="preserve">
-    <value>Overwrite File</value>
-  </data>
-  <data name="PdfStatus" xml:space="preserve">
-    <value>{0} of {1}</value>
-  </data>
-  <data name="ScannedImage" xml:space="preserve">
-    <value>Scanned Image</value>
-  </data>
-  <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Select a profile before clicking Scan.</value>
-  </data>
-  <data name="UnknownDriverError" xml:space="preserve">
-    <value>An error occurred with the scanning driver.</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>Version {0}</value>
-  </data>
-  <data name="EmailError" xml:space="preserve">
-    <value>An error occurred while trying to send an email.</value>
-  </data>
-  <data name="AutoUpdates" xml:space="preserve">
-    <value>Automatic Updates</value>
-  </data>
-  <data name="Download" xml:space="preserve">
-    <value>Download</value>
-  </data>
-  <data name="DownloadAndInstall" xml:space="preserve">
-    <value>Download and Install</value>
-  </data>
-  <data name="EnableAutoUpdates" xml:space="preserve">
-    <value>Do you want NAPS2 to automatically check for updates?</value>
-  </data>
-  <data name="NotNow" xml:space="preserve">
-    <value>Not Now</value>
-  </data>
-  <data name="UpdateNow" xml:space="preserve">
-    <value>A newer version of NAPS2 is available. Do you want to update now?</value>
-  </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Installation Complete</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Installation complete. Do you want to restart NAPS2 now?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Installation failed.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Installation Failed</value>
-  </data>
-  <data name="AllCount" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="SelectedCount" xml:space="preserve">
-    <value>Selected ({0})</value>
-  </data>
-  <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Estimated download size: {0} MB</value>
-  </data>
-  <data name="FilesProgress" xml:space="preserve">
-    <value>{0} / {1} files</value>
-  </data>
-  <data name="SizeProgress" xml:space="preserve">
-    <value>{0} / {1} MB</value>
-  </data>
-  <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>The file "{0}" could not be imported.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
-  </data>
-  <data name="DownloadError" xml:space="preserve">
-    <value>Download Error</value>
-  </data>
-  <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>One or more files could not be downloaded.</value>
-  </data>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ChooseProfile" xml:space="preserve">
+        <value>Profiel kiezen</value>
+    </data>
+    <data name="Clear" xml:space="preserve">
+        <value>Wissen</value>
+    </data>
+    <data name="ConfirmClearItems" xml:space="preserve">
+        <value>Weet u zeker dat u {0} item(s) wilt wissen?</value>
+    </data>
+    <data name="ConfirmDeleteItems" xml:space="preserve">
+        <value>Weet u zeker dat u {0} item(s) wilt verwijderen?</value>
+    </data>
+    <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+        <value>Weet u zeker dat u {0} profielen wilt verwijderen?</value>
+    </data>
+    <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+        <value>Weet u zeker dat u profiel {0} wilt verwijderen?</value>
+    </data>
+    <data name="ConfirmOverwriteFile" xml:space="preserve">
+        <value>Bestand {0} bestaat al. Wilt u het bestand overschrijven?</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Verwijderen</value>
+    </data>
+    <data name="DeviceNotFound" xml:space="preserve">
+        <value>Kan de geselecteerde scanner niet vinden.</value>
+    </data>
+    <data name="DeviceOffline" xml:space="preserve">
+        <value>De geselecteerde scanner is offline.</value>
+    </data>
+    <data name="DontHavePermission" xml:space="preserve">
+        <value>U heeft geen rechten om hier bestanden op te slaan.</value>
+    </data>
+    <data name="Error" xml:space="preserve">
+        <value>Fout</value>
+    </data>
+    <data name="FileTypeBmp" xml:space="preserve">
+        <value>Bitmapbestanden (*.bmp)</value>
+    </data>
+    <data name="FileTypeEmf" xml:space="preserve">
+        <value>Enhanced Windows Metafile (*.emf)</value>
+    </data>
+    <data name="FileTypeExif" xml:space="preserve">
+        <value>Exchangeable Image File (*.exif)</value>
+    </data>
+    <data name="FileTypeGif" xml:space="preserve">
+        <value>GIF bestand (*.gif)</value>
+    </data>
+    <data name="FileTypeJpeg" xml:space="preserve">
+        <value>JPEG bestand (*.jpg, *.jpeg)</value>
+    </data>
+    <data name="FileTypePdf" xml:space="preserve">
+        <value>PDF bestand (*.pdf)</value>
+    </data>
+    <data name="FileTypePng" xml:space="preserve">
+        <value>PNG bestand (*.png)</value>
+    </data>
+    <data name="FileTypeTiff" xml:space="preserve">
+        <value>TIFF bestand (*.tiff, *.tif)</value>
+    </data>
+    <data name="NameMissing" xml:space="preserve">
+        <value>Naam ontbreekt.</value>
+    </data>
+    <data name="NAPS2" xml:space="preserve">
+        <value>NAPS2</value>
+    </data>
+    <data name="NoDeviceSelected" xml:space="preserve">
+        <value>Geen apparaat geselecteerd.</value>
+    </data>
+    <data name="NoDevicesFound" xml:space="preserve">
+        <value>Geen scanapparaat gevonden.</value>
+    </data>
+    <data name="OverwriteFile" xml:space="preserve">
+        <value>Bestand overschrijven</value>
+    </data>
+    <data name="PdfStatus" xml:space="preserve">
+        <value>{0} van {1}</value>
+    </data>
+    <data name="ScannedImage" xml:space="preserve">
+        <value>Gescande afbeelding</value>
+    </data>
+    <data name="SelectProfileBeforeScan" xml:space="preserve">
+        <value>Kies een profiel voor het scannen.</value>
+    </data>
+    <data name="UnknownDriverError" xml:space="preserve">
+        <value>Fout met het stuurprogramma van de scanner.</value>
+    </data>
+    <data name="Version" xml:space="preserve">
+        <value>Versie {0}</value>
+    </data>
+    <data name="EmailError" xml:space="preserve">
+        <value>Fout bij het versturen van de e-mail.</value>
+    </data>
+    <data name="AutoUpdates" xml:space="preserve">
+        <value>Automatische updates</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>Downloaden</value>
+    </data>
+    <data name="DownloadAndInstall" xml:space="preserve">
+        <value>Downloaden en installeren</value>
+    </data>
+    <data name="EnableAutoUpdates" xml:space="preserve">
+        <value>Wilt u dat NAPS2 automatisch zoekt naar updates?</value>
+    </data>
+    <data name="NotNow" xml:space="preserve">
+        <value>Niet nu</value>
+    </data>
+    <data name="UpdateNow" xml:space="preserve">
+        <value>Een nieuwe versie van NAPS2 is beschikbaar. Wilt u nu bijwerken?</value>
+    </data>
+    <data name="InstallComplete" xml:space="preserve">
+        <value>Installatie voltooid</value>
+    </data>
+    <data name="InstallCompletePromptRestart" xml:space="preserve">
+        <value>Installatie voltooid. Wilt u NAPS2 nu herstarten?</value>
+    </data>
+    <data name="InstallFailed" xml:space="preserve">
+        <value>Installatie mislukt.</value>
+    </data>
+    <data name="InstallFailedTitle" xml:space="preserve">
+        <value>Installatie mislukt</value>
+    </data>
+    <data name="AllCount" xml:space="preserve">
+        <value>Alle ({0})</value>
+    </data>
+    <data name="SelectedCount" xml:space="preserve">
+        <value>Geselecteerd ({0})</value>
+    </data>
+    <data name="EstimatedDownloadSize" xml:space="preserve">
+        <value>Geschatte omvang: {0} MB</value>
+    </data>
+    <data name="FilesProgress" xml:space="preserve">
+        <value>{0} / {1} bestanden</value>
+    </data>
+    <data name="SizeProgress" xml:space="preserve">
+        <value>{0} / {1} MB</value>
+    </data>
+    <data name="ImportErrorCouldNot" xml:space="preserve">
+        <value>The file "{0}" could not be imported.</value>
+    </data>
+    <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+        <value>The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
+    </data>
+    <data name="DownloadError" xml:space="preserve">
+        <value>Fout bij downloaden</value>
+    </data>
+    <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+        <value>Download mislukt voor 1 of meerdere bestanden.</value>
+    </data>
 </root>
