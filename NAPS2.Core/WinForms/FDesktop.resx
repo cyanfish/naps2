@@ -171,33 +171,6 @@
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>233, 17</value>
   </metadata>
-  <data name="ctxView.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="ctxView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
-  </data>
-  <data name="ctxView.Text" xml:space="preserve">
-    <value>View</value>
-  </data>
-  <data name="ctxSelectAll.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+A</value>
-  </data>
-  <data name="ctxSelectAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
-  </data>
-  <data name="ctxSelectAll.Text" xml:space="preserve">
-    <value>Select All</value>
-  </data>
-  <data name="ctxCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+C</value>
-  </data>
-  <data name="ctxCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
-  </data>
-  <data name="ctxCopy.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 70</value>
   </data>
@@ -223,7 +196,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.0.1.21719, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.0.1.24397, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -291,38 +264,38 @@
   <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        v4kTwh0AAAAASUVORK5CYII=
+        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
+        fKx5AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -401,18 +374,6 @@
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
   </data>
-  <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSavePDFAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSavePDFSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
-  </data>
   <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -425,18 +386,6 @@
   <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSaveImagesAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
-  </data>
   <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -448,18 +397,6 @@
   </data>
   <data name="tsdSaveImages.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
-  </data>
-  <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsEmailPDFAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="tsEmailPDFSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
   </data>
   <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -487,33 +424,6 @@
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 54</value>
-  </data>
-  <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsRotateLeft.Text" xml:space="preserve">
-    <value>Rotate Left</value>
-  </data>
-  <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsRotateRight.Text" xml:space="preserve">
-    <value>Rotate Right</value>
-  </data>
-  <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsFlip.Text" xml:space="preserve">
-    <value>Flip</value>
   </data>
   <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -552,16 +462,37 @@
     <value>ImageAboveText</value>
   </data>
   <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsInterleave.Text" xml:space="preserve">
     <value>Interleave</value>
   </data>
   <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsDeinterleave.Text" xml:space="preserve">
     <value>Deinterleave</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsReverseAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsReverseSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
+  <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsReverse.Text" xml:space="preserve">
+    <value>Reverse</value>
   </data>
   <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -673,7 +604,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1124, 54</value>
+    <value>1155, 54</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -716,6 +647,96 @@
   </data>
   <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ctxView.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="ctxView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="ctxView.Text" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="ctxSelectAll.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+A</value>
+  </data>
+  <data name="ctxSelectAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="ctxSelectAll.Text" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="ctxCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+C</value>
+  </data>
+  <data name="ctxCopy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="ctxCopy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsSavePDFAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsSavePDFSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
+  <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsSaveImagesAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
+  <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsEmailPDFAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="tsEmailPDFSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
+  <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="tsRotateLeft.Text" xml:space="preserve">
+    <value>Rotate Left</value>
+  </data>
+  <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="tsRotateRight.Text" xml:space="preserve">
+    <value>Rotate Right</value>
+  </data>
+  <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="tsFlip.Text" xml:space="preserve">
+    <value>Flip</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -951,10 +972,34 @@
   <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tsReverse.Name" xml:space="preserve">
+    <value>tsReverse</value>
+  </data>
+  <data name="&gt;&gt;tsReverse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsReverseAll.Name" xml:space="preserve">
+    <value>tsReverseAll</value>
+  </data>
+  <data name="&gt;&gt;tsReverseAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsReverseSelected.Name" xml:space="preserve">
+    <value>tsReverseSelected</value>
+  </data>
+  <data name="&gt;&gt;tsReverseSelected.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.21719, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.24397, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

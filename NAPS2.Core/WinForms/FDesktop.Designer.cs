@@ -73,6 +73,10 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
+            this.tsReverse = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsReverseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsReverseSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -332,7 +336,9 @@ namespace NAPS2.WinForms
             // 
             this.tsdReorder.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsInterleave,
-            this.tsDeinterleave});
+            this.tsDeinterleave,
+            this.toolStripSeparator1,
+            this.tsReverse});
             this.tsdReorder.Image = global::NAPS2.Icons.arrow_refresh;
             resources.ApplyResources(this.tsdReorder, "tsdReorder");
             this.tsdReorder.Name = "tsdReorder";
@@ -391,6 +397,31 @@ namespace NAPS2.WinForms
             this.tsAbout.Name = "tsAbout";
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
+            // 
+            // tsReverse
+            // 
+            this.tsReverse.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsReverseAll,
+            this.tsReverseSelected});
+            this.tsReverse.Name = "tsReverse";
+            resources.ApplyResources(this.tsReverse, "tsReverse");
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // tsReverseAll
+            // 
+            this.tsReverseAll.Name = "tsReverseAll";
+            resources.ApplyResources(this.tsReverseAll, "tsReverseAll");
+            this.tsReverseAll.Click += new System.EventHandler(this.tsReverseAll_Click);
+            // 
+            // tsReverseSelected
+            // 
+            this.tsReverseSelected.Name = "tsReverseSelected";
+            resources.ApplyResources(this.tsReverseSelected, "tsReverseSelected");
+            this.tsReverseSelected.Click += new System.EventHandler(this.tsReverseSelected_Click);
             // 
             // FDesktop
             // 
@@ -453,6 +484,10 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem ctxSelectAll;
         private System.Windows.Forms.ToolStripMenuItem ctxCopy;
         private System.Windows.Forms.Button btnQuickScan;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsReverse;
+        private System.Windows.Forms.ToolStripMenuItem tsReverseAll;
+        private System.Windows.Forms.ToolStripMenuItem tsReverseSelected;
     }
 }
 

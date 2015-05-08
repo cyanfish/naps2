@@ -192,14 +192,16 @@ namespace NAPS2.WinForms
         private void UpdateToolbar()
         {
             // "All" dropdown items
-            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text =
+            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text = tsReverseAll.Text =
                 string.Format(MiscResources.AllCount, imageList.Images.Count);
-            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = imageList.Images.Any();
+            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = tsReverseAll.Enabled =
+                imageList.Images.Any();
 
             // "Selected" dropdown items
-            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text =
+            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text = tsReverseSelected.Text =
                 string.Format(MiscResources.SelectedCount, SelectedIndices.Count());
-            tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = SelectedIndices.Any();
+            tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = tsReverseSelected.Enabled =
+                SelectedIndices.Any();
 
             // Top-level toolbar actions
             tsdRotate.Enabled = tsMoveUp.Enabled = tsMoveDown.Enabled = tsDelete.Enabled = SelectedIndices.Any();
@@ -684,6 +686,16 @@ namespace NAPS2.WinForms
                 profileManager.Save();
             }
             scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
+        }
+
+        private void tsReverseAll_Click(object sender, EventArgs e)
+        {
+            UpdateThumbnails(imageList.Reverse());
+        }
+
+        private void tsReverseSelected_Click(object sender, EventArgs e)
+        {
+            UpdateThumbnails(imageList.Reverse(SelectedIndices));
         }
     }
 }

@@ -138,5 +138,32 @@ namespace NAPS2.Scan.Images
             // Clear the selection (may be changed in the future to maintain it, but not necessary)
             return Enumerable.Empty<int>();
         }
+
+        public IEnumerable<int> Reverse()
+        {
+            Reverse(Enumerable.Range(0, Images.Count));
+
+            // Selection is unpredictable, so clear it
+            return Enumerable.Empty<int>();
+        }
+
+        public IEnumerable<int> Reverse(IEnumerable<int> selection)
+        {
+            var selectionList = selection.ToList();
+            int pairCount = selectionList.Count / 2;
+
+            // Swap pairs in the selection, excluding the middle element (if the total count is odd)
+            for (int i = 0; i < pairCount; i++)
+            {
+                int x = selectionList[i];
+                int y = selectionList[selectionList.Count - i - 1];
+                var temp = Images[x];
+                Images[x] = Images[y];
+                Images[y] = temp;
+            }
+
+            // Selection stays the same, so is easy to maintain
+            return selectionList;
+        }
     }
 }
