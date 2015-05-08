@@ -154,6 +154,7 @@
     <None Include="Setup\ps.bat" />
     <None Include="Setup\Publish-NAPS2.ps1" />
     <None Include="Setup\Update-Language.ps1" />
+    <None Include="Setup\updatetemplates.bat" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WIA">
