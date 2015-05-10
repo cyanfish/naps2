@@ -34,33 +34,55 @@ namespace NAPS2.Scan.Wia
 {
     internal class WiaApi
     {
-        private const int DEV_NAME = 7;
-        private const int HORIZONTAL_FEED_SIZE = 3076;
-        private const int VERTICAL_FEED_SIZE = 3077;
-        private const int HORIZONTAL_BED_SIZE = 3074;
-        private const int VERTICAL_BED_SIZE = 3075;
-        private const int PAPER_SOURCE = 3088;
-        private const int DOCUMENT_HANDLING_CAPABILITIES = 3086;
-        private const int PAGES = 3096;
-        private const int DATA_TYPE = 4103;
-        private const int VERTICAL_RESOLUTION = 6148;
-        private const int HORIZONTAL_RESOLUTION = 6147;
-        private const int HORIZONTAL_EXTENT = 6151;
-        private const int VERTICAL_EXTENT = 6152;
-        private const int BRIGHTNESS = 6154;
-        private const int CONTRAST = 6155;
-        private const int HORIZONTAL_START = 6149;
+        #region WIA Constants
 
-        private const int SOURCE_FEEDER = 1;
-        private const int SOURCE_FLATBED = 2;
-        private const int SOURCE_DUPLEX = 4;
+        private static class DeviceProperties
+        {
+            public const int DEVICE_NAME = 7;
+            public const int HORIZONTAL_FEED_SIZE = 3076;
+            public const int VERTICAL_FEED_SIZE = 3077;
+            public const int HORIZONTAL_BED_SIZE = 3074;
+            public const int VERTICAL_BED_SIZE = 3075;
+            public const int PAPER_SOURCE = 3088;
+            public const int DOCUMENT_HANDLING_CAPABILITIES = 3086;
+            public const int PAGES = 3096;
+        }
 
-        private const uint ERROR_OUT_OF_PAPER = 0x80210003;
-        private const uint NO_DEVICE_FOUND = 0x80210015;
-        private const uint ERROR_OFFLINE = 0x80210005;
-        private const uint PAPER_JAM = 0x8021000A;
+        private static class ItemProperties
+        {
+            public const int DATA_TYPE = 4103;
+            public const int VERTICAL_RESOLUTION = 6148;
+            public const int HORIZONTAL_RESOLUTION = 6147;
+            public const int HORIZONTAL_EXTENT = 6151;
+            public const int VERTICAL_EXTENT = 6152;
+            public const int BRIGHTNESS = 6154;
+            public const int CONTRAST = 6155;
+            public const int HORIZONTAL_START = 6149;
+        }
 
-        private const uint UI_CANCELED = 0x80210064;
+        private static class Errors
+        {
+            public const uint OUT_OF_PAPER = 0x80210003;
+            public const uint NO_DEVICE_FOUND = 0x80210015;
+            public const uint OFFLINE = 0x80210005;
+            public const uint PAPER_JAM = 0x8021000A;
+
+            public const uint UI_CANCELED = 0x80210064;
+        }
+
+        private static class Source
+        {
+            public const int FEEDER = 1;
+            public const int FLATBED = 2;
+            public const int DUPLEX = 4;
+        }
+
+        private static class Formats
+        {
+            public const string BMP = "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}";
+        }
+
+        #endregion
 
         private readonly Device device;
 
@@ -82,7 +104,7 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (COMException e)
                     {
-                        if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                        if ((uint)e.ErrorCode == Errors.OFFLINE)
                         {
                             throw new DeviceOfflineException();
                         }
@@ -96,7 +118,7 @@ namespace NAPS2.Scan.Wia
 
         public string DeviceName
         {
-            get { return GetDeviceProperty(DEV_NAME); }
+            get { return GetDeviceProperty(DeviceProperties.DEVICE_NAME); }
         }
 
         public static ScanDevice SelectDeviceUI()
@@ -113,11 +135,11 @@ namespace NAPS2.Scan.Wia
             }
             catch (COMException e)
             {
-                if ((uint)e.ErrorCode == NO_DEVICE_FOUND)
+                if ((uint)e.ErrorCode == Errors.NO_DEVICE_FOUND)
                 {
                     throw new NoDevicesFoundException();
                 }
-                if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                if ((uint)e.ErrorCode == Errors.OFFLINE)
                 {
                     throw new DeviceOfflineException();
                 }
@@ -133,7 +155,7 @@ namespace NAPS2.Scan.Wia
                 if (info.DeviceID == deviceID)
                 {
                     Device device = info.Connect();
-                    return GetDeviceProperty(device, DEV_NAME);
+                    return GetDeviceProperty(device, DeviceProperties.DEVICE_NAME);
                 }
             }
             throw new DeviceNotFoundException();
@@ -234,46 +256,46 @@ namespace NAPS2.Scan.Wia
             switch (settings.BitDepth)
             {
                 case ScanBitDepth.Grayscale:
-                    SetItemIntProperty(item, 2, DATA_TYPE);
+                    SetItemIntProperty(item, 2, ItemProperties.DATA_TYPE);
                     break;
                 case ScanBitDepth.C24Bit:
-                    SetItemIntProperty(item, 3, DATA_TYPE);
+                    SetItemIntProperty(item, 3, ItemProperties.DATA_TYPE);
                     break;
                 case ScanBitDepth.BlackWhite:
-                    SetItemIntProperty(item, 0, DATA_TYPE);
+                    SetItemIntProperty(item, 0, ItemProperties.DATA_TYPE);
                     break;
             }
 
             switch (settings.Resolution)
             {
                 case ScanDpi.Dpi100:
-                    SetItemIntProperty(item, 100, VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 100, HORIZONTAL_RESOLUTION);
+                    SetItemIntProperty(item, 100, ItemProperties.VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 100, ItemProperties.HORIZONTAL_RESOLUTION);
                     resolution = 100;
                     break;
                 case ScanDpi.Dpi150:
-                    SetItemIntProperty(item, 150, VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 150, HORIZONTAL_RESOLUTION);
+                    SetItemIntProperty(item, 150, ItemProperties.VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 150, ItemProperties.HORIZONTAL_RESOLUTION);
                     resolution = 150;
                     break;
                 case ScanDpi.Dpi200:
-                    SetItemIntProperty(item, 200, VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 200, HORIZONTAL_RESOLUTION);
+                    SetItemIntProperty(item, 200, ItemProperties.VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 200, ItemProperties.HORIZONTAL_RESOLUTION);
                     resolution = 200;
                     break;
                 case ScanDpi.Dpi300:
-                    SetItemIntProperty(item, 300, VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 300, HORIZONTAL_RESOLUTION);
+                    SetItemIntProperty(item, 300, ItemProperties.VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 300, ItemProperties.HORIZONTAL_RESOLUTION);
                     resolution = 300;
                     break;
                 case ScanDpi.Dpi600:
-                    SetItemIntProperty(item, 600, VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 600, HORIZONTAL_RESOLUTION);
+                    SetItemIntProperty(item, 600, ItemProperties.VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 600, ItemProperties.HORIZONTAL_RESOLUTION);
                     resolution = 600;
                     break;
                 case ScanDpi.Dpi1200:
-                    SetItemIntProperty(item, 1200, VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 1200, HORIZONTAL_RESOLUTION);
+                    SetItemIntProperty(item, 1200, ItemProperties.VERTICAL_RESOLUTION);
+                    SetItemIntProperty(item, 1200, ItemProperties.HORIZONTAL_RESOLUTION);
                     resolution = 120;
                     break;
             }
@@ -281,9 +303,9 @@ namespace NAPS2.Scan.Wia
             Size pageSize = settings.PageSize.ToSize();
             int pageWidth = pageSize.Width * resolution / 1000;
             int pageHeight = pageSize.Height * resolution / 1000;
-            int horizontalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? HORIZONTAL_BED_SIZE : HORIZONTAL_FEED_SIZE);
+            int horizontalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.HORIZONTAL_BED_SIZE : DeviceProperties.HORIZONTAL_FEED_SIZE);
 
-            int verticalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? VERTICAL_BED_SIZE : VERTICAL_FEED_SIZE);
+            int verticalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.VERTICAL_BED_SIZE : DeviceProperties.VERTICAL_FEED_SIZE);
 
             int pagemaxwidth = horizontalSize * resolution / 1000;
             int pagemaxheight = verticalSize * resolution / 1000;
@@ -297,19 +319,19 @@ namespace NAPS2.Scan.Wia
             pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
             pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
 
-            SetItemIntProperty(item, pageWidth, HORIZONTAL_EXTENT);
-            SetItemIntProperty(item, pageHeight, VERTICAL_EXTENT);
-            SetItemIntProperty(item, horizontalPos, HORIZONTAL_START);
-            SetItemIntProperty(item, settings.Contrast, -1000, 1000, CONTRAST);
-            SetItemIntProperty(item, settings.Brightness, -1000, 1000, BRIGHTNESS);
+            SetItemIntProperty(item, pageWidth, ItemProperties.HORIZONTAL_EXTENT);
+            SetItemIntProperty(item, pageHeight, ItemProperties.VERTICAL_EXTENT);
+            SetItemIntProperty(item, horizontalPos, ItemProperties.HORIZONTAL_START);
+            SetItemIntProperty(item, settings.Contrast, -1000, 1000, ItemProperties.CONTRAST);
+            SetItemIntProperty(item, settings.Brightness, -1000, 1000, ItemProperties.BRIGHTNESS);
         }
 
         public bool SupportsFeeder
         {
             get
             {
-                int capabilities = GetDeviceIntProperty(DOCUMENT_HANDLING_CAPABILITIES);
-                return (capabilities & SOURCE_FEEDER) != 0;
+                int capabilities = GetDeviceIntProperty(DeviceProperties.DOCUMENT_HANDLING_CAPABILITIES);
+                return (capabilities & Source.FEEDER) != 0;
             }
         }
 
@@ -317,19 +339,19 @@ namespace NAPS2.Scan.Wia
         {
             if (settings.PaperSource != ScanSource.Glass && SupportsFeeder)
             {
-                SetDeviceIntProperty(1, PAGES);
+                SetDeviceIntProperty(1, DeviceProperties.PAGES);
             }
 
             switch (settings.PaperSource)
             {
                 case ScanSource.Glass:
-                    SetDeviceIntProperty(SOURCE_FLATBED, PAPER_SOURCE);
+                    SetDeviceIntProperty(Source.FLATBED, DeviceProperties.PAPER_SOURCE);
                     break;
                 case ScanSource.Feeder:
-                    SetDeviceIntProperty(SOURCE_FEEDER, PAPER_SOURCE);
+                    SetDeviceIntProperty(Source.FEEDER, DeviceProperties.PAPER_SOURCE);
                     break;
                 case ScanSource.Duplex:
-                    SetDeviceIntProperty(SOURCE_DUPLEX | SOURCE_FEEDER, PAPER_SOURCE);
+                    SetDeviceIntProperty(Source.DUPLEX | Source.FEEDER, DeviceProperties.PAPER_SOURCE);
                     break;
             }
         }
@@ -376,7 +398,7 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (COMException e)
                     {
-                        if ((uint)e.ErrorCode == UI_CANCELED)
+                        if ((uint)e.ErrorCode == Errors.UI_CANCELED)
                             return null;
                     }
                 }
@@ -386,7 +408,7 @@ namespace NAPS2.Scan.Wia
                     SetupItem(items[1]);
                 }
                 var file =
-                    (ImageFile)wiaCommonDialog.ShowTransfer(items[1], "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}", false);
+                    (ImageFile)wiaCommonDialog.ShowTransfer(items[1], Formats.BMP, false);
                 if (file == null)
                 {
                     // User cancelled
@@ -441,11 +463,11 @@ namespace NAPS2.Scan.Wia
             }
             catch (COMException e)
             {
-                if ((uint)e.ErrorCode == ERROR_OUT_OF_PAPER)
+                if ((uint)e.ErrorCode == Errors.OUT_OF_PAPER)
                 {
                     return null;
                 }
-                else if ((uint)e.ErrorCode == ERROR_OFFLINE)
+                else if ((uint)e.ErrorCode == Errors.OFFLINE)
                 {
                     throw new DeviceOfflineException();
                 }
