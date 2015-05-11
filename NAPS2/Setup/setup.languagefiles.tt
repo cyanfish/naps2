@@ -1,0 +1,21 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".iss" encoding="us-ascii" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+    var setupDirPath = Path.GetDirectoryName(this.Host.TemplateFile);
+    var outputDirPath = Path.Combine(setupDirPath, @"..\..\NAPS2.Core\bin\x86\InstallerEXE");
+    var outputDir = new DirectoryInfo(outputDirPath);
+    foreach(var folder in outputDir.EnumerateDirectories()) {
+        var langName = folder.Name;
+#>
+Source: "..\bin\InstallerEXE\\<#= langName #>\NAPS2.Core.resources.dll"; DestDir: "{app}\\<#= langName #>"; Flags: ignoreversion
+<#
+    }
+#>
