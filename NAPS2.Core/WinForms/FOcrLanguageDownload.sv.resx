@@ -117,94 +117,70 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
-        <value>Microsoft Sans Serif, 8.25pt</value>
-    </data>
-    <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 9</value>
-    </data>
-    <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
-        <value>372, 46</value>
-    </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
-        <value>0</value>
+    <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
     </data>
-    <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} imagen(es) escaneada(s) el {1} a las {2} quizás no han sido guardada(s) y son recuperables. ¿Quieres recuperarlas?</value>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 33</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
-        <value>lblPrompt</value>
+    <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+        <value>151, 13</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Type" xml:space="preserve">
+    <data name="label3.TabIndex" type="System.Int32, mscorlib">
+        <value>3</value>
+    </data>
+    <data name="label3.Text" xml:space="preserve">
+        <value>Välj ett eller flera språk:</value>
+    </data>
+    <data name="&gt;&gt;label3.Name" xml:space="preserve">
+        <value>label3</value>
+    </data>
+    <data name="&gt;&gt;label3.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Parent" xml:space="preserve">
+    <data name="&gt;&gt;label3.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
-        <value>3</value>
+    <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+        <value>5</value>
     </data>
-    <data name="btnRecover.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 58</value>
+    <data name="btnDownload.Location" type="System.Drawing.Point, System.Drawing">
+        <value>255, 236</value>
     </data>
-    <data name="btnRecover.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
+    <data name="btnDownload.Size" type="System.Drawing.Size, System.Drawing">
+        <value>75, 23</value>
     </data>
-    <data name="btnRecover.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
+    <data name="btnDownload.TabIndex" type="System.Int32, mscorlib">
+        <value>5</value>
     </data>
-    <data name="btnRecover.Text" xml:space="preserve">
-        <value>&amp;Recuperar</value>
+    <data name="btnDownload.Text" xml:space="preserve">
+        <value>Ladda ner</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Name" xml:space="preserve">
-        <value>btnRecover</value>
+    <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
+        <value>btnDownload</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Type" xml:space="preserve">
+    <data name="&gt;&gt;btnDownload.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Parent" xml:space="preserve">
+    <data name="&gt;&gt;btnDownload.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnRecover.ZOrder" xml:space="preserve">
-        <value>2</value>
-    </data>
-    <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
-        <value>138, 58</value>
-    </data>
-    <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
-    </data>
-    <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
-    </data>
-    <data name="btnDelete.Text" xml:space="preserve">
-        <value>Borrar</value>
-    </data>
-    <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
-        <value>btnDelete</value>
-    </data>
-    <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
-        <value>1</value>
+    <data name="&gt;&gt;btnDownload.ZOrder" xml:space="preserve">
+        <value>4</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>264, 58</value>
+        <value>336, 236</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
+        <value>75, 23</value>
     </data>
     <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>3</value>
+        <value>6</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Ahora no</value>
+        <value>Avbryt</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -216,6 +192,81 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="lvLanguages.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 49</value>
+    </data>
+    <data name="lvLanguages.Size" type="System.Drawing.Size, System.Drawing">
+        <value>399, 181</value>
+    </data>
+    <data name="lvLanguages.TabIndex" type="System.Int32, mscorlib">
+        <value>10</value>
+    </data>
+    <data name="&gt;&gt;lvLanguages.Name" xml:space="preserve">
+        <value>lvLanguages</value>
+    </data>
+    <data name="&gt;&gt;lvLanguages.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;lvLanguages.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;lvLanguages.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 9</value>
+    </data>
+    <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>342, 13</value>
+    </data>
+    <data name="label1.TabIndex" type="System.Int32, mscorlib">
+        <value>8</value>
+    </data>
+    <data name="label1.Text" xml:space="preserve">
+        <value>Användning av OCR kräver nedladdning av varje språk du vill skanna.</value>
+    </data>
+    <data name="&gt;&gt;label1.Name" xml:space="preserve">
+        <value>label1</value>
+    </data>
+    <data name="&gt;&gt;label1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="labelSizeEstimate.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="labelSizeEstimate.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 241</value>
+    </data>
+    <data name="labelSizeEstimate.Size" type="System.Drawing.Size, System.Drawing">
+        <value>162, 13</value>
+    </data>
+    <data name="labelSizeEstimate.TabIndex" type="System.Int32, mscorlib">
+        <value>9</value>
+    </data>
+    <data name="labelSizeEstimate.Text" xml:space="preserve">
+        <value>Beräknad nedladdningsstorlek: {0} MB</value>
+    </data>
+    <data name="&gt;&gt;labelSizeEstimate.Name" xml:space="preserve">
+        <value>labelSizeEstimate</value>
+    </data>
+    <data name="&gt;&gt;labelSizeEstimate.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;labelSizeEstimate.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;labelSizeEstimate.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -225,13 +276,16 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>396, 100</value>
+        <value>423, 271</value>
+    </data>
+    <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+        <value>439, 310</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Recover Scanned Images</value>
+        <value>OCR-nedladdning</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FRecover</value>
+        <value>FOcrLanguageDownload</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
         <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.22698, Culture=neutral, PublicKeyToken=null</value>

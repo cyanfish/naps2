@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} imagen(es) escaneada(s) el {1} a las {2} quizás no han sido guardada(s) y son recuperables. ¿Quieres recuperarlas?</value>
+        <value>{0} bild(er) skannad(e) på {1} i {2} kanske inte har sparats, och är återställningsbara. Vill du återställa dem?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -156,7 +156,7 @@
         <value>1</value>
     </data>
     <data name="btnRecover.Text" xml:space="preserve">
-        <value>&amp;Recuperar</value>
+        <value>Återställ</value>
     </data>
     <data name="&gt;&gt;btnRecover.Name" xml:space="preserve">
         <value>btnRecover</value>
@@ -180,7 +180,7 @@
         <value>2</value>
     </data>
     <data name="btnDelete.Text" xml:space="preserve">
-        <value>Borrar</value>
+        <value>Ta bort</value>
     </data>
     <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
         <value>btnDelete</value>
@@ -204,7 +204,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Ahora no</value>
+        <value>Inte nu</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -228,7 +228,7 @@
         <value>396, 100</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Recover Scanned Images</value>
+        <value>Återställ skannade bilder</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FRecover</value>

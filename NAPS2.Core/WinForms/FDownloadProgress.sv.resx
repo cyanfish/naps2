@@ -118,93 +118,39 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
-        <value>Microsoft Sans Serif, 8.25pt</value>
+    <data name="progressBarSub.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 77</value>
     </data>
-    <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 9</value>
-    </data>
-    <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
-        <value>372, 46</value>
+    <data name="progressBarSub.Size" type="System.Drawing.Size, System.Drawing">
+        <value>417, 38</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
+    <data name="progressBarSub.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
     </data>
-    <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} imagen(es) escaneada(s) el {1} a las {2} quizás no han sido guardada(s) y son recuperables. ¿Quieres recuperarlas?</value>
+    <data name="&gt;&gt;progressBarSub.Name" xml:space="preserve">
+        <value>progressBarSub</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
-        <value>lblPrompt</value>
+    <data name="&gt;&gt;progressBarSub.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;lblPrompt.Parent" xml:space="preserve">
+    <data name="&gt;&gt;progressBarSub.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
-        <value>3</value>
-    </data>
-    <data name="btnRecover.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 58</value>
-    </data>
-    <data name="btnRecover.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
-    </data>
-    <data name="btnRecover.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
-    </data>
-    <data name="btnRecover.Text" xml:space="preserve">
-        <value>&amp;Recuperar</value>
-    </data>
-    <data name="&gt;&gt;btnRecover.Name" xml:space="preserve">
-        <value>btnRecover</value>
-    </data>
-    <data name="&gt;&gt;btnRecover.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;btnRecover.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;btnRecover.ZOrder" xml:space="preserve">
-        <value>2</value>
-    </data>
-    <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
-        <value>138, 58</value>
-    </data>
-    <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
-    </data>
-    <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
-    </data>
-    <data name="btnDelete.Text" xml:space="preserve">
-        <value>Borrar</value>
-    </data>
-    <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
-        <value>btnDelete</value>
-    </data>
-    <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
-        <value>1</value>
+    <data name="&gt;&gt;progressBarSub.ZOrder" xml:space="preserve">
+        <value>4</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>264, 58</value>
+        <value>354, 121</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
+        <value>75, 23</value>
     </data>
     <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>3</value>
+        <value>1</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Ahora no</value>
+        <value>Avbryt</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -216,7 +162,82 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="labelSub.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="labelSub.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 118</value>
+    </data>
+    <data name="labelSub.Size" type="System.Drawing.Size, System.Drawing">
+        <value>65, 13</value>
+    </data>
+    <data name="labelSub.TabIndex" type="System.Int32, mscorlib">
+        <value>2</value>
+    </data>
+    <data name="labelSub.Text" xml:space="preserve">
+        <value>{0} / {1} MB</value>
+    </data>
+    <data name="&gt;&gt;labelSub.Name" xml:space="preserve">
+        <value>labelSub</value>
+    </data>
+    <data name="&gt;&gt;labelSub.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;labelSub.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;labelSub.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="labelTop.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="labelTop.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 53</value>
+    </data>
+    <data name="labelTop.Size" type="System.Drawing.Size, System.Drawing">
+        <value>67, 13</value>
+    </data>
+    <data name="labelTop.TabIndex" type="System.Int32, mscorlib">
+        <value>4</value>
+    </data>
+    <data name="labelTop.Text" xml:space="preserve">
+        <value>{0} / {1} filer</value>
+    </data>
+    <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
+        <value>labelTop</value>
+    </data>
+    <data name="&gt;&gt;labelTop.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;labelTop.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;labelTop.ZOrder" xml:space="preserve">
         <value>0</value>
+    </data>
+    <data name="progressBarTop.Location" type="System.Drawing.Point, System.Drawing">
+        <value>14, 12</value>
+    </data>
+    <data name="progressBarTop.Size" type="System.Drawing.Size, System.Drawing">
+        <value>417, 38</value>
+    </data>
+    <data name="progressBarTop.TabIndex" type="System.Int32, mscorlib">
+        <value>3</value>
+    </data>
+    <data name="&gt;&gt;progressBarTop.Name" xml:space="preserve">
+        <value>progressBarTop</value>
+    </data>
+    <data name="&gt;&gt;progressBarTop.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;progressBarTop.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;progressBarTop.ZOrder" xml:space="preserve">
+        <value>1</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
@@ -225,13 +246,19 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>396, 100</value>
+        <value>441, 156</value>
+    </data>
+    <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+        <value>1000, 195</value>
+    </data>
+    <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+        <value>350, 195</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Recover Scanned Images</value>
+        <value>Nedladdningsförlopp</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FRecover</value>
+        <value>FDownloadProgress</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
         <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.22698, Culture=neutral, PublicKeyToken=null</value>
