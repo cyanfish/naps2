@@ -23,6 +23,9 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\NAPS2\Setup\LanguageComponents.wxs">
+      <Link>LanguageComponents.wxs</Link>
+    </Compile>
     <Compile Include="NAPS2.Setup.wxs" />
   </ItemGroup>
   <ItemGroup>
