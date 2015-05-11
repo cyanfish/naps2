@@ -174,4 +174,7 @@
   <data name="nl" xml:space="preserve">
     <value>Nederlands</value>
   </data>
+  <data name="sv" xml:space="preserve">
+    <value>Svenska</value>
+  </data>
 </root>

@@ -223,6 +223,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Svenska.
+        /// </summary>
+        internal static string sv {
+            get {
+                return ResourceManager.GetString("sv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Українська.
         /// </summary>
         internal static string uk {
