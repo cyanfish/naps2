@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-13 22:01+0000\n"
+"POT-Creation-Date: 2015-05-08 22:40+0000\n"
 "PO-Revision-Date: 2013-11-10 00:21+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,10 +69,11 @@ msgstr "Info"
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
-#: MiscResources.resx$AllCount$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
 msgid "All ({0})"
 msgstr ""
 
@@ -121,8 +122,8 @@ msgid "Brightness"
 msgstr "Helligkeit"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -178,6 +179,7 @@ msgstr "Copyright © 2013 Peter De Leeuw"
 msgid "Deinterleave"
 msgstr ""
 
+#: FRecover.resx$btnDelete.Text$Message
 #: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -200,9 +202,9 @@ msgstr ""
 msgid "Done"
 msgstr "Fertig"
 
-#: MiscResources.resx$Download$Message
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
+#: MiscResources.resx$Download$Message
 msgid "Download"
 msgstr ""
 
@@ -214,8 +216,8 @@ msgstr ""
 msgid "Download Progress"
 msgstr ""
 
-#: MiscResources.resx$DownloadAndInstall$Message
 #: FUpdate.resx$btnInstall.Text$Message
+#: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
 msgstr ""
 
@@ -360,8 +362,9 @@ msgstr "Es wurden keine Scanner gefunden"
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
 
-#: MiscResources.resx$NotNow$Message
 #: FUpdate.resx$btnCancel.Text$Message
+#: FRecover.resx$btnCancel.Text$Message
+#: MiscResources.resx$NotNow$Message
 msgid "Not Now"
 msgstr ""
 
@@ -381,10 +384,10 @@ msgstr ""
 msgid "OCR language"
 msgstr ""
 
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
 
@@ -425,6 +428,18 @@ msgstr "Profileinstellungen"
 msgid "Profiles"
 msgstr "Profile"
 
+#: FDesktop.resx$btnQuickScan.Text$Message
+msgid "Quick Scan"
+msgstr ""
+
+#: FRecover.resx$btnRecover.Text$Message
+msgid "Recover"
+msgstr ""
+
+#: FRecover.resx$$this.Text$Message
+msgid "Recover Scanned Images"
+msgstr ""
+
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
 msgstr ""
@@ -432,6 +447,10 @@ msgstr ""
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Auflösung"
+
+#: FDesktop.resx$tsReverse.Text$Message
+msgid "Reverse"
+msgstr ""
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -489,8 +508,9 @@ msgstr ""
 
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
-#: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsReverseSelected.Text$Message
 msgid "Selected ({0})"
 msgstr ""
 
@@ -597,6 +617,10 @@ msgstr ""
 #: MiscResources.resx$FilesProgress$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
+msgstr ""
+
+#: FRecover.resx$lblPrompt.Text$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
 
 #: MiscResources.resx$PdfStatus$Message

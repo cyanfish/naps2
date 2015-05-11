@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-13 22:01+0000\n"
+"POT-Creation-Date: 2015-05-08 22:40+0000\n"
 "PO-Revision-Date: 2015-01-03 18:57+0000\n"
 "Last-Translator: Vladimir <zlatev.email@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,10 +68,11 @@ msgstr "Относно"
 msgid "Add"
 msgstr "Добави"
 
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
-#: MiscResources.resx$AllCount$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
 msgid "All ({0})"
 msgstr "Всички ({0})"
 
@@ -120,8 +121,8 @@ msgid "Brightness"
 msgstr "Яркост"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Откажи"
@@ -177,6 +178,7 @@ msgstr "Copyright © 2013 Peter De Leeuw"
 msgid "Deinterleave"
 msgstr "Deinterleave"
 
+#: FRecover.resx$btnDelete.Text$Message
 #: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -199,9 +201,9 @@ msgstr "Искате ли NAPS2 автоматично да проверява �
 msgid "Done"
 msgstr "Готово"
 
-#: MiscResources.resx$Download$Message
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
+#: MiscResources.resx$Download$Message
 msgid "Download"
 msgstr "Сваляне"
 
@@ -213,8 +215,8 @@ msgstr "Грешка при сваляне"
 msgid "Download Progress"
 msgstr "Напредък на свалянето"
 
-#: MiscResources.resx$DownloadAndInstall$Message
 #: FUpdate.resx$btnInstall.Text$Message
+#: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
 msgstr "Свали и инсталирай"
 
@@ -359,8 +361,9 @@ msgstr "Не бе открито устройство за сканиране"
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
 
-#: MiscResources.resx$NotNow$Message
 #: FUpdate.resx$btnCancel.Text$Message
+#: FRecover.resx$btnCancel.Text$Message
+#: MiscResources.resx$NotNow$Message
 msgid "Not Now"
 msgstr "Не сега"
 
@@ -380,10 +383,10 @@ msgstr "Настройки на OCR"
 msgid "OCR language"
 msgstr "Език на OCR"
 
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
 
@@ -424,6 +427,18 @@ msgstr "Настройки на профила"
 msgid "Profiles"
 msgstr "Профили"
 
+#: FDesktop.resx$btnQuickScan.Text$Message
+msgid "Quick Scan"
+msgstr ""
+
+#: FRecover.resx$btnRecover.Text$Message
+msgid "Recover"
+msgstr ""
+
+#: FRecover.resx$$this.Text$Message
+msgid "Recover Scanned Images"
+msgstr ""
+
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
 msgstr "Пренареждане"
@@ -431,6 +446,10 @@ msgstr "Пренареждане"
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Резолюция"
+
+#: FDesktop.resx$tsReverse.Text$Message
+msgid "Reverse"
+msgstr ""
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -488,8 +507,9 @@ msgstr "Избери един или повече езици"
 
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
-#: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsReverseSelected.Text$Message
 msgid "Selected ({0})"
 msgstr "Избрани ({0})"
 
@@ -599,6 +619,10 @@ msgstr "{0} / {1} MB"
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
 msgstr "{0} / {1} файлове"
+
+#: FRecover.resx$lblPrompt.Text$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr ""
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"

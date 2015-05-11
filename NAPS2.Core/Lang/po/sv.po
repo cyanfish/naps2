@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-08 22:40+0000\n"
-"PO-Revision-Date: 2015-05-01 20:51+0000\n"
-"Last-Translator: cyjambo <cyjambo@gmail.com>\n"
+"POT-Creation-Date: 2015-05-08 22:41+0000\n"
+"PO-Revision-Date: 2015-05-10 11:52+0000\n"
+"Last-Translator: eson <eson@svenskasprakfiler.se>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: hu\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1430513504.0\n"
+"X-POOTLE-MTIME: 1431258768.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -32,7 +32,7 @@ msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "Szines (24 bit)"
+msgstr "24-bitars färg"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
@@ -45,7 +45,7 @@ msgstr "600 dpi"
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "Az NAPS2 újabb verziója elérhető. Frissítsen most?"
+msgstr "En nyare version av NAPS2 finns tillgänglig. Vill du uppdatera nu?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -62,11 +62,11 @@ msgstr "A5 (148x210 mm)"
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
 msgid "About"
-msgstr "Névjegy"
+msgstr "Om"
 
 #: FManageProfiles.resx$btnAdd.Text$Message
 msgid "Add"
-msgstr "Új"
+msgstr "Lägg tll"
 
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
@@ -74,272 +74,271 @@ msgstr "Új"
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 msgid "All ({0})"
-msgstr "Mind ({0})"
+msgstr "Alla ({0})"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr "Hiba történt az e-mail küldése során."
+msgstr "Ett fel uppstod vid försök att skicka e-post"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "Hiba történt a képolvasó meghajtójával."
+msgstr "Ett fel uppstod med skannerdrivrutinen"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Biztos hogy tisztítja a(z) {0} képet?"
+msgstr "Vill du verkligen rensa bort {0} objekt?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Biztos hogy törli a következő profilt: {0}?"
+msgstr "Vill du verkligen ta bort profilen {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Biztos hogy törli mind a(z) {0} oldalt?"
+msgstr "Vill du verkligen ta bort {0} objekt?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Biztos hogy törli mind a(z) {0} profilt?"
+msgstr "Vill du verkligen ta bort {0} profiler?"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr "Automatikus frissítések"
+msgstr "Automatiska uppdateringar"
 
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
-msgstr "Bitmélység"
+msgstr "Bitdjup"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "BMP fájl (*.bmp)"
+msgstr "Bitmap-filer (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
-msgstr "Fekete-fehér"
+msgstr "Svartvitt"
 
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
-msgstr "Fényerő"
+msgstr "Ljus"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
-msgstr "Mégse"
+msgstr "Avbryt"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr "Középre"
+msgstr "Centrera"
 
 #: FChooseIcon.resx$$this.Text$Message
 msgid "Choose Icon"
-msgstr "Ikon kiválasztása"
+msgstr "Välj ikon"
 
 #: MiscResources.resx$ChooseProfile$Message
 #: FChooseProfile.resx$$this.Text$Message
 msgid "Choose Profile"
-msgstr "Profil kiválasztása"
+msgstr "Välj profil"
 
 #: FEditScanSettings.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
-msgstr "Képolvasó kiválasztása"
+msgstr "Välj enhet"
 
 #: MiscResources.resx$Clear$Message
 #: FDesktop.resx$tsClear.Text$Message
 msgid "Clear"
-msgstr "Kép tisztítása"
+msgstr "Rensa"
 
 #: FEditScanSettings.resx$label7.Text$Message
 msgid "Contrast"
-msgstr "Kontraszt"
+msgstr "Kontrast"
 
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
-msgstr "Másolás"
+msgstr "Kopiera"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
-msgstr "Minden jog fenntartva © 2009 Pavel Sorejs"
+msgstr "Copyright © 2009 Pavel Sorejs"
 
 #: FAbout.resx__1$labelCopyright.Text$Message
 msgid "Copyright © 2012 Michael Adams"
-msgstr "Minden jog fenntartva © 2012 Michael Adams"
+msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
 msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
-msgstr "Minden jog fenntartva © 2012-2014 Ben Olden-Cooligan"
+msgstr "Copyright © 2012-2014 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
-msgstr "Minden jog fenntartva © 2013 Peter De Leeuw"
+msgstr "Copyright © 2013 Peter De Leeuw"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "Elhagyás"
+msgstr "Interfoliera inte"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
-msgstr "Oldal törlése"
+msgstr "Ta bort"
 
 #: FEditScanSettings.resx$label1.Text$Message
 msgid "Device"
-msgstr "Eszköz"
+msgstr "Enhet"
 
 #: FEditScanSettings.resx$label8.Text$Message
 msgid "Display name"
-msgstr "Név"
+msgstr "Visningsnamn"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr ""
-"Szeretnéd, ha a NAPS2 automatikusan ellenőrizné az elérhető frissítéseket?"
+msgstr "Vill du att NAPS2 skall söka efter uppdateringar automatiskt?"
 
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
-msgstr "Kész"
+msgstr "Klart"
 
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 #: MiscResources.resx$Download$Message
 msgid "Download"
-msgstr "Letöltés"
+msgstr "Ladda ner"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "Letöltési hiba"
+msgstr "Nedladdningsfel"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr "Letöltési folyamat"
+msgstr "Nedladdningsförlopp"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
-msgstr "Letöltés és telepítés"
+msgstr "Ladda ner och installera"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "Kétoldalas"
+msgstr "Duplex"
 
 #: FManageProfiles.resx$btnEdit.Text$Message
 msgid "Edit"
-msgstr "Szerkesztés"
+msgstr "Redigera"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "PDF küldése Email-ben"
+msgstr "E-posta PDF"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "EMF fájl (*.emf)"
+msgstr "Enhanced Windows MetaFile (*.emf)"
 
 #: MiscResources.resx$Error$Message
 msgid "Error"
-msgstr "Hiba"
+msgstr "Fel"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 msgid "Estimated download size: {0} MB"
-msgstr "Becsült letöltési méret: {0} MB"
+msgstr "Beräknad nedladdningsstorlek: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "EXIF fájl (*.exif)"
+msgstr "Exchangeable Image File (*.exif)"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Lapadagoló"
+msgstr "Matare"
 
 #: FDesktop.resx$tsFlip.Text$Message
 msgid "Flip"
-msgstr "Átfordítás"
+msgstr "Vänd"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF fájl (*.gif)"
+msgstr "GIF-fil (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr "További nyelvek beszerzése"
+msgstr "Hämta fler språk"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "Síkágy"
+msgstr "Glas"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr "Szürkeárnylatos"
+msgstr "Gråskala"
 
 #: FEditScanSettings.resx$label9.Text$Message
 msgid "Horizontal align"
-msgstr "Vízszintes igazítás"
+msgstr "Horisontell justering"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
-msgstr "Ikonok forrása"
+msgstr "Ikoner från"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
-msgstr "Importálás"
+msgstr "Importera"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
-msgstr "A telepítés befejeződött"
+msgstr "Installationen slutförd"
 
 #: MiscResources.resx$InstallFailedTitle$Message
 msgid "Installation Failed"
-msgstr "A telepítés sikertelen"
+msgstr "Installationen misslyckades"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "A telepítés sikeres. Újra szeretnéd indítani a NAPS2 programot most?"
+msgstr "Installationen slutförd. Vill du starta om NAPS2 nu?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
-msgstr "A telepítés sikertelen"
+msgstr "Installationen misslyckades"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "Átrendezés"
+msgstr "Interfoliera"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "JPEG fájl (*.jpg, *.jpeg)"
+msgstr "JPEG-fil (*.jpg, *.jpeg)"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
-msgstr "Nyelv"
+msgstr "Språk"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr "Balra"
+msgstr "Vänster"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
-msgstr "Eszöztár"
+msgstr "Verktygsfält"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "A PDF-ek kereshetővé tétele karakterfelismeréssel"
+msgstr "Gör PDF:er sökbara med hjälp av OCR"
 
 #: FChooseProfile.resx$btnProfiles.Text$Message
 msgid "Manage Profiles"
-msgstr "Profilok kezelése"
+msgstr "Hantera profiler"
 
 #: FEditScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr "Legjobb minőség (nagy fájlok)"
+msgstr "Maximal kvalitet (stora filer)"
 
 #: FDesktop.resx$tsMoveDown.Text$Message
 msgid "Move Down"
-msgstr "Fel"
+msgstr "Flytta ner"
 
 #: FDesktop.resx$tsMoveUp.Text$Message
 msgid "Move Up"
-msgstr "Le"
+msgstr "Flytta upp"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -347,15 +346,15 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr "Hiányzó név"
+msgstr "Namn saknas"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
-msgstr "Nincs kiválasztott eszköz"
+msgstr "Ingen enhet vald"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr "Nincs elérhető képolvasó"
+msgstr "Ingen skannerenhet hittades"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -365,145 +364,145 @@ msgstr "Not Another PDF Scanner 2"
 #: FRecover.resx$btnCancel.Text$Message
 #: MiscResources.resx$NotNow$Message
 msgid "Not Now"
-msgstr "Most nem"
+msgstr "Inte nu"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "Karakterfelismerés"
+msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr "OCR Letöltés"
+msgstr "OCR-nedladdning"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "OCR Telepítés"
+msgstr "OCR-installation"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr "Karakterfelismerés nyelve"
+msgstr "OCR-språk"
 
 #: FOcrSetup.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 msgid "OK"
-msgstr "Ok"
+msgstr "OK"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
-msgstr "Egy vagy több fájlt nem sikerült letölteni"
+msgstr "En eller flera filer kunde inte laddas ner"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
-msgstr "Fájl felülírása"
+msgstr "Skriv över filen"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF document (*.pdf)"
-msgstr "PDF dokumentum (*.pdf)"
+msgstr "PDF-dokument (*.pdf)"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr "PNG fájl (*.png)"
+msgstr "PNG-fil (*.png)"
 
 #: FEditScanSettings.resx$label4.Text$Message
 msgid "Page size"
-msgstr "Oldalméret"
+msgstr "Sidstorlek"
 
 #: FEditScanSettings.resx$label2.Text$Message
 msgid "Paper source"
-msgstr "Forrás"
+msgstr "Papperskälla"
 
 #: FViewer.resx$$this.Text$Message
 msgid "Preview"
-msgstr "Előnézet"
+msgstr "Förhandsgranskning"
 
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
-msgstr "Profil-beálítások"
+msgstr "Profilinställningar"
 
 #: FManageProfiles.resx$$this.Text$Message
 #: FDesktop.resx$tsProfiles.Text$Message
 msgid "Profiles"
-msgstr "Profilok"
+msgstr "Profiler"
 
 #: FDesktop.resx$btnQuickScan.Text$Message
 msgid "Quick Scan"
-msgstr ""
+msgstr "Snabbskanning"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
-msgstr ""
+msgstr "Återställ"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "Återställ skannade bilder"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
-msgstr "Rendezés"
+msgstr "Sortera om"
 
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
-msgstr "Felbontás"
+msgstr "Upplösning"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
-msgstr ""
+msgstr "Omvänt"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
-msgstr "Jobbra"
+msgstr "Höger"
 
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
-msgstr "Forgatás"
+msgstr "Rotera"
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
-msgstr "Elforgatás balra"
+msgstr "Rotera vänster"
 
 #: FDesktop.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
-msgstr "Elforgatás jobbra"
+msgstr "Rotera höger"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
-msgstr "Képek mentése"
+msgstr "Spara bilder"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
-msgstr "PDF mentése"
+msgstr "Spara PDF"
 
 #: FPDFSave.resx$label1.Text$Message
 msgid "Saving to PDF"
-msgstr "PDF mentése..."
+msgstr "Sparar till PDF"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 #: FEditScanSettings.resx$label10.Text$Message
 msgid "Scale"
-msgstr "Méret"
+msgstr "Skala"
 
 #: FChooseProfile.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
 msgid "Scan"
-msgstr "Képolvasás"
+msgstr "Skanna"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
-msgstr "Beolvasott kép"
+msgstr "Skannad bild"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
-msgstr "Összes kijelölése"
+msgstr "Markera alla"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Válasszon profilt a képolvasás elött"
+msgstr "Välj en profil före skanning"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr "Válasszon ki legalább egy nyelvet."
+msgstr "Välj ett eller flera språk"
 
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
@@ -511,37 +510,37 @@ msgstr "Válasszon ki legalább egy nyelvet."
 #: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
 msgid "Selected ({0})"
-msgstr "Kiválasztva ({0})"
+msgstr "Markerade ({0})"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr "TIFF fájl (*.tiff, *.tif)"
+msgstr "TIFF-fil (*.tiff, *.tif)"
 
 #: FEditScanSettings.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
-msgstr "TWAIN meghajtó"
+msgstr "TWAIN-drivrutin"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file "{0}" could not be imported"
-msgstr "A \"{0}\" fájl nem importálható."
+msgstr "Filen \"{0}\" kunde inte importeras"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
-"A \"{0}\" fájlt nem lehet importálni. Csak a NAPS2 által generált PDF fájlokat "
-"lehet importálni"
+"Filen \"{0}\" kunde inte importeras. Endast PDF-filer genererade av NAPS2 kan "
+"importeras"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Már létezik {0} nevű fájl, felül szeretné írni?"
+msgstr "Filen {0} finns redan. Vill du skriva över den?"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
-msgstr "A kiválasztott képolvasó nem található"
+msgstr "Den valda skannern kan inte hittas"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
-msgstr "A kiválasztott képolvasó nem elérhető"
+msgstr "Den valda skannern är offline"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -553,54 +552,52 @@ msgstr "US Letter (8.5x11 in)"
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
-msgstr "NAPS2 frissítése"
+msgstr "Uppdatera NAPS2"
 
 #: FEditScanSettings.resx$rdbNativeWIA.Text$Message
 msgid "Use native WIA UI"
-msgstr "A WIA felületének használata"
+msgstr "Använd inbyggt WIA-gränssnitt"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
-msgstr "A következő bállítások használata"
+msgstr "Använd fördefinierade inställningar"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr ""
-"Az karakterfelismerés használatához le kell tölteni az összes szkennelési "
-"nyelvet"
+msgstr "Användning av OCR kräver nedladdning av varje språk du vill skanna"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
-msgstr "Verzió: {0}"
+msgstr "Version {0}"
 
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
-msgstr "Nézet"
+msgstr "Visa"
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
-msgstr "WIA meghajtó"
+msgstr "WIA-drivrutin"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
-msgstr "Várakozás a TWAIN befejezésére."
+msgstr "Väntar på att TWAIN skall slutföras"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "Nincs hozzáférési egedélye az adott helyhez."
+msgstr "Du saknar tillstånd att spara filer på den här platsen"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
-msgstr "Nagyítás"
+msgstr "Zoom"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom in"
-msgstr "Nagyobb"
+msgstr "Zooma in"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom out"
-msgstr "Kisebb"
+msgstr "Zooma ut"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://sourceforge.com/projects/naps2"
@@ -618,15 +615,14 @@ msgstr "{0} / {1} MB"
 #: MiscResources.resx$FilesProgress$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
-msgstr "{0} / {1} files"
+msgstr "{0} / {1} filer"
 
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
+"{0} bild(er) skannad(e) på {1} i {2} kanske inte har sparats, och är "
+"återställningsbara. Vill du återställa dem?"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
-msgstr "{0} / {1}"
-
-#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
-#~ msgstr "Minden jog fenntartva © 2012-2013 Ben Olden-Cooligan"
+msgstr "{0} av {1}"

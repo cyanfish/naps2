@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-13 22:01+0000\n"
-"PO-Revision-Date: 2015-02-12 21:48+0000\n"
-"Last-Translator: YoViajo <rcrmj@hotmail.com>\n"
+"POT-Creation-Date: 2015-05-08 22:40+0000\n"
+"PO-Revision-Date: 2015-05-09 04:33+0000\n"
+"Last-Translator: cheche <juanjo@apertus.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1423777698.0\n"
+"X-POOTLE-MTIME: 1431145990.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -70,10 +70,11 @@ msgstr "Acerca"
 msgid "Add"
 msgstr "Añadir"
 
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
-#: MiscResources.resx$AllCount$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
 msgid "All ({0})"
 msgstr "Todo ({0})"
 
@@ -122,8 +123,8 @@ msgid "Brightness"
 msgstr "Brillo"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Cancelar"
@@ -178,6 +179,7 @@ msgstr "Derechos reservados © 2013 Peter De Leeuw"
 msgid "Deinterleave"
 msgstr "Desentrelazar"
 
+#: FRecover.resx$btnDelete.Text$Message
 #: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -197,12 +199,13 @@ msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "¿Desea que NAPS2 busque actualizaciones automáticamente?"
 
 #: FChooseProfile.resx$btnDone.Text$Message
+#, fuzzy
 msgid "Done"
-msgstr "Terminado             "
+msgstr "Terminado"
 
-#: MiscResources.resx$Download$Message
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
+#: MiscResources.resx$Download$Message
 msgid "Download"
 msgstr "Descargar"
 
@@ -214,8 +217,8 @@ msgstr "Error de descarga"
 msgid "Download Progress"
 msgstr "Progreso de la descarga"
 
-#: MiscResources.resx$DownloadAndInstall$Message
 #: FUpdate.resx$btnInstall.Text$Message
+#: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
 msgstr "Descargar e instalar"
 
@@ -360,8 +363,9 @@ msgstr "No se ha encontrado escáner"
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
 
-#: MiscResources.resx$NotNow$Message
 #: FUpdate.resx$btnCancel.Text$Message
+#: FRecover.resx$btnCancel.Text$Message
+#: MiscResources.resx$NotNow$Message
 msgid "Not Now"
 msgstr "Ahora no"
 
@@ -381,10 +385,10 @@ msgstr "Ajustes de OCR"
 msgid "OCR language"
 msgstr "Idioma de OCR"
 
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Aceptar"
 
@@ -425,6 +429,18 @@ msgstr "Configuración de perfil"
 msgid "Profiles"
 msgstr "Perfiles"
 
+#: FDesktop.resx$btnQuickScan.Text$Message
+msgid "Quick Scan"
+msgstr ""
+
+#: FRecover.resx$btnRecover.Text$Message
+msgid "Recover"
+msgstr "Recuperar"
+
+#: FRecover.resx$$this.Text$Message
+msgid "Recover Scanned Images"
+msgstr ""
+
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
 msgstr "Reordenar"
@@ -432,6 +448,10 @@ msgstr "Reordenar"
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Resolución"
+
+#: FDesktop.resx$tsReverse.Text$Message
+msgid "Reverse"
+msgstr "Invertir"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -489,8 +509,9 @@ msgstr "Seleccione uno o más idiomas"
 
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
-#: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsReverseSelected.Text$Message
 msgid "Selected ({0})"
 msgstr "Seleccionado ({0})"
 
@@ -598,6 +619,13 @@ msgstr "{0} / {1} MB"
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
 msgstr "{0} / {1} archivos"
+
+#: FRecover.resx$lblPrompt.Text$Message
+#, fuzzy
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr ""
+"{0} imagen(es) escaneada(s) el {1} a las {2} quizás no han sido guardada(s) "
+"y son recuperables. ¿Quieres recuperarlas?"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
