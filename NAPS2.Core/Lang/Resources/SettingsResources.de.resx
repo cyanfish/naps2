@@ -171,6 +171,12 @@
     <data name="PageSize_A5" xml:space="preserve">
         <value>A5 (148 × 210 mm)</value>
     </data>
+    <data name="PageSize_B4" xml:space="preserve">
+        <value>B4 (250x353 mm)</value>
+    </data>
+    <data name="PageSize_B5" xml:space="preserve">
+        <value>B5 (176x250 mm)</value>
+    </data>
     <data name="PageSize_Custom" xml:space="preserve">
         <value>Custom...</value>
     </data>

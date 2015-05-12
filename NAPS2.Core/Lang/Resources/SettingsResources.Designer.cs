@@ -196,6 +196,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to B4 (250x353 mm).
+        /// </summary>
+        internal static string PageSize_B4 {
+            get {
+                return ResourceManager.GetString("PageSize_B4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to B5 (176x250 mm).
+        /// </summary>
+        internal static string PageSize_B5 {
+            get {
+                return ResourceManager.GetString("PageSize_B5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom....
         /// </summary>
         internal static string PageSize_Custom {

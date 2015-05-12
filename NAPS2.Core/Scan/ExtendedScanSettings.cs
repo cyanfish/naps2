@@ -139,6 +139,12 @@ namespace NAPS2.Scan
         [LocalizedDescription(typeof(SettingsResources), "PageSize_A3")]
         [PageDimensions("297", "420", PageSizeUnit.Millimetre)]
         A3,
+        [LocalizedDescription(typeof(SettingsResources), "PageSize_B5")]
+        [PageDimensions("176", "250", PageSizeUnit.Millimetre)]
+        B5,
+        [LocalizedDescription(typeof(SettingsResources), "PageSize_B4")]
+        [PageDimensions("250", "353", PageSizeUnit.Millimetre)]
+        B4,
         [LocalizedDescription(typeof(SettingsResources), "PageSize_Custom")]
         Custom
     }

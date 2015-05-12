@@ -307,8 +307,8 @@ namespace NAPS2.Scan.Wia
             }
             int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * resolution / 1000;
             int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
-            int horizontalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.HORIZONTAL_BED_SIZE : DeviceProperties.HORIZONTAL_FEED_SIZE);
 
+            int horizontalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.HORIZONTAL_BED_SIZE : DeviceProperties.HORIZONTAL_FEED_SIZE);
             int verticalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.VERTICAL_BED_SIZE : DeviceProperties.VERTICAL_FEED_SIZE);
 
             int pagemaxwidth = horizontalSize * resolution / 1000;
