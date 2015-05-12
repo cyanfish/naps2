@@ -133,11 +133,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 400 dpi.
+        /// </summary>
+        internal static string Dpi_400 {
+            get {
+                return ResourceManager.GetString("Dpi_400", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 600 dpi.
         /// </summary>
         internal static string Dpi_600 {
             get {
                 return ResourceManager.GetString("Dpi_600", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 800 dpi.
+        /// </summary>
+        internal static string Dpi_800 {
+            get {
+                return ResourceManager.GetString("Dpi_800", resourceCulture);
             }
         }
         

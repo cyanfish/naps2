@@ -94,8 +94,12 @@ namespace NAPS2.Scan
         Dpi200,
         [LocalizedDescription(typeof(SettingsResources), "Dpi_300")]
         Dpi300,
+        [LocalizedDescription(typeof(SettingsResources), "Dpi_400")]
+        Dpi400,
         [LocalizedDescription(typeof(SettingsResources), "Dpi_600")]
         Dpi600,
+        [LocalizedDescription(typeof(SettingsResources), "Dpi_800")]
+        Dpi800,
         [LocalizedDescription(typeof(SettingsResources), "Dpi_1200")]
         Dpi1200
     }

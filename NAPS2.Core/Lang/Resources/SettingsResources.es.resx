@@ -141,8 +141,14 @@
     <data name="Dpi_300" xml:space="preserve">
         <value>300 ppp</value>
     </data>
+    <data name="Dpi_400" xml:space="preserve">
+        <value>400 dpi</value>
+    </data>
     <data name="Dpi_600" xml:space="preserve">
         <value>600 ppp</value>
+    </data>
+    <data name="Dpi_800" xml:space="preserve">
+        <value>800 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Centro</value>
