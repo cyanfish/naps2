@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using NAPS2.Lang.Resources;
 
@@ -168,8 +169,8 @@ namespace NAPS2.Scan
         {
             this.PageDimensions = new PageDimensions
             {
-                Width = decimal.Parse(width),
-                Height = decimal.Parse(height),
+                Width = decimal.Parse(width, CultureInfo.InvariantCulture),
+                Height = decimal.Parse(height, CultureInfo.InvariantCulture),
                 Unit = unit
             };
         }
