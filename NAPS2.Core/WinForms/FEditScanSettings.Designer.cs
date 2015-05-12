@@ -158,6 +158,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.cmbPage, "cmbPage");
             this.cmbPage.FormattingEnabled = true;
             this.cmbPage.Name = "cmbPage";
+            this.cmbPage.SelectedIndexChanged += new System.EventHandler(this.cmbPage_SelectedIndexChanged);
             // 
             // cmbResolution
             // 

@@ -267,4 +267,7 @@
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
         <value>Един или няколко файла не могат да бъдат свалени.</value>
     </data>
+    <data name="CustomPageSizeFormat" xml:space="preserve">
+        <value>Custom ({0}x{1} {2})</value>
+    </data>
 </root>

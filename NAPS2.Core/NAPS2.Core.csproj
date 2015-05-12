@@ -208,6 +208,12 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
+    <Compile Include="WinForms\FPageSize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FPageSize.Designer.cs">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +374,66 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.ru.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.sv.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
+    <EmbeddedResource Include="WinForms\FPageSize.bg.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.ca.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.cs.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.da.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.de.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.es.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.fr.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.he.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.hr.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.hu.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.it.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.nl.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.pl.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.pt-BR.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.pt-PT.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.ro.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.ru.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.sv.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.uk.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.bg.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
       <SubType>Designer</SubType>

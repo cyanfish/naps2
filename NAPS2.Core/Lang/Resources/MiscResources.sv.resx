@@ -267,4 +267,7 @@
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
         <value>En eller flera filer kunde inte laddas ner.</value>
     </data>
+    <data name="CustomPageSizeFormat" xml:space="preserve">
+        <value>Custom ({0}x{1} {2})</value>
+    </data>
 </root>

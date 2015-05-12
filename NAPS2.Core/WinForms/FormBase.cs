@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Scan;
 
 namespace NAPS2.WinForms
 {
@@ -59,6 +60,29 @@ namespace NAPS2.WinForms
                 }
                 return state;
             }
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        protected void AddEnumItems<T>(ComboBox combo)
+        {
+            AddEnumItems<T>(combo, Combo_Format);
+        }
+
+        protected void AddEnumItems<T>(ComboBox combo, ListControlConvertEventHandler format)
+        {
+            foreach (object item in Enum.GetValues(typeof(T)))
+            {
+                combo.Items.Add(item);
+            }
+            combo.Format += format;
+        }
+
+        void Combo_Format(object sender, ListControlConvertEventArgs e)
+        {
+            e.Value = ((Enum)e.ListItem).Description();
         }
 
         #endregion

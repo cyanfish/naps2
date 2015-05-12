@@ -57,6 +57,8 @@ namespace NAPS2.Scan
 
         public ScanPageSize PageSize { get; set; }
 
+        public PageDimensions CustomPageSize { get; set; }
+
         public ScanDpi Resolution { get; set; }
 
         public ScanSource PaperSource { get; set; }
@@ -123,36 +125,94 @@ namespace NAPS2.Scan
     public enum ScanPageSize
     {
         [LocalizedDescription(typeof(SettingsResources), "PageSize_Letter")]
+        [PageDimensions("8.5", "11", PageSizeUnit.Inch)]
         Letter,
         [LocalizedDescription(typeof(SettingsResources), "PageSize_Legal")]
+        [PageDimensions("8.5", "14", PageSizeUnit.Inch)]
         Legal,
         [LocalizedDescription(typeof(SettingsResources), "PageSize_A5")]
+        [PageDimensions("148", "210", PageSizeUnit.Millimetre)]
         A5,
         [LocalizedDescription(typeof(SettingsResources), "PageSize_A4")]
+        [PageDimensions("210", "297", PageSizeUnit.Millimetre)]
         A4,
         [LocalizedDescription(typeof(SettingsResources), "PageSize_A3")]
-        A3
+        [PageDimensions("297", "420", PageSizeUnit.Millimetre)]
+        A3,
+        [LocalizedDescription(typeof(SettingsResources), "PageSize_Custom")]
+        Custom
+    }
+
+    public class PageDimensions
+    {
+        public decimal Width { get; set; }
+
+        public decimal Height { get; set; }
+
+        public PageSizeUnit Unit { get; set; }
+    }
+
+    public class PageDimensionsAttribute : Attribute
+    {
+        public PageDimensionsAttribute(string width, string height, PageSizeUnit unit)
+        {
+            this.PageDimensions = new PageDimensions
+            {
+                Width = decimal.Parse(width),
+                Height = decimal.Parse(height),
+                Unit = unit
+            };
+        }
+
+        public PageDimensions PageDimensions { get; private set; }
+    }
+
+    public enum PageSizeUnit
+    {
+        [LocalizedDescription(typeof(SettingsResources), "PageSizeUnit_Inch")]
+        Inch,
+        [LocalizedDescription(typeof(SettingsResources), "PageSizeUnit_Centimetre")]
+        Centimetre,
+        [LocalizedDescription(typeof(SettingsResources), "PageSizeUnit_Millimetre")]
+        Millimetre
     }
 
     public static class ScanEnumExtensions
     {
-        public static Size ToSize(this ScanPageSize pageSize)
+        public static int WidthInThousandthsOfAnInch(this PageDimensions pageDimensions)
         {
-            switch (pageSize)
+            switch (pageDimensions.Unit)
             {
-                case ScanPageSize.A5:
-                    return new Size(5826, 8267);
-                case ScanPageSize.A4:
-                    return new Size(8267, 11692);
-                case ScanPageSize.A3:
-                    return new Size(11692, 16535);
-                case ScanPageSize.Legal:
-                    return new Size(8500, 14000);
-                case ScanPageSize.Letter:
-                    return new Size(8500, 11000);
+                case PageSizeUnit.Inch:
+                    return (int)(pageDimensions.Width * 1000);
+                case PageSizeUnit.Centimetre:
+                    return (int)(pageDimensions.Width * 0.393701m * 1000);
+                case PageSizeUnit.Millimetre:
+                    return (int)(pageDimensions.Width * 0.0393701m * 1000);
                 default:
                     throw new ArgumentException();
             }
+        }
+
+        public static int HeightInThousandthsOfAnInch(this PageDimensions pageDimensions)
+        {
+            switch (pageDimensions.Unit)
+            {
+                case PageSizeUnit.Inch:
+                    return (int)(pageDimensions.Height * 1000);
+                case PageSizeUnit.Centimetre:
+                    return (int)(pageDimensions.Height * 0.393701m * 1000);
+                case PageSizeUnit.Millimetre:
+                    return (int)(pageDimensions.Height * 0.0393701m * 1000);
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        public static PageDimensions PageDimensions(this Enum enumValue)
+        {
+            object[] attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(PageDimensionsAttribute), false);
+            return attrs.Cast<PageDimensionsAttribute>().Select(x => x.PageDimensions).SingleOrDefault();
         }
 
         public static string Description(this Enum enumValue)

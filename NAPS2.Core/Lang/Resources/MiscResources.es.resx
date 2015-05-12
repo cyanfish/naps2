@@ -267,4 +267,7 @@
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
         <value>Uno o más archivos no han podido ser descargados.</value>
     </data>
+    <data name="CustomPageSizeFormat" xml:space="preserve">
+        <value>Custom ({0}x{1} {2})</value>
+    </data>
 </root>

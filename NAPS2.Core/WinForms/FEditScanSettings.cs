@@ -49,10 +49,23 @@ namespace NAPS2.WinForms
             InitializeComponent();
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
-            AddEnumItems<ScanPageSize>(cmbPage);
+            AddEnumItems<ScanPageSize>(cmbPage, FormatPageSize);
             AddEnumItems<ScanDpi>(cmbResolution);
             AddEnumItems<ScanScale>(cmbScale);
             AddEnumItems<ScanSource>(cmbSource);
+        }
+
+        private void FormatPageSize(object sender, ListControlConvertEventArgs e)
+        {
+            if (e.ListItem is PageDimensions)
+            {
+                var pageDimensions = (PageDimensions)e.ListItem;
+                e.Value = string.Format(MiscResources.CustomPageSizeFormat, pageDimensions.Width, pageDimensions.Height, pageDimensions.Unit.Description());
+            }
+            else
+            {
+                e.Value = ((Enum)e.ListItem).Description();
+            }
         }
 
         protected override void OnLoad(object sender, EventArgs e)
@@ -70,7 +83,15 @@ namespace NAPS2.WinForms
             cmbResolution.SelectedIndex = (int)ScanSettings.Resolution;
             txtContrast.Text = ScanSettings.Contrast.ToString("G");
             txtBrightness.Text = ScanSettings.Brightness.ToString("G");
-            cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
+            if (ScanSettings.PageSize == ScanPageSize.Custom)
+            {
+                cmbPage.Items.Add(ScanSettings.CustomPageSize);
+                cmbPage.SelectedIndex = (int)ScanPageSize.Custom + 1;
+            }
+            else
+            {
+                cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
+            }
             cmbScale.SelectedIndex = (int)ScanSettings.AfterScanScale;
             cmbAlign.SelectedIndex = (int)ScanSettings.PageAlign;
 
@@ -139,20 +160,6 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void AddEnumItems<T>(ComboBox combo)
-        {
-            foreach (object item in Enum.GetValues(typeof(T)))
-            {
-                combo.Items.Add(item);
-            }
-            combo.Format += Combo_Format;
-        }
-
-        void Combo_Format(object sender, ListControlConvertEventArgs e)
-        {
-            e.Value = ((Enum)e.ListItem).Description();
-        }
-
         private void ChooseDevice(string driverName)
         {
             var driver = driverFactory.Create(driverName);
@@ -187,6 +194,21 @@ namespace NAPS2.WinForms
 
         private void SaveSettings()
         {
+            ScanPageSize pageSize;
+            PageDimensions customPageSize = null;
+            if (cmbPage.SelectedIndex > (int)ScanPageSize.Custom)
+            {
+                pageSize = ScanPageSize.Custom;
+                customPageSize = (PageDimensions)cmbPage.SelectedItem;
+            }
+            else if (cmbPage.SelectedIndex == (int)ScanPageSize.Custom)
+            {
+                throw new InvalidOperationException("Custom page size should never be selected when saving");
+            }
+            else
+            {
+                pageSize = (ScanPageSize)cmbPage.SelectedIndex;
+            }
             ScanSettings = new ExtendedScanSettings
             {
                 Version = ExtendedScanSettings.CURRENT_VERSION,
@@ -203,7 +225,8 @@ namespace NAPS2.WinForms
                 Brightness = trBrightness.Value,
                 Contrast = trContrast.Value,
                 PageAlign = (ScanHorizontalAlign)cmbAlign.SelectedIndex,
-                PageSize = (ScanPageSize)cmbPage.SelectedIndex,
+                PageSize = pageSize,
+                CustomPageSize = customPageSize,
                 Resolution = (ScanDpi)cmbResolution.SelectedIndex,
                 PaperSource = (ScanSource)cmbSource.SelectedIndex
             };
@@ -314,6 +337,34 @@ namespace NAPS2.WinForms
         private void trContrast_Scroll(object sender, EventArgs e)
         {
             txtContrast.Text = trContrast.Value.ToString("G");
+        }
+
+        private void cmbPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPage.SelectedIndex == (int)ScanPageSize.Custom)
+            {
+                var form = FormFactory.Create<FPageSize>();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    if (cmbPage.Items.Count > (int)ScanPageSize.Custom + 1)
+                    {
+                        cmbPage.Items.RemoveAt(cmbPage.Items.Count - 1);
+                    }
+                    cmbPage.Items.Add(form.Result);
+                    cmbPage.SelectedIndex = (int)ScanPageSize.Custom + 1;
+                }
+                else
+                {
+                    if (ScanSettings.PageSize == ScanPageSize.Custom)
+                    {
+                        cmbPage.SelectedIndex = (int)ScanPageSize.Custom + 1;
+                    }
+                    else
+                    {
+                        cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
+                    }
+                }
+            }
         }
     }
 }

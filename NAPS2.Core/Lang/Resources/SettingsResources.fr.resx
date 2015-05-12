@@ -153,6 +153,15 @@
     <data name="HorizontalAlign_Right" xml:space="preserve">
         <value>Droite</value>
     </data>
+    <data name="PageSizeUnit_Centimetre" xml:space="preserve">
+        <value>cm</value>
+    </data>
+    <data name="PageSizeUnit_Inch" xml:space="preserve">
+        <value>in</value>
+    </data>
+    <data name="PageSizeUnit_Millimetre" xml:space="preserve">
+        <value>mm</value>
+    </data>
     <data name="PageSize_A3" xml:space="preserve">
         <value>A3 (297 x 420 mm)</value>
     </data>
@@ -161,6 +170,9 @@
     </data>
     <data name="PageSize_A5" xml:space="preserve">
         <value>A5 (148 x 210 mm)</value>
+    </data>
+    <data name="PageSize_Custom" xml:space="preserve">
+        <value>Custom...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>US Legal (8.5x14 in)</value>

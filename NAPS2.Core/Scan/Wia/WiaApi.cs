@@ -300,9 +300,13 @@ namespace NAPS2.Scan.Wia
                     break;
             }
 
-            Size pageSize = settings.PageSize.ToSize();
-            int pageWidth = pageSize.Width * resolution / 1000;
-            int pageHeight = pageSize.Height * resolution / 1000;
+            PageDimensions pageDimensions = settings.PageSize.PageDimensions() ?? settings.CustomPageSize;
+            if (pageDimensions == null)
+            {
+                throw new InvalidOperationException("No page size specified");
+            }
+            int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * resolution / 1000;
+            int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
             int horizontalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.HORIZONTAL_BED_SIZE : DeviceProperties.HORIZONTAL_FEED_SIZE);
 
             int verticalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.VERTICAL_BED_SIZE : DeviceProperties.VERTICAL_FEED_SIZE);
