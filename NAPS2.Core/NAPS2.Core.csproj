@@ -341,6 +341,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\MiscResources.ro.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.ru.resx" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.sv.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.uk.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.bg.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.ca.resx" />
@@ -365,6 +366,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\SettingsResources.ro.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.ru.resx" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.sv.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
     <EmbeddedResource Include="WinForms\FAbout.bg.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
