@@ -20,6 +20,7 @@
       <ComponentRef Id="LangComponent_pt_PT" />
       <ComponentRef Id="LangComponent_ro" />
       <ComponentRef Id="LangComponent_ru" />
+      <ComponentRef Id="LangComponent_sq" />
       <ComponentRef Id="LangComponent_sv" />
       <ComponentRef Id="LangComponent_uk" />
     </ComponentGroup>
@@ -108,6 +109,11 @@
       <Directory Id="LangFolder_ru" Name="ru">
         <Component Id="LangComponent_ru">
           <File Source="..\NAPS2\bin\InstallerMSI\ru\NAPS2.Core.resources.dll" Id="LangFile_ru" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_sq" Name="sq">
+        <Component Id="LangComponent_sq">
+          <File Source="..\NAPS2\bin\InstallerMSI\sq\NAPS2.Core.resources.dll" Id="LangFile_sq" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_sv" Name="sv">

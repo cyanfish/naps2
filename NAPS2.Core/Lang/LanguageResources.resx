@@ -177,4 +177,7 @@
   <data name="sv" xml:space="preserve">
     <value>Svenska</value>
   </data>
+  <data name="sq" xml:space="preserve">
+    <value>Shqip</value>
+  </data>
 </root>
