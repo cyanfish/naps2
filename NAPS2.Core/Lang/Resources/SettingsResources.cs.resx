@@ -172,7 +172,7 @@
         <value>A3 (297 x 420 mm)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4  (210 x 297 mm)</value>
+        <value>A4 (210 x 297 mm)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
         <value>A5 (148 x 210 mm)</value>

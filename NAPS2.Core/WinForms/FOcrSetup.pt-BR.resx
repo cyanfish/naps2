@@ -235,7 +235,7 @@
         <value>4</value>
     </data>
     <data name="linkGetLanguages.Text" xml:space="preserve">
-        <value>Get more languages</value>
+        <value>Instalar mais idiomas</value>
     </data>
     <data name="&gt;&gt;linkGetLanguages.Name" xml:space="preserve">
         <value>linkGetLanguages</value>
@@ -289,7 +289,7 @@
         <value>336, 139</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>OCR Setup</value>
+        <value>Configuração do OCR</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrSetup</value>

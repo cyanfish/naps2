@@ -142,13 +142,13 @@
         <value>300 ppp</value>
     </data>
     <data name="Dpi_400" xml:space="preserve">
-        <value>100 ppp</value>
+        <value>400 ppp</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
         <value>600 ppp</value>
     </data>
     <data name="Dpi_800" xml:space="preserve">
-        <value>100 ppp</value>
+        <value>800 ppp</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Centro</value>
@@ -163,7 +163,7 @@
         <value>cm</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>in</value>
+        <value>Pulg</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
         <value>mm</value>
@@ -184,7 +184,7 @@
         <value>B5 (176x250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>Personalizar...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>Oficio (356 x 216 mm)</value>

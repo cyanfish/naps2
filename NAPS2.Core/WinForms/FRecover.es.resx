@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} imagen(es) escaneada(s) el {1} a las {2} quizás no han sido guardada(s) y son recuperables. ¿Quieres recuperarlas?</value>
+        <value>{0} imagen(es) escaneada(s) desde las paginas {1} a las {2} quizás no han sido guardada(s) y se pueden recuperar. ¿Deseas recuperarlas?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -228,7 +228,7 @@
         <value>396, 100</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Recover Scanned Images</value>
+        <value>Recuperar Images Digitalizadas</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FRecover</value>

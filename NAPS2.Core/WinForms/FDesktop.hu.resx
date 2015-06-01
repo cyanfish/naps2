@@ -151,7 +151,7 @@
         <value>8</value>
     </data>
     <data name="btnQuickScan.Text" xml:space="preserve">
-        <value>&amp;Quick Scan</value>
+        <value>Gyors Képolvasás</value>
     </data>
     <data name="btnQuickScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>

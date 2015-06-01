@@ -133,7 +133,7 @@
         <value>1200 ppp</value>
     </data>
     <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+        <value>150 ppp</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
         <value>200 ppp</value>
@@ -142,13 +142,13 @@
         <value>300 ppp</value>
     </data>
     <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+        <value>400 ppp</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
         <value>600 ppp</value>
     </data>
     <data name="Dpi_800" xml:space="preserve">
-        <value>800 dpi</value>
+        <value>800 ppp</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Centrar</value>

@@ -133,7 +133,7 @@
         <value>1200 dpi</value>
     </data>
     <data name="Dpi_150" xml:space="preserve">
-        <value>100 dpi</value>
+        <value>150 dpi</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
         <value>200 dpi</value>
@@ -172,7 +172,7 @@
         <value>A3 (297 × 420 mm)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4  (210x297 mm)</value>
+        <value>A4 (210x297 mm)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
         <value>A5 (148 × 210 mm)</value>

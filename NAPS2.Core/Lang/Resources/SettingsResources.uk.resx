@@ -133,7 +133,7 @@
         <value>1200 т/д</value>
     </data>
     <data name="Dpi_150" xml:space="preserve">
-        <value>100 т/д</value>
+        <value>150 т/д</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
         <value>200 т/д</value>
@@ -142,13 +142,13 @@
         <value>300 т/д</value>
     </data>
     <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+        <value>400 т/д</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
         <value>600 т/д</value>
     </data>
     <data name="Dpi_800" xml:space="preserve">
-        <value>800 dpi</value>
+        <value>800 т/д</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Центрувати</value>

@@ -160,7 +160,7 @@
         <value>Poboljšani Windows MetaFile (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
-        <value>Exchangeable Image File (*.exif)</value>
+        <value>Razmenjiva slika (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
         <value>GIF datoteka (*.gif)</value>

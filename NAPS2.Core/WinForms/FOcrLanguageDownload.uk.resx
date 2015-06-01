@@ -156,7 +156,7 @@
         <value>5</value>
     </data>
     <data name="btnDownload.Text" xml:space="preserve">
-        <value>&amp;Download</value>
+        <value>Звантаження</value>
     </data>
     <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
         <value>btnDownload</value>
@@ -255,7 +255,7 @@
         <value>9</value>
     </data>
     <data name="labelSizeEstimate.Text" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>Приблизний об’єм звантаження: {0} МБ</value>
     </data>
     <data name="&gt;&gt;labelSizeEstimate.Name" xml:space="preserve">
         <value>labelSizeEstimate</value>

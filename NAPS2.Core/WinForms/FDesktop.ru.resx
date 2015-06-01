@@ -652,7 +652,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxView.Text" xml:space="preserve">
-        <value>Просмотр</value>
+        <value>Вид</value>
     </data>
     <data name="ctxSelectAll.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
         <value>Ctrl+A</value>
@@ -670,7 +670,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxCopy.Text" xml:space="preserve">
-        <value>Копировать</value>
+        <value>Копия</value>
     </data>
     <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
