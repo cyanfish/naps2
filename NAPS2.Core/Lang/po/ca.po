@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-12 22:45+0000\n"
-"PO-Revision-Date: 2013-11-10 00:19+0000\n"
+"PO-Revision-Date: 2015-06-01 20:15+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ca\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1384042754.0\n"
+"X-POOTLE-MTIME: 1433189707.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -24,7 +24,7 @@ msgstr "1200 ppp"
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr ""
+msgstr "150 ppp"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
@@ -40,7 +40,7 @@ msgstr "300 ppp"
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr ""
+msgstr "400 ppp"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
@@ -48,7 +48,7 @@ msgstr "600 ppp"
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr ""
+msgstr "800 ppp"
 
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
@@ -183,8 +183,9 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
+#, fuzzy
 msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
-msgstr ""
+msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-12 22:45+0000\n"
-"PO-Revision-Date: 2013-11-12 03:13+0000\n"
+"PO-Revision-Date: 2015-06-01 20:17+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: cs\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1384226028.0\n"
+"X-POOTLE-MTIME: 1433189828.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -24,7 +24,7 @@ msgstr "1200 dpi"
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr ""
+msgstr "150 dpi"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
@@ -40,7 +40,7 @@ msgstr "300 dpi"
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr ""
+msgstr "400 dpi"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
@@ -48,7 +48,7 @@ msgstr "600 dpi"
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr ""
+msgstr "800 dpi"
 
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
@@ -61,7 +61,7 @@ msgstr "A3 (297 x 420 mm)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4  (210 x 297 mm)"
+msgstr "A4 (210 x 297 mm)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"

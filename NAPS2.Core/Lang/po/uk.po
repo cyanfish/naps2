@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-12 22:46+0000\n"
-"PO-Revision-Date: 2013-11-10 00:30+0000\n"
+"PO-Revision-Date: 2015-06-01 20:13+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: uk\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1384043426.0\n"
+"X-POOTLE-MTIME: 1433189596.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -23,9 +23,8 @@ msgid "1200 dpi"
 msgstr "1200 т/д"
 
 #: SettingsResources.resx$Dpi_150$Message
-#, fuzzy
 msgid "150 dpi"
-msgstr "100 т/д"
+msgstr "150 т/д"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
@@ -41,7 +40,7 @@ msgstr "300 т/д"
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr ""
+msgstr "400 т/д"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
@@ -49,12 +48,12 @@ msgstr "600 т/д"
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr ""
+msgstr "800 т/д"
 
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr ""
+msgstr "Є оновлення. Встановити?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -83,11 +82,11 @@ msgstr "Додати"
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 msgid "All ({0})"
-msgstr ""
+msgstr "Всі ({0})"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr ""
+msgstr "При відправці пошти сталася помилка"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
@@ -111,7 +110,7 @@ msgstr "Ви справді бажаєте видалити {0} профілів
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr ""
+msgstr "Автоматичне оновлення"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -173,7 +172,7 @@ msgstr "Контрастність"
 
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
-msgstr ""
+msgstr "Копіювати"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
@@ -184,9 +183,8 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Авторські права належать Michael Adams, 2012"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-#, fuzzy
 msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
-msgstr "Авторські права належать Ben Olden-Cooligan, 2012-2013 "
+msgstr "Авторські права належать Ben Olden-Cooligan, 2012-2014"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -206,7 +204,7 @@ msgstr ""
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr ""
+msgstr "Позбавити чергування"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FManageProfiles.resx$btnDelete.Text$Message
@@ -225,7 +223,7 @@ msgstr "Назва"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr ""
+msgstr "Увімкнути автоматичне оновлення?"
 
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
@@ -235,20 +233,20 @@ msgstr "Завершити"
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 #: MiscResources.resx$Download$Message
 msgid "Download"
-msgstr ""
+msgstr "Звантаження"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr ""
+msgstr "Помилка звантаження"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr ""
+msgstr "Поступ звантаження"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
-msgstr ""
+msgstr "Завантаження та встановлення"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -273,7 +271,7 @@ msgstr "Помилка"
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 msgid "Estimated download size: {0} MB"
-msgstr ""
+msgstr "Приблизний об’єм звантаження: {0} МБ"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"

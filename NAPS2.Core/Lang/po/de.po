@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-12 22:45+0000\n"
-"PO-Revision-Date: 2013-11-10 00:21+0000\n"
+"PO-Revision-Date: 2015-06-01 20:03+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: de\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1384042881.0\n"
+"X-POOTLE-MTIME: 1433189001.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -23,9 +23,8 @@ msgid "1200 dpi"
 msgstr "1200 dpi"
 
 #: SettingsResources.resx$Dpi_150$Message
-#, fuzzy
 msgid "150 dpi"
-msgstr "100 dpi"
+msgstr "150 dpi"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
@@ -40,21 +39,25 @@ msgid "300 dpi"
 msgstr "300 dpi"
 
 #: SettingsResources.resx$Dpi_400$Message
+#, fuzzy
 msgid "400 dpi"
-msgstr ""
+msgstr "400 dpi"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
 msgstr "600 dpi"
 
 #: SettingsResources.resx$Dpi_800$Message
+#, fuzzy
 msgid "800 dpi"
-msgstr ""
+msgstr "800 dpi"
 
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
 msgstr ""
+"Eine neuere Version von NAPS2 ist verfügbar. Möchten Sie jetzt "
+"aktualisieren?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -62,7 +65,7 @@ msgstr "A3 (297 × 420 mm)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4  (210x297 mm)"
+msgstr "A4 (210x297 mm)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
@@ -83,15 +86,15 @@ msgstr "Hinzufügen"
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 msgid "All ({0})"
-msgstr ""
+msgstr "Alle ({0})"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr ""
+msgstr "Beim Versuch eine Email zu senden ist ein Fehler aufgetreten."
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "Ein Fehler ist mit dem Sanner-Treiber aufgetreten"
+msgstr "Ein Fehler ist mit dem Scanner-Treiber aufgetreten"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -99,7 +102,7 @@ msgstr "Möchten Sie wirklich {0} Seite(n) löschen?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Möchten Sie wirklich {0} Profile löschen?"
+msgstr "Möchten Sie wirklich das Profil {0} löschen?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
@@ -111,7 +114,7 @@ msgstr "Möchten Sie wirklich {0} Profile löschen?"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr ""
+msgstr "Automatische Aktualisierungen"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -173,7 +176,7 @@ msgstr "Kontrast"
 
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
-msgstr ""
+msgstr "Kopieren"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
@@ -206,7 +209,7 @@ msgstr ""
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr ""
+msgstr "Zeilensprünge entfernen"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FManageProfiles.resx$btnDelete.Text$Message
@@ -225,7 +228,7 @@ msgstr "Angezeigter Name"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr ""
+msgstr "Soll NAPS2 automatisch nach Aktualisierungen suchen?"
 
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
@@ -235,20 +238,20 @@ msgstr "Fertig"
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 #: MiscResources.resx$Download$Message
 msgid "Download"
-msgstr ""
+msgstr "Herunterladen"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr ""
+msgstr "Fehler beim Herunterladen"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr ""
+msgstr "Download-Fortschritt"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
-msgstr ""
+msgstr "Herunterladen und Installieren"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -273,7 +276,7 @@ msgstr "Fehler"
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 msgid "Estimated download size: {0} MB"
-msgstr ""
+msgstr "Geschätzte Download-Größe: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -293,7 +296,7 @@ msgstr "GIF Datei (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr ""
+msgstr "Weitere Sprachen installieren"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -313,23 +316,23 @@ msgstr "Icons von"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
-msgstr ""
+msgstr "Importieren"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
-msgstr ""
+msgstr "Installation abgeschlossen"
 
 #: MiscResources.resx$InstallFailedTitle$Message
 msgid "Installation Failed"
-msgstr ""
+msgstr "Installation fehlgeschlagen"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr ""
+msgstr "Installation abgeschlossen. Soll NAPS2 jetzt neugestartet werden?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
-msgstr ""
+msgstr "Installation fehlgeschlagen"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
@@ -353,7 +356,7 @@ msgstr "Hauptwerkzeugleiste"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr ""
+msgstr "PDF mittels OCR durchsuchbar machen"
 
 #: FChooseProfile.resx$btnProfiles.Text$Message
 msgid "Manage Profiles"
@@ -365,7 +368,7 @@ msgstr "max. Qualität (große Dateien)"
 
 #: FDesktop.resx$tsMoveDown.Text$Message
 msgid "Move Down"
-msgstr "Nach oben"
+msgstr "Nach unten"
 
 #: FDesktop.resx$tsMoveUp.Text$Message
 msgid "Move Up"
@@ -395,23 +398,23 @@ msgstr "Not Another PDF Scanner 2"
 #: FRecover.resx$btnCancel.Text$Message
 #: MiscResources.resx$NotNow$Message
 msgid "Not Now"
-msgstr ""
+msgstr "Jetzt nicht"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr ""
+msgstr "Texterkennung"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr ""
+msgstr "Sprachpaket herunterladen"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr ""
+msgstr "Texterkennung einrichten"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr ""
+msgstr "Texterkennung Sprache"
 
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
@@ -423,7 +426,7 @@ msgstr "OK"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
-msgstr ""
+msgstr "Eine oder mehrere Dateien konnten nicht heruntergeladen werden"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -472,7 +475,7 @@ msgstr ""
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
-msgstr ""
+msgstr "Neu ordnen"
 
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
@@ -488,7 +491,7 @@ msgstr "Rechts"
 
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
-msgstr ""
+msgstr "Drehen"
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
@@ -526,7 +529,7 @@ msgstr "Eingelesenes Bild"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
-msgstr ""
+msgstr "Alle auswählen"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
@@ -534,7 +537,7 @@ msgstr "Wählen Sie ein Profil vor dem Scannen"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr ""
+msgstr "Wählen Sie eine oder mehrere Sprachen aus"
 
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
@@ -542,7 +545,7 @@ msgstr ""
 #: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
 msgid "Selected ({0})"
-msgstr ""
+msgstr "Ausgewählt ({0})"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -554,11 +557,13 @@ msgstr "TWAIN Treiber"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file "{0}" could not be imported"
-msgstr ""
+msgstr "Die Datei \"{0}\" konnte nicht importiert werden"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
+"Die Datei \"{0}\" Konnte nicht importiert werden. Nur PDF-Datein, die von "
+"NAPS2 erstellt wurden, können importiert werden."
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -582,7 +587,7 @@ msgstr "US Letter (8.5x11 in)"
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
-msgstr ""
+msgstr "NAPS2 aktualisieren"
 
 #: FEditScanSettings.resx$rdbNativeWIA.Text$Message
 msgid "Use native WIA UI"
@@ -595,6 +600,8 @@ msgstr "Vordefinierte Einstellungen"
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
 msgstr ""
+"Um die Texterkennung zu verwenden, müssen Sie alle gewünschten Sprachen "
+"herunterladen"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -602,7 +609,7 @@ msgstr "Version {0}"
 
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
-msgstr ""
+msgstr "Betrachten"
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -624,7 +631,7 @@ msgstr ""
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom in"
@@ -633,7 +640,7 @@ msgstr ""
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom out"
-msgstr ""
+msgstr "Verkleinern"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
@@ -658,12 +665,12 @@ msgstr ""
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgress$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
-msgstr ""
+msgstr "{0} / {1} Dateien"
 
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"

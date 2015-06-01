@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-12 22:45+0000\n"
-"PO-Revision-Date: 2015-05-09 04:33+0000\n"
-"Last-Translator: cheche <juanjo@apertus.es>\n"
+"PO-Revision-Date: 2015-06-01 19:56+0000\n"
+"Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1431145990.0\n"
+"X-POOTLE-MTIME: 1433188583.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -39,24 +39,22 @@ msgid "300 dpi"
 msgstr "300 ppp"
 
 #: SettingsResources.resx$Dpi_400$Message
-#, fuzzy
 msgid "400 dpi"
-msgstr "100 ppp"
+msgstr "400 ppp"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
 msgstr "600 ppp"
 
 #: SettingsResources.resx$Dpi_800$Message
-#, fuzzy
 msgid "800 dpi"
-msgstr "100 ppp"
+msgstr "800 ppp"
 
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
 msgstr ""
-"Una versión de NAPS2 está disponible. ¿Desea realizar la actualización "
+"Una nueva versión de NAPS2 está disponible. ¿Desea realizar la actualización "
 "ahora?"
 
 #: SettingsResources.resx$PageSize_A3$Message
@@ -118,11 +116,11 @@ msgstr "Actualizaciones automáticas"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
@@ -196,15 +194,15 @@ msgstr "Derechos reservados © 2013 Peter De Leeuw"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr ""
+msgstr "Personalizar"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr ""
+msgstr "PERSONALIZADO ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr ""
+msgstr "Personalizar Tamaño de Pagina"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -230,7 +228,6 @@ msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "¿Desea que NAPS2 busque actualizaciones automáticamente?"
 
 #: FChooseProfile.resx$btnDone.Text$Message
-#, fuzzy
 msgid "Done"
 msgstr "Terminado"
 
@@ -463,7 +460,7 @@ msgstr "Perfiles"
 
 #: FDesktop.resx$btnQuickScan.Text$Message
 msgid "Quick Scan"
-msgstr ""
+msgstr "Digitalización Rápida"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -471,7 +468,7 @@ msgstr "Recuperar"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "Recuperar Images Digitalizadas"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -619,7 +616,7 @@ msgstr "Esperando que TWAIN finalice"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr ""
+msgstr "Tamaño de Pagina"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
@@ -640,7 +637,7 @@ msgstr "Alejar"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://sourceforge.com/projects/naps2"
@@ -652,11 +649,11 @@ msgstr "http://www.fatcow.com/free-icons"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "Pulg"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -672,8 +669,8 @@ msgstr "{0} / {1} archivos"
 #, fuzzy
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
-"{0} imagen(es) escaneada(s) el {1} a las {2} quizás no han sido guardada(s) "
-"y son recuperables. ¿Quieres recuperarlas?"
+"{0} imagen(es) escaneada(s) desde las paginas {1} a las {2} quizás no han "
+"sido guardada(s) y se pueden recuperar. ¿Deseas recuperarlas?"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
