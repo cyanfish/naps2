@@ -13,7 +13,7 @@ namespace NAPS2.Ocr
 {
     public class TesseractOcrEngine : IOcrEngine
     {
-        private const int TESSERACT_TIMEOUT_MS = 20 * 1000;
+        private const int TESSERACT_TIMEOUT_MS = 60 * 1000;
         private readonly OcrDependencyManager ocrDependencyManager;
 
         public TesseractOcrEngine(OcrDependencyManager ocrDependencyManager)
