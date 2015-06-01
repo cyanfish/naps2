@@ -118,106 +118,149 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
-        <value>Microsoft Sans Serif, 8.25pt</value>
+    <data name="lvProfiles.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 12</value>
     </data>
-    <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 9</value>
-    </data>
-    <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
-        <value>372, 46</value>
+    <data name="lvProfiles.Size" type="System.Drawing.Size, System.Drawing">
+        <value>563, 80</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
+    <data name="lvProfiles.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
     </data>
-    <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} billede(r) skannet på {1} af {2} er måske ikke blevet gemt, men er mulige at genskabe. Vil du genskabe dem?</value>
+    <data name="&gt;&gt;lvProfiles.Name" xml:space="preserve">
+        <value>lvProfiles</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
-        <value>lblPrompt</value>
+    <data name="&gt;&gt;lvProfiles.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;lblPrompt.Parent" xml:space="preserve">
+    <data name="&gt;&gt;lvProfiles.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;lvProfiles.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="btnRecover.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 58</value>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+        <value>None</value>
     </data>
-    <data name="btnRecover.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
+    <data name="btnScan.Font" type="System.Drawing.Font, System.Drawing">
+        <value>Microsoft Sans Serif, 8.25pt</value>
     </data>
-    <data name="btnRecover.TabIndex" type="System.Int32, mscorlib">
+    <data name="btnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>TopCenter</value>
+    </data>
+    <data name="btnScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="btnScan.Location" type="System.Drawing.Point, System.Drawing">
+        <value>581, 12</value>
+    </data>
+    <data name="btnScan.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+        <value>0, 10, 0, 6</value>
+    </data>
+    <data name="btnScan.Size" type="System.Drawing.Size, System.Drawing">
+        <value>94, 80</value>
+    </data>
+    <data name="btnScan.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnRecover.Text" xml:space="preserve">
-        <value>Gendan</value>
+    <data name="btnScan.Text" xml:space="preserve">
+        <value>&amp;Skano</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Name" xml:space="preserve">
-        <value>btnRecover</value>
+    <data name="btnScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>BottomCenter</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Type" xml:space="preserve">
+    <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
+        <value>btnScan</value>
+    </data>
+    <data name="&gt;&gt;btnScan.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Parent" xml:space="preserve">
+    <data name="&gt;&gt;btnScan.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnRecover.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;btnScan.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
-        <value>138, 58</value>
+    <data name="btnProfiles.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+        <value>None</value>
     </data>
-    <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
+    <data name="btnProfiles.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>MiddleLeft</value>
     </data>
-    <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
+    <data name="btnProfiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="btnProfiles.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 98</value>
+    </data>
+    <data name="btnProfiles.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+        <value>4, 0, 4, 0</value>
+    </data>
+    <data name="btnProfiles.Size" type="System.Drawing.Size, System.Drawing">
+        <value>128, 32</value>
+    </data>
+    <data name="btnProfiles.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="btnDelete.Text" xml:space="preserve">
-        <value>Slet</value>
+    <data name="btnProfiles.Text" xml:space="preserve">
+        <value>Menaxho profilet</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
-        <value>btnDelete</value>
+    <data name="btnProfiles.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>MiddleRight</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
+    <data name="&gt;&gt;btnProfiles.Name" xml:space="preserve">
+        <value>btnProfiles</value>
+    </data>
+    <data name="&gt;&gt;btnProfiles.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
+    <data name="&gt;&gt;btnProfiles.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;btnProfiles.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>264, 58</value>
+    <data name="btnDone.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+        <value>None</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>120, 30</value>
+    <data name="btnDone.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>MiddleLeft</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="btnDone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="btnDone.Location" type="System.Drawing.Point, System.Drawing">
+        <value>581, 98</value>
+    </data>
+    <data name="btnDone.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+        <value>4, 0, 0, 0</value>
+    </data>
+    <data name="btnDone.Size" type="System.Drawing.Size, System.Drawing">
+        <value>94, 32</value>
+    </data>
+    <data name="btnDone.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
-        <value>Ikke nu</value>
+    <data name="btnDone.Text" xml:space="preserve">
+        <value>U krye</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
+        <value>btnDone</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;btnDone.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;btnDone.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;btnDone.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
+    <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <value>17, 17</value>
+    </metadata>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
     </metadata>
@@ -225,15 +268,50 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>396, 100</value>
+        <value>687, 142</value>
+    </data>
+    <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAFxcXPldXV6RYWFilV1dXpFZWVqRUVFSkVFRUpFRUVKRSUlKkUlJSpFRSVKRcVlymRkRGnQAA
+        AC8AAAAAAAAAAI2NjcHm5ub/3t7e/97e3v/d3d3/3d3d/9/f3//f39//3Nzc/93c3f/Y2tj/pNKk/8rY
+        yv9KSEqZAAAAAAAAAAChoaHN5+jo/+Hj5f/g4uT/6Orr//n6/P/+/////f////T29//l5un/097X/2vO
+        bv+63Lr/ZWBlpAAAAAAAAAAAsLCwzf36+P/l1s//49TM/+ja0v/s39j/697Z/+ve2P/r3tf/5tjQ/+PU
+        zP/t3t3//////2NjY6IAAAAAAAAAAKKjprLx18H/7MGL//XWpP/44rb/+enD//nt0f/568z/+ea7//bc
+        rf/00Zz/57uL//Hl4P9KTE6DAAAAAAAAAABnaW1z8NfD//LIj//74bX//uvH///xzf//8MT//+2+//3n
+        t//63qr/+NOZ/+q8i//a09D+ExYWQgAAAAAAAAAAMDQ0PuXXzv3uyJ3//ObF//zoyv/87ND//OvL//rg
+        sv/316H/9s+W//PEhf/txZ//s7K03gAAABAAAAAAAAAAAAAPDxHOysjl5byb//zkw//75sn/++fM//vp
+        z//758n/+N20//bTpP/uv4v/7s+2/4eKjLAAAAAAAAAAAAAAAAAAAAAAmpueqe7Lr//217P/++TI//vl
+        yf/75sr/++bK//vlyv/85cr/7cSe/+nVyv9RU1V/AAAAAAAAAAAAAAAAAAAAAFhbXV7s3tX/5MOq/+fN
+        t//nzrj/5865/+fOuP/nzbf/58y1/+XHsP/NysjtExMTMQAAAAAAAAAAAAAAAAAAAAAREREsu7y987Gx
+        s/+kpKX/paWm/6Wlpv+lpab/paWm/6SjpP/Lzc//cnJzvAAAAAEAAAAAAAAAAAAAAAAAAAAAV1dXfNDQ
+        0P+JiYr/iYmK/4qKi/+Kiov/ioqL/4qKi/+Hh4j/pqam/7e3t/YEBAQ4AAAAAAAAAAAAAAAAAAAAELCw
+        sNm3t7f/mpqa/56env+enp7/np6e/56env+enp7/np6e/5qamv/S0tL/SUlJkwAAAAAAAAAAAAAAADo6
+        Olb09PT/ra2t/6mpqf+oqKj/p6en/6enp/+np6f/p6en/6qqqv+lpaX/2dnZ/6qqqt8AAAAXAAAAAAAA
+        AABLS0tT8/Pz/O7u7vzn5+f69PT0//j4+P/39/f/+Pj4//r6+v/s7Oz95OTk+vj4+P+enp7JAAAADQAA
+        AAAAAAAAAAAAAZKSkiaNjY00c3NzMKampqHi4uLl2dnZ3tnZ2eDKysrbS0tLYUhISC1KSkozDQ0NEwAA
+        AAAAAAAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIADAADAAwAAwAMAAMADAADAAwAAgAMAAIAB
+        AACAAQAAgAMAAA==
+</value>
+    </data>
+    <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+        <value>600, 181</value>
+    </data>
+    <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+        <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Gendan skannet billeder</value>
+        <value>Zgjidh Profilin</value>
+    </data>
+    <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
+        <value>ilProfileIcons</value>
+    </data>
+    <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
+        <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=3.0.1.21592, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FRecover</value>
+        <value>FChooseProfile</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.22698, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.21592, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

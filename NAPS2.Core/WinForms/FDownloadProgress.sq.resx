@@ -117,100 +117,150 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Sort/hvid</value>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="progressBarSub.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 77</value>
     </data>
-    <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit farve</value>
+    <data name="progressBarSub.Size" type="System.Drawing.Size, System.Drawing">
+        <value>417, 38</value>
     </data>
-    <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Gråskala</value>
+    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="progressBarSub.TabIndex" type="System.Int32, mscorlib">
+        <value>0</value>
     </data>
-    <data name="Dpi_100" xml:space="preserve">
-        <value>100 dpi</value>
+    <data name="&gt;&gt;progressBarSub.Name" xml:space="preserve">
+        <value>progressBarSub</value>
     </data>
-    <data name="Dpi_1200" xml:space="preserve">
-        <value>1200 dpi</value>
+    <data name="&gt;&gt;progressBarSub.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+    <data name="&gt;&gt;progressBarSub.Parent" xml:space="preserve">
+        <value>$this</value>
     </data>
-    <data name="Dpi_200" xml:space="preserve">
-        <value>200 dpi</value>
+    <data name="&gt;&gt;progressBarSub.ZOrder" xml:space="preserve">
+        <value>4</value>
     </data>
-    <data name="Dpi_300" xml:space="preserve">
-        <value>300 dpi</value>
+    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+        <value>354, 121</value>
     </data>
-    <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+        <value>75, 23</value>
     </data>
-    <data name="Dpi_600" xml:space="preserve">
-        <value>600 dpi</value>
+    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+        <value>1</value>
     </data>
-    <data name="Dpi_800" xml:space="preserve">
-        <value>800 dpi</value>
+    <data name="btnCancel.Text" xml:space="preserve">
+        <value>Anulo</value>
     </data>
-    <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Centrér</value>
+    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+        <value>btnCancel</value>
     </data>
-    <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Venstre</value>
+    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Højre</value>
+    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+        <value>$this</value>
     </data>
-    <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm.</value>
+    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+        <value>3</value>
     </data>
-    <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>tommer</value>
+    <data name="labelSub.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
     </data>
-    <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm.</value>
+    <data name="labelSub.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 118</value>
     </data>
-    <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 mm)</value>
+    <data name="labelSub.Size" type="System.Drawing.Size, System.Drawing">
+        <value>65, 13</value>
     </data>
-    <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
+    <data name="labelSub.TabIndex" type="System.Int32, mscorlib">
+        <value>2</value>
     </data>
-    <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 mm)</value>
+    <data name="labelSub.Text" xml:space="preserve">
+        <value>{0} / {1} MB</value>
     </data>
-    <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+    <data name="&gt;&gt;labelSub.Name" xml:space="preserve">
+        <value>labelSub</value>
     </data>
-    <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+    <data name="&gt;&gt;labelSub.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="PageSize_Custom" xml:space="preserve">
-        <value>Brugertilpasset...</value>
+    <data name="&gt;&gt;labelSub.Parent" xml:space="preserve">
+        <value>$this</value>
     </data>
-    <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+    <data name="&gt;&gt;labelSub.ZOrder" xml:space="preserve">
+        <value>2</value>
     </data>
-    <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+    <data name="labelTop.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
     </data>
-    <data name="Scale_1_1" xml:space="preserve">
-        <value>1:1</value>
+    <data name="labelTop.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 53</value>
     </data>
-    <data name="Scale_1_2" xml:space="preserve">
-        <value>1:2</value>
+    <data name="labelTop.Size" type="System.Drawing.Size, System.Drawing">
+        <value>67, 13</value>
     </data>
-    <data name="Scale_1_4" xml:space="preserve">
-        <value>1:4</value>
+    <data name="labelTop.TabIndex" type="System.Int32, mscorlib">
+        <value>4</value>
     </data>
-    <data name="Scale_1_8" xml:space="preserve">
-        <value>1:8</value>
+    <data name="labelTop.Text" xml:space="preserve">
+        <value>{0} / {1} skedarë</value>
     </data>
-    <data name="Source_Duplex" xml:space="preserve">
-        <value>Dupleks</value>
+    <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
+        <value>labelTop</value>
     </data>
-    <data name="Source_Feeder" xml:space="preserve">
-        <value>Føder</value>
+    <data name="&gt;&gt;labelTop.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="Source_Glass" xml:space="preserve">
-        <value>Glas</value>
+    <data name="&gt;&gt;labelTop.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;labelTop.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="progressBarTop.Location" type="System.Drawing.Point, System.Drawing">
+        <value>14, 12</value>
+    </data>
+    <data name="progressBarTop.Size" type="System.Drawing.Size, System.Drawing">
+        <value>417, 38</value>
+    </data>
+    <data name="progressBarTop.TabIndex" type="System.Int32, mscorlib">
+        <value>3</value>
+    </data>
+    <data name="&gt;&gt;progressBarTop.Name" xml:space="preserve">
+        <value>progressBarTop</value>
+    </data>
+    <data name="&gt;&gt;progressBarTop.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;progressBarTop.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;progressBarTop.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>True</value>
+    </metadata>
+    <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+        <value>6, 13</value>
+    </data>
+    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+        <value>441, 156</value>
+    </data>
+    <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+        <value>1000, 195</value>
+    </data>
+    <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+        <value>350, 195</value>
+    </data>
+    <data name="$this.Text" xml:space="preserve">
+        <value>Progresi i shkarkimit</value>
+    </data>
+    <data name="&gt;&gt;$this.Name" xml:space="preserve">
+        <value>FDownloadProgress</value>
+    </data>
+    <data name="&gt;&gt;$this.Type" xml:space="preserve">
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.22698, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

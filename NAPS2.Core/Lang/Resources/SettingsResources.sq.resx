@@ -118,13 +118,13 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Sort/hvid</value>
+        <value>Bardhë e zi</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit farve</value>
+        <value>Ngjyra me 24 bit</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Gråskala</value>
+        <value>E hirtë</value>
     </data>
     <data name="Dpi_100" xml:space="preserve">
         <value>100 dpi</value>
@@ -151,46 +151,46 @@
         <value>800 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Centrér</value>
+        <value>Në qendër</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Venstre</value>
+        <value>Majtas</value>
     </data>
     <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Højre</value>
+        <value>Djathtas</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm.</value>
+        <value>cm</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>tommer</value>
+        <value>inç</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm.</value>
+        <value>mm</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 mm)</value>
+        <value>A3 (297 x 420 mm)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
+        <value>A4 (210 x 297 mm)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 mm)</value>
+        <value>A5 (148 x 210 mm)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+        <value>B4 (250 x 353 mm)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+        <value>B5 (176 x 250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Brugertilpasset...</value>
+        <value>E personalizuar...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>Ligjore SHBA (8.5 x 14 inç)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>Letër SHBA (8.5 x 11 inç)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>
@@ -208,9 +208,9 @@
         <value>Dupleks</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Føder</value>
+        <value>Furnizuesi</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
-        <value>Glas</value>
+        <value>Xham</value>
     </data>
 </root>

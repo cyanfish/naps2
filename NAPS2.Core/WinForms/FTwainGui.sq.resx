@@ -117,100 +117,58 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Sort/hvid</value>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+        <value>Fill</value>
     </data>
-    <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit farve</value>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+        <value>Microsoft Sans Serif, 20.25pt, style=Bold</value>
     </data>
-    <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Gråskala</value>
+    <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+        <value>0, 0</value>
     </data>
-    <data name="Dpi_100" xml:space="preserve">
-        <value>100 dpi</value>
+    <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>631, 104</value>
     </data>
-    <data name="Dpi_1200" xml:space="preserve">
-        <value>1200 dpi</value>
+    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="label1.TabIndex" type="System.Int32, mscorlib">
+        <value>1</value>
     </data>
-    <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+    <data name="label1.Text" xml:space="preserve">
+        <value>Po pret që të përfundojë TWAIN...</value>
     </data>
-    <data name="Dpi_200" xml:space="preserve">
-        <value>200 dpi</value>
+    <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>MiddleCenter</value>
     </data>
-    <data name="Dpi_300" xml:space="preserve">
-        <value>300 dpi</value>
+    <data name="&gt;&gt;label1.Name" xml:space="preserve">
+        <value>label1</value>
     </data>
-    <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+    <data name="&gt;&gt;label1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="Dpi_600" xml:space="preserve">
-        <value>600 dpi</value>
+    <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+        <value>$this</value>
     </data>
-    <data name="Dpi_800" xml:space="preserve">
-        <value>800 dpi</value>
+    <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+        <value>0</value>
     </data>
-    <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Centrér</value>
+    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>True</value>
+    </metadata>
+    <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+        <value>6, 13</value>
     </data>
-    <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Venstre</value>
+    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+        <value>631, 104</value>
     </data>
-    <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Højre</value>
+    <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+        <value>CenterScreen</value>
     </data>
-    <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm.</value>
+    <data name="&gt;&gt;$this.Name" xml:space="preserve">
+        <value>FTwainGui</value>
     </data>
-    <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>tommer</value>
-    </data>
-    <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm.</value>
-    </data>
-    <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 mm)</value>
-    </data>
-    <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
-    </data>
-    <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 mm)</value>
-    </data>
-    <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
-    </data>
-    <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
-    </data>
-    <data name="PageSize_Custom" xml:space="preserve">
-        <value>Brugertilpasset...</value>
-    </data>
-    <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
-    </data>
-    <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
-    </data>
-    <data name="Scale_1_1" xml:space="preserve">
-        <value>1:1</value>
-    </data>
-    <data name="Scale_1_2" xml:space="preserve">
-        <value>1:2</value>
-    </data>
-    <data name="Scale_1_4" xml:space="preserve">
-        <value>1:4</value>
-    </data>
-    <data name="Scale_1_8" xml:space="preserve">
-        <value>1:8</value>
-    </data>
-    <data name="Source_Duplex" xml:space="preserve">
-        <value>Dupleks</value>
-    </data>
-    <data name="Source_Feeder" xml:space="preserve">
-        <value>Føder</value>
-    </data>
-    <data name="Source_Glass" xml:space="preserve">
-        <value>Glas</value>
+    <data name="&gt;&gt;$this.Type" xml:space="preserve">
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.29730, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

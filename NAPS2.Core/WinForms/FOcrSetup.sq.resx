@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-        <value>Lav PDF'er søgebar med OCR</value>
+        <value>Bëji PDF-të të kërkueshme duke përdorur OCR</value>
     </data>
     <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
         <value>checkBoxEnableOcr</value>
@@ -159,7 +159,7 @@
         <value>1</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>OCR sprog:</value>
+        <value>Gjuha e OCR:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -208,7 +208,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Fortryd</value>
+        <value>Anulo</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -235,7 +235,7 @@
         <value>4</value>
     </data>
     <data name="linkGetLanguages.Text" xml:space="preserve">
-        <value>Hent flere sprog</value>
+        <value>Merr më shumë gjuhë</value>
     </data>
     <data name="&gt;&gt;linkGetLanguages.Name" xml:space="preserve">
         <value>linkGetLanguages</value>
@@ -289,7 +289,7 @@
         <value>336, 139</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>OCR opsætning</value>
+        <value>Konfigurimi i OCR</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrSetup</value>

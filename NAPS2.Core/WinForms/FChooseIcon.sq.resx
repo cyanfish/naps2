@@ -117,100 +117,84 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Sort/hvid</value>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="iconList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+        <value>Fill</value>
     </data>
-    <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit farve</value>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="iconList.Location" type="System.Drawing.Point, System.Drawing">
+        <value>0, 0</value>
     </data>
-    <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Gråskala</value>
+    <data name="iconList.Size" type="System.Drawing.Size, System.Drawing">
+        <value>316, 302</value>
     </data>
-    <data name="Dpi_100" xml:space="preserve">
-        <value>100 dpi</value>
+    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="iconList.TabIndex" type="System.Int32, mscorlib">
+        <value>0</value>
     </data>
-    <data name="Dpi_1200" xml:space="preserve">
-        <value>1200 dpi</value>
+    <data name="&gt;&gt;iconList.Name" xml:space="preserve">
+        <value>iconList</value>
     </data>
-    <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+    <data name="&gt;&gt;iconList.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="Dpi_200" xml:space="preserve">
-        <value>200 dpi</value>
+    <data name="&gt;&gt;iconList.Parent" xml:space="preserve">
+        <value>$this</value>
     </data>
-    <data name="Dpi_300" xml:space="preserve">
-        <value>300 dpi</value>
+    <data name="&gt;&gt;iconList.ZOrder" xml:space="preserve">
+        <value>0</value>
     </data>
-    <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+    <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <value>17, 17</value>
+    </metadata>
+    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>True</value>
+    </metadata>
+    <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>ru</value>
+    </metadata>
+    <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+        <value>6, 13</value>
     </data>
-    <data name="Dpi_600" xml:space="preserve">
-        <value>600 dpi</value>
+    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+        <value>316, 302</value>
     </data>
-    <data name="Dpi_800" xml:space="preserve">
-        <value>800 dpi</value>
+    <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAFxcXPldXV6RYWFilV1dXpFZWVqRUVFSkVFRUpFRUVKRSUlKkUlJSpFRSVKRcVlymRkRGnQAA
+        AC8AAAAAAAAAAI2NjcHm5ub/3t7e/97e3v/d3d3/3d3d/9/f3//f39//3Nzc/93c3f/Y2tj/pNKk/8rY
+        yv9KSEqZAAAAAAAAAAChoaHN5+jo/+Hj5f/g4uT/6Orr//n6/P/+/////f////T29//l5un/097X/2vO
+        bv+63Lr/ZWBlpAAAAAAAAAAAsLCwzf36+P/l1s//49TM/+ja0v/s39j/697Z/+ve2P/r3tf/5tjQ/+PU
+        zP/t3t3//////2NjY6IAAAAAAAAAAKKjprLx18H/7MGL//XWpP/44rb/+enD//nt0f/568z/+ea7//bc
+        rf/00Zz/57uL//Hl4P9KTE6DAAAAAAAAAABnaW1z8NfD//LIj//74bX//uvH///xzf//8MT//+2+//3n
+        t//63qr/+NOZ/+q8i//a09D+ExYWQgAAAAAAAAAAMDQ0PuXXzv3uyJ3//ObF//zoyv/87ND//OvL//rg
+        sv/316H/9s+W//PEhf/txZ//s7K03gAAABAAAAAAAAAAAAAPDxHOysjl5byb//zkw//75sn/++fM//vp
+        z//758n/+N20//bTpP/uv4v/7s+2/4eKjLAAAAAAAAAAAAAAAAAAAAAAmpueqe7Lr//217P/++TI//vl
+        yf/75sr/++bK//vlyv/85cr/7cSe/+nVyv9RU1V/AAAAAAAAAAAAAAAAAAAAAFhbXV7s3tX/5MOq/+fN
+        t//nzrj/5865/+fOuP/nzbf/58y1/+XHsP/NysjtExMTMQAAAAAAAAAAAAAAAAAAAAAREREsu7y987Gx
+        s/+kpKX/paWm/6Wlpv+lpab/paWm/6SjpP/Lzc//cnJzvAAAAAEAAAAAAAAAAAAAAAAAAAAAV1dXfNDQ
+        0P+JiYr/iYmK/4qKi/+Kiov/ioqL/4qKi/+Hh4j/pqam/7e3t/YEBAQ4AAAAAAAAAAAAAAAAAAAAELCw
+        sNm3t7f/mpqa/56env+enp7/np6e/56env+enp7/np6e/5qamv/S0tL/SUlJkwAAAAAAAAAAAAAAADo6
+        Olb09PT/ra2t/6mpqf+oqKj/p6en/6enp/+np6f/p6en/6qqqv+lpaX/2dnZ/6qqqt8AAAAXAAAAAAAA
+        AABLS0tT8/Pz/O7u7vzn5+f69PT0//j4+P/39/f/+Pj4//r6+v/s7Oz95OTk+vj4+P+enp7JAAAADQAA
+        AAAAAAAAAAAAAZKSkiaNjY00c3NzMKampqHi4uLl2dnZ3tnZ2eDKysrbS0tLYUhISC1KSkozDQ0NEwAA
+        AAAAAAAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIADAADAAwAAwAMAAMADAADAAwAAgAMAAIAB
+        AACAAQAAgAMAAA==
+</value>
     </data>
-    <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Centrér</value>
+    <data name="$this.Text" xml:space="preserve">
+        <value>Zgjidh Ikonën</value>
     </data>
-    <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Venstre</value>
+    <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
+        <value>ilProfileIcons</value>
     </data>
-    <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Højre</value>
+    <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
+        <value>NAPS2.ILProfileIcons, NAPS2, Version=2.1.4952.26857, Culture=neutral, PublicKeyToken=null</value>
     </data>
-    <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm.</value>
+    <data name="&gt;&gt;$this.Name" xml:space="preserve">
+        <value>FChooseIcon</value>
     </data>
-    <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>tommer</value>
-    </data>
-    <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm.</value>
-    </data>
-    <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 mm)</value>
-    </data>
-    <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
-    </data>
-    <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 mm)</value>
-    </data>
-    <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
-    </data>
-    <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
-    </data>
-    <data name="PageSize_Custom" xml:space="preserve">
-        <value>Brugertilpasset...</value>
-    </data>
-    <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
-    </data>
-    <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
-    </data>
-    <data name="Scale_1_1" xml:space="preserve">
-        <value>1:1</value>
-    </data>
-    <data name="Scale_1_2" xml:space="preserve">
-        <value>1:2</value>
-    </data>
-    <data name="Scale_1_4" xml:space="preserve">
-        <value>1:4</value>
-    </data>
-    <data name="Scale_1_8" xml:space="preserve">
-        <value>1:8</value>
-    </data>
-    <data name="Source_Duplex" xml:space="preserve">
-        <value>Dupleks</value>
-    </data>
-    <data name="Source_Feeder" xml:space="preserve">
-        <value>Føder</value>
-    </data>
-    <data name="Source_Glass" xml:space="preserve">
-        <value>Glas</value>
+    <data name="&gt;&gt;$this.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
 </root>

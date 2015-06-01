@@ -124,19 +124,19 @@
         <value>Ryd</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Vil du virkelig slette dette element?</value>
+        <value>Vil du virkelig slette {0} element(er)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Vil du virkelig slette dette element?</value>
+        <value>Vil du virkelig slette {0} element(er)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Er du sikker på, at du vil slette profiler </value>
+        <value>Er du sikker på, at du vil slette {0} profiler?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Er du sikker på, at du vil slette profilen </value>
+        <value>Er du sikker på, at du vil slette profilen {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Filen findes allerede. Vil du overskrive den?</value>
+        <value>Filen {0} findes allerede. Vil du overskrive den?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Slet</value>
@@ -148,7 +148,7 @@
         <value>Den valgte skanner er offline.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Du har ikke skriverettigheder til dette sted..</value>
+        <value>Du har ikke skriverettigheder til dette sted.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Fejl</value>
@@ -190,7 +190,7 @@
         <value>Ingen skannerenheder blev fundet.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
-        <value>Overskriv fil?</value>
+        <value>Overskriv fil</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
         <value>{0} af {1}</value>
@@ -202,55 +202,55 @@
         <value>Vælg profil før klik på skan.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Der opstod en fejl under scanning..</value>
+        <value>Der opstod en fejl med scanner driveren.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Version {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>An error occurred while trying to send an email.</value>
+        <value>En fejl opstod under forsøg på at sende en email.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Automatic Updates</value>
+        <value>Automatiske opdateringer</value>
     </data>
     <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>Hent</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>Download and Install</value>
+        <value>Download og installér</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Do you want NAPS2 to automatically check for updates?</value>
+        <value>Ønsker du at NAPS2 automatisk skal check for opdateringer?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Not Now</value>
+        <value>Ikke nu</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>A newer version of NAPS2 is available. Do you want to update now?</value>
+        <value>Der er en nyere version af NAPS2. Vil du opdatere nu?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Installation Complete</value>
+        <value>Installation er færdig</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Installation complete. Do you want to restart NAPS2 now?</value>
+        <value>Installationen er færdig. Ønsker du at genstarte NAPS2 nu?</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installation failed.</value>
+        <value>Installationen mislykkedes.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installation Failed</value>
+        <value>Installationen mislykkedes</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Alle ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Valgte ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>Anslået download størrelse: {0} MB</value>
     </data>
     <data name="FilesProgress" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} filer</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
         <value>{0} / {1} MB</value>
@@ -262,12 +262,12 @@
         <value>The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
-        <value>Download Error</value>
+        <value>Overførselsfejl</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>One or more files could not be downloaded.</value>
+        <value>En eller flere filer, kunne ikke blive hentet.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Custom ({0}x{1} {2})</value>
+        <value>Tilpasset ({0}x{1} {2})</value>
     </data>
 </root>

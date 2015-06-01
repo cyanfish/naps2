@@ -117,144 +117,14 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="checkBoxEnableOcr.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="checkBoxEnableOcr.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 12</value>
-    </data>
-    <data name="checkBoxEnableOcr.Size" type="System.Drawing.Size, System.Drawing">
-        <value>191, 17</value>
-    </data>
-    <data name="checkBoxEnableOcr.TabIndex" type="System.Int32, mscorlib">
-        <value>0</value>
-    </data>
-    <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-        <value>Lav PDF'er søgebar med OCR</value>
-    </data>
-    <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
-        <value>checkBoxEnableOcr</value>
-    </data>
-    <data name="&gt;&gt;checkBoxEnableOcr.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;checkBoxEnableOcr.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;checkBoxEnableOcr.ZOrder" xml:space="preserve">
-        <value>5</value>
-    </data>
-    <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 41</value>
-    </data>
-    <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>80, 13</value>
-    </data>
-    <data name="label1.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
-    </data>
-    <data name="label1.Text" xml:space="preserve">
-        <value>OCR sprog:</value>
-    </data>
-    <data name="&gt;&gt;label1.Name" xml:space="preserve">
-        <value>label1</value>
-    </data>
-    <data name="&gt;&gt;label1.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-        <value>4</value>
-    </data>
-    <data name="comboLanguages.Location" type="System.Drawing.Point, System.Drawing">
-        <value>132, 38</value>
-    </data>
-    <data name="comboLanguages.Size" type="System.Drawing.Size, System.Drawing">
-        <value>176, 21</value>
-    </data>
-    <data name="comboLanguages.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
-    </data>
-    <data name="&gt;&gt;comboLanguages.Name" xml:space="preserve">
-        <value>comboLanguages</value>
-    </data>
-    <data name="&gt;&gt;comboLanguages.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;comboLanguages.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;comboLanguages.ZOrder" xml:space="preserve">
-        <value>3</value>
-    </data>
-    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>233, 65</value>
-    </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
-    </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>3</value>
-    </data>
-    <data name="btnCancel.Text" xml:space="preserve">
-        <value>Fortryd</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>2</value>
-    </data>
-    <data name="linkGetLanguages.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="linkGetLanguages.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 70</value>
-    </data>
-    <data name="linkGetLanguages.Size" type="System.Drawing.Size, System.Drawing">
-        <value>102, 13</value>
-    </data>
-    <data name="linkGetLanguages.TabIndex" type="System.Int32, mscorlib">
-        <value>4</value>
-    </data>
-    <data name="linkGetLanguages.Text" xml:space="preserve">
-        <value>Hent flere sprog</value>
-    </data>
-    <data name="&gt;&gt;linkGetLanguages.Name" xml:space="preserve">
-        <value>linkGetLanguages</value>
-    </data>
-    <data name="&gt;&gt;linkGetLanguages.Type" xml:space="preserve">
-        <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;linkGetLanguages.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;linkGetLanguages.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>152, 65</value>
+        <value>113, 38</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
+    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
     </data>
@@ -271,6 +141,120 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+        <value>5</value>
+    </data>
+    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+        <value>194, 39</value>
+    </data>
+    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+        <value>75, 23</value>
+    </data>
+    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+        <value>6</value>
+    </data>
+    <data name="btnCancel.Text" xml:space="preserve">
+        <value>Anulo</value>
+    </data>
+    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+        <value>btnCancel</value>
+    </data>
+    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+        <value>4</value>
+    </data>
+    <data name="textboxWidth.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 12</value>
+    </data>
+    <data name="textboxWidth.Size" type="System.Drawing.Size, System.Drawing">
+        <value>75, 20</value>
+    </data>
+    <data name="textboxWidth.TabIndex" type="System.Int32, mscorlib">
+        <value>7</value>
+    </data>
+    <data name="&gt;&gt;textboxWidth.Name" xml:space="preserve">
+        <value>textboxWidth</value>
+    </data>
+    <data name="&gt;&gt;textboxWidth.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;textboxWidth.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;textboxWidth.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="labelX.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="labelX.Location" type="System.Drawing.Point, System.Drawing">
+        <value>93, 15</value>
+    </data>
+    <data name="labelX.Size" type="System.Drawing.Size, System.Drawing">
+        <value>14, 13</value>
+    </data>
+    <data name="labelX.TabIndex" type="System.Int32, mscorlib">
+        <value>8</value>
+    </data>
+    <data name="labelX.Text" xml:space="preserve">
+        <value>X</value>
+    </data>
+    <data name="&gt;&gt;labelX.Name" xml:space="preserve">
+        <value>labelX</value>
+    </data>
+    <data name="&gt;&gt;labelX.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;labelX.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;labelX.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="textboxHeight.Location" type="System.Drawing.Point, System.Drawing">
+        <value>113, 12</value>
+    </data>
+    <data name="textboxHeight.Size" type="System.Drawing.Size, System.Drawing">
+        <value>75, 20</value>
+    </data>
+    <data name="textboxHeight.TabIndex" type="System.Int32, mscorlib">
+        <value>9</value>
+    </data>
+    <data name="&gt;&gt;textboxHeight.Name" xml:space="preserve">
+        <value>textboxHeight</value>
+    </data>
+    <data name="&gt;&gt;textboxHeight.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;textboxHeight.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;textboxHeight.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="comboUnit.Location" type="System.Drawing.Point, System.Drawing">
+        <value>194, 12</value>
+    </data>
+    <data name="comboUnit.Size" type="System.Drawing.Size, System.Drawing">
+        <value>75, 21</value>
+    </data>
+    <data name="comboUnit.TabIndex" type="System.Int32, mscorlib">
+        <value>10</value>
+    </data>
+    <data name="&gt;&gt;comboUnit.Name" xml:space="preserve">
+        <value>comboUnit</value>
+    </data>
+    <data name="&gt;&gt;comboUnit.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;comboUnit.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;comboUnit.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -280,21 +264,44 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>320, 100</value>
+        <value>281, 74</value>
+    </data>
+    <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAxAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAL////wH///8B////Af//
+        /wH///8BrHE086tuMf+qay3/qmwv/6ptMf+qbTH/qm0x/6psL/+qay3/q24x/6twNPH///8B////Af//
+        /wH///8B////AatuMf/ur2D///fe/+mpW//qq17/6qtf/+qrXv/pqVr///fe/+6vYP+rbjD/AAAAMwAA
+        ADMAAAAzAAAAMwAAACOqay3///bd//zt0v/879X//fHZ//3w1//87tT//O3S//zt0f//9t3/qGkr/6tu
+        Mf+qbC//qmst/6tuL/+gaTDBqmwu/+iwaP/97tT/3ZxP/96gVP/dnlL//e/W/9qXR//87dH/565n/6Vm
+        KP/ur2L/6qlb///23P/0wYD/q20v/6psL//ntHL//vHY/9mcUv/boVn/26BY/9mcUf/979X//O3S/+ay
+        b/+jYyT///Xc//zt0v/87M////Xa/6lrLP+qbC//6Ld4//7x2P/VmlP/2J9a/9ifW//WnFb/3a1w//7v
+        1f/ntXb/pGMk///02//irGj/++vO//LMmP+qayz/qmwv/+e5f///8df/0JVP/9ObV//Tm1j/0ppV/9CV
+        Tv//89r/5rl//6VmJ//doFT//fDW//zs0f/uwYn/qmst/6psLv/nu4T//vDV/8qPSv/NlVL/16Zo/+i/
+        i//ovon/5ryG/+m/iv+mZyr/2qBa/9SXTv/979T/7sWQ/6prLf+qbC7/5b2K//3u0v//8db/xY1I/+bA
+        jv+/iU//pmco/6VkJv/pxZT/pmcq/9WdWP/Rlk////LZ/+7Klv+qbC7/qmss/+XAjv/97ND/u4E6///w
+        1f/szaP/pWUm/9uiWv/oyJz/z6Ju/7+JTf/pwY3/6L+K/+a8hv/pwIr/q20v/6prK///9dr//ezO//3s
+        z//+7tL/686m/6VjIv/oyqD/zqFu/7FzMf/ow5D/wIlQ/6ZnKP+lZCb/68aV/6xuMP+rbS7/5suj///1
+        2f/ixZr/48ad/+XJof/nzKT/zaNx/65uKv//9Nr/5sOS/6ZmJ//co1r/6cqe/9Onc/+tcDKtrnE0satt
+        Lv+qayv/qmsr/6prLP+qair/p2Uk/8eYZf//89f///DU/+TDlv+lYyP/6cyi/9Kndf+rbi+n////Af//
+        /wH///8B////Af///wH///8BrW8x/+nQqf//+d//48ac/+PHnv/myqL/6M+n/9Gqev+rbS+n////Af//
+        /wH///8B////Af///wH///8B////Aa5yNK+rbC7/wY5Y/6lpKv+qayz/q2wu/6xtL/+tbzGt////Af//
+        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        //8AAP//AAD//w==
+</value>
     </data>
     <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-        <value>1000, 139</value>
+        <value>1000, 113</value>
     </data>
     <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-        <value>336, 139</value>
+        <value>297, 113</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>OCR opsætning</value>
+        <value>Madhësi e personalizuar e faqes</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FOcrSetup</value>
+        <value>FPageSize</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.22698, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.2.0.31688, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

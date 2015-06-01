@@ -117,100 +117,157 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Sort/hvid</value>
+    <data name="ChooseProfile" xml:space="preserve">
+        <value>Zgjidh Profilin</value>
     </data>
-    <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit farve</value>
+    <data name="Clear" xml:space="preserve">
+        <value>Pastro</value>
     </data>
-    <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Gråskala</value>
+    <data name="ConfirmClearItems" xml:space="preserve">
+        <value>A je i sigurt se dëshiron të pastrosh {0} elemente?</value>
     </data>
-    <data name="Dpi_100" xml:space="preserve">
-        <value>100 dpi</value>
+    <data name="ConfirmDeleteItems" xml:space="preserve">
+        <value>A je i sigurt se dëshiron të fshish {0} elemente?</value>
     </data>
-    <data name="Dpi_1200" xml:space="preserve">
-        <value>1200 dpi</value>
+    <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+        <value>A je i sigurt se dëshiron të fshish {0} profile?</value>
     </data>
-    <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+    <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+        <value>A je i sigurt se dëshiron të fshish profilin {0}?</value>
     </data>
-    <data name="Dpi_200" xml:space="preserve">
-        <value>200 dpi</value>
+    <data name="ConfirmOverwriteFile" xml:space="preserve">
+        <value>Skedari {0} tashmë ekziston. A dëshironi ta mbishkruani?</value>
     </data>
-    <data name="Dpi_300" xml:space="preserve">
-        <value>300 dpi</value>
+    <data name="Delete" xml:space="preserve">
+        <value>Fshi</value>
     </data>
-    <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+    <data name="DeviceNotFound" xml:space="preserve">
+        <value>Skaneri i zgjedhur nuk mund të gjendej.</value>
     </data>
-    <data name="Dpi_600" xml:space="preserve">
-        <value>600 dpi</value>
+    <data name="DeviceOffline" xml:space="preserve">
+        <value>Skaneri i zgjedhur është jashtë linje.</value>
     </data>
-    <data name="Dpi_800" xml:space="preserve">
-        <value>800 dpi</value>
+    <data name="DontHavePermission" xml:space="preserve">
+        <value>Nuk ke të drejta për të ruajtur skedarët në këtë vendndodhje.</value>
     </data>
-    <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Centrér</value>
+    <data name="Error" xml:space="preserve">
+        <value>Gabim</value>
     </data>
-    <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Venstre</value>
+    <data name="FileTypeBmp" xml:space="preserve">
+        <value>Skedarët Bitmap (*.bmp)</value>
     </data>
-    <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Højre</value>
+    <data name="FileTypeEmf" xml:space="preserve">
+        <value>Metaskedar i përmirësuar i Windows (*.emf)</value>
     </data>
-    <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm.</value>
+    <data name="FileTypeExif" xml:space="preserve">
+        <value>Skedar imazhi i shkëmbyeshëm (*.exif)</value>
     </data>
-    <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>tommer</value>
+    <data name="FileTypeGif" xml:space="preserve">
+        <value>Skedar GIF (*.gif)</value>
     </data>
-    <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm.</value>
+    <data name="FileTypeJpeg" xml:space="preserve">
+        <value>Skedar JPEG (*.jpg, *.jpeg)</value>
     </data>
-    <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 mm)</value>
+    <data name="FileTypePdf" xml:space="preserve">
+        <value>Dokument PDF (*.pdf)</value>
     </data>
-    <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
+    <data name="FileTypePng" xml:space="preserve">
+        <value>Skedar PNG (*.png)</value>
     </data>
-    <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 mm)</value>
+    <data name="FileTypeTiff" xml:space="preserve">
+        <value>Skedar TIFF (*.tiff, *.tif)</value>
     </data>
-    <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+    <data name="NameMissing" xml:space="preserve">
+        <value>Emri mungon.</value>
     </data>
-    <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+    <data name="NAPS2" xml:space="preserve">
+        <value>NAPS2</value>
     </data>
-    <data name="PageSize_Custom" xml:space="preserve">
-        <value>Brugertilpasset...</value>
+    <data name="NoDeviceSelected" xml:space="preserve">
+        <value>Nuk është zgjedhur asnjë pajisje.</value>
     </data>
-    <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+    <data name="NoDevicesFound" xml:space="preserve">
+        <value>Nuk është gjetur asnjë pajisje skanimi.</value>
     </data>
-    <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+    <data name="OverwriteFile" xml:space="preserve">
+        <value>Mbishkruaj skedarin</value>
     </data>
-    <data name="Scale_1_1" xml:space="preserve">
-        <value>1:1</value>
+    <data name="PdfStatus" xml:space="preserve">
+        <value>{0} nga {1}</value>
     </data>
-    <data name="Scale_1_2" xml:space="preserve">
-        <value>1:2</value>
+    <data name="ScannedImage" xml:space="preserve">
+        <value>Imazhi i skanuar</value>
     </data>
-    <data name="Scale_1_4" xml:space="preserve">
-        <value>1:4</value>
+    <data name="SelectProfileBeforeScan" xml:space="preserve">
+        <value>Zgjidh një profil para se të klikosh Skano.</value>
     </data>
-    <data name="Scale_1_8" xml:space="preserve">
-        <value>1:8</value>
+    <data name="UnknownDriverError" xml:space="preserve">
+        <value>Ndodhi një gabim me drejtuesin e skanimit.</value>
     </data>
-    <data name="Source_Duplex" xml:space="preserve">
-        <value>Dupleks</value>
+    <data name="Version" xml:space="preserve">
+        <value>Versioni {0}</value>
     </data>
-    <data name="Source_Feeder" xml:space="preserve">
-        <value>Føder</value>
+    <data name="EmailError" xml:space="preserve">
+        <value>Ndodhi një gabim gjatë provës për të dërguar një email.</value>
     </data>
-    <data name="Source_Glass" xml:space="preserve">
-        <value>Glas</value>
+    <data name="AutoUpdates" xml:space="preserve">
+        <value>Përditësimet automatike</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>Shkarko</value>
+    </data>
+    <data name="DownloadAndInstall" xml:space="preserve">
+        <value>Shkarko dhe instalo</value>
+    </data>
+    <data name="EnableAutoUpdates" xml:space="preserve">
+        <value>A dëshironi që NAPS2 të kontrollojë automatikisht për përditësime?</value>
+    </data>
+    <data name="NotNow" xml:space="preserve">
+        <value>Jo tani</value>
+    </data>
+    <data name="UpdateNow" xml:space="preserve">
+        <value>Një version më i ri i NAPS2 është i disponueshëm. A dëshiron ta përditësosh tani?</value>
+    </data>
+    <data name="InstallComplete" xml:space="preserve">
+        <value>Instalimi përfundoi</value>
+    </data>
+    <data name="InstallCompletePromptRestart" xml:space="preserve">
+        <value>Instalimi përfundoi. A dëshiron ta rihapësh NAPS2 tani?</value>
+    </data>
+    <data name="InstallFailed" xml:space="preserve">
+        <value>Instalimi dështoi.</value>
+    </data>
+    <data name="InstallFailedTitle" xml:space="preserve">
+        <value>Instalimi dështoi</value>
+    </data>
+    <data name="AllCount" xml:space="preserve">
+        <value>Të gjitha ({0})</value>
+    </data>
+    <data name="SelectedCount" xml:space="preserve">
+        <value>E zgjedhur ({0})</value>
+    </data>
+    <data name="EstimatedDownloadSize" xml:space="preserve">
+        <value>Madhësia e vlerësuar e shkarkimit: {0} MB</value>
+    </data>
+    <data name="FilesProgress" xml:space="preserve">
+        <value>{0} / {1} skedarë</value>
+    </data>
+    <data name="SizeProgress" xml:space="preserve">
+        <value>{0} / {1} MB</value>
+    </data>
+    <data name="ImportErrorCouldNot" xml:space="preserve">
+        <value>The file "{0}" could not be imported.</value>
+    </data>
+    <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+        <value>The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
+    </data>
+    <data name="DownloadError" xml:space="preserve">
+        <value>Gabim gjatë shkarkimit</value>
+    </data>
+    <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+        <value>Një ose më shumë skedar s'mund të shkarkoheshin.</value>
+    </data>
+    <data name="CustomPageSizeFormat" xml:space="preserve">
+        <value>E personalizuar ({0} x {1} {2})</value>
     </data>
 </root>
