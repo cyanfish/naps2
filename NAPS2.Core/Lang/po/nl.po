@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-08 22:40+0000\n"
+"POT-Creation-Date: 2015-05-12 22:45+0000\n"
 "PO-Revision-Date: 2015-01-26 19:33+0000\n"
 "Last-Translator: emphyrio <list@schuiling.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,9 +38,17 @@ msgstr "24-bits kleuren"
 msgid "300 dpi"
 msgstr "300 dpi"
 
+#: SettingsResources.resx$Dpi_400$Message
+msgid "400 dpi"
+msgstr ""
+
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
 msgstr "600 dpi"
+
+#: SettingsResources.resx$Dpi_800$Message
+msgid "800 dpi"
+msgstr ""
 
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
@@ -68,8 +76,8 @@ msgstr "Over"
 msgid "Add"
 msgstr "Toevoegen"
 
-#: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
@@ -104,6 +112,14 @@ msgstr "Weet u zeker dat u {0} profielen wilt verwijderen?"
 msgid "Automatic Updates"
 msgstr "Automatische updates"
 
+#: SettingsResources.resx$PageSize_B4$Message
+msgid "B4 (250x353 mm)"
+msgstr ""
+
+#: SettingsResources.resx$PageSize_B5$Message
+msgid "B5 (176x250 mm)"
+msgstr ""
+
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Kleurdiepte"
@@ -121,6 +137,7 @@ msgid "Brightness"
 msgstr "Helderheid"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
@@ -172,6 +189,18 @@ msgstr "Copyright © 2012-2014 Ben Olden-Cooligan"
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Copyright © 2013 Peter De Leeuw"
+
+#: SettingsResources.resx$PageSize_Custom$Message
+msgid "Custom"
+msgstr ""
+
+#: MiscResources.resx$CustomPageSizeFormat$Message
+msgid "Custom ({0}x{1} {2})"
+msgstr ""
+
+#: FPageSize.resx$$this.Text$Message
+msgid "Custom Page Size"
+msgstr ""
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -382,6 +411,7 @@ msgstr "OCR instellingen"
 msgid "OCR language"
 msgstr "OCR taal"
 
+#: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FManageProfiles.resx$btnOK.Text$Message
@@ -582,6 +612,10 @@ msgstr "WIA driver"
 msgid "Waiting for TWAIN to complete"
 msgstr "Wachten op TWAIN scan"
 
+#: FPageSize.resx$labelX.Text$Message
+msgid "X"
+msgstr ""
+
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
 msgstr "U heeft geen rechten om hier bestanden op te slaan"
@@ -599,6 +633,10 @@ msgstr "Inzoomen"
 msgid "Zoom out"
 msgstr "Uitzoomen"
 
+#: SettingsResources.resx$PageSizeUnit_Centimetre$Message
+msgid "cm"
+msgstr ""
+
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://sourceforge.com/projects/naps2"
 msgstr "http://sourceforge.com/projects/naps2"
@@ -606,6 +644,14 @@ msgstr "http://sourceforge.com/projects/naps2"
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
 msgstr "http://www.fatcow.com/free-icons"
+
+#: SettingsResources.resx$PageSizeUnit_Inch$Message
+msgid "in"
+msgstr ""
+
+#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
+msgid "mm"
+msgstr ""
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
