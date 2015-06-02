@@ -6,7 +6,7 @@ namespace NAPS2.Recovery
 {
     public class RecoveryIndex
     {
-        public const int CURRENT_VERSION = 1;
+        public const int CURRENT_VERSION = 2;
 
         public RecoveryIndex()
         {
