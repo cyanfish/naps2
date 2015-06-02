@@ -49,12 +49,13 @@ namespace NAPS2.Console
         private readonly IErrorOutput errorOutput;
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly ILogger logger;
+        private readonly IUserConfigManager userConfigManager;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -65,6 +66,7 @@ namespace NAPS2.Console
             this.emailer = emailer;
             this.scannedImageImporter = scannedImageImporter;
             this.logger = logger;
+            this.userConfigManager = userConfigManager;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -351,7 +353,9 @@ namespace NAPS2.Console
                 Author = ConsoleResources.NAPS2,
                 Creator = ConsoleResources.NAPS2
             };
-            pdfExporter.Export(outputPath, scannedImages, pdfInfo, i =>
+            bool useOcr = !options.DisableOcr && (options.EnableOcr || userConfigManager.Config.EnableOcr);
+            string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
+            pdfExporter.Export(outputPath, scannedImages, pdfInfo, ocrLanguageCode, i =>
             {
                 OutputVerbose(ConsoleResources.ExportedPage, i, scannedImages.Count);
                 return true;

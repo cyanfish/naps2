@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
@@ -33,12 +34,14 @@ namespace NAPS2.WinForms
     {
         private readonly IPdfExporter pdfExporter;
         private readonly IErrorOutput errorOutput;
+        private readonly IUserConfigManager userConfigManager;
 
-        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput)
+        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput, IUserConfigManager userConfigManager)
         {
             InitializeComponent();
             this.pdfExporter = pdfExporter;
             this.errorOutput = errorOutput;
+            this.userConfigManager = userConfigManager;
             RestoreFormState = false;
             Shown += FPDFSave_Shown;
         }
@@ -56,9 +59,10 @@ namespace NAPS2.WinForms
                 Author = MiscResources.NAPS2,
                 Creator = MiscResources.NAPS2
             };
+            var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
             try
             {
-                pdfExporter.Export(Filename, Images, info, num =>
+                pdfExporter.Export(Filename, Images, info, ocrLanguageCode, num =>
                 {
                     Invoke(new ThreadStart(() => SetStatus(num, Images.Count)));
                     return true;

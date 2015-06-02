@@ -43,7 +43,7 @@ namespace NAPS2.ImportExport.Pdf
             this.userConfigManager = userConfigManager;
         }
 
-        public bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, Func<int, bool> progressCallback)
+        public bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
             document.Info.Author = info.Author;
@@ -56,16 +56,17 @@ namespace NAPS2.ImportExport.Pdf
             {
                 using (Image img = scannedImage.GetImage())
                 {
-                    OcrResult ocrResult = null;
-                    if (userConfigManager.Config.EnableOcr && ocrEngine.CanProcess(userConfigManager.Config.OcrLanguageCode))
-                    {
-                        ocrResult = ocrEngine.ProcessImage(img, userConfigManager.Config.OcrLanguageCode);
-                    }
-
                     if (!progressCallback(i))
                     {
                         return false;
                     }
+
+                    OcrResult ocrResult = null;
+                    if (ocrLanguageCode != null && ocrEngine.CanProcess(ocrLanguageCode))
+                    {
+                        ocrResult = ocrEngine.ProcessImage(img, ocrLanguageCode);
+                    }
+
                     float hAdjust = 72 / img.HorizontalResolution;
                     float vAdjust = 72 / img.VerticalResolution;
                     double realWidth = img.Width * hAdjust;

@@ -27,6 +27,6 @@ namespace NAPS2.ImportExport.Pdf
 {
     public interface IPdfExporter
     {
-        bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, Func<int, bool> progressCallback);
+        bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, string ocrLanguageCode, Func<int, bool> progressCallback);
     }
 }
