@@ -39,6 +39,15 @@ namespace NAPS2.Scan.Twain
 
     internal class Twain
     {
+        // http://www.twain.org/docs/530fe0cb85f7511c510004e8/Twain-Spec-1-9-197.pdf
+        // A bit of summary information for reference:
+        // DSM = Data Source Manager, handles choosing and opening/closing data sources
+        // DS = Data Source, provides image data (i.e. a scanner)
+        // dsm* methods are called on the DSM, ds* are passed through to the DS
+        // Since they use the same entry point, they are differentiated by IntPtr.Zero vs TwIdentity for the second arg.
+        // Method variants are simply for different argument types, they all go to the same entry point.
+        // Refer to the spec for specific messages that can be sent and the required arguments.
+
         private const short COUNTRY_USA = 1;
         private const short LANGUAGE_USA = 13;
         private readonly TwIdentity appid;
@@ -90,7 +99,12 @@ namespace NAPS2.Scan.Twain
             Marshal.FreeHGlobal(evtmsg.EventPtr);
         }
 
-        public bool Init(IntPtr hwndp)
+        /// <summary>
+        /// Initializes the Data Source Manager (DSM).
+        /// </summary>
+        /// <param name="hwndp">A pointer to the parent window's handle.</param>
+        /// <returns></returns>
+        public bool InitDSM(IntPtr hwndp)
         {
             Finish();
             TwReturnCode returnCode = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.OpenDSM, ref hwndp);
@@ -111,13 +125,17 @@ namespace NAPS2.Scan.Twain
             return false;
         }
 
+        /// <summary>
+        /// Displays a modal UI for the user to choose a TWAIN device. The chosen device is stored in the srcds field (if successful).
+        /// </summary>
+        /// <returns></returns>
         public bool Select()
         {
             TwReturnCode returnCode;
-            CloseSrc();
+            CloseDS();
             if (appid.Id == IntPtr.Zero)
             {
-                Init(hwnd);
+                InitDSM(hwnd);
                 if (appid.Id == IntPtr.Zero)
                     return false;
             }
@@ -125,6 +143,11 @@ namespace NAPS2.Scan.Twain
             return returnCode == TwReturnCode.Success;
         }
 
+        /// <summary>
+        /// Chooses the TWAIN device with the given name. The chosen device is stored in the srcds field (if successful).
+        /// </summary>
+        /// <param name="name">The name of the device.</param>
+        /// <returns></returns>
         public bool SelectByName(string name)
         {
             if (srcds.ProductName == name)
@@ -143,25 +166,37 @@ namespace NAPS2.Scan.Twain
             return false;
         }
 
+        /// <summary>
+        /// Gets the name of the most-recently chosen TWAIN device.
+        /// </summary>
+        /// <returns></returns>
         public string GetCurrentName()
         {
             return srcds.ProductName;
         }
 
+        /// <summary>
+        /// Start acquiring the image data. Runs asynchronously.
+        /// </summary>
+        /// <returns></returns>
         public bool Acquire()
         {
             TwReturnCode returnCode;
-            CloseSrc();
+
+            CloseDS();
             if (appid.Id == IntPtr.Zero)
             {
-                Init(hwnd);
+                InitDSM(hwnd);
                 if (appid.Id == IntPtr.Zero)
                     throw new InvalidOperationException("Init call falied");
             }
+
+            // Tell the DSM to initialize the DS
             returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.OpenDS, srcds);
             if (returnCode != TwReturnCode.Success)
                 throw new InvalidOperationException("DSMident call falied");
 
+            // Display the user interface, which will begin acquiring the image when appropriate
             var guif = new TwUserInterface
             {
                 ShowUI = 1,
@@ -169,9 +204,11 @@ namespace NAPS2.Scan.Twain
                 ParentHand = hwnd
             };
             returnCode = DSuserif(appid, srcds, TwDG.Control, TwData.UserInterface, TwMessageCode.EnableDS, guif);
+
             if (returnCode != TwReturnCode.Success)
             {
-                CloseSrc();
+                CloseDS();
+
                 if (returnCode == TwReturnCode.Cancel)
                 {
                     return false;
@@ -181,6 +218,10 @@ namespace NAPS2.Scan.Twain
             return true;
         }
 
+        /// <summary>
+        /// When the image data is ready to transfer, call this method to get an array of DIB pointers.
+        /// </summary>
+        /// <returns>An array of DIB pointers.</returns>
         public ArrayList TransferPictures()
         {
             var pics = new ArrayList();
@@ -200,21 +241,21 @@ namespace NAPS2.Scan.Twain
                 returnCode = DSiinf(appid, srcds, TwDG.Image, TwData.ImageInfo, TwMessageCode.Get, iinf);
                 if (returnCode != TwReturnCode.Success)
                 {
-                    CloseSrc();
+                    CloseDS();
                     return pics;
                 }
 
                 returnCode = DSixfer(appid, srcds, TwDG.Image, TwData.ImageNativeXfer, TwMessageCode.Get, ref hbitmap);
                 if (returnCode != TwReturnCode.XferDone)
                 {
-                    CloseSrc();
+                    CloseDS();
                     return pics;
                 }
 
                 returnCode = DSpxfer(appid, srcds, TwDG.Control, TwData.PendingXfers, TwMessageCode.EndXfer, pxfr);
                 if (returnCode != TwReturnCode.Success)
                 {
-                    CloseSrc();
+                    CloseDS();
                     return pics;
                 }
 
@@ -258,7 +299,10 @@ namespace NAPS2.Scan.Twain
             return TwainCommand.Null;
         }
 
-        public void CloseSrc()
+        /// <summary>
+        /// Closes the current Data Source (DS).
+        /// </summary>
+        public void CloseDS()
         {
             TwReturnCode returnCode;
             if (srcds.Id != IntPtr.Zero)
@@ -272,7 +316,7 @@ namespace NAPS2.Scan.Twain
         public void Finish()
         {
             TwReturnCode returnCode;
-            CloseSrc();
+            CloseDS();
             if (appid.Id != IntPtr.Zero)
                 returnCode = DSMparent(appid, IntPtr.Zero, TwDG.Control, TwData.Parent, TwMessageCode.CloseDSM, ref hwnd);
             appid.Id = IntPtr.Zero;

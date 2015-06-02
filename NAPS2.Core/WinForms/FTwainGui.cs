@@ -70,14 +70,14 @@ namespace NAPS2.WinForms
                 case TwainCommand.CloseRequest:
                     {
                         EndingScan();
-                        tw.CloseSrc();
+                        tw.CloseDS();
                         Close();
                         break;
                     }
                 case TwainCommand.CloseOk:
                     {
                         EndingScan();
-                        tw.CloseSrc();
+                        tw.CloseDS();
                         break;
                     }
                 case TwainCommand.DeviceEvent:
@@ -88,7 +88,7 @@ namespace NAPS2.WinForms
                     {
                         ArrayList pics = tw.TransferPictures();
                         EndingScan();
-                        tw.CloseSrc();
+                        tw.CloseDS();
                         foreach (IntPtr img in pics)
                         {
                             int bitcount = 0;

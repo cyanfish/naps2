@@ -41,7 +41,7 @@ namespace NAPS2.Scan.Twain
             this.formFactory = formFactory;
             tw = new Twain();
             this.settings = settings;
-            if (!tw.Init(parent.Handle))
+            if (!tw.InitDSM(parent.Handle))
             {
                 throw new DeviceNotFoundException();
             }
@@ -54,7 +54,7 @@ namespace NAPS2.Scan.Twain
         public static string SelectDeviceUI()
         {
             var tw = new Twain();
-            if (!tw.Init(Application.OpenForms[0].Handle))
+            if (!tw.InitDSM(Application.OpenForms[0].Handle))
             {
                 throw new NoDevicesFoundException();
             }
