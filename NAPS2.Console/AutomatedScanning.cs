@@ -353,7 +353,7 @@ namespace NAPS2.Console
                 Author = ConsoleResources.NAPS2,
                 Creator = ConsoleResources.NAPS2
             };
-            bool useOcr = !options.DisableOcr && (options.EnableOcr || userConfigManager.Config.EnableOcr);
+            bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
             pdfExporter.Export(outputPath, scannedImages, pdfInfo, ocrLanguageCode, i =>
             {
