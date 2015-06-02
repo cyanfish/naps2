@@ -63,13 +63,13 @@ namespace NAPS2.Console
         //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
         public string EmailFileName { get; set; }
 
-        [Option("enableocr", HelpText = "Enables OCR for PDF generation.")]
+        [Option("enableocr", HelpText = "Enable OCR for generated PDFs.")]
         public bool EnableOcr { get; set; }
 
-        [Option("disableocr", HelpText = "Disables OCR for PDF generation. Overrides --enableocr.")]
+        [Option("disableocr", HelpText = "Disable OCR for generated PDFs. Overrides --enableocr.")]
         public bool DisableOcr { get; set; }
 
-        [Option("ocrlang", HelpText = "Sets the three-letter code for the language used for OCR (e.g. 'eng' for English, 'fra' for French, etc.). Implies --enableocr.")]
+        [Option("ocrlang", HelpText = "The three-letter code for the language used for OCR (e.g. 'eng' for English, 'fra' for French, etc.). Implies --enableocr.")]
         public string OcrLang { get; set; }
 
         [Option("subject", HelpText = "The email message's subject." +
