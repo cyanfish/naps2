@@ -30,7 +30,7 @@ namespace NAPS2.Scan
 {
     public class ExtendedScanSettings : ScanSettings
     {
-        public const int CURRENT_VERSION = 1;
+        public const int CURRENT_VERSION = 2;
 
         public ExtendedScanSettings()
         {

@@ -24,6 +24,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.Scan;
+using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 
 namespace NAPS2.Config
@@ -58,7 +59,20 @@ namespace NAPS2.Config
             var serializer = new XmlSerializer(typeof(List<ExtendedScanSettings>));
             try
             {
-                return (List<ExtendedScanSettings>)serializer.Deserialize(configFileStream);
+                var settingsList = (List<ExtendedScanSettings>)serializer.Deserialize(configFileStream);
+                // Upgrade from v1 to v2 if necessary
+                foreach (var settings in settingsList)
+                {
+                    if (settings.Version == 1)
+                    {
+                        if (settings.DriverName == TwainScanDriver.DRIVER_NAME)
+                        {
+                            settings.UseNativeUI = true;
+                        }
+                        settings.Version = ExtendedScanSettings.CURRENT_VERSION;
+                    }
+                }
+                return settingsList;
             }
             catch (InvalidOperationException)
             {
