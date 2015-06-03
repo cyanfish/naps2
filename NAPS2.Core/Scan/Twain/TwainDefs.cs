@@ -192,15 +192,6 @@ namespace NAPS2.Scan.Twain
         Str512 = 0x000e
     }
 
-    internal enum TwCap : short
-    {
-        XferCount = 0x0001,			// CAP_XFERCOUNT
-        ICompression = 0x0100,			// ICAP_...
-        IPixelType = 0x0101,
-        IUnits = 0x0102,
-        IXferMech = 0x0103
-    }
-
     // ------------------- STRUCTS --------------------------------------------
 
     [StructLayout(LayoutKind.Sequential, Pack = 2, CharSet = CharSet.Ansi)]
