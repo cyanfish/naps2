@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <!-- 
     Microsoft ResX Schema 
@@ -303,31 +303,31 @@
     <data name="&gt;&gt;rdbConfig.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="rdbNativeWIA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="rdbNative.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="rdbNativeWIA.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="rdbNative.Location" type="System.Drawing.Point, System.Drawing">
         <value>220, 3</value>
     </data>
-    <data name="rdbNativeWIA.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="rdbNative.Size" type="System.Drawing.Size, System.Drawing">
         <value>182, 17</value>
     </data>
-    <data name="rdbNativeWIA.TabIndex" type="System.Int32, mscorlib">
+    <data name="rdbNative.TabIndex" type="System.Int32, mscorlib">
         <value>6</value>
     </data>
-    <data name="rdbNativeWIA.Text" xml:space="preserve">
+    <data name="rdbNative.Text" xml:space="preserve">
         <value>Usa WIA UI nativo</value>
     </data>
-    <data name="&gt;&gt;rdbNativeWIA.Name" xml:space="preserve">
-        <value>rdbNativeWIA</value>
+    <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
+        <value>rdbNative</value>
     </data>
-    <data name="&gt;&gt;rdbNativeWIA.Type" xml:space="preserve">
+    <data name="&gt;&gt;rdbNative.Type" xml:space="preserve">
         <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;rdbNativeWIA.Parent" xml:space="preserve">
+    <data name="&gt;&gt;rdbNative.Parent" xml:space="preserve">
         <value>panel1</value>
     </data>
-    <data name="&gt;&gt;rdbNativeWIA.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;rdbNative.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
     <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">

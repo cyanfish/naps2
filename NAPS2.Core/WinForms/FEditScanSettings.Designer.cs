@@ -42,7 +42,7 @@ namespace NAPS2.WinForms
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdbConfig = new System.Windows.Forms.RadioButton();
-            this.rdbNativeWIA = new System.Windows.Forms.RadioButton();
+            this.rdbNative = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbDepth = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -115,7 +115,7 @@ namespace NAPS2.WinForms
             // panel1
             // 
             this.panel1.Controls.Add(this.rdbConfig);
-            this.panel1.Controls.Add(this.rdbNativeWIA);
+            this.panel1.Controls.Add(this.rdbNative);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
@@ -127,13 +127,13 @@ namespace NAPS2.WinForms
             this.rdbConfig.UseVisualStyleBackColor = true;
             this.rdbConfig.CheckedChanged += new System.EventHandler(this.rdbConfig_CheckedChanged);
             // 
-            // rdbNativeWIA
+            // rdbNative
             // 
-            resources.ApplyResources(this.rdbNativeWIA, "rdbNativeWIA");
-            this.rdbNativeWIA.Name = "rdbNativeWIA";
-            this.rdbNativeWIA.TabStop = true;
-            this.rdbNativeWIA.UseVisualStyleBackColor = true;
-            this.rdbNativeWIA.CheckedChanged += new System.EventHandler(this.rdbNativeWIA_CheckedChanged);
+            resources.ApplyResources(this.rdbNative, "rdbNative");
+            this.rdbNative.Name = "rdbNative";
+            this.rdbNative.TabStop = true;
+            this.rdbNative.UseVisualStyleBackColor = true;
+            this.rdbNative.CheckedChanged += new System.EventHandler(this.rdbNativeWIA_CheckedChanged);
             // 
             // label3
             // 
@@ -345,7 +345,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rdbConfig;
-        private System.Windows.Forms.RadioButton rdbNativeWIA;
+        private System.Windows.Forms.RadioButton rdbNative;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbDepth;
         private System.Windows.Forms.Label label4;

@@ -100,7 +100,7 @@ namespace NAPS2.WinForms
             // The setter updates the driver selection checkboxes
             DeviceDriverName = ScanSettings.DriverName;
 
-            rdbNativeWIA.Checked = ScanSettings.UseNativeUI;
+            rdbNative.Checked = ScanSettings.UseNativeUI;
             rdbConfig.Checked = !ScanSettings.UseNativeUI;
 
             // Start triggering onChange events again
@@ -115,7 +115,7 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Bind(cmbAlign, cmbDepth, cmbPage, cmbResolution, cmbScale, cmbSource, trBrightness, trContrast)
                     .WidthTo(() => Width / 2)
-                .Bind(rdTWAIN, rdbNativeWIA, label3, cmbDepth, label9, cmbAlign, label10, cmbScale, label7, trContrast)
+                .Bind(rdTWAIN, rdbNative, label3, cmbDepth, label9, cmbAlign, label10, cmbScale, label7, trContrast)
                     .LeftTo(() => Width / 2)
                 .Bind(txtBrightness)
                     .LeftTo(() => trBrightness.Right)
@@ -218,7 +218,7 @@ namespace NAPS2.WinForms
                 DisplayName = txtName.Text,
                 IconID = iconID,
                 MaxQuality = cbHighQuality.Checked,
-                UseNativeUI = rdbNativeWIA.Checked,
+                UseNativeUI = rdbNative.Checked,
 
                 AfterScanScale = (ScanScale)cmbScale.SelectedIndex,
                 BitDepth = (ScanBitDepth)cmbDepth.SelectedIndex,
@@ -266,10 +266,7 @@ namespace NAPS2.WinForms
             if (!suppressChangeEvent)
             {
                 suppressChangeEvent = true;
-                bool configEnabled = rdWIA.Checked;
-                rdbConfig.Enabled = configEnabled;
-                rdbNativeWIA.Enabled = configEnabled;
-                bool enabled = rdbConfig.Checked && rdWIA.Checked;
+                bool enabled = rdbConfig.Checked;
                 cmbSource.Enabled = enabled;
                 cmbResolution.Enabled = enabled;
                 cmbPage.Enabled = enabled;
