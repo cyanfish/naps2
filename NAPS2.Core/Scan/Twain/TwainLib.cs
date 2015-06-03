@@ -56,8 +56,11 @@ namespace NAPS2.Scan.Twain
         private IntPtr hwnd;
         private WINMSG winmsg;
 
-        public Twain()
+        private readonly ExtendedScanSettings settings;
+
+        public Twain(ExtendedScanSettings settings)
         {
+            this.settings = settings;
             appid = new TwIdentity
                 {
                     Id = IntPtr.Zero,
@@ -196,10 +199,16 @@ namespace NAPS2.Scan.Twain
             if (returnCode != TwReturnCode.Success)
                 throw new InvalidOperationException("DSMident call falied");
 
-            // Display the user interface, which will begin acquiring the image when appropriate
+            // Set capabilities if needed
+            if (!settings.UseNativeUI)
+            {
+                SetCapabilitiesFromSettings();
+            }
+
+            // Begin acquiring the image, displaying the native UI if needed
             var guif = new TwUserInterface
             {
-                ShowUI = 1,
+                ShowUI = (short)(settings.UseNativeUI ? 1 : 0),
                 ModalUI = 1,
                 ParentHand = hwnd
             };
@@ -216,6 +225,43 @@ namespace NAPS2.Scan.Twain
                 throw new InvalidOperationException("DSuserif call falied");
             }
             return true;
+        }
+
+        private void SetCapabilitiesFromSettings()
+        {
+            switch (settings.PaperSource)
+            {
+                case ScanSource.Glass:
+                    SetCap(TwCap.CAP_AUTOFEED, false);
+                    SetCap(TwCap.CAP_AUTOSCAN, false);
+                    break;
+                case ScanSource.Feeder:
+                    SetCap(TwCap.CAP_AUTOFEED, true);
+                    SetCap(TwCap.CAP_AUTOSCAN, true);
+                    SetCap(TwCap.CAP_DUPLEXENABLED, false);
+                    break;
+                case ScanSource.Duplex:
+                    SetCap(TwCap.CAP_AUTOFEED, true);
+                    SetCap(TwCap.CAP_AUTOSCAN, true);
+                    SetCap(TwCap.CAP_DUPLEXENABLED, true);
+                    break;
+            }
+        }
+
+        private bool SetCap(TwCap cap, short value)
+        {
+            var returnCode = DScap(appid, srcds, TwDG.Control, TwData.Capability, TwMessageCode.Set, new TwCapability(cap, (short)value));
+            return returnCode == TwReturnCode.Success;
+        }
+
+        private bool SetCap(TwCap cap, int value)
+        {
+            return SetCap(cap, (short)value);
+        }
+
+        private bool SetCap(TwCap cap, bool value)
+        {
+            return SetCap(cap, value ? 1 : 0);
         }
 
         /// <summary>

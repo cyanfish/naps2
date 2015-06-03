@@ -39,7 +39,7 @@ namespace NAPS2.Scan.Twain
         {
             parent = pForm;
             this.formFactory = formFactory;
-            tw = new Twain();
+            tw = new Twain(settings);
             this.settings = settings;
             if (!tw.InitDSM(parent.Handle))
             {
@@ -53,7 +53,7 @@ namespace NAPS2.Scan.Twain
 
         public static string SelectDeviceUI()
         {
-            var tw = new Twain();
+            var tw = new Twain(null);
             if (!tw.InitDSM(Application.OpenForms[0].Handle))
             {
                 throw new NoDevicesFoundException();
