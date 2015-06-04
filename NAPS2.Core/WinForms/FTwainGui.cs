@@ -35,11 +35,9 @@ namespace NAPS2.WinForms
         {
             InitializeComponent();
             RestoreFormState = false;
-
-            Activated += OnActivated;
         }
 
-        private void OnActivated(object sender, EventArgs eventArgs)
+        private void FTwainGui_Activated(object sender, EventArgs eventArgs)
         {
             if (activated)
                 return;

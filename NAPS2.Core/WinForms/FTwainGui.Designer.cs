@@ -19,7 +19,6 @@ namespace NAPS2.WinForms
         {
             if (disposing)
             {
-                tw.Finish();
                 if (components != null)
                 {
                     components.Dispose();
