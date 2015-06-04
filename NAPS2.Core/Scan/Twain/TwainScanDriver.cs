@@ -32,10 +32,12 @@ namespace NAPS2.Scan.Twain
         public const string DRIVER_NAME = "twain";
 
         private readonly IFormFactory formFactory;
+        private readonly IScannedImageFactory scannedImageFactory;
 
-        public TwainScanDriver(IFormFactory formFactory)
+        public TwainScanDriver(IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
         {
             this.formFactory = formFactory;
+            this.scannedImageFactory = scannedImageFactory;
         }
 
         public string DriverName
@@ -91,7 +93,7 @@ namespace NAPS2.Scan.Twain
             }
             try
             {
-                var api = new TwainApi(ScanSettings, ScanDevice, DialogParent, formFactory);
+                var api = new TwainApi(ScanSettings, ScanDevice, DialogParent, formFactory, scannedImageFactory);
                 return api.Scan();
             }
             catch (ScanDriverException)

@@ -20,58 +20,112 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
+using NTwain;
+using NTwain.Data;
 
 namespace NAPS2.Scan.Twain
 {
+    // TODO: Create a ScanDriverBase class to remove the boilerplate from TwainScanDriver, then move this code there
     internal class TwainApi
     {
-        private readonly IFormFactory formFactory;
-        readonly IWin32Window parent;
-        readonly ExtendedScanSettings settings;
-        readonly Twain tw;
+        private static readonly TWIdentity AppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetExecutingAssembly());
 
-        public TwainApi(ExtendedScanSettings settings, ScanDevice device, IWin32Window pForm, IFormFactory formFactory)
+        private readonly IFormFactory formFactory;
+        private readonly IScannedImageFactory scannedImageFactory;
+        private readonly IWin32Window parent;
+        private readonly ExtendedScanSettings settings;
+        private readonly ScanDevice device;
+        private readonly List<IScannedImage> images = new List<IScannedImage>();
+        private FTwainGui twainForm;
+
+        static TwainApi()
+        {
+            NTwain.PlatformInfo.Current.PreferNewDSM = false;
+        }
+
+        public TwainApi(ExtendedScanSettings settings, ScanDevice device, IWin32Window pForm, IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
         {
             parent = pForm;
             this.formFactory = formFactory;
-            tw = new Twain(settings);
+            this.scannedImageFactory = scannedImageFactory;
             this.settings = settings;
-            if (!tw.InitDSM(parent.Handle))
-            {
-                throw new DeviceNotFoundException();
-            }
-            if (!tw.SelectByName(device.ID))
-            {
-                throw new DeviceNotFoundException();
-            }
+            this.device = device;
         }
 
         public static string SelectDeviceUI()
         {
-            var tw = new Twain(null);
-            if (!tw.InitDSM(Application.OpenForms[0].Handle))
+            var session = new TwainSession(AppId);
+            session.Open();
+            try
             {
-                throw new NoDevicesFoundException();
+                var ds = session.ShowSourceSelector();
+                if (ds == null)
+                {
+                    return null;
+                }
+                return ds.Name;
             }
-            if (!tw.Select())
+            finally
             {
-                return null;
+                session.Close();
             }
-            return tw.GetCurrentName();
         }
 
         public List<IScannedImage> Scan()
         {
-            var fg = formFactory.Create<FTwainGui>();
-            fg.Settings = settings;
-            fg.TwainIface = tw;
-            fg.ShowDialog(parent);
-            return fg.Bitmaps;
+            var session = new TwainSession(AppId);
+            session.TransferReady += TransferReady;
+            session.DataTransferred += DataTransferred;
+            session.TransferError += TransferError;
+            session.SourceDisabled += SourceDisabled;
+            session.Open();
+            try
+            {
+                var ds = session.FirstOrDefault(x => x.Name == device.Name);
+                if (ds == null)
+                {
+                    throw new DeviceNotFoundException();
+                }
+                twainForm = formFactory.Create<FTwainGui>();
+                twainForm.DataSource = ds;
+                twainForm.ShowDialog(parent);
+                return images;
+            }
+            finally
+            {
+                session.Close();
+            }
+        }
+
+        private void SourceDisabled(object sender, EventArgs eventArgs)
+        {
+            twainForm.Close();
+        }
+
+        private void DataTransferred(object sender, DataTransferredEventArgs eventArgs)
+        {
+            int bitcount;
+            using (Bitmap bmp = DibUtils.BitmapFromDib(eventArgs.NativeData, out bitcount))
+            {
+                images.Add(scannedImageFactory.Create(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality));
+            }
+        }
+
+        private void TransferError(object sender, TransferErrorEventArgs eventArgs)
+        {
+            Log.ErrorException("An error occurred while interacting with TWAIN.", eventArgs.Exception);
+            twainForm.Close();
+        }
+
+        private void TransferReady(object sender, TransferReadyEventArgs eventArgs)
+        {
         }
     }
 }

@@ -21,127 +21,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Twain;
+using NTwain;
 
 namespace NAPS2.WinForms
 {
-    internal partial class FTwainGui : FormBase, IMessageFilter
+    internal partial class FTwainGui : FormBase
     {
-        private readonly IScannedImageFactory scannedImageFactory;
-
-        private readonly List<IScannedImage> bitmaps;
         private bool activated;
-        private bool msgfilter;
-        private Twain tw;
 
-        public FTwainGui(IScannedImageFactory scannedImageFactory)
+        public FTwainGui()
         {
             InitializeComponent();
-            bitmaps = new List<IScannedImage>();
-            this.scannedImageFactory = scannedImageFactory;
             RestoreFormState = false;
+
+            Activated += OnActivated;
         }
 
-        public ExtendedScanSettings Settings { get; set; }
-
-        public List<IScannedImage> Bitmaps
-        {
-            get { return bitmaps; }
-        }
-
-        public Twain TwainIface
-        {
-            set { tw = value; }
-        }
-
-        bool IMessageFilter.PreFilterMessage(ref Message m)
-        {
-            TwainCommand cmd = tw.PassMessage(ref m);
-            if (cmd == TwainCommand.Not)
-                return false;
-
-            switch (cmd)
-            {
-                case TwainCommand.CloseRequest:
-                    {
-                        EndingScan();
-                        tw.CloseDS();
-                        Close();
-                        break;
-                    }
-                case TwainCommand.CloseOk:
-                    {
-                        EndingScan();
-                        tw.CloseDS();
-                        break;
-                    }
-                case TwainCommand.DeviceEvent:
-                    {
-                        break;
-                    }
-                case TwainCommand.TransferReady:
-                    {
-                        ArrayList pics = tw.TransferPictures();
-                        EndingScan();
-                        tw.CloseDS();
-                        foreach (IntPtr img in pics)
-                        {
-                            int bitcount = 0;
-
-                            using (Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount))
-                            {
-                                bitmaps.Add(scannedImageFactory.Create(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, Settings.MaxQuality));
-                            }
-                        }
-                        Close();
-                        break;
-                    }
-            }
-
-            return true;
-        }
-
-        private void EndingScan()
-        {
-            if (msgfilter)
-            {
-                Application.RemoveMessageFilter(this);
-                msgfilter = false;
-                Enabled = true;
-                Activate();
-            }
-        }
-
-        private void FTwainGui_Activated(object sender, EventArgs e)
+        private void OnActivated(object sender, EventArgs eventArgs)
         {
             if (activated)
                 return;
             activated = true;
-            if (!msgfilter)
-            {
-                Enabled = false;
-                msgfilter = true;
-                Application.AddMessageFilter(this);
-            }
-            try
-            {
-                if (!tw.Acquire())
-                {
-                    EndingScan();
-                    Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorException("An error occurred while interacting with TWAIN.", ex);
-                EndingScan();
-                Close();
-            }
+
+            // TODO: Pass in show/noshow
+            // TODO: (Somewhere else) configure ds
+            DataSource.Enable(SourceEnableMode.ShowUI, true, Handle); // SourceEnableMode.ShowUIOnly could be useful
         }
+
+        public DataSource DataSource { get; set; }
     }
 }
