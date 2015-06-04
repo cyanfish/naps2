@@ -86,13 +86,14 @@ namespace NAPS2.Scan.Twain
             session.TransferError += TransferError;
             session.SourceDisabled += SourceDisabled;
             session.Open();
+            var ds = session.FirstOrDefault(x => x.Name == device.Name);
             try
             {
-                var ds = session.FirstOrDefault(x => x.Name == device.Name);
                 if (ds == null)
                 {
                     throw new DeviceNotFoundException();
                 }
+                ds.Open();
                 twainForm = formFactory.Create<FTwainGui>();
                 twainForm.DataSource = ds;
                 twainForm.ShowDialog(parent);
@@ -100,13 +101,17 @@ namespace NAPS2.Scan.Twain
             }
             finally
             {
+                if (ds != null)
+                {
+                    ds.Close();
+                }
                 session.Close();
             }
         }
 
         private void SourceDisabled(object sender, EventArgs eventArgs)
         {
-            twainForm.Close();
+            twainForm.Invoke((MethodInvoker)twainForm.Close);
         }
 
         private void DataTransferred(object sender, DataTransferredEventArgs eventArgs)
