@@ -393,42 +393,14 @@ namespace NAPS2.Scan.Wia
                 {
                     using (Image output = Image.FromStream(stream))
                     {
-
-                        double koef = 1;
-
+                        double scaleFactor = 1;
                         if (!settings.UseNativeUI)
                         {
-                            switch (settings.AfterScanScale)
-                            {
-                                case ScanScale.OneToOne:
-                                    koef = 1;
-                                    break;
-                                case ScanScale.OneToTwo:
-                                    koef = 2;
-                                    break;
-                                case ScanScale.OneToFour:
-                                    koef = 4;
-                                    break;
-                                case ScanScale.OneToEight:
-                                    koef = 8;
-                                    break;
-                            }
+                            scaleFactor = settings.AfterScanScale.ToIntScaleFactor();
                         }
 
-                        double realWidth = output.Width / koef;
-                        double realHeight = output.Height / koef;
-
-                        double horizontalRes = output.HorizontalResolution / koef;
-                        double verticalRes = output.VerticalResolution / koef;
-
-                        using (var result = new Bitmap((int)realWidth, (int)realHeight))
-                        using (Graphics g = Graphics.FromImage(result))
+                        using (var result = TransformationHelper.ScaleImage(output, scaleFactor))
                         {
-                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            g.DrawImage(output, 0, 0, (int)realWidth, (int)realHeight);
-
-                            result.SetResolution((float)horizontalRes, (float)verticalRes);
-
                             ScanBitDepth bitDepth = settings.UseNativeUI ? ScanBitDepth.C24Bit : settings.BitDepth;
                             return scannedImageFactory.Create(result, bitDepth, settings.MaxQuality);
                         }

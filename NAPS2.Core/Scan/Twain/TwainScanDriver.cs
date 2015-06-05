@@ -91,12 +91,21 @@ namespace NAPS2.Scan.Twain
             session.TransferReady += (sender, eventArgs) => { };
             session.DataTransferred += (sender, eventArgs) =>
             {
-                using (var bmp = new Bitmap(eventArgs.GetNativeImageStream()))
+                using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
                 {
-                    var bitDepth = bmp.PixelFormat == PixelFormat.Format1bppIndexed
-                        ? ScanBitDepth.BlackWhite
-                        : ScanBitDepth.C24Bit;
-                    images.Add(scannedImageFactory.Create(bmp, bitDepth, ScanSettings.MaxQuality));
+                    double scaleFactor = 1;
+                    if (!ScanSettings.UseNativeUI)
+                    {
+                        scaleFactor = ScanSettings.AfterScanScale.ToIntScaleFactor();
+                    }
+
+                    using (var result = TransformationHelper.ScaleImage(output, scaleFactor))
+                    {
+                        var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
+                            ? ScanBitDepth.BlackWhite
+                            : ScanBitDepth.C24Bit;
+                        images.Add(scannedImageFactory.Create(result, bitDepth, ScanSettings.MaxQuality));
+                    }
                 }
             };
             session.TransferError += (sender, eventArgs) =>
@@ -221,8 +230,6 @@ namespace NAPS2.Scan.Twain
             int dpi = ScanSettings.Resolution.ToIntDpi();
             ds.Capabilities.ICapXResolution.SetValue(dpi);
             ds.Capabilities.ICapYResolution.SetValue(dpi);
-
-
         }
     }
 }

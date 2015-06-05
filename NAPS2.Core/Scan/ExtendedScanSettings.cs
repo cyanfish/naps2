@@ -251,6 +251,23 @@ namespace NAPS2.Scan
             }
         }
 
+        public static int ToIntScaleFactor(this ScanScale enumValue)
+        {
+            switch (enumValue)
+            {
+                case ScanScale.OneToOne:
+                    return 1;
+                case ScanScale.OneToTwo:
+                    return 2;
+                case ScanScale.OneToFour:
+                    return 4;
+                case ScanScale.OneToEight:
+                    return 8;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
         public static string Description(this Enum enumValue)
         {
             object[] attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
