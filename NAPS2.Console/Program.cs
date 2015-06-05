@@ -37,6 +37,7 @@ namespace NAPS2.Console
         [STAThread]
         static void Main(string[] args)
         {
+            Log.Logger = new NLogLogger();
             var options = new AutomatedScanningOptions();
             try
             {
