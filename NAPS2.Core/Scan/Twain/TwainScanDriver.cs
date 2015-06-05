@@ -84,9 +84,7 @@ namespace NAPS2.Scan.Twain
             var twainForm = formFactory.Create<FTwainGui>();
             var images = new List<IScannedImage>();
             Exception error = null;
-
-            session.Open(new WindowsFormsMessageLoopHook(DialogParent.Handle));
-            var ds = session.FirstOrDefault(x => x.Name == ScanDevice.ID);
+            DataSource ds = null;
 
             session.TransferReady += (sender, eventArgs) => { };
             session.DataTransferred += (sender, eventArgs) =>
@@ -110,14 +108,19 @@ namespace NAPS2.Scan.Twain
             };
             session.TransferError += (sender, eventArgs) =>
             {
-                Log.ErrorException("An error occurred while interacting with TWAIN.", eventArgs.Exception);
+                error = eventArgs.Exception;
                 twainForm.Close();
             };
             session.SourceDisabled += (sender, eventArgs) =>
             {
-                Debug.Assert(ds != null);
-                ds.Close();
-                session.Close();
+                if (ds != null && session.IsSourceOpen)
+                {
+                    ds.Close();
+                }
+                if (session.IsDsmOpen)
+                {
+                    session.Close();
+                }
                 twainForm.Close();
             };
 
@@ -125,7 +128,14 @@ namespace NAPS2.Scan.Twain
             {
                 try
                 {
-                    Debug.Assert(ds != null);
+                    session.Open(new WindowsFormsMessageLoopHook(DialogParent.Handle));
+                    ds = session.FirstOrDefault(x => x.Name == ScanDevice.ID);
+                    if (ds == null)
+                    {
+                        session.Close();
+                        throw new DeviceNotFoundException();
+                    }
+                    ds.Open();
                     ConfigureDS(ds);
                     var ui = ScanSettings.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
                     ds.Enable(ui, true, twainForm.Handle);
@@ -137,17 +147,14 @@ namespace NAPS2.Scan.Twain
                 }
             };
 
-            if (ds == null)
-            {
-                session.Close();
-                throw new DeviceNotFoundException();
-            }
-            ds.Open();
-
             twainForm.ShowDialog(DialogParent);
 
             if (error != null)
             {
+                if (error is ScanDriverException)
+                {
+                    throw error;
+                }
                 throw new ScanDriverUnknownException(error);
             }
 
