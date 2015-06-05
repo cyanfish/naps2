@@ -226,6 +226,31 @@ namespace NAPS2.Scan
             return attrs.Cast<PageDimensionsAttribute>().Select(x => x.PageDimensions).SingleOrDefault();
         }
 
+        public static int ToIntDpi(this ScanDpi enumValue)
+        {
+            switch (enumValue)
+            {
+                case ScanDpi.Dpi100:
+                    return 100;
+                case ScanDpi.Dpi150:
+                    return 150;
+                case ScanDpi.Dpi200:
+                    return 200;
+                case ScanDpi.Dpi300:
+                    return 300;
+                case ScanDpi.Dpi400:
+                    return 400;
+                case ScanDpi.Dpi600:
+                    return 600;
+                case ScanDpi.Dpi800:
+                    return 800;
+                case ScanDpi.Dpi1200:
+                    return 1200;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
         public static string Description(this Enum enumValue)
         {
             object[] attrs = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);

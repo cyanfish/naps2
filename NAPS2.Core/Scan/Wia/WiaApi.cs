@@ -266,39 +266,9 @@ namespace NAPS2.Scan.Wia
                     break;
             }
 
-            switch (settings.Resolution)
-            {
-                case ScanDpi.Dpi100:
-                    SetItemIntProperty(item, 100, ItemProperties.VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 100, ItemProperties.HORIZONTAL_RESOLUTION);
-                    resolution = 100;
-                    break;
-                case ScanDpi.Dpi150:
-                    SetItemIntProperty(item, 150, ItemProperties.VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 150, ItemProperties.HORIZONTAL_RESOLUTION);
-                    resolution = 150;
-                    break;
-                case ScanDpi.Dpi200:
-                    SetItemIntProperty(item, 200, ItemProperties.VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 200, ItemProperties.HORIZONTAL_RESOLUTION);
-                    resolution = 200;
-                    break;
-                case ScanDpi.Dpi300:
-                    SetItemIntProperty(item, 300, ItemProperties.VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 300, ItemProperties.HORIZONTAL_RESOLUTION);
-                    resolution = 300;
-                    break;
-                case ScanDpi.Dpi600:
-                    SetItemIntProperty(item, 600, ItemProperties.VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 600, ItemProperties.HORIZONTAL_RESOLUTION);
-                    resolution = 600;
-                    break;
-                case ScanDpi.Dpi1200:
-                    SetItemIntProperty(item, 1200, ItemProperties.VERTICAL_RESOLUTION);
-                    SetItemIntProperty(item, 1200, ItemProperties.HORIZONTAL_RESOLUTION);
-                    resolution = 120;
-                    break;
-            }
+            resolution = settings.Resolution.ToIntDpi();
+            SetItemIntProperty(item, resolution, ItemProperties.VERTICAL_RESOLUTION);
+            SetItemIntProperty(item, resolution, ItemProperties.HORIZONTAL_RESOLUTION);
 
             PageDimensions pageDimensions = settings.PageSize.PageDimensions() ?? settings.CustomPageSize;
             if (pageDimensions == null)

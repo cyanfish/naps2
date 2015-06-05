@@ -187,7 +187,6 @@
     <Compile Include="Scan\ScanSettings.cs" />
     <Compile Include="Scan\Stub\StubScanDriverFactory.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
-    <Compile Include="Scan\Twain\DibUtils.cs" />
     <Compile Include="Scan\Twain\TwainScanDriver.cs" />
     <Compile Include="Scan\ScanDriverBase.cs" />
     <Compile Include="Scan\Wia\WiaApi.cs" />

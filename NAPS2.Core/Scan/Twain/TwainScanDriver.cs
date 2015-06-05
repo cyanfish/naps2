@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -105,6 +106,7 @@ namespace NAPS2.Scan.Twain
             };
             session.SourceDisabled += (sender, eventArgs) =>
             {
+                Debug.Assert(ds != null);
                 ds.Close();
                 session.Close();
                 twainForm.Close();
@@ -114,6 +116,7 @@ namespace NAPS2.Scan.Twain
             {
                 try
                 {
+                    Debug.Assert(ds != null);
                     ConfigureDS(ds);
                     var ui = ScanSettings.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
                     ds.Enable(ui, true, twainForm.Handle);
@@ -149,6 +152,7 @@ namespace NAPS2.Scan.Twain
                 return;
             }
 
+            // Paper Source
             switch (ScanSettings.PaperSource)
             {
                 case ScanSource.Glass:
@@ -165,6 +169,7 @@ namespace NAPS2.Scan.Twain
                     break;
             }
 
+            // Bit Depth
             switch (ScanSettings.BitDepth)
             {
                 case ScanBitDepth.C24Bit:
@@ -178,7 +183,7 @@ namespace NAPS2.Scan.Twain
                     break;
             }
 
-
+            // Page Size, Horizontal Align
             PageDimensions pageDimensions = ScanSettings.PageSize.PageDimensions() ?? ScanSettings.CustomPageSize;
             if (pageDimensions == null)
             {
@@ -206,6 +211,18 @@ namespace NAPS2.Scan.Twain
                 Bottom = pageHeight
             };
             ds.DGImage.ImageLayout.Set(imageLayout);
+
+            // Brightness, Contrast
+            // Conveniently, the range of values used in settings (-1000 to +1000) is the same range TWAIN supports
+            ds.Capabilities.ICapBrightness.SetValue(ScanSettings.Brightness);
+            ds.Capabilities.ICapContrast.SetValue(ScanSettings.Contrast);
+
+            // Resolution
+            int dpi = ScanSettings.Resolution.ToIntDpi();
+            ds.Capabilities.ICapXResolution.SetValue(dpi);
+            ds.Capabilities.ICapYResolution.SetValue(dpi);
+
+
         }
     }
 }
