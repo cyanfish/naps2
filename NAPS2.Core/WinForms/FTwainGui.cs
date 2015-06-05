@@ -29,25 +29,10 @@ namespace NAPS2.WinForms
 {
     internal partial class FTwainGui : FormBase
     {
-        private bool activated;
-
         public FTwainGui()
         {
             InitializeComponent();
             RestoreFormState = false;
         }
-
-        private void FTwainGui_Activated(object sender, EventArgs eventArgs)
-        {
-            if (activated)
-                return;
-            activated = true;
-
-            // TODO: Pass in show/noshow
-            // TODO: (Somewhere else) configure ds
-            DataSource.Enable(SourceEnableMode.ShowUI, true, Handle); // SourceEnableMode.ShowUIOnly could be useful
-        }
-
-        public DataSource DataSource { get; set; }
     }
 }

@@ -20,19 +20,30 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
-using System.Windows.Forms;
+using System.Reflection;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.WinForms;
+using NTwain;
+using NTwain.Data;
 
 namespace NAPS2.Scan.Twain
 {
-    public class TwainScanDriver : IScanDriver
+    public class TwainScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "twain";
+        private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetExecutingAssembly());
 
         private readonly IFormFactory formFactory;
         private readonly IScannedImageFactory scannedImageFactory;
+
+        static TwainScanDriver()
+        {
+            NTwain.PlatformInfo.Current.PreferNewDSM = false;
+        }
 
         public TwainScanDriver(IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
         {
@@ -40,70 +51,161 @@ namespace NAPS2.Scan.Twain
             this.scannedImageFactory = scannedImageFactory;
         }
 
-        public string DriverName
+        public override string DriverName
         {
             get { return DRIVER_NAME; }
         }
 
-        public ExtendedScanSettings ScanSettings { get; set; }
-
-        public ScanDevice ScanDevice { get; set; }
-
-        public IWin32Window DialogParent { get; set; }
-
-        public ScanDevice PromptForDevice()
+        protected override ScanDevice PromptForDeviceInternal()
         {
-            if (DialogParent == null)
-            {
-                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
-            }
+            var session = new TwainSession(TwainAppId);
+            session.Open();
             try
             {
-                string deviceId = TwainApi.SelectDeviceUI();
-                if (deviceId == null)
+                var ds = session.ShowSourceSelector();
+                if (ds == null)
                 {
                     return null;
                 }
-                string deviceName = deviceId;
+                string deviceId = ds.Name;
+                string deviceName = ds.Name;
                 return new ScanDevice(deviceId, deviceName);
             }
-            catch (ScanDriverException)
+            finally
             {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new ScanDriverUnknownException(e);
+                session.Close();
             }
         }
 
-        public IEnumerable<IScannedImage> Scan()
+        protected override IEnumerable<IScannedImage> ScanInternal()
         {
-            if (ScanSettings == null)
+            var session = new TwainSession(TwainAppId);
+            var twainForm = formFactory.Create<FTwainGui>();
+            var images = new List<IScannedImage>();
+            Exception error = null;
+
+            session.Open(new WindowsFormsMessageLoopHook(DialogParent.Handle));
+            var ds = session.FirstOrDefault(x => x.Name == ScanDevice.ID);
+
+            session.TransferReady += (sender, eventArgs) => { };
+            session.DataTransferred += (sender, eventArgs) =>
             {
-                throw new InvalidOperationException("IScanDriver.ScanSettings must be specified before calling Scan().");
-            }
-            if (ScanDevice == null)
+                using (var bmp = new Bitmap(eventArgs.GetNativeImageStream()))
+                {
+                    var bitDepth = bmp.PixelFormat == PixelFormat.Format1bppIndexed
+                        ? ScanBitDepth.BlackWhite
+                        : ScanBitDepth.C24Bit;
+                    images.Add(scannedImageFactory.Create(bmp, bitDepth, ScanSettings.MaxQuality));
+                }
+            };
+            session.TransferError += (sender, eventArgs) =>
             {
-                throw new InvalidOperationException("IScanDriver.ScanDevice must be specified before calling Scan().");
-            }
-            if (DialogParent == null)
+                Log.ErrorException("An error occurred while interacting with TWAIN.", eventArgs.Exception);
+                twainForm.Close();
+            };
+            session.SourceDisabled += (sender, eventArgs) =>
             {
-                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
-            }
-            try
+                ds.Close();
+                session.Close();
+                twainForm.Close();
+            };
+
+            twainForm.Load += (sender, eventArgs) =>
             {
-                var api = new TwainApi(ScanSettings, ScanDevice, DialogParent, formFactory, scannedImageFactory);
-                return api.Scan();
-            }
-            catch (ScanDriverException)
+                try
+                {
+                    ConfigureDS(ds);
+                    var ui = ScanSettings.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
+                    ds.Enable(ui, true, twainForm.Handle);
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                    twainForm.Close();
+                }
+            };
+
+            if (ds == null)
             {
-                throw;
+                session.Close();
+                throw new DeviceNotFoundException();
             }
-            catch (Exception e)
+            ds.Open();
+
+            twainForm.ShowDialog(DialogParent);
+
+            if (error != null)
             {
-                throw new ScanDriverUnknownException(e);
+                throw new ScanDriverUnknownException(error);
             }
+
+            return images;
+        }
+
+        private void ConfigureDS(DataSource ds)
+        {
+            if (ScanSettings.UseNativeUI)
+            {
+                return;
+            }
+
+            switch (ScanSettings.PaperSource)
+            {
+                case ScanSource.Glass:
+                    ds.Capabilities.CapFeederEnabled.SetValue(BoolType.False);
+                    ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
+                    break;
+                case ScanSource.Feeder:
+                    ds.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
+                    ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
+                    break;
+                case ScanSource.Duplex:
+                    ds.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
+                    ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.True);
+                    break;
+            }
+
+            switch (ScanSettings.BitDepth)
+            {
+                case ScanBitDepth.C24Bit:
+                    ds.Capabilities.ICapPixelType.SetValue(PixelType.RGB);
+                    break;
+                case ScanBitDepth.Grayscale:
+                    ds.Capabilities.ICapPixelType.SetValue(PixelType.Gray);
+                    break;
+                case ScanBitDepth.BlackWhite:
+                    ds.Capabilities.ICapPixelType.SetValue(PixelType.BlackWhite);
+                    break;
+            }
+
+
+            PageDimensions pageDimensions = ScanSettings.PageSize.PageDimensions() ?? ScanSettings.CustomPageSize;
+            if (pageDimensions == null)
+            {
+                throw new InvalidOperationException("No page size specified");
+            }
+            float pageWidth = pageDimensions.WidthInThousandthsOfAnInch() / 1000.0f;
+            float pageHeight = pageDimensions.HeightInThousandthsOfAnInch() / 1000.0f;
+            var pageMaxWidthFixed = ds.Capabilities.ICapPhysicalWidth.GetCurrent();
+            float pageMaxWidth = pageMaxWidthFixed.Whole + (pageMaxWidthFixed.Fraction / (float)ushort.MaxValue);
+
+            float horizontalOffset = 0.0f;
+            if (ScanSettings.PageAlign == ScanHorizontalAlign.Center)
+                horizontalOffset = (pageMaxWidth - pageWidth) / 2;
+            else if (ScanSettings.PageAlign == ScanHorizontalAlign.Right)
+                horizontalOffset = (pageMaxWidth - pageWidth);
+
+            ds.Capabilities.ICapUnits.SetValue(Unit.Inches);
+            TWImageLayout imageLayout;
+            ds.DGImage.ImageLayout.Get(out imageLayout);
+            imageLayout.Frame = new TWFrame
+            {
+                Left = horizontalOffset,
+                Right = horizontalOffset + pageWidth,
+                Top = 0,
+                Bottom = pageHeight
+            };
+            ds.DGImage.ImageLayout.Set(imageLayout);
         }
     }
 }

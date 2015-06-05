@@ -53,7 +53,6 @@ namespace NAPS2.WinForms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FTwainGui";
             this.ShowInTaskbar = false;
-            this.Activated += new System.EventHandler(this.FTwainGui_Activated);
             this.ResumeLayout(false);
 
         }

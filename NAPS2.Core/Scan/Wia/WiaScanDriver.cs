@@ -27,8 +27,10 @@ using NAPS2.Scan.Images;
 
 namespace NAPS2.Scan.Wia
 {
-    public class WiaScanDriver : IScanDriver
+    public class WiaScanDriver : ScanDriverBase
     {
+        public const string DRIVER_NAME = "wia";
+
         private readonly IScannedImageFactory scannedImageFactory;
 
         public WiaScanDriver(IScannedImageFactory scannedImageFactory)
@@ -36,66 +38,19 @@ namespace NAPS2.Scan.Wia
             this.scannedImageFactory = scannedImageFactory;
         }
 
-        public const string DRIVER_NAME = "wia";
-
-        public string DriverName
+        public override string DriverName
         {
             get { return DRIVER_NAME; }
         }
 
-        public ExtendedScanSettings ScanSettings { get; set; }
-
-        public ScanDevice ScanDevice { get; set; }
-
-        public IWin32Window DialogParent { get; set; }
-
-        public ScanDevice PromptForDevice()
+        protected override ScanDevice PromptForDeviceInternal()
         {
-            if (DialogParent == null)
-            {
-                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
-            }
-            try
-            {
-                return WiaApi.SelectDeviceUI();
-            }
-            catch (ScanDriverException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new ScanDriverUnknownException(e);
-            }
+            return WiaApi.SelectDeviceUI();
         }
 
-        public IEnumerable<IScannedImage> Scan()
+        protected override IEnumerable<IScannedImage> ScanInternal()
         {
-            if (ScanSettings == null)
-            {
-                throw new InvalidOperationException("IScanDriver.ScanSettings must be specified before calling Scan().");
-            }
-            if (ScanDevice == null)
-            {
-                throw new InvalidOperationException("IScanDriver.ScanDevice must be specified before calling Scan().");
-            }
-            if (DialogParent == null)
-            {
-                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
-            }
-            WiaApi api;
-            try
-            {
-                api = new WiaApi(ScanSettings, ScanDevice, scannedImageFactory);
-            }
-            catch (ScanDriverException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new ScanDriverUnknownException(e);
-            }
+            var api = new WiaApi(ScanSettings, ScanDevice, scannedImageFactory);
             while (true)
             {
                 IScannedImage image;
