@@ -98,14 +98,14 @@ namespace NAPS2.Tests.Base
         public void Export_Normal_CreatesFile()
         {
             Assert.IsFalse(File.Exists(PDF_PATH), "Error setting up test (test file not deleted)");
-            pdfExporter.Export(PDF_PATH, images, info, num => true);
+            pdfExporter.Export(PDF_PATH, images, info, null, num => true);
             Assert.IsTrue(File.Exists(PDF_PATH));
         }
 
         [Test]
         public void Export_Normal_ReturnsTrue()
         {
-            bool result = pdfExporter.Export(PDF_PATH, images, info, num => true);
+            bool result = pdfExporter.Export(PDF_PATH, images, info, null, num => true);
             Assert.IsTrue(result);
         }
 
@@ -113,7 +113,7 @@ namespace NAPS2.Tests.Base
         public void Export_Progress_IsLinear()
         {
             int i = 0;
-            pdfExporter.Export(PDF_PATH, images, info, num =>
+            pdfExporter.Export(PDF_PATH, images, info, null, num =>
             {
                 Assert.AreEqual(++i, num);
                 return true;
@@ -125,7 +125,7 @@ namespace NAPS2.Tests.Base
         public void Export_Cancel_DoesntContinue()
         {
             bool first = true;
-            pdfExporter.Export(PDF_PATH, images, info, num =>
+            pdfExporter.Export(PDF_PATH, images, info, null, num =>
             {
                 Assert.IsTrue(first);
                 first = false;
@@ -136,7 +136,7 @@ namespace NAPS2.Tests.Base
         [Test]
         public void Export_Cancel_ReturnsFalse()
         {
-            bool result = pdfExporter.Export(PDF_PATH, images, info, num => false);
+            bool result = pdfExporter.Export(PDF_PATH, images, info, null, num => false);
             Assert.IsFalse(result);
         }
     }
