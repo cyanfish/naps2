@@ -84,6 +84,14 @@ namespace NAPS2.Console
                 return;
             }
 
+            if (options.OutputPath != null && IsPdfFile(options.OutputPath))
+            {
+                if (!CheckCanWriteFile())
+                {
+                    return;
+                }
+            }
+
             scannedImages = new List<IScannedImage>();
 
             if (options.ImportPath != null)
@@ -323,15 +331,6 @@ namespace NAPS2.Console
 
         private void ExportToPdf()
         {
-            if (File.Exists(options.OutputPath))
-            {
-                NotifyOverwrite(options.OutputPath);
-                if (!options.ForceOverwrite)
-                {
-                    return;
-                }
-            }
-
             try
             {
                 DoExportToPdf(options.OutputPath);
@@ -342,6 +341,19 @@ namespace NAPS2.Console
             {
                 errorOutput.DisplayError(ConsoleResources.DontHavePermission);
             }
+        }
+
+        private bool CheckCanWriteFile()
+        {
+            if (File.Exists(options.OutputPath))
+            {
+                NotifyOverwrite(options.OutputPath);
+                if (!options.ForceOverwrite)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void DoExportToPdf(string outputPath)
