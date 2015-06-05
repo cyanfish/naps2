@@ -192,12 +192,19 @@ namespace NAPS2.Scan.Wia
 
         private void SetDeviceIntProperty(int value, int propid)
         {
-            object objprop = value;
             foreach (Property property in device.Properties)
             {
                 if (property.PropertyID == propid)
                 {
-                    property.set_Value(ref objprop);
+                    object objprop = value;
+                    try
+                    {
+                        property.set_Value(ref objprop);
+                    }
+                    catch (ArgumentException)
+                    {
+                        // Ignore unsupported properties or value out of range
+                    }
                 }
             }
         }
@@ -215,7 +222,7 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (ArgumentException)
                     {
-                        // Ignore unsupported properties (e.g. contrast)
+                        // Ignore unsupported properties or value out of range
                     }
                 }
             }
@@ -244,7 +251,7 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (ArgumentException)
                     {
-                        // Ignore unsupported properties (e.g. contrast)
+                        // Ignore unsupported properties or value out of range
                     }
                 }
             }
