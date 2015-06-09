@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
@@ -147,6 +148,10 @@ namespace NAPS2.Scan.Twain
                 }
             };
 
+            if (DialogParent is Form && !((Form)DialogParent).Visible)
+            {
+                twainForm.Visible = false;
+            }
             twainForm.ShowDialog(DialogParent);
 
             if (error != null)
