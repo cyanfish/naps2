@@ -248,5 +248,14 @@ namespace NAPS2.Lang {
                 return ResourceManager.GetString("uk", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 台語 台灣話.
+        /// </summary>
+        internal static string zh_TW {
+            get {
+                return ResourceManager.GetString("zh_TW", resourceCulture);
+            }
+        }
     }
 }

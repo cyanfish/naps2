@@ -180,4 +180,7 @@
   <data name="sq" xml:space="preserve">
     <value>Shqip</value>
   </data>
+  <data name="zh_TW" xml:space="preserve">
+    <value>台語 台灣話</value>
+  </data>
 </root>

@@ -23,6 +23,7 @@
       <ComponentRef Id="LangComponent_sq" />
       <ComponentRef Id="LangComponent_sv" />
       <ComponentRef Id="LangComponent_uk" />
+      <ComponentRef Id="LangComponent_zh_TW" />
     </ComponentGroup>
 
     <DirectoryRef Id="INSTALLFOLDER">
@@ -124,6 +125,11 @@
       <Directory Id="LangFolder_uk" Name="uk">
         <Component Id="LangComponent_uk">
           <File Source="..\NAPS2\bin\InstallerMSI\uk\NAPS2.Core.resources.dll" Id="LangFile_uk" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_zh_TW" Name="zh_TW">
+        <Component Id="LangComponent_zh_TW">
+          <File Source="..\NAPS2\bin\InstallerMSI\zh-TW\NAPS2.Core.resources.dll" Id="LangFile_zh_TW" />
         </Component>
       </Directory>
     </DirectoryRef>
