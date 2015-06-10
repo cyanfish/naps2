@@ -37,7 +37,7 @@ namespace NAPS2.Scan.Twain
     public class TwainScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "twain";
-        private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetExecutingAssembly());
+        private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
 
         private readonly IFormFactory formFactory;
         private readonly IScannedImageFactory scannedImageFactory;
