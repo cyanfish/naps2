@@ -112,18 +112,7 @@ namespace NAPS2.Scan.Twain
                 error = eventArgs.Exception;
                 twainForm.Close();
             };
-            session.SourceDisabled += (sender, eventArgs) =>
-            {
-                if (ds != null && session.IsSourceOpen)
-                {
-                    ds.Close();
-                }
-                if (session.IsDsmOpen)
-                {
-                    session.Close();
-                }
-                twainForm.Close();
-            };
+            session.SourceDisabled += (sender, eventArgs) => twainForm.Close();
 
             twainForm.Load += (sender, eventArgs) =>
             {
@@ -145,6 +134,17 @@ namespace NAPS2.Scan.Twain
                 {
                     error = ex;
                     twainForm.Close();
+                }
+            };
+            twainForm.Closed += (sender, eventArgs) =>
+            {
+                if (ds != null && session.IsSourceOpen)
+                {
+                    ds.Close();
+                }
+                if (session.IsDsmOpen)
+                {
+                    session.Close();
                 }
             };
 
