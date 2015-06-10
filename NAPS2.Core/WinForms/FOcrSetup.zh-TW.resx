@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-        <value>Permettre la recherche dans les PDFs (OCR)</value>
+        <value>使用 OCR 讓 PDF 可搜尋</value>
     </data>
     <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
         <value>checkBoxEnableOcr</value>
@@ -159,7 +159,7 @@
         <value>1</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Langue de l'OCR:</value>
+        <value>OCR 語言:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -208,7 +208,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Annuler</value>
+        <value>取消</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -235,7 +235,7 @@
         <value>4</value>
     </data>
     <data name="linkGetLanguages.Text" xml:space="preserve">
-        <value>Obtenir plus de langues</value>
+        <value>獲取更多的語言</value>
     </data>
     <data name="&gt;&gt;linkGetLanguages.Name" xml:space="preserve">
         <value>linkGetLanguages</value>
@@ -259,7 +259,7 @@
         <value>5</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;Ok</value>
+        <value>確定</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -289,7 +289,7 @@
         <value>336, 139</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Configuration de l'OCR</value>
+        <value>OCR 安裝</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrSetup</value>

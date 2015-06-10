@@ -118,34 +118,34 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ChooseProfile" xml:space="preserve">
-        <value>Choisissez un profil</value>
+        <value>Choisir un profil</value>
     </data>
     <data name="Clear" xml:space="preserve">
         <value>Effacer</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Etes-vous sûr de vouloir supprimer {0} élément(s) ?</value>
+        <value>Faut-il vraiment supprimer {0} élément(s) ?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Êtes-vous sûr de vouloir supprimer {0} élément(s) ?</value>
+        <value>Faut-il vraiment supprimer {0} élément(s) ?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Êtes-vous certain de vouloir supprimer {0} profil(s) ?</value>
+        <value>Faut-il vraiment supprimer {0} profil(s) ?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Êtes-vous certain de vouloir supprimer le profil {0} ? </value>
+        <value>Faut-il vraiment supprimer le profil {0} ? </value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Le fichier {0} existe déjà. Voulez-vous l'écraser ?</value>
+        <value>Le fichier {0} existe déjà. Faut-il l'écraser ?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Supprimer</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>Le scanner indiqué est introuvable.</value>
+        <value>Le scanner indiqué est introuvable..</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>Le scanner indiqué est éteint.</value>
+        <value>Le scanner indiqué est éteint..</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
         <value>Vous n'avez pas la permission de créer un fichier à cet endroit.</value>
@@ -199,7 +199,7 @@
         <value>Image numérisée</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Choisissez un profil avant de numériser.</value>
+        <value>Choisir un profil avant de Numériser.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>Une erreur s'est produite avec le pilote du scanner..</value>
@@ -208,52 +208,52 @@
         <value>Version {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>An error occurred while trying to send an email.</value>
+        <value>Une erreur s'est produite en tentant d'envoyer un courriel..</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Automatic Updates</value>
+        <value>Mises à jour automatiques</value>
     </data>
     <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>Télécharger</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>Download and Install</value>
+        <value>Télécharger et installer</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Do you want NAPS2 to automatically check for updates?</value>
+        <value>Faut-il que NAPS2 vérifie régulièrement les mises à jour ?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Not Now</value>
+        <value>Pas maintenant</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>A newer version of NAPS2 is available. Do you want to update now?</value>
+        <value>Une nouvelle version de NAPS2 est disponible. Faut-il mettre à jour maintenant ?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Installation Complete</value>
+        <value>Installation terminée</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Installation complete. Do you want to restart NAPS2 now?</value>
+        <value>Installation terminée. Faut-il redémarrer NAPS2 maintenant ?</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installation failed.</value>
+        <value>Échec de l'installation.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installation Failed</value>
+        <value>Échec de l'installation</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Tout ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Sélectionné ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>Taille estimée du téléchargement : {0} Mo</value>
     </data>
     <data name="FilesProgress" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>fichiers {0} / {1}</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
-        <value>{0} / {1} MB</value>
+        <value>{0} / {1} Mo</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
         <value>The file "{0}" could not be imported.</value>
@@ -262,12 +262,12 @@
         <value>The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
-        <value>Download Error</value>
+        <value>Erreur de téléchargement</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>One or more files could not be downloaded.</value>
+        <value>Au moins un fichier n'a pas pu être téléchargé..</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Custom ({0}x{1} {2})</value>
+        <value>Personnalisée ({0}x{1} {2})</value>
     </data>
 </root>

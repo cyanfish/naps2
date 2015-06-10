@@ -129,7 +129,7 @@
         <value>5</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>&amp;Ok</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -296,7 +296,7 @@
         <value>297, 113</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Custom Page Size</value>
+        <value>Taille de page personnalisée</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FPageSize</value>

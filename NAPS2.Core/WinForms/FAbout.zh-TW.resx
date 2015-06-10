@@ -196,7 +196,7 @@
         <value>28</value>
     </data>
     <data name="labelCopyright.Text" xml:space="preserve">
-        <value>Copyright © 2009 Pavel Sorejs\nCopyright © 2012 Michael Adams\nCopyright © 2013 Peter De Leeuw\nCopyright © 2012-2015 Ben Olden-Cooligan</value>
+        <value>Copyright © 2009 Pavel Sorejs\nCopyright © 2012 Michael Adams\nCopyright © 2013 Peter De Leeuw\nCopyright © 2012-2014 Ben Olden-Cooligan</value>
     </data>
     <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
         <value>labelCopyright</value>
@@ -226,7 +226,7 @@
         <value>29</value>
     </data>
     <data name="okButton.Text" xml:space="preserve">
-        <value>&amp;Ok</value>
+        <value>確定</value>
     </data>
     <data name="&gt;&gt;okButton.Name" xml:space="preserve">
         <value>okButton</value>
@@ -467,7 +467,7 @@
         <value>31</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Icônes venant de:</value>
+        <value>圖示從:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -547,7 +547,7 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>À propos de</value>
+        <value>關於</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FAbout</value>

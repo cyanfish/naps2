@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
     <!-- 
     Microsoft ResX Schema 
@@ -316,7 +316,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Usa native WIA UI</value>
+        <value>Use native UI</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -1091,12 +1091,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=3.1.1.29776, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=3.2.1.31144, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FEditScanSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.1.1.29776, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.2.1.31144, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

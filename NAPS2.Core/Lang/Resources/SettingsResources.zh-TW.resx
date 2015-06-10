@@ -117,123 +117,100 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
-        <value>Microsoft Sans Serif, 8.25pt</value>
+    <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
+        <value>黑白</value>
     </data>
-    <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 9</value>
+    <data name="BitDepth_24Color" xml:space="preserve">
+        <value>24 位元色彩</value>
     </data>
-    <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
-        <value>282, 46</value>
+    <data name="BitDepth_8Grayscale" xml:space="preserve">
+        <value>灰階</value>
     </data>
-    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
-        <value>0</value>
+    <data name="Dpi_100" xml:space="preserve">
+        <value>100 dpi</value>
     </data>
-    <data name="lblPrompt.Text" xml:space="preserve">
-        <value>Une nouvelle version de NAPS2 est disponible. Faut-il mettre à jour maintenant ?</value>
+    <data name="Dpi_1200" xml:space="preserve">
+        <value>1200 dpi</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
-        <value>lblPrompt</value>
+    <data name="Dpi_150" xml:space="preserve">
+        <value>150 dpi</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="Dpi_200" xml:space="preserve">
+        <value>200 dpi</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="Dpi_300" xml:space="preserve">
+        <value>300 dpi</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
-        <value>3</value>
+    <data name="Dpi_400" xml:space="preserve">
+        <value>400 dpi</value>
     </data>
-    <data name="btnInstall.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 58</value>
+    <data name="Dpi_600" xml:space="preserve">
+        <value>600 dpi</value>
     </data>
-    <data name="btnInstall.Size" type="System.Drawing.Size, System.Drawing">
-        <value>282, 30</value>
+    <data name="Dpi_800" xml:space="preserve">
+        <value>800 dpi</value>
     </data>
-    <data name="btnInstall.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
+    <data name="HorizontalAlign_Center" xml:space="preserve">
+        <value>置中</value>
     </data>
-    <data name="btnInstall.Text" xml:space="preserve">
-        <value>Télécharger et installer</value>
+    <data name="HorizontalAlign_Left" xml:space="preserve">
+        <value>靠左</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Name" xml:space="preserve">
-        <value>btnInstall</value>
+    <data name="HorizontalAlign_Right" xml:space="preserve">
+        <value>靠右</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="PageSizeUnit_Centimetre" xml:space="preserve">
+        <value>公分</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="PageSizeUnit_Inch" xml:space="preserve">
+        <value>單位</value>
     </data>
-    <data name="&gt;&gt;btnInstall.ZOrder" xml:space="preserve">
-        <value>2</value>
+    <data name="PageSizeUnit_Millimetre" xml:space="preserve">
+        <value>毫米</value>
     </data>
-    <data name="btnDownload.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 94</value>
+    <data name="PageSize_A3" xml:space="preserve">
+        <value>A3 (297x420 mm)</value>
     </data>
-    <data name="btnDownload.Size" type="System.Drawing.Size, System.Drawing">
-        <value>138, 30</value>
+    <data name="PageSize_A4" xml:space="preserve">
+        <value>A4 (210x297 mm)</value>
     </data>
-    <data name="btnDownload.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
+    <data name="PageSize_A5" xml:space="preserve">
+        <value>A5 (148x210 mm)</value>
     </data>
-    <data name="btnDownload.Text" xml:space="preserve">
-        <value>Télécharger</value>
+    <data name="PageSize_B4" xml:space="preserve">
+        <value>B4 (250x353 mm)</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
-        <value>btnDownload</value>
+    <data name="PageSize_B5" xml:space="preserve">
+        <value>B5 (176x250 mm)</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="PageSize_Custom" xml:space="preserve">
+        <value>自訂...</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="PageSize_Legal" xml:space="preserve">
+        <value>US Legal (8.5x14 in)</value>
     </data>
-    <data name="&gt;&gt;btnDownload.ZOrder" xml:space="preserve">
-        <value>1</value>
+    <data name="PageSize_Letter" xml:space="preserve">
+        <value>US Letter (8.5x11 in)</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>156, 94</value>
+    <data name="Scale_1_1" xml:space="preserve">
+        <value>1:1</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>138, 30</value>
+    <data name="Scale_1_2" xml:space="preserve">
+        <value>1:2</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>3</value>
+    <data name="Scale_1_4" xml:space="preserve">
+        <value>1:4</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
-        <value>Pas maintenant</value>
+    <data name="Scale_1_8" xml:space="preserve">
+        <value>1:8</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="Source_Duplex" xml:space="preserve">
+        <value>雙面</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="Source_Feeder" xml:space="preserve">
+        <value>送紙器</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>0</value>
-    </data>
-    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-        <value>True</value>
-    </metadata>
-    <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-        <value>6, 13</value>
-    </data>
-    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>306, 136</value>
-    </data>
-    <data name="$this.Text" xml:space="preserve">
-        <value>Mettre à jour NAPS2</value>
-    </data>
-    <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FUpdate</value>
-    </data>
-    <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.22698, Culture=neutral, PublicKeyToken=null</value>
+    <data name="Source_Glass" xml:space="preserve">
+        <value>半透明</value>
     </data>
 </root>

@@ -117,123 +117,157 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
-        <value>Microsoft Sans Serif, 8.25pt</value>
+    <data name="ChooseProfile" xml:space="preserve">
+        <value>選擇設定檔</value>
     </data>
-    <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 9</value>
+    <data name="Clear" xml:space="preserve">
+        <value>清除</value>
     </data>
-    <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
-        <value>282, 46</value>
+    <data name="ConfirmClearItems" xml:space="preserve">
+        <value>您確定要清除 {0} 個項目嗎?</value>
     </data>
-    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
-        <value>0</value>
+    <data name="ConfirmDeleteItems" xml:space="preserve">
+        <value>您確定要刪除 {0} 個項目嗎?</value>
     </data>
-    <data name="lblPrompt.Text" xml:space="preserve">
-        <value>Une nouvelle version de NAPS2 est disponible. Faut-il mettre à jour maintenant ?</value>
+    <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+        <value>您確定要刪除 {0} 個設定檔嗎?</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
-        <value>lblPrompt</value>
+    <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+        <value>您確定要刪除設定檔 {0}?</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="ConfirmOverwriteFile" xml:space="preserve">
+        <value>檔案 {0} 已經存在，您要將它覆寫嗎?</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="Delete" xml:space="preserve">
+        <value>刪除</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
-        <value>3</value>
+    <data name="DeviceNotFound" xml:space="preserve">
+        <value>找不到所選的掃瞄器。.</value>
     </data>
-    <data name="btnInstall.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 58</value>
+    <data name="DeviceOffline" xml:space="preserve">
+        <value>所選的掃瞄器離線.</value>
     </data>
-    <data name="btnInstall.Size" type="System.Drawing.Size, System.Drawing">
-        <value>282, 30</value>
+    <data name="DontHavePermission" xml:space="preserve">
+        <value>您沒有在該位置儲存檔案的權限。.</value>
     </data>
-    <data name="btnInstall.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
+    <data name="Error" xml:space="preserve">
+        <value>錯誤</value>
     </data>
-    <data name="btnInstall.Text" xml:space="preserve">
-        <value>Télécharger et installer</value>
+    <data name="FileTypeBmp" xml:space="preserve">
+        <value>點陣圖檔 (*.bmp)</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Name" xml:space="preserve">
-        <value>btnInstall</value>
+    <data name="FileTypeEmf" xml:space="preserve">
+        <value>Windows 增強型中繼檔 (*.emf)</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="FileTypeExif" xml:space="preserve">
+        <value>可交換式影像檔案 (*.exif)</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="FileTypeGif" xml:space="preserve">
+        <value>GIF 檔 (*.gif)</value>
     </data>
-    <data name="&gt;&gt;btnInstall.ZOrder" xml:space="preserve">
-        <value>2</value>
+    <data name="FileTypeJpeg" xml:space="preserve">
+        <value>JPEG 檔 (*.jpg, *.jpeg)</value>
     </data>
-    <data name="btnDownload.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 94</value>
+    <data name="FileTypePdf" xml:space="preserve">
+        <value>PDF 文件 (*.pdf)</value>
     </data>
-    <data name="btnDownload.Size" type="System.Drawing.Size, System.Drawing">
-        <value>138, 30</value>
+    <data name="FileTypePng" xml:space="preserve">
+        <value>PNG 檔 (*.png)</value>
     </data>
-    <data name="btnDownload.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
+    <data name="FileTypeTiff" xml:space="preserve">
+        <value>TIFF 檔 (*.tiff, *.tif)</value>
     </data>
-    <data name="btnDownload.Text" xml:space="preserve">
-        <value>Télécharger</value>
+    <data name="NameMissing" xml:space="preserve">
+        <value>缺少名稱.</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
-        <value>btnDownload</value>
+    <data name="NAPS2" xml:space="preserve">
+        <value>NAPS2</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="NoDeviceSelected" xml:space="preserve">
+        <value>尚未選擇裝置.</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="NoDevicesFound" xml:space="preserve">
+        <value>找不到掃瞄裝置.</value>
     </data>
-    <data name="&gt;&gt;btnDownload.ZOrder" xml:space="preserve">
-        <value>1</value>
+    <data name="OverwriteFile" xml:space="preserve">
+        <value>覆寫檔案</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>156, 94</value>
+    <data name="PdfStatus" xml:space="preserve">
+        <value>{0} / {1}</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>138, 30</value>
+    <data name="ScannedImage" xml:space="preserve">
+        <value>已掃瞄的圖像</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>3</value>
+    <data name="SelectProfileBeforeScan" xml:space="preserve">
+        <value>按下 [掃瞄] 前請先選擇設定檔.</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
-        <value>Pas maintenant</value>
+    <data name="UnknownDriverError" xml:space="preserve">
+        <value>掃瞄時發生錯誤。.</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="Version" xml:space="preserve">
+        <value>版本 {0}</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="EmailError" xml:space="preserve">
+        <value>嘗試發送電子郵件時發生錯誤.</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="AutoUpdates" xml:space="preserve">
+        <value>自動更新</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>0</value>
+    <data name="Download" xml:space="preserve">
+        <value>下載</value>
     </data>
-    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-        <value>True</value>
-    </metadata>
-    <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-        <value>6, 13</value>
+    <data name="DownloadAndInstall" xml:space="preserve">
+        <value>下載並安裝</value>
     </data>
-    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>306, 136</value>
+    <data name="EnableAutoUpdates" xml:space="preserve">
+        <value>您要 NAPS2 自動檢查更新嗎?</value>
     </data>
-    <data name="$this.Text" xml:space="preserve">
-        <value>Mettre à jour NAPS2</value>
+    <data name="NotNow" xml:space="preserve">
+        <value>現在不要</value>
     </data>
-    <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FUpdate</value>
+    <data name="UpdateNow" xml:space="preserve">
+        <value>有新版本的 NAPS2 可用。您要馬上更新嗎?</value>
     </data>
-    <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.22698, Culture=neutral, PublicKeyToken=null</value>
+    <data name="InstallComplete" xml:space="preserve">
+        <value>安裝完成</value>
+    </data>
+    <data name="InstallCompletePromptRestart" xml:space="preserve">
+        <value>安裝完成。您要馬上將 NAPS2 重新啟動嗎?</value>
+    </data>
+    <data name="InstallFailed" xml:space="preserve">
+        <value>安裝失敗.</value>
+    </data>
+    <data name="InstallFailedTitle" xml:space="preserve">
+        <value>安裝失敗</value>
+    </data>
+    <data name="AllCount" xml:space="preserve">
+        <value>全部 ({0})</value>
+    </data>
+    <data name="SelectedCount" xml:space="preserve">
+        <value>已選 ({0})</value>
+    </data>
+    <data name="EstimatedDownloadSize" xml:space="preserve">
+        <value>估計下載大小: {0} MB</value>
+    </data>
+    <data name="FilesProgress" xml:space="preserve">
+        <value>{0} / {1} 檔案</value>
+    </data>
+    <data name="SizeProgress" xml:space="preserve">
+        <value>{0} / {1} MB</value>
+    </data>
+    <data name="ImportErrorCouldNot" xml:space="preserve">
+        <value>The file "{0}" could not be imported.</value>
+    </data>
+    <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+        <value>The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
+    </data>
+    <data name="DownloadError" xml:space="preserve">
+        <value>下載發生錯誤</value>
+    </data>
+    <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+        <value>無法下載一個或多個檔案.</value>
+    </data>
+    <data name="CustomPageSizeFormat" xml:space="preserve">
+        <value>自訂 ({0}x{1} {2})</value>
     </data>
 </root>
