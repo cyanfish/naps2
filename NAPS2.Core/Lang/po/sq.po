@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-13 21:35+0000\n"
+"POT-Creation-Date: 2015-06-10 19:04+0000\n"
 "PO-Revision-Date: 2015-05-21 13:00+0000\n"
 "Last-Translator: klean.xhelilaj <xhelilajk@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -598,9 +598,9 @@ msgstr "Letër SHBA (8.5 x 11 inç)"
 msgid "Update NAPS2"
 msgstr "Përditëso NAPS2"
 
-#: FEditScanSettings.resx$rdbNativeWIA.Text$Message
-msgid "Use native WIA UI"
-msgstr "Përdorni UI origjinal të WIA"
+#: FEditScanSettings.resx$rdbNative.Text$Message
+msgid "Use native UI"
+msgstr ""
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -687,3 +687,6 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} nga {1}"
+
+#~ msgid "Use native WIA UI"
+#~ msgstr "Përdorni UI origjinal të WIA"

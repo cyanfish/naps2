@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-10 19:04+0000\n"
-"PO-Revision-Date: 2015-06-01 20:17+0000\n"
-"Last-Translator: Ben <blue0fish@gmail.com>\n"
+"PO-Revision-Date: 2015-06-07 12:33+0000\n"
+"Last-Translator: danfong <danfong.hsieh@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: nl\n"
+"Language: zh-TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1433189864.0\n"
+"X-POOTLE-MTIME: 1433680405.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -32,7 +32,7 @@ msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "24-bits kleuren"
+msgstr "24 位元色彩"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
@@ -53,7 +53,7 @@ msgstr "800 dpi"
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "Een nieuwe versie van NAPS2 is beschikbaar. Wilt u nu bijwerken?"
+msgstr "有新版本的 NAPS2 可用。您要馬上更新嗎?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -70,11 +70,11 @@ msgstr "A5 (148x210 mm)"
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
 msgid "About"
-msgstr "Over"
+msgstr "關於"
 
 #: FManageProfiles.resx$btnAdd.Text$Message
 msgid "Add"
-msgstr "Toevoegen"
+msgstr "加入"
 
 #: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
@@ -82,59 +82,59 @@ msgstr "Toevoegen"
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 msgid "All ({0})"
-msgstr "Alle ({0})"
+msgstr "全部 ({0})"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr "Fout bij het versturen van de e-mail"
+msgstr "嘗試發送電子郵件時發生錯誤"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "Fout met het stuurprogramma van de scanner"
+msgstr "掃瞄時發生錯誤。"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Weet u zeker dat u {0} item(s) wilt wissen?"
+msgstr "您確定要清除 {0} 個項目嗎?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Weet u zeker dat u profiel {0} wilt verwijderen?"
+msgstr "您確定要刪除設定檔 {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Weet u zeker dat u {0} item(s) wilt verwijderen?"
+msgstr "您確定要刪除 {0} 個項目嗎?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Weet u zeker dat u {0} profielen wilt verwijderen?"
+msgstr "您確定要刪除 {0} 個設定檔嗎?"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr "Automatische updates"
+msgstr "自動更新"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
-msgstr "Kleurdiepte"
+msgstr "位元深度"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "Bitmapbestanden (*.bmp)"
+msgstr "點陣圖檔 (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
-msgstr "Zwart-wit"
+msgstr "黑白"
 
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
-msgstr "Helderheid"
+msgstr "亮度"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
@@ -142,37 +142,37 @@ msgstr "Helderheid"
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr "取消"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr "Centreren"
+msgstr "置中"
 
 #: FChooseIcon.resx$$this.Text$Message
 msgid "Choose Icon"
-msgstr "Kies pictogram"
+msgstr "選擇圖示"
 
 #: MiscResources.resx$ChooseProfile$Message
 #: FChooseProfile.resx$$this.Text$Message
 msgid "Choose Profile"
-msgstr "Profiel kiezen"
+msgstr "選擇設定檔"
 
 #: FEditScanSettings.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
-msgstr "Apparaat kiezen"
+msgstr "選擇裝置"
 
 #: MiscResources.resx$Clear$Message
 #: FDesktop.resx$tsClear.Text$Message
 msgid "Clear"
-msgstr "Wissen"
+msgstr "清除"
 
 #: FEditScanSettings.resx$label7.Text$Message
 msgid "Contrast"
-msgstr "Contrast"
+msgstr "對比"
 
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
-msgstr "Kopiëren"
+msgstr "複製"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
@@ -192,182 +192,182 @@ msgstr "Copyright © 2013 Peter De Leeuw"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr ""
+msgstr "自訂"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr ""
+msgstr "自訂 ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr ""
+msgstr "自訂頁面大小"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "Terug tussenvoegen"
+msgstr "去掉間隔"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FManageProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
-msgstr "Verwijderen"
+msgstr "刪除"
 
 #: FEditScanSettings.resx$label1.Text$Message
 msgid "Device"
-msgstr "Apparaat"
+msgstr "裝置"
 
 #: FEditScanSettings.resx$label8.Text$Message
 msgid "Display name"
-msgstr "Schermnaam"
+msgstr "顯示名稱"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr "Wilt u dat NAPS2 automatisch zoekt naar updates?"
+msgstr "您要 NAPS2 自動檢查更新嗎?"
 
 #: FChooseProfile.resx$btnDone.Text$Message
 msgid "Done"
-msgstr "Gereed"
+msgstr "完成"
 
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 #: MiscResources.resx$Download$Message
 msgid "Download"
-msgstr "Downloaden"
+msgstr "下載"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "Fout bij downloaden"
+msgstr "下載發生錯誤"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr "Downloadvoortgang"
+msgstr "下載進度"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
-msgstr "Downloaden en installeren"
+msgstr "下載並安裝"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "Duplex"
+msgstr "雙面"
 
 #: FManageProfiles.resx$btnEdit.Text$Message
 msgid "Edit"
-msgstr "Bewerken"
+msgstr "編輯"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "E-mail PDF"
+msgstr "電子郵件 PDF"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Enhanced Windows Metafile (*.emf)"
+msgstr "Windows 增強型中繼檔 (*.emf)"
 
 #: MiscResources.resx$Error$Message
 msgid "Error"
-msgstr "Fout"
+msgstr "錯誤"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 msgid "Estimated download size: {0} MB"
-msgstr "Geschatte omvang: {0} MB"
+msgstr "估計下載大小: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "Exchangeable Image File (*.exif)"
+msgstr "可交換式影像檔案 (*.exif)"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Invoer"
+msgstr "送紙器"
 
 #: FDesktop.resx$tsFlip.Text$Message
 msgid "Flip"
-msgstr "Omdraaien"
+msgstr "翻轉"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF bestand (*.gif)"
+msgstr "GIF 檔 (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr "Meer talen installeren"
+msgstr "獲取更多的語言"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "Glas"
+msgstr "半透明"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr "Grijswaarden"
+msgstr "灰階"
 
 #: FEditScanSettings.resx$label9.Text$Message
 msgid "Horizontal align"
-msgstr "Horizontaal uitlijnen"
+msgstr "水平對齊"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
-msgstr "Pictogrammen van"
+msgstr "圖示從"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
-msgstr "Importeren"
+msgstr "匯入"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
-msgstr "Installatie voltooid"
+msgstr "安裝完成"
 
 #: MiscResources.resx$InstallFailedTitle$Message
 msgid "Installation Failed"
-msgstr "Installatie mislukt"
+msgstr "安裝失敗"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Installatie voltooid. Wilt u NAPS2 nu herstarten?"
+msgstr "安裝完成。您要馬上將 NAPS2 重新啟動嗎?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
-msgstr "Installatie mislukt"
+msgstr "安裝失敗"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "Afwisselend tussenvoegen"
+msgstr "間隔"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "JPEG bestand (*.jpg, *.jpeg)"
+msgstr "JPEG 檔 (*.jpg, *.jpeg)"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
-msgstr "Taal"
+msgstr "語言"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr "Links"
+msgstr "靠左"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
-msgstr "Hoofdwerkbalk"
+msgstr "主工具列"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "PDFs doorzoekbaar maken met OCR"
+msgstr "使用 OCR 讓 PDF 可搜尋"
 
 #: FChooseProfile.resx$btnProfiles.Text$Message
 msgid "Manage Profiles"
-msgstr "Profielen beheren"
+msgstr "管理設定檔"
 
 #: FEditScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr "Maximale kwaliteit (grote bestanden)"
+msgstr "最高品質 (大檔)"
 
 #: FDesktop.resx$tsMoveDown.Text$Message
 msgid "Move Down"
-msgstr "Naar beneden"
+msgstr "下移"
 
 #: FDesktop.resx$tsMoveUp.Text$Message
 msgid "Move Up"
-msgstr "Naar boven"
+msgstr "上移"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -375,15 +375,15 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr "Naam ontbreekt"
+msgstr "缺少名稱"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
-msgstr "Geen apparaat geselecteerd"
+msgstr "尚未選擇裝置"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr "Geen scanapparaat gevonden"
+msgstr "找不到掃瞄裝置"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -393,23 +393,23 @@ msgstr "Not Another PDF Scanner 2"
 #: FRecover.resx$btnCancel.Text$Message
 #: MiscResources.resx$NotNow$Message
 msgid "Not Now"
-msgstr "Niet nu"
+msgstr "現在不要"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "OCR"
+msgstr "光學辨識(OCR)"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr "OCR downloaden"
+msgstr "OCR 下載"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "OCR instellingen"
+msgstr "OCR 安裝"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr "OCR taal"
+msgstr "OCR 語言"
 
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
@@ -417,122 +417,122 @@ msgstr "OCR taal"
 #: FManageProfiles.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 msgid "OK"
-msgstr "OK"
+msgstr "確定"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
-msgstr "Download mislukt voor 1 of meerdere bestanden"
+msgstr "無法下載一個或多個檔案"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
-msgstr "Bestand overschrijven"
+msgstr "覆寫檔案"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF document (*.pdf)"
-msgstr "PDF bestand (*.pdf)"
+msgstr "PDF 文件 (*.pdf)"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr "PNG bestand (*.png)"
+msgstr "PNG 檔 (*.png)"
 
 #: FEditScanSettings.resx$label4.Text$Message
 msgid "Page size"
-msgstr "Paginaformaat"
+msgstr "頁面大小"
 
 #: FEditScanSettings.resx$label2.Text$Message
 msgid "Paper source"
-msgstr "Papierbron"
+msgstr "紙張來源"
 
 #: FViewer.resx$$this.Text$Message
 msgid "Preview"
-msgstr "Voorbeeld"
+msgstr "預覽"
 
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
-msgstr "Profielinstellingen"
+msgstr "設定檔設定"
 
 #: FManageProfiles.resx$$this.Text$Message
 #: FDesktop.resx$tsProfiles.Text$Message
 msgid "Profiles"
-msgstr "Profielen"
+msgstr "設定檔"
 
 #: FDesktop.resx$btnQuickScan.Text$Message
 msgid "Quick Scan"
-msgstr ""
+msgstr "快速掃瞄"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
-msgstr ""
+msgstr "修復"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "復原掃瞄過的圖像"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
-msgstr "Hersorteren"
+msgstr "重新排序"
 
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
-msgstr "Resolutie"
+msgstr "解析度"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
-msgstr ""
+msgstr "反轉"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
-msgstr "Rechts"
+msgstr "靠右"
 
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
-msgstr "Roteren"
+msgstr "旋轉"
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
-msgstr "Linksom draaien"
+msgstr "向左旋轉"
 
 #: FDesktop.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
-msgstr "Rechtsom draaien"
+msgstr "向右旋轉"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
-msgstr "Afbeeldingen opslaan"
+msgstr "儲存圖像"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
-msgstr "PDF opslaan"
+msgstr "儲存 PDF"
 
 #: FPDFSave.resx$label1.Text$Message
 msgid "Saving to PDF"
-msgstr "Opslaan naar PDF"
+msgstr "儲存成 PDF"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 #: FEditScanSettings.resx$label10.Text$Message
 msgid "Scale"
-msgstr "Schalen"
+msgstr "縮放比例"
 
 #: FChooseProfile.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
 msgid "Scan"
-msgstr "Scannen"
+msgstr "掃瞄"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
-msgstr "Gescande afbeelding"
+msgstr "已掃瞄的圖像"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
-msgstr "Alles selecteren"
+msgstr "全選"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Kies een profiel voor het scannen"
+msgstr "按下 [掃瞄] 前請先選擇設定檔"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr "Kies een of meer talen"
+msgstr "請選擇一個或多個語言"
 
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
@@ -540,37 +540,35 @@ msgstr "Kies een of meer talen"
 #: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
 msgid "Selected ({0})"
-msgstr "Geselecteerd ({0})"
+msgstr "已選 ({0})"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr "TIFF bestand (*.tiff, *.tif)"
+msgstr "TIFF 檔 (*.tiff, *.tif)"
 
 #: FEditScanSettings.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
-msgstr "TWAIN driver"
+msgstr "TWAIN 驅動程式"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file "{0}" could not be imported"
-msgstr "Bestand \"{0}\"kon niet worden geïmporteerd"
+msgstr "檔案 \"{0}\" 無法匯入"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
-msgstr ""
-"Import mislukt voor bestand \"{0}\". Alleen PDFs gemaakt met NAPS2 kunnen "
-"worden geïmporteerd"
+msgstr "檔案 \"{0}\" 無法匯入。僅能匯入 NAPS2 產生的 PDF 檔"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Bestand {0} bestaat al. Wilt u het bestand overschrijven?"
+msgstr "檔案 {0} 已經存在，您要將它覆寫嗎?"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
-msgstr "Kan de geselecteerde scanner niet vinden"
+msgstr "找不到所選的掃瞄器。"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
-msgstr "De geselecteerde scanner is offline"
+msgstr "所選的掃瞄器離線"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -582,7 +580,7 @@ msgstr "US Letter (8.5x11 in)"
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
-msgstr "NAPS2 updaten"
+msgstr "更新 NAPS2"
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -590,52 +588,52 @@ msgstr ""
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
-msgstr "Gebruik voorgedefinieerde instellingen"
+msgstr "使用預定義設定"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr "Voor OCR moet u elke taal downloaden die u wilt laten herkennen"
+msgstr "使用 OCR 需要您去下載每個您想要掃瞄的語言"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
-msgstr "Versie {0}"
+msgstr "版本 {0}"
 
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
-msgstr "Beeld"
+msgstr "檢視"
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
-msgstr "WIA driver"
+msgstr "WIA 驅動程式"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
-msgstr "Wachten op TWAIN scan"
+msgstr "等待 TWAIN 完成"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "U heeft geen rechten om hier bestanden op te slaan"
+msgstr "您沒有在該位置儲存檔案的權限。"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
-msgstr "Zoomen"
+msgstr "縮放"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom in"
-msgstr "Inzoomen"
+msgstr "放大"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom out"
-msgstr "Uitzoomen"
+msgstr "縮小"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "公分"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://sourceforge.com/projects/naps2"
@@ -647,11 +645,11 @@ msgstr "http://www.fatcow.com/free-icons"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "單位"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "毫米"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -661,18 +659,15 @@ msgstr "{0} / {1} MB"
 #: MiscResources.resx$FilesProgress$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
-msgstr "{0} / {1} bestanden"
+msgstr "{0} / {1} 檔案"
 
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr ""
+msgstr "在 {1} 上已掃瞄 {0} 個圖像，在 {2} 可能沒有被儲存，且可復原。您要將它們復原嗎?"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
-msgstr "{0} van {1}"
+msgstr "{0} / {1}"
 
 #~ msgid "Use native WIA UI"
-#~ msgstr "Gebruik eigen interface WIA"
-
-#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
-#~ msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
+#~ msgstr "使用原生 WIA 使用者介面"

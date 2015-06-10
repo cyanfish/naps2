@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-12 22:46+0000\n"
+"POT-Creation-Date: 2015-06-10 19:04+0000\n"
 "PO-Revision-Date: 2015-06-01 20:20+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -585,9 +585,9 @@ msgstr "Ofício (8.5x11 pol)"
 msgid "Update NAPS2"
 msgstr "Atualizar o NAPS2"
 
-#: FEditScanSettings.resx$rdbNativeWIA.Text$Message
-msgid "Use native WIA UI"
-msgstr "Usar WIA UI nativo"
+#: FEditScanSettings.resx$rdbNative.Text$Message
+msgid "Use native UI"
+msgstr ""
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -671,6 +671,9 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} de {1}"
+
+#~ msgid "Use native WIA UI"
+#~ msgstr "Usar WIA UI nativo"
 
 #~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
 #~ msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
