@@ -50,8 +50,12 @@ namespace NAPS2.Console
             }
             catch (Exception ex)
             {
-                KernelManager.Kernel.Get<ILogger>().FatalException("An error occurred that caused the console application to close.", ex);
+                KernelManager.Kernel.Get<ILogger>()
+                    .FatalException("An error occurred that caused the console application to close.", ex);
                 System.Console.WriteLine(ConsoleResources.UnexpectedError);
+            }
+            finally
+            {
                 if (options.WaitForEnter)
                 {
                     System.Console.ReadLine();

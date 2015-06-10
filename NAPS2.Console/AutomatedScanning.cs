@@ -127,11 +127,6 @@ namespace NAPS2.Console
             }
 
             scannedImages = null;
-
-            if (options.WaitForEnter)
-            {
-                Console.ReadLine();
-            }
         }
 
         private void ImportImages()
