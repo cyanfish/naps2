@@ -137,10 +137,6 @@ namespace NAPS2.Scan.Twain
                 }
             };
 
-            if (DialogParent is Form && !((Form)DialogParent).Visible)
-            {
-                twainForm.Visible = false;
-            }
             twainForm.ShowDialog(DialogParent);
 
             if (ds != null && session.IsSourceOpen)
