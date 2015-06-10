@@ -84,12 +84,13 @@ namespace NAPS2.Console
                 return;
             }
 
-            if (options.OutputPath != null && IsPdfFile(options.OutputPath))
+            if (options.OutputPath != null
+                && IsPdfFile(options.OutputPath)
+                && File.Exists(options.OutputPath)
+                && !options.ForceOverwrite)
             {
-                if (!CheckCanWriteFile())
-                {
-                    return;
-                }
+                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, options.OutputPath));
+                return;
             }
 
             scannedImages = new List<IScannedImage>();
@@ -312,25 +313,33 @@ namespace NAPS2.Console
         {
             imageSaver.SaveImages(outputPath, scannedImages, path =>
             {
-                NotifyOverwrite(path);
+                if (options.ForceOverwrite)
+                {
+                    OutputVerbose(ConsoleResources.Overwriting, path);
+                }
+                else
+                {
+                    errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
+                }
                 return options.ForceOverwrite;
             });
         }
 
-        private void NotifyOverwrite(string path)
-        {
-            if (!options.ForceOverwrite)
-            {
-                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
-            }
-            if (options.ForceOverwrite)
-            {
-                OutputVerbose(ConsoleResources.Overwriting, path);
-            }
-        }
-
         private void ExportToPdf()
         {
+            if (File.Exists(options.OutputPath))
+            {
+                if (options.ForceOverwrite)
+                {
+                    OutputVerbose(ConsoleResources.Overwriting, options.OutputPath);
+                }
+                else
+                {
+                    errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, options.OutputPath));
+                    return;
+                }
+            }
+
             try
             {
                 DoExportToPdf(options.OutputPath);
@@ -341,19 +350,6 @@ namespace NAPS2.Console
             {
                 errorOutput.DisplayError(ConsoleResources.DontHavePermission);
             }
-        }
-
-        private bool CheckCanWriteFile()
-        {
-            if (File.Exists(options.OutputPath))
-            {
-                NotifyOverwrite(options.OutputPath);
-                if (!options.ForceOverwrite)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
 
         private void DoExportToPdf(string outputPath)
