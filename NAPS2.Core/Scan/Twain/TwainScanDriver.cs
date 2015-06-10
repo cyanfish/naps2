@@ -136,23 +136,21 @@ namespace NAPS2.Scan.Twain
                     twainForm.Close();
                 }
             };
-            twainForm.Closed += (sender, eventArgs) =>
-            {
-                if (ds != null && session.IsSourceOpen)
-                {
-                    ds.Close();
-                }
-                if (session.IsDsmOpen)
-                {
-                    session.Close();
-                }
-            };
 
             if (DialogParent is Form && !((Form)DialogParent).Visible)
             {
                 twainForm.Visible = false;
             }
             twainForm.ShowDialog(DialogParent);
+
+            if (ds != null && session.IsSourceOpen)
+            {
+                ds.Close();
+            }
+            if (session.IsDsmOpen)
+            {
+                session.Close();
+            }
 
             if (error != null)
             {
