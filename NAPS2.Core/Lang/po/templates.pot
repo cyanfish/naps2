@@ -573,8 +573,8 @@ msgstr ""
 msgid "Update NAPS2"
 msgstr ""
 
-#: FEditScanSettings.resx$rdbNativeWIA.Text$Message
-msgid "Use native WIA UI"
+#: FEditScanSettings.resx$rdbNative.Text$Message
+msgid "Use native UI"
 msgstr ""
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
