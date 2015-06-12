@@ -4,7 +4,7 @@
       Id="*"
       Name="NAPS2"
       Language="1033"
-      Version="3.3.0"
+      Version="3.3.1"
       Manufacturer="Ben Olden-Cooligan"
       UpgradeCode="FEB82971-B3E6-4F19-9684-1D543E644D73">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
@@ -45,6 +45,7 @@
         <File Source="..\NAPS2\bin\InstallerMSI\Interop.WIA.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\Ninject.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\NLog.dll" />
+        <File Source="..\NAPS2\bin\InstallerMSI\NTwain.dll" />
         <File Source="..\NAPS2.Core\Resources\scanner-app.ico" />
         <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\CommandLine.dll" />
