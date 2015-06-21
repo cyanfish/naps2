@@ -34,6 +34,7 @@ using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
@@ -60,8 +61,9 @@ namespace NAPS2.WinForms
         private readonly IconButtonSizer iconButtonSizer;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
+        private readonly IPdfPrinter pdfPrinter;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IconButtonSizer iconButtonSizer, IProfileManager profileManager, IScanPerformer scanPerformer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IconButtonSizer iconButtonSizer, IProfileManager profileManager, IScanPerformer scanPerformer, IPdfPrinter pdfPrinter)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -76,6 +78,7 @@ namespace NAPS2.WinForms
             this.iconButtonSizer = iconButtonSizer;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
+            this.pdfPrinter = pdfPrinter;
             InitializeComponent();
         }
 
@@ -192,20 +195,20 @@ namespace NAPS2.WinForms
         private void UpdateToolbar()
         {
             // "All" dropdown items
-            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text = tsReverseAll.Text =
+            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text = tsPrintAll.Text = tsReverseAll.Text =
                 string.Format(MiscResources.AllCount, imageList.Images.Count);
-            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = tsReverseAll.Enabled =
+            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = tsPrintAll.Enabled = tsReverseAll.Enabled =
                 imageList.Images.Any();
 
             // "Selected" dropdown items
-            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text = tsReverseSelected.Text =
+            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text = tsPrintSelected.Text = tsReverseSelected.Text =
                 string.Format(MiscResources.SelectedCount, SelectedIndices.Count());
-            tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = tsReverseSelected.Enabled =
+            tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = tsPrintSelected.Enabled = tsReverseSelected.Enabled =
                 SelectedIndices.Any();
 
             // Top-level toolbar actions
             tsdRotate.Enabled = tsMoveUp.Enabled = tsMoveDown.Enabled = tsDelete.Enabled = SelectedIndices.Any();
-            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsClear.Enabled = imageList.Images.Any();
+            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsdPrint.Enabled = tsClear.Enabled = imageList.Images.Any();
 
             // Context-menu actions
             ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
@@ -696,6 +699,27 @@ namespace NAPS2.WinForms
         private void tsReverseSelected_Click(object sender, EventArgs e)
         {
             UpdateThumbnails(imageList.Reverse(SelectedIndices));
+        }
+
+        private void tsPrintAll_Click(object sender, EventArgs e)
+        {
+            Print(imageList.Images);
+        }
+
+        private void tsPrintSelected_Click(object sender, EventArgs e)
+        {
+            Print(SelectedImages.ToList());
+        }
+
+        private void Print(List<IScannedImage> images)
+        {
+            if (images.Any())
+            {
+                string path = Paths.AppData + "\\Scan.pdf";
+                ExportPDF(path, images);
+                pdfPrinter.Print(path);
+                File.Delete(path);
+            }
         }
     }
 }

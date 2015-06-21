@@ -87,6 +87,8 @@
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="ImportExport\Pdf\PdfSharpPrinter.cs" />
+    <Compile Include="ImportExport\Pdf\IPdfPrinter.cs" />
     <Compile Include="Lang\Resources\MiscResources.Designer.cs">
       <DependentUpon>MiscResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -1641,6 +1643,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\control_play_blue-small.png" />
+    <Content Include="Resources\printer.png" />
     <Content Include="Resources\text.png" />
     <None Include="Resources\arrow_rotate_anticlockwise.png" />
     <None Include="Resources\arrow_rotate_clockwise.png" />
