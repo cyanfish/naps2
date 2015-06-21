@@ -223,7 +223,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.3.1.32420, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.3.1.32669, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -291,45 +291,45 @@
   <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        duSEAAAAAElFTkSuQmCC
+        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
+        DwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="tsScan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 51</value>
+    <value>46, 51</value>
   </data>
   <data name="tsScan.Text" xml:space="preserve">
     <value>Scan</value>
@@ -378,7 +378,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsProfiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 51</value>
+    <value>60, 51</value>
   </data>
   <data name="tsProfiles.Text" xml:space="preserve">
     <value>Profiles</value>
@@ -390,7 +390,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsOcr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 51</value>
+    <value>46, 51</value>
   </data>
   <data name="tsOcr.Text" xml:space="preserve">
     <value>OCR</value>
@@ -417,7 +417,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdSavePDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 51</value>
+    <value>71, 51</value>
   </data>
   <data name="tsdSavePDF.Text" xml:space="preserve">
     <value>Save PDF</value>
@@ -441,7 +441,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdSaveImages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 51</value>
+    <value>88, 51</value>
   </data>
   <data name="tsdSaveImages.Text" xml:space="preserve">
     <value>Save Images</value>
@@ -450,13 +450,13 @@
     <value>ImageAboveText</value>
   </data>
   <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>143, 22</value>
   </data>
   <data name="tsEmailPDFAll.Text" xml:space="preserve">
     <value>All ({0})</value>
   </data>
   <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>143, 22</value>
   </data>
   <data name="tsEmailPDFSelected.Text" xml:space="preserve">
     <value>Selected ({0})</value>
@@ -465,7 +465,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdEmailPDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 51</value>
+    <value>76, 51</value>
   </data>
   <data name="tsdEmailPDF.Text" xml:space="preserve">
     <value>Email PDF</value>
@@ -492,7 +492,7 @@
     <value>None</value>
   </data>
   <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>139, 22</value>
   </data>
   <data name="tsRotateLeft.Text" xml:space="preserve">
     <value>Rotate Left</value>
@@ -501,7 +501,7 @@
     <value>None</value>
   </data>
   <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>139, 22</value>
   </data>
   <data name="tsRotateRight.Text" xml:space="preserve">
     <value>Rotate Right</value>
@@ -510,7 +510,7 @@
     <value>None</value>
   </data>
   <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>139, 22</value>
   </data>
   <data name="tsFlip.Text" xml:space="preserve">
     <value>Flip</value>
@@ -519,7 +519,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdRotate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 51</value>
+    <value>54, 51</value>
   </data>
   <data name="tsdRotate.Text" xml:space="preserve">
     <value>Rotate</value>
@@ -531,7 +531,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsMoveUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 51</value>
+    <value>69, 51</value>
   </data>
   <data name="tsMoveUp.Text" xml:space="preserve">
     <value>Move Up</value>
@@ -543,7 +543,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsMoveDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 51</value>
+    <value>85, 51</value>
   </data>
   <data name="tsMoveDown.Text" xml:space="preserve">
     <value>Move Down</value>
@@ -552,19 +552,19 @@
     <value>ImageAboveText</value>
   </data>
   <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>139, 22</value>
   </data>
   <data name="tsInterleave.Text" xml:space="preserve">
     <value>Interleave</value>
   </data>
   <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>139, 22</value>
   </data>
   <data name="tsDeinterleave.Text" xml:space="preserve">
     <value>Deinterleave</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>136, 6</value>
   </data>
   <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 22</value>
@@ -579,7 +579,7 @@
     <value>Selected ({0})</value>
   </data>
   <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>139, 22</value>
   </data>
   <data name="tsReverse.Text" xml:space="preserve">
     <value>Reverse</value>
@@ -588,7 +588,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdReorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 51</value>
+    <value>61, 51</value>
   </data>
   <data name="tsdReorder.Text" xml:space="preserve">
     <value>Reorder</value>
@@ -603,7 +603,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 51</value>
+    <value>54, 51</value>
   </data>
   <data name="tsDelete.Text" xml:space="preserve">
     <value>Delete</value>
@@ -615,7 +615,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 51</value>
+    <value>48, 51</value>
   </data>
   <data name="tsClear.Text" xml:space="preserve">
     <value>Clear</value>
@@ -630,7 +630,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 51</value>
+    <value>72, 51</value>
   </data>
   <data name="toolStripDropDownButton1.Text" xml:space="preserve">
     <value>Language</value>
@@ -682,7 +682,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 51</value>
+    <value>54, 51</value>
   </data>
   <data name="tsAbout.Text" xml:space="preserve">
     <value>About</value>
@@ -694,7 +694,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1181, 54</value>
+    <value>1127, 54</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1000,6 +1000,6 @@
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.1.32420, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.1.32669, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
