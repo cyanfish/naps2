@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -195,15 +196,15 @@ namespace NAPS2.WinForms
         private void UpdateToolbar()
         {
             // "All" dropdown items
-            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text = tsPrintAll.Text = tsReverseAll.Text =
+            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text = tsReverseAll.Text =
                 string.Format(MiscResources.AllCount, imageList.Images.Count);
-            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = tsPrintAll.Enabled = tsReverseAll.Enabled =
+            tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = tsReverseAll.Enabled =
                 imageList.Images.Any();
 
             // "Selected" dropdown items
-            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text = tsPrintSelected.Text = tsReverseSelected.Text =
+            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text = tsReverseSelected.Text =
                 string.Format(MiscResources.SelectedCount, SelectedIndices.Count());
-            tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = tsPrintSelected.Enabled = tsReverseSelected.Enabled =
+            tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = tsReverseSelected.Enabled =
                 SelectedIndices.Any();
 
             // Top-level toolbar actions
@@ -701,24 +702,53 @@ namespace NAPS2.WinForms
             UpdateThumbnails(imageList.Reverse(SelectedIndices));
         }
 
-        private void tsPrintAll_Click(object sender, EventArgs e)
-        {
-            Print(imageList.Images);
-        }
-
-        private void tsPrintSelected_Click(object sender, EventArgs e)
-        {
-            Print(SelectedImages.ToList());
-        }
-
-        private void Print(List<IScannedImage> images)
+        private void Print(List<IScannedImage> images, string printerName)
         {
             if (images.Any())
             {
                 string path = Paths.AppData + "\\Scan.pdf";
                 ExportPDF(path, images);
-                pdfPrinter.Print(path);
+                pdfPrinter.Print(path, printerName);
                 File.Delete(path);
+            }
+        }
+
+        private void tsdPrint_Click(object sender, EventArgs e)
+        {
+            if (!imageList.Images.Any())
+            {
+                return;
+            }
+            var printDialog = new PrintDialog
+            {
+                AllowSelection = SelectedIndices.Any(),
+                AllowSomePages = true
+            };
+            printDialog.PrinterSettings.MinimumPage = 1;
+            printDialog.PrinterSettings.MaximumPage = imageList.Images.Count;
+            printDialog.PrinterSettings.FromPage = 1;
+            printDialog.PrinterSettings.ToPage = imageList.Images.Count;
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                List<IScannedImage> imagesToPrint;
+                switch (printDialog.PrinterSettings.PrintRange)
+                {
+                    case PrintRange.AllPages:
+                        imagesToPrint = imageList.Images;
+                        break;
+                    case PrintRange.Selection:
+                        imagesToPrint = SelectedImages.ToList();
+                        break;
+                    case PrintRange.SomePages:
+                        int start = printDialog.PrinterSettings.FromPage;
+                        int length = printDialog.PrinterSettings.ToPage - start + 1;
+                        imagesToPrint = imageList.Images.Skip(start).Take(length).ToList();
+                        break;
+                    default:
+                        imagesToPrint = new List<IScannedImage>();
+                        break;
+                }
+                Print(imagesToPrint, printDialog.PrinterSettings.PrinterName);
             }
         }
     }

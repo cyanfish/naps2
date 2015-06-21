@@ -31,39 +31,23 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpPrinter : IPdfPrinter
     {
-        public void Print(string pdfFilePath)
+        public void Print(string pdfFilePath, string printerName)
         {
-            var p = Process.Start(new ProcessStartInfo
+            var adobePath =
+                Registry.LocalMachine.OpenSubKey("Software")
+                    .OpenSubKey("Microsoft")
+                    .OpenSubKey("Windows")
+                    .OpenSubKey("CurrentVersion")
+                    .OpenSubKey("App Paths")
+                    .OpenSubKey("AcroRd32.exe");
+            if (adobePath == null)
             {
-                CreateNoWindow = false,
-                Verb = "print",
-                FileName = pdfFilePath
-            });
-            if (p != null)
-            {
-                p.Start();
-                p.WaitForExit();
+                MessageBox.Show("Adobe Reader must be installed in order to print.");
+                return;
             }
-            //var adobePath =
-            //    Registry.LocalMachine.OpenSubKey("Software")
-            //        .OpenSubKey("Microsoft")
-            //        .OpenSubKey("Windows")
-            //        .OpenSubKey("CurrentVersion")
-            //        .OpenSubKey("App Paths")
-            //        .OpenSubKey("AcroRd32.exe");
-            //if (adobePath == null)
-            //{
-            //    MessageBox.Show("Adobe Reader must be installed in order to print.");
-            //    return;
-            //}
-            //PdfFilePrinter.AdobeReaderPath = Path.Combine(adobePath.GetValue("Path").ToString(), "AcroRd32.exe");
-            //var printDialog = new PrintDialog();
-            //printDialog.AllowSelection = true;
-            //if (printDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    var printer = new PdfFilePrinter(pdfFilePath, printDialog.PrinterSettings.PrinterName);
-            //    printer.Print();
-            //}
+            PdfFilePrinter.AdobeReaderPath = Path.Combine(adobePath.GetValue("Path").ToString(), "AcroRd32.exe");
+            var printer = new PdfFilePrinter(pdfFilePath, printerName);
+            printer.Print();
         }
     }
 }

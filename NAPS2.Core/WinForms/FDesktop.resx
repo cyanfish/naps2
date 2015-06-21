@@ -450,13 +450,13 @@
     <value>ImageAboveText</value>
   </data>
   <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsEmailPDFAll.Text" xml:space="preserve">
     <value>All ({0})</value>
   </data>
   <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsEmailPDFSelected.Text" xml:space="preserve">
     <value>Selected ({0})</value>
@@ -472,18 +472,6 @@
   </data>
   <data name="tsdEmailPDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
-  </data>
-  <data name="tsPrintAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="tsPrintAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsPrintSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="tsPrintSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
   </data>
   <data name="tsdPrint.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -718,7 +706,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1180, 54</value>
+    <value>1181, 54</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -899,18 +887,6 @@
   </data>
   <data name="&gt;&gt;tsdPrint.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsPrintAll.Name" xml:space="preserve">
-    <value>tsPrintAll</value>
-  </data>
-  <data name="&gt;&gt;tsPrintAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsPrintSelected.Name" xml:space="preserve">
-    <value>tsPrintSelected</value>
-  </data>
-  <data name="&gt;&gt;tsPrintSelected.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsImport.Name" xml:space="preserve">
     <value>tsImport</value>

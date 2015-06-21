@@ -27,6 +27,6 @@ namespace NAPS2.ImportExport.Pdf
 {
     public interface IPdfPrinter
     {
-        void Print(string pdfFilePath);
+        void Print(string pdfFilePath, string printerName);
     }
 }

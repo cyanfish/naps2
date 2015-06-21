@@ -57,8 +57,6 @@ namespace NAPS2.WinForms
             this.tsEmailPDFAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsEmailPDFSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdPrint = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsPrintAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsPrintSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.tsImport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsdRotate = new System.Windows.Forms.ToolStripDropDownButton();
@@ -276,26 +274,12 @@ namespace NAPS2.WinForms
             // 
             // tsdPrint
             // 
-            this.tsdPrint.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsPrintAll,
-            this.tsPrintSelected});
             this.tsdPrint.Image = global::NAPS2.Icons.printer;
             resources.ApplyResources(this.tsdPrint, "tsdPrint");
             this.tsdPrint.Name = "tsdPrint";
             this.tsdPrint.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsdPrint.ShowDropDownArrow = false;
-            // 
-            // tsPrintAll
-            // 
-            this.tsPrintAll.Name = "tsPrintAll";
-            resources.ApplyResources(this.tsPrintAll, "tsPrintAll");
-            this.tsPrintAll.Click += new System.EventHandler(this.tsPrintAll_Click);
-            // 
-            // tsPrintSelected
-            // 
-            this.tsPrintSelected.Name = "tsPrintSelected";
-            resources.ApplyResources(this.tsPrintSelected, "tsPrintSelected");
-            this.tsPrintSelected.Click += new System.EventHandler(this.tsPrintSelected_Click);
+            this.tsdPrint.Click += new System.EventHandler(this.tsdPrint_Click);
             // 
             // tsImport
             // 
@@ -516,8 +500,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsReverseAll;
         private System.Windows.Forms.ToolStripMenuItem tsReverseSelected;
         private System.Windows.Forms.ToolStripDropDownButton tsdPrint;
-        private System.Windows.Forms.ToolStripMenuItem tsPrintAll;
-        private System.Windows.Forms.ToolStripMenuItem tsPrintSelected;
     }
 }
 
