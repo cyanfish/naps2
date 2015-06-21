@@ -155,15 +155,6 @@ namespace NAPS2.Scan.Images
             transform = TransformationHelper.CombineRotation(transform, rotateFlipType);
             Thumbnail.RotateFlip(rotateFlipType);
 
-            // TODO: Consider storing original thumbnail and working from that
-            // TODO: Also, this won't work. For example, a Resize transform shouldn't actually affect the thumbnail (assuming ratios remain the same).
-            // TODO: Couple possibilities: Add a separate method for performing on a thumbnail (annoying), or do all transforms on the original image
-            // TODO: and then generate a thumbnail from the final result (elegant, but potentially with performance issues).
-            // TODO: Of course, this whole idea could have performance issues with lots of stacked transforms...
-            // TODO: Ideally some cases (e.g. rotate/flip) could be done directly on the thumbnail while others could use the above procedure.
-            // TODO: Think about that.
-            // TODO: Also, this needs to be added to the in-memory implementation.
-            Thumbnail = transform.Perform(Thumbnail);
             foreach (var indexImage in _recoveryIndexManager.Index.Images.Where(x => x.FileName == baseImageFileName))
             {
                 indexImage.Transform = transform;
