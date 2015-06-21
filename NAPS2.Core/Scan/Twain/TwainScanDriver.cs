@@ -85,9 +85,16 @@ namespace NAPS2.Scan.Twain
             var twainForm = formFactory.Create<FTwainGui>();
             var images = new List<IScannedImage>();
             Exception error = null;
+            bool cancel = false;
             DataSource ds = null;
 
-            session.TransferReady += (sender, eventArgs) => { };
+            session.TransferReady += (sender, eventArgs) =>
+            {
+                if (cancel)
+                {
+                    eventArgs.CancelAll = true;
+                }
+            };
             session.DataTransferred += (sender, eventArgs) =>
             {
                 using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
@@ -110,6 +117,7 @@ namespace NAPS2.Scan.Twain
             session.TransferError += (sender, eventArgs) =>
             {
                 error = eventArgs.Exception;
+                cancel = true;
                 twainForm.Close();
             };
             session.SourceDisabled += (sender, eventArgs) => twainForm.Close();
