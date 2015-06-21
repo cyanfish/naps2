@@ -324,6 +324,11 @@ namespace NAPS2.WinForms
             prof.ShowDialog();
         }
 
+        private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
+        {
+            SavePDF(imageList.Images);
+        }
+
         private void tsSavePDFAll_Click(object sender, EventArgs e)
         {
             SavePDF(imageList.Images);
@@ -350,6 +355,11 @@ namespace NAPS2.WinForms
                     ExportPDF(sd.FileName, images);
                 }
             }
+        }
+
+        private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
+        {
+            SaveImages(imageList.Images);
         }
 
         private void tsSaveImagesAll_Click(object sender, EventArgs e)
@@ -411,6 +421,11 @@ namespace NAPS2.WinForms
                     }
                 }
             }
+        }
+
+        private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
+        {
+            EmailPDF(imageList.Images);
         }
 
         private void tsEmailPDFAll_Click(object sender, EventArgs e)
