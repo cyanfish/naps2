@@ -293,7 +293,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
             this.tsdRotate.Name = "tsdRotate";
             this.tsdRotate.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsdRotate.ShowDropDownArrow = false;
             // 
             // tsRotateLeft
             // 
@@ -343,7 +342,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsdReorder, "tsdReorder");
             this.tsdReorder.Name = "tsdReorder";
             this.tsdReorder.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsdReorder.ShowDropDownArrow = false;
             // 
             // tsInterleave
             // 
@@ -414,7 +412,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.toolStripDropDownButton1, "toolStripDropDownButton1");
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.toolStripDropDownButton1.ShowDropDownArrow = false;
             // 
             // tsAbout
             // 
