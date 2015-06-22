@@ -403,7 +403,7 @@
         <value>84, 51</value>
     </data>
     <data name="tsdEmailPDF.Text" xml:space="preserve">
-        <value>電子郵件 PDF</value>
+        <value>電子郵件發送 PDF</value>
     </data>
     <data name="tsdEmailPDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>

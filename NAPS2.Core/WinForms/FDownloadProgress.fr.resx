@@ -204,7 +204,7 @@
         <value>4</value>
     </data>
     <data name="labelTop.Text" xml:space="preserve">
-        <value>fichiers {0} / {1}</value>
+        <value>Fichier {0} / {1}</value>
     </data>
     <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
         <value>labelTop</value>

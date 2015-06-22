@@ -132,7 +132,7 @@
         <value>3</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Sélectionner une ou plusieurs langues:</value>
+        <value>Sélectionner une ou plusieurs langues :</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -228,7 +228,7 @@
         <value>8</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Il est nécessaire de télécharger la langue OCR appropriée au document numérisé..</value>
+        <value>Il est nécessaire de télécharger la langue OCR appropriée au document numérisé.</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
