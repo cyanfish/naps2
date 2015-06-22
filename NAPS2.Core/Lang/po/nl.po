@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-10 19:04+0000\n"
-"PO-Revision-Date: 2015-06-01 20:17+0000\n"
-"Last-Translator: Ben <blue0fish@gmail.com>\n"
+"PO-Revision-Date: 2015-06-16 04:52+0000\n"
+"Last-Translator: emphyrio <list@schuiling.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1433189864.0\n"
+"X-POOTLE-MTIME: 1434430345.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -114,11 +114,11 @@ msgstr "Automatische updates"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
@@ -150,7 +150,7 @@ msgstr "Centreren"
 
 #: FChooseIcon.resx$$this.Text$Message
 msgid "Choose Icon"
-msgstr "Kies pictogram"
+msgstr "Pictogram kiezen"
 
 #: MiscResources.resx$ChooseProfile$Message
 #: FChooseProfile.resx$$this.Text$Message
@@ -192,15 +192,15 @@ msgstr "Copyright © 2013 Peter De Leeuw"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr ""
+msgstr "Aangepast"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr ""
+msgstr "Aangepast ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr ""
+msgstr "Aangepaste paginagrootte"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -458,15 +458,15 @@ msgstr "Profielen"
 
 #: FDesktop.resx$btnQuickScan.Text$Message
 msgid "Quick Scan"
-msgstr ""
+msgstr "Snelle scan"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
-msgstr ""
+msgstr "Herstellen"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "Herstel gescande afbeeldingen"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -478,7 +478,7 @@ msgstr "Resolutie"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
-msgstr ""
+msgstr "Omdraaien"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -586,7 +586,7 @@ msgstr "NAPS2 updaten"
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
 msgid "Use native UI"
-msgstr ""
+msgstr "Gebruik eigen interface"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -614,7 +614,7 @@ msgstr "Wachten op TWAIN scan"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
@@ -635,7 +635,7 @@ msgstr "Uitzoomen"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://sourceforge.com/projects/naps2"
@@ -647,11 +647,11 @@ msgstr "http://www.fatcow.com/free-icons"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -666,6 +666,8 @@ msgstr "{0} / {1} bestanden"
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
+"{0} afbeelding(en) gescand op {1} om {2} zijn mogelijk niet opgeslagen en "
+"zijn te herstellen. Wilt u herstellen?"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
