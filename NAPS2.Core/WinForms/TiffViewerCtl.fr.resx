@@ -226,7 +226,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsStretch.ToolTipText" xml:space="preserve">
-        <value>Échelle</value>
+        <value>Échelle </value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>

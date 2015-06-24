@@ -163,7 +163,7 @@
         <value>cm</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>in</value>
+        <value>pouce</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
         <value>mm</value>

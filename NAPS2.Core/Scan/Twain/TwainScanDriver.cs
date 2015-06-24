@@ -122,7 +122,7 @@ namespace NAPS2.Scan.Twain
             };
             session.SourceDisabled += (sender, eventArgs) => twainForm.Close();
 
-            twainForm.Load += (sender, eventArgs) =>
+            twainForm.Shown += (sender, eventArgs) =>
             {
                 try
                 {
@@ -220,7 +220,7 @@ namespace NAPS2.Scan.Twain
             float horizontalOffset = 0.0f;
             if (ScanSettings.PageAlign == ScanHorizontalAlign.Center)
                 horizontalOffset = (pageMaxWidth - pageWidth) / 2;
-            else if (ScanSettings.PageAlign == ScanHorizontalAlign.Right)
+            else if (ScanSettings.PageAlign == ScanHorizontalAlign.Left)
                 horizontalOffset = (pageMaxWidth - pageWidth);
 
             ds.Capabilities.ICapUnits.SetValue(Unit.Inches);

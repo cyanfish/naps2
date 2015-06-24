@@ -151,7 +151,7 @@
         <value>8</value>
     </data>
     <data name="btnQuickScan.Text" xml:space="preserve">
-        <value>&amp;Quick Scan</value>
+        <value>Snelle scan</value>
     </data>
     <data name="btnQuickScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -490,7 +490,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsReverse.Text" xml:space="preserve">
-        <value>Reverse</value>
+        <value>Omdraaien</value>
     </data>
     <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

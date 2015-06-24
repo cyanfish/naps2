@@ -244,7 +244,7 @@
         <value>3</value>
     </data>
     <data name="btnDone.Text" xml:space="preserve">
-        <value>Terminé</value>
+        <value>Terminer</value>
     </data>
     <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
         <value>btnDone</value>
