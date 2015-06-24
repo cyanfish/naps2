@@ -122,7 +122,7 @@ namespace NAPS2.Scan.Twain
             };
             session.SourceDisabled += (sender, eventArgs) => twainForm.Close();
 
-            twainForm.Load += (sender, eventArgs) =>
+            twainForm.Shown += (sender, eventArgs) =>
             {
                 try
                 {
