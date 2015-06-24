@@ -270,4 +270,7 @@
   <data name="CustomPageSizeFormat" xml:space="preserve">
     <value>Custom ({0}x{1} {2})</value>
   </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Scan</value>
+  </data>
 </root>

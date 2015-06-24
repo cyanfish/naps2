@@ -57,11 +57,10 @@ namespace NAPS2.WinForms
         private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly AutoUpdaterUI autoUpdaterUI;
         private readonly OcrDependencyManager ocrDependencyManager;
-        private readonly IconButtonSizer iconButtonSizer;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IconButtonSizer iconButtonSizer, IProfileManager profileManager, IScanPerformer scanPerformer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -73,7 +72,6 @@ namespace NAPS2.WinForms
             this.scannedImageImporter = scannedImageImporter;
             this.autoUpdaterUI = autoUpdaterUI;
             this.ocrDependencyManager = ocrDependencyManager;
-            this.iconButtonSizer = iconButtonSizer;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             InitializeComponent();
@@ -88,11 +86,7 @@ namespace NAPS2.WinForms
         {
             RelayoutToolbar();
             InitLanguageDropdown();
-
-            iconButtonSizer.WidthOffset = 22;
-            iconButtonSizer.PaddingRight = 4;
-            iconButtonSizer.MaxWidth = 200;
-            iconButtonSizer.ResizeButtons(btnQuickScan);
+            UpdateScanButton();
         }
 
         private void InitLanguageDropdown()
@@ -210,9 +204,6 @@ namespace NAPS2.WinForms
             // Context-menu actions
             ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
             ctxSelectAll.Enabled = imageList.Images.Any();
-
-            // Other buttons
-            btnQuickScan.Visible = !imageList.Images.Any();
         }
 
         private void Clear()
@@ -317,11 +308,101 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsScan_Click(object sender, EventArgs e)
+        private void UpdateScanButton()
         {
+            // Update the main icon/text
+            if (UserConfigManager.Config.ScanButtonMode == ScanButtonMode.UseDefaultProfile
+                && profileManager.DefaultProfile != null)
+            {
+                tsScan.Image = Icons.control_play_blue;
+                tsScan.Text = profileManager.DefaultProfile.DisplayName;
+            }
+            else
+            {
+                tsScan.Image = Icons.scanner;
+                tsScan.Text = MiscResources.Scan;
+            }
+            RelayoutToolbar();
+
+            // Clean up the dropdown
+            while (tsScan.DropDownItems.Count > 3)
+            {
+                tsScan.DropDownItems.RemoveAt(2);
+            }
+
+            // Populate the dropdown
+            tsChooseProfile.Checked = UserConfigManager.Config.ScanButtonMode == ScanButtonMode.ChooseProfile;
+            foreach (var profile in profileManager.Profiles)
+            {
+                var item = new ToolStripMenuItem
+                {
+                    Text = profile.DisplayName,
+                    Checked = UserConfigManager.Config.ScanButtonMode == ScanButtonMode.UseDefaultProfile
+                              && profile.IsDefault,
+                    ImageScaling = ToolStripItemImageScaling.None
+                };
+                item.Click += (sender, args) =>
+                {
+                    profileManager.DefaultProfile = profile;
+                    profileManager.Save();
+
+                    UserConfigManager.Config.ScanButtonMode = ScanButtonMode.UseDefaultProfile;
+                    UserConfigManager.Save();
+
+                    UpdateScanButton();
+
+                    scanPerformer.PerformScan(profile, this, this);
+                };
+                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, item);
+            }
+        }
+
+        private void tsScan_ButtonClick(object sender, EventArgs e)
+        {
+            if (UserConfigManager.Config.ScanButtonMode == ScanButtonMode.UseDefaultProfile
+                && profileManager.DefaultProfile != null)
+            {
+                scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
+            }
+            else
+            {
+                var prof = FormFactory.Create<FChooseProfile>();
+                prof.ScanReceiver = this;
+                prof.ShowDialog();
+            }
+        }
+
+        private void tsChooseProfile_Click(object sender, EventArgs e)
+        {
+            UserConfigManager.Config.ScanButtonMode = ScanButtonMode.ChooseProfile;
+            UserConfigManager.Save();
+
+            UpdateScanButton();
+
             var prof = FormFactory.Create<FChooseProfile>();
             prof.ScanReceiver = this;
             prof.ShowDialog();
+        }
+
+        private void tsNewProfile_Click(object sender, EventArgs e)
+        {
+            var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+            editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
+            editSettingsForm.ShowDialog();
+            if (!editSettingsForm.Result)
+            {
+                return;
+            }
+            profileManager.Profiles.Add(editSettingsForm.ScanSettings);
+            profileManager.DefaultProfile = editSettingsForm.ScanSettings;
+            profileManager.Save();
+
+            UserConfigManager.Config.ScanButtonMode = ScanButtonMode.UseDefaultProfile;
+            UserConfigManager.Save();
+
+            UpdateScanButton();
+
+            scanPerformer.PerformScan(editSettingsForm.ScanSettings, this, this);
         }
 
         private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
@@ -684,23 +765,6 @@ namespace NAPS2.WinForms
                        @"\picwgoa" + image.Width + @"\pichgoa" + image.Height +
                        @"\hex " + hexString + "}";
             }
-        }
-
-        private void btnQuickScan_Click(object sender, EventArgs e)
-        {
-            if (profileManager.Profiles.Count == 0)
-            {
-                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
-                editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
-                editSettingsForm.ShowDialog();
-                if (!editSettingsForm.Result)
-                {
-                    return;
-                }
-                profileManager.Profiles.Add(editSettingsForm.ScanSettings);
-                profileManager.Save();
-            }
-            scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
         }
 
         private void tsReverseAll_Click(object sender, EventArgs e)

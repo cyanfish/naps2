@@ -36,14 +36,16 @@ namespace NAPS2.WinForms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.btnQuickScan = new System.Windows.Forms.Button();
             this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxView = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.tStrip = new System.Windows.Forms.ToolStrip();
-            this.tsScan = new System.Windows.Forms.ToolStripButton();
+            this.tsScan = new System.Windows.Forms.ToolStripSplitButton();
+            this.tsChooseProfile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsNewProfile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();
             this.tsOcr = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -89,7 +91,6 @@ namespace NAPS2.WinForms
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnQuickScan);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
@@ -98,14 +99,6 @@ namespace NAPS2.WinForms
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
-            // 
-            // btnQuickScan
-            // 
-            this.btnQuickScan.Image = global::NAPS2.Icons.control_play_blue_small;
-            resources.ApplyResources(this.btnQuickScan, "btnQuickScan");
-            this.btnQuickScan.Name = "btnQuickScan";
-            this.btnQuickScan.UseVisualStyleBackColor = true;
-            this.btnQuickScan.Click += new System.EventHandler(this.btnQuickScan_Click);
             // 
             // thumbnailList1
             // 
@@ -176,11 +169,35 @@ namespace NAPS2.WinForms
             // 
             // tsScan
             // 
+            this.tsScan.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsChooseProfile,
+            this.toolStripSeparator6,
+            this.tsNewProfile});
             resources.ApplyResources(this.tsScan, "tsScan");
             this.tsScan.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsScan.Name = "tsScan";
             this.tsScan.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.tsScan.Click += new System.EventHandler(this.tsScan_Click);
+            this.tsScan.ButtonClick += new System.EventHandler(this.tsScan_ButtonClick);
+            // 
+            // tsChooseProfile
+            // 
+            this.tsChooseProfile.Checked = true;
+            this.tsChooseProfile.CheckState = System.Windows.Forms.CheckState.Checked;
+            resources.ApplyResources(this.tsChooseProfile, "tsChooseProfile");
+            this.tsChooseProfile.Name = "tsChooseProfile";
+            this.tsChooseProfile.Click += new System.EventHandler(this.tsChooseProfile_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+            // 
+            // tsNewProfile
+            // 
+            this.tsNewProfile.Image = global::NAPS2.Icons.add_small;
+            resources.ApplyResources(this.tsNewProfile, "tsNewProfile");
+            this.tsNewProfile.Name = "tsNewProfile";
+            this.tsNewProfile.Click += new System.EventHandler(this.tsNewProfile_Click);
             // 
             // tsProfiles
             // 
@@ -452,7 +469,7 @@ namespace NAPS2.WinForms
         #endregion
 
         private System.Windows.Forms.ToolStrip tStrip;
-        private System.Windows.Forms.ToolStripButton tsScan;
+        private System.Windows.Forms.ToolStripSplitButton tsScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private ThumbnailList thumbnailList1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
@@ -488,11 +505,13 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem ctxView;
         private System.Windows.Forms.ToolStripMenuItem ctxSelectAll;
         private System.Windows.Forms.ToolStripMenuItem ctxCopy;
-        private System.Windows.Forms.Button btnQuickScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsReverse;
         private System.Windows.Forms.ToolStripMenuItem tsReverseAll;
         private System.Windows.Forms.ToolStripMenuItem tsReverseSelected;
+        private System.Windows.Forms.ToolStripMenuItem tsChooseProfile;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem tsNewProfile;
     }
 }
 
