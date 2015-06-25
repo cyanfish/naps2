@@ -136,7 +136,11 @@ namespace NAPS2.Scan.Twain
                     ds.Open();
                     ConfigureDS(ds);
                     var ui = ScanSettings.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
-                    ds.Enable(ui, true, twainForm.Handle);
+                    var rc = ds.Enable(ui, true, twainForm.Handle);
+                    if (rc != ReturnCode.Success)
+                    {
+                        twainForm.Close();
+                    }
                 }
                 catch (Exception ex)
                 {
