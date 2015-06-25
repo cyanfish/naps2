@@ -542,7 +542,10 @@ namespace NAPS2.WinForms
 
         private void tsProfiles_Click(object sender, EventArgs e)
         {
-            FormFactory.Create<FManageProfiles>().ShowDialog();
+            var form = FormFactory.Create<FProfiles>();
+            form.ScanReceiver = this;
+            form.ShowDialog();
+            UpdateScanButton();
         }
 
         private void tsAbout_Click(object sender, EventArgs e)

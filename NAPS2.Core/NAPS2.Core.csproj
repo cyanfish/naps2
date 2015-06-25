@@ -229,12 +229,6 @@
     <Compile Include="WinForms\FChooseIcon.Designer.cs">
       <DependentUpon>FChooseIcon.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\FChooseProfile.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForms\FChooseProfile.Designer.cs">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForms\FDesktop.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,11 +247,11 @@
     <Compile Include="WinForms\FEditScanSettings.Designer.cs">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\FManageProfiles.cs">
+    <Compile Include="WinForms\FProfiles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\FManageProfiles.Designer.cs">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <Compile Include="WinForms\FProfiles.Designer.cs">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FOcrLanguageDownload.cs">
       <SubType>Form</SubType>
@@ -393,12 +387,6 @@
     <EmbeddedResource Include="WinForms\FChooseIcon.zh-TW.resx">
       <DependentUpon>FChooseIcon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.sq.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.zh-TW.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.sq.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
@@ -417,11 +405,11 @@
     <EmbeddedResource Include="WinForms\FEditScanSettings.zh-TW.resx">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.sq.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.sq.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.zh-TW.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.zh-TW.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.sq.resx">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
@@ -621,67 +609,6 @@
     <EmbeddedResource Include="WinForms\FChooseIcon.uk.resx">
       <DependentUpon>FChooseIcon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.bg.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.ca.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.cs.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.da.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.de.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.es.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.fr.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.he.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.hr.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.hu.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.it.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.nl.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.pl.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.pt-BR.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.pt-PT.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.ro.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.ru.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.sv.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseProfile.uk.resx">
-      <DependentUpon>FChooseProfile.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.bg.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
@@ -864,66 +791,66 @@
     <EmbeddedResource Include="WinForms\FEditScanSettings.uk.resx">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.bg.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.bg.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.ca.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.ca.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.cs.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.cs.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.da.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.da.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.de.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.de.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.es.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.es.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.fr.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.fr.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.he.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.he.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.hr.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.hr.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.hu.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.hu.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.it.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.it.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.nl.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.nl.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.pl.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.pl.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.pt-BR.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.pt-BR.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.pt-PT.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.pt-PT.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.ro.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.ro.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.ru.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.ru.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.sv.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.sv.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FManageProfiles.uk.resx">
-      <DependentUpon>FManageProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FProfiles.uk.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.bg.resx">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>

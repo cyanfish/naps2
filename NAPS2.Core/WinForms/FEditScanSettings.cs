@@ -36,6 +36,7 @@ namespace NAPS2.WinForms
         private readonly IErrorOutput errorOutput;
 
         private ScanDevice currentDevice;
+        private bool isDefault;
 
         private int iconID;
         private bool result;
@@ -76,6 +77,7 @@ namespace NAPS2.WinForms
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanSettings.IconID];
             txtName.Text = ScanSettings.DisplayName;
             CurrentDevice = ScanSettings.Device;
+            isDefault = ScanSettings.IsDefault;
             iconID = ScanSettings.IconID;
 
             cmbSource.SelectedIndex = (int)ScanSettings.PaperSource;
@@ -214,6 +216,7 @@ namespace NAPS2.WinForms
                 Version = ExtendedScanSettings.CURRENT_VERSION,
 
                 Device = CurrentDevice,
+                IsDefault = isDefault,
                 DriverName = DeviceDriverName,
                 DisplayName = txtName.Text,
                 IconID = iconID,

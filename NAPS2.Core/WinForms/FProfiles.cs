@@ -28,18 +28,34 @@ using NAPS2.Scan;
 
 namespace NAPS2.WinForms
 {
-    public partial class FManageProfiles : FormBase
+    public partial class FProfiles : FormBase
     {
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;
         private readonly IconButtonSizer iconButtonSizer;
+        private readonly IScanPerformer scanPerformer;
 
-        public FManageProfiles(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer)
+        public FProfiles(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;
             this.iconButtonSizer = iconButtonSizer;
+            this.scanPerformer = scanPerformer;
             InitializeComponent();
+        }
+
+        public IScanReceiver ScanReceiver { get; set; }
+
+        private ExtendedScanSettings SelectedProfile
+        {
+            get
+            {
+                if (lvProfiles.SelectedIndices.Count == 1)
+                {
+                    return profileManager.Profiles[lvProfiles.SelectedIndices[0]];
+                }
+                return null;
+            }
         }
 
         protected override void OnLoad(object sender, EventArgs e)
@@ -47,15 +63,16 @@ namespace NAPS2.WinForms
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
-            LoadProfileList();
+            UpdateProfiles();
+            SelectProfile(x => x.IsDefault);
 
             var lm = new LayoutManager(this)
                 .Bind(lvProfiles)
                     .WidthToForm()
                     .HeightToForm()
-                .Bind(btnAdd, btnEdit, btnDelete, btnOK)
+                .Bind(btnAdd, btnEdit, btnDelete, btnDone)
                     .BottomToForm()
-                .Bind(btnOK)
+                .Bind(btnDone, btnScan)
                     .RightToForm()
                 .Bind(btnEdit)
                     .LeftTo(() => btnAdd.Right)
@@ -71,19 +88,30 @@ namespace NAPS2.WinForms
             lm.UpdateLayout();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void LoadProfileList()
+        private void UpdateProfiles()
         {
             lvProfiles.Items.Clear();
             foreach (var profile in profileManager.Profiles)
             {
                 lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
             }
+        }
 
+        private void SelectProfile(Func<ExtendedScanSettings, bool> pred)
+        {
+            int i = 0;
+            foreach (var profile in profileManager.Profiles)
+            {
+                if (pred(profile))
+                {
+                    lvProfiles.Items[i].Selected = true;
+                }
+                i++;
+            }
+            if (profileManager.Profiles.Count == 1)
+            {
+                lvProfiles.Items[0].Selected = true;
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -94,7 +122,8 @@ namespace NAPS2.WinForms
             if (fedit.Result)
             {
                 profileManager.Profiles.Add(fedit.ScanSettings);
-                LoadProfileList();
+                UpdateProfiles();
+                SelectProfile(x => x == fedit.ScanSettings);
                 profileManager.Save();
             }
         }
@@ -111,7 +140,8 @@ namespace NAPS2.WinForms
                 {
                     profileManager.Profiles[profileIndex] = fedit.ScanSettings;
                     profileManager.Save();
-                    LoadProfileList();
+                    UpdateProfiles();
+                    SelectProfile(x => x == fedit.ScanSettings);
                     lvProfiles.SelectedIndices.Add(profileIndex);
                 }
                 else
@@ -139,7 +169,7 @@ namespace NAPS2.WinForms
                 {
                     profileManager.Profiles.RemoveAll(lvProfiles.SelectedIndices.OfType<int>());
                     profileManager.Save();
-                    LoadProfileList();
+                    UpdateProfiles();
                     lvProfiles_SelectedIndexChanged(null, null);
                 }
             }
@@ -147,7 +177,10 @@ namespace NAPS2.WinForms
 
         private void lvProfiles_ItemActivate(object sender, EventArgs e)
         {
-            btnEdit_Click(null, null);
+            if (SelectedProfile != null)
+            {
+                PerformScan();
+            }
         }
 
         private void lvProfiles_KeyDown(object sender, KeyEventArgs e)
@@ -158,5 +191,43 @@ namespace NAPS2.WinForms
             }
         }
 
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            PerformScan();
+        }
+
+        private void PerformScan()
+        {
+            if (profileManager.Profiles.Count == 0)
+            {
+                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+                editSettingsForm.ScanSettings = new ExtendedScanSettings
+                {
+                    Version = ExtendedScanSettings.CURRENT_VERSION
+                };
+                editSettingsForm.ShowDialog();
+                if (!editSettingsForm.Result)
+                {
+                    return;
+                }
+                profileManager.Profiles.Add(editSettingsForm.ScanSettings);
+                profileManager.Save();
+                UpdateProfiles();
+                lvProfiles.SelectedIndices.Add(0);
+            }
+            if (SelectedProfile == null)
+            {
+                MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            profileManager.Save();
+            scanPerformer.PerformScan(SelectedProfile, this, ScanReceiver);
+        }
     }
 }

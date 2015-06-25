@@ -42,7 +42,11 @@ namespace NAPS2.Config
         {
             get
             {
-                return Profiles.FirstOrDefault(x => x.IsDefault) ?? Profiles.LastOrDefault();
+                if (Profiles.Count == 1)
+                {
+                    return Profiles.First();
+                }
+                return Profiles.FirstOrDefault(x => x.IsDefault);
             }
             set
             {
