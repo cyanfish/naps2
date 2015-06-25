@@ -43,8 +43,6 @@ namespace NAPS2.WinForms
             this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripSplitButton();
-            this.tsChooseProfile = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsNewProfile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();
             this.tsOcr = new System.Windows.Forms.ToolStripButton();
@@ -170,27 +168,13 @@ namespace NAPS2.WinForms
             // tsScan
             // 
             this.tsScan.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsChooseProfile,
-            this.toolStripSeparator6,
             this.tsNewProfile});
+            this.tsScan.Image = global::NAPS2.Icons.control_play_blue;
             resources.ApplyResources(this.tsScan, "tsScan");
             this.tsScan.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsScan.Name = "tsScan";
             this.tsScan.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.tsScan.ButtonClick += new System.EventHandler(this.tsScan_ButtonClick);
-            // 
-            // tsChooseProfile
-            // 
-            this.tsChooseProfile.Checked = true;
-            this.tsChooseProfile.CheckState = System.Windows.Forms.CheckState.Checked;
-            resources.ApplyResources(this.tsChooseProfile, "tsChooseProfile");
-            this.tsChooseProfile.Name = "tsChooseProfile";
-            this.tsChooseProfile.Click += new System.EventHandler(this.tsChooseProfile_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             // 
             // tsNewProfile
             // 
@@ -509,8 +493,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsReverse;
         private System.Windows.Forms.ToolStripMenuItem tsReverseAll;
         private System.Windows.Forms.ToolStripMenuItem tsReverseSelected;
-        private System.Windows.Forms.ToolStripMenuItem tsChooseProfile;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem tsNewProfile;
     }
 }

@@ -310,44 +310,25 @@ namespace NAPS2.WinForms
 
         private void UpdateScanButton()
         {
-            // Update the main icon/text
-            if (UserConfigManager.Config.ScanButtonMode == ScanButtonMode.UseDefaultProfile
-                && profileManager.DefaultProfile != null)
-            {
-                tsScan.Image = Icons.control_play_blue;
-                tsScan.Text = profileManager.DefaultProfile.DisplayName;
-            }
-            else
-            {
-                tsScan.Image = Icons.scanner;
-                tsScan.Text = MiscResources.Scan;
-            }
-            RelayoutToolbar();
-
             // Clean up the dropdown
-            while (tsScan.DropDownItems.Count > 3)
+            while (tsScan.DropDownItems.Count > 1)
             {
-                tsScan.DropDownItems.RemoveAt(2);
+                tsScan.DropDownItems.RemoveAt(0);
             }
 
             // Populate the dropdown
-            tsChooseProfile.Checked = UserConfigManager.Config.ScanButtonMode == ScanButtonMode.ChooseProfile;
             foreach (var profile in profileManager.Profiles)
             {
                 var item = new ToolStripMenuItem
                 {
                     Text = profile.DisplayName,
-                    Checked = UserConfigManager.Config.ScanButtonMode == ScanButtonMode.UseDefaultProfile
-                              && profile.IsDefault,
+                    Checked = profile.IsDefault,
                     ImageScaling = ToolStripItemImageScaling.None
                 };
                 item.Click += (sender, args) =>
                 {
                     profileManager.DefaultProfile = profile;
                     profileManager.Save();
-
-                    UserConfigManager.Config.ScanButtonMode = ScanButtonMode.UseDefaultProfile;
-                    UserConfigManager.Save();
 
                     UpdateScanButton();
 
@@ -359,32 +340,22 @@ namespace NAPS2.WinForms
 
         private void tsScan_ButtonClick(object sender, EventArgs e)
         {
-            if (UserConfigManager.Config.ScanButtonMode == ScanButtonMode.UseDefaultProfile
-                && profileManager.DefaultProfile != null)
+            if (profileManager.DefaultProfile != null)
             {
                 scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
             }
             else
             {
-                var prof = FormFactory.Create<FChooseProfile>();
-                prof.ScanReceiver = this;
-                prof.ShowDialog();
+                ScanWithNewProfile();
             }
         }
 
-        private void tsChooseProfile_Click(object sender, EventArgs e)
+        private void tsNewProfile_Click(object sender, EventArgs e)
         {
-            UserConfigManager.Config.ScanButtonMode = ScanButtonMode.ChooseProfile;
-            UserConfigManager.Save();
-
-            UpdateScanButton();
-
-            var prof = FormFactory.Create<FChooseProfile>();
-            prof.ScanReceiver = this;
-            prof.ShowDialog();
+            ScanWithNewProfile();
         }
 
-        private void tsNewProfile_Click(object sender, EventArgs e)
+        private void ScanWithNewProfile()
         {
             var editSettingsForm = FormFactory.Create<FEditScanSettings>();
             editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
@@ -396,9 +367,6 @@ namespace NAPS2.WinForms
             profileManager.Profiles.Add(editSettingsForm.ScanSettings);
             profileManager.DefaultProfile = editSettingsForm.ScanSettings;
             profileManager.Save();
-
-            UserConfigManager.Config.ScanButtonMode = ScanButtonMode.UseDefaultProfile;
-            UserConfigManager.Save();
 
             UpdateScanButton();
 

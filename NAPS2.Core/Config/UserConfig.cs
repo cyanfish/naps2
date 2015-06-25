@@ -47,7 +47,5 @@ namespace NAPS2.Config
         public bool EnableOcr { get; set; }
 
         public string OcrLanguageCode { get; set; }
-
-        public ScanButtonMode ScanButtonMode { get; set; }
     }
 }

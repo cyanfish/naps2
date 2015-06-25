@@ -132,7 +132,6 @@ namespace NAPS2.WinForms
                 MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            profileManager.DefaultProfile = SelectedProfile;
             profileManager.Save();
             scanPerformer.PerformScan(SelectedProfile, this, ScanReceiver);
         }

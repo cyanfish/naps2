@@ -85,7 +85,6 @@
     <Compile Include="Config\IProfileManager.cs" />
     <Compile Include="Config\IUserConfigManager.cs" />
     <Compile Include="Config\ProfileManager.cs" />
-    <Compile Include="Config\ScanButtonMode.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
     <Compile Include="Lang\Resources\MiscResources.Designer.cs">

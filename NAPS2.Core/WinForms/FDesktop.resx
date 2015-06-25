@@ -187,7 +187,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.3.3.27768, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.3.3.28227, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -252,18 +252,6 @@
   <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="tsChooseProfile.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsChooseProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="tsChooseProfile.Text" xml:space="preserve">
-    <value>Choose Profile</value>
-  </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
-  </data>
   <data name="tsNewProfile.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -272,43 +260,6 @@
   </data>
   <data name="tsNewProfile.Text" xml:space="preserve">
     <value>New Profile</value>
-  </data>
-  <data name="tsScan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        cooAAAAASUVORK5CYII=
-</value>
   </data>
   <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -783,18 +734,6 @@
   <data name="&gt;&gt;tsScan.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsChooseProfile.Name" xml:space="preserve">
-    <value>tsChooseProfile</value>
-  </data>
-  <data name="&gt;&gt;tsChooseProfile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
-    <value>toolStripSeparator6</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;tsNewProfile.Name" xml:space="preserve">
     <value>tsNewProfile</value>
   </data>
@@ -1003,6 +942,6 @@
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.3.27768, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.3.28227, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
