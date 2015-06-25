@@ -229,5 +229,28 @@ namespace NAPS2.WinForms
             profileManager.Save();
             scanPerformer.PerformScan(SelectedProfile, this, ScanReceiver);
         }
+
+        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (SelectedProfile == null)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ctxScan_Click(object sender, EventArgs e)
+        {
+            PerformScan();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnEdit_Click(null, null);
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnDelete_Click(null, null);
+        }
     }
 }
