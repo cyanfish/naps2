@@ -321,7 +321,7 @@ namespace NAPS2.WinForms
             {
                 var item = new ToolStripMenuItem
                 {
-                    Text = profile.DisplayName,
+                    Text = profile.DisplayName.Replace("&", "&&"),
                     Checked = profile.IsDefault,
                     ImageScaling = ToolStripItemImageScaling.None
                 };
