@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace NAPS2.Scan.Images.Transforms
 {
+    [XmlInclude(typeof(RotationTransform))]
     public abstract class Transform
     {
         public static Bitmap PerformAll(Bitmap bitmap, IEnumerable<Transform> transforms)
@@ -18,7 +20,19 @@ namespace NAPS2.Scan.Images.Transforms
             var last = transformList.LastOrDefault();
             if (transform.CanSimplify(last))
             {
-                transformList[transformList.Count - 1] = transform.Simplify(last);
+                var simplified = transform.Simplify(last);
+                if (simplified.IsNull)
+                {
+                    transformList.RemoveAt(transformList.Count - 1);
+                }
+                else
+                {
+                    transformList[transformList.Count - 1] = transform.Simplify(last);
+                }
+            }
+            else
+            {
+                transformList.Add(transform);
             }
         }
 
@@ -50,5 +64,10 @@ namespace NAPS2.Scan.Images.Transforms
         {
             throw new InvalidOperationException();
         }
+
+        /// <summary>
+        /// Gets a value that indicates whether the transform is a null transformation (i.e. has no effect).
+        /// </summary>
+        public virtual bool IsNull { get { return false; } }
     }
 }

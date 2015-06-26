@@ -151,6 +151,7 @@ namespace NAPS2.Scan.Images
 
         public void AddTransform(Transform transform)
         {
+            // Also updates the recovery index since they reference the same list
             Transform.AddOrSimplify(transformList, transform);
             // TODO: Consider storing original thumbnail and working from that
             // TODO: Also, this won't work. For example, a Resize transform shouldn't actually affect the thumbnail (assuming ratios remain the same).
@@ -161,10 +162,6 @@ namespace NAPS2.Scan.Images
             // TODO: Think about that.
             // TODO: Also, this needs to be added to the in-memory implementation.
             Thumbnail = transform.Perform(Thumbnail);
-            foreach (var indexImage in _recoveryIndexManager.Index.Images.Where(x => x.FileName == baseImageFileName))
-            {
-                Transform.AddOrSimplify(indexImage.TransformList, transform);
-            }
             _recoveryIndexManager.Save();
         }
 
