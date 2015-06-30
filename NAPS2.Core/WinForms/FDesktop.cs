@@ -322,7 +322,7 @@ namespace NAPS2.WinForms
                 var item = new ToolStripMenuItem
                 {
                     Text = profile.DisplayName.Replace("&", "&&"),
-                    Checked = profile.IsDefault,
+                    Image = profile.IsDefault ? Icons.accept_small : null,
                     ImageScaling = ToolStripItemImageScaling.None
                 };
                 item.Click += (sender, args) =>
@@ -335,6 +335,11 @@ namespace NAPS2.WinForms
                     scanPerformer.PerformScan(profile, this, this);
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, item);
+            }
+
+            if (profileManager.Profiles.Any())
+            {
+                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, new ToolStripSeparator());
             }
         }
 
