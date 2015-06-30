@@ -223,12 +223,6 @@
     <Compile Include="WinForms\FAbout.Designer.cs">
       <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\FChooseIcon.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForms\FChooseIcon.Designer.cs">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForms\FDesktop.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -385,15 +379,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.zh-TW.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.sq.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.tr.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.zh-TW.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.sq.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
@@ -573,67 +558,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.uk.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.bg.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.ca.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.cs.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.da.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.de.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.es.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.fr.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.he.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.hr.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.hu.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.it.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.nl.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.pl.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.pt-BR.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.pt-PT.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.ro.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.ru.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.sv.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FChooseIcon.uk.resx">
-      <DependentUpon>FChooseIcon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.bg.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
