@@ -183,4 +183,7 @@
   <data name="zh_TW" xml:space="preserve">
     <value>台語 台灣話</value>
   </data>
+  <data name="tr" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
 </root>
