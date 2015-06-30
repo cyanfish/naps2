@@ -284,17 +284,6 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void pctIcon_DoubleClick(object sender, EventArgs e)
-        {
-            var fic = FormFactory.Create<FChooseIcon>();
-            fic.ShowDialog();
-            if (fic.IconID > -1)
-            {
-                pctIcon.Image = ilProfileIcons.IconsList.Images[fic.IconID];
-                iconID = fic.IconID;
-            }
-        }
-
         private void rdWIA_CheckedChanged(object sender, EventArgs e)
         {
             if (!suppressChangeEvent)
