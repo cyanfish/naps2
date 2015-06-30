@@ -38,8 +38,9 @@ namespace NAPS2.WinForms
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxScan = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxSetDefault = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -66,8 +67,9 @@ namespace NAPS2.WinForms
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxScan,
             this.toolStripSeparator1,
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.ctxEdit,
+            this.ctxSetDefault,
+            this.ctxDelete});
             this.contextMenuStrip.Name = "contextMenuStrip";
             resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
@@ -84,19 +86,26 @@ namespace NAPS2.WinForms
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
-            // editToolStripMenuItem
+            // ctxEdit
             // 
-            this.editToolStripMenuItem.Image = global::NAPS2.Icons.pencil_small;
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            this.ctxEdit.Image = global::NAPS2.Icons.pencil_small;
+            this.ctxEdit.Name = "ctxEdit";
+            resources.ApplyResources(this.ctxEdit, "ctxEdit");
+            this.ctxEdit.Click += new System.EventHandler(this.ctxEdit_Click);
             // 
-            // deleteToolStripMenuItem
+            // ctxSetDefault
             // 
-            this.deleteToolStripMenuItem.Image = global::NAPS2.Icons.cross_small;
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            resources.ApplyResources(this.deleteToolStripMenuItem, "deleteToolStripMenuItem");
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.ctxSetDefault.Image = global::NAPS2.Icons.accept_small;
+            this.ctxSetDefault.Name = "ctxSetDefault";
+            resources.ApplyResources(this.ctxSetDefault, "ctxSetDefault");
+            this.ctxSetDefault.Click += new System.EventHandler(this.ctxSetDefault_Click);
+            // 
+            // ctxDelete
+            // 
+            this.ctxDelete.Image = global::NAPS2.Icons.cross_small;
+            this.ctxDelete.Name = "ctxDelete";
+            resources.ApplyResources(this.ctxDelete, "ctxDelete");
+            this.ctxDelete.Click += new System.EventHandler(this.ctxDelete_Click);
             // 
             // btnAdd
             // 
@@ -168,7 +177,8 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem ctxScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ctxEdit;
+        private System.Windows.Forms.ToolStripMenuItem ctxDelete;
+        private System.Windows.Forms.ToolStripMenuItem ctxSetDefault;
     }
 }

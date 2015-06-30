@@ -51,7 +51,7 @@ namespace NAPS2.WinForms
         {
             iconList.LargeImageList = ilProfileIcons.IconsList;
             int i = 0;
-            foreach (Image icon in ilProfileIcons.IconsList.Images)
+            foreach (Image icon in ilProfileIcons.IconsList.Images.Cast<Image>().Take(3))
             {
                 iconList.Items.Add("", i);
                 i++;

@@ -30,6 +30,8 @@ namespace NAPS2.WinForms
 {
     public partial class FProfiles : FormBase
     {
+        private const int DEFAULT_PROFILE_ICON_ID = 3;
+
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;
         private readonly IconButtonSizer iconButtonSizer;
@@ -93,7 +95,7 @@ namespace NAPS2.WinForms
             lvProfiles.Items.Clear();
             foreach (var profile in profileManager.Profiles)
             {
-                lvProfiles.Items.Add(profile.DisplayName, profile.IconID);
+                lvProfiles.Items.Add(profile.DisplayName, profile.IsDefault ? DEFAULT_PROFILE_ICON_ID : profile.IconID);
             }
         }
 
@@ -243,14 +245,27 @@ namespace NAPS2.WinForms
             PerformScan();
         }
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ctxEdit_Click(object sender, EventArgs e)
         {
             btnEdit_Click(null, null);
         }
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ctxDelete_Click(object sender, EventArgs e)
         {
             btnDelete_Click(null, null);
+        }
+
+        private void ctxSetDefault_Click(object sender, EventArgs e)
+        {
+            if (lvProfiles.SelectedItems.Count == 1)
+            {
+                int profileIndex = lvProfiles.SelectedItems[0].Index;
+                profileManager.DefaultProfile = profileManager.Profiles[profileIndex];
+                profileManager.Save();
+
+                UpdateProfiles();
+                SelectProfile(x => x.IsDefault);
+            }
         }
     }
 }
