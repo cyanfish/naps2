@@ -135,7 +135,6 @@ namespace NAPS2.Scan.Twain
                     ds = session.FirstOrDefault(x => x.Name == ScanDevice.ID);
                     if (ds == null)
                     {
-                        session.Close();
                         throw new DeviceNotFoundException();
                     }
                     rc = ds.Open();
