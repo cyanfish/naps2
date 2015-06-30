@@ -80,10 +80,9 @@ namespace NAPS2.ImportExport.Pdf
                         var tf = new XTextFormatter(gfx);
                         foreach (var element in ocrResult.Elements)
                         {
-                            var b = element.Bounds;
-                            var adjustedBounds = new RectangleF(b.X * hAdjust, b.Y * vAdjust, b.Width * hAdjust, b.Height * vAdjust);
-                            int fontSize = Math.Max(10, element.Bounds.Height);
-                            tf.DrawString(element.Text, new XFont("Times New Roman", fontSize, XFontStyle.Regular), XBrushes.Transparent, adjustedBounds);
+                            var adjustedBounds = AdjustBounds(element.Bounds, hAdjust, vAdjust);
+                            var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+                            tf.DrawString(element.Text, new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular), XBrushes.Transparent, adjustedBounds);
                         }
                     }
                     gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
@@ -92,6 +91,21 @@ namespace NAPS2.ImportExport.Pdf
             }
             document.Save(path);
             return true;
+        }
+
+        private static RectangleF AdjustBounds(Rectangle b, float hAdjust, float vAdjust)
+        {
+            var adjustedBounds = new RectangleF(b.X * hAdjust, b.Y * vAdjust, b.Width * hAdjust, b.Height * vAdjust);
+            return adjustedBounds;
+        }
+
+        private static int CalculateFontSize(string text, RectangleF adjustedBounds, XGraphics gfx)
+        {
+            int fontSizeGuess = Math.Max(1, (int)(adjustedBounds.Height));
+            var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
+            double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
+            int adjustedFontSize = Math.Max(1, (int)Math.Round(fontSizeGuess * adjustmentFactor));
+            return adjustedFontSize;
         }
     }
 }

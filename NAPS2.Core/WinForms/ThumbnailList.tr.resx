@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,73 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="en" xml:space="preserve">
-    <value>English</value>
+  <metadata name="ilThumbnailList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ilThumbnailList.ImageSize" type="System.Drawing.Size, System.Drawing">
+    <value>128, 128</value>
   </data>
-  <data name="de" xml:space="preserve">
-    <value>Deutsch</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
+  </metadata>
+  <metadata name="$this.TrayLargeIcon" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="&gt;&gt;ilThumbnailList.Name" xml:space="preserve">
+    <value>ilThumbnailList</value>
   </data>
-  <data name="es" xml:space="preserve">
-    <value>Español</value>
+  <data name="&gt;&gt;ilThumbnailList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="fr" xml:space="preserve">
-    <value>Français</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ThumbnailList</value>
   </data>
-  <data name="hi" xml:space="preserve">
-    <value>हिन्दी</value>
-  </data>
-  <data name="it" xml:space="preserve">
-    <value>Italiano</value>
-  </data>
-  <data name="pl" xml:space="preserve">
-    <value>Polski</value>
-  </data>
-  <data name="ru" xml:space="preserve">
-    <value>Русский язык</value>
-  </data>
-  <data name="uk" xml:space="preserve">
-    <value>Українська</value>
-  </data>
-  <data name="he" xml:space="preserve">
-    <value>עברית</value>
-  </data>
-  <data name="ca" xml:space="preserve">
-    <value>Català</value>
-  </data>
-  <data name="cs" xml:space="preserve">
-    <value>Čeština</value>
-  </data>
-  <data name="da" xml:space="preserve">
-    <value>Dansk</value>
-  </data>
-  <data name="bg" xml:space="preserve">
-    <value>български</value>
-  </data>
-  <data name="pt_BR" xml:space="preserve">
-    <value>Português (Brasil)</value>
-  </data>
-  <data name="pt_PT" xml:space="preserve">
-    <value>Português (Portugal)</value>
-  </data>
-  <data name="hu" xml:space="preserve">
-    <value>Magyar</value>
-  </data>
-  <data name="hr" xml:space="preserve">
-    <value>Hrvatski</value>
-  </data>
-  <data name="nl" xml:space="preserve">
-    <value>Nederlands</value>
-  </data>
-  <data name="sv" xml:space="preserve">
-    <value>Svenska</value>
-  </data>
-  <data name="sq" xml:space="preserve">
-    <value>Shqip</value>
-  </data>
-  <data name="zh_TW" xml:space="preserve">
-    <value>台語 台灣話</value>
-  </data>
-  <data name="tr" xml:space="preserve">
-    <value>Türkçe</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

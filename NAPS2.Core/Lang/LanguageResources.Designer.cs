@@ -241,6 +241,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Türkçe.
+        /// </summary>
+        internal static string tr {
+            get {
+                return ResourceManager.GetString("tr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Українська.
         /// </summary>
         internal static string uk {
