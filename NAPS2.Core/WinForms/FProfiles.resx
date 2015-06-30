@@ -125,34 +125,34 @@
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="ctxScan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>131, 22</value>
   </data>
   <data name="ctxScan.Text" xml:space="preserve">
     <value>Scan</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>128, 6</value>
   </data>
   <data name="ctxEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>131, 22</value>
   </data>
   <data name="ctxEdit.Text" xml:space="preserve">
     <value>Edit</value>
   </data>
   <data name="ctxSetDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>131, 22</value>
   </data>
   <data name="ctxSetDefault.Text" xml:space="preserve">
     <value>Set Default</value>
   </data>
   <data name="ctxDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>131, 22</value>
   </data>
   <data name="ctxDelete.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 120</value>
+    <value>132, 98</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
     <value>contextMenuStrip</value>
@@ -202,7 +202,7 @@
     <value>1</value>
   </data>
   <data name="btnAdd.Text" xml:space="preserve">
-    <value>&amp;Add</value>
+    <value>&amp;New</value>
   </data>
   <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -430,12 +430,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=3.3.4.29381, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=3.3.4.33503, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FProfiles</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.4.29381, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.4.33503, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
