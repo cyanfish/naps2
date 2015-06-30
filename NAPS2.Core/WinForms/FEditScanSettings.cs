@@ -291,7 +291,7 @@ namespace NAPS2.WinForms
             if (fic.IconID > -1)
             {
                 pctIcon.Image = ilProfileIcons.IconsList.Images[fic.IconID];
-                ScanSettings.IconID = fic.IconID;
+                iconID = fic.IconID;
             }
         }
 
