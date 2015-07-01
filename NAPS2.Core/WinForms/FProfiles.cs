@@ -238,6 +238,10 @@ namespace NAPS2.WinForms
             {
                 e.Cancel = true;
             }
+            else
+            {
+                ctxSetDefault.Enabled = !SelectedProfile.IsDefault;
+            }
         }
 
         private void ctxScan_Click(object sender, EventArgs e)
@@ -257,10 +261,9 @@ namespace NAPS2.WinForms
 
         private void ctxSetDefault_Click(object sender, EventArgs e)
         {
-            if (lvProfiles.SelectedItems.Count == 1)
+            if (SelectedProfile != null)
             {
-                int profileIndex = lvProfiles.SelectedItems[0].Index;
-                profileManager.DefaultProfile = profileManager.Profiles[profileIndex];
+                profileManager.DefaultProfile = SelectedProfile;
                 profileManager.Save();
 
                 UpdateProfiles();
