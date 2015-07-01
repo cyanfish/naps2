@@ -303,6 +303,9 @@
     <Compile Include="WinForms\TiffViewerCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForms\ToolStripDoubleItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons.resx">
