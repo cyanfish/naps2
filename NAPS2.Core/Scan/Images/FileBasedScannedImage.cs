@@ -27,6 +27,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using NAPS2.Recovery;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
 {
@@ -63,7 +64,7 @@ namespace NAPS2.Scan.Images
         private readonly string baseImageFilePath;
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
-        private RotateFlipType transform = RotateFlipType.RotateNoneFlipNone;
+        private List<Transform> transformList = new List<Transform>();
 
         public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
@@ -98,7 +99,7 @@ namespace NAPS2.Scan.Images
                 FileName = baseImageFileName,
                 BitDepth = bitDepth,
                 HighQuality = highQuality,
-                Transform = transform
+                TransformList = transformList
             });
             _recoveryIndexManager.Save();
         }
@@ -121,8 +122,7 @@ namespace NAPS2.Scan.Images
         public Bitmap GetImage()
         {
             var bitmap = new Bitmap(baseImageFilePath);
-            bitmap.RotateFlip(transform);
-            return bitmap;
+            return Transform.PerformAll(bitmap, transformList);
         }
 
         public void Dispose()
@@ -149,7 +149,7 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        public void RotateFlip(RotateFlipType rotateFlipType)
+        public void AddTransform(Transform transform)
         {
             // Also updates the recovery index since they reference the same list
             Transform.AddOrSimplify(transformList, transform);

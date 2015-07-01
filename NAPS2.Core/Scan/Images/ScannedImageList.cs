@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
 {
@@ -84,7 +85,7 @@ namespace NAPS2.Scan.Images
         {
             foreach (int i in selection)
             {
-                Images[i].RotateFlip(rotateFlipType);
+                Images[i].AddTransform(new RotationTransform(rotateFlipType));
             }
             return selection.ToList();
         }
