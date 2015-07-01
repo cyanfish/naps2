@@ -58,6 +58,13 @@ namespace NAPS2.WinForms
             this.tsEmailPDFSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.tsImport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsdEdit = new System.Windows.Forms.ToolStripDropDownButton();
+            this.previewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.brightnessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contrastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cropToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bitDepthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdRotate = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.tsRotateRight = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,6 +84,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -152,6 +160,7 @@ namespace NAPS2.WinForms
             this.tsdEmailPDF,
             this.tsImport,
             this.toolStripSeparator4,
+            this.tsdEdit,
             this.tsdRotate,
             this.tsMoveUp,
             this.tsMoveDown,
@@ -284,6 +293,56 @@ namespace NAPS2.WinForms
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // tsdEdit
+            // 
+            this.tsdEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.previewToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.brightnessToolStripMenuItem,
+            this.contrastToolStripMenuItem,
+            this.bitDepthToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.cropToolStripMenuItem});
+            this.tsdEdit.Image = global::NAPS2.Icons.image_edit;
+            resources.ApplyResources(this.tsdEdit, "tsdEdit");
+            this.tsdEdit.Name = "tsdEdit";
+            this.tsdEdit.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsdEdit.ShowDropDownArrow = false;
+            // 
+            // previewToolStripMenuItem
+            // 
+            this.previewToolStripMenuItem.Name = "previewToolStripMenuItem";
+            resources.ApplyResources(this.previewToolStripMenuItem, "previewToolStripMenuItem");
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+            // 
+            // brightnessToolStripMenuItem
+            // 
+            this.brightnessToolStripMenuItem.Image = global::NAPS2.Icons.weather_sun;
+            resources.ApplyResources(this.brightnessToolStripMenuItem, "brightnessToolStripMenuItem");
+            this.brightnessToolStripMenuItem.Name = "brightnessToolStripMenuItem";
+            // 
+            // contrastToolStripMenuItem
+            // 
+            this.contrastToolStripMenuItem.Image = global::NAPS2.Icons.contrast;
+            resources.ApplyResources(this.contrastToolStripMenuItem, "contrastToolStripMenuItem");
+            this.contrastToolStripMenuItem.Name = "contrastToolStripMenuItem";
+            // 
+            // cropToolStripMenuItem
+            // 
+            this.cropToolStripMenuItem.Image = global::NAPS2.Icons.transform_crop;
+            resources.ApplyResources(this.cropToolStripMenuItem, "cropToolStripMenuItem");
+            this.cropToolStripMenuItem.Name = "cropToolStripMenuItem";
+            // 
+            // bitDepthToolStripMenuItem
+            // 
+            this.bitDepthToolStripMenuItem.Image = global::NAPS2.Icons.color_wheel;
+            resources.ApplyResources(this.bitDepthToolStripMenuItem, "bitDepthToolStripMenuItem");
+            this.bitDepthToolStripMenuItem.Name = "bitDepthToolStripMenuItem";
             // 
             // tsdRotate
             // 
@@ -425,6 +484,11 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
@@ -490,6 +554,14 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsReverseAll;
         private System.Windows.Forms.ToolStripMenuItem tsReverseSelected;
         private System.Windows.Forms.ToolStripMenuItem tsNewProfile;
+        private System.Windows.Forms.ToolStripDropDownButton tsdEdit;
+        private System.Windows.Forms.ToolStripMenuItem previewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem brightnessToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem contrastToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cropToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bitDepthToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     }
 }
 
