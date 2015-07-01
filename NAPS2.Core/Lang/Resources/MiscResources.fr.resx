@@ -133,19 +133,19 @@
         <value>Faut-il vraiment supprimer {0} profil(s) ?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Faut-il vraiment supprimer le profil {0} ? </value>
+        <value>Faut-il vraiment supprimer le profil {0} ?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Le fichier {0} existe déjà. Faut-il l'écraser ?</value>
+        <value>Le fichier \"{0}\" existe déjà. Faut-il l'écraser ?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Supprimer</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>Le scanner indiqué est introuvable..</value>
+        <value>Le scanner indiqué est introuvable.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>Le scanner indiqué est éteint..</value>
+        <value>Le scanner sélectionné est éteint.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
         <value>Vous n'avez pas la permission de créer un fichier à cet endroit.</value>
@@ -187,7 +187,7 @@
         <value>Aucun périphérique sélectionné.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>Aucun scanner trouvé.</value>
+        <value>Aucun périphérique de numérisation trouvé.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
         <value>Écraser le fichier</value>
@@ -202,13 +202,13 @@
         <value>Choisir un profil avant de Numériser.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Une erreur s'est produite avec le pilote du scanner..</value>
+        <value>Une erreur s'est produite avec le pilote du scanner.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Version {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>Une erreur s'est produite en tentant d'envoyer un courriel..</value>
+        <value>Une erreur s'est produite en tentant d'envoyer un courriel.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
         <value>Mises à jour automatiques</value>
@@ -244,13 +244,13 @@
         <value>Tout ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Sélectionné ({0})</value>
+        <value>Sélection ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
         <value>Taille estimée du téléchargement : {0} Mo</value>
     </data>
     <data name="FilesProgress" xml:space="preserve">
-        <value>fichiers {0} / {1}</value>
+        <value>Fichier {0} / {1}</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
         <value>{0} / {1} Mo</value>
@@ -265,7 +265,7 @@
         <value>Erreur de téléchargement</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>Au moins un fichier n'a pas pu être téléchargé..</value>
+        <value>Au moins un fichier n'a pas pu être téléchargé.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
         <value>Personnalisée ({0}x{1} {2})</value>

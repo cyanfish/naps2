@@ -57,11 +57,10 @@ namespace NAPS2.WinForms
         private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly AutoUpdaterUI autoUpdaterUI;
         private readonly OcrDependencyManager ocrDependencyManager;
-        private readonly IconButtonSizer iconButtonSizer;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IconButtonSizer iconButtonSizer, IProfileManager profileManager, IScanPerformer scanPerformer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -73,7 +72,6 @@ namespace NAPS2.WinForms
             this.scannedImageImporter = scannedImageImporter;
             this.autoUpdaterUI = autoUpdaterUI;
             this.ocrDependencyManager = ocrDependencyManager;
-            this.iconButtonSizer = iconButtonSizer;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             InitializeComponent();
@@ -88,11 +86,7 @@ namespace NAPS2.WinForms
         {
             RelayoutToolbar();
             InitLanguageDropdown();
-
-            iconButtonSizer.WidthOffset = 22;
-            iconButtonSizer.PaddingRight = 4;
-            iconButtonSizer.MaxWidth = 200;
-            iconButtonSizer.ResizeButtons(btnQuickScan);
+            UpdateScanButton();
         }
 
         private void InitLanguageDropdown()
@@ -124,23 +118,43 @@ namespace NAPS2.WinForms
             {
                 btn.Text = stringWrapper.Wrap(btn.Text, 80, CreateGraphics(), btn.Font);
             }
-            // Reset padding
-            SetToolbarButtonPadding(new Padding(10, 0, 10, 0));
+            ResetToolbarMargin();
             // Recalculate visibility for the below check
             Application.DoEvents();
             // Check if toolbar buttons are overflowing
             if (tStrip.Items.OfType<ToolStripItem>().Any(btn => !btn.Visible))
             {
-                // Shrink the padding to help the buttons fit
-                SetToolbarButtonPadding(new Padding(5, 0, 5, 0));
+                ShrinkToolbarMargin();
             }
         }
 
-        private void SetToolbarButtonPadding(Padding padding)
+        private void ResetToolbarMargin()
         {
             foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
             {
-                btn.Padding = padding;
+                if (btn is ToolStripSplitButton)
+                {
+                    btn.Margin = new Padding(5, 1, 5, 2);
+                }
+                else
+                {
+                    btn.Padding = new Padding(10, 0, 10, 0);
+                }
+            }
+        }
+
+        private void ShrinkToolbarMargin()
+        {
+            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
+            {
+                if (btn is ToolStripSplitButton)
+                {
+                    btn.Margin = new Padding(0, 1, 0, 2);
+                }
+                else
+                {
+                    btn.Padding = new Padding(5, 0, 5, 0);
+                }
             }
         }
 
@@ -210,9 +224,6 @@ namespace NAPS2.WinForms
             // Context-menu actions
             ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
             ctxSelectAll.Enabled = imageList.Images.Any();
-
-            // Other buttons
-            btnQuickScan.Visible = !imageList.Images.Any();
         }
 
         private void Clear()
@@ -317,11 +328,79 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsScan_Click(object sender, EventArgs e)
+        private void UpdateScanButton()
         {
-            var prof = FormFactory.Create<FChooseProfile>();
-            prof.ScanReceiver = this;
-            prof.ShowDialog();
+            // Clean up the dropdown
+            while (tsScan.DropDownItems.Count > 1)
+            {
+                tsScan.DropDownItems.RemoveAt(0);
+            }
+
+            // Populate the dropdown
+            foreach (var profile in profileManager.Profiles)
+            {
+                var item = new ToolStripMenuItem
+                {
+                    Text = profile.DisplayName.Replace("&", "&&"),
+                    Image = profile.IsDefault ? Icons.accept_small : null,
+                    ImageScaling = ToolStripItemImageScaling.None
+                };
+                item.Click += (sender, args) =>
+                {
+                    profileManager.DefaultProfile = profile;
+                    profileManager.Save();
+
+                    UpdateScanButton();
+
+                    scanPerformer.PerformScan(profile, this, this);
+                };
+                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, item);
+            }
+
+            if (profileManager.Profiles.Any())
+            {
+                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, new ToolStripSeparator());
+            }
+        }
+
+        private void tsScan_ButtonClick(object sender, EventArgs e)
+        {
+            if (profileManager.DefaultProfile != null)
+            {
+                scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
+            }
+            else
+            {
+                ScanWithNewProfile();
+            }
+        }
+
+        private void tsNewProfile_Click(object sender, EventArgs e)
+        {
+            ScanWithNewProfile();
+        }
+
+        private void ScanWithNewProfile()
+        {
+            var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+            editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
+            editSettingsForm.ShowDialog();
+            if (!editSettingsForm.Result)
+            {
+                return;
+            }
+            profileManager.Profiles.Add(editSettingsForm.ScanSettings);
+            profileManager.DefaultProfile = editSettingsForm.ScanSettings;
+            profileManager.Save();
+
+            UpdateScanButton();
+
+            scanPerformer.PerformScan(editSettingsForm.ScanSettings, this, this);
+        }
+
+        private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
+        {
+            SavePDF(imageList.Images);
         }
 
         private void tsSavePDFAll_Click(object sender, EventArgs e)
@@ -350,6 +429,11 @@ namespace NAPS2.WinForms
                     ExportPDF(sd.FileName, images);
                 }
             }
+        }
+
+        private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
+        {
+            SaveImages(imageList.Images);
         }
 
         private void tsSaveImagesAll_Click(object sender, EventArgs e)
@@ -411,6 +495,11 @@ namespace NAPS2.WinForms
                     }
                 }
             }
+        }
+
+        private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
+        {
+            EmailPDF(imageList.Images);
         }
 
         private void tsEmailPDFAll_Click(object sender, EventArgs e)
@@ -478,7 +567,10 @@ namespace NAPS2.WinForms
 
         private void tsProfiles_Click(object sender, EventArgs e)
         {
-            FormFactory.Create<FManageProfiles>().ShowDialog();
+            var form = FormFactory.Create<FProfiles>();
+            form.ScanReceiver = this;
+            form.ShowDialog();
+            UpdateScanButton();
         }
 
         private void tsAbout_Click(object sender, EventArgs e)
@@ -669,23 +761,6 @@ namespace NAPS2.WinForms
                        @"\picwgoa" + image.Width + @"\pichgoa" + image.Height +
                        @"\hex " + hexString + "}";
             }
-        }
-
-        private void btnQuickScan_Click(object sender, EventArgs e)
-        {
-            if (profileManager.Profiles.Count == 0)
-            {
-                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
-                editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
-                editSettingsForm.ShowDialog();
-                if (!editSettingsForm.Result)
-                {
-                    return;
-                }
-                profileManager.Profiles.Add(editSettingsForm.ScanSettings);
-                profileManager.Save();
-            }
-            scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
         }
 
         private void tsReverseAll_Click(object sender, EventArgs e)

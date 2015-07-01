@@ -25,7 +25,6 @@ using System.Drawing;
 using System.Linq;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Unit
@@ -235,7 +234,7 @@ namespace NAPS2.Tests.Unit
             get { return null; }
         }
 
-        public void AddTransform(Transform transform)
+        public void RotateFlip(RotateFlipType rotateFlipType)
         {
             RotateFlipCalled += 1;
         }

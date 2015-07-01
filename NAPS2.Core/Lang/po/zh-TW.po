@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-10 19:04+0000\n"
-"PO-Revision-Date: 2015-06-07 12:33+0000\n"
+"PO-Revision-Date: 2015-06-11 03:43+0000\n"
 "Last-Translator: danfong <danfong.hsieh@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh-TW\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1433680405.0\n"
+"X-POOTLE-MTIME: 1433994181.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -258,7 +258,7 @@ msgstr "編輯"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "電子郵件 PDF"
+msgstr "電子郵件發送 PDF"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -307,7 +307,7 @@ msgstr "水平對齊"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
-msgstr "圖示從"
+msgstr "圖示來源"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -583,8 +583,9 @@ msgid "Update NAPS2"
 msgstr "更新 NAPS2"
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
+#, fuzzy
 msgid "Use native UI"
-msgstr ""
+msgstr "使用原生 WIA 使用者介面"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"

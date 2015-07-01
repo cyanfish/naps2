@@ -122,7 +122,7 @@ namespace NAPS2.Scan.Twain
             };
             session.SourceDisabled += (sender, eventArgs) => twainForm.Close();
 
-            twainForm.Load += (sender, eventArgs) =>
+            twainForm.Shown += (sender, eventArgs) =>
             {
                 try
                 {
@@ -136,7 +136,11 @@ namespace NAPS2.Scan.Twain
                     ds.Open();
                     ConfigureDS(ds);
                     var ui = ScanSettings.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
-                    ds.Enable(ui, true, twainForm.Handle);
+                    var rc = ds.Enable(ui, true, twainForm.Handle);
+                    if (rc != ReturnCode.Success)
+                    {
+                        twainForm.Close();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -220,7 +224,7 @@ namespace NAPS2.Scan.Twain
             float horizontalOffset = 0.0f;
             if (ScanSettings.PageAlign == ScanHorizontalAlign.Center)
                 horizontalOffset = (pageMaxWidth - pageWidth) / 2;
-            else if (ScanSettings.PageAlign == ScanHorizontalAlign.Right)
+            else if (ScanSettings.PageAlign == ScanHorizontalAlign.Left)
                 horizontalOffset = (pageMaxWidth - pageWidth);
 
             ds.Capabilities.ICapUnits.SetValue(Unit.Inches);

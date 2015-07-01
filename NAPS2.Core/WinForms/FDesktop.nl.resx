@@ -151,7 +151,7 @@
         <value>8</value>
     </data>
     <data name="btnQuickScan.Text" xml:space="preserve">
-        <value>&amp;Quick Scan</value>
+        <value>Snelle scan</value>
     </data>
     <data name="btnQuickScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -403,7 +403,7 @@
         <value>84, 51</value>
     </data>
     <data name="tsdEmailPDF.Text" xml:space="preserve">
-        <value>E-mail PDF</value>
+        <value>PDF mailen</value>
     </data>
     <data name="tsdEmailPDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -442,7 +442,7 @@
         <value>79, 51</value>
     </data>
     <data name="tsMoveUp.Text" xml:space="preserve">
-        <value>Naar boven</value>
+        <value>Omhoog</value>
     </data>
     <data name="tsMoveUp.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -454,7 +454,7 @@
         <value>95, 51</value>
     </data>
     <data name="tsMoveDown.Text" xml:space="preserve">
-        <value>Naar beneden</value>
+        <value>Omlaag</value>
     </data>
     <data name="tsMoveDown.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -490,7 +490,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsReverse.Text" xml:space="preserve">
-        <value>Reverse</value>
+        <value>Omdraaien</value>
     </data>
     <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

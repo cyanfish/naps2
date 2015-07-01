@@ -24,7 +24,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
 {
@@ -37,7 +36,7 @@ namespace NAPS2.Scan.Images
         private readonly MemoryStream baseImageEncoded;
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
-        private readonly List<Transform> transformList = new List<Transform>();
+        private RotateFlipType transform = RotateFlipType.RotateNoneFlipNone;
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
@@ -52,7 +51,8 @@ namespace NAPS2.Scan.Images
         public Bitmap GetImage()
         {
             var bitmap = bitDepth == ScanBitDepth.BlackWhite ? (Bitmap)baseImage.Clone() : new Bitmap(baseImageEncoded);
-            return Transform.PerformAll(bitmap, transformList);
+            bitmap.RotateFlip(transform);
+            return bitmap;
         }
 
         public void Dispose()
@@ -68,9 +68,11 @@ namespace NAPS2.Scan.Images
             Thumbnail.Dispose();
         }
 
-        public void AddTransform(Transform transform)
+        public void RotateFlip(RotateFlipType rotateFlipType)
         {
-            Transform.AddOrSimplify(transformList, transform);
+            // There should be no actual flips (just rotations of varying degrees), so this code is simplified
+            transform = TransformationHelper.CombineRotation(transform, rotateFlipType);
+            Thumbnail.RotateFlip(rotateFlipType);
         }
 
         public void MovedTo(int index)

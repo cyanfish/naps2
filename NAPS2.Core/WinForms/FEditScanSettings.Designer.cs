@@ -212,7 +212,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.pctIcon, "pctIcon");
             this.pctIcon.Name = "pctIcon";
             this.pctIcon.TabStop = false;
-            this.pctIcon.DoubleClick += new System.EventHandler(this.pctIcon_DoubleClick);
             // 
             // label8
             // 
