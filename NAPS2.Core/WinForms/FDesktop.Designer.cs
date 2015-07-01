@@ -62,6 +62,7 @@ namespace NAPS2.WinForms
             this.tsRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.tsRotateRight = new System.Windows.Forms.ToolStripMenuItem();
             this.tsFlip = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsMove = new NAPS2.WinForms.ToolStripDoubleButton();
             this.tsMoveUp = new System.Windows.Forms.ToolStripButton();
             this.tsMoveDown = new System.Windows.Forms.ToolStripButton();
             this.tsdReorder = new System.Windows.Forms.ToolStripDropDownButton();
@@ -319,6 +320,16 @@ namespace NAPS2.WinForms
             this.tsFlip.Name = "tsFlip";
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
             // 
+            // tsMove
+            // 
+            this.tsMove.Image = global::NAPS2.Icons.arrow_up_small;
+            this.tsMove.Name = "tsMove";
+            this.tsMove.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            resources.ApplyResources(this.tsMove, "tsMove");
+            this.tsMove.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.tsMove.ClickFirst += new System.EventHandler(this.tsMove_ClickFirst);
+            this.tsMove.ClickSecond += new System.EventHandler(this.tsMove_ClickSecond);
+            // 
             // tsMoveUp
             // 
             this.tsMoveUp.Image = global::NAPS2.Icons.arrow_up;
@@ -334,13 +345,6 @@ namespace NAPS2.WinForms
             this.tsMoveDown.Name = "tsMoveDown";
             this.tsMoveDown.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsMoveDown.Click += new System.EventHandler(this.tsMoveDown_Click);
-            // 
-            // tsMove
-            // 
-            this.tsMove.Image = global::NAPS2.Icons.arrow_up;
-            this.tsMove.Name = "tsMove";
-            this.tsMove.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            resources.ApplyResources(this.tsMove, "tsMove");
             // 
             // tsdReorder
             // 
@@ -462,7 +466,7 @@ namespace NAPS2.WinForms
         private ThumbnailList thumbnailList1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private ToolStripDoubleItem tsMove;
+        private ToolStripDoubleButton tsMove;
         private System.Windows.Forms.ToolStripButton tsMoveUp;
         private System.Windows.Forms.ToolStripButton tsMoveDown;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

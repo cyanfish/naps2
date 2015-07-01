@@ -253,4 +253,10 @@
   <data name="control_play_blue_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\control_play_blue-small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="arrow_down_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\arrow_down-small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_up_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\arrow_up-small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
