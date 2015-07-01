@@ -118,23 +118,43 @@ namespace NAPS2.WinForms
             {
                 btn.Text = stringWrapper.Wrap(btn.Text, 80, CreateGraphics(), btn.Font);
             }
-            // Reset margin
-            SetToolbarButtonMargin(new Padding(5, 1, 5, 2));
+            ResetToolbarMargin();
             // Recalculate visibility for the below check
             Application.DoEvents();
             // Check if toolbar buttons are overflowing
             if (tStrip.Items.OfType<ToolStripItem>().Any(btn => !btn.Visible))
             {
-                // Shrink the margin to help the buttons fit
-                SetToolbarButtonMargin(new Padding(0, 1, 0, 2));
+                ShrinkToolbarMargin();
             }
         }
 
-        private void SetToolbarButtonMargin(Padding margin)
+        private void ResetToolbarMargin()
         {
             foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
             {
-                btn.Margin = margin;
+                if (btn is ToolStripSplitButton)
+                {
+                    btn.Margin = new Padding(5, 1, 5, 2);
+                }
+                else
+                {
+                    btn.Padding = new Padding(10, 0, 10, 0);
+                }
+            }
+        }
+
+        private void ShrinkToolbarMargin()
+        {
+            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
+            {
+                if (btn is ToolStripSplitButton)
+                {
+                    btn.Margin = new Padding(0, 1, 0, 2);
+                }
+                else
+                {
+                    btn.Padding = new Padding(5, 0, 5, 0);
+                }
             }
         }
 

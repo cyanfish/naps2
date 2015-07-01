@@ -186,18 +186,16 @@ namespace NAPS2.WinForms
             // tsProfiles
             // 
             resources.ApplyResources(this.tsProfiles, "tsProfiles");
-            this.tsProfiles.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsProfiles.Name = "tsProfiles";
-            this.tsProfiles.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsProfiles.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsProfiles.Click += new System.EventHandler(this.tsProfiles_Click);
             // 
             // tsOcr
             // 
             this.tsOcr.Image = global::NAPS2.Icons.text;
             resources.ApplyResources(this.tsOcr, "tsOcr");
-            this.tsOcr.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsOcr.Name = "tsOcr";
-            this.tsOcr.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsOcr.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsOcr.Click += new System.EventHandler(this.tsOcr_Click);
             // 
             // toolStripSeparator5
@@ -295,8 +293,9 @@ namespace NAPS2.WinForms
             this.tsFlip});
             this.tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise;
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
-            this.tsdRotate.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsdRotate.Name = "tsdRotate";
+            this.tsdRotate.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsdRotate.ShowDropDownArrow = false;
             // 
             // tsRotateLeft
             // 
@@ -323,18 +322,16 @@ namespace NAPS2.WinForms
             // 
             this.tsMoveUp.Image = global::NAPS2.Icons.arrow_up;
             resources.ApplyResources(this.tsMoveUp, "tsMoveUp");
-            this.tsMoveUp.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsMoveUp.Name = "tsMoveUp";
-            this.tsMoveUp.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsMoveUp.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsMoveUp.Click += new System.EventHandler(this.tsMoveUp_Click);
             // 
             // tsMoveDown
             // 
             this.tsMoveDown.Image = global::NAPS2.Icons.arrow_down;
             resources.ApplyResources(this.tsMoveDown, "tsMoveDown");
-            this.tsMoveDown.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsMoveDown.Name = "tsMoveDown";
-            this.tsMoveDown.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsMoveDown.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsMoveDown.Click += new System.EventHandler(this.tsMoveDown_Click);
             // 
             // tsdReorder
@@ -346,8 +343,9 @@ namespace NAPS2.WinForms
             this.tsReverse});
             this.tsdReorder.Image = global::NAPS2.Icons.arrow_refresh;
             resources.ApplyResources(this.tsdReorder, "tsdReorder");
-            this.tsdReorder.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsdReorder.Name = "tsdReorder";
+            this.tsdReorder.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsdReorder.ShowDropDownArrow = false;
             // 
             // tsInterleave
             // 
@@ -395,18 +393,16 @@ namespace NAPS2.WinForms
             // 
             this.tsDelete.Image = global::NAPS2.Icons.cross;
             resources.ApplyResources(this.tsDelete, "tsDelete");
-            this.tsDelete.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsDelete.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
             // 
             // tsClear
             // 
             this.tsClear.Image = global::NAPS2.Icons.cancel;
             resources.ApplyResources(this.tsClear, "tsClear");
-            this.tsClear.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsClear.Name = "tsClear";
-            this.tsClear.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsClear.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsClear.Click += new System.EventHandler(this.tsClear_Click);
             // 
             // toolStripSeparator3
@@ -418,15 +414,15 @@ namespace NAPS2.WinForms
             // 
             this.toolStripDropDownButton1.Image = global::NAPS2.Icons.world;
             resources.ApplyResources(this.toolStripDropDownButton1, "toolStripDropDownButton1");
-            this.toolStripDropDownButton1.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.toolStripDropDownButton1.ShowDropDownArrow = false;
             // 
             // tsAbout
             // 
             resources.ApplyResources(this.tsAbout, "tsAbout");
-            this.tsAbout.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsAbout.Name = "tsAbout";
-            this.tsAbout.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
             // FDesktop
