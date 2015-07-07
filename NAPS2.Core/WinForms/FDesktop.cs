@@ -136,6 +136,10 @@ namespace NAPS2.WinForms
                 {
                     btn.Margin = new Padding(5, 1, 5, 2);
                 }
+                else if (btn is ToolStripDoubleButton)
+                {
+                    btn.Padding = new Padding(5, 0, 5, 0);
+                }
                 else
                 {
                     btn.Padding = new Padding(10, 0, 10, 0);
@@ -150,6 +154,10 @@ namespace NAPS2.WinForms
                 if (btn is ToolStripSplitButton)
                 {
                     btn.Margin = new Padding(0, 1, 0, 2);
+                }
+                else if (btn is ToolStripDoubleButton)
+                {
+                    btn.Padding = new Padding(0, 0, 0, 0);
                 }
                 else
                 {
