@@ -187,7 +187,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.3.4.30902, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.3.4.31423, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -464,10 +464,7 @@
     <value>ImageAboveText</value>
   </data>
   <data name="tsMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 51</value>
-  </data>
-  <data name="tsMove.Text" xml:space="preserve">
-    <value>Move Up</value>
+    <value>24, 51</value>
   </data>
   <data name="tsMoveUp.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -636,7 +633,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1181, 54</value>
+    <value>1166, 54</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -858,7 +855,7 @@
     <value>tsMove</value>
   </data>
   <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=3.3.4.30902, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=3.3.4.31423, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tsMoveUp.Name" xml:space="preserve">
     <value>tsMoveUp</value>
@@ -954,6 +951,6 @@
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.4.30902, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.4.31423, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

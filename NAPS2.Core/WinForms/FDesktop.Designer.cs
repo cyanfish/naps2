@@ -322,11 +322,14 @@ namespace NAPS2.WinForms
             // 
             // tsMove
             // 
-            this.tsMove.Image = global::NAPS2.Icons.arrow_up_small;
+            this.tsMove.ImageFirst = global::NAPS2.Icons.arrow_up_small;
+            this.tsMove.ImageSecond = global::NAPS2.Icons.arrow_down_small;
             this.tsMove.Name = "tsMove";
             this.tsMove.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             resources.ApplyResources(this.tsMove, "tsMove");
             this.tsMove.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.tsMove.TextFirst = "Move Up";
+            this.tsMove.TextSecond = "Move Down";
             this.tsMove.ClickFirst += new System.EventHandler(this.tsMove_ClickFirst);
             this.tsMove.ClickSecond += new System.EventHandler(this.tsMove_ClickSecond);
             // 

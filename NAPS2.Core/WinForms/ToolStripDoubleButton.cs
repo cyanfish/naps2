@@ -18,6 +18,12 @@ namespace NAPS2.WinForms
         public event EventHandler ClickFirst;
         public event EventHandler ClickSecond;
 
+        public Image ImageFirst { get; set; }
+        public Image ImageSecond { get; set; }
+
+        public string TextFirst { get; set; }
+        public string TextSecond { get; set; }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             // base.OnPaint(e);
@@ -35,15 +41,23 @@ namespace NAPS2.WinForms
             Height = oldHeight;
             Parent = oldParent;
 
-            var textRectangle = new Rectangle(16, 0, Width, Height / 2);
-            renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, Text, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter));
-            textRectangle = new Rectangle(16, Height / 2, Width, Height / 2);
-            renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, Text, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter));
+            if (ImageFirst != null && TextFirst != null)
+            {
+                e.Graphics.DrawImage(ImageFirst, new Point(Padding.Left, Height / 4 - ImageFirst.Height / 2));
 
-            var imageRectangle = new Rectangle(0, Height / 4 - 8, 16, 16);
-            renderer.DrawItemImage(new ToolStripItemImageRenderEventArgs(e.Graphics, this, imageRectangle));
-            imageRectangle = new Rectangle(0, Height * 3 / 4 - 8, 16, 16);
-            renderer.DrawItemImage(new ToolStripItemImageRenderEventArgs(e.Graphics, this, imageRectangle));
+                var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, Width, Height / 2);
+                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextFirst, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter));
+            }
+
+            if (ImageSecond != null && TextSecond != null)
+            {
+                e.Graphics.DrawImage(ImageSecond, new Point(Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2));
+
+                var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, Width, Height / 2);
+                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextSecond, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter));
+            }
+
+            Image = null;
         }
 
         protected override void OnMouseMove(MouseEventArgs mea)
