@@ -296,12 +296,14 @@ namespace NAPS2.WinForms
                     Delete();
                     break;
                 case Keys.Left:
+                case Keys.Up:
                     if (e.Control)
                     {
                         MoveUp();
                     }
                     break;
                 case Keys.Right:
+                case Keys.Down:
                     if (e.Control)
                     {
                         MoveDown();
