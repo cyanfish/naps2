@@ -134,6 +134,9 @@ namespace NAPS2.Ocr
             new OcrLanguage { Filename = "jpn.traineddata.gz", Code = "jpn", LangName = "Japanese", Size = 12.88, Sha1 = "ec1608a652ae9f47b9af54199da310e59df35011" },
             new OcrLanguage { Filename = "chi_sim.traineddata.gz", Code = "chi_sim", LangName = "Chinese (Simplified)", Size = 16.89, Sha1 = "e22bd4006a0b7246a1d137b0417f9270b5ba4ca4" },
             new OcrLanguage { Filename = "chi_tra.traineddata.gz", Code = "chi_tra", LangName = "Chinese (Traditional)", Size = 23.57, Sha1 = "bf60fb7815e6f508f063f323ed3a3445116ffac4" },
+            new OcrLanguage { Filename = "grc.traineddata.gz", Code = "grc", LangName = "Ancient Greek", Size = 3.22, Sha1 = "44a61a7f8a983995b6cb347c88a301a61cc5ef58" },
+            new OcrLanguage { Filename = "rus.traineddata.gz", Code = "rus", LangName = "Russian", Size = 5.69, Sha1 = "7ef1432cf05ddcd4dbae5b0094a3448207027c57" },
+            new OcrLanguage { Filename = "vie.traineddata.gz", Code = "vie", LangName = "Vietnamese", Size = 2.09, Sha1 = "184b6e56993d4b130a6c5b4c7e7fef990043d71c" },
         };
     }
 }

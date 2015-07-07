@@ -126,17 +126,26 @@ namespace NAPS2.Scan.Twain
             {
                 try
                 {
-                    session.Open(new WindowsFormsMessageLoopHook(DialogParent.Handle));
+                    ReturnCode rc = session.Open(new WindowsFormsMessageLoopHook(DialogParent.Handle));
+                    if (rc != ReturnCode.Success)
+                    {
+                        twainForm.Close();
+                        return;
+                    }
                     ds = session.FirstOrDefault(x => x.Name == ScanDevice.ID);
                     if (ds == null)
                     {
-                        session.Close();
                         throw new DeviceNotFoundException();
                     }
-                    ds.Open();
+                    rc = ds.Open();
+                    if (rc != ReturnCode.Success)
+                    {
+                        twainForm.Close();
+                        return;
+                    }
                     ConfigureDS(ds);
                     var ui = ScanSettings.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
-                    var rc = ds.Enable(ui, true, twainForm.Handle);
+                    rc = ds.Enable(ui, true, twainForm.Handle);
                     if (rc != ReturnCode.Success)
                     {
                         twainForm.Close();
