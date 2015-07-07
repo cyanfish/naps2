@@ -24,12 +24,27 @@ namespace NAPS2.WinForms
         public string TextFirst { get; set; }
         public string TextSecond { get; set; }
 
+        public override Size GetPreferredSize(Size constrainingSize)
+        {
+            var baseSize = base.GetPreferredSize(constrainingSize);
+            var sumWidth = Padding.Left + Padding.Right +
+                           Math.Max(ImageFirst != null ? ImageFirst.Width : 0,
+                               ImageSecond != null ? ImageSecond.Width : 0)
+                           + Math.Max(MeasureTextWidth(TextFirst), MeasureTextWidth(TextSecond));
+            return new Size(sumWidth, baseSize.Height);
+        }
+
+        private int MeasureTextWidth(string text)
+        {
+            var g = Graphics.FromImage(new Bitmap(1, 1));
+            return (int)Math.Ceiling(g.MeasureString(text, Font).Width);
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
-            // base.OnPaint(e);
             if (Owner == null)
                 return;
-            ToolStripRenderer renderer = new ToolStripSystemRenderer();
+            ToolStripRenderer renderer = ToolStripManager.Renderer;
 
             var oldHeight = Height;
             var oldParent = Parent;
@@ -43,7 +58,14 @@ namespace NAPS2.WinForms
 
             if (ImageFirst != null && TextFirst != null)
             {
-                e.Graphics.DrawImage(ImageFirst, new Point(Padding.Left, Height / 4 - ImageFirst.Height / 2));
+                if (Enabled)
+                {
+                    e.Graphics.DrawImage(ImageFirst, new Point(Padding.Left, Height / 4 - ImageFirst.Height / 2));
+                }
+                else
+                {
+                    ControlPaint.DrawImageDisabled(e.Graphics, ImageFirst, Padding.Left, Height / 4 - ImageFirst.Height / 2, Color.Transparent);
+                }
 
                 var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, Width, Height / 2);
                 renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextFirst, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter));
@@ -51,7 +73,14 @@ namespace NAPS2.WinForms
 
             if (ImageSecond != null && TextSecond != null)
             {
-                e.Graphics.DrawImage(ImageSecond, new Point(Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2));
+                if (Enabled)
+                {
+                    e.Graphics.DrawImage(ImageSecond, new Point(Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2));
+                }
+                else
+                {
+                    ControlPaint.DrawImageDisabled(e.Graphics, ImageSecond, Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2, Color.Transparent);
+                }
 
                 var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, Width, Height / 2);
                 renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextSecond, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter));

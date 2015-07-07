@@ -63,8 +63,6 @@ namespace NAPS2.WinForms
             this.tsRotateRight = new System.Windows.Forms.ToolStripMenuItem();
             this.tsFlip = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMove = new NAPS2.WinForms.ToolStripDoubleButton();
-            this.tsMoveUp = new System.Windows.Forms.ToolStripButton();
-            this.tsMoveDown = new System.Windows.Forms.ToolStripButton();
             this.tsdReorder = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsInterleave = new System.Windows.Forms.ToolStripMenuItem();
             this.tsDeinterleave = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,8 +153,6 @@ namespace NAPS2.WinForms
             this.toolStripSeparator4,
             this.tsdRotate,
             this.tsMove,
-            this.tsMoveUp,
-            this.tsMoveDown,
             this.tsdReorder,
             this.toolStripSeparator2,
             this.tsDelete,
@@ -333,22 +329,6 @@ namespace NAPS2.WinForms
             this.tsMove.ClickFirst += new System.EventHandler(this.tsMove_ClickFirst);
             this.tsMove.ClickSecond += new System.EventHandler(this.tsMove_ClickSecond);
             // 
-            // tsMoveUp
-            // 
-            this.tsMoveUp.Image = global::NAPS2.Icons.arrow_up;
-            resources.ApplyResources(this.tsMoveUp, "tsMoveUp");
-            this.tsMoveUp.Name = "tsMoveUp";
-            this.tsMoveUp.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsMoveUp.Click += new System.EventHandler(this.tsMoveUp_Click);
-            // 
-            // tsMoveDown
-            // 
-            this.tsMoveDown.Image = global::NAPS2.Icons.arrow_down;
-            resources.ApplyResources(this.tsMoveDown, "tsMoveDown");
-            this.tsMoveDown.Name = "tsMoveDown";
-            this.tsMoveDown.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsMoveDown.Click += new System.EventHandler(this.tsMoveDown_Click);
-            // 
             // tsdReorder
             // 
             this.tsdReorder.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -470,8 +450,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private ToolStripDoubleButton tsMove;
-        private System.Windows.Forms.ToolStripButton tsMoveUp;
-        private System.Windows.Forms.ToolStripButton tsMoveDown;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsClear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;

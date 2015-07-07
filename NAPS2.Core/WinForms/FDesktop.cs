@@ -218,7 +218,7 @@ namespace NAPS2.WinForms
                 SelectedIndices.Any();
 
             // Top-level toolbar actions
-            tsdRotate.Enabled = tsMoveUp.Enabled = tsMoveDown.Enabled = tsDelete.Enabled = SelectedIndices.Any();
+            tsdRotate.Enabled = tsMove.Enabled = tsDelete.Enabled = SelectedIndices.Any();
             tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsClear.Enabled = imageList.Images.Any();
 
             // Context-menu actions
@@ -543,16 +543,6 @@ namespace NAPS2.WinForms
         private void tsDelete_Click(object sender, EventArgs e)
         {
             Delete();
-        }
-
-        private void tsMoveUp_Click(object sender, EventArgs e)
-        {
-            MoveUp();
-        }
-
-        private void tsMoveDown_Click(object sender, EventArgs e)
-        {
-            MoveDown();
         }
 
         private void tsRotateLeft_Click(object sender, EventArgs e)
