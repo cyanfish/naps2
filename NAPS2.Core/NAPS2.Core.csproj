@@ -1544,11 +1544,19 @@
     <None Include="Resources\arrow_up.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\color_wheel.png" />
+    <Content Include="Resources\contrast.png" />
     <Content Include="Resources\arrow_down-small.png" />
     <Content Include="Resources\arrow_up-small.png" />
     <Content Include="Resources\control_play_blue-small.png" />
+    <Content Include="Resources\image_edit.png" />
+    <Content Include="Resources\pictures.png" />
+    <Content Include="Resources\picture_edit.png" />
+    <Content Include="Resources\picture_save.png" />
     <Content Include="Resources\scanner-default.png" />
     <Content Include="Resources\text.png" />
+    <Content Include="Resources\transform_crop.png" />
+    <Content Include="Resources\weather_sun.png" />
     <None Include="Resources\arrow_rotate_anticlockwise.png" />
     <None Include="Resources\arrow_rotate_clockwise.png" />
     <None Include="Resources\arrow_switch.png" />
