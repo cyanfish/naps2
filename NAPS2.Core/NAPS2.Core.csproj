@@ -105,6 +105,7 @@
     <Compile Include="Ocr\OcrDependencyManager.cs" />
     <Compile Include="Ocr\OcrResult.cs" />
     <Compile Include="Ocr\OcrResultElement.cs" />
+    <Compile Include="Scan\Images\Transforms\TransformSet.cs" />
     <Compile Include="Scan\Images\Transforms\RotationTransform.cs" />
     <Compile Include="Scan\Images\Transforms\Transform.cs" />
     <Compile Include="Scan\IScanDriverFactory.cs" />

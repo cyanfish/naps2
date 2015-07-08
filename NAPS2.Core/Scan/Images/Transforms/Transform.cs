@@ -10,11 +10,6 @@ namespace NAPS2.Scan.Images.Transforms
     [XmlInclude(typeof(RotationTransform))]
     public abstract class Transform
     {
-        public static Bitmap PerformAll(Bitmap bitmap, IEnumerable<Transform> transforms)
-        {
-            return transforms.Aggregate(bitmap, (current, t) => t.Perform(current));
-        }
-
         public static void AddOrSimplify(IList<Transform> transformList, Transform transform)
         {
             var last = transformList.LastOrDefault();

@@ -21,7 +21,7 @@ namespace NAPS2.Recovery
             return false;
         }
 
-        public List<Transform> TransformList { get; set; }
+        public List<Transform> TransformSet { get; set; }
 
         public ScanBitDepth BitDepth { get; set; }
 

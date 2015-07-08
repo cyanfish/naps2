@@ -37,7 +37,7 @@ namespace NAPS2.Recovery
                 {
                     if (img.Transform != RotateFlipType.RotateNoneFlipNone)
                     {
-                        img.TransformList.Add(new RotationTransform(img.Transform));
+                        img.TransformSet.Add(new RotationTransform(img.Transform));
                         img.Transform = RotateFlipType.RotateNoneFlipNone;
                     }
                 }
