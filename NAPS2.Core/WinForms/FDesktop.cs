@@ -226,7 +226,7 @@ namespace NAPS2.WinForms
                 SelectedIndices.Any();
 
             // Top-level toolbar actions
-            tsdRotate.Enabled = tsMove.Enabled = tsDelete.Enabled = SelectedIndices.Any();
+            tsdImage.Enabled = tsdRotate.Enabled = tsMove.Enabled = tsDelete.Enabled = SelectedIndices.Any();
             tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsClear.Enabled = imageList.Images.Any();
 
             // Context-menu actions
@@ -781,6 +781,27 @@ namespace NAPS2.WinForms
         private void tsMove_ClickSecond(object sender, EventArgs e)
         {
             MoveDown();
+        }
+
+        private void tsView_Click(object sender, EventArgs e)
+        {
+            PreviewImage();
+        }
+
+        private void tsReset_Click(object sender, EventArgs e)
+        {
+            ResetImage();
+        }
+
+        private void ResetImage()
+        {
+            if (SelectedIndices.Any())
+            {
+                if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, SelectedIndices.Count()), MiscResources.ResetImage, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    UpdateThumbnails(imageList.ResetTransforms(SelectedIndices));
+                }
+            }
         }
     }
 }

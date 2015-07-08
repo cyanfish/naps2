@@ -142,6 +142,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want undo your changes to {0} image(s)?.
+        /// </summary>
+        internal static string ConfirmResetImages {
+            get {
+                return ResourceManager.GetString("ConfirmResetImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom ({0}x{1} {2}).
         /// </summary>
         internal static string CustomPageSizeFormat {
@@ -453,6 +462,15 @@ namespace NAPS2.Lang.Resources {
         internal static string PdfStatus {
             get {
                 return ResourceManager.GetString("PdfStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Image.
+        /// </summary>
+        internal static string ResetImage {
+            get {
+                return ResourceManager.GetString("ResetImage", resourceCulture);
             }
         }
         

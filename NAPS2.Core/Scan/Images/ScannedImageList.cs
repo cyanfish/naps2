@@ -167,5 +167,15 @@ namespace NAPS2.Scan.Images
             // Selection stays the same, so is easy to maintain
             return selectionList;
         }
+
+        public IEnumerable<int> ResetTransforms(IEnumerable<int> selection)
+        {
+            foreach (IScannedImage img in Images.ElementsAt(selection))
+            {
+                img.ResetTransforms();
+                img.UpdateThumbnail();
+            }
+            return selection.ToList();
+        }
     }
 }

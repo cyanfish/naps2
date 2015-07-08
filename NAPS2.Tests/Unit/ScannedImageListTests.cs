@@ -240,6 +240,14 @@ namespace NAPS2.Tests.Unit
             RotateFlipCalled += 1;
         }
 
+        public void ResetTransforms()
+        {
+        }
+
+        public void UpdateThumbnail()
+        {
+        }
+
         public void MovedTo(int index)
         {
         }

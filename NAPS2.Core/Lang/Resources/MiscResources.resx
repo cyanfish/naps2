@@ -273,4 +273,10 @@
   <data name="Scan" xml:space="preserve">
     <value>Scan</value>
   </data>
+  <data name="ConfirmResetImages" xml:space="preserve">
+    <value>Are you sure you want undo your changes to {0} image(s)?</value>
+  </data>
+  <data name="ResetImage" xml:space="preserve">
+    <value>Reset Image</value>
+  </data>
 </root>
