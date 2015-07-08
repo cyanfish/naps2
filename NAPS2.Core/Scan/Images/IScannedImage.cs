@@ -46,6 +46,16 @@ namespace NAPS2.Scan.Images
         void AddTransform(Transform transform);
 
         /// <summary>
+        /// Removes all of the transforms from the image.
+        /// </summary>
+        void ResetTransforms();
+
+        /// <summary>
+        /// Updates the image's thumbnail with all of the transforms.
+        /// </summary>
+        void UpdateThumbnail();
+
+        /// <summary>
         /// Indicates the the scanned image has been moved to the given position in the scanned image list.
         /// </summary>
         /// <param name="index">The index at which the image was inserted after being removed.</param>

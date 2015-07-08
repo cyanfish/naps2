@@ -64,7 +64,7 @@ namespace NAPS2.Scan.Images
         private readonly string baseImageFilePath;
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
-        private List<Transform> transformList = new List<Transform>();
+        private readonly List<Transform> transformList = new List<Transform>();
 
         public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
@@ -153,16 +153,21 @@ namespace NAPS2.Scan.Images
         {
             // Also updates the recovery index since they reference the same list
             Transform.AddOrSimplify(transformList, transform);
-            // TODO: Consider storing original thumbnail and working from that
-            // TODO: Also, this won't work. For example, a Resize transform shouldn't actually affect the thumbnail (assuming ratios remain the same).
-            // TODO: Couple possibilities: Add a separate method for performing on a thumbnail (annoying), or do all transforms on the original image
-            // TODO: and then generate a thumbnail from the final result (elegant, but potentially with performance issues).
-            // TODO: Of course, this whole idea could have performance issues with lots of stacked transforms...
-            // TODO: Ideally some cases (e.g. rotate/flip) could be done directly on the thumbnail while others could use the above procedure.
-            // TODO: Think about that.
-            // TODO: Also, this needs to be added to the in-memory implementation.
-            Thumbnail = transform.Perform(Thumbnail);
             _recoveryIndexManager.Save();
+        }
+
+        public void ResetTransforms()
+        {
+            transformList.Clear();
+            _recoveryIndexManager.Save();
+        }
+
+        public void UpdateThumbnail()
+        {
+            using (var img = GetImage())
+            {
+                Thumbnail = ThumbnailHelper.GetThumbnail(img);
+            }
         }
 
         public void MovedTo(int index)

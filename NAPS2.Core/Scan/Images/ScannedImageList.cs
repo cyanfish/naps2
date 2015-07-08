@@ -86,6 +86,7 @@ namespace NAPS2.Scan.Images
             foreach (int i in selection)
             {
                 Images[i].AddTransform(new RotationTransform(rotateFlipType));
+                Images[i].UpdateThumbnail();
             }
             return selection.ToList();
         }

@@ -64,7 +64,6 @@ namespace NAPS2.WinForms
             this.brightnessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contrastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bitDepthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.cropToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdRotate = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,6 +83,8 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -297,11 +298,12 @@ namespace NAPS2.WinForms
             this.tsdEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.previewToolStripMenuItem,
             this.toolStripSeparator6,
+            this.cropToolStripMenuItem,
             this.brightnessToolStripMenuItem,
             this.contrastToolStripMenuItem,
             this.bitDepthToolStripMenuItem,
             this.toolStripSeparator7,
-            this.cropToolStripMenuItem});
+            this.resetToolStripMenuItem});
             this.tsdEdit.Image = global::NAPS2.Icons.picture_edit;
             resources.ApplyResources(this.tsdEdit, "tsdEdit");
             this.tsdEdit.Name = "tsdEdit";
@@ -335,11 +337,6 @@ namespace NAPS2.WinForms
             this.bitDepthToolStripMenuItem.Image = global::NAPS2.Icons.color_wheel;
             resources.ApplyResources(this.bitDepthToolStripMenuItem, "bitDepthToolStripMenuItem");
             this.bitDepthToolStripMenuItem.Name = "bitDepthToolStripMenuItem";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
             // 
             // cropToolStripMenuItem
             // 
@@ -484,6 +481,16 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            resources.ApplyResources(this.resetToolStripMenuItem, "resetToolStripMenuItem");
+            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
@@ -556,6 +563,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem cropToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bitDepthToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
     }
 }
 

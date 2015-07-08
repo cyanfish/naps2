@@ -73,6 +73,19 @@ namespace NAPS2.Scan.Images
             Transform.AddOrSimplify(transformList, transform);
         }
 
+        public void ResetTransforms()
+        {
+            transformList.Clear();
+        }
+
+        public void UpdateThumbnail()
+        {
+            using (var img = GetImage())
+            {
+                Thumbnail = ThumbnailHelper.GetThumbnail(img);
+            }
+        }
+
         public void MovedTo(int index)
         {
             // Do nothing, this is only important for FileBasedScannedImage
