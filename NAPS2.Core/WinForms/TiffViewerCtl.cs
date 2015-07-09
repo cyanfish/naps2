@@ -45,7 +45,13 @@ namespace NAPS2.WinForms
         public TiffViewerCtl()
         {
             InitializeComponent();
+            tiffviewer1.ZoomChanged += Tiffviewer1OnZoomChanged;
             tsStretch_Click(null, null);
+        }
+
+        private void Tiffviewer1OnZoomChanged(object sender, EventArgs eventArgs)
+        {
+            tsZoom.Text = (tiffviewer1.Zoom / 100.0).ToString("P");
         }
 
         public Image Image
@@ -87,25 +93,17 @@ namespace NAPS2.WinForms
                 double zoomX = containerWidth / tiffviewer1.ImageWidth * 100;
                 double zoomY = containerHeight / tiffviewer1.ImageHeight * 100;
                 tiffviewer1.Zoom = (int)Math.Min(zoomX, zoomY);
-                UpdateZoomText();
             }
-        }
-
-        private void UpdateZoomText()
-        {
-            tsZoom.Text = (tiffviewer1.Zoom/100.0).ToString("P");
         }
 
         private void tsZoomPlus_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom += 10;
-            UpdateZoomText();
         }
 
         private void tsZoomOut_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom -= 10;
-            UpdateZoomText();
         }
 
         private void tsStretch_Click(object sender, EventArgs e)
@@ -121,7 +119,6 @@ namespace NAPS2.WinForms
         private void tsZoomActual_Click(object sender, EventArgs e)
         {
             tiffviewer1.Zoom = 100;
-            UpdateZoomText();
         }
 
         #region Component Designer generated code
@@ -133,7 +130,6 @@ namespace NAPS2.WinForms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TiffViewerCtl));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.tiffviewer1 = new NAPS2.WinForms.TiffViewer();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsStretch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -142,6 +138,7 @@ namespace NAPS2.WinForms
             this.tsZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsZoom = new System.Windows.Forms.ToolStripLabel();
+            this.tiffviewer1 = new NAPS2.WinForms.TiffViewer();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -161,13 +158,6 @@ namespace NAPS2.WinForms
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
-            // 
-            // tiffviewer1
-            // 
-            resources.ApplyResources(this.tiffviewer1, "tiffviewer1");
-            this.tiffviewer1.BackColor = System.Drawing.Color.White;
-            this.tiffviewer1.Name = "tiffviewer1";
-            this.tiffviewer1.Zoom = 0;
             // 
             // tStrip
             // 
@@ -229,6 +219,13 @@ namespace NAPS2.WinForms
             // 
             this.tsZoom.Name = "tsZoom";
             resources.ApplyResources(this.tsZoom, "tsZoom");
+            // 
+            // tiffviewer1
+            // 
+            resources.ApplyResources(this.tiffviewer1, "tiffviewer1");
+            this.tiffviewer1.BackColor = System.Drawing.Color.White;
+            this.tiffviewer1.Name = "tiffviewer1";
+            this.tiffviewer1.Zoom = 0;
             // 
             // TiffViewerCtl
             // 

@@ -36,6 +36,8 @@ namespace NAPS2.WinForms
         private PictureBox pbox;
         private int xzoom;
 
+        private bool isControlKeyDown;
+
         public TiffViewer()
         {
             InitializeComponent();
@@ -94,24 +96,44 @@ namespace NAPS2.WinForms
             {
                 if (image != null)
                 {
+                    var old = xzoom;
                     xzoom = Math.Max(Math.Min(value, 1000), 10);
                     double displayWidth = image.Width * ((double)xzoom / 100);
                     double displayHeight = image.Height * ((double)xzoom / 100) * (image.HorizontalResolution / (double)image.VerticalResolution);
-                    var result = new Bitmap((int)displayWidth, (int)displayHeight);
+                    Bitmap result;
+                    try
+                    {
+                        result = new Bitmap((int)displayWidth, (int)displayHeight);
+                    }
+                    catch (ArgumentException)
+                    {
+                        xzoom = old;
+                        return;
+                    }
                     using (Graphics g = Graphics.FromImage(result))
                     {
                         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                         g.DrawImage(image, 0, 0, (int)displayWidth, (int)displayHeight);
                     }
 
+                    if (pbox.Image != null)
+                    {
+                        pbox.Image.Dispose();
+                    }
                     pbox.Image = result;
                     pbox.Width = (int)displayWidth;
                     pbox.Height = (int)displayHeight;
+                    if (ZoomChanged != null)
+                    {
+                        ZoomChanged.Invoke(this, new EventArgs());
+                    }
                 }
             }
             get
             { return xzoom; }
         }
+
+        public event EventHandler<EventArgs> ZoomChanged;
 
         private void clearimage()
         {
@@ -130,6 +152,28 @@ namespace NAPS2.WinForms
             base.Dispose(disposing);
         }
 
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            if (isControlKeyDown)
+            {
+                Zoom += 10 * e.Delta / SystemInformation.MouseWheelScrollDelta;
+            }
+            else
+            {
+                base.OnMouseWheel(e);
+            }
+        }
+
+        private void TiffViewer_KeyDown(object sender, KeyEventArgs e)
+        {
+            isControlKeyDown = e.Control;
+        }
+
+        private void TiffViewer_KeyUp(object sender, KeyEventArgs e)
+        {
+            isControlKeyDown = e.Control;
+        }
+
         #region Component Designer generated code
         /// <summary>
         /// Required method for Designer support - do not modify 
@@ -144,8 +188,8 @@ namespace NAPS2.WinForms
             // 
             // pbox
             // 
-            this.pbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.pbox, "pbox");
+            this.pbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox.Name = "pbox";
             this.pbox.TabStop = false;
             // 
@@ -155,6 +199,8 @@ namespace NAPS2.WinForms
             this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.pbox);
             this.Name = "TiffViewer";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TiffViewer_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TiffViewer_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbox)).EndInit();
             this.ResumeLayout(false);
 

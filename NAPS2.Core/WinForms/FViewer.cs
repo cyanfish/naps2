@@ -23,12 +23,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
     public class FViewer : FormBase
     {
         private readonly Container components = null;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
         private TiffViewerCtl tiffViewer1;
 
         public FViewer()
@@ -67,8 +70,27 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FViewer));
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tiffViewer1 = new NAPS2.WinForms.TiffViewerCtl();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripContainer1.ContentPanel.SuspendLayout();
+            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.tiffViewer1);
+            resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
+            resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
             // 
             // tiffViewer1
             // 
@@ -76,12 +98,22 @@ namespace NAPS2.WinForms
             this.tiffViewer1.Image = null;
             this.tiffViewer1.Name = "tiffViewer1";
             // 
+            // toolStrip1
+            // 
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            this.toolStrip1.Name = "toolStrip1";
+            // 
             // FViewer
             // 
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.tiffViewer1);
+            this.Controls.Add(this.toolStripContainer1);
             this.Name = "FViewer";
             this.ShowInTaskbar = false;
+            this.toolStripContainer1.ContentPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
             this.ResumeLayout(false);
 
         }
