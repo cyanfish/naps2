@@ -316,6 +316,24 @@ namespace NAPS2.WinForms
                         MoveDown();
                     }
                     break;
+                case Keys.O:
+                    if (e.Control)
+                    {
+                        Import();
+                    }
+                    break;
+                case Keys.Enter:
+                    if (e.Control)
+                    {
+                        ScanDefault();
+                    }
+                    break;
+                case Keys.S:
+                    if (e.Control)
+                    {
+                        SavePDF(imageList.Images);
+                    }
+                    break;
             }
         }
 
@@ -373,6 +391,11 @@ namespace NAPS2.WinForms
         }
 
         private void tsScan_ButtonClick(object sender, EventArgs e)
+        {
+            ScanDefault();
+        }
+
+        private void ScanDefault()
         {
             if (profileManager.DefaultProfile != null)
             {
@@ -566,6 +589,11 @@ namespace NAPS2.WinForms
 
         private void tsProfiles_Click(object sender, EventArgs e)
         {
+            ShowProfilesForm();
+        }
+
+        private void ShowProfilesForm()
+        {
             var form = FormFactory.Create<FProfiles>();
             form.ScanReceiver = this;
             form.ShowDialog();
@@ -574,7 +602,7 @@ namespace NAPS2.WinForms
 
         private void tsAbout_Click(object sender, EventArgs e)
         {
-            FormFactory.Create<FCrop>().ShowDialog();
+            FormFactory.Create<FAbout>().ShowDialog();
         }
 
         private void SetCulture(string cultureId)
@@ -629,6 +657,11 @@ namespace NAPS2.WinForms
         }
 
         private void tsImport_Click(object sender, EventArgs e)
+        {
+            Import();
+        }
+
+        private void Import()
         {
             var ofd = new OpenFileDialog
             {
