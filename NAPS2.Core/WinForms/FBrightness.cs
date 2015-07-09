@@ -20,16 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
 using Timer = System.Threading.Timer;

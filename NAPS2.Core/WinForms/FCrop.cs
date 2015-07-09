@@ -20,22 +20,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
-using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
+using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
     partial class FCrop : FormBase
     {
-        private Bitmap workingImage;
+        private Bitmap workingImage, workingImage2;
+        private bool previewOutOfDate;
+        private bool working;
+        private Timer previewTimer;
 
         public FCrop()
         {
@@ -62,6 +62,7 @@ namespace NAPS2.WinForms
                 .Activate();
 
             workingImage = Image.GetImage();
+            workingImage2 = Image.GetImage();
             UpdateCropBounds();
             UpdatePreviewBox();
         }
@@ -73,7 +74,7 @@ namespace NAPS2.WinForms
 
             tbLeft.Value = tbTop.Value = 0;
             tbRight.Value = workingImage.Width;
-            tbBottom.Value = workingImage.Height;
+            tbTop.Value = workingImage.Height;
         }
 
         private void UpdateTransform()
@@ -87,31 +88,49 @@ namespace NAPS2.WinForms
 
         private void UpdatePreviewBox()
         {
-            var bitmap = pictureBox.Image as Bitmap ?? new Bitmap(workingImage.Width, workingImage.Height);
-
-            using (var g = Graphics.FromImage(bitmap))
+            if (previewTimer == null)
             {
-                g.Clear(Color.Transparent);
-                var attrs = new ImageAttributes();
-                attrs.SetColorMatrix(new ColorMatrix { Matrix33 = 0.5f });
-                g.DrawImage(workingImage,
-                    new Rectangle(0, 0, workingImage.Width, workingImage.Height),
-                    0,
-                    0,
-                    workingImage.Width,
-                    workingImage.Height,
-                    GraphicsUnit.Pixel,
-                    attrs);
-                var cropBorderRect = new Rectangle(CropTransform.Left, CropTransform.Top,
-                    workingImage.Width - CropTransform.Left - CropTransform.Right,
-                    workingImage.Height - CropTransform.Top - CropTransform.Bottom);
-                g.SetClip(cropBorderRect);
-                g.DrawImage(workingImage, new Rectangle(0, 0, workingImage.Width, workingImage.Height));
-                g.ResetClip();
-                g.DrawRectangle(new Pen(Color.Black, 2.0f), cropBorderRect);
+                previewTimer = new Timer((obj) =>
+                {
+                    if (previewOutOfDate && !working)
+                    {
+                        working = true;
+                        previewOutOfDate = false;
+                        var bitmap = new Bitmap(workingImage2.Width, workingImage2.Height);
+                        using (var g = Graphics.FromImage(bitmap))
+                        {
+                            g.Clear(Color.Transparent);
+                            var attrs = new ImageAttributes();
+                            attrs.SetColorMatrix(new ColorMatrix { Matrix33 = 0.5f });
+                            g.DrawImage(workingImage2,
+                                new Rectangle(0, 0, workingImage2.Width, workingImage2.Height),
+                                0,
+                                0,
+                                workingImage2.Width,
+                                workingImage2.Height,
+                                GraphicsUnit.Pixel,
+                                attrs);
+                            var cropBorderRect = new Rectangle(CropTransform.Left, CropTransform.Top,
+                                workingImage2.Width - CropTransform.Left - CropTransform.Right,
+                                workingImage2.Height - CropTransform.Top - CropTransform.Bottom);
+                            g.SetClip(cropBorderRect);
+                            g.DrawImage(workingImage2, new Rectangle(0, 0, workingImage2.Width, workingImage2.Height));
+                            g.ResetClip();
+                            g.DrawRectangle(new Pen(Color.Black, 2.0f), cropBorderRect);
+                        }
+                        Invoke(new MethodInvoker(() =>
+                        {
+                            if (pictureBox.Image != null)
+                            {
+                                pictureBox.Image.Dispose();
+                            }
+                            pictureBox.Image = bitmap;
+                        }));
+                        working = false;
+                    }
+                }, null, 0, 100);
             }
-
-            pictureBox.Image = bitmap;
+            previewOutOfDate = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -155,9 +174,14 @@ namespace NAPS2.WinForms
         private void FCrop_FormClosed(object sender, FormClosedEventArgs e)
         {
             workingImage.Dispose();
+            workingImage2.Dispose();
             if (pictureBox.Image != null)
             {
                 pictureBox.Image.Dispose();
+            }
+            if (previewTimer != null)
+            {
+                previewTimer.Dispose();
             }
         }
     }
