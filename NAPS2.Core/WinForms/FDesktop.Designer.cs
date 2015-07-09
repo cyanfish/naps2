@@ -326,6 +326,7 @@ namespace NAPS2.WinForms
             this.tsCrop.Image = global::NAPS2.Icons.transform_crop;
             resources.ApplyResources(this.tsCrop, "tsCrop");
             this.tsCrop.Name = "tsCrop";
+            this.tsCrop.Click += new System.EventHandler(this.tsCrop_Click);
             // 
             // tsBrightness
             // 

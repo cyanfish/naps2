@@ -575,7 +575,7 @@ namespace NAPS2.WinForms
 
         private void tsAbout_Click(object sender, EventArgs e)
         {
-            FormFactory.Create<FAbout>().ShowDialog();
+            FormFactory.Create<FCrop>().ShowDialog();
         }
 
         private void SetCulture(string cultureId)
@@ -801,6 +801,17 @@ namespace NAPS2.WinForms
                 {
                     UpdateThumbnails(imageList.ResetTransforms(SelectedIndices));
                 }
+            }
+        }
+
+        private void tsCrop_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FCrop>();
+                form.Image = SelectedImages.First();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
             }
         }
     }
