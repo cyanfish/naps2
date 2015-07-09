@@ -26,21 +26,22 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
+using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
     partial class FBrightness : FormBase
     {
         private Bitmap workingImage;
-
-        private object taskLock = new object();
-        private Task updatePreviewTask;
         private bool previewOutOfDate;
+        private bool working;
+        private Timer previewTimer;
 
         public FBrightness()
         {
@@ -60,13 +61,14 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Bind(pictureBox)
                     .HeightToForm()
-                .Bind(btnOK, btnCancel)
+                .Bind(btnOK, btnCancel, txtBrightness)
                     .RightToForm()
                 .Bind(tbBrightness, txtBrightness, btnRevert, btnOK, btnCancel)
                     .BottomToForm()
                 .Activate();
 
             workingImage = Image.GetImage();
+            pictureBox.Image = (Bitmap)workingImage.Clone();
             UpdatePreviewBox();
         }
 
@@ -78,45 +80,28 @@ namespace NAPS2.WinForms
 
         private void UpdatePreviewBox()
         {
-            lock (taskLock)
+            if (previewTimer == null)
             {
-                if (updatePreviewTask != null && !updatePreviewTask.IsCompleted)
+                previewTimer = new Timer((obj) =>
                 {
-                    previewOutOfDate = true;
-                    return;
-                }
+                    if (previewOutOfDate && !working)
+                    {
+                        working = true;
+                        previewOutOfDate = false;
+                        var result = BrightnessTransform.Perform((Bitmap)workingImage.Clone());
+                        Invoke(new MethodInvoker(() =>
+                        {
+                            if (pictureBox.Image != null)
+                            {
+                                pictureBox.Image.Dispose();
+                            }
+                            pictureBox.Image = result;
+                        }));
+                        working = false;
+                    }
+                }, null, 0, 100);
             }
-            updatePreviewTask = Task.Factory.StartNew(() =>
-            {
-                var result = BrightnessTransform.Perform((Bitmap)workingImage.Clone());
-                Invoke(new MethodInvoker(() =>
-                {
-                    if (pictureBox.Image != null)
-                    {
-                        pictureBox.Image.Dispose();
-                    }
-                    pictureBox.Image = result;
-                }));
-            }).ContinueWith(task =>
-            {
-                lock (taskLock)
-                {
-                    if (!previewOutOfDate)
-                    {
-                        return;
-                    }
-                    previewOutOfDate = false;
-                }
-                var result = BrightnessTransform.Perform((Bitmap)workingImage.Clone());
-                Invoke(new MethodInvoker(() =>
-                {
-                    if (pictureBox.Image != null)
-                    {
-                        pictureBox.Image.Dispose();
-                    }
-                    pictureBox.Image = result;
-                }));
-            });
+            previewOutOfDate = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -134,6 +119,8 @@ namespace NAPS2.WinForms
         private void btnRevert_Click(object sender, EventArgs e)
         {
             BrightnessTransform = new BrightnessTransform();
+            tbBrightness.Value = 0;
+            txtBrightness.Text = tbBrightness.Value.ToString("G");
             UpdatePreviewBox();
         }
 
@@ -143,6 +130,10 @@ namespace NAPS2.WinForms
             if (pictureBox.Image != null)
             {
                 pictureBox.Image.Dispose();
+            }
+            if (previewTimer != null)
+            {
+                previewTimer.Dispose();
             }
         }
 
