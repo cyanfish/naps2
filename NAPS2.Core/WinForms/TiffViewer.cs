@@ -96,31 +96,10 @@ namespace NAPS2.WinForms
             {
                 if (image != null)
                 {
-                    var old = xzoom;
                     xzoom = Math.Max(Math.Min(value, 1000), 10);
                     double displayWidth = image.Width * ((double)xzoom / 100);
                     double displayHeight = image.Height * ((double)xzoom / 100) * (image.HorizontalResolution / (double)image.VerticalResolution);
-                    Bitmap result;
-                    try
-                    {
-                        result = new Bitmap((int)displayWidth, (int)displayHeight);
-                    }
-                    catch (ArgumentException)
-                    {
-                        xzoom = old;
-                        return;
-                    }
-                    using (Graphics g = Graphics.FromImage(result))
-                    {
-                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        g.DrawImage(image, 0, 0, (int)displayWidth, (int)displayHeight);
-                    }
-
-                    if (pbox.Image != null)
-                    {
-                        pbox.Image.Dispose();
-                    }
-                    pbox.Image = result;
+                    pbox.Image = image;
                     pbox.Width = (int)displayWidth;
                     pbox.Height = (int)displayHeight;
                     if (ZoomChanged != null)
@@ -156,12 +135,17 @@ namespace NAPS2.WinForms
         {
             if (isControlKeyDown)
             {
-                Zoom += 10 * e.Delta / SystemInformation.MouseWheelScrollDelta;
+                StepZoom(e.Delta / (double)SystemInformation.MouseWheelScrollDelta);
             }
             else
             {
                 base.OnMouseWheel(e);
             }
+        }
+
+        public void StepZoom(double steps)
+        {
+            Zoom = (int)Math.Round(Zoom * Math.Pow(1.2, steps));
         }
 
         private void TiffViewer_KeyDown(object sender, KeyEventArgs e)
@@ -192,6 +176,7 @@ namespace NAPS2.WinForms
             this.pbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox.Name = "pbox";
             this.pbox.TabStop = false;
+            this.pbox.SizeMode = PictureBoxSizeMode.Zoom;
             // 
             // TiffViewer
             // 

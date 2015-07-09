@@ -51,7 +51,7 @@ namespace NAPS2.WinForms
 
         private void Tiffviewer1OnZoomChanged(object sender, EventArgs eventArgs)
         {
-            tsZoom.Text = (tiffviewer1.Zoom / 100.0).ToString("P");
+            tsZoom.Text = (tiffviewer1.Zoom / 100.0).ToString("P0");
         }
 
         public Image Image
@@ -98,12 +98,12 @@ namespace NAPS2.WinForms
 
         private void tsZoomPlus_Click(object sender, EventArgs e)
         {
-            tiffviewer1.Zoom += 10;
+            tiffviewer1.StepZoom(1);
         }
 
         private void tsZoomOut_Click(object sender, EventArgs e)
         {
-            tiffviewer1.Zoom -= 10;
+            tiffviewer1.StepZoom(-1);
         }
 
         private void tsStretch_Click(object sender, EventArgs e)

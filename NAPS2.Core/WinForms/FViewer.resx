@@ -138,7 +138,7 @@
     <value>0, 0</value>
   </data>
   <data name="tiffViewer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>656, 629</value>
+    <value>284, 629</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tiffViewer1.TabIndex" type="System.Int32, mscorlib">
@@ -148,7 +148,7 @@
     <value>tiffViewer1</value>
   </data>
   <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=3.3.5.29101, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=3.3.5.32516, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -157,7 +157,7 @@
     <value>0</value>
   </data>
   <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>656, 629</value>
+    <value>284, 629</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -202,7 +202,7 @@
     <value>2</value>
   </data>
   <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>656, 654</value>
+    <value>284, 654</value>
   </data>
   <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -294,6 +294,12 @@
         AACAAQAAgAMAAA==
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>300, 300</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Preview</value>
   </data>
@@ -301,6 +307,6 @@
     <value>FViewer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.29101, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.32516, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
