@@ -835,5 +835,16 @@ namespace NAPS2.WinForms
                 UpdateThumbnails(SelectedIndices.ToList());
             }
         }
+
+        private void customRotationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FRotate>();
+                form.Image = SelectedImages.First();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
+            }
+        }
     }
 }

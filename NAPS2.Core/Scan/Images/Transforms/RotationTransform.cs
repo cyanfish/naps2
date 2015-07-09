@@ -79,7 +79,25 @@ namespace NAPS2.Scan.Images.Transforms
                 bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 return bitmap;
             }
-            throw new NotImplementedException();
+            Bitmap result;
+            if (Angle > 45.0 && Angle < 135.0 || Angle > 225.0 && Angle < 315.0)
+            {
+                result = new Bitmap(bitmap.Height, bitmap.Width);
+            }
+            else
+            {
+                result = new Bitmap(bitmap.Width, bitmap.Height);
+            }
+            using (var g = Graphics.FromImage(result))
+            {
+                // TODO: Background (maybe)
+                g.TranslateTransform(bitmap.Width / 2.0f, bitmap.Height / 2.0f);
+                g.RotateTransform((float)Angle);
+                g.TranslateTransform(-bitmap.Width / 2.0f, -bitmap.Height / 2.0f);
+                g.DrawImage(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
+            }
+            bitmap.Dispose();
+            return result;
         }
 
         public override bool CanSimplify(Transform other)
