@@ -31,7 +31,7 @@ namespace NAPS2.Scan.Images.Transforms
                     transformList[transformList.Count - 1] = transform.Simplify(last);
                 }
             }
-            else
+            else if (!transform.IsNull)
             {
                 transformList.Add(transform);
             }
