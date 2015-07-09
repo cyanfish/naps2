@@ -9,6 +9,7 @@ namespace NAPS2.Scan.Images.Transforms
 {
     [XmlInclude(typeof(RotationTransform))]
     [XmlInclude(typeof(CropTransform))]
+    [XmlInclude(typeof(BrightnessTransform))]
     public abstract class Transform
     {
         public static Bitmap PerformAll(Bitmap bitmap, IEnumerable<Transform> transforms)

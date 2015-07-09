@@ -89,25 +89,27 @@ namespace NAPS2.WinForms
         {
             var bitmap = pictureBox.Image as Bitmap ?? new Bitmap(workingImage.Width, workingImage.Height);
 
-            var g = Graphics.FromImage(bitmap);
-            g.Clear(Color.Transparent);
-            var attrs = new ImageAttributes();
-            attrs.SetColorMatrix(new ColorMatrix { Matrix33 = 0.5f });
-            g.DrawImage(workingImage,
-                new Rectangle(0, 0, workingImage.Width, workingImage.Height),
-                0,
-                0,
-                workingImage.Width,
-                workingImage.Height,
-                GraphicsUnit.Pixel,
-                attrs);
-            var cropBorderRect = new Rectangle(CropTransform.Left, CropTransform.Top,
-                workingImage.Width - CropTransform.Left - CropTransform.Right,
-                workingImage.Height - CropTransform.Top - CropTransform.Bottom);
-            g.SetClip(cropBorderRect);
-            g.DrawImage(workingImage, new Rectangle(0, 0, workingImage.Width, workingImage.Height));
-            g.ResetClip();
-            g.DrawRectangle(new Pen(Color.Black, 2.0f), cropBorderRect);
+            using (var g = Graphics.FromImage(bitmap))
+            {
+                g.Clear(Color.Transparent);
+                var attrs = new ImageAttributes();
+                attrs.SetColorMatrix(new ColorMatrix { Matrix33 = 0.5f });
+                g.DrawImage(workingImage,
+                    new Rectangle(0, 0, workingImage.Width, workingImage.Height),
+                    0,
+                    0,
+                    workingImage.Width,
+                    workingImage.Height,
+                    GraphicsUnit.Pixel,
+                    attrs);
+                var cropBorderRect = new Rectangle(CropTransform.Left, CropTransform.Top,
+                    workingImage.Width - CropTransform.Left - CropTransform.Right,
+                    workingImage.Height - CropTransform.Top - CropTransform.Bottom);
+                g.SetClip(cropBorderRect);
+                g.DrawImage(workingImage, new Rectangle(0, 0, workingImage.Width, workingImage.Height));
+                g.ResetClip();
+                g.DrawRectangle(new Pen(Color.Black, 2.0f), cropBorderRect);
+            }
 
             pictureBox.Image = bitmap;
         }

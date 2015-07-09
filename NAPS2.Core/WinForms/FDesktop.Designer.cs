@@ -333,6 +333,7 @@ namespace NAPS2.WinForms
             this.tsBrightness.Image = global::NAPS2.Icons.weather_sun;
             resources.ApplyResources(this.tsBrightness, "tsBrightness");
             this.tsBrightness.Name = "tsBrightness";
+            this.tsBrightness.Click += new System.EventHandler(this.tsBrightness_Click);
             // 
             // tsContrast
             // 

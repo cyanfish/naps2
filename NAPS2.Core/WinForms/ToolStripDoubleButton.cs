@@ -39,8 +39,10 @@ namespace NAPS2.WinForms
 
         private int MeasureTextWidth(string text)
         {
-            var g = Graphics.FromImage(new Bitmap(1, 1));
-            return (int)Math.Ceiling(g.MeasureString(text, Font).Width);
+            using (var g = Graphics.FromImage(new Bitmap(1, 1)))
+            {
+                return (int)Math.Ceiling(g.MeasureString(text, Font).Width);
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)

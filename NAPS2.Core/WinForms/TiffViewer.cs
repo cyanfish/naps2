@@ -98,9 +98,11 @@ namespace NAPS2.WinForms
                     double displayWidth = image.Width * ((double)xzoom / 100);
                     double displayHeight = image.Height * ((double)xzoom / 100) * (image.HorizontalResolution / (double)image.VerticalResolution);
                     var result = new Bitmap((int)displayWidth, (int)displayHeight);
-                    Graphics g = Graphics.FromImage(result);
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.DrawImage(image, 0, 0, (int)displayWidth, (int)displayHeight);
+                    using (Graphics g = Graphics.FromImage(result))
+                    {
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.DrawImage(image, 0, 0, (int)displayWidth, (int)displayHeight);
+                    }
 
                     pbox.Image = result;
                     pbox.Width = (int)displayWidth;

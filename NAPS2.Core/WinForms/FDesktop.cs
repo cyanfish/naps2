@@ -814,5 +814,16 @@ namespace NAPS2.WinForms
                 UpdateThumbnails(SelectedIndices.ToList());
             }
         }
+
+        private void tsBrightness_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FBrightness>();
+                form.Image = SelectedImages.First();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
+            }
+        }
     }
 }

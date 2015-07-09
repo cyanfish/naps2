@@ -21,8 +21,11 @@ namespace NAPS2.Scan.Images.Transforms
         {
             var result = new Bitmap(bitmap.Width - Left - Right, bitmap.Height - Top - Bottom);
             result.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
-            var g = Graphics.FromImage(result);
-            g.DrawImage(bitmap, new Rectangle(-Left, -Top, bitmap.Width, bitmap.Height));
+            using (var g = Graphics.FromImage(result))
+            {
+                g.DrawImage(bitmap, new Rectangle(-Left, -Top, bitmap.Width, bitmap.Height));
+            }
+            bitmap.Dispose();
             return result;
         }
 
