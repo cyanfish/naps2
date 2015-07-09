@@ -346,12 +346,11 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                using (var image = imageList.Images[SelectedIndices.First()].GetImage())
-                {
-                    var viewer = FormFactory.Create<FViewer>();
-                    viewer.Image = image;
-                    viewer.ShowDialog();
-                }
+                var viewer = FormFactory.Create<FViewer>();
+                viewer.ImageList = imageList;
+                viewer.ImageIndex = SelectedIndices.First();
+                viewer.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
             }
         }
 

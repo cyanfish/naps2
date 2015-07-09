@@ -1855,7 +1855,11 @@
     <None Include="Resources\arrow_up.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\arrow_left.png" />
+    <Content Include="Resources\arrow_right.png" />
+    <Content Include="Resources\arrow_rotate_anticlockwise-small.ico" />
     <Content Include="Resources\color_wheel.png" />
+    <Content Include="Resources\contrast.ico" />
     <Content Include="Resources\contrast.png" />
     <Content Include="Resources\arrow_down-small.png" />
     <Content Include="Resources\arrow_up-small.png" />
@@ -1866,7 +1870,9 @@
     <Content Include="Resources\picture_save.png" />
     <Content Include="Resources\scanner-default.png" />
     <Content Include="Resources\text.png" />
+    <Content Include="Resources\transform_crop.ico" />
     <Content Include="Resources\transform_crop.png" />
+    <Content Include="Resources\weather_sun.ico" />
     <Content Include="Resources\weather_sun.png" />
     <None Include="Resources\arrow_rotate_anticlockwise.png" />
     <None Include="Resources\arrow_rotate_clockwise.png" />
