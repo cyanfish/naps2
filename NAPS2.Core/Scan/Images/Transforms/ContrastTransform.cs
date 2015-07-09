@@ -7,22 +7,22 @@ using System.Text;
 
 namespace NAPS2.Scan.Images.Transforms
 {
-    public class BrightnessTransform : Transform
+    public class ContrastTransform : Transform
     {
-        public int Brightness { get; set; }
+        public int Contrast { get; set; }
 
         public override Bitmap Perform(Bitmap bitmap)
         {
-            float brightnessAdjusted = Brightness / 1000f;
+            float contrastAdjusted = Contrast / 1000f + 1.0f;
 
             using (var g = Graphics.FromImage(bitmap))
             {
                 var attrs = new ImageAttributes();
                 attrs.SetColorMatrix(new ColorMatrix
                 {
-                    Matrix40 = brightnessAdjusted,
-                    Matrix41 = brightnessAdjusted,
-                    Matrix42 = brightnessAdjusted
+                    Matrix00 = contrastAdjusted,
+                    Matrix11 = contrastAdjusted,
+                    Matrix22 = contrastAdjusted
                 });
                 g.DrawImage(bitmap,
                     new Rectangle(0, 0, bitmap.Width, bitmap.Height),
@@ -38,7 +38,7 @@ namespace NAPS2.Scan.Images.Transforms
 
         public override bool IsNull
         {
-            get { return Brightness == 0; }
+            get { return Contrast == 0; }
         }
     }
 }

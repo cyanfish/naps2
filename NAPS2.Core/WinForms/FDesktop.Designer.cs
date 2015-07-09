@@ -340,6 +340,7 @@ namespace NAPS2.WinForms
             this.tsContrast.Image = global::NAPS2.Icons.contrast;
             resources.ApplyResources(this.tsContrast, "tsContrast");
             this.tsContrast.Name = "tsContrast";
+            this.tsContrast.Click += new System.EventHandler(this.tsContrast_Click);
             // 
             // tsBitDepth
             // 

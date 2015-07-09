@@ -21,7 +21,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -820,6 +819,17 @@ namespace NAPS2.WinForms
             if (SelectedIndices.Any())
             {
                 var form = FormFactory.Create<FBrightness>();
+                form.Image = SelectedImages.First();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
+            }
+        }
+
+        private void tsContrast_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FContrast>();
                 form.Image = SelectedImages.First();
                 form.ShowDialog();
                 UpdateThumbnails(SelectedIndices.ToList());
