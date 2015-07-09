@@ -64,13 +64,13 @@ namespace NAPS2.WinForms
             this.tsCrop = new System.Windows.Forms.ToolStripMenuItem();
             this.tsBrightness = new System.Windows.Forms.ToolStripMenuItem();
             this.tsContrast = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsBitDepth = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsReset = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdRotate = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.tsRotateRight = new System.Windows.Forms.ToolStripMenuItem();
             this.tsFlip = new System.Windows.Forms.ToolStripMenuItem();
+            this.customRotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMove = new NAPS2.WinForms.ToolStripDoubleButton();
             this.tsdReorder = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsInterleave = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,7 +85,6 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.customRotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -302,7 +301,6 @@ namespace NAPS2.WinForms
             this.tsCrop,
             this.tsBrightness,
             this.tsContrast,
-            this.tsBitDepth,
             this.toolStripSeparator7,
             this.tsReset});
             this.tsdImage.Image = global::NAPS2.Icons.picture_edit;
@@ -342,12 +340,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsContrast, "tsContrast");
             this.tsContrast.Name = "tsContrast";
             this.tsContrast.Click += new System.EventHandler(this.tsContrast_Click);
-            // 
-            // tsBitDepth
-            // 
-            this.tsBitDepth.Image = global::NAPS2.Icons.color_wheel;
-            resources.ApplyResources(this.tsBitDepth, "tsBitDepth");
-            this.tsBitDepth.Name = "tsBitDepth";
             // 
             // toolStripSeparator7
             // 
@@ -393,6 +385,12 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsFlip, "tsFlip");
             this.tsFlip.Name = "tsFlip";
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
+            // 
+            // customRotationToolStripMenuItem
+            // 
+            this.customRotationToolStripMenuItem.Name = "customRotationToolStripMenuItem";
+            resources.ApplyResources(this.customRotationToolStripMenuItem, "customRotationToolStripMenuItem");
+            this.customRotationToolStripMenuItem.Click += new System.EventHandler(this.customRotationToolStripMenuItem_Click);
             // 
             // tsMove
             // 
@@ -498,12 +496,6 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
-            // customRotationToolStripMenuItem
-            // 
-            this.customRotationToolStripMenuItem.Name = "customRotationToolStripMenuItem";
-            resources.ApplyResources(this.customRotationToolStripMenuItem, "customRotationToolStripMenuItem");
-            this.customRotationToolStripMenuItem.Click += new System.EventHandler(this.customRotationToolStripMenuItem_Click);
-            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
@@ -574,7 +566,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsBrightness;
         private System.Windows.Forms.ToolStripMenuItem tsContrast;
         private System.Windows.Forms.ToolStripMenuItem tsCrop;
-        private System.Windows.Forms.ToolStripMenuItem tsBitDepth;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsReset;
         private System.Windows.Forms.ToolStripMenuItem customRotationToolStripMenuItem;

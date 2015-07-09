@@ -59,6 +59,7 @@ namespace NAPS2.WinForms
                 .Bind(tbContrast, txtContrast, btnRevert, btnOK, btnCancel)
                     .BottomToForm()
                 .Activate();
+            Size = new Size(600, 600);
 
             workingImage = Image.GetImage();
             pictureBox.Image = (Bitmap)workingImage.Clone();

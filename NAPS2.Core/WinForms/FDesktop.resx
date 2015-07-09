@@ -187,7 +187,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.3.5.2744, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=3.3.5.25366, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -425,19 +425,19 @@
     <value>6, 54</value>
   </data>
   <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsView.Text" xml:space="preserve">
     <value>View</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 6</value>
+    <value>149, 6</value>
   </data>
   <data name="tsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="tsCrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsCrop.Text" xml:space="preserve">
     <value>Crop</value>
@@ -446,7 +446,7 @@
     <value>None</value>
   </data>
   <data name="tsBrightness.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsBrightness.Text" xml:space="preserve">
     <value>Brightness</value>
@@ -455,25 +455,16 @@
     <value>None</value>
   </data>
   <data name="tsContrast.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsContrast.Text" xml:space="preserve">
     <value>Contrast</value>
   </data>
-  <data name="tsBitDepth.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tsBitDepth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
-  </data>
-  <data name="tsBitDepth.Text" xml:space="preserve">
-    <value>Bit Depth</value>
-  </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 6</value>
+    <value>149, 6</value>
   </data>
   <data name="tsReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsReset.Text" xml:space="preserve">
     <value>Reset</value>
@@ -681,7 +672,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1159, 54</value>
+    <value>1128, 54</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -911,12 +902,6 @@
   <data name="&gt;&gt;tsContrast.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsBitDepth.Name" xml:space="preserve">
-    <value>tsBitDepth</value>
-  </data>
-  <data name="&gt;&gt;tsBitDepth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
     <value>toolStripSeparator7</value>
   </data>
@@ -953,11 +938,17 @@
   <data name="&gt;&gt;tsFlip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;customRotationToolStripMenuItem.Name" xml:space="preserve">
+    <value>customRotationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;customRotationToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tsMove.Name" xml:space="preserve">
     <value>tsMove</value>
   </data>
   <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=3.3.5.2744, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=3.3.5.25366, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
     <value>tsdReorder</value>
@@ -1037,16 +1028,10 @@
   <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;customRotationToolStripMenuItem.Name" xml:space="preserve">
-    <value>customRotationToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;customRotationToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.2744, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.25366, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

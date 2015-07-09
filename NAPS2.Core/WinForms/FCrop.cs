@@ -60,6 +60,7 @@ namespace NAPS2.WinForms
                 .Bind(tbRight, btnRevert, btnOK, btnCancel)
                     .BottomToForm()
                 .Activate();
+            Size = new Size(600, 600);
 
             workingImage = Image.GetImage();
             workingImage2 = Image.GetImage();

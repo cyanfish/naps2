@@ -275,27 +275,30 @@
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAFxcXPldXV6RYWFilV1dXpFZWVqRUVFSkVFRUpFRUVKRSUlKkUlJSpFRSVKRcVlymRkRGnQAA
-        AC8AAAAAAAAAAI2NjcHm5ub/3t7e/97e3v/d3d3/3d3d/9/f3//f39//3Nzc/93c3f/Y2tj/pNKk/8rY
-        yv9KSEqZAAAAAAAAAAChoaHN5+jo/+Hj5f/g4uT/6Orr//n6/P/+/////f////T29//l5un/097X/2vO
-        bv+63Lr/ZWBlpAAAAAAAAAAAsLCwzf36+P/l1s//49TM/+ja0v/s39j/697Z/+ve2P/r3tf/5tjQ/+PU
-        zP/t3t3//////2NjY6IAAAAAAAAAAKKjprLx18H/7MGL//XWpP/44rb/+enD//nt0f/568z/+ea7//bc
-        rf/00Zz/57uL//Hl4P9KTE6DAAAAAAAAAABnaW1z8NfD//LIj//74bX//uvH///xzf//8MT//+2+//3n
-        t//63qr/+NOZ/+q8i//a09D+ExYWQgAAAAAAAAAAMDQ0PuXXzv3uyJ3//ObF//zoyv/87ND//OvL//rg
-        sv/316H/9s+W//PEhf/txZ//s7K03gAAABAAAAAAAAAAAAAPDxHOysjl5byb//zkw//75sn/++fM//vp
-        z//758n/+N20//bTpP/uv4v/7s+2/4eKjLAAAAAAAAAAAAAAAAAAAAAAmpueqe7Lr//217P/++TI//vl
-        yf/75sr/++bK//vlyv/85cr/7cSe/+nVyv9RU1V/AAAAAAAAAAAAAAAAAAAAAFhbXV7s3tX/5MOq/+fN
-        t//nzrj/5865/+fOuP/nzbf/58y1/+XHsP/NysjtExMTMQAAAAAAAAAAAAAAAAAAAAAREREsu7y987Gx
-        s/+kpKX/paWm/6Wlpv+lpab/paWm/6SjpP/Lzc//cnJzvAAAAAEAAAAAAAAAAAAAAAAAAAAAV1dXfNDQ
-        0P+JiYr/iYmK/4qKi/+Kiov/ioqL/4qKi/+Hh4j/pqam/7e3t/YEBAQ4AAAAAAAAAAAAAAAAAAAAELCw
-        sNm3t7f/mpqa/56env+enp7/np6e/56env+enp7/np6e/5qamv/S0tL/SUlJkwAAAAAAAAAAAAAAADo6
-        Olb09PT/ra2t/6mpqf+oqKj/p6en/6enp/+np6f/p6en/6qqqv+lpaX/2dnZ/6qqqt8AAAAXAAAAAAAA
-        AABLS0tT8/Pz/O7u7vzn5+f69PT0//j4+P/39/f/+Pj4//r6+v/s7Oz95OTk+vj4+P+enp7JAAAADQAA
-        AAAAAAAAAAAAAZKSkiaNjY00c3NzMKampqHi4uLl2dnZ3tnZ2eDKysrbS0tLYUhISC1KSkozDQ0NEwAA
-        AAAAAAAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIADAADAAwAAwAMAAMADAADAAwAAgAMAAIAB
-        AACAAQAAgAMAAA==
+        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAD///8B////Af///wH///8BAAAAHwAAADEAAAAzAAAAMwAAADMAAAAxAAAAH////wH///8B////Af//
+        /wH///8B////Af///wEAAAAPAAAAM0tJSKtSUE/5UU9O/1BOTv9NS0r/SkhH+UA+PqsAAAAzAAAAD///
+        /wH///8B////Af///wEAAAAPS0pJa2NhYP9fXl3/ZmRj/2hmZf9oZmX/aGZl/2ZkY/9aWFf/SEZF/y8u
+        LWsAAAAP////Af///wH///8BWllYa4WDgv9qaGf/bmxr/2JhYP9dW1r/WlhX/11bWv9jY2L/c3Fw/25s
+        a/9JR0f/Ly4ta////wH///8BAAAAH5eVlP/t7u3/ysnJ/0pIR/9SUVD/VlZV/1hXVv9YV1b/V1ZV/1hW
+        Vf96eHf/eXd2/0ZEQ/8AAAAf////AZGPjanOzcz/+vv6//f49/+4t7b/R0ZF/1FQT/9VVFP/VlVU/1ZV
+        VP9UU1L/VVNS/4yKiv9samn/Pz0+qf///wGjoZ/58fDv//Hx8P/u7ez/9vX0/7e2tf9FREP/T05N/1NS
+        Uf9UU1L/U1NS/1BQT/90c3L/k5KS/0ZEQ/n///8BpKKg//z7+//s6+r/6eno/+zs6//09fT/tbW0/0NB
+        Qf9NS0v/UU9P/1JQUP9PTU3/XFpa/66trP9IRkX/////AbOxr//7+/z/5ufm/+fn5v/n5+b/6urp//Lz
+        8v+zsrL/QT8//0tJSf9PTU3/TUtL/0ZERP+7u7r/SUdG/////wGnpaP//f39/+jo5//m5eP/5uXk/+fl
+        5P/p6Of/8vHw/7KxsP8/PT3/SUdH/0lHR/9bWlr/ysnJ/0pIR/////8Bqqel+fX09P/v7u7/4+Lg/+Tj
+        4v/k4+L/5OPi/+fm5f/w7u3/sK+u/zs5Of8/PT3/iomJ/8bFxf9NS0r5////Aa6rqZXV1dT//f7+/+Tj
+        4v/h4eD/4uLh/+Li4f/i4uH/5eXk/+3t7P+qqaj/RUJD/9rZ2f+ZmJf/UE5Nlf///wH///8Bramn//Pz
+        8//7+vr/4uHg/9/e3f/g397/4N/e/+Hf3v/i4eD/6+rp//Dw7//X1tb/XFpZ/////wH///8B////AbKu
+        rFuxr6z/9vX1///////v7+//4+Pi/9zb2v/j4+L/8PDw///////09fX/goB//3RycEf///8B////Af//
+        /wH///8Bsq6sR6yppv/Z2Nf//f3+//////////////////39/v/V1NP/lpST/42LiUf///8B////Af//
+        /wH///8B////Af///wH///8BrquolauopfenpaP/pqOh/6SioP+joZ/3pKKflf///wH///8B////Af//
+        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        //8AAP//AAD//w==
 </value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>336, 314</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 9, 9, 9</value>
@@ -310,6 +313,6 @@
     <value>FContrast</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.2406, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.25627, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
