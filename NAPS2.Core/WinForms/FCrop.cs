@@ -107,7 +107,7 @@ namespace NAPS2.WinForms
             g.SetClip(cropBorderRect);
             g.DrawImage(workingImage, new Rectangle(0, 0, workingImage.Width, workingImage.Height));
             g.ResetClip();
-            g.DrawRectangle(new Pen(Color.Black), cropBorderRect);
+            g.DrawRectangle(new Pen(Color.Black, 2.0f), cropBorderRect);
 
             pictureBox.Image = bitmap;
         }
