@@ -179,6 +179,7 @@ namespace NAPS2.WinForms
             // 
             this.tsScan.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsNewProfile});
+            this.tsScan.Image = global::NAPS2.Icons.control_play_blue;
             resources.ApplyResources(this.tsScan, "tsScan");
             this.tsScan.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsScan.Name = "tsScan";
@@ -513,6 +514,7 @@ namespace NAPS2.WinForms
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "FDesktop";
             this.Closed += new System.EventHandler(this.FDesktop_Closed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FDesktop_FormClosing);
             this.Load += new System.EventHandler(this.FDesktop_Load);
             this.Shown += new System.EventHandler(this.FDesktop_Shown);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);

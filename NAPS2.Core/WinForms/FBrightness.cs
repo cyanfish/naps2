@@ -31,13 +31,16 @@ namespace NAPS2.WinForms
 {
     partial class FBrightness : FormBase
     {
+        private readonly ChangeTracker changeTracker;
+
         private Bitmap workingImage;
         private bool previewOutOfDate;
         private bool working;
         private Timer previewTimer;
 
-        public FBrightness()
+        public FBrightness(ChangeTracker changeTracker)
         {
+            this.changeTracker = changeTracker;
             InitializeComponent();
 
             BrightnessTransform = new BrightnessTransform();
@@ -105,8 +108,12 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            Image.AddTransform(BrightnessTransform);
-            Image.UpdateThumbnail();
+            if (!BrightnessTransform.IsNull)
+            {
+                Image.AddTransform(BrightnessTransform);
+                Image.UpdateThumbnail();
+                changeTracker.HasUnsavedChanges = true;
+            }
             Close();
         }
 

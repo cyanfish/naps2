@@ -32,13 +32,16 @@ namespace NAPS2.WinForms
 {
     partial class FCrop : FormBase
     {
+        private readonly ChangeTracker changeTracker;
+
         private Bitmap workingImage, workingImage2;
         private bool previewOutOfDate;
         private bool working;
         private Timer previewTimer;
 
-        public FCrop()
+        public FCrop(ChangeTracker changeTracker)
         {
+            this.changeTracker = changeTracker;
             InitializeComponent();
 
             CropTransform = new CropTransform();
@@ -141,8 +144,12 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            Image.AddTransform(CropTransform);
-            Image.UpdateThumbnail();
+            if (!CropTransform.IsNull)
+            {
+                Image.AddTransform(CropTransform);
+                Image.UpdateThumbnail();
+                changeTracker.HasUnsavedChanges = true;
+            }
             Close();
         }
 

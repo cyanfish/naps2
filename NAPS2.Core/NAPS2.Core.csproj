@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeTracker.cs" />
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Config\AppConfigManager.cs" />

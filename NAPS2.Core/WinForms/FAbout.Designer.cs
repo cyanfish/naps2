@@ -31,7 +31,7 @@ namespace NAPS2.WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FCrop));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAbout));
             this.labelProductName = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();

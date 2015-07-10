@@ -32,13 +32,16 @@ namespace NAPS2.WinForms
 {
     partial class FRotate : FormBase
     {
+        private readonly ChangeTracker changeTracker;
+
         private Bitmap workingImage;
         private bool previewOutOfDate;
         private bool working;
         private Timer previewTimer;
 
-        public FRotate()
+        public FRotate(ChangeTracker changeTracker)
         {
+            this.changeTracker = changeTracker;
             InitializeComponent();
 
             RotationTransform = new RotationTransform();
@@ -107,8 +110,12 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            Image.AddTransform(RotationTransform);
-            Image.UpdateThumbnail();
+            if (!RotationTransform.IsNull)
+            {
+                Image.AddTransform(RotationTransform);
+                Image.UpdateThumbnail();
+                changeTracker.HasUnsavedChanges = true;
+            }
             Close();
         }
 

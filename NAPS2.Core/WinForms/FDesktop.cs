@@ -23,7 +23,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -61,9 +60,9 @@ namespace NAPS2.WinForms
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IImagePrinter imagePrinter;
-        private readonly IPdfExporter pdfExporter;
+        private readonly ChangeTracker changeTracker;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, IPdfExporter pdfExporter)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -78,7 +77,7 @@ namespace NAPS2.WinForms
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.imagePrinter = imagePrinter;
-            this.pdfExporter = pdfExporter;
+            this.changeTracker = changeTracker;
             InitializeComponent();
         }
 
@@ -196,6 +195,7 @@ namespace NAPS2.WinForms
         {
             imageList.Images.Add(scannedImage);
             AppendThumbnail(scannedImage);
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void UpdateThumbnails()
@@ -247,6 +247,7 @@ namespace NAPS2.WinForms
                 {
                     imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
                     UpdateThumbnails();
+                    changeTracker.HasUnsavedChanges = false;
                 }
             }
         }
@@ -259,6 +260,14 @@ namespace NAPS2.WinForms
                 {
                     imageList.Delete(SelectedIndices);
                     UpdateThumbnails();
+                    if (imageList.Images.Any())
+                    {
+                        changeTracker.HasUnsavedChanges = true;
+                    }
+                    else
+                    {
+                        changeTracker.HasUnsavedChanges = false;
+                    }
                 }
             }
         }
@@ -270,27 +279,52 @@ namespace NAPS2.WinForms
 
         private void MoveDown()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.MoveDown(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void MoveUp()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.MoveUp(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void RotateLeft()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void RotateRight()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void Flip()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void ExportPDF(string filename, List<IScannedImage> images)
@@ -464,6 +498,7 @@ namespace NAPS2.WinForms
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
                     ExportPDF(sd.FileName, images);
+                    changeTracker.HasUnsavedChanges = false;
                 }
             }
         }
@@ -526,6 +561,7 @@ namespace NAPS2.WinForms
                                     throw new InvalidOperationException("User cancelled");
                             }
                         });
+                        changeTracker.HasUnsavedChanges = false;
                     }
                     catch (InvalidOperationException)
                     {
@@ -555,14 +591,20 @@ namespace NAPS2.WinForms
             {
                 string path = Paths.AppData + "\\Scan.pdf";
                 ExportPDF(path, images);
-                emailer.SendEmail(new EmailMessage
+                if (emailer.SendEmail(new EmailMessage
                 {
-                    Attachments = new List<EmailAttachment> { new EmailAttachment
+                    Attachments = new List<EmailAttachment>
+                    {
+                        new EmailAttachment
                         {
                             FilePath = path,
                             AttachmentName = Path.GetFileName(path)
-                        } },
-                });
+                        }
+                    }
+                }))
+                {
+                    changeTracker.HasUnsavedChanges = false;
+                }
                 File.Delete(path);
             }
         }
@@ -647,6 +689,7 @@ namespace NAPS2.WinForms
             foreach (IScannedImage scannedImage in recoveryManager.RecoverScannedImages())
             {
                 imageList.Images.Add(scannedImage);
+                changeTracker.HasUnsavedChanges = true;
             }
             UpdateThumbnails();
 
@@ -685,6 +728,7 @@ namespace NAPS2.WinForms
                         imageList.Images.Add(img);
                         AppendThumbnail(img);
                         thumbnailList1.Refresh();
+                        changeTracker.HasUnsavedChanges = true;
                     }
                 }
             }
@@ -716,12 +760,22 @@ namespace NAPS2.WinForms
 
         private void tsInterleave_Click(object sender, EventArgs e)
         {
+            if (SelectedIndices.Count() < 3)
+            {
+                return;
+            }
             UpdateThumbnails(imageList.Interleave(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void tsDeinterleave_Click(object sender, EventArgs e)
         {
+            if (SelectedIndices.Count() < 3)
+            {
+                return;
+            }
             UpdateThumbnails(imageList.Deinterleave(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void thumbnailList1_MouseMove(object sender, MouseEventArgs e)
@@ -802,12 +856,22 @@ namespace NAPS2.WinForms
 
         private void tsReverseAll_Click(object sender, EventArgs e)
         {
+            if (imageList.Images.Count < 2)
+            {
+                return;
+            }
             UpdateThumbnails(imageList.Reverse());
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void tsReverseSelected_Click(object sender, EventArgs e)
         {
+            if (SelectedIndices.Count() < 2)
+            {
+                return;
+            }
             UpdateThumbnails(imageList.Reverse(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void tsMove_ClickFirst(object sender, EventArgs e)
@@ -837,6 +901,7 @@ namespace NAPS2.WinForms
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, SelectedIndices.Count()), MiscResources.ResetImage, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     UpdateThumbnails(imageList.ResetTransforms(SelectedIndices));
+                    changeTracker.HasUnsavedChanges = true;
                 }
             }
         }
@@ -887,7 +952,34 @@ namespace NAPS2.WinForms
 
         private void tsdPrint_Click(object sender, EventArgs e)
         {
-            imagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList());
+            if (imagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList()))
+            {
+                changeTracker.HasUnsavedChanges = false;
+            }
+        }
+
+        private void FDesktop_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (changeTracker.HasUnsavedChanges)
+            {
+                if (e.CloseReason == CloseReason.UserClosing)
+                {
+                    var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                    if (result == DialogResult.Yes)
+                    {
+                        changeTracker.HasUnsavedChanges = false;
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    FileBasedScannedImage.DisableRecoveryCleanup = true;
+                }
+            }
         }
     }
 }

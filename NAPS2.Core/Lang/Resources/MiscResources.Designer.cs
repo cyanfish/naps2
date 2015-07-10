@@ -259,6 +259,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have unsaved changes. Are you sure you want to exit and discard those changes?.
+        /// </summary>
+        internal static string ExitWithUnsavedChanges {
+            get {
+                return ResourceManager.GetString("ExitWithUnsavedChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more files could not be downloaded..
         /// </summary>
         internal static string FilesCouldNotBeDownloaded {
@@ -525,6 +534,15 @@ namespace NAPS2.Lang.Resources {
         internal static string UnknownDriverError {
             get {
                 return ResourceManager.GetString("UnknownDriverError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsaved Changes.
+        /// </summary>
+        internal static string UnsavedChanges {
+            get {
+                return ResourceManager.GetString("UnsavedChanges", resourceCulture);
             }
         }
         

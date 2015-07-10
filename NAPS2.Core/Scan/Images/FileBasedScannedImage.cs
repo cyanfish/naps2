@@ -40,6 +40,8 @@ namespace NAPS2.Scan.Images
         private static FileStream _recoveryLock;
         private static RecoveryIndexManager _recoveryIndexManager;
 
+        public static bool DisableRecoveryCleanup { get; set; }
+
         private static DirectoryInfo RecoveryFolder
         {
             get
@@ -130,7 +132,7 @@ namespace NAPS2.Scan.Images
             Thumbnail.Dispose();
             try
             {
-                if (File.Exists(baseImageFilePath))
+                if (!DisableRecoveryCleanup && File.Exists(baseImageFilePath))
                 {
                     File.Delete(baseImageFilePath);
                     _recoveryIndexManager.Index.Images.RemoveAll(x => x.FileName == baseImageFileName);
