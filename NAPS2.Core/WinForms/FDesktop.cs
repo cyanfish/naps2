@@ -748,6 +748,23 @@ namespace NAPS2.WinForms
                         imagesToPrint = new List<IScannedImage>();
                         break;
                 }
+                int copies = printDialog.PrinterSettings.Copies;
+                if (copies > 1)
+                {
+                    if (printDialog.PrinterSettings.Collate)
+                    {
+                        imagesToPrint =
+                            Enumerable.Range(0, copies)
+                                .Aggregate(Enumerable.Empty<IScannedImage>(), (x, y) => x.Concat(imagesToPrint))
+                                .ToList();
+                    }
+                    else
+                    {
+                        imagesToPrint =
+                            imagesToPrint.SelectMany(x => Enumerable.Repeat(x, copies))
+                                .ToList();
+                    }
+                }
                 Print(imagesToPrint, printDialog.PrinterSettings.PrinterName);
             }
         }
