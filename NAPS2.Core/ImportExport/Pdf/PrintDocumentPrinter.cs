@@ -30,11 +30,11 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PrintDocumentPrinter : IImagePrinter
     {
-        public void PromptToPrint(List<IScannedImage> images, List<IScannedImage> selectedImages)
+        public bool PromptToPrint(List<IScannedImage> images, List<IScannedImage> selectedImages)
         {
             if (!images.Any())
             {
-                return;
+                return false;
             }
             var printDialog = new PrintDialog
             {
@@ -50,11 +50,12 @@ namespace NAPS2.ImportExport.Pdf
             };
             if (printDialog.ShowDialog() == DialogResult.OK)
             {
-                Print(printDialog.PrinterSettings, images, selectedImages);
+                return Print(printDialog.PrinterSettings, images, selectedImages);
             }
+            return false;
         }
 
-        public void Print(PrinterSettings printerSettings, List<IScannedImage> images, List<IScannedImage> selectedImages)
+        public bool Print(PrinterSettings printerSettings, List<IScannedImage> images, List<IScannedImage> selectedImages)
         {
             List<IScannedImage> imagesToPrint;
             switch (printerSettings.PrintRange)
@@ -74,6 +75,10 @@ namespace NAPS2.ImportExport.Pdf
                     imagesToPrint = new List<IScannedImage>();
                     break;
             }
+            if (imagesToPrint.Count == 0)
+            {
+                return false;
+            }
 
             var printDocument = new PrintDocument();
             int i = 0;
@@ -91,6 +96,7 @@ namespace NAPS2.ImportExport.Pdf
             };
             printDocument.PrinterSettings = printerSettings;
             printDocument.Print();
+            return true;
         }
     }
 }
