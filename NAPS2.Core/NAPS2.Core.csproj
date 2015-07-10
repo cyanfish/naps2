@@ -87,6 +87,8 @@
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="ImportExport\Pdf\PrintDocumentPrinter.cs" />
+    <Compile Include="ImportExport\Pdf\IImagePrinter.cs" />
     <Compile Include="Lang\Resources\MiscResources.Designer.cs">
       <DependentUpon>MiscResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -1869,6 +1871,7 @@
     <Content Include="Resources\picture_edit.png" />
     <Content Include="Resources\picture_save.png" />
     <Content Include="Resources\scanner-default.png" />
+    <Content Include="Resources\printer.png" />
     <Content Include="Resources\text.png" />
     <Content Include="Resources\transform_crop.ico" />
     <Content Include="Resources\transform_crop.png" />

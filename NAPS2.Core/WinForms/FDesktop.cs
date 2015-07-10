@@ -23,6 +23,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -33,6 +34,7 @@ using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
@@ -58,8 +60,10 @@ namespace NAPS2.WinForms
         private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
+        private readonly IImagePrinter imagePrinter;
+        private readonly IPdfExporter pdfExporter;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, IPdfExporter pdfExporter)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -73,6 +77,8 @@ namespace NAPS2.WinForms
             this.ocrDependencyManager = ocrDependencyManager;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
+            this.imagePrinter = imagePrinter;
+            this.pdfExporter = pdfExporter;
             InitializeComponent();
         }
 
@@ -226,7 +232,7 @@ namespace NAPS2.WinForms
 
             // Top-level toolbar actions
             tsdImage.Enabled = tsdRotate.Enabled = tsMove.Enabled = tsDelete.Enabled = SelectedIndices.Any();
-            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsClear.Enabled = imageList.Images.Any();
+            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsdPrint.Enabled = tsClear.Enabled = imageList.Images.Any();
 
             // Context-menu actions
             ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
@@ -877,6 +883,11 @@ namespace NAPS2.WinForms
                 form.ShowDialog();
                 UpdateThumbnails(SelectedIndices.ToList());
             }
+        }
+
+        private void tsdPrint_Click(object sender, EventArgs e)
+        {
+            imagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList());
         }
     }
 }

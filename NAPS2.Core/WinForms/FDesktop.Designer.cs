@@ -56,6 +56,7 @@ namespace NAPS2.WinForms
             this.tsdEmailPDF = new System.Windows.Forms.ToolStripSplitButton();
             this.tsEmailPDFAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsEmailPDFSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsdPrint = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsImport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsdImage = new System.Windows.Forms.ToolStripDropDownButton();
@@ -158,6 +159,7 @@ namespace NAPS2.WinForms
             this.tsdSavePDF,
             this.tsdSaveImages,
             this.tsdEmailPDF,
+            this.tsdPrint,
             this.tsImport,
             this.toolStripSeparator4,
             this.tsdImage,
@@ -177,7 +179,6 @@ namespace NAPS2.WinForms
             // 
             this.tsScan.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsNewProfile});
-            this.tsScan.Image = global::NAPS2.Icons.control_play_blue;
             resources.ApplyResources(this.tsScan, "tsScan");
             this.tsScan.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsScan.Name = "tsScan";
@@ -279,6 +280,15 @@ namespace NAPS2.WinForms
             this.tsEmailPDFSelected.Name = "tsEmailPDFSelected";
             resources.ApplyResources(this.tsEmailPDFSelected, "tsEmailPDFSelected");
             this.tsEmailPDFSelected.Click += new System.EventHandler(this.tsEmailPDFSelected_Click);
+            // 
+            // tsdPrint
+            // 
+            this.tsdPrint.Image = global::NAPS2.Icons.printer;
+            resources.ApplyResources(this.tsdPrint, "tsdPrint");
+            this.tsdPrint.Name = "tsdPrint";
+            this.tsdPrint.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsdPrint.ShowDropDownArrow = false;
+            this.tsdPrint.Click += new System.EventHandler(this.tsdPrint_Click);
             // 
             // tsImport
             // 
@@ -569,6 +579,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsReset;
         private System.Windows.Forms.ToolStripMenuItem customRotationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton tsdPrint;
     }
 }
 
