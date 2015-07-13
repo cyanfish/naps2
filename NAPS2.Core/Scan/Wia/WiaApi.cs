@@ -45,7 +45,6 @@ namespace NAPS2.Scan.Wia
             public const int VERTICAL_BED_SIZE = 3075;
             public const int PAPER_SOURCE = 3088;
             public const int DOCUMENT_HANDLING_CAPABILITIES = 3086;
-            public const int DOCUMENT_HANDLING_STATUS = 3087;
             public const int PAGES = 3096;
         }
 
@@ -76,11 +75,6 @@ namespace NAPS2.Scan.Wia
             public const int FEEDER = 1;
             public const int FLATBED = 2;
             public const int DUPLEX = 4;
-        }
-
-        private static class Status
-        {
-            public const int FEED_READY = 1;
         }
 
         private static class Formats
@@ -319,15 +313,6 @@ namespace NAPS2.Scan.Wia
             {
                 int capabilities = GetDeviceIntProperty(DeviceProperties.DOCUMENT_HANDLING_CAPABILITIES);
                 return (capabilities & Source.FEEDER) != 0;
-            }
-        }
-
-        public bool FeederReady
-        {
-            get
-            {
-                int status = GetDeviceIntProperty(DeviceProperties.DOCUMENT_HANDLING_STATUS);
-                return (status & Status.FEED_READY) != 0;
             }
         }
 
