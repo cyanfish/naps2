@@ -532,13 +532,38 @@ namespace NAPS2.WinForms
                                  MiscResources.FileTypeGif + "|*.gif|" +
                                  MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
                                  MiscResources.FileTypePng + "|*.png|" +
-                                 MiscResources.FileTypeTiff + "|*.tiff;*.tif",
-                        DefaultExt = "jpg",
-                        FilterIndex = 5
+                                 MiscResources.FileTypeTiff + "|*.tiff;*.tif"
                     };
+                switch ((UserConfigManager.Config.LastImageExt ?? "").ToLowerInvariant())
+                {
+                    case "bmp":
+                        sd.FilterIndex = 1;
+                        break;
+                    case "emf":
+                        sd.FilterIndex = 2;
+                        break;
+                    case "exif":
+                        sd.FilterIndex = 3;
+                        break;
+                    case "gif":
+                        sd.FilterIndex = 4;
+                        break;
+                    case "png":
+                        sd.FilterIndex = 6;
+                        break;
+                    case "tif":
+                    case "tiff":
+                        sd.FilterIndex = 7;
+                        break;
+                    default:
+                        sd.FilterIndex = 5;
+                        break;
+                }
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
+                    UserConfigManager.Config.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", "");
+                    UserConfigManager.Save();
                     try
                     {
                         imageSaver.SaveImages(sd.FileName, images, path =>

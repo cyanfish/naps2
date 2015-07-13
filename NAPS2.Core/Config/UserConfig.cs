@@ -47,5 +47,7 @@ namespace NAPS2.Config
         public bool EnableOcr { get; set; }
 
         public string OcrLanguageCode { get; set; }
+
+        public string LastImageExt { get; set; }
     }
 }
