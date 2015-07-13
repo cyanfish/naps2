@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
@@ -32,6 +33,12 @@ namespace NAPS2.WinForms
         {
             InitializeComponent();
             LargeImageList = ilThumbnailList;
+        }
+
+        public Size ThumbnailSize
+        {
+            get { return ilThumbnailList.ImageSize; }
+            set { ilThumbnailList.ImageSize = value; }
         }
 
         public void UpdateImages(List<IScannedImage> images)

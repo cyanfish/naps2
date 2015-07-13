@@ -26,6 +26,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using NAPS2.Config;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
 
@@ -60,6 +61,7 @@ namespace NAPS2.Scan.Images
 
         private static int _recoveryFileNumber = 1;
 
+        private readonly IUserConfigManager userConfigManager;
         // Store the actual image on disk
         private readonly ImageFormat baseImageFileFormat;
         private readonly string baseImageFileName;
@@ -67,10 +69,13 @@ namespace NAPS2.Scan.Images
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private readonly List<Transform> transformList = new List<Transform>();
+        private Bitmap thumbnail1;
 
-        public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
+        public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, IUserConfigManager userConfigManager)
         {
-            Thumbnail = ThumbnailHelper.GetThumbnail(img);
+            this.userConfigManager = userConfigManager;
+            thumbnail1 = ThumbnailHelper.GetThumbnail(img, 256);
+            Thumbnail = ThumbnailHelper.GetThumbnail(thumbnail1, 128);
 
             Bitmap baseImage;
             MemoryStream baseImageEncoded;
@@ -129,6 +134,7 @@ namespace NAPS2.Scan.Images
 
         public void Dispose()
         {
+            thumbnail1.Dispose();
             Thumbnail.Dispose();
             try
             {
@@ -168,7 +174,7 @@ namespace NAPS2.Scan.Images
         {
             using (var img = GetImage())
             {
-                Thumbnail = ThumbnailHelper.GetThumbnail(img);
+                Thumbnail = ThumbnailHelper.GetThumbnail(thumbnail1, 128);
             }
         }
 

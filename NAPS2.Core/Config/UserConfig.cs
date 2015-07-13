@@ -30,6 +30,7 @@ namespace NAPS2.Config
         public UserConfig()
         {
             FormStates = new List<FormState>();
+            ThumbnailSize = 128;
         }
 
         public const int CURRENT_VERSION = 2;
@@ -49,5 +50,7 @@ namespace NAPS2.Config
         public string OcrLanguageCode { get; set; }
 
         public string LastImageExt { get; set; }
+
+        public int ThumbnailSize { get; set; }
     }
 }

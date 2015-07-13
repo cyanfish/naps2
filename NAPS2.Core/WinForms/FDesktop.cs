@@ -62,6 +62,8 @@ namespace NAPS2.WinForms
         private readonly IImagePrinter imagePrinter;
         private readonly ChangeTracker changeTracker;
 
+        private bool isControlKeyDown;
+
         public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker)
         {
             this.emailer = emailer;
@@ -79,6 +81,7 @@ namespace NAPS2.WinForms
             this.imagePrinter = imagePrinter;
             this.changeTracker = changeTracker;
             InitializeComponent();
+            thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
         }
 
         private void FDesktop_Load(object sender, EventArgs e)
@@ -337,6 +340,7 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
         {
+            isControlKeyDown = e.Control;
             switch (e.KeyCode)
             {
                 case Keys.Delete:
@@ -375,6 +379,11 @@ namespace NAPS2.WinForms
                     }
                     break;
             }
+        }
+
+        private void thumbnailList1_KeyUp(object sender, KeyEventArgs e)
+        {
+            isControlKeyDown = e.Control;
         }
 
         private void thumbnailList1_ItemActivate(object sender, EventArgs e)
@@ -1004,6 +1013,26 @@ namespace NAPS2.WinForms
                 {
                     FileBasedScannedImage.DisableRecoveryCleanup = true;
                 }
+            }
+        }
+
+        private void thumbnailList1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (isControlKeyDown)
+            {
+                double step = e.Delta / (double)SystemInformation.MouseWheelScrollDelta;
+                int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
+                thumbnailSize += (int)(32 * step);
+                thumbnailSize = Math.Max(Math.Min(thumbnailSize, 256), 64);
+                UserConfigManager.Config.ThumbnailSize = thumbnailSize;
+                UserConfigManager.Save();
+
+                thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
+                //foreach (var image in imageList.Images)
+                //{
+                //    image.UpdateThumbnail();
+                //}
+                UpdateThumbnails(SelectedIndices.ToList());
             }
         }
     }

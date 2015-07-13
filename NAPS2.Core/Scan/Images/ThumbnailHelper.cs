@@ -8,17 +8,15 @@ namespace NAPS2.Scan.Images
 {
     internal static class ThumbnailHelper
     {
-        public const int THUMBNAIL_WIDTH = 128;
-        public const int THUMBNAIL_HEIGHT = 128;
-
         /// <summary>
         /// Gets a bitmap resized to fit within a thumbnail rectangle, including a border around the picture.
         /// </summary>
         /// <param name="b">The bitmap to resize.</param>
+        /// <param name="size">The maximum width and height of the thumbnail.</param>
         /// <returns>The thumbnail bitmap.</returns>
-        public static Bitmap GetThumbnail(Bitmap b)
+        public static Bitmap GetThumbnail(Bitmap b, int size)
         {
-            var result = new Bitmap(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+            var result = new Bitmap(size, size);
             using (Graphics g = Graphics.FromImage(result))
             {
                 // The location and dimensions of the old bitmap, scaled and positioned within the thumbnail bitmap
@@ -30,22 +28,22 @@ namespace NAPS2.Scan.Images
                 if (b.Width > b.Height)
                 {
                     // Fill the new bitmap's width
-                    width = THUMBNAIL_WIDTH;
+                    width = size;
                     left = 0;
                     // Scale the drawing height to match the original bitmap's aspect ratio
-                    height = (int)(b.Height * (THUMBNAIL_WIDTH / (double)b.Width));
+                    height = (int)(b.Height * (size / (double)b.Width));
                     // Center the drawing vertically
-                    top = (THUMBNAIL_HEIGHT - height) / 2;
+                    top = (size - height) / 2;
                 }
                 else
                 {
                     // Fill the new bitmap's height
-                    height = THUMBNAIL_HEIGHT;
+                    height = size;
                     top = 0;
                     // Scale the drawing width to match the original bitmap's aspect ratio
-                    width = (int)(b.Width * (THUMBNAIL_HEIGHT / (double)b.Height));
+                    width = (int)(b.Width * (size / (double)b.Height));
                     // Center the drawing horizontally
-                    left = (THUMBNAIL_WIDTH - width) / 2;
+                    left = (size - width) / 2;
                 }
 
                 // Draw the original bitmap onto the new bitmap, using the calculated location and dimensions

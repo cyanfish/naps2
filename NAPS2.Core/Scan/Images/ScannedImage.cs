@@ -24,12 +24,14 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using NAPS2.Config;
 using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
 {
     public class ScannedImage : IScannedImage
     {
+        private readonly IUserConfigManager userConfigManager;
         // The image's bit depth (or C24Bit if unknown)
         private readonly ScanBitDepth bitDepth;
         // Only one of the following (baseImage/baseImageEncoded) should have a value for any particular ScannedImage
@@ -39,10 +41,11 @@ namespace NAPS2.Scan.Images
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private readonly List<Transform> transformList = new List<Transform>();
 
-        public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
+        public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, IUserConfigManager userConfigManager)
         {
             this.bitDepth = bitDepth;
-            Thumbnail = ThumbnailHelper.GetThumbnail(img);
+            this.userConfigManager = userConfigManager;
+            Thumbnail = ThumbnailHelper.GetThumbnail(img, userConfigManager.Config.ThumbnailSize);
             ImageFormat imageFormat;
             ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out imageFormat);
         }
@@ -82,7 +85,7 @@ namespace NAPS2.Scan.Images
         {
             using (var img = GetImage())
             {
-                Thumbnail = ThumbnailHelper.GetThumbnail(img);
+                Thumbnail = ThumbnailHelper.GetThumbnail(img, userConfigManager.Config.ThumbnailSize);
             }
         }
 
