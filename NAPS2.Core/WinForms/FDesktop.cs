@@ -21,7 +21,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -34,6 +33,7 @@ using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
@@ -57,11 +57,12 @@ namespace NAPS2.WinForms
         private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly AutoUpdaterUI autoUpdaterUI;
         private readonly OcrDependencyManager ocrDependencyManager;
-        private readonly IconButtonSizer iconButtonSizer;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
+        private readonly IImagePrinter imagePrinter;
+        private readonly ChangeTracker changeTracker;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IconButtonSizer iconButtonSizer, IProfileManager profileManager, IScanPerformer scanPerformer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -73,9 +74,10 @@ namespace NAPS2.WinForms
             this.scannedImageImporter = scannedImageImporter;
             this.autoUpdaterUI = autoUpdaterUI;
             this.ocrDependencyManager = ocrDependencyManager;
-            this.iconButtonSizer = iconButtonSizer;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
+            this.imagePrinter = imagePrinter;
+            this.changeTracker = changeTracker;
             InitializeComponent();
         }
 
@@ -88,11 +90,7 @@ namespace NAPS2.WinForms
         {
             RelayoutToolbar();
             InitLanguageDropdown();
-
-            iconButtonSizer.WidthOffset = 22;
-            iconButtonSizer.PaddingRight = 4;
-            iconButtonSizer.MaxWidth = 200;
-            iconButtonSizer.ResizeButtons(btnQuickScan);
+            UpdateScanButton();
         }
 
         private void InitLanguageDropdown()
@@ -124,23 +122,51 @@ namespace NAPS2.WinForms
             {
                 btn.Text = stringWrapper.Wrap(btn.Text, 80, CreateGraphics(), btn.Font);
             }
-            // Reset padding
-            SetToolbarButtonPadding(new Padding(10, 0, 10, 0));
+            ResetToolbarMargin();
             // Recalculate visibility for the below check
             Application.DoEvents();
             // Check if toolbar buttons are overflowing
             if (tStrip.Items.OfType<ToolStripItem>().Any(btn => !btn.Visible))
             {
-                // Shrink the padding to help the buttons fit
-                SetToolbarButtonPadding(new Padding(5, 0, 5, 0));
+                ShrinkToolbarMargin();
             }
         }
 
-        private void SetToolbarButtonPadding(Padding padding)
+        private void ResetToolbarMargin()
         {
             foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
             {
-                btn.Padding = padding;
+                if (btn is ToolStripSplitButton)
+                {
+                    btn.Margin = new Padding(5, 1, 5, 2);
+                }
+                else if (btn is ToolStripDoubleButton)
+                {
+                    btn.Padding = new Padding(5, 0, 5, 0);
+                }
+                else
+                {
+                    btn.Padding = new Padding(10, 0, 10, 0);
+                }
+            }
+        }
+
+        private void ShrinkToolbarMargin()
+        {
+            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
+            {
+                if (btn is ToolStripSplitButton)
+                {
+                    btn.Margin = new Padding(0, 1, 0, 2);
+                }
+                else if (btn is ToolStripDoubleButton)
+                {
+                    btn.Padding = new Padding(0, 0, 0, 0);
+                }
+                else
+                {
+                    btn.Padding = new Padding(5, 0, 5, 0);
+                }
             }
         }
 
@@ -169,6 +195,7 @@ namespace NAPS2.WinForms
         {
             imageList.Images.Add(scannedImage);
             AppendThumbnail(scannedImage);
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void UpdateThumbnails()
@@ -204,15 +231,12 @@ namespace NAPS2.WinForms
                 SelectedIndices.Any();
 
             // Top-level toolbar actions
-            tsdRotate.Enabled = tsMoveUp.Enabled = tsMoveDown.Enabled = tsDelete.Enabled = SelectedIndices.Any();
-            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsClear.Enabled = imageList.Images.Any();
+            tsdImage.Enabled = tsdRotate.Enabled = tsMove.Enabled = tsDelete.Enabled = SelectedIndices.Any();
+            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsdPrint.Enabled = tsClear.Enabled = imageList.Images.Any();
 
             // Context-menu actions
             ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
             ctxSelectAll.Enabled = imageList.Images.Any();
-
-            // Other buttons
-            btnQuickScan.Visible = !imageList.Images.Any();
         }
 
         private void Clear()
@@ -223,6 +247,7 @@ namespace NAPS2.WinForms
                 {
                     imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
                     UpdateThumbnails();
+                    changeTracker.HasUnsavedChanges = false;
                 }
             }
         }
@@ -235,6 +260,14 @@ namespace NAPS2.WinForms
                 {
                     imageList.Delete(SelectedIndices);
                     UpdateThumbnails();
+                    if (imageList.Images.Any())
+                    {
+                        changeTracker.HasUnsavedChanges = true;
+                    }
+                    else
+                    {
+                        changeTracker.HasUnsavedChanges = false;
+                    }
                 }
             }
         }
@@ -246,27 +279,52 @@ namespace NAPS2.WinForms
 
         private void MoveDown()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.MoveDown(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void MoveUp()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.MoveUp(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void RotateLeft()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void RotateRight()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void Flip()
         {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
             UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void ExportPDF(string filename, List<IScannedImage> images)
@@ -285,15 +343,35 @@ namespace NAPS2.WinForms
                     Delete();
                     break;
                 case Keys.Left:
+                case Keys.Up:
                     if (e.Control)
                     {
                         MoveUp();
                     }
                     break;
                 case Keys.Right:
+                case Keys.Down:
                     if (e.Control)
                     {
                         MoveDown();
+                    }
+                    break;
+                case Keys.O:
+                    if (e.Control)
+                    {
+                        Import();
+                    }
+                    break;
+                case Keys.Enter:
+                    if (e.Control)
+                    {
+                        ScanDefault();
+                    }
+                    break;
+                case Keys.S:
+                    if (e.Control)
+                    {
+                        SavePDF(imageList.Images);
                     }
                     break;
             }
@@ -308,20 +386,92 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                using (var image = imageList.Images[SelectedIndices.First()].GetImage())
-                {
-                    var viewer = FormFactory.Create<FViewer>();
-                    viewer.Image = image;
-                    viewer.ShowDialog();
-                }
+                var viewer = FormFactory.Create<FViewer>();
+                viewer.ImageList = imageList;
+                viewer.ImageIndex = SelectedIndices.First();
+                viewer.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
             }
         }
 
-        private void tsScan_Click(object sender, EventArgs e)
+        private void UpdateScanButton()
         {
-            var prof = FormFactory.Create<FChooseProfile>();
-            prof.ScanReceiver = this;
-            prof.ShowDialog();
+            // Clean up the dropdown
+            while (tsScan.DropDownItems.Count > 1)
+            {
+                tsScan.DropDownItems.RemoveAt(0);
+            }
+
+            // Populate the dropdown
+            foreach (var profile in profileManager.Profiles)
+            {
+                var item = new ToolStripMenuItem
+                {
+                    Text = profile.DisplayName.Replace("&", "&&"),
+                    Image = profile.IsDefault ? Icons.accept_small : null,
+                    ImageScaling = ToolStripItemImageScaling.None
+                };
+                item.Click += (sender, args) =>
+                {
+                    profileManager.DefaultProfile = profile;
+                    profileManager.Save();
+
+                    UpdateScanButton();
+
+                    scanPerformer.PerformScan(profile, this, this);
+                };
+                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, item);
+            }
+
+            if (profileManager.Profiles.Any())
+            {
+                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, new ToolStripSeparator());
+            }
+        }
+
+        private void tsScan_ButtonClick(object sender, EventArgs e)
+        {
+            ScanDefault();
+        }
+
+        private void ScanDefault()
+        {
+            if (profileManager.DefaultProfile != null)
+            {
+                scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
+            }
+            else
+            {
+                ScanWithNewProfile();
+            }
+        }
+
+        private void tsNewProfile_Click(object sender, EventArgs e)
+        {
+            ScanWithNewProfile();
+        }
+
+        private void ScanWithNewProfile()
+        {
+            var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+            editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
+            editSettingsForm.ShowDialog();
+            if (!editSettingsForm.Result)
+            {
+                return;
+            }
+            profileManager.Profiles.Add(editSettingsForm.ScanSettings);
+            profileManager.DefaultProfile = editSettingsForm.ScanSettings;
+            profileManager.Save();
+
+            UpdateScanButton();
+
+            scanPerformer.PerformScan(editSettingsForm.ScanSettings, this, this);
+        }
+
+        private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
+        {
+            SavePDF(imageList.Images);
         }
 
         private void tsSavePDFAll_Click(object sender, EventArgs e)
@@ -348,8 +498,14 @@ namespace NAPS2.WinForms
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
                     ExportPDF(sd.FileName, images);
+                    changeTracker.HasUnsavedChanges = false;
                 }
             }
+        }
+
+        private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
+        {
+            SaveImages(imageList.Images);
         }
 
         private void tsSaveImagesAll_Click(object sender, EventArgs e)
@@ -376,13 +532,38 @@ namespace NAPS2.WinForms
                                  MiscResources.FileTypeGif + "|*.gif|" +
                                  MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
                                  MiscResources.FileTypePng + "|*.png|" +
-                                 MiscResources.FileTypeTiff + "|*.tiff;*.tif",
-                        DefaultExt = "jpg",
-                        FilterIndex = 5
+                                 MiscResources.FileTypeTiff + "|*.tiff;*.tif"
                     };
+                switch ((UserConfigManager.Config.LastImageExt ?? "").ToLowerInvariant())
+                {
+                    case "bmp":
+                        sd.FilterIndex = 1;
+                        break;
+                    case "emf":
+                        sd.FilterIndex = 2;
+                        break;
+                    case "exif":
+                        sd.FilterIndex = 3;
+                        break;
+                    case "gif":
+                        sd.FilterIndex = 4;
+                        break;
+                    case "png":
+                        sd.FilterIndex = 6;
+                        break;
+                    case "tif":
+                    case "tiff":
+                        sd.FilterIndex = 7;
+                        break;
+                    default:
+                        sd.FilterIndex = 5;
+                        break;
+                }
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
+                    UserConfigManager.Config.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", "");
+                    UserConfigManager.Save();
                     try
                     {
                         imageSaver.SaveImages(sd.FileName, images, path =>
@@ -405,12 +586,18 @@ namespace NAPS2.WinForms
                                     throw new InvalidOperationException("User cancelled");
                             }
                         });
+                        changeTracker.HasUnsavedChanges = false;
                     }
                     catch (InvalidOperationException)
                     {
                     }
                 }
             }
+        }
+
+        private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
+        {
+            EmailPDF(imageList.Images);
         }
 
         private void tsEmailPDFAll_Click(object sender, EventArgs e)
@@ -429,14 +616,20 @@ namespace NAPS2.WinForms
             {
                 string path = Paths.AppData + "\\Scan.pdf";
                 ExportPDF(path, images);
-                emailer.SendEmail(new EmailMessage
+                if (emailer.SendEmail(new EmailMessage
                 {
-                    Attachments = new List<EmailAttachment> { new EmailAttachment
+                    Attachments = new List<EmailAttachment>
+                    {
+                        new EmailAttachment
                         {
                             FilePath = path,
                             AttachmentName = Path.GetFileName(path)
-                        } },
-                });
+                        }
+                    }
+                }))
+                {
+                    changeTracker.HasUnsavedChanges = false;
+                }
                 File.Delete(path);
             }
         }
@@ -456,16 +649,6 @@ namespace NAPS2.WinForms
             Delete();
         }
 
-        private void tsMoveUp_Click(object sender, EventArgs e)
-        {
-            MoveUp();
-        }
-
-        private void tsMoveDown_Click(object sender, EventArgs e)
-        {
-            MoveDown();
-        }
-
         private void tsRotateLeft_Click(object sender, EventArgs e)
         {
             RotateLeft();
@@ -478,7 +661,15 @@ namespace NAPS2.WinForms
 
         private void tsProfiles_Click(object sender, EventArgs e)
         {
-            FormFactory.Create<FManageProfiles>().ShowDialog();
+            ShowProfilesForm();
+        }
+
+        private void ShowProfilesForm()
+        {
+            var form = FormFactory.Create<FProfiles>();
+            form.ScanReceiver = this;
+            form.ShowDialog();
+            UpdateScanButton();
         }
 
         private void tsAbout_Click(object sender, EventArgs e)
@@ -523,6 +714,7 @@ namespace NAPS2.WinForms
             foreach (IScannedImage scannedImage in recoveryManager.RecoverScannedImages())
             {
                 imageList.Images.Add(scannedImage);
+                changeTracker.HasUnsavedChanges = true;
             }
             UpdateThumbnails();
 
@@ -538,6 +730,11 @@ namespace NAPS2.WinForms
         }
 
         private void tsImport_Click(object sender, EventArgs e)
+        {
+            Import();
+        }
+
+        private void Import()
         {
             var ofd = new OpenFileDialog
             {
@@ -556,6 +753,7 @@ namespace NAPS2.WinForms
                         imageList.Images.Add(img);
                         AppendThumbnail(img);
                         thumbnailList1.Refresh();
+                        changeTracker.HasUnsavedChanges = true;
                     }
                 }
             }
@@ -587,12 +785,22 @@ namespace NAPS2.WinForms
 
         private void tsInterleave_Click(object sender, EventArgs e)
         {
+            if (SelectedIndices.Count() < 3)
+            {
+                return;
+            }
             UpdateThumbnails(imageList.Interleave(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void tsDeinterleave_Click(object sender, EventArgs e)
         {
+            if (SelectedIndices.Count() < 3)
+            {
+                return;
+            }
             UpdateThumbnails(imageList.Deinterleave(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void thumbnailList1_MouseMove(object sender, MouseEventArgs e)
@@ -671,31 +879,132 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void btnQuickScan_Click(object sender, EventArgs e)
-        {
-            if (profileManager.Profiles.Count == 0)
-            {
-                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
-                editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
-                editSettingsForm.ShowDialog();
-                if (!editSettingsForm.Result)
-                {
-                    return;
-                }
-                profileManager.Profiles.Add(editSettingsForm.ScanSettings);
-                profileManager.Save();
-            }
-            scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
-        }
-
         private void tsReverseAll_Click(object sender, EventArgs e)
         {
+            if (imageList.Images.Count < 2)
+            {
+                return;
+            }
             UpdateThumbnails(imageList.Reverse());
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void tsReverseSelected_Click(object sender, EventArgs e)
         {
+            if (SelectedIndices.Count() < 2)
+            {
+                return;
+            }
             UpdateThumbnails(imageList.Reverse(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
+        }
+
+        private void tsMove_ClickFirst(object sender, EventArgs e)
+        {
+            MoveUp();
+        }
+
+        private void tsMove_ClickSecond(object sender, EventArgs e)
+        {
+            MoveDown();
+        }
+
+        private void tsView_Click(object sender, EventArgs e)
+        {
+            PreviewImage();
+        }
+
+        private void tsReset_Click(object sender, EventArgs e)
+        {
+            ResetImage();
+        }
+
+        private void ResetImage()
+        {
+            if (SelectedIndices.Any())
+            {
+                if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, SelectedIndices.Count()), MiscResources.ResetImage, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    UpdateThumbnails(imageList.ResetTransforms(SelectedIndices));
+                    changeTracker.HasUnsavedChanges = true;
+                }
+            }
+        }
+
+        private void tsCrop_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FCrop>();
+                form.Image = SelectedImages.First();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
+            }
+        }
+
+        private void tsBrightness_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FBrightness>();
+                form.Image = SelectedImages.First();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
+            }
+        }
+
+        private void tsContrast_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FContrast>();
+                form.Image = SelectedImages.First();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
+            }
+        }
+
+        private void customRotationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FRotate>();
+                form.Image = SelectedImages.First();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList());
+            }
+        }
+
+        private void tsdPrint_Click(object sender, EventArgs e)
+        {
+            if (imagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList()))
+            {
+                changeTracker.HasUnsavedChanges = false;
+            }
+        }
+
+        private void FDesktop_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (changeTracker.HasUnsavedChanges)
+            {
+                if (e.CloseReason == CloseReason.UserClosing)
+                {
+                    var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                    if (result == DialogResult.Yes)
+                    {
+                        changeTracker.HasUnsavedChanges = false;
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    FileBasedScannedImage.DisableRecoveryCleanup = true;
+                }
+            }
         }
     }
 }

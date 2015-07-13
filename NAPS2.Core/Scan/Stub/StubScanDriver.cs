@@ -56,9 +56,11 @@ namespace NAPS2.Scan.Stub
         private IScannedImage MakeImage()
         {
             var bitmap = new Bitmap(600, 800);
-            Graphics g = Graphics.FromImage(bitmap);
-            g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
-            g.DrawString(new Random().Next().ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
+                g.DrawString(new Random().Next().ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
+            }
             var image = scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, ScanSettings.MaxQuality);
             return image;
         }

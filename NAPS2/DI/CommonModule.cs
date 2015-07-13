@@ -31,6 +31,7 @@ namespace NAPS2.DI
 
             // Export
             Bind<IPdfExporter>().To<PdfSharpExporter>();
+            Bind<IImagePrinter>().To<PrintDocumentPrinter>();
             Bind<IEmailer>().To<MapiEmailer>();
             Bind<IOcrEngine>().To<TesseractOcrEngine>();
 
@@ -63,6 +64,7 @@ namespace NAPS2.DI
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
+            Bind<ChangeTracker>().ToSelf().InSingletonScope();
         }
 
         private Edition GetEdition()

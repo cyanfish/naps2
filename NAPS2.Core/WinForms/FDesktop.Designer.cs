@@ -36,47 +36,56 @@ namespace NAPS2.WinForms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.btnQuickScan = new System.Windows.Forms.Button();
             this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxView = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.tStrip = new System.Windows.Forms.ToolStrip();
-            this.tsScan = new System.Windows.Forms.ToolStripButton();
+            this.tsScan = new System.Windows.Forms.ToolStripSplitButton();
+            this.tsNewProfile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsProfiles = new System.Windows.Forms.ToolStripButton();
             this.tsOcr = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsdSavePDF = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsdSavePDF = new System.Windows.Forms.ToolStripSplitButton();
             this.tsSavePDFAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSavePDFSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsdSaveImages = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsdSaveImages = new System.Windows.Forms.ToolStripSplitButton();
             this.tsSaveImagesAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSaveImagesSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsdEmailPDF = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsdEmailPDF = new System.Windows.Forms.ToolStripSplitButton();
             this.tsEmailPDFAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsEmailPDFSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsdPrint = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsImport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsdImage = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsCrop = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsBrightness = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsContrast = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsReset = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdRotate = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.tsRotateRight = new System.Windows.Forms.ToolStripMenuItem();
             this.tsFlip = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsMoveUp = new System.Windows.Forms.ToolStripButton();
-            this.tsMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.customRotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsMove = new NAPS2.WinForms.ToolStripDoubleButton();
             this.tsdReorder = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsInterleave = new System.Windows.Forms.ToolStripMenuItem();
             this.tsDeinterleave = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsReverse = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsReverseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsReverseSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsDelete = new System.Windows.Forms.ToolStripButton();
             this.tsClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.tsReverse = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsReverseAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsReverseSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -89,7 +98,6 @@ namespace NAPS2.WinForms
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnQuickScan);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
@@ -98,14 +106,6 @@ namespace NAPS2.WinForms
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
-            // 
-            // btnQuickScan
-            // 
-            this.btnQuickScan.Image = global::NAPS2.Icons.control_play_blue_small;
-            resources.ApplyResources(this.btnQuickScan, "btnQuickScan");
-            this.btnQuickScan.Name = "btnQuickScan";
-            this.btnQuickScan.UseVisualStyleBackColor = true;
-            this.btnQuickScan.Click += new System.EventHandler(this.btnQuickScan_Click);
             // 
             // thumbnailList1
             // 
@@ -159,11 +159,12 @@ namespace NAPS2.WinForms
             this.tsdSavePDF,
             this.tsdSaveImages,
             this.tsdEmailPDF,
+            this.tsdPrint,
             this.tsImport,
             this.toolStripSeparator4,
+            this.tsdImage,
             this.tsdRotate,
-            this.tsMoveUp,
-            this.tsMoveDown,
+            this.tsMove,
             this.tsdReorder,
             this.toolStripSeparator2,
             this.tsDelete,
@@ -176,10 +177,21 @@ namespace NAPS2.WinForms
             // 
             // tsScan
             // 
+            this.tsScan.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsNewProfile});
+            this.tsScan.Image = global::NAPS2.Icons.control_play_blue;
             resources.ApplyResources(this.tsScan, "tsScan");
+            this.tsScan.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsScan.Name = "tsScan";
-            this.tsScan.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsScan.Click += new System.EventHandler(this.tsScan_Click);
+            this.tsScan.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.tsScan.ButtonClick += new System.EventHandler(this.tsScan_ButtonClick);
+            // 
+            // tsNewProfile
+            // 
+            this.tsNewProfile.Image = global::NAPS2.Icons.add_small;
+            resources.ApplyResources(this.tsNewProfile, "tsNewProfile");
+            this.tsNewProfile.Name = "tsNewProfile";
+            this.tsNewProfile.Click += new System.EventHandler(this.tsNewProfile_Click);
             // 
             // tsProfiles
             // 
@@ -208,9 +220,9 @@ namespace NAPS2.WinForms
             this.tsSavePDFSelected});
             this.tsdSavePDF.Image = global::NAPS2.Icons.file_extension_pdf;
             resources.ApplyResources(this.tsdSavePDF, "tsdSavePDF");
+            this.tsdSavePDF.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsdSavePDF.Name = "tsdSavePDF";
-            this.tsdSavePDF.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsdSavePDF.ShowDropDownArrow = false;
+            this.tsdSavePDF.ButtonClick += new System.EventHandler(this.tsdSavePDF_ButtonClick);
             // 
             // tsSavePDFAll
             // 
@@ -229,11 +241,11 @@ namespace NAPS2.WinForms
             this.tsdSaveImages.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsSaveImagesAll,
             this.tsSaveImagesSelected});
-            this.tsdSaveImages.Image = global::NAPS2.Icons.picture;
+            this.tsdSaveImages.Image = global::NAPS2.Icons.pictures;
             resources.ApplyResources(this.tsdSaveImages, "tsdSaveImages");
+            this.tsdSaveImages.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsdSaveImages.Name = "tsdSaveImages";
-            this.tsdSaveImages.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsdSaveImages.ShowDropDownArrow = false;
+            this.tsdSaveImages.ButtonClick += new System.EventHandler(this.tsdSaveImages_ButtonClick);
             // 
             // tsSaveImagesAll
             // 
@@ -254,9 +266,9 @@ namespace NAPS2.WinForms
             this.tsEmailPDFSelected});
             this.tsdEmailPDF.Image = global::NAPS2.Icons.email_attach;
             resources.ApplyResources(this.tsdEmailPDF, "tsdEmailPDF");
+            this.tsdEmailPDF.Margin = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.tsdEmailPDF.Name = "tsdEmailPDF";
-            this.tsdEmailPDF.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsdEmailPDF.ShowDropDownArrow = false;
+            this.tsdEmailPDF.ButtonClick += new System.EventHandler(this.tsdEmailPDF_ButtonClick);
             // 
             // tsEmailPDFAll
             // 
@@ -269,6 +281,15 @@ namespace NAPS2.WinForms
             this.tsEmailPDFSelected.Name = "tsEmailPDFSelected";
             resources.ApplyResources(this.tsEmailPDFSelected, "tsEmailPDFSelected");
             this.tsEmailPDFSelected.Click += new System.EventHandler(this.tsEmailPDFSelected_Click);
+            // 
+            // tsdPrint
+            // 
+            this.tsdPrint.Image = global::NAPS2.Icons.printer;
+            resources.ApplyResources(this.tsdPrint, "tsdPrint");
+            this.tsdPrint.Name = "tsdPrint";
+            this.tsdPrint.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsdPrint.ShowDropDownArrow = false;
+            this.tsdPrint.Click += new System.EventHandler(this.tsdPrint_Click);
             // 
             // tsImport
             // 
@@ -283,12 +304,72 @@ namespace NAPS2.WinForms
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             // 
+            // tsdImage
+            // 
+            this.tsdImage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsView,
+            this.toolStripSeparator6,
+            this.tsCrop,
+            this.tsBrightness,
+            this.tsContrast,
+            this.toolStripSeparator7,
+            this.tsReset});
+            this.tsdImage.Image = global::NAPS2.Icons.picture_edit;
+            resources.ApplyResources(this.tsdImage, "tsdImage");
+            this.tsdImage.Name = "tsdImage";
+            this.tsdImage.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsdImage.ShowDropDownArrow = false;
+            // 
+            // tsView
+            // 
+            this.tsView.Name = "tsView";
+            resources.ApplyResources(this.tsView, "tsView");
+            this.tsView.Click += new System.EventHandler(this.tsView_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+            // 
+            // tsCrop
+            // 
+            this.tsCrop.Image = global::NAPS2.Icons.transform_crop;
+            resources.ApplyResources(this.tsCrop, "tsCrop");
+            this.tsCrop.Name = "tsCrop";
+            this.tsCrop.Click += new System.EventHandler(this.tsCrop_Click);
+            // 
+            // tsBrightness
+            // 
+            this.tsBrightness.Image = global::NAPS2.Icons.weather_sun;
+            resources.ApplyResources(this.tsBrightness, "tsBrightness");
+            this.tsBrightness.Name = "tsBrightness";
+            this.tsBrightness.Click += new System.EventHandler(this.tsBrightness_Click);
+            // 
+            // tsContrast
+            // 
+            this.tsContrast.Image = global::NAPS2.Icons.contrast;
+            resources.ApplyResources(this.tsContrast, "tsContrast");
+            this.tsContrast.Name = "tsContrast";
+            this.tsContrast.Click += new System.EventHandler(this.tsContrast_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            // 
+            // tsReset
+            // 
+            this.tsReset.Name = "tsReset";
+            resources.ApplyResources(this.tsReset, "tsReset");
+            this.tsReset.Click += new System.EventHandler(this.tsReset_Click);
+            // 
             // tsdRotate
             // 
             this.tsdRotate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsRotateLeft,
             this.tsRotateRight,
-            this.tsFlip});
+            this.tsFlip,
+            this.customRotationToolStripMenuItem});
             this.tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise;
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
             this.tsdRotate.Name = "tsdRotate";
@@ -316,21 +397,24 @@ namespace NAPS2.WinForms
             this.tsFlip.Name = "tsFlip";
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
             // 
-            // tsMoveUp
+            // customRotationToolStripMenuItem
             // 
-            this.tsMoveUp.Image = global::NAPS2.Icons.arrow_up;
-            resources.ApplyResources(this.tsMoveUp, "tsMoveUp");
-            this.tsMoveUp.Name = "tsMoveUp";
-            this.tsMoveUp.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsMoveUp.Click += new System.EventHandler(this.tsMoveUp_Click);
+            this.customRotationToolStripMenuItem.Name = "customRotationToolStripMenuItem";
+            resources.ApplyResources(this.customRotationToolStripMenuItem, "customRotationToolStripMenuItem");
+            this.customRotationToolStripMenuItem.Click += new System.EventHandler(this.customRotationToolStripMenuItem_Click);
             // 
-            // tsMoveDown
+            // tsMove
             // 
-            this.tsMoveDown.Image = global::NAPS2.Icons.arrow_down;
-            resources.ApplyResources(this.tsMoveDown, "tsMoveDown");
-            this.tsMoveDown.Name = "tsMoveDown";
-            this.tsMoveDown.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsMoveDown.Click += new System.EventHandler(this.tsMoveDown_Click);
+            this.tsMove.ImageFirst = global::NAPS2.Icons.arrow_up_small;
+            this.tsMove.ImageSecond = global::NAPS2.Icons.arrow_down_small;
+            this.tsMove.Name = "tsMove";
+            this.tsMove.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            resources.ApplyResources(this.tsMove, "tsMove");
+            this.tsMove.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.tsMove.TextFirst = "Move Up";
+            this.tsMove.TextSecond = "Move Down";
+            this.tsMove.ClickFirst += new System.EventHandler(this.tsMove_ClickFirst);
+            this.tsMove.ClickSecond += new System.EventHandler(this.tsMove_ClickSecond);
             // 
             // tsdReorder
             // 
@@ -356,6 +440,31 @@ namespace NAPS2.WinForms
             this.tsDeinterleave.Name = "tsDeinterleave";
             resources.ApplyResources(this.tsDeinterleave, "tsDeinterleave");
             this.tsDeinterleave.Click += new System.EventHandler(this.tsDeinterleave_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // tsReverse
+            // 
+            this.tsReverse.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsReverseAll,
+            this.tsReverseSelected});
+            this.tsReverse.Name = "tsReverse";
+            resources.ApplyResources(this.tsReverse, "tsReverse");
+            // 
+            // tsReverseAll
+            // 
+            this.tsReverseAll.Name = "tsReverseAll";
+            resources.ApplyResources(this.tsReverseAll, "tsReverseAll");
+            this.tsReverseAll.Click += new System.EventHandler(this.tsReverseAll_Click);
+            // 
+            // tsReverseSelected
+            // 
+            this.tsReverseSelected.Name = "tsReverseSelected";
+            resources.ApplyResources(this.tsReverseSelected, "tsReverseSelected");
+            this.tsReverseSelected.Click += new System.EventHandler(this.tsReverseSelected_Click);
             // 
             // toolStripSeparator2
             // 
@@ -398,31 +507,6 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
-            // tsReverse
-            // 
-            this.tsReverse.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsReverseAll,
-            this.tsReverseSelected});
-            this.tsReverse.Name = "tsReverse";
-            resources.ApplyResources(this.tsReverse, "tsReverse");
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // tsReverseAll
-            // 
-            this.tsReverseAll.Name = "tsReverseAll";
-            resources.ApplyResources(this.tsReverseAll, "tsReverseAll");
-            this.tsReverseAll.Click += new System.EventHandler(this.tsReverseAll_Click);
-            // 
-            // tsReverseSelected
-            // 
-            this.tsReverseSelected.Name = "tsReverseSelected";
-            resources.ApplyResources(this.tsReverseSelected, "tsReverseSelected");
-            this.tsReverseSelected.Click += new System.EventHandler(this.tsReverseSelected_Click);
-            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
@@ -430,6 +514,7 @@ namespace NAPS2.WinForms
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "FDesktop";
             this.Closed += new System.EventHandler(this.FDesktop_Closed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FDesktop_FormClosing);
             this.Load += new System.EventHandler(this.FDesktop_Load);
             this.Shown += new System.EventHandler(this.FDesktop_Shown);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -447,13 +532,12 @@ namespace NAPS2.WinForms
         #endregion
 
         private System.Windows.Forms.ToolStrip tStrip;
-        private System.Windows.Forms.ToolStripButton tsScan;
+        private System.Windows.Forms.ToolStripSplitButton tsScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private ThumbnailList thumbnailList1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton tsMoveUp;
-        private System.Windows.Forms.ToolStripButton tsMoveDown;
+        private ToolStripDoubleButton tsMove;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsClear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -462,7 +546,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripButton tsDelete;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripButton tsImport;
-        private System.Windows.Forms.ToolStripDropDownButton tsdSavePDF;
+        private System.Windows.Forms.ToolStripSplitButton tsdSavePDF;
         private System.Windows.Forms.ToolStripMenuItem tsSavePDFAll;
         private System.Windows.Forms.ToolStripMenuItem tsSavePDFSelected;
         private System.Windows.Forms.ToolStripDropDownButton tsdRotate;
@@ -472,10 +556,10 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripDropDownButton tsdReorder;
         private System.Windows.Forms.ToolStripMenuItem tsInterleave;
         private System.Windows.Forms.ToolStripMenuItem tsDeinterleave;
-        private System.Windows.Forms.ToolStripDropDownButton tsdSaveImages;
+        private System.Windows.Forms.ToolStripSplitButton tsdSaveImages;
         private System.Windows.Forms.ToolStripMenuItem tsSaveImagesAll;
         private System.Windows.Forms.ToolStripMenuItem tsSaveImagesSelected;
-        private System.Windows.Forms.ToolStripDropDownButton tsdEmailPDF;
+        private System.Windows.Forms.ToolStripSplitButton tsdEmailPDF;
         private System.Windows.Forms.ToolStripMenuItem tsEmailPDFAll;
         private System.Windows.Forms.ToolStripMenuItem tsEmailPDFSelected;
         private System.Windows.Forms.ToolStripButton tsOcr;
@@ -483,11 +567,21 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem ctxView;
         private System.Windows.Forms.ToolStripMenuItem ctxSelectAll;
         private System.Windows.Forms.ToolStripMenuItem ctxCopy;
-        private System.Windows.Forms.Button btnQuickScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsReverse;
         private System.Windows.Forms.ToolStripMenuItem tsReverseAll;
         private System.Windows.Forms.ToolStripMenuItem tsReverseSelected;
+        private System.Windows.Forms.ToolStripMenuItem tsNewProfile;
+        private System.Windows.Forms.ToolStripDropDownButton tsdImage;
+        private System.Windows.Forms.ToolStripMenuItem tsView;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem tsBrightness;
+        private System.Windows.Forms.ToolStripMenuItem tsContrast;
+        private System.Windows.Forms.ToolStripMenuItem tsCrop;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem tsReset;
+        private System.Windows.Forms.ToolStripMenuItem customRotationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton tsdPrint;
     }
 }
 

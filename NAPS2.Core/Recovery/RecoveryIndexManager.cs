@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 using NAPS2.Config;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Recovery
 {
@@ -21,6 +24,26 @@ namespace NAPS2.Recovery
             {
                 return Config;
             }
+        }
+
+        protected override RecoveryIndex Deserialize(Stream configFileStream)
+        {
+            var serializer = new XmlSerializer(typeof(RecoveryIndex));
+            var recoveryIndex = (RecoveryIndex)serializer.Deserialize(configFileStream);
+            // Upgrade from V1 to V2
+            if (recoveryIndex.Version == 1)
+            {
+                foreach (var img in recoveryIndex.Images)
+                {
+                    if (img.Transform != RotateFlipType.RotateNoneFlipNone)
+                    {
+                        img.TransformList.Add(new RotationTransform(img.Transform));
+                        img.Transform = RotateFlipType.RotateNoneFlipNone;
+                    }
+                }
+                recoveryIndex.Version = RecoveryIndex.CURRENT_VERSION;
+            }
+            return recoveryIndex;
         }
     }
 }

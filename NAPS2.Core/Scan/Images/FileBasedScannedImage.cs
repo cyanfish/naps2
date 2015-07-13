@@ -27,6 +27,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using NAPS2.Recovery;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
 {
@@ -38,6 +39,8 @@ namespace NAPS2.Scan.Images
         private static FileInfo _recoveryLockFile;
         private static FileStream _recoveryLock;
         private static RecoveryIndexManager _recoveryIndexManager;
+
+        public static bool DisableRecoveryCleanup { get; set; }
 
         private static DirectoryInfo RecoveryFolder
         {
@@ -63,7 +66,7 @@ namespace NAPS2.Scan.Images
         private readonly string baseImageFilePath;
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
-        private RotateFlipType transform = RotateFlipType.RotateNoneFlipNone;
+        private readonly List<Transform> transformList = new List<Transform>();
 
         public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
@@ -98,7 +101,7 @@ namespace NAPS2.Scan.Images
                 FileName = baseImageFileName,
                 BitDepth = bitDepth,
                 HighQuality = highQuality,
-                Transform = transform
+                TransformList = transformList
             });
             _recoveryIndexManager.Save();
         }
@@ -121,8 +124,7 @@ namespace NAPS2.Scan.Images
         public Bitmap GetImage()
         {
             var bitmap = new Bitmap(baseImageFilePath);
-            bitmap.RotateFlip(transform);
-            return bitmap;
+            return Transform.PerformAll(bitmap, transformList);
         }
 
         public void Dispose()
@@ -130,7 +132,7 @@ namespace NAPS2.Scan.Images
             Thumbnail.Dispose();
             try
             {
-                if (File.Exists(baseImageFilePath))
+                if (!DisableRecoveryCleanup && File.Exists(baseImageFilePath))
                 {
                     File.Delete(baseImageFilePath);
                     _recoveryIndexManager.Index.Images.RemoveAll(x => x.FileName == baseImageFileName);
@@ -149,17 +151,25 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        public void RotateFlip(RotateFlipType rotateFlipType)
+        public void AddTransform(Transform transform)
         {
-            // There should be no actual flips (just rotations of varying degrees), so this code is simplified
-            transform = TransformationHelper.CombineRotation(transform, rotateFlipType);
-            Thumbnail.RotateFlip(rotateFlipType);
-
-            foreach (var indexImage in _recoveryIndexManager.Index.Images.Where(x => x.FileName == baseImageFileName))
-            {
-                indexImage.Transform = transform;
-            }
+            // Also updates the recovery index since they reference the same list
+            Transform.AddOrSimplify(transformList, transform);
             _recoveryIndexManager.Save();
+        }
+
+        public void ResetTransforms()
+        {
+            transformList.Clear();
+            _recoveryIndexManager.Save();
+        }
+
+        public void UpdateThumbnail()
+        {
+            using (var img = GetImage())
+            {
+                Thumbnail = ThumbnailHelper.GetThumbnail(img);
+            }
         }
 
         public void MovedTo(int index)

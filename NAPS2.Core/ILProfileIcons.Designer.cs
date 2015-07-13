@@ -39,6 +39,7 @@ namespace NAPS2
             this.IconsList.Images.SetKeyName(0, "scanner.png");
             this.IconsList.Images.SetKeyName(1, "wordprocessing.png");
             this.IconsList.Images.SetKeyName(2, "image.png");
+            this.IconsList.Images.SetKeyName(3, "scanner-default.png");
 
         }
 

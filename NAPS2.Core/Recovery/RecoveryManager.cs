@@ -87,7 +87,11 @@ namespace NAPS2.Recovery
                     using (var bitmap = new Bitmap(imagePath))
                     {
                         var scannedImage = scannedImageFactory.Create(bitmap, indexImage.BitDepth, indexImage.HighQuality);
-                        scannedImage.RotateFlip(indexImage.Transform);
+                        foreach (var transform in indexImage.TransformList)
+                        {
+                            scannedImage.AddTransform(transform);
+                        }
+                        scannedImage.UpdateThumbnail();
                         yield return scannedImage;
                     }
                 }

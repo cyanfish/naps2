@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
 {
@@ -39,10 +40,20 @@ namespace NAPS2.Scan.Images
         Bitmap GetImage();
 
         /// <summary>
-        /// Transforms (rotates and/or flips) the image.
+        /// Adds a transform to the image.
         /// </summary>
-        /// <param name="rotateFlipType">The transformation type.</param>
-        void RotateFlip(RotateFlipType rotateFlipType);
+        /// <param name="transform">The transform.</param>
+        void AddTransform(Transform transform);
+
+        /// <summary>
+        /// Removes all of the transforms from the image.
+        /// </summary>
+        void ResetTransforms();
+
+        /// <summary>
+        /// Updates the image's thumbnail with all of the transforms.
+        /// </summary>
+        void UpdateThumbnail();
 
         /// <summary>
         /// Indicates the the scanned image has been moved to the given position in the scanned image list.
