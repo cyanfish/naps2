@@ -270,4 +270,19 @@
     <data name="CustomPageSizeFormat" xml:space="preserve">
         <value>Custom ({0}x{1} {2})</value>
     </data>
+    <data name="Scan" xml:space="preserve">
+        <value>Skenovat</value>
+    </data>
+    <data name="ConfirmResetImages" xml:space="preserve">
+        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+    </data>
+    <data name="ResetImage" xml:space="preserve">
+        <value>Reset Image</value>
+    </data>
+    <data name="ExitWithUnsavedChanges" xml:space="preserve">
+        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+    </data>
+    <data name="UnsavedChanges" xml:space="preserve">
+        <value>Unsaved Changes</value>
+    </data>
 </root>
