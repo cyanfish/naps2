@@ -63,15 +63,11 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: FManageProfiles.resx$btnAdd.Text$Message
-msgid "Add"
-msgstr ""
-
-#: MiscResources.resx$AllCount$Message
-#: FDesktop.resx$tsSavePDFAll.Text$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr ""
 
@@ -99,6 +95,10 @@ msgstr ""
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr ""
 
+#: MiscResources.resx$ConfirmResetImages$Message
+msgid "Are you sure you want undo your changes to {0} image(s)?"
+msgstr ""
+
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
 msgstr ""
@@ -123,15 +123,22 @@ msgstr ""
 msgid "Black & White"
 msgstr ""
 
+#: FViewer.resx$tsBrightness.Text$Message
+#: FDesktop.resx$tsBrightness.Text$Message
+#: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
 msgstr ""
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
+#: FContrast.resx$btnCancel.Text$Message
+#: FBrightness.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr ""
 
@@ -139,12 +146,7 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
-#: FChooseIcon.resx$$this.Text$Message
-msgid "Choose Icon"
-msgstr ""
-
 #: MiscResources.resx$ChooseProfile$Message
-#: FChooseProfile.resx$$this.Text$Message
 msgid "Choose Profile"
 msgstr ""
 
@@ -157,6 +159,9 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
+#: FDesktop.resx$tsContrast.Text$Message
+#: FViewer.resx$tsContrast.Text$Message
+#: FContrast.resx$$this.Text$Message
 #: FEditScanSettings.resx$label7.Text$Message
 msgid "Contrast"
 msgstr ""
@@ -181,6 +186,12 @@ msgstr ""
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr ""
 
+#: FDesktop.resx$tsCrop.Text$Message
+#: FViewer.resx$tsCrop.Text$Message
+#: FCrop.resx$$this.Text$Message
+msgid "Crop"
+msgstr ""
+
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
 msgstr ""
@@ -193,13 +204,19 @@ msgstr ""
 msgid "Custom Page Size"
 msgstr ""
 
+#: FViewer.resx$tsCustomRotation.Text$Message
+#: FDesktop.resx$customRotationToolStripMenuItem.Text$Message
+msgid "Custom Rotation"
+msgstr ""
+
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr ""
 
 #: FRecover.resx$btnDelete.Text$Message
-#: FManageProfiles.resx$btnDelete.Text$Message
+#: FProfiles.resx$btnDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
 msgstr ""
@@ -216,7 +233,7 @@ msgstr ""
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr ""
 
-#: FChooseProfile.resx$btnDone.Text$Message
+#: FProfiles.resx$btnDone.Text$Message
 msgid "Done"
 msgstr ""
 
@@ -243,7 +260,8 @@ msgstr ""
 msgid "Duplex"
 msgstr ""
 
-#: FManageProfiles.resx$btnEdit.Text$Message
+#: FProfiles.resx$btnEdit.Text$Message
+#: FProfiles.resx$ctxEdit.Text$Message
 msgid "Edit"
 msgstr ""
 
@@ -272,6 +290,7 @@ msgstr ""
 msgid "Feeder"
 msgstr ""
 
+#: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
 msgid "Flip"
 msgstr ""
@@ -298,6 +317,10 @@ msgstr ""
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
+msgstr ""
+
+#: FDesktop.resx$tsdImage.Text$Message
+msgid "Image"
 msgstr ""
 
 #: FDesktop.resx$tsImport.Text$Message
@@ -344,20 +367,8 @@ msgstr ""
 msgid "Make PDFs searchable using OCR"
 msgstr ""
 
-#: FChooseProfile.resx$btnProfiles.Text$Message
-msgid "Manage Profiles"
-msgstr ""
-
 #: FEditScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr ""
-
-#: FDesktop.resx$tsMoveDown.Text$Message
-msgid "Move Down"
-msgstr ""
-
-#: FDesktop.resx$tsMoveUp.Text$Message
-msgid "Move Up"
 msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
@@ -366,6 +377,18 @@ msgstr ""
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
+msgstr ""
+
+#: FProfiles.resx$btnAdd.Text$Message
+msgid "New"
+msgstr ""
+
+#: FDesktop.resx$tsNewProfile.Text$Message
+msgid "New Profile"
+msgstr ""
+
+#: FViewer.resx$tsNext.Text$Message
+msgid "Next"
 msgstr ""
 
 #: MiscResources.resx$NoDeviceSelected$Message
@@ -402,11 +425,14 @@ msgstr ""
 msgid "OCR language"
 msgstr ""
 
-#: FPageSize.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
-#: FManageProfiles.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
+#: FContrast.resx$btnOK.Text$Message
+#: FRotate.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
+#: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr ""
 
@@ -438,17 +464,21 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
+#: FViewer.resx$tsPrev.Text$Message
+msgid "Previous"
+msgstr ""
+
+#: FDesktop.resx$tsdPrint.Text$Message
+msgid "Print"
+msgstr ""
+
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
 msgstr ""
 
-#: FManageProfiles.resx$$this.Text$Message
+#: FProfiles.resx$$this.Text$Message
 #: FDesktop.resx$tsProfiles.Text$Message
 msgid "Profiles"
-msgstr ""
-
-#: FDesktop.resx$btnQuickScan.Text$Message
-msgid "Quick Scan"
 msgstr ""
 
 #: FRecover.resx$btnRecover.Text$Message
@@ -463,6 +493,14 @@ msgstr ""
 msgid "Reorder"
 msgstr ""
 
+#: FDesktop.resx$tsReset.Text$Message
+msgid "Reset"
+msgstr ""
+
+#: MiscResources.resx$ResetImage$Message
+msgid "Reset Image"
+msgstr ""
+
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr ""
@@ -471,18 +509,29 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
+#: FRotate.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
+#: FContrast.resx$btnRevert.Text$Message
+#: FBrightness.resx$btnRevert.Text$Message
+msgid "Revert"
+msgstr ""
+
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr ""
 
+#: FViewer.resx$tsdRotate.Text$Message
+#: FRotate.resx$$this.Text$Message
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
 msgstr ""
 
+#: FViewer.resx$tsRotateLeft.Text$Message
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
 msgstr ""
 
+#: FViewer.resx$tsRotateRight.Text$Message
 #: FDesktop.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
 msgstr ""
@@ -499,12 +548,17 @@ msgstr ""
 msgid "Saving to PDF"
 msgstr ""
 
-#: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 #: FEditScanSettings.resx$label10.Text$Message
 msgid "Scale"
 msgstr ""
 
-#: FChooseProfile.resx$btnScan.Text$Message
+#: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
+msgid "Scale With Window"
+msgstr ""
+
+#: FProfiles.resx$btnScan.Text$Message
+#: FProfiles.resx$ctxScan.Text$Message
+#: MiscResources.resx$Scan$Message
 #: FDesktop.resx$tsScan.Text$Message
 msgid "Scan"
 msgstr ""
@@ -525,12 +579,16 @@ msgstr ""
 msgid "Select one or more languages"
 msgstr ""
 
-#: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
-#: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
+msgstr ""
+
+#: FProfiles.resx$ctxSetDefault.Text$Message
+msgid "Set Default"
 msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
@@ -569,6 +627,10 @@ msgstr ""
 msgid "US Letter (8.5x11 in)"
 msgstr ""
 
+#: MiscResources.resx$UnsavedChanges$Message
+msgid "Unsaved Changes"
+msgstr ""
+
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
 msgstr ""
@@ -589,6 +651,7 @@ msgstr ""
 msgid "Version {0}"
 msgstr ""
 
+#: FDesktop.resx$tsView.Text$Message
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
 msgstr ""
@@ -609,17 +672,24 @@ msgstr ""
 msgid "You don't have permission to save files at this location"
 msgstr ""
 
+#: MiscResources.resx$ExitWithUnsavedChanges$Message
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgstr ""
+
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
 msgstr ""
 
+#: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
+msgid "Zoom Actual"
+msgstr ""
+
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
-msgid "Zoom in"
+msgid "Zoom In"
 msgstr ""
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
-msgid "Zoom out"
+msgid "Zoom Out"
 msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
@@ -640,6 +710,10 @@ msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
+msgstr ""
+
+#: FViewer.resx$lblPageTotal.Text$Message
+msgid "of {0}"
 msgstr ""
 
 #: MiscResources.resx$SizeProgress$Message

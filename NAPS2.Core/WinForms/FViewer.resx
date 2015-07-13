@@ -148,7 +148,7 @@
     <value>tiffViewer1</value>
   </data>
   <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=3.3.5.34026, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=3.3.5.26990, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -206,9 +206,6 @@
   </data>
   <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="toolStripContainer1.Text" xml:space="preserve">
-    <value>toolStripContainer1</value>
   </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -472,6 +469,6 @@
     <value>FViewer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.34026, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.26990, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
