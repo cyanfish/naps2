@@ -31,7 +31,7 @@ namespace NAPS2
         private static readonly string ExecutablePath = Application.StartupPath;
 
 #if STANDALONE
-        private static readonly string AppDataPath = ExecutablePath;
+        private static readonly string AppDataPath = Path.Combine(ExecutablePath, @"..\Data");
 #else
         private static readonly string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif
