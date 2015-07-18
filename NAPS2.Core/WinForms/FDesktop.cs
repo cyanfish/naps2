@@ -403,12 +403,13 @@ namespace NAPS2.WinForms
             }
 
             // Populate the dropdown
+            var defaultProfile = profileManager.DefaultProfile;
             foreach (var profile in profileManager.Profiles)
             {
                 var item = new ToolStripMenuItem
                 {
                     Text = profile.DisplayName.Replace("&", "&&"),
-                    Image = profile.IsDefault ? Icons.accept_small : null,
+                    Image = profile == defaultProfile ? Icons.accept_small : null,
                     ImageScaling = ToolStripItemImageScaling.None
                 };
                 item.Click += (sender, args) =>
