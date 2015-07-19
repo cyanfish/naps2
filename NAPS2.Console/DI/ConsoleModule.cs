@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Scan.Wia;
 using Ninject.Modules;
 
 namespace NAPS2.Console.DI
@@ -29,6 +30,7 @@ namespace NAPS2.Console.DI
     {
         public override void Load()
         {
+            Bind<IWiaTransfer>().To<ConsoleWiaTransfer>();
             Bind<IErrorOutput>().To<ConsoleErrorOutput>();
         }
     }

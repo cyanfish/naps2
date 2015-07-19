@@ -32,10 +32,12 @@ namespace NAPS2.Scan.Wia
         public const string DRIVER_NAME = "wia";
 
         private readonly IScannedImageFactory scannedImageFactory;
+        private readonly IWiaTransfer wiaTransfer;
 
-        public WiaScanDriver(IScannedImageFactory scannedImageFactory)
+        public WiaScanDriver(IScannedImageFactory scannedImageFactory, IWiaTransfer wiaTransfer)
         {
             this.scannedImageFactory = scannedImageFactory;
+            this.wiaTransfer = wiaTransfer;
         }
 
         public override string DriverName
@@ -51,12 +53,13 @@ namespace NAPS2.Scan.Wia
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
             var api = new WiaApi(ScanSettings, ScanDevice, scannedImageFactory);
+            int pageNumber = 1;
             while (true)
             {
                 IScannedImage image;
                 try
                 {
-                    image = api.GetImage();
+                    image = api.GetImage(wiaTransfer, pageNumber++);
                 }
                 catch (ScanDriverException)
                 {

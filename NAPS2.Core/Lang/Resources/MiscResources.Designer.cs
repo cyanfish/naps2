@@ -502,6 +502,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scanning page {0}.
+        /// </summary>
+        internal static string ScanPageProgress {
+            get {
+                return ResourceManager.GetString("ScanPageProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selected ({0}).
         /// </summary>
         internal static string SelectedCount {

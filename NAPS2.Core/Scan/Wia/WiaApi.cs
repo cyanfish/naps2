@@ -363,18 +363,16 @@ namespace NAPS2.Scan.Wia
             }
         }*/
 
-        public IScannedImage GetImage()
+        public IScannedImage GetImage(IWiaTransfer wiaTransfer, int pageNumber)
         {
             try
             {
-                var wiaCommonDialog = new CommonDialogClass();
-
                 Items items = device.Items;
                 if (settings.UseNativeUI)
                 {
                     try
                     {
-                        items = wiaCommonDialog.ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent,
+                        items = new CommonDialogClass().ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent,
                             WiaImageBias.MaximizeQuality, true, true, true);
                     }
                     catch (COMException e)
@@ -388,8 +386,7 @@ namespace NAPS2.Scan.Wia
                     SetupDevice();
                     SetupItem(items[1]);
                 }
-                var file =
-                    (ImageFile)wiaCommonDialog.ShowTransfer(items[1], Formats.BMP, false);
+                var file = wiaTransfer.Transfer(pageNumber, items[1], Formats.BMP);
                 if (file == null)
                 {
                     // User cancelled
