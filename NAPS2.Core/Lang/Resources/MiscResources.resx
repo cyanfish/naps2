@@ -288,4 +288,10 @@
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Scanning page {0}</value>
   </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>No pages are in the feeder.</value>
+  </data>
 </root>

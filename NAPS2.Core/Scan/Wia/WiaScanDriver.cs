@@ -53,9 +53,21 @@ namespace NAPS2.Scan.Wia
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
             var api = new WiaApi(ScanSettings, ScanDevice, scannedImageFactory);
+            if (ScanSettings.PaperSource != ScanSource.Glass && !api.SupportsFeeder)
+            {
+                throw new NoFeederSupportException();
+            }
             int pageNumber = 1;
             while (true)
             {
+                if (ScanSettings.PaperSource != ScanSource.Glass && api.SupportsFeeder && !api.FeederReady)
+                {
+                    if (pageNumber == 1)
+                    {
+                        throw new NoPagesException();
+                    }
+                    break;
+                }
                 IScannedImage image;
                 try
                 {

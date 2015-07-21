@@ -52,9 +52,9 @@ namespace NAPS2.WinForms
                 {
                     ImageFile = (ImageFile)Item.Transfer(Format);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Exception = e;
+                    Exception = ex;
                 }
             }).ContinueWith(task =>
             {
