@@ -60,7 +60,7 @@ namespace NAPS2.Scan.Wia
             int pageNumber = 1;
             while (true)
             {
-                if (ScanSettings.PaperSource != ScanSource.Glass && api.SupportsFeeder && !api.FeederReady)
+                if (ScanSettings.PaperSource != ScanSource.Glass && !api.FeederReady)
                 {
                     if (pageNumber == 1)
                     {
@@ -86,7 +86,7 @@ namespace NAPS2.Scan.Wia
                     break;
                 }
                 yield return image;
-                if (ScanSettings.PaperSource == ScanSource.Glass || !api.SupportsFeeder)
+                if (ScanSettings.PaperSource == ScanSource.Glass)
                 {
                     break;
                 }

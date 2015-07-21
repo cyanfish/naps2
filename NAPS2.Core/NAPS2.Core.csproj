@@ -108,6 +108,7 @@
     <Compile Include="Ocr\OcrDependencyManager.cs" />
     <Compile Include="Ocr\OcrResult.cs" />
     <Compile Include="Ocr\OcrResultElement.cs" />
+    <Compile Include="Scan\Exceptions\NoFeederSupportException.cs" />
     <Compile Include="Scan\Exceptions\NoPagesException.cs" />
     <Compile Include="Scan\Images\Transforms\BrightnessTransform.cs" />
     <Compile Include="Scan\Images\Transforms\ContrastTransform.cs" />
