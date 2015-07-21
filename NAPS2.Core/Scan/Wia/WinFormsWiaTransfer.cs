@@ -23,7 +23,7 @@ namespace NAPS2.Scan.Wia
                 // The only downside of the common dialog is that it steals focus.
                 // If this is the first page, then the user has just pressed the scan button, so that's not
                 // an issue and we can use it and get the benefits of progress display and immediate cancellation.
-                return (ImageFile)new CommonDialogClass().ShowTransfer(item, format, false);
+                //return (ImageFile)new CommonDialogClass().ShowTransfer(item, format, false);
             }
             // For subsequent pages, we don't want to take focus in case the user has switched applications,
             // so we use the custom form.
@@ -32,6 +32,10 @@ namespace NAPS2.Scan.Wia
             form.Item = item;
             form.Format = format;
             form.ShowDialog();
+            if (form.Exception != null)
+            {
+                throw form.Exception;
+            }
             if (form.DialogResult == DialogResult.Cancel)
             {
                 return null;

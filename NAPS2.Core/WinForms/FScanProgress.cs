@@ -25,6 +25,8 @@ namespace NAPS2.WinForms
 
         public ImageFile ImageFile { get; private set; }
 
+        public Exception Exception { get; private set; }
+
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             new LayoutManager(this)
@@ -46,9 +48,17 @@ namespace NAPS2.WinForms
         {
             Task.Factory.StartNew(() =>
             {
-                ImageFile = (ImageFile)Item.Transfer(Format);
+                try
+                {
+                    ImageFile = (ImageFile)Item.Transfer(Format);
+                }
+                catch (Exception e)
+                {
+                    Exception = e;
+                }
             }).ContinueWith(task =>
             {
+                DialogResult = DialogResult.OK;
                 isComplete = true;
                 Close();
             }, TaskScheduler.FromCurrentSynchronizationContext());

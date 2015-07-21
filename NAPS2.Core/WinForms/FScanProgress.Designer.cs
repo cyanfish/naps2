@@ -39,6 +39,7 @@
             resources.ApplyResources(this.progressBar, "progressBar");
             this.progressBar.Name = "progressBar";
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar.Value = 100;
             // 
             // btnCancel
             // 
@@ -61,6 +62,7 @@
             this.Controls.Add(this.progressBar);
             this.Name = "FScanProgress";
             this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FScanProgress_FormClosing);
             this.Shown += new System.EventHandler(this.FScanProgress_Shown);
             this.ResumeLayout(false);

@@ -213,6 +213,6 @@
     <value>FScanProgress</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.23422, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.34025, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
