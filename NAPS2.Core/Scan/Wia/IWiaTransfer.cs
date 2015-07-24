@@ -8,6 +8,6 @@ namespace NAPS2.Scan.Wia
 {
     public interface IWiaTransfer
     {
-        ImageFile Transfer(int pageNumber, Item item, string format);
+        ImageFile Transfer(int pageNumber, Device device, Item item, string format);
     }
 }

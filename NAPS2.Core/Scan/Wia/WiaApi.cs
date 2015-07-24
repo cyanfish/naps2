@@ -401,7 +401,7 @@ namespace NAPS2.Scan.Wia
                     SetupDevice();
                     SetupItem(items[1]);
                 }
-                var file = wiaTransfer.Transfer(pageNumber, items[1], Formats.BMP);
+                var file = wiaTransfer.Transfer(pageNumber, device, items[1], Formats.BMP);
                 if (file == null)
                 {
                     // User cancelled

@@ -37,6 +37,7 @@
             // progressBar
             // 
             resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.MarqueeAnimationSpeed = 20;
             this.progressBar.Name = "progressBar";
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar.Value = 100;

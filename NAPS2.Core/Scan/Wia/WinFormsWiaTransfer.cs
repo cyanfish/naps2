@@ -16,7 +16,7 @@ namespace NAPS2.Scan.Wia
             this.formFactory = formFactory;
         }
 
-        public ImageFile Transfer(int pageNumber, Item item, string format)
+        public ImageFile Transfer(int pageNumber, Device device, Item item, string format)
         {
             if (pageNumber == 1)
             {
@@ -29,7 +29,8 @@ namespace NAPS2.Scan.Wia
             // so we use the custom form.
             var form = formFactory.Create<FScanProgress>();
             form.PageNumber = pageNumber;
-            form.Item = item;
+            form.DeviceID = device.DeviceID;
+            form.ItemID = item.ItemID;
             form.Format = format;
             form.ShowDialog();
             if (form.Exception != null)

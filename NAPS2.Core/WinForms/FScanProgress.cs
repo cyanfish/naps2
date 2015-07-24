@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
@@ -19,7 +20,9 @@ namespace NAPS2.WinForms
 
         public int PageNumber { get; set; }
 
-        public Item Item { get; set; }
+        public string DeviceID { get; set; }
+
+        public string ItemID { get; set; }
 
         public string Format { get; set; }
 
@@ -46,22 +49,28 @@ namespace NAPS2.WinForms
 
         private void FScanProgress_Shown(object sender, EventArgs e)
         {
-            Task.Factory.StartNew(() =>
+            var eventLoop = new InternalEventLoop(() =>
             {
                 try
                 {
-                    ImageFile = (ImageFile)Item.Transfer(Format);
+                    var deviceManager = new DeviceManagerClass();
+                    var deviceInfo = deviceManager.DeviceInfos.Cast<DeviceInfo>().First(x => x.DeviceID == DeviceID);
+                    var device = deviceInfo.Connect();
+                    var item = device.GetItem(ItemID);
+                    ImageFile = (ImageFile)item.Transfer(Format);
                 }
                 catch (Exception ex)
                 {
                     Exception = ex;
                 }
-            }).ContinueWith(task =>
-            {
-                DialogResult = DialogResult.OK;
-                isComplete = true;
-                Close();
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+                Invoke(new MethodInvoker(() =>
+                {
+                    DialogResult = DialogResult.OK;
+                    isComplete = true;
+                    Close();
+                }));
+            });
+            eventLoop.Start();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -75,6 +84,58 @@ namespace NAPS2.WinForms
             {
                 // Prevent simultaneous transfers by refusing to close until the transfer is complete
                 e.Cancel = true;
+            }
+        }
+
+        // Because WIA.Item.Transfer blocks the UI thread, we need a second event loop to avoid that.
+        // Bit of a pain but it works.
+        private class InternalEventLoop
+        {
+            private readonly Thread thread;
+            private readonly Action action;
+
+            public InternalEventLoop(Action action)
+            {
+                this.action = action;
+                thread = new Thread(RunEventLoop);
+                thread.SetApartmentState(ApartmentState.STA);
+            }
+
+            public void Start()
+            {
+                thread.Start();
+            }
+
+            private void RunEventLoop()
+            {
+                var form = new Form();
+                form.Load += DoAction;
+                Application.Run(form);
+            }
+
+            private void DoAction(object sender, EventArgs e)
+            {
+                try
+                {
+                    action();
+                }
+                finally
+                {
+                    Application.ExitThread();
+                }
+            }
+
+            private class InvisibleForm : Form
+            {
+                protected override void SetVisibleCore(bool value)
+                {
+                    if (!IsHandleCreated)
+                    {
+                        CreateHandle();
+                        value = false;
+                    }
+                    base.SetVisibleCore(value);
+                }
             }
         }
     }
