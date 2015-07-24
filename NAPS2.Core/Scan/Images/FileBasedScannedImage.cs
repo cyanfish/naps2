@@ -127,6 +127,16 @@ namespace NAPS2.Scan.Images
             return Transform.PerformAll(bitmap, transformList);
         }
 
+        public Stream GetImageStream()
+        {
+            using (var transformed = GetImage())
+            {
+                var stream = new MemoryStream();
+                transformed.Save(stream, baseImageFileFormat);
+                return stream;
+            }
+        }
+
         public void Dispose()
         {
             Thumbnail.Dispose();

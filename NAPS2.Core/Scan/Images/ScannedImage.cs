@@ -35,6 +35,7 @@ namespace NAPS2.Scan.Images
         // Only one of the following (baseImage/baseImageEncoded) should have a value for any particular ScannedImage
         private readonly Bitmap baseImage;
         private readonly MemoryStream baseImageEncoded;
+        private readonly ImageFormat baseImageFileFormat;
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private readonly List<Transform> transformList = new List<Transform>();
@@ -43,8 +44,7 @@ namespace NAPS2.Scan.Images
         {
             this.bitDepth = bitDepth;
             Thumbnail = ThumbnailHelper.GetThumbnail(img);
-            ImageFormat imageFormat;
-            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out imageFormat);
+            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
         }
 
         public Bitmap Thumbnail { get; private set; }
@@ -53,6 +53,16 @@ namespace NAPS2.Scan.Images
         {
             var bitmap = bitDepth == ScanBitDepth.BlackWhite ? (Bitmap)baseImage.Clone() : new Bitmap(baseImageEncoded);
             return Transform.PerformAll(bitmap, transformList);
+        }
+
+        public Stream GetImageStream()
+        {
+            using (var transformed = GetImage())
+            {
+                var stream = new MemoryStream();
+                transformed.Save(stream, baseImageFileFormat);
+                return stream;
+            }
         }
 
         public void Dispose()

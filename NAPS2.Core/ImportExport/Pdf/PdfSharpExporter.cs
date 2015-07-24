@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using NAPS2.Config;
 using NAPS2.Ocr;
@@ -54,7 +55,8 @@ namespace NAPS2.ImportExport.Pdf
             int i = 1;
             foreach (IScannedImage scannedImage in images)
             {
-                using (Image img = scannedImage.GetImage())
+                using (Stream stream = scannedImage.GetImageStream())
+                using (var img = new Bitmap(stream))
                 {
                     if (!progressCallback(i))
                     {
