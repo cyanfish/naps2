@@ -401,15 +401,14 @@ namespace NAPS2.Scan.Wia
                     SetupDevice();
                     SetupItem(items[1]);
                 }
-                var file = wiaTransfer.Transfer(pageNumber, device, items[1], Formats.BMP);
-                if (file == null)
-                {
-                    // User cancelled
-                    return null;
-                }
 
-                using (var stream = new MemoryStream((byte[])file.FileData.get_BinaryData()))
+                using (var stream = wiaTransfer.Transfer(pageNumber, device, items[1], Formats.BMP))
                 {
+                    if (stream == null)
+                    {
+                        // User cancelled
+                        return null;
+                    }
                     using (Image output = Image.FromStream(stream))
                     {
                         double scaleFactor = 1;

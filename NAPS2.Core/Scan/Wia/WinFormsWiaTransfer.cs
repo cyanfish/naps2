@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.WinForms;
@@ -16,7 +17,7 @@ namespace NAPS2.Scan.Wia
             this.formFactory = formFactory;
         }
 
-        public ImageFile Transfer(int pageNumber, Device device, Item item, string format)
+        public Stream Transfer(int pageNumber, Device device, Item item, string format)
         {
             if (pageNumber == 1)
             {
@@ -41,7 +42,7 @@ namespace NAPS2.Scan.Wia
             {
                 return null;
             }
-            return form.ImageFile;
+            return form.ImageStream;
         }
     }
 }

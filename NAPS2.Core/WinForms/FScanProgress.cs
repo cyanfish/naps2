@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace NAPS2.WinForms
 
         public string Format { get; set; }
 
-        public ImageFile ImageFile { get; private set; }
+        public Stream ImageStream { get; private set; }
 
         public Exception Exception { get; private set; }
 
@@ -57,7 +58,11 @@ namespace NAPS2.WinForms
                     var deviceInfo = deviceManager.DeviceInfos.Cast<DeviceInfo>().First(x => x.DeviceID == DeviceID);
                     var device = deviceInfo.Connect();
                     var item = device.GetItem(ItemID);
-                    ImageFile = (ImageFile)item.Transfer(Format);
+                    var imageFile = (ImageFile)item.Transfer(Format);
+                    if (imageFile != null)
+                    {
+                        ImageStream = new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -22,6 +22,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -226,6 +227,11 @@ namespace NAPS2.Tests.Unit
         public bool DisposeCalled { get; private set; }
 
         public Bitmap GetImage()
+        {
+            return null;
+        }
+
+        public Stream GetImageStream()
         {
             return null;
         }
