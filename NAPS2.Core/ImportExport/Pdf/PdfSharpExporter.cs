@@ -30,6 +30,7 @@ using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf.Security;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -52,6 +53,28 @@ namespace NAPS2.ImportExport.Pdf
             document.Info.Keywords = info.Keywords;
             document.Info.Subject = info.Subject;
             document.Info.Title = info.Title;
+
+            if (info.EncryptPdf)
+            {
+                document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
+                if (!string.IsNullOrEmpty(info.OwnerPassword))
+                {
+                    document.SecuritySettings.OwnerPassword = info.OwnerPassword;
+                }
+                if (!string.IsNullOrEmpty(info.UserPassword))
+                {
+                    document.SecuritySettings.UserPassword = info.UserPassword;
+                }
+                document.SecuritySettings.PermitAccessibilityExtractContent = info.PermitAccessibilityExtractContent;
+                document.SecuritySettings.PermitAnnotations = info.PermitAnnotations;
+                document.SecuritySettings.PermitAssembleDocument = info.PermitAssembleDocument;
+                document.SecuritySettings.PermitExtractContent = info.PermitExtractContent;
+                document.SecuritySettings.PermitFormsFill = info.PermitFormsFill;
+                document.SecuritySettings.PermitFullQualityPrint = info.PermitFullQualityPrint;
+                document.SecuritySettings.PermitModifyDocument = info.PermitModifyDocument;
+                document.SecuritySettings.PermitPrint = info.PermitPrint;
+            }
+
             int i = 1;
             foreach (IScannedImage scannedImage in images)
             {

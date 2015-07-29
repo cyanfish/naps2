@@ -1007,5 +1007,10 @@ namespace NAPS2.WinForms
                 }
             }
         }
+
+        private void tsPDFSettings_Click(object sender, EventArgs e)
+        {
+            FormFactory.Create<FPdfSettings>().ShowDialog();
+        }
     }
 }
