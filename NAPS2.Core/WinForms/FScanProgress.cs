@@ -49,14 +49,17 @@ namespace NAPS2.WinForms
 
         private void FScanProgress_Shown(object sender, EventArgs e)
         {
-            EventLoop.Do(() =>
+            EventLoop.DoAsync(wia =>
             {
                 try
                 {
-                    var imageFile = (ImageFile)EventLoop.WiaItem.Transfer(Format);
-                    if (imageFile != null)
+                    if (wia.Item != null)
                     {
-                        ImageStream = new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
+                        var imageFile = (ImageFile)wia.Item.Transfer(Format);
+                        if (imageFile != null)
+                        {
+                            ImageStream = new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
+                        }
                     }
                 }
                 catch (Exception ex)

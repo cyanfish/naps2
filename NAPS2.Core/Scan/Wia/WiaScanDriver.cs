@@ -20,7 +20,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -47,19 +49,14 @@ namespace NAPS2.Scan.Wia
 
         protected override ScanDevice PromptForDeviceInternal()
         {
-            return WiaApi.SelectDeviceUI();
+            return WiaApi.PromptForDevice();
         }
 
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
             using (var eventLoop = new WiaBackgroundEventLoop(ScanSettings, ScanDevice, scannedImageFactory))
             {
-                bool supportsFeeder = false;
-                eventLoop.Do(() =>
-                {
-                    supportsFeeder = eventLoop.Api.SupportsFeeder;
-                });
-                eventLoop.Sync();
+                bool supportsFeeder = eventLoop.GetSync(wia => WiaApi.DeviceSupportsFeeder(wia.Device));
                 if (ScanSettings.PaperSource != ScanSource.Glass && !supportsFeeder)
                 {
                     throw new NoFeederSupportException();
@@ -67,14 +64,7 @@ namespace NAPS2.Scan.Wia
                 int pageNumber = 1;
                 while (true)
                 {
-                    bool feederReady = false;
-                    // TODO: Change eventloop api so that things that should only be accessed on the event loop thread
-                    // TODO: (api, device, item) are accessible via an interface passed in as a single arg to the Do callback
-                    eventLoop.Do(() =>
-                    {
-                        feederReady = eventLoop.Api.FeederReady;
-                    });
-                    eventLoop.Sync();
+                    bool feederReady = eventLoop.GetSync(wia => WiaApi.DeviceFeederReady(wia.Device));
                     if (ScanSettings.PaperSource != ScanSource.Glass && !feederReady)
                     {
                         if (pageNumber == 1)
@@ -83,11 +73,10 @@ namespace NAPS2.Scan.Wia
                         }
                         break;
                     }
-                    IScannedImage image = null;
+                    IScannedImage image;
                     try
                     {
-                        // TODO: This method should be moved, since normally WiaApi calls should be done on event loop thread
-                        image = eventLoop.Api.GetImage(wiaTransfer, eventLoop, pageNumber++);
+                        image = TransferImage(eventLoop, pageNumber++);
                     }
                     catch (ScanDriverException)
                     {
@@ -106,6 +95,50 @@ namespace NAPS2.Scan.Wia
                     {
                         break;
                     }
+                }
+            }
+        }
+
+        private IScannedImage TransferImage(WiaBackgroundEventLoop eventLoop, int pageNumber)
+        {
+            try
+            {
+                using (var stream = wiaTransfer.Transfer(pageNumber, eventLoop, WiaApi.Formats.BMP))
+                {
+                    if (stream == null)
+                    {
+                        // User cancelled
+                        return null;
+                    }
+                    using (Image output = Image.FromStream(stream))
+                    {
+                        double scaleFactor = 1;
+                        if (!ScanSettings.UseNativeUI)
+                        {
+                            scaleFactor = ScanSettings.AfterScanScale.ToIntScaleFactor();
+                        }
+
+                        using (var result = TransformationHelper.ScaleImage(output, scaleFactor))
+                        {
+                            ScanBitDepth bitDepth = ScanSettings.UseNativeUI ? ScanBitDepth.C24Bit : ScanSettings.BitDepth;
+                            return scannedImageFactory.Create(result, bitDepth, ScanSettings.MaxQuality);
+                        }
+                    }
+                }
+            }
+            catch (COMException e)
+            {
+                if ((uint)e.ErrorCode == WiaApi.Errors.OUT_OF_PAPER)
+                {
+                    return null;
+                }
+                else if ((uint)e.ErrorCode == WiaApi.Errors.OFFLINE)
+                {
+                    throw new DeviceOfflineException();
+                }
+                else
+                {
+                    throw new ScanDriverUnknownException(e);
                 }
             }
         }

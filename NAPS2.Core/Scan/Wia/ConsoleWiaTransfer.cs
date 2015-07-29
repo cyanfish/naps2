@@ -12,12 +12,7 @@ namespace NAPS2.Scan.Wia
         {
             // The console shouldn't spawn new forms, so use the silent transfer method.
             // TODO: Test cancellation (via Ctrl+C or similar)
-            ImageFile imageFile = null;
-            eventLoop.Do(() =>
-            {
-                imageFile = (ImageFile)eventLoop.WiaItem.Transfer(format);
-            });
-            eventLoop.Sync();
+            ImageFile imageFile = eventLoop.GetSync(wia => (ImageFile)wia.Item.Transfer(format));
             if (imageFile == null)
             {
                 return null;

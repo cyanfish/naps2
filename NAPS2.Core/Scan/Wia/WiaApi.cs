@@ -32,11 +32,11 @@ using WIA;
 
 namespace NAPS2.Scan.Wia
 {
-    public class WiaApi
+    internal static class WiaApi
     {
         #region WIA Constants
 
-        private static class DeviceProperties
+        public static class DeviceProperties
         {
             public const int DEVICE_NAME = 7;
             public const int HORIZONTAL_FEED_SIZE = 3076;
@@ -49,7 +49,7 @@ namespace NAPS2.Scan.Wia
             public const int PAGES = 3096;
         }
 
-        private static class ItemProperties
+        public static class ItemProperties
         {
             public const int DATA_TYPE = 4103;
             public const int VERTICAL_RESOLUTION = 6148;
@@ -61,7 +61,7 @@ namespace NAPS2.Scan.Wia
             public const int HORIZONTAL_START = 6149;
         }
 
-        private static class Errors
+        public static class Errors
         {
             public const uint OUT_OF_PAPER = 0x80210003;
             public const uint NO_DEVICE_FOUND = 0x80210015;
@@ -71,80 +71,28 @@ namespace NAPS2.Scan.Wia
             public const uint UI_CANCELED = 0x80210064;
         }
 
-        private static class Source
+        public static class Source
         {
             public const int FEEDER = 1;
             public const int FLATBED = 2;
             public const int DUPLEX = 4;
         }
 
-        private static class Status
+        public static class Status
         {
             public const int FEED_READY = 1;
         }
 
-        private static class Formats
+        public static class Formats
         {
             public const string BMP = "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}";
         }
 
         #endregion
 
-        private readonly Device device;
-        private readonly Item item;
+        #region Device/Item Management
 
-        private readonly ExtendedScanSettings settings;
-        private readonly IScannedImageFactory scannedImageFactory;
-
-        public WiaApi(ExtendedScanSettings settings, ScanDevice scanDevice, IScannedImageFactory scannedImageFactory)
-        {
-            this.settings = settings;
-            this.scannedImageFactory = scannedImageFactory;
-
-            device = GetDevice(scanDevice);
-            item = GetItem();
-        }
-
-        private Device GetDevice(ScanDevice scanDevice)
-        {
-            DeviceManager manager = new DeviceManagerClass();
-            foreach (DeviceInfo info in manager.DeviceInfos)
-            {
-                if (info.DeviceID == scanDevice.ID)
-                {
-                    try
-                    {
-                        return info.Connect();
-                    }
-                    catch (COMException e)
-                    {
-                        if ((uint)e.ErrorCode == Errors.OFFLINE)
-                        {
-                            throw new DeviceOfflineException();
-                        }
-                        throw new ScanDriverUnknownException(e);
-                    }
-                }
-            }
-            throw new DeviceNotFoundException();
-        }
-
-        public string DeviceName
-        {
-            get { return GetDeviceProperty(DeviceProperties.DEVICE_NAME); }
-        }
-
-        public IDevice Device
-        {
-            get { return device; }
-        }
-
-        public Item Item
-        {
-            get { return item; }
-        }
-
-        public static ScanDevice SelectDeviceUI()
+        public static ScanDevice PromptForDevice()
         {
             var wiaCommonDialog = new CommonDialogClass();
             try
@@ -170,6 +118,35 @@ namespace NAPS2.Scan.Wia
             }
         }
 
+        public static Device GetDevice(ScanDevice scanDevice)
+        {
+            DeviceManager manager = new DeviceManagerClass();
+            foreach (DeviceInfo info in manager.DeviceInfos)
+            {
+                if (info.DeviceID == scanDevice.ID)
+                {
+                    try
+                    {
+                        return info.Connect();
+                    }
+                    catch (COMException e)
+                    {
+                        if ((uint)e.ErrorCode == Errors.OFFLINE)
+                        {
+                            throw new DeviceOfflineException();
+                        }
+                        throw new ScanDriverUnknownException(e);
+                    }
+                }
+            }
+            throw new DeviceNotFoundException();
+        }
+
+        public static string GetDeviceName(Device device)
+        {
+            return GetDeviceProperty(device, DeviceProperties.DEVICE_NAME);
+        }
+
         public static string GetDeviceName(string deviceID)
         {
             DeviceManager manager = new DeviceManagerClass();
@@ -178,11 +155,142 @@ namespace NAPS2.Scan.Wia
                 if (info.DeviceID == deviceID)
                 {
                     Device device = info.Connect();
-                    return GetDeviceProperty(device, DeviceProperties.DEVICE_NAME);
+                    return GetDeviceName(device);
                 }
             }
             throw new DeviceNotFoundException();
         }
+
+        public static Item GetItem(Device device, ExtendedScanSettings settings)
+        {
+            Item item;
+            if (settings.UseNativeUI)
+            {
+                try
+                {
+                    var items = new CommonDialogClass().ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent,
+                        WiaImageBias.MaximizeQuality, true, true, true);
+                    item = items[1];
+                }
+                catch (COMException e)
+                {
+                    if ((uint)e.ErrorCode == Errors.UI_CANCELED)
+                        return null;
+                    throw;
+                }
+            }
+            else
+            {
+                item = device.Items[1];
+            }
+            return item;
+        }
+
+        #endregion
+
+        #region Device/Item Configuration
+
+        public static void Configure(Device device, Item item, ExtendedScanSettings settings)
+        {
+            ConfigureDeviceProperties(device, settings);
+            ConfigureItemProperties(device, item, settings);
+        }
+
+        private static void ConfigureItemProperties(Device device, Item item, ExtendedScanSettings settings)
+        {
+            switch (settings.BitDepth)
+            {
+                case ScanBitDepth.Grayscale:
+                    SetItemIntProperty(item, 2, ItemProperties.DATA_TYPE);
+                    break;
+                case ScanBitDepth.C24Bit:
+                    SetItemIntProperty(item, 3, ItemProperties.DATA_TYPE);
+                    break;
+                case ScanBitDepth.BlackWhite:
+                    SetItemIntProperty(item, 0, ItemProperties.DATA_TYPE);
+                    break;
+            }
+
+            int resolution = settings.Resolution.ToIntDpi();
+            SetItemIntProperty(item, resolution, ItemProperties.VERTICAL_RESOLUTION);
+            SetItemIntProperty(item, resolution, ItemProperties.HORIZONTAL_RESOLUTION);
+
+            PageDimensions pageDimensions = settings.PageSize.PageDimensions() ?? settings.CustomPageSize;
+            if (pageDimensions == null)
+            {
+                throw new InvalidOperationException("No page size specified");
+            }
+            int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * resolution / 1000;
+            int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
+
+            int horizontalSize =
+                GetDeviceIntProperty(device, settings.PaperSource == ScanSource.Glass
+                    ? DeviceProperties.HORIZONTAL_BED_SIZE
+                    : DeviceProperties.HORIZONTAL_FEED_SIZE);
+            int verticalSize =
+                GetDeviceIntProperty(device, settings.PaperSource == ScanSource.Glass
+                    ? DeviceProperties.VERTICAL_BED_SIZE
+                    : DeviceProperties.VERTICAL_FEED_SIZE);
+
+            int pagemaxwidth = horizontalSize * resolution / 1000;
+            int pagemaxheight = verticalSize * resolution / 1000;
+
+            int horizontalPos = 0;
+            if (settings.PageAlign == ScanHorizontalAlign.Center)
+                horizontalPos = (pagemaxwidth - pageWidth) / 2;
+            else if (settings.PageAlign == ScanHorizontalAlign.Left)
+                horizontalPos = (pagemaxwidth - pageWidth);
+
+            pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
+            pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
+
+            SetItemIntProperty(item, pageWidth, ItemProperties.HORIZONTAL_EXTENT);
+            SetItemIntProperty(item, pageHeight, ItemProperties.VERTICAL_EXTENT);
+            SetItemIntProperty(item, horizontalPos, ItemProperties.HORIZONTAL_START);
+            SetItemIntProperty(item, settings.Contrast, -1000, 1000, ItemProperties.CONTRAST);
+            SetItemIntProperty(item, settings.Brightness, -1000, 1000, ItemProperties.BRIGHTNESS);
+        }
+
+        private static void ConfigureDeviceProperties(Device device, ExtendedScanSettings settings)
+        {
+            if (settings.PaperSource != ScanSource.Glass && DeviceSupportsFeeder(device))
+            {
+                SetDeviceIntProperty(device, 1, DeviceProperties.PAGES);
+            }
+
+            switch (settings.PaperSource)
+            {
+                case ScanSource.Glass:
+                    SetDeviceIntProperty(device, Source.FLATBED, DeviceProperties.PAPER_SOURCE);
+                    break;
+                case ScanSource.Feeder:
+                    SetDeviceIntProperty(device, Source.FEEDER, DeviceProperties.PAPER_SOURCE);
+                    break;
+                case ScanSource.Duplex:
+                    SetDeviceIntProperty(device, Source.DUPLEX | Source.FEEDER, DeviceProperties.PAPER_SOURCE);
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Derived Properties
+
+        public static bool DeviceSupportsFeeder(Device device)
+        {
+            int capabilities = GetDeviceIntProperty(device, DeviceProperties.DOCUMENT_HANDLING_CAPABILITIES);
+            return (capabilities & Source.FEEDER) != 0;
+        }
+
+        public static bool DeviceFeederReady(Device device)
+        {
+            int status = GetDeviceIntProperty(device, DeviceProperties.DOCUMENT_HANDLING_STATUS);
+            return (status & Status.FEED_READY) != 0;
+        }
+
+        #endregion
+
+        #region WIA Property Getters and Setters
 
         private static string GetDeviceProperty(Device device, int propid)
         {
@@ -196,12 +304,7 @@ namespace NAPS2.Scan.Wia
             return "";
         }
 
-        private string GetDeviceProperty(int propid)
-        {
-            return GetDeviceProperty(device, propid);
-        }
-
-        private int GetDeviceIntProperty(int propid)
+        private static int GetDeviceIntProperty(Device device, int propid)
         {
             foreach (Property property in device.Properties)
             {
@@ -213,7 +316,7 @@ namespace NAPS2.Scan.Wia
             return 0;
         }
 
-        private void SetDeviceIntProperty(int value, int propid)
+        private static void SetDeviceIntProperty(Device device, int value, int propid)
         {
             foreach (Property property in device.Properties)
             {
@@ -232,7 +335,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void SetItemIntProperty(Item item, int value, int propid)
+        private static void SetItemIntProperty(Item item, int value, int propid)
         {
             foreach (Property property in item.Properties)
             {
@@ -251,7 +354,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void SetItemIntProperty(Item item, int value, int expectedMin, int expectedMax, int propid)
+        private static void SetItemIntProperty(Item item, int value, int expectedMin, int expectedMax, int propid)
         {
             foreach (Property property in item.Properties)
             {
@@ -280,191 +383,6 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void SetupItem(Item item)
-        {
-            int resolution = 0;
-            switch (settings.BitDepth)
-            {
-                case ScanBitDepth.Grayscale:
-                    SetItemIntProperty(item, 2, ItemProperties.DATA_TYPE);
-                    break;
-                case ScanBitDepth.C24Bit:
-                    SetItemIntProperty(item, 3, ItemProperties.DATA_TYPE);
-                    break;
-                case ScanBitDepth.BlackWhite:
-                    SetItemIntProperty(item, 0, ItemProperties.DATA_TYPE);
-                    break;
-            }
-
-            resolution = settings.Resolution.ToIntDpi();
-            SetItemIntProperty(item, resolution, ItemProperties.VERTICAL_RESOLUTION);
-            SetItemIntProperty(item, resolution, ItemProperties.HORIZONTAL_RESOLUTION);
-
-            PageDimensions pageDimensions = settings.PageSize.PageDimensions() ?? settings.CustomPageSize;
-            if (pageDimensions == null)
-            {
-                throw new InvalidOperationException("No page size specified");
-            }
-            int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * resolution / 1000;
-            int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
-
-            int horizontalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.HORIZONTAL_BED_SIZE : DeviceProperties.HORIZONTAL_FEED_SIZE);
-            int verticalSize = GetDeviceIntProperty(settings.PaperSource == ScanSource.Glass ? DeviceProperties.VERTICAL_BED_SIZE : DeviceProperties.VERTICAL_FEED_SIZE);
-
-            int pagemaxwidth = horizontalSize * resolution / 1000;
-            int pagemaxheight = verticalSize * resolution / 1000;
-
-            int horizontalPos = 0;
-            if (settings.PageAlign == ScanHorizontalAlign.Center)
-                horizontalPos = (pagemaxwidth - pageWidth) / 2;
-            else if (settings.PageAlign == ScanHorizontalAlign.Left)
-                horizontalPos = (pagemaxwidth - pageWidth);
-
-            pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
-            pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
-
-            SetItemIntProperty(item, pageWidth, ItemProperties.HORIZONTAL_EXTENT);
-            SetItemIntProperty(item, pageHeight, ItemProperties.VERTICAL_EXTENT);
-            SetItemIntProperty(item, horizontalPos, ItemProperties.HORIZONTAL_START);
-            SetItemIntProperty(item, settings.Contrast, -1000, 1000, ItemProperties.CONTRAST);
-            SetItemIntProperty(item, settings.Brightness, -1000, 1000, ItemProperties.BRIGHTNESS);
-        }
-
-        public bool SupportsFeeder
-        {
-            get
-            {
-                int capabilities = GetDeviceIntProperty(DeviceProperties.DOCUMENT_HANDLING_CAPABILITIES);
-                return (capabilities & Source.FEEDER) != 0;
-            }
-        }
-
-        public bool FeederReady
-        {
-            get
-            {
-                int status = GetDeviceIntProperty(DeviceProperties.DOCUMENT_HANDLING_STATUS);
-                return (status & Status.FEED_READY) != 0;
-            }
-        }
-
-        private void SetupDevice()
-        {
-            if (settings.PaperSource != ScanSource.Glass && SupportsFeeder)
-            {
-                SetDeviceIntProperty(1, DeviceProperties.PAGES);
-            }
-
-            switch (settings.PaperSource)
-            {
-                case ScanSource.Glass:
-                    SetDeviceIntProperty(Source.FLATBED, DeviceProperties.PAPER_SOURCE);
-                    break;
-                case ScanSource.Feeder:
-                    SetDeviceIntProperty(Source.FEEDER, DeviceProperties.PAPER_SOURCE);
-                    break;
-                case ScanSource.Duplex:
-                    SetDeviceIntProperty(Source.DUPLEX | Source.FEEDER, DeviceProperties.PAPER_SOURCE);
-                    break;
-            }
-        }
-
-        /*private void EnumerateOptions()
-        {
-            foreach (Property prop in device.Properties)
-            {
-                if (!prop.IsReadOnly)
-                {
-                    System.Diagnostics.Debug.WriteLine(string.Format("DEV-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine(string.Format("(RO)DEV-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
-                }
-            }
-            foreach (Property prop in items[1].Properties)
-            {
-                if (!prop.IsReadOnly)
-                {
-                    System.Diagnostics.Debug.WriteLine(string.Format("IT-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine(string.Format("(RO)IT-{0}:{1}={2}", prop.PropertyID, prop.Name, prop.get_Value()));
-                }
-            }
-        }*/
-
-        public IScannedImage GetImage(IWiaTransfer wiaTransfer, WiaBackgroundEventLoop eventLoop, int pageNumber)
-        {
-            if (item == null)
-            {
-                return null;
-            }
-            try
-            {
-                using (var stream = wiaTransfer.Transfer(pageNumber, eventLoop, Formats.BMP))
-                {
-                    if (stream == null)
-                    {
-                        // User cancelled
-                        return null;
-                    }
-                    using (Image output = Image.FromStream(stream))
-                    {
-                        double scaleFactor = 1;
-                        if (!settings.UseNativeUI)
-                        {
-                            scaleFactor = settings.AfterScanScale.ToIntScaleFactor();
-                        }
-
-                        using (var result = TransformationHelper.ScaleImage(output, scaleFactor))
-                        {
-                            ScanBitDepth bitDepth = settings.UseNativeUI ? ScanBitDepth.C24Bit : settings.BitDepth;
-                            return scannedImageFactory.Create(result, bitDepth, settings.MaxQuality);
-                        }
-                    }
-                }
-            }
-            catch (COMException e)
-            {
-                if ((uint)e.ErrorCode == Errors.OUT_OF_PAPER)
-                {
-                    return null;
-                }
-                else if ((uint)e.ErrorCode == Errors.OFFLINE)
-                {
-                    throw new DeviceOfflineException();
-                }
-                else
-                {
-                    throw new ScanDriverUnknownException(e);
-                }
-            }
-        }
-
-        private Item GetItem()
-        {
-            var items = device.Items;
-            if (settings.UseNativeUI)
-            {
-                try
-                {
-                    items = new CommonDialogClass().ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent,
-                        WiaImageBias.MaximizeQuality, true, true, true);
-                }
-                catch (COMException e)
-                {
-                    if ((uint)e.ErrorCode == Errors.UI_CANCELED)
-                        return null;
-                }
-            }
-            else
-            {
-                SetupDevice();
-                SetupItem(items[1]);
-            }
-            return items[1];
-        }
+        #endregion
     }
 }
