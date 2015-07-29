@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using WIA;
 
 namespace NAPS2.Scan.Wia
 {

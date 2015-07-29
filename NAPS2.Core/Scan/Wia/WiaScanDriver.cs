@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 
@@ -54,7 +53,7 @@ namespace NAPS2.Scan.Wia
 
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
-            using (var eventLoop = new WiaBackgroundEventLoop(ScanSettings, ScanDevice, scannedImageFactory))
+            using (var eventLoop = new WiaBackgroundEventLoop(ScanSettings, ScanDevice))
             {
                 bool supportsFeeder = eventLoop.GetSync(wia => WiaApi.DeviceSupportsFeeder(wia.Device));
                 if (ScanSettings.PaperSource != ScanSource.Glass && !supportsFeeder)

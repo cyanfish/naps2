@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Scan.Images;
 
 namespace NAPS2.Scan.Wia
 {
@@ -16,18 +14,16 @@ namespace NAPS2.Scan.Wia
     {
         private readonly ExtendedScanSettings settings;
         private readonly ScanDevice scanDevice;
-        private readonly IScannedImageFactory scannedImageFactory;
 
         private readonly AutoResetEvent initWaiter = new AutoResetEvent(false);
         private Thread thread;
         private Form form;
         private WiaState wiaState;
 
-        public WiaBackgroundEventLoop(ExtendedScanSettings settings, ScanDevice scanDevice, IScannedImageFactory scannedImageFactory)
+        public WiaBackgroundEventLoop(ExtendedScanSettings settings, ScanDevice scanDevice)
         {
             this.settings = settings;
             this.scanDevice = scanDevice;
-            this.scannedImageFactory = scannedImageFactory;
 
             thread = new Thread(RunEventLoop);
             thread.SetApartmentState(ApartmentState.STA);
@@ -91,13 +87,8 @@ namespace NAPS2.Scan.Wia
                 WindowState = FormWindowState.Minimized,
                 ShowInTaskbar = false
             };
-            form.Load += form_Load;
+            form.Load += (sender, e) => initWaiter.Set();
             Application.Run(form);
-        }
-
-        private void form_Load(object sender, EventArgs e)
-        {
-            initWaiter.Set();
         }
     }
 }
