@@ -34,14 +34,14 @@ namespace NAPS2.Tests.Base
     {
         private const String PDF_PATH = "test/test.pdf";
         private List<IScannedImage> images;
-        private PdfInfo info;
+        private PdfSettings settings;
         protected IPdfExporter pdfExporter;
 
         [SetUp]
         public virtual void SetUp()
         {
             pdfExporter = GetPdfExporter();
-            info = new PdfInfo
+            settings = new PdfSettings
             {
                 Author = "Test Author",
                 Creator = "Test Creator",
@@ -74,7 +74,7 @@ namespace NAPS2.Tests.Base
         public void TearDown()
         {
             pdfExporter = null;
-            info = null;
+            settings = null;
             foreach (IScannedImage img in images)
             {
                 img.Dispose();
@@ -98,14 +98,14 @@ namespace NAPS2.Tests.Base
         public void Export_Normal_CreatesFile()
         {
             Assert.IsFalse(File.Exists(PDF_PATH), "Error setting up test (test file not deleted)");
-            pdfExporter.Export(PDF_PATH, images, info, null, num => true);
+            pdfExporter.Export(PDF_PATH, images, settings, null, num => true);
             Assert.IsTrue(File.Exists(PDF_PATH));
         }
 
         [Test]
         public void Export_Normal_ReturnsTrue()
         {
-            bool result = pdfExporter.Export(PDF_PATH, images, info, null, num => true);
+            bool result = pdfExporter.Export(PDF_PATH, images, settings, null, num => true);
             Assert.IsTrue(result);
         }
 
@@ -113,7 +113,7 @@ namespace NAPS2.Tests.Base
         public void Export_Progress_IsLinear()
         {
             int i = 0;
-            pdfExporter.Export(PDF_PATH, images, info, null, num =>
+            pdfExporter.Export(PDF_PATH, images, settings, null, num =>
             {
                 Assert.AreEqual(++i, num);
                 return true;
@@ -125,7 +125,7 @@ namespace NAPS2.Tests.Base
         public void Export_Cancel_DoesntContinue()
         {
             bool first = true;
-            pdfExporter.Export(PDF_PATH, images, info, null, num =>
+            pdfExporter.Export(PDF_PATH, images, settings, null, num =>
             {
                 Assert.IsTrue(first);
                 first = false;
@@ -136,7 +136,7 @@ namespace NAPS2.Tests.Base
         [Test]
         public void Export_Cancel_ReturnsFalse()
         {
-            bool result = pdfExporter.Export(PDF_PATH, images, info, null, num => false);
+            bool result = pdfExporter.Export(PDF_PATH, images, settings, null, num => false);
             Assert.IsFalse(result);
         }
     }

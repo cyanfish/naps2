@@ -88,6 +88,7 @@
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="ImportExport\Pdf\PdfSettingsContainer.cs" />
     <Compile Include="ImportExport\Pdf\PrintDocumentPrinter.cs" />
     <Compile Include="ImportExport\Pdf\IImagePrinter.cs" />
     <Compile Include="Lang\Resources\MiscResources.Designer.cs">
@@ -152,7 +153,7 @@
     <Compile Include="ImportExport\IScannedImageImporter.cs" />
     <Compile Include="ImportExport\Pdf\IPdfExporter.cs" />
     <Compile Include="ImportExport\Pdf\IPdfImporter.cs" />
-    <Compile Include="ImportExport\Pdf\PdfInfo.cs" />
+    <Compile Include="ImportExport\Pdf\PdfSettings.cs" />
     <Compile Include="ImportExport\Pdf\PdfSharpExporter.cs" />
     <Compile Include="ImportExport\Pdf\PdfSharpImporter.cs" />
     <Compile Include="ImportExport\ScannedImageImporter.cs" />

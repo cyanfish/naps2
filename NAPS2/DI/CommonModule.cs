@@ -50,6 +50,7 @@ namespace NAPS2.DI
             Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
             Bind<AppConfigManager>().ToSelf().InSingletonScope();
             Bind<IUserConfigManager>().To<UserConfigManager>().InSingletonScope();
+            Bind<PdfSettingsContainer>().ToSelf().InSingletonScope();
 
             // Update
             Bind<IAutoUpdater>().To<AutoUpdater>();

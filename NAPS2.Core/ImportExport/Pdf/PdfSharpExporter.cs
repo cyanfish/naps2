@@ -45,34 +45,34 @@ namespace NAPS2.ImportExport.Pdf
             this.userConfigManager = userConfigManager;
         }
 
-        public bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, string ocrLanguageCode, Func<int, bool> progressCallback)
+        public bool Export(string path, IEnumerable<IScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
-            document.Info.Author = info.Author;
-            document.Info.Creator = info.Creator;
-            document.Info.Keywords = info.Keywords;
-            document.Info.Subject = info.Subject;
-            document.Info.Title = info.Title;
+            document.Info.Author = settings.Author;
+            document.Info.Creator = settings.Creator;
+            document.Info.Keywords = settings.Keywords;
+            document.Info.Subject = settings.Subject;
+            document.Info.Title = settings.Title;
 
-            if (info.EncryptPdf)
+            if (settings.EncryptPdf)
             {
                 document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
-                if (!string.IsNullOrEmpty(info.OwnerPassword))
+                if (!string.IsNullOrEmpty(settings.OwnerPassword))
                 {
-                    document.SecuritySettings.OwnerPassword = info.OwnerPassword;
+                    document.SecuritySettings.OwnerPassword = settings.OwnerPassword;
                 }
-                if (!string.IsNullOrEmpty(info.UserPassword))
+                if (!string.IsNullOrEmpty(settings.UserPassword))
                 {
-                    document.SecuritySettings.UserPassword = info.UserPassword;
+                    document.SecuritySettings.UserPassword = settings.UserPassword;
                 }
-                document.SecuritySettings.PermitAccessibilityExtractContent = info.PermitAccessibilityExtractContent;
-                document.SecuritySettings.PermitAnnotations = info.PermitAnnotations;
-                document.SecuritySettings.PermitAssembleDocument = info.PermitAssembleDocument;
-                document.SecuritySettings.PermitExtractContent = info.PermitExtractContent;
-                document.SecuritySettings.PermitFormsFill = info.PermitFormsFill;
-                document.SecuritySettings.PermitFullQualityPrint = info.PermitFullQualityPrint;
-                document.SecuritySettings.PermitModifyDocument = info.PermitModifyDocument;
-                document.SecuritySettings.PermitPrint = info.PermitPrint;
+                document.SecuritySettings.PermitAccessibilityExtractContent = settings.PermitAccessibilityExtractContent;
+                document.SecuritySettings.PermitAnnotations = settings.PermitAnnotations;
+                document.SecuritySettings.PermitAssembleDocument = settings.PermitAssembleDocument;
+                document.SecuritySettings.PermitExtractContent = settings.PermitExtractContent;
+                document.SecuritySettings.PermitFormsFill = settings.PermitFormsFill;
+                document.SecuritySettings.PermitFullQualityPrint = settings.PermitFullQualityPrint;
+                document.SecuritySettings.PermitModifyDocument = settings.PermitModifyDocument;
+                document.SecuritySettings.PermitPrint = settings.PermitPrint;
             }
 
             int i = 1;

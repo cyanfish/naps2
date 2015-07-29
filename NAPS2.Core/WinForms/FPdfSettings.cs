@@ -21,13 +21,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Config;
+using NAPS2.ImportExport.Pdf;
 
 namespace NAPS2.WinForms
 {
     public partial class FPdfSettings : FormBase
     {
-        public FPdfSettings()
+        private readonly PdfSettingsContainer pdfSettingsContainer;
+        private readonly IUserConfigManager userConfigManager;
+
+        public FPdfSettings(PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager)
         {
+            this.pdfSettingsContainer = pdfSettingsContainer;
+            this.userConfigManager = userConfigManager;
             InitializeComponent();
         }
 
@@ -42,7 +49,28 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Activate();
 
+            UpdateValues(pdfSettingsContainer.PdfSettings);
             UpdateEnabled();
+            cbRememberSettings.Checked = userConfigManager.Config.PdfSettings != null;
+        }
+
+        private void UpdateValues(PdfSettings pdfSettings)
+        {
+            txtTitle.Text = pdfSettings.Title;
+            txtAuthor.Text = pdfSettings.Author;
+            txtSubject.Text = pdfSettings.Subject;
+            txtKeywords.Text = pdfSettings.Keywords;
+            cbEncryptPdf.Checked = pdfSettings.EncryptPdf;
+            txtOwnerPassword.Text = pdfSettings.OwnerPassword;
+            txtUserPassword.Text = pdfSettings.UserPassword;
+            cbAllowContentExtractionAccessibility.Checked = pdfSettings.PermitAccessibilityExtractContent;
+            cbAllowAnnotations.Checked = pdfSettings.PermitAnnotations;
+            cbAllowDocumentAssembly.Checked = pdfSettings.PermitAssembleDocument;
+            cbAllowContentExtraction.Checked = pdfSettings.PermitExtractContent;
+            cbAllowFormFilling.Checked = pdfSettings.PermitFormsFill;
+            cbAllowFullQualityPrinting.Checked = pdfSettings.PermitFullQualityPrint;
+            cbAllowDocumentModification.Checked = pdfSettings.PermitModifyDocument;
+            cbAllowPrinting.Checked = pdfSettings.PermitPrint;
         }
 
         private void UpdateEnabled()
@@ -58,17 +86,42 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            var pdfSettings = new PdfSettings
+            {
+                Title = txtTitle.Text,
+                Author = txtAuthor.Text,
+                Subject = txtSubject.Text,
+                Keywords = txtKeywords.Text,
+                EncryptPdf = cbEncryptPdf.Checked,
+                OwnerPassword = txtOwnerPassword.Text,
+                UserPassword = txtUserPassword.Text,
+                PermitAccessibilityExtractContent = cbAllowContentExtractionAccessibility.Checked,
+                PermitAnnotations = cbAllowAnnotations.Checked,
+                PermitAssembleDocument = cbAllowDocumentAssembly.Checked,
+                PermitExtractContent = cbAllowContentExtraction.Checked,
+                PermitFormsFill = cbAllowFormFilling.Checked,
+                PermitFullQualityPrint = cbAllowFullQualityPrinting.Checked,
+                PermitModifyDocument = cbAllowDocumentModification.Checked,
+                PermitPrint = cbAllowPrinting.Checked
+            };
 
+            pdfSettingsContainer.PdfSettings = pdfSettings;
+            userConfigManager.Config.PdfSettings = cbRememberSettings.Checked ? pdfSettings : null;
+            userConfigManager.Save();
+
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
         {
-
+            UpdateValues(new PdfSettings());
+            UpdateEnabled();
+            cbRememberSettings.Checked = false;
         }
 
         private void cbEncryptPdf_CheckedChanged(object sender, EventArgs e)

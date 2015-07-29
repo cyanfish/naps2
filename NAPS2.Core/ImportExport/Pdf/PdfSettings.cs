@@ -25,9 +25,9 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class PdfInfo
+    public class PdfSettings
     {
-        public PdfInfo()
+        public PdfSettings()
         {
             Title = MiscResources.ScannedImage;
             Subject = MiscResources.ScannedImage;

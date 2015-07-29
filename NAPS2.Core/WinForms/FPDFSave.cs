@@ -35,13 +35,15 @@ namespace NAPS2.WinForms
         private readonly IPdfExporter pdfExporter;
         private readonly IErrorOutput errorOutput;
         private readonly IUserConfigManager userConfigManager;
+        private readonly PdfSettingsContainer pdfSettingsContainer;
 
-        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput, IUserConfigManager userConfigManager)
+        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
         {
             InitializeComponent();
             this.pdfExporter = pdfExporter;
             this.errorOutput = errorOutput;
             this.userConfigManager = userConfigManager;
+            this.pdfSettingsContainer = pdfSettingsContainer;
             RestoreFormState = false;
             Shown += FPDFSave_Shown;
         }
@@ -52,17 +54,13 @@ namespace NAPS2.WinForms
 
         private void ExportPdfProcess()
         {
-            var info = new PdfInfo
-            {
-                Title = MiscResources.ScannedImage,
-                Subject = MiscResources.ScannedImage,
-                Author = MiscResources.NAPS2,
-                Creator = MiscResources.NAPS2
-            };
+            var pdfSettings = pdfSettingsContainer.PdfSettings;
+            pdfSettings.Creator = MiscResources.NAPS2;
             var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
+
             try
             {
-                pdfExporter.Export(Filename, Images, info, ocrLanguageCode, num =>
+                pdfExporter.Export(Filename, Images, pdfSettings, ocrLanguageCode, num =>
                 {
                     Invoke(new ThreadStart(() => SetStatus(num, Images.Count)));
                     return true;

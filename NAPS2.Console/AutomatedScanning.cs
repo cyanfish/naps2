@@ -50,12 +50,13 @@ namespace NAPS2.Console
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly ILogger logger;
         private readonly IUserConfigManager userConfigManager;
+        private readonly PdfSettingsContainer pdfSettingsContainer;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -67,6 +68,7 @@ namespace NAPS2.Console
             this.scannedImageImporter = scannedImageImporter;
             this.logger = logger;
             this.userConfigManager = userConfigManager;
+            this.pdfSettingsContainer = pdfSettingsContainer;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -349,16 +351,11 @@ namespace NAPS2.Console
 
         private void DoExportToPdf(string outputPath)
         {
-            var pdfInfo = new PdfInfo
-            {
-                Title = ConsoleResources.ScannedImage,
-                Subject = ConsoleResources.ScannedImage,
-                Author = ConsoleResources.NAPS2,
-                Creator = ConsoleResources.NAPS2
-            };
+            var pdfSettings = pdfSettingsContainer.PdfSettings;
+            pdfSettings.Creator = ConsoleResources.NAPS2;
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
-            pdfExporter.Export(outputPath, scannedImages, pdfInfo, ocrLanguageCode, i =>
+            pdfExporter.Export(outputPath, scannedImages, pdfSettings, ocrLanguageCode, i =>
             {
                 OutputVerbose(ConsoleResources.ExportedPage, i, scannedImages.Count);
                 return true;

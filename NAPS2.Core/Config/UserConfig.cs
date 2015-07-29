@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Update;
 
 namespace NAPS2.Config
@@ -49,5 +50,7 @@ namespace NAPS2.Config
         public string OcrLanguageCode { get; set; }
 
         public string LastImageExt { get; set; }
+
+        public PdfSettings PdfSettings { get; set; }
     }
 }
