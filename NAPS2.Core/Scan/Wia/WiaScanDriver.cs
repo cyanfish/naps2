@@ -52,43 +52,60 @@ namespace NAPS2.Scan.Wia
 
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
-            var api = new WiaApi(ScanSettings, ScanDevice, scannedImageFactory);
-            if (ScanSettings.PaperSource != ScanSource.Glass && !api.SupportsFeeder)
+            using (var eventLoop = new WiaBackgroundEventLoop(ScanSettings, ScanDevice, scannedImageFactory))
             {
-                throw new NoFeederSupportException();
-            }
-            int pageNumber = 1;
-            while (true)
-            {
-                if (ScanSettings.PaperSource != ScanSource.Glass && !api.FeederReady)
+                bool supportsFeeder = false;
+                eventLoop.Do(() =>
                 {
-                    if (pageNumber == 1)
+                    supportsFeeder = eventLoop.Api.SupportsFeeder;
+                });
+                eventLoop.Sync();
+                if (ScanSettings.PaperSource != ScanSource.Glass && !supportsFeeder)
+                {
+                    throw new NoFeederSupportException();
+                }
+                int pageNumber = 1;
+                while (true)
+                {
+                    bool feederReady = false;
+                    // TODO: Change eventloop api so that things that should only be accessed on the event loop thread
+                    // TODO: (api, device, item) are accessible via an interface passed in as a single arg to the Do callback
+                    eventLoop.Do(() =>
                     {
-                        throw new NoPagesException();
+                        feederReady = eventLoop.Api.FeederReady;
+                    });
+                    eventLoop.Sync();
+                    if (ScanSettings.PaperSource != ScanSource.Glass && !feederReady)
+                    {
+                        if (pageNumber == 1)
+                        {
+                            throw new NoPagesException();
+                        }
+                        break;
                     }
-                    break;
-                }
-                IScannedImage image;
-                try
-                {
-                    image = api.GetImage(wiaTransfer, pageNumber++);
-                }
-                catch (ScanDriverException)
-                {
-                    throw;
-                }
-                catch (Exception e)
-                {
-                    throw new ScanDriverUnknownException(e);
-                }
-                if (image == null)
-                {
-                    break;
-                }
-                yield return image;
-                if (ScanSettings.PaperSource == ScanSource.Glass)
-                {
-                    break;
+                    IScannedImage image = null;
+                    try
+                    {
+                        // TODO: This method should be moved, since normally WiaApi calls should be done on event loop thread
+                        image = eventLoop.Api.GetImage(wiaTransfer, eventLoop, pageNumber++);
+                    }
+                    catch (ScanDriverException)
+                    {
+                        throw;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ScanDriverUnknownException(e);
+                    }
+                    if (image == null)
+                    {
+                        break;
+                    }
+                    yield return image;
+                    if (ScanSettings.PaperSource == ScanSource.Glass)
+                    {
+                        break;
+                    }
                 }
             }
         }

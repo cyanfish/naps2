@@ -17,7 +17,7 @@ namespace NAPS2.Scan.Wia
             this.formFactory = formFactory;
         }
 
-        public Stream Transfer(int pageNumber, Device device, Item item, string format)
+        public Stream Transfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format)
         {
             if (pageNumber == 1)
             {
@@ -30,8 +30,7 @@ namespace NAPS2.Scan.Wia
             // so we use the custom form.
             var form = formFactory.Create<FScanProgress>();
             form.PageNumber = pageNumber;
-            form.DeviceID = device.DeviceID;
-            form.ItemID = item.ItemID;
+            form.EventLoop = eventLoop;
             form.Format = format;
             form.ShowDialog();
             if (form.Exception != null)

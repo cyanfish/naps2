@@ -8,11 +8,16 @@ namespace NAPS2.Scan.Wia
 {
     public class ConsoleWiaTransfer : IWiaTransfer
     {
-        public Stream Transfer(int pageNumber, Device device, Item item, string format)
+        public Stream Transfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format)
         {
             // The console shouldn't spawn new forms, so use the silent transfer method.
             // TODO: Test cancellation (via Ctrl+C or similar)
-            var imageFile = (ImageFile)item.Transfer(format);
+            ImageFile imageFile = null;
+            eventLoop.Do(() =>
+            {
+                imageFile = (ImageFile)eventLoop.WiaItem.Transfer(format);
+            });
+            eventLoop.Sync();
             if (imageFile == null)
             {
                 return null;

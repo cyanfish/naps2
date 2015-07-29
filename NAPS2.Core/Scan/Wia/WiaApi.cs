@@ -32,7 +32,7 @@ using WIA;
 
 namespace NAPS2.Scan.Wia
 {
-    internal class WiaApi
+    public class WiaApi
     {
         #region WIA Constants
 
@@ -91,6 +91,7 @@ namespace NAPS2.Scan.Wia
         #endregion
 
         private readonly Device device;
+        private readonly Item item;
 
         private readonly ExtendedScanSettings settings;
         private readonly IScannedImageFactory scannedImageFactory;
@@ -99,6 +100,13 @@ namespace NAPS2.Scan.Wia
         {
             this.settings = settings;
             this.scannedImageFactory = scannedImageFactory;
+
+            device = GetDevice(scanDevice);
+            item = GetItem();
+        }
+
+        private Device GetDevice(ScanDevice scanDevice)
+        {
             DeviceManager manager = new DeviceManagerClass();
             foreach (DeviceInfo info in manager.DeviceInfos)
             {
@@ -106,7 +114,7 @@ namespace NAPS2.Scan.Wia
                 {
                     try
                     {
-                        device = info.Connect();
+                        return info.Connect();
                     }
                     catch (COMException e)
                     {
@@ -116,7 +124,6 @@ namespace NAPS2.Scan.Wia
                         }
                         throw new ScanDriverUnknownException(e);
                     }
-                    return;
                 }
             }
             throw new DeviceNotFoundException();
@@ -125,6 +132,16 @@ namespace NAPS2.Scan.Wia
         public string DeviceName
         {
             get { return GetDeviceProperty(DeviceProperties.DEVICE_NAME); }
+        }
+
+        public IDevice Device
+        {
+            get { return device; }
+        }
+
+        public Item Item
+        {
+            get { return item; }
         }
 
         public static ScanDevice SelectDeviceUI()
@@ -378,31 +395,15 @@ namespace NAPS2.Scan.Wia
             }
         }*/
 
-        public IScannedImage GetImage(IWiaTransfer wiaTransfer, int pageNumber)
+        public IScannedImage GetImage(IWiaTransfer wiaTransfer, WiaBackgroundEventLoop eventLoop, int pageNumber)
         {
+            if (item == null)
+            {
+                return null;
+            }
             try
             {
-                Items items = device.Items;
-                if (settings.UseNativeUI)
-                {
-                    try
-                    {
-                        items = new CommonDialogClass().ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent,
-                            WiaImageBias.MaximizeQuality, true, true, true);
-                    }
-                    catch (COMException e)
-                    {
-                        if ((uint)e.ErrorCode == Errors.UI_CANCELED)
-                            return null;
-                    }
-                }
-                else
-                {
-                    SetupDevice();
-                    SetupItem(items[1]);
-                }
-
-                using (var stream = wiaTransfer.Transfer(pageNumber, device, items[1], Formats.BMP))
+                using (var stream = wiaTransfer.Transfer(pageNumber, eventLoop, Formats.BMP))
                 {
                     if (stream == null)
                     {
@@ -440,6 +441,30 @@ namespace NAPS2.Scan.Wia
                     throw new ScanDriverUnknownException(e);
                 }
             }
+        }
+
+        private Item GetItem()
+        {
+            var items = device.Items;
+            if (settings.UseNativeUI)
+            {
+                try
+                {
+                    items = new CommonDialogClass().ShowSelectItems(device, WiaImageIntent.UnspecifiedIntent,
+                        WiaImageBias.MaximizeQuality, true, true, true);
+                }
+                catch (COMException e)
+                {
+                    if ((uint)e.ErrorCode == Errors.UI_CANCELED)
+                        return null;
+                }
+            }
+            else
+            {
+                SetupDevice();
+                SetupItem(items[1]);
+            }
+            return items[1];
         }
     }
 }

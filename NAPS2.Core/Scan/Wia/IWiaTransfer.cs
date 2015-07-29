@@ -9,6 +9,6 @@ namespace NAPS2.Scan.Wia
 {
     public interface IWiaTransfer
     {
-        Stream Transfer(int pageNumber, Device device, Item item, string format);
+        Stream Transfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format);
     }
 }

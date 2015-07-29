@@ -200,6 +200,7 @@
     <Compile Include="Scan\Wia\ConsoleWiaTransfer.cs" />
     <Compile Include="Scan\Wia\IWiaTransfer.cs" />
     <Compile Include="Scan\Wia\WiaApi.cs" />
+    <Compile Include="Scan\Wia\WiaBackgroundEventLoop.cs" />
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
     <Compile Include="Scan\Wia\WinFormsWiaTransfer.cs" />
     <Compile Include="StringWrapper.cs" />
