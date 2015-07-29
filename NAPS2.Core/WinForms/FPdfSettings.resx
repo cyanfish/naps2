@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
     <value>&amp;OK</value>
@@ -157,7 +157,7 @@
     <value>75, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Cancel</value>
@@ -177,126 +177,6 @@
   <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="&gt;&gt;txtKeywords.Name" xml:space="preserve">
-    <value>txtKeywords</value>
-  </data>
-  <data name="&gt;&gt;txtKeywords.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtKeywords.Parent" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;txtKeywords.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtSubject.Name" xml:space="preserve">
-    <value>txtSubject</value>
-  </data>
-  <data name="&gt;&gt;txtSubject.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtSubject.Parent" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;txtSubject.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtAuthor.Name" xml:space="preserve">
-    <value>txtAuthor</value>
-  </data>
-  <data name="&gt;&gt;txtAuthor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtAuthor.Parent" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;txtAuthor.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;txtTitle.Name" xml:space="preserve">
-    <value>txtTitle</value>
-  </data>
-  <data name="&gt;&gt;txtTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtTitle.Parent" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;txtTitle.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="groupMetadata.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="groupMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 175</value>
-  </data>
-  <data name="groupMetadata.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadata</value>
-  </data>
-  <data name="&gt;&gt;groupMetadata.Name" xml:space="preserve">
-    <value>groupMetadata</value>
-  </data>
-  <data name="&gt;&gt;groupMetadata.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupMetadata.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupMetadata.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="txtKeywords.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 149</value>
   </data>
@@ -304,7 +184,7 @@
     <value>396, 20</value>
   </data>
   <data name="txtKeywords.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;txtKeywords.Name" xml:space="preserve">
     <value>txtKeywords</value>
@@ -355,7 +235,7 @@
     <value>396, 20</value>
   </data>
   <data name="txtSubject.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txtSubject.Name" xml:space="preserve">
     <value>txtSubject</value>
@@ -406,7 +286,7 @@
     <value>396, 20</value>
   </data>
   <data name="txtAuthor.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;txtAuthor.Name" xml:space="preserve">
     <value>txtAuthor</value>
@@ -457,7 +337,7 @@
     <value>396, 20</value>
   </data>
   <data name="txtTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;txtTitle.Name" xml:space="preserve">
     <value>txtTitle</value>
@@ -501,6 +381,30 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="groupMetadata.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="groupMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 175</value>
+  </data>
+  <data name="groupMetadata.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="&gt;&gt;groupMetadata.Name" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;groupMetadata.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupMetadata.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupMetadata.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="cbAllowFullQualityPrinting.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -514,7 +418,7 @@
     <value>143, 17</value>
   </data>
   <data name="cbAllowFullQualityPrinting.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>8</value>
   </data>
   <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
     <value>Allow Full Quality Printing</value>
@@ -544,7 +448,7 @@
     <value>106, 17</value>
   </data>
   <data name="cbAllowFormFilling.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="cbAllowFormFilling.Text" xml:space="preserve">
     <value>Allow Form Filling</value>
@@ -574,7 +478,7 @@
     <value>112, 17</value>
   </data>
   <data name="cbAllowAnnotations.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="cbAllowAnnotations.Text" xml:space="preserve">
     <value>Allow Commenting</value>
@@ -604,7 +508,7 @@
     <value>207, 17</value>
   </data>
   <data name="cbAllowContentExtractionAccessibility.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="cbAllowContentExtractionAccessibility.Text" xml:space="preserve">
     <value>Allow Content Copying for Accessibility</value>
@@ -634,7 +538,7 @@
     <value>132, 17</value>
   </data>
   <data name="cbAllowContentExtraction.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="cbAllowContentExtraction.Text" xml:space="preserve">
     <value>Allow Content Copying</value>
@@ -664,7 +568,7 @@
     <value>150, 17</value>
   </data>
   <data name="cbAllowDocumentAssembly.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
     <value>Allow Document Assembly</value>
@@ -691,7 +595,7 @@
     <value>169, 17</value>
   </data>
   <data name="cbAllowDocumentModification.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="cbAllowDocumentModification.Text" xml:space="preserve">
     <value>Allow Changing the Document</value>
@@ -718,7 +622,7 @@
     <value>89, 17</value>
   </data>
   <data name="cbAllowPrinting.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="cbAllowPrinting.Text" xml:space="preserve">
     <value>Allow Printing</value>
@@ -742,7 +646,7 @@
     <value>396, 20</value>
   </data>
   <data name="txtUserPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;txtUserPassword.Name" xml:space="preserve">
     <value>txtUserPassword</value>
@@ -793,7 +697,7 @@
     <value>396, 20</value>
   </data>
   <data name="txtOwnerPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;txtOwnerPassword.Name" xml:space="preserve">
     <value>txtOwnerPassword</value>
@@ -844,7 +748,7 @@
     <value>86, 17</value>
   </data>
   <data name="cbEncryptPdf.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Encrypt PDF</value>
@@ -895,7 +799,7 @@
     <value>145, 17</value>
   </data>
   <data name="cbRememberSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+    <value>15</value>
   </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
     <value>Remember these settings</value>
@@ -919,7 +823,7 @@
     <value>145, 23</value>
   </data>
   <data name="btnRestoreDefaults.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+    <value>16</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
     <value>Restore &amp;Defaults</value>
@@ -982,12 +886,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=4.0.1.26423, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=4.0.1.28644, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FPdfSettings</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.26423, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.28644, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

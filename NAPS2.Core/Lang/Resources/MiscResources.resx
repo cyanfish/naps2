@@ -294,4 +294,7 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>No pages are in the feeder.</value>
   </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>You do not have permission to copy content from the file "{0}".</value>
+  </data>
 </root>

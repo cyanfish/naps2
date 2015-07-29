@@ -484,6 +484,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to copy content from the file &quot;{0}&quot;..
+        /// </summary>
+        internal static string PdfNoPermissionToExtractContent {
+            get {
+                return ResourceManager.GetString("PdfNoPermissionToExtractContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} of {1}.
         /// </summary>
         internal static string PdfStatus {
