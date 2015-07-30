@@ -6,6 +6,23 @@ namespace NAPS2.ImportExport.Email
 {
     public class EmailRecipient
     {
+        public static IEnumerable<EmailRecipient> FromText(EmailRecipientType recipType, string recipText)
+        {
+            if (string.IsNullOrWhiteSpace(recipText))
+            {
+                yield break;
+            }
+            foreach (string address in recipText.Split(','))
+            {
+                yield return new EmailRecipient
+                {
+                    Name = address.Trim(),
+                    Address = address.Trim(),
+                    Type = recipType
+                };
+            }
+        }
+
         public EmailRecipient()
         {
             Name = "";

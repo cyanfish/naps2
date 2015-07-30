@@ -88,6 +88,8 @@
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="ImportExport\Email\EmailSettings.cs" />
+    <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />
     <Compile Include="ImportExport\Pdf\ConsolePdfPasswordProvider.cs" />
     <Compile Include="ImportExport\Pdf\IPdfPasswordProvider.cs" />
     <Compile Include="ImportExport\Pdf\PdfSettingsContainer.cs" />
@@ -230,6 +232,12 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
+    <Compile Include="WinForms\FEmailSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FEmailSettings.Designer.cs">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FPdfPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -435,6 +443,76 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.tr.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" />
+    <EmbeddedResource Include="WinForms\FEmailSettings.bg.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.ca.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.cs.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.da.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.de.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.es.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.fr.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.he.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.hr.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.hu.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.it.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.nl.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.pl.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.pt-BR.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.pt-PT.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.ro.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.ru.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.sq.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.sv.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.tr.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.uk.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.zh-TW.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfPassword.bg.resx">
       <DependentUpon>FPdfPassword.cs</DependentUpon>
     </EmbeddedResource>
@@ -2107,6 +2185,7 @@
     <Content Include="Resources\arrow_down-small.png" />
     <Content Include="Resources\arrow_up-small.png" />
     <Content Include="Resources\control_play_blue-small.png" />
+    <Content Include="Resources\email.ico" />
     <Content Include="Resources\file_extension_pdf.ico" />
     <Content Include="Resources\image_edit.png" />
     <Content Include="Resources\pictures.png" />

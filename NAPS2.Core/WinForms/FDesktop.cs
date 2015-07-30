@@ -61,8 +61,9 @@ namespace NAPS2.WinForms
         private readonly IScanPerformer scanPerformer;
         private readonly IImagePrinter imagePrinter;
         private readonly ChangeTracker changeTracker;
+        private readonly EmailSettingsContainer emailSettingsContainer;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -78,6 +79,7 @@ namespace NAPS2.WinForms
             this.scanPerformer = scanPerformer;
             this.imagePrinter = imagePrinter;
             this.changeTracker = changeTracker;
+            this.emailSettingsContainer = emailSettingsContainer;
             InitializeComponent();
         }
 
@@ -615,19 +617,39 @@ namespace NAPS2.WinForms
         {
             if (images.Any())
             {
-                string path = Paths.AppData + "\\Scan.pdf";
-                ExportPDF(path, images);
-                if (emailer.SendEmail(new EmailMessage
+                var emailSettings = emailSettingsContainer.EmailSettings;
+                var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+                var attachmentName = new string(emailSettings.AttachmentName.Where(x => !invalidChars.Contains(x)).ToArray());
+                if (string.IsNullOrEmpty(attachmentName))
                 {
+                    attachmentName = "Scan.pdf";
+                }
+                if (!attachmentName.EndsWith(".pdf", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    attachmentName += ".pdf";
+                }
+
+                string path = Path.Combine(Paths.AppData, attachmentName);
+                ExportPDF(path, images);
+
+                var message = new EmailMessage
+                {
+                    Subject = emailSettings.Subject ?? "",
+                    BodyText = emailSettings.BodyText,
                     Attachments = new List<EmailAttachment>
                     {
                         new EmailAttachment
                         {
                             FilePath = path,
-                            AttachmentName = Path.GetFileName(path)
+                            AttachmentName = attachmentName
                         }
                     }
-                }))
+                };
+                message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.To, emailSettings.To));
+                message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Cc, emailSettings.Cc));
+                message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, emailSettings.Bcc));
+
+                if (emailer.SendEmail(message))
                 {
                     changeTracker.HasUnsavedChanges = false;
                 }
@@ -1011,6 +1033,11 @@ namespace NAPS2.WinForms
         private void tsPDFSettings_Click(object sender, EventArgs e)
         {
             FormFactory.Create<FPdfSettings>().ShowDialog();
+        }
+
+        private void tsEmailSettings_Click(object sender, EventArgs e)
+        {
+            FormFactory.Create<FEmailSettings>().ShowDialog();
         }
     }
 }

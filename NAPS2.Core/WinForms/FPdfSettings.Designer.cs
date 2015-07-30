@@ -243,7 +243,6 @@ namespace NAPS2.WinForms
             // 
             // FPdfSettings
             // 
-            this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnRestoreDefaults);

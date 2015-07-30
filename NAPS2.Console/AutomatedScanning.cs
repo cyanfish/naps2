@@ -174,9 +174,9 @@ namespace NAPS2.Console
                 SilentSend = options.EmailSilentSend
             };
 
-            AddRecipients(message, options.EmailTo, EmailRecipientType.To);
-            AddRecipients(message, options.EmailCc, EmailRecipientType.Cc);
-            AddRecipients(message, options.EmailBcc, EmailRecipientType.Bcc);
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.To, options.EmailTo));
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Cc, options.EmailCc));
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, options.EmailTo));
 
             var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
             tempFolder.Create();
@@ -240,23 +240,6 @@ namespace NAPS2.Console
                 {
                     FilePath = file.FullName,
                     AttachmentName = file.Name
-                });
-            }
-        }
-
-        private void AddRecipients(EmailMessage message, string addresses, EmailRecipientType recipientType)
-        {
-            if (string.IsNullOrWhiteSpace(addresses))
-            {
-                return;
-            }
-            foreach (string address in addresses.Split(','))
-            {
-                message.Recipients.Add(new EmailRecipient
-                {
-                    Name = address.Trim(),
-                    Address = address.Trim(),
-                    Type = recipientType
                 });
             }
         }
