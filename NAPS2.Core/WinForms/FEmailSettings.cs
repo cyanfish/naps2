@@ -45,10 +45,8 @@ namespace NAPS2.WinForms
                     .BottomToForm()
                 .Bind(btnOK, btnCancel)
                     .RightToForm()
-                .Bind(txtTo, txtCc, txtBcc, txtSubject, txtAttachmentName, txtBody)
+                .Bind(txtAttachmentName)
                     .WidthToForm()
-                .Bind(txtBody)
-                    .HeightToForm()
                 .Activate();
 
             UpdateValues(emailSettingsContainer.EmailSettings);
@@ -57,24 +55,14 @@ namespace NAPS2.WinForms
 
         private void UpdateValues(EmailSettings emailSettings)
         {
-            txtTo.Text = emailSettings.To;
-            txtCc.Text = emailSettings.Cc;
-            txtBcc.Text = emailSettings.Bcc;
-            txtSubject.Text = emailSettings.Subject;
             txtAttachmentName.Text = emailSettings.AttachmentName;
-            txtBody.Text = emailSettings.BodyText;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
             var emailSettings = new EmailSettings
             {
-                To = txtTo.Text,
-                Cc = txtCc.Text,
-                Bcc = txtBcc.Text,
-                Subject = txtSubject.Text,
-                AttachmentName = txtAttachmentName.Text,
-                BodyText = txtBody.Text
+                AttachmentName = txtAttachmentName.Text
             };
 
             emailSettingsContainer.EmailSettings = emailSettings;

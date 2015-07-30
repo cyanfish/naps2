@@ -12,16 +12,6 @@ namespace NAPS2.ImportExport.Email
             AttachmentName = "Scan.pdf";
         }
 
-        public string To { get; set; }
-
-        public string Cc { get; set; }
-
-        public string Bcc { get; set; }
-
-        public string Subject { get; set; }
-
         public string AttachmentName { get; set; }
-
-        public string BodyText { get; set; }
     }
 }

@@ -634,8 +634,6 @@ namespace NAPS2.WinForms
 
                 var message = new EmailMessage
                 {
-                    Subject = emailSettings.Subject ?? "",
-                    BodyText = emailSettings.BodyText,
                     Attachments = new List<EmailAttachment>
                     {
                         new EmailAttachment
@@ -645,9 +643,6 @@ namespace NAPS2.WinForms
                         }
                     }
                 };
-                message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.To, emailSettings.To));
-                message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Cc, emailSettings.Cc));
-                message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, emailSettings.Bcc));
 
                 if (emailer.SendEmail(message))
                 {
