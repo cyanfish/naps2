@@ -62,6 +62,8 @@ namespace NAPS2.WinForms
             this.cbEncryptPdf = new System.Windows.Forms.CheckBox();
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
+            this.cbShowOwnerPassword = new System.Windows.Forms.CheckBox();
+            this.cbShowUserPassword = new System.Windows.Forms.CheckBox();
             this.groupMetadata.SuspendLayout();
             this.groupProtection.SuspendLayout();
             this.SuspendLayout();
@@ -136,6 +138,8 @@ namespace NAPS2.WinForms
             // 
             // groupProtection
             // 
+            this.groupProtection.Controls.Add(this.cbShowUserPassword);
+            this.groupProtection.Controls.Add(this.cbShowOwnerPassword);
             this.groupProtection.Controls.Add(this.cbAllowFullQualityPrinting);
             this.groupProtection.Controls.Add(this.cbAllowFormFilling);
             this.groupProtection.Controls.Add(this.cbAllowAnnotations);
@@ -205,6 +209,7 @@ namespace NAPS2.WinForms
             // 
             resources.ApplyResources(this.txtUserPassword, "txtUserPassword");
             this.txtUserPassword.Name = "txtUserPassword";
+            this.txtUserPassword.UseSystemPasswordChar = true;
             // 
             // lblUserPassword
             // 
@@ -215,6 +220,7 @@ namespace NAPS2.WinForms
             // 
             resources.ApplyResources(this.txtOwnerPassword, "txtOwnerPassword");
             this.txtOwnerPassword.Name = "txtOwnerPassword";
+            this.txtOwnerPassword.UseSystemPasswordChar = true;
             // 
             // lblOwnerPassword
             // 
@@ -240,6 +246,20 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults.Name = "btnRestoreDefaults";
             this.btnRestoreDefaults.UseVisualStyleBackColor = true;
             this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
+            // 
+            // cbShowOwnerPassword
+            // 
+            resources.ApplyResources(this.cbShowOwnerPassword, "cbShowOwnerPassword");
+            this.cbShowOwnerPassword.Name = "cbShowOwnerPassword";
+            this.cbShowOwnerPassword.UseVisualStyleBackColor = true;
+            this.cbShowOwnerPassword.CheckedChanged += new System.EventHandler(this.cbShowOwnerPassword_CheckedChanged);
+            // 
+            // cbShowUserPassword
+            // 
+            resources.ApplyResources(this.cbShowUserPassword, "cbShowUserPassword");
+            this.cbShowUserPassword.Name = "cbShowUserPassword";
+            this.cbShowUserPassword.UseVisualStyleBackColor = true;
+            this.cbShowUserPassword.CheckedChanged += new System.EventHandler(this.cbShowUserPassword_CheckedChanged);
             // 
             // FPdfSettings
             // 
@@ -293,5 +313,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtKeywords;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox cbShowUserPassword;
+        private System.Windows.Forms.CheckBox cbShowOwnerPassword;
     }
 }

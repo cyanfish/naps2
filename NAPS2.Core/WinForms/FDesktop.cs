@@ -1030,6 +1030,11 @@ namespace NAPS2.WinForms
             FormFactory.Create<FPdfSettings>().ShowDialog();
         }
 
+        private void tsPdfSettings2_Click(object sender, EventArgs e)
+        {
+            FormFactory.Create<FPdfSettings>().ShowDialog();
+        }
+
         private void tsEmailSettings_Click(object sender, EventArgs e)
         {
             FormFactory.Create<FEmailSettings>().ShowDialog();

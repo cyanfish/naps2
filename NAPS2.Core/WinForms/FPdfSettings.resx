@@ -177,6 +177,126 @@
   <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="&gt;&gt;txtKeywords.Name" xml:space="preserve">
+    <value>txtKeywords</value>
+  </data>
+  <data name="&gt;&gt;txtKeywords.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtKeywords.Parent" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;txtKeywords.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtSubject.Name" xml:space="preserve">
+    <value>txtSubject</value>
+  </data>
+  <data name="&gt;&gt;txtSubject.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSubject.Parent" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;txtSubject.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtAuthor.Name" xml:space="preserve">
+    <value>txtAuthor</value>
+  </data>
+  <data name="&gt;&gt;txtAuthor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtAuthor.Parent" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;txtAuthor.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;txtTitle.Name" xml:space="preserve">
+    <value>txtTitle</value>
+  </data>
+  <data name="&gt;&gt;txtTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtTitle.Parent" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;txtTitle.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="groupMetadata.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="groupMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 175</value>
+  </data>
+  <data name="groupMetadata.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="groupMetadata.Text" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="&gt;&gt;groupMetadata.Name" xml:space="preserve">
+    <value>groupMetadata</value>
+  </data>
+  <data name="&gt;&gt;groupMetadata.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupMetadata.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupMetadata.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="txtKeywords.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 149</value>
   </data>
@@ -381,29 +501,62 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="groupMetadata.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+  <data name="cbShowUserPassword.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="groupMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 175</value>
+  <data name="cbShowUserPassword.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="groupMetadata.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="cbShowUserPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>305, 77</value>
   </data>
-  <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadata</value>
+  <data name="cbShowUserPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 17</value>
   </data>
-  <data name="&gt;&gt;groupMetadata.Name" xml:space="preserve">
-    <value>groupMetadata</value>
+  <data name="cbShowUserPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
-  <data name="&gt;&gt;groupMetadata.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cbShowUserPassword.Text" xml:space="preserve">
+    <value>Show</value>
   </data>
-  <data name="&gt;&gt;groupMetadata.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;cbShowUserPassword.Name" xml:space="preserve">
+    <value>cbShowUserPassword</value>
   </data>
-  <data name="&gt;&gt;groupMetadata.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;cbShowUserPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbShowUserPassword.Parent" xml:space="preserve">
+    <value>groupProtection</value>
+  </data>
+  <data name="&gt;&gt;cbShowUserPassword.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbShowOwnerPassword.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbShowOwnerPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>305, 38</value>
+  </data>
+  <data name="cbShowOwnerPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 17</value>
+  </data>
+  <data name="cbShowOwnerPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="cbShowOwnerPassword.Text" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="&gt;&gt;cbShowOwnerPassword.Name" xml:space="preserve">
+    <value>cbShowOwnerPassword</value>
+  </data>
+  <data name="&gt;&gt;cbShowOwnerPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbShowOwnerPassword.Parent" xml:space="preserve">
+    <value>groupProtection</value>
+  </data>
+  <data name="&gt;&gt;cbShowOwnerPassword.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="cbAllowFullQualityPrinting.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -433,7 +586,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbAllowFullQualityPrinting.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="cbAllowFormFilling.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -463,7 +616,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbAllowFormFilling.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="cbAllowAnnotations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -493,7 +646,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbAllowAnnotations.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="cbAllowContentExtractionAccessibility.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -523,7 +676,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbAllowContentExtractionAccessibility.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="cbAllowContentExtraction.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -553,7 +706,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbAllowContentExtraction.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="cbAllowDocumentAssembly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -583,7 +736,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbAllowDocumentAssembly.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="cbAllowDocumentModification.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -610,7 +763,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbAllowDocumentModification.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cbAllowPrinting.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -637,7 +790,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbAllowPrinting.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="txtUserPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 94</value>
@@ -658,7 +811,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;txtUserPassword.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="lblUserPassword.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -688,7 +841,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;lblUserPassword.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="txtOwnerPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 55</value>
@@ -709,7 +862,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;txtOwnerPassword.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="lblOwnerPassword.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -736,7 +889,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;lblOwnerPassword.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="cbEncryptPdf.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -763,7 +916,7 @@
     <value>groupProtection</value>
   </data>
   <data name="&gt;&gt;cbEncryptPdf.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="groupProtection.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 193</value>
@@ -886,12 +1039,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=4.0.1.1722, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=4.0.1.25626, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FPdfSettings</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.1722, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.25626, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

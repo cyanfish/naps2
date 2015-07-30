@@ -76,7 +76,7 @@ namespace NAPS2.WinForms
         private void UpdateEnabled()
         {
             bool encrypt = cbEncryptPdf.Checked;
-            txtUserPassword.Enabled = txtOwnerPassword.Enabled =
+            txtUserPassword.Enabled = txtOwnerPassword.Enabled = cbShowOwnerPassword.Enabled = cbShowUserPassword.Enabled =
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
             cbAllowAnnotations.Enabled =
                 cbAllowContentExtraction.Enabled = cbAllowContentExtractionAccessibility.Enabled =
@@ -127,6 +127,16 @@ namespace NAPS2.WinForms
         private void cbEncryptPdf_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
+        }
+
+        private void cbShowOwnerPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            txtOwnerPassword.UseSystemPasswordChar = !cbShowOwnerPassword.Checked;
+        }
+
+        private void cbShowUserPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            txtUserPassword.UseSystemPasswordChar = !cbShowUserPassword.Checked;
         }
     }
 }
