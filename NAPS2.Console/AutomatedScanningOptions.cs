@@ -67,37 +67,23 @@ namespace NAPS2.Console
 
         #region PDF Options
 
-        [Option("pdftitle", HelpText = "Specifies the title for generated PDF metadata.")]
+        [Option("pdftitle", HelpText = "The title for generated PDF metadata.")]
         public string PdfTitle { get; set; }
 
-        [Option("pdfauthor", HelpText = "Specifies the author for generated PDF metadata.")]
+        [Option("pdfauthor", HelpText = "The author for generated PDF metadata.")]
         public string PdfAuthor { get; set; }
 
-        [Option("pdfsubject", HelpText = "Specifies the subject for generated PDF metadata.")]
+        [Option("pdfsubject", HelpText = "The subject for generated PDF metadata.")]
         public string PdfSubject { get; set; }
 
-        [Option("pdfkeywords", HelpText = "Specifies the keywords for generated PDF metadata.")]
+        [Option("pdfkeywords", HelpText = "The keywords for generated PDF metadata.")]
         public string PdfKeywords { get; set; }
 
-        [Option("pdfencrypt", HelpText = "Specifies that encryption should be used for generated PDFs.")]
-        public bool PdfEncrypt { get; set; }
+        [Option("pdfencrypt", HelpText = "The name and path of an XML file to configure encryption for the generated PDF.")]
+        public string PdfEncrypt { get; set; }
 
-        [Option("pdfuserpassword", HelpText = "Specifies the user password for the encrypted PDF.")]
-        public string PdfUserPassword { get; set; }
-
-        [Option("pdfownerpassword", HelpText = "Specifies the owner password for the encrypted PDF.")]
-        public string PdfOwnerPassword { get; set; }
-
-        [Option("pdfallowall", HelpText = "Specifies that all operations should be allowed for the encrypted PDF.")]
-        public string PdfAllowAll { get; set; }
-
-        [Option("pdfallowprinting", HelpText = "Specifies that printing should be allowed for the encrypted PDF.")]
-        public string PdfAllowPrinting { get; set; }
-
-        [Option("pdfallowfullqualityprinting", HelpText = "Specifies that full quality printing should be allowed for the encrypted PDF.")]
-        public string PdfAllowFullQualityPrinting { get; set; }
-
-        // TODO: More
+        [Option("pdfencryptdefault", HelpText = "Use the encryption configured in the GUI, if any, for the generated PDF.")]
+        public bool PdfEncryptDefault { get; set; }
 
         #endregion
 
