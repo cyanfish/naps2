@@ -27,6 +27,8 @@ namespace NAPS2.Console
 {
     public class AutomatedScanningOptions : CommandLineOptions
     {
+        #region General Options
+
         [Option('o', "output", HelpText = "The name and path of the file to save." +
                                           " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG).")]
         //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
@@ -40,6 +42,9 @@ namespace NAPS2.Console
                                           " Imported files are prepended to the output in the order they are specified." +
                                           " Multiple files are separated by a semicolon (\";\").")]
         public string ImportPath { get; set; }
+
+        [Option("importpassword", HelpText = "The password to use to import one or more encrypted PDF files.")]
+        public string ImportPassword { get; set; }
 
         [Option('v', "verbose", HelpText = "Display progress information." +
                                            " If not specified, no output is displayed if the scan is successful.")]
@@ -58,10 +63,45 @@ namespace NAPS2.Console
         [Option('w', "wait", HelpText = "After finishing, wait for user input (enter/return) before exiting.")]
         public bool WaitForEnter { get; set; }
 
-        [Option('e', "email", HelpText = "The name of the file to attach to an email." +
-                                         " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG).")]
-        //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
-        public string EmailFileName { get; set; }
+        #endregion
+
+        #region PDF Options
+
+        [Option("pdftitle", HelpText = "Specifies the title for generated PDF metadata.")]
+        public string PdfTitle { get; set; }
+
+        [Option("pdfauthor", HelpText = "Specifies the author for generated PDF metadata.")]
+        public string PdfAuthor { get; set; }
+
+        [Option("pdfsubject", HelpText = "Specifies the subject for generated PDF metadata.")]
+        public string PdfSubject { get; set; }
+
+        [Option("pdfkeywords", HelpText = "Specifies the keywords for generated PDF metadata.")]
+        public string PdfKeywords { get; set; }
+
+        [Option("pdfencrypt", HelpText = "Specifies that encryption should be used for generated PDFs.")]
+        public bool PdfEncrypt { get; set; }
+
+        [Option("pdfuserpassword", HelpText = "Specifies the user password for the encrypted PDF.")]
+        public string PdfUserPassword { get; set; }
+
+        [Option("pdfownerpassword", HelpText = "Specifies the owner password for the encrypted PDF.")]
+        public string PdfOwnerPassword { get; set; }
+
+        [Option("pdfallowall", HelpText = "Specifies that all operations should be allowed for the encrypted PDF.")]
+        public string PdfAllowAll { get; set; }
+
+        [Option("pdfallowprinting", HelpText = "Specifies that printing should be allowed for the encrypted PDF.")]
+        public string PdfAllowPrinting { get; set; }
+
+        [Option("pdfallowfullqualityprinting", HelpText = "Specifies that full quality printing should be allowed for the encrypted PDF.")]
+        public string PdfAllowFullQualityPrinting { get; set; }
+
+        // TODO: More
+
+        #endregion
+
+        #region OCR Options
 
         [Option("enableocr", HelpText = "Enable OCR for generated PDFs.")]
         public bool EnableOcr { get; set; }
@@ -71,6 +111,15 @@ namespace NAPS2.Console
 
         [Option("ocrlang", HelpText = "The three-letter code for the language used for OCR (e.g. 'eng' for English, 'fra' for French, etc.). Implies --enableocr.")]
         public string OcrLang { get; set; }
+
+        #endregion
+
+        #region Email Options
+
+        [Option('e', "email", HelpText = "The name of the file to attach to an email." +
+                                         " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG).")]
+        //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
+        public string EmailFileName { get; set; }
 
         [Option("subject", HelpText = "The email message's subject." +
             //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
@@ -105,5 +154,7 @@ namespace NAPS2.Console
                                          " Note that Outlook may still require user interaction to send an email, regardless of --autosend or --silentsend options." +
                                          " Requires --autosend.")]
         public bool EmailSilentSend { get; set; }
+
+        #endregion
     }
 }
