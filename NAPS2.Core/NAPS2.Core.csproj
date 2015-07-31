@@ -92,6 +92,8 @@
     <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />
     <Compile Include="ImportExport\Pdf\ConsolePdfPasswordProvider.cs" />
     <Compile Include="ImportExport\Pdf\IPdfPasswordProvider.cs" />
+    <Compile Include="ImportExport\Pdf\PdfEncryption.cs" />
+    <Compile Include="ImportExport\Pdf\PdfMetadata.cs" />
     <Compile Include="ImportExport\Pdf\PdfSettingsContainer.cs" />
     <Compile Include="ImportExport\Pdf\PrintDocumentPrinter.cs" />
     <Compile Include="ImportExport\Pdf\IImagePrinter.cs" />

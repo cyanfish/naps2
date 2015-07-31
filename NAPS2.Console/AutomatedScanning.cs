@@ -26,6 +26,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using NAPS2.Config;
 using NAPS2.Console.Lang.Resources;
 using NAPS2.ImportExport;
@@ -334,10 +335,47 @@ namespace NAPS2.Console
 
         private void DoExportToPdf(string outputPath)
         {
-            var pdfSettings = pdfSettingsContainer.PdfSettings;
-            pdfSettings.Creator = ConsoleResources.NAPS2;
+            var metadata = options.PdfMetadataDefault ? pdfSettingsContainer.PdfSettings.Metadata : new PdfMetadata();
+            metadata.Creator = ConsoleResources.NAPS2;
+            if (options.PdfTitle != null)
+            {
+                metadata.Title = options.PdfTitle;
+            }
+            if (options.PdfAuthor != null)
+            {
+                metadata.Author = options.PdfAuthor;
+            }
+            if (options.PdfSubject != null)
+            {
+                metadata.Subject = options.PdfSubject;
+            }
+            if (options.PdfKeywords != null)
+            {
+                metadata.Keywords = options.PdfKeywords;
+            }
+
+            var encryption = options.PdfEncryptDefault ? pdfSettingsContainer.PdfSettings.Encryption : new PdfEncryption();
+            if (options.PdfEncrypt != null)
+            {
+                try
+                {
+                    using (Stream configFileStream = File.OpenRead(options.PdfEncrypt))
+                    {
+                        var serializer = new XmlSerializer(typeof(PdfEncryption));
+                        encryption = (PdfEncryption)serializer.Deserialize(configFileStream);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errorOutput.DisplayError(ConsoleResources.CouldntLoadEncryptionConfig);
+                }
+            }
+
+            var pdfSettings = new PdfSettings { Metadata = metadata, Encryption = encryption };
+
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
+
             pdfExporter.Export(outputPath, scannedImages, pdfSettings, ocrLanguageCode, i =>
             {
                 OutputVerbose(ConsoleResources.ExportedPage, i, scannedImages.Count);

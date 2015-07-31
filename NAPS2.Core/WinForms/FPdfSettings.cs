@@ -56,21 +56,21 @@ namespace NAPS2.WinForms
 
         private void UpdateValues(PdfSettings pdfSettings)
         {
-            txtTitle.Text = pdfSettings.Title;
-            txtAuthor.Text = pdfSettings.Author;
-            txtSubject.Text = pdfSettings.Subject;
-            txtKeywords.Text = pdfSettings.Keywords;
-            cbEncryptPdf.Checked = pdfSettings.EncryptPdf;
-            txtOwnerPassword.Text = pdfSettings.OwnerPassword;
-            txtUserPassword.Text = pdfSettings.UserPassword;
-            cbAllowContentExtractionAccessibility.Checked = pdfSettings.PermitAccessibilityExtractContent;
-            cbAllowAnnotations.Checked = pdfSettings.PermitAnnotations;
-            cbAllowDocumentAssembly.Checked = pdfSettings.PermitAssembleDocument;
-            cbAllowContentExtraction.Checked = pdfSettings.PermitExtractContent;
-            cbAllowFormFilling.Checked = pdfSettings.PermitFormsFill;
-            cbAllowFullQualityPrinting.Checked = pdfSettings.PermitFullQualityPrint;
-            cbAllowDocumentModification.Checked = pdfSettings.PermitModifyDocument;
-            cbAllowPrinting.Checked = pdfSettings.PermitPrint;
+            txtTitle.Text = pdfSettings.Metadata.Title;
+            txtAuthor.Text = pdfSettings.Metadata.Author;
+            txtSubject.Text = pdfSettings.Metadata.Subject;
+            txtKeywords.Text = pdfSettings.Metadata.Keywords;
+            cbEncryptPdf.Checked = pdfSettings.Encryption.EncryptPdf;
+            txtOwnerPassword.Text = pdfSettings.Encryption.OwnerPassword;
+            txtUserPassword.Text = pdfSettings.Encryption.UserPassword;
+            cbAllowContentExtractionAccessibility.Checked = pdfSettings.Encryption.PermitAccessibilityExtractContent;
+            cbAllowAnnotations.Checked = pdfSettings.Encryption.PermitAnnotations;
+            cbAllowDocumentAssembly.Checked = pdfSettings.Encryption.PermitAssembleDocument;
+            cbAllowContentExtraction.Checked = pdfSettings.Encryption.PermitExtractContent;
+            cbAllowFormFilling.Checked = pdfSettings.Encryption.PermitFormsFill;
+            cbAllowFullQualityPrinting.Checked = pdfSettings.Encryption.PermitFullQualityPrint;
+            cbAllowDocumentModification.Checked = pdfSettings.Encryption.PermitModifyDocument;
+            cbAllowPrinting.Checked = pdfSettings.Encryption.PermitPrint;
         }
 
         private void UpdateEnabled()
@@ -88,21 +88,27 @@ namespace NAPS2.WinForms
         {
             var pdfSettings = new PdfSettings
             {
-                Title = txtTitle.Text,
-                Author = txtAuthor.Text,
-                Subject = txtSubject.Text,
-                Keywords = txtKeywords.Text,
-                EncryptPdf = cbEncryptPdf.Checked,
-                OwnerPassword = txtOwnerPassword.Text,
-                UserPassword = txtUserPassword.Text,
-                PermitAccessibilityExtractContent = cbAllowContentExtractionAccessibility.Checked,
-                PermitAnnotations = cbAllowAnnotations.Checked,
-                PermitAssembleDocument = cbAllowDocumentAssembly.Checked,
-                PermitExtractContent = cbAllowContentExtraction.Checked,
-                PermitFormsFill = cbAllowFormFilling.Checked,
-                PermitFullQualityPrint = cbAllowFullQualityPrinting.Checked,
-                PermitModifyDocument = cbAllowDocumentModification.Checked,
-                PermitPrint = cbAllowPrinting.Checked
+                Metadata =
+                {
+                    Title = txtTitle.Text,
+                    Author = txtAuthor.Text,
+                    Subject = txtSubject.Text,
+                    Keywords = txtKeywords.Text
+                },
+                Encryption =
+                {
+                    EncryptPdf = cbEncryptPdf.Checked,
+                    OwnerPassword = txtOwnerPassword.Text,
+                    UserPassword = txtUserPassword.Text,
+                    PermitAccessibilityExtractContent = cbAllowContentExtractionAccessibility.Checked,
+                    PermitAnnotations = cbAllowAnnotations.Checked,
+                    PermitAssembleDocument = cbAllowDocumentAssembly.Checked,
+                    PermitExtractContent = cbAllowContentExtraction.Checked,
+                    PermitFormsFill = cbAllowFormFilling.Checked,
+                    PermitFullQualityPrint = cbAllowFullQualityPrinting.Checked,
+                    PermitModifyDocument = cbAllowDocumentModification.Checked,
+                    PermitPrint = cbAllowPrinting.Checked
+                }
             };
 
             pdfSettingsContainer.PdfSettings = pdfSettings;

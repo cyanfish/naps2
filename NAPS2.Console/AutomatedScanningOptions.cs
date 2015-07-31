@@ -79,6 +79,9 @@ namespace NAPS2.Console
         [Option("pdfkeywords", HelpText = "The keywords for generated PDF metadata.")]
         public string PdfKeywords { get; set; }
 
+        [Option("pdfmetadatadefault", HelpText = "Use the metadata (title, author, subject, keywords) configured in the GUI, if any, for the generated PDF.")]
+        public bool PdfMetadataDefault { get; set; }
+
         [Option("pdfencrypt", HelpText = "The name and path of an XML file to configure encryption for the generated PDF.")]
         public string PdfEncrypt { get; set; }
 

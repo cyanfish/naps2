@@ -43,11 +43,14 @@ namespace NAPS2.Tests.Base
             pdfExporter = GetPdfExporter();
             settings = new PdfSettings
             {
-                Author = "Test Author",
-                Creator = "Test Creator",
-                Keywords = "Test Keywords",
-                Subject = "Test Subject",
-                Title = "Test Title"
+                Metadata =
+                {
+                    Author = "Test Author",
+                    Creator = "Test Creator",
+                    Keywords = "Test Keywords",
+                    Subject = "Test Subject",
+                    Title = "Test Title"
+                }
             };
             images = new List<Bitmap> {
                 ColorBitmap(100, 100, Color.Red),

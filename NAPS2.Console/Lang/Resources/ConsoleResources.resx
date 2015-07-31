@@ -207,4 +207,7 @@
   <data name="Importing" xml:space="preserve">
     <value>Importing...</value>
   </data>
+  <data name="CouldntLoadEncryptionConfig" xml:space="preserve">
+    <value>The encryption configuration file could not be loaded. The output will not be encrypted.</value>
+  </data>
 </root>

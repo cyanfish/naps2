@@ -21,36 +21,44 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Lang.Resources;
 
 namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSettings
     {
+        private PdfMetadata metadata;
+        private PdfEncryption encryption;
+
         public PdfSettings()
         {
-            Title = MiscResources.ScannedImage;
-            Subject = MiscResources.ScannedImage;
-            Author = MiscResources.NAPS2;
-            Creator = MiscResources.NAPS2;
+            metadata = new PdfMetadata();
+            encryption = new PdfEncryption();
         }
 
-        public string Author { get; set; }
-        public string Creator { get; set; }
-        public string Keywords { get; set; }
-        public string Subject { get; set; }
-        public string Title { get; set; }
+        public PdfMetadata Metadata
+        {
+            get { return metadata; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+                metadata = value;
+            }
+        }
 
-        public bool EncryptPdf { get; set; }
-        public string UserPassword { get; set; }
-        public string OwnerPassword { get; set; }
-        public bool PermitAccessibilityExtractContent { get; set; }
-        public bool PermitAnnotations { get; set; }
-        public bool PermitAssembleDocument { get; set; }
-        public bool PermitExtractContent { get; set; }
-        public bool PermitFormsFill { get; set; }
-        public bool PermitFullQualityPrint { get; set; }
-        public bool PermitModifyDocument { get; set; }
-        public bool PermitPrint { get; set; }
+        public PdfEncryption Encryption
+        {
+            get { return encryption; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+                encryption = value;
+            }
+        }
     }
 }

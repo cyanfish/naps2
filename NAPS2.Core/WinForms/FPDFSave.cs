@@ -55,7 +55,7 @@ namespace NAPS2.WinForms
         private void ExportPdfProcess()
         {
             var pdfSettings = pdfSettingsContainer.PdfSettings;
-            pdfSettings.Creator = MiscResources.NAPS2;
+            pdfSettings.Metadata.Creator = MiscResources.NAPS2;
             var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
 
             try

@@ -48,31 +48,31 @@ namespace NAPS2.ImportExport.Pdf
         public bool Export(string path, IEnumerable<IScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
-            document.Info.Author = settings.Author;
-            document.Info.Creator = settings.Creator;
-            document.Info.Keywords = settings.Keywords;
-            document.Info.Subject = settings.Subject;
-            document.Info.Title = settings.Title;
+            document.Info.Author = settings.Metadata.Author;
+            document.Info.Creator = settings.Metadata.Creator;
+            document.Info.Keywords = settings.Metadata.Keywords;
+            document.Info.Subject = settings.Metadata.Subject;
+            document.Info.Title = settings.Metadata.Title;
 
-            if (settings.EncryptPdf)
+            if (settings.Encryption.EncryptPdf)
             {
                 document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
-                if (!string.IsNullOrEmpty(settings.OwnerPassword))
+                if (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword))
                 {
-                    document.SecuritySettings.OwnerPassword = settings.OwnerPassword;
+                    document.SecuritySettings.OwnerPassword = settings.Encryption.OwnerPassword;
                 }
-                if (!string.IsNullOrEmpty(settings.UserPassword))
+                if (!string.IsNullOrEmpty(settings.Encryption.UserPassword))
                 {
-                    document.SecuritySettings.UserPassword = settings.UserPassword;
+                    document.SecuritySettings.UserPassword = settings.Encryption.UserPassword;
                 }
-                document.SecuritySettings.PermitAccessibilityExtractContent = settings.PermitAccessibilityExtractContent;
-                document.SecuritySettings.PermitAnnotations = settings.PermitAnnotations;
-                document.SecuritySettings.PermitAssembleDocument = settings.PermitAssembleDocument;
-                document.SecuritySettings.PermitExtractContent = settings.PermitExtractContent;
-                document.SecuritySettings.PermitFormsFill = settings.PermitFormsFill;
-                document.SecuritySettings.PermitFullQualityPrint = settings.PermitFullQualityPrint;
-                document.SecuritySettings.PermitModifyDocument = settings.PermitModifyDocument;
-                document.SecuritySettings.PermitPrint = settings.PermitPrint;
+                document.SecuritySettings.PermitAccessibilityExtractContent = settings.Encryption.PermitAccessibilityExtractContent;
+                document.SecuritySettings.PermitAnnotations = settings.Encryption.PermitAnnotations;
+                document.SecuritySettings.PermitAssembleDocument = settings.Encryption.PermitAssembleDocument;
+                document.SecuritySettings.PermitExtractContent = settings.Encryption.PermitExtractContent;
+                document.SecuritySettings.PermitFormsFill = settings.Encryption.PermitFormsFill;
+                document.SecuritySettings.PermitFullQualityPrint = settings.Encryption.PermitFullQualityPrint;
+                document.SecuritySettings.PermitModifyDocument = settings.Encryption.PermitModifyDocument;
+                document.SecuritySettings.PermitPrint = settings.Encryption.PermitPrint;
             }
 
             int i = 1;
