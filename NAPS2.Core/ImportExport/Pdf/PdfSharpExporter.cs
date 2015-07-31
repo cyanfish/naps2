@@ -65,14 +65,14 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     document.SecuritySettings.UserPassword = settings.Encryption.UserPassword;
                 }
-                document.SecuritySettings.PermitAccessibilityExtractContent = settings.Encryption.PermitAccessibilityExtractContent;
-                document.SecuritySettings.PermitAnnotations = settings.Encryption.PermitAnnotations;
-                document.SecuritySettings.PermitAssembleDocument = settings.Encryption.PermitAssembleDocument;
-                document.SecuritySettings.PermitExtractContent = settings.Encryption.PermitExtractContent;
-                document.SecuritySettings.PermitFormsFill = settings.Encryption.PermitFormsFill;
-                document.SecuritySettings.PermitFullQualityPrint = settings.Encryption.PermitFullQualityPrint;
-                document.SecuritySettings.PermitModifyDocument = settings.Encryption.PermitModifyDocument;
-                document.SecuritySettings.PermitPrint = settings.Encryption.PermitPrint;
+                document.SecuritySettings.PermitAccessibilityExtractContent = settings.Encryption.AllowContentCopyingForAccessibility;
+                document.SecuritySettings.PermitAnnotations = settings.Encryption.AllowAnnotations;
+                document.SecuritySettings.PermitAssembleDocument = settings.Encryption.AllowDocumentAssembly;
+                document.SecuritySettings.PermitExtractContent = settings.Encryption.AllowContentCopying;
+                document.SecuritySettings.PermitFormsFill = settings.Encryption.AllowFormFilling;
+                document.SecuritySettings.PermitFullQualityPrint = settings.Encryption.AllowFullQualityPrinting;
+                document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
+                document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
 
             int i = 1;

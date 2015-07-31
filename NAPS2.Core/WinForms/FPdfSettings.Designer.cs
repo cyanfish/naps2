@@ -47,11 +47,13 @@ namespace NAPS2.WinForms
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupProtection = new System.Windows.Forms.GroupBox();
+            this.cbShowUserPassword = new System.Windows.Forms.CheckBox();
+            this.cbShowOwnerPassword = new System.Windows.Forms.CheckBox();
             this.cbAllowFullQualityPrinting = new System.Windows.Forms.CheckBox();
             this.cbAllowFormFilling = new System.Windows.Forms.CheckBox();
             this.cbAllowAnnotations = new System.Windows.Forms.CheckBox();
-            this.cbAllowContentExtractionAccessibility = new System.Windows.Forms.CheckBox();
-            this.cbAllowContentExtraction = new System.Windows.Forms.CheckBox();
+            this.cbAllowContentCopyingForAccessibility = new System.Windows.Forms.CheckBox();
+            this.cbAllowContentCopying = new System.Windows.Forms.CheckBox();
             this.cbAllowDocumentAssembly = new System.Windows.Forms.CheckBox();
             this.cbAllowDocumentModification = new System.Windows.Forms.CheckBox();
             this.cbAllowPrinting = new System.Windows.Forms.CheckBox();
@@ -62,8 +64,6 @@ namespace NAPS2.WinForms
             this.cbEncryptPdf = new System.Windows.Forms.CheckBox();
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
-            this.cbShowOwnerPassword = new System.Windows.Forms.CheckBox();
-            this.cbShowUserPassword = new System.Windows.Forms.CheckBox();
             this.groupMetadata.SuspendLayout();
             this.groupProtection.SuspendLayout();
             this.SuspendLayout();
@@ -143,8 +143,8 @@ namespace NAPS2.WinForms
             this.groupProtection.Controls.Add(this.cbAllowFullQualityPrinting);
             this.groupProtection.Controls.Add(this.cbAllowFormFilling);
             this.groupProtection.Controls.Add(this.cbAllowAnnotations);
-            this.groupProtection.Controls.Add(this.cbAllowContentExtractionAccessibility);
-            this.groupProtection.Controls.Add(this.cbAllowContentExtraction);
+            this.groupProtection.Controls.Add(this.cbAllowContentCopyingForAccessibility);
+            this.groupProtection.Controls.Add(this.cbAllowContentCopying);
             this.groupProtection.Controls.Add(this.cbAllowDocumentAssembly);
             this.groupProtection.Controls.Add(this.cbAllowDocumentModification);
             this.groupProtection.Controls.Add(this.cbAllowPrinting);
@@ -156,6 +156,20 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.groupProtection, "groupProtection");
             this.groupProtection.Name = "groupProtection";
             this.groupProtection.TabStop = false;
+            // 
+            // cbShowUserPassword
+            // 
+            resources.ApplyResources(this.cbShowUserPassword, "cbShowUserPassword");
+            this.cbShowUserPassword.Name = "cbShowUserPassword";
+            this.cbShowUserPassword.UseVisualStyleBackColor = true;
+            this.cbShowUserPassword.CheckedChanged += new System.EventHandler(this.cbShowUserPassword_CheckedChanged);
+            // 
+            // cbShowOwnerPassword
+            // 
+            resources.ApplyResources(this.cbShowOwnerPassword, "cbShowOwnerPassword");
+            this.cbShowOwnerPassword.Name = "cbShowOwnerPassword";
+            this.cbShowOwnerPassword.UseVisualStyleBackColor = true;
+            this.cbShowOwnerPassword.CheckedChanged += new System.EventHandler(this.cbShowOwnerPassword_CheckedChanged);
             // 
             // cbAllowFullQualityPrinting
             // 
@@ -175,17 +189,17 @@ namespace NAPS2.WinForms
             this.cbAllowAnnotations.Name = "cbAllowAnnotations";
             this.cbAllowAnnotations.UseVisualStyleBackColor = true;
             // 
-            // cbAllowContentExtractionAccessibility
+            // cbAllowContentCopyingForAccessibility
             // 
-            resources.ApplyResources(this.cbAllowContentExtractionAccessibility, "cbAllowContentExtractionAccessibility");
-            this.cbAllowContentExtractionAccessibility.Name = "cbAllowContentExtractionAccessibility";
-            this.cbAllowContentExtractionAccessibility.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.cbAllowContentCopyingForAccessibility, "cbAllowContentCopyingForAccessibility");
+            this.cbAllowContentCopyingForAccessibility.Name = "cbAllowContentCopyingForAccessibility";
+            this.cbAllowContentCopyingForAccessibility.UseVisualStyleBackColor = true;
             // 
-            // cbAllowContentExtraction
+            // cbAllowContentCopying
             // 
-            resources.ApplyResources(this.cbAllowContentExtraction, "cbAllowContentExtraction");
-            this.cbAllowContentExtraction.Name = "cbAllowContentExtraction";
-            this.cbAllowContentExtraction.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.cbAllowContentCopying, "cbAllowContentCopying");
+            this.cbAllowContentCopying.Name = "cbAllowContentCopying";
+            this.cbAllowContentCopying.UseVisualStyleBackColor = true;
             // 
             // cbAllowDocumentAssembly
             // 
@@ -247,20 +261,6 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults.UseVisualStyleBackColor = true;
             this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
-            // cbShowOwnerPassword
-            // 
-            resources.ApplyResources(this.cbShowOwnerPassword, "cbShowOwnerPassword");
-            this.cbShowOwnerPassword.Name = "cbShowOwnerPassword";
-            this.cbShowOwnerPassword.UseVisualStyleBackColor = true;
-            this.cbShowOwnerPassword.CheckedChanged += new System.EventHandler(this.cbShowOwnerPassword_CheckedChanged);
-            // 
-            // cbShowUserPassword
-            // 
-            resources.ApplyResources(this.cbShowUserPassword, "cbShowUserPassword");
-            this.cbShowUserPassword.Name = "cbShowUserPassword";
-            this.cbShowUserPassword.UseVisualStyleBackColor = true;
-            this.cbShowUserPassword.CheckedChanged += new System.EventHandler(this.cbShowUserPassword_CheckedChanged);
-            // 
             // FPdfSettings
             // 
             resources.ApplyResources(this, "$this");
@@ -300,8 +300,8 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.CheckBox cbAllowPrinting;
         private System.Windows.Forms.CheckBox cbAllowDocumentModification;
         private System.Windows.Forms.CheckBox cbAllowDocumentAssembly;
-        private System.Windows.Forms.CheckBox cbAllowContentExtraction;
-        private System.Windows.Forms.CheckBox cbAllowContentExtractionAccessibility;
+        private System.Windows.Forms.CheckBox cbAllowContentCopying;
+        private System.Windows.Forms.CheckBox cbAllowContentCopyingForAccessibility;
         private System.Windows.Forms.CheckBox cbAllowAnnotations;
         private System.Windows.Forms.CheckBox cbAllowFormFilling;
         private System.Windows.Forms.CheckBox cbAllowFullQualityPrinting;

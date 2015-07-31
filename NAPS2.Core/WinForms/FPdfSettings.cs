@@ -63,14 +63,14 @@ namespace NAPS2.WinForms
             cbEncryptPdf.Checked = pdfSettings.Encryption.EncryptPdf;
             txtOwnerPassword.Text = pdfSettings.Encryption.OwnerPassword;
             txtUserPassword.Text = pdfSettings.Encryption.UserPassword;
-            cbAllowContentExtractionAccessibility.Checked = pdfSettings.Encryption.PermitAccessibilityExtractContent;
-            cbAllowAnnotations.Checked = pdfSettings.Encryption.PermitAnnotations;
-            cbAllowDocumentAssembly.Checked = pdfSettings.Encryption.PermitAssembleDocument;
-            cbAllowContentExtraction.Checked = pdfSettings.Encryption.PermitExtractContent;
-            cbAllowFormFilling.Checked = pdfSettings.Encryption.PermitFormsFill;
-            cbAllowFullQualityPrinting.Checked = pdfSettings.Encryption.PermitFullQualityPrint;
-            cbAllowDocumentModification.Checked = pdfSettings.Encryption.PermitModifyDocument;
-            cbAllowPrinting.Checked = pdfSettings.Encryption.PermitPrint;
+            cbAllowContentCopyingForAccessibility.Checked = pdfSettings.Encryption.AllowContentCopyingForAccessibility;
+            cbAllowAnnotations.Checked = pdfSettings.Encryption.AllowAnnotations;
+            cbAllowDocumentAssembly.Checked = pdfSettings.Encryption.AllowDocumentAssembly;
+            cbAllowContentCopying.Checked = pdfSettings.Encryption.AllowContentCopying;
+            cbAllowFormFilling.Checked = pdfSettings.Encryption.AllowFormFilling;
+            cbAllowFullQualityPrinting.Checked = pdfSettings.Encryption.AllowFullQualityPrinting;
+            cbAllowDocumentModification.Checked = pdfSettings.Encryption.AllowDocumentModification;
+            cbAllowPrinting.Checked = pdfSettings.Encryption.AllowPrinting;
         }
 
         private void UpdateEnabled()
@@ -79,7 +79,7 @@ namespace NAPS2.WinForms
             txtUserPassword.Enabled = txtOwnerPassword.Enabled = cbShowOwnerPassword.Enabled = cbShowUserPassword.Enabled =
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
             cbAllowAnnotations.Enabled =
-                cbAllowContentExtraction.Enabled = cbAllowContentExtractionAccessibility.Enabled =
+                cbAllowContentCopying.Enabled = cbAllowContentCopyingForAccessibility.Enabled =
                     cbAllowDocumentAssembly.Enabled = cbAllowDocumentModification.Enabled = cbAllowFormFilling.Enabled =
                         cbAllowFullQualityPrinting.Enabled = cbAllowPrinting.Enabled = encrypt;
         }
@@ -100,14 +100,14 @@ namespace NAPS2.WinForms
                     EncryptPdf = cbEncryptPdf.Checked,
                     OwnerPassword = txtOwnerPassword.Text,
                     UserPassword = txtUserPassword.Text,
-                    PermitAccessibilityExtractContent = cbAllowContentExtractionAccessibility.Checked,
-                    PermitAnnotations = cbAllowAnnotations.Checked,
-                    PermitAssembleDocument = cbAllowDocumentAssembly.Checked,
-                    PermitExtractContent = cbAllowContentExtraction.Checked,
-                    PermitFormsFill = cbAllowFormFilling.Checked,
-                    PermitFullQualityPrint = cbAllowFullQualityPrinting.Checked,
-                    PermitModifyDocument = cbAllowDocumentModification.Checked,
-                    PermitPrint = cbAllowPrinting.Checked
+                    AllowContentCopyingForAccessibility = cbAllowContentCopyingForAccessibility.Checked,
+                    AllowAnnotations = cbAllowAnnotations.Checked,
+                    AllowDocumentAssembly = cbAllowDocumentAssembly.Checked,
+                    AllowContentCopying = cbAllowContentCopying.Checked,
+                    AllowFormFilling = cbAllowFormFilling.Checked,
+                    AllowFullQualityPrinting = cbAllowFullQualityPrinting.Checked,
+                    AllowDocumentModification = cbAllowDocumentModification.Checked,
+                    AllowPrinting = cbAllowPrinting.Checked
                 }
             };
 
