@@ -30,14 +30,14 @@ using NAPS2.Scan.Images;
 
 namespace NAPS2.WinForms
 {
-    public partial class FPDFSave : FormBase
+    public partial class FPdfSave : FormBase
     {
         private readonly IPdfExporter pdfExporter;
         private readonly IErrorOutput errorOutput;
         private readonly IUserConfigManager userConfigManager;
         private readonly PdfSettingsContainer pdfSettingsContainer;
 
-        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
+        public FPdfSave(IPdfExporter pdfExporter, IErrorOutput errorOutput, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
         {
             InitializeComponent();
             this.pdfExporter = pdfExporter;

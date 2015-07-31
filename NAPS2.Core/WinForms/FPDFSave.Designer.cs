@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.WinForms
 {
-    partial class FPDFSave
+    partial class FPdfSave
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace NAPS2.WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPDFSave));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPdfSave));
             this.label1 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();

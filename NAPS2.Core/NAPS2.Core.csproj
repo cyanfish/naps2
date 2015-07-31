@@ -333,11 +333,11 @@
     <Compile Include="WinForms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\FPDFSave.cs">
+    <Compile Include="WinForms\FPdfSave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\FPDFSave.Designer.cs">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <Compile Include="WinForms\FPdfSave.Designer.cs">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FRecover.cs">
       <SubType>Form</SubType>
@@ -1564,75 +1564,75 @@
     <EmbeddedResource Include="WinForms\FPageSize.zh-TW.resx">
       <DependentUpon>FPageSize.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.bg.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.bg.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.ca.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.ca.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.cs.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.cs.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.da.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.da.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.de.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.de.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.es.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.es.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.fr.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.fr.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.he.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.he.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.hr.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.hr.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.hu.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.hu.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.it.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.it.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.nl.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.nl.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.pl.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.pl.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.pt-BR.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.pt-BR.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.pt-PT.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.pt-PT.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.ro.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.ro.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.ru.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.ru.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.sq.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.sq.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.sv.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.sv.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.tr.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.tr.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.uk.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.uk.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.zh-TW.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.zh-TW.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRecover.bg.resx">
       <DependentUpon>FRecover.cs</DependentUpon>

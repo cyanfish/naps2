@@ -331,7 +331,7 @@ namespace NAPS2.WinForms
 
         private void ExportPDF(string filename, List<IScannedImage> images)
         {
-            var pdfdialog = FormFactory.Create<FPDFSave>();
+            var pdfdialog = FormFactory.Create<FPdfSave>();
             pdfdialog.Filename = filename;
             pdfdialog.Images = images;
             pdfdialog.ShowDialog(this);
