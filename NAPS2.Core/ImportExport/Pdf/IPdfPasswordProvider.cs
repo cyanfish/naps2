@@ -7,6 +7,6 @@ namespace NAPS2.ImportExport.Pdf
 {
     public interface IPdfPasswordProvider
     {
-        bool ProvidePassword(string fileName, out string password);
+        bool ProvidePassword(string fileName, int attemptCount, out string password);
     }
 }

@@ -15,7 +15,7 @@ namespace NAPS2.ImportExport.Pdf
             this.formFactory = formFactory;
         }
 
-        public bool ProvidePassword(string fileName, out string password)
+        public bool ProvidePassword(string fileName, int attemptCount, out string password)
         {
             var passwordForm = formFactory.Create<FPdfPassword>();
             passwordForm.FileName = fileName;

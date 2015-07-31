@@ -210,4 +210,11 @@
   <data name="CouldntLoadEncryptionConfig" xml:space="preserve">
     <value>The encryption configuration file could not be loaded.</value>
   </data>
+  <data name="ImportErrorNoPassword" xml:space="preserve">
+    <value>The file could not be imported because it requires a password.
+Use the "--importpassword" option.</value>
+  </data>
+  <data name="ImportErrorWrongPassword" xml:space="preserve">
+    <value>The file could not be imported because the provided password was incorrect.</value>
+  </data>
 </root>

@@ -33,14 +33,13 @@ namespace NAPS2.ImportExport.Pdf
 
         public IEnumerable<IScannedImage> Import(string filePath)
         {
-            bool neededPassword = false;
+            int passwordAttempts = 0;
             bool aborted = false;
             try
             {
                 PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.ReadOnly, args =>
                 {
-                    neededPassword = true;
-                    if (!pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), out args.Password))
+                    if (!pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++, out args.Password))
                     {
                         args.Abort = true;
                         aborted = true;
@@ -51,7 +50,7 @@ namespace NAPS2.ImportExport.Pdf
                     errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
                     return Enumerable.Empty<IScannedImage>();
                 }
-                if (neededPassword
+                if (passwordAttempts > 0
                     && !document.SecuritySettings.HasOwnerPermissions
                     && !document.SecuritySettings.PermitExtractContent)
                 {

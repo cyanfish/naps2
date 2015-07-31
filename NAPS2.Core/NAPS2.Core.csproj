@@ -90,7 +90,6 @@
     <Compile Include="Config\UserConfigManager.cs" />
     <Compile Include="ImportExport\Email\EmailSettings.cs" />
     <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />
-    <Compile Include="ImportExport\Pdf\ConsolePdfPasswordProvider.cs" />
     <Compile Include="ImportExport\Pdf\IPdfPasswordProvider.cs" />
     <Compile Include="ImportExport\Pdf\PdfEncryption.cs" />
     <Compile Include="ImportExport\Pdf\PdfMetadata.cs" />

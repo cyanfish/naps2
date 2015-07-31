@@ -336,7 +336,7 @@ namespace NAPS2.Console
 
         private void DoExportToPdf(string outputPath)
         {
-            var metadata = options.PdfMetadataDefault ? pdfSettingsContainer.PdfSettings.Metadata : new PdfMetadata();
+            var metadata = options.UseSavedMetadata ? pdfSettingsContainer.PdfSettings.Metadata : new PdfMetadata();
             metadata.Creator = ConsoleResources.NAPS2;
             if (options.PdfTitle != null)
             {
@@ -355,12 +355,12 @@ namespace NAPS2.Console
                 metadata.Keywords = options.PdfKeywords;
             }
 
-            var encryption = options.PdfEncryptDefault ? pdfSettingsContainer.PdfSettings.Encryption : new PdfEncryption();
-            if (options.PdfEncrypt != null)
+            var encryption = options.UseSavedEncryptConfig ? pdfSettingsContainer.PdfSettings.Encryption : new PdfEncryption();
+            if (options.EncryptConfig != null)
             {
                 try
                 {
-                    using (Stream configFileStream = File.OpenRead(options.PdfEncrypt))
+                    using (Stream configFileStream = File.OpenRead(options.EncryptConfig))
                     {
                         var serializer = new XmlSerializer(typeof(PdfEncryption));
                         encryption = (PdfEncryption)serializer.Deserialize(configFileStream);

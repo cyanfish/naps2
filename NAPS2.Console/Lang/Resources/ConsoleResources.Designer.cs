@@ -214,6 +214,25 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file could not be imported because it requires a password.
+        ///Use the &quot;--importpassword&quot; option..
+        /// </summary>
+        internal static string ImportErrorNoPassword {
+            get {
+                return ResourceManager.GetString("ImportErrorNoPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file could not be imported because the provided password was incorrect..
+        /// </summary>
+        internal static string ImportErrorWrongPassword {
+            get {
+                return ResourceManager.GetString("ImportErrorWrongPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Importing....
         /// </summary>
         internal static string Importing {
