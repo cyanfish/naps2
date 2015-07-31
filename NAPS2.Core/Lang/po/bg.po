@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 19:04+0000\n"
+"POT-Creation-Date: 2015-07-31 23:11+0000\n"
 "PO-Revision-Date: 2015-06-01 20:14+0000\n"
 "Last-Translator: Ben <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,17 +72,49 @@ msgstr "A5 (148 x 210 мм)"
 msgid "About"
 msgstr "Относно"
 
-#: FManageProfiles.resx$btnAdd.Text$Message
-msgid "Add"
-msgstr "Добави"
+#: FScanProgress.resx$$this.Text$Message
+msgid "Acquiring data"
+msgstr ""
 
+#: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
 msgid "All ({0})"
 msgstr "Всички ({0})"
+
+#: FPdfSettings.resx$cbAllowAnnotations.Text$Message
+msgid "Allow Annotations"
+msgstr ""
+
+#: FPdfSettings.resx$cbAllowContentCopying.Text$Message
+msgid "Allow Content Copying"
+msgstr ""
+
+#: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
+msgid "Allow Content Copying for Accessibility"
+msgstr ""
+
+#: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
+msgid "Allow Document Assembly"
+msgstr ""
+
+#: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
+msgid "Allow Document Modification"
+msgstr ""
+
+#: FPdfSettings.resx$cbAllowFormFilling.Text$Message
+msgid "Allow Form Filling"
+msgstr ""
+
+#: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
+msgid "Allow Full Quality Printing"
+msgstr ""
+
+#: FPdfSettings.resx$cbAllowPrinting.Text$Message
+msgid "Allow Printing"
+msgstr ""
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -108,6 +140,18 @@ msgstr "Сигурни ли сте, че искате да изтриете {0} 
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "Сигурни ли сте, че искате да изтриете {0} профила ?"
 
+#: MiscResources.resx$ConfirmResetImages$Message
+msgid "Are you sure you want undo your changes to {0} image(s)?"
+msgstr ""
+
+#: FEmailSettings.resx$label1.Text$Message
+msgid "Attachment Name"
+msgstr ""
+
+#: FPdfSettings.resx$label3.Text$Message
+msgid "Author"
+msgstr ""
+
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
 msgstr "Автоматично обновяване"
@@ -132,15 +176,26 @@ msgstr "Bitmap файл (*.bmp)"
 msgid "Black & White"
 msgstr "Черно и бяло"
 
+#: FDesktop.resx$tsBrightness.Text$Message
+#: FViewer.resx$tsBrightness.Text$Message
+#: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Яркост"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
+#: FScanProgress.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
+#: FContrast.resx$btnCancel.Text$Message
+#: FBrightness.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Откажи"
 
@@ -148,12 +203,7 @@ msgstr "Откажи"
 msgid "Center"
 msgstr "Център"
 
-#: FChooseIcon.resx$$this.Text$Message
-msgid "Choose Icon"
-msgstr "Избери икона"
-
 #: MiscResources.resx$ChooseProfile$Message
-#: FChooseProfile.resx$$this.Text$Message
 msgid "Choose Profile"
 msgstr "Избери профил "
 
@@ -166,6 +216,9 @@ msgstr "Избери устройство"
 msgid "Clear"
 msgstr "Изчисти"
 
+#: FViewer.resx$tsContrast.Text$Message
+#: FDesktop.resx$tsContrast.Text$Message
+#: FContrast.resx$$this.Text$Message
 #: FEditScanSettings.resx$label7.Text$Message
 msgid "Contrast"
 msgstr "Контраст"
@@ -183,12 +236,18 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
-msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
+msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
+msgstr ""
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Copyright © 2013 Peter De Leeuw"
+
+#: FDesktop.resx$tsCrop.Text$Message
+#: FViewer.resx$tsCrop.Text$Message
+#: FCrop.resx$$this.Text$Message
+msgid "Crop"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -202,13 +261,19 @@ msgstr ""
 msgid "Custom Page Size"
 msgstr ""
 
+#: FViewer.resx$tsCustomRotation.Text$Message
+#: FDesktop.resx$customRotationToolStripMenuItem.Text$Message
+msgid "Custom Rotation"
+msgstr ""
+
 # Need some more information what does exactly this function do ?
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "Deinterleave"
 
 #: FRecover.resx$btnDelete.Text$Message
-#: FManageProfiles.resx$btnDelete.Text$Message
+#: FProfiles.resx$btnDelete.Text$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
@@ -226,7 +291,7 @@ msgstr "Име за показване"
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "Искате ли NAPS2 автоматично да проверява за ъпдейти ?"
 
-#: FChooseProfile.resx$btnDone.Text$Message
+#: FProfiles.resx$btnDone.Text$Message
 msgid "Done"
 msgstr "Готово"
 
@@ -253,13 +318,27 @@ msgstr "Свали и инсталирай"
 msgid "Duplex"
 msgstr "Двустранно"
 
-#: FManageProfiles.resx$btnEdit.Text$Message
+#: FProfiles.resx$btnEdit.Text$Message
+#: FProfiles.resx$ctxEdit.Text$Message
 msgid "Edit"
 msgstr "Редактиране"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
 msgstr "Изпрати PDF по имейл"
+
+#: FEmailSettings.resx$$this.Text$Message
+#: FDesktop.resx$tsEmailSettings.Text$Message
+msgid "Email Settings"
+msgstr ""
+
+#: FPdfSettings.resx$cbEncryptPdf.Text$Message
+msgid "Encrypt PDF"
+msgstr ""
+
+#: FPdfSettings.resx$groupProtection.Text$Message
+msgid "Encryption"
+msgstr ""
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -282,6 +361,7 @@ msgstr "Exchangeable Image File (*.exif)"
 msgid "Feeder"
 msgstr "Захранваща тава за листи"
 
+#: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
 msgid "Flip"
 msgstr "Обръщане"
@@ -309,6 +389,10 @@ msgstr "Хоризонтално подравняване"
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
 msgstr "Икони от"
+
+#: FDesktop.resx$tsdImage.Text$Message
+msgid "Image"
+msgstr ""
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -338,6 +422,10 @@ msgstr "Interleave"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG файл (*.jpg, *.jpeg)"
 
+#: FPdfSettings.resx$label6.Text$Message
+msgid "Keywords"
+msgstr ""
+
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
 msgstr "Език"
@@ -354,21 +442,13 @@ msgstr "Основна лента с инструменти"
 msgid "Make PDFs searchable using OCR"
 msgstr "Създай PDF с възможност за търсене посредством OCR"
 
-#: FChooseProfile.resx$btnProfiles.Text$Message
-msgid "Manage Profiles"
-msgstr "Управление на профилите"
-
 #: FEditScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
 msgstr "Максимално качество (по-големи файлове)"
 
-#: FDesktop.resx$tsMoveDown.Text$Message
-msgid "Move Down"
-msgstr "Преместване надолу"
-
-#: FDesktop.resx$tsMoveUp.Text$Message
-msgid "Move Up"
-msgstr "Преместване нагоре"
+#: FPdfSettings.resx$groupMetadata.Text$Message
+msgid "Metadata"
+msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -378,9 +458,25 @@ msgstr "NAPS2"
 msgid "Name missing"
 msgstr "Липсва име"
 
+#: FProfiles.resx$btnAdd.Text$Message
+msgid "New"
+msgstr ""
+
+#: FDesktop.resx$tsNewProfile.Text$Message
+msgid "New Profile"
+msgstr ""
+
+#: FViewer.resx$tsNext.Text$Message
+msgid "Next"
+msgstr ""
+
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
 msgstr "Не е избрано устройство"
+
+#: MiscResources.resx$NoPagesInFeeder$Message
+msgid "No pages are in the feeder"
+msgstr ""
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -412,11 +508,17 @@ msgstr "Настройки на OCR"
 msgid "OCR language"
 msgstr "Език на OCR"
 
+#: FEmailSettings.resx$btnOK.Text$Message
+#: FEditScanSettings.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
-#: FEditScanSettings.resx$btnOK.Text$Message
-#: FManageProfiles.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
+#: FRotate.resx$btnOK.Text$Message
+#: FContrast.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
+#: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
 
@@ -427,6 +529,16 @@ msgstr "Един или няколко файла не могат да бъда�
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
 msgstr "Презаписване на файла"
+
+#: FPdfSettings.resx$lblOwnerPassword.Text$Message
+msgid "Owner Password"
+msgstr ""
+
+#: FPdfSettings.resx$$this.Text$Message
+#: FDesktop.resx$tsPDFSettings.Text$Message
+#: FDesktop.resx$tsPdfSettings2.Text$Message
+msgid "PDF Settings"
+msgstr ""
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF document (*.pdf)"
@@ -444,22 +556,30 @@ msgstr "Размер на страница"
 msgid "Paper source"
 msgstr "Източник на хартия"
 
+#: FPdfPassword.resx$$this.Text$Message
+msgid "Password"
+msgstr ""
+
 #: FViewer.resx$$this.Text$Message
 msgid "Preview"
 msgstr "Преглед"
+
+#: FViewer.resx$tsPrev.Text$Message
+msgid "Previous"
+msgstr ""
+
+#: FDesktop.resx$tsdPrint.Text$Message
+msgid "Print"
+msgstr ""
 
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
 msgstr "Настройки на профила"
 
-#: FManageProfiles.resx$$this.Text$Message
+#: FProfiles.resx$$this.Text$Message
 #: FDesktop.resx$tsProfiles.Text$Message
 msgid "Profiles"
 msgstr "Профили"
-
-#: FDesktop.resx$btnQuickScan.Text$Message
-msgid "Quick Scan"
-msgstr ""
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -469,30 +589,59 @@ msgstr ""
 msgid "Recover Scanned Images"
 msgstr ""
 
+#: FPdfSettings.resx$cbRememberSettings.Text$Message
+#: FEmailSettings.resx$cbRememberSettings.Text$Message
+msgid "Remember these settings"
+msgstr ""
+
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
 msgstr "Пренареждане"
+
+#: FDesktop.resx$tsReset.Text$Message
+msgid "Reset"
+msgstr ""
+
+#: MiscResources.resx$ResetImage$Message
+msgid "Reset Image"
+msgstr ""
 
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Резолюция"
 
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
+msgid "Restore Defaults"
+msgstr ""
+
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
+msgstr ""
+
+#: FRotate.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
+#: FContrast.resx$btnRevert.Text$Message
+#: FBrightness.resx$btnRevert.Text$Message
+msgid "Revert"
 msgstr ""
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Дясно"
 
+#: FRotate.resx$$this.Text$Message
+#: FViewer.resx$tsdRotate.Text$Message
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
 msgstr "Завъртане"
 
+#: FViewer.resx$tsRotateLeft.Text$Message
 #: FDesktop.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
 msgstr "Завъртане наляво"
 
+#: FViewer.resx$tsRotateRight.Text$Message
 #: FDesktop.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
 msgstr "Завъртане надясно"
@@ -505,16 +654,21 @@ msgstr "Запис на изображенията"
 msgid "Save PDF"
 msgstr "Запис на PDF"
 
-#: FPDFSave.resx$label1.Text$Message
+#: FPdfSave.resx$label1.Text$Message
 msgid "Saving to PDF"
 msgstr "Записване на PDF файл "
 
-#: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 #: FEditScanSettings.resx$label10.Text$Message
 msgid "Scale"
 msgstr "Мащаб"
 
-#: FChooseProfile.resx$btnScan.Text$Message
+#: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
+msgid "Scale With Window"
+msgstr ""
+
+#: FProfiles.resx$btnScan.Text$Message
+#: FProfiles.resx$ctxScan.Text$Message
+#: MiscResources.resx$Scan$Message
 #: FDesktop.resx$tsScan.Text$Message
 msgid "Scan"
 msgstr "Сканиране"
@@ -522,6 +676,11 @@ msgstr "Сканиране"
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
 msgstr "Сканирано изображение"
+
+#: MiscResources.resx$ScanPageProgress$Message
+#: FScanProgress.resx$labelPage.Text$Message
+msgid "Scanning page {0}"
+msgstr ""
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
@@ -535,13 +694,26 @@ msgstr "Избери Профил преди да натиснеш 'Сканир
 msgid "Select one or more languages"
 msgstr "Избери един или повече езици"
 
-#: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
-#: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 msgid "Selected ({0})"
 msgstr "Избрани ({0})"
+
+#: FProfiles.resx$ctxSetDefault.Text$Message
+msgid "Set Default"
+msgstr ""
+
+#: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
+#: FPdfSettings.resx$cbShowUserPassword.Text$Message
+msgid "Show"
+msgstr ""
+
+#: FPdfSettings.resx$label5.Text$Message
+msgid "Subject"
+msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -565,13 +737,25 @@ msgstr ""
 msgid "The file {0} already exists. Do you want to overwrite it?"
 msgstr "Вече има файл {0} . Искате ли да бъде презаписан?"
 
+#: FPdfPassword.resx$lblPrompt.Text$Message
+msgid "The following file is encrypted and requires a password to open: {0}"
+msgstr ""
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "Избраният скенер не е достъпен"
 
+#: MiscResources.resx$NoFeederSupport$Message
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgstr ""
+
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "Избраният скенер е не е достъпен"
+
+#: FPdfSettings.resx$label4.Text$Message
+msgid "Title"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -580,6 +764,10 @@ msgstr "US Legal (8.5x14 инча)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "US Писмо (8.5x14 in)"
+
+#: MiscResources.resx$UnsavedChanges$Message
+msgid "Unsaved Changes"
+msgstr ""
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
@@ -593,6 +781,10 @@ msgstr ""
 msgid "Use predefined settings"
 msgstr "Използвай готови настройки"
 
+#: FPdfSettings.resx$lblUserPassword.Text$Message
+msgid "User Password"
+msgstr ""
+
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
 msgstr ""
@@ -603,6 +795,7 @@ msgstr ""
 msgid "Version {0}"
 msgstr "Версия {0}"
 
+#: FDesktop.resx$tsView.Text$Message
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
 msgstr "Изглед"
@@ -619,22 +812,33 @@ msgstr "Изчакване TWAIN да приключи задачата"
 msgid "X"
 msgstr ""
 
+#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
+msgid "You do not have permission to copy content from the file "{0}""
+msgstr ""
+
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
 msgstr "Нямате права за създаването на файлове в тази папка."
+
+#: MiscResources.resx$ExitWithUnsavedChanges$Message
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgstr ""
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
 msgstr "Увеличаване/Намаляване"
 
+#: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
+msgid "Zoom Actual"
+msgstr ""
+
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
-msgid "Zoom in"
-msgstr "Увеличаване"
+msgid "Zoom In"
+msgstr ""
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
-msgid "Zoom out"
-msgstr "Намаляване"
+msgid "Zoom Out"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
@@ -656,6 +860,10 @@ msgstr ""
 msgid "mm"
 msgstr ""
 
+#: FViewer.resx$lblPageTotal.Text$Message
+msgid "of {0}"
+msgstr ""
+
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
 msgid "{0} / {1} MB"
@@ -673,6 +881,30 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} от {1}"
+
+#~ msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
+#~ msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
+
+#~ msgid "Add"
+#~ msgstr "Добави"
+
+#~ msgid "Choose Icon"
+#~ msgstr "Избери икона"
+
+#~ msgid "Manage Profiles"
+#~ msgstr "Управление на профилите"
+
+#~ msgid "Move Down"
+#~ msgstr "Преместване надолу"
+
+#~ msgid "Move Up"
+#~ msgstr "Преместване нагоре"
+
+#~ msgid "Zoom in"
+#~ msgstr "Увеличаване"
+
+#~ msgid "Zoom out"
+#~ msgstr "Намаляване"
 
 #~ msgid "Use native WIA UI"
 #~ msgstr "Използвай вградения WIA интерфейс"
