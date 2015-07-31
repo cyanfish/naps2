@@ -41,7 +41,7 @@ namespace NAPS2.WinForms
         protected override void OnLoad(object sender, EventArgs e)
         {
             new LayoutManager(this)
-                .Bind(btnOK, btnCancel)
+                .Bind(btnOK, btnCancel, cbShowOwnerPassword, cbShowUserPassword)
                     .RightToForm()
                 .Bind(groupMetadata, groupProtection)
                     .WidthToForm()
