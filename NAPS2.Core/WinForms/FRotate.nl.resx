@@ -202,7 +202,7 @@
         <value>7</value>
     </data>
     <data name="btnRevert.Text" xml:space="preserve">
-        <value>Revert</value>
+        <value>Ongedaan maken</value>
     </data>
     <data name="&gt;&gt;btnRevert.Name" xml:space="preserve">
         <value>btnRevert</value>

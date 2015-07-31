@@ -301,7 +301,7 @@
         <value>7</value>
     </data>
     <data name="btnRevert.Text" xml:space="preserve">
-        <value>Revert</value>
+        <value>Geri Al</value>
     </data>
     <data name="&gt;&gt;btnRevert.Name" xml:space="preserve">
         <value>btnRevert</value>
@@ -357,7 +357,7 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Kırp</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FCrop</value>

@@ -316,7 +316,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Use native UI</value>
+        <value>Użyj natywnego interfejsu</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -367,7 +367,7 @@
         <value>9</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Głębia bitowa::</value>
+        <value>Głębia bitowa:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
