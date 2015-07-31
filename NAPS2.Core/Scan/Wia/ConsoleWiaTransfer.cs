@@ -11,7 +11,6 @@ namespace NAPS2.Scan.Wia
         public Stream Transfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format)
         {
             // The console shouldn't spawn new forms, so use the silent transfer method.
-            // TODO: Test cancellation (via Ctrl+C or similar)
             ImageFile imageFile = eventLoop.GetSync(wia => (ImageFile)wia.Item.Transfer(format));
             if (imageFile == null)
             {

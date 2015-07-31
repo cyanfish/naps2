@@ -314,6 +314,15 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scanned page {0}..
+        /// </summary>
+        internal static string ScannedPage {
+            get {
+                return ResourceManager.GetString("ScannedPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sending email....
         /// </summary>
         internal static string SendingEmail {

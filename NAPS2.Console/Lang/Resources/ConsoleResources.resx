@@ -217,4 +217,7 @@ Use the "--importpassword" option.</value>
   <data name="ImportErrorWrongPassword" xml:space="preserve">
     <value>The file could not be imported because the provided password was incorrect.</value>
   </data>
+  <data name="ScannedPage" xml:space="preserve">
+    <value>Scanned page {0}.</value>
+  </data>
 </root>

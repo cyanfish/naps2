@@ -55,6 +55,7 @@ namespace NAPS2.Console
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
+        private int totalPagesScanned;
 
         public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
         {
@@ -390,6 +391,7 @@ namespace NAPS2.Console
             OutputVerbose(ConsoleResources.BeginningScan);
 
             IWin32Window parentWindow = new Form { Visible = false };
+            totalPagesScanned = 0;
             foreach (int i in Enumerable.Range(1, options.Number))
             {
                 if (options.Delay > 0)
@@ -437,6 +439,8 @@ namespace NAPS2.Console
         {
             scannedImages.Add(scannedImage);
             pagesScanned++;
+            totalPagesScanned++;
+            OutputVerbose(ConsoleResources.ScannedPage, totalPagesScanned);
         }
     }
 }
