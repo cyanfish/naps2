@@ -8,7 +8,10 @@ namespace NAPS2.ImportExport.Pdf
     {
         public bool ProvidePassword(string fileName, out string password)
         {
-            throw new NotImplementedException();
+            password = PasswordToProvide ?? "";
+            return true;
         }
+
+        public static string PasswordToProvide { get; set; }
     }
 }

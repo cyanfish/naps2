@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -135,6 +134,8 @@ namespace NAPS2.Console
         private void ImportImages()
         {
             OutputVerbose(ConsoleResources.Importing);
+
+            ConsolePdfPasswordProvider.PasswordToProvide = options.ImportPassword;
 
             var filePaths = options.ImportPath.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             int i = 0;
@@ -367,6 +368,7 @@ namespace NAPS2.Console
                 }
                 catch (Exception ex)
                 {
+                    logger.ErrorException(ConsoleResources.CouldntLoadEncryptionConfig, ex);
                     errorOutput.DisplayError(ConsoleResources.CouldntLoadEncryptionConfig);
                 }
             }

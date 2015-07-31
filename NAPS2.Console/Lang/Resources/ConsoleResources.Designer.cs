@@ -88,7 +88,7 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The encryption configuration file could not be loaded. The output will not be encrypted..
+        ///   Looks up a localized string similar to The encryption configuration file could not be loaded..
         /// </summary>
         internal static string CouldntLoadEncryptionConfig {
             get {
