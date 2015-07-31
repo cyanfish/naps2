@@ -12,6 +12,7 @@ namespace NAPS2.WinForms
     public partial class FScanProgress : FormBase
     {
         private bool isComplete;
+        private bool cancel;
 
         public FScanProgress()
         {
@@ -66,7 +67,7 @@ namespace NAPS2.WinForms
                 }
                 Invoke(new MethodInvoker(() =>
                 {
-                    DialogResult = DialogResult.OK;
+                    DialogResult = cancel ? DialogResult.Cancel : DialogResult.OK;
                     isComplete = true;
                     Close();
                 }));
@@ -75,7 +76,8 @@ namespace NAPS2.WinForms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            cancel = true;
+            btnCancel.Enabled = false;
         }
 
         private void FScanProgress_FormClosing(object sender, FormClosingEventArgs e)
