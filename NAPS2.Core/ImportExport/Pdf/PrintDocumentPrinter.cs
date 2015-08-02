@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@ using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -84,13 +85,25 @@ namespace NAPS2.ImportExport.Pdf
             int i = 0;
             printDocument.PrintPage += (sender, e) =>
             {
-                using (var image = imagesToPrint[i].GetImage())
+                var image = imagesToPrint[i].GetImage();
+                try
                 {
                     var pb = e.PageBounds;
+                    if (Math.Sign(image.Width - image.Height) != Math.Sign(pb.Width - pb.Height))
+                    {
+                        // Flip portrait/landscape to match output
+                        image = new RotationTransform(90).Perform(image);
+                    }
+                    // Fit the image into the output rect while maintaining its aspect ratio
                     var rect = image.Width / pb.Width < image.Height / pb.Height
-                            ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
-                            : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
+                        ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
+                        : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
+
                     e.Graphics.DrawImage(image, rect);
+                }
+                finally
+                {
+                    image.Dispose();
                 }
                 e.HasMorePages = (++i < imagesToPrint.Count);
             };

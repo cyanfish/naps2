@@ -26,7 +26,9 @@ cp "..\..\NAPS2.Setup\bin\Release\NAPS2.Setup.msi" ($PublishDir + "naps2-$Versio
 & (Get-Inno-Path) "setup.iss"
 
 # Standalone ZIP/7Z
-$StandaloneDir = $PublishDir + "naps2-$Version-standalone\"
+$StandaloneDir = $PublishDir + "naps2-$Version-portable\"
+$AppDir = $StandaloneDir + "App\"
+$DataDir = $StandaloneDir + "Data\"
 
 function Publish-NAPS2-Standalone {
     param([Parameter(Position=0)] [String] $Configuration,
@@ -35,20 +37,24 @@ function Publish-NAPS2-Standalone {
         rmdir $StandaloneDir -Recurse
     }
     mkdir $StandaloneDir
+    mkdir $AppDir
+    mkdir $DataDir
     $BinDir = "..\bin\$Configuration\"
     $CmdBinDir = "..\..\NAPS2.Console\bin\$Configuration\"
+    $PortableBinDir = "..\..\NAPS2.Portable\bin\Release\"
+    cp ($PortableBinDir + "NAPS2.Portable.exe") $StandaloneDir
     foreach ($LanguageCode in Get-NAPS2-Languages) {
-        $LangDir = $StandaloneDir + "$LanguageCode\"
+        $LangDir = $AppDir + "$LanguageCode\"
         mkdir $LangDir
         cp ($BinDir + "$LanguageCode\NAPS2.Core.resources.dll") $LangDir
     }
     foreach ($Dir in ($BinDir, $CmdBinDir)) {
         foreach ($File in (Get-ChildItem $Dir | where { $_.Name -match '(?<!vshost)\.(exe|dll)$' })) {
-            cp $File.FullName $StandaloneDir
+            cp $File.FullName $AppDir
         }
     }
     foreach ($File in ("..\..\NAPS2.Core\Resources\scanner-app.ico", "..\appsettings.xml", "lib\wiaaut.dll", "license.txt")) {
-        cp $File $StandaloneDir
+        cp $File $AppDir
     }
     if (Test-Path $ArchiveFile) {
         rm $ArchiveFile
@@ -57,5 +63,5 @@ function Publish-NAPS2-Standalone {
     rmdir -Recurse $StandaloneDir
 }
 
-Publish-NAPS2-Standalone "StandaloneZIP" ($PublishDir + "naps2-$Version-standalone.zip")
-Publish-NAPS2-Standalone "Standalone7Z" ($PublishDir + "naps2-$Version-standalone.7z")
+Publish-NAPS2-Standalone "StandaloneZIP" ($PublishDir + "naps2-$Version-portable.zip")
+Publish-NAPS2-Standalone "Standalone7Z" ($PublishDir + "naps2-$Version-portable.7z")

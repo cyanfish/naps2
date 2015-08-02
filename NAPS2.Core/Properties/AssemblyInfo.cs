@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NAPS2.Core")]
-[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, Copyright © 2012 Michael Adams, Copyright © 2013 Peter De Leeuw, Copyright © 2012-2014 Ben Olden-Cooligan; Icons from http://www.fatcow.com/free-icons")]
+[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, Copyright © 2012 Michael Adams, Copyright © 2013 Peter De Leeuw, Copyright © 2012-2015 Ben Olden-Cooligan; Icons from http://www.fatcow.com/free-icons")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,6 +30,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("3.3.5.*")]
-[assembly: AssemblyVersion("3.3.5.*")]
+// [assembly: AssemblyVersion("4.0.2.*")]
+[assembly: AssemblyVersion("4.0.2.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

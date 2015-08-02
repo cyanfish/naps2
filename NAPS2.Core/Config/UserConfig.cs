@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.ImportExport.Email;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Update;
 
 namespace NAPS2.Config
@@ -50,6 +52,10 @@ namespace NAPS2.Config
         public string OcrLanguageCode { get; set; }
 
         public string LastImageExt { get; set; }
+
+        public PdfSettings PdfSettings { get; set; }
+
+        public EmailSettings EmailSettings { get; set; }
 
         public int ThumbnailSize { get; set; }
     }

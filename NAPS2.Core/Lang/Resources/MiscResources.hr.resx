@@ -270,4 +270,31 @@
     <data name="CustomPageSizeFormat" xml:space="preserve">
         <value>Custom ({0}x{1} {2})</value>
     </data>
+    <data name="Scan" xml:space="preserve">
+        <value>Skeniraj</value>
+    </data>
+    <data name="ConfirmResetImages" xml:space="preserve">
+        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+    </data>
+    <data name="ResetImage" xml:space="preserve">
+        <value>Reset Image</value>
+    </data>
+    <data name="ExitWithUnsavedChanges" xml:space="preserve">
+        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+    </data>
+    <data name="UnsavedChanges" xml:space="preserve">
+        <value>Unsaved Changes</value>
+    </data>
+    <data name="ScanPageProgress" xml:space="preserve">
+        <value>Scanning page {0}</value>
+    </data>
+    <data name="NoFeederSupport" xml:space="preserve">
+        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    </data>
+    <data name="NoPagesInFeeder" xml:space="preserve">
+        <value>No pages are in the feeder.</value>
+    </data>
+    <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+        <value>You do not have permission to copy content from the file "{0}".</value>
+    </data>
 </root>

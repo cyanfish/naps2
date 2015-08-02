@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using NAPS2.Config;
 using NAPS2.Ocr;
@@ -29,6 +30,7 @@ using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf.Security;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -43,18 +45,41 @@ namespace NAPS2.ImportExport.Pdf
             this.userConfigManager = userConfigManager;
         }
 
-        public bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, string ocrLanguageCode, Func<int, bool> progressCallback)
+        public bool Export(string path, IEnumerable<IScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
-            document.Info.Author = info.Author;
-            document.Info.Creator = info.Creator;
-            document.Info.Keywords = info.Keywords;
-            document.Info.Subject = info.Subject;
-            document.Info.Title = info.Title;
+            document.Info.Author = settings.Metadata.Author;
+            document.Info.Creator = settings.Metadata.Creator;
+            document.Info.Keywords = settings.Metadata.Keywords;
+            document.Info.Subject = settings.Metadata.Subject;
+            document.Info.Title = settings.Metadata.Title;
+
+            if (settings.Encryption.EncryptPdf)
+            {
+                document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
+                if (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword))
+                {
+                    document.SecuritySettings.OwnerPassword = settings.Encryption.OwnerPassword;
+                }
+                if (!string.IsNullOrEmpty(settings.Encryption.UserPassword))
+                {
+                    document.SecuritySettings.UserPassword = settings.Encryption.UserPassword;
+                }
+                document.SecuritySettings.PermitAccessibilityExtractContent = settings.Encryption.AllowContentCopyingForAccessibility;
+                document.SecuritySettings.PermitAnnotations = settings.Encryption.AllowAnnotations;
+                document.SecuritySettings.PermitAssembleDocument = settings.Encryption.AllowDocumentAssembly;
+                document.SecuritySettings.PermitExtractContent = settings.Encryption.AllowContentCopying;
+                document.SecuritySettings.PermitFormsFill = settings.Encryption.AllowFormFilling;
+                document.SecuritySettings.PermitFullQualityPrint = settings.Encryption.AllowFullQualityPrinting;
+                document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
+                document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
+            }
+
             int i = 1;
             foreach (IScannedImage scannedImage in images)
             {
-                using (Image img = scannedImage.GetImage())
+                using (Stream stream = scannedImage.GetImageStream())
+                using (var img = new Bitmap(stream))
                 {
                     if (!progressCallback(i))
                     {

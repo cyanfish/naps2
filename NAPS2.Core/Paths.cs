@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ namespace NAPS2
         private static readonly string ExecutablePath = Application.StartupPath;
 
 #if STANDALONE
-        private static readonly string AppDataPath = ExecutablePath;
+        private static readonly string AppDataPath = Path.Combine(ExecutablePath, @"..\Data");
 #else
         private static readonly string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NAPS2");
 #endif

@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -21,15 +21,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Lang.Resources;
 
-namespace NAPS2.ImportExport.Pdf
+namespace NAPS2.Scan.Exceptions
 {
-    public class PdfInfo
+    public class NoFeederSupportException : ScanDriverException
     {
-        public string Author { get; set; }
-        public string Creator { get; set; }
-        public string Keywords { get; set; }
-        public string Subject { get; set; }
-        public string Title { get; set; }
+        public NoFeederSupportException()
+            : base(MiscResources.NoFeederSupport)
+        {
+        }
+
+        public NoFeederSupportException(string message)
+            : base(message)
+        {
+        }
+
+        public NoFeederSupportException(Exception innerException)
+            : base(MiscResources.NoDevicesFound, innerException)
+        {
+        }
+
+        public NoFeederSupportException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
     }
 }

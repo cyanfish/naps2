@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -130,6 +130,26 @@ namespace NAPS2.Scan.Images
         {
             var bitmap = new Bitmap(baseImageFilePath);
             return Transform.PerformAll(bitmap, transformList);
+        }
+
+        public Stream GetImageStream()
+        {
+            using (var transformed = GetImage())
+            {
+                var stream = new MemoryStream();
+                if (Equals(baseImageFileFormat, ImageFormat.Jpeg))
+                {
+                    var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
+                    var encoderParams = new EncoderParameters(1);
+                    encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, 75L);
+                    transformed.Save(stream, baseImageFileFormat);
+                }
+                else
+                {
+                    transformed.Save(stream, baseImageFileFormat);
+                }
+                return stream;
+            }
         }
 
         public void Dispose()

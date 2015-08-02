@@ -14,6 +14,7 @@ using NAPS2.Scan.Images;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf.Security;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -21,21 +22,39 @@ namespace NAPS2.ImportExport.Pdf
     {
         private readonly IScannedImageFactory scannedImageFactory;
         private readonly IErrorOutput errorOutput;
+        private readonly IPdfPasswordProvider pdfPasswordProvider;
 
-        public PdfSharpImporter(IScannedImageFactory scannedImageFactory, IErrorOutput errorOutput)
+        public PdfSharpImporter(IScannedImageFactory scannedImageFactory, IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider)
         {
             this.scannedImageFactory = scannedImageFactory;
             this.errorOutput = errorOutput;
+            this.pdfPasswordProvider = pdfPasswordProvider;
         }
 
         public IEnumerable<IScannedImage> Import(string filePath)
         {
+            int passwordAttempts = 0;
+            bool aborted = false;
             try
             {
-                PdfDocument document = PdfReader.Open(filePath);
+                PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.ReadOnly, args =>
+                {
+                    if (!pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++, out args.Password))
+                    {
+                        args.Abort = true;
+                        aborted = true;
+                    }
+                });
                 if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                 {
                     errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
+                    return Enumerable.Empty<IScannedImage>();
+                }
+                if (passwordAttempts > 0
+                    && !document.SecuritySettings.HasOwnerPermissions
+                    && !document.SecuritySettings.PermitExtractContent)
+                {
+                    errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
                     return Enumerable.Empty<IScannedImage>();
                 }
 
@@ -49,8 +68,11 @@ namespace NAPS2.ImportExport.Pdf
             }
             catch (Exception e)
             {
-                errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
-                Log.ErrorException("Error importing PDF file.", e);
+                if (!aborted)
+                {
+                    errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
+                    Log.ErrorException("Error importing PDF file.", e);
+                }
                 return Enumerable.Empty<IScannedImage>();
             }
         }

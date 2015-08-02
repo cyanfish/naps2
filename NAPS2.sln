@@ -18,6 +18,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "NAPS2.Setup", "NAPS2.Setup\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Core", "NAPS2.Core\NAPS2.Core.csproj", "{968378FA-A649-4058-A928-1FCD97B23070}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Portable", "NAPS2.Portable\NAPS2.Portable.csproj", "{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,36 @@ Global
 		{968378FA-A649-4058-A928-1FCD97B23070}.StandaloneZIP|Mixed Platforms.Build.0 = StandaloneZIP|x86
 		{968378FA-A649-4058-A928-1FCD97B23070}.StandaloneZIP|x86.ActiveCfg = StandaloneZIP|x86
 		{968378FA-A649-4058-A928-1FCD97B23070}.StandaloneZIP|x86.Build.0 = StandaloneZIP|x86
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerEXE|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerEXE|Any CPU.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerEXE|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerEXE|Mixed Platforms.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerEXE|x86.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerMSI|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerMSI|Any CPU.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerMSI|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerMSI|Mixed Platforms.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.InstallerMSI|x86.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Release|x86.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Standalone7Z|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Standalone7Z|Any CPU.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Standalone7Z|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Standalone7Z|Mixed Platforms.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.Standalone7Z|x86.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.StandaloneZIP|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.StandaloneZIP|Any CPU.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.StandaloneZIP|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.StandaloneZIP|Mixed Platforms.Build.0 = Release|Any CPU
+		{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}.StandaloneZIP|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

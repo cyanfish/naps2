@@ -448,6 +448,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver..
+        /// </summary>
+        internal static string NoFeederSupport {
+            get {
+                return ResourceManager.GetString("NoFeederSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No pages are in the feeder..
+        /// </summary>
+        internal static string NoPagesInFeeder {
+            get {
+                return ResourceManager.GetString("NoPagesInFeeder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Now.
         /// </summary>
         internal static string NotNow {
@@ -462,6 +480,15 @@ namespace NAPS2.Lang.Resources {
         internal static string OverwriteFile {
             get {
                 return ResourceManager.GetString("OverwriteFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to copy content from the file &quot;{0}&quot;..
+        /// </summary>
+        internal static string PdfNoPermissionToExtractContent {
+            get {
+                return ResourceManager.GetString("PdfNoPermissionToExtractContent", resourceCulture);
             }
         }
         
@@ -498,6 +525,15 @@ namespace NAPS2.Lang.Resources {
         internal static string ScannedImage {
             get {
                 return ResourceManager.GetString("ScannedImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning page {0}.
+        /// </summary>
+        internal static string ScanPageProgress {
+            get {
+                return ResourceManager.GetString("ScanPageProgress", resourceCulture);
             }
         }
         

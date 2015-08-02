@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using NAPS2.Scan.Images.Transforms;
 
@@ -38,6 +39,12 @@ namespace NAPS2.Scan.Images
         /// </summary>
         /// <returns>A copy of the scanned image.</returns>
         Bitmap GetImage();
+
+        /// <summary>
+        /// Gets a stream for the scanned image. The consumer is responsible for calling Dispose on the returned stream.
+        /// </summary>
+        /// <returns>A stream for the scanned image.</returns>
+        Stream GetImageStream();
 
         /// <summary>
         /// Adds a transform to the image.

@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -21,11 +21,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using NAPS2.Config;
 using NAPS2.Console.Lang.Resources;
 using NAPS2.ImportExport;
@@ -50,12 +50,14 @@ namespace NAPS2.Console
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly ILogger logger;
         private readonly IUserConfigManager userConfigManager;
+        private readonly PdfSettingsContainer pdfSettingsContainer;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
+        private int totalPagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -67,6 +69,7 @@ namespace NAPS2.Console
             this.scannedImageImporter = scannedImageImporter;
             this.logger = logger;
             this.userConfigManager = userConfigManager;
+            this.pdfSettingsContainer = pdfSettingsContainer;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -133,6 +136,8 @@ namespace NAPS2.Console
         {
             OutputVerbose(ConsoleResources.Importing);
 
+            ConsolePdfPasswordProvider.PasswordToProvide = options.ImportPassword;
+
             var filePaths = options.ImportPath.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             int i = 0;
             foreach (var filePath in filePaths)
@@ -172,9 +177,9 @@ namespace NAPS2.Console
                 SilentSend = options.EmailSilentSend
             };
 
-            AddRecipients(message, options.EmailTo, EmailRecipientType.To);
-            AddRecipients(message, options.EmailCc, EmailRecipientType.Cc);
-            AddRecipients(message, options.EmailBcc, EmailRecipientType.Bcc);
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.To, options.EmailTo));
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Cc, options.EmailCc));
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, options.EmailTo));
 
             var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
             tempFolder.Create();
@@ -238,23 +243,6 @@ namespace NAPS2.Console
                 {
                     FilePath = file.FullName,
                     AttachmentName = file.Name
-                });
-            }
-        }
-
-        private void AddRecipients(EmailMessage message, string addresses, EmailRecipientType recipientType)
-        {
-            if (string.IsNullOrWhiteSpace(addresses))
-            {
-                return;
-            }
-            foreach (string address in addresses.Split(','))
-            {
-                message.Recipients.Add(new EmailRecipient
-                {
-                    Name = address.Trim(),
-                    Address = address.Trim(),
-                    Type = recipientType
                 });
             }
         }
@@ -349,16 +337,49 @@ namespace NAPS2.Console
 
         private void DoExportToPdf(string outputPath)
         {
-            var pdfInfo = new PdfInfo
+            var metadata = options.UseSavedMetadata ? pdfSettingsContainer.PdfSettings.Metadata : new PdfMetadata();
+            metadata.Creator = ConsoleResources.NAPS2;
+            if (options.PdfTitle != null)
             {
-                Title = ConsoleResources.ScannedImage,
-                Subject = ConsoleResources.ScannedImage,
-                Author = ConsoleResources.NAPS2,
-                Creator = ConsoleResources.NAPS2
-            };
+                metadata.Title = options.PdfTitle;
+            }
+            if (options.PdfAuthor != null)
+            {
+                metadata.Author = options.PdfAuthor;
+            }
+            if (options.PdfSubject != null)
+            {
+                metadata.Subject = options.PdfSubject;
+            }
+            if (options.PdfKeywords != null)
+            {
+                metadata.Keywords = options.PdfKeywords;
+            }
+
+            var encryption = options.UseSavedEncryptConfig ? pdfSettingsContainer.PdfSettings.Encryption : new PdfEncryption();
+            if (options.EncryptConfig != null)
+            {
+                try
+                {
+                    using (Stream configFileStream = File.OpenRead(options.EncryptConfig))
+                    {
+                        var serializer = new XmlSerializer(typeof(PdfEncryption));
+                        encryption = (PdfEncryption)serializer.Deserialize(configFileStream);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.ErrorException(ConsoleResources.CouldntLoadEncryptionConfig, ex);
+                    errorOutput.DisplayError(ConsoleResources.CouldntLoadEncryptionConfig);
+                }
+            }
+
+            var pdfSettings = new PdfSettings { Metadata = metadata, Encryption = encryption };
+
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
-            pdfExporter.Export(outputPath, scannedImages, pdfInfo, ocrLanguageCode, i =>
+
+            pdfExporter.Export(outputPath, scannedImages, pdfSettings, ocrLanguageCode, i =>
             {
                 OutputVerbose(ConsoleResources.ExportedPage, i, scannedImages.Count);
                 return true;
@@ -370,6 +391,7 @@ namespace NAPS2.Console
             OutputVerbose(ConsoleResources.BeginningScan);
 
             IWin32Window parentWindow = new Form { Visible = false };
+            totalPagesScanned = 0;
             foreach (int i in Enumerable.Range(1, options.Number))
             {
                 if (options.Delay > 0)
@@ -417,6 +439,8 @@ namespace NAPS2.Console
         {
             scannedImages.Add(scannedImage);
             pagesScanned++;
+            totalPagesScanned++;
+            OutputVerbose(ConsoleResources.ScannedPage, totalPagesScanned);
         }
     }
 }

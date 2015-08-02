@@ -196,7 +196,10 @@
         <value>28</value>
     </data>
     <data name="labelCopyright.Text" xml:space="preserve">
-        <value>Minden jog fenntartva © 2009 Pavel Sorejs\nMinden jog fenntartva © 2012 Michael Adams\nMinden jog fenntartva © 2013 Peter De Leeuw\nMinden jog fenntartva © 2012-2014 Ben Olden-Cooligan</value>
+        <value>Copyright © 2009 Pavel Sorejs
+Copyright © 2012 Michael Adams
+Copyright © 2013 Peter De Leeuw
+Copyright © 2012-2015 Ben Olden-Cooligan</value>
     </data>
     <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
         <value>labelCopyright</value>
@@ -553,6 +556,6 @@
         <value>FAbout</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.0.1.29730, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.24136, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

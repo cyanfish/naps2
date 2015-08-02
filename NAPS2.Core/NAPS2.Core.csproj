@@ -88,8 +88,15 @@
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="ImportExport\Email\EmailSettings.cs" />
+    <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />
+    <Compile Include="ImportExport\Pdf\IPdfPasswordProvider.cs" />
+    <Compile Include="ImportExport\Pdf\PdfEncryption.cs" />
+    <Compile Include="ImportExport\Pdf\PdfMetadata.cs" />
+    <Compile Include="ImportExport\Pdf\PdfSettingsContainer.cs" />
     <Compile Include="ImportExport\Pdf\PrintDocumentPrinter.cs" />
     <Compile Include="ImportExport\Pdf\IImagePrinter.cs" />
+    <Compile Include="ImportExport\Pdf\WinFormsPdfPasswordProvider.cs" />
     <Compile Include="Lang\Resources\MiscResources.Designer.cs">
       <DependentUpon>MiscResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -108,6 +115,8 @@
     <Compile Include="Ocr\OcrDependencyManager.cs" />
     <Compile Include="Ocr\OcrResult.cs" />
     <Compile Include="Ocr\OcrResultElement.cs" />
+    <Compile Include="Scan\Exceptions\NoFeederSupportException.cs" />
+    <Compile Include="Scan\Exceptions\NoPagesException.cs" />
     <Compile Include="Scan\Images\Transforms\BrightnessTransform.cs" />
     <Compile Include="Scan\Images\Transforms\ContrastTransform.cs" />
     <Compile Include="Scan\Images\Transforms\CropTransform.cs" />
@@ -150,7 +159,7 @@
     <Compile Include="ImportExport\IScannedImageImporter.cs" />
     <Compile Include="ImportExport\Pdf\IPdfExporter.cs" />
     <Compile Include="ImportExport\Pdf\IPdfImporter.cs" />
-    <Compile Include="ImportExport\Pdf\PdfInfo.cs" />
+    <Compile Include="ImportExport\Pdf\PdfSettings.cs" />
     <Compile Include="ImportExport\Pdf\PdfSharpExporter.cs" />
     <Compile Include="ImportExport\Pdf\PdfSharpImporter.cs" />
     <Compile Include="ImportExport\ScannedImageImporter.cs" />
@@ -195,8 +204,13 @@
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\TwainScanDriver.cs" />
     <Compile Include="Scan\ScanDriverBase.cs" />
+    <Compile Include="Scan\Wia\ConsoleWiaTransfer.cs" />
+    <Compile Include="Scan\Wia\IWiaTransfer.cs" />
     <Compile Include="Scan\Wia\WiaApi.cs" />
+    <Compile Include="Scan\Wia\WiaBackgroundEventLoop.cs" />
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
+    <Compile Include="Scan\Wia\WiaState.cs" />
+    <Compile Include="Scan\Wia\WinFormsWiaTransfer.cs" />
     <Compile Include="StringWrapper.cs" />
     <Compile Include="Unmanaged.cs" />
     <Compile Include="UnmanagedArray.cs" />
@@ -219,6 +233,30 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
+    <Compile Include="WinForms\FEmailSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FEmailSettings.Designer.cs">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FPdfPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FPdfPassword.Designer.cs">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FPdfSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FPdfSettings.Designer.cs">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FScanProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FScanProgress.Designer.cs">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FRotate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,11 +332,11 @@
     <Compile Include="WinForms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\FPDFSave.cs">
+    <Compile Include="WinForms\FPdfSave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\FPDFSave.Designer.cs">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <Compile Include="WinForms\FPdfSave.Designer.cs">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FRecover.cs">
       <SubType>Form</SubType>
@@ -406,6 +444,287 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.tr.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" />
+    <EmbeddedResource Include="WinForms\FEmailSettings.bg.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.ca.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.cs.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.da.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.de.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.es.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.fr.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.he.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.hr.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.hu.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.it.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.nl.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.pl.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.pt-BR.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.pt-PT.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.ro.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.ru.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.sq.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.sv.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.tr.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.uk.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.zh-TW.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.bg.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.ca.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.cs.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.da.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.de.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.es.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.fr.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.he.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.hr.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.hu.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.it.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.nl.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.pl.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.pt-BR.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.pt-PT.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.ro.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.ru.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.sq.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.sv.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.tr.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.uk.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.zh-TW.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.bg.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.ca.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.cs.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.da.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.de.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.es.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.fr.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.he.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.hr.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.hu.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.it.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.nl.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.pl.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.pt-BR.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.pt-PT.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.ro.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.ru.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.sq.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.sv.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.tr.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.uk.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.zh-TW.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.bg.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.ca.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.cs.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.da.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.de.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.es.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.fr.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.he.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.hr.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.hu.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.it.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.nl.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.pl.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.pt-BR.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.pt-PT.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.ro.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.ru.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.sq.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.sv.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.tr.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.uk.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.zh-TW.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FProfiles.tr.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRotate.bg.resx">
       <DependentUpon>FRotate.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1244,75 +1563,75 @@
     <EmbeddedResource Include="WinForms\FPageSize.zh-TW.resx">
       <DependentUpon>FPageSize.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.bg.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.bg.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.ca.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.ca.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.cs.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.cs.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.da.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.da.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.de.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.de.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.es.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.es.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.fr.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.fr.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.he.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.he.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.hr.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.hr.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.hu.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.hu.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.it.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.it.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.nl.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.nl.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.pl.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.pl.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.pt-BR.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.pt-BR.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.pt-PT.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.pt-PT.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.ro.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.ro.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.ru.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.ru.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.sq.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.sq.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.sv.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.sv.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.tr.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.tr.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.uk.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.uk.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPDFSave.zh-TW.resx">
-      <DependentUpon>FPDFSave.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FPdfSave.zh-TW.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRecover.bg.resx">
       <DependentUpon>FRecover.cs</DependentUpon>
@@ -1867,6 +2186,8 @@
     <Content Include="Resources\arrow_down-small.png" />
     <Content Include="Resources\arrow_up-small.png" />
     <Content Include="Resources\control_play_blue-small.png" />
+    <Content Include="Resources\email.ico" />
+    <Content Include="Resources\file_extension_pdf.ico" />
     <Content Include="Resources\image_edit.png" />
     <Content Include="Resources\pictures.png" />
     <Content Include="Resources\picture_edit.png" />

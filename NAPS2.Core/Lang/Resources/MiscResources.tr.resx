@@ -270,4 +270,31 @@
     <data name="CustomPageSizeFormat" xml:space="preserve">
         <value>Özel ({0}x{1} {2})</value>
     </data>
+    <data name="Scan" xml:space="preserve">
+        <value>Tara</value>
+    </data>
+    <data name="ConfirmResetImages" xml:space="preserve">
+        <value>{0} adet resimde yapılan değişiklikleri geri almak istediğinize emin misiniz?</value>
+    </data>
+    <data name="ResetImage" xml:space="preserve">
+        <value>Resmi Sıfırla</value>
+    </data>
+    <data name="ExitWithUnsavedChanges" xml:space="preserve">
+        <value>Kaydedilmemiş değişiklikleriniz var. Değişiklikleri iptal edip çıkmak istediğinize emin misiniz?</value>
+    </data>
+    <data name="UnsavedChanges" xml:space="preserve">
+        <value>Kaydedilmemiş Değişiklikler</value>
+    </data>
+    <data name="ScanPageProgress" xml:space="preserve">
+        <value>Scanning page {0}</value>
+    </data>
+    <data name="NoFeederSupport" xml:space="preserve">
+        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    </data>
+    <data name="NoPagesInFeeder" xml:space="preserve">
+        <value>No pages are in the feeder.</value>
+    </data>
+    <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+        <value>You do not have permission to copy content from the file "{0}".</value>
+    </data>
 </root>

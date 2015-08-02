@@ -58,7 +58,9 @@ namespace NAPS2.WinForms
         private void linkGetLanguages_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
+            var selectedLang = comboLanguages.SelectedItem;
             LoadLanguages();
+            comboLanguages.SelectedItem = selectedLang;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

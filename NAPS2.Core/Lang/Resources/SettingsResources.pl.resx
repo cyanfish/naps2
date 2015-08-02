@@ -121,7 +121,7 @@
         <value>Czarno-biały</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bitowy kolor</value>
+        <value>Kolor 24-bitowy</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Odcienie szarości</value>
@@ -178,13 +178,13 @@
         <value>A5 (148 x 210 mm)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+        <value>B4 (250 x 353 mm)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+        <value>B5 (176 x 250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>Odprzeplatanie...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>US Legal (8.5 x 14 in)</value>

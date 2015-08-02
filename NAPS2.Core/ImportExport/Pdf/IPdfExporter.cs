@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -27,6 +27,6 @@ namespace NAPS2.ImportExport.Pdf
 {
     public interface IPdfExporter
     {
-        bool Export(string path, IEnumerable<IScannedImage> images, PdfInfo info, string ocrLanguageCode, Func<int, bool> progressCallback);
+        bool Export(string path, IEnumerable<IScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback);
     }
 }

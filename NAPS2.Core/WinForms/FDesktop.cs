@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -61,6 +61,8 @@ namespace NAPS2.WinForms
         private readonly IScanPerformer scanPerformer;
         private readonly IImagePrinter imagePrinter;
         private readonly ChangeTracker changeTracker;
+        private readonly EmailSettingsContainer emailSettingsContainer;
+
 
         private bool isControlKeyDown;
 
@@ -80,6 +82,7 @@ namespace NAPS2.WinForms
             this.scanPerformer = scanPerformer;
             this.imagePrinter = imagePrinter;
             this.changeTracker = changeTracker;
+            this.emailSettingsContainer = emailSettingsContainer;
             InitializeComponent();
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
         }
@@ -332,7 +335,7 @@ namespace NAPS2.WinForms
 
         private void ExportPDF(string filename, List<IScannedImage> images)
         {
-            var pdfdialog = FormFactory.Create<FPDFSave>();
+            var pdfdialog = FormFactory.Create<FPdfSave>();
             pdfdialog.Filename = filename;
             pdfdialog.Images = images;
             pdfdialog.ShowDialog(this);
@@ -412,12 +415,13 @@ namespace NAPS2.WinForms
             }
 
             // Populate the dropdown
+            var defaultProfile = profileManager.DefaultProfile;
             foreach (var profile in profileManager.Profiles)
             {
                 var item = new ToolStripMenuItem
                 {
                     Text = profile.DisplayName.Replace("&", "&&"),
-                    Image = profile.IsDefault ? Icons.accept_small : null,
+                    Image = profile == defaultProfile ? Icons.accept_small : null,
                     ImageScaling = ToolStripItemImageScaling.None
                 };
                 item.Click += (sender, args) =>
@@ -623,19 +627,34 @@ namespace NAPS2.WinForms
         {
             if (images.Any())
             {
-                string path = Paths.AppData + "\\Scan.pdf";
+                var emailSettings = emailSettingsContainer.EmailSettings;
+                var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+                var attachmentName = new string(emailSettings.AttachmentName.Where(x => !invalidChars.Contains(x)).ToArray());
+                if (string.IsNullOrEmpty(attachmentName))
+                {
+                    attachmentName = "Scan.pdf";
+                }
+                if (!attachmentName.EndsWith(".pdf", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    attachmentName += ".pdf";
+                }
+
+                string path = Path.Combine(Paths.AppData, attachmentName);
                 ExportPDF(path, images);
-                if (emailer.SendEmail(new EmailMessage
+
+                var message = new EmailMessage
                 {
                     Attachments = new List<EmailAttachment>
                     {
                         new EmailAttachment
                         {
                             FilePath = path,
-                            AttachmentName = Path.GetFileName(path)
+                            AttachmentName = attachmentName
                         }
                     }
-                }))
+                };
+
+                if (emailer.SendEmail(message))
                 {
                     changeTracker.HasUnsavedChanges = false;
                 }
@@ -1014,6 +1033,21 @@ namespace NAPS2.WinForms
                     FileBasedScannedImage.DisableRecoveryCleanup = true;
                 }
             }
+        }
+
+        private void tsPDFSettings_Click(object sender, EventArgs e)
+        {
+            FormFactory.Create<FPdfSettings>().ShowDialog();
+        }
+
+        private void tsPdfSettings2_Click(object sender, EventArgs e)
+        {
+            FormFactory.Create<FPdfSettings>().ShowDialog();
+        }
+
+        private void tsEmailSettings_Click(object sender, EventArgs e)
+        {
+            FormFactory.Create<FEmailSettings>().ShowDialog();
         }
 
         private void thumbnailList1_MouseWheel(object sender, MouseEventArgs e)

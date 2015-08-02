@@ -5,7 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
-    Copyright (C) 2012-2014  Ben Olden-Cooligan
+    Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -30,18 +30,20 @@ using NAPS2.Scan.Images;
 
 namespace NAPS2.WinForms
 {
-    public partial class FPDFSave : FormBase
+    public partial class FPdfSave : FormBase
     {
         private readonly IPdfExporter pdfExporter;
         private readonly IErrorOutput errorOutput;
         private readonly IUserConfigManager userConfigManager;
+        private readonly PdfSettingsContainer pdfSettingsContainer;
 
-        public FPDFSave(IPdfExporter pdfExporter, IErrorOutput errorOutput, IUserConfigManager userConfigManager)
+        public FPdfSave(IPdfExporter pdfExporter, IErrorOutput errorOutput, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
         {
             InitializeComponent();
             this.pdfExporter = pdfExporter;
             this.errorOutput = errorOutput;
             this.userConfigManager = userConfigManager;
+            this.pdfSettingsContainer = pdfSettingsContainer;
             RestoreFormState = false;
             Shown += FPDFSave_Shown;
         }
@@ -52,17 +54,13 @@ namespace NAPS2.WinForms
 
         private void ExportPdfProcess()
         {
-            var info = new PdfInfo
-            {
-                Title = MiscResources.ScannedImage,
-                Subject = MiscResources.ScannedImage,
-                Author = MiscResources.NAPS2,
-                Creator = MiscResources.NAPS2
-            };
+            var pdfSettings = pdfSettingsContainer.PdfSettings;
+            pdfSettings.Metadata.Creator = MiscResources.NAPS2;
             var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
+
             try
             {
-                pdfExporter.Export(Filename, Images, info, ocrLanguageCode, num =>
+                pdfExporter.Export(Filename, Images, pdfSettings, ocrLanguageCode, num =>
                 {
                     Invoke(new ThreadStart(() => SetStatus(num, Images.Count)));
                     return true;
