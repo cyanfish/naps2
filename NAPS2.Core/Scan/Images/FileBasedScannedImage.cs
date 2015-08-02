@@ -137,17 +137,7 @@ namespace NAPS2.Scan.Images
             using (var transformed = GetImage())
             {
                 var stream = new MemoryStream();
-                if (Equals(baseImageFileFormat, ImageFormat.Jpeg))
-                {
-                    var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
-                    var encoderParams = new EncoderParameters(1);
-                    encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, 75L);
-                    transformed.Save(stream, baseImageFileFormat);
-                }
-                else
-                {
-                    transformed.Save(stream, baseImageFileFormat);
-                }
+                transformed.Save(stream, baseImageFileFormat);
                 return stream;
             }
         }
