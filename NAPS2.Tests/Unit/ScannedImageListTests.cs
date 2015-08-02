@@ -241,6 +241,11 @@ namespace NAPS2.Tests.Unit
             return null;
         }
 
+        public object GetThumbnailState()
+        {
+            return null;
+        }
+
         public void SetThumbnail(Bitmap bitmap)
         {
         }

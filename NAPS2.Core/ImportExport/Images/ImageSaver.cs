@@ -32,13 +32,13 @@ namespace NAPS2.ImportExport.Images
 {
     public class ImageSaver
     {
-        private readonly ImageFileNamer imageFileNamer;
         private readonly IErrorOutput errorOutput;
+        private readonly FileNameSubstitution fileNameSubstitution;
 
-        public ImageSaver(ImageFileNamer imageFileNamer, IErrorOutput errorOutput)
+        public ImageSaver(IErrorOutput errorOutput, FileNameSubstitution fileNameSubstitution)
         {
-            this.imageFileNamer = imageFileNamer;
             this.errorOutput = errorOutput;
+            this.fileNameSubstitution = fileNameSubstitution;
         }
 
         /// <summary>
@@ -52,21 +52,22 @@ namespace NAPS2.ImportExport.Images
         {
             try
             {
-                ImageFormat format = GetImageFormat(fileName);
+                var subFileName = fileNameSubstitution.SubstituteFileName(fileName);
+                ImageFormat format = GetImageFormat(subFileName);
 
                 if (Equals(format, ImageFormat.Tiff))
                 {
-                    if (File.Exists(fileName))
+                    if (File.Exists(subFileName))
                     {
                         // Overwrite?
-                        if (!overwritePredicate(Path.GetFullPath(fileName)))
+                        if (!overwritePredicate(Path.GetFullPath(subFileName)))
                         {
                             // No, so skip it
                             return;
                         }
                     }
                     Image[] bitmaps = images.Select(x => (Image)x.GetImage()).ToArray();
-                    TiffHelper.SaveMultipage(bitmaps, fileName);
+                    TiffHelper.SaveMultipage(bitmaps, subFileName);
                     foreach (Image bitmap in bitmaps)
                     {
                         bitmap.Dispose();
@@ -74,22 +75,30 @@ namespace NAPS2.ImportExport.Images
                     return;
                 }
 
-                var fileNames = imageFileNamer.GetFileNames(fileName, images.Count).GetEnumerator();
+                int i = 0;
+                int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
                 foreach (IScannedImage img in images)
                 {
                     using (Bitmap baseImage = img.GetImage())
                     {
-                        fileNames.MoveNext();
-                        if (File.Exists(fileNames.Current))
+                        if (images.Count == 1)
                         {
-                            // Overwrite?
-                            if (!overwritePredicate(Path.GetFullPath(fileNames.Current)))
+                            if (File.Exists(subFileName))
                             {
-                                // No, so skip it
-                                continue;
+                                // Overwrite?
+                                if (!overwritePredicate(Path.GetFullPath(subFileName)))
+                                {
+                                    // No, so skip it
+                                    continue;
+                                }
                             }
+                            baseImage.Save(subFileName, format);
                         }
-                        baseImage.Save(fileNames.Current, format);
+                        else
+                        {
+                            var fileNameN = fileNameSubstitution.SubstituteFileName(fileName, true, i++, digits);
+                            baseImage.Save(fileNameN, format);
+                        }
                     }
                 }
             }

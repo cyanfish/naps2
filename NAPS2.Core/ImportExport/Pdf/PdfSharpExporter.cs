@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
 using PdfSharp.Drawing;
@@ -36,13 +35,13 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {
-        private readonly IUserConfigManager userConfigManager;
         private readonly IOcrEngine ocrEngine;
+        private readonly FileNameSubstitution fileNameSubstitution;
 
-        public PdfSharpExporter(IOcrEngine ocrEngine, IUserConfigManager userConfigManager)
+        public PdfSharpExporter(IOcrEngine ocrEngine, FileNameSubstitution fileNameSubstitution)
         {
             this.ocrEngine = ocrEngine;
-            this.userConfigManager = userConfigManager;
+            this.fileNameSubstitution = fileNameSubstitution;
         }
 
         public bool Export(string path, IEnumerable<IScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
@@ -114,7 +113,7 @@ namespace NAPS2.ImportExport.Pdf
                     i++;
                 }
             }
-            document.Save(path);
+            document.Save(fileNameSubstitution.SubstituteFileName(path));
             return true;
         }
 

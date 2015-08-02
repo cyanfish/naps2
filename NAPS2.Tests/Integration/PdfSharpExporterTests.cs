@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Tests.Base;
@@ -40,7 +41,7 @@ namespace NAPS2.Tests.Integration
 
         public override IPdfExporter GetPdfExporter()
         {
-            return new PdfSharpExporter(new StubOcrEngine(), new StubUserConfigManager());
+            return new PdfSharpExporter(new StubOcrEngine(), new FileNameSubstitution());
         }
 
         public class StubUserConfigManager : IUserConfigManager

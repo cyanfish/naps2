@@ -63,12 +63,13 @@ namespace NAPS2.WinForms
         private readonly IImagePrinter imagePrinter;
         private readonly ChangeTracker changeTracker;
         private readonly EmailSettingsContainer emailSettingsContainer;
+        private readonly FileNameSubstitution fileNameSubstitution;
 
         private bool isControlKeyDown;
         private Task renderThumbnailsTask;
         private CancellationTokenSource renderThumbnailsCts;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -85,6 +86,7 @@ namespace NAPS2.WinForms
             this.imagePrinter = imagePrinter;
             this.changeTracker = changeTracker;
             this.emailSettingsContainer = emailSettingsContainer;
+            this.fileNameSubstitution = fileNameSubstitution;
             InitializeComponent();
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
         }
@@ -608,9 +610,9 @@ namespace NAPS2.WinForms
                     {
                         imageSaver.SaveImages(sd.FileName, images, path =>
                         {
-                            if (images.Count() == 1)
+                            if (path == Path.GetFullPath(sd.FileName))
                             {
-                                // One image, so the file name is the same and the save dialog already prompted the user to overwrite
+                                // No substitutions, so the save dialog already prompted the user to overwrite
                                 return true;
                             }
                             switch (
@@ -665,6 +667,7 @@ namespace NAPS2.WinForms
                 {
                     attachmentName += ".pdf";
                 }
+                attachmentName = fileNameSubstitution.SubstituteFileName(attachmentName, false);
 
                 string path = Path.Combine(Paths.AppData, attachmentName);
                 ExportPDF(path, images);

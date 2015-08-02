@@ -10,12 +10,18 @@ namespace NAPS2.ImportExport
     {
         private static readonly Dictionary<string, Func<string>> Subs = new Dictionary<string, Func<string>>
         {
-            { "$(YYYY)", () => DateTime.Now.ToString("yyyy") }
+            { "$(YYYY)", () => DateTime.Now.ToString("yyyy") },
+            { "$(YY)", () => DateTime.Now.ToString("yy") },
+            { "$(MM)", () => DateTime.Now.ToString("MM") },
+            { "$(DD)", () => DateTime.Now.ToString("dd") },
+            { "$(hh)", () => DateTime.Now.ToString("HH") },
+            { "$(mm)", () => DateTime.Now.ToString("mm") },
+            { "$(ss)", () => DateTime.Now.ToString("ss") },
         };
 
-        private static readonly Regex NumberSubPattern = new Regex(@"\$\{n+\}");
+        private static readonly Regex NumberSubPattern = new Regex(@"\$\(n+\)");
 
-        public string SubstituteFileName(string fileNameWithPath, int numberSkip = 0, int autoNumberDigits = 0)
+        public string SubstituteFileName(string fileNameWithPath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
         {
             // Most subs don't need a special case
             string result = Subs.Aggregate(fileNameWithPath, (current, sub) => current.Replace(sub.Key, sub.Value()));
@@ -24,16 +30,17 @@ namespace NAPS2.ImportExport
             if (match.Success)
             {
                 result = NumberSubPattern.Replace(result, "");
-                result = SubNumber(result, match.Index, match.Length - 3, numberSkip);
+                result = SubNumber(result, match.Index, match.Length - 3, numberSkip, incrementIfExists);
             }
             else if (autoNumberDigits > 0)
             {
-                result = SubNumber(result, result.Length - Path.GetExtension(result).Length, autoNumberDigits, numberSkip);
+                result = result.Insert(result.Length - Path.GetExtension(result).Length, ".");
+                result = SubNumber(result, result.Length - Path.GetExtension(result).Length, autoNumberDigits, numberSkip, incrementIfExists);
             }
             return result;
         }
 
-        private string SubNumber(string path, int insertionIndex, int minDigits, int skip)
+        private string SubNumber(string path, int insertionIndex, int minDigits, int skip, bool incrementIfExists)
         {
             string result;
             int i = skip;
@@ -41,7 +48,7 @@ namespace NAPS2.ImportExport
             {
                 ++i;
                 result = path.Insert(insertionIndex, i.ToString("D" + minDigits));
-            } while (File.Exists(result));
+            } while (incrementIfExists && File.Exists(result));
             return result;
         }
     }

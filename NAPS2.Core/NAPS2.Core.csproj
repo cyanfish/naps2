@@ -152,7 +152,6 @@
     <Compile Include="ImportExport\Email\Mapi\MapiRecipDesc.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiSendMailFlags.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiSendMailReturnCode.cs" />
-    <Compile Include="ImportExport\Images\ImageFileNamer.cs" />
     <Compile Include="ImportExport\Images\ImageImporter.cs" />
     <Compile Include="ImportExport\Images\ImageSaver.cs" />
     <Compile Include="ImportExport\Images\IPdfImporter.cs" />

@@ -51,13 +51,14 @@ namespace NAPS2.Console
         private readonly ILogger logger;
         private readonly IUserConfigManager userConfigManager;
         private readonly PdfSettingsContainer pdfSettingsContainer;
+        private readonly FileNameSubstitution fileNameSubstitution;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
         private int totalPagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNameSubstitution fileNameSubstitution)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -70,6 +71,7 @@ namespace NAPS2.Console
             this.logger = logger;
             this.userConfigManager = userConfigManager;
             this.pdfSettingsContainer = pdfSettingsContainer;
+            this.fileNameSubstitution = fileNameSubstitution;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -185,17 +187,18 @@ namespace NAPS2.Console
             tempFolder.Create();
             try
             {
-                string targetPath = Path.Combine(tempFolder.FullName, options.EmailFileName);
+                string attachmentName = fileNameSubstitution.SubstituteFileName(options.EmailFileName, false);
+                string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
                 if (IsPdfFile(targetPath))
                 {
                     if (options.OutputPath != null && IsPdfFile(options.OutputPath))
                     {
                         // The scan has already been exported to PDF, so use that file
-                        OutputVerbose(ConsoleResources.AttachingExportedPDF, options.EmailFileName);
+                        OutputVerbose(ConsoleResources.AttachingExportedPDF, attachmentName);
                         message.Attachments.Add(new EmailAttachment
                         {
                             FilePath = options.OutputPath,
-                            AttachmentName = options.EmailFileName
+                            AttachmentName = attachmentName
                         });
                     }
                     else
