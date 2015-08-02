@@ -26,7 +26,6 @@ using System.Linq;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
-using NAPS2.Tests.Integration;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Base
@@ -61,7 +60,7 @@ namespace NAPS2.Tests.Base
             {
                 using (bitmap)
                 {
-                    return (IScannedImage)new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, new PdfSharpExporterTests.StubUserConfigManager());
+                    return (IScannedImage)new ScannedImage(bitmap, ScanBitDepth.C24Bit, false);
                 }
             }).ToList();
             if (!Directory.Exists("test"))

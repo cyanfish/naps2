@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
 
@@ -13,23 +14,26 @@ namespace NAPS2.Recovery
     {
         private readonly IFormFactory formFactory;
         private readonly IScannedImageFactory scannedImageFactory;
+        private readonly IUserConfigManager userConfigManager;
 
-        public RecoveryManager(IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
+        public RecoveryManager(IFormFactory formFactory, IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager)
         {
             this.formFactory = formFactory;
             this.scannedImageFactory = scannedImageFactory;
+            this.userConfigManager = userConfigManager;
         }
 
         public IEnumerable<IScannedImage> RecoverScannedImages()
         {
             // Use an internal class with its own state so that RecoverManager is thread-safe
-            return new RecoveryState(formFactory, scannedImageFactory).RecoverScannedImages();
+            return new RecoveryState(formFactory, scannedImageFactory, userConfigManager).RecoverScannedImages();
         }
 
         private class RecoveryState
         {
             private readonly IFormFactory formFactory;
             private readonly IScannedImageFactory scannedImageFactory;
+            private readonly IUserConfigManager userConfigManager;
 
             private FileStream lockFile;
             private DirectoryInfo folderToRecoverFrom;
@@ -37,10 +41,11 @@ namespace NAPS2.Recovery
             private int imageCount;
             private DateTime scannedDateTime;
 
-            public RecoveryState(IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
+            public RecoveryState(IFormFactory formFactory, IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager)
             {
                 this.formFactory = formFactory;
                 this.scannedImageFactory = scannedImageFactory;
+                this.userConfigManager = userConfigManager;
             }
 
             public IEnumerable<IScannedImage> RecoverScannedImages()
@@ -91,7 +96,7 @@ namespace NAPS2.Recovery
                         {
                             scannedImage.AddTransform(transform);
                         }
-                        scannedImage.UpdateThumbnail();
+                        scannedImage.RenderThumbnail(userConfigManager.Config.ThumbnailSize);
                         yield return scannedImage;
                     }
                 }

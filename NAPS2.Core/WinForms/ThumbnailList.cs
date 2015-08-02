@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Scan.Images;
 
 namespace NAPS2.WinForms
@@ -34,6 +35,8 @@ namespace NAPS2.WinForms
             InitializeComponent();
             LargeImageList = ilThumbnailList;
         }
+
+        public IUserConfigManager UserConfigManager { get; set; }
 
         public Size ThumbnailSize
         {
@@ -53,17 +56,8 @@ namespace NAPS2.WinForms
 
         public void AppendImage(IScannedImage img)
         {
-            ilThumbnailList.Images.Add(img.Thumbnail);
+            ilThumbnailList.Images.Add(img.GetThumbnail(UserConfigManager.Config.ThumbnailSize));
             Items.Add("", ilThumbnailList.Images.Count - 1);
-        }
-
-        public void UpdateView(List<IScannedImage> images)
-        {
-            ilThumbnailList.Images.Clear();
-            foreach (IScannedImage img in images)
-            {
-                ilThumbnailList.Images.Add(img.Thumbnail);
-            }
         }
 
         public void ClearItems()

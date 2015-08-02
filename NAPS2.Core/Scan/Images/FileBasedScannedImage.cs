@@ -26,7 +26,6 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
 
@@ -61,7 +60,7 @@ namespace NAPS2.Scan.Images
 
         private static int _recoveryFileNumber = 1;
 
-        private readonly IUserConfigManager userConfigManager;
+        private Bitmap thumbnail;
         // Store the actual image on disk
         private readonly ImageFormat baseImageFileFormat;
         private readonly string baseImageFileName;
@@ -69,14 +68,9 @@ namespace NAPS2.Scan.Images
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private readonly List<Transform> transformList = new List<Transform>();
-        private Bitmap thumbnail1;
 
-        public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, IUserConfigManager userConfigManager)
+        public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
-            this.userConfigManager = userConfigManager;
-            thumbnail1 = ThumbnailHelper.GetThumbnail(img, 256);
-            Thumbnail = ThumbnailHelper.GetThumbnail(thumbnail1, 128);
-
             Bitmap baseImage;
             MemoryStream baseImageEncoded;
             ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
@@ -124,8 +118,6 @@ namespace NAPS2.Scan.Images
             throw new ArgumentException();
         }
 
-        public Bitmap Thumbnail { get; private set; }
-
         public Bitmap GetImage()
         {
             var bitmap = new Bitmap(baseImageFilePath);
@@ -144,8 +136,6 @@ namespace NAPS2.Scan.Images
 
         public void Dispose()
         {
-            thumbnail1.Dispose();
-            Thumbnail.Dispose();
             try
             {
                 if (!DisableRecoveryCleanup && File.Exists(baseImageFilePath))
@@ -159,6 +149,10 @@ namespace NAPS2.Scan.Images
                         RecoveryFolder.Delete(true);
                         _recoveryFolder = null;
                     }
+                }
+                if (thumbnail != null)
+                {
+                    thumbnail.Dispose();
                 }
             }
             catch (IOException ex)
@@ -180,11 +174,25 @@ namespace NAPS2.Scan.Images
             _recoveryIndexManager.Save();
         }
 
-        public void UpdateThumbnail()
+        public Bitmap GetThumbnail(int preferredSize)
         {
+            if (thumbnail == null)
+            {
+                RenderThumbnail(preferredSize);
+            }
+            Debug.Assert(thumbnail != null);
+            return (Bitmap)thumbnail.Clone();
+        }
+
+        public void RenderThumbnail(int size)
+        {
+            if (thumbnail != null)
+            {
+                thumbnail.Dispose();
+            }
             using (var img = GetImage())
             {
-                Thumbnail = ThumbnailHelper.GetThumbnail(thumbnail1, 128);
+                thumbnail = ThumbnailHelper.GetThumbnail(img, size);
             }
         }
 

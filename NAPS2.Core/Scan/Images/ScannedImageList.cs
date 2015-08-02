@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Config;
 using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
@@ -32,6 +33,8 @@ namespace NAPS2.Scan.Images
         {
             Images = new List<IScannedImage>();
         }
+
+        public IUserConfigManager UserConfigManager { get; set; }
 
         public List<IScannedImage> Images { get; private set; }
 
@@ -86,7 +89,7 @@ namespace NAPS2.Scan.Images
             foreach (int i in selection)
             {
                 Images[i].AddTransform(new RotationTransform(rotateFlipType));
-                Images[i].UpdateThumbnail();
+                Images[i].RenderThumbnail(UserConfigManager.Config.ThumbnailSize);
             }
             return selection.ToList();
         }
@@ -173,7 +176,7 @@ namespace NAPS2.Scan.Images
             foreach (IScannedImage img in Images.ElementsAt(selection))
             {
                 img.ResetTransforms();
-                img.UpdateThumbnail();
+                img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize);
             }
             return selection.ToList();
         }

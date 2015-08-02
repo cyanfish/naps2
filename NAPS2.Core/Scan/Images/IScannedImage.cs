@@ -30,9 +30,14 @@ namespace NAPS2.Scan.Images
     public interface IScannedImage : IDisposable
     {
         /// <summary>
-        /// Gets a thumbnail bitmap for the image. The consumer should NOT call Dispose on the returned bitmap.
+        /// Gets the current thumbnail bitmap for the image. The consumer should clone the thumbnail if it keeps a reference.
         /// </summary>
-        Bitmap Thumbnail { get; }
+        Bitmap GetThumbnail(int preferredSize);
+
+        /// <summary>
+        /// Renders a bitmap for the image's thumbnail with all of the transforms at the given size.
+        /// </summary>
+        void RenderThumbnail(int size);
 
         /// <summary>
         /// Gets a copy of the scanned image. The consumer is responsible for calling Dispose on the returned bitmap.
@@ -56,11 +61,6 @@ namespace NAPS2.Scan.Images
         /// Removes all of the transforms from the image.
         /// </summary>
         void ResetTransforms();
-
-        /// <summary>
-        /// Updates the image's thumbnail with all of the transforms.
-        /// </summary>
-        void UpdateThumbnail();
 
         /// <summary>
         /// Indicates the the scanned image has been moved to the given position in the scanned image list.

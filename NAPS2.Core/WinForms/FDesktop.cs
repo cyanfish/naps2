@@ -63,10 +63,9 @@ namespace NAPS2.WinForms
         private readonly ChangeTracker changeTracker;
         private readonly EmailSettingsContainer emailSettingsContainer;
 
-
         private bool isControlKeyDown;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -89,6 +88,8 @@ namespace NAPS2.WinForms
 
         private void FDesktop_Load(object sender, EventArgs e)
         {
+            imageList.UserConfigManager = UserConfigManager;
+            thumbnailList1.UserConfigManager = UserConfigManager;
             PostInitializeComponent();
         }
 
