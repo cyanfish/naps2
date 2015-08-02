@@ -74,5 +74,12 @@ namespace NAPS2.WinForms
             }
             ilThumbnailList.Images.Clear();
         }
+
+        public void ReplaceThumbnail(int index, Bitmap thumbnail)
+        {
+            ilThumbnailList.Images[index].Dispose();
+            ilThumbnailList.Images[index] = thumbnail;
+            Invalidate();
+        }
     }
 }

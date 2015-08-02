@@ -28,6 +28,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport;
@@ -64,6 +65,8 @@ namespace NAPS2.WinForms
         private readonly EmailSettingsContainer emailSettingsContainer;
 
         private bool isControlKeyDown;
+        private Task renderThumbnailsTask;
+        private CancellationTokenSource renderThumbnailsCts;
 
         public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer)
         {
@@ -1061,13 +1064,39 @@ namespace NAPS2.WinForms
                 thumbnailSize = Math.Max(Math.Min(thumbnailSize, 256), 64);
                 UserConfigManager.Config.ThumbnailSize = thumbnailSize;
                 UserConfigManager.Save();
-
                 thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
-                //foreach (var image in imageList.Images)
-                //{
-                //    image.UpdateThumbnail();
-                //}
+                thumbnailList1.UpdateImages(imageList.Images);
                 UpdateThumbnails(SelectedIndices.ToList());
+
+                if (renderThumbnailsCts != null)
+                {
+                    renderThumbnailsCts.Cancel();
+                }
+                var imagesToRenderThumbnailsFor = imageList.Images.ToList();
+                renderThumbnailsCts = new CancellationTokenSource();
+                var ct = renderThumbnailsCts.Token;
+                renderThumbnailsTask = Task.Factory.StartNew(() =>
+                {
+                    foreach (var img in imagesToRenderThumbnailsFor)
+                    {
+                        img.RenderThumbnail(thumbnailSize);
+                        Invoke(new Action(() =>
+                        {
+                            if (!ct.IsCancellationRequested)
+                            {
+                                int index = imageList.Images.IndexOf(img);
+                                if (index != -1)
+                                {
+                                    thumbnailList1.ReplaceThumbnail(index, img.GetThumbnail(thumbnailSize));
+                                }
+                            }
+                        }));
+                        if (ct.IsCancellationRequested)
+                        {
+                            break;
+                        }
+                    }
+                }, ct);
             }
         }
     }
