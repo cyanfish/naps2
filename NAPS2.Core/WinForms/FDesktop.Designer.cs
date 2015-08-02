@@ -39,6 +39,9 @@ namespace NAPS2.WinForms
             this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxView = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.ctxSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.tStrip = new System.Windows.Forms.ToolStrip();
@@ -51,7 +54,7 @@ namespace NAPS2.WinForms
             this.tsdSavePDF = new System.Windows.Forms.ToolStripSplitButton();
             this.tsSavePDFAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSavePDFSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsPDFSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdSaveImages = new System.Windows.Forms.ToolStripSplitButton();
             this.tsSaveImagesAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +64,7 @@ namespace NAPS2.WinForms
             this.tsEmailPDFSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.tsEmailSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsPdfSettings2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdPrint = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsdImage = new System.Windows.Forms.ToolStripDropDownButton();
@@ -90,10 +94,6 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.tsPdfSettings2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -120,7 +120,9 @@ namespace NAPS2.WinForms
             this.thumbnailList1.ContextMenuStrip = this.contextMenuStrip;
             resources.ApplyResources(this.thumbnailList1, "thumbnailList1");
             this.thumbnailList1.Name = "thumbnailList1";
+            this.thumbnailList1.ThumbnailSize = new System.Drawing.Size(128, 128);
             this.thumbnailList1.UseCompatibleStateImageBehavior = false;
+            this.thumbnailList1.UserConfigManager = null;
             this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
             this.thumbnailList1.SelectedIndexChanged += new System.EventHandler(this.thumbnailList1_SelectedIndexChanged);
             this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
@@ -146,6 +148,21 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.ctxView, "ctxView");
             this.ctxView.Name = "ctxView";
             this.ctxView.Click += new System.EventHandler(this.ctxView_Click);
+            // 
+            // zoomInToolStripMenuItem
+            // 
+            this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
+            resources.ApplyResources(this.zoomInToolStripMenuItem, "zoomInToolStripMenuItem");
+            // 
+            // zoomOutToolStripMenuItem
+            // 
+            this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
+            resources.ApplyResources(this.zoomOutToolStripMenuItem, "zoomOutToolStripMenuItem");
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
             // 
             // ctxSelectAll
             // 
@@ -258,10 +275,10 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsSavePDFSelected, "tsSavePDFSelected");
             this.tsSavePDFSelected.Click += new System.EventHandler(this.tsSavePDFSelected_Click);
             // 
-            // toolStripSeparator8
+            // toolStripSeparator10
             // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
             // 
             // tsPDFSettings
             // 
@@ -328,6 +345,12 @@ namespace NAPS2.WinForms
             this.tsEmailSettings.Name = "tsEmailSettings";
             resources.ApplyResources(this.tsEmailSettings, "tsEmailSettings");
             this.tsEmailSettings.Click += new System.EventHandler(this.tsEmailSettings_Click);
+            // 
+            // tsPdfSettings2
+            // 
+            this.tsPdfSettings2.Name = "tsPdfSettings2";
+            resources.ApplyResources(this.tsPdfSettings2, "tsPdfSettings2");
+            this.tsPdfSettings2.Click += new System.EventHandler(this.tsPdfSettings2_Click);
             // 
             // tsdPrint
             // 
@@ -546,32 +569,12 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
-            // tsPdfSettings2
-            // 
-            this.tsPdfSettings2.Name = "tsPdfSettings2";
-            resources.ApplyResources(this.tsPdfSettings2, "tsPdfSettings2");
-            this.tsPdfSettings2.Click += new System.EventHandler(this.tsPdfSettings2_Click);
-            // 
-            // zoomInToolStripMenuItem
-            // 
-            this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
-            resources.ApplyResources(this.zoomInToolStripMenuItem, "zoomInToolStripMenuItem");
-            // 
-            // zoomOutToolStripMenuItem
-            // 
-            this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
-            resources.ApplyResources(this.zoomOutToolStripMenuItem, "zoomOutToolStripMenuItem");
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
-            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.toolStripContainer1);
+            this.DoubleBuffered = true;
             this.Name = "FDesktop";
             this.Closed += new System.EventHandler(this.FDesktop_Closed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FDesktop_FormClosing);

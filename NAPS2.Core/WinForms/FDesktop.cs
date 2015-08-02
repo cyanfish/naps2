@@ -748,9 +748,10 @@ namespace NAPS2.WinForms
             foreach (IScannedImage scannedImage in recoveryManager.RecoverScannedImages())
             {
                 imageList.Images.Add(scannedImage);
+                AppendThumbnail(scannedImage);
+                thumbnailList1.Refresh();
                 changeTracker.HasUnsavedChanges = true;
             }
-            UpdateThumbnails();
 
             // Automatic updates
             // Not yet enabled
