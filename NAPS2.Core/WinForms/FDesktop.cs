@@ -1068,8 +1068,7 @@ namespace NAPS2.WinForms
                 UserConfigManager.Config.ThumbnailSize = thumbnailSize;
                 UserConfigManager.Save();
                 thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
-                thumbnailList1.UpdateImages(imageList.Images);
-                UpdateThumbnails(SelectedIndices.ToList());
+                thumbnailList1.ReplaceThumbnailList(imageList.Images);
 
                 if (renderThumbnailsCts != null)
                 {
