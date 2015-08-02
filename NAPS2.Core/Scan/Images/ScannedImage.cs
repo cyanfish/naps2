@@ -95,21 +95,26 @@ namespace NAPS2.Scan.Images
         {
             if (thumbnail == null)
             {
-                RenderThumbnail(preferredSize);
+                thumbnail = RenderThumbnail(preferredSize);
             }
             Debug.Assert(thumbnail != null);
             return (Bitmap)thumbnail.Clone();
         }
 
-        public void RenderThumbnail(int size)
+        public void SetThumbnail(Bitmap bitmap)
         {
             if (thumbnail != null)
             {
                 thumbnail.Dispose();
             }
+            thumbnail = bitmap;
+        }
+
+        public Bitmap RenderThumbnail(int size)
+        {
             using (var img = GetImage())
             {
-                thumbnail = ThumbnailHelper.GetThumbnail(img, size);
+                return ThumbnailHelper.GetThumbnail(img, size);
             }
         }
 

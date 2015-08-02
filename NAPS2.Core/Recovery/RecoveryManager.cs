@@ -96,7 +96,7 @@ namespace NAPS2.Recovery
                         {
                             scannedImage.AddTransform(transform);
                         }
-                        scannedImage.RenderThumbnail(userConfigManager.Config.ThumbnailSize);
+                        scannedImage.SetThumbnail(scannedImage.RenderThumbnail(userConfigManager.Config.ThumbnailSize));
                         yield return scannedImage;
                     }
                 }

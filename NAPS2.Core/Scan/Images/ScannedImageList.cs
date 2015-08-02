@@ -89,7 +89,7 @@ namespace NAPS2.Scan.Images
             foreach (int i in selection)
             {
                 Images[i].AddTransform(new RotationTransform(rotateFlipType));
-                Images[i].RenderThumbnail(UserConfigManager.Config.ThumbnailSize);
+                Images[i].SetThumbnail(Images[i].RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
             }
             return selection.ToList();
         }
@@ -176,7 +176,7 @@ namespace NAPS2.Scan.Images
             foreach (IScannedImage img in Images.ElementsAt(selection))
             {
                 img.ResetTransforms();
-                img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize);
+                img.SetThumbnail(img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
             }
             return selection.ToList();
         }

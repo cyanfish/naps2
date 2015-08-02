@@ -27,7 +27,6 @@ using System.Linq;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
-using NAPS2.Tests.Integration;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Unit
@@ -38,7 +37,7 @@ namespace NAPS2.Tests.Unit
         [SetUp]
         public void SetUp()
         {
-            imageList = new ScannedImageList(new PdfSharpExporterTests.StubUserConfigManager());
+            imageList = new ScannedImageList();
         }
 
         [TearDown]
@@ -242,6 +241,10 @@ namespace NAPS2.Tests.Unit
             return null;
         }
 
+        public void SetThumbnail(Bitmap bitmap)
+        {
+        }
+
         public void AddTransform(Transform transform)
         {
             RotateFlipCalled += 1;
@@ -251,8 +254,9 @@ namespace NAPS2.Tests.Unit
         {
         }
 
-        public void RenderThumbnail(int size)
+        public Bitmap RenderThumbnail(int size)
         {
+            return null;
         }
 
         public void MovedTo(int index)

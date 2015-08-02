@@ -93,6 +93,8 @@ namespace NAPS2.WinForms
         {
             imageList.UserConfigManager = UserConfigManager;
             thumbnailList1.UserConfigManager = UserConfigManager;
+            int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
+            thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             PostInitializeComponent();
         }
 
@@ -1079,15 +1081,16 @@ namespace NAPS2.WinForms
                 {
                     foreach (var img in imagesToRenderThumbnailsFor)
                     {
-                        img.RenderThumbnail(thumbnailSize);
+                        var thumbnail = img.RenderThumbnail(thumbnailSize);
                         Invoke(new Action(() =>
                         {
                             if (!ct.IsCancellationRequested)
                             {
+                                img.SetThumbnail(thumbnail);
                                 int index = imageList.Images.IndexOf(img);
                                 if (index != -1)
                                 {
-                                    thumbnailList1.ReplaceThumbnail(index, img.GetThumbnail(thumbnailSize));
+                                    thumbnailList1.ReplaceThumbnail(index, thumbnail);
                                 }
                             }
                         }));

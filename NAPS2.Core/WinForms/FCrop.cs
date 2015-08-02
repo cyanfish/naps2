@@ -147,7 +147,7 @@ namespace NAPS2.WinForms
             if (!CropTransform.IsNull)
             {
                 Image.AddTransform(CropTransform);
-                Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize);
+                Image.SetThumbnail(Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
                 changeTracker.HasUnsavedChanges = true;
             }
             Close();

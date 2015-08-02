@@ -113,7 +113,7 @@ namespace NAPS2.WinForms
             if (!RotationTransform.IsNull)
             {
                 Image.AddTransform(RotationTransform);
-                Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize);
+                Image.SetThumbnail(Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
                 changeTracker.HasUnsavedChanges = true;
             }
             Close();

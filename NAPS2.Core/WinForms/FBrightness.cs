@@ -111,7 +111,7 @@ namespace NAPS2.WinForms
             if (!BrightnessTransform.IsNull)
             {
                 Image.AddTransform(BrightnessTransform);
-                Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize);
+                Image.SetThumbnail(Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
                 changeTracker.HasUnsavedChanges = true;
             }
             Close();
