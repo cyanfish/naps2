@@ -58,7 +58,7 @@ namespace NAPS2.ImportExport.Pdf
                     return Enumerable.Empty<IScannedImage>();
                 }
 
-                return document.Pages.Cast<PdfPage>().SelectMany(GetImagesFromPage).ToList();
+                return document.Pages.Cast<PdfPage>().SelectMany(GetImagesFromPage);
             }
             catch (NotImplementedException e)
             {
