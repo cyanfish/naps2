@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Scan.Images;
 using NAPS2.Update;
 
 namespace NAPS2.Config
@@ -32,7 +33,7 @@ namespace NAPS2.Config
         public UserConfig()
         {
             FormStates = new List<FormState>();
-            ThumbnailSize = 128;
+            ThumbnailSize = ThumbnailHelper.DEFAULT_SIZE;
         }
 
         public const int CURRENT_VERSION = 2;

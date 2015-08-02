@@ -8,6 +8,11 @@ namespace NAPS2.Scan.Images
 {
     internal static class ThumbnailHelper
     {
+        public const int MIN_SIZE = 64;
+        public const int DEFAULT_SIZE = 128;
+        public const int MAX_SIZE = 256;
+        public const int STEP_SIZE = 32;
+
         /// <summary>
         /// Gets a bitmap resized to fit within a thumbnail rectangle, including a border around the picture.
         /// </summary>

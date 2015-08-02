@@ -129,10 +129,63 @@
   <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnZoomIn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnZoomIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnZoomIn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 439</value>
+  </data>
+  <data name="btnZoomIn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnZoomIn.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;btnZoomIn.Name" xml:space="preserve">
+    <value>btnZoomIn</value>
+  </data>
+  <data name="&gt;&gt;btnZoomIn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnZoomIn.Parent" xml:space="preserve">
+    <value>toolStripContainer1.ContentPanel</value>
+  </data>
+  <data name="&gt;&gt;btnZoomIn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnZoomOut.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnZoomOut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 439</value>
+  </data>
+  <data name="btnZoomOut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="btnZoomOut.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnZoomOut.Name" xml:space="preserve">
+    <value>btnZoomOut</value>
+  </data>
+  <data name="&gt;&gt;btnZoomOut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnZoomOut.Parent" xml:space="preserve">
+    <value>toolStripContainer1.ContentPanel</value>
+  </data>
+  <data name="&gt;&gt;btnZoomOut.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>233, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ctxView.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
@@ -142,22 +195,9 @@
   <data name="ctxView.Text" xml:space="preserve">
     <value>View</value>
   </data>
-  <data name="zoomInToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
-  </data>
-  <data name="zoomInToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zoom In</value>
-  </data>
-  <data name="zoomOutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
-  </data>
-  <data name="zoomOutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zoom Out</value>
-  </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 6</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ctxSelectAll.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+A</value>
   </data>
@@ -177,7 +217,7 @@
     <value>Copy</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 120</value>
+    <value>165, 76</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
     <value>contextMenuStrip</value>
@@ -194,7 +234,6 @@
   <data name="thumbnailList1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1204, 472</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
@@ -202,13 +241,13 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.0.2.6029, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.0.2.9167, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1204, 472</value>
@@ -809,18 +848,6 @@
   <data name="&gt;&gt;ctxView.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;zoomInToolStripMenuItem.Name" xml:space="preserve">
-    <value>zoomInToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;zoomInToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;zoomOutToolStripMenuItem.Name" xml:space="preserve">
-    <value>zoomOutToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;zoomOutToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
     <value>toolStripSeparator8</value>
   </data>
@@ -1053,7 +1080,7 @@
     <value>tsMove</value>
   </data>
   <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.0.2.6029, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.0.2.9167, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
     <value>tsdReorder</value>
@@ -1137,6 +1164,6 @@
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.2.6029, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.2.9167, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

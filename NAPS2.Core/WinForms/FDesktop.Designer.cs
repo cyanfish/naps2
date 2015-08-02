@@ -36,11 +36,11 @@ namespace NAPS2.WinForms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDesktop));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.btnZoomIn = new System.Windows.Forms.Button();
+            this.btnZoomOut = new System.Windows.Forms.Button();
             this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxView = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.ctxSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,6 +106,8 @@ namespace NAPS2.WinForms
             // 
             // toolStripContainer1.ContentPanel
             // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnZoomIn);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnZoomOut);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
@@ -114,6 +116,24 @@ namespace NAPS2.WinForms
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
+            // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnZoomIn, "btnZoomIn");
+            this.btnZoomIn.Image = global::NAPS2.Icons.zoom_in;
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.UseVisualStyleBackColor = false;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            // 
+            // btnZoomOut
+            // 
+            this.btnZoomOut.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnZoomOut, "btnZoomOut");
+            this.btnZoomOut.Image = global::NAPS2.Icons.zoom_out;
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.UseVisualStyleBackColor = false;
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
             // 
             // thumbnailList1
             // 
@@ -134,8 +154,6 @@ namespace NAPS2.WinForms
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxView,
-            this.zoomInToolStripMenuItem,
-            this.zoomOutToolStripMenuItem,
             this.toolStripSeparator8,
             this.ctxSelectAll,
             this.ctxCopy});
@@ -148,16 +166,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.ctxView, "ctxView");
             this.ctxView.Name = "ctxView";
             this.ctxView.Click += new System.EventHandler(this.ctxView_Click);
-            // 
-            // zoomInToolStripMenuItem
-            // 
-            this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
-            resources.ApplyResources(this.zoomInToolStripMenuItem, "zoomInToolStripMenuItem");
-            // 
-            // zoomOutToolStripMenuItem
-            // 
-            this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
-            resources.ApplyResources(this.zoomOutToolStripMenuItem, "zoomOutToolStripMenuItem");
             // 
             // toolStripSeparator8
             // 
@@ -578,7 +586,6 @@ namespace NAPS2.WinForms
             this.Name = "FDesktop";
             this.Closed += new System.EventHandler(this.FDesktop_Closed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FDesktop_FormClosing);
-            this.Load += new System.EventHandler(this.FDesktop_Load);
             this.Shown += new System.EventHandler(this.FDesktop_Shown);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
@@ -650,9 +657,9 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem tsEmailSettings;
         private System.Windows.Forms.ToolStripMenuItem tsPdfSettings2;
-        private System.Windows.Forms.ToolStripMenuItem zoomInToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.Button btnZoomIn;
+        private System.Windows.Forms.Button btnZoomOut;
     }
 }
 

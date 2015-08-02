@@ -89,8 +89,13 @@ namespace NAPS2.WinForms
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
         }
 
-        private void FDesktop_Load(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs eventArgs)
         {
+            new LayoutManager(this)
+                .Bind(btnZoomIn, btnZoomOut)
+                    .BottomToForm()
+                .Activate();
+
             imageList.UserConfigManager = UserConfigManager;
             thumbnailList1.UserConfigManager = UserConfigManager;
             int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
@@ -249,6 +254,10 @@ namespace NAPS2.WinForms
             // Context-menu actions
             ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
             ctxSelectAll.Enabled = imageList.Images.Any();
+
+            // Other buttons
+            btnZoomIn.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize < ThumbnailHelper.MAX_SIZE;
+            btnZoomOut.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize > ThumbnailHelper.MIN_SIZE;
         }
 
         private void Clear()
@@ -385,6 +394,18 @@ namespace NAPS2.WinForms
                     if (e.Control)
                     {
                         SavePDF(imageList.Images);
+                    }
+                    break;
+                case Keys.OemMinus:
+                    if (e.Control)
+                    {
+                        StepThumbnailSize(-1);
+                    }
+                    break;
+                case Keys.Oemplus:
+                    if (e.Control)
+                    {
+                        StepThumbnailSize(1);
                     }
                     break;
             }
@@ -1061,19 +1082,30 @@ namespace NAPS2.WinForms
         {
             if (isControlKeyDown)
             {
-                double step = e.Delta / (double)SystemInformation.MouseWheelScrollDelta;
-                int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
-                thumbnailSize += (int)(32 * step);
-                thumbnailSize = Math.Max(Math.Min(thumbnailSize, 256), 64);
-                ResizeThumbnails(thumbnailSize);
+                StepThumbnailSize(e.Delta / (double)SystemInformation.MouseWheelScrollDelta);
             }
+        }
+
+        private void StepThumbnailSize(double step)
+        {
+            int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
+            thumbnailSize += (int)(ThumbnailHelper.STEP_SIZE * step);
+            thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailHelper.MAX_SIZE), ThumbnailHelper.MIN_SIZE);
+            ResizeThumbnails(thumbnailSize);
         }
 
         private void ResizeThumbnails(int thumbnailSize)
         {
+            if (!imageList.Images.Any())
+            {
+                // Can't show visual feedback so don't do anything
+                return;
+            }
+
             // Save the new size to config
             UserConfigManager.Config.ThumbnailSize = thumbnailSize;
             UserConfigManager.Save();
+            UpdateToolbar();
             // Adjust the visible thumbnail display with the new size
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             thumbnailList1.RegenerateThumbnailList(imageList.Images);
@@ -1134,6 +1166,16 @@ namespace NAPS2.WinForms
                     }));
                 }
             }, ct);
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            StepThumbnailSize(-1);
+        }
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+            StepThumbnailSize(1);
         }
     }
 }
