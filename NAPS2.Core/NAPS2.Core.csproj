@@ -88,6 +88,7 @@
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Config\UserConfigManager.cs" />
+    <Compile Include="ImportExport\FileNameSubstitution.cs" />
     <Compile Include="ImportExport\Email\EmailSettings.cs" />
     <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />
     <Compile Include="ImportExport\Pdf\IPdfPasswordProvider.cs" />
