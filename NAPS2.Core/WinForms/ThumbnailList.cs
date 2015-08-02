@@ -79,7 +79,7 @@ namespace NAPS2.WinForms
         {
             ilThumbnailList.Images[index].Dispose();
             ilThumbnailList.Images[index] = thumbnail;
-            Invalidate();
+            Invalidate(Items[index].Bounds);
         }
     }
 }
