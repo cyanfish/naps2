@@ -131,6 +131,38 @@ namespace NAPS2.WinForms
             base.Dispose(disposing);
         }
 
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            if (isControlKeyDown)
+            {
+                StepZoom(e.Delta / (double)SystemInformation.MouseWheelScrollDelta);
+            }
+            else
+            {
+                base.OnMouseWheel(e);
+            }
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            isControlKeyDown = e.Control;
+            switch (e.KeyCode)
+            {
+                case Keys.OemMinus:
+                    if (e.Control)
+                    {
+                        StepZoom(-1);
+                    }
+                    break;
+                case Keys.Oemplus:
+                    if (e.Control)
+                    {
+                        StepZoom(1);
+                    }
+                    break;
+            }
+        }
+
         public void StepZoom(double steps)
         {
             Zoom = (int)Math.Round(Zoom * Math.Pow(1.2, steps));
