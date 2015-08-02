@@ -184,6 +184,11 @@ namespace NAPS2.Scan.Images
             return (Bitmap)thumbnail.Clone();
         }
 
+        public object GetThumbnailState()
+        {
+            return thumbnail;
+        }
+
         public void SetThumbnail(Bitmap bitmap)
         {
             if (thumbnail != null)

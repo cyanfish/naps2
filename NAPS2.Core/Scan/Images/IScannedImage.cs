@@ -35,6 +35,11 @@ namespace NAPS2.Scan.Images
         Bitmap GetThumbnail(int preferredSize);
 
         /// <summary>
+        /// Gets an object that changes when the thumbnail is changed.
+        /// </summary>
+        object GetThumbnailState();
+
+        /// <summary>
         /// Sets the current thumbnail bitmap for the image.
         /// </summary>
         void SetThumbnail(Bitmap bitmap);

@@ -82,7 +82,7 @@ namespace NAPS2.WinForms
             Invalidate(Items[index].Bounds);
         }
 
-        public void ReplaceThumbnailList(List<IScannedImage> images)
+        public void RegenerateThumbnailList(List<IScannedImage> images)
         {
             var thumbnails = images.Select(x => (Image)x.GetThumbnail(UserConfigManager.Config.ThumbnailSize)).ToArray();
             ilThumbnailList.Images.AddRange(thumbnails);

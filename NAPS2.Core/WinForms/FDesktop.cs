@@ -1065,42 +1065,75 @@ namespace NAPS2.WinForms
                 int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
                 thumbnailSize += (int)(32 * step);
                 thumbnailSize = Math.Max(Math.Min(thumbnailSize, 256), 64);
-                UserConfigManager.Config.ThumbnailSize = thumbnailSize;
-                UserConfigManager.Save();
-                thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
-                thumbnailList1.ReplaceThumbnailList(imageList.Images);
+                ResizeThumbnails(thumbnailSize);
+            }
+        }
 
-                if (renderThumbnailsCts != null)
+        private void ResizeThumbnails(int thumbnailSize)
+        {
+            // Save the new size to config
+            UserConfigManager.Config.ThumbnailSize = thumbnailSize;
+            UserConfigManager.Save();
+            // Adjust the visible thumbnail display with the new size
+            thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
+            thumbnailList1.RegenerateThumbnailList(imageList.Images);
+
+            // Render high-quality thumbnails at the new size in a background task
+            // The existing (poorly scaled) thumbnails are used in the meantime
+
+            if (renderThumbnailsCts != null)
+            {
+                // Cancel any previous task so that no two run at the same time
+                renderThumbnailsCts.Cancel();
+            }
+            var imagesToRenderThumbnailsFor = imageList.Images.ToList();
+            renderThumbnailsCts = new CancellationTokenSource();
+            var ct = renderThumbnailsCts.Token;
+            renderThumbnailsTask = Task.Factory.StartNew(() =>
+            {
+                foreach (var img in imagesToRenderThumbnailsFor)
                 {
-                    renderThumbnailsCts.Cancel();
-                }
-                var imagesToRenderThumbnailsFor = imageList.Images.ToList();
-                renderThumbnailsCts = new CancellationTokenSource();
-                var ct = renderThumbnailsCts.Token;
-                renderThumbnailsTask = Task.Factory.StartNew(() =>
-                {
-                    foreach (var img in imagesToRenderThumbnailsFor)
+                    if (ct.IsCancellationRequested)
                     {
-                        var thumbnail = img.RenderThumbnail(thumbnailSize);
-                        Invoke(new Action(() =>
-                        {
-                            if (!ct.IsCancellationRequested)
-                            {
-                                img.SetThumbnail(thumbnail);
-                                int index = imageList.Images.IndexOf(img);
-                                if (index != -1)
-                                {
-                                    thumbnailList1.ReplaceThumbnail(index, thumbnail);
-                                }
-                            }
-                        }));
+                        break;
+                    }
+                    // Save the state to check later for concurrent changes
+                    var oldState = img.GetThumbnailState();
+                    // Render the thumbnail
+                    Bitmap thumbnail;
+                    try
+                    {
+                        thumbnail = img.RenderThumbnail(thumbnailSize);
+                    }
+                    catch
+                    {
+                        // An error occurred, which could mean the image was deleted
+                        // In any case we don't need to worry too much about it and can move on to the next
+                        continue;
+                    }
+                    // Do the rest of the stuff on the UI thread to help with synchronization
+                    Invoke(new Action(() =>
+                    {
                         if (ct.IsCancellationRequested)
                         {
-                            break;
+                            return;
                         }
-                    }
-                }, ct);
-            }
+                        // Check for concurrent transformations
+                        if (oldState != img.GetThumbnailState())
+                        {
+                            // The thumbnail has been concurrently updated
+                            return;
+                        }
+                        // Checks passed, so use the newly rendered thumbnail at the appropriate index
+                        img.SetThumbnail(thumbnail);
+                        int index = imageList.Images.IndexOf(img);
+                        if (index != -1)
+                        {
+                            thumbnailList1.ReplaceThumbnail(index, thumbnail);
+                        }
+                    }));
+                }
+            }, ct);
         }
     }
 }
