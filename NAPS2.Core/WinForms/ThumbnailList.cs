@@ -46,7 +46,7 @@ namespace NAPS2.WinForms
 
         public void UpdateImages(List<IScannedImage> images)
         {
-            ilThumbnailList.Images.Clear();
+            ClearImages();
             Clear();
             foreach (IScannedImage img in images)
             {
@@ -62,7 +62,16 @@ namespace NAPS2.WinForms
 
         public void ClearItems()
         {
+            ClearImages();
             Clear();
+        }
+
+        private void ClearImages()
+        {
+            foreach (Image img in ilThumbnailList.Images)
+            {
+                img.Dispose();
+            }
             ilThumbnailList.Images.Clear();
         }
     }
