@@ -125,9 +125,11 @@ namespace NAPS2.ImportExport.Pdf
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using (var memoryStream = new MemoryStream(image.Stream.Value))
             {
-                var bitmap = new Bitmap(memoryStream);
-                bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                return scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, false);
+                using (var bitmap = new Bitmap(memoryStream))
+                {
+                    bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
+                    return scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, false);
+                }
             }
         }
 
@@ -157,8 +159,11 @@ namespace NAPS2.ImportExport.Pdf
                     throw new NotImplementedException("Unsupported image encoding (expected 24 bpp or 1bpp)");
             }
 
-            bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-            return scannedImageFactory.Create(bitmap, bitDepth, true);
+            using (bitmap)
+            {
+                bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
+                return scannedImageFactory.Create(bitmap, bitDepth, true);
+            }
         }
 
         private static void RgbToBitmapUnmanaged(int height, int width, Bitmap bitmap, byte[] rgbBuffer)

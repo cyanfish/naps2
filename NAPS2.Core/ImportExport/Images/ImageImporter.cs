@@ -35,7 +35,7 @@ namespace NAPS2.ImportExport.Images
                 for (int i = 0; i < toImport.GetFrameCount(FrameDimension.Page); ++i)
                 {
                     toImport.SelectActiveFrame(FrameDimension.Page, i);
-                    yield return scannedImageFactory.Create((Bitmap)toImport.Clone(), ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat));
+                    yield return scannedImageFactory.Create(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat));
                 }
             }
         }
