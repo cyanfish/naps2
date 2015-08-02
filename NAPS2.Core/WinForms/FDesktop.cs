@@ -52,8 +52,6 @@ namespace NAPS2.WinForms
         private readonly ImageSaver imageSaver;
         private readonly StringWrapper stringWrapper;
         private readonly AppConfigManager appConfigManager;
-        private readonly IErrorOutput errorOutput;
-        private readonly IScannedImageFactory scannedImageFactory;
         private readonly RecoveryManager recoveryManager;
         private readonly ScannedImageList imageList = new ScannedImageList();
         private readonly AutoUpdaterUI autoUpdaterUI;
@@ -66,17 +64,14 @@ namespace NAPS2.WinForms
         private readonly FileNameSubstitution fileNameSubstitution;
 
         private bool isControlKeyDown;
-        private Task renderThumbnailsTask;
         private CancellationTokenSource renderThumbnailsCts;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, IErrorOutput errorOutput, IScannedImageFactory scannedImageFactory, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
-            this.errorOutput = errorOutput;
-            this.scannedImageFactory = scannedImageFactory;
             this.recoveryManager = recoveryManager;
             this.scannedImageImporter = scannedImageImporter;
             this.autoUpdaterUI = autoUpdaterUI;
@@ -1124,7 +1119,7 @@ namespace NAPS2.WinForms
             var imagesToRenderThumbnailsFor = imageList.Images.ToList();
             renderThumbnailsCts = new CancellationTokenSource();
             var ct = renderThumbnailsCts.Token;
-            renderThumbnailsTask = Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(() =>
             {
                 foreach (var img in imagesToRenderThumbnailsFor)
                 {
