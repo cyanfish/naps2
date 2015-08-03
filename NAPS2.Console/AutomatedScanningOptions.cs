@@ -145,5 +145,12 @@ namespace NAPS2.Console
         public bool EmailSilentSend { get; set; }
 
         #endregion
+
+        #region Image Options
+
+        [Option("jpegquality", DefaultValue = 75, HelpText = "The quality of saved JPEG files (0-100, default 75).")]
+        public int JpegQuality { get; set; }
+
+        #endregion
     }
 }

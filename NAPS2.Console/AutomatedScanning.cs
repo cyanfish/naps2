@@ -52,13 +52,14 @@ namespace NAPS2.Console
         private readonly IUserConfigManager userConfigManager;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly FileNameSubstitution fileNameSubstitution;
+        private readonly ImageSettingsContainer imageSettingsContainer;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
         private int totalPagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNameSubstitution fileNameSubstitution)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -72,6 +73,7 @@ namespace NAPS2.Console
             this.userConfigManager = userConfigManager;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.fileNameSubstitution = fileNameSubstitution;
+            this.imageSettingsContainer = imageSettingsContainer;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -297,6 +299,8 @@ namespace NAPS2.Console
 
         private void DoExportToImageFiles(string outputPath)
         {
+            // TODO: If I add new image settings this may break things
+            imageSettingsContainer.ImageSettings = new ImageSettings { JpegQuality = options.JpegQuality };
             imageSaver.SaveImages(outputPath, scannedImages, path =>
             {
                 if (options.ForceOverwrite)
