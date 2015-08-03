@@ -76,11 +76,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Icons.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Icons.resx</DependentUpon>
-    </Compile>
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />
@@ -133,6 +128,11 @@
     <Compile Include="Util\CultureInitializer.cs" />
     <Compile Include="WinForms\IconButtonSizer.cs" />
     <Compile Include="Util\IErrorOutput.cs" />
+    <Compile Include="WinForms\Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\IFormFactory.cs" />
     <Compile Include="Util\ILogger.cs" />
     <Compile Include="WinForms\ILProfileIcons.cs">
@@ -389,7 +389,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icons.resx">
+    <EmbeddedResource Include="WinForms\Icons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Icons.Designer.cs</LastGenOutput>
