@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.ImportExport.Email;
+using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan.Images;
 using NAPS2.Update;
@@ -55,6 +56,8 @@ namespace NAPS2.Config
         public string LastImageExt { get; set; }
 
         public PdfSettings PdfSettings { get; set; }
+
+        public ImageSettings ImageSettings { get; set; }
 
         public EmailSettings EmailSettings { get; set; }
 

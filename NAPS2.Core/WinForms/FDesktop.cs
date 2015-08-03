@@ -1076,6 +1076,11 @@ namespace NAPS2.WinForms
             FormFactory.Create<FEmailSettings>().ShowDialog();
         }
 
+        private void tsImageSettings_Click(object sender, EventArgs e)
+        {
+            FormFactory.Create<FImageSettings>().ShowDialog();
+        }
+
         private void thumbnailList1_MouseWheel(object sender, MouseEventArgs e)
         {
             if (isControlKeyDown)

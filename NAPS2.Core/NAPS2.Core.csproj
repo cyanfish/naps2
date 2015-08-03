@@ -91,6 +91,8 @@
     <Compile Include="ImportExport\FileNameSubstitution.cs" />
     <Compile Include="ImportExport\Email\EmailSettings.cs" />
     <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />
+    <Compile Include="ImportExport\Images\ImageSettings.cs" />
+    <Compile Include="ImportExport\Images\ImageSettingsContainer.cs" />
     <Compile Include="ImportExport\Pdf\IPdfPasswordProvider.cs" />
     <Compile Include="ImportExport\Pdf\PdfEncryption.cs" />
     <Compile Include="ImportExport\Pdf\PdfMetadata.cs" />
@@ -233,6 +235,12 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
+    <Compile Include="WinForms\FImageSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FImageSettings.Designer.cs">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FEmailSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -444,6 +452,76 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.tr.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" />
+    <EmbeddedResource Include="WinForms\FImageSettings.bg.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.ca.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.cs.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.da.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.de.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.es.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.fr.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.he.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.hr.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.hu.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.it.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.nl.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.pl.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.pt-BR.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.pt-PT.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.ro.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.ru.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.sq.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.sv.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.tr.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.uk.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.zh-TW.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEmailSettings.bg.resx">
       <DependentUpon>FEmailSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -2189,6 +2267,7 @@
     <Content Include="Resources\email.ico" />
     <Content Include="Resources\file_extension_pdf.ico" />
     <Content Include="Resources\image_edit.png" />
+    <Content Include="Resources\picture.ico" />
     <Content Include="Resources\pictures.png" />
     <Content Include="Resources\picture_edit.png" />
     <Content Include="Resources\picture_save.png" />
