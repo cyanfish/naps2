@@ -62,11 +62,12 @@ namespace NAPS2.WinForms
         private readonly ChangeTracker changeTracker;
         private readonly EmailSettingsContainer emailSettingsContainer;
         private readonly FileNameSubstitution fileNameSubstitution;
+        private readonly ImageSettingsContainer imageSettingsContainer;
 
         private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -82,6 +83,7 @@ namespace NAPS2.WinForms
             this.changeTracker = changeTracker;
             this.emailSettingsContainer = emailSettingsContainer;
             this.fileNameSubstitution = fileNameSubstitution;
+            this.imageSettingsContainer = imageSettingsContainer;
             InitializeComponent();
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
         }
@@ -569,7 +571,8 @@ namespace NAPS2.WinForms
                                  MiscResources.FileTypeGif + "|*.gif|" +
                                  MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
                                  MiscResources.FileTypePng + "|*.png|" +
-                                 MiscResources.FileTypeTiff + "|*.tiff;*.tif"
+                                 MiscResources.FileTypeTiff + "|*.tiff;*.tif",
+                        FileName = imageSettingsContainer.ImageSettings.DefaultFileName
                     };
                 switch ((UserConfigManager.Config.LastImageExt ?? "").ToLowerInvariant())
                 {
