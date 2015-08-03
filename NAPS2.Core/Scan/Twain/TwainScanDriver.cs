@@ -103,7 +103,7 @@ namespace NAPS2.Scan.Twain
                         scaleFactor = ScanSettings.AfterScanScale.ToIntScaleFactor();
                     }
 
-                    using (var result = TransformationHelper.ScaleImage(output, scaleFactor))
+                    using (var result = ImageScaleHelper.ScaleImage(output, scaleFactor))
                     {
                         var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
                             ? ScanBitDepth.BlackWhite

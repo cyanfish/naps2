@@ -193,7 +193,7 @@
     <Compile Include="Scan\Images\ScannedImageHelper.cs" />
     <Compile Include="Scan\Images\ScannedImageList.cs" />
     <Compile Include="Scan\Images\ThumbnailHelper.cs" />
-    <Compile Include="Scan\Images\TransformationHelper.cs" />
+    <Compile Include="Scan\Images\ImageScaleHelper.cs" />
     <Compile Include="Scan\IScanDriver.cs" />
     <Compile Include="Scan\IScanPerformer.cs" />
     <Compile Include="Scan\IScanReceiver.cs" />

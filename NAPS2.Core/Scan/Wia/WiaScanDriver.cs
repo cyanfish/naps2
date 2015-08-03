@@ -117,7 +117,7 @@ namespace NAPS2.Scan.Wia
                             scaleFactor = ScanSettings.AfterScanScale.ToIntScaleFactor();
                         }
 
-                        using (var result = TransformationHelper.ScaleImage(output, scaleFactor))
+                        using (var result = ImageScaleHelper.ScaleImage(output, scaleFactor))
                         {
                             ScanBitDepth bitDepth = ScanSettings.UseNativeUI ? ScanBitDepth.C24Bit : ScanSettings.BitDepth;
                             return scannedImageFactory.Create(result, bitDepth, ScanSettings.MaxQuality);
