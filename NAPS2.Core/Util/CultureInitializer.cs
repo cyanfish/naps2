@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using NAPS2.Config;
 
-namespace NAPS2
+namespace NAPS2.Util
 {
     public class CultureInitializer
     {

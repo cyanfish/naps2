@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {

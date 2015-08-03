@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace NAPS2
+namespace NAPS2.Util
 {
     public class StringWrapper
     {

@@ -177,7 +177,7 @@ namespace NAPS2.WinForms
             // tsPrev
             // 
             this.tsPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsPrev.Image = global::NAPS2.Icons.arrow_left;
+            this.tsPrev.Image = Icons.arrow_left;
             resources.ApplyResources(this.tsPrev, "tsPrev");
             this.tsPrev.Name = "tsPrev";
             this.tsPrev.Click += new System.EventHandler(this.tsPrev_Click);
@@ -185,7 +185,7 @@ namespace NAPS2.WinForms
             // tsNext
             // 
             this.tsNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsNext.Image = global::NAPS2.Icons.arrow_right;
+            this.tsNext.Image = Icons.arrow_right;
             resources.ApplyResources(this.tsNext, "tsNext");
             this.tsNext.Name = "tsNext";
             this.tsNext.Click += new System.EventHandler(this.tsNext_Click);
@@ -203,28 +203,28 @@ namespace NAPS2.WinForms
             this.tsRotateRight,
             this.tsFlip,
             this.tsCustomRotation});
-            this.tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small;
+            this.tsdRotate.Image = Icons.arrow_rotate_anticlockwise_small;
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
             this.tsdRotate.Name = "tsdRotate";
             this.tsdRotate.ShowDropDownArrow = false;
             // 
             // tsRotateLeft
             // 
-            this.tsRotateLeft.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small;
+            this.tsRotateLeft.Image = Icons.arrow_rotate_anticlockwise_small;
             this.tsRotateLeft.Name = "tsRotateLeft";
             resources.ApplyResources(this.tsRotateLeft, "tsRotateLeft");
             this.tsRotateLeft.Click += new System.EventHandler(this.tsRotateLeft_Click);
             // 
             // tsRotateRight
             // 
-            this.tsRotateRight.Image = global::NAPS2.Icons.arrow_rotate_clockwise_small;
+            this.tsRotateRight.Image = Icons.arrow_rotate_clockwise_small;
             this.tsRotateRight.Name = "tsRotateRight";
             resources.ApplyResources(this.tsRotateRight, "tsRotateRight");
             this.tsRotateRight.Click += new System.EventHandler(this.tsRotateRight_Click);
             // 
             // tsFlip
             // 
-            this.tsFlip.Image = global::NAPS2.Icons.arrow_switch_small;
+            this.tsFlip.Image = Icons.arrow_switch_small;
             this.tsFlip.Name = "tsFlip";
             resources.ApplyResources(this.tsFlip, "tsFlip");
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
@@ -238,7 +238,7 @@ namespace NAPS2.WinForms
             // tsCrop
             // 
             this.tsCrop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsCrop.Image = global::NAPS2.Icons.transform_crop;
+            this.tsCrop.Image = Icons.transform_crop;
             resources.ApplyResources(this.tsCrop, "tsCrop");
             this.tsCrop.Name = "tsCrop";
             this.tsCrop.Click += new System.EventHandler(this.tsCrop_Click);
@@ -246,7 +246,7 @@ namespace NAPS2.WinForms
             // tsBrightness
             // 
             this.tsBrightness.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsBrightness.Image = global::NAPS2.Icons.weather_sun;
+            this.tsBrightness.Image = Icons.weather_sun;
             resources.ApplyResources(this.tsBrightness, "tsBrightness");
             this.tsBrightness.Name = "tsBrightness";
             this.tsBrightness.Click += new System.EventHandler(this.tsBrightness_Click);
@@ -254,7 +254,7 @@ namespace NAPS2.WinForms
             // tsContrast
             // 
             this.tsContrast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsContrast.Image = global::NAPS2.Icons.contrast;
+            this.tsContrast.Image = Icons.contrast;
             resources.ApplyResources(this.tsContrast, "tsContrast");
             this.tsContrast.Name = "tsContrast";
             this.tsContrast.Click += new System.EventHandler(this.tsContrast_Click);

@@ -25,9 +25,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {

@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
-            this.ilProfileIcons = new NAPS2.ILProfileIcons(this.components);
+            this.ilProfileIcons = new ILProfileIcons(this.components);
             this.btnScan = new System.Windows.Forms.Button();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();

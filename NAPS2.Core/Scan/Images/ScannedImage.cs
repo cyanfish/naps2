@@ -25,7 +25,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images

@@ -36,7 +36,7 @@ namespace NAPS2.WinForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FEmailSettings));
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.ilProfileIcons = new NAPS2.ILProfileIcons(this.components);
+            this.ilProfileIcons = new ILProfileIcons(this.components);
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
             this.txtAttachmentName = new System.Windows.Forms.TextBox();

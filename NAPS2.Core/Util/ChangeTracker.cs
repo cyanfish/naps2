@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace NAPS2
+namespace NAPS2.Util
 {
     public class ChangeTracker
     {

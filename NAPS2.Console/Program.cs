@@ -21,14 +21,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using NAPS2.Console.DI;
 using NAPS2.Console.Lang.Resources;
+using NAPS2.Util;
 using Ninject;
 using Ninject.Parameters;
-using NLog;
 
 namespace NAPS2.Console
 {

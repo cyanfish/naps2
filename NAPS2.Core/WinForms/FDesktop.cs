@@ -42,6 +42,7 @@ using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Update;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {

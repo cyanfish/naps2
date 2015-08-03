@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Forms;
+using NAPS2.Util;
 
-namespace NAPS2
+namespace NAPS2.WinForms
 {
     /// <summary>
     /// A layout manager for WinForms that takes advantage of the relative sizes and positions of controls from the WinForms designer.

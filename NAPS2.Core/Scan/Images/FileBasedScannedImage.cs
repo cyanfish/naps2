@@ -28,6 +28,7 @@ using System.IO;
 using System.Linq;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {

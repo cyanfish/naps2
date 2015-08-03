@@ -11,12 +11,12 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
-using NAPS2.Scan.Stub;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Update;
+using NAPS2.Util;
+using NAPS2.WinForms;
 using Ninject.Modules;
-using NLog;
 
 namespace NAPS2.DI
 {

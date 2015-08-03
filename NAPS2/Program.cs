@@ -20,16 +20,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Config;
 using NAPS2.DI;
+using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject;
-using Ninject.Parameters;
-using NLog;
 
 namespace NAPS2
 {

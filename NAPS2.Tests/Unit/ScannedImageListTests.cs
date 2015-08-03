@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
 using NUnit.Framework;

@@ -36,7 +36,7 @@ namespace NAPS2.WinForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPdfSettings));
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.ilProfileIcons = new NAPS2.ILProfileIcons(this.components);
+            this.ilProfileIcons = new ILProfileIcons(this.components);
             this.groupMetadata = new System.Windows.Forms.GroupBox();
             this.txtKeywords = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using NAPS2.Util;
 using NLog;
 using NLog.Config;
 using NLog.Targets;

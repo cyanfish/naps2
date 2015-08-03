@@ -73,12 +73,16 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeTracker.cs" />
-    <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\ChangeTracker.cs" />
+    <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Config\AppConfigManager.cs" />
     <Compile Include="Config\ConfigManager.cs" />
@@ -110,8 +114,8 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Log.cs" />
-    <Compile Include="NullLogger.cs" />
+    <Compile Include="Util\Log.cs" />
+    <Compile Include="Util\NullLogger.cs" />
     <Compile Include="Ocr\IOcrEngine.cs" />
     <Compile Include="Ocr\TesseractOcrEngine.cs" />
     <Compile Include="Ocr\OcrLanguage.cs" />
@@ -126,20 +130,15 @@
     <Compile Include="Scan\Images\Transforms\RotationTransform.cs" />
     <Compile Include="Scan\Images\Transforms\Transform.cs" />
     <Compile Include="Scan\IScanDriverFactory.cs" />
-    <Compile Include="CultureInitializer.cs" />
-    <Compile Include="IconButtonSizer.cs" />
-    <Compile Include="Icons.Designer.cs">
-      <DependentUpon>Icons.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="IErrorOutput.cs" />
-    <Compile Include="IFormFactory.cs" />
-    <Compile Include="ILogger.cs" />
-    <Compile Include="ILProfileIcons.cs">
+    <Compile Include="Util\CultureInitializer.cs" />
+    <Compile Include="WinForms\IconButtonSizer.cs" />
+    <Compile Include="Util\IErrorOutput.cs" />
+    <Compile Include="WinForms\IFormFactory.cs" />
+    <Compile Include="Util\ILogger.cs" />
+    <Compile Include="WinForms\ILProfileIcons.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ILProfileIcons.Designer.cs">
+    <Compile Include="WinForms\ILProfileIcons.Designer.cs">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportExport\Email\EmailAttachment.cs" />
@@ -170,8 +169,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="LayoutManager.cs" />
-    <Compile Include="MessageBoxErrorOutput.cs" />
+    <Compile Include="WinForms\LayoutManager.cs" />
+    <Compile Include="WinForms\MessageBoxErrorOutput.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recovery\RecoveryIndex.cs" />
@@ -213,10 +212,10 @@
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
     <Compile Include="Scan\Wia\WiaState.cs" />
     <Compile Include="Scan\Wia\WinFormsWiaTransfer.cs" />
-    <Compile Include="StringWrapper.cs" />
-    <Compile Include="Unmanaged.cs" />
-    <Compile Include="UnmanagedArray.cs" />
-    <Compile Include="UnmanagedBase.cs" />
+    <Compile Include="Util\StringWrapper.cs" />
+    <Compile Include="Util\Unmanaged.cs" />
+    <Compile Include="Util\UnmanagedArray.cs" />
+    <Compile Include="Util\UnmanagedBase.cs" />
     <Compile Include="Update\AutoUpdater.cs" />
     <Compile Include="Update\AutoUpdaterUI.cs" />
     <Compile Include="Update\AutoUpdateStatus.cs" />
@@ -392,10 +391,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ILProfileIcons.resx">
+    <EmbeddedResource Include="WinForms\ILProfileIcons.resx">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

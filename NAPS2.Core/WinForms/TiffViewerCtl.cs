@@ -175,7 +175,7 @@ namespace NAPS2.WinForms
             // tsStretch
             // 
             this.tsStretch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsStretch.Image = global::NAPS2.Icons.arrow_out;
+            this.tsStretch.Image = Icons.arrow_out;
             resources.ApplyResources(this.tsStretch, "tsStretch");
             this.tsStretch.Name = "tsStretch";
             this.tsStretch.CheckedChanged += new System.EventHandler(this.tsStretch_CheckedChanged);
@@ -189,7 +189,7 @@ namespace NAPS2.WinForms
             // tsZoomActual
             // 
             this.tsZoomActual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsZoomActual.Image = global::NAPS2.Icons.zoom_actual;
+            this.tsZoomActual.Image = Icons.zoom_actual;
             resources.ApplyResources(this.tsZoomActual, "tsZoomActual");
             this.tsZoomActual.Name = "tsZoomActual";
             this.tsZoomActual.Click += new System.EventHandler(this.tsZoomActual_Click);
@@ -197,7 +197,7 @@ namespace NAPS2.WinForms
             // tsZoomPlus
             // 
             this.tsZoomPlus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsZoomPlus.Image = global::NAPS2.Icons.zoom_in;
+            this.tsZoomPlus.Image = Icons.zoom_in;
             resources.ApplyResources(this.tsZoomPlus, "tsZoomPlus");
             this.tsZoomPlus.Name = "tsZoomPlus";
             this.tsZoomPlus.Click += new System.EventHandler(this.tsZoomPlus_Click);
@@ -205,7 +205,7 @@ namespace NAPS2.WinForms
             // tsZoomOut
             // 
             this.tsZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsZoomOut.Image = global::NAPS2.Icons.zoom_out;
+            this.tsZoomOut.Image = Icons.zoom_out;
             resources.ApplyResources(this.tsZoomOut, "tsZoomOut");
             this.tsZoomOut.Name = "tsZoomOut";
             this.tsZoomOut.Click += new System.EventHandler(this.tsZoomOut_Click);

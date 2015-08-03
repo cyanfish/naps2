@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace NAPS2.Scan.Images.Transforms
