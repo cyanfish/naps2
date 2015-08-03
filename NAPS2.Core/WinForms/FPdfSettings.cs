@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Pdf;
 
@@ -145,6 +146,16 @@ namespace NAPS2.WinForms
         private void cbShowUserPassword_CheckedChanged(object sender, EventArgs e)
         {
             txtUserPassword.UseSystemPasswordChar = !cbShowUserPassword.Checked;
+        }
+
+        private void linkSubstitutions_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var form = FormFactory.Create<FSubstitutions>();
+            form.FileName = txtDefaultFileName.Text;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                txtDefaultFileName.Text = form.FileName;
+            }
         }
     }
 }
