@@ -23,6 +23,7 @@ namespace NAPS2.ImportExport
 
         public string SubstituteFileName(string fileNameWithPath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
         {
+            // TODO: Add datetime as a parameter for consistency.
             // Most subs don't need a special case
             string result = Subs.Aggregate(fileNameWithPath, (current, sub) => current.Replace(sub.Key, sub.Value()));
             // One does, however

@@ -306,31 +306,31 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="linkSubstitutions.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="linkSubstitutions.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 45</value>
   </data>
-  <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="linkSubstitutions.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
   </data>
-  <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="linkSubstitutions.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="linkLabel1.Text" xml:space="preserve">
+  <data name="linkSubstitutions.Text" xml:space="preserve">
     <value>Substitutions</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
-    <value>linkLabel1</value>
+  <data name="&gt;&gt;linkSubstitutions.Name" xml:space="preserve">
+    <value>linkSubstitutions</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;linkSubstitutions.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;linkSubstitutions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;linkSubstitutions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="txtJpegQuality.Location" type="System.Drawing.Point, System.Drawing">

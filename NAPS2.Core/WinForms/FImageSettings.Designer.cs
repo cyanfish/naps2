@@ -42,7 +42,7 @@ namespace NAPS2.WinForms
             this.txtDefaultFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
             this.txtJpegQuality = new System.Windows.Forms.TextBox();
             this.tbJpegQuality = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).BeginInit();
@@ -90,11 +90,12 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // linkLabel1
+            // linkSubstitutions
             // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
+            resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
+            this.linkSubstitutions.Name = "linkSubstitutions";
+            this.linkSubstitutions.TabStop = true;
+            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
             // 
             // txtJpegQuality
             // 
@@ -115,7 +116,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.txtJpegQuality);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.linkSubstitutions);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtDefaultFileName);
             this.Controls.Add(this.label1);
@@ -143,7 +144,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.TextBox txtDefaultFileName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkSubstitutions;
         private System.Windows.Forms.TextBox txtJpegQuality;
         private System.Windows.Forms.TrackBar tbJpegQuality;
     }

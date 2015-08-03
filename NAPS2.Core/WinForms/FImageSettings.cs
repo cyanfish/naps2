@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Images;
 
@@ -101,6 +101,16 @@ namespace NAPS2.WinForms
                 {
                     tbJpegQuality.Value = value;
                 }
+            }
+        }
+
+        private void linkSubstitutions_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var form = FormFactory.Create<FSubstitutions>();
+            form.FileName = txtDefaultFileName.Text;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                txtDefaultFileName.Text = form.FileName;
             }
         }
     }

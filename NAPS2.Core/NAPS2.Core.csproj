@@ -235,6 +235,12 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
+    <Compile Include="WinForms\FSubstitutions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FSubstitutions.Designer.cs">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FImageSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -452,6 +458,75 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.tr.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" />
+    <EmbeddedResource Include="WinForms\FSubstitutions.bg.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.ca.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.cs.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.da.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.de.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.es.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.fr.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.he.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.hr.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.hu.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.it.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.nl.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.pl.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.pt-BR.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.pt-PT.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.ro.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.ru.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.sq.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.sv.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.tr.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.uk.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSubstitutions.zh-TW.resx">
+      <DependentUpon>FSubstitutions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FImageSettings.bg.resx">
       <DependentUpon>FImageSettings.cs</DependentUpon>
     </EmbeddedResource>
