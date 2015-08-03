@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -69,6 +70,11 @@ namespace NAPS2.WinForms
             catch (UnauthorizedAccessException)
             {
                 errorOutput.DisplayError(MiscResources.DontHavePermission);
+            }
+            catch (IOException ex)
+            {
+                Log.ErrorException(MiscResources.ErrorSaving, ex);
+                errorOutput.DisplayError(MiscResources.ErrorSaving);
             }
 
             Invoke(new ThreadStart(Close));

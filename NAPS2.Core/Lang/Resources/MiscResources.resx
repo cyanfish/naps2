@@ -297,4 +297,7 @@
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>You do not have permission to copy content from the file "{0}".</value>
   </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>An error occurred when trying to save the file.</value>
+  </data>
 </root>

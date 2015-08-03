@@ -250,6 +250,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when trying to save the file..
+        /// </summary>
+        internal static string ErrorSaving {
+            get {
+                return ResourceManager.GetString("ErrorSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estimated download size: {0} MB.
         /// </summary>
         internal static string EstimatedDownloadSize {

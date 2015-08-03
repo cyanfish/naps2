@@ -340,6 +340,11 @@ namespace NAPS2.Console
             {
                 errorOutput.DisplayError(ConsoleResources.DontHavePermission);
             }
+            catch (IOException ex)
+            {
+                logger.ErrorException(ConsoleResources.ErrorSaving, ex);
+                errorOutput.DisplayError(ConsoleResources.ErrorSaving);
+            }
         }
 
         private void DoExportToPdf(string outputPath)

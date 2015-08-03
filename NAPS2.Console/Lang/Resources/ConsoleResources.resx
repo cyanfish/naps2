@@ -220,4 +220,7 @@ Use the "--importpassword" option.</value>
   <data name="ScannedPage" xml:space="preserve">
     <value>Scanned page {0}.</value>
   </data>
+  <data name="ErrorSaving" xml:space="preserve">
+    <value>An error occurred when trying to save the file.</value>
+  </data>
 </root>

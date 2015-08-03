@@ -109,6 +109,11 @@ namespace NAPS2.ImportExport.Images
             {
                 errorOutput.DisplayError(MiscResources.DontHavePermission);
             }
+            catch (IOException ex)
+            {
+                Log.ErrorException(MiscResources.ErrorSaving, ex);
+                errorOutput.DisplayError(MiscResources.ErrorSaving);
+            }
         }
 
         private void DoSaveImage(Bitmap image, string path, ImageFormat format)

@@ -151,6 +151,15 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when trying to save the file..
+        /// </summary>
+        internal static string ErrorSaving {
+            get {
+                return ResourceManager.GetString("ErrorSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exported page {0} of {1}..
         /// </summary>
         internal static string ExportedPage {
