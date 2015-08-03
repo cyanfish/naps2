@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
 
@@ -34,11 +35,13 @@ namespace NAPS2.ImportExport.Images
     {
         private readonly IErrorOutput errorOutput;
         private readonly FileNameSubstitution fileNameSubstitution;
+        private readonly ImageSettingsContainer imageSettingsContainer;
 
-        public ImageSaver(IErrorOutput errorOutput, FileNameSubstitution fileNameSubstitution)
+        public ImageSaver(IErrorOutput errorOutput, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer)
         {
             this.errorOutput = errorOutput;
             this.fileNameSubstitution = fileNameSubstitution;
+            this.imageSettingsContainer = imageSettingsContainer;
         }
 
         /// <summary>
@@ -92,12 +95,12 @@ namespace NAPS2.ImportExport.Images
                                     continue;
                                 }
                             }
-                            baseImage.Save(subFileName, format);
+                            DoSaveImage(baseImage, subFileName, format);
                         }
                         else
                         {
                             var fileNameN = fileNameSubstitution.SubstituteFileName(fileName, true, i++, digits);
-                            baseImage.Save(fileNameN, format);
+                            DoSaveImage(baseImage, fileNameN, format);
                         }
                     }
                 }
@@ -105,6 +108,22 @@ namespace NAPS2.ImportExport.Images
             catch (UnauthorizedAccessException)
             {
                 errorOutput.DisplayError(MiscResources.DontHavePermission);
+            }
+        }
+
+        private void DoSaveImage(Bitmap image, string path, ImageFormat format)
+        {
+            if (Equals(format, ImageFormat.Jpeg))
+            {
+                var quality = Math.Max(Math.Min(imageSettingsContainer.ImageSettings.JpegQuality, 100), 0);
+                var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
+                var encoderParams = new EncoderParameters(1);
+                encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+                image.Save(path, encoder, encoderParams);
+            }
+            else
+            {
+                image.Save(path, format);
             }
         }
 

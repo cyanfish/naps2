@@ -51,6 +51,7 @@ namespace NAPS2.DI
             Bind<AppConfigManager>().ToSelf().InSingletonScope();
             Bind<IUserConfigManager>().To<UserConfigManager>().InSingletonScope();
             Bind<PdfSettingsContainer>().ToSelf().InSingletonScope();
+            Bind<ImageSettingsContainer>().ToSelf().InSingletonScope();
             Bind<EmailSettingsContainer>().ToSelf().InSingletonScope();
 
             // Update
