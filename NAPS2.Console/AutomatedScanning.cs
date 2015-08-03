@@ -49,7 +49,6 @@ namespace NAPS2.Console
         private readonly IScanPerformer scanPerformer;
         private readonly IErrorOutput errorOutput;
         private readonly IScannedImageImporter scannedImageImporter;
-        private readonly ILogger logger;
         private readonly IUserConfigManager userConfigManager;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly FileNameSubstitution fileNameSubstitution;
@@ -60,7 +59,7 @@ namespace NAPS2.Console
         private int pagesScanned;
         private int totalPagesScanned;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, ILogger logger, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -70,7 +69,6 @@ namespace NAPS2.Console
             this.errorOutput = errorOutput;
             this.emailer = emailer;
             this.scannedImageImporter = scannedImageImporter;
-            this.logger = logger;
             this.userConfigManager = userConfigManager;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.fileNameSubstitution = fileNameSubstitution;
@@ -155,7 +153,7 @@ namespace NAPS2.Console
                 }
                 catch (Exception ex)
                 {
-                    logger.ErrorException(string.Format(ConsoleResources.ErrorImporting, filePath), ex);
+                    Log.ErrorException(string.Format(ConsoleResources.ErrorImporting, filePath), ex);
                     errorOutput.DisplayError(string.Format(ConsoleResources.ErrorImporting, filePath));
                     continue;
                 }
@@ -343,7 +341,7 @@ namespace NAPS2.Console
             }
             catch (IOException ex)
             {
-                logger.ErrorException(ConsoleResources.ErrorSaving, ex);
+                Log.ErrorException(ConsoleResources.ErrorSaving, ex);
                 errorOutput.DisplayError(ConsoleResources.ErrorSaving);
             }
         }
@@ -382,7 +380,7 @@ namespace NAPS2.Console
                 }
                 catch (Exception ex)
                 {
-                    logger.ErrorException(ConsoleResources.CouldntLoadEncryptionConfig, ex);
+                    Log.ErrorException(ConsoleResources.CouldntLoadEncryptionConfig, ex);
                     errorOutput.DisplayError(ConsoleResources.CouldntLoadEncryptionConfig);
                 }
             }

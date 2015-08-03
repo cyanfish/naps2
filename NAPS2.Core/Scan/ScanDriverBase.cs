@@ -29,10 +29,6 @@ namespace NAPS2.Scan
 {
     public abstract class ScanDriverBase : IScanDriver
     {
-        protected ScanDriverBase()
-        {
-        }
-
         public abstract string DriverName { get; }
 
         public ExtendedScanSettings ScanSettings { get; set; }
