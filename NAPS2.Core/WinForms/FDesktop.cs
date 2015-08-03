@@ -63,11 +63,12 @@ namespace NAPS2.WinForms
         private readonly EmailSettingsContainer emailSettingsContainer;
         private readonly FileNameSubstitution fileNameSubstitution;
         private readonly ImageSettingsContainer imageSettingsContainer;
+        private readonly PdfSettingsContainer pdfSettingsContainer;
 
         private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -84,6 +85,7 @@ namespace NAPS2.WinForms
             this.emailSettingsContainer = emailSettingsContainer;
             this.fileNameSubstitution = fileNameSubstitution;
             this.imageSettingsContainer = imageSettingsContainer;
+            this.pdfSettingsContainer = pdfSettingsContainer;
             InitializeComponent();
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
         }
@@ -531,7 +533,8 @@ namespace NAPS2.WinForms
                 {
                     OverwritePrompt = true,
                     AddExtension = true,
-                    Filter = MiscResources.FileTypePdf + "|*.pdf"
+                    Filter = MiscResources.FileTypePdf + "|*.pdf",
+                    FileName = pdfSettingsContainer.PdfSettings.DefaultFileName
                 };
 
                 if (sd.ShowDialog() == DialogResult.OK)
@@ -562,18 +565,18 @@ namespace NAPS2.WinForms
             if (images.Any())
             {
                 var sd = new SaveFileDialog
-                    {
-                        OverwritePrompt = true,
-                        AddExtension = true,
-                        Filter = MiscResources.FileTypeBmp + "|*.bmp|" +
-                                 MiscResources.FileTypeEmf + "|*.emf|" +
-                                 MiscResources.FileTypeExif + "|*.exif|" +
-                                 MiscResources.FileTypeGif + "|*.gif|" +
-                                 MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
-                                 MiscResources.FileTypePng + "|*.png|" +
-                                 MiscResources.FileTypeTiff + "|*.tiff;*.tif",
-                        FileName = imageSettingsContainer.ImageSettings.DefaultFileName
-                    };
+                {
+                    OverwritePrompt = true,
+                    AddExtension = true,
+                    Filter = MiscResources.FileTypeBmp + "|*.bmp|" +
+                                MiscResources.FileTypeEmf + "|*.emf|" +
+                                MiscResources.FileTypeExif + "|*.exif|" +
+                                MiscResources.FileTypeGif + "|*.gif|" +
+                                MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
+                                MiscResources.FileTypePng + "|*.png|" +
+                                MiscResources.FileTypeTiff + "|*.tiff;*.tif",
+                    FileName = imageSettingsContainer.ImageSettings.DefaultFileName
+                };
                 switch ((UserConfigManager.Config.LastImageExt ?? "").ToLowerInvariant())
                 {
                     case "bmp":
@@ -595,7 +598,7 @@ namespace NAPS2.WinForms
                     case "tiff":
                         sd.FilterIndex = 7;
                         break;
-                    default:
+                    default: // Jpeg
                         sd.FilterIndex = 5;
                         break;
                 }

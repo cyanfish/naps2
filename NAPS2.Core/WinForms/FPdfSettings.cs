@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Bind(groupMetadata, groupProtection)
                     .WidthToForm()
-                .Bind(txtTitle, txtAuthor, txtSubject, txtKeywords, txtOwnerPassword, txtUserPassword)
+                .Bind(txtDefaultFileName, txtTitle, txtAuthor, txtSubject, txtKeywords, txtOwnerPassword, txtUserPassword)
                     .WidthToForm()
                 .Activate();
 
@@ -56,6 +56,7 @@ namespace NAPS2.WinForms
 
         private void UpdateValues(PdfSettings pdfSettings)
         {
+            txtDefaultFileName.Text = pdfSettings.DefaultFileName;
             txtTitle.Text = pdfSettings.Metadata.Title;
             txtAuthor.Text = pdfSettings.Metadata.Author;
             txtSubject.Text = pdfSettings.Metadata.Subject;
@@ -88,6 +89,7 @@ namespace NAPS2.WinForms
         {
             var pdfSettings = new PdfSettings
             {
+                DefaultFileName = txtDefaultFileName.Text,
                 Metadata =
                 {
                     Title = txtTitle.Text,

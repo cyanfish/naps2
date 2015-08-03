@@ -45,9 +45,9 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(btnRestoreDefaults, btnOK, btnCancel)
                     .BottomToForm()
-                .Bind(btnOK, btnCancel)
+                .Bind(txtJpegQuality, btnOK, btnCancel)
                     .RightToForm()
-                .Bind(txtDefaultFileName)
+                .Bind(txtDefaultFileName, tbJpegQuality)
                     .WidthToForm()
                 .Activate();
 

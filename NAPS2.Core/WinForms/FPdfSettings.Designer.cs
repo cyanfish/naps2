@@ -64,6 +64,9 @@ namespace NAPS2.WinForms
             this.cbEncryptPdf = new System.Windows.Forms.CheckBox();
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.txtDefaultFileName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupMetadata.SuspendLayout();
             this.groupProtection.SuspendLayout();
             this.SuspendLayout();
@@ -261,10 +264,29 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults.UseVisualStyleBackColor = true;
             this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
+            // linkLabel1
+            // 
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.TabStop = true;
+            // 
+            // txtDefaultFileName
+            // 
+            resources.ApplyResources(this.txtDefaultFileName, "txtDefaultFileName");
+            this.txtDefaultFileName.Name = "txtDefaultFileName";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // FPdfSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.txtDefaultFileName);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRestoreDefaults);
             this.Controls.Add(this.cbRememberSettings);
             this.Controls.Add(this.groupProtection);
@@ -315,5 +337,8 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox cbShowUserPassword;
         private System.Windows.Forms.CheckBox cbShowOwnerPassword;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.TextBox txtDefaultFileName;
+        private System.Windows.Forms.Label label1;
     }
 }

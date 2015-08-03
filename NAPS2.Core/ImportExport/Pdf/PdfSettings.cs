@@ -35,6 +35,8 @@ namespace NAPS2.ImportExport.Pdf
             encryption = new PdfEncryption();
         }
 
+        public string DefaultFileName { get; set; }
+
         public PdfMetadata Metadata
         {
             get { return metadata; }
