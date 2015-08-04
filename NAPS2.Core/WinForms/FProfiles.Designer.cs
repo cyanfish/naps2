@@ -77,7 +77,7 @@ namespace NAPS2.WinForms
             // ctxScan
             // 
             resources.ApplyResources(this.ctxScan, "ctxScan");
-            this.ctxScan.Image = global::NAPS2.WinForms.Icons.control_play_blue_small;
+            this.ctxScan.Image = global::NAPS2.Icons.control_play_blue_small;
             this.ctxScan.Name = "ctxScan";
             this.ctxScan.Click += new System.EventHandler(this.ctxScan_Click);
             // 
@@ -88,21 +88,21 @@ namespace NAPS2.WinForms
             // 
             // ctxEdit
             // 
-            this.ctxEdit.Image = global::NAPS2.WinForms.Icons.pencil_small;
+            this.ctxEdit.Image = global::NAPS2.Icons.pencil_small;
             this.ctxEdit.Name = "ctxEdit";
             resources.ApplyResources(this.ctxEdit, "ctxEdit");
             this.ctxEdit.Click += new System.EventHandler(this.ctxEdit_Click);
             // 
             // ctxSetDefault
             // 
-            this.ctxSetDefault.Image = global::NAPS2.WinForms.Icons.accept_small;
+            this.ctxSetDefault.Image = global::NAPS2.Icons.accept_small;
             this.ctxSetDefault.Name = "ctxSetDefault";
             resources.ApplyResources(this.ctxSetDefault, "ctxSetDefault");
             this.ctxSetDefault.Click += new System.EventHandler(this.ctxSetDefault_Click);
             // 
             // ctxDelete
             // 
-            this.ctxDelete.Image = global::NAPS2.WinForms.Icons.cross_small;
+            this.ctxDelete.Image = global::NAPS2.Icons.cross_small;
             this.ctxDelete.Name = "ctxDelete";
             resources.ApplyResources(this.ctxDelete, "ctxDelete");
             this.ctxDelete.Click += new System.EventHandler(this.ctxDelete_Click);
@@ -110,14 +110,14 @@ namespace NAPS2.WinForms
             // btnAdd
             // 
             resources.ApplyResources(this.btnAdd, "btnAdd");
-            this.btnAdd.Image = global::NAPS2.WinForms.Icons.add_small;
+            this.btnAdd.Image = global::NAPS2.Icons.add_small;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::NAPS2.WinForms.Icons.pencil_small;
+            this.btnEdit.Image = global::NAPS2.Icons.pencil_small;
             resources.ApplyResources(this.btnEdit, "btnEdit");
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -125,7 +125,7 @@ namespace NAPS2.WinForms
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::NAPS2.WinForms.Icons.cross_small;
+            this.btnDelete.Image = global::NAPS2.Icons.cross_small;
             resources.ApplyResources(this.btnDelete, "btnDelete");
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -142,7 +142,7 @@ namespace NAPS2.WinForms
             // 
             this.btnScan.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.btnScan, "btnScan");
-            this.btnScan.Image = global::NAPS2.WinForms.Icons.control_play_blue;
+            this.btnScan.Image = global::NAPS2.Icons.control_play_blue;
             this.btnScan.Name = "btnScan";
             this.btnScan.UseVisualStyleBackColor = true;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);

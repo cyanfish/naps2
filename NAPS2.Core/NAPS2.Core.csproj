@@ -76,6 +76,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
     <Compile Include="ImportExport\Pdf\PdfSaver.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
@@ -130,17 +135,12 @@
     <Compile Include="Util\CultureInitializer.cs" />
     <Compile Include="WinForms\IconButtonSizer.cs" />
     <Compile Include="Util\IErrorOutput.cs" />
-    <Compile Include="WinForms\Icons.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Icons.resx</DependentUpon>
-    </Compile>
     <Compile Include="WinForms\IFormFactory.cs" />
     <Compile Include="Util\ILogger.cs" />
-    <Compile Include="WinForms\ILProfileIcons.cs">
+    <Compile Include="ILProfileIcons.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WinForms\ILProfileIcons.Designer.cs">
+    <Compile Include="ILProfileIcons.Designer.cs">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportExport\Email\EmailAttachment.cs" />
@@ -392,12 +392,12 @@
     <Compile Include="WinForms\WinFormsOverwritePrompt.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="WinForms\Icons.resx">
+    <EmbeddedResource Include="Icons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Icons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\ILProfileIcons.resx">
+    <EmbeddedResource Include="ILProfileIcons.resx">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
