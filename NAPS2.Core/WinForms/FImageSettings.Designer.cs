@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
             this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
             this.txtJpegQuality = new System.Windows.Forms.TextBox();
             this.tbJpegQuality = new System.Windows.Forms.TrackBar();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblWarning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,16 +112,16 @@ namespace NAPS2.WinForms
             this.tbJpegQuality.TickFrequency = 25;
             this.tbJpegQuality.Scroll += new System.EventHandler(this.tbJpegQuality_Scroll);
             // 
-            // label3
+            // lblWarning
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.lblWarning, "lblWarning");
+            this.lblWarning.Name = "lblWarning";
             // 
             // FImageSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblWarning);
             this.Controls.Add(this.txtJpegQuality);
             this.Controls.Add(this.linkSubstitutions);
             this.Controls.Add(this.label2);
@@ -155,6 +155,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.LinkLabel linkSubstitutions;
         private System.Windows.Forms.TextBox txtJpegQuality;
         private System.Windows.Forms.TrackBar tbJpegQuality;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblWarning;
     }
 }

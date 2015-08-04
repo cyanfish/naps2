@@ -47,7 +47,7 @@ namespace NAPS2.WinForms
                     .BottomToForm()
                 .Bind(txtJpegQuality, btnOK, btnCancel)
                     .RightToForm()
-                .Bind(txtDefaultFileName, tbJpegQuality)
+                .Bind(txtDefaultFileName, tbJpegQuality, lblWarning)
                     .WidthToForm()
                 .Activate();
 
