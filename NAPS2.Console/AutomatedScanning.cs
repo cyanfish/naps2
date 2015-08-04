@@ -149,7 +149,7 @@ namespace NAPS2.Console
                 && File.Exists(subPath)
                 && !options.ForceOverwrite)
             {
-                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, Path.GetFileName(subPath)));
+                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, Path.GetFullPath(subPath)));
                 return false;
             }
             return true;
@@ -311,24 +311,29 @@ namespace NAPS2.Console
 
         private void ExportToImageFiles()
         {
-            // TODO: Maybe add return code
+            var path = fileNameSubstitution.SubstituteFileName(options.OutputPath, startTime);
             DoExportToImageFiles(options.OutputPath);
-
-            OutputVerbose(ConsoleResources.FinishedSavingImages, options.OutputPath);
+            OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
         }
 
         private void DoExportToImageFiles(string outputPath)
         {
             // TODO: If I add new image settings this may break things
             imageSettingsContainer.ImageSettings = new ImageSettings { JpegQuality = options.JpegQuality };
-            imageSaver.SaveImages(outputPath, startTime, scannedImages);
+            imageSaver.SaveImages(outputPath, startTime, scannedImages, i =>
+            {
+                OutputVerbose(ConsoleResources.ExportingImage, i, scannedImages.Count);
+                return true;
+            });
         }
 
         private void ExportToPdf()
         {
+            // Get a local copy of the path just for output
+            var path = fileNameSubstitution.SubstituteFileName(options.OutputPath, startTime);
             if (DoExportToPdf(options.OutputPath))
             {
-                OutputVerbose(ConsoleResources.SuccessfullySavedPdf, options.OutputPath);
+                OutputVerbose(ConsoleResources.SuccessfullySavedPdf, path);
             }
         }
 
@@ -378,7 +383,7 @@ namespace NAPS2.Console
 
             return pdfSaver.SavePdf(path, startTime, scannedImages, pdfSettings, ocrLanguageCode, i =>
             {
-                OutputVerbose(ConsoleResources.ExportedPage, i, scannedImages.Count);
+                OutputVerbose(ConsoleResources.ExportingPage, i, scannedImages.Count);
                 return true;
             });
         }

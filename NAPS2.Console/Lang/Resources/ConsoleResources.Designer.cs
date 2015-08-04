@@ -160,15 +160,6 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exported page {0} of {1}..
-        /// </summary>
-        internal static string ExportedPage {
-            get {
-                return ResourceManager.GetString("ExportedPage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Exporting....
         /// </summary>
         internal static string Exporting {
@@ -178,11 +169,29 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exporting image {0} of {1}....
+        /// </summary>
+        internal static string ExportingImage {
+            get {
+                return ResourceManager.GetString("ExportingImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exporting images for use as an attachment....
         /// </summary>
         internal static string ExportingImagesToAttach {
             get {
                 return ResourceManager.GetString("ExportingImagesToAttach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting page {0} of {1}..
+        /// </summary>
+        internal static string ExportingPage {
+            get {
+                return ResourceManager.GetString("ExportingPage", resourceCulture);
             }
         }
         

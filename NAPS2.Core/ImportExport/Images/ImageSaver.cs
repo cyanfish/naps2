@@ -52,8 +52,9 @@ namespace NAPS2.ImportExport.Images
         /// If multiple images are provided, they will be saved to files with numeric identifiers, e.g. img1.jpg, img2.jpg, etc..
         /// </summary>
         /// <param name="fileName">The name of the file to save. For multiple images, this is modified by appending a number before the extension.</param>
+        /// <param name="dateTime"></param>
         /// <param name="images">The collection of images to save.</param>
-        public void SaveImages(string fileName, DateTime dateTime, ICollection<IScannedImage> images)
+        public void SaveImages(string fileName, DateTime dateTime, ICollection<IScannedImage> images, Func<int, bool> progressCallback)
         {
             try
             {
@@ -78,10 +79,14 @@ namespace NAPS2.ImportExport.Images
                     return;
                 }
 
-                int i = 0;
+                int i = 1;
                 int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
                 foreach (IScannedImage img in images)
                 {
+                    if (!progressCallback(i))
+                    {
+                        return;
+                    }
                     if (images.Count == 1 && File.Exists(subFileName))
                     {
                         var dialogResult = overwritePrompt.ConfirmOverwrite(subFileName);
@@ -102,10 +107,11 @@ namespace NAPS2.ImportExport.Images
                         }
                         else
                         {
-                            var fileNameN = fileNameSubstitution.SubstituteFileName(fileName, dateTime, true, i++, digits);
+                            var fileNameN = fileNameSubstitution.SubstituteFileName(fileName, dateTime, true, i - 1, digits);
                             DoSaveImage(baseImage, fileNameN, format);
                         }
                     }
+                    i++;
                 }
             }
             catch (UnauthorizedAccessException)

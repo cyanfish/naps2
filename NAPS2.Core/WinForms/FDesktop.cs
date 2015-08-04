@@ -610,7 +610,7 @@ namespace NAPS2.WinForms
                 {
                     UserConfigManager.Config.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", "");
                     UserConfigManager.Save();
-                    imageSaver.SaveImages(sd.FileName, DateTime.Now, images);
+                    imageSaver.SaveImages(sd.FileName, DateTime.Now, images, i => true);
                     changeTracker.HasUnsavedChanges = false;
                 }
             }

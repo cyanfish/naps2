@@ -132,8 +132,8 @@
   <data name="ScannedImage" xml:space="preserve">
     <value>Scanned Image</value>
   </data>
-  <data name="ExportedPage" xml:space="preserve">
-    <value>Exported page {0} of {1}.</value>
+  <data name="ExportingPage" xml:space="preserve">
+    <value>Exporting page {0} of {1}.</value>
   </data>
   <data name="SuccessfullySavedPdf" xml:space="preserve">
     <value>Successfully saved PDF file to {0}</value>
@@ -222,5 +222,8 @@ Use the "--importpassword" option.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>An error occurred when trying to save the file.</value>
+  </data>
+  <data name="ExportingImage" xml:space="preserve">
+    <value>Exporting image {0} of {1}...</value>
   </data>
 </root>
