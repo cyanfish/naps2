@@ -70,8 +70,8 @@ msgstr ""
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 msgid "All ({0})"
 msgstr ""
 
@@ -105,6 +105,10 @@ msgstr ""
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
+msgstr ""
+
+#: MiscResources.resx$ErrorSaving$Message
+msgid "An error occurred when trying to save the file"
 msgstr ""
 
 #: MiscResources.resx$EmailError$Message
@@ -143,6 +147,22 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
+#: FSubstitutions.resx$label13.Text$Message
+msgid "Auto-incrementing number (1 digit)"
+msgstr ""
+
+#: FSubstitutions.resx$label12.Text$Message
+msgid "Auto-incrementing number (2 digits)"
+msgstr ""
+
+#: FSubstitutions.resx$label11.Text$Message
+msgid "Auto-incrementing number (3 digits)"
+msgstr ""
+
+#: FSubstitutions.resx$label10.Text$Message
+msgid "Auto-incrementing number (4 digits)"
+msgstr ""
+
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
 msgstr ""
@@ -176,15 +196,17 @@ msgstr ""
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
+#: FSubstitutions.resx$btnCancel.Text$Message
+#: FScanProgress.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FRotate.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 msgid "Cancel"
@@ -207,8 +229,8 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: FViewer.resx$tsContrast.Text$Message
 #: FDesktop.resx$tsContrast.Text$Message
+#: FViewer.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
 #: FEditScanSettings.resx$label7.Text$Message
 msgid "Contrast"
@@ -257,14 +279,23 @@ msgstr ""
 msgid "Custom Rotation"
 msgstr ""
 
+#: FSubstitutions.resx$label6.Text$Message
+msgid "Day (01-31)"
+msgstr ""
+
+#: FPdfSettings.resx$label1.Text$Message
+#: FImageSettings.resx$label1.Text$Message
+msgid "Default File Name"
+msgstr ""
+
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr ""
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
 msgstr ""
@@ -351,9 +382,21 @@ msgstr ""
 msgid "Feeder"
 msgstr ""
 
+#: FSubstitutions.resx$label1.Text$Message
+msgid "File Name"
+msgstr ""
+
+#: FSubstitutions.resx$$this.Text$Message
+msgid "File Name Substitutions"
+msgstr ""
+
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
 msgid "Flip"
+msgstr ""
+
+#: FImageSettings.resx$lblWarning.Text$Message
+msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
@@ -376,12 +419,21 @@ msgstr ""
 msgid "Horizontal align"
 msgstr ""
 
+#: FSubstitutions.resx$label7.Text$Message
+msgid "Hour (0-23)"
+msgstr ""
+
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
 msgstr ""
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
+msgstr ""
+
+#: FImageSettings.resx$$this.Text$Message
+#: FDesktop.resx$tsImageSettings.Text$Message
+msgid "Image Settings"
 msgstr ""
 
 #: FDesktop.resx$tsImport.Text$Message
@@ -412,6 +464,10 @@ msgstr ""
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr ""
 
+#: FImageSettings.resx$label2.Text$Message
+msgid "Jpeg Quality"
+msgstr ""
+
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
 msgstr ""
@@ -438,6 +494,14 @@ msgstr ""
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
+msgstr ""
+
+#: FSubstitutions.resx$label8.Text$Message
+msgid "Minute (00-59)"
+msgstr ""
+
+#: FSubstitutions.resx$label5.Text$Message
+msgid "Month (01-12)"
 msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
@@ -500,10 +564,12 @@ msgstr ""
 
 #: FEmailSettings.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
+#: FSubstitutions.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FRotate.resx$btnOK.Text$Message
 #: FContrast.resx$btnOK.Text$Message
@@ -524,9 +590,9 @@ msgstr ""
 msgid "Owner Password"
 msgstr ""
 
+#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
-#: FDesktop.resx$tsPdfSettings2.Text$Message
 msgid "PDF Settings"
 msgstr ""
 
@@ -551,6 +617,7 @@ msgid "Password"
 msgstr ""
 
 #: FViewer.resx$$this.Text$Message
+#: FSubstitutions.resx$label2.Text$Message
 msgid "Preview"
 msgstr ""
 
@@ -580,6 +647,7 @@ msgid "Recover Scanned Images"
 msgstr ""
 
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
+#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr ""
@@ -601,6 +669,7 @@ msgid "Resolution"
 msgstr ""
 
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr ""
@@ -672,6 +741,10 @@ msgstr ""
 msgid "Scanning page {0}"
 msgstr ""
 
+#: FSubstitutions.resx$label9.Text$Message
+msgid "Second (00-59)"
+msgstr ""
+
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
 msgstr ""
@@ -685,10 +758,10 @@ msgid "Select one or more languages"
 msgstr ""
 
 #: FDesktop.resx$tsReverseSelected.Text$Message
-#: MiscResources.resx$SelectedCount$Message
-#: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
 msgid "Selected ({0})"
 msgstr ""
 
@@ -703,6 +776,13 @@ msgstr ""
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
+msgstr ""
+
+#: FImageSettings.resx$linkSubstitutions.Text$Message
+#: FSubstitutions.resx$gboxSubs.Text$Message
+#: FPdfSettings.resx$linkSubstitutions.Text$Message
+#: FEmailSettings.resx$linkSubstitutions.Text$Message
+msgid "Substitutions"
 msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
@@ -796,6 +876,14 @@ msgstr ""
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
+msgstr ""
+
+#: FSubstitutions.resx$label3.Text$Message
+msgid "Year"
+msgstr ""
+
+#: FSubstitutions.resx$label4.Text$Message
+msgid "Year (00-99)"
 msgstr ""
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
