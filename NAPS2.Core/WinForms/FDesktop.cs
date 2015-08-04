@@ -66,11 +66,12 @@ namespace NAPS2.WinForms
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly PdfSaver pdfSaver;
+        private readonly IErrorOutput errorOutput;
 
         private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -89,6 +90,7 @@ namespace NAPS2.WinForms
             this.imageSettingsContainer = imageSettingsContainer;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.pdfSaver = pdfSaver;
+            this.errorOutput = errorOutput;
             InitializeComponent();
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
         }
@@ -792,13 +794,21 @@ namespace NAPS2.WinForms
                 {
                     // TODO: Run in thread, and show a dialog (just like exporting)
                     // Need to provide count somehow (progress callback). count = # files or # pages
-                    var images = scannedImageImporter.Import(fileName);
-                    foreach (var img in images)
+                    try
                     {
-                        imageList.Images.Add(img);
-                        AppendThumbnail(img);
-                        thumbnailList1.Refresh();
-                        changeTracker.HasUnsavedChanges = true;
+                        var images = scannedImageImporter.Import(fileName);
+                        foreach (var img in images)
+                        {
+                            imageList.Images.Add(img);
+                            AppendThumbnail(img);
+                            thumbnailList1.Refresh();
+                            changeTracker.HasUnsavedChanges = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
+                        errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)));
                     }
                 }
             }
