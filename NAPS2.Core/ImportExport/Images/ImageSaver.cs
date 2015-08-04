@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -36,12 +37,14 @@ namespace NAPS2.ImportExport.Images
         private readonly IErrorOutput errorOutput;
         private readonly FileNameSubstitution fileNameSubstitution;
         private readonly ImageSettingsContainer imageSettingsContainer;
+        private readonly IOverwritePrompt overwritePrompt;
 
-        public ImageSaver(IErrorOutput errorOutput, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer)
+        public ImageSaver(IErrorOutput errorOutput, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt)
         {
             this.errorOutput = errorOutput;
             this.fileNameSubstitution = fileNameSubstitution;
             this.imageSettingsContainer = imageSettingsContainer;
+            this.overwritePrompt = overwritePrompt;
         }
 
         /// <summary>
@@ -50,22 +53,19 @@ namespace NAPS2.ImportExport.Images
         /// </summary>
         /// <param name="fileName">The name of the file to save. For multiple images, this is modified by appending a number before the extension.</param>
         /// <param name="images">The collection of images to save.</param>
-        /// <param name="overwritePredicate">A predicate that, given the full name/path of a file that already exists, returns true if it should be overwritten, or false if it should be skipped.</param>
-        public void SaveImages(string fileName, ICollection<IScannedImage> images, Func<string, bool> overwritePredicate)
+        public void SaveImages(string fileName, DateTime dateTime, ICollection<IScannedImage> images)
         {
             try
             {
-                var subFileName = fileNameSubstitution.SubstituteFileName(fileName);
+                var subFileName = fileNameSubstitution.SubstituteFileName(fileName, dateTime);
                 ImageFormat format = GetImageFormat(subFileName);
 
                 if (Equals(format, ImageFormat.Tiff))
                 {
                     if (File.Exists(subFileName))
                     {
-                        // Overwrite?
-                        if (!overwritePredicate(Path.GetFullPath(subFileName)))
+                        if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
                         {
-                            // No, so skip it
                             return;
                         }
                     }
@@ -82,24 +82,27 @@ namespace NAPS2.ImportExport.Images
                 int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
                 foreach (IScannedImage img in images)
                 {
+                    if (images.Count == 1 && File.Exists(subFileName))
+                    {
+                        var dialogResult = overwritePrompt.ConfirmOverwrite(subFileName);
+                        if (dialogResult == DialogResult.No)
+                        {
+                            continue;
+                        }
+                        if (dialogResult == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+                    }
                     using (Bitmap baseImage = img.GetImage())
                     {
                         if (images.Count == 1)
                         {
-                            if (File.Exists(subFileName))
-                            {
-                                // Overwrite?
-                                if (!overwritePredicate(Path.GetFullPath(subFileName)))
-                                {
-                                    // No, so skip it
-                                    continue;
-                                }
-                            }
                             DoSaveImage(baseImage, subFileName, format);
                         }
                         else
                         {
-                            var fileNameN = fileNameSubstitution.SubstituteFileName(fileName, true, i++, digits);
+                            var fileNameN = fileNameSubstitution.SubstituteFileName(fileName, dateTime, true, i++, digits);
                             DoSaveImage(baseImage, fileNameN, format);
                         }
                     }

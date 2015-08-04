@@ -91,6 +91,7 @@
     <Compile Include="CommandLineOptions.cs" />
     <Compile Include="ConsoleErrorOutput.cs" />
     <Compile Include="ConsolePdfPasswordProvider.cs" />
+    <Compile Include="ConsoleOverwritePrompt.cs" />
     <Compile Include="DI\ConsoleModule.cs" />
     <Compile Include="DI\KernelManager.cs" />
     <Compile Include="Lang\Resources\ConsoleResources.Designer.cs">

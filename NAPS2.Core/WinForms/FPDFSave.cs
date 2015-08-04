@@ -28,22 +28,19 @@ using NAPS2.Config;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
     public partial class FPdfSave : FormBase
     {
-        private readonly IPdfExporter pdfExporter;
-        private readonly IErrorOutput errorOutput;
+        private readonly PdfSaver pdfSaver;
         private readonly IUserConfigManager userConfigManager;
         private readonly PdfSettingsContainer pdfSettingsContainer;
 
-        public FPdfSave(IPdfExporter pdfExporter, IErrorOutput errorOutput, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
+        public FPdfSave(PdfSaver pdfSaver, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
         {
             InitializeComponent();
-            this.pdfExporter = pdfExporter;
-            this.errorOutput = errorOutput;
+            this.pdfSaver = pdfSaver;
             this.userConfigManager = userConfigManager;
             this.pdfSettingsContainer = pdfSettingsContainer;
             RestoreFormState = false;
@@ -60,24 +57,11 @@ namespace NAPS2.WinForms
             pdfSettings.Metadata.Creator = MiscResources.NAPS2;
             var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
 
-            try
+            pdfSaver.SavePdf(Filename, DateTime.Now, Images, pdfSettings, ocrLanguageCode, num =>
             {
-                pdfExporter.Export(Filename, Images, pdfSettings, ocrLanguageCode, num =>
-                {
-                    Invoke(new ThreadStart(() => SetStatus(num, Images.Count)));
-                    return true;
-                });
-            }
-            catch (UnauthorizedAccessException)
-            {
-                errorOutput.DisplayError(MiscResources.DontHavePermission);
-            }
-            catch (IOException ex)
-            {
-                Log.ErrorException(MiscResources.ErrorSaving, ex);
-                errorOutput.DisplayError(MiscResources.ErrorSaving);
-            }
-
+                Invoke(new ThreadStart(() => SetStatus(num, Images.Count)));
+                return true;
+            });
             Invoke(new ThreadStart(Close));
         }
 

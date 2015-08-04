@@ -41,7 +41,7 @@ namespace NAPS2.Tests.Integration
 
         public override IPdfExporter GetPdfExporter()
         {
-            return new PdfSharpExporter(new StubOcrEngine(), new FileNameSubstitution());
+            return new PdfSharpExporter(new StubOcrEngine());
         }
 
         public class StubUserConfigManager : IUserConfigManager

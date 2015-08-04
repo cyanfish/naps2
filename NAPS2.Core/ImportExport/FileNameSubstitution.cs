@@ -20,24 +20,24 @@ namespace NAPS2.ImportExport
         public const string NUMBER_2_DIGITS = "$(nn)";
         public const string NUMBER_1_DIGIT = "$(n)";
 
-        private static readonly Dictionary<string, Func<string>> Subs = new Dictionary<string, Func<string>>
+        private static readonly Dictionary<string, Func<DateTime, string>> Subs = new Dictionary<string, Func<DateTime, string>>
         {
-            { YEAR_4_DIGITS, () => DateTime.Now.ToString("yyyy") },
-            { YEAR_2_DIGITS, () => DateTime.Now.ToString("yy") },
-            { MONTH_2_DIGITS, () => DateTime.Now.ToString("MM") },
-            { DAY_2_DIGITS, () => DateTime.Now.ToString("dd") },
-            { HOUR_24_CLOCK, () => DateTime.Now.ToString("HH") },
-            { MINUTE_2_DIGITS, () => DateTime.Now.ToString("mm") },
-            { SECOND_2_DIGITS, () => DateTime.Now.ToString("ss") },
+            { YEAR_4_DIGITS, dateTime => dateTime.ToString("yyyy") },
+            { YEAR_2_DIGITS, dateTime => dateTime.ToString("yy") },
+            { MONTH_2_DIGITS, dateTime => dateTime.ToString("MM") },
+            { DAY_2_DIGITS, dateTime => dateTime.ToString("dd") },
+            { HOUR_24_CLOCK, dateTime => dateTime.ToString("HH") },
+            { MINUTE_2_DIGITS, dateTime => dateTime.ToString("mm") },
+            { SECOND_2_DIGITS, dateTime => dateTime.ToString("ss") },
         };
 
         private static readonly Regex NumberSubPattern = new Regex(@"\$\(n+\)");
 
-        public string SubstituteFileName(string fileNameWithPath, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
+        public string SubstituteFileName(string fileNameWithPath, DateTime dateTime, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
         {
             // TODO: Add datetime as a parameter for consistency.
             // Most subs don't need a special case
-            string result = Subs.Aggregate(fileNameWithPath, (current, sub) => current.Replace(sub.Key, sub.Value()));
+            string result = Subs.Aggregate(fileNameWithPath, (current, sub) => current.Replace(sub.Key, sub.Value(dateTime)));
             // One does, however
             var match = NumberSubPattern.Match(result);
             if (match.Success)

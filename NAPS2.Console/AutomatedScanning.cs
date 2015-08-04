@@ -53,13 +53,15 @@ namespace NAPS2.Console
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly FileNameSubstitution fileNameSubstitution;
         private readonly ImageSettingsContainer imageSettingsContainer;
+        private readonly PdfSaver pdfSaver;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
         private int pagesScanned;
         private int totalPagesScanned;
+        private DateTime startTime;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, PdfSaver pdfSaver)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -73,6 +75,7 @@ namespace NAPS2.Console
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.fileNameSubstitution = fileNameSubstitution;
             this.imageSettingsContainer = imageSettingsContainer;
+            this.pdfSaver = pdfSaver;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -90,12 +93,11 @@ namespace NAPS2.Console
                 return;
             }
 
-            if (options.OutputPath != null
-                && IsPdfFile(options.OutputPath)
-                && File.Exists(options.OutputPath)
-                && !options.ForceOverwrite)
+            startTime = DateTime.Now;
+            ConsoleOverwritePrompt.ForceOverwrite = options.ForceOverwrite;
+
+            if (!PreCheckOverwriteFile())
             {
-                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, options.OutputPath));
                 return;
             }
 
@@ -133,6 +135,24 @@ namespace NAPS2.Console
             }
 
             scannedImages = null;
+        }
+
+        private bool PreCheckOverwriteFile()
+        {
+            if (options.OutputPath == null)
+            {
+                // Email, so no check needed
+                return true;
+            }
+            var subPath = fileNameSubstitution.SubstituteFileName(options.OutputPath, startTime);
+            if (IsPdfFile(subPath)
+                && File.Exists(subPath)
+                && !options.ForceOverwrite)
+            {
+                errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, Path.GetFileName(subPath)));
+                return false;
+            }
+            return true;
         }
 
         private void ImportImages()
@@ -188,7 +208,7 @@ namespace NAPS2.Console
             tempFolder.Create();
             try
             {
-                string attachmentName = fileNameSubstitution.SubstituteFileName(options.EmailFileName, false);
+                string attachmentName = fileNameSubstitution.SubstituteFileName(options.EmailFileName, startTime, false);
                 string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
                 if (IsPdfFile(targetPath))
                 {
@@ -291,6 +311,7 @@ namespace NAPS2.Console
 
         private void ExportToImageFiles()
         {
+            // TODO: Maybe add return code
             DoExportToImageFiles(options.OutputPath);
 
             OutputVerbose(ConsoleResources.FinishedSavingImages, options.OutputPath);
@@ -300,53 +321,18 @@ namespace NAPS2.Console
         {
             // TODO: If I add new image settings this may break things
             imageSettingsContainer.ImageSettings = new ImageSettings { JpegQuality = options.JpegQuality };
-            imageSaver.SaveImages(outputPath, scannedImages, path =>
-            {
-                if (options.ForceOverwrite)
-                {
-                    OutputVerbose(ConsoleResources.Overwriting, path);
-                }
-                else
-                {
-                    errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
-                }
-                return options.ForceOverwrite;
-            });
+            imageSaver.SaveImages(outputPath, startTime, scannedImages);
         }
 
         private void ExportToPdf()
         {
-            if (File.Exists(options.OutputPath))
+            if (DoExportToPdf(options.OutputPath))
             {
-                if (options.ForceOverwrite)
-                {
-                    OutputVerbose(ConsoleResources.Overwriting, options.OutputPath);
-                }
-                else
-                {
-                    errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, options.OutputPath));
-                    return;
-                }
-            }
-
-            try
-            {
-                DoExportToPdf(options.OutputPath);
-
                 OutputVerbose(ConsoleResources.SuccessfullySavedPdf, options.OutputPath);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                errorOutput.DisplayError(ConsoleResources.DontHavePermission);
-            }
-            catch (IOException ex)
-            {
-                Log.ErrorException(ConsoleResources.ErrorSaving, ex);
-                errorOutput.DisplayError(ConsoleResources.ErrorSaving);
             }
         }
 
-        private void DoExportToPdf(string outputPath)
+        private bool DoExportToPdf(string path)
         {
             var metadata = options.UseSavedMetadata ? pdfSettingsContainer.PdfSettings.Metadata : new PdfMetadata();
             metadata.Creator = ConsoleResources.NAPS2;
@@ -390,7 +376,7 @@ namespace NAPS2.Console
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
 
-            pdfExporter.Export(outputPath, scannedImages, pdfSettings, ocrLanguageCode, i =>
+            return pdfSaver.SavePdf(path, startTime, scannedImages, pdfSettings, ocrLanguageCode, i =>
             {
                 OutputVerbose(ConsoleResources.ExportedPage, i, scannedImages.Count);
                 return true;

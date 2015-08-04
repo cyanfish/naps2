@@ -35,6 +35,7 @@ namespace NAPS2.Console.DI
             Bind<IPdfPasswordProvider>().To<ConsolePdfPasswordProvider>();
             Bind<IWiaTransfer>().To<ConsoleWiaTransfer>();
             Bind<IErrorOutput>().To<ConsoleErrorOutput>();
+            Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
         }
     }
 }

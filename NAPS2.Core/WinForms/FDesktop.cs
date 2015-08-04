@@ -65,11 +65,12 @@ namespace NAPS2.WinForms
         private readonly FileNameSubstitution fileNameSubstitution;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly PdfSettingsContainer pdfSettingsContainer;
+        private readonly PdfSaver pdfSaver;
 
         private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -87,6 +88,7 @@ namespace NAPS2.WinForms
             this.fileNameSubstitution = fileNameSubstitution;
             this.imageSettingsContainer = imageSettingsContainer;
             this.pdfSettingsContainer = pdfSettingsContainer;
+            this.pdfSaver = pdfSaver;
             InitializeComponent();
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
         }
@@ -355,7 +357,7 @@ namespace NAPS2.WinForms
             var pdfdialog = FormFactory.Create<FPdfSave>();
             pdfdialog.Filename = filename;
             pdfdialog.Images = images;
-            pdfdialog.ShowDialog(this);
+            pdfdialog.ShowDialog();
         }
 
         private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
@@ -532,7 +534,7 @@ namespace NAPS2.WinForms
             {
                 var sd = new SaveFileDialog
                 {
-                    OverwritePrompt = true,
+                    OverwritePrompt = false,
                     AddExtension = true,
                     Filter = MiscResources.FileTypePdf + "|*.pdf",
                     FileName = pdfSettingsContainer.PdfSettings.DefaultFileName
@@ -567,7 +569,7 @@ namespace NAPS2.WinForms
             {
                 var sd = new SaveFileDialog
                 {
-                    OverwritePrompt = true,
+                    OverwritePrompt = false,
                     AddExtension = true,
                     Filter = MiscResources.FileTypeBmp + "|*.bmp|" +
                                 MiscResources.FileTypeEmf + "|*.emf|" +
@@ -608,33 +610,8 @@ namespace NAPS2.WinForms
                 {
                     UserConfigManager.Config.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", "");
                     UserConfigManager.Save();
-                    try
-                    {
-                        imageSaver.SaveImages(sd.FileName, images, path =>
-                        {
-                            if (path == Path.GetFullPath(sd.FileName))
-                            {
-                                // No substitutions, so the save dialog already prompted the user to overwrite
-                                return true;
-                            }
-                            switch (
-                                MessageBox.Show(
-                                    string.Format(MiscResources.ConfirmOverwriteFile, path),
-                                    MiscResources.OverwriteFile, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning))
-                            {
-                                case DialogResult.Yes:
-                                    return true;
-                                case DialogResult.No:
-                                    return false;
-                                default:
-                                    throw new InvalidOperationException("User cancelled");
-                            }
-                        });
-                        changeTracker.HasUnsavedChanges = false;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                    }
+                    imageSaver.SaveImages(sd.FileName, DateTime.Now, images);
+                    changeTracker.HasUnsavedChanges = false;
                 }
             }
         }
@@ -669,28 +646,35 @@ namespace NAPS2.WinForms
                 {
                     attachmentName += ".pdf";
                 }
-                attachmentName = fileNameSubstitution.SubstituteFileName(attachmentName, false);
+                attachmentName = fileNameSubstitution.SubstituteFileName(attachmentName, DateTime.Now, false);
 
-                string path = Path.Combine(Paths.AppData, attachmentName);
-                ExportPDF(path, images);
-
-                var message = new EmailMessage
+                var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
+                tempFolder.Create();
+                try
                 {
-                    Attachments = new List<EmailAttachment>
+                    string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
+                    ExportPDF(targetPath, images);
+                    var message = new EmailMessage
                     {
-                        new EmailAttachment
+                        Attachments =
                         {
-                            FilePath = path,
-                            AttachmentName = attachmentName
+                            new EmailAttachment
+                            {
+                                FilePath = targetPath,
+                                AttachmentName = attachmentName
+                            }
                         }
-                    }
-                };
+                    };
 
-                if (emailer.SendEmail(message))
-                {
-                    changeTracker.HasUnsavedChanges = false;
+                    if (emailer.SendEmail(message))
+                    {
+                        changeTracker.HasUnsavedChanges = false;
+                    }
                 }
-                File.Delete(path);
+                finally
+                {
+                    tempFolder.Delete(true);
+                }
             }
         }
 

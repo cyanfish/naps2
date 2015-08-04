@@ -16,6 +16,7 @@ namespace NAPS2.DI
             Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
             Bind<IWiaTransfer>().To<WinFormsWiaTransfer>();
             Bind<IErrorOutput>().To<MessageBoxErrorOutput>();
+            Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
         }
     }
 }

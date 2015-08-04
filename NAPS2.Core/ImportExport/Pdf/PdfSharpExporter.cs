@@ -36,12 +36,10 @@ namespace NAPS2.ImportExport.Pdf
     public class PdfSharpExporter : IPdfExporter
     {
         private readonly IOcrEngine ocrEngine;
-        private readonly FileNameSubstitution fileNameSubstitution;
 
-        public PdfSharpExporter(IOcrEngine ocrEngine, FileNameSubstitution fileNameSubstitution)
+        public PdfSharpExporter(IOcrEngine ocrEngine)
         {
             this.ocrEngine = ocrEngine;
-            this.fileNameSubstitution = fileNameSubstitution;
         }
 
         public bool Export(string path, IEnumerable<IScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
@@ -113,7 +111,7 @@ namespace NAPS2.ImportExport.Pdf
                     i++;
                 }
             }
-            document.Save(fileNameSubstitution.SubstituteFileName(path));
+            document.Save(path);
             return true;
         }
 

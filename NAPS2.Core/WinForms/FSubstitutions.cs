@@ -74,7 +74,7 @@ namespace NAPS2.WinForms
 
         private void txtFileName_TextChanged(object sender, EventArgs e)
         {
-            lblPreview.Text = fileNameSubstitution.SubstituteFileName(txtFileName.Text, false);
+            lblPreview.Text = fileNameSubstitution.SubstituteFileName(txtFileName.Text, DateTime.Now, false);
         }
     }
 }

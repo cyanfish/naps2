@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImportExport\Pdf\PdfSaver.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />
@@ -109,6 +110,7 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Util\IOverwritePrompt.cs" />
     <Compile Include="Util\Log.cs" />
     <Compile Include="Util\NullLogger.cs" />
     <Compile Include="Ocr\IOcrEngine.cs" />
@@ -387,6 +389,7 @@
     <Compile Include="WinForms\ToolStripDoubleButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WinForms\WinFormsOverwritePrompt.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WinForms\Icons.resx">
