@@ -78,7 +78,6 @@ namespace NAPS2.WinForms
             base.Dispose(disposing);
         }
 
-
         private void TiffViewer_SizeChanged(object sender, EventArgs e)
         {
             AdjustZoom();
