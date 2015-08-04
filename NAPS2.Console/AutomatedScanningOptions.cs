@@ -30,7 +30,8 @@ namespace NAPS2.Console
         #region General Options
 
         [Option('o', "output", HelpText = "The name and path of the file to save." +
-                                          " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG).")]
+                                          " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
+                                          " Substitutions can be used (e.g. $(YYYY)-$(MM)-$(DD) for the date, $(hh)_$(mm)_$(ss) for the time, $(nnnn) for an auto-incrementing number).")]
         //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
         public string OutputPath { get; set; }
 
