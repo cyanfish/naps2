@@ -36,7 +36,7 @@ namespace NAPS2.WinForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FImageSettings));
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.ilProfileIcons = new ILProfileIcons(this.components);
+            this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
             this.txtDefaultFileName = new System.Windows.Forms.TextBox();
@@ -45,6 +45,7 @@ namespace NAPS2.WinForms
             this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
             this.txtJpegQuality = new System.Windows.Forms.TextBox();
             this.tbJpegQuality = new System.Windows.Forms.TrackBar();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,10 +112,16 @@ namespace NAPS2.WinForms
             this.tbJpegQuality.TickFrequency = 25;
             this.tbJpegQuality.Scroll += new System.EventHandler(this.tbJpegQuality_Scroll);
             // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
             // FImageSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtJpegQuality);
             this.Controls.Add(this.linkSubstitutions);
             this.Controls.Add(this.label2);
@@ -128,6 +135,7 @@ namespace NAPS2.WinForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FImageSettings";
+            this.Load += new System.EventHandler(this.FImageSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -147,5 +155,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.LinkLabel linkSubstitutions;
         private System.Windows.Forms.TextBox txtJpegQuality;
         private System.Windows.Forms.TrackBar tbJpegQuality;
+        private System.Windows.Forms.Label label3;
     }
 }
