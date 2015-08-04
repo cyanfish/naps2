@@ -135,7 +135,6 @@ namespace NAPS2.WinForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FImageSettings";
-            this.Load += new System.EventHandler(this.FImageSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

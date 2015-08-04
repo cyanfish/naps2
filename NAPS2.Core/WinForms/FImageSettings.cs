@@ -113,10 +113,5 @@ namespace NAPS2.WinForms
                 txtDefaultFileName.Text = form.FileName;
             }
         }
-
-        private void FImageSettings_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

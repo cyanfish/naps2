@@ -36,11 +36,12 @@ namespace NAPS2.WinForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FEmailSettings));
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.ilProfileIcons = new ILProfileIcons(this.components);
+            this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
             this.txtAttachmentName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnOK
@@ -80,10 +81,18 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // linkSubstitutions
+            // 
+            resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
+            this.linkSubstitutions.Name = "linkSubstitutions";
+            this.linkSubstitutions.TabStop = true;
+            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
+            // 
             // FEmailSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.linkSubstitutions);
             this.Controls.Add(this.txtAttachmentName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRestoreDefaults);
@@ -107,5 +116,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnRestoreDefaults;
         private System.Windows.Forms.TextBox txtAttachmentName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel linkSubstitutions;
     }
 }
