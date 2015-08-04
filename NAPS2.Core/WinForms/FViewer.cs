@@ -32,8 +32,8 @@ namespace NAPS2.WinForms
     public class FViewer : FormBase
     {
         private readonly Container components = null;
-        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private ToolStripContainer toolStripContainer1;
+        private ToolStrip toolStrip1;
         private ToolStripTextBox tbPageCurrent;
         private ToolStripLabel lblPageTotal;
         private ToolStripButton tsPrev;
@@ -57,7 +57,7 @@ namespace NAPS2.WinForms
         public ScannedImageList ImageList { get; set; }
         public int ImageIndex { get; set; }
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(object sender, EventArgs e)
         {
             tiffViewer1.Image = ImageList.Images[ImageIndex].GetImage();
             tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.InvariantCulture);
