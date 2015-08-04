@@ -943,12 +943,12 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>File Name Substitutions</value>
+    <value>Substitutions</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FSubstitutions</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.2.28178, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.2.3903, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

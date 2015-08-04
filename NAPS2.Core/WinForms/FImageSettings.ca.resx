@@ -123,7 +123,7 @@
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>264, 69</value>
+        <value>264, 173</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -145,13 +145,13 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-        <value>5</value>
+        <value>9</value>
     </data>
     <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>345, 69</value>
+        <value>345, 173</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -172,7 +172,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>4</value>
+        <value>8</value>
     </data>
     <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>17, 17</value>
@@ -181,7 +181,7 @@
         <value>True</value>
     </data>
     <data name="cbRememberSettings.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 48</value>
+        <value>12, 152</value>
     </data>
     <data name="cbRememberSettings.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 17</value>
@@ -202,10 +202,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.ZOrder" xml:space="preserve">
-        <value>3</value>
+        <value>7</value>
     </data>
     <data name="btnRestoreDefaults.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 69</value>
+        <value>12, 173</value>
     </data>
     <data name="btnRestoreDefaults.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 23</value>
@@ -226,28 +226,28 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.ZOrder" xml:space="preserve">
-        <value>2</value>
+        <value>6</value>
     </data>
-    <data name="txtAttachmentName.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="txtDefaultFileName.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 22</value>
     </data>
-    <data name="txtAttachmentName.Size" type="System.Drawing.Size, System.Drawing">
-        <value>396, 20</value>
+    <data name="txtDefaultFileName.Size" type="System.Drawing.Size, System.Drawing">
+        <value>408, 20</value>
     </data>
-    <data name="txtAttachmentName.TabIndex" type="System.Int32, mscorlib">
+    <data name="txtDefaultFileName.TabIndex" type="System.Int32, mscorlib">
         <value>27</value>
     </data>
-    <data name="&gt;&gt;txtAttachmentName.Name" xml:space="preserve">
-        <value>txtAttachmentName</value>
+    <data name="&gt;&gt;txtDefaultFileName.Name" xml:space="preserve">
+        <value>txtDefaultFileName</value>
     </data>
-    <data name="&gt;&gt;txtAttachmentName.Type" xml:space="preserve">
+    <data name="&gt;&gt;txtDefaultFileName.Type" xml:space="preserve">
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;txtAttachmentName.Parent" xml:space="preserve">
+    <data name="&gt;&gt;txtDefaultFileName.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;txtAttachmentName.ZOrder" xml:space="preserve">
-        <value>0</value>
+    <data name="&gt;&gt;txtDefaultFileName.ZOrder" xml:space="preserve">
+        <value>4</value>
     </data>
     <data name="label1.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -259,13 +259,13 @@
         <value>12, 6</value>
     </data>
     <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>92, 13</value>
+        <value>91, 13</value>
     </data>
     <data name="label1.TabIndex" type="System.Int32, mscorlib">
         <value>28</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Attachment Name</value>
+        <value>Default File Name</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -277,7 +277,136 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+        <value>5</value>
+    </data>
+    <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 71</value>
+    </data>
+    <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>65, 13</value>
+    </data>
+    <data name="label2.TabIndex" type="System.Int32, mscorlib">
+        <value>29</value>
+    </data>
+    <data name="label2.Text" xml:space="preserve">
+        <value>Jpeg Quality</value>
+    </data>
+    <data name="&gt;&gt;label2.Name" xml:space="preserve">
+        <value>label2</value>
+    </data>
+    <data name="&gt;&gt;label2.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="linkSubstitutions.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="linkSubstitutions.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 45</value>
+    </data>
+    <data name="linkSubstitutions.Size" type="System.Drawing.Size, System.Drawing">
+        <value>67, 13</value>
+    </data>
+    <data name="linkSubstitutions.TabIndex" type="System.Int32, mscorlib">
+        <value>30</value>
+    </data>
+    <data name="linkSubstitutions.Text" xml:space="preserve">
+        <value>Substitutions</value>
+    </data>
+    <data name="&gt;&gt;linkSubstitutions.Name" xml:space="preserve">
+        <value>linkSubstitutions</value>
+    </data>
+    <data name="&gt;&gt;linkSubstitutions.Type" xml:space="preserve">
+        <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;linkSubstitutions.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;linkSubstitutions.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="txtJpegQuality.Location" type="System.Drawing.Point, System.Drawing">
+        <value>382, 87</value>
+    </data>
+    <data name="txtJpegQuality.Size" type="System.Drawing.Size, System.Drawing">
+        <value>38, 20</value>
+    </data>
+    <data name="txtJpegQuality.TabIndex" type="System.Int32, mscorlib">
+        <value>32</value>
+    </data>
+    <data name="txtJpegQuality.Text" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="&gt;&gt;txtJpegQuality.Name" xml:space="preserve">
+        <value>txtJpegQuality</value>
+    </data>
+    <data name="&gt;&gt;txtJpegQuality.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;txtJpegQuality.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;txtJpegQuality.ZOrder" xml:space="preserve">
         <value>1</value>
+    </data>
+    <data name="tbJpegQuality.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="tbJpegQuality.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 87</value>
+    </data>
+    <data name="tbJpegQuality.Size" type="System.Drawing.Size, System.Drawing">
+        <value>364, 45</value>
+    </data>
+    <data name="tbJpegQuality.TabIndex" type="System.Int32, mscorlib">
+        <value>31</value>
+    </data>
+    <data name="&gt;&gt;tbJpegQuality.Name" xml:space="preserve">
+        <value>tbJpegQuality</value>
+    </data>
+    <data name="&gt;&gt;tbJpegQuality.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tbJpegQuality.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;tbJpegQuality.ZOrder" xml:space="preserve">
+        <value>10</value>
+    </data>
+    <data name="lblWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 119</value>
+    </data>
+    <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
+        <value>408, 30</value>
+    </data>
+    <data name="lblWarning.TabIndex" type="System.Int32, mscorlib">
+        <value>33</value>
+    </data>
+    <data name="lblWarning.Text" xml:space="preserve">
+        <value>For high JPEG qualities (80+), use the Maximum Quality profile option for best results.</value>
+    </data>
+    <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
+        <value>lblWarning</value>
+    </data>
+    <data name="&gt;&gt;lblWarning.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;lblWarning.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;lblWarning.ZOrder" xml:space="preserve">
+        <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
@@ -286,50 +415,50 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>432, 104</value>
+        <value>432, 208</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA
-        AAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP//
-        /wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP//
-        /wD///8A////AAAAADAAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAA
-        ADMAAAAzAAAAMwAAADDLomryzKBm/8qeY//KnmP/yp5j/8qeYv/KnmL/yp5i/8qeYv/KnmL/yp5i/8qe
-        Y//KnmP/yp5j/8ygZv/LomryzKBm////9f///+3///7r///96////er///3p///96f///en///3p///9
-        6v///ev///7r////7f///uz/zKBm/8qeY////u3/5sqh//fkxf//9t////Tc///z2///89v///Pb///z
-        2///9Nz///bf//fkxf/myqH///7t/8qeY//KnmP///vp///77//atoT/48SX///z2P//89n///Ta///0
-        2v//89n///PY/+PEl//atoT///vv///76f/KnmP/yp5j///56P//79D///31/9u1gv//9Nj/3LmI/8SV
-        Vv/ElVb/3LmI///02P/btYL///31///v0P//+ej/yp5j/8qeY///+uj//+vK///sy/////7/5MOT/9y6
-        iP///////////9y6iP/kw5P////+///sy///68r///ro/8qeY//KnmP///rq///pxf//6sf/68ue/9u2
-        hP///////+/P///vz///////27aE/+vLnv//6sf//+nF///66v/KnmP/yp5j///77P//6MH/9tmv/966
-        h/////r//+nH///pxv//6cb//+nH////+v/euof/9tmv///owf//++z/yp5j/8qeY////PH//uG1/962
-        gv//++///+a9///mvf//5r7//+a+///mvf//5r3///vv/962gv/+4bX///zx/8qeY//Kn2P///70/+a+
-        iP//9eP//+Gy///gsv//4bP//+Gz///hs///4bP//+Cy///hsv//9eP/5r6I///+9P/Kn2P/zKBl////
-        /f////j////3////9/////f////3////9/////f////3////9/////f////3////+P////3/zKBl/82k
-        a7DMoGX/yp5j/8qeYv/KnmL/yp5i/8qeYv/KnmL/yp5i/8qeYv/KnmL/yp5i/8qeYv/KnmP/zKBl/82k
-        a8X///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP//
-        /wD///8A//8AAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAA//8AAA==
+        AAAAAAAjAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAA
+        ACz///8AqX5NwLWDTP+zgUn/s4BI/7OASP+zgEj/s4BI/7OASP+zgEj/s4BI/7OASP+zgEj/s4FJ/7WD
+        TP+yhVHh////ALWETf//////////////////////////////////////////////////////////////
+        ////////tYRN/////wC0gUn/////////////////////////////////////////////////////////
+        /////////////7SBSf////8AtYFK//////8bnnL/JaF2/yiieP8oonj/KKJ4/yiieP8oo3j/KKJ4/yii
+        eP8loXb/G55y//////+1gUr/////ALWCS///////MLWI/z24jf9AuY//QLmP/0C5j/9CvI//RL6P/0K8
+        j/9AuY//PbiN/zC1iP//////tYJL/////wC0gUv//////2zLmf91zZ7/ds2g/3fNoP96z6D/gtWh/xY/
+        j/+C1aH/es+g/3XNnv9sy5n//////7SBS/////8AtIFL////////36f//+Cr///grP//4a3//+Wu///j
+        qP8TZZL//+Oo///lrv//4az//9+n//////+0gUv/////ALOBS////////9uf///co///3aT//9+m/5S/
+        k/8ZnH3/IqB+/yqif/+Tv5L//9+k///cn///////s4FL/////wCzgUv////////YmP//2Zz//9qe///d
+        oP8Qn4X/J6WG/y2mh/8mpIb/EJ+E///cnv//2Jj//////7OBS/////8AtIFL////////1oz//9eR///X
+        lf//2Zj/d7mR/yiqjv8wq47/KKqO/3e5kf//2Jj//9WS//////+zgUv/////ALWCSv//////Vbvs/4jD
+        1P//1Yr//9WR///Yk/8erpf/KLCX/x6ul///2JT//9SS///RjP//////s4FL/////wC1gkn//////ya+
+        //8pwP//i8fS///Qhf//0Yr/1MqP/3i+lv/Uyo///9GL///Piv//zYT//////7OBS/////8AtYJK////
+        //8myv//K8v//13L6f//y3n//8t+///Mf///zH///8x////Lf///yn7//8l6//////+zgkv/////ALWE
+        Tv////T///3r///96v///e7///3z///99f///fX///31///99f///fX///30///99P////j/tYRP////
+        /wC4iVXvtYRP/7WDS/+1gkv/tYJL/7SCTP+zgkz/s4JM/7OCTP+zgkz/s4JM/7OCTP+zg0z/tYRP/7iJ
+        Ve////8AAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAB
+        AAAAAQAAAAEAAA==
 </value>
     </data>
     <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-        <value>800, 143</value>
+        <value>800, 247</value>
     </data>
     <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-        <value>400, 143</value>
+        <value>400, 247</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Email Settings</value>
+        <value>Image Settings</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.ILProfileIcons, NAPS2.Core, Version=4.0.1.1809, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.0.2.2958, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FEmailSettings</value>
+        <value>FImageSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.1809, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.2.2958, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>
