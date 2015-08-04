@@ -8,15 +8,27 @@ namespace NAPS2.ImportExport
 {
     public class FileNameSubstitution
     {
+        public const string YEAR_4_DIGITS = "$(YYYY)";
+        public const string YEAR_2_DIGITS = "$(YY)";
+        public const string MONTH_2_DIGITS = "$(MM)";
+        public const string DAY_2_DIGITS = "$(DD)";
+        public const string HOUR_24_CLOCK = "$(hh)";
+        public const string MINUTE_2_DIGITS = "$(mm)";
+        public const string SECOND_2_DIGITS = "$(ss)";
+        public const string NUMBER_4_DIGITS = "$(nnnn)";
+        public const string NUMBER_3_DIGITS = "$(nnn)";
+        public const string NUMBER_2_DIGITS = "$(nn)";
+        public const string NUMBER_1_DIGIT = "$(n)";
+
         private static readonly Dictionary<string, Func<string>> Subs = new Dictionary<string, Func<string>>
         {
-            { "$(YYYY)", () => DateTime.Now.ToString("yyyy") },
-            { "$(YY)", () => DateTime.Now.ToString("yy") },
-            { "$(MM)", () => DateTime.Now.ToString("MM") },
-            { "$(DD)", () => DateTime.Now.ToString("dd") },
-            { "$(hh)", () => DateTime.Now.ToString("HH") },
-            { "$(mm)", () => DateTime.Now.ToString("mm") },
-            { "$(ss)", () => DateTime.Now.ToString("ss") },
+            { YEAR_4_DIGITS, () => DateTime.Now.ToString("yyyy") },
+            { YEAR_2_DIGITS, () => DateTime.Now.ToString("yy") },
+            { MONTH_2_DIGITS, () => DateTime.Now.ToString("MM") },
+            { DAY_2_DIGITS, () => DateTime.Now.ToString("dd") },
+            { HOUR_24_CLOCK, () => DateTime.Now.ToString("HH") },
+            { MINUTE_2_DIGITS, () => DateTime.Now.ToString("mm") },
+            { SECOND_2_DIGITS, () => DateTime.Now.ToString("ss") },
         };
 
         private static readonly Regex NumberSubPattern = new Regex(@"\$\(n+\)");

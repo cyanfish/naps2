@@ -279,9 +279,6 @@
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>$(YYYY)</value>
-  </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
@@ -289,7 +286,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -316,7 +313,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -346,7 +343,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -363,9 +360,6 @@
   <data name="button2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="button2.Text" xml:space="preserve">
-    <value>$(YY)</value>
-  </data>
   <data name="&gt;&gt;button2.Name" xml:space="preserve">
     <value>button2</value>
   </data>
@@ -373,7 +367,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button2.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -403,7 +397,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -420,9 +414,6 @@
   <data name="button3.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="button3.Text" xml:space="preserve">
-    <value>$(MM)</value>
-  </data>
   <data name="&gt;&gt;button3.Name" xml:space="preserve">
     <value>button3</value>
   </data>
@@ -430,7 +421,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button3.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button3.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -460,7 +451,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -477,9 +468,6 @@
   <data name="button4.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="button4.Text" xml:space="preserve">
-    <value>$(DD)</value>
-  </data>
   <data name="&gt;&gt;button4.Name" xml:space="preserve">
     <value>button4</value>
   </data>
@@ -487,7 +475,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button4.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button4.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -517,7 +505,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>19</value>
@@ -534,9 +522,6 @@
   <data name="button5.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="button5.Text" xml:space="preserve">
-    <value>$(hh)</value>
-  </data>
   <data name="&gt;&gt;button5.Name" xml:space="preserve">
     <value>button5</value>
   </data>
@@ -544,7 +529,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button5.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button5.ZOrder" xml:space="preserve">
     <value>17</value>
@@ -574,7 +559,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>23</value>
@@ -591,9 +576,6 @@
   <data name="button6.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="button6.Text" xml:space="preserve">
-    <value>$(mm)</value>
-  </data>
   <data name="&gt;&gt;button6.Name" xml:space="preserve">
     <value>button6</value>
   </data>
@@ -601,7 +583,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button6.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button6.ZOrder" xml:space="preserve">
     <value>21</value>
@@ -631,7 +613,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>20</value>
@@ -648,9 +630,6 @@
   <data name="button7.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="button7.Text" xml:space="preserve">
-    <value>$(ss)</value>
-  </data>
   <data name="&gt;&gt;button7.Name" xml:space="preserve">
     <value>button7</value>
   </data>
@@ -658,7 +637,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button7.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button7.ZOrder" xml:space="preserve">
     <value>22</value>
@@ -688,7 +667,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>16</value>
@@ -705,9 +684,6 @@
   <data name="button8.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="button8.Text" xml:space="preserve">
-    <value>$(NNNN)</value>
-  </data>
   <data name="&gt;&gt;button8.Name" xml:space="preserve">
     <value>button8</value>
   </data>
@@ -715,7 +691,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button8.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button8.ZOrder" xml:space="preserve">
     <value>18</value>
@@ -745,7 +721,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -762,9 +738,6 @@
   <data name="button9.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="button9.Text" xml:space="preserve">
-    <value>$(NNN)</value>
-  </data>
   <data name="&gt;&gt;button9.Name" xml:space="preserve">
     <value>button9</value>
   </data>
@@ -772,7 +745,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button9.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button9.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -802,7 +775,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -819,9 +792,6 @@
   <data name="button10.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="button10.Text" xml:space="preserve">
-    <value>$(NN)</value>
-  </data>
   <data name="&gt;&gt;button10.Name" xml:space="preserve">
     <value>button10</value>
   </data>
@@ -829,7 +799,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button10.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button10.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -859,7 +829,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -876,9 +846,6 @@
   <data name="button11.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
-  <data name="button11.Text" xml:space="preserve">
-    <value>$(N)</value>
-  </data>
   <data name="&gt;&gt;button11.Name" xml:space="preserve">
     <value>button11</value>
   </data>
@@ -886,7 +853,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button11.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button11.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -903,9 +870,6 @@
   <data name="button12.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="button12.Text" xml:space="preserve">
-    <value>$(YYYY)-$(MM)-$(DD)</value>
-  </data>
   <data name="&gt;&gt;button12.Name" xml:space="preserve">
     <value>button12</value>
   </data>
@@ -913,7 +877,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button12.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button12.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -930,9 +894,6 @@
   <data name="button13.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="button13.Text" xml:space="preserve">
-    <value>$(hh)_$(mm)_$(ss)</value>
-  </data>
   <data name="&gt;&gt;button13.Name" xml:space="preserve">
     <value>button13</value>
   </data>
@@ -940,33 +901,33 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button13.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gboxSubs</value>
   </data>
   <data name="&gt;&gt;button13.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="gboxSubs.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 115</value>
   </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="gboxSubs.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 367</value>
   </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="gboxSubs.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
+  <data name="gboxSubs.Text" xml:space="preserve">
     <value>Substitutions</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="&gt;&gt;gboxSubs.Name" xml:space="preserve">
+    <value>gboxSubs</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;gboxSubs.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gboxSubs.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;gboxSubs.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -988,6 +949,6 @@
     <value>FSubstitutions</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.2.2331, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.2.28178, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

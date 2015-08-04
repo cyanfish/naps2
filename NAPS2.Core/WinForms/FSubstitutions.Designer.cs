@@ -59,8 +59,8 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox1.SuspendLayout();
+            this.gboxSubs = new System.Windows.Forms.GroupBox();
+            this.gboxSubs.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -245,35 +245,35 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.subButton_Click);
             // 
-            // groupBox1
+            // gboxSubs
             // 
-            this.groupBox1.Controls.Add(this.button13);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.button12);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button11);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button10);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button9);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button8);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Controls.Add(this.label8);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            this.gboxSubs.Controls.Add(this.button13);
+            this.gboxSubs.Controls.Add(this.button1);
+            this.gboxSubs.Controls.Add(this.button12);
+            this.gboxSubs.Controls.Add(this.label3);
+            this.gboxSubs.Controls.Add(this.label13);
+            this.gboxSubs.Controls.Add(this.button2);
+            this.gboxSubs.Controls.Add(this.button11);
+            this.gboxSubs.Controls.Add(this.label4);
+            this.gboxSubs.Controls.Add(this.label12);
+            this.gboxSubs.Controls.Add(this.button3);
+            this.gboxSubs.Controls.Add(this.button10);
+            this.gboxSubs.Controls.Add(this.label5);
+            this.gboxSubs.Controls.Add(this.label11);
+            this.gboxSubs.Controls.Add(this.button4);
+            this.gboxSubs.Controls.Add(this.button9);
+            this.gboxSubs.Controls.Add(this.label6);
+            this.gboxSubs.Controls.Add(this.label10);
+            this.gboxSubs.Controls.Add(this.button5);
+            this.gboxSubs.Controls.Add(this.button8);
+            this.gboxSubs.Controls.Add(this.label7);
+            this.gboxSubs.Controls.Add(this.label9);
+            this.gboxSubs.Controls.Add(this.button6);
+            this.gboxSubs.Controls.Add(this.button7);
+            this.gboxSubs.Controls.Add(this.label8);
+            resources.ApplyResources(this.gboxSubs, "gboxSubs");
+            this.gboxSubs.Name = "gboxSubs";
+            this.gboxSubs.TabStop = false;
             // 
             // FSubstitutions
             // 
@@ -285,11 +285,11 @@
             this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gboxSubs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FSubstitutions";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gboxSubs.ResumeLayout(false);
+            this.gboxSubs.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,6 +327,6 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gboxSubs;
     }
 }
