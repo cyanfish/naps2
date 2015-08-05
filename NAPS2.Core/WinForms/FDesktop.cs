@@ -840,7 +840,7 @@ namespace NAPS2.WinForms
 
         private void tsInterleave_Click(object sender, EventArgs e)
         {
-            if (SelectedIndices.Count() < 3)
+            if (imageList.Images.Count < 3)
             {
                 return;
             }
@@ -850,7 +850,7 @@ namespace NAPS2.WinForms
 
         private void tsDeinterleave_Click(object sender, EventArgs e)
         {
-            if (SelectedIndices.Count() < 3)
+            if (imageList.Images.Count < 3)
             {
                 return;
             }
