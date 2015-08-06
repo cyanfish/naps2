@@ -147,19 +147,19 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: FSubstitutions.resx$label13.Text$Message
+#: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
 msgstr ""
 
-#: FSubstitutions.resx$label12.Text$Message
+#: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
 msgstr ""
 
-#: FSubstitutions.resx$label11.Text$Message
+#: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
 msgstr ""
 
-#: FSubstitutions.resx$label10.Text$Message
+#: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
 msgstr ""
 
@@ -198,15 +198,15 @@ msgstr ""
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
-#: FSubstitutions.resx$btnCancel.Text$Message
+#: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 msgid "Cancel"
@@ -279,7 +279,7 @@ msgstr ""
 msgid "Custom Rotation"
 msgstr ""
 
-#: FSubstitutions.resx$label6.Text$Message
+#: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
 msgstr ""
 
@@ -382,12 +382,8 @@ msgstr ""
 msgid "Feeder"
 msgstr ""
 
-#: FSubstitutions.resx$label1.Text$Message
+#: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr ""
-
-#: FSubstitutions.resx$$this.Text$Message
-msgid "File Name Substitutions"
 msgstr ""
 
 #: FViewer.resx$tsFlip.Text$Message
@@ -419,7 +415,7 @@ msgstr ""
 msgid "Horizontal align"
 msgstr ""
 
-#: FSubstitutions.resx$label7.Text$Message
+#: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
 msgstr ""
 
@@ -496,11 +492,11 @@ msgstr ""
 msgid "Metadata"
 msgstr ""
 
-#: FSubstitutions.resx$label8.Text$Message
+#: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
 msgstr ""
 
-#: FSubstitutions.resx$label5.Text$Message
+#: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
 msgstr ""
 
@@ -564,16 +560,16 @@ msgstr ""
 
 #: FEmailSettings.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
-#: FSubstitutions.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FRotate.resx$btnOK.Text$Message
 #: FContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
+#: FRotate.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr ""
@@ -616,8 +612,16 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+msgid "Placeholders"
+msgstr ""
+
 #: FViewer.resx$$this.Text$Message
-#: FSubstitutions.resx$label2.Text$Message
+#: FPlaceholders.resx$label2.Text$Message
 msgid "Preview"
 msgstr ""
 
@@ -646,8 +650,8 @@ msgstr ""
 msgid "Recover Scanned Images"
 msgstr ""
 
-#: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
+#: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr ""
@@ -678,8 +682,8 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
-#: FRotate.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
+#: FRotate.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
@@ -741,7 +745,7 @@ msgstr ""
 msgid "Scanning page {0}"
 msgstr ""
 
-#: FSubstitutions.resx$label9.Text$Message
+#: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
 msgstr ""
 
@@ -776,13 +780,6 @@ msgstr ""
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr ""
-
-#: FImageSettings.resx$linkSubstitutions.Text$Message
-#: FSubstitutions.resx$gboxSubs.Text$Message
-#: FPdfSettings.resx$linkSubstitutions.Text$Message
-#: FEmailSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
 msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
@@ -878,11 +875,11 @@ msgstr ""
 msgid "X"
 msgstr ""
 
-#: FSubstitutions.resx$label3.Text$Message
+#: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
 msgstr ""
 
-#: FSubstitutions.resx$label4.Text$Message
+#: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
 msgstr ""
 
@@ -918,12 +915,12 @@ msgstr ""
 msgid "cm"
 msgstr ""
 
-#: FAbout.resx$linkLabel1.Text$Message
-msgid "http://sourceforge.com/projects/naps2"
-msgstr ""
-
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
+msgstr ""
+
+#: FAbout.resx$linkLabel1.Text$Message
+msgid "http://www.naps2.com"
 msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
