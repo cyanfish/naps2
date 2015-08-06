@@ -42,7 +42,7 @@ namespace NAPS2.WinForms
             this.txtDefaultFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
+            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.txtJpegQuality = new System.Windows.Forms.TextBox();
             this.tbJpegQuality = new System.Windows.Forms.TrackBar();
             this.lblWarning = new System.Windows.Forms.Label();
@@ -91,12 +91,12 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // linkSubstitutions
+            // linkPlaceholders
             // 
-            resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
-            this.linkSubstitutions.Name = "linkSubstitutions";
-            this.linkSubstitutions.TabStop = true;
-            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
+            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
+            this.linkPlaceholders.Name = "linkPlaceholders";
+            this.linkPlaceholders.TabStop = true;
+            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
             // 
             // txtJpegQuality
             // 
@@ -123,7 +123,7 @@ namespace NAPS2.WinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lblWarning);
             this.Controls.Add(this.txtJpegQuality);
-            this.Controls.Add(this.linkSubstitutions);
+            this.Controls.Add(this.linkPlaceholders);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtDefaultFileName);
             this.Controls.Add(this.label1);
@@ -151,7 +151,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.TextBox txtDefaultFileName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.LinkLabel linkSubstitutions;
+        private System.Windows.Forms.LinkLabel linkPlaceholders;
         private System.Windows.Forms.TextBox txtJpegQuality;
         private System.Windows.Forms.TrackBar tbJpegQuality;
         private System.Windows.Forms.Label lblWarning;

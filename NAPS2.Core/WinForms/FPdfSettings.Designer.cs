@@ -36,7 +36,7 @@ namespace NAPS2.WinForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPdfSettings));
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.ilProfileIcons = new ILProfileIcons(this.components);
+            this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.groupMetadata = new System.Windows.Forms.GroupBox();
             this.txtKeywords = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -64,7 +64,7 @@ namespace NAPS2.WinForms
             this.cbEncryptPdf = new System.Windows.Forms.CheckBox();
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
-            this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
+            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.txtDefaultFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupMetadata.SuspendLayout();
@@ -264,12 +264,12 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults.UseVisualStyleBackColor = true;
             this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
-            // linkSubstitutions
+            // linkPlaceholders
             // 
-            resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
-            this.linkSubstitutions.Name = "linkSubstitutions";
-            this.linkSubstitutions.TabStop = true;
-            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
+            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
+            this.linkPlaceholders.Name = "linkPlaceholders";
+            this.linkPlaceholders.TabStop = true;
+            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
             // 
             // txtDefaultFileName
             // 
@@ -285,7 +285,7 @@ namespace NAPS2.WinForms
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.linkSubstitutions);
+            this.Controls.Add(this.linkPlaceholders);
             this.Controls.Add(this.txtDefaultFileName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRestoreDefaults);
@@ -338,7 +338,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox cbShowUserPassword;
         private System.Windows.Forms.CheckBox cbShowOwnerPassword;
-        private System.Windows.Forms.LinkLabel linkSubstitutions;
+        private System.Windows.Forms.LinkLabel linkPlaceholders;
         private System.Windows.Forms.TextBox txtDefaultFileName;
         private System.Windows.Forms.Label label1;
     }

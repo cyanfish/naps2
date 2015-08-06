@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.WinForms
 {
-    partial class FSubstitutions
+    partial class FPlaceholders
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FSubstitutions));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPlaceholders));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.txtFileName = new System.Windows.Forms.TextBox();
@@ -59,8 +59,8 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.gboxSubs = new System.Windows.Forms.GroupBox();
-            this.gboxSubs.SuspendLayout();
+            this.gboxPlaceholders = new System.Windows.Forms.GroupBox();
+            this.gboxPlaceholders.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -104,7 +104,7 @@
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.subButton_Click);
+            this.button1.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label3
             // 
@@ -121,7 +121,7 @@
             resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.subButton_Click);
+            this.button2.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label5
             // 
@@ -133,7 +133,7 @@
             resources.ApplyResources(this.button3, "button3");
             this.button3.Name = "button3";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.subButton_Click);
+            this.button3.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label6
             // 
@@ -145,7 +145,7 @@
             resources.ApplyResources(this.button4, "button4");
             this.button4.Name = "button4";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.subButton_Click);
+            this.button4.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label7
             // 
@@ -157,7 +157,7 @@
             resources.ApplyResources(this.button5, "button5");
             this.button5.Name = "button5";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.subButton_Click);
+            this.button5.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label8
             // 
@@ -169,7 +169,7 @@
             resources.ApplyResources(this.button6, "button6");
             this.button6.Name = "button6";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.subButton_Click);
+            this.button6.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label9
             // 
@@ -181,7 +181,7 @@
             resources.ApplyResources(this.button7, "button7");
             this.button7.Name = "button7";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.subButton_Click);
+            this.button7.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label10
             // 
@@ -193,7 +193,7 @@
             resources.ApplyResources(this.button8, "button8");
             this.button8.Name = "button8";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.subButton_Click);
+            this.button8.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label11
             // 
@@ -205,7 +205,7 @@
             resources.ApplyResources(this.button9, "button9");
             this.button9.Name = "button9";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.subButton_Click);
+            this.button9.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label12
             // 
@@ -217,7 +217,7 @@
             resources.ApplyResources(this.button10, "button10");
             this.button10.Name = "button10";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.subButton_Click);
+            this.button10.Click += new System.EventHandler(this.phButton_Click);
             // 
             // label13
             // 
@@ -229,53 +229,53 @@
             resources.ApplyResources(this.button11, "button11");
             this.button11.Name = "button11";
             this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.subButton_Click);
+            this.button11.Click += new System.EventHandler(this.phButton_Click);
             // 
             // button12
             // 
             resources.ApplyResources(this.button12, "button12");
             this.button12.Name = "button12";
             this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.subButton_Click);
+            this.button12.Click += new System.EventHandler(this.phButton_Click);
             // 
             // button13
             // 
             resources.ApplyResources(this.button13, "button13");
             this.button13.Name = "button13";
             this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.subButton_Click);
+            this.button13.Click += new System.EventHandler(this.phButton_Click);
             // 
             // gboxSubs
             // 
-            this.gboxSubs.Controls.Add(this.button13);
-            this.gboxSubs.Controls.Add(this.button1);
-            this.gboxSubs.Controls.Add(this.button12);
-            this.gboxSubs.Controls.Add(this.label3);
-            this.gboxSubs.Controls.Add(this.label13);
-            this.gboxSubs.Controls.Add(this.button2);
-            this.gboxSubs.Controls.Add(this.button11);
-            this.gboxSubs.Controls.Add(this.label4);
-            this.gboxSubs.Controls.Add(this.label12);
-            this.gboxSubs.Controls.Add(this.button3);
-            this.gboxSubs.Controls.Add(this.button10);
-            this.gboxSubs.Controls.Add(this.label5);
-            this.gboxSubs.Controls.Add(this.label11);
-            this.gboxSubs.Controls.Add(this.button4);
-            this.gboxSubs.Controls.Add(this.button9);
-            this.gboxSubs.Controls.Add(this.label6);
-            this.gboxSubs.Controls.Add(this.label10);
-            this.gboxSubs.Controls.Add(this.button5);
-            this.gboxSubs.Controls.Add(this.button8);
-            this.gboxSubs.Controls.Add(this.label7);
-            this.gboxSubs.Controls.Add(this.label9);
-            this.gboxSubs.Controls.Add(this.button6);
-            this.gboxSubs.Controls.Add(this.button7);
-            this.gboxSubs.Controls.Add(this.label8);
-            resources.ApplyResources(this.gboxSubs, "gboxSubs");
-            this.gboxSubs.Name = "gboxSubs";
-            this.gboxSubs.TabStop = false;
+            this.gboxPlaceholders.Controls.Add(this.button13);
+            this.gboxPlaceholders.Controls.Add(this.button1);
+            this.gboxPlaceholders.Controls.Add(this.button12);
+            this.gboxPlaceholders.Controls.Add(this.label3);
+            this.gboxPlaceholders.Controls.Add(this.label13);
+            this.gboxPlaceholders.Controls.Add(this.button2);
+            this.gboxPlaceholders.Controls.Add(this.button11);
+            this.gboxPlaceholders.Controls.Add(this.label4);
+            this.gboxPlaceholders.Controls.Add(this.label12);
+            this.gboxPlaceholders.Controls.Add(this.button3);
+            this.gboxPlaceholders.Controls.Add(this.button10);
+            this.gboxPlaceholders.Controls.Add(this.label5);
+            this.gboxPlaceholders.Controls.Add(this.label11);
+            this.gboxPlaceholders.Controls.Add(this.button4);
+            this.gboxPlaceholders.Controls.Add(this.button9);
+            this.gboxPlaceholders.Controls.Add(this.label6);
+            this.gboxPlaceholders.Controls.Add(this.label10);
+            this.gboxPlaceholders.Controls.Add(this.button5);
+            this.gboxPlaceholders.Controls.Add(this.button8);
+            this.gboxPlaceholders.Controls.Add(this.label7);
+            this.gboxPlaceholders.Controls.Add(this.label9);
+            this.gboxPlaceholders.Controls.Add(this.button6);
+            this.gboxPlaceholders.Controls.Add(this.button7);
+            this.gboxPlaceholders.Controls.Add(this.label8);
+            resources.ApplyResources(this.gboxPlaceholders, "gboxPlaceholders");
+            this.gboxPlaceholders.Name = "gboxPlaceholders";
+            this.gboxPlaceholders.TabStop = false;
             // 
-            // FSubstitutions
+            // FPlaceholders
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -285,11 +285,11 @@
             this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.gboxSubs);
+            this.Controls.Add(this.gboxPlaceholders);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FSubstitutions";
-            this.gboxSubs.ResumeLayout(false);
-            this.gboxSubs.PerformLayout();
+            this.Name = "FPlaceholders";
+            this.gboxPlaceholders.ResumeLayout(false);
+            this.gboxPlaceholders.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,6 +327,6 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.GroupBox gboxSubs;
+        private System.Windows.Forms.GroupBox gboxPlaceholders;
     }
 }

@@ -35,14 +35,14 @@ namespace NAPS2.ImportExport.Images
     public class ImageSaver
     {
         private readonly IErrorOutput errorOutput;
-        private readonly FileNameSubstitution fileNameSubstitution;
+        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOverwritePrompt overwritePrompt;
 
-        public ImageSaver(IErrorOutput errorOutput, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt)
+        public ImageSaver(IErrorOutput errorOutput, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt)
         {
             this.errorOutput = errorOutput;
-            this.fileNameSubstitution = fileNameSubstitution;
+            this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.overwritePrompt = overwritePrompt;
         }
@@ -58,7 +58,7 @@ namespace NAPS2.ImportExport.Images
         {
             try
             {
-                var subFileName = fileNameSubstitution.SubstituteFileName(fileName, dateTime);
+                var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
                 ImageFormat format = GetImageFormat(subFileName);
 
                 if (Equals(format, ImageFormat.Tiff))
@@ -107,7 +107,7 @@ namespace NAPS2.ImportExport.Images
                         }
                         else
                         {
-                            var fileNameN = fileNameSubstitution.SubstituteFileName(fileName, dateTime, true, i - 1, digits);
+                            var fileNameN = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i - 1, digits);
                             DoSaveImage(baseImage, fileNameN, format);
                         }
                     }

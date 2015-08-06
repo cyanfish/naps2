@@ -41,7 +41,7 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
             this.txtAttachmentName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
+            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnOK
@@ -81,18 +81,18 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
-            // linkSubstitutions
+            // linkPlaceholders
             // 
-            resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
-            this.linkSubstitutions.Name = "linkSubstitutions";
-            this.linkSubstitutions.TabStop = true;
-            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
+            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
+            this.linkPlaceholders.Name = "linkPlaceholders";
+            this.linkPlaceholders.TabStop = true;
+            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
             // 
             // FEmailSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.linkSubstitutions);
+            this.Controls.Add(this.linkPlaceholders);
             this.Controls.Add(this.txtAttachmentName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRestoreDefaults);
@@ -116,6 +116,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnRestoreDefaults;
         private System.Windows.Forms.TextBox txtAttachmentName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel linkSubstitutions;
+        private System.Windows.Forms.LinkLabel linkPlaceholders;
     }
 }

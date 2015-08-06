@@ -62,7 +62,7 @@ namespace NAPS2.WinForms
         private readonly IImagePrinter imagePrinter;
         private readonly ChangeTracker changeTracker;
         private readonly EmailSettingsContainer emailSettingsContainer;
-        private readonly FileNameSubstitution fileNameSubstitution;
+        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly PdfSaver pdfSaver;
@@ -71,7 +71,7 @@ namespace NAPS2.WinForms
         private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -86,7 +86,7 @@ namespace NAPS2.WinForms
             this.imagePrinter = imagePrinter;
             this.changeTracker = changeTracker;
             this.emailSettingsContainer = emailSettingsContainer;
-            this.fileNameSubstitution = fileNameSubstitution;
+            this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.pdfSaver = pdfSaver;
@@ -648,7 +648,7 @@ namespace NAPS2.WinForms
                 {
                     attachmentName += ".pdf";
                 }
-                attachmentName = fileNameSubstitution.SubstituteFileName(attachmentName, DateTime.Now, false);
+                attachmentName = fileNamePlaceholders.SubstitutePlaceholders(attachmentName, DateTime.Now, false);
 
                 var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
                 tempFolder.Create();

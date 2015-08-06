@@ -84,9 +84,9 @@ namespace NAPS2.WinForms
             cbRememberSettings.Checked = false;
         }
 
-        private void linkSubstitutions_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var form = FormFactory.Create<FSubstitutions>();
+            var form = FormFactory.Create<FPlaceholders>();
             form.FileName = txtAttachmentName.Text;
             if (form.ShowDialog() == DialogResult.OK)
             {

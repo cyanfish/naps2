@@ -36,21 +36,21 @@ namespace NAPS2.ImportExport.Pdf
     public class PdfSaver
     {
         private readonly IErrorOutput errorOutput;
-        private readonly FileNameSubstitution fileNameSubstitution;
+        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly IPdfExporter pdfExporter;
         private readonly IOverwritePrompt overwritePrompt;
 
-        public PdfSaver(IErrorOutput errorOutput, FileNameSubstitution fileNameSubstitution, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt)
+        public PdfSaver(IErrorOutput errorOutput, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt)
         {
             this.errorOutput = errorOutput;
-            this.fileNameSubstitution = fileNameSubstitution;
+            this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
             this.overwritePrompt = overwritePrompt;
         }
 
         public bool SavePdf(string fileName, DateTime dateTime, ICollection<IScannedImage> images, PdfSettings pdfSettings, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
-            var subFileName = fileNameSubstitution.SubstituteFileName(fileName, dateTime);
+            var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
             if (File.Exists(subFileName))
             {
                 if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)

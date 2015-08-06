@@ -51,7 +51,7 @@ namespace NAPS2.Console
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly IUserConfigManager userConfigManager;
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly FileNameSubstitution fileNameSubstitution;
+        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly PdfSaver pdfSaver;
 
@@ -61,7 +61,7 @@ namespace NAPS2.Console
         private int totalPagesScanned;
         private DateTime startTime;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNameSubstitution fileNameSubstitution, ImageSettingsContainer imageSettingsContainer, PdfSaver pdfSaver)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSaver pdfSaver)
         {
             this.options = options;
             this.imageSaver = imageSaver;
@@ -73,7 +73,7 @@ namespace NAPS2.Console
             this.scannedImageImporter = scannedImageImporter;
             this.userConfigManager = userConfigManager;
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.fileNameSubstitution = fileNameSubstitution;
+            this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.pdfSaver = pdfSaver;
         }
@@ -144,7 +144,7 @@ namespace NAPS2.Console
                 // Email, so no check needed
                 return true;
             }
-            var subPath = fileNameSubstitution.SubstituteFileName(options.OutputPath, startTime);
+            var subPath = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
             if (IsPdfFile(subPath)
                 && File.Exists(subPath)
                 && !options.ForceOverwrite)
@@ -208,7 +208,7 @@ namespace NAPS2.Console
             tempFolder.Create();
             try
             {
-                string attachmentName = fileNameSubstitution.SubstituteFileName(options.EmailFileName, startTime, false);
+                string attachmentName = fileNamePlaceholders.SubstitutePlaceholders(options.EmailFileName, startTime, false);
                 string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
                 if (IsPdfFile(targetPath))
                 {
@@ -311,7 +311,7 @@ namespace NAPS2.Console
 
         private void ExportToImageFiles()
         {
-            var path = fileNameSubstitution.SubstituteFileName(options.OutputPath, startTime);
+            var path = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
             DoExportToImageFiles(options.OutputPath);
             OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
         }
@@ -330,7 +330,7 @@ namespace NAPS2.Console
         private void ExportToPdf()
         {
             // Get a local copy of the path just for output
-            var path = fileNameSubstitution.SubstituteFileName(options.OutputPath, startTime);
+            var path = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
             if (DoExportToPdf(options.OutputPath))
             {
                 OutputVerbose(ConsoleResources.SuccessfullySavedPdf, path);

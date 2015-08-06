@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace NAPS2.ImportExport
 {
-    public class FileNameSubstitution
+    public class FileNamePlaceholders
     {
         public const string YEAR_4_DIGITS = "$(YYYY)";
         public const string YEAR_2_DIGITS = "$(YY)";
@@ -20,7 +20,7 @@ namespace NAPS2.ImportExport
         public const string NUMBER_2_DIGITS = "$(nn)";
         public const string NUMBER_1_DIGIT = "$(n)";
 
-        private static readonly Dictionary<string, Func<DateTime, string>> Subs = new Dictionary<string, Func<DateTime, string>>
+        private static readonly Dictionary<string, Func<DateTime, string>> Placeholders = new Dictionary<string, Func<DateTime, string>>
         {
             { YEAR_4_DIGITS, dateTime => dateTime.ToString("yyyy") },
             { YEAR_2_DIGITS, dateTime => dateTime.ToString("yy") },
@@ -31,29 +31,28 @@ namespace NAPS2.ImportExport
             { SECOND_2_DIGITS, dateTime => dateTime.ToString("ss") },
         };
 
-        private static readonly Regex NumberSubPattern = new Regex(@"\$\(n+\)");
+        private static readonly Regex NumberPlaceholderPattern = new Regex(@"\$\(n+\)");
 
-        public string SubstituteFileName(string fileNameWithPath, DateTime dateTime, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
+        public string SubstitutePlaceholders(string fileNameWithPath, DateTime dateTime, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
         {
-            // TODO: Add datetime as a parameter for consistency.
-            // Most subs don't need a special case
-            string result = Subs.Aggregate(fileNameWithPath, (current, sub) => current.Replace(sub.Key, sub.Value(dateTime)));
+            // Most placeholders don't need a special case
+            string result = Placeholders.Aggregate(fileNameWithPath, (current, ph) => current.Replace(ph.Key, ph.Value(dateTime)));
             // One does, however
-            var match = NumberSubPattern.Match(result);
+            var match = NumberPlaceholderPattern.Match(result);
             if (match.Success)
             {
-                result = NumberSubPattern.Replace(result, "");
-                result = SubNumber(result, match.Index, match.Length - 3, numberSkip, incrementIfExists);
+                result = NumberPlaceholderPattern.Replace(result, "");
+                result = SubstituteNumber(result, match.Index, match.Length - 3, numberSkip, incrementIfExists);
             }
             else if (autoNumberDigits > 0)
             {
                 result = result.Insert(result.Length - Path.GetExtension(result).Length, ".");
-                result = SubNumber(result, result.Length - Path.GetExtension(result).Length, autoNumberDigits, numberSkip, incrementIfExists);
+                result = SubstituteNumber(result, result.Length - Path.GetExtension(result).Length, autoNumberDigits, numberSkip, incrementIfExists);
             }
             return result;
         }
 
-        private string SubNumber(string path, int insertionIndex, int minDigits, int skip, bool incrementIfExists)
+        private string SubstituteNumber(string path, int insertionIndex, int minDigits, int skip, bool incrementIfExists)
         {
             string result;
             int i = skip;
