@@ -437,13 +437,13 @@ Copyright © 2012-2015 Ben Olden-Cooligan</value>
         <value>150, 42</value>
     </data>
     <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>193, 13</value>
+        <value>117, 13</value>
     </data>
     <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
         <value>30</value>
     </data>
     <data name="linkLabel1.Text" xml:space="preserve">
-        <value>http://sourceforge.com/projects/naps2</value>
+        <value>http://www.naps2.com</value>
     </data>
     <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
         <value>linkLabel1</value>
@@ -556,6 +556,6 @@ Copyright © 2012-2015 Ben Olden-Cooligan</value>
         <value>FAbout</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.1.24136, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.0.42816, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>
