@@ -76,6 +76,7 @@ namespace NAPS2.Scan.Wia
         {
             var device = WiaApi.GetDevice(scanDevice);
             var item = WiaApi.GetItem(device, settings);
+            WiaApi.Configure(device, item, settings);
             return new WiaState(device, item);
         }
 
