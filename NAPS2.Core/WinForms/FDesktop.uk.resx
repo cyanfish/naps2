@@ -784,7 +784,7 @@
         <value>139, 22</value>
     </data>
     <data name="tsInterleave.Text" xml:space="preserve">
-        <value>Interleave</value>
+        <value>Позбавити чергування</value>
     </data>
     <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>139, 22</value>

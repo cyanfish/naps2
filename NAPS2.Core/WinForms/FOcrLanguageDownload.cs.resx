@@ -132,7 +132,7 @@
         <value>3</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Select one or more languages:</value>
+        <value>Vyberte jeden nebo více jazyků:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -156,7 +156,7 @@
         <value>5</value>
     </data>
     <data name="btnDownload.Text" xml:space="preserve">
-        <value>&amp;Download</value>
+        <value>Stáhnout</value>
     </data>
     <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
         <value>btnDownload</value>

@@ -394,7 +394,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>Image Settings</value>
+        <value>Настройки на изображението</value>
     </data>
     <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -427,7 +427,7 @@
         <value>56, 51</value>
     </data>
     <data name="tsdPrint.Text" xml:space="preserve">
-        <value>Print</value>
+        <value>Печат</value>
     </data>
     <data name="tsdPrint.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -442,7 +442,7 @@
         <value>64, 51</value>
     </data>
     <data name="tsdImage.Text" xml:space="preserve">
-        <value>Image</value>
+        <value>Изображение</value>
     </data>
     <data name="tsdImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -652,7 +652,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsNewProfile.Text" xml:space="preserve">
-        <value>New Profile</value>
+        <value>Нов профил</value>
     </data>
     <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -673,7 +673,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>Настройки на PDF</value>
     </data>
     <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -694,13 +694,13 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>Email Settings</value>
+        <value>Настройки на е-поща</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>Настройки на PDF</value>
     </data>
     <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
         <value>129, 22</value>
@@ -718,7 +718,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Изрязване</value>
     </data>
     <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -745,7 +745,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsReset.Text" xml:space="preserve">
-        <value>Reset</value>
+        <value>Изчистване</value>
     </data>
     <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -778,7 +778,7 @@
         <value>164, 22</value>
     </data>
     <data name="customRotationToolStripMenuItem.Text" xml:space="preserve">
-        <value>Custom Rotation</value>
+        <value>Завъртане по избор</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>139, 22</value>
@@ -799,7 +799,7 @@
         <value>139, 22</value>
     </data>
     <data name="tsReverse.Text" xml:space="preserve">
-        <value>Reverse</value>
+        <value>Обръщане</value>
     </data>
     <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>

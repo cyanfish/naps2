@@ -274,7 +274,7 @@
         <value>20, 22</value>
     </data>
     <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Rotate</value>
+        <value>Otočení</value>
     </data>
     <data name="tsCrop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>Një version më i ri i NAPS2 është i disponueshëm. A dëshiron ta përditësosh tani?</value>
+        <value>Një version më i ri i NAPS2 është i disponueshëm. Dëshiron ta përditësosh tani?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
