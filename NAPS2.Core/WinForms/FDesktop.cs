@@ -790,7 +790,7 @@ namespace NAPS2.WinForms
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                foreach (var fileName in ofd.FileNames)
+                foreach (var fileName in ofd.FileNames.OrderBy(x => x))
                 {
                     // TODO: Run in thread, and show a dialog (just like exporting)
                     // Need to provide count somehow (progress callback). count = # files or # pages
