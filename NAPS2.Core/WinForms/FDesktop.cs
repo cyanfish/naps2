@@ -70,6 +70,7 @@ namespace NAPS2.WinForms
 
         private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
+        private LayoutManager layoutManager;
 
         public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput)
         {
@@ -97,23 +98,30 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            new LayoutManager(this)
-                .Bind(btnZoomIn, btnZoomOut)
-                    .BottomToForm()
-                .Activate();
-
-            imageList.UserConfigManager = UserConfigManager;
-            thumbnailList1.UserConfigManager = UserConfigManager;
-            int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
-            thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             PostInitializeComponent();
         }
 
         private void PostInitializeComponent()
         {
+            imageList.UserConfigManager = UserConfigManager;
+            thumbnailList1.UserConfigManager = UserConfigManager;
+            int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
+            thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
+
             RelayoutToolbar();
             InitLanguageDropdown();
             UpdateScanButton();
+
+            if (layoutManager != null)
+            {
+                layoutManager.Deactivate();
+            }
+            btnZoomIn.Location = new Point(btnZoomIn.Location.X, thumbnailList1.Height - 33);
+            btnZoomOut.Location = new Point(btnZoomOut.Location.X, thumbnailList1.Height - 33);
+            layoutManager = new LayoutManager(this)
+                   .Bind(btnZoomIn, btnZoomOut)
+                       .BottomToForm()
+                   .Activate();
         }
 
         private void InitLanguageDropdown()
