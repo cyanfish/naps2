@@ -186,4 +186,10 @@
   <data name="tr" xml:space="preserve">
     <value>Türkçe</value>
   </data>
+  <data name="nb" xml:space="preserve">
+    <value>Bokmål</value>
+  </data>
+  <data name="ro" xml:space="preserve">
+    <value>Limba Română</value>
+  </data>
 </root>

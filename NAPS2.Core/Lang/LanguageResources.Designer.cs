@@ -178,6 +178,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bokmål.
+        /// </summary>
+        internal static string nb {
+            get {
+                return ResourceManager.GetString("nb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nederlands.
         /// </summary>
         internal static string nl {
@@ -210,6 +219,15 @@ namespace NAPS2.Lang {
         internal static string pt_PT {
             get {
                 return ResourceManager.GetString("pt_PT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limba Română.
+        /// </summary>
+        internal static string ro {
+            get {
+                return ResourceManager.GetString("ro", resourceCulture);
             }
         }
         

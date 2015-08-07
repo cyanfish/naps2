@@ -14,6 +14,7 @@
       <ComponentRef Id="LangComponent_hr" />
       <ComponentRef Id="LangComponent_hu" />
       <ComponentRef Id="LangComponent_it" />
+      <ComponentRef Id="LangComponent_nb" />
       <ComponentRef Id="LangComponent_nl" />
       <ComponentRef Id="LangComponent_pl" />
       <ComponentRef Id="LangComponent_pt_BR" />
@@ -81,6 +82,11 @@
       <Directory Id="LangFolder_it" Name="it">
         <Component Id="LangComponent_it">
           <File Source="..\NAPS2\bin\InstallerMSI\it\NAPS2.Core.resources.dll" Id="LangFile_it" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_nb" Name="nb">
+        <Component Id="LangComponent_nb">
+          <File Source="..\NAPS2\bin\InstallerMSI\nb\NAPS2.Core.resources.dll" Id="LangFile_nb" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_nl" Name="nl">
