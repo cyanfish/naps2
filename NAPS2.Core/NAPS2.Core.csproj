@@ -102,8 +102,8 @@
     <Compile Include="ImportExport\Pdf\PdfEncryption.cs" />
     <Compile Include="ImportExport\Pdf\PdfMetadata.cs" />
     <Compile Include="ImportExport\Pdf\PdfSettingsContainer.cs" />
-    <Compile Include="ImportExport\Pdf\PrintDocumentPrinter.cs" />
-    <Compile Include="ImportExport\Pdf\IImagePrinter.cs" />
+    <Compile Include="ImportExport\PrintDocumentPrinter.cs" />
+    <Compile Include="ImportExport\IScannedImagePrinter.cs" />
     <Compile Include="ImportExport\Pdf\WinFormsPdfPasswordProvider.cs" />
     <Compile Include="Lang\Resources\MiscResources.Designer.cs">
       <DependentUpon>MiscResources.resx</DependentUpon>

@@ -24,9 +24,9 @@ using System.Drawing.Printing;
 using System.Linq;
 using NAPS2.Scan.Images;
 
-namespace NAPS2.ImportExport.Pdf
+namespace NAPS2.ImportExport
 {
-    public interface IImagePrinter
+    public interface IScannedImagePrinter
     {
         /// <summary>
         /// Prints the provided images, prompting the user for the printer settings.

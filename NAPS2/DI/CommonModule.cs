@@ -31,7 +31,7 @@ namespace NAPS2.DI
 
             // Export
             Bind<IPdfExporter>().To<PdfSharpExporter>();
-            Bind<IImagePrinter>().To<PrintDocumentPrinter>();
+            Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
             Bind<IEmailer>().To<MapiEmailer>();
             Bind<IOcrEngine>().To<TesseractOcrEngine>();
 

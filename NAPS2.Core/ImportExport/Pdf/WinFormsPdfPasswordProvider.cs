@@ -8,7 +8,7 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class WinFormsPdfPasswordProvider : IPdfPasswordProvider
     {
-        private IFormFactory formFactory;
+        private readonly IFormFactory formFactory;
 
         public WinFormsPdfPasswordProvider(IFormFactory formFactory)
         {

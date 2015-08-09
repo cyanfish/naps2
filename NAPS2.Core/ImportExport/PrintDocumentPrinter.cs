@@ -29,7 +29,7 @@ using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class PrintDocumentPrinter : IImagePrinter
+    public class PrintDocumentPrinter : IScannedImagePrinter
     {
         public bool PromptToPrint(List<IScannedImage> images, List<IScannedImage> selectedImages)
         {

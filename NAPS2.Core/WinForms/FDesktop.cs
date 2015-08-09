@@ -59,7 +59,7 @@ namespace NAPS2.WinForms
         private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
-        private readonly IImagePrinter imagePrinter;
+        private readonly IScannedImagePrinter scannedImagePrinter;
         private readonly ChangeTracker changeTracker;
         private readonly EmailSettingsContainer emailSettingsContainer;
         private readonly FileNamePlaceholders fileNamePlaceholders;
@@ -72,7 +72,7 @@ namespace NAPS2.WinForms
         private CancellationTokenSource renderThumbnailsCts;
         private LayoutManager layoutManager;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IImagePrinter imagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -84,7 +84,7 @@ namespace NAPS2.WinForms
             this.ocrDependencyManager = ocrDependencyManager;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
-            this.imagePrinter = imagePrinter;
+            this.scannedImagePrinter = scannedImagePrinter;
             this.changeTracker = changeTracker;
             this.emailSettingsContainer = emailSettingsContainer;
             this.fileNamePlaceholders = fileNamePlaceholders;
@@ -1040,7 +1040,7 @@ namespace NAPS2.WinForms
 
         private void tsdPrint_Click(object sender, EventArgs e)
         {
-            if (imagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList()))
+            if (scannedImagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList()))
             {
                 changeTracker.HasUnsavedChanges = false;
             }
