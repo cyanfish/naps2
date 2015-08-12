@@ -6,6 +6,7 @@
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
     Copyright (C) 2012-2015  Ben Olden-Cooligan
+    Copyright (C) 2015       Luca De Petrillo
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -863,6 +864,26 @@ namespace NAPS2.WinForms
                 return;
             }
             UpdateThumbnails(imageList.Deinterleave(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
+        }
+
+        private void tsFrontBackAdfSort_Click(object sender, EventArgs e)
+        {
+            if (imageList.Images.Count < 3)
+            {
+                return;
+            }
+            UpdateThumbnails(imageList.FrontBackAdfSort());
+            changeTracker.HasUnsavedChanges = true;
+        }
+
+        private void tsFrontBackAdfDeSort_Click(object sender, EventArgs e)
+        {
+            if (imageList.Images.Count < 3)
+            {
+                return;
+            }
+            UpdateThumbnails(imageList.FrontBackAdfDesort());
             changeTracker.HasUnsavedChanges = true;
         }
 

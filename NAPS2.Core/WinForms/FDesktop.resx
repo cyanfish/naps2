@@ -211,7 +211,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.0.2.31892, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.1.1.21423, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -376,27 +376,6 @@
   <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="tsSaveImagesAll.Text" xml:space="preserve">
-    <value>All ({0})</value>
-  </data>
-  <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
-    <value>Selected ({0})</value>
-  </data>
-  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
-  </data>
-  <data name="tsImageSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="tsImageSettings.Text" xml:space="preserve">
-    <value>Image Settings</value>
-  </data>
   <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -462,6 +441,54 @@
   </data>
   <data name="tsMove.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 51</value>
+  </data>
+  <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 22</value>
+  </data>
+  <data name="tsInterleave.Text" xml:space="preserve">
+    <value>Interleave</value>
+  </data>
+  <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 22</value>
+  </data>
+  <data name="tsDeinterleave.Text" xml:space="preserve">
+    <value>Deinterleave</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 6</value>
+  </data>
+  <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 22</value>
+  </data>
+  <data name="tsReverse.Text" xml:space="preserve">
+    <value>Reverse</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 6</value>
+  </data>
+  <data name="tsFrontBackAdfSort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsFrontBackAdfSort.Text" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="tsFrontBackAdfSort.ToolTipText" xml:space="preserve">
+    <value>1, 3, 5, 6, 4, 2 -&gt; 1, 2, 3, 4, 5, 6</value>
+  </data>
+  <data name="tsFrontBackAdfDeSort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsFrontBackAdfDeSort.Text" xml:space="preserve">
+    <value>De-sort</value>
+  </data>
+  <data name="tsFrontBackAdfDeSort.ToolTipText" xml:space="preserve">
+    <value>1, 2, 3, 4, 5, 6 -&gt; 1, 3, 5, 6, 4, 2</value>
+  </data>
+  <data name="tsFrontBackAdf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 22</value>
+  </data>
+  <data name="tsFrontBackAdf.Text" xml:space="preserve">
+    <value>Front-Back ADF</value>
   </data>
   <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -573,7 +600,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1201, 54</value>
+    <value>1184, 54</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -657,25 +684,46 @@
     <value>New Profile</value>
   </data>
   <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>143, 22</value>
   </data>
   <data name="tsSavePDFAll.Text" xml:space="preserve">
     <value>All ({0})</value>
   </data>
   <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>143, 22</value>
   </data>
   <data name="tsSavePDFSelected.Text" xml:space="preserve">
     <value>Selected ({0})</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>140, 6</value>
   </data>
   <data name="tsPDFSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>143, 22</value>
   </data>
   <data name="tsPDFSettings.Text" xml:space="preserve">
     <value>PDF Settings</value>
+  </data>
+  <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsSaveImagesAll.Text" xml:space="preserve">
+    <value>All ({0})</value>
+  </data>
+  <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsSaveImagesSelected.Text" xml:space="preserve">
+    <value>Selected ({0})</value>
+  </data>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="tsImageSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsImageSettings.Text" xml:space="preserve">
+    <value>Image Settings</value>
   </data>
   <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 22</value>
@@ -782,35 +830,14 @@
   <data name="customRotationToolStripMenuItem.Text" xml:space="preserve">
     <value>Custom Rotation</value>
   </data>
-  <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsInterleave.Text" xml:space="preserve">
-    <value>Interleave</value>
-  </data>
-  <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsDeinterleave.Text" xml:space="preserve">
-    <value>Deinterleave</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 6</value>
-  </data>
-  <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="tsReverse.Text" xml:space="preserve">
-    <value>Reverse</value>
-  </data>
   <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsReverseAll.Text" xml:space="preserve">
     <value>All ({0})</value>
   </data>
   <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="tsReverseSelected.Text" xml:space="preserve">
     <value>Selected ({0})</value>
@@ -959,6 +986,18 @@
   <data name="&gt;&gt;tsSaveImagesSelected.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
+    <value>toolStripSeparator11</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsImageSettings.Name" xml:space="preserve">
+    <value>tsImageSettings</value>
+  </data>
+  <data name="&gt;&gt;tsImageSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tsdEmailPDF.Name" xml:space="preserve">
     <value>tsdEmailPDF</value>
   </data>
@@ -1089,7 +1128,7 @@
     <value>tsMove</value>
   </data>
   <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.0.2.31892, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.1.1.21423, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
     <value>tsdReorder</value>
@@ -1133,6 +1172,18 @@
   <data name="&gt;&gt;tsReverseSelected.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsFrontBackAdf.Name" xml:space="preserve">
+    <value>tsFrontBackAdf</value>
+  </data>
+  <data name="&gt;&gt;tsFrontBackAdf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
   </data>
@@ -1169,22 +1220,22 @@
   <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
-    <value>toolStripSeparator11</value>
+  <data name="&gt;&gt;tsFrontBackAdfSort.Name" xml:space="preserve">
+    <value>tsFrontBackAdfSort</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tsFrontBackAdfSort.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsImageSettings.Name" xml:space="preserve">
-    <value>tsImageSettings</value>
+  <data name="&gt;&gt;tsFrontBackAdfDeSort.Name" xml:space="preserve">
+    <value>tsFrontBackAdfDeSort</value>
   </data>
-  <data name="&gt;&gt;tsImageSettings.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsFrontBackAdfDeSort.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.2.31892, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.1.21423, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
