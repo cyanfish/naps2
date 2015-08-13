@@ -44,7 +44,7 @@ namespace NAPS2.ImportExport.Pdf
 
         public bool Export(string path, IEnumerable<IScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
-            var document = new PdfDocument { Layout = PdfWriterLayout.Compact };
+            var document = new PdfDocument();
             document.Info.Author = settings.Metadata.Author;
             document.Info.Creator = settings.Metadata.Creator;
             document.Info.Keywords = settings.Metadata.Keywords;
