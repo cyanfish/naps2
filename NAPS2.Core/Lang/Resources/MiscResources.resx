@@ -300,4 +300,7 @@
   <data name="ErrorSaving" xml:space="preserve">
     <value>An error occurred when trying to save the file.</value>
   </data>
+  <data name="OfN" xml:space="preserve">
+    <value>of {0}</value>
+  </data>
 </root>

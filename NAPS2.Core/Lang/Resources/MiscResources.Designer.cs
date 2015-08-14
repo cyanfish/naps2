@@ -484,6 +484,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to of {0}.
+        /// </summary>
+        internal static string OfN {
+            get {
+                return ResourceManager.GetString("OfN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overwrite File.
         /// </summary>
         internal static string OverwriteFile {

@@ -25,7 +25,9 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -47,21 +49,27 @@ namespace NAPS2.WinForms
         private ToolStripButton tsCrop;
         private ToolStripButton tsBrightness;
         private ToolStripButton tsContrast;
+        private ToolStripButton tsDelete;
         private TiffViewerCtl tiffViewer1;
 
-        public FViewer()
+        private readonly ChangeTracker changeTracker;
+
+        public FViewer(ChangeTracker changeTracker)
         {
+            this.changeTracker = changeTracker;
             InitializeComponent();
         }
 
         public ScannedImageList ImageList { get; set; }
         public int ImageIndex { get; set; }
+        public Action DeleteCallback { get; set; }
+        public Action<IEnumerable<int>> UpdateCallback { get; set; }
 
         protected override void OnLoad(object sender, EventArgs e)
         {
             tiffViewer1.Image = ImageList.Images[ImageIndex].GetImage();
             tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.InvariantCulture);
-            lblPageTotal.Text = string.Format(lblPageTotal.Text, ImageList.Images.Count);
+            lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
         }
 
         private void GoTo(int index)
@@ -122,6 +130,7 @@ namespace NAPS2.WinForms
             this.tsCrop = new System.Windows.Forms.ToolStripButton();
             this.tsBrightness = new System.Windows.Forms.ToolStripButton();
             this.tsContrast = new System.Windows.Forms.ToolStripButton();
+            this.tsDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -160,7 +169,8 @@ namespace NAPS2.WinForms
             this.tsdRotate,
             this.tsCrop,
             this.tsBrightness,
-            this.tsContrast});
+            this.tsContrast,
+            this.tsDelete});
             this.toolStrip1.Name = "toolStrip1";
             // 
             // tbPageCurrent
@@ -177,7 +187,7 @@ namespace NAPS2.WinForms
             // tsPrev
             // 
             this.tsPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsPrev.Image = Icons.arrow_left;
+            this.tsPrev.Image = global::NAPS2.Icons.arrow_left;
             resources.ApplyResources(this.tsPrev, "tsPrev");
             this.tsPrev.Name = "tsPrev";
             this.tsPrev.Click += new System.EventHandler(this.tsPrev_Click);
@@ -185,7 +195,7 @@ namespace NAPS2.WinForms
             // tsNext
             // 
             this.tsNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsNext.Image = Icons.arrow_right;
+            this.tsNext.Image = global::NAPS2.Icons.arrow_right;
             resources.ApplyResources(this.tsNext, "tsNext");
             this.tsNext.Name = "tsNext";
             this.tsNext.Click += new System.EventHandler(this.tsNext_Click);
@@ -203,28 +213,28 @@ namespace NAPS2.WinForms
             this.tsRotateRight,
             this.tsFlip,
             this.tsCustomRotation});
-            this.tsdRotate.Image = Icons.arrow_rotate_anticlockwise_small;
+            this.tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small;
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
             this.tsdRotate.Name = "tsdRotate";
             this.tsdRotate.ShowDropDownArrow = false;
             // 
             // tsRotateLeft
             // 
-            this.tsRotateLeft.Image = Icons.arrow_rotate_anticlockwise_small;
+            this.tsRotateLeft.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small;
             this.tsRotateLeft.Name = "tsRotateLeft";
             resources.ApplyResources(this.tsRotateLeft, "tsRotateLeft");
             this.tsRotateLeft.Click += new System.EventHandler(this.tsRotateLeft_Click);
             // 
             // tsRotateRight
             // 
-            this.tsRotateRight.Image = Icons.arrow_rotate_clockwise_small;
+            this.tsRotateRight.Image = global::NAPS2.Icons.arrow_rotate_clockwise_small;
             this.tsRotateRight.Name = "tsRotateRight";
             resources.ApplyResources(this.tsRotateRight, "tsRotateRight");
             this.tsRotateRight.Click += new System.EventHandler(this.tsRotateRight_Click);
             // 
             // tsFlip
             // 
-            this.tsFlip.Image = Icons.arrow_switch_small;
+            this.tsFlip.Image = global::NAPS2.Icons.arrow_switch_small;
             this.tsFlip.Name = "tsFlip";
             resources.ApplyResources(this.tsFlip, "tsFlip");
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
@@ -238,7 +248,7 @@ namespace NAPS2.WinForms
             // tsCrop
             // 
             this.tsCrop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsCrop.Image = Icons.transform_crop;
+            this.tsCrop.Image = global::NAPS2.Icons.transform_crop;
             resources.ApplyResources(this.tsCrop, "tsCrop");
             this.tsCrop.Name = "tsCrop";
             this.tsCrop.Click += new System.EventHandler(this.tsCrop_Click);
@@ -246,7 +256,7 @@ namespace NAPS2.WinForms
             // tsBrightness
             // 
             this.tsBrightness.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsBrightness.Image = Icons.weather_sun;
+            this.tsBrightness.Image = global::NAPS2.Icons.weather_sun;
             resources.ApplyResources(this.tsBrightness, "tsBrightness");
             this.tsBrightness.Name = "tsBrightness";
             this.tsBrightness.Click += new System.EventHandler(this.tsBrightness_Click);
@@ -254,10 +264,18 @@ namespace NAPS2.WinForms
             // tsContrast
             // 
             this.tsContrast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsContrast.Image = Icons.contrast;
+            this.tsContrast.Image = global::NAPS2.Icons.contrast;
             resources.ApplyResources(this.tsContrast, "tsContrast");
             this.tsContrast.Name = "tsContrast";
             this.tsContrast.Click += new System.EventHandler(this.tsContrast_Click);
+            // 
+            // tsDelete
+            // 
+            this.tsDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsDelete.Image = global::NAPS2.Icons.cross_small;
+            resources.ApplyResources(this.tsDelete, "tsDelete");
+            this.tsDelete.Name = "tsDelete";
+            this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
             // 
             // FViewer
             // 
@@ -300,18 +318,21 @@ namespace NAPS2.WinForms
         {
             ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate270FlipNone);
             UpdateImage();
+            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private void tsRotateRight_Click(object sender, EventArgs e)
         {
             ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate90FlipNone);
             UpdateImage();
+            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private void tsFlip_Click(object sender, EventArgs e)
         {
             ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate180FlipNone);
             UpdateImage();
+            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private void tsCustomRotation_Click(object sender, EventArgs e)
@@ -320,6 +341,7 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             UpdateImage();
+            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private void tsCrop_Click(object sender, EventArgs e)
@@ -328,6 +350,7 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             UpdateImage();
+            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private void tsBrightness_Click(object sender, EventArgs e)
@@ -344,6 +367,40 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             UpdateImage();
+        }
+
+        private void tsDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, 1), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                // Need to dispose the bitmap first to avoid file access issues
+                tiffViewer1.Image.Dispose();
+                // Actually delete the image
+                ImageList.Delete(Enumerable.Range(ImageIndex, 1));
+                // Update FDesktop in the background
+                DeleteCallback();
+
+                if (ImageList.Images.Any())
+                {
+                    changeTracker.HasUnsavedChanges = true;
+                    // Update the GUI for the newly displayed image
+                    if (ImageIndex >= ImageList.Images.Count)
+                    {
+                        GoTo(ImageList.Images.Count - 1);
+                    }
+                    else
+                    {
+                        UpdateImage();
+                    }
+                    lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
+                }
+                else
+                {
+                    changeTracker.HasUnsavedChanges = false;
+                    // No images left to display, so no point keeping the form open
+                    Close();
+                }
+            }
         }
     }
 }
