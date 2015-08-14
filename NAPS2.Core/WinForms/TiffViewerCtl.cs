@@ -120,6 +120,12 @@ namespace NAPS2.WinForms
             tiffviewer1.Zoom = 100;
         }
 
+        private void tiffviewer1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Pass through events to the parent form in case it listens for them
+            OnKeyDown(e);
+        }
+
         #region Component Designer generated code
         /// <summary> 
         /// Required method for Designer support - do not modify 
@@ -129,6 +135,7 @@ namespace NAPS2.WinForms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TiffViewerCtl));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.tiffviewer1 = new NAPS2.WinForms.TiffViewer();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsStretch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -137,7 +144,6 @@ namespace NAPS2.WinForms
             this.tsZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsZoom = new System.Windows.Forms.ToolStripLabel();
-            this.tiffviewer1 = new NAPS2.WinForms.TiffViewer();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -158,6 +164,14 @@ namespace NAPS2.WinForms
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tStrip);
             // 
+            // tiffviewer1
+            // 
+            resources.ApplyResources(this.tiffviewer1, "tiffviewer1");
+            this.tiffviewer1.BackColor = System.Drawing.Color.White;
+            this.tiffviewer1.Name = "tiffviewer1";
+            this.tiffviewer1.Zoom = 0;
+            this.tiffviewer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tiffviewer1_KeyDown);
+            // 
             // tStrip
             // 
             resources.ApplyResources(this.tStrip, "tStrip");
@@ -174,7 +188,7 @@ namespace NAPS2.WinForms
             // tsStretch
             // 
             this.tsStretch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsStretch.Image = Icons.arrow_out;
+            this.tsStretch.Image = global::NAPS2.Icons.arrow_out;
             resources.ApplyResources(this.tsStretch, "tsStretch");
             this.tsStretch.Name = "tsStretch";
             this.tsStretch.CheckedChanged += new System.EventHandler(this.tsStretch_CheckedChanged);
@@ -188,7 +202,7 @@ namespace NAPS2.WinForms
             // tsZoomActual
             // 
             this.tsZoomActual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsZoomActual.Image = Icons.zoom_actual;
+            this.tsZoomActual.Image = global::NAPS2.Icons.zoom_actual;
             resources.ApplyResources(this.tsZoomActual, "tsZoomActual");
             this.tsZoomActual.Name = "tsZoomActual";
             this.tsZoomActual.Click += new System.EventHandler(this.tsZoomActual_Click);
@@ -196,7 +210,7 @@ namespace NAPS2.WinForms
             // tsZoomPlus
             // 
             this.tsZoomPlus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsZoomPlus.Image = Icons.zoom_in;
+            this.tsZoomPlus.Image = global::NAPS2.Icons.zoom_in;
             resources.ApplyResources(this.tsZoomPlus, "tsZoomPlus");
             this.tsZoomPlus.Name = "tsZoomPlus";
             this.tsZoomPlus.Click += new System.EventHandler(this.tsZoomPlus_Click);
@@ -204,7 +218,7 @@ namespace NAPS2.WinForms
             // tsZoomOut
             // 
             this.tsZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsZoomOut.Image = Icons.zoom_out;
+            this.tsZoomOut.Image = global::NAPS2.Icons.zoom_out;
             resources.ApplyResources(this.tsZoomOut, "tsZoomOut");
             this.tsZoomOut.Name = "tsZoomOut";
             this.tsZoomOut.Click += new System.EventHandler(this.tsZoomOut_Click);
@@ -218,13 +232,6 @@ namespace NAPS2.WinForms
             // 
             this.tsZoom.Name = "tsZoom";
             resources.ApplyResources(this.tsZoom, "tsZoom");
-            // 
-            // tiffviewer1
-            // 
-            resources.ApplyResources(this.tiffviewer1, "tiffviewer1");
-            this.tiffviewer1.BackColor = System.Drawing.Color.White;
-            this.tiffviewer1.Name = "tiffviewer1";
-            this.tiffviewer1.Zoom = 0;
             // 
             // TiffViewerCtl
             // 

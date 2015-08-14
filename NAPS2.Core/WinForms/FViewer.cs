@@ -156,6 +156,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tiffViewer1, "tiffViewer1");
             this.tiffViewer1.Image = null;
             this.tiffViewer1.Name = "tiffViewer1";
+            this.tiffViewer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tiffViewer1_KeyDown);
             // 
             // toolStrip1
             // 
@@ -177,6 +178,7 @@ namespace NAPS2.WinForms
             // 
             this.tbPageCurrent.Name = "tbPageCurrent";
             resources.ApplyResources(this.tbPageCurrent, "tbPageCurrent");
+            this.tbPageCurrent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbPageCurrent_KeyDown);
             this.tbPageCurrent.TextChanged += new System.EventHandler(this.tbPageCurrent_TextChanged);
             // 
             // lblPageTotal
@@ -400,6 +402,35 @@ namespace NAPS2.WinForms
                     // No images left to display, so no point keeping the form open
                     Close();
                 }
+            }
+        }
+
+        private void tiffViewer1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+                case Keys.PageDown:
+                    GoTo(ImageIndex + 1);
+                    break;
+                case Keys.PageUp:
+                    GoTo(ImageIndex - 1);
+                    break;
+            }
+        }
+
+        private void tbPageCurrent_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.PageDown:
+                    GoTo(ImageIndex + 1);
+                    break;
+                case Keys.PageUp:
+                    GoTo(ImageIndex - 1);
+                    break;
             }
         }
     }

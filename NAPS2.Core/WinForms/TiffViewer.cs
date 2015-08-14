@@ -144,6 +144,7 @@ namespace NAPS2.WinForms
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
+            base.OnKeyDown(e);
             isControlKeyDown = e.Control;
             switch (e.KeyCode)
             {
@@ -157,12 +158,6 @@ namespace NAPS2.WinForms
                     if (e.Control)
                     {
                         StepZoom(1);
-                    }
-                    break;
-                case Keys.Escape:
-                    if (ParentForm != null)
-                    {
-                        ParentForm.Close();
                     }
                     break;
             }
