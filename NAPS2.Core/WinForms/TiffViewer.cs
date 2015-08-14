@@ -53,7 +53,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    clearimage();
+                    ClearImage();
                     image = null;
                 }
             }
@@ -113,7 +113,7 @@ namespace NAPS2.WinForms
 
         public event EventHandler<EventArgs> ZoomChanged;
 
-        private void clearimage()
+        private void ClearImage()
         {
             pbox.Image = null;
             pbox.Width = 1;
@@ -157,6 +157,12 @@ namespace NAPS2.WinForms
                     if (e.Control)
                     {
                         StepZoom(1);
+                    }
+                    break;
+                case Keys.Escape:
+                    if (ParentForm != null)
+                    {
+                        ParentForm.Close();
                     }
                     break;
             }
