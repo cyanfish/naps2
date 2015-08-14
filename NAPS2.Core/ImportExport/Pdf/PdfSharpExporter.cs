@@ -104,7 +104,8 @@ namespace NAPS2.ImportExport.Pdf
                         {
                             var adjustedBounds = AdjustBounds(element.Bounds, hAdjust, vAdjust);
                             var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                            tf.DrawString(element.Text, new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular), XBrushes.Transparent, adjustedBounds);
+                            var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.Unicode));
+                            tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
                         }
                     }
                     gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
