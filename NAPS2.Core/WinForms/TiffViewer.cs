@@ -33,7 +33,7 @@ namespace NAPS2.WinForms
 
         private Image image;
         private PictureBox pbox;
-        private int xzoom;
+        private double xzoom;
 
         private bool isControlKeyDown;
 
@@ -89,7 +89,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public int Zoom
+        public double Zoom
         {
             set
             {
@@ -165,7 +165,7 @@ namespace NAPS2.WinForms
 
         public void StepZoom(double steps)
         {
-            Zoom = (int)Math.Round(Zoom * Math.Pow(1.2, steps));
+            Zoom = Math.Round(Zoom * Math.Pow(1.2, steps));
         }
 
         private void TiffViewer_KeyDown(object sender, KeyEventArgs e)

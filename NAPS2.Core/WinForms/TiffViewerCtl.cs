@@ -51,7 +51,7 @@ namespace NAPS2.WinForms
 
         private void Tiffviewer1OnZoomChanged(object sender, EventArgs eventArgs)
         {
-            tsZoom.Text = (tiffviewer1.Zoom / 100.0).ToString("P0");
+            tsZoom.Text = (tiffviewer1.Zoom / 100.0).ToString("P1");
         }
 
         public Image Image
@@ -91,7 +91,7 @@ namespace NAPS2.WinForms
                 double containerHeight = Math.Max(tiffviewer1.Height - 20, 0);
                 double zoomX = containerWidth / tiffviewer1.ImageWidth * 100;
                 double zoomY = containerHeight / tiffviewer1.ImageHeight * 100;
-                tiffviewer1.Zoom = (int)Math.Min(zoomX, zoomY);
+                tiffviewer1.Zoom = Math.Min(zoomX, zoomY);
             }
         }
 
