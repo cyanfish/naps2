@@ -63,15 +63,6 @@ namespace NAPS2.Scan.Wia
                 int pageNumber = 1;
                 while (true)
                 {
-                    bool feederReady = eventLoop.GetSync(wia => WiaApi.DeviceFeederReady(wia.Device));
-                    if (ScanSettings.PaperSource != ScanSource.Glass && !feederReady)
-                    {
-                        if (pageNumber == 1)
-                        {
-                            throw new NoPagesException();
-                        }
-                        break;
-                    }
                     IScannedImage image;
                     try
                     {
@@ -129,6 +120,10 @@ namespace NAPS2.Scan.Wia
             {
                 if ((uint)e.ErrorCode == WiaApi.Errors.OUT_OF_PAPER)
                 {
+                    if (ScanSettings.PaperSource != ScanSource.Glass && pageNumber == 1)
+                    {
+                        throw new NoPagesException();
+                    }
                     return null;
                 }
                 else if ((uint)e.ErrorCode == WiaApi.Errors.OFFLINE)
