@@ -33,6 +33,7 @@ namespace NAPS2.WinForms
     {
         public FAbout()
         {
+            RestoreFormState = false;
             InitializeComponent();
             labelProductName.Text = AssemblyProduct;
             labelVersion.Text = String.Format(MiscResources.Version, AssemblyVersion);
