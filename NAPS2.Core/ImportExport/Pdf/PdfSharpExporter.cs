@@ -5,6 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
+    Copyright (C) 2015       Luca De Petrillo
     Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
@@ -30,6 +31,7 @@ using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
+using System.Drawing.Imaging;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -107,7 +109,37 @@ namespace NAPS2.ImportExport.Pdf
                             tf.DrawString(element.Text, new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular), XBrushes.Transparent, adjustedBounds);
                         }
                     }
-                    gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
+
+                    if (scannedImage.IsHighQuality() && settings.ImageSettings.CompressImages)
+                    {
+                        // Compress the image to JPEG and use it if smaller than the original one.
+                        var quality = Math.Max(Math.Min(settings.ImageSettings.JpegQuality, 100), 0);
+                        var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
+                        var encoderParams = new EncoderParameters(1);
+                        encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+
+                        using (var streamJpg = new MemoryStream())
+                        {
+                            img.Save(streamJpg, encoder, encoderParams);
+                            if (streamJpg.Length < stream.Length) 
+                            {
+                                using (var imgJpg = Bitmap.FromStream(streamJpg))
+                                {
+                                    gfx.DrawImage(imgJpg, 0, 0, (int)realWidth, (int)realHeight);
+                                }
+                            }
+                            else
+                            {
+                                gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
+                            }
+                            
+                        }
+                    }
+                    else
+                    {
+                        gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
+                    }
+                    
                     i++;
                 }
             }

@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 584</value>
+    <value>264, 703</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -145,13 +145,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 584</value>
+    <value>345, 703</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -403,7 +403,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupMetadata.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="cbShowUserPassword.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -823,7 +823,7 @@
     <value>14</value>
   </data>
   <data name="groupProtection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 253</value>
+    <value>12, 372</value>
   </data>
   <data name="groupProtection.Size" type="System.Drawing.Size, System.Drawing">
     <value>408, 304</value>
@@ -844,13 +844,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupProtection.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cbRememberSettings.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="cbRememberSettings.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cbRememberSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 563</value>
+    <value>12, 682</value>
   </data>
   <data name="cbRememberSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 17</value>
@@ -871,10 +874,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbRememberSettings.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="btnRestoreDefaults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 584</value>
+    <value>12, 703</value>
   </data>
   <data name="btnRestoreDefaults.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 23</value>
@@ -895,7 +898,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnRestoreDefaults.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="linkPlaceholders.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -925,7 +928,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;linkPlaceholders.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="txtDefaultFileName.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 25</value>
@@ -946,7 +949,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtDefaultFileName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -976,7 +979,163 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lbCompressImageQuality.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbCompressImageQuality.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbCompressImageQuality.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="lbCompressImageQuality.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 13</value>
+  </data>
+  <data name="lbCompressImageQuality.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="lbCompressImageQuality.Text" xml:space="preserve">
+    <value>Jpeg Quality</value>
+  </data>
+  <data name="&gt;&gt;lbCompressImageQuality.Name" xml:space="preserve">
+    <value>lbCompressImageQuality</value>
+  </data>
+  <data name="&gt;&gt;lbCompressImageQuality.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbCompressImageQuality.Parent" xml:space="preserve">
+    <value>groupImage</value>
+  </data>
+  <data name="&gt;&gt;lbCompressImageQuality.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbCompressImagePdf.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbCompressImagePdf.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
+  </data>
+  <data name="cbCompressImagePdf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="cbCompressImagePdf.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="cbCompressImagePdf.Text" xml:space="preserve">
+    <value>Compress images</value>
+  </data>
+  <data name="&gt;&gt;cbCompressImagePdf.Name" xml:space="preserve">
+    <value>cbCompressImagePdf</value>
+  </data>
+  <data name="&gt;&gt;cbCompressImagePdf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbCompressImagePdf.Parent" xml:space="preserve">
+    <value>groupImage</value>
+  </data>
+  <data name="&gt;&gt;cbCompressImagePdf.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblImageCompressionInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblImageCompressionInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 83</value>
+  </data>
+  <data name="lblImageCompressionInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>396, 27</value>
+  </data>
+  <data name="lblImageCompressionInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="lblImageCompressionInfo.Text" xml:space="preserve">
+    <value>Images are compressed if Maximum Quality profile option is used.</value>
+  </data>
+  <data name="&gt;&gt;lblImageCompressionInfo.Name" xml:space="preserve">
+    <value>lblImageCompressionInfo</value>
+  </data>
+  <data name="&gt;&gt;lblImageCompressionInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblImageCompressionInfo.Parent" xml:space="preserve">
+    <value>groupImage</value>
+  </data>
+  <data name="&gt;&gt;lblImageCompressionInfo.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="txtJpegQuality.Location" type="System.Drawing.Point, System.Drawing">
+    <value>364, 51</value>
+  </data>
+  <data name="txtJpegQuality.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 20</value>
+  </data>
+  <data name="txtJpegQuality.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="txtJpegQuality.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtJpegQuality.Name" xml:space="preserve">
+    <value>txtJpegQuality</value>
+  </data>
+  <data name="&gt;&gt;txtJpegQuality.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtJpegQuality.Parent" xml:space="preserve">
+    <value>groupImage</value>
+  </data>
+  <data name="&gt;&gt;txtJpegQuality.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbJpegQuality.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tbJpegQuality.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 51</value>
+  </data>
+  <data name="tbJpegQuality.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 45</value>
+  </data>
+  <data name="tbJpegQuality.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;tbJpegQuality.Name" xml:space="preserve">
+    <value>tbJpegQuality</value>
+  </data>
+  <data name="&gt;&gt;tbJpegQuality.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbJpegQuality.Parent" xml:space="preserve">
+    <value>groupImage</value>
+  </data>
+  <data name="&gt;&gt;tbJpegQuality.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupImage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 253</value>
+  </data>
+  <data name="groupImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 113</value>
+  </data>
+  <data name="groupImage.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="groupImage.Text" xml:space="preserve">
+    <value>Image compression</value>
+  </data>
+  <data name="&gt;&gt;groupImage.Name" xml:space="preserve">
+    <value>groupImage</value>
+  </data>
+  <data name="&gt;&gt;groupImage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupImage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupImage.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -985,7 +1144,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>432, 619</value>
+    <value>432, 738</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1012,10 +1171,10 @@
 </value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>600, 658</value>
+    <value>600, 777</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>400, 658</value>
+    <value>400, 777</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PDF Settings</value>
@@ -1024,12 +1183,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.0.3.7448, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.1.1.22191, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FPdfSettings</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.3.7448, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.1.22191, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

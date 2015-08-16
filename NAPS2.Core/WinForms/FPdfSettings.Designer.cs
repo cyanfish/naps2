@@ -67,8 +67,16 @@ namespace NAPS2.WinForms
             this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.txtDefaultFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupImage = new System.Windows.Forms.GroupBox();
+            this.lbCompressImageQuality = new System.Windows.Forms.Label();
+            this.cbCompressImagePdf = new System.Windows.Forms.CheckBox();
+            this.lblImageCompressionInfo = new System.Windows.Forms.Label();
+            this.txtJpegQuality = new System.Windows.Forms.TextBox();
+            this.tbJpegQuality = new System.Windows.Forms.TrackBar();
             this.groupMetadata.SuspendLayout();
             this.groupProtection.SuspendLayout();
+            this.groupImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOK
@@ -281,10 +289,53 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // groupImage
+            // 
+            this.groupImage.Controls.Add(this.lbCompressImageQuality);
+            this.groupImage.Controls.Add(this.cbCompressImagePdf);
+            this.groupImage.Controls.Add(this.lblImageCompressionInfo);
+            this.groupImage.Controls.Add(this.txtJpegQuality);
+            this.groupImage.Controls.Add(this.tbJpegQuality);
+            resources.ApplyResources(this.groupImage, "groupImage");
+            this.groupImage.Name = "groupImage";
+            this.groupImage.TabStop = false;
+            // 
+            // lbCompressImageQuality
+            // 
+            resources.ApplyResources(this.lbCompressImageQuality, "lbCompressImageQuality");
+            this.lbCompressImageQuality.Name = "lbCompressImageQuality";
+            // 
+            // cbCompressImagePdf
+            // 
+            resources.ApplyResources(this.cbCompressImagePdf, "cbCompressImagePdf");
+            this.cbCompressImagePdf.Name = "cbCompressImagePdf";
+            this.cbCompressImagePdf.UseVisualStyleBackColor = true;
+            this.cbCompressImagePdf.CheckedChanged += new System.EventHandler(this.cbCompressImagePdf_CheckedChanged);
+            // 
+            // lblImageCompressionInfo
+            // 
+            resources.ApplyResources(this.lblImageCompressionInfo, "lblImageCompressionInfo");
+            this.lblImageCompressionInfo.Name = "lblImageCompressionInfo";
+            // 
+            // txtJpegQuality
+            // 
+            resources.ApplyResources(this.txtJpegQuality, "txtJpegQuality");
+            this.txtJpegQuality.Name = "txtJpegQuality";
+            this.txtJpegQuality.TextChanged += new System.EventHandler(this.txtJpegQuality_TextChanged);
+            // 
+            // tbJpegQuality
+            // 
+            resources.ApplyResources(this.tbJpegQuality, "tbJpegQuality");
+            this.tbJpegQuality.Maximum = 100;
+            this.tbJpegQuality.Name = "tbJpegQuality";
+            this.tbJpegQuality.TickFrequency = 25;
+            this.tbJpegQuality.Scroll += new System.EventHandler(this.tbJpegQuality_Scroll);
+            // 
             // FPdfSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupImage);
             this.Controls.Add(this.linkPlaceholders);
             this.Controls.Add(this.txtDefaultFileName);
             this.Controls.Add(this.label1);
@@ -301,6 +352,9 @@ namespace NAPS2.WinForms
             this.groupMetadata.PerformLayout();
             this.groupProtection.ResumeLayout(false);
             this.groupProtection.PerformLayout();
+            this.groupImage.ResumeLayout(false);
+            this.groupImage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,5 +395,11 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.LinkLabel linkPlaceholders;
         private System.Windows.Forms.TextBox txtDefaultFileName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupImage;
+        private System.Windows.Forms.Label lblImageCompressionInfo;
+        private System.Windows.Forms.TextBox txtJpegQuality;
+        private System.Windows.Forms.TrackBar tbJpegQuality;
+        private System.Windows.Forms.CheckBox cbCompressImagePdf;
+        private System.Windows.Forms.Label lbCompressImageQuality;
     }
 }
