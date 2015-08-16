@@ -5,6 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
+    Copyright (C) 2015       Luca De Petrillo
     Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
@@ -27,11 +28,13 @@ namespace NAPS2.ImportExport.Pdf
     public class PdfSettings
     {
         private PdfMetadata metadata;
+        private PdfImageSettings imageSettings;
         private PdfEncryption encryption;
 
         public PdfSettings()
         {
             metadata = new PdfMetadata();
+            imageSettings = new PdfImageSettings();
             encryption = new PdfEncryption();
         }
 
@@ -47,6 +50,19 @@ namespace NAPS2.ImportExport.Pdf
                     throw new ArgumentNullException("value");
                 }
                 metadata = value;
+            }
+        }
+
+        public PdfImageSettings ImageSettings
+        {
+            get { return imageSettings; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+                imageSettings = value;
             }
         }
 

@@ -5,6 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
+    Copyright (C) 2015       Luca De Petrillo
     Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
@@ -34,6 +35,7 @@ namespace NAPS2.Scan.Images
         private Bitmap thumbnail;
         // The image's bit depth (or C24Bit if unknown)
         private readonly ScanBitDepth bitDepth;
+        private readonly bool highQuality;
         // Only one of the following (baseImage/baseImageEncoded) should have a value for any particular ScannedImage
         private readonly Bitmap baseImage;
         private readonly MemoryStream baseImageEncoded;
@@ -42,9 +44,12 @@ namespace NAPS2.Scan.Images
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private readonly List<Transform> transformList = new List<Transform>();
 
+        
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
             this.bitDepth = bitDepth;
+            this.highQuality = highQuality;
+
             ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
         }
 
@@ -125,6 +130,11 @@ namespace NAPS2.Scan.Images
         public void MovedTo(int index)
         {
             // Do nothing, this is only important for FileBasedScannedImage
+        }
+
+        public bool IsHighQuality()
+        {
+            return highQuality;
         }
     }
 }

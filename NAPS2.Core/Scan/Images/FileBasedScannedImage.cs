@@ -5,6 +5,7 @@
     Copyright (C) 2009       Pavel Sorejs
     Copyright (C) 2012       Michael Adams
     Copyright (C) 2013       Peter De Leeuw
+    Copyright (C) 2015       Luca De Petrillo
     Copyright (C) 2012-2015  Ben Olden-Cooligan
 
     This program is free software; you can redistribute it and/or
@@ -69,9 +70,12 @@ namespace NAPS2.Scan.Images
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private readonly List<Transform> transformList = new List<Transform>();
+        private readonly bool highQuality;
 
         public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
         {
+            this.highQuality = highQuality;
+
             Bitmap baseImage;
             MemoryStream baseImageEncoded;
             ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
@@ -213,6 +217,11 @@ namespace NAPS2.Scan.Images
             _recoveryIndexManager.Index.Images.Remove(indexImage);
             _recoveryIndexManager.Index.Images.Insert(index, indexImage);
             _recoveryIndexManager.Save();
+        }
+
+        public bool IsHighQuality()
+        {
+            return highQuality;
         }
     }
 }
