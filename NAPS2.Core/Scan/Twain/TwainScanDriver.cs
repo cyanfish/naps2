@@ -108,7 +108,18 @@ namespace NAPS2.Scan.Twain
                         var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;
-                        images.Add(scannedImageFactory.Create(result, bitDepth, ScanSettings.MaxQuality));
+                        var img = scannedImageFactory.Create(result, bitDepth, ScanSettings.MaxQuality);
+                        if (ScanSettings.DetectPatchCodes)
+                        {
+                            foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
+                            {
+                                if (patchCodeInfo.ReturnCode == ReturnCode.Success)
+                                {
+                                    img.PatchCode = GetPatchCode(patchCodeInfo);
+                                }
+                            }
+                        }
+                        images.Add(img);
                     }
                 }
             };
@@ -177,6 +188,27 @@ namespace NAPS2.Scan.Twain
             }
 
             return images;
+        }
+
+        private static PatchCode GetPatchCode(TWInfo patchCodeInfo)
+        {
+            switch ((NTwain.Data.PatchCode)patchCodeInfo.Item)
+            {
+                case NTwain.Data.PatchCode.Patch1:
+                    return PatchCode.Patch1;
+                case NTwain.Data.PatchCode.Patch2:
+                    return PatchCode.Patch2;
+                case NTwain.Data.PatchCode.Patch3:
+                    return PatchCode.Patch3;
+                case NTwain.Data.PatchCode.Patch4:
+                    return PatchCode.Patch4;
+                case NTwain.Data.PatchCode.Patch6:
+                    return PatchCode.Patch6;
+                case NTwain.Data.PatchCode.PatchT:
+                    return PatchCode.PatchT;
+                default:
+                    throw new ArgumentException();
+            }
         }
 
         private void ConfigureDS(DataSource ds)
@@ -255,6 +287,12 @@ namespace NAPS2.Scan.Twain
             int dpi = ScanSettings.Resolution.ToIntDpi();
             ds.Capabilities.ICapXResolution.SetValue(dpi);
             ds.Capabilities.ICapYResolution.SetValue(dpi);
+
+            // Patch codes
+            if (ScanSettings.DetectPatchCodes)
+            {
+                ds.Capabilities.ICapPatchCodeDetectionEnabled.SetValue(BoolType.True);
+            }
         }
     }
 }

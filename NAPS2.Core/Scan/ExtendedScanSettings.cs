@@ -62,6 +62,8 @@ namespace NAPS2.Scan
         public ScanDpi Resolution { get; set; }
 
         public ScanSource PaperSource { get; set; }
+
+        public bool DetectPatchCodes { get; set; }
     }
 
     public enum ScanSource
