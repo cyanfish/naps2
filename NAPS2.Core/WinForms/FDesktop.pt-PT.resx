@@ -379,7 +379,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsSaveImagesAll.Text" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Todos</value>
     </data>
     <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -658,7 +658,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsSavePDFAll.Text" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Todos</value>
     </data>
     <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -679,7 +679,7 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailPDFAll.Text" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Todos</value>
     </data>
     <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -778,7 +778,7 @@
         <value>164, 22</value>
     </data>
     <data name="customRotationToolStripMenuItem.Text" xml:space="preserve">
-        <value>Custom Rotation</value>
+        <value>Rotação personalizada</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>139, 22</value>
@@ -805,7 +805,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsReverseAll.Text" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Todos</value>
     </data>
     <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>

@@ -300,4 +300,7 @@
     <data name="ErrorSaving" xml:space="preserve">
         <value>儲存此檔時發生錯誤.</value>
     </data>
+    <data name="OfN" xml:space="preserve">
+        <value>/ {0}</value>
+    </data>
 </root>

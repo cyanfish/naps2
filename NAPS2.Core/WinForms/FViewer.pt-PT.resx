@@ -148,7 +148,7 @@
         <value>tiffViewer1</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=3.3.5.26990, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=4.1.1.632, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -265,7 +265,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>Custom Rotation</value>
+        <value>Rotação personalizada</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -303,11 +303,20 @@
     <data name="tsContrast.Text" xml:space="preserve">
         <value>Contraste</value>
     </data>
+    <data name="tsDelete.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsDelete.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsDelete.Text" xml:space="preserve">
+        <value>Eliminar</value>
+    </data>
     <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 0</value>
     </data>
     <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>215, 25</value>
+        <value>269, 25</value>
     </data>
     <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
@@ -464,10 +473,16 @@
     <data name="&gt;&gt;tsContrast.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
+    <data name="&gt;&gt;tsDelete.Name" xml:space="preserve">
+        <value>tsDelete</value>
+    </data>
+    <data name="&gt;&gt;tsDelete.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FViewer</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.26990, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.1.632, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

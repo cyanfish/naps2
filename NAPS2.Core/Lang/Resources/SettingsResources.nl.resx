@@ -160,7 +160,7 @@
         <value>Rechts</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm</value>
+        <value>Uitzoomen</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
         <value>in</value>
@@ -205,12 +205,12 @@
         <value>1:8</value>
     </data>
     <data name="Source_Duplex" xml:space="preserve">
-        <value>Duplex</value>
+        <value>Dubbelzijdig</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Invoer</value>
+        <value>Automatische documentinvoer</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
-        <value>Glas</value>
+        <value>Glasplaat</value>
     </data>
 </root>

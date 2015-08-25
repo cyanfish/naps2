@@ -286,18 +286,21 @@
         <value>Modifications non sauvegardées</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>Numérisation de la page {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>Le scanner sélectionné ne gère pas de dispositif d'alimentation. Utiliser un autre pilote si ce scanner en possède un.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>Aucune page dans le dispositif d'alimentation.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
         <value>You do not have permission to copy content from the file "{0}".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Une erreur s'est produite en tentant d'enregistrer le fichier.</value>
+    </data>
+    <data name="OfN" xml:space="preserve">
+        <value>de {0}</value>
     </data>
 </root>

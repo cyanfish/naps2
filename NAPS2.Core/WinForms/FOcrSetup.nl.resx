@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-        <value>PDFs doorzoekbaar maken met OCR</value>
+        <value>PDFs doorzoekbaar maken middels OCR</value>
     </data>
     <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
         <value>checkBoxEnableOcr</value>

@@ -154,7 +154,7 @@
         <value>tiffviewer1</value>
     </data>
     <data name="&gt;&gt;tiffviewer1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.TiffViewer, NAPS2.Core, Version=3.3.5.29101, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.TiffViewer, NAPS2.Core, Version=4.1.1.264, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tiffviewer1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -247,7 +247,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
-        <value>Zoom In</value>
+        <value>Aumentar o zoom</value>
     </data>
     <data name="tsZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -256,7 +256,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-        <value>Zoom Out</value>
+        <value>Reduzir o zoom</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>

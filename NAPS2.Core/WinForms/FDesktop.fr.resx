@@ -394,7 +394,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>Image Settings</value>
+        <value>Configuration d'image</value>
     </data>
     <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -673,7 +673,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>Réglages PDF</value>
     </data>
     <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -694,13 +694,13 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>Email Settings</value>
+        <value>Paramètres de messagerie</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>Réglages PDF</value>
     </data>
     <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
         <value>129, 22</value>

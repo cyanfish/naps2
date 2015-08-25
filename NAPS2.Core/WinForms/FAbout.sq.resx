@@ -544,7 +544,7 @@
         <value>9, 9, 9, 9</value>
     </data>
     <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-        <value>CenterScreen</value>
+        <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
         <value>Rreth</value>
@@ -553,6 +553,6 @@
         <value>FAbout</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.0.42816, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.1.5955, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

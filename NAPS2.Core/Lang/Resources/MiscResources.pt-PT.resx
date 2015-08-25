@@ -226,7 +226,7 @@
         <value>Not Now</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>A newer version of NAPS2 is available. Do you want to update now?</value>
+        <value>Uma nova versão de NAPS2 está disponível. Quer atualizar agora?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Installation Complete</value>
@@ -241,7 +241,7 @@
         <value>Installation Failed</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Todos</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
         <value>Selected ({0})</value>
@@ -274,7 +274,7 @@
         <value>Digitalizar</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>Tem a certeza que quer desfazer as alterações a {0} imagens?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
         <value>Reset Image</value>
@@ -298,6 +298,9 @@
         <value>You do not have permission to copy content from the file "{0}".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Ocorreu um erro ao tentar gravar o ficheiro.</value>
+    </data>
+    <data name="OfN" xml:space="preserve">
+        <value>of {0}</value>
     </data>
 </root>

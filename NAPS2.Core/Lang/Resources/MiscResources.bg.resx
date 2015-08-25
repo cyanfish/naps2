@@ -300,4 +300,7 @@
     <data name="ErrorSaving" xml:space="preserve">
         <value>Възникна грешка при опит за запис на файла.</value>
     </data>
+    <data name="OfN" xml:space="preserve">
+        <value>от {0}</value>
+    </data>
 </root>

@@ -394,7 +394,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>Image Settings</value>
+        <value>Instellingen afbeeldingen</value>
     </data>
     <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -454,7 +454,7 @@
         <value>65, 51</value>
     </data>
     <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Roteren</value>
+        <value>Draaien</value>
     </data>
     <data name="tsdRotate.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -673,7 +673,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>PDF instellingen</value>
     </data>
     <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -694,13 +694,13 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>Email Settings</value>
+        <value>E-mailinstellingen</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>PDF instellingen</value>
     </data>
     <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
         <value>129, 22</value>
@@ -772,7 +772,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsFlip.Text" xml:space="preserve">
-        <value>Omdraaien</value>
+        <value>Spiegelen</value>
     </data>
     <data name="customRotationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>

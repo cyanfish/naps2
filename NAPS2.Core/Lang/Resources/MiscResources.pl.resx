@@ -300,4 +300,7 @@
     <data name="ErrorSaving" xml:space="preserve">
         <value>Wystąpił błąd podczas próby zapisania pliku.</value>
     </data>
+    <data name="OfN" xml:space="preserve">
+        <value>z {0}</value>
+    </data>
 </root>

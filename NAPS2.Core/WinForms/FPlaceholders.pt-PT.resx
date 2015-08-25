@@ -442,7 +442,7 @@
         <value>13</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Day (01-31)</value>
+        <value>Dia (01-31)</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>

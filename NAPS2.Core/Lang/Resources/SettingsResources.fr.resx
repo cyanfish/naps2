@@ -163,7 +163,7 @@
         <value>cm</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>pouce</value>
+        <value>http://www.naps2.com</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
         <value>mm</value>
@@ -208,7 +208,7 @@
         <value>Recto-verso</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Chargeur</value>
+        <value>Dispositif d'alimentation</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
         <value>Vitre</value>
