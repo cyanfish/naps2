@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-06 11:08+0000\n"
-"PO-Revision-Date: 2015-07-15 19:25+0000\n"
+"PO-Revision-Date: 2015-08-12 15:26+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1436988351.0\n"
+"X-POOTLE-MTIME: 1439393213.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -76,7 +76,7 @@ msgstr "À propos"
 
 #: FScanProgress.resx$$this.Text$Message
 msgid "Acquiring data"
-msgstr ""
+msgstr "Acquisition des données"
 
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
@@ -88,39 +88,39 @@ msgstr "Tout ({0})"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
-msgstr ""
+msgstr "Permettre les annotations"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr ""
+msgstr "Permettre la copie du contenu"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr ""
+msgstr "Permettre la copie du contenu pour l'accessibilité"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr ""
+msgstr "Permettre l'assemblage du document"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
-msgstr ""
+msgstr "Permettre la modification du document"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr ""
+msgstr "Permettre l'édition de formulaire"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr ""
+msgstr "Permettre l'impression en qualité max."
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
-msgstr ""
+msgstr "Permettre l'impression"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr ""
+msgstr "Une erreur s'est produite en tentant d'enregistrer le fichier"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -152,27 +152,27 @@ msgstr "Faut-il vraiment annuler les modifications sur {0} image(s) ?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nom de la pièce jointe"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr ""
+msgstr "Auto-incrémentation (1 chiffre)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr ""
+msgstr "Auto-incrémentation (2 chiffres)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr ""
+msgstr "Auto-incrémentation (3 chiffres)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr ""
+msgstr "Auto-incrémentation (4 chiffres)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
@@ -261,7 +261,7 @@ msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr ""
+msgstr "Copyright © 2012-2015 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -292,12 +292,12 @@ msgstr "Rotation personnalisée"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
-msgstr ""
+msgstr "Jour (01-31)"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Name"
-msgstr ""
+msgstr "Nom de fichier par défaut"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -362,15 +362,15 @@ msgstr "Envoyer le PDF par courriel"
 #: FEmailSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsEmailSettings.Text$Message
 msgid "Email Settings"
-msgstr ""
+msgstr "Paramètres de messagerie"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "Chiffrer le PDF"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr ""
+msgstr "Chiffrement"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -391,11 +391,11 @@ msgstr "Fichier EXIF (*.exif)"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Chargeur"
+msgstr "Dispositif d'alimentation"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr ""
+msgstr "Nom du fichier"
 
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
@@ -405,6 +405,8 @@ msgstr "Retourner"
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
+"Pour les hautes qualités JPEG (> 80), utiliser le profil de Qualité maximale "
+"pour obtenir le meilleur résultat."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -428,7 +430,7 @@ msgstr "Alignement horizontal "
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "Heure (0-23)"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -441,7 +443,7 @@ msgstr "Image"
 #: FImageSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsImageSettings.Text$Message
 msgid "Image Settings"
-msgstr ""
+msgstr "Configuration d'image"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -473,11 +475,11 @@ msgstr "Fichier JPEG (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr ""
+msgstr "Qualité JPEG"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr ""
+msgstr "Mots-clés"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -501,15 +503,15 @@ msgstr "Qualité max. (fichiers volumineux)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
-msgstr ""
+msgstr "Métadonnées"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "Minute (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
-msgstr ""
+msgstr "Mois (01-12)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -537,7 +539,7 @@ msgstr "Aucun périphérique sélectionné"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr ""
+msgstr "Aucune page dans le dispositif d'alimentation"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -563,11 +565,11 @@ msgstr "Téléchargement OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "Configuration de l'OCR"
+msgstr "Configuration d'OCR"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr "Langue de l'OCR"
+msgstr "Langue d'OCR"
 
 #: FEmailSettings.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
@@ -595,13 +597,13 @@ msgstr "Écraser le fichier"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr ""
+msgstr "Mot de passe du propriétaire"
 
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
-msgstr ""
+msgstr "Réglages PDF"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF document (*.pdf)"
@@ -621,7 +623,7 @@ msgstr "Source du papier "
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: FPlaceholders.resx$$this.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
@@ -629,7 +631,7 @@ msgstr ""
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr ""
+msgstr "Chaînes de substitution"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -665,7 +667,7 @@ msgstr "Récupérer les images numérisées"
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr ""
+msgstr "Se souvenir de ces réglages"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -687,7 +689,7 @@ msgstr "Résolution "
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Rétablir les valeurs par défaut"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -754,11 +756,11 @@ msgstr "Image numérisée"
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
 msgid "Scanning page {0}"
-msgstr ""
+msgstr "Numérisation de la page {0}"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr ""
+msgstr "Seconde (00-59)"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
@@ -787,11 +789,11 @@ msgstr "Définir par défaut"
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
-msgstr ""
+msgstr "Afficher"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr ""
+msgstr "Sujet"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -818,6 +820,8 @@ msgstr "Le fichier \"{0}\" existe déjà. Faut-il l'écraser ?"
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
+"Le fichier suivant est chiffré, son ouverture nécessite un mot de passe : "
+"{0}"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -826,6 +830,8 @@ msgstr "Le scanner indiqué est introuvable"
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
+"Le scanner sélectionné ne gère pas de dispositif d'alimentation. Utiliser un "
+"autre pilote si ce scanner en possède un"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -833,7 +839,7 @@ msgstr "Le scanner sélectionné est éteint"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -861,7 +867,7 @@ msgstr "Configuration prédéfinie"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr ""
+msgstr "Mot de passe utilisateur"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
@@ -892,15 +898,15 @@ msgstr "X"
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
-msgstr ""
+msgstr "Année"
 
 #: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
-msgstr ""
+msgstr "Année (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file "{0}""
-msgstr ""
+msgstr "Vous n'avez pas la permission de copier le contenu du fichier \"{0}\"."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
@@ -938,11 +944,11 @@ msgstr "http://www.fatcow.com/free-icons"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr ""
+msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "pouce"
+msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
@@ -965,8 +971,8 @@ msgstr "Fichier {0} / {1}"
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
-"{0} image(s) numérisée(s) sur {1} à {2} n'a(ont) peut-être pas été sauvée(s) "
-"et est(sont) récupérable(s). Faut-il la(es) récupérer ?"
+"{0} image(s) numérisée(s) sur {1} le {2} n'a(ont) peut-être pas été "
+"sauvée(s) et est(sont) récupérable(s). Faut-il la(es) récupérer ?"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"

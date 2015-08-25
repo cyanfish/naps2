@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-06 11:09+0000\n"
-"PO-Revision-Date: 2015-07-27 04:22+0000\n"
+"PO-Revision-Date: 2015-08-16 20:00+0000\n"
 "Last-Translator: emphyrio <list@schuiling.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1437970975.0\n"
+"X-POOTLE-MTIME: 1439755246.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -74,7 +74,7 @@ msgstr "Over"
 
 #: FScanProgress.resx$$this.Text$Message
 msgid "Acquiring data"
-msgstr ""
+msgstr "Data wordt opgehaald"
 
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
@@ -86,39 +86,39 @@ msgstr "Alle ({0})"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
-msgstr ""
+msgstr "Annotaties toestaan"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr ""
+msgstr "Inhoud kopiëren toestaan"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr ""
+msgstr "Inhoud kopiëren voor toegankelijkheid toestaan"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr ""
+msgstr "Documentassemblage toestaan"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
-msgstr ""
+msgstr "Document bewerken toestaan"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr ""
+msgstr "Formulier invullen toestaan"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr ""
+msgstr "Afdrukken met volledige kwaliteit toestaan"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
-msgstr ""
+msgstr "Afdrukken toestaan"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr ""
+msgstr "Er was een fout bij het opslaan van het bestand"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -151,27 +151,27 @@ msgstr ""
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr ""
+msgstr "Naam bijlage"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr ""
+msgstr "Automatisch ophogend nummer (1 cijfer)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr ""
+msgstr "Automatisch ophogend nummer (2 cijfers)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr ""
+msgstr "Automatisch ophogend nummer (3 cijfers)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr ""
+msgstr "Automatisch ophogend nummer (4 cijfers)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
@@ -260,7 +260,7 @@ msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr ""
+msgstr "Copyright © 2012-2014 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -291,12 +291,12 @@ msgstr "Aangepast roteren"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
-msgstr ""
+msgstr "Dag (01-31)"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Name"
-msgstr ""
+msgstr "Standaard bestandsnaam"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -347,7 +347,7 @@ msgstr "Downloaden en installeren"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "Duplex"
+msgstr "Dubbelzijdig"
 
 #: FProfiles.resx$btnEdit.Text$Message
 #: FProfiles.resx$ctxEdit.Text$Message
@@ -361,15 +361,15 @@ msgstr "PDF mailen"
 #: FEmailSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsEmailSettings.Text$Message
 msgid "Email Settings"
-msgstr ""
+msgstr "E-mailinstellingen"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "PDF versleutelen"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr ""
+msgstr "Versleuteling"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -390,20 +390,22 @@ msgstr "Exchangeable Image File (*.exif)"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Invoer"
+msgstr "Automatische documentinvoer"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr ""
+msgstr "Bestandsnaam"
 
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
 msgid "Flip"
-msgstr "Omdraaien"
+msgstr "Spiegelen"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
+"Voor hoge kwaliteit JPEG (80+), gebruik profiel Maximale Kwaliteit voor het "
+"beste resultaat"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -415,7 +417,7 @@ msgstr "Meer talen installeren"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "Glas"
+msgstr "Glasplaat"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -427,7 +429,7 @@ msgstr "Horizontaal uitlijnen"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "Uur (0-23)"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -440,7 +442,7 @@ msgstr "Afbeelding"
 #: FImageSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsImageSettings.Text$Message
 msgid "Image Settings"
-msgstr ""
+msgstr "Instellingen afbeeldingen"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -472,11 +474,11 @@ msgstr "JPEG bestand (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr ""
+msgstr "JPEG kwaliteit"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr ""
+msgstr "Sleutelwoorden"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -492,7 +494,7 @@ msgstr "Hoofdwerkbalk"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "PDFs doorzoekbaar maken met OCR"
+msgstr "PDFs doorzoekbaar maken middels OCR"
 
 #: FEditScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
@@ -500,15 +502,15 @@ msgstr "Maximale kwaliteit (grote bestanden)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
-msgstr ""
+msgstr "Metadata"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "Minuut (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
-msgstr ""
+msgstr "Maand (01-12)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -536,7 +538,7 @@ msgstr "Geen apparaat geselecteerd"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr ""
+msgstr "Geen pagina's in de invoerlade"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -594,13 +596,13 @@ msgstr "Bestand overschrijven"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr ""
+msgstr "Wachtwoord eigenaar"
 
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
-msgstr ""
+msgstr "PDF instellingen"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF document (*.pdf)"
@@ -620,7 +622,7 @@ msgstr "Papierbron"
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: FPlaceholders.resx$$this.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
@@ -628,7 +630,7 @@ msgstr ""
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr ""
+msgstr "Placeholders"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -664,7 +666,7 @@ msgstr "Herstel gescande afbeeldingen"
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr ""
+msgstr "Onthoud deze instellingen"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -686,7 +688,7 @@ msgstr "Resolutie"
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Standaardinstellingen herstellen"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -707,7 +709,7 @@ msgstr "Rechts"
 #: FViewer.resx$tsdRotate.Text$Message
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
-msgstr "Roteren"
+msgstr "Draaien"
 
 #: FViewer.resx$tsRotateLeft.Text$Message
 #: FDesktop.resx$tsRotateLeft.Text$Message
@@ -753,11 +755,11 @@ msgstr "Gescande afbeelding"
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
 msgid "Scanning page {0}"
-msgstr ""
+msgstr "Scannen pagina {0}"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr ""
+msgstr "Seconde (00-59)"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
@@ -786,11 +788,11 @@ msgstr "Als standaard instellen"
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
-msgstr ""
+msgstr "Tonen"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr ""
+msgstr "Onderwerp"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -802,7 +804,7 @@ msgstr "TWAIN driver"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file "{0}" could not be imported"
-msgstr "Bestand \"{0}\"kon niet worden geïmporteerd"
+msgstr "Bestand \"{0}\" kon niet worden geïmporteerd"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
@@ -817,6 +819,8 @@ msgstr "Bestand {0} bestaat al. Wilt u het bestand overschrijven?"
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
+"Het volgende bestand is versleuteld en vereist een wachtwoord voor openen: "
+"{0}"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -825,6 +829,8 @@ msgstr "Kan de geselecteerde scanner niet vinden"
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
+"Deze scanner ondersteunt geen automatische documentinvoer. Als uw scanner "
+"dit wel heeft, probeer dan een andere driver"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -832,7 +838,7 @@ msgstr "De geselecteerde scanner is offline"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -860,7 +866,7 @@ msgstr "Gebruik voorgedefinieerd"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr ""
+msgstr "Wachtwoord gebruiker"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
@@ -889,15 +895,15 @@ msgstr "X"
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
-msgstr ""
+msgstr "Jaar"
 
 #: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
-msgstr ""
+msgstr "Jaar (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file "{0}""
-msgstr ""
+msgstr "U heeft geen toestemming voor kopiëren van inhoud uit bestand \"{0}\""
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
@@ -922,13 +928,12 @@ msgid "Zoom In"
 msgstr "Inzoomen"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#, fuzzy
 msgid "Zoom Out"
 msgstr "Uitzoomen"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "cm"
+msgstr "Uitzoomen"
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
@@ -936,7 +941,7 @@ msgstr "http://www.fatcow.com/free-icons"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr ""
+msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"

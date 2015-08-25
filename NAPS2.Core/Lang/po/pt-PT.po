@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-06 11:09+0000\n"
-"PO-Revision-Date: 2015-06-01 20:20+0000\n"
-"Last-Translator: Ben <blue0fish@gmail.com>\n"
+"PO-Revision-Date: 2015-08-11 15:45+0000\n"
+"Last-Translator: manuelp135 <manuelp135@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-PT\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1433190054.0\n"
+"X-POOTLE-MTIME: 1439307943.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -53,7 +53,7 @@ msgstr "800 ppp"
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr ""
+msgstr "Uma nova versão de NAPS2 está disponível. Quer atualizar agora?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -74,27 +74,28 @@ msgstr "Sobre"
 
 #: FScanProgress.resx$$this.Text$Message
 msgid "Acquiring data"
-msgstr ""
+msgstr "A obter dados"
 
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#, fuzzy
 msgid "All ({0})"
-msgstr ""
+msgstr "Todos"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
-msgstr ""
+msgstr "Permitir Anotações"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr ""
+msgstr "Permitir Cópia de Conteúdo"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr ""
+msgstr "Permitir Cópia de Conteúdo para Acessibilidade"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
@@ -106,19 +107,19 @@ msgstr ""
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr ""
+msgstr "Permitir Preenchimento de Formulário"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr ""
+msgstr "Permitir Impressão de Alta Qualidade"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
-msgstr ""
+msgstr "Permitir Impressão"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr ""
+msgstr "Ocorreu um erro ao tentar gravar o ficheiro"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -146,15 +147,15 @@ msgstr "Confirma que quer eliminar {0} perfis? "
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr ""
+msgstr "Tem a certeza que quer desfazer as alterações a {0} imagens?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nome do anexo"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
@@ -258,8 +259,9 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
+#, fuzzy
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr ""
+msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -281,16 +283,16 @@ msgstr ""
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr ""
+msgstr "Tamanho de página personalizado"
 
 #: FViewer.resx$tsCustomRotation.Text$Message
 #: FDesktop.resx$customRotationToolStripMenuItem.Text$Message
 msgid "Custom Rotation"
-msgstr ""
+msgstr "Rotação personalizada"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
-msgstr ""
+msgstr "Dia (01-31)"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
@@ -848,8 +850,9 @@ msgid "Update NAPS2"
 msgstr ""
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
+#, fuzzy
 msgid "Use native UI"
-msgstr ""
+msgstr "Usar WIA UI nativo"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -913,12 +916,14 @@ msgid "Zoom Actual"
 msgstr ""
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
+#, fuzzy
 msgid "Zoom In"
-msgstr ""
+msgstr "Aumentar o zoom"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
+#, fuzzy
 msgid "Zoom Out"
-msgstr ""
+msgstr "Reduzir o zoom"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
