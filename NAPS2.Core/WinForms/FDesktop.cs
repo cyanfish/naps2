@@ -474,6 +474,7 @@ namespace NAPS2.WinForms
                     UpdateScanButton();
 
                     scanPerformer.PerformScan(profile, this, this);
+                    Activate();
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, item);
             }
@@ -494,6 +495,7 @@ namespace NAPS2.WinForms
             if (profileManager.DefaultProfile != null)
             {
                 scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
+                Activate();
             }
             else
             {
@@ -522,6 +524,7 @@ namespace NAPS2.WinForms
             UpdateScanButton();
 
             scanPerformer.PerformScan(editSettingsForm.ScanSettings, this, this);
+            Activate();
         }
 
         private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
