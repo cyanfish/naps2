@@ -96,19 +96,22 @@ namespace NAPS2.ImportExport.Pdf
                     PdfPage newPage = document.AddPage();
                     newPage.Width = (int)realWidth;
                     newPage.Height = (int)realHeight;
-                    XGraphics gfx = XGraphics.FromPdfPage(newPage);
-                    if (ocrResult != null)
+                    using (XGraphics gfx = XGraphics.FromPdfPage(newPage))
                     {
-                        var tf = new XTextFormatter(gfx);
-                        foreach (var element in ocrResult.Elements)
+                        if (ocrResult != null)
                         {
-                            var adjustedBounds = AdjustBounds(element.Bounds, hAdjust, vAdjust);
-                            var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                            var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.Unicode));
-                            tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
+                            var tf = new XTextFormatter(gfx);
+                            foreach (var element in ocrResult.Elements)
+                            {
+                                var adjustedBounds = AdjustBounds(element.Bounds, hAdjust, vAdjust);
+                                var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+                                var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+                                    new XPdfFontOptions(PdfFontEncoding.Unicode));
+                                tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
+                            }
                         }
+                        gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
                     }
-                    gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
                     i++;
                 }
             }
