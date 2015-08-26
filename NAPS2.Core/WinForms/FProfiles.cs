@@ -231,6 +231,7 @@ namespace NAPS2.WinForms
             }
             profileManager.Save();
             scanPerformer.PerformScan(SelectedProfile, this, ScanReceiver);
+            Activate();
         }
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
