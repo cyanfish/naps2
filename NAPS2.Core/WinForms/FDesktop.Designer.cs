@@ -58,6 +58,8 @@ namespace NAPS2.WinForms
             this.tsdSaveImages = new System.Windows.Forms.ToolStripSplitButton();
             this.tsSaveImagesAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSaveImagesSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsImageSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdEmailPDF = new System.Windows.Forms.ToolStripSplitButton();
             this.tsEmailPDFAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsEmailPDFSelected = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,14 +89,16 @@ namespace NAPS2.WinForms
             this.tsReverse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsReverseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsReverseSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsFrontBackAdf = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsDelete = new System.Windows.Forms.ToolStripButton();
             this.tsClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsImageSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsFrontBackAdfSort = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsFrontBackAdfDeSort = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -320,6 +324,17 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsSaveImagesSelected, "tsSaveImagesSelected");
             this.tsSaveImagesSelected.Click += new System.EventHandler(this.tsSaveImagesSelected_Click);
             // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            // 
+            // tsImageSettings
+            // 
+            this.tsImageSettings.Name = "tsImageSettings";
+            resources.ApplyResources(this.tsImageSettings, "tsImageSettings");
+            this.tsImageSettings.Click += new System.EventHandler(this.tsImageSettings_Click);
+            // 
             // tsdEmailPDF
             // 
             this.tsdEmailPDF.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -495,7 +510,9 @@ namespace NAPS2.WinForms
             this.tsInterleave,
             this.tsDeinterleave,
             this.toolStripSeparator1,
-            this.tsReverse});
+            this.tsReverse,
+            this.toolStripMenuItem1,
+            this.tsFrontBackAdf});
             this.tsdReorder.Image = global::NAPS2.Icons.arrow_refresh;
             resources.ApplyResources(this.tsdReorder, "tsdReorder");
             this.tsdReorder.Name = "tsdReorder";
@@ -539,6 +556,19 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsReverseSelected, "tsReverseSelected");
             this.tsReverseSelected.Click += new System.EventHandler(this.tsReverseSelected_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
+            // tsFrontBackAdf
+            // 
+            this.tsFrontBackAdf.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsFrontBackAdfSort,
+            this.tsFrontBackAdfDeSort});
+            this.tsFrontBackAdf.Name = "tsFrontBackAdf";
+            resources.ApplyResources(this.tsFrontBackAdf, "tsFrontBackAdf");
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -580,16 +610,17 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
-            // toolStripSeparator11
+            // tsFrontBackAdfSort
             // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            this.tsFrontBackAdfSort.Name = "tsFrontBackAdfSort";
+            resources.ApplyResources(this.tsFrontBackAdfSort, "tsFrontBackAdfSort");
+            this.tsFrontBackAdfSort.Click += new System.EventHandler(this.tsFrontBackAdfSort_Click);
             // 
-            // tsImageSettings
+            // tsFrontBackAdfDeSort
             // 
-            this.tsImageSettings.Name = "tsImageSettings";
-            resources.ApplyResources(this.tsImageSettings, "tsImageSettings");
-            this.tsImageSettings.Click += new System.EventHandler(this.tsImageSettings_Click);
+            this.tsFrontBackAdfDeSort.Name = "tsFrontBackAdfDeSort";
+            resources.ApplyResources(this.tsFrontBackAdfDeSort, "tsFrontBackAdfDeSort");
+            this.tsFrontBackAdfDeSort.Click += new System.EventHandler(this.tsFrontBackAdfDeSort_Click);
             // 
             // FDesktop
             // 
@@ -676,6 +707,10 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnZoomOut;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem tsImageSettings;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsFrontBackAdf;
+        private System.Windows.Forms.ToolStripMenuItem tsFrontBackAdfSort;
+        private System.Windows.Forms.ToolStripMenuItem tsFrontBackAdfDeSort;
     }
 }
 
