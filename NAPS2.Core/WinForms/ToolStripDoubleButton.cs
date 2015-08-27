@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -20,7 +21,9 @@ namespace NAPS2.WinForms
         public Image ImageFirst { get; set; }
         public Image ImageSecond { get; set; }
 
+        [Localizable(true)]
         public string TextFirst { get; set; }
+        [Localizable(true)]
         public string TextSecond { get; set; }
 
         public override Size GetPreferredSize(Size constrainingSize)
