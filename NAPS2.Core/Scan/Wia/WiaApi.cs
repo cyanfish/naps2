@@ -188,6 +188,11 @@ namespace NAPS2.Scan.Wia
 
         public static void Configure(Device device, Item item, ExtendedScanSettings settings)
         {
+            if (settings.UseNativeUI)
+            {
+                return;
+            }
+
             ConfigureDeviceProperties(device, settings);
             ConfigureItemProperties(device, item, settings);
         }
