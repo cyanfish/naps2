@@ -35,7 +35,7 @@ namespace NAPS2.Ocr
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = Path.Combine(ocrDependencyManager.GetExecutableDir().FullName, "tesseract.exe"),
-                    Arguments = string.Format("\"{0}\" \"{1}\" hocr -l {2}", tempImageFilePath, tempHocrFilePath, langCode),
+                    Arguments = string.Format("\"{0}\" \"{1}\" -l {2} hocr", tempImageFilePath, tempHocrFilePath, langCode),
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
