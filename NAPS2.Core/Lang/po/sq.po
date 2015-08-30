@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-06 11:09+0000\n"
+"POT-Creation-Date: 2015-08-27 21:08+0000\n"
 "PO-Revision-Date: 2015-08-07 09:52+0000\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,11 +87,11 @@ msgstr "Rreth"
 msgid "Acquiring data"
 msgstr ""
 
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
-#: FDesktop.resx$tsSavePDFAll.Text$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "Të gjitha ({0})"
 
@@ -209,16 +209,16 @@ msgstr "Skedarët Bitmap (*.bmp)"
 msgid "Black & White"
 msgstr "Bardhë e zi"
 
-#: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
+#: FDesktop.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Shkëlqimi"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
@@ -228,8 +228,8 @@ msgstr "Shkëlqimi"
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Anulo"
@@ -318,6 +318,7 @@ msgstr "Heq përzierjen"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -524,6 +525,14 @@ msgstr ""
 msgid "Month (01-12)"
 msgstr ""
 
+#: FDesktop.resx$tsMove.TextSecond$Message
+msgid "Move Down"
+msgstr "Lëviz poshtë"
+
+#: FDesktop.resx$tsMove.TextFirst$Message
+msgid "Move Up"
+msgstr "Lëviz lart"
+
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
 msgstr "NAPS2"
@@ -588,12 +597,12 @@ msgstr "Gjuha e OCR"
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
-#: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
@@ -610,8 +619,8 @@ msgstr "Mbishkruaj skedarin"
 msgid "Owner Password"
 msgstr ""
 
-#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
+#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
 msgstr ""
@@ -636,9 +645,9 @@ msgstr "Burimi i letrës"
 msgid "Password"
 msgstr ""
 
-#: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -696,8 +705,8 @@ msgstr ""
 msgid "Resolution"
 msgstr "Rezolucioni"
 
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr ""
@@ -786,10 +795,10 @@ msgid "Select one or more languages"
 msgstr "Zgjidh një ose më shumë gjuhë"
 
 #: FDesktop.resx$tsReverseSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
 msgstr "E zgjedhur ({0})"
 
@@ -961,6 +970,7 @@ msgstr "inç"
 msgid "mm"
 msgstr "mm"
 
+#: MiscResources.resx$OfN$Message
 #: FViewer.resx$lblPageTotal.Text$Message
 msgid "of {0}"
 msgstr ""
@@ -999,12 +1009,6 @@ msgstr "{0} nga {1}"
 
 #~ msgid "Manage Profiles"
 #~ msgstr "Menaxho profilet"
-
-#~ msgid "Move Down"
-#~ msgstr "Lëviz poshtë"
-
-#~ msgid "Move Up"
-#~ msgstr "Lëviz lart"
 
 #~ msgid "Quick Scan"
 #~ msgstr "Skanim i shpejtë"

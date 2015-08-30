@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-06 11:09+0000\n"
+"POT-Creation-Date: 2015-08-27 21:08+0000\n"
 "PO-Revision-Date: 2015-08-07 11:52+0000\n"
 "Last-Translator: danfong <danfong.hsieh@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,11 +76,11 @@ msgstr "關於"
 msgid "Acquiring data"
 msgstr "正在取得資料"
 
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
-#: FDesktop.resx$tsSavePDFAll.Text$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "全部 ({0})"
 
@@ -196,16 +196,16 @@ msgstr "點陣圖檔 (*.bmp)"
 msgid "Black & White"
 msgstr "黑白"
 
-#: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
+#: FDesktop.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "亮度"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
@@ -215,8 +215,8 @@ msgstr "亮度"
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "取消"
@@ -303,6 +303,7 @@ msgstr "去掉間隔"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -509,6 +510,14 @@ msgstr "分鐘 (00-59)"
 msgid "Month (01-12)"
 msgstr "月份 (01-12)"
 
+#: FDesktop.resx$tsMove.TextSecond$Message
+msgid "Move Down"
+msgstr "下移"
+
+#: FDesktop.resx$tsMove.TextFirst$Message
+msgid "Move Up"
+msgstr "上移"
+
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
 msgstr "NAPS2"
@@ -573,12 +582,12 @@ msgstr "OCR 語言"
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
-#: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "確定"
@@ -595,8 +604,8 @@ msgstr "覆寫檔案"
 msgid "Owner Password"
 msgstr "擁有者密碼"
 
-#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
+#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
 msgstr "PDF 設定"
@@ -621,9 +630,9 @@ msgstr "紙張來源"
 msgid "Password"
 msgstr "密碼"
 
-#: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -681,8 +690,8 @@ msgstr "重設圖像"
 msgid "Resolution"
 msgstr "解析度"
 
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "還原預設值"
@@ -771,10 +780,10 @@ msgid "Select one or more languages"
 msgstr "請選擇一個或多個語言"
 
 #: FDesktop.resx$tsReverseSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
 msgstr "已選 ({0})"
 
@@ -942,6 +951,7 @@ msgstr "單位"
 msgid "mm"
 msgstr "毫米"
 
+#: MiscResources.resx$OfN$Message
 #: FViewer.resx$lblPageTotal.Text$Message
 msgid "of {0}"
 msgstr "/ {0}"
@@ -984,12 +994,6 @@ msgstr "{0} / {1}"
 
 #~ msgid "Manage Profiles"
 #~ msgstr "管理設定檔"
-
-#~ msgid "Move Down"
-#~ msgstr "下移"
-
-#~ msgid "Move Up"
-#~ msgstr "上移"
 
 #~ msgid "Quick Scan"
 #~ msgstr "快速掃瞄"

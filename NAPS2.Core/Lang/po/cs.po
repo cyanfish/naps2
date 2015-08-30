@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-06 11:08+0000\n"
+"POT-Creation-Date: 2015-08-27 21:07+0000\n"
 "PO-Revision-Date: 2015-08-07 09:55+0000\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,11 +77,11 @@ msgstr "O programu"
 msgid "Acquiring data"
 msgstr ""
 
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
-#: FDesktop.resx$tsSavePDFAll.Text$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "Vše"
 
@@ -197,16 +197,16 @@ msgstr "Soubor Bitmap (*.bmp)"
 msgid "Black & White"
 msgstr "Černobíle"
 
-#: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
+#: FDesktop.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Jas"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
@@ -216,8 +216,8 @@ msgstr "Jas"
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Zrušit"
@@ -304,6 +304,7 @@ msgstr ""
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -510,6 +511,14 @@ msgstr ""
 msgid "Month (01-12)"
 msgstr ""
 
+#: FDesktop.resx$tsMove.TextSecond$Message
+msgid "Move Down"
+msgstr "Posunout níž"
+
+#: FDesktop.resx$tsMove.TextFirst$Message
+msgid "Move Up"
+msgstr "Posunout výš"
+
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
 msgstr ""
@@ -574,12 +583,12 @@ msgstr ""
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
-#: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
@@ -596,8 +605,8 @@ msgstr "Přepsat soubor"
 msgid "Owner Password"
 msgstr ""
 
-#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
+#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
 msgstr ""
@@ -622,9 +631,9 @@ msgstr "Zdroj papíru"
 msgid "Password"
 msgstr ""
 
-#: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -682,8 +691,8 @@ msgstr ""
 msgid "Resolution"
 msgstr "Rozlišení"
 
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr ""
@@ -772,10 +781,10 @@ msgid "Select one or more languages"
 msgstr "Vyberte jeden nebo více jazyků"
 
 #: FDesktop.resx$tsReverseSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
 msgstr ""
 
@@ -941,6 +950,7 @@ msgstr ""
 msgid "mm"
 msgstr "mm"
 
+#: MiscResources.resx$OfN$Message
 #: FViewer.resx$lblPageTotal.Text$Message
 msgid "of {0}"
 msgstr ""
@@ -971,12 +981,6 @@ msgstr "{0} of {1}"
 
 #~ msgid "Manage Profiles"
 #~ msgstr "Spravovat profily"
-
-#~ msgid "Move Down"
-#~ msgstr "Posunout níž"
-
-#~ msgid "Move Up"
-#~ msgstr "Posunout výš"
 
 #~ msgid "Use native WIA UI"
 #~ msgstr "Použít nativní WIA UI"

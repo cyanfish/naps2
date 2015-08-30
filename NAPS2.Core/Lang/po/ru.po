@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-06 11:09+0000\n"
+"POT-Creation-Date: 2015-08-27 21:08+0000\n"
 "PO-Revision-Date: 2015-08-07 10:02+0000\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,11 +76,11 @@ msgstr "О программе"
 msgid "Acquiring data"
 msgstr "Получаю данные"
 
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: MiscResources.resx$AllCount$Message
-#: FDesktop.resx$tsSavePDFAll.Text$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "Все ({0})"
 
@@ -196,16 +196,16 @@ msgstr "Файлы несжатых рисунков (*.bmp)"
 msgid "Black & White"
 msgstr "Чёрно-белый"
 
-#: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
+#: FDesktop.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Яркость"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
@@ -215,8 +215,8 @@ msgstr "Яркость"
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Отменить"
@@ -303,6 +303,7 @@ msgstr "Устранение чередования"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
@@ -513,6 +514,14 @@ msgstr "Минута (00-59)"
 msgid "Month (01-12)"
 msgstr "Месяц (01-12)"
 
+#: FDesktop.resx$tsMove.TextSecond$Message
+msgid "Move Down"
+msgstr "Переместить вниз"
+
+#: FDesktop.resx$tsMove.TextFirst$Message
+msgid "Move Up"
+msgstr "Переместить вверх"
+
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
 msgstr "NAPS2"
@@ -577,12 +586,12 @@ msgstr "Язык распознавания"
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
-#: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
@@ -599,8 +608,8 @@ msgstr "Заменить файл"
 msgid "Owner Password"
 msgstr "Пароль Владельца"
 
-#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
+#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
 msgstr "Настройки PDF"
@@ -625,9 +634,9 @@ msgstr "Источник бумаги"
 msgid "Password"
 msgstr "Пароль"
 
-#: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -685,8 +694,8 @@ msgstr "Сбросить Изображение"
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Восстановить По Умолчанию"
@@ -775,10 +784,10 @@ msgid "Select one or more languages"
 msgstr "Выберите один или несколько языков"
 
 #: FDesktop.resx$tsReverseSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
-#: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
 msgstr "Выбранные ({0})"
 
@@ -953,6 +962,7 @@ msgstr "дюйм"
 msgid "mm"
 msgstr "мм"
 
+#: MiscResources.resx$OfN$Message
 #: FViewer.resx$lblPageTotal.Text$Message
 msgid "of {0}"
 msgstr "из {0}"
@@ -991,12 +1001,6 @@ msgstr "{0} из {1}"
 
 #~ msgid "Manage Profiles"
 #~ msgstr "Управление профилями"
-
-#~ msgid "Move Down"
-#~ msgstr "Переместить вниз"
-
-#~ msgid "Move Up"
-#~ msgstr "Переместить вверх"
 
 #~ msgid "Zoom in"
 #~ msgstr "Приблизить"
