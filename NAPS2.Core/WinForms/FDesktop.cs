@@ -439,12 +439,14 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                var viewer = FormFactory.Create<FViewer>();
-                viewer.ImageList = imageList;
-                viewer.ImageIndex = SelectedIndices.First();
-                viewer.DeleteCallback = UpdateThumbnails;
-                viewer.UpdateCallback = UpdateThumbnails;
-                viewer.ShowDialog();
+                using (var viewer = FormFactory.Create<FViewer>())
+                {
+                    viewer.ImageList = imageList;
+                    viewer.ImageIndex = SelectedIndices.First();
+                    viewer.DeleteCallback = UpdateThumbnails;
+                    viewer.UpdateCallback = UpdateThumbnails;
+                    viewer.ShowDialog();
+                }
             }
         }
 
