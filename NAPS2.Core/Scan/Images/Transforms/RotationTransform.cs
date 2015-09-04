@@ -89,7 +89,7 @@ namespace NAPS2.Scan.Images.Transforms
             }
             using (var g = Graphics.FromImage(result))
             {
-                // TODO: Background (maybe)
+                g.Clear(Color.White);
                 g.TranslateTransform(result.Width / 2.0f, result.Height / 2.0f);
                 g.RotateTransform((float)Angle);
                 g.TranslateTransform(-bitmap.Width / 2.0f, -bitmap.Height / 2.0f);
