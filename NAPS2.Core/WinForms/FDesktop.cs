@@ -817,6 +817,7 @@ namespace NAPS2.WinForms
                             AppendThumbnail(img);
                             thumbnailList1.Refresh();
                             changeTracker.HasUnsavedChanges = true;
+                            Application.DoEvents();
                         }
                     }
                     catch (Exception ex)
