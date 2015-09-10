@@ -11,6 +11,7 @@ using NAPS2.Scan.Images;
 using NAPS2.Util;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
+using PdfSharp.Pdf.Filters;
 using PdfSharp.Pdf.IO;
 
 namespace NAPS2.ImportExport.Pdf
@@ -100,27 +101,43 @@ namespace NAPS2.ImportExport.Pdf
                 // Is external object an image?
                 if (xObject != null && xObject.Elements.GetString("/Subtype") == "/Image")
                 {
-                    switch (xObject.Elements.GetName("/Filter"))
+                    // Support multiple filter schemes
+                    // For JPEG: "/DCTDecode" OR ["/DCTDecode", "/FlateDecode"]
+                    // For PNG: "/FlateDecode"
+                    var element = xObject.Elements.Single(x => x.Key == "/Filter");
+                    var elementAsArray = element.Value as PdfArray;
+                    var elementAsName = element.Value as PdfName;
+                    if (elementAsArray != null)
                     {
-                        case "/DCTDecode":
-                            yield return ExportJpegImage(page, xObject);
-                            break;
-
-                        case "/FlateDecode":
-                            yield return ExportAsPngImage(page, xObject);
-                            break;
-
-                        default:
-                            throw new NotImplementedException("Unsupported image encoding");
+                        // JPEG ["/DCTDecode", "/FlateDecode"]
+                        yield return ExportJpegImage(page, Filtering.Decode(xObject.Stream.Value, "/FlateDecode"));
+                    }
+                    else if (elementAsName != null)
+                    {
+                        switch (elementAsName.Value)
+                        {
+                            case "/DCTDecode":
+                                yield return ExportJpegImage(page, xObject.Stream.Value);
+                                break;
+                            case "/FlateDecode":
+                                yield return ExportAsPngImage(page, xObject);
+                                break;
+                            default:
+                                throw new NotImplementedException("Unsupported image encoding");
+                        }
+                    }
+                    else
+                    {
+                        throw new NotImplementedException("Unsupported filter");
                     }
                 }
             }
         }
 
-        private IScannedImage ExportJpegImage(PdfPage page, PdfDictionary image)
+        private IScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes)
         {
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
-            using (var memoryStream = new MemoryStream(image.Stream.Value))
+            using (var memoryStream = new MemoryStream(imageBytes))
             {
                 using (var bitmap = new Bitmap(memoryStream))
                 {
