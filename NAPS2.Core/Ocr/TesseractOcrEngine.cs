@@ -21,8 +21,13 @@ namespace NAPS2.Ocr
 
         public bool CanProcess(string langCode)
         {
-            return ocrDependencyManager.IsExecutableDownloaded &&
-                ocrDependencyManager.GetDownloadedLanguages().Any(x => x.Code == langCode);
+            if (string.IsNullOrEmpty(langCode) || !ocrDependencyManager.IsExecutableDownloaded)
+            {
+                return false;
+            }
+            var availableLanguages = ocrDependencyManager.GetDownloadedLanguages();
+            // Support multiple specified languages (e.g. "eng+fra")
+            return langCode.Split('+').All(code => availableLanguages.Any(x => x.Code == code));
         }
 
         public OcrResult ProcessImage(Image image, string langCode)
