@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-27 21:07+0000\n"
-"PO-Revision-Date: 2015-08-12 15:26+0000\n"
+"PO-Revision-Date: 2015-09-08 11:24+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1439393213.0\n"
+"X-POOTLE-MTIME: 1441711447.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -112,7 +112,7 @@ msgstr "Permettre l'édition de formulaire"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr "Permettre l'impression en qualité max."
+msgstr "Permettre l'impression en Qualité maximale"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
@@ -128,7 +128,7 @@ msgstr "Une erreur s'est produite en tentant d'envoyer un courriel"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "Une erreur s'est produite avec le pilote du scanner"
+msgstr "Une erreur s'est produite avec le pilote de numérisation"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -192,7 +192,7 @@ msgstr "Profondeur d'échantillonnage "
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "Fichiers de dessin (*.bmp)"
+msgstr "Fichiers Bitmap (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
@@ -238,7 +238,7 @@ msgstr "Sélectionner..."
 #: MiscResources.resx$Clear$Message
 #: FDesktop.resx$tsClear.Text$Message
 msgid "Clear"
-msgstr "Effacer"
+msgstr "Tout supprimer"
 
 #: FDesktop.resx$tsContrast.Text$Message
 #: FViewer.resx$tsContrast.Text$Message
@@ -288,7 +288,7 @@ msgstr "Taille de page personnalisée"
 #: FViewer.resx$tsCustomRotation.Text$Message
 #: FDesktop.resx$customRotationToolStripMenuItem.Text$Message
 msgid "Custom Rotation"
-msgstr "Rotation personnalisée"
+msgstr "Rotation personnalisée..."
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -301,7 +301,7 @@ msgstr "Nom de fichier par défaut"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "Désentrelacer"
+msgstr "Classer par parité"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
@@ -358,7 +358,7 @@ msgstr "Éditer"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "Envoyer le PDF par courriel"
+msgstr "Envoyer en PDF par courriel"
 
 #: FEmailSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsEmailSettings.Text$Message
@@ -375,7 +375,7 @@ msgstr "Chiffrement"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Métafichier Windows (*.emf)"
+msgstr "Fichier EMF (*.emf)"
 
 #: MiscResources.resx$Error$Message
 msgid "Error"
@@ -396,7 +396,7 @@ msgstr "Dispositif d'alimentation"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr "Nom du fichier"
+msgstr "Nom du fichier :"
 
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
@@ -407,7 +407,7 @@ msgstr "Retourner"
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
 "Pour les hautes qualités JPEG (> 80), utiliser le profil de Qualité maximale "
-"pour obtenir le meilleur résultat."
+"pour obtenir le meilleur résultat"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -448,7 +448,7 @@ msgstr "Configuration d'image"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
-msgstr "Importer"
+msgstr "Importer en PDF"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -468,7 +468,7 @@ msgstr "Échec de l'installation"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "Entrelacer"
+msgstr "Classer numériquement"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -496,11 +496,11 @@ msgstr "Barre d'outils principale"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Permettre la recherche dans les PDFs (OCR)"
+msgstr "Permettre la recherche dans les fichiers PDF (ROC)"
 
 #: FEditScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr "Qualité max. (fichiers volumineux)"
+msgstr "Qualité maximale (fichiers volumineux)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
@@ -516,11 +516,11 @@ msgstr "Mois (01-12)"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
-msgstr "Déplacer vers le bas"
+msgstr "Plus bas"
 
 #: FDesktop.resx$tsMove.TextFirst$Message
 msgid "Move Up"
-msgstr "Déplacer vers le haut"
+msgstr "Plus haut"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -536,7 +536,7 @@ msgstr "Nouveau"
 
 #: FDesktop.resx$tsNewProfile.Text$Message
 msgid "New Profile"
-msgstr "Nouveau profil"
+msgstr "Nouveau profil..."
 
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
@@ -566,19 +566,19 @@ msgstr "Pas maintenant"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "Reconnaissance de caractères (OCR)"
+msgstr "Reconnaissance de caractères (ROC)"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr "Téléchargement OCR"
+msgstr "Téléchargement de ROC"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "Configuration d'OCR"
+msgstr "Configuration de ROC"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr "Langue d'OCR"
+msgstr "Langue de ROC"
 
 #: FEmailSettings.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
@@ -645,7 +645,7 @@ msgstr "Chaînes de substitution"
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
 msgid "Preview"
-msgstr "Aperçu"
+msgstr "Aperçu "
 
 #: FViewer.resx$tsPrev.Text$Message
 msgid "Previous"
@@ -670,7 +670,7 @@ msgstr "Récupérer"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr "Récupérer les images numérisées"
+msgstr "Récupérer des images numérisées"
 
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
@@ -698,7 +698,7 @@ msgstr "Résolution "
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr "Rétablir les valeurs par défaut"
+msgstr "Valeurs par défaut"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -737,7 +737,7 @@ msgstr "Enregistrer les images"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
-msgstr "Enregistrer le PDF"
+msgstr "Enregistrer en PDF"
 
 #: FPdfSave.resx$label1.Text$Message
 msgid "Saving to PDF"
@@ -765,7 +765,7 @@ msgstr "Image numérisée"
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
 msgid "Scanning page {0}"
-msgstr "Numérisation de la page {0}"
+msgstr "Numérisation de la page {0}..."
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
@@ -852,11 +852,11 @@ msgstr "Titre"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x14 in)"
+msgstr "US Legal (8.5x14 p)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US Letter (8.5x11 in)"
+msgstr "US Letter (8.5x11 p)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -881,7 +881,7 @@ msgstr "Mot de passe utilisateur"
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
 msgstr ""
-"Il est nécessaire de télécharger la langue OCR appropriée au document "
+"Il est nécessaire de télécharger la langue de ROC appropriée au document "
 "numérisé"
 
 #: MiscResources.resx$Version$Message
@@ -891,7 +891,7 @@ msgstr "Version {0}"
 #: FDesktop.resx$tsView.Text$Message
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
-msgstr "Voir"
+msgstr "Afficher..."
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -919,7 +919,7 @@ msgstr "Vous n'avez pas la permission de copier le contenu du fichier \"{0}\"."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "Vous n'avez pas la permission de créer un fichier à cet endroit"
+msgstr "Vous n'avez pas la permission de sauver des fichiers à cet endroit"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
@@ -957,7 +957,7 @@ msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "http://www.naps2.com"
+msgstr "pouce"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
@@ -981,8 +981,8 @@ msgstr "Fichier {0} / {1}"
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
-"{0} image(s) numérisée(s) sur {1} le {2} n'a(ont) peut-être pas été "
-"sauvée(s) et est(sont) récupérable(s). Faut-il la(es) récupérer ?"
+"{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été "
+"sauvegardée(s), et est(sont) récupérable(s). Faut-il la(es) récupérer ?"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"

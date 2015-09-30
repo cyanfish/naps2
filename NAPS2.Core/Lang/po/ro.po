@@ -39,16 +39,18 @@ msgid "300 dpi"
 msgstr "300 dpi"
 
 #: SettingsResources.resx$Dpi_400$Message
+#, fuzzy
 msgid "400 dpi"
-msgstr ""
+msgstr "100 dpi"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
 msgstr "600 dpi"
 
 #: SettingsResources.resx$Dpi_800$Message
+#, fuzzy
 msgid "800 dpi"
-msgstr ""
+msgstr "100 dpi"
 
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
