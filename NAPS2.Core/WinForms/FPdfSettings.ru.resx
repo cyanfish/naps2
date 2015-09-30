@@ -160,7 +160,7 @@
         <value>18</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Отменить</value>
+        <value>Отмена</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -478,7 +478,7 @@
         <value>8</value>
     </data>
     <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
-        <value>Разрешить Полную Качественную Печать</value>
+        <value>Разрешить полнокачественную печать</value>
     </data>
     <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
         <value>cbAllowFullQualityPrinting</value>
@@ -508,7 +508,7 @@
         <value>14</value>
     </data>
     <data name="cbAllowFormFilling.Text" xml:space="preserve">
-        <value>Разрешить Заполнение Форм</value>
+        <value>Разрешить заполнение форм</value>
     </data>
     <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
         <value>cbAllowFormFilling</value>
@@ -568,7 +568,7 @@
         <value>12</value>
     </data>
     <data name="cbAllowContentCopyingForAccessibility.Text" xml:space="preserve">
-        <value>Allow Content Copying for Accessibility</value>
+        <value>Разрешить копирование содержимого для доступа</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Name" xml:space="preserve">
         <value>cbAllowContentCopyingForAccessibility</value>
@@ -598,7 +598,7 @@
         <value>11</value>
     </data>
     <data name="cbAllowContentCopying.Text" xml:space="preserve">
-        <value>Разрешить Копирование Содержимого</value>
+        <value>Разрешить копирование содержимого</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
         <value>cbAllowContentCopying</value>
@@ -628,7 +628,7 @@
         <value>10</value>
     </data>
     <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>Allow Document Assembly</value>
+        <value>Разрешить сборку документа</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
         <value>cbAllowDocumentAssembly</value>
@@ -655,7 +655,7 @@
         <value>9</value>
     </data>
     <data name="cbAllowDocumentModification.Text" xml:space="preserve">
-        <value>Разрешить Изменения Документа</value>
+        <value>Разрешить изменение документа</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentModification.Name" xml:space="preserve">
         <value>cbAllowDocumentModification</value>
@@ -682,7 +682,7 @@
         <value>7</value>
     </data>
     <data name="cbAllowPrinting.Text" xml:space="preserve">
-        <value>Разрешить Печать</value>
+        <value>Разрешить печать</value>
     </data>
     <data name="&gt;&gt;cbAllowPrinting.Name" xml:space="preserve">
         <value>cbAllowPrinting</value>
@@ -781,7 +781,7 @@
         <value>1</value>
     </data>
     <data name="lblOwnerPassword.Text" xml:space="preserve">
-        <value>Пароль Владельца</value>
+        <value>Пароль владельца</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>
@@ -883,7 +883,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Восстановить По Умолчанию</value>
+        <value>Восстановить стандартные</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -913,7 +913,7 @@
         <value>33</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Заполнители</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -964,7 +964,7 @@
         <value>32</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Имя Файла По Умолчанию</value>
+        <value>Имя файла по умолчанию</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>

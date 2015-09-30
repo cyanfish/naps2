@@ -156,7 +156,7 @@
         <value>5</value>
     </data>
     <data name="btnDownload.Text" xml:space="preserve">
-        <value>Загрузка и установка</value>
+        <value>Загрузка</value>
     </data>
     <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
         <value>btnDownload</value>
@@ -180,7 +180,7 @@
         <value>6</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Отменить</value>
+        <value>Отмена</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -255,7 +255,7 @@
         <value>9</value>
     </data>
     <data name="labelSizeEstimate.Text" xml:space="preserve">
-        <value>Примерный размер загрузки: {0} Мб</value>
+        <value>Примерный размер загрузки: {0} МБ</value>
     </data>
     <data name="&gt;&gt;labelSizeEstimate.Name" xml:space="preserve">
         <value>labelSizeEstimate</value>

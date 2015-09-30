@@ -121,7 +121,7 @@
         <value>Choisir un profil</value>
     </data>
     <data name="Clear" xml:space="preserve">
-        <value>Effacer</value>
+        <value>Tout supprimer</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
         <value>Faut-il vraiment supprimer {0} élément(s) ?</value>
@@ -148,16 +148,16 @@
         <value>Le scanner sélectionné est éteint.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Vous n'avez pas la permission de créer un fichier à cet endroit.</value>
+        <value>Vous n'avez pas la permission de sauver des fichiers à cet endroit.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Erreur</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Fichiers de dessin (*.bmp)</value>
+        <value>Fichiers Bitmap (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
-        <value>Métafichier Windows (*.emf)</value>
+        <value>Fichier EMF (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
         <value>Fichier EXIF (*.exif)</value>
@@ -202,7 +202,7 @@
         <value>Choisir un profil avant de Numériser.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Une erreur s'est produite avec le pilote du scanner.</value>
+        <value>Une erreur s'est produite avec le pilote de numérisation.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Version {0}</value>
@@ -286,7 +286,7 @@
         <value>Modifications non sauvegardées</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Numérisation de la page {0}</value>
+        <value>Numérisation de la page {0}...</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
         <value>Le scanner sélectionné ne gère pas de dispositif d'alimentation. Utiliser un autre pilote si ce scanner en possède un.</value>

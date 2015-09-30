@@ -163,7 +163,7 @@
         <value>cm</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>http://www.naps2.com</value>
+        <value>pouce</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
         <value>mm</value>
@@ -187,10 +187,10 @@
         <value>Personnalisée...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>US Legal (8.5x14 p)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>US Letter (8.5x11 p)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>

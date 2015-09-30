@@ -214,7 +214,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Rétablir les valeurs par défaut</value>
+        <value>Valeurs par défaut</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -394,7 +394,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>Pour les hautes qualités JPEG (&gt; 80), utiliser le profil de Qualité maximale pour obtenir le meilleur résultat..</value>
+        <value>Pour les hautes qualités JPEG (&gt; 80), utiliser le profil de Qualité maximale pour obtenir le meilleur résultat.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>

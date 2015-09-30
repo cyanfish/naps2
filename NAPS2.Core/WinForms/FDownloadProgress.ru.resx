@@ -150,7 +150,7 @@
         <value>1</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Отменить</value>
+        <value>Отмена</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -177,7 +177,7 @@
         <value>2</value>
     </data>
     <data name="labelSub.Text" xml:space="preserve">
-        <value>{0} / {1} Мб</value>
+        <value>{0} / {1} МБ</value>
     </data>
     <data name="&gt;&gt;labelSub.Name" xml:space="preserve">
         <value>labelSub</value>

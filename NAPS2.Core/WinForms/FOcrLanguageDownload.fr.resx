@@ -228,7 +228,7 @@
         <value>8</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Il est nécessaire de télécharger la langue OCR appropriée au document numérisé.</value>
+        <value>Il est nécessaire de télécharger la langue de ROC appropriée au document numérisé.</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -305,7 +305,7 @@
         <value>439, 310</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Téléchargement OCR</value>
+        <value>Téléchargement de ROC</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrLanguageDownload</value>

@@ -124,10 +124,10 @@
         <value>Pastro</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>A je i sigurt se dëshiron të pastrosh {0} elemente?</value>
+        <value>A je i sigurt se dëshiron të pastrosh {0} element(e)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>A je i sigurt se dëshiron të fshish {0} elemente?</value>
+        <value>A je i sigurt se dëshiron të fshish {0} element(e)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
         <value>A je i sigurt se dëshiron të fshish {0} profile?</value>
@@ -148,7 +148,7 @@
         <value>Skaneri i zgjedhur është jashtë linje.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Nuk ke të drejta për të ruajtur skedarët në këtë vendndodhje.</value>
+        <value>"Nuk ke të drejta për të kopjuar përmbajtjen nga skedari \"{0}\"".</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Gabim</value>
@@ -268,39 +268,39 @@
         <value>Një ose më shumë skedar s'mund të shkarkoheshin.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>E personalizuar ({0} x {1} {2})</value>
+        <value>E personalizuar ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
         <value>Skano</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>A je i sigurt se dëshiron të zhbësh ndryshimet e tua te {0} imazh(e)?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>Rivendos imazhin</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>Ke ndryshime të paruajtura. A je i sigurt se dëshiron të dalësh dhe të mos i ruash ato ndryshime?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Unsaved Changes</value>
+        <value>Ndryshimet e pa ruajtura</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>Po skanon faqen {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>Skaneri i zgjedhur nuk e mbështet përdorimin e furnizuesit. Nëse skaneri yt nuk ka një furnizues, provo të përdorësh një drejtues të ndryshëm.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>Nuk ka faqe te furnizuesi.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
         <value>You do not have permission to copy content from the file "{0}".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Ndodhi një gabim gjatë provës për ruajtjen e skedarit.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>nga {0}</value>
     </data>
 </root>

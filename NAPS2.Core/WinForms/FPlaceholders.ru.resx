@@ -133,7 +133,7 @@
         <value>2</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Отменить</value>
+        <value>Отмена</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -235,7 +235,7 @@
         <value>4</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Предварительный просмотр:</value>
+        <value>Предпросмотр:</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -658,7 +658,7 @@
         <value>21</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Авто-увеличивающийся номер (4 цифры)</value>
+        <value>Автоувеличение номера (4 цифры)</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>
@@ -712,7 +712,7 @@
         <value>23</value>
     </data>
     <data name="label11.Text" xml:space="preserve">
-        <value>Авто-увеличивающийся номер (3 цифры)</value>
+        <value>Автоувеличение номера (3 цифры)</value>
     </data>
     <data name="&gt;&gt;label11.Name" xml:space="preserve">
         <value>label11</value>
@@ -766,7 +766,7 @@
         <value>25</value>
     </data>
     <data name="label12.Text" xml:space="preserve">
-        <value>Авто-увеличивающийся номер (2 цифры)</value>
+        <value>Автоувеличение номера (2 цифры)</value>
     </data>
     <data name="&gt;&gt;label12.Name" xml:space="preserve">
         <value>label12</value>
@@ -820,7 +820,7 @@
         <value>27</value>
     </data>
     <data name="label13.Text" xml:space="preserve">
-        <value>Авто-увеличивающийся номер (1 цифра)</value>
+        <value>Автоувеличение номера (1 цифра)</value>
     </data>
     <data name="&gt;&gt;label13.Name" xml:space="preserve">
         <value>label13</value>
@@ -916,7 +916,7 @@
         <value>30</value>
     </data>
     <data name="gboxPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Заполнители</value>
     </data>
     <data name="&gt;&gt;gboxPlaceholders.Name" xml:space="preserve">
         <value>gboxPlaceholders</value>
@@ -943,7 +943,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Заполнители</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FPlaceholders</value>

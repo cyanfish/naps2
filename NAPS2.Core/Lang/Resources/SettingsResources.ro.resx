@@ -142,13 +142,13 @@
         <value>300 dpi</value>
     </data>
     <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+        <value>100 dpi</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
         <value>600 dpi</value>
     </data>
     <data name="Dpi_800" xml:space="preserve">
-        <value>800 dpi</value>
+        <value>100 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Centrează</value>

@@ -265,7 +265,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>Rotation personnalisée</value>
+        <value>Rotation personnalisée...</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -393,7 +393,7 @@
         <value>300, 300</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Aperçu</value>
+        <value>Aperçu </value>
     </data>
     <data name="&gt;&gt;tbPageCurrent.Name" xml:space="preserve">
         <value>tbPageCurrent</value>

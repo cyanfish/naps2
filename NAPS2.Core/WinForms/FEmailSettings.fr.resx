@@ -214,7 +214,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Rétablir les valeurs par défaut</value>
+        <value>Valeurs par défaut</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>

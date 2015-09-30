@@ -193,7 +193,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxView.Text" xml:space="preserve">
-        <value>Voir</value>
+        <value>Afficher...</value>
     </data>
     <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -313,7 +313,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsNewProfile.Text" xml:space="preserve">
-        <value>Nouveau profil</value>
+        <value>Nouveau profil...</value>
     </data>
     <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -382,7 +382,7 @@
         <value>56, 51</value>
     </data>
     <data name="tsOcr.Text" xml:space="preserve">
-        <value>Reconnaissance de caractères (OCR)</value>
+        <value>Reconnaissance de caractères (ROC)</value>
     </data>
     <data name="tsOcr.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -394,7 +394,7 @@
         <value>67, 51</value>
     </data>
     <data name="tsImport.Text" xml:space="preserve">
-        <value>Importer</value>
+        <value>Importer en PDF</value>
     </data>
     <data name="tsImport.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -430,7 +430,7 @@
         <value>71, 51</value>
     </data>
     <data name="tsdSavePDF.Text" xml:space="preserve">
-        <value>Enregistrer le PDF</value>
+        <value>Enregistrer en PDF</value>
     </data>
     <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -502,7 +502,7 @@
         <value>76, 51</value>
     </data>
     <data name="tsdEmailPDF.Text" xml:space="preserve">
-        <value>Envoyer le PDF par courriel</value>
+        <value>Envoyer en PDF par courriel</value>
     </data>
     <data name="tsdEmailPDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -526,7 +526,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsView.Text" xml:space="preserve">
-        <value>Voir</value>
+        <value>Afficher...</value>
     </data>
     <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
         <value>126, 6</value>
@@ -610,7 +610,7 @@
         <value>164, 22</value>
     </data>
     <data name="customRotationToolStripMenuItem.Text" xml:space="preserve">
-        <value>Rotation personnalisée</value>
+        <value>Rotation personnalisée...</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -628,22 +628,22 @@
         <value>96, 51</value>
     </data>
     <data name="tsMove.TextFirst" xml:space="preserve">
-        <value>Déplacer vers le haut</value>
+        <value>Plus haut</value>
     </data>
     <data name="tsMove.TextSecond" xml:space="preserve">
-        <value>Déplacer vers le bas</value>
+        <value>Plus bas</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>139, 22</value>
     </data>
     <data name="tsInterleave.Text" xml:space="preserve">
-        <value>Entrelacer</value>
+        <value>Classer numériquement</value>
     </data>
     <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>139, 22</value>
     </data>
     <data name="tsDeinterleave.Text" xml:space="preserve">
-        <value>Désentrelacer</value>
+        <value>Classer par parité</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>136, 6</value>
@@ -700,7 +700,7 @@
         <value>58, 51</value>
     </data>
     <data name="tsClear.Text" xml:space="preserve">
-        <value>Effacer</value>
+        <value>Tout supprimer</value>
     </data>
     <data name="tsClear.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>

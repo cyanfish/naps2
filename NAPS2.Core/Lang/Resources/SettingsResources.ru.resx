@@ -118,10 +118,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Чёрно-белый</value>
+        <value>Чёрно-белое</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-х битный цвет</value>
+        <value>24-бит цвет</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Оттенки серого</value>
@@ -187,10 +187,10 @@
         <value>Другой...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>US Legal (8.5x14 дюймов)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>US Letter (8.5x11 дюймов)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>
@@ -205,7 +205,7 @@
         <value>1:8</value>
     </data>
     <data name="Source_Duplex" xml:space="preserve">
-        <value>Двухстороннее сканирование</value>
+        <value>Двустороннее сканирование</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
         <value>Устройство подачи</value>

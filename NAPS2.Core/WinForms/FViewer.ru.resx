@@ -247,7 +247,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsRotateLeft.Text" xml:space="preserve">
-        <value>Повернуть страницу влево</value>
+        <value>Повернуть влево</value>
     </data>
     <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
@@ -265,7 +265,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>Другой Поворот</value>
+        <value>Другой поворот</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -310,7 +310,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsDelete.Text" xml:space="preserve">
-        <value>Отображаемое имя</value>
+        <value>Удалить</value>
     </data>
     <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 0</value>
@@ -393,7 +393,7 @@
         <value>300, 300</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Предварительный просмотр</value>
+        <value>Предпросмотр</value>
     </data>
     <data name="&gt;&gt;tbPageCurrent.Name" xml:space="preserve">
         <value>tbPageCurrent</value>

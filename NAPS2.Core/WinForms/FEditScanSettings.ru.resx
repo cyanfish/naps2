@@ -289,7 +289,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Предустановленные параметры</value>
+        <value>Предустановки</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -316,7 +316,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Использовать собственный интерфейс WIA</value>
+        <value>Собственный интерфейс</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -634,7 +634,7 @@
         <value>19</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Отменить</value>
+        <value>Отмена</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -747,7 +747,7 @@
         <value>23</value>
     </data>
     <data name="label8.Text" xml:space="preserve">
-        <value>Название:</value>
+        <value>Отображаемое имя:</value>
     </data>
     <data name="&gt;&gt;label8.Name" xml:space="preserve">
         <value>label8</value>
@@ -876,7 +876,7 @@
         <value>27</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Масштабировать:</value>
+        <value>Масштаб:</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>
@@ -903,7 +903,7 @@
         <value>2</value>
     </data>
     <data name="rdTWAIN.Text" xml:space="preserve">
-        <value>TWAIN драйвер</value>
+        <value>Драйвер TWAIN</value>
     </data>
     <data name="&gt;&gt;rdTWAIN.Name" xml:space="preserve">
         <value>rdTWAIN</value>

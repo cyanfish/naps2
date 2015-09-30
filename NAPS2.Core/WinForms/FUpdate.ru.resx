@@ -156,7 +156,7 @@
         <value>1</value>
     </data>
     <data name="btnInstall.Text" xml:space="preserve">
-        <value>Загрузка и установка</value>
+        <value>Установить</value>
     </data>
     <data name="&gt;&gt;btnInstall.Name" xml:space="preserve">
         <value>btnInstall</value>
@@ -180,7 +180,7 @@
         <value>2</value>
     </data>
     <data name="btnDownload.Text" xml:space="preserve">
-        <value>Загрузка и установка</value>
+        <value>Загрузка</value>
     </data>
     <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
         <value>btnDownload</value>

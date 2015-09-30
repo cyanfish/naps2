@@ -981,7 +981,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>Qualité max. (fichiers volumineux)</value>
+        <value>Qualité maximale (fichiers volumineux)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>

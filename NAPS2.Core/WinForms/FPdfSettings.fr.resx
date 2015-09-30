@@ -478,7 +478,7 @@
         <value>8</value>
     </data>
     <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
-        <value>Permettre l'impression en qualité max.</value>
+        <value>Permettre l'impression en Qualité maximale</value>
     </data>
     <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
         <value>cbAllowFullQualityPrinting</value>
@@ -883,7 +883,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Rétablir les valeurs par défaut</value>
+        <value>Valeurs par défaut</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>

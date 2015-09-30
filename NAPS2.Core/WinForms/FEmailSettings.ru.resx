@@ -160,7 +160,7 @@
         <value>18</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Отменить</value>
+        <value>Отмена</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -214,7 +214,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Восстановить По Умолчанию</value>
+        <value>Восстановить стандартные</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -265,7 +265,7 @@
         <value>28</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Имя Вложения</value>
+        <value>Имя вложения</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -295,7 +295,7 @@
         <value>31</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Заполнители</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>

@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} изображений, сканированных на {1} в {2} могли не быть сохранены, и могут быть восстановлены. Вы хотите восстановить их?</value>
+        <value>Изображения ({0} шт.), сканированные на {1} в {2}, возможно, не были сохранены и могут быть восстановлены. Хотите восстановить их?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -180,7 +180,7 @@
         <value>2</value>
     </data>
     <data name="btnDelete.Text" xml:space="preserve">
-        <value>Отображаемое имя</value>
+        <value>Удалить</value>
     </data>
     <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
         <value>btnDelete</value>
@@ -232,7 +232,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Восстановить Отсканированные Изображения</value>
+        <value>Восстановить отсканированные изображения</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FRecover</value>
