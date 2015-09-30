@@ -106,6 +106,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ελληνικά.
+        /// </summary>
+        internal static string el {
+            get {
+                return ResourceManager.GetString("el", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         internal static string en {
@@ -120,6 +129,15 @@ namespace NAPS2.Lang {
         internal static string es {
             get {
                 return ResourceManager.GetString("es", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eesti keel.
+        /// </summary>
+        internal static string et {
+            get {
+                return ResourceManager.GetString("et", resourceCulture);
             }
         }
         

@@ -192,4 +192,10 @@
   <data name="ro" xml:space="preserve">
     <value>Limba Română</value>
   </data>
+  <data name="el" xml:space="preserve">
+    <value>Ελληνικά</value>
+  </data>
+  <data name="et" xml:space="preserve">
+    <value>Eesti keel</value>
+  </data>
 </root>
