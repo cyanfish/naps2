@@ -93,7 +93,11 @@ namespace NAPS2.WinForms
             this.pdfSaver = pdfSaver;
             this.errorOutput = errorOutput;
             InitializeComponent();
+
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
+            Shown += FDesktop_Shown;
+            FormClosing += FDesktop_FormClosing;
+            Closed += FDesktop_Closed;
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
