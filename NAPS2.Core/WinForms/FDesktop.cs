@@ -558,12 +558,7 @@ namespace NAPS2.WinForms
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
-                    var fileName = sd.FileName;
-                    if (!fileName.EndsWith(".pdf", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        fileName += ".pdf";
-                    }
-                    ExportPDF(fileName, images);
+                    ExportPDF(sd.FileName, images);
                     changeTracker.HasUnsavedChanges = false;
                 }
             }
