@@ -68,7 +68,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 errorOutput.DisplayError(MiscResources.DontHavePermission);
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 Log.ErrorException(MiscResources.ErrorSaving, ex);
                 errorOutput.DisplayError(MiscResources.ErrorSaving);
