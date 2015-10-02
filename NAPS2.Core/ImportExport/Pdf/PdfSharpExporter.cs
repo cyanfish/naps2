@@ -51,7 +51,8 @@ namespace NAPS2.ImportExport.Pdf
             document.Info.Subject = settings.Metadata.Subject;
             document.Info.Title = settings.Metadata.Title;
 
-            if (settings.Encryption.EncryptPdf)
+            if (settings.Encryption.EncryptPdf
+                && (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword) || !string.IsNullOrEmpty(settings.Encryption.UserPassword)))
             {
                 document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
                 if (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword))
