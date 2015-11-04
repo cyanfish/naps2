@@ -30,6 +30,7 @@ namespace NAPS2.Scan.Stub
     public class StubScanDriver : IScanDriver
     {
         private readonly IScannedImageFactory scannedImageFactory;
+        private static int _number = 1;
 
         public StubScanDriver(string driverName, IScannedImageFactory scannedImageFactory)
         {
@@ -59,7 +60,7 @@ namespace NAPS2.Scan.Stub
             using (Graphics g = Graphics.FromImage(bitmap))
             {
                 g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
-                g.DrawString(new Random().Next().ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
+                g.DrawString((_number++).ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
             }
             var image = scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, ScanSettings.MaxQuality);
             return image;
