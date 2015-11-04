@@ -14,6 +14,7 @@ namespace NAPS2.Scan.Images.Transforms
         {
             float contrastAdjusted = Contrast / 1000f + 1.0f;
 
+            EnsurePixelFormat(ref bitmap);
             using (var g = Graphics.FromImage(bitmap))
             {
                 var attrs = new ImageAttributes();

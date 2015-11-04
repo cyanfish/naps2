@@ -14,6 +14,7 @@ namespace NAPS2.Scan.Images.Transforms
         {
             float brightnessAdjusted = Brightness / 1000f;
 
+            EnsurePixelFormat(ref bitmap);
             using (var g = Graphics.FromImage(bitmap))
             {
                 var attrs = new ImageAttributes();

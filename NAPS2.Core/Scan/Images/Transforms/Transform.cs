@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Xml.Serialization;
 
@@ -35,6 +36,25 @@ namespace NAPS2.Scan.Images.Transforms
             else if (!transform.IsNull)
             {
                 transformList.Add(transform);
+            }
+        }
+
+        /// <summary>
+        /// If the provided bitmap is 1-bit (black and white), replace it with a 24-bit bitmap so that image transforms will work. If the bitmap is replaced, the original is disposed.
+        /// </summary>
+        /// <param name="bitmap">The bitmap that may be replaced.</param>
+        protected static void EnsurePixelFormat(ref Bitmap bitmap)
+        {
+            if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
+            {
+                // Copy B&W over to grayscale
+                var bitmap2 = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format24bppRgb);
+                using (var g = Graphics.FromImage(bitmap2))
+                {
+                    g.DrawImage(bitmap, 0, 0);
+                }
+                bitmap.Dispose();
+                bitmap = bitmap2;
             }
         }
 
