@@ -145,6 +145,47 @@ namespace NAPS2.Scan.Images
             return Enumerable.Empty<int>();
         }
 
+        public IEnumerable<int> AltInterleave(IEnumerable<int> selectedIndices)
+        {
+            // Partition the image list in two
+            int count = Images.Count;
+            int split = (count + 1) / 2;
+            var p1 = Images.Take(split).ToList();
+            var p2 = Images.Skip(split).ToList();
+
+            // Rebuild the image list, taking alternating images from each the partitions (the latter in reverse order)
+            Images.Clear();
+            for (int i = 0; i < count; ++i)
+            {
+                Images.Add(i % 2 == 0 ? p1[i / 2] : p2[p2.Count - 1 - i / 2]);
+            }
+
+            // Clear the selection (may be changed in the future to maintain it, but not necessary)
+            return Enumerable.Empty<int>();
+        }
+
+        public IEnumerable<int> AltDeinterleave(IEnumerable<int> selectedIndices)
+        {
+            // Duplicate the list
+            int count = Images.Count;
+            int split = (count + 1) / 2;
+            var images = Images.ToList();
+
+            // Rebuild the image list, even-indexed images first (odd-indexed images in reverse order)
+            Images.Clear();
+            for (int i = 0; i < split; ++i)
+            {
+                Images.Add(images[i * 2]);
+            }
+            for (int i = count - split - 1; i >= 0; --i)
+            {
+                Images.Add(images[i * 2 + 1]);
+            }
+
+            // Clear the selection (may be changed in the future to maintain it, but not necessary)
+            return Enumerable.Empty<int>();
+        }
+
         public IEnumerable<int> Reverse()
         {
             Reverse(Enumerable.Range(0, Images.Count));

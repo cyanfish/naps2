@@ -877,6 +877,26 @@ namespace NAPS2.WinForms
             changeTracker.HasUnsavedChanges = true;
         }
 
+        private void tsAltInterleave_Click(object sender, EventArgs e)
+        {
+            if (imageList.Images.Count < 3)
+            {
+                return;
+            }
+            UpdateThumbnails(imageList.AltInterleave(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
+        }
+
+        private void tsAltDeinterleave_Click(object sender, EventArgs e)
+        {
+            if (imageList.Images.Count < 3)
+            {
+                return;
+            }
+            UpdateThumbnails(imageList.AltDeinterleave(SelectedIndices));
+            changeTracker.HasUnsavedChanges = true;
+        }
+
         private void thumbnailList1_MouseMove(object sender, MouseEventArgs e)
         {
             Cursor = thumbnailList1.GetItemAt(e.X, e.Y) == null ? Cursors.Default : Cursors.Hand;
