@@ -39,43 +39,43 @@ namespace NAPS2.WinForms
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.groupboxScanConfig = new System.Windows.Forms.GroupBox();
+            this.panelScanDetails = new System.Windows.Forms.Panel();
+            this.txtTimeBetweenScans = new System.Windows.Forms.TextBox();
+            this.lblTimeBetweenScans = new System.Windows.Forms.Label();
+            this.txtNumberOfScans = new System.Windows.Forms.TextBox();
+            this.lblNumberOfScans = new System.Windows.Forms.Label();
+            this.panelScanType = new System.Windows.Forms.Panel();
+            this.rdMultipleScans = new System.Windows.Forms.RadioButton();
+            this.rdSingleScan = new System.Windows.Forms.RadioButton();
+            this.btnAddProfile = new System.Windows.Forms.Button();
             this.btnEditProfile = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.groupBox1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
+            this.comboProfile = new System.Windows.Forms.ComboBox();
+            this.lblProfile = new System.Windows.Forms.Label();
+            this.groupboxResult = new System.Windows.Forms.GroupBox();
+            this.panelSaveSeparator = new System.Windows.Forms.Panel();
+            this.linkPatchCodeInfo = new System.Windows.Forms.LinkLabel();
+            this.rdSeparateByPatchT = new System.Windows.Forms.RadioButton();
+            this.rdFilePerImage = new System.Windows.Forms.RadioButton();
+            this.rdFilePerScan = new System.Windows.Forms.RadioButton();
+            this.panelSaveTo = new System.Windows.Forms.Panel();
+            this.btnChooseFolder = new System.Windows.Forms.Button();
+            this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
+            this.txtFileName = new System.Windows.Forms.TextBox();
+            this.lblFileName = new System.Windows.Forms.Label();
+            this.txtFolder = new System.Windows.Forms.TextBox();
+            this.lblSaveToFolder = new System.Windows.Forms.Label();
+            this.panelSaveType = new System.Windows.Forms.Panel();
+            this.rdSaveToMultipleFiles = new System.Windows.Forms.RadioButton();
+            this.rdSaveToSingleFile = new System.Windows.Forms.RadioButton();
+            this.rdLoadIntoNaps2 = new System.Windows.Forms.RadioButton();
+            this.groupboxScanConfig.SuspendLayout();
+            this.panelScanDetails.SuspendLayout();
+            this.panelScanType.SuspendLayout();
+            this.groupboxResult.SuspendLayout();
+            this.panelSaveSeparator.SuspendLayout();
+            this.panelSaveTo.SuspendLayout();
+            this.panelSaveType.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripSeparator1
@@ -100,74 +100,74 @@ namespace NAPS2.WinForms
             this.btnStart.Name = "btnStart";
             this.btnStart.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // groupboxScanConfig
             // 
-            this.groupBox1.Controls.Add(this.panel2);
-            this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.btnEditProfile);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.label1);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            this.groupboxScanConfig.Controls.Add(this.panelScanDetails);
+            this.groupboxScanConfig.Controls.Add(this.panelScanType);
+            this.groupboxScanConfig.Controls.Add(this.btnAddProfile);
+            this.groupboxScanConfig.Controls.Add(this.btnEditProfile);
+            this.groupboxScanConfig.Controls.Add(this.comboProfile);
+            this.groupboxScanConfig.Controls.Add(this.lblProfile);
+            resources.ApplyResources(this.groupboxScanConfig, "groupboxScanConfig");
+            this.groupboxScanConfig.Name = "groupboxScanConfig";
+            this.groupboxScanConfig.TabStop = false;
             // 
-            // panel2
+            // panelScanDetails
             // 
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.label2);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
+            this.panelScanDetails.Controls.Add(this.txtTimeBetweenScans);
+            this.panelScanDetails.Controls.Add(this.lblTimeBetweenScans);
+            this.panelScanDetails.Controls.Add(this.txtNumberOfScans);
+            this.panelScanDetails.Controls.Add(this.lblNumberOfScans);
+            resources.ApplyResources(this.panelScanDetails, "panelScanDetails");
+            this.panelScanDetails.Name = "panelScanDetails";
             // 
-            // textBox2
+            // txtTimeBetweenScans
             // 
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
+            resources.ApplyResources(this.txtTimeBetweenScans, "txtTimeBetweenScans");
+            this.txtTimeBetweenScans.Name = "txtTimeBetweenScans";
             // 
-            // label3
+            // lblTimeBetweenScans
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.lblTimeBetweenScans, "lblTimeBetweenScans");
+            this.lblTimeBetweenScans.Name = "lblTimeBetweenScans";
             // 
-            // textBox1
+            // txtNumberOfScans
             // 
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
+            resources.ApplyResources(this.txtNumberOfScans, "txtNumberOfScans");
+            this.txtNumberOfScans.Name = "txtNumberOfScans";
             // 
-            // label2
+            // lblNumberOfScans
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lblNumberOfScans, "lblNumberOfScans");
+            this.lblNumberOfScans.Name = "lblNumberOfScans";
             // 
-            // panel1
+            // panelScanType
             // 
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            this.panelScanType.Controls.Add(this.rdMultipleScans);
+            this.panelScanType.Controls.Add(this.rdSingleScan);
+            resources.ApplyResources(this.panelScanType, "panelScanType");
+            this.panelScanType.Name = "panelScanType";
             // 
-            // radioButton2
+            // rdMultipleScans
             // 
-            resources.ApplyResources(this.radioButton2, "radioButton2");
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.TabStop = true;
-            this.radioButton2.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdMultipleScans, "rdMultipleScans");
+            this.rdMultipleScans.Name = "rdMultipleScans";
+            this.rdMultipleScans.TabStop = true;
+            this.rdMultipleScans.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rdSingleScan
             // 
-            resources.ApplyResources(this.radioButton1, "radioButton1");
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdSingleScan, "rdSingleScan");
+            this.rdSingleScan.Name = "rdSingleScan";
+            this.rdSingleScan.TabStop = true;
+            this.rdSingleScan.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnAddProfile
             // 
-            this.button1.Image = global::NAPS2.Icons.add_small;
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddProfile.Image = global::NAPS2.Icons.add_small;
+            resources.ApplyResources(this.btnAddProfile, "btnAddProfile");
+            this.btnAddProfile.Name = "btnAddProfile";
+            this.btnAddProfile.UseVisualStyleBackColor = true;
             // 
             // btnEditProfile
             // 
@@ -176,159 +176,159 @@ namespace NAPS2.WinForms
             this.btnEditProfile.Name = "btnEditProfile";
             this.btnEditProfile.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // comboProfile
             // 
-            this.comboBox1.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
+            this.comboProfile.FormattingEnabled = true;
+            resources.ApplyResources(this.comboProfile, "comboProfile");
+            this.comboProfile.Name = "comboProfile";
             // 
-            // label1
+            // lblProfile
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblProfile, "lblProfile");
+            this.lblProfile.Name = "lblProfile";
             // 
-            // groupBox2
+            // groupboxResult
             // 
-            this.groupBox2.Controls.Add(this.panel3);
-            this.groupBox2.Controls.Add(this.panel6);
-            this.groupBox2.Controls.Add(this.panel7);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
+            this.groupboxResult.Controls.Add(this.panelSaveSeparator);
+            this.groupboxResult.Controls.Add(this.panelSaveTo);
+            this.groupboxResult.Controls.Add(this.panelSaveType);
+            resources.ApplyResources(this.groupboxResult, "groupboxResult");
+            this.groupboxResult.Name = "groupboxResult";
+            this.groupboxResult.TabStop = false;
             // 
-            // panel3
+            // panelSaveSeparator
             // 
-            this.panel3.Controls.Add(this.linkLabel1);
-            this.panel3.Controls.Add(this.radioButton3);
-            this.panel3.Controls.Add(this.radioButton4);
-            this.panel3.Controls.Add(this.radioButton5);
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.Name = "panel3";
+            this.panelSaveSeparator.Controls.Add(this.linkPatchCodeInfo);
+            this.panelSaveSeparator.Controls.Add(this.rdSeparateByPatchT);
+            this.panelSaveSeparator.Controls.Add(this.rdFilePerImage);
+            this.panelSaveSeparator.Controls.Add(this.rdFilePerScan);
+            resources.ApplyResources(this.panelSaveSeparator, "panelSaveSeparator");
+            this.panelSaveSeparator.Name = "panelSaveSeparator";
             // 
-            // linkLabel1
+            // linkPatchCodeInfo
             // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
+            resources.ApplyResources(this.linkPatchCodeInfo, "linkPatchCodeInfo");
+            this.linkPatchCodeInfo.Name = "linkPatchCodeInfo";
+            this.linkPatchCodeInfo.TabStop = true;
             // 
-            // radioButton3
+            // rdSeparateByPatchT
             // 
-            resources.ApplyResources(this.radioButton3, "radioButton3");
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.TabStop = true;
-            this.radioButton3.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdSeparateByPatchT, "rdSeparateByPatchT");
+            this.rdSeparateByPatchT.Name = "rdSeparateByPatchT";
+            this.rdSeparateByPatchT.TabStop = true;
+            this.rdSeparateByPatchT.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rdFilePerImage
             // 
-            resources.ApplyResources(this.radioButton4, "radioButton4");
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.TabStop = true;
-            this.radioButton4.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdFilePerImage, "rdFilePerImage");
+            this.rdFilePerImage.Name = "rdFilePerImage";
+            this.rdFilePerImage.TabStop = true;
+            this.rdFilePerImage.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // rdFilePerScan
             // 
-            resources.ApplyResources(this.radioButton5, "radioButton5");
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.TabStop = true;
-            this.radioButton5.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdFilePerScan, "rdFilePerScan");
+            this.rdFilePerScan.Name = "rdFilePerScan";
+            this.rdFilePerScan.TabStop = true;
+            this.rdFilePerScan.UseVisualStyleBackColor = true;
             // 
-            // panel6
+            // panelSaveTo
             // 
-            this.panel6.Controls.Add(this.button3);
-            this.panel6.Controls.Add(this.linkLabel3);
-            this.panel6.Controls.Add(this.textBox5);
-            this.panel6.Controls.Add(this.label6);
-            this.panel6.Controls.Add(this.textBox6);
-            this.panel6.Controls.Add(this.label7);
-            resources.ApplyResources(this.panel6, "panel6");
-            this.panel6.Name = "panel6";
+            this.panelSaveTo.Controls.Add(this.btnChooseFolder);
+            this.panelSaveTo.Controls.Add(this.linkSubstitutions);
+            this.panelSaveTo.Controls.Add(this.txtFileName);
+            this.panelSaveTo.Controls.Add(this.lblFileName);
+            this.panelSaveTo.Controls.Add(this.txtFolder);
+            this.panelSaveTo.Controls.Add(this.lblSaveToFolder);
+            resources.ApplyResources(this.panelSaveTo, "panelSaveTo");
+            this.panelSaveTo.Name = "panelSaveTo";
             // 
-            // button3
+            // btnChooseFolder
             // 
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.btnChooseFolder, "btnChooseFolder");
+            this.btnChooseFolder.Name = "btnChooseFolder";
+            this.btnChooseFolder.UseVisualStyleBackColor = true;
             // 
-            // linkLabel3
+            // linkSubstitutions
             // 
-            resources.ApplyResources(this.linkLabel3, "linkLabel3");
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.TabStop = true;
+            resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
+            this.linkSubstitutions.Name = "linkSubstitutions";
+            this.linkSubstitutions.TabStop = true;
             // 
-            // textBox5
+            // txtFileName
             // 
-            resources.ApplyResources(this.textBox5, "textBox5");
-            this.textBox5.Name = "textBox5";
+            resources.ApplyResources(this.txtFileName, "txtFileName");
+            this.txtFileName.Name = "txtFileName";
             // 
-            // label6
+            // lblFileName
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.lblFileName, "lblFileName");
+            this.lblFileName.Name = "lblFileName";
             // 
-            // textBox6
+            // txtFolder
             // 
-            resources.ApplyResources(this.textBox6, "textBox6");
-            this.textBox6.Name = "textBox6";
+            resources.ApplyResources(this.txtFolder, "txtFolder");
+            this.txtFolder.Name = "txtFolder";
             // 
-            // label7
+            // lblSaveToFolder
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            resources.ApplyResources(this.lblSaveToFolder, "lblSaveToFolder");
+            this.lblSaveToFolder.Name = "lblSaveToFolder";
             // 
-            // panel7
+            // panelSaveType
             // 
-            this.panel7.Controls.Add(this.radioButton9);
-            this.panel7.Controls.Add(this.radioButton10);
-            this.panel7.Controls.Add(this.radioButton11);
-            resources.ApplyResources(this.panel7, "panel7");
-            this.panel7.Name = "panel7";
+            this.panelSaveType.Controls.Add(this.rdSaveToMultipleFiles);
+            this.panelSaveType.Controls.Add(this.rdSaveToSingleFile);
+            this.panelSaveType.Controls.Add(this.rdLoadIntoNaps2);
+            resources.ApplyResources(this.panelSaveType, "panelSaveType");
+            this.panelSaveType.Name = "panelSaveType";
             // 
-            // radioButton9
+            // rdSaveToMultipleFiles
             // 
-            resources.ApplyResources(this.radioButton9, "radioButton9");
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.TabStop = true;
-            this.radioButton9.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdSaveToMultipleFiles, "rdSaveToMultipleFiles");
+            this.rdSaveToMultipleFiles.Name = "rdSaveToMultipleFiles";
+            this.rdSaveToMultipleFiles.TabStop = true;
+            this.rdSaveToMultipleFiles.UseVisualStyleBackColor = true;
             // 
-            // radioButton10
+            // rdSaveToSingleFile
             // 
-            resources.ApplyResources(this.radioButton10, "radioButton10");
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.TabStop = true;
-            this.radioButton10.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdSaveToSingleFile, "rdSaveToSingleFile");
+            this.rdSaveToSingleFile.Name = "rdSaveToSingleFile";
+            this.rdSaveToSingleFile.TabStop = true;
+            this.rdSaveToSingleFile.UseVisualStyleBackColor = true;
             // 
-            // radioButton11
+            // rdLoadIntoNaps2
             // 
-            resources.ApplyResources(this.radioButton11, "radioButton11");
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.TabStop = true;
-            this.radioButton11.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdLoadIntoNaps2, "rdLoadIntoNaps2");
+            this.rdLoadIntoNaps2.Name = "rdLoadIntoNaps2";
+            this.rdLoadIntoNaps2.TabStop = true;
+            this.rdLoadIntoNaps2.UseVisualStyleBackColor = true;
             // 
             // FBatchScan
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupboxResult);
+            this.Controls.Add(this.groupboxScanConfig);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblStatus);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FBatchScan";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
+            this.groupboxScanConfig.ResumeLayout(false);
+            this.groupboxScanConfig.PerformLayout();
+            this.panelScanDetails.ResumeLayout(false);
+            this.panelScanDetails.PerformLayout();
+            this.panelScanType.ResumeLayout(false);
+            this.panelScanType.PerformLayout();
+            this.groupboxResult.ResumeLayout(false);
+            this.panelSaveSeparator.ResumeLayout(false);
+            this.panelSaveSeparator.PerformLayout();
+            this.panelSaveTo.ResumeLayout(false);
+            this.panelSaveTo.PerformLayout();
+            this.panelSaveType.ResumeLayout(false);
+            this.panelSaveType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -340,35 +340,35 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupboxScanConfig;
+        private System.Windows.Forms.Button btnAddProfile;
         private System.Windows.Forms.Button btnEditProfile;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.RadioButton radioButton9;
-        private System.Windows.Forms.RadioButton radioButton10;
-        private System.Windows.Forms.RadioButton radioButton11;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.ComboBox comboProfile;
+        private System.Windows.Forms.Label lblProfile;
+        private System.Windows.Forms.Panel panelScanType;
+        private System.Windows.Forms.RadioButton rdMultipleScans;
+        private System.Windows.Forms.RadioButton rdSingleScan;
+        private System.Windows.Forms.Panel panelScanDetails;
+        private System.Windows.Forms.Label lblNumberOfScans;
+        private System.Windows.Forms.TextBox txtNumberOfScans;
+        private System.Windows.Forms.TextBox txtTimeBetweenScans;
+        private System.Windows.Forms.Label lblTimeBetweenScans;
+        private System.Windows.Forms.GroupBox groupboxResult;
+        private System.Windows.Forms.Panel panelSaveTo;
+        private System.Windows.Forms.Button btnChooseFolder;
+        private System.Windows.Forms.LinkLabel linkSubstitutions;
+        private System.Windows.Forms.TextBox txtFileName;
+        private System.Windows.Forms.Label lblFileName;
+        private System.Windows.Forms.TextBox txtFolder;
+        private System.Windows.Forms.Label lblSaveToFolder;
+        private System.Windows.Forms.Panel panelSaveType;
+        private System.Windows.Forms.RadioButton rdSaveToMultipleFiles;
+        private System.Windows.Forms.RadioButton rdSaveToSingleFile;
+        private System.Windows.Forms.RadioButton rdLoadIntoNaps2;
+        private System.Windows.Forms.Panel panelSaveSeparator;
+        private System.Windows.Forms.LinkLabel linkPatchCodeInfo;
+        private System.Windows.Forms.RadioButton rdSeparateByPatchT;
+        private System.Windows.Forms.RadioButton rdFilePerImage;
+        private System.Windows.Forms.RadioButton rdFilePerScan;
     }
 }

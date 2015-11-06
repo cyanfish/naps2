@@ -82,7 +82,9 @@
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
     <Compile Include="ImportExport\Pdf\PdfSaver.cs" />
+    <Compile Include="Scan\Batch\BatchSettings.cs" />
     <Compile Include="Scan\Images\Transforms\TrueContrastTransform.cs" />
+    <Compile Include="Scan\ProfileRenamer.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />

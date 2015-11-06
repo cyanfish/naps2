@@ -31,8 +31,6 @@ namespace NAPS2.WinForms
 {
     public partial class FBatchScan : FormBase
     {
-        private const int DEFAULT_PROFILE_ICON_ID = 3;
-
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;
         private readonly IconButtonSizer iconButtonSizer;

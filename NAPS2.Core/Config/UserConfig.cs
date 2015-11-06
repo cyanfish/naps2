@@ -24,6 +24,7 @@ using System.Linq;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Scan.Batch;
 using NAPS2.Scan.Images;
 using NAPS2.Update;
 
@@ -62,5 +63,7 @@ namespace NAPS2.Config
         public EmailSettings EmailSettings { get; set; }
 
         public int ThumbnailSize { get; set; }
+
+        public BatchSettings LastBatchSettings { get; set; }
     }
 }

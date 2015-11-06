@@ -35,6 +35,7 @@ namespace NAPS2.WinForms
     {
         private readonly IScanDriverFactory driverFactory;
         private readonly IErrorOutput errorOutput;
+        private readonly ProfileNameTracker profileNameTracker;
 
         private ScanDevice currentDevice;
         private bool isDefault;
@@ -44,10 +45,11 @@ namespace NAPS2.WinForms
 
         private bool suppressChangeEvent;
 
-        public FEditScanSettings(IScanDriverFactory driverFactory, IErrorOutput errorOutput)
+        public FEditScanSettings(IScanDriverFactory driverFactory, IErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
+            this.profileNameTracker = profileNameTracker;
             InitializeComponent();
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
@@ -197,6 +199,7 @@ namespace NAPS2.WinForms
 
         private void SaveSettings()
         {
+            
             ScanPageSize pageSize;
             PageDimensions customPageSize = null;
             if (cmbPage.SelectedIndex > (int)ScanPageSize.Custom)
@@ -211,6 +214,10 @@ namespace NAPS2.WinForms
             else
             {
                 pageSize = (ScanPageSize)cmbPage.SelectedIndex;
+            }
+            if (ScanSettings.DisplayName != null)
+            {
+                profileNameTracker.RenamingProfile(ScanSettings.DisplayName, txtName.Text);
             }
             ScanSettings = new ExtendedScanSettings
             {
