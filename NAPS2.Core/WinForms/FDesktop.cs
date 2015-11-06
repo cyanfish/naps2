@@ -520,7 +520,7 @@ namespace NAPS2.WinForms
         private void ScanWithNewProfile()
         {
             var editSettingsForm = FormFactory.Create<FEditScanSettings>();
-            editSettingsForm.ScanSettings = new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
+            editSettingsForm.ScanSettings = appConfigManager.Config.DefaultProfileSettings ?? new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
             editSettingsForm.ShowDialog();
             if (!editSettingsForm.Result)
             {
