@@ -23,6 +23,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -456,8 +457,10 @@ namespace NAPS2.WinForms
 
         private void UpdateScanButton()
         {
+            const int staticButtonCount = 2;
+
             // Clean up the dropdown
-            while (tsScan.DropDownItems.Count > 1)
+            while (tsScan.DropDownItems.Count > staticButtonCount)
             {
                 tsScan.DropDownItems.RemoveAt(0);
             }
@@ -482,12 +485,12 @@ namespace NAPS2.WinForms
                     scanPerformer.PerformScan(profile, this, this);
                     Activate();
                 };
-                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, item);
+                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
             }
 
             if (profileManager.Profiles.Any())
             {
-                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - 1, new ToolStripSeparator());
+                tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, new ToolStripSeparator());
             }
         }
 
@@ -1219,6 +1222,14 @@ namespace NAPS2.WinForms
         private void btnZoomIn_Click(object sender, EventArgs e)
         {
             StepThumbnailSize(1);
+        }
+
+        private void tsBatchScan_Click(object sender, EventArgs e)
+        {
+            var form = FormFactory.Create<FBatchScan>();
+            form.ScanReceiver = this;
+            form.ShowDialog();
+            UpdateScanButton();
         }
     }
 }
