@@ -151,15 +151,16 @@ namespace NAPS2.WinForms
             // rdMultipleScans
             // 
             resources.ApplyResources(this.rdMultipleScans, "rdMultipleScans");
+            this.rdMultipleScans.Checked = true;
             this.rdMultipleScans.Name = "rdMultipleScans";
             this.rdMultipleScans.TabStop = true;
             this.rdMultipleScans.UseVisualStyleBackColor = true;
+            this.rdMultipleScans.CheckedChanged += new System.EventHandler(this.rdMultipleScans_CheckedChanged);
             // 
             // rdSingleScan
             // 
             resources.ApplyResources(this.rdSingleScan, "rdSingleScan");
             this.rdSingleScan.Name = "rdSingleScan";
-            this.rdSingleScan.TabStop = true;
             this.rdSingleScan.UseVisualStyleBackColor = true;
             // 
             // btnAddProfile
@@ -178,6 +179,7 @@ namespace NAPS2.WinForms
             // 
             // comboProfile
             // 
+            this.comboProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboProfile.FormattingEnabled = true;
             resources.ApplyResources(this.comboProfile, "comboProfile");
             this.comboProfile.Name = "comboProfile";
@@ -215,19 +217,18 @@ namespace NAPS2.WinForms
             // 
             resources.ApplyResources(this.rdSeparateByPatchT, "rdSeparateByPatchT");
             this.rdSeparateByPatchT.Name = "rdSeparateByPatchT";
-            this.rdSeparateByPatchT.TabStop = true;
             this.rdSeparateByPatchT.UseVisualStyleBackColor = true;
             // 
             // rdFilePerImage
             // 
             resources.ApplyResources(this.rdFilePerImage, "rdFilePerImage");
             this.rdFilePerImage.Name = "rdFilePerImage";
-            this.rdFilePerImage.TabStop = true;
             this.rdFilePerImage.UseVisualStyleBackColor = true;
             // 
             // rdFilePerScan
             // 
             resources.ApplyResources(this.rdFilePerScan, "rdFilePerScan");
+            this.rdFilePerScan.Checked = true;
             this.rdFilePerScan.Name = "rdFilePerScan";
             this.rdFilePerScan.TabStop = true;
             this.rdFilePerScan.UseVisualStyleBackColor = true;
@@ -286,23 +287,24 @@ namespace NAPS2.WinForms
             // rdSaveToMultipleFiles
             // 
             resources.ApplyResources(this.rdSaveToMultipleFiles, "rdSaveToMultipleFiles");
+            this.rdSaveToMultipleFiles.Checked = true;
             this.rdSaveToMultipleFiles.Name = "rdSaveToMultipleFiles";
             this.rdSaveToMultipleFiles.TabStop = true;
             this.rdSaveToMultipleFiles.UseVisualStyleBackColor = true;
+            this.rdSaveToMultipleFiles.CheckedChanged += new System.EventHandler(this.rdSaveToMultipleFiles_CheckedChanged);
             // 
             // rdSaveToSingleFile
             // 
             resources.ApplyResources(this.rdSaveToSingleFile, "rdSaveToSingleFile");
             this.rdSaveToSingleFile.Name = "rdSaveToSingleFile";
-            this.rdSaveToSingleFile.TabStop = true;
             this.rdSaveToSingleFile.UseVisualStyleBackColor = true;
             // 
             // rdLoadIntoNaps2
             // 
             resources.ApplyResources(this.rdLoadIntoNaps2, "rdLoadIntoNaps2");
             this.rdLoadIntoNaps2.Name = "rdLoadIntoNaps2";
-            this.rdLoadIntoNaps2.TabStop = true;
             this.rdLoadIntoNaps2.UseVisualStyleBackColor = true;
+            this.rdLoadIntoNaps2.CheckedChanged += new System.EventHandler(this.rdLoadIntoNaps2_CheckedChanged);
             // 
             // FBatchScan
             // 

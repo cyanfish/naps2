@@ -84,7 +84,7 @@
     <Compile Include="ImportExport\Pdf\PdfSaver.cs" />
     <Compile Include="Scan\Batch\BatchSettings.cs" />
     <Compile Include="Scan\Images\Transforms\TrueContrastTransform.cs" />
-    <Compile Include="Scan\ProfileRenamer.cs" />
+    <Compile Include="Scan\ProfileNameTracker.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />
@@ -118,6 +118,7 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Util\ConditionalControls.cs" />
     <Compile Include="Util\IOverwritePrompt.cs" />
     <Compile Include="Util\Log.cs" />
     <Compile Include="Util\NullLogger.cs" />

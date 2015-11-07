@@ -43,8 +43,25 @@ namespace NAPS2.WinForms
             this.iconButtonSizer = iconButtonSizer;
             this.scanPerformer = scanPerformer;
             InitializeComponent();
+
+            RestoreFormState = false;
         }
 
         public IScanReceiver ScanReceiver { get; set; }
+
+        private void rdMultipleScans_CheckedChanged(object sender, EventArgs e)
+        {
+            ConditionalControls.SetVisible(panelScanDetails, rdMultipleScans.Checked);
+        }
+
+        private void rdLoadIntoNaps2_CheckedChanged(object sender, EventArgs e)
+        {
+            ConditionalControls.SetVisible(panelSaveTo, !rdLoadIntoNaps2.Checked);
+        }
+
+        private void rdSaveToMultipleFiles_CheckedChanged(object sender, EventArgs e)
+        {
+            ConditionalControls.SetVisible(panelSaveSeparator, rdSaveToMultipleFiles.Checked);
+        }
     }
 }
