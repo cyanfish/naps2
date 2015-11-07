@@ -15,7 +15,7 @@ namespace NAPS2.Scan.Batch
 
         public double ScanIntervalSeconds { get; set; }
 
-        public BatchSaveType SaveType { get; set;  }
+        public BatchOutputType OutputType { get; set;  }
 
         public BatchSaveSeparator SaveSeparator { get; set; }
 
@@ -26,12 +26,12 @@ namespace NAPS2.Scan.Batch
 
     public enum BatchSaveSeparator
     {
-        FilePerScan,
         FilePerPage,
+        FilePerScan,
         PatchT
     }
 
-    public enum BatchSaveType
+    public enum BatchOutputType
     {
         Load,
         SingleFile,
