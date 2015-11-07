@@ -46,13 +46,14 @@ namespace NAPS2.WinForms
             this.txtNumberOfScans = new System.Windows.Forms.TextBox();
             this.lblNumberOfScans = new System.Windows.Forms.Label();
             this.panelScanType = new System.Windows.Forms.Panel();
-            this.rdMultipleScans = new System.Windows.Forms.RadioButton();
+            this.rdMultipleScansPrompt = new System.Windows.Forms.RadioButton();
+            this.rdMultipleScansDelay = new System.Windows.Forms.RadioButton();
             this.rdSingleScan = new System.Windows.Forms.RadioButton();
             this.btnAddProfile = new System.Windows.Forms.Button();
             this.btnEditProfile = new System.Windows.Forms.Button();
             this.comboProfile = new System.Windows.Forms.ComboBox();
             this.lblProfile = new System.Windows.Forms.Label();
-            this.groupboxResult = new System.Windows.Forms.GroupBox();
+            this.groupboxOutput = new System.Windows.Forms.GroupBox();
             this.panelSaveSeparator = new System.Windows.Forms.Panel();
             this.linkPatchCodeInfo = new System.Windows.Forms.LinkLabel();
             this.rdSeparateByPatchT = new System.Windows.Forms.RadioButton();
@@ -69,10 +70,11 @@ namespace NAPS2.WinForms
             this.rdSaveToMultipleFiles = new System.Windows.Forms.RadioButton();
             this.rdSaveToSingleFile = new System.Windows.Forms.RadioButton();
             this.rdLoadIntoNaps2 = new System.Windows.Forms.RadioButton();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupboxScanConfig.SuspendLayout();
             this.panelScanDetails.SuspendLayout();
             this.panelScanType.SuspendLayout();
-            this.groupboxResult.SuspendLayout();
+            this.groupboxOutput.SuspendLayout();
             this.panelSaveSeparator.SuspendLayout();
             this.panelSaveTo.SuspendLayout();
             this.panelSaveType.SuspendLayout();
@@ -143,25 +145,33 @@ namespace NAPS2.WinForms
             // 
             // panelScanType
             // 
-            this.panelScanType.Controls.Add(this.rdMultipleScans);
+            this.panelScanType.Controls.Add(this.rdMultipleScansPrompt);
+            this.panelScanType.Controls.Add(this.rdMultipleScansDelay);
             this.panelScanType.Controls.Add(this.rdSingleScan);
             resources.ApplyResources(this.panelScanType, "panelScanType");
             this.panelScanType.Name = "panelScanType";
             // 
-            // rdMultipleScans
+            // rdMultipleScansPrompt
             // 
-            resources.ApplyResources(this.rdMultipleScans, "rdMultipleScans");
-            this.rdMultipleScans.Checked = true;
-            this.rdMultipleScans.Name = "rdMultipleScans";
-            this.rdMultipleScans.TabStop = true;
-            this.rdMultipleScans.UseVisualStyleBackColor = true;
-            this.rdMultipleScans.CheckedChanged += new System.EventHandler(this.rdMultipleScans_CheckedChanged);
+            resources.ApplyResources(this.rdMultipleScansPrompt, "rdMultipleScansPrompt");
+            this.rdMultipleScansPrompt.Name = "rdMultipleScansPrompt";
+            this.rdMultipleScansPrompt.UseVisualStyleBackColor = true;
+            // 
+            // rdMultipleScansDelay
+            // 
+            resources.ApplyResources(this.rdMultipleScansDelay, "rdMultipleScansDelay");
+            this.rdMultipleScansDelay.Checked = true;
+            this.rdMultipleScansDelay.Name = "rdMultipleScansDelay";
+            this.rdMultipleScansDelay.TabStop = true;
+            this.rdMultipleScansDelay.UseVisualStyleBackColor = true;
+            this.rdMultipleScansDelay.CheckedChanged += new System.EventHandler(this.rdMultipleScansDelay_CheckedChanged);
             // 
             // rdSingleScan
             // 
             resources.ApplyResources(this.rdSingleScan, "rdSingleScan");
             this.rdSingleScan.Name = "rdSingleScan";
             this.rdSingleScan.UseVisualStyleBackColor = true;
+            this.rdSingleScan.CheckedChanged += new System.EventHandler(this.rdSingleScan_CheckedChanged);
             // 
             // btnAddProfile
             // 
@@ -189,14 +199,14 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.lblProfile, "lblProfile");
             this.lblProfile.Name = "lblProfile";
             // 
-            // groupboxResult
+            // groupboxOutput
             // 
-            this.groupboxResult.Controls.Add(this.panelSaveSeparator);
-            this.groupboxResult.Controls.Add(this.panelSaveTo);
-            this.groupboxResult.Controls.Add(this.panelSaveType);
-            resources.ApplyResources(this.groupboxResult, "groupboxResult");
-            this.groupboxResult.Name = "groupboxResult";
-            this.groupboxResult.TabStop = false;
+            this.groupboxOutput.Controls.Add(this.panelSaveSeparator);
+            this.groupboxOutput.Controls.Add(this.panelSaveTo);
+            this.groupboxOutput.Controls.Add(this.panelSaveType);
+            resources.ApplyResources(this.groupboxOutput, "groupboxOutput");
+            this.groupboxOutput.Name = "groupboxOutput";
+            this.groupboxOutput.TabStop = false;
             // 
             // panelSaveSeparator
             // 
@@ -249,6 +259,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.btnChooseFolder, "btnChooseFolder");
             this.btnChooseFolder.Name = "btnChooseFolder";
             this.btnChooseFolder.UseVisualStyleBackColor = true;
+            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
             // 
             // linkSubstitutions
             // 
@@ -310,7 +321,7 @@ namespace NAPS2.WinForms
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupboxResult);
+            this.Controls.Add(this.groupboxOutput);
             this.Controls.Add(this.groupboxScanConfig);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnCancel);
@@ -324,7 +335,7 @@ namespace NAPS2.WinForms
             this.panelScanDetails.PerformLayout();
             this.panelScanType.ResumeLayout(false);
             this.panelScanType.PerformLayout();
-            this.groupboxResult.ResumeLayout(false);
+            this.groupboxOutput.ResumeLayout(false);
             this.panelSaveSeparator.ResumeLayout(false);
             this.panelSaveSeparator.PerformLayout();
             this.panelSaveTo.ResumeLayout(false);
@@ -348,14 +359,14 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ComboBox comboProfile;
         private System.Windows.Forms.Label lblProfile;
         private System.Windows.Forms.Panel panelScanType;
-        private System.Windows.Forms.RadioButton rdMultipleScans;
+        private System.Windows.Forms.RadioButton rdMultipleScansDelay;
         private System.Windows.Forms.RadioButton rdSingleScan;
         private System.Windows.Forms.Panel panelScanDetails;
         private System.Windows.Forms.Label lblNumberOfScans;
         private System.Windows.Forms.TextBox txtNumberOfScans;
         private System.Windows.Forms.TextBox txtTimeBetweenScans;
         private System.Windows.Forms.Label lblTimeBetweenScans;
-        private System.Windows.Forms.GroupBox groupboxResult;
+        private System.Windows.Forms.GroupBox groupboxOutput;
         private System.Windows.Forms.Panel panelSaveTo;
         private System.Windows.Forms.Button btnChooseFolder;
         private System.Windows.Forms.LinkLabel linkSubstitutions;
@@ -372,5 +383,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.RadioButton rdSeparateByPatchT;
         private System.Windows.Forms.RadioButton rdFilePerImage;
         private System.Windows.Forms.RadioButton rdFilePerScan;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.RadioButton rdMultipleScansPrompt;
     }
 }

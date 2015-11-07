@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
@@ -49,10 +50,14 @@ namespace NAPS2.WinForms
 
         public IScanReceiver ScanReceiver { get; set; }
 
-        private void rdMultipleScans_CheckedChanged(object sender, EventArgs e)
+        private void rdSingleScan_CheckedChanged(object sender, EventArgs e)
         {
-            ConditionalControls.SetVisible(rdFilePerScan, rdMultipleScans.Checked);
-            ConditionalControls.SetVisible(panelScanDetails, rdMultipleScans.Checked);
+            ConditionalControls.SetVisible(rdFilePerScan, !rdSingleScan.Checked && rdSaveToMultipleFiles.Checked);
+        }
+
+        private void rdMultipleScansDelay_CheckedChanged(object sender, EventArgs e)
+        {
+            ConditionalControls.SetVisible(panelScanDetails, rdMultipleScansDelay.Checked);
         }
 
         private void rdLoadIntoNaps2_CheckedChanged(object sender, EventArgs e)
@@ -63,6 +68,12 @@ namespace NAPS2.WinForms
         private void rdSaveToMultipleFiles_CheckedChanged(object sender, EventArgs e)
         {
             ConditionalControls.SetVisible(panelSaveSeparator, rdSaveToMultipleFiles.Checked);
+            ConditionalControls.SetVisible(rdFilePerScan, !rdSingleScan.Checked && rdSaveToMultipleFiles.Checked);
+        }
+
+        private void btnChooseFolder_Click(object sender, EventArgs e)
+        {
+            new SaveFileDialog().ShowDialog();
         }
     }
 }
