@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -32,6 +33,8 @@ namespace NAPS2.WinForms
 {
     public partial class FBatchScan : FormBase
     {
+        private const string PATCH_CODE_INFO_URL = "http://www.naps2.com/doc-batch-scan.html#patch-t";
+
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;
         private readonly IconButtonSizer iconButtonSizer;
@@ -74,6 +77,11 @@ namespace NAPS2.WinForms
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
             new SaveFileDialog().ShowDialog();
+        }
+
+        private void linkPatchCodeInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(PATCH_CODE_INFO_URL);
         }
     }
 }

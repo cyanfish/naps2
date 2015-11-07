@@ -57,7 +57,7 @@ namespace NAPS2.WinForms
             this.panelSaveSeparator = new System.Windows.Forms.Panel();
             this.linkPatchCodeInfo = new System.Windows.Forms.LinkLabel();
             this.rdSeparateByPatchT = new System.Windows.Forms.RadioButton();
-            this.rdFilePerImage = new System.Windows.Forms.RadioButton();
+            this.rdFilePerPage = new System.Windows.Forms.RadioButton();
             this.rdFilePerScan = new System.Windows.Forms.RadioButton();
             this.panelSaveTo = new System.Windows.Forms.Panel();
             this.btnChooseFolder = new System.Windows.Forms.Button();
@@ -212,7 +212,7 @@ namespace NAPS2.WinForms
             // 
             this.panelSaveSeparator.Controls.Add(this.linkPatchCodeInfo);
             this.panelSaveSeparator.Controls.Add(this.rdSeparateByPatchT);
-            this.panelSaveSeparator.Controls.Add(this.rdFilePerImage);
+            this.panelSaveSeparator.Controls.Add(this.rdFilePerPage);
             this.panelSaveSeparator.Controls.Add(this.rdFilePerScan);
             resources.ApplyResources(this.panelSaveSeparator, "panelSaveSeparator");
             this.panelSaveSeparator.Name = "panelSaveSeparator";
@@ -222,6 +222,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.linkPatchCodeInfo, "linkPatchCodeInfo");
             this.linkPatchCodeInfo.Name = "linkPatchCodeInfo";
             this.linkPatchCodeInfo.TabStop = true;
+            this.linkPatchCodeInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPatchCodeInfo_LinkClicked);
             // 
             // rdSeparateByPatchT
             // 
@@ -229,11 +230,11 @@ namespace NAPS2.WinForms
             this.rdSeparateByPatchT.Name = "rdSeparateByPatchT";
             this.rdSeparateByPatchT.UseVisualStyleBackColor = true;
             // 
-            // rdFilePerImage
+            // rdFilePerPage
             // 
-            resources.ApplyResources(this.rdFilePerImage, "rdFilePerImage");
-            this.rdFilePerImage.Name = "rdFilePerImage";
-            this.rdFilePerImage.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rdFilePerPage, "rdFilePerPage");
+            this.rdFilePerPage.Name = "rdFilePerPage";
+            this.rdFilePerPage.UseVisualStyleBackColor = true;
             // 
             // rdFilePerScan
             // 
@@ -381,7 +382,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Panel panelSaveSeparator;
         private System.Windows.Forms.LinkLabel linkPatchCodeInfo;
         private System.Windows.Forms.RadioButton rdSeparateByPatchT;
-        private System.Windows.Forms.RadioButton rdFilePerImage;
+        private System.Windows.Forms.RadioButton rdFilePerPage;
         private System.Windows.Forms.RadioButton rdFilePerScan;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.RadioButton rdMultipleScansPrompt;
