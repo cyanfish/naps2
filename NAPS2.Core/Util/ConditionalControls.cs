@@ -35,7 +35,7 @@ namespace NAPS2.Util
             }
             foreach (var c in EnumerateSiblingsAndUncles(control))
             {
-                if (LocationInForm(c).Y > bottom)
+                if (LocationInForm(c).Y >= bottom)
                 {
                     c.Top -= height;
                 }
@@ -57,7 +57,7 @@ namespace NAPS2.Util
             }
             foreach (var c in EnumerateSiblingsAndUncles(control))
             {
-                if (LocationInForm(c).Y > top)
+                if (LocationInForm(c).Y >= top)
                 {
                     c.Top += height;
                 }
@@ -75,7 +75,8 @@ namespace NAPS2.Util
 
         private static IEnumerable<Control> EnumerateSiblingsAndUncles(Control control)
         {
-            return EnumerateParents(control).SelectMany(x => x.Controls.Cast<Control>()).Except(EnumerateParents(control));
+            var parentsAndSelf = EnumerateParents(control).Concat(Enumerable.Repeat(control, 1));
+            return EnumerateParents(control).SelectMany(x => x.Controls.Cast<Control>()).Except(parentsAndSelf);
         }
 
         private static Point LocationInForm(Control control)

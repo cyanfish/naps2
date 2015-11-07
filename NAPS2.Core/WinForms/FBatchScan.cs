@@ -51,6 +51,7 @@ namespace NAPS2.WinForms
 
         private void rdMultipleScans_CheckedChanged(object sender, EventArgs e)
         {
+            ConditionalControls.SetVisible(rdFilePerScan, rdMultipleScans.Checked);
             ConditionalControls.SetVisible(panelScanDetails, rdMultipleScans.Checked);
         }
 

@@ -304,7 +304,7 @@
     <value>6, 110</value>
   </data>
   <data name="panelScanDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 85</value>
+    <value>364, 87</value>
   </data>
   <data name="panelScanDetails.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -603,8 +603,8 @@
   <data name="&gt;&gt;rdFilePerImage.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="rdFilePerScan.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="rdFilePerScan.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
   </data>
   <data name="rdFilePerScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -613,13 +613,16 @@
     <value>39, 0</value>
   </data>
   <data name="rdFilePerScan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 17</value>
+    <value>322, 23</value>
   </data>
   <data name="rdFilePerScan.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="rdFilePerScan.Text" xml:space="preserve">
     <value>One file per scan</value>
+  </data>
+  <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
   </data>
   <data name="&gt;&gt;rdFilePerScan.Name" xml:space="preserve">
     <value>rdFilePerScan</value>
@@ -949,7 +952,7 @@
     <value>12, 249</value>
   </data>
   <data name="groupboxResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 272</value>
+    <value>376, 266</value>
   </data>
   <data name="groupboxResult.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -976,7 +979,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>400, 531</value>
+    <value>400, 525</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1015,12 +1018,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.2.3.34059, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.2.3.36494, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FBatchScan</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.34059, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.36494, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
