@@ -62,9 +62,7 @@ namespace NAPS2.WinForms
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             BatchSettings = userConfigManager.Config.LastBatchSettings ?? new BatchSettings();
-            comboProfile.Items.AddRange(profileManager.Profiles.Cast<object>().ToArray());
-
-            comboProfile.Text = BatchSettings.ProfileDisplayName ?? profileManager.DefaultProfile.DisplayName;
+            UpdateProfiles();
 
             rdSingleScan.Checked = BatchSettings.ScanType == BatchScanType.Single;
             rdMultipleScansPrompt.Checked = BatchSettings.ScanType == BatchScanType.MultipleWithPrompt;
@@ -81,6 +79,13 @@ namespace NAPS2.WinForms
             rdFilePerScan.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.FilePerScan;
             rdFilePerPage.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.FilePerPage;
             rdSeparateByPatchT.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.PatchT;
+        }
+
+        private void UpdateProfiles()
+        {
+            comboProfile.Items.Clear();
+            comboProfile.Items.AddRange(profileManager.Profiles.Cast<object>().ToArray());
+            comboProfile.Text = BatchSettings.ProfileDisplayName ?? profileManager.DefaultProfile.DisplayName;
         }
 
         private void rdSingleScan_CheckedChanged(object sender, EventArgs e)
@@ -117,6 +122,37 @@ namespace NAPS2.WinForms
         private void comboProfile_Format(object sender, ListControlConvertEventArgs e)
         {
             e.Value = ((ExtendedScanSettings) e.ListItem).DisplayName;
+        }
+
+        private void btnEditProfile_Click(object sender, EventArgs e)
+        {
+            if (comboProfile.SelectedItem != null)
+            {
+                var fedit = FormFactory.Create<FEditScanSettings>();
+                fedit.ScanSettings = (ExtendedScanSettings)comboProfile.SelectedItem;
+                fedit.ShowDialog();
+                if (fedit.Result)
+                {
+                    profileManager.Profiles[comboProfile.SelectedIndex] = fedit.ScanSettings;
+                    profileManager.Save();
+                    BatchSettings.ProfileDisplayName = fedit.ScanSettings.DisplayName;
+                    UpdateProfiles();
+                }
+            }
+        }
+
+        private void btnAddProfile_Click(object sender, EventArgs e)
+        {
+            var fedit = FormFactory.Create<FEditScanSettings>();
+            fedit.ScanSettings = appConfigManager.Config.DefaultProfileSettings ?? new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
+            fedit.ShowDialog();
+            if (fedit.Result)
+            {
+                profileManager.Profiles.Add(fedit.ScanSettings);
+                profileManager.Save();
+                BatchSettings.ProfileDisplayName = fedit.ScanSettings.DisplayName;
+                UpdateProfiles();
+            }
         }
     }
 }

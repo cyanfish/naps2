@@ -179,6 +179,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.btnAddProfile, "btnAddProfile");
             this.btnAddProfile.Name = "btnAddProfile";
             this.btnAddProfile.UseVisualStyleBackColor = true;
+            this.btnAddProfile.Click += new System.EventHandler(this.btnAddProfile_Click);
             // 
             // btnEditProfile
             // 
@@ -186,6 +187,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.btnEditProfile, "btnEditProfile");
             this.btnEditProfile.Name = "btnEditProfile";
             this.btnEditProfile.UseVisualStyleBackColor = true;
+            this.btnEditProfile.Click += new System.EventHandler(this.btnEditProfile_Click);
             // 
             // comboProfile
             // 
