@@ -24,11 +24,13 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -42,14 +44,21 @@ namespace NAPS2.WinForms
         private readonly IconButtonSizer iconButtonSizer;
         private readonly IScanPerformer scanPerformer;
         private readonly IUserConfigManager userConfigManager;
+        private readonly BatchScanPerformer batchScanPerformer;
+        private readonly IErrorOutput errorOutput;
 
-        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager)
+        private bool batchRunning = false;
+        private bool cancelBatch = false;
+
+        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;
             this.iconButtonSizer = iconButtonSizer;
             this.scanPerformer = scanPerformer;
             this.userConfigManager = userConfigManager;
+            this.batchScanPerformer = batchScanPerformer;
+            this.errorOutput = errorOutput;
             InitializeComponent();
 
             RestoreFormState = false;
@@ -121,7 +130,7 @@ namespace NAPS2.WinForms
 
         private void comboProfile_Format(object sender, ListControlConvertEventArgs e)
         {
-            e.Value = ((ExtendedScanSettings) e.ListItem).DisplayName;
+            e.Value = ((ExtendedScanSettings)e.ListItem).DisplayName;
         }
 
         private void btnEditProfile_Click(object sender, EventArgs e)
@@ -152,6 +161,118 @@ namespace NAPS2.WinForms
                 profileManager.Save();
                 BatchSettings.ProfileDisplayName = fedit.ScanSettings.DisplayName;
                 UpdateProfiles();
+            }
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            if (batchRunning)
+            {
+                return;
+            }
+            batchRunning = true;
+            cancelBatch = false;
+            btnStart.Enabled = false;
+            btnCancel.Enabled = true;
+            btnCancel.Text = MiscResources.Cancel;
+            EnableDisableSettings(false);
+            Task.Factory.StartNew(DoBatchScan);
+
+            userConfigManager.Config.LastBatchSettings = BatchSettings;
+            userConfigManager.Save();
+        }
+
+        private void EnableDisableSettings(bool enabled)
+        {
+            EnableDisable(groupboxScanConfig, enabled);
+            EnableDisable(groupboxOutput, enabled);
+        }
+
+        private void EnableDisable(Control root, bool enabled)
+        {
+            foreach (Control control in root.Controls)
+            {
+                if (control.Controls.Count > 0)
+                {
+                    EnableDisable(control, enabled);
+                }
+                else
+                {
+                    control.Enabled = enabled;
+                }
+            }
+        }
+
+        private void DoBatchScan()
+        {
+            try
+            {
+                batchScanPerformer.PerformBatchScan(BatchSettings, status =>
+                {
+                    if (!cancelBatch)
+                    {
+                        Invoke(new Action(() =>
+                        {
+                            lblStatus.Text = status;
+                        }));
+                    }
+                    return !cancelBatch;
+                });
+                Invoke(new Action(() =>
+                {
+                    lblStatus.Text = cancelBatch
+                        ? MiscResources.BatchStatusCancelled
+                        : MiscResources.BatchStatusComplete;
+                }));
+            }
+            catch (ScanDriverException ex)
+            {
+                if (ex is ScanDriverUnknownException)
+                {
+                    Log.ErrorException("Error in batch scan", ex);
+                }
+                errorOutput.DisplayError(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Error in batch scan", ex);
+                errorOutput.DisplayError(MiscResources.BatchError);
+                Invoke(new Action(() =>
+                {
+                    lblStatus.Text = MiscResources.BatchStatusError;
+                }));
+            }
+            Invoke(new Action(() =>
+            {
+                batchRunning = false;
+                cancelBatch = false;
+                btnStart.Enabled = true;
+                btnCancel.Enabled = true;
+                btnCancel.Text = MiscResources.Close;
+                EnableDisableSettings(true);
+            }));
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (batchRunning)
+            {
+                cancelBatch = true;
+                btnCancel.Enabled = false;
+                lblStatus.Text = MiscResources.BatchStatusCancelling;
+            }
+            else
+            {
+                Close();
+            }
+        }
+
+        private void FBatchScan_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (cancelBatch)
+            {
+                // Keep dialog open while cancel is in progress to avoid concurrency issues
+                e.Cancel = true;
             }
         }
     }

@@ -95,12 +95,14 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnStart
             // 
             resources.ApplyResources(this.btnStart, "btnStart");
             this.btnStart.Name = "btnStart";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // groupboxScanConfig
             // 
@@ -333,6 +335,7 @@ namespace NAPS2.WinForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FBatchScan";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FBatchScan_FormClosing);
             this.groupboxScanConfig.ResumeLayout(false);
             this.groupboxScanConfig.PerformLayout();
             this.panelScanDetails.ResumeLayout(false);
