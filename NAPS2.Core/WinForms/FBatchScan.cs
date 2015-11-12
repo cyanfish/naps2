@@ -207,7 +207,7 @@ namespace NAPS2.WinForms
         {
             try
             {
-                batchScanPerformer.PerformBatchScan(BatchSettings, status =>
+                batchScanPerformer.PerformBatchScan(BatchSettings, this, ScanReceiver, status =>
                 {
                     if (!cancelBatch)
                     {

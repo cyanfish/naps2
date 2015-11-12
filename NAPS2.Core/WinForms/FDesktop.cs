@@ -482,7 +482,7 @@ namespace NAPS2.WinForms
 
                     UpdateScanButton();
 
-                    scanPerformer.PerformScan(profile, this, this);
+                    scanPerformer.PerformScan(profile, this, this, () => Application.DoEvents());
                     Activate();
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
@@ -503,7 +503,7 @@ namespace NAPS2.WinForms
         {
             if (profileManager.DefaultProfile != null)
             {
-                scanPerformer.PerformScan(profileManager.DefaultProfile, this, this);
+                scanPerformer.PerformScan(profileManager.DefaultProfile, this, this, () => Application.DoEvents());
                 Activate();
             }
             else
@@ -532,7 +532,7 @@ namespace NAPS2.WinForms
 
             UpdateScanButton();
 
-            scanPerformer.PerformScan(editSettingsForm.ScanSettings, this, this);
+            scanPerformer.PerformScan(editSettingsForm.ScanSettings, this, this, () => Application.DoEvents());
             Activate();
         }
 

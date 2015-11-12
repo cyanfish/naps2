@@ -27,6 +27,6 @@ namespace NAPS2.Scan
 {
     public interface IScanPerformer
     {
-        void PerformScan(ExtendedScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver);
+        void PerformScan(ExtendedScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver, Action betweenImageAction);
     }
 }

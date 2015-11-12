@@ -19,9 +19,7 @@ namespace NAPS2.Scan.Batch
 
         public BatchSaveSeparator SaveSeparator { get; set; }
 
-        public string SaveFolder { get; set; }
-
-        public string SaveFileName { get; set; }
+        public string SavePath { get; set; }
     }
 
     public enum BatchSaveSeparator

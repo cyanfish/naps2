@@ -37,13 +37,15 @@ namespace NAPS2.WinForms
         private readonly AppConfigManager appConfigManager;
         private readonly IconButtonSizer iconButtonSizer;
         private readonly IScanPerformer scanPerformer;
+        private readonly ProfileNameTracker profileNameTracker;
 
-        public FProfiles(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer)
+        public FProfiles(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;
             this.iconButtonSizer = iconButtonSizer;
             this.scanPerformer = scanPerformer;
+            this.profileNameTracker = profileNameTracker;
             InitializeComponent();
         }
 
@@ -170,6 +172,10 @@ namespace NAPS2.WinForms
                     : string.Format(MiscResources.ConfirmDeleteMultipleProfiles, lvProfiles.SelectedIndices.Count);
                 if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
+                    foreach (var profile in profileManager.Profiles.ElementsAt(lvProfiles.SelectedIndices.OfType<int>()))
+                    {
+                        profileNameTracker.DeletingProfile(profile.DisplayName);
+                    }
                     profileManager.Profiles.RemoveAll(lvProfiles.SelectedIndices.OfType<int>());
                     profileManager.Save();
                     UpdateProfiles();
@@ -230,7 +236,7 @@ namespace NAPS2.WinForms
                 return;
             }
             profileManager.Save();
-            scanPerformer.PerformScan(SelectedProfile, this, ScanReceiver);
+            scanPerformer.PerformScan(SelectedProfile, this, ScanReceiver, () => Application.DoEvents());
             Activate();
         }
 

@@ -30,5 +30,21 @@ namespace NAPS2.Scan
                 }
             }
         }
+
+        public void DeletingProfile(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return;
+            }
+            if (userConfigManager.Config.LastBatchSettings != null)
+            {
+                if (userConfigManager.Config.LastBatchSettings.ProfileDisplayName == name)
+                {
+                    userConfigManager.Config.LastBatchSettings.ProfileDisplayName = null;
+                    userConfigManager.Save();
+                }
+            }
+        }
     }
 }
