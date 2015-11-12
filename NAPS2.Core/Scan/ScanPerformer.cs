@@ -39,7 +39,7 @@ namespace NAPS2.Scan
             this.errorOutput = errorOutput;
         }
 
-        public void PerformScan(ExtendedScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver, Action betweenImageAction)
+        public void PerformScan(ExtendedScanSettings scanSettings, IWin32Window dialogParent, Action<IScannedImage> imageCallback)
         {
             var driver = driverFactory.Create(scanSettings.DriverName);
             driver.DialogParent = dialogParent;
@@ -65,8 +65,7 @@ namespace NAPS2.Scan
 
                 foreach (IScannedImage scannedImage in driver.Scan())
                 {
-                    scanReceiver.ReceiveScannedImage(scannedImage);
-                    betweenImageAction();
+                    imageCallback(scannedImage);
                 }
             }
             catch (ScanDriverException e)

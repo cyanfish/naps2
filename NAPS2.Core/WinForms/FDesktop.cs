@@ -47,7 +47,7 @@ using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
-    public partial class FDesktop : FormBase, IScanReceiver, IAutoUpdaterClient
+    public partial class FDesktop : FormBase, IAutoUpdaterClient
     {
         private readonly IEmailer emailer;
         private readonly IScannedImageImporter scannedImageImporter;
@@ -232,6 +232,7 @@ namespace NAPS2.WinForms
             imageList.Images.Add(scannedImage);
             AppendThumbnail(scannedImage);
             changeTracker.HasUnsavedChanges = true;
+            Application.DoEvents();
         }
 
         private void UpdateThumbnails()
@@ -482,7 +483,7 @@ namespace NAPS2.WinForms
 
                     UpdateScanButton();
 
-                    scanPerformer.PerformScan(profile, this, this, () => Application.DoEvents());
+                    scanPerformer.PerformScan(profile, this, ReceiveScannedImage);
                     Activate();
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
@@ -503,7 +504,7 @@ namespace NAPS2.WinForms
         {
             if (profileManager.DefaultProfile != null)
             {
-                scanPerformer.PerformScan(profileManager.DefaultProfile, this, this, () => Application.DoEvents());
+                scanPerformer.PerformScan(profileManager.DefaultProfile, this, ReceiveScannedImage);
                 Activate();
             }
             else
@@ -532,7 +533,7 @@ namespace NAPS2.WinForms
 
             UpdateScanButton();
 
-            scanPerformer.PerformScan(editSettingsForm.ScanSettings, this, this, () => Application.DoEvents());
+            scanPerformer.PerformScan(editSettingsForm.ScanSettings, this, ReceiveScannedImage);
             Activate();
         }
 
@@ -734,7 +735,7 @@ namespace NAPS2.WinForms
         private void ShowProfilesForm()
         {
             var form = FormFactory.Create<FProfiles>();
-            form.ScanReceiver = this;
+            form.ImageCallback = ReceiveScannedImage;
             form.ShowDialog();
             UpdateScanButton();
         }
@@ -1227,7 +1228,7 @@ namespace NAPS2.WinForms
         private void tsBatchScan_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FBatchScan>();
-            form.ScanReceiver = this;
+            form.ImageCallback = ReceiveScannedImage;
             form.ShowDialog();
             UpdateScanButton();
         }

@@ -199,7 +199,6 @@
     <Compile Include="Scan\Images\ImageScaleHelper.cs" />
     <Compile Include="Scan\IScanDriver.cs" />
     <Compile Include="Scan\IScanPerformer.cs" />
-    <Compile Include="Scan\IScanReceiver.cs" />
     <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\ScanDevice.cs" />
     <Compile Include="Scan\ScanPerformer.cs" />

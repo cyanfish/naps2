@@ -22,11 +22,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Scan.Images;
 
 namespace NAPS2.Scan
 {
     public interface IScanPerformer
     {
-        void PerformScan(ExtendedScanSettings scanSettings, IWin32Window dialogParent, IScanReceiver scanReceiver, Action betweenImageAction);
+        void PerformScan(ExtendedScanSettings scanSettings, IWin32Window dialogParent, Action<IScannedImage> imageCallback);
     }
 }

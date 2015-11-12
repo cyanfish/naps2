@@ -39,19 +39,19 @@ namespace NAPS2.Scan.Batch
             this.userConfigManager = userConfigManager;
         }
 
-        public void PerformBatchScan(BatchSettings settings, IWin32Window dialogParent, IScanReceiver scanReceiver, Func<string, bool> progressCallback)
+        public void PerformBatchScan(BatchSettings settings, IWin32Window dialogParent, Action<IScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
             var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, imageSaver, pdfSettingsContainer, userConfigManager)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
                 DialogParent = dialogParent,
-                LoadImagesScanReceiver = scanReceiver
+                LoadImageCallback = imageCallback
             };
             state.Do();
         }
 
-        private class BatchState : IScanReceiver
+        private class BatchState
         {
             private readonly IScanPerformer scanPerformer;
             private readonly IProfileManager profileManager;
@@ -81,7 +81,7 @@ namespace NAPS2.Scan.Batch
 
             public IWin32Window DialogParent { get; set; }
 
-            public IScanReceiver LoadImagesScanReceiver { get; set; }
+            public Action<IScannedImage> LoadImageCallback { get; set; }
 
             public void Do()
             {
@@ -121,25 +121,19 @@ namespace NAPS2.Scan.Batch
 
             private void InputOneScan(int scanNumber)
             {
-                scans.Add(new List<IScannedImage>());
+                var scan = new List<IScannedImage>();
                 int pageNumber = 1;
-                scanPerformer.PerformScan(profile, DialogParent, this, () =>
+                ProgressCallback(scanNumber == -1
+                    ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
+                    : string.Format(MiscResources.BatchStatusScanPage, scanNumber + 1, pageNumber++));
+                scanPerformer.PerformScan(profile, DialogParent, image =>
                 {
-                    if (scanNumber == -1)
-                    {
-                        ProgressCallback(string.Format(MiscResources.BatchStatusPage, pageNumber + 1));
-                    }
-                    else
-                    {
-                        ProgressCallback(string.Format(MiscResources.BatchStatusScanPage, scanNumber + 1, pageNumber + 1));
-                    }
-                    pageNumber++;
+                    scan.Add(image);
+                    ProgressCallback(scanNumber == -1
+                        ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
+                        : string.Format(MiscResources.BatchStatusScanPage, scanNumber + 1, pageNumber++));
                 });
-            }
-            
-            public void ReceiveScannedImage(IScannedImage scannedImage)
-            {
-                scans.Last().Add(scannedImage);
+                scans.Add(scan);
             }
 
             private bool PromptForNextScan()
@@ -156,7 +150,7 @@ namespace NAPS2.Scan.Batch
                 {
                     foreach (var image in allImages)
                     {
-                        LoadImagesScanReceiver.ReceiveScannedImage(image);
+                        LoadImageCallback(image);
                     }
                 }
                 else if (Settings.OutputType == BatchOutputType.SingleFile)

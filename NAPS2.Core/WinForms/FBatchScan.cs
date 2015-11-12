@@ -31,6 +31,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Scan.Images;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -64,7 +65,7 @@ namespace NAPS2.WinForms
             RestoreFormState = false;
         }
 
-        public IScanReceiver ScanReceiver { get; set; }
+        public Action<IScannedImage> ImageCallback { get; set; }
 
         private BatchSettings BatchSettings { get; set; }
 
@@ -207,7 +208,7 @@ namespace NAPS2.WinForms
         {
             try
             {
-                batchScanPerformer.PerformBatchScan(BatchSettings, this, ScanReceiver, status =>
+                batchScanPerformer.PerformBatchScan(BatchSettings, this, ImageCallback, status =>
                 {
                     if (!cancelBatch)
                     {

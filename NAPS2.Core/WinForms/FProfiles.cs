@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -49,7 +50,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        public IScanReceiver ScanReceiver { get; set; }
+        public Action<IScannedImage> ImageCallback { get; set; }
 
         private ExtendedScanSettings SelectedProfile
         {
@@ -236,7 +237,7 @@ namespace NAPS2.WinForms
                 return;
             }
             profileManager.Save();
-            scanPerformer.PerformScan(SelectedProfile, this, ScanReceiver, () => Application.DoEvents());
+            scanPerformer.PerformScan(SelectedProfile, this, ImageCallback);
             Activate();
         }
 

@@ -40,7 +40,7 @@ namespace NAPS2.Console
 {
     using Console = System.Console;
 
-    public class AutomatedScanning : IScanReceiver
+    public class AutomatedScanning
     {
         private readonly ImageSaver imageSaver;
         private readonly IEmailer emailer;
@@ -403,7 +403,7 @@ namespace NAPS2.Console
                 }
                 OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
                 pagesScanned = 0;
-                scanPerformer.PerformScan(profile, parentWindow, this, () => { });
+                scanPerformer.PerformScan(profile, parentWindow, ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }
