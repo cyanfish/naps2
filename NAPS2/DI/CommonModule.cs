@@ -39,7 +39,7 @@ namespace NAPS2.DI
             Bind<IScannedImageFactory>().To<FileBasedScannedImageFactory>();
             Bind<IScanPerformer>().To<ScanPerformer>();
 #if DEBUG && false
-            Bind<IScanDriverFactory>().To<StubScanDriverFactory>();
+            Bind<IScanDriverFactory>().To<Scan.Stub.StubScanDriverFactory>();
 #else
             Bind<IScanDriverFactory>().To<NinjectScanDriverFactory>();
 #endif
