@@ -721,7 +721,7 @@
     <value>NoControl</value>
   </data>
   <data name="linkSubstitutions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 86</value>
+    <value>3, 42</value>
   </data>
   <data name="linkSubstitutions.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
@@ -744,113 +744,62 @@
   <data name="&gt;&gt;linkSubstitutions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="txtFileName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 63</value>
-  </data>
-  <data name="txtFileName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 20</value>
-  </data>
-  <data name="txtFileName.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtFileName.Name" xml:space="preserve">
-    <value>txtFileName</value>
-  </data>
-  <data name="&gt;&gt;txtFileName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtFileName.Parent" xml:space="preserve">
-    <value>panelSaveTo</value>
-  </data>
-  <data name="&gt;&gt;txtFileName.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lblFileName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblFileName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblFileName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 47</value>
-  </data>
-  <data name="lblFileName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="lblFileName.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblFileName.Text" xml:space="preserve">
-    <value>File name:</value>
-  </data>
-  <data name="&gt;&gt;lblFileName.Name" xml:space="preserve">
-    <value>lblFileName</value>
-  </data>
-  <data name="&gt;&gt;lblFileName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFileName.Parent" xml:space="preserve">
-    <value>panelSaveTo</value>
-  </data>
-  <data name="&gt;&gt;lblFileName.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="txtFolder.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtFilePath.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 19</value>
   </data>
-  <data name="txtFolder.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtFilePath.Size" type="System.Drawing.Size, System.Drawing">
     <value>318, 20</value>
   </data>
-  <data name="txtFolder.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtFilePath.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;txtFolder.Name" xml:space="preserve">
-    <value>txtFolder</value>
+  <data name="&gt;&gt;txtFilePath.Name" xml:space="preserve">
+    <value>txtFilePath</value>
   </data>
-  <data name="&gt;&gt;txtFolder.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtFilePath.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtFolder.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtFilePath.Parent" xml:space="preserve">
     <value>panelSaveTo</value>
   </data>
-  <data name="&gt;&gt;txtFolder.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;txtFilePath.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="lblSaveToFolder.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblFilePath.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblSaveToFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblFilePath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblSaveToFolder.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFilePath.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 3</value>
   </data>
-  <data name="lblSaveToFolder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
+  <data name="lblFilePath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
-  <data name="lblSaveToFolder.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFilePath.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="lblSaveToFolder.Text" xml:space="preserve">
-    <value>Save to folder:</value>
+  <data name="lblFilePath.Text" xml:space="preserve">
+    <value>File path:</value>
   </data>
-  <data name="&gt;&gt;lblSaveToFolder.Name" xml:space="preserve">
-    <value>lblSaveToFolder</value>
+  <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
+    <value>lblFilePath</value>
   </data>
-  <data name="&gt;&gt;lblSaveToFolder.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFilePath.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblSaveToFolder.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFilePath.Parent" xml:space="preserve">
     <value>panelSaveTo</value>
   </data>
-  <data name="&gt;&gt;lblSaveToFolder.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;lblFilePath.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="panelSaveTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 158</value>
   </data>
   <data name="panelSaveTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 106</value>
+    <value>364, 60</value>
   </data>
   <data name="panelSaveTo.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -982,7 +931,7 @@
     <value>12, 272</value>
   </data>
   <data name="groupboxOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 266</value>
+    <value>376, 222</value>
   </data>
   <data name="groupboxOutput.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1012,7 +961,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>400, 548</value>
+    <value>400, 506</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1051,7 +1000,7 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.2.3.2852, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.2.3.26593, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;folderBrowserDialog1.Name" xml:space="preserve">
     <value>folderBrowserDialog1</value>
@@ -1063,6 +1012,6 @@
     <value>FBatchScan</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.2852, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.26593, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

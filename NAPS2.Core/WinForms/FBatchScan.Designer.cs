@@ -62,10 +62,8 @@ namespace NAPS2.WinForms
             this.panelSaveTo = new System.Windows.Forms.Panel();
             this.btnChooseFolder = new System.Windows.Forms.Button();
             this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
-            this.txtFileName = new System.Windows.Forms.TextBox();
-            this.lblFileName = new System.Windows.Forms.Label();
-            this.txtFolder = new System.Windows.Forms.TextBox();
-            this.lblSaveToFolder = new System.Windows.Forms.Label();
+            this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.lblFilePath = new System.Windows.Forms.Label();
             this.panelSaveType = new System.Windows.Forms.Panel();
             this.rdSaveToMultipleFiles = new System.Windows.Forms.RadioButton();
             this.rdSaveToSingleFile = new System.Windows.Forms.RadioButton();
@@ -253,10 +251,8 @@ namespace NAPS2.WinForms
             // 
             this.panelSaveTo.Controls.Add(this.btnChooseFolder);
             this.panelSaveTo.Controls.Add(this.linkSubstitutions);
-            this.panelSaveTo.Controls.Add(this.txtFileName);
-            this.panelSaveTo.Controls.Add(this.lblFileName);
-            this.panelSaveTo.Controls.Add(this.txtFolder);
-            this.panelSaveTo.Controls.Add(this.lblSaveToFolder);
+            this.panelSaveTo.Controls.Add(this.txtFilePath);
+            this.panelSaveTo.Controls.Add(this.lblFilePath);
             resources.ApplyResources(this.panelSaveTo, "panelSaveTo");
             this.panelSaveTo.Name = "panelSaveTo";
             // 
@@ -272,26 +268,17 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
             this.linkSubstitutions.Name = "linkSubstitutions";
             this.linkSubstitutions.TabStop = true;
+            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
             // 
-            // txtFileName
+            // txtFilePath
             // 
-            resources.ApplyResources(this.txtFileName, "txtFileName");
-            this.txtFileName.Name = "txtFileName";
+            resources.ApplyResources(this.txtFilePath, "txtFilePath");
+            this.txtFilePath.Name = "txtFilePath";
             // 
-            // lblFileName
+            // lblFilePath
             // 
-            resources.ApplyResources(this.lblFileName, "lblFileName");
-            this.lblFileName.Name = "lblFileName";
-            // 
-            // txtFolder
-            // 
-            resources.ApplyResources(this.txtFolder, "txtFolder");
-            this.txtFolder.Name = "txtFolder";
-            // 
-            // lblSaveToFolder
-            // 
-            resources.ApplyResources(this.lblSaveToFolder, "lblSaveToFolder");
-            this.lblSaveToFolder.Name = "lblSaveToFolder";
+            resources.ApplyResources(this.lblFilePath, "lblFilePath");
+            this.lblFilePath.Name = "lblFilePath";
             // 
             // panelSaveType
             // 
@@ -377,10 +364,8 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Panel panelSaveTo;
         private System.Windows.Forms.Button btnChooseFolder;
         private System.Windows.Forms.LinkLabel linkSubstitutions;
-        private System.Windows.Forms.TextBox txtFileName;
-        private System.Windows.Forms.Label lblFileName;
-        private System.Windows.Forms.TextBox txtFolder;
-        private System.Windows.Forms.Label lblSaveToFolder;
+        private System.Windows.Forms.TextBox txtFilePath;
+        private System.Windows.Forms.Label lblFilePath;
         private System.Windows.Forms.Panel panelSaveType;
         private System.Windows.Forms.RadioButton rdSaveToMultipleFiles;
         private System.Windows.Forms.RadioButton rdSaveToSingleFile;

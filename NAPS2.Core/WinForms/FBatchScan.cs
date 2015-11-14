@@ -72,6 +72,11 @@ namespace NAPS2.WinForms
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             BatchSettings = userConfigManager.Config.LastBatchSettings ?? new BatchSettings();
+            UpdateUIFromSettings();
+        }
+
+        private void UpdateUIFromSettings()
+        {
             UpdateProfiles();
 
             rdSingleScan.Checked = BatchSettings.ScanType == BatchScanType.Single;
@@ -89,6 +94,57 @@ namespace NAPS2.WinForms
             rdFilePerScan.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.FilePerScan;
             rdFilePerPage.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.FilePerPage;
             rdSeparateByPatchT.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.PatchT;
+        }
+
+        private bool ValidateSettings()
+        {
+            bool ok = true;
+
+            BatchSettings.ProfileDisplayName = comboProfile.Text;
+            if (comboProfile.SelectedIndex == -1)
+            {
+                ok = false;
+                comboProfile.Focus();
+            }
+
+            BatchSettings.ScanType = rdMultipleScansPrompt.Checked ? BatchScanType.MultipleWithPrompt
+                                   : rdMultipleScansDelay.Checked ? BatchScanType.MultipleWithDelay
+                                   : BatchScanType.Single;
+
+            int scanCount;
+            if (!int.TryParse(txtNumberOfScans.Text, out scanCount) || scanCount < 0)
+            {
+                ok = false;
+                scanCount = 0;
+                txtNumberOfScans.Focus();
+            }
+            BatchSettings.ScanCount = scanCount;
+
+            double scanInterval;
+            if (!double.TryParse(txtTimeBetweenScans.Text, out scanInterval) || scanInterval < 0)
+            {
+                ok = false;
+                scanInterval = 0;
+                txtTimeBetweenScans.Focus();
+            }
+            BatchSettings.ScanIntervalSeconds = scanInterval;
+
+            BatchSettings.OutputType = rdSaveToSingleFile.Checked ? BatchOutputType.SingleFile
+                                     : rdSaveToMultipleFiles.Checked ? BatchOutputType.MultipleFiles
+                                     : BatchOutputType.Load;
+
+            BatchSettings.SaveSeparator = rdFilePerScan.Checked ? BatchSaveSeparator.FilePerScan
+                                        : rdSeparateByPatchT.Checked ? BatchSaveSeparator.PatchT
+                                        : BatchSaveSeparator.FilePerPage;
+
+            BatchSettings.SavePath = txtFilePath.Text;
+            if (BatchSettings.OutputType != BatchOutputType.Load && string.IsNullOrWhiteSpace(BatchSettings.SavePath))
+            {
+                ok = false;
+                txtFilePath.Focus();
+            }
+
+            return ok;
         }
 
         private void UpdateProfiles()
@@ -121,7 +177,23 @@ namespace NAPS2.WinForms
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
-            new SaveFileDialog().ShowDialog();
+            var sd = new SaveFileDialog
+            {
+                OverwritePrompt = false,
+                AddExtension = true,
+                Filter = MiscResources.FileTypePdf + "|*.pdf|" +
+                         MiscResources.FileTypeBmp + "|*.bmp|" +
+                         MiscResources.FileTypeEmf + "|*.emf|" +
+                         MiscResources.FileTypeExif + "|*.exif|" +
+                         MiscResources.FileTypeGif + "|*.gif|" +
+                         MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
+                         MiscResources.FileTypePng + "|*.png|" +
+                         MiscResources.FileTypeTiff + "|*.tiff;*.tif",
+            };
+            if (sd.ShowDialog() == DialogResult.OK)
+            {
+                txtFilePath.Text = sd.FileName;
+            }
         }
 
         private void linkPatchCodeInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -171,14 +243,25 @@ namespace NAPS2.WinForms
             {
                 return;
             }
+            if (!ValidateSettings())
+            {
+                return;
+            }
+
+            // Update state
             batchRunning = true;
             cancelBatch = false;
+
+            // Update UI
             btnStart.Enabled = false;
             btnCancel.Enabled = true;
             btnCancel.Text = MiscResources.Cancel;
             EnableDisableSettings(false);
+
+            // Start the batch
             Task.Factory.StartNew(DoBatchScan);
 
+            // Save settings for next time (could also do on form close)
             userConfigManager.Config.LastBatchSettings = BatchSettings;
             userConfigManager.Save();
         }
@@ -208,7 +291,7 @@ namespace NAPS2.WinForms
         {
             try
             {
-                batchScanPerformer.PerformBatchScan(BatchSettings, this, ImageCallback, status =>
+                batchScanPerformer.PerformBatchScan(BatchSettings, this, image => Invoke(new Action(() => ImageCallback(image))), status =>
                 {
                     if (!cancelBatch)
                     {
@@ -274,6 +357,16 @@ namespace NAPS2.WinForms
             {
                 // Keep dialog open while cancel is in progress to avoid concurrency issues
                 e.Cancel = true;
+            }
+        }
+
+        private void linkSubstitutions_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var form = FormFactory.Create<FPlaceholders>();
+            form.FileName = txtFilePath.Text;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                txtFilePath.Text = form.FileName;
             }
         }
     }
