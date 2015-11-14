@@ -54,10 +54,7 @@ namespace NAPS2.Scan.Stub
         {
             for (int i = 0; i < ImageCount; i++)
             {
-                if (i != 0)
-                {
-                    Thread.Sleep(500);
-                }
+                Thread.Sleep(500);
                 yield return MakeImage();
             }
         }
