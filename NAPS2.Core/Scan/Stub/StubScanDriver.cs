@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
 
@@ -51,7 +52,31 @@ namespace NAPS2.Scan.Stub
 
         public IEnumerable<IScannedImage> Scan()
         {
-            yield return MakeImage();
+            for (int i = 0; i < ImageCount; i++)
+            {
+                if (i != 0)
+                {
+                    Thread.Sleep(500);
+                }
+                yield return MakeImage();
+            }
+        }
+
+        private int ImageCount
+        {
+            get
+            {
+                switch (ScanSettings.PaperSource)
+                {
+                    case ScanSource.Glass:
+                        return 1;
+                    case ScanSource.Feeder:
+                        return 3;
+                    case ScanSource.Duplex:
+                        return 4;
+                }
+                return 0;
+            }
         }
 
         private IScannedImage MakeImage()
