@@ -39,7 +39,7 @@ namespace NAPS2.Scan.Stub
             this.scannedImageFactory = scannedImageFactory;
         }
 
-        public ExtendedScanSettings ScanSettings { get; set; }
+        public ExtendedScanSettings ScanProfile { get; set; }
 
         public ScanDevice ScanDevice { get; set; }
 
@@ -63,7 +63,7 @@ namespace NAPS2.Scan.Stub
         {
             get
             {
-                switch (ScanSettings.PaperSource)
+                switch (ScanProfile.PaperSource)
                 {
                     case ScanSource.Glass:
                         return 1;
@@ -84,7 +84,7 @@ namespace NAPS2.Scan.Stub
                 g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
                 g.DrawString((_number++).ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
             }
-            var image = scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, ScanSettings.MaxQuality);
+            var image = scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, ScanProfile.MaxQuality);
             return image;
         }
 

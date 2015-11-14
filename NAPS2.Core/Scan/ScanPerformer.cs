@@ -43,7 +43,7 @@ namespace NAPS2.Scan
         {
             var driver = driverFactory.Create(scanSettings.DriverName);
             driver.DialogParent = dialogParent;
-            driver.ScanSettings = scanSettings;
+            driver.ScanProfile = scanSettings;
             try
             {
                 if (scanSettings.Device == null)

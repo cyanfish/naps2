@@ -53,10 +53,10 @@ namespace NAPS2.Scan.Wia
 
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
-            using (var eventLoop = new WiaBackgroundEventLoop(ScanSettings, ScanDevice))
+            using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice))
             {
                 bool supportsFeeder = eventLoop.GetSync(wia => WiaApi.DeviceSupportsFeeder(wia.Device));
-                if (ScanSettings.PaperSource != ScanSource.Glass && !supportsFeeder)
+                if (ScanProfile.PaperSource != ScanSource.Glass && !supportsFeeder)
                 {
                     throw new NoFeederSupportException();
                 }
@@ -81,7 +81,7 @@ namespace NAPS2.Scan.Wia
                         break;
                     }
                     yield return image;
-                    if (ScanSettings.PaperSource == ScanSource.Glass)
+                    if (ScanProfile.PaperSource == ScanSource.Glass)
                     {
                         break;
                     }
@@ -103,15 +103,15 @@ namespace NAPS2.Scan.Wia
                     using (Image output = Image.FromStream(stream))
                     {
                         double scaleFactor = 1;
-                        if (!ScanSettings.UseNativeUI)
+                        if (!ScanProfile.UseNativeUI)
                         {
-                            scaleFactor = ScanSettings.AfterScanScale.ToIntScaleFactor();
+                            scaleFactor = ScanProfile.AfterScanScale.ToIntScaleFactor();
                         }
 
                         using (var result = ImageScaleHelper.ScaleImage(output, scaleFactor))
                         {
-                            ScanBitDepth bitDepth = ScanSettings.UseNativeUI ? ScanBitDepth.C24Bit : ScanSettings.BitDepth;
-                            return scannedImageFactory.Create(result, bitDepth, ScanSettings.MaxQuality);
+                            ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
+                            return scannedImageFactory.Create(result, bitDepth, ScanProfile.MaxQuality);
                         }
                     }
                 }
@@ -120,7 +120,7 @@ namespace NAPS2.Scan.Wia
             {
                 if ((uint)e.ErrorCode == WiaApi.Errors.OUT_OF_PAPER)
                 {
-                    if (ScanSettings.PaperSource != ScanSource.Glass && pageNumber == 1)
+                    if (ScanProfile.PaperSource != ScanSource.Glass && pageNumber == 1)
                     {
                         throw new NoPagesException();
                     }

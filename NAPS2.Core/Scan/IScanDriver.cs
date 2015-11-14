@@ -33,10 +33,10 @@ namespace NAPS2.Scan
     public interface IScanDriver
     {
         /// <summary>
-        /// Sets the settings used by the driver for scanning.
+        /// Sets the profile used by the driver for scanning.
         /// This must be set before calling Scan.
         /// </summary>
-        ExtendedScanSettings ScanSettings { set; }
+        ExtendedScanSettings ScanProfile { set; }
 
         /// <summary>
         /// Sets the device used by the driver for scanning.
