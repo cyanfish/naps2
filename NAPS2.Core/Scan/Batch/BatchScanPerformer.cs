@@ -62,6 +62,7 @@ namespace NAPS2.Scan.Batch
             private readonly UserConfigManager userConfigManager;
 
             private ExtendedScanSettings profile;
+            private ScanParams scanParams;
             private List<List<IScannedImage>> scans;
 
             public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, ImageSaver imageSaver, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager)
@@ -86,6 +87,10 @@ namespace NAPS2.Scan.Batch
             public void Do()
             {
                 profile = profileManager.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
+                scanParams = new ScanParams
+                {
+                    DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == BatchSaveSeparator.PatchT
+                };
                 Input();
                 Output();
             }
@@ -126,7 +131,7 @@ namespace NAPS2.Scan.Batch
                 ProgressCallback(scanNumber == -1
                     ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
                     : string.Format(MiscResources.BatchStatusScanPage, scanNumber + 1, pageNumber++));
-                scanPerformer.PerformScan(profile, DialogParent, image =>
+                scanPerformer.PerformScan(profile, scanParams, DialogParent, image =>
                 {
                     scan.Add(image);
                     ProgressCallback(scanNumber == -1

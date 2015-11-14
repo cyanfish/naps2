@@ -39,6 +39,12 @@ namespace NAPS2.Scan
         ExtendedScanSettings ScanProfile { set; }
 
         /// <summary>
+        /// Sets the runtime parameters used by the driver for scanning.
+        /// This must be set before calling Scan.
+        /// </summary>
+        ScanParams ScanParams { set; }
+
+        /// <summary>
         /// Sets the device used by the driver for scanning.
         /// This must be set before calling Scan.
         /// </summary>

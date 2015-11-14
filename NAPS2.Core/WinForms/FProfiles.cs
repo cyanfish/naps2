@@ -237,7 +237,7 @@ namespace NAPS2.WinForms
                 return;
             }
             profileManager.Save();
-            scanPerformer.PerformScan(SelectedProfile, this, ImageCallback);
+            scanPerformer.PerformScan(SelectedProfile, new ScanParams(), this, ImageCallback);
             Activate();
         }
 

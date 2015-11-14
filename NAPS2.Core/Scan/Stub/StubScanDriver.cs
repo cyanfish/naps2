@@ -41,6 +41,8 @@ namespace NAPS2.Scan.Stub
 
         public ExtendedScanSettings ScanProfile { get; set; }
 
+        public ScanParams ScanParams { get; set; }
+
         public ScanDevice ScanDevice { get; set; }
 
         public IWin32Window DialogParent { get; set; }

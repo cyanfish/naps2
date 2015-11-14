@@ -109,7 +109,7 @@ namespace NAPS2.Scan.Twain
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;
                         var img = scannedImageFactory.Create(result, bitDepth, ScanProfile.MaxQuality);
-                        if (ScanProfile.DetectPatchCodes)
+                        if (ScanParams.DetectPatchCodes)
                         {
                             foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
                             {
@@ -289,7 +289,7 @@ namespace NAPS2.Scan.Twain
             ds.Capabilities.ICapYResolution.SetValue(dpi);
 
             // Patch codes
-            if (ScanProfile.DetectPatchCodes)
+            if (ScanParams.DetectPatchCodes)
             {
                 ds.Capabilities.ICapPatchCodeDetectionEnabled.SetValue(BoolType.True);
             }

@@ -33,6 +33,8 @@ namespace NAPS2.Scan
 
         public ExtendedScanSettings ScanProfile { get; set; }
 
+        public ScanParams ScanParams { get; set; }
+
         public ScanDevice ScanDevice { get; set; }
 
         public IWin32Window DialogParent { get; set; }
@@ -64,6 +66,10 @@ namespace NAPS2.Scan
             if (ScanProfile == null)
             {
                 throw new InvalidOperationException("IScanDriver.ScanSettings must be specified before calling Scan().");
+            }
+            if (ScanParams == null)
+            {
+                throw new InvalidOperationException("IScanDriver.ScanParams must be specified before calling Scan().");
             }
             if (ScanDevice == null)
             {

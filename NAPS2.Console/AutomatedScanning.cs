@@ -403,7 +403,7 @@ namespace NAPS2.Console
                 }
                 OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
                 pagesScanned = 0;
-                scanPerformer.PerformScan(profile, parentWindow, ReceiveScannedImage);
+                scanPerformer.PerformScan(profile, new ScanParams(), parentWindow, ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }

@@ -39,14 +39,15 @@ namespace NAPS2.Scan
             this.errorOutput = errorOutput;
         }
 
-        public void PerformScan(ExtendedScanSettings scanSettings, IWin32Window dialogParent, Action<IScannedImage> imageCallback)
+        public void PerformScan(ExtendedScanSettings scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<IScannedImage> imageCallback)
         {
-            var driver = driverFactory.Create(scanSettings.DriverName);
+            var driver = driverFactory.Create(scanProfile.DriverName);
             driver.DialogParent = dialogParent;
-            driver.ScanProfile = scanSettings;
+            driver.ScanProfile = scanProfile;
+            driver.ScanParams = scanParams;
             try
             {
-                if (scanSettings.Device == null)
+                if (scanProfile.Device == null)
                 {
                     // The profile has no device specified, so prompt the user to choose one
                     var device = driver.PromptForDevice();
@@ -60,7 +61,7 @@ namespace NAPS2.Scan
                 else
                 {
                     // The profile has a device specified, so use it
-                    driver.ScanDevice = scanSettings.Device;
+                    driver.ScanDevice = scanProfile.Device;
                 }
 
                 foreach (IScannedImage scannedImage in driver.Scan())
