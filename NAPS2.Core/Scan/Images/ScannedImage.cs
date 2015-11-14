@@ -126,5 +126,7 @@ namespace NAPS2.Scan.Images
         {
             // Do nothing, this is only important for FileBasedScannedImage
         }
+
+        public PatchCode PatchCode { get; set; }
     }
 }

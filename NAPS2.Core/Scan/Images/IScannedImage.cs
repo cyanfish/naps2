@@ -77,5 +77,10 @@ namespace NAPS2.Scan.Images
         /// </summary>
         /// <param name="index">The index at which the image was inserted after being removed.</param>
         void MovedTo(int index);
+
+        /// <summary>
+        /// Gets or sets the patch code associated with the scanned page.
+        /// </summary>
+        PatchCode PatchCode { get; set; }
     }
 }

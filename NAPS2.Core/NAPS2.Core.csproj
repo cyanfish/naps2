@@ -86,6 +86,7 @@
     <Compile Include="Scan\Batch\BatchSettings.cs" />
     <Compile Include="Scan\Images\Transforms\TrueContrastTransform.cs" />
     <Compile Include="Scan\ProfileNameTracker.cs" />
+    <Compile Include="Scan\PatchCode.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />

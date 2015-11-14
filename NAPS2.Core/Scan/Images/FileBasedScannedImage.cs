@@ -214,5 +214,7 @@ namespace NAPS2.Scan.Images
             _recoveryIndexManager.Index.Images.Insert(index, indexImage);
             _recoveryIndexManager.Save();
         }
+
+        public PatchCode PatchCode { get; set; }
     }
 }
