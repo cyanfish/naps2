@@ -60,23 +60,9 @@ namespace NAPS2.Config
 
         protected override List<ScanProfile> Deserialize(Stream configFileStream)
         {
-            var serializer = new XmlSerializer(typeof(List<ScanProfile>));
             try
             {
-                var settingsList = (List<ScanProfile>)serializer.Deserialize(configFileStream);
-                // Upgrade from v1 to v2 if necessary
-                foreach (var settings in settingsList)
-                {
-                    if (settings.Version == 1)
-                    {
-                        if (settings.DriverName == TwainScanDriver.DRIVER_NAME)
-                        {
-                            settings.UseNativeUI = true;
-                        }
-                        settings.Version = ScanProfile.CURRENT_VERSION;
-                    }
-                }
-                return settingsList;
+                return ReadProfiles(configFileStream);
             }
             catch (InvalidOperationException)
             {
@@ -84,9 +70,81 @@ namespace NAPS2.Config
                 configFileStream.Seek(0, SeekOrigin.Begin);
             }
 
+            try
+            {
+                return ReadOldProfiles(configFileStream);
+            }
+            catch (InvalidOperationException)
+            {
+                // Continue, and try to read using the older serializer now
+                configFileStream.Seek(0, SeekOrigin.Begin);
+            }
+
+            return ReadVeryOldProfiles(configFileStream);
+        }
+
+        private static List<ScanProfile> ReadProfiles(Stream configFileStream)
+        {
+            var serializer = new XmlSerializer(typeof(List<ScanProfile>));
+            var settingsList = (List<ScanProfile>)serializer.Deserialize(configFileStream);
+            // Upgrade from v1 to v2 if necessary
+            foreach (var settings in settingsList)
+            {
+                if (settings.Version == 1)
+                {
+                    if (settings.DriverName == TwainScanDriver.DRIVER_NAME)
+                    {
+                        settings.UseNativeUI = true;
+                    }
+                    settings.Version = ScanProfile.CURRENT_VERSION;
+                }
+            }
+            return settingsList;
+        }
+
+        private static List<ScanProfile> ReadOldProfiles(Stream configFileStream)
+        {
+            var serializer = new XmlSerializer(typeof(List<OldExtendedScanSettings>));
+            var profiles = (List<OldExtendedScanSettings>)serializer.Deserialize(configFileStream);
+            // Upgrade from v1 to v2 if necessary
+            foreach (var settings in profiles)
+            {
+                if (settings.Version == 1)
+                {
+                    if (settings.DriverName == TwainScanDriver.DRIVER_NAME)
+                    {
+                        settings.UseNativeUI = true;
+                    }
+                    settings.Version = ScanProfile.CURRENT_VERSION;
+                }
+            }
+            return profiles.Select(profile => new ScanProfile
+            {
+                Version = ScanProfile.CURRENT_VERSION,
+                Device = profile.Device,
+                DriverName = profile.DriverName,
+                DisplayName = profile.DisplayName,
+                MaxQuality = profile.MaxQuality,
+                IsDefault = profile.IsDefault,
+                IconID = profile.IconID,
+                AfterScanScale = profile.AfterScanScale,
+                BitDepth = profile.BitDepth,
+                Brightness = profile.Brightness,
+                Contrast = profile.Contrast,
+                CustomPageSize = profile.CustomPageSize,
+                PageAlign = profile.PageAlign,
+                PageSize = profile.PageSize,
+                PaperSource = profile.PaperSource,
+                Resolution = profile.Resolution,
+                UseNativeUI = profile.UseNativeUI
+            }).ToList();
+        }
+
+        private List<ScanProfile> ReadVeryOldProfiles(Stream configFileStream)
+        {
             // For compatibility with profiles.xml from old versions, load OldScanSettings instead of ScanProfile (which is used exclusively now)
-            var deprecatedSerializer = new XmlSerializer(typeof(List<OldScanSettings>));
-            var profiles = (List<OldScanSettings>)deprecatedSerializer.Deserialize(configFileStream);
+            var deprecatedSerializer = new XmlSerializer(typeof (List<OldScanSettings>));
+            var profiles = (List<OldScanSettings>) deprecatedSerializer.Deserialize(configFileStream);
 
             // Okay, we've read the old version of profiles.txt. Since we're going to eventually change it to the new version, make a backup in case the user downgrades.
             File.Copy(primaryConfigPath, primaryConfigPath + ".bak", true);

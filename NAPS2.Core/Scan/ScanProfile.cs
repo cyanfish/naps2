@@ -28,7 +28,6 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan
 {
-    [XmlType("ExtendedScanSettings")]
     public class ScanProfile
     {
         public const int CURRENT_VERSION = 2;
