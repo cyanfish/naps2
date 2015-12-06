@@ -41,7 +41,7 @@ namespace NAPS2.Config
 
         public MessageBoxIcon StartupMessageIcon { get; set; }
 
-        public ExtendedScanSettings DefaultProfileSettings { get; set; }
+        public ScanProfile DefaultProfileSettings { get; set; }
 
         public AutoUpdateStatus AutoUpdate { get; set; }
     }

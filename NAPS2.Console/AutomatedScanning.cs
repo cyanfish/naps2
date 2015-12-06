@@ -110,7 +110,7 @@ namespace NAPS2.Console
 
             if (options.Number > 0)
             {
-                ExtendedScanSettings profile;
+                ScanProfile profile;
                 if (!GetProfile(out profile))
                 {
                     return;
@@ -388,7 +388,7 @@ namespace NAPS2.Console
             });
         }
 
-        private void PerformScan(ExtendedScanSettings profile)
+        private void PerformScan(ScanProfile profile)
         {
             OutputVerbose(ConsoleResources.BeginningScan);
 
@@ -408,7 +408,7 @@ namespace NAPS2.Console
             }
         }
 
-        private bool GetProfile(out ExtendedScanSettings profile)
+        private bool GetProfile(out ScanProfile profile)
         {
             try
             {

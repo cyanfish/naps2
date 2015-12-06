@@ -203,7 +203,7 @@ namespace NAPS2.WinForms
 
         private void comboProfile_Format(object sender, ListControlConvertEventArgs e)
         {
-            e.Value = ((ExtendedScanSettings)e.ListItem).DisplayName;
+            e.Value = ((ScanProfile)e.ListItem).DisplayName;
         }
 
         private void btnEditProfile_Click(object sender, EventArgs e)
@@ -211,13 +211,13 @@ namespace NAPS2.WinForms
             if (comboProfile.SelectedItem != null)
             {
                 var fedit = FormFactory.Create<FEditScanSettings>();
-                fedit.ScanSettings = (ExtendedScanSettings)comboProfile.SelectedItem;
+                fedit.ScanProfile = (ScanProfile)comboProfile.SelectedItem;
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    profileManager.Profiles[comboProfile.SelectedIndex] = fedit.ScanSettings;
+                    profileManager.Profiles[comboProfile.SelectedIndex] = fedit.ScanProfile;
                     profileManager.Save();
-                    BatchSettings.ProfileDisplayName = fedit.ScanSettings.DisplayName;
+                    BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName;
                     UpdateProfiles();
                 }
             }
@@ -226,13 +226,13 @@ namespace NAPS2.WinForms
         private void btnAddProfile_Click(object sender, EventArgs e)
         {
             var fedit = FormFactory.Create<FEditScanSettings>();
-            fedit.ScanSettings = appConfigManager.Config.DefaultProfileSettings ?? new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
+            fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             fedit.ShowDialog();
             if (fedit.Result)
             {
-                profileManager.Profiles.Add(fedit.ScanSettings);
+                profileManager.Profiles.Add(fedit.ScanProfile);
                 profileManager.Save();
-                BatchSettings.ProfileDisplayName = fedit.ScanSettings.DisplayName;
+                BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName;
                 UpdateProfiles();
             }
         }

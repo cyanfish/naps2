@@ -11,7 +11,7 @@ namespace NAPS2.Scan.Wia
     /// </summary>
     public class WiaBackgroundEventLoop : IDisposable
     {
-        private readonly ExtendedScanSettings settings;
+        private readonly ScanProfile profile;
         private readonly ScanDevice scanDevice;
 
         private readonly AutoResetEvent initWaiter = new AutoResetEvent(false);
@@ -19,9 +19,9 @@ namespace NAPS2.Scan.Wia
         private Form form;
         private WiaState wiaState;
 
-        public WiaBackgroundEventLoop(ExtendedScanSettings settings, ScanDevice scanDevice)
+        public WiaBackgroundEventLoop(ScanProfile profile, ScanDevice scanDevice)
         {
-            this.settings = settings;
+            this.profile = profile;
             this.scanDevice = scanDevice;
 
             thread = new Thread(RunEventLoop);
@@ -75,8 +75,8 @@ namespace NAPS2.Scan.Wia
         private WiaState InitWia()
         {
             var device = WiaApi.GetDevice(scanDevice);
-            var item = WiaApi.GetItem(device, settings);
-            WiaApi.Configure(device, item, settings);
+            var item = WiaApi.GetItem(device, profile);
+            WiaApi.Configure(device, item, profile);
             return new WiaState(device, item);
         }
 

@@ -77,36 +77,36 @@ namespace NAPS2.WinForms
             // Don't trigger any onChange events
             suppressChangeEvent = true;
 
-            pctIcon.Image = ilProfileIcons.IconsList.Images[ScanSettings.IconID];
-            txtName.Text = ScanSettings.DisplayName;
-            CurrentDevice = ScanSettings.Device;
-            isDefault = ScanSettings.IsDefault;
-            iconID = ScanSettings.IconID;
+            pctIcon.Image = ilProfileIcons.IconsList.Images[ScanProfile.IconID];
+            txtName.Text = ScanProfile.DisplayName;
+            CurrentDevice = ScanProfile.Device;
+            isDefault = ScanProfile.IsDefault;
+            iconID = ScanProfile.IconID;
 
-            cmbSource.SelectedIndex = (int)ScanSettings.PaperSource;
-            cmbDepth.SelectedIndex = (int)ScanSettings.BitDepth;
-            cmbResolution.SelectedIndex = (int)ScanSettings.Resolution;
-            txtContrast.Text = ScanSettings.Contrast.ToString("G");
-            txtBrightness.Text = ScanSettings.Brightness.ToString("G");
-            if (ScanSettings.PageSize == ScanPageSize.Custom)
+            cmbSource.SelectedIndex = (int)ScanProfile.PaperSource;
+            cmbDepth.SelectedIndex = (int)ScanProfile.BitDepth;
+            cmbResolution.SelectedIndex = (int)ScanProfile.Resolution;
+            txtContrast.Text = ScanProfile.Contrast.ToString("G");
+            txtBrightness.Text = ScanProfile.Brightness.ToString("G");
+            if (ScanProfile.PageSize == ScanPageSize.Custom)
             {
-                cmbPage.Items.Add(ScanSettings.CustomPageSize);
+                cmbPage.Items.Add(ScanProfile.CustomPageSize);
                 cmbPage.SelectedIndex = (int)ScanPageSize.Custom + 1;
             }
             else
             {
-                cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
+                cmbPage.SelectedIndex = (int)ScanProfile.PageSize;
             }
-            cmbScale.SelectedIndex = (int)ScanSettings.AfterScanScale;
-            cmbAlign.SelectedIndex = (int)ScanSettings.PageAlign;
+            cmbScale.SelectedIndex = (int)ScanProfile.AfterScanScale;
+            cmbAlign.SelectedIndex = (int)ScanProfile.PageAlign;
 
-            cbHighQuality.Checked = ScanSettings.MaxQuality;
+            cbHighQuality.Checked = ScanProfile.MaxQuality;
 
             // The setter updates the driver selection checkboxes
-            DeviceDriverName = ScanSettings.DriverName;
+            DeviceDriverName = ScanProfile.DriverName;
 
-            rdbNative.Checked = ScanSettings.UseNativeUI;
-            rdbConfig.Checked = !ScanSettings.UseNativeUI;
+            rdbNative.Checked = ScanProfile.UseNativeUI;
+            rdbConfig.Checked = !ScanProfile.UseNativeUI;
 
             // Start triggering onChange events again
             suppressChangeEvent = false;
@@ -134,7 +134,7 @@ namespace NAPS2.WinForms
             get { return result; }
         }
 
-        public ExtendedScanSettings ScanSettings { get; set; }
+        public ScanProfile ScanProfile { get; set; }
 
         private string DeviceDriverName
         {
@@ -215,13 +215,13 @@ namespace NAPS2.WinForms
             {
                 pageSize = (ScanPageSize)cmbPage.SelectedIndex;
             }
-            if (ScanSettings.DisplayName != null)
+            if (ScanProfile.DisplayName != null)
             {
-                profileNameTracker.RenamingProfile(ScanSettings.DisplayName, txtName.Text);
+                profileNameTracker.RenamingProfile(ScanProfile.DisplayName, txtName.Text);
             }
-            ScanSettings = new ExtendedScanSettings
+            ScanProfile = new ScanProfile
             {
-                Version = ExtendedScanSettings.CURRENT_VERSION,
+                Version = ScanProfile.CURRENT_VERSION,
 
                 Device = CurrentDevice,
                 IsDefault = isDefault,
@@ -296,7 +296,7 @@ namespace NAPS2.WinForms
         {
             if (!suppressChangeEvent)
             {
-                ScanSettings.Device = null;
+                ScanProfile.Device = null;
                 CurrentDevice = null;
                 UpdateEnabledControls();
             }
@@ -352,13 +352,13 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    if (ScanSettings.PageSize == ScanPageSize.Custom)
+                    if (ScanProfile.PageSize == ScanPageSize.Custom)
                     {
                         cmbPage.SelectedIndex = (int)ScanPageSize.Custom + 1;
                     }
                     else
                     {
-                        cmbPage.SelectedIndex = (int)ScanSettings.PageSize;
+                        cmbPage.SelectedIndex = (int)ScanProfile.PageSize;
                     }
                 }
             }

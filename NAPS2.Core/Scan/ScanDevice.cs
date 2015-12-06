@@ -41,7 +41,7 @@ namespace NAPS2.Scan
         public string Name { get; set; }
 
         /// <summary>
-        /// This property only exists for compatibility when reading profiles.xml from an older version. Use ExtendedScanSettings.DriverName instead.
+        /// This property only exists for compatibility when reading profiles.xml from an older version. Use ScanProfile.DriverName instead.
         /// </summary>
         public string DriverName { get; set; }
     }

@@ -39,7 +39,7 @@ namespace NAPS2.Scan
             this.errorOutput = errorOutput;
         }
 
-        public void PerformScan(ExtendedScanSettings scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<IScannedImage> imageCallback)
+        public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<IScannedImage> imageCallback)
         {
             var driver = driverFactory.Create(scanProfile.DriverName);
             driver.DialogParent = dialogParent;

@@ -187,7 +187,7 @@
     <Compile Include="Scan\Exceptions\NoDevicesFoundException.cs" />
     <Compile Include="Scan\Exceptions\ScanDriverException.cs" />
     <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
-    <Compile Include="Scan\ExtendedScanSettings.cs" />
+    <Compile Include="Scan\ScanProfile.cs" />
     <Compile Include="Scan\Images\BitmapHelper.cs" />
     <Compile Include="Scan\Images\FileBasedScannedImage.cs" />
     <Compile Include="Scan\Images\FileBasedScannedImageFactory.cs" />
@@ -204,7 +204,7 @@
     <Compile Include="Scan\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Scan\ScanDevice.cs" />
     <Compile Include="Scan\ScanPerformer.cs" />
-    <Compile Include="Scan\ScanSettings.cs" />
+    <Compile Include="Scan\OldScanSettings.cs" />
     <Compile Include="Scan\Stub\StubScanDriverFactory.cs" />
     <Compile Include="Scan\Stub\StubScanDriver.cs" />
     <Compile Include="Scan\Twain\TwainScanDriver.cs" />

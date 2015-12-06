@@ -157,10 +157,10 @@ namespace NAPS2.Scan.Wia
             throw new DeviceNotFoundException();
         }
 
-        public static Item GetItem(Device device, ExtendedScanSettings settings)
+        public static Item GetItem(Device device, ScanProfile profile)
         {
             Item item;
-            if (settings.UseNativeUI)
+            if (profile.UseNativeUI)
             {
                 try
                 {
@@ -186,20 +186,20 @@ namespace NAPS2.Scan.Wia
 
         #region Device/Item Configuration
 
-        public static void Configure(Device device, Item item, ExtendedScanSettings settings)
+        public static void Configure(Device device, Item item, ScanProfile profile)
         {
-            if (settings.UseNativeUI)
+            if (profile.UseNativeUI)
             {
                 return;
             }
 
-            ConfigureDeviceProperties(device, settings);
-            ConfigureItemProperties(device, item, settings);
+            ConfigureDeviceProperties(device, profile);
+            ConfigureItemProperties(device, item, profile);
         }
 
-        private static void ConfigureItemProperties(Device device, Item item, ExtendedScanSettings settings)
+        private static void ConfigureItemProperties(Device device, Item item, ScanProfile profile)
         {
-            switch (settings.BitDepth)
+            switch (profile.BitDepth)
             {
                 case ScanBitDepth.Grayscale:
                     SetItemIntProperty(item, 2, ItemProperties.DATA_TYPE);
@@ -212,11 +212,11 @@ namespace NAPS2.Scan.Wia
                     break;
             }
 
-            int resolution = settings.Resolution.ToIntDpi();
+            int resolution = profile.Resolution.ToIntDpi();
             SetItemIntProperty(item, resolution, ItemProperties.VERTICAL_RESOLUTION);
             SetItemIntProperty(item, resolution, ItemProperties.HORIZONTAL_RESOLUTION);
 
-            PageDimensions pageDimensions = settings.PageSize.PageDimensions() ?? settings.CustomPageSize;
+            PageDimensions pageDimensions = profile.PageSize.PageDimensions() ?? profile.CustomPageSize;
             if (pageDimensions == null)
             {
                 throw new InvalidOperationException("No page size specified");
@@ -225,11 +225,11 @@ namespace NAPS2.Scan.Wia
             int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
 
             int horizontalSize =
-                GetDeviceIntProperty(device, settings.PaperSource == ScanSource.Glass
+                GetDeviceIntProperty(device, profile.PaperSource == ScanSource.Glass
                     ? DeviceProperties.HORIZONTAL_BED_SIZE
                     : DeviceProperties.HORIZONTAL_FEED_SIZE);
             int verticalSize =
-                GetDeviceIntProperty(device, settings.PaperSource == ScanSource.Glass
+                GetDeviceIntProperty(device, profile.PaperSource == ScanSource.Glass
                     ? DeviceProperties.VERTICAL_BED_SIZE
                     : DeviceProperties.VERTICAL_FEED_SIZE);
 
@@ -237,9 +237,9 @@ namespace NAPS2.Scan.Wia
             int pagemaxheight = verticalSize * resolution / 1000;
 
             int horizontalPos = 0;
-            if (settings.PageAlign == ScanHorizontalAlign.Center)
+            if (profile.PageAlign == ScanHorizontalAlign.Center)
                 horizontalPos = (pagemaxwidth - pageWidth) / 2;
-            else if (settings.PageAlign == ScanHorizontalAlign.Left)
+            else if (profile.PageAlign == ScanHorizontalAlign.Left)
                 horizontalPos = (pagemaxwidth - pageWidth);
 
             pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
@@ -248,18 +248,18 @@ namespace NAPS2.Scan.Wia
             SetItemIntProperty(item, pageWidth, ItemProperties.HORIZONTAL_EXTENT);
             SetItemIntProperty(item, pageHeight, ItemProperties.VERTICAL_EXTENT);
             SetItemIntProperty(item, horizontalPos, ItemProperties.HORIZONTAL_START);
-            SetItemIntProperty(item, settings.Contrast, -1000, 1000, ItemProperties.CONTRAST);
-            SetItemIntProperty(item, settings.Brightness, -1000, 1000, ItemProperties.BRIGHTNESS);
+            SetItemIntProperty(item, profile.Contrast, -1000, 1000, ItemProperties.CONTRAST);
+            SetItemIntProperty(item, profile.Brightness, -1000, 1000, ItemProperties.BRIGHTNESS);
         }
 
-        private static void ConfigureDeviceProperties(Device device, ExtendedScanSettings settings)
+        private static void ConfigureDeviceProperties(Device device, ScanProfile profile)
         {
-            if (settings.PaperSource != ScanSource.Glass && DeviceSupportsFeeder(device))
+            if (profile.PaperSource != ScanSource.Glass && DeviceSupportsFeeder(device))
             {
                 SetDeviceIntProperty(device, 1, DeviceProperties.PAGES);
             }
 
-            switch (settings.PaperSource)
+            switch (profile.PaperSource)
             {
                 case ScanSource.Glass:
                     SetDeviceIntProperty(device, Source.FLATBED, DeviceProperties.PAPER_SOURCE);

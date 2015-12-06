@@ -29,16 +29,16 @@ using NAPS2.Scan.Wia;
 
 namespace NAPS2.Config
 {
-    public class ProfileManager : ConfigManager<List<ExtendedScanSettings>>, IProfileManager
+    public class ProfileManager : ConfigManager<List<ScanProfile>>, IProfileManager
     {
         public ProfileManager()
-            : base("profiles.xml", Paths.AppData, Paths.Executable, () => new List<ExtendedScanSettings>())
+            : base("profiles.xml", Paths.AppData, Paths.Executable, () => new List<ScanProfile>())
         {
         }
 
-        public List<ExtendedScanSettings> Profiles { get { return Config; } }
+        public List<ScanProfile> Profiles { get { return Config; } }
 
-        public ExtendedScanSettings DefaultProfile
+        public ScanProfile DefaultProfile
         {
             get
             {
@@ -50,7 +50,7 @@ namespace NAPS2.Config
             }
             set
             {
-                foreach (ExtendedScanSettings profile in Profiles)
+                foreach (ScanProfile profile in Profiles)
                 {
                     profile.IsDefault = false;
                 }
@@ -58,12 +58,12 @@ namespace NAPS2.Config
             }
         }
 
-        protected override List<ExtendedScanSettings> Deserialize(Stream configFileStream)
+        protected override List<ScanProfile> Deserialize(Stream configFileStream)
         {
-            var serializer = new XmlSerializer(typeof(List<ExtendedScanSettings>));
+            var serializer = new XmlSerializer(typeof(List<ScanProfile>));
             try
             {
-                var settingsList = (List<ExtendedScanSettings>)serializer.Deserialize(configFileStream);
+                var settingsList = (List<ScanProfile>)serializer.Deserialize(configFileStream);
                 // Upgrade from v1 to v2 if necessary
                 foreach (var settings in settingsList)
                 {
@@ -73,7 +73,7 @@ namespace NAPS2.Config
                         {
                             settings.UseNativeUI = true;
                         }
-                        settings.Version = ExtendedScanSettings.CURRENT_VERSION;
+                        settings.Version = ScanProfile.CURRENT_VERSION;
                     }
                 }
                 return settingsList;
@@ -84,9 +84,9 @@ namespace NAPS2.Config
                 configFileStream.Seek(0, SeekOrigin.Begin);
             }
 
-            // For compatibility with profiles.xml from old versions, load ScanSettings instead of ExtendedScanSettings (which is used exclusively now)
-            var deprecatedSerializer = new XmlSerializer(typeof(List<ScanSettings>));
-            var profiles = (List<ScanSettings>)deprecatedSerializer.Deserialize(configFileStream);
+            // For compatibility with profiles.xml from old versions, load OldScanSettings instead of ScanProfile (which is used exclusively now)
+            var deprecatedSerializer = new XmlSerializer(typeof(List<OldScanSettings>));
+            var profiles = (List<OldScanSettings>)deprecatedSerializer.Deserialize(configFileStream);
 
             // Okay, we've read the old version of profiles.txt. Since we're going to eventually change it to the new version, make a backup in case the user downgrades.
             File.Copy(primaryConfigPath, primaryConfigPath + ".bak", true);
@@ -100,23 +100,34 @@ namespace NAPS2.Config
                     // This old property is unused, so remove its value
                     profile.Device.DriverName = null;
                 }
-                if (!(profile is ExtendedScanSettings))
+                // Everything should be ScanProfile now
+                var result = new ScanProfile
                 {
-                    // Everything should be ExtendedScanSettings now
-                    return new ExtendedScanSettings
-                    {
-                        Version = ExtendedScanSettings.CURRENT_VERSION,
-                        Device = profile.Device,
-                        DriverName = profile.DriverName,
-                        DisplayName = profile.DisplayName,
-                        MaxQuality = profile.MaxQuality,
-                        IsDefault = profile.IsDefault,
-                        IconID = profile.IconID,
-                        // If the driver is WIA and the profile type is not Extended, that meant the native UI was to be used
-                        UseNativeUI = profile.DriverName == WiaScanDriver.DRIVER_NAME
-                    };
+                    Version = ScanProfile.CURRENT_VERSION,
+                    Device = profile.Device,
+                    DriverName = profile.DriverName,
+                    DisplayName = profile.DisplayName,
+                    MaxQuality = profile.MaxQuality,
+                    IsDefault = profile.IsDefault,
+                    IconID = profile.IconID,
+                    // If the driver is WIA and the profile type is not Extended, that meant the native UI was to be used
+                    UseNativeUI = profile.DriverName == WiaScanDriver.DRIVER_NAME
+                };
+                var ext = profile as OldExtendedScanSettings;
+                if (ext != null)
+                {
+                    result.AfterScanScale = ext.AfterScanScale;
+                    result.BitDepth = ext.BitDepth;
+                    result.Brightness = ext.Brightness;
+                    result.Contrast = ext.Contrast;
+                    result.CustomPageSize = ext.CustomPageSize;
+                    result.PageAlign = ext.PageAlign;
+                    result.PageSize = ext.PageSize;
+                    result.PaperSource = ext.PaperSource;
+                    result.Resolution = ext.Resolution;
+                    result.UseNativeUI = ext.UseNativeUI;
                 }
-                return (ExtendedScanSettings)profile;
+                return result;
             }).ToList();
         }
     }

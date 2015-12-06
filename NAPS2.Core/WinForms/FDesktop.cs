@@ -521,19 +521,19 @@ namespace NAPS2.WinForms
         private void ScanWithNewProfile()
         {
             var editSettingsForm = FormFactory.Create<FEditScanSettings>();
-            editSettingsForm.ScanSettings = appConfigManager.Config.DefaultProfileSettings ?? new ExtendedScanSettings { Version = ExtendedScanSettings.CURRENT_VERSION };
+            editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             editSettingsForm.ShowDialog();
             if (!editSettingsForm.Result)
             {
                 return;
             }
-            profileManager.Profiles.Add(editSettingsForm.ScanSettings);
-            profileManager.DefaultProfile = editSettingsForm.ScanSettings;
+            profileManager.Profiles.Add(editSettingsForm.ScanProfile);
+            profileManager.DefaultProfile = editSettingsForm.ScanProfile;
             profileManager.Save();
 
             UpdateScanButton();
 
-            scanPerformer.PerformScan(editSettingsForm.ScanSettings, new ScanParams(), this, ReceiveScannedImage);
+            scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), this, ReceiveScannedImage);
             Activate();
         }
 

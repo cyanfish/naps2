@@ -23,15 +23,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Xml.Serialization;
 using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan
 {
-    public class ExtendedScanSettings : ScanSettings
+    [XmlType("ExtendedScanSettings")]
+    public class ScanProfile
     {
         public const int CURRENT_VERSION = 2;
 
-        public ExtendedScanSettings()
+        public ScanProfile()
         {
             // Set defaults
             BitDepth = ScanBitDepth.C24Bit;
@@ -40,6 +42,18 @@ namespace NAPS2.Scan
             Resolution = ScanDpi.Dpi200;
             PaperSource = ScanSource.Glass;
         }
+
+        public ScanDevice Device { get; set; }
+
+        public string DriverName { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public int IconID { get; set; }
+
+        public bool MaxQuality { get; set; }
+
+        public bool IsDefault { get; set; }
 
         public int Version { get; set; }
 

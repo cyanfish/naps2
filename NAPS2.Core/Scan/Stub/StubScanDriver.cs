@@ -39,7 +39,7 @@ namespace NAPS2.Scan.Stub
             this.scannedImageFactory = scannedImageFactory;
         }
 
-        public ExtendedScanSettings ScanProfile { get; set; }
+        public ScanProfile ScanProfile { get; set; }
 
         public ScanParams ScanParams { get; set; }
 

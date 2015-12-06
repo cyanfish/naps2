@@ -61,7 +61,7 @@ namespace NAPS2.Scan.Batch
             private readonly PdfSettingsContainer pdfSettingsContainer;
             private readonly UserConfigManager userConfigManager;
 
-            private ExtendedScanSettings profile;
+            private ScanProfile profile;
             private ScanParams scanParams;
             private List<List<IScannedImage>> scans;
 
