@@ -40,6 +40,7 @@ namespace NAPS2.WinForms
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRevert = new System.Windows.Forms.Button();
+            this.checkboxApplyToSelected = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbLeft)).BeginInit();
@@ -103,10 +104,17 @@ namespace NAPS2.WinForms
             this.btnRevert.UseVisualStyleBackColor = true;
             this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
             // 
+            // checkboxApplyToSelected
+            // 
+            resources.ApplyResources(this.checkboxApplyToSelected, "checkboxApplyToSelected");
+            this.checkboxApplyToSelected.Name = "checkboxApplyToSelected";
+            this.checkboxApplyToSelected.UseVisualStyleBackColor = true;
+            // 
             // FCrop
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkboxApplyToSelected);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.tbLeft);
             this.Controls.Add(this.tbTop);
@@ -139,6 +147,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnRevert;
+        private System.Windows.Forms.CheckBox checkboxApplyToSelected;
 
 
     }

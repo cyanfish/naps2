@@ -38,6 +38,7 @@ namespace NAPS2.WinForms
             this.btnRevert = new System.Windows.Forms.Button();
             this.txtAngle = new System.Windows.Forms.TextBox();
             this.tbAngle = new System.Windows.Forms.TrackBar();
+            this.checkboxApplyToSelected = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbAngle)).BeginInit();
             this.SuspendLayout();
@@ -85,10 +86,17 @@ namespace NAPS2.WinForms
             this.tbAngle.TickFrequency = 450;
             this.tbAngle.Scroll += new System.EventHandler(this.tbAngle_Scroll);
             // 
+            // checkboxApplyToSelected
+            // 
+            resources.ApplyResources(this.checkboxApplyToSelected, "checkboxApplyToSelected");
+            this.checkboxApplyToSelected.Name = "checkboxApplyToSelected";
+            this.checkboxApplyToSelected.UseVisualStyleBackColor = true;
+            // 
             // FRotate
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkboxApplyToSelected);
             this.Controls.Add(this.btnRevert);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -114,6 +122,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnRevert;
         private System.Windows.Forms.TextBox txtAngle;
         private System.Windows.Forms.TrackBar tbAngle;
+        private System.Windows.Forms.CheckBox checkboxApplyToSelected;
 
 
     }

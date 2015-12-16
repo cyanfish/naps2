@@ -54,8 +54,25 @@ namespace NAPS2.WinForms
 
         public RotationTransform RotationTransform { get; private set; }
 
+        private IEnumerable<IScannedImage> ImagesToTransform
+        {
+            get
+            {
+                return checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
+            }
+        }
+
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
+            if (SelectedImages.Count > 1)
+            {
+                checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
+            }
+            else
+            {
+                ConditionalControls.Hide(checkboxApplyToSelected, 6);
+            }
+
             new LayoutManager(this)
                 .Bind(tbAngle, pictureBox)
                     .WidthToForm()
@@ -63,7 +80,7 @@ namespace NAPS2.WinForms
                     .HeightToForm()
                 .Bind(btnOK, btnCancel, txtAngle)
                     .RightToForm()
-                .Bind(tbAngle, txtAngle, btnRevert, btnOK, btnCancel)
+                .Bind(tbAngle, txtAngle, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
                     .BottomToForm()
                 .Activate();
             Size = new Size(600, 600);
@@ -115,8 +132,11 @@ namespace NAPS2.WinForms
         {
             if (!RotationTransform.IsNull)
             {
-                Image.AddTransform(RotationTransform);
-                Image.SetThumbnail(Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
+                foreach (var img in ImagesToTransform)
+                {
+                    img.AddTransform(RotationTransform);
+                    img.SetThumbnail(img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
+                }
                 changeTracker.HasUnsavedChanges = true;
             }
             Close();
