@@ -1035,6 +1035,7 @@ namespace NAPS2.WinForms
             {
                 var form = FormFactory.Create<FCrop>();
                 form.Image = SelectedImages.First();
+                form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
                 UpdateThumbnails(SelectedIndices.ToList());
             }
@@ -1046,6 +1047,7 @@ namespace NAPS2.WinForms
             {
                 var form = FormFactory.Create<FBrightness>();
                 form.Image = SelectedImages.First();
+                form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
                 UpdateThumbnails(SelectedIndices.ToList());
             }
@@ -1057,6 +1059,7 @@ namespace NAPS2.WinForms
             {
                 var form = FormFactory.Create<FContrast>();
                 form.Image = SelectedImages.First();
+                form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
                 UpdateThumbnails(SelectedIndices.ToList());
             }
@@ -1068,6 +1071,7 @@ namespace NAPS2.WinForms
             {
                 var form = FormFactory.Create<FRotate>();
                 form.Image = SelectedImages.First();
+                form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
                 UpdateThumbnails(SelectedIndices.ToList());
             }

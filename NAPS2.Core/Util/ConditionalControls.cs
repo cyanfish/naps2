@@ -21,13 +21,13 @@ namespace NAPS2.Util
             }
         }
 
-        public static void Hide(Control control)
+        public static void Hide(Control control, int margin = 0)
         {
             if (!control.Visible)
             {
                 return;
             }
-            int height = control.Height;
+            int height = control.Height + margin;
             int bottom = LocationInForm(control).Y + height;
             foreach (var c in EnumerateParents(control))
             {
@@ -43,13 +43,13 @@ namespace NAPS2.Util
             control.Visible = false;
         }
 
-        public static void Show(Control control)
+        public static void Show(Control control, int margin = 0)
         {
             if (control.Visible)
             {
                 return;
             }
-            int height = control.Height;
+            int height = control.Height + margin;
             int top = LocationInForm(control).Y;
             foreach (var c in EnumerateParents(control))
             {

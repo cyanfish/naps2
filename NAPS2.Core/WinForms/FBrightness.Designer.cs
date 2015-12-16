@@ -38,6 +38,7 @@ namespace NAPS2.WinForms
             this.btnRevert = new System.Windows.Forms.Button();
             this.txtBrightness = new System.Windows.Forms.TextBox();
             this.tbBrightness = new System.Windows.Forms.TrackBar();
+            this.checkboxApplyToSelected = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBrightness)).BeginInit();
             this.SuspendLayout();
@@ -85,10 +86,17 @@ namespace NAPS2.WinForms
             this.tbBrightness.TickFrequency = 200;
             this.tbBrightness.Scroll += new System.EventHandler(this.tbBrightness_Scroll);
             // 
+            // checkboxApplyToSelected
+            // 
+            resources.ApplyResources(this.checkboxApplyToSelected, "checkboxApplyToSelected");
+            this.checkboxApplyToSelected.Name = "checkboxApplyToSelected";
+            this.checkboxApplyToSelected.UseVisualStyleBackColor = true;
+            // 
             // FBrightness
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkboxApplyToSelected);
             this.Controls.Add(this.btnRevert);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -114,6 +122,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnRevert;
         private System.Windows.Forms.TextBox txtBrightness;
         private System.Windows.Forms.TrackBar tbBrightness;
+        private System.Windows.Forms.CheckBox checkboxApplyToSelected;
 
 
     }

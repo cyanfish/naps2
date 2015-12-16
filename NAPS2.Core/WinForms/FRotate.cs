@@ -50,6 +50,8 @@ namespace NAPS2.WinForms
 
         public IScannedImage Image { get; set; }
 
+        public List<IScannedImage> SelectedImages { get; set; }
+
         public RotationTransform RotationTransform { get; private set; }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
