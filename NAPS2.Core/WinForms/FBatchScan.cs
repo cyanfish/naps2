@@ -32,6 +32,7 @@ using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Twain;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -71,6 +72,17 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
+            new LayoutManager(this)
+                .Bind(groupboxScanConfig, groupboxOutput,
+                      panelSaveSeparator, panelSaveTo, panelSaveType, panelScanDetails, panelScanType,
+                      comboProfile, txtFilePath, lblStatus)
+                    .WidthToForm()
+                .Bind(btnEditProfile, btnAddProfile, btnStart, btnCancel, btnChooseFolder)
+                    .RightToForm()
+                .Activate();
+
+            ConditionalControls.LockHeight(this);
+
             BatchSettings = userConfigManager.Config.LastBatchSettings ?? new BatchSettings();
             UpdateUIFromSettings();
         }
@@ -152,27 +164,45 @@ namespace NAPS2.WinForms
             comboProfile.Items.Clear();
             comboProfile.Items.AddRange(profileManager.Profiles.Cast<object>().ToArray());
             comboProfile.Text = BatchSettings.ProfileDisplayName ?? profileManager.DefaultProfile.DisplayName;
+            ProfileChanged();
         }
 
-        private void rdSingleScan_CheckedChanged(object sender, EventArgs e)
+        private void ProfileChanged()
         {
+            var profile = (ScanProfile) comboProfile.SelectedItem;
+            if (profile != null)
+            {
+                rdSeparateByPatchT.Enabled = (profile.DriverName == TwainScanDriver.DRIVER_NAME);
+            }
+        }
+
+        private void rdSingleScan_CheckedChanged(object sender, EventArgs    e)
+        {
+            ConditionalControls.UnlockHeight(this);
             ConditionalControls.SetVisible(rdFilePerScan, !rdSingleScan.Checked && rdSaveToMultipleFiles.Checked);
+            ConditionalControls.LockHeight(this);
         }
 
         private void rdMultipleScansDelay_CheckedChanged(object sender, EventArgs e)
         {
+            ConditionalControls.UnlockHeight(this);
             ConditionalControls.SetVisible(panelScanDetails, rdMultipleScansDelay.Checked);
+            ConditionalControls.LockHeight(this);
         }
 
         private void rdLoadIntoNaps2_CheckedChanged(object sender, EventArgs e)
         {
+            ConditionalControls.UnlockHeight(this);
             ConditionalControls.SetVisible(panelSaveTo, !rdLoadIntoNaps2.Checked);
+            ConditionalControls.LockHeight(this);
         }
 
         private void rdSaveToMultipleFiles_CheckedChanged(object sender, EventArgs e)
         {
+            ConditionalControls.UnlockHeight(this);
             ConditionalControls.SetVisible(panelSaveSeparator, rdSaveToMultipleFiles.Checked);
             ConditionalControls.SetVisible(rdFilePerScan, !rdSingleScan.Checked && rdSaveToMultipleFiles.Checked);
+            ConditionalControls.LockHeight(this);
         }
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
@@ -368,6 +398,11 @@ namespace NAPS2.WinForms
             {
                 txtFilePath.Text = form.FileName;
             }
+        }
+
+        private void comboProfile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ProfileChanged();
         }
     }
 }

@@ -125,10 +125,10 @@
     <value>19, 22</value>
   </metadata>
   <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>12, 16</value>
   </data>
   <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 23</value>
+    <value>214, 19</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
@@ -136,9 +136,6 @@
   </data>
   <data name="lblStatus.Text" xml:space="preserve">
     <value>Press Start when ready.</value>
-  </data>
-  <data name="lblStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
     <value>lblStatus</value>
@@ -550,7 +547,7 @@
     <value>True</value>
   </data>
   <data name="linkPatchCodeInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 48</value>
+    <value>36, 66</value>
   </data>
   <data name="linkPatchCodeInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -583,13 +580,13 @@
     <value>39, 46</value>
   </data>
   <data name="rdSeparateByPatchT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 17</value>
+    <value>211, 17</value>
   </data>
   <data name="rdSeparateByPatchT.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value>Separate files by Patch-T</value>
+    <value>Separate files by Patch-T (TWAIN only)</value>
   </data>
   <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
     <value>rdSeparateByPatchT</value>
@@ -670,7 +667,7 @@
     <value>6, 88</value>
   </data>
   <data name="panelSaveSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 68</value>
+    <value>364, 84</value>
   </data>
   <data name="panelSaveSeparator.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -796,7 +793,7 @@
     <value>3</value>
   </data>
   <data name="panelSaveTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 158</value>
+    <value>6, 174</value>
   </data>
   <data name="panelSaveTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>364, 60</value>
@@ -931,7 +928,7 @@
     <value>12, 272</value>
   </data>
   <data name="groupboxOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 222</value>
+    <value>376, 238</value>
   </data>
   <data name="groupboxOutput.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -961,7 +958,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>400, 506</value>
+    <value>400, 522</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1000,7 +997,7 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.2.3.26593, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.2.3.27918, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;folderBrowserDialog1.Name" xml:space="preserve">
     <value>folderBrowserDialog1</value>
@@ -1012,6 +1009,6 @@
     <value>FBatchScan</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.26593, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.27918, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

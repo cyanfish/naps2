@@ -65,6 +65,18 @@ namespace NAPS2.Util
             control.Visible = true;
         }
 
+        public static void LockHeight(Form form)
+        {
+            form.MaximumSize = new Size(int.MaxValue, form.Height);
+            form.MinimumSize = new Size(0, form.Height);
+        }
+
+        public static void UnlockHeight(Form form)
+        {
+            form.MaximumSize = new Size(0, 0);
+            form.MinimumSize = new Size(0, 0);
+        }
+
         private static IEnumerable<Control> EnumerateParents(Control control)
         {
             for (var parent = control.Parent; parent != null; parent = parent.Parent)
