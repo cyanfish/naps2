@@ -198,4 +198,7 @@
   <data name="et" xml:space="preserve">
     <value>Eesti keel</value>
   </data>
+  <data name="fi" xml:space="preserve">
+    <value>Suomi</value>
+  </data>
 </root>
