@@ -34,6 +34,7 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Util;
+using NTwain.Data;
 
 namespace NAPS2.WinForms
 {
@@ -169,13 +170,19 @@ namespace NAPS2.WinForms
             ProfileChanged();
         }
 
-        private void ProfileChanged()
+        private bool ProfileIsTwain()
         {
             var profile = (ScanProfile) comboProfile.SelectedItem;
             if (profile != null)
             {
-                rdSeparateByPatchT.Enabled = (profile.DriverName == TwainScanDriver.DRIVER_NAME);
+                return profile.DriverName == TwainScanDriver.DRIVER_NAME;
             }
+            return false;
+        }
+
+        private void ProfileChanged()
+        {
+            rdSeparateByPatchT.Enabled = ProfileIsTwain();
         }
 
         private void rdSingleScan_CheckedChanged(object sender, EventArgs    e)
@@ -302,6 +309,7 @@ namespace NAPS2.WinForms
         {
             EnableDisable(groupboxScanConfig, enabled);
             EnableDisable(groupboxOutput, enabled);
+            rdSeparateByPatchT.Enabled = enabled && ProfileIsTwain();
         }
 
         private void EnableDisable(Control root, bool enabled)
@@ -323,20 +331,18 @@ namespace NAPS2.WinForms
         {
             try
             {
+                var profile = profileManager.Profiles.First(x => x.DisplayName == BatchSettings.ProfileDisplayName);
+                if (profile.DriverName == TwainScanDriver.DRIVER_NAME || profile.UseNativeUI)
+                {
+                    // We would prefer not to run this on the UI thread, but will if necessary
+                    Invoke(new Action(() => batchScanPerformer.PerformBatchScan(BatchSettings, this, image => Invoke(new Action(() => ImageCallback(image))), ProgressCallback())));
+                }
+                else
+                {
+                    batchScanPerformer.PerformBatchScan(BatchSettings, this, image => Invoke(new Action(() => ImageCallback(image))), ProgressCallback());
+                }
                 Invoke(new Action(() =>
                 {
-                    batchScanPerformer.PerformBatchScan(BatchSettings, this,
-                        image => Invoke(new Action(() => ImageCallback(image))), status =>
-                        {
-                            if (!cancelBatch)
-                            {
-                                Invoke(new Action(() =>
-                                {
-                                    lblStatus.Text = status;
-                                }));
-                            }
-                            return !cancelBatch;
-                        });
                     lblStatus.Text = cancelBatch
                         ? MiscResources.BatchStatusCancelled
                         : MiscResources.BatchStatusComplete;
@@ -367,7 +373,23 @@ namespace NAPS2.WinForms
                 btnCancel.Enabled = true;
                 btnCancel.Text = MiscResources.Close;
                 EnableDisableSettings(true);
+                Activate();
             }));
+        }
+
+        private Func<string, bool> ProgressCallback()
+        {
+            return status =>
+            {
+                if (!cancelBatch)
+                {
+                    Invoke(new Action(() =>
+                    {
+                        lblStatus.Text = status;
+                    }));
+                }
+                return !cancelBatch;
+            };
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

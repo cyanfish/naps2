@@ -93,7 +93,9 @@ namespace NAPS2.Scan.Wia
         {
             try
             {
-                using (var stream = wiaTransfer.Transfer(pageNumber, eventLoop, WiaApi.Formats.BMP))
+                // TODO: Use the NoUI flag uniformly
+                var transfer = ScanParams.NoUI ? new ConsoleWiaTransfer() : wiaTransfer;
+                using (var stream = transfer.Transfer(pageNumber, eventLoop, WiaApi.Formats.BMP))
                 {
                     if (stream == null)
                     {

@@ -11,6 +11,7 @@ using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
+using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Batch
 {
@@ -23,8 +24,9 @@ namespace NAPS2.Scan.Batch
         private readonly ImageSaver imageSaver;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly UserConfigManager userConfigManager;
+        private readonly IFormFactory formFactory;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, ImageSaver imageSaver, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager)
+        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, ImageSaver imageSaver, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
         {
             this.scanPerformer = scanPerformer;
             this.profileManager = profileManager;
@@ -33,11 +35,12 @@ namespace NAPS2.Scan.Batch
             this.imageSaver = imageSaver;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.userConfigManager = userConfigManager;
+            this.formFactory = formFactory;
         }
 
         public void PerformBatchScan(BatchSettings settings, IWin32Window dialogParent, Action<IScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
-            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, imageSaver, pdfSettingsContainer, userConfigManager)
+            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, imageSaver, pdfSettingsContainer, userConfigManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -56,12 +59,13 @@ namespace NAPS2.Scan.Batch
             private readonly ImageSaver imageSaver;
             private readonly PdfSettingsContainer pdfSettingsContainer;
             private readonly UserConfigManager userConfigManager;
+            private readonly IFormFactory formFactory;
 
             private ScanProfile profile;
             private ScanParams scanParams;
             private List<List<IScannedImage>> scans;
 
-            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, ImageSaver imageSaver, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager)
+            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, ImageSaver imageSaver, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
             {
                 this.scanPerformer = scanPerformer;
                 this.profileManager = profileManager;
@@ -70,6 +74,7 @@ namespace NAPS2.Scan.Batch
                 this.imageSaver = imageSaver;
                 this.pdfSettingsContainer = pdfSettingsContainer;
                 this.userConfigManager = userConfigManager;
+                this.formFactory = formFactory;
             }
 
             public BatchSettings Settings { get; set; }
@@ -85,7 +90,8 @@ namespace NAPS2.Scan.Batch
                 profile = profileManager.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
                 scanParams = new ScanParams
                 {
-                    DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == BatchSaveSeparator.PatchT
+                    DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == BatchSaveSeparator.PatchT,
+                    NoUI = true
                 };
                 try
                 {
@@ -106,7 +112,10 @@ namespace NAPS2.Scan.Batch
 
                 if (Settings.ScanType == BatchScanType.Single)
                 {
-                    InputOneScan(-1);
+                    if (!InputOneScan(-1))
+                    {
+                        return;
+                    }
                 }
                 else if (Settings.ScanType == BatchScanType.MultipleWithDelay)
                 {
@@ -116,7 +125,14 @@ namespace NAPS2.Scan.Batch
                         {
                             Thread.Sleep(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds));
                         }
-                        InputOneScan(i);
+                        if (!InputOneScan(i))
+                        {
+                            return;
+                        }
+                        if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 2)))
+                        {
+                            return;
+                        }
                     }
                 }
                 else if (Settings.ScanType == BatchScanType.MultipleWithPrompt)
@@ -124,35 +140,66 @@ namespace NAPS2.Scan.Batch
                     int i = 0;
                     do
                     {
-                        InputOneScan(i++);
+                        if (!InputOneScan(i++))
+                        {
+                            return;
+                        }
+                        if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1)))
+                        {
+                            return;
+                        }
                     } while (PromptForNextScan());
                 }
             }
 
-            private void InputOneScan(int scanNumber)
+            private bool InputOneScan(int scanNumber)
             {
                 var scan = new List<IScannedImage>();
                 int pageNumber = 1;
-                ProgressCallback(scanNumber == -1
+                if (!ProgressCallback(scanNumber == -1
                     ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                    : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-                scanPerformer.PerformScan(profile, scanParams, DialogParent, image =>
+                    : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1)))
                 {
-                    scan.Add(image);
-                    ProgressCallback(scanNumber == -1
-                        ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                        : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-                });
+                    return false;
+                }
+                try
+                {
+                    scanPerformer.PerformScan(profile, scanParams, DialogParent, image =>
+                    {
+                        scan.Add(image);
+                        if (!ProgressCallback(scanNumber == -1
+                            ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
+                            : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1)))
+                        {
+                            throw new OperationCanceledException();
+                        }
+                    });
+                }
+                catch (OperationCanceledException)
+                {
+                    scans.Add(scan);
+                    return false;
+                }
+                if (scan.Count == 0)
+                {
+                    // Presume cancelled
+                    return false;
+                }
                 scans.Add(scan);
+                return true;
             }
 
             private bool PromptForNextScan()
             {
-                throw new NotImplementedException();
+                var promptForm = formFactory.Create<FBatchPrompt>();
+                promptForm.ScanNumber = scans.Count + 1;
+                return promptForm.ShowDialog() == DialogResult.OK;
             }
 
             private void Output()
             {
+                ProgressCallback(MiscResources.BatchStatusSaving);
+
                 var now = DateTime.Now;
                 var allImages = scans.SelectMany(x => x).ToList();
 

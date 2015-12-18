@@ -333,4 +333,7 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="BatchStatusSaving" xml:space="preserve">
+    <value>Saving batch results...</value>
+  </data>
 </root>
