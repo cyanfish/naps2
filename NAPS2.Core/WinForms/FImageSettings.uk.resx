@@ -190,7 +190,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Remember these settings</value>
+        <value>Зберегти налаштуваання</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -214,7 +214,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Restore &amp;Defaults</value>
+        <value>Відновити типові</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -265,7 +265,7 @@
         <value>28</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Default File Name</value>
+        <value>Назва файлу за замовчуванням</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -292,7 +292,7 @@
         <value>29</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Jpeg Quality</value>
+        <value>Якість JPEG</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -319,7 +319,7 @@
         <value>30</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Заповнювачі</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -394,7 +394,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>For high JPEG qualities (80+), use the Maximum Quality profile option for best results.</value>
+        <value>Для отримання найвищих результатів (JPEG (80+) використовуйте опцію профілю "\"Максимальна якість\"".</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>
@@ -447,7 +447,7 @@
         <value>400, 247</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Image Settings</value>
+        <value>Налаштування зображення</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

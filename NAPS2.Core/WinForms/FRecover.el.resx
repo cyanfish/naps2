@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>Για {0} εικόνα(ες) που σαρώθηκε(αν) στις {1} και ώρα {2} μπορεί να μην είχε γίνει αποθήκευση. Θέλετε να γίνει ανάκτηση;</value>
+        <value>Υπάρχουν {0} εικόνες που σαρώθηκαν στις {1} και ώρα {2} οι οποίες ενδέχεται να μην έχουν σωθεί. Θέλετε να τις ανακτήσετε;</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -204,7 +204,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Όχι Τώρα</value>
+        <value>Αργότερα</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>

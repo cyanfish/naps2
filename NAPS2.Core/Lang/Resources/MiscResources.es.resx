@@ -124,10 +124,10 @@
         <value>Limpiar</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>¿Está seguro que desea limpiar {0} ítem(s)?</value>
+        <value>¿Está seguro que desea eliminar {0} ítem(s)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>¿Está seguro que desea borrar {0} item(s)?</value>
+        <value>¿Está seguro que desea borrar {0} elemento(s)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
         <value>¿Está seguro que desea borrar {0} perfiles?</value>
@@ -274,22 +274,22 @@
         <value>Escanear</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>¿Está seguro que quiere deshacer los cambios a {0} imagen(es)?                </value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>Reiniciar Imagen</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
         <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Unsaved Changes</value>
+        <value>Cambios sin guardar</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
         <value>Scanning page {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>El escáner seleccionado no admite el uso de un alimentador . Si el escáner tiene un alimentador , intente utilizar un controlador diferente.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
         <value>No pages are in the feeder.</value>
@@ -298,9 +298,42 @@
         <value>You do not have permission to copy content from the file "{0}".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Ocurrió un error al intentar guardar el archivo                .</value>
     </data>
     <data name="OfN" xml:space="preserve">
         <value>of {0}</value>
+    </data>
+    <data name="BatchError" xml:space="preserve">
+        <value>An unknown error ocurred during the batch scan.</value>
+    </data>
+    <data name="BatchStatusCancelled" xml:space="preserve">
+        <value>Batch cancelled.</value>
+    </data>
+    <data name="BatchStatusCancelling" xml:space="preserve">
+        <value>Cancelling....</value>
+    </data>
+    <data name="BatchStatusComplete" xml:space="preserve">
+        <value>Batch completed successfully.</value>
+    </data>
+    <data name="BatchStatusError" xml:space="preserve">
+        <value>Batch scan stopped due to error.</value>
+    </data>
+    <data name="BatchStatusPage" xml:space="preserve">
+        <value>Scanning page {0}...</value>
+    </data>
+    <data name="BatchStatusScanPage" xml:space="preserve">
+        <value>Scanning page {0} (scan {1})...</value>
+    </data>
+    <data name="BatchStatusWaitingForScan" xml:space="preserve">
+        <value>Waiting for scan {0}...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Cancelar</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="BatchStatusSaving" xml:space="preserve">
+        <value>Saving batch results...</value>
     </data>
 </root>

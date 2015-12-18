@@ -220,7 +220,7 @@
         <value>35, 22</value>
     </data>
     <data name="lblPageTotal.Text" xml:space="preserve">
-        <value>of {0}</value>
+        <value>з {0}</value>
     </data>
     <data name="tsPrev.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -229,7 +229,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsPrev.Text" xml:space="preserve">
-        <value>Previous</value>
+        <value>Попередня</value>
     </data>
     <data name="tsNext.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -238,7 +238,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsNext.Text" xml:space="preserve">
-        <value>Next</value>
+        <value>Далі</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>
@@ -265,7 +265,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>Custom Rotation</value>
+        <value>Ротація користувачем</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -274,7 +274,7 @@
         <value>20, 22</value>
     </data>
     <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Rotate</value>
+        <value>Обернути</value>
     </data>
     <data name="tsCrop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -283,7 +283,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Обрізати</value>
     </data>
     <data name="tsBrightness.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

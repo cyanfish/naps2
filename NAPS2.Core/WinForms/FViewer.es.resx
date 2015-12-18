@@ -229,7 +229,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsPrev.Text" xml:space="preserve">
-        <value>Previous</value>
+        <value>Anterior</value>
     </data>
     <data name="tsNext.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -265,7 +265,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>Custom Rotation</value>
+        <value>Rotación personalizada</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -283,7 +283,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Recortar</value>
     </data>
     <data name="tsBrightness.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

@@ -124,7 +124,7 @@
         <value>Cancella</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Vuoi cancellare {0} oggetto(i)?</value>
+        <value>Vuoi cancellare il(i) {0} oggetto(i)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
         <value>Vuoi eliminare {0} oggetto(i)?</value>
@@ -220,7 +220,7 @@
         <value>Scarica e Installa</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Vuoi che NAPS2 controlli automaticamente la diponibilità di aggiornamenti?</value>
+        <value>Vuoi che NAPS2 controlli automaticamente gli aggiornamenti?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
         <value>Non ora</value>
@@ -247,7 +247,7 @@
         <value>Selezionato ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
-        <value>Dimensione stimata dello scaricamento: {0} MB</value>
+        <value>Dimensione stimata del download: {0} MB</value>
     </data>
     <data name="FilesProgress" xml:space="preserve">
         <value>{0} / {1} files</value>
@@ -268,39 +268,72 @@
         <value>Uno o più files non possono essere scaricati.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Custom ({0}x{1} {2})</value>
+        <value>Personalizzato ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
         <value>Scansiona</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>Sicuro di voler annullare i cambiamenti a {0} immagine(i)?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>Resetta Immagine</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>Ci sono modifiche non salvate. Sicuro di voler uscire ed eliminare tali modifiche?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Unsaved Changes</value>
+        <value>Modifiche non salvate</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>Digitalizzazione pagina {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo scanner ha un alimentatore, prova un driver differente.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>Non ci sono fogli nel caricatore.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
         <value>You do not have permission to copy content from the file "{0}".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Si è verificato un errore durante il salvataggio del file.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>di {0}</value>
+    </data>
+    <data name="BatchError" xml:space="preserve">
+        <value>An unknown error ocurred during the batch scan.</value>
+    </data>
+    <data name="BatchStatusCancelled" xml:space="preserve">
+        <value>Batch cancelled.</value>
+    </data>
+    <data name="BatchStatusCancelling" xml:space="preserve">
+        <value>Cancelling....</value>
+    </data>
+    <data name="BatchStatusComplete" xml:space="preserve">
+        <value>Batch completed successfully.</value>
+    </data>
+    <data name="BatchStatusError" xml:space="preserve">
+        <value>Batch scan stopped due to error.</value>
+    </data>
+    <data name="BatchStatusPage" xml:space="preserve">
+        <value>Digitalizzazione pagina {0}...</value>
+    </data>
+    <data name="BatchStatusScanPage" xml:space="preserve">
+        <value>Scanning page {0} (scan {1})...</value>
+    </data>
+    <data name="BatchStatusWaitingForScan" xml:space="preserve">
+        <value>Waiting for scan {0}...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Annulla</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="BatchStatusSaving" xml:space="preserve">
+        <value>Saving batch results...</value>
     </data>
 </root>

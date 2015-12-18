@@ -137,7 +137,7 @@
         <value>131, 22</value>
     </data>
     <data name="ctxEdit.Text" xml:space="preserve">
-        <value>Éditer</value>
+        <value>Éditer...</value>
     </data>
     <data name="ctxSetDefault.Size" type="System.Drawing.Size, System.Drawing">
         <value>131, 22</value>
@@ -202,7 +202,7 @@
         <value>1</value>
     </data>
     <data name="btnAdd.Text" xml:space="preserve">
-        <value>&amp;Nouveau</value>
+        <value>&amp;Nouveau...</value>
     </data>
     <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -235,7 +235,7 @@
         <value>2</value>
     </data>
     <data name="btnEdit.Text" xml:space="preserve">
-        <value>Éditer</value>
+        <value>Éditer...</value>
     </data>
     <data name="btnEdit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>

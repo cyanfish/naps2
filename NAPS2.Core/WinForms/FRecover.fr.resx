@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été sauvegardée(s), et est(sont) récupérable(s). Faut-il la(es) récupérer ?</value>
+        <value>{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été sauvegardée(s), et est(sont) récupérable(s). Faut-il procéder à la récupération ?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>

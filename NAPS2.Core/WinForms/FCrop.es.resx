@@ -142,7 +142,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;pictureBox.ZOrder" xml:space="preserve">
-        <value>0</value>
+        <value>1</value>
     </data>
     <data name="tbRight.Location" type="System.Drawing.Point, System.Drawing">
         <value>28, 206</value>
@@ -163,7 +163,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;tbRight.ZOrder" xml:space="preserve">
-        <value>7</value>
+        <value>8</value>
     </data>
     <data name="tbLeft.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
@@ -187,7 +187,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;tbLeft.ZOrder" xml:space="preserve">
-        <value>1</value>
+        <value>2</value>
     </data>
     <data name="tbTop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
@@ -214,7 +214,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;tbTop.ZOrder" xml:space="preserve">
-        <value>2</value>
+        <value>3</value>
     </data>
     <data name="tbBottom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
@@ -241,10 +241,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;tbBottom.ZOrder" xml:space="preserve">
-        <value>6</value>
+        <value>7</value>
     </data>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>152, 240</value>
+        <value>152, 263</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -265,10 +265,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-        <value>5</value>
+        <value>6</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>233, 240</value>
+        <value>233, 263</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -289,10 +289,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>4</value>
+        <value>5</value>
     </data>
     <data name="btnRevert.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 240</value>
+        <value>12, 263</value>
     </data>
     <data name="btnRevert.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -313,7 +313,37 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnRevert.ZOrder" xml:space="preserve">
-        <value>3</value>
+        <value>4</value>
+    </data>
+    <data name="checkboxApplyToSelected.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="checkboxApplyToSelected.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="checkboxApplyToSelected.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 238</value>
+    </data>
+    <data name="checkboxApplyToSelected.Size" type="System.Drawing.Size, System.Drawing">
+        <value>173, 17</value>
+    </data>
+    <data name="checkboxApplyToSelected.TabIndex" type="System.Int32, mscorlib">
+        <value>11</value>
+    </data>
+    <data name="checkboxApplyToSelected.Text" xml:space="preserve">
+        <value>Apply to all {0} selected images</value>
+    </data>
+    <data name="&gt;&gt;checkboxApplyToSelected.Name" xml:space="preserve">
+        <value>checkboxApplyToSelected</value>
+    </data>
+    <data name="&gt;&gt;checkboxApplyToSelected.Type" xml:space="preserve">
+        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;checkboxApplyToSelected.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;checkboxApplyToSelected.ZOrder" xml:space="preserve">
+        <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
@@ -322,7 +352,7 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>320, 275</value>
+        <value>320, 298</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
@@ -357,12 +387,12 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Recortar</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FCrop</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.25627, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.28575, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

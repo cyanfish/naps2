@@ -238,6 +238,12 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
+    <Compile Include="WinForms\FAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FAbout.Designer.cs">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FBatchPrompt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,12 +255,6 @@
     </Compile>
     <Compile Include="WinForms\FBatchScan.Designer.cs">
       <DependentUpon>FBatchScan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForms\FAbout.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForms\FAbout.Designer.cs">
-      <DependentUpon>FAbout.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FBrightness.cs">
       <SubType>Form</SubType>
@@ -441,6 +441,7 @@
     <EmbeddedResource Include="Lang\Resources\MiscResources.el.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.es.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.et.resx" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.fi.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.fr.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.he.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.hr.resx" />
@@ -472,6 +473,7 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.el.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.es.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.et.resx" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.fi.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.fr.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.he.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.hr.resx" />
@@ -495,6 +497,89 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.tr.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" />
+    <EmbeddedResource Include="WinForms\FAbout.bg.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.ca.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.cs.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.da.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.de.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.el.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.es.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.et.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.fi.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.fr.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.he.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.hr.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.hu.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.it.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.nb.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.nl.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.pl.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.pt-BR.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.pt-PT.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.ro.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.ru.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.sq.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.sv.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.tr.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.uk.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.zh-TW.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchPrompt.bg.resx">
       <DependentUpon>FBatchPrompt.cs</DependentUpon>
     </EmbeddedResource>
@@ -517,6 +602,9 @@
       <DependentUpon>FBatchPrompt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchPrompt.et.resx">
+      <DependentUpon>FBatchPrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBatchPrompt.fi.resx">
       <DependentUpon>FBatchPrompt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchPrompt.fr.resx">
@@ -597,6 +685,9 @@
     <EmbeddedResource Include="WinForms\FBatchScan.et.resx">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBatchScan.fi.resx">
+      <DependentUpon>FBatchScan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchScan.fr.resx">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </EmbeddedResource>
@@ -652,86 +743,6 @@
     <EmbeddedResource Include="WinForms\FBatchScan.zh-TW.resx">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.bg.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.ca.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.cs.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.da.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.de.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.el.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.es.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.et.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.fr.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.he.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.hr.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.hu.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.it.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.nb.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.nl.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.pl.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.pt-BR.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.pt-PT.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.ro.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.ru.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.sq.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.sv.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.tr.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.uk.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.zh-TW.resx">
-      <DependentUpon>FAbout.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBrightness.bg.resx">
       <DependentUpon>FBrightness.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -755,6 +766,9 @@
       <DependentUpon>FBrightness.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBrightness.et.resx">
+      <DependentUpon>FBrightness.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightness.fi.resx">
       <DependentUpon>FBrightness.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBrightness.fr.resx">
@@ -837,6 +851,9 @@
     <EmbeddedResource Include="WinForms\FContrast.et.resx">
       <DependentUpon>FContrast.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FContrast.fi.resx">
+      <DependentUpon>FContrast.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FContrast.fr.resx">
       <DependentUpon>FContrast.cs</DependentUpon>
     </EmbeddedResource>
@@ -915,6 +932,9 @@
       <DependentUpon>FCrop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FCrop.et.resx">
+      <DependentUpon>FCrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FCrop.fi.resx">
       <DependentUpon>FCrop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FCrop.fr.resx">
@@ -996,6 +1016,9 @@
     <EmbeddedResource Include="WinForms\FDesktop.et.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FDesktop.fi.resx">
+      <DependentUpon>FDesktop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.fr.resx">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
@@ -1075,6 +1098,9 @@
     <EmbeddedResource Include="WinForms\FDownloadProgress.et.resx">
       <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FDownloadProgress.fi.resx">
+      <DependentUpon>FDownloadProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDownloadProgress.fr.resx">
       <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
@@ -1151,6 +1177,9 @@
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditScanSettings.et.resx">
+      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEditScanSettings.fi.resx">
       <DependentUpon>FEditScanSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditScanSettings.fr.resx">
@@ -1232,6 +1261,9 @@
     <EmbeddedResource Include="WinForms\FEmailSettings.et.resx">
       <DependentUpon>FEmailSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.fi.resx">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEmailSettings.fr.resx">
       <DependentUpon>FEmailSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -1309,6 +1341,9 @@
       <DependentUpon>FImageSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FImageSettings.et.resx">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.fi.resx">
       <DependentUpon>FImageSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FImageSettings.fr.resx">
@@ -1390,6 +1425,9 @@
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.et.resx">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FOcrLanguageDownload.fi.resx">
+      <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.fr.resx">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </EmbeddedResource>
@@ -1466,6 +1504,9 @@
       <DependentUpon>FOcrSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrSetup.et.resx">
+      <DependentUpon>FOcrSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FOcrSetup.fi.resx">
       <DependentUpon>FOcrSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrSetup.fr.resx">
@@ -1546,6 +1587,9 @@
     <EmbeddedResource Include="WinForms\FPageSize.et.resx">
       <DependentUpon>FPageSize.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.fi.resx">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPageSize.fr.resx">
       <DependentUpon>FPageSize.cs</DependentUpon>
     </EmbeddedResource>
@@ -1624,6 +1668,9 @@
     <EmbeddedResource Include="WinForms\FPdfPassword.et.resx">
       <DependentUpon>FPdfPassword.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.fi.resx">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfPassword.fr.resx">
       <DependentUpon>FPdfPassword.cs</DependentUpon>
     </EmbeddedResource>
@@ -1700,6 +1747,9 @@
       <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfSave.et.resx">
+      <DependentUpon>FPdfSave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPDFSave.fi.resx">
       <DependentUpon>FPdfSave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfSave.fr.resx">
@@ -1781,6 +1831,9 @@
     <EmbeddedResource Include="WinForms\FPdfSettings.et.resx">
       <DependentUpon>FPdfSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.fi.resx">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfSettings.fr.resx">
       <DependentUpon>FPdfSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -1860,6 +1913,9 @@
     <EmbeddedResource Include="WinForms\FPlaceholders.et.resx">
       <DependentUpon>FPlaceholders.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPlaceholders.fi.resx">
+      <DependentUpon>FPlaceholders.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPlaceholders.fr.resx">
       <DependentUpon>FPlaceholders.cs</DependentUpon>
     </EmbeddedResource>
@@ -1936,6 +1992,9 @@
       <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FProfiles.et.resx">
+      <DependentUpon>FProfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FProfiles.fi.resx">
       <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FProfiles.fr.resx">
@@ -2017,6 +2076,9 @@
     <EmbeddedResource Include="WinForms\FRecover.et.resx">
       <DependentUpon>FRecover.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FRecover.fi.resx">
+      <DependentUpon>FRecover.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRecover.fr.resx">
       <DependentUpon>FRecover.cs</DependentUpon>
     </EmbeddedResource>
@@ -2094,6 +2156,9 @@
       <DependentUpon>FRotate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRotate.et.resx">
+      <DependentUpon>FRotate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FRotate.fi.resx">
       <DependentUpon>FRotate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRotate.fr.resx">
@@ -2175,6 +2240,9 @@
     <EmbeddedResource Include="WinForms\FScanProgress.et.resx">
       <DependentUpon>FScanProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.fi.resx">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FScanProgress.fr.resx">
       <DependentUpon>FScanProgress.cs</DependentUpon>
     </EmbeddedResource>
@@ -2251,6 +2319,9 @@
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FTwainGui.et.resx">
+      <DependentUpon>FTwainGui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FTwainGui.fi.resx">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FTwainGui.fr.resx">
@@ -2332,6 +2403,9 @@
     <EmbeddedResource Include="WinForms\FUpdate.et.resx">
       <DependentUpon>FUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.fi.resx">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FUpdate.fr.resx">
       <DependentUpon>FUpdate.cs</DependentUpon>
     </EmbeddedResource>
@@ -2408,6 +2482,9 @@
       <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FViewer.et.resx">
+      <DependentUpon>FViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FViewer.fi.resx">
       <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FViewer.fr.resx">
@@ -2489,6 +2566,9 @@
     <EmbeddedResource Include="WinForms\ThumbnailList.et.resx">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ThumbnailList.fi.resx">
+      <DependentUpon>ThumbnailList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\ThumbnailList.fr.resx">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
@@ -2568,6 +2648,9 @@
     <EmbeddedResource Include="WinForms\TiffViewer.et.resx">
       <DependentUpon>TiffViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\TiffViewer.fi.resx">
+      <DependentUpon>TiffViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewer.fr.resx">
       <DependentUpon>TiffViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -2645,6 +2728,9 @@
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewerCtl.et.resx">
+      <DependentUpon>TiffViewerCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\TiffViewerCtl.fi.resx">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewerCtl.fr.resx">

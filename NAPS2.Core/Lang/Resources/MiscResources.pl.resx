@@ -148,7 +148,7 @@
         <value>Wybrany skaner jest w trybie offline.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Oddalenie.</value>
+        <value>Nie masz uprawnień do zapisywania plików we wskazanym położeniu.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Błąd</value>
@@ -157,25 +157,25 @@
         <value>Pliki bitmapowe (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
-        <value>Enhanced Windows MetaFile (*.emf)</value>
+        <value>Plik Enhanced Windows MetaFile (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
-        <value>Exchangeable Image File (*.exif)</value>
+        <value>Plik Exchangeable Image File (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
-        <value>GIF File (*.gif)</value>
+        <value>Plik GIF (*.gif)</value>
     </data>
     <data name="FileTypeJpeg" xml:space="preserve">
-        <value>Przeplataj</value>
+        <value>Plik JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF document (*.pdf)</value>
+        <value>Dokument PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>PNG File (*.png)</value>
+        <value>Plik PNG (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>Plik TIFF (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
         <value>Brak nazwy.</value>
@@ -187,7 +187,7 @@
         <value>Nie wybrano urządzenia.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>Nie odnaleziono urządzenia.</value>
+        <value>Nie odnaleziono urządzenia skanującego.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
         <value>Nadpisz plik</value>
@@ -226,7 +226,7 @@
         <value>Nie teraz</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Nowa wersja NAPS2 jest dostępna. Czy chcesz teraz zaktualizować?</value>
+        <value>Nowa wersja NAPS2 jest dostępna. Czy chcesz teraz dokonać aktualizacji?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Instalacja zakończona</value>
@@ -302,5 +302,38 @@
     </data>
     <data name="OfN" xml:space="preserve">
         <value>z {0}</value>
+    </data>
+    <data name="BatchError" xml:space="preserve">
+        <value>An unknown error ocurred during the batch scan.</value>
+    </data>
+    <data name="BatchStatusCancelled" xml:space="preserve">
+        <value>Batch cancelled.</value>
+    </data>
+    <data name="BatchStatusCancelling" xml:space="preserve">
+        <value>Cancelling....</value>
+    </data>
+    <data name="BatchStatusComplete" xml:space="preserve">
+        <value>Batch completed successfully.</value>
+    </data>
+    <data name="BatchStatusError" xml:space="preserve">
+        <value>Batch scan stopped due to error.</value>
+    </data>
+    <data name="BatchStatusPage" xml:space="preserve">
+        <value>Skanowanie strony {0}...</value>
+    </data>
+    <data name="BatchStatusScanPage" xml:space="preserve">
+        <value>Scanning page {0} (scan {1})...</value>
+    </data>
+    <data name="BatchStatusWaitingForScan" xml:space="preserve">
+        <value>Waiting for scan {0}...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Anuluj</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="BatchStatusSaving" xml:space="preserve">
+        <value>Saving batch results...</value>
     </data>
 </root>

@@ -177,7 +177,7 @@
         <value>2</value>
     </data>
     <data name="labelSub.Text" xml:space="preserve">
-        <value>{0} / {1} MB</value>
+        <value>{0} / {1} МБ</value>
     </data>
     <data name="&gt;&gt;labelSub.Name" xml:space="preserve">
         <value>labelSub</value>
@@ -204,7 +204,7 @@
         <value>4</value>
     </data>
     <data name="labelTop.Text" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} файлів</value>
     </data>
     <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
         <value>labelTop</value>

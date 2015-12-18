@@ -118,22 +118,22 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ChooseProfile" xml:space="preserve">
-        <value>Επιλογή Προφίλ</value>
+        <value>Επιλέξτε Προφίλ</value>
     </data>
     <data name="Clear" xml:space="preserve">
-        <value>Καθάρισμα</value>
+        <value>Καθαρισμός</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Θέλετε σίγουρα να καθαρίσετε {0} αντικείμενο(α);</value>
+        <value>Θέλετε σίγουρα να καθαρίσετε {0} αντικείμενα;</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Θέλετε σίγουρα να διαγράψετε {0} αντικείμενο(α);</value>
+        <value>Θέλετε σίγουρα να διαγράψετε {0} αντικείμενα;</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
         <value>Θέλετε σίγουρα να διαγράψετε {0} προφίλ;</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Θέλετε σίγουρα να γίνει διαγραφή του προφίλ {0};</value>
+        <value>Θέλετε σίγουρα να διαγράψετε το προφίλ {0};</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
         <value>Το αρχείο {0} υπάρχει ήδη. Θέλετε να αντικατασταθεί;</value>
@@ -148,7 +148,7 @@
         <value>Ο επιλεγμένος σαρωτής είναι εκτός λειτουργίας.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Δεν έχετε δικαίωμα αποθήκευσης αρχείων σε αυτή την τοποθεσία.</value>
+        <value>Δεν έχετε δικαίωμα να σώσετε αρχεία σε αυτή την τοποθεσία.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Σφάλμα</value>
@@ -172,13 +172,13 @@
         <value>Αρχεία PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>Άρχεία PNG (*.png)</value>
+        <value>Αρχεία PNG (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
         <value>Αρχεία TIFF (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
-        <value>Λείπει το όνομα.</value>
+        <value>Το όνομα λείπει.</value>
     </data>
     <data name="NAPS2" xml:space="preserve">
         <value>NAPS2</value>
@@ -202,7 +202,7 @@
         <value>Επιλέξτε ένα προφίλ πριν κάνετε κλικ στην Σάρωση.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Υπήρξε σφάλμα με τον οδηγό σάρωσης.</value>
+        <value>Υπήρξε σφάλμα του οδηγού σάρωσης.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Έκδοση {0}</value>
@@ -223,10 +223,10 @@
         <value>Θέλετε το NAPS2 να ελέγχει αυτόματα για ενημερώσεις;</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Όχι Τώρα</value>
+        <value>Αργότερα</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Μια νεότερη έκδοση του NAPS2 είναι διαθέσιμη. Θέλετε να γίνει ενημέρωση τώρα;</value>
+        <value>Υπάρχει διαθέσιμη μία νεότερη έκδοση του NAPS2. Θέλετε να γίνει ενημέρωση τώρα;</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Η Εγκατάσταση Ολοκληρώθηκε</value>
@@ -244,7 +244,7 @@
         <value>Όλα ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Επιλεγμένο(α) ({0})</value>
+        <value>Επιλεγμένα ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
         <value>Εκτιμώμενο μέγεθος λήψης: {0} MB</value>
@@ -268,19 +268,19 @@
         <value>Αποτυχία λήψης για ένα ή περισσότερα αρχεία.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Προσαρμοσμένο ({0}x{1} {2})</value>
+        <value>Προσ/νο ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
         <value>Σάρωση</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Θέλετε σίγουρα να ακυρώσετε τις αλλαγές σας σε {0} εικόνα(ες);</value>
+        <value>Θέλετε σίγουρα να αναιρέσετε τις αλλαγές σας σε {0} εικόνες;</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Επαναφορά Εικόνας</value>
+        <value>Αρχικοποίηση Εικόνας</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>Έχετε μη αποθηκευμένες αλλαγές. Είστε σίγουροι ότι θέλετε έξοδο και να τις αγνοήσετε;</value>
+        <value>Έχετε μη αποθηκευμένες αλλαγές. Είστε σίγουροι ότι θέλετε να βγείτε και να απορρίψετε αυτές τις αλλαγές;</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
         <value>Μη Αποθηκευμένες Αλλαγές</value>
@@ -289,7 +289,7 @@
         <value>Σάρωση σελίδας {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής σας διαθέτει τροφοδότη, δοκιμάστε διαφορετικό οδηγό (driver).</value>
+        <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής σας όντως διαθέτει τροφοδότη, δοκιμάστε ένα διαφορετικό οδηγό.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
         <value>Δεν υπάρχουν σελίδες στον τροφοδότη.</value>
@@ -298,9 +298,42 @@
         <value>You do not have permission to copy content from the file "{0}".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>Υπήρξε σφάλμα κατά την αποθήκευση του αρχείου.</value>
+        <value>Υπήρξε σφάλμα κατά το σώσιμο του αρχείου.</value>
     </data>
     <data name="OfN" xml:space="preserve">
         <value>από {0}</value>
+    </data>
+    <data name="BatchError" xml:space="preserve">
+        <value>An unknown error ocurred during the batch scan.</value>
+    </data>
+    <data name="BatchStatusCancelled" xml:space="preserve">
+        <value>Batch cancelled.</value>
+    </data>
+    <data name="BatchStatusCancelling" xml:space="preserve">
+        <value>Cancelling....</value>
+    </data>
+    <data name="BatchStatusComplete" xml:space="preserve">
+        <value>Batch completed successfully.</value>
+    </data>
+    <data name="BatchStatusError" xml:space="preserve">
+        <value>Batch scan stopped due to error.</value>
+    </data>
+    <data name="BatchStatusPage" xml:space="preserve">
+        <value>Σάρωση σελίδας {0}...</value>
+    </data>
+    <data name="BatchStatusScanPage" xml:space="preserve">
+        <value>Scanning page {0} (scan {1})...</value>
+    </data>
+    <data name="BatchStatusWaitingForScan" xml:space="preserve">
+        <value>Waiting for scan {0}...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Άκυρο</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="BatchStatusSaving" xml:space="preserve">
+        <value>Saving batch results...</value>
     </data>
 </root>

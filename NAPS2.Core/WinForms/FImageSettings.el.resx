@@ -394,7 +394,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>Για υψηλές ποιότητες JPEG (80+) και καλύτερα αποτελέσματα, χρησιμοποιήστε την επιλογή του προφίλ για Μέγιστη Ποιότητα.</value>
+        <value>Για καλύτερα αποτελέσματα σε υψηλές ποιότητες JPEG (80+), χρησιμοποιήστε την επιλογή του προφίλ Μέγιστη Ποιότητα.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>

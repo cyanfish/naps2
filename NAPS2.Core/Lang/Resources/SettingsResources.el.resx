@@ -124,7 +124,7 @@
         <value>Χρώμα 24-bit</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Κλίμακα του γκρι</value>
+        <value>Κλίμακα του Γκρι</value>
     </data>
     <data name="Dpi_100" xml:space="preserve">
         <value>100 dpi</value>
@@ -151,7 +151,7 @@
         <value>800 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Κεντράρισμα</value>
+        <value>Κέντρο</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
         <value>Αριστερά</value>
@@ -205,7 +205,7 @@
         <value>1:8</value>
     </data>
     <data name="Source_Duplex" xml:space="preserve">
-        <value>Διπλή όψη</value>
+        <value>Διπλή Όψη</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
         <value>Τροφοδότης</value>

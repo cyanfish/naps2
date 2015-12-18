@@ -184,7 +184,7 @@
         <value>B5 (176x250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Personnalisée...</value>
+        <value>Personnalisé...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>US Legal (8.5x14 p)</value>

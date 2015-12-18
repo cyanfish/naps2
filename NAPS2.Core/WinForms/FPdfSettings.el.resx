@@ -214,7 +214,7 @@
         <value>11</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Λέξεις κλειδιά</value>
+        <value>Λέξεις Κλειδιά</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -391,7 +391,7 @@
         <value>20</value>
     </data>
     <data name="groupMetadata.Text" xml:space="preserve">
-        <value>Μεταδεδομένα</value>
+        <value>Μεταδεδομένα (Metadata)</value>
     </data>
     <data name="&gt;&gt;groupMetadata.Name" xml:space="preserve">
         <value>groupMetadata</value>
@@ -781,7 +781,7 @@
         <value>1</value>
     </data>
     <data name="lblOwnerPassword.Text" xml:space="preserve">
-        <value>Κωδικός Κατόχου</value>
+        <value>Κωδικός Ιδιοκτήτη</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>
@@ -808,7 +808,7 @@
         <value>4</value>
     </data>
     <data name="cbEncryptPdf.Text" xml:space="preserve">
-        <value>Κρυπτογράφηση PDF</value>
+        <value>Κρυπτογραφημένο PDF</value>
     </data>
     <data name="&gt;&gt;cbEncryptPdf.Name" xml:space="preserve">
         <value>cbEncryptPdf</value>

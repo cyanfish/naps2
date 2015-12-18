@@ -124,7 +124,7 @@
         <value>Очистити</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Ви справді бажаєте почистити профіль(лі) {0}?</value>
+        <value>Ви справді бажаєте очистити профіль(лі) {0}?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
         <value>Ви справді бажаєте видалити {0} профілі(в)?</value>
@@ -154,13 +154,13 @@
         <value>Помилка</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Файли зображень mspaint *.bmp</value>
+        <value>Файли зображень *.bmp</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
         <value>Розширений метафайл (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
-        <value>Exchangeable Image File (*.exif)</value>
+        <value>Файл зображень для обміну (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
         <value>GIF файл (*.gif)</value>
@@ -193,7 +193,7 @@
         <value>Перезаписати файл</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
-        <value>{0} of {1}</value>
+        <value>{0} з {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
         <value>Зіскановане зображення</value>
@@ -223,37 +223,37 @@
         <value>Увімкнути автоматичне оновлення?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Not Now</value>
+        <value>Не зараз</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Є оновлення. Встановити?</value>
+        <value>Доступна нова версія NAPS2. Бажаєте встановити?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Installation Complete</value>
+        <value>Встановлення завершено</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Installation complete. Do you want to restart NAPS2 now?</value>
+        <value>Встановлення завершено. Перезапустити NAPS2?</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installation failed.</value>
+        <value>Встановлення завершилося невдало.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installation Failed</value>
+        <value>Помилка при встановленні</value>
     </data>
     <data name="AllCount" xml:space="preserve">
         <value>Всі ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Вибрані ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
         <value>Приблизний об’єм звантаження: {0} МБ</value>
     </data>
     <data name="FilesProgress" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} файлів</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
-        <value>{0} / {1} MB</value>
+        <value>{0} / {1} МБ</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
         <value>The file "{0}" could not be imported.</value>
@@ -265,42 +265,75 @@
         <value>Помилка звантаження</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>One or more files could not be downloaded.</value>
+        <value>Один або декілька файлів завантажити не вдалось.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Custom ({0}x{1} {2})</value>
+        <value>Користувача ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
         <value>Сканувати</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>Ви бажаєте відмінити зміни в {0} зображеннях ?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>Перевантажити зображення</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>Є незбережені зміни. Ви впевнені, що хочете вийти та відмовитись від них?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Unsaved Changes</value>
+        <value>Зміни не збережено</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>Сканування сторінки {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>Цей сканер не підтримує автоматичну подачу паперу. Якщо Ваш сканер має автоматичну подачу паперу, спробуйте використати інший драйвер..</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>В пристрої відсутній папір.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
         <value>You do not have permission to copy content from the file "{0}".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Під час збереження файлу трапилась помилка.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>з {0}</value>
+    </data>
+    <data name="BatchError" xml:space="preserve">
+        <value>An unknown error ocurred during the batch scan.</value>
+    </data>
+    <data name="BatchStatusCancelled" xml:space="preserve">
+        <value>Batch cancelled.</value>
+    </data>
+    <data name="BatchStatusCancelling" xml:space="preserve">
+        <value>Cancelling....</value>
+    </data>
+    <data name="BatchStatusComplete" xml:space="preserve">
+        <value>Batch completed successfully.</value>
+    </data>
+    <data name="BatchStatusError" xml:space="preserve">
+        <value>Batch scan stopped due to error.</value>
+    </data>
+    <data name="BatchStatusPage" xml:space="preserve">
+        <value>Сканування сторінки {0}...</value>
+    </data>
+    <data name="BatchStatusScanPage" xml:space="preserve">
+        <value>Scanning page {0} (scan {1})...</value>
+    </data>
+    <data name="BatchStatusWaitingForScan" xml:space="preserve">
+        <value>Waiting for scan {0}...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Скасувати</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="BatchStatusSaving" xml:space="preserve">
+        <value>Saving batch results...</value>
     </data>
 </root>

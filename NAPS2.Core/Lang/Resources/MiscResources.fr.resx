@@ -136,7 +136,7 @@
         <value>Faut-il vraiment supprimer le profil {0} ?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Le fichier \"{0}\" existe déjà. Faut-il l'écraser ?</value>
+        <value>Le fichier « {0} » existe déjà. Faut-il l'écraser ?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Supprimer</value>
@@ -208,10 +208,10 @@
         <value>Version {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>Une erreur s'est produite en tentant d'envoyer un courriel.</value>
+        <value>Une erreur s'est produite en essayant d'envoyer un email.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Mises à jour automatiques</value>
+        <value>Mise à jour automatique</value>
     </data>
     <data name="Download" xml:space="preserve">
         <value>Télécharger</value>
@@ -220,7 +220,7 @@
         <value>Télécharger et installer</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Faut-il que NAPS2 vérifie régulièrement les mises à jour ?</value>
+        <value>Faut-il que NAPS2 vérifie automatiquement les mises à jour ?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
         <value>Pas maintenant</value>
@@ -268,7 +268,7 @@
         <value>Au moins un fichier n'a pas pu être téléchargé.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Personnalisée ({0}x{1} {2})</value>
+        <value>Personnalisé ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
         <value>Numériser</value>
@@ -302,5 +302,38 @@
     </data>
     <data name="OfN" xml:space="preserve">
         <value>de {0}</value>
+    </data>
+    <data name="BatchError" xml:space="preserve">
+        <value>An unknown error ocurred during the batch scan.</value>
+    </data>
+    <data name="BatchStatusCancelled" xml:space="preserve">
+        <value>Batch cancelled.</value>
+    </data>
+    <data name="BatchStatusCancelling" xml:space="preserve">
+        <value>Cancelling....</value>
+    </data>
+    <data name="BatchStatusComplete" xml:space="preserve">
+        <value>Batch completed successfully.</value>
+    </data>
+    <data name="BatchStatusError" xml:space="preserve">
+        <value>Batch scan stopped due to error.</value>
+    </data>
+    <data name="BatchStatusPage" xml:space="preserve">
+        <value>Numérisation de la page {0}......</value>
+    </data>
+    <data name="BatchStatusScanPage" xml:space="preserve">
+        <value>Scanning page {0} (scan {1})...</value>
+    </data>
+    <data name="BatchStatusWaitingForScan" xml:space="preserve">
+        <value>Waiting for scan {0}...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Annuler</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="BatchStatusSaving" xml:space="preserve">
+        <value>Saving batch results...</value>
     </data>
 </root>

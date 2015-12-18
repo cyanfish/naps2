@@ -118,10 +118,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Чорно-біле</value>
+        <value>Чорно-білий</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-біт Колір</value>
+        <value>Кольорове 24-біти</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Відтінки сірого</value>
@@ -151,7 +151,7 @@
         <value>800 т/д</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Центрувати</value>
+        <value>По центру</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
         <value>Вліво</value>
@@ -160,13 +160,13 @@
         <value>Вправо</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm</value>
+        <value>см</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>in</value>
+        <value>дюйм</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm</value>
+        <value>мм</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
         <value>A3 (297 x 420 мм)</value>
@@ -178,19 +178,19 @@
         <value>A5 (148 x 210 мм)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+        <value>B4 (250x353 мм)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+        <value>B5 (176x250 мм)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>Інший...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>US Legal (8.5x11 дюймів)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>US Letter (8.5x11 дюймів)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>

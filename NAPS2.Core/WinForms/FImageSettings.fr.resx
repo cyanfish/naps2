@@ -190,7 +190,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Se souvenir de ces réglages</value>
+        <value>Mémoriser ces réglages</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>

@@ -316,7 +316,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Use native UI</value>
+        <value>Benutze natives WIA User Interface</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>

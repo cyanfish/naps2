@@ -193,7 +193,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxView.Text" xml:space="preserve">
-        <value>View</value>
+        <value>Вигляд</value>
     </data>
     <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -205,7 +205,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxSelectAll.Text" xml:space="preserve">
-        <value>Select All</value>
+        <value>Вибрати все</value>
     </data>
     <data name="ctxCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
         <value>Ctrl+C</value>
@@ -241,7 +241,7 @@
         <value>thumbnailList1</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.2.1.28715, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.2.3.306, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -310,10 +310,19 @@
         <value>None</value>
     </data>
     <data name="tsNewProfile.Size" type="System.Drawing.Size, System.Drawing">
-        <value>135, 22</value>
+        <value>152, 22</value>
     </data>
     <data name="tsNewProfile.Text" xml:space="preserve">
-        <value>New Profile</value>
+        <value>Створити профіль</value>
+    </data>
+    <data name="tsBatchScan.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsBatchScan.Size" type="System.Drawing.Size, System.Drawing">
+        <value>152, 22</value>
+    </data>
+    <data name="tsBatchScan.Text" xml:space="preserve">
+        <value>Batch Scan</value>
     </data>
     <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -382,7 +391,7 @@
         <value>56, 51</value>
     </data>
     <data name="tsOcr.Text" xml:space="preserve">
-        <value>OCR</value>
+        <value>Розпізнавання</value>
     </data>
     <data name="tsOcr.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -394,7 +403,7 @@
         <value>67, 51</value>
     </data>
     <data name="tsImport.Text" xml:space="preserve">
-        <value>Import</value>
+        <value>Імпортувати</value>
     </data>
     <data name="tsImport.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -412,7 +421,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsSavePDFSelected.Text" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Вибрані ({0})</value>
     </data>
     <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
         <value>140, 6</value>
@@ -421,7 +430,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>Налаштування PDF </value>
     </data>
     <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -445,7 +454,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsSaveImagesSelected.Text" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Вибрані ({0})</value>
     </data>
     <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
         <value>149, 6</value>
@@ -454,7 +463,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>Image Settings</value>
+        <value>Налаштування зображення</value>
     </data>
     <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -478,7 +487,7 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailPDFSelected.Text" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Вибрані ({0})</value>
     </data>
     <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 6</value>
@@ -487,13 +496,13 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>Email Settings</value>
+        <value>Параметри електронної пошти</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>Налаштування PDF </value>
     </data>
     <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -514,7 +523,7 @@
         <value>56, 51</value>
     </data>
     <data name="tsdPrint.Text" xml:space="preserve">
-        <value>Print</value>
+        <value>Друк</value>
     </data>
     <data name="tsdPrint.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -526,7 +535,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsView.Text" xml:space="preserve">
-        <value>View</value>
+        <value>Вигляд</value>
     </data>
     <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
         <value>126, 6</value>
@@ -538,7 +547,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Обрізати</value>
     </data>
     <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -565,7 +574,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsReset.Text" xml:space="preserve">
-        <value>Reset</value>
+        <value>Перезавантажити зображення</value>
     </data>
     <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -574,7 +583,7 @@
         <value>64, 51</value>
     </data>
     <data name="tsdImage.Text" xml:space="preserve">
-        <value>Image</value>
+        <value>Зображення</value>
     </data>
     <data name="tsdImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -610,7 +619,7 @@
         <value>164, 22</value>
     </data>
     <data name="customRotationToolStripMenuItem.Text" xml:space="preserve">
-        <value>Custom Rotation</value>
+        <value>Ротація користувачем</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -619,7 +628,7 @@
         <value>65, 51</value>
     </data>
     <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Rotate</value>
+        <value>Обернути</value>
     </data>
     <data name="tsdRotate.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -634,19 +643,34 @@
         <value>Пересунути нижче</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
-        <value>139, 22</value>
+        <value>190, 22</value>
     </data>
     <data name="tsInterleave.Text" xml:space="preserve">
-        <value>Позбавити чергування</value>
+        <value>Чергування</value>
     </data>
     <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
-        <value>139, 22</value>
+        <value>190, 22</value>
     </data>
     <data name="tsDeinterleave.Text" xml:space="preserve">
         <value>Позбавити чергування</value>
     </data>
+    <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+        <value>187, 6</value>
+    </data>
+    <data name="tsAltInterleave.Size" type="System.Drawing.Size, System.Drawing">
+        <value>190, 22</value>
+    </data>
+    <data name="tsAltInterleave.Text" xml:space="preserve">
+        <value>Alternate Interleave</value>
+    </data>
+    <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
+        <value>190, 22</value>
+    </data>
+    <data name="tsAltDeinterleave.Text" xml:space="preserve">
+        <value>Alternate Deinterleave</value>
+    </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>136, 6</value>
+        <value>187, 6</value>
     </data>
     <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
@@ -658,13 +682,13 @@
         <value>143, 22</value>
     </data>
     <data name="tsReverseSelected.Text" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Вибрані ({0})</value>
     </data>
     <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
-        <value>139, 22</value>
+        <value>190, 22</value>
     </data>
     <data name="tsReverse.Text" xml:space="preserve">
-        <value>Reverse</value>
+        <value>Зворотній</value>
     </data>
     <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -673,7 +697,7 @@
         <value>72, 51</value>
     </data>
     <data name="tsdReorder.Text" xml:space="preserve">
-        <value>Reorder</value>
+        <value>Змінити порядок</value>
     </data>
     <data name="tsdReorder.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -852,7 +876,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Not Another PDF Scanner 2</value>
+        <value>Можливо інший PDF Scanner 2</value>
     </data>
     <data name="&gt;&gt;ctxView.Name" xml:space="preserve">
         <value>ctxView</value>
@@ -888,6 +912,12 @@
         <value>tsNewProfile</value>
     </data>
     <data name="&gt;&gt;tsNewProfile.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsBatchScan.Name" xml:space="preserve">
+        <value>tsBatchScan</value>
+    </data>
+    <data name="&gt;&gt;tsBatchScan.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;tsProfiles.Name" xml:space="preserve">
@@ -1104,7 +1134,7 @@
         <value>tsMove</value>
     </data>
     <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.2.1.28715, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.2.3.306, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
         <value>tsdReorder</value>
@@ -1122,6 +1152,24 @@
         <value>tsDeinterleave</value>
     </data>
     <data name="&gt;&gt;tsDeinterleave.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
+        <value>toolStripSeparator12</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsAltInterleave.Name" xml:space="preserve">
+        <value>tsAltInterleave</value>
+    </data>
+    <data name="&gt;&gt;tsAltInterleave.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsAltDeinterleave.Name" xml:space="preserve">
+        <value>tsAltDeinterleave</value>
+    </data>
+    <data name="&gt;&gt;tsAltDeinterleave.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
@@ -1188,6 +1236,6 @@
         <value>FDesktop</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.1.28715, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.306, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

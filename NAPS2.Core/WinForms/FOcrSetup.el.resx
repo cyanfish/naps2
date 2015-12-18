@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-        <value>Χρήση OCR ώστε να μπορεί να γίνει αναζήτηση στα PDF</value>
+        <value>Χρήση OCR για δυνατότητα αναζήτησης στα PDF</value>
     </data>
     <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
         <value>checkBoxEnableOcr</value>

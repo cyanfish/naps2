@@ -256,7 +256,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-        <value>Zoom Out</value>
+        <value>Verkleinern</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>

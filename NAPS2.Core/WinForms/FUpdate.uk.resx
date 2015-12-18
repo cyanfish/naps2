@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>Є оновлення. Встановити?</value>
+        <value>Доступна нова версія NAPS2. Бажаєте встановити?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -204,7 +204,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>&amp;Not Now</value>
+        <value>Не зараз</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -228,7 +228,7 @@
         <value>306, 136</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Update NAPS2</value>
+        <value>Оновити NAPS2</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FUpdate</value>

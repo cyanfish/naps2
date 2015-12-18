@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+        <value>{0} immagine(i) digitalizzata(e) su {1} a {2} potrebbero non essere state salvate e si possono recuperare. Vuoi farlo?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -156,7 +156,7 @@
         <value>1</value>
     </data>
     <data name="btnRecover.Text" xml:space="preserve">
-        <value>&amp;Recover</value>
+        <value>&amp;Ripristino</value>
     </data>
     <data name="&gt;&gt;btnRecover.Name" xml:space="preserve">
         <value>btnRecover</value>
@@ -232,7 +232,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Recover Scanned Images</value>
+        <value>Ripristino Immagini Digitalizzate</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FRecover</value>

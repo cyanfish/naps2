@@ -822,7 +822,7 @@
         <value>25</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Odbicie poziome:</value>
+        <value>Wyrównanie poziome:</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>
@@ -981,7 +981,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>Najlepsza jakość (duży plik)</value>
+        <value>Najwyższa jakość (duże pliki)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>

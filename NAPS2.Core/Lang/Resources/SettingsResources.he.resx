@@ -160,13 +160,13 @@
         <value>ימין</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm</value>
+        <value>ס\"מ</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>in</value>
+        <value>אינטש</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm</value>
+        <value>מ\"מ</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
         <value>A3 (297x240 מ\"מ)</value>
@@ -178,13 +178,13 @@
         <value>A5 (148x210 מ\"מ)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+        <value>B4 (250x353 מ\"מ)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+        <value>B5 (176x250 מ\"מ)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>מותאם אישית...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>נייר US Legal (8.5x14 in)</value>

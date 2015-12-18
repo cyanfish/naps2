@@ -184,7 +184,7 @@
         <value>4</value>
     </data>
     <data name="btnChooseDevice.Text" xml:space="preserve">
-        <value>Вибір пристрою</value>
+        <value>Виберіть пристрій</value>
     </data>
     <data name="&gt;&gt;btnChooseDevice.Name" xml:space="preserve">
         <value>btnChooseDevice</value>
@@ -316,7 +316,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Рідний інтерфейс сканера WIA UI</value>
+        <value>Власний інтерфейс сканера WIA UI</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -367,7 +367,7 @@
         <value>9</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Глибина кольору:</value>
+        <value>Глибина в бітах:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>

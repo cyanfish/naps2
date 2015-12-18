@@ -238,7 +238,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomActual.ToolTipText" xml:space="preserve">
-        <value>Αρχικό Μέγεθος</value>
+        <value>Πραγματικό Μέγεθος</value>
     </data>
     <data name="tsZoomPlus.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -268,7 +268,7 @@
         <value>100%</value>
     </data>
     <data name="tsZoom.ToolTipText" xml:space="preserve">
-        <value>Ζουμ</value>
+        <value>Εστίαση</value>
     </data>
     <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 0</value>

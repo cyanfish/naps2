@@ -226,7 +226,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsStretch.ToolTipText" xml:space="preserve">
-        <value>Scale With Window</value>
+        <value>Adatta alla finestra</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>
@@ -238,7 +238,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomActual.ToolTipText" xml:space="preserve">
-        <value>Zoom Actual</value>
+        <value>Zoom Attuale</value>
     </data>
     <data name="tsZoomPlus.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -247,7 +247,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
-        <value>Zoom In</value>
+        <value>Aumenta Zoom</value>
     </data>
     <data name="tsZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -256,7 +256,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-        <value>Zoom Out</value>
+        <value>Riduci Zoom</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>

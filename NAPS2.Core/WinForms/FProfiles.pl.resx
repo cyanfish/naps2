@@ -298,7 +298,7 @@
         <value>4</value>
     </data>
     <data name="btnDone.Text" xml:space="preserve">
-        <value>Ukończono</value>
+        <value>Gotowe</value>
     </data>
     <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
         <value>btnDone</value>

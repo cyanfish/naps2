@@ -296,7 +296,7 @@
         <value>297, 113</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Προσαρμοσμένο Μέγεθος Σελίδας</value>
+        <value>Προσ/νο Μέγεθος Σελίδας</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FPageSize</value>

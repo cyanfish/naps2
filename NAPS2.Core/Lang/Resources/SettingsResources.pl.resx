@@ -184,13 +184,13 @@
         <value>B5 (176 x 250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Odprzeplatanie...</value>
+        <value>Niestandardowy...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>US Legal (8.5 x 14 in)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Legal (8.5 x 14 in)</value>
+        <value>US Letter (8.5 x 11 in)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>

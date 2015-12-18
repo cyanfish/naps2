@@ -274,7 +274,7 @@
         <value>20, 22</value>
     </data>
     <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Pivoter</value>
+        <value>Rotation</value>
     </data>
     <data name="tsCrop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -283,7 +283,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Rogner</value>
+        <value>Rognage</value>
     </data>
     <data name="tsBrightness.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
