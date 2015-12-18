@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-27 21:07+0000\n"
-"PO-Revision-Date: 2015-06-01 20:19+0000\n"
-"Last-Translator: Ben <blue0fish@gmail.com>\n"
+"PO-Revision-Date: 2015-12-01 09:04+0000\n"
+"Last-Translator: Antonino <antoninomurabito@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1433189974.0\n"
+"X-POOTLE-MTIME: 1448960640.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -74,7 +74,7 @@ msgstr "Informazioni"
 
 #: FScanProgress.resx$$this.Text$Message
 msgid "Acquiring data"
-msgstr ""
+msgstr "Acquisizione dati"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
@@ -86,39 +86,39 @@ msgstr "Tutti ({0})"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
-msgstr ""
+msgstr "Consenti Annotazioni"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr ""
+msgstr "Consenti la Copia dei Contenuti"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr ""
+msgstr "Consenti la Copia dei contenuti per Accessibilità"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr ""
+msgstr "Consenti Composizione Documento"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
-msgstr ""
+msgstr "Consenti Modifica Documento"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr ""
+msgstr "Consenti Compilazione Modulo"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr ""
+msgstr "Consenti Stampa ad alta qualità"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
-msgstr ""
+msgstr "Consenti stampa"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr ""
+msgstr "Si è verificato un errore durante il salvataggio del file"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -130,7 +130,7 @@ msgstr "Errore del driver di scansione"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Vuoi cancellare {0} oggetto(i)?"
+msgstr "Vuoi cancellare il(i) {0} oggetto(i)?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -146,31 +146,31 @@ msgstr "Vuoi eliminare {0} profilo(i)?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr ""
+msgstr "Sicuro di voler annullare i cambiamenti a {0} immagine(i)?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nome allegato"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr ""
+msgstr "Autore"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr ""
+msgstr "Autoincrementa numero (1 cifra)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr ""
+msgstr "Autoincrementa numero (2 cifre)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr ""
+msgstr "Autoincrementa numero (3 cifre)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr ""
+msgstr "Autoincrementa numero (4 cifre)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
@@ -178,11 +178,11 @@ msgstr "Aggiornamenti automatici"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250×353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
@@ -259,7 +259,7 @@ msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr ""
+msgstr "Copyright © 2012-2014 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -269,33 +269,33 @@ msgstr "Copyright © 2013 Peter De Leeuw"
 #: FViewer.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
-msgstr ""
+msgstr "Taglia"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr ""
+msgstr "Personalizzato"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr ""
+msgstr "Personalizzato ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr ""
+msgstr "Formato Pagina Personalizzato"
 
 #: FViewer.resx$tsCustomRotation.Text$Message
 #: FDesktop.resx$customRotationToolStripMenuItem.Text$Message
 msgid "Custom Rotation"
-msgstr ""
+msgstr "Rotazione Personalizzata"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
-msgstr ""
+msgstr "Giorno (01-31)"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Name"
-msgstr ""
+msgstr "Nome File Predefinito"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -320,8 +320,7 @@ msgstr "Nome visualizzato"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr ""
-"Vuoi che NAPS2 controlli automaticamente la diponibilità di aggiornamenti?"
+msgstr "Vuoi che NAPS2 controlli automaticamente gli aggiornamenti?"
 
 #: FProfiles.resx$btnDone.Text$Message
 msgid "Done"
@@ -339,7 +338,7 @@ msgstr "Errore nello scaricamento"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr "Avanzamento"
+msgstr "Avanzamento Download"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
@@ -362,15 +361,15 @@ msgstr "Email PDF"
 #: FEmailSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsEmailSettings.Text$Message
 msgid "Email Settings"
-msgstr ""
+msgstr "Impostazioni email"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "Cripta il PDF"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr ""
+msgstr "Criptare"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -383,7 +382,7 @@ msgstr "Errore"
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 msgid "Estimated download size: {0} MB"
-msgstr "Dimensione stimata dello scaricamento: {0} MB"
+msgstr "Dimensione stimata del download: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -395,7 +394,7 @@ msgstr "Caricatore"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr ""
+msgstr "Nome file"
 
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
@@ -405,6 +404,8 @@ msgstr "Capovolgi"
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
+"Per le alte qualità JPEG (80+), usare l'opzione Massima Qualità del profilo "
+"per risultati migliori"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -428,7 +429,7 @@ msgstr "Allineamento orizzontale"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "Ora (0-23)"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -436,12 +437,12 @@ msgstr "Trova icone da"
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
-msgstr ""
+msgstr "Immagine"
 
 #: FImageSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsImageSettings.Text$Message
 msgid "Image Settings"
-msgstr ""
+msgstr "Impostazioni immagine"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -473,11 +474,11 @@ msgstr "JPEG File (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr ""
+msgstr "Qualità Jpeg"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr ""
+msgstr "Parole chiave"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -501,15 +502,15 @@ msgstr "Massima qualità (files grandi)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
-msgstr ""
+msgstr "Metadati"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "Minuti (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
-msgstr ""
+msgstr "Mese (01-12)"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
@@ -529,15 +530,15 @@ msgstr "Nome mancante"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
-msgstr ""
+msgstr "Nuovo"
 
 #: FDesktop.resx$tsNewProfile.Text$Message
 msgid "New Profile"
-msgstr ""
+msgstr "Nuovo Profilo"
 
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
-msgstr ""
+msgstr "Avanti"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
@@ -545,7 +546,7 @@ msgstr "Nessun dispositivo selezionato"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr ""
+msgstr "Non ci sono fogli nel caricatore"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
@@ -603,13 +604,13 @@ msgstr "Sovrascrivi file"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr ""
+msgstr "Password Proprietario"
 
 #: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
-msgstr ""
+msgstr "Impostazioni PDF"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF document (*.pdf)"
@@ -629,7 +630,7 @@ msgstr "Alimentazione carta"
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
@@ -637,7 +638,7 @@ msgstr ""
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr ""
+msgstr "Segnaposti"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -646,11 +647,11 @@ msgstr "Anteprima"
 
 #: FViewer.resx$tsPrev.Text$Message
 msgid "Previous"
-msgstr ""
+msgstr "Precedente"
 
 #: FDesktop.resx$tsdPrint.Text$Message
 msgid "Print"
-msgstr ""
+msgstr "Stampa"
 
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
@@ -663,17 +664,17 @@ msgstr "Profili"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
-msgstr ""
+msgstr "Ripristino"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "Ripristino Immagini Digitalizzate"
 
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr ""
+msgstr "Ricorda queste impostazioni"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -681,11 +682,11 @@ msgstr "Riordina"
 
 #: FDesktop.resx$tsReset.Text$Message
 msgid "Reset"
-msgstr ""
+msgstr "Azzera"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr ""
+msgstr "Resetta Immagine"
 
 #: FEditScanSettings.resx$label5.Text$Message
 msgid "Resolution"
@@ -695,18 +696,18 @@ msgstr "Risoluzione"
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Ripristina predefiniti"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
-msgstr ""
+msgstr "Inverso"
 
 #: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
-msgstr ""
+msgstr "Inverti"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -746,7 +747,7 @@ msgstr "Scala"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 msgid "Scale With Window"
-msgstr ""
+msgstr "Adatta alla finestra"
 
 #: FProfiles.resx$btnScan.Text$Message
 #: FProfiles.resx$ctxScan.Text$Message
@@ -762,11 +763,11 @@ msgstr "Immagine scansionata"
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
 msgid "Scanning page {0}"
-msgstr ""
+msgstr "Digitalizzazione pagina {0}"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr ""
+msgstr "Secondi (00-59)"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
@@ -790,16 +791,16 @@ msgstr "Selezionato ({0})"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
-msgstr ""
+msgstr "Imposta predefinito"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
-msgstr ""
+msgstr "Mostra"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr ""
+msgstr "Oggetto"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -826,6 +827,7 @@ msgstr "Il file {0} esiste già. Vuoi sovrascriverlo?"
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
+"Il seguente file è criptato ed è richiesta una password per aprirlo: {0}"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -834,6 +836,8 @@ msgstr "Il dispositivo selezionato non è stato trovato"
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
+"Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo "
+"scanner ha un alimentatore, prova un driver differente"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -841,7 +845,7 @@ msgstr "Il dispositivo selezionato non è in linea"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr ""
+msgstr "Titolo"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -853,7 +857,7 @@ msgstr "US Letter (8.5x11 in)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Modifiche non salvate"
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
@@ -861,7 +865,7 @@ msgstr "Aggiorna NAPS2"
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
 msgid "Use native UI"
-msgstr ""
+msgstr "Usa UI nativo"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -869,7 +873,7 @@ msgstr "Usa configurazione predefinita"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr ""
+msgstr "Password utente"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
@@ -895,19 +899,19 @@ msgstr "In attesa di TWAIN per completare"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
-msgstr ""
+msgstr "Anno"
 
 #: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
-msgstr ""
+msgstr "Anno (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file "{0}""
-msgstr ""
+msgstr "Non hai i parmessi per copiare il contenuto del file \"{0}\""
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
@@ -916,6 +920,8 @@ msgstr "Non puoi salvare i files in questo percorso"
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr ""
+"Ci sono modifiche non salvate. Sicuro di voler uscire ed eliminare tali "
+"modifiche?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -923,19 +929,19 @@ msgstr "Zoom"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
-msgstr ""
+msgstr "Zoom Attuale"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom In"
-msgstr ""
+msgstr "Aumenta Zoom"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 msgid "Zoom Out"
-msgstr ""
+msgstr "Riduci Zoom"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
@@ -943,20 +949,20 @@ msgstr "http://www.fatcow.com/free-icons"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr ""
+msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 #: FViewer.resx$lblPageTotal.Text$Message
 msgid "of {0}"
-msgstr ""
+msgstr "di {0}"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -971,6 +977,8 @@ msgstr "{0} / {1} files"
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
+"{0} immagine(i) digitalizzata(e) su {1} a {2} potrebbero non essere state "
+"salvate e si possono recuperare. Vuoi farlo?"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"

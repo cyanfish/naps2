@@ -262,8 +262,9 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
+#, fuzzy
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr ""
+msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -467,8 +468,9 @@ msgid "Installation failed"
 msgstr "Installation fehlgeschlagen"
 
 #: FDesktop.resx$tsInterleave.Text$Message
+#, fuzzy
 msgid "Interleave"
-msgstr ""
+msgstr "Zeilensprünge entfernen"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -863,8 +865,9 @@ msgid "Update NAPS2"
 msgstr "NAPS2 aktualisieren"
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
+#, fuzzy
 msgid "Use native UI"
-msgstr ""
+msgstr "Benutze natives WIA User Interface"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -936,8 +939,9 @@ msgid "Zoom In"
 msgstr ""
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
+#, fuzzy
 msgid "Zoom Out"
-msgstr ""
+msgstr "Verkleinern"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"

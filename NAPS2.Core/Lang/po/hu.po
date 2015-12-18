@@ -258,8 +258,9 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Minden jog fenntartva © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
+#, fuzzy
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr ""
+msgstr "Minden jog fenntartva © 2012-2014 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -860,8 +861,9 @@ msgid "Update NAPS2"
 msgstr "NAPS2 frissítése"
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
+#, fuzzy
 msgid "Use native UI"
-msgstr ""
+msgstr "A WIA felületének használata"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -927,12 +929,14 @@ msgid "Zoom Actual"
 msgstr ""
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
+#, fuzzy
 msgid "Zoom In"
-msgstr ""
+msgstr "Nagyobb"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
+#, fuzzy
 msgid "Zoom Out"
-msgstr ""
+msgstr "Kisebb"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
