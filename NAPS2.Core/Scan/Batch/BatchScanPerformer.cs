@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport;
@@ -13,8 +11,6 @@ using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
-using NAPS2.Util;
-using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Batch
 {
@@ -91,7 +87,16 @@ namespace NAPS2.Scan.Batch
                 {
                     DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == BatchSaveSeparator.PatchT
                 };
-                Input();
+                try
+                {
+                    Input();
+                }
+                catch (Exception)
+                {
+                    // Save at least some data so it isn't lost
+                    Output();
+                    throw;
+                }
                 Output();
             }
 
@@ -130,13 +135,13 @@ namespace NAPS2.Scan.Batch
                 int pageNumber = 1;
                 ProgressCallback(scanNumber == -1
                     ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                    : string.Format(MiscResources.BatchStatusScanPage, scanNumber + 1, pageNumber++));
+                    : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
                 scanPerformer.PerformScan(profile, scanParams, DialogParent, image =>
                 {
                     scan.Add(image);
                     ProgressCallback(scanNumber == -1
                         ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                        : string.Format(MiscResources.BatchStatusScanPage, scanNumber + 1, pageNumber++));
+                        : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
                 });
                 scans.Add(scan);
             }
@@ -160,22 +165,7 @@ namespace NAPS2.Scan.Batch
                 }
                 else if (Settings.OutputType == BatchOutputType.SingleFile)
                 {
-                    var extension = GetSavePathExtension();
-                    if (extension.ToLower() == ".pdf")
-                    {
-                        var subPath = fileNamePlaceholders.SubstitutePlaceholders(Settings.SavePath, now);
-                        if (File.Exists(subPath))
-                        {
-                            subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
-                        }
-                        pdfExporter.Export(subPath, allImages, pdfSettingsContainer.PdfSettings,
-                            userConfigManager.Config.OcrLanguageCode, i => true);
-                        // TODO: Add an actual progress callback
-                    }
-                    else
-                    {
-                        imageSaver.SaveImages(Settings.SavePath, now, allImages, i => true);
-                    }
+                    Save(now, 0, allImages);
                     foreach (var img in allImages)
                     {
                         img.Dispose();
@@ -183,26 +173,11 @@ namespace NAPS2.Scan.Batch
                 }
                 else if (Settings.OutputType == BatchOutputType.MultipleFiles)
                 {
-                    var extension = GetSavePathExtension();
                     if (Settings.SaveSeparator == BatchSaveSeparator.FilePerScan)
                     {
                         for (int i = 0; i < scans.Count; i++)
                         {
-                            var subPath = fileNamePlaceholders.SubstitutePlaceholders(Settings.SavePath, now, true, i);
-                            if (extension.ToLower() == ".pdf")
-                            {
-                                if (File.Exists(subPath))
-                                {
-                                    subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
-                                }
-                                pdfExporter.Export(subPath, scans[i], pdfSettingsContainer.PdfSettings,
-                                    userConfigManager.Config.OcrLanguageCode, j => true);
-                            }
-                            else
-                            {
-                                // TODO: Verify behavior for TIFF + others
-                                imageSaver.SaveImages(subPath, now, scans[i], j => true);
-                            }
+                            Save(now, i, scans[i]);
                             foreach (var img in scans[i])
                             {
                                 img.Dispose();
@@ -213,28 +188,58 @@ namespace NAPS2.Scan.Batch
                     {
                         for (int i = 0; i < allImages.Count; i++)
                         {
-                            var subPath = fileNamePlaceholders.SubstitutePlaceholders(Settings.SavePath, now, true, i);
-                            if (extension.ToLower() == ".pdf")
-                            {
-                                if (File.Exists(subPath))
-                                {
-                                    subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
-                                }
-                                pdfExporter.Export(subPath, new[] { allImages[i] }, pdfSettingsContainer.PdfSettings,
-                                    userConfigManager.Config.OcrLanguageCode, j => true);
-                            }
-                            else
-                            {
-                                // TODO: Verify behavior for TIFF + others
-                                imageSaver.SaveImages(subPath, now, new [] { allImages[i] }, j => true);
-                            }
+                            Save(now, i, new[] { allImages[i] });
                             allImages[i].Dispose();
                         }
                     }
                     else if (Settings.SaveSeparator == BatchSaveSeparator.PatchT)
                     {
-                        // TODO
+                        var images = new List<IScannedImage>();
+                        int fileIndex = 0;
+                        foreach (IScannedImage img in allImages)
+                        {
+                            if (img.PatchCode == PatchCode.PatchT)
+                            {
+                                if (images.Count > 0)
+                                {
+                                    Save(now, fileIndex++, images);
+                                    foreach (var img2 in images)
+                                    {
+                                        img2.Dispose();
+                                    }
+                                    images.Clear();
+                                }
+                            }
+                            else
+                            {
+                                images.Add(img);
+                            }
+                        }
+                        Save(now, fileIndex, images);
+                        foreach (var img in images)
+                        {
+                            img.Dispose();
+                        }
                     }
+                }
+            }
+
+            private void Save(DateTime now, int i, ICollection<IScannedImage> images)
+            {
+                var subPath = fileNamePlaceholders.SubstitutePlaceholders(Settings.SavePath, now, true, i);
+                if (GetSavePathExtension().ToLower() == ".pdf")
+                {
+                    if (File.Exists(subPath))
+                    {
+                        subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
+                    }
+                    pdfExporter.Export(subPath, images, pdfSettingsContainer.PdfSettings,
+                        userConfigManager.Config.OcrLanguageCode, j => true);
+                }
+                else
+                {
+                    // TODO: Verify behavior for TIFF + others
+                    imageSaver.SaveImages(subPath, now, images, j => true);
                 }
             }
 

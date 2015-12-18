@@ -106,6 +106,8 @@ namespace NAPS2.WinForms
             rdFilePerScan.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.FilePerScan;
             rdFilePerPage.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.FilePerPage;
             rdSeparateByPatchT.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.PatchT;
+
+            txtFilePath.Text = BatchSettings.SavePath;
         }
 
         private bool ValidateSettings()
@@ -321,19 +323,20 @@ namespace NAPS2.WinForms
         {
             try
             {
-                batchScanPerformer.PerformBatchScan(BatchSettings, this, image => Invoke(new Action(() => ImageCallback(image))), status =>
-                {
-                    if (!cancelBatch)
-                    {
-                        Invoke(new Action(() =>
-                        {
-                            lblStatus.Text = status;
-                        }));
-                    }
-                    return !cancelBatch;
-                });
                 Invoke(new Action(() =>
                 {
+                    batchScanPerformer.PerformBatchScan(BatchSettings, this,
+                        image => Invoke(new Action(() => ImageCallback(image))), status =>
+                        {
+                            if (!cancelBatch)
+                            {
+                                Invoke(new Action(() =>
+                                {
+                                    lblStatus.Text = status;
+                                }));
+                            }
+                            return !cancelBatch;
+                        });
                     lblStatus.Text = cancelBatch
                         ? MiscResources.BatchStatusCancelled
                         : MiscResources.BatchStatusComplete;
