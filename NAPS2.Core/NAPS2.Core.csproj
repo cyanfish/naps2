@@ -2810,6 +2810,7 @@
     <None Include="Lang\po\en.po" />
     <None Include="Lang\po\es.po" />
     <None Include="Lang\po\et.po" />
+    <None Include="Lang\po\fi.po" />
     <None Include="Lang\po\fr.po" />
     <None Include="Lang\po\he.po" />
     <None Include="Lang\po\hr.po" />
