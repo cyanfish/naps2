@@ -49,6 +49,7 @@ namespace NAPS2.Scan.Images.Transforms
             {
                 // Copy B&W over to grayscale
                 var bitmap2 = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format24bppRgb);
+                bitmap2.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
                 using (var g = Graphics.FromImage(bitmap2))
                 {
                     g.DrawImage(bitmap, 0, 0);

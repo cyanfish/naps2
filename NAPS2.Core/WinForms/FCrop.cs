@@ -58,13 +58,13 @@ namespace NAPS2.WinForms
         {
             get
             {
-                return checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
+                return SelectedImages != null && checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
             }
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            if (SelectedImages.Count > 1)
+            if (SelectedImages != null && SelectedImages.Count > 1)
             {
                 checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
             }
