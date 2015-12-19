@@ -322,7 +322,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsBatchScan.Text" xml:space="preserve">
-        <value>Batch Scan</value>
+        <value>Skanowanie wsadowe</value>
     </data>
     <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -661,13 +661,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>Alternate Interleave</value>
+        <value>Alternatywne przeplatanie</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>Alternate Deinterleave</value>
+        <value>Alternatywne usuwanie przeplatania</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>

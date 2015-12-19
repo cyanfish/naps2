@@ -124,16 +124,16 @@
         <value>Wyczyść</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Czy na pewno chcesz usunąć {0} wpis(ów)?</value>
+        <value>Czy na pewno chcesz wyczyścić {0} element(y/ów)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Czy na pewno chcesz usunąć {0} wpis(ów)?</value>
+        <value>Czy na pewno chcesz usunąć {0} element(y/ów)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
         <value>Czy na pewno chcesz usunąć {0} profil/i? </value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Czy na pewno chcesz usunąć profil {0}? </value>
+        <value>Czy na pewno chcesz usunąć profil {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
         <value>Plik {0} już istnieje. Czy chcesz go zastąpić?</value>
@@ -202,7 +202,7 @@
         <value>Wybierz profil przed naciśnięciem przycisku Skanuj.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Wystąpił błąd ze sterownikiem skanowania.</value>
+        <value>Wystąpił błąd w sterowniku skanowania.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Wersja {0}</value>
@@ -304,36 +304,36 @@
         <value>z {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>Nieznany błąd wystąpił podczas skanowania wsadowego.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>Anulowano wsad.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Cancelling....</value>
+        <value>Anulowanie....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>Wsad wykonano pomyślnie.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>Skanowanie wsadowe zatrzymane z powodu błędu.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
         <value>Skanowanie strony {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Scanning page {0} (scan {1})...</value>
+        <value>Skanowana strona {0} (skanowanie {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Waiting for scan {0}...</value>
+        <value>Oczekiwanie na skanowanie {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>Anuluj</value>
     </data>
     <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Zamknij</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Saving batch results...</value>
+        <value>Zapisywanie wyników skanowania wsadowego...</value>
     </data>
 </root>
