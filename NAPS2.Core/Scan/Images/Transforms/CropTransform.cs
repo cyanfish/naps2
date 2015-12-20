@@ -18,7 +18,7 @@ namespace NAPS2.Scan.Images.Transforms
 
         public override Bitmap Perform(Bitmap bitmap)
         {
-            var result = new Bitmap(bitmap.Width - Left - Right, bitmap.Height - Top - Bottom);
+            var result = new Bitmap(Math.Max(bitmap.Width - Left - Right, 1), Math.Max(bitmap.Height - Top - Bottom, 1));
             result.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
             using (var g = Graphics.FromImage(result))
             {

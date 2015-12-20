@@ -54,11 +54,16 @@ namespace NAPS2.WinForms
 
         public CropTransform CropTransform { get; private set; }
 
+        private bool TransformMultiple
+        {
+            get { return SelectedImages != null && checkboxApplyToSelected.Checked; }
+        }
+
         private IEnumerable<IScannedImage> ImagesToTransform
         {
             get
             {
-                return SelectedImages != null && checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
+                return TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
             }
         }
 
@@ -166,14 +171,42 @@ namespace NAPS2.WinForms
         {
             if (!CropTransform.IsNull)
             {
-                foreach (var img in ImagesToTransform)
+                if (TransformMultiple)
                 {
-                    img.AddTransform(CropTransform);
-                    img.SetThumbnail(img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
+                    // With multiple images, we need to have the transform scaled in case they're different sizes
+                    using (var referenceBitmap = Image.GetImage())
+                    {
+                        foreach (var img in ImagesToTransform)
+                        {
+                            img.AddTransform(ScaleCropTransform(img, referenceBitmap));
+                            img.SetThumbnail(img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
+                        }
+                    }
+                }
+                else
+                {
+                    Image.AddTransform(CropTransform);
+                    Image.SetThumbnail(Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
                 }
                 changeTracker.HasUnsavedChanges = true;
             }
             Close();
+        }
+
+        private CropTransform ScaleCropTransform(IScannedImage img, Bitmap referenceBitmap)
+        {
+            using (var bitmap = img.GetImage())
+            {
+                double xScale = bitmap.Width / (double)referenceBitmap.Width,
+                       yScale = bitmap.Height / (double)referenceBitmap.Height;
+                return new CropTransform
+                {
+                    Left = (int)Math.Round(CropTransform.Left * xScale),
+                    Right = (int)Math.Round(CropTransform.Right * xScale),
+                    Top = (int)Math.Round(CropTransform.Top * yScale),
+                    Bottom = (int)Math.Round(CropTransform.Bottom * yScale)
+                };
+            }
         }
 
         private void btnRevert_Click(object sender, EventArgs e)
