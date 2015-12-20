@@ -13,12 +13,35 @@ namespace NAPS2.WinForms
 {
     public partial class FDownloadProgress : FormBase
     {
+        private readonly List<QueueItem> filesToDownload = new List<QueueItem>();
+        private int filesDownloaded = 0;
+        private double currentFileSize = 0.0;
+        private double currentFileProgress = 0.0;
+        private bool hasError;
+        private bool cancel;
+
+        private readonly WebClient client = new WebClient();
+
         public FDownloadProgress()
         {
             InitializeComponent();
 
             client.DownloadFileCompleted += client_DownloadFileCompleted;
             client.DownloadProgressChanged += client_DownloadProgressChanged;
+        }
+
+        protected override void OnLoad(object sender, EventArgs eventArgs)
+        {
+            new LayoutManager(this)
+                .Bind(progressBarTop, progressBarSub)
+                    .WidthToForm()
+                .Bind(btnCancel)
+                    .RightToForm()
+                .Activate();
+
+            DisplayProgress();
+
+            StartNextDownload();
         }
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -34,7 +57,10 @@ namespace NAPS2.WinForms
             if (e.Error != null)
             {
                 hasError = true;
-                Log.ErrorException("Error downloading file: " + file.Filename, e.Error);
+                if (!cancel)
+                {
+                    Log.ErrorException("Error downloading file: " + file.Filename, e.Error);
+                }
             }
             else if (file.Sha1 != CalculateSha1((Path.Combine(file.TempFolder, file.Filename))))
             {
@@ -70,8 +96,11 @@ namespace NAPS2.WinForms
             {
                 var prev = filesToDownload[filesDownloaded];
                 Directory.Delete(prev.TempFolder, true);
-                Close();
-                MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!cancel)
+                {
+                    Close();
+                    MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 return;
             }
             if (filesDownloaded > 0)
@@ -96,28 +125,6 @@ namespace NAPS2.WinForms
             filesToDownload.Add(new QueueItem { Root = root, Filename = filename, Sha1 = sha1, FileCallback = fileCallback });
         }
 
-        private readonly List<QueueItem> filesToDownload = new List<QueueItem>();
-        private int filesDownloaded = 0;
-        private double currentFileSize = 0.0;
-        private double currentFileProgress = 0.0;
-        private bool hasError;
-
-        private readonly WebClient client = new WebClient();
-
-        protected override void OnLoad(object sender, EventArgs eventArgs)
-        {
-            new LayoutManager(this)
-                .Bind(progressBarTop, progressBarSub)
-                    .WidthToForm()
-                .Bind(btnCancel)
-                    .RightToForm()
-                .Activate();
-
-            DisplayProgress();
-
-            StartNextDownload();
-        }
-
         private void DisplayProgress()
         {
             labelTop.Text = string.Format(MiscResources.FilesProgress, filesDownloaded, filesToDownload.Count);
@@ -127,6 +134,17 @@ namespace NAPS2.WinForms
             progressBarSub.Maximum = (int)(currentFileSize);
             progressBarSub.Value = (int)(currentFileProgress);
             Refresh();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void FDownloadProgress_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cancel = true;
+            client.CancelAsync();
         }
 
         private class QueueItem

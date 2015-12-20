@@ -47,6 +47,7 @@
             resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // labelSub
             // 
@@ -74,6 +75,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.progressBarSub);
             this.Name = "FDownloadProgress";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FDownloadProgress_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
