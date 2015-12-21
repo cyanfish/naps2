@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-27 21:07+0000\n"
+"POT-Creation-Date: 2015-12-19 00:09+0000\n"
 "PO-Revision-Date: 2015-08-06 19:17+0000\n"
 "Last-Translator: Vladimir <zlatev.email@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,10 +76,10 @@ msgstr "Относно"
 msgid "Acquiring data"
 msgstr "Получаване на данни"
 
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
-#: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "Всички ({0})"
@@ -116,6 +116,14 @@ msgstr "Разреши принтиране с най-високо качест�
 msgid "Allow Printing"
 msgstr "Разреши принтиране"
 
+#: FDesktop.resx$tsAltDeinterleave.Text$Message
+msgid "Alternate Deinterleave"
+msgstr ""
+
+#: FDesktop.resx$tsAltInterleave.Text$Message
+msgid "Alternate Interleave"
+msgstr ""
+
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
 msgstr "Възникна грешка при опит за запис на файла"
@@ -127,6 +135,17 @@ msgstr "Грешка при изпращане на имейл"
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
 msgstr "Проблем с драйвера на скенера"
+
+#: MiscResources.resx$BatchError$Message
+msgid "An unknown error ocurred during the batch scan"
+msgstr ""
+
+#: FContrast.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FBrightness.resx$checkboxApplyToSelected.Text$Message
+msgid "Apply to all {0} selected images"
+msgstr ""
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -184,6 +203,23 @@ msgstr "B4 (250x353 мм)"
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 мм)"
 
+#: FDesktop.resx$tsBatchScan.Text$Message
+#: FBatchScan.resx$$this.Text$Message
+msgid "Batch Scan"
+msgstr ""
+
+#: MiscResources.resx$BatchStatusCancelled$Message
+msgid "Batch cancelled"
+msgstr ""
+
+#: MiscResources.resx$BatchStatusComplete$Message
+msgid "Batch completed successfully"
+msgstr ""
+
+#: MiscResources.resx$BatchStatusError$Message
+msgid "Batch scan stopped due to error"
+msgstr ""
+
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Дълбочина на цвета:"
@@ -205,21 +241,27 @@ msgstr "Яркост"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
+#: FRotate.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Откажи"
+
+#: MiscResources.resx$BatchStatusCancelling$Message
+msgid "Cancelling"
+msgstr ""
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -238,8 +280,12 @@ msgstr "Избери устройство"
 msgid "Clear"
 msgstr "Изчисти"
 
-#: FDesktop.resx$tsContrast.Text$Message
+#: MiscResources.resx$Close$Message
+msgid "Close"
+msgstr ""
+
 #: FViewer.resx$tsContrast.Text$Message
+#: FDesktop.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
 #: FEditScanSettings.resx$label7.Text$Message
 msgid "Contrast"
@@ -265,8 +311,8 @@ msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Copyright © 2013 Peter De Leeuw"
 
-#: FDesktop.resx$tsCrop.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
+#: FDesktop.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr "Изрязване"
@@ -304,9 +350,9 @@ msgstr "Deinterleave"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
-#: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
+#: MiscResources.resx$Delete$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
 msgstr "Изтрий"
@@ -324,6 +370,7 @@ msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "Искате ли NAPS2 автоматично да проверява за ъпдейти ?"
 
 #: FProfiles.resx$btnDone.Text$Message
+#: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
 msgstr "Готово"
 
@@ -396,6 +443,10 @@ msgstr "Захранваща тава за листи"
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
 msgstr "Име на файл"
+
+#: FBatchScan.resx$lblFilePath.Text$Message
+msgid "File path"
+msgstr ""
 
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
@@ -489,6 +540,10 @@ msgstr "Език"
 msgid "Left"
 msgstr "Ляво"
 
+#: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
+msgid "Load images into NAPS2"
+msgstr ""
+
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
 msgstr "Основна лента с инструменти"
@@ -513,6 +568,10 @@ msgstr "Минути (00-59)"
 msgid "Month (01-12)"
 msgstr "Месец (01-12)"
 
+#: FBatchScan.resx$linkPatchCodeInfo.Text$Message
+msgid "More info"
+msgstr ""
+
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
 msgstr "Преместване надолу"
@@ -520,6 +579,14 @@ msgstr "Преместване надолу"
 #: FDesktop.resx$tsMove.TextFirst$Message
 msgid "Move Up"
 msgstr "Преместване нагоре"
+
+#: FBatchScan.resx$rdMultipleScansDelay.Text$Message
+msgid "Multiple scans (fixed delay between scans)"
+msgstr ""
+
+#: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
+msgid "Multiple scans (prompt between scans)"
+msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -540,6 +607,10 @@ msgstr "Нов профил"
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
 msgstr "Следващ"
+
+#: FBatchPrompt.resx$$this.Text$Message
+msgid "Next Scan"
+msgstr ""
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
@@ -563,6 +634,10 @@ msgstr "Not Another PDF Scanner 2"
 msgid "Not Now"
 msgstr "Не сега"
 
+#: FBatchScan.resx$lblNumberOfScans.Text$Message
+msgid "Number of scans"
+msgstr ""
+
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
 msgstr "OCR"
@@ -579,25 +654,37 @@ msgstr "Настройки на OCR"
 msgid "OCR language"
 msgstr "Език на OCR"
 
-#: FEmailSettings.resx$btnOK.Text$Message
-#: FEditScanSettings.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
+#: FEmailSettings.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
+#: FEditScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FContrast.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
 
+#: FBatchScan.resx$rdFilePerPage.Text$Message
+msgid "One file per page"
+msgstr ""
+
+#: FBatchScan.resx$rdFilePerScan.Text$Message
+msgid "One file per scan"
+msgstr ""
+
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
 msgstr "Един или няколко файла не могат да бъдат свалени"
+
+#: FBatchScan.resx$groupboxOutput.Text$Message
+msgid "Output"
+msgstr ""
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -607,8 +694,8 @@ msgstr "Презаписване на файла"
 msgid "Owner Password"
 msgstr "Парола на собственика"
 
-#: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPdfSettings2.Text$Message
+#: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
 msgstr "Настройки на PDF"
@@ -633,13 +720,17 @@ msgstr "Източник на хартия"
 msgid "Password"
 msgstr "Парола"
 
+#: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Заместители"
+
+#: FBatchScan.resx$lblStatus.Text$Message
+msgid "Press Start when ready"
+msgstr ""
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -654,6 +745,10 @@ msgstr "Предишен"
 msgid "Print"
 msgstr "Печат"
 
+#: FBatchScan.resx$lblProfile.Text$Message
+msgid "Profile"
+msgstr ""
+
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
 msgstr "Настройки на профила"
@@ -662,6 +757,10 @@ msgstr "Настройки на профила"
 #: FDesktop.resx$tsProfiles.Text$Message
 msgid "Profiles"
 msgstr "Профили"
+
+#: FBatchPrompt.resx$lblStatus.Text$Message
+msgid "Ready for scan {0}"
+msgstr ""
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -693,8 +792,8 @@ msgstr "Връщане изображението в начално състоя
 msgid "Resolution"
 msgstr "Резолюция"
 
-#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Възстановяване на настройки по подразбиране"
@@ -703,9 +802,9 @@ msgstr "Възстановяване на настройки по подразб
 msgid "Reverse"
 msgstr "Обръщане"
 
+#: FContrast.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
-#: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "Връщане в начално състояние"
@@ -714,8 +813,8 @@ msgstr "Връщане в начално състояние"
 msgid "Right"
 msgstr "Дясно"
 
-#: FRotate.resx$$this.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
+#: FRotate.resx$$this.Text$Message
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
 msgstr "Завъртане"
@@ -738,7 +837,19 @@ msgstr "Запис на изображенията"
 msgid "Save PDF"
 msgstr "Запис на PDF"
 
-#: FPdfSave.resx$label1.Text$Message
+#: FBatchScan.resx$rdSaveToSingleFile.Text$Message
+msgid "Save to a single file"
+msgstr ""
+
+#: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
+msgid "Save to multiple files"
+msgstr ""
+
+#: MiscResources.resx$BatchStatusSaving$Message
+msgid "Saving batch results"
+msgstr ""
+
+#: FPDFSave.resx$label1.Text$Message
 msgid "Saving to PDF"
 msgstr "Записване на PDF файл "
 
@@ -751,11 +862,16 @@ msgid "Scale With Window"
 msgstr "Мащабиране според прозореца"
 
 #: FProfiles.resx$btnScan.Text$Message
+#: FBatchPrompt.resx$btnScan.Text$Message
 #: FProfiles.resx$ctxScan.Text$Message
 #: MiscResources.resx$Scan$Message
 #: FDesktop.resx$tsScan.Text$Message
 msgid "Scan"
 msgstr "Сканиране"
+
+#: FBatchScan.resx$groupboxScanConfig.Text$Message
+msgid "Scan Configuration"
+msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -763,8 +879,13 @@ msgstr "Сканирано изображение"
 
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
+#: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
 msgstr "Сканиране на страница {0}"
+
+#: MiscResources.resx$BatchStatusScanPage$Message
+msgid "Scanning page {0} (scan {1})"
+msgstr ""
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
@@ -782,13 +903,17 @@ msgstr "Избери Профил преди да натиснеш 'Сканир
 msgid "Select one or more languages"
 msgstr "Избери един или повече езици"
 
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
 msgstr "Избрани ({0})"
+
+#: FBatchScan.resx$rdSeparateByPatchT.Text$Message
+msgid "Separate files by Patch-T (TWAIN only)"
+msgstr ""
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -799,9 +924,21 @@ msgstr "Задаване като настройки по подразбиран
 msgid "Show"
 msgstr "Показване"
 
+#: FBatchScan.resx$rdSingleScan.Text$Message
+msgid "Single scan"
+msgstr ""
+
+#: FBatchScan.resx$btnStart.Text$Message
+msgid "Start"
+msgstr ""
+
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
 msgstr "Тема"
+
+#: FBatchScan.resx$linkSubstitutions.Text$Message
+msgid "Substitutions"
+msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -809,16 +946,16 @@ msgstr "TIFF файл (*.tiff, *.tif)"
 
 #: FEditScanSettings.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
-msgstr "Файлът \"{0}\" не може да бъде внесен"
+msgstr "Файлът '{0}' не може да бъде внесен"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
-msgid "The file "{0}" could not be imported"
-msgstr "Файлът \"{0}\" не може да бъде внесен"
+msgid "The file '{0}' could not be imported"
+msgstr "Файлът '{0}' не може да бъде внесен"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
-"Файлът \"{0}\" не може да бъде внесен. Само PDF файлове, създадени от NAPS2, "
+"Файлът '{0}' не може да бъде внесен. Само PDF файлове, създадени от NAPS2, "
 "могат да бъдат внесени"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
@@ -843,6 +980,10 @@ msgstr ""
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "Избраният скенер е не е достъпен"
+
+#: FBatchScan.resx$lblTimeBetweenScans.Text$Message
+msgid "Time between scans (seconds)"
+msgstr ""
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
@@ -899,6 +1040,10 @@ msgstr "WIA драйвер"
 msgid "Waiting for TWAIN to complete"
 msgstr "Изчакване TWAIN да приключи задачата"
 
+#: MiscResources.resx$BatchStatusWaitingForScan$Message
+msgid "Waiting for scan {0}"
+msgstr ""
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
 msgstr "Х"
@@ -912,8 +1057,8 @@ msgid "Year (00-99)"
 msgstr "Година (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file "{0}""
-msgstr "Нямате разрешение да копирате съдържание от файл \"{0}\""
+msgid "You do not have permission to copy content from the file '{0}'"
+msgstr "Нямате разрешение да копирате съдържание от файл '{0}'"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"

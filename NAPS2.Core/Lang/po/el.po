@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 23:49+0000\n"
-"PO-Revision-Date: 2015-10-03 22:49+0000\n"
+"POT-Creation-Date: 2015-12-19 00:09+0000\n"
+"PO-Revision-Date: 2015-12-21 18:52+0000\n"
 "Last-Translator: solidhit <solidhit2003@yahoo.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1443912586.0\n"
+"X-POOTLE-MTIME: 1450723922.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -78,10 +78,10 @@ msgstr "Σχετικά"
 msgid "Acquiring data"
 msgstr "Λήψη δεδομένων"
 
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
-#: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: MiscResources.resx$AllCount$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "Όλα ({0})"
@@ -118,17 +118,36 @@ msgstr "Να Επιτρέπεται Εκτύπωση Μέγιστης Ποιότ
 msgid "Allow Printing"
 msgstr "Να Επιτρέπεται Εκτύπωση"
 
+#: FDesktop.resx$tsAltDeinterleave.Text$Message
+msgid "Alternate Deinterleave"
+msgstr "Εναλλακτική Αποπαρεμβολή"
+
+#: FDesktop.resx$tsAltInterleave.Text$Message
+msgid "Alternate Interleave"
+msgstr "Εναλλακτική Παρεμβολή"
+
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr "Υπήρξε σφάλμα κατά το σώσιμο του αρχείου"
+msgstr "Σφάλμα κατά το σώσιμο του αρχείου"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr "Υπήρξε σφάλμα κατά την αποστολή ενός email"
+msgstr "Σφάλμα κατά την αποστολή ενός email"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "Υπήρξε σφάλμα του οδηγού σάρωσης"
+msgstr "Σφάλμα του οδηγού σάρωσης"
+
+#: MiscResources.resx$BatchError$Message
+msgid "An unknown error ocurred during the batch scan"
+msgstr "Άγνωστο σφάλμα κατά την μαζική σάρωση"
+
+#: FContrast.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FBrightness.resx$checkboxApplyToSelected.Text$Message
+msgid "Apply to all {0} selected images"
+msgstr "Εφαρμογή στις {0} επιλεγμένες εικόνες"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -186,6 +205,23 @@ msgstr "B4 (250x353 χιλ.)"
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 χιλ.)"
 
+#: FDesktop.resx$tsBatchScan.Text$Message
+#: FBatchScan.resx$$this.Text$Message
+msgid "Batch Scan"
+msgstr "Μαζική Σάρωση"
+
+#: MiscResources.resx$BatchStatusCancelled$Message
+msgid "Batch cancelled"
+msgstr "Η μαζική ακυρώθηκε"
+
+#: MiscResources.resx$BatchStatusComplete$Message
+msgid "Batch completed successfully"
+msgstr "Η μαζική ολοκληρώθηκε με επιτυχία"
+
+#: MiscResources.resx$BatchStatusError$Message
+msgid "Batch scan stopped due to error"
+msgstr "Η μαζική διακόπηκε λόγω σφάλματος"
+
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Βάθος bit"
@@ -207,21 +243,27 @@ msgstr "Φωτεινότητα"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
+#: FRotate.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Άκυρο"
+
+#: MiscResources.resx$BatchStatusCancelling$Message
+msgid "Cancelling"
+msgstr "Ακύρωση"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -229,19 +271,23 @@ msgstr "Κέντρο"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr "Επιλέξτε Προφίλ"
+msgstr "Επιλογή Προφίλ"
 
 #: FEditScanSettings.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
-msgstr "Επ/ξτε συσκευή"
+msgstr "Επιλογή συσκευής"
 
 #: MiscResources.resx$Clear$Message
 #: FDesktop.resx$tsClear.Text$Message
 msgid "Clear"
 msgstr "Καθαρισμός"
 
-#: FDesktop.resx$tsContrast.Text$Message
+#: MiscResources.resx$Close$Message
+msgid "Close"
+msgstr "Κλείσιμο"
+
 #: FViewer.resx$tsContrast.Text$Message
+#: FDesktop.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
 #: FEditScanSettings.resx$label7.Text$Message
 msgid "Contrast"
@@ -267,23 +313,23 @@ msgstr "Copyright © 2012-2015 Ben Olden-Cooligan"
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Copyright © 2013 Peter De Leeuw"
 
-#: FDesktop.resx$tsCrop.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
+#: FDesktop.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr "Περικοπή"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr "Προσαρμοσμένο"
+msgstr "Προσαρμογή"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr "Προσ/νο ({0}x{1} {2})"
+msgstr "Προσαρμογή ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr "Προσ/νο Μέγεθος Σελίδας"
+msgstr "Προσαρμογή Μεγέθους Σελίδας"
 
 #: FViewer.resx$tsCustomRotation.Text$Message
 #: FDesktop.resx$customRotationToolStripMenuItem.Text$Message
@@ -305,9 +351,9 @@ msgstr "Αποπαρεμβολή"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
-#: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
+#: MiscResources.resx$Delete$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 msgid "Delete"
 msgstr "Διαγραφή"
@@ -325,8 +371,9 @@ msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "Θέλετε το NAPS2 να ελέγχει αυτόματα για ενημερώσεις;"
 
 #: FProfiles.resx$btnDone.Text$Message
+#: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
-msgstr "Έτοιμο"
+msgstr "Ολοκλήρωση"
 
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
@@ -398,6 +445,10 @@ msgstr "Τροφοδότης"
 msgid "File Name"
 msgstr "Όνομα Αρχείου"
 
+#: FBatchScan.resx$lblFilePath.Text$Message
+msgid "File path"
+msgstr "Διαδρομή αρχείου"
+
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
 msgid "Flip"
@@ -406,8 +457,8 @@ msgstr "Αναστροφή"
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
-"Για καλύτερα αποτελέσματα σε υψηλές ποιότητες JPEG (80+), χρησιμοποιήστε την "
-"επιλογή του προφίλ Μέγιστη Ποιότητα"
+"Για καλύτερα αποτελέσματα σε υψηλές ποιότητες JPEG (80+), υπάρχει στο προφίλ "
+"η επιλογή Μέγιστη Ποιότητα"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -476,7 +527,7 @@ msgstr "Αρχεία JPEG (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr "Ποιότητα JPEG"
+msgstr "Ποιότητα Jpeg"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
@@ -489,6 +540,10 @@ msgstr "Γλώσσα"
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Αριστερά"
+
+#: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
+msgid "Load images into NAPS2"
+msgstr "Φόρτωση εικόνων στο NAPS2"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
@@ -514,13 +569,25 @@ msgstr "Λεπτά (00-59)"
 msgid "Month (01-12)"
 msgstr "Μήνας (01-12)"
 
+#: FBatchScan.resx$linkPatchCodeInfo.Text$Message
+msgid "More info"
+msgstr "Περισσότερες πληροφορίες"
+
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
-msgstr "Μετ/νηση Κάτω"
+msgstr "Κίνηση Κάτω"
 
 #: FDesktop.resx$tsMove.TextFirst$Message
 msgid "Move Up"
-msgstr "Μετ/νηση Πάνω"
+msgstr "Κίνηση Πάνω"
+
+#: FBatchScan.resx$rdMultipleScansDelay.Text$Message
+msgid "Multiple scans (fixed delay between scans)"
+msgstr "Πολλαπλές σαρώσεις (χρονοκαθυστέρηση μεταξύ σαρώσεων)"
+
+#: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
+msgid "Multiple scans (prompt between scans)"
+msgstr "Πολλαπλές σαρώσεις (προτροπή μεταξύ σαρώσεων)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -541,6 +608,10 @@ msgstr "Νέο Προφίλ"
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
 msgstr "Επόμενη"
+
+#: FBatchPrompt.resx$$this.Text$Message
+msgid "Next Scan"
+msgstr "Επόμενη Σάρωση"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
@@ -564,6 +635,10 @@ msgstr "Not Another PDF Scanner 2"
 msgid "Not Now"
 msgstr "Αργότερα"
 
+#: FBatchScan.resx$lblNumberOfScans.Text$Message
+msgid "Number of scans"
+msgstr "Αριθμός σαρώσεων"
+
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
 msgstr "OCR"
@@ -580,25 +655,37 @@ msgstr "Διαμόρφωση OCR"
 msgid "OCR language"
 msgstr "Γλώσσα OCR"
 
-#: FEmailSettings.resx$btnOK.Text$Message
-#: FEditScanSettings.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
+#: FEmailSettings.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
+#: FEditScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FContrast.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Εντάξει"
 
+#: FBatchScan.resx$rdFilePerPage.Text$Message
+msgid "One file per page"
+msgstr "Ένα αρχείο ανά σελίδα"
+
+#: FBatchScan.resx$rdFilePerScan.Text$Message
+msgid "One file per scan"
+msgstr "Ένα αρχείο ανά σάρωση"
+
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
 msgstr "Αποτυχία λήψης για ένα ή περισσότερα αρχεία"
+
+#: FBatchScan.resx$groupboxOutput.Text$Message
+msgid "Output"
+msgstr "Διαχείριση Αποτελέσματος"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -608,8 +695,8 @@ msgstr "Αντικατάσταση Αρχείου"
 msgid "Owner Password"
 msgstr "Κωδικός Ιδιοκτήτη"
 
-#: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPdfSettings2.Text$Message
+#: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
 msgstr "Ρυθμίσεις PDF"
@@ -634,13 +721,17 @@ msgstr "Πηγή χαρτιού"
 msgid "Password"
 msgstr "Κωδικός"
 
+#: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Δεσμευτικά Θέσεων (Placeholders)"
+
+#: FBatchScan.resx$lblStatus.Text$Message
+msgid "Press Start when ready"
+msgstr "Σε αναμονή για κλικ στο Έναρξη"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -655,6 +746,10 @@ msgstr "Προηγούμενη"
 msgid "Print"
 msgstr "Εκτύπωση"
 
+#: FBatchScan.resx$lblProfile.Text$Message
+msgid "Profile"
+msgstr "Προφίλ"
+
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
 msgstr "Ρυθμίσεις Προφίλ"
@@ -663,6 +758,10 @@ msgstr "Ρυθμίσεις Προφίλ"
 #: FDesktop.resx$tsProfiles.Text$Message
 msgid "Profiles"
 msgstr "Προφίλ"
+
+#: FBatchPrompt.resx$lblStatus.Text$Message
+msgid "Ready for scan {0}"
+msgstr "Σε ετοιμότητα για σάρωση {0}"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -694,8 +793,8 @@ msgstr "Αρχικοποίηση Εικόνας"
 msgid "Resolution"
 msgstr "Ανάλυση"
 
-#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Επαναφορά Προεπιλογών"
@@ -704,9 +803,9 @@ msgstr "Επαναφορά Προεπιλογών"
 msgid "Reverse"
 msgstr "Αντιστροφή"
 
+#: FContrast.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
-#: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "Επαναφορά"
@@ -715,8 +814,8 @@ msgstr "Επαναφορά"
 msgid "Right"
 msgstr "Δεξιά"
 
-#: FRotate.resx$$this.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
+#: FRotate.resx$$this.Text$Message
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
 msgstr "Περιστροφή"
@@ -739,7 +838,19 @@ msgstr "Σώσιμο Εικόνων"
 msgid "Save PDF"
 msgstr "Σώσιμο PDF"
 
-#: FPdfSave.resx$label1.Text$Message
+#: FBatchScan.resx$rdSaveToSingleFile.Text$Message
+msgid "Save to a single file"
+msgstr "Σώσιμο σε ένα αρχείο"
+
+#: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
+msgid "Save to multiple files"
+msgstr "Σώσιμο σε πολλαπλά αρχεία"
+
+#: MiscResources.resx$BatchStatusSaving$Message
+msgid "Saving batch results"
+msgstr "Σώσιμο αποτελεσμάτων μαζικής"
+
+#: FPDFSave.resx$label1.Text$Message
 msgid "Saving to PDF"
 msgstr "Σώσιμο σε PDF"
 
@@ -752,11 +863,16 @@ msgid "Scale With Window"
 msgstr "Μέγεθος Βάση Παραθύρου"
 
 #: FProfiles.resx$btnScan.Text$Message
+#: FBatchPrompt.resx$btnScan.Text$Message
 #: FProfiles.resx$ctxScan.Text$Message
 #: MiscResources.resx$Scan$Message
 #: FDesktop.resx$tsScan.Text$Message
 msgid "Scan"
 msgstr "Σάρωση"
+
+#: FBatchScan.resx$groupboxScanConfig.Text$Message
+msgid "Scan Configuration"
+msgstr "Διαμόρφωση Σάρωσης"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -764,8 +880,13 @@ msgstr "Σαρωμένη Εικόνα"
 
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
+#: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
 msgstr "Σάρωση σελίδας {0}"
+
+#: MiscResources.resx$BatchStatusScanPage$Message
+msgid "Scanning page {0} (scan {1})"
+msgstr "Σάρωση σελίδας {0} (σάρωση {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
@@ -777,19 +898,23 @@ msgstr "Επιλογή Όλων"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Επιλέξτε ένα προφίλ πριν κάνετε κλικ στην Σάρωση"
+msgstr "Να επιλεγεί ένα προφίλ πριν γίνει κλικ στην Σάρωση"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr "Επιλέξτε μία ή περισσότερες γλώσσες"
+msgstr "Να επιλεγούν μία ή περισσότερες γλώσσες"
 
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 msgid "Selected ({0})"
 msgstr "Επιλεγμένα ({0})"
+
+#: FBatchScan.resx$rdSeparateByPatchT.Text$Message
+msgid "Separate files by Patch-T (TWAIN only)"
+msgstr "Διαχωρισμός αρχείων με Patch-T (TWAIN μόνο)"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -800,9 +925,21 @@ msgstr "Ορισμός Προεπιλεγμένου"
 msgid "Show"
 msgstr "Εμφάνιση"
 
+#: FBatchScan.resx$rdSingleScan.Text$Message
+msgid "Single scan"
+msgstr "Μία σάρωση"
+
+#: FBatchScan.resx$btnStart.Text$Message
+msgid "Start"
+msgstr "Έναρξη"
+
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
 msgstr "Θέμα"
+
+#: FBatchScan.resx$linkSubstitutions.Text$Message
+msgid "Substitutions"
+msgstr "Δεσμευτικά Θέσεων (Placeholders)"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -813,13 +950,13 @@ msgid "TWAIN Driver"
 msgstr "Οδηγός TWAIN"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
-msgid "The file "{0}" could not be imported"
-msgstr "Το αρχείο \"{0}\" δεν μπόρεσε να εισαχθεί"
+msgid "The file '{0}' could not be imported"
+msgstr "Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file "{0}" could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
-"Το αρχείο \"{0}\" δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF δημιουργημένα από "
+"Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF δημιουργημένα από "
 "το NAPS2 μπορεί να εισαχθούν"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
@@ -829,8 +966,7 @@ msgstr "Το αρχείο {0} υπάρχει ήδη. Θέλετε να αντι�
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
-"Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: "
-"{0}"
+"Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: {0}"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -839,12 +975,16 @@ msgstr "Ο επιλεγμένος σαρωτής δεν μπόρεσε να βρ
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
-"Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής σας "
-"όντως διαθέτει τροφοδότη, δοκιμάστε ένα διαφορετικό οδηγό"
+"Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν πράγματι ο "
+"σαρωτής διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "Ο επιλεγμένος σαρωτής είναι εκτός λειτουργίας"
+
+#: FBatchScan.resx$lblTimeBetweenScans.Text$Message
+msgid "Time between scans (seconds)"
+msgstr "Χρόνος μεταξύ σαρώσεων (δευτερόλεπτα)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
@@ -899,6 +1039,10 @@ msgstr "Οδηγός WIA"
 msgid "Waiting for TWAIN to complete"
 msgstr "Αναμονή ολοκλήρωσης TWAIN"
 
+#: MiscResources.resx$BatchStatusWaitingForScan$Message
+msgid "Waiting for scan {0}"
+msgstr "Αναμονή σάρωσης {0}"
+
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
 msgstr "X"
@@ -912,12 +1056,12 @@ msgid "Year (00-99)"
 msgstr "Έτος (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file "{0}""
-msgstr "Δεν έχετε δικαίωμα αντιγραφής περιεχομένου από το αρχείο \"{0}\""
+msgid "You do not have permission to copy content from the file '{0}'"
+msgstr "Δεν υπάρχει δικαίωμα αντιγραφής περιεχομένου από το αρχείο '{0}'"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "Δεν έχετε δικαίωμα να σώσετε αρχεία σε αυτή την τοποθεσία"
+msgstr "Δεν υπάρχει δικαίωμα για να σωθούν αρχεία σε αυτή την τοποθεσία"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
@@ -927,7 +1071,7 @@ msgstr ""
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
-msgstr "Εστίαση"
+msgstr "Ποσοστό Εστίασης"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
