@@ -38,7 +38,7 @@ namespace NAPS2
         [STAThread]
         static void Main()
         {
-            KernelManager.Kernel.Get<CultureInitializer>().InitCulture();
+            KernelManager.Kernel.Get<CultureInitializer>().InitCulture(Thread.CurrentThread);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

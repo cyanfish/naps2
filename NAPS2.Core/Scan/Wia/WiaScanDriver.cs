@@ -25,6 +25,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Wia
 {
@@ -34,11 +35,13 @@ namespace NAPS2.Scan.Wia
 
         private readonly IScannedImageFactory scannedImageFactory;
         private readonly IWiaTransfer wiaTransfer;
+        private readonly ThreadFactory threadFactory;
 
-        public WiaScanDriver(IScannedImageFactory scannedImageFactory, IWiaTransfer wiaTransfer)
+        public WiaScanDriver(IScannedImageFactory scannedImageFactory, IWiaTransfer wiaTransfer, ThreadFactory threadFactory)
         {
             this.scannedImageFactory = scannedImageFactory;
             this.wiaTransfer = wiaTransfer;
+            this.threadFactory = threadFactory;
         }
 
         public override string DriverName
@@ -53,7 +56,7 @@ namespace NAPS2.Scan.Wia
 
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
-            using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice))
+            using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice, threadFactory))
             {
                 bool supportsFeeder = eventLoop.GetSync(wia => WiaApi.DeviceSupportsFeeder(wia.Device));
                 if (ScanProfile.PaperSource != ScanSource.Glass && !supportsFeeder)

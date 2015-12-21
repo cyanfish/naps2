@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Wia
 {
@@ -19,12 +20,12 @@ namespace NAPS2.Scan.Wia
         private Form form;
         private WiaState wiaState;
 
-        public WiaBackgroundEventLoop(ScanProfile profile, ScanDevice scanDevice)
+        public WiaBackgroundEventLoop(ScanProfile profile, ScanDevice scanDevice, ThreadFactory threadFactory)
         {
             this.profile = profile;
             this.scanDevice = scanDevice;
 
-            thread = new Thread(RunEventLoop);
+            thread = threadFactory.CreateThread(RunEventLoop);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
             // Wait for the thread to initialize the background form and event loop

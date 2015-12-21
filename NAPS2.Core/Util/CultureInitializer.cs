@@ -18,7 +18,7 @@ namespace NAPS2.Util
             this.appConfigManager = appConfigManager;
         }
 
-        public void InitCulture()
+        public void InitCulture(Thread thread)
         {
             var cultureId = userConfigManager.Config.Culture ?? appConfigManager.Config.DefaultCulture;
             if (!String.IsNullOrWhiteSpace(cultureId))
@@ -26,8 +26,8 @@ namespace NAPS2.Util
                 try
                 {
                     var culture = new CultureInfo(cultureId);
-                    Thread.CurrentThread.CurrentUICulture = culture;
-                    Thread.CurrentThread.CurrentCulture = culture;
+                    thread.CurrentUICulture = culture;
+                    thread.CurrentCulture = culture;
                 }
                 catch (CultureNotFoundException e)
                 {

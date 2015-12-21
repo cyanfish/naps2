@@ -28,6 +28,7 @@ using NAPS2.Config;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -36,13 +37,15 @@ namespace NAPS2.WinForms
         private readonly PdfSaver pdfSaver;
         private readonly IUserConfigManager userConfigManager;
         private readonly PdfSettingsContainer pdfSettingsContainer;
+        private readonly ThreadFactory threadFactory;
 
-        public FPdfSave(PdfSaver pdfSaver, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer)
+        public FPdfSave(PdfSaver pdfSaver, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, ThreadFactory threadFactory)
         {
             InitializeComponent();
             this.pdfSaver = pdfSaver;
             this.userConfigManager = userConfigManager;
             this.pdfSettingsContainer = pdfSettingsContainer;
+            this.threadFactory = threadFactory;
             RestoreFormState = false;
             Shown += FPDFSave_Shown;
         }
@@ -67,7 +70,7 @@ namespace NAPS2.WinForms
 
         void FPDFSave_Shown(object sender, EventArgs e)
         {
-            new Thread(ExportPdfProcess).Start();
+            threadFactory.CreateThread(ExportPdfProcess).Start();
         }
 
         public void SetStatus(int count, int total)
