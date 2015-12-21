@@ -119,10 +119,10 @@
     </resheader>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>113, 38</value>
+        <value>123, 38</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
+        <value>85, 23</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
@@ -144,10 +144,10 @@
         <value>5</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>194, 39</value>
+        <value>214, 39</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
+        <value>85, 23</value>
     </data>
     <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>6</value>
@@ -171,7 +171,7 @@
         <value>12, 12</value>
     </data>
     <data name="textboxWidth.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 20</value>
+        <value>85, 20</value>
     </data>
     <data name="textboxWidth.TabIndex" type="System.Int32, mscorlib">
         <value>7</value>
@@ -192,7 +192,7 @@
         <value>True</value>
     </data>
     <data name="labelX.Location" type="System.Drawing.Point, System.Drawing">
-        <value>93, 15</value>
+        <value>103, 15</value>
     </data>
     <data name="labelX.Size" type="System.Drawing.Size, System.Drawing">
         <value>14, 13</value>
@@ -216,10 +216,10 @@
         <value>2</value>
     </data>
     <data name="textboxHeight.Location" type="System.Drawing.Point, System.Drawing">
-        <value>113, 12</value>
+        <value>123, 12</value>
     </data>
     <data name="textboxHeight.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 20</value>
+        <value>85, 20</value>
     </data>
     <data name="textboxHeight.TabIndex" type="System.Int32, mscorlib">
         <value>9</value>
@@ -237,10 +237,10 @@
         <value>1</value>
     </data>
     <data name="comboUnit.Location" type="System.Drawing.Point, System.Drawing">
-        <value>194, 12</value>
+        <value>214, 12</value>
     </data>
     <data name="comboUnit.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 21</value>
+        <value>85, 21</value>
     </data>
     <data name="comboUnit.TabIndex" type="System.Int32, mscorlib">
         <value>10</value>
@@ -264,7 +264,7 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>281, 74</value>
+        <value>311, 74</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
@@ -293,7 +293,7 @@
         <value>1000, 113</value>
     </data>
     <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-        <value>297, 113</value>
+        <value>327, 113</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
         <value>Özel Sayfa Boyutu</value>
@@ -302,6 +302,6 @@
         <value>FPageSize</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.2.0.31688, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.36564, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

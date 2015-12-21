@@ -132,7 +132,7 @@
         <value>3</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Επιλέξτε μία ή περισσότερες γλώσσες:</value>
+        <value>Να επιλεγούν μία ή περισσότερες γλώσσες:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>

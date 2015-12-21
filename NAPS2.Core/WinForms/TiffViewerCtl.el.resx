@@ -268,7 +268,7 @@
         <value>100%</value>
     </data>
     <data name="tsZoom.ToolTipText" xml:space="preserve">
-        <value>Εστίαση</value>
+        <value>Ποσοστό Εστίασης</value>
     </data>
     <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 0</value>

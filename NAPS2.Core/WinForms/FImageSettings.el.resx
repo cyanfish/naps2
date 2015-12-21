@@ -204,6 +204,9 @@
     <data name="&gt;&gt;cbRememberSettings.ZOrder" xml:space="preserve">
         <value>7</value>
     </data>
+    <data name="btnRestoreDefaults.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
     <data name="btnRestoreDefaults.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 173</value>
     </data>
@@ -292,7 +295,7 @@
         <value>29</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Ποιότητα JPEG</value>
+        <value>Ποιότητα Jpeg</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -394,7 +397,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>Για καλύτερα αποτελέσματα σε υψηλές ποιότητες JPEG (80+), χρησιμοποιήστε την επιλογή του προφίλ Μέγιστη Ποιότητα.</value>
+        <value>Για καλύτερα αποτελέσματα σε υψηλές ποιότητες JPEG (80+), υπάρχει στο προφίλ η επιλογή Μέγιστη Ποιότητα.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>
@@ -453,12 +456,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.0.3.7448, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.3.1.36618, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FImageSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.3.7448, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.36618, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

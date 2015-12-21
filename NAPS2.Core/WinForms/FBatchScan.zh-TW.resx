@@ -727,7 +727,7 @@
         <value>4</value>
     </data>
     <data name="linkSubstitutions.Text" xml:space="preserve">
-        <value>Substitutions</value>
+        <value>替代</value>
     </data>
     <data name="&gt;&gt;linkSubstitutions.Name" xml:space="preserve">
         <value>linkSubstitutions</value>
