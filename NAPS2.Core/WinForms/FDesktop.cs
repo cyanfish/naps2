@@ -272,7 +272,7 @@ namespace NAPS2.WinForms
             tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsdPrint.Enabled = tsClear.Enabled = imageList.Images.Any();
 
             // Context-menu actions
-            ctxView.Visible = ctxCopy.Visible = SelectedIndices.Any();
+            ctxView.Visible = ctxCopy.Visible = ctxDelete.Visible = ctxSeparator1.Visible = ctxSeparator2.Visible = SelectedIndices.Any();
             ctxSelectAll.Enabled = imageList.Images.Any();
 
             // Other buttons
@@ -381,9 +381,6 @@ namespace NAPS2.WinForms
             isControlKeyDown = e.Control;
             switch (e.KeyCode)
             {
-                case Keys.Delete:
-                    Delete();
-                    break;
                 case Keys.Left:
                 case Keys.Up:
                     if (e.Control)
@@ -948,6 +945,11 @@ namespace NAPS2.WinForms
         private void ctxCopy_Click(object sender, EventArgs e)
         {
             CopyImages();
+        }
+
+        private void ctxDelete_Click(object sender, EventArgs e)
+        {
+            Delete();
         }
 
         private void CopyImages()
