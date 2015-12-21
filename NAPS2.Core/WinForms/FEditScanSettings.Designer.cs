@@ -67,7 +67,7 @@ namespace NAPS2.WinForms
             this.cbHighQuality = new System.Windows.Forms.CheckBox();
             this.txtBrightness = new System.Windows.Forms.TextBox();
             this.txtContrast = new System.Windows.Forms.TextBox();
-            this.ilProfileIcons = new ILProfileIcons(this.components);
+            this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).BeginInit();

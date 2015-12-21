@@ -118,7 +118,7 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Bind(pctIcon, btnChooseDevice, btnOK, btnCancel)
                     .RightToForm()
-                .Bind(cmbAlign, cmbDepth, cmbPage, cmbResolution, cmbScale, cmbSource, trBrightness, trContrast)
+                .Bind(cmbAlign, cmbDepth, cmbPage, cmbResolution, cmbScale, cmbSource, trBrightness, trContrast, rdbConfig, rdbNative)
                     .WidthTo(() => Width / 2)
                 .Bind(rdTWAIN, rdbNative, label3, cmbDepth, label9, cmbAlign, label10, cmbScale, label7, trContrast)
                     .LeftTo(() => Width / 2)

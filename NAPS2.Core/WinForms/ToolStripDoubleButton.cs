@@ -26,24 +26,43 @@ namespace NAPS2.WinForms
         [Localizable(true)]
         public string TextSecond { get; set; }
 
+        public int MaxTextWidth { get; set; }
+
         public override Size GetPreferredSize(Size constrainingSize)
         {
+            bool wrap = false;
             var sumWidth = Padding.Left + Padding.Right +
                            Math.Max(ImageFirst != null ? ImageFirst.Width : 0,
                                ImageSecond != null ? ImageSecond.Width : 0)
-                           + Math.Max(MeasureTextWidth(TextFirst), MeasureTextWidth(TextSecond));
+                           + Math.Max(MeasureTextWidth(TextFirst, ref wrap), MeasureTextWidth(TextSecond, ref wrap));
             var sumHeight = Padding.Top + Padding.Bottom +
                            (ImageFirst != null ? ImageFirst.Height : 0)
                            + (ImageSecond != null ? ImageSecond.Height : 0)
-                           + 16;
+                           + 16 + (wrap ? 12 : 0);
             return new Size(sumWidth, sumHeight);
         }
 
-        private int MeasureTextWidth(string text)
+        private int MeasureTextWidth(string text, ref bool wrap)
         {
             using (var g = Graphics.FromImage(new Bitmap(1, 1)))
             {
-                return (int)Math.Ceiling(g.MeasureString(text, Font).Width);
+                var width = (int)Math.Ceiling(g.MeasureString(text, Font).Width);
+                if (MaxTextWidth > 0 && width > MaxTextWidth)
+                {
+                    var words = text.Split(' ');
+                    for (int i = 1; i < words.Length; i++)
+                    {
+                        var left = string.Join(" ", words.Take(words.Length - i));
+                        var right = string.Join(" ", words.Skip(words.Length - i));
+                        var wrappedWidth = (int)Math.Ceiling(g.MeasureString(left + "\n" + right, Font).Width);
+                        if (wrappedWidth < width)
+                        {
+                            width = wrappedWidth;
+                            wrap = true;
+                        }
+                    }
+                }
+                return width;
             }
         }
 
@@ -74,8 +93,8 @@ namespace NAPS2.WinForms
                     ControlPaint.DrawImageDisabled(e.Graphics, ImageFirst, Padding.Left, Height / 4 - ImageFirst.Height / 2, Color.Transparent);
                 }
 
-                var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, Width, Height / 2);
-                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextFirst, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter));
+                var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, Width - (Padding.Left + ImageFirst.Width), Height / 2);
+                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextFirst, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak));
             }
 
             if (ImageSecond != null && TextSecond != null)
@@ -89,8 +108,8 @@ namespace NAPS2.WinForms
                     ControlPaint.DrawImageDisabled(e.Graphics, ImageSecond, Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2, Color.Transparent);
                 }
 
-                var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, Width, Height / 2);
-                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextSecond, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter));
+                var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, Width - (Padding.Left + ImageSecond.Width), Height / 2);
+                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextSecond, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak));
             }
 
             Image = null;

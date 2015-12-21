@@ -232,7 +232,7 @@
     <value>0, 0</value>
   </data>
   <data name="thumbnailList1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1204, 472</value>
+    <value>1204, 463</value>
   </data>
   <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -241,7 +241,7 @@
     <value>thumbnailList1</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.2.3.306, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.3.1.37720, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -250,7 +250,7 @@
     <value>2</value>
   </data>
   <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1204, 472</value>
+    <value>1204, 463</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -310,7 +310,7 @@
     <value>None</value>
   </data>
   <data name="tsNewProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>135, 22</value>
   </data>
   <data name="tsNewProfile.Text" xml:space="preserve">
     <value>New Profile</value>
@@ -319,7 +319,7 @@
     <value>None</value>
   </data>
   <data name="tsBatchScan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>135, 22</value>
   </data>
   <data name="tsBatchScan.Text" xml:space="preserve">
     <value>Batch Scan</value>
@@ -328,7 +328,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsScan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 51</value>
+    <value>58, 60</value>
   </data>
   <data name="tsScan.Text" xml:space="preserve">
     <value>Scan</value>
@@ -377,7 +377,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsProfiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 51</value>
+    <value>70, 60</value>
   </data>
   <data name="tsProfiles.Text" xml:space="preserve">
     <value>Profiles</value>
@@ -389,7 +389,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsOcr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 51</value>
+    <value>56, 60</value>
   </data>
   <data name="tsOcr.Text" xml:space="preserve">
     <value>OCR</value>
@@ -401,7 +401,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 51</value>
+    <value>67, 60</value>
   </data>
   <data name="tsImport.Text" xml:space="preserve">
     <value>Import</value>
@@ -410,7 +410,7 @@
     <value>ImageAboveText</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 54</value>
+    <value>6, 63</value>
   </data>
   <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 22</value>
@@ -437,7 +437,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdSavePDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 51</value>
+    <value>71, 60</value>
   </data>
   <data name="tsdSavePDF.Text" xml:space="preserve">
     <value>Save PDF</value>
@@ -470,7 +470,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdSaveImages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 51</value>
+    <value>88, 60</value>
   </data>
   <data name="tsdSaveImages.Text" xml:space="preserve">
     <value>Save Images</value>
@@ -509,7 +509,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdEmailPDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 51</value>
+    <value>76, 60</value>
   </data>
   <data name="tsdEmailPDF.Text" xml:space="preserve">
     <value>Email PDF</value>
@@ -521,7 +521,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdPrint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 51</value>
+    <value>56, 60</value>
   </data>
   <data name="tsdPrint.Text" xml:space="preserve">
     <value>Print</value>
@@ -530,7 +530,7 @@
     <value>ImageAboveText</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 54</value>
+    <value>6, 63</value>
   </data>
   <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 22</value>
@@ -581,7 +581,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdImage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 51</value>
+    <value>64, 60</value>
   </data>
   <data name="tsdImage.Text" xml:space="preserve">
     <value>Image</value>
@@ -626,7 +626,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdRotate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 51</value>
+    <value>65, 60</value>
   </data>
   <data name="tsdRotate.Text" xml:space="preserve">
     <value>Rotate</value>
@@ -635,7 +635,7 @@
     <value>ImageAboveText</value>
   </data>
   <data name="tsMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 51</value>
+    <value>80, 60</value>
   </data>
   <data name="tsMove.TextFirst" xml:space="preserve">
     <value>Move Up</value>
@@ -695,7 +695,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsdReorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 51</value>
+    <value>72, 60</value>
   </data>
   <data name="tsdReorder.Text" xml:space="preserve">
     <value>Reorder</value>
@@ -704,13 +704,13 @@
     <value>ImageAboveText</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 54</value>
+    <value>6, 63</value>
   </data>
   <data name="tsDelete.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="tsDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 51</value>
+    <value>64, 60</value>
   </data>
   <data name="tsDelete.Text" xml:space="preserve">
     <value>Delete</value>
@@ -722,7 +722,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 51</value>
+    <value>58, 60</value>
   </data>
   <data name="tsClear.Text" xml:space="preserve">
     <value>Clear</value>
@@ -731,13 +731,13 @@
     <value>ImageAboveText</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 54</value>
+    <value>6, 63</value>
   </data>
   <data name="toolStripDropDownButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 51</value>
+    <value>83, 60</value>
   </data>
   <data name="toolStripDropDownButton1.Text" xml:space="preserve">
     <value>Language</value>
@@ -789,7 +789,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 51</value>
+    <value>64, 60</value>
   </data>
   <data name="tsAbout.Text" xml:space="preserve">
     <value>About</value>
@@ -801,7 +801,7 @@
     <value>3, 0</value>
   </data>
   <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1201, 54</value>
+    <value>1199, 63</value>
   </data>
   <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1137,7 +1137,7 @@
     <value>tsMove</value>
   </data>
   <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.2.3.306, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.3.1.37720, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
     <value>tsdReorder</value>
@@ -1239,6 +1239,6 @@
     <value>FDesktop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.306, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.37720, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -873,6 +873,9 @@
   <data name="&gt;&gt;cbRememberSettings.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="btnRestoreDefaults.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="btnRestoreDefaults.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 584</value>
   </data>
@@ -1024,12 +1027,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.0.3.7448, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.3.1.36618, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FPdfSettings</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.3.7448, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.36618, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
