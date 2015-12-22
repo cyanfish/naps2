@@ -49,7 +49,7 @@ namespace NAPS2.Util
             {
                 try
                 {
-                    using (var pipeServer = new NamedPipeServerStream(PIPE_NAME, PipeDirection.In))
+                    using (var pipeServer = new NamedPipeServerStream(PIPE_NAME, PipeDirection.In, NamedPipeServerStream.MaxAllowedServerInstances))
                     {
                         while (true)
                         {
@@ -65,12 +65,11 @@ namespace NAPS2.Util
                         }
                     }
                 }
-                catch (IOException)
+                catch (Exception ex)
                 {
-                    // If multiple NAPS2 instances are started this may fail normally
+                    Log.ErrorException("Error in named pipe server", ex);
                 }
                 _serverRunning = false;
-// ReSharper disable once FunctionNeverReturns
             });
             _serverRunning = true;
             thread.Start();
