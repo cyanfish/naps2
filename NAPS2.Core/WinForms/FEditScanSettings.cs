@@ -79,7 +79,10 @@ namespace NAPS2.WinForms
 
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanProfile.IconID];
             txtName.Text = ScanProfile.DisplayName;
-            CurrentDevice = ScanProfile.Device;
+            if (CurrentDevice == null)
+            {
+                CurrentDevice = ScanProfile.Device;
+            }
             isDefault = ScanProfile.IsDefault;
             iconID = ScanProfile.IconID;
 
