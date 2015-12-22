@@ -29,7 +29,7 @@ namespace NAPS2.Util
         /// Send a message to a NAPS2 instance running a pipe server. If multiple instances are running servers then the recipient is essentially random.
         /// </summary>
         /// <param name="msg">The message to send.</param>
-        public static void SendMessage(string msg)
+        public static bool SendMessage(string msg)
         {
             try
             {
@@ -40,11 +40,13 @@ namespace NAPS2.Util
                     var streamString = new StreamString(pipeClient);
                     streamString.WriteString(msg);
                     //MessageBox.Show("Sent");
+                    return true;
                 }
             }
             catch (Exception e)
             {
                 Log.ErrorException("Error sending message through pipe", e);
+                return false;
             }
         }
 
@@ -75,6 +77,7 @@ namespace NAPS2.Util
                                 break;
                             }
                             msgCallback(msg);
+                            pipeServer.Disconnect();
                         }
                     }
                 }

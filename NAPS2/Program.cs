@@ -38,7 +38,10 @@ namespace NAPS2
         [STAThread]
         static void Main(string[] args)
         {
-            KernelManager.Kernel.Get<StillImage>().ParseArgs(args);
+            var sti = KernelManager.Kernel.Get<StillImage>();
+            sti.ParseArgs(args);
+            sti.ExitIfRedundant();
+
             KernelManager.Kernel.Get<CultureInitializer>().InitCulture(Thread.CurrentThread);
 
             Application.EnableVisualStyles();

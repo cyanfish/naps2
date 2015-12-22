@@ -214,13 +214,13 @@ namespace NAPS2.WinForms
         {
             if (stillImage.DoScan)
             {
-                Activate();
                 ScanWithDevice(stillImage.DeviceID);
             }
         }
 
         private void ScanWithDevice(string deviceID)
         {
+            Activate();
             ScanProfile profile;
             if (profileManager.DefaultProfile != null && profileManager.DefaultProfile.Device != null
                 && profileManager.DefaultProfile.Device.ID == deviceID)
@@ -834,6 +834,15 @@ namespace NAPS2.WinForms
         {
             UpdateToolbar();
 
+            // Receive messages from other processes
+            Pipes.StartServer(msg =>
+            {
+                if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE))
+                {
+                    Invoke(new Action(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length))));
+                }
+            });
+
             // If configured (e.g. by a business), show a customizable message box on application startup.
             var appConfig = appConfigManager.Config;
             if (!string.IsNullOrWhiteSpace(appConfig.StartupMessageText))
@@ -850,15 +859,6 @@ namespace NAPS2.WinForms
                 thumbnailList1.Refresh();
                 changeTracker.HasUnsavedChanges = true;
             }
-
-            // Receive messages from other processes
-            Pipes.StartServer(msg =>
-            {
-                if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE))
-                {
-                    Invoke(new Action(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length))));
-                }
-            });
 
             // If NAPS2 was started by the scanner button, do the appropriate actions automatically
             RunStillImageEvents();

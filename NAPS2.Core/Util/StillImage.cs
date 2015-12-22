@@ -25,20 +25,23 @@ namespace NAPS2.Util
                     DoScan = true;
                 }
             }
-
-            if (DoScan)
-            {
-                EnsureSingleInstance();
-            }
         }
 
-        private void EnsureSingleInstance()
+        public void ExitIfRedundant()
         {
-            Process current = Process.GetCurrentProcess();
-            if (Process.GetProcessesByName(current.ProcessName).Any(process => process.Id != current.Id))
+            // If this instance of NAPS2 was spawned by STI, then there may be another instance of NAPS2 we want to get the scan signal instead
+            if (DoScan)
             {
-                Pipes.SendMessage(Pipes.MSG_SCAN_WITH_DEVICE + DeviceID);
-                Environment.Exit(0);
+                Process current = Process.GetCurrentProcess();
+                if (Process.GetProcessesByName(current.ProcessName).Any(process => process.Id != current.Id))
+                {
+                    // Another instance of NAPS2 is running, so send it the "Scan" signal
+                    if (Pipes.SendMessage(Pipes.MSG_SCAN_WITH_DEVICE + DeviceID))
+                    {
+                        // Successful, so this instance can be closed before showing any UI
+                        Environment.Exit(0);
+                    }
+                }
             }
         }
 
