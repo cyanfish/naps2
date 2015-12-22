@@ -128,6 +128,10 @@ namespace NAPS2.WinForms
             if (fedit.Result)
             {
                 profileManager.Profiles.Add(fedit.ScanProfile);
+                if (profileManager.Profiles.Count == 1)
+                {
+                    profileManager.DefaultProfile = fedit.ScanProfile;
+                }
                 UpdateProfiles();
                 SelectProfile(x => x == fedit.ScanProfile);
                 profileManager.Save();
@@ -178,6 +182,10 @@ namespace NAPS2.WinForms
                         profileNameTracker.DeletingProfile(profile.DisplayName);
                     }
                     profileManager.Profiles.RemoveAll(lvProfiles.SelectedIndices.OfType<int>());
+                    if (profileManager.Profiles.Count == 1)
+                    {
+                        profileManager.DefaultProfile = profileManager.Profiles.First();
+                    }
                     profileManager.Save();
                     UpdateProfiles();
                     lvProfiles_SelectedIndexChanged(null, null);
@@ -226,6 +234,7 @@ namespace NAPS2.WinForms
                     return;
                 }
                 profileManager.Profiles.Add(editSettingsForm.ScanProfile);
+                profileManager.DefaultProfile = editSettingsForm.ScanProfile;
                 profileManager.Save();
                 UpdateProfiles();
                 lvProfiles.SelectedIndices.Add(0);
@@ -235,6 +244,13 @@ namespace NAPS2.WinForms
                 MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
+            }
+            if (profileManager.DefaultProfile == null)
+            {
+                var profile = SelectedProfile;
+                profileManager.DefaultProfile = profile;
+                UpdateProfiles();
+                SelectProfile(x => x == profile);
             }
             profileManager.Save();
             scanPerformer.PerformScan(SelectedProfile, new ScanParams(), this, ImageCallback);

@@ -567,9 +567,13 @@ namespace NAPS2.WinForms
                 scanPerformer.PerformScan(profileManager.DefaultProfile, new ScanParams(), this, ReceiveScannedImage);
                 Activate();
             }
-            else
+            else if (profileManager.Profiles.Count == 0)
             {
                 ScanWithNewProfile();
+            }
+            else
+            {
+                ShowProfilesForm();
             }
         }
 
