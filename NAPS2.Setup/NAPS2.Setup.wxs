@@ -12,7 +12,7 @@
 
     <Icon Id="icon.ico" SourceFile="..\NAPS2.Core\Resources\scanner.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-    
+
     <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
 
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
@@ -22,6 +22,7 @@
     <Feature Id="MainApplication" Title="NAPS2" Level="1">
       <ComponentRef Id="Exec" />
       <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="RegistryEntries" />
       <ComponentGroupRef Id="LangComponents" />
     </Feature>
 
@@ -32,6 +33,26 @@
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ProgramMenuDir" Name="NAPS2" />
       </Directory>
+
+      <!-- Registry -->
+      <Component Id="RegistryEntries" Guid="5A1EA674-0ED2-42DF-817A-772F1B91EAE3">
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{1c3a7177-f3a7-439e-be47-e304a185f932}">
+          <RegistryValue Type="string" Name="Action" Value="Scan with NAPS2" />
+          <RegistryValue Type="string" Name="CLSID" Value="WIACLSID" />
+          <RegistryValue Type="string" Name="DefaultIcon" Value="sti.dll,0" />
+          <RegistryValue Type="string" Name="InitCmdLine" Value="/WiaCmd;[INSTALLFOLDER]NAPS2.exe /StiDevice:%1 /StiEvent:%2;" />
+          <RegistryValue Type="string" Name="Provider" Value="NAPS2" />
+        </RegistryKey>
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\StillImage\Registered Applications">
+          <RegistryValue Type="string" Name="NAPS2" Value="[INSTALLFOLDER]NAPS2.exe" />
+        </RegistryKey>
+        <RegistryKey Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{1c3a7177-f3a7-439e-be47-e304a185f932}">
+          <RegistryValue Type="string" Name="Cmdline" Value="[INSTALLFOLDER]NAPS2.exe /StiDevice:%1 /StiEvent:%2" />
+          <RegistryValue Type="string" Name="Desc" Value="Scan with NAPS2" />
+          <RegistryValue Type="string" Name="Icon" Value="[INSTALLFOLDER]NAPS2.exe,0" />
+          <RegistryValue Type="string" Name="Name" Value="NAPS2" />
+        </RegistryKey>
+      </Component>
     </Directory>
 
     <DirectoryRef Id="INSTALLFOLDER">

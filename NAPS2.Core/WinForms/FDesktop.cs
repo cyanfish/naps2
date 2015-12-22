@@ -41,6 +41,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia;
 using NAPS2.Update;
@@ -239,8 +240,15 @@ namespace NAPS2.WinForms
                 var editSettingsForm = FormFactory.Create<FEditScanSettings>();
                 editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ??
                                                new ScanProfile {Version = ScanProfile.CURRENT_VERSION};
-                // Populate the device field automatically (because we can do that!)
-                editSettingsForm.CurrentDevice = new ScanDevice(deviceID, WiaApi.GetDeviceName(deviceID));
+                try
+                {
+                    // Populate the device field automatically (because we can do that!)
+                    string deviceName = WiaApi.GetDeviceName(deviceID);
+                    editSettingsForm.CurrentDevice = new ScanDevice(deviceID, deviceName);
+                }
+                catch (DeviceNotFoundException)
+                {
+                }
                 editSettingsForm.ShowDialog();
                 if (!editSettingsForm.Result)
                 {
