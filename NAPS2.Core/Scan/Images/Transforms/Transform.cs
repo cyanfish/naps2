@@ -60,6 +60,21 @@ namespace NAPS2.Scan.Images.Transforms
         }
 
         /// <summary>
+        /// If the original bitmap is 1-bit (black and white), optimize the result by making it 1-bit too.
+        /// </summary>
+        /// <param name="original">The original bitmap that is used to determine whether the result should be black and white.</param>
+        /// <param name="result">The result that may be replaced.</param>
+        protected static void OptimizePixelFormat(Bitmap original, ref Bitmap result)
+        {
+            if (original.PixelFormat == PixelFormat.Format1bppIndexed)
+            {
+                var bitmap2 = (Bitmap)BitmapHelper.CopyToBpp(result, 1).Clone();
+                result.Dispose();
+                result = bitmap2;
+            }
+        }
+
+        /// <summary>
         /// Returns a bitmap with the result of the transform.
         /// May be the same bitmap object if the transform can be performed in-place.
         /// The original bitmap is disposed otherwise.

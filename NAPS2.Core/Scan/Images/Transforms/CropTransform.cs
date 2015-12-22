@@ -24,6 +24,7 @@ namespace NAPS2.Scan.Images.Transforms
             {
                 g.DrawImage(bitmap, new Rectangle(-Left, -Top, bitmap.Width, bitmap.Height));
             }
+            OptimizePixelFormat(bitmap, ref result);
             bitmap.Dispose();
             return result;
         }
