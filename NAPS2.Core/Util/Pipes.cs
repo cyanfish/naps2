@@ -3,23 +3,32 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// Simple inter-process communication between NAPS2 instances via named pipes.
+    /// </summary>
     public static class Pipes
     {
         public const string MSG_SCAN_WITH_DEVICE = "SCAN_WDEV_";
         public const string MSG_KILL_PIPE_SERVER = "KILL_PIPE_SERVER";
 
+        // An arbitrary non-secret unique name.
+        // This could be edtion/version-specific, but I like the idea that if the user is running a portable version and
+        // happens to have NAPS2 installed too, the scan button will propagate to the portable version.
         private const string PIPE_NAME = "NAPS2_PIPE_86a6ef67-742a-44ec-9ca5-64c5bddfd013";
+        // The timeout is small since pipe connections should be on the local machine only.
         private const int TIMEOUT = 1000;
 
         private static bool _serverRunning;
 
+        /// <summary>
+        /// Send a message to a NAPS2 instance running a pipe server. If multiple instances are running servers then the recipient is essentially random.
+        /// </summary>
+        /// <param name="msg">The message to send.</param>
         public static void SendMessage(string msg)
         {
             try
@@ -39,7 +48,11 @@ namespace NAPS2.Util
             }
         }
 
-        public static void StartServer(Action<string> callback)
+        /// <summary>
+        /// Start a pipe server on a background thread, calling the callback each time a message is received. Only one pipe server can be running per process.
+        /// </summary>
+        /// <param name="msgCallback">The message callback.</param>
+        public static void StartServer(Action<string> msgCallback)
         {
             if (_serverRunning)
             {
@@ -61,7 +74,7 @@ namespace NAPS2.Util
                             {
                                 break;
                             }
-                            callback(msg);
+                            msgCallback(msg);
                         }
                     }
                 }
@@ -75,6 +88,9 @@ namespace NAPS2.Util
             thread.Start();
         }
 
+        /// <summary>
+        /// Kills the pipe server background thread if one is running.
+        /// </summary>
         public static void KillServer()
         {
             if (_serverRunning)
@@ -83,6 +99,9 @@ namespace NAPS2.Util
             }
         }
 
+        /// <summary>
+        /// From https://msdn.microsoft.com/en-us/library/bb546085%28v=vs.110%29.aspx
+        /// </summary>
         private class StreamString
         {
             private Stream ioStream;
