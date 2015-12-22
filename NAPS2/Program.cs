@@ -36,8 +36,9 @@ namespace NAPS2
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            KernelManager.Kernel.Get<StillImage>().ParseArgs(args);
             KernelManager.Kernel.Get<CultureInitializer>().InitCulture(Thread.CurrentThread);
 
             Application.EnableVisualStyles();

@@ -216,6 +216,8 @@
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
     <Compile Include="Scan\Wia\WiaState.cs" />
     <Compile Include="Scan\Wia\WinFormsWiaTransfer.cs" />
+    <Compile Include="Util\Pipes.cs" />
+    <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />
     <Compile Include="Util\ThreadFactory.cs" />
     <Compile Include="Util\Unmanaged.cs" />

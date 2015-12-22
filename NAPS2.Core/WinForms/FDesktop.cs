@@ -42,6 +42,7 @@ using NAPS2.Ocr;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Wia;
 using NAPS2.Update;
 using NAPS2.Util;
 
@@ -68,12 +69,13 @@ namespace NAPS2.WinForms
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly PdfSaver pdfSaver;
         private readonly IErrorOutput errorOutput;
+        private readonly StillImage stillImage;
 
         private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
         private LayoutManager layoutManager;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput, StillImage stillImage)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -93,6 +95,7 @@ namespace NAPS2.WinForms
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.pdfSaver = pdfSaver;
             this.errorOutput = errorOutput;
+            this.stillImage = stillImage;
             InitializeComponent();
 
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
@@ -203,6 +206,58 @@ namespace NAPS2.WinForms
                 {
                     btn.Padding = new Padding(5, 0, 5, 0);
                 }
+            }
+        }
+
+        private void RunStillImageEvents()
+        {
+            if (stillImage.DoScan)
+            {
+                Activate();
+                ScanWithDevice(stillImage.DeviceID);
+            }
+        }
+
+        private void ScanWithDevice(string deviceID)
+        {
+            ScanProfile profile;
+            if (profileManager.DefaultProfile != null && profileManager.DefaultProfile.Device != null
+                && profileManager.DefaultProfile.Device.ID == deviceID)
+            {
+                // Try to use the default profile if it has the right device
+                profile = profileManager.DefaultProfile;
+            }
+            else
+            {
+                // Otherwise just pick any old profile with the right device
+                // Not sure if this is the best way to do it, but it's hard to prioritize profiles
+                profile = profileManager.Profiles.FirstOrDefault(x => x.Device != null && x.Device.ID == deviceID);
+            }
+            if (profile == null)
+            {
+                // No profile for the device we're scanning with, so prompt to create one
+                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+                editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ??
+                                               new ScanProfile {Version = ScanProfile.CURRENT_VERSION};
+                // Populate the device field automatically (because we can do that!)
+                editSettingsForm.CurrentDevice = new ScanDevice(deviceID, WiaApi.GetDeviceName(deviceID));
+                editSettingsForm.ShowDialog();
+                if (!editSettingsForm.Result)
+                {
+                    return;
+                }
+                profile = editSettingsForm.ScanProfile;
+                profileManager.Profiles.Add(profile);
+                profileManager.DefaultProfile = profile;
+                profileManager.Save();
+
+                UpdateScanButton();
+            }
+            if (profile != null)
+            {
+                // We got a profile, yay, so we can actually do the scan now
+                scanPerformer.PerformScan(profile, new ScanParams(), this, ReceiveScannedImage);
+                Activate();
             }
         }
 
@@ -784,6 +839,18 @@ namespace NAPS2.WinForms
                 changeTracker.HasUnsavedChanges = true;
             }
 
+            // Receive messages from other processes
+            Pipes.StartServer(msg =>
+            {
+                if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE))
+                {
+                    Invoke(new Action(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length))));
+                }
+            });
+
+            // If NAPS2 was started by the scanner button, do the appropriate actions automatically
+            RunStillImageEvents();
+
             // Automatic updates
             // Not yet enabled
             // autoUpdaterUI.OnApplicationStart(this);
@@ -791,7 +858,7 @@ namespace NAPS2.WinForms
 
         private void FDesktop_Closed(object sender, EventArgs e)
         {
-            // TODO: Add a closing confirmation
+            Pipes.KillServer();
             imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
         }
 

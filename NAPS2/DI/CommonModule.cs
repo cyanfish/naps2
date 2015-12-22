@@ -68,6 +68,7 @@ namespace NAPS2.DI
             Bind<IFormFactory>().To<NinjectFormFactory>();
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
             Bind<ChangeTracker>().ToSelf().InSingletonScope();
+            Bind<StillImage>().ToSelf().InSingletonScope();
         }
 
         private Edition GetEdition()
