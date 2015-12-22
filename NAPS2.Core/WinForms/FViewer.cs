@@ -361,6 +361,7 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             UpdateImage();
+            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private void tsContrast_Click(object sender, EventArgs e)
@@ -369,6 +370,7 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             UpdateImage();
+            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private void tsDelete_Click(object sender, EventArgs e)
