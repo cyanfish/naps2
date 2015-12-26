@@ -33,10 +33,11 @@ namespace NAPS2.Util
             if (DoScan)
             {
                 Process current = Process.GetCurrentProcess();
-                if (Process.GetProcessesByName(current.ProcessName).Any(process => process.Id != current.Id))
+                // Try each possible process in turn until one receives the message (most recently started first)
+                foreach (var process in Process.GetProcessesByName(current.ProcessName).Where(x => x.Id != current.Id).OrderByDescending(x => x.StartTime))
                 {
                     // Another instance of NAPS2 is running, so send it the "Scan" signal
-                    if (Pipes.SendMessage(Pipes.MSG_SCAN_WITH_DEVICE + DeviceID))
+                    if (Pipes.SendMessage(process, Pipes.MSG_SCAN_WITH_DEVICE + DeviceID))
                     {
                         // Successful, so this instance can be closed before showing any UI
                         Environment.Exit(0);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
@@ -18,24 +19,30 @@ namespace NAPS2.Util
         // TODO: Kill won't work properly when multiple servers are running
         // TODO: See http://stackoverflow.com/a/10485210/2112909 for a possible fix
 
-        // An arbitrary non-secret unique name.
+        // An arbitrary non-secret unique name with a single format argument (for the process ID).
         // This could be edtion/version-specific, but I like the idea that if the user is running a portable version and
         // happens to have NAPS2 installed too, the scan button will propagate to the portable version.
-        private const string PIPE_NAME = "NAPS2_PIPE_86a6ef67-742a-44ec-9ca5-64c5bddfd013";
+        private const string PIPE_NAME_FORMAT = "NAPS2_PIPE_86a6ef67-742a-44ec-9ca5-64c5bddfd013_{0}";
         // The timeout is small since pipe connections should be on the local machine only.
         private const int TIMEOUT = 1000;
 
         private static bool _serverRunning;
 
+        private static string GetPipeName(Process process)
+        {
+            return string.Format(PIPE_NAME_FORMAT, process.Id);
+        }
+
         /// <summary>
-        /// Send a message to a NAPS2 instance running a pipe server. If multiple instances are running servers then the recipient is essentially random.
+        /// Send a message to a NAPS2 instance running a pipe server.
         /// </summary>
+        /// <param name="recipient">The process to send the message to.</param>
         /// <param name="msg">The message to send.</param>
-        public static bool SendMessage(string msg)
+        public static bool SendMessage(Process recipient, string msg)
         {
             try
             {
-                using (var pipeClient = new NamedPipeClientStream(".", PIPE_NAME, PipeDirection.Out))
+                using (var pipeClient = new NamedPipeClientStream(".", GetPipeName(recipient), PipeDirection.Out))
                 {
                     //MessageBox.Show("Sending msg:" + msg);
                     pipeClient.Connect(TIMEOUT);
@@ -66,7 +73,7 @@ namespace NAPS2.Util
             {
                 try
                 {
-                    using (var pipeServer = new NamedPipeServerStream(PIPE_NAME, PipeDirection.In, NamedPipeServerStream.MaxAllowedServerInstances))
+                    using (var pipeServer = new NamedPipeServerStream(GetPipeName(Process.GetCurrentProcess()), PipeDirection.In))
                     {
                         while (true)
                         {
@@ -100,7 +107,7 @@ namespace NAPS2.Util
         {
             if (_serverRunning)
             {
-                SendMessage(MSG_KILL_PIPE_SERVER);
+                SendMessage(Process.GetCurrentProcess(), MSG_KILL_PIPE_SERVER);
             }
         }
 
