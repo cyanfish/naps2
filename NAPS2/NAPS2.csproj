@@ -150,6 +150,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Setup\Test-Lang.ps1" />
     <None Include="Setup\LanguageComponents.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LanguageComponents.wxs</LastGenOutput>
