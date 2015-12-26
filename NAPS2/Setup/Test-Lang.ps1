@@ -74,4 +74,12 @@ function Publish-NAPS2-Standalone {
 
 Publish-NAPS2-Standalone "StandaloneZIP" ($PublishDir + "naps2-$Version-test_$LanguageCode-portable.zip")
 
+""
 "Saved to " + ($PublishDir + "naps2-$Version-test_$LanguageCode-portable.zip")
+""
+
+$confirmation = Read-Host "Revert changes (y/n)"
+if ($confirmation -eq 'y') {
+    & git checkout -- "..\..\*.po"
+    & git checkout -- "..\..\*.resx"
+}
