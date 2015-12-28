@@ -62,6 +62,8 @@
             this.Controls.Add(this.btnScan);
             this.Controls.Add(this.lblStatus);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FBatchPrompt";
             this.ResumeLayout(false);
             this.PerformLayout();

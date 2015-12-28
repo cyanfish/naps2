@@ -70,6 +70,8 @@
             this.Controls.Add(this.btnRecover);
             this.Controls.Add(this.lblPrompt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FRecover";
             this.ResumeLayout(false);
 

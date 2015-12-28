@@ -74,6 +74,7 @@
             this.Controls.Add(this.labelSub);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.progressBarSub);
+            this.MaximizeBox = false;
             this.Name = "FDownloadProgress";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FDownloadProgress_FormClosing);
             this.ResumeLayout(false);

@@ -61,6 +61,7 @@
             this.Controls.Add(this.labelPage);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.progressBar);
+            this.MaximizeBox = false;
             this.Name = "FScanProgress";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

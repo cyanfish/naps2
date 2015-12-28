@@ -69,6 +69,8 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblPrompt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FPdfPassword";
             this.ResumeLayout(false);
             this.PerformLayout();

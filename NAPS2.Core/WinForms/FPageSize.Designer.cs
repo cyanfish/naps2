@@ -83,6 +83,8 @@
             this.Controls.Add(this.textboxWidth);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FPageSize";
             this.ResumeLayout(false);
             this.PerformLayout();

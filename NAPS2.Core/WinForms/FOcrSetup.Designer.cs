@@ -87,6 +87,8 @@
             this.Controls.Add(this.comboLanguages);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBoxEnableOcr);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FOcrSetup";
             this.ResumeLayout(false);
             this.PerformLayout();

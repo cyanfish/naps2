@@ -322,7 +322,6 @@ namespace NAPS2.WinForms
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblStatus);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FBatchScan";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FBatchScan_FormClosing);
             this.groupboxScanConfig.ResumeLayout(false);

@@ -949,6 +949,6 @@
     <value>FPlaceholders</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.0.3.7448, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31793, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

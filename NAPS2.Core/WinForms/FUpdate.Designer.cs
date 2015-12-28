@@ -70,6 +70,8 @@
             this.Controls.Add(this.btnInstall);
             this.Controls.Add(this.lblPrompt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FUpdate";
             this.ResumeLayout(false);
 

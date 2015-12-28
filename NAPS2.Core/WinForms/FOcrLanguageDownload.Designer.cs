@@ -85,6 +85,8 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.label3);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FOcrLanguageDownload";
             this.ResumeLayout(false);
             this.PerformLayout();

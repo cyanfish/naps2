@@ -245,7 +245,7 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.phButton_Click);
             // 
-            // gboxSubs
+            // gboxPlaceholders
             // 
             this.gboxPlaceholders.Controls.Add(this.button13);
             this.gboxPlaceholders.Controls.Add(this.button1);
@@ -287,6 +287,8 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.gboxPlaceholders);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FPlaceholders";
             this.gboxPlaceholders.ResumeLayout(false);
             this.gboxPlaceholders.PerformLayout();
