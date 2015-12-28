@@ -146,6 +146,7 @@ namespace NAPS2.WinForms
             // 
             // thumbnailList1
             // 
+            this.thumbnailList1.AllowDrop = true;
             this.thumbnailList1.ContextMenuStrip = this.contextMenuStrip;
             resources.ApplyResources(this.thumbnailList1, "thumbnailList1");
             this.thumbnailList1.Name = "thumbnailList1";
@@ -153,7 +154,10 @@ namespace NAPS2.WinForms
             this.thumbnailList1.UseCompatibleStateImageBehavior = false;
             this.thumbnailList1.UserConfigManager = null;
             this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
+            this.thumbnailList1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.thumbnailList1_ItemDrag);
             this.thumbnailList1.SelectedIndexChanged += new System.EventHandler(this.thumbnailList1_SelectedIndexChanged);
+            this.thumbnailList1.DragDrop += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragDrop);
+            this.thumbnailList1.DragEnter += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragEnter);
             this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
             this.thumbnailList1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyUp);
             this.thumbnailList1.MouseLeave += new System.EventHandler(this.thumbnailList1_MouseLeave);

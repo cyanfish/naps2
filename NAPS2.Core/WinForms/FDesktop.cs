@@ -1336,5 +1336,69 @@ namespace NAPS2.WinForms
             form.ShowDialog();
             UpdateScanButton();
         }
+
+        private void thumbnailList1_DragDrop(object sender, DragEventArgs e)
+        {
+            //Return if the items are not selected in the ListView control.
+            if (thumbnailList1.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            //Returns the location of the mouse pointer in the ListView control.
+            Point cp = thumbnailList1.PointToClient(new Point(e.X, e.Y));
+            //Obtain the item that is located at the specified location of the mouse pointer.
+            ListViewItem dragToItem = thumbnailList1.GetItemAt(cp.X, cp.Y);
+            if (dragToItem == null)
+            {
+                return;
+            }
+            //Obtain the index of the item at the mouse pointer.
+            int dragIndex = dragToItem.Index;
+            ListViewItem[] sel = new ListViewItem[thumbnailList1.SelectedItems.Count];
+            for (int i = 0; i <= thumbnailList1.SelectedItems.Count - 1; i++)
+            {
+                sel[i] = thumbnailList1.SelectedItems[i];
+            }
+            for (int i = 0; i < sel.GetLength(0); i++)
+            {
+                //Obtain the ListViewItem to be dragged to the target location.
+                ListViewItem dragItem = sel[i];
+                int itemIndex = dragIndex;
+                if (itemIndex == dragItem.Index)
+                {
+                    return;
+                }
+                if (dragItem.Index < itemIndex)
+                    itemIndex++;
+                else
+                    itemIndex = dragIndex + i;
+                //Insert the item at the mouse pointer.
+                ListViewItem insertItem = (ListViewItem)dragItem.Clone();
+                thumbnailList1.Items.Insert(itemIndex, insertItem);
+                //Removes the item from the initial location while 
+                //the item is moved to the new location.
+                thumbnailList1.Items.Remove(dragItem);
+            }
+        }
+
+        private void thumbnailList1_DragEnter(object sender, DragEventArgs e)
+        {
+            int len = e.Data.GetFormats().Length - 1;
+            int i;
+            for (i = 0; i <= len; i++)
+            {
+                if (e.Data.GetFormats()[i].Equals("System.Windows.Forms.ListView+SelectedListViewItemCollection"))
+                {
+                    //The data from the drag source is moved to the target.	
+                    e.Effect = DragDropEffects.Move;
+                }
+            }
+        }
+
+        private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            //Begins a drag-and-drop operation in the ListView control.
+            thumbnailList1.DoDragDrop(thumbnailList1.SelectedItems, DragDropEffects.Move);
+        }
     }
 }
