@@ -128,8 +128,9 @@ namespace NAPS2.WinForms
         private void DisplayProgress()
         {
             labelTop.Text = string.Format(MiscResources.FilesProgress, filesDownloaded, filesToDownload.Count);
-            progressBarTop.Maximum = filesToDownload.Count;
-            progressBarTop.Value = filesDownloaded;
+            progressBarTop.Maximum = filesToDownload.Count * 1000;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            progressBarTop.Value = filesDownloaded * 1000 + (currentFileSize == 0 ? 0 : (int)(currentFileProgress / currentFileSize * 1000));
             labelSub.Text = string.Format(MiscResources.SizeProgress, (currentFileProgress / 1000000.0).ToString("f1"), (currentFileSize / 1000000.0).ToString("f1"));
             progressBarSub.Maximum = (int)(currentFileSize);
             progressBarSub.Value = (int)(currentFileProgress);
