@@ -241,6 +241,12 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
+    <Compile Include="WinForms\FImportProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FImportProgress.Designer.cs">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -500,6 +506,87 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.tr.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" />
+    <EmbeddedResource Include="WinForms\FImportProgress.bg.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.ca.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.cs.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.da.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.de.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.el.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.es.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.et.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.fi.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.fr.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.he.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.hr.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.hu.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.it.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.nb.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.nl.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.pl.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.pt-BR.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.pt-PT.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.ro.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.ru.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.sq.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.sv.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.tr.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.uk.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImportProgress.zh-TW.resx">
+      <DependentUpon>FImportProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.bg.resx">
       <DependentUpon>FAbout.cs</DependentUpon>
       <SubType>Designer</SubType>

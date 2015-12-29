@@ -19,7 +19,7 @@ namespace NAPS2.ImportExport
             this.imageImporter = imageImporter;
         }
 
-        public IEnumerable<IScannedImage> Import(string filePath)
+        public IEnumerable<IScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
         {
             if (filePath == null)
             {
@@ -28,9 +28,9 @@ namespace NAPS2.ImportExport
             switch (Path.GetExtension(filePath).ToLowerInvariant())
             {
                 case ".pdf":
-                    return pdfImporter.Import(filePath);
+                    return pdfImporter.Import(filePath, progressCallback);
                 default:
-                    return imageImporter.Import(filePath);
+                    return imageImporter.Import(filePath, progressCallback);
             }
         }
     }
