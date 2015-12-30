@@ -168,7 +168,7 @@ namespace NAPS2.Console
                 i++;
                 try
                 {
-                    var images = scannedImageImporter.Import(filePath);
+                    var images = scannedImageImporter.Import(filePath, (j, k) => true);
                     scannedImages.AddRange(images);
                 }
                 catch (Exception ex)

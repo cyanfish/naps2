@@ -18,8 +18,12 @@ namespace NAPS2.ImportExport.Images
             this.scannedImageFactory = scannedImageFactory;
         }
 
-        public IEnumerable<IScannedImage> Import(string filePath)
+        public IEnumerable<IScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
         {
+            if (!progressCallback(0, 1))
+            {
+                yield break;
+            }
             Bitmap toImport;
             try
             {
@@ -33,11 +37,17 @@ namespace NAPS2.ImportExport.Images
             }
             using (toImport)
             {
-                for (int i = 0; i < toImport.GetFrameCount(FrameDimension.Page); ++i)
+                int frameCount = toImport.GetFrameCount(FrameDimension.Page);
+                for (int i = 0; i < frameCount; ++i)
                 {
+                    if (!progressCallback(i, frameCount))
+                    {
+                        yield break;
+                    }
                     toImport.SelectActiveFrame(FrameDimension.Page, i);
                     yield return scannedImageFactory.Create(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat));
                 }
+                progressCallback(frameCount, frameCount);
             }
         }
 

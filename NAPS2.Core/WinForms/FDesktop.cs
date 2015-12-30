@@ -243,7 +243,7 @@ namespace NAPS2.WinForms
                 // No profile for the device we're scanning with, so prompt to create one
                 var editSettingsForm = FormFactory.Create<FEditScanSettings>();
                 editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ??
-                                               new ScanProfile {Version = ScanProfile.CURRENT_VERSION};
+                                               new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
                 try
                 {
                     // Populate the device field automatically (because we can do that!)
@@ -912,28 +912,10 @@ namespace NAPS2.WinForms
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                foreach (var fileName in ofd.FileNames.OrderBy(x => x))
-                {
-                    // TODO: Run in thread, and show a dialog (just like exporting)
-                    // Need to provide count somehow (progress callback). count = # files or # pages
-                    try
-                    {
-                        var images = scannedImageImporter.Import(fileName);
-                        foreach (var img in images)
-                        {
-                            imageList.Images.Add(img);
-                            AppendThumbnail(img);
-                            thumbnailList1.Refresh();
-                            changeTracker.HasUnsavedChanges = true;
-                            Application.DoEvents();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
-                        errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)));
-                    }
-                }
+                var importDialog = FormFactory.Create<FImportProgress>();
+                importDialog.FilesToImport = ofd.FileNames.OrderBy(x => x).ToList();
+                importDialog.ImageCallback = ReceiveScannedImage;
+                importDialog.ShowDialog();
             }
         }
 
