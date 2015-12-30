@@ -336,7 +336,4 @@
   <data name="BatchStatusSaving" xml:space="preserve">
     <value>Saving batch results...</value>
   </data>
-  <data name="Progress" xml:space="preserve">
-    <value>{0} / {1}</value>
-  </data>
 </root>
