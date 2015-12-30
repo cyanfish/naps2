@@ -29,8 +29,12 @@ namespace NAPS2.ImportExport.Pdf
             this.pdfPasswordProvider = pdfPasswordProvider;
         }
 
-        public IEnumerable<IScannedImage> Import(string filePath)
+        public IEnumerable<IScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
         {
+            if (!progressCallback(0, 1))
+            {
+                return Enumerable.Empty<IScannedImage>();
+            }
             int passwordAttempts = 0;
             bool aborted = false;
             try
@@ -56,7 +60,8 @@ namespace NAPS2.ImportExport.Pdf
                     return Enumerable.Empty<IScannedImage>();
                 }
 
-                return document.Pages.Cast<PdfPage>().SelectMany(GetImagesFromPage);
+                int i = 0;
+                return document.Pages.Cast<PdfPage>().TakeWhile(page => progressCallback(i++, document.PageCount)).SelectMany(GetImagesFromPage);
             }
             catch (NotImplementedException e)
             {
