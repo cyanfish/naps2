@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-19 00:09+0000\n"
-"PO-Revision-Date: 2015-11-27 08:53+0000\n"
-"Last-Translator: fadhel <bfadhel2006@yahoo.fr>\n"
+"PO-Revision-Date: 2015-12-27 13:16+0000\n"
+"Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1448614439.0\n"
+"X-POOTLE-MTIME: 1451222202.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -100,19 +100,19 @@ msgstr "Permettre la copie du contenu pour l'accessibilité"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr "Permettre l'assemblage du document"
+msgstr "Permettre l'assemblage des documents"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
-msgstr "Permettre la modification du document"
+msgstr "Permettre la modification des documents"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr "Permettre l'édition de formulaire"
+msgstr "Permettre l'édition de formulaires"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr "Permettre l'impression en Qualité maximale"
+msgstr "Permettre l'impression en qualité maximale"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
@@ -120,11 +120,11 @@ msgstr "Permettre l'impression"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "Désappairer alt. (162534 > 123456)"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Appairer alt. (135642 > 123456)"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
@@ -132,22 +132,22 @@ msgstr "Une erreur s'est produite en tentant d'enregistrer le fichier"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr "Une erreur s'est produite en essayant d'envoyer un email"
+msgstr "Une erreur s'est produite en essayant d'envoyer un courriel"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "Une erreur s'est produite avec le pilote de numérisation"
+msgstr "Une erreur s'est produite avec le pilote d'acquisition"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr ""
+msgstr "Une erreur inconnue s'est produite lors de l'acquisition par lot"
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
-msgstr ""
+msgstr "Appliquer à toutes les {0} images sélectionnées"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -155,7 +155,7 @@ msgstr "Faut-il vraiment supprimer {0} élément(s) ?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Faut-il vraiment supprimer le profil {0} ?"
+msgstr "Faut-il vraiment supprimer le profil « {0} » ?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
@@ -171,11 +171,11 @@ msgstr "Faut-il vraiment annuler les modifications sur {0} image(s) ?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr "Nom de la pièce jointe"
+msgstr "Nom de la pièce jointe :"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr "Auteur"
+msgstr "Auteur :"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
@@ -195,7 +195,7 @@ msgstr "Auto-incrémentation (4 chiffres)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr "Mise à jour automatique"
+msgstr "Mises à jour automatique"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -208,19 +208,19 @@ msgstr "B5 (176x250 mm)"
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
 msgid "Batch Scan"
-msgstr ""
+msgstr "Acquisition par lot"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled"
-msgstr ""
+msgstr "Lot annulé"
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully"
-msgstr ""
+msgstr "Lot terminé avec succès"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
-msgstr ""
+msgstr "Acquisition par lot arrêtée avec l'erreur"
 
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
@@ -263,7 +263,7 @@ msgstr "Annuler"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
-msgstr ""
+msgstr "Annulation"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -284,7 +284,7 @@ msgstr "Tout supprimer"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #: FViewer.resx$tsContrast.Text$Message
 #: FDesktop.resx$tsContrast.Text$Message
@@ -317,7 +317,7 @@ msgstr "Copyright © 2013 Peter De Leeuw"
 #: FDesktop.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
-msgstr "Rognage"
+msgstr "Rogner"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -343,11 +343,11 @@ msgstr "Jour (01-31)"
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Name"
-msgstr "Nom de fichier par défaut"
+msgstr "Nom de fichier par défaut :"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "Désentrelacer"
+msgstr "Désappairer (142536 > 123456)"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
@@ -373,7 +373,7 @@ msgstr "Faut-il que NAPS2 vérifie automatiquement les mises à jour ?"
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
-msgstr "Terminer"
+msgstr "Fermer"
 
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
@@ -405,7 +405,7 @@ msgstr "Éditer..."
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "Envoyer en PDF par courriel"
+msgstr "PDF par courriel"
 
 #: FEmailSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsEmailSettings.Text$Message
@@ -447,7 +447,7 @@ msgstr "Nom du fichier :"
 
 #: FBatchScan.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr ""
+msgstr "Chemin de fichier "
 
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
@@ -457,8 +457,8 @@ msgstr "Retourner"
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
-"Pour les hautes qualités JPEG (> 80), utiliser le profil de Qualité maximale "
-"pour obtenir le meilleur résultat"
+"Pour les hautes qualités JPEG (> 80), utiliser l'option « Qualité maximale » "
+"du profil pour obtenir les meilleurs résultats"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -495,11 +495,11 @@ msgstr "Image"
 #: FImageSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsImageSettings.Text$Message
 msgid "Image Settings"
-msgstr "Configuration d'image"
+msgstr "Paramètres d'image"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
-msgstr "Importer en PDF"
+msgstr "Importer"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -519,7 +519,7 @@ msgstr "Échec de l'installation"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "Classer numériquement"
+msgstr "Appairer (135246 > 123456)"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -527,11 +527,11 @@ msgstr "Fichier JPEG (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr "Qualité JPEG"
+msgstr "Qualité JPEG :"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr "Mots-clés"
+msgstr "Mots-clés :"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -543,7 +543,7 @@ msgstr "Gauche"
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
-msgstr ""
+msgstr "Charger les images dans NAPS2"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
@@ -551,7 +551,7 @@ msgstr "Barre d'outils principale"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Permettre la recherche dans les fichiers PDF (ROC)"
+msgstr "Rendre la recherche possible dans les PDFs issus d'OCR"
 
 #: FEditScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
@@ -571,7 +571,7 @@ msgstr "Mois (01-12)"
 
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
-msgstr ""
+msgstr "Plus d'informations"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
@@ -583,11 +583,11 @@ msgstr "Monter"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr ""
+msgstr "Acquisitions multiples (délai fixe entre les numérisations)"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr ""
+msgstr "Acquisitions multiples (demande à chaque numérisation)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -611,7 +611,7 @@ msgstr "Suivant"
 
 #: FBatchPrompt.resx$$this.Text$Message
 msgid "Next Scan"
-msgstr ""
+msgstr "Prochaine acquisition"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
@@ -623,7 +623,7 @@ msgstr "Aucune page dans le dispositif d'alimentation"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr "Aucun périphérique de numérisation trouvé"
+msgstr "Aucun périphérique d'acquisition trouvé"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -637,23 +637,23 @@ msgstr "Pas maintenant"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr ""
+msgstr "Nombre de numérisations "
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "Reconnaissance de caractères (ROC)"
+msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr "Téléchargement de ROC"
+msgstr "Téléchargement OCR (reconnaissance optique de caractères)"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "Configuration de ROC"
+msgstr "Configuration OCR (reconnaissance optique de caractères)"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr "Langue de ROC"
+msgstr "Langue OCR "
 
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
@@ -673,11 +673,11 @@ msgstr "Ok"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
-msgstr ""
+msgstr "Un fichier par page"
 
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr ""
+msgstr "Un fichier par acquisition"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
@@ -685,7 +685,7 @@ msgstr "Au moins un fichier n'a pas pu être téléchargé"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr ""
+msgstr "Sortie"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -693,13 +693,13 @@ msgstr "Écraser le fichier"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr "Mot de passe du propriétaire"
+msgstr "Mot de passe du propriétaire :"
 
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 msgid "PDF Settings"
-msgstr "Réglages PDF"
+msgstr "Paramètres PDF"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF document (*.pdf)"
@@ -731,7 +731,7 @@ msgstr "Chaînes de substitution"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr ""
+msgstr "Presser « Démarrer » une fois prêt"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -748,11 +748,11 @@ msgstr "Imprimer"
 
 #: FBatchScan.resx$lblProfile.Text$Message
 msgid "Profile"
-msgstr ""
+msgstr "Profil "
 
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
-msgstr "Paramètres du profil"
+msgstr "Paramètres de profil"
 
 #: FProfiles.resx$$this.Text$Message
 #: FDesktop.resx$tsProfiles.Text$Message
@@ -761,7 +761,7 @@ msgstr "Profils"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
-msgstr ""
+msgstr "Prêt pour numériser {0}"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -775,7 +775,7 @@ msgstr "Récupérer des images numérisées"
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr "Mémoriser ces réglages"
+msgstr "Mémoriser ces paramètres"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -840,15 +840,15 @@ msgstr "Enregistrer en PDF"
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr ""
+msgstr "Sauvegarder en un fichier multi-pages unique"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
-msgstr ""
+msgstr "Sauvegarder en fichiers uniques"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
-msgstr ""
+msgstr "Sauvegarde des acquisitions par lot"
 
 #: FPDFSave.resx$label1.Text$Message
 msgid "Saving to PDF"
@@ -872,7 +872,7 @@ msgstr "Numériser"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
 msgid "Scan Configuration"
-msgstr ""
+msgstr "Configuration d'acquisition"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -882,11 +882,11 @@ msgstr "Image numérisée"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
-msgstr "Numérisation de la page {0}..."
+msgstr "Acquisition de la page {0}..."
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr ""
+msgstr "Acquisition page {0} (numérisation {1})..."
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
@@ -898,7 +898,7 @@ msgstr "Tout sélectionner"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Choisir un profil avant de Numériser"
+msgstr "Il faut sélectionner un profil avant de cliquer sur « Numériser »"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
@@ -914,7 +914,7 @@ msgstr "Sélection ({0})"
 
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T (TWAIN only)"
-msgstr ""
+msgstr "Séparer les fichiers par Patch-T (TWAIN seulement)"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -927,19 +927,19 @@ msgstr "Afficher"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr ""
+msgstr "Acquisition unique"
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
-msgstr ""
+msgstr "Démarrer"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr "Sujet"
+msgstr "Sujet :"
 
 #: FBatchScan.resx$linkSubstitutions.Text$Message
 msgid "Substitutions"
-msgstr ""
+msgstr "Substitutions"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -975,8 +975,8 @@ msgstr "Le scanner indiqué est introuvable"
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
-"Le scanner sélectionné ne gère pas de dispositif d'alimentation. Utiliser un "
-"autre pilote si ce scanner en possède un"
+"Le scanner sélectionné ne gère pas de dispositif d'alimentation. Si ce "
+"scanner en possède un, tenter d'utiliser un autre pilote"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -984,11 +984,11 @@ msgstr "Le scanner sélectionné est éteint"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
-msgstr ""
+msgstr "Délai entre 2 numérisations (secondes) "
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr "Titre"
+msgstr "Titre :"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1012,17 +1012,15 @@ msgstr "Interface native"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
-msgstr "Configuration prédéfinie"
+msgstr "Paramètres prédéfinis"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr "Mot de passe utilisateur"
+msgstr "Mot de passe utilisateur :"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr ""
-"Il est nécessaire de télécharger la langue de ROC appropriée au document "
-"numérisé"
+msgstr "Télécharger chaque langue OCR appropriée au document numérisé"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -1039,11 +1037,11 @@ msgstr "Pilote WIA"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
-msgstr "Attente de la fin du transfert TWAIN"
+msgstr "En attente de la fin du transfert TWAIN"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr ""
+msgstr "En attente de l'acquisition {0}"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
@@ -1063,7 +1061,7 @@ msgstr "Vous n'avez pas la permission de copier le contenu du fichier « {0} ».
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "Vous n'avez pas la permission de sauver des fichiers à cet endroit"
+msgstr "Vous n'avez pas la permission de sauver des fichiers à cet emplacement"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"

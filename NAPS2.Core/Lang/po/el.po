@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-19 00:09+0000\n"
-"PO-Revision-Date: 2015-12-21 18:52+0000\n"
+"PO-Revision-Date: 2015-12-31 11:35+0000\n"
 "Last-Translator: solidhit <solidhit2003@yahoo.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1450723922.0\n"
+"X-POOTLE-MTIME: 1451561735.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -88,7 +88,7 @@ msgstr "Όλα ({0})"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
-msgstr "Να Επιτρέπονται Σχόλια"
+msgstr "Να Επιτρέπεται Σχολιασμός"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
@@ -151,23 +151,23 @@ msgstr "Εφαρμογή στις {0} επιλεγμένες εικόνες"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Θέλετε σίγουρα να καθαρίσετε {0} αντικείμενα;"
+msgstr "Θέλετε σίγουρα να καθαριστούν {0} αντικείμενα;"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Θέλετε σίγουρα να διαγράψετε το προφίλ {0};"
+msgstr "Θέλετε σίγουρα να διαγραφεί το προφίλ {0};"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Θέλετε σίγουρα να διαγράψετε {0} αντικείμενα;"
+msgstr "Θέλετε σίγουρα να διαγραφούν {0} αντικείμενα;"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Θέλετε σίγουρα να διαγράψετε {0} προφίλ;"
+msgstr "Θέλετε σίγουρα να διαγραφούν {0} προφίλ;"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "Θέλετε σίγουρα να αναιρέσετε τις αλλαγές σας σε {0} εικόνες;"
+msgstr "Θέλετε σίγουρα να αναιρεθούν οι αλλαγές σε {0} εικόνες;"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
@@ -175,7 +175,7 @@ msgstr "Όνομα Επισύναψης"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr "Συγγραφέας"
+msgstr "Συντάκτης"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
@@ -228,7 +228,7 @@ msgstr "Βάθος bit"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "Αρχεία Bitmap (*.bmp)"
+msgstr "Αρχεία BMP (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
@@ -457,8 +457,8 @@ msgstr "Αναστροφή"
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
-"Για καλύτερα αποτελέσματα σε υψηλές ποιότητες JPEG (80+), υπάρχει στο προφίλ "
-"η επιλογή Μέγιστη Ποιότητα"
+"Για υψηλές ποιότητες JPEG (80+), συνιστάται η επιλογή του προφίλ Μέγιστη "
+"Ποιότητα"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -575,11 +575,11 @@ msgstr "Περισσότερες πληροφορίες"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
-msgstr "Κίνηση Κάτω"
+msgstr "Κύλιση Κάτω"
 
 #: FDesktop.resx$tsMove.TextFirst$Message
 msgid "Move Up"
-msgstr "Κίνηση Πάνω"
+msgstr "Κύλιση Πάνω"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -595,7 +595,7 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr "Το όνομα λείπει"
+msgstr "Απουσιάζει το όνομα"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
@@ -685,7 +685,7 @@ msgstr "Αποτυχία λήψης για ένα ή περισσότερα αρ
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr "Διαχείριση Αποτελέσματος"
+msgstr "Αποτέλεσμα"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -693,7 +693,7 @@ msgstr "Αντικατάσταση Αρχείου"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr "Κωδικός Ιδιοκτήτη"
+msgstr "Κωδικός Κατόχου"
 
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
@@ -898,11 +898,11 @@ msgstr "Επιλογή Όλων"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Να επιλεγεί ένα προφίλ πριν γίνει κλικ στην Σάρωση"
+msgstr "Απαραίτητη η επιλογή προφίλ πριν γίνει κλικ στην Σάρωση"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr "Να επιλεγούν μία ή περισσότερες γλώσσες"
+msgstr "Επιλογή μίας ή περισσοτέρων γλωσσών"
 
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
@@ -956,8 +956,8 @@ msgstr "Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί"
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
-"Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF δημιουργημένα από "
-"το NAPS2 μπορεί να εισαχθούν"
+"Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF που έχουν παραχθεί "
+"από το NAPS2 είναι συμβατά"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -975,8 +975,8 @@ msgstr "Ο επιλεγμένος σαρωτής δεν μπόρεσε να βρ
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
-"Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν πράγματι ο "
-"σαρωτής διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού"
+"Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής "
+"πράγματι διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1041,7 +1041,7 @@ msgstr "Αναμονή ολοκλήρωσης TWAIN"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr "Αναμονή σάρωσης {0}"
+msgstr "Σε αναμονή για σάρωση {0}"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
@@ -1066,8 +1066,8 @@ msgstr "Δεν υπάρχει δικαίωμα για να σωθούν αρχε
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr ""
-"Έχετε μη αποθηκευμένες αλλαγές. Είστε σίγουροι ότι θέλετε να βγείτε και να "
-"απορρίψετε αυτές τις αλλαγές;"
+"Υπάρχουν αλλαγές που δεν έχουν σωθεί. Θέλετε σίγουρα να τερματιστεί η "
+"εφαρμογή;"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
@@ -1124,7 +1124,7 @@ msgstr "{0} / {1} αρχεία"
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
 "Υπάρχουν {0} εικόνες που σαρώθηκαν στις {1} και ώρα {2} οι οποίες ενδέχεται "
-"να μην έχουν σωθεί. Θέλετε να τις ανακτήσετε;"
+"να μην έχουν σωθεί. Θέλετε να ανακτηθούν;"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
