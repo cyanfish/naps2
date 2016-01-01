@@ -99,7 +99,6 @@ namespace NAPS2.WinForms
             this.stillImage = stillImage;
             InitializeComponent();
 
-            thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
             Shown += FDesktop_Shown;
             FormClosing += FDesktop_FormClosing;
             Closed += FDesktop_Closed;
@@ -130,8 +129,11 @@ namespace NAPS2.WinForms
             btnZoomOut.Location = new Point(btnZoomOut.Location.X, thumbnailList1.Height - 33);
             layoutManager = new LayoutManager(this)
                    .Bind(btnZoomIn, btnZoomOut)
-                       .BottomToForm()
+                       .BottomTo(() => thumbnailList1.Height)
                    .Activate();
+
+            thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
+            thumbnailList1.SizeChanged += (sender, args) => layoutManager.UpdateLayout();
         }
 
         private void InitLanguageDropdown()
