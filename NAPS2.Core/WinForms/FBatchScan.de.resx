@@ -135,7 +135,7 @@
         <value>1</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>Press Start when ready.</value>
+        <value>Um zu beginnen Start drücken.</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -235,7 +235,7 @@
         <value>2</value>
     </data>
     <data name="lblTimeBetweenScans.Text" xml:space="preserve">
-        <value>Time between scans (seconds):</value>
+        <value>Zeit zwischen Scans (Sekunden):</value>
     </data>
     <data name="&gt;&gt;lblTimeBetweenScans.Name" xml:space="preserve">
         <value>lblTimeBetweenScans</value>
@@ -283,7 +283,7 @@
         <value>0</value>
     </data>
     <data name="lblNumberOfScans.Text" xml:space="preserve">
-        <value>Number of scans:</value>
+        <value>Anzahl der Scans:</value>
     </data>
     <data name="&gt;&gt;lblNumberOfScans.Name" xml:space="preserve">
         <value>lblNumberOfScans</value>
@@ -334,7 +334,7 @@
         <value>2</value>
     </data>
     <data name="rdMultipleScansPrompt.Text" xml:space="preserve">
-        <value>Multiple scans (prompt between scans)</value>
+        <value>Mehrere Scans (Zwischen den Scans nachfragen)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansPrompt.Name" xml:space="preserve">
         <value>rdMultipleScansPrompt</value>
@@ -364,7 +364,7 @@
         <value>1</value>
     </data>
     <data name="rdMultipleScansDelay.Text" xml:space="preserve">
-        <value>Multiple scans (fixed delay between scans)</value>
+        <value>Mehrere Scans (Konstante Verzögerung zwischen Scans)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansDelay.Name" xml:space="preserve">
         <value>rdMultipleScansDelay</value>
@@ -391,7 +391,7 @@
         <value>0</value>
     </data>
     <data name="rdSingleScan.Text" xml:space="preserve">
-        <value>Single scan</value>
+        <value>Einzelner Scan</value>
     </data>
     <data name="&gt;&gt;rdSingleScan.Name" xml:space="preserve">
         <value>rdSingleScan</value>
@@ -505,7 +505,7 @@
         <value>0</value>
     </data>
     <data name="lblProfile.Text" xml:space="preserve">
-        <value>Profile:</value>
+        <value>Profil:</value>
     </data>
     <data name="&gt;&gt;lblProfile.Name" xml:space="preserve">
         <value>lblProfile</value>
@@ -529,7 +529,7 @@
         <value>4</value>
     </data>
     <data name="groupboxScanConfig.Text" xml:space="preserve">
-        <value>Scan Configuration</value>
+        <value>Scan-Einstellungen</value>
     </data>
     <data name="&gt;&gt;groupboxScanConfig.Name" xml:space="preserve">
         <value>groupboxScanConfig</value>
@@ -556,7 +556,7 @@
         <value>3</value>
     </data>
     <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-        <value>More info</value>
+        <value>Mehr Info</value>
     </data>
     <data name="&gt;&gt;linkPatchCodeInfo.Name" xml:space="preserve">
         <value>linkPatchCodeInfo</value>
@@ -586,7 +586,7 @@
         <value>2</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T (TWAIN only)</value>
+        <value>Dateien auf Basis von Patch-T trennen (nur TWAIN)</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -616,7 +616,7 @@
         <value>1</value>
     </data>
     <data name="rdFilePerPage.Text" xml:space="preserve">
-        <value>One file per page</value>
+        <value>Eine Datei je Seite</value>
     </data>
     <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
         <value>rdFilePerPage</value>
@@ -646,7 +646,7 @@
         <value>0</value>
     </data>
     <data name="rdFilePerScan.Text" xml:space="preserve">
-        <value>One file per scan</value>
+        <value>Eine Datei je Scan</value>
     </data>
     <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopLeft</value>
@@ -727,7 +727,7 @@
         <value>4</value>
     </data>
     <data name="linkSubstitutions.Text" xml:space="preserve">
-        <value>Substitutions</value>
+        <value>Ersetzungen</value>
     </data>
     <data name="&gt;&gt;linkSubstitutions.Name" xml:space="preserve">
         <value>linkSubstitutions</value>
@@ -778,7 +778,7 @@
         <value>0</value>
     </data>
     <data name="lblFilePath.Text" xml:space="preserve">
-        <value>File path:</value>
+        <value>Dateipfad:</value>
     </data>
     <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
         <value>lblFilePath</value>
@@ -829,7 +829,7 @@
         <value>2</value>
     </data>
     <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-        <value>Save to multiple files</value>
+        <value>In mehrere Dateien speichern</value>
     </data>
     <data name="&gt;&gt;rdSaveToMultipleFiles.Name" xml:space="preserve">
         <value>rdSaveToMultipleFiles</value>
@@ -859,7 +859,7 @@
         <value>1</value>
     </data>
     <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-        <value>Save to a single file</value>
+        <value>In eine einzige Datei speichern</value>
     </data>
     <data name="&gt;&gt;rdSaveToSingleFile.Name" xml:space="preserve">
         <value>rdSaveToSingleFile</value>
@@ -889,7 +889,7 @@
         <value>0</value>
     </data>
     <data name="rdLoadIntoNaps2.Text" xml:space="preserve">
-        <value>Load images into NAPS2</value>
+        <value>Bilder in NAPS2 laden</value>
     </data>
     <data name="&gt;&gt;rdLoadIntoNaps2.Name" xml:space="preserve">
         <value>rdLoadIntoNaps2</value>
@@ -934,7 +934,7 @@
         <value>7</value>
     </data>
     <data name="groupboxOutput.Text" xml:space="preserve">
-        <value>Output</value>
+        <value>Ausgabe</value>
     </data>
     <data name="&gt;&gt;groupboxOutput.Name" xml:space="preserve">
         <value>groupboxOutput</value>
@@ -984,7 +984,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Batch Scan</value>
+        <value>Stapel-Scan</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
         <value>toolStripSeparator1</value>
@@ -996,7 +996,7 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.2.3.27918, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.3.1.31757, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;folderBrowserDialog1.Name" xml:space="preserve">
         <value>folderBrowserDialog1</value>
@@ -1008,6 +1008,6 @@
         <value>FBatchScan</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.27918, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31757, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

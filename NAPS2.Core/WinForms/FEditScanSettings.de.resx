@@ -319,7 +319,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Benutze natives WIA User Interface</value>
+        <value>Native Benutzerschnittstelle verwenden</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -370,7 +370,7 @@
         <value>9</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Farbtiefe: :</value>
+        <value>Farbtiefe:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -825,7 +825,7 @@
         <value>25</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Horizontale Ausrichtung::</value>
+        <value>Horizontale Ausrichtung:</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>
@@ -984,7 +984,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>max. Qualität (große Dateien)</value>
+        <value>Max. Qualität (große Dateien)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>

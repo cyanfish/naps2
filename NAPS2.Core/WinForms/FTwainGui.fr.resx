@@ -136,7 +136,7 @@
         <value>1</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Attente de la fin du transfert TWAIN...</value>
+        <value>En attente de la fin du transfert TWAIN...</value>
     </data>
     <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleCenter</value>

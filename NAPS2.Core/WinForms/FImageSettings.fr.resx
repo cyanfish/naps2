@@ -190,7 +190,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Mémoriser ces réglages</value>
+        <value>Mémoriser ces paramètres</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -268,7 +268,7 @@
         <value>28</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Nom de fichier par défaut</value>
+        <value>Nom de fichier par défaut :</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -295,7 +295,7 @@
         <value>29</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Qualité JPEG</value>
+        <value>Qualité JPEG :</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -397,7 +397,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>Pour les hautes qualités JPEG (&gt; 80), utiliser le profil de Qualité maximale pour obtenir le meilleur résultat.</value>
+        <value>Pour les hautes qualités JPEG (&gt; 80), utiliser l'option « Qualité maximale » du profil pour obtenir les meilleurs résultats.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>
@@ -450,7 +450,7 @@
         <value>400, 247</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Configuration d'image</value>
+        <value>Paramètres d'image</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

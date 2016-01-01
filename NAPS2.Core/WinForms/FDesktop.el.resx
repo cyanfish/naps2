@@ -697,10 +697,10 @@
         <value>96, 51</value>
     </data>
     <data name="tsMove.TextFirst" xml:space="preserve">
-        <value>Κίνηση Πάνω</value>
+        <value>Κύλιση Πάνω</value>
     </data>
     <data name="tsMove.TextSecond" xml:space="preserve">
-        <value>Κίνηση Κάτω</value>
+        <value>Κύλιση Κάτω</value>
     </data>
     <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

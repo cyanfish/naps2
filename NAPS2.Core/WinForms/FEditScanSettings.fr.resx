@@ -292,7 +292,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Configuration prédéfinie</value>
+        <value>Paramètres prédéfinis</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -1088,7 +1088,7 @@
         <value>448, 468</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Paramètres du profil</value>
+        <value>Paramètres de profil</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

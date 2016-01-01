@@ -316,7 +316,7 @@
         <value>7</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Συγγραφέας</value>
+        <value>Συντάκτης</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -538,7 +538,7 @@
         <value>13</value>
     </data>
     <data name="cbAllowAnnotations.Text" xml:space="preserve">
-        <value>Να Επιτρέπονται Σχόλια</value>
+        <value>Να Επιτρέπεται Σχολιασμός</value>
     </data>
     <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
         <value>cbAllowAnnotations</value>
@@ -781,7 +781,7 @@
         <value>1</value>
     </data>
     <data name="lblOwnerPassword.Text" xml:space="preserve">
-        <value>Κωδικός Ιδιοκτήτη</value>
+        <value>Κωδικός Κατόχου</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>

@@ -190,7 +190,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Remember these settings</value>
+        <value>Diese Einstellungen merken</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -217,7 +217,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Restore &amp;Defaults</value>
+        <value>Standardeinstellungen wiederherstellen</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -268,7 +268,7 @@
         <value>28</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Attachment Name</value>
+        <value>Name des Anhangs</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -298,7 +298,7 @@
         <value>31</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Platzhalter</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -351,7 +351,7 @@
         <value>400, 163</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Email Settings</value>
+        <value>E-Mail-Einstellungen</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

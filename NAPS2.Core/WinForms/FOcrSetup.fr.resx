@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-        <value>Permettre la recherche dans les fichiers PDF (ROC)</value>
+        <value>Rendre la recherche possible dans les PDFs issus d'OCR</value>
     </data>
     <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
         <value>checkBoxEnableOcr</value>
@@ -159,7 +159,7 @@
         <value>1</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Langue de ROC:</value>
+        <value>Langue OCR :</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -312,12 +312,12 @@
         <value>336, 139</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Configuration de ROC</value>
+        <value>Configuration OCR (reconnaissance optique de caractères)</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrSetup</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.33441, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31793, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

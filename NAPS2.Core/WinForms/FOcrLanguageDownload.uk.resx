@@ -311,6 +311,6 @@
         <value>FOcrLanguageDownload</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=3.3.5.33441, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31408, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

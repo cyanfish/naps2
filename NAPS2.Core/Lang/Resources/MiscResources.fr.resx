@@ -133,7 +133,7 @@
         <value>Faut-il vraiment supprimer {0} profil(s) ?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Faut-il vraiment supprimer le profil {0} ?</value>
+        <value>Faut-il vraiment supprimer le profil « {0} » ?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
         <value>Le fichier « {0} » existe déjà. Faut-il l'écraser ?</value>
@@ -148,7 +148,7 @@
         <value>Le scanner sélectionné est éteint.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Vous n'avez pas la permission de sauver des fichiers à cet endroit.</value>
+        <value>Vous n'avez pas la permission de sauver des fichiers à cet emplacement.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Erreur</value>
@@ -187,7 +187,7 @@
         <value>Aucun périphérique sélectionné.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>Aucun périphérique de numérisation trouvé.</value>
+        <value>Aucun périphérique d'acquisition trouvé.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
         <value>Écraser le fichier</value>
@@ -199,19 +199,19 @@
         <value>Image numérisée</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Choisir un profil avant de Numériser.</value>
+        <value>Il faut sélectionner un profil avant de cliquer sur « Numériser ».</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Une erreur s'est produite avec le pilote de numérisation.</value>
+        <value>Une erreur s'est produite avec le pilote d'acquisition.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Version {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>Une erreur s'est produite en essayant d'envoyer un email.</value>
+        <value>Une erreur s'est produite en essayant d'envoyer un courriel.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Mise à jour automatique</value>
+        <value>Mises à jour automatique</value>
     </data>
     <data name="Download" xml:space="preserve">
         <value>Télécharger</value>
@@ -286,10 +286,10 @@
         <value>Modifications non sauvegardées</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Numérisation de la page {0}...</value>
+        <value>Acquisition de la page {0}...</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>Le scanner sélectionné ne gère pas de dispositif d'alimentation. Utiliser un autre pilote si ce scanner en possède un.</value>
+        <value>Le scanner sélectionné ne gère pas de dispositif d'alimentation. Si ce scanner en possède un, tenter d'utiliser un autre pilote.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
         <value>Aucune page dans le dispositif d'alimentation.</value>
@@ -304,36 +304,36 @@
         <value>de {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>Une erreur inconnue s'est produite lors de l'acquisition par lot.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>Lot annulé.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Cancelling....</value>
+        <value>Annulation....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>Lot terminé avec succès.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>Acquisition par lot arrêtée avec l'erreur.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>Numérisation de la page {0}......</value>
+        <value>Acquisition de la page {0}......</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Scanning page {0} (scan {1})...</value>
+        <value>Acquisition page {0} (numérisation {1})......</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Waiting for scan {0}...</value>
+        <value>En attente de l'acquisition {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>Annuler</value>
     </data>
     <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Fermer</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Saving batch results...</value>
+        <value>Sauvegarde des acquisitions par lot...</value>
     </data>
 </root>

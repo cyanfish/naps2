@@ -124,16 +124,16 @@
         <value>Καθαρισμός</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Θέλετε σίγουρα να καθαρίσετε {0} αντικείμενα;</value>
+        <value>Θέλετε σίγουρα να καθαριστούν {0} αντικείμενα;</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Θέλετε σίγουρα να διαγράψετε {0} αντικείμενα;</value>
+        <value>Θέλετε σίγουρα να διαγραφούν {0} αντικείμενα;</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Θέλετε σίγουρα να διαγράψετε {0} προφίλ;</value>
+        <value>Θέλετε σίγουρα να διαγραφούν {0} προφίλ;</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Θέλετε σίγουρα να διαγράψετε το προφίλ {0};</value>
+        <value>Θέλετε σίγουρα να διαγραφεί το προφίλ {0};</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
         <value>Το αρχείο {0} υπάρχει ήδη. Θέλετε να αντικατασταθεί;</value>
@@ -154,7 +154,7 @@
         <value>Σφάλμα</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Αρχεία Bitmap (*.bmp)</value>
+        <value>Αρχεία BMP (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
         <value>Αρχεία EMF (*.emf)</value>
@@ -178,7 +178,7 @@
         <value>Αρχεία TIFF (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
-        <value>Το όνομα λείπει.</value>
+        <value>Απουσιάζει το όνομα.</value>
     </data>
     <data name="NAPS2" xml:space="preserve">
         <value>NAPS2</value>
@@ -199,7 +199,7 @@
         <value>Σαρωμένη Εικόνα</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Να επιλεγεί ένα προφίλ πριν γίνει κλικ στην Σάρωση.</value>
+        <value>Απαραίτητη η επιλογή προφίλ πριν γίνει κλικ στην Σάρωση.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>Σφάλμα του οδηγού σάρωσης.</value>
@@ -259,7 +259,7 @@
         <value>Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF δημιουργημένα από το NAPS2 μπορεί να εισαχθούν.</value>
+        <value>Το αρχείο '{0}' δεν μπόρεσε να εισαχθεί. Μόνο αρχεία PDF που έχουν παραχθεί από το NAPS2 είναι συμβατά.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
         <value>Σφάλμα Λήψης</value>
@@ -274,13 +274,13 @@
         <value>Σάρωση</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Θέλετε σίγουρα να αναιρέσετε τις αλλαγές σας σε {0} εικόνες;</value>
+        <value>Θέλετε σίγουρα να αναιρεθούν οι αλλαγές σε {0} εικόνες;</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
         <value>Αρχικοποίηση Εικόνας</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>Έχετε μη αποθηκευμένες αλλαγές. Είστε σίγουροι ότι θέλετε να βγείτε και να απορρίψετε αυτές τις αλλαγές;</value>
+        <value>Υπάρχουν αλλαγές που δεν έχουν σωθεί. Θέλετε σίγουρα να τερματιστεί η εφαρμογή;</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
         <value>Μη Αποθηκευμένες Αλλαγές</value>
@@ -289,7 +289,7 @@
         <value>Σάρωση σελίδας {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν πράγματι ο σαρωτής διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού.</value>
+        <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής πράγματι διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
         <value>Δεν υπάρχουν σελίδες στον τροφοδότη.</value>
@@ -325,7 +325,7 @@
         <value>Σάρωση σελίδας {0} (σάρωση {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Αναμονή σάρωσης {0}...</value>
+        <value>Σε αναμονή για σάρωση {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>Άκυρο</value>

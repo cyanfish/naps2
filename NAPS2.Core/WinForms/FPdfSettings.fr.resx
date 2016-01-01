@@ -214,7 +214,7 @@
         <value>11</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Mots-clés</value>
+        <value>Mots-clés :</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -265,7 +265,7 @@
         <value>9</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Sujet</value>
+        <value>Sujet :</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -316,7 +316,7 @@
         <value>7</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Auteur</value>
+        <value>Auteur :</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -367,7 +367,7 @@
         <value>5</value>
     </data>
     <data name="label4.Text" xml:space="preserve">
-        <value>Titre</value>
+        <value>Titre :</value>
     </data>
     <data name="&gt;&gt;label4.Name" xml:space="preserve">
         <value>label4</value>
@@ -478,7 +478,7 @@
         <value>8</value>
     </data>
     <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
-        <value>Permettre l'impression en Qualité maximale</value>
+        <value>Permettre l'impression en qualité maximale</value>
     </data>
     <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
         <value>cbAllowFullQualityPrinting</value>
@@ -508,7 +508,7 @@
         <value>14</value>
     </data>
     <data name="cbAllowFormFilling.Text" xml:space="preserve">
-        <value>Permettre l'édition de formulaire</value>
+        <value>Permettre l'édition de formulaires</value>
     </data>
     <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
         <value>cbAllowFormFilling</value>
@@ -628,7 +628,7 @@
         <value>10</value>
     </data>
     <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>Permettre l'assemblage du document</value>
+        <value>Permettre l'assemblage des documents</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
         <value>cbAllowDocumentAssembly</value>
@@ -655,7 +655,7 @@
         <value>9</value>
     </data>
     <data name="cbAllowDocumentModification.Text" xml:space="preserve">
-        <value>Permettre la modification du document</value>
+        <value>Permettre la modification des documents</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentModification.Name" xml:space="preserve">
         <value>cbAllowDocumentModification</value>
@@ -733,7 +733,7 @@
         <value>3</value>
     </data>
     <data name="lblUserPassword.Text" xml:space="preserve">
-        <value>Mot de passe utilisateur</value>
+        <value>Mot de passe utilisateur :</value>
     </data>
     <data name="&gt;&gt;lblUserPassword.Name" xml:space="preserve">
         <value>lblUserPassword</value>
@@ -781,7 +781,7 @@
         <value>1</value>
     </data>
     <data name="lblOwnerPassword.Text" xml:space="preserve">
-        <value>Mot de passe du propriétaire</value>
+        <value>Mot de passe du propriétaire :</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>
@@ -859,7 +859,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Mémoriser ces réglages</value>
+        <value>Mémoriser ces paramètres</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -967,7 +967,7 @@
         <value>32</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Nom de fichier par défaut</value>
+        <value>Nom de fichier par défaut :</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -1020,7 +1020,7 @@
         <value>400, 658</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Réglages PDF</value>
+        <value>Paramètres PDF</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>
