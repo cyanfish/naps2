@@ -93,7 +93,7 @@ namespace NAPS2.WinForms
                     ControlPaint.DrawImageDisabled(e.Graphics, ImageFirst, Padding.Left, Height / 4 - ImageFirst.Height / 2, Color.Transparent);
                 }
 
-                var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, Width - (Padding.Left + ImageFirst.Width) + 1, Height / 2);
+                var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, Width - (Padding.Left + ImageFirst.Width) + 2, Height / 2);
                 renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextFirst, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak));
             }
 
@@ -108,7 +108,7 @@ namespace NAPS2.WinForms
                     ControlPaint.DrawImageDisabled(e.Graphics, ImageSecond, Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2, Color.Transparent);
                 }
 
-                var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, Width - (Padding.Left + ImageSecond.Width) + 1, Height / 2);
+                var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, Width - (Padding.Left + ImageSecond.Width) + 2, Height / 2);
                 renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextSecond, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak));
             }
 
