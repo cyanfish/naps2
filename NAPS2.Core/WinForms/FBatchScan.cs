@@ -22,7 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,7 +33,6 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Util;
-using NTwain.Data;
 
 namespace NAPS2.WinForms
 {
@@ -49,11 +47,12 @@ namespace NAPS2.WinForms
         private readonly IUserConfigManager userConfigManager;
         private readonly BatchScanPerformer batchScanPerformer;
         private readonly IErrorOutput errorOutput;
+        private readonly ThreadFactory threadFactory;
 
         private bool batchRunning = false;
         private bool cancelBatch = false;
 
-        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput)
+        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, ThreadFactory threadFactory)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;
@@ -62,6 +61,7 @@ namespace NAPS2.WinForms
             this.userConfigManager = userConfigManager;
             this.batchScanPerformer = batchScanPerformer;
             this.errorOutput = errorOutput;
+            this.threadFactory = threadFactory;
             InitializeComponent();
 
             RestoreFormState = false;
@@ -298,7 +298,7 @@ namespace NAPS2.WinForms
             EnableDisableSettings(false);
 
             // Start the batch
-            Task.Factory.StartNew(DoBatchScan);
+            threadFactory.CreateThread(DoBatchScan).Start();
 
             // Save settings for next time (could also do on form close)
             userConfigManager.Config.LastBatchSettings = BatchSettings;
