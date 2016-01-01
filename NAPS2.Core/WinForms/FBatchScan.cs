@@ -168,7 +168,19 @@ namespace NAPS2.WinForms
         {
             comboProfile.Items.Clear();
             comboProfile.Items.AddRange(profileManager.Profiles.Cast<object>().ToArray());
-            comboProfile.Text = BatchSettings.ProfileDisplayName ?? profileManager.DefaultProfile.DisplayName;
+            if (BatchSettings.ProfileDisplayName != null &&
+                profileManager.Profiles.Any(x => x.DisplayName == BatchSettings.ProfileDisplayName))
+            {
+                comboProfile.Text = BatchSettings.ProfileDisplayName;
+            }
+            else if (profileManager.DefaultProfile != null)
+            {
+                comboProfile.Text = profileManager.DefaultProfile.DisplayName;
+            }
+            else
+            {
+                comboProfile.Text = "";
+            }
             ProfileChanged();
         }
 
