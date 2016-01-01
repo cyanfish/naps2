@@ -11,6 +11,7 @@ using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Twain;
 using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Batch
@@ -38,13 +39,13 @@ namespace NAPS2.Scan.Batch
             this.formFactory = formFactory;
         }
 
-        public void PerformBatchScan(BatchSettings settings, IWin32Window dialogParent, Action<IScannedImage> imageCallback, Func<string, bool> progressCallback)
+        public void PerformBatchScan(BatchSettings settings, Form batchForm, Action<IScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
             var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, imageSaver, pdfSettingsContainer, userConfigManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
-                DialogParent = dialogParent,
+                BatchForm = batchForm,
                 LoadImageCallback = imageCallback
             };
             state.Do();
@@ -81,7 +82,7 @@ namespace NAPS2.Scan.Batch
 
             public Func<string, bool> ProgressCallback { get; set; }
 
-            public IWin32Window DialogParent { get; set; }
+            public Form BatchForm { get; set; }
 
             public Action<IScannedImage> LoadImageCallback { get; set; }
 
@@ -123,7 +124,12 @@ namespace NAPS2.Scan.Batch
                     {
                         if (i != 0)
                         {
-                            Thread.Sleep(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds));
+                            string status = string.Format(MiscResources.BatchStatusWaitingForScan, i + 1);
+                            if (!ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds), TimeSpan.FromSeconds(1),
+                                () => ProgressCallback(status)))
+                            {
+                                return;
+                            }
                         }
                         if (!InputOneScan(i))
                         {
@@ -152,6 +158,28 @@ namespace NAPS2.Scan.Batch
                 }
             }
 
+            private bool ThreadSleepWithCancel(TimeSpan sleepDuration, TimeSpan cancelCheckInterval, Func<bool> cancelCheck)
+            {
+                while (sleepDuration > TimeSpan.Zero)
+                {
+                    if (sleepDuration > cancelCheckInterval)
+                    {
+                        Thread.Sleep(cancelCheckInterval);
+                        sleepDuration -= cancelCheckInterval;
+                    }
+                    else
+                    {
+                        Thread.Sleep(sleepDuration);
+                        sleepDuration = TimeSpan.Zero;
+                    }
+                    if (!cancelCheck())
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
             private bool InputOneScan(int scanNumber)
             {
                 var scan = new List<IScannedImage>();
@@ -164,16 +192,15 @@ namespace NAPS2.Scan.Batch
                 }
                 try
                 {
-                    scanPerformer.PerformScan(profile, scanParams, DialogParent, image =>
+                    if (profile.DriverName == TwainScanDriver.DRIVER_NAME || profile.UseNativeUI)
                     {
-                        scan.Add(image);
-                        if (!ProgressCallback(scanNumber == -1
-                            ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                            : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1)))
-                        {
-                            throw new OperationCanceledException();
-                        }
-                    });
+                        // Apart from WIA with predefined settings, the actual scan needs to be done on the UI thread
+                        BatchForm.Invoke(new Action(() => DoScan(scanNumber, scan, pageNumber)));
+                    }
+                    else
+                    {
+                        DoScan(scanNumber, scan, pageNumber);
+                    }
                 }
                 catch (OperationCanceledException)
                 {
@@ -187,6 +214,20 @@ namespace NAPS2.Scan.Batch
                 }
                 scans.Add(scan);
                 return true;
+            }
+
+            private void DoScan(int scanNumber, List<IScannedImage> scan, int pageNumber)
+            {
+                scanPerformer.PerformScan(profile, scanParams, BatchForm, image =>
+                {
+                    scan.Add(image);
+                    if (!ProgressCallback(scanNumber == -1
+                        ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
+                        : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1)))
+                    {
+                        throw new OperationCanceledException();
+                    }
+                });
             }
 
             private bool PromptForNextScan()

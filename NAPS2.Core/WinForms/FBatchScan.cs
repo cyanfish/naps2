@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
@@ -51,6 +52,7 @@ namespace NAPS2.WinForms
 
         private bool batchRunning = false;
         private bool cancelBatch = false;
+        private Thread batchThread;
 
         public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, ThreadFactory threadFactory)
         {
@@ -298,7 +300,8 @@ namespace NAPS2.WinForms
             EnableDisableSettings(false);
 
             // Start the batch
-            threadFactory.CreateThread(DoBatchScan).Start();
+            batchThread = threadFactory.CreateThread(DoBatchScan);
+            batchThread.Start();
 
             // Save settings for next time (could also do on form close)
             userConfigManager.Config.LastBatchSettings = BatchSettings;
@@ -331,16 +334,8 @@ namespace NAPS2.WinForms
         {
             try
             {
-                var profile = profileManager.Profiles.First(x => x.DisplayName == BatchSettings.ProfileDisplayName);
-                if (profile.DriverName == TwainScanDriver.DRIVER_NAME || profile.UseNativeUI)
-                {
-                    // We would prefer not to run this on the UI thread, but will if necessary
-                    Invoke(new Action(() => batchScanPerformer.PerformBatchScan(BatchSettings, this, image => Invoke(new Action(() => ImageCallback(image))), ProgressCallback())));
-                }
-                else
-                {
-                    batchScanPerformer.PerformBatchScan(BatchSettings, this, image => Invoke(new Action(() => ImageCallback(image))), ProgressCallback());
-                }
+                batchScanPerformer.PerformBatchScan(BatchSettings, this,
+                    image => Invoke(new Action(() => ImageCallback(image))), ProgressCallback());
                 Invoke(new Action(() =>
                 {
                     lblStatus.Text = cancelBatch
