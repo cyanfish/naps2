@@ -193,7 +193,7 @@
         <value>Datei überschreiben</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
-        <value>{0} der Bilder, die am {1} um {2} eingescannt wurden, wurden nicht gespeichert, können aber wiederhergestellt werden. Sollen sie wiederhergestellt werden?</value>
+        <value>{0} of {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
         <value>Eingelesenes Bild</value>
