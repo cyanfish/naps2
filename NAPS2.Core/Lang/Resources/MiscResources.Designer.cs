@@ -556,6 +556,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver..
+        /// </summary>
+        internal static string NoDuplexSupport {
+            get {
+                return ResourceManager.GetString("NoDuplexSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver..
         /// </summary>
         internal static string NoFeederSupport {

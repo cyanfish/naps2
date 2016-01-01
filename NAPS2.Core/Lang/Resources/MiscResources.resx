@@ -336,4 +336,7 @@
   <data name="BatchStatusSaving" xml:space="preserve">
     <value>Saving batch results...</value>
   </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+  </data>
 </root>

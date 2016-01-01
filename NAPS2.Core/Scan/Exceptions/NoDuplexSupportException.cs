@@ -25,24 +25,24 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan.Exceptions
 {
-    public class NoFeederSupportException : ScanDriverException
+    public class NoDuplexSupportException : ScanDriverException
     {
-        public NoFeederSupportException()
-            : base(MiscResources.NoFeederSupport)
+        public NoDuplexSupportException()
+            : base(MiscResources.NoDuplexSupport)
         {
         }
 
-        public NoFeederSupportException(string message)
+        public NoDuplexSupportException(string message)
             : base(message)
         {
         }
 
-        public NoFeederSupportException(Exception innerException)
-            : base(MiscResources.NoFeederSupport, innerException)
+        public NoDuplexSupportException(Exception innerException)
+            : base(MiscResources.NoDuplexSupport, innerException)
         {
         }
 
-        public NoFeederSupportException(string message, Exception innerException)
+        public NoDuplexSupportException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

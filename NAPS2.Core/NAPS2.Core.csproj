@@ -84,6 +84,7 @@
     <Compile Include="ImportExport\Pdf\PdfSaver.cs" />
     <Compile Include="Scan\Batch\BatchScanPerformer.cs" />
     <Compile Include="Scan\Batch\BatchSettings.cs" />
+    <Compile Include="Scan\Exceptions\NoDuplexSupportException.cs" />
     <Compile Include="Scan\Images\Transforms\TrueContrastTransform.cs" />
     <Compile Include="Scan\PatchCode.cs" />
     <Compile Include="Scan\ProfileNameTracker.cs" />

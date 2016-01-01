@@ -63,6 +63,11 @@ namespace NAPS2.Scan.Wia
                 {
                     throw new NoFeederSupportException();
                 }
+                bool supportsDuplex = eventLoop.GetSync(wia => WiaApi.DeviceSupportsDuplex(wia.Device));
+                if (ScanProfile.PaperSource == ScanSource.Duplex && !supportsDuplex)
+                {
+                    throw new NoDuplexSupportException();
+                }
                 int pageNumber = 1;
                 while (true)
                 {

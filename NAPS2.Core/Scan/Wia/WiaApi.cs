@@ -283,6 +283,12 @@ namespace NAPS2.Scan.Wia
             return (capabilities & Source.FEEDER) != 0;
         }
 
+        public static bool DeviceSupportsDuplex(Device device)
+        {
+            int capabilities = GetDeviceIntProperty(device, DeviceProperties.DOCUMENT_HANDLING_CAPABILITIES);
+            return (capabilities & Source.DUPLEX) != 0;
+        }
+
         public static bool DeviceFeederReady(Device device)
         {
             int status = GetDeviceIntProperty(device, DeviceProperties.DOCUMENT_HANDLING_STATUS);
