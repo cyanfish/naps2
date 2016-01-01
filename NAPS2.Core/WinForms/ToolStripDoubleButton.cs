@@ -82,6 +82,14 @@ namespace NAPS2.WinForms
             Height = oldHeight;
             Parent = oldParent;
 
+            bool wrap = false;
+            int textWidth = Math.Max(MeasureTextWidth(TextFirst, ref wrap), MeasureTextWidth(TextSecond, ref wrap));
+            var flags = TextFormatFlags.Left | TextFormatFlags.VerticalCenter;
+            if (wrap)
+            {
+                flags |= TextFormatFlags.WordBreak;
+            }
+
             if (ImageFirst != null && TextFirst != null)
             {
                 if (Enabled)
@@ -93,8 +101,8 @@ namespace NAPS2.WinForms
                     ControlPaint.DrawImageDisabled(e.Graphics, ImageFirst, Padding.Left, Height / 4 - ImageFirst.Height / 2, Color.Transparent);
                 }
 
-                var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, Width - (Padding.Left + ImageFirst.Width) + 2, Height / 2);
-                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextFirst, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak));
+                var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, textWidth, Height / 2);
+                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextFirst, textRectangle, ForeColor, Font, flags));
             }
 
             if (ImageSecond != null && TextSecond != null)
@@ -108,8 +116,8 @@ namespace NAPS2.WinForms
                     ControlPaint.DrawImageDisabled(e.Graphics, ImageSecond, Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2, Color.Transparent);
                 }
 
-                var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, Width - (Padding.Left + ImageSecond.Width) + 2, Height / 2);
-                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextSecond, textRectangle, ForeColor, Font, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak));
+                var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, textWidth, Height / 2);
+                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextSecond, textRectangle, ForeColor, Font, flags));
             }
 
             Image = null;
