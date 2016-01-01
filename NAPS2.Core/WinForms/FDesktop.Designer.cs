@@ -43,6 +43,8 @@ namespace NAPS2.WinForms
             this.ctxSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ctxSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripSplitButton();
             this.tsNewProfile = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,8 +101,6 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.ctxSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.ctxDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -192,6 +192,17 @@ namespace NAPS2.WinForms
             this.ctxCopy.Name = "ctxCopy";
             resources.ApplyResources(this.ctxCopy, "ctxCopy");
             this.ctxCopy.Click += new System.EventHandler(this.ctxCopy_Click);
+            // 
+            // ctxSeparator2
+            // 
+            this.ctxSeparator2.Name = "ctxSeparator2";
+            resources.ApplyResources(this.ctxSeparator2, "ctxSeparator2");
+            // 
+            // ctxDelete
+            // 
+            this.ctxDelete.Name = "ctxDelete";
+            resources.ApplyResources(this.ctxDelete, "ctxDelete");
+            this.ctxDelete.Click += new System.EventHandler(this.ctxDelete_Click);
             // 
             // tStrip
             // 
@@ -625,17 +636,6 @@ namespace NAPS2.WinForms
             this.tsAbout.Name = "tsAbout";
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
-            // 
-            // ctxSeparator2
-            // 
-            this.ctxSeparator2.Name = "ctxSeparator2";
-            resources.ApplyResources(this.ctxSeparator2, "ctxSeparator2");
-            // 
-            // ctxDelete
-            // 
-            this.ctxDelete.Name = "ctxDelete";
-            resources.ApplyResources(this.ctxDelete, "ctxDelete");
-            this.ctxDelete.Click += new System.EventHandler(this.ctxDelete_Click);
             // 
             // FDesktop
             // 

@@ -120,6 +120,7 @@ namespace NAPS2.WinForms
             RelayoutToolbar();
             InitLanguageDropdown();
             UpdateScanButton();
+            LoadToolStripLocation();
 
             if (layoutManager != null)
             {
@@ -811,6 +812,7 @@ namespace NAPS2.WinForms
 
         private void SetCulture(string cultureId)
         {
+            SaveToolStripLocation();
             UserConfigManager.Config.Culture = cultureId;
             UserConfigManager.Save();
             Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureId);
@@ -870,8 +872,27 @@ namespace NAPS2.WinForms
 
         private void FDesktop_Closed(object sender, EventArgs e)
         {
+            SaveToolStripLocation();
             Pipes.KillServer();
             imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+        }
+
+        private void SaveToolStripLocation()
+        {
+            UserConfigManager.Config.DesktopToolStripDock = tStrip.Parent.Dock;
+            UserConfigManager.Save();
+        }
+
+        private void LoadToolStripLocation()
+        {
+            var dock = UserConfigManager.Config.DesktopToolStripDock;
+            if (dock != DockStyle.None) {
+                var panel = toolStripContainer1.Controls.OfType<ToolStripPanel>().FirstOrDefault(x => x.Dock == dock);
+                if (panel != null)
+                {
+                    tStrip.Parent = panel;
+                }
+            }
         }
 
         private void tsImport_Click(object sender, EventArgs e)

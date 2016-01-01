@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -65,5 +66,7 @@ namespace NAPS2.Config
         public int ThumbnailSize { get; set; }
 
         public BatchSettings LastBatchSettings { get; set; }
+
+        public DockStyle DesktopToolStripDock { get; set; }
     }
 }
