@@ -128,23 +128,26 @@ namespace NAPS2.WinForms
                                    : rdMultipleScansDelay.Checked ? BatchScanType.MultipleWithDelay
                                    : BatchScanType.Single;
 
-            int scanCount;
-            if (!int.TryParse(txtNumberOfScans.Text, out scanCount) || scanCount < 0)
+            if (rdMultipleScansDelay.Checked)
             {
-                ok = false;
-                scanCount = 0;
-                txtNumberOfScans.Focus();
-            }
-            BatchSettings.ScanCount = scanCount;
+                int scanCount;
+                if (!int.TryParse(txtNumberOfScans.Text, out scanCount) || scanCount <= 0)
+                {
+                    ok = false;
+                    scanCount = 0;
+                    txtNumberOfScans.Focus();
+                }
+                BatchSettings.ScanCount = scanCount;
 
-            double scanInterval;
-            if (!double.TryParse(txtTimeBetweenScans.Text, out scanInterval) || scanInterval < 0)
-            {
-                ok = false;
-                scanInterval = 0;
-                txtTimeBetweenScans.Focus();
+                double scanInterval;
+                if (!double.TryParse(txtTimeBetweenScans.Text, out scanInterval) || scanInterval < 0)
+                {
+                    ok = false;
+                    scanInterval = 0;
+                    txtTimeBetweenScans.Focus();
+                }
+                BatchSettings.ScanIntervalSeconds = scanInterval;
             }
-            BatchSettings.ScanIntervalSeconds = scanInterval;
 
             BatchSettings.OutputType = rdSaveToSingleFile.Checked ? BatchOutputType.SingleFile
                                      : rdSaveToMultipleFiles.Checked ? BatchOutputType.MultipleFiles
@@ -186,7 +189,7 @@ namespace NAPS2.WinForms
 
         private bool ProfileIsTwain()
         {
-            var profile = (ScanProfile) comboProfile.SelectedItem;
+            var profile = (ScanProfile)comboProfile.SelectedItem;
             if (profile != null)
             {
                 return profile.DriverName == TwainScanDriver.DRIVER_NAME;
@@ -199,7 +202,7 @@ namespace NAPS2.WinForms
             rdSeparateByPatchT.Enabled = ProfileIsTwain();
         }
 
-        private void rdSingleScan_CheckedChanged(object sender, EventArgs    e)
+        private void rdSingleScan_CheckedChanged(object sender, EventArgs e)
         {
             ConditionalControls.UnlockHeight(this);
             ConditionalControls.SetVisible(rdFilePerScan, !rdSingleScan.Checked && rdSaveToMultipleFiles.Checked);
