@@ -314,6 +314,10 @@ namespace NAPS2.Scan.Batch
 
             private void Save(DateTime now, int i, ICollection<IScannedImage> images)
             {
+                if (images.Count == 0)
+                {
+                    return;
+                }
                 var subPath = fileNamePlaceholders.SubstitutePlaceholders(Settings.SavePath, now, true, i);
                 if (GetSavePathExtension().ToLower() == ".pdf")
                 {
