@@ -20,12 +20,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 using NAPS2.WinForms;
 using NTwain;
 using NTwain.Data;
@@ -91,6 +93,7 @@ namespace NAPS2.Scan.Twain
 
             session.TransferReady += (sender, eventArgs) =>
             {
+                Debug.WriteLine("NAPS2.TW - TransferReady");
                 if (cancel)
                 {
                     eventArgs.CancelAll = true;
@@ -98,6 +101,7 @@ namespace NAPS2.Scan.Twain
             };
             session.DataTransferred += (sender, eventArgs) =>
             {
+                Debug.WriteLine("NAPS2.TW - DataTransferred");
                 using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
                 {
                     double scaleFactor = 1;
@@ -128,61 +132,79 @@ namespace NAPS2.Scan.Twain
             };
             session.TransferError += (sender, eventArgs) =>
             {
+                Debug.WriteLine("NAPS2.TW - TransferError - {0}", eventArgs.Exception);
                 error = eventArgs.Exception;
                 cancel = true;
                 twainForm.Close();
             };
-            session.SourceDisabled += (sender, eventArgs) => twainForm.Close();
+            session.SourceDisabled += (sender, eventArgs) =>
+            {
+                Debug.WriteLine("NAPS2.TW - SourceDisabled");
+                twainForm.Close();
+            };
 
             twainForm.Shown += (sender, eventArgs) =>
             {
+                Debug.WriteLine("NAPS2.TW - TwainForm.Shown");
                 try
                 {
                     ReturnCode rc = session.Open(new WindowsFormsMessageLoopHook(DialogParent.Handle));
                     if (rc != ReturnCode.Success)
                     {
+                        Debug.WriteLine("NAPS2.TW - Could not open session - {0}", rc);
                         twainForm.Close();
                         return;
                     }
                     ds = session.FirstOrDefault(x => x.Name == ScanDevice.ID);
                     if (ds == null)
                     {
+                        Debug.WriteLine("NAPS2.TW - Could not find DS - DS count = {0}", session.Count());
                         throw new DeviceNotFoundException();
                     }
                     rc = ds.Open();
                     if (rc != ReturnCode.Success)
                     {
+                        Debug.WriteLine("NAPS2.TW - Could not open DS - {0}", rc);
                         twainForm.Close();
                         return;
                     }
                     ConfigureDS(ds);
                     var ui = ScanProfile.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
+                    Debug.WriteLine("NAPS2.TW - Enabling DS");
                     rc = ds.Enable(ui, true, twainForm.Handle);
+                    Debug.WriteLine("NAPS2.TW - Enable finished");
                     if (rc != ReturnCode.Success)
                     {
+                        Debug.WriteLine("NAPS2.TW - Enable failed - {0}, rc");
                         twainForm.Close();
                     }
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine("NAPS2.TW - Error");
                     error = ex;
                     twainForm.Close();
                 }
             };
 
+            Debug.WriteLine("NAPS2.TW - Showing TwainForm");
             twainForm.ShowDialog(DialogParent);
+            Debug.WriteLine("NAPS2.TW - TwainForm closed");
 
             if (ds != null && session.IsSourceOpen)
             {
+                Debug.WriteLine("NAPS2.TW - Closing DS");
                 ds.Close();
             }
             if (session.IsDsmOpen)
             {
+                Debug.WriteLine("NAPS2.TW - Closing session");
                 session.Close();
             }
 
             if (error != null)
             {
+                Debug.WriteLine("NAPS2.TW - Throwing error - {0}", error);
                 if (error is ScanDriverException)
                 {
                     throw error;
