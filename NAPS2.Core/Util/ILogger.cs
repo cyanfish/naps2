@@ -6,7 +6,6 @@ namespace NAPS2.Util
 {
     public interface ILogger
     {
-        void Debug(string message);
         void Error(string message);
         void ErrorException(string message, Exception exception);
         void FatalException(string message, Exception exception);
