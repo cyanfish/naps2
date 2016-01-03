@@ -43,6 +43,9 @@ namespace NAPS2.Scan.Twain
         static TwainScanDriver()
         {
             NTwain.PlatformInfo.Current.PreferNewDSM = false;
+#if DEBUG
+            NTwain.PlatformInfo.Current.Log.IsDebugEnabled = true;
+#endif
         }
 
         public TwainScanDriver(IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
