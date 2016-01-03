@@ -61,8 +61,6 @@
     <Compile Include="BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HostService.cs" />
-    <Compile Include="IHostService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

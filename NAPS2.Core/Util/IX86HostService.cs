@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace NAPS2_32
+namespace NAPS2.Util
 {
     [ServiceContract]
     public interface IX86HostService
