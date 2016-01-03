@@ -233,6 +233,7 @@
     <Compile Include="Operation\OperationErrorEventArgs.cs" />
     <Compile Include="Operation\OperationStatus.cs" />
     <Compile Include="Util\Pipes.cs" />
+    <Compile Include="Util\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />

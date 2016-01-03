@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.ServiceModel;
 using System.Text;
 
@@ -11,7 +12,7 @@ namespace NAPS2.Util
 {
     public static class X86HostManager
     {
-        private const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2_32/{0}/x86host";
+        public const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2_32/{0}/x86host";
         
         private static Process _hostProcess;
         private static string _pipeName;
@@ -34,7 +35,11 @@ namespace NAPS2.Util
             {
                 Log.Error("Could not start 32-bit host process; terminating.");
                 Environment.Exit(1);
+                return;
             }
+
+            var job = new Job();
+            job.AddProcess(_hostProcess.Handle);
 
             _channelFactory = new Lazy<ChannelFactory<IX86HostService>>(
                 () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding(), new EndpointAddress(_pipeName)));

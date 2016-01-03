@@ -11,18 +11,19 @@ namespace NAPS2_32
 {
     static class Program
     {
-        private const string PIPE_BASE_ADDR_FORMAT = "net.pipe://localhost/NAPS2_32/{0}/";
-
         [STAThread]
         static void Main()
         {
-            var pipeBaseAddr = new Uri(string.Format(PIPE_BASE_ADDR_FORMAT, Process.GetCurrentProcess().Id));
-            var host = new ServiceHost(typeof(X86HostService), pipeBaseAddr);
-            host.Open();
+            using (var host = new ServiceHost(typeof (X86HostService)))
+            {
+                string pipeName = string.Format(X86HostManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
+                host.AddServiceEndpoint(typeof (IX86HostService), new NetNamedPipeBinding(), pipeName);
+                host.Open();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BackgroundForm());
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new BackgroundForm(pipeName));
+            }
         }
     }
 }

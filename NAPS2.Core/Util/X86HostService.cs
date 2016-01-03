@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -9,7 +10,7 @@ namespace NAPS2.Util
     {
         public void DoWork()
         {
-            MessageBox.Show("Hi!");
+            MessageBox.Show("Hi from " + Process.GetCurrentProcess().Id + "!");
         }
     }
 }
