@@ -62,7 +62,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTwain.3.3.4\lib\net40-Client\NTwain.dll</HintPath>
+      <HintPath>..\packages\NTwain.3.3.7\lib\net40-Client\NTwain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp">
