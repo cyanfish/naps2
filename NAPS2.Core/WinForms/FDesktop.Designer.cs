@@ -101,6 +101,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
+            this.btnZoomMouseCatcher = new System.Windows.Forms.Button();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -115,6 +116,7 @@ namespace NAPS2.WinForms
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.btnZoomIn);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.btnZoomOut);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnZoomMouseCatcher);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.thumbnailList1);
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
@@ -637,6 +639,13 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
+            // btnZoomMouseCatcher
+            // 
+            this.btnZoomMouseCatcher.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnZoomMouseCatcher, "btnZoomMouseCatcher");
+            this.btnZoomMouseCatcher.Name = "btnZoomMouseCatcher";
+            this.btnZoomMouseCatcher.UseVisualStyleBackColor = false;
+            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
@@ -725,6 +734,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsBatchScan;
         private System.Windows.Forms.ToolStripSeparator ctxSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ctxDelete;
+        private System.Windows.Forms.Button btnZoomMouseCatcher;
     }
 }
 

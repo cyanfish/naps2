@@ -127,8 +127,9 @@ namespace NAPS2.WinForms
             }
             btnZoomIn.Location = new Point(btnZoomIn.Location.X, thumbnailList1.Height - 33);
             btnZoomOut.Location = new Point(btnZoomOut.Location.X, thumbnailList1.Height - 33);
+            btnZoomMouseCatcher.Location = new Point(btnZoomMouseCatcher.Location.X, thumbnailList1.Height - 33);
             layoutManager = new LayoutManager(this)
-                   .Bind(btnZoomIn, btnZoomOut)
+                   .Bind(btnZoomIn, btnZoomOut, btnZoomMouseCatcher)
                        .BottomTo(() => thumbnailList1.Height)
                    .Activate();
 
