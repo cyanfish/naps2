@@ -30,6 +30,13 @@ namespace NAPS2
             logger = LogManager.GetLogger("NAPS2");
         }
 
+        public void Debug(string message)
+        {
+#if DEBUG
+            logger.Debug(message);
+#endif
+        }
+
         public void Error(string message)
         {
             logger.Error(message);

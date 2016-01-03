@@ -19,6 +19,11 @@ namespace NAPS2.Util
             }
         }
 
+        public static void Debug(string message, params object[] args)
+        {
+            _logger.Debug(string.Format(message, args));
+        }
+
         public static void Error(string message, params object[] args)
         {
             _logger.Error(string.Format(message, args));
