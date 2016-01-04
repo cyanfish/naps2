@@ -26,12 +26,14 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {
+    [DataContract]
     public class FileBasedScannedImage : IScannedImage
     {
         public const string LOCK_FILE_NAME = ".lock";
@@ -61,23 +63,37 @@ namespace NAPS2.Scan.Images
 
         private static int _recoveryFileNumber = 1;
 
+        [DataMember]
         private Bitmap thumbnail;
+
         // Store the actual image on disk
-        private readonly ImageFormat baseImageFileFormat;
+        [DataMember]
+        private readonly Guid baseImageFileFormatGuid;
+
+        [DataMember]
         private readonly string baseImageFileName;
+
+        [DataMember]
         private readonly string baseImageFilePath;
+
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
+        [DataMember]
         private readonly List<Transform> transformList = new List<Transform>();
+
+        [DataMember]
+        public PatchCode PatchCode { get; set; }
 
         public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
             Bitmap baseImage;
             MemoryStream baseImageEncoded;
+            ImageFormat baseImageFileFormat;
             ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, quality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
 
             baseImageFileName = (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture) + GetExtension(baseImageFileFormat);
             baseImageFilePath = Path.Combine(RecoveryFolder.FullName, baseImageFileName);
+            baseImageFileFormatGuid = baseImageFileFormat.Guid;
 
             if (baseImage != null)
             {
@@ -130,7 +146,7 @@ namespace NAPS2.Scan.Images
             using (var transformed = GetImage())
             {
                 var stream = new MemoryStream();
-                transformed.Save(stream, baseImageFileFormat);
+                transformed.Save(stream, new ImageFormat(baseImageFileFormatGuid));
                 return stream;
             }
         }
@@ -214,8 +230,6 @@ namespace NAPS2.Scan.Images
             _recoveryIndexManager.Index.Images.Insert(index, indexImage);
             _recoveryIndexManager.Save();
         }
-
-        public PatchCode PatchCode { get; set; }
 
         public ImageFormat FileFormat { get { return baseImageFileFormat; } }
 

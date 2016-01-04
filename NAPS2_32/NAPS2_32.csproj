@@ -45,6 +45,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -106,7 +107,8 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy $(ProjectDir)$(OutDir)NAPS2_32.exe $(SolutionDir)NAPS2\$(OutDir)</PostBuildEvent>
+    <PostBuildEvent>copy $(ProjectDir)$(OutDir)NAPS2_32.exe $(SolutionDir)NAPS2\$(OutDir)
+copy $(ProjectDir)$(OutDir)NAPS2_32.exe.config $(SolutionDir)NAPS2\$(OutDir)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

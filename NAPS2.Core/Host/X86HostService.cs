@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Windows.Forms;
 using NAPS2.Scan;

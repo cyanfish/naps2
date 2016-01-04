@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
@@ -19,7 +20,7 @@ namespace NAPS2_32
             //{
             //    return;
             //}
-
+                
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

@@ -8,6 +8,7 @@ using NAPS2.Scan.Images;
 namespace NAPS2.Host
 {
     [ServiceContract]
+    [ServiceKnownType(typeof(FileBasedScannedImage))]
     public interface IX86HostService
     {
         [OperationContract]
