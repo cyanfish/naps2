@@ -58,7 +58,6 @@ namespace NAPS2
 
 
             X86HostManager.StartHostProcess();
-            X86HostManager.Interface.DoWork();
 
             var formFactory = KernelManager.Kernel.Get<IFormFactory>();
             Application.Run(formFactory.Create<FDesktop>());

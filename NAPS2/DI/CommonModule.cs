@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
@@ -71,6 +72,18 @@ namespace NAPS2.DI
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
             Bind<ChangeTracker>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();
+
+            // 32-bit host bindings
+            if (!Environment.Is64BitProcess)
+            {
+                Bind<IX86HostService>().To<X86HostService>();
+            }
+            else
+            {
+                var channelFactory = new Lazy<ChannelFactory<IX86HostService>>(
+                   () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) }, new EndpointAddress(X86HostManager.PipeName)));
+                Bind<IX86HostService>().ToMethod(ctx => channelFactory.Value.CreateChannel());
+            }
         }
 
         private Edition GetEdition()

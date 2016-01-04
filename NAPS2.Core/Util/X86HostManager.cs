@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.ServiceModel;
 using System.Text;
+using NAPS2.Scan.Twain;
 
 namespace NAPS2.Util
 {
@@ -19,8 +20,8 @@ namespace NAPS2.Util
         public const string MAGIC_ARG = "{DE401010-6942-41D5-9BB0-B1B99A32C4BE}";
         
         private static Process _hostProcess;
-        private static string _pipeName;
-        private static Lazy<ChannelFactory<IX86HostService>> _channelFactory;
+
+        public static string PipeName { get; set; }
 
         public static void StartHostProcess()
         {
@@ -33,7 +34,7 @@ namespace NAPS2.Util
             _hostProcess = Process.Start(hostProcessPath, MAGIC_ARG);
             if (_hostProcess != null)
             {
-                _pipeName = string.Format(PIPE_NAME_FORMAT, _hostProcess.Id);
+                PipeName = string.Format(PIPE_NAME_FORMAT, _hostProcess.Id);
             }
             else
             {
@@ -51,21 +52,6 @@ namespace NAPS2.Util
             {
                 _hostProcess.Kill();
                 throw;
-            }
-
-            _channelFactory = new Lazy<ChannelFactory<IX86HostService>>(
-                () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding(), new EndpointAddress(_pipeName)));
-        }
-
-        public static IX86HostService Interface
-        {
-            get
-            {
-                if (!Environment.Is64BitProcess)
-                {
-                    return new X86HostService();
-                }
-                return _channelFactory.Value.CreateChannel();
             }
         }
     }
