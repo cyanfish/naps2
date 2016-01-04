@@ -13,6 +13,10 @@ namespace NAPS2.Util
     public static class X86HostManager
     {
         public const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2_32/{0}/x86host";
+        /// <summary>
+        /// Use a magic argument when starting NAPS2_32.exe to avoid the user accidentally starting it and having it never stop
+        /// </summary>
+        public const string MAGIC_ARG = "{DE401010-6942-41D5-9BB0-B1B99A32C4BE}";
         
         private static Process _hostProcess;
         private static string _pipeName;
@@ -26,7 +30,7 @@ namespace NAPS2.Util
             }
             var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var hostProcessPath = Path.Combine(dir, "NAPS2_32.exe");
-            _hostProcess = Process.Start(hostProcessPath);
+            _hostProcess = Process.Start(hostProcessPath, MAGIC_ARG);
             if (_hostProcess != null)
             {
                 _pipeName = string.Format(PIPE_NAME_FORMAT, _hostProcess.Id);
@@ -38,8 +42,16 @@ namespace NAPS2.Util
                 return;
             }
 
-            var job = new Job();
-            job.AddProcess(_hostProcess.Handle);
+            try
+            {
+                var job = new Job();
+                job.AddProcess(_hostProcess.Handle);
+            }
+            catch
+            {
+                _hostProcess.Kill();
+                throw;
+            }
 
             _channelFactory = new Lazy<ChannelFactory<IX86HostService>>(
                 () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding(), new EndpointAddress(_pipeName)));

@@ -12,8 +12,12 @@ namespace NAPS2_32
     static class Program
     {
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            if (args.All(x => x != X86HostManager.MAGIC_ARG))
+            {
+                return;
+            }
             using (var host = new ServiceHost(typeof (X86HostService)))
             {
                 string pipeName = string.Format(X86HostManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
