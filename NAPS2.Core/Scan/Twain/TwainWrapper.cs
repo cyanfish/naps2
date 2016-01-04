@@ -61,7 +61,7 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        public List<IScannedImage> Scan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<IScannedImage> Scan(Form dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
             //if (ScanProfile.TwainImpl == TwainImpl.Legacy)
             //{
@@ -132,7 +132,7 @@ namespace NAPS2.Scan.Twain
                 Debug.WriteLine("NAPS2.TW - TwainForm.Shown");
                 try
                 {
-                    ReturnCode rc = session.Open(new WindowsFormsMessageLoopHook(Form.ActiveForm.Handle));
+                    ReturnCode rc = session.Open(new WindowsFormsMessageLoopHook(dialogParent.Handle));
                     if (rc != ReturnCode.Success)
                     {
                         Debug.WriteLine("NAPS2.TW - Could not open session - {0}", rc);
@@ -172,7 +172,7 @@ namespace NAPS2.Scan.Twain
             };
 
             Debug.WriteLine("NAPS2.TW - Showing TwainForm");
-            twainForm.ShowDialog();
+            twainForm.ShowDialog(dialogParent);
             Debug.WriteLine("NAPS2.TW - TwainForm closed");
 
             if (ds != null && session.IsSourceOpen)

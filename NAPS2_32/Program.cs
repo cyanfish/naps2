@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.DI;
-using NAPS2.Util;
+using NAPS2.Host;
 using Ninject;
 
 namespace NAPS2_32
@@ -20,15 +19,20 @@ namespace NAPS2_32
             //{
             //    return;
             //}
-            using (var host = new ServiceHost(KernelManager.Kernel.Get<X86HostService>()))
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            string pipeName = string.Format(X86HostManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
+            var form = new BackgroundForm(pipeName);
+            var svc = KernelManager.Kernel.Get<X86HostService>();
+            svc.ParentForm = form;
+
+            using (var host = new ServiceHost(svc))
             {
-                string pipeName = string.Format(X86HostManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
                 host.AddServiceEndpoint(typeof(IX86HostService), new NetNamedPipeBinding { ReceiveTimeout = TimeSpan.FromHours(24), SendTimeout = TimeSpan.FromHours(24) }, pipeName);
                 host.Open();
-
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new BackgroundForm(pipeName));
+                Application.Run(form);
             }
         }
     }

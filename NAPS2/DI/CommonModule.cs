@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using NAPS2.Config;
+using NAPS2.Host;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -66,17 +67,11 @@ namespace NAPS2.DI
             Bind<IUrlTextReader>().To<UrlTextReader>();
             Bind<Edition>().ToConstant(GetEdition());
 
-            // Misc
-            Bind<IFormFactory>().To<NinjectFormFactory>();
-            Bind<IOperationFactory>().To<NinjectOperationFactory>();
-            Bind<ILogger>().To<NLogLogger>().InSingletonScope();
-            Bind<ChangeTracker>().ToSelf().InSingletonScope();
-            Bind<StillImage>().ToSelf().InSingletonScope();
-
-            // 32-bit host bindings
+            // Host
+            Bind<IX86HostServiceFactory>().To<NinjectX86HostServiceFactory>();
             if (!Environment.Is64BitProcess)
             {
-                Bind<IX86HostService>().To<X86HostService>();
+                Bind<IX86HostService>().To<X86HostServiceFake>();
             }
             else
             {
@@ -84,6 +79,13 @@ namespace NAPS2.DI
                    () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) }, new EndpointAddress(X86HostManager.PipeName)));
                 Bind<IX86HostService>().ToMethod(ctx => channelFactory.Value.CreateChannel());
             }
+
+            // Misc
+            Bind<IFormFactory>().To<NinjectFormFactory>();
+            Bind<IOperationFactory>().To<NinjectOperationFactory>();
+            Bind<ILogger>().To<NLogLogger>().InSingletonScope();
+            Bind<ChangeTracker>().ToSelf().InSingletonScope();
+            Bind<StillImage>().ToSelf().InSingletonScope();
         }
 
         private Edition GetEdition()

@@ -8,12 +8,14 @@ using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 
-namespace NAPS2.Util
+namespace NAPS2.Host
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
     public class X86HostService : IX86HostService
     {
         private readonly TwainWrapper twainWrapper;
+
+        public Form ParentForm { get; set; }
 
         public X86HostService(TwainWrapper twainWrapper)
         {
@@ -25,14 +27,14 @@ namespace NAPS2.Util
             MessageBox.Show("Hi from " + Process.GetCurrentProcess().Id + "!");
         }
 
-        public ScanDevice TwainPromptForDevice()
+        public ScanDevice TwainPromptForDevice(IntPtr hwnd)
         {
             return twainWrapper.PromptForDevice();
         }
 
-        public List<IScannedImage> TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<IScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
-            return twainWrapper.Scan(scanDevice, scanProfile, scanParams);
+            return twainWrapper.Scan(ParentForm, scanDevice, scanProfile, scanParams);
         }
     }
 }

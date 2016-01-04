@@ -136,8 +136,10 @@
     </Compile>
     <Compile Include="Util\ConditionalControls.cs" />
     <Compile Include="Operation\IOperation.cs" />
+    <Compile Include="Host\IX86HostServiceFactory.cs" />
+    <Compile Include="Host\X86HostServiceFake.cs" />
     <Compile Include="Util\IOverwritePrompt.cs" />
-    <Compile Include="Util\IX86HostService.cs" />
+    <Compile Include="Host\IX86HostService.cs" />
     <Compile Include="Util\Log.cs" />
     <Compile Include="Util\NullLogger.cs" />
     <Compile Include="Ocr\IOcrEngine.cs" />
@@ -234,7 +236,7 @@
     <Compile Include="Operation\OperationErrorEventArgs.cs" />
     <Compile Include="Operation\OperationStatus.cs" />
     <Compile Include="Util\Pipes.cs" />
-    <Compile Include="Util\ProcessJob.cs" />
+    <Compile Include="Host\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />
@@ -260,8 +262,8 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
-    <Compile Include="Util\X86HostManager.cs" />
-    <Compile Include="Util\X86HostService.cs" />
+    <Compile Include="Host\X86HostManager.cs" />
+    <Compile Include="Host\X86HostService.cs" />
     <Compile Include="WinForms\FAdvancedScanSettings.cs">
       <SubType>Form</SubType>
     </Compile>

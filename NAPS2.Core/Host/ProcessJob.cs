@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace NAPS2.Util
+namespace NAPS2.Host
 {
     public class Job : IDisposable
     {

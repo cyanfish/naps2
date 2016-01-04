@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 
-namespace NAPS2.Util
+namespace NAPS2.Host
 {
     [ServiceContract]
     public interface IX86HostService
@@ -16,9 +14,9 @@ namespace NAPS2.Util
         void DoWork();
 
         [OperationContract]
-        ScanDevice TwainPromptForDevice();
+        ScanDevice TwainPromptForDevice(IntPtr hwnd);
 
         [OperationContract]
-        List<IScannedImage> TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams);
+        List<IScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams);
     }
 }

@@ -4,12 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.ServiceModel;
-using System.Text;
-using NAPS2.Scan.Twain;
+using NAPS2.Util;
 
-namespace NAPS2.Util
+namespace NAPS2.Host
 {
     public static class X86HostManager
     {

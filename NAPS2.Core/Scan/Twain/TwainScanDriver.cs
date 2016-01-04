@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Host;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 
@@ -30,11 +31,11 @@ namespace NAPS2.Scan.Twain
     {
         public const string DRIVER_NAME = "twain";
         
-        private readonly IX86HostService x86HostService;
+        private readonly IX86HostServiceFactory x86HostServiceFactory;
 
-        public TwainScanDriver(IX86HostService x86HostService)
+        public TwainScanDriver(IX86HostServiceFactory x86HostServiceFactory)
         {
-            this.x86HostService = x86HostService;
+            this.x86HostServiceFactory = x86HostServiceFactory;
         }
 
         public override string DriverName
@@ -44,12 +45,12 @@ namespace NAPS2.Scan.Twain
 
         protected override ScanDevice PromptForDeviceInternal()
         {
-            return x86HostService.TwainPromptForDevice();
+            return x86HostServiceFactory.Create().TwainPromptForDevice(DialogParent.Handle);
         }
 
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
-            return x86HostService.TwainScan(ScanDevice, ScanProfile, ScanParams);
+            return x86HostServiceFactory.Create().TwainScan(DialogParent.Handle, ScanDevice, ScanProfile, ScanParams);
         }
     }
 }
