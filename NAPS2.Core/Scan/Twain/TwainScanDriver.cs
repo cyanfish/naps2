@@ -137,10 +137,14 @@ namespace NAPS2.Scan.Twain
                 {
                     error = eventArgs.Exception;
                 }
-                else
+                else if (eventArgs.SourceStatus != null)
                 {
                     Log.Error("TWAIN Transfer Error. Return code = {0}; condition code = {1}; data = {2}.",
                         eventArgs.ReturnCode, eventArgs.SourceStatus.ConditionCode, eventArgs.SourceStatus.Data);
+                }
+                else
+                {
+                    Log.Error("TWAIN Transfer Error. Return code = {0}.", eventArgs.ReturnCode);
                 }
                 cancel = true;
                 twainForm.Close();
