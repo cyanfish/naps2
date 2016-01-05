@@ -132,8 +132,16 @@ namespace NAPS2.Scan.Twain
             };
             session.TransferError += (sender, eventArgs) =>
             {
-                Debug.WriteLine("NAPS2.TW - TransferError - {0}", eventArgs.Exception);
-                error = eventArgs.Exception;
+                Debug.WriteLine("NAPS2.TW - TransferError");
+                if (eventArgs.Exception != null)
+                {
+                    error = eventArgs.Exception;
+                }
+                else
+                {
+                    Log.Error("TWAIN Transfer Error. Return code = {0}; condition code = {1}; data = {2}.",
+                        eventArgs.ReturnCode, eventArgs.SourceStatus.ConditionCode, eventArgs.SourceStatus.Data);
+                }
                 cancel = true;
                 twainForm.Close();
             };
