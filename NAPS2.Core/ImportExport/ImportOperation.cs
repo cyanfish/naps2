@@ -26,6 +26,7 @@ namespace NAPS2.ImportExport
             this.threadFactory = threadFactory;
 
             ProgressTitle = MiscResources.ImportProgress;
+            AllowCancel = true;
         }
 
         public bool Start(List<string> filesToImport, Action<IScannedImage> imageCallback)

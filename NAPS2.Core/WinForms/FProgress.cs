@@ -37,12 +37,13 @@ namespace NAPS2.WinForms
                 operation.StatusChanged += operation_StatusChanged;
                 operation.Error += operation_Error;
                 operation.Finished += operation_Finished;
+                btnCancel.Visible = operation.AllowCancel;
             }
         }
 
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
-            errorOutput.DisplayError(e.ErrorMessage);
+            Invoke(new Action(() => errorOutput.DisplayError(e.ErrorMessage)));
         }
 
         void operation_StatusChanged(object sender, EventArgs e)
@@ -101,17 +102,24 @@ namespace NAPS2.WinForms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Operation.Cancel();
-            btnCancel.Enabled = false;
+            TryCancelOp();
         }
 
         private void FDownloadProgress_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!finished)
             {
+                TryCancelOp();
+                e.Cancel = true;
+            }
+        }
+
+        private void TryCancelOp()
+        {
+            if (Operation.AllowCancel)
+            {
                 Operation.Cancel();
                 btnCancel.Enabled = false;
-                e.Cancel = true;
             }
         }
     }

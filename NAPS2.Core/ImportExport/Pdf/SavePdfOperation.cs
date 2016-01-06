@@ -49,6 +49,7 @@ namespace NAPS2.ImportExport.Pdf
             this.threadFactory = threadFactory;
 
             ProgressTitle = MiscResources.SavePdfProgress;
+            AllowCancel = true;
         }
 
         public bool Start(string fileName, DateTime dateTime, ICollection<IScannedImage> images, PdfSettings pdfSettings, string ocrLanguageCode)
