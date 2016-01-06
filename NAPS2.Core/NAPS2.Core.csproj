@@ -82,6 +82,7 @@
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
     <Compile Include="ImportExport\Pdf\PdfSaver.cs" />
+    <Compile Include="Operation\OperationBase.cs" />
     <Compile Include="Scan\Batch\BatchScanPerformer.cs" />
     <Compile Include="Scan\Batch\BatchSettings.cs" />
     <Compile Include="Scan\Exceptions\NoDuplexSupportException.cs" />
@@ -127,6 +128,7 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Util\ConditionalControls.cs" />
+    <Compile Include="Operation\IOperation.cs" />
     <Compile Include="Util\IOverwritePrompt.cs" />
     <Compile Include="Util\Log.cs" />
     <Compile Include="Util\NullLogger.cs" />
@@ -221,6 +223,8 @@
     <Compile Include="Scan\Wia\WiaScanDriver.cs" />
     <Compile Include="Scan\Wia\WiaState.cs" />
     <Compile Include="Scan\Wia\WinFormsWiaTransfer.cs" />
+    <Compile Include="Operation\OperationErrorEventArgs.cs" />
+    <Compile Include="Operation\OperationStatus.cs" />
     <Compile Include="Util\Pipes.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />
