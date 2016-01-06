@@ -919,10 +919,14 @@ namespace NAPS2.WinForms
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                var importDialog = FormFactory.Create<FProgress>();
-                importDialog.FilesToImport = ofd.FileNames.OrderBy(x => x).ToList();
-                importDialog.ImageCallback = ReceiveScannedImage;
-                importDialog.ShowDialog();
+                var op = operationFactory.Create<ImportOperation>();
+                var progressForm = FormFactory.Create<FProgress>();
+                progressForm.Operation = op;
+                if (op.Start(ofd.FileNames.OrderBy(x => x).ToList(),
+                    img => Invoke(new Action(() => ReceiveScannedImage(img)))))
+                {
+                    progressForm.ShowDialog();
+                }
             }
         }
 

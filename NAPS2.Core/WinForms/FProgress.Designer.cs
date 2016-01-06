@@ -30,8 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FProgress));
             this.btnCancel = new System.Windows.Forms.Button();
-            this.labelTop = new System.Windows.Forms.Label();
-            this.progressBarTop = new System.Windows.Forms.ProgressBar();
+            this.labelNumber = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.labelStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -41,24 +42,31 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // labelTop
+            // labelNumber
             // 
-            resources.ApplyResources(this.labelTop, "labelTop");
-            this.labelTop.Name = "labelTop";
+            resources.ApplyResources(this.labelNumber, "labelNumber");
+            this.labelNumber.Name = "labelNumber";
             // 
-            // progressBarTop
+            // progressBar
             // 
-            resources.ApplyResources(this.progressBarTop, "progressBarTop");
-            this.progressBarTop.MarqueeAnimationSpeed = 50;
-            this.progressBarTop.Name = "progressBarTop";
-            this.progressBarTop.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.MarqueeAnimationSpeed = 50;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoEllipsis = true;
+            resources.ApplyResources(this.labelStatus, "labelStatus");
+            this.labelStatus.Name = "labelStatus";
             // 
             // FProgress
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelTop);
-            this.Controls.Add(this.progressBarTop);
+            this.Controls.Add(this.labelStatus);
+            this.Controls.Add(this.labelNumber);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.btnCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -72,7 +80,8 @@
         #endregion
 
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label labelTop;
-        private System.Windows.Forms.ProgressBar progressBarTop;
+        private System.Windows.Forms.Label labelNumber;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label labelStatus;
     }
 }

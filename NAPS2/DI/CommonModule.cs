@@ -9,6 +9,7 @@ using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
+using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
@@ -66,6 +67,7 @@ namespace NAPS2.DI
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();
+            Bind<IOperationFactory>().To<NinjectOperationFactory>();
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
             Bind<ChangeTracker>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();

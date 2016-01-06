@@ -31,7 +31,7 @@ namespace NAPS2.ImportExport.Pdf
 
         public IEnumerable<IScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
         {
-            if (!progressCallback(0, 1))
+            if (!progressCallback(0, 0))
             {
                 return Enumerable.Empty<IScannedImage>();
             }
