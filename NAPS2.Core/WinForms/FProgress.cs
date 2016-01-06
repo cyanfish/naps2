@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
+using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
-    public partial class FImportProgress : FormBase
+    public partial class FProgress : FormBase
     {
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly IErrorOutput errorOutput;
@@ -22,12 +23,14 @@ namespace NAPS2.WinForms
         private bool cancel;
         private bool importing;
 
-        public FImportProgress(IScannedImageImporter scannedImageImporter, IErrorOutput errorOutput)
+        public FProgress(IScannedImageImporter scannedImageImporter, IErrorOutput errorOutput)
         {
             this.scannedImageImporter = scannedImageImporter;
             this.errorOutput = errorOutput;
             InitializeComponent();
         }
+
+        public IOperation Operation { get; set; }
 
         public List<string> FilesToImport { get; set; }
 

@@ -32,6 +32,7 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -44,7 +45,6 @@ namespace NAPS2.Console
     {
         private readonly ImageSaver imageSaver;
         private readonly IEmailer emailer;
-        private readonly IPdfExporter pdfExporter;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IErrorOutput errorOutput;
@@ -53,7 +53,7 @@ namespace NAPS2.Console
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
-        private readonly PdfSaver pdfSaver;
+        private readonly IOperationFactory operationFactory;
 
         private readonly AutomatedScanningOptions options;
         private List<IScannedImage> scannedImages;
@@ -61,11 +61,10 @@ namespace NAPS2.Console
         private int totalPagesScanned;
         private DateTime startTime;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IPdfExporter pdfExporter, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSaver pdfSaver)
+        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory)
         {
             this.options = options;
             this.imageSaver = imageSaver;
-            this.pdfExporter = pdfExporter;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
@@ -75,7 +74,7 @@ namespace NAPS2.Console
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
-            this.pdfSaver = pdfSaver;
+            this.operationFactory = operationFactory;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -381,11 +380,12 @@ namespace NAPS2.Console
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
 
-            return pdfSaver.SavePdf(path, startTime, scannedImages, pdfSettings, ocrLanguageCode, i =>
-            {
-                OutputVerbose(ConsoleResources.ExportingPage, i, scannedImages.Count);
-                return true;
-            });
+            var op = operationFactory.Create<SavePdfOperation>();
+            op.StatusChanged += (sender, args) =>
+                OutputVerbose(ConsoleResources.ExportingPage, op.Status.CurrentProgress + 1, scannedImages.Count);;
+            op.Start(path, startTime, scannedImages, pdfSettings, ocrLanguageCode);
+            op.WaitForCompletion();
+            return op.Status.Success;
         }
 
         private void PerformScan(ScanProfile profile)

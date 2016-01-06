@@ -342,4 +342,25 @@
   <data name="Progress" xml:space="preserve">
     <value>{0} / {1}</value>
   </data>
+  <data name="Importing" xml:space="preserve">
+    <value>Importing {0}...</value>
+  </data>
+  <data name="ImportProgress" xml:space="preserve">
+    <value>Import Progress</value>
+  </data>
+  <data name="Recovering" xml:space="preserve">
+    <value>Recovering...</value>
+  </data>
+  <data name="RecoveryProgress" xml:space="preserve">
+    <value>Recovery Progress</value>
+  </data>
+  <data name="SaveImagesProgress" xml:space="preserve">
+    <value>Save Images Progress</value>
+  </data>
+  <data name="SavePdfProgress" xml:space="preserve">
+    <value>Save PDF Progress</value>
+  </data>
+  <data name="Saving" xml:space="preserve">
+    <value>Saving {0}...</value>
+  </data>
 </root>

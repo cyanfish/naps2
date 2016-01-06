@@ -23,7 +23,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -39,6 +38,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
+using NAPS2.Operation;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
@@ -68,15 +68,15 @@ namespace NAPS2.WinForms
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly PdfSaver pdfSaver;
-        private readonly IErrorOutput errorOutput;
         private readonly StillImage stillImage;
+        private readonly IOperationFactory operationFactory;
+        private readonly IUserConfigManager userConfigManager;
 
         private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
         private LayoutManager layoutManager;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, PdfSaver pdfSaver, IErrorOutput errorOutput, StillImage stillImage)
+        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager)
         {
             this.emailer = emailer;
             this.imageSaver = imageSaver;
@@ -94,9 +94,9 @@ namespace NAPS2.WinForms
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.pdfSaver = pdfSaver;
-            this.errorOutput = errorOutput;
             this.stillImage = stillImage;
+            this.operationFactory = operationFactory;
+            this.userConfigManager = userConfigManager;
             InitializeComponent();
 
             Shown += FDesktop_Shown;
@@ -437,10 +437,17 @@ namespace NAPS2.WinForms
 
         private void ExportPDF(string filename, List<IScannedImage> images)
         {
-            var pdfdialog = FormFactory.Create<FPdfSave>();
-            pdfdialog.Filename = filename;
-            pdfdialog.Images = images;
-            pdfdialog.ShowDialog();
+            var op = operationFactory.Create<SavePdfOperation>();
+            var progressForm = FormFactory.Create<FProgress>();
+            progressForm.Operation = op;
+
+            var pdfSettings = pdfSettingsContainer.PdfSettings;
+            pdfSettings.Metadata.Creator = MiscResources.NAPS2;
+            var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
+            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrLanguageCode))
+            {
+                progressForm.ShowDialog();
+            }
         }
 
         private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
@@ -912,7 +919,7 @@ namespace NAPS2.WinForms
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                var importDialog = FormFactory.Create<FImportProgress>();
+                var importDialog = FormFactory.Create<FProgress>();
                 importDialog.FilesToImport = ofd.FileNames.OrderBy(x => x).ToList();
                 importDialog.ImageCallback = ReceiveScannedImage;
                 importDialog.ShowDialog();

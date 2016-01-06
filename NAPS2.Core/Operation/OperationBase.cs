@@ -19,5 +19,29 @@ namespace NAPS2.Operation
         public event EventHandler Finished;
 
         public event EventHandler<OperationErrorEventArgs> Error;
+
+        protected void InvokeFinished()
+        {
+            if (Finished != null)
+            {
+                Finished.Invoke(this, new EventArgs());
+            }
+        }
+
+        protected void InvokeStatusChanged()
+        {
+            if (StatusChanged != null)
+            {
+                StatusChanged.Invoke(this, new EventArgs());
+            }
+        }
+
+        protected void InvokeError(string message)
+        {
+            if (Error != null)
+            {
+                Error.Invoke(this, new OperationErrorEventArgs(message));
+            }
+        }
     }
 }

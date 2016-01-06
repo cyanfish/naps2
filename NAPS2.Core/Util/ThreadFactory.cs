@@ -15,11 +15,18 @@ namespace NAPS2.Util
             this.cultureInitializer = cultureInitializer;
         }
 
-        public Thread CreateThread(ThreadStart threadStart)
+        public Thread CreateThread(Action action)
         {
             // Using CultureInfo.DefaultThreadCurrentCulture would be eaiser, but it's .NET 4.5 only
-            var thread = new Thread(threadStart);
+            var thread = new Thread(new ThreadStart(action));
             cultureInitializer.InitCulture(thread);
+            return thread;
+        }
+
+        public Thread StartThread(Action action)
+        {
+            var thread = CreateThread(action);
+            thread.Start();
             return thread;
         }
     }

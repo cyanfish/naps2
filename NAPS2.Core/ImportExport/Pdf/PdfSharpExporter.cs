@@ -73,7 +73,7 @@ namespace NAPS2.ImportExport.Pdf
                 document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
 
-            int i = 1;
+            int i = 0;
             foreach (IScannedImage scannedImage in images)
             {
                 using (Stream stream = scannedImage.GetImageStream())

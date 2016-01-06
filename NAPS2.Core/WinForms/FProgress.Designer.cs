@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.WinForms
 {
-    partial class FImportProgress
+    partial class FProgress
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FImportProgress));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FProgress));
             this.btnCancel = new System.Windows.Forms.Button();
             this.labelTop = new System.Windows.Forms.Label();
             this.progressBarTop = new System.Windows.Forms.ProgressBar();
@@ -53,7 +53,7 @@
             this.progressBarTop.Name = "progressBarTop";
             this.progressBarTop.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
-            // FImportProgress
+            // FProgress
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -62,7 +62,7 @@
             this.Controls.Add(this.btnCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.Name = "FImportProgress";
+            this.Name = "FProgress";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FDownloadProgress_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

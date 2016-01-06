@@ -210,7 +210,7 @@
     <value>Import Progress</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FImportProgress</value>
+    <value>FProgress</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.26698, Culture=neutral, PublicKeyToken=null</value>
