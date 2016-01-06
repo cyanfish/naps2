@@ -82,6 +82,7 @@
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
     <Compile Include="ImportExport\Pdf\PdfSaver.cs" />
+    <Compile Include="Operation\IOperationFactory.cs" />
     <Compile Include="Operation\OperationBase.cs" />
     <Compile Include="Scan\Batch\BatchScanPerformer.cs" />
     <Compile Include="Scan\Batch\BatchSettings.cs" />

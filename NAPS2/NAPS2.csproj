@@ -120,6 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NinjectOperationFactory.cs" />
     <Compile Include="NinjectScanDriverFactory.cs" />
     <Compile Include="DI\CommonModule.cs" />
     <Compile Include="DI\WinFormsModule.cs" />
