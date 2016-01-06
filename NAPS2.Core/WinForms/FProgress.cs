@@ -96,8 +96,11 @@ namespace NAPS2.WinForms
                 progressBar.Maximum = Operation.Status.MaxProgress;
             }
             // Force the progress bar to render immediately
-            progressBar.Value += 1;
-            progressBar.Value -= 1;
+            if (progressBar.Value < progressBar.Maximum)
+            {
+                progressBar.Value += 1;
+                progressBar.Value -= 1;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
