@@ -86,6 +86,35 @@ namespace NAPS2.Scan.Images
             return newSelection;
         }
 
+        public IEnumerable<int> MoveTo(IEnumerable<int> selection, int index)
+        {
+            var selList = selection.ToList();
+            var bottom = selList.Where(x => x < index).OrderByDescending(x => x).ToList();
+            var top = selList.Where(x => x >= index).OrderBy(x => x).ToList();
+
+            int offset = 1;
+            foreach (int i in bottom)
+            {
+                IScannedImage img = Images[i];
+                Images.RemoveAt(i);
+                Images.Insert(index - offset, img);
+                img.MovedTo(index - offset);
+                offset++;
+            }
+
+            offset = 0;
+            foreach (int i in top)
+            {
+                IScannedImage img = Images[i];
+                Images.RemoveAt(i);
+                Images.Insert(index + offset, img);
+                img.MovedTo(index + offset);
+                offset++;
+            }
+
+            return Enumerable.Range(index - bottom.Count, selList.Count);
+        }
+
         public IEnumerable<int> RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
         {
             foreach (int i in selection)
