@@ -73,7 +73,7 @@ namespace NAPS2.Recovery
                 };
                 cancel = false;
 
-                StartRecovery();
+                folderToRecoverFrom = FindAndLockFolderToRecoverFrom();
                 if (folderToRecoverFrom == null)
                 {
                     return false;
@@ -83,41 +83,45 @@ namespace NAPS2.Recovery
                     recoveryIndexManager = new RecoveryIndexManager(folderToRecoverFrom);
                     imageCount = recoveryIndexManager.Index.Images.Count;
                     scannedDateTime = folderToRecoverFrom.LastWriteTime;
-                    if (imageCount > 0)
+                    if (imageCount == 0)
                     {
                         // If there are no images, do nothing. Don't delete the folder in case the index was corrupted somehow.
-                        switch (PromptToRecover())
-                        {
-                            case DialogResult.Yes:
-                                threadFactory.StartThread(() =>
+                        ReleaseFolderLock();
+                        return false;
+                    }
+                    switch (PromptToRecover())
+                    {
+                        case DialogResult.Yes: // Recover
+                            threadFactory.StartThread(() =>
+                            {
+                                try
                                 {
-                                    try
+                                    if (DoRecover(imageCallback))
                                     {
-                                        if (DoRecover(imageCallback))
-                                        {
-                                            DeleteRecoveryFolder();
-                                            Status.Success = true;
-                                        }
+                                        ReleaseFolderLock();
+                                        DeleteFolder();
+                                        Status.Success = true;
                                     }
-                                    finally
-                                    {
-                                        FinishRecovery();
-                                        InvokeFinished();
-                                    }
-                                });
-                                return true;
-                            case DialogResult.No:
-                                DeleteRecoveryFolder();
-                                break;
-                            default:
-                                FinishRecovery();
-                                break;
-                        }
+                                }
+                                finally
+                                {
+                                    ReleaseFolderLock();
+                                    InvokeFinished();
+                                }
+                            });
+                            return true;
+                        case DialogResult.No: // Delete
+                            ReleaseFolderLock();
+                            DeleteFolder();
+                            break;
+                        default: // Not Now
+                            ReleaseFolderLock();
+                            break;
                     }
                 }
                 catch (Exception)
                 {
-                    FinishRecovery();
+                    ReleaseFolderLock();
                     throw;
                 }
                 return false;
@@ -162,11 +166,8 @@ namespace NAPS2.Recovery
                 return recoveryPromptForm.ShowDialog();
             }
 
-            private void DeleteRecoveryFolder()
+            private void DeleteFolder()
             {
-                // Release all locks so that the folder's deletion will work
-                FinishRecovery();
-
                 try
                 {
                     folderToRecoverFrom.Delete(true);
@@ -177,16 +178,16 @@ namespace NAPS2.Recovery
                 }
             }
 
-            private void StartRecovery()
+            private DirectoryInfo FindAndLockFolderToRecoverFrom()
             {
                 // Find the most recent recovery folder that can be locked (i.e. isn't in use already)
-                folderToRecoverFrom = new DirectoryInfo(Paths.Recovery)
+                return new DirectoryInfo(Paths.Recovery)
                     .EnumerateDirectories()
                     .OrderByDescending(x => x.LastWriteTime)
                     .FirstOrDefault(TryLockRecoveryFolder);
             }
 
-            private void FinishRecovery()
+            private void ReleaseFolderLock()
             {
                 // Unlock the recover folder
                 if (lockFile != null)
