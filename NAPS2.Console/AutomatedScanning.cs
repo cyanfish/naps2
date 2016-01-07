@@ -318,7 +318,15 @@ namespace NAPS2.Console
             // TODO: If I add new image settings this may break things
             imageSettingsContainer.ImageSettings = new ImageSettings { JpegQuality = options.JpegQuality };
             var op = operationFactory.Create<SaveImagesOperation>();
-            op.StatusChanged += (sender, args) => OutputVerbose(ConsoleResources.ExportingImage, op.Status.CurrentProgress + 1, scannedImages.Count);
+            int i = -1;
+            op.StatusChanged += (sender, args) =>
+            {
+                if (op.Status.CurrentProgress > i)
+                {
+                    OutputVerbose(ConsoleResources.ExportingImage, op.Status.CurrentProgress + 1, scannedImages.Count);
+                    i = op.Status.CurrentProgress;
+                }
+            };
             op.Start(outputPath, startTime, scannedImages);
             op.WaitUntilFinished();
         }
@@ -378,8 +386,15 @@ namespace NAPS2.Console
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
 
             var op = operationFactory.Create<SavePdfOperation>();
+            int i = -1;
             op.StatusChanged += (sender, args) =>
-                OutputVerbose(ConsoleResources.ExportingPage, op.Status.CurrentProgress + 1, scannedImages.Count);;
+            {
+                if (op.Status.CurrentProgress > i)
+                {
+                    OutputVerbose(ConsoleResources.ExportingPage, op.Status.CurrentProgress + 1, scannedImages.Count);
+                    i = op.Status.CurrentProgress;
+                }
+            };
             op.Start(path, startTime, scannedImages, pdfSettings, ocrLanguageCode);
             op.WaitUntilFinished();
             return op.Status.Success;
