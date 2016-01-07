@@ -10,6 +10,7 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
+using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.WinForms;
@@ -22,18 +23,18 @@ namespace NAPS2.Scan.Batch
         private readonly IProfileManager profileManager;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly IPdfExporter pdfExporter;
-        private readonly ImageSaver imageSaver;
+        private readonly IOperationFactory operationFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly UserConfigManager userConfigManager;
         private readonly IFormFactory formFactory;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, ImageSaver imageSaver, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
+        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
         {
             this.scanPerformer = scanPerformer;
             this.profileManager = profileManager;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
-            this.imageSaver = imageSaver;
+            this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.userConfigManager = userConfigManager;
             this.formFactory = formFactory;
@@ -41,7 +42,7 @@ namespace NAPS2.Scan.Batch
 
         public void PerformBatchScan(BatchSettings settings, Form batchForm, Action<IScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
-            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, imageSaver, pdfSettingsContainer, userConfigManager, formFactory)
+            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, userConfigManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -57,7 +58,7 @@ namespace NAPS2.Scan.Batch
             private readonly IProfileManager profileManager;
             private readonly FileNamePlaceholders fileNamePlaceholders;
             private readonly IPdfExporter pdfExporter;
-            private readonly ImageSaver imageSaver;
+            private readonly IOperationFactory operationFactory;
             private readonly PdfSettingsContainer pdfSettingsContainer;
             private readonly UserConfigManager userConfigManager;
             private readonly IFormFactory formFactory;
@@ -66,13 +67,13 @@ namespace NAPS2.Scan.Batch
             private ScanParams scanParams;
             private List<List<IScannedImage>> scans;
 
-            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, ImageSaver imageSaver, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
+            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
             {
                 this.scanPerformer = scanPerformer;
                 this.profileManager = profileManager;
                 this.fileNamePlaceholders = fileNamePlaceholders;
                 this.pdfExporter = pdfExporter;
-                this.imageSaver = imageSaver;
+                this.operationFactory = operationFactory;
                 this.pdfSettingsContainer = pdfSettingsContainer;
                 this.userConfigManager = userConfigManager;
                 this.formFactory = formFactory;
@@ -276,7 +277,7 @@ namespace NAPS2.Scan.Batch
                     {
                         for (int i = 0; i < allImages.Count; i++)
                         {
-                            Save(now, i, new[] { allImages[i] });
+                            Save(now, i, new List<IScannedImage> { allImages[i] });
                             allImages[i].Dispose();
                         }
                     }
@@ -312,7 +313,7 @@ namespace NAPS2.Scan.Batch
                 }
             }
 
-            private void Save(DateTime now, int i, ICollection<IScannedImage> images)
+            private void Save(DateTime now, int i, List<IScannedImage> images)
             {
                 if (images.Count == 0)
                 {
@@ -330,8 +331,9 @@ namespace NAPS2.Scan.Batch
                 }
                 else
                 {
-                    // TODO: Verify behavior for TIFF + others
-                    imageSaver.SaveImages(subPath, now, images, j => true);
+                    var op = operationFactory.Create<SaveImagesOperation>();
+                    op.Start(subPath, now, images);
+                    op.WaitUntilFinished();
                 }
             }
 

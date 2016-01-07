@@ -53,7 +53,6 @@ namespace NAPS2.WinForms
     {
         private readonly IEmailer emailer;
         private readonly IScannedImageImporter scannedImageImporter;
-        private readonly ImageSaver imageSaver;
         private readonly StringWrapper stringWrapper;
         private readonly AppConfigManager appConfigManager;
         private readonly RecoveryManager recoveryManager;
@@ -76,10 +75,9 @@ namespace NAPS2.WinForms
         private CancellationTokenSource renderThumbnailsCts;
         private LayoutManager layoutManager;
 
-        public FDesktop(IEmailer emailer, ImageSaver imageSaver, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager)
+        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager)
         {
             this.emailer = emailer;
-            this.imageSaver = imageSaver;
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
             this.recoveryManager = recoveryManager;
@@ -296,10 +294,13 @@ namespace NAPS2.WinForms
 
         public void ReceiveScannedImage(IScannedImage scannedImage)
         {
-            imageList.Images.Add(scannedImage);
-            AppendThumbnail(scannedImage);
-            changeTracker.HasUnsavedChanges = true;
-            Application.DoEvents();
+            Invoke(new Action(() =>
+            {
+                imageList.Images.Add(scannedImage);
+                AppendThumbnail(scannedImage);
+                changeTracker.HasUnsavedChanges = true;
+                Application.DoEvents();
+            }));
         }
 
         private void UpdateThumbnails()
@@ -709,7 +710,15 @@ namespace NAPS2.WinForms
                 {
                     UserConfigManager.Config.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", "");
                     UserConfigManager.Save();
-                    imageSaver.SaveImages(sd.FileName, DateTime.Now, images, i => true);
+
+                    var op = operationFactory.Create<SaveImagesOperation>();
+                    var progressForm = FormFactory.Create<FProgress>();
+                    progressForm.Operation = op;
+                    if (op.Start(sd.FileName, DateTime.Now, images))
+                    {
+                        progressForm.ShowDialog();
+                    }
+
                     changeTracker.HasUnsavedChanges = false;
                 }
             }
@@ -864,13 +873,7 @@ namespace NAPS2.WinForms
             }
 
             // Allow scanned images to be recovered in case of an unexpected close
-            foreach (IScannedImage scannedImage in recoveryManager.RecoverScannedImages())
-            {
-                imageList.Images.Add(scannedImage);
-                AppendThumbnail(scannedImage);
-                thumbnailList1.Refresh();
-                changeTracker.HasUnsavedChanges = true;
-            }
+            recoveryManager.RecoverScannedImages(ReceiveScannedImage);
 
             // If NAPS2 was started by the scanner button, do the appropriate actions automatically
             RunStillImageEvents();
@@ -922,8 +925,7 @@ namespace NAPS2.WinForms
                 var op = operationFactory.Create<ImportOperation>();
                 var progressForm = FormFactory.Create<FProgress>();
                 progressForm.Operation = op;
-                if (op.Start(ofd.FileNames.OrderBy(x => x).ToList(),
-                    img => Invoke(new Action(() => ReceiveScannedImage(img)))))
+                if (op.Start(ofd.FileNames.OrderBy(x => x).ToList(), ReceiveScannedImage))
                 {
                     progressForm.ShowDialog();
                 }

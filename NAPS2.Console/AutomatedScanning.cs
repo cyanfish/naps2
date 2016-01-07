@@ -43,7 +43,6 @@ namespace NAPS2.Console
 
     public class AutomatedScanning
     {
-        private readonly ImageSaver imageSaver;
         private readonly IEmailer emailer;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
@@ -61,10 +60,9 @@ namespace NAPS2.Console
         private int totalPagesScanned;
         private DateTime startTime;
 
-        public AutomatedScanning(AutomatedScanningOptions options, ImageSaver imageSaver, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory)
         {
             this.options = options;
-            this.imageSaver = imageSaver;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
@@ -319,11 +317,10 @@ namespace NAPS2.Console
         {
             // TODO: If I add new image settings this may break things
             imageSettingsContainer.ImageSettings = new ImageSettings { JpegQuality = options.JpegQuality };
-            imageSaver.SaveImages(outputPath, startTime, scannedImages, i =>
-            {
-                OutputVerbose(ConsoleResources.ExportingImage, i, scannedImages.Count);
-                return true;
-            });
+            var op = operationFactory.Create<SaveImagesOperation>();
+            op.StatusChanged += (sender, args) => OutputVerbose(ConsoleResources.ExportingImage, op.Status.CurrentProgress + 1, scannedImages.Count);
+            op.Start(outputPath, startTime, scannedImages);
+            op.WaitUntilFinished();
         }
 
         private void ExportToPdf()
@@ -384,7 +381,7 @@ namespace NAPS2.Console
             op.StatusChanged += (sender, args) =>
                 OutputVerbose(ConsoleResources.ExportingPage, op.Status.CurrentProgress + 1, scannedImages.Count);;
             op.Start(path, startTime, scannedImages, pdfSettings, ocrLanguageCode);
-            op.WaitForCompletion();
+            op.WaitUntilFinished();
             return op.Status.Success;
         }
 

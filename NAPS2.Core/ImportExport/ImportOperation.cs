@@ -78,7 +78,7 @@ namespace NAPS2.ImportExport
             return true;
         }
 
-        public void WaitForCompletion()
+        public void WaitUntilFinished()
         {
             thread.Join();
         }

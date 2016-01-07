@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Lang.Resources;
+using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
@@ -16,45 +19,64 @@ namespace NAPS2.Recovery
         private readonly IFormFactory formFactory;
         private readonly IScannedImageFactory scannedImageFactory;
         private readonly IUserConfigManager userConfigManager;
+        private readonly ThreadFactory threadFactory;
 
-        public RecoveryManager(IFormFactory formFactory, IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager)
+        public RecoveryManager(IFormFactory formFactory, IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
         {
             this.formFactory = formFactory;
             this.scannedImageFactory = scannedImageFactory;
             this.userConfigManager = userConfigManager;
+            this.threadFactory = threadFactory;
         }
 
-        public IEnumerable<IScannedImage> RecoverScannedImages()
+        public void RecoverScannedImages(Action<IScannedImage> imageCallback)
         {
-            // Use an internal class with its own state so that RecoverManager is thread-safe
-            return new RecoveryState(formFactory, scannedImageFactory, userConfigManager).RecoverScannedImages();
+            var op = new RecoveryOperation(formFactory, scannedImageFactory, userConfigManager, threadFactory);
+            var progressForm = formFactory.Create<FProgress>();
+            progressForm.Operation = op;
+            if (op.Start(imageCallback))
+            {
+                progressForm.ShowDialog();
+            }
         }
 
-        private class RecoveryState
+        private class RecoveryOperation : OperationBase
         {
             private readonly IFormFactory formFactory;
             private readonly IScannedImageFactory scannedImageFactory;
             private readonly IUserConfigManager userConfigManager;
+            private readonly ThreadFactory threadFactory;
 
             private FileStream lockFile;
             private DirectoryInfo folderToRecoverFrom;
             private RecoveryIndexManager recoveryIndexManager;
             private int imageCount;
             private DateTime scannedDateTime;
+            private bool cancel;
 
-            public RecoveryState(IFormFactory formFactory, IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager)
+            public RecoveryOperation(IFormFactory formFactory, IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
             {
                 this.formFactory = formFactory;
                 this.scannedImageFactory = scannedImageFactory;
                 this.userConfigManager = userConfigManager;
+                this.threadFactory = threadFactory;
+
+                ProgressTitle = MiscResources.ImportProgress;
+                AllowCancel = true;
             }
 
-            public IEnumerable<IScannedImage> RecoverScannedImages()
+            public bool Start(Action<IScannedImage> imageCallback)
             {
+                Status = new OperationStatus
+                {
+                    StatusText = MiscResources.Recovering
+                };
+                cancel = false;
+
                 StartRecovery();
                 if (folderToRecoverFrom == null)
                 {
-                    yield break;
+                    return false;
                 }
                 try
                 {
@@ -67,40 +89,70 @@ namespace NAPS2.Recovery
                         switch (PromptToRecover())
                         {
                             case DialogResult.Yes:
-                                foreach (var scannedImage in DoRecover())
+                                threadFactory.StartThread(() =>
                                 {
-                                    yield return scannedImage;
-                                }
-                                DeleteRecoveryFolder();
-                                break;
+                                    try
+                                    {
+                                        if (DoRecover(imageCallback))
+                                        {
+                                            DeleteRecoveryFolder();
+                                            Status.Success = true;
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        FinishRecovery();
+                                        InvokeFinished();
+                                    }
+                                });
+                                return true;
                             case DialogResult.No:
                                 DeleteRecoveryFolder();
+                                break;
+                            default:
+                                FinishRecovery();
                                 break;
                         }
                     }
                 }
-                finally
+                catch (Exception)
                 {
                     FinishRecovery();
+                    throw;
                 }
+                return false;
             }
 
-            private IEnumerable<IScannedImage> DoRecover()
+            private bool DoRecover(Action<IScannedImage> imageCallback)
             {
+                Status.MaxProgress = recoveryIndexManager.Index.Images.Count;
+                InvokeStatusChanged();
+
                 foreach (RecoveryIndexImage indexImage in recoveryIndexManager.Index.Images)
                 {
+                    if (cancel)
+                    {
+                        return false;
+                    }
+
                     string imagePath = Path.Combine(folderToRecoverFrom.FullName, indexImage.FileName);
                     using (var bitmap = new Bitmap(imagePath))
                     {
-                        var scannedImage = scannedImageFactory.Create(bitmap, indexImage.BitDepth, indexImage.HighQuality);
+                        var scannedImage = scannedImageFactory.Create(bitmap, indexImage.BitDepth,
+                            indexImage.HighQuality);
                         foreach (var transform in indexImage.TransformList)
                         {
                             scannedImage.AddTransform(transform);
                         }
-                        scannedImage.SetThumbnail(scannedImage.RenderThumbnail(userConfigManager.Config.ThumbnailSize));
-                        yield return scannedImage;
+                        scannedImage.SetThumbnail(
+                            scannedImage.RenderThumbnail(userConfigManager.Config.ThumbnailSize));
+                        imageCallback(scannedImage);
                     }
+
+                    Status.CurrentProgress++;
+                    InvokeStatusChanged();
                 }
+                return true;
             }
 
             private DialogResult PromptToRecover()
@@ -157,6 +209,11 @@ namespace NAPS2.Recovery
                     // Some problem, e.g. the folder is already locked
                     return false;
                 }
+            }
+
+            public override void Cancel()
+            {
+                cancel = true;
             }
         }
     }

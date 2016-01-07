@@ -25,26 +25,36 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
+using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {
-    public class ImageSaver
+    public class SaveImagesOperation : OperationBase
     {
         private readonly IErrorOutput errorOutput;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOverwritePrompt overwritePrompt;
+        private readonly ThreadFactory threadFactory;
 
-        public ImageSaver(IErrorOutput errorOutput, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt)
+        private bool cancel;
+        private Thread thread;
+
+        public SaveImagesOperation(IErrorOutput errorOutput, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory)
         {
             this.errorOutput = errorOutput;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.overwritePrompt = overwritePrompt;
+            this.threadFactory = threadFactory;
+
+            ProgressTitle = MiscResources.SaveImagesProgress;
+            AllowCancel = true;
         }
 
         /// <summary>
@@ -54,75 +64,97 @@ namespace NAPS2.ImportExport.Images
         /// <param name="fileName">The name of the file to save. For multiple images, this is modified by appending a number before the extension.</param>
         /// <param name="dateTime"></param>
         /// <param name="images">The collection of images to save.</param>
-        public void SaveImages(string fileName, DateTime dateTime, ICollection<IScannedImage> images, Func<int, bool> progressCallback)
+        public bool Start(string fileName, DateTime dateTime, List<IScannedImage> images)
         {
-            try
+            Status = new OperationStatus
             {
-                var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
-                ImageFormat format = GetImageFormat(subFileName);
+                MaxProgress = images.Count
+            };
+            cancel = false;
 
-                if (Equals(format, ImageFormat.Tiff))
+            thread = threadFactory.StartThread(() =>
+            {
+                try
                 {
-                    if (File.Exists(subFileName))
+                    var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
+                    ImageFormat format = GetImageFormat(subFileName);
+
+                    if (Equals(format, ImageFormat.Tiff))
                     {
-                        if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
+                        if (File.Exists(subFileName))
                         {
-                            return;
+                            if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
+                            {
+                                return;
+                            }
                         }
-                    }
-                    Image[] bitmaps = images.Select(x => (Image)x.GetImage()).ToArray();
-                    TiffHelper.SaveMultipage(bitmaps, subFileName);
-                    foreach (Image bitmap in bitmaps)
-                    {
-                        bitmap.Dispose();
-                    }
-                    return;
-                }
-
-                int i = 1;
-                int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
-                foreach (IScannedImage img in images)
-                {
-                    if (!progressCallback(i))
-                    {
+                        Status.StatusText = string.Format(MiscResources.Saving, subFileName);
+                        Status.Success = TiffHelper.SaveMultipage(images, subFileName, j =>
+                        {
+                            Status.CurrentProgress = j;
+                            InvokeStatusChanged();
+                            return !cancel;
+                        });
                         return;
                     }
-                    if (images.Count == 1 && File.Exists(subFileName))
+
+                    int i = 0;
+                    int digits = (int) Math.Floor(Math.Log10(images.Count)) + 1;
+                    foreach (IScannedImage img in images)
                     {
-                        var dialogResult = overwritePrompt.ConfirmOverwrite(subFileName);
-                        if (dialogResult == DialogResult.No)
-                        {
-                            continue;
-                        }
-                        if (dialogResult == DialogResult.Cancel)
+                        if (cancel)
                         {
                             return;
                         }
-                    }
-                    using (Bitmap baseImage = img.GetImage())
-                    {
-                        if (images.Count == 1)
+                        Status.CurrentProgress = i;
+                        InvokeStatusChanged();
+
+                        if (images.Count == 1 && File.Exists(subFileName))
                         {
-                            DoSaveImage(baseImage, subFileName, format);
+                            var dialogResult = overwritePrompt.ConfirmOverwrite(subFileName);
+                            if (dialogResult == DialogResult.No)
+                            {
+                                continue;
+                            }
+                            if (dialogResult == DialogResult.Cancel)
+                            {
+                                return;
+                            }
                         }
-                        else
+                        using (Bitmap baseImage = img.GetImage())
                         {
-                            var fileNameN = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i - 1, digits);
-                            DoSaveImage(baseImage, fileNameN, format);
+                            if (images.Count == 1)
+                            {
+                                DoSaveImage(baseImage, subFileName, format);
+                            }
+                            else
+                            {
+                                var fileNameN = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i,
+                                    digits);
+                                DoSaveImage(baseImage, fileNameN, format);
+                            }
                         }
+                        i++;
                     }
-                    i++;
+
+                    Status.Success = true;
                 }
-            }
-            catch (UnauthorizedAccessException)
-            {
-                errorOutput.DisplayError(MiscResources.DontHavePermission);
-            }
-            catch (IOException ex)
-            {
-                Log.ErrorException(MiscResources.ErrorSaving, ex);
-                errorOutput.DisplayError(MiscResources.ErrorSaving);
-            }
+                catch (UnauthorizedAccessException)
+                {
+                    InvokeError(MiscResources.DontHavePermission);
+                }
+                catch (IOException ex)
+                {
+                    Log.ErrorException(MiscResources.ErrorSaving, ex);
+                    InvokeError(MiscResources.ErrorSaving);
+                }
+                finally
+                {
+                    InvokeFinished();
+                }
+            });
+
+            return true;
         }
 
         private void DoSaveImage(Bitmap image, string path, ImageFormat format)
@@ -139,6 +171,16 @@ namespace NAPS2.ImportExport.Images
             {
                 image.Save(path, format);
             }
+        }
+
+        public override void Cancel()
+        {
+            cancel = true;
+        }
+
+        public void WaitUntilFinished()
+        {
+            thread.Join();
         }
 
         private static ImageFormat GetImageFormat(string fileName)

@@ -24,97 +24,98 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using NAPS2.Scan.Images;
 
 namespace NAPS2.ImportExport.Images
 {
     class TiffHelper
     {
-        public static bool SaveMultipage(Image[] bmp, string location)
+        public static bool SaveMultipage(List<IScannedImage> images, string location, Func<int, bool> progressCallback)
         {
-            if (bmp != null)
+            try
             {
-                try
+                ImageCodecInfo codecInfo = GetCodecForString("TIFF");
+
+                if (!progressCallback(0))
                 {
-                    ImageCodecInfo codecInfo = GetCodecForString("TIFF");
+                    return false;
+                }
 
-                    if (bmp.Length == 1)
+                if (images.Count == 1)
+                {
+                    var iparams = new EncoderParameters(1);
+                    Encoder iparam = Encoder.Compression;
+                    var iparamPara = new EncoderParameter(iparam, (long)(EncoderValue.CompressionLZW));
+                    iparams.Param[0] = iparamPara;
+                    using (var bitmap = images[0].GetImage())
                     {
-
-                        var iparams = new EncoderParameters(1);
-                        Encoder iparam = Encoder.Compression;
-                        var iparamPara = new EncoderParameter(iparam, (long)(EncoderValue.CompressionLZW));
-                        iparams.Param[0] = iparamPara;
-                        bmp[0].Save(location, codecInfo, iparams);
-
-
+                        bitmap.Save(location, codecInfo, iparams);
                     }
-                    else if (bmp.Length > 1)
+                }
+                else if (images.Count > 1)
+                {
+                    Encoder saveEncoder;
+                    Encoder compressionEncoder;
+                    EncoderParameter SaveEncodeParam;
+                    EncoderParameter CompressionEncodeParam;
+                    var encoderParams = new EncoderParameters(2);
+
+                    saveEncoder = Encoder.SaveFlag;
+                    compressionEncoder = Encoder.Compression;
+
+                    // Save the first page (frame).
+                    SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
+                    CompressionEncodeParam = new EncoderParameter(compressionEncoder, (long)EncoderValue.CompressionLZW);
+                    encoderParams.Param[0] = CompressionEncodeParam;
+                    encoderParams.Param[1] = SaveEncodeParam;
+
+                    File.Delete(location);
+                    using (var bitmap0 = images[0].GetImage())
                     {
+                        bitmap0.Save(location, codecInfo, encoderParams);
 
-                        Encoder saveEncoder;
-                        Encoder compressionEncoder;
-                        EncoderParameter SaveEncodeParam;
-                        EncoderParameter CompressionEncodeParam;
-                        var encoderParams = new EncoderParameters(2);
-
-                        saveEncoder = Encoder.SaveFlag;
-                        compressionEncoder = Encoder.Compression;
-
-                        // Save the first page (frame).
-                        SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
-                        CompressionEncodeParam = new EncoderParameter(compressionEncoder, (long)EncoderValue.CompressionLZW);
-                        encoderParams.Param[0] = CompressionEncodeParam;
-                        encoderParams.Param[1] = SaveEncodeParam;
-
-                        File.Delete(location);
-                        bmp[0].Save(location, codecInfo, encoderParams);
-
-
-                        for (int i = 1; i < bmp.Length; i++)
+                        for (int i = 1; i < images.Count; i++)
                         {
-                            if (bmp[i] == null)
+                            if (images[i] == null)
                                 break;
 
-                            SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);
-                            CompressionEncodeParam = new EncoderParameter(compressionEncoder, (long)EncoderValue.CompressionLZW);
+                            if (!progressCallback(i))
+                            {
+                                bitmap0.Dispose();
+                                File.Delete(location);
+                                return false;
+                            }
+
+                            SaveEncodeParam = new EncoderParameter(saveEncoder, (long) EncoderValue.FrameDimensionPage);
+                            CompressionEncodeParam = new EncoderParameter(compressionEncoder,
+                                (long) EncoderValue.CompressionLZW);
                             encoderParams.Param[0] = CompressionEncodeParam;
                             encoderParams.Param[1] = SaveEncodeParam;
-                            bmp[0].SaveAdd(bmp[i], encoderParams);
-
+                            using (var bitmap = images[i].GetImage())
+                            {
+                                bitmap0.SaveAdd(bitmap, encoderParams);
+                            }
                         }
 
-                        SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.Flush);
+                        SaveEncodeParam = new EncoderParameter(saveEncoder, (long) EncoderValue.Flush);
                         encoderParams.Param[0] = SaveEncodeParam;
-                        bmp[0].SaveAdd(encoderParams);
+                        bitmap0.SaveAdd(encoderParams);
                     }
-                    return true;
+                }
+                return true;
 
 
-                }
-                catch (Exception ee)
-                {
-                    throw new Exception(ee.Message + "  Error in saving as multipage ");
-                }
             }
-            else
-                return false;
+            catch (Exception ex)
+            {
+                throw new Exception("Error saving TIFF", ex);
+            }
 
         }
         private static ImageCodecInfo GetCodecForString(string type)
         {
             ImageCodecInfo[] info = ImageCodecInfo.GetImageEncoders();
-
-            for (int i = 0; i < info.Length; i++)
-            {
-                string enumName = type;
-                if (info[i].FormatDescription.Equals(enumName))
-                {
-                    return info[i];
-                }
-            }
-
-            return null;
-
+            return info.FirstOrDefault(t => t.FormatDescription.Equals(type));
         }
     }
 }
