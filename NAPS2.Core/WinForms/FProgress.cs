@@ -43,18 +43,18 @@ namespace NAPS2.WinForms
 
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
-            Invoke(new Action(() => errorOutput.DisplayError(e.ErrorMessage)));
+            Invoke(() => errorOutput.DisplayError(e.ErrorMessage));
         }
 
         void operation_StatusChanged(object sender, EventArgs e)
         {
-            Invoke(new Action(DisplayProgress));
+            Invoke(DisplayProgress);
         }
 
         void operation_Finished(object sender, EventArgs e)
         {
             finished = true;
-            Invoke(new Action(Close));
+            Invoke(Close);
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)

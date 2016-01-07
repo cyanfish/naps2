@@ -294,13 +294,13 @@ namespace NAPS2.WinForms
 
         public void ReceiveScannedImage(IScannedImage scannedImage)
         {
-            Invoke(new Action(() =>
+            Invoke(() =>
             {
                 imageList.Images.Add(scannedImage);
                 AppendThumbnail(scannedImage);
                 changeTracker.HasUnsavedChanges = true;
                 Application.DoEvents();
-            }));
+            });
         }
 
         private void UpdateThumbnails()
@@ -860,7 +860,7 @@ namespace NAPS2.WinForms
             {
                 if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE))
                 {
-                    Invoke(new Action(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length))));
+                    Invoke(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
                 }
             });
 
@@ -934,12 +934,12 @@ namespace NAPS2.WinForms
 
         public void UpdateAvailable(VersionInfo versionInfo)
         {
-            Invoke(new Action(() => autoUpdaterUI.PerformUpdate(this, versionInfo)));
+            Invoke(() => autoUpdaterUI.PerformUpdate(this, versionInfo));
         }
 
         public void InstallComplete()
         {
-            Invoke(new Action(() =>
+            Invoke(() =>
             {
                 switch (MessageBox.Show(MiscResources.InstallCompletePromptRestart, MiscResources.InstallComplete, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 {
@@ -948,7 +948,7 @@ namespace NAPS2.WinForms
                         Process.Start(Application.ExecutablePath);
                         break;
                 }
-            }));
+            });
         }
 
         private void thumbnailList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1295,7 +1295,7 @@ namespace NAPS2.WinForms
                         continue;
                     }
                     // Do the rest of the stuff on the UI thread to help with synchronization
-                    Invoke(new Action(() =>
+                    Invoke(() =>
                     {
                         if (ct.IsCancellationRequested)
                         {
@@ -1314,7 +1314,7 @@ namespace NAPS2.WinForms
                         {
                             thumbnailList1.ReplaceThumbnail(index, thumbnail);
                         }
-                    }));
+                    });
                 }
             }, ct);
         }

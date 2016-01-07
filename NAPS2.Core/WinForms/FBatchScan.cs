@@ -350,13 +350,13 @@ namespace NAPS2.WinForms
             try
             {
                 batchScanPerformer.PerformBatchScan(BatchSettings, this,
-                    image => Invoke(new Action(() => ImageCallback(image))), ProgressCallback());
-                Invoke(new Action(() =>
+                    image => Invoke(() => ImageCallback(image)), ProgressCallback());
+                Invoke(() =>
                 {
                     lblStatus.Text = cancelBatch
                         ? MiscResources.BatchStatusCancelled
                         : MiscResources.BatchStatusComplete;
-                }));
+                });
             }
             catch (ScanDriverException ex)
             {
@@ -370,12 +370,12 @@ namespace NAPS2.WinForms
             {
                 Log.ErrorException("Error in batch scan", ex);
                 errorOutput.DisplayError(MiscResources.BatchError);
-                Invoke(new Action(() =>
+                Invoke(() =>
                 {
                     lblStatus.Text = MiscResources.BatchStatusError;
-                }));
+                });
             }
-            Invoke(new Action(() =>
+            Invoke(() =>
             {
                 batchRunning = false;
                 cancelBatch = false;
@@ -384,7 +384,7 @@ namespace NAPS2.WinForms
                 btnCancel.Text = MiscResources.Close;
                 EnableDisableSettings(true);
                 Activate();
-            }));
+            });
         }
 
         private Func<string, bool> ProgressCallback()
@@ -393,10 +393,10 @@ namespace NAPS2.WinForms
             {
                 if (!cancelBatch)
                 {
-                    Invoke(new Action(() =>
+                    Invoke(() =>
                     {
                         lblStatus.Text = status;
-                    }));
+                    });
                 }
                 return !cancelBatch;
             };

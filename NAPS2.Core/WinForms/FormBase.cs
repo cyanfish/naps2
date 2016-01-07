@@ -85,6 +85,11 @@ namespace NAPS2.WinForms
             e.Value = ((Enum)e.ListItem).Description();
         }
 
+        public void Invoke(Action action)
+        {
+            ((Control) this).Invoke(action);
+        }
+
         #endregion
 
         protected void UpdateRTL()

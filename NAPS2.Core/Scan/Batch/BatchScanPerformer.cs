@@ -40,7 +40,7 @@ namespace NAPS2.Scan.Batch
             this.formFactory = formFactory;
         }
 
-        public void PerformBatchScan(BatchSettings settings, Form batchForm, Action<IScannedImage> imageCallback, Func<string, bool> progressCallback)
+        public void PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<IScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
             var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, userConfigManager, formFactory)
             {
@@ -83,7 +83,7 @@ namespace NAPS2.Scan.Batch
 
             public Func<string, bool> ProgressCallback { get; set; }
 
-            public Form BatchForm { get; set; }
+            public FormBase BatchForm { get; set; }
 
             public Action<IScannedImage> LoadImageCallback { get; set; }
 
@@ -196,7 +196,7 @@ namespace NAPS2.Scan.Batch
                     if (profile.DriverName == TwainScanDriver.DRIVER_NAME || profile.UseNativeUI)
                     {
                         // Apart from WIA with predefined settings, the actual scan needs to be done on the UI thread
-                        BatchForm.Invoke(new Action(() => DoScan(scanNumber, scan, pageNumber)));
+                        BatchForm.Invoke(() => DoScan(scanNumber, scan, pageNumber));
                     }
                     else
                     {
