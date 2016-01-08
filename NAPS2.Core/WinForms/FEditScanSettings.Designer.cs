@@ -64,10 +64,12 @@ namespace NAPS2.WinForms
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdTWAIN = new System.Windows.Forms.RadioButton();
             this.rdWIA = new System.Windows.Forms.RadioButton();
-            this.cbHighQuality = new System.Windows.Forms.CheckBox();
             this.txtBrightness = new System.Windows.Forms.TextBox();
             this.txtContrast = new System.Windows.Forms.TextBox();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
+            this.cbAutoSave = new System.Windows.Forms.CheckBox();
+            this.linkAutoSaveSettings = new System.Windows.Forms.LinkLabel();
+            this.btnAdvanced = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).BeginInit();
@@ -269,12 +271,6 @@ namespace NAPS2.WinForms
             this.rdWIA.UseVisualStyleBackColor = true;
             this.rdWIA.CheckedChanged += new System.EventHandler(this.rdWIA_CheckedChanged);
             // 
-            // cbHighQuality
-            // 
-            resources.ApplyResources(this.cbHighQuality, "cbHighQuality");
-            this.cbHighQuality.Name = "cbHighQuality";
-            this.cbHighQuality.UseVisualStyleBackColor = true;
-            // 
             // txtBrightness
             // 
             resources.ApplyResources(this.txtBrightness, "txtBrightness");
@@ -287,14 +283,36 @@ namespace NAPS2.WinForms
             this.txtContrast.Name = "txtContrast";
             this.txtContrast.TextChanged += new System.EventHandler(this.txtContrast_TextChanged);
             // 
+            // cbAutoSave
+            // 
+            resources.ApplyResources(this.cbAutoSave, "cbAutoSave");
+            this.cbAutoSave.Name = "cbAutoSave";
+            this.cbAutoSave.UseVisualStyleBackColor = true;
+            // 
+            // linkAutoSaveSettings
+            // 
+            resources.ApplyResources(this.linkAutoSaveSettings, "linkAutoSaveSettings");
+            this.linkAutoSaveSettings.Name = "linkAutoSaveSettings";
+            this.linkAutoSaveSettings.TabStop = true;
+            this.linkAutoSaveSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAutoSaveSettings_LinkClicked);
+            // 
+            // btnAdvanced
+            // 
+            resources.ApplyResources(this.btnAdvanced, "btnAdvanced");
+            this.btnAdvanced.Name = "btnAdvanced";
+            this.btnAdvanced.UseVisualStyleBackColor = true;
+            this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
+            // 
             // FEditScanSettings
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnAdvanced);
+            this.Controls.Add(this.linkAutoSaveSettings);
+            this.Controls.Add(this.cbAutoSave);
             this.Controls.Add(this.txtContrast);
             this.Controls.Add(this.txtBrightness);
-            this.Controls.Add(this.cbHighQuality);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.cmbScale);
             this.Controls.Add(this.label10);
@@ -367,8 +385,10 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton rdTWAIN;
         private System.Windows.Forms.RadioButton rdWIA;
-        private System.Windows.Forms.CheckBox cbHighQuality;
         private System.Windows.Forms.TextBox txtBrightness;
         private System.Windows.Forms.TextBox txtContrast;
+        private System.Windows.Forms.CheckBox cbAutoSave;
+        private System.Windows.Forms.LinkLabel linkAutoSaveSettings;
+        private System.Windows.Forms.Button btnAdvanced;
     }
 }

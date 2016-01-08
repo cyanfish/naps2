@@ -40,6 +40,14 @@ namespace NAPS2.Scan
             PageSize = ScanPageSize.Letter;
             Resolution = ScanDpi.Dpi200;
             PaperSource = ScanSource.Glass;
+            Quality = 75;
+        }
+
+        public ScanProfile Clone()
+        {
+            var profile = (ScanProfile) MemberwiseClone();
+            profile.AutoSaveSettings = AutoSaveSettings.Clone();
+            return profile;
         }
 
         public ScanDevice Device { get; set; }
@@ -75,6 +83,49 @@ namespace NAPS2.Scan
         public ScanDpi Resolution { get; set; }
 
         public ScanSource PaperSource { get; set; }
+
+        public bool EnableAutoSave { get; set; }
+
+        public AutoSaveSettings AutoSaveSettings { get; set; }
+
+        public int Quality { get; set; }
+
+        public bool BrightnessContrastAfterScan { get; set; }
+
+        public bool ForcePageSize { get; set; }
+
+        public TwainImpl TwainImpl { get; set; }
+    }
+
+    public class AutoSaveSettings
+    {
+        internal AutoSaveSettings Clone()
+        {
+            return (AutoSaveSettings) MemberwiseClone();
+        }
+
+        public string FilePath { get; set; }
+
+        public bool ClearImagesAfterSaving { get; set; }
+
+        public AutoSaveSeparator Separator { get; set; }
+    }
+
+    public enum AutoSaveSeparator
+    {
+        FilePerPage,
+        FilePerScan,
+        PatchT
+    }
+
+    public enum TwainImpl
+    {
+        [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Default")]
+        Default,
+        [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Legacy")]
+        Legacy,
+        //[LocalizedDescription(typeof(SettingsResources), "TwainImpl_X64")]
+        //X64
     }
 
     public enum ScanSource

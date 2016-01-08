@@ -31,13 +31,12 @@ using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
-    public partial class FEditScanSettings : FormBase
+    public partial class FAutoSaveSettings : FormBase
     {
         private readonly IScanDriverFactory driverFactory;
         private readonly IErrorOutput errorOutput;
         private readonly ProfileNameTracker profileNameTracker;
 
-        private ScanProfile scanProfile;
         private ScanDevice currentDevice;
         private bool isDefault;
 
@@ -46,7 +45,7 @@ namespace NAPS2.WinForms
 
         private bool suppressChangeEvent;
 
-        public FEditScanSettings(IScanDriverFactory driverFactory, IErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
+        public FAutoSaveSettings(IScanDriverFactory driverFactory, IErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
@@ -104,7 +103,7 @@ namespace NAPS2.WinForms
             cmbScale.SelectedIndex = (int)ScanProfile.AfterScanScale;
             cmbAlign.SelectedIndex = (int)ScanProfile.PageAlign;
 
-            cbAutoSave.Checked = ScanProfile.EnableAutoSave;
+            cbHighQuality.Checked = ScanProfile.MaxQuality;
 
             // The setter updates the driver selection checkboxes
             DeviceDriverName = ScanProfile.DriverName;
@@ -138,11 +137,7 @@ namespace NAPS2.WinForms
             get { return result; }
         }
 
-        public ScanProfile ScanProfile
-        {
-            get { return scanProfile; }
-            set { scanProfile = value.Clone(); }
-        }
+        public ScanProfile ScanProfile { get; set; }
 
         private string DeviceDriverName
         {
@@ -172,6 +167,8 @@ namespace NAPS2.WinForms
                 txtDevice.Text = (value == null ? "" : value.Name);
             }
         }
+
+        public AutoSaveSettings AutoSaveSettings { get; set; }
 
         private void ChooseDevice(string driverName)
         {
@@ -226,7 +223,7 @@ namespace NAPS2.WinForms
             {
                 profileNameTracker.RenamingProfile(ScanProfile.DisplayName, txtName.Text);
             }
-            scanProfile = new ScanProfile
+            ScanProfile = new ScanProfile
             {
                 Version = ScanProfile.CURRENT_VERSION,
 
@@ -235,7 +232,7 @@ namespace NAPS2.WinForms
                 DriverName = DeviceDriverName,
                 DisplayName = txtName.Text,
                 IconID = iconID,
-                MaxQuality = ScanProfile.MaxQuality,
+                MaxQuality = cbHighQuality.Checked,
                 UseNativeUI = rdbNative.Checked,
 
                 AfterScanScale = (ScanScale)cmbScale.SelectedIndex,
@@ -246,14 +243,7 @@ namespace NAPS2.WinForms
                 PageSize = pageSize,
                 CustomPageSize = customPageSize,
                 Resolution = (ScanDpi)cmbResolution.SelectedIndex,
-                PaperSource = (ScanSource)cmbSource.SelectedIndex,
-
-                EnableAutoSave = cbAutoSave.Checked,
-                AutoSaveSettings = ScanProfile.AutoSaveSettings,
-                Quality = ScanProfile.Quality,
-                BrightnessContrastAfterScan = ScanProfile.BrightnessContrastAfterScan,
-                ForcePageSize = ScanProfile.ForcePageSize,
-                TwainImpl = ScanProfile.TwainImpl
+                PaperSource = (ScanSource)cmbSource.SelectedIndex
             };
         }
 
@@ -376,20 +366,6 @@ namespace NAPS2.WinForms
                     }
                 }
             }
-        }
-
-        private void linkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var form = FormFactory.Create<FAutoSaveSettings>();
-            form.AutoSaveSettings = ScanProfile.AutoSaveSettings ?? new AutoSaveSettings();
-            form.ShowDialog();
-        }
-
-        private void btnAdvanced_Click(object sender, EventArgs e)
-        {
-            var form = FormFactory.Create<FAdvancedScanSettings>();
-            form.ScanProfile = ScanProfile;
-            form.ShowDialog();
         }
     }
 }
