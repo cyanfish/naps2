@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using NAPS2.Scan.Images.Transforms;
@@ -82,5 +83,10 @@ namespace NAPS2.Scan.Images
         /// Gets or sets the patch code associated with the scanned page.
         /// </summary>
         PatchCode PatchCode { get; set; }
+
+        /// <summary>
+        /// Gets the image's file format.
+        /// </summary>
+        ImageFormat FileFormat { get; }
     }
 }

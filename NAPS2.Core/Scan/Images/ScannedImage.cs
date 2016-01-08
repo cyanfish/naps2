@@ -128,5 +128,10 @@ namespace NAPS2.Scan.Images
         }
 
         public PatchCode PatchCode { get; set; }
+
+        public ImageFormat FileFormat
+        {
+            get { return baseImageFileFormat; }
+        }
     }
 }

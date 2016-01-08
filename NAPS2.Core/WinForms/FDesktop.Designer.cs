@@ -37,6 +37,7 @@ namespace NAPS2.WinForms
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.btnZoomIn = new System.Windows.Forms.Button();
             this.btnZoomOut = new System.Windows.Forms.Button();
+            this.btnZoomMouseCatcher = new System.Windows.Forms.Button();
             this.thumbnailList1 = new NAPS2.WinForms.ThumbnailList();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxView = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,7 +102,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.btnZoomMouseCatcher = new System.Windows.Forms.Button();
+            this.ctxPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -144,6 +145,13 @@ namespace NAPS2.WinForms
             this.btnZoomOut.UseVisualStyleBackColor = false;
             this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
             // 
+            // btnZoomMouseCatcher
+            // 
+            this.btnZoomMouseCatcher.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnZoomMouseCatcher, "btnZoomMouseCatcher");
+            this.btnZoomMouseCatcher.Name = "btnZoomMouseCatcher";
+            this.btnZoomMouseCatcher.UseVisualStyleBackColor = false;
+            // 
             // thumbnailList1
             // 
             this.thumbnailList1.AllowDrop = true;
@@ -170,6 +178,7 @@ namespace NAPS2.WinForms
             this.ctxSeparator1,
             this.ctxSelectAll,
             this.ctxCopy,
+            this.ctxPaste,
             this.ctxSeparator2,
             this.ctxDelete});
             this.contextMenuStrip.Name = "contextMenuStrip";
@@ -643,12 +652,11 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
-            // btnZoomMouseCatcher
+            // ctxPaste
             // 
-            this.btnZoomMouseCatcher.BackColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.btnZoomMouseCatcher, "btnZoomMouseCatcher");
-            this.btnZoomMouseCatcher.Name = "btnZoomMouseCatcher";
-            this.btnZoomMouseCatcher.UseVisualStyleBackColor = false;
+            this.ctxPaste.Name = "ctxPaste";
+            resources.ApplyResources(this.ctxPaste, "ctxPaste");
+            this.ctxPaste.Click += new System.EventHandler(this.ctxPaste_Click);
             // 
             // FDesktop
             // 
@@ -739,6 +747,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripSeparator ctxSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ctxDelete;
         private System.Windows.Forms.Button btnZoomMouseCatcher;
+        private System.Windows.Forms.ToolStripMenuItem ctxPaste;
     }
 }
 

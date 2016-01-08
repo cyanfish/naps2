@@ -23,6 +23,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -857,12 +858,12 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void ImportDirect(DirectImageTransfer data)
+        private void ImportDirect(DirectImageTransfer data, bool copy)
         {
             var op = operationFactory.Create<DirectImportOperation>();
             var progressForm = FormFactory.Create<FProgress>();
             progressForm.Operation = op;
-            if (op.Start(data, ReceiveScannedImage))
+            if (op.Start(data, copy, ReceiveScannedImage))
             {
                 progressForm.ShowDialog();
             }
@@ -1285,7 +1286,8 @@ namespace NAPS2.WinForms
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!imageList.Images.Any())
+            ctxPaste.Enabled = CanPaste;
+            if (!imageList.Images.Any() && !ctxPaste.Enabled)
             {
                 e.Cancel = true;
             }
@@ -1306,6 +1308,11 @@ namespace NAPS2.WinForms
             CopyImages();
         }
 
+        private void ctxPaste_Click(object sender, EventArgs e)
+        {
+            PasteImages();
+        }
+
         private void ctxDelete_Click(object sender, EventArgs e)
         {
             Delete();
@@ -1324,6 +1331,29 @@ namespace NAPS2.WinForms
             }
         }
 
+        private void PasteImages()
+        {
+            var ido = Clipboard.GetDataObject();
+            if (ido == null)
+            {
+                return;
+            }
+            if (ido.GetDataPresent(typeof(DirectImageTransfer).FullName))
+            {
+                var data = (DirectImageTransfer)ido.GetData(typeof(DirectImageTransfer).FullName);
+                ImportDirect(data, true);
+            }
+        }
+
+        private bool CanPaste
+        {
+            get
+            {
+                var ido = Clipboard.GetDataObject();
+                return ido != null && ido.GetDataPresent(typeof (DirectImageTransfer).FullName);
+            }
+        }
+
         private static IDataObject GetDataObjectForImages(IEnumerable<IScannedImage> images, bool includeBitmap)
         {
             var imageList = images.ToList();
@@ -1335,20 +1365,20 @@ namespace NAPS2.WinForms
             if (includeBitmap)
             {
                 var firstBitmap = imageList[0].GetImage();
-                var bitmapsExceptFirst = imageList.Select(x => x.GetImage()).Skip(1);
                 ido.SetData(DataFormats.Bitmap, true, firstBitmap);
                 const int maxRtfSize = 20 * 1000 * 1000;
                 var rtfEncodedImages = new StringBuilder();
                 rtfEncodedImages.Append("{");
-                rtfEncodedImages.Append(GetRtfEncodedImage(firstBitmap));
-                foreach (var bitmap in bitmapsExceptFirst)
+                rtfEncodedImages.Append(GetRtfEncodedImage(firstBitmap, imageList[0].FileFormat));
+                foreach (var img in imageList.Skip(1))
                 {
+                    var bitmap = img.GetImage();
                     if (rtfEncodedImages.Length > maxRtfSize)
                     {
                         break;
                     }
                     rtfEncodedImages.Append(@"\par");
-                    rtfEncodedImages.Append(GetRtfEncodedImage(bitmap));
+                    rtfEncodedImages.Append(GetRtfEncodedImage(bitmap, img.FileFormat));
                     bitmap.Dispose();
                 }
                 rtfEncodedImages.Append("}");
@@ -1358,11 +1388,11 @@ namespace NAPS2.WinForms
             return ido;
         }
 
-        private static string GetRtfEncodedImage(Image image)
+        private static string GetRtfEncodedImage(Image image, ImageFormat format)
         {
             using (var stream = new MemoryStream())
             {
-                image.Save(stream, image.RawFormat);
+                image.Save(stream, format);
                 string hexString = BitConverter.ToString(stream.ToArray(), 0).Replace("-", string.Empty);
 
                 return @"{\pict\pngblip\picw" +
@@ -1520,7 +1550,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    ImportDirect(data);
+                    ImportDirect(data, false);
                 }
             }
             else if (e.Data.GetDataPresent(DataFormats.FileDrop))

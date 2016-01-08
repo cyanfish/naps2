@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
@@ -15,37 +16,46 @@ namespace NAPS2.ImportExport
     public class DirectImportOperation : OperationBase
     {
         private readonly IScannedImageFactory scannedImageFactory;
+        private readonly IUserConfigManager userConfigManager;
         private readonly ThreadFactory threadFactory;
 
         private bool cancel;
         private Thread thread;
 
-        public DirectImportOperation(IScannedImageFactory scannedImageFactory, ThreadFactory threadFactory)
+        public DirectImportOperation(IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
         {
             this.scannedImageFactory = scannedImageFactory;
+            this.userConfigManager = userConfigManager;
             this.threadFactory = threadFactory;
 
-            ProgressTitle = MiscResources.ImportProgress;
             AllowCancel = true;
         }
 
-        public bool Start(DirectImageTransfer data, Action<IScannedImage> imageCallback)
+        public bool Start(DirectImageTransfer data, bool copy, Action<IScannedImage> imageCallback)
         {
+            ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
             Status = new OperationStatus
             {
+                StatusText = copy ? MiscResources.Copying : MiscResources.Importing,
                 MaxProgress = data.ImageRecovery.Length
             };
             cancel = false;
 
             thread = threadFactory.StartThread(() =>
             {
-                try
+                Exception error = null;
+                foreach (var ir in data.ImageRecovery)
                 {
-                    foreach (var ir in data.ImageRecovery)
+                    try
                     {
                         using (var bitmap = new Bitmap(Path.Combine(data.RecoveryFolder, ir.FileName)))
                         {
                             var img = scannedImageFactory.Create(bitmap, ir.BitDepth, ir.HighQuality);
+                            foreach (var transform in ir.TransformList)
+                            {
+                                img.AddTransform(transform);
+                            }
+                            img.SetThumbnail(img.RenderThumbnail(userConfigManager.Config.ThumbnailSize));
                             imageCallback(img);
 
                             Status.CurrentProgress++;
@@ -56,12 +66,16 @@ namespace NAPS2.ImportExport
                             }
                         }
                     }
-                    Status.Success = true;
+                    catch (Exception ex)
+                    {
+                        error = ex;
+                    }
                 }
-                catch (Exception ex)
+                if (error != null)
                 {
-                    Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, data.RecoveryFolder), ex);
+                    Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, data.RecoveryFolder), error);
                 }
+                Status.Success = true;
                 InvokeFinished();
             });
             return true;

@@ -88,7 +88,7 @@ namespace NAPS2.ImportExport.Images
                                 return;
                             }
                         }
-                        Status.StatusText = string.Format(MiscResources.Saving, Path.GetFileName(subFileName));
+                        Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                         Status.Success = TiffHelper.SaveMultipage(images, subFileName, j =>
                         {
                             Status.CurrentProgress = j;
@@ -125,7 +125,7 @@ namespace NAPS2.ImportExport.Images
                         {
                             if (images.Count == 1)
                             {
-                                Status.StatusText = string.Format(MiscResources.Saving, Path.GetFileName(subFileName));
+                                Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                                 InvokeStatusChanged();
                                 DoSaveImage(baseImage, subFileName, format);
                             }
@@ -133,7 +133,7 @@ namespace NAPS2.ImportExport.Images
                             {
                                 var fileNameN = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i,
                                     digits);
-                                Status.StatusText = string.Format(MiscResources.Saving, Path.GetFileName(fileNameN));
+                                Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                                 InvokeStatusChanged();
                                 DoSaveImage(baseImage, fileNameN, format);
                             }

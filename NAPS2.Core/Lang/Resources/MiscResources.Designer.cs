@@ -250,6 +250,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copying....
+        /// </summary>
+        internal static string Copying {
+            get {
+                return ResourceManager.GetString("Copying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Progress.
+        /// </summary>
+        internal static string CopyProgress {
+            get {
+                return ResourceManager.GetString("CopyProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom ({0}x{1} {2}).
         /// </summary>
         internal static string CustomPageSizeFormat {
@@ -387,9 +405,9 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} / {1} files.
         /// </summary>
-        internal static string FilesProgress {
+        internal static string FilesProgressFormat {
             get {
-                return ResourceManager.GetString("FilesProgress", resourceCulture);
+                return ResourceManager.GetString("FilesProgressFormat", resourceCulture);
             }
         }
         
@@ -484,11 +502,20 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importing {0}....
+        ///   Looks up a localized string similar to Importing....
         /// </summary>
         internal static string Importing {
             get {
                 return ResourceManager.GetString("Importing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing {0}....
+        /// </summary>
+        internal static string ImportingFormat {
+            get {
+                return ResourceManager.GetString("ImportingFormat", resourceCulture);
             }
         }
         
@@ -648,9 +675,9 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} / {1}.
         /// </summary>
-        internal static string Progress {
+        internal static string ProgressFormat {
             get {
-                return ResourceManager.GetString("Progress", resourceCulture);
+                return ResourceManager.GetString("ProgressFormat", resourceCulture);
             }
         }
         
@@ -702,9 +729,9 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Saving {0}....
         /// </summary>
-        internal static string Saving {
+        internal static string SavingFormat {
             get {
-                return ResourceManager.GetString("Saving", resourceCulture);
+                return ResourceManager.GetString("SavingFormat", resourceCulture);
             }
         }
         

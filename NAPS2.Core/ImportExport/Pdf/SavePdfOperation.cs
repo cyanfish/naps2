@@ -57,7 +57,7 @@ namespace NAPS2.ImportExport.Pdf
             var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
             Status = new OperationStatus
             {
-                StatusText = string.Format(MiscResources.Saving, Path.GetFileName(subFileName)),
+                StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName)),
                 MaxProgress = images.Count
             };
             cancel = false;

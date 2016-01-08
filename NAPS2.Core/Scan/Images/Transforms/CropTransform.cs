@@ -8,10 +8,6 @@ namespace NAPS2.Scan.Images.Transforms
     [Serializable]
     public class CropTransform : Transform
     {
-        public CropTransform()
-        {
-        }
-
         public int Left { get; set; }
         public int Right { get; set; }
         public int Top { get; set; }

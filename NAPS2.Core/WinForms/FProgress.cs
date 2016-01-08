@@ -34,7 +34,6 @@ namespace NAPS2.WinForms
             set
             {
                 operation = value;
-                Text = operation.ProgressTitle;
                 operation.StatusChanged += operation_StatusChanged;
                 operation.Error += operation_Error;
                 operation.Finished += operation_Finished;
@@ -74,6 +73,7 @@ namespace NAPS2.WinForms
                 .Activate();
 
             loaded = true;
+            Text = operation.ProgressTitle;
 
             DisplayProgress();
             if (finished)
@@ -99,7 +99,7 @@ namespace NAPS2.WinForms
             }
             else
             {
-                labelNumber.Text = string.Format(MiscResources.Progress, Operation.Status.CurrentProgress, Operation.Status.MaxProgress);
+                labelNumber.Text = string.Format(MiscResources.ProgressFormat, Operation.Status.CurrentProgress, Operation.Status.MaxProgress);
                 progressBar.Style = ProgressBarStyle.Continuous;
                 progressBar.Value = Operation.Status.CurrentProgress;
                 progressBar.Maximum = Operation.Status.MaxProgress;
