@@ -1428,9 +1428,39 @@ namespace NAPS2.WinForms
 
         #region Drag/Drop
 
+        private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            // Provide drag data
+            DoDragDrop(new SelectedImageDrag(SelectedImages), DragDropEffects.Move | DragDropEffects.Copy);
+        }
+
+        private void thumbnailList1_DragEnter(object sender, DragEventArgs e)
+        {
+            // Determine if drop data is compatible
+            try
+            {
+                if (e.Data.GetDataPresent(typeof(SelectedImageDrag).FullName))
+                {
+                    var data = (SelectedImageDrag)e.Data.GetData(typeof(SelectedImageDrag).FullName);
+                    e.Effect = data.ProcessID == Process.GetCurrentProcess().Id
+                        ? DragDropEffects.Move
+                        : DragDropEffects.Copy;
+                }
+                else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    e.Effect = DragDropEffects.Copy;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Error receiving drag/drop", ex);
+            }
+        }
+
         private void thumbnailList1_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetFormats().Any(x => x.Equals(typeof(SelectedImageDrag).FullName)))
+            // Receive drop data
+            if (e.Data.GetDataPresent(typeof(SelectedImageDrag).FullName))
             {
                 var data = (SelectedImageDrag) e.Data.GetData(typeof(SelectedImageDrag).FullName);
                 if (data.ProcessID == Process.GetCurrentProcess().Id)
@@ -1439,12 +1469,28 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    DragDropImport(data);
+                    DragDropImportFromOtherInstance(data);
                 }
+            }
+            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var data = (string[]) e.Data.GetData(DataFormats.FileDrop);
+                DragDropImportFromFiles(data);
             }
         }
 
-        private void DragDropImport(SelectedImageDrag data)
+        private void DragDropImportFromFiles(IEnumerable<string> fileNames)
+        {
+            var op = operationFactory.Create<ImportOperation>();
+            var progressForm = FormFactory.Create<FProgress>();
+            progressForm.Operation = op;
+            if (op.Start(fileNames.OrderBy(x => x).ToList(), ReceiveScannedImage))
+            {
+                progressForm.ShowDialog();
+            }
+        }
+
+        private void DragDropImportFromOtherInstance(SelectedImageDrag data)
         {
             var op = operationFactory.Create<DragDropImportOperation>();
             var progressForm = FormFactory.Create<FProgress>();
@@ -1496,29 +1542,6 @@ namespace NAPS2.WinForms
             }
             UpdateThumbnails(imageList.MoveTo(SelectedIndices, dragToIndex));
             changeTracker.HasUnsavedChanges = true;
-        }
-
-        private void thumbnailList1_DragEnter(object sender, DragEventArgs e)
-        {
-            try
-            {
-                if (e.Data.GetFormats().Any(x => x.Equals(typeof (SelectedImageDrag).FullName)))
-                {
-                    var data = (SelectedImageDrag) e.Data.GetData(typeof (SelectedImageDrag).FullName);
-                    e.Effect = data.ProcessID == Process.GetCurrentProcess().Id
-                        ? DragDropEffects.Move
-                        : DragDropEffects.Copy;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorException("Error receiving drag/drop", ex);
-            }
-        }
-
-        private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-            DoDragDrop(new SelectedImageDrag(SelectedImages), DragDropEffects.Move | DragDropEffects.Copy);
         }
 
         #endregion
