@@ -40,6 +40,11 @@ namespace NAPS2
         [STAThread]
         static void Main(string[] args)
         {
+            Log.Logger = new NLogLogger();
+#if DEBUG
+            Debug.Listeners.Add(new NLogTraceListener());
+#endif
+
             var sti = KernelManager.Kernel.Get<StillImage>();
             sti.ParseArgs(args);
             sti.ExitIfRedundant();
@@ -51,10 +56,6 @@ namespace NAPS2
 
             Application.ThreadException += UnhandledException;
 
-            Log.Logger = new NLogLogger();
-#if DEBUG
-            Debug.Listeners.Add(new NLogTraceListener());
-#endif
             var formFactory = KernelManager.Kernel.Get<IFormFactory>();
             Application.Run(formFactory.Create<FDesktop>());
         }
