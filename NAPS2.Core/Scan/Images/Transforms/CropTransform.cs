@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace NAPS2.Scan.Images.Transforms
 {
+    [Serializable]
     public class CropTransform : Transform
     {
         public CropTransform()

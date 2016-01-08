@@ -71,6 +71,7 @@ namespace NAPS2.WinForms
         private readonly StillImage stillImage;
         private readonly IOperationFactory operationFactory;
         private readonly IUserConfigManager userConfigManager;
+        private readonly IScannedImageFactory scannedImageFactory;
 
         #endregion
 
@@ -85,7 +86,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager)
+        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, IScannedImageFactory scannedImageFactory)
         {
             this.emailer = emailer;
             this.stringWrapper = stringWrapper;
@@ -105,6 +106,7 @@ namespace NAPS2.WinForms
             this.stillImage = stillImage;
             this.operationFactory = operationFactory;
             this.userConfigManager = userConfigManager;
+            this.scannedImageFactory = scannedImageFactory;
             InitializeComponent();
 
             Shown += FDesktop_Shown;
@@ -1353,13 +1355,16 @@ namespace NAPS2.WinForms
 
             // Render high-quality thumbnails at the new size in a background task
             // The existing (poorly scaled) thumbnails are used in the meantime
+            RenderThumbnails(thumbnailSize, imageList.Images.ToList());
+        }
 
+        private void RenderThumbnails(int thumbnailSize, IEnumerable<IScannedImage> imagesToRenderThumbnailsFor)
+        {
             if (renderThumbnailsCts != null)
             {
                 // Cancel any previous task so that no two run at the same time
                 renderThumbnailsCts.Cancel();
             }
-            var imagesToRenderThumbnailsFor = imageList.Images.ToList();
             renderThumbnailsCts = new CancellationTokenSource();
             var ct = renderThumbnailsCts.Token;
             Task.Factory.StartNew(() =>
@@ -1427,58 +1432,93 @@ namespace NAPS2.WinForms
         {
             if (e.Data.GetFormats().Any(x => x.Equals(typeof(SelectedImageDrag).FullName)))
             {
-                if (!SelectedIndices.Any())
+                var data = (SelectedImageDrag) e.Data.GetData(typeof(SelectedImageDrag).FullName);
+                if (data.ProcessID == Process.GetCurrentProcess().Id)
                 {
-                    return;
+                    DragMoveImages(e);
                 }
-                Point cp = thumbnailList1.PointToClient(new Point(e.X, e.Y));
-                ListViewItem dragToItem = thumbnailList1.GetItemAt(cp.X, cp.Y);
-                if (dragToItem == null)
+                else
                 {
-                    var items = thumbnailList1.Items.Cast<ListViewItem>().ToList();
-                    var minY = items.Select(x => x.Bounds.Top).Min();
-                    var maxY = items.Select(x => x.Bounds.Bottom).Max();
-                    if (cp.Y < minY)
-                    {
-                        UpdateThumbnails(imageList.MoveTo(SelectedIndices, 0));
-                        changeTracker.HasUnsavedChanges = true;
-                    }
-                    else if (cp.Y > maxY)
-                    {
-                        UpdateThumbnails(imageList.MoveTo(SelectedIndices, imageList.Images.Count));
-                        changeTracker.HasUnsavedChanges = true;
-                    }
-                    else
-                    {
-                        var row = items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
-                        dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
-                    }
+                    DragDropImport(data);
                 }
-                if (dragToItem == null)
-                {
-                    return;
-                }
-                int dragToIndex = dragToItem.ImageIndex;
-                if (cp.X > (dragToItem.Bounds.X + dragToItem.Bounds.Width/2))
-                {
-                    dragToIndex++;
-                }
-                UpdateThumbnails(imageList.MoveTo(SelectedIndices, dragToIndex));
-                changeTracker.HasUnsavedChanges = true;
             }
+        }
+
+        private void DragDropImport(SelectedImageDrag data)
+        {
+            var op = operationFactory.Create<DragDropImportOperation>();
+            var progressForm = FormFactory.Create<FProgress>();
+            progressForm.Operation = op;
+            if (op.Start(data, ReceiveScannedImage))
+            {
+                progressForm.ShowDialog();
+            }
+        }
+
+        private void DragMoveImages(DragEventArgs e)
+        {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
+            Point cp = thumbnailList1.PointToClient(new Point(e.X, e.Y));
+            ListViewItem dragToItem = thumbnailList1.GetItemAt(cp.X, cp.Y);
+            if (dragToItem == null)
+            {
+                var items = thumbnailList1.Items.Cast<ListViewItem>().ToList();
+                var minY = items.Select(x => x.Bounds.Top).Min();
+                var maxY = items.Select(x => x.Bounds.Bottom).Max();
+                if (cp.Y < minY)
+                {
+                    UpdateThumbnails(imageList.MoveTo(SelectedIndices, 0));
+                    changeTracker.HasUnsavedChanges = true;
+                }
+                else if (cp.Y > maxY)
+                {
+                    UpdateThumbnails(imageList.MoveTo(SelectedIndices, imageList.Images.Count));
+                    changeTracker.HasUnsavedChanges = true;
+                }
+                else
+                {
+                    var row =
+                        items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
+                    dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
+                }
+            }
+            if (dragToItem == null)
+            {
+                return;
+            }
+            int dragToIndex = dragToItem.ImageIndex;
+            if (cp.X > (dragToItem.Bounds.X + dragToItem.Bounds.Width/2))
+            {
+                dragToIndex++;
+            }
+            UpdateThumbnails(imageList.MoveTo(SelectedIndices, dragToIndex));
+            changeTracker.HasUnsavedChanges = true;
         }
 
         private void thumbnailList1_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetFormats().Any(x => x.Equals(typeof(SelectedImageDrag).FullName)))
+            try
             {
-                e.Effect = DragDropEffects.Move;
+                if (e.Data.GetFormats().Any(x => x.Equals(typeof (SelectedImageDrag).FullName)))
+                {
+                    var data = (SelectedImageDrag) e.Data.GetData(typeof (SelectedImageDrag).FullName);
+                    e.Effect = data.ProcessID == Process.GetCurrentProcess().Id
+                        ? DragDropEffects.Move
+                        : DragDropEffects.Copy;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Error receiving drag/drop", ex);
             }
         }
 
         private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            thumbnailList1.DoDragDrop(new SelectedImageDrag(), DragDropEffects.Move);
+            DoDragDrop(new SelectedImageDrag(SelectedImages), DragDropEffects.Move | DragDropEffects.Copy);
         }
 
         #endregion

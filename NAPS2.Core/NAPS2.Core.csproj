@@ -81,6 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
+    <Compile Include="ImportExport\DragDropImportOperation.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
     <Compile Include="Operation\IOperationFactory.cs" />

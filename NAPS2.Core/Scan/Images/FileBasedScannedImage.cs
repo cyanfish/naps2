@@ -43,7 +43,7 @@ namespace NAPS2.Scan.Images
 
         public static bool DisableRecoveryCleanup { get; set; }
 
-        private static DirectoryInfo RecoveryFolder
+        internal static DirectoryInfo RecoveryFolder
         {
             get
             {
@@ -216,5 +216,13 @@ namespace NAPS2.Scan.Images
         }
 
         public PatchCode PatchCode { get; set; }
+
+        internal RecoveryIndexImage RecoveryIndexImage
+        {
+            get
+            {
+                return _recoveryIndexManager.Index.Images.Single(x => x.FileName == baseImageFileName);
+            }
+        }
     }
 }

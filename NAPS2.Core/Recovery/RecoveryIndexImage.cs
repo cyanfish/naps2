@@ -7,6 +7,7 @@ using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Recovery
 {
+    [Serializable]
     public class RecoveryIndexImage
     {
         public string FileName { get; set; }

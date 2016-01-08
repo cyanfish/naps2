@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace NAPS2.Scan.Images.Transforms
 {
+    [Serializable]
     public class RotationTransform : Transform
     {
         private const double TOLERANCE = 0.001;

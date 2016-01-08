@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace NAPS2.Scan.Images.Transforms
 {
+    [Serializable]
     public class ContrastTransform : Transform
     {
         public int Contrast { get; set; }
