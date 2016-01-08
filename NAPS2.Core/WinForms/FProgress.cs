@@ -16,6 +16,7 @@ namespace NAPS2.WinForms
     {
         private readonly IErrorOutput errorOutput;
 
+        private bool loaded;
         private bool finished;
         private IOperation operation;
 
@@ -43,18 +44,24 @@ namespace NAPS2.WinForms
 
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
-            Invoke(() => errorOutput.DisplayError(e.ErrorMessage));
+            errorOutput.DisplayError(e.ErrorMessage);
         }
 
         void operation_StatusChanged(object sender, EventArgs e)
         {
-            Invoke(DisplayProgress);
+            if (loaded)
+            {
+                Invoke(DisplayProgress);
+            }
         }
 
         void operation_Finished(object sender, EventArgs e)
         {
             finished = true;
-            Invoke(Close);
+            if (loaded)
+            {
+                Invoke(Close);
+            }
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
@@ -65,6 +72,8 @@ namespace NAPS2.WinForms
                 .Bind(btnCancel)
                     .RightToForm()
                 .Activate();
+
+            loaded = true;
 
             DisplayProgress();
             if (finished)

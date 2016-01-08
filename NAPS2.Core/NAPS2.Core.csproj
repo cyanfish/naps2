@@ -81,7 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
-    <Compile Include="ImportExport\DragDropImportOperation.cs" />
+    <Compile Include="ImportExport\DirectImportOperation.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
     <Compile Include="Operation\IOperationFactory.cs" />
@@ -229,7 +229,7 @@
     <Compile Include="Operation\OperationErrorEventArgs.cs" />
     <Compile Include="Operation\OperationStatus.cs" />
     <Compile Include="Util\Pipes.cs" />
-    <Compile Include="WinForms\SelectedImageDrag.cs" />
+    <Compile Include="WinForms\DirectImageTransfer.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />
     <Compile Include="Util\ThreadFactory.cs" />

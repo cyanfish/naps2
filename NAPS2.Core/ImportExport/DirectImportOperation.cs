@@ -12,7 +12,7 @@ using NAPS2.WinForms;
 
 namespace NAPS2.ImportExport
 {
-    public class DragDropImportOperation : OperationBase
+    public class DirectImportOperation : OperationBase
     {
         private readonly IScannedImageFactory scannedImageFactory;
         private readonly ThreadFactory threadFactory;
@@ -20,7 +20,7 @@ namespace NAPS2.ImportExport
         private bool cancel;
         private Thread thread;
 
-        public DragDropImportOperation(IScannedImageFactory scannedImageFactory, ThreadFactory threadFactory)
+        public DirectImportOperation(IScannedImageFactory scannedImageFactory, ThreadFactory threadFactory)
         {
             this.scannedImageFactory = scannedImageFactory;
             this.threadFactory = threadFactory;
@@ -29,11 +29,11 @@ namespace NAPS2.ImportExport
             AllowCancel = true;
         }
 
-        public bool Start(SelectedImageDrag drag, Action<IScannedImage> imageCallback)
+        public bool Start(DirectImageTransfer data, Action<IScannedImage> imageCallback)
         {
             Status = new OperationStatus
             {
-                MaxProgress = drag.ImageRecovery.Length
+                MaxProgress = data.ImageRecovery.Length
             };
             cancel = false;
 
@@ -41,9 +41,9 @@ namespace NAPS2.ImportExport
             {
                 try
                 {
-                    foreach (var ir in drag.ImageRecovery)
+                    foreach (var ir in data.ImageRecovery)
                     {
-                        using (var bitmap = new Bitmap(Path.Combine(drag.RecoveryFolder, ir.FileName)))
+                        using (var bitmap = new Bitmap(Path.Combine(data.RecoveryFolder, ir.FileName)))
                         {
                             var img = scannedImageFactory.Create(bitmap, ir.BitDepth, ir.HighQuality);
                             imageCallback(img);
@@ -60,7 +60,7 @@ namespace NAPS2.ImportExport
                 }
                 catch (Exception ex)
                 {
-                    Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, drag.RecoveryFolder), ex);
+                    Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, data.RecoveryFolder), ex);
                 }
                 InvokeFinished();
             });

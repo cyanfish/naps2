@@ -10,9 +10,9 @@ using NAPS2.Scan.Images;
 namespace NAPS2.WinForms
 {
     [Serializable]
-    public class SelectedImageDrag
+    public class DirectImageTransfer
     {
-        public SelectedImageDrag(IEnumerable<IScannedImage> selectedImages)
+        public DirectImageTransfer(IEnumerable<IScannedImage> selectedImages)
         {
             ProcessID = Process.GetCurrentProcess().Id;
             ImageRecovery = selectedImages.OfType<FileBasedScannedImage>().Select(x => x.RecoveryIndexImage).ToArray();

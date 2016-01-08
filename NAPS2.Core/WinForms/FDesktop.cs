@@ -841,13 +841,29 @@ namespace NAPS2.WinForms
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                var op = operationFactory.Create<ImportOperation>();
-                var progressForm = FormFactory.Create<FProgress>();
-                progressForm.Operation = op;
-                if (op.Start(ofd.FileNames.OrderBy(x => x).ToList(), ReceiveScannedImage))
-                {
-                    progressForm.ShowDialog();
-                }
+                ImportFiles(ofd.FileNames);
+            }
+        }
+
+        private void ImportFiles(IEnumerable<string> files)
+        {
+            var op = operationFactory.Create<ImportOperation>();
+            var progressForm = FormFactory.Create<FProgress>();
+            progressForm.Operation = op;
+            if (op.Start(files.OrderBy(x => x).ToList(), ReceiveScannedImage))
+            {
+                progressForm.ShowDialog();
+            }
+        }
+
+        private void ImportDirect(DirectImageTransfer data)
+        {
+            var op = operationFactory.Create<DirectImportOperation>();
+            var progressForm = FormFactory.Create<FProgress>();
+            progressForm.Operation = op;
+            if (op.Start(data, ReceiveScannedImage))
+            {
+                progressForm.ShowDialog();
             }
         }
 
@@ -1302,12 +1318,33 @@ namespace NAPS2.WinForms
         {
             if (SelectedIndices.Any())
             {
-                var images = SelectedImages.Select(x => x.GetImage()).ToList();
-                IDataObject ido = new DataObject();
-                ido.SetData(DataFormats.Bitmap, true, images.First());
-                var rtfEncodedImages = "{" + string.Join(@"\par", images.Select(GetRtfEncodedImage)) + "}";
-                ido.SetData(DataFormats.Rtf, true, rtfEncodedImages);
+                var ido = GetDataObjectForImages(SelectedImages, true);
                 Clipboard.SetDataObject(ido);
+            }
+        }
+
+        private static IDataObject GetDataObjectForImages(IEnumerable<IScannedImage> images, bool includeBitmap)
+        {
+            var imageList = images.ToList();
+            var bitmaps = imageList.Select(x => x.GetImage()).ToList();
+            try
+            {
+                IDataObject ido = new DataObject();
+                if (includeBitmap)
+                {
+                    ido.SetData(DataFormats.Bitmap, true, bitmaps.First());
+                }
+                var rtfEncodedImages = "{" + string.Join(@"\par", bitmaps.Select(GetRtfEncodedImage)) + "}";
+                ido.SetData(DataFormats.Rtf, true, rtfEncodedImages);
+                ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(imageList));
+                return ido;
+            }
+            finally
+            {
+                foreach (var bitmap in bitmaps.Skip(includeBitmap ? 1 : 0))
+                {
+                    bitmap.Dispose();
+                }
             }
         }
 
@@ -1431,7 +1468,11 @@ namespace NAPS2.WinForms
         private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             // Provide drag data
-            DoDragDrop(new SelectedImageDrag(SelectedImages), DragDropEffects.Move | DragDropEffects.Copy);
+            if (SelectedIndices.Any())
+            {
+                var ido = GetDataObjectForImages(SelectedImages, false);
+                DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
+            }
         }
 
         private void thumbnailList1_DragEnter(object sender, DragEventArgs e)
@@ -1439,9 +1480,9 @@ namespace NAPS2.WinForms
             // Determine if drop data is compatible
             try
             {
-                if (e.Data.GetDataPresent(typeof(SelectedImageDrag).FullName))
+                if (e.Data.GetDataPresent(typeof(DirectImageTransfer).FullName))
                 {
-                    var data = (SelectedImageDrag)e.Data.GetData(typeof(SelectedImageDrag).FullName);
+                    var data = (DirectImageTransfer)e.Data.GetData(typeof(DirectImageTransfer).FullName);
                     e.Effect = data.ProcessID == Process.GetCurrentProcess().Id
                         ? DragDropEffects.Move
                         : DragDropEffects.Copy;
@@ -1460,44 +1501,22 @@ namespace NAPS2.WinForms
         private void thumbnailList1_DragDrop(object sender, DragEventArgs e)
         {
             // Receive drop data
-            if (e.Data.GetDataPresent(typeof(SelectedImageDrag).FullName))
+            if (e.Data.GetDataPresent(typeof(DirectImageTransfer).FullName))
             {
-                var data = (SelectedImageDrag) e.Data.GetData(typeof(SelectedImageDrag).FullName);
+                var data = (DirectImageTransfer) e.Data.GetData(typeof(DirectImageTransfer).FullName);
                 if (data.ProcessID == Process.GetCurrentProcess().Id)
                 {
                     DragMoveImages(e);
                 }
                 else
                 {
-                    DragDropImportFromOtherInstance(data);
+                    ImportDirect(data);
                 }
             }
             else if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var data = (string[]) e.Data.GetData(DataFormats.FileDrop);
-                DragDropImportFromFiles(data);
-            }
-        }
-
-        private void DragDropImportFromFiles(IEnumerable<string> fileNames)
-        {
-            var op = operationFactory.Create<ImportOperation>();
-            var progressForm = FormFactory.Create<FProgress>();
-            progressForm.Operation = op;
-            if (op.Start(fileNames.OrderBy(x => x).ToList(), ReceiveScannedImage))
-            {
-                progressForm.ShowDialog();
-            }
-        }
-
-        private void DragDropImportFromOtherInstance(SelectedImageDrag data)
-        {
-            var op = operationFactory.Create<DragDropImportOperation>();
-            var progressForm = FormFactory.Create<FProgress>();
-            progressForm.Operation = op;
-            if (op.Start(data, ReceiveScannedImage))
-            {
-                progressForm.ShowDialog();
+                ImportFiles(data);
             }
         }
 
