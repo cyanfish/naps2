@@ -1425,7 +1425,7 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetFormats().Any(x => x.Equals("System.String")) && (string) e.Data.GetData("System.String") == "NAPS2.SelectedImageDrag")
+            if (e.Data.GetFormats().Any(x => x.Equals(typeof(SelectedImageDrag).FullName)))
             {
                 if (!SelectedIndices.Any())
                 {
@@ -1433,6 +1433,27 @@ namespace NAPS2.WinForms
                 }
                 Point cp = thumbnailList1.PointToClient(new Point(e.X, e.Y));
                 ListViewItem dragToItem = thumbnailList1.GetItemAt(cp.X, cp.Y);
+                if (dragToItem == null)
+                {
+                    var items = thumbnailList1.Items.Cast<ListViewItem>().ToList();
+                    var minY = items.Select(x => x.Bounds.Top).Min();
+                    var maxY = items.Select(x => x.Bounds.Bottom).Max();
+                    if (cp.Y < minY)
+                    {
+                        UpdateThumbnails(imageList.MoveTo(SelectedIndices, 0));
+                        changeTracker.HasUnsavedChanges = true;
+                    }
+                    else if (cp.Y > maxY)
+                    {
+                        UpdateThumbnails(imageList.MoveTo(SelectedIndices, imageList.Images.Count));
+                        changeTracker.HasUnsavedChanges = true;
+                    }
+                    else
+                    {
+                        var row = items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
+                        dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
+                    }
+                }
                 if (dragToItem == null)
                 {
                     return;
@@ -1449,7 +1470,7 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetFormats().Any(x => x.Equals("System.String")) && (string) e.Data.GetData("System.String") == "NAPS2.SelectedImageDrag")
+            if (e.Data.GetFormats().Any(x => x.Equals(typeof(SelectedImageDrag).FullName)))
             {
                 e.Effect = DragDropEffects.Move;
             }
@@ -1457,7 +1478,7 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            thumbnailList1.DoDragDrop("NAPS2.SelectedImageDrag", DragDropEffects.Move);
+            thumbnailList1.DoDragDrop(new SelectedImageDrag(), DragDropEffects.Move);
         }
 
         #endregion

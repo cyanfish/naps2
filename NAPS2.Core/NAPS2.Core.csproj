@@ -228,6 +228,7 @@
     <Compile Include="Operation\OperationErrorEventArgs.cs" />
     <Compile Include="Operation\OperationStatus.cs" />
     <Compile Include="Util\Pipes.cs" />
+    <Compile Include="WinForms\SelectedImageDrag.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />
     <Compile Include="Util\ThreadFactory.cs" />
