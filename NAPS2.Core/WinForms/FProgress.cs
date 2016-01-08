@@ -16,8 +16,8 @@ namespace NAPS2.WinForms
     {
         private readonly IErrorOutput errorOutput;
 
-        private bool loaded;
-        private bool finished;
+        private volatile bool loaded;
+        private volatile bool finished;
         private IOperation operation;
 
         public FProgress(IErrorOutput errorOutput)

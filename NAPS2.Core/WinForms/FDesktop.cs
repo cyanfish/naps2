@@ -27,6 +27,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -935,7 +936,7 @@ namespace NAPS2.WinForms
                 StepThumbnailSize(e.Delta / (double)SystemInformation.MouseWheelScrollDelta);
             }
         }
-        
+
         #endregion
 
         #region Event Handlers - Misc
@@ -1055,7 +1056,7 @@ namespace NAPS2.WinForms
         {
             FormFactory.Create<FAbout>().ShowDialog();
         }
-        
+
         #endregion
 
         #region Event Handlers - Save/Email Menus
@@ -1326,26 +1327,35 @@ namespace NAPS2.WinForms
         private static IDataObject GetDataObjectForImages(IEnumerable<IScannedImage> images, bool includeBitmap)
         {
             var imageList = images.ToList();
-            var bitmaps = imageList.Select(x => x.GetImage()).ToList();
-            try
+            IDataObject ido = new DataObject();
+            if (imageList.Count == 0)
             {
-                IDataObject ido = new DataObject();
-                if (includeBitmap)
-                {
-                    ido.SetData(DataFormats.Bitmap, true, bitmaps.First());
-                }
-                var rtfEncodedImages = "{" + string.Join(@"\par", bitmaps.Select(GetRtfEncodedImage)) + "}";
-                ido.SetData(DataFormats.Rtf, true, rtfEncodedImages);
-                ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(imageList));
                 return ido;
             }
-            finally
+            if (includeBitmap)
             {
-                foreach (var bitmap in bitmaps.Skip(includeBitmap ? 1 : 0))
+                var firstBitmap = imageList[0].GetImage();
+                var bitmapsExceptFirst = imageList.Select(x => x.GetImage()).Skip(1);
+                ido.SetData(DataFormats.Bitmap, true, firstBitmap);
+                const int maxRtfSize = 20 * 1000 * 1000;
+                var rtfEncodedImages = new StringBuilder();
+                rtfEncodedImages.Append("{");
+                rtfEncodedImages.Append(GetRtfEncodedImage(firstBitmap));
+                foreach (var bitmap in bitmapsExceptFirst)
                 {
+                    if (rtfEncodedImages.Length > maxRtfSize)
+                    {
+                        break;
+                    }
+                    rtfEncodedImages.Append(@"\par");
+                    rtfEncodedImages.Append(GetRtfEncodedImage(bitmap));
                     bitmap.Dispose();
                 }
+                rtfEncodedImages.Append("}");
+                ido.SetData(DataFormats.Rtf, true, rtfEncodedImages.ToString());
             }
+            ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(imageList));
+            return ido;
         }
 
         private static string GetRtfEncodedImage(Image image)
@@ -1503,7 +1513,7 @@ namespace NAPS2.WinForms
             // Receive drop data
             if (e.Data.GetDataPresent(typeof(DirectImageTransfer).FullName))
             {
-                var data = (DirectImageTransfer) e.Data.GetData(typeof(DirectImageTransfer).FullName);
+                var data = (DirectImageTransfer)e.Data.GetData(typeof(DirectImageTransfer).FullName);
                 if (data.ProcessID == Process.GetCurrentProcess().Id)
                 {
                     DragMoveImages(e);
@@ -1515,7 +1525,7 @@ namespace NAPS2.WinForms
             }
             else if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                var data = (string[]) e.Data.GetData(DataFormats.FileDrop);
+                var data = (string[])e.Data.GetData(DataFormats.FileDrop);
                 ImportFiles(data);
             }
         }
@@ -1555,7 +1565,7 @@ namespace NAPS2.WinForms
                 return;
             }
             int dragToIndex = dragToItem.ImageIndex;
-            if (cp.X > (dragToItem.Bounds.X + dragToItem.Bounds.Width/2))
+            if (cp.X > (dragToItem.Bounds.X + dragToItem.Bounds.Width / 2))
             {
                 dragToIndex++;
             }
