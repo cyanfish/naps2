@@ -48,12 +48,12 @@ namespace NAPS2.ImportExport.Pdf
             this.overwritePrompt = overwritePrompt;
             this.threadFactory = threadFactory;
 
-            ProgressTitle = MiscResources.SavePdfProgress;
             AllowCancel = true;
         }
 
-        public bool Start(string fileName, DateTime dateTime, ICollection<IScannedImage> images, PdfSettings pdfSettings, string ocrLanguageCode)
+        public bool Start(string fileName, DateTime dateTime, ICollection<IScannedImage> images, PdfSettings pdfSettings, string ocrLanguageCode, bool email)
         {
+            ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
             var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
             Status = new OperationStatus
             {

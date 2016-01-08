@@ -349,6 +349,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email PDF Progress.
+        /// </summary>
+        internal static string EmailPdfProgress {
+            get {
+                return ResourceManager.GetString("EmailPdfProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want NAPS2 to automatically check for updates?.
         /// </summary>
         internal static string EnableAutoUpdates {

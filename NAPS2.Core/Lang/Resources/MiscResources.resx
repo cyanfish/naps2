@@ -372,4 +372,7 @@
   <data name="Importing" xml:space="preserve">
     <value>Importing...</value>
   </data>
+  <data name="EmailPdfProgress" xml:space="preserve">
+    <value>Email PDF Progress</value>
+  </data>
 </root>

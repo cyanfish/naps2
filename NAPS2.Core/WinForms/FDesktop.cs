@@ -709,13 +709,15 @@ namespace NAPS2.WinForms
 
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
-                    ExportPDF(sd.FileName, images);
-                    changeTracker.HasUnsavedChanges = false;
+                    if (ExportPDF(sd.FileName, images, false))
+                    {
+                        changeTracker.HasUnsavedChanges = false;
+                    }
                 }
             }
         }
 
-        private void ExportPDF(string filename, List<IScannedImage> images)
+        private bool ExportPDF(string filename, List<IScannedImage> images, bool email)
         {
             var op = operationFactory.Create<SavePdfOperation>();
             var progressForm = FormFactory.Create<FProgress>();
@@ -724,10 +726,11 @@ namespace NAPS2.WinForms
             var pdfSettings = pdfSettingsContainer.PdfSettings;
             pdfSettings.Metadata.Creator = MiscResources.NAPS2;
             var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
-            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrLanguageCode))
+            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrLanguageCode, email))
             {
                 progressForm.ShowDialog();
             }
+            return op.Status.Success;
         }
 
         private void SaveImages(List<IScannedImage> images)
@@ -785,8 +788,10 @@ namespace NAPS2.WinForms
                     {
                         progressForm.ShowDialog();
                     }
-
-                    changeTracker.HasUnsavedChanges = false;
+                    if (op.Status.Success)
+                    {
+                        changeTracker.HasUnsavedChanges = false;
+                    }
                 }
             }
         }
@@ -813,7 +818,11 @@ namespace NAPS2.WinForms
                 try
                 {
                     string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
-                    ExportPDF(targetPath, images);
+                    if (!ExportPDF(targetPath, images, true))
+                    {
+                        // Cancel or error
+                        return;
+                    }
                     var message = new EmailMessage
                     {
                         Attachments =

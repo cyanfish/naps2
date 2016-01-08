@@ -223,7 +223,11 @@ namespace NAPS2.Console
                     {
                         // The scan hasn't bee exported to PDF yet, so it needs to be exported to the temp folder
                         OutputVerbose(ConsoleResources.ExportingPDFToAttach);
-                        DoExportToPdf(targetPath);
+                        if (!DoExportToPdf(targetPath, true))
+                        {
+                            OutputVerbose(ConsoleResources.EmailNotSent);
+                            return;
+                        }
                         // Attach the PDF file
                         AttachFilesInFolder(tempFolder, message);
                     }
@@ -335,13 +339,13 @@ namespace NAPS2.Console
         {
             // Get a local copy of the path just for output
             var path = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
-            if (DoExportToPdf(options.OutputPath))
+            if (DoExportToPdf(options.OutputPath, false))
             {
                 OutputVerbose(ConsoleResources.SuccessfullySavedPdf, path);
             }
         }
 
-        private bool DoExportToPdf(string path)
+        private bool DoExportToPdf(string path, bool email)
         {
             var metadata = options.UseSavedMetadata ? pdfSettingsContainer.PdfSettings.Metadata : new PdfMetadata();
             metadata.Creator = ConsoleResources.NAPS2;
@@ -395,7 +399,7 @@ namespace NAPS2.Console
                     i = op.Status.CurrentProgress;
                 }
             };
-            op.Start(path, startTime, scannedImages, pdfSettings, ocrLanguageCode);
+            op.Start(path, startTime, scannedImages, pdfSettings, ocrLanguageCode, email);
             op.WaitUntilFinished();
             return op.Status.Success;
         }
