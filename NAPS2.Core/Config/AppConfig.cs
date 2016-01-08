@@ -44,5 +44,7 @@ namespace NAPS2.Config
         public ScanProfile DefaultProfileSettings { get; set; }
 
         public AutoUpdateStatus AutoUpdate { get; set; }
+
+        public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
     }
 }

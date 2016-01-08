@@ -18,6 +18,8 @@
     GNU General Public License for more details.
 */
 
+#region Usings
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,6 +50,8 @@ using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia;
 using NAPS2.Update;
 using NAPS2.Util;
+
+#endregion
 
 namespace NAPS2.WinForms
 {
@@ -1012,17 +1016,50 @@ namespace NAPS2.WinForms
 
         private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
         {
-            SavePDF(imageList.Images);
+            if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.AlwaysPrompt)
+            {
+                tsdSavePDF.ShowDropDown();
+            }
+            else if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
+            {
+                SavePDF(SelectedImages.ToList());
+            }
+            else
+            {
+                SavePDF(imageList.Images);
+            }
         }
 
         private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
         {
-            SaveImages(imageList.Images);
+            if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.AlwaysPrompt)
+            {
+                tsdSaveImages.ShowDropDown();
+            }
+            else if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
+            {
+                SaveImages(SelectedImages.ToList());
+            }
+            else
+            {
+                SaveImages(imageList.Images);
+            }
         }
 
         private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
         {
-            EmailPDF(imageList.Images);
+            if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.AlwaysPrompt)
+            {
+                tsdEmailPDF.ShowDropDown();
+            }
+            else if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
+            {
+                EmailPDF(SelectedImages.ToList());
+            }
+            else
+            {
+                EmailPDF(imageList.Images);
+            }
         }
 
         private void tsdPrint_Click(object sender, EventArgs e)
