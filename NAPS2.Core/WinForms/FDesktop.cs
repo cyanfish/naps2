@@ -1372,11 +1372,11 @@ namespace NAPS2.WinForms
                 rtfEncodedImages.Append(GetRtfEncodedImage(firstBitmap, imageList[0].FileFormat));
                 foreach (var img in imageList.Skip(1))
                 {
-                    var bitmap = img.GetImage();
                     if (rtfEncodedImages.Length > maxRtfSize)
                     {
                         break;
                     }
+                    var bitmap = img.GetImage();
                     rtfEncodedImages.Append(@"\par");
                     rtfEncodedImages.Append(GetRtfEncodedImage(bitmap, img.FileFormat));
                     bitmap.Dispose();
