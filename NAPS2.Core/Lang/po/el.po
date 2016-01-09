@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-19 00:09+0000\n"
-"PO-Revision-Date: 2015-12-31 11:35+0000\n"
+"POT-Creation-Date: 2016-01-01 22:32+0000\n"
+"PO-Revision-Date: 2016-01-02 15:48+0000\n"
 "Last-Translator: solidhit <solidhit2003@yahoo.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1451561735.0\n"
+"X-POOTLE-MTIME: 1451749715.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -78,10 +78,10 @@ msgstr "Σχετικά"
 msgid "Acquiring data"
 msgstr "Λήψη δεδομένων"
 
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "Όλα ({0})"
@@ -242,9 +242,9 @@ msgid "Brightness"
 msgstr "Φωτεινότητα"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FImageSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
@@ -254,9 +254,9 @@ msgstr "Φωτεινότητα"
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
 #: FRotate.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Άκυρο"
@@ -352,9 +352,10 @@ msgstr "Αποπαρεμβολή"
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
 #: FProfiles.resx$ctxDelete.Text$Message
-#: MiscResources.resx$Delete$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
+#: MiscResources.resx$Delete$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Διαγραφή"
 
@@ -664,9 +665,9 @@ msgstr "Γλώσσα OCR"
 #: FImageSettings.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FRotate.resx$btnOK.Text$Message
 #: FContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
+#: FRotate.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Εντάξει"
@@ -685,7 +686,7 @@ msgstr "Αποτυχία λήψης για ένα ή περισσότερα αρ
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr "Αποτέλεσμα"
+msgstr "Παραγόμενο Αποτέλεσμα"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -721,9 +722,9 @@ msgstr "Πηγή χαρτιού"
 msgid "Password"
 msgstr "Κωδικός"
 
-#: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -793,8 +794,8 @@ msgstr "Αρχικοποίηση Εικόνας"
 msgid "Resolution"
 msgstr "Ανάλυση"
 
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Επαναφορά Προεπιλογών"
@@ -966,7 +967,8 @@ msgstr "Το αρχείο {0} υπάρχει ήδη. Θέλετε να αντι�
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
-"Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: {0}"
+"Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: "
+"{0}"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -977,6 +979,13 @@ msgid "The selected scanner does not support using a feeder. If your scanner doe
 msgstr ""
 "Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής "
 "πράγματι διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού"
+
+#: MiscResources.resx$NoDuplexSupport$Message
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr ""
+"Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής "
+"πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού "
+"οδηγού"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1000,7 +1009,7 @@ msgstr "US Letter (8.5x11 ιν.)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
-msgstr "Μη Αποθηκευμένες Αλλαγές"
+msgstr "Εκκρεμούν Αλλαγές"
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"

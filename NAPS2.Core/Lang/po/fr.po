@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-19 00:09+0000\n"
-"PO-Revision-Date: 2015-12-27 13:16+0000\n"
+"POT-Creation-Date: 2016-01-01 22:32+0000\n"
+"PO-Revision-Date: 2016-01-07 11:18+0000\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1451222202.0\n"
+"X-POOTLE-MTIME: 1452165529.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -78,10 +78,10 @@ msgstr "À propos"
 msgid "Acquiring data"
 msgstr "Acquisition des données"
 
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "Tout ({0})"
@@ -120,15 +120,15 @@ msgstr "Permettre l'impression"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr "Désappairer alt. (162534 > 123456)"
+msgstr "Désappairer alt. [162534>123456]"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr "Appairer alt. (135642 > 123456)"
+msgstr "Appairer alternativ. [135642>123456]"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr "Une erreur s'est produite en tentant d'enregistrer le fichier"
+msgstr "Une erreur s'est produite en essayant d'enregistrer le fichier"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -171,11 +171,11 @@ msgstr "Faut-il vraiment annuler les modifications sur {0} image(s) ?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr "Nom de la pièce jointe :"
+msgstr "Nom de la pièce jointe "
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr "Auteur :"
+msgstr "Auteur "
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
@@ -242,9 +242,9 @@ msgid "Brightness"
 msgstr "Luminosité "
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FImageSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
@@ -254,9 +254,9 @@ msgstr "Luminosité "
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
 #: FRotate.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Annuler"
@@ -267,7 +267,7 @@ msgstr "Annulation"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr "Centrer"
+msgstr "Centrré"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -343,18 +343,19 @@ msgstr "Jour (01-31)"
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Name"
-msgstr "Nom de fichier par défaut :"
+msgstr "Nom de fichier par défaut "
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "Désappairer (142536 > 123456)"
+msgstr "Désappairer [142536>123456]"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
 #: FProfiles.resx$ctxDelete.Text$Message
-#: MiscResources.resx$Delete$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
+#: MiscResources.resx$Delete$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -443,7 +444,7 @@ msgstr "Dispositif d'alimentation"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr "Nom du fichier :"
+msgstr "Nom du fichier "
 
 #: FBatchScan.resx$lblFilePath.Text$Message
 msgid "File path"
@@ -519,7 +520,7 @@ msgstr "Échec de l'installation"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "Appairer (135246 > 123456)"
+msgstr "Appairer [135246>123456]"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -527,11 +528,11 @@ msgstr "Fichier JPEG (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr "Qualité JPEG :"
+msgstr "Qualité JPEG "
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr "Mots-clés :"
+msgstr "Mots-clés "
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -551,7 +552,7 @@ msgstr "Barre d'outils principale"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Rendre la recherche possible dans les PDFs issus d'OCR"
+msgstr "Rendre la recherche possible dans les PDF issus d'OCR"
 
 #: FEditScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
@@ -664,12 +665,12 @@ msgstr "Langue OCR "
 #: FImageSettings.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FRotate.resx$btnOK.Text$Message
 #: FContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
+#: FRotate.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
-msgstr "Ok"
+msgstr "OK"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
@@ -677,7 +678,7 @@ msgstr "Un fichier par page"
 
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr "Un fichier par acquisition"
+msgstr "Un fichier par numérisation"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
@@ -693,7 +694,7 @@ msgstr "Écraser le fichier"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr "Mot de passe du propriétaire :"
+msgstr "Mot de passe du propriétaire "
 
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
@@ -721,9 +722,9 @@ msgstr "Source du papier "
 msgid "Password"
 msgstr "Mot de passe"
 
-#: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -793,8 +794,8 @@ msgstr "Rétablir l'image"
 msgid "Resolution"
 msgstr "Résolution "
 
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Valeurs par défaut"
@@ -935,7 +936,7 @@ msgstr "Démarrer"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr "Sujet :"
+msgstr "Sujet "
 
 #: FBatchScan.resx$linkSubstitutions.Text$Message
 msgid "Substitutions"
@@ -966,17 +967,24 @@ msgstr "Le fichier « {0} » existe déjà. Faut-il l'écraser ?"
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
-"Le fichier suivant est chiffré, son ouverture nécessite un mot de passe : {0}"
+"Le fichier suivant est chiffré, son ouverture nécessite un mot de passe : "
+"{0}"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
-msgstr "Le scanner indiqué est introuvable"
+msgstr "Le scanner sélectionné est introuvable"
 
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
 "Le scanner sélectionné ne gère pas de dispositif d'alimentation. Si ce "
-"scanner en possède un, tenter d'utiliser un autre pilote"
+"scanner en possède un, essayer d'utiliser un autre pilote"
+
+#: MiscResources.resx$NoDuplexSupport$Message
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr ""
+"Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé "
+"le gérer, essayer d'utiliser un autre pilote."
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -988,7 +996,7 @@ msgstr "Délai entre 2 numérisations (secondes) "
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr "Titre :"
+msgstr "Titre "
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1016,7 +1024,7 @@ msgstr "Paramètres prédéfinis"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr "Mot de passe utilisateur :"
+msgstr "Mot de passe utilisateur "
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"

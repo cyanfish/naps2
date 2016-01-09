@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-19 00:10+0000\n"
-"PO-Revision-Date: 2015-12-20 11:06+0000\n"
+"POT-Creation-Date: 2016-01-01 22:33+0000\n"
+"PO-Revision-Date: 2016-01-02 10:56+0000\n"
 "Last-Translator: Kityn <kitynska@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1450609616.0\n"
+"X-POOTLE-MTIME: 1451732194.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -76,10 +76,10 @@ msgstr "O programie"
 msgid "Acquiring data"
 msgstr "Pozyskiwanie danych"
 
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
-#: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
 msgstr "Wszystko ({0})"
@@ -240,9 +240,9 @@ msgid "Brightness"
 msgstr "Jasność"
 
 #: FEditScanSettings.resx$btnCancel.Text$Message
-#: FImageSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
@@ -252,9 +252,9 @@ msgstr "Jasność"
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
 #: FRotate.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Anuluj"
@@ -350,9 +350,10 @@ msgstr "Usuń przeplatanie"
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
 #: FProfiles.resx$ctxDelete.Text$Message
-#: MiscResources.resx$Delete$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
+#: MiscResources.resx$Delete$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Usuń"
 
@@ -662,9 +663,9 @@ msgstr "Język OCR"
 #: FImageSettings.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FRotate.resx$btnOK.Text$Message
 #: FContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
+#: FRotate.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
@@ -719,9 +720,9 @@ msgstr "Źródło papieru"
 msgid "Password"
 msgstr "Hasło"
 
-#: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -791,8 +792,8 @@ msgstr "Zresetuj obraz"
 msgid "Resolution"
 msgstr "Rozdzielczość"
 
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Przywróć domyślne"
@@ -975,6 +976,12 @@ msgid "The selected scanner does not support using a feeder. If your scanner doe
 msgstr ""
 "Wybrany skaner nie obsługuje podajnika. Jeżeli twój skaner ma podajnik, "
 "spróbuj użyć innego sterownika"
+
+#: MiscResources.resx$NoDuplexSupport$Message
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr ""
+"Wybrany skaner nie obsługuje druku obustronnego. Jeśli twój skaner powinien "
+"wspierać druk obustronny, spróbuj użyć innego sterownika"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
