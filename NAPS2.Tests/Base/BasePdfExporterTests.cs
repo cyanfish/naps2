@@ -60,7 +60,7 @@ namespace NAPS2.Tests.Base
             {
                 using (bitmap)
                 {
-                    return (IScannedImage)new ScannedImage(bitmap, ScanBitDepth.C24Bit, false);
+                    return (IScannedImage)new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
                 }
             }).ToList();
             if (!Directory.Exists("test"))

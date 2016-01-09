@@ -147,7 +147,7 @@ namespace NAPS2.ImportExport.Pdf
                 using (var bitmap = new Bitmap(memoryStream))
                 {
                     bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                    return scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, false);
+                    return scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, false, -1);
                 }
             }
         }
@@ -181,7 +181,7 @@ namespace NAPS2.ImportExport.Pdf
             using (bitmap)
             {
                 bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                return scannedImageFactory.Create(bitmap, bitDepth, true);
+                return scannedImageFactory.Create(bitmap, bitDepth, true, -1);
             }
         }
 

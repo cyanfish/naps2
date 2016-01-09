@@ -86,7 +86,7 @@ namespace NAPS2.Scan.Stub
                 g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
                 g.DrawString((_number++).ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
             }
-            var image = scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, ScanProfile.MaxQuality);
+            var image = scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, ScanProfile.MaxQuality, ScanProfile.Quality);
             return image;
         }
 

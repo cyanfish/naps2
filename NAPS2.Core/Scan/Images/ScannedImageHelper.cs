@@ -4,12 +4,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
 {
     internal static class ScannedImageHelper
     {
-        public static void GetSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, out Bitmap bitmap, out MemoryStream encodedBitmap, out ImageFormat imageFormat)
+        public static void GetSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, int quality, out Bitmap bitmap, out MemoryStream encodedBitmap, out ImageFormat imageFormat)
         {
             // Defaults for out arguments
             bitmap = null;
@@ -29,13 +30,13 @@ namespace NAPS2.Scan.Images
             {
                 // Store as PNG
                 // Lossless, but some images (color/grayscale) take up lots of storage
-                encodedBitmap = EncodeBitmap(sourceImage, ImageFormat.Png);
+                encodedBitmap = EncodePng(sourceImage);
             }
             else
             {
                 // Store as PNG/JPEG depending on which is smaller
-                var pngEncoded = EncodeBitmap(sourceImage, ImageFormat.Png);
-                var jpegEncoded = EncodeBitmap(sourceImage, ImageFormat.Jpeg);
+                var pngEncoded = EncodePng(sourceImage);
+                var jpegEncoded = EncodeJpeg(sourceImage, quality);
                 if (pngEncoded.Length <= jpegEncoded.Length)
                 {
                     // Probably a black and white image (from native WIA, so bitDepth is unknown), which PNG compresses well vs. JPEG
@@ -52,11 +53,77 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        private static MemoryStream EncodeBitmap(Bitmap bitmap, ImageFormat imageFormat)
+        private static MemoryStream EncodePng(Bitmap bitmap)
         {
             var encoded = new MemoryStream();
-            bitmap.Save(encoded, imageFormat);
+            bitmap.Save(encoded, ImageFormat.Png);
             return encoded;
+        }
+
+        private static MemoryStream EncodeJpeg(Bitmap bitmap, int quality)
+        {
+            var encoded = new MemoryStream();
+            if (quality == -1)
+            {
+                bitmap.Save(encoded, ImageFormat.Jpeg);
+            }
+            else
+            {
+                quality = Math.Max(Math.Min(quality, 100), 0);
+                var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
+                var encoderParams = new EncoderParameters(1);
+                encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+                bitmap.Save(encoded, encoder, encoderParams);
+            }
+            return encoded;
+        }
+
+        public static Bitmap PostProcessStep1(Image output, ScanProfile profile)
+        {
+            double scaleFactor = 1;
+            if (!profile.UseNativeUI)
+            {
+                scaleFactor = profile.AfterScanScale.ToIntScaleFactor();
+            }
+            var result = ImageScaleHelper.ScaleImage(output, scaleFactor);
+
+            if (!profile.UseNativeUI && profile.ForcePageSize)
+            {
+                float width = output.Width / output.HorizontalResolution;
+                float height = output.Height / output.VerticalResolution;
+                if (float.IsNaN(width) || float.IsNaN(height))
+                {
+                    width = output.Width;
+                    height = output.Height;
+                }
+                PageDimensions pageDimensions = profile.PageSize.PageDimensions() ?? profile.CustomPageSize;
+                if (pageDimensions.Width > pageDimensions.Height && width < height)
+                {
+                    // Flip dimensions
+                    result.SetResolution((float)(output.Width / pageDimensions.HeightInInches()), (float)(output.Height / pageDimensions.WidthInInches()));
+                }
+                else
+                {
+                    result.SetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
+                }
+            }
+
+            return result;
+        }
+
+        public static void PostProcessStep2(IScannedImage image, ScanProfile profile)
+        {
+            if (!profile.UseNativeUI && profile.BrightnessContrastAfterScan)
+            {
+                if (profile.Brightness != 0)
+                {
+                    image.AddTransform(new BrightnessTransform { Brightness = profile.Brightness });
+                }
+                if (profile.Contrast != 0)
+                {
+                    image.AddTransform(new TrueContrastTransform { Contrast = profile.Contrast });
+                }
+            }
         }
     }
 }

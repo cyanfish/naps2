@@ -112,16 +112,12 @@ namespace NAPS2.Scan.Wia
                     }
                     using (Image output = Image.FromStream(stream))
                     {
-                        double scaleFactor = 1;
-                        if (!ScanProfile.UseNativeUI)
-                        {
-                            scaleFactor = ScanProfile.AfterScanScale.ToIntScaleFactor();
-                        }
-
-                        using (var result = ImageScaleHelper.ScaleImage(output, scaleFactor))
+                        using (var result = ScannedImageHelper.PostProcessStep1(output, ScanProfile))
                         {
                             ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
-                            return scannedImageFactory.Create(result, bitDepth, ScanProfile.MaxQuality);
+                            var image = scannedImageFactory.Create(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                            ScannedImageHelper.PostProcessStep2(image, ScanProfile);
+                            return image;
                         }
                     }
                 }

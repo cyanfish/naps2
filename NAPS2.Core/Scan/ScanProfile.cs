@@ -256,16 +256,36 @@ namespace NAPS2.Scan
 
     public static class ScanEnumExtensions
     {
-        public static int WidthInThousandthsOfAnInch(this PageDimensions pageDimensions)
+        public static decimal WidthInInches(this PageDimensions pageDimensions)
         {
             switch (pageDimensions.Unit)
             {
                 case PageSizeUnit.Inch:
-                    return (int)(pageDimensions.Width * 1000);
+                    return pageDimensions.Width;
                 case PageSizeUnit.Centimetre:
-                    return (int)(pageDimensions.Width * 0.393701m * 1000);
+                    return pageDimensions.Width * 0.393701m;
                 case PageSizeUnit.Millimetre:
-                    return (int)(pageDimensions.Width * 0.0393701m * 1000);
+                    return pageDimensions.Width * 0.0393701m;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        public static int WidthInThousandthsOfAnInch(this PageDimensions pageDimensions)
+        {
+            return (int)(WidthInInches(pageDimensions) * 1000);
+        }
+
+        public static decimal HeightInInches(this PageDimensions pageDimensions)
+        {
+            switch (pageDimensions.Unit)
+            {
+                case PageSizeUnit.Inch:
+                    return pageDimensions.Height;
+                case PageSizeUnit.Centimetre:
+                    return pageDimensions.Height * 0.393701m;
+                case PageSizeUnit.Millimetre:
+                    return pageDimensions.Height * 0.0393701m;
                 default:
                     throw new ArgumentException();
             }
@@ -273,17 +293,7 @@ namespace NAPS2.Scan
 
         public static int HeightInThousandthsOfAnInch(this PageDimensions pageDimensions)
         {
-            switch (pageDimensions.Unit)
-            {
-                case PageSizeUnit.Inch:
-                    return (int)(pageDimensions.Height * 1000);
-                case PageSizeUnit.Centimetre:
-                    return (int)(pageDimensions.Height * 0.393701m * 1000);
-                case PageSizeUnit.Millimetre:
-                    return (int)(pageDimensions.Height * 0.0393701m * 1000);
-                default:
-                    throw new ArgumentException();
-            }
+            return (int)(HeightInInches(pageDimensions) * 1000);
         }
 
         public static PageDimensions PageDimensions(this Enum enumValue)

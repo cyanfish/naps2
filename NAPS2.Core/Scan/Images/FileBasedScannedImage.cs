@@ -70,11 +70,11 @@ namespace NAPS2.Scan.Images
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private readonly List<Transform> transformList = new List<Transform>();
 
-        public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality)
+        public FileBasedScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
             Bitmap baseImage;
             MemoryStream baseImageEncoded;
-            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
+            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, quality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
 
             baseImageFileName = (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture) + GetExtension(baseImageFileFormat);
             baseImageFilePath = Path.Combine(RecoveryFolder.FullName, baseImageFileName);

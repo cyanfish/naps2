@@ -50,7 +50,7 @@ namespace NAPS2.ImportExport
                     {
                         using (var bitmap = new Bitmap(Path.Combine(data.RecoveryFolder, ir.FileName)))
                         {
-                            var img = scannedImageFactory.Create(bitmap, ir.BitDepth, ir.HighQuality);
+                            var img = scannedImageFactory.Create(bitmap, ir.BitDepth, ir.HighQuality, -1);
                             foreach (var transform in ir.TransformList)
                             {
                                 img.AddTransform(transform);

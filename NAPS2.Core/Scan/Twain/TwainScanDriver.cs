@@ -114,29 +114,24 @@ namespace NAPS2.Scan.Twain
                 Debug.WriteLine("NAPS2.TW - DataTransferred");
                 using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
                 {
-                    double scaleFactor = 1;
-                    if (!ScanProfile.UseNativeUI)
-                    {
-                        scaleFactor = ScanProfile.AfterScanScale.ToIntScaleFactor();
-                    }
-
-                    using (var result = ImageScaleHelper.ScaleImage(output, scaleFactor))
+                    using (var result = ScannedImageHelper.PostProcessStep1(output, ScanProfile))
                     {
                         var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;
-                        var img = scannedImageFactory.Create(result, bitDepth, ScanProfile.MaxQuality);
+                        var image = scannedImageFactory.Create(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                        ScannedImageHelper.PostProcessStep2(image, ScanProfile);
                         if (ScanParams.DetectPatchCodes)
                         {
                             foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
                             {
                                 if (patchCodeInfo.ReturnCode == ReturnCode.Success)
                                 {
-                                    img.PatchCode = GetPatchCode(patchCodeInfo);
+                                    image.PatchCode = GetPatchCode(patchCodeInfo);
                                 }
                             }
                         }
-                        images.Add(img);
+                        images.Add(image);
                     }
                 }
             };
