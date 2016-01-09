@@ -151,7 +151,7 @@
         <value>800 ppp</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Centrer</value>
+        <value>Centrré</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
         <value>Gauche</value>
@@ -212,5 +212,14 @@
     </data>
     <data name="Source_Glass" xml:space="preserve">
         <value>Vitre</value>
+    </data>
+    <data name="TwainImpl_Default" xml:space="preserve">
+        <value>Default</value>
+    </data>
+    <data name="TwainImpl_Legacy" xml:space="preserve">
+        <value>Legacy (native UI only)</value>
+    </data>
+    <data name="TwainImpl_X64" xml:space="preserve">
+        <value>x64</value>
     </data>
 </root>

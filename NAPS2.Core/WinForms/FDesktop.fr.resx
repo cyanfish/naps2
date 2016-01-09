@@ -183,6 +183,33 @@
     <data name="&gt;&gt;btnZoomOut.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
+    <data name="btnZoomMouseCatcher.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+        <value>Flat</value>
+    </data>
+    <data name="btnZoomMouseCatcher.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="btnZoomMouseCatcher.Location" type="System.Drawing.Point, System.Drawing">
+        <value>10, 439</value>
+    </data>
+    <data name="btnZoomMouseCatcher.Size" type="System.Drawing.Size, System.Drawing">
+        <value>45, 23</value>
+    </data>
+    <data name="btnZoomMouseCatcher.TabIndex" type="System.Int32, mscorlib">
+        <value>10</value>
+    </data>
+    <data name="&gt;&gt;btnZoomMouseCatcher.Name" xml:space="preserve">
+        <value>btnZoomMouseCatcher</value>
+    </data>
+    <data name="&gt;&gt;btnZoomMouseCatcher.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnZoomMouseCatcher.Parent" xml:space="preserve">
+        <value>toolStripContainer1.ContentPanel</value>
+    </data>
+    <data name="&gt;&gt;btnZoomMouseCatcher.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
     <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>233, 17</value>
     </metadata>
@@ -216,6 +243,15 @@
     <data name="ctxCopy.Text" xml:space="preserve">
         <value>Copier</value>
     </data>
+    <data name="ctxPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+        <value>Ctrl+V</value>
+    </data>
+    <data name="ctxPaste.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="ctxPaste.Text" xml:space="preserve">
+        <value>Paste</value>
+    </data>
     <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
     </data>
@@ -229,7 +265,7 @@
         <value>Supprimer</value>
     </data>
     <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-        <value>165, 126</value>
+        <value>165, 148</value>
     </data>
     <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
         <value>contextMenuStrip</value>
@@ -253,13 +289,13 @@
         <value>thumbnailList1</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.3.2.37882, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.4.1.40447, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.ZOrder" xml:space="preserve">
-        <value>2</value>
+        <value>3</value>
     </data>
     <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
         <value>1204, 472</value>
@@ -718,13 +754,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsInterleave.Text" xml:space="preserve">
-        <value>Appairer (135246 &gt; 123456)</value>
+        <value>Appairer [135246&gt;123456]</value>
     </data>
     <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsDeinterleave.Text" xml:space="preserve">
-        <value>Désappairer (142536 &gt; 123456)</value>
+        <value>Désappairer [142536&gt;123456]</value>
     </data>
     <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -733,13 +769,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>Appairer alt. (135642 &gt; 123456)</value>
+        <value>Appairer alternativ. [135642&gt;123456]</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>Désappairer alt. (162534 &gt; 123456)</value>
+        <value>Désappairer alt. [162534&gt;123456]</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -912,6 +948,18 @@
         <value>ctxCopy</value>
     </data>
     <data name="&gt;&gt;ctxCopy.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;ctxSeparator2.Name" xml:space="preserve">
+        <value>ctxSeparator2</value>
+    </data>
+    <data name="&gt;&gt;ctxSeparator2.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;ctxDelete.Name" xml:space="preserve">
+        <value>ctxDelete</value>
+    </data>
+    <data name="&gt;&gt;ctxDelete.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;tsScan.Name" xml:space="preserve">
@@ -1146,7 +1194,7 @@
         <value>tsMove</value>
     </data>
     <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.3.2.37882, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.4.1.40447, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
         <value>tsdReorder</value>
@@ -1244,22 +1292,16 @@
     <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;ctxSeparator2.Name" xml:space="preserve">
-        <value>ctxSeparator2</value>
+    <data name="&gt;&gt;ctxPaste.Name" xml:space="preserve">
+        <value>ctxPaste</value>
     </data>
-    <data name="&gt;&gt;ctxSeparator2.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;ctxDelete.Name" xml:space="preserve">
-        <value>ctxDelete</value>
-    </data>
-    <data name="&gt;&gt;ctxDelete.Type" xml:space="preserve">
+    <data name="&gt;&gt;ctxPaste.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FDesktop</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.2.37882, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.4.1.40447, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

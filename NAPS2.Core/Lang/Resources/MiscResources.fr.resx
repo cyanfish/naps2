@@ -142,7 +142,7 @@
         <value>Supprimer</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>Le scanner indiqué est introuvable.</value>
+        <value>Le scanner sélectionné est introuvable.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
         <value>Le scanner sélectionné est éteint.</value>
@@ -249,7 +249,7 @@
     <data name="EstimatedDownloadSize" xml:space="preserve">
         <value>Taille estimée du téléchargement : {0} Mo</value>
     </data>
-    <data name="FilesProgress" xml:space="preserve">
+    <data name="FilesProgressFormat" xml:space="preserve">
         <value>Fichier {0} / {1}</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
@@ -289,7 +289,7 @@
         <value>Acquisition de la page {0}...</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>Le scanner sélectionné ne gère pas de dispositif d'alimentation. Si ce scanner en possède un, tenter d'utiliser un autre pilote.</value>
+        <value>Le scanner sélectionné ne gère pas de dispositif d'alimentation. Si ce scanner en possède un, essayer d'utiliser un autre pilote.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
         <value>Aucune page dans le dispositif d'alimentation.</value>
@@ -298,7 +298,7 @@
         <value>Vous n'avez pas la permission de copier le contenu du fichier « {0} »..</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>Une erreur s'est produite en tentant d'enregistrer le fichier.</value>
+        <value>Une erreur s'est produite en essayant d'enregistrer le fichier.</value>
     </data>
     <data name="OfN" xml:space="preserve">
         <value>de {0}</value>
@@ -335,5 +335,47 @@
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
         <value>Sauvegarde des acquisitions par lot...</value>
+    </data>
+    <data name="NoDuplexSupport" xml:space="preserve">
+        <value>Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé le gérer, essayer d'utiliser un autre pilote..</value>
+    </data>
+    <data name="ProgressFormat" xml:space="preserve">
+        <value>{0} / {1}</value>
+    </data>
+    <data name="ImportingFormat" xml:space="preserve">
+        <value>Importing {0}...</value>
+    </data>
+    <data name="ImportProgress" xml:space="preserve">
+        <value>Import Progress</value>
+    </data>
+    <data name="Recovering" xml:space="preserve">
+        <value>Recovering...</value>
+    </data>
+    <data name="RecoveryProgress" xml:space="preserve">
+        <value>Recovery Progress</value>
+    </data>
+    <data name="SaveImagesProgress" xml:space="preserve">
+        <value>Save Images Progress</value>
+    </data>
+    <data name="SavePdfProgress" xml:space="preserve">
+        <value>Save PDF Progress</value>
+    </data>
+    <data name="SavingFormat" xml:space="preserve">
+        <value>Saving {0}...</value>
+    </data>
+    <data name="Copying" xml:space="preserve">
+        <value>Copying...</value>
+    </data>
+    <data name="CopyProgress" xml:space="preserve">
+        <value>Copy Progress</value>
+    </data>
+    <data name="Importing" xml:space="preserve">
+        <value>Importing...</value>
+    </data>
+    <data name="EmailPdfProgress" xml:space="preserve">
+        <value>Email PDF Progress</value>
+    </data>
+    <data name="AutoSaveError" xml:space="preserve">
+        <value>An error occurred when trying to auto save.</value>
     </data>
 </root>

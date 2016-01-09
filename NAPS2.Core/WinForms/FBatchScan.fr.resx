@@ -646,7 +646,7 @@
         <value>0</value>
     </data>
     <data name="rdFilePerScan.Text" xml:space="preserve">
-        <value>Un fichier par acquisition</value>
+        <value>Un fichier par numérisation</value>
     </data>
     <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopLeft</value>

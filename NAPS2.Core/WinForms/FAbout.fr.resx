@@ -226,7 +226,7 @@
         <value>29</value>
     </data>
     <data name="okButton.Text" xml:space="preserve">
-        <value>&amp;Ok</value>
+        <value>&amp;OK</value>
     </data>
     <data name="&gt;&gt;okButton.Name" xml:space="preserve">
         <value>okButton</value>

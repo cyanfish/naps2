@@ -934,7 +934,7 @@
         <value>7</value>
     </data>
     <data name="groupboxOutput.Text" xml:space="preserve">
-        <value>Αποτέλεσμα</value>
+        <value>Παραγόμενο Αποτέλεσμα</value>
     </data>
     <data name="&gt;&gt;groupboxOutput.Name" xml:space="preserve">
         <value>groupboxOutput</value>

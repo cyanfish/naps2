@@ -249,7 +249,7 @@
     <data name="EstimatedDownloadSize" xml:space="preserve">
         <value>Εκτιμώμενο μέγεθος λήψης: {0} MB</value>
     </data>
-    <data name="FilesProgress" xml:space="preserve">
+    <data name="FilesProgressFormat" xml:space="preserve">
         <value>{0} / {1} αρχεία</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
@@ -283,7 +283,7 @@
         <value>Υπάρχουν αλλαγές που δεν έχουν σωθεί. Θέλετε σίγουρα να τερματιστεί η εφαρμογή;</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Μη Αποθηκευμένες Αλλαγές</value>
+        <value>Εκκρεμούν Αλλαγές</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
         <value>Σάρωση σελίδας {0}</value>
@@ -335,5 +335,47 @@
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
         <value>Σώσιμο αποτελεσμάτων μαζικής...</value>
+    </data>
+    <data name="NoDuplexSupport" xml:space="preserve">
+        <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού οδηγού.</value>
+    </data>
+    <data name="ProgressFormat" xml:space="preserve">
+        <value>{0} / {1}</value>
+    </data>
+    <data name="ImportingFormat" xml:space="preserve">
+        <value>Importing {0}...</value>
+    </data>
+    <data name="ImportProgress" xml:space="preserve">
+        <value>Import Progress</value>
+    </data>
+    <data name="Recovering" xml:space="preserve">
+        <value>Recovering...</value>
+    </data>
+    <data name="RecoveryProgress" xml:space="preserve">
+        <value>Recovery Progress</value>
+    </data>
+    <data name="SaveImagesProgress" xml:space="preserve">
+        <value>Save Images Progress</value>
+    </data>
+    <data name="SavePdfProgress" xml:space="preserve">
+        <value>Save PDF Progress</value>
+    </data>
+    <data name="SavingFormat" xml:space="preserve">
+        <value>Saving {0}...</value>
+    </data>
+    <data name="Copying" xml:space="preserve">
+        <value>Copying...</value>
+    </data>
+    <data name="CopyProgress" xml:space="preserve">
+        <value>Copy Progress</value>
+    </data>
+    <data name="Importing" xml:space="preserve">
+        <value>Importing...</value>
+    </data>
+    <data name="EmailPdfProgress" xml:space="preserve">
+        <value>Email PDF Progress</value>
+    </data>
+    <data name="AutoSaveError" xml:space="preserve">
+        <value>An error occurred when trying to auto save.</value>
     </data>
 </root>

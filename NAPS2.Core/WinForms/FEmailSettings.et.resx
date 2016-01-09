@@ -262,13 +262,13 @@
         <value>12, 6</value>
     </data>
     <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>92, 13</value>
+        <value>95, 13</value>
     </data>
     <data name="label1.TabIndex" type="System.Int32, mscorlib">
         <value>28</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Manuse nimi</value>
+        <value>Manuse nimi:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -357,12 +357,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.3.1.36618, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.4.1.24470, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FEmailSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.36618, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.4.1.24470, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

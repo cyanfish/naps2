@@ -249,7 +249,7 @@
     <data name="EstimatedDownloadSize" xml:space="preserve">
         <value>Estimated download size: {0} MB</value>
     </data>
-    <data name="FilesProgress" xml:space="preserve">
+    <data name="FilesProgressFormat" xml:space="preserve">
         <value>{0} / {1} files</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
@@ -335,5 +335,47 @@
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
         <value>Saving batch results...</value>
+    </data>
+    <data name="NoDuplexSupport" xml:space="preserve">
+        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    </data>
+    <data name="ProgressFormat" xml:space="preserve">
+        <value>{0} / {1}</value>
+    </data>
+    <data name="ImportingFormat" xml:space="preserve">
+        <value>Importing {0}...</value>
+    </data>
+    <data name="ImportProgress" xml:space="preserve">
+        <value>Import Progress</value>
+    </data>
+    <data name="Recovering" xml:space="preserve">
+        <value>Recovering...</value>
+    </data>
+    <data name="RecoveryProgress" xml:space="preserve">
+        <value>Recovery Progress</value>
+    </data>
+    <data name="SaveImagesProgress" xml:space="preserve">
+        <value>Save Images Progress</value>
+    </data>
+    <data name="SavePdfProgress" xml:space="preserve">
+        <value>Save PDF Progress</value>
+    </data>
+    <data name="SavingFormat" xml:space="preserve">
+        <value>Saving {0}...</value>
+    </data>
+    <data name="Copying" xml:space="preserve">
+        <value>Copying...</value>
+    </data>
+    <data name="CopyProgress" xml:space="preserve">
+        <value>Copy Progress</value>
+    </data>
+    <data name="Importing" xml:space="preserve">
+        <value>Importing...</value>
+    </data>
+    <data name="EmailPdfProgress" xml:space="preserve">
+        <value>Email PDF Progress</value>
+    </data>
+    <data name="AutoSaveError" xml:space="preserve">
+        <value>An error occurred when trying to auto save.</value>
     </data>
 </root>
