@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
@@ -29,7 +28,8 @@ namespace NAPS2.Util
 
         public void ParseArgs(string[] args)
         {
-            bool silent = args.Any(x => x.Equals("/silent", StringComparison.InvariantCultureIgnoreCase));
+            bool silent = args.Any(x => x.Equals("/Silent", StringComparison.InvariantCultureIgnoreCase));
+            bool noElevation = args.Any(x => x.Equals("/NoElevation", StringComparison.InvariantCultureIgnoreCase));
             foreach (var arg in args)
             {
                 if (arg.StartsWith(DEVICE_PREFIX))
@@ -37,20 +37,20 @@ namespace NAPS2.Util
                     DeviceID = arg.Substring(DEVICE_PREFIX.Length);
                     DoScan = true;
                 }
-                else if (arg.Equals("/registersti", StringComparison.InvariantCultureIgnoreCase))
+                else if (arg.Equals("/RegisterSti", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    RegisterSti(silent);
+                    RegisterSti(silent, noElevation);
                     registered = true;
                 }
-                else if (arg.Equals("/unregistersti", StringComparison.InvariantCultureIgnoreCase))
+                else if (arg.Equals("/UnregisterSti", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    UnregisterSti(silent);
+                    UnregisterSti(silent, noElevation);
                     registered = true;
                 }
             }
         }
 
-        private void RegisterSti(bool silent)
+        private void RegisterSti(bool silent, bool noElevation)
         {
             try
             {
@@ -86,6 +86,12 @@ namespace NAPS2.Util
             }
             catch (Exception ex)
             {
+                if (!noElevation && !IsElevated)
+                {
+                    RelaunchAsElevated();
+                    return;
+                }
+
                 Log.ErrorException("Error registering STI", ex);
                 if (!silent)
                 {
@@ -94,7 +100,7 @@ namespace NAPS2.Util
             }
         }
 
-        private void UnregisterSti(bool silent)
+        private void UnregisterSti(bool silent, bool noElevation)
         {
             try
             {
@@ -116,12 +122,42 @@ namespace NAPS2.Util
             }
             catch (Exception ex)
             {
+                if (!noElevation && !IsElevated)
+                {
+                    RelaunchAsElevated();
+                    return;
+                }
+
                 Log.ErrorException("Error unregistering STI", ex);
                 if (!silent)
                 {
                     MessageBox.Show(@"Error unregistering STI. Maybe run as administrator?");
                 }
             }
+        }
+
+        public bool IsElevated
+        {
+            get
+            {
+                var identity = WindowsIdentity.GetCurrent();
+                if (identity == null)
+                {
+                    return false;
+                }
+                var pricipal = new WindowsPrincipal(identity);
+                return pricipal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+        }
+
+        private void RelaunchAsElevated()
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                Verb = "runas",
+                FileName = Assembly.GetEntryAssembly().Location,
+                Arguments = string.Join(" ", Environment.GetCommandLineArgs().Skip(1)) + " /NoElevation"
+            });
         }
 
         public void ExitIfRedundant()
