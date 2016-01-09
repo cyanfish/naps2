@@ -1426,25 +1426,27 @@ namespace NAPS2.WinForms
             }
             if (includeBitmap)
             {
-                var firstBitmap = imageList[0].GetImage();
-                ido.SetData(DataFormats.Bitmap, true, firstBitmap);
-                const int maxRtfSize = 20 * 1000 * 1000;
-                var rtfEncodedImages = new StringBuilder();
-                rtfEncodedImages.Append("{");
-                rtfEncodedImages.Append(GetRtfEncodedImage(firstBitmap, imageList[0].FileFormat));
-                foreach (var img in imageList.Skip(1))
+                using (var firstBitmap = imageList[0].GetImage())
                 {
-                    if (rtfEncodedImages.Length > maxRtfSize)
+                    ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
+                    const int maxRtfSize = 20*1000*1000;
+                    var rtfEncodedImages = new StringBuilder();
+                    rtfEncodedImages.Append("{");
+                    rtfEncodedImages.Append(GetRtfEncodedImage(firstBitmap, imageList[0].FileFormat));
+                    foreach (var img in imageList.Skip(1))
                     {
-                        break;
+                        if (rtfEncodedImages.Length > maxRtfSize)
+                        {
+                            break;
+                        }
+                        var bitmap = img.GetImage();
+                        rtfEncodedImages.Append(@"\par");
+                        rtfEncodedImages.Append(GetRtfEncodedImage(bitmap, img.FileFormat));
+                        bitmap.Dispose();
                     }
-                    var bitmap = img.GetImage();
-                    rtfEncodedImages.Append(@"\par");
-                    rtfEncodedImages.Append(GetRtfEncodedImage(bitmap, img.FileFormat));
-                    bitmap.Dispose();
+                    rtfEncodedImages.Append("}");
+                    ido.SetData(DataFormats.Rtf, true, rtfEncodedImages.ToString());
                 }
-                rtfEncodedImages.Append("}");
-                ido.SetData(DataFormats.Rtf, true, rtfEncodedImages.ToString());
             }
             ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(imageList));
             return ido;
