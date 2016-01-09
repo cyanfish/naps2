@@ -190,6 +190,7 @@ namespace NAPS2.WinForms
             try
             {
                 driver.DialogParent = this;
+                driver.ScanProfile = ScanProfile;
                 ScanDevice device = driver.PromptForDevice();
                 if (device != null)
                 {

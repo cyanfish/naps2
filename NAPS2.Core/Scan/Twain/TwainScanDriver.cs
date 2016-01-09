@@ -63,6 +63,11 @@ namespace NAPS2.Scan.Twain
 
         protected override ScanDevice PromptForDeviceInternal()
         {
+            if (ScanProfile != null && ScanProfile.TwainImpl == TwainImpl.Legacy)
+            {
+                return Legacy.TwainApi.SelectDeviceUI();
+            }
+
             var session = new TwainSession(TwainAppId);
             session.Open();
             try
@@ -84,6 +89,11 @@ namespace NAPS2.Scan.Twain
 
         protected override IEnumerable<IScannedImage> ScanInternal()
         {
+            if (ScanProfile.TwainImpl == TwainImpl.Legacy)
+            {
+                return Legacy.TwainApi.Scan(ScanProfile, ScanDevice, DialogParent, formFactory, scannedImageFactory);
+            }
+
             var session = new TwainSession(TwainAppId);
             var twainForm = formFactory.Create<FTwainGui>();
             var images = new List<IScannedImage>();
