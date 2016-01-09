@@ -288,6 +288,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.cbAutoSave, "cbAutoSave");
             this.cbAutoSave.Name = "cbAutoSave";
             this.cbAutoSave.UseVisualStyleBackColor = true;
+            this.cbAutoSave.CheckedChanged += new System.EventHandler(this.cbAutoSave_CheckedChanged);
             // 
             // linkAutoSaveSettings
             // 

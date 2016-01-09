@@ -70,6 +70,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.cbHighQuality, "cbHighQuality");
             this.cbHighQuality.Name = "cbHighQuality";
             this.cbHighQuality.UseVisualStyleBackColor = true;
+            this.cbHighQuality.CheckedChanged += new System.EventHandler(this.cbHighQuality_CheckedChanged);
             // 
             // txtImageQuality
             // 
@@ -118,6 +119,7 @@ namespace NAPS2.WinForms
             // 
             // cmbTwainImpl
             // 
+            this.cmbTwainImpl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTwainImpl.FormattingEnabled = true;
             resources.ApplyResources(this.cmbTwainImpl, "cmbTwainImpl");
             this.cmbTwainImpl.Name = "cmbTwainImpl";

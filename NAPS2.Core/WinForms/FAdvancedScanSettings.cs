@@ -38,6 +38,7 @@ namespace NAPS2.WinForms
         {
             cbHighQuality.Checked = ScanProfile.MaxQuality;
             tbImageQuality.Value = ScanProfile.Quality;
+            txtImageQuality.Text = ScanProfile.Quality.ToString("G");
             cbBrightnessContrastAfterScan.Checked = ScanProfile.BrightnessContrastAfterScan;
             cbForcePageSize.Checked = ScanProfile.ForcePageSize;
             cmbTwainImpl.SelectedIndex = (int)ScanProfile.TwainImpl;
@@ -97,6 +98,12 @@ namespace NAPS2.WinForms
                     tbImageQuality.Value = value;
                 }
             }
+        }
+
+        private void cbHighQuality_CheckedChanged(object sender, EventArgs e)
+        {
+            tbImageQuality.Enabled = !cbHighQuality.Checked;
+            txtImageQuality.Enabled = !cbHighQuality.Checked;
         }
     }
 }

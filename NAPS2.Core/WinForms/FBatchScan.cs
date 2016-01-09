@@ -39,7 +39,7 @@ namespace NAPS2.WinForms
 {
     public partial class FBatchScan : FormBase
     {
-        private const string PATCH_CODE_INFO_URL = "http://www.naps2.com/doc-batch-scan.html#patch-t";
+        public const string PATCH_CODE_INFO_URL = "http://www.naps2.com/doc-batch-scan.html#patch-t";
 
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;

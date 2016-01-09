@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
             this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.lblFilePath = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbClearAfterSave = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnOK
@@ -67,6 +67,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.linkPatchCodeInfo, "linkPatchCodeInfo");
             this.linkPatchCodeInfo.Name = "linkPatchCodeInfo";
             this.linkPatchCodeInfo.TabStop = true;
+            this.linkPatchCodeInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPatchCodeInfo_LinkClicked);
             // 
             // rdSeparateByPatchT
             // 
@@ -77,15 +78,15 @@ namespace NAPS2.WinForms
             // rdFilePerPage
             // 
             resources.ApplyResources(this.rdFilePerPage, "rdFilePerPage");
+            this.rdFilePerPage.Checked = true;
             this.rdFilePerPage.Name = "rdFilePerPage";
+            this.rdFilePerPage.TabStop = true;
             this.rdFilePerPage.UseVisualStyleBackColor = true;
             // 
             // rdFilePerScan
             // 
             resources.ApplyResources(this.rdFilePerScan, "rdFilePerScan");
-            this.rdFilePerScan.Checked = true;
             this.rdFilePerScan.Name = "rdFilePerScan";
-            this.rdFilePerScan.TabStop = true;
             this.rdFilePerScan.UseVisualStyleBackColor = true;
             // 
             // btnChooseFolder
@@ -93,12 +94,14 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.btnChooseFolder, "btnChooseFolder");
             this.btnChooseFolder.Name = "btnChooseFolder";
             this.btnChooseFolder.UseVisualStyleBackColor = true;
+            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
             // 
             // linkSubstitutions
             // 
             resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
             this.linkSubstitutions.Name = "linkSubstitutions";
             this.linkSubstitutions.TabStop = true;
+            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
             // 
             // txtFilePath
             // 
@@ -110,18 +113,18 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.lblFilePath, "lblFilePath");
             this.lblFilePath.Name = "lblFilePath";
             // 
-            // checkBox1
+            // cbClearAfterSave
             // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.cbClearAfterSave, "cbClearAfterSave");
+            this.cbClearAfterSave.Name = "cbClearAfterSave";
+            this.cbClearAfterSave.UseVisualStyleBackColor = true;
             // 
             // FAutoSaveSettings
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cbClearAfterSave);
             this.Controls.Add(this.btnChooseFolder);
             this.Controls.Add(this.linkSubstitutions);
             this.Controls.Add(this.txtFilePath);
@@ -153,6 +156,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.LinkLabel linkSubstitutions;
         private System.Windows.Forms.TextBox txtFilePath;
         private System.Windows.Forms.Label lblFilePath;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbClearAfterSave;
     }
 }

@@ -381,15 +381,35 @@ namespace NAPS2.WinForms
         private void linkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = FormFactory.Create<FAutoSaveSettings>();
-            form.AutoSaveSettings = ScanProfile.AutoSaveSettings ?? new AutoSaveSettings();
+            ScanProfile.DriverName = DeviceDriverName;
+            form.ScanProfile = ScanProfile;
             form.ShowDialog();
         }
 
         private void btnAdvanced_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FAdvancedScanSettings>();
+            ScanProfile.DriverName = DeviceDriverName;
             form.ScanProfile = ScanProfile;
             form.ShowDialog();
+        }
+
+        private void cbAutoSave_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!suppressChangeEvent)
+            {
+                if (cbAutoSave.Checked)
+                {
+                    var form = FormFactory.Create<FAutoSaveSettings>();
+                    form.ScanProfile = ScanProfile;
+                    form.ShowDialog();
+                    if (!form.Result)
+                    {
+                        cbAutoSave.Checked = false;
+                    }
+                }
+            }
+            linkAutoSaveSettings.Enabled = cbAutoSave.Checked;
         }
     }
 }

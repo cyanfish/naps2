@@ -244,7 +244,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdFilePerPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 93</value>
+    <value>11, 70</value>
   </data>
   <data name="rdFilePerPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
@@ -274,7 +274,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdFilePerScan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 70</value>
+    <value>11, 93</value>
   </data>
   <data name="rdFilePerScan.Size" type="System.Drawing.Size, System.Drawing">
     <value>322, 23</value>
@@ -408,31 +408,31 @@
   <data name="&gt;&gt;lblFilePath.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="checkBox1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="cbClearAfterSave.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cbClearAfterSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 160</value>
   </data>
-  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cbClearAfterSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 17</value>
   </data>
-  <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="cbClearAfterSave.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="checkBox1.Text" xml:space="preserve">
+  <data name="cbClearAfterSave.Text" xml:space="preserve">
     <value>Clear images after saving</value>
   </data>
-  <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
-    <value>checkBox1</value>
+  <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
+    <value>cbClearAfterSave</value>
   </data>
-  <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;cbClearAfterSave.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cbClearAfterSave.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cbClearAfterSave.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -469,7 +469,10 @@
 </value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>9999, 468</value>
+    <value>9999, 260</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>350, 260</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Auto Save Settings</value>
@@ -478,12 +481,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.4.1.30463, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.4.1.35637, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FAutoSaveSettings</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.4.1.30463, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.4.1.35637, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

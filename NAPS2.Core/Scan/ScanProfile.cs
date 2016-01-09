@@ -46,7 +46,10 @@ namespace NAPS2.Scan
         public ScanProfile Clone()
         {
             var profile = (ScanProfile) MemberwiseClone();
-            profile.AutoSaveSettings = AutoSaveSettings.Clone();
+            if (profile.AutoSaveSettings != null)
+            {
+                profile.AutoSaveSettings = AutoSaveSettings.Clone();
+            }
             return profile;
         }
 
