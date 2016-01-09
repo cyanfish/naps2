@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -34,12 +35,14 @@ namespace NAPS2.Scan
         private readonly IScanDriverFactory driverFactory;
         private readonly IErrorOutput errorOutput;
         private readonly IAutoSave autoSave;
+        private readonly AppConfigManager appConfigManager;
 
-        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave)
+        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, AppConfigManager appConfigManager)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
             this.autoSave = autoSave;
+            this.appConfigManager = appConfigManager;
         }
 
         public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<IScannedImage> imageCallback)
@@ -67,16 +70,41 @@ namespace NAPS2.Scan
                     driver.ScanDevice = scanProfile.Device;
                 }
 
-                var images = new List<IScannedImage>();
-                foreach (IScannedImage scannedImage in driver.Scan())
+                bool doAutoSave = !appConfigManager.Config.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
+                if (doAutoSave)
                 {
-                    imageCallback(scannedImage);
-                    images.Add(scannedImage);
+                    if (scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
+                    {
+                        // Auto save without piping images
+                        var images = driver.Scan().ToList();
+                        if (!autoSave.AutoSave(scanProfile.AutoSaveSettings, images))
+                        {
+                            // Fallback in case auto save failed; pipe all the images back at once
+                            foreach (IScannedImage img in images)
+                            {
+                                imageCallback(img);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
+                        var images = new List<IScannedImage>();
+                        foreach (IScannedImage scannedImage in driver.Scan())
+                        {
+                            imageCallback(scannedImage);
+                            images.Add(scannedImage);
+                        }
+                        autoSave.AutoSave(scanProfile.AutoSaveSettings, images);
+                    }
                 }
-
-                if (scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null)
+                else
                 {
-                    autoSave.AutoSave(scanProfile.AutoSaveSettings, images);
+                    // No auto save, so just pipe images back as we get them
+                    foreach (IScannedImage scannedImage in driver.Scan())
+                    {
+                        imageCallback(scannedImage);
+                    }
                 }
             }
             catch (ScanDriverException e)
