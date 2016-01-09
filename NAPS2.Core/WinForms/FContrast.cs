@@ -44,14 +44,14 @@ namespace NAPS2.WinForms
             this.changeTracker = changeTracker;
             InitializeComponent();
 
-            ContrastTransform = new ContrastTransform();
+            ContrastTransform = new TrueContrastTransform();
         }
 
         public IScannedImage Image { get; set; }
 
         public List<IScannedImage> SelectedImages { get; set; }
 
-        public ContrastTransform ContrastTransform { get; private set; }
+        public TrueContrastTransform ContrastTransform { get; private set; }
 
         private IEnumerable<IScannedImage> ImagesToTransform
         {
@@ -142,7 +142,7 @@ namespace NAPS2.WinForms
 
         private void btnRevert_Click(object sender, EventArgs e)
         {
-            ContrastTransform = new ContrastTransform();
+            ContrastTransform = new TrueContrastTransform();
             tbContrast.Value = 0;
             txtContrast.Text = tbContrast.Value.ToString("G");
             UpdatePreviewBox();
