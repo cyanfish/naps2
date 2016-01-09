@@ -81,7 +81,7 @@ namespace NAPS2.Util
                 registerOk = true;
                 if (!silent)
                 {
-                    MessageBox.Show(@"Successfully registered STI.");
+                    MessageBox.Show(@"Successfully registered STI. A reboot may be needed.");
                 }
             }
             catch (Exception ex)
