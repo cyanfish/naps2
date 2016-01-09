@@ -22,6 +22,7 @@ namespace NAPS2.Util
         private const string REGKEY_AUTOPLAY_HANDLER_NAPS2 = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{1c3a7177-f3a7-439e-be47-e304a185f932}";
         private const string REGKEY_STI_APP = @"SOFTWARE\Microsoft\Windows\CurrentVersion\StillImage\Registered Applications";
         private const string REGKEY_STI_EVENT_NAPS2 = @"SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{1c3a7177-f3a7-439e-be47-e304a185f932}";
+        private const string REGKEY_IMAGE_EVENTS = @"SYSTEM\CurrentControlSet\Control\Class\{6bdd1fc6-810f-11d0-bec7-08002be2092f}\0000\Events";
 
         private bool registered;
         private bool registerOk;
@@ -114,10 +115,19 @@ namespace NAPS2.Util
                 }
                 Registry.LocalMachine.DeleteSubKey(REGKEY_STI_EVENT_NAPS2, false);
 
+                var events = Registry.LocalMachine.OpenSubKey(REGKEY_IMAGE_EVENTS, true);
+                if (events != null)
+                {
+                    foreach (var eventType in events.GetSubKeyNames())
+                    {
+                        events.DeleteSubKey(eventType + @"\{1C3A7177-F3A7-439E-BE47-E304A185F932}", false);
+                    }
+                }
+
                 registerOk = true;
                 if (!silent)
                 {
-                    MessageBox.Show(@"Successfully unregistered STI.");
+                    MessageBox.Show(@"Successfully unregistered STI. A reboot may be needed.");
                 }
             }
             catch (Exception ex)
