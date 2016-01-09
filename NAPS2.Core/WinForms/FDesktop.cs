@@ -674,6 +674,14 @@ namespace NAPS2.WinForms
                     viewer.ImageIndex = SelectedIndices.First();
                     viewer.DeleteCallback = UpdateThumbnails;
                     viewer.UpdateCallback = x => UpdateThumbnails(x, false);
+                    viewer.SelectCallback = i =>
+                    {
+                        if (SelectedIndices.Count() <= 1)
+                        {
+                            SelectedIndices = new[] { i };
+                            thumbnailList1.Items[i].EnsureVisible();
+                        }
+                    };
                     viewer.ShowDialog();
                 }
             }

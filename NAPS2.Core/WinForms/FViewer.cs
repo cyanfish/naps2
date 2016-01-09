@@ -64,6 +64,7 @@ namespace NAPS2.WinForms
         public int ImageIndex { get; set; }
         public Action DeleteCallback { get; set; }
         public Action<IEnumerable<int>> UpdateCallback { get; set; }
+        public Action<int> SelectCallback { get; set; }
 
         protected override void OnLoad(object sender, EventArgs e)
         {
@@ -81,6 +82,7 @@ namespace NAPS2.WinForms
             ImageIndex = index;
             UpdateImage();
             tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.CurrentCulture);
+            SelectCallback(index);
         }
 
         private void UpdateImage()
