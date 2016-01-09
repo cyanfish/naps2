@@ -322,8 +322,11 @@ namespace NAPS2.Scan.Twain
 
             // Brightness, Contrast
             // Conveniently, the range of values used in settings (-1000 to +1000) is the same range TWAIN supports
-            ds.Capabilities.ICapBrightness.SetValue(ScanProfile.Brightness);
-            ds.Capabilities.ICapContrast.SetValue(ScanProfile.Contrast);
+            if (!ScanProfile.BrightnessContrastAfterScan)
+            {
+                ds.Capabilities.ICapBrightness.SetValue(ScanProfile.Brightness);
+                ds.Capabilities.ICapContrast.SetValue(ScanProfile.Contrast);
+            }
 
             // Resolution
             int dpi = ScanProfile.Resolution.ToIntDpi();

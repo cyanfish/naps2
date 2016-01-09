@@ -248,8 +248,12 @@ namespace NAPS2.Scan.Wia
             SetItemIntProperty(item, pageWidth, ItemProperties.HORIZONTAL_EXTENT);
             SetItemIntProperty(item, pageHeight, ItemProperties.VERTICAL_EXTENT);
             SetItemIntProperty(item, horizontalPos, ItemProperties.HORIZONTAL_START);
-            SetItemIntProperty(item, profile.Contrast, -1000, 1000, ItemProperties.CONTRAST);
-            SetItemIntProperty(item, profile.Brightness, -1000, 1000, ItemProperties.BRIGHTNESS);
+
+            if (!profile.BrightnessContrastAfterScan)
+            {
+                SetItemIntProperty(item, profile.Contrast, -1000, 1000, ItemProperties.CONTRAST);
+                SetItemIntProperty(item, profile.Brightness, -1000, 1000, ItemProperties.BRIGHTNESS);
+            }
         }
 
         private static void ConfigureDeviceProperties(Device device, ScanProfile profile)
