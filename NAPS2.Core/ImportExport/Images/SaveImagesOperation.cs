@@ -64,7 +64,8 @@ namespace NAPS2.ImportExport.Images
         /// <param name="fileName">The name of the file to save. For multiple images, this is modified by appending a number before the extension.</param>
         /// <param name="dateTime"></param>
         /// <param name="images">The collection of images to save.</param>
-        public bool Start(string fileName, DateTime dateTime, List<IScannedImage> images)
+        /// <param name="batch"></param>
+        public bool Start(string fileName, DateTime dateTime, List<IScannedImage> images, bool batch = false)
         {
             Status = new OperationStatus
             {
@@ -76,7 +77,7 @@ namespace NAPS2.ImportExport.Images
             {
                 try
                 {
-                    var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
+                    var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, batch);
                     ImageFormat format = GetImageFormat(subFileName);
 
                     if (Equals(format, ImageFormat.Tiff))

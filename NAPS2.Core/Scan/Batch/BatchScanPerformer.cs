@@ -332,7 +332,7 @@ namespace NAPS2.Scan.Batch
                 else
                 {
                     var op = operationFactory.Create<SaveImagesOperation>();
-                    op.Start(subPath, now, images);
+                    op.Start(subPath, now, images, true);
                     op.WaitUntilFinished();
                 }
             }

@@ -217,7 +217,7 @@
     <value>Default</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy</value>
+    <value>Legacy (native UI only)</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>

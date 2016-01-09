@@ -358,7 +358,7 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Legacy.
+        ///   Looks up a localized string similar to Legacy (native UI only).
         /// </summary>
         internal static string TwainImpl_Legacy {
             get {
