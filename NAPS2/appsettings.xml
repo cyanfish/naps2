@@ -5,6 +5,7 @@
   <StartupMessageText></StartupMessageText>
   <StartupMessageIcon>Information</StartupMessageIcon>
   <SaveButtonDefaultAction>SaveAll</SaveButtonDefaultAction>
+  <DisableAutoSave>false</DisableAutoSave>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
     <UseNativeUI>false</UseNativeUI>

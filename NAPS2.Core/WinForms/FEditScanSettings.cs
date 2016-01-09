@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
@@ -37,6 +38,7 @@ namespace NAPS2.WinForms
         private readonly IScanDriverFactory driverFactory;
         private readonly IErrorOutput errorOutput;
         private readonly ProfileNameTracker profileNameTracker;
+        private readonly AppConfigManager appConfigManager;
 
         private ScanProfile scanProfile;
         private ScanDevice currentDevice;
@@ -47,11 +49,12 @@ namespace NAPS2.WinForms
 
         private bool suppressChangeEvent;
 
-        public FEditScanSettings(IScanDriverFactory driverFactory, IErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
+        public FEditScanSettings(IScanDriverFactory driverFactory, IErrorOutput errorOutput, ProfileNameTracker profileNameTracker, AppConfigManager appConfigManager)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
             this.profileNameTracker = profileNameTracker;
+            this.appConfigManager = appConfigManager;
             InitializeComponent();
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
@@ -78,6 +81,12 @@ namespace NAPS2.WinForms
         {
             // Don't trigger any onChange events
             suppressChangeEvent = true;
+
+            if (appConfigManager.Config.DisableAutoSave)
+            {
+                cbAutoSave.Enabled = false;
+                linkAutoSaveSettings.Visible = false;
+            }
 
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanProfile.IconID];
             txtName.Text = ScanProfile.DisplayName;
@@ -382,6 +391,10 @@ namespace NAPS2.WinForms
 
         private void linkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (appConfigManager.Config.DisableAutoSave)
+            {
+                return;
+            }
             var form = FormFactory.Create<FAutoSaveSettings>();
             ScanProfile.DriverName = DeviceDriverName;
             form.ScanProfile = ScanProfile;
@@ -402,6 +415,7 @@ namespace NAPS2.WinForms
             {
                 if (cbAutoSave.Checked)
                 {
+                    linkAutoSaveSettings.Enabled = true;
                     var form = FormFactory.Create<FAutoSaveSettings>();
                     form.ScanProfile = ScanProfile;
                     form.ShowDialog();

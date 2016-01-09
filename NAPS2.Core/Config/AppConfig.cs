@@ -46,5 +46,7 @@ namespace NAPS2.Config
         public AutoUpdateStatus AutoUpdate { get; set; }
 
         public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
+
+        public bool DisableAutoSave { get; set; }
     }
 }

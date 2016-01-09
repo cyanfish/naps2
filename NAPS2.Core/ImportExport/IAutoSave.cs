@@ -26,18 +26,24 @@ namespace NAPS2.ImportExport
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly IUserConfigManager userConfigManager;
         private readonly IErrorOutput errorOutput;
+        private readonly AppConfigManager appConfigManager;
 
-        public WinFormsAutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, IErrorOutput errorOutput)
+        public WinFormsAutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, IErrorOutput errorOutput, AppConfigManager appConfigManager)
         {
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.userConfigManager = userConfigManager;
             this.errorOutput = errorOutput;
+            this.appConfigManager = appConfigManager;
         }
 
         public void AutoSave(AutoSaveSettings settings, List<IScannedImage> images)
         {
+            if (appConfigManager.Config.DisableAutoSave)
+            {
+                return;
+            }
             try
             {
                 var form = formFactory.Create<FProgress>();
