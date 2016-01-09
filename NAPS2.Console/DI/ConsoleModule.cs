@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan.Wia;
 using NAPS2.Util;
@@ -36,6 +37,7 @@ namespace NAPS2.Console.DI
             Bind<IWiaTransfer>().To<ConsoleWiaTransfer>();
             Bind<IErrorOutput>().To<ConsoleErrorOutput>();
             Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
+            Bind<IAutoSave>().To<ConsoleAutoSave>();
         }
     }
 }

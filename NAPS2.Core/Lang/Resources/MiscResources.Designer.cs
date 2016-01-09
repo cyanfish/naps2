@@ -70,6 +70,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when trying to auto save..
+        /// </summary>
+        internal static string AutoSaveError {
+            get {
+                return ResourceManager.GetString("AutoSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatic Updates.
         /// </summary>
         internal static string AutoUpdates {

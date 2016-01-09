@@ -375,4 +375,7 @@
   <data name="EmailPdfProgress" xml:space="preserve">
     <value>Email PDF Progress</value>
   </data>
+  <data name="AutoSaveError" xml:space="preserve">
+    <value>An error occurred when trying to auto save.</value>
+  </data>
 </root>

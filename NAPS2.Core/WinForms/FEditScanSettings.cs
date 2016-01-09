@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
@@ -117,6 +118,7 @@ namespace NAPS2.WinForms
 
             UpdateEnabledControls();
 
+            linkAutoSaveSettings.Location = new Point(cbAutoSave.Right, linkAutoSaveSettings.Location.Y);
             new LayoutManager(this)
                 .Bind(txtName, txtDevice, panel1, panel2)
                     .WidthToForm()

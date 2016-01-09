@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.ImportExport;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -32,11 +33,13 @@ namespace NAPS2.Scan
     {
         private readonly IScanDriverFactory driverFactory;
         private readonly IErrorOutput errorOutput;
+        private readonly IAutoSave autoSave;
 
-        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput)
+        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
+            this.autoSave = autoSave;
         }
 
         public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<IScannedImage> imageCallback)
@@ -64,9 +67,16 @@ namespace NAPS2.Scan
                     driver.ScanDevice = scanProfile.Device;
                 }
 
+                var images = new List<IScannedImage>();
                 foreach (IScannedImage scannedImage in driver.Scan())
                 {
                     imageCallback(scannedImage);
+                    images.Add(scannedImage);
+                }
+
+                if (scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null)
+                {
+                    autoSave.AutoSave(scanProfile.AutoSaveSettings, images);
                 }
             }
             catch (ScanDriverException e)

@@ -326,8 +326,8 @@ namespace NAPS2.Scan.Batch
                     {
                         subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
                     }
-                    pdfExporter.Export(subPath, images, pdfSettingsContainer.PdfSettings,
-                        userConfigManager.Config.OcrLanguageCode, j => true);
+                    var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
+                    pdfExporter.Export(subPath, images, pdfSettingsContainer.PdfSettings, ocrLanguageCode, j => true);
                 }
                 else
                 {
