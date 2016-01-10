@@ -61,7 +61,7 @@ namespace NAPS2.Scan
 
         protected abstract ScanDevice PromptForDeviceInternal();
 
-        public IEnumerable<IScannedImage> Scan()
+        public IEnumerable<ScannedImage> Scan()
         {
             if (ScanProfile == null)
             {
@@ -93,6 +93,6 @@ namespace NAPS2.Scan
             }
         }
 
-        protected abstract IEnumerable<IScannedImage> ScanInternal();
+        protected abstract IEnumerable<ScannedImage> ScanInternal();
     }
 }

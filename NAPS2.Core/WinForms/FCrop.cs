@@ -48,9 +48,9 @@ namespace NAPS2.WinForms
             CropTransform = new CropTransform();
         }
 
-        public IScannedImage Image { get; set; }
+        public ScannedImage Image { get; set; }
 
-        public List<IScannedImage> SelectedImages { get; set; }
+        public List<ScannedImage> SelectedImages { get; set; }
 
         public CropTransform CropTransform { get; private set; }
 
@@ -59,7 +59,7 @@ namespace NAPS2.WinForms
             get { return SelectedImages != null && checkboxApplyToSelected.Checked; }
         }
 
-        private IEnumerable<IScannedImage> ImagesToTransform
+        private IEnumerable<ScannedImage> ImagesToTransform
         {
             get
             {
@@ -193,7 +193,7 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private CropTransform ScaleCropTransform(IScannedImage img, Bitmap referenceBitmap)
+        private CropTransform ScaleCropTransform(ScannedImage img, Bitmap referenceBitmap)
         {
             using (var bitmap = img.GetImage())
             {

@@ -33,13 +33,11 @@ namespace NAPS2.Scan.Wia
     {
         public const string DRIVER_NAME = "wia";
 
-        private readonly IScannedImageFactory scannedImageFactory;
         private readonly IWiaTransfer wiaTransfer;
         private readonly ThreadFactory threadFactory;
 
-        public WiaScanDriver(IScannedImageFactory scannedImageFactory, IWiaTransfer wiaTransfer, ThreadFactory threadFactory)
+        public WiaScanDriver(IWiaTransfer wiaTransfer, ThreadFactory threadFactory)
         {
-            this.scannedImageFactory = scannedImageFactory;
             this.wiaTransfer = wiaTransfer;
             this.threadFactory = threadFactory;
         }
@@ -54,7 +52,7 @@ namespace NAPS2.Scan.Wia
             return WiaApi.PromptForDevice();
         }
 
-        protected override IEnumerable<IScannedImage> ScanInternal()
+        protected override IEnumerable<ScannedImage> ScanInternal()
         {
             using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice, threadFactory))
             {
@@ -71,7 +69,7 @@ namespace NAPS2.Scan.Wia
                 int pageNumber = 1;
                 while (true)
                 {
-                    IScannedImage image;
+                    ScannedImage image;
                     try
                     {
                         image = TransferImage(eventLoop, pageNumber++);
@@ -97,7 +95,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private IScannedImage TransferImage(WiaBackgroundEventLoop eventLoop, int pageNumber)
+        private ScannedImage TransferImage(WiaBackgroundEventLoop eventLoop, int pageNumber)
         {
             try
             {
@@ -115,7 +113,7 @@ namespace NAPS2.Scan.Wia
                         using (var result = ScannedImageHelper.PostProcessStep1(output, ScanProfile))
                         {
                             ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
-                            var image = scannedImageFactory.Create(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                            var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                             ScannedImageHelper.PostProcessStep2(image, ScanProfile);
                             return image;
                         }

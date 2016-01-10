@@ -207,12 +207,7 @@
     <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
     <Compile Include="Scan\ScanProfile.cs" />
     <Compile Include="Scan\Images\BitmapHelper.cs" />
-    <Compile Include="Scan\Images\FileBasedScannedImage.cs" />
-    <Compile Include="Scan\Images\FileBasedScannedImageFactory.cs" />
-    <Compile Include="Scan\Images\IScannedImage.cs" />
-    <Compile Include="Scan\Images\IScannedImageFactory.cs" />
     <Compile Include="Scan\Images\ScannedImage.cs" />
-    <Compile Include="Scan\Images\ScannedImageFactory.cs" />
     <Compile Include="Scan\Images\ScannedImageHelper.cs" />
     <Compile Include="Scan\Images\ScannedImageList.cs" />
     <Compile Include="Scan\Images\ThumbnailHelper.cs" />

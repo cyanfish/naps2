@@ -31,7 +31,7 @@ namespace NAPS2.Host
             return twainWrapper.PromptForDevice();
         }
 
-        public List<IScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<ScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
             var dialogParent = Application.OpenForms.Cast<Form>().Single(x => x.Handle == hwnd);
             return twainWrapper.Scan(dialogParent, scanDevice, scanProfile, scanParams);

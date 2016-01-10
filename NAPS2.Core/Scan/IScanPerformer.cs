@@ -28,6 +28,6 @@ namespace NAPS2.Scan
 {
     public interface IScanPerformer
     {
-        void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<IScannedImage> imageCallback);
+        void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<ScannedImage> imageCallback);
     }
 }

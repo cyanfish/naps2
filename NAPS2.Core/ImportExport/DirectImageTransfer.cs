@@ -10,13 +10,13 @@ namespace NAPS2.ImportExport
     [Serializable]
     public class DirectImageTransfer
     {
-        public DirectImageTransfer(IEnumerable<IScannedImage> selectedImages)
+        public DirectImageTransfer(IEnumerable<ScannedImage> selectedImages)
         {
             ProcessID = Process.GetCurrentProcess().Id;
-            ImageRecovery = selectedImages.OfType<FileBasedScannedImage>().Select(x => x.RecoveryIndexImage).ToArray();
+            ImageRecovery = selectedImages.OfType<ScannedImage>().Select(x => x.RecoveryIndexImage).ToArray();
             if (ImageRecovery.Length > 0)
             {
-                RecoveryFolder = FileBasedScannedImage.RecoveryFolder.FullName;
+                RecoveryFolder = ScannedImage.RecoveryFolder.FullName;
             }
         }
 

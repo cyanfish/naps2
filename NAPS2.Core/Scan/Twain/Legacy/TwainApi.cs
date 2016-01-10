@@ -52,7 +52,7 @@ namespace NAPS2.Scan.Twain.Legacy
             return new ScanDevice(name, name);
         }
 
-        public static List<IScannedImage> Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
+        public static List<ScannedImage> Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, IFormFactory formFactory)
         {
             var tw = new Twain();
             if (!tw.Init(pForm.Handle))
@@ -64,7 +64,7 @@ namespace NAPS2.Scan.Twain.Legacy
                 throw new DeviceNotFoundException();
             }
             var form = formFactory.Create<FTwainGui>();
-            var mf = new TwainMessageFilter(settings, tw, form, scannedImageFactory);
+            var mf = new TwainMessageFilter(settings, tw, form);
             form.ShowDialog(pForm);
             return mf.Bitmaps;
         }
@@ -74,22 +74,20 @@ namespace NAPS2.Scan.Twain.Legacy
             private readonly ScanProfile settings;
             private readonly Twain tw;
             private readonly FTwainGui form;
-            private readonly IScannedImageFactory scannedImageFactory;
 
             private bool activated;
             private bool msgfilter;
 
-            public TwainMessageFilter(ScanProfile settings, Twain tw, FTwainGui form, IScannedImageFactory scannedImageFactory)
+            public TwainMessageFilter(ScanProfile settings, Twain tw, FTwainGui form)
             {
                 this.settings = settings;
                 this.tw = tw;
                 this.form = form;
-                this.scannedImageFactory = scannedImageFactory;
-                Bitmaps = new List<IScannedImage>();
+                Bitmaps = new List<ScannedImage>();
                 form.Activated += FTwainGui_Activated;
             }
 
-            public List<IScannedImage> Bitmaps { get; private set; }
+            public List<ScannedImage> Bitmaps { get; private set; }
 
             public bool PreFilterMessage(ref Message m)
             {
@@ -127,7 +125,7 @@ namespace NAPS2.Scan.Twain.Legacy
 
                                 using (Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount))
                                 {
-                                    Bitmaps.Add(scannedImageFactory.Create(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality, settings.Quality));
+                                    Bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality, settings.Quality));
                                 }
                             }
                             form.Close();

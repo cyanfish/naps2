@@ -50,7 +50,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        public Action<IScannedImage> ImageCallback { get; set; }
+        public Action<ScannedImage> ImageCallback { get; set; }
 
         private ScanProfile SelectedProfile
         {

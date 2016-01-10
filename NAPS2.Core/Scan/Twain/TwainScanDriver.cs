@@ -48,7 +48,7 @@ namespace NAPS2.Scan.Twain
             return x86HostServiceFactory.Create().TwainPromptForDevice(DialogParent.Handle);
         }
 
-        protected override IEnumerable<IScannedImage> ScanInternal()
+        protected override IEnumerable<ScannedImage> ScanInternal()
         {
             return x86HostServiceFactory.Create().TwainScan(DialogParent.Handle, ScanDevice, ScanProfile, ScanParams);
         }

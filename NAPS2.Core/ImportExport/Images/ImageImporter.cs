@@ -11,14 +11,7 @@ namespace NAPS2.ImportExport.Images
 {
     public class ImageImporter : IImageImporter
     {
-        private readonly IScannedImageFactory scannedImageFactory;
-
-        public ImageImporter(IScannedImageFactory scannedImageFactory)
-        {
-            this.scannedImageFactory = scannedImageFactory;
-        }
-
-        public IEnumerable<IScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
+        public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
         {
             if (!progressCallback(0, 1))
             {
@@ -45,7 +38,7 @@ namespace NAPS2.ImportExport.Images
                         yield break;
                     }
                     toImport.SelectActiveFrame(FrameDimension.Page, i);
-                    yield return scannedImageFactory.Create(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
+                    yield return new ScannedImage(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
                 }
                 progressCallback(frameCount, frameCount);
             }

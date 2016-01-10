@@ -74,6 +74,6 @@ namespace NAPS2.Scan
         /// <returns>A list of scanned images.</returns>
         /// <exception cref="ScanDriverException">Throws a ScanDriverException if an error occurs while scanning.</exception>
         /// /// <exception cref="InvalidOperationException">Throws an InvalidOperationException if ScanProfile or DialogParent has not been set.</exception>
-        IEnumerable<IScannedImage> Scan();
+        IEnumerable<ScannedImage> Scan();
     }
 }

@@ -17,21 +17,19 @@ namespace NAPS2.Recovery
     public class RecoveryManager
     {
         private readonly IFormFactory formFactory;
-        private readonly IScannedImageFactory scannedImageFactory;
         private readonly IUserConfigManager userConfigManager;
         private readonly ThreadFactory threadFactory;
 
-        public RecoveryManager(IFormFactory formFactory, IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
+        public RecoveryManager(IFormFactory formFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
         {
             this.formFactory = formFactory;
-            this.scannedImageFactory = scannedImageFactory;
             this.userConfigManager = userConfigManager;
             this.threadFactory = threadFactory;
         }
 
-        public void RecoverScannedImages(Action<IScannedImage> imageCallback)
+        public void RecoverScannedImages(Action<ScannedImage> imageCallback)
         {
-            var op = new RecoveryOperation(formFactory, scannedImageFactory, userConfigManager, threadFactory);
+            var op = new RecoveryOperation(formFactory, userConfigManager, threadFactory);
             var progressForm = formFactory.Create<FProgress>();
             progressForm.Operation = op;
             if (op.Start(imageCallback))
@@ -43,7 +41,6 @@ namespace NAPS2.Recovery
         private class RecoveryOperation : OperationBase
         {
             private readonly IFormFactory formFactory;
-            private readonly IScannedImageFactory scannedImageFactory;
             private readonly IUserConfigManager userConfigManager;
             private readonly ThreadFactory threadFactory;
 
@@ -54,10 +51,9 @@ namespace NAPS2.Recovery
             private DateTime scannedDateTime;
             private bool cancel;
 
-            public RecoveryOperation(IFormFactory formFactory, IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
+            public RecoveryOperation(IFormFactory formFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
             {
                 this.formFactory = formFactory;
-                this.scannedImageFactory = scannedImageFactory;
                 this.userConfigManager = userConfigManager;
                 this.threadFactory = threadFactory;
 
@@ -65,7 +61,7 @@ namespace NAPS2.Recovery
                 AllowCancel = true;
             }
 
-            public bool Start(Action<IScannedImage> imageCallback)
+            public bool Start(Action<ScannedImage> imageCallback)
             {
                 Status = new OperationStatus
                 {
@@ -127,7 +123,7 @@ namespace NAPS2.Recovery
                 return false;
             }
 
-            private bool DoRecover(Action<IScannedImage> imageCallback)
+            private bool DoRecover(Action<ScannedImage> imageCallback)
             {
                 Status.MaxProgress = recoveryIndexManager.Index.Images.Count;
                 InvokeStatusChanged();
@@ -142,7 +138,7 @@ namespace NAPS2.Recovery
                     string imagePath = Path.Combine(folderToRecoverFrom.FullName, indexImage.FileName);
                     using (var bitmap = new Bitmap(imagePath))
                     {
-                        var scannedImage = scannedImageFactory.Create(bitmap, indexImage.BitDepth,
+                        var scannedImage = new ScannedImage(bitmap, indexImage.BitDepth,
                             indexImage.HighQuality, -1);
                         foreach (var transform in indexImage.TransformList)
                         {
@@ -201,7 +197,7 @@ namespace NAPS2.Recovery
             {
                 try
                 {
-                    string lockFilePath = Path.Combine(recoveryFolder.FullName, FileBasedScannedImage.LOCK_FILE_NAME);
+                    string lockFilePath = Path.Combine(recoveryFolder.FullName, ScannedImage.LOCK_FILE_NAME);
                     lockFile = new FileStream(lockFilePath, FileMode.Open);
                     return true;
                 }

@@ -42,7 +42,7 @@ namespace NAPS2.ImportExport.Pdf
             this.ocrEngine = ocrEngine;
         }
 
-        public bool Export(string path, IEnumerable<IScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
+        public bool Export(string path, IEnumerable<ScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument();
             document.Info.Author = settings.Metadata.Author;
@@ -74,7 +74,7 @@ namespace NAPS2.ImportExport.Pdf
             }
 
             int i = 0;
-            foreach (IScannedImage scannedImage in images)
+            foreach (ScannedImage scannedImage in images)
             {
                 using (Stream stream = scannedImage.GetImageStream())
                 using (var img = new Bitmap(stream))

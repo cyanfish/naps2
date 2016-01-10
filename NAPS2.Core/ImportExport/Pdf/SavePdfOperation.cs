@@ -51,7 +51,7 @@ namespace NAPS2.ImportExport.Pdf
             AllowCancel = true;
         }
 
-        public bool Start(string fileName, DateTime dateTime, ICollection<IScannedImage> images, PdfSettings pdfSettings, string ocrLanguageCode, bool email)
+        public bool Start(string fileName, DateTime dateTime, ICollection<ScannedImage> images, PdfSettings pdfSettings, string ocrLanguageCode, bool email)
         {
             ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
             var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);

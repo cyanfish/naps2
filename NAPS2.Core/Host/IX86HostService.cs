@@ -8,7 +8,7 @@ using NAPS2.Scan.Images;
 namespace NAPS2.Host
 {
     [ServiceContract]
-    [ServiceKnownType(typeof(FileBasedScannedImage))]
+    [ServiceKnownType(typeof(ScannedImage))]
     public interface IX86HostService
     {
         [OperationContract]
@@ -18,6 +18,6 @@ namespace NAPS2.Host
         ScanDevice TwainPromptForDevice(IntPtr hwnd);
 
         [OperationContract]
-        List<IScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams);
+        List<ScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams);
     }
 }

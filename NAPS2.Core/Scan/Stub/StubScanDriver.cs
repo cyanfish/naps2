@@ -30,13 +30,11 @@ namespace NAPS2.Scan.Stub
 {
     public class StubScanDriver : IScanDriver
     {
-        private readonly IScannedImageFactory scannedImageFactory;
         private static int _number = 1;
 
-        public StubScanDriver(string driverName, IScannedImageFactory scannedImageFactory)
+        public StubScanDriver(string driverName)
         {
             DriverName = driverName;
-            this.scannedImageFactory = scannedImageFactory;
         }
 
         public ScanProfile ScanProfile { get; set; }
@@ -52,7 +50,7 @@ namespace NAPS2.Scan.Stub
             return new ScanDevice("test", "Test Scanner");
         }
 
-        public IEnumerable<IScannedImage> Scan()
+        public IEnumerable<ScannedImage> Scan()
         {
             for (int i = 0; i < ImageCount; i++)
             {
@@ -78,7 +76,7 @@ namespace NAPS2.Scan.Stub
             }
         }
 
-        private IScannedImage MakeImage()
+        private ScannedImage MakeImage()
         {
             var bitmap = new Bitmap(600, 800);
             using (Graphics g = Graphics.FromImage(bitmap))
@@ -86,7 +84,7 @@ namespace NAPS2.Scan.Stub
                 g.FillRectangle(Brushes.LightGray, 0, 0, bitmap.Width, bitmap.Height);
                 g.DrawString((_number++).ToString("G"), new Font("Times New Roman", 80), Brushes.Black, 0, 350);
             }
-            var image = scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, ScanProfile.MaxQuality, ScanProfile.Quality);
+            var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, ScanProfile.MaxQuality, ScanProfile.Quality);
             return image;
         }
 

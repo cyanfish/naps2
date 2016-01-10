@@ -33,7 +33,7 @@ namespace NAPS2.Host
             return twainWrapper.PromptForDevice();
         }
 
-        public List<IScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<ScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
             return twainWrapper.Scan(ParentForm, scanDevice, scanProfile, scanParams);
         }

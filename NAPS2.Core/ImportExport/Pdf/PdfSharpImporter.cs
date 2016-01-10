@@ -18,22 +18,20 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpImporter : IPdfImporter
     {
-        private readonly IScannedImageFactory scannedImageFactory;
         private readonly IErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
 
-        public PdfSharpImporter(IScannedImageFactory scannedImageFactory, IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider)
+        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider)
         {
-            this.scannedImageFactory = scannedImageFactory;
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
         }
 
-        public IEnumerable<IScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
+        public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
         {
             if (!progressCallback(0, 0))
             {
-                return Enumerable.Empty<IScannedImage>();
+                return Enumerable.Empty<ScannedImage>();
             }
             int passwordAttempts = 0;
             bool aborted = false;
@@ -50,14 +48,14 @@ namespace NAPS2.ImportExport.Pdf
                 if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                 {
                     errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
-                    return Enumerable.Empty<IScannedImage>();
+                    return Enumerable.Empty<ScannedImage>();
                 }
                 if (passwordAttempts > 0
                     && !document.SecuritySettings.HasOwnerPermissions
                     && !document.SecuritySettings.PermitExtractContent)
                 {
                     errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
-                    return Enumerable.Empty<IScannedImage>();
+                    return Enumerable.Empty<ScannedImage>();
                 }
 
                 int i = 0;
@@ -67,7 +65,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
                 Log.ErrorException("Error importing PDF file.", e);
-                return Enumerable.Empty<IScannedImage>();
+                return Enumerable.Empty<ScannedImage>();
             }
             catch (Exception e)
             {
@@ -76,11 +74,11 @@ namespace NAPS2.ImportExport.Pdf
                     errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
                     Log.ErrorException("Error importing PDF file.", e);
                 }
-                return Enumerable.Empty<IScannedImage>();
+                return Enumerable.Empty<ScannedImage>();
             }
         }
 
-        private IEnumerable<IScannedImage> GetImagesFromPage(PdfPage page)
+        private IEnumerable<ScannedImage> GetImagesFromPage(PdfPage page)
         {
             // Get resources dictionary
             PdfDictionary resources = page.Elements.GetDictionary("/Resources");
@@ -139,7 +137,7 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
 
-        private IScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes)
+        private ScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes)
         {
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using (var memoryStream = new MemoryStream(imageBytes))
@@ -147,12 +145,12 @@ namespace NAPS2.ImportExport.Pdf
                 using (var bitmap = new Bitmap(memoryStream))
                 {
                     bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                    return scannedImageFactory.Create(bitmap, ScanBitDepth.C24Bit, false, -1);
+                    return new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
                 }
             }
         }
 
-        private IScannedImage ExportAsPngImage(PdfPage page, PdfDictionary image)
+        private ScannedImage ExportAsPngImage(PdfPage page, PdfDictionary image)
         {
             int width = image.Elements.GetInteger(PdfImage.Keys.Width);
             int height = image.Elements.GetInteger(PdfImage.Keys.Height);
@@ -181,7 +179,7 @@ namespace NAPS2.ImportExport.Pdf
             using (bitmap)
             {
                 bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                return scannedImageFactory.Create(bitmap, bitDepth, true, -1);
+                return new ScannedImage(bitmap, bitDepth, true, -1);
             }
         }
 

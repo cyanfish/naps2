@@ -19,7 +19,6 @@ namespace NAPS2.Scan.Twain
         private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
 
         private readonly IFormFactory formFactory;
-        private readonly IScannedImageFactory scannedImageFactory;
 
         static TwainWrapper()
         {
@@ -29,10 +28,9 @@ namespace NAPS2.Scan.Twain
 #endif
         }
 
-        public TwainWrapper(IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
+        public TwainWrapper(IFormFactory formFactory)
         {
             this.formFactory = formFactory;
-            this.scannedImageFactory = scannedImageFactory;
         }
 
         public ScanDevice PromptForDevice()
@@ -61,7 +59,7 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        public List<IScannedImage> Scan(Form dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<ScannedImage> Scan(Form dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
             //if (ScanProfile.TwainImpl == TwainImpl.Legacy)
             //{
@@ -70,7 +68,7 @@ namespace NAPS2.Scan.Twain
 
             var session = new TwainSession(TwainAppId);
             var twainForm = formFactory.Create<FTwainGui>();
-            var images = new List<IScannedImage>();
+            var images = new List<ScannedImage>();
             Exception error = null;
             bool cancel = false;
             DataSource ds = null;
@@ -99,7 +97,7 @@ namespace NAPS2.Scan.Twain
                         var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;
-                        var img = scannedImageFactory.Create(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                        var img = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
                         if (scanParams.DetectPatchCodes)
                         {
                             foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))

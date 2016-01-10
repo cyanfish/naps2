@@ -45,7 +45,7 @@ namespace NAPS2.Scan
             this.appConfigManager = appConfigManager;
         }
 
-        public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<IScannedImage> imageCallback)
+        public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<ScannedImage> imageCallback)
         {
             var driver = driverFactory.Create(scanProfile.DriverName);
             driver.DialogParent = dialogParent;
@@ -80,7 +80,7 @@ namespace NAPS2.Scan
                         if (!autoSave.AutoSave(scanProfile.AutoSaveSettings, images))
                         {
                             // Fallback in case auto save failed; pipe all the images back at once
-                            foreach (IScannedImage img in images)
+                            foreach (ScannedImage img in images)
                             {
                                 imageCallback(img);
                             }
@@ -89,8 +89,8 @@ namespace NAPS2.Scan
                     else
                     {
                         // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
-                        var images = new List<IScannedImage>();
-                        foreach (IScannedImage scannedImage in driver.Scan())
+                        var images = new List<ScannedImage>();
+                        foreach (ScannedImage scannedImage in driver.Scan())
                         {
                             imageCallback(scannedImage);
                             images.Add(scannedImage);
@@ -101,7 +101,7 @@ namespace NAPS2.Scan
                 else
                 {
                     // No auto save, so just pipe images back as we get them
-                    foreach (IScannedImage scannedImage in driver.Scan())
+                    foreach (ScannedImage scannedImage in driver.Scan())
                     {
                         imageCallback(scannedImage);
                     }
