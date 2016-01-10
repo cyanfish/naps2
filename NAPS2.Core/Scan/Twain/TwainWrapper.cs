@@ -99,7 +99,7 @@ namespace NAPS2.Scan.Twain
                         var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;
-                        var img = scannedImageFactory.Create(result, bitDepth, scanProfile.MaxQuality);
+                        var img = scannedImageFactory.Create(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
                         if (scanParams.DetectPatchCodes)
                         {
                             foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
@@ -289,10 +289,10 @@ namespace NAPS2.Scan.Twain
 
             // Brightness, Contrast
             // Conveniently, the range of values used in settings (-1000 to +1000) is the same range TWAIN supports
-            if (!ScanProfile.BrightnessContrastAfterScan)
+            if (!scanProfile.BrightnessContrastAfterScan)
             {
-                ds.Capabilities.ICapBrightness.SetValue(ScanProfile.Brightness);
-                ds.Capabilities.ICapContrast.SetValue(ScanProfile.Contrast);
+                ds.Capabilities.ICapBrightness.SetValue(scanProfile.Brightness);
+                ds.Capabilities.ICapContrast.SetValue(scanProfile.Contrast);
             }
 
             // Resolution

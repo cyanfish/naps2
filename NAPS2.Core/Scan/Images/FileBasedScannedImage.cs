@@ -231,7 +231,7 @@ namespace NAPS2.Scan.Images
             _recoveryIndexManager.Save();
         }
 
-        public ImageFormat FileFormat { get { return baseImageFileFormat; } }
+        public ImageFormat FileFormat { get { return new ImageFormat(baseImageFileFormatGuid); } }
 
         internal RecoveryIndexImage RecoveryIndexImage
         {
