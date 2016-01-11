@@ -25,7 +25,7 @@ namespace NAPS2_32
             Application.SetCompatibleTextRenderingDefault(false);
 
             string pipeName = string.Format(X86HostManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
-            var form = new BackgroundForm(pipeName);
+            var form = new BackgroundForm();
             var svc = KernelManager.Kernel.Get<X86HostService>();
             svc.ParentForm = form;
 
