@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Scan.Images;
 
@@ -34,6 +35,7 @@ namespace NAPS2.WinForms
         public ThumbnailList()
         {
             InitializeComponent();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             LargeImageList = ilThumbnailList;
         }
 
@@ -53,12 +55,12 @@ namespace NAPS2.WinForms
 
         public void UpdateImages(List<ScannedImage> images)
         {
-            for (int i = 0; i < (images.Count - Items.Count); i++)
+            int delta = images.Count - Items.Count;
+            for (int i = 0; i < delta; i++)
             {
                 Items.Add("", i);
             }
-
-            for (int i = 0; i < (Items.Count - images.Count); i++)
+            for (int i = 0; i < -delta; i++)
             {
                 Items.RemoveAt(Items.Count - 1);
             }
