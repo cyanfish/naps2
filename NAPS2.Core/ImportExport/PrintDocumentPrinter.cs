@@ -31,7 +31,7 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PrintDocumentPrinter : IScannedImagePrinter
     {
-        public bool PromptToPrint(List<IScannedImage> images, List<IScannedImage> selectedImages)
+        public bool PromptToPrint(List<ScannedImage> images, List<ScannedImage> selectedImages)
         {
             if (!images.Any())
             {
@@ -56,9 +56,9 @@ namespace NAPS2.ImportExport.Pdf
             return false;
         }
 
-        public bool Print(PrinterSettings printerSettings, List<IScannedImage> images, List<IScannedImage> selectedImages)
+        public bool Print(PrinterSettings printerSettings, List<ScannedImage> images, List<ScannedImage> selectedImages)
         {
-            List<IScannedImage> imagesToPrint;
+            List<ScannedImage> imagesToPrint;
             switch (printerSettings.PrintRange)
             {
                 case PrintRange.AllPages:
@@ -73,7 +73,7 @@ namespace NAPS2.ImportExport.Pdf
                     imagesToPrint = images.Skip(start).Take(length).ToList();
                     break;
                 default:
-                    imagesToPrint = new List<IScannedImage>();
+                    imagesToPrint = new List<ScannedImage>();
                     break;
             }
             if (imagesToPrint.Count == 0)

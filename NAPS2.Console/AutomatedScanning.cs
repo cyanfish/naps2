@@ -55,7 +55,7 @@ namespace NAPS2.Console
         private readonly IOperationFactory operationFactory;
 
         private readonly AutomatedScanningOptions options;
-        private List<IScannedImage> scannedImages;
+        private List<ScannedImage> scannedImages;
         private int pagesScanned;
         private int totalPagesScanned;
         private DateTime startTime;
@@ -98,7 +98,7 @@ namespace NAPS2.Console
                 return;
             }
 
-            scannedImages = new List<IScannedImage>();
+            scannedImages = new List<ScannedImage>();
 
             if (options.ImportPath != null)
             {
@@ -453,7 +453,7 @@ namespace NAPS2.Console
             return true;
         }
 
-        public void ReceiveScannedImage(IScannedImage scannedImage)
+        public void ReceiveScannedImage(ScannedImage scannedImage)
         {
             scannedImages.Add(scannedImage);
             pagesScanned++;

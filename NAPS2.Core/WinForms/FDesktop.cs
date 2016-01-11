@@ -77,7 +77,6 @@ namespace NAPS2.WinForms
         private readonly StillImage stillImage;
         private readonly IOperationFactory operationFactory;
         private readonly IUserConfigManager userConfigManager;
-        private readonly IScannedImageFactory scannedImageFactory;
 
         #endregion
 
@@ -92,7 +91,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, IScannedImageFactory scannedImageFactory)
+        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager)
         {
             this.emailer = emailer;
             this.stringWrapper = stringWrapper;
@@ -112,7 +111,6 @@ namespace NAPS2.WinForms
             this.stillImage = stillImage;
             this.operationFactory = operationFactory;
             this.userConfigManager = userConfigManager;
-            this.scannedImageFactory = scannedImageFactory;
             InitializeComponent();
 
             Shown += FDesktop_Shown;
@@ -310,7 +308,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    FileBasedScannedImage.DisableRecoveryCleanup = true;
+                    ScannedImage.DisableRecoveryCleanup = true;
                 }
             }
         }
@@ -441,12 +439,12 @@ namespace NAPS2.WinForms
             }
         }
 
-        private IEnumerable<IScannedImage> SelectedImages
+        private IEnumerable<ScannedImage> SelectedImages
         {
             get { return imageList.Images.ElementsAt(SelectedIndices); }
         }
 
-        public void ReceiveScannedImage(IScannedImage scannedImage)
+        public void ReceiveScannedImage(ScannedImage scannedImage)
         {
             Invoke(() =>
             {
@@ -463,7 +461,7 @@ namespace NAPS2.WinForms
             UpdateToolbar();
         }
 
-        private void AppendThumbnail(IScannedImage scannedImage)
+        private void AppendThumbnail(ScannedImage scannedImage)
         {
             thumbnailList1.AppendImage(scannedImage);
             UpdateToolbar();
@@ -711,7 +709,7 @@ namespace NAPS2.WinForms
 
         #region Actions - Save/Email/Import
 
-        private void SavePDF(List<IScannedImage> images)
+        private void SavePDF(List<ScannedImage> images)
         {
             if (images.Any())
             {
@@ -733,7 +731,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private bool ExportPDF(string filename, List<IScannedImage> images, bool email)
+        private bool ExportPDF(string filename, List<ScannedImage> images, bool email)
         {
             var op = operationFactory.Create<SavePdfOperation>();
             var progressForm = FormFactory.Create<FProgress>();
@@ -749,7 +747,7 @@ namespace NAPS2.WinForms
             return op.Status.Success;
         }
 
-        private void SaveImages(List<IScannedImage> images)
+        private void SaveImages(List<ScannedImage> images)
         {
             if (images.Any())
             {
@@ -812,7 +810,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void EmailPDF(List<IScannedImage> images)
+        private void EmailPDF(List<ScannedImage> images)
         {
             if (images.Any())
             {
@@ -1416,7 +1414,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private static IDataObject GetDataObjectForImages(IEnumerable<IScannedImage> images, bool includeBitmap)
+        private static IDataObject GetDataObjectForImages(IEnumerable<ScannedImage> images, bool includeBitmap)
         {
             var imageList = images.ToList();
             IDataObject ido = new DataObject();
@@ -1499,7 +1497,7 @@ namespace NAPS2.WinForms
             RenderThumbnails(thumbnailSize, imageList.Images.ToList());
         }
 
-        private void RenderThumbnails(int thumbnailSize, IEnumerable<IScannedImage> imagesToRenderThumbnailsFor)
+        private void RenderThumbnails(int thumbnailSize, IEnumerable<ScannedImage> imagesToRenderThumbnailsFor)
         {
             if (renderThumbnailsCts != null)
             {

@@ -47,13 +47,13 @@ namespace NAPS2.WinForms
             ContrastTransform = new TrueContrastTransform();
         }
 
-        public IScannedImage Image { get; set; }
+        public ScannedImage Image { get; set; }
 
-        public List<IScannedImage> SelectedImages { get; set; }
+        public List<ScannedImage> SelectedImages { get; set; }
 
         public TrueContrastTransform ContrastTransform { get; private set; }
 
-        private IEnumerable<IScannedImage> ImagesToTransform
+        private IEnumerable<ScannedImage> ImagesToTransform
         {
             get
             {

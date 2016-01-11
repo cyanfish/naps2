@@ -23,34 +23,105 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {
-    public class ScannedImage : IScannedImage
+    public class ScannedImage : IDisposable
     {
+        public const string LOCK_FILE_NAME = ".lock";
+
+        private static DirectoryInfo _recoveryFolder;
+        private static FileInfo _recoveryLockFile;
+        private static FileStream _recoveryLock;
+        private static RecoveryIndexManager _recoveryIndexManager;
+
+        public static bool DisableRecoveryCleanup { get; set; }
+
+        internal static DirectoryInfo RecoveryFolder
+        {
+            get
+            {
+                if (_recoveryFolder == null)
+                {
+                    _recoveryFolder = new DirectoryInfo(Path.Combine(Paths.Recovery, Path.GetRandomFileName()));
+                    _recoveryFolder.Create();
+                    _recoveryLockFile = new FileInfo(Path.Combine(_recoveryFolder.FullName, LOCK_FILE_NAME));
+                    _recoveryLock = _recoveryLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                    _recoveryIndexManager = new RecoveryIndexManager(_recoveryFolder);
+                }
+                return _recoveryFolder;
+            }
+        }
+
+        private static int _recoveryFileNumber = 1;
+
         private Bitmap thumbnail;
-        // The image's bit depth (or C24Bit if unknown)
-        private readonly ScanBitDepth bitDepth;
-        // Only one of the following (baseImage/baseImageEncoded) should have a value for any particular ScannedImage
-        private readonly Bitmap baseImage;
-        private readonly MemoryStream baseImageEncoded;
+        // Store the actual image on disk
         private readonly ImageFormat baseImageFileFormat;
+        private readonly string baseImageFileName;
+        private readonly string baseImageFilePath;
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
         private readonly List<Transform> transformList = new List<Transform>();
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
-            this.bitDepth = bitDepth;
+            Bitmap baseImage;
+            MemoryStream baseImageEncoded;
             ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, quality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
+
+            baseImageFileName = (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture) + GetExtension(baseImageFileFormat);
+            baseImageFilePath = Path.Combine(RecoveryFolder.FullName, baseImageFileName);
+
+            if (baseImage != null)
+            {
+                // TODO: If I'm stuck using PNG anyway, then don't treat B&W specially
+                baseImage.Save(baseImageFilePath, baseImageFileFormat);
+                baseImage.Dispose();
+            }
+            else
+            {
+                Debug.Assert(baseImageEncoded != null);
+                using (var fs = new FileStream(baseImageFilePath, FileMode.CreateNew))
+                {
+                    baseImageEncoded.Seek(0, SeekOrigin.Begin);
+                    baseImageEncoded.CopyTo(fs);
+                }
+                baseImageEncoded.Dispose();
+            }
+
+            _recoveryIndexManager.Index.Images.Add(new RecoveryIndexImage
+            {
+                FileName = baseImageFileName,
+                BitDepth = bitDepth,
+                HighQuality = highQuality,
+                TransformList = transformList
+            });
+            _recoveryIndexManager.Save();
+        }
+
+        private string GetExtension(ImageFormat imageFormat)
+        {
+            if (Equals(imageFormat, ImageFormat.Png))
+            {
+                return ".png";
+            }
+            if (Equals(imageFormat, ImageFormat.Jpeg))
+            {
+                return ".jpg";
+            }
+            throw new ArgumentException();
         }
 
         public Bitmap GetImage()
         {
-            var bitmap = bitDepth == ScanBitDepth.BlackWhite ? (Bitmap)baseImage.Clone() : new Bitmap(baseImageEncoded);
+            var bitmap = new Bitmap(baseImageFilePath);
             return Transform.PerformAll(bitmap, transformList);
         }
 
@@ -66,28 +137,42 @@ namespace NAPS2.Scan.Images
 
         public void Dispose()
         {
-            if (baseImage != null)
+            try
             {
-                baseImage.Dispose();
+                if (!DisableRecoveryCleanup && File.Exists(baseImageFilePath))
+                {
+                    File.Delete(baseImageFilePath);
+                    _recoveryIndexManager.Index.Images.RemoveAll(x => x.FileName == baseImageFileName);
+                    _recoveryIndexManager.Save();
+                    if (_recoveryIndexManager.Index.Images.Count == 0)
+                    {
+                        _recoveryLock.Dispose();
+                        RecoveryFolder.Delete(true);
+                        _recoveryFolder = null;
+                    }
+                }
+                if (thumbnail != null)
+                {
+                    thumbnail.Dispose();
+                }
             }
-            if (baseImageEncoded != null)
+            catch (IOException ex)
             {
-                baseImageEncoded.Dispose();
-            }
-            if (thumbnail != null)
-            {
-                thumbnail.Dispose();
+                Log.ErrorException("Error cleaning up recovery files.", ex);
             }
         }
 
         public void AddTransform(Transform transform)
         {
+            // Also updates the recovery index since they reference the same list
             Transform.AddOrSimplify(transformList, transform);
+            _recoveryIndexManager.Save();
         }
 
         public void ResetTransforms()
         {
             transformList.Clear();
+            _recoveryIndexManager.Save();
         }
 
         public Bitmap GetThumbnail(int preferredSize)
@@ -124,14 +209,27 @@ namespace NAPS2.Scan.Images
 
         public void MovedTo(int index)
         {
-            // Do nothing, this is only important for FileBasedScannedImage
+            var indexImage = _recoveryIndexManager.Index.Images.Single(x => x.FileName == baseImageFileName);
+            _recoveryIndexManager.Index.Images.Remove(indexImage);
+            _recoveryIndexManager.Index.Images.Insert(index, indexImage);
+            _recoveryIndexManager.Save();
         }
 
         public PatchCode PatchCode { get; set; }
 
-        public ImageFormat FileFormat
+        public ImageFormat FileFormat { get { return baseImageFileFormat; } }
+
+        internal RecoveryIndexImage RecoveryIndexImage
         {
-            get { return baseImageFileFormat; }
+            get
+            {
+                return _recoveryIndexManager.Index.Images.Single(x => x.FileName == baseImageFileName);
+            }
+        }
+
+        public override string ToString()
+        {
+            return baseImageFileName;
         }
     }
 }

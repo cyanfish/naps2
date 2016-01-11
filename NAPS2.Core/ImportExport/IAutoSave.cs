@@ -16,7 +16,7 @@ namespace NAPS2.ImportExport
 {
     public interface IAutoSave
     {
-        bool AutoSave(AutoSaveSettings settings, List<IScannedImage> images);
+        bool AutoSave(AutoSaveSettings settings, List<ScannedImage> images);
     }
 
     public class WinFormsAutoSave : IAutoSave
@@ -40,7 +40,7 @@ namespace NAPS2.ImportExport
             this.fileNamePlaceholders = fileNamePlaceholders;
         }
 
-        public bool AutoSave(AutoSaveSettings settings, List<IScannedImage> images)
+        public bool AutoSave(AutoSaveSettings settings, List<ScannedImage> images)
         {
             if (appConfigManager.Config.DisableAutoSave)
             {
@@ -61,7 +61,7 @@ namespace NAPS2.ImportExport
                 {
                     for (int i = 0; i < images.Count; i++)
                     {
-                        if (!SaveOneFile(settings, now, i, new List<IScannedImage> { images[i] }))
+                        if (!SaveOneFile(settings, now, i, new List<ScannedImage> { images[i] }))
                         {
                             ok = false;
                         }
@@ -69,9 +69,9 @@ namespace NAPS2.ImportExport
                 }
                 else if (settings.Separator == AutoSaveSeparator.PatchT)
                 {
-                    var imageSet = new List<IScannedImage>();
+                    var imageSet = new List<ScannedImage>();
                     int fileIndex = 0;
-                    foreach (IScannedImage img in images)
+                    foreach (ScannedImage img in images)
                     {
                         if (img.PatchCode == PatchCode.PatchT)
                         {
@@ -104,7 +104,7 @@ namespace NAPS2.ImportExport
             }
         }
 
-        private bool SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<IScannedImage> images)
+        private bool SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<ScannedImage> images)
         {
             if (images.Count == 0)
             {
@@ -143,7 +143,7 @@ namespace NAPS2.ImportExport
 
     public class ConsoleAutoSave : IAutoSave
     {
-        public bool AutoSave(AutoSaveSettings settings, List<IScannedImage> images)
+        public bool AutoSave(AutoSaveSettings settings, List<ScannedImage> images)
         {
             // Not supported in NAPS2.Console
             return false;

@@ -40,7 +40,7 @@ namespace NAPS2.Scan.Batch
             this.formFactory = formFactory;
         }
 
-        public void PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<IScannedImage> imageCallback, Func<string, bool> progressCallback)
+        public void PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
             var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, userConfigManager, formFactory)
             {
@@ -65,7 +65,7 @@ namespace NAPS2.Scan.Batch
 
             private ScanProfile profile;
             private ScanParams scanParams;
-            private List<List<IScannedImage>> scans;
+            private List<List<ScannedImage>> scans;
 
             public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
             {
@@ -85,7 +85,7 @@ namespace NAPS2.Scan.Batch
 
             public FormBase BatchForm { get; set; }
 
-            public Action<IScannedImage> LoadImageCallback { get; set; }
+            public Action<ScannedImage> LoadImageCallback { get; set; }
 
             public void Do()
             {
@@ -110,7 +110,7 @@ namespace NAPS2.Scan.Batch
 
             private void Input()
             {
-                scans = new List<List<IScannedImage>>();
+                scans = new List<List<ScannedImage>>();
 
                 if (Settings.ScanType == BatchScanType.Single)
                 {
@@ -183,7 +183,7 @@ namespace NAPS2.Scan.Batch
 
             private bool InputOneScan(int scanNumber)
             {
-                var scan = new List<IScannedImage>();
+                var scan = new List<ScannedImage>();
                 int pageNumber = 1;
                 if (!ProgressCallback(scanNumber == -1
                     ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
@@ -217,7 +217,7 @@ namespace NAPS2.Scan.Batch
                 return true;
             }
 
-            private void DoScan(int scanNumber, List<IScannedImage> scan, int pageNumber)
+            private void DoScan(int scanNumber, List<ScannedImage> scan, int pageNumber)
             {
                 scanPerformer.PerformScan(profile, scanParams, BatchForm, image =>
                 {
@@ -277,15 +277,15 @@ namespace NAPS2.Scan.Batch
                     {
                         for (int i = 0; i < allImages.Count; i++)
                         {
-                            Save(now, i, new List<IScannedImage> { allImages[i] });
+                            Save(now, i, new List<ScannedImage> { allImages[i] });
                             allImages[i].Dispose();
                         }
                     }
                     else if (Settings.SaveSeparator == BatchSaveSeparator.PatchT)
                     {
-                        var images = new List<IScannedImage>();
+                        var images = new List<ScannedImage>();
                         int fileIndex = 0;
-                        foreach (IScannedImage img in allImages)
+                        foreach (ScannedImage img in allImages)
                         {
                             if (img.PatchCode == PatchCode.PatchT)
                             {
@@ -313,7 +313,7 @@ namespace NAPS2.Scan.Batch
                 }
             }
 
-            private void Save(DateTime now, int i, List<IScannedImage> images)
+            private void Save(DateTime now, int i, List<ScannedImage> images)
             {
                 if (images.Count == 0)
                 {

@@ -29,7 +29,7 @@ namespace NAPS2.ImportExport
             AllowCancel = true;
         }
 
-        public bool Start(List<string> filesToImport, Action<IScannedImage> imageCallback)
+        public bool Start(List<string> filesToImport, Action<ScannedImage> imageCallback)
         {
             bool oneFile = filesToImport.Count == 1;
             Status = new OperationStatus

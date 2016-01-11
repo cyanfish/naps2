@@ -65,7 +65,7 @@ namespace NAPS2.ImportExport.Images
         /// <param name="dateTime"></param>
         /// <param name="images">The collection of images to save.</param>
         /// <param name="batch"></param>
-        public bool Start(string fileName, DateTime dateTime, List<IScannedImage> images, bool batch = false)
+        public bool Start(string fileName, DateTime dateTime, List<ScannedImage> images, bool batch = false)
         {
             Status = new OperationStatus
             {
@@ -101,7 +101,7 @@ namespace NAPS2.ImportExport.Images
 
                     int i = 0;
                     int digits = (int) Math.Floor(Math.Log10(images.Count)) + 1;
-                    foreach (IScannedImage img in images)
+                    foreach (ScannedImage img in images)
                     {
                         if (cancel)
                         {

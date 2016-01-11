@@ -111,7 +111,7 @@ namespace NAPS2.Scan.Images
             return result;
         }
 
-        public static void PostProcessStep2(IScannedImage image, ScanProfile profile)
+        public static void PostProcessStep2(ScannedImage image, ScanProfile profile)
         {
             if (!profile.UseNativeUI && profile.BrightnessContrastAfterScan)
             {

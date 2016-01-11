@@ -37,7 +37,6 @@ namespace NAPS2.DI
             Bind<IOcrEngine>().To<TesseractOcrEngine>();
 
             // Scan
-            Bind<IScannedImageFactory>().To<FileBasedScannedImageFactory>();
             Bind<IScanPerformer>().To<ScanPerformer>();
 #if DEBUG && false
             Bind<IScanDriverFactory>().To<Scan.Stub.StubScanDriverFactory>();

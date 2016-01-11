@@ -44,17 +44,17 @@ namespace NAPS2.WinForms
             set { ilThumbnailList.ImageSize = value; }
         }
 
-        public void UpdateImages(List<IScannedImage> images)
+        public void UpdateImages(List<ScannedImage> images)
         {
             ClearImages();
             Clear();
-            foreach (IScannedImage img in images)
+            foreach (ScannedImage img in images)
             {
                 AppendImage(img);
             }
         }
 
-        public void AppendImage(IScannedImage img)
+        public void AppendImage(ScannedImage img)
         {
             ilThumbnailList.Images.Add(img.GetThumbnail(UserConfigManager.Config.ThumbnailSize));
             Items.Add("", ilThumbnailList.Images.Count - 1);
@@ -82,7 +82,7 @@ namespace NAPS2.WinForms
             Invalidate(Items[index].Bounds);
         }
 
-        public void RegenerateThumbnailList(List<IScannedImage> images)
+        public void RegenerateThumbnailList(List<ScannedImage> images)
         {
             var thumbnails = images.Select(x => (Image)x.GetThumbnail(UserConfigManager.Config.ThumbnailSize)).ToArray();
             ilThumbnailList.Images.AddRange(thumbnails);

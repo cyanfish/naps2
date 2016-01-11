@@ -33,12 +33,12 @@ namespace NAPS2.Scan.Images
     {
         public ScannedImageList()
         {
-            Images = new List<IScannedImage>();
+            Images = new List<ScannedImage>();
         }
 
         public IUserConfigManager UserConfigManager { get; set; }
 
-        public List<IScannedImage> Images { get; private set; }
+        public List<ScannedImage> Images { get; private set; }
 
         public IEnumerable<int> MoveUp(IEnumerable<int> selection)
         {
@@ -49,7 +49,7 @@ namespace NAPS2.Scan.Images
             {
                 if (i != lowerBound++)
                 {
-                    IScannedImage img = Images[i];
+                    ScannedImage img = Images[i];
                     Images.RemoveAt(i);
                     Images.Insert(i - 1, img);
                     img.MovedTo(i - 1);
@@ -72,7 +72,7 @@ namespace NAPS2.Scan.Images
             {
                 if (i != upperBound--)
                 {
-                    IScannedImage img = Images[i];
+                    ScannedImage img = Images[i];
                     Images.RemoveAt(i);
                     Images.Insert(i + 1, img);
                     img.MovedTo(i + 1);
@@ -95,7 +95,7 @@ namespace NAPS2.Scan.Images
             int offset = 1;
             foreach (int i in bottom)
             {
-                IScannedImage img = Images[i];
+                ScannedImage img = Images[i];
                 Images.RemoveAt(i);
                 Images.Insert(index - offset, img);
                 img.MovedTo(index - offset);
@@ -105,7 +105,7 @@ namespace NAPS2.Scan.Images
             offset = 0;
             foreach (int i in top)
             {
-                IScannedImage img = Images[i];
+                ScannedImage img = Images[i];
                 Images.RemoveAt(i);
                 Images.Insert(index + offset, img);
                 img.MovedTo(index + offset);
@@ -127,7 +127,7 @@ namespace NAPS2.Scan.Images
 
         public void Delete(IEnumerable<int> selection)
         {
-            foreach (IScannedImage img in Images.ElementsAt(selection))
+            foreach (ScannedImage img in Images.ElementsAt(selection))
             {
                 img.Dispose();
             }
@@ -245,7 +245,7 @@ namespace NAPS2.Scan.Images
 
         public IEnumerable<int> ResetTransforms(IEnumerable<int> selection)
         {
-            foreach (IScannedImage img in Images.ElementsAt(selection))
+            foreach (ScannedImage img in Images.ElementsAt(selection))
             {
                 img.ResetTransforms();
                 img.SetThumbnail(img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));

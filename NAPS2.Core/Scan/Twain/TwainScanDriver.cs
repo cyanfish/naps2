@@ -40,7 +40,6 @@ namespace NAPS2.Scan.Twain
         private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
 
         private readonly IFormFactory formFactory;
-        private readonly IScannedImageFactory scannedImageFactory;
 
         static TwainScanDriver()
         {
@@ -50,10 +49,9 @@ namespace NAPS2.Scan.Twain
 #endif
         }
 
-        public TwainScanDriver(IFormFactory formFactory, IScannedImageFactory scannedImageFactory)
+        public TwainScanDriver(IFormFactory formFactory)
         {
             this.formFactory = formFactory;
-            this.scannedImageFactory = scannedImageFactory;
         }
 
         public override string DriverName
@@ -87,16 +85,16 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        protected override IEnumerable<IScannedImage> ScanInternal()
+        protected override IEnumerable<ScannedImage> ScanInternal()
         {
             if (ScanProfile.TwainImpl == TwainImpl.Legacy)
             {
-                return Legacy.TwainApi.Scan(ScanProfile, ScanDevice, DialogParent, formFactory, scannedImageFactory);
+                return Legacy.TwainApi.Scan(ScanProfile, ScanDevice, DialogParent, formFactory);
             }
 
             var session = new TwainSession(TwainAppId);
             var twainForm = formFactory.Create<FTwainGui>();
-            var images = new List<IScannedImage>();
+            var images = new List<ScannedImage>();
             Exception error = null;
             bool cancel = false;
             DataSource ds = null;
@@ -119,7 +117,7 @@ namespace NAPS2.Scan.Twain
                         var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;
-                        var image = scannedImageFactory.Create(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                        var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                         ScannedImageHelper.PostProcessStep2(image, ScanProfile);
                         if (ScanParams.DetectPatchCodes)
                         {

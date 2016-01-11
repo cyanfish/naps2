@@ -48,13 +48,13 @@ namespace NAPS2.WinForms
             RotationTransform = new RotationTransform();
         }
 
-        public IScannedImage Image { get; set; }
+        public ScannedImage Image { get; set; }
 
-        public List<IScannedImage> SelectedImages { get; set; }
+        public List<ScannedImage> SelectedImages { get; set; }
 
         public RotationTransform RotationTransform { get; private set; }
 
-        private IEnumerable<IScannedImage> ImagesToTransform
+        private IEnumerable<ScannedImage> ImagesToTransform
         {
             get
             {

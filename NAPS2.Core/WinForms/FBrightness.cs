@@ -47,13 +47,13 @@ namespace NAPS2.WinForms
             BrightnessTransform = new BrightnessTransform();
         }
 
-        public IScannedImage Image { get; set; }
+        public ScannedImage Image { get; set; }
 
-        public List<IScannedImage> SelectedImages { get; set; }
+        public List<ScannedImage> SelectedImages { get; set; }
 
         public BrightnessTransform BrightnessTransform { get; private set; }
 
-        private IEnumerable<IScannedImage> ImagesToTransform
+        private IEnumerable<ScannedImage> ImagesToTransform
         {
             get
             {

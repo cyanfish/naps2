@@ -30,7 +30,7 @@ namespace NAPS2.ImportExport.Images
 {
     class TiffHelper
     {
-        public static bool SaveMultipage(List<IScannedImage> images, string location, Func<int, bool> progressCallback)
+        public static bool SaveMultipage(List<ScannedImage> images, string location, Func<int, bool> progressCallback)
         {
             try
             {

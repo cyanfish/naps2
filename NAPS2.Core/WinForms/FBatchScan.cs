@@ -69,7 +69,7 @@ namespace NAPS2.WinForms
             RestoreFormState = false;
         }
 
-        public Action<IScannedImage> ImageCallback { get; set; }
+        public Action<ScannedImage> ImageCallback { get; set; }
 
         private BatchSettings BatchSettings { get; set; }
 

@@ -33,7 +33,7 @@ namespace NAPS2.Tests.Base
     public abstract class BasePdfExporterTests
     {
         private const String PDF_PATH = "test/test.pdf";
-        private List<IScannedImage> images;
+        private List<ScannedImage> images;
         private PdfSettings settings;
         protected IPdfExporter pdfExporter;
 
@@ -60,7 +60,7 @@ namespace NAPS2.Tests.Base
             {
                 using (bitmap)
                 {
-                    return (IScannedImage)new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
+                    return new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
                 }
             }).ToList();
             if (!Directory.Exists("test"))
@@ -78,7 +78,7 @@ namespace NAPS2.Tests.Base
         {
             pdfExporter = null;
             settings = null;
-            foreach (IScannedImage img in images)
+            foreach (ScannedImage img in images)
             {
                 img.Dispose();
             }

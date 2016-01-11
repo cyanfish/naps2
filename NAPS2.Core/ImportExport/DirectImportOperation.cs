@@ -9,29 +9,26 @@ using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
-using NAPS2.WinForms;
 
 namespace NAPS2.ImportExport
 {
     public class DirectImportOperation : OperationBase
     {
-        private readonly IScannedImageFactory scannedImageFactory;
         private readonly IUserConfigManager userConfigManager;
         private readonly ThreadFactory threadFactory;
 
         private bool cancel;
         private Thread thread;
 
-        public DirectImportOperation(IScannedImageFactory scannedImageFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
+        public DirectImportOperation(IUserConfigManager userConfigManager, ThreadFactory threadFactory)
         {
-            this.scannedImageFactory = scannedImageFactory;
             this.userConfigManager = userConfigManager;
             this.threadFactory = threadFactory;
 
             AllowCancel = true;
         }
 
-        public bool Start(DirectImageTransfer data, bool copy, Action<IScannedImage> imageCallback)
+        public bool Start(DirectImageTransfer data, bool copy, Action<ScannedImage> imageCallback)
         {
             ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
             Status = new OperationStatus
@@ -50,7 +47,7 @@ namespace NAPS2.ImportExport
                     {
                         using (var bitmap = new Bitmap(Path.Combine(data.RecoveryFolder, ir.FileName)))
                         {
-                            var img = scannedImageFactory.Create(bitmap, ir.BitDepth, ir.HighQuality, -1);
+                            var img = new ScannedImage(bitmap, ir.BitDepth, ir.HighQuality, -1);
                             foreach (var transform in ir.TransformList)
                             {
                                 img.AddTransform(transform);
