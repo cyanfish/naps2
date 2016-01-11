@@ -54,13 +54,30 @@ namespace NAPS2.WinForms
 
         public void UpdateImages(List<ScannedImage> images)
         {
-            ilThumbnailList.Images.Clear();
-            Clear();
-            foreach (ScannedImage img in images)
+            for (int i = 0; i < (images.Count - Items.Count); i++)
             {
-                AppendImage(img);
+                Items.Add("", i);
             }
+
+            for (int i = 0; i < (Items.Count - images.Count); i++)
+            {
+                Items.RemoveAt(Items.Count - 1);
+            }
+
+            for (int i = 0; i < images.Count; i++)
+            {
+                if (i >= ilThumbnailList.Images.Count)
+                {
+                    ilThumbnailList.Images.Add(thumbnails[images[i]]);
+                }
+                else
+                {
+                    ilThumbnailList.Images[i] = thumbnails[images[i]];
+                }
+            }
+
             thumbnails.TrimCache(images);
+            Invalidate();
         }
 
         public void AppendImage(ScannedImage img)

@@ -472,13 +472,13 @@ namespace NAPS2.WinForms
             UpdateThumbnails();
             SelectedIndices = selection;
 
-            // We would like to maintain the current scroll if scrollToSelection is false, but that's not easy with ListView
-            // In the meantime just scroll to selection anyway (the alternative is to always pop to the top)
-            // TODO: Rewrite ThumbnailList.UpdateImages to detect and perform incremental updates
-
-            // Scroll to selection
-            thumbnailList1.EnsureVisible(SelectedIndices.LastOrDefault());
-            thumbnailList1.EnsureVisible(SelectedIndices.FirstOrDefault());
+            if (scrollToSelection)
+            {
+                // Scroll to selection
+                // If selection is empty (e.g. after interleave), this scrolls to top
+                thumbnailList1.EnsureVisible(SelectedIndices.LastOrDefault());
+                thumbnailList1.EnsureVisible(SelectedIndices.FirstOrDefault());
+            }
         }
 
         #endregion
