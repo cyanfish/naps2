@@ -252,6 +252,9 @@
     <Compile Include="Update\UrlStreamReader.cs" />
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
+    <Compile Include="WinForms\DragScrollListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WinForms\FAdvancedScanSettings.cs">
       <SubType>Form</SubType>
     </Compile>

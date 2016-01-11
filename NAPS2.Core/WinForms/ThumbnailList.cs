@@ -22,13 +22,12 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Scan.Images;
 
 namespace NAPS2.WinForms
 {
-    public partial class ThumbnailList : ListView
+    public partial class ThumbnailList : DragScrollListView
     {
         private ThumbnailCache thumbnails;
 
