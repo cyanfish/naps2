@@ -31,7 +31,7 @@ namespace NAPS2.WinForms
             get { return Font.Height; }
         }
 
-        protected void InitializeComponent()
+        private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             this.tmrLVScroll = new System.Windows.Forms.Timer(this.components);
@@ -48,7 +48,7 @@ namespace NAPS2.WinForms
 
         }
 
-        protected void ListViewBase_DragOver(object sender, DragEventArgs e)
+        private void ListViewBase_DragOver(object sender, DragEventArgs e)
         {
             Point position = PointToClient(new Point(e.X, e.Y));
 
