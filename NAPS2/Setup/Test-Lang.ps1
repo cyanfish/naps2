@@ -13,6 +13,11 @@ function Update-Lang {
 
 # Download PO file and update language files
 
+$Ext = [System.IO.Path]::GetExtension($PoUrl)
+if (-not ($Ext -eq ".po")) {
+    return
+}
+
 $LanguageCode = [System.IO.Path]::GetFileNameWithoutExtension($PoUrl)
 if ($LanguageCode -eq $null -or $LanguageCode -eq "") {
     return
