@@ -1546,7 +1546,7 @@ namespace NAPS2.WinForms
                         int index = imageList.Images.IndexOf(img);
                         if (index != -1)
                         {
-                            thumbnailList1.ReplaceThumbnail(index, thumbnail);
+                            thumbnailList1.ReplaceThumbnail(index, img);
                         }
                     });
                 }

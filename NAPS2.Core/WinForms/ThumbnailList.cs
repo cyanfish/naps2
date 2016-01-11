@@ -30,13 +30,21 @@ namespace NAPS2.WinForms
 {
     public partial class ThumbnailList : ListView
     {
+        private ThumbnailCache thumbnails;
+
         public ThumbnailList()
         {
             InitializeComponent();
             LargeImageList = ilThumbnailList;
         }
 
-        public IUserConfigManager UserConfigManager { get; set; }
+        public IUserConfigManager UserConfigManager
+        {
+            set
+            {
+                thumbnails = new ThumbnailCache(value);
+            }
+        }
 
         public Size ThumbnailSize
         {
@@ -46,46 +54,31 @@ namespace NAPS2.WinForms
 
         public void UpdateImages(List<ScannedImage> images)
         {
-            ClearImages();
+            ilThumbnailList.Images.Clear();
             Clear();
             foreach (ScannedImage img in images)
             {
                 AppendImage(img);
             }
+            thumbnails.TrimCache(images);
         }
 
         public void AppendImage(ScannedImage img)
         {
-            ilThumbnailList.Images.Add(img.GetThumbnail(UserConfigManager.Config.ThumbnailSize));
+            ilThumbnailList.Images.Add(thumbnails[img]);
             Items.Add("", ilThumbnailList.Images.Count - 1);
         }
 
-        public void ClearItems()
+        public void ReplaceThumbnail(int index, ScannedImage img)
         {
-            ClearImages();
-            Clear();
-        }
-
-        private void ClearImages()
-        {
-            foreach (Image img in ilThumbnailList.Images)
-            {
-                img.Dispose();
-            }
-            ilThumbnailList.Images.Clear();
-        }
-
-        public void ReplaceThumbnail(int index, Bitmap thumbnail)
-        {
-            ilThumbnailList.Images[index].Dispose();
-            ilThumbnailList.Images[index] = thumbnail;
+            ilThumbnailList.Images[index] = thumbnails[img];
             Invalidate(Items[index].Bounds);
         }
 
         public void RegenerateThumbnailList(List<ScannedImage> images)
         {
-            var thumbnails = images.Select(x => (Image)x.GetThumbnail(UserConfigManager.Config.ThumbnailSize)).ToArray();
-            ilThumbnailList.Images.AddRange(thumbnails);
+            var thumbnailArray = images.Select(x => (Image)thumbnails[x]).ToArray();
+            ilThumbnailList.Images.AddRange(thumbnailArray);
         }
     }
 }
