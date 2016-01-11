@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -53,23 +54,30 @@ namespace NAPS2.WinForms
             set { ilThumbnailList.ImageSize = value; }
         }
 
-        public void UpdateImages(List<ScannedImage> images)
+        public void UpdateImages(List<ScannedImage> images, List<int> range = null)
         {
             int delta = images.Count - Items.Count;
             for (int i = 0; i < delta; i++)
             {
                 Items.Add("", i);
+                Debug.Assert(range == null);
             }
             for (int i = 0; i < -delta; i++)
             {
                 Items.RemoveAt(Items.Count - 1);
+                ilThumbnailList.Images.RemoveAt(ilThumbnailList.Images.Count - 1);
+                Debug.Assert(range == null);
             }
 
-            for (int i = 0; i < images.Count; i++)
+            int min = range == null || !range.Any() ? 0 : range.Min();
+            int max = range == null || !range.Any() ? images.Count : range.Max() + 1;
+
+            for (int i = min; i < max; i++)
             {
                 if (i >= ilThumbnailList.Images.Count)
                 {
                     ilThumbnailList.Images.Add(thumbnails[images[i]]);
+                    Debug.Assert(range == null);
                 }
                 else
                 {
