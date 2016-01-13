@@ -166,6 +166,7 @@ namespace NAPS2.WinForms
             this.thumbnailList1.DragDrop += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragDrop);
             this.thumbnailList1.DragEnter += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragEnter);
             this.thumbnailList1.DragOver += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragOver);
+            this.thumbnailList1.DragLeave += new System.EventHandler(this.thumbnailList1_DragLeave);
             this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
             this.thumbnailList1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyUp);
             this.thumbnailList1.MouseLeave += new System.EventHandler(this.thumbnailList1_MouseLeave);

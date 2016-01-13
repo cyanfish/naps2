@@ -1625,6 +1625,11 @@ namespace NAPS2.WinForms
             thumbnailList1.InsertionMark.Index = -1;
         }
 
+        private void thumbnailList1_DragLeave(object sender, EventArgs e)
+        {
+            thumbnailList1.InsertionMark.Index = -1;
+        }
+
         private void DragMoveImages(DragEventArgs e)
         {
             if (!SelectedIndices.Any())
