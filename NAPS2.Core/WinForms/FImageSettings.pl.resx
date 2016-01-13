@@ -123,7 +123,7 @@
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>264, 173</value>
+        <value>264, 178</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -151,7 +151,7 @@
         <value>NoControl</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>345, 173</value>
+        <value>345, 178</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -181,7 +181,7 @@
         <value>True</value>
     </data>
     <data name="cbRememberSettings.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 152</value>
+        <value>12, 157</value>
     </data>
     <data name="cbRememberSettings.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 17</value>
@@ -208,7 +208,7 @@
         <value>True</value>
     </data>
     <data name="btnRestoreDefaults.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 173</value>
+        <value>12, 178</value>
     </data>
     <data name="btnRestoreDefaults.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 23</value>
@@ -418,7 +418,7 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>432, 208</value>
+        <value>432, 213</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA
@@ -444,10 +444,10 @@
 </value>
     </data>
     <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-        <value>800, 247</value>
+        <value>800, 252</value>
     </data>
     <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-        <value>400, 247</value>
+        <value>400, 252</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
         <value>Ustawienia obrazu</value>
@@ -456,12 +456,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.4.1.24470, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.5.0.41626, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FImageSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.4.1.24470, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.0.41626, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

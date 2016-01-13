@@ -265,7 +265,7 @@
         <value>Sil</value>
     </data>
     <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-        <value>165, 148</value>
+        <value>165, 126</value>
     </data>
     <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
         <value>contextMenuStrip</value>
@@ -289,7 +289,7 @@
         <value>thumbnailList1</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.4.1.40447, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=4.5.0.38649, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -354,66 +354,6 @@
     <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
-        <value>3, 0</value>
-    </data>
-    <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-        <value>1184, 54</value>
-    </data>
-    <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
-        <value>12</value>
-    </data>
-    <data name="tStrip.Text" xml:space="preserve">
-        <value>Ana araç çubuğu</value>
-    </data>
-    <data name="&gt;&gt;tStrip.Name" xml:space="preserve">
-        <value>tStrip</value>
-    </data>
-    <data name="&gt;&gt;tStrip.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;tStrip.Parent" xml:space="preserve">
-        <value>toolStripContainer1.TopToolStripPanel</value>
-    </data>
-    <data name="&gt;&gt;tStrip.ZOrder" xml:space="preserve">
-        <value>0</value>
-    </data>
-    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
-        <value>toolStripContainer1.TopToolStripPanel</value>
-    </data>
-    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
-        <value>toolStripContainer1</value>
-    </data>
-    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
-        <value>3</value>
-    </data>
-    <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
-        <value>toolStripContainer1</value>
-    </data>
-    <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
-    <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-        <value>Magenta</value>
-    </data>
-    <data name="tsScan.Size" type="System.Drawing.Size, System.Drawing">
-        <value>58, 51</value>
-    </data>
-    <data name="tsScan.Text" xml:space="preserve">
-        <value>Tara</value>
-    </data>
-    <data name="tsScan.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-        <value>ImageAboveText</value>
-    </data>
     <data name="tsNewProfile.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
@@ -431,6 +371,18 @@
     </data>
     <data name="tsBatchScan.Text" xml:space="preserve">
         <value>Batch Scan</value>
+    </data>
+    <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsScan.Size" type="System.Drawing.Size, System.Drawing">
+        <value>58, 51</value>
+    </data>
+    <data name="tsScan.Text" xml:space="preserve">
+        <value>Tara</value>
+    </data>
+    <data name="tsScan.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
     </data>
     <data name="tsProfiles.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -507,18 +459,6 @@
     <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 54</value>
     </data>
-    <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-        <value>Magenta</value>
-    </data>
-    <data name="tsdSavePDF.Size" type="System.Drawing.Size, System.Drawing">
-        <value>71, 51</value>
-    </data>
-    <data name="tsdSavePDF.Text" xml:space="preserve">
-        <value>PDF Kaydet</value>
-    </data>
-    <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-        <value>ImageAboveText</value>
-    </data>
     <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
     </data>
@@ -540,16 +480,16 @@
     <data name="tsPDFSettings.Text" xml:space="preserve">
         <value>PDF Settings</value>
     </data>
-    <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
-    <data name="tsdSaveImages.Size" type="System.Drawing.Size, System.Drawing">
-        <value>88, 51</value>
+    <data name="tsdSavePDF.Size" type="System.Drawing.Size, System.Drawing">
+        <value>71, 51</value>
     </data>
-    <data name="tsdSaveImages.Text" xml:space="preserve">
-        <value>Resimleri Kaydet</value>
+    <data name="tsdSavePDF.Text" xml:space="preserve">
+        <value>PDF Kaydet</value>
     </data>
-    <data name="tsdSaveImages.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
     </data>
     <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
@@ -573,16 +513,16 @@
     <data name="tsImageSettings.Text" xml:space="preserve">
         <value>Image Settings</value>
     </data>
-    <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
-    <data name="tsdEmailPDF.Size" type="System.Drawing.Size, System.Drawing">
-        <value>76, 51</value>
+    <data name="tsdSaveImages.Size" type="System.Drawing.Size, System.Drawing">
+        <value>88, 51</value>
     </data>
-    <data name="tsdEmailPDF.Text" xml:space="preserve">
-        <value>PDF Gönder</value>
+    <data name="tsdSaveImages.Text" xml:space="preserve">
+        <value>Resimleri Kaydet</value>
     </data>
-    <data name="tsdEmailPDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <data name="tsdSaveImages.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
     </data>
     <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
@@ -612,6 +552,18 @@
     <data name="tsPdfSettings2.Text" xml:space="preserve">
         <value>PDF Settings</value>
     </data>
+    <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsdEmailPDF.Size" type="System.Drawing.Size, System.Drawing">
+        <value>76, 51</value>
+    </data>
+    <data name="tsdEmailPDF.Text" xml:space="preserve">
+        <value>PDF Gönder</value>
+    </data>
+    <data name="tsdEmailPDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
     <data name="tsdPrint.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
@@ -626,18 +578,6 @@
     </data>
     <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 54</value>
-    </data>
-    <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-        <value>Magenta</value>
-    </data>
-    <data name="tsdImage.Size" type="System.Drawing.Size, System.Drawing">
-        <value>64, 51</value>
-    </data>
-    <data name="tsdImage.Text" xml:space="preserve">
-        <value>Resim</value>
-    </data>
-    <data name="tsdImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-        <value>ImageAboveText</value>
     </data>
     <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
         <value>129, 22</value>
@@ -684,16 +624,16 @@
     <data name="tsReset.Text" xml:space="preserve">
         <value>Sıfırla</value>
     </data>
-    <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
-    <data name="tsdRotate.Size" type="System.Drawing.Size, System.Drawing">
-        <value>65, 51</value>
+    <data name="tsdImage.Size" type="System.Drawing.Size, System.Drawing">
+        <value>64, 51</value>
     </data>
-    <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Çevir</value>
+    <data name="tsdImage.Text" xml:space="preserve">
+        <value>Resim</value>
     </data>
-    <data name="tsdRotate.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <data name="tsdImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
     </data>
     <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
@@ -729,6 +669,18 @@
     <data name="customRotationToolStripMenuItem.Text" xml:space="preserve">
         <value>Özel Döndürme</value>
     </data>
+    <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsdRotate.Size" type="System.Drawing.Size, System.Drawing">
+        <value>65, 51</value>
+    </data>
+    <data name="tsdRotate.Text" xml:space="preserve">
+        <value>Çevir</value>
+    </data>
+    <data name="tsdRotate.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
+    </data>
     <data name="tsMove.Size" type="System.Drawing.Size, System.Drawing">
         <value>96, 51</value>
     </data>
@@ -737,18 +689,6 @@
     </data>
     <data name="tsMove.TextSecond" xml:space="preserve">
         <value>Aşağı Taşı</value>
-    </data>
-    <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-        <value>Magenta</value>
-    </data>
-    <data name="tsdReorder.Size" type="System.Drawing.Size, System.Drawing">
-        <value>72, 51</value>
-    </data>
-    <data name="tsdReorder.Text" xml:space="preserve">
-        <value>Yeniden Sırala</value>
-    </data>
-    <data name="tsdReorder.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-        <value>ImageAboveText</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
@@ -780,12 +720,6 @@
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
     </data>
-    <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
-        <value>190, 22</value>
-    </data>
-    <data name="tsReverse.Text" xml:space="preserve">
-        <value>Ters Çevir</value>
-    </data>
     <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
     </data>
@@ -797,6 +731,24 @@
     </data>
     <data name="tsReverseSelected.Text" xml:space="preserve">
         <value>Seçilen ({0})</value>
+    </data>
+    <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
+        <value>190, 22</value>
+    </data>
+    <data name="tsReverse.Text" xml:space="preserve">
+        <value>Ters Çevir</value>
+    </data>
+    <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsdReorder.Size" type="System.Drawing.Size, System.Drawing">
+        <value>72, 51</value>
+    </data>
+    <data name="tsdReorder.Text" xml:space="preserve">
+        <value>Yeniden Sırala</value>
+    </data>
+    <data name="tsdReorder.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+        <value>ImageAboveText</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 54</value>
@@ -891,6 +843,54 @@
     <data name="tsAbout.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
     </data>
+    <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
+        <value>3, 0</value>
+    </data>
+    <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
+        <value>1184, 54</value>
+    </data>
+    <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
+        <value>12</value>
+    </data>
+    <data name="tStrip.Text" xml:space="preserve">
+        <value>Ana araç çubuğu</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Name" xml:space="preserve">
+        <value>tStrip</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tStrip.Parent" xml:space="preserve">
+        <value>toolStripContainer1.TopToolStripPanel</value>
+    </data>
+    <data name="&gt;&gt;tStrip.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+        <value>toolStripContainer1.TopToolStripPanel</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+        <value>toolStripContainer1</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
+        <value>toolStripContainer1</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
     </metadata>
@@ -948,6 +948,12 @@
         <value>ctxCopy</value>
     </data>
     <data name="&gt;&gt;ctxCopy.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;ctxPaste.Name" xml:space="preserve">
+        <value>ctxPaste</value>
+    </data>
+    <data name="&gt;&gt;ctxPaste.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;ctxSeparator2.Name" xml:space="preserve">
@@ -1194,7 +1200,7 @@
         <value>tsMove</value>
     </data>
     <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.4.1.40447, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=4.5.0.38649, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
         <value>tsdReorder</value>
@@ -1292,16 +1298,10 @@
     <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;ctxPaste.Name" xml:space="preserve">
-        <value>ctxPaste</value>
-    </data>
-    <data name="&gt;&gt;ctxPaste.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FDesktop</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.4.1.40447, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.0.38649, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

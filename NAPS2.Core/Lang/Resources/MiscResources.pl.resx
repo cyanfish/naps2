@@ -343,39 +343,39 @@
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importing {0}...</value>
+        <value>Importowanie {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Import Progress</value>
+        <value>Postęp importowania</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Recovering...</value>
+        <value>Odzyskiwanie...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Recovery Progress</value>
+        <value>Postęp odzyskiwania</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Save Images Progress</value>
+        <value>Postęp zapisywania obrazów</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>Zapisz postęp PDF</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Saving {0}...</value>
+        <value>Zapisywanie {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>Kopiowanie...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>Postęp kopiowania</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Importowanie...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>Email PDF Progress</value>
+        <value>Postęp e-maila PDF</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>Wystąpił błąd podczas próby automatycznego zapisania.</value>
     </data>
 </root>
