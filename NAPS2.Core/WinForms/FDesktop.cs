@@ -1622,6 +1622,7 @@ namespace NAPS2.WinForms
                 var data = (string[])e.Data.GetData(DataFormats.FileDrop);
                 ImportFiles(data);
             }
+            thumbnailList1.InsertionMark.Index = -1;
         }
 
         private void DragMoveImages(DragEventArgs e)
@@ -1630,6 +1631,34 @@ namespace NAPS2.WinForms
             {
                 return;
             }
+            int index = GetDragIndex(e);
+            if (index != -1)
+            {
+                UpdateThumbnails(imageList.MoveTo(SelectedIndices, index), true, true);
+                changeTracker.HasUnsavedChanges = true;
+            }
+        }
+
+        private void thumbnailList1_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Effect == DragDropEffects.Move)
+            {
+                var index = GetDragIndex(e);
+                if (index == imageList.Images.Count)
+                {
+                    thumbnailList1.InsertionMark.Index = index - 1;
+                    thumbnailList1.InsertionMark.AppearsAfterItem = true;
+                }
+                else
+                {
+                    thumbnailList1.InsertionMark.Index = index;
+                    thumbnailList1.InsertionMark.AppearsAfterItem = false;
+                }
+            }
+        }
+
+        private int GetDragIndex(DragEventArgs e)
+        {
             Point cp = thumbnailList1.PointToClient(new Point(e.X, e.Y));
             ListViewItem dragToItem = thumbnailList1.GetItemAt(cp.X, cp.Y);
             if (dragToItem == null)
@@ -1639,32 +1668,25 @@ namespace NAPS2.WinForms
                 var maxY = items.Select(x => x.Bounds.Bottom).Max();
                 if (cp.Y < minY)
                 {
-                    UpdateThumbnails(imageList.MoveTo(SelectedIndices, 0), true, true);
-                    changeTracker.HasUnsavedChanges = true;
+                    cp.Y = minY;
                 }
-                else if (cp.Y > maxY)
+                if (cp.Y > maxY)
                 {
-                    UpdateThumbnails(imageList.MoveTo(SelectedIndices, imageList.Images.Count), true, true);
-                    changeTracker.HasUnsavedChanges = true;
+                    return imageList.Images.Count;
                 }
-                else
-                {
-                    var row =
-                        items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
-                    dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
-                }
+                var row = items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
+                dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
             }
             if (dragToItem == null)
             {
-                return;
+                return -1;
             }
             int dragToIndex = dragToItem.ImageIndex;
             if (cp.X > (dragToItem.Bounds.X + dragToItem.Bounds.Width / 2))
             {
                 dragToIndex++;
             }
-            UpdateThumbnails(imageList.MoveTo(SelectedIndices, dragToIndex), true, true);
-            changeTracker.HasUnsavedChanges = true;
+            return dragToIndex;
         }
 
         #endregion
