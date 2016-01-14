@@ -322,7 +322,7 @@
         <value>Seite {0} wird eingescannt...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Seite {0} wird eingescannt (Scan [1})...</value>
+        <value>Seite {0} wird eingescannt (Scan {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
         <value>Warte auf Scan {0}...</value>
@@ -376,6 +376,6 @@
         <value>Email PDF Progress</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>Beim Speichern der Datei ist ein Fehler aufgetreten.</value>
     </data>
 </root>

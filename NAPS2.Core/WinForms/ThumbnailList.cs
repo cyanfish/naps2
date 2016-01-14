@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -28,15 +29,24 @@ using NAPS2.Scan.Images;
 
 namespace NAPS2.WinForms
 {
-    public partial class ThumbnailList : ListView
+    public partial class ThumbnailList : DragScrollListView
     {
+        private ThumbnailCache thumbnails;
+
         public ThumbnailList()
         {
             InitializeComponent();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             LargeImageList = ilThumbnailList;
         }
 
-        public IUserConfigManager UserConfigManager { get; set; }
+        public IUserConfigManager UserConfigManager
+        {
+            set
+            {
+                thumbnails = new ThumbnailCache(value);
+            }
+        }
 
         public Size ThumbnailSize
         {
@@ -44,48 +54,58 @@ namespace NAPS2.WinForms
             set { ilThumbnailList.ImageSize = value; }
         }
 
-        public void UpdateImages(List<ScannedImage> images)
+        public void UpdateImages(List<ScannedImage> images, List<int> selection = null)
         {
-            ClearImages();
-            Clear();
-            foreach (ScannedImage img in images)
+            int delta = images.Count - Items.Count;
+            for (int i = 0; i < delta; i++)
             {
-                AppendImage(img);
+                Items.Add("", i);
+                Debug.Assert(selection == null);
             }
+            for (int i = 0; i < -delta; i++)
+            {
+                Items.RemoveAt(Items.Count - 1);
+                ilThumbnailList.Images.RemoveAt(ilThumbnailList.Images.Count - 1);
+                Debug.Assert(selection == null);
+            }
+
+            // Determine the smallest range that contains all images in the selection
+            int min = selection == null || !selection.Any() ? 0 : selection.Min();
+            int max = selection == null || !selection.Any() ? images.Count : selection.Max() + 1;
+
+            for (int i = min; i < max; i++)
+            {
+                if (i >= ilThumbnailList.Images.Count)
+                {
+                    ilThumbnailList.Images.Add(thumbnails[images[i]]);
+                    Debug.Assert(selection == null);
+                }
+                else
+                {
+                    ilThumbnailList.Images[i] = thumbnails[images[i]];
+                }
+            }
+
+            thumbnails.TrimCache(images);
+            Invalidate();
         }
 
         public void AppendImage(ScannedImage img)
         {
-            ilThumbnailList.Images.Add(img.GetThumbnail(UserConfigManager.Config.ThumbnailSize));
+            ilThumbnailList.Images.Add(thumbnails[img]);
             Items.Add("", ilThumbnailList.Images.Count - 1);
         }
 
-        public void ClearItems()
+        public void ReplaceThumbnail(int index, ScannedImage img)
         {
-            ClearImages();
-            Clear();
-        }
-
-        private void ClearImages()
-        {
-            foreach (Image img in ilThumbnailList.Images)
-            {
-                img.Dispose();
-            }
-            ilThumbnailList.Images.Clear();
-        }
-
-        public void ReplaceThumbnail(int index, Bitmap thumbnail)
-        {
-            ilThumbnailList.Images[index].Dispose();
-            ilThumbnailList.Images[index] = thumbnail;
+            ilThumbnailList.Images[index] = thumbnails[img];
             Invalidate(Items[index].Bounds);
         }
 
         public void RegenerateThumbnailList(List<ScannedImage> images)
         {
-            var thumbnails = images.Select(x => (Image)x.GetThumbnail(UserConfigManager.Config.ThumbnailSize)).ToArray();
-            ilThumbnailList.Images.AddRange(thumbnails);
+            var thumbnailArray = images.Select(x => (Image)thumbnails[x]).ToArray();
+            ilThumbnailList.Images.AddRange(thumbnailArray);
         }
     }
 }

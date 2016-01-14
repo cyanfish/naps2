@@ -240,5 +240,10 @@ namespace NAPS2.Scan.Images
                 return _recoveryIndexManager.Index.Images.Single(x => x.FileName == baseImageFileName);
             }
         }
+
+        public override string ToString()
+        {
+            return baseImageFileName;
+        }
     }
 }

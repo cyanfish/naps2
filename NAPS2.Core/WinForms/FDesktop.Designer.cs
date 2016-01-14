@@ -44,6 +44,7 @@ namespace NAPS2.WinForms
             this.ctxSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ctxSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ctxDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tStrip = new System.Windows.Forms.ToolStrip();
@@ -102,7 +103,6 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.ctxPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -160,12 +160,13 @@ namespace NAPS2.WinForms
             this.thumbnailList1.Name = "thumbnailList1";
             this.thumbnailList1.ThumbnailSize = new System.Drawing.Size(128, 128);
             this.thumbnailList1.UseCompatibleStateImageBehavior = false;
-            this.thumbnailList1.UserConfigManager = null;
             this.thumbnailList1.ItemActivate += new System.EventHandler(this.thumbnailList1_ItemActivate);
             this.thumbnailList1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.thumbnailList1_ItemDrag);
             this.thumbnailList1.SelectedIndexChanged += new System.EventHandler(this.thumbnailList1_SelectedIndexChanged);
             this.thumbnailList1.DragDrop += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragDrop);
             this.thumbnailList1.DragEnter += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragEnter);
+            this.thumbnailList1.DragOver += new System.Windows.Forms.DragEventHandler(this.thumbnailList1_DragOver);
+            this.thumbnailList1.DragLeave += new System.EventHandler(this.thumbnailList1_DragLeave);
             this.thumbnailList1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyDown);
             this.thumbnailList1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.thumbnailList1_KeyUp);
             this.thumbnailList1.MouseLeave += new System.EventHandler(this.thumbnailList1_MouseLeave);
@@ -207,6 +208,12 @@ namespace NAPS2.WinForms
             this.ctxCopy.Name = "ctxCopy";
             resources.ApplyResources(this.ctxCopy, "ctxCopy");
             this.ctxCopy.Click += new System.EventHandler(this.ctxCopy_Click);
+            // 
+            // ctxPaste
+            // 
+            this.ctxPaste.Name = "ctxPaste";
+            resources.ApplyResources(this.ctxPaste, "ctxPaste");
+            this.ctxPaste.Click += new System.EventHandler(this.ctxPaste_Click);
             // 
             // ctxSeparator2
             // 
@@ -651,12 +658,6 @@ namespace NAPS2.WinForms
             this.tsAbout.Name = "tsAbout";
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
-            // 
-            // ctxPaste
-            // 
-            this.ctxPaste.Name = "ctxPaste";
-            resources.ApplyResources(this.ctxPaste, "ctxPaste");
-            this.ctxPaste.Click += new System.EventHandler(this.ctxPaste_Click);
             // 
             // FDesktop
             // 

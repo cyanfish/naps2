@@ -467,18 +467,19 @@ namespace NAPS2.WinForms
             UpdateToolbar();
         }
 
-        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection)
+        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, bool optimizeForSelection)
         {
-            UpdateThumbnails();
+            thumbnailList1.UpdateImages(imageList.Images, optimizeForSelection ? SelectedIndices.Concat(selection).ToList() : null);
             SelectedIndices = selection;
-
-            // We would like to maintain the current scroll if scrollToSelection is false, but that's not easy with ListView
-            // In the meantime just scroll to selection anyway (the alternative is to always pop to the top)
-            // TODO: Rewrite ThumbnailList.UpdateImages to detect and perform incremental updates
-
-            // Scroll to selection
-            thumbnailList1.EnsureVisible(SelectedIndices.LastOrDefault());
-            thumbnailList1.EnsureVisible(SelectedIndices.FirstOrDefault());
+            UpdateToolbar();
+            
+            if (scrollToSelection)
+            {
+                // Scroll to selection
+                // If selection is empty (e.g. after interleave), this scrolls to top
+                thumbnailList1.EnsureVisible(SelectedIndices.LastOrDefault());
+                thumbnailList1.EnsureVisible(SelectedIndices.FirstOrDefault());
+            }
         }
 
         #endregion
@@ -618,7 +619,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.MoveDown(SelectedIndices), true);
+            UpdateThumbnails(imageList.MoveDown(SelectedIndices), true, true);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -628,7 +629,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.MoveUp(SelectedIndices), true);
+            UpdateThumbnails(imageList.MoveUp(SelectedIndices), true, true);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -638,7 +639,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone), false);
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone), false, true);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -648,7 +649,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone), false);
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone), false, true);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -658,7 +659,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY), false);
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY), false, true);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -671,7 +672,7 @@ namespace NAPS2.WinForms
                     viewer.ImageList = imageList;
                     viewer.ImageIndex = SelectedIndices.First();
                     viewer.DeleteCallback = UpdateThumbnails;
-                    viewer.UpdateCallback = x => UpdateThumbnails(x, false);
+                    viewer.UpdateCallback = x => UpdateThumbnails(x, false, true);
                     viewer.SelectCallback = i =>
                     {
                         if (SelectedIndices.Count() <= 1)
@@ -699,7 +700,7 @@ namespace NAPS2.WinForms
             {
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, SelectedIndices.Count()), MiscResources.ResetImage, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    UpdateThumbnails(imageList.ResetTransforms(SelectedIndices), false);
+                    UpdateThumbnails(imageList.ResetTransforms(SelectedIndices), false, true);
                     changeTracker.HasUnsavedChanges = true;
                 }
             }
@@ -1189,7 +1190,7 @@ namespace NAPS2.WinForms
                 form.Image = SelectedImages.First();
                 form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
-                UpdateThumbnails(SelectedIndices.ToList(), false);
+                UpdateThumbnails(SelectedIndices.ToList(), false, true);
             }
         }
 
@@ -1201,7 +1202,7 @@ namespace NAPS2.WinForms
                 form.Image = SelectedImages.First();
                 form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
-                UpdateThumbnails(SelectedIndices.ToList(), false);
+                UpdateThumbnails(SelectedIndices.ToList(), false, true);
             }
         }
 
@@ -1213,7 +1214,7 @@ namespace NAPS2.WinForms
                 form.Image = SelectedImages.First();
                 form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
-                UpdateThumbnails(SelectedIndices.ToList(), false);
+                UpdateThumbnails(SelectedIndices.ToList(), false, true);
             }
         }
 
@@ -1249,7 +1250,7 @@ namespace NAPS2.WinForms
                 form.Image = SelectedImages.First();
                 form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();
-                UpdateThumbnails(SelectedIndices.ToList(), false);
+                UpdateThumbnails(SelectedIndices.ToList(), false, true);
             }
         }
 
@@ -1263,7 +1264,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.Interleave(SelectedIndices), true);
+            UpdateThumbnails(imageList.Interleave(SelectedIndices), true, false);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -1273,7 +1274,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.Deinterleave(SelectedIndices), true);
+            UpdateThumbnails(imageList.Deinterleave(SelectedIndices), true, false);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -1283,7 +1284,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.AltInterleave(SelectedIndices), true);
+            UpdateThumbnails(imageList.AltInterleave(SelectedIndices), true, false);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -1293,7 +1294,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.AltDeinterleave(SelectedIndices), true);
+            UpdateThumbnails(imageList.AltDeinterleave(SelectedIndices), true, false);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -1303,7 +1304,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.Reverse(), true);
+            UpdateThumbnails(imageList.Reverse(), true, false);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -1313,7 +1314,7 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            UpdateThumbnails(imageList.Reverse(SelectedIndices), true);
+            UpdateThumbnails(imageList.Reverse(SelectedIndices), true, true);
             changeTracker.HasUnsavedChanges = true;
         }
 
@@ -1529,6 +1530,7 @@ namespace NAPS2.WinForms
                         continue;
                     }
                     // Do the rest of the stuff on the UI thread to help with synchronization
+                    ScannedImage img1 = img;
                     Invoke(() =>
                     {
                         if (ct.IsCancellationRequested)
@@ -1536,17 +1538,17 @@ namespace NAPS2.WinForms
                             return;
                         }
                         // Check for concurrent transformations
-                        if (oldState != img.GetThumbnailState())
+                        if (oldState != img1.GetThumbnailState())
                         {
                             // The thumbnail has been concurrently updated
                             return;
                         }
                         // Checks passed, so use the newly rendered thumbnail at the appropriate index
-                        img.SetThumbnail(thumbnail);
-                        int index = imageList.Images.IndexOf(img);
+                        img1.SetThumbnail(thumbnail);
+                        int index = imageList.Images.IndexOf(img1);
                         if (index != -1)
                         {
-                            thumbnailList1.ReplaceThumbnail(index, thumbnail);
+                            thumbnailList1.ReplaceThumbnail(index, img1);
                         }
                     });
                 }
@@ -1620,6 +1622,12 @@ namespace NAPS2.WinForms
                 var data = (string[])e.Data.GetData(DataFormats.FileDrop);
                 ImportFiles(data);
             }
+            thumbnailList1.InsertionMark.Index = -1;
+        }
+
+        private void thumbnailList1_DragLeave(object sender, EventArgs e)
+        {
+            thumbnailList1.InsertionMark.Index = -1;
         }
 
         private void DragMoveImages(DragEventArgs e)
@@ -1628,6 +1636,34 @@ namespace NAPS2.WinForms
             {
                 return;
             }
+            int index = GetDragIndex(e);
+            if (index != -1)
+            {
+                UpdateThumbnails(imageList.MoveTo(SelectedIndices, index), true, true);
+                changeTracker.HasUnsavedChanges = true;
+            }
+        }
+
+        private void thumbnailList1_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Effect == DragDropEffects.Move)
+            {
+                var index = GetDragIndex(e);
+                if (index == imageList.Images.Count)
+                {
+                    thumbnailList1.InsertionMark.Index = index - 1;
+                    thumbnailList1.InsertionMark.AppearsAfterItem = true;
+                }
+                else
+                {
+                    thumbnailList1.InsertionMark.Index = index;
+                    thumbnailList1.InsertionMark.AppearsAfterItem = false;
+                }
+            }
+        }
+
+        private int GetDragIndex(DragEventArgs e)
+        {
             Point cp = thumbnailList1.PointToClient(new Point(e.X, e.Y));
             ListViewItem dragToItem = thumbnailList1.GetItemAt(cp.X, cp.Y);
             if (dragToItem == null)
@@ -1637,32 +1673,25 @@ namespace NAPS2.WinForms
                 var maxY = items.Select(x => x.Bounds.Bottom).Max();
                 if (cp.Y < minY)
                 {
-                    UpdateThumbnails(imageList.MoveTo(SelectedIndices, 0), true);
-                    changeTracker.HasUnsavedChanges = true;
+                    cp.Y = minY;
                 }
-                else if (cp.Y > maxY)
+                if (cp.Y > maxY)
                 {
-                    UpdateThumbnails(imageList.MoveTo(SelectedIndices, imageList.Images.Count), true);
-                    changeTracker.HasUnsavedChanges = true;
+                    return imageList.Images.Count;
                 }
-                else
-                {
-                    var row =
-                        items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
-                    dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
-                }
+                var row = items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
+                dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
             }
             if (dragToItem == null)
             {
-                return;
+                return -1;
             }
             int dragToIndex = dragToItem.ImageIndex;
             if (cp.X > (dragToItem.Bounds.X + dragToItem.Bounds.Width / 2))
             {
                 dragToIndex++;
             }
-            UpdateThumbnails(imageList.MoveTo(SelectedIndices, dragToIndex), true);
-            changeTracker.HasUnsavedChanges = true;
+            return dragToIndex;
         }
 
         #endregion

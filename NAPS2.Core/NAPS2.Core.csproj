@@ -93,6 +93,7 @@
     <Compile Include="Scan\Batch\BatchScanPerformer.cs" />
     <Compile Include="Scan\Batch\BatchSettings.cs" />
     <Compile Include="Scan\Exceptions\NoDuplexSupportException.cs" />
+    <Compile Include="Scan\Images\ThumbnailCache.cs" />
     <Compile Include="Scan\Images\Transforms\TrueContrastTransform.cs" />
     <Compile Include="Scan\PatchCode.cs" />
     <Compile Include="Scan\ProfileNameTracker.cs" />
@@ -260,6 +261,9 @@
     <Compile Include="Update\VersionInfo.cs" />
     <Compile Include="Host\X86HostManager.cs" />
     <Compile Include="Host\X86HostService.cs" />
+    <Compile Include="WinForms\DragScrollListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WinForms\FAdvancedScanSettings.cs">
       <SubType>Form</SubType>
     </Compile>
