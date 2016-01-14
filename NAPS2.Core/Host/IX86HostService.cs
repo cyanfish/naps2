@@ -12,10 +12,7 @@ namespace NAPS2.Host
     public interface IX86HostService
     {
         [OperationContract]
-        void DoWork();
-
-        [OperationContract]
-        ScanDevice TwainPromptForDevice(IntPtr hwnd);
+        List<ScanDevice> TwainGetDeviceList();
 
         [OperationContract]
         List<ScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams);

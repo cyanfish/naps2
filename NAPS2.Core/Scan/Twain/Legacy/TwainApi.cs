@@ -52,6 +52,26 @@ namespace NAPS2.Scan.Twain.Legacy
             return new ScanDevice(name, name);
         }
 
+        public static List<ScanDevice> GetDeviceList()
+        {
+            var tw = new Twain();
+            if (!tw.Init(Application.OpenForms[0].Handle))
+            {
+                throw new NoDevicesFoundException();
+            }
+            var result = new List<ScanDevice>();
+            if (!tw.GetFirst())
+            {
+                return result;
+            }
+            do
+            {
+                string name = tw.GetCurrentName();
+                result.Add(new ScanDevice(name, name));
+            } while (tw.GetNext());
+            return result;
+        }
+
         public static List<ScannedImage> Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, IFormFactory formFactory)
         {
             var tw = new Twain();

@@ -24,6 +24,7 @@ using System.Linq;
 using NAPS2.Host;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
+using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Twain
 {
@@ -32,10 +33,14 @@ namespace NAPS2.Scan.Twain
         public const string DRIVER_NAME = "twain";
         
         private readonly IX86HostServiceFactory x86HostServiceFactory;
+        private readonly TwainWrapper twainWrapper;
+        private readonly IFormFactory formFactory;
 
-        public TwainScanDriver(IX86HostServiceFactory x86HostServiceFactory)
+        public TwainScanDriver(IX86HostServiceFactory x86HostServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory)
         {
             this.x86HostServiceFactory = x86HostServiceFactory;
+            this.twainWrapper = twainWrapper;
+            this.formFactory = formFactory;
         }
 
         public override string DriverName
@@ -45,11 +50,25 @@ namespace NAPS2.Scan.Twain
 
         protected override ScanDevice PromptForDeviceInternal()
         {
-            return x86HostServiceFactory.Create().TwainPromptForDevice(DialogParent.Handle);
+            List<ScanDevice> deviceList = ScanProfile.TwainImpl == TwainImpl.X64
+                ? twainWrapper.GetDeviceList()
+                : x86HostServiceFactory.Create().TwainGetDeviceList();
+
+            // Exclude WIA proxy devices since NAPS2 already supports WIA
+            deviceList = deviceList.Where(x => !x.ID.StartsWith("WIA-")).ToList();
+
+            var form = formFactory.Create<FSelectDevice>();
+            form.DeviceList = deviceList;
+            form.ShowDialog();
+            return form.SelectedDevice;
         }
 
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
+            if (ScanProfile.TwainImpl == TwainImpl.X64)
+            {
+                return twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams);
+            }
             return x86HostServiceFactory.Create().TwainScan(DialogParent.Handle, ScanDevice, ScanProfile, ScanParams);
         }
     }

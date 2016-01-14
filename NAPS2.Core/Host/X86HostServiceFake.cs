@@ -21,14 +21,9 @@ namespace NAPS2.Host
             this.twainWrapper = twainWrapper;
         }
 
-        public void DoWork()
+        public List<ScanDevice> TwainGetDeviceList()
         {
-            MessageBox.Show("Hi from " + Process.GetCurrentProcess().Id + "!");
-        }
-
-        public ScanDevice TwainPromptForDevice(IntPtr hwnd)
-        {
-            return twainWrapper.PromptForDevice();
+            return twainWrapper.GetDeviceList();
         }
 
         public List<ScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)

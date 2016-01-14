@@ -111,6 +111,26 @@ namespace NAPS2.Scan.Twain.Legacy
             return false;
         }
 
+        public bool GetFirst()
+        {
+            TwReturnCode returnCode;
+            CloseSrc();
+            if (appid.Id == IntPtr.Zero)
+            {
+                Init(hwnd);
+                if (appid.Id == IntPtr.Zero)
+                    return false;
+            }
+            returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetFirst, srcds);
+            return returnCode == TwReturnCode.Success;
+        }
+
+        public bool GetNext()
+        {
+            TwReturnCode returnCode = DSMident(appid, IntPtr.Zero, TwDG.Control, TwData.Identity, TwMessageCode.GetNext, srcds);
+            return returnCode == TwReturnCode.Success;
+        }
+
         public bool Select()
         {
             TwReturnCode returnCode;

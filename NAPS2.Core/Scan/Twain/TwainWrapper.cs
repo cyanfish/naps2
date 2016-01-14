@@ -11,6 +11,7 @@ using NAPS2.Scan.Images;
 using NAPS2.WinForms;
 using NTwain;
 using NTwain.Data;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Twain
 {
@@ -22,7 +23,7 @@ namespace NAPS2.Scan.Twain
 
         static TwainWrapper()
         {
-            PlatformInfo.Current.PreferNewDSM = false;
+            PlatformInfo.Current.PreferNewDSM = Environment.Is64BitProcess;
 #if DEBUG
             PlatformInfo.Current.Log.IsDebugEnabled = true;
 #endif
@@ -33,25 +34,13 @@ namespace NAPS2.Scan.Twain
             this.formFactory = formFactory;
         }
 
-        public ScanDevice PromptForDevice()
+        public List<ScanDevice> GetDeviceList()
         {
-            //if (ScanProfile != null && ScanProfile.TwainImpl == TwainImpl.Legacy)
-            //{
-            //    return Legacy.TwainApi.SelectDeviceUI();
-            //}
-
             var session = new TwainSession(TwainAppId);
             session.Open();
             try
             {
-                var ds = session.ShowSourceSelector();
-                if (ds == null)
-                {
-                    return null;
-                }
-                string deviceId = ds.Name;
-                string deviceName = ds.Name;
-                return new ScanDevice(deviceId, deviceName);
+                return session.GetSources().Select(ds => new ScanDevice(ds.Name, ds.Name)).ToList();
             }
             finally
             {
@@ -59,12 +48,12 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        public List<ScannedImage> Scan(Form dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<ScannedImage> Scan(IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
-            //if (ScanProfile.TwainImpl == TwainImpl.Legacy)
-            //{
-            //    return Legacy.TwainApi.Scan(ScanProfile, ScanDevice, DialogParent, formFactory, scannedImageFactory);
-            //}
+            if (scanProfile.TwainImpl == TwainImpl.Legacy)
+            {
+                return Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, formFactory);
+            }
 
             var session = new TwainSession(TwainAppId);
             var twainForm = formFactory.Create<FTwainGui>();
@@ -86,36 +75,43 @@ namespace NAPS2.Scan.Twain
                 Debug.WriteLine("NAPS2.TW - DataTransferred");
                 using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
                 {
-                    double scaleFactor = 1;
-                    if (!scanProfile.UseNativeUI)
-                    {
-                        scaleFactor = scanProfile.AfterScanScale.ToIntScaleFactor();
-                    }
-
-                    using (var result = ImageScaleHelper.ScaleImage(output, scaleFactor))
+                    using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
                     {
                         var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;
-                        var img = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                        var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                        ScannedImageHelper.PostProcessStep2(image, scanProfile);
                         if (scanParams.DetectPatchCodes)
                         {
                             foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
                             {
                                 if (patchCodeInfo.ReturnCode == ReturnCode.Success)
                                 {
-                                    img.PatchCode = GetPatchCode(patchCodeInfo);
+                                    image.PatchCode = GetPatchCode(patchCodeInfo);
                                 }
                             }
                         }
-                        images.Add(img);
+                        images.Add(image);
                     }
                 }
             };
             session.TransferError += (sender, eventArgs) =>
             {
-                Debug.WriteLine("NAPS2.TW - TransferError - {0}", eventArgs.Exception);
-                error = eventArgs.Exception;
+                Debug.WriteLine("NAPS2.TW - TransferError");
+                if (eventArgs.Exception != null)
+                {
+                    error = eventArgs.Exception;
+                }
+                else if (eventArgs.SourceStatus != null)
+                {
+                    Log.Error("TWAIN Transfer Error. Return code = {0}; condition code = {1}; data = {2}.",
+                        eventArgs.ReturnCode, eventArgs.SourceStatus.ConditionCode, eventArgs.SourceStatus.Data);
+                }
+                else
+                {
+                    Log.Error("TWAIN Transfer Error. Return code = {0}.", eventArgs.ReturnCode);
+                }
                 cancel = true;
                 twainForm.Close();
             };
