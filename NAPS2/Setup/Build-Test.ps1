@@ -1,4 +1,4 @@
-﻿param([Parameter(Position=0, Mandatory=$false)] [String] $Name)
+﻿param([Parameter(Position=0, Mandatory=$false)] [String] $Name, [Parameter(Mandatory=$false)] [switch] $d)
 
 . .\naps2.ps1
 
@@ -14,7 +14,11 @@ Get-Process | where { $_.ProcessName -eq "NAPS2.vshost" } | kill
 "Building MSI"
 & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerMSI
 "Building ZIP"
-& $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=StandaloneZIP
+if ($d) {
+    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=StandaloneZIP /t:Rebuild /p:DefineConstants=DEBUG%3BSTANDALONE%3BSTANDALONE_ZIP
+} else {
+    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=StandaloneZIP /t:Rebuild
+}
 
 # Standalone ZIP/7Z
 $StandaloneDir = $PublishDir + "naps2-$Version-portable\"
