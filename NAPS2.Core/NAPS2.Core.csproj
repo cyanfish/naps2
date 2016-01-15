@@ -139,7 +139,6 @@
     <Compile Include="Util\ConditionalControls.cs" />
     <Compile Include="Operation\IOperation.cs" />
     <Compile Include="Host\IX86HostServiceFactory.cs" />
-    <Compile Include="Host\X86HostServiceFake.cs" />
     <Compile Include="Util\IOverwritePrompt.cs" />
     <Compile Include="Host\IX86HostService.cs" />
     <Compile Include="Util\Log.cs" />

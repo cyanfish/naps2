@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Host;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
@@ -48,14 +49,20 @@ namespace NAPS2.Scan.Twain
             get { return DRIVER_NAME; }
         }
 
+        private bool UseHostService
+        {
+            get { return ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess; }
+        }
+
         protected override ScanDevice PromptForDeviceInternal()
         {
-            List<ScanDevice> deviceList = ScanProfile.TwainImpl == TwainImpl.X64
-                ? twainWrapper.GetDeviceList()
-                : x86HostServiceFactory.Create().TwainGetDeviceList();
-
             // Exclude WIA proxy devices since NAPS2 already supports WIA
-            deviceList = deviceList.Where(x => !x.ID.StartsWith("WIA-")).ToList();
+            var deviceList = GetDeviceList().Where(x => !x.ID.StartsWith("WIA-")).ToList();
+
+            if (!deviceList.Any())
+            {
+                throw new NoDevicesFoundException();
+            }
 
             var form = formFactory.Create<FSelectDevice>();
             form.DeviceList = deviceList;
@@ -63,13 +70,22 @@ namespace NAPS2.Scan.Twain
             return form.SelectedDevice;
         }
 
+        private IEnumerable<ScanDevice> GetDeviceList()
+        {
+            if (UseHostService)
+            {
+                return x86HostServiceFactory.Create().TwainGetDeviceList();
+            }
+            return twainWrapper.GetDeviceList();
+        }
+
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
-            if (ScanProfile.TwainImpl == TwainImpl.X64)
+            if (UseHostService)
             {
-                return twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams);
+                return x86HostServiceFactory.Create().TwainScan(DialogParent.Handle, ScanDevice, ScanProfile, ScanParams);
             }
-            return x86HostServiceFactory.Create().TwainScan(DialogParent.Handle, ScanDevice, ScanProfile, ScanParams);
+            return twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams);
         }
     }
 }

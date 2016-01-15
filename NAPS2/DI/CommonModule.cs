@@ -68,16 +68,9 @@ namespace NAPS2.DI
 
             // Host
             Bind<IX86HostServiceFactory>().To<NinjectX86HostServiceFactory>();
-            if (!Environment.Is64BitProcess)
-            {
-                Bind<IX86HostService>().To<X86HostServiceFake>();
-            }
-            else
-            {
-                var channelFactory = new Lazy<ChannelFactory<IX86HostService>>(
-                   () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) }, new EndpointAddress(X86HostManager.PipeName)));
-                Bind<IX86HostService>().ToMethod(ctx => channelFactory.Value.CreateChannel());
-            }
+            var channelFactory = new Lazy<ChannelFactory<IX86HostService>>(
+                () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) }, new EndpointAddress(X86HostManager.PipeName)));
+            Bind<IX86HostService>().ToMethod(ctx => channelFactory.Value.CreateChannel());
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();
