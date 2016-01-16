@@ -66,10 +66,6 @@ namespace NAPS2.Host
             {
                 StartHostProcess();
             }
-            if (_hostProcess != null)
-            {
-                _hostProcess.StandardOutput.Read();
-            }
             return ChannelFactory.Value.CreateChannel();
         }
     }

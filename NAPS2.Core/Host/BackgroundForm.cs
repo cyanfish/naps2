@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
-namespace NAPS2_32
+namespace NAPS2.Host
 {
     public class BackgroundForm : Form
     {

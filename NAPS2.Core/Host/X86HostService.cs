@@ -4,12 +4,11 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows.Forms;
-using NAPS2.Host;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 
-namespace NAPS2_32
+namespace NAPS2.Host
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
     public class X86HostService : IX86HostService
