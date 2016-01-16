@@ -33,56 +33,15 @@ using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {
-    [DataContract]
     public class ScannedImage : IDisposable
     {
-        public const string LOCK_FILE_NAME = ".lock";
-
-        private static DirectoryInfo _recoveryFolder;
-        private static FileInfo _recoveryLockFile;
-        private static FileStream _recoveryLock;
-        private static RecoveryIndexManager _recoveryIndexManager;
-
-        public static bool DisableRecoveryCleanup { get; set; }
-
-        internal static DirectoryInfo RecoveryFolder
-        {
-            get
-            {
-                if (_recoveryFolder == null)
-                {
-                    _recoveryFolder = new DirectoryInfo(Path.Combine(Paths.Recovery, Path.GetRandomFileName()));
-                    _recoveryFolder.Create();
-                    _recoveryLockFile = new FileInfo(Path.Combine(_recoveryFolder.FullName, LOCK_FILE_NAME));
-                    _recoveryLock = _recoveryLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                    _recoveryIndexManager = new RecoveryIndexManager(_recoveryFolder);
-                }
-                return _recoveryFolder;
-            }
-        }
-
-        private static int _recoveryFileNumber = 1;
-
-        [DataMember]
-        private Bitmap thumbnail;
-
-        // Store the actual image on disk
-        [DataMember]
-        private readonly Guid baseImageFileFormatGuid;
-
-        [DataMember]
-        private readonly string baseImageFileName;
-
-        [DataMember]
-        private readonly string baseImageFilePath;
+        private readonly RecoveryImage recoveryImage;
 
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
         // so that JPEG degradation is minimized when multiple rotations/flips are performed
-        [DataMember]
-        private readonly List<Transform> transformList = new List<Transform>();
+        private readonly List<Transform> transformList;
 
-        [DataMember]
-        public PatchCode PatchCode { get; set; }
+        private Bitmap thumbnail;
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
@@ -91,20 +50,18 @@ namespace NAPS2.Scan.Images
             ImageFormat baseImageFileFormat;
             ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, quality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
 
-            baseImageFileName = (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture) + GetExtension(baseImageFileFormat);
-            baseImageFilePath = Path.Combine(RecoveryFolder.FullName, baseImageFileName);
-            baseImageFileFormatGuid = baseImageFileFormat.Guid;
+            transformList = new List<Transform>();
+            recoveryImage = RecoveryImage.CreateNew(baseImageFileFormat, bitDepth, highQuality, transformList);
 
             if (baseImage != null)
             {
-                // TODO: If I'm stuck using PNG anyway, then don't treat B&W specially
-                baseImage.Save(baseImageFilePath, baseImageFileFormat);
+                baseImage.Save(recoveryImage.FilePath, recoveryImage.FileFormat);
                 baseImage.Dispose();
             }
             else
             {
                 Debug.Assert(baseImageEncoded != null);
-                using (var fs = new FileStream(baseImageFilePath, FileMode.CreateNew))
+                using (var fs = new FileStream(recoveryImage.FilePath, FileMode.CreateNew))
                 {
                     baseImageEncoded.Seek(0, SeekOrigin.Begin);
                     baseImageEncoded.CopyTo(fs);
@@ -112,32 +69,30 @@ namespace NAPS2.Scan.Images
                 baseImageEncoded.Dispose();
             }
 
-            _recoveryIndexManager.Index.Images.Add(new RecoveryIndexImage
-            {
-                FileName = baseImageFileName,
-                BitDepth = bitDepth,
-                HighQuality = highQuality,
-                TransformList = transformList
-            });
-            _recoveryIndexManager.Save();
+            recoveryImage.Save();
         }
 
-        private string GetExtension(ImageFormat imageFormat)
+        public ScannedImage(RecoveryIndexImage recoveryIndexImage)
         {
-            if (Equals(imageFormat, ImageFormat.Png))
+            recoveryImage = RecoveryImage.LoadExisting(recoveryIndexImage);
+            transformList = recoveryImage.IndexImage.TransformList;
+        }
+
+        public PatchCode PatchCode { get; set; }
+
+        public ImageFormat FileFormat { get { return recoveryImage.FileFormat; } }
+
+        internal RecoveryIndexImage RecoveryIndexImage
+        {
+            get
             {
-                return ".png";
+                return recoveryImage.IndexImage;
             }
-            if (Equals(imageFormat, ImageFormat.Jpeg))
-            {
-                return ".jpg";
-            }
-            throw new ArgumentException();
         }
 
         public Bitmap GetImage()
         {
-            var bitmap = new Bitmap(baseImageFilePath);
+            var bitmap = new Bitmap(recoveryImage.FilePath);
             return Transform.PerformAll(bitmap, transformList);
         }
 
@@ -146,35 +101,20 @@ namespace NAPS2.Scan.Images
             using (var transformed = GetImage())
             {
                 var stream = new MemoryStream();
-                transformed.Save(stream, new ImageFormat(baseImageFileFormatGuid));
+                transformed.Save(stream, recoveryImage.FileFormat);
                 return stream;
             }
         }
 
         public void Dispose()
         {
-            try
+            if (recoveryImage != null)
             {
-                if (!DisableRecoveryCleanup && File.Exists(baseImageFilePath))
-                {
-                    File.Delete(baseImageFilePath);
-                    _recoveryIndexManager.Index.Images.RemoveAll(x => x.FileName == baseImageFileName);
-                    _recoveryIndexManager.Save();
-                    if (_recoveryIndexManager.Index.Images.Count == 0)
-                    {
-                        _recoveryLock.Dispose();
-                        RecoveryFolder.Delete(true);
-                        _recoveryFolder = null;
-                    }
-                }
-                if (thumbnail != null)
-                {
-                    thumbnail.Dispose();
-                }
+                recoveryImage.Dispose();
             }
-            catch (IOException ex)
+            if (thumbnail != null)
             {
-                Log.ErrorException("Error cleaning up recovery files.", ex);
+                thumbnail.Dispose();
             }
         }
 
@@ -182,13 +122,13 @@ namespace NAPS2.Scan.Images
         {
             // Also updates the recovery index since they reference the same list
             Transform.AddOrSimplify(transformList, transform);
-            _recoveryIndexManager.Save();
+            recoveryImage.Save();
         }
 
         public void ResetTransforms()
         {
             transformList.Clear();
-            _recoveryIndexManager.Save();
+            recoveryImage.Save();
         }
 
         public Bitmap GetThumbnail(int preferredSize)
@@ -225,25 +165,7 @@ namespace NAPS2.Scan.Images
 
         public void MovedTo(int index)
         {
-            var indexImage = _recoveryIndexManager.Index.Images.Single(x => x.FileName == baseImageFileName);
-            _recoveryIndexManager.Index.Images.Remove(indexImage);
-            _recoveryIndexManager.Index.Images.Insert(index, indexImage);
-            _recoveryIndexManager.Save();
-        }
-
-        public ImageFormat FileFormat { get { return new ImageFormat(baseImageFileFormatGuid); } }
-
-        internal RecoveryIndexImage RecoveryIndexImage
-        {
-            get
-            {
-                return _recoveryIndexManager.Index.Images.Single(x => x.FileName == baseImageFileName);
-            }
-        }
-
-        public override string ToString()
-        {
-            return baseImageFileName;
+            recoveryImage.Move(index);
         }
     }
 }

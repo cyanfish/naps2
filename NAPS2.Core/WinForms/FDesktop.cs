@@ -308,7 +308,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    ScannedImage.DisableRecoveryCleanup = true;
+                    RecoveryImage.DisableRecoveryCleanup = true;
                 }
             }
         }
