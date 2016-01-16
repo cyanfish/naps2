@@ -58,6 +58,11 @@ namespace NAPS2.Host
                 _hostProcess.Kill();
                 throw;
             }
+
+            if (_hostProcess != null)
+            {
+                _hostProcess.StandardOutput.Read();
+            }
         }
 
         public static IX86HostService Connect()
