@@ -83,13 +83,59 @@ namespace NAPS2.Scan.Twain
         {
             if (UseHostService)
             {
-                var service = x86HostServiceFactory.Create();
-                service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
-                return service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
-                    .Select(x => new ScannedImage(x))
-                    .ToList();
+                return RunInForm(formFactory.Create<FTwainGui>(), () =>
+                {
+                    var service = x86HostServiceFactory.Create();
+                    service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
+                    return service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
+                        .Select(x => new ScannedImage(x))
+                        .ToList();
+                });
             }
             return twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams);
+        }
+
+        private T RunInForm<T>(FormBase form, Func<T> func) where T : class
+        {
+            T result = null;
+            Exception error = null;
+            bool done = false;
+
+            form.Shown += (sender, args) =>
+            {
+                try
+                {
+                    result = func();
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                }
+                finally
+                {
+                    done = true;
+                    form.Close();
+                }
+            };
+            form.Closing += (sender, args) =>
+            {
+                if (!done)
+                {
+                    args.Cancel = true;
+                }
+            };
+            form.ShowDialog();
+
+            if (error != null)
+            {
+                if (error is ScanDriverException)
+                {
+                    throw error;
+                }
+                throw new ScanDriverUnknownException(error);
+            }
+
+            return result;
         }
     }
 }
