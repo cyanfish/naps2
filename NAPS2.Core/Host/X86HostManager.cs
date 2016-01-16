@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.ServiceModel;
 using NAPS2.Util;
 
 namespace NAPS2.Host
@@ -15,6 +16,9 @@ namespace NAPS2.Host
         /// Use a magic argument when starting NAPS2_32.exe to avoid the user accidentally starting it and having it never stop
         /// </summary>
         public const string MAGIC_ARG = "{DE401010-6942-41D5-9BB0-B1B99A32C4BE}";
+
+        private static readonly Lazy<ChannelFactory<IX86HostService>> ChannelFactory = new Lazy<ChannelFactory<IX86HostService>>(
+                () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) }, new EndpointAddress(PipeName)));
         
         private static Process _hostProcess;
 
@@ -22,7 +26,7 @@ namespace NAPS2.Host
 
         public static void StartHostProcess()
         {
-            if (!Environment.Is64BitProcess)
+            if (!Environment.Is64BitProcess || _hostProcess != null)
             {
                 return;
             }
@@ -35,8 +39,7 @@ namespace NAPS2.Host
             }
             else
             {
-                Log.Error("Could not start 32-bit host process; terminating.");
-                Environment.Exit(1);
+                Log.Error("Could not start 32-bit host process");
                 return;
             }
 
@@ -50,6 +53,15 @@ namespace NAPS2.Host
                 _hostProcess.Kill();
                 throw;
             }
+        }
+
+        public static IX86HostService Connect()
+        {
+            if (_hostProcess == null)
+            {
+                StartHostProcess();
+            }
+            return ChannelFactory.Value.CreateChannel();
         }
     }
 }

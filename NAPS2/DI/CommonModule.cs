@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.ServiceModel;
 using NAPS2.Config;
 using NAPS2.Host;
 using NAPS2.ImportExport;
@@ -13,7 +12,6 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Update;
@@ -68,9 +66,7 @@ namespace NAPS2.DI
 
             // Host
             Bind<IX86HostServiceFactory>().To<NinjectX86HostServiceFactory>();
-            var channelFactory = new Lazy<ChannelFactory<IX86HostService>>(
-                () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) }, new EndpointAddress(X86HostManager.PipeName)));
-            Bind<IX86HostService>().ToMethod(ctx => channelFactory.Value.CreateChannel());
+            Bind<IX86HostService>().ToMethod(ctx => X86HostManager.Connect());
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();
