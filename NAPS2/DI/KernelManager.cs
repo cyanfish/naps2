@@ -25,7 +25,7 @@ using Ninject;
 
 namespace NAPS2.DI
 {
-    static class KernelManager
+    public static class KernelManager
     {
         static KernelManager()
         {

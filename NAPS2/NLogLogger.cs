@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NAPS2.Util;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
 
 namespace NAPS2
 {
-    public class NLogLogger : ILogger
+    public class NLogLogger : Util.ILogger
     {
         private readonly Logger logger;
 
@@ -37,12 +36,12 @@ namespace NAPS2
 
         public void ErrorException(string message, Exception exception)
         {
-            logger.ErrorException(message, exception);
+            logger.Error(exception, message);
         }
 
         public void FatalException(string message, Exception exception)
         {
-            logger.FatalException(message, exception);
+            logger.Fatal(exception, message);
         }
     }
 }

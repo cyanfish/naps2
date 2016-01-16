@@ -25,6 +25,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using NAPS2.DI;
+using NAPS2.Host;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject;

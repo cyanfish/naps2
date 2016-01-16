@@ -197,7 +197,7 @@ namespace NAPS2.Recovery
             {
                 try
                 {
-                    string lockFilePath = Path.Combine(recoveryFolder.FullName, ScannedImage.LOCK_FILE_NAME);
+                    string lockFilePath = Path.Combine(recoveryFolder.FullName, RecoveryImage.LOCK_FILE_NAME);
                     lockFile = new FileStream(lockFilePath, FileMode.Open);
                     return true;
                 }

@@ -20,37 +20,27 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Reflection;
+using NAPS2.Host;
+using NAPS2.Recovery;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
-using NAPS2.Util;
 using NAPS2.WinForms;
-using NTwain;
-using NTwain.Data;
 
 namespace NAPS2.Scan.Twain
 {
     public class TwainScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "twain";
-        private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
-
+        
+        private readonly IX86HostServiceFactory x86HostServiceFactory;
+        private readonly TwainWrapper twainWrapper;
         private readonly IFormFactory formFactory;
 
-        static TwainScanDriver()
+        public TwainScanDriver(IX86HostServiceFactory x86HostServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory)
         {
-            NTwain.PlatformInfo.Current.PreferNewDSM = false;
-#if DEBUG
-            NTwain.PlatformInfo.Current.Log.IsDebugEnabled = true;
-#endif
-        }
-
-        public TwainScanDriver(IFormFactory formFactory)
-        {
+            this.x86HostServiceFactory = x86HostServiceFactory;
+            this.twainWrapper = twainWrapper;
             this.formFactory = formFactory;
         }
 
@@ -59,167 +49,85 @@ namespace NAPS2.Scan.Twain
             get { return DRIVER_NAME; }
         }
 
+        private bool UseHostService
+        {
+            get { return ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess; }
+        }
+
         protected override ScanDevice PromptForDeviceInternal()
         {
-            if (ScanProfile != null && ScanProfile.TwainImpl == TwainImpl.Legacy)
+            // Exclude WIA proxy devices since NAPS2 already supports WIA
+            var deviceList = GetDeviceList().Where(x => !x.ID.StartsWith("WIA-")).ToList();
+
+            if (!deviceList.Any())
             {
-                return Legacy.TwainApi.SelectDeviceUI();
+                throw new NoDevicesFoundException();
             }
 
-            var session = new TwainSession(TwainAppId);
-            session.Open();
-            try
+            var form = formFactory.Create<FSelectDevice>();
+            form.DeviceList = deviceList;
+            form.ShowDialog();
+            return form.SelectedDevice;
+        }
+
+        private IEnumerable<ScanDevice> GetDeviceList()
+        {
+            if (UseHostService)
             {
-                var ds = session.ShowSourceSelector();
-                if (ds == null)
-                {
-                    return null;
-                }
-                string deviceId = ds.Name;
-                string deviceName = ds.Name;
-                return new ScanDevice(deviceId, deviceName);
+                return x86HostServiceFactory.Create().TwainGetDeviceList();
             }
-            finally
-            {
-                session.Close();
-            }
+            return twainWrapper.GetDeviceList();
         }
 
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
-            if (ScanProfile.TwainImpl == TwainImpl.Legacy)
+            if (UseHostService)
             {
-                return Legacy.TwainApi.Scan(ScanProfile, ScanDevice, DialogParent, formFactory);
+                return RunInForm(formFactory.Create<FTwainGui>(), () =>
+                {
+                    var service = x86HostServiceFactory.Create();
+                    service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
+                    return service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
+                        .Select(x => new ScannedImage(x))
+                        .ToList();
+                });
             }
+            return twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams);
+        }
 
-            var session = new TwainSession(TwainAppId);
-            var twainForm = formFactory.Create<FTwainGui>();
-            var images = new List<ScannedImage>();
+        private T RunInForm<T>(FormBase form, Func<T> func) where T : class
+        {
+            T result = null;
             Exception error = null;
-            bool cancel = false;
-            DataSource ds = null;
+            bool done = false;
 
-            session.TransferReady += (sender, eventArgs) =>
+            form.Shown += (sender, args) =>
             {
-                Debug.WriteLine("NAPS2.TW - TransferReady");
-                if (cancel)
-                {
-                    eventArgs.CancelAll = true;
-                }
-            };
-            session.DataTransferred += (sender, eventArgs) =>
-            {
-                Debug.WriteLine("NAPS2.TW - DataTransferred");
-                using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
-                {
-                    using (var result = ScannedImageHelper.PostProcessStep1(output, ScanProfile))
-                    {
-                        var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
-                            ? ScanBitDepth.BlackWhite
-                            : ScanBitDepth.C24Bit;
-                        var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                        ScannedImageHelper.PostProcessStep2(image, ScanProfile);
-                        if (ScanParams.DetectPatchCodes)
-                        {
-                            foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
-                            {
-                                if (patchCodeInfo.ReturnCode == ReturnCode.Success)
-                                {
-                                    image.PatchCode = GetPatchCode(patchCodeInfo);
-                                }
-                            }
-                        }
-                        images.Add(image);
-                    }
-                }
-            };
-            session.TransferError += (sender, eventArgs) =>
-            {
-                Debug.WriteLine("NAPS2.TW - TransferError");
-                if (eventArgs.Exception != null)
-                {
-                    error = eventArgs.Exception;
-                }
-                else if (eventArgs.SourceStatus != null)
-                {
-                    Log.Error("TWAIN Transfer Error. Return code = {0}; condition code = {1}; data = {2}.",
-                        eventArgs.ReturnCode, eventArgs.SourceStatus.ConditionCode, eventArgs.SourceStatus.Data);
-                }
-                else
-                {
-                    Log.Error("TWAIN Transfer Error. Return code = {0}.", eventArgs.ReturnCode);
-                }
-                cancel = true;
-                twainForm.Close();
-            };
-            session.SourceDisabled += (sender, eventArgs) =>
-            {
-                Debug.WriteLine("NAPS2.TW - SourceDisabled");
-                twainForm.Close();
-            };
-
-            twainForm.Shown += (sender, eventArgs) =>
-            {
-                Debug.WriteLine("NAPS2.TW - TwainForm.Shown");
                 try
                 {
-                    ReturnCode rc = session.Open(new WindowsFormsMessageLoopHook(DialogParent.Handle));
-                    if (rc != ReturnCode.Success)
-                    {
-                        Debug.WriteLine("NAPS2.TW - Could not open session - {0}", rc);
-                        twainForm.Close();
-                        return;
-                    }
-                    ds = session.FirstOrDefault(x => x.Name == ScanDevice.ID);
-                    if (ds == null)
-                    {
-                        Debug.WriteLine("NAPS2.TW - Could not find DS - DS count = {0}", session.Count());
-                        throw new DeviceNotFoundException();
-                    }
-                    rc = ds.Open();
-                    if (rc != ReturnCode.Success)
-                    {
-                        Debug.WriteLine("NAPS2.TW - Could not open DS - {0}", rc);
-                        twainForm.Close();
-                        return;
-                    }
-                    ConfigureDS(ds);
-                    var ui = ScanProfile.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
-                    Debug.WriteLine("NAPS2.TW - Enabling DS");
-                    rc = ds.Enable(ui, true, twainForm.Handle);
-                    Debug.WriteLine("NAPS2.TW - Enable finished");
-                    if (rc != ReturnCode.Success)
-                    {
-                        Debug.WriteLine("NAPS2.TW - Enable failed - {0}, rc");
-                        twainForm.Close();
-                    }
+                    result = func();
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("NAPS2.TW - Error");
                     error = ex;
-                    twainForm.Close();
+                }
+                finally
+                {
+                    done = true;
+                    form.Close();
                 }
             };
-
-            Debug.WriteLine("NAPS2.TW - Showing TwainForm");
-            twainForm.ShowDialog(DialogParent);
-            Debug.WriteLine("NAPS2.TW - TwainForm closed");
-
-            if (ds != null && session.IsSourceOpen)
+            form.Closing += (sender, args) =>
             {
-                Debug.WriteLine("NAPS2.TW - Closing DS");
-                ds.Close();
-            }
-            if (session.IsDsmOpen)
-            {
-                Debug.WriteLine("NAPS2.TW - Closing session");
-                session.Close();
-            }
+                if (!done)
+                {
+                    args.Cancel = true;
+                }
+            };
+            form.ShowDialog();
 
             if (error != null)
             {
-                Debug.WriteLine("NAPS2.TW - Throwing error - {0}", error);
                 if (error is ScanDriverException)
                 {
                     throw error;
@@ -227,115 +135,7 @@ namespace NAPS2.Scan.Twain
                 throw new ScanDriverUnknownException(error);
             }
 
-            return images;
-        }
-
-        private static PatchCode GetPatchCode(TWInfo patchCodeInfo)
-        {
-            switch ((NTwain.Data.PatchCode)patchCodeInfo.Item)
-            {
-                case NTwain.Data.PatchCode.Patch1:
-                    return PatchCode.Patch1;
-                case NTwain.Data.PatchCode.Patch2:
-                    return PatchCode.Patch2;
-                case NTwain.Data.PatchCode.Patch3:
-                    return PatchCode.Patch3;
-                case NTwain.Data.PatchCode.Patch4:
-                    return PatchCode.Patch4;
-                case NTwain.Data.PatchCode.Patch6:
-                    return PatchCode.Patch6;
-                case NTwain.Data.PatchCode.PatchT:
-                    return PatchCode.PatchT;
-                default:
-                    throw new ArgumentException();
-            }
-        }
-
-        private void ConfigureDS(DataSource ds)
-        {
-            if (ScanProfile.UseNativeUI)
-            {
-                return;
-            }
-
-            // Paper Source
-            switch (ScanProfile.PaperSource)
-            {
-                case ScanSource.Glass:
-                    ds.Capabilities.CapFeederEnabled.SetValue(BoolType.False);
-                    ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
-                    break;
-                case ScanSource.Feeder:
-                    ds.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
-                    ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
-                    break;
-                case ScanSource.Duplex:
-                    ds.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
-                    ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.True);
-                    break;
-            }
-
-            // Bit Depth
-            switch (ScanProfile.BitDepth)
-            {
-                case ScanBitDepth.C24Bit:
-                    ds.Capabilities.ICapPixelType.SetValue(PixelType.RGB);
-                    break;
-                case ScanBitDepth.Grayscale:
-                    ds.Capabilities.ICapPixelType.SetValue(PixelType.Gray);
-                    break;
-                case ScanBitDepth.BlackWhite:
-                    ds.Capabilities.ICapPixelType.SetValue(PixelType.BlackWhite);
-                    break;
-            }
-
-            // Page Size, Horizontal Align
-            PageDimensions pageDimensions = ScanProfile.PageSize.PageDimensions() ?? ScanProfile.CustomPageSize;
-            if (pageDimensions == null)
-            {
-                throw new InvalidOperationException("No page size specified");
-            }
-            float pageWidth = pageDimensions.WidthInThousandthsOfAnInch() / 1000.0f;
-            float pageHeight = pageDimensions.HeightInThousandthsOfAnInch() / 1000.0f;
-            var pageMaxWidthFixed = ds.Capabilities.ICapPhysicalWidth.GetCurrent();
-            float pageMaxWidth = pageMaxWidthFixed.Whole + (pageMaxWidthFixed.Fraction / (float)ushort.MaxValue);
-
-            float horizontalOffset = 0.0f;
-            if (ScanProfile.PageAlign == ScanHorizontalAlign.Center)
-                horizontalOffset = (pageMaxWidth - pageWidth) / 2;
-            else if (ScanProfile.PageAlign == ScanHorizontalAlign.Left)
-                horizontalOffset = (pageMaxWidth - pageWidth);
-
-            ds.Capabilities.ICapUnits.SetValue(Unit.Inches);
-            TWImageLayout imageLayout;
-            ds.DGImage.ImageLayout.Get(out imageLayout);
-            imageLayout.Frame = new TWFrame
-            {
-                Left = horizontalOffset,
-                Right = horizontalOffset + pageWidth,
-                Top = 0,
-                Bottom = pageHeight
-            };
-            ds.DGImage.ImageLayout.Set(imageLayout);
-
-            // Brightness, Contrast
-            // Conveniently, the range of values used in settings (-1000 to +1000) is the same range TWAIN supports
-            if (!ScanProfile.BrightnessContrastAfterScan)
-            {
-                ds.Capabilities.ICapBrightness.SetValue(ScanProfile.Brightness);
-                ds.Capabilities.ICapContrast.SetValue(ScanProfile.Contrast);
-            }
-
-            // Resolution
-            int dpi = ScanProfile.Resolution.ToIntDpi();
-            ds.Capabilities.ICapXResolution.SetValue(dpi);
-            ds.Capabilities.ICapYResolution.SetValue(dpi);
-
-            // Patch codes
-            if (ScanParams.DetectPatchCodes)
-            {
-                ds.Capabilities.ICapPatchCodeDetectionEnabled.SetValue(BoolType.True);
-            }
+            return result;
         }
     }
 }

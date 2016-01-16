@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
@@ -149,6 +150,8 @@ namespace NAPS2.Scan.Images
                 Images.Add(i % 2 == 0 ? p1[i / 2] : p2[i / 2]);
             }
 
+            RecoveryImage.Refresh(Images);
+
             // Clear the selection (may be changed in the future to maintain it, but not necessary)
             return Enumerable.Empty<int>();
         }
@@ -171,6 +174,8 @@ namespace NAPS2.Scan.Images
                 Images.Add(images[i * 2 + 1]);
             }
 
+            RecoveryImage.Refresh(Images);
+
             // Clear the selection (may be changed in the future to maintain it, but not necessary)
             return Enumerable.Empty<int>();
         }
@@ -189,6 +194,8 @@ namespace NAPS2.Scan.Images
             {
                 Images.Add(i % 2 == 0 ? p1[i / 2] : p2[p2.Count - 1 - i / 2]);
             }
+
+            RecoveryImage.Refresh(Images);
 
             // Clear the selection (may be changed in the future to maintain it, but not necessary)
             return Enumerable.Empty<int>();
@@ -211,6 +218,8 @@ namespace NAPS2.Scan.Images
             {
                 Images.Add(images[i * 2 + 1]);
             }
+
+            RecoveryImage.Refresh(Images);
 
             // Clear the selection (may be changed in the future to maintain it, but not necessary)
             return Enumerable.Empty<int>();
@@ -238,6 +247,8 @@ namespace NAPS2.Scan.Images
                 Images[x] = Images[y];
                 Images[y] = temp;
             }
+
+            RecoveryImage.Refresh(Images);
 
             // Selection stays the same, so is easy to maintain
             return selectionList;

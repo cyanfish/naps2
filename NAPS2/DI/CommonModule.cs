@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Host;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -11,7 +12,6 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Update;
@@ -63,6 +63,10 @@ namespace NAPS2.DI
             Bind<IUrlStreamReader>().To<UrlStreamReader>();
             Bind<IUrlTextReader>().To<UrlTextReader>();
             Bind<Edition>().ToConstant(GetEdition());
+
+            // Host
+            Bind<IX86HostServiceFactory>().To<NinjectX86HostServiceFactory>();
+            Bind<IX86HostService>().ToMethod(ctx => X86HostManager.Connect());
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();

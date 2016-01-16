@@ -127,8 +127,8 @@ namespace NAPS2.Scan
         Default,
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Legacy")]
         Legacy,
-        //[LocalizedDescription(typeof(SettingsResources), "TwainImpl_X64")]
-        //X64
+        [LocalizedDescription(typeof(SettingsResources), "TwainImpl_X64")]
+        X64
     }
 
     public enum ScanSource
