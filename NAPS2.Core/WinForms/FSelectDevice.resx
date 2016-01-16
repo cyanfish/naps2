@@ -117,45 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
-  </data>
-  <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 37</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblPrompt.Text" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open: {0}</value>
-  </data>
-  <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
-    <value>lblPrompt</value>
-  </data>
-  <data name="&gt;&gt;lblPrompt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblPrompt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 75</value>
+    <value>215, 41</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -174,52 +147,52 @@
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 75</value>
+  <data name="btnSelect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 12</value>
   </data>
-  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnSelect.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnSelect.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="btnOK.Text" xml:space="preserve">
-    <value>&amp;OK</value>
+  <data name="btnSelect.Text" xml:space="preserve">
+    <value>&amp;Select</value>
   </data>
-  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
-    <value>btnOK</value>
+  <data name="&gt;&gt;btnSelect.Name" xml:space="preserve">
+    <value>btnSelect</value>
   </data>
-  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnSelect.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnSelect.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnSelect.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 49</value>
+  <data name="listboxDevices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
-  <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 20</value>
+  <data name="listboxDevices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 108</value>
   </data>
-  <data name="txtPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="listboxDevices.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;txtPassword.Name" xml:space="preserve">
-    <value>txtPassword</value>
+  <data name="&gt;&gt;listboxDevices.Name" xml:space="preserve">
+    <value>listboxDevices</value>
   </data>
-  <data name="&gt;&gt;txtPassword.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;listboxDevices.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtPassword.Parent" xml:space="preserve">
+  <data name="&gt;&gt;listboxDevices.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;txtPassword.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;listboxDevices.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -229,18 +202,18 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>396, 106</value>
+    <value>302, 132</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Password</value>
+    <value>Select Source</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FPdfPassword</value>
+    <value>FSelectDevice</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31793, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.1.32878, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

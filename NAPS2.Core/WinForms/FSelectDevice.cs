@@ -12,7 +12,7 @@ namespace NAPS2.WinForms
         {
             RestoreFormState = false;
             InitializeComponent();
-            AcceptButton = btnOK;
+            AcceptButton = btnSelect;
             CancelButton = btnCancel;
         }
 
@@ -22,12 +22,34 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            
+            new LayoutManager(this)
+                .Bind(listboxDevices)
+                    .WidthToForm()
+                    .HeightToForm()
+                .Bind(btnSelect, btnCancel)
+                    .RightToForm()
+                .Activate();
+
+            foreach (var device in DeviceList)
+            {
+                listboxDevices.Items.Add(device);
+            }
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void listboxDevices_Format(object sender, ListControlConvertEventArgs e)
         {
+            e.Value = ((ScanDevice)e.ListItem).Name;
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            if (listboxDevices.SelectedItem == null)
+            {
+                listboxDevices.Focus();
+                return;
+            }
             DialogResult = DialogResult.OK;
+            SelectedDevice = ((ScanDevice) listboxDevices.SelectedItem);
             Close();
         }
 

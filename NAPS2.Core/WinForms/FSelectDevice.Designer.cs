@@ -28,17 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPdfPassword));
-            this.lblPrompt = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FSelectDevice));
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.listboxDevices = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // lblPrompt
-            // 
-            resources.ApplyResources(this.lblPrompt, "lblPrompt");
-            this.lblPrompt.Name = "lblPrompt";
             // 
             // btnCancel
             // 
@@ -47,41 +41,39 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnOK
+            // btnSelect
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.btnSelect, "btnSelect");
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
-            // txtPassword
+            // listboxDevices
             // 
-            resources.ApplyResources(this.txtPassword, "txtPassword");
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.UseSystemPasswordChar = true;
+            this.listboxDevices.FormattingEnabled = true;
+            resources.ApplyResources(this.listboxDevices, "listboxDevices");
+            this.listboxDevices.Name = "listboxDevices";
+            this.listboxDevices.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.listboxDevices_Format);
             // 
-            // FPdfPassword
+            // FSelectDevice
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.listboxDevices);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.lblPrompt);
+            this.Controls.Add(this.btnSelect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FPdfPassword";
+            this.Name = "FSelectDevice";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblPrompt;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.ListBox listboxDevices;
     }
 }
