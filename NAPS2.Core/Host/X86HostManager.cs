@@ -32,7 +32,12 @@ namespace NAPS2.Host
             }
             var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var hostProcessPath = Path.Combine(dir, "NAPS2_32.exe");
-            _hostProcess = Process.Start(hostProcessPath, MAGIC_ARG);
+            _hostProcess = Process.Start(new ProcessStartInfo {
+                FileName = hostProcessPath,
+                Arguments = MAGIC_ARG,
+                RedirectStandardOutput = true,
+                UseShellExecute = false
+            });
             if (_hostProcess != null)
             {
                 PipeName = string.Format(PIPE_NAME_FORMAT, _hostProcess.Id);
@@ -60,6 +65,10 @@ namespace NAPS2.Host
             if (_hostProcess == null)
             {
                 StartHostProcess();
+            }
+            if (_hostProcess != null)
+            {
+                _hostProcess.StandardOutput.Read();
             }
             return ChannelFactory.Value.CreateChannel();
         }
