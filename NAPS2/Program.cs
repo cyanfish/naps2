@@ -57,6 +57,8 @@ namespace NAPS2
 
             Application.ThreadException += UnhandledException;
 
+            X86HostManager.StartHostProcess();
+
             var formFactory = KernelManager.Kernel.Get<IFormFactory>();
             Application.Run(formFactory.Create<FDesktop>());
         }

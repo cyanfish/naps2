@@ -83,13 +83,53 @@ namespace NAPS2.Scan.Twain
         {
             if (UseHostService)
             {
-                var service = x86HostServiceFactory.Create();
-                service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
-                return service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
-                    .Select(x => new ScannedImage(x))
-                    .ToList();
+                List<ScannedImage> result = null;
+                bool done = false;
+                Exception error = null;
+
+                var twainForm = formFactory.Create<FTwainGui>();
+                twainForm.Shown += (sender, args) =>
+                {
+                    try
+                    {
+                        var service = x86HostServiceFactory.Create();
+                        service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
+                        result = service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
+                            .Select(x => new ScannedImage(x))
+                            .ToList();
+                    }
+                    catch (Exception ex)
+                    {
+                        error = ex;
+                    }
+                    finally
+                    {
+                        done = true;
+                        twainForm.Close();
+                    }
+                };
+                twainForm.Closing += (sender, args) =>
+                {
+                    if (!done)
+                    {
+                        args.Cancel = true;
+                    }
+                };
+                twainForm.ShowDialog();
+
+                if (error != null)
+                {
+                    if (error is ScanDriverException)
+                    {
+                        throw error;
+                    }
+                    throw new ScanDriverUnknownException(error);
+                }
+
+                return result;
+
             }
-            return twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams);
+            return twainWrapper.Scan(DialogParent, true, ScanDevice, ScanProfile, ScanParams);
         }
     }
 }
