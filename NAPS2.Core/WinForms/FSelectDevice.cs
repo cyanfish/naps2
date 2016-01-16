@@ -34,6 +34,10 @@ namespace NAPS2.WinForms
             {
                 listboxDevices.Items.Add(device);
             }
+            if (listboxDevices.Items.Count > 0)
+            {
+                listboxDevices.SelectedIndex = 0;
+            }
         }
 
         private void listboxDevices_Format(object sender, ListControlConvertEventArgs e)

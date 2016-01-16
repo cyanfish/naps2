@@ -22,9 +22,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Host;
+using NAPS2.Recovery;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
-using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Twain
@@ -83,7 +83,11 @@ namespace NAPS2.Scan.Twain
         {
             if (UseHostService)
             {
-                return x86HostServiceFactory.Create().TwainScan(DialogParent.Handle, ScanDevice, ScanProfile, ScanParams);
+                var service = x86HostServiceFactory.Create();
+                service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
+                return service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
+                    .Select(x => new ScannedImage(x))
+                    .ToList();
             }
             return twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams);
         }

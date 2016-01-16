@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Windows.Forms;
+using NAPS2.Recovery;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 
 namespace NAPS2.Host
@@ -23,14 +22,20 @@ namespace NAPS2.Host
             this.twainWrapper = twainWrapper;
         }
 
+        public void SetRecoveryFolder(string path)
+        {
+            RecoveryImage.RecoveryFolder = new DirectoryInfo(path);
+        }
+
         public List<ScanDevice> TwainGetDeviceList()
         {
             return twainWrapper.GetDeviceList();
         }
 
-        public List<ScannedImage> TwainScan(IntPtr hwnd, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
-            return twainWrapper.Scan(ParentForm, scanDevice, scanProfile, scanParams);
+            RecoveryImage.RecoveryFileNumber = recoveryFileNumber;
+            return twainWrapper.Scan(ParentForm, scanDevice, scanProfile, scanParams).Select(x => x.RecoveryIndexImage).ToList();
         }
     }
 }

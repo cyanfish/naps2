@@ -26,12 +26,13 @@ namespace NAPS2.Recovery
 
         public static bool DisableRecoveryCleanup { get; set; }
 
-        internal static DirectoryInfo RecoveryFolder
+        public static DirectoryInfo RecoveryFolder
         {
             get
             {
                 if (_recoveryFolder == null)
                 {
+                    // Automatically create a recovery folder owned by this process
                     _recoveryFolder = new DirectoryInfo(Path.Combine(Paths.Recovery, Path.GetRandomFileName()));
                     _recoveryFolder.Create();
                     _recoveryLockFile = new FileInfo(Path.Combine(_recoveryFolder.FullName, LOCK_FILE_NAME));
@@ -40,6 +41,22 @@ namespace NAPS2.Recovery
                 }
                 return _recoveryFolder;
             }
+            set
+            {
+                if (_recoveryIndexManager != null)
+                {
+                    // Oops, this process already owns a recovery folder
+                    throw new InvalidOperationException();
+                }
+                // If _recoveryFolder is set like this then this process doesn't own it, so we can't modify the index or lock
+                _recoveryFolder = value;
+            }
+        }
+
+        public static int RecoveryFileNumber
+        {
+            get { return _recoveryFileNumber; }
+            set { _recoveryFileNumber = value; }
         }
 
         public static RecoveryImage CreateNew(ImageFormat fileFormat, ScanBitDepth bitDepth, bool highQuality, List<Transform> transformList)
@@ -54,9 +71,12 @@ namespace NAPS2.Recovery
 
         public static void Refresh(IEnumerable<ScannedImage> images)
         {
-            _recoveryIndexManager.Index.Images.RemoveAll();
-            _recoveryIndexManager.Index.Images.AddRange(images.Select(x => x.RecoveryIndexImage));
-            _recoveryIndexManager.Save();
+            if (_recoveryIndexManager != null)
+            {
+                _recoveryIndexManager.Index.Images.RemoveAll();
+                _recoveryIndexManager.Index.Images.AddRange(images.Select(x => x.RecoveryIndexImage));
+                _recoveryIndexManager.Save();
+            }
         }
 
         private static string GetExtension(ImageFormat imageFormat)
@@ -119,17 +139,20 @@ namespace NAPS2.Recovery
             {
                 throw new InvalidOperationException();
             }
-            if (!saved)
+            if (_recoveryIndexManager != null)
             {
-                _recoveryIndexManager.Index.Images.Add(IndexImage);
-                saved = true;
+                if (!saved)
+                {
+                    _recoveryIndexManager.Index.Images.Add(IndexImage);
+                    saved = true;
+                }
+                _recoveryIndexManager.Save();
             }
-            _recoveryIndexManager.Save();
         }
 
         public void Move(int index)
         {
-            if (!saved || disposed)
+            if (!saved || disposed || _recoveryIndexManager == null)
             {
                 throw new InvalidOperationException();
             }
@@ -142,7 +165,7 @@ namespace NAPS2.Recovery
         {
             try
             {
-                if (!DisableRecoveryCleanup && File.Exists(FilePath))
+                if (_recoveryIndexManager != null && !DisableRecoveryCleanup && File.Exists(FilePath))
                 {
                     File.Delete(FilePath);
                     _recoveryIndexManager.Index.Images.Remove(IndexImage);
