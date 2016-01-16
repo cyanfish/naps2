@@ -9,8 +9,9 @@ namespace NAPS2.Host
     {
         public BackgroundForm()
         {
-            WindowState = FormWindowState.Minimized;
             ShowInTaskbar = false;
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            WindowState = FormWindowState.Minimized;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace NAPS2.Host
         public List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
             RecoveryImage.RecoveryFileNumber = recoveryFileNumber;
-            return twainWrapper.Scan(ParentForm, scanDevice, scanProfile, scanParams).Select(x => x.RecoveryIndexImage).ToList();
+            return twainWrapper.Scan(ParentForm, true, scanDevice, scanProfile, scanParams).Select(x => x.RecoveryIndexImage).ToList();
         }
     }
 }

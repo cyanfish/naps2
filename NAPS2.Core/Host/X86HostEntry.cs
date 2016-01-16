@@ -7,6 +7,17 @@ using System.Windows.Forms;
 
 namespace NAPS2.Host
 {
+    // TODO TODO TODO
+    // The NAPS2.Host namespace is all about 64-bit support. The NAPS2_32 process calls X86HostEntry.Run.
+    // To enable 64-bit support, simply switch NAPS2 and NAPS2.Console to build in AnyCPU and ensure NAPS2_32.exe is included in distribution.
+    // It's not enabled right now because of a few issues - minor, but I don't want to regress the experience for people that don't need the extra memory.
+    // Issue list:
+    // - Hard to give focus to the TWAIN UI consistently. Maybe leverage the Form.Activated event in NAPS2.exe to call a new method in NAPS2_32.
+    // - Relatedly, there's no way to find the TWAIN window from the taskbar. But if the above can work then maybe not needed.
+    // - Minor lag (1-2s) when doing the first WCF call. Probably unavoidable.
+    // - General stability needs testing/work
+    // - Probably something else I forgot. Thorough testing should reveal more issues.
+    // TODO TODO TODO
     public static class X86HostEntry
     {
         public static void Run(string[] args, X86HostService hostService)

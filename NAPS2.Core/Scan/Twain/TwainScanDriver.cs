@@ -92,7 +92,7 @@ namespace NAPS2.Scan.Twain
                         .ToList();
                 });
             }
-            return twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams);
+            return twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams);
         }
 
         private T RunInForm<T>(FormBase form, Func<T> func) where T : class

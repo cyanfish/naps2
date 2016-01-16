@@ -31,7 +31,14 @@ namespace NAPS2.WinForms
         public FAdvancedScanSettings()
         {
             InitializeComponent();
-            AddEnumItems<TwainImpl>(cmbTwainImpl);
+
+            cmbTwainImpl.Format += (sender, e) => ((Enum) e.ListItem).Description();
+            cmbTwainImpl.Items.Add(TwainImpl.Default);
+            cmbTwainImpl.Items.Add(TwainImpl.Legacy);
+            if (Environment.Is64BitProcess)
+            {
+                cmbTwainImpl.Items.Add(TwainImpl.X64);
+            }
         }
 
         protected override void OnLoad(object sender, EventArgs e)

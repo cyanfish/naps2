@@ -48,7 +48,7 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        public List<ScannedImage> Scan(IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<ScannedImage> Scan(IWin32Window dialogParent, bool activate, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
             if (scanProfile.TwainImpl == TwainImpl.Legacy)
             {
@@ -123,6 +123,13 @@ namespace NAPS2.Scan.Twain
 
             twainForm.Shown += (sender, eventArgs) =>
             {
+                if (activate)
+                {
+                    // TODO: Set this flag based on whether NAPS2 already has focus
+                    // http://stackoverflow.com/questions/7162834/determine-if-current-application-is-activated-has-focus
+                    // Or maybe http://stackoverflow.com/questions/156046/show-a-form-without-stealing-focus
+                    twainForm.Activate();
+                }
                 Debug.WriteLine("NAPS2.TW - TwainForm.Shown");
                 try
                 {
