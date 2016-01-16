@@ -9,9 +9,9 @@ namespace NAPS2.Scan.Images
 {
     public class ThresholdBlankDetector : IBlankDetector
     {
-        // If the pixel value < THRESHOLD (0-254), then it counts as a non-white pixel.
+        // If the pixel value <= THRESHOLD (0-254), then it counts as a non-white pixel.
         private const int THRESHOLD = 180;
-        // If the fraction of non-white pixels > sensitivity * SENSITIVITY_SCALE, then it counts as a non-blank page.
+        // If the fraction of non-white pixels > (1.0 - sensitivity) * SENSITIVITY_SCALE, then it counts as a non-blank page.
         private const double SENSITIVITY_SCALE = 0.005;
 
         public bool IsBlank(Bitmap bitmap, double sensitivity)
@@ -54,7 +54,7 @@ namespace NAPS2.Scan.Images
                 }
             }
 
-            return (matchPixels / (double)totalPixels) < sensitivity * SENSITIVITY_SCALE;
+            return (matchPixels / (double)totalPixels) < (1.0 - sensitivity) * SENSITIVITY_SCALE;
         }
     }
 }
