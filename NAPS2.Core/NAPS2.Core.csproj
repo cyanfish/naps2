@@ -260,6 +260,7 @@
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
     <Compile Include="Host\X86HostManager.cs" />
+    <Compile Include="Host\X86HostService.cs" />
     <Compile Include="WinForms\FSelectDevice.cs">
       <SubType>Form</SubType>
     </Compile>

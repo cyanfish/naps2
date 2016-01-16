@@ -82,7 +82,7 @@ namespace NAPS2.Scan.Images
 
         public ImageFormat FileFormat { get { return recoveryImage.FileFormat; } }
 
-        public RecoveryIndexImage RecoveryIndexImage
+        internal RecoveryIndexImage RecoveryIndexImage
         {
             get
             {

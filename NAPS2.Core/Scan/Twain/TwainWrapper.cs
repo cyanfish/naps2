@@ -48,7 +48,7 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        public List<ScannedImage> Scan(IWin32Window dialogParent, bool showForm, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<ScannedImage> Scan(IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
         {
             if (scanProfile.TwainImpl == TwainImpl.Legacy)
             {
@@ -123,11 +123,6 @@ namespace NAPS2.Scan.Twain
 
             twainForm.Shown += (sender, eventArgs) =>
             {
-                if (!showForm)
-                {
-                    twainForm.ShowInTaskbar = true;
-                }
-                twainForm.Activate();
                 Debug.WriteLine("NAPS2.TW - TwainForm.Shown");
                 try
                 {
