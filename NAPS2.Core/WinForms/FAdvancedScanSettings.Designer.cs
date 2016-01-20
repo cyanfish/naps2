@@ -46,9 +46,20 @@ namespace NAPS2.WinForms
             this.cbBrightnessContrastAfterScan = new System.Windows.Forms.CheckBox();
             this.cmbTwainImpl = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbCoverageThreshold = new System.Windows.Forms.TrackBar();
+            this.txtCoverageThreshold = new System.Windows.Forms.TextBox();
+            this.tbWhiteThreshold = new System.Windows.Forms.TrackBar();
+            this.txtWhiteThreshold = new System.Windows.Forms.TextBox();
+            this.cbExcludeBlankPages = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageQuality)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbCoverageThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbWhiteThreshold)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOK
@@ -129,11 +140,70 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.tbCoverageThreshold);
+            this.groupBox3.Controls.Add(this.txtCoverageThreshold);
+            this.groupBox3.Controls.Add(this.tbWhiteThreshold);
+            this.groupBox3.Controls.Add(this.txtWhiteThreshold);
+            this.groupBox3.Controls.Add(this.cbExcludeBlankPages);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // tbCoverageThreshold
+            // 
+            resources.ApplyResources(this.tbCoverageThreshold, "tbCoverageThreshold");
+            this.tbCoverageThreshold.Maximum = 100;
+            this.tbCoverageThreshold.Name = "tbCoverageThreshold";
+            this.tbCoverageThreshold.TickFrequency = 25;
+            this.tbCoverageThreshold.Scroll += new System.EventHandler(this.tbCoverageThreshold_Scroll);
+            // 
+            // txtCoverageThreshold
+            // 
+            resources.ApplyResources(this.txtCoverageThreshold, "txtCoverageThreshold");
+            this.txtCoverageThreshold.Name = "txtCoverageThreshold";
+            this.txtCoverageThreshold.TextChanged += new System.EventHandler(this.txtCoverageThreshold_TextChanged);
+            // 
+            // tbWhiteThreshold
+            // 
+            resources.ApplyResources(this.tbWhiteThreshold, "tbWhiteThreshold");
+            this.tbWhiteThreshold.Maximum = 100;
+            this.tbWhiteThreshold.Name = "tbWhiteThreshold";
+            this.tbWhiteThreshold.TickFrequency = 25;
+            this.tbWhiteThreshold.Scroll += new System.EventHandler(this.tbWhiteThreshold_Scroll);
+            // 
+            // txtWhiteThreshold
+            // 
+            resources.ApplyResources(this.txtWhiteThreshold, "txtWhiteThreshold");
+            this.txtWhiteThreshold.Name = "txtWhiteThreshold";
+            this.txtWhiteThreshold.TextChanged += new System.EventHandler(this.txtWhiteThreshold_TextChanged);
+            // 
+            // cbExcludeBlankPages
+            // 
+            resources.ApplyResources(this.cbExcludeBlankPages, "cbExcludeBlankPages");
+            this.cbExcludeBlankPages.Name = "cbExcludeBlankPages";
+            this.cbExcludeBlankPages.UseVisualStyleBackColor = true;
+            this.cbExcludeBlankPages.CheckedChanged += new System.EventHandler(this.cbExcludeBlankPages_CheckedChanged);
+            // 
             // FAdvancedScanSettings
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
@@ -146,6 +216,10 @@ namespace NAPS2.WinForms
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbCoverageThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbWhiteThreshold)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -164,5 +238,13 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ComboBox cmbTwainImpl;
         private System.Windows.Forms.CheckBox cbBrightnessContrastAfterScan;
         private System.Windows.Forms.CheckBox cbForcePageSize;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TrackBar tbCoverageThreshold;
+        private System.Windows.Forms.TextBox txtCoverageThreshold;
+        private System.Windows.Forms.TrackBar tbWhiteThreshold;
+        private System.Windows.Forms.TextBox txtWhiteThreshold;
+        private System.Windows.Forms.CheckBox cbExcludeBlankPages;
     }
 }

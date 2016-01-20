@@ -41,6 +41,8 @@ namespace NAPS2.Scan
             Resolution = ScanDpi.Dpi200;
             PaperSource = ScanSource.Glass;
             Quality = 75;
+            BlankPageWhiteThreshold = 70;
+            BlankPageCoverageThreshold = 25;
         }
 
         public ScanProfile Clone()
@@ -98,6 +100,12 @@ namespace NAPS2.Scan
         public bool ForcePageSize { get; set; }
 
         public TwainImpl TwainImpl { get; set; }
+
+        public bool ExcludeBlankPages { get; set; }
+
+        public int BlankPageWhiteThreshold { get; set; }
+
+        public int BlankPageCoverageThreshold { get; set; }
     }
 
     public class AutoSaveSettings
