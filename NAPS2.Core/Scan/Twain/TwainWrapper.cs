@@ -20,6 +20,7 @@ namespace NAPS2.Scan.Twain
         private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
 
         private readonly IFormFactory formFactory;
+        private readonly IBlankDetector blankDetector;
 
         static TwainWrapper()
         {
@@ -29,9 +30,10 @@ namespace NAPS2.Scan.Twain
 #endif
         }
 
-        public TwainWrapper(IFormFactory formFactory)
+        public TwainWrapper(IFormFactory formFactory, IBlankDetector blankDetector)
         {
             this.formFactory = formFactory;
+            this.blankDetector = blankDetector;
         }
 
         public List<ScanDevice> GetDeviceList()
@@ -77,6 +79,11 @@ namespace NAPS2.Scan.Twain
                 {
                     using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
                     {
+                        if (blankDetector.ExcludePage(result, scanProfile))
+                        {
+                            return;
+                        }
+
                         var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;

@@ -35,11 +35,13 @@ namespace NAPS2.Scan.Wia
 
         private readonly IWiaTransfer wiaTransfer;
         private readonly ThreadFactory threadFactory;
+        private readonly IBlankDetector blankDetector;
 
-        public WiaScanDriver(IWiaTransfer wiaTransfer, ThreadFactory threadFactory)
+        public WiaScanDriver(IWiaTransfer wiaTransfer, ThreadFactory threadFactory, IBlankDetector blankDetector)
         {
             this.wiaTransfer = wiaTransfer;
             this.threadFactory = threadFactory;
+            this.blankDetector = blankDetector;
         }
 
         public override string DriverName
@@ -67,12 +69,13 @@ namespace NAPS2.Scan.Wia
                     throw new NoDuplexSupportException();
                 }
                 int pageNumber = 1;
-                while (true)
+                bool cancel;
+                do
                 {
                     ScannedImage image;
                     try
                     {
-                        image = TransferImage(eventLoop, pageNumber++);
+                        image = TransferImage(eventLoop, pageNumber++, out cancel);
                     }
                     catch (ScanDriverException)
                     {
@@ -82,20 +85,15 @@ namespace NAPS2.Scan.Wia
                     {
                         throw new ScanDriverUnknownException(e);
                     }
-                    if (image == null)
+                    if (image != null)
                     {
-                        break;
+                        yield return image;
                     }
-                    yield return image;
-                    if (ScanProfile.PaperSource == ScanSource.Glass)
-                    {
-                        break;
-                    }
-                }
+                } while (!cancel && ScanProfile.PaperSource != ScanSource.Glass);
             }
         }
 
-        private ScannedImage TransferImage(WiaBackgroundEventLoop eventLoop, int pageNumber)
+        private ScannedImage TransferImage(WiaBackgroundEventLoop eventLoop, int pageNumber, out bool cancel)
         {
             try
             {
@@ -105,13 +103,18 @@ namespace NAPS2.Scan.Wia
                 {
                     if (stream == null)
                     {
-                        // User cancelled
+                        cancel = true;
                         return null;
                     }
+                    cancel = false;
                     using (Image output = Image.FromStream(stream))
                     {
                         using (var result = ScannedImageHelper.PostProcessStep1(output, ScanProfile))
                         {
+                            if (blankDetector.ExcludePage(result, ScanProfile))
+                            {
+                                return null;
+                            }
                             ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
                             var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                             ScannedImageHelper.PostProcessStep2(image, ScanProfile);
@@ -128,6 +131,7 @@ namespace NAPS2.Scan.Wia
                     {
                         throw new NoPagesException();
                     }
+                    cancel = true;
                     return null;
                 }
                 else if ((uint)e.ErrorCode == WiaApi.Errors.OFFLINE)
