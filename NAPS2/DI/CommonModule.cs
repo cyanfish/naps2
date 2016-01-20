@@ -12,6 +12,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Update;
@@ -74,6 +75,7 @@ namespace NAPS2.DI
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
             Bind<ChangeTracker>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();
+            Bind<IBlankDetector>().To<ThresholdBlankDetector>();
         }
 
         private Edition GetEdition()

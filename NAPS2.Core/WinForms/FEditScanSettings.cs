@@ -265,7 +265,11 @@ namespace NAPS2.WinForms
                 Quality = ScanProfile.Quality,
                 BrightnessContrastAfterScan = ScanProfile.BrightnessContrastAfterScan,
                 ForcePageSize = ScanProfile.ForcePageSize,
-                TwainImpl = ScanProfile.TwainImpl
+                TwainImpl = ScanProfile.TwainImpl,
+
+                ExcludeBlankPages = ScanProfile.ExcludeBlankPages,
+                BlankPageWhiteThreshold = ScanProfile.BlankPageWhiteThreshold,
+                BlankPageCoverageThreshold = ScanProfile.BlankPageCoverageThreshold
             };
         }
 
@@ -406,6 +410,7 @@ namespace NAPS2.WinForms
         {
             var form = FormFactory.Create<FAdvancedScanSettings>();
             ScanProfile.DriverName = DeviceDriverName;
+            ScanProfile.BitDepth = (ScanBitDepth)cmbDepth.SelectedIndex;
             form.ScanProfile = ScanProfile;
             form.ShowDialog();
         }

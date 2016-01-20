@@ -10,11 +10,9 @@ namespace NAPS2.Scan.Images
     public class ThresholdBlankDetector : IBlankDetector
     {
         // If the pixel value (0-255) >= white_threshold, then it counts as a white pixel.
-        // Default: sensitivity = 0.5 -> white_threshold = 180
         private const int WHITE_THRESHOLD_MIN = 1;
         private const int WHITE_THRESHOLD_MAX = 255;
         // If the fraction of non-white pixels > coverage_threshold, then it counts as a non-blank page.
-        // Default: sensitivity = 0.5 -> coverage_threshold = 0.0025 (quadratic scale)
         private const double COVERAGE_THRESHOLD_MIN = 0.00;
         private const double COVERAGE_THRESHOLD_MAX = 0.01;
 
@@ -37,7 +35,7 @@ namespace NAPS2.Scan.Images
         private static bool IsBlankRGB(Bitmap bitmap, int whiteThresholdNorm, int coverageThresholdNorm)
         {
             var whiteThreshold = (int)Math.Round(WHITE_THRESHOLD_MIN + (whiteThresholdNorm / 100.0) * (WHITE_THRESHOLD_MAX - WHITE_THRESHOLD_MIN));
-            var coverageThreshold = COVERAGE_THRESHOLD_MIN + (coverageThresholdNorm / 100.0) * (coverageThresholdNorm / 100.0) * (COVERAGE_THRESHOLD_MAX - COVERAGE_THRESHOLD_MIN);
+            var coverageThreshold = COVERAGE_THRESHOLD_MIN + (coverageThresholdNorm / 100.0) * (COVERAGE_THRESHOLD_MAX - COVERAGE_THRESHOLD_MIN);
 
             long totalPixels = bitmap.Width * bitmap.Height;
             long matchPixels = 0;

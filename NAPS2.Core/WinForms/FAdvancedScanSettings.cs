@@ -58,9 +58,9 @@ namespace NAPS2.WinForms
             UpdateEnabled();
 
             new LayoutManager(this)
-                .Bind(groupBox1, groupBox2, tbImageQuality)
+                .Bind(groupBox1, groupBox2, groupBox3, tbImageQuality, tbWhiteThreshold, tbCoverageThreshold)
                     .WidthToForm()
-                .Bind(txtImageQuality, btnOK, btnCancel)
+                .Bind(txtImageQuality, txtWhiteThreshold, txtCoverageThreshold, btnOK, btnCancel)
                     .RightToForm()
                 .Activate();
         }

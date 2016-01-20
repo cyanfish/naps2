@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 
 namespace NAPS2.Scan.Images
@@ -16,7 +17,7 @@ namespace NAPS2.Scan.Images
             double horizontalRes = original.HorizontalResolution / scaleFactor;
             double verticalRes = original.VerticalResolution / scaleFactor;
 
-            var result = new Bitmap((int)realWidth, (int)realHeight);
+            var result = new Bitmap((int)realWidth, (int)realHeight, PixelFormat.Format24bppRgb);
             using (Graphics g = Graphics.FromImage(result))
             {
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
