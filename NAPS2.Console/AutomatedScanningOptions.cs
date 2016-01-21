@@ -66,6 +66,25 @@ namespace NAPS2.Console
 
         #endregion
 
+        #region Order Options
+        
+        [Option("interleave", HelpText = "Interleave pages before saving.")]
+        public bool Interleave { get; set; }
+
+        [Option("altinterleave", HelpText = "Alternate Interleave pages before saving.")]
+        public bool AltInterleave { get; set; }
+
+        [Option("deinterleave", HelpText = "Deinterleave pages before saving.")]
+        public bool Deinterleave { get; set; }
+
+        [Option("altdeinterleave", HelpText = "Alternate Deinterleave pages before saving.")]
+        public bool AltDeinterleave { get; set; }
+
+        [Option("reverse", HelpText = "Reverse pages before saving.")]
+        public bool Reverse { get; set; }
+
+        #endregion
+
         #region PDF Options
 
         [Option("pdftitle", HelpText = "The title for generated PDF metadata.")]
