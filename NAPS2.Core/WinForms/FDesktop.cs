@@ -77,6 +77,7 @@ namespace NAPS2.WinForms
         private readonly StillImage stillImage;
         private readonly IOperationFactory operationFactory;
         private readonly IUserConfigManager userConfigManager;
+        private readonly KeyboardShortcutManager ksm;
 
         #endregion
 
@@ -91,7 +92,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager)
+        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm)
         {
             this.emailer = emailer;
             this.stringWrapper = stringWrapper;
@@ -111,6 +112,7 @@ namespace NAPS2.WinForms
             this.stillImage = stillImage;
             this.operationFactory = operationFactory;
             this.userConfigManager = userConfigManager;
+            this.ksm = ksm;
             InitializeComponent();
 
             Shown += FDesktop_Shown;
@@ -135,6 +137,7 @@ namespace NAPS2.WinForms
 
             RelayoutToolbar();
             InitLanguageDropdown();
+            AssignKeyboardShortcuts();
             UpdateScanButton();
             LoadToolStripLocation();
 
@@ -502,7 +505,7 @@ namespace NAPS2.WinForms
 
             // Top-level toolbar actions
             tsdImage.Enabled = tsdRotate.Enabled = tsMove.Enabled = tsDelete.Enabled = SelectedIndices.Any();
-            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsdPrint.Enabled = tsClear.Enabled = imageList.Images.Any();
+            tsdReorder.Enabled = tsdSavePDF.Enabled = tsdSaveImages.Enabled = tsdEmailPDF.Enabled = tsPrint.Enabled = tsClear.Enabled = imageList.Images.Any();
 
             // Context-menu actions
             ctxView.Visible = ctxCopy.Visible = ctxDelete.Visible = ctxSeparator1.Visible = ctxSeparator2.Visible = SelectedIndices.Any();
@@ -525,6 +528,7 @@ namespace NAPS2.WinForms
 
             // Populate the dropdown
             var defaultProfile = profileManager.DefaultProfile;
+            int i = 1;
             foreach (var profile in profileManager.Profiles)
             {
                 var item = new ToolStripMenuItem
@@ -533,6 +537,7 @@ namespace NAPS2.WinForms
                     Image = profile == defaultProfile ? Icons.accept_small : null,
                     ImageScaling = ToolStripItemImageScaling.None
                 };
+                AssignProfileShortcut(i, item);
                 item.Click += (sender, args) =>
                 {
                     profileManager.DefaultProfile = profile;
@@ -544,6 +549,8 @@ namespace NAPS2.WinForms
                     Activate();
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
+
+                i++;
             }
 
             if (profileManager.Profiles.Any())
@@ -927,56 +934,135 @@ namespace NAPS2.WinForms
 
         #region Keyboard Shortcuts
 
+        private void AssignKeyboardShortcuts()
+        {
+            var ks = appConfigManager.Config.KeyboardShortcuts;
+
+            ksm.Assign(ks.About, tsAbout);
+            ksm.Assign(ks.BatchScan, tsBatchScan);
+            ksm.Assign(ks.Clear, tsClear);
+            ksm.Assign(ks.Delete, tsDelete);
+            ksm.Assign(ks.EmailPDF, tsdEmailPDF);
+            ksm.Assign(ks.EmailPDFAll, tsEmailPDFAll);
+            ksm.Assign(ks.EmailPDFSelected, tsEmailPDFSelected);
+            ksm.Assign(ks.ImageBrightness, tsBrightness);
+            ksm.Assign(ks.ImageContrast, tsContrast);
+            ksm.Assign(ks.ImageCrop, tsCrop);
+            ksm.Assign(ks.ImageReset, tsReset);
+            ksm.Assign(ks.ImageView, tsView);
+            ksm.Assign(ks.Import, tsImport);
+            ksm.Assign(ks.MoveDown, MoveDown); // TODO
+            ksm.Assign(ks.MoveUp, MoveUp); // TODO
+            ksm.Assign(ks.NewProfile, tsNewProfile);
+            ksm.Assign(ks.Ocr, tsOcr);
+            ksm.Assign(ks.Print, tsPrint);
+            ksm.Assign(ks.Profiles, ShowProfilesForm);
+            
+            ksm.Assign(ks.ReorderAltDeinterleave, tsAltDeinterleave);
+            ksm.Assign(ks.ReorderAltInterleave, tsAltInterleave);
+            ksm.Assign(ks.ReorderDeinterleave, tsDeinterleave);
+            ksm.Assign(ks.ReorderInterleave, tsInterleave);
+            ksm.Assign(ks.ReorderReverseAll, tsReverseAll);
+            ksm.Assign(ks.ReorderReverseSelected, tsReverseSelected);
+            ksm.Assign(ks.RotateCustom, tsCustomRotation);
+            ksm.Assign(ks.RotateFlip, tsFlip);
+            ksm.Assign(ks.RotateLeft, tsRotateLeft);
+            ksm.Assign(ks.RotateRight, tsRotateRight);
+            ksm.Assign(ks.SaveImages, tsdSaveImages);
+            ksm.Assign(ks.SaveImagesAll, tsSaveImagesAll);
+            ksm.Assign(ks.SaveImagesSelected, tsSaveImagesSelected);
+            ksm.Assign(ks.SavePDF, tsdSavePDF);
+            ksm.Assign(ks.SavePDFAll, tsSavePDFAll);
+            ksm.Assign(ks.SavePDFSelected, tsSavePDFSelected);
+            ksm.Assign(ks.ScanDefault, tsScan);
+
+            ksm.Assign(ks.ZoomIn, btnZoomIn);
+            ksm.Assign(ks.ZoomOut, btnZoomOut);
+        }
+
+        private void AssignProfileShortcut(int i, ToolStripMenuItem item)
+        {
+            ksm.Assign(GetProfileShortcut(i), item);
+        }
+
+        private string GetProfileShortcut(int i)
+        {
+            var ks = appConfigManager.Config.KeyboardShortcuts;
+            switch (i)
+            {
+                case 1:
+                    return ks.ScanProfile1;
+                case 2:
+                    return ks.ScanProfile2;
+                case 3:
+                    return ks.ScanProfile3;
+                case 4:
+                    return ks.ScanProfile4;
+                case 5:
+                    return ks.ScanProfile5;
+                case 6:
+                    return ks.ScanProfile6;
+                case 7:
+                    return ks.ScanProfile7;
+                case 8:
+                    return ks.ScanProfile8;
+                case 9:
+                    return ks.ScanProfile9;
+            }
+            return null;
+        }
+
         private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
         {
             isControlKeyDown = e.Control;
-            switch (e.KeyCode)
-            {
-                case Keys.Left:
-                case Keys.Up:
-                    if (e.Control)
-                    {
-                        MoveUp();
-                    }
-                    break;
-                case Keys.Right:
-                case Keys.Down:
-                    if (e.Control)
-                    {
-                        MoveDown();
-                    }
-                    break;
-                case Keys.O:
-                    if (e.Control)
-                    {
-                        Import();
-                    }
-                    break;
-                case Keys.Enter:
-                    if (e.Control)
-                    {
-                        ScanDefault();
-                    }
-                    break;
-                case Keys.S:
-                    if (e.Control)
-                    {
-                        SavePDF(imageList.Images);
-                    }
-                    break;
-                case Keys.OemMinus:
-                    if (e.Control)
-                    {
-                        StepThumbnailSize(-1);
-                    }
-                    break;
-                case Keys.Oemplus:
-                    if (e.Control)
-                    {
-                        StepThumbnailSize(1);
-                    }
-                    break;
-            }
+            ksm.Perform(e.KeyData);
+            //switch (e.KeyCode)
+            //{
+            //    case Keys.Left:
+            //    case Keys.Up:
+            //        if (e.Control)
+            //        {
+            //            MoveUp();
+            //        }
+            //        break;
+            //    case Keys.Right:
+            //    case Keys.Down:
+            //        if (e.Control)
+            //        {
+            //            MoveDown();
+            //        }
+            //        break;
+            //    case Keys.O:
+            //        if (e.Control)
+            //        {
+            //            Import();
+            //        }
+            //        break;
+            //    case Keys.Enter:
+            //        if (e.Control)
+            //        {
+            //            ScanDefault();
+            //        }
+            //        break;
+            //    case Keys.S:
+            //        if (e.Control)
+            //        {
+            //            SavePDF(imageList.Images);
+            //        }
+            //        break;
+            //    case Keys.OemMinus:
+            //        if (e.Control)
+            //        {
+            //            StepThumbnailSize(-1);
+            //        }
+            //        break;
+            //    case Keys.Oemplus:
+            //        if (e.Control)
+            //        {
+            //            StepThumbnailSize(1);
+            //        }
+            //        break;
+            //}
         }
 
         private void thumbnailList1_KeyUp(object sender, KeyEventArgs e)
@@ -1268,7 +1354,7 @@ namespace NAPS2.WinForms
             Flip();
         }
 
-        private void customRotationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsCustomRotation_Click(object sender, EventArgs e)
         {
             if (SelectedIndices.Any())
             {

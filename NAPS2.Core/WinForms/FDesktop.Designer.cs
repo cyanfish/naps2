@@ -71,7 +71,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.tsEmailSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsPdfSettings2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsdPrint = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsdImage = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsView = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,7 +85,7 @@ namespace NAPS2.WinForms
             this.tsRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.tsRotateRight = new System.Windows.Forms.ToolStripMenuItem();
             this.tsFlip = new System.Windows.Forms.ToolStripMenuItem();
-            this.customRotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsCustomRotation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMove = new NAPS2.WinForms.ToolStripDoubleButton();
             this.tsdReorder = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsInterleave = new System.Windows.Forms.ToolStripMenuItem();
@@ -239,7 +239,7 @@ namespace NAPS2.WinForms
             this.tsdSavePDF,
             this.tsdSaveImages,
             this.tsdEmailPDF,
-            this.tsdPrint,
+            this.tsPrint,
             this.toolStripSeparator4,
             this.tsdImage,
             this.tsdRotate,
@@ -423,14 +423,13 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsPdfSettings2, "tsPdfSettings2");
             this.tsPdfSettings2.Click += new System.EventHandler(this.tsPdfSettings2_Click);
             // 
-            // tsdPrint
+            // tsPrint
             // 
-            this.tsdPrint.Image = global::NAPS2.Icons.printer;
-            resources.ApplyResources(this.tsdPrint, "tsdPrint");
-            this.tsdPrint.Name = "tsdPrint";
-            this.tsdPrint.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsdPrint.ShowDropDownArrow = false;
-            this.tsdPrint.Click += new System.EventHandler(this.tsdPrint_Click);
+            this.tsPrint.Image = global::NAPS2.Icons.printer;
+            resources.ApplyResources(this.tsPrint, "tsPrint");
+            this.tsPrint.Name = "tsPrint";
+            this.tsPrint.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsPrint.Click += new System.EventHandler(this.tsdPrint_Click);
             // 
             // toolStripSeparator4
             // 
@@ -502,7 +501,7 @@ namespace NAPS2.WinForms
             this.tsRotateLeft,
             this.tsRotateRight,
             this.tsFlip,
-            this.customRotationToolStripMenuItem});
+            this.tsCustomRotation});
             this.tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise;
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
             this.tsdRotate.Name = "tsdRotate";
@@ -530,11 +529,11 @@ namespace NAPS2.WinForms
             this.tsFlip.Name = "tsFlip";
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
             // 
-            // customRotationToolStripMenuItem
+            // tsCustomRotation
             // 
-            this.customRotationToolStripMenuItem.Name = "customRotationToolStripMenuItem";
-            resources.ApplyResources(this.customRotationToolStripMenuItem, "customRotationToolStripMenuItem");
-            this.customRotationToolStripMenuItem.Click += new System.EventHandler(this.customRotationToolStripMenuItem_Click);
+            this.tsCustomRotation.Name = "tsCustomRotation";
+            resources.ApplyResources(this.tsCustomRotation, "tsCustomRotation");
+            this.tsCustomRotation.Click += new System.EventHandler(this.tsCustomRotation_Click);
             // 
             // tsMove
             // 
@@ -729,8 +728,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsCrop;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsReset;
-        private System.Windows.Forms.ToolStripMenuItem customRotationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripDropDownButton tsdPrint;
+        private System.Windows.Forms.ToolStripMenuItem tsCustomRotation;
         private System.Windows.Forms.ToolStripSeparator ctxSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsPDFSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
@@ -749,6 +747,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem ctxDelete;
         private System.Windows.Forms.Button btnZoomMouseCatcher;
         private System.Windows.Forms.ToolStripMenuItem ctxPaste;
+        private System.Windows.Forms.ToolStripButton tsPrint;
     }
 }
 

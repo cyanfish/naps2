@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\KeyboardShortcuts.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Host\BackgroundForm.cs">
       <SubType>Form</SubType>
@@ -242,6 +243,7 @@
     <Compile Include="Util\Pipes.cs" />
     <Compile Include="Host\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />
+    <Compile Include="Util\KeyboardShortcutManager.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />
     <Compile Include="Util\ThreadFactory.cs" />
