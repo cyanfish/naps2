@@ -880,10 +880,36 @@ namespace NAPS2.WinForms
             var op = operationFactory.Create<ImportOperation>();
             var progressForm = FormFactory.Create<FProgress>();
             progressForm.Operation = op;
-            if (op.Start(files.OrderBy(x => x).ToList(), ReceiveScannedImage))
+            if (op.Start(OrderFiles(files), ReceiveScannedImage))
             {
                 progressForm.ShowDialog();
             }
+        }
+
+        private List<string> OrderFiles(IEnumerable<string> files)
+        {
+            // Custom ordering to account for numbers so that e.g. "10" comes after "2"
+            var filesList = files.ToList();
+            filesList.Sort((x, y) =>
+            {
+                for (int i = 0; i < Math.Min(x.Length, y.Length); i++)
+                {
+                    if (x[i] == y[i])
+                        continue;
+                    if (char.IsDigit(x[i]) && char.IsDigit(y[i]))
+                    {
+                        long xn = long.Parse(new string(x.Skip(i).TakeWhile(char.IsDigit).ToArray()));
+                        long yn = long.Parse(new string(y.Skip(i).TakeWhile(char.IsDigit).ToArray()));
+                        if (xn != yn)
+                        {
+                            return Math.Sign(xn - yn);
+                        }
+                    }
+                    return x[i] - y[i];
+                }
+                return x.Length - y.Length;
+            });
+            return filesList;
         }
 
         private void ImportDirect(DirectImageTransfer data, bool copy)
