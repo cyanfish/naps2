@@ -948,9 +948,9 @@ namespace NAPS2.WinForms
             ksm.Assign("Ctrl+OemMinus", btnZoomOut);
             ksm.Assign("Ctrl+Oemplus", btnZoomIn);
 
-            // App Config
+            // Configured
 
-            var ks = appConfigManager.Config.KeyboardShortcuts;
+            var ks = userConfigManager.Config.KeyboardShortcuts ?? appConfigManager.Config.KeyboardShortcuts ?? new KeyboardShortcuts();
 
             ksm.Assign(ks.About, tsAbout);
             ksm.Assign(ks.BatchScan, tsBatchScan);
@@ -1006,7 +1006,7 @@ namespace NAPS2.WinForms
 
         private string GetProfileShortcut(int i)
         {
-            var ks = appConfigManager.Config.KeyboardShortcuts;
+            var ks = userConfigManager.Config.KeyboardShortcuts ?? appConfigManager.Config.KeyboardShortcuts ?? new KeyboardShortcuts();
             switch (i)
             {
                 case 1:

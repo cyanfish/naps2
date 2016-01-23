@@ -31,11 +31,6 @@ namespace NAPS2.Config
     {
         public const int CURRENT_VERSION = 2;
 
-        public AppConfig()
-        {
-            KeyboardShortcuts = new KeyboardShortcuts();
-        }
-
         public int Version { get; set; }
 
         public string DefaultCulture { get; set; }

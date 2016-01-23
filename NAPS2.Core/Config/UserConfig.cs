@@ -68,5 +68,7 @@ namespace NAPS2.Config
         public BatchSettings LastBatchSettings { get; set; }
 
         public DockStyle DesktopToolStripDock { get; set; }
+
+        public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }
 }
