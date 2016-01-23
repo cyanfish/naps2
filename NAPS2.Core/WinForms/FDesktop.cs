@@ -30,6 +30,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -893,30 +894,14 @@ namespace NAPS2.WinForms
             }
         }
 
+        [DllImport("shlwapi.dll", CharSet = CharSet.Unicode)]
+        private static extern int StrCmpLogicalW(string psz1, string psz2);
+
         private List<string> OrderFiles(IEnumerable<string> files)
         {
-            // TODO: Consider 01.1 vs 1.2 and maybe just use the windows fn
             // Custom ordering to account for numbers so that e.g. "10" comes after "2"
             var filesList = files.ToList();
-            filesList.Sort((x, y) =>
-            {
-                for (int i = 0; i < Math.Min(x.Length, y.Length); i++)
-                {
-                    if (x[i] == y[i])
-                        continue;
-                    if (char.IsDigit(x[i]) && char.IsDigit(y[i]))
-                    {
-                        long xn = long.Parse(new string(x.Skip(i).TakeWhile(char.IsDigit).ToArray()));
-                        long yn = long.Parse(new string(y.Skip(i).TakeWhile(char.IsDigit).ToArray()));
-                        if (xn != yn)
-                        {
-                            return Math.Sign(xn - yn);
-                        }
-                    }
-                    return x[i] - y[i];
-                }
-                return x.Length - y.Length;
-            });
+            filesList.Sort(StrCmpLogicalW);
             return filesList;
         }
 
