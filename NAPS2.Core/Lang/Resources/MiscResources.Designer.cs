@@ -430,6 +430,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Files.
+        /// </summary>
+        internal static string FileTypeAllFiles {
+            get {
+                return ResourceManager.GetString("FileTypeAllFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitmap Files (*.bmp).
         /// </summary>
         internal static string FileTypeBmp {
@@ -466,6 +475,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image Files.
+        /// </summary>
+        internal static string FileTypeImageFiles {
+            get {
+                return ResourceManager.GetString("FileTypeImageFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to JPEG File (*.jpg, *.jpeg).
         /// </summary>
         internal static string FileTypeJpeg {
@@ -475,7 +493,7 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PDF document (*.pdf).
+        ///   Looks up a localized string similar to PDF Document (*.pdf).
         /// </summary>
         internal static string FileTypePdf {
             get {
