@@ -245,9 +245,9 @@ namespace NAPS2.Scan.Wia
             pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
             pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
 
+            SetItemIntProperty(item, horizontalPos, ItemProperties.HORIZONTAL_START);
             SetItemIntProperty(item, pageWidth, ItemProperties.HORIZONTAL_EXTENT);
             SetItemIntProperty(item, pageHeight, ItemProperties.VERTICAL_EXTENT);
-            SetItemIntProperty(item, horizontalPos, ItemProperties.HORIZONTAL_START);
 
             if (!profile.BrightnessContrastAfterScan)
             {
