@@ -9,10 +9,22 @@ namespace NAPS2.Util
     {
         private readonly KeysConverter keysConverter = new KeysConverter();
         private readonly Dictionary<Keys, Action> dict = new Dictionary<Keys, Action>();
+        private readonly Dictionary<Keys, ToolStripMenuItem> itemDict = new Dictionary<Keys, ToolStripMenuItem>();
 
         public Keys Parse(string value)
         {
-            return (Keys)(keysConverter.ConvertFrom(value) ?? Keys.None);
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    return (Keys) (keysConverter.ConvertFromInvariantString(value) ?? Keys.None);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Error parsing keyboard shortcut", ex);
+            }
+            return Keys.None;
         }
 
         public bool Assign(string value, Action action)
@@ -21,6 +33,11 @@ namespace NAPS2.Util
             if (keys != Keys.None)
             {
                 dict[keys] = action;
+                if (itemDict.ContainsKey(keys))
+                {
+                    itemDict[keys].ShortcutKeys = Keys.None;
+                    itemDict.Remove(keys);
+                }
                 return true;
             }
             return false;
@@ -34,10 +51,16 @@ namespace NAPS2.Util
                 try
                 {
                     item.ShortcutKeys = keys;
+                    itemDict[keys] = item;
                 }
                 catch (Exception)
                 {
                     dict[keys] = action;
+                    if (itemDict.ContainsKey(keys))
+                    {
+                        itemDict[keys].ShortcutKeys = Keys.None;
+                        itemDict.Remove(keys);
+                    }
                 }
                 return true;
             }
@@ -62,7 +85,7 @@ namespace NAPS2.Util
 
         public bool Assign(string value, ToolStripSplitButton item)
         {
-            if (Assign(value, item.PerformClick))
+            if (Assign(value, item.PerformButtonClick))
             {
                 item.AutoToolTip = true;
                 item.ToolTipText = value;

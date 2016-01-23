@@ -895,6 +895,7 @@ namespace NAPS2.WinForms
 
         private List<string> OrderFiles(IEnumerable<string> files)
         {
+            // TODO: Consider 01.1 vs 1.2 and maybe just use the windows fn
             // Custom ordering to account for numbers so that e.g. "10" comes after "2"
             var filesList = files.ToList();
             filesList.Sort((x, y) =>
@@ -936,6 +937,20 @@ namespace NAPS2.WinForms
 
         private void AssignKeyboardShortcuts()
         {
+            // Defaults
+
+            ksm.Assign("Ctrl+Up", MoveUp);
+            ksm.Assign("Ctrl+Left", MoveUp);
+            ksm.Assign("Ctrl+Down", MoveDown);
+            ksm.Assign("Ctrl+Right", MoveDown);
+            ksm.Assign("Ctrl+O", tsImport);
+            ksm.Assign("Ctrl+Enter", tsScan);
+            ksm.Assign("Ctrl+S", tsdSavePDF);
+            ksm.Assign("Ctrl+OemMinus", btnZoomOut);
+            ksm.Assign("Ctrl+Oemplus", btnZoomIn);
+
+            // App Config
+
             var ks = appConfigManager.Config.KeyboardShortcuts;
 
             ksm.Assign(ks.About, tsAbout);
@@ -1016,53 +1031,6 @@ namespace NAPS2.WinForms
         {
             isControlKeyDown = e.Control;
             ksm.Perform(e.KeyData);
-            //switch (e.KeyCode)
-            //{
-            //    case Keys.Left:
-            //    case Keys.Up:
-            //        if (e.Control)
-            //        {
-            //            MoveUp();
-            //        }
-            //        break;
-            //    case Keys.Right:
-            //    case Keys.Down:
-            //        if (e.Control)
-            //        {
-            //            MoveDown();
-            //        }
-            //        break;
-            //    case Keys.O:
-            //        if (e.Control)
-            //        {
-            //            Import();
-            //        }
-            //        break;
-            //    case Keys.Enter:
-            //        if (e.Control)
-            //        {
-            //            ScanDefault();
-            //        }
-            //        break;
-            //    case Keys.S:
-            //        if (e.Control)
-            //        {
-            //            SavePDF(imageList.Images);
-            //        }
-            //        break;
-            //    case Keys.OemMinus:
-            //        if (e.Control)
-            //        {
-            //            StepThumbnailSize(-1);
-            //        }
-            //        break;
-            //    case Keys.Oemplus:
-            //        if (e.Control)
-            //        {
-            //            StepThumbnailSize(1);
-            //        }
-            //        break;
-            //}
         }
 
         private void thumbnailList1_KeyUp(object sender, KeyEventArgs e)
