@@ -20,4 +20,56 @@
     <Resolution>Dpi100</Resolution>
     <PaperSource>Glass</PaperSource>
   </DefaultProfileSettings>
+  <KeyboardShortcuts>
+    <ScanDefault>Ctrl+Enter</ScanDefault>
+    <ScanProfile1>F2</ScanProfile1>
+    <ScanProfile2>F3</ScanProfile2>
+    <ScanProfile3>F4</ScanProfile3>
+    <ScanProfile4>F5</ScanProfile4>
+    <ScanProfile5>F6</ScanProfile5>
+    <ScanProfile6>F7</ScanProfile6>
+    <ScanProfile7>F8</ScanProfile7>
+    <ScanProfile8>F9</ScanProfile8>
+    <ScanProfile9>F10</ScanProfile9>
+    <ScanProfile10>F11</ScanProfile10>
+    <ScanProfile11>F12</ScanProfile11>
+    <ScanProfile12></ScanProfile12>
+    <NewProfile></NewProfile>
+    <BatchScan>Ctrl+B</BatchScan>
+    <Profiles></Profiles>
+    <Ocr></Ocr>
+    <Import>Ctrl+O</Import>
+    <SavePDF>Ctrl+S</SavePDF>
+    <SavePDFAll></SavePDFAll>
+    <SavePDFSelected></SavePDFSelected>
+    <SaveImages></SaveImages>
+    <SaveImagesAll></SaveImagesAll>
+    <SaveImagesSelected></SaveImagesSelected>
+    <EmailPDF></EmailPDF>
+    <EmailPDFAll></EmailPDFAll>
+    <EmailPDFSelected></EmailPDFSelected>
+    <Print>Ctrl+P</Print>
+    <ImageView></ImageView>
+    <ImageBrightness></ImageBrightness>
+    <ImageContrast></ImageContrast>
+    <ImageCrop></ImageCrop>
+    <ImageReset></ImageReset>
+    <RotateLeft></RotateLeft>
+    <RotateRight></RotateRight>
+    <RotateFlip></RotateFlip>
+    <RotateCustom></RotateCustom>
+    <MoveUp>Ctrl+Up</MoveUp>
+    <MoveDown>Ctrl+Down</MoveDown>
+    <ReorderInterleave></ReorderInterleave>
+    <ReorderDeinterleave></ReorderDeinterleave>
+    <ReorderAltInterleave></ReorderAltInterleave>
+    <ReorderAltDeinterleave></ReorderAltDeinterleave>
+    <ReorderReverseAll></ReorderReverseAll>
+    <ReorderReverseSelected></ReorderReverseSelected>
+    <Delete></Delete>
+    <Clear>Ctrl+Shift+Del</Clear>
+    <About>F1</About>
+    <ZoomIn>Ctrl+Oemplus</ZoomIn>
+    <ZoomOut>Ctrl+OemMinus</ZoomOut>
+  </KeyboardShortcuts>
 </AppConfig>

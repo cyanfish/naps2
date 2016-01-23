@@ -16,6 +16,9 @@ namespace NAPS2.Config
         public string ScanProfile7 { get; set; }
         public string ScanProfile8 { get; set; }
         public string ScanProfile9 { get; set; }
+        public string ScanProfile10 { get; set; }
+        public string ScanProfile11 { get; set; }
+        public string ScanProfile12 { get; set; }
         public string NewProfile { get; set; }
         public string BatchScan { get; set; }
 

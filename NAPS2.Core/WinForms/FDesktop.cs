@@ -939,13 +939,17 @@ namespace NAPS2.WinForms
         {
             // Defaults
 
+            ksm.Assign("Ctrl+Enter", tsScan);
+            ksm.Assign("Ctrl+B", tsBatchScan);
+            ksm.Assign("Ctrl+O", tsImport);
+            ksm.Assign("Ctrl+S", tsdSavePDF);
+            ksm.Assign("Ctrl+P", tsPrint);
             ksm.Assign("Ctrl+Up", MoveUp);
             ksm.Assign("Ctrl+Left", MoveUp);
             ksm.Assign("Ctrl+Down", MoveDown);
             ksm.Assign("Ctrl+Right", MoveDown);
-            ksm.Assign("Ctrl+O", tsImport);
-            ksm.Assign("Ctrl+Enter", tsScan);
-            ksm.Assign("Ctrl+S", tsdSavePDF);
+            ksm.Assign("Ctrl+Shift+Del", tsClear);
+            ksm.Assign("F1", tsAbout);
             ksm.Assign("Ctrl+OemMinus", btnZoomOut);
             ksm.Assign("Ctrl+Oemplus", btnZoomIn);
 
@@ -997,7 +1001,12 @@ namespace NAPS2.WinForms
 
         private void AssignProfileShortcut(int i, ToolStripMenuItem item)
         {
-            ksm.Assign(GetProfileShortcut(i), item);
+            var sh = GetProfileShortcut(i);
+            if (string.IsNullOrWhiteSpace(sh) && i <= 11)
+            {
+                sh = "F" + (i + 1);
+            }
+            ksm.Assign(sh, item);
         }
 
         private string GetProfileShortcut(int i)
@@ -1023,6 +1032,12 @@ namespace NAPS2.WinForms
                     return ks.ScanProfile8;
                 case 9:
                     return ks.ScanProfile9;
+                case 10:
+                    return ks.ScanProfile10;
+                case 11:
+                    return ks.ScanProfile11;
+                case 12:
+                    return ks.ScanProfile12;
             }
             return null;
         }
@@ -1166,7 +1181,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsdPrint_Click(object sender, EventArgs e)
+        private void tsPrint_Click(object sender, EventArgs e)
         {
             if (scannedImagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList()))
             {

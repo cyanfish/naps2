@@ -429,7 +429,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsPrint, "tsPrint");
             this.tsPrint.Name = "tsPrint";
             this.tsPrint.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsPrint.Click += new System.EventHandler(this.tsdPrint_Click);
+            this.tsPrint.Click += new System.EventHandler(this.tsPrint_Click);
             // 
             // toolStripSeparator4
             // 
