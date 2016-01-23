@@ -19,7 +19,7 @@ namespace NAPS2.Util
                 {
                     nextParts.Add(parts.Dequeue());
                 } while (
-                    parts.Count > 0 && drawingGraphics.MeasureString(string.Join(" ", nextParts.Concat(new [] {parts.Peek()})),
+                    parts.Count > 0 && drawingGraphics.MeasureString(string.Join(" ", nextParts.Concat(new[] { parts.Peek() })).Replace("&", ""),
                         drawingFont).Width < maxWidth);
                 result.Append(string.Join(" ", nextParts));
                 if (parts.Count > 0)
