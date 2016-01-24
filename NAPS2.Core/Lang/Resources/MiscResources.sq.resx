@@ -169,7 +169,7 @@
         <value>Skedar JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>Dokument PDF (*.pdf)</value>
+        <value>PDF Document (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Skedar PNG (*.png)</value>
@@ -377,5 +377,11 @@
     </data>
     <data name="AutoSaveError" xml:space="preserve">
         <value>An error occurred when trying to auto save.</value>
+    </data>
+    <data name="FileTypeAllFiles" xml:space="preserve">
+        <value>All Files</value>
+    </data>
+    <data name="FileTypeImageFiles" xml:space="preserve">
+        <value>Image Files</value>
     </data>
 </root>

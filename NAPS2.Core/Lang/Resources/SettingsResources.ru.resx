@@ -214,10 +214,10 @@
         <value>Со стекла</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>По умолчанию</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>Наследие (только пользовательский интерфейс)</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

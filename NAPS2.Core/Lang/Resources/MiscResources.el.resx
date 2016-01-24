@@ -169,7 +169,7 @@
         <value>Αρχεία JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>Αρχεία PDF (*.pdf)</value>
+        <value>PDF Document (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Αρχεία PNG (*.png)</value>
@@ -208,7 +208,7 @@
         <value>Έκδοση {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>Σφάλμα κατά την αποστολή ενός email.</value>
+        <value>Σφάλμα κατά την αποστολή ενός Email.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
         <value>Αυτόματες Ενημερώσεις</value>
@@ -377,5 +377,11 @@
     </data>
     <data name="AutoSaveError" xml:space="preserve">
         <value>Σφάλμα κατά το αυτόματο σώσιμο.</value>
+    </data>
+    <data name="FileTypeAllFiles" xml:space="preserve">
+        <value>All Files</value>
+    </data>
+    <data name="FileTypeImageFiles" xml:space="preserve">
+        <value>Image Files</value>
     </data>
 </root>

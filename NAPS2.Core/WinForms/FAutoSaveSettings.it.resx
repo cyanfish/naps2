@@ -193,7 +193,7 @@
         <value>23</value>
     </data>
     <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-        <value>More info</value>
+        <value>Maggiori informazioni</value>
     </data>
     <data name="&gt;&gt;linkPatchCodeInfo.Name" xml:space="preserve">
         <value>linkPatchCodeInfo</value>
@@ -223,7 +223,7 @@
         <value>22</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T (TWAIN only)</value>
+        <value>Separare i file con Patch-T (solo TWAIN)</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -253,7 +253,7 @@
         <value>21</value>
     </data>
     <data name="rdFilePerPage.Text" xml:space="preserve">
-        <value>One file per page</value>
+        <value>Una pagina per file</value>
     </data>
     <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
         <value>rdFilePerPage</value>
@@ -283,7 +283,7 @@
         <value>20</value>
     </data>
     <data name="rdFilePerScan.Text" xml:space="preserve">
-        <value>One file per scan</value>
+        <value>Un file per scansione</value>
     </data>
     <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopLeft</value>
@@ -343,7 +343,7 @@
         <value>26</value>
     </data>
     <data name="linkSubstitutions.Text" xml:space="preserve">
-        <value>Substitutions</value>
+        <value>Sostituzione</value>
     </data>
     <data name="&gt;&gt;linkSubstitutions.Name" xml:space="preserve">
         <value>linkSubstitutions</value>
@@ -394,7 +394,7 @@
         <value>24</value>
     </data>
     <data name="lblFilePath.Text" xml:space="preserve">
-        <value>File path:</value>
+        <value>Percorso del file:</value>
     </data>
     <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
         <value>lblFilePath</value>
@@ -421,7 +421,7 @@
         <value>28</value>
     </data>
     <data name="cbClearAfterSave.Text" xml:space="preserve">
-        <value>Clear images after saving</value>
+        <value>Elimina immagini dopo il salvataggio</value>
     </data>
     <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
         <value>cbClearAfterSave</value>
@@ -474,7 +474,7 @@
         <value>350, 260</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Auto Save Settings</value>
+        <value>Salva impostazioni automaticamente</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

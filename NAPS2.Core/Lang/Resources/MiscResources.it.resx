@@ -169,7 +169,7 @@
         <value>JPEG File (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF document (*.pdf)</value>
+        <value>PDF Document (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>PNG File (*.png)</value>
@@ -304,78 +304,84 @@
         <value>di {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>Errore sconosciuto durante la scansione batch.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>Scansione in serie annullata.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Cancelling....</value>
+        <value>Annullamento....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>Serie completata.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>Scansione in serie arrestata a causa di un errore.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
         <value>Digitalizzazione pagina {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Scanning page {0} (scan {1})...</value>
+        <value>Scansione pagina {0} (scansione {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Waiting for scan {0}...</value>
+        <value>Attesa per la scansione {0} ...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>Annulla</value>
     </data>
     <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Chiudi</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Saving batch results...</value>
+        <value>Salvataggio risultati della serie...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+        <value>Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner dispone di supporto duplex, provare un driver differente.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importing {0}...</value>
+        <value>Importazione di {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Import Progress</value>
+        <value>Avanzamento importazione</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Recovering...</value>
+        <value>Ripristino...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Recovery Progress</value>
+        <value>Progresso del ripristino</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Save Images Progress</value>
+        <value>Progresso del salvataggio immagini</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>Progresso del salvataggio PDF</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Saving {0}...</value>
+        <value>Salvataggio {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>Copia in corso...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>Progresso della copia</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Importazione...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>Email PDF Progress</value>
+        <value>Progresso invio PDF via email</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>Si è verificato un errore durante il salvataggio automatico.</value>
+    </data>
+    <data name="FileTypeAllFiles" xml:space="preserve">
+        <value>All Files</value>
+    </data>
+    <data name="FileTypeImageFiles" xml:space="preserve">
+        <value>Image Files</value>
     </data>
 </root>

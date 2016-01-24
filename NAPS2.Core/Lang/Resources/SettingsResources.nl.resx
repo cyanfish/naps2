@@ -214,10 +214,10 @@
         <value>Glasplaat</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>Standaard</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>Legacy (alleen eigen interface)</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>
