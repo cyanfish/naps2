@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-19 00:10+0000\n"
-"PO-Revision-Date: 2015-08-16 20:00+0000\n"
+"POT-Creation-Date: 2016-01-09 23:56+0000\n"
+"PO-Revision-Date: 2016-01-17 10:41+0000\n"
 "Last-Translator: emphyrio <list@schuiling.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1439755246.0\n"
+"X-POOTLE-MTIME: 1453027264.0\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -76,9 +76,17 @@ msgstr "Over"
 msgid "Acquiring data"
 msgstr "Data wordt opgehaald"
 
+#: FEditScanSettings.resx$btnAdvanced.Text$Message
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+#: FAdvancedScanSettings.resx$$this.Text$Message
+msgid "Advanced Profile Settings"
+msgstr "Geavanceerde profielinstellingen"
+
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
-#: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
+#: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 msgid "All ({0})"
@@ -116,13 +124,18 @@ msgstr "Afdrukken met volledige kwaliteit toestaan"
 msgid "Allow Printing"
 msgstr "Afdrukken toestaan"
 
+# This is a hard one to translate. I'll have to see it in context to confirm this is the proper translation.
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "Afwisselend terug tussenvoegen"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Afwisselend tussenvoegen"
+
+#: MiscResources.resx$AutoSaveError$Message
+msgid "An error occurred when trying to auto save"
+msgstr "Er was een fout bij het automatisch opslaan"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
@@ -138,14 +151,18 @@ msgstr "Fout met het stuurprogramma van de scanner"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr ""
+msgstr "Er is een onbekende fout opgetreden tijdens het batch scannen."
+
+#: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
+msgid "Apply brightness/contrast after scan"
+msgstr "Helderheid/contrast toepassen na scannen"
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
-msgstr ""
+msgstr "Toepassen op {0} geselecteerde afbeeldingen"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -175,6 +192,11 @@ msgstr "Naam bijlage"
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
 msgstr "Auteur"
+
+#: FEditScanSettings.resx$linkAutoSaveSettings.Text$Message
+#: FAutoSaveSettings.resx$$this.Text$Message
+msgid "Auto Save Settings"
+msgstr "Instellingen voor automatisch opslaan"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
@@ -207,19 +229,19 @@ msgstr "B5 (176x250 mm)"
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
 msgid "Batch Scan"
-msgstr ""
+msgstr "Automatisch scannen"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled"
-msgstr ""
+msgstr "Batch geannuleerd"
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully"
-msgstr ""
+msgstr "Batch succesvol voltooid"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
-msgstr ""
+msgstr "Batch scan gestopt door fout"
 
 #: FEditScanSettings.resx$label3.Text$Message
 msgid "Bit depth"
@@ -233,36 +255,39 @@ msgstr "Bitmapbestanden (*.bmp)"
 msgid "Black & White"
 msgstr "Zwart-wit"
 
-#: FViewer.resx$tsBrightness.Text$Message
 #: FDesktop.resx$tsBrightness.Text$Message
+#: FViewer.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Helderheid"
 
+#: FAutoSaveSettings.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
 #: FEditScanSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FEmailSettings.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
-#: FDownloadProgress.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
+#: FAdvancedScanSettings.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
-#: FRotate.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Annuleren"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
-msgstr ""
+msgstr "Bezig met annuleren"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -281,9 +306,17 @@ msgstr "Apparaat kiezen"
 msgid "Clear"
 msgstr "Wissen"
 
+#: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
+msgid "Clear images after saving"
+msgstr "Afbeeldingen verwijderen na opslaan"
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
+
+#: FAdvancedScanSettings.resx$groupBox2.Text$Message
+msgid "Compatibility"
+msgstr "Compatibiliteit"
 
 #: FViewer.resx$tsContrast.Text$Message
 #: FDesktop.resx$tsContrast.Text$Message
@@ -295,6 +328,14 @@ msgstr "Contrast"
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "Kopiëren"
+
+#: MiscResources.resx$CopyProgress$Message
+msgid "Copy Progress"
+msgstr "Voortgang kopiëren"
+
+#: MiscResources.resx$Copying$Message
+msgid "Copying"
+msgstr "Bezig met kopiëren"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
@@ -312,8 +353,8 @@ msgstr "Copyright © 2012-2014 Ben Olden-Cooligan"
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Copyright © 2013 Peter De Leeuw"
 
-#: FViewer.resx$tsCrop.Text$Message
 #: FDesktop.resx$tsCrop.Text$Message
+#: FViewer.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr "Bijsnijden"
@@ -339,6 +380,10 @@ msgstr "Aangepast roteren"
 msgid "Day (01-31)"
 msgstr "Dag (01-31)"
 
+#: SettingsResources.resx$TwainImpl_Default$Message
+msgid "Default"
+msgstr "Standaard"
+
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Name"
@@ -350,10 +395,11 @@ msgstr "Terug tussenvoegen"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Verwijderen"
 
@@ -406,10 +452,18 @@ msgstr "Bewerken"
 msgid "Email PDF"
 msgstr "PDF mailen"
 
+#: MiscResources.resx$EmailPdfProgress$Message
+msgid "Email PDF Progress"
+msgstr "E-mail PDF voortgang"
+
 #: FEmailSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsEmailSettings.Text$Message
 msgid "Email Settings"
 msgstr "E-mailinstellingen"
+
+#: FEditScanSettings.resx$cbAutoSave.Text$Message
+msgid "Enable Auto Save"
+msgstr "Automatisch opslaan inschakelen"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
@@ -445,8 +499,9 @@ msgid "File Name"
 msgstr "Bestandsnaam"
 
 #: FBatchScan.resx$lblFilePath.Text$Message
+#: FAutoSaveSettings.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr ""
+msgstr "Bestandspad"
 
 #: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
@@ -458,6 +513,10 @@ msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for
 msgstr ""
 "Voor hoge kwaliteit JPEG (80+), gebruik profiel Maximale Kwaliteit voor het "
 "beste resultaat"
+
+#: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
+msgid "Force matching page size"
+msgstr "Forceer passende paginagrootte"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -491,6 +550,10 @@ msgstr "Pictogrammen van"
 msgid "Image"
 msgstr "Afbeelding"
 
+#: FAdvancedScanSettings.resx$groupBox1.Text$Message
+msgid "Image Quality"
+msgstr "Kwaliteit afbeelding"
+
 #: FImageSettings.resx$$this.Text$Message
 #: FDesktop.resx$tsImageSettings.Text$Message
 msgid "Image Settings"
@@ -499,6 +562,18 @@ msgstr "Instellingen afbeeldingen"
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
 msgstr "Importeren"
+
+#: MiscResources.resx$ImportProgress$Message
+msgid "Import Progress"
+msgstr "Voortgang importeren"
+
+#: MiscResources.resx$Importing$Message
+msgid "Importing"
+msgstr "Bezig met importeren"
+
+#: MiscResources.resx$ImportingFormat$Message
+msgid "Importing {0}"
+msgstr "Importeren {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -540,9 +615,14 @@ msgstr "Taal"
 msgid "Left"
 msgstr "Links"
 
+# This one I find hard to translate.
+#: SettingsResources.resx$TwainImpl_Legacy$Message
+msgid "Legacy (native UI only)"
+msgstr "Legacy (alleen eigen interface)"
+
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
-msgstr ""
+msgstr "Afbeeldingen laden in NAPS2"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
@@ -552,7 +632,7 @@ msgstr "Hoofdwerkbalk"
 msgid "Make PDFs searchable using OCR"
 msgstr "PDFs doorzoekbaar maken middels OCR"
 
-#: FEditScanSettings.resx$cbHighQuality.Text$Message
+#: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
 msgstr "Maximale kwaliteit (grote bestanden)"
 
@@ -569,8 +649,9 @@ msgid "Month (01-12)"
 msgstr "Maand (01-12)"
 
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
+#: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
-msgstr ""
+msgstr "Meer informatie"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
@@ -582,11 +663,11 @@ msgstr "Omhoog"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr ""
+msgstr "Meerdere scans (vaste pauze tussen scans)"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr ""
+msgstr "Meerdere scans (vraag tussen 2 scans)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -610,7 +691,7 @@ msgstr "Volgende"
 
 #: FBatchPrompt.resx$$this.Text$Message
 msgid "Next Scan"
-msgstr ""
+msgstr "Volgende scan"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
@@ -636,7 +717,7 @@ msgstr "Niet nu"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr ""
+msgstr "Aantal scans"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
@@ -654,29 +735,33 @@ msgstr "OCR instellingen"
 msgid "OCR language"
 msgstr "OCR taal"
 
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FEditScanSettings.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
+#: FEmailSettings.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
-#: FEmailSettings.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
-#: FEditScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FRotate.resx$btnOK.Text$Message
 #: FContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
+#: FRotate.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
+#: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
-msgstr ""
+msgstr "Eén bestand per pagina"
 
 #: FBatchScan.resx$rdFilePerScan.Text$Message
+#: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr ""
+msgstr "Eén bestand per scan"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
@@ -684,7 +769,7 @@ msgstr "Download mislukt voor 1 of meerdere bestanden"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr ""
+msgstr "Uitvoer"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -720,17 +805,21 @@ msgstr "Papierbron"
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: FPlaceholders.resx$$this.Text$Message
-#: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FDesktop.resx$ctxPaste.Text$Message
+msgid "Paste"
+msgstr "Plakken"
+
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Placeholders"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr ""
+msgstr "Klik 'Beginnen' om te starten"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -747,7 +836,7 @@ msgstr "Afdrukken"
 
 #: FBatchScan.resx$lblProfile.Text$Message
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 #: FEditScanSettings.resx$$this.Text$Message
 msgid "Profile Settings"
@@ -760,7 +849,7 @@ msgstr "Profielen"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
-msgstr ""
+msgstr "Klaar voor scannen {0}"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -770,8 +859,16 @@ msgstr "Herstellen"
 msgid "Recover Scanned Images"
 msgstr "Herstel gescande afbeeldingen"
 
-#: FImageSettings.resx$cbRememberSettings.Text$Message
+#: MiscResources.resx$Recovering$Message
+msgid "Recovering"
+msgstr "Bezig met herstellen"
+
+#: MiscResources.resx$RecoveryProgress$Message
+msgid "Recovery Progress"
+msgstr "Herstelvoortgang"
+
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
+#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr "Onthoud deze instellingen"
@@ -802,19 +899,19 @@ msgstr "Standaardinstellingen herstellen"
 msgid "Reverse"
 msgstr "Omdraaien"
 
-#: FContrast.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
+#: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
-msgstr "Ongedaan maken"
+msgstr "Herstel"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Rechts"
 
-#: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
+#: FViewer.resx$tsdRotate.Text$Message
 #: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
 msgstr "Draaien"
@@ -833,25 +930,33 @@ msgstr "Rechtsom draaien"
 msgid "Save Images"
 msgstr "Afbeeldingen opslaan"
 
+#: MiscResources.resx$SaveImagesProgress$Message
+msgid "Save Images Progress"
+msgstr "Voortgang afbeeldingen opslaan"
+
 #: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
 msgstr "PDF opslaan"
 
+#: MiscResources.resx$SavePdfProgress$Message
+msgid "Save PDF Progress"
+msgstr "PDF voortgang bewaren"
+
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr ""
+msgstr "Opslaan naar één bestand"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
-msgstr ""
+msgstr "Opslaan naar meerdere bestanden"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
-msgstr ""
+msgstr "Batchresultaten opslaan"
 
-#: FPDFSave.resx$label1.Text$Message
-msgid "Saving to PDF"
-msgstr "Opslaan naar PDF"
+#: MiscResources.resx$SavingFormat$Message
+msgid "Saving {0}"
+msgstr "Bezig met opslaan {0}"
 
 #: FEditScanSettings.resx$label10.Text$Message
 msgid "Scale"
@@ -871,7 +976,7 @@ msgstr "Scannen"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
 msgid "Scan Configuration"
-msgstr ""
+msgstr "Scaninstellingen"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -885,7 +990,7 @@ msgstr "Scannen pagina {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr ""
+msgstr "Scant pagina {0} (scan {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
@@ -912,8 +1017,9 @@ msgid "Selected ({0})"
 msgstr "Geselecteerd ({0})"
 
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
+#: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T (TWAIN only)"
-msgstr ""
+msgstr "Bestanden scheiden via Patch-T (alleen bij TWAIN)"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -926,19 +1032,20 @@ msgstr "Tonen"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr ""
+msgstr "Enkele scan"
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
-msgstr ""
+msgstr "Beginnen"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
 msgstr "Onderwerp"
 
 #: FBatchScan.resx$linkSubstitutions.Text$Message
+#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
 msgid "Substitutions"
-msgstr ""
+msgstr "Vervangingen"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -965,7 +1072,8 @@ msgstr "Bestand {0} bestaat al. Wilt u het bestand overschrijven?"
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
-"Het volgende bestand is versleuteld en vereist een wachtwoord voor openen: {0}"
+"Het volgende bestand is versleuteld en vereist een wachtwoord voor openen: "
+"{0}"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -977,17 +1085,27 @@ msgstr ""
 "Deze scanner ondersteunt geen automatische documentinvoer. Als uw scanner "
 "dit wel heeft, probeer dan een andere driver"
 
+#: MiscResources.resx$NoDuplexSupport$Message
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr ""
+"De geselecteerde scanner ondersteunt geen dubbelzijdig scannen. Als uw "
+"scanner dit hoort te ondersteunen, probeer dan een andere driver"
+
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "De geselecteerde scanner is offline"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
-msgstr ""
+msgstr "Tijd tussen scans (seconden)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
 msgstr "Titel"
+
+#: FAdvancedScanSettings.resx$label1.Text$Message
+msgid "Twain Implementation"
+msgstr "Twain-implementatie"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1007,7 +1125,7 @@ msgstr "NAPS2 updaten"
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
 msgid "Use native UI"
-msgstr "Gebruik voorgedefinieerd"
+msgstr "Gebruik native interface"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
@@ -1040,7 +1158,7 @@ msgstr "Wachten op TWAIN scan"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr ""
+msgstr "Wacht op scan {0}"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
@@ -1109,12 +1227,16 @@ msgstr "mm"
 msgid "of {0}"
 msgstr "van {0}"
 
+#: SettingsResources.resx$TwainImpl_X64$Message
+msgid "x64"
+msgstr "x64"
+
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
 msgid "{0} / {1} MB"
 msgstr "{0} / {1} MB"
 
-#: MiscResources.resx$FilesProgress$Message
+#: MiscResources.resx$FilesProgressFormat$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
 msgstr "{0} / {1} bestanden"
@@ -1128,6 +1250,9 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} van {1}"
+
+#~ msgid "Saving to PDF"
+#~ msgstr "Opslaan naar PDF"
 
 #~ msgid "http://sourceforge.com/projects/naps2"
 #~ msgstr "http://sourceforge.com/projects/naps2"
