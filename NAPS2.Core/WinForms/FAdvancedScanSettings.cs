@@ -32,7 +32,7 @@ namespace NAPS2.WinForms
         {
             InitializeComponent();
 
-            cmbTwainImpl.Format += (sender, e) => ((Enum) e.ListItem).Description();
+            cmbTwainImpl.Format += (sender, e) => e.Value = ((Enum) e.ListItem).Description();
             cmbTwainImpl.Items.Add(TwainImpl.Default);
             cmbTwainImpl.Items.Add(TwainImpl.Legacy);
             if (Environment.Is64BitProcess)
