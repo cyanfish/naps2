@@ -6,7 +6,7 @@ Visit the NAPS2 home page at [www.naps2.com](http://www.naps2.com).
 
 Other links:
 - [Documentation](http://www.naps2.com/support.html)
-- [Translations](http://naps2.cylansoft.com/translate/) - [Doc](http://www.naps2.com/doc-translations.html)
+- [Translations](http://translate.naps2.com/) - [Doc](http://www.naps2.com/doc-translations.html)
 - [File a Ticket](https://sourceforge.net/p/naps2/tickets/) - For bug reports, feature requests, and general support inquiries.
 - [Discussion Forums](https://sourceforge.net/p/naps2/discussion/general/) - For more open-ended discussion.
 - [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M77MFAP2ZV9RG)
