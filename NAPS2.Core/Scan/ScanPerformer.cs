@@ -77,7 +77,14 @@ namespace NAPS2.Scan
                     {
                         // Auto save without piping images
                         var images = driver.Scan().ToList();
-                        if (!autoSave.AutoSave(scanProfile.AutoSaveSettings, images))
+                        if (autoSave.AutoSave(scanProfile.AutoSaveSettings, images))
+                        {
+                            foreach (ScannedImage img in images)
+                            {
+                                img.Dispose();
+                            }
+                        }
+                        else
                         {
                             // Fallback in case auto save failed; pipe all the images back at once
                             foreach (ScannedImage img in images)
