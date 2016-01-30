@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-19 00:09+0000\n"
+"POT-Creation-Date: 2016-01-24 20:33+0000\n"
 "PO-Revision-Date: 2015-09-29 05:28+0000\n"
 "Last-Translator: matis123 <matis.pihu@outlook.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,13 +76,25 @@ msgstr "Meist"
 msgid "Acquiring data"
 msgstr ""
 
+#: FEditScanSettings.resx$btnAdvanced.Text$Message
+msgid "Advanced"
+msgstr ""
+
+#: FAdvancedScanSettings.resx$$this.Text$Message
+msgid "Advanced Profile Settings"
+msgstr ""
+
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
-#: MiscResources.resx$AllCount$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
+#: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Kõik ({0})"
+
+#: MiscResources.resx$FileTypeAllFiles$Message
+msgid "All Files"
+msgstr ""
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
@@ -124,6 +136,10 @@ msgstr ""
 msgid "Alternate Interleave"
 msgstr ""
 
+#: MiscResources.resx$AutoSaveError$Message
+msgid "An error occurred when trying to auto save"
+msgstr ""
+
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
 msgstr ""
@@ -140,9 +156,13 @@ msgstr ""
 msgid "An unknown error ocurred during the batch scan"
 msgstr ""
 
-#: FContrast.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
+msgid "Apply brightness/contrast after scan"
+msgstr ""
+
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FContrast.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr ""
@@ -174,6 +194,11 @@ msgstr "Manuse nimi"
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
 msgstr "Autor"
+
+#: FEditScanSettings.resx$linkAutoSaveSettings.Text$Message
+#: FAutoSaveSettings.resx$$this.Text$Message
+msgid "Auto Save Settings"
+msgstr ""
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
@@ -232,29 +257,37 @@ msgstr ""
 msgid "Black & White"
 msgstr ""
 
-#: FViewer.resx$tsBrightness.Text$Message
+#: FAdvancedScanSettings.resx$groupBox3.Text$Message
+msgid "Blank Pages"
+msgstr ""
+
 #: FDesktop.resx$tsBrightness.Text$Message
+#: FViewer.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Heledus"
 
-#: FEditScanSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
+#: FPlaceholders.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
+#: FSelectDevice.resx$btnCancel.Text$Message
+#: FScanProgress.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
-#: FPlaceholders.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
+#: FEditScanSettings.resx$btnCancel.Text$Message
+#: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
+#: FAdvancedScanSettings.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
 #: FRotate.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Loobu"
@@ -275,17 +308,25 @@ msgstr "Vali profiil"
 msgid "Choose device"
 msgstr "Seadme valik"
 
-#: MiscResources.resx$Clear$Message
 #: FDesktop.resx$tsClear.Text$Message
+#: MiscResources.resx$Clear$Message
 msgid "Clear"
 msgstr "Puhasta"
+
+#: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
+msgid "Clear images after saving"
+msgstr ""
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr ""
 
-#: FViewer.resx$tsContrast.Text$Message
+#: FAdvancedScanSettings.resx$groupBox2.Text$Message
+msgid "Compatibility"
+msgstr ""
+
 #: FDesktop.resx$tsContrast.Text$Message
+#: FViewer.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
 #: FEditScanSettings.resx$label7.Text$Message
 msgid "Contrast"
@@ -294,6 +335,14 @@ msgstr "Kontrast"
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "Kopeeri"
+
+#: MiscResources.resx$CopyProgress$Message
+msgid "Copy Progress"
+msgstr ""
+
+#: MiscResources.resx$Copying$Message
+msgid "Copying"
+msgstr ""
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
@@ -311,8 +360,12 @@ msgstr ""
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr ""
 
-#: FViewer.resx$tsCrop.Text$Message
+#: FAdvancedScanSettings.resx$label3.Text$Message
+msgid "Coverage Threshold"
+msgstr ""
+
 #: FDesktop.resx$tsCrop.Text$Message
+#: FViewer.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr ""
@@ -329,14 +382,18 @@ msgstr ""
 msgid "Custom Page Size"
 msgstr ""
 
+#: FDesktop.resx$tsCustomRotation.Text$Message
 #: FViewer.resx$tsCustomRotation.Text$Message
-#: FDesktop.resx$customRotationToolStripMenuItem.Text$Message
 msgid "Custom Rotation"
 msgstr ""
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
 msgstr "Päev (01-31)"
+
+#: SettingsResources.resx$TwainImpl_Default$Message
+msgid "Default"
+msgstr ""
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
@@ -347,12 +404,13 @@ msgstr "Vaikimisi faili nimi"
 msgid "Deinterleave"
 msgstr ""
 
-#: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
-#: MiscResources.resx$Delete$Message
-#: FViewer.resx$tsDelete.Text$Message
+#: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
+#: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Kustuta"
 
@@ -405,10 +463,18 @@ msgstr ""
 msgid "Email PDF"
 msgstr "PDF e-mailile"
 
-#: FEmailSettings.resx$$this.Text$Message
+#: MiscResources.resx$EmailPdfProgress$Message
+msgid "Email PDF Progress"
+msgstr ""
+
 #: FDesktop.resx$tsEmailSettings.Text$Message
+#: FEmailSettings.resx$$this.Text$Message
 msgid "Email Settings"
 msgstr "E-posti sätted"
+
+#: FEditScanSettings.resx$cbAutoSave.Text$Message
+msgid "Enable Auto Save"
+msgstr ""
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
@@ -435,6 +501,10 @@ msgstr "Hinnanguline allalaadimise suurus: {0} MB"
 msgid "Exchangeable Image File (*.exif)"
 msgstr ""
 
+#: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
+msgid "Exclude blank pages"
+msgstr ""
+
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
 msgstr "Söötur"
@@ -444,16 +514,21 @@ msgid "File Name"
 msgstr ""
 
 #: FBatchScan.resx$lblFilePath.Text$Message
+#: FAutoSaveSettings.resx$lblFilePath.Text$Message
 msgid "File path"
 msgstr ""
 
-#: FViewer.resx$tsFlip.Text$Message
 #: FDesktop.resx$tsFlip.Text$Message
+#: FViewer.resx$tsFlip.Text$Message
 msgid "Flip"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
+msgstr ""
+
+#: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
+msgid "Force matching page size"
 msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
@@ -488,14 +563,34 @@ msgstr ""
 msgid "Image"
 msgstr "Pilt"
 
-#: FImageSettings.resx$$this.Text$Message
+#: MiscResources.resx$FileTypeImageFiles$Message
+msgid "Image Files"
+msgstr ""
+
+#: FAdvancedScanSettings.resx$groupBox1.Text$Message
+msgid "Image Quality"
+msgstr ""
+
 #: FDesktop.resx$tsImageSettings.Text$Message
+#: FImageSettings.resx$$this.Text$Message
 msgid "Image Settings"
 msgstr "Pildi seadistused"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
 msgstr "Impordi"
+
+#: MiscResources.resx$ImportProgress$Message
+msgid "Import Progress"
+msgstr ""
+
+#: MiscResources.resx$Importing$Message
+msgid "Importing"
+msgstr ""
+
+#: MiscResources.resx$ImportingFormat$Message
+msgid "Importing {0}"
+msgstr ""
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -537,6 +632,10 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
+#: SettingsResources.resx$TwainImpl_Legacy$Message
+msgid "Legacy (native UI only)"
+msgstr ""
+
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
 msgstr ""
@@ -549,7 +648,7 @@ msgstr "Peamine tööriistariba"
 msgid "Make PDFs searchable using OCR"
 msgstr ""
 
-#: FEditScanSettings.resx$cbHighQuality.Text$Message
+#: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
 msgstr ""
 
@@ -566,6 +665,7 @@ msgid "Month (01-12)"
 msgstr "Kuu (01-12)"
 
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
+#: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
 msgstr ""
 
@@ -651,27 +751,31 @@ msgstr "OCR häälestaja"
 msgid "OCR language"
 msgstr "OCR keel"
 
+#: FPlaceholders.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FEditScanSettings.resx$btnOK.Text$Message
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
-#: FPdfSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
-#: FEditScanSettings.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FRotate.resx$btnOK.Text$Message
-#: FContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
+#: FContrast.resx$btnOK.Text$Message
+#: FRotate.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Olgu"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
+#: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
 msgstr ""
 
 #: FBatchScan.resx$rdFilePerScan.Text$Message
+#: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
 msgstr ""
 
@@ -691,14 +795,14 @@ msgstr "Kirjuta fail üle"
 msgid "Owner Password"
 msgstr "Omaniku parool"
 
-#: FDesktop.resx$tsPdfSettings2.Text$Message
-#: FPdfSettings.resx$$this.Text$Message
-#: FDesktop.resx$tsPDFSettings.Text$Message
-msgid "PDF Settings"
+#: MiscResources.resx$FileTypePdf$Message
+msgid "PDF Document (*.pdf)"
 msgstr ""
 
-#: MiscResources.resx$FileTypePdf$Message
-msgid "PDF document (*.pdf)"
+#: FDesktop.resx$tsPdfSettings2.Text$Message
+#: FDesktop.resx$tsPDFSettings.Text$Message
+#: FPdfSettings.resx$$this.Text$Message
+msgid "PDF Settings"
 msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
@@ -717,10 +821,14 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: FDesktop.resx$ctxPaste.Text$Message
+msgid "Paste"
+msgstr ""
+
+#: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Kohahoidjad"
@@ -738,7 +846,7 @@ msgstr "Eelvaade"
 msgid "Previous"
 msgstr "Eelmine"
 
-#: FDesktop.resx$tsdPrint.Text$Message
+#: FDesktop.resx$tsPrint.Text$Message
 msgid "Print"
 msgstr "Prindi"
 
@@ -750,8 +858,8 @@ msgstr ""
 msgid "Profile Settings"
 msgstr "Profiili sätted"
 
-#: FProfiles.resx$$this.Text$Message
 #: FDesktop.resx$tsProfiles.Text$Message
+#: FProfiles.resx$$this.Text$Message
 msgid "Profiles"
 msgstr "Profiilid"
 
@@ -766,6 +874,14 @@ msgstr "Taasta"
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
 msgstr "Taasta skännitud pildid"
+
+#: MiscResources.resx$Recovering$Message
+msgid "Recovering"
+msgstr ""
+
+#: MiscResources.resx$RecoveryProgress$Message
+msgid "Recovery Progress"
+msgstr ""
 
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
@@ -789,8 +905,8 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr ""
@@ -799,9 +915,9 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
-#: FContrast.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
+#: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr ""
@@ -810,19 +926,19 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
+#: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
-#: FDesktop.resx$tsdRotate.Text$Message
 msgid "Rotate"
 msgstr "Pööra"
 
-#: FViewer.resx$tsRotateLeft.Text$Message
 #: FDesktop.resx$tsRotateLeft.Text$Message
+#: FViewer.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
 msgstr "Pööramine vasakule"
 
-#: FViewer.resx$tsRotateRight.Text$Message
 #: FDesktop.resx$tsRotateRight.Text$Message
+#: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
 msgstr "Pööramine paremale"
 
@@ -830,9 +946,17 @@ msgstr "Pööramine paremale"
 msgid "Save Images"
 msgstr "Piltide salvestamine"
 
+#: MiscResources.resx$SaveImagesProgress$Message
+msgid "Save Images Progress"
+msgstr ""
+
 #: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
 msgstr "Salvesta PDF"
+
+#: MiscResources.resx$SavePdfProgress$Message
+msgid "Save PDF Progress"
+msgstr ""
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
@@ -846,9 +970,9 @@ msgstr ""
 msgid "Saving batch results"
 msgstr ""
 
-#: FPDFSave.resx$label1.Text$Message
-msgid "Saving to PDF"
-msgstr "Salvestan PDF-i"
+#: MiscResources.resx$SavingFormat$Message
+msgid "Saving {0}"
+msgstr ""
 
 #: FEditScanSettings.resx$label10.Text$Message
 msgid "Scale"
@@ -860,9 +984,9 @@ msgstr ""
 
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
-#: FProfiles.resx$ctxScan.Text$Message
-#: MiscResources.resx$Scan$Message
 #: FDesktop.resx$tsScan.Text$Message
+#: MiscResources.resx$Scan$Message
+#: FProfiles.resx$ctxScan.Text$Message
 msgid "Scan"
 msgstr "Skaneeri"
 
@@ -888,8 +1012,16 @@ msgstr ""
 msgid "Second (00-59)"
 msgstr ""
 
+#: FSelectDevice.resx$btnSelect.Text$Message
+msgid "Select"
+msgstr ""
+
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
+msgstr ""
+
+#: FSelectDevice.resx$$this.Text$Message
+msgid "Select Source"
 msgstr ""
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
@@ -902,13 +1034,14 @@ msgstr ""
 
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
-#: MiscResources.resx$SelectedCount$Message
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
+#: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr ""
 
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
+#: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T (TWAIN only)"
 msgstr ""
 
@@ -934,6 +1067,7 @@ msgid "Subject"
 msgstr "Teema"
 
 #: FBatchScan.resx$linkSubstitutions.Text$Message
+#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
 msgid "Substitutions"
 msgstr ""
 
@@ -969,6 +1103,10 @@ msgstr ""
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
 
+#: MiscResources.resx$NoDuplexSupport$Message
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr ""
+
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr ""
@@ -979,6 +1117,10 @@ msgstr ""
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
+msgstr ""
+
+#: FAdvancedScanSettings.resx$label1.Text$Message
+msgid "Twain Implementation"
 msgstr ""
 
 #: SettingsResources.resx$PageSize_Legal$Message
@@ -1032,6 +1174,10 @@ msgstr ""
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
+msgstr ""
+
+#: FAdvancedScanSettings.resx$label2.Text$Message
+msgid "White Threshold"
 msgstr ""
 
 #: FPageSize.resx$labelX.Text$Message
@@ -1099,12 +1245,16 @@ msgstr ""
 msgid "of {0}"
 msgstr ""
 
+#: SettingsResources.resx$TwainImpl_X64$Message
+msgid "x64"
+msgstr ""
+
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
 msgid "{0} / {1} MB"
 msgstr ""
 
-#: MiscResources.resx$FilesProgress$Message
+#: MiscResources.resx$FilesProgressFormat$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
 msgstr ""
@@ -1116,3 +1266,6 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr ""
+
+#~ msgid "Saving to PDF"
+#~ msgstr "Salvestan PDF-i"
