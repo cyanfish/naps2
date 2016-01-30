@@ -135,7 +135,7 @@
         <value>1</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>Нажмите \"Старт\", когда будете готовы..</value>
+        <value>Нажмите «Старт», для запуска..</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -283,7 +283,7 @@
         <value>0</value>
     </data>
     <data name="lblNumberOfScans.Text" xml:space="preserve">
-        <value>Кол-во страниц:</value>
+        <value>Количество страниц:</value>
     </data>
     <data name="&gt;&gt;lblNumberOfScans.Name" xml:space="preserve">
         <value>lblNumberOfScans</value>
@@ -364,7 +364,7 @@
         <value>1</value>
     </data>
     <data name="rdMultipleScansDelay.Text" xml:space="preserve">
-        <value>Многостраничное сканирование (фиксированная задержка сканирования)</value>
+        <value>Многостраничное сканирование (задержка по времени)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansDelay.Name" xml:space="preserve">
         <value>rdMultipleScansDelay</value>

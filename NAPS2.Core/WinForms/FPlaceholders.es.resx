@@ -388,7 +388,7 @@
         <value>11</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Month (01-12)</value>
+        <value>Mes (01-12)</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -442,7 +442,7 @@
         <value>13</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Día (01-31)             </value>
+        <value>Día (01-31)</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -550,7 +550,7 @@
         <value>17</value>
     </data>
     <data name="label8.Text" xml:space="preserve">
-        <value>Minute (00-59)</value>
+        <value>Minuto (00-59)</value>
     </data>
     <data name="&gt;&gt;label8.Name" xml:space="preserve">
         <value>label8</value>
@@ -604,7 +604,7 @@
         <value>19</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Second (00-59)</value>
+        <value>Segundo (00-59)</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>
@@ -820,7 +820,7 @@
         <value>27</value>
     </data>
     <data name="label13.Text" xml:space="preserve">
-        <value>Número autoincremental (1 dígito)            </value>
+        <value>Número autoincremental (1 dígito)</value>
     </data>
     <data name="&gt;&gt;label13.Name" xml:space="preserve">
         <value>label13</value>

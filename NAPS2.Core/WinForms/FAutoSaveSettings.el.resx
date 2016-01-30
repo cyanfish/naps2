@@ -421,7 +421,7 @@
         <value>28</value>
     </data>
     <data name="cbClearAfterSave.Text" xml:space="preserve">
-        <value>Καθαρισμός εικόνων μετά το σώσιμο</value>
+        <value>Καθαρισμός εικόνων μετά την αποθήκευση</value>
     </data>
     <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
         <value>cbClearAfterSave</value>
@@ -474,7 +474,7 @@
         <value>350, 260</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Ρυθμίσεις για Αυτόματο Σώσιμο</value>
+        <value>Ρυθμίσεις Αυτόματης Αποθήκευσης</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

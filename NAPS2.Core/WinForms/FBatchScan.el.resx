@@ -829,7 +829,7 @@
         <value>2</value>
     </data>
     <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-        <value>Σώσιμο σε πολλαπλά αρχεία</value>
+        <value>Αποθήκευση σε πολλαπλά αρχεία</value>
     </data>
     <data name="&gt;&gt;rdSaveToMultipleFiles.Name" xml:space="preserve">
         <value>rdSaveToMultipleFiles</value>
@@ -859,7 +859,7 @@
         <value>1</value>
     </data>
     <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-        <value>Σώσιμο σε ένα αρχείο</value>
+        <value>Αποθήκευση σε ένα αρχείο</value>
     </data>
     <data name="&gt;&gt;rdSaveToSingleFile.Name" xml:space="preserve">
         <value>rdSaveToSingleFile</value>

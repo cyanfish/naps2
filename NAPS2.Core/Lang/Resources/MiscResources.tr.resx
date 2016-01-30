@@ -169,7 +169,7 @@
         <value>JPEG Dosyası (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF doküman (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>PNG Dosya (*.png)</value>
@@ -298,13 +298,13 @@
         <value>You do not have permission to copy content from the file '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Dosyayı kaydetmeye çalışırken bir hata oluştu.\n.</value>
     </data>
     <data name="OfN" xml:space="preserve">
         <value> / {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>Dosyayı kaydetmeye çalışırken bir hata oluştu.\n.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
         <value>Batch cancelled.</value>

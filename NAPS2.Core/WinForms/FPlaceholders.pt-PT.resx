@@ -208,7 +208,7 @@
         <value>3</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>File Name</value>
+        <value>Nome do ficheiro</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -388,7 +388,7 @@
         <value>11</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Month (01-12)</value>
+        <value>Mês (01-12)</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -496,7 +496,7 @@
         <value>15</value>
     </data>
     <data name="label7.Text" xml:space="preserve">
-        <value>Hour (0-23)</value>
+        <value>Hora (0-23)</value>
     </data>
     <data name="&gt;&gt;label7.Name" xml:space="preserve">
         <value>label7</value>
@@ -658,7 +658,7 @@
         <value>21</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Auto-incrementing number (4 digits)</value>
+        <value>Número de auto-incremento (4 dígitos)</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>
@@ -712,7 +712,7 @@
         <value>23</value>
     </data>
     <data name="label11.Text" xml:space="preserve">
-        <value>Auto-incrementing number (3 digits)</value>
+        <value>Número de auto-incremento (3 dígitos)</value>
     </data>
     <data name="&gt;&gt;label11.Name" xml:space="preserve">
         <value>label11</value>
@@ -766,7 +766,7 @@
         <value>25</value>
     </data>
     <data name="label12.Text" xml:space="preserve">
-        <value>Auto-incrementing number (2 digits)</value>
+        <value>Número de auto-incremento (2 dígitos)</value>
     </data>
     <data name="&gt;&gt;label12.Name" xml:space="preserve">
         <value>label12</value>
@@ -820,7 +820,7 @@
         <value>27</value>
     </data>
     <data name="label13.Text" xml:space="preserve">
-        <value>Auto-incrementing number (1 digit)</value>
+        <value>Número de auto-incremento (1 dígito)</value>
     </data>
     <data name="&gt;&gt;label13.Name" xml:space="preserve">
         <value>label13</value>

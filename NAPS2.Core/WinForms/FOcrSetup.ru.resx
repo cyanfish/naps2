@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-        <value>Сделать PDF-файлы доступными для поиска используя распознавание текста</value>
+        <value>Создать PDF с возможностью поиска текста</value>
     </data>
     <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
         <value>checkBoxEnableOcr</value>

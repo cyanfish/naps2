@@ -361,7 +361,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsNewProfile.Text" xml:space="preserve">
-        <value>&amp;New Profile</value>
+        <value>&amp;Nuevo Perfil</value>
     </data>
     <data name="tsBatchScan.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -478,7 +478,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>Configuraciones &amp;PDF </value>
+        <value>Configuraciones &amp;PDF</value>
     </data>
     <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -550,7 +550,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>Configuraciones &amp;PDF </value>
+        <value>Configuraciones &amp;PDF</value>
     </data>
     <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

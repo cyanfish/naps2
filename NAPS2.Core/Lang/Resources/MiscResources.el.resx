@@ -148,7 +148,7 @@
         <value>Ο επιλεγμένος σαρωτής είναι εκτός λειτουργίας.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Δεν υπάρχει δικαίωμα για να σωθούν αρχεία σε αυτή την τοποθεσία.</value>
+        <value>Δεν υπάρχει δικαίωμα αποθήκευσης αρχείων σε αυτή την τοποθεσία.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Σφάλμα</value>
@@ -169,7 +169,7 @@
         <value>Αρχεία JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>Αρχεία PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Αρχεία PNG (*.png)</value>
@@ -208,7 +208,7 @@
         <value>Έκδοση {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>Σφάλμα κατά την αποστολή ενός Email.</value>
+        <value>Σφάλμα κατά την αποστολή Email.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
         <value>Αυτόματες Ενημερώσεις</value>
@@ -226,7 +226,7 @@
         <value>Αργότερα</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Υπάρχει διαθέσιμη μία νεότερη έκδοση του NAPS2. Θέλετε να γίνει ενημέρωση τώρα;</value>
+        <value>Υπάρχει μία νεότερη έκδοση του NAPS2 διαθέσιμη. Θέλετε να γίνει ενημέρωση τώρα;</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Η Εγκατάσταση Ολοκληρώθηκε</value>
@@ -280,10 +280,10 @@
         <value>Αρχικοποίηση Εικόνας</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>Υπάρχουν αλλαγές που δεν έχουν σωθεί. Θέλετε σίγουρα να τερματιστεί η εφαρμογή;</value>
+        <value>Υπάρχουν αλλαγές που δεν έχουν αποθηκευτεί. Θέλετε σίγουρα να τερματιστεί η εφαρμογή;</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Αλλαγές για Σώσιμο</value>
+        <value>Μη Αποθηκευμένες Αλλαγές</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
         <value>Σάρωση σελίδας {0}</value>
@@ -298,7 +298,7 @@
         <value>Δεν υπάρχει δικαίωμα αντιγραφής περιεχομένου από το αρχείο '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>Σφάλμα κατά το σώσιμο του αρχείου.</value>
+        <value>Σφάλμα κατά την αποθήκευση του αρχείου.</value>
     </data>
     <data name="OfN" xml:space="preserve">
         <value>από {0}</value>
@@ -334,7 +334,7 @@
         <value>Κλείσιμο</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Σώσιμο αποτελεσμάτων μαζικής...</value>
+        <value>Αποθήκευση αποτελεσμάτων μαζικής...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
         <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού οδηγού.</value>
@@ -355,13 +355,13 @@
         <value>Πρόοδος Ανάκτησης</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Πρόοδος για Σώσιμο Εικόνων</value>
+        <value>Πρόοδος Αποθήκευσης Εικόνων</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Πρόοδος για Σώσιμο PDF</value>
+        <value>Πρόοδος Αποθήκευσης PDF</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Σώσιμο {0}...</value>
+        <value>Αποθήκευση {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
         <value>Αντιγραφή...</value>
@@ -376,12 +376,12 @@
         <value>Πρόοδος Αποστολής PDF (Email)</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>Σφάλμα κατά το αυτόματο σώσιμο.</value>
+        <value>Σφάλμα κατά την αυτόματη αποθήκευση.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Όλα τα Αρχεία</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>Αρχεία Εικόνας</value>
     </data>
 </root>

@@ -538,7 +538,7 @@
         <value>13</value>
     </data>
     <data name="cbAllowAnnotations.Text" xml:space="preserve">
-        <value>Allow Annotations</value>
+        <value>Permitir anotações</value>
     </data>
     <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
         <value>cbAllowAnnotations</value>

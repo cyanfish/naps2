@@ -217,7 +217,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Restore &amp;Defaults</value>
+        <value>Restaurar los valores predeterminados</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -295,7 +295,7 @@
         <value>29</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Jpeg Quality:</value>
+        <value>Calidad Jpeg:</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>

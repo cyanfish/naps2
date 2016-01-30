@@ -208,7 +208,7 @@
         <value>3</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>File Name</value>
+        <value>Nume fişier</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -442,7 +442,7 @@
         <value>13</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Day (01-31)</value>
+        <value>Ziua (01-31)</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -496,7 +496,7 @@
         <value>15</value>
     </data>
     <data name="label7.Text" xml:space="preserve">
-        <value>Hour (0-23)</value>
+        <value>Ora (0-23)</value>
     </data>
     <data name="&gt;&gt;label7.Name" xml:space="preserve">
         <value>label7</value>
@@ -712,7 +712,7 @@
         <value>23</value>
     </data>
     <data name="label11.Text" xml:space="preserve">
-        <value>Auto-incrementing number (3 digits)</value>
+        <value>Incrementează automat numarul (trei cifre)</value>
     </data>
     <data name="&gt;&gt;label11.Name" xml:space="preserve">
         <value>label11</value>
@@ -766,7 +766,7 @@
         <value>25</value>
     </data>
     <data name="label12.Text" xml:space="preserve">
-        <value>Auto-incrementing number (2 digits)</value>
+        <value>Incrementează automat numatul (doua cifre)</value>
     </data>
     <data name="&gt;&gt;label12.Name" xml:space="preserve">
         <value>label12</value>
@@ -820,7 +820,7 @@
         <value>27</value>
     </data>
     <data name="label13.Text" xml:space="preserve">
-        <value>Auto-incrementing number (1 digit)</value>
+        <value>Incrementează automat numarul (o cifra)</value>
     </data>
     <data name="&gt;&gt;label13.Name" xml:space="preserve">
         <value>label13</value>
@@ -916,7 +916,7 @@
         <value>30</value>
     </data>
     <data name="gboxPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Înlocuitor</value>
     </data>
     <data name="&gt;&gt;gboxPlaceholders.Name" xml:space="preserve">
         <value>gboxPlaceholders</value>
@@ -943,7 +943,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Înlocuitor</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FPlaceholders</value>

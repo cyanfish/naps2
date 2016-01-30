@@ -169,7 +169,7 @@
         <value>Fichier JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>Document PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Fichier PNG (*.png)</value>
@@ -379,9 +379,9 @@
         <value>Une erreur s'est produite en essayant d'enregistrer automatiquement.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Tous les fichiers</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>Fichiers image</value>
     </data>
 </root>

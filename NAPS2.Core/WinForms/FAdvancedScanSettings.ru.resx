@@ -472,7 +472,7 @@
         <value>38</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Coverage Threshold</value>
+        <value>Порог покрытия</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -499,7 +499,7 @@
         <value>37</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>White Threshold</value>
+        <value>Белый порог</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -631,7 +631,7 @@
         <value>17</value>
     </data>
     <data name="cbExcludeBlankPages.Text" xml:space="preserve">
-        <value>Exclude blank pages</value>
+        <value>Исключить пустые страницы</value>
     </data>
     <data name="&gt;&gt;cbExcludeBlankPages.Name" xml:space="preserve">
         <value>cbExcludeBlankPages</value>
@@ -655,7 +655,7 @@
         <value>37</value>
     </data>
     <data name="groupBox3.Text" xml:space="preserve">
-        <value>Blank Pages</value>
+        <value>Чистые страницы</value>
     </data>
     <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
         <value>groupBox3</value>
@@ -708,7 +708,7 @@
         <value>400, 441</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>                  Расширенные настройки профиля                </value>
+        <value>Дополнительные настройки профиля</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

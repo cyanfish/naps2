@@ -298,7 +298,7 @@
         <value>31</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Заполнители</value>
+        <value>Подстановка</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>

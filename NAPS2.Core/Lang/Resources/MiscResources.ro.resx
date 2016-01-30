@@ -169,7 +169,7 @@
         <value>Fișier JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>Document PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Fișier PNG (*.png)</value>
@@ -193,7 +193,7 @@
         <value>Suprascrie fișierul</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
-        <value>{0} of {1}</value>
+        <value>{0} din {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
         <value>Imagine scanată</value>
@@ -241,7 +241,7 @@
         <value>Instalarea a eșuat</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Toate ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
         <value>Alese ({0})</value>
@@ -268,40 +268,40 @@
         <value>Unul sau mai multe fișiere nu s-au putut descărca.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Custom ({0}x{1} {2})</value>
+        <value>Personalizat ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
         <value>Scanează</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>Sunteti sigur că vreti sa anulati schimbarile pentru {0} imagini(e)?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>Resetează Imaginea</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>Ai facut modificari care nu sunt salvate. Esti sigur ca vrei sa iesi si sa anulezi aceste modificari?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
         <value>Unsaved Changes</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>Scaneaza pagina {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
         <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>Nici o foaie in alimentator.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
         <value>You do not have permission to copy content from the file '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>A aparut o eroare in timpul salvării fisierului.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>din {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
         <value>An unknown error ocurred during the batch scan.</value>
@@ -319,7 +319,7 @@
         <value>Batch scan stopped due to error.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>Scanning page {0}...</value>
+        <value>Scaneaza pagina {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
         <value>Scanning page {0} (scan {1})...</value>

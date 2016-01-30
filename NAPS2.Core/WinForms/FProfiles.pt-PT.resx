@@ -202,7 +202,7 @@
         <value>1</value>
     </data>
     <data name="btnAdd.Text" xml:space="preserve">
-        <value>&amp;New</value>
+        <value>&amp;Novo</value>
     </data>
     <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>

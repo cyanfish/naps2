@@ -217,7 +217,7 @@
         <value>3</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Πηγή χαρτιού:</value>
+        <value>Προέλευση χαρτιού:</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -1035,7 +1035,7 @@
         <value>30</value>
     </data>
     <data name="cbAutoSave.Text" xml:space="preserve">
-        <value>Αυτόματο Σώσιμο Ενεργό</value>
+        <value>Αυτόματη Αποθήκευση Ενεργή</value>
     </data>
     <data name="&gt;&gt;cbAutoSave.Name" xml:space="preserve">
         <value>cbAutoSave</value>
@@ -1065,7 +1065,7 @@
         <value>31</value>
     </data>
     <data name="linkAutoSaveSettings.Text" xml:space="preserve">
-        <value>Ρυθμίσεις για Αυτόματο Σώσιμο</value>
+        <value>Ρυθμίσεις Αυτόματης Αποθήκευσης</value>
     </data>
     <data name="&gt;&gt;linkAutoSaveSettings.Name" xml:space="preserve">
         <value>linkAutoSaveSettings</value>

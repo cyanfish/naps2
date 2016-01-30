@@ -142,13 +142,13 @@
         <value>300 dpi</value>
     </data>
     <data name="Dpi_400" xml:space="preserve">
-        <value>100 dpi</value>
+        <value>400 dpi</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
         <value>600 dpi</value>
     </data>
     <data name="Dpi_800" xml:space="preserve">
-        <value>100 dpi</value>
+        <value>800 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Centrează</value>
@@ -178,13 +178,13 @@
         <value>A5 (148 x 210 mm)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+        <value>B4 (250 x 353 mm)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
         <value>B5 (176x250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>Personalizat...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>US Legal (8.5x14 in)</value>

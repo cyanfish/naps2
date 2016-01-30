@@ -190,7 +190,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Remember these settings</value>
+        <value>Lembrar estas configurações</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -351,7 +351,7 @@
         <value>400, 163</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Email Settings</value>
+        <value>Definições de Email</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

@@ -169,7 +169,7 @@
         <value>Imagen JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>Documento PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Imagen PNG (*.png)</value>
@@ -274,34 +274,34 @@
         <value>Escanear</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>¿Está seguro que quiere deshacer los cambios a {0} imagen(es)?                </value>
+        <value>¿Está seguro que quiere deshacer los cambios a {0} imagen(es)?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
         <value>Reiniciar Imagen</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>Usted tiene cambios sin guardar . ¿Esta Seguro de que desea salir y descartar los cambios?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
         <value>Cambios sin guardar</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>Escaneando página {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
         <value>El escáner seleccionado no admite el uso de un alimentador . Si el escáner tiene un alimentador , intente utilizar un controlador diferente.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>Sin hojas en el alimentador.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
         <value>"Usted no tiene permiso para copiar el contenido del archivo \" { 0 }\"".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>Ocurrió un error al intentar guardar el archivo                .</value>
+        <value>Ocurrió un error al intentar guardar el archivo.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>De {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
         <value>An unknown error ocurred during the batch scan.</value>
@@ -319,7 +319,7 @@
         <value>Batch scan stopped due to error.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>Scanning page {0}...</value>
+        <value>Escaneando página {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
         <value>Scanning page {0} (scan {1})...</value>
@@ -376,7 +376,7 @@
         <value>Email PDF Progress</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>Ocurrió un error al intentar guardar el archivo                .</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
         <value>All Files</value>

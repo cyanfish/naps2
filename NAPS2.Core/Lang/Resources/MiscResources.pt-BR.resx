@@ -169,7 +169,7 @@
         <value>Arquivo JPG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>Documento PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Arquivo PNG (*.png)</value>
@@ -241,7 +241,7 @@
         <value>Falha na instalação</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>All ({0})</value>
+        <value>Todo ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
         <value>Selecionado ({0})</value>

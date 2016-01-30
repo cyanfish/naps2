@@ -265,7 +265,7 @@
         <value>9</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Subject:</value>
+        <value>Sujeto:</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -316,7 +316,7 @@
         <value>7</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Autor       :</value>
+        <value>Autor:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -391,7 +391,7 @@
         <value>20</value>
     </data>
     <data name="groupMetadata.Text" xml:space="preserve">
-        <value>Metadata</value>
+        <value>Metadato</value>
     </data>
     <data name="&gt;&gt;groupMetadata.Name" xml:space="preserve">
         <value>groupMetadata</value>
@@ -421,7 +421,7 @@
         <value>16</value>
     </data>
     <data name="cbShowUserPassword.Text" xml:space="preserve">
-        <value>Show</value>
+        <value>Mostrar</value>
     </data>
     <data name="&gt;&gt;cbShowUserPassword.Name" xml:space="preserve">
         <value>cbShowUserPassword</value>
@@ -448,7 +448,7 @@
         <value>15</value>
     </data>
     <data name="cbShowOwnerPassword.Text" xml:space="preserve">
-        <value>Show</value>
+        <value>Mostrar</value>
     </data>
     <data name="&gt;&gt;cbShowOwnerPassword.Name" xml:space="preserve">
         <value>cbShowOwnerPassword</value>
@@ -538,7 +538,7 @@
         <value>13</value>
     </data>
     <data name="cbAllowAnnotations.Text" xml:space="preserve">
-        <value>                  Permitir anotaciones                </value>
+        <value>Permitir anotaciones</value>
     </data>
     <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
         <value>cbAllowAnnotations</value>
@@ -598,7 +598,7 @@
         <value>11</value>
     </data>
     <data name="cbAllowContentCopying.Text" xml:space="preserve">
-        <value>Permitir copia de contenido       </value>
+        <value>Permitir copia de contenido</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
         <value>cbAllowContentCopying</value>
@@ -628,7 +628,7 @@
         <value>10</value>
     </data>
     <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>                  Permitir montaje del documento                </value>
+        <value>Permitir montaje del documento</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
         <value>cbAllowDocumentAssembly</value>
@@ -682,7 +682,7 @@
         <value>7</value>
     </data>
     <data name="cbAllowPrinting.Text" xml:space="preserve">
-        <value>                  Permitir Impresión                </value>
+        <value>Permitir Impresión</value>
     </data>
     <data name="&gt;&gt;cbAllowPrinting.Name" xml:space="preserve">
         <value>cbAllowPrinting</value>
@@ -781,7 +781,7 @@
         <value>1</value>
     </data>
     <data name="lblOwnerPassword.Text" xml:space="preserve">
-        <value>Contraseña de Propietario                :</value>
+        <value>Contraseña de Propietario:</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>
@@ -886,7 +886,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Restore &amp;Defaults</value>
+        <value>Restaurar los valores predeterminados</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -1020,7 +1020,7 @@
         <value>400, 658</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Configuraciones PDF </value>
+        <value>Configuraciones PDF</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

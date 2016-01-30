@@ -169,7 +169,7 @@
         <value>JPEG fájl (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF dokumentum (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>PNG fájl (*.png)</value>

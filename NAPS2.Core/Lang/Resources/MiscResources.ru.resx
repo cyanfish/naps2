@@ -169,7 +169,7 @@
         <value>Файл JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>Документ PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Файл PNG (*.png)</value>
@@ -376,12 +376,12 @@
         <value>Процесс сохранения в PDF и отправки e-mail</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>                  Ошибка при попытке автосохранения файла                .</value>
+        <value>Ошибка при попытке автосохранения файла.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Все файлы</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>Изображения</value>
     </data>
 </root>

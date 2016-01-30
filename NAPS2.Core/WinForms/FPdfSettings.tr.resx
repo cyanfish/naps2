@@ -478,7 +478,7 @@
         <value>8</value>
     </data>
     <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
-        <value>Allow Full Quality Printing</value>
+        <value>Tam Kalite Baskıya İzin Ver</value>
     </data>
     <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
         <value>cbAllowFullQualityPrinting</value>
@@ -508,7 +508,7 @@
         <value>14</value>
     </data>
     <data name="cbAllowFormFilling.Text" xml:space="preserve">
-        <value>Allow Form Filling</value>
+        <value>Form Doldurmaya İzin Ver</value>
     </data>
     <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
         <value>cbAllowFormFilling</value>
@@ -538,7 +538,7 @@
         <value>13</value>
     </data>
     <data name="cbAllowAnnotations.Text" xml:space="preserve">
-        <value>Allow Annotations</value>
+        <value>Açıklamalara İzin Ver</value>
     </data>
     <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
         <value>cbAllowAnnotations</value>
@@ -598,7 +598,7 @@
         <value>11</value>
     </data>
     <data name="cbAllowContentCopying.Text" xml:space="preserve">
-        <value>Allow Content Copying</value>
+        <value>İçerik Kopyalamaya İzin Ver</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
         <value>cbAllowContentCopying</value>
@@ -682,7 +682,7 @@
         <value>7</value>
     </data>
     <data name="cbAllowPrinting.Text" xml:space="preserve">
-        <value>Allow Printing</value>
+        <value>Baskıya İzin Ver</value>
     </data>
     <data name="&gt;&gt;cbAllowPrinting.Name" xml:space="preserve">
         <value>cbAllowPrinting</value>
