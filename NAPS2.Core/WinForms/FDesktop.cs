@@ -87,6 +87,7 @@ namespace NAPS2.WinForms
         private readonly ScannedImageList imageList = new ScannedImageList();
         private CancellationTokenSource renderThumbnailsCts;
         private LayoutManager layoutManager;
+        private bool disableSelectedIndexChangedEvent;
 
         #endregion
 
@@ -434,11 +435,14 @@ namespace NAPS2.WinForms
             }
             set
             {
+                disableSelectedIndexChangedEvent = true;
                 thumbnailList1.SelectedIndices.Clear();
                 foreach (int i in value)
                 {
                     thumbnailList1.SelectedIndices.Add(i);
                 }
+                disableSelectedIndexChangedEvent = true;
+                thumbnailList1_SelectedIndexChanged(thumbnailList1, new EventArgs());
             }
         }
 
@@ -1060,7 +1064,10 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateToolbar();
+            if (!disableSelectedIndexChangedEvent)
+            {
+                UpdateToolbar();
+            }
         }
 
         private void thumbnailList1_MouseMove(object sender, MouseEventArgs e)
