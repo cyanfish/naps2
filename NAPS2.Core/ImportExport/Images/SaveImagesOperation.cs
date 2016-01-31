@@ -155,6 +155,7 @@ namespace NAPS2.ImportExport.Images
                 }
                 finally
                 {
+                    GC.Collect();
                     InvokeFinished();
                 }
             });

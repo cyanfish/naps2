@@ -90,6 +90,7 @@ namespace NAPS2.ImportExport.Pdf
                     Log.ErrorException(MiscResources.ErrorSaving, ex);
                     InvokeError(MiscResources.ErrorSaving);
                 }
+                GC.Collect();
                 InvokeFinished();
             });
 

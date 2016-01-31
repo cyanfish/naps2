@@ -102,6 +102,7 @@ namespace NAPS2.Recovery
                                 finally
                                 {
                                     ReleaseFolderLock();
+                                    GC.Collect();
                                     InvokeFinished();
                                 }
                             });

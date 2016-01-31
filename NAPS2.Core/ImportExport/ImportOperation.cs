@@ -40,42 +40,48 @@ namespace NAPS2.ImportExport
 
             thread = threadFactory.StartThread(() =>
             {
-                foreach (var fileName in filesToImport)
-                {
-                    try
-                    {
-                        Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
-                        InvokeStatusChanged();
-                        var images = scannedImageImporter.Import(fileName, (i, j) =>
-                        {
-                            if (oneFile)
-                            {
-                                Status.CurrentProgress = i;
-                                Status.MaxProgress = j;
-                                InvokeStatusChanged();
-                            }
-                            return !cancel;
-                        });
-                        foreach (var img in images)
-                        {
-                            imageCallback(img);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
-                        InvokeError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)));
-                    }
-                    if (!oneFile)
-                    {
-                        Status.CurrentProgress++;
-                        InvokeStatusChanged();
-                    }
-                }
-                Status.Success = true;
+                Run(filesToImport, imageCallback, oneFile);
+                GC.Collect();
                 InvokeFinished();
             });
             return true;
+        }
+
+        private void Run(IEnumerable<string> filesToImport, Action<ScannedImage> imageCallback, bool oneFile)
+        {
+            foreach (var fileName in filesToImport)
+            {
+                try
+                {
+                    Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
+                    InvokeStatusChanged();
+                    var images = scannedImageImporter.Import(fileName, (i, j) =>
+                    {
+                        if (oneFile)
+                        {
+                            Status.CurrentProgress = i;
+                            Status.MaxProgress = j;
+                            InvokeStatusChanged();
+                        }
+                        return !cancel;
+                    });
+                    foreach (var img in images)
+                    {
+                        imageCallback(img);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
+                    InvokeError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)));
+                }
+                if (!oneFile)
+                {
+                    Status.CurrentProgress++;
+                    InvokeStatusChanged();
+                }
+            }
+            Status.Success = true;
         }
 
         public void WaitUntilFinished()
