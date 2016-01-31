@@ -1518,41 +1518,76 @@ namespace NAPS2.WinForms
                 using (var firstBitmap = imageList[0].GetImage())
                 {
                     ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
-                    const int maxRtfSize = 20*1000*1000;
-                    var rtfEncodedImages = new StringBuilder();
-                    rtfEncodedImages.Append("{");
-                    rtfEncodedImages.Append(GetRtfEncodedImage(firstBitmap, imageList[0].FileFormat));
-                    foreach (var img in imageList.Skip(1))
-                    {
-                        if (rtfEncodedImages.Length > maxRtfSize)
-                        {
-                            break;
-                        }
-                        var bitmap = img.GetImage();
-                        rtfEncodedImages.Append(@"\par");
-                        rtfEncodedImages.Append(GetRtfEncodedImage(bitmap, img.FileFormat));
-                        bitmap.Dispose();
-                    }
-                    rtfEncodedImages.Append("}");
-                    ido.SetData(DataFormats.Rtf, true, rtfEncodedImages.ToString());
+                    ido.SetData(DataFormats.Rtf, true, RtfEncodeImages(firstBitmap, imageList));
                 }
             }
             ido.SetData(typeof(DirectImageTransfer), new DirectImageTransfer(imageList));
             return ido;
         }
 
-        private static string GetRtfEncodedImage(Image image, ImageFormat format)
+        private static string RtfEncodeImages(Bitmap firstBitmap, List<ScannedImage> images)
         {
+            var sb = new StringBuilder();
+            sb.Append("{");
+            if (!AppendRtfEncodedImage(firstBitmap, images[0].FileFormat, sb, false))
+            {
+                return null;
+            }
+            foreach (var img in images.Skip(1))
+            {
+                using (var bitmap = img.GetImage())
+                {
+                    if (!AppendRtfEncodedImage(bitmap, img.FileFormat, sb, true))
+                    {
+                        break;
+                    }
+                }
+            }
+            sb.Append("}");
+            return sb.ToString();
+        }
+
+        private static bool AppendRtfEncodedImage(Image image, ImageFormat format, StringBuilder sb, bool par)
+        {
+            const int maxRtfSize = 20 * 1000 * 1000;
             using (var stream = new MemoryStream())
             {
                 image.Save(stream, format);
-                string hexString = BitConverter.ToString(stream.ToArray(), 0).Replace("-", string.Empty);
+                if (sb.Length + stream.Length * 2 > maxRtfSize)
+                {
+                    return false;
+                }
 
-                return @"{\pict\pngblip\picw" +
-                       image.Width + @"\pich" + image.Height +
-                       @"\picwgoa" + image.Width + @"\pichgoa" + image.Height +
-                       @"\hex " + hexString + "}";
+                if (par)
+                {
+                    sb.Append(@"\par");
+                }
+                sb.Append(@"{\pict\pngblip\picw");
+                sb.Append(image.Width);
+                sb.Append(@"\pich");
+                sb.Append(image.Height);
+                sb.Append(@"\picwgoa");
+                sb.Append(image.Width);
+                sb.Append(@"\pichgoa");
+                sb.Append(image.Height);
+                sb.Append(@"\hex ");
+                // Do a "low-level" conversion to save on memory by avoiding intermediate representations
+                stream.Seek(0, SeekOrigin.Begin);
+                int value;
+                while ((value = stream.ReadByte()) != -1)
+                {
+                    int hi = value / 16, lo = value % 16;
+                    sb.Append(GetHexChar(hi));
+                    sb.Append(GetHexChar(lo));
+                }
+                sb.Append("}");
             }
+            return true;
+        }
+
+        private static char GetHexChar(int n)
+        {
+            return (char) (n < 10 ? '0' + n : 'A' + (n - 10));
         }
 
         #endregion
