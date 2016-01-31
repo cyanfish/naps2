@@ -56,17 +56,26 @@ namespace NAPS2.WinForms
 
         public void UpdateImages(List<ScannedImage> images, List<int> selection = null)
         {
-            int delta = images.Count - Items.Count;
-            for (int i = 0; i < delta; i++)
+            if (images.Count == 0)
             {
-                Items.Add("", i);
-                Debug.Assert(selection == null);
+                // Fast case
+                Items.Clear();
+                ilThumbnailList.Images.Clear();
             }
-            for (int i = 0; i < -delta; i++)
+            else
             {
-                Items.RemoveAt(Items.Count - 1);
-                ilThumbnailList.Images.RemoveAt(ilThumbnailList.Images.Count - 1);
-                Debug.Assert(selection == null);
+                int delta = images.Count - Items.Count;
+                for (int i = 0; i < delta; i++)
+                {
+                    Items.Add("", i);
+                    Debug.Assert(selection == null);
+                }
+                for (int i = 0; i < -delta; i++)
+                {
+                    Items.RemoveAt(Items.Count - 1);
+                    ilThumbnailList.Images.RemoveAt(ilThumbnailList.Images.Count - 1);
+                    Debug.Assert(selection == null);
+                }
             }
 
             // Determine the smallest range that contains all images in the selection
