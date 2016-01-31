@@ -35,8 +35,6 @@ namespace NAPS2.WinForms
         private PictureBox pbox;
         private double xzoom;
 
-        private bool isControlKeyDown;
-
         public TiffViewer()
         {
             InitializeComponent();
@@ -132,7 +130,7 @@ namespace NAPS2.WinForms
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
-            if (isControlKeyDown)
+            if (ModifierKeys.HasFlag(Keys.Control))
             {
                 StepZoom(e.Delta / (double)SystemInformation.MouseWheelScrollDelta);
             }
@@ -145,7 +143,6 @@ namespace NAPS2.WinForms
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
-            isControlKeyDown = e.Control;
             switch (e.KeyCode)
             {
                 case Keys.OemMinus:
@@ -166,16 +163,6 @@ namespace NAPS2.WinForms
         public void StepZoom(double steps)
         {
             Zoom = Math.Round(Zoom * Math.Pow(1.2, steps));
-        }
-
-        private void TiffViewer_KeyDown(object sender, KeyEventArgs e)
-        {
-            isControlKeyDown = e.Control;
-        }
-
-        private void TiffViewer_KeyUp(object sender, KeyEventArgs e)
-        {
-            isControlKeyDown = e.Control;
         }
 
         #region Component Designer generated code
@@ -204,8 +191,6 @@ namespace NAPS2.WinForms
             this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.pbox);
             this.Name = "TiffViewer";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TiffViewer_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TiffViewer_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbox)).EndInit();
             this.ResumeLayout(false);
 

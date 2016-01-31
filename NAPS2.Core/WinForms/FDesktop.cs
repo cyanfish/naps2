@@ -85,7 +85,6 @@ namespace NAPS2.WinForms
         #region State Fields
 
         private readonly ScannedImageList imageList = new ScannedImageList();
-        private bool isControlKeyDown;
         private CancellationTokenSource renderThumbnailsCts;
         private LayoutManager layoutManager;
 
@@ -1039,18 +1038,12 @@ namespace NAPS2.WinForms
 
         private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
         {
-            isControlKeyDown = e.Control;
             ksm.Perform(e.KeyData);
-        }
-
-        private void thumbnailList1_KeyUp(object sender, KeyEventArgs e)
-        {
-            isControlKeyDown = e.Control;
         }
 
         private void thumbnailList1_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (isControlKeyDown)
+            if (ModifierKeys.HasFlag(Keys.Control))
             {
                 StepThumbnailSize(e.Delta / (double)SystemInformation.MouseWheelScrollDelta);
             }
