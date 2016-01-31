@@ -1609,6 +1609,11 @@ namespace NAPS2.WinForms
                 // Can't show visual feedback so don't do anything
                 return;
             }
+            if (thumbnailList1.ThumbnailSize.Height == thumbnailSize)
+            {
+                // Same size so no resizing needed
+                return;
+            }
 
             // Save the new size to config
             UserConfigManager.Config.ThumbnailSize = thumbnailSize;
