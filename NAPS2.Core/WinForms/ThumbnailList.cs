@@ -104,6 +104,10 @@ namespace NAPS2.WinForms
 
         public void RegenerateThumbnailList(List<ScannedImage> images)
         {
+            if (ilThumbnailList.Images.Count > 0)
+            {
+                ilThumbnailList.Images.Clear();
+            }
             var thumbnailArray = images.Select(x => (Image)thumbnails[x]).ToArray();
             ilThumbnailList.Images.AddRange(thumbnailArray);
         }
