@@ -606,7 +606,7 @@ namespace NAPS2.WinForms
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, SelectedIndices.Count()), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     imageList.Delete(SelectedIndices);
-                    UpdateThumbnails();
+                    UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                     if (imageList.Images.Any())
                     {
                         changeTracker.HasUnsavedChanges = true;
