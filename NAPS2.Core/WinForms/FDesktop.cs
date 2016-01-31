@@ -476,7 +476,7 @@ namespace NAPS2.WinForms
             thumbnailList1.UpdateImages(imageList.Images, optimizeForSelection ? SelectedIndices.Concat(selection).ToList() : null);
             SelectedIndices = selection;
             UpdateToolbar();
-            
+
             if (scrollToSelection)
             {
                 // Scroll to selection
@@ -971,7 +971,7 @@ namespace NAPS2.WinForms
             ksm.Assign(ks.Ocr, tsOcr);
             ksm.Assign(ks.Print, tsPrint);
             ksm.Assign(ks.Profiles, ShowProfilesForm);
-            
+
             ksm.Assign(ks.ReorderAltDeinterleave, tsAltDeinterleave);
             ksm.Assign(ks.ReorderAltInterleave, tsAltInterleave);
             ksm.Assign(ks.ReorderDeinterleave, tsDeinterleave);
@@ -1587,7 +1587,7 @@ namespace NAPS2.WinForms
 
         private static char GetHexChar(int n)
         {
-            return (char) (n < 10 ? '0' + n : 'A' + (n - 10));
+            return (char)(n < 10 ? '0' + n : 'A' + (n - 10));
         }
 
         #endregion
@@ -1640,19 +1640,28 @@ namespace NAPS2.WinForms
                     {
                         break;
                     }
-                    // Save the state to check later for concurrent changes
-                    var oldState = img.GetThumbnailState();
-                    // Render the thumbnail
+                    object oldState;
                     Bitmap thumbnail;
-                    try
+                    // Lock the image to prevent it from being disposed mid-render
+                    lock (img)
                     {
-                        thumbnail = img.RenderThumbnail(thumbnailSize);
-                    }
-                    catch
-                    {
-                        // An error occurred, which could mean the image was deleted
-                        // In any case we don't need to worry too much about it and can move on to the next
-                        continue;
+                        if (ct.IsCancellationRequested)
+                        {
+                            break;
+                        }
+                        // Save the state to check later for concurrent changes
+                        oldState = img.GetThumbnailState();
+                        // Render the thumbnail
+                        try
+                        {
+                            thumbnail = img.RenderThumbnail(thumbnailSize);
+                        }
+                        catch
+                        {
+                            // An error occurred, which could mean the image was deleted
+                            // In any case we don't need to worry too much about it and can move on to the next
+                            continue;
+                        }
                     }
                     // Do the rest of the stuff on the UI thread to help with synchronization
                     ScannedImage img1 = img;

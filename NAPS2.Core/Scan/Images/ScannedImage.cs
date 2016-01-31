@@ -23,13 +23,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {
@@ -93,7 +89,10 @@ namespace NAPS2.Scan.Images
         public Bitmap GetImage()
         {
             var bitmap = new Bitmap(recoveryImage.FilePath);
-            return Transform.PerformAll(bitmap, transformList);
+            lock (transformList)
+            {
+                return Transform.PerformAll(bitmap, transformList);
+            }
         }
 
         public Stream GetImageStream()
@@ -108,26 +107,36 @@ namespace NAPS2.Scan.Images
 
         public void Dispose()
         {
-            if (recoveryImage != null)
+            lock (this)
             {
-                recoveryImage.Dispose();
-            }
-            if (thumbnail != null)
-            {
-                thumbnail.Dispose();
+                if (recoveryImage != null)
+                {
+                    recoveryImage.Dispose();
+                }
+                if (thumbnail != null)
+                {
+                    thumbnail.Dispose();
+                    thumbnail = null;
+                }
             }
         }
 
         public void AddTransform(Transform transform)
         {
-            // Also updates the recovery index since they reference the same list
-            Transform.AddOrSimplify(transformList, transform);
+            lock (transformList)
+            {
+                // Also updates the recovery index since they reference the same list
+                Transform.AddOrSimplify(transformList, transform);
+            }
             recoveryImage.Save();
         }
 
         public void ResetTransforms()
         {
-            transformList.Clear();
+            lock (transformList)
+            {
+                transformList.Clear();
+            }
             recoveryImage.Save();
         }
 
