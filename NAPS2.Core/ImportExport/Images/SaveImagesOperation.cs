@@ -148,7 +148,7 @@ namespace NAPS2.ImportExport.Images
                 {
                     InvokeError(MiscResources.DontHavePermission);
                 }
-                catch (IOException ex)
+                catch (Exception ex)
                 {
                     Log.ErrorException(MiscResources.ErrorSaving, ex);
                     InvokeError(MiscResources.ErrorSaving);
