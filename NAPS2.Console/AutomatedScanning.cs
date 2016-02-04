@@ -228,7 +228,7 @@ namespace NAPS2.Console
 
             message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.To, options.EmailTo));
             message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Cc, options.EmailCc));
-            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, options.EmailTo));
+            message.Recipients.AddRange(EmailRecipient.FromText(EmailRecipientType.Bcc, options.EmailBcc));
 
             var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
             tempFolder.Create();
