@@ -441,7 +441,7 @@ namespace NAPS2.WinForms
                 {
                     thumbnailList1.SelectedIndices.Add(i);
                 }
-                disableSelectedIndexChangedEvent = true;
+                disableSelectedIndexChangedEvent = false;
                 thumbnailList1_SelectedIndexChanged(thumbnailList1, new EventArgs());
             }
         }
