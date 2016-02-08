@@ -118,6 +118,11 @@ namespace NAPS2.Console
 
             ReorderScannedImages();
 
+            if (options.AutoSave)
+            {
+                AutoSaveScannedImages();
+            }
+
             if (options.OutputPath != null)
             {
                 ExportScannedImages();
@@ -310,6 +315,22 @@ namespace NAPS2.Console
                 return false;
             }
             return true;
+        }
+
+        private void AutoSaveScannedImages()
+        {
+            OutputVerbose(ConsoleResources.AutoSaving);
+
+            if (IsPdfFile(options.OutputPath))
+            {
+                // TODO
+                ExportToPdf();
+            }
+            else
+            {
+                // TODO
+                ExportToImageFiles();
+            }
         }
 
         private void ExportScannedImages()

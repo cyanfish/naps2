@@ -226,4 +226,7 @@ Use the "--importpassword" option.</value>
   <data name="ExportingImage" xml:space="preserve">
     <value>Exporting image {0} of {1}...</value>
   </data>
+  <data name="AutoSaving" xml:space="preserve">
+    <value>Auto saving...</value>
+  </data>
 </root>

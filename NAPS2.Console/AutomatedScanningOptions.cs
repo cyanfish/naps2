@@ -32,8 +32,11 @@ namespace NAPS2.Console
         [Option('o', "output", HelpText = "The name and path of the file to save." +
                                           " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
                                           " Placeholders can be used (e.g. $(YYYY)-$(MM)-$(DD) for the date, $(hh)_$(mm)_$(ss) for the time, $(nnnn) for an auto-incrementing number).")]
-        //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan.")]
         public string OutputPath { get; set; }
+
+        [Option('a', "autosave", HelpText = "Use the Auto Save settings from the selected profile." +
+                                          " Only works if the profile has Auto Save enabled.")]
+        public bool AutoSave { get; set; }
 
         [Option('p', "profile", HelpText = "The name of the profile to use for scanning." +
                                            " If not specified, the most-recently-used profile from the GUI is selected.")]
