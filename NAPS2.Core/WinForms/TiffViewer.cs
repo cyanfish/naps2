@@ -101,6 +101,7 @@ namespace NAPS2.WinForms
                     pbox.Height = (int)displayHeight;
                     if (ZoomChanged != null)
                     {
+                        pbox.Cursor = HorizontalScroll.Visible || VerticalScroll.Visible ? Cursors.Hand : Cursors.Default;
                         ZoomChanged.Invoke(this, new EventArgs());
                     }
                 }
@@ -165,6 +166,21 @@ namespace NAPS2.WinForms
             Zoom = Math.Round(Zoom * Math.Pow(1.2, steps));
         }
 
+        private Point mousePos;
+
+        private void pbox_MouseDown(object sender, MouseEventArgs e)
+        {
+            mousePos = e.Location;
+        }
+
+        private void pbox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                AutoScrollPosition = new Point(-AutoScrollPosition.X + mousePos.X - e.X, -AutoScrollPosition.Y + mousePos.Y - e.Y);
+            }
+        }
+
         #region Component Designer generated code
         /// <summary>
         /// Required method for Designer support - do not modify 
@@ -184,6 +200,8 @@ namespace NAPS2.WinForms
             this.pbox.Name = "pbox";
             this.pbox.TabStop = false;
             this.pbox.SizeMode = PictureBoxSizeMode.Zoom;
+            this.pbox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_MouseDown);
+            this.pbox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_MouseMove);
             // 
             // TiffViewer
             // 
