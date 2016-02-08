@@ -125,23 +125,17 @@ namespace NAPS2.Scan.Wia
             }
             catch (COMException e)
             {
+                cancel = true;
                 if ((uint)e.ErrorCode == WiaApi.Errors.OUT_OF_PAPER)
                 {
                     if (ScanProfile.PaperSource != ScanSource.Glass && pageNumber == 1)
                     {
                         throw new NoPagesException();
                     }
-                    cancel = true;
                     return null;
                 }
-                else if ((uint)e.ErrorCode == WiaApi.Errors.OFFLINE)
-                {
-                    throw new DeviceOfflineException();
-                }
-                else
-                {
-                    throw new ScanDriverUnknownException(e);
-                }
+                WiaApi.ThrowDeviceError(e);
+                return null;
             }
         }
     }

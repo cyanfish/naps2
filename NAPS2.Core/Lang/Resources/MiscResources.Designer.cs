@@ -295,6 +295,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected scanner is busy..
+        /// </summary>
+        internal static string DeviceBusy {
+            get {
+                return ResourceManager.GetString("DeviceBusy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The scanner&apos;s cover is open..
+        /// </summary>
+        internal static string DeviceCoverOpen {
+            get {
+                return ResourceManager.GetString("DeviceCoverOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The selected scanner could not be found..
         /// </summary>
         internal static string DeviceNotFound {
@@ -309,6 +327,24 @@ namespace NAPS2.Lang.Resources {
         internal static string DeviceOffline {
             get {
                 return ResourceManager.GetString("DeviceOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The scanner has a paper jam..
+        /// </summary>
+        internal static string DevicePaperJam {
+            get {
+                return ResourceManager.GetString("DevicePaperJam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The scanner is warming up..
+        /// </summary>
+        internal static string DeviceWarmingUp {
+            get {
+                return ResourceManager.GetString("DeviceWarmingUp", resourceCulture);
             }
         }
         

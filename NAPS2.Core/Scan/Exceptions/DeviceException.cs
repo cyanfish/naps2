@@ -21,29 +21,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan.Exceptions
 {
-    public class DeviceOfflineException : ScanDriverException
+    public class DeviceException : ScanDriverException
     {
-        public DeviceOfflineException()
-            : base(MiscResources.DeviceOffline)
-        {
-        }
-
-        public DeviceOfflineException(string message)
+        public DeviceException(string message)
             : base(message)
-        {
-        }
-
-        public DeviceOfflineException(Exception innerException)
-            : base(MiscResources.DeviceOffline, innerException)
-        {
-        }
-
-        public DeviceOfflineException(string message, Exception innerException)
-            : base(message, innerException)
         {
         }
     }

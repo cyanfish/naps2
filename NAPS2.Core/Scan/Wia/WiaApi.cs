@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan.Exceptions;
 using WIA;
 
@@ -62,7 +63,14 @@ namespace NAPS2.Scan.Wia
             public const uint OUT_OF_PAPER = 0x80210003;
             public const uint NO_DEVICE_FOUND = 0x80210015;
             public const uint OFFLINE = 0x80210005;
-            public const uint PAPER_JAM = 0x8021000A;
+            public const uint PAPER_JAM = 0x80210002;
+            public const uint BUSY = 0x80210006;
+            public const uint COVER_OPEN = 0x80210016;
+            public const uint COMMUNICATION = 0x8021000A;
+            public const uint LOCKED = 0x8021000D;
+            public const uint INCORRECT_SETTING = 0x8021000C;
+            public const uint LAMP_OFF = 0x80210017;
+            public const uint WARMING_UP = 0x80210007;
 
             public const uint UI_CANCELED = 0x80210064;
         }
@@ -102,15 +110,8 @@ namespace NAPS2.Scan.Wia
             }
             catch (COMException e)
             {
-                if ((uint)e.ErrorCode == Errors.NO_DEVICE_FOUND)
-                {
-                    throw new NoDevicesFoundException();
-                }
-                if ((uint)e.ErrorCode == Errors.OFFLINE)
-                {
-                    throw new DeviceOfflineException();
-                }
-                throw new ScanDriverUnknownException(e);
+                ThrowDeviceError(e);
+                return null;
             }
         }
 
@@ -127,11 +128,7 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (COMException e)
                     {
-                        if ((uint)e.ErrorCode == Errors.OFFLINE)
-                        {
-                            throw new DeviceOfflineException();
-                        }
-                        throw new ScanDriverUnknownException(e);
+                        ThrowDeviceError(e);
                     }
                 }
             }
@@ -180,6 +177,35 @@ namespace NAPS2.Scan.Wia
                 item = device.Items[1];
             }
             return item;
+        }
+
+        public static void ThrowDeviceError(COMException e)
+        {
+            if ((uint)e.ErrorCode == Errors.NO_DEVICE_FOUND)
+            {
+                throw new NoDevicesFoundException();
+            }
+            if ((uint)e.ErrorCode == Errors.OFFLINE)
+            {
+                throw new DeviceException(MiscResources.DeviceOffline);
+            }
+            if ((uint)e.ErrorCode == Errors.BUSY)
+            {
+                throw new DeviceException(MiscResources.DeviceBusy);
+            }
+            if ((uint)e.ErrorCode == Errors.COVER_OPEN)
+            {
+                throw new DeviceException(MiscResources.DeviceCoverOpen);
+            }
+            if ((uint)e.ErrorCode == Errors.PAPER_JAM)
+            {
+                throw new DeviceException(MiscResources.DevicePaperJam);
+            }
+            if ((uint)e.ErrorCode == Errors.WARMING_UP)
+            {
+                throw new DeviceException(MiscResources.DeviceWarmingUp);
+            }
+            throw new ScanDriverUnknownException(e);
         }
 
         #endregion

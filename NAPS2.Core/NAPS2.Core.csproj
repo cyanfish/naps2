@@ -210,7 +210,7 @@
     <Compile Include="Recovery\RecoveryIndexManager.cs" />
     <Compile Include="Recovery\RecoveryManager.cs" />
     <Compile Include="Scan\Exceptions\DeviceNotFoundException.cs" />
-    <Compile Include="Scan\Exceptions\DeviceOfflineException.cs" />
+    <Compile Include="Scan\Exceptions\DeviceException.cs" />
     <Compile Include="Scan\Exceptions\NoDevicesFoundException.cs" />
     <Compile Include="Scan\Exceptions\ScanDriverException.cs" />
     <Compile Include="Scan\Exceptions\ScanDriverUnknownException.cs" />
