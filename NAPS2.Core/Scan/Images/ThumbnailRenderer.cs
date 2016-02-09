@@ -42,7 +42,7 @@ namespace NAPS2.Scan.Images
         /// <param name="b">The bitmap to resize.</param>
         /// <param name="size">The maximum width and height of the thumbnail.</param>
         /// <returns>The thumbnail bitmap.</returns>
-        public Bitmap RenderThumbnail(Bitmap b, int size)
+        public virtual Bitmap RenderThumbnail(Bitmap b, int size)
         {
             var result = new Bitmap(size, size);
             using (Graphics g = Graphics.FromImage(result))
