@@ -326,24 +326,26 @@ namespace NAPS2.WinForms
 
         private Point TranslatePboxCoords(Point point)
         {
-            double px = point.X;
-            double py = point.Y;
+            double px = point.X - 1;
+            double py = point.Y - 1;
             double imageAspect = workingImage.Width / (double)workingImage.Height;
-            double pboxAspect = pictureBox.Width / (double)pictureBox.Height;
+            double pboxWidth = (pictureBox.Width - 2);
+            double pboxHeight = (pictureBox.Height - 2);
+            double pboxAspect = pboxWidth / pboxHeight;
             if (pboxAspect > imageAspect)
             {
                 // Empty space on left/right
-                var emptyWidth = ((1 - imageAspect / pboxAspect) / 2 * pictureBox.Width);
+                var emptyWidth = ((1 - imageAspect / pboxAspect) / 2 * pboxWidth);
                 px = (pboxAspect / imageAspect * (px - emptyWidth));
             }
             else
             {
                 // Empty space on top/bottom
-                var emptyHeight = ((1 - pboxAspect / imageAspect) / 2 * pictureBox.Height);
+                var emptyHeight = ((1 - pboxAspect / imageAspect) / 2 * pboxHeight);
                 py = (imageAspect / pboxAspect * (py - emptyHeight));
             }
-            double x = px / pictureBox.Width * workingImage.Width;
-            double y = py / pictureBox.Height * workingImage.Height;
+            double x = px / pboxWidth * workingImage.Width;
+            double y = py / pboxHeight * workingImage.Height;
             x = Math.Max(Math.Min(x, workingImage.Width), 0);
             y = Math.Max(Math.Min(y, workingImage.Height), 0);
             return new Point((int)Math.Round(x), (int)Math.Round(y));
