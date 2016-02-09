@@ -11,11 +11,11 @@ namespace NAPS2.Scan.Images
     {
         private readonly Dictionary<ScannedImage, CacheItem> cache = new Dictionary<ScannedImage,CacheItem>();
 
-        private readonly IUserConfigManager userConfigManager;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public ThumbnailCache(IUserConfigManager userConfigManager)
+        public ThumbnailCache(ThumbnailRenderer thumbnailRenderer)
         {
-            this.userConfigManager = userConfigManager;
+            this.thumbnailRenderer = thumbnailRenderer;
         }
 
         ~ThumbnailCache()
@@ -45,7 +45,7 @@ namespace NAPS2.Scan.Images
                     {
                         // Invalidated
                         item.Thumbnail.Dispose();
-                        item.Thumbnail = scannedImage.GetThumbnail(userConfigManager.Config.ThumbnailSize);
+                        item.Thumbnail = scannedImage.GetThumbnail(thumbnailRenderer);
                         item.State = newState;
                     }
                     return item.Thumbnail;
@@ -55,7 +55,7 @@ namespace NAPS2.Scan.Images
                     // Cache miss
                     var item = new CacheItem
                     {
-                        Thumbnail = scannedImage.GetThumbnail(userConfigManager.Config.ThumbnailSize),
+                        Thumbnail = scannedImage.GetThumbnail(thumbnailRenderer),
                         State = newState
                     };
                     return item.Thumbnail;

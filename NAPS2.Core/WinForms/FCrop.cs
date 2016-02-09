@@ -34,15 +34,17 @@ namespace NAPS2.WinForms
     partial class FCrop : FormBase
     {
         private readonly ChangeTracker changeTracker;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
         private Bitmap workingImage, workingImage2;
         private bool previewOutOfDate;
         private bool working;
         private Timer previewTimer;
 
-        public FCrop(ChangeTracker changeTracker)
+        public FCrop(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer)
         {
             this.changeTracker = changeTracker;
+            this.thumbnailRenderer = thumbnailRenderer;
             InitializeComponent();
 
             CropTransform = new CropTransform();
@@ -179,14 +181,14 @@ namespace NAPS2.WinForms
                         foreach (var img in ImagesToTransform)
                         {
                             img.AddTransform(ScaleCropTransform(img, referenceBitmap));
-                            img.SetThumbnail(img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
+                            img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
                         }
                     }
                 }
                 else
                 {
                     Image.AddTransform(CropTransform);
-                    Image.SetThumbnail(Image.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
+                    Image.SetThumbnail(thumbnailRenderer.RenderThumbnail(Image));
                 }
                 changeTracker.HasUnsavedChanges = true;
             }

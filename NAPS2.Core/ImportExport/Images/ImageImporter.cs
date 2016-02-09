@@ -11,6 +11,13 @@ namespace NAPS2.ImportExport.Images
 {
     public class ImageImporter : IImageImporter
     {
+        private readonly ThumbnailRenderer thumbnailRenderer;
+
+        public ImageImporter(ThumbnailRenderer thumbnailRenderer)
+        {
+            this.thumbnailRenderer = thumbnailRenderer;
+        }
+
         public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
         {
             if (!progressCallback(0, 1))
@@ -38,7 +45,9 @@ namespace NAPS2.ImportExport.Images
                         yield break;
                     }
                     toImport.SelectActiveFrame(FrameDimension.Page, i);
-                    yield return new ScannedImage(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
+                    var image = new ScannedImage(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
+                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(toImport));
+                    yield return image;
                 }
                 progressCallback(frameCount, frameCount);
             }

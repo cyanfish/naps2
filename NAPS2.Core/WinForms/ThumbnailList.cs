@@ -40,7 +40,7 @@ namespace NAPS2.WinForms
             LargeImageList = ilThumbnailList;
         }
 
-        public IUserConfigManager UserConfigManager
+        public ThumbnailRenderer ThumbnailRenderer
         {
             set
             {

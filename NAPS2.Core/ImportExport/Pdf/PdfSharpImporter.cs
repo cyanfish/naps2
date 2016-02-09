@@ -20,11 +20,13 @@ namespace NAPS2.ImportExport.Pdf
     {
         private readonly IErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider)
+        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
+            this.thumbnailRenderer = thumbnailRenderer;
         }
 
         public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
@@ -145,18 +147,20 @@ namespace NAPS2.ImportExport.Pdf
                 using (var bitmap = new Bitmap(memoryStream))
                 {
                     bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                    return new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
+                    var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
+                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                    return image;
                 }
             }
         }
 
-        private ScannedImage ExportAsPngImage(PdfPage page, PdfDictionary image)
+        private ScannedImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject)
         {
-            int width = image.Elements.GetInteger(PdfImage.Keys.Width);
-            int height = image.Elements.GetInteger(PdfImage.Keys.Height);
-            int bitsPerComponent = image.Elements.GetInteger(PdfImage.Keys.BitsPerComponent);
+            int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
+            int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
+            int bitsPerComponent = imageObject.Elements.GetInteger(PdfImage.Keys.BitsPerComponent);
 
-            var buffer = image.Stream.UnfilteredValue;
+            var buffer = imageObject.Stream.UnfilteredValue;
 
             Bitmap bitmap;
             ScanBitDepth bitDepth;
@@ -179,7 +183,9 @@ namespace NAPS2.ImportExport.Pdf
             using (bitmap)
             {
                 bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                return new ScannedImage(bitmap, bitDepth, true, -1);
+                var image = new ScannedImage(bitmap, bitDepth, true, -1);
+                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                return image;
             }
         }
 

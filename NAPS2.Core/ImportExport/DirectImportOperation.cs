@@ -14,15 +14,15 @@ namespace NAPS2.ImportExport
 {
     public class DirectImportOperation : OperationBase
     {
-        private readonly IUserConfigManager userConfigManager;
+        private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ThreadFactory threadFactory;
 
         private bool cancel;
         private Thread thread;
 
-        public DirectImportOperation(IUserConfigManager userConfigManager, ThreadFactory threadFactory)
+        public DirectImportOperation(ThumbnailRenderer thumbnailRenderer, ThreadFactory threadFactory)
         {
-            this.userConfigManager = userConfigManager;
+            this.thumbnailRenderer = thumbnailRenderer;
             this.threadFactory = threadFactory;
 
             AllowCancel = true;
@@ -45,22 +45,23 @@ namespace NAPS2.ImportExport
                 {
                     try
                     {
+                        ScannedImage img;
                         using (var bitmap = new Bitmap(Path.Combine(data.RecoveryFolder, ir.FileName)))
                         {
-                            var img = new ScannedImage(bitmap, ir.BitDepth, ir.HighQuality, -1);
-                            foreach (var transform in ir.TransformList)
-                            {
-                                img.AddTransform(transform);
-                            }
-                            img.SetThumbnail(img.RenderThumbnail(userConfigManager.Config.ThumbnailSize));
-                            imageCallback(img);
+                            img = new ScannedImage(bitmap, ir.BitDepth, ir.HighQuality, -1);
+                        }
+                        foreach (var transform in ir.TransformList)
+                        {
+                            img.AddTransform(transform);
+                        }
+                        img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
+                        imageCallback(img);
 
-                            Status.CurrentProgress++;
-                            InvokeStatusChanged();
-                            if (cancel)
-                            {
-                                break;
-                            }
+                        Status.CurrentProgress++;
+                        InvokeStatusChanged();
+                        if (cancel)
+                        {
+                            break;
                         }
                     }
                     catch (Exception ex)

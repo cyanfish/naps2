@@ -140,11 +140,11 @@ namespace NAPS2.Scan.Images
             recoveryImage.Save();
         }
 
-        public Bitmap GetThumbnail(int preferredSize)
+        public Bitmap GetThumbnail(ThumbnailRenderer thumbnailRenderer)
         {
             if (thumbnail == null)
             {
-                thumbnail = RenderThumbnail(preferredSize);
+                thumbnail = thumbnailRenderer.RenderThumbnail(this);
             }
             Debug.Assert(thumbnail != null);
             return (Bitmap)thumbnail.Clone();
@@ -162,14 +162,6 @@ namespace NAPS2.Scan.Images
                 thumbnail.Dispose();
             }
             thumbnail = bitmap;
-        }
-
-        public Bitmap RenderThumbnail(int size)
-        {
-            using (var img = GetImage())
-            {
-                return ThumbnailHelper.GetThumbnail(img, size);
-            }
         }
 
         public void MovedTo(int index)

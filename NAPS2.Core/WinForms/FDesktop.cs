@@ -88,12 +88,13 @@ namespace NAPS2.WinForms
         private CancellationTokenSource renderThumbnailsCts;
         private LayoutManager layoutManager;
         private bool disableSelectedIndexChangedEvent;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
         #endregion
 
         #region Initialization and Culture
 
-        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm)
+        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer)
         {
             this.emailer = emailer;
             this.stringWrapper = stringWrapper;
@@ -114,6 +115,7 @@ namespace NAPS2.WinForms
             this.operationFactory = operationFactory;
             this.userConfigManager = userConfigManager;
             this.ksm = ksm;
+            this.thumbnailRenderer = thumbnailRenderer;
             InitializeComponent();
 
             Shown += FDesktop_Shown;
@@ -131,8 +133,8 @@ namespace NAPS2.WinForms
         /// </summary>
         private void PostInitializeComponent()
         {
-            imageList.UserConfigManager = UserConfigManager;
-            thumbnailList1.UserConfigManager = UserConfigManager;
+            imageList.ThumbnailRenderer = thumbnailRenderer;
+            thumbnailList1.ThumbnailRenderer = thumbnailRenderer;
             int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
 
@@ -516,8 +518,8 @@ namespace NAPS2.WinForms
             ctxSelectAll.Enabled = imageList.Images.Any();
 
             // Other buttons
-            btnZoomIn.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize < ThumbnailHelper.MAX_SIZE;
-            btnZoomOut.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize > ThumbnailHelper.MIN_SIZE;
+            btnZoomIn.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize < ThumbnailRenderer.MAX_SIZE;
+            btnZoomOut.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize > ThumbnailRenderer.MIN_SIZE;
         }
 
         private void UpdateScanButton()
@@ -1597,8 +1599,8 @@ namespace NAPS2.WinForms
         private void StepThumbnailSize(double step)
         {
             int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
-            thumbnailSize += (int)(ThumbnailHelper.STEP_SIZE * step);
-            thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailHelper.MAX_SIZE), ThumbnailHelper.MIN_SIZE);
+            thumbnailSize += (int)(ThumbnailRenderer.STEP_SIZE * step);
+            thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailRenderer.MAX_SIZE), ThumbnailRenderer.MIN_SIZE);
             ResizeThumbnails(thumbnailSize);
         }
 
@@ -1659,7 +1661,7 @@ namespace NAPS2.WinForms
                         // Render the thumbnail
                         try
                         {
-                            thumbnail = img.RenderThumbnail(thumbnailSize);
+                            thumbnail = thumbnailRenderer.RenderThumbnail(img, thumbnailSize);
                         }
                         catch
                         {

@@ -98,7 +98,7 @@ namespace NAPS2.Console
                 return;
             }
 
-            imageList = new ScannedImageList { UserConfigManager = userConfigManager };
+            imageList = new ScannedImageList();
 
             if (options.ImportPath != null)
             {

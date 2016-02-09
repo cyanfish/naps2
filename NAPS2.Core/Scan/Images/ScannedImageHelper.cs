@@ -31,6 +31,11 @@ namespace NAPS2.Scan.Images
                 // Store as PNG
                 // Lossless, but some images (color/grayscale) take up lots of storage
                 encodedBitmap = EncodePng(sourceImage);
+            } else if (Equals(sourceImage.RawFormat, ImageFormat.Jpeg))
+            {
+                // Store as JPEG
+                // Since the image was originally in JPEG format, PNG is unlikely to have size benefits
+                encodedBitmap = EncodeJpeg(sourceImage, quality);
             }
             else
             {

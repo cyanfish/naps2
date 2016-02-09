@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using NAPS2.Config;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -36,12 +37,14 @@ namespace NAPS2.Scan.Wia
         private readonly IWiaTransfer wiaTransfer;
         private readonly ThreadFactory threadFactory;
         private readonly IBlankDetector blankDetector;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public WiaScanDriver(IWiaTransfer wiaTransfer, ThreadFactory threadFactory, IBlankDetector blankDetector)
+        public WiaScanDriver(IWiaTransfer wiaTransfer, ThreadFactory threadFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer)
         {
             this.wiaTransfer = wiaTransfer;
             this.threadFactory = threadFactory;
             this.blankDetector = blankDetector;
+            this.thumbnailRenderer = thumbnailRenderer;
         }
 
         public override string DriverName
@@ -117,6 +120,7 @@ namespace NAPS2.Scan.Wia
                             }
                             ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
                             var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                            image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
                             ScannedImageHelper.PostProcessStep2(image, ScanProfile);
                             return image;
                         }

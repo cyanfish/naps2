@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
@@ -17,19 +16,19 @@ namespace NAPS2.Recovery
     public class RecoveryManager
     {
         private readonly IFormFactory formFactory;
-        private readonly IUserConfigManager userConfigManager;
         private readonly ThreadFactory threadFactory;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public RecoveryManager(IFormFactory formFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
+        public RecoveryManager(IFormFactory formFactory, ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer)
         {
             this.formFactory = formFactory;
-            this.userConfigManager = userConfigManager;
             this.threadFactory = threadFactory;
+            this.thumbnailRenderer = thumbnailRenderer;
         }
 
         public void RecoverScannedImages(Action<ScannedImage> imageCallback)
         {
-            var op = new RecoveryOperation(formFactory, userConfigManager, threadFactory);
+            var op = new RecoveryOperation(formFactory, threadFactory, thumbnailRenderer);
             var progressForm = formFactory.Create<FProgress>();
             progressForm.Operation = op;
             if (op.Start(imageCallback))
@@ -41,8 +40,8 @@ namespace NAPS2.Recovery
         private class RecoveryOperation : OperationBase
         {
             private readonly IFormFactory formFactory;
-            private readonly IUserConfigManager userConfigManager;
             private readonly ThreadFactory threadFactory;
+            private readonly ThumbnailRenderer thumbnailRenderer;
 
             private FileStream lockFile;
             private DirectoryInfo folderToRecoverFrom;
@@ -51,11 +50,11 @@ namespace NAPS2.Recovery
             private DateTime scannedDateTime;
             private bool cancel;
 
-            public RecoveryOperation(IFormFactory formFactory, IUserConfigManager userConfigManager, ThreadFactory threadFactory)
+            public RecoveryOperation(IFormFactory formFactory, ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer)
             {
                 this.formFactory = formFactory;
-                this.userConfigManager = userConfigManager;
                 this.threadFactory = threadFactory;
+                this.thumbnailRenderer = thumbnailRenderer;
 
                 ProgressTitle = MiscResources.ImportProgress;
                 AllowCancel = true;
@@ -137,18 +136,17 @@ namespace NAPS2.Recovery
                     }
 
                     string imagePath = Path.Combine(folderToRecoverFrom.FullName, indexImage.FileName);
+                    ScannedImage scannedImage;
                     using (var bitmap = new Bitmap(imagePath))
                     {
-                        var scannedImage = new ScannedImage(bitmap, indexImage.BitDepth,
-                            indexImage.HighQuality, -1);
-                        foreach (var transform in indexImage.TransformList)
-                        {
-                            scannedImage.AddTransform(transform);
-                        }
-                        scannedImage.SetThumbnail(
-                            scannedImage.RenderThumbnail(userConfigManager.Config.ThumbnailSize));
-                        imageCallback(scannedImage);
+                        scannedImage = new ScannedImage(bitmap, indexImage.BitDepth, indexImage.HighQuality, -1);
                     }
+                    foreach (var transform in indexImage.TransformList)
+                    {
+                        scannedImage.AddTransform(transform);
+                    }
+                    scannedImage.SetThumbnail(thumbnailRenderer.RenderThumbnail(scannedImage));
+                    imageCallback(scannedImage);
 
                     Status.CurrentProgress++;
                     InvokeStatusChanged();

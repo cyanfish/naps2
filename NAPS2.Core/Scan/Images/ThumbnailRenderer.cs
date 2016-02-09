@@ -3,15 +3,38 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using NAPS2.Config;
 
 namespace NAPS2.Scan.Images
 {
-    internal static class ThumbnailHelper
+    public class ThumbnailRenderer
     {
         public const int MIN_SIZE = 64;
         public const int DEFAULT_SIZE = 128;
         public const int MAX_SIZE = 256;
         public const int STEP_SIZE = 32;
+
+        private readonly IUserConfigManager userConfigManager;
+
+        public ThumbnailRenderer(IUserConfigManager userConfigManager)
+        {
+            this.userConfigManager = userConfigManager;
+        }
+
+        public Bitmap RenderThumbnail(ScannedImage scannedImage)
+        {
+            return RenderThumbnail(scannedImage.GetImage(), userConfigManager.Config.ThumbnailSize);
+        }
+
+        public Bitmap RenderThumbnail(ScannedImage scannedImage, int size)
+        {
+            return RenderThumbnail(scannedImage.GetImage(), size);
+        }
+
+        public Bitmap RenderThumbnail(Bitmap b)
+        {
+            return RenderThumbnail(b, userConfigManager.Config.ThumbnailSize);
+        }
 
         /// <summary>
         /// Gets a bitmap resized to fit within a thumbnail rectangle, including a border around the picture.
@@ -19,7 +42,7 @@ namespace NAPS2.Scan.Images
         /// <param name="b">The bitmap to resize.</param>
         /// <param name="size">The maximum width and height of the thumbnail.</param>
         /// <returns>The thumbnail bitmap.</returns>
-        public static Bitmap GetThumbnail(Bitmap b, int size)
+        public Bitmap RenderThumbnail(Bitmap b, int size)
         {
             var result = new Bitmap(size, size);
             using (Graphics g = Graphics.FromImage(result))

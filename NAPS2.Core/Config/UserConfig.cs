@@ -36,7 +36,7 @@ namespace NAPS2.Config
         public UserConfig()
         {
             FormStates = new List<FormState>();
-            ThumbnailSize = ThumbnailHelper.DEFAULT_SIZE;
+            ThumbnailSize = ThumbnailRenderer.DEFAULT_SIZE;
         }
 
         public const int CURRENT_VERSION = 2;

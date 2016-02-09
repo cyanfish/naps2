@@ -33,15 +33,17 @@ namespace NAPS2.WinForms
     partial class FContrast : FormBase
     {
         private readonly ChangeTracker changeTracker;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
         private Bitmap workingImage;
         private bool previewOutOfDate;
         private bool working;
         private Timer previewTimer;
 
-        public FContrast(ChangeTracker changeTracker)
+        public FContrast(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer)
         {
             this.changeTracker = changeTracker;
+            this.thumbnailRenderer = thumbnailRenderer;
             InitializeComponent();
 
             ContrastTransform = new TrueContrastTransform();
@@ -133,7 +135,7 @@ namespace NAPS2.WinForms
                 foreach (var img in ImagesToTransform)
                 {
                     img.AddTransform(ContrastTransform);
-                    img.SetThumbnail(img.RenderThumbnail(UserConfigManager.Config.ThumbnailSize));
+                    img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
                 }
                 changeTracker.HasUnsavedChanges = true;
             }

@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
@@ -21,6 +22,7 @@ namespace NAPS2.Scan.Twain
 
         private readonly IFormFactory formFactory;
         private readonly IBlankDetector blankDetector;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
         static TwainWrapper()
         {
@@ -30,10 +32,11 @@ namespace NAPS2.Scan.Twain
 #endif
         }
 
-        public TwainWrapper(IFormFactory formFactory, IBlankDetector blankDetector)
+        public TwainWrapper(IFormFactory formFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer)
         {
             this.formFactory = formFactory;
             this.blankDetector = blankDetector;
+            this.thumbnailRenderer = thumbnailRenderer;
         }
 
         public List<ScanDevice> GetDeviceList()
@@ -88,6 +91,7 @@ namespace NAPS2.Scan.Twain
                             ? ScanBitDepth.BlackWhite
                             : ScanBitDepth.C24Bit;
                         var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
                         ScannedImageHelper.PostProcessStep2(image, scanProfile);
                         if (scanParams.DetectPatchCodes)
                         {
