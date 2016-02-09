@@ -117,15 +117,15 @@ namespace NAPS2.WinForms
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.btnRevert);
             this.Controls.Add(this.checkboxApplyToSelected);
+            this.Controls.Add(this.tbRight);
+            this.Controls.Add(this.tbBottom);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.tbLeft);
             this.Controls.Add(this.tbTop);
-            this.Controls.Add(this.btnRevert);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.tbBottom);
-            this.Controls.Add(this.tbRight);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FCrop";

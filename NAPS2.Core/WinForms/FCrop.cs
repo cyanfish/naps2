@@ -80,11 +80,16 @@ namespace NAPS2.WinForms
                 ConditionalControls.Hide(checkboxApplyToSelected, 6);
             }
 
-            new LayoutManager(this)
-                .Bind(tbLeft, tbRight, pictureBox)
+            var lm = new LayoutManager(this)
+                .Bind(pictureBox)
                     .WidthToForm()
-                .Bind(tbTop, tbBottom, pictureBox)
                     .HeightToForm()
+                .Bind(tbLeft, tbRight)
+                    .WidthTo(() => (int)(GetImageWidthRatio() * pictureBox.Width))
+                    .LeftTo(() => (int)((1 - GetImageWidthRatio()) * pictureBox.Width / 2))
+                .Bind(tbTop, tbBottom)
+                    .HeightTo(() => (int)(GetImageHeightRatio() * pictureBox.Height))
+                    .TopTo(() => (int)((1 - GetImageHeightRatio()) * pictureBox.Height / 2))
                 .Bind(tbBottom, btnOK, btnCancel)
                     .RightToForm()
                 .Bind(tbRight, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
@@ -96,6 +101,38 @@ namespace NAPS2.WinForms
             workingImage2 = Image.GetImage();
             UpdateCropBounds();
             UpdatePreviewBox();
+
+            lm.UpdateLayout();
+        }
+
+        private double GetImageWidthRatio()
+        {
+            if (workingImage == null)
+            {
+                return 1;
+            }
+            double imageAspect = workingImage.Width / (double)workingImage.Height;
+            double pboxAspect = pictureBox.Width / (double)pictureBox.Height;
+            if (imageAspect > pboxAspect)
+            {
+                return 1;
+            }
+            return imageAspect / pboxAspect;
+        }
+
+        private double GetImageHeightRatio()
+        {
+            if (workingImage == null)
+            {
+                return 1;
+            }
+            double imageAspect = workingImage.Width / (double)workingImage.Height;
+            double pboxAspect = pictureBox.Width / (double)pictureBox.Height;
+            if (pboxAspect > imageAspect)
+            {
+                return 1;
+            }
+            return pboxAspect / imageAspect;
         }
 
         private void UpdateCropBounds()
