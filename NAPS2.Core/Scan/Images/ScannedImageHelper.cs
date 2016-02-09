@@ -10,19 +10,18 @@ namespace NAPS2.Scan.Images
 {
     internal static class ScannedImageHelper
     {
-        public static void GetSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, int quality, out Bitmap bitmap, out MemoryStream encodedBitmap, out ImageFormat imageFormat)
+        public static string SaveSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, int quality, out ImageFormat imageFormat)
         {
-            // Defaults for out arguments
-            bitmap = null;
-            encodedBitmap = null;
-            imageFormat = ImageFormat.Png;
-
             // Store the image in as little space as possible
             if (bitDepth == ScanBitDepth.BlackWhite)
             {
-                // Store as a 1-bit bitmap
+                // Convert to a 1-bit bitmap before saving to help compression
                 // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
-                bitmap = (Bitmap)BitmapHelper.CopyToBpp(sourceImage, 1).Clone();
+                using (var bitmap = BitmapHelper.CopyToBpp(sourceImage, 1))
+                {
+                    imageFormat = ImageFormat.Png;
+                    return EncodePng(bitmap);
+                }
                 // Note that if a black and white image comes from native WIA, bitDepth is unknown,
                 // so the image will be png-encoded below instead of using a 1-bit bitmap
             }
@@ -30,47 +29,56 @@ namespace NAPS2.Scan.Images
             {
                 // Store as PNG
                 // Lossless, but some images (color/grayscale) take up lots of storage
-                encodedBitmap = EncodePng(sourceImage);
-            } else if (Equals(sourceImage.RawFormat, ImageFormat.Jpeg))
+                imageFormat = ImageFormat.Png;
+                return EncodePng(sourceImage);
+            }
+            else if (Equals(sourceImage.RawFormat, ImageFormat.Jpeg))
             {
                 // Store as JPEG
                 // Since the image was originally in JPEG format, PNG is unlikely to have size benefits
-                encodedBitmap = EncodeJpeg(sourceImage, quality);
+                imageFormat = ImageFormat.Jpeg;
+                return EncodeJpeg(sourceImage, quality);
             }
             else
             {
                 // Store as PNG/JPEG depending on which is smaller
                 var pngEncoded = EncodePng(sourceImage);
                 var jpegEncoded = EncodeJpeg(sourceImage, quality);
-                if (pngEncoded.Length <= jpegEncoded.Length)
+                if (new FileInfo(pngEncoded).Length <= new FileInfo(jpegEncoded).Length)
                 {
                     // Probably a black and white image (from native WIA, so bitDepth is unknown), which PNG compresses well vs. JPEG
-                    encodedBitmap = pngEncoded;
-                    jpegEncoded.Dispose();
+                    File.Delete(jpegEncoded);
+                    imageFormat = ImageFormat.Png;
+                    return pngEncoded;
                 }
                 else
                 {
                     // Probably a color or grayscale image, which JPEG compresses well vs. PNG
-                    encodedBitmap = jpegEncoded;
-                    pngEncoded.Dispose();
+                    File.Delete(pngEncoded);
                     imageFormat = ImageFormat.Jpeg;
+                    return jpegEncoded;
                 }
             }
         }
 
-        private static MemoryStream EncodePng(Bitmap bitmap)
+        private static string GetTempFilePath()
         {
-            var encoded = new MemoryStream();
-            bitmap.Save(encoded, ImageFormat.Png);
-            return encoded;
+            return Path.Combine(Paths.Temp, Path.GetRandomFileName());
         }
 
-        private static MemoryStream EncodeJpeg(Bitmap bitmap, int quality)
+        private static string EncodePng(Bitmap bitmap)
         {
-            var encoded = new MemoryStream();
+            var tempFilePath = GetTempFilePath();
+            bitmap.Save(tempFilePath, ImageFormat.Png);
+            return tempFilePath;
+        }
+
+        private static string EncodeJpeg(Bitmap bitmap, int quality)
+        {
+            var tempFilePath = GetTempFilePath();
             if (quality == -1)
             {
-                bitmap.Save(encoded, ImageFormat.Jpeg);
+                bitmap.Save(tempFilePath, ImageFormat.Jpeg);
             }
             else
             {
@@ -78,9 +86,9 @@ namespace NAPS2.Scan.Images
                 var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
-                bitmap.Save(encoded, encoder, encoderParams);
+                bitmap.Save(tempFilePath, encoder, encoderParams);
             }
-            return encoded;
+            return tempFilePath;
         }
 
         public static Bitmap PostProcessStep1(Image output, ScanProfile profile)

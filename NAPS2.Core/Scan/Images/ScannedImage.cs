@@ -31,6 +31,8 @@ namespace NAPS2.Scan.Images
 {
     public class ScannedImage : IDisposable
     {
+        // Store the base image and metadata on disk using a separate class to manage lifetime
+        // If NAPS2 crashes, the image data can be recovered by the next instance of NAPS2 to start
         private readonly RecoveryImage recoveryImage;
 
         // Store a base image and transform pair (rather than doing the actual transform on the base image)
@@ -41,29 +43,13 @@ namespace NAPS2.Scan.Images
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
-            Bitmap baseImage;
-            MemoryStream baseImageEncoded;
-            ImageFormat baseImageFileFormat;
-            ScannedImageHelper.GetSmallestBitmap(img, bitDepth, highQuality, quality, out baseImage, out baseImageEncoded, out baseImageFileFormat);
+            ImageFormat fileFormat;
+            string tempFilePath = ScannedImageHelper.SaveSmallestBitmap(img, bitDepth, highQuality, quality, out fileFormat);
 
             transformList = new List<Transform>();
-            recoveryImage = RecoveryImage.CreateNew(baseImageFileFormat, bitDepth, highQuality, transformList);
+            recoveryImage = RecoveryImage.CreateNew(fileFormat, bitDepth, highQuality, transformList);
 
-            if (baseImage != null)
-            {
-                baseImage.Save(recoveryImage.FilePath, recoveryImage.FileFormat);
-                baseImage.Dispose();
-            }
-            else
-            {
-                Debug.Assert(baseImageEncoded != null);
-                using (var fs = new FileStream(recoveryImage.FilePath, FileMode.CreateNew))
-                {
-                    baseImageEncoded.Seek(0, SeekOrigin.Begin);
-                    baseImageEncoded.CopyTo(fs);
-                }
-                baseImageEncoded.Dispose();
-            }
+            File.Move(tempFilePath, recoveryImage.FilePath);
 
             recoveryImage.Save();
         }
@@ -111,6 +97,7 @@ namespace NAPS2.Scan.Images
             {
                 if (recoveryImage != null)
                 {
+                    // Delete the image data on disk
                     recoveryImage.Dispose();
                 }
                 if (thumbnail != null)
