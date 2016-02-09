@@ -250,5 +250,66 @@ namespace NAPS2.WinForms
                 previewTimer.Dispose();
             }
         }
+
+        private Point dragStartCoords;
+
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragStartCoords = TranslatePboxCoords(e.Location);
+        }
+
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                var dragEndCoords = TranslatePboxCoords(e.Location);
+                if (dragEndCoords.X > dragStartCoords.X)
+                {
+                    tbLeft.Value = dragStartCoords.X;
+                    tbRight.Value = dragEndCoords.X;
+                }
+                else
+                {
+                    tbLeft.Value = dragEndCoords.X;
+                    tbRight.Value = dragStartCoords.X;
+                }
+                if (dragEndCoords.Y > dragStartCoords.Y)
+                {
+                    tbTop.Value = workingImage.Height - dragStartCoords.Y;
+                    tbBottom.Value = workingImage.Height - dragEndCoords.Y;
+                }
+                else
+                {
+                    tbTop.Value = workingImage.Height - dragEndCoords.Y;
+                    tbBottom.Value = workingImage.Height - dragStartCoords.Y;
+                }
+                UpdateTransform();
+            }
+        }
+
+        private Point TranslatePboxCoords(Point point)
+        {
+            double px = point.X;
+            double py = point.Y;
+            double imageAspect = workingImage.Width / (double)workingImage.Height;
+            double pboxAspect = pictureBox.Width / (double)pictureBox.Height;
+            if (pboxAspect > imageAspect)
+            {
+                // Empty space on left/right
+                var emptyWidth = ((1 - imageAspect / pboxAspect) / 2 * pictureBox.Width);
+                px = (pboxAspect / imageAspect * (px - emptyWidth));
+            }
+            else
+            {
+                // Empty space on top/bottom
+                var emptyHeight = ((1 - pboxAspect / imageAspect) / 2 * pictureBox.Height);
+                py = (imageAspect / pboxAspect * (py - emptyHeight));
+            }
+            double x = px / pictureBox.Width * workingImage.Width;
+            double y = py / pictureBox.Height * workingImage.Height;
+            x = Math.Max(Math.Min(x, workingImage.Width), 0);
+            y = Math.Max(Math.Min(y, workingImage.Height), 0);
+            return new Point((int)Math.Round(x), (int)Math.Round(y));
+        }
     }
 }
