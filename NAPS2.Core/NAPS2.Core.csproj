@@ -97,6 +97,7 @@
     <Compile Include="Operation\IOperationFactory.cs" />
     <Compile Include="Operation\OperationBase.cs" />
     <Compile Include="Recovery\RecoveryImage.cs" />
+    <Compile Include="Scan\SaveSeparator.cs" />
     <Compile Include="Scan\Batch\BatchScanPerformer.cs" />
     <Compile Include="Scan\Batch\BatchSettings.cs" />
     <Compile Include="Scan\Exceptions\NoDuplexSupportException.cs" />

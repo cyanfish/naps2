@@ -50,14 +50,14 @@ namespace NAPS2.ImportExport
             {
                 bool ok = true;
                 DateTime now = DateTime.Now;
-                if (settings.Separator == AutoSaveSeparator.FilePerScan)
+                if (settings.Separator == SaveSeparator.FilePerScan)
                 {
                     if (!SaveOneFile(settings, now, 0, images))
                     {
                         ok = false;
                     }
                 }
-                else if (settings.Separator == AutoSaveSeparator.FilePerPage)
+                else if (settings.Separator == SaveSeparator.FilePerPage)
                 {
                     for (int i = 0; i < images.Count; i++)
                     {
@@ -67,7 +67,7 @@ namespace NAPS2.ImportExport
                         }
                     }
                 }
-                else if (settings.Separator == AutoSaveSeparator.PatchT)
+                else if (settings.Separator == SaveSeparator.PatchT)
                 {
                     var imageSet = new List<ScannedImage>();
                     int fileIndex = 0;

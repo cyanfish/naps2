@@ -17,16 +17,9 @@ namespace NAPS2.Scan.Batch
 
         public BatchOutputType OutputType { get; set;  }
 
-        public BatchSaveSeparator SaveSeparator { get; set; }
+        public SaveSeparator SaveSeparator { get; set; }
 
         public string SavePath { get; set; }
-    }
-
-    public enum BatchSaveSeparator
-    {
-        FilePerPage,
-        FilePerScan,
-        PatchT
     }
 
     public enum BatchOutputType

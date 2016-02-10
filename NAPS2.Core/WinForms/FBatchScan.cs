@@ -106,9 +106,9 @@ namespace NAPS2.WinForms
             rdSaveToSingleFile.Checked = BatchSettings.OutputType == BatchOutputType.SingleFile;
             rdSaveToMultipleFiles.Checked = BatchSettings.OutputType == BatchOutputType.MultipleFiles;
 
-            rdFilePerScan.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.FilePerScan;
-            rdFilePerPage.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.FilePerPage;
-            rdSeparateByPatchT.Checked = BatchSettings.SaveSeparator == BatchSaveSeparator.PatchT;
+            rdFilePerScan.Checked = BatchSettings.SaveSeparator == SaveSeparator.FilePerScan;
+            rdFilePerPage.Checked = BatchSettings.SaveSeparator == SaveSeparator.FilePerPage;
+            rdSeparateByPatchT.Checked = BatchSettings.SaveSeparator == SaveSeparator.PatchT;
 
             txtFilePath.Text = BatchSettings.SavePath;
         }
@@ -153,9 +153,9 @@ namespace NAPS2.WinForms
                                      : rdSaveToMultipleFiles.Checked ? BatchOutputType.MultipleFiles
                                      : BatchOutputType.Load;
 
-            BatchSettings.SaveSeparator = rdFilePerScan.Checked ? BatchSaveSeparator.FilePerScan
-                                        : rdSeparateByPatchT.Checked ? BatchSaveSeparator.PatchT
-                                        : BatchSaveSeparator.FilePerPage;
+            BatchSettings.SaveSeparator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
+                                        : rdSeparateByPatchT.Checked ? SaveSeparator.PatchT
+                                        : SaveSeparator.FilePerPage;
 
             BatchSettings.SavePath = txtFilePath.Text;
             if (BatchSettings.OutputType != BatchOutputType.Load && string.IsNullOrWhiteSpace(BatchSettings.SavePath))

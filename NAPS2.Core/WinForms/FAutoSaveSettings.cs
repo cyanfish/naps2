@@ -47,11 +47,11 @@ namespace NAPS2.WinForms
             {
                 txtFilePath.Text = ScanProfile.AutoSaveSettings.FilePath;
                 cbClearAfterSave.Checked = ScanProfile.AutoSaveSettings.ClearImagesAfterSaving;
-                if (ScanProfile.AutoSaveSettings.Separator == AutoSaveSeparator.FilePerScan)
+                if (ScanProfile.AutoSaveSettings.Separator == SaveSeparator.FilePerScan)
                 {
                     rdFilePerScan.Checked = true;
                 }
-                else if (ScanProfile.AutoSaveSettings.Separator == AutoSaveSeparator.PatchT &&
+                else if (ScanProfile.AutoSaveSettings.Separator == SaveSeparator.PatchT &&
                          ScanProfile.DriverName == TwainScanDriver.DRIVER_NAME)
                 {
                     rdSeparateByPatchT.Checked = true;
@@ -88,9 +88,9 @@ namespace NAPS2.WinForms
             {
                 FilePath = txtFilePath.Text,
                 ClearImagesAfterSaving = cbClearAfterSave.Checked,
-                Separator = rdFilePerScan.Checked ? AutoSaveSeparator.FilePerScan
-                          : rdSeparateByPatchT.Checked ? AutoSaveSeparator.PatchT
-                          : AutoSaveSeparator.FilePerPage
+                Separator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
+                          : rdSeparateByPatchT.Checked ? SaveSeparator.PatchT
+                          : SaveSeparator.FilePerPage
             };
         }
 

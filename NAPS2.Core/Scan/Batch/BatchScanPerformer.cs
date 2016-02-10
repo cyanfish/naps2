@@ -92,7 +92,7 @@ namespace NAPS2.Scan.Batch
                 profile = profileManager.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
                 scanParams = new ScanParams
                 {
-                    DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == BatchSaveSeparator.PatchT,
+                    DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == SaveSeparator.PatchT,
                     NoUI = true
                 };
                 try
@@ -262,7 +262,7 @@ namespace NAPS2.Scan.Batch
                 }
                 else if (Settings.OutputType == BatchOutputType.MultipleFiles)
                 {
-                    if (Settings.SaveSeparator == BatchSaveSeparator.FilePerScan)
+                    if (Settings.SaveSeparator == SaveSeparator.FilePerScan)
                     {
                         for (int i = 0; i < scans.Count; i++)
                         {
@@ -273,7 +273,7 @@ namespace NAPS2.Scan.Batch
                             }
                         }
                     }
-                    else if (Settings.SaveSeparator == BatchSaveSeparator.FilePerPage)
+                    else if (Settings.SaveSeparator == SaveSeparator.FilePerPage)
                     {
                         for (int i = 0; i < allImages.Count; i++)
                         {
@@ -281,7 +281,7 @@ namespace NAPS2.Scan.Batch
                             allImages[i].Dispose();
                         }
                     }
-                    else if (Settings.SaveSeparator == BatchSaveSeparator.PatchT)
+                    else if (Settings.SaveSeparator == SaveSeparator.PatchT)
                     {
                         var images = new List<ScannedImage>();
                         int fileIndex = 0;

@@ -119,14 +119,7 @@ namespace NAPS2.Scan
 
         public bool ClearImagesAfterSaving { get; set; }
 
-        public AutoSaveSeparator Separator { get; set; }
-    }
-
-    public enum AutoSaveSeparator
-    {
-        FilePerPage,
-        FilePerScan,
-        PatchT
+        public SaveSeparator Separator { get; set; }
     }
 
     public enum TwainImpl
