@@ -50,46 +50,10 @@ namespace NAPS2.ImportExport
             {
                 bool ok = true;
                 DateTime now = DateTime.Now;
-                if (settings.Separator == SaveSeparator.FilePerScan)
+                int i = 0;
+                foreach (var imageList in SaveSeparatorHelper.SeparateScans(new [] { images }, settings.Separator))
                 {
-                    if (!SaveOneFile(settings, now, 0, images))
-                    {
-                        ok = false;
-                    }
-                }
-                else if (settings.Separator == SaveSeparator.FilePerPage)
-                {
-                    for (int i = 0; i < images.Count; i++)
-                    {
-                        if (!SaveOneFile(settings, now, i, new List<ScannedImage> { images[i] }))
-                        {
-                            ok = false;
-                        }
-                    }
-                }
-                else if (settings.Separator == SaveSeparator.PatchT)
-                {
-                    var imageSet = new List<ScannedImage>();
-                    int fileIndex = 0;
-                    foreach (ScannedImage img in images)
-                    {
-                        if (img.PatchCode == PatchCode.PatchT)
-                        {
-                            if (imageSet.Count > 0)
-                            {
-                                if (!SaveOneFile(settings, now, fileIndex++, imageSet))
-                                {
-                                    ok = false;
-                                }
-                                imageSet.Clear();
-                            }
-                        }
-                        else
-                        {
-                            imageSet.Add(img);
-                        }
-                    }
-                    if (!SaveOneFile(settings, now, fileIndex, imageSet))
+                    if (!SaveOneFile(settings, now, i++, imageList))
                     {
                         ok = false;
                     }

@@ -262,50 +262,11 @@ namespace NAPS2.Scan.Batch
                 }
                 else if (Settings.OutputType == BatchOutputType.MultipleFiles)
                 {
-                    if (Settings.SaveSeparator == SaveSeparator.FilePerScan)
+                    int i = 0;
+                    foreach (var imageList in SaveSeparatorHelper.SeparateScans(scans, Settings.SaveSeparator))
                     {
-                        for (int i = 0; i < scans.Count; i++)
-                        {
-                            Save(now, i, scans[i]);
-                            foreach (var img in scans[i])
-                            {
-                                img.Dispose();
-                            }
-                        }
-                    }
-                    else if (Settings.SaveSeparator == SaveSeparator.FilePerPage)
-                    {
-                        for (int i = 0; i < allImages.Count; i++)
-                        {
-                            Save(now, i, new List<ScannedImage> { allImages[i] });
-                            allImages[i].Dispose();
-                        }
-                    }
-                    else if (Settings.SaveSeparator == SaveSeparator.PatchT)
-                    {
-                        var images = new List<ScannedImage>();
-                        int fileIndex = 0;
-                        foreach (ScannedImage img in allImages)
-                        {
-                            if (img.PatchCode == PatchCode.PatchT)
-                            {
-                                if (images.Count > 0)
-                                {
-                                    Save(now, fileIndex++, images);
-                                    foreach (var img2 in images)
-                                    {
-                                        img2.Dispose();
-                                    }
-                                    images.Clear();
-                                }
-                            }
-                            else
-                            {
-                                images.Add(img);
-                            }
-                        }
-                        Save(now, fileIndex, images);
-                        foreach (var img in images)
+                        Save(now, i++, imageList);
+                        foreach (var img in imageList)
                         {
                             img.Dispose();
                         }

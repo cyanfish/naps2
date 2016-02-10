@@ -24,6 +24,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
+using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan
@@ -110,6 +111,11 @@ namespace NAPS2.Scan
 
     public class AutoSaveSettings
     {
+        public AutoSaveSettings()
+        {
+            Separator = SaveSeparator.FilePerPage;
+        }
+
         internal AutoSaveSettings Clone()
         {
             return (AutoSaveSettings) MemberwiseClone();

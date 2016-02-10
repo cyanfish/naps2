@@ -94,10 +94,11 @@
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
+    <Compile Include="ImportExport\SaveSeparatorHelper.cs" />
     <Compile Include="Operation\IOperationFactory.cs" />
     <Compile Include="Operation\OperationBase.cs" />
     <Compile Include="Recovery\RecoveryImage.cs" />
-    <Compile Include="Scan\SaveSeparator.cs" />
+    <Compile Include="ImportExport\SaveSeparator.cs" />
     <Compile Include="Scan\Batch\BatchScanPerformer.cs" />
     <Compile Include="Scan\Batch\BatchSettings.cs" />
     <Compile Include="Scan\Exceptions\NoDuplexSupportException.cs" />

@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;

@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NAPS2.ImportExport;
 
 namespace NAPS2.Scan.Batch
 {
     public class BatchSettings
     {
+        public BatchSettings()
+        {
+            SaveSeparator = SaveSeparator.FilePerPage;
+        }
+
         public string ProfileDisplayName { get; set; }
 
         public BatchScanType ScanType { get; set; }
