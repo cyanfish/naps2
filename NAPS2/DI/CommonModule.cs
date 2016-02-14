@@ -76,6 +76,7 @@ namespace NAPS2.DI
             Bind<ChangeTracker>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();
             Bind<IBlankDetector>().To<ThresholdBlankDetector>();
+            Bind<IAutoSave>().To<AutoSave>();
         }
 
         private Edition GetEdition()

@@ -16,10 +16,10 @@ namespace NAPS2.ImportExport
 {
     public interface IAutoSave
     {
-        bool AutoSave(AutoSaveSettings settings, List<ScannedImage> images);
+        bool Save(AutoSaveSettings settings, List<ScannedImage> images);
     }
 
-    public class WinFormsAutoSave : IAutoSave
+    public class AutoSave : IAutoSave
     {
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
@@ -29,7 +29,7 @@ namespace NAPS2.ImportExport
         private readonly AppConfigManager appConfigManager;
         private readonly FileNamePlaceholders fileNamePlaceholders;
 
-        public WinFormsAutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders)
+        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders)
         {
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
@@ -40,7 +40,7 @@ namespace NAPS2.ImportExport
             this.fileNamePlaceholders = fileNamePlaceholders;
         }
 
-        public bool AutoSave(AutoSaveSettings settings, List<ScannedImage> images)
+        public bool Save(AutoSaveSettings settings, List<ScannedImage> images)
         {
             if (appConfigManager.Config.DisableAutoSave)
             {
@@ -102,15 +102,6 @@ namespace NAPS2.ImportExport
                 }
                 return op.Status.Success;
             }
-        }
-    }
-
-    public class ConsoleAutoSave : IAutoSave
-    {
-        public bool AutoSave(AutoSaveSettings settings, List<ScannedImage> images)
-        {
-            // Not supported in NAPS2.Console
-            return false;
         }
     }
 }

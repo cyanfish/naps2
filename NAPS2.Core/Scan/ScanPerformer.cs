@@ -70,14 +70,14 @@ namespace NAPS2.Scan
                     driver.ScanDevice = scanProfile.Device;
                 }
 
-                bool doAutoSave = !appConfigManager.Config.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
+                bool doAutoSave = !scanParams.NoAutoSave && !appConfigManager.Config.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
                 if (doAutoSave)
                 {
                     if (scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
                     {
                         // Auto save without piping images
                         var images = driver.Scan().ToList();
-                        if (autoSave.AutoSave(scanProfile.AutoSaveSettings, images))
+                        if (autoSave.Save(scanProfile.AutoSaveSettings, images))
                         {
                             foreach (ScannedImage img in images)
                             {
@@ -102,7 +102,7 @@ namespace NAPS2.Scan
                             imageCallback(scannedImage);
                             images.Add(scannedImage);
                         }
-                        autoSave.AutoSave(scanProfile.AutoSaveSettings, images);
+                        autoSave.Save(scanProfile.AutoSaveSettings, images);
                     }
                 }
                 else

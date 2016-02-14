@@ -38,7 +38,6 @@ namespace NAPS2.Console.DI
             Bind<IWiaTransfer>().To<ConsoleWiaTransfer>();
             Bind<IErrorOutput>().To<ConsoleErrorOutput>();
             Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
-            Bind<IAutoSave>().To<ConsoleAutoSave>();
             Bind<ThumbnailRenderer>().To<NullThumbnailRenderer>();
         }
     }

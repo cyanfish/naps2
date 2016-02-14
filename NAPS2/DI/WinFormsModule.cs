@@ -18,7 +18,6 @@ namespace NAPS2.DI
             Bind<IWiaTransfer>().To<WinFormsWiaTransfer>();
             Bind<IErrorOutput>().To<MessageBoxErrorOutput>();
             Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
-            Bind<IAutoSave>().To<WinFormsAutoSave>();
         }
     }
 }
