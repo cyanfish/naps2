@@ -53,6 +53,7 @@ namespace NAPS2.Console
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOperationFactory operationFactory;
+        private readonly AppConfigManager appConfigManager;
 
         private readonly AutomatedScanningOptions options;
         private ScannedImageList imageList;
@@ -60,7 +61,7 @@ namespace NAPS2.Console
         private int totalPagesScanned;
         private DateTime startTime;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager)
         {
             this.options = options;
             this.profileManager = profileManager;
@@ -73,6 +74,7 @@ namespace NAPS2.Console
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.operationFactory = operationFactory;
+            this.appConfigManager = appConfigManager;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -117,11 +119,6 @@ namespace NAPS2.Console
             }
 
             ReorderScannedImages();
-
-            if (options.AutoSave)
-            {
-                AutoSaveScannedImages();
-            }
 
             if (options.OutputPath != null)
             {
@@ -309,28 +306,17 @@ namespace NAPS2.Console
         public bool ValidateOptions()
         {
             // Most validation is done by the CommandLineParser library, but some constraints that can't be represented by that API need to be checked here
-            if (options.OutputPath == null && options.EmailFileName == null)
+            if (options.OutputPath == null && options.EmailFileName == null && !options.AutoSave)
             {
                 errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequired);
                 return false;
             }
+            if (options.OutputPath == null && options.EmailFileName == null && options.ImportPath != null)
+            {
+                errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequiredForImport);
+                return false;
+            }
             return true;
-        }
-
-        private void AutoSaveScannedImages()
-        {
-            OutputVerbose(ConsoleResources.AutoSaving);
-
-            if (IsPdfFile(options.OutputPath))
-            {
-                // TODO
-                ExportToPdf();
-            }
-            else
-            {
-                // TODO
-                ExportToImageFiles();
-            }
         }
 
         private void ExportScannedImages()
@@ -458,6 +444,16 @@ namespace NAPS2.Console
         {
             OutputVerbose(ConsoleResources.BeginningScan);
 
+            bool autoSaveEnabled = !appConfigManager.Config.DisableAutoSave && profile.EnableAutoSave && profile.AutoSaveSettings != null;
+            if (options.AutoSave && !autoSaveEnabled)
+            {
+                errorOutput.DisplayError(ConsoleResources.AutoSaveNotEnabled);
+                if (options.OutputPath == null && options.EmailFileName == null)
+                {
+                    return;
+                }
+            }
+
             IWin32Window parentWindow = new Form { Visible = false };
             totalPagesScanned = 0;
             foreach (int i in Enumerable.Range(1, options.Number))
@@ -469,7 +465,7 @@ namespace NAPS2.Console
                 }
                 OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
                 pagesScanned = 0;
-                scanPerformer.PerformScan(profile, new ScanParams(), parentWindow, ReceiveScannedImage);
+                scanPerformer.PerformScan(profile, new ScanParams { NoAutoSave = !options.AutoSave }, parentWindow, ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }

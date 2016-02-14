@@ -79,6 +79,15 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto save is not enabled for the specified profile..
+        /// </summary>
+        internal static string AutoSaveNotEnabled {
+            get {
+                return ResourceManager.GetString("AutoSaveNotEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto saving....
         /// </summary>
         internal static string AutoSaving {
@@ -296,11 +305,20 @@ namespace NAPS2.Console.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At least one of the -o/--output or -e/--email options must be specified..
+        ///   Looks up a localized string similar to At least one of the -o/--output, -e/--email, or -a/--autosave options must be specified..
         /// </summary>
         internal static string OutputOrEmailRequired {
             get {
                 return ResourceManager.GetString("OutputOrEmailRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one of the -o/--output or -e/--email options must be specified if -i/--import is specified. Import does not work with -a/--autosave..
+        /// </summary>
+        internal static string OutputOrEmailRequiredForImport {
+            get {
+                return ResourceManager.GetString("OutputOrEmailRequiredForImport", resourceCulture);
             }
         }
         

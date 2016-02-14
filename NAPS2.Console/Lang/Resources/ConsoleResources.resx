@@ -193,7 +193,7 @@
     <value>No scanned pages to email.</value>
   </data>
   <data name="OutputOrEmailRequired" xml:space="preserve">
-    <value>At least one of the -o/--output or -e/--email options must be specified.</value>
+    <value>At least one of the -o/--output, -e/--email, or -a/--autosave options must be specified.</value>
   </data>
   <data name="SendingEmail" xml:space="preserve">
     <value>Sending email...</value>
@@ -228,5 +228,11 @@ Use the "--importpassword" option.</value>
   </data>
   <data name="AutoSaving" xml:space="preserve">
     <value>Auto saving...</value>
+  </data>
+  <data name="AutoSaveNotEnabled" xml:space="preserve">
+    <value>Auto save is not enabled for the specified profile.</value>
+  </data>
+  <data name="OutputOrEmailRequiredForImport" xml:space="preserve">
+    <value>At least one of the -o/--output or -e/--email options must be specified if -i/--import is specified. Import does not work with -a/--autosave.</value>
   </data>
 </root>
