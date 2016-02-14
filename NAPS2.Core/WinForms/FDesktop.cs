@@ -138,11 +138,11 @@ namespace NAPS2.WinForms
             int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
 
+            LoadToolStripLocation();
             RelayoutToolbar();
             InitLanguageDropdown();
             AssignKeyboardShortcuts();
             UpdateScanButton();
-            LoadToolStripLocation();
 
             if (layoutManager != null)
             {
@@ -193,7 +193,8 @@ namespace NAPS2.WinForms
             // Recalculate visibility for the below check
             Application.DoEvents();
             // Check if toolbar buttons are overflowing
-            if (tStrip.Items.OfType<ToolStripItem>().Any(btn => !btn.Visible))
+            if (tStrip.Items.OfType<ToolStripItem>().Any(btn => !btn.Visible)
+                && (tStrip.Parent.Dock == DockStyle.Top || tStrip.Parent.Dock == DockStyle.Bottom))
             {
                 ShrinkToolbarMargin();
             }
@@ -205,11 +206,22 @@ namespace NAPS2.WinForms
             {
                 if (btn is ToolStripSplitButton)
                 {
-                    btn.Margin = new Padding(5, 1, 5, 2);
+                    if (tStrip.Parent.Dock == DockStyle.Left || tStrip.Parent.Dock == DockStyle.Right)
+                    {
+                        btn.Margin = new Padding(10, 1, 5, 2);
+                    }
+                    else
+                    {
+                        btn.Margin = new Padding(5, 1, 5, 2);
+                    }
                 }
                 else if (btn is ToolStripDoubleButton)
                 {
                     btn.Padding = new Padding(5, 0, 5, 0);
+                }
+                else if (tStrip.Parent.Dock == DockStyle.Left || tStrip.Parent.Dock == DockStyle.Right)
+                {
+                    btn.Margin = new Padding(0, 1, 5, 2);
                 }
                 else
                 {
@@ -1080,6 +1092,11 @@ namespace NAPS2.WinForms
         private void thumbnailList1_MouseLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
+        }
+
+        private void tStrip_DockChanged(object sender, EventArgs e)
+        {
+            RelayoutToolbar();
         }
 
         #endregion

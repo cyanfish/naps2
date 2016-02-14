@@ -252,6 +252,7 @@ namespace NAPS2.WinForms
             this.tsAbout});
             this.tStrip.Name = "tStrip";
             this.tStrip.ShowItemToolTips = false;
+            this.tStrip.DockChanged += new System.EventHandler(this.tStrip_DockChanged);
             // 
             // tsScan
             // 
