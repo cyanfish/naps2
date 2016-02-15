@@ -90,6 +90,11 @@ namespace NAPS2.WinForms
             ((Control) this).Invoke(action);
         }
 
+        public void BeginInvoke(Action action)
+        {
+            ((Control)this).BeginInvoke(action);
+        }
+
         #endregion
 
         protected void UpdateRTL()

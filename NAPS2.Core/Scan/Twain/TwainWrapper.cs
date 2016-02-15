@@ -78,34 +78,39 @@ namespace NAPS2.Scan.Twain
             session.DataTransferred += (sender, eventArgs) =>
             {
                 Debug.WriteLine("NAPS2.TW - DataTransferred");
-                using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
+                var stream = eventArgs.GetNativeImageStream();
+                // Let this event finish before processing the stream so the native data can be disposed first (to minimize memory requirements)
+                twainForm.BeginInvoke(() =>
                 {
-                    using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
+                    using (var output = Image.FromStream(stream))
                     {
-                        if (blankDetector.ExcludePage(result, scanProfile))
+                        using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
                         {
-                            return;
-                        }
-
-                        var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
-                            ? ScanBitDepth.BlackWhite
-                            : ScanBitDepth.C24Bit;
-                        var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
-                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                        ScannedImageHelper.PostProcessStep2(image, scanProfile);
-                        if (scanParams.DetectPatchCodes)
-                        {
-                            foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
+                            if (blankDetector.ExcludePage(result, scanProfile))
                             {
-                                if (patchCodeInfo.ReturnCode == ReturnCode.Success)
+                                return;
+                            }
+
+                            var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
+                                ? ScanBitDepth.BlackWhite
+                                : ScanBitDepth.C24Bit;
+                            var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                            image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
+                            ScannedImageHelper.PostProcessStep2(image, scanProfile);
+                            if (scanParams.DetectPatchCodes)
+                            {
+                                foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
                                 {
-                                    image.PatchCode = GetPatchCode(patchCodeInfo);
+                                    if (patchCodeInfo.ReturnCode == ReturnCode.Success)
+                                    {
+                                        image.PatchCode = GetPatchCode(patchCodeInfo);
+                                    }
                                 }
                             }
+                            images.Add(image);
                         }
-                        images.Add(image);
                     }
-                }
+                });
             };
             session.TransferError += (sender, eventArgs) =>
             {
