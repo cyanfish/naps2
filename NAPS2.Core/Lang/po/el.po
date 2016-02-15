@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-24 20:33+0000\n"
-"PO-Revision-Date: 2016-01-29 23:30+0000\n"
+"PO-Revision-Date: 2016-01-31 20:38+0000\n"
 "Last-Translator: solidhit <solidhit2003@yahoo.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1454110244.000000\n"
+"X-POOTLE-MTIME: 1454272689.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -132,11 +132,11 @@ msgstr "Να Επιτρέπεται Εκτύπωση"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr "Εναλλακτική Αποπαρεμβολή"
+msgstr "Εναλλακτική Αποπαρεμβολή [135642...]"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr "Εναλλακτική Παρεμβολή"
+msgstr "Εναλλακτική Παρεμβολή [162534...]"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -171,11 +171,11 @@ msgstr "Εφαρμογή στις {0} επιλεγμένες εικόνες"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Θέλετε σίγουρα να καθαριστούν {0} αντικείμενα;"
+msgstr "Θέλετε σίγουρα ολική διαγραφή ({0} αντικείμενα);"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Θέλετε σίγουρα να διαγραφεί το προφίλ {0};"
+msgstr "Θέλετε σίγουρα να διαγραφεί το προφίλ '{0}';"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
@@ -313,11 +313,11 @@ msgstr "Επιλογή συσκευής"
 #: FDesktop.resx$tsClear.Text$Message
 #: MiscResources.resx$Clear$Message
 msgid "Clear"
-msgstr "Καθαρισμός"
+msgstr "Ολική Διαγραφή"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr "Καθαρισμός εικόνων μετά την αποθήκευση"
+msgstr "Διαγραφή των εικόνων μετά την αποθήκευση"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -404,7 +404,7 @@ msgstr "Προεπιλεγμένο Όνομα Αρχείου"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "Αποπαρεμβολή"
+msgstr "Αποπαρεμβολή [142536...]"
 
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
@@ -594,7 +594,7 @@ msgstr "Εισαγωγή"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
-msgstr "Εισαγωγή {0}"
+msgstr "Εισαγωγή '{0}'"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -614,7 +614,7 @@ msgstr "Η εγκατάσταση απέτυχε"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "Παρεμβολή"
+msgstr "Παρεμβολή [135246...]"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -977,7 +977,7 @@ msgstr "Αποθήκευση αποτελεσμάτων μαζικής"
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}"
-msgstr "Αποθήκευση {0}"
+msgstr "Αποθήκευση '{0}'"
 
 #: FEditScanSettings.resx$label10.Text$Message
 msgid "Scale"
@@ -1007,11 +1007,11 @@ msgstr "Σαρωμένη Εικόνα"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
-msgstr "Σάρωση σελίδας {0}"
+msgstr "Απόκτηση σελίδας {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr "Σάρωση σελίδας {0} (σάρωση {1})"
+msgstr "Απόκτηση σελίδας {0} (σάρωση {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
@@ -1096,13 +1096,13 @@ msgstr ""
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Το αρχείο {0} υπάρχει ήδη. Θέλετε να αντικατασταθεί;"
+msgstr "Το αρχείο '{0}' υπάρχει ήδη. Θέλετε να αντικατασταθεί;"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
 "Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: "
-"{0}"
+"'{0}'"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"

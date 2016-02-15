@@ -3115,6 +3115,7 @@
     <None Include="Lang\po\hr.po" />
     <None Include="Lang\po\hu.po" />
     <None Include="Lang\po\it.po" />
+    <None Include="Lang\po\lt.po" />
     <None Include="Lang\po\nb.po" />
     <None Include="Lang\po\nl.po" />
     <None Include="Lang\po\pl.po" />
