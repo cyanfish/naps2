@@ -238,7 +238,9 @@ namespace NAPS2.Scan.Wia
                     break;
             }
 
-            int resolution = profile.Resolution.ToIntDpi();
+            int maxResolution = Math.Min(GetItemIntPropertyMax(item, ItemProperties.VERTICAL_RESOLUTION),
+                GetItemIntPropertyMax(item, ItemProperties.HORIZONTAL_RESOLUTION));
+            int resolution = Math.Min(profile.Resolution.ToIntDpi(), maxResolution);
             SetItemIntProperty(item, resolution, ItemProperties.VERTICAL_RESOLUTION);
             SetItemIntProperty(item, resolution, ItemProperties.HORIZONTAL_RESOLUTION);
 
@@ -370,6 +372,18 @@ namespace NAPS2.Scan.Wia
                     }
                 }
             }
+        }
+
+        private static int GetItemIntPropertyMax(Item item, int propid)
+        {
+            foreach (Property property in item.Properties)
+            {
+                if (property.PropertyID == propid)
+                {
+                    return property.SubTypeMax;
+                }
+            }
+            return int.MaxValue;
         }
 
         private static void SetItemIntProperty(Item item, int value, int propid)
