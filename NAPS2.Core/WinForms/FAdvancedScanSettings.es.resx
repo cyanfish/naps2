@@ -268,7 +268,7 @@
         <value>35</value>
     </data>
     <data name="groupBox1.Text" xml:space="preserve">
-        <value>Image Quality</value>
+        <value>Calidad de imagen</value>
     </data>
     <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
         <value>groupBox1</value>
@@ -394,7 +394,7 @@
         <value>2</value>
     </data>
     <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-        <value>Apply brightness/contrast after scan</value>
+        <value>Aplicar el brillo/contraste tras el escaneo</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.Name" xml:space="preserve">
         <value>cbBrightnessContrastAfterScan</value>
@@ -442,7 +442,7 @@
         <value>0</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Twain Implementation:</value>
+        <value>Implementación Twain:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -499,7 +499,7 @@
         <value>37</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>White Threshold</value>
+        <value>Umbral de blanco</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -631,7 +631,7 @@
         <value>17</value>
     </data>
     <data name="cbExcludeBlankPages.Text" xml:space="preserve">
-        <value>Exclude blank pages</value>
+        <value>Excluir las páginas en blanco</value>
     </data>
     <data name="&gt;&gt;cbExcludeBlankPages.Name" xml:space="preserve">
         <value>cbExcludeBlankPages</value>
@@ -655,7 +655,7 @@
         <value>37</value>
     </data>
     <data name="groupBox3.Text" xml:space="preserve">
-        <value>Blank Pages</value>
+        <value>Paginas en blanco</value>
     </data>
     <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
         <value>groupBox3</value>
@@ -708,7 +708,7 @@
         <value>400, 441</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Advanced Profile Settings</value>
+        <value>Preferencias de perfil avanzadas</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

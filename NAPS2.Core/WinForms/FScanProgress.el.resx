@@ -177,7 +177,7 @@
         <value>4</value>
     </data>
     <data name="labelPage.Text" xml:space="preserve">
-        <value>Σάρωση σελίδας {0}</value>
+        <value>Απόκτηση σελίδας {0}</value>
     </data>
     <data name="&gt;&gt;labelPage.Name" xml:space="preserve">
         <value>labelPage</value>

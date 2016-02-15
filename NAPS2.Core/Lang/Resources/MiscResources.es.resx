@@ -304,19 +304,19 @@
         <value>De {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>Se ha producido un error desconocido durante el escaneo por lotes.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>Cancelado el proceso por lotes.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Cancelling....</value>
+        <value>Cancelando....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>Proceso por lotes completado con éxito.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>Escaneo de proceso por lotes se detuvo debido a un error.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
         <value>Escaneando página {0}...</value>
@@ -331,31 +331,31 @@
         <value>Cancelar</value>
     </data>
     <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Cerrar</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
         <value>Saving batch results...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+        <value>El escáner seleccionado no admite el uso dúplex. Si el escáner si admite dúplex, intente utilizar un controlador diferente.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importing {0}...</value>
+        <value>Importando {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Import Progress</value>
+        <value>Progreso de la importación</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Recovering...</value>
+        <value>Recuperando...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Recovery Progress</value>
+        <value>Proceso de recuperación</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Save Images Progress</value>
+        <value>Progreso del guardado de la imagen</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
         <value>Save PDF Progress</value>
@@ -370,7 +370,7 @@
         <value>Copy Progress</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Importar...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
         <value>Email PDF Progress</value>
@@ -379,9 +379,21 @@
         <value>Ocurrió un error al intentar guardar el archivo                .</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Todos los archivos</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>Archivos de imagen</value>
+    </data>
+    <data name="DeviceBusy" xml:space="preserve">
+        <value>The selected scanner is busy.</value>
+    </data>
+    <data name="DeviceCoverOpen" xml:space="preserve">
+        <value>The scanner's cover is open.</value>
+    </data>
+    <data name="DevicePaperJam" xml:space="preserve">
+        <value>The scanner has a paper jam.</value>
+    </data>
+    <data name="DeviceWarmingUp" xml:space="preserve">
+        <value>The scanner is warming up.</value>
     </data>
 </root>

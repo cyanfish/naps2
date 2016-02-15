@@ -169,7 +169,7 @@
         <value>JPEG файл (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF документ (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>PNG файл  (*.png)</value>
@@ -226,7 +226,7 @@
         <value>Не сега</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Налична е нова версия на NAPS2. Искате ли да направите ъпдейт сега ?</value>
+        <value>A newer version of NAPS2 is available. Do you want to update now?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Инсталацията е завършена</value>
@@ -241,7 +241,7 @@
         <value>Неуспешна инсталация</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>Всички ({0})</value>
+        <value>All ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
         <value>Избрани ({0})</value>
@@ -376,12 +376,24 @@
         <value>Email PDF Progress</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>Възникна грешка при опит за запис на файла.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
         <value>All Files</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
         <value>Image Files</value>
+    </data>
+    <data name="DeviceBusy" xml:space="preserve">
+        <value>The selected scanner is busy.</value>
+    </data>
+    <data name="DeviceCoverOpen" xml:space="preserve">
+        <value>The scanner's cover is open.</value>
+    </data>
+    <data name="DevicePaperJam" xml:space="preserve">
+        <value>The scanner has a paper jam.</value>
+    </data>
+    <data name="DeviceWarmingUp" xml:space="preserve">
+        <value>The scanner is warming up.</value>
     </data>
 </root>

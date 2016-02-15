@@ -223,7 +223,7 @@
         <value>22</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T (TWAIN only)</value>
+        <value>Archivos de separados  mediante Patch-T (TWAIN únicamente)</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -343,7 +343,7 @@
         <value>26</value>
     </data>
     <data name="linkSubstitutions.Text" xml:space="preserve">
-        <value>Substitutions</value>
+        <value>Sustituciones</value>
     </data>
     <data name="&gt;&gt;linkSubstitutions.Name" xml:space="preserve">
         <value>linkSubstitutions</value>
@@ -394,7 +394,7 @@
         <value>24</value>
     </data>
     <data name="lblFilePath.Text" xml:space="preserve">
-        <value>File path:</value>
+        <value>Ruta del archivo:</value>
     </data>
     <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
         <value>lblFilePath</value>
@@ -421,7 +421,7 @@
         <value>28</value>
     </data>
     <data name="cbClearAfterSave.Text" xml:space="preserve">
-        <value>Clear images after saving</value>
+        <value>Borrar las imágenes después de guardar</value>
     </data>
     <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
         <value>cbClearAfterSave</value>
@@ -474,7 +474,7 @@
         <value>350, 260</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Auto Save Settings</value>
+        <value>Guardar configuración de automóviles</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

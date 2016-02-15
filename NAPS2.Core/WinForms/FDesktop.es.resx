@@ -250,7 +250,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>Pegar</value>
     </data>
     <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -370,7 +370,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsBatchScan.Text" xml:space="preserve">
-        <value>&amp;Batch Scan</value>
+        <value>Escanear por lotes</value>
     </data>
     <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

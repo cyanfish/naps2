@@ -694,13 +694,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsInterleave.Text" xml:space="preserve">
-        <value>Παρεμβολή</value>
+        <value>Παρεμβολή [135246...]</value>
     </data>
     <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsDeinterleave.Text" xml:space="preserve">
-        <value>Αποπαρεμβολή</value>
+        <value>Αποπαρεμβολή [142536...]</value>
     </data>
     <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -709,13 +709,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>Εναλλακτική Παρεμβολή</value>
+        <value>Εναλλακτική Παρεμβολή [162534...]</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>Εναλλακτική Αποπαρεμβολή</value>
+        <value>Εναλλακτική Αποπαρεμβολή [135642...]</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -772,7 +772,7 @@
         <value>58, 51</value>
     </data>
     <data name="tsClear.Text" xml:space="preserve">
-        <value>Καθαρισμός</value>
+        <value>Ολική Διαγραφή</value>
     </data>
     <data name="tsClear.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>

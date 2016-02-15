@@ -135,7 +135,7 @@
         <value>1</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>Press Start when ready.</value>
+        <value>Cuando esté listo pulse Iniciar.</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -183,7 +183,7 @@
         <value>3</value>
     </data>
     <data name="btnStart.Text" xml:space="preserve">
-        <value>Start</value>
+        <value>Comenzar</value>
     </data>
     <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
         <value>btnStart</value>
@@ -235,7 +235,7 @@
         <value>2</value>
     </data>
     <data name="lblTimeBetweenScans.Text" xml:space="preserve">
-        <value>Time between scans (seconds):</value>
+        <value>Tiempo entre escaneos (segundos):</value>
     </data>
     <data name="&gt;&gt;lblTimeBetweenScans.Name" xml:space="preserve">
         <value>lblTimeBetweenScans</value>
@@ -391,7 +391,7 @@
         <value>0</value>
     </data>
     <data name="rdSingleScan.Text" xml:space="preserve">
-        <value>Single scan</value>
+        <value>Escáner sencillo</value>
     </data>
     <data name="&gt;&gt;rdSingleScan.Name" xml:space="preserve">
         <value>rdSingleScan</value>
@@ -505,7 +505,7 @@
         <value>0</value>
     </data>
     <data name="lblProfile.Text" xml:space="preserve">
-        <value>Perfiles:</value>
+        <value>Perfil:</value>
     </data>
     <data name="&gt;&gt;lblProfile.Name" xml:space="preserve">
         <value>lblProfile</value>
@@ -586,7 +586,7 @@
         <value>2</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T (TWAIN only)</value>
+        <value>Archivos de separados  mediante Patch-T (TWAIN únicamente)</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -727,7 +727,7 @@
         <value>4</value>
     </data>
     <data name="linkSubstitutions.Text" xml:space="preserve">
-        <value>Substitutions</value>
+        <value>Sustituciones</value>
     </data>
     <data name="&gt;&gt;linkSubstitutions.Name" xml:space="preserve">
         <value>linkSubstitutions</value>
@@ -778,7 +778,7 @@
         <value>0</value>
     </data>
     <data name="lblFilePath.Text" xml:space="preserve">
-        <value>File path:</value>
+        <value>Ruta del archivo:</value>
     </data>
     <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
         <value>lblFilePath</value>
@@ -934,7 +934,7 @@
         <value>7</value>
     </data>
     <data name="groupboxOutput.Text" xml:space="preserve">
-        <value>Output</value>
+        <value>Destino</value>
     </data>
     <data name="&gt;&gt;groupboxOutput.Name" xml:space="preserve">
         <value>groupboxOutput</value>
@@ -984,7 +984,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Batch Scan</value>
+        <value>Escanear por lotes</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
         <value>toolStripSeparator1</value>

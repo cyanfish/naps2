@@ -384,4 +384,16 @@
     <data name="FileTypeImageFiles" xml:space="preserve">
         <value>Pliki obrazów</value>
     </data>
+    <data name="DeviceBusy" xml:space="preserve">
+        <value>The selected scanner is busy.</value>
+    </data>
+    <data name="DeviceCoverOpen" xml:space="preserve">
+        <value>The scanner's cover is open.</value>
+    </data>
+    <data name="DevicePaperJam" xml:space="preserve">
+        <value>The scanner has a paper jam.</value>
+    </data>
+    <data name="DeviceWarmingUp" xml:space="preserve">
+        <value>The scanner is warming up.</value>
+    </data>
 </root>
