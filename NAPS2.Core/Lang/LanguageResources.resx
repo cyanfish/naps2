@@ -201,4 +201,7 @@
   <data name="fi" xml:space="preserve">
     <value>Suomi</value>
   </data>
+  <data name="lt" xml:space="preserve">
+    <value>Lietuvių kalba</value>
+  </data>
 </root>
