@@ -205,6 +205,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 한국어.
+        /// </summary>
+        internal static string ko {
+            get {
+                return ResourceManager.GetString("ko", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lietuvių kalba.
         /// </summary>
         internal static string lt {

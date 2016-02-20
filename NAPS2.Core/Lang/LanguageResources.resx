@@ -204,4 +204,7 @@
   <data name="lt" xml:space="preserve">
     <value>Lietuvių kalba</value>
   </data>
+  <data name="ko" xml:space="preserve">
+    <value>한국어</value>
+  </data>
 </root>
