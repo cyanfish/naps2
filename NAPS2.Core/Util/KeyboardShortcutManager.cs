@@ -7,7 +7,6 @@ namespace NAPS2.Util
 {
     public class KeyboardShortcutManager
     {
-        private readonly KeysConverter keysConverter = new KeysConverter();
         private readonly Dictionary<Keys, Action> dict = new Dictionary<Keys, Action>();
         private readonly Dictionary<Keys, ToolStripMenuItem> itemDict = new Dictionary<Keys, ToolStripMenuItem>();
 
@@ -17,7 +16,19 @@ namespace NAPS2.Util
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    return (Keys) (keysConverter.ConvertFromInvariantString(value) ?? Keys.None);
+                    var keys = Keys.None;
+                    foreach (var part in value.Split('+').Select(x => x.Trim()))
+                    {
+                        if (part.Equals("Ctrl", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            keys |= Keys.Control;
+                        }
+                        else
+                        {
+                            keys |= (Keys) Enum.Parse(typeof (Keys), part, true);
+                        }
+                    }
+                    return keys;
                 }
             }
             catch (Exception ex)
