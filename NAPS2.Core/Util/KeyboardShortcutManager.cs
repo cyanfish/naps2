@@ -10,6 +10,14 @@ namespace NAPS2.Util
         private readonly Dictionary<Keys, Action> dict = new Dictionary<Keys, Action>();
         private readonly Dictionary<Keys, ToolStripMenuItem> itemDict = new Dictionary<Keys, ToolStripMenuItem>();
 
+        private readonly Dictionary<string, Keys> customMap = new Dictionary<string, Keys>
+        {
+            { "ctrl", Keys.Control },
+            { "del", Keys.Delete },
+            { "ins", Keys.Insert },
+            { "break", Keys.Pause },
+        }; 
+
         public Keys Parse(string value)
         {
             try
@@ -17,11 +25,11 @@ namespace NAPS2.Util
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     var keys = Keys.None;
-                    foreach (var part in value.Split('+').Select(x => x.Trim()))
+                    foreach (var part in value.Split('+').Select(x => x.Trim().ToLowerInvariant()))
                     {
-                        if (part.Equals("Ctrl", StringComparison.InvariantCultureIgnoreCase))
+                        if (customMap.ContainsKey(part))
                         {
-                            keys |= Keys.Control;
+                            keys |= customMap[part];
                         }
                         else
                         {
