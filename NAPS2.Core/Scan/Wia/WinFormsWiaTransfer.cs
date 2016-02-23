@@ -19,6 +19,10 @@ namespace NAPS2.Scan.Wia
 
         public Stream Transfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format)
         {
+            if (eventLoop.GetSync(wia => wia.Item) == null)
+            {
+                return null;
+            }
             if (pageNumber == 1)
             {
                 // The only downside of the common dialog is that it steals focus.
