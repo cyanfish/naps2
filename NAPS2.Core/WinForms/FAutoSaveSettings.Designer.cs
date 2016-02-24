@@ -42,7 +42,7 @@ namespace NAPS2.WinForms
             this.rdFilePerPage = new System.Windows.Forms.RadioButton();
             this.rdFilePerScan = new System.Windows.Forms.RadioButton();
             this.btnChooseFolder = new System.Windows.Forms.Button();
-            this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
+            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.lblFilePath = new System.Windows.Forms.Label();
             this.cbClearAfterSave = new System.Windows.Forms.CheckBox();
@@ -96,12 +96,12 @@ namespace NAPS2.WinForms
             this.btnChooseFolder.UseVisualStyleBackColor = true;
             this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
             // 
-            // linkSubstitutions
+            // linkPlaceholders
             // 
-            resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
-            this.linkSubstitutions.Name = "linkSubstitutions";
-            this.linkSubstitutions.TabStop = true;
-            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
+            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
+            this.linkPlaceholders.Name = "linkPlaceholders";
+            this.linkPlaceholders.TabStop = true;
+            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
             // 
             // txtFilePath
             // 
@@ -126,7 +126,7 @@ namespace NAPS2.WinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.cbClearAfterSave);
             this.Controls.Add(this.btnChooseFolder);
-            this.Controls.Add(this.linkSubstitutions);
+            this.Controls.Add(this.linkPlaceholders);
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.lblFilePath);
             this.Controls.Add(this.linkPatchCodeInfo);
@@ -153,7 +153,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.RadioButton rdFilePerPage;
         private System.Windows.Forms.RadioButton rdFilePerScan;
         private System.Windows.Forms.Button btnChooseFolder;
-        private System.Windows.Forms.LinkLabel linkSubstitutions;
+        private System.Windows.Forms.LinkLabel linkPlaceholders;
         private System.Windows.Forms.TextBox txtFilePath;
         private System.Windows.Forms.Label lblFilePath;
         private System.Windows.Forms.CheckBox cbClearAfterSave;

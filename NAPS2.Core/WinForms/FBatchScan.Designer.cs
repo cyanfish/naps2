@@ -61,7 +61,7 @@ namespace NAPS2.WinForms
             this.rdFilePerScan = new System.Windows.Forms.RadioButton();
             this.panelSaveTo = new System.Windows.Forms.Panel();
             this.btnChooseFolder = new System.Windows.Forms.Button();
-            this.linkSubstitutions = new System.Windows.Forms.LinkLabel();
+            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.lblFilePath = new System.Windows.Forms.Label();
             this.panelSaveType = new System.Windows.Forms.Panel();
@@ -252,7 +252,7 @@ namespace NAPS2.WinForms
             // panelSaveTo
             // 
             this.panelSaveTo.Controls.Add(this.btnChooseFolder);
-            this.panelSaveTo.Controls.Add(this.linkSubstitutions);
+            this.panelSaveTo.Controls.Add(this.linkPlaceholders);
             this.panelSaveTo.Controls.Add(this.txtFilePath);
             this.panelSaveTo.Controls.Add(this.lblFilePath);
             resources.ApplyResources(this.panelSaveTo, "panelSaveTo");
@@ -265,12 +265,12 @@ namespace NAPS2.WinForms
             this.btnChooseFolder.UseVisualStyleBackColor = true;
             this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
             // 
-            // linkSubstitutions
+            // linkPlaceholders
             // 
-            resources.ApplyResources(this.linkSubstitutions, "linkSubstitutions");
-            this.linkSubstitutions.Name = "linkSubstitutions";
-            this.linkSubstitutions.TabStop = true;
-            this.linkSubstitutions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSubstitutions_LinkClicked);
+            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
+            this.linkPlaceholders.Name = "linkPlaceholders";
+            this.linkPlaceholders.TabStop = true;
+            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
             // 
             // txtFilePath
             // 
@@ -364,7 +364,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.GroupBox groupboxOutput;
         private System.Windows.Forms.Panel panelSaveTo;
         private System.Windows.Forms.Button btnChooseFolder;
-        private System.Windows.Forms.LinkLabel linkSubstitutions;
+        private System.Windows.Forms.LinkLabel linkPlaceholders;
         private System.Windows.Forms.TextBox txtFilePath;
         private System.Windows.Forms.Label lblFilePath;
         private System.Windows.Forms.Panel panelSaveType;
