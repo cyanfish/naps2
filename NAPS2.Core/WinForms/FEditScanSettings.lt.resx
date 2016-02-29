@@ -292,7 +292,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Naudoti iš anksto nustatytus</value>
+        <value>Naudoti nustatytas parinktis</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -319,7 +319,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Skaitytuvo sąsaja</value>
+        <value>Skenerio sąsaja</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -825,7 +825,7 @@
         <value>25</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Horizontalus lygiavimas:</value>
+        <value>Horizontali lygiuotė:</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>

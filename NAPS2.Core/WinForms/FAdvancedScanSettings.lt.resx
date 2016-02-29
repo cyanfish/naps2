@@ -394,7 +394,7 @@
         <value>2</value>
     </data>
     <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-        <value>Pritaikyti ryškumą/kontrastą po nuskaitymo</value>
+        <value>Pritaikyti ryškumą/kontrastą po skenavimo</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.Name" xml:space="preserve">
         <value>cbBrightnessContrastAfterScan</value>
@@ -708,7 +708,7 @@
         <value>400, 441</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Išplėstinės profilio nustatymai</value>
+        <value>Išplėstiniai profilio nustatymai</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

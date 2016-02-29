@@ -169,7 +169,7 @@
         <value>קובץ JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>מסמך PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>קובץ PNG (*.png)</value>
@@ -304,7 +304,7 @@
         <value>מתוך {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>שגיאה בלתי ידוע אירע בעת סריקת אצווה.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
         <value>Batch cancelled.</value>
@@ -376,10 +376,10 @@
         <value>Email PDF Progress</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>אירעה שגיאה בעת שמירת אוטומטי.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>כל הקבצים</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
         <value>Image Files</value>

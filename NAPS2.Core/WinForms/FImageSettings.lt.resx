@@ -217,7 +217,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Atstatyti numatytus</value>
+        <value>Atstatyti numatytas parinktis</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -397,7 +397,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>Geriausiems rezultatams didelio JPEG kokybės (80+) naudokite Maksimalios Kokybės variantą.</value>
+        <value>Esant didelei JPEG kokybei (80+), geriausiems rezultatams pasiekti naudokite Maksimalios Kokybės variantą.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>

@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} vaizdas(-ai) nuskaitytas nuo {1} iki {2} negali būti išsaugotas, ir gali būti atstatyti. Ar norite juos atstatyti?</value>
+        <value>{0} vaizdas(-ai) nuskenuotas(-i) nuo {1} iki {2} nebuvo išsaugoti ir gali būti atstatyti. Ar norite juos atstatyti?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -232,7 +232,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Atkurti nuskaitytus vaizdus</value>
+        <value>Atkurti nuskenuotus vaizdus</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FRecover</value>

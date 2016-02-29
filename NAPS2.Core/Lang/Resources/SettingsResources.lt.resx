@@ -118,7 +118,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Juodai balta</value>
+        <value>Nespalvotas</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
         <value>24-bitų spalva</value>
@@ -151,13 +151,13 @@
         <value>800 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Centras</value>
+        <value>Centrinė</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Į kairę</value>
+        <value>Kairinė</value>
     </data>
     <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Į dešinę</value>
+        <value>Dešininė</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
         <value>cm</value>
@@ -217,7 +217,7 @@
         <value>Numatytasis</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Paveldas (tik vartotojo sąsaja)</value>
+        <value>Paveldėjimas (tik skenerio sąsajai)</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

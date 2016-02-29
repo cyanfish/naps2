@@ -478,7 +478,7 @@
         <value>8</value>
     </data>
     <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
-        <value>Leisti visiškos kokybės spausdinimą</value>
+        <value>Leisti spausdinti visiškos kokybės</value>
     </data>
     <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
         <value>cbAllowFullQualityPrinting</value>
@@ -508,7 +508,7 @@
         <value>14</value>
     </data>
     <data name="cbAllowFormFilling.Text" xml:space="preserve">
-        <value>Lesti formos pildymą</value>
+        <value>Lesti pildyti formą</value>
     </data>
     <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
         <value>cbAllowFormFilling</value>
@@ -568,7 +568,7 @@
         <value>12</value>
     </data>
     <data name="cbAllowContentCopyingForAccessibility.Text" xml:space="preserve">
-        <value>Leisti prieinamumą turinio kopijavimui</value>
+        <value>Leisti kopijuoti turinį prieinamumui</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Name" xml:space="preserve">
         <value>cbAllowContentCopyingForAccessibility</value>
@@ -598,7 +598,7 @@
         <value>11</value>
     </data>
     <data name="cbAllowContentCopying.Text" xml:space="preserve">
-        <value>Leisti turinio kopijavimą</value>
+        <value>Leisti kopijuoti turinį</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
         <value>cbAllowContentCopying</value>
@@ -628,7 +628,7 @@
         <value>10</value>
     </data>
     <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>Leisti dokumento surinkimą</value>
+        <value>Leisti surinkti dokumentą</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
         <value>cbAllowDocumentAssembly</value>
@@ -655,7 +655,7 @@
         <value>9</value>
     </data>
     <data name="cbAllowDocumentModification.Text" xml:space="preserve">
-        <value>Leisti dokumento keitimą</value>
+        <value>Leisti keisti dokumentą</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentModification.Name" xml:space="preserve">
         <value>cbAllowDocumentModification</value>
@@ -682,7 +682,7 @@
         <value>7</value>
     </data>
     <data name="cbAllowPrinting.Text" xml:space="preserve">
-        <value>Leisti spausdinimą</value>
+        <value>Leisti spausdinti</value>
     </data>
     <data name="&gt;&gt;cbAllowPrinting.Name" xml:space="preserve">
         <value>cbAllowPrinting</value>
@@ -886,7 +886,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Atstatyti numatytus</value>
+        <value>Atstatyti numatytas parinktis</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>

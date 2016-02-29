@@ -205,7 +205,7 @@
         <value>3</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>Paruoštas nuskaitymui {0}.</value>
+        <value>Paruoštas skenavimui {0}.</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -238,7 +238,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Kitas nuskaitymas</value>
+        <value>Kitas skenavimas</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FBatchPrompt</value>

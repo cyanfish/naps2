@@ -327,34 +327,34 @@
     <data name="&gt;&gt;btnChooseFolder.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="linkSubstitutions.AutoSize" type="System.Boolean, mscorlib">
+    <data name="linkPlaceholders.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="linkSubstitutions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="linkPlaceholders.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="linkSubstitutions.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="linkPlaceholders.Location" type="System.Drawing.Point, System.Drawing">
         <value>8, 48</value>
     </data>
-    <data name="linkSubstitutions.Size" type="System.Drawing.Size, System.Drawing">
-        <value>67, 13</value>
+    <data name="linkPlaceholders.Size" type="System.Drawing.Size, System.Drawing">
+        <value>68, 13</value>
     </data>
-    <data name="linkSubstitutions.TabIndex" type="System.Int32, mscorlib">
+    <data name="linkPlaceholders.TabIndex" type="System.Int32, mscorlib">
         <value>26</value>
     </data>
-    <data name="linkSubstitutions.Text" xml:space="preserve">
-        <value>Substitutions</value>
+    <data name="linkPlaceholders.Text" xml:space="preserve">
+        <value>Înlocuitor</value>
     </data>
-    <data name="&gt;&gt;linkSubstitutions.Name" xml:space="preserve">
-        <value>linkSubstitutions</value>
+    <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
+        <value>linkPlaceholders</value>
     </data>
-    <data name="&gt;&gt;linkSubstitutions.Type" xml:space="preserve">
+    <data name="&gt;&gt;linkPlaceholders.Type" xml:space="preserve">
         <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;linkSubstitutions.Parent" xml:space="preserve">
+    <data name="&gt;&gt;linkPlaceholders.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;linkSubstitutions.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;linkPlaceholders.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
     <data name="txtFilePath.Location" type="System.Drawing.Point, System.Drawing">
@@ -480,12 +480,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.4.1.35637, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.6.1.31733, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FAutoSaveSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.4.1.35637, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.6.1.31733, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

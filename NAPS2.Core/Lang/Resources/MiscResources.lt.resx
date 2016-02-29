@@ -124,7 +124,7 @@
         <value>Išvalyti</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Ar tikrai norite išvalyti objektus {0} vnt.?</value>
+        <value>Ar tikrai norite išvalyti {0} objektus(-ų)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
         <value>Ar tikrai norite pašalinti {0} objektą(-us)?</value>
@@ -136,7 +136,7 @@
         <value>Ar tikrai norite pašalinti profilį {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Byla {0} jau yra. Ar norite jį perrašyti?</value>
+        <value>Byla {0} jau yra. Ar norite ją perrašyti?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Ištrinti</value>
@@ -145,10 +145,10 @@
         <value>Pasirinktas skeneris nerastas.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>Pasirinktas skaitytuvas neprisijungęs.</value>
+        <value>Pasirinktas skeneris neprisijungęs.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Jūs neturite leidimo įrašyti bylas šioje vietoje.</value>
+        <value>Neturite leidimo įrašyti bylų šioje vietoje.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Klaida</value>
@@ -199,7 +199,7 @@
         <value>Nuskenuotas vaizdas</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Prieš pradedant skenavimą pasitinkite profilį.</value>
+        <value>Prieš pradėdami skenavimą pasirinkite profilį.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>Skenerio tvarkyklės klaida.</value>
@@ -226,7 +226,7 @@
         <value>Ne dabar</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Yra naujesnė versija NAPS2. Noritė atnaujinti dabar?</value>
+        <value>Yra naujesnė NAPS2 versija . Norite atnaujinti dabar?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Diegimas baigtas</value>
@@ -256,31 +256,31 @@
         <value>{0} / {1} MB</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
-        <value>Negalima importuoti bylą '{0}'.</value>
+        <value>Negalima importuoti bylos '{0}'.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>Negalima importuoti bylą '{0}'. Įmanomas importavimas tik PDF bylų, sugeneruotus NAPS2.</value>
+        <value>Negalima importuoti bylos '{0}' . Įmanomas tik PDF bylų, sugeneruotų NAPS2, importavimas.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
-        <value>Atsisiuntimo klaida</value>
+        <value>Siuntimo klaida</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
         <value>Viena ar kelios bylos negali būti atsisiųstos.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Pritaikitas ({0}x{1} {2})</value>
+        <value>Pritaikytas ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
         <value>Skenuoti</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Ar tikrai norite atšaukti pakeitimus {0} vaizdo(-ų)?</value>
+        <value>Ar tikrai norite atšaukti pakeitimus {0} vaizdui(-ams)?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
         <value>Atstatyti vaizdą</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>Turite neišsaugotų pakeitimų. Ar tikrai norite išeiti ir tuos pakeitimus atmesti?</value>
+        <value>Turite neišsaugotų pakeitimų. Ar tikrai norite išeiti ir atmesti pakeitimus?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
         <value>Neišsaugoti pakeitimai</value>
@@ -289,13 +289,13 @@
         <value>Skenuojamas puslapis {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>Pasirinktas skeneris nepalaiko padavimo mechanizmą. Jei jūsų skeneris tikrai turi padavimo mechanizmą, pabandykite naudoti kitą tvarkyklę.</value>
+        <value>Pasirinktas skeneris nepalaiko padavimo mechanizmo. Jei jūsų skeneris tikrai turi padavimo mechanizmą, pabandykite naudoti kitą tvarkyklę.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
         <value>Padavimo mechanizme nėra lapų.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>Jūs neturite leidimo kopijuoti turinį iš failo '{0}'.</value>
+        <value>Neturite leidimo kopijuoti turinio iš failo '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
         <value>Įvyko klaida bandant išsaugoti bylą.</value>
@@ -316,7 +316,7 @@
         <value>Paketas sėkmingai baigtas.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Paketinis nuskaitymas sustabdytas dėl klaidos.</value>
+        <value>Paketinis skenavimas sustabdytas dėl klaidos.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
         <value>Skenuojamas puslapis {0}...</value>
@@ -325,7 +325,7 @@
         <value>Skenuojamas puslapis {0} ({1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Laikiama skenavymo {0}...</value>
+        <value>Laukiama skenavimo {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>Atšaukti</value>
@@ -337,7 +337,7 @@
         <value>Paketo rezultatų išsaugojimas...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>Pasirinktas skeneris nepalaiko dvipusį skenavim. Jei jūsų skeneris turi dvipusio skenavimo galimybę, pabandykite naudoti kitą tvarkyklę.</value>
+        <value>Pasirinktas skeneris nepalaiko dvipusio skenavimo. Jei jūsų skeneris turi dvipusio skenavimo galimybę, pabandykite naudoti kitą tvarkyklę.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
@@ -346,7 +346,7 @@
         <value>Importuojama {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Importo eigą</value>
+        <value>Importo eiga</value>
     </data>
     <data name="Recovering" xml:space="preserve">
         <value>Atstatymas...</value>
