@@ -142,6 +142,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فارسى.
+        /// </summary>
+        internal static string fa {
+            get {
+                return ResourceManager.GetString("fa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suomi.
         /// </summary>
         internal static string fi {

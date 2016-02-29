@@ -207,4 +207,7 @@
   <data name="ko" xml:space="preserve">
     <value>한국어</value>
   </data>
+  <data name="fa" xml:space="preserve">
+    <value>فارسى</value>
+  </data>
 </root>
