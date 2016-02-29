@@ -48,7 +48,10 @@ namespace NAPS2.WinForms
             txtImageQuality.Text = ScanProfile.Quality.ToString("G");
             cbBrightnessContrastAfterScan.Checked = ScanProfile.BrightnessContrastAfterScan;
             cbForcePageSize.Checked = ScanProfile.ForcePageSize;
-            cmbTwainImpl.SelectedIndex = (int)ScanProfile.TwainImpl;
+            if (ScanProfile.TwainImpl != TwainImpl.X64 || Environment.Is64BitProcess)
+            {
+                cmbTwainImpl.SelectedIndex = (int) ScanProfile.TwainImpl;
+            }
             cbExcludeBlankPages.Checked = ScanProfile.ExcludeBlankPages;
             tbWhiteThreshold.Value = ScanProfile.BlankPageWhiteThreshold;
             txtWhiteThreshold.Text = ScanProfile.BlankPageWhiteThreshold.ToString("G");
@@ -84,7 +87,10 @@ namespace NAPS2.WinForms
             ScanProfile.MaxQuality = cbHighQuality.Checked;
             ScanProfile.BrightnessContrastAfterScan = cbBrightnessContrastAfterScan.Checked;
             ScanProfile.ForcePageSize = cbForcePageSize.Checked;
-            ScanProfile.TwainImpl = (TwainImpl)cmbTwainImpl.SelectedIndex;
+            if (cmbTwainImpl.SelectedIndex != -1)
+            {
+                ScanProfile.TwainImpl = (TwainImpl) cmbTwainImpl.SelectedIndex;
+            }
             ScanProfile.ExcludeBlankPages = cbExcludeBlankPages.Checked;
             ScanProfile.BlankPageWhiteThreshold = tbWhiteThreshold.Value;
             ScanProfile.BlankPageCoverageThreshold = tbCoverageThreshold.Value;
