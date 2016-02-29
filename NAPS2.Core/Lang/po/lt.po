@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-09 22:38+0000\n"
-"PO-Revision-Date: 2016-02-15 09:24+0000\n"
+"PO-Revision-Date: 2016-02-20 09:57+0000\n"
 "Last-Translator: stels75 <stels75@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: lt\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1455528258.000000\n"
+"X-POOTLE-MTIME: 1455962228.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -53,7 +53,7 @@ msgstr "800 dpi"
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "Yra naujesnė versija NAPS2. Noritė atnaujinti dabar?"
+msgstr "Yra naujesnė NAPS2 versija . Norite atnaujinti dabar?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -73,7 +73,6 @@ msgid "About"
 msgstr "Apie programą"
 
 #: FScanProgress.resx$$this.Text$Message
-#, fuzzy
 msgid "Acquiring data"
 msgstr "Duomenų gavimas"
 
@@ -82,16 +81,14 @@ msgid "Advanced"
 msgstr "Papildomi"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
-#, fuzzy
 msgid "Advanced Profile Settings"
-msgstr "Išplėstinės profilio nustatymai"
+msgstr "Išplėstiniai profilio nustatymai"
 
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
-#, fuzzy
 msgid "All ({0})"
 msgstr "Viską ({0})"
 
@@ -100,95 +97,79 @@ msgid "All Files"
 msgstr "Visos bylos"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
-#, fuzzy
 msgid "Allow Annotations"
 msgstr "Leisti anotacijas"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr "Leisti turinio kopijavimą"
+msgstr "Leisti kopijuoti turinį"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
-#, fuzzy
 msgid "Allow Content Copying for Accessibility"
-msgstr "Leisti prieinamumą turinio kopijavimui"
+msgstr "Leisti kopijuoti turinį prieinamumui"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
-#, fuzzy
 msgid "Allow Document Assembly"
-msgstr "Leisti dokumento surinkimą"
+msgstr "Leisti surinkti dokumentą"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
-#, fuzzy
 msgid "Allow Document Modification"
-msgstr "Leisti dokumento keitimą"
+msgstr "Leisti keisti dokumentą"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
-#, fuzzy
 msgid "Allow Form Filling"
-msgstr "Lesti formos pildymą"
+msgstr "Lesti pildyti formą"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
-#, fuzzy
 msgid "Allow Full Quality Printing"
-msgstr "Leisti visiškos kokybės spausdinimą"
+msgstr "Leisti spausdinti visiškos kokybės"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
-msgstr "Leisti spausdinimą"
+msgstr "Leisti spausdinti"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
-#, fuzzy
 msgid "Alternate Deinterleave"
 msgstr "Alternatyvus tarpų šalinimas"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
-#, fuzzy
 msgid "Alternate Interleave"
-msgstr "Alternativus tarpavimas"
+msgstr "Alternatyvus tarpavimas"
 
 #: MiscResources.resx$AutoSaveError$Message
-#, fuzzy
 msgid "An error occurred when trying to auto save"
 msgstr "Įvyko klaida bandant automatiškai išsaugoti"
 
 #: MiscResources.resx$ErrorSaving$Message
-#, fuzzy
 msgid "An error occurred when trying to save the file"
 msgstr "Įvyko klaida bandant išsaugoti bylą"
 
 #: MiscResources.resx$EmailError$Message
-#, fuzzy
 msgid "An error occurred while trying to send an email"
 msgstr "Įvyko klaida siunčiant elektroninį laišką"
 
 #: MiscResources.resx$UnknownDriverError$Message
-#, fuzzy
 msgid "An error occurred with the scanning driver"
 msgstr "Skenerio tvarkyklės klaida"
 
 #: MiscResources.resx$BatchError$Message
-#, fuzzy
 msgid "An unknown error ocurred during the batch scan"
 msgstr "Įvyko nežinoma paketinio skenavimo klaida"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
-#, fuzzy
 msgid "Apply brightness/contrast after scan"
-msgstr "Pritaikyti ryškumą/kontrastą po nuskaitymo"
+msgstr "Pritaikyti ryškumą/kontrastą po skenavimo"
 
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
-#, fuzzy
 msgid "Apply to all {0} selected images"
 msgstr "Taikyti visiems {0} pasirinktiems vaizdams"
 
 #: MiscResources.resx$ConfirmClearItems$Message
-#, fuzzy
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Ar tikrai norite išvalyti objektus {0} vnt.?"
+msgstr "Ar tikrai norite išvalyti {0} objektus(-ų)?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -199,17 +180,14 @@ msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "Ar tikrai norite pašalinti {0} objektą(-us)?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-#, fuzzy
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "Ar tikrai norite ištrinti {0} profilius?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
-#, fuzzy
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "Ar tikrai norite atšaukti pakeitimus {0} vaizdo(-ų)?"
+msgstr "Ar tikrai norite atšaukti pakeitimus {0} vaizdui(-ams)?"
 
 #: FEmailSettings.resx$label1.Text$Message
-#, fuzzy
 msgid "Attachment Name"
 msgstr "Priedo pavadinimas"
 
@@ -219,27 +197,22 @@ msgstr "Autorius"
 
 #: FEditScanSettings.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
-#, fuzzy
 msgid "Auto Save Settings"
 msgstr "Automatinio išsaugojimo nustatymai"
 
 #: FPlaceholders.resx$label13.Text$Message
-#, fuzzy
 msgid "Auto-incrementing number (1 digit)"
 msgstr "Automatinis numerio didinimas (1 skaičius)"
 
 #: FPlaceholders.resx$label12.Text$Message
-#, fuzzy
 msgid "Auto-incrementing number (2 digits)"
 msgstr "Automatinis numerio didinimas (2 skaičiai)"
 
 #: FPlaceholders.resx$label11.Text$Message
-#, fuzzy
 msgid "Auto-incrementing number (3 digits)"
 msgstr "Automatinis numerio didinimas (3 skaičiai)"
 
 #: FPlaceholders.resx$label10.Text$Message
-#, fuzzy
 msgid "Auto-incrementing number (4 digits)"
 msgstr "Automatinis numerio didinimas (4 skaičiai)"
 
@@ -257,42 +230,34 @@ msgstr "B5 (176x250 mm)"
 
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
-#, fuzzy
 msgid "Batch Scan"
 msgstr "Paketinis skenavimas"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
-#, fuzzy
 msgid "Batch cancelled"
 msgstr "Paketas atšauktas"
 
 #: MiscResources.resx$BatchStatusComplete$Message
-#, fuzzy
 msgid "Batch completed successfully"
 msgstr "Paketas sėkmingai baigtas"
 
 #: MiscResources.resx$BatchStatusError$Message
-#, fuzzy
 msgid "Batch scan stopped due to error"
-msgstr "Paketinis nuskaitymas sustabdytas dėl klaidos"
+msgstr "Paketinis skenavimas sustabdytas dėl klaidos"
 
 #: FEditScanSettings.resx$label3.Text$Message
-#, fuzzy
 msgid "Bit depth"
 msgstr "Bitų gylis"
 
 #: MiscResources.resx$FileTypeBmp$Message
-#, fuzzy
 msgid "Bitmap Files (*.bmp)"
 msgstr "Bitmap bylos (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
-#, fuzzy
 msgid "Black & White"
-msgstr "Juodai balta"
+msgstr "Nespalvotas"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
-#, fuzzy
 msgid "Blank Pages"
 msgstr "Tušti puslapiai"
 
@@ -300,7 +265,6 @@ msgstr "Tušti puslapiai"
 #: FViewer.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditScanSettings.resx$label6.Text$Message
-#, fuzzy
 msgid "Brightness"
 msgstr "Šviesumas"
 
@@ -329,42 +293,35 @@ msgid "Cancel"
 msgstr "Atšaukti"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
-#, fuzzy
 msgid "Cancelling"
 msgstr "Atšaukiama"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr "Centras"
+msgstr "Centrinė"
 
 #: MiscResources.resx$ChooseProfile$Message
-#, fuzzy
 msgid "Choose Profile"
 msgstr "Pasirinkti profilį"
 
 #: FEditScanSettings.resx$btnChooseDevice.Text$Message
-#, fuzzy
 msgid "Choose device"
 msgstr "Pasirinkti įrenginį"
 
 #: FDesktop.resx$tsClear.Text$Message
 #: MiscResources.resx$Clear$Message
-#, fuzzy
 msgid "Clear"
 msgstr "Išvalyti"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
-#, fuzzy
 msgid "Clear images after saving"
-msgstr "Išvalyti vaizdus po nuskaitymo"
+msgstr "Išvalyti vaizdus po išsaugojimo"
 
 #: MiscResources.resx$Close$Message
-#, fuzzy
 msgid "Close"
 msgstr "Užverti"
 
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
-#, fuzzy
 msgid "Compatibility"
 msgstr "Suderinamumas"
 
@@ -376,12 +333,10 @@ msgid "Contrast"
 msgstr "Kontrastas"
 
 #: FDesktop.resx$ctxCopy.Text$Message
-#, fuzzy
 msgid "Copy"
 msgstr "Kopijuoti"
 
 #: MiscResources.resx$CopyProgress$Message
-#, fuzzy
 msgid "Copy Progress"
 msgstr "Kopijavimas"
 
@@ -390,7 +345,6 @@ msgid "Copying"
 msgstr "Kopijuojama"
 
 #: FAbout.resx$labelCopyright.Text$Message
-#, fuzzy
 msgid "Copyright © 2009 Pavel Sorejs"
 msgstr "Visos teisės saugomos © 2009 Pavel Sorejs"
 
@@ -407,35 +361,29 @@ msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Visos teisės saugomos © 2013 Peter De Leeuw"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
-#, fuzzy
 msgid "Coverage Threshold"
 msgstr "Padengimo slenkstis"
 
 #: FDesktop.resx$tsCrop.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
-#, fuzzy
 msgid "Crop"
 msgstr "Apkirpti"
 
 #: SettingsResources.resx$PageSize_Custom$Message
-#, fuzzy
 msgid "Custom"
 msgstr "Pritaikytas"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
-#, fuzzy
 msgid "Custom ({0}x{1} {2})"
-msgstr "Pritaikitas ({0}x{1} {2})"
+msgstr "Pritaikytas ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
-#, fuzzy
 msgid "Custom Page Size"
 msgstr "Pasirinktinis puslapio dydis"
 
 #: FDesktop.resx$tsCustomRotation.Text$Message
 #: FViewer.resx$tsCustomRotation.Text$Message
-#, fuzzy
 msgid "Custom Rotation"
 msgstr "Pasirinktinis sukimas"
 
@@ -444,18 +392,15 @@ msgid "Day (01-31)"
 msgstr "Diena (01-31)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
-#, fuzzy
 msgid "Default"
 msgstr "Numatytasis"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
-#, fuzzy
 msgid "Default File Name"
 msgstr "Numatytas bylos pavadinimas"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
-#, fuzzy
 msgid "Deinterleave"
 msgstr "Tarpų šalinimas"
 
@@ -466,46 +411,39 @@ msgstr "Tarpų šalinimas"
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
-#, fuzzy
 msgid "Delete"
 msgstr "Ištrinti"
 
 #: FEditScanSettings.resx$label1.Text$Message
-#, fuzzy
 msgid "Device"
 msgstr "Įrenginys"
 
 #: FEditScanSettings.resx$label8.Text$Message
-#, fuzzy
 msgid "Display name"
 msgstr "Rodomas pavadinimas"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
-#, fuzzy
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "Norite NAPS2 automatiškai tikrinti dėl atnaujinimų?"
 
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
-#, fuzzy
 msgid "Done"
 msgstr "Atlikta"
 
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 #: MiscResources.resx$Download$Message
-#, fuzzy
 msgid "Download"
 msgstr "Atsisiųsti"
 
 #: MiscResources.resx$DownloadError$Message
-#, fuzzy
 msgid "Download Error"
-msgstr "Atsisiuntimo klaida"
+msgstr "Siuntimo klaida"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr "Atsiuntimo eiga"
+msgstr "Siuntimo eiga"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
@@ -513,23 +451,19 @@ msgid "Download and Install"
 msgstr "Atsisiųsti ir įdiegti"
 
 #: SettingsResources.resx$Source_Duplex$Message
-#, fuzzy
 msgid "Duplex"
 msgstr "Dvipusis skenavimas"
 
 #: FProfiles.resx$btnEdit.Text$Message
 #: FProfiles.resx$ctxEdit.Text$Message
-#, fuzzy
 msgid "Edit"
 msgstr "Redaguoti"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
-#, fuzzy
 msgid "Email PDF"
 msgstr "Siųsti PDF"
 
 #: MiscResources.resx$EmailPdfProgress$Message
-#, fuzzy
 msgid "Email PDF Progress"
 msgstr "Vyksta PDF siuntimas el. paštu"
 
@@ -539,7 +473,6 @@ msgid "Email Settings"
 msgstr "El. pašto nustatymai"
 
 #: FEditScanSettings.resx$cbAutoSave.Text$Message
-#, fuzzy
 msgid "Enable Auto Save"
 msgstr "Leisti automatinį išsaugojimą"
 
@@ -561,22 +494,18 @@ msgstr "Klaida"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
-#, fuzzy
 msgid "Estimated download size: {0} MB"
 msgstr "Numatomas atsiuntimo dydis: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
-#, fuzzy
 msgid "Exchangeable Image File (*.exif)"
 msgstr "Keičiamo vaizdo byla (*.exif)"
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
-#, fuzzy
 msgid "Exclude blank pages"
 msgstr "Pašalinti tuščius puslapius"
 
 #: SettingsResources.resx$Source_Feeder$Message
-#, fuzzy
 msgid "Feeder"
 msgstr "Padavimo mechanizmas"
 
@@ -586,25 +515,21 @@ msgstr "Bylos pavadinimas"
 
 #: FBatchScan.resx$lblFilePath.Text$Message
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
-#, fuzzy
 msgid "File path"
 msgstr "Kelias iki bylos"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
-#, fuzzy
 msgid "Flip"
 msgstr "Veidrodinis vaizdas"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-#, fuzzy
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
-"Geriausiems rezultatams didelio JPEG kokybės (80+) naudokite Maksimalios "
-"Kokybės variantą"
+"Esant didelei JPEG kokybei (80+), geriausiems rezultatams pasiekti naudokite "
+"Maksimalios Kokybės variantą"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
-#, fuzzy
 msgid "Force matching page size"
 msgstr "Priverstinis puslapio dydis"
 
@@ -613,7 +538,6 @@ msgid "GIF File (*.gif)"
 msgstr "GIF byla (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
-#, fuzzy
 msgid "Get more languages"
 msgstr "Įdiegti daugiau kalbų"
 
@@ -622,42 +546,35 @@ msgid "Glass"
 msgstr "Stiklas"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
-#, fuzzy
 msgid "Grayscale"
 msgstr "Pilkumo atspalviai"
 
 #: FEditScanSettings.resx$label9.Text$Message
-#, fuzzy
 msgid "Horizontal align"
-msgstr "Horizontalus lygiavimas"
+msgstr "Horizontali lygiuotė"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
 msgstr "Valanda (0-23)"
 
 #: FAbout.resx$label1.Text$Message
-#, fuzzy
 msgid "Icons from"
 msgstr "Piktogramos iš"
 
 #: FDesktop.resx$tsdImage.Text$Message
-#, fuzzy
 msgid "Image"
 msgstr "Vaizdas"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
-#, fuzzy
 msgid "Image Files"
 msgstr "Vaizdo bylos"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
-#, fuzzy
 msgid "Image Quality"
 msgstr "Vaizdo kokybė"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
-#, fuzzy
 msgid "Image Settings"
 msgstr "Vaizdo parametrai"
 
@@ -666,9 +583,8 @@ msgid "Import"
 msgstr "Importas"
 
 #: MiscResources.resx$ImportProgress$Message
-#, fuzzy
 msgid "Import Progress"
-msgstr "Importo eigą"
+msgstr "Importo eiga"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
@@ -683,12 +599,10 @@ msgid "Installation Complete"
 msgstr "Diegimas baigtas"
 
 #: MiscResources.resx$InstallFailedTitle$Message
-#, fuzzy
 msgid "Installation Failed"
 msgstr "Diegimas nepavyko"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
-#, fuzzy
 msgid "Installation complete. Do you want to restart NAPS2 now?"
 msgstr "Diegimas baigtas. Ar norite paleisti NAPS2 dabar?"
 
@@ -697,7 +611,6 @@ msgid "Installation failed"
 msgstr "Diegimas nepavyko"
 
 #: FDesktop.resx$tsInterleave.Text$Message
-#, fuzzy
 msgid "Interleave"
 msgstr "Tarpuoti"
 
@@ -718,17 +631,14 @@ msgid "Language"
 msgstr "Kalba"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
-#, fuzzy
 msgid "Left"
-msgstr "Į kairę"
+msgstr "Kairinė"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
-#, fuzzy
 msgid "Legacy (native UI only)"
-msgstr "Paveldas (tik vartotojo sąsaja)"
+msgstr "Paveldėjimas (tik skenerio sąsajai)"
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
-#, fuzzy
 msgid "Load images into NAPS2"
 msgstr "Įkrauti vaizdus į NAPS2"
 
@@ -737,17 +647,14 @@ msgid "Main toolbar"
 msgstr "Pagrindinė įrankių juosta"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
-#, fuzzy
 msgid "Make PDFs searchable using OCR"
-msgstr "Padaryti PDF su paieška naudojant OCR"
+msgstr "Padaryti PDF su paieškos galimybe naudojant OCR"
 
 #: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
-#, fuzzy
 msgid "Maximum quality (large files)"
 msgstr "Maksimali kokybė (didelės bylos)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
-#, fuzzy
 msgid "Metadata"
 msgstr "Meta-duomenys"
 
@@ -765,24 +672,20 @@ msgid "More info"
 msgstr "Daugiau informacijos"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
-#, fuzzy
 msgid "Move Down"
 msgstr "Perkelti žemyn"
 
 #: FDesktop.resx$tsMove.TextFirst$Message
-#, fuzzy
 msgid "Move Up"
 msgstr "Perkelti aukštyn"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
-#, fuzzy
 msgid "Multiple scans (fixed delay between scans)"
-msgstr "Kelių puslapių skenavimas (fiksuotas uždelsimas tarp nuskaitymų)"
+msgstr "Kelių puslapių skenavimas (fiksuotas uždelsimas tarp skenavimų)"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
-#, fuzzy
 msgid "Multiple scans (prompt between scans)"
-msgstr "Kelių puslapių skenavimas (pranešimas tarp nuskaitymų)"
+msgstr "Kelių puslapių skenavimas (pranešimas tarp skenavimų)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -805,21 +708,18 @@ msgid "Next"
 msgstr "Kitas"
 
 #: FBatchPrompt.resx$$this.Text$Message
-#, fuzzy
 msgid "Next Scan"
-msgstr "Kitas nuskaitymas"
+msgstr "Kitas skenavimas"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
 msgstr "Įrenginys nepasirinktas"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
-#, fuzzy
 msgid "No pages are in the feeder"
 msgstr "Padavimo mechanizme nėra lapų"
 
 #: MiscResources.resx$NoDevicesFound$Message
-#, fuzzy
 msgid "No scanning device was found"
 msgstr "Nerastas skeneris"
 
@@ -834,27 +734,22 @@ msgid "Not Now"
 msgstr "Ne dabar"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
-#, fuzzy
 msgid "Number of scans"
-msgstr "Nyskaitymų kiekis"
+msgstr "Skenavimų kiekis"
 
 #: FDesktop.resx$tsOcr.Text$Message
-#, fuzzy
 msgid "OCR"
 msgstr "Teksto atpažinimas"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
-#, fuzzy
 msgid "OCR Download"
-msgstr "Atsisiųsti bylas teksto atpažinimui"
+msgstr "Atsisiųsti bylas tekstui atpažinti"
 
 #: FOcrSetup.resx$$this.Text$Message
-#, fuzzy
 msgid "OCR Setup"
 msgstr "Teksto atpažinimo nustatymai"
 
 #: FOcrSetup.resx$label1.Text$Message
-#, fuzzy
 msgid "OCR language"
 msgstr "Teksto atpažinimo kalba"
 
@@ -878,33 +773,27 @@ msgstr "Gerai"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
-#, fuzzy
 msgid "One file per page"
 msgstr "Viena byla puslapiui"
 
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
-#, fuzzy
 msgid "One file per scan"
-msgstr "Viena byla nuskaitymui"
+msgstr "Viena byla skenavimui"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
-#, fuzzy
 msgid "One or more files could not be downloaded"
 msgstr "Viena ar kelios bylos negali būti atsisiųstos"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
-#, fuzzy
 msgid "Output"
 msgstr "Išvestis"
 
 #: MiscResources.resx$OverwriteFile$Message
-#, fuzzy
 msgid "Overwrite File"
 msgstr "Perrašyti bylą"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
-#, fuzzy
 msgid "Owner Password"
 msgstr "Savininko slaptažodis"
 
@@ -935,7 +824,6 @@ msgid "Password"
 msgstr "Slaptažodis"
 
 #: FDesktop.resx$ctxPaste.Text$Message
-#, fuzzy
 msgid "Paste"
 msgstr "Įterpti"
 
@@ -948,9 +836,8 @@ msgid "Placeholders"
 msgstr "Vietaženkliai"
 
 #: FBatchScan.resx$lblStatus.Text$Message
-#, fuzzy
 msgid "Press Start when ready"
-msgstr "Paspauskite Start, kai pasiruošę"
+msgstr "Paspauskite Pradėti, kai būsite pasiruošę"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -979,37 +866,32 @@ msgid "Profiles"
 msgstr "Profiliai"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
-#, fuzzy
 msgid "Ready for scan {0}"
-msgstr "Paruoštas nuskaitymui {0}"
+msgstr "Paruoštas skenavimui {0}"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
 msgstr "Atkurti"
 
 #: FRecover.resx$$this.Text$Message
-#, fuzzy
 msgid "Recover Scanned Images"
-msgstr "Atkurti nuskaitytus vaizdus"
+msgstr "Atkurti nuskenuotus vaizdus"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
 msgstr "Atstatymas"
 
 #: MiscResources.resx$RecoveryProgress$Message
-#, fuzzy
 msgid "Recovery Progress"
 msgstr "Vyksta atstatymas"
 
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
-#, fuzzy
 msgid "Remember these settings"
 msgstr "Atsiminti šiuos nustatymus"
 
 #: FDesktop.resx$tsdReorder.Text$Message
-#, fuzzy
 msgid "Reorder"
 msgstr "Pertvarkyti"
 
@@ -1018,21 +900,18 @@ msgid "Reset"
 msgstr "Atstatyti"
 
 #: MiscResources.resx$ResetImage$Message
-#, fuzzy
 msgid "Reset Image"
 msgstr "Atstatyti vaizdą"
 
 #: FEditScanSettings.resx$label5.Text$Message
-#, fuzzy
 msgid "Resolution"
 msgstr "Skiriamoji geba"
 
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
-#, fuzzy
 msgid "Restore Defaults"
-msgstr "Atstatyti numatytus"
+msgstr "Atstatyti numatytas parinktis"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -1046,9 +925,8 @@ msgid "Revert"
 msgstr "Grąžinti"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
-#, fuzzy
 msgid "Right"
-msgstr "Į dešinę"
+msgstr "Dešininė"
 
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
@@ -1067,12 +945,10 @@ msgid "Rotate Right"
 msgstr "Pasukti į dešinę"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
-#, fuzzy
 msgid "Save Images"
 msgstr "Išsaugoti vaizdus"
 
 #: MiscResources.resx$SaveImagesProgress$Message
-#, fuzzy
 msgid "Save Images Progress"
 msgstr "Vaizdų išsaugojimo progresas"
 
@@ -1081,68 +957,56 @@ msgid "Save PDF"
 msgstr "Išsaugoti PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
-#, fuzzy
 msgid "Save PDF Progress"
 msgstr "PDF išsaugojimo progresas"
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
-#, fuzzy
 msgid "Save to a single file"
 msgstr "Išsaugoti į vieną bylą"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
-#, fuzzy
 msgid "Save to multiple files"
 msgstr "Išsaugoti į kelias bylas"
 
 #: MiscResources.resx$BatchStatusSaving$Message
-#, fuzzy
 msgid "Saving batch results"
 msgstr "Paketo rezultatų išsaugojimas"
 
 #: MiscResources.resx$SavingFormat$Message
-#, fuzzy
 msgid "Saving {0}"
 msgstr "Įrašoma {0}"
 
 #: FEditScanSettings.resx$label10.Text$Message
-#, fuzzy
 msgid "Scale"
 msgstr "Mastelis"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
-#, fuzzy
 msgid "Scale With Window"
-msgstr "Mastelis su langu"
+msgstr "Pagal langą"
 
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
 #: MiscResources.resx$Scan$Message
 #: FProfiles.resx$ctxScan.Text$Message
-#, fuzzy
 msgid "Scan"
 msgstr "Skenuoti"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
-#, fuzzy
 msgid "Scan Configuration"
 msgstr "Skenavimo nustatymai"
 
 #: MiscResources.resx$ScannedImage$Message
-#, fuzzy
 msgid "Scanned Image"
 msgstr "Nuskenuotas vaizdas"
 
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
-#, fuzzy
 msgid "Scanning page {0}"
 msgstr "Skenuojamas puslapis {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
-#, fuzzy
 msgid "Scanning page {0} (scan {1})"
 msgstr "Skenuojamas puslapis {0} ({1})"
 
@@ -1151,12 +1015,10 @@ msgid "Second (00-59)"
 msgstr "Sekundė (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
-#, fuzzy
 msgid "Select"
 msgstr "Pažymėti"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
-#, fuzzy
 msgid "Select All"
 msgstr "Pažymėti viską"
 
@@ -1165,12 +1027,10 @@ msgid "Select Source"
 msgstr "Pasirinkti šaltinį"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
-#, fuzzy
 msgid "Select a profile before clicking Scan"
-msgstr "Prieš pradedant skenavimą pasitinkite profilį"
+msgstr "Prieš pradėdami skenavimą pasirinkite profilį"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
-#, fuzzy
 msgid "Select one or more languages"
 msgstr "Pasirinkite vieną ar daugiau kalbų"
 
@@ -1179,20 +1039,17 @@ msgstr "Pasirinkite vieną ar daugiau kalbų"
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
-#, fuzzy
 msgid "Selected ({0})"
 msgstr "Pasirinkta ({0})"
 
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
-#, fuzzy
 msgid "Separate files by Patch-T (TWAIN only)"
 msgstr "Atskirti bylas pagal Patch-T (tik TWAIN)"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
-#, fuzzy
 msgid "Set Default"
-msgstr "Nustatyti numatytu"
+msgstr "Nustatyti kaip numatytąjį"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
@@ -1200,7 +1057,6 @@ msgid "Show"
 msgstr "Rodyti"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
-#, fuzzy
 msgid "Single scan"
 msgstr "Viengubas skenavimas"
 
@@ -1209,13 +1065,11 @@ msgid "Start"
 msgstr "Pradėti"
 
 #: FPdfSettings.resx$label5.Text$Message
-#, fuzzy
 msgid "Subject"
 msgstr "Tema"
 
 #: FBatchScan.resx$linkSubstitutions.Text$Message
 #: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-#, fuzzy
 msgid "Substitutions"
 msgstr "Pakeitimai"
 
@@ -1228,54 +1082,46 @@ msgid "TWAIN Driver"
 msgstr "TWAIN tvarkyklė"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
-#, fuzzy
 msgid "The file '{0}' could not be imported"
-msgstr "Negalima importuoti bylą '{0}'"
+msgstr "Negalima importuoti bylos '{0}'"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-#, fuzzy
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
-"Negalima importuoti bylą '{0}'. Įmanomas importavimas tik PDF bylų, "
-"sugeneruotus NAPS2"
+"Negalima importuoti bylos '{0}' . Įmanomas tik PDF bylų, sugeneruotų NAPS2, "
+"importavimas"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Byla {0} jau yra. Ar norite jį perrašyti?"
+msgstr "Byla {0} jau yra. Ar norite ją perrašyti?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
-#, fuzzy
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr "Byla yra užšifruota ir reikalauja slaptažodžio atidarymui: {0}"
 
 #: MiscResources.resx$DeviceNotFound$Message
-#, fuzzy
 msgid "The selected scanner could not be found"
 msgstr "Pasirinktas skeneris nerastas"
 
 #: MiscResources.resx$NoFeederSupport$Message
-#, fuzzy
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
-"Pasirinktas skeneris nepalaiko padavimo mechanizmą. Jei jūsų skeneris tikrai "
+"Pasirinktas skeneris nepalaiko padavimo mechanizmo. Jei jūsų skeneris tikrai "
 "turi padavimo mechanizmą, pabandykite naudoti kitą tvarkyklę"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-#, fuzzy
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr ""
-"Pasirinktas skeneris nepalaiko dvipusį skenavim. Jei jūsų skeneris turi "
+"Pasirinktas skeneris nepalaiko dvipusio skenavimo. Jei jūsų skeneris turi "
 "dvipusio skenavimo galimybę, pabandykite naudoti kitą tvarkyklę"
 
 #: MiscResources.resx$DeviceOffline$Message
-#, fuzzy
 msgid "The selected scanner is offline"
-msgstr "Pasirinktas skaitytuvas neprisijungęs"
+msgstr "Pasirinktas skeneris neprisijungęs"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
-#, fuzzy
 msgid "Time between scans (seconds)"
-msgstr "Laikas tarp nuskaitymų (sekundės)"
+msgstr "Laikas tarp skenavimų (sekundės)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
@@ -1302,25 +1148,21 @@ msgid "Update NAPS2"
 msgstr "Atnaujinti NAPS2"
 
 #: FEditScanSettings.resx$rdbNative.Text$Message
-#, fuzzy
 msgid "Use native UI"
-msgstr "Skaitytuvo sąsaja"
+msgstr "Skenerio sąsaja"
 
 #: FEditScanSettings.resx$rdbConfig.Text$Message
-#, fuzzy
 msgid "Use predefined settings"
-msgstr "Naudoti iš anksto nustatytus"
+msgstr "Naudoti nustatytas parinktis"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
 msgstr "Naudotojo slaptažodis"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
-#, fuzzy
 msgid "Using OCR requires you to download each language you want to scan"
 msgstr ""
-"Teksto atpažinimui jums reikia parsisiųsti kiekvieną kalbą, kurią norite "
-"nuskaityti"
+"Teksto atpažinimo funkcijai reikia atsisiųsti visų reikalingų kalbų paketus"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
@@ -1328,27 +1170,22 @@ msgstr "Versija {0}"
 
 #: FDesktop.resx$tsView.Text$Message
 #: FDesktop.resx$ctxView.Text$Message
-#, fuzzy
 msgid "View"
 msgstr "Peržiūrėti"
 
 #: FEditScanSettings.resx$rdWIA.Text$Message
-#, fuzzy
 msgid "WIA Driver"
 msgstr "Tvarkyklė WIA"
 
 #: FTwainGui.resx$label1.Text$Message
-#, fuzzy
 msgid "Waiting for TWAIN to complete"
 msgstr "Laukiama TWAIN užbaigimo"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
-#, fuzzy
 msgid "Waiting for scan {0}"
-msgstr "Laikiama skenavymo {0}"
+msgstr "Laukiama skenavimo {0}"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
-#, fuzzy
 msgid "White Threshold"
 msgstr "Baltumo slenkstis"
 
@@ -1365,38 +1202,31 @@ msgid "Year (00-99)"
 msgstr "Metai (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#, fuzzy
 msgid "You do not have permission to copy content from the file '{0}'"
-msgstr "Jūs neturite leidimo kopijuoti turinį iš failo '{0}'"
+msgstr "Neturite leidimo kopijuoti turinio iš failo '{0}'"
 
 #: MiscResources.resx$DontHavePermission$Message
-#, fuzzy
 msgid "You don't have permission to save files at this location"
-msgstr "Jūs neturite leidimo įrašyti bylas šioje vietoje"
+msgstr "Neturite leidimo įrašyti bylų šioje vietoje"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-#, fuzzy
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr ""
-"Turite neišsaugotų pakeitimų. Ar tikrai norite išeiti ir tuos pakeitimus "
-"atmesti?"
+"Turite neišsaugotų pakeitimų. Ar tikrai norite išeiti ir atmesti pakeitimus?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
 msgstr "Mastelis"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
-#, fuzzy
 msgid "Zoom Actual"
 msgstr "Tikrasis mastelis"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
-#, fuzzy
 msgid "Zoom In"
 msgstr "Padidinti"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#, fuzzy
 msgid "Zoom Out"
 msgstr "Sumažinti"
 
@@ -1413,7 +1243,6 @@ msgid "http://www.naps2.com"
 msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
-#, fuzzy
 msgid "in"
 msgstr "in"
 
@@ -1441,10 +1270,9 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} bylų"
 
 #: FRecover.resx$lblPrompt.Text$Message
-#, fuzzy
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
-"{0} vaizdas(-ai) nuskaitytas nuo {1} iki {2} negali būti išsaugotas, ir gali "
+"{0} vaizdas(-ai) nuskenuotas(-i) nuo {1} iki {2} nebuvo išsaugoti ir gali "
 "būti atstatyti. Ar norite juos atstatyti?"
 
 #: MiscResources.resx$PdfStatus$Message
