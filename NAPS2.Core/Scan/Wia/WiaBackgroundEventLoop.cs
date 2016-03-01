@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Wia
@@ -34,43 +35,68 @@ namespace NAPS2.Scan.Wia
 
         public void DoSync(Action<WiaState> action)
         {
-            form.Invoke(Bind(action));
+            Exception error = null;
+            form.Invoke(new Action(() =>
+            {
+                try
+                {
+                    if (wiaState == null)
+                    {
+                        wiaState = InitWia();
+                    }
+                    action(wiaState);
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                }
+            }));
+            if (error != null)
+            {
+                if (error is ScanDriverException)
+                {
+                    throw error;
+                }
+                throw new ScanDriverUnknownException(error);
+            }
         }
 
         public T GetSync<T>(Func<WiaState, T> action)
         {
             T value = default(T);
-            form.Invoke(Bind(wia =>
+            DoSync(wia =>
             {
                 value = action(wia);
-            }));
+            });
             return value;
         }
 
         public void DoAsync(Action<WiaState> action)
         {
-            form.BeginInvoke(Bind(action));
-        }
-
-        public void Dispose()
-        {
-            if (thread != null)
-            {
-                DoSync(wia => Application.ExitThread());
-                thread = null;
-            }
-        }
-
-        private Action Bind(Action<WiaState> action)
-        {
-            return () =>
+            form.BeginInvoke(new Action(() =>
             {
                 if (wiaState == null)
                 {
                     wiaState = InitWia();
                 }
                 action(wiaState);
-            };
+            }));
+        }
+
+        public void Dispose()
+        {
+            if (thread != null)
+            {
+                try
+                {
+                    form.Invoke(new Action(Application.ExitThread));
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorException("Error disposing WIA event loop", ex);
+                }
+                thread = null;
+            }
         }
 
         private WiaState InitWia()
