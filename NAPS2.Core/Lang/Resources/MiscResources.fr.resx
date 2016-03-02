@@ -136,7 +136,7 @@
         <value>Faut-il vraiment supprimer le profil « {0} » ?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Le fichier « {0} » existe déjà. Faut-il l'écraser ?</value>
+        <value>Le fichier « {0} » existe déjà. Faut-il vraiment l'écraser ?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Supprimer</value>
@@ -187,7 +187,7 @@
         <value>Aucun périphérique sélectionné.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>Aucun périphérique d'acquisition trouvé.</value>
+        <value>Aucun périphérique d'acquisition n'a été trouvé.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
         <value>Écraser le fichier</value>
@@ -199,7 +199,7 @@
         <value>Image numérisée</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Il faut sélectionner un profil avant de cliquer sur « Numériser ».</value>
+        <value>Sélectionner un profil avant de cliquer sur « Numériser ».</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>Une erreur s'est produite avec le pilote d'acquisition.</value>
@@ -385,15 +385,15 @@
         <value>Fichiers image</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Le scanner sélectionné est occupé.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>Le capot du scanner est ouvert.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>Le scanner a un bourrage papier.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>Le scanner est en train de chauffer.</value>
     </data>
 </root>

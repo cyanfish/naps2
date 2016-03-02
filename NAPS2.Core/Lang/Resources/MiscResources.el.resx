@@ -145,7 +145,7 @@
         <value>Ο επιλεγμένος σαρωτής δεν μπόρεσε να βρεθεί.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>Ο επιλεγμένος σαρωτής είναι εκτός λειτουργίας.</value>
+        <value>Ο επιλεγμένος σαρωτής βρίσκεται εκτός σύνδεσης (offline).</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
         <value>Δεν υπάρχει δικαίωμα αποθήκευσης αρχείων σε αυτή την τοποθεσία.</value>
@@ -385,15 +385,15 @@
         <value>Αρχεία Εικόνας</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Ο επιλεγμένος σαρωτής είναι απασχολημένος.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>Το κάλυμμα του σαρωτή είναι ανοικτό.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>Εμπλοκή χαρτιού στον σαρωτή.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>Προθέρμανση σαρωτή.</value>
     </data>
 </root>
