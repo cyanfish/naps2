@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 20:33+0000\n"
-"PO-Revision-Date: 2016-01-31 20:38+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
+"PO-Revision-Date: 2016-03-01 22:54+0000\n"
 "Last-Translator: solidhit <solidhit2003@yahoo.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1454272689.000000\n"
+"X-POOTLE-MTIME: 1456872849.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -830,11 +830,13 @@ msgstr "Κωδικός"
 msgid "Paste"
 msgstr "Επικόλληση"
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Δεσμευτικά Θέσεων (Placeholders)"
 
@@ -1071,11 +1073,6 @@ msgstr "Έναρξη"
 msgid "Subject"
 msgstr "Θέμα"
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr "Δεσμευτικά Θέσεων (Placeholders)"
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Αρχεία TIFF (*.tiff, *.tif)"
@@ -1104,6 +1101,18 @@ msgstr ""
 "Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: "
 "'{0}'"
 
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr "Εμπλοκή χαρτιού στον σαρωτή"
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr "Προθέρμανση σαρωτή"
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr "Το κάλυμμα του σαρωτή είναι ανοικτό"
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "Ο επιλεγμένος σαρωτής δεν μπόρεσε να βρεθεί"
@@ -1121,9 +1130,13 @@ msgstr ""
 "πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού "
 "οδηγού"
 
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
+msgstr "Ο επιλεγμένος σαρωτής είναι απασχολημένος"
+
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
-msgstr "Ο επιλεγμένος σαρωτής είναι εκτός λειτουργίας"
+msgstr "Ο επιλεγμένος σαρωτής βρίσκεται εκτός σύνδεσης (offline)"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1284,6 +1297,9 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} από {1}"
+
+#~ msgid "Substitutions"
+#~ msgstr "Δεσμευτικά Θέσεων (Placeholders)"
 
 #~ msgid "PDF document (*.pdf)"
 #~ msgstr "Αρχεία PDF (*.pdf)"

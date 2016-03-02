@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 20:34+0000\n"
-"PO-Revision-Date: 2016-01-24 22:35+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
+"PO-Revision-Date: 2016-02-29 22:48+0000\n"
 "Last-Translator: Kityn <kitynska@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1453674908.000000\n"
+"X-POOTLE-MTIME: 1456786133.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -827,11 +827,13 @@ msgstr "Hasło"
 msgid "Paste"
 msgstr "Wklej"
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Symbole zastępcze"
 
@@ -1068,11 +1070,6 @@ msgstr "Rozpocznij"
 msgid "Subject"
 msgstr "Temat"
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr "Zastępstwa"
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Plik TIFF (*.tiff, *.tif)"
@@ -1100,6 +1097,18 @@ msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
 "Następujący plik jest zaszyfrowany i potrzebuje hasła do otworzenia: {0}"
 
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr "W skanerze zaciął się papier"
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr "Skaner się rozgrzewa"
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr "Pokrywa skanera jest otwarta"
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "Nie można odnaleźć wybranego skanera"
@@ -1115,6 +1124,10 @@ msgid "The selected scanner does not support using duplex. If your scanner is su
 msgstr ""
 "Wybrany skaner nie obsługuje druku obustronnego. Jeśli twój skaner powinien "
 "wspierać druk obustronny, spróbuj użyć innego sterownika"
+
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
+msgstr "Wybrany skaner jest zajęty"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1279,6 +1292,9 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} z {1}"
+
+#~ msgid "Substitutions"
+#~ msgstr "Zastępstwa"
 
 #~ msgid "PDF document (*.pdf)"
 #~ msgstr "Dokument PDF (*.pdf)"

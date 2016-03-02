@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 20:33+0000\n"
-"PO-Revision-Date: 2016-01-27 07:56+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
+"PO-Revision-Date: 2016-03-02 13:47+0000\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1453881364.000000\n"
+"X-POOTLE-MTIME: 1456926463.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -723,7 +723,7 @@ msgstr "Il n'y a aucune page dans le dispositif d'alimentation"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr "Aucun périphérique d'acquisition trouvé"
+msgstr "Aucun périphérique d'acquisition n'a été trouvé"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -829,11 +829,13 @@ msgstr "Mot de passe"
 msgid "Paste"
 msgstr "Coller"
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Chaînes de substitution"
 
@@ -1030,7 +1032,7 @@ msgstr "Sélectionner une source"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Il faut sélectionner un profil avant de cliquer sur « Numériser »"
+msgstr "Sélectionner un profil avant de cliquer sur « Numériser »"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
@@ -1070,11 +1072,6 @@ msgstr "Démarrer"
 msgid "Subject"
 msgstr "Sujet "
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr "Substitutions"
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Fichier TIFF (*.tiff, *.tif)"
@@ -1095,13 +1092,24 @@ msgstr ""
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Le fichier « {0} » existe déjà. Faut-il l'écraser ?"
+msgstr "Le fichier « {0} » existe déjà. Faut-il vraiment l'écraser ?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
-"Le fichier suivant est chiffré, son ouverture nécessite un mot de passe : "
-"{0}"
+"Le fichier suivant est chiffré, son ouverture nécessite un mot de passe : {0}"
+
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr "Le scanner a un bourrage papier"
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr "Le scanner est en train de chauffer"
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr "Le capot du scanner est ouvert"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1118,6 +1126,10 @@ msgid "The selected scanner does not support using duplex. If your scanner is su
 msgstr ""
 "Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé "
 "le gérer, essayer d'utiliser un autre pilote."
+
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
+msgstr "Le scanner sélectionné est occupé"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1283,6 +1295,9 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} sur {1}"
+
+#~ msgid "Substitutions"
+#~ msgstr "Substitutions"
 
 #~ msgid "PDF document (*.pdf)"
 #~ msgstr "Document PDF (*.pdf)"
