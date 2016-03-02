@@ -25,6 +25,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Util;
 using WIA;
 
 namespace NAPS2.Scan.Wia
@@ -376,12 +377,26 @@ namespace NAPS2.Scan.Wia
 
         private static int GetItemIntPropertyMax(Item item, int propid)
         {
-            foreach (Property property in item.Properties)
+            try
             {
-                if (property.PropertyID == propid)
+                foreach (Property property in item.Properties)
                 {
-                    return property.SubTypeMax;
+                    if (property.PropertyID == propid)
+                    {
+                        if (property.SubType == WiaSubType.RangeSubType)
+                        {
+                            return property.SubTypeMax;
+                        }
+                        if (property.SubType == WiaSubType.ListSubType)
+                        {
+                            return property.SubTypeValues.Cast<int>().Max();
+                        }
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Error getting property max", ex);
             }
             return int.MaxValue;
         }
