@@ -358,7 +358,7 @@
         <value>Save Images Progress</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>پیشرفت رایانامه PDF</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
         <value>ذخیره {0}...</value>

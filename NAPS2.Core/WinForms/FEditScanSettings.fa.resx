@@ -933,7 +933,7 @@
         <value>1</value>
     </data>
     <data name="rdWIA.Text" xml:space="preserve">
-        <value>WIA Driver</value>
+        <value>درایور TWAIN</value>
     </data>
     <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
         <value>rdWIA</value>

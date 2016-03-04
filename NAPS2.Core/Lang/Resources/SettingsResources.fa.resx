@@ -178,10 +178,10 @@
         <value>A5 (۱۴۸×۲۱۰ میلی‌متر)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+        <value>ب۴ (۲۵۰ در ۳۵۳ م.م)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+        <value>ب۵ (۱۷۶ در ۲۵۰ م.م)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
         <value>سفارشی...</value>
