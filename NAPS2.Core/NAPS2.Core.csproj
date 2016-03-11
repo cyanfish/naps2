@@ -3437,91 +3437,91 @@
     <None Include="Lang\po\uk.po" />
     <None Include="Lang\po\zh-TW.po" />
     <None Include="packages.config" />
-    <None Include="Resources\accept-small.png" />
+    <None Include="Icons\accept-small.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\accept.png" />
+    <None Include="Icons\accept.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\add-small.png" />
+    <None Include="Icons\add-small.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\add.png" />
+    <None Include="Icons\add.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arrow_down.png" />
+    <None Include="Icons\arrow_down.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arrow_out.png" />
+    <None Include="Icons\arrow_out.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arrow_up.png" />
+    <None Include="Icons\arrow_up.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\application_cascade.png" />
-    <Content Include="Resources\arrow_left.png" />
-    <Content Include="Resources\arrow_right.png" />
-    <Content Include="Resources\arrow_rotate_anticlockwise-small.ico" />
-    <Content Include="Resources\color_wheel.png" />
-    <Content Include="Resources\contrast.ico" />
-    <Content Include="Resources\contrast.png" />
-    <Content Include="Resources\arrow_down-small.png" />
-    <Content Include="Resources\arrow_up-small.png" />
-    <Content Include="Resources\control_play_blue-small.png" />
-    <Content Include="Resources\email.ico" />
-    <Content Include="Resources\file_extension_pdf.ico" />
-    <Content Include="Resources\image_edit.png" />
-    <Content Include="Resources\picture.ico" />
-    <Content Include="Resources\pictures.png" />
-    <Content Include="Resources\picture_edit.png" />
-    <Content Include="Resources\picture_save.png" />
-    <Content Include="Resources\scanner-default.png" />
-    <Content Include="Resources\printer.png" />
-    <Content Include="Resources\text.png" />
-    <Content Include="Resources\transform_crop.ico" />
-    <Content Include="Resources\transform_crop.png" />
-    <Content Include="Resources\weather_sun.ico" />
-    <Content Include="Resources\weather_sun.png" />
-    <None Include="Resources\arrow_rotate_anticlockwise.png" />
-    <None Include="Resources\arrow_rotate_clockwise.png" />
-    <None Include="Resources\arrow_switch.png" />
-    <None Include="Resources\arrow_rotate_anticlockwise-small.png" />
-    <None Include="Resources\arrow_rotate_clockwise-small.png" />
-    <None Include="Resources\arrow_switch-small.png" />
-    <None Include="Resources\arrow_refresh.png" />
-    <Content Include="Resources\blueprints-small.ico" />
-    <Content Include="Resources\folder_picture.png" />
-    <Content Include="Resources\information-small.ico" />
-    <Content Include="Resources\information-small.png" />
-    <Content Include="Resources\scanner-app.ico" />
-    <Content Include="Resources\scanner-large.png" />
-    <Content Include="Resources\scanner.ico" />
-    <Content Include="Resources\scanner.png" />
-    <None Include="Resources\control_play_blue.png" />
-    <None Include="Resources\zoom_out.png" />
-    <None Include="Resources\zoom_in.png" />
-    <None Include="Resources\zoom_actual.png" />
-    <None Include="Resources\world.png" />
-    <None Include="Resources\transform_flip.png" />
-    <None Include="Resources\tick.png" />
-    <None Include="Resources\tick-small.png" />
-    <None Include="Resources\scanner-72.png" />
-    <None Include="Resources\scanner-64.png" />
-    <None Include="Resources\scanner-48.png" />
-    <None Include="Resources\picture.png" />
-    <None Include="Resources\pencil.png" />
-    <None Include="Resources\pencil-small.png" />
-    <None Include="Resources\pdf_email.png" />
-    <None Include="Resources\information.png" />
-    <None Include="Resources\info_rhombus.png" />
-    <None Include="Resources\file_extension_pdf.png" />
-    <None Include="Resources\email_attach.png" />
-    <None Include="Resources\cross.png" />
-    <None Include="Resources\cross-small.png" />
-    <None Include="Resources\cancel.png" />
-    <None Include="Resources\cancel-small.png" />
-    <None Include="Resources\blueprints.png" />
-    <None Include="Resources\blueprints-small.png" />
+    <None Include="Icons\application_cascade.png" />
+    <Content Include="Icons\arrow_left.png" />
+    <Content Include="Icons\arrow_right.png" />
+    <Content Include="Icons\arrow_rotate_anticlockwise-small.ico" />
+    <Content Include="Icons\color_wheel.png" />
+    <Content Include="Icons\contrast.ico" />
+    <Content Include="Icons\contrast.png" />
+    <Content Include="Icons\arrow_down-small.png" />
+    <Content Include="Icons\arrow_up-small.png" />
+    <Content Include="Icons\control_play_blue-small.png" />
+    <Content Include="Icons\email.ico" />
+    <Content Include="Icons\file_extension_pdf.ico" />
+    <Content Include="Icons\image_edit.png" />
+    <Content Include="Icons\picture.ico" />
+    <Content Include="Icons\pictures.png" />
+    <Content Include="Icons\picture_edit.png" />
+    <Content Include="Icons\picture_save.png" />
+    <Content Include="Icons\scanner-default.png" />
+    <Content Include="Icons\printer.png" />
+    <Content Include="Icons\text.png" />
+    <Content Include="Icons\transform_crop.ico" />
+    <Content Include="Icons\transform_crop.png" />
+    <Content Include="Icons\weather_sun.ico" />
+    <Content Include="Icons\weather_sun.png" />
+    <None Include="Icons\arrow_rotate_anticlockwise.png" />
+    <None Include="Icons\arrow_rotate_clockwise.png" />
+    <None Include="Icons\arrow_switch.png" />
+    <None Include="Icons\arrow_rotate_anticlockwise-small.png" />
+    <None Include="Icons\arrow_rotate_clockwise-small.png" />
+    <None Include="Icons\arrow_switch-small.png" />
+    <None Include="Icons\arrow_refresh.png" />
+    <Content Include="Icons\blueprints-small.ico" />
+    <Content Include="Icons\folder_picture.png" />
+    <Content Include="Icons\information-small.ico" />
+    <Content Include="Icons\information-small.png" />
+    <Content Include="Icons\scanner-app.ico" />
+    <Content Include="Icons\scanner-large.png" />
+    <Content Include="Icons\scanner.ico" />
+    <Content Include="Icons\scanner.png" />
+    <None Include="Icons\control_play_blue.png" />
+    <None Include="Icons\zoom_out.png" />
+    <None Include="Icons\zoom_in.png" />
+    <None Include="Icons\zoom_actual.png" />
+    <None Include="Icons\world.png" />
+    <None Include="Icons\transform_flip.png" />
+    <None Include="Icons\tick.png" />
+    <None Include="Icons\tick-small.png" />
+    <None Include="Icons\scanner-72.png" />
+    <None Include="Icons\scanner-64.png" />
+    <None Include="Icons\scanner-48.png" />
+    <None Include="Icons\picture.png" />
+    <None Include="Icons\pencil.png" />
+    <None Include="Icons\pencil-small.png" />
+    <None Include="Icons\pdf_email.png" />
+    <None Include="Icons\information.png" />
+    <None Include="Icons\info_rhombus.png" />
+    <None Include="Icons\file_extension_pdf.png" />
+    <None Include="Icons\email_attach.png" />
+    <None Include="Icons\cross.png" />
+    <None Include="Icons\cross-small.png" />
+    <None Include="Icons\cancel.png" />
+    <None Include="Icons\cancel-small.png" />
+    <None Include="Icons\blueprints.png" />
+    <None Include="Icons\blueprints-small.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

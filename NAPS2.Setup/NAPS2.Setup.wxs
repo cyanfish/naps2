@@ -10,7 +10,7 @@
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <Media Id="1" Cabinet="NAPS2.cab" EmbedCab="yes" CompressionLevel="high" />
 
-    <Icon Id="icon.ico" SourceFile="..\NAPS2.Core\Resources\scanner.ico"/>
+    <Icon Id="icon.ico" SourceFile="..\NAPS2.Core\Icons\scanner.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
@@ -69,7 +69,7 @@
         <File Source="..\NAPS2\bin\InstallerMSI\Ninject.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\NLog.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\NTwain.dll" />
-        <File Source="..\NAPS2.Core\Resources\scanner-app.ico" />
+        <File Source="..\NAPS2.Core\Icons\scanner-app.ico" />
         <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\CommandLine.dll" />
         <!-- Configuration -->
