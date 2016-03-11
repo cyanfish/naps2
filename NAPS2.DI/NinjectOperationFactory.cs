@@ -4,7 +4,7 @@ using System.Linq;
 using NAPS2.Operation;
 using Ninject;
 
-namespace NAPS2
+namespace NAPS2.DI
 {
     public class NinjectOperationFactory : IOperationFactory
     {

@@ -61,6 +61,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net40\CommandLine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
       <HintPath>..\packages\NTwain.3.3.9.4\lib\net40-Client\NTwain.dll</HintPath>
       <Private>True</Private>
@@ -78,6 +82,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Automation\AutomatedScanning.cs" />
+    <Compile Include="Automation\AutomatedScanningOptions.cs" />
+    <Compile Include="Automation\CommandLineOptions.cs" />
+    <Compile Include="Automation\ConsoleErrorOutput.cs" />
+    <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
+    <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Config\KeyboardShortcuts.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Host\BackgroundForm.cs">
@@ -95,6 +105,11 @@
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
     <Compile Include="ImportExport\SaveSeparatorHelper.cs" />
+    <Compile Include="Lang\Resources\ConsoleResources.Designer.cs">
+      <DependentUpon>ConsoleResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Operation\IOperationFactory.cs" />
     <Compile Include="Operation\OperationBase.cs" />
     <Compile Include="Recovery\RecoveryImage.cs" />
@@ -487,6 +502,11 @@
     <EmbeddedResource Include="Lang\LanguageResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LanguageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\ConsoleResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConsoleResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\MiscResources.bg.resx" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.ca.resx" />

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.ImportExport;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan.Wia;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject.Modules;
 
-namespace NAPS2.DI
+namespace NAPS2.DI.Modules
 {
     public class WinFormsModule : NinjectModule
     {

@@ -6,7 +6,7 @@ using NLog;
 using NLog.Config;
 using NLog.Targets;
 
-namespace NAPS2
+namespace NAPS2.DI
 {
     public class NLogLogger : Util.ILogger
     {

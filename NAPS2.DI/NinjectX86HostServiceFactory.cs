@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Host;
-using NAPS2.Scan;
-using NAPS2.Util;
 using Ninject;
 
-namespace NAPS2
+namespace NAPS2.DI
 {
     public class NinjectX86HostServiceFactory : IX86HostServiceFactory
     {

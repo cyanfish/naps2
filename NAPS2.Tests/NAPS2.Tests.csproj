@@ -91,10 +91,6 @@
       <Project>{968378fa-a649-4058-a928-1fcd97b23070}</Project>
       <Name>NAPS2.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NAPS2\NAPS2.csproj">
-      <Project>{eac4a133-93be-4400-bfa9-ceb1615693c4}</Project>
-      <Name>NAPS2</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="in\test.1p.in.tiff">

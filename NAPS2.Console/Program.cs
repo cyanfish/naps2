@@ -21,11 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Console.DI;
-using NAPS2.Console.Lang.Resources;
-using NAPS2.Util;
-using Ninject;
-using Ninject.Parameters;
+using NAPS2.DI.EntryPoints;
 
 namespace NAPS2.Console
 {
@@ -34,29 +30,7 @@ namespace NAPS2.Console
         [STAThread]
         static void Main(string[] args)
         {
-            Log.Logger = new NLogLogger();
-            var options = new AutomatedScanningOptions();
-            try
-            {
-                if (!CommandLine.Parser.Default.ParseArguments(args, options))
-                {
-                    return;
-                }
-                var scanning = KernelManager.Kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
-                scanning.Execute();
-            }
-            catch (Exception ex)
-            {
-                Log.FatalException("An error occurred that caused the console application to close.", ex);
-                System.Console.WriteLine(ConsoleResources.UnexpectedError);
-            }
-            finally
-            {
-                if (options.WaitForEnter)
-                {
-                    System.Console.ReadLine();
-                }
-            }
+            ConsoleEntryPoint.Run(args);
         }
     }
 }

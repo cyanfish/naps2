@@ -102,14 +102,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.2.3\lib\net40\NLog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PdfSharp, Version=0.9.653.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Setup\lib\PdfSharp.dll</HintPath>
@@ -123,14 +115,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NinjectX86HostServiceFactory.cs" />
-    <Compile Include="NinjectOperationFactory.cs" />
-    <Compile Include="NinjectScanDriverFactory.cs" />
-    <Compile Include="DI\CommonModule.cs" />
-    <Compile Include="DI\WinFormsModule.cs" />
-    <Compile Include="DI\KernelManager.cs" />
-    <Compile Include="NinjectFormFactory.cs" />
-    <Compile Include="NLogLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -217,9 +201,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Core\NAPS2.Core.csproj">
-      <Project>{968378fa-a649-4058-a928-1fcd97b23070}</Project>
-      <Name>NAPS2.Core</Name>
+    <ProjectReference Include="..\NAPS2.DI\NAPS2.DI.csproj">
+      <Project>{4d349529-149b-498b-8a55-373e6a67e1f0}</Project>
+      <Name>NAPS2.DI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -37,10 +37,8 @@ using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 
-namespace NAPS2.Console
+namespace NAPS2.Automation
 {
-    using Console = System.Console;
-
     public class AutomatedScanning
     {
         private readonly IEmailer emailer;
@@ -81,61 +79,76 @@ namespace NAPS2.Console
         {
             if (options.Verbose)
             {
-                Console.WriteLine(value, args);
+                System.Console.WriteLine(value, args);
             }
         }
 
         public void Execute()
         {
-            if (!ValidateOptions())
+            try
             {
-                return;
-            }
-
-            startTime = DateTime.Now;
-            ConsoleOverwritePrompt.ForceOverwrite = options.ForceOverwrite;
-
-            if (!PreCheckOverwriteFile())
-            {
-                return;
-            }
-
-            imageList = new ScannedImageList();
-
-            if (options.ImportPath != null)
-            {
-                ImportImages();
-            }
-
-            if (options.Number > 0)
-            {
-                ScanProfile profile;
-                if (!GetProfile(out profile))
+                if (!ValidateOptions())
                 {
                     return;
                 }
 
-                PerformScan(profile);
+                startTime = DateTime.Now;
+                ConsoleOverwritePrompt.ForceOverwrite = options.ForceOverwrite;
+
+                if (!PreCheckOverwriteFile())
+                {
+                    return;
+                }
+
+                imageList = new ScannedImageList();
+
+                if (options.ImportPath != null)
+                {
+                    ImportImages();
+                }
+
+                if (options.Number > 0)
+                {
+                    ScanProfile profile;
+                    if (!GetProfile(out profile))
+                    {
+                        return;
+                    }
+
+                    PerformScan(profile);
+                }
+
+                ReorderScannedImages();
+
+                if (options.OutputPath != null)
+                {
+                    ExportScannedImages();
+                }
+
+                if (options.EmailFileName != null)
+                {
+                    EmailScannedImages();
+                }
+
+                foreach (var image in imageList.Images)
+                {
+                    image.Dispose();
+                }
+
+                imageList = null;
             }
-
-            ReorderScannedImages();
-
-            if (options.OutputPath != null)
+            catch (Exception ex)
             {
-                ExportScannedImages();
+                Log.FatalException("An error occurred that caused the console application to close.", ex);
+                System.Console.WriteLine(ConsoleResources.UnexpectedError);
             }
-
-            if (options.EmailFileName != null)
+            finally
             {
-                EmailScannedImages();
+                if (options.WaitForEnter)
+                {
+                    System.Console.ReadLine();
+                }
             }
-
-            foreach (var image in imageList.Images)
-            {
-                image.Dispose();
-            }
-
-            imageList = null;
         }
 
         private void ReorderScannedImages()

@@ -5,7 +5,7 @@ using NAPS2.Config;
 using NAPS2.WinForms;
 using Ninject;
 
-namespace NAPS2
+namespace NAPS2.DI
 {
     public class NinjectFormFactory : IFormFactory
     {

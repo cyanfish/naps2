@@ -5,7 +5,7 @@ using NAPS2.Console.Lang.Resources;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Util;
 
-namespace NAPS2.Console
+namespace NAPS2.Automation
 {
     public class ConsolePdfPasswordProvider : IPdfPasswordProvider
     {

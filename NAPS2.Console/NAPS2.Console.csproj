@@ -63,18 +63,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net40\CommandLine.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.2.3\lib\net40\NLog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -86,19 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutomatedScanning.cs" />
-    <Compile Include="AutomatedScanningOptions.cs" />
-    <Compile Include="CommandLineOptions.cs" />
-    <Compile Include="ConsoleErrorOutput.cs" />
-    <Compile Include="ConsolePdfPasswordProvider.cs" />
-    <Compile Include="ConsoleOverwritePrompt.cs" />
-    <Compile Include="DI\ConsoleModule.cs" />
-    <Compile Include="DI\KernelManager.cs" />
-    <Compile Include="Lang\Resources\ConsoleResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConsoleResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,20 +83,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Lang\Resources\ConsoleResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ConsoleResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Core\NAPS2.Core.csproj">
-      <Project>{968378FA-A649-4058-A928-1FCD97B23070}</Project>
-      <Name>NAPS2.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NAPS2\NAPS2.csproj">
-      <Project>{eac4a133-93be-4400-bfa9-ceb1615693c4}</Project>
-      <Name>NAPS2</Name>
+    <ProjectReference Include="..\NAPS2.DI\NAPS2.DI.csproj">
+      <Project>{4d349529-149b-498b-8a55-373e6a67e1f0}</Project>
+      <Name>NAPS2.DI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

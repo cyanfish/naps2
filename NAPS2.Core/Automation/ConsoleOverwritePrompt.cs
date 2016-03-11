@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using NAPS2.Console.Lang.Resources;
 using NAPS2.Util;
 
-namespace NAPS2.Console
+namespace NAPS2.Automation
 {
     public class ConsoleOverwritePrompt : IOverwritePrompt
     {

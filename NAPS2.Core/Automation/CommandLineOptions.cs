@@ -4,7 +4,7 @@ using System.Linq;
 using CommandLine;
 using CommandLine.Text;
 
-namespace NAPS2.Console
+namespace NAPS2.Automation
 {
     public class CommandLineOptions
     {

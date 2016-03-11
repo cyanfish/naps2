@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
@@ -19,8 +20,10 @@ using NAPS2.Update;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject.Modules;
+using NLog;
+using ILogger = NAPS2.Util.ILogger;
 
-namespace NAPS2.DI
+namespace NAPS2.DI.Modules
 {
     public class CommonModule : NinjectModule
     {
@@ -77,6 +80,11 @@ namespace NAPS2.DI
             Bind<StillImage>().ToSelf().InSingletonScope();
             Bind<IBlankDetector>().To<ThresholdBlankDetector>();
             Bind<IAutoSave>().To<AutoSave>();
+
+            Log.Logger = new NLogLogger();
+#if DEBUG
+            Debug.Listeners.Add(new NLogTraceListener());
+#endif
         }
 
         private Edition GetEdition()

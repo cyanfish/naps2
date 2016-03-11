@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommandLine;
 
-namespace NAPS2.Console
+namespace NAPS2.Automation
 {
     public class AutomatedScanningOptions : CommandLineOptions
     {

@@ -7,6 +7,8 @@ using System.Windows.Forms;
 
 namespace NAPS2.Host
 {
+    using Console = System.Console;
+
     // TODO TODO TODO
     // The NAPS2.Host namespace is all about 64-bit support. The NAPS2_32 process calls X86HostEntry.Run.
     // To enable 64-bit support, simply switch NAPS2 and NAPS2.Console to build in AnyCPU and ensure NAPS2_32.exe is included in distribution.
