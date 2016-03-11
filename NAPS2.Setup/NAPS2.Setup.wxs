@@ -21,6 +21,7 @@
 
     <Feature Id="MainApplication" Title="NAPS2" Level="1">
       <ComponentRef Id="Exec" />
+      <ComponentRef Id="SystemDeps" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="RegistryEntries" />
       <ComponentGroupRef Id="LangComponents" />
@@ -33,6 +34,7 @@
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ProgramMenuDir" Name="NAPS2" />
       </Directory>
+      <Directory Id="SystemFolder" />
 
       <!-- Registry -->
       <Component Id="RegistryEntries" Guid="5A1EA674-0ED2-42DF-817A-772F1B91EAE3">
@@ -74,6 +76,13 @@
         <File Source="..\NAPS2\appsettings.xml" />
         <!-- License -->
         <File Source="..\NAPS2\Setup\license.txt" />
+      </Component>
+    </DirectoryRef>
+    
+    <DirectoryRef Id="SystemFolder">
+      <Component Id="SystemDeps" Guid="A55F9DBB-0A42-44B9-8C58-87F06A2075BA" Permanent="yes" SharedDllRefCount="yes">
+        <!-- System Dependencies -->
+        <File Source="..\NAPS2\Setup\lib\twaindsm.dll" KeyPath="yes" />
       </Component>
     </DirectoryRef>
 
