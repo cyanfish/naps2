@@ -29,17 +29,19 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]                              
 #include "setup.languagefiles.iss"                                                          
 Source: "..\bin\InstallerEXE\NAPS2.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\NAPS2.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\PdfSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Interop.WIA.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Ninject.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion     
-Source: "..\bin\InstallerEXE\NTwain.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\NAPS2.Core\Resources\scanner-app.ico"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\bin\InstallerEXE\NAPS2.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\NAPS2.Core.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\NAPS2.DI.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\PdfSharp.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\Interop.WIA.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\Ninject.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\NLog.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\NTwain.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\appsettings.xml"; DestDir: "{app}"; Flags: ignoreversion           
 Source: "license.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\NAPS2.Console\bin\InstallerEXE\CommandLine.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\NAPS2.Console\bin\InstallerEXE\CommandLine.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\twaindsm.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "lib\wiaaut.dll"; DestDir: "{sys}"; Flags: regserver
 

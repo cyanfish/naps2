@@ -68,6 +68,7 @@ function Publish-NAPS2-Standalone {
           [Parameter(Position=2)] [String] $ArchiveFile)
 	$StandaloneDir = $PublishDir + "naps2-$Version-portable\"
     $AppDir = $StandaloneDir + "App\"
+	$LibDir = $StandaloneDir + "App\lib\"
     $DataDir = $StandaloneDir + "Data\"
     if (Test-Path $StandaloneDir) {
         rmdir $StandaloneDir -Recurse
@@ -80,16 +81,19 @@ function Publish-NAPS2-Standalone {
     $PortableBinDir = "..\..\NAPS2.Portable\bin\Release\"
     cp ($PortableBinDir + "NAPS2.Portable.exe") $StandaloneDir
     foreach ($LanguageCode in Get-NAPS2-Languages) {
-        $LangDir = $AppDir + "$LanguageCode\"
+        $LangDir = $LibDir + "$LanguageCode\"
         mkdir $LangDir
         cp ($BinDir + "$LanguageCode\NAPS2.Core.resources.dll") $LangDir
     }
     foreach ($Dir in ($BinDir, $CmdBinDir)) {
-        foreach ($File in (Get-ChildItem $Dir | where { $_.Name -match '(?<!vshost)\.(exe|dll)$' })) {
+        foreach ($File in (Get-ChildItem $Dir | where { $_.Name -match '(?<!vshost)\.exe(\.config)?$' })) {
             cp $File.FullName $AppDir
         }
+        foreach ($File in (Get-ChildItem $Dir | where { $_.Name -match '\.dll$' })) {
+            cp $File.FullName $LibDir
+        }
     }
-    foreach ($File in ("..\..\NAPS2.Core\Resources\scanner-app.ico", "..\appsettings.xml", "lib\twaindsm.dll", "lib\wiaaut.dll", "license.txt")) {
+    foreach ($File in ("..\appsettings.xml", "lib\twaindsm.dll", "lib\wiaaut.dll", "license.txt")) {
         cp $File $AppDir
     }
     if (Test-Path $ArchiveFile) {

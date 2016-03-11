@@ -11,12 +11,14 @@
       <ComponentRef Id="LangComponent_el" />
       <ComponentRef Id="LangComponent_es" />
       <ComponentRef Id="LangComponent_et" />
+      <ComponentRef Id="LangComponent_fa" />
       <ComponentRef Id="LangComponent_fi" />
       <ComponentRef Id="LangComponent_fr" />
       <ComponentRef Id="LangComponent_he" />
       <ComponentRef Id="LangComponent_hr" />
       <ComponentRef Id="LangComponent_hu" />
       <ComponentRef Id="LangComponent_it" />
+      <ComponentRef Id="LangComponent_ko" />
       <ComponentRef Id="LangComponent_lt" />
       <ComponentRef Id="LangComponent_nb" />
       <ComponentRef Id="LangComponent_nl" />
@@ -32,7 +34,7 @@
       <ComponentRef Id="LangComponent_zh_TW" />
     </ComponentGroup>
 
-    <DirectoryRef Id="INSTALLFOLDER">
+    <DirectoryRef Id="LIBFOLDER">
       <Directory Id="LangFolder_bg" Name="bg">
         <Component Id="LangComponent_bg">
           <File Source="..\NAPS2\bin\InstallerMSI\bg\NAPS2.Core.resources.dll" Id="LangFile_bg" />
@@ -73,6 +75,11 @@
           <File Source="..\NAPS2\bin\InstallerMSI\et\NAPS2.Core.resources.dll" Id="LangFile_et" />
         </Component>
       </Directory>
+      <Directory Id="LangFolder_fa" Name="fa">
+        <Component Id="LangComponent_fa">
+          <File Source="..\NAPS2\bin\InstallerMSI\fa\NAPS2.Core.resources.dll" Id="LangFile_fa" />
+        </Component>
+      </Directory>
       <Directory Id="LangFolder_fi" Name="fi">
         <Component Id="LangComponent_fi">
           <File Source="..\NAPS2\bin\InstallerMSI\fi\NAPS2.Core.resources.dll" Id="LangFile_fi" />
@@ -101,6 +108,11 @@
       <Directory Id="LangFolder_it" Name="it">
         <Component Id="LangComponent_it">
           <File Source="..\NAPS2\bin\InstallerMSI\it\NAPS2.Core.resources.dll" Id="LangFile_it" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_ko" Name="ko">
+        <Component Id="LangComponent_ko">
+          <File Source="..\NAPS2\bin\InstallerMSI\ko\NAPS2.Core.resources.dll" Id="LangFile_ko" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_lt" Name="lt">

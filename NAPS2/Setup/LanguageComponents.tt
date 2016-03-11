@@ -28,7 +28,7 @@
 #>
     </ComponentGroup>
 
-    <DirectoryRef Id="INSTALLFOLDER">
+    <DirectoryRef Id="LIBFOLDER">
 <#
     foreach(var folder in outputDir.EnumerateDirectories()) {
         var langName = folder.Name;

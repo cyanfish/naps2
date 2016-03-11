@@ -21,6 +21,7 @@
 
     <Feature Id="MainApplication" Title="NAPS2" Level="1">
       <ComponentRef Id="Exec" />
+      <ComponentRef Id="Deps" />
       <ComponentRef Id="SystemDeps" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="RegistryEntries" />
@@ -29,7 +30,9 @@
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="NAPS2" />
+        <Directory Id="INSTALLFOLDER" Name="NAPS2">
+          <Directory Id="LIBFOLDER" Name="lib" />
+        </Directory>
       </Directory>
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ProgramMenuDir" Name="NAPS2" />
@@ -61,21 +64,29 @@
       <Component Id="Exec" Guid="3ED24800-E1D9-4D64-A106-6DC3597D9266">
         <!-- EXEs -->
         <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.exe" />
+        <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.exe.config" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe" />
+        <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe.config" />
+        <!-- Dependencies -->
+        <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
+        <!-- Configuration -->
+        <File Source="..\NAPS2\appsettings.xml" />
+        <!-- License -->
+        <File Source="..\NAPS2\Setup\license.txt" />
+      </Component>
+    </DirectoryRef>
+    
+    <DirectoryRef Id="LIBFOLDER">
+      <Component Id="Deps" Guid="04AC2B17-BDFA-4AA0-B8CA-0AE208D9193A">
         <!-- Dependencies -->
         <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.Core.dll" />
+        <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.DI.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\PdfSharp.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\Interop.WIA.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\Ninject.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\NLog.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\NTwain.dll" />
-        <File Source="..\NAPS2.Core\Icons\scanner-app.ico" />
-        <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\CommandLine.dll" />
-        <!-- Configuration -->
-        <File Source="..\NAPS2\appsettings.xml" />
-        <!-- License -->
-        <File Source="..\NAPS2\Setup\license.txt" />
       </Component>
     </DirectoryRef>
     
