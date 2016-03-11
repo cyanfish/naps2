@@ -27,9 +27,9 @@ namespace NAPS2.Host
             RecoveryImage.RecoveryFolder = new DirectoryInfo(path);
         }
 
-        public List<ScanDevice> TwainGetDeviceList()
+        public List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl)
         {
-            return twainWrapper.GetDeviceList();
+            return twainWrapper.GetDeviceList(twainImpl);
         }
 
         public List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)

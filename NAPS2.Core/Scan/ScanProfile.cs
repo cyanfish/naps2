@@ -132,6 +132,8 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Default")]
         Default,
+        [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Modern")]
+        Modern,
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Legacy")]
         Legacy,
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_X64")]

@@ -26,7 +26,6 @@ namespace NAPS2.Scan.Twain
 
         static TwainWrapper()
         {
-            PlatformInfo.Current.PreferNewDSM = Environment.Is64BitProcess;
 #if DEBUG
             PlatformInfo.Current.Log.IsDebugEnabled = true;
 #endif
@@ -39,8 +38,9 @@ namespace NAPS2.Scan.Twain
             this.thumbnailRenderer = thumbnailRenderer;
         }
 
-        public List<ScanDevice> GetDeviceList()
+        public List<ScanDevice> GetDeviceList(TwainImpl twainImpl)
         {
+            PlatformInfo.Current.PreferNewDSM = twainImpl == TwainImpl.Modern;
             var session = new TwainSession(TwainAppId);
             session.Open();
             try
@@ -60,6 +60,7 @@ namespace NAPS2.Scan.Twain
                 return Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, formFactory);
             }
 
+            PlatformInfo.Current.PreferNewDSM = scanProfile.TwainImpl == TwainImpl.Modern;
             var session = new TwainSession(TwainAppId);
             var twainForm = formFactory.Create<FTwainGui>();
             var images = new List<ScannedImage>();

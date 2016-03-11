@@ -367,6 +367,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modern.
+        /// </summary>
+        internal static string TwainImpl_Modern {
+            get {
+                return ResourceManager.GetString("TwainImpl_Modern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to x64.
         /// </summary>
         internal static string TwainImpl_X64 {

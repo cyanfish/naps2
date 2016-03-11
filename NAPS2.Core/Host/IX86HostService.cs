@@ -14,7 +14,7 @@ namespace NAPS2.Host
         void SetRecoveryFolder(string path);
 
         [OperationContract]
-        List<ScanDevice> TwainGetDeviceList();
+        List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl);
 
         [OperationContract]
         List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams);
