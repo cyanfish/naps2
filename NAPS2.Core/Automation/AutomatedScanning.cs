@@ -27,11 +27,11 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using NAPS2.Config;
-using NAPS2.Console.Lang.Resources;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Lang.ConsoleResources;
 using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -79,7 +79,7 @@ namespace NAPS2.Automation
         {
             if (options.Verbose)
             {
-                System.Console.WriteLine(value, args);
+                Console.WriteLine(value, args);
             }
         }
 
@@ -140,13 +140,13 @@ namespace NAPS2.Automation
             catch (Exception ex)
             {
                 Log.FatalException("An error occurred that caused the console application to close.", ex);
-                System.Console.WriteLine(ConsoleResources.UnexpectedError);
+                Console.WriteLine(ConsoleResources.UnexpectedError);
             }
             finally
             {
                 if (options.WaitForEnter)
                 {
-                    System.Console.ReadLine();
+                    Console.ReadLine();
                 }
             }
         }

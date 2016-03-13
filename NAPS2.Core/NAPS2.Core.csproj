@@ -105,7 +105,7 @@
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
     <Compile Include="ImportExport\SaveSeparatorHelper.cs" />
-    <Compile Include="Lang\Resources\ConsoleResources.Designer.cs">
+    <Compile Include="Lang\ConsoleResources\ConsoleResources.Designer.cs">
       <DependentUpon>ConsoleResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -503,7 +503,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LanguageNames.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lang\Resources\ConsoleResources.resx">
+    <EmbeddedResource Include="Lang\ConsoleResources\ConsoleResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ConsoleResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>

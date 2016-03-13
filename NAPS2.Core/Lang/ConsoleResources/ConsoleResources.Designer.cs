@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAPS2.Console.Lang.Resources {
+namespace NAPS2.Lang.ConsoleResources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace NAPS2.Console.Lang.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NAPS2.Console.Lang.Resources.ConsoleResources", typeof(ConsoleResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NAPS2.Lang.ConsoleResources.ConsoleResources", typeof(ConsoleResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
