@@ -219,8 +219,8 @@
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Legacy (native UI only)</value>
   </data>
-  <data name="TwainImpl_Modern" xml:space="preserve">
-    <value>Modern</value>
+  <data name="TwainImpl_OldDsm" xml:space="preserve">
+    <value>Old DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>

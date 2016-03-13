@@ -367,11 +367,11 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modern.
+        ///   Looks up a localized string similar to Old DSM.
         /// </summary>
-        internal static string TwainImpl_Modern {
+        internal static string TwainImpl_OldDsm {
             get {
-                return ResourceManager.GetString("TwainImpl_Modern", resourceCulture);
+                return ResourceManager.GetString("TwainImpl_OldDsm", resourceCulture);
             }
         }
         

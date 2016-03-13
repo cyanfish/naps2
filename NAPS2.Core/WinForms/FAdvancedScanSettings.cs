@@ -34,7 +34,7 @@ namespace NAPS2.WinForms
 
             cmbTwainImpl.Format += (sender, e) => e.Value = ((Enum) e.ListItem).Description();
             cmbTwainImpl.Items.Add(TwainImpl.Default);
-            cmbTwainImpl.Items.Add(TwainImpl.Modern);
+            cmbTwainImpl.Items.Add(TwainImpl.OldDsm);
             cmbTwainImpl.Items.Add(TwainImpl.Legacy);
             if (Environment.Is64BitProcess)
             {
