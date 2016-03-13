@@ -216,8 +216,8 @@
     <Compile Include="ImportExport\Pdf\PdfSharpExporter.cs" />
     <Compile Include="ImportExport\Pdf\PdfSharpImporter.cs" />
     <Compile Include="ImportExport\ScannedImageImporter.cs" />
-    <Compile Include="Lang\LanguageResources.Designer.cs">
-      <DependentUpon>LanguageResources.resx</DependentUpon>
+    <Compile Include="Lang\LanguageNames.Designer.cs">
+      <DependentUpon>LanguageNames.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -499,9 +499,9 @@
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lang\LanguageResources.resx">
+    <EmbeddedResource Include="Lang\LanguageNames.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LanguageResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>LanguageNames.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\ConsoleResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

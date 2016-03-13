@@ -163,7 +163,7 @@ namespace NAPS2.WinForms
         private void InitLanguageDropdown()
         {
             // Read a list of languages from the Languages.resx file
-            var resourceManager = LanguageResources.ResourceManager;
+            var resourceManager = LanguageNames.ResourceManager;
             var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             foreach (DictionaryEntry entry in resourceSet.Cast<DictionaryEntry>().OrderBy(x => x.Value))
             {
