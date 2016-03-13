@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
+using NAPS2.Scan.Wia;
 
 namespace NAPS2.WinForms
 {
@@ -48,6 +49,7 @@ namespace NAPS2.WinForms
             tbImageQuality.Value = ScanProfile.Quality;
             txtImageQuality.Text = ScanProfile.Quality.ToString("G");
             cbBrightnessContrastAfterScan.Checked = ScanProfile.BrightnessContrastAfterScan;
+            cbWiaOffsetWidth.Checked = ScanProfile.WiaOffsetWidth;
             cbForcePageSize.Checked = ScanProfile.ForcePageSize;
             if (ScanProfile.TwainImpl != TwainImpl.X64 || Environment.Is64BitProcess)
             {
@@ -72,6 +74,7 @@ namespace NAPS2.WinForms
         private void UpdateEnabled()
         {
             cmbTwainImpl.Enabled = ScanProfile.DriverName == TwainScanDriver.DRIVER_NAME;
+            cbWiaOffsetWidth.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
             tbImageQuality.Enabled = !cbHighQuality.Checked;
             txtImageQuality.Enabled = !cbHighQuality.Checked;
             tbWhiteThreshold.Enabled = cbExcludeBlankPages.Checked && ScanProfile.BitDepth != ScanBitDepth.BlackWhite;
@@ -87,6 +90,7 @@ namespace NAPS2.WinForms
             ScanProfile.Quality = tbImageQuality.Value;
             ScanProfile.MaxQuality = cbHighQuality.Checked;
             ScanProfile.BrightnessContrastAfterScan = cbBrightnessContrastAfterScan.Checked;
+            ScanProfile.WiaOffsetWidth = cbWiaOffsetWidth.Checked;
             ScanProfile.ForcePageSize = cbForcePageSize.Checked;
             if (cmbTwainImpl.SelectedIndex != -1)
             {

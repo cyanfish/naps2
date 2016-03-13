@@ -54,6 +54,7 @@ namespace NAPS2.WinForms
             this.tbWhiteThreshold = new System.Windows.Forms.TrackBar();
             this.txtWhiteThreshold = new System.Windows.Forms.TextBox();
             this.cbExcludeBlankPages = new System.Windows.Forms.CheckBox();
+            this.cbWiaOffsetWidth = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageQuality)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -108,6 +109,7 @@ namespace NAPS2.WinForms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbWiaOffsetWidth);
             this.groupBox2.Controls.Add(this.cbForcePageSize);
             this.groupBox2.Controls.Add(this.cbBrightnessContrastAfterScan);
             this.groupBox2.Controls.Add(this.cmbTwainImpl);
@@ -198,6 +200,12 @@ namespace NAPS2.WinForms
             this.cbExcludeBlankPages.UseVisualStyleBackColor = true;
             this.cbExcludeBlankPages.CheckedChanged += new System.EventHandler(this.cbExcludeBlankPages_CheckedChanged);
             // 
+            // cbWiaOffsetWidth
+            // 
+            resources.ApplyResources(this.cbWiaOffsetWidth, "cbWiaOffsetWidth");
+            this.cbWiaOffsetWidth.Name = "cbWiaOffsetWidth";
+            this.cbWiaOffsetWidth.UseVisualStyleBackColor = true;
+            // 
             // FAdvancedScanSettings
             // 
             this.AcceptButton = this.btnOK;
@@ -246,5 +254,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.TrackBar tbWhiteThreshold;
         private System.Windows.Forms.TextBox txtWhiteThreshold;
         private System.Windows.Forms.CheckBox cbExcludeBlankPages;
+        private System.Windows.Forms.CheckBox cbWiaOffsetWidth;
     }
 }
