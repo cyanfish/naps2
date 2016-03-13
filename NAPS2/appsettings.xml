@@ -15,7 +15,7 @@
     <Brightness>0</Brightness>
     <Contrast>0</Contrast>
     <BitDepth>C24Bit</BitDepth>
-    <PageAlign>Left</PageAlign>
+    <PageAlign>Right</PageAlign>
     <PageSize>Letter</PageSize>
     <Resolution>Dpi100</Resolution>
     <PaperSource>Glass</PaperSource>

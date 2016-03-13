@@ -37,7 +37,7 @@ namespace NAPS2.Scan
         {
             // Set defaults
             BitDepth = ScanBitDepth.C24Bit;
-            PageAlign = ScanHorizontalAlign.Left;
+            PageAlign = ScanHorizontalAlign.Right;
             PageSize = ScanPageSize.Letter;
             Resolution = ScanDpi.Dpi200;
             PaperSource = ScanSource.Glass;
