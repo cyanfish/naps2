@@ -22,7 +22,8 @@
     <Feature Id="MainApplication" Title="NAPS2" Level="1">
       <ComponentRef Id="Exec" />
       <ComponentRef Id="Deps" />
-      <ComponentRef Id="SystemDeps" />
+      <ComponentRef Id="twaindsm" />
+      <ComponentRef Id="wiaaut" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="RegistryEntries" />
       <ComponentGroupRef Id="LangComponents" />
@@ -67,8 +68,6 @@
         <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.exe.config" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe.config" />
-        <!-- Dependencies -->
-        <File Source="..\NAPS2\Setup\lib\wiaaut.dll" />
         <!-- Configuration -->
         <File Source="..\NAPS2\appsettings.xml" />
         <!-- License -->
@@ -91,9 +90,12 @@
     </DirectoryRef>
     
     <DirectoryRef Id="SystemFolder">
-      <Component Id="SystemDeps" Guid="A55F9DBB-0A42-44B9-8C58-87F06A2075BA" Permanent="yes" SharedDllRefCount="yes">
-        <!-- System Dependencies -->
+      <!-- System Dependencies -->
+      <Component Id="twaindsm" Guid="A55F9DBB-0A42-44B9-8C58-87F06A2075BA" Permanent="yes">
         <File Source="..\NAPS2\Setup\lib\twaindsm.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="wiaaut" Guid="9E7EF98E-5E9E-4838-8554-43EFB5ECF949" Permanent="yes">
+        <File Source="..\NAPS2\Setup\lib\wiaaut.dll" KeyPath="yes" />
       </Component>
     </DirectoryRef>
 
