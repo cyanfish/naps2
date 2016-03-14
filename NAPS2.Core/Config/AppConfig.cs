@@ -49,6 +49,8 @@ namespace NAPS2.Config
 
         public bool DisableAutoSave { get; set; }
 
+        public bool LockSystemProfiles { get; set; }
+
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }
 }

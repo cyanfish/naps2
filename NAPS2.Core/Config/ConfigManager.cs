@@ -61,10 +61,10 @@ namespace NAPS2.Config
         public virtual void Load()
         {
             config = null;
-            TryLoadConfig(primaryConfigPath);
+            config = TryLoadConfig(primaryConfigPath);
             if (config == null && secondaryConfigPath != null)
             {
-                TryLoadConfig(secondaryConfigPath);
+                config = TryLoadConfig(secondaryConfigPath);
             }
             if (config == null)
             {
@@ -88,16 +88,15 @@ namespace NAPS2.Config
             return (T)serializer.Deserialize(configFileStream);
         }
 
-        private void TryLoadConfig(string configPath)
+        protected T TryLoadConfig(string configPath)
         {
-            config = null;
             if (File.Exists(configPath))
             {
                 try
                 {
                     using (Stream configFileStream = File.OpenRead(configPath))
                     {
-                        config = Deserialize(configFileStream);
+                        return Deserialize(configFileStream);
                     }
                 }
                 catch (Exception ex)
@@ -105,6 +104,7 @@ namespace NAPS2.Config
                     Log.ErrorException("Error loading config.", ex);
                 }
             }
+            return null;
         }
     }
 }

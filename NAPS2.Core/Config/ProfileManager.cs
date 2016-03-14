@@ -31,9 +31,12 @@ namespace NAPS2.Config
 {
     public class ProfileManager : ConfigManager<List<ScanProfile>>, IProfileManager
     {
-        public ProfileManager()
+        private readonly AppConfigManager appConfigManager;
+
+        public ProfileManager(AppConfigManager appConfigManager)
             : base("profiles.xml", Paths.AppData, Paths.Executable, () => new List<ScanProfile>())
         {
+            this.appConfigManager = appConfigManager;
         }
 
         public List<ScanProfile> Profiles { get { return Config; } }
@@ -55,6 +58,40 @@ namespace NAPS2.Config
                     profile.IsDefault = false;
                 }
                 value.IsDefault = true;
+            }
+        }
+
+        public override void Load()
+        {
+            base.Load();
+            if (appConfigManager.Config.LockSystemProfiles)
+            {
+                var systemProfiles = TryLoadConfig(secondaryConfigPath);
+                if (systemProfiles != null)
+                {
+                    foreach (var systemProfile in systemProfiles)
+                    {
+                        systemProfile.IsLocked = true;
+                    }
+                    var systemProfileNames = new HashSet<string>(systemProfiles.Select(x => x.DisplayName));
+                    foreach (var profile in Config.ToList())
+                    {
+                        if (systemProfileNames.Contains(profile.DisplayName))
+                        {
+                            Config.Remove(profile);
+                            // Avoid removing duplicates
+                            systemProfileNames.Remove(profile.DisplayName);
+                        }
+                    }
+                    if (Config.Any(x => x.IsDefault))
+                    {
+                        foreach (var systemProfile in systemProfiles)
+                        {
+                            systemProfile.IsDefault = false;
+                        }
+                    }
+                    Config.InsertRange(0, systemProfiles);
+                }
             }
         }
 
