@@ -33,6 +33,8 @@ namespace NAPS2.WinForms
     public partial class FProfiles : FormBase
     {
         private const int DEFAULT_PROFILE_ICON_ID = 3;
+        private const int LOCK_PROFILE_ICON_ID = 4;
+        private const int DEFAULT_LOCK_PROFILE_ICON_ID = 5;
 
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;
@@ -61,6 +63,14 @@ namespace NAPS2.WinForms
                     return profileManager.Profiles[lvProfiles.SelectedIndices[0]];
                 }
                 return null;
+            }
+        }
+
+        private bool SelectionLocked
+        {
+            get
+            {
+                return profileManager.Profiles.ElementsAt(lvProfiles.SelectedIndices.OfType<int>()).Any(x => x.IsLocked);
             }
         }
 
@@ -99,7 +109,10 @@ namespace NAPS2.WinForms
             lvProfiles.Items.Clear();
             foreach (var profile in profileManager.Profiles)
             {
-                lvProfiles.Items.Add(profile.DisplayName, profile.IsDefault ? DEFAULT_PROFILE_ICON_ID : profile.IconID);
+                lvProfiles.Items.Add(profile.DisplayName,
+                    profile.IsDefault
+                        ? profile.IsLocked ? DEFAULT_LOCK_PROFILE_ICON_ID : DEFAULT_PROFILE_ICON_ID
+                        : profile.IsLocked ? LOCK_PROFILE_ICON_ID : profile.IconID);
             }
         }
 
@@ -140,7 +153,7 @@ namespace NAPS2.WinForms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (lvProfiles.SelectedItems.Count > 0)
+            if (lvProfiles.SelectedItems.Count > 0 && !SelectionLocked)
             {
                 int profileIndex = lvProfiles.SelectedItems[0].Index;
                 var fedit = FormFactory.Create<FEditScanSettings>();
@@ -164,13 +177,13 @@ namespace NAPS2.WinForms
 
         private void lvProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnEdit.Enabled = lvProfiles.SelectedItems.Count == 1;
-            btnDelete.Enabled = lvProfiles.SelectedItems.Count > 0;
+            btnEdit.Enabled = lvProfiles.SelectedItems.Count == 1 && !SelectionLocked;
+            btnDelete.Enabled = lvProfiles.SelectedItems.Count > 0 && !SelectionLocked;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (lvProfiles.SelectedItems.Count > 0)
+            if (lvProfiles.SelectedItems.Count > 0 && !SelectionLocked)
             {
                 string message = lvProfiles.SelectedIndices.Count == 1
                     ? string.Format(MiscResources.ConfirmDeleteSingleProfile, profileManager.Profiles[lvProfiles.SelectedIndices[0]].DisplayName)
@@ -266,6 +279,8 @@ namespace NAPS2.WinForms
             else
             {
                 ctxSetDefault.Enabled = !SelectedProfile.IsDefault;
+                ctxEdit.Enabled = !SelectedProfile.IsLocked;
+                ctxDelete.Enabled = !SelectedProfile.IsLocked;
             }
         }
 

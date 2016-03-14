@@ -44,6 +44,8 @@ namespace NAPS2.WinForms
             this.IconsList.Images.SetKeyName(1, "wordprocessing.png");
             this.IconsList.Images.SetKeyName(2, "image.png");
             this.IconsList.Images.SetKeyName(3, "scanner-default.png");
+            this.IconsList.Images.SetKeyName(4, "scanner-lock.png");
+            this.IconsList.Images.SetKeyName(5, "scanner-lock-default.png");
 
         }
 
