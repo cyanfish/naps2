@@ -74,6 +74,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -470,6 +471,12 @@
     </Compile>
     <Compile Include="WinForms\MessageBoxErrorOutput.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinForms\NotifyWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForms\NotifyWidget.Designer.cs">
+      <DependentUpon>NotifyWidget.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\ThumbnailList.cs">
       <SubType>Component</SubType>
@@ -3120,6 +3127,9 @@
     <EmbeddedResource Include="WinForms\FViewer.zh-TW.resx">
       <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\NotifyWidget.resx">
+      <DependentUpon>NotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\ThumbnailList.bg.resx">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
@@ -3460,9 +3470,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\application_cascade.png" />
+    <Content Include="Icons\application_cascade.ico" />
     <Content Include="Icons\arrow_left.png" />
     <Content Include="Icons\arrow_right.png" />
     <Content Include="Icons\arrow_rotate_anticlockwise-small.ico" />
+    <Content Include="Icons\close.png" />
     <Content Include="Icons\color_wheel.png" />
     <Content Include="Icons\contrast.ico" />
     <Content Include="Icons\contrast.png" />
@@ -3478,6 +3490,9 @@
     <Content Include="Icons\picture_save.png" />
     <Content Include="Icons\scanner-default.png" />
     <Content Include="Icons\printer.png" />
+    <Content Include="Icons\scanner-lock-default.png" />
+    <Content Include="Icons\scanner-lock.png" />
+    <Content Include="Icons\text.ico" />
     <Content Include="Icons\text.png" />
     <Content Include="Icons\transform_crop.ico" />
     <Content Include="Icons\transform_crop.png" />
