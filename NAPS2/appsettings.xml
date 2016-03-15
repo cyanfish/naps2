@@ -7,6 +7,7 @@
   <SaveButtonDefaultAction>SaveAll</SaveButtonDefaultAction>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
+  <NoUpdatePrompt>false</NoUpdatePrompt>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
     <UseNativeUI>false</UseNativeUI>

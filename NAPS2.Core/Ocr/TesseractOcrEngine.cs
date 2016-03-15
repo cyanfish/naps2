@@ -55,7 +55,7 @@ namespace NAPS2.Ocr
                 {
                     startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = tessdataParent.FullName;
                 }
-                EnsureHocrConfigExists();
+                EnsureHocrConfigExists(tessdata);
                 var tesseractProcess = Process.Start(startInfo);
                 if (tesseractProcess == null)
                 {
@@ -108,10 +108,9 @@ namespace NAPS2.Ocr
             }
         }
 
-        private void EnsureHocrConfigExists()
+        private void EnsureHocrConfigExists(DirectoryInfo tessdata)
         {
-            var tessdataDir = ocrDependencyManager.GetLanguageDir();
-            var configDir = new DirectoryInfo(Path.Combine(tessdataDir.FullName, "configs"));
+            var configDir = new DirectoryInfo(Path.Combine(tessdata.FullName, "configs"));
             if (!configDir.Exists)
             {
                 configDir.Create();

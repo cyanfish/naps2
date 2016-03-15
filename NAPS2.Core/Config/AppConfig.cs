@@ -51,6 +51,8 @@ namespace NAPS2.Config
 
         public bool LockSystemProfiles { get; set; }
 
+        public bool NoUpdatePrompt { get; set; }
+
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }
 }
