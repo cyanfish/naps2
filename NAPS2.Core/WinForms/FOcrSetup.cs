@@ -30,7 +30,11 @@ namespace NAPS2.WinForms
             comboLanguages.ValueMember = "Code";
 
             checkBoxEnableOcr.Checked = UserConfigManager.Config.EnableOcr;
-            comboLanguages.SelectedValue = UserConfigManager.Config.OcrLanguageCode ?? comboLanguages.Items.Cast<OcrLanguage>().Select(x => x.Code).FirstOrDefault();
+            comboLanguages.SelectedValue = UserConfigManager.Config.OcrLanguageCode;
+            if (comboLanguages.SelectedValue == null)
+            {
+                comboLanguages.SelectedValue = comboLanguages.Items.Cast<OcrLanguage>().Select(x => x.Code).FirstOrDefault();
+            }
 
             UpdateView();
         }
