@@ -1130,6 +1130,11 @@ namespace NAPS2.WinForms
         {
             if (ocrDependencyManager.IsExecutableDownloaded && ocrDependencyManager.GetDownloadedLanguages().Any())
             {
+                if (!ocrDependencyManager.IsNewExecutableDownloaded)
+                {
+                    MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
+                }
                 FormFactory.Create<FOcrSetup>().ShowDialog();
             }
             else

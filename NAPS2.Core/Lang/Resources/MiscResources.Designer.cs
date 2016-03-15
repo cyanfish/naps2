@@ -709,6 +709,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An update to OCR is available..
+        /// </summary>
+        internal static string OcrUpdateAvailable {
+            get {
+                return ResourceManager.GetString("OcrUpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to of {0}.
         /// </summary>
         internal static string OfN {

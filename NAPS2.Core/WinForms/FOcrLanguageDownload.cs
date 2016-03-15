@@ -11,7 +11,7 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrLanguageDownload : FormBase
     {
-        private static readonly string DownloadBase = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.02/{0}/download";
+        private static readonly string DownloadBase = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download";
 
         private readonly OcrDependencyManager ocrDependencyManager;
 
@@ -20,13 +20,28 @@ namespace NAPS2.WinForms
             this.ocrDependencyManager = ocrDependencyManager;
             InitializeComponent();
 
+            var initialSelection = new HashSet<string>();
+            if (ocrDependencyManager.IsExecutableDownloaded && !ocrDependencyManager.IsNewExecutableDownloaded)
+            {
+                // Upgrade
+                foreach (var lang in ocrDependencyManager.GetDownloadedLanguages())
+                {
+                    initialSelection.Add(lang.Code);
+                }
+            }
+            else if (!ocrDependencyManager.IsExecutableDownloaded)
+            {
+                // Fresh install
+                initialSelection.Add("eng");
+            }
+
             // Add missing languages to the list of language options
             // Special case for English: sorted first, and checked by default
             var languageOptions = this.ocrDependencyManager.GetMissingLanguages().OrderBy(x => x.Code == "eng" ? "AAA" : x.LangName);
             foreach (var languageOption in languageOptions)
             {
                 var item = new ListViewItem { Text = languageOption.LangName, Tag = languageOption };
-                if (languageOption.Code == "eng")
+                if (initialSelection.Contains(languageOption.Code))
                 {
                     item.Checked = true;
                 }
@@ -53,7 +68,7 @@ namespace NAPS2.WinForms
         {
             double downloadSize =
                 lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => ((OcrLanguage)x.Tag).Size).Sum();
-            if (!ocrDependencyManager.IsExecutableDownloaded)
+            if (!ocrDependencyManager.IsNewExecutableDownloaded)
             {
                 downloadSize += ocrDependencyManager.ExecutableFileSize;
             }
@@ -75,7 +90,7 @@ namespace NAPS2.WinForms
         private void btnDownload_Click(object sender, EventArgs e)
         {
             var progressForm = FormFactory.Create<FDownloadProgress>();
-            if (!ocrDependencyManager.IsExecutableDownloaded)
+            if (!ocrDependencyManager.IsNewExecutableDownloaded)
             {
                 progressForm.QueueFile(DownloadBase, ocrDependencyManager.ExecutableFileName, ocrDependencyManager.ExecutableFileSha1, tempPath =>
                 {

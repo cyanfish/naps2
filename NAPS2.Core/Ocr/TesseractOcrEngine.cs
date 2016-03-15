@@ -32,19 +32,25 @@ namespace NAPS2.Ocr
 
         public OcrResult ProcessImage(Image image, string langCode)
         {
+            bool newTesseract = ocrDependencyManager.IsNewExecutableDownloaded;
             string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+            string tempHocrFilePathWithExt = tempHocrFilePath + (newTesseract ? ".hocr" : ".html");
             try
             {
                 image.Save(tempImageFilePath);
+                var exeDir = newTesseract ? ocrDependencyManager.GetExecutableDir() : ocrDependencyManager.GetOldExecutableDir();
                 var startInfo = new ProcessStartInfo
                 {
-                    FileName = Path.Combine(ocrDependencyManager.GetExecutableDir().FullName, "tesseract.exe"),
+                    FileName = Path.Combine(exeDir.FullName, "tesseract.exe"),
                     Arguments = string.Format("\"{0}\" \"{1}\" -l {2} hocr", tempImageFilePath, tempHocrFilePath, langCode),
                     UseShellExecute = false,
-                    CreateNoWindow = true
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
                 };
-                var tessdataParent = ocrDependencyManager.GetLanguageDir().Parent;
+                var tessdata = newTesseract ? ocrDependencyManager.GetLanguageDir() : ocrDependencyManager.GetOldLanguageDir();
+                var tessdataParent = tessdata.Parent;
                 if (tessdataParent != null)
                 {
                     startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = tessdataParent.FullName;
@@ -70,7 +76,19 @@ namespace NAPS2.Ocr
                     }
                     return null;
                 }
-                XDocument hocrDocument = XDocument.Load(tempHocrFilePath + ".html");
+#if DEBUG
+                var output = tesseractProcess.StandardOutput.ReadToEnd();
+                if (output.Length > 0)
+                {
+                    Log.Error("Tesseract stdout: {0}", output);
+                }
+                output = tesseractProcess.StandardError.ReadToEnd();
+                if (output.Length > 0)
+                {
+                    Log.Error("Tesseract stderr: {0}", output);
+                }
+#endif
+                XDocument hocrDocument = XDocument.Load(tempHocrFilePathWithExt);
                 return new OcrResult
                 {
                     Elements = hocrDocument.Descendants()
@@ -86,7 +104,7 @@ namespace NAPS2.Ocr
             finally
             {
                 File.Delete(tempImageFilePath);
-                File.Delete(tempHocrFilePath + ".html");
+                File.Delete(tempHocrFilePathWithExt);
             }
         }
 
@@ -110,12 +128,15 @@ namespace NAPS2.Ocr
             var bounds = new Rectangle();
             if (titleAttr != null)
             {
-                string[] parts = titleAttr.Value.Split(' ');
-                if (parts.Length == 5 && parts[0] == "bbox")
+                foreach (var param in titleAttr.Value.Split(';'))
                 {
-                    int x1 = int.Parse(parts[1]), y1 = int.Parse(parts[2]);
-                    int x2 = int.Parse(parts[3]), y2 = int.Parse(parts[4]);
-                    bounds = new Rectangle(x1, y1, x2 - x1, y2 - y1);
+                    string[] parts = param.Trim().Split(' ');
+                    if (parts.Length == 5 && parts[0] == "bbox")
+                    {
+                        int x1 = int.Parse(parts[1]), y1 = int.Parse(parts[2]);
+                        int x2 = int.Parse(parts[3]), y2 = int.Parse(parts[4]);
+                        bounds = new Rectangle(x1, y1, x2 - x1, y2 - y1);
+                    }
                 }
             }
             return bounds;
