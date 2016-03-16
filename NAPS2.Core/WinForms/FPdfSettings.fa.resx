@@ -733,7 +733,7 @@
         <value>3</value>
     </data>
     <data name="lblUserPassword.Text" xml:space="preserve">
-        <value>User Password:</value>
+        <value>گذرواژه کاربر:</value>
     </data>
     <data name="&gt;&gt;lblUserPassword.Name" xml:space="preserve">
         <value>lblUserPassword</value>
@@ -781,7 +781,7 @@
         <value>1</value>
     </data>
     <data name="lblOwnerPassword.Text" xml:space="preserve">
-        <value>Owner Password:</value>
+        <value>گذرواژه مالک:</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>
@@ -967,7 +967,7 @@
         <value>32</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Default File Name:</value>
+        <value>نام پرونده پیش فرض:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>

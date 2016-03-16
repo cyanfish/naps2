@@ -396,4 +396,7 @@
     <data name="DeviceWarmingUp" xml:space="preserve">
         <value>The scanner is warming up.</value>
     </data>
+    <data name="OcrUpdateAvailable" xml:space="preserve">
+        <value>An update to OCR is available.</value>
+    </data>
 </root>

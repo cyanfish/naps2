@@ -187,10 +187,10 @@
         <value>سفارشی...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>US Legal (۸٫۵x۱۴ اینچ)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>US Letter (۸٫۵x۱۱ اینچ)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>
@@ -217,7 +217,10 @@
         <value>پیش‌فرض</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>ارث (فقط رابط کاربری بومی)</value>
+    </data>
+    <data name="TwainImpl_OldDsm" xml:space="preserve">
+        <value>Old DSM</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

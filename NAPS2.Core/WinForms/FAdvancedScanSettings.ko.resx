@@ -123,7 +123,7 @@
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>264, 367</value>
+        <value>264, 390</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -151,7 +151,7 @@
         <value>NoControl</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>345, 367</value>
+        <value>345, 390</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -282,83 +282,41 @@
     <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
-        <value>cbForcePageSize</value>
+    <data name="cbWiaOffsetWidth.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSize.Type" xml:space="preserve">
+    <data name="cbWiaOffsetWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="cbWiaOffsetWidth.Location" type="System.Drawing.Point, System.Drawing">
+        <value>9, 42</value>
+    </data>
+    <data name="cbWiaOffsetWidth.Size" type="System.Drawing.Size, System.Drawing">
+        <value>207, 17</value>
+    </data>
+    <data name="cbWiaOffsetWidth.TabIndex" type="System.Int32, mscorlib">
+        <value>4</value>
+    </data>
+    <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
+        <value>Offset width based on alignment (WIA)</value>
+    </data>
+    <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
+        <value>cbWiaOffsetWidth</value>
+    </data>
+    <data name="&gt;&gt;cbWiaOffsetWidth.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSize.Parent" xml:space="preserve">
+    <data name="&gt;&gt;cbWiaOffsetWidth.Parent" xml:space="preserve">
         <value>groupBox2</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSize.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;cbWiaOffsetWidth.ZOrder" xml:space="preserve">
         <value>0</value>
-    </data>
-    <data name="&gt;&gt;cbBrightnessContrastAfterScan.Name" xml:space="preserve">
-        <value>cbBrightnessContrastAfterScan</value>
-    </data>
-    <data name="&gt;&gt;cbBrightnessContrastAfterScan.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbBrightnessContrastAfterScan.Parent" xml:space="preserve">
-        <value>groupBox2</value>
-    </data>
-    <data name="&gt;&gt;cbBrightnessContrastAfterScan.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
-    <data name="&gt;&gt;cmbTwainImpl.Name" xml:space="preserve">
-        <value>cmbTwainImpl</value>
-    </data>
-    <data name="&gt;&gt;cmbTwainImpl.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cmbTwainImpl.Parent" xml:space="preserve">
-        <value>groupBox2</value>
-    </data>
-    <data name="&gt;&gt;cmbTwainImpl.ZOrder" xml:space="preserve">
-        <value>2</value>
-    </data>
-    <data name="&gt;&gt;label1.Name" xml:space="preserve">
-        <value>label1</value>
-    </data>
-    <data name="&gt;&gt;label1.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-        <value>groupBox2</value>
-    </data>
-    <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-        <value>3</value>
-    </data>
-    <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 248</value>
-    </data>
-    <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-        <value>408, 113</value>
-    </data>
-    <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-        <value>36</value>
-    </data>
-    <data name="groupBox2.Text" xml:space="preserve">
-        <value>호환성</value>
-    </data>
-    <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-        <value>groupBox2</value>
-    </data>
-    <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-        <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-        <value>1</value>
     </data>
     <data name="cbForcePageSize.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
     <data name="cbForcePageSize.Location" type="System.Drawing.Point, System.Drawing">
-        <value>9, 42</value>
+        <value>9, 65</value>
     </data>
     <data name="cbForcePageSize.Size" type="System.Drawing.Size, System.Drawing">
         <value>147, 17</value>
@@ -379,7 +337,7 @@
         <value>groupBox2</value>
     </data>
     <data name="&gt;&gt;cbForcePageSize.ZOrder" xml:space="preserve">
-        <value>0</value>
+        <value>1</value>
     </data>
     <data name="cbBrightnessContrastAfterScan.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -406,10 +364,10 @@
         <value>groupBox2</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.ZOrder" xml:space="preserve">
-        <value>1</value>
+        <value>2</value>
     </data>
     <data name="cmbTwainImpl.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 80</value>
+        <value>6, 103</value>
     </data>
     <data name="cmbTwainImpl.Size" type="System.Drawing.Size, System.Drawing">
         <value>246, 21</value>
@@ -427,13 +385,13 @@
         <value>groupBox2</value>
     </data>
     <data name="&gt;&gt;cmbTwainImpl.ZOrder" xml:space="preserve">
-        <value>2</value>
+        <value>3</value>
     </data>
     <data name="label1.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
     <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 64</value>
+        <value>6, 87</value>
     </data>
     <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
         <value>113, 13</value>
@@ -454,7 +412,31 @@
         <value>groupBox2</value>
     </data>
     <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-        <value>3</value>
+        <value>4</value>
+    </data>
+    <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 248</value>
+    </data>
+    <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>408, 136</value>
+    </data>
+    <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+        <value>36</value>
+    </data>
+    <data name="groupBox2.Text" xml:space="preserve">
+        <value>호환성</value>
+    </data>
+    <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+        <value>groupBox2</value>
+    </data>
+    <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+        <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+        <value>1</value>
     </data>
     <data name="label3.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -676,7 +658,7 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>432, 402</value>
+        <value>432, 425</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
@@ -702,10 +684,10 @@
 </value>
     </data>
     <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-        <value>9999, 441</value>
+        <value>9999, 464</value>
     </data>
     <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-        <value>400, 441</value>
+        <value>400, 464</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
         <value>상세 프로필 설정</value>
@@ -714,12 +696,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.5.1.29862, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.7.2.39387, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FAdvancedScanSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.1.29862, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.7.2.39387, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

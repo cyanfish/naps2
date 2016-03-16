@@ -385,7 +385,7 @@
         <value>Изображения</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Выбранный сканер отключён.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>The scanner's cover is open.</value>
@@ -395,5 +395,8 @@
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
         <value>The scanner is warming up.</value>
+    </data>
+    <data name="OcrUpdateAvailable" xml:space="preserve">
+        <value>An update to OCR is available.</value>
     </data>
 </root>

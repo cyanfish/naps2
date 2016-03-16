@@ -292,7 +292,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Use predefined settings</value>
+        <value>استفاده از تنظیمات پیش تعریف شده</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -319,7 +319,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Use native UI</value>
+        <value>استفاده از رابط کاربری بومی</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -933,7 +933,7 @@
         <value>1</value>
     </data>
     <data name="rdWIA.Text" xml:space="preserve">
-        <value>درایور TWAIN</value>
+        <value>درایور WIA</value>
     </data>
     <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
         <value>rdWIA</value>
@@ -1148,7 +1148,7 @@
         <value>448, 478</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Profile Settings</value>
+        <value>تنظیمات پروفایل</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+        <value>{0} تصویر اسکن شده از {1} روی {2} ذخیره نشده‌اند و قابل بازیابی هستندُ آیا مایل به بازیابی آنها هستید؟</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>

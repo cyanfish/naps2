@@ -235,7 +235,7 @@
         <value>2</value>
     </data>
     <data name="lblTimeBetweenScans.Text" xml:space="preserve">
-        <value>Time between scans (seconds):</value>
+        <value>زمان بین اسکن‌ها (ثانیه):</value>
     </data>
     <data name="&gt;&gt;lblTimeBetweenScans.Name" xml:space="preserve">
         <value>lblTimeBetweenScans</value>
@@ -334,7 +334,7 @@
         <value>2</value>
     </data>
     <data name="rdMultipleScansPrompt.Text" xml:space="preserve">
-        <value>Multiple scans (prompt between scans)</value>
+        <value>اسکن چندتایی (اعلان بین اسکن‌ها)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansPrompt.Name" xml:space="preserve">
         <value>rdMultipleScansPrompt</value>
@@ -364,7 +364,7 @@
         <value>1</value>
     </data>
     <data name="rdMultipleScansDelay.Text" xml:space="preserve">
-        <value>Multiple scans (fixed delay between scans)</value>
+        <value>اسکن چندتایی (تاخیر ثابت بین اسکن‌ها)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansDelay.Name" xml:space="preserve">
         <value>rdMultipleScansDelay</value>
@@ -505,7 +505,7 @@
         <value>0</value>
     </data>
     <data name="lblProfile.Text" xml:space="preserve">
-        <value>Profile:</value>
+        <value>پروفایل:</value>
     </data>
     <data name="&gt;&gt;lblProfile.Name" xml:space="preserve">
         <value>lblProfile</value>
@@ -586,7 +586,7 @@
         <value>2</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T (TWAIN only)</value>
+        <value>پرونده‌های جداگانه بوسیله وصله-T (فقط TWAIN)</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -829,7 +829,7 @@
         <value>2</value>
     </data>
     <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-        <value>Save to multiple files</value>
+        <value>ذخیره در چند پرونده</value>
     </data>
     <data name="&gt;&gt;rdSaveToMultipleFiles.Name" xml:space="preserve">
         <value>rdSaveToMultipleFiles</value>
@@ -859,7 +859,7 @@
         <value>1</value>
     </data>
     <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-        <value>Save to a single file</value>
+        <value>ذخیره در یک پرونده</value>
     </data>
     <data name="&gt;&gt;rdSaveToSingleFile.Name" xml:space="preserve">
         <value>rdSaveToSingleFile</value>
@@ -934,7 +934,7 @@
         <value>7</value>
     </data>
     <data name="groupboxOutput.Text" xml:space="preserve">
-        <value>Output</value>
+        <value>خروجی</value>
     </data>
     <data name="&gt;&gt;groupboxOutput.Name" xml:space="preserve">
         <value>groupboxOutput</value>
@@ -984,7 +984,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Batch Scan</value>
+        <value>اسکن دسته‌ای</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
         <value>toolStripSeparator1</value>
