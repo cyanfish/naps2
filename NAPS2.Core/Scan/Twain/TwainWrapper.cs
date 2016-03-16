@@ -68,6 +68,8 @@ namespace NAPS2.Scan.Twain
             bool cancel = false;
             DataSource ds = null;
 
+            int pageNumber = 0;
+
             session.TransferReady += (sender, eventArgs) =>
             {
                 Debug.WriteLine("NAPS2.TW - TransferReady");
@@ -79,6 +81,7 @@ namespace NAPS2.Scan.Twain
             session.DataTransferred += (sender, eventArgs) =>
             {
                 Debug.WriteLine("NAPS2.TW - DataTransferred");
+                pageNumber++;
                 using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
                 {
                     using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
@@ -93,7 +96,7 @@ namespace NAPS2.Scan.Twain
                             : ScanBitDepth.C24Bit;
                         var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
                         image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                        ScannedImageHelper.PostProcessStep2(image, scanProfile);
+                        ScannedImageHelper.PostProcessStep2(image, scanProfile, pageNumber);
                         if (scanParams.DetectPatchCodes)
                         {
                             foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))

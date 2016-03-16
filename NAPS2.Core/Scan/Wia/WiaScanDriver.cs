@@ -121,7 +121,7 @@ namespace NAPS2.Scan.Wia
                             ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
                             var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                             image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                            ScannedImageHelper.PostProcessStep2(image, ScanProfile);
+                            ScannedImageHelper.PostProcessStep2(image, ScanProfile, pageNumber);
                             return image;
                         }
                     }

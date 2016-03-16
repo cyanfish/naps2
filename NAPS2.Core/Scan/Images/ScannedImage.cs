@@ -131,6 +131,10 @@ namespace NAPS2.Scan.Images
         {
             if (thumbnail == null)
             {
+                if (thumbnailRenderer == null)
+                {
+                    return null;
+                }
                 thumbnail = thumbnailRenderer.RenderThumbnail(this);
             }
             Debug.Assert(thumbnail != null);

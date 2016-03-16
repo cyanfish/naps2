@@ -51,6 +51,7 @@ namespace NAPS2.WinForms
             cbBrightnessContrastAfterScan.Checked = ScanProfile.BrightnessContrastAfterScan;
             cbWiaOffsetWidth.Checked = ScanProfile.WiaOffsetWidth;
             cbForcePageSize.Checked = ScanProfile.ForcePageSize;
+            cbFlipDuplex.Checked = ScanProfile.FlipDuplexedPages;
             if (ScanProfile.TwainImpl != TwainImpl.X64 || Environment.Is64BitProcess)
             {
                 cmbTwainImpl.SelectedIndex = (int) ScanProfile.TwainImpl;
@@ -92,6 +93,7 @@ namespace NAPS2.WinForms
             ScanProfile.BrightnessContrastAfterScan = cbBrightnessContrastAfterScan.Checked;
             ScanProfile.WiaOffsetWidth = cbWiaOffsetWidth.Checked;
             ScanProfile.ForcePageSize = cbForcePageSize.Checked;
+            ScanProfile.FlipDuplexedPages = cbFlipDuplex.Checked;
             if (cmbTwainImpl.SelectedIndex != -1)
             {
                 ScanProfile.TwainImpl = (TwainImpl) cmbTwainImpl.SelectedIndex;

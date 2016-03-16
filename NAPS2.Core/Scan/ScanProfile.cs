@@ -112,6 +112,8 @@ namespace NAPS2.Scan
         public int BlankPageCoverageThreshold { get; set; }
 
         public bool WiaOffsetWidth { get; set; }
+
+        public bool FlipDuplexedPages { get; set; }
     }
 
     public class AutoSaveSettings

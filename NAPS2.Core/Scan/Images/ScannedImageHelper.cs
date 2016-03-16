@@ -124,18 +124,32 @@ namespace NAPS2.Scan.Images
             return result;
         }
 
-        public static void PostProcessStep2(ScannedImage image, ScanProfile profile)
+        public static void PostProcessStep2(ScannedImage image, ScanProfile profile, int pageNumber)
         {
             if (!profile.UseNativeUI && profile.BrightnessContrastAfterScan)
             {
                 if (profile.Brightness != 0)
                 {
-                    image.AddTransform(new BrightnessTransform { Brightness = profile.Brightness });
+                    AddTransformAndUpdateThumbnail(image, new BrightnessTransform { Brightness = profile.Brightness });
                 }
                 if (profile.Contrast != 0)
                 {
-                    image.AddTransform(new TrueContrastTransform { Contrast = profile.Contrast });
+                    AddTransformAndUpdateThumbnail(image, new TrueContrastTransform { Contrast = profile.Contrast });
                 }
+            }
+            if (profile.FlipDuplexedPages && pageNumber % 2 == 0)
+            {
+                AddTransformAndUpdateThumbnail(image, new RotationTransform(RotateFlipType.Rotate180FlipNone));
+            }
+        }
+
+        private static void AddTransformAndUpdateThumbnail(ScannedImage image, Transform transform)
+        {
+            image.AddTransform(transform);
+            var thumbnail = image.GetThumbnail(null);
+            if (thumbnail != null)
+            {
+                image.SetThumbnail(transform.Perform(thumbnail));
             }
         }
     }

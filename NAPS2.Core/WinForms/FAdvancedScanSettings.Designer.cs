@@ -42,6 +42,7 @@ namespace NAPS2.WinForms
             this.tbImageQuality = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbWiaOffsetWidth = new System.Windows.Forms.CheckBox();
             this.cbForcePageSize = new System.Windows.Forms.CheckBox();
             this.cbBrightnessContrastAfterScan = new System.Windows.Forms.CheckBox();
             this.cmbTwainImpl = new System.Windows.Forms.ComboBox();
@@ -54,7 +55,7 @@ namespace NAPS2.WinForms
             this.tbWhiteThreshold = new System.Windows.Forms.TrackBar();
             this.txtWhiteThreshold = new System.Windows.Forms.TextBox();
             this.cbExcludeBlankPages = new System.Windows.Forms.CheckBox();
-            this.cbWiaOffsetWidth = new System.Windows.Forms.CheckBox();
+            this.cbFlipDuplex = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageQuality)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -109,6 +110,7 @@ namespace NAPS2.WinForms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbFlipDuplex);
             this.groupBox2.Controls.Add(this.cbWiaOffsetWidth);
             this.groupBox2.Controls.Add(this.cbForcePageSize);
             this.groupBox2.Controls.Add(this.cbBrightnessContrastAfterScan);
@@ -117,6 +119,12 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // cbWiaOffsetWidth
+            // 
+            resources.ApplyResources(this.cbWiaOffsetWidth, "cbWiaOffsetWidth");
+            this.cbWiaOffsetWidth.Name = "cbWiaOffsetWidth";
+            this.cbWiaOffsetWidth.UseVisualStyleBackColor = true;
             // 
             // cbForcePageSize
             // 
@@ -200,11 +208,11 @@ namespace NAPS2.WinForms
             this.cbExcludeBlankPages.UseVisualStyleBackColor = true;
             this.cbExcludeBlankPages.CheckedChanged += new System.EventHandler(this.cbExcludeBlankPages_CheckedChanged);
             // 
-            // cbWiaOffsetWidth
+            // cbFlipDuplex
             // 
-            resources.ApplyResources(this.cbWiaOffsetWidth, "cbWiaOffsetWidth");
-            this.cbWiaOffsetWidth.Name = "cbWiaOffsetWidth";
-            this.cbWiaOffsetWidth.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.cbFlipDuplex, "cbFlipDuplex");
+            this.cbFlipDuplex.Name = "cbFlipDuplex";
+            this.cbFlipDuplex.UseVisualStyleBackColor = true;
             // 
             // FAdvancedScanSettings
             // 
@@ -255,5 +263,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.TextBox txtWhiteThreshold;
         private System.Windows.Forms.CheckBox cbExcludeBlankPages;
         private System.Windows.Forms.CheckBox cbWiaOffsetWidth;
+        private System.Windows.Forms.CheckBox cbFlipDuplex;
     }
 }

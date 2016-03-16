@@ -264,7 +264,9 @@ namespace NAPS2.WinForms
                 AutoSaveSettings = ScanProfile.AutoSaveSettings,
                 Quality = ScanProfile.Quality,
                 BrightnessContrastAfterScan = ScanProfile.BrightnessContrastAfterScan,
+                WiaOffsetWidth = ScanProfile.WiaOffsetWidth,
                 ForcePageSize = ScanProfile.ForcePageSize,
+                FlipDuplexedPages = ScanProfile.FlipDuplexedPages,
                 TwainImpl = ScanProfile.TwainImpl,
 
                 ExcludeBlankPages = ScanProfile.ExcludeBlankPages,
