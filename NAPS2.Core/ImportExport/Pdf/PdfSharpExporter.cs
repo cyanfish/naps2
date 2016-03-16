@@ -25,6 +25,7 @@ using System.IO;
 using System.Linq;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
@@ -85,9 +86,16 @@ namespace NAPS2.ImportExport.Pdf
                     }
 
                     OcrResult ocrResult = null;
-                    if (ocrLanguageCode != null && ocrEngine.CanProcess(ocrLanguageCode))
+                    if (ocrLanguageCode != null)
                     {
-                        ocrResult = ocrEngine.ProcessImage(img, ocrLanguageCode);
+                        if (ocrEngine.CanProcess(ocrLanguageCode))
+                        {
+                            ocrResult = ocrEngine.ProcessImage(img, ocrLanguageCode);
+                        }
+                        else
+                        {
+                            Log.Error("OCR files not available for '{0}'.", ocrLanguageCode);
+                        }
                     }
 
                     float hAdjust = 72 / img.HorizontalResolution;
