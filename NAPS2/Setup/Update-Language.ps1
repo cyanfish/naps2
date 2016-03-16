@@ -4,8 +4,10 @@
 
 if ($LanguageCode -eq $null -or $LanguageCode -eq "") {
     foreach ($LanguageCode in Get-NAPS2-Languages) {
+	    "$LanguageCode"
         Update-Lang $LanguageCode
     }
 } else {
+    "$LanguageCode"
     Update-Lang $LanguageCode
 }
