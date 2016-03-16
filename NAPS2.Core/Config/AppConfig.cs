@@ -53,6 +53,8 @@ namespace NAPS2.Config
 
         public bool NoUpdatePrompt { get; set; }
 
+        public bool DeleteAfterSaving { get; set; }
+
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }
 }

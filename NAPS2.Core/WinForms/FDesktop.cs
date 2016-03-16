@@ -752,6 +752,11 @@ namespace NAPS2.WinForms
                     if (ExportPDF(sd.FileName, images, false))
                     {
                         changeTracker.HasUnsavedChanges = false;
+                        if (appConfigManager.Config.DeleteAfterSaving)
+                        {
+                            imageList.Delete(imageList.Images.IndiciesOf(images));
+                            UpdateThumbnails(Enumerable.Empty<int>(), false, false);
+                        }
                     }
                 }
             }
@@ -831,6 +836,11 @@ namespace NAPS2.WinForms
                     if (op.Status.Success)
                     {
                         changeTracker.HasUnsavedChanges = false;
+                        if (appConfigManager.Config.DeleteAfterSaving)
+                        {
+                            imageList.Delete(imageList.Images.IndiciesOf(images));
+                            UpdateThumbnails(Enumerable.Empty<int>(), false, false);
+                        }
                     }
                 }
             }

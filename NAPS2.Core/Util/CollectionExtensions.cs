@@ -49,6 +49,11 @@ namespace NAPS2.Util
             return indices.Select(i => list[i]);
         }
 
+        public static IEnumerable<int> IndiciesOf<T>(this IList<T> list, IEnumerable<T> elements)
+        {
+            return elements.Select(list.IndexOf);
+        }
+
         /// <summary>
         /// Adds a key-value pair to the multi-dictionary.
         /// </summary>
