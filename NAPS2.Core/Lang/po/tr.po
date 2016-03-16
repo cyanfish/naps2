@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 20:35+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
 "PO-Revision-Date: 2016-01-30 16:00+0000\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,8 +187,7 @@ msgstr "{0} adet profili silmek istediğinize emin misiniz?"
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr ""
-"{0} adet resimde yapılan değişiklikleri geri almak istediğinize emin "
-"misiniz?"
+"{0} adet resimde yapılan değişiklikleri geri almak istediğinize emin misiniz?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
@@ -832,11 +831,13 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr ""
 
@@ -1074,11 +1075,6 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr ""
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF Dosyası (*.tiff, *.tif)"
@@ -1105,6 +1101,18 @@ msgstr "{0} dosyası zaten mevcut. Üzerine yazmak ister misiniz?"
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
 
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr ""
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr ""
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr ""
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "Seçilen tarayıcı bulunamadı"
@@ -1115,6 +1123,10 @@ msgstr ""
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr ""
+
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
 msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message

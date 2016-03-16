@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 20:32+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
 "PO-Revision-Date: 2016-02-15 13:07+0000\n"
 "Last-Translator: seojin <me@rainmint.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -830,11 +830,13 @@ msgstr "Парола"
 msgid "Paste"
 msgstr ""
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Заместители"
 
@@ -1072,11 +1074,6 @@ msgstr ""
 msgid "Subject"
 msgstr "Тема"
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr ""
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF файл (*.tiff, *.tif)"
@@ -1103,6 +1100,18 @@ msgstr "Вече има файл {0} . Искате ли да бъде през�
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr "Този файл е шифрован и е нужна парола за отварянето му: {0}"
 
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr ""
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr ""
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr ""
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "Избраният скенер не е достъпен"
@@ -1116,6 +1125,10 @@ msgstr ""
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr ""
+
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
 msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message

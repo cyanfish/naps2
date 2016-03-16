@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 20:33+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
 "PO-Revision-Date: 2016-01-30 16:11+0000\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -828,11 +828,13 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr ""
 
@@ -1070,11 +1072,6 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr ""
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF fájl (*.tiff, *.tif)"
@@ -1101,6 +1098,18 @@ msgstr "Már létezik {0} nevű fájl, felül szeretné írni?"
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr ""
 
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr ""
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr ""
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr ""
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "A kiválasztott képolvasó nem található"
@@ -1111,6 +1120,10 @@ msgstr ""
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgstr ""
+
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
 msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message

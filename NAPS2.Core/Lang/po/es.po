@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 20:33+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
 "PO-Revision-Date: 2016-02-05 02:21+0000\n"
 "Last-Translator: vsc55 <jpastor@cerebelum.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -831,11 +831,13 @@ msgstr "Contraseña"
 msgid "Paste"
 msgstr "Pegar"
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Marcadores de posición"
 
@@ -1072,11 +1074,6 @@ msgstr "Comenzar"
 msgid "Subject"
 msgstr "Sujeto"
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr "Sustituciones"
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Imagen TIFF (*.tiff, *.tif)"
@@ -1105,6 +1102,18 @@ msgstr ""
 "El siguiente archivo está cifrado y requiere una contraseña para abrir : { 0 "
 "}"
 
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr ""
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr ""
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr ""
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "No se ha encontrado el escáner seleccionado"
@@ -1120,6 +1129,10 @@ msgid "The selected scanner does not support using duplex. If your scanner is su
 msgstr ""
 "El escáner seleccionado no admite el uso dúplex. Si el escáner si admite "
 "dúplex, intente utilizar un controlador diferente"
+
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
+msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1287,6 +1300,9 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} de {1}"
+
+#~ msgid "Substitutions"
+#~ msgstr "Sustituciones"
 
 #~ msgid "PDF document (*.pdf)"
 #~ msgstr "Documento PDF (*.pdf)"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-15 13:28+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
 "PO-Revision-Date: 2016-02-15 15:28+0000\n"
 "Last-Translator: seojin <me@rainmint.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -828,11 +828,13 @@ msgstr "암호"
 msgid "Paste"
 msgstr "붙여넣기"
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "파일명 형식"
 
@@ -1069,11 +1071,6 @@ msgstr "시작"
 msgid "Subject"
 msgstr "제목"
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr "대체"
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF 파일 (*.tiff, *.tif)"
@@ -1098,6 +1095,18 @@ msgstr "{0} 파일이 이미 존재합니다. 덮어쓰시겠습니까?"
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr "암호화 된 {0} 파일을 열기 위해서는 암호가 필요합니다."
 
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr ""
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr ""
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr ""
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "선택된 스캐너를 찾을 수 없습니다."
@@ -1109,6 +1118,10 @@ msgstr "선택된 스캐너에서는 지급기를 사용할 수 없습니다. �
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr "선택된 스캐너에서는 양면 기능을 사용할 수 없습니다. 만약 스캐너가 양면 기능을 지원한다면, 다른 드라이버를 선택 해 주세요."
+
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
+msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1269,3 +1282,6 @@ msgstr "스캔된 {0} 이미지가 {2} 의 {1} 에 저장되지 않았을 수 �
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{1} 의 {0}"
+
+#~ msgid "Substitutions"
+#~ msgstr "대체"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-09 22:38+0000\n"
+"POT-Creation-Date: 2016-02-29 21:04+0000\n"
 "PO-Revision-Date: 2016-02-20 09:57+0000\n"
 "Last-Translator: stels75 <stels75@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -827,11 +827,13 @@ msgstr "Slaptažodis"
 msgid "Paste"
 msgstr "Įterpti"
 
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Vietaženkliai"
 
@@ -1068,11 +1070,6 @@ msgstr "Pradėti"
 msgid "Subject"
 msgstr "Tema"
 
-#: FBatchScan.resx$linkSubstitutions.Text$Message
-#: FAutoSaveSettings.resx$linkSubstitutions.Text$Message
-msgid "Substitutions"
-msgstr "Pakeitimai"
-
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF byla (*.tiff, *.tif)"
@@ -1099,6 +1096,18 @@ msgstr "Byla {0} jau yra. Ar norite ją perrašyti?"
 msgid "The following file is encrypted and requires a password to open: {0}"
 msgstr "Byla yra užšifruota ir reikalauja slaptažodžio atidarymui: {0}"
 
+#: MiscResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam"
+msgstr ""
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up"
+msgstr ""
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open"
+msgstr ""
+
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
 msgstr "Pasirinktas skeneris nerastas"
@@ -1114,6 +1123,10 @@ msgid "The selected scanner does not support using duplex. If your scanner is su
 msgstr ""
 "Pasirinktas skeneris nepalaiko dvipusio skenavimo. Jei jūsų skeneris turi "
 "dvipusio skenavimo galimybę, pabandykite naudoti kitą tvarkyklę"
+
+#: MiscResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy"
+msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1278,3 +1291,6 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} iš {1}"
+
+#~ msgid "Substitutions"
+#~ msgstr "Pakeitimai"
