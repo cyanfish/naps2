@@ -4,7 +4,7 @@
       Id="*"
       Name="NAPS2"
       Language="1033"
-      Version="5.0.1"
+      Version="5.0.2"
       Manufacturer="Ben Olden-Cooligan"
       UpgradeCode="FEB82971-B3E6-4F19-9684-1D543E644D73">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
