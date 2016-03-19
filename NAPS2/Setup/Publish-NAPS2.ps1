@@ -29,6 +29,9 @@ cp "..\..\NAPS2.Setup\bin\Release\NAPS2.Setup.msi" ($PublishDir + "naps2-$Name-s
 
 # EXE Installer
 & (Get-Inno-Path) "setup.iss"
+If ($Force -and (Test-Path ($PublishDir + "naps2-$Name-setup.exe"))) {
+	Remove-Item ($PublishDir + "naps2-$Name-setup.exe")
+}
 ren ($PublishDir + "naps2-$Version-setup.exe") "naps2-$Name-setup.exe"
 
 # Standalone ZIP/7Z
