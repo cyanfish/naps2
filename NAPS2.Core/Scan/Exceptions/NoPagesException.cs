@@ -38,7 +38,7 @@ namespace NAPS2.Scan.Exceptions
         }
 
         public NoPagesException(Exception innerException)
-            : base(MiscResources.NoDevicesFound, innerException)
+            : base(MiscResources.NoPagesInFeeder, innerException)
         {
         }
 

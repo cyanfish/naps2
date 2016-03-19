@@ -127,19 +127,24 @@ namespace NAPS2.Scan.Wia
                     }
                 }
             }
-            catch (COMException e)
+            catch (NoPagesException)
             {
-                cancel = true;
-                if ((uint)e.ErrorCode == WiaApi.Errors.OUT_OF_PAPER)
+                if (ScanProfile.PaperSource != ScanSource.Glass && pageNumber == 1)
                 {
-                    if (ScanProfile.PaperSource != ScanSource.Glass && pageNumber == 1)
-                    {
-                        throw new NoPagesException();
-                    }
-                    return null;
+                    // No pages were in the feeder, so show the user an error
+                    throw new NoPagesException();
                 }
-                WiaApi.ThrowDeviceError(e);
+                // At least one page was scanned but now the feeder is empty, so exit normally
+                cancel = true;
                 return null;
+            }
+            catch (ScanDriverException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ScanDriverUnknownException(e);
             }
         }
     }

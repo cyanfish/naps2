@@ -186,6 +186,10 @@ namespace NAPS2.Scan.Wia
             {
                 throw new NoDevicesFoundException();
             }
+            if ((uint)e.ErrorCode == Errors.OUT_OF_PAPER)
+            {
+                throw new NoPagesException();
+            }
             if ((uint)e.ErrorCode == Errors.OFFLINE)
             {
                 throw new DeviceException(MiscResources.DeviceOffline);
