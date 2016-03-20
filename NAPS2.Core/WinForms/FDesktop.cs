@@ -829,10 +829,8 @@ namespace NAPS2.WinForms
                     var op = operationFactory.Create<SaveImagesOperation>();
                     var progressForm = FormFactory.Create<FProgress>();
                     progressForm.Operation = op;
-                    if (op.Start(sd.FileName, DateTime.Now, images))
-                    {
-                        progressForm.ShowDialog();
-                    }
+                    progressForm.Start = () => op.Start(sd.FileName, DateTime.Now, images);
+                    progressForm.ShowDialog();
                     if (op.Status.Success)
                     {
                         changeTracker.HasUnsavedChanges = false;

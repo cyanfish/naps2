@@ -41,6 +41,8 @@ namespace NAPS2.WinForms
             }
         }
 
+        public Func<bool> Start { get; set; }
+
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
             errorOutput.DisplayError(e.ErrorMessage);
@@ -82,15 +84,28 @@ namespace NAPS2.WinForms
             }
         }
 
+        private void FProgress_Shown(object sender, EventArgs e)
+        {
+            if (Start != null)
+            {
+                if (!Start())
+                {
+                    finished = true;
+                    Close();
+                }
+            }
+        }
+
         private void DisplayProgress()
         {
-            labelStatus.Text = Operation.Status.StatusText;
-            if (Operation.Status.MaxProgress == 1 || Operation.Status.IndeterminateProgress)
+            var status = Operation.Status ?? new OperationStatus();
+            labelStatus.Text = status.StatusText;
+            if (status.MaxProgress == 1 || status.IndeterminateProgress)
             {
                 labelNumber.Text = "";
                 progressBar.Style = ProgressBarStyle.Marquee;
             }
-            else if (Operation.Status.MaxProgress == 0)
+            else if (status.MaxProgress == 0)
             {
                 labelNumber.Text = "";
                 progressBar.Style = ProgressBarStyle.Continuous;
@@ -99,10 +114,10 @@ namespace NAPS2.WinForms
             }
             else
             {
-                labelNumber.Text = string.Format(MiscResources.ProgressFormat, Operation.Status.CurrentProgress, Operation.Status.MaxProgress);
+                labelNumber.Text = string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
                 progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Value = Operation.Status.CurrentProgress;
-                progressBar.Maximum = Operation.Status.MaxProgress;
+                progressBar.Value = status.CurrentProgress;
+                progressBar.Maximum = status.MaxProgress;
             }
             // Force the progress bar to render immediately
             if (progressBar.Value < progressBar.Maximum)
