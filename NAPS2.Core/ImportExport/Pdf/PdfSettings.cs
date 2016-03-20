@@ -37,6 +37,8 @@ namespace NAPS2.ImportExport.Pdf
 
         public string DefaultFileName { get; set; }
 
+        public bool SkipSavePrompt { get; set; }
+
         public PdfMetadata Metadata
         {
             get { return metadata; }

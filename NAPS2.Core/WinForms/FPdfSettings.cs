@@ -20,10 +20,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms
 {
@@ -46,7 +48,7 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Bind(groupMetadata, groupProtection)
                     .WidthToForm()
-                .Bind(txtDefaultFileName, txtTitle, txtAuthor, txtSubject, txtKeywords, txtOwnerPassword, txtUserPassword)
+                .Bind(txtDefaultFilePath, txtTitle, txtAuthor, txtSubject, txtKeywords, txtOwnerPassword, txtUserPassword)
                     .WidthToForm()
                 .Activate();
 
@@ -57,7 +59,8 @@ namespace NAPS2.WinForms
 
         private void UpdateValues(PdfSettings pdfSettings)
         {
-            txtDefaultFileName.Text = pdfSettings.DefaultFileName;
+            txtDefaultFilePath.Text = pdfSettings.DefaultFileName;
+            cbSkipSavePrompt.Checked = pdfSettings.SkipSavePrompt;
             txtTitle.Text = pdfSettings.Metadata.Title;
             txtAuthor.Text = pdfSettings.Metadata.Author;
             txtSubject.Text = pdfSettings.Metadata.Subject;
@@ -77,6 +80,8 @@ namespace NAPS2.WinForms
 
         private void UpdateEnabled()
         {
+            cbSkipSavePrompt.Enabled = Path.IsPathRooted(txtDefaultFilePath.Text);
+
             bool encrypt = cbEncryptPdf.Checked;
             txtUserPassword.Enabled = txtOwnerPassword.Enabled = cbShowOwnerPassword.Enabled = cbShowUserPassword.Enabled =
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
@@ -90,7 +95,8 @@ namespace NAPS2.WinForms
         {
             var pdfSettings = new PdfSettings
             {
-                DefaultFileName = txtDefaultFileName.Text,
+                DefaultFileName = txtDefaultFilePath.Text,
+                SkipSavePrompt = cbSkipSavePrompt.Checked,
                 Metadata =
                 {
                     Title = txtTitle.Text,
@@ -133,6 +139,11 @@ namespace NAPS2.WinForms
             cbRememberSettings.Checked = false;
         }
 
+        private void txtDefaultFilePath_TextChanged(object sender, EventArgs e)
+        {
+            UpdateEnabled();
+        }
+
         private void cbEncryptPdf_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
@@ -151,10 +162,26 @@ namespace NAPS2.WinForms
         private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = FormFactory.Create<FPlaceholders>();
-            form.FileName = txtDefaultFileName.Text;
+            form.FileName = txtDefaultFilePath.Text;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                txtDefaultFileName.Text = form.FileName;
+                txtDefaultFilePath.Text = form.FileName;
+            }
+        }
+
+        private void btnChooseFolder_Click(object sender, EventArgs e)
+        {
+            var sd = new SaveFileDialog
+            {
+                OverwritePrompt = false,
+                AddExtension = true,
+                Filter = MiscResources.FileTypePdf + "|*.pdf",
+                FileName = Path.GetFileName(txtDefaultFilePath.Text),
+                InitialDirectory = Path.GetDirectoryName(txtDefaultFilePath.Text)
+            };
+            if (sd.ShowDialog() == DialogResult.OK)
+            {
+                txtDefaultFilePath.Text = sd.FileName;
             }
         }
     }

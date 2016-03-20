@@ -739,24 +739,37 @@ namespace NAPS2.WinForms
         {
             if (images.Any())
             {
-                var sd = new SaveFileDialog
-                {
-                    OverwritePrompt = false,
-                    AddExtension = true,
-                    Filter = MiscResources.FileTypePdf + "|*.pdf",
-                    FileName = pdfSettingsContainer.PdfSettings.DefaultFileName
-                };
+                string path;
 
-                if (sd.ShowDialog() == DialogResult.OK)
+                var pdfSettings = pdfSettingsContainer.PdfSettings;
+                if (pdfSettings.SkipSavePrompt && Path.IsPathRooted(pdfSettings.DefaultFileName))
                 {
-                    if (ExportPDF(sd.FileName, images, false))
-                    {
-                        changeTracker.HasUnsavedChanges = false;
-                        if (appConfigManager.Config.DeleteAfterSaving)
+                    path = pdfSettings.DefaultFileName;
+                }
+                else
+                {
+                    var sd = new SaveFileDialog
                         {
-                            imageList.Delete(imageList.Images.IndiciesOf(images));
-                            UpdateThumbnails(Enumerable.Empty<int>(), false, false);
-                        }
+                            OverwritePrompt = false,
+                            AddExtension = true,
+                            Filter = MiscResources.FileTypePdf + "|*.pdf",
+                            FileName = Path.GetFileName(pdfSettings.DefaultFileName),
+                            InitialDirectory = Path.GetDirectoryName(pdfSettings.DefaultFileName)
+                        };
+                    if (sd.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+                    path = sd.FileName;
+                }
+
+                if (ExportPDF(path, images, false))
+                {
+                    changeTracker.HasUnsavedChanges = false;
+                    if (appConfigManager.Config.DeleteAfterSaving)
+                    {
+                        imageList.Delete(imageList.Images.IndiciesOf(images));
+                        UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                     }
                 }
             }

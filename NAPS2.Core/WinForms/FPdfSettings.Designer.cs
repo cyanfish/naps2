@@ -65,8 +65,10 @@ namespace NAPS2.WinForms
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
             this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
-            this.txtDefaultFileName = new System.Windows.Forms.TextBox();
+            this.txtDefaultFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnChooseFolder = new System.Windows.Forms.Button();
+            this.cbSkipSavePrompt = new System.Windows.Forms.CheckBox();
             this.groupMetadata.SuspendLayout();
             this.groupProtection.SuspendLayout();
             this.SuspendLayout();
@@ -271,22 +273,38 @@ namespace NAPS2.WinForms
             this.linkPlaceholders.TabStop = true;
             this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
             // 
-            // txtDefaultFileName
+            // txtDefaultFilePath
             // 
-            resources.ApplyResources(this.txtDefaultFileName, "txtDefaultFileName");
-            this.txtDefaultFileName.Name = "txtDefaultFileName";
+            resources.ApplyResources(this.txtDefaultFilePath, "txtDefaultFilePath");
+            this.txtDefaultFilePath.Name = "txtDefaultFilePath";
+            this.txtDefaultFilePath.TextChanged += new System.EventHandler(this.txtDefaultFilePath_TextChanged);
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // btnChooseFolder
+            // 
+            resources.ApplyResources(this.btnChooseFolder, "btnChooseFolder");
+            this.btnChooseFolder.Name = "btnChooseFolder";
+            this.btnChooseFolder.UseVisualStyleBackColor = true;
+            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
+            // 
+            // cbSkipSavePrompt
+            // 
+            resources.ApplyResources(this.cbSkipSavePrompt, "cbSkipSavePrompt");
+            this.cbSkipSavePrompt.Name = "cbSkipSavePrompt";
+            this.cbSkipSavePrompt.UseVisualStyleBackColor = true;
+            // 
             // FPdfSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbSkipSavePrompt);
+            this.Controls.Add(this.btnChooseFolder);
             this.Controls.Add(this.linkPlaceholders);
-            this.Controls.Add(this.txtDefaultFileName);
+            this.Controls.Add(this.txtDefaultFilePath);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRestoreDefaults);
             this.Controls.Add(this.cbRememberSettings);
@@ -339,7 +357,9 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.CheckBox cbShowUserPassword;
         private System.Windows.Forms.CheckBox cbShowOwnerPassword;
         private System.Windows.Forms.LinkLabel linkPlaceholders;
-        private System.Windows.Forms.TextBox txtDefaultFileName;
+        private System.Windows.Forms.TextBox txtDefaultFilePath;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnChooseFolder;
+        private System.Windows.Forms.CheckBox cbSkipSavePrompt;
     }
 }
