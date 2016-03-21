@@ -54,15 +54,7 @@ namespace NAPS2.Scan.Wia
             }));
             if (error != null)
             {
-                if (error is ScanDriverException)
-                {
-                    throw error;
-                }
-                if (error is COMException)
-                {
-                    WiaApi.ThrowDeviceError((COMException)error);
-                }
-                throw new ScanDriverUnknownException(error);
+                WiaApi.ThrowDeviceError(error);
             }
         }
 

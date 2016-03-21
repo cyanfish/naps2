@@ -180,6 +180,19 @@ namespace NAPS2.Scan.Wia
             return item;
         }
 
+        public static void ThrowDeviceError(Exception error)
+        {
+            if (error is ScanDriverException)
+            {
+                throw error;
+            }
+            if (error is COMException)
+            {
+                ThrowDeviceError((COMException)error);
+            }
+            throw new ScanDriverUnknownException(error);
+        }
+
         public static void ThrowDeviceError(COMException e)
         {
             if ((uint)e.ErrorCode == Errors.NO_DEVICE_FOUND)

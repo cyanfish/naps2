@@ -45,7 +45,7 @@ namespace NAPS2.Scan.Wia
             form.ShowDialog();
             if (form.Exception != null)
             {
-                throw form.Exception;
+                WiaApi.ThrowDeviceError(form.Exception);
             }
             if (form.DialogResult == DialogResult.Cancel)
             {
