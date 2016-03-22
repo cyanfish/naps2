@@ -21,10 +21,12 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Images;
+using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms
 {
@@ -32,11 +34,13 @@ namespace NAPS2.WinForms
     {
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IUserConfigManager userConfigManager;
+        private readonly DialogHelper dialogHelper;
 
-        public FImageSettings(ImageSettingsContainer imageSettingsContainer, IUserConfigManager userConfigManager)
+        public FImageSettings(ImageSettingsContainer imageSettingsContainer, IUserConfigManager userConfigManager, DialogHelper dialogHelper)
         {
             this.imageSettingsContainer = imageSettingsContainer;
             this.userConfigManager = userConfigManager;
+            this.dialogHelper = dialogHelper;
             InitializeComponent();
         }
 
@@ -45,27 +49,40 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(btnRestoreDefaults, btnOK, btnCancel)
                     .BottomToForm()
-                .Bind(txtJpegQuality, btnOK, btnCancel)
+                .Bind(txtJpegQuality, btnOK, btnCancel, btnChooseFolder)
                     .RightToForm()
-                .Bind(txtDefaultFileName, tbJpegQuality, lblWarning)
+                .Bind(txtDefaultFilePath, tbJpegQuality, lblWarning)
                     .WidthToForm()
                 .Activate();
 
             UpdateValues(imageSettingsContainer.ImageSettings);
+            UpdateEnabled();
             cbRememberSettings.Checked = userConfigManager.Config.ImageSettings != null;
         }
 
         private void UpdateValues(ImageSettings imageSettings)
         {
-            txtDefaultFileName.Text = imageSettings.DefaultFileName;
+            txtDefaultFilePath.Text = imageSettings.DefaultFileName;
+            cbSkipSavePrompt.Checked = imageSettings.SkipSavePrompt;
             txtJpegQuality.Text = imageSettings.JpegQuality.ToString(CultureInfo.InvariantCulture);
+        }
+
+        private void UpdateEnabled()
+        {
+            cbSkipSavePrompt.Enabled = Path.IsPathRooted(txtDefaultFilePath.Text);
+        }
+
+        private void txtDefaultFilePath_TextChanged(object sender, EventArgs e)
+        {
+            UpdateEnabled();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
             var imageSettings = new ImageSettings
             {
-                DefaultFileName = txtDefaultFileName.Text,
+                DefaultFileName = txtDefaultFilePath.Text,
+                SkipSavePrompt = cbSkipSavePrompt.Checked,
                 JpegQuality = tbJpegQuality.Value
             };
 
@@ -107,10 +124,19 @@ namespace NAPS2.WinForms
         private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = FormFactory.Create<FPlaceholders>();
-            form.FileName = txtDefaultFileName.Text;
+            form.FileName = txtDefaultFilePath.Text;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                txtDefaultFileName.Text = form.FileName;
+                txtDefaultFilePath.Text = form.FileName;
+            }
+        }
+
+        private void btnChooseFolder_Click(object sender, EventArgs e)
+        {
+            string savePath;
+            if (dialogHelper.SaveImage(txtDefaultFilePath.Text, out savePath))
+            {
+                txtDefaultFilePath.Text = savePath;
             }
         }
     }

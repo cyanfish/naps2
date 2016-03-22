@@ -33,18 +33,20 @@ namespace NAPS2.WinForms
     {
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly IUserConfigManager userConfigManager;
+        private readonly DialogHelper dialogHelper;
 
-        public FPdfSettings(PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager)
+        public FPdfSettings(PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, DialogHelper dialogHelper)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.userConfigManager = userConfigManager;
+            this.dialogHelper = dialogHelper;
             InitializeComponent();
         }
 
         protected override void OnLoad(object sender, EventArgs e)
         {
             new LayoutManager(this)
-                .Bind(btnOK, btnCancel, cbShowOwnerPassword, cbShowUserPassword)
+                .Bind(btnOK, btnCancel, cbShowOwnerPassword, cbShowUserPassword, btnChooseFolder)
                     .RightToForm()
                 .Bind(groupMetadata, groupProtection)
                     .WidthToForm()
@@ -171,19 +173,10 @@ namespace NAPS2.WinForms
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
-            var sd = new SaveFileDialog
+            string savePath;
+            if (dialogHelper.SavePdf(txtDefaultFilePath.Text, out savePath))
             {
-                OverwritePrompt = false,
-                AddExtension = true,
-                Filter = MiscResources.FileTypePdf + "|*.pdf",
-                FileName = Path.GetFileName(txtDefaultFilePath.Text),
-                InitialDirectory = Path.IsPathRooted(txtDefaultFilePath.Text)
-                                 ? Path.GetDirectoryName(txtDefaultFilePath.Text)
-                                 : ""
-            };
-            if (sd.ShowDialog() == DialogResult.OK)
-            {
-                txtDefaultFilePath.Text = sd.FileName;
+                txtDefaultFilePath.Text = savePath;
             }
         }
     }

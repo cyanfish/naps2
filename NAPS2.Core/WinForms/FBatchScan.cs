@@ -50,12 +50,13 @@ namespace NAPS2.WinForms
         private readonly BatchScanPerformer batchScanPerformer;
         private readonly IErrorOutput errorOutput;
         private readonly ThreadFactory threadFactory;
+        private readonly DialogHelper dialogHelper;
 
         private bool batchRunning = false;
         private bool cancelBatch = false;
         private Thread batchThread;
 
-        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, ThreadFactory threadFactory)
+        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, ThreadFactory threadFactory, DialogHelper dialogHelper)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;
@@ -65,6 +66,7 @@ namespace NAPS2.WinForms
             this.batchScanPerformer = batchScanPerformer;
             this.errorOutput = errorOutput;
             this.threadFactory = threadFactory;
+            this.dialogHelper = dialogHelper;
             InitializeComponent();
 
             RestoreFormState = false;
@@ -234,22 +236,10 @@ namespace NAPS2.WinForms
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
-            var sd = new SaveFileDialog
+            string savePath;
+            if (dialogHelper.SavePdfOrImage(null, out savePath))
             {
-                OverwritePrompt = false,
-                AddExtension = true,
-                Filter = MiscResources.FileTypePdf + "|*.pdf|" +
-                         MiscResources.FileTypeBmp + "|*.bmp|" +
-                         MiscResources.FileTypeEmf + "|*.emf|" +
-                         MiscResources.FileTypeExif + "|*.exif|" +
-                         MiscResources.FileTypeGif + "|*.gif|" +
-                         MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
-                         MiscResources.FileTypePng + "|*.png|" +
-                         MiscResources.FileTypeTiff + "|*.tiff;*.tif",
-            };
-            if (sd.ShowDialog() == DialogResult.OK)
-            {
-                txtFilePath.Text = sd.FileName;
+                txtFilePath.Text = savePath;
             }
         }
 

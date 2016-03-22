@@ -79,6 +79,7 @@ namespace NAPS2.WinForms
         private readonly IOperationFactory operationFactory;
         private readonly IUserConfigManager userConfigManager;
         private readonly KeyboardShortcutManager ksm;
+        private readonly DialogHelper dialogHelper;
 
         #endregion
 
@@ -94,7 +95,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer)
+        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, AutoUpdaterUI autoUpdaterUI, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, DialogHelper dialogHelper)
         {
             this.emailer = emailer;
             this.stringWrapper = stringWrapper;
@@ -116,6 +117,7 @@ namespace NAPS2.WinForms
             this.userConfigManager = userConfigManager;
             this.ksm = ksm;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.dialogHelper = dialogHelper;
             InitializeComponent();
 
             Shown += FDesktop_Shown;
@@ -748,21 +750,10 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    var sd = new SaveFileDialog
-                        {
-                            OverwritePrompt = false,
-                            AddExtension = true,
-                            Filter = MiscResources.FileTypePdf + "|*.pdf",
-                            FileName = Path.GetFileName(pdfSettings.DefaultFileName),
-                            InitialDirectory = Path.IsPathRooted(pdfSettings.DefaultFileName)
-                                             ? Path.GetDirectoryName(pdfSettings.DefaultFileName)
-                                             : ""
-                        };
-                    if (sd.ShowDialog() != DialogResult.OK)
+                    if (!dialogHelper.SavePdf(pdfSettings.DefaultFileName, out exportPath))
                     {
                         return;
                     }
-                    exportPath = sd.FileName;
                 }
 
                 if (ExportPDF(exportPath, images, false))
@@ -797,63 +788,33 @@ namespace NAPS2.WinForms
         {
             if (images.Any())
             {
-                var sd = new SaveFileDialog
+                string exportPath;
+
+                var imageSettings = imageSettingsContainer.ImageSettings;
+                if (imageSettings.SkipSavePrompt && Path.IsPathRooted(imageSettings.DefaultFileName))
                 {
-                    OverwritePrompt = false,
-                    AddExtension = true,
-                    Filter = MiscResources.FileTypeBmp + "|*.bmp|" +
-                                MiscResources.FileTypeEmf + "|*.emf|" +
-                                MiscResources.FileTypeExif + "|*.exif|" +
-                                MiscResources.FileTypeGif + "|*.gif|" +
-                                MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
-                                MiscResources.FileTypePng + "|*.png|" +
-                                MiscResources.FileTypeTiff + "|*.tiff;*.tif",
-                    FileName = imageSettingsContainer.ImageSettings.DefaultFileName
-                };
-                switch ((UserConfigManager.Config.LastImageExt ?? "").ToLowerInvariant())
+                    exportPath = imageSettings.DefaultFileName;
+                }
+                else
                 {
-                    case "bmp":
-                        sd.FilterIndex = 1;
-                        break;
-                    case "emf":
-                        sd.FilterIndex = 2;
-                        break;
-                    case "exif":
-                        sd.FilterIndex = 3;
-                        break;
-                    case "gif":
-                        sd.FilterIndex = 4;
-                        break;
-                    case "png":
-                        sd.FilterIndex = 6;
-                        break;
-                    case "tif":
-                    case "tiff":
-                        sd.FilterIndex = 7;
-                        break;
-                    default: // Jpeg
-                        sd.FilterIndex = 5;
-                        break;
+                    if (!dialogHelper.SaveImage(imageSettings.DefaultFileName, out exportPath))
+                    {
+                        return;
+                    }
                 }
 
-                if (sd.ShowDialog() == DialogResult.OK)
+                var op = operationFactory.Create<SaveImagesOperation>();
+                var progressForm = FormFactory.Create<FProgress>();
+                progressForm.Operation = op;
+                progressForm.Start = () => op.Start(exportPath, DateTime.Now, images);
+                progressForm.ShowDialog();
+                if (op.Status.Success)
                 {
-                    UserConfigManager.Config.LastImageExt = (Path.GetExtension(sd.FileName) ?? "").Replace(".", "");
-                    UserConfigManager.Save();
-
-                    var op = operationFactory.Create<SaveImagesOperation>();
-                    var progressForm = FormFactory.Create<FProgress>();
-                    progressForm.Operation = op;
-                    progressForm.Start = () => op.Start(sd.FileName, DateTime.Now, images);
-                    progressForm.ShowDialog();
-                    if (op.Status.Success)
+                    changeTracker.HasUnsavedChanges = false;
+                    if (appConfigManager.Config.DeleteAfterSaving)
                     {
-                        changeTracker.HasUnsavedChanges = false;
-                        if (appConfigManager.Config.DeleteAfterSaving)
-                        {
-                            imageList.Delete(imageList.Images.IndiciesOf(images));
-                            UpdateThumbnails(Enumerable.Empty<int>(), false, false);
-                        }
+                        imageList.Delete(imageList.Images.IndiciesOf(images));
+                        UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                     }
                 }
             }

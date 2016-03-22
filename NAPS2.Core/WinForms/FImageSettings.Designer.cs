@@ -39,13 +39,15 @@ namespace NAPS2.WinForms
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
-            this.txtDefaultFileName = new System.Windows.Forms.TextBox();
+            this.txtDefaultFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.txtJpegQuality = new System.Windows.Forms.TextBox();
             this.tbJpegQuality = new System.Windows.Forms.TrackBar();
             this.lblWarning = new System.Windows.Forms.Label();
+            this.btnChooseFolder = new System.Windows.Forms.Button();
+            this.cbSkipSavePrompt = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,10 +78,11 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults.UseVisualStyleBackColor = true;
             this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
-            // txtDefaultFileName
+            // txtDefaultFilePath
             // 
-            resources.ApplyResources(this.txtDefaultFileName, "txtDefaultFileName");
-            this.txtDefaultFileName.Name = "txtDefaultFileName";
+            resources.ApplyResources(this.txtDefaultFilePath, "txtDefaultFilePath");
+            this.txtDefaultFilePath.Name = "txtDefaultFilePath";
+            this.txtDefaultFilePath.TextChanged += new System.EventHandler(this.txtDefaultFilePath_TextChanged);
             // 
             // label1
             // 
@@ -117,15 +120,30 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.lblWarning, "lblWarning");
             this.lblWarning.Name = "lblWarning";
             // 
+            // btnChooseFolder
+            // 
+            resources.ApplyResources(this.btnChooseFolder, "btnChooseFolder");
+            this.btnChooseFolder.Name = "btnChooseFolder";
+            this.btnChooseFolder.UseVisualStyleBackColor = true;
+            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
+            // 
+            // cbSkipSavePrompt
+            // 
+            resources.ApplyResources(this.cbSkipSavePrompt, "cbSkipSavePrompt");
+            this.cbSkipSavePrompt.Name = "cbSkipSavePrompt";
+            this.cbSkipSavePrompt.UseVisualStyleBackColor = true;
+            // 
             // FImageSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbSkipSavePrompt);
+            this.Controls.Add(this.btnChooseFolder);
             this.Controls.Add(this.lblWarning);
             this.Controls.Add(this.txtJpegQuality);
             this.Controls.Add(this.linkPlaceholders);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtDefaultFileName);
+            this.Controls.Add(this.txtDefaultFilePath);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRestoreDefaults);
             this.Controls.Add(this.cbRememberSettings);
@@ -148,12 +166,14 @@ namespace NAPS2.WinForms
         private ILProfileIcons ilProfileIcons;
         private System.Windows.Forms.CheckBox cbRememberSettings;
         private System.Windows.Forms.Button btnRestoreDefaults;
-        private System.Windows.Forms.TextBox txtDefaultFileName;
+        private System.Windows.Forms.TextBox txtDefaultFilePath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel linkPlaceholders;
         private System.Windows.Forms.TextBox txtJpegQuality;
         private System.Windows.Forms.TrackBar tbJpegQuality;
         private System.Windows.Forms.Label lblWarning;
+        private System.Windows.Forms.Button btnChooseFolder;
+        private System.Windows.Forms.CheckBox cbSkipSavePrompt;
     }
 }

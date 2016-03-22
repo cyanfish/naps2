@@ -35,10 +35,13 @@ namespace NAPS2.WinForms
 {
     public partial class FAutoSaveSettings : FormBase
     {
+        private readonly DialogHelper dialogHelper;
+
         private bool result;
 
-        public FAutoSaveSettings()
+        public FAutoSaveSettings(DialogHelper dialogHelper)
         {
+            this.dialogHelper = dialogHelper;
             InitializeComponent();
         }
 
@@ -114,22 +117,10 @@ namespace NAPS2.WinForms
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
-            var sd = new SaveFileDialog
+            string savePath;
+            if (dialogHelper.SavePdfOrImage(null, out savePath))
             {
-                OverwritePrompt = false,
-                AddExtension = true,
-                Filter = MiscResources.FileTypePdf + "|*.pdf|" +
-                         MiscResources.FileTypeBmp + "|*.bmp|" +
-                         MiscResources.FileTypeEmf + "|*.emf|" +
-                         MiscResources.FileTypeExif + "|*.exif|" +
-                         MiscResources.FileTypeGif + "|*.gif|" +
-                         MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
-                         MiscResources.FileTypePng + "|*.png|" +
-                         MiscResources.FileTypeTiff + "|*.tiff;*.tif",
-            };
-            if (sd.ShowDialog() == DialogResult.OK)
-            {
-                txtFilePath.Text = sd.FileName;
+                txtFilePath.Text = savePath;
             }
         }
 

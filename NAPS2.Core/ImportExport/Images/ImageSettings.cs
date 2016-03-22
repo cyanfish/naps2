@@ -15,6 +15,8 @@ namespace NAPS2.ImportExport.Images
 
         public string DefaultFileName { get; set; }
 
+        public bool SkipSavePrompt { get; set; }
+
         public int JpegQuality { get; set; }
     }
 }
