@@ -134,7 +134,7 @@ namespace NAPS2.WinForms
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
             string savePath;
-            if (dialogHelper.SaveImage(txtDefaultFilePath.Text, out savePath))
+            if (dialogHelper.PromptToSaveImage(txtDefaultFilePath.Text, out savePath))
             {
                 txtDefaultFilePath.Text = savePath;
             }

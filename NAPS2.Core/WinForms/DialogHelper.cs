@@ -17,7 +17,7 @@ namespace NAPS2.WinForms
             this.userConfigManager = userConfigManager;
         }
 
-        public bool SavePdfOrImage(string defaultPath, out string savePath)
+        public bool PromptToSavePdfOrImage(string defaultPath, out string savePath)
         {
             var sd = new SaveFileDialog
             {
@@ -43,7 +43,7 @@ namespace NAPS2.WinForms
             return false;
         }
 
-        public bool SavePdf(string defaultPath, out string savePath)
+        public bool PromptToSavePdf(string defaultPath, out string savePath)
         {
             var sd = new SaveFileDialog
             {
@@ -62,7 +62,7 @@ namespace NAPS2.WinForms
             return false;
         }
 
-        public bool SaveImage(string defaultPath, out string savePath)
+        public bool PromptToSaveImage(string defaultPath, out string savePath)
         {
             var sd = new SaveFileDialog
             {

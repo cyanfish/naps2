@@ -741,22 +741,22 @@ namespace NAPS2.WinForms
         {
             if (images.Any())
             {
-                string exportPath;
+                string savePath;
 
                 var pdfSettings = pdfSettingsContainer.PdfSettings;
                 if (pdfSettings.SkipSavePrompt && Path.IsPathRooted(pdfSettings.DefaultFileName))
                 {
-                    exportPath = pdfSettings.DefaultFileName;
+                    savePath = pdfSettings.DefaultFileName;
                 }
                 else
                 {
-                    if (!dialogHelper.SavePdf(pdfSettings.DefaultFileName, out exportPath))
+                    if (!dialogHelper.PromptToSavePdf(pdfSettings.DefaultFileName, out savePath))
                     {
                         return;
                     }
                 }
 
-                if (ExportPDF(exportPath, images, false))
+                if (ExportPDF(savePath, images, false))
                 {
                     changeTracker.HasUnsavedChanges = false;
                     if (appConfigManager.Config.DeleteAfterSaving)
@@ -788,16 +788,16 @@ namespace NAPS2.WinForms
         {
             if (images.Any())
             {
-                string exportPath;
+                string savePath;
 
                 var imageSettings = imageSettingsContainer.ImageSettings;
                 if (imageSettings.SkipSavePrompt && Path.IsPathRooted(imageSettings.DefaultFileName))
                 {
-                    exportPath = imageSettings.DefaultFileName;
+                    savePath = imageSettings.DefaultFileName;
                 }
                 else
                 {
-                    if (!dialogHelper.SaveImage(imageSettings.DefaultFileName, out exportPath))
+                    if (!dialogHelper.PromptToSaveImage(imageSettings.DefaultFileName, out savePath))
                     {
                         return;
                     }
@@ -806,7 +806,7 @@ namespace NAPS2.WinForms
                 var op = operationFactory.Create<SaveImagesOperation>();
                 var progressForm = FormFactory.Create<FProgress>();
                 progressForm.Operation = op;
-                progressForm.Start = () => op.Start(exportPath, DateTime.Now, images);
+                progressForm.Start = () => op.Start(savePath, DateTime.Now, images);
                 progressForm.ShowDialog();
                 if (op.Status.Success)
                 {
