@@ -45,6 +45,12 @@ Source: "..\..\NAPS2.Console\bin\InstallerEXE\CommandLine.dll"; DestDir: "{app}\
 Source: "lib\twaindsm.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "lib\wiaaut.dll"; DestDir: "{sys}"; Flags: regserver
 
+; Delete files from old locations in case of upgrade
+[InstallDelete]
+Type: files; Name: "{app}\*.dll"
+Type: filesandordirs; Name: "{app}\??"
+Type: filesandordirs; Name: "{app}\??-??"
+
 [Icons]
 Name: "{group}\NAPS2"; Filename: "{app}\NAPS2.exe"
 Name: "{commondesktop}\NAPS2"; Filename: "{app}\NAPS2.exe"; Tasks: desktopicon
