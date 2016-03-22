@@ -177,7 +177,9 @@ namespace NAPS2.WinForms
                 AddExtension = true,
                 Filter = MiscResources.FileTypePdf + "|*.pdf",
                 FileName = Path.GetFileName(txtDefaultFilePath.Text),
-                InitialDirectory = Path.GetDirectoryName(txtDefaultFilePath.Text)
+                InitialDirectory = Path.IsPathRooted(txtDefaultFilePath.Text)
+                                 ? Path.GetDirectoryName(txtDefaultFilePath.Text)
+                                 : ""
             };
             if (sd.ShowDialog() == DialogResult.OK)
             {

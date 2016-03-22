@@ -739,12 +739,12 @@ namespace NAPS2.WinForms
         {
             if (images.Any())
             {
-                string path;
+                string exportPath;
 
                 var pdfSettings = pdfSettingsContainer.PdfSettings;
                 if (pdfSettings.SkipSavePrompt && Path.IsPathRooted(pdfSettings.DefaultFileName))
                 {
-                    path = pdfSettings.DefaultFileName;
+                    exportPath = pdfSettings.DefaultFileName;
                 }
                 else
                 {
@@ -754,16 +754,18 @@ namespace NAPS2.WinForms
                             AddExtension = true,
                             Filter = MiscResources.FileTypePdf + "|*.pdf",
                             FileName = Path.GetFileName(pdfSettings.DefaultFileName),
-                            InitialDirectory = Path.GetDirectoryName(pdfSettings.DefaultFileName)
+                            InitialDirectory = Path.IsPathRooted(pdfSettings.DefaultFileName)
+                                             ? Path.GetDirectoryName(pdfSettings.DefaultFileName)
+                                             : ""
                         };
                     if (sd.ShowDialog() != DialogResult.OK)
                     {
                         return;
                     }
-                    path = sd.FileName;
+                    exportPath = sd.FileName;
                 }
 
-                if (ExportPDF(path, images, false))
+                if (ExportPDF(exportPath, images, false))
                 {
                     changeTracker.HasUnsavedChanges = false;
                     if (appConfigManager.Config.DeleteAfterSaving)
