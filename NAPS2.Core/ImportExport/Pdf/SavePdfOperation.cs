@@ -74,6 +74,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 try
                 {
+                    EnsureParentDirExists(subFileName);
                     Status.Success = pdfExporter.Export(subFileName, images, pdfSettings, ocrLanguageCode, i =>
                     {
                         Status.CurrentProgress = i;
@@ -95,6 +96,15 @@ namespace NAPS2.ImportExport.Pdf
             });
 
             return true;
+        }
+
+        private static void EnsureParentDirExists(string path)
+        {
+            var parentDir = new FileInfo(path).Directory;
+            if (parentDir != null && !parentDir.Exists)
+            {
+                parentDir.Create();
+            }
         }
 
         public override void Cancel()
