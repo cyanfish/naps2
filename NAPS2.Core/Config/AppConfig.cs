@@ -55,6 +55,8 @@ namespace NAPS2.Config
 
         public bool DeleteAfterSaving { get; set; }
 
+        public bool DisableSaveNotifications { get; set; }
+
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }
 }

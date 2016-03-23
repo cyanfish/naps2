@@ -9,6 +9,7 @@
   <LockSystemProfiles>false</LockSystemProfiles>
   <NoUpdatePrompt>false</NoUpdatePrompt>
   <DeleteAfterSaving>false</DeleteAfterSaving>
+  <DisableSaveNotifications>false</DisableSaveNotifications>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
     <UseNativeUI>false</UseNativeUI>

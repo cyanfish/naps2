@@ -4,21 +4,39 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using NAPS2.Config;
 
 namespace NAPS2.WinForms
 {
     public class NotificationManager
     {
-        private readonly FormBase parentForm;
         private const int PADDING_X = 25, PADDING_Y = 25;
         private const int SPACING_Y = 20;
 
+        private readonly FormBase parentForm;
+        private readonly AppConfigManager appConfigManager;
+
         private readonly List<NotifyWidget> slots = new List<NotifyWidget>();
 
-        public NotificationManager(FormBase parentForm)
+        public NotificationManager(FormBase parentForm, AppConfigManager appConfigManager)
         {
             this.parentForm = parentForm;
+            this.appConfigManager = appConfigManager;
             parentForm.Resize += parentForm_Resize;
+        }
+
+        public void Show(NotifyWidget n)
+        {
+            if (appConfigManager.Config.DisableSaveNotifications)
+            {
+                return;
+            }
+
+            int slot = FillNextSlot(n);
+            n.Location = GetPosition(n, slot);
+            n.BringToFront();
+            n.HideNotify += (sender, args) => ClearSlot(n);
+            n.ShowNotify();
         }
 
         private void parentForm_Resize(object sender, EventArgs e)
@@ -30,15 +48,6 @@ namespace NAPS2.WinForms
                     slots[i].Location = GetPosition(slots[i], i);
                 }
             }
-        }
-
-        public void Show(NotifyWidget n)
-        {
-            int slot = FillNextSlot(n);
-            n.Location = GetPosition(n, slot);
-            n.BringToFront();
-            n.HideNotify += (sender, args) => ClearSlot(n);
-            n.ShowNotify();
         }
 
         private void ClearSlot(NotifyWidget n)
