@@ -954,6 +954,7 @@ namespace NAPS2.WinForms
             ksm.Assign("F1", tsAbout);
             ksm.Assign("Ctrl+OemMinus", btnZoomOut);
             ksm.Assign("Ctrl+Oemplus", btnZoomIn);
+            ksm.Assign("Del", ctxDelete);
 
             // Configured
 
