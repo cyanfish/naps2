@@ -42,7 +42,7 @@ namespace NAPS2.ImportExport
             if (match.Success)
             {
                 result = NumberPlaceholderPattern.Replace(result, "");
-                result = SubstituteNumber(result, match.Index, match.Length - 3, numberSkip, incrementIfExists);
+                result = SubstituteNumber(result, match.Index, match.Length - 3, numberSkip, true);
             }
             else if (autoNumberDigits > 0)
             {
