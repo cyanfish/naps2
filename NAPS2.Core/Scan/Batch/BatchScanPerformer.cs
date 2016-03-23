@@ -219,7 +219,7 @@ namespace NAPS2.Scan.Batch
 
             private void DoScan(int scanNumber, List<ScannedImage> scan, int pageNumber)
             {
-                scanPerformer.PerformScan(profile, scanParams, BatchForm, image =>
+                scanPerformer.PerformScan(profile, scanParams, BatchForm, null, image =>
                 {
                     scan.Add(image);
                     if (!ProgressCallback(scanNumber == -1

@@ -45,7 +45,7 @@ namespace NAPS2.Scan
             this.appConfigManager = appConfigManager;
         }
 
-        public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, Action<ScannedImage> imageCallback)
+        public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify, Action<ScannedImage> imageCallback)
         {
             var driver = driverFactory.Create(scanProfile.DriverName);
             driver.DialogParent = dialogParent;
@@ -77,7 +77,7 @@ namespace NAPS2.Scan
                     {
                         // Auto save without piping images
                         var images = driver.Scan().ToList();
-                        if (autoSave.Save(scanProfile.AutoSaveSettings, images))
+                        if (autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
                         {
                             foreach (ScannedImage img in images)
                             {
@@ -102,7 +102,7 @@ namespace NAPS2.Scan
                             imageCallback(scannedImage);
                             images.Add(scannedImage);
                         }
-                        autoSave.Save(scanProfile.AutoSaveSettings, images);
+                        autoSave.Save(scanProfile.AutoSaveSettings, images, notify);
                     }
                 }
                 else

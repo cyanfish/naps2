@@ -90,7 +90,7 @@ namespace NAPS2.WinForms
         private LayoutManager layoutManager;
         private bool disableSelectedIndexChangedEvent;
         private readonly ThumbnailRenderer thumbnailRenderer;
-        private NotificationManager notificationManager;
+        private NotificationManager notify;
 
         #endregion
 
@@ -162,7 +162,7 @@ namespace NAPS2.WinForms
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
             thumbnailList1.SizeChanged += (sender, args) => layoutManager.UpdateLayout();
 
-            notificationManager = new NotificationManager(this, appConfigManager);
+            notify = new NotificationManager(this, appConfigManager);
         }
 
         private void InitLanguageDropdown()
@@ -401,7 +401,7 @@ namespace NAPS2.WinForms
             if (profile != null)
             {
                 // We got a profile, yay, so we can actually do the scan now
-                scanPerformer.PerformScan(profile, new ScanParams(), this, ReceiveScannedImage);
+                scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage);
                 Activate();
             }
         }
@@ -410,7 +410,7 @@ namespace NAPS2.WinForms
         {
             if (profileManager.DefaultProfile != null)
             {
-                scanPerformer.PerformScan(profileManager.DefaultProfile, new ScanParams(), this, ReceiveScannedImage);
+                scanPerformer.PerformScan(profileManager.DefaultProfile, new ScanParams(), this, notify, ReceiveScannedImage);
                 Activate();
             }
             else if (profileManager.Profiles.Count == 0)
@@ -438,7 +438,7 @@ namespace NAPS2.WinForms
 
             UpdateScanButton();
 
-            scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), this, ReceiveScannedImage);
+            scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), this, notify, ReceiveScannedImage);
             Activate();
         }
 
@@ -568,7 +568,7 @@ namespace NAPS2.WinForms
 
                     UpdateScanButton();
 
-                    scanPerformer.PerformScan(profile, new ScanParams(), this, ReceiveScannedImage);
+                    scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage);
                     Activate();
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
@@ -768,7 +768,7 @@ namespace NAPS2.WinForms
                         imageList.Delete(imageList.Images.IndiciesOf(images));
                         UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                     }
-                    notificationManager.Show(new PdfSavedNotifyWidget(subSavePath));
+                    notify.PdfSaved(subSavePath);
                 }
             }
         }
@@ -821,14 +821,7 @@ namespace NAPS2.WinForms
                         imageList.Delete(imageList.Images.IndiciesOf(images));
                         UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                     }
-                    if (images.Count == 1)
-                    {
-                        notificationManager.Show(new ImageSavedNotifyWidget(op.FirstFileSaved));
-                    }
-                    else
-                    {
-                        notificationManager.Show(new ImagesSavedNotifyWidget(images.Count, op.FirstFileSaved));
-                    }
+                    notify.ImagesSaved(images.Count, op.FirstFileSaved);
                 }
             }
         }

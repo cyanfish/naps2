@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
-    public class NotificationManager
+    public class NotificationManager : ISaveNotify
     {
         private const int PADDING_X = 25, PADDING_Y = 25;
         private const int SPACING_Y = 20;
@@ -25,7 +26,24 @@ namespace NAPS2.WinForms
             parentForm.Resize += parentForm_Resize;
         }
 
-        public void Show(NotifyWidget n)
+        public void PdfSaved(string path)
+        {
+            Show(new PdfSavedNotifyWidget(path));
+        }
+
+        public void ImagesSaved(int imageCount, string path)
+        {
+            if (imageCount == 1)
+            {
+                Show(new OneImageSavedNotifyWidget(path));
+            }
+            else if (imageCount > 1)
+            {
+                Show(new ImagesSavedNotifyWidget(imageCount, path));
+            }
+        }
+
+        private void Show(NotifyWidget n)
         {
             if (appConfigManager.Config.DisableSaveNotifications)
             {

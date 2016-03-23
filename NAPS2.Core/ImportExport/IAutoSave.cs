@@ -16,7 +16,7 @@ namespace NAPS2.ImportExport
 {
     public interface IAutoSave
     {
-        bool Save(AutoSaveSettings settings, List<ScannedImage> images);
+        bool Save(AutoSaveSettings settings, List<ScannedImage> images, ISaveNotify notify);
     }
 
     public class AutoSave : IAutoSave
@@ -40,7 +40,7 @@ namespace NAPS2.ImportExport
             this.fileNamePlaceholders = fileNamePlaceholders;
         }
 
-        public bool Save(AutoSaveSettings settings, List<ScannedImage> images)
+        public bool Save(AutoSaveSettings settings, List<ScannedImage> images, ISaveNotify notify)
         {
             if (appConfigManager.Config.DisableAutoSave)
             {
@@ -51,12 +51,20 @@ namespace NAPS2.ImportExport
                 bool ok = true;
                 DateTime now = DateTime.Now;
                 int i = 0;
-                foreach (var imageList in SaveSeparatorHelper.SeparateScans(new [] { images }, settings.Separator))
+                string firstFileSaved = null;
+                var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator).ToList();
+                foreach (var imageList in scans)
                 {
-                    if (!SaveOneFile(settings, now, i++, imageList))
+                    if (!SaveOneFile(settings, now, i++, imageList, scans.Count == 1 ? notify : null, ref firstFileSaved))
                     {
                         ok = false;
                     }
+                }
+                if (notify != null && scans.Count > 1 && ok)
+                {
+                    // Can't just do images.Count because that includes patch codes
+                    int imageCount = scans.SelectMany(x => x).Count();
+                    notify.ImagesSaved(imageCount, firstFileSaved);
                 }
                 return ok;
             }
@@ -68,7 +76,7 @@ namespace NAPS2.ImportExport
             }
         }
 
-        private bool SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<ScannedImage> images)
+        private bool SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<ScannedImage> images, ISaveNotify notify, ref string firstFileSaved)
         {
             if (images.Count == 0)
             {
@@ -90,6 +98,14 @@ namespace NAPS2.ImportExport
                 {
                     form.ShowDialog();
                 }
+                if (op.Status.Success && firstFileSaved == null)
+                {
+                    firstFileSaved = subPath;
+                }
+                if (op.Status.Success && notify != null)
+                {
+                    notify.PdfSaved(subPath);
+                }
                 return op.Status.Success;
             }
             else
@@ -99,6 +115,14 @@ namespace NAPS2.ImportExport
                 if (op.Start(subPath, now, images))
                 {
                     form.ShowDialog();
+                }
+                if (op.Status.Success && firstFileSaved == null)
+                {
+                    firstFileSaved = op.FirstFileSaved;
+                }
+                if (op.Status.Success && notify != null)
+                {
+                    notify.ImagesSaved(images.Count, op.FirstFileSaved);
                 }
                 return op.Status.Success;
             }
