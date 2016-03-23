@@ -556,6 +556,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image saved..
+        /// </summary>
+        internal static string ImageSaved {
+            get {
+                return ResourceManager.GetString("ImageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} images saved..
+        /// </summary>
+        internal static string ImagesSaved {
+            get {
+                return ResourceManager.GetString("ImagesSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file &apos;{0}&apos; could not be imported..
         /// </summary>
         internal static string ImportErrorCouldNot {
@@ -741,6 +759,15 @@ namespace NAPS2.Lang.Resources {
         internal static string PdfNoPermissionToExtractContent {
             get {
                 return ResourceManager.GetString("PdfNoPermissionToExtractContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF saved..
+        /// </summary>
+        internal static string PdfSaved {
+            get {
+                return ResourceManager.GetString("PdfSaved", resourceCulture);
             }
         }
         

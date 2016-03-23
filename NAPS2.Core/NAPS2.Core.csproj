@@ -288,6 +288,12 @@
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
     <Compile Include="Host\X86HostManager.cs" />
+    <Compile Include="WinForms\ImagesSavedNotifyWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForms\ImageSavedNotifyWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForms\DialogHelper.cs" />
     <Compile Include="WinForms\DragScrollListView.cs">
       <SubType>Component</SubType>
@@ -472,11 +478,15 @@
     <Compile Include="WinForms\MessageBoxErrorOutput.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WinForms\NotificationManager.cs" />
     <Compile Include="WinForms\NotifyWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForms\NotifyWidget.Designer.cs">
       <DependentUpon>NotifyWidget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\PdfSavedNotifyWidget.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForms\ThumbnailList.cs">
       <SubType>Component</SubType>

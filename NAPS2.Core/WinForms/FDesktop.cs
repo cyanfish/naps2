@@ -90,6 +90,7 @@ namespace NAPS2.WinForms
         private LayoutManager layoutManager;
         private bool disableSelectedIndexChangedEvent;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private NotificationManager notificationManager;
 
         #endregion
 
@@ -160,6 +161,8 @@ namespace NAPS2.WinForms
 
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
             thumbnailList1.SizeChanged += (sender, args) => layoutManager.UpdateLayout();
+
+            notificationManager = new NotificationManager(this);
         }
 
         private void InitLanguageDropdown()
@@ -756,7 +759,8 @@ namespace NAPS2.WinForms
                     }
                 }
 
-                if (ExportPDF(savePath, images, false))
+                var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
+                if (ExportPDF(subSavePath, images, false))
                 {
                     changeTracker.HasUnsavedChanges = false;
                     if (appConfigManager.Config.DeleteAfterSaving)
@@ -764,6 +768,7 @@ namespace NAPS2.WinForms
                         imageList.Delete(imageList.Images.IndiciesOf(images));
                         UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                     }
+                    notificationManager.Show(new PdfSavedNotifyWidget(subSavePath));
                 }
             }
         }
@@ -815,6 +820,14 @@ namespace NAPS2.WinForms
                     {
                         imageList.Delete(imageList.Images.IndiciesOf(images));
                         UpdateThumbnails(Enumerable.Empty<int>(), false, false);
+                    }
+                    if (images.Count == 1)
+                    {
+                        notificationManager.Show(new ImageSavedNotifyWidget(op.FirstFileSaved));
+                    }
+                    else
+                    {
+                        notificationManager.Show(new ImagesSavedNotifyWidget(images.Count, op.FirstFileSaved));
                     }
                 }
             }

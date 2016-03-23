@@ -57,6 +57,8 @@ namespace NAPS2.ImportExport.Images
             AllowCancel = true;
         }
 
+        public string FirstFileSaved { get; private set; }
+
         /// <summary>
         /// Saves the provided collection of images to a file with the given name. The image type is inferred from the file extension.
         /// If multiple images are provided, they will be saved to files with numeric identifiers, e.g. img1.jpg, img2.jpg, etc..
@@ -96,6 +98,7 @@ namespace NAPS2.ImportExport.Images
                             InvokeStatusChanged();
                             return !cancel;
                         });
+                        FirstFileSaved = subFileName;
                         return;
                     }
 
@@ -129,6 +132,7 @@ namespace NAPS2.ImportExport.Images
                                 Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                                 InvokeStatusChanged();
                                 DoSaveImage(baseImage, subFileName, format);
+                                FirstFileSaved = subFileName;
                             }
                             else
                             {
@@ -137,6 +141,11 @@ namespace NAPS2.ImportExport.Images
                                 Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                                 InvokeStatusChanged();
                                 DoSaveImage(baseImage, fileNameN, format);
+
+                                if (i == 0)
+                                {
+                                    FirstFileSaved = fileNameN;
+                                }
                             }
                         }
                         i++;
