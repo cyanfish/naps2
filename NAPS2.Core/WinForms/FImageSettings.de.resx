@@ -123,7 +123,7 @@
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>264, 178</value>
+        <value>264, 204</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -145,13 +145,13 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-        <value>9</value>
+        <value>11</value>
     </data>
     <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>345, 178</value>
+        <value>345, 204</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -172,7 +172,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>8</value>
+        <value>10</value>
     </data>
     <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>17, 17</value>
@@ -181,7 +181,7 @@
         <value>True</value>
     </data>
     <data name="cbRememberSettings.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 157</value>
+        <value>12, 183</value>
     </data>
     <data name="cbRememberSettings.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 17</value>
@@ -202,13 +202,13 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.ZOrder" xml:space="preserve">
-        <value>7</value>
+        <value>9</value>
     </data>
     <data name="btnRestoreDefaults.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
     <data name="btnRestoreDefaults.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 178</value>
+        <value>12, 204</value>
     </data>
     <data name="btnRestoreDefaults.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 23</value>
@@ -229,28 +229,28 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.ZOrder" xml:space="preserve">
-        <value>6</value>
+        <value>8</value>
     </data>
-    <data name="txtDefaultFileName.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 22</value>
+    <data name="txtDefaultFilePath.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 25</value>
     </data>
-    <data name="txtDefaultFileName.Size" type="System.Drawing.Size, System.Drawing">
-        <value>408, 20</value>
+    <data name="txtDefaultFilePath.Size" type="System.Drawing.Size, System.Drawing">
+        <value>368, 20</value>
     </data>
-    <data name="txtDefaultFileName.TabIndex" type="System.Int32, mscorlib">
+    <data name="txtDefaultFilePath.TabIndex" type="System.Int32, mscorlib">
         <value>27</value>
     </data>
-    <data name="&gt;&gt;txtDefaultFileName.Name" xml:space="preserve">
-        <value>txtDefaultFileName</value>
+    <data name="&gt;&gt;txtDefaultFilePath.Name" xml:space="preserve">
+        <value>txtDefaultFilePath</value>
     </data>
-    <data name="&gt;&gt;txtDefaultFileName.Type" xml:space="preserve">
+    <data name="&gt;&gt;txtDefaultFilePath.Type" xml:space="preserve">
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;txtDefaultFileName.Parent" xml:space="preserve">
+    <data name="&gt;&gt;txtDefaultFilePath.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;txtDefaultFileName.ZOrder" xml:space="preserve">
-        <value>4</value>
+    <data name="&gt;&gt;txtDefaultFilePath.ZOrder" xml:space="preserve">
+        <value>6</value>
     </data>
     <data name="label1.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -259,16 +259,16 @@
         <value>NoControl</value>
     </data>
     <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 6</value>
+        <value>12, 9</value>
     </data>
     <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>94, 13</value>
+        <value>88, 13</value>
     </data>
     <data name="label1.TabIndex" type="System.Int32, mscorlib">
         <value>28</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Standard-Dateiname:</value>
+        <value>Default File Path:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -280,13 +280,13 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-        <value>5</value>
+        <value>7</value>
     </data>
     <data name="label2.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
     <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 71</value>
+        <value>12, 97</value>
     </data>
     <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
         <value>68, 13</value>
@@ -307,13 +307,13 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-        <value>3</value>
+        <value>5</value>
     </data>
     <data name="linkPlaceholders.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
     <data name="linkPlaceholders.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 45</value>
+        <value>12, 48</value>
     </data>
     <data name="linkPlaceholders.Size" type="System.Drawing.Size, System.Drawing">
         <value>68, 13</value>
@@ -334,10 +334,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.ZOrder" xml:space="preserve">
-        <value>2</value>
+        <value>4</value>
     </data>
     <data name="txtJpegQuality.Location" type="System.Drawing.Point, System.Drawing">
-        <value>382, 87</value>
+        <value>382, 113</value>
     </data>
     <data name="txtJpegQuality.Size" type="System.Drawing.Size, System.Drawing">
         <value>38, 20</value>
@@ -358,13 +358,13 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;txtJpegQuality.ZOrder" xml:space="preserve">
-        <value>1</value>
+        <value>3</value>
     </data>
     <data name="tbJpegQuality.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <data name="tbJpegQuality.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 87</value>
+        <value>12, 113</value>
     </data>
     <data name="tbJpegQuality.Size" type="System.Drawing.Size, System.Drawing">
         <value>364, 45</value>
@@ -382,13 +382,13 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;tbJpegQuality.ZOrder" xml:space="preserve">
-        <value>10</value>
+        <value>12</value>
     </data>
     <data name="lblWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 119</value>
+        <value>12, 145</value>
     </data>
     <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
         <value>408, 30</value>
@@ -409,6 +409,63 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;lblWarning.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="btnChooseFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="btnChooseFolder.Location" type="System.Drawing.Point, System.Drawing">
+        <value>386, 24</value>
+    </data>
+    <data name="btnChooseFolder.Size" type="System.Drawing.Size, System.Drawing">
+        <value>34, 22</value>
+    </data>
+    <data name="btnChooseFolder.TabIndex" type="System.Int32, mscorlib">
+        <value>35</value>
+    </data>
+    <data name="btnChooseFolder.Text" xml:space="preserve">
+        <value>...</value>
+    </data>
+    <data name="&gt;&gt;btnChooseFolder.Name" xml:space="preserve">
+        <value>btnChooseFolder</value>
+    </data>
+    <data name="&gt;&gt;btnChooseFolder.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnChooseFolder.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;btnChooseFolder.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="cbSkipSavePrompt.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="cbSkipSavePrompt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="cbSkipSavePrompt.Location" type="System.Drawing.Point, System.Drawing">
+        <value>13, 68</value>
+    </data>
+    <data name="cbSkipSavePrompt.Size" type="System.Drawing.Size, System.Drawing">
+        <value>108, 17</value>
+    </data>
+    <data name="cbSkipSavePrompt.TabIndex" type="System.Int32, mscorlib">
+        <value>36</value>
+    </data>
+    <data name="cbSkipSavePrompt.Text" xml:space="preserve">
+        <value>Skip save prompt</value>
+    </data>
+    <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
+        <value>cbSkipSavePrompt</value>
+    </data>
+    <data name="&gt;&gt;cbSkipSavePrompt.Type" xml:space="preserve">
+        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;cbSkipSavePrompt.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;cbSkipSavePrompt.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -418,7 +475,7 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>432, 213</value>
+        <value>432, 239</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA
@@ -444,10 +501,10 @@
 </value>
     </data>
     <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-        <value>800, 252</value>
+        <value>800, 278</value>
     </data>
     <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-        <value>400, 252</value>
+        <value>400, 278</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
         <value>Bildeinstellungen</value>
@@ -456,12 +513,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.5.0.41626, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.0.2.26149, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FImageSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.0.41626, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.0.2.26149, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

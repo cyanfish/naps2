@@ -399,4 +399,13 @@
     <data name="OcrUpdateAvailable" xml:space="preserve">
         <value>An update to OCR is available.</value>
     </data>
+    <data name="ImageSaved" xml:space="preserve">
+        <value>Image saved.</value>
+    </data>
+    <data name="ImagesSaved" xml:space="preserve">
+        <value>{0} images saved.</value>
+    </data>
+    <data name="PdfSaved" xml:space="preserve">
+        <value>PDF saved.</value>
+    </data>
 </root>
