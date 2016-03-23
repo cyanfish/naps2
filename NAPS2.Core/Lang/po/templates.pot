@@ -156,8 +156,8 @@ msgid "Apply brightness/contrast after scan"
 msgstr ""
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr ""
@@ -281,8 +281,8 @@ msgstr ""
 #: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr ""
@@ -392,7 +392,7 @@ msgstr ""
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
-msgid "Default File Name"
+msgid "Default File Path"
 msgstr ""
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
@@ -402,9 +402,9 @@ msgstr ""
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr ""
@@ -573,6 +573,10 @@ msgstr ""
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
 msgid "Image Settings"
+msgstr ""
+
+#: MiscResources.resx$ImageSaved$Message
+msgid "Image saved"
 msgstr ""
 
 #: FDesktop.resx$tsImport.Text$Message
@@ -750,8 +754,8 @@ msgstr ""
 msgid "OCR language"
 msgstr ""
 
-#: FPlaceholders.resx$btnOK.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
@@ -762,8 +766,8 @@ msgstr ""
 #: FImageSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
-#: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr ""
@@ -790,6 +794,10 @@ msgstr ""
 msgid "One or more files could not be downloaded"
 msgstr ""
 
+#: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
+msgid "Open Folder"
+msgstr ""
+
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
 msgstr ""
@@ -810,6 +818,10 @@ msgstr ""
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 msgid "PDF Settings"
+msgstr ""
+
+#: MiscResources.resx$PdfSaved$Message
+msgid "PDF saved"
 msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
@@ -834,10 +846,10 @@ msgstr ""
 
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr ""
@@ -892,8 +904,8 @@ msgstr ""
 msgid "Recovery Progress"
 msgstr ""
 
-#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
+#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr ""
@@ -924,8 +936,8 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
-#: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
@@ -1065,6 +1077,11 @@ msgstr ""
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
+msgstr ""
+
+#: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
+#: FImageSettings.resx$cbSkipSavePrompt.Text$Message
+msgid "Skip save prompt"
 msgstr ""
 
 #: FBatchScan.resx$btnStart.Text$Message
@@ -1281,6 +1298,10 @@ msgstr ""
 
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr ""
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved"
 msgstr ""
 
 #: MiscResources.resx$PdfStatus$Message
