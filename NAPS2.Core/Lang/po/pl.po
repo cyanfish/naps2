@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 21:04+0000\n"
-"PO-Revision-Date: 2016-02-29 22:48+0000\n"
+"POT-Creation-Date: 2016-03-19 18:21+0000\n"
+"PO-Revision-Date: 2016-03-20 20:30+0000\n"
 "Last-Translator: Kityn <kitynska@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1456786133.000000\n"
+"X-POOTLE-MTIME: 1458505802.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -156,13 +156,17 @@ msgstr "Wystąpił błąd w sterowniku skanowania"
 msgid "An unknown error ocurred during the batch scan"
 msgstr "Nieznany błąd wystąpił podczas skanowania wsadowego"
 
+#: MiscResources.resx$OcrUpdateAvailable$Message
+msgid "An update to OCR is available"
+msgstr "Dostępna jest aktualizacja OCR"
+
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
 msgstr "Zastosuj jasność/kontrast po skanowaniu"
 
-#: FCrop.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Zastosuj do wszystkich {0} wybranych obrazów"
@@ -269,25 +273,25 @@ msgid "Brightness"
 msgstr "Jasność"
 
 #: FImageSettings.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FEditScanSettings.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
-#: FBrightness.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
-#: FRotate.resx$btnCancel.Text$Message
+#: FBrightness.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Anuluj"
@@ -404,12 +408,12 @@ msgstr "Domyślna nazwa pliku"
 msgid "Deinterleave"
 msgstr "Usuń przeplatanie"
 
-#: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
+#: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Usuń"
@@ -522,6 +526,10 @@ msgstr "Ścieżka pliku"
 #: FViewer.resx$tsFlip.Text$Message
 msgid "Flip"
 msgstr "Odwróć"
+
+#: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
+msgid "Flip duplexed pages"
+msgstr "Odwróć strony dwustronne"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
@@ -756,20 +764,28 @@ msgstr "Język OCR"
 #: FPlaceholders.resx$btnOK.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
-#: FAutoSaveSettings.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FCrop.resx$btnOK.Text$Message
 #: FContrast.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
+
+#: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
+msgid "Offset width based on alignment (WIA)"
+msgstr "Przesunięcie szerokości na podstawie wyrównania (WIA)"
+
+#: SettingsResources.resx$TwainImpl_OldDsm$Message
+msgid "Old DSM"
+msgstr "Stare DSM"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
@@ -829,10 +845,10 @@ msgstr "Wklej"
 
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
-#: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Symbole zastępcze"
