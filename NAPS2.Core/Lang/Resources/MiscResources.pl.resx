@@ -397,7 +397,7 @@
         <value>Skaner się rozgrzewa.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>Dostępna jest aktualizacja OCR.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
         <value>Image saved.</value>

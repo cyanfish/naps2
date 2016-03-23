@@ -220,7 +220,7 @@
         <value>Παρωχημένο (εγγενές περιβάλλον μόνο)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>Παλαιό DSM (Data Source Manager)</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>
