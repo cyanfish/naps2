@@ -44,10 +44,6 @@ namespace NAPS2.Ocr
         public DirectoryInfo GetOldExecutableDir()
         {
             var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.2"));
-            if (!dir.Exists)
-            {
-                dir.Create();
-            }
             return dir;
         }
 
