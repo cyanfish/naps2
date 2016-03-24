@@ -25,6 +25,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {
@@ -40,6 +41,8 @@ namespace NAPS2.ImportExport.Images
                 {
                     return false;
                 }
+
+                PathHelper.EnsureParentDirExists(location);
 
                 if (images.Count == 1)
                 {

@@ -260,6 +260,7 @@
     <Compile Include="Scan\Wia\WinFormsWiaTransfer.cs" />
     <Compile Include="Operation\OperationErrorEventArgs.cs" />
     <Compile Include="Operation\OperationStatus.cs" />
+    <Compile Include="Util\PathHelper.cs" />
     <Compile Include="Util\Pipes.cs" />
     <Compile Include="Host\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />

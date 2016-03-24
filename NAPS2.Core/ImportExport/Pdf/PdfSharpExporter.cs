@@ -124,6 +124,7 @@ namespace NAPS2.ImportExport.Pdf
                     i++;
                 }
             }
+            PathHelper.EnsureParentDirExists(path);
             document.Save(path);
             return true;
         }

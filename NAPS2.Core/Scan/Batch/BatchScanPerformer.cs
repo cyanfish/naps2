@@ -13,6 +13,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
+using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Batch

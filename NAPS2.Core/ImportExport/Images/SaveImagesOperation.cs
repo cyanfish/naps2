@@ -92,7 +92,6 @@ namespace NAPS2.ImportExport.Images
                             }
                         }
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
-                        EnsureParentDirExists(subFileName);
                         Status.Success = TiffHelper.SaveMultipage(images, subFileName, j =>
                         {
                             Status.CurrentProgress = j;
@@ -173,18 +172,9 @@ namespace NAPS2.ImportExport.Images
             return true;
         }
 
-        private static void EnsureParentDirExists(string subFileName)
-        {
-            var parentDir = new FileInfo(subFileName).Directory;
-            if (parentDir != null && !parentDir.Exists)
-            {
-                parentDir.Create();
-            }
-        }
-
         private void DoSaveImage(Bitmap image, string path, ImageFormat format)
         {
-            EnsureParentDirExists(path);
+            PathHelper.EnsureParentDirExists(path);
             if (Equals(format, ImageFormat.Jpeg))
             {
                 var quality = Math.Max(Math.Min(imageSettingsContainer.ImageSettings.JpegQuality, 100), 0);
