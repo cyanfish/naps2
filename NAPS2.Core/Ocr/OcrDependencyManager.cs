@@ -2,14 +2,38 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NAPS2.Config;
 
 namespace NAPS2.Ocr
 {
     public class OcrDependencyManager
     {
+        private readonly AppConfigManager appConfigManager;
+
+        public OcrDependencyManager(AppConfigManager appConfigManager)
+        {
+            this.appConfigManager = appConfigManager;
+        }
+
+        private string ComponentsPath
+        {
+            get
+            {
+                var customPath = appConfigManager.Config.ComponentsPath;
+                if (string.IsNullOrWhiteSpace(customPath))
+                {
+                    return Paths.Components;
+                }
+                else
+                {
+                    return Environment.ExpandEnvironmentVariables(customPath);
+                }
+            }
+        }
+
         public DirectoryInfo GetExecutableDir()
         {
-            var dir = new DirectoryInfo(Path.Combine(Paths.Components, "tesseract-3.0.4"));
+            var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.4"));
             if (!dir.Exists)
             {
                 dir.Create();
@@ -19,7 +43,7 @@ namespace NAPS2.Ocr
 
         public DirectoryInfo GetOldExecutableDir()
         {
-            var dir = new DirectoryInfo(Path.Combine(Paths.Components, "tesseract-3.0.2"));
+            var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.2"));
             if (!dir.Exists)
             {
                 dir.Create();
@@ -44,7 +68,7 @@ namespace NAPS2.Ocr
 
         public DirectoryInfo GetLanguageDir()
         {
-            var dir = new DirectoryInfo(Path.Combine(Paths.Components, "tesseract-3.0.4", "tessdata"));
+            var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.4", "tessdata"));
             if (!dir.Exists)
             {
                 dir.Create();
@@ -54,7 +78,7 @@ namespace NAPS2.Ocr
 
         public DirectoryInfo GetOldLanguageDir()
         {
-            var dir = new DirectoryInfo(Path.Combine(Paths.Components, "tesseract-3.0.2", "tessdata"));
+            var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.2", "tessdata"));
             return dir;
         }
 

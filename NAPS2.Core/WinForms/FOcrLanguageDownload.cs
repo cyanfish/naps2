@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -116,15 +117,23 @@ namespace NAPS2.WinForms
 
         private static void DecompressFile(string sourcePath, string destPath)
         {
-            using (FileStream inFile = new FileInfo(sourcePath).OpenRead())
+            try
             {
-                using (FileStream outFile = File.Create(destPath))
+                using (FileStream inFile = new FileInfo(sourcePath).OpenRead())
                 {
-                    using (GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress))
+                    using (FileStream outFile = File.Create(destPath))
                     {
-                        decompress.CopyTo(outFile);
+                        using (GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress))
+                        {
+                            decompress.CopyTo(outFile);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Error extracting OCR file", ex);
+                MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

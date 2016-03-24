@@ -10,6 +10,7 @@
   <NoUpdatePrompt>false</NoUpdatePrompt>
   <DeleteAfterSaving>false</DeleteAfterSaving>
   <DisableSaveNotifications>false</DisableSaveNotifications>
+  <ComponentsPath></ComponentsPath>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
     <UseNativeUI>false</UseNativeUI>
