@@ -24,9 +24,6 @@ namespace NAPS2.Util
         private const string REGKEY_STI_EVENT_NAPS2 = @"SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{1c3a7177-f3a7-439e-be47-e304a185f932}";
         private const string REGKEY_IMAGE_EVENTS = @"SYSTEM\CurrentControlSet\Control\Class\{6bdd1fc6-810f-11d0-bec7-08002be2092f}\0000\Events";
 
-        private bool registered;
-        private bool registerOk;
-
         public void ParseArgs(string[] args)
         {
             bool silent = args.Any(x => x.Equals("/Silent", StringComparison.InvariantCultureIgnoreCase));
@@ -41,12 +38,12 @@ namespace NAPS2.Util
                 else if (arg.Equals("/RegisterSti", StringComparison.InvariantCultureIgnoreCase))
                 {
                     RegisterSti(silent, noElevation);
-                    registered = true;
+                    Registered = true;
                 }
                 else if (arg.Equals("/UnregisterSti", StringComparison.InvariantCultureIgnoreCase))
                 {
                     UnregisterSti(silent, noElevation);
-                    registered = true;
+                    Registered = true;
                 }
             }
         }
@@ -79,7 +76,7 @@ namespace NAPS2.Util
                     key3.SetValue("Name", "NAPS2");
                 }
 
-                registerOk = true;
+                RegisterOk = true;
                 if (!silent)
                 {
                     MessageBox.Show(@"Successfully registered STI. A reboot may be needed.");
@@ -124,7 +121,7 @@ namespace NAPS2.Util
                     }
                 }
 
-                registerOk = true;
+                RegisterOk = true;
                 if (!silent)
                 {
                     MessageBox.Show(@"Successfully unregistered STI. A reboot may be needed.");
@@ -170,32 +167,12 @@ namespace NAPS2.Util
             });
         }
 
-        public void ExitIfRedundant()
-        {
-            if (registered)
-            {
-                // Was just started by the user to (un)register STI
-                Environment.Exit(registerOk ? 0 : 1);
-            }
-            // If this instance of NAPS2 was spawned by STI, then there may be another instance of NAPS2 we want to get the scan signal instead
-            if (DoScan)
-            {
-                Process current = Process.GetCurrentProcess();
-                // Try each possible process in turn until one receives the message (most recently started first)
-                foreach (var process in Process.GetProcessesByName(current.ProcessName).Where(x => x.Id != current.Id).OrderByDescending(x => x.StartTime))
-                {
-                    // Another instance of NAPS2 is running, so send it the "Scan" signal
-                    if (Pipes.SendMessage(process, Pipes.MSG_SCAN_WITH_DEVICE + DeviceID))
-                    {
-                        // Successful, so this instance can be closed before showing any UI
-                        Environment.Exit(0);
-                    }
-                }
-            }
-        }
-
         public string DeviceID { get; private set; }
 
         public bool DoScan { get; private set; }
+
+        public bool Registered { get; set; }
+
+        public bool RegisterOk { get; set; }
     }
 }

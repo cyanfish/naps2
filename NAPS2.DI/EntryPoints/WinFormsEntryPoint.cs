@@ -16,9 +16,9 @@ namespace NAPS2.DI.EntryPoints
         {
             var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
 
-            var sti = kernel.Get<StillImage>();
-            sti.ParseArgs(args);
-            sti.ExitIfRedundant();
+            var lifecycle = kernel.Get<Lifecycle>();
+            lifecycle.ParseArgs(args);
+            lifecycle.ExitIfRedundant();
 
             kernel.Get<CultureInitializer>().InitCulture(Thread.CurrentThread);
 
