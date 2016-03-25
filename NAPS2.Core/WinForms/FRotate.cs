@@ -194,7 +194,7 @@ namespace NAPS2.WinForms
         private Point guideStart, guideEnd;
 
         private const int MIN_LINE_DISTANCE = 50;
-        private const float LINE_PEN_SIZE = 3;
+        private const float LINE_PEN_SIZE = 1;
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
