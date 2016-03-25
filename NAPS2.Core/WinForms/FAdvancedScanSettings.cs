@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Config;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
@@ -29,8 +30,11 @@ namespace NAPS2.WinForms
 {
     public partial class FAdvancedScanSettings : FormBase
     {
-        public FAdvancedScanSettings()
+        private readonly AppConfigManager appConfigManager;
+
+        public FAdvancedScanSettings(AppConfigManager appConfigManager)
         {
+            this.appConfigManager = appConfigManager;
             InitializeComponent();
 
             cmbTwainImpl.Format += (sender, e) => e.Value = ((Enum) e.ListItem).Description();
@@ -45,23 +49,7 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs e)
         {
-            cbHighQuality.Checked = ScanProfile.MaxQuality;
-            tbImageQuality.Value = ScanProfile.Quality;
-            txtImageQuality.Text = ScanProfile.Quality.ToString("G");
-            cbBrightnessContrastAfterScan.Checked = ScanProfile.BrightnessContrastAfterScan;
-            cbWiaOffsetWidth.Checked = ScanProfile.WiaOffsetWidth;
-            cbForcePageSize.Checked = ScanProfile.ForcePageSize;
-            cbFlipDuplex.Checked = ScanProfile.FlipDuplexedPages;
-            if (ScanProfile.TwainImpl != TwainImpl.X64 || Environment.Is64BitProcess)
-            {
-                cmbTwainImpl.SelectedIndex = (int) ScanProfile.TwainImpl;
-            }
-            cbExcludeBlankPages.Checked = ScanProfile.ExcludeBlankPages;
-            tbWhiteThreshold.Value = ScanProfile.BlankPageWhiteThreshold;
-            txtWhiteThreshold.Text = ScanProfile.BlankPageWhiteThreshold.ToString("G");
-            tbCoverageThreshold.Value = ScanProfile.BlankPageCoverageThreshold;
-            txtCoverageThreshold.Text = ScanProfile.BlankPageCoverageThreshold.ToString("G");
-
+            UpdateValues(ScanProfile);
             UpdateEnabled();
 
             new LayoutManager(this)
@@ -70,6 +58,26 @@ namespace NAPS2.WinForms
                 .Bind(txtImageQuality, txtWhiteThreshold, txtCoverageThreshold, btnOK, btnCancel)
                     .RightToForm()
                 .Activate();
+        }
+
+        private void UpdateValues(ScanProfile scanProfile)
+        {
+            cbHighQuality.Checked = scanProfile.MaxQuality;
+            tbImageQuality.Value = scanProfile.Quality;
+            txtImageQuality.Text = scanProfile.Quality.ToString("G");
+            cbBrightnessContrastAfterScan.Checked = scanProfile.BrightnessContrastAfterScan;
+            cbWiaOffsetWidth.Checked = scanProfile.WiaOffsetWidth;
+            cbForcePageSize.Checked = scanProfile.ForcePageSize;
+            cbFlipDuplex.Checked = scanProfile.FlipDuplexedPages;
+            if (scanProfile.TwainImpl != TwainImpl.X64 || Environment.Is64BitProcess)
+            {
+                cmbTwainImpl.SelectedIndex = (int) scanProfile.TwainImpl;
+            }
+            cbExcludeBlankPages.Checked = scanProfile.ExcludeBlankPages;
+            tbWhiteThreshold.Value = scanProfile.BlankPageWhiteThreshold;
+            txtWhiteThreshold.Text = scanProfile.BlankPageWhiteThreshold.ToString("G");
+            tbCoverageThreshold.Value = scanProfile.BlankPageCoverageThreshold;
+            txtCoverageThreshold.Text = scanProfile.BlankPageCoverageThreshold.ToString("G");
         }
 
         private void UpdateEnabled()
@@ -173,6 +181,11 @@ namespace NAPS2.WinForms
                     tbCoverageThreshold.Value = value;
                 }
             }
+        }
+
+        private void btnRestoreDefaults_Click(object sender, EventArgs e)
+        {
+            UpdateValues(appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION });
         }
     }
 }

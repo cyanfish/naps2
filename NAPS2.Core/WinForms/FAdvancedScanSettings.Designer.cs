@@ -42,6 +42,7 @@ namespace NAPS2.WinForms
             this.tbImageQuality = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbFlipDuplex = new System.Windows.Forms.CheckBox();
             this.cbWiaOffsetWidth = new System.Windows.Forms.CheckBox();
             this.cbForcePageSize = new System.Windows.Forms.CheckBox();
             this.cbBrightnessContrastAfterScan = new System.Windows.Forms.CheckBox();
@@ -55,7 +56,7 @@ namespace NAPS2.WinForms
             this.tbWhiteThreshold = new System.Windows.Forms.TrackBar();
             this.txtWhiteThreshold = new System.Windows.Forms.TextBox();
             this.cbExcludeBlankPages = new System.Windows.Forms.CheckBox();
-            this.cbFlipDuplex = new System.Windows.Forms.CheckBox();
+            this.btnRestoreDefaults = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageQuality)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -119,6 +120,12 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // cbFlipDuplex
+            // 
+            resources.ApplyResources(this.cbFlipDuplex, "cbFlipDuplex");
+            this.cbFlipDuplex.Name = "cbFlipDuplex";
+            this.cbFlipDuplex.UseVisualStyleBackColor = true;
             // 
             // cbWiaOffsetWidth
             // 
@@ -208,17 +215,19 @@ namespace NAPS2.WinForms
             this.cbExcludeBlankPages.UseVisualStyleBackColor = true;
             this.cbExcludeBlankPages.CheckedChanged += new System.EventHandler(this.cbExcludeBlankPages_CheckedChanged);
             // 
-            // cbFlipDuplex
+            // btnRestoreDefaults
             // 
-            resources.ApplyResources(this.cbFlipDuplex, "cbFlipDuplex");
-            this.cbFlipDuplex.Name = "cbFlipDuplex";
-            this.cbFlipDuplex.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.btnRestoreDefaults, "btnRestoreDefaults");
+            this.btnRestoreDefaults.Name = "btnRestoreDefaults";
+            this.btnRestoreDefaults.UseVisualStyleBackColor = true;
+            this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
             // FAdvancedScanSettings
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRestoreDefaults);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -237,6 +246,7 @@ namespace NAPS2.WinForms
             ((System.ComponentModel.ISupportInitialize)(this.tbCoverageThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbWhiteThreshold)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -264,5 +274,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.CheckBox cbExcludeBlankPages;
         private System.Windows.Forms.CheckBox cbWiaOffsetWidth;
         private System.Windows.Forms.CheckBox cbFlipDuplex;
+        private System.Windows.Forms.Button btnRestoreDefaults;
     }
 }
