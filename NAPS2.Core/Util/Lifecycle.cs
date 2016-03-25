@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using NAPS2.Config;
 
 namespace NAPS2.Util
 {
@@ -12,10 +12,12 @@ namespace NAPS2.Util
     public class Lifecycle
     {
         private readonly StillImage sti;
+        private readonly AppConfigManager appConfigManager;
 
-        public Lifecycle(StillImage sti)
+        public Lifecycle(StillImage sti, AppConfigManager appConfigManager)
         {
             this.sti = sti;
+            this.appConfigManager = appConfigManager;
         }
 
         /// <summary>
@@ -37,14 +39,15 @@ namespace NAPS2.Util
                 // Was just started by the user to (un)register STI
                 Environment.Exit(sti.RegisterOk ? 0 : 1);
             }
+
             // If this instance of NAPS2 was spawned by STI, then there may be another instance of NAPS2 we want to get the scan signal instead
             if (sti.DoScan)
             {
-                Process current = Process.GetCurrentProcess();
                 // Try each possible process in turn until one receives the message (most recently started first)
-                foreach (var process in Process.GetProcessesByName(current.ProcessName).Where(x => x.Id != current.Id).OrderByDescending(x => x.StartTime))
+                foreach (var process in GetOtherNaps2Processes())
                 {
                     // Another instance of NAPS2 is running, so send it the "Scan" signal
+                    ActivateProcess(process);
                     if (Pipes.SendMessage(process, Pipes.MSG_SCAN_WITH_DEVICE + sti.DeviceID))
                     {
                         // Successful, so this instance can be closed before showing any UI
@@ -52,6 +55,39 @@ namespace NAPS2.Util
                     }
                 }
             }
+
+            // Only start one instance if configured for SingleInstance
+            if (appConfigManager.Config.SingleInstance)
+            {
+                // See if there's another NAPS2 process running
+                foreach (var process in GetOtherNaps2Processes())
+                {
+                    // Another instance of NAPS2 is running, so send it the "Activate" signal
+                    ActivateProcess(process);
+                    if (Pipes.SendMessage(process, Pipes.MSG_ACTIVATE))
+                    {
+                        // Successful, so this instance should be closed
+                        Environment.Exit(0);
+                    }
+                }
+            }
+        }
+
+        private static void ActivateProcess(Process process)
+        {
+            if (process.MainWindowHandle != IntPtr.Zero)
+            {
+                Win32.SetForegroundWindow(process.MainWindowHandle);
+            }
+        }
+
+        private static IEnumerable<Process> GetOtherNaps2Processes()
+        {
+            Process currentProcess = Process.GetCurrentProcess();
+            var otherProcesses = Process.GetProcessesByName(currentProcess.ProcessName)
+                .Where(x => x.Id != currentProcess.Id)
+                .OrderByDescending(x => x.StartTime);
+            return otherProcesses;
         }
     }
 }

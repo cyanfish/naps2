@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -15,8 +16,7 @@ namespace NAPS2.WinForms
         private Timer tmrLVScroll;
         private System.ComponentModel.IContainer components;
         private int mintScrollDirection;
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+
         const int WM_VSCROLL = 277; // Vertical scroll
         const int SB_LINEUP = 0; // Scrolls one line up
         const int SB_LINEDOWN = 1; // Scrolls one line down
@@ -72,7 +72,7 @@ namespace NAPS2.WinForms
 
         private void tmrLVScroll_Tick(object sender, EventArgs e)
         {
-            SendMessage(Handle, WM_VSCROLL, (IntPtr)mintScrollDirection, IntPtr.Zero);
+            Win32.SendMessage(Handle, WM_VSCROLL, (IntPtr)mintScrollDirection, IntPtr.Zero);
         }
     }
 }

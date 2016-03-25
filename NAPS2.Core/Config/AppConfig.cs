@@ -57,6 +57,8 @@ namespace NAPS2.Config
 
         public bool DisableSaveNotifications { get; set; }
 
+        public bool SingleInstance { get; set; }
+
         public string ComponentsPath { get; set; }
 
         public KeyboardShortcuts KeyboardShortcuts { get; set; }

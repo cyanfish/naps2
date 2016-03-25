@@ -291,6 +291,7 @@
     <Compile Include="Update\UrlTextReader.cs" />
     <Compile Include="Update\VersionInfo.cs" />
     <Compile Include="Host\X86HostManager.cs" />
+    <Compile Include="Util\Win32.cs" />
     <Compile Include="WinForms\ImagesSavedNotifyWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>

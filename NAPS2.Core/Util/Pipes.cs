@@ -15,6 +15,7 @@ namespace NAPS2.Util
     public static class Pipes
     {
         public const string MSG_SCAN_WITH_DEVICE = "SCAN_WDEV_";
+        public const string MSG_ACTIVATE = "ACTIVATE";
         public const string MSG_KILL_PIPE_SERVER = "KILL_PIPE_SERVER";
         // TODO: Kill won't work properly when multiple servers are running
         // TODO: See http://stackoverflow.com/a/10485210/2112909 for a possible fix

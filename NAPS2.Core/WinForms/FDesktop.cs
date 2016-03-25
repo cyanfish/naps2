@@ -30,7 +30,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -286,6 +285,18 @@ namespace NAPS2.WinForms
                 if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE))
                 {
                     Invoke(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
+                }
+                if (msg.Equals(Pipes.MSG_ACTIVATE))
+                {
+                    Invoke(() =>
+                    {
+                        var form = Application.OpenForms.Cast<Form>().Last();
+                        if (form.WindowState == FormWindowState.Minimized)
+                        {
+                            Win32.ShowWindow(form.Handle, Win32.ShowWindowCommands.Restore);
+                        }
+                        form.Activate();
+                    });
                 }
             });
 
@@ -911,14 +922,11 @@ namespace NAPS2.WinForms
             }
         }
 
-        [DllImport("shlwapi.dll", CharSet = CharSet.Unicode)]
-        private static extern int StrCmpLogicalW(string psz1, string psz2);
-
         private List<string> OrderFiles(IEnumerable<string> files)
         {
             // Custom ordering to account for numbers so that e.g. "10" comes after "2"
             var filesList = files.ToList();
-            filesList.Sort(StrCmpLogicalW);
+            filesList.Sort(Win32.StrCmpLogicalW);
             return filesList;
         }
 
