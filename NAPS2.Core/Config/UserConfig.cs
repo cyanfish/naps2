@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Images;
 using NAPS2.Update;
@@ -36,6 +37,7 @@ namespace NAPS2.Config
         public UserConfig()
         {
             FormStates = new List<FormState>();
+            CustomPageSizePresets = new List<NamedPageSize>();
             ThumbnailSize = ThumbnailRenderer.DEFAULT_SIZE;
         }
 
@@ -70,5 +72,7 @@ namespace NAPS2.Config
         public DockStyle DesktopToolStripDock { get; set; }
 
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
+
+        public List<NamedPageSize> CustomPageSizePresets { get; set; }
     }
 }

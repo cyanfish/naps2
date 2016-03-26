@@ -655,6 +655,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} ({1}x{2} {3}).
+        /// </summary>
+        internal static string NamedPageSizeFormat {
+            get {
+                return ResourceManager.GetString("NamedPageSizeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name missing..
         /// </summary>
         internal static string NameMissing {

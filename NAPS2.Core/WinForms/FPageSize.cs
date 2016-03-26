@@ -20,7 +20,7 @@ namespace NAPS2.WinForms
             comboUnit.SelectedIndex = 0;
         }
 
-        public PageDimensions Result { get; private set; }
+        public NamedPageSize Result { get; private set; }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
@@ -59,12 +59,23 @@ namespace NAPS2.WinForms
                 textboxHeight.Focus();
                 return;
             }
-            Result = new PageDimensions
+            Result = new NamedPageSize
             {
-                Width = width,
-                Height = height,
-                Unit = (PageSizeUnit)comboUnit.SelectedIndex
+                Name = comboName.Text,
+                Dimens = new PageDimensions
+                {
+                    Width = width,
+                    Height = height,
+                    Unit = (PageSizeUnit)comboUnit.SelectedIndex
+                }
             };
+            if (!string.IsNullOrEmpty(Result.Name))
+            {
+                var presets = UserConfigManager.Config.CustomPageSizePresets;
+                presets.RemoveAll(x => x.Name == Result.Name);
+                presets.Add(Result);
+                UserConfigManager.Save();
+            }
             DialogResult = DialogResult.OK;
             Close();
         }

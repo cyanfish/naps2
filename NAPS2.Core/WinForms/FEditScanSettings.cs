@@ -58,15 +58,24 @@ namespace NAPS2.WinForms
             InitializeComponent();
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
-            AddEnumItems<ScanPageSize>(cmbPage, FormatPageSize);
             AddEnumItems<ScanDpi>(cmbResolution);
             AddEnumItems<ScanScale>(cmbScale);
             AddEnumItems<ScanSource>(cmbSource);
+            cmbPage.Format += (sender, e) =>
+            {
+                var item = (PageSizeListItem)e.ListItem;
+                e.Value = item.Label;
+            };
         }
 
         private void FormatPageSize(object sender, ListControlConvertEventArgs e)
         {
-            if (e.ListItem is PageDimensions)
+            if (e.ListItem is KeyValuePair<string, PageDimensions>)
+            {
+                var pair = (KeyValuePair<string, PageDimensions>)e.ListItem;
+                e.Value = string.Format(MiscResources.NamedPageSizeFormat, pair.Key, pair.Value.Width, pair.Value.Height, pair.Value.Unit.Description());
+            }
+            else if (e.ListItem is PageDimensions)
             {
                 var pageDimensions = (PageDimensions)e.ListItem;
                 e.Value = string.Format(MiscResources.CustomPageSizeFormat, pageDimensions.Width, pageDimensions.Height, pageDimensions.Unit.Description());
@@ -102,15 +111,8 @@ namespace NAPS2.WinForms
             cmbResolution.SelectedIndex = (int)ScanProfile.Resolution;
             txtContrast.Text = ScanProfile.Contrast.ToString("G");
             txtBrightness.Text = ScanProfile.Brightness.ToString("G");
-            if (ScanProfile.PageSize == ScanPageSize.Custom)
-            {
-                cmbPage.Items.Add(ScanProfile.CustomPageSize);
-                cmbPage.SelectedIndex = (int)ScanPageSize.Custom + 1;
-            }
-            else
-            {
-                cmbPage.SelectedIndex = (int)ScanProfile.PageSize;
-            }
+            UpdatePageSizeList();
+            SelectPageSize();
             cmbScale.SelectedIndex = (int)ScanProfile.AfterScanScale;
             cmbAlign.SelectedIndex = (int)ScanProfile.PageAlign;
 
@@ -142,6 +144,70 @@ namespace NAPS2.WinForms
                 .Bind(txtContrast)
                     .LeftTo(() => trContrast.Right)
                 .Activate();
+        }
+
+        private void UpdatePageSizeList()
+        {
+            cmbPage.Items.Clear();
+
+            // Defaults
+            foreach (ScanPageSize item in Enum.GetValues(typeof(ScanPageSize)))
+            {
+                cmbPage.Items.Add(new PageSizeListItem
+                {
+                    Type = item,
+                    Label = item.Description()
+                });
+            }
+
+            // Custom Presets
+            foreach (var preset in UserConfigManager.Config.CustomPageSizePresets.OrderBy(x => x.Name))
+            {
+                cmbPage.Items.Insert(cmbPage.Items.Count - 1, new PageSizeListItem
+                {
+                    Type = ScanPageSize.Custom,
+                    Label = string.Format(MiscResources.NamedPageSizeFormat, preset.Name, preset.Dimens.Width, preset.Dimens.Height, preset.Dimens.Unit.Description()),
+                    CustomName = preset.Name,
+                    CustomDimens = preset.Dimens
+                });
+            }
+        }
+
+        private void SelectPageSize()
+        {
+            if (ScanProfile.PageSize == ScanPageSize.Custom)
+            {
+                SelectCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
+            }
+            else
+            {
+                cmbPage.SelectedIndex = (int) ScanProfile.PageSize;
+            }
+        }
+
+        private void SelectCustomPageSize(string name, PageDimensions dimens)
+        {
+            for (int i = 0; i < cmbPage.Items.Count; i++)
+            {
+                var item = (PageSizeListItem) cmbPage.Items[i];
+                if (item.Type == ScanPageSize.Custom && item.CustomName == name && item.CustomDimens == dimens)
+                {
+                    cmbPage.SelectedIndex = i;
+                    return;
+                }
+            }
+
+            // Not found, so insert a new item
+            cmbPage.Items.Insert(cmbPage.Items.Count - 1, new PageSizeListItem
+            {
+                Type = ScanPageSize.Custom,
+                Label = string.IsNullOrEmpty(name)
+                    ? string.Format(MiscResources.CustomPageSizeFormat, dimens.Width, dimens.Height, dimens.Unit.Description())
+                    : string.Format(MiscResources.NamedPageSizeFormat, name, dimens.Width, dimens.Height, dimens.Unit.Description()),
+                CustomName = name,
+                CustomDimens = dimens
+            });
+            cmbPage.SelectedIndex = cmbPage.Items.Count - 2;
         }
 
         public bool Result
@@ -219,21 +285,7 @@ namespace NAPS2.WinForms
 
         private void SaveSettings()
         {
-            ScanPageSize pageSize;
-            PageDimensions customPageSize = null;
-            if (cmbPage.SelectedIndex > (int)ScanPageSize.Custom)
-            {
-                pageSize = ScanPageSize.Custom;
-                customPageSize = (PageDimensions)cmbPage.SelectedItem;
-            }
-            else if (cmbPage.SelectedIndex == (int)ScanPageSize.Custom)
-            {
-                throw new InvalidOperationException("Custom page size should never be selected when saving");
-            }
-            else
-            {
-                pageSize = (ScanPageSize)cmbPage.SelectedIndex;
-            }
+            var pageSize = (PageSizeListItem) cmbPage.SelectedItem;
             if (ScanProfile.DisplayName != null)
             {
                 profileNameTracker.RenamingProfile(ScanProfile.DisplayName, txtName.Text);
@@ -255,8 +307,9 @@ namespace NAPS2.WinForms
                 Brightness = trBrightness.Value,
                 Contrast = trContrast.Value,
                 PageAlign = (ScanHorizontalAlign)cmbAlign.SelectedIndex,
-                PageSize = pageSize,
-                CustomPageSize = customPageSize,
+                PageSize = pageSize.Type,
+                CustomPageSizeName = pageSize.CustomName,
+                CustomPageSize = pageSize.CustomDimens,
                 Resolution = (ScanDpi)cmbResolution.SelectedIndex,
                 PaperSource = (ScanSource)cmbSource.SelectedIndex,
 
@@ -370,28 +423,19 @@ namespace NAPS2.WinForms
 
         private void cmbPage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbPage.SelectedIndex == (int)ScanPageSize.Custom)
+            if (cmbPage.SelectedIndex == cmbPage.Items.Count - 1)
             {
+                // "Custom..." selected
                 var form = FormFactory.Create<FPageSize>();
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    if (cmbPage.Items.Count > (int)ScanPageSize.Custom + 1)
-                    {
-                        cmbPage.Items.RemoveAt(cmbPage.Items.Count - 1);
-                    }
-                    cmbPage.Items.Add(form.Result);
-                    cmbPage.SelectedIndex = (int)ScanPageSize.Custom + 1;
+                    UpdatePageSizeList();
+                    SelectCustomPageSize(form.Result.Name, form.Result.Dimens);
                 }
                 else
                 {
-                    if (ScanProfile.PageSize == ScanPageSize.Custom)
-                    {
-                        cmbPage.SelectedIndex = (int)ScanPageSize.Custom + 1;
-                    }
-                    else
-                    {
-                        cmbPage.SelectedIndex = (int)ScanProfile.PageSize;
-                    }
+                    // TODO: Select the previous selection instead of the original value.
+                    SelectPageSize();
                 }
             }
         }
@@ -434,6 +478,17 @@ namespace NAPS2.WinForms
                 }
             }
             linkAutoSaveSettings.Enabled = cbAutoSave.Checked;
+        }
+
+        private class PageSizeListItem
+        {
+            public string Label { get; set; }
+
+            public ScanPageSize Type { get; set; }
+
+            public string CustomName { get; set; }
+
+            public PageDimensions CustomDimens { get; set; }
         }
     }
 }

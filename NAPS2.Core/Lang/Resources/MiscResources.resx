@@ -408,4 +408,7 @@
   <data name="PdfSaved" xml:space="preserve">
     <value>PDF saved.</value>
   </data>
+  <data name="NamedPageSizeFormat" xml:space="preserve">
+    <value>{0} ({1}x{2} {3})</value>
+  </data>
 </root>

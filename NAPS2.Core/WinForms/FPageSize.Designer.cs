@@ -35,6 +35,9 @@
             this.labelX = new System.Windows.Forms.Label();
             this.textboxHeight = new System.Windows.Forms.TextBox();
             this.comboUnit = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboName = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnOK
@@ -73,10 +76,29 @@
             resources.ApplyResources(this.comboUnit, "comboUnit");
             this.comboUnit.Name = "comboUnit";
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // comboName
+            // 
+            this.comboName.FormattingEnabled = true;
+            resources.ApplyResources(this.comboName, "comboName");
+            this.comboName.Name = "comboName";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
             // FPageSize
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.comboName);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboUnit);
             this.Controls.Add(this.textboxHeight);
             this.Controls.Add(this.labelX);
@@ -99,6 +121,9 @@
         private System.Windows.Forms.Label labelX;
         private System.Windows.Forms.TextBox textboxHeight;
         private System.Windows.Forms.ComboBox comboUnit;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboName;
+        private System.Windows.Forms.Label label2;
 
     }
 }

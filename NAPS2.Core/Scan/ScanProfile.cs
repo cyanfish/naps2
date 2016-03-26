@@ -87,6 +87,8 @@ namespace NAPS2.Scan
 
         public ScanPageSize PageSize { get; set; }
 
+        public string CustomPageSizeName { get; set; }
+
         public PageDimensions CustomPageSize { get; set; }
 
         public ScanDpi Resolution { get; set; }
@@ -243,6 +245,41 @@ namespace NAPS2.Scan
         public decimal Height { get; set; }
 
         public PageSizeUnit Unit { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            return obj is PageDimensions && this == (PageDimensions)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            return Width.GetHashCode() ^ Height.GetHashCode() ^ Unit.GetHashCode();
+        }
+
+        public static bool operator ==(PageDimensions x, PageDimensions y)
+        {
+            if (ReferenceEquals(x, y))
+            {
+                return true;
+            }
+            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            {
+                return false;
+            }
+            return x.Width == y.Width && x.Height == y.Height && x.Unit == y.Unit;
+        }
+
+        public static bool operator !=(PageDimensions x, PageDimensions y)
+        {
+            return !(x == y);
+        }
+    }
+
+    public class NamedPageSize
+    {
+        public string Name { get; set; }
+
+        public PageDimensions Dimens { get; set; }
     }
 
     public class PageDimensionsAttribute : Attribute
