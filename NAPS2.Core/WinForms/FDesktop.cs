@@ -385,7 +385,7 @@ namespace NAPS2.WinForms
             if (profile == null)
             {
                 // No profile for the device we're scanning with, so prompt to create one
-                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+                var editSettingsForm = FormFactory.Create<FEditProfile>();
                 editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ??
                                                new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
                 try
@@ -436,7 +436,7 @@ namespace NAPS2.WinForms
 
         private void ScanWithNewProfile()
         {
-            var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+            var editSettingsForm = FormFactory.Create<FEditProfile>();
             editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             editSettingsForm.ShowDialog();
             if (!editSettingsForm.Result)

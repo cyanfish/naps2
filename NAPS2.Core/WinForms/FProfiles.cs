@@ -135,7 +135,7 @@ namespace NAPS2.WinForms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var fedit = FormFactory.Create<FEditScanSettings>();
+            var fedit = FormFactory.Create<FEditProfile>();
             fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             fedit.ShowDialog();
             if (fedit.Result)
@@ -156,7 +156,7 @@ namespace NAPS2.WinForms
             if (lvProfiles.SelectedItems.Count > 0 && !SelectionLocked)
             {
                 int profileIndex = lvProfiles.SelectedItems[0].Index;
-                var fedit = FormFactory.Create<FEditScanSettings>();
+                var fedit = FormFactory.Create<FEditProfile>();
                 fedit.ScanProfile = profileManager.Profiles[profileIndex];
                 fedit.ShowDialog();
                 if (fedit.Result)
@@ -236,7 +236,7 @@ namespace NAPS2.WinForms
         {
             if (profileManager.Profiles.Count == 0)
             {
-                var editSettingsForm = FormFactory.Create<FEditScanSettings>();
+                var editSettingsForm = FormFactory.Create<FEditProfile>();
                 editSettingsForm.ScanProfile = new ScanProfile
                 {
                     Version = ScanProfile.CURRENT_VERSION

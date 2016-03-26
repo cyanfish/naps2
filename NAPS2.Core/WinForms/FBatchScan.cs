@@ -257,7 +257,7 @@ namespace NAPS2.WinForms
         {
             if (comboProfile.SelectedItem != null)
             {
-                var fedit = FormFactory.Create<FEditScanSettings>();
+                var fedit = FormFactory.Create<FEditProfile>();
                 fedit.ScanProfile = (ScanProfile)comboProfile.SelectedItem;
                 fedit.ShowDialog();
                 if (fedit.Result)
@@ -272,7 +272,7 @@ namespace NAPS2.WinForms
 
         private void btnAddProfile_Click(object sender, EventArgs e)
         {
-            var fedit = FormFactory.Create<FEditScanSettings>();
+            var fedit = FormFactory.Create<FEditProfile>();
             fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             fedit.ShowDialog();
             if (fedit.Result)

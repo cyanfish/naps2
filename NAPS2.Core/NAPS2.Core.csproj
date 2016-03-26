@@ -362,11 +362,11 @@
     <Compile Include="WinForms\FDownloadProgress.Designer.cs">
       <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\FEditScanSettings.cs">
+    <Compile Include="WinForms\FEditProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\FEditScanSettings.Designer.cs">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <Compile Include="WinForms\FEditProfile.Designer.cs">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FEmailSettings.cs">
       <SubType>Form</SubType>
@@ -1512,96 +1512,96 @@
     <EmbeddedResource Include="WinForms\FDownloadProgress.zh-TW.resx">
       <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.bg.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.bg.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.ca.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.ca.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.cs.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.cs.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.da.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.da.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.de.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.de.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.el.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.el.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.es.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.es.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.et.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.et.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.fa.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.fa.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.fi.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.fi.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.fr.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.fr.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.he.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.he.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.hr.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.hr.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.hu.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.hu.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.it.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.it.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.ko.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.ko.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.lt.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.lt.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.nb.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.nb.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.nl.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.nl.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.pl.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.pl.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.pt-BR.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.pt-BR.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.pt-PT.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.pt-PT.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.ro.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.ro.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.ru.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.ru.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.sq.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.sq.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.sv.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.sv.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.tr.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.tr.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.uk.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.uk.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditScanSettings.zh-TW.resx">
-      <DependentUpon>FEditScanSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEditProfile.zh-TW.resx">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEmailSettings.bg.resx">
       <DependentUpon>FEmailSettings.cs</DependentUpon>
