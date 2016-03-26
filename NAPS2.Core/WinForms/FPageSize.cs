@@ -51,9 +51,8 @@ namespace NAPS2.WinForms
 
         private void UpdateDropdown()
         {
-            var presets = UserConfigManager.Config.CustomPageSizePresets;
             comboName.Items.Clear();
-            foreach (var preset in presets)
+            foreach (var preset in UserConfigManager.Config.CustomPageSizePresets.OrderBy(x => x.Name))
             {
                 comboName.Items.Add(preset.Name);
             }
