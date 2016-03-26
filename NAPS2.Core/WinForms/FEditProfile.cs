@@ -68,24 +68,6 @@ namespace NAPS2.WinForms
             };
         }
 
-        private void FormatPageSize(object sender, ListControlConvertEventArgs e)
-        {
-            if (e.ListItem is KeyValuePair<string, PageDimensions>)
-            {
-                var pair = (KeyValuePair<string, PageDimensions>)e.ListItem;
-                e.Value = string.Format(MiscResources.NamedPageSizeFormat, pair.Key, pair.Value.Width, pair.Value.Height, pair.Value.Unit.Description());
-            }
-            else if (e.ListItem is PageDimensions)
-            {
-                var pageDimensions = (PageDimensions)e.ListItem;
-                e.Value = string.Format(MiscResources.CustomPageSizeFormat, pageDimensions.Width, pageDimensions.Height, pageDimensions.Unit.Description());
-            }
-            else
-            {
-                e.Value = ((Enum)e.ListItem).Description();
-            }
-        }
-
         protected override void OnLoad(object sender, EventArgs e)
         {
             // Don't trigger any onChange events
