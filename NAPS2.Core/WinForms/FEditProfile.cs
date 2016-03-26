@@ -412,11 +412,9 @@ namespace NAPS2.WinForms
             {
                 // "Custom..." selected
                 var form = FormFactory.Create<FPageSize>();
-                if (lastPageSizeItem.Type == ScanPageSize.Custom)
-                {
-                    // Don't set the name, since "new" is more likely than "edit"
-                    form.PageSizeDimens = lastPageSizeItem.CustomDimens;
-                }
+                form.PageSizeDimens = lastPageSizeItem.Type == ScanPageSize.Custom
+                    ? lastPageSizeItem.CustomDimens
+                    : lastPageSizeItem.Type.PageDimensions();
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     UpdatePageSizeList();
