@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboName = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnOK
@@ -86,16 +87,27 @@
             this.comboName.FormattingEnabled = true;
             resources.ApplyResources(this.comboName, "comboName");
             this.comboName.Name = "comboName";
+            this.comboName.SelectionChangeCommitted += new System.EventHandler(this.comboName_SelectionChangeCommitted);
+            this.comboName.TextChanged += new System.EventHandler(this.comboName_TextChanged);
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
+            // btnDelete
+            // 
+            resources.ApplyResources(this.btnDelete, "btnDelete");
+            this.btnDelete.Image = global::NAPS2.Icons.cross_small;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // FPageSize
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboName);
             this.Controls.Add(this.label1);
@@ -124,6 +136,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboName;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnDelete;
 
     }
 }

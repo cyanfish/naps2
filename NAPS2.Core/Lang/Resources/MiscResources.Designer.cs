@@ -214,6 +214,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete &quot;{0}&quot;?.
+        /// </summary>
+        internal static string ConfirmDelete {
+            get {
+                return ResourceManager.GetString("ConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete {0} item(s)?.
         /// </summary>
         internal static string ConfirmDeleteItems {

@@ -411,4 +411,7 @@
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
   </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
 </root>

@@ -421,23 +421,32 @@ namespace NAPS2.WinForms
             txtContrast.Text = trContrast.Value.ToString("G");
         }
 
+        private int lastPageSizeIndex = -1;
+        private PageSizeListItem lastPageSizeItem = null;
+
         private void cmbPage_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbPage.SelectedIndex == cmbPage.Items.Count - 1)
             {
                 // "Custom..." selected
                 var form = FormFactory.Create<FPageSize>();
+                if (lastPageSizeItem.Type == ScanPageSize.Custom)
+                {
+                    // Don't set the name, since "new" is more likely than "edit"
+                    form.PageSizeDimens = lastPageSizeItem.CustomDimens;
+                }
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     UpdatePageSizeList();
-                    SelectCustomPageSize(form.Result.Name, form.Result.Dimens);
+                    SelectCustomPageSize(form.PageSizeName, form.PageSizeDimens);
                 }
                 else
                 {
-                    // TODO: Select the previous selection instead of the original value.
-                    SelectPageSize();
+                    cmbPage.SelectedIndex = lastPageSizeIndex;
                 }
             }
+            lastPageSizeIndex = cmbPage.SelectedIndex;
+            lastPageSizeItem = (PageSizeListItem)cmbPage.SelectedItem;
         }
 
         private void linkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

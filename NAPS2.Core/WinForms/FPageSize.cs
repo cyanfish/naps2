@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 
 namespace NAPS2.WinForms
@@ -13,18 +14,18 @@ namespace NAPS2.WinForms
         {
             InitializeComponent();
 
-            textboxWidth.Text = 8.5.ToString(CultureInfo.CurrentCulture);
-            textboxHeight.Text = 11.ToString(CultureInfo.CurrentCulture);
-
             AddEnumItems<PageSizeUnit>(comboUnit);
-            comboUnit.SelectedIndex = 0;
         }
 
-        public NamedPageSize Result { get; private set; }
+        public string PageSizeName { get; set; }
+
+        public PageDimensions PageSizeDimens { get; set; }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             new LayoutManager(this)
+                .Bind(comboName)
+                    .WidthToForm()
                 .Bind(textboxWidth, textboxHeight)
                     .WidthTo(() => Width / 3)
                 .Bind(comboUnit)
@@ -38,6 +39,43 @@ namespace NAPS2.WinForms
                 .Bind(btnCancel, btnOK)
                     .RightToForm()
                 .Activate();
+
+            UpdateDropdown();
+            comboName.Text = PageSizeName ?? "";
+            UpdateDimens(PageSizeDimens ?? ScanPageSize.Letter.PageDimensions());
+        }
+
+        private void UpdateDropdown()
+        {
+            var presets = UserConfigManager.Config.CustomPageSizePresets;
+            comboName.Items.Clear();
+            foreach (var preset in presets)
+            {
+                comboName.Items.Add(preset.Name);
+            }
+        }
+
+        private void UpdateDimens(PageDimensions dimens)
+        {
+            textboxWidth.Text = dimens.Width.ToString(CultureInfo.CurrentCulture);
+            textboxHeight.Text = dimens.Height.ToString(CultureInfo.CurrentCulture);
+            comboUnit.SelectedIndex = (int)dimens.Unit;
+        }
+
+        private void comboName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var presets = UserConfigManager.Config.CustomPageSizePresets;
+            var dimens = presets.Where(x => x.Name == (string)comboName.SelectedItem).Select(x => x.Dimens).FirstOrDefault();
+            if (dimens != null)
+            {
+                UpdateDimens(dimens);
+            }
+        }
+
+        private void comboName_TextChanged(object sender, EventArgs e)
+        {
+            var presets = UserConfigManager.Config.CustomPageSizePresets;
+            btnDelete.Enabled = presets.Any(x => x.Name == comboName.Text);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -59,25 +97,41 @@ namespace NAPS2.WinForms
                 textboxHeight.Focus();
                 return;
             }
-            Result = new NamedPageSize
+            PageSizeName = null;
+            PageSizeDimens = new PageDimensions
             {
-                Name = comboName.Text,
-                Dimens = new PageDimensions
-                {
-                    Width = width,
-                    Height = height,
-                    Unit = (PageSizeUnit)comboUnit.SelectedIndex
-                }
+                Width = width,
+                Height = height,
+                Unit = (PageSizeUnit)comboUnit.SelectedIndex
             };
-            if (!string.IsNullOrEmpty(Result.Name))
+            if (!string.IsNullOrWhiteSpace(comboName.Text))
             {
+                PageSizeName = comboName.Text;
                 var presets = UserConfigManager.Config.CustomPageSizePresets;
-                presets.RemoveAll(x => x.Name == Result.Name);
-                presets.Add(Result);
+                presets.RemoveAll(x => x.Name == PageSizeName);
+                presets.Add(new NamedPageSize
+                {
+                    Name = PageSizeName,
+                    Dimens = PageSizeDimens
+                });
                 UserConfigManager.Save();
             }
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(string.Format(MiscResources.ConfirmDelete, comboName.Text), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                var presets = UserConfigManager.Config.CustomPageSizePresets;
+                presets.RemoveAll(x => x.Name == comboName.Text);
+                UserConfigManager.Save();
+
+                UpdateDropdown();
+                comboName.Text = "";
+                UpdateDimens(ScanPageSize.Letter.PageDimensions());
+            }
         }
     }
 }
