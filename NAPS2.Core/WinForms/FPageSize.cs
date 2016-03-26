@@ -38,7 +38,7 @@ namespace NAPS2.WinForms
                     .LeftTo(() => labelX.Right)
                 .Bind(comboUnit)
                     .LeftTo(() => textboxHeight.Right)
-                .Bind(btnCancel, btnOK)
+                .Bind(btnCancel, btnOK, btnDelete)
                     .RightToForm()
                 .Activate();
 
