@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-19 18:21+0000\n"
-"PO-Revision-Date: 2016-03-22 10:47+0000\n"
+"POT-Creation-Date: 2016-03-23 03:56+0000\n"
+"PO-Revision-Date: 2016-03-23 14:58+0000\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1458643638.000000\n"
+"X-POOTLE-MTIME: 1458745128.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -167,8 +167,8 @@ msgid "Apply brightness/contrast after scan"
 msgstr "Appliquer luminosité/contraste après acquisition"
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Appliquer à toutes les {0} images sélectionnées"
@@ -292,8 +292,8 @@ msgstr "Luminosité "
 #: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Annuler"
@@ -403,8 +403,8 @@ msgstr "Prédéfinie"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
-msgid "Default File Name"
-msgstr "Nom de fichier prédéfini "
+msgid "Default File Path"
+msgstr "Chemin de fichier prédéfini "
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -413,9 +413,9 @@ msgstr "Désappairer [142536>123456]"
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Supprimer"
@@ -587,6 +587,10 @@ msgstr "Qualité d'image"
 #: FImageSettings.resx$$this.Text$Message
 msgid "Image Settings"
 msgstr "Paramètres d'image"
+
+#: MiscResources.resx$ImageSaved$Message
+msgid "Image saved"
+msgstr "Image enregistrée"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -763,8 +767,8 @@ msgstr "Configuration OCR (reconnaissance optique de caractères)"
 msgid "OCR language"
 msgstr "Langue OCR "
 
-#: FPlaceholders.resx$btnOK.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
@@ -775,8 +779,8 @@ msgstr "Langue OCR "
 #: FImageSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
-#: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
@@ -803,6 +807,10 @@ msgstr "Un fichier par numérisation"
 msgid "One or more files could not be downloaded"
 msgstr "Au moins un fichier n'a pas pu être téléchargé"
 
+#: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
+msgid "Open Folder"
+msgstr "Ouvrir un dossier"
+
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
 msgstr "Sortie"
@@ -824,6 +832,10 @@ msgstr "Document PDF (*.pdf)"
 #: FPdfSettings.resx$$this.Text$Message
 msgid "PDF Settings"
 msgstr "Paramètres PDF"
+
+#: MiscResources.resx$PdfSaved$Message
+msgid "PDF saved"
+msgstr "PDF enregistré"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -847,10 +859,10 @@ msgstr "Coller"
 
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Chaînes de substitution"
@@ -905,8 +917,8 @@ msgstr "Récupération"
 msgid "Recovery Progress"
 msgstr "Progression de la récupération"
 
-#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
+#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr "Mémoriser ces paramètres"
@@ -937,8 +949,8 @@ msgstr "Valeurs par défaut"
 msgid "Reverse"
 msgstr "Inverser"
 
-#: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
@@ -1079,6 +1091,11 @@ msgstr "Afficher"
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
 msgstr "Acquisition unique"
+
+#: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
+#: FImageSettings.resx$cbSkipSavePrompt.Text$Message
+msgid "Skip save prompt"
+msgstr "Ignorer l'invite d'enregistrement"
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
@@ -1308,9 +1325,16 @@ msgstr ""
 "sauvegardée(s), et est(sont) récupérable(s). Faut-il procéder à la "
 "récupération ?"
 
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved"
+msgstr "{0} images enregistrées"
+
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} sur {1}"
+
+#~ msgid "Default File Name"
+#~ msgstr "Nom de fichier prédéfini "
 
 #~ msgid "Substitutions"
 #~ msgstr "Substitutions"

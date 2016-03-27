@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-19 18:21+0000\n"
-"PO-Revision-Date: 2016-03-22 20:06+0000\n"
+"POT-Creation-Date: 2016-03-23 03:56+0000\n"
+"PO-Revision-Date: 2016-03-26 01:46+0000\n"
 "Last-Translator: solidhit <solidhit2003@yahoo.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1458677171.000000\n"
+"X-POOTLE-MTIME: 1458956795.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -167,8 +167,8 @@ msgid "Apply brightness/contrast after scan"
 msgstr "Εφαρμογή φωτεινότητας/αντίθεσης μετά την σάρωση"
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Εφαρμογή στις {0} επιλεγμένες εικόνες"
@@ -292,8 +292,8 @@ msgstr "Φωτεινότητα"
 #: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Άκυρο"
@@ -321,7 +321,7 @@ msgstr "Ολική Διαγραφή"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr "Διαγραφή των εικόνων μετά την αποθήκευση"
+msgstr "Διαγραφή εικόνων μετά την αποθήκευση"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -403,8 +403,8 @@ msgstr "Προεπιλεγμένο"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
-msgid "Default File Name"
-msgstr "Προεπιλεγμένο Όνομα Αρχείου"
+msgid "Default File Path"
+msgstr "Προεπιλεγμένη Διαδρομή Αρχείου"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -413,9 +413,9 @@ msgstr "Αποπαρεμβολή [142536...]"
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Διαγραφή"
@@ -588,6 +588,10 @@ msgstr "Ποιότητα Εικόνας"
 msgid "Image Settings"
 msgstr "Ρυθμίσεις Εικόνας"
 
+#: MiscResources.resx$ImageSaved$Message
+msgid "Image saved"
+msgstr "Η εικόνα αποθηκεύτηκε"
+
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
 msgstr "Εισαγωγή"
@@ -757,14 +761,14 @@ msgstr "Λήψη OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "Διαμόρφωση OCR"
+msgstr "Διαμόρφωση OCR (Οπτική Αναγνώριση Χαρακτήρων)"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
 msgstr "Γλώσσα OCR"
 
-#: FPlaceholders.resx$btnOK.Text$Message
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FEditScanSettings.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
@@ -775,8 +779,8 @@ msgstr "Γλώσσα OCR"
 #: FImageSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
-#: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
+#: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Εντάξει"
@@ -787,7 +791,7 @@ msgstr "Πλάτος απόκλισης βάση στοίχισης (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
-msgstr "Παλαιό DSM (Data Source Manager)"
+msgstr "Παλαιό DSM"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
@@ -803,10 +807,13 @@ msgstr "Ένα αρχείο ανά σάρωση"
 msgid "One or more files could not be downloaded"
 msgstr "Αποτυχία λήψης για ένα ή περισσότερα αρχεία"
 
+#: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
+msgid "Open Folder"
+msgstr "Άνοιγμα Φακέλου"
+
 #: FBatchScan.resx$groupboxOutput.Text$Message
-#, fuzzy
 msgid "Output"
-msgstr "Παραγόμενο Αποτέλεσμα"
+msgstr "Αποτέλεσμα"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -825,6 +832,10 @@ msgstr "Αρχεία PDF (*.pdf)"
 #: FPdfSettings.resx$$this.Text$Message
 msgid "PDF Settings"
 msgstr "Ρυθμίσεις PDF"
+
+#: MiscResources.resx$PdfSaved$Message
+msgid "PDF saved"
+msgstr "Το PDF αποθηκεύτηκε"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -848,10 +859,10 @@ msgstr "Επικόλληση"
 
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Δεσμευτικά Θέσεων (Placeholders)"
@@ -906,8 +917,8 @@ msgstr "Ανάκτηση"
 msgid "Recovery Progress"
 msgstr "Πρόοδος Ανάκτησης"
 
-#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
+#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr "Απομνημόνευση αυτών των ρυθμίσεων"
@@ -938,8 +949,8 @@ msgstr "Επαναφορά Προεπιλογών"
 msgid "Reverse"
 msgstr "Αντιστροφή"
 
-#: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
@@ -1025,11 +1036,11 @@ msgstr "Σαρωμένη Εικόνα"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
-msgstr "Απόκτηση σελίδας {0}"
+msgstr "Σάρωση σελίδας {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr "Απόκτηση σελίδας {0} (σάρωση {1})"
+msgstr "Σάρωση σελίδας {0} (σάρωση {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
@@ -1080,6 +1091,11 @@ msgstr "Εμφάνιση"
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
 msgstr "Μία σάρωση"
+
+#: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
+#: FImageSettings.resx$cbSkipSavePrompt.Text$Message
+msgid "Skip save prompt"
+msgstr "Χωρίς προτροπή αποθήκευσης"
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
@@ -1310,9 +1326,16 @@ msgstr ""
 "Υπάρχουν {0} εικόνες που σαρώθηκαν στις {1} και ώρα {2} οι οποίες ενδέχεται "
 "να μην έχουν αποθηκευτεί. Θέλετε να ανακτηθούν;"
 
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved"
+msgstr "{0} εικόνες αποθηκεύτηκαν"
+
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} από {1}"
+
+#~ msgid "Default File Name"
+#~ msgstr "Προεπιλεγμένο Όνομα Αρχείου"
 
 #~ msgid "Substitutions"
 #~ msgstr "Δεσμευτικά Θέσεων (Placeholders)"
