@@ -58,6 +58,7 @@ namespace NAPS2.Automation
         private int pagesScanned;
         private int totalPagesScanned;
         private DateTime startTime;
+        private string actualOutputPath;
 
         public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager)
         {
@@ -259,7 +260,7 @@ namespace NAPS2.Automation
                         OutputVerbose(ConsoleResources.AttachingExportedPDF, attachmentName);
                         message.Attachments.Add(new EmailAttachment
                         {
-                            FilePath = options.OutputPath,
+                            FilePath = actualOutputPath,
                             AttachmentName = attachmentName
                         });
                     }
@@ -387,10 +388,10 @@ namespace NAPS2.Automation
         private void ExportToPdf()
         {
             // Get a local copy of the path just for output
-            var path = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
+            actualOutputPath = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
             if (DoExportToPdf(options.OutputPath, false))
             {
-                OutputVerbose(ConsoleResources.SuccessfullySavedPdf, path);
+                OutputVerbose(ConsoleResources.SuccessfullySavedPdf, actualOutputPath);
             }
         }
 
