@@ -8,7 +8,7 @@ if ($Version -notmatch '^[0-9]+(\.[0-9]+)+$') {
     $Version = Get-NAPS2-Version
 }
 
-if ($Name -eq $null) {
+if ([string]::IsNullOrEmpty($Name)) {
     $Name = $Version
 }
 
@@ -29,10 +29,12 @@ cp "..\..\NAPS2.Setup\bin\Release\NAPS2.Setup.msi" ($PublishDir + "naps2-$Name-s
 
 # EXE Installer
 & (Get-Inno-Path) "setup.iss"
-If ($Force -and (Test-Path ($PublishDir + "naps2-$Name-setup.exe"))) {
-	Remove-Item ($PublishDir + "naps2-$Name-setup.exe")
+if (-not [string]::IsNullOrEmpty($Name)) {
+	if ($Force -and (Test-Path ($PublishDir + "naps2-$Name-setup.exe")) -and (-not ($Name -eq $Version))) {
+		Remove-Item ($PublishDir + "naps2-$Name-setup.exe")
+	}
+	ren ($PublishDir + "naps2-$Version-setup.exe") "naps2-$Name-setup.exe"
 }
-ren ($PublishDir + "naps2-$Version-setup.exe") "naps2-$Name-setup.exe"
 
 # Standalone ZIP/7Z
 Publish-NAPS2-Standalone $PublishDir "StandaloneZIP" ($PublishDir + "naps2-$Name-portable.zip")
