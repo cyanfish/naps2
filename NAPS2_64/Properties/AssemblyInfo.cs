@@ -1,4 +1,4 @@
-ï»¿/*
+/*
     NAPS2 (Not Another PDF Scanner 2)
     http://sourceforge.net/projects/naps2/
     
@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NAPS2 (Not Another PDF Scanner 2)")]
-[assembly: AssemblyCopyright("Copyright Â© 2009 Pavel Sorejs, Copyright Â© 2012 Michael Adams, Copyright Â© 2013 Peter De Leeuw, Copyright Â© 2012-2015 Ben Olden-Cooligan; Icons from http://www.fatcow.com/free-icons")]
+[assembly: AssemblyCopyright("Copyright © 2009 Pavel Sorejs, Copyright © 2012 Michael Adams, Copyright © 2013 Peter De Leeuw, Copyright © 2012-2015 Ben Olden-Cooligan; Icons from http://www.fatcow.com/free-icons")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -52,4 +52,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("5.0.3.*")]
+[assembly: AssemblyVersion("5.1.0.*")]
