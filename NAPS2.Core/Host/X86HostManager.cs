@@ -28,7 +28,7 @@ namespace NAPS2.Host
             {
                 return;
             }
-            var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             var hostProcessPath = Path.Combine(dir, HOST_EXE_NAME);
             _hostProcess = Process.Start(new ProcessStartInfo {
                 FileName = hostProcessPath,
