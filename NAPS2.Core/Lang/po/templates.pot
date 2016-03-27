@@ -67,7 +67,7 @@ msgstr ""
 msgid "Acquiring data"
 msgstr ""
 
-#: FEditScanSettings.resx$btnAdvanced.Text$Message
+#: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
 msgstr ""
 
@@ -166,6 +166,10 @@ msgstr ""
 msgid "Are you sure you want to clear {0} item(s)?"
 msgstr ""
 
+#: MiscResources.resx$ConfirmDelete$Message
+msgid "Are you sure you want to delete "{0}"?"
+msgstr ""
+
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
 msgstr ""
@@ -190,7 +194,7 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: FEditScanSettings.resx$linkAutoSaveSettings.Text$Message
+#: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
 msgid "Auto Save Settings"
 msgstr ""
@@ -240,7 +244,7 @@ msgstr ""
 msgid "Batch scan stopped due to error"
 msgstr ""
 
-#: FEditScanSettings.resx$label3.Text$Message
+#: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr ""
 
@@ -259,7 +263,7 @@ msgstr ""
 #: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
-#: FEditScanSettings.resx$label6.Text$Message
+#: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
 msgstr ""
 
@@ -268,21 +272,21 @@ msgstr ""
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
-#: FProgress.resx$btnCancel.Text$Message
-#: FSelectDevice.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
+#: FScanProgress.resx$btnCancel.Text$Message
+#: FSelectDevice.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FEditScanSettings.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
+#: FContrast.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 #: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
-#: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr ""
@@ -299,7 +303,7 @@ msgstr ""
 msgid "Choose Profile"
 msgstr ""
 
-#: FEditScanSettings.resx$btnChooseDevice.Text$Message
+#: FEditProfile.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
 msgstr ""
 
@@ -323,7 +327,7 @@ msgstr ""
 #: FDesktop.resx$tsContrast.Text$Message
 #: FViewer.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
-#: FEditScanSettings.resx$label7.Text$Message
+#: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
 msgstr ""
 
@@ -403,17 +407,21 @@ msgstr ""
 #: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
-#: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
+#: MiscResources.resx$Delete$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr ""
 
-#: FEditScanSettings.resx$label1.Text$Message
+#: FEditProfile.resx$label1.Text$Message
 msgid "Device"
 msgstr ""
 
-#: FEditScanSettings.resx$label8.Text$Message
+#: FPageSize.resx$label2.Text$Message
+msgid "Dimensions"
+msgstr ""
+
+#: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
 msgstr ""
 
@@ -467,7 +475,7 @@ msgstr ""
 msgid "Email Settings"
 msgstr ""
 
-#: FEditScanSettings.resx$cbAutoSave.Text$Message
+#: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
 msgstr ""
 
@@ -546,7 +554,7 @@ msgstr ""
 msgid "Grayscale"
 msgstr ""
 
-#: FEditScanSettings.resx$label9.Text$Message
+#: FEditProfile.resx$label9.Text$Message
 msgid "Horizontal align"
 msgstr ""
 
@@ -692,6 +700,10 @@ msgstr ""
 msgid "NAPS2"
 msgstr ""
 
+#: FPageSize.resx$label1.Text$Message
+msgid "Name (optional)"
+msgstr ""
+
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
 msgstr ""
@@ -755,14 +767,14 @@ msgid "OCR language"
 msgstr ""
 
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FEditProfile.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
-#: FEditScanSettings.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
-#: FPdfSettings.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
@@ -828,11 +840,11 @@ msgstr ""
 msgid "PNG File (*.png)"
 msgstr ""
 
-#: FEditScanSettings.resx$label4.Text$Message
+#: FEditProfile.resx$label4.Text$Message
 msgid "Page size"
 msgstr ""
 
-#: FEditScanSettings.resx$label2.Text$Message
+#: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
 msgstr ""
 
@@ -844,11 +856,11 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
-#: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -875,7 +887,7 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: FEditScanSettings.resx$$this.Text$Message
+#: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
 msgstr ""
 
@@ -922,13 +934,14 @@ msgstr ""
 msgid "Reset Image"
 msgstr ""
 
-#: FEditScanSettings.resx$label5.Text$Message
+#: FEditProfile.resx$label5.Text$Message
 msgid "Resolution"
 msgstr ""
 
-#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr ""
 
@@ -995,7 +1008,7 @@ msgstr ""
 msgid "Saving {0}"
 msgstr ""
 
-#: FEditScanSettings.resx$label10.Text$Message
+#: FEditProfile.resx$label10.Text$Message
 msgid "Scale"
 msgstr ""
 
@@ -1096,7 +1109,7 @@ msgstr ""
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr ""
 
-#: FEditScanSettings.resx$rdTWAIN.Text$Message
+#: FEditProfile.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
 msgstr ""
 
@@ -1176,11 +1189,11 @@ msgstr ""
 msgid "Update NAPS2"
 msgstr ""
 
-#: FEditScanSettings.resx$rdbNative.Text$Message
+#: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
 msgstr ""
 
-#: FEditScanSettings.resx$rdbConfig.Text$Message
+#: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
 msgstr ""
 
@@ -1201,7 +1214,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: FEditScanSettings.resx$rdWIA.Text$Message
+#: FEditProfile.resx$rdWIA.Text$Message
 msgid "WIA Driver"
 msgstr ""
 
@@ -1284,6 +1297,10 @@ msgstr ""
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
+msgstr ""
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
 msgstr ""
 
 #: MiscResources.resx$SizeProgress$Message
