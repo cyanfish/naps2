@@ -6,7 +6,6 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using NAPS2.Config;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
@@ -26,6 +25,19 @@ namespace NAPS2.Scan.Twain
 
         static TwainWrapper()
         {
+#if STANDALONE
+            // Path to the folder containing the 64-bit twaindsm.dll relative to NAPS2.Core.dll
+            const string lib64Dir = "64";
+            if (Environment.Is64BitProcess)
+            {
+                var location = Assembly.GetExecutingAssembly().Location;
+                var coreDllDir = System.IO.Path.GetDirectoryName(location);
+                if (coreDllDir != null)
+                {
+                    Win32.SetDllDirectory(System.IO.Path.Combine(coreDllDir, lib64Dir));
+                }
+            }
+#endif
 #if DEBUG
             PlatformInfo.Current.Log.IsDebugEnabled = true;
 #endif
