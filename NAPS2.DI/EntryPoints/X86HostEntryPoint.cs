@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows.Forms;
+using NAPS2.DI.Modules;
+using NAPS2.Host;
+using NAPS2.Util;
+using Ninject;
 
-namespace NAPS2.Host
+namespace NAPS2.DI.EntryPoints
 {
-    using Console = System.Console;
-
     // TODO TODO TODO
     // The NAPS2.Host namespace is all about 64-bit support. The NAPS2_32 process calls X86HostEntry.Run.
     // To enable 64-bit support, simply switch NAPS2 and NAPS2.Console to build in AnyCPU and ensure NAPS2_32.exe is included in distribution.
@@ -20,17 +22,15 @@ namespace NAPS2.Host
     // - General stability needs testing/work
     // - Probably something else I forgot. Thorough testing should reveal more issues.
     // TODO TODO TODO
-    public static class X86HostEntry
+    public static class X86HostEntryPoint
     {
-        public static void Run(string[] args, X86HostService hostService)
+        public static void Run(string[] args)
         {
-            if (args.All(x => x != X86HostManager.MAGIC_ARG))
-            {
-                return;
-            }
-
             try
             {
+                var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
+                var hostService = kernel.Get<X86HostService>();
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
@@ -47,10 +47,11 @@ namespace NAPS2.Host
                     Application.Run(form);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Console.Write('k');
-                throw;
+                Log.FatalException("An error occurred that caused the 32-bit host application to close.", ex);
+                Environment.Exit(1);
             }
         }
     }

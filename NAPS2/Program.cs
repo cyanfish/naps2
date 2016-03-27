@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.DI.EntryPoints;
+using NAPS2.Host;
 
 namespace NAPS2
 {
@@ -33,7 +34,14 @@ namespace NAPS2
         [STAThread]
         static void Main(string[] args)
         {
-            WinFormsEntryPoint.Run(args);
+            if (args.Contains(X86HostManager.HOST_ARG))
+            {
+                X86HostEntryPoint.Run(args);
+            }
+            else
+            {
+                WinFormsEntryPoint.Run(args);
+            }
         }
     }
 }
