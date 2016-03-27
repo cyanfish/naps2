@@ -1,4 +1,6 @@
-﻿param([Parameter(Position=0, Mandatory=$false)] [String] $Name, [Parameter(Mandatory=$false)] [switch] $d)
+﻿param([Parameter(Position=0, Mandatory=$false)] [String] $Name,
+      [Parameter(Mandatory=$false)] [switch] $d,
+      [Parameter(Mandatory=$false)] [switch] $x64)
 
 . .\naps2.ps1
 
@@ -20,7 +22,7 @@ if ($d) {
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=StandaloneZIP /t:Rebuild
 }
 
-Publish-NAPS2-Standalone $PublishDir "StandaloneZIP" ($PublishDir + "naps2-$Version-test_$Name-portable.zip")
+Publish-NAPS2-Standalone $PublishDir "StandaloneZIP" ($PublishDir + "naps2-$Version-test_$Name-portable.zip") -x64:$x64
 
 ""
 "Saved to " + ($PublishDir + "naps2-$Version-test_$Name-portable.zip")

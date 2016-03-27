@@ -161,6 +161,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageComponents.tt</DependentUpon>
     </Content>
+    <Content Include="Setup\lib\64\twaindsm.dll" />
     <Content Include="Setup\lib\twaindsm.dll" />
     <Content Include="Setup\setup.languagefiles.iss">
       <AutoGen>True</AutoGen>
