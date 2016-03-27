@@ -35,8 +35,10 @@ function Set-Assembly-Version {
 function Set-NAPS2-Version {
     param([Parameter(Position=0)] [String] $Version)
     Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\Properties\AssemblyInfo.cs")) $Version".*"
+	Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2_64\Properties\AssemblyInfo.cs")) $Version".*"
     Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2.Core\Properties\AssemblyInfo.cs")) $Version".*"
     Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2.Console\Properties\AssemblyInfo.cs")) $Version".*"
+	Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2_64.Console\Properties\AssemblyInfo.cs")) $Version".*"
     Replace-Content ([IO.Path]::Combine($pwd, "setup.iss")) '^#define AppVersion "[^"]+"' "#define AppVersion `"$Version`""
     # TODO: Do some XML processing instead of this flaky replacement
     Replace-Content ([IO.Path]::Combine($pwd, "..\..\NAPS2.Setup\NAPS2.Setup.wxs")) '^      Version="[^"]+"' "      Version=`"$Version`""

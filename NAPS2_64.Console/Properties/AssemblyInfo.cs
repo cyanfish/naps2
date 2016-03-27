@@ -24,12 +24,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NAPS2 32-bit Host")]
+[assembly: AssemblyTitle("NAPS2 (Not Another PDF Scanner 2)")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NAPS2 32-bit Host")]
-[assembly: AssemblyCopyright("Copyright © 2016 Ben Olden-Cooligan")]
+[assembly: AssemblyProduct("NAPS2 (Not Another PDF Scanner 2)")]
+[assembly: AssemblyCopyright("Copyright © 2009-2014 NAPS & NAPS2 Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -39,7 +39,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b021485b-14cc-4dbd-85b4-6a6cd7049d10")]
+[assembly: Guid("25ebbe9b-6e86-4ded-9dd3-9e3480ba1939")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -48,7 +48,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.4.1.*")]
+[assembly: AssemblyVersion("5.0.3.*")]

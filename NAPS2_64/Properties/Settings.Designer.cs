@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAPS2_32.Properties {
+namespace NAPS2_64.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
