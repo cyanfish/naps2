@@ -236,8 +236,8 @@ namespace NAPS2.Automation
 
             var message = new EmailMessage
             {
-                Subject = options.EmailSubject ?? "",
-                BodyText = options.EmailBody,
+                Subject = fileNamePlaceholders.SubstitutePlaceholders(options.EmailSubject, startTime, false) ?? "",
+                BodyText = fileNamePlaceholders.SubstitutePlaceholders(options.EmailBody, startTime, false),
                 AutoSend = options.EmailAutoSend,
                 SilentSend = options.EmailSilentSend
             };
