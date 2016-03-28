@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Documented at http://www.naps2.com/doc-org-use.html -->
 <AppConfig>
   <DefaultCulture></DefaultCulture>
   <StartupMessageTitle></StartupMessageTitle>
@@ -14,17 +15,47 @@
   <ComponentsPath></ComponentsPath>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
+    <!--
+    <Device>
+      <ID></ID>
+      <Name></Name>
+    </Device>
+    -->
     <UseNativeUI>false</UseNativeUI>
-    <IconID>0</IconID>
-    <MaxQuality>false</MaxQuality>
+    <PaperSource>Glass</PaperSource>
+    <BitDepth>C24Bit</BitDepth>
+    <PageSize>Letter</PageSize>
+    <!--
+    <CustomPageSizeName></CustomPageSizeName>
+    <CustomPageSize>
+      <Width></Width>
+      <Height></Height>
+      <Unit>Inch</Unit>
+    </CustomPageSize>
+    -->
+    <PageAlign>Right</PageAlign>
+    <Resolution>Dpi100</Resolution>
     <AfterScanScale>OneToOne</AfterScanScale>
     <Brightness>0</Brightness>
     <Contrast>0</Contrast>
-    <BitDepth>C24Bit</BitDepth>
-    <PageAlign>Right</PageAlign>
-    <PageSize>Letter</PageSize>
-    <Resolution>Dpi100</Resolution>
-    <PaperSource>Glass</PaperSource>
+    <EnableAutoSave>false</EnableAutoSave>
+    <!--
+    <AutoSaveSettings>
+      <FilePath></FilePath>
+      <ClearImagesAfterSaving>false</ClearImagesAfterSaving>
+      <Separator>FilePerPage</Separator>
+    </AutoSaveSettings>
+    -->
+    <MaxQuality>false</MaxQuality>
+    <Quality>75</Quality>
+    <ExcludeBlankPages>false</ExcludeBlankPages>
+    <BlankPageWhiteThreshold>70</BlankPageWhiteThreshold>
+    <BlankPageCoverageThreshold>25</BlankPageCoverageThreshold>
+    <BrightnessContrastAfterScan>false</BrightnessContrastAfterScan>
+    <WiaOffsetWidth>false</WiaOffsetWidth>
+    <ForcePageSize>false</ForcePageSize>
+    <FlipDuplexedPages>false</FlipDuplexedPages>
+    <TwainImpl>Default</TwainImpl>
   </DefaultProfileSettings>
   <KeyboardShortcuts>
     <ScanDefault>Ctrl+Enter</ScanDefault>
