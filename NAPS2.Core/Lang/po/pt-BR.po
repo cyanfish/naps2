@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 03:56+0000\n"
-"PO-Revision-Date: 2016-03-24 06:09+0000\n"
+"POT-Creation-Date: 2016-03-27 22:07+0000\n"
+"PO-Revision-Date: 2016-03-28 16:23+0000\n"
 "Last-Translator: rpozzebon <rodrigo.pozzebon@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-BR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1458799794.000000\n"
+"X-POOTLE-MTIME: 1459182233.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -32,7 +32,7 @@ msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "24 bits Colorido"
+msgstr "Colorido 24 bits "
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
@@ -76,7 +76,7 @@ msgstr "Sobre"
 msgid "Acquiring data"
 msgstr "Obtendo dados"
 
-#: FEditScanSettings.resx$btnAdvanced.Text$Message
+#: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
 msgstr "Avançado"
 
@@ -176,6 +176,11 @@ msgstr "Aplicar para todas {0} imagens selecionadas"
 msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "Confirma a limpeza de {0} itens ?"
 
+#: MiscResources.resx$ConfirmDelete$Message
+#, fuzzy
+msgid "Are you sure you want to delete "{0}"?"
+msgstr "Confirma a remoção de {0} itens ?"
+
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
 msgstr "Confirma a remoção do perfil {0}?"
@@ -200,7 +205,7 @@ msgstr "Nome do anexo"
 msgid "Author"
 msgstr "Autor"
 
-#: FEditScanSettings.resx$linkAutoSaveSettings.Text$Message
+#: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
 msgid "Auto Save Settings"
 msgstr "Configurações de salvamento automático"
@@ -257,7 +262,7 @@ msgstr "Operação concluída com sucesso"
 msgid "Batch scan stopped due to error"
 msgstr "Digitalização em lote interrompida devido a erro"
 
-#: FEditScanSettings.resx$label3.Text$Message
+#: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Qualidade"
 
@@ -276,7 +281,7 @@ msgstr "Páginas em Branco"
 #: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
-#: FEditScanSettings.resx$label6.Text$Message
+#: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Brilho"
 
@@ -285,21 +290,21 @@ msgstr "Brilho"
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
-#: FProgress.resx$btnCancel.Text$Message
-#: FSelectDevice.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
+#: FScanProgress.resx$btnCancel.Text$Message
+#: FSelectDevice.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FEditScanSettings.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
+#: FContrast.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 #: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
-#: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Cancelar"
@@ -316,7 +321,7 @@ msgstr "Centralizado"
 msgid "Choose Profile"
 msgstr "Escolha o perfil"
 
-#: FEditScanSettings.resx$btnChooseDevice.Text$Message
+#: FEditProfile.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
 msgstr "Escolha o dispositivo"
 
@@ -340,7 +345,7 @@ msgstr "Compatibilidade"
 #: FDesktop.resx$tsContrast.Text$Message
 #: FViewer.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
-#: FEditScanSettings.resx$label7.Text$Message
+#: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
 msgstr "Contraste"
 
@@ -424,17 +429,21 @@ msgstr "Desintercalar"
 #: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
-#: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
+#: MiscResources.resx$Delete$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Apagar"
 
-#: FEditScanSettings.resx$label1.Text$Message
+#: FEditProfile.resx$label1.Text$Message
 msgid "Device"
 msgstr "Dispositivo"
 
-#: FEditScanSettings.resx$label8.Text$Message
+#: FPageSize.resx$label2.Text$Message
+msgid "Dimensions"
+msgstr ""
+
+#: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
 msgstr "Nome para exibição"
 
@@ -488,7 +497,7 @@ msgstr ""
 msgid "Email Settings"
 msgstr "Configurações de e-mail"
 
-#: FEditScanSettings.resx$cbAutoSave.Text$Message
+#: FEditProfile.resx$cbAutoSave.Text$Message
 #, fuzzy
 msgid "Enable Auto Save"
 msgstr "Habilitar Auto Salvamento"
@@ -573,7 +582,7 @@ msgstr "Vidro"
 msgid "Grayscale"
 msgstr "Escala de cinza"
 
-#: FEditScanSettings.resx$label9.Text$Message
+#: FEditProfile.resx$label9.Text$Message
 msgid "Horizontal align"
 msgstr "Alinhamento horizontal"
 
@@ -681,7 +690,7 @@ msgstr "Cria PDF pesquisável usando OCV"
 
 #: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr "Alta qualidade (arquivos grande"
+msgstr "Alta qualidade (arquivos grandes)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
@@ -719,6 +728,10 @@ msgstr ""
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
 msgstr "NAPS2"
+
+#: FPageSize.resx$label1.Text$Message
+msgid "Name (optional)"
+msgstr ""
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
@@ -784,14 +797,14 @@ msgid "OCR language"
 msgstr "Idioma do OCR"
 
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FEditProfile.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
-#: FEditScanSettings.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
-#: FPdfSettings.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
@@ -858,11 +871,11 @@ msgstr "PDF salvo"
 msgid "PNG File (*.png)"
 msgstr "Arquivo PNG (*.png)"
 
-#: FEditScanSettings.resx$label4.Text$Message
+#: FEditProfile.resx$label4.Text$Message
 msgid "Page size"
 msgstr "Tamanho da folha"
 
-#: FEditScanSettings.resx$label2.Text$Message
+#: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
 msgstr "Origem do papel"
 
@@ -874,11 +887,11 @@ msgstr "Senha"
 msgid "Paste"
 msgstr "Colar"
 
-#: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 #, fuzzy
@@ -907,7 +920,7 @@ msgstr "Imprimir"
 msgid "Profile"
 msgstr "Perfil"
 
-#: FEditScanSettings.resx$$this.Text$Message
+#: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
 msgstr "Configurar Perfil"
 
@@ -954,13 +967,14 @@ msgstr "Restaurar"
 msgid "Reset Image"
 msgstr "Restaurar Imagem"
 
-#: FEditScanSettings.resx$label5.Text$Message
+#: FEditProfile.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Resolução"
 
-#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Restaurar padrões"
 
@@ -1027,9 +1041,9 @@ msgstr ""
 msgid "Saving {0}"
 msgstr "Salvando {0}"
 
-#: FEditScanSettings.resx$label10.Text$Message
+#: FEditProfile.resx$label10.Text$Message
 msgid "Scale"
-msgstr "Redimensionar"
+msgstr "Escala"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 msgid "Scale With Window"
@@ -1130,7 +1144,7 @@ msgstr "Assunto"
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Arquivo TIFF (*.tiff, *.tif)"
 
-#: FEditScanSettings.resx$rdTWAIN.Text$Message
+#: FEditProfile.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
 msgstr "Driver TWAIN"
 
@@ -1219,12 +1233,12 @@ msgstr "Alterações não salvas"
 msgid "Update NAPS2"
 msgstr "Atualizar o NAPS2"
 
-#: FEditScanSettings.resx$rdbNative.Text$Message
+#: FEditProfile.resx$rdbNative.Text$Message
 #, fuzzy
 msgid "Use native UI"
 msgstr "Usar WIA UI nativo"
 
-#: FEditScanSettings.resx$rdbConfig.Text$Message
+#: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
 msgstr "Usar configurações padrões"
 
@@ -1245,7 +1259,7 @@ msgstr "Versão {0}"
 msgid "View"
 msgstr "Ver"
 
-#: FEditScanSettings.resx$rdWIA.Text$Message
+#: FEditProfile.resx$rdWIA.Text$Message
 msgid "WIA Driver"
 msgstr "Driver WIA"
 
@@ -1334,6 +1348,10 @@ msgstr "de {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
+msgstr ""
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
