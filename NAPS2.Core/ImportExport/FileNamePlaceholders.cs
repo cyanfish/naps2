@@ -35,6 +35,10 @@ namespace NAPS2.ImportExport
 
         public string SubstitutePlaceholders(string fileNameWithPath, DateTime dateTime, bool incrementIfExists = true, int numberSkip = 0, int autoNumberDigits = 0)
         {
+            if (fileNameWithPath == null)
+            {
+                return null;
+            }
             // Most placeholders don't need a special case
             string result = Placeholders.Aggregate(fileNameWithPath, (current, ph) => current.Replace(ph.Key, ph.Value(dateTime)));
             // One does, however
