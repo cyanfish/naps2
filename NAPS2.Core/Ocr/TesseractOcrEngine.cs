@@ -116,9 +116,12 @@ namespace NAPS2.Ocr
                 configDir.Create();
             }
             var hocrConfigFile = new FileInfo(Path.Combine(configDir.FullName, "hocr"));
-            using (var writer = hocrConfigFile.CreateText())
+            if (!hocrConfigFile.Exists)
             {
-                writer.Write("tessedit_create_hocr 1");
+                using (var writer = hocrConfigFile.CreateText())
+                {
+                    writer.Write("tessedit_create_hocr 1");
+                }
             }
         }
 
