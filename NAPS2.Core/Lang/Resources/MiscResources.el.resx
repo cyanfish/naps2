@@ -286,7 +286,7 @@
         <value>Μη Αποθηκευμένες Αλλαγές</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Απόκτηση σελίδας {0}</value>
+        <value>Σάρωση σελίδας {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
         <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει χρήση τροφοδότη. Εάν ο σαρωτής πράγματι διαθέτει τροφοδότη, προτείνεται η χρήση διαφορετικού οδηγού.</value>
@@ -319,10 +319,10 @@
         <value>Η μαζική διακόπηκε λόγω σφάλματος.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>Απόκτηση σελίδας {0}...</value>
+        <value>Σάρωση σελίδας {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Απόκτηση σελίδας {0} (σάρωση {1})...</value>
+        <value>Σάρωση σελίδας {0} (σάρωση {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
         <value>Σε αναμονή για σάρωση {0}...</value>
@@ -400,12 +400,18 @@
         <value>Υπάρχει διαθέσιμη ενημέρωση για το OCR.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>Η εικόνα αποθηκεύτηκε.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} εικόνες αποθηκεύτηκαν.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>Το PDF αποθηκεύτηκε.</value>
+    </data>
+    <data name="NamedPageSizeFormat" xml:space="preserve">
+        <value>{0} ({1}x{2} {3})</value>
+    </data>
+    <data name="ConfirmDelete" xml:space="preserve">
+        <value>Are you sure you want to delete "{0}"?</value>
     </data>
 </root>

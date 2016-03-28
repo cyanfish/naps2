@@ -187,7 +187,7 @@
         <value>4</value>
     </data>
     <data name="btnChooseDevice.Text" xml:space="preserve">
-        <value>Избери устройство</value>
+        <value>Изберете устройство</value>
     </data>
     <data name="&gt;&gt;btnChooseDevice.Name" xml:space="preserve">
         <value>btnChooseDevice</value>
@@ -370,7 +370,7 @@
         <value>9</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Дълбочина на цвета::</value>
+        <value>Дълбочина на цвета:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -424,7 +424,7 @@
         <value>11</value>
     </data>
     <data name="label4.Text" xml:space="preserve">
-        <value>Размер на страница:</value>
+        <value>Размер на листовете:</value>
     </data>
     <data name="&gt;&gt;label4.Name" xml:space="preserve">
         <value>label4</value>
@@ -637,7 +637,7 @@
         <value>19</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Откажи</value>
+        <value>Отказ</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -906,7 +906,7 @@
         <value>2</value>
     </data>
     <data name="rdTWAIN.Text" xml:space="preserve">
-        <value>Файлът '{0}' не може да бъде внесен</value>
+        <value>TWAIN драйвър</value>
     </data>
     <data name="&gt;&gt;rdTWAIN.Name" xml:space="preserve">
         <value>rdTWAIN</value>
@@ -933,7 +933,7 @@
         <value>1</value>
     </data>
     <data name="rdWIA.Text" xml:space="preserve">
-        <value>WIA драйвер</value>
+        <value>WIA драйвър</value>
     </data>
     <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
         <value>rdWIA</value>
@@ -1035,7 +1035,7 @@
         <value>30</value>
     </data>
     <data name="cbAutoSave.Text" xml:space="preserve">
-        <value>Enable Auto Save</value>
+        <value>Автоматично запазване</value>
     </data>
     <data name="&gt;&gt;cbAutoSave.Name" xml:space="preserve">
         <value>cbAutoSave</value>
@@ -1065,7 +1065,7 @@
         <value>31</value>
     </data>
     <data name="linkAutoSaveSettings.Text" xml:space="preserve">
-        <value>Auto Save Settings</value>
+        <value>Автоматично запазване на настройките</value>
     </data>
     <data name="&gt;&gt;linkAutoSaveSettings.Name" xml:space="preserve">
         <value>linkAutoSaveSettings</value>
@@ -1095,7 +1095,7 @@
         <value>32</value>
     </data>
     <data name="btnAdvanced.Text" xml:space="preserve">
-        <value>&amp;Advanced</value>
+        <value>Допълнителни настройки</value>
     </data>
     <data name="&gt;&gt;btnAdvanced.Name" xml:space="preserve">
         <value>btnAdvanced</value>

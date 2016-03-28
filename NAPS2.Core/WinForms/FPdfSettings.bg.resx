@@ -160,7 +160,7 @@
         <value>18</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Откажи</value>
+        <value>Отказ</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -778,7 +778,7 @@
         <value>8</value>
     </data>
     <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
-        <value>Разреши принтиране с най-високо качество</value>
+        <value>Разрешаване на принтиране с високо качество</value>
     </data>
     <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
         <value>cbAllowFullQualityPrinting</value>
@@ -808,7 +808,7 @@
         <value>14</value>
     </data>
     <data name="cbAllowFormFilling.Text" xml:space="preserve">
-        <value>Разреши попълване на формуляри</value>
+        <value>Разрешаване на попълване на формуляри</value>
     </data>
     <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
         <value>cbAllowFormFilling</value>
@@ -838,7 +838,7 @@
         <value>13</value>
     </data>
     <data name="cbAllowAnnotations.Text" xml:space="preserve">
-        <value>Разреши анотации</value>
+        <value>Разрешаване на анотации</value>
     </data>
     <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
         <value>cbAllowAnnotations</value>
@@ -898,7 +898,7 @@
         <value>11</value>
     </data>
     <data name="cbAllowContentCopying.Text" xml:space="preserve">
-        <value>Разреши на копиране на съдържание</value>
+        <value>Разрешаване на копиране на съдържание</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
         <value>cbAllowContentCopying</value>
@@ -955,7 +955,7 @@
         <value>9</value>
     </data>
     <data name="cbAllowDocumentModification.Text" xml:space="preserve">
-        <value>Разреши на промяна на документа</value>
+        <value>Разрешаване на промяна на документа</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentModification.Name" xml:space="preserve">
         <value>cbAllowDocumentModification</value>
@@ -1243,7 +1243,7 @@
         <value>32</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Default File Path:</value>
+        <value>Директория по подразбиране:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -1297,7 +1297,7 @@
         <value>35</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>Пропусни запитването за запис</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>

@@ -421,7 +421,7 @@
         <value>28</value>
     </data>
     <data name="cbClearAfterSave.Text" xml:space="preserve">
-        <value>Διαγραφή των εικόνων μετά την αποθήκευση</value>
+        <value>Διαγραφή εικόνων μετά την αποθήκευση</value>
     </data>
     <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
         <value>cbClearAfterSave</value>

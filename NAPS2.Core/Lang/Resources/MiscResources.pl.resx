@@ -130,7 +130,7 @@
         <value>Czy na pewno chcesz usunąć {0} element(y/ów)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Czy na pewno chcesz usunąć {0} profil/i? </value>
+        <value>Czy na pewno chcesz usunąć {0} profile/profilów?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
         <value>Czy na pewno chcesz usunąć profil {0}?</value>
@@ -400,12 +400,18 @@
         <value>Dostępna jest aktualizacja OCR.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>Zapisano obraz.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} obrazy/obrazów zapisano.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>Zapisano PDF.</value>
+    </data>
+    <data name="NamedPageSizeFormat" xml:space="preserve">
+        <value>{0} ({1}x{2} {3})</value>
+    </data>
+    <data name="ConfirmDelete" xml:space="preserve">
+        <value>Are you sure you want to delete "{0}"?</value>
     </data>
 </root>

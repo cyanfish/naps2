@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>A newer version of NAPS2 is available. Do you want to update now?</value>
+        <value>Налична е нова версия на NAPS2. Желаете ли да актуализирате?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>

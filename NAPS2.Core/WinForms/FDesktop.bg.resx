@@ -250,7 +250,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>Постави</value>
     </data>
     <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -259,7 +259,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxDelete.Text" xml:space="preserve">
-        <value>Изтрий</value>
+        <value>Изтриване</value>
     </data>
     <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
         <value>165, 148</value>
@@ -367,7 +367,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsBatchScan.Text" xml:space="preserve">
-        <value>&amp;Batch Scan</value>
+        <value>Групово сканиране</value>
     </data>
     <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -460,7 +460,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsSavePDFAll.Text" xml:space="preserve">
-        <value>&amp;All ({0})</value>
+        <value>Всички ({0})</value>
     </data>
     <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
@@ -484,7 +484,7 @@
         <value>71, 51</value>
     </data>
     <data name="tsdSavePDF.Text" xml:space="preserve">
-        <value>Запис на PDF</value>
+        <value>Запис в PDF</value>
     </data>
     <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -493,7 +493,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsSaveImagesAll.Text" xml:space="preserve">
-        <value>&amp;All ({0})</value>
+        <value>Всички ({0})</value>
     </data>
     <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -526,7 +526,7 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailPDFAll.Text" xml:space="preserve">
-        <value>&amp;All ({0})</value>
+        <value>Всички ({0})</value>
     </data>
     <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -541,7 +541,7 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>Настройки на е-поща</value>
+        <value>Настройки за имейл</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -721,7 +721,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsReverseAll.Text" xml:space="preserve">
-        <value>&amp;All ({0})</value>
+        <value>Всички ({0})</value>
     </data>
     <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
@@ -757,7 +757,7 @@
         <value>64, 51</value>
     </data>
     <data name="tsDelete.Text" xml:space="preserve">
-        <value>Изтрий</value>
+        <value>Изтриване</value>
     </data>
     <data name="tsDelete.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -769,7 +769,7 @@
         <value>58, 51</value>
     </data>
     <data name="tsClear.Text" xml:space="preserve">
-        <value>Изчисти</value>
+        <value>Изчистване</value>
     </data>
     <data name="tsClear.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -835,7 +835,7 @@
         <value>64, 51</value>
     </data>
     <data name="tsAbout.Text" xml:space="preserve">
-        <value>&amp;About</value>
+        <value>Относно</value>
     </data>
     <data name="tsAbout.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>

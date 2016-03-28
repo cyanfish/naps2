@@ -121,7 +121,7 @@
         <value>Preto e Branco</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24 bits de cor</value>
+        <value>Colorido 24 bits </value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Escala de cinza</value>
@@ -157,13 +157,13 @@
         <value>Esquerda</value>
     </data>
     <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Diretira</value>
+        <value>Direita</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
         <value>cm</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>in</value>
+        <value>pol</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
         <value>mm</value>
@@ -184,7 +184,7 @@
         <value>B5 (176x250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>Personalizado...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>Ofício (8.5x14 pol)</value>
@@ -214,10 +214,10 @@
         <value>Vidro</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>Padrão</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>Legado (UI nativa apenas)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Old DSM</value>

@@ -400,12 +400,18 @@
         <value>Une mise à jour pour l'OCR est disponible.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>Image enregistrée.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} images enregistrées.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>PDF enregistré.</value>
+    </data>
+    <data name="NamedPageSizeFormat" xml:space="preserve">
+        <value>{0} ({1}x{2} {3})</value>
+    </data>
+    <data name="ConfirmDelete" xml:space="preserve">
+        <value>Are you sure you want to delete "{0}"?</value>
     </data>
 </root>

@@ -241,7 +241,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxCopy.Text" xml:space="preserve">
-        <value>Copy</value>
+        <value>Copiar</value>
     </data>
     <data name="ctxPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
         <value>Ctrl+V</value>
@@ -250,7 +250,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>Colar</value>
     </data>
     <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -358,7 +358,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsNewProfile.Text" xml:space="preserve">
-        <value>&amp;New Profile</value>
+        <value>&amp;Novo perfil</value>
     </data>
     <data name="tsBatchScan.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -367,7 +367,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsBatchScan.Text" xml:space="preserve">
-        <value>&amp;Batch Scan</value>
+        <value>Digitalização em lote</value>
     </data>
     <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -475,7 +475,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>&amp;PDF Settings</value>
+        <value>Configurações de &amp;PDF</value>
     </data>
     <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -508,7 +508,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>&amp;Image Settings</value>
+        <value>Configurações de imagem</value>
     </data>
     <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -541,13 +541,13 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>&amp;Email Settings</value>
+        <value>Configurações de e-mail</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>&amp;PDF Settings</value>
+        <value>Configurações de &amp;PDF</value>
     </data>
     <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -568,7 +568,7 @@
         <value>56, 51</value>
     </data>
     <data name="tsPrint.Text" xml:space="preserve">
-        <value>&amp;Print</value>
+        <value>Imprimir</value>
     </data>
     <data name="tsPrint.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -592,7 +592,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>&amp;Crop</value>
+        <value>&amp;Cortar</value>
     </data>
     <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -619,7 +619,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsReset.Text" xml:space="preserve">
-        <value>&amp;Reset</value>
+        <value>&amp;Restaurar</value>
     </data>
     <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -628,7 +628,7 @@
         <value>64, 51</value>
     </data>
     <data name="tsdImage.Text" xml:space="preserve">
-        <value>Ima&amp;ge</value>
+        <value>Imagem</value>
     </data>
     <data name="tsdImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -664,7 +664,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>&amp;Custom Rotation</value>
+        <value>Rotação personalizada</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -691,13 +691,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsInterleave.Text" xml:space="preserve">
-        <value>&amp;Interleave</value>
+        <value>&amp;Intercalar</value>
     </data>
     <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsDeinterleave.Text" xml:space="preserve">
-        <value>&amp;Deinterleave</value>
+        <value>&amp;Desintercalar</value>
     </data>
     <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -706,13 +706,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>&amp;Alternate Interleave</value>
+        <value>Intercalar &amp;Alternativo</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>A&amp;lternate Deinterleave</value>
+        <value>Desintercalar Alternativo</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -733,7 +733,7 @@
         <value>190, 22</value>
     </data>
     <data name="tsReverse.Text" xml:space="preserve">
-        <value>&amp;Reverse</value>
+        <value>Inverter</value>
     </data>
     <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

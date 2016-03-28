@@ -169,13 +169,13 @@
         <value>мм</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 mm)</value>
+        <value>A3 (297x420 мм)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
+        <value>A4 (210x297 мм)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 mm)</value>
+        <value>A5 (148x210 мм)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
         <value>B4 (250x353 мм)</value>
@@ -190,7 +190,7 @@
         <value>US Legal (8.5x14 инча)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Писмо (8.5x14 in)</value>
+        <value>US писмо (8.5x11 инч)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>
@@ -214,13 +214,13 @@
         <value>Стъкло</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>По подразбиране</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
         <value>Legacy (native UI only)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>Стар DSM</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

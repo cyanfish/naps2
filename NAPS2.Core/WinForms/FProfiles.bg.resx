@@ -149,7 +149,7 @@
         <value>131, 22</value>
     </data>
     <data name="ctxDelete.Text" xml:space="preserve">
-        <value>Изтрий</value>
+        <value>Изтриване</value>
     </data>
     <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
         <value>132, 98</value>
@@ -268,7 +268,7 @@
         <value>3</value>
     </data>
     <data name="btnDelete.Text" xml:space="preserve">
-        <value>Изтрий</value>
+        <value>Изтриване</value>
     </data>
     <data name="btnDelete.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>

@@ -310,7 +310,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsDelete.Text" xml:space="preserve">
-        <value>Изтрий</value>
+        <value>Изтриване</value>
     </data>
     <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 0</value>

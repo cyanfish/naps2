@@ -211,7 +211,7 @@
         <value>Ocorreu um erro enquanto tentávamos enviar um e-mail.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Automatic Updates</value>
+        <value>Atualizações automáticas</value>
     </data>
     <data name="Download" xml:space="preserve">
         <value>Baixar</value>
@@ -226,7 +226,7 @@
         <value>Não agora</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Uma nova versão está disponível. Quer atualizar agora?</value>
+        <value>Uma nova versão do NAPS2 está disponível. Quer atualizar agora?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Instalação concluída</value>
@@ -274,49 +274,49 @@
         <value>Digitalizar</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>Tem certeza de que deseja desfazer as alterações para {0} imagem(s)?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>Restaurar Imagem</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>Você tem alterações não salvas. Tem certeza de que deseja sair e descartar essas alterações?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Unsaved Changes</value>
+        <value>Alterações não salvas</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
         <value>Scanning page {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>O scanner selecionado não suporta o uso de alimentador. Se o scanner tiver um alimentador, tente usar um driver diferente.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>Sem papel no alimentador.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>You do not have permission to copy content from the file '{0}'.</value>
+        <value>Você não tem permissão para copiar o conteúdo do arquivo '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Ocorreu um erro ao tentar salvar o arquivo.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>de {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>Ocorreu um erro desconhecido durante a digitalização em lote.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>Operação cancelada.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Cancelling....</value>
+        <value>Cancelando....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>Operação concluída com sucesso.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>Digitalização em lote interrompida devido a erro.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
         <value>Scanning page {0}...</value>
@@ -331,19 +331,19 @@
         <value>Cancelar</value>
     </data>
     <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Fechar</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
         <value>Saving batch results...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+        <value>O scanner selecionado não suporta o uso duplex. Se o scanner realmente suporta duplex, tente usar um driver diferente.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importing {0}...</value>
+        <value>Importando {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
         <value>Import Progress</value>
@@ -361,51 +361,57 @@
         <value>Save PDF Progress</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Saving {0}...</value>
+        <value>Salvando {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>Copiando...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>Progresso da Cópia</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Importando...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
         <value>Email PDF Progress</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>Ocorreu um erro ao tentar salvar automaticamente.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Todos os Arquivos</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>Arquivos de imagens</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>O scanner escolhido está offline.</value>
+        <value>O scanner escolhido está ocupado.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>A tampa do scanner está aberta.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>O scanner tem um atolamento de papel.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>O scanner está aquecendo.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>Uma atualização para OCR está disponível.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>Imagem salva.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} imagens salvas.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>PDF salvo.</value>
+    </data>
+    <data name="NamedPageSizeFormat" xml:space="preserve">
+        <value>{0} ({1}x{2} {3})</value>
+    </data>
+    <data name="ConfirmDelete" xml:space="preserve">
+        <value>Are you sure you want to delete "{0}"?</value>
     </data>
 </root>

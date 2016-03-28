@@ -202,7 +202,7 @@
         <value>7</value>
     </data>
     <data name="btnRevert.Text" xml:space="preserve">
-        <value>Revert</value>
+        <value>Reverter</value>
     </data>
     <data name="&gt;&gt;btnRevert.Name" xml:space="preserve">
         <value>btnRevert</value>
@@ -280,7 +280,7 @@
         <value>11</value>
     </data>
     <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-        <value>Apply to all {0} selected images</value>
+        <value>Aplicar para todas {0} imagens selecionadas</value>
     </data>
     <data name="&gt;&gt;checkboxApplyToSelected.Name" xml:space="preserve">
         <value>checkboxApplyToSelected</value>
@@ -342,6 +342,6 @@
         <value>FRotate</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.28575, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.0.3.36170, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

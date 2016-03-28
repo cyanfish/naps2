@@ -312,7 +312,7 @@
         <value>336, 139</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Διαμόρφωση OCR</value>
+        <value>Διαμόρφωση OCR (Οπτική Αναγνώριση Χαρακτήρων)</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrSetup</value>

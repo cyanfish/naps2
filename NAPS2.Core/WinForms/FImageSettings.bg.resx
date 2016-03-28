@@ -160,7 +160,7 @@
         <value>18</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Откажи</value>
+        <value>Отказ</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -268,7 +268,7 @@
         <value>28</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Default File Path:</value>
+        <value>Директория по подразбиране:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -397,7 +397,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>За най-добри резултати при JPEG с високо каччество (80+), използвайте  профила Максимално Качество..</value>
+        <value>За най-добри резултати при JPEG с високо качество (80+), ползвайте профила Максимално Качество..</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>
@@ -454,7 +454,7 @@
         <value>36</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>Пропусни запитването за запис</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>
