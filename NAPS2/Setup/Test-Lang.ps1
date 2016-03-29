@@ -1,4 +1,5 @@
-﻿param([Parameter(Position=0, Mandatory=$false)] [String] $PoUrl)
+﻿param([Parameter(Position=0, Mandatory=$false)] [String] $PoUrl,
+      [Parameter(Position=1, Mandatory=$false)] [String] $Lang)
 
 . .\naps2.ps1
 
@@ -9,9 +10,12 @@ if (-not ($Ext -eq ".po")) {
     return
 }
 
-$LanguageCode = [System.IO.Path]::GetFileNameWithoutExtension($PoUrl)
-if ($LanguageCode -eq $null -or $LanguageCode -eq "") {
-    return
+$LanguageCode = $Lang
+if ([string]::IsNullOrEmpty($LanguageCode)) {
+	$LanguageCode = [System.IO.Path]::GetFileNameWithoutExtension($PoUrl)
+	if ($LanguageCode -eq $null -or $LanguageCode -eq "") {
+		return
+	}
 }
 Invoke-WebRequest -Uri $PoUrl -OutFile "..\..\NAPS2.Core\Lang\po\$LanguageCode.po"
 Update-Lang $LanguageCode
