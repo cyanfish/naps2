@@ -1159,11 +1159,14 @@ namespace NAPS2.WinForms
 
         private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.AlwaysPrompt)
+            var action = appConfigManager.Config.SaveButtonDefaultAction;
+
+            if (action == SaveButtonDefaultAction.AlwaysPrompt
+                || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
             {
                 tsdSavePDF.ShowDropDown();
             }
-            else if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
+            else if (action == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
             {
                 SavePDF(SelectedImages.ToList());
             }
@@ -1175,11 +1178,14 @@ namespace NAPS2.WinForms
 
         private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.AlwaysPrompt)
+            var action = appConfigManager.Config.SaveButtonDefaultAction;
+
+            if (action == SaveButtonDefaultAction.AlwaysPrompt
+                || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
             {
                 tsdSaveImages.ShowDropDown();
             }
-            else if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
+            else if (action == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
             {
                 SaveImages(SelectedImages.ToList());
             }
@@ -1191,11 +1197,14 @@ namespace NAPS2.WinForms
 
         private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.AlwaysPrompt)
+            var action = appConfigManager.Config.SaveButtonDefaultAction;
+
+            if (action == SaveButtonDefaultAction.AlwaysPrompt
+                || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
             {
                 tsdEmailPDF.ShowDropDown();
             }
-            else if (appConfigManager.Config.SaveButtonDefaultAction == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
+            else if (action == SaveButtonDefaultAction.SaveSelected && SelectedIndices.Any())
             {
                 EmailPDF(SelectedImages.ToList());
             }

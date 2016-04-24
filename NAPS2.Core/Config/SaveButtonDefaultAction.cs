@@ -9,6 +9,7 @@ namespace NAPS2.Config
     {
         SaveAll,
         SaveSelected,
-        AlwaysPrompt
+        AlwaysPrompt,
+        PromptIfSelected
     }
 }
