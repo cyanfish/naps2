@@ -87,6 +87,8 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Activate();
 
+            btnAddProfile.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
+
             ConditionalControls.LockHeight(this);
 
             BatchSettings = userConfigManager.Config.LastBatchSettings ?? new BatchSettings();
@@ -272,15 +274,18 @@ namespace NAPS2.WinForms
 
         private void btnAddProfile_Click(object sender, EventArgs e)
         {
-            var fedit = FormFactory.Create<FEditProfile>();
-            fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
-            fedit.ShowDialog();
-            if (fedit.Result)
+            if (!(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked)))
             {
-                profileManager.Profiles.Add(fedit.ScanProfile);
-                profileManager.Save();
-                BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName;
-                UpdateProfiles();
+                var fedit = FormFactory.Create<FEditProfile>();
+                fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile {Version = ScanProfile.CURRENT_VERSION};
+                fedit.ShowDialog();
+                if (fedit.Result)
+                {
+                    profileManager.Profiles.Add(fedit.ScanProfile);
+                    profileManager.Save();
+                    BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName;
+                    UpdateProfiles();
+                }
             }
         }
 

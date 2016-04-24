@@ -8,6 +8,8 @@
   <SaveButtonDefaultAction>SaveAll</SaveButtonDefaultAction>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
+  <NoUserProfiles>false</NoUserProfiles>
+  <AlwaysRememberDevice>false</AlwaysRememberDevice>
   <NoUpdatePrompt>false</NoUpdatePrompt>
   <DeleteAfterSaving>false</DeleteAfterSaving>
   <DisableSaveNotifications>false</DisableSaveNotifications>

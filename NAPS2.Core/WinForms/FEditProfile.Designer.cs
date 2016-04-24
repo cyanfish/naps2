@@ -82,6 +82,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.txtDevice, "txtDevice");
             this.txtDevice.Name = "txtDevice";
             this.txtDevice.ReadOnly = true;
+            this.txtDevice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDevice_KeyDown);
             // 
             // label1
             // 
@@ -304,7 +305,7 @@ namespace NAPS2.WinForms
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
-            // FEditScanSettings
+            // FEditProfile
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");

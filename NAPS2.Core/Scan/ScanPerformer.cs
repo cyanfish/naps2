@@ -36,13 +36,15 @@ namespace NAPS2.Scan
         private readonly IErrorOutput errorOutput;
         private readonly IAutoSave autoSave;
         private readonly AppConfigManager appConfigManager;
+        private readonly IProfileManager profileManager;
 
-        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, AppConfigManager appConfigManager)
+        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, AppConfigManager appConfigManager, IProfileManager profileManager)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
             this.autoSave = autoSave;
             this.appConfigManager = appConfigManager;
+            this.profileManager = profileManager;
         }
 
         public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify, Action<ScannedImage> imageCallback)
@@ -61,6 +63,11 @@ namespace NAPS2.Scan
                     {
                         // User cancelled
                         return;
+                    }
+                    if (appConfigManager.Config.AlwaysRememberDevice)
+                    {
+                        scanProfile.Device = device;
+                        profileManager.Save();
                     }
                     driver.ScanDevice = device;
                 }

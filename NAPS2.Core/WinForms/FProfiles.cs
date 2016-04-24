@@ -77,6 +77,7 @@ namespace NAPS2.WinForms
         protected override void OnLoad(object sender, EventArgs e)
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
+            btnAdd.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             UpdateProfiles();
@@ -153,7 +154,7 @@ namespace NAPS2.WinForms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (lvProfiles.SelectedItems.Count > 0 && !SelectionLocked)
+            if (lvProfiles.SelectedItems.Count > 0)
             {
                 int profileIndex = lvProfiles.SelectedItems[0].Index;
                 var fedit = FormFactory.Create<FEditProfile>();
@@ -177,7 +178,7 @@ namespace NAPS2.WinForms
 
         private void lvProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnEdit.Enabled = lvProfiles.SelectedItems.Count == 1 && !SelectionLocked;
+            btnEdit.Enabled = lvProfiles.SelectedItems.Count == 1;
             btnDelete.Enabled = lvProfiles.SelectedItems.Count > 0 && !SelectionLocked;
         }
 

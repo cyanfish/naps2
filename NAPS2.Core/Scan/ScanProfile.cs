@@ -59,6 +59,9 @@ namespace NAPS2.Scan
         [XmlIgnore]
         public bool IsLocked { get; set; }
 
+        [XmlIgnore]
+        public bool IsDeviceLocked { get; set; }
+
         public ScanDevice Device { get; set; }
 
         public string DriverName { get; set; }

@@ -73,12 +73,6 @@ namespace NAPS2.WinForms
             // Don't trigger any onChange events
             suppressChangeEvent = true;
 
-            if (appConfigManager.Config.DisableAutoSave)
-            {
-                cbAutoSave.Enabled = false;
-                linkAutoSaveSettings.Visible = false;
-            }
-
             pctIcon.Image = ilProfileIcons.IconsList.Images[ScanProfile.IconID];
             txtName.Text = ScanProfile.DisplayName;
             if (CurrentDevice == null)
@@ -267,6 +261,14 @@ namespace NAPS2.WinForms
 
         private void SaveSettings()
         {
+            if (ScanProfile.IsLocked)
+            {
+                if (!ScanProfile.IsDeviceLocked)
+                {
+                    ScanProfile.Device = CurrentDevice;
+                }
+                return;
+            }
             var pageSize = (PageSizeListItem) cmbPage.SelectedItem;
             if (ScanProfile.DisplayName != null)
             {
@@ -344,17 +346,33 @@ namespace NAPS2.WinForms
             if (!suppressChangeEvent)
             {
                 suppressChangeEvent = true;
-                bool enabled = rdbConfig.Checked;
-                cmbSource.Enabled = enabled;
-                cmbResolution.Enabled = enabled;
-                cmbPage.Enabled = enabled;
-                cmbDepth.Enabled = enabled;
-                cmbAlign.Enabled = enabled;
-                cmbScale.Enabled = enabled;
-                trBrightness.Enabled = enabled;
-                trContrast.Enabled = enabled;
-                txtBrightness.Enabled = enabled;
-                txtContrast.Enabled = enabled;
+                
+                bool locked = ScanProfile.IsLocked;
+                bool deviceLocked = ScanProfile.IsDeviceLocked;
+                bool settingsEnabled = !locked && rdbConfig.Checked;
+
+                txtName.Enabled = !locked;
+                rdWIA.Enabled = rdTWAIN.Enabled = !locked;
+                txtDevice.Enabled = !deviceLocked;
+                btnChooseDevice.Enabled = !deviceLocked;
+                rdbConfig.Enabled = rdbNative.Enabled = !locked;
+
+                cmbSource.Enabled = settingsEnabled;
+                cmbResolution.Enabled = settingsEnabled;
+                cmbPage.Enabled = settingsEnabled;
+                cmbDepth.Enabled = settingsEnabled;
+                cmbAlign.Enabled = settingsEnabled;
+                cmbScale.Enabled = settingsEnabled;
+                trBrightness.Enabled = settingsEnabled;
+                trContrast.Enabled = settingsEnabled;
+                txtBrightness.Enabled = settingsEnabled;
+                txtContrast.Enabled = settingsEnabled;
+
+                cbAutoSave.Enabled = !locked && !appConfigManager.Config.DisableAutoSave;
+                linkAutoSaveSettings.Visible = !locked && !appConfigManager.Config.DisableAutoSave;
+
+                btnAdvanced.Enabled = !locked;
+
                 suppressChangeEvent = false;
             }
         }
@@ -467,6 +485,14 @@ namespace NAPS2.WinForms
                 }
             }
             linkAutoSaveSettings.Enabled = cbAutoSave.Checked;
+        }
+
+        private void txtDevice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                CurrentDevice = null;
+            }
         }
 
         private class PageSizeListItem

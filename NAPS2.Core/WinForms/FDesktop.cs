@@ -384,6 +384,11 @@ namespace NAPS2.WinForms
             }
             if (profile == null)
             {
+                if (appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+                {
+                    return;
+                }
+
                 // No profile for the device we're scanning with, so prompt to create one
                 var editSettingsForm = FormFactory.Create<FEditProfile>();
                 editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ??
@@ -545,9 +550,10 @@ namespace NAPS2.WinForms
             ctxView.Visible = ctxCopy.Visible = ctxDelete.Visible = ctxSeparator1.Visible = ctxSeparator2.Visible = SelectedIndices.Any();
             ctxSelectAll.Enabled = imageList.Images.Any();
 
-            // Other buttons
+            // Other
             btnZoomIn.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize < ThumbnailRenderer.MAX_SIZE;
             btnZoomOut.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize > ThumbnailRenderer.MIN_SIZE;
+            tsNewProfile.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
         }
 
         private void UpdateScanButton()

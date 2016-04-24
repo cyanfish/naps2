@@ -72,16 +72,30 @@ namespace NAPS2.Config
                     foreach (var systemProfile in systemProfiles)
                     {
                         systemProfile.IsLocked = true;
+                        systemProfile.IsDeviceLocked = (systemProfile.Device != null);
                     }
                     var systemProfileNames = new HashSet<string>(systemProfiles.Select(x => x.DisplayName));
                     foreach (var profile in Config.ToList())
                     {
                         if (systemProfileNames.Contains(profile.DisplayName))
                         {
+                            // Merge some properties from the user's copy of the profile
+                            var systemProfile = systemProfiles.First(x => x.DisplayName == profile.DisplayName);
+                            if (systemProfile.Device == null)
+                            {
+                                systemProfile.Device = profile.Device;
+                            }
+                            systemProfile.IsDefault = profile.IsDefault;
+
+                            // Delete the user's copy of the profile
                             Config.Remove(profile);
                             // Avoid removing duplicates
                             systemProfileNames.Remove(profile.DisplayName);
                         }
+                    }
+                    if (systemProfiles.Count > 0 && appConfigManager.Config.NoUserProfiles)
+                    {
+                        Config.Clear();
                     }
                     if (Config.Any(x => x.IsDefault))
                     {
