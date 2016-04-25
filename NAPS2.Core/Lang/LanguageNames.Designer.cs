@@ -61,6 +61,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to العَرَبِية.
+        /// </summary>
+        internal static string ar {
+            get {
+                return ResourceManager.GetString("ar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to български.
         /// </summary>
         internal static string bg {
@@ -295,11 +304,38 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slovenčina.
+        /// </summary>
+        internal static string sk {
+            get {
+                return ResourceManager.GetString("sk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shqip.
         /// </summary>
         internal static string sq {
             get {
                 return ResourceManager.GetString("sq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Српски.
+        /// </summary>
+        internal static string sr_Cyrl {
+            get {
+                return ResourceManager.GetString("sr_Cyrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Srpski.
+        /// </summary>
+        internal static string sr_Latn {
+            get {
+                return ResourceManager.GetString("sr_Latn", resourceCulture);
             }
         }
         

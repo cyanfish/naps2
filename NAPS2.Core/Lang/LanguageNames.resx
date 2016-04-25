@@ -210,4 +210,16 @@
   <data name="fa" xml:space="preserve">
     <value>فارسى</value>
   </data>
+  <data name="ar" xml:space="preserve">
+    <value>العَرَبِية</value>
+  </data>
+  <data name="sk" xml:space="preserve">
+    <value>Slovenčina</value>
+  </data>
+  <data name="sr_Cyrl" xml:space="preserve">
+    <value>Српски</value>
+  </data>
+  <data name="sr_Latn" xml:space="preserve">
+    <value>Srpski</value>
+  </data>
 </root>
