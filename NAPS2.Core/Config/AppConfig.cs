@@ -47,6 +47,10 @@ namespace NAPS2.Config
 
         public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
+        public bool HideEmailButton { get; set; }
+
+        public bool HidePrintButton { get; set; }
+
         public bool DisableAutoSave { get; set; }
 
         public bool LockSystemProfiles { get; set; }

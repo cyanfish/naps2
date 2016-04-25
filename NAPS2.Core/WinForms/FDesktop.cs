@@ -140,6 +140,15 @@ namespace NAPS2.WinForms
             int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
 
+            if (appConfigManager.Config.HideEmailButton)
+            {
+                tStrip.Items.Remove(tsdEmailPDF);
+            }
+            if (appConfigManager.Config.HidePrintButton)
+            {
+                tStrip.Items.Remove(tsPrint);
+            }
+
             LoadToolStripLocation();
             RelayoutToolbar();
             InitLanguageDropdown();
@@ -1197,6 +1206,11 @@ namespace NAPS2.WinForms
 
         private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideEmailButton)
+            {
+                return;
+            }
+
             var action = appConfigManager.Config.SaveButtonDefaultAction;
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
@@ -1216,6 +1230,11 @@ namespace NAPS2.WinForms
 
         private void tsPrint_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HidePrintButton)
+            {
+                return;
+            }
+
             if (scannedImagePrinter.PromptToPrint(imageList.Images, SelectedImages.ToList()))
             {
                 changeTracker.HasUnsavedChanges = false;
@@ -1283,11 +1302,21 @@ namespace NAPS2.WinForms
 
         private void tsEmailPDFAll_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideEmailButton)
+            {
+                return;
+            }
+
             EmailPDF(imageList.Images);
         }
 
         private void tsEmailPDFSelected_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideEmailButton)
+            {
+                return;
+            }
+
             EmailPDF(SelectedImages.ToList());
         }
 

@@ -6,6 +6,8 @@
   <StartupMessageText></StartupMessageText>
   <StartupMessageIcon>Information</StartupMessageIcon>
   <SaveButtonDefaultAction>SaveAll</SaveButtonDefaultAction>
+  <HideEmailButton>false</HideEmailButton>
+  <HidePrintButton>false</HidePrintButton>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
   <NoUserProfiles>false</NoUserProfiles>
