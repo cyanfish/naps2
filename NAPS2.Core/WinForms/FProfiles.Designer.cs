@@ -47,6 +47,9 @@ namespace NAPS2.WinForms
             this.btnDone = new System.Windows.Forms.Button();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.btnScan = new System.Windows.Forms.Button();
+            this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,9 +75,12 @@ namespace NAPS2.WinForms
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxScan,
-            this.toolStripSeparator1,
             this.ctxEdit,
             this.ctxSetDefault,
+            this.toolStripSeparator2,
+            this.ctxCopy,
+            this.ctxPaste,
+            this.toolStripSeparator1,
             this.ctxDelete});
             this.contextMenuStrip.Name = "contextMenuStrip";
             resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
@@ -153,6 +159,23 @@ namespace NAPS2.WinForms
             this.btnScan.UseVisualStyleBackColor = true;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
+            // ctxCopy
+            // 
+            this.ctxCopy.Name = "ctxCopy";
+            resources.ApplyResources(this.ctxCopy, "ctxCopy");
+            this.ctxCopy.Click += new System.EventHandler(this.ctxCopy_Click);
+            // 
+            // ctxPaste
+            // 
+            this.ctxPaste.Name = "ctxPaste";
+            resources.ApplyResources(this.ctxPaste, "ctxPaste");
+            this.ctxPaste.Click += new System.EventHandler(this.ctxPaste_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
             // FProfiles
             // 
             resources.ApplyResources(this, "$this");
@@ -186,5 +209,8 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem ctxEdit;
         private System.Windows.Forms.ToolStripMenuItem ctxDelete;
         private System.Windows.Forms.ToolStripMenuItem ctxSetDefault;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem ctxCopy;
+        private System.Windows.Forms.ToolStripMenuItem ctxPaste;
     }
 }

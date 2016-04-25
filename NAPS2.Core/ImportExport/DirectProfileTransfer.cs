@@ -13,6 +13,10 @@ namespace NAPS2.ImportExport
         {
             ProcessID = Process.GetCurrentProcess().Id;
             ScanProfile = profile.Clone();
+
+            ScanProfile.IsDefault = false;
+            ScanProfile.IsLocked = false;
+            ScanProfile.IsDeviceLocked = false;
         }
 
         public int ProcessID { get; private set; }

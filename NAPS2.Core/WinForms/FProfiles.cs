@@ -144,14 +144,7 @@ namespace NAPS2.WinForms
             fedit.ShowDialog();
             if (fedit.Result)
             {
-                profileManager.Profiles.Add(fedit.ScanProfile);
-                if (profileManager.Profiles.Count == 1)
-                {
-                    profileManager.DefaultProfile = fedit.ScanProfile;
-                }
-                UpdateProfiles();
-                SelectProfile(x => x == fedit.ScanProfile);
-                profileManager.Save();
+                AddProfile(fedit.ScanProfile);
             }
         }
 
@@ -276,15 +269,37 @@ namespace NAPS2.WinForms
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            var ido = Clipboard.GetDataObject();
+            var canPaste = ido != null && ido.GetDataPresent(typeof (DirectProfileTransfer).FullName);
             if (SelectedProfile == null)
             {
-                e.Cancel = true;
+                if (canPaste)
+                {
+                    foreach (ToolStripItem item in contextMenuStrip.Items)
+                    {
+                        if (item != ctxPaste)
+                        {
+                            item.Visible = false;
+                        }
+                    }
+                    ctxPaste.Enabled = true;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
             }
             else
             {
+                foreach (ToolStripItem item in contextMenuStrip.Items)
+                {
+                    item.Visible = true;
+                }
                 ctxSetDefault.Enabled = !SelectedProfile.IsDefault;
                 ctxEdit.Enabled = !SelectedProfile.IsLocked;
                 ctxDelete.Enabled = !SelectedProfile.IsLocked;
+                ctxCopy.Enabled = true;
+                ctxPaste.Enabled = canPaste;
             }
         }
 
@@ -315,6 +330,46 @@ namespace NAPS2.WinForms
             }
         }
 
+        private void AddProfile(ScanProfile profile)
+        {
+            profileManager.Profiles.Add(profile);
+            if (profileManager.Profiles.Count == 1)
+            {
+                profileManager.DefaultProfile = profile;
+            }
+            UpdateProfiles();
+            SelectProfile(x => x == profile);
+            profileManager.Save();
+        }
+
+        private IDataObject GetSelectedProfileDataObject()
+        {
+            IDataObject ido = new DataObject();
+            int profileIndex = lvProfiles.SelectedItems[0].Index;
+            var profile = profileManager.Profiles[profileIndex];
+            ido.SetData(typeof(DirectProfileTransfer), new DirectProfileTransfer(profile));
+            return ido;
+        }
+
+        private void ctxCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(GetSelectedProfileDataObject());
+        }
+
+        private void ctxPaste_Click(object sender, EventArgs e)
+        {
+            var ido = Clipboard.GetDataObject();
+            if (ido == null)
+            {
+                return;
+            }
+            if (ido.GetDataPresent(typeof(DirectProfileTransfer).FullName))
+            {
+                var data = (DirectProfileTransfer)ido.GetData(typeof(DirectProfileTransfer).FullName);
+                AddProfile(data.ScanProfile);
+            }
+        }
+
         #region Drag/Drop
 
         private void lvProfiles_ItemDrag(object sender, ItemDragEventArgs e)
@@ -322,10 +377,7 @@ namespace NAPS2.WinForms
             // Provide drag data
             if (lvProfiles.SelectedItems.Count > 0)
             {
-                IDataObject ido = new DataObject();
-                int profileIndex = lvProfiles.SelectedItems[0].Index;
-                var profile = profileManager.Profiles[profileIndex];
-                ido.SetData(typeof(DirectProfileTransfer), new DirectProfileTransfer(profile));
+                var ido = GetSelectedProfileDataObject();
                 DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
             }
         }
@@ -361,19 +413,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    var profile = data.ScanProfile;
-                    profile.IsDefault = false;
-                    profile.IsLocked = false;
-                    profile.IsDeviceLocked = false;
-
-                    profileManager.Profiles.Add(profile);
-                    if (profileManager.Profiles.Count == 1)
-                    {
-                        profileManager.DefaultProfile = profile;
-                    }
-                    UpdateProfiles();
-                    SelectProfile(x => x == profile);
-                    profileManager.Save();
+                    AddProfile(data.ScanProfile);
                 }
             }
             lvProfiles.InsertionMark.Index = -1;
