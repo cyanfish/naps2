@@ -190,7 +190,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Remember these settings</value>
+        <value>Lembrar essas configurações</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -397,7 +397,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>Usar acima de 80 para JPEG de alta qualidade, use a opção máxima para obter melhores resultados.</value>
+        <value>Usar acima de 80 para JPEG de alta qualidade. Use a opção máxima para obter melhores resultados.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>
@@ -454,7 +454,7 @@
         <value>36</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>Pular pedido de salvar</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>

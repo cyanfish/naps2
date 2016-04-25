@@ -424,7 +424,7 @@
         <value>4</value>
     </data>
     <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-        <value>Offset width based on alignment (WIA)</value>
+        <value>Compensar largura com base no alinhamento (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
         <value>cbWiaOffsetWidth</value>

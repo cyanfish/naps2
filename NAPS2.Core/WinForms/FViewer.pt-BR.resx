@@ -247,19 +247,19 @@
         <value>164, 22</value>
     </data>
     <data name="tsRotateLeft.Text" xml:space="preserve">
-        <value>Rodar para esquerda</value>
+        <value>Girar para esquerda</value>
     </data>
     <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsRotateRight.Text" xml:space="preserve">
-        <value>Rodar para direita</value>
+        <value>Girar para direita</value>
     </data>
     <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsFlip.Text" xml:space="preserve">
-        <value>Rodar</value>
+        <value>Inverter</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>

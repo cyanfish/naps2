@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+        <value>{0} obrázků skenovaných na {1} v {2} možná nebylo uloženo a je možno je obnovit. Chcete je obnovit?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -204,7 +204,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>&amp;Not Now</value>
+        <value>Teď ne</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -232,7 +232,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Recover Scanned Images</value>
+        <value>Obnovit skenované obrázky</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FRecover</value>

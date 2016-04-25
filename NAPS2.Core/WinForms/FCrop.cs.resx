@@ -301,7 +301,7 @@
         <value>7</value>
     </data>
     <data name="btnRevert.Text" xml:space="preserve">
-        <value>Revert</value>
+        <value>Vrátit</value>
     </data>
     <data name="&gt;&gt;btnRevert.Name" xml:space="preserve">
         <value>btnRevert</value>
@@ -331,7 +331,7 @@
         <value>11</value>
     </data>
     <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-        <value>Apply to all {0} selected images</value>
+        <value>Použít na všechny {0} vybrané obrázky</value>
     </data>
     <data name="&gt;&gt;checkboxApplyToSelected.Name" xml:space="preserve">
         <value>checkboxApplyToSelected</value>
@@ -387,7 +387,7 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Ořez</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FCrop</value>

@@ -228,7 +228,7 @@
         <value>8</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Using OCR requires you to download each language you want to scan.</value>
+        <value>Pro použití OCR musíte stáhnout každý jazyk, který chcete skenovat.</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -255,7 +255,7 @@
         <value>9</value>
     </data>
     <data name="labelSizeEstimate.Text" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>Odhadovaná velikost stažení: {0} MB</value>
     </data>
     <data name="&gt;&gt;labelSizeEstimate.Name" xml:space="preserve">
         <value>labelSizeEstimate</value>
@@ -305,7 +305,7 @@
         <value>439, 310</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>OCR Download</value>
+        <value>Stažení OCR</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrLanguageDownload</value>

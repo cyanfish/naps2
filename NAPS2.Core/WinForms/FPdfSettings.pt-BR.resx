@@ -808,7 +808,7 @@
         <value>14</value>
     </data>
     <data name="cbAllowFormFilling.Text" xml:space="preserve">
-        <value>Permitir o Preenchimento do Formulário</value>
+        <value>Permitir Preenchimento de Formulário</value>
     </data>
     <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
         <value>cbAllowFormFilling</value>
@@ -868,7 +868,7 @@
         <value>12</value>
     </data>
     <data name="cbAllowContentCopyingForAccessibility.Text" xml:space="preserve">
-        <value>Permitir Cópia de Conteúdo para a Acessibilidade</value>
+        <value>Permitir Cópia de Conteúdo para Acessibilidade</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Name" xml:space="preserve">
         <value>cbAllowContentCopyingForAccessibility</value>
@@ -898,7 +898,7 @@
         <value>11</value>
     </data>
     <data name="cbAllowContentCopying.Text" xml:space="preserve">
-        <value>Permitir Cópia de Conteúdo</value>
+        <value>Permitir Cópia do Conteúdo</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
         <value>cbAllowContentCopying</value>
@@ -928,7 +928,7 @@
         <value>10</value>
     </data>
     <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>Permitir Montagem do Documento</value>
+        <value>Permitir União do Documento</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
         <value>cbAllowDocumentAssembly</value>
@@ -1081,7 +1081,7 @@
         <value>1</value>
     </data>
     <data name="lblOwnerPassword.Text" xml:space="preserve">
-        <value>Senha:</value>
+        <value>Senha do Proprietário:</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>
@@ -1135,7 +1135,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Remember these settings</value>
+        <value>Lembrar essas configurações</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -1297,7 +1297,7 @@
         <value>35</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>Pular pedido de salvar</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>

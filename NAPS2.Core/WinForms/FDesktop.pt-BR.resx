@@ -220,7 +220,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxView.Text" xml:space="preserve">
-        <value>Ver</value>
+        <value>Visualizar</value>
     </data>
     <data name="ctxSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -460,7 +460,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsSavePDFAll.Text" xml:space="preserve">
-        <value>Todo ({0})</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
@@ -493,7 +493,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsSaveImagesAll.Text" xml:space="preserve">
-        <value>Todo ({0})</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -526,7 +526,7 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailPDFAll.Text" xml:space="preserve">
-        <value>Todo ({0})</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -580,7 +580,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsView.Text" xml:space="preserve">
-        <value>&amp;Ver</value>
+        <value>&amp;Visualizar</value>
     </data>
     <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
         <value>126, 6</value>
@@ -640,7 +640,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsRotateLeft.Text" xml:space="preserve">
-        <value>Rodar para esquerda</value>
+        <value>Girar para esquerda</value>
     </data>
     <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -649,7 +649,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsRotateRight.Text" xml:space="preserve">
-        <value>&amp;Rodar para direita</value>
+        <value>Girar para direita</value>
     </data>
     <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -658,7 +658,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsFlip.Text" xml:space="preserve">
-        <value>Rodar</value>
+        <value>Inverter</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
@@ -706,13 +706,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>Intercalar &amp;Alternativo</value>
+        <value>Intercalar &amp;Alternado</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>Desintercalar Alternativo</value>
+        <value>Desintercalar Alternado</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -721,7 +721,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsReverseAll.Text" xml:space="preserve">
-        <value>Todo ({0})</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>

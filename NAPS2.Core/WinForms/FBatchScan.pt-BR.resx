@@ -283,7 +283,7 @@
         <value>0</value>
     </data>
     <data name="lblNumberOfScans.Text" xml:space="preserve">
-        <value>Number of scans:</value>
+        <value>Número de digitalizações:</value>
     </data>
     <data name="&gt;&gt;lblNumberOfScans.Name" xml:space="preserve">
         <value>lblNumberOfScans</value>
@@ -334,7 +334,7 @@
         <value>2</value>
     </data>
     <data name="rdMultipleScansPrompt.Text" xml:space="preserve">
-        <value>Multiple scans (prompt between scans)</value>
+        <value>Múltiplas digitalizações (Solicitar confirmação entre cada uma)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansPrompt.Name" xml:space="preserve">
         <value>rdMultipleScansPrompt</value>
@@ -364,7 +364,7 @@
         <value>1</value>
     </data>
     <data name="rdMultipleScansDelay.Text" xml:space="preserve">
-        <value>Multiple scans (fixed delay between scans)</value>
+        <value>Múltiplas digitalizações (Fixar tempo entre cada uma)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansDelay.Name" xml:space="preserve">
         <value>rdMultipleScansDelay</value>
@@ -391,7 +391,7 @@
         <value>0</value>
     </data>
     <data name="rdSingleScan.Text" xml:space="preserve">
-        <value>Single scan</value>
+        <value>Única digitalização</value>
     </data>
     <data name="&gt;&gt;rdSingleScan.Name" xml:space="preserve">
         <value>rdSingleScan</value>

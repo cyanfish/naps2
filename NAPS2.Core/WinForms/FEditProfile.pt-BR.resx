@@ -1035,7 +1035,7 @@
         <value>30</value>
     </data>
     <data name="cbAutoSave.Text" xml:space="preserve">
-        <value>Habilitar Auto Salvamento</value>
+        <value>Ativar Auto Salvamento</value>
     </data>
     <data name="&gt;&gt;cbAutoSave.Name" xml:space="preserve">
         <value>cbAutoSave</value>
@@ -1154,12 +1154,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.4.1.35818, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.1.1.39462, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FEditProfile</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.4.1.35818, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.1.1.39462, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

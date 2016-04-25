@@ -121,7 +121,7 @@
         <value>Preto e Branco</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>Colorido 24 bits </value>
+        <value>Colorido 24 bits</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Escala de cinza</value>
@@ -220,7 +220,7 @@
         <value>Legado (UI nativa apenas)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>DSM Antigo</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>
