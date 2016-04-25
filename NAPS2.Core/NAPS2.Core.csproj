@@ -3517,6 +3517,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Lang\po\ar.po" />
     <None Include="Lang\po\bg.po" />
     <None Include="Lang\po\ca.po" />
     <None Include="Lang\po\cs.po" />
@@ -3542,7 +3543,10 @@
     <None Include="Lang\po\pt-PT.po" />
     <None Include="Lang\po\ro.po" />
     <None Include="Lang\po\ru.po" />
+    <None Include="Lang\po\sk.po" />
     <None Include="Lang\po\sq.po" />
+    <None Include="Lang\po\sr-Cyrl.po" />
+    <None Include="Lang\po\sr-Latn.po" />
     <None Include="Lang\po\sv.po" />
     <None Include="Lang\po\templates.pot" />
     <None Include="Lang\po\tr.po" />

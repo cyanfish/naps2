@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 03:56+0000\n"
-"PO-Revision-Date: 2016-03-26 01:46+0000\n"
+"POT-Creation-Date: 2016-03-27 22:06+0000\n"
+"PO-Revision-Date: 2016-03-30 22:08+0000\n"
 "Last-Translator: solidhit <solidhit2003@yahoo.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1458956795.000000\n"
+"X-POOTLE-MTIME: 1459375688.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -78,7 +78,7 @@ msgstr "Σχετικά"
 msgid "Acquiring data"
 msgstr "Απόκτηση δεδομένων"
 
-#: FEditScanSettings.resx$btnAdvanced.Text$Message
+#: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
@@ -177,6 +177,10 @@ msgstr "Εφαρμογή στις {0} επιλεγμένες εικόνες"
 msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "Θέλετε σίγουρα ολική διαγραφή ({0} αντικείμενα);"
 
+#: MiscResources.resx$ConfirmDelete$Message
+msgid "Are you sure you want to delete "{0}"?"
+msgstr "Θέλετε σίγουρα να διαγράψετε το '{0}';"
+
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
 msgstr "Θέλετε σίγουρα να διαγραφεί το προφίλ '{0}';"
@@ -201,7 +205,7 @@ msgstr "Όνομα Επισύναψης"
 msgid "Author"
 msgstr "Συντάκτης"
 
-#: FEditScanSettings.resx$linkAutoSaveSettings.Text$Message
+#: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
 msgid "Auto Save Settings"
 msgstr "Ρυθμίσεις Αυτόματης Αποθήκευσης"
@@ -251,7 +255,7 @@ msgstr "Η μαζική ολοκληρώθηκε με επιτυχία"
 msgid "Batch scan stopped due to error"
 msgstr "Η μαζική διακόπηκε λόγω σφάλματος"
 
-#: FEditScanSettings.resx$label3.Text$Message
+#: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
 msgstr "Βάθος bit"
 
@@ -270,7 +274,7 @@ msgstr "Κενές Σελίδες"
 #: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
-#: FEditScanSettings.resx$label6.Text$Message
+#: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Φωτεινότητα"
 
@@ -279,21 +283,21 @@ msgstr "Φωτεινότητα"
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
-#: FProgress.resx$btnCancel.Text$Message
-#: FSelectDevice.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
+#: FScanProgress.resx$btnCancel.Text$Message
+#: FSelectDevice.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FEditScanSettings.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
+#: FContrast.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 #: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
-#: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Άκυρο"
@@ -310,7 +314,7 @@ msgstr "Κέντρο"
 msgid "Choose Profile"
 msgstr "Επιλογή Προφίλ"
 
-#: FEditScanSettings.resx$btnChooseDevice.Text$Message
+#: FEditProfile.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
 msgstr "Επιλογή συσκευής"
 
@@ -334,7 +338,7 @@ msgstr "Συμβατότητα"
 #: FDesktop.resx$tsContrast.Text$Message
 #: FViewer.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
-#: FEditScanSettings.resx$label7.Text$Message
+#: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
 msgstr "Αντίθεση"
 
@@ -414,17 +418,21 @@ msgstr "Αποπαρεμβολή [142536...]"
 #: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
-#: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
+#: MiscResources.resx$Delete$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: FEditScanSettings.resx$label1.Text$Message
+#: FEditProfile.resx$label1.Text$Message
 msgid "Device"
 msgstr "Συσκευή"
 
-#: FEditScanSettings.resx$label8.Text$Message
+#: FPageSize.resx$label2.Text$Message
+msgid "Dimensions"
+msgstr "Διαστάσεις"
+
+#: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
 msgstr "Εμφανιζόμενο Όνομα"
 
@@ -478,7 +486,7 @@ msgstr "Πρόοδος Αποστολής PDF (Email)"
 msgid "Email Settings"
 msgstr "Ρυθμίσεις Email"
 
-#: FEditScanSettings.resx$cbAutoSave.Text$Message
+#: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
 msgstr "Αυτόματη Αποθήκευση Ενεργή"
 
@@ -559,7 +567,7 @@ msgstr "Γυαλί"
 msgid "Grayscale"
 msgstr "Κλίμακα του Γκρι"
 
-#: FEditScanSettings.resx$label9.Text$Message
+#: FEditProfile.resx$label9.Text$Message
 msgid "Horizontal align"
 msgstr "Οριζόντια στοίχιση"
 
@@ -705,6 +713,10 @@ msgstr "Πολλαπλές σαρώσεις (προτροπή μεταξύ σα�
 msgid "NAPS2"
 msgstr "NAPS2"
 
+#: FPageSize.resx$label1.Text$Message
+msgid "Name (optional)"
+msgstr "Όνομα (προαιρετικό)"
+
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
 msgstr "Απουσιάζει το όνομα"
@@ -768,14 +780,14 @@ msgid "OCR language"
 msgstr "Γλώσσα OCR"
 
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FEditProfile.resx$btnOK.Text$Message
 #: FPlaceholders.resx$btnOK.Text$Message
-#: FEditScanSettings.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
-#: FPdfPassword.resx$btnOK.Text$Message
-#: FPdfSettings.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
@@ -791,7 +803,7 @@ msgstr "Πλάτος απόκλισης βάση στοίχισης (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
-msgstr "Παλαιό DSM"
+msgstr "Παλαιό DSM (Διαχειριστής Πηγής Δεδομένων)"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
@@ -841,11 +853,11 @@ msgstr "Το PDF αποθηκεύτηκε"
 msgid "PNG File (*.png)"
 msgstr "Αρχεία PNG (*.png)"
 
-#: FEditScanSettings.resx$label4.Text$Message
+#: FEditProfile.resx$label4.Text$Message
 msgid "Page size"
 msgstr "Μέγεθος σελίδας"
 
-#: FEditScanSettings.resx$label2.Text$Message
+#: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
 msgstr "Προέλευση χαρτιού"
 
@@ -857,11 +869,11 @@ msgstr "Κωδικός"
 msgid "Paste"
 msgstr "Επικόλληση"
 
-#: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
@@ -888,7 +900,7 @@ msgstr "Εκτύπωση"
 msgid "Profile"
 msgstr "Προφίλ"
 
-#: FEditScanSettings.resx$$this.Text$Message
+#: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
 msgstr "Ρυθμίσεις Προφίλ"
 
@@ -935,13 +947,14 @@ msgstr "Αρχικοποίηση"
 msgid "Reset Image"
 msgstr "Αρχικοποίηση Εικόνας"
 
-#: FEditScanSettings.resx$label5.Text$Message
+#: FEditProfile.resx$label5.Text$Message
 msgid "Resolution"
 msgstr "Ανάλυση"
 
-#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Επαναφορά Προεπιλογών"
 
@@ -1008,7 +1021,7 @@ msgstr "Αποθήκευση αποτελεσμάτων μαζικής"
 msgid "Saving {0}"
 msgstr "Αποθήκευση '{0}'"
 
-#: FEditScanSettings.resx$label10.Text$Message
+#: FEditProfile.resx$label10.Text$Message
 msgid "Scale"
 msgstr "Κλίμακα"
 
@@ -1109,7 +1122,7 @@ msgstr "Θέμα"
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Αρχεία TIFF (*.tiff, *.tif)"
 
-#: FEditScanSettings.resx$rdTWAIN.Text$Message
+#: FEditProfile.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
 msgstr "Οδηγός TWAIN"
 
@@ -1198,11 +1211,11 @@ msgstr "Μη Αποθηκευμένες Αλλαγές"
 msgid "Update NAPS2"
 msgstr "Ενημέρωση NAPS2"
 
-#: FEditScanSettings.resx$rdbNative.Text$Message
+#: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
 msgstr "Εγγενές περιβάλλον"
 
-#: FEditScanSettings.resx$rdbConfig.Text$Message
+#: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
 msgstr "Προκαθορισμένες ρυθμίσεις"
 
@@ -1223,7 +1236,7 @@ msgstr "Έκδοση {0}"
 msgid "View"
 msgstr "Προβολή"
 
-#: FEditScanSettings.resx$rdWIA.Text$Message
+#: FEditProfile.resx$rdWIA.Text$Message
 msgid "WIA Driver"
 msgstr "Οδηγός WIA"
 
@@ -1309,6 +1322,10 @@ msgstr "από {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message

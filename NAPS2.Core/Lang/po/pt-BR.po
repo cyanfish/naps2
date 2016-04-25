@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-27 22:07+0000\n"
-"PO-Revision-Date: 2016-03-28 16:23+0000\n"
+"PO-Revision-Date: 2016-03-29 21:05+0000\n"
 "Last-Translator: rpozzebon <rodrigo.pozzebon@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-BR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1459182233.000000\n"
+"X-POOTLE-MTIME: 1459285528.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -32,7 +32,7 @@ msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "Colorido 24 bits "
+msgstr "Colorido 24 bits"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
@@ -53,7 +53,7 @@ msgstr "800 dpi"
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "Uma nova versão do NAPS2 está disponível. Quer atualizar agora?"
+msgstr "Uma nova versão do NAPS2 está disponível. Deseja atualizar agora?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -90,7 +90,7 @@ msgstr "Configurações Avançadas do Perfil"
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr "Todo ({0})"
+msgstr "Todos ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
@@ -102,15 +102,15 @@ msgstr "Permitir anotações"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr "Permitir Cópia de Conteúdo"
+msgstr "Permitir Cópia do Conteúdo"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "Permitir Cópia de Conteúdo para a Acessibilidade"
+msgstr "Permitir Cópia de Conteúdo para Acessibilidade"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr "Permitir Montagem do Documento"
+msgstr "Permitir União do Documento"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
@@ -118,7 +118,7 @@ msgstr "Permitir Modificação do Documento"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr "Permitir o Preenchimento do Formulário"
+msgstr "Permitir Preenchimento de Formulário"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
@@ -130,11 +130,11 @@ msgstr "Permitir Impressão"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr "Desintercalar Alternativo"
+msgstr "Desintercalar Alternado"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr "Intercalar Alternativo"
+msgstr "Intercalar Alternado"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -168,16 +168,14 @@ msgstr "Aplicar Brilho/Contraste após digitalizar"
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
-#, fuzzy
 msgid "Apply to all {0} selected images"
-msgstr "Aplicar para todas {0} imagens selecionadas"
+msgstr "Aplicar para todas as {0} imagens selecionadas"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "Confirma a limpeza de {0} itens ?"
 
 #: MiscResources.resx$ConfirmDelete$Message
-#, fuzzy
 msgid "Are you sure you want to delete "{0}"?"
 msgstr "Confirma a remoção de {0} itens ?"
 
@@ -211,22 +209,18 @@ msgid "Auto Save Settings"
 msgstr "Configurações de salvamento automático"
 
 #: FPlaceholders.resx$label13.Text$Message
-#, fuzzy
 msgid "Auto-incrementing number (1 digit)"
 msgstr "Auto-incrementar número (1 dígito)"
 
 #: FPlaceholders.resx$label12.Text$Message
-#, fuzzy
 msgid "Auto-incrementing number (2 digits)"
 msgstr "Auto-incrementar número (2 dígitos)"
 
 #: FPlaceholders.resx$label11.Text$Message
-#, fuzzy
 msgid "Auto-incrementing number (3 digits)"
 msgstr "Auto-incrementar número (3 dígitos)"
 
 #: FPlaceholders.resx$label10.Text$Message
-#, fuzzy
 msgid "Auto-incrementing number (4 digits)"
 msgstr "Auto-incrementar número (4 dígitos)"
 
@@ -248,17 +242,14 @@ msgid "Batch Scan"
 msgstr "Digitalização em lote"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
-#, fuzzy
 msgid "Batch cancelled"
-msgstr "Operação cancelada"
+msgstr "Digitalização em lote cancelada"
 
 #: MiscResources.resx$BatchStatusComplete$Message
-#, fuzzy
 msgid "Batch completed successfully"
 msgstr "Operação concluída com sucesso"
 
 #: MiscResources.resx$BatchStatusError$Message
-#, fuzzy
 msgid "Batch scan stopped due to error"
 msgstr "Digitalização em lote interrompida devido a erro"
 
@@ -350,7 +341,6 @@ msgid "Contrast"
 msgstr "Contraste"
 
 #: FDesktop.resx$ctxCopy.Text$Message
-#, fuzzy
 msgid "Copy"
 msgstr "Copiar"
 
@@ -371,7 +361,6 @@ msgid "Copyright © 2012 Michael Adams"
 msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
-#, fuzzy
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
 msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
 
@@ -380,7 +369,6 @@ msgid "Copyright © 2013 Peter De Leeuw"
 msgstr "Copyright © 2013 Peter De Leeuw"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
-#, fuzzy
 msgid "Coverage Threshold"
 msgstr "Limiar de Cobertura"
 
@@ -396,10 +384,9 @@ msgstr "Personalizado"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr ""
+msgstr "Personalizado ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
-#, fuzzy
 msgid "Custom Page Size"
 msgstr "Tamanho de página personalizada"
 
@@ -441,7 +428,7 @@ msgstr "Dispositivo"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "Dimensões"
 
 #: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
@@ -454,7 +441,7 @@ msgstr "Deseja que o NAPS2 verifique automaticamente por atualizações?"
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
-msgstr "Finalizado"
+msgstr "Concluído"
 
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
@@ -490,7 +477,7 @@ msgstr "E-mail"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr ""
+msgstr "Progresso Email PDF"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
@@ -498,9 +485,8 @@ msgid "Email Settings"
 msgstr "Configurações de e-mail"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
-#, fuzzy
 msgid "Enable Auto Save"
-msgstr "Habilitar Auto Salvamento"
+msgstr "Ativar Auto Salvamento"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
@@ -547,22 +533,19 @@ msgstr "Caminho do arquivo"
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
 msgid "Flip"
-msgstr "Rodar"
+msgstr "Inverter"
 
 #: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
-#, fuzzy
 msgid "Flip duplexed pages"
 msgstr "Virar páginas frente e verso"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-#, fuzzy
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
-"Usar acima de 80 para JPEG de alta qualidade, use a opção máxima para obter "
+"Usar acima de 80 para JPEG de alta qualidade. Use a opção máxima para obter "
 "melhores resultados"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
-#, fuzzy
 msgid "Force matching page size"
 msgstr "Forçar tamanho da página"
 
@@ -621,7 +604,7 @@ msgstr "Importar"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr ""
+msgstr "Progresso da Importação"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
@@ -676,7 +659,6 @@ msgid "Legacy (native UI only)"
 msgstr "Legado (UI nativa apenas)"
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
-#, fuzzy
 msgid "Load images into NAPS2"
 msgstr "Carregar imagens em NAPS2"
 
@@ -686,7 +668,7 @@ msgstr "Menu principal"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Cria PDF pesquisável usando OCV"
+msgstr "Criar PDF pesquisável usando OCR"
 
 #: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
@@ -719,11 +701,11 @@ msgstr "Mover acima"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr ""
+msgstr "Múltiplas digitalizações (Fixar tempo entre cada uma)"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr ""
+msgstr "Múltiplas digitalizações (Solicitar confirmação entre cada uma)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -731,7 +713,7 @@ msgstr "NAPS2"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "Nome (opcional)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
@@ -750,7 +732,6 @@ msgid "Next"
 msgstr "Próximo"
 
 #: FBatchPrompt.resx$$this.Text$Message
-#, fuzzy
 msgid "Next Scan"
 msgstr "Próxima Digitalização"
 
@@ -778,7 +759,7 @@ msgstr "Não agora"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr ""
+msgstr "Número de digitalizações"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
@@ -816,11 +797,11 @@ msgstr "OK"
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr ""
+msgstr "Compensar largura com base no alinhamento (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
-msgstr ""
+msgstr "DSM Antigo"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
@@ -849,9 +830,8 @@ msgid "Overwrite File"
 msgstr "Sobrescrever arquivo"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
-#, fuzzy
 msgid "Owner Password"
-msgstr "Senha"
+msgstr "Senha do Proprietário"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
@@ -894,12 +874,10 @@ msgstr "Colar"
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
-#, fuzzy
 msgid "Placeholders"
 msgstr "Substituições"
 
 #: FBatchScan.resx$lblStatus.Text$Message
-#, fuzzy
 msgid "Press Start when ready"
 msgstr "Pressione Iniciar quando estiver pronto"
 
@@ -931,7 +909,7 @@ msgstr "Perfis"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
-msgstr ""
+msgstr "Pronto para digitalizar {0}"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
@@ -939,21 +917,21 @@ msgstr "Recuperar"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "Recuperar imagens digitalizadas"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
-msgstr ""
+msgstr "Recuperando"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr ""
+msgstr "Progresso da Recuperação"
 
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr ""
+msgstr "Lembrar essas configurações"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -1002,12 +980,12 @@ msgstr "Rotacionar"
 #: FDesktop.resx$tsRotateLeft.Text$Message
 #: FViewer.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
-msgstr "Rodar para esquerda"
+msgstr "Girar para esquerda"
 
 #: FDesktop.resx$tsRotateRight.Text$Message
 #: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
-msgstr "Rodar para direita"
+msgstr "Girar para direita"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1015,7 +993,7 @@ msgstr "Salvar imagens"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr ""
+msgstr "Progresso de Salvar Imagem"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
@@ -1023,7 +1001,7 @@ msgstr "Salvar PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr ""
+msgstr "Progresso de Salvamento do PDF"
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
@@ -1035,7 +1013,7 @@ msgstr "Salvar em múltiplos arquivos"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
-msgstr ""
+msgstr "Salvando resultados de lote"
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}"
@@ -1047,7 +1025,7 @@ msgstr "Escala"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 msgid "Scale With Window"
-msgstr ""
+msgstr "Ajustar à Janela"
 
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
@@ -1058,7 +1036,6 @@ msgid "Scan"
 msgstr "Digitalizar"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
-#, fuzzy
 msgid "Scan Configuration"
 msgstr "Configuração da digitalização"
 
@@ -1070,11 +1047,11 @@ msgstr "Imagem digitalizada"
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
-msgstr ""
+msgstr "Digitalizando página {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr ""
+msgstr "Digitalizando página {0} (Digitalizado {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
@@ -1124,15 +1101,14 @@ msgstr "Mostrar"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr ""
+msgstr "Única digitalização"
 
 #: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
 msgid "Skip save prompt"
-msgstr ""
+msgstr "Pular pedido de salvar"
 
 #: FBatchScan.resx$btnStart.Text$Message
-#, fuzzy
 msgid "Start"
 msgstr "Iniciar"
 
@@ -1183,7 +1159,6 @@ msgid "The selected scanner could not be found"
 msgstr "O scanner escolhido não foi encontrado"
 
 #: MiscResources.resx$NoFeederSupport$Message
-#, fuzzy
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
 "O scanner selecionado não suporta o uso de alimentador. Se o scanner tiver "
@@ -1204,7 +1179,6 @@ msgid "The selected scanner is offline"
 msgstr "O scanner escolhido está offline"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
-#, fuzzy
 msgid "Time between scans (seconds)"
 msgstr "Tempo entre digitalizações (segundos)"
 
@@ -1225,7 +1199,6 @@ msgid "US Letter (8.5x11 in)"
 msgstr "Ofício (8.5x11 pol)"
 
 #: MiscResources.resx$UnsavedChanges$Message
-#, fuzzy
 msgid "Unsaved Changes"
 msgstr "Alterações não salvas"
 
@@ -1234,7 +1207,6 @@ msgid "Update NAPS2"
 msgstr "Atualizar o NAPS2"
 
 #: FEditProfile.resx$rdbNative.Text$Message
-#, fuzzy
 msgid "Use native UI"
 msgstr "Usar WIA UI nativo"
 
@@ -1257,7 +1229,7 @@ msgstr "Versão {0}"
 #: FDesktop.resx$tsView.Text$Message
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
-msgstr "Ver"
+msgstr "Visualizar"
 
 #: FEditProfile.resx$rdWIA.Text$Message
 msgid "WIA Driver"
@@ -1269,16 +1241,15 @@ msgstr "Aguardando driver TWAIN"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr ""
+msgstr "Aguardando para digitalizar {0}"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
-#, fuzzy
 msgid "White Threshold"
 msgstr "Limiar de branco"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
@@ -1308,15 +1279,13 @@ msgstr "Zoom"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
-msgstr "Zoom Atual"
+msgstr "Tamanho Original"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
-#, fuzzy
 msgid "Zoom In"
 msgstr "Ampliar"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#, fuzzy
 msgid "Zoom Out"
 msgstr "Diminuir"
 
@@ -1351,7 +1320,7 @@ msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -1364,7 +1333,6 @@ msgid "{0} / {1} files"
 msgstr "{0}/{1} arquivos"
 
 #: FRecover.resx$lblPrompt.Text$Message
-#, fuzzy
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
 "{0} imagem(s) digitalizadas em {1} a {2} pode não ter sido salva mas é "
