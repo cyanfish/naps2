@@ -488,7 +488,7 @@ namespace NAPS2.WinForms
                 }
                 if (cp.Y > maxY)
                 {
-                    return profileManager.Profiles.Count;
+                    cp.Y = maxY;
                 }
                 var row = items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
                 dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
