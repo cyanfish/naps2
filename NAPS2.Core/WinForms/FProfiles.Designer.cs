@@ -45,13 +45,14 @@ namespace NAPS2.WinForms
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
-            this.ilProfileIcons = new ILProfileIcons(this.components);
+            this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.btnScan = new System.Windows.Forms.Button();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvProfiles
             // 
+            this.lvProfiles.AllowDrop = true;
             this.lvProfiles.ContextMenuStrip = this.contextMenuStrip;
             this.lvProfiles.HideSelection = false;
             resources.ApplyResources(this.lvProfiles, "lvProfiles");
@@ -59,7 +60,12 @@ namespace NAPS2.WinForms
             this.lvProfiles.Name = "lvProfiles";
             this.lvProfiles.UseCompatibleStateImageBehavior = false;
             this.lvProfiles.ItemActivate += new System.EventHandler(this.lvProfiles_ItemActivate);
+            this.lvProfiles.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lvProfiles_ItemDrag);
             this.lvProfiles.SelectedIndexChanged += new System.EventHandler(this.lvProfiles_SelectedIndexChanged);
+            this.lvProfiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragDrop);
+            this.lvProfiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragEnter);
+            this.lvProfiles.DragOver += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragOver);
+            this.lvProfiles.DragLeave += new System.EventHandler(this.lvProfiles_DragLeave);
             this.lvProfiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvProfiles_KeyDown);
             // 
             // contextMenuStrip

@@ -24,6 +24,7 @@ using System.Linq;
 
 namespace NAPS2.Scan
 {
+    [Serializable]
     public class ScanDevice
     {
         public ScanDevice(string id, string name)

@@ -155,6 +155,7 @@
   <ItemGroup>
     <Content Include="appsettings.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Setup\LanguageComponents.wxs">
       <AutoGen>True</AutoGen>

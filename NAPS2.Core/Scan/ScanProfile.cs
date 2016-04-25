@@ -29,6 +29,7 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan
 {
+    [Serializable]
     public class ScanProfile
     {
         public const int CURRENT_VERSION = 2;
@@ -121,6 +122,7 @@ namespace NAPS2.Scan
         public bool FlipDuplexedPages { get; set; }
     }
 
+    [Serializable]
     public class AutoSaveSettings
     {
         public AutoSaveSettings()
@@ -241,6 +243,7 @@ namespace NAPS2.Scan
         Custom
     }
 
+    [Serializable]
     public class PageDimensions
     {
         public decimal Width { get; set; }

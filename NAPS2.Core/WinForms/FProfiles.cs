@@ -20,9 +20,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -311,5 +314,157 @@ namespace NAPS2.WinForms
                 SelectProfile(x => x.IsDefault);
             }
         }
+
+        #region Drag/Drop
+
+        private void lvProfiles_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            // Provide drag data
+            if (lvProfiles.SelectedItems.Count > 0)
+            {
+                IDataObject ido = new DataObject();
+                int profileIndex = lvProfiles.SelectedItems[0].Index;
+                var profile = profileManager.Profiles[profileIndex];
+                ido.SetData(typeof(DirectProfileTransfer), new DirectProfileTransfer(profile));
+                DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
+            }
+        }
+
+        private void lvProfiles_DragEnter(object sender, DragEventArgs e)
+        {
+            // Determine if drop data is compatible
+            try
+            {
+                if (e.Data.GetDataPresent(typeof(DirectProfileTransfer).FullName))
+                {
+                    var data = (DirectProfileTransfer)e.Data.GetData(typeof(DirectProfileTransfer).FullName);
+                    e.Effect = data.ProcessID == Process.GetCurrentProcess().Id
+                        ? DragDropEffects.Move
+                        : DragDropEffects.Copy;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Error receiving drag/drop", ex);
+            }
+        }
+
+        private void lvProfiles_DragDrop(object sender, DragEventArgs e)
+        {
+            // Receive drop data
+            if (e.Data.GetDataPresent(typeof(DirectProfileTransfer).FullName))
+            {
+                var data = (DirectProfileTransfer)e.Data.GetData(typeof(DirectProfileTransfer).FullName);
+                if (data.ProcessID == Process.GetCurrentProcess().Id)
+                {
+                    DragMoveProfile(e);
+                }
+                else
+                {
+                    var profile = data.ScanProfile;
+                    profile.IsDefault = false;
+                    profile.IsLocked = false;
+                    profile.IsDeviceLocked = false;
+
+                    profileManager.Profiles.Add(profile);
+                    if (profileManager.Profiles.Count == 1)
+                    {
+                        profileManager.DefaultProfile = profile;
+                    }
+                    UpdateProfiles();
+                    SelectProfile(x => x == profile);
+                    profileManager.Save();
+                }
+            }
+            lvProfiles.InsertionMark.Index = -1;
+        }
+
+        private void lvProfiles_DragLeave(object sender, EventArgs e)
+        {
+            lvProfiles.InsertionMark.Index = -1;
+        }
+
+        private void DragMoveProfile(DragEventArgs e)
+        {
+            if (lvProfiles.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            int index = GetDragIndex(e);
+            if (index != -1)
+            {
+                var selectedIndex = lvProfiles.SelectedItems[0].Index;
+                var selectedProfile = profileManager.Profiles[selectedIndex];
+                if (selectedProfile.IsLocked)
+                {
+                    return;
+                }
+                while (index < profileManager.Profiles.Count && profileManager.Profiles[index].IsLocked)
+                {
+                    index++;
+                }
+                profileManager.Profiles.RemoveAt(selectedIndex);
+                if (index > selectedIndex)
+                {
+                    index--;
+                }
+                profileManager.Profiles.Insert(index, selectedProfile);
+                UpdateProfiles();
+                SelectProfile(x => x == selectedProfile);
+                profileManager.Save();
+            }
+        }
+
+        private void lvProfiles_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Effect == DragDropEffects.Move)
+            {
+                var index = GetDragIndex(e);
+                if (index == profileManager.Profiles.Count)
+                {
+                    lvProfiles.InsertionMark.Index = index - 1;
+                    lvProfiles.InsertionMark.AppearsAfterItem = true;
+                }
+                else
+                {
+                    lvProfiles.InsertionMark.Index = index;
+                    lvProfiles.InsertionMark.AppearsAfterItem = false;
+                }
+            }
+        }
+
+        private int GetDragIndex(DragEventArgs e)
+        {
+            Point cp = lvProfiles.PointToClient(new Point(e.X, e.Y));
+            ListViewItem dragToItem = lvProfiles.GetItemAt(cp.X, cp.Y);
+            if (dragToItem == null)
+            {
+                var items = lvProfiles.Items.Cast<ListViewItem>().ToList();
+                var minY = items.Select(x => x.Bounds.Top).Min();
+                var maxY = items.Select(x => x.Bounds.Bottom).Max();
+                if (cp.Y < minY)
+                {
+                    cp.Y = minY;
+                }
+                if (cp.Y > maxY)
+                {
+                    return profileManager.Profiles.Count;
+                }
+                var row = items.Where(x => x.Bounds.Top <= cp.Y && x.Bounds.Bottom >= cp.Y).OrderBy(x => x.Bounds.X).ToList();
+                dragToItem = row.FirstOrDefault(x => x.Bounds.Right >= cp.X) ?? row.LastOrDefault();
+            }
+            if (dragToItem == null)
+            {
+                return -1;
+            }
+            int dragToIndex = dragToItem.Index;
+            if (cp.X > (dragToItem.Bounds.X + dragToItem.Bounds.Width / 2))
+            {
+                dragToIndex++;
+            }
+            return dragToIndex;
+        }
+
+        #endregion
     }
 }
