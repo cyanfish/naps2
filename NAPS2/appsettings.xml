@@ -10,6 +10,7 @@
   <HidePrintButton>false</HidePrintButton>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
+  <LockUnspecifiedDevices>false</LockUnspecifiedDevices>
   <NoUserProfiles>false</NoUserProfiles>
   <AlwaysRememberDevice>false</AlwaysRememberDevice>
   <NoUpdatePrompt>false</NoUpdatePrompt>

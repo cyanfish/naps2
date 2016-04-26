@@ -72,7 +72,7 @@ namespace NAPS2.Config
                     foreach (var systemProfile in systemProfiles)
                     {
                         systemProfile.IsLocked = true;
-                        systemProfile.IsDeviceLocked = (systemProfile.Device != null);
+                        systemProfile.IsDeviceLocked = (systemProfile.Device != null || appConfigManager.Config.LockUnspecifiedDevices);
                     }
                     var systemProfileNames = new HashSet<string>(systemProfiles.Select(x => x.DisplayName));
                     foreach (var profile in Config.ToList())

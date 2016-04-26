@@ -55,6 +55,8 @@ namespace NAPS2.Config
 
         public bool LockSystemProfiles { get; set; }
 
+        public bool LockUnspecifiedDevices { get; set; }
+
         public bool NoUserProfiles { get; set; }
 
         public bool AlwaysRememberDevice { get; set; }
