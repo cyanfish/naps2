@@ -86,6 +86,13 @@ namespace NAPS2.WinForms
             UpdateProfiles();
             SelectProfile(x => x.IsDefault);
 
+            if (appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+            {
+                contextMenuStrip.Items.Remove(ctxCopy);
+                contextMenuStrip.Items.Remove(ctxPaste);
+                contextMenuStrip.Items.Remove(toolStripSeparator2);
+            }
+
             var lm = new LayoutManager(this)
                 .Bind(lvProfiles)
                     .WidthToForm()
@@ -296,7 +303,7 @@ namespace NAPS2.WinForms
                     item.Visible = true;
                 }
                 ctxSetDefault.Enabled = !SelectedProfile.IsDefault;
-                ctxEdit.Enabled = !SelectedProfile.IsLocked;
+                ctxEdit.Enabled = true;
                 ctxDelete.Enabled = !SelectedProfile.IsLocked;
                 ctxCopy.Enabled = true;
                 ctxPaste.Enabled = canPaste;
@@ -358,6 +365,10 @@ namespace NAPS2.WinForms
 
         private void ctxPaste_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+            {
+                return;
+            }
             var ido = Clipboard.GetDataObject();
             if (ido == null)
             {
@@ -385,6 +396,10 @@ namespace NAPS2.WinForms
         private void lvProfiles_DragEnter(object sender, DragEventArgs e)
         {
             // Determine if drop data is compatible
+            if (appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+            {
+                return;
+            }
             try
             {
                 if (e.Data.GetDataPresent(typeof(DirectProfileTransfer).FullName))
@@ -413,7 +428,10 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    AddProfile(data.ScanProfile);
+                    if (!(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked)))
+                    {
+                        AddProfile(data.ScanProfile);
+                    }
                 }
             }
             lvProfiles.InsertionMark.Index = -1;
