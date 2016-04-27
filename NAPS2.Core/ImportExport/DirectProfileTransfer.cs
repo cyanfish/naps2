@@ -14,6 +14,8 @@ namespace NAPS2.ImportExport
             ProcessID = Process.GetCurrentProcess().Id;
             ScanProfile = profile.Clone();
 
+            Locked = ScanProfile.IsLocked;
+
             ScanProfile.IsDefault = false;
             ScanProfile.IsLocked = false;
             ScanProfile.IsDeviceLocked = false;
@@ -22,5 +24,7 @@ namespace NAPS2.ImportExport
         public int ProcessID { get; private set; }
 
         public ScanProfile ScanProfile { get; private set; }
+
+        public bool Locked { get; private set; }
     }
 }

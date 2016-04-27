@@ -406,7 +406,9 @@ namespace NAPS2.WinForms
                 {
                     var data = (DirectProfileTransfer)e.Data.GetData(typeof(DirectProfileTransfer).FullName);
                     e.Effect = data.ProcessID == Process.GetCurrentProcess().Id
-                        ? DragDropEffects.Move
+                        ? data.Locked
+                            ? DragDropEffects.None
+                            : DragDropEffects.Move
                         : DragDropEffects.Copy;
                 }
             }
