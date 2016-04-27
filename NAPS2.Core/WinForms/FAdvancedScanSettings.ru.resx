@@ -394,7 +394,7 @@
         <value>5</value>
     </data>
     <data name="cbFlipDuplex.Text" xml:space="preserve">
-        <value>Flip duplexed pages</value>
+        <value>Развернуть дуплексные страницы</value>
     </data>
     <data name="&gt;&gt;cbFlipDuplex.Name" xml:space="preserve">
         <value>cbFlipDuplex</value>
@@ -424,7 +424,7 @@
         <value>4</value>
     </data>
     <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-        <value>Offset width based on alignment (WIA)</value>
+        <value>Смещение ширины при выравнивании (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
         <value>cbWiaOffsetWidth</value>

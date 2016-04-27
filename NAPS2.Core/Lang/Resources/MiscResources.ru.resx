@@ -385,28 +385,28 @@
         <value>Изображения</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>Выбранный сканер отключён.</value>
+        <value>Выбранный сканер занят.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>Крышка сканера открыта.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>В сканере застряла бумага.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>Разогрев сканера.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>Обновить распознавание.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>Изображение сохранено.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} изображений сохранено.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>PDF сохранен.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
         <value>{0} ({1}x{2} {3})</value>
