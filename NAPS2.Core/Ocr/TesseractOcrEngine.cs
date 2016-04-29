@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Xml.Linq;
 using NAPS2.Util;
 
@@ -69,6 +70,8 @@ namespace NAPS2.Ocr
                     try
                     {
                         tesseractProcess.Kill();
+                        // Wait a bit to give the process time to release its file handles
+                        Thread.Sleep(200);
                     }
                     catch (Exception e)
                     {
@@ -103,8 +106,15 @@ namespace NAPS2.Ocr
             }
             finally
             {
-                File.Delete(tempImageFilePath);
-                File.Delete(tempHocrFilePathWithExt);
+                try
+                {
+                    File.Delete(tempImageFilePath);
+                    File.Delete(tempHocrFilePathWithExt);
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error cleaning up OCR temp files", e);
+                }
             }
         }
 
