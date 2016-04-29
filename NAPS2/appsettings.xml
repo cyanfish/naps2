@@ -18,6 +18,7 @@
   <DisableSaveNotifications>false</DisableSaveNotifications>
   <SingleInstance>false</SingleInstance>
   <ComponentsPath></ComponentsPath>
+  <OcrTimeoutInSeconds>60</OcrTimeoutInSeconds>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
     <!--

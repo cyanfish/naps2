@@ -6,18 +6,22 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
+using NAPS2.Config;
 using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {
     public class TesseractOcrEngine : IOcrEngine
     {
-        private const int TESSERACT_TIMEOUT_MS = 60 * 1000;
-        private readonly OcrDependencyManager ocrDependencyManager;
+        private const int DEFAULT_TIMEOUT = 60 * 1000;
 
-        public TesseractOcrEngine(OcrDependencyManager ocrDependencyManager)
+        private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly AppConfigManager appConfigManager;
+
+        public TesseractOcrEngine(OcrDependencyManager ocrDependencyManager, AppConfigManager appConfigManager)
         {
             this.ocrDependencyManager = ocrDependencyManager;
+            this.appConfigManager = appConfigManager;
         }
 
         public bool CanProcess(string langCode)
@@ -64,7 +68,12 @@ namespace NAPS2.Ocr
                     Log.Error("Couldn't start OCR process.");
                     return null;
                 }
-                if (!tesseractProcess.WaitForExit(TESSERACT_TIMEOUT_MS))
+                var timeout = (int)(appConfigManager.Config.OcrTimeoutInSeconds * 1000);
+                if (timeout == 0)
+                {
+                    timeout = DEFAULT_TIMEOUT;
+                }
+                if (!tesseractProcess.WaitForExit(timeout))
                 {
                     Log.Error("OCR process timed out.");
                     try

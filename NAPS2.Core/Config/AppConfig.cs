@@ -71,6 +71,8 @@ namespace NAPS2.Config
 
         public string ComponentsPath { get; set; }
 
+        public double OcrTimeoutInSeconds { get; set; }
+
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }
 }
