@@ -163,7 +163,7 @@
         <value>cm</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>in</value>
+        <value>tum</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
         <value>mm</value>
@@ -184,7 +184,7 @@
         <value>B5 (176x250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>Anpassad...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>US Legal (8.5x14 in)</value>
@@ -214,13 +214,13 @@
         <value>Glas</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>Standard</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>Inbyggd (endast inbyggt användargränssnitt)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>Gammal DSM</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>
