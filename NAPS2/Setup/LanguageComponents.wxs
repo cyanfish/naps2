@@ -144,12 +144,12 @@
           <File Source="..\NAPS2\bin\InstallerMSI\pl\NAPS2.Core.resources.dll" Id="LangFile_pl" />
         </Component>
       </Directory>
-      <Directory Id="LangFolder_pt_BR" Name="pt_BR">
+      <Directory Id="LangFolder_pt_BR" Name="pt-BR">
         <Component Id="LangComponent_pt_BR">
           <File Source="..\NAPS2\bin\InstallerMSI\pt-BR\NAPS2.Core.resources.dll" Id="LangFile_pt_BR" />
         </Component>
       </Directory>
-      <Directory Id="LangFolder_pt_PT" Name="pt_PT">
+      <Directory Id="LangFolder_pt_PT" Name="pt-PT">
         <Component Id="LangComponent_pt_PT">
           <File Source="..\NAPS2\bin\InstallerMSI\pt-PT\NAPS2.Core.resources.dll" Id="LangFile_pt_PT" />
         </Component>
@@ -174,12 +174,12 @@
           <File Source="..\NAPS2\bin\InstallerMSI\sq\NAPS2.Core.resources.dll" Id="LangFile_sq" />
         </Component>
       </Directory>
-      <Directory Id="LangFolder_sr_Cyrl" Name="sr_Cyrl">
+      <Directory Id="LangFolder_sr_Cyrl" Name="sr-Cyrl">
         <Component Id="LangComponent_sr_Cyrl">
           <File Source="..\NAPS2\bin\InstallerMSI\sr-Cyrl\NAPS2.Core.resources.dll" Id="LangFile_sr_Cyrl" />
         </Component>
       </Directory>
-      <Directory Id="LangFolder_sr_Latn" Name="sr_Latn">
+      <Directory Id="LangFolder_sr_Latn" Name="sr-Latn">
         <Component Id="LangComponent_sr_Latn">
           <File Source="..\NAPS2\bin\InstallerMSI\sr-Latn\NAPS2.Core.resources.dll" Id="LangFile_sr_Latn" />
         </Component>
@@ -199,7 +199,7 @@
           <File Source="..\NAPS2\bin\InstallerMSI\uk\NAPS2.Core.resources.dll" Id="LangFile_uk" />
         </Component>
       </Directory>
-      <Directory Id="LangFolder_zh_TW" Name="zh_TW">
+      <Directory Id="LangFolder_zh_TW" Name="zh-TW">
         <Component Id="LangComponent_zh_TW">
           <File Source="..\NAPS2\bin\InstallerMSI\zh-TW\NAPS2.Core.resources.dll" Id="LangFile_zh_TW" />
         </Component>

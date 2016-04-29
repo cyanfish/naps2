@@ -33,7 +33,7 @@
     foreach(var folder in outputDir.EnumerateDirectories()) {
         var langName = folder.Name;
 #>
-      <Directory Id="LangFolder_<#= langName.Replace("-", "_") #>" Name="<#= langName.Replace("-", "_") #>">
+      <Directory Id="LangFolder_<#= langName.Replace("-", "_") #>" Name="<#= langName #>">
         <Component Id="LangComponent_<#= langName.Replace("-", "_") #>">
           <File Source="..\NAPS2\bin\InstallerMSI\\<#= langName #>\NAPS2.Core.resources.dll" Id="LangFile_<#= langName.Replace("-", "_") #>" />
         </Component>
