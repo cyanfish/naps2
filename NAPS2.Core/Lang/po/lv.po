@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 22:06+0000\n"
-"PO-Revision-Date: 2016-05-18 09:59+0000\n"
-"Last-Translator: Antonino <antoninomurabito@gmail.com>\n"
+"POT-Creation-Date: 2016-05-18 15:23+0000\n"
+"PO-Revision-Date: 2016-05-19 13:14+0000\n"
+"Last-Translator: karlis <karlis.irmejs@limbazi.lv>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: it\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1463565593.000000\n"
+"X-POOTLE-MTIME: 1463663653.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -32,7 +32,7 @@ msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "Colore a 24-bit"
+msgstr "24-bitu krāsa"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
@@ -53,7 +53,7 @@ msgstr "800 dpi"
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "E' disponibile una nuova versione di NAPS2. Vuoi aggiornare ora?"
+msgstr "Pieejama jaunāka NAPS2 versija. Vai vēlaties atjaunināt tūlīt?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -70,19 +70,19 @@ msgstr "A5 (148x210 mm)"
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
 msgid "About"
-msgstr "Informazioni"
+msgstr "Par"
 
 #: FScanProgress.resx$$this.Text$Message
 msgid "Acquiring data"
-msgstr "Acquisizione dati"
+msgstr "Iegūst datus"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
-msgstr "Avanzate"
+msgstr "Papildu"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
 msgid "Advanced Profile Settings"
-msgstr "Impostazioni avanzate di profilo"
+msgstr "Papildu profila iestatījumi"
 
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
@@ -90,147 +90,147 @@ msgstr "Impostazioni avanzate di profilo"
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr "Tutti ({0})"
+msgstr "Visi ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr "Tutti i files"
+msgstr "Visas datnes"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
-msgstr "Consenti Annotazioni"
+msgstr "Atļaut anotācijas"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr "Consenti la Copia dei Contenuti"
+msgstr "Atļaut satura kopēšanu"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "Consenti la Copia dei contenuti per Accessibilità"
+msgstr "Atļaut pieejamības satura kopēšanu"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr "Consenti Composizione Documento"
+msgstr "Atļaut dokumenta montāžu"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
-msgstr "Consenti Modifica Documento"
+msgstr "Atļaut dokumenta modificēšanu"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr "Consenti Compilazione Modulo"
+msgstr "Atļaut veidlapas aizpildīšanu"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr "Consenti Stampa ad alta qualità"
+msgstr "Atļaut augstākās kvalitātes drukāšanu"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
-msgstr "Consenti stampa"
+msgstr "Atļaut drukāšanu"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr "Deinterleave alternativo"
+msgstr "Noņemt pretēju kārtojumu"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr "Interleave alternativo"
+msgstr "Pārkārtot pretēji"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
-msgstr "Si è verificato un errore durante il salvataggio automatico"
+msgstr "Notika kļūda mēģinot veikt automātisko saglabāšanu"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr "Si è verificato un errore durante il salvataggio del file"
+msgstr "Notika kļūda mēģinot saglabāt datni"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr "Si è verificato un errore durante l'invio di una email"
+msgstr "Notika kļūda mēģinot nosūtīt e-pastu"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "Errore del driver di scansione"
+msgstr "Notika kļūda ar skenēšanas draiveri"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr "Errore sconosciuto durante la scansione batch"
+msgstr "Notika nezināma kļūda partijas skenēšanas laikā"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr "E' disponibile un aggiornamento per l'OCR"
+msgstr "Pieejams OCR atjauninājums"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
-msgstr "Applica luminosità/contrasto dopo la scansione"
+msgstr "Pēc skenēšanas koriģēt spilgtumu/kontrastu"
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
-msgstr "Applica a tutte le {0} immagini selezionate"
+msgstr "Pielietot visiem {0} iezīmētajiem attēliem"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Vuoi cancellare il(i) {0} oggetto(i)?"
+msgstr "Vai tiešām vēlaties notīrīt {0} vienumu(s)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete "{0}"?"
-msgstr "Sicuro di voler eliminare \"{0}\"?"
+msgstr "Vai tiešām vēlaties dzēst \"{0}\"?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Vuoi eliminare il profilo {0}?"
+msgstr "Vai tiešām vēlaties dzēst profilu {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Vuoi eliminare {0} oggetto(i)?"
+msgstr "Vai tiešām vēlaties dzēst {0} vienumu(s)?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Vuoi eliminare {0} profilo(i)?"
+msgstr "Vai tiešām vēlaties dzēst {0} profilus?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "Sicuro di voler annullare i cambiamenti a {0} immagine(i)?"
+msgstr "Vai tiešām vēlaties atsaukt jūsu veiktās izmaiņas {0} attēlam(iem)?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr "Nome allegato"
+msgstr "Pielikuma nosaukums"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr "Autore"
+msgstr "Autors"
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
 msgid "Auto Save Settings"
-msgstr "Salva impostazioni automaticamente"
+msgstr "Automātiski saglabāt iestatījumus"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr "Autoincrementa numero (1 cifra)"
+msgstr "Automātiski palielināt skaitli (1 cipars)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "Autoincrementa numero (2 cifre)"
+msgstr "Automātiski palielināt skaitli (2 cipari)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "Autoincrementa numero (3 cifre)"
+msgstr "Automātiski palielināt skaitli (3 cipari)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "Autoincrementa numero (4 cifre)"
+msgstr "Automātiski palielināt skaitli (4 cipari)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr "Aggiornamenti automatici"
+msgstr "Automātiskie atjauninājumi"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr "B4 (250×353 mm)"
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
@@ -239,42 +239,42 @@ msgstr "B5 (176x250 mm)"
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
 msgid "Batch Scan"
-msgstr "Scansione in serie"
+msgstr "Partijas skenēšana"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled"
-msgstr "Scansione in serie annullata"
+msgstr "Partija atcelta"
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully"
-msgstr "Serie completata"
+msgstr "Partija veiksmīgi pabeigta"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
-msgstr "Scansione in serie arrestata a causa di un errore"
+msgstr "Partijas skenēšana apstājās kļūdas dēļ"
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
-msgstr "Profondità di bit"
+msgstr "Bitu dziļums"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "Bitmap Files (*.bmp)"
+msgstr "Bitmap datnes (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
-msgstr "Bianco e nero"
+msgstr "Melns & balts"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
-msgstr "Pagine vuote"
+msgstr "Tukšās lapas"
 
 #: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
-msgstr "Luminosità"
+msgstr "Spilgtums"
 
 #: FImageSettings.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
@@ -298,119 +298,119 @@ msgstr "Luminosità"
 #: FBrightness.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
-msgstr "Annulla"
+msgstr "Atcelt"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
-msgstr "Annullamento"
+msgstr "Atceļ"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr "Centra"
+msgstr "Centrēt"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr "Scegli Profilo"
+msgstr "Izvēlies profilu"
 
 #: FEditProfile.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
-msgstr "Scegli Dispositivo"
+msgstr "Izvēlies ierīci"
 
 #: FDesktop.resx$tsClear.Text$Message
 #: MiscResources.resx$Clear$Message
 msgid "Clear"
-msgstr "Cancella"
+msgstr "Notīrīt"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr "Elimina immagini dopo il salvataggio"
+msgstr "Notīrīt attēlus pēc saglabāšanas"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr "Chiudi"
+msgstr "Aizvērt"
 
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 msgid "Compatibility"
-msgstr "Compatibilità"
+msgstr "Savietojamība"
 
 #: FDesktop.resx$tsContrast.Text$Message
 #: FViewer.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
-msgstr "Contrasto"
+msgstr "Kontrasts"
 
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
-msgstr "Copia"
+msgstr "Kopēt"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr "Progresso della copia"
+msgstr "Kopēšanas progress"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
-msgstr "Copia in corso"
+msgstr "Kopē"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
-msgstr "Copyright © 2009 Pavel Sorejs"
+msgstr "Autortiesības © 2009 Pavel Sorejs"
 
 #: FAbout.resx__1$labelCopyright.Text$Message
 msgid "Copyright © 2012 Michael Adams"
-msgstr "Copyright © 2012 Michael Adams"
+msgstr "Autortiesības © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr "Copyright © 2012-2014 Ben Olden-Cooligan"
+msgstr "Autortiesības © 2012-2015 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
-msgstr "Copyright © 2013 Peter De Leeuw"
+msgstr "Autortiesības © 2013 Peter De Leeuw"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
-msgstr "Soglia di copertura"
+msgstr "Pārklājuma slieksnis"
 
 #: FDesktop.resx$tsCrop.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
-msgstr "Taglia"
+msgstr "Apgriezt"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr "Personalizzato"
+msgstr "Pielāgots"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr "Personalizzato ({0}x{1} {2})"
+msgstr "Pielāgots ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr "Formato Pagina Personalizzato"
+msgstr "Pielāgots lapas izmērs"
 
 #: FDesktop.resx$tsCustomRotation.Text$Message
 #: FViewer.resx$tsCustomRotation.Text$Message
 msgid "Custom Rotation"
-msgstr "Rotazione Personalizzata"
+msgstr "Pielāgota pagriešana"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
-msgstr "Giorno (01-31)"
+msgstr "Diena (01-31)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
 msgid "Default"
-msgstr "Predefinito"
+msgstr "Noklusētais"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Path"
-msgstr "Percorso File Predefinito"
+msgstr "Noklusētais datnes ceļš"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "Deinterleave"
+msgstr "Noņemt kārtojumu"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
@@ -420,81 +420,81 @@ msgstr "Deinterleave"
 #: MiscResources.resx$Delete$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
-msgstr "Elimina"
+msgstr "Dzēst"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
-msgstr "Dispositivo"
+msgstr "Ierīce"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
-msgstr "Dimensioni"
+msgstr "Izmēri"
 
 #: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
-msgstr "Nome visualizzato"
+msgstr "Parādāmais nosaukums"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr "Vuoi che NAPS2 controlli automaticamente gli aggiornamenti?"
+msgstr "Vai vēlaties lai NAPS2 veic automātisku atjauninājumu pārbaudi?"
 
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
-msgstr "Fatto"
+msgstr "Pabeigts"
 
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 #: MiscResources.resx$Download$Message
 msgid "Download"
-msgstr "Scarica"
+msgstr "Lejupielādēt"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "Errore nel download"
+msgstr "Lejupielādes kļūda"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr "Avanzamento Download"
+msgstr "Lejupielādes progress"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
-msgstr "Scarica e Installa"
+msgstr "Lejupielādēt un instalēt"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "Fronte/Retro"
+msgstr "Duplekss"
 
 #: FProfiles.resx$btnEdit.Text$Message
 #: FProfiles.resx$ctxEdit.Text$Message
 msgid "Edit"
-msgstr "Modifica"
+msgstr "Rediģēt"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "Email PDF"
+msgstr "PDF uz e-pastu"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "Progresso invio PDF via email"
+msgstr "PDF uz e-pastu progress"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
 msgid "Email Settings"
-msgstr "Impostazioni email"
+msgstr "E-pasta iestatījumi"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
-msgstr "Abilita salvataggio automatico"
+msgstr "Iespējot automātisku saglabāšanu"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr "Cripta il PDF"
+msgstr "Šifrēt PDF"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr "Criptare"
+msgstr "Šifrēšana"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -502,12 +502,12 @@ msgstr "Enhanced Windows MetaFile (*.emf)"
 
 #: MiscResources.resx$Error$Message
 msgid "Error"
-msgstr "Errore"
+msgstr "Kļūda"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 msgid "Estimated download size: {0} MB"
-msgstr "Dimensione stimata del download: {0} MB"
+msgstr "Paredzamais lejupielādes izmērs: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -515,164 +515,164 @@ msgstr "Exchangeable Image File (*.exif)"
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
-msgstr "Esclude pagine vuote"
+msgstr "Izlaist tukšās lapas"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Caricatore"
+msgstr "Padevējs"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr "Nome file"
+msgstr "Datnes nosaukums"
 
 #: FBatchScan.resx$lblFilePath.Text$Message
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr "Percorso del file"
+msgstr "Datnes ceļš"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
 msgid "Flip"
-msgstr "Capovolgi"
+msgstr "Apvērst"
 
 #: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
 msgid "Flip duplexed pages"
-msgstr "Capovolgi pagine fronte-retro"
+msgstr "Apvērst dupleksās lapas"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
-"Per le alte qualità JPEG (80+), usare l'opzione Massima Qualità del profilo "
-"per risultati migliori"
+"Augstai JPEG kvalitātei (80+) izmantojiet profila iestatījumu \"Maksimālā "
+"kvalitāte\", lai iegūtu labāko rezultātu"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Force matching page size"
-msgstr "Forza corrispondenza dimensione pagina"
+msgstr "Uzspiest atbilstību lapas izmēriem"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF File (*.gif)"
+msgstr "GIF datne (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr "Installa altre lingue"
+msgstr "Iegūt vairāk valodu"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "Piano"
+msgstr "Stikls"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr "Scala di grigi"
+msgstr "Pelēktoņu"
 
 #: FEditProfile.resx$label9.Text$Message
 msgid "Horizontal align"
-msgstr "Allineamento orizzontale"
+msgstr "Līdzināt horizontāli"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr "Ora (0-23)"
+msgstr "Stunda (0-23)"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
-msgstr "Trova icone da"
+msgstr "Ikonas no"
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
-msgstr "Immagine"
+msgstr "Attēls"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr "Files immagini"
+msgstr "Attēlu datnes"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
-msgstr "Qualità immagine"
+msgstr "Attēla kvalitāte"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
 msgid "Image Settings"
-msgstr "Impostazioni immagine"
+msgstr "Attēla iestatījumi"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr "Immagine salvata"
+msgstr "Attēls saglabāts"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
-msgstr "Importa"
+msgstr "Importēt"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr "Avanzamento importazione"
+msgstr "Importēšanas progress"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
-msgstr "Importazione"
+msgstr "Importē"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
-msgstr "Importazione di {0}"
+msgstr "Importē {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
-msgstr "Installazione completata"
+msgstr "Instalēšana pabeigta"
 
 #: MiscResources.resx$InstallFailedTitle$Message
 msgid "Installation Failed"
-msgstr "Installazione non riuscita"
+msgstr "Instalēšana neizdevās"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Installazione completata. Vuoi riavviare NAPS2 ora?"
+msgstr "Instalēšana pabeigta. Vai vēlaties tagad pārstartēt NAPS2?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
-msgstr "Installazione non riuscita"
+msgstr "Instalēšana neizdevās"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "Interleave"
+msgstr "Pārkārtot"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "JPEG File (*.jpg, *.jpeg)"
+msgstr "JPEG datne (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr "Qualità Jpeg"
+msgstr "JPEG kvalitāte"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr "Parole chiave"
+msgstr "Atslēgvārdi"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
-msgstr "Lingua"
+msgstr "Valoda"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr "Sinistra"
+msgstr "Pa kreisi"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr "Eredita (solo UI nativo)"
+msgstr "Savietojams (tikai standarta saskarne)"
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
-msgstr "Carica immagini in NAPS2"
+msgstr "Ielādēt attēlus NAPS2"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
-msgstr "Barra principale"
+msgstr "Galvenā rīkjosla"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Rendi il PDF ricercabile usando l'OCR"
+msgstr "Padarīt PDF meklējamus, izmantojot OCR"
 
 #: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr "Massima qualità (files grandi)"
+msgstr "Maksimālā kvalitāte (lielas datnes)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
@@ -680,32 +680,32 @@ msgstr "Metadati"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr "Minuti (00-59)"
+msgstr "Minūte (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
-msgstr "Mese (01-12)"
+msgstr "Mēnesis (01-12)"
 
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 #: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
-msgstr "Maggiori informazioni"
+msgstr "Vairāk informācijas"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
-msgstr "Sposta giù"
+msgstr "Pārvietot uz leju"
 
 #: FDesktop.resx$tsMove.TextFirst$Message
 msgid "Move Up"
-msgstr "Sposta su"
+msgstr "Pārvietot uz augšu"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr "Scansioni multiple (ritardo fisso per ognuna)"
+msgstr "Vairākas skenēšanas (fiksēta aizture starp skenējumiem)"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "Scansioni multiple (richiesta tra ognuna)"
+msgstr "Vairākas skenēšanas (jautāt starp skenējumiem)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -713,39 +713,39 @@ msgstr "NAPS2"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr "Nome (opzionale)"
+msgstr "Nosaukums (neobligāts)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr "Nome mancante"
+msgstr "Nav nosaukuma"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
-msgstr "Nuovo"
+msgstr "Jauns"
 
 #: FDesktop.resx$tsNewProfile.Text$Message
 msgid "New Profile"
-msgstr "Nuovo Profilo"
+msgstr "Jauns profils"
 
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
-msgstr "Avanti"
+msgstr "Nākamais"
 
 #: FBatchPrompt.resx$$this.Text$Message
 msgid "Next Scan"
-msgstr "Prossima Scansione"
+msgstr "Nākamais skenējums"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
-msgstr "Nessun dispositivo selezionato"
+msgstr "Nav izvēlēta ierīce"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr "Non ci sono fogli nel caricatore"
+msgstr "Padevē nav lapu"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr "Nessuno scanner non trovato"
+msgstr "Netika atrasta skenēšanas ierīce"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -755,11 +755,11 @@ msgstr "Not Another PDF Scanner 2"
 #: FRecover.resx$btnCancel.Text$Message
 #: MiscResources.resx$NotNow$Message
 msgid "Not Now"
-msgstr "Non ora"
+msgstr "Ne tagad"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr "Numero di scansioni"
+msgstr "Skenējumu skaits"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
@@ -767,15 +767,15 @@ msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr "Scarica OCR"
+msgstr "OCR lejupielāde"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "Installa OCR"
+msgstr "OCR uzstādīšana"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr "Lingua OCR"
+msgstr "OCR valoda"
 
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FEditProfile.resx$btnOK.Text$Message
@@ -797,76 +797,75 @@ msgstr "OK"
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr "Bilanciamento larghezza in base ad allineamento (WIA)"
+msgstr "Platuma nobīde pēc pielīdzināšanas (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
-#, fuzzy
 msgid "Old DSM"
-msgstr "Vecchio DSM"
+msgstr "Vecais DSM"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
-msgstr "Una pagina per file"
+msgstr "Lappuse vienā datnē"
 
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr "Un file per scansione"
+msgstr "Skenējums vienā datnē"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
-msgstr "Uno o più files non possono essere scaricati"
+msgstr "Vienu vai vairākas datnes nevarēja lejupielādēt"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
-msgstr "Apri cartella"
+msgstr "Atvērt mapi"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr "Output"
+msgstr "Izvade"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
-msgstr "Sovrascrivi file"
+msgstr "Pārrakstīt datni"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr "Password Proprietario"
+msgstr "Īpašnieka parole"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr "Documento PDF (*.pdf)"
+msgstr "PDF dokuments (*.pdf)"
 
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 msgid "PDF Settings"
-msgstr "Impostazioni PDF"
+msgstr "PDF iestatījumi"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr "PDF salvato"
+msgstr "PDF saglabāts"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr "PNG File (*.png)"
+msgstr "PNG datne (*.png)"
 
 #: FEditProfile.resx$label4.Text$Message
 msgid "Page size"
-msgstr "Dimensione pagina"
+msgstr "Lappuses izmērs"
 
 #: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
-msgstr "Alimentazione carta"
+msgstr "Papīra avots"
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
-msgstr "Password"
+msgstr "Parole"
 
 #: FDesktop.resx$ctxPaste.Text$Message
 msgid "Paste"
-msgstr "Incolla"
+msgstr "Ielīmēt"
 
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
@@ -876,32 +875,32 @@ msgstr "Incolla"
 #: FPlaceholders.resx$$this.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr "Segnaposti"
+msgstr "Vietrāži"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr "Premere avvia quando pronti"
+msgstr "Nospied Sākt, kad gatavs"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
 msgid "Preview"
-msgstr "Anteprima"
+msgstr "Priekšskatījums"
 
 #: FViewer.resx$tsPrev.Text$Message
 msgid "Previous"
-msgstr "Precedente"
+msgstr "Iepriekšējais"
 
 #: FDesktop.resx$tsPrint.Text$Message
 msgid "Print"
-msgstr "Stampa"
+msgstr "Drukāt"
 
 #: FBatchScan.resx$lblProfile.Text$Message
 msgid "Profile"
-msgstr "Profilo"
+msgstr "Profils"
 
 #: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
-msgstr "Configurazione Profilo"
+msgstr "Profila iestatījumi"
 
 #: FDesktop.resx$tsProfiles.Text$Message
 #: FProfiles.resx$$this.Text$Message
@@ -910,123 +909,123 @@ msgstr "Profili"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
-msgstr "Pronto per la scansione {0}"
+msgstr "Gatavs skenēšanai {0}"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
-msgstr "Ripristino"
+msgstr "Atgūt"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr "Ripristino Immagini Digitalizzate"
+msgstr "Atgūt skenētos attēlus"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
-msgstr "Ripristino"
+msgstr "Atgūst"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr "Progresso del ripristino"
+msgstr "Atgūšanas progress"
 
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr "Ricorda queste impostazioni"
+msgstr "Atcerēties šos iestatījumus"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
-msgstr "Riordina"
+msgstr "Pārkārtot"
 
 #: FDesktop.resx$tsReset.Text$Message
 msgid "Reset"
-msgstr "Azzera"
+msgstr "Atiestatīt"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr "Resetta Immagine"
+msgstr "Atiestatīt attēlu"
 
 #: FEditProfile.resx$label5.Text$Message
 msgid "Resolution"
-msgstr "Risoluzione"
+msgstr "Izšķirtspēja"
 
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr "Ripristina predefiniti"
+msgstr "Atiestatīt uz noklusēto"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
-msgstr "Inverso"
+msgstr "Apvērst"
 
 #: FRotate.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
-msgstr "Inverti"
+msgstr "Atgriezt"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
-msgstr "Destra"
+msgstr "Pa labi"
 
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
 msgid "Rotate"
-msgstr "Ruota"
+msgstr "Pagriezt"
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 #: FViewer.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
-msgstr "Ruota a sinistra"
+msgstr "Pagriezt pa kreisi"
 
 #: FDesktop.resx$tsRotateRight.Text$Message
 #: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
-msgstr "Ruota a destra"
+msgstr "Pagriezt pa labi"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
-msgstr "Salva Immagine"
+msgstr "Saglabāt attēlus"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr "Progresso del salvataggio immagini"
+msgstr "Attēlu saglabāšanas progress"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
-msgstr "Salva PDF"
+msgstr "Saglabāt PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr "Progresso del salvataggio PDF"
+msgstr "PDF saglabāšanas progress"
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr "Salva in un singolo file"
+msgstr "Saglabāt vienā datnē"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
-msgstr "Salva in files multipli"
+msgstr "Saglabāt vairākās datnēs"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
-msgstr "Salvataggio risultati della serie"
+msgstr "Saglabā partijas rezultātus"
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}"
-msgstr "Salvataggio {0}"
+msgstr "Saglabā {0}"
 
 #: FEditProfile.resx$label10.Text$Message
 msgid "Scale"
-msgstr "Scala"
+msgstr "Mērogs"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 msgid "Scale With Window"
-msgstr "Adatta alla finestra"
+msgstr "Mērogot ar logu"
 
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
@@ -1034,49 +1033,49 @@ msgstr "Adatta alla finestra"
 #: MiscResources.resx$Scan$Message
 #: FProfiles.resx$ctxScan.Text$Message
 msgid "Scan"
-msgstr "Scansiona"
+msgstr "Skenēt"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
 msgid "Scan Configuration"
-msgstr "Configurazione della scansione"
+msgstr "Skenēšanas konfigurācija"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
-msgstr "Immagine scansionata"
+msgstr "Skenētais attēls"
 
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
-msgstr "Digitalizzazione pagina {0}"
+msgstr "Skenē {0}. lappusi"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr "Scansione pagina {0} (scansione {1})"
+msgstr "Skenē {0}. lappusi (skenējums {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr "Secondi (00-59)"
+msgstr "Sekunde (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
 msgid "Select"
-msgstr "Seleziona"
+msgstr "Izvēlēties"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
-msgstr "Seleziona tutto"
+msgstr "Izvēlēties visu"
 
 #: FSelectDevice.resx$$this.Text$Message
 msgid "Select Source"
-msgstr "Seleziona sorgente"
+msgstr "Izvēlēties avotu"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Seleziona profilo prima di scansionare"
+msgstr "Izvēlieties profilu pirms spiest uz Skenēt"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr "Seleziona una o più lingue"
+msgstr "Izvēlieties vienu vai vairākas valodas"
 
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
@@ -1084,170 +1083,169 @@ msgstr "Seleziona una o più lingue"
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
-msgstr "Selezionato ({0})"
+msgstr "Izvēlēti ({0})"
 
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T (TWAIN only)"
-msgstr "Separare i file con Patch-T (solo TWAIN)"
+msgstr "Atdalīt datnes pēc Patch-T (tikai TWAIN)"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
-msgstr "Imposta predefinito"
+msgstr "Uzstādīt noklusējumu"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
-msgstr "Mostra"
+msgstr "Rādīt"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr "Scansione singola"
+msgstr "Viens skenējums"
 
 #: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
 msgid "Skip save prompt"
-msgstr "Salta richiesta di salvataggio"
+msgstr "Izlaist saglabāšanas dialogu"
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
-msgstr "Avvio"
+msgstr "Sākt"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr "Oggetto"
+msgstr "Temats"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr "TIFF File (*.tiff, *.tif)"
+msgstr "TIFF datne (*.tiff, *.tif)"
 
 #: FEditProfile.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
-msgstr "Driver TWAIN"
+msgstr "TWAIN draiveris"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
-msgstr "Il file '{0}' non può essere importato"
+msgstr "Datni '{0}' nevarēja importēt"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
-"Il file '{0}' non può essere importato. Solo i PDF generati da NAPS2 possono "
-"essere importati"
+"Datni '{0}' nevarēja importēt. Importēt iespējams tikai ar NAPS2 ģenerētas "
+"PDF datnes"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Il file {0} esiste già. Vuoi sovrascriverlo?"
+msgstr "Datne {0} jau pastāv. Vai vēlaties to pārrakstīt?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
-msgstr ""
-"Il seguente file è criptato ed è richiesta una password per aprirlo: {0}"
+msgstr "Sekojošā datne ir šifrēta un atvēršanai pieprasa paroli: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
-msgstr "Carta inceppata nello scanner"
+msgstr "Skenerī ir iesprūdis papīrs"
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up"
-msgstr "Riscaldamento scanner"
+msgstr "Skeneris uzsilst"
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
-msgstr "Coperchio dello scanner aperto"
+msgstr "Skenera vāks ir atvērts"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
-msgstr "Il dispositivo selezionato non è stato trovato"
+msgstr "Izvēlēto skeneri nevar atrast"
 
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
-"Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo "
-"scanner ha un alimentatore, prova un driver differente"
+"Izvēlētais skeneris neatbalsta dokumentu padevi. Ja jūsu skenerim ir padeve, "
+"mēģiniet izmantot citu draiveri"
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr ""
-"Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner dispone "
-"di supporto duplex, provare un driver differente"
+"Izvēlētais skeneris neatbalsta dupleksu. Ja jūsu skenerim ir paredzēts "
+"duplekss, mēģiniet izmantot citu draiveri"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
-msgstr "Lo scanner selezionato non è in linea"
+msgstr "Izvēlētais skeneris ir aizņemts"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
-msgstr "Il dispositivo selezionato non è in linea"
+msgstr "Izvēlētais skeneris ir bezsaistē"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
-msgstr "Tempo tra le scansioni (secondi)"
+msgstr "Laiks starp skenēšanām (sekundes)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr "Titolo"
+msgstr "Virsraksts"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
 msgid "Twain Implementation"
-msgstr "Implementazione Twain"
+msgstr "TWAIN realizācija"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x14 in)"
+msgstr "US Legal (8.5x14 collas)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US Letter (8.5x11 in)"
+msgstr "US Letter (8.5x11 collas)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
-msgstr "Modifiche non salvate"
+msgstr "Nesaglabātās izmaiņas"
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
-msgstr "Aggiorna NAPS2"
+msgstr "Atjaunināt NAPS2"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
-msgstr "Usa UI nativo"
+msgstr "Lietot noklusējuma saskarni"
 
 #: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
-msgstr "Usa configurazione predefinita"
+msgstr "Lietot iepriekšdefinētos iestatījumus"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr "Password utente"
+msgstr "Lietotāja parole"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr "L'uso dell'OCR richiede che venga scaricata ogni lingua che vuoi usare"
+msgstr "Lai lietotu OCR, jums jālejupielādē katra valoda, kuru vēlaties skenēt"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
-msgstr "Versione {0}"
+msgstr "Versija {0}"
 
 #: FDesktop.resx$tsView.Text$Message
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
-msgstr "Visualizza"
+msgstr "Skatīt"
 
 #: FEditProfile.resx$rdWIA.Text$Message
 msgid "WIA Driver"
-msgstr "Driver WIA"
+msgstr "WIA draiveris"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
-msgstr "In attesa di TWAIN per completare"
+msgstr "Gaida TWAIN, lai pabeigtu"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr "Attesa per la scansione {0} "
+msgstr "Gaida skenēšanu {0}"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
-msgstr "Soglia bianco"
+msgstr "Baltā slieksnis"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
@@ -1255,41 +1253,41 @@ msgstr "X"
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
-msgstr "Anno"
+msgstr "Gads"
 
 #: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
-msgstr "Anno (00-99)"
+msgstr "Gads (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'"
-msgstr "Non hai i parmessi per copiare il contenuto del file '{0}'"
+msgstr "Jums nav atļaujas kopēt saturu no datnes '{0}'"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "Non puoi salvare i files in questo percorso"
+msgstr "Jums nav atļaujas saglabāt datnes šajā vietā"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
 msgstr ""
-"Ci sono modifiche non salvate. Sicuro di voler uscire ed eliminare tali "
-"modifiche?"
+"Jums ir nesaglabātas izmaiņas. Vai jūs tiešām gribat iziet un atmest šīs "
+"izmaiņas?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
-msgstr "Zoom"
+msgstr "Mērogs"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
-msgstr "Zoom Attuale"
+msgstr "Oriģinālais izmērs"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
 msgid "Zoom In"
-msgstr "Aumenta Zoom"
+msgstr "Palielināt"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
 msgid "Zoom Out"
-msgstr "Riduci Zoom"
+msgstr "Samazināt"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
@@ -1305,7 +1303,7 @@ msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "in"
+msgstr "collas"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
@@ -1314,7 +1312,7 @@ msgstr "mm"
 #: MiscResources.resx$OfN$Message
 #: FViewer.resx$lblPageTotal.Text$Message
 msgid "of {0}"
-msgstr "di {0}"
+msgstr "no {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
@@ -1332,60 +1330,18 @@ msgstr "{0} / {1} MB"
 #: MiscResources.resx$FilesProgressFormat$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
-msgstr "{0} / {1} files"
+msgstr "{0} / {1} datnes"
 
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
 msgstr ""
-"{0} immagine(i) digitalizzata(e) su {1} a {2} potrebbero non essere state "
-"salvate e si possono recuperare. Vuoi farlo?"
+"{0} attēls(i), kas skenēti {1} {2}, iespējams nav saglabāti un ir atgūstami. "
+"Vai vēlaties tos atgūt?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
-msgstr "{0} immagini salvate"
+msgstr "{0} attēli saglabāti"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
-msgstr "{0} di {1}"
-
-#~ msgid "Default File Name"
-#~ msgstr "Nome File Predefinito"
-
-#~ msgid "Substitutions"
-#~ msgstr "Sostituzione"
-
-#~ msgid "PDF document (*.pdf)"
-#~ msgstr "PDF document (*.pdf)"
-
-#~ msgid "Saving to PDF"
-#~ msgstr "Salva come PDF"
-
-#~ msgid "http://sourceforge.com/projects/naps2"
-#~ msgstr "http://sourceforge.com/projects/naps2"
-
-#~ msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
-#~ msgstr "Copyright © 2012-2014 Ben Olden-Cooligan"
-
-#~ msgid "Add"
-#~ msgstr "Aggiungi"
-
-#~ msgid "Choose Icon"
-#~ msgstr "Scegli Icona"
-
-#~ msgid "Manage Profiles"
-#~ msgstr "Gestione Profili"
-
-#~ msgid "Zoom in"
-#~ msgstr "Aumenta Zoom"
-
-#~ msgid "Zoom out"
-#~ msgstr "Riduci Zoom"
-
-#~ msgid "Use native WIA UI"
-#~ msgstr "Usa WIA UI nativo"
-
-#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
-#~ msgstr "Copyright © 2012-2013 Ben Olden-Cooligan"
-
-#~ msgid "FTwainGui"
-#~ msgstr "FTwainGui"
+msgstr "{0} no {1}"

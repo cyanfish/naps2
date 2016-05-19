@@ -3932,6 +3932,7 @@
     <None Include="Lang\po\it.po" />
     <None Include="Lang\po\ko.po" />
     <None Include="Lang\po\lt.po" />
+    <None Include="Lang\po\lv.po" />
     <None Include="Lang\po\nb.po" />
     <None Include="Lang\po\nl.po" />
     <None Include="Lang\po\pl.po" />
@@ -3947,6 +3948,7 @@
     <None Include="Lang\po\templates.pot" />
     <None Include="Lang\po\tr.po" />
     <None Include="Lang\po\uk.po" />
+    <None Include="Lang\po\zh-CHS.po" />
     <None Include="Lang\po\zh-TW.po" />
     <None Include="packages.config" />
     <None Include="Icons\accept-small.png" />
