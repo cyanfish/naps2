@@ -222,4 +222,7 @@
   <data name="sr_Latn" xml:space="preserve">
     <value>Srpski</value>
   </data>
+  <data name="lv" xml:space="preserve">
+    <value>Latviešu valoda</value>
+  </data>
 </root>

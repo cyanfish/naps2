@@ -21,6 +21,7 @@
       <ComponentRef Id="LangComponent_it" />
       <ComponentRef Id="LangComponent_ko" />
       <ComponentRef Id="LangComponent_lt" />
+      <ComponentRef Id="LangComponent_lv" />
       <ComponentRef Id="LangComponent_nb" />
       <ComponentRef Id="LangComponent_nl" />
       <ComponentRef Id="LangComponent_pl" />
@@ -35,6 +36,7 @@
       <ComponentRef Id="LangComponent_sv" />
       <ComponentRef Id="LangComponent_tr" />
       <ComponentRef Id="LangComponent_uk" />
+      <ComponentRef Id="LangComponent_zh_CHS" />
       <ComponentRef Id="LangComponent_zh_TW" />
     </ComponentGroup>
 
@@ -129,6 +131,11 @@
           <File Source="..\NAPS2\bin\InstallerMSI\lt\NAPS2.Core.resources.dll" Id="LangFile_lt" />
         </Component>
       </Directory>
+      <Directory Id="LangFolder_lv" Name="lv">
+        <Component Id="LangComponent_lv">
+          <File Source="..\NAPS2\bin\InstallerMSI\lv\NAPS2.Core.resources.dll" Id="LangFile_lv" />
+        </Component>
+      </Directory>
       <Directory Id="LangFolder_nb" Name="nb">
         <Component Id="LangComponent_nb">
           <File Source="..\NAPS2\bin\InstallerMSI\nb\NAPS2.Core.resources.dll" Id="LangFile_nb" />
@@ -197,6 +204,11 @@
       <Directory Id="LangFolder_uk" Name="uk">
         <Component Id="LangComponent_uk">
           <File Source="..\NAPS2\bin\InstallerMSI\uk\NAPS2.Core.resources.dll" Id="LangFile_uk" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_zh_CHS" Name="zh-CHS">
+        <Component Id="LangComponent_zh_CHS">
+          <File Source="..\NAPS2\bin\InstallerMSI\zh-CHS\NAPS2.Core.resources.dll" Id="LangFile_zh_CHS" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_zh_TW" Name="zh-TW">

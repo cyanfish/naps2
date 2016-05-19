@@ -241,6 +241,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Latviešu valoda.
+        /// </summary>
+        internal static string lv {
+            get {
+                return ResourceManager.GetString("lv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bokmål.
         /// </summary>
         internal static string nb {
