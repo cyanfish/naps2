@@ -118,43 +118,43 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ChooseProfile" xml:space="preserve">
-        <value>Scegli Profilo</value>
+        <value>Izvēlies profilu</value>
     </data>
     <data name="Clear" xml:space="preserve">
-        <value>Cancella</value>
+        <value>Notīrīt</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Vuoi cancellare il(i) {0} oggetto(i)?</value>
+        <value>Vai tiešām vēlaties notīrīt {0} vienumu(s)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Vuoi eliminare {0} oggetto(i)?</value>
+        <value>Vai tiešām vēlaties dzēst {0} vienumu(s)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Vuoi eliminare {0} profilo(i)?</value>
+        <value>Vai tiešām vēlaties dzēst {0} profilus?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Vuoi eliminare il profilo {0}?</value>
+        <value>Vai tiešām vēlaties dzēst profilu {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>Il file {0} esiste già. Vuoi sovrascriverlo?</value>
+        <value>Datne {0} jau pastāv. Vai vēlaties to pārrakstīt?</value>
     </data>
     <data name="Delete" xml:space="preserve">
-        <value>Elimina</value>
+        <value>Dzēst</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>Il dispositivo selezionato non è stato trovato.</value>
+        <value>Izvēlēto skeneri nevar atrast.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>Il dispositivo selezionato non è in linea.</value>
+        <value>Izvēlētais skeneris ir bezsaistē.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Non puoi salvare i files in questo percorso.</value>
+        <value>Jums nav atļaujas saglabāt datnes šajā vietā.</value>
     </data>
     <data name="Error" xml:space="preserve">
-        <value>Errore</value>
+        <value>Kļūda</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Bitmap Files (*.bmp)</value>
+        <value>Bitmap datnes (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
         <value>Enhanced Windows MetaFile (*.emf)</value>
@@ -163,250 +163,250 @@
         <value>Exchangeable Image File (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
-        <value>GIF File (*.gif)</value>
+        <value>GIF datne (*.gif)</value>
     </data>
     <data name="FileTypeJpeg" xml:space="preserve">
-        <value>JPEG File (*.jpg, *.jpeg)</value>
+        <value>JPEG datne (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>Documento PDF (*.pdf)</value>
+        <value>PDF dokuments (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>PNG File (*.png)</value>
+        <value>PNG datne (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>TIFF datne (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
-        <value>Nome mancante.</value>
+        <value>Nav nosaukuma.</value>
     </data>
     <data name="NAPS2" xml:space="preserve">
         <value>NAPS2</value>
     </data>
     <data name="NoDeviceSelected" xml:space="preserve">
-        <value>Nessun dispositivo selezionato.</value>
+        <value>Nav izvēlēta ierīce.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>Nessuno scanner non trovato.</value>
+        <value>Netika atrasta skenēšanas ierīce.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
-        <value>Sovrascrivi file</value>
+        <value>Pārrakstīt datni</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
-        <value>{0} di {1}</value>
+        <value>{0} no {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
-        <value>Immagine scansionata</value>
+        <value>Skenētais attēls</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Seleziona profilo prima di scansionare.</value>
+        <value>Izvēlieties profilu pirms spiest uz Skenēt.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Errore del driver di scansione.</value>
+        <value>Notika kļūda ar skenēšanas draiveri.</value>
     </data>
     <data name="Version" xml:space="preserve">
-        <value>Versione {0}</value>
+        <value>Versija {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>Si è verificato un errore durante l'invio di una email.</value>
+        <value>Notika kļūda mēģinot nosūtīt e-pastu.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Aggiornamenti automatici</value>
+        <value>Automātiskie atjauninājumi</value>
     </data>
     <data name="Download" xml:space="preserve">
-        <value>Scarica</value>
+        <value>Lejupielādēt</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>Scarica e Installa</value>
+        <value>Lejupielādēt un instalēt</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Vuoi che NAPS2 controlli automaticamente gli aggiornamenti?</value>
+        <value>Vai vēlaties lai NAPS2 veic automātisku atjauninājumu pārbaudi?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Non ora</value>
+        <value>Ne tagad</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>E' disponibile una nuova versione di NAPS2. Vuoi aggiornare ora?</value>
+        <value>Pieejama jaunāka NAPS2 versija. Vai vēlaties atjaunināt tūlīt?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Installazione completata</value>
+        <value>Instalēšana pabeigta</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Installazione completata. Vuoi riavviare NAPS2 ora?</value>
+        <value>Instalēšana pabeigta. Vai vēlaties tagad pārstartēt NAPS2?</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installazione non riuscita.</value>
+        <value>Instalēšana neizdevās.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installazione non riuscita</value>
+        <value>Instalēšana neizdevās</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>Tutti ({0})</value>
+        <value>Visi ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selezionato ({0})</value>
+        <value>Izvēlēti ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
-        <value>Dimensione stimata del download: {0} MB</value>
+        <value>Paredzamais lejupielādes izmērs: {0} MB</value>
     </data>
     <data name="FilesProgressFormat" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} datnes</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
         <value>{0} / {1} MB</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
-        <value>Il file '{0}' non può essere importato.</value>
+        <value>Datni '{0}' nevarēja importēt.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>Il file '{0}' non può essere importato. Solo i PDF generati da NAPS2 possono essere importati.</value>
+        <value>Datni '{0}' nevarēja importēt. Importēt iespējams tikai ar NAPS2 ģenerētas PDF datnes.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
-        <value>Errore nel download</value>
+        <value>Lejupielādes kļūda</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>Uno o più files non possono essere scaricati.</value>
+        <value>Vienu vai vairākas datnes nevarēja lejupielādēt.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Personalizzato ({0}x{1} {2})</value>
+        <value>Pielāgots ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
-        <value>Scansiona</value>
+        <value>Skenēt</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Sicuro di voler annullare i cambiamenti a {0} immagine(i)?</value>
+        <value>Vai tiešām vēlaties atsaukt jūsu veiktās izmaiņas {0} attēlam(iem)?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Resetta Immagine</value>
+        <value>Atiestatīt attēlu</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>Ci sono modifiche non salvate. Sicuro di voler uscire ed eliminare tali modifiche?</value>
+        <value>Jums ir nesaglabātas izmaiņas. Vai jūs tiešām gribat iziet un atmest šīs izmaiņas?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Modifiche non salvate</value>
+        <value>Nesaglabātās izmaiņas</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Digitalizzazione pagina {0}</value>
+        <value>Skenē {0}. lappusi</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo scanner ha un alimentatore, prova un driver differente.</value>
+        <value>Izvēlētais skeneris neatbalsta dokumentu padevi. Ja jūsu skenerim ir padeve, mēģiniet izmantot citu draiveri.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>Non ci sono fogli nel caricatore.</value>
+        <value>Padevē nav lapu.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>Non hai i parmessi per copiare il contenuto del file '{0}'.</value>
+        <value>Jums nav atļaujas kopēt saturu no datnes '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>Si è verificato un errore durante il salvataggio del file.</value>
+        <value>Notika kļūda mēģinot saglabāt datni.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>di {0}</value>
+        <value>no {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>Errore sconosciuto durante la scansione batch.</value>
+        <value>Notika nezināma kļūda partijas skenēšanas laikā.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Scansione in serie annullata.</value>
+        <value>Partija atcelta.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Annullamento....</value>
+        <value>Atceļ....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Serie completata.</value>
+        <value>Partija veiksmīgi pabeigta.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Scansione in serie arrestata a causa di un errore.</value>
+        <value>Partijas skenēšana apstājās kļūdas dēļ.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>Digitalizzazione pagina {0}...</value>
+        <value>Skenē {0}. lappusi...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Scansione pagina {0} (scansione {1})...</value>
+        <value>Skenē {0}. lappusi (skenējums {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Attesa per la scansione {0} ...</value>
+        <value>Gaida skenēšanu {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
-        <value>Annulla</value>
+        <value>Atcelt</value>
     </data>
     <data name="Close" xml:space="preserve">
-        <value>Chiudi</value>
+        <value>Aizvērt</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Salvataggio risultati della serie...</value>
+        <value>Saglabā partijas rezultātus...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner dispone di supporto duplex, provare un driver differente.</value>
+        <value>Izvēlētais skeneris neatbalsta dupleksu. Ja jūsu skenerim ir paredzēts duplekss, mēģiniet izmantot citu draiveri.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importazione di {0}...</value>
+        <value>Importē {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Avanzamento importazione</value>
+        <value>Importēšanas progress</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Ripristino...</value>
+        <value>Atgūst...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Progresso del ripristino</value>
+        <value>Atgūšanas progress</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Progresso del salvataggio immagini</value>
+        <value>Attēlu saglabāšanas progress</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Progresso del salvataggio PDF</value>
+        <value>PDF saglabāšanas progress</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Salvataggio {0}...</value>
+        <value>Saglabā {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copia in corso...</value>
+        <value>Kopē...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Progresso della copia</value>
+        <value>Kopēšanas progress</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importazione...</value>
+        <value>Importē...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>Progresso invio PDF via email</value>
+        <value>PDF uz e-pastu progress</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>Si è verificato un errore durante il salvataggio automatico.</value>
+        <value>Notika kļūda mēģinot veikt automātisko saglabāšanu.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>Tutti i files</value>
+        <value>Visas datnes</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Files immagini</value>
+        <value>Attēlu datnes</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>Lo scanner selezionato non è in linea.</value>
+        <value>Izvēlētais skeneris ir aizņemts.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>Coperchio dello scanner aperto.</value>
+        <value>Skenera vāks ir atvērts.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>Carta inceppata nello scanner.</value>
+        <value>Skenerī ir iesprūdis papīrs.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>Riscaldamento scanner.</value>
+        <value>Skeneris uzsilst.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>E' disponibile un aggiornamento per l'OCR.</value>
+        <value>Pieejams OCR atjauninājums.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Immagine salvata.</value>
+        <value>Attēls saglabāts.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} immagini salvate.</value>
+        <value>{0} attēli saglabāti.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF salvato.</value>
+        <value>PDF saglabāts.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
         <value>{0} ({1}x{2} {3})</value>

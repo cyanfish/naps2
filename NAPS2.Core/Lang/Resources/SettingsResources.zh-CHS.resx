@@ -117,103 +117,112 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
+    <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
+        <value>Black &amp; White</value>
     </data>
-    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>215, 41</value>
+    <data name="BitDepth_24Color" xml:space="preserve">
+        <value>24位色彩</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
+    <data name="BitDepth_8Grayscale" xml:space="preserve">
+        <value>Grayscale</value>
     </data>
-    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
+    <data name="Dpi_100" xml:space="preserve">
+        <value>100 dpi</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
-        <value>Annulla</value>
+    <data name="Dpi_1200" xml:space="preserve">
+        <value>1200 dpi</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="Dpi_150" xml:space="preserve">
+        <value>150 dpi</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="Dpi_200" xml:space="preserve">
+        <value>200 dpi</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="Dpi_300" xml:space="preserve">
+        <value>300 dpi</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>1</value>
+    <data name="Dpi_400" xml:space="preserve">
+        <value>400 dpi</value>
     </data>
-    <data name="btnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
+    <data name="Dpi_600" xml:space="preserve">
+        <value>600 dpi</value>
     </data>
-    <data name="btnSelect.Location" type="System.Drawing.Point, System.Drawing">
-        <value>215, 12</value>
+    <data name="Dpi_800" xml:space="preserve">
+        <value>800 dpi</value>
     </data>
-    <data name="btnSelect.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
+    <data name="HorizontalAlign_Center" xml:space="preserve">
+        <value>居中</value>
     </data>
-    <data name="btnSelect.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
+    <data name="HorizontalAlign_Left" xml:space="preserve">
+        <value>Left</value>
     </data>
-    <data name="btnSelect.Text" xml:space="preserve">
-        <value>&amp;Seleziona</value>
+    <data name="HorizontalAlign_Right" xml:space="preserve">
+        <value>Right</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Name" xml:space="preserve">
-        <value>btnSelect</value>
+    <data name="PageSizeUnit_Centimetre" xml:space="preserve">
+        <value>cm</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="PageSizeUnit_Inch" xml:space="preserve">
+        <value>in</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="PageSizeUnit_Millimetre" xml:space="preserve">
+        <value>mm</value>
     </data>
-    <data name="&gt;&gt;btnSelect.ZOrder" xml:space="preserve">
-        <value>2</value>
+    <data name="PageSize_A3" xml:space="preserve">
+        <value>A3 (297x420 mm)</value>
     </data>
-    <data name="listboxDevices.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 12</value>
+    <data name="PageSize_A4" xml:space="preserve">
+        <value>A4 (210x297 mm)</value>
     </data>
-    <data name="listboxDevices.Size" type="System.Drawing.Size, System.Drawing">
-        <value>197, 108</value>
+    <data name="PageSize_A5" xml:space="preserve">
+        <value>A5 (148x210 mm)</value>
     </data>
-    <data name="listboxDevices.TabIndex" type="System.Int32, mscorlib">
-        <value>3</value>
+    <data name="PageSize_B4" xml:space="preserve">
+        <value>B4 (250x353 mm)</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Name" xml:space="preserve">
-        <value>listboxDevices</value>
+    <data name="PageSize_B5" xml:space="preserve">
+        <value>B5 (176x250 mm)</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="PageSize_Custom" xml:space="preserve">
+        <value>Custom...</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Parent" xml:space="preserve">
-        <value>$this</value>
+    <data name="PageSize_Legal" xml:space="preserve">
+        <value>US Legal (8.5x14 in)</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.ZOrder" xml:space="preserve">
-        <value>0</value>
+    <data name="PageSize_Letter" xml:space="preserve">
+        <value>US Letter (8.5x11 in)</value>
     </data>
-    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-        <value>True</value>
-    </metadata>
-    <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-        <value>6, 13</value>
+    <data name="Scale_1_1" xml:space="preserve">
+        <value>1:1</value>
     </data>
-    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>302, 132</value>
+    <data name="Scale_1_2" xml:space="preserve">
+        <value>1:2</value>
     </data>
-    <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-        <value>CenterParent</value>
+    <data name="Scale_1_4" xml:space="preserve">
+        <value>1:4</value>
     </data>
-    <data name="$this.Text" xml:space="preserve">
-        <value>Seleziona sorgente</value>
+    <data name="Scale_1_8" xml:space="preserve">
+        <value>1:8</value>
     </data>
-    <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FSelectDevice</value>
+    <data name="Source_Duplex" xml:space="preserve">
+        <value>Duplex</value>
     </data>
-    <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.1.32878, Culture=neutral, PublicKeyToken=null</value>
+    <data name="Source_Feeder" xml:space="preserve">
+        <value>Feeder</value>
+    </data>
+    <data name="Source_Glass" xml:space="preserve">
+        <value>Glass</value>
+    </data>
+    <data name="TwainImpl_Default" xml:space="preserve">
+        <value>Default</value>
+    </data>
+    <data name="TwainImpl_Legacy" xml:space="preserve">
+        <value>Legacy (native UI only)</value>
+    </data>
+    <data name="TwainImpl_OldDsm" xml:space="preserve">
+        <value>Old DSM</value>
+    </data>
+    <data name="TwainImpl_X64" xml:space="preserve">
+        <value>x64</value>
     </data>
 </root>

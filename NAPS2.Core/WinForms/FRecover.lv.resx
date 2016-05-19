@@ -117,23 +117,94 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>215, 41</value>
+    <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
+        <value>Microsoft Sans Serif, 8.25pt</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
+    <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 9</value>
+    </data>
+    <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
+        <value>372, 46</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
+        <value>0</value>
+    </data>
+    <data name="lblPrompt.Text" xml:space="preserve">
+        <value>{0} attēls(i), kas skenēti {1} {2}, iespējams nav saglabāti un ir atgūstami. Vai vēlaties tos atgūt?</value>
+    </data>
+    <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
+        <value>lblPrompt</value>
+    </data>
+    <data name="&gt;&gt;lblPrompt.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;lblPrompt.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="btnRecover.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 58</value>
+    </data>
+    <data name="btnRecover.Size" type="System.Drawing.Size, System.Drawing">
+        <value>120, 30</value>
+    </data>
+    <data name="btnRecover.TabIndex" type="System.Int32, mscorlib">
+        <value>1</value>
+    </data>
+    <data name="btnRecover.Text" xml:space="preserve">
+        <value>Atgūt</value>
+    </data>
+    <data name="&gt;&gt;btnRecover.Name" xml:space="preserve">
+        <value>btnRecover</value>
+    </data>
+    <data name="&gt;&gt;btnRecover.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnRecover.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;btnRecover.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
+    <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
+        <value>138, 58</value>
+    </data>
+    <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
+        <value>120, 30</value>
+    </data>
+    <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
+        <value>2</value>
+    </data>
+    <data name="btnDelete.Text" xml:space="preserve">
+        <value>&amp;Dzēst</value>
+    </data>
+    <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
+        <value>btnDelete</value>
+    </data>
+    <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+        <value>264, 58</value>
+    </data>
+    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+        <value>120, 30</value>
+    </data>
+    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+        <value>3</value>
+    </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Annulla</value>
+        <value>&amp;Ne tagad</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -145,54 +216,6 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
-    <data name="btnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="btnSelect.Location" type="System.Drawing.Point, System.Drawing">
-        <value>215, 12</value>
-    </data>
-    <data name="btnSelect.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
-    </data>
-    <data name="btnSelect.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
-    </data>
-    <data name="btnSelect.Text" xml:space="preserve">
-        <value>&amp;Seleziona</value>
-    </data>
-    <data name="&gt;&gt;btnSelect.Name" xml:space="preserve">
-        <value>btnSelect</value>
-    </data>
-    <data name="&gt;&gt;btnSelect.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;btnSelect.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;btnSelect.ZOrder" xml:space="preserve">
-        <value>2</value>
-    </data>
-    <data name="listboxDevices.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 12</value>
-    </data>
-    <data name="listboxDevices.Size" type="System.Drawing.Size, System.Drawing">
-        <value>197, 108</value>
-    </data>
-    <data name="listboxDevices.TabIndex" type="System.Int32, mscorlib">
-        <value>3</value>
-    </data>
-    <data name="&gt;&gt;listboxDevices.Name" xml:space="preserve">
-        <value>listboxDevices</value>
-    </data>
-    <data name="&gt;&gt;listboxDevices.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;listboxDevices.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;listboxDevices.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -202,18 +225,19 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>302, 132</value>
+        <value>396, 100</value>
     </data>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Seleziona sorgente</value>
+        <value>Atgūt skenētos attēlus</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FSelectDevice</value>
+        <value>FRecover</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.1.32878, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31793, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

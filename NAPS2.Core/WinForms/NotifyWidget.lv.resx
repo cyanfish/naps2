@@ -117,83 +117,110 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
+    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>215, 41</value>
+    <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
+        <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
-    </data>
-    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
-    </data>
-    <data name="btnCancel.Text" xml:space="preserve">
-        <value>Annulla</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
-    <data name="btnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="lblTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnSelect.Location" type="System.Drawing.Point, System.Drawing">
-        <value>215, 12</value>
+    <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+        <value>7, 8</value>
     </data>
-    <data name="btnSelect.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
+    <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+        <value>0, 13</value>
     </data>
-    <data name="btnSelect.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
+    <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+        <value>0</value>
     </data>
-    <data name="btnSelect.Text" xml:space="preserve">
-        <value>&amp;Seleziona</value>
+    <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+        <value>lblTitle</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Name" xml:space="preserve">
-        <value>btnSelect</value>
+    <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;btnSelect.Parent" xml:space="preserve">
+    <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnSelect.ZOrder" xml:space="preserve">
-        <value>2</value>
-    </data>
-    <data name="listboxDevices.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 12</value>
-    </data>
-    <data name="listboxDevices.Size" type="System.Drawing.Size, System.Drawing">
-        <value>197, 108</value>
-    </data>
-    <data name="listboxDevices.TabIndex" type="System.Int32, mscorlib">
+    <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Name" xml:space="preserve">
-        <value>listboxDevices</value>
+    <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+        <value>7, 27</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>150, 13</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Parent" xml:space="preserve">
+    <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
+        <value>1</value>
+    </data>
+    <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
+        <value>linkLabel1</value>
+    </data>
+    <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.ZOrder" xml:space="preserve">
-        <value>0</value>
+    <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="btnClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+        <value>Flat</value>
+    </data>
+    <data name="btnClose.Font" type="System.Drawing.Font, System.Drawing">
+        <value>Microsoft Sans Serif, 12pt</value>
+    </data>
+    <data name="btnClose.Location" type="System.Drawing.Point, System.Drawing">
+        <value>136, 4</value>
+    </data>
+    <data name="btnClose.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+        <value>0, 0, 1, 1</value>
+    </data>
+    <data name="btnClose.Size" type="System.Drawing.Size, System.Drawing">
+        <value>20, 20</value>
+    </data>
+    <data name="btnClose.TabIndex" type="System.Int32, mscorlib">
+        <value>2</value>
+    </data>
+    <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
+        <value>btnClose</value>
+    </data>
+    <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <metadata name="hideTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <value>17, 17</value>
+    </metadata>
+    <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <value>123, 17</value>
+    </metadata>
+    <data name="openFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+        <value>139, 22</value>
+    </data>
+    <data name="openFolderToolStripMenuItem.Text" xml:space="preserve">
+        <value>Atvērt mapi</value>
+    </data>
+    <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>140, 26</value>
+    </data>
+    <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+        <value>contextMenuStrip1</value>
+    </data>
+    <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
@@ -201,19 +228,25 @@
     <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
         <value>6, 13</value>
     </data>
-    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>302, 132</value>
+    <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+        <value>160, 50</value>
     </data>
-    <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-        <value>CenterParent</value>
+    <data name="&gt;&gt;hideTimer.Name" xml:space="preserve">
+        <value>hideTimer</value>
     </data>
-    <data name="$this.Text" xml:space="preserve">
-        <value>Seleziona sorgente</value>
+    <data name="&gt;&gt;hideTimer.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;openFolderToolStripMenuItem.Name" xml:space="preserve">
+        <value>openFolderToolStripMenuItem</value>
+    </data>
+    <data name="&gt;&gt;openFolderToolStripMenuItem.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FSelectDevice</value>
+        <value>NotifyWidget</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.1.32878, Culture=neutral, PublicKeyToken=null</value>
+        <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
 </root>

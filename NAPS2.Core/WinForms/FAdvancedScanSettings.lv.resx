@@ -160,7 +160,7 @@
         <value>19</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Annulla</value>
+        <value>Atcelt</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -190,7 +190,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>Massima qualità (files grandi)</value>
+        <value>Maksimālā kvalitāte (lielas datnes)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>
@@ -268,7 +268,7 @@
         <value>35</value>
     </data>
     <data name="groupBox1.Text" xml:space="preserve">
-        <value>Qualità immagine</value>
+        <value>Attēla kvalitāte</value>
     </data>
     <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
         <value>groupBox1</value>
@@ -364,7 +364,7 @@
         <value>36</value>
     </data>
     <data name="groupBox2.Text" xml:space="preserve">
-        <value>Compatibilità</value>
+        <value>Savietojamība</value>
     </data>
     <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
         <value>groupBox2</value>
@@ -394,7 +394,7 @@
         <value>5</value>
     </data>
     <data name="cbFlipDuplex.Text" xml:space="preserve">
-        <value>Capovolgi pagine fronte-retro</value>
+        <value>Apvērst dupleksās lapas</value>
     </data>
     <data name="&gt;&gt;cbFlipDuplex.Name" xml:space="preserve">
         <value>cbFlipDuplex</value>
@@ -424,7 +424,7 @@
         <value>4</value>
     </data>
     <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-        <value>Bilanciamento larghezza in base ad allineamento (WIA)</value>
+        <value>Platuma nobīde pēc pielīdzināšanas (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
         <value>cbWiaOffsetWidth</value>
@@ -451,7 +451,7 @@
         <value>3</value>
     </data>
     <data name="cbForcePageSize.Text" xml:space="preserve">
-        <value>Forza corrispondenza dimensione pagina</value>
+        <value>Uzspiest atbilstību lapas izmēriem</value>
     </data>
     <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
         <value>cbForcePageSize</value>
@@ -478,7 +478,7 @@
         <value>2</value>
     </data>
     <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-        <value>Applica luminosità/contrasto dopo la scansione</value>
+        <value>Pēc skenēšanas koriģēt spilgtumu/kontrastu</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.Name" xml:space="preserve">
         <value>cbBrightnessContrastAfterScan</value>
@@ -526,7 +526,7 @@
         <value>0</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Implementazione Twain:</value>
+        <value>TWAIN realizācija:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -634,7 +634,7 @@
         <value>37</value>
     </data>
     <data name="groupBox3.Text" xml:space="preserve">
-        <value>Pagine vuote</value>
+        <value>Tukšās lapas</value>
     </data>
     <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
         <value>groupBox3</value>
@@ -664,7 +664,7 @@
         <value>38</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Soglia di copertura</value>
+        <value>Pārklājuma slieksnis</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -691,7 +691,7 @@
         <value>37</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Soglia bianco</value>
+        <value>Baltā slieksnis</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -823,7 +823,7 @@
         <value>17</value>
     </data>
     <data name="cbExcludeBlankPages.Text" xml:space="preserve">
-        <value>Esclude pagine vuote</value>
+        <value>Izlaist tukšās lapas</value>
     </data>
     <data name="&gt;&gt;cbExcludeBlankPages.Name" xml:space="preserve">
         <value>cbExcludeBlankPages</value>
@@ -853,7 +853,7 @@
         <value>38</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Ripristina predefiniti</value>
+        <value>Atiestatīt uz noklusēto</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -906,7 +906,7 @@
         <value>400, 487</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Impostazioni avanzate di profilo</value>
+        <value>Papildu profila iestatījumi</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>
