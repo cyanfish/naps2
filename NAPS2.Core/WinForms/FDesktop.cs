@@ -139,6 +139,7 @@ namespace NAPS2.WinForms
             thumbnailList1.ThumbnailRenderer = thumbnailRenderer;
             int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
+            SetThumbnailSpacing(thumbnailSize);
 
             if (appConfigManager.Config.HideEmailButton)
             {
@@ -1690,9 +1691,22 @@ namespace NAPS2.WinForms
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             thumbnailList1.RegenerateThumbnailList(imageList.Images);
 
+            SetThumbnailSpacing(thumbnailSize);
+
             // Render high-quality thumbnails at the new size in a background task
             // The existing (poorly scaled) thumbnails are used in the meantime
             RenderThumbnails(thumbnailSize, imageList.Images.ToList());
+        }
+
+        private void SetThumbnailSpacing(int thumbnailSize)
+        {
+            const int LVM_FIRST = 0x1000;
+            const int LVM_SETICONSPACING = LVM_FIRST + 53;
+            int leftPadding = 8;
+            int topPadding = 8;
+            int width = thumbnailSize + leftPadding * 2;
+            int height = thumbnailSize + topPadding * 2;
+            Win32.SendMessage(thumbnailList1.Handle, LVM_SETICONSPACING, IntPtr.Zero, (IntPtr) (int) (((ushort) width) | (uint) (height << 16)));
         }
 
         private void RenderThumbnails(int thumbnailSize, IEnumerable<ScannedImage> imagesToRenderThumbnailsFor)
