@@ -77,27 +77,9 @@ namespace NAPS2.Ocr
             get { return Components.Tesseract304.IsInstalled || Components.Tesseract304Xp.IsInstalled; }
         }
 
-        public class OcrComponents
-        {
-            public readonly OcrComponent Tesseract304Xp = new OcrComponent(@"tesseract-3.0.4\tesseract_xp.exe");
-
-            public readonly OcrComponent Tesseract304 = new OcrComponent(@"tesseract-3.0.4\tesseract.exe");
-
-            public readonly OcrComponent Tesseract302 = new OcrComponent(@"tesseract-3.0.2\tesseract.exe");
-
-            public readonly IDictionary<string, OcrComponent> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.4\tessdata", x.Filename.Replace(".gz", ""))));
-
-            public readonly IDictionary<string, OcrComponent> Tesseract302Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.2\tessdata", x.Filename.Replace(".gz", ""))));
-        }
-
-        public class OcrDownloads
-        {
-            public readonly DownloadInfo Tesseract304 = new DownloadInfo("tesseract.exe.gz", 1.32, "0b0fd21cd886c04c60ed5c3f38b9120b408139b3", DownloadFormat.Gzip);
-
-            public readonly IDictionary<string, DownloadInfo> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new DownloadInfo(x.Filename, x.Size, x.Sha1, DownloadFormat.Gzip));
-        }
-
         public readonly IDictionary<string, Language> Languages = LanguageData.ToDictionary(x => x.Code, x => new Language(x.Code, x.LangName));
+
+        #region Language Data (auto-generated)
 
         private static readonly OcrLanguage[] LanguageData =
         {
@@ -210,6 +192,30 @@ namespace NAPS2.Ocr
             new OcrLanguage { Filename = "yid.traineddata.gz", Code = "yid", LangName = "Yiddish", Size = 1.60, Sha1 = "0dbb6e19b660b57283f954eb5183cc2f3677fdda" },
         };
 
+        #endregion
+
+        public class OcrComponents
+        {
+            public readonly OcrComponent Tesseract304Xp = new OcrComponent(@"tesseract-3.0.4\tesseract_xp.exe");
+
+            public readonly OcrComponent Tesseract304 = new OcrComponent(@"tesseract-3.0.4\tesseract.exe");
+
+            public readonly OcrComponent Tesseract302 = new OcrComponent(@"tesseract-3.0.2\tesseract.exe");
+
+            public readonly IDictionary<string, OcrComponent> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.4\tessdata", x.Filename.Replace(".gz", ""))));
+
+            // The set of 302 languages is actually smaller, but that has no practical effect so we don't have to store the difference anywhere
+            public readonly IDictionary<string, OcrComponent> Tesseract302Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.2\tessdata", x.Filename.Replace(".gz", ""))));
+        }
+
+        public class OcrDownloads
+        {
+            private const string URL_FORMAT = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download";
+
+            public readonly DownloadInfo Tesseract304 = new DownloadInfo("tesseract.exe.gz", URL_FORMAT, 1.32, "0b0fd21cd886c04c60ed5c3f38b9120b408139b3", DownloadFormat.Gzip);
+
+            public readonly IDictionary<string, DownloadInfo> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new DownloadInfo(x.Filename, URL_FORMAT, x.Size, x.Sha1, DownloadFormat.Gzip));
+        }
         
         private class OcrLanguage
         {

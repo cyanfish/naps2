@@ -6,12 +6,10 @@ namespace NAPS2.Util
 {
     public class DownloadInfo
     {
-        private const string URL_FORMAT = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download";
-
-        public DownloadInfo(string fileName, double size, string sha1, DownloadFormat format)
+        public DownloadInfo(string fileName, string urlFormat, double size, string sha1, DownloadFormat format)
         {
             FileName = fileName;
-            Url = string.Format(URL_FORMAT, fileName);
+            Url = string.Format(urlFormat, fileName);
             Size = size;
             Sha1 = sha1;
             Format = format;
