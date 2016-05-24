@@ -13,6 +13,9 @@ namespace NAPS2.Ocr
         public OcrDependencyManager(AppConfigManager appConfigManager)
         {
             this.appConfigManager = appConfigManager;
+
+            OcrComponent.BasePath = ComponentsPath;
+            Components = new OcrComponents();
         }
 
         private string ComponentsPath
@@ -29,6 +32,33 @@ namespace NAPS2.Ocr
                     return Environment.ExpandEnvironmentVariables(customPath);
                 }
             }
+        }
+
+        public readonly OcrComponents Components;
+
+        public OcrComponent InstalledTesseractExe
+        {
+            get
+            {
+                if (Components.Tesseract304Xp.IsInstalled)
+                {
+                    return Components.Tesseract304Xp;
+                }
+                if (Components.Tesseract304.IsInstalled)
+                {
+                    return Components.Tesseract304;
+                }
+                if (Components.Tesseract302.IsInstalled)
+                {
+                    return Components.Tesseract302;
+                }
+                return null;
+            }
+        }
+
+        public bool HasNewTesseractExe
+        {
+            get { return Components.Tesseract304.IsInstalled || Components.Tesseract304Xp.IsInstalled; }
         }
 
         public string ExecutableFileName
@@ -87,6 +117,15 @@ namespace NAPS2.Ocr
                 }
             }
             return new HashSet<string>(files.Select(x => Path.GetFileNameWithoutExtension(x.Name)));
+        }
+
+        public class OcrComponents
+        {
+            public readonly OcrComponent Tesseract304Xp = new OcrComponent(@"tesseract-3.0.4\tesseract_xp.exe");
+
+            public readonly OcrComponent Tesseract304 = new OcrComponent(@"tesseract-3.0.4\tesseract.exe");
+
+            public readonly OcrComponent Tesseract302 = new OcrComponent(@"tesseract-3.0.2\tesseract.exe");
         }
 
         private static readonly OcrLanguage[] AllLanguages =

@@ -15,16 +15,14 @@ namespace NAPS2.WinForms
         private static readonly string DownloadBase = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download";
 
         private readonly OcrDependencyManager ocrDependencyManager;
-        private readonly IndependentComponents icomponents;
 
-        public FOcrLanguageDownload(OcrDependencyManager ocrDependencyManager, IndependentComponents icomponents)
+        public FOcrLanguageDownload(OcrDependencyManager ocrDependencyManager)
         {
             this.ocrDependencyManager = ocrDependencyManager;
-            this.icomponents = icomponents;
             InitializeComponent();
 
             var initialSelection = new HashSet<string>();
-            if (icomponents.Tesseract302.IsInstalled && !icomponents.Tesseract304.IsInstalled && !icomponents.Tesseract304Xp.IsInstalled)
+            if (ocrDependencyManager.Components.Tesseract302.IsInstalled && !ocrDependencyManager.HasNewTesseractExe)
             {
                 // Upgrade
                 foreach (var lang in ocrDependencyManager.GetDownloadedLanguages())
@@ -32,7 +30,7 @@ namespace NAPS2.WinForms
                     initialSelection.Add(lang.Code);
                 }
             }
-            else if (!icomponents.Tesseract304.IsInstalled && !icomponents.Tesseract304Xp.IsInstalled)
+            else if (!ocrDependencyManager.HasNewTesseractExe)
             {
                 // Fresh install
                 initialSelection.Add("eng");
@@ -71,7 +69,7 @@ namespace NAPS2.WinForms
         {
             double downloadSize =
                 lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => ((OcrLanguage)x.Tag).Size).Sum();
-            if (!icomponents.Tesseract304.IsInstalled && !icomponents.Tesseract304Xp.IsInstalled)
+            if (!ocrDependencyManager.HasNewTesseractExe)
             {
                 downloadSize += ocrDependencyManager.ExecutableFileSize;
             }
@@ -93,13 +91,13 @@ namespace NAPS2.WinForms
         private void btnDownload_Click(object sender, EventArgs e)
         {
             var progressForm = FormFactory.Create<FDownloadProgress>();
-            if (!icomponents.Tesseract304.IsInstalled && !icomponents.Tesseract304Xp.IsInstalled)
+            if (!ocrDependencyManager.HasNewTesseractExe)
             {
                 progressForm.QueueFile(DownloadBase, ocrDependencyManager.ExecutableFileName, ocrDependencyManager.ExecutableFileSha1, tempPath =>
                 {
                     var extractedPath = tempPath.Substring(0, tempPath.Length - 3);
                     DecompressFile(tempPath, extractedPath);
-                    icomponents.Tesseract304.Install(extractedPath);
+                    ocrDependencyManager.Components.Tesseract304.Install(extractedPath);
                 });
             }
             foreach (

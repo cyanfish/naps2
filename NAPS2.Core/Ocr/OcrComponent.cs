@@ -6,11 +6,13 @@ using System.Text;
 
 namespace NAPS2.Ocr
 {
-    public class IndependentComponent
+    public class OcrComponent
     {
-        public IndependentComponent(string path)
+        public static string BasePath { get; set; }
+
+        public OcrComponent(string path)
         {
-            Path = path;
+            Path = System.IO.Path.Combine(BasePath, path);
         }
 
         public string Path { get; private set; }
@@ -35,16 +37,5 @@ namespace NAPS2.Ocr
             }
             File.Move(sourcePath, Path);
         }
-    }
-
-    public class IndependentComponents
-    {
-        public readonly IndependentComponent Tesseract304Xp = new IndependentComponent(@"tesseract-3.0.4\tesseract_xp.exe");
-
-        public readonly IndependentComponent Tesseract304 = new IndependentComponent(@"tesseract-3.0.4\tesseract.exe");
-
-        public readonly IndependentComponent Tesseract302 = new IndependentComponent(@"tesseract-3.0.2\tesseract.exe");
-
-        public readonly IndependentComponent Null = new IndependentComponent(null);
     }
 }

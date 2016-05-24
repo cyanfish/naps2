@@ -17,38 +17,16 @@ namespace NAPS2.Ocr
 
         private readonly OcrDependencyManager ocrDependencyManager;
         private readonly AppConfigManager appConfigManager;
-        private readonly IndependentComponents icomponents;
 
-        public TesseractOcrEngine(OcrDependencyManager ocrDependencyManager, AppConfigManager appConfigManager, IndependentComponents icomponents)
+        public TesseractOcrEngine(OcrDependencyManager ocrDependencyManager, AppConfigManager appConfigManager)
         {
             this.ocrDependencyManager = ocrDependencyManager;
             this.appConfigManager = appConfigManager;
-            this.icomponents = icomponents;
-        }
-
-        private IndependentComponent TesseractExe
-        {
-            get
-            {
-                if (icomponents.Tesseract304Xp.IsInstalled)
-                {
-                    return icomponents.Tesseract304Xp;
-                }
-                if (icomponents.Tesseract304.IsInstalled)
-                {
-                    return icomponents.Tesseract304;
-                }
-                if (icomponents.Tesseract302.IsInstalled)
-                {
-                    return icomponents.Tesseract302;
-                }
-                return icomponents.Null;
-            }
         }
 
         public bool CanProcess(string langCode)
         {
-            if (string.IsNullOrEmpty(langCode) || !TesseractExe.IsInstalled)
+            if (string.IsNullOrEmpty(langCode) || ocrDependencyManager.InstalledTesseractExe == null)
             {
                 return false;
             }
@@ -59,21 +37,20 @@ namespace NAPS2.Ocr
 
         public OcrResult ProcessImage(string imagePath, string langCode)
         {
-            bool newTesseract = (TesseractExe == icomponents.Tesseract304 || TesseractExe == icomponents.Tesseract304Xp);
             string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-            string tempHocrFilePathWithExt = tempHocrFilePath + (newTesseract ? ".hocr" : ".html");
+            string tempHocrFilePathWithExt = tempHocrFilePath + (ocrDependencyManager.HasNewTesseractExe ? ".hocr" : ".html");
             try
             {
                 var startInfo = new ProcessStartInfo
                 {
-                    FileName = TesseractExe.Path,
+                    FileName = ocrDependencyManager.InstalledTesseractExe.Path,
                     Arguments = string.Format("\"{0}\" \"{1}\" -l {2} hocr", imagePath, tempHocrFilePath, langCode),
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
                 };
-                var tessdata = newTesseract ? ocrDependencyManager.GetLanguageDir() : ocrDependencyManager.GetOldLanguageDir();
+                var tessdata = ocrDependencyManager.HasNewTesseractExe ? ocrDependencyManager.GetLanguageDir() : ocrDependencyManager.GetOldLanguageDir();
                 var tessdataParent = tessdata.Parent;
                 if (tessdataParent != null)
                 {

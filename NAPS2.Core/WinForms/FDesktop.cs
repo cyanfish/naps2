@@ -1143,9 +1143,9 @@ namespace NAPS2.WinForms
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
-            if (ocrDependencyManager.IsExecutableDownloaded && ocrDependencyManager.GetDownloadedLanguages().Any())
+            if (ocrDependencyManager.InstalledTesseractExe != null && ocrDependencyManager.GetDownloadedLanguages().Any())
             {
-                if (!ocrDependencyManager.IsNewExecutableDownloaded && !appConfigManager.Config.NoUpdatePrompt)
+                if (!ocrDependencyManager.HasNewTesseractExe && !appConfigManager.Config.NoUpdatePrompt)
                 {
                     MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
@@ -1155,7 +1155,7 @@ namespace NAPS2.WinForms
             else
             {
                 FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
-                if (ocrDependencyManager.IsExecutableDownloaded && ocrDependencyManager.GetDownloadedLanguages().Any())
+                if (ocrDependencyManager.InstalledTesseractExe != null && ocrDependencyManager.GetDownloadedLanguages().Any())
                 {
                     FormFactory.Create<FOcrSetup>().ShowDialog();
                 }
