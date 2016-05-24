@@ -31,22 +31,6 @@ namespace NAPS2.Ocr
             }
         }
 
-        public DirectoryInfo GetExecutableDir()
-        {
-            var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.4"));
-            if (!dir.Exists)
-            {
-                dir.Create();
-            }
-            return dir;
-        }
-
-        public DirectoryInfo GetOldExecutableDir()
-        {
-            var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.2"));
-            return dir;
-        }
-
         public string ExecutableFileName
         {
             get { return "tesseract.exe.gz"; }
@@ -76,21 +60,6 @@ namespace NAPS2.Ocr
         {
             var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.2", "tessdata"));
             return dir;
-        }
-
-        public bool IsExecutableDownloaded
-        {
-            get { return IsNewExecutableDownloaded || IsOldExecutableDownloaded; }
-        }
-
-        public bool IsNewExecutableDownloaded
-        {
-            get { return new FileInfo(Path.Combine(GetExecutableDir().FullName, "tesseract.exe")).Exists; }
-        }
-
-        public bool IsOldExecutableDownloaded
-        {
-            get { return new FileInfo(Path.Combine(GetOldExecutableDir().FullName, "tesseract.exe")).Exists; }
         }
 
         public IEnumerable<OcrLanguage> GetDownloadedLanguages()
