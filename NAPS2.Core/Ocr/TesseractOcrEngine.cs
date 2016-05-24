@@ -30,9 +30,8 @@ namespace NAPS2.Ocr
             {
                 return false;
             }
-            var availableLanguages = ocrDependencyManager.GetDownloadedLanguages();
             // Support multiple specified languages (e.g. "eng+fra")
-            return langCode.Split('+').All(code => availableLanguages.Any(x => x.Code == code));
+            return langCode.Split('+').All(code => ocrDependencyManager.InstalledTesseractLanguages.Any(x => x.Code == code));
         }
 
         public OcrResult ProcessImage(string imagePath, string langCode)
@@ -50,12 +49,13 @@ namespace NAPS2.Ocr
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
                 };
-                var tessdata = ocrDependencyManager.HasNewTesseractExe ? ocrDependencyManager.GetLanguageDir() : ocrDependencyManager.GetOldLanguageDir();
-                var tessdataParent = tessdata.Parent;
-                if (tessdataParent != null)
+                var tessdataParent = new FileInfo(ocrDependencyManager.InstalledTesseractExe.Path).Directory;
+                if (tessdataParent == null)
                 {
-                    startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = tessdataParent.FullName;
+                    throw new InvalidOperationException();
                 }
+                var tessdata = new DirectoryInfo(Path.Combine(tessdataParent.FullName, "tessdata"));
+                startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = tessdataParent.FullName;
                 EnsureHocrConfigExists(tessdata);
                 var tesseractProcess = Process.Start(startInfo);
                 if (tesseractProcess == null)

@@ -26,14 +26,14 @@ namespace NAPS2.WinForms
                 .Activate();
 
             LoadLanguages();
-            comboLanguages.DisplayMember = "LangName";
+            comboLanguages.DisplayMember = "Name";
             comboLanguages.ValueMember = "Code";
 
             checkBoxEnableOcr.Checked = UserConfigManager.Config.EnableOcr;
             comboLanguages.SelectedValue = UserConfigManager.Config.OcrLanguageCode;
             if (comboLanguages.SelectedValue == null)
             {
-                comboLanguages.SelectedValue = comboLanguages.Items.Cast<OcrLanguage>().Select(x => x.Code).FirstOrDefault();
+                comboLanguages.SelectedValue = comboLanguages.Items.Cast<string>().FirstOrDefault();
             }
 
             UpdateView();
@@ -41,7 +41,9 @@ namespace NAPS2.WinForms
 
         private void LoadLanguages()
         {
-            var languages = ocrDependencyManager.GetDownloadedLanguages().OrderBy(x => x.LangName).ToList();
+            var languages = ocrDependencyManager.InstalledTesseractLanguages
+                .OrderBy(x => x.Name)
+                .ToList();
             comboLanguages.DataSource = languages;
         }
 

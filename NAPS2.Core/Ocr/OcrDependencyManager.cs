@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Lang;
 
 namespace NAPS2.Ocr
 {
@@ -16,6 +17,7 @@ namespace NAPS2.Ocr
 
             OcrComponent.BasePath = ComponentsPath;
             Components = new OcrComponents();
+            Downloads = new OcrDownloads();
         }
 
         private string ComponentsPath
@@ -35,6 +37,8 @@ namespace NAPS2.Ocr
         }
 
         public readonly OcrComponents Components;
+
+        public readonly OcrDownloads Downloads;
 
         public OcrComponent InstalledTesseractExe
         {
@@ -56,67 +60,20 @@ namespace NAPS2.Ocr
             }
         }
 
+        public IEnumerable<Language> InstalledTesseractLanguages
+        {
+            get
+            {
+                var languageComponents = HasNewTesseractExe
+                    ? Components.Tesseract304Languages
+                    : Components.Tesseract302Languages;
+                return languageComponents.Where(x => x.Value.IsInstalled).Select(x => Languages[x.Key]);
+            }
+        } 
+
         public bool HasNewTesseractExe
         {
             get { return Components.Tesseract304.IsInstalled || Components.Tesseract304Xp.IsInstalled; }
-        }
-
-        public string ExecutableFileName
-        {
-            get { return "tesseract.exe.gz"; }
-        }
-
-        public double ExecutableFileSize
-        {
-            get { return 1.32; }
-        }
-
-        public string ExecutableFileSha1
-        {
-            get { return "0b0fd21cd886c04c60ed5c3f38b9120b408139b3"; }
-        }
-
-        public DirectoryInfo GetLanguageDir()
-        {
-            var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.4", "tessdata"));
-            if (!dir.Exists)
-            {
-                dir.Create();
-            }
-            return dir;
-        }
-
-        public DirectoryInfo GetOldLanguageDir()
-        {
-            var dir = new DirectoryInfo(Path.Combine(ComponentsPath, "tesseract-3.0.2", "tessdata"));
-            return dir;
-        }
-
-        public IEnumerable<OcrLanguage> GetDownloadedLanguages()
-        {
-            var downloadedCodes = GetDownloadedCodes(true);
-            return AllLanguages.Where(x => downloadedCodes.Contains(x.Code));
-        }
-
-        public IEnumerable<OcrLanguage> GetMissingLanguages()
-        {
-            var downloadedCodes = GetDownloadedCodes(false);
-            return AllLanguages.Where(x => !downloadedCodes.Contains(x.Code));
-        }
-
-        private HashSet<string> GetDownloadedCodes(bool checkOld)
-        {
-            var tessdataFolder = GetLanguageDir();
-            var files = tessdataFolder.GetFiles("*.traineddata");
-            if (files.Length == 0 && checkOld)
-            {
-                tessdataFolder = GetOldLanguageDir();
-                if (tessdataFolder.Exists)
-                {
-                    files = tessdataFolder.GetFiles("*.traineddata");
-                }
-            }
-            return new HashSet<string>(files.Select(x => Path.GetFileNameWithoutExtension(x.Name)));
         }
 
         public class OcrComponents
@@ -126,9 +83,22 @@ namespace NAPS2.Ocr
             public readonly OcrComponent Tesseract304 = new OcrComponent(@"tesseract-3.0.4\tesseract.exe");
 
             public readonly OcrComponent Tesseract302 = new OcrComponent(@"tesseract-3.0.2\tesseract.exe");
+
+            public readonly IDictionary<string, OcrComponent> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.4\tessdata", x.Filename.Replace(".gz", ""))));
+
+            public readonly IDictionary<string, OcrComponent> Tesseract302Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.2\tessdata", x.Filename.Replace(".gz", ""))));
         }
 
-        private static readonly OcrLanguage[] AllLanguages =
+        public class OcrDownloads
+        {
+            public readonly DownloadInfo Tesseract304 = new DownloadInfo("tesseract.exe.gz", 1.32, "0b0fd21cd886c04c60ed5c3f38b9120b408139b3", DownloadFormat.Gzip);
+
+            public readonly IDictionary<string, DownloadInfo> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new DownloadInfo(x.Filename, x.Size, x.Sha1, DownloadFormat.Gzip));
+        }
+
+        public readonly IDictionary<string, Language> Languages = LanguageData.ToDictionary(x => x.Code, x => new Language(x.Code, x.LangName));
+
+        private static readonly OcrLanguage[] LanguageData =
         {
             new OcrLanguage { Filename = "afr.traineddata.gz", Code = "afr", LangName = "Afrikaans", Size = 1.93, Sha1 = "a669186130bf1fc6c78226ac868c82b70a44c70b" },
             new OcrLanguage { Filename = "amh.traineddata.gz", Code = "amh", LangName = "Amharic", Size = 1.03, Sha1 = "1153cbbac7306d42e72ca639ff3f36f45dcb15a2" },
@@ -238,5 +208,19 @@ namespace NAPS2.Ocr
             new OcrLanguage { Filename = "vie.traineddata.gz", Code = "vie", LangName = "Vietnamese", Size = 2.27, Sha1 = "571e132cd3ed26f5c33943efe7aa17835d277a15" },
             new OcrLanguage { Filename = "yid.traineddata.gz", Code = "yid", LangName = "Yiddish", Size = 1.60, Sha1 = "0dbb6e19b660b57283f954eb5183cc2f3677fdda" },
         };
+
+        
+        private class OcrLanguage
+        {
+            public string Filename { get; set; }
+
+            public string Code { get; set; }
+
+            public string LangName { get; set; }
+
+            public double Size { get; set; }
+
+            public string Sha1 { get; set; }
+        }
     }
 }

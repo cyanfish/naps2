@@ -7,6 +7,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
+using NAPS2.Ocr;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -59,13 +60,13 @@ namespace NAPS2.WinForms
                 hasError = true;
                 if (!cancel)
                 {
-                    Log.ErrorException("Error downloading file: " + file.Filename, e.Error);
+                    Log.ErrorException("Error downloading file: " + file.DownloadInfo.FileName, e.Error);
                 }
             }
-            else if (file.Sha1 != CalculateSha1((Path.Combine(file.TempFolder, file.Filename))))
+            else if (file.DownloadInfo.Sha1 != CalculateSha1((Path.Combine(file.TempFolder, file.DownloadInfo.FileName))))
             {
                 hasError = true;
-                Log.Error("Error downloading file (invalid checksum): " + file.Filename);
+                Log.Error("Error downloading file (invalid checksum): " + file.DownloadInfo.FileName);
             }
             else
             {
@@ -106,7 +107,17 @@ namespace NAPS2.WinForms
             if (filesDownloaded > 0)
             {
                 var prev = filesToDownload[filesDownloaded - 1];
-                prev.FileCallback(Path.Combine(prev.TempFolder, prev.Filename));
+                var filePath = Path.Combine(prev.TempFolder, prev.DownloadInfo.FileName);
+                try
+                {
+                    var preparedFilePath = prev.DownloadInfo.Format.Prepare(filePath);
+                    prev.FileCallback(preparedFilePath);
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorException("Error preparing downloaded file", ex);
+                    MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 Directory.Delete(prev.TempFolder, true);
             }
             if (filesDownloaded >= filesToDownload.Count)
@@ -117,12 +128,12 @@ namespace NAPS2.WinForms
             var next = filesToDownload[filesDownloaded];
             next.TempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             Directory.CreateDirectory(next.TempFolder);
-            client.DownloadFileAsync(new Uri(string.Format(next.Root, next.Filename)), Path.Combine(next.TempFolder, next.Filename));
+            client.DownloadFileAsync(new Uri(next.DownloadInfo.Url), Path.Combine(next.TempFolder, next.DownloadInfo.FileName));
         }
 
-        public void QueueFile(string root, string filename, string sha1, Action<string> fileCallback)
+        public void QueueFile(DownloadInfo downloadInfo, Action<string> fileCallback)
         {
-            filesToDownload.Add(new QueueItem { Root = root, Filename = filename, Sha1 = sha1, FileCallback = fileCallback });
+            filesToDownload.Add(new QueueItem { DownloadInfo = downloadInfo, FileCallback = fileCallback });
         }
 
         private void DisplayProgress()
@@ -150,13 +161,9 @@ namespace NAPS2.WinForms
 
         private class QueueItem
         {
-            public string Root { get; set; }
-
-            public string Filename { get; set; }
+            public DownloadInfo DownloadInfo { get; set; }
 
             public string TempFolder { get; set; }
-
-            public string Sha1 { get; set; }
 
             public Action<string> FileCallback { get; set; }
         }
