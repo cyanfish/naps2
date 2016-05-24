@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
 
-namespace NAPS2.Ocr
+namespace NAPS2.Util
 {
     public abstract class DownloadFormat
     {

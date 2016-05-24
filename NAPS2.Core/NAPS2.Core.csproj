@@ -119,8 +119,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ocr\DownloadFormat.cs" />
-    <Compile Include="Ocr\DownloadInfo.cs" />
+    <Compile Include="Util\DownloadFormat.cs" />
+    <Compile Include="Util\DownloadInfo.cs" />
     <Compile Include="Ocr\Language.cs" />
     <Compile Include="Ocr\OcrComponent.cs" />
     <Compile Include="Operation\IOperationFactory.cs" />

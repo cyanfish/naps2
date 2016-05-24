@@ -7,7 +7,6 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
-using NAPS2.Ocr;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
