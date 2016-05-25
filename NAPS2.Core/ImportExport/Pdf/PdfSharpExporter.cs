@@ -23,6 +23,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -74,15 +76,30 @@ namespace NAPS2.ImportExport.Pdf
                 document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
 
-            int i = 0;
-            foreach (ScannedImage scannedImage in images)
+            var imageList = images.ToList();
+            var pageList = imageList.Select(x => document.AddPage()).ToList();
+
+            double maxImageSizeMB = imageList.Select(x => x.Size / 1048576.0).Max();
+            double memoryLimitMB = Environment.Is64BitOperatingSystem ? 3000 : 1000;
+            int maxThreads = (int)Math.Floor(memoryLimitMB / (maxImageSizeMB * 4));
+
+            int progress = 0;
+
+            Parallel.For(0, imageList.Count, new ParallelOptions { MaxDegreeOfParallelism = maxThreads }, (i, loop) =>
             {
-                using (Stream stream = scannedImage.GetImageStream())
+                if (!progressCallback(progress))
+                {
+                    loop.Stop();
+                    return;
+                }
+
+                using (Stream stream = imageList[i].GetImageStream())
                 using (var img = new Bitmap(stream))
                 {
-                    if (!progressCallback(i))
+                    if (!progressCallback(progress))
                     {
-                        return false;
+                        loop.Stop();
+                        return;
                     }
 
                     OcrResult ocrResult = null;
@@ -98,32 +115,41 @@ namespace NAPS2.ImportExport.Pdf
                         }
                     }
 
+                    if (!progressCallback(progress))
+                    {
+                        loop.Stop();
+                        return;
+                    }
+
                     float hAdjust = 72 / img.HorizontalResolution;
                     float vAdjust = 72 / img.VerticalResolution;
                     double realWidth = img.Width * hAdjust;
                     double realHeight = img.Height * vAdjust;
-                    PdfPage newPage = document.AddPage();
-                    newPage.Width = (int)realWidth;
-                    newPage.Height = (int)realHeight;
-                    using (XGraphics gfx = XGraphics.FromPdfPage(newPage))
+                    lock (document)
                     {
-                        if (ocrResult != null)
+                        PdfPage newPage = pageList[i];
+                        newPage.Width = (int)realWidth;
+                        newPage.Height = (int)realHeight;
+                        using (XGraphics gfx = XGraphics.FromPdfPage(newPage))
                         {
-                            var tf = new XTextFormatter(gfx);
-                            foreach (var element in ocrResult.Elements)
+                            if (ocrResult != null)
                             {
-                                var adjustedBounds = AdjustBounds(element.Bounds, hAdjust, vAdjust);
-                                var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                                var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
-                                    new XPdfFontOptions(PdfFontEncoding.Unicode));
-                                tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
+                                var tf = new XTextFormatter(gfx);
+                                foreach (var element in ocrResult.Elements)
+                                {
+                                    var adjustedBounds = AdjustBounds(element.Bounds, hAdjust, vAdjust);
+                                    var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+                                    var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+                                        new XPdfFontOptions(PdfFontEncoding.Unicode));
+                                    tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
+                                }
                             }
+                            gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
                         }
-                        gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
                     }
-                    i++;
+                    Interlocked.Increment(ref progress);
                 }
-            }
+            });
             PathHelper.EnsureParentDirExists(path);
             document.Save(path);
             return true;

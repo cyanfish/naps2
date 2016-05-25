@@ -72,6 +72,11 @@ namespace NAPS2.Scan.Images
             }
         }
 
+        public long Size
+        {
+            get { return new FileInfo(recoveryImage.FilePath).Length; }
+        }
+
         public Bitmap GetImage()
         {
             var bitmap = new Bitmap(recoveryImage.FilePath);
