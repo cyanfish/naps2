@@ -77,8 +77,6 @@ namespace NAPS2.Ocr
             get { return Components.Tesseract304.IsInstalled || Components.Tesseract304Xp.IsInstalled; }
         }
 
-        public readonly IDictionary<string, Language> Languages = LanguageData.ToDictionary(x => x.Code, x => new Language(x.Code, x.LangName));
-
         #region Language Data (auto-generated)
 
         private static readonly OcrLanguage[] LanguageData =
@@ -194,13 +192,15 @@ namespace NAPS2.Ocr
 
         #endregion
 
+        public readonly IDictionary<string, Language> Languages = LanguageData.ToDictionary(x => x.Code, x => new Language(x.Code, x.LangName));
+
         public class OcrComponents
         {
-            public readonly OcrComponent Tesseract304Xp = new OcrComponent(@"tesseract-3.0.4\tesseract_xp.exe");
+            public readonly OcrComponent Tesseract304Xp = new OcrComponent(@"tesseract-3.0.4\tesseract_xp.exe", PlatformSupport.Windows);
 
-            public readonly OcrComponent Tesseract304 = new OcrComponent(@"tesseract-3.0.4\tesseract.exe");
+            public readonly OcrComponent Tesseract304 = new OcrComponent(@"tesseract-3.0.4\tesseract.exe", PlatformSupport.Windows.Except(PlatformSupport.WindowsXp));
 
-            public readonly OcrComponent Tesseract302 = new OcrComponent(@"tesseract-3.0.2\tesseract.exe");
+            public readonly OcrComponent Tesseract302 = new OcrComponent(@"tesseract-3.0.2\tesseract.exe", PlatformSupport.Windows);
 
             public readonly IDictionary<string, OcrComponent> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.4\tessdata", x.Filename.Replace(".gz", ""))));
 
@@ -211,6 +211,8 @@ namespace NAPS2.Ocr
         public class OcrDownloads
         {
             private const string URL_FORMAT = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download";
+
+            public readonly DownloadInfo Tesseract304Xp = new DownloadInfo("tesseract_xp.exe.gz", URL_FORMAT, 1.32, "98d15e4765caae864f16fa2ab106e3fd6adbe8c3", DownloadFormat.Gzip);
 
             public readonly DownloadInfo Tesseract304 = new DownloadInfo("tesseract.exe.gz", URL_FORMAT, 1.32, "0b0fd21cd886c04c60ed5c3f38b9120b408139b3", DownloadFormat.Gzip);
 

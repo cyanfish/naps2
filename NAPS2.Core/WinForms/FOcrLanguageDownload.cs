@@ -64,15 +64,24 @@ namespace NAPS2.WinForms
 
         private void UpdateView()
         {
-            var selectedLanguages = lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => ((string) x.Tag));
+            var selectedLanguages = lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => ((string)x.Tag));
             double downloadSize = selectedLanguages.Select(x => ocrDependencyManager.Downloads.Tesseract304Languages[x].Size).Sum();
-            if (!ocrDependencyManager.HasNewTesseractExe)
+
+            if (!ocrDependencyManager.Components.Tesseract304.IsInstalled && ocrDependencyManager.Components.Tesseract304.IsSupported)
             {
                 downloadSize += ocrDependencyManager.Downloads.Tesseract304.Size;
             }
+            if (!ocrDependencyManager.Components.Tesseract304Xp.IsInstalled && !ocrDependencyManager.Components.Tesseract304.IsSupported)
+            {
+                downloadSize += ocrDependencyManager.Downloads.Tesseract304Xp.Size;
+            }
+
             labelSizeEstimate.Text = string.Format(MiscResources.EstimatedDownloadSize, downloadSize.ToString("f1"));
 
-            btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked);
+            bool fixingExe = ocrDependencyManager.Components.Tesseract304.IsInstalled
+                && !ocrDependencyManager.Components.Tesseract304.IsSupported
+                && !ocrDependencyManager.Components.Tesseract304Xp.IsInstalled;
+            btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked) || fixingExe;
         }
 
         private void lvLanguages_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -88,11 +97,18 @@ namespace NAPS2.WinForms
         private void btnDownload_Click(object sender, EventArgs e)
         {
             var progressForm = FormFactory.Create<FDownloadProgress>();
-            if (!ocrDependencyManager.HasNewTesseractExe)
+
+            if (!ocrDependencyManager.Components.Tesseract304.IsInstalled && ocrDependencyManager.Components.Tesseract304.IsSupported)
             {
                 progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304,
                     path => ocrDependencyManager.Components.Tesseract304.Install(path));
             }
+            if (!ocrDependencyManager.Components.Tesseract304Xp.IsInstalled && !ocrDependencyManager.Components.Tesseract304.IsSupported)
+            {
+                progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304Xp,
+                    path => ocrDependencyManager.Components.Tesseract304Xp.Install(path));
+            }
+
             foreach (
                 var langCode in
                     lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => (string)x.Tag))
@@ -100,6 +116,7 @@ namespace NAPS2.WinForms
                 progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304Languages[langCode],
                     path => ocrDependencyManager.Components.Tesseract304Languages[langCode].Install(path));
             }
+
             Close();
             progressForm.ShowDialog();
         }

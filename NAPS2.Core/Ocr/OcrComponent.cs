@@ -10,8 +10,11 @@ namespace NAPS2.Ocr
     {
         public static string BasePath { get; set; }
 
-        public OcrComponent(string path)
+        private readonly PlatformSupport platformSupport;
+
+        public OcrComponent(string path, PlatformSupport platformSupport = null)
         {
+            this.platformSupport = platformSupport;
             Path = System.IO.Path.Combine(BasePath, path);
         }
 
@@ -27,6 +30,11 @@ namespace NAPS2.Ocr
                 }
                 return File.Exists(Path);
             }
+        }
+
+        public bool IsSupported
+        {
+            get { return platformSupport == null || platformSupport.Validate(); }
         }
 
         public void Install(string sourcePath)
