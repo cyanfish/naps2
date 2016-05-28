@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using NAPS2.Scan.Images.Transforms;
+using ZXing;
 
 namespace NAPS2.Scan.Images
 {
@@ -124,7 +125,7 @@ namespace NAPS2.Scan.Images
             return result;
         }
 
-        public static void PostProcessStep2(ScannedImage image, ScanProfile profile, int pageNumber)
+        public static void PostProcessStep2(ScannedImage image, Bitmap bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber)
         {
             if (!profile.UseNativeUI && profile.BrightnessContrastAfterScan)
             {
@@ -140,6 +141,35 @@ namespace NAPS2.Scan.Images
             if (profile.FlipDuplexedPages && pageNumber % 2 == 0)
             {
                 AddTransformAndUpdateThumbnail(image, new RotationTransform(RotateFlipType.Rotate180FlipNone));
+            }
+            if (scanParams.DetectPatchCodes && image.PatchCode == PatchCode.None)
+            {
+                IBarcodeReader reader = new BarcodeReader();
+                var barcodeResult = reader.Decode(bitmap);
+                if (barcodeResult != null)
+                {
+                    switch (barcodeResult.Text)
+                    {
+                        case "PATCH1":
+                            image.PatchCode = PatchCode.Patch1;
+                            break;
+                        case "PATCH2":
+                            image.PatchCode = PatchCode.Patch2;
+                            break;
+                        case "PATCH3":
+                            image.PatchCode = PatchCode.Patch3;
+                            break;
+                        case "PATCH4":
+                            image.PatchCode = PatchCode.Patch4;
+                            break;
+                        case "PATCH6":
+                            image.PatchCode = PatchCode.Patch6;
+                            break;
+                        case "PATCHT":
+                            image.PatchCode = PatchCode.PatchT;
+                            break;
+                    }
+                }
             }
         }
 

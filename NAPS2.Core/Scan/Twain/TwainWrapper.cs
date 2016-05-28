@@ -108,7 +108,6 @@ namespace NAPS2.Scan.Twain
                             : ScanBitDepth.C24Bit;
                         var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
                         image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                        ScannedImageHelper.PostProcessStep2(image, scanProfile, pageNumber);
                         if (scanParams.DetectPatchCodes)
                         {
                             foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
@@ -119,6 +118,7 @@ namespace NAPS2.Scan.Twain
                                 }
                             }
                         }
+                        ScannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
                         images.Add(image);
                     }
                 }
