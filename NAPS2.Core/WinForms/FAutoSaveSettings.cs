@@ -24,12 +24,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.ImportExport;
-using NAPS2.Lang.Resources;
 using NAPS2.Scan;
-using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Twain;
-using NAPS2.Scan.Wia;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -55,8 +50,7 @@ namespace NAPS2.WinForms
                 {
                     rdFilePerScan.Checked = true;
                 }
-                else if (ScanProfile.AutoSaveSettings.Separator == SaveSeparator.PatchT &&
-                         ScanProfile.DriverName == TwainScanDriver.DRIVER_NAME)
+                else if (ScanProfile.AutoSaveSettings.Separator == SaveSeparator.PatchT)
                 {
                     rdSeparateByPatchT.Checked = true;
                 }
@@ -64,11 +58,6 @@ namespace NAPS2.WinForms
                 {
                     rdFilePerPage.Checked = true;
                 }
-            }
-
-            if (ScanProfile.DriverName != TwainScanDriver.DRIVER_NAME)
-            {
-                rdSeparateByPatchT.Enabled = false;
             }
 
             new LayoutManager(this)

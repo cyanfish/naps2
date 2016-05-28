@@ -196,7 +196,6 @@ namespace NAPS2.WinForms
             this.comboProfile.FormattingEnabled = true;
             resources.ApplyResources(this.comboProfile, "comboProfile");
             this.comboProfile.Name = "comboProfile";
-            this.comboProfile.SelectedIndexChanged += new System.EventHandler(this.comboProfile_SelectedIndexChanged);
             this.comboProfile.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.comboProfile_Format);
             // 
             // lblProfile

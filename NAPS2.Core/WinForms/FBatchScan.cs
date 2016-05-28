@@ -189,22 +189,6 @@ namespace NAPS2.WinForms
             {
                 comboProfile.Text = "";
             }
-            ProfileChanged();
-        }
-
-        private bool ProfileIsTwain()
-        {
-            var profile = (ScanProfile)comboProfile.SelectedItem;
-            if (profile != null)
-            {
-                return profile.DriverName == TwainScanDriver.DRIVER_NAME;
-            }
-            return false;
-        }
-
-        private void ProfileChanged()
-        {
-            rdSeparateByPatchT.Enabled = ProfileIsTwain();
         }
 
         private void rdSingleScan_CheckedChanged(object sender, EventArgs e)
@@ -323,7 +307,6 @@ namespace NAPS2.WinForms
         {
             EnableDisable(groupboxScanConfig, enabled);
             EnableDisable(groupboxOutput, enabled);
-            rdSeparateByPatchT.Enabled = enabled && ProfileIsTwain();
         }
 
         private void EnableDisable(Control root, bool enabled)
@@ -429,11 +412,6 @@ namespace NAPS2.WinForms
             {
                 txtFilePath.Text = form.FileName;
             }
-        }
-
-        private void comboProfile_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ProfileChanged();
         }
     }
 }
