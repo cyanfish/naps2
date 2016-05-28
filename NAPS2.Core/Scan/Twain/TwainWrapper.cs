@@ -12,6 +12,7 @@ using NAPS2.WinForms;
 using NTwain;
 using NTwain.Data;
 using NAPS2.Util;
+using ZXing;
 
 namespace NAPS2.Scan.Twain
 {
@@ -117,6 +118,43 @@ namespace NAPS2.Scan.Twain
                                 {
                                     image.PatchCode = GetPatchCode(patchCodeInfo);
                                 }
+                            }
+                            if (image.PatchCode == PatchCode.None)
+
+                            {
+                                Debug.WriteLine("No Patch code send from scanner, trying detection on Image");
+                                //create a barcode reader Instance
+                                IBarcodeReader reader = new BarcodeReader();
+                                var barcodeBitmap = (Bitmap)output;
+                                var barcoderesult = reader.Decode(barcodeBitmap);
+                                if (barcoderesult != null)
+                                    Debug.WriteLine("Found Barcode, type " + barcoderesult.BarcodeFormat.ToString() + "Content: " + barcoderesult.Text);
+                                 {
+                                    switch (barcoderesult.Text)
+                                    {
+                                        case "PATCH1":
+                                            image.PatchCode = PatchCode.Patch1;
+                                            break;
+                                        case "PATCH2":
+                                            image.PatchCode = PatchCode.Patch2;
+                                            break;
+                                        case "PATCH3":
+                                            image.PatchCode = PatchCode.Patch3;
+                                            break;
+                                        case "PATCH4":
+                                            image.PatchCode = PatchCode.Patch4;
+                                            break;
+                                        case "PATCH6":
+                                            image.PatchCode = PatchCode.Patch6;
+                                            break;
+                                        case "PATCHT":
+                                            image.PatchCode = PatchCode.PatchT;
+                                            break;
+
+                                    }
+                                    
+                                }
+
                             }
                         }
                         images.Add(image);
