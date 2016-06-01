@@ -57,6 +57,11 @@ namespace NAPS2.Scan.Wia
             return WiaApi.PromptForDevice();
         }
 
+        public override IEnumerable<ScanDevice> GetDeviceList()
+        {
+            return WiaApi.GetDeviceList();
+        }
+
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
             using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice, threadFactory))
