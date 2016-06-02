@@ -81,6 +81,12 @@ namespace NAPS2.Scan.Twain
             return twainWrapper.GetDeviceList(twainImpl);
         }
 
+        public override IEnumerable<ScanDevice> GetDeviceList()
+        {
+            var twainImpl = ScanProfile != null ? ScanProfile.TwainImpl : TwainImpl.Default;
+            return GetDeviceList(twainImpl);
+        }
+
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
             if (UseHostService)

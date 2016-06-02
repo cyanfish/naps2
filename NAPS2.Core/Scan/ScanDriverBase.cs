@@ -94,5 +94,9 @@ namespace NAPS2.Scan
         }
 
         protected abstract IEnumerable<ScannedImage> ScanInternal();
+
+
+        public abstract IEnumerable<ScanDevice> GetDeviceList();
+
     }
 }

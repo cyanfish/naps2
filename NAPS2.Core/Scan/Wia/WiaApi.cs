@@ -97,6 +97,18 @@ namespace NAPS2.Scan.Wia
 
         #region Device/Item Management
 
+
+        public static IEnumerable<ScanDevice> GetDeviceList()
+        {
+            List<ScanDevice> devices = new List<ScanDevice>();
+            WIA.DeviceManager manager = new WIA.DeviceManager();
+            foreach (WIA.DeviceInfo info in manager.DeviceInfos)
+            {
+                devices.Add(new ScanDevice(info.DeviceID, GetDeviceName(info.DeviceID)));
+            }
+            return devices;
+        }
+
         public static ScanDevice PromptForDevice()
         {
             var wiaCommonDialog = new CommonDialogClass();

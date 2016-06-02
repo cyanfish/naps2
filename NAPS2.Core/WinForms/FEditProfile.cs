@@ -229,6 +229,9 @@ namespace NAPS2.WinForms
         private void ChooseDevice(string driverName)
         {
             var driver = driverFactory.Create(driverName);
+
+            
+
             try
             {
                 driver.DialogParent = this;
