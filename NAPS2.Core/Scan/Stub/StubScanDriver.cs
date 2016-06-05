@@ -50,6 +50,14 @@ namespace NAPS2.Scan.Stub
             return new ScanDevice("test", "Test Scanner");
         }
 
+        public List<ScanDevice> GetDeviceList()
+        {
+            return new List<ScanDevice>
+            {
+                new ScanDevice("test", "Test Scanner")
+            };
+        }
+
         public IEnumerable<ScannedImage> Scan()
         {
             for (int i = 0; i < ImageCount; i++)

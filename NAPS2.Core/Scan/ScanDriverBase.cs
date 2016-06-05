@@ -61,6 +61,24 @@ namespace NAPS2.Scan
 
         protected abstract ScanDevice PromptForDeviceInternal();
 
+        public List<ScanDevice> GetDeviceList()
+        {
+            try
+            {
+                return GetDeviceListInternal();
+            }
+            catch (ScanDriverException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ScanDriverUnknownException(e);
+            }
+        }
+
+        protected abstract List<ScanDevice> GetDeviceListInternal();
+
         public IEnumerable<ScannedImage> Scan()
         {
             if (ScanProfile == null)

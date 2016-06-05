@@ -54,7 +54,12 @@ namespace NAPS2.Scan.Wia
 
         protected override ScanDevice PromptForDeviceInternal()
         {
-            return WiaApi.PromptForDevice();
+            return WiaApi.PromptForScanDevice();
+        }
+
+        protected override List<ScanDevice> GetDeviceListInternal()
+        {
+            return WiaApi.GetScanDeviceList();
         }
 
         protected override IEnumerable<ScannedImage> ScanInternal()

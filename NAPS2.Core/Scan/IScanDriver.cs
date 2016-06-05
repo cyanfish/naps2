@@ -69,6 +69,13 @@ namespace NAPS2.Scan
         ScanDevice PromptForDevice();
 
         /// <summary>
+        /// Gets a list of available scanning devices.
+        /// </summary>
+        /// <returns>The list of devices.</returns>
+        /// <exception cref="ScanDriverException">Throws a ScanDriverException if an error occurs when reading the available devices.</exception>
+        List<ScanDevice> GetDeviceList();
+
+        /// <summary>
         /// Scans one or more images, interacting with the user as necessary.
         /// </summary>
         /// <returns>A list of scanned images.</returns>

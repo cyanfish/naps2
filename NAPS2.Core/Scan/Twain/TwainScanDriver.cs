@@ -56,10 +56,7 @@ namespace NAPS2.Scan.Twain
 
         protected override ScanDevice PromptForDeviceInternal()
         {
-            var twainImpl = ScanProfile != null ? ScanProfile.TwainImpl : TwainImpl.Default;
-
-            // Exclude WIA proxy devices since NAPS2 already supports WIA
-            var deviceList = GetDeviceList(twainImpl).Where(x => !x.ID.StartsWith("WIA-")).ToList();
+            var deviceList = GetDeviceList();
 
             if (!deviceList.Any())
             {
@@ -72,8 +69,15 @@ namespace NAPS2.Scan.Twain
             return form.SelectedDevice;
         }
 
-        private IEnumerable<ScanDevice> GetDeviceList(TwainImpl twainImpl)
+        protected override List<ScanDevice> GetDeviceListInternal()
         {
+            // Exclude WIA proxy devices since NAPS2 already supports WIA
+            return GetFullDeviceList().Where(x => !x.ID.StartsWith("WIA-")).ToList();
+        }
+
+        private IEnumerable<ScanDevice> GetFullDeviceList()
+        {
+            var twainImpl = ScanProfile != null ? ScanProfile.TwainImpl : TwainImpl.Default;
             if (UseHostService)
             {
                 return x86HostServiceFactory.Create().TwainGetDeviceList(twainImpl);
