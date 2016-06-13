@@ -9,13 +9,14 @@ namespace NAPS2.Util
 {
     public static class Pipeline
     {
-        // TODO: Need to add cancellation logic to avoid a possible deadlock
-        // see: https://msdn.microsoft.com/en-us/library/ff963548.aspx
-        // TODO: Test exception handling
-
         private static readonly TaskFactory TaskFactory =
             new TaskFactory(TaskCreationOptions.LongRunning, TaskContinuationOptions.None);
 
+        /// <summary>
+        /// Creates a pipeline to process the given input.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static IPipelineSyntax<T> For<T>(IEnumerable<T> input)
         {
             return new PipelineSource<T>(input);

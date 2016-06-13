@@ -19,20 +19,16 @@
 */
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
 
 namespace NAPS2.ImportExport.Pdf
@@ -124,7 +120,7 @@ namespace NAPS2.ImportExport.Pdf
                         gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
                     }
                 }
-            };
+            }
         }
 
         private void BuildDocumentWithOcr(PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
@@ -176,7 +172,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 lock (document)
                 {
-                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                    using (XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend))
                     {
                         var tf = new XTextFormatter(gfx);
                         foreach (var element in ocrResult.Elements)
