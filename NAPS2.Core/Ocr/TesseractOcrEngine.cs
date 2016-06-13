@@ -35,20 +35,18 @@ namespace NAPS2.Ocr
             return langCode.Split('+').All(code => availableLanguages.Any(x => x.Code == code));
         }
 
-        public OcrResult ProcessImage(Image image, string langCode)
+        public OcrResult ProcessImage(string imagePath, string langCode)
         {
             bool newTesseract = ocrDependencyManager.IsNewExecutableDownloaded;
-            string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             string tempHocrFilePathWithExt = tempHocrFilePath + (newTesseract ? ".hocr" : ".html");
             try
             {
-                image.Save(tempImageFilePath);
                 var exeDir = newTesseract ? ocrDependencyManager.GetExecutableDir() : ocrDependencyManager.GetOldExecutableDir();
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = Path.Combine(exeDir.FullName, "tesseract.exe"),
-                    Arguments = string.Format("\"{0}\" \"{1}\" -l {2} hocr", tempImageFilePath, tempHocrFilePath, langCode),
+                    Arguments = string.Format("\"{0}\" \"{1}\" -l {2} hocr", imagePath, tempHocrFilePath, langCode),
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
@@ -103,6 +101,10 @@ namespace NAPS2.Ocr
                 XDocument hocrDocument = XDocument.Load(tempHocrFilePathWithExt);
                 return new OcrResult
                 {
+                    PageBounds = hocrDocument.Descendants()
+                        .Where(x => x.Attributes("class").Any(y => y.Value == "ocr_page"))
+                        .Select(x => GetBounds(x.Attribute("title")))
+                        .First(),
                     Elements = hocrDocument.Descendants()
                         .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
                         .Select(x => new OcrResultElement { Text = x.Value, Bounds = GetBounds(x.Attribute("title")) })
@@ -117,7 +119,6 @@ namespace NAPS2.Ocr
             {
                 try
                 {
-                    File.Delete(tempImageFilePath);
                     File.Delete(tempHocrFilePathWithExt);
                 }
                 catch (Exception e)

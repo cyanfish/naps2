@@ -19,6 +19,7 @@
 */
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -76,83 +77,119 @@ namespace NAPS2.ImportExport.Pdf
                 document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
 
-            var imageList = images.ToList();
-            var pageList = imageList.Select(x => document.AddPage()).ToList();
 
-            double maxImageSizeMB = imageList.Select(x => x.Size / 1048576.0).Max();
-            double memoryLimitMB = Environment.Is64BitOperatingSystem ? 3000 : 1000;
-            int maxThreads = (int)Math.Floor(memoryLimitMB / (maxImageSizeMB * 4));
-
-            int progress = 0;
-
-            Parallel.For(0, imageList.Count, new ParallelOptions { MaxDegreeOfParallelism = maxThreads }, (i, loop) =>
+            bool useOcr = false;
+            if (ocrLanguageCode != null)
             {
-                if (!progressCallback(progress))
+                if (ocrEngine.CanProcess(ocrLanguageCode))
                 {
-                    loop.Stop();
-                    return;
+                    useOcr = true;
                 }
+                else
+                {
+                    Log.Error("OCR files not available for '{0}'.", ocrLanguageCode);
+                }
+            }
 
-                using (Stream stream = imageList[i].GetImageStream())
+            if (useOcr)
+            {
+                BuildDocumentWithOcr(document, images, ocrLanguageCode);
+            }
+            else
+            {
+                BuildDocumentWithoutOcr(document, images);
+            }
+
+            PathHelper.EnsureParentDirExists(path);
+            document.Save(path);
+            return true;
+        }
+
+        private void BuildDocumentWithoutOcr(PdfDocument document, IEnumerable<ScannedImage> images)
+        {
+            foreach (var image in images)
+            {
+                using (Stream stream = image.GetImageStream())
                 using (var img = new Bitmap(stream))
                 {
-                    if (!progressCallback(progress))
-                    {
-                        loop.Stop();
-                        return;
-                    }
-
-                    OcrResult ocrResult = null;
-                    if (ocrLanguageCode != null)
-                    {
-                        if (ocrEngine.CanProcess(ocrLanguageCode))
-                        {
-                            ocrResult = ocrEngine.ProcessImage(img, ocrLanguageCode);
-                        }
-                        else
-                        {
-                            Log.Error("OCR files not available for '{0}'.", ocrLanguageCode);
-                        }
-                    }
-
-                    if (!progressCallback(progress))
-                    {
-                        loop.Stop();
-                        return;
-                    }
-
                     float hAdjust = 72 / img.HorizontalResolution;
                     float vAdjust = 72 / img.VerticalResolution;
                     double realWidth = img.Width * hAdjust;
                     double realHeight = img.Height * vAdjust;
+                    PdfPage page = document.AddPage();
+                    page.Width = (int)realWidth;
+                    page.Height = (int)realHeight;
+                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                    {
+                        gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
+                    }
+                }
+            };
+        }
+
+        private void BuildDocumentWithOcr(PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
+        {
+            Pipeline.For(images).Step(image =>
+            {
+                using (Stream stream = image.GetImageStream())
+                using (var img = new Bitmap(stream))
+                {
+                    float hAdjust = 72 / img.HorizontalResolution;
+                    float vAdjust = 72 / img.VerticalResolution;
+                    double realWidth = img.Width * hAdjust;
+                    double realHeight = img.Height * vAdjust;
+                    PdfPage page;
                     lock (document)
                     {
-                        PdfPage newPage = pageList[i];
-                        newPage.Width = (int)realWidth;
-                        newPage.Height = (int)realHeight;
-                        using (XGraphics gfx = XGraphics.FromPdfPage(newPage))
+                        page = document.AddPage();
+                        page.Width = (int)realWidth;
+                        page.Height = (int)realHeight;
+                        using (XGraphics gfx = XGraphics.FromPdfPage(page))
                         {
-                            if (ocrResult != null)
-                            {
-                                var tf = new XTextFormatter(gfx);
-                                foreach (var element in ocrResult.Elements)
-                                {
-                                    var adjustedBounds = AdjustBounds(element.Bounds, hAdjust, vAdjust);
-                                    var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                                    var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
-                                        new XPdfFontOptions(PdfFontEncoding.Unicode));
-                                    tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
-                                }
-                            }
                             gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
                         }
                     }
-                    Interlocked.Increment(ref progress);
+
+                    string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+                    img.Save(tempImageFilePath);
+
+                    return Tuple.Create(page, tempImageFilePath);
+                }
+            }).StepParallel((page, tempImageFilePath) =>
+            {
+                OcrResult ocrResult;
+                try
+                {
+                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode);
+                }
+                finally
+                {
+                    File.Delete(tempImageFilePath);
+                }
+
+                return Tuple.Create(page, ocrResult);
+            }).Run((page, ocrResult) =>
+            {
+                if (ocrResult == null)
+                {
+                    return;
+                }
+                lock (document)
+                {
+                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                    {
+                        var tf = new XTextFormatter(gfx);
+                        foreach (var element in ocrResult.Elements)
+                        {
+                            var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
+                            var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+                            var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+                                new XPdfFontOptions(PdfFontEncoding.Unicode));
+                            tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
+                        }
+                    }
                 }
             });
-            PathHelper.EnsureParentDirExists(path);
-            document.Save(path);
-            return true;
         }
 
         private static RectangleF AdjustBounds(Rectangle b, float hAdjust, float vAdjust)
