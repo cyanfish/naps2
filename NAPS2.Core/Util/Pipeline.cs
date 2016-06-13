@@ -22,7 +22,7 @@ namespace NAPS2.Util
             return new PipelineSource<T>(input);
         }
 
-        public abstract class PipelineBase<T> : IPipelineSyntax<T>
+        private abstract class PipelineBase<T> : IPipelineSyntax<T>
         {
             public IPipelineSyntax<T2> Step<T2>(Func<T, T2> pipelineStepFunc)
             {
@@ -55,7 +55,7 @@ namespace NAPS2.Util
             public abstract IEnumerable<T> GetOutput(List<Task> taskList);
         }
 
-        public class PipelineSource<T> : PipelineBase<T>
+        private class PipelineSource<T> : PipelineBase<T>
         {
             private readonly IEnumerable<T> value;
 
@@ -70,7 +70,7 @@ namespace NAPS2.Util
             }
         }
 
-        public class PipelineStep<T1, T2> : PipelineBase<T2>
+        private class PipelineStep<T1, T2> : PipelineBase<T2>
         {
             private readonly PipelineBase<T1> previous;
             private readonly Func<T1, T2> func;
@@ -91,7 +91,11 @@ namespace NAPS2.Util
                     {
                         foreach (var item in input)
                         {
-                            collection.Add(func(item));
+                            var result = func(item);
+                            if (!ReferenceEquals(result, null))
+                            {
+                                collection.Add(result);
+                            }
                         }
                     }
                     finally
@@ -103,7 +107,7 @@ namespace NAPS2.Util
             }
         }
 
-        public class PipelineParallelStep<T1, T2> : PipelineBase<T2>
+        private class PipelineParallelStep<T1, T2> : PipelineBase<T2>
         {
             private readonly PipelineBase<T1> previous;
             private readonly Func<T1, T2> func;
@@ -122,7 +126,14 @@ namespace NAPS2.Util
                 {
                     try
                     {
-                        Parallel.ForEach(input, item => collection.Add(func(item)));
+                        Parallel.ForEach(input, item =>
+                        {
+                            var result = func(item);
+                            if (!ReferenceEquals(result, null))
+                            {
+                                collection.Add(result);
+                            }
+                        });
                     }
                     finally
                     {

@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -87,13 +88,12 @@ namespace NAPS2.ImportExport.Pdf
                 }
             }
 
-            if (useOcr)
+            bool result = useOcr
+                ? BuildDocumentWithOcr(progressCallback, document, images, ocrLanguageCode)
+                : BuildDocumentWithoutOcr(progressCallback, document, images);
+            if (!result)
             {
-                BuildDocumentWithOcr(document, images, ocrLanguageCode);
-            }
-            else
-            {
-                BuildDocumentWithoutOcr(document, images);
+                return false;
             }
 
             PathHelper.EnsureParentDirExists(path);
@@ -101,49 +101,67 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private void BuildDocumentWithoutOcr(PdfDocument document, IEnumerable<ScannedImage> images)
+        private bool BuildDocumentWithoutOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images)
         {
+            int progress = 0;
             foreach (var image in images)
             {
                 using (Stream stream = image.GetImageStream())
                 using (var img = new Bitmap(stream))
                 {
-                    float hAdjust = 72 / img.HorizontalResolution;
-                    float vAdjust = 72 / img.VerticalResolution;
-                    double realWidth = img.Width * hAdjust;
-                    double realHeight = img.Height * vAdjust;
+                    if (!progressCallback(progress))
+                    {
+                        return false;
+                    }
+
+                    Size realSize = GetRealSize(img);
                     PdfPage page = document.AddPage();
-                    page.Width = (int)realWidth;
-                    page.Height = (int)realHeight;
+                    page.Width = realSize.Width;
+                    page.Height = realSize.Height;
                     using (XGraphics gfx = XGraphics.FromPdfPage(page))
                     {
-                        gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
+                        gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
                     }
                 }
+                progress++;
             }
+            return true;
         }
 
-        private void BuildDocumentWithOcr(PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
+        private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
         {
+            int progress = 0;
             Pipeline.For(images).Step(image =>
             {
+                if (!progressCallback(progress))
+                {
+                    return null;
+                }
+
                 using (Stream stream = image.GetImageStream())
                 using (var img = new Bitmap(stream))
                 {
-                    float hAdjust = 72 / img.HorizontalResolution;
-                    float vAdjust = 72 / img.VerticalResolution;
-                    double realWidth = img.Width * hAdjust;
-                    double realHeight = img.Height * vAdjust;
+                    if (!progressCallback(progress))
+                    {
+                        return null;
+                    }
+
+                    Size realSize = GetRealSize(img);
                     PdfPage page;
                     lock (document)
                     {
                         page = document.AddPage();
-                        page.Width = (int)realWidth;
-                        page.Height = (int)realHeight;
+                        page.Width = realSize.Width;
+                        page.Height = realSize.Height;
                         using (XGraphics gfx = XGraphics.FromPdfPage(page))
                         {
-                            gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
+                            gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
                         }
+                    }
+
+                    if (!progressCallback(progress))
+                    {
+                        return null;
                     }
 
                     string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
@@ -156,6 +174,11 @@ namespace NAPS2.ImportExport.Pdf
                 OcrResult ocrResult;
                 try
                 {
+                    if (!progressCallback(progress))
+                    {
+                        return null;
+                    }
+
                     ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode);
                 }
                 finally
@@ -167,6 +190,10 @@ namespace NAPS2.ImportExport.Pdf
             }).Run((page, ocrResult) =>
             {
                 if (ocrResult == null)
+                {
+                    return;
+                }
+                if (!progressCallback(progress))
                 {
                     return;
                 }
@@ -185,7 +212,18 @@ namespace NAPS2.ImportExport.Pdf
                         }
                     }
                 }
+                Interlocked.Increment(ref progress);
             });
+            return progressCallback(progress);
+        }
+
+        private static Size GetRealSize(Bitmap img)
+        {
+            float hAdjust = 72 / img.HorizontalResolution;
+            float vAdjust = 72 / img.VerticalResolution;
+            double realWidth = img.Width * hAdjust;
+            double realHeight = img.Height * vAdjust;
+            return new Size((int)realWidth, (int)realHeight);
         }
 
         private static RectangleF AdjustBounds(Rectangle b, float hAdjust, float vAdjust)
