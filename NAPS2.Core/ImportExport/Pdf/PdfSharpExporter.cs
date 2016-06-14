@@ -114,14 +114,8 @@ namespace NAPS2.ImportExport.Pdf
                         return false;
                     }
 
-                    Size realSize = GetRealSize(img);
                     PdfPage page = document.AddPage();
-                    page.Width = realSize.Width;
-                    page.Height = realSize.Height;
-                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
-                    {
-                        gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
-                    }
+                    DrawImageOnPage(page, img);
                 }
                 progress++;
             }
@@ -130,9 +124,13 @@ namespace NAPS2.ImportExport.Pdf
 
         private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
         {
+            // Use a pipeline so that multiple pages/images can be processed in parallel
+
             int progress = 0;
             Pipeline.For(images).Step(image =>
             {
+                // Step 1: Load the image into memory, draw it on a new PDF page, and save a copy of the processed image to disk for OCR
+
                 if (!progressCallback(progress))
                 {
                     return null;
@@ -146,17 +144,11 @@ namespace NAPS2.ImportExport.Pdf
                         return null;
                     }
 
-                    Size realSize = GetRealSize(img);
                     PdfPage page;
                     lock (document)
                     {
                         page = document.AddPage();
-                        page.Width = realSize.Width;
-                        page.Height = realSize.Height;
-                        using (XGraphics gfx = XGraphics.FromPdfPage(page))
-                        {
-                            gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
-                        }
+                        DrawImageOnPage(page, img);
                     }
 
                     if (!progressCallback(progress))
@@ -171,6 +163,10 @@ namespace NAPS2.ImportExport.Pdf
                 }
             }).StepParallel((page, tempImageFilePath) =>
             {
+                // Step 2: Run OCR on the processsed image file
+                // This step is doubly parallel since not only can it run alongside other stages of the pipeline,
+                // multiple files can also be OCR'd at once (no locks needed on the PDF document)
+
                 OcrResult ocrResult;
                 try
                 {
@@ -189,6 +185,8 @@ namespace NAPS2.ImportExport.Pdf
                 return Tuple.Create(page, ocrResult);
             }).Run((page, ocrResult) =>
             {
+                // Step 3: Draw the OCR text on the PDF page
+
                 if (ocrResult == null)
                 {
                     return;
@@ -199,25 +197,41 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 lock (document)
                 {
-                    using (XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend))
-                    {
-                        var tf = new XTextFormatter(gfx);
-                        foreach (var element in ocrResult.Elements)
-                        {
-                            var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
-                            var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                            var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
-                                new XPdfFontOptions(PdfFontEncoding.Unicode));
-                            var adjustedHeight = gfx.MeasureString(element.Text, font).Height;
-                            var verticalOffset = (adjustedBounds.Height - adjustedHeight) / 2;
-                            adjustedBounds.Offset(0, (float)verticalOffset);
-                            tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
-                        }
-                    }
+                    DrawOcrTextOnPage(page, ocrResult);
                 }
                 Interlocked.Increment(ref progress);
             });
             return progressCallback(progress);
+        }
+
+        private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
+        {
+            using (XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend))
+            {
+                var tf = new XTextFormatter(gfx);
+                foreach (var element in ocrResult.Elements)
+                {
+                    var adjustedBounds = AdjustBounds(element.Bounds, (float) page.Width/ocrResult.PageBounds.Width, (float) page.Height/ocrResult.PageBounds.Height);
+                    var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+                    var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+                        new XPdfFontOptions(PdfFontEncoding.Unicode));
+                    var adjustedHeight = gfx.MeasureString(element.Text, font).Height;
+                    var verticalOffset = (adjustedBounds.Height - adjustedHeight)/2;
+                    adjustedBounds.Offset(0, (float) verticalOffset);
+                    tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
+                }
+            }
+        }
+
+        private static void DrawImageOnPage(PdfPage page, Bitmap img)
+        {
+            Size realSize = GetRealSize(img);
+            page.Width = realSize.Width;
+            page.Height = realSize.Height;
+            using (XGraphics gfx = XGraphics.FromPdfPage(page))
+            {
+                gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
+            }
         }
 
         private static Size GetRealSize(Bitmap img)
