@@ -208,6 +208,9 @@ namespace NAPS2.ImportExport.Pdf
                             var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
                             var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
                                 new XPdfFontOptions(PdfFontEncoding.Unicode));
+                            var adjustedHeight = gfx.MeasureString(element.Text, font).Height;
+                            var verticalOffset = (adjustedBounds.Height - adjustedHeight) / 2;
+                            adjustedBounds.Offset(0, (float)verticalOffset);
                             tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
                         }
                     }
