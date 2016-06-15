@@ -23,13 +23,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
 
 namespace NAPS2.ImportExport.Pdf
@@ -74,59 +74,173 @@ namespace NAPS2.ImportExport.Pdf
                 document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
 
-            int i = 0;
-            foreach (ScannedImage scannedImage in images)
+
+            bool useOcr = false;
+            if (ocrLanguageCode != null)
             {
-                using (Stream stream = scannedImage.GetImageStream())
+                if (ocrEngine.CanProcess(ocrLanguageCode))
+                {
+                    useOcr = true;
+                }
+                else
+                {
+                    Log.Error("OCR files not available for '{0}'.", ocrLanguageCode);
+                }
+            }
+
+            bool result = useOcr
+                ? BuildDocumentWithOcr(progressCallback, document, images, ocrLanguageCode)
+                : BuildDocumentWithoutOcr(progressCallback, document, images);
+            if (!result)
+            {
+                return false;
+            }
+
+            PathHelper.EnsureParentDirExists(path);
+            document.Save(path);
+            return true;
+        }
+
+        private bool BuildDocumentWithoutOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images)
+        {
+            int progress = 0;
+            foreach (var image in images)
+            {
+                using (Stream stream = image.GetImageStream())
                 using (var img = new Bitmap(stream))
                 {
-                    if (!progressCallback(i))
+                    if (!progressCallback(progress))
                     {
                         return false;
                     }
 
-                    OcrResult ocrResult = null;
-                    if (ocrLanguageCode != null)
+                    PdfPage page = document.AddPage();
+                    DrawImageOnPage(page, img);
+                }
+                progress++;
+            }
+            return true;
+        }
+
+        private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
+        {
+            // Use a pipeline so that multiple pages/images can be processed in parallel
+
+            int progress = 0;
+            Pipeline.For(images).Step(image =>
+            {
+                // Step 1: Load the image into memory, draw it on a new PDF page, and save a copy of the processed image to disk for OCR
+
+                if (!progressCallback(progress))
+                {
+                    return null;
+                }
+
+                using (Stream stream = image.GetImageStream())
+                using (var img = new Bitmap(stream))
+                {
+                    if (!progressCallback(progress))
                     {
-                        if (ocrEngine.CanProcess(ocrLanguageCode))
-                        {
-                            ocrResult = ocrEngine.ProcessImage(img, ocrLanguageCode);
-                        }
-                        else
-                        {
-                            Log.Error("OCR files not available for '{0}'.", ocrLanguageCode);
-                        }
+                        return null;
                     }
 
-                    float hAdjust = 72 / img.HorizontalResolution;
-                    float vAdjust = 72 / img.VerticalResolution;
-                    double realWidth = img.Width * hAdjust;
-                    double realHeight = img.Height * vAdjust;
-                    PdfPage newPage = document.AddPage();
-                    newPage.Width = (int)realWidth;
-                    newPage.Height = (int)realHeight;
-                    using (XGraphics gfx = XGraphics.FromPdfPage(newPage))
+                    PdfPage page;
+                    lock (document)
                     {
-                        if (ocrResult != null)
-                        {
-                            var tf = new XTextFormatter(gfx);
-                            foreach (var element in ocrResult.Elements)
-                            {
-                                var adjustedBounds = AdjustBounds(element.Bounds, hAdjust, vAdjust);
-                                var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                                var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
-                                    new XPdfFontOptions(PdfFontEncoding.Unicode));
-                                tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
-                            }
-                        }
-                        gfx.DrawImage(img, 0, 0, (int)realWidth, (int)realHeight);
+                        page = document.AddPage();
+                        DrawImageOnPage(page, img);
                     }
-                    i++;
+
+                    if (!progressCallback(progress))
+                    {
+                        return null;
+                    }
+
+                    string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+                    img.Save(tempImageFilePath);
+
+                    return Tuple.Create(page, tempImageFilePath);
+                }
+            }).StepParallel((page, tempImageFilePath) =>
+            {
+                // Step 2: Run OCR on the processsed image file
+                // This step is doubly parallel since not only can it run alongside other stages of the pipeline,
+                // multiple files can also be OCR'd at once (no locks needed on the PDF document)
+
+                OcrResult ocrResult;
+                try
+                {
+                    if (!progressCallback(progress))
+                    {
+                        return null;
+                    }
+
+                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode);
+                }
+                finally
+                {
+                    File.Delete(tempImageFilePath);
+                }
+
+                return Tuple.Create(page, ocrResult);
+            }).Run((page, ocrResult) =>
+            {
+                // Step 3: Draw the OCR text on the PDF page
+
+                if (ocrResult == null)
+                {
+                    return;
+                }
+                if (!progressCallback(progress))
+                {
+                    return;
+                }
+                lock (document)
+                {
+                    DrawOcrTextOnPage(page, ocrResult);
+                }
+                Interlocked.Increment(ref progress);
+            });
+            return progressCallback(progress);
+        }
+
+        private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
+        {
+            using (XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend))
+            {
+                var tf = new XTextFormatter(gfx);
+                foreach (var element in ocrResult.Elements)
+                {
+                    var adjustedBounds = AdjustBounds(element.Bounds, (float) page.Width/ocrResult.PageBounds.Width, (float) page.Height/ocrResult.PageBounds.Height);
+                    var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+                    var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+                        new XPdfFontOptions(PdfFontEncoding.Unicode));
+                    var adjustedHeight = gfx.MeasureString(element.Text, font).Height;
+                    var verticalOffset = (adjustedBounds.Height - adjustedHeight)/2;
+                    adjustedBounds.Offset(0, (float) verticalOffset);
+                    tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
                 }
             }
-            PathHelper.EnsureParentDirExists(path);
-            document.Save(path);
-            return true;
+        }
+
+        private static void DrawImageOnPage(PdfPage page, Bitmap img)
+        {
+            Size realSize = GetRealSize(img);
+            page.Width = realSize.Width;
+            page.Height = realSize.Height;
+            using (XGraphics gfx = XGraphics.FromPdfPage(page))
+            {
+                gfx.DrawImage(img, 0, 0, realSize.Width, realSize.Height);
+            }
+        }
+
+        private static Size GetRealSize(Bitmap img)
+        {
+            float hAdjust = 72 / img.HorizontalResolution;
+            float vAdjust = 72 / img.VerticalResolution;
+            double realWidth = img.Width * hAdjust;
+            double realHeight = img.Height * vAdjust;
+            return new Size((int)realWidth, (int)realHeight);
         }
 
         private static RectangleF AdjustBounds(Rectangle b, float hAdjust, float vAdjust)
