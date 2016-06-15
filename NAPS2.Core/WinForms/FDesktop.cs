@@ -1700,13 +1700,20 @@ namespace NAPS2.WinForms
 
         private void SetThumbnailSpacing(int thumbnailSize)
         {
+            thumbnailList1.Padding = new Padding(0, 20, 0, 0);
+            const int MIN_PADDING = 6;
+            const int MAX_PADDING = 18;
+            // Linearly scale the padding with the thumbnail size
+            int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailRenderer.MIN_SIZE) / (ThumbnailRenderer.MAX_SIZE - ThumbnailRenderer.MIN_SIZE);
+            int spacing = thumbnailSize + padding * 2;
+            SetListSpacing(thumbnailList1, spacing, spacing);
+        }
+
+        private void SetListSpacing(ListView list, int hspacing, int vspacing)
+        {
             const int LVM_FIRST = 0x1000;
             const int LVM_SETICONSPACING = LVM_FIRST + 53;
-            int leftPadding = 8;
-            int topPadding = 8;
-            int width = thumbnailSize + leftPadding * 2;
-            int height = thumbnailSize + topPadding * 2;
-            Win32.SendMessage(thumbnailList1.Handle, LVM_SETICONSPACING, IntPtr.Zero, (IntPtr) (int) (((ushort) width) | (uint) (height << 16)));
+            Win32.SendMessage(list.Handle, LVM_SETICONSPACING, IntPtr.Zero, (IntPtr) (int) (((ushort) hspacing) | (uint) (vspacing << 16)));
         }
 
         private void RenderThumbnails(int thumbnailSize, IEnumerable<ScannedImage> imagesToRenderThumbnailsFor)
