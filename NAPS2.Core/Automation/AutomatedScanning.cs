@@ -479,7 +479,7 @@ namespace NAPS2.Automation
                 }
                 OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
                 pagesScanned = 0;
-                scanPerformer.PerformScan(profile, new ScanParams { NoAutoSave = !options.AutoSave }, parentWindow, null, ReceiveScannedImage);
+                scanPerformer.PerformScan(profile, new ScanParams { NoUI = true, NoAutoSave = !options.AutoSave }, parentWindow, null, ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }

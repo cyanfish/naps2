@@ -6,7 +6,7 @@ using WIA;
 
 namespace NAPS2.Scan.Wia
 {
-    public class ConsoleWiaTransfer : IWiaTransfer
+    public class BackgroundWiaTransfer : IWiaTransfer
     {
         public Stream Transfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format)
         {

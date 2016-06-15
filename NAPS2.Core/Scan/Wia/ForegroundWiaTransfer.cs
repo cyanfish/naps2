@@ -8,11 +8,11 @@ using WIA;
 
 namespace NAPS2.Scan.Wia
 {
-    public class WinFormsWiaTransfer : IWiaTransfer
+    public class ForegroundWiaTransfer : IWiaTransfer
     {
         private readonly IFormFactory formFactory;
 
-        public WinFormsWiaTransfer(IFormFactory formFactory)
+        public ForegroundWiaTransfer(IFormFactory formFactory)
         {
             this.formFactory = formFactory;
         }

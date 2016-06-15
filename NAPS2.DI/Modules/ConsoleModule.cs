@@ -35,7 +35,6 @@ namespace NAPS2.DI.Modules
         public override void Load()
         {
             Bind<IPdfPasswordProvider>().To<ConsolePdfPasswordProvider>();
-            Bind<IWiaTransfer>().To<ConsoleWiaTransfer>();
             Bind<IErrorOutput>().To<ConsoleErrorOutput>();
             Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
             Bind<ThumbnailRenderer>().To<NullThumbnailRenderer>();

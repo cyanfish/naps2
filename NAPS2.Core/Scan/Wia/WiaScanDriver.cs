@@ -34,14 +34,16 @@ namespace NAPS2.Scan.Wia
     {
         public const string DRIVER_NAME = "wia";
 
-        private readonly IWiaTransfer wiaTransfer;
+        private readonly IWiaTransfer backgroundWiaTransfer;
+        private readonly IWiaTransfer foregroundWiaTransfer;
         private readonly ThreadFactory threadFactory;
         private readonly IBlankDetector blankDetector;
         private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public WiaScanDriver(IWiaTransfer wiaTransfer, ThreadFactory threadFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer)
+        public WiaScanDriver(BackgroundWiaTransfer backgroundWiaTransfer, ForegroundWiaTransfer foregroundWiaTransfer, ThreadFactory threadFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer)
         {
-            this.wiaTransfer = wiaTransfer;
+            this.backgroundWiaTransfer = backgroundWiaTransfer;
+            this.foregroundWiaTransfer = foregroundWiaTransfer;
             this.threadFactory = threadFactory;
             this.blankDetector = blankDetector;
             this.thumbnailRenderer = thumbnailRenderer;
@@ -105,8 +107,7 @@ namespace NAPS2.Scan.Wia
         {
             try
             {
-                // TODO: Use the NoUI flag uniformly
-                var transfer = ScanParams.NoUI ? new ConsoleWiaTransfer() : wiaTransfer;
+                var transfer = ScanParams.NoUI ? backgroundWiaTransfer : foregroundWiaTransfer;
                 using (var stream = transfer.Transfer(pageNumber, eventLoop, WiaApi.Formats.BMP))
                 {
                     if (stream == null)

@@ -14,7 +14,6 @@ namespace NAPS2.DI.Modules
         public override void Load()
         {
             Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
-            Bind<IWiaTransfer>().To<WinFormsWiaTransfer>();
             Bind<IErrorOutput>().To<MessageBoxErrorOutput>();
             Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
         }
