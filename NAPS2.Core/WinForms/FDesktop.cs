@@ -1143,10 +1143,9 @@ namespace NAPS2.WinForms
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
-            // Re-download a fixed version on Windows XP if needed
-            if (ocrDependencyManager.InstalledTesseractExe != null && !ocrDependencyManager.InstalledTesseractExe.IsSupported
-                && !appConfigManager.Config.NoUpdatePrompt && ocrDependencyManager.Components.Tesseract304Xp.IsSupported)
+            if (ocrDependencyManager.TesseractExeRequiresFix && !appConfigManager.Config.NoUpdatePrompt)
             {
+                // Re-download a fixed version on Windows XP if needed
                 MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var progressForm = FormFactory.Create<FDownloadProgress>();
                 progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304Xp,

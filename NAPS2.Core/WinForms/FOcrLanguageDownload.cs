@@ -17,23 +17,27 @@ namespace NAPS2.WinForms
             InitializeComponent();
 
             var initialSelection = new HashSet<string>();
-            if (ocrDependencyManager.Components.Tesseract302.IsInstalled && !ocrDependencyManager.HasNewTesseractExe)
+            if (!ocrDependencyManager.HasNewTesseractExe)
             {
-                // Upgrade
-                foreach (var lang in ocrDependencyManager.Components.Tesseract302Languages.Where(x => x.Value.IsInstalled))
+                // The new OCR version hasn't been installed yet, so pre-select some languages
+                if (ocrDependencyManager.Components.Tesseract302.IsInstalled)
                 {
-                    initialSelection.Add(lang.Key);
+                    // Upgrading from an old version, so pre-select previously used languages
+                    foreach (var lang in ocrDependencyManager.Components.Tesseract302Languages.Where(x => x.Value.IsInstalled))
+                    {
+                        initialSelection.Add(lang.Key);
+                    }
+                }
+                else
+                {
+                    // Fresh install, so pre-select English as a sensible default
+                    initialSelection.Add("eng");
                 }
             }
-            else if (!ocrDependencyManager.HasNewTesseractExe)
-            {
-                // Fresh install
-                initialSelection.Add("eng");
-            }
 
-            // Add missing languages to the list of language options
-            // Special case for English: sorted first, and checked by default
-            var languageOptions = this.ocrDependencyManager.Components.Tesseract304Languages.Where(x => !x.Value.IsInstalled)
+            // Populate the list of language options
+            // Special case for English: sorted to the top of the list
+            var languageOptions = ocrDependencyManager.Components.Tesseract304Languages.Where(x => !x.Value.IsInstalled)
                 .Select(x => ocrDependencyManager.Languages[x.Key])
                 .OrderBy(x => x.Code == "eng" ? "AAA" : x.Name);
             foreach (var languageOption in languageOptions)
@@ -78,10 +82,7 @@ namespace NAPS2.WinForms
 
             labelSizeEstimate.Text = string.Format(MiscResources.EstimatedDownloadSize, downloadSize.ToString("f1"));
 
-            bool fixingExe = ocrDependencyManager.Components.Tesseract304.IsInstalled
-                && !ocrDependencyManager.Components.Tesseract304.IsSupported
-                && !ocrDependencyManager.Components.Tesseract304Xp.IsInstalled;
-            btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked) || fixingExe;
+            btnDownload.Enabled = lvLanguages.Items.Cast<ListViewItem>().Any(x => x.Checked) || ocrDependencyManager.TesseractExeRequiresFix;
         }
 
         private void lvLanguages_ItemChecked(object sender, ItemCheckedEventArgs e)

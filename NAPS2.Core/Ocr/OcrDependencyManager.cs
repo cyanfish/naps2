@@ -77,6 +77,22 @@ namespace NAPS2.Ocr
             get { return Components.Tesseract304.IsInstalled || Components.Tesseract304Xp.IsInstalled; }
         }
 
+        public bool IsOcrSupported
+        {
+            get
+            {
+                return PlatformSupport.Windows.Validate();
+            }
+        }
+
+        public bool TesseractExeRequiresFix
+        {
+            get
+            {
+                return InstalledTesseractExe != null && !InstalledTesseractExe.IsSupported && IsOcrSupported;
+            }
+        }
+
         #region Language Data (auto-generated)
 
         private static readonly OcrLanguage[] LanguageData =
