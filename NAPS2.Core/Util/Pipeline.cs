@@ -34,6 +34,11 @@ namespace NAPS2.Util
                 return new OrderMaintainingPipelineParallelStep<T, T2>(this, pipelineStepFunc);
             }
 
+            public IPipelineSyntax<T> StepBlock()
+            {
+                return new PipelineBlockingStep<T>(this);
+            }
+
             public List<T> Run()
             {
                 var taskList = new List<Task>();
@@ -104,6 +109,21 @@ namespace NAPS2.Util
                     }
                 }));
                 return collection.GetConsumingEnumerable();
+            }
+        }
+
+        private class PipelineBlockingStep<T> : PipelineBase<T>
+        {
+            private readonly PipelineBase<T> previous;
+
+            public PipelineBlockingStep(PipelineBase<T> previous)
+            {
+                this.previous = previous;
+            }
+
+            public override IEnumerable<T> GetOutput(List<Task> taskList)
+            {
+                return previous.GetOutput(taskList).ToList();
             }
         }
 
@@ -232,6 +252,11 @@ namespace NAPS2.Util
             /// </summary>
             /// <param name="pipelineFinishAction"></param>
             void Run(Action<T> pipelineFinishAction);
+
+            /// <summary>
+            /// Blocks the pipeline until all previous steps are completed, then continues with subsequent steps.
+            /// </summary>
+            IPipelineSyntax<T> StepBlock();
         }
 
         #region Extensions for Tuples

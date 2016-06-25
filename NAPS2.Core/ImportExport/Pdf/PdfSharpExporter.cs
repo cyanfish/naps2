@@ -125,6 +125,7 @@ namespace NAPS2.ImportExport.Pdf
         private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
+            // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
 
             int progress = 0;
             Pipeline.For(images).Step(image =>
@@ -144,12 +145,8 @@ namespace NAPS2.ImportExport.Pdf
                         return null;
                     }
 
-                    PdfPage page;
-                    lock (document)
-                    {
-                        page = document.AddPage();
-                        DrawImageOnPage(page, img);
-                    }
+                    PdfPage page = document.AddPage();
+                    DrawImageOnPage(page, img);
 
                     if (!progressCallback(progress))
                     {
@@ -182,8 +179,11 @@ namespace NAPS2.ImportExport.Pdf
                     File.Delete(tempImageFilePath);
                 }
 
+                Interlocked.Increment(ref progress);
+                progressCallback(progress);
+
                 return Tuple.Create(page, ocrResult);
-            }).Run((page, ocrResult) =>
+            }).StepBlock().Run((page, ocrResult) =>
             {
                 // Step 3: Draw the OCR text on the PDF page
 
@@ -195,12 +195,7 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     return;
                 }
-                lock (document)
-                {
-                    DrawOcrTextOnPage(page, ocrResult);
-                }
-                Interlocked.Increment(ref progress);
-                progressCallback(progress);
+                DrawOcrTextOnPage(page, ocrResult);
             });
             return progressCallback(progress);
         }
