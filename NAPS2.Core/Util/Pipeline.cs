@@ -183,17 +183,21 @@ namespace NAPS2.Util
                 {
                     try
                     {
-                        var resultDict = new Dictionary<int, T2>();
+                        // Store results in an intermediate container so that we can send them to the actual output in the correct order
+                        var resultBuffer = new Dictionary<int, T2>();
                         int outputIndex = 0;
                         Parallel.ForEach(WithIndexAsKey(input), item =>
                         {
                             var result = func(item.Value);
-                            lock (resultDict)
+                            lock (resultBuffer)
                             {
-                                resultDict.Add(item.Key, result);
-                                while (resultDict.ContainsKey(outputIndex))
+                                resultBuffer.Add(item.Key, result);
+                                // Check if we have anything ready to send to the actual output
+                                // If the "next" result is missing, nothing will be sent yet, and results will just be buffered
+                                // After all items are processed, this is guaranteed to send all buffered results
+                                while (resultBuffer.ContainsKey(outputIndex))
                                 {
-                                    var output = resultDict[outputIndex];
+                                    var output = resultBuffer[outputIndex];
                                     if (!ReferenceEquals(output, null))
                                     {
                                         collection.Add(output);

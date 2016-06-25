@@ -162,7 +162,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 // Step 2: Run OCR on the processsed image file
                 // This step is doubly parallel since not only can it run alongside other stages of the pipeline,
-                // multiple files can also be OCR'd at once (no locks needed on the PDF document)
+                // multiple files can also be OCR'd at once (no interdependencies, it doesn't touch the document)
 
                 OcrResult ocrResult;
                 try
@@ -179,6 +179,7 @@ namespace NAPS2.ImportExport.Pdf
                     File.Delete(tempImageFilePath);
                 }
 
+                // The final pipeline step is pretty fast, so updating progress here is more accurate
                 Interlocked.Increment(ref progress);
                 progressCallback(progress);
 
