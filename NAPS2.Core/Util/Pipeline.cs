@@ -31,7 +31,7 @@ namespace NAPS2.Util
 
             public IPipelineSyntax<T2> StepParallel<T2>(Func<T, T2> pipelineStepFunc)
             {
-                return new PipelineParallelStep<T, T2>(this, pipelineStepFunc);
+                return new OrderMaintainingPipelineParallelStep<T, T2>(this, pipelineStepFunc);
             }
 
             public List<T> Run()
@@ -144,6 +144,67 @@ namespace NAPS2.Util
             }
         }
 
+        private class OrderMaintainingPipelineParallelStep<T1, T2> : PipelineBase<T2>
+        {
+            private readonly PipelineBase<T1> previous;
+            private readonly Func<T1, T2> func;
+
+            public OrderMaintainingPipelineParallelStep(PipelineBase<T1> previous, Func<T1, T2> func)
+            {
+                this.previous = previous;
+                this.func = func;
+            }
+
+            public override IEnumerable<T2> GetOutput(List<Task> taskList)
+            {
+                var collection = new BlockingCollection<T2>();
+                var input = previous.GetOutput(taskList);
+                taskList.Add(TaskFactory.StartNew(() =>
+                {
+                    try
+                    {
+                        var resultDict = new Dictionary<int, T2>();
+                        int outputIndex = 0;
+                        Parallel.ForEach(WithIndexAsKey(input), item =>
+                        {
+                            var result = func(item.Value);
+                            lock (resultDict)
+                            {
+                                resultDict.Add(item.Key, result);
+                                while (resultDict.ContainsKey(outputIndex))
+                                {
+                                    var output = resultDict[outputIndex];
+                                    if (!ReferenceEquals(output, null))
+                                    {
+                                        collection.Add(output);
+                                    }
+                                    outputIndex++;
+                                }
+                            }
+                        });
+                    }
+                    finally
+                    {
+                        collection.CompleteAdding();
+                    }
+                }));
+                return collection.GetConsumingEnumerable();
+            }
+
+            private IEnumerable<KeyValuePair<int, T1>> WithIndexAsKey(IEnumerable<T1> input)
+            {
+                return input.Zip(WholeNumbers(), (value, key) => new KeyValuePair<int, T1>(key, value));
+            }
+
+            private IEnumerable<int> WholeNumbers()
+            {
+                for (int i = 0; ; i++)
+                {
+                    yield return i;
+                }
+            }
+        }
+
         public interface IPipelineSyntax<T>
         {
             /// <summary>
@@ -154,7 +215,7 @@ namespace NAPS2.Util
             IPipelineSyntax<T2> Step<T2>(Func<T, T2> pipelineStepFunc);
 
             /// <summary>
-            /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order will not be maintained!
+            /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order is maintained.
             /// </summary>
             /// <param name="pipelineStepFunc"></param>
             /// <returns></returns>
@@ -187,7 +248,7 @@ namespace NAPS2.Util
         }
 
         /// <summary>
-        /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order will not be maintained!
+        /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order is maintained.
         /// </summary>
         /// <param name="syntax"></param>
         /// <param name="pipelineStepFunc"></param>

@@ -200,6 +200,7 @@ namespace NAPS2.ImportExport.Pdf
                     DrawOcrTextOnPage(page, ocrResult);
                 }
                 Interlocked.Increment(ref progress);
+                progressCallback(progress);
             });
             return progressCallback(progress);
         }
