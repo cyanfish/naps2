@@ -71,7 +71,7 @@ namespace NAPS2.ImportExport
             catch (Exception ex)
             {
                 Log.ErrorException(MiscResources.AutoSaveError, ex);
-                errorOutput.DisplayError(MiscResources.AutoSaveError);
+                errorOutput.DisplayError(MiscResources.AutoSaveError, ex);
                 return false;
             }
         }

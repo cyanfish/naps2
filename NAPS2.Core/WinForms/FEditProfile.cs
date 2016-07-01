@@ -249,8 +249,12 @@ namespace NAPS2.WinForms
                 if (e is ScanDriverUnknownException)
                 {
                     Log.ErrorException(e.Message, e.InnerException);
+                    errorOutput.DisplayError(e.Message, e);
                 }
-                errorOutput.DisplayError(e.Message);
+                else
+                {
+                    errorOutput.DisplayError(e.Message);
+                }
             }
         }
 

@@ -36,11 +36,11 @@ namespace NAPS2.Operation
             }
         }
 
-        protected void InvokeError(string message)
+        protected void InvokeError(string message, Exception exception)
         {
             if (Error != null)
             {
-                Error.Invoke(this, new OperationErrorEventArgs(message));
+                Error.Invoke(this, new OperationErrorEventArgs(message, exception));
             }
         }
     }

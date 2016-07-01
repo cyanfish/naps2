@@ -86,7 +86,7 @@ namespace NAPS2.ImportExport.Email.Mapi
                 if (returnCode != MapiSendMailReturnCode.Success)
                 {
                     Log.Error("Error sending email. MAPI error code: {0}", returnCode);
-                    errorOutput.DisplayError(MiscResources.EmailError);
+                    errorOutput.DisplayError(MiscResources.EmailError, string.Format("MAPI returned error code: {0}", returnCode));
                     return false;
                 }
                 return true;

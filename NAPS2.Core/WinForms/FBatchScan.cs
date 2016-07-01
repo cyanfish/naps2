@@ -342,13 +342,17 @@ namespace NAPS2.WinForms
                 if (ex is ScanDriverUnknownException)
                 {
                     Log.ErrorException("Error in batch scan", ex);
+                    errorOutput.DisplayError(ex.Message, ex);
                 }
-                errorOutput.DisplayError(ex.Message);
+                else
+                {
+                    errorOutput.DisplayError(ex.Message);
+                }
             }
             catch (Exception ex)
             {
                 Log.ErrorException("Error in batch scan", ex);
-                errorOutput.DisplayError(MiscResources.BatchError);
+                errorOutput.DisplayError(MiscResources.BatchError, ex);
                 Invoke(() =>
                 {
                     lblStatus.Text = MiscResources.BatchStatusError;

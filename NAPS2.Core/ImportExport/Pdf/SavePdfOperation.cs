@@ -81,14 +81,14 @@ namespace NAPS2.ImportExport.Pdf
                         return !cancel;
                     });
                 }
-                catch (UnauthorizedAccessException)
+                catch (UnauthorizedAccessException ex)
                 {
-                    InvokeError(MiscResources.DontHavePermission);
+                    InvokeError(MiscResources.DontHavePermission, ex);
                 }
                 catch (Exception ex)
                 {
                     Log.ErrorException(MiscResources.ErrorSaving, ex);
-                    InvokeError(MiscResources.ErrorSaving);
+                    InvokeError(MiscResources.ErrorSaving, ex);
                 }
                 GC.Collect();
                 InvokeFinished();

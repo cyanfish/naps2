@@ -45,7 +45,7 @@ namespace NAPS2.WinForms
 
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
-            errorOutput.DisplayError(e.ErrorMessage);
+            Invoke(() => errorOutput.DisplayError(e.ErrorMessage, e.Exception));
         }
 
         void operation_StatusChanged(object sender, EventArgs e)

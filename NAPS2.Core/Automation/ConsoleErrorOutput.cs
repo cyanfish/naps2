@@ -11,5 +11,15 @@ namespace NAPS2.Automation
         {
             System.Console.WriteLine(errorMessage);
         }
+
+        public void DisplayError(string errorMessage, string details)
+        {
+            DisplayError(errorMessage);
+        }
+
+        public void DisplayError(string errorMessage, Exception exception)
+        {
+            DisplayError(errorMessage);
+        }
     }
 }

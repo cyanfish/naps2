@@ -73,7 +73,7 @@ namespace NAPS2.ImportExport
                 catch (Exception ex)
                 {
                     Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
-                    InvokeError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)));
+                    InvokeError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
                 }
                 if (!oneFile)
                 {

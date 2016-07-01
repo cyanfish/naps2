@@ -153,14 +153,14 @@ namespace NAPS2.ImportExport.Images
 
                     Status.Success = true;
                 }
-                catch (UnauthorizedAccessException)
+                catch (UnauthorizedAccessException ex)
                 {
-                    InvokeError(MiscResources.DontHavePermission);
+                    InvokeError(MiscResources.DontHavePermission, ex);
                 }
                 catch (Exception ex)
                 {
                     Log.ErrorException(MiscResources.ErrorSaving, ex);
-                    InvokeError(MiscResources.ErrorSaving);
+                    InvokeError(MiscResources.ErrorSaving, ex);
                 }
                 finally
                 {

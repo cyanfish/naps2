@@ -11,10 +11,12 @@ namespace NAPS2.WinForms
     public class DialogHelper
     {
         private readonly IUserConfigManager userConfigManager;
+        private readonly IFormFactory formFactory;
 
-        public DialogHelper(IUserConfigManager userConfigManager)
+        public DialogHelper(IUserConfigManager userConfigManager, IFormFactory formFactory)
         {
             this.userConfigManager = userConfigManager;
+            this.formFactory = formFactory;
         }
 
         public bool PromptToSavePdfOrImage(string defaultPath, out string savePath)
@@ -119,6 +121,14 @@ namespace NAPS2.WinForms
             return Path.IsPathRooted(defaultPath)
                 ? Path.GetDirectoryName(defaultPath)
                 : "";
+        }
+
+        public void ShowErrorWithDetails(string errorMesage, string details)
+        {
+            var form = formFactory.Create<FError>();
+            form.ErrorMessage = errorMesage;
+            form.Details = details;
+            form.ShowDialog();
         }
     }
 }
