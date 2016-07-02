@@ -62,6 +62,11 @@ namespace NAPS2.ImportExport.Pdf
             };
             cancel = false;
 
+            if (Directory.Exists(subFileName))
+            {
+                // Not supposed to be a directory, but ok...
+                subFileName = fileNamePlaceholders.SubstitutePlaceholders(Path.Combine(subFileName, "$(n).pdf"), dateTime);
+            }
             if (File.Exists(subFileName))
             {
                 if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)

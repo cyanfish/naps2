@@ -78,6 +78,12 @@ namespace NAPS2.ImportExport.Images
                 try
                 {
                     var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, batch);
+                    if (Directory.Exists(subFileName))
+                    {
+                        // Not supposed to be a directory, but ok...
+                        fileName = Path.Combine(subFileName, "$(n).jpg");
+                        subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, batch);
+                    }
                     ImageFormat format = GetImageFormat(subFileName);
 
                     if (Equals(format, ImageFormat.Tiff))
