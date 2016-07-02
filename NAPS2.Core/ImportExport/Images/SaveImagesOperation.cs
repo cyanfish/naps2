@@ -36,7 +36,6 @@ namespace NAPS2.ImportExport.Images
 {
     public class SaveImagesOperation : OperationBase
     {
-        private readonly IErrorOutput errorOutput;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOverwritePrompt overwritePrompt;
@@ -45,9 +44,8 @@ namespace NAPS2.ImportExport.Images
         private bool cancel;
         private Thread thread;
 
-        public SaveImagesOperation(IErrorOutput errorOutput, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory)
+        public SaveImagesOperation(FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory)
         {
-            this.errorOutput = errorOutput;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.overwritePrompt = overwritePrompt;
@@ -194,9 +192,13 @@ namespace NAPS2.ImportExport.Images
             cancel = true;
         }
 
-        public void WaitUntilFinished()
+        public void WaitUntilFinished(bool throwOnError = true)
         {
             thread.Join();
+            if (throwOnError && LastError != null)
+            {
+                throw new Exception(LastError.ErrorMessage, LastError.Exception);
+            }
         }
 
         private static ImageFormat GetImageFormat(string fileName)

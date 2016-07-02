@@ -20,6 +20,8 @@ namespace NAPS2.Operation
 
         public event EventHandler<OperationErrorEventArgs> Error;
 
+        protected OperationErrorEventArgs LastError { get; private set; }
+
         protected void InvokeFinished()
         {
             if (Finished != null)
@@ -38,9 +40,11 @@ namespace NAPS2.Operation
 
         protected void InvokeError(string message, Exception exception)
         {
+            var args = new OperationErrorEventArgs(message, exception);
+            LastError = args;
             if (Error != null)
             {
-                Error.Invoke(this, new OperationErrorEventArgs(message, exception));
+                Error.Invoke(this, args);
             }
         }
     }
