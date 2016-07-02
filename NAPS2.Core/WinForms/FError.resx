@@ -122,14 +122,17 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblErrorText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
+    <value>50, 6</value>
   </data>
   <data name="lblErrorText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 37</value>
+    <value>334, 37</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblErrorText.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="lblErrorText.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;lblErrorText.Name" xml:space="preserve">
     <value>lblErrorText</value>
@@ -148,7 +151,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 173</value>
+    <value>309, 178</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -175,7 +178,7 @@
     <value>True</value>
   </data>
   <data name="linkDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 46</value>
+    <value>12, 51</value>
   </data>
   <data name="linkDetails.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 13</value>
@@ -199,10 +202,13 @@
     <value>1</value>
   </data>
   <data name="txtDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 62</value>
+    <value>12, 67</value>
   </data>
   <data name="txtDetails.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="txtDetails.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
   </data>
   <data name="txtDetails.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 105</value>
@@ -229,7 +235,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>396, 208</value>
+    <value>396, 213</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -241,6 +247,6 @@
     <value>FError</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.2.1.29592, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.2.1.36098, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
