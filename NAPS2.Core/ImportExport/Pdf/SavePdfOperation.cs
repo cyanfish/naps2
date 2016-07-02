@@ -85,6 +85,18 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     InvokeError(MiscResources.DontHavePermission, ex);
                 }
+                catch (IOException ex)
+                {
+                    if (File.Exists(subFileName))
+                    {
+                        InvokeError(MiscResources.FileInUse, ex);
+                    }
+                    else
+                    {
+                        Log.ErrorException(MiscResources.ErrorSaving, ex);
+                        InvokeError(MiscResources.ErrorSaving, ex);
+                    }
+                }
                 catch (Exception ex)
                 {
                     Log.ErrorException(MiscResources.ErrorSaving, ex);

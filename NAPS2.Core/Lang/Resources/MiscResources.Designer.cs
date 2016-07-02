@@ -457,6 +457,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file could not be overwritten because it is currently in use..
+        /// </summary>
+        internal static string FileInUse {
+            get {
+                return ResourceManager.GetString("FileInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more files could not be downloaded..
         /// </summary>
         internal static string FilesCouldNotBeDownloaded {
