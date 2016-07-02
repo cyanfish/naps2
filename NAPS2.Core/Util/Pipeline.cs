@@ -258,7 +258,7 @@ namespace NAPS2.Util
             void Run(Action<T> pipelineFinishAction);
 
             /// <summary>
-            /// Blocks the pipeline until all previous steps are completed, then continues with subsequent steps.
+            /// Indicates that the pipeline should be blocked until all previous steps are completed before continuing with subsequent steps.
             /// </summary>
             IPipelineSyntax<T> StepBlock();
         }
