@@ -44,13 +44,10 @@ namespace NAPS2.ImportExport
                     {
                         if (image.PatchCode == PatchCode.PatchT)
                         {
+                            image.Dispose();
                             if (images.Count > 0)
                             {
                                 yield return images;
-                                foreach (var img2 in images)
-                                {
-                                    img2.Dispose();
-                                }
                                 images = new List<ScannedImage>();
                             }
                         }
@@ -59,10 +56,10 @@ namespace NAPS2.ImportExport
                             images.Add(image);
                         }
                     }
-                    if (images.Count > 0)
-                    {
-                        yield return images;
-                    }
+                }
+                if (images.Count > 0)
+                {
+                    yield return images;
                 }
             }
             else
