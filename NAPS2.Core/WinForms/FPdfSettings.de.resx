@@ -928,7 +928,7 @@
         <value>10</value>
     </data>
     <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>Erlaube Dokument-Zusammenstellung</value>
+        <value>Erlaube Dokumentenzusammenführung</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
         <value>cbAllowDocumentAssembly</value>
@@ -1243,7 +1243,7 @@
         <value>32</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Default File Path:</value>
+        <value>Standarddateipfad:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -1297,7 +1297,7 @@
         <value>35</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>Überspringe Speicherdialog</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>

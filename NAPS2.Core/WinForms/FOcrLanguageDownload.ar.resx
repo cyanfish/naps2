@@ -132,7 +132,7 @@
         <value>3</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Select one or more languages:</value>
+        <value>اختيار لغة واحدة أو أكثر:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -156,7 +156,7 @@
         <value>5</value>
     </data>
     <data name="btnDownload.Text" xml:space="preserve">
-        <value>&amp;Download</value>
+        <value>تنزيل</value>
     </data>
     <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
         <value>btnDownload</value>
@@ -228,7 +228,7 @@
         <value>8</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Using OCR requires you to download each language you want to scan.</value>
+        <value>استخدام التعرف الضوئي على الحروف OCR يتطلب منك تحميل كل لغة تريد مسحها ضوئيا.</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -255,7 +255,7 @@
         <value>9</value>
     </data>
     <data name="labelSizeEstimate.Text" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>حجم التنزيل المقدّر: {0} ميغابايت</value>
     </data>
     <data name="&gt;&gt;labelSizeEstimate.Name" xml:space="preserve">
         <value>labelSizeEstimate</value>
@@ -305,7 +305,7 @@
         <value>439, 310</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>OCR Download</value>
+        <value>تحميل التعرف الضوئي على الحروف OCR</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrLanguageDownload</value>

@@ -127,7 +127,7 @@
         <value>Möchten Sie wirklich {0} Seite(n) löschen?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>{0} Seite(n) wirklich öschen?</value>
+        <value>{0} Seite(n) wirklich löschen?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
         <value>Möchten Sie wirklich {0} Profile löschen?</value>
@@ -169,7 +169,7 @@
         <value>JPEG Datei (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF-Dokument (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>PNG Datei (*.png)</value>
@@ -337,81 +337,84 @@
         <value>Speichere das Ergebnis der Stapelverarbeitung...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+        <value>Der ausgewählte Scanner unterstützt keinen Duplexscan. Sollte der Scanner einen Duplexscan unterstützen, probieren sie einen anderen Treiber aus.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importing {0}...</value>
+        <value>Importiere {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Import Progress</value>
+        <value>Importfortschritt</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Recovering...</value>
+        <value>Wiederherstellen...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Recovery Progress</value>
+        <value>Wiederherstellungsfortschritt</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Save Images Progress</value>
+        <value>Fortschritt des Bildspeicherns</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>Fortschritt des PDF-speicherns</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Saving {0}...</value>
+        <value>{0} gespeichert...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>Kopieren...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>Kopierfortschritt</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Importiere ......</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>Email PDF Progress</value>
+        <value>Email PDF Fortschritt</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>Beim Speichern der Datei ist ein Fehler aufgetreten.</value>
+        <value>Beim automatischen Speichern der Datei ist ein Fehler aufgetreten.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Alle Dateien</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>Bilddateien</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Der gewählte Scanner ist in Benutzung.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>Die Scannerabdeckung ist offen.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>Der Scanner hat einen Papierstau.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>Der Scanner wird vorgewärmt.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>Es ist ein Update für OCR verfügbar!.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>Bild gespeichert.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} bilder gespeichert.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>PDF gespeichert.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
         <value>{0} ({1}x{2} {3})</value>
     </data>
     <data name="ConfirmDelete" xml:space="preserve">
         <value>Are you sure you want to delete "{0}"?</value>
+    </data>
+    <data name="FileInUse" xml:space="preserve">
+        <value>The file could not be overwritten because it is currently in use.</value>
     </data>
 </root>

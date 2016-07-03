@@ -118,67 +118,40 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
+    <data name="lblErrorText.Font" type="System.Drawing.Font, System.Drawing">
         <value>Microsoft Sans Serif, 8.25pt</value>
     </data>
-    <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 9</value>
+    <data name="lblErrorText.Location" type="System.Drawing.Point, System.Drawing">
+        <value>50, 6</value>
     </data>
-    <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
-        <value>372, 37</value>
+    <data name="lblErrorText.Size" type="System.Drawing.Size, System.Drawing">
+        <value>334, 37</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
+    <data name="lblErrorText.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
     </data>
-    <data name="lblPrompt.Text" xml:space="preserve">
-        <value>Το ακόλουθο αρχείο είναι κρυπτογραφημένο και απαιτεί κωδικό για να ανοίξει: '{0}'</value>
+    <data name="lblErrorText.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>MiddleLeft</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
-        <value>lblPrompt</value>
+    <data name="&gt;&gt;lblErrorText.Name" xml:space="preserve">
+        <value>lblErrorText</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Type" xml:space="preserve">
+    <data name="&gt;&gt;lblErrorText.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.Parent" xml:space="preserve">
+    <data name="&gt;&gt;lblErrorText.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;lblErrorText.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>309, 75</value>
-    </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
-    </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
-    </data>
-    <data name="btnCancel.Text" xml:space="preserve">
-        <value>Άκυρο</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
     <data name="btnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>228, 75</value>
+        <value>309, 178</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -201,25 +174,58 @@
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 49</value>
+    <data name="linkDetails.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
     </data>
-    <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
-        <value>372, 20</value>
+    <data name="linkDetails.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 51</value>
     </data>
-    <data name="txtPassword.TabIndex" type="System.Int32, mscorlib">
-        <value>0</value>
+    <data name="linkDetails.Size" type="System.Drawing.Size, System.Drawing">
+        <value>89, 13</value>
     </data>
-    <data name="&gt;&gt;txtPassword.Name" xml:space="preserve">
-        <value>txtPassword</value>
+    <data name="linkDetails.TabIndex" type="System.Int32, mscorlib">
+        <value>2</value>
     </data>
-    <data name="&gt;&gt;txtPassword.Type" xml:space="preserve">
-        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="linkDetails.Text" xml:space="preserve">
+        <value>Technical Details</value>
     </data>
-    <data name="&gt;&gt;txtPassword.Parent" xml:space="preserve">
+    <data name="&gt;&gt;linkDetails.Name" xml:space="preserve">
+        <value>linkDetails</value>
+    </data>
+    <data name="&gt;&gt;linkDetails.Type" xml:space="preserve">
+        <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;linkDetails.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;txtPassword.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;linkDetails.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="txtDetails.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 67</value>
+    </data>
+    <data name="txtDetails.Multiline" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="txtDetails.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+        <value>Vertical</value>
+    </data>
+    <data name="txtDetails.Size" type="System.Drawing.Size, System.Drawing">
+        <value>372, 105</value>
+    </data>
+    <data name="txtDetails.TabIndex" type="System.Int32, mscorlib">
+        <value>3</value>
+    </data>
+    <data name="&gt;&gt;txtDetails.Name" xml:space="preserve">
+        <value>txtDetails</value>
+    </data>
+    <data name="&gt;&gt;txtDetails.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;txtDetails.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;txtDetails.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -229,18 +235,18 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>396, 106</value>
+        <value>396, 213</value>
     </data>
     <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-        <value>CenterParent</value>
+        <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Κωδικός</value>
+        <value>Σφάλμα</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FPdfPassword</value>
+        <value>FError</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31793, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.2.1.3225, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

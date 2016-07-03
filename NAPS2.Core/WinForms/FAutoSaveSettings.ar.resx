@@ -133,7 +133,7 @@
         <value>18</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>حسناً</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -193,7 +193,7 @@
         <value>23</value>
     </data>
     <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-        <value>More info</value>
+        <value>المزيد من المعلومات</value>
     </data>
     <data name="&gt;&gt;linkPatchCodeInfo.Name" xml:space="preserve">
         <value>linkPatchCodeInfo</value>
@@ -217,13 +217,13 @@
         <value>11, 116</value>
     </data>
     <data name="rdSeparateByPatchT.Size" type="System.Drawing.Size, System.Drawing">
-        <value>211, 17</value>
+        <value>144, 17</value>
     </data>
     <data name="rdSeparateByPatchT.TabIndex" type="System.Int32, mscorlib">
         <value>22</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T (TWAIN only)</value>
+        <value>Separate files by Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -253,7 +253,7 @@
         <value>21</value>
     </data>
     <data name="rdFilePerPage.Text" xml:space="preserve">
-        <value>One file per page</value>
+        <value>ملف واحد لكل صفحة</value>
     </data>
     <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
         <value>rdFilePerPage</value>
@@ -283,7 +283,7 @@
         <value>20</value>
     </data>
     <data name="rdFilePerScan.Text" xml:space="preserve">
-        <value>One file per scan</value>
+        <value>ملف واحد لكل عملية مسح ضوئي</value>
     </data>
     <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopLeft</value>
@@ -343,7 +343,7 @@
         <value>26</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>عناصر نائبة</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -394,7 +394,7 @@
         <value>24</value>
     </data>
     <data name="lblFilePath.Text" xml:space="preserve">
-        <value>File path:</value>
+        <value>مسار الملف:</value>
     </data>
     <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
         <value>lblFilePath</value>
@@ -421,7 +421,7 @@
         <value>28</value>
     </data>
     <data name="cbClearAfterSave.Text" xml:space="preserve">
-        <value>مسح الصور بعد الحفظ</value>
+        <value>محو الصور بعد الحفظ</value>
     </data>
     <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
         <value>cbClearAfterSave</value>
@@ -480,12 +480,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.6.1.31733, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.2.1.29171, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FAutoSaveSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.6.1.31733, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.2.1.29171, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

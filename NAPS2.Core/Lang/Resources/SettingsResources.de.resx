@@ -172,7 +172,7 @@
         <value>A3 (297 × 420 mm)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
+        <value>A4 (210 x 297 mm)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
         <value>A5 (148 × 210 mm)</value>
@@ -211,16 +211,16 @@
         <value>Einzug</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
-        <value>Glas</value>
+        <value>Flachbett</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>Standard</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>veraltet (nur Treiberoberfläche)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>Alte Datenquellenverwaltung</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

@@ -169,7 +169,7 @@
         <value>JPEG bestand (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF bestand (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>PNG bestand (*.png)</value>
@@ -379,39 +379,42 @@
         <value>Er was een fout bij het automatisch opslaan.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Alle bestanden</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>Afbeeldingbestanden</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>De geselecteerde scanner is bezig.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>Het deksel van de scanner is open.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>Er is papier vastgelopen in de scanner.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>De scanner warmt op.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>Er is een OCR update beschikbaar.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>Afbeelding opgeslagen.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} afbeeldingen opgeslagen.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>PDF opgeslagen.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
         <value>{0} ({1}x{2} {3})</value>
     </data>
     <data name="ConfirmDelete" xml:space="preserve">
         <value>Are you sure you want to delete "{0}"?</value>
+    </data>
+    <data name="FileInUse" xml:space="preserve">
+        <value>The file could not be overwritten because it is currently in use.</value>
     </data>
 </root>

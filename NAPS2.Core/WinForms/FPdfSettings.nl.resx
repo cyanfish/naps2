@@ -1243,7 +1243,7 @@
         <value>32</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Default File Path:</value>
+        <value>Standaard bestandspad:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -1297,7 +1297,7 @@
         <value>35</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>Opslaanvenster overslaan</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>

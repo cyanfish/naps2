@@ -1035,7 +1035,7 @@
         <value>30</value>
     </data>
     <data name="cbAutoSave.Text" xml:space="preserve">
-        <value>Enable Auto Save</value>
+        <value>Erlaube automatisches Speichern</value>
     </data>
     <data name="&gt;&gt;cbAutoSave.Name" xml:space="preserve">
         <value>cbAutoSave</value>
@@ -1065,7 +1065,7 @@
         <value>31</value>
     </data>
     <data name="linkAutoSaveSettings.Text" xml:space="preserve">
-        <value>Auto Save Settings</value>
+        <value>Einstellungen zum automatischen Entfernen</value>
     </data>
     <data name="&gt;&gt;linkAutoSaveSettings.Name" xml:space="preserve">
         <value>linkAutoSaveSettings</value>
@@ -1095,7 +1095,7 @@
         <value>32</value>
     </data>
     <data name="btnAdvanced.Text" xml:space="preserve">
-        <value>&amp;Advanced</value>
+        <value>Fortgeschritten</value>
     </data>
     <data name="&gt;&gt;btnAdvanced.Name" xml:space="preserve">
         <value>btnAdvanced</value>

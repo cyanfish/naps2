@@ -250,7 +250,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>Einfügen</value>
     </data>
     <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -541,7 +541,7 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>&amp;E-Mail-Einstellungen</value>
+        <value>&amp;Einstellungen für EMail</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -592,7 +592,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Beschneiden</value>
+        <value>Zuschneiden</value>
     </data>
     <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>

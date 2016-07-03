@@ -177,7 +177,7 @@
         <value>4</value>
     </data>
     <data name="labelPage.Text" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>يمسح ضوئياً الصفحة {0}</value>
     </data>
     <data name="&gt;&gt;labelPage.Name" xml:space="preserve">
         <value>labelPage</value>
@@ -207,7 +207,7 @@
         <value>388, 149</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Acquiring data</value>
+        <value>الحصول على البيانات</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FScanProgress</value>

@@ -135,7 +135,7 @@
         <value>1</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>Press Start when ready.</value>
+        <value>اضغط بدأ عندما تكون جاهزاً.</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -183,7 +183,7 @@
         <value>3</value>
     </data>
     <data name="btnStart.Text" xml:space="preserve">
-        <value>Start</value>
+        <value>بدء</value>
     </data>
     <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
         <value>btnStart</value>
@@ -235,7 +235,7 @@
         <value>2</value>
     </data>
     <data name="lblTimeBetweenScans.Text" xml:space="preserve">
-        <value>Time between scans (seconds):</value>
+        <value>الوقت بين عمليات المسح الضوئي (ثواني):</value>
     </data>
     <data name="&gt;&gt;lblTimeBetweenScans.Name" xml:space="preserve">
         <value>lblTimeBetweenScans</value>
@@ -283,7 +283,7 @@
         <value>0</value>
     </data>
     <data name="lblNumberOfScans.Text" xml:space="preserve">
-        <value>Number of scans:</value>
+        <value>عدد عمليات المسح الضوئي:</value>
     </data>
     <data name="&gt;&gt;lblNumberOfScans.Name" xml:space="preserve">
         <value>lblNumberOfScans</value>
@@ -334,7 +334,7 @@
         <value>2</value>
     </data>
     <data name="rdMultipleScansPrompt.Text" xml:space="preserve">
-        <value>Multiple scans (prompt between scans)</value>
+        <value>مسوح ضوئية متعددة (مطالبة بين عمليات المسح)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansPrompt.Name" xml:space="preserve">
         <value>rdMultipleScansPrompt</value>
@@ -364,7 +364,7 @@
         <value>1</value>
     </data>
     <data name="rdMultipleScansDelay.Text" xml:space="preserve">
-        <value>Multiple scans (fixed delay between scans)</value>
+        <value>مسوح ضوئية متعددة (توقيت تأخير ثابت بين عمليات المسح)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansDelay.Name" xml:space="preserve">
         <value>rdMultipleScansDelay</value>
@@ -391,7 +391,7 @@
         <value>0</value>
     </data>
     <data name="rdSingleScan.Text" xml:space="preserve">
-        <value>Single scan</value>
+        <value>مسح ضوئي فردي</value>
     </data>
     <data name="&gt;&gt;rdSingleScan.Name" xml:space="preserve">
         <value>rdSingleScan</value>
@@ -505,7 +505,7 @@
         <value>0</value>
     </data>
     <data name="lblProfile.Text" xml:space="preserve">
-        <value>Profile:</value>
+        <value>الملف الشخصي:</value>
     </data>
     <data name="&gt;&gt;lblProfile.Name" xml:space="preserve">
         <value>lblProfile</value>
@@ -529,7 +529,7 @@
         <value>4</value>
     </data>
     <data name="groupboxScanConfig.Text" xml:space="preserve">
-        <value>Scan Configuration</value>
+        <value>تكوين المسح الضوئي</value>
     </data>
     <data name="&gt;&gt;groupboxScanConfig.Name" xml:space="preserve">
         <value>groupboxScanConfig</value>
@@ -556,7 +556,7 @@
         <value>3</value>
     </data>
     <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-        <value>More info</value>
+        <value>المزيد من المعلومات</value>
     </data>
     <data name="&gt;&gt;linkPatchCodeInfo.Name" xml:space="preserve">
         <value>linkPatchCodeInfo</value>
@@ -580,13 +580,13 @@
         <value>39, 46</value>
     </data>
     <data name="rdSeparateByPatchT.Size" type="System.Drawing.Size, System.Drawing">
-        <value>211, 17</value>
+        <value>144, 17</value>
     </data>
     <data name="rdSeparateByPatchT.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T (TWAIN only)</value>
+        <value>Separate files by Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -616,7 +616,7 @@
         <value>1</value>
     </data>
     <data name="rdFilePerPage.Text" xml:space="preserve">
-        <value>One file per page</value>
+        <value>ملف واحد لكل صفحة</value>
     </data>
     <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
         <value>rdFilePerPage</value>
@@ -646,7 +646,7 @@
         <value>0</value>
     </data>
     <data name="rdFilePerScan.Text" xml:space="preserve">
-        <value>One file per scan</value>
+        <value>ملف واحد لكل عملية مسح ضوئي</value>
     </data>
     <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopLeft</value>
@@ -727,7 +727,7 @@
         <value>4</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>عناصر نائبة</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -778,7 +778,7 @@
         <value>0</value>
     </data>
     <data name="lblFilePath.Text" xml:space="preserve">
-        <value>File path:</value>
+        <value>مسار الملف:</value>
     </data>
     <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
         <value>lblFilePath</value>
@@ -829,7 +829,7 @@
         <value>2</value>
     </data>
     <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-        <value>Save to multiple files</value>
+        <value>حفظ إلى ملفات متعددة</value>
     </data>
     <data name="&gt;&gt;rdSaveToMultipleFiles.Name" xml:space="preserve">
         <value>rdSaveToMultipleFiles</value>
@@ -859,7 +859,7 @@
         <value>1</value>
     </data>
     <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-        <value>Save to a single file</value>
+        <value>حفظ إلى ملف واحد</value>
     </data>
     <data name="&gt;&gt;rdSaveToSingleFile.Name" xml:space="preserve">
         <value>rdSaveToSingleFile</value>
@@ -889,7 +889,7 @@
         <value>0</value>
     </data>
     <data name="rdLoadIntoNaps2.Text" xml:space="preserve">
-        <value>Load images into NAPS2</value>
+        <value>تحميل صور إلى NAPS2</value>
     </data>
     <data name="&gt;&gt;rdLoadIntoNaps2.Name" xml:space="preserve">
         <value>rdLoadIntoNaps2</value>
@@ -934,7 +934,7 @@
         <value>7</value>
     </data>
     <data name="groupboxOutput.Text" xml:space="preserve">
-        <value>Output</value>
+        <value>الإخراج</value>
     </data>
     <data name="&gt;&gt;groupboxOutput.Name" xml:space="preserve">
         <value>groupboxOutput</value>
@@ -984,7 +984,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Batch Scan</value>
+        <value>مسح ضوئي على دفعات</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
         <value>toolStripSeparator1</value>
@@ -996,7 +996,7 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.6.1.31733, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.2.1.29171, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;folderBrowserDialog1.Name" xml:space="preserve">
         <value>folderBrowserDialog1</value>
@@ -1008,6 +1008,6 @@
         <value>FBatchScan</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.6.1.31733, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.2.1.29171, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

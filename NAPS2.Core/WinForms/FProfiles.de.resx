@@ -162,7 +162,7 @@
         <value>152, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>Einfügen</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>149, 6</value>

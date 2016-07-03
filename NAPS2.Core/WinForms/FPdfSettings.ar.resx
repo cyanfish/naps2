@@ -133,7 +133,7 @@
         <value>17</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>حسناً</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -283,7 +283,7 @@
         <value>20</value>
     </data>
     <data name="groupMetadata.Text" xml:space="preserve">
-        <value>Metadata</value>
+        <value>بيانات وصفية</value>
     </data>
     <data name="&gt;&gt;groupMetadata.Name" xml:space="preserve">
         <value>groupMetadata</value>
@@ -334,7 +334,7 @@
         <value>11</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Keywords:</value>
+        <value>الكلمات المفتاحية:</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -385,7 +385,7 @@
         <value>9</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Subject:</value>
+        <value>الموضوع:</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -487,7 +487,7 @@
         <value>5</value>
     </data>
     <data name="label4.Text" xml:space="preserve">
-        <value>Title:</value>
+        <value>العنوان:</value>
     </data>
     <data name="&gt;&gt;label4.Name" xml:space="preserve">
         <value>label4</value>
@@ -721,7 +721,7 @@
         <value>16</value>
     </data>
     <data name="cbShowUserPassword.Text" xml:space="preserve">
-        <value>Show</value>
+        <value>إظهار</value>
     </data>
     <data name="&gt;&gt;cbShowUserPassword.Name" xml:space="preserve">
         <value>cbShowUserPassword</value>
@@ -748,7 +748,7 @@
         <value>15</value>
     </data>
     <data name="cbShowOwnerPassword.Text" xml:space="preserve">
-        <value>Show</value>
+        <value>إظهار</value>
     </data>
     <data name="&gt;&gt;cbShowOwnerPassword.Name" xml:space="preserve">
         <value>cbShowOwnerPassword</value>
@@ -838,7 +838,7 @@
         <value>13</value>
     </data>
     <data name="cbAllowAnnotations.Text" xml:space="preserve">
-        <value>اسمح بالتعليقات الوصفية Annotations</value>
+        <value>اسمح بالتعليقات التوضيحية Annotations</value>
     </data>
     <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
         <value>cbAllowAnnotations</value>
@@ -868,7 +868,7 @@
         <value>12</value>
     </data>
     <data name="cbAllowContentCopyingForAccessibility.Text" xml:space="preserve">
-        <value>Allow Content Copying for Accessibility</value>
+        <value>السماح بنسخ المحتوى لسهولة الوصول</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Name" xml:space="preserve">
         <value>cbAllowContentCopyingForAccessibility</value>
@@ -928,7 +928,7 @@
         <value>10</value>
     </data>
     <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>Allow Document Assembly</value>
+        <value>السماح بتجميع المستندات</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
         <value>cbAllowDocumentAssembly</value>
@@ -1033,7 +1033,7 @@
         <value>3</value>
     </data>
     <data name="lblUserPassword.Text" xml:space="preserve">
-        <value>User Password:</value>
+        <value>كلمة مرور المستخدم:</value>
     </data>
     <data name="&gt;&gt;lblUserPassword.Name" xml:space="preserve">
         <value>lblUserPassword</value>
@@ -1081,7 +1081,7 @@
         <value>1</value>
     </data>
     <data name="lblOwnerPassword.Text" xml:space="preserve">
-        <value>Owner Password:</value>
+        <value>كلمة مرور المالك:</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>
@@ -1135,7 +1135,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Remember these settings</value>
+        <value>تذكر هذه الإعدادات</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -1162,7 +1162,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Restore &amp;Defaults</value>
+        <value>استعادة الإعدادات الافتراضية</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -1192,7 +1192,7 @@
         <value>33</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>عناصر نائبة</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -1297,7 +1297,7 @@
         <value>35</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>تخطي مطالبة الحفظ</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>
@@ -1350,7 +1350,7 @@
         <value>400, 677</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>PDF Settings</value>
+        <value>إعدادات PDF</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

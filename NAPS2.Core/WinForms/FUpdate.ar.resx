@@ -156,7 +156,7 @@
         <value>1</value>
     </data>
     <data name="btnInstall.Text" xml:space="preserve">
-        <value>Download and &amp;Install</value>
+        <value>تنزيل وتثبيت</value>
     </data>
     <data name="&gt;&gt;btnInstall.Name" xml:space="preserve">
         <value>btnInstall</value>
@@ -180,7 +180,7 @@
         <value>2</value>
     </data>
     <data name="btnDownload.Text" xml:space="preserve">
-        <value>&amp;Download</value>
+        <value>تنزيل</value>
     </data>
     <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
         <value>btnDownload</value>
@@ -204,7 +204,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>&amp;Not Now</value>
+        <value>ليس الآن</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -228,7 +228,7 @@
         <value>306, 136</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Update NAPS2</value>
+        <value>تحديث NAPS2</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FUpdate</value>

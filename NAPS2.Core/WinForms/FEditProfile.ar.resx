@@ -187,7 +187,7 @@
         <value>4</value>
     </data>
     <data name="btnChooseDevice.Text" xml:space="preserve">
-        <value>Choose device</value>
+        <value>اختيار جهاز</value>
     </data>
     <data name="&gt;&gt;btnChooseDevice.Name" xml:space="preserve">
         <value>btnChooseDevice</value>
@@ -217,7 +217,7 @@
         <value>3</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Paper source:</value>
+        <value>مصدر الورق:</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -265,7 +265,7 @@
         <value>18</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>حسناً</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -292,7 +292,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Use predefined settings</value>
+        <value>استخدام إعدادات معرفة مسبقاً</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -319,7 +319,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Use native UI</value>
+        <value>استخدام واجهة المستخدم الأصلية</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -424,7 +424,7 @@
         <value>11</value>
     </data>
     <data name="label4.Text" xml:space="preserve">
-        <value>Page size:</value>
+        <value>حجم الصفحة:</value>
     </data>
     <data name="&gt;&gt;label4.Name" xml:space="preserve">
         <value>label4</value>
@@ -502,7 +502,7 @@
         <value>13</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Resolution:</value>
+        <value>الدقة:</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -825,7 +825,7 @@
         <value>25</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Horizontal align:</value>
+        <value>محاذاة أفقية:</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>
@@ -879,7 +879,7 @@
         <value>27</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Scale:</value>
+        <value>المقياس:</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>
@@ -906,7 +906,7 @@
         <value>2</value>
     </data>
     <data name="rdTWAIN.Text" xml:space="preserve">
-        <value>TWAIN Driver</value>
+        <value>تعريف TWAIN</value>
     </data>
     <data name="&gt;&gt;rdTWAIN.Name" xml:space="preserve">
         <value>rdTWAIN</value>
@@ -933,7 +933,7 @@
         <value>1</value>
     </data>
     <data name="rdWIA.Text" xml:space="preserve">
-        <value>WIA Driver</value>
+        <value>تعريف WIA</value>
     </data>
     <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
         <value>rdWIA</value>
@@ -1148,7 +1148,7 @@
         <value>448, 478</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Profile Settings</value>
+        <value>إعدادات الملف الشخصي</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

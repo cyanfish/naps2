@@ -160,7 +160,7 @@
         <value>1</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>حسناً</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -208,7 +208,7 @@
         <value>3</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>File Name</value>
+        <value>اسم الملف</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -235,7 +235,7 @@
         <value>4</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Preview:</value>
+        <value>معاينة:</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -304,7 +304,7 @@
         <value>7</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Year</value>
+        <value>سنة</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -334,7 +334,7 @@
         <value>9</value>
     </data>
     <data name="label4.Text" xml:space="preserve">
-        <value>Year (00-99)</value>
+        <value>سنة (00-99)</value>
     </data>
     <data name="&gt;&gt;label4.Name" xml:space="preserve">
         <value>label4</value>
@@ -388,7 +388,7 @@
         <value>11</value>
     </data>
     <data name="label5.Text" xml:space="preserve">
-        <value>Month (01-12)</value>
+        <value>شهر (01-12)</value>
     </data>
     <data name="&gt;&gt;label5.Name" xml:space="preserve">
         <value>label5</value>
@@ -442,7 +442,7 @@
         <value>13</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Day (01-31)</value>
+        <value>اليوم (01-31)</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -496,7 +496,7 @@
         <value>15</value>
     </data>
     <data name="label7.Text" xml:space="preserve">
-        <value>Hour (0-23)</value>
+        <value>ساعة (0-23)</value>
     </data>
     <data name="&gt;&gt;label7.Name" xml:space="preserve">
         <value>label7</value>
@@ -550,7 +550,7 @@
         <value>17</value>
     </data>
     <data name="label8.Text" xml:space="preserve">
-        <value>Minute (00-59)</value>
+        <value>دقيقة (00-59)</value>
     </data>
     <data name="&gt;&gt;label8.Name" xml:space="preserve">
         <value>label8</value>
@@ -604,7 +604,7 @@
         <value>19</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Second (00-59)</value>
+        <value>ثانية (00-59)</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>
@@ -658,7 +658,7 @@
         <value>21</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Auto-incrementing number (4 digits)</value>
+        <value>رقم متزايد تلقائياً (4 أعداد)</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>
@@ -712,7 +712,7 @@
         <value>23</value>
     </data>
     <data name="label11.Text" xml:space="preserve">
-        <value>Auto-incrementing number (3 digits)</value>
+        <value>رقم متزايد تلقائياً (3 أعداد)</value>
     </data>
     <data name="&gt;&gt;label11.Name" xml:space="preserve">
         <value>label11</value>
@@ -766,7 +766,7 @@
         <value>25</value>
     </data>
     <data name="label12.Text" xml:space="preserve">
-        <value>Auto-incrementing number (2 digits)</value>
+        <value>رقم متزايد تلقائياً (عددين)</value>
     </data>
     <data name="&gt;&gt;label12.Name" xml:space="preserve">
         <value>label12</value>
@@ -820,7 +820,7 @@
         <value>27</value>
     </data>
     <data name="label13.Text" xml:space="preserve">
-        <value>Auto-incrementing number (1 digit)</value>
+        <value>رقم متزايد تلقائياً (عدد واحد)</value>
     </data>
     <data name="&gt;&gt;label13.Name" xml:space="preserve">
         <value>label13</value>
@@ -916,7 +916,7 @@
         <value>30</value>
     </data>
     <data name="gboxPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>عناصر نائبة</value>
     </data>
     <data name="&gt;&gt;gboxPlaceholders.Name" xml:space="preserve">
         <value>gboxPlaceholders</value>
@@ -943,7 +943,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>عناصر نائبة</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FPlaceholders</value>

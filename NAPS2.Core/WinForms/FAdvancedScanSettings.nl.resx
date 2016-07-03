@@ -394,7 +394,7 @@
         <value>5</value>
     </data>
     <data name="cbFlipDuplex.Text" xml:space="preserve">
-        <value>Flip duplexed pages</value>
+        <value>Dubbelzijdige pagina's omdraaien</value>
     </data>
     <data name="&gt;&gt;cbFlipDuplex.Name" xml:space="preserve">
         <value>cbFlipDuplex</value>
@@ -424,7 +424,7 @@
         <value>4</value>
     </data>
     <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-        <value>Offset width based on alignment (WIA)</value>
+        <value>Breedte aanpassen op basis van uitlijning (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
         <value>cbWiaOffsetWidth</value>
@@ -634,7 +634,7 @@
         <value>37</value>
     </data>
     <data name="groupBox3.Text" xml:space="preserve">
-        <value>Blank Pages</value>
+        <value>Lege pagina's</value>
     </data>
     <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
         <value>groupBox3</value>
@@ -664,7 +664,7 @@
         <value>38</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Coverage Threshold</value>
+        <value>Dekkingsdrempel</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -691,7 +691,7 @@
         <value>37</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>White Threshold</value>
+        <value>Witdrempel</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -823,7 +823,7 @@
         <value>17</value>
     </data>
     <data name="cbExcludeBlankPages.Text" xml:space="preserve">
-        <value>Exclude blank pages</value>
+        <value>Lege pagina's uitsluiten</value>
     </data>
     <data name="&gt;&gt;cbExcludeBlankPages.Name" xml:space="preserve">
         <value>cbExcludeBlankPages</value>

@@ -207,7 +207,7 @@
         <value>388, 149</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Erfasse Daten</value>
+        <value>Sammle Daten</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FScanProgress</value>

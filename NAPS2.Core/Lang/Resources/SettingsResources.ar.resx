@@ -124,7 +124,7 @@
         <value>لون 24 بت</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Grayscale</value>
+        <value>تدرج الرمادي</value>
     </data>
     <data name="Dpi_100" xml:space="preserve">
         <value>100 dpi</value>
@@ -151,46 +151,46 @@
         <value>800 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Center</value>
+        <value>منتصف</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Left</value>
+        <value>يسار</value>
     </data>
     <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Right</value>
+        <value>يمين</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm</value>
+        <value>سم</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>in</value>
+        <value>بوصة</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm</value>
+        <value>مم</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297x420 mm)</value>
+        <value>A3 (297×420 مم)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210x297 mm)</value>
+        <value>A4 (210×297 مم)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148x210 mm)</value>
+        <value>A5 (148×210 مم)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+        <value>B4 (250 × 353 مم)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+        <value>B5 (176 × 250 مم)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>مخصص...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>US قانوني (8.5x14 بوصة)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>US رسالة (8.5x11 بوصة)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>
@@ -208,19 +208,19 @@
         <value>Duplex</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Feeder</value>
+        <value>المغذِّي</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
-        <value>Glass</value>
+        <value>الزجاج</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
         <value>الإفتراضي</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>وراثي (واجهة المستخدم الأصلية فقط)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>DSM القديم</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

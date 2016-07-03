@@ -220,7 +220,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxView.Text" xml:space="preserve">
-        <value>View</value>
+        <value>عرض</value>
     </data>
     <data name="ctxSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -232,7 +232,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxSelectAll.Text" xml:space="preserve">
-        <value>Select All</value>
+        <value>اختيار الكل</value>
     </data>
     <data name="ctxCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
         <value>Ctrl+C</value>
@@ -250,7 +250,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>لصق</value>
     </data>
     <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -358,7 +358,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsNewProfile.Text" xml:space="preserve">
-        <value>&amp;New Profile</value>
+        <value>ملف شخصي جديد</value>
     </data>
     <data name="tsBatchScan.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -367,7 +367,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsBatchScan.Text" xml:space="preserve">
-        <value>&amp;Batch Scan</value>
+        <value>مسح ضوئي على دفعات</value>
     </data>
     <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -376,7 +376,7 @@
         <value>58, 51</value>
     </data>
     <data name="tsScan.Text" xml:space="preserve">
-        <value>Sca&amp;n</value>
+        <value>مسح ضوئي</value>
     </data>
     <data name="tsScan.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -424,7 +424,7 @@
         <value>70, 51</value>
     </data>
     <data name="tsProfiles.Text" xml:space="preserve">
-        <value>Pro&amp;files</value>
+        <value>الملفات الشخصية</value>
     </data>
     <data name="tsProfiles.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -436,7 +436,7 @@
         <value>56, 51</value>
     </data>
     <data name="tsOcr.Text" xml:space="preserve">
-        <value>&amp;OCR</value>
+        <value>التعرف الضوئي على الحروف &amp;OCR</value>
     </data>
     <data name="tsOcr.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -448,7 +448,7 @@
         <value>67, 51</value>
     </data>
     <data name="tsImport.Text" xml:space="preserve">
-        <value>&amp;Import</value>
+        <value>استيراد</value>
     </data>
     <data name="tsImport.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -460,13 +460,13 @@
         <value>143, 22</value>
     </data>
     <data name="tsSavePDFAll.Text" xml:space="preserve">
-        <value>الكل ({0})</value>
+        <value>كل ({0})</value>
     </data>
     <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
     </data>
     <data name="tsSavePDFSelected.Text" xml:space="preserve">
-        <value>&amp;Selected ({0})</value>
+        <value>مختار ({0})</value>
     </data>
     <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
         <value>140, 6</value>
@@ -475,7 +475,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>&amp;PDF Settings</value>
+        <value>إعدادات &amp;PDF</value>
     </data>
     <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -484,7 +484,7 @@
         <value>71, 51</value>
     </data>
     <data name="tsdSavePDF.Text" xml:space="preserve">
-        <value>&amp;Save PDF</value>
+        <value>حفظ PDF</value>
     </data>
     <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -493,13 +493,13 @@
         <value>152, 22</value>
     </data>
     <data name="tsSaveImagesAll.Text" xml:space="preserve">
-        <value>الكل ({0})</value>
+        <value>كل ({0})</value>
     </data>
     <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
     </data>
     <data name="tsSaveImagesSelected.Text" xml:space="preserve">
-        <value>&amp;Selected ({0})</value>
+        <value>مختار ({0})</value>
     </data>
     <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
         <value>149, 6</value>
@@ -508,7 +508,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>&amp;Image Settings</value>
+        <value>إعدادات الصورة</value>
     </data>
     <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -517,7 +517,7 @@
         <value>88, 51</value>
     </data>
     <data name="tsdSaveImages.Text" xml:space="preserve">
-        <value>Save I&amp;mages</value>
+        <value>حفظ الصور</value>
     </data>
     <data name="tsdSaveImages.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -526,13 +526,13 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailPDFAll.Text" xml:space="preserve">
-        <value>الكل ({0})</value>
+        <value>كل ({0})</value>
     </data>
     <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
     </data>
     <data name="tsEmailPDFSelected.Text" xml:space="preserve">
-        <value>&amp;Selected ({0})</value>
+        <value>مختار ({0})</value>
     </data>
     <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 6</value>
@@ -547,7 +547,7 @@
         <value>148, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>&amp;PDF Settings</value>
+        <value>إعدادات &amp;PDF</value>
     </data>
     <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -556,7 +556,7 @@
         <value>76, 51</value>
     </data>
     <data name="tsdEmailPDF.Text" xml:space="preserve">
-        <value>&amp;Email PDF</value>
+        <value>إرسال PDF بالبريد</value>
     </data>
     <data name="tsdEmailPDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -568,7 +568,7 @@
         <value>56, 51</value>
     </data>
     <data name="tsPrint.Text" xml:space="preserve">
-        <value>&amp;Print</value>
+        <value>﻿طباعة</value>
     </data>
     <data name="tsPrint.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -580,7 +580,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsView.Text" xml:space="preserve">
-        <value>&amp;View</value>
+        <value>عرض</value>
     </data>
     <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
         <value>126, 6</value>
@@ -592,7 +592,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>&amp;Crop</value>
+        <value>قطع</value>
     </data>
     <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -619,7 +619,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsReset.Text" xml:space="preserve">
-        <value>&amp;Reset</value>
+        <value>إعادة تعيين</value>
     </data>
     <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -628,7 +628,7 @@
         <value>64, 51</value>
     </data>
     <data name="tsdImage.Text" xml:space="preserve">
-        <value>Ima&amp;ge</value>
+        <value>صورة</value>
     </data>
     <data name="tsdImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -640,7 +640,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsRotateLeft.Text" xml:space="preserve">
-        <value>Rotate &amp;Left</value>
+        <value>استدارة لليسار</value>
     </data>
     <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -649,7 +649,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsRotateRight.Text" xml:space="preserve">
-        <value>Rotate &amp;Right</value>
+        <value>استدارة لليمين</value>
     </data>
     <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -658,13 +658,13 @@
         <value>164, 22</value>
     </data>
     <data name="tsFlip.Text" xml:space="preserve">
-        <value>&amp;Flip</value>
+        <value>قلب</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>دوران مخصص</value>
+        <value>استدارة مخصصة</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -673,7 +673,7 @@
         <value>65, 51</value>
     </data>
     <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Ro&amp;tate</value>
+        <value>تدوير</value>
     </data>
     <data name="tsdRotate.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -682,10 +682,10 @@
         <value>96, 51</value>
     </data>
     <data name="tsMove.TextFirst" xml:space="preserve">
-        <value>Move Up</value>
+        <value>تحريك لأعلي</value>
     </data>
     <data name="tsMove.TextSecond" xml:space="preserve">
-        <value>Move Down</value>
+        <value>تحريك لأسفل</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
@@ -706,13 +706,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>&amp;Alternate Interleave</value>
+        <value>Interleave البديل</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>A&amp;lternate Deinterleave</value>
+        <value>Deinterleave البديل</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -721,19 +721,19 @@
         <value>143, 22</value>
     </data>
     <data name="tsReverseAll.Text" xml:space="preserve">
-        <value>الكل ({0})</value>
+        <value>كل ({0})</value>
     </data>
     <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
     </data>
     <data name="tsReverseSelected.Text" xml:space="preserve">
-        <value>&amp;Selected ({0})</value>
+        <value>مختار ({0})</value>
     </data>
     <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsReverse.Text" xml:space="preserve">
-        <value>&amp;Reverse</value>
+        <value>عكس</value>
     </data>
     <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -742,7 +742,7 @@
         <value>72, 51</value>
     </data>
     <data name="tsdReorder.Text" xml:space="preserve">
-        <value>&amp;Reorder</value>
+        <value>إعادة ترتيب</value>
     </data>
     <data name="tsdReorder.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -769,7 +769,7 @@
         <value>58, 51</value>
     </data>
     <data name="tsClear.Text" xml:space="preserve">
-        <value>&amp;Clear</value>
+        <value>محو</value>
     </data>
     <data name="tsClear.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -784,7 +784,7 @@
         <value>83, 51</value>
     </data>
     <data name="toolStripDropDownButton1.Text" xml:space="preserve">
-        <value>&amp;Language</value>
+        <value>اللغة</value>
     </data>
     <data name="toolStripDropDownButton1.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -850,7 +850,7 @@
         <value>12</value>
     </data>
     <data name="tStrip.Text" xml:space="preserve">
-        <value>Main toolbar</value>
+        <value>شريط الأدوات الرئيسي</value>
     </data>
     <data name="&gt;&gt;tStrip.Name" xml:space="preserve">
         <value>tStrip</value>
@@ -921,7 +921,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Not Another PDF Scanner 2</value>
+        <value>ليس مجرد ماسح ضوئي PDF آخر 2 (Not Another PDF Scanner 2)</value>
     </data>
     <data name="&gt;&gt;ctxView.Name" xml:space="preserve">
         <value>ctxView</value>

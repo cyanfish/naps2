@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-        <value>&amp;Make PDFs searchable using OCR</value>
+        <value>جعل ملفات PDF قابلة للبحث باستخدام التعرف الضوئي على الحروف OCR</value>
     </data>
     <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
         <value>checkBoxEnableOcr</value>
@@ -159,7 +159,7 @@
         <value>1</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>OCR language:</value>
+        <value>لغة التعرف الضوئي على الحروف OCR:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -235,7 +235,7 @@
         <value>4</value>
     </data>
     <data name="linkGetLanguages.Text" xml:space="preserve">
-        <value>Get more languages</value>
+        <value>الحصول على المزيد من اللغات</value>
     </data>
     <data name="&gt;&gt;linkGetLanguages.Name" xml:space="preserve">
         <value>linkGetLanguages</value>
@@ -259,7 +259,7 @@
         <value>5</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>حسناً</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -312,7 +312,7 @@
         <value>336, 139</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>OCR Setup</value>
+        <value>إعداد التعرف الضوئي على الحروف OCR</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrSetup</value>

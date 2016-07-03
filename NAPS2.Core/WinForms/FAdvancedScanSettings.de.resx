@@ -268,7 +268,7 @@
         <value>35</value>
     </data>
     <data name="groupBox1.Text" xml:space="preserve">
-        <value>Image Quality</value>
+        <value>Bildqualität</value>
     </data>
     <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
         <value>groupBox1</value>
@@ -364,7 +364,7 @@
         <value>36</value>
     </data>
     <data name="groupBox2.Text" xml:space="preserve">
-        <value>Compatibility</value>
+        <value>Kompatibilität</value>
     </data>
     <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
         <value>groupBox2</value>
@@ -394,7 +394,7 @@
         <value>5</value>
     </data>
     <data name="cbFlipDuplex.Text" xml:space="preserve">
-        <value>Flip duplexed pages</value>
+        <value>Doppelseiten umdrehen</value>
     </data>
     <data name="&gt;&gt;cbFlipDuplex.Name" xml:space="preserve">
         <value>cbFlipDuplex</value>
@@ -424,7 +424,7 @@
         <value>4</value>
     </data>
     <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-        <value>Offset width based on alignment (WIA)</value>
+        <value>Versatzbreite basierend auf Ausrichtung (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
         <value>cbWiaOffsetWidth</value>
@@ -451,7 +451,7 @@
         <value>3</value>
     </data>
     <data name="cbForcePageSize.Text" xml:space="preserve">
-        <value>Force matching page size</value>
+        <value>Erzwinge Papiergrößenerkennung</value>
     </data>
     <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
         <value>cbForcePageSize</value>
@@ -478,7 +478,7 @@
         <value>2</value>
     </data>
     <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-        <value>Apply brightness/contrast after scan</value>
+        <value>Helligkeits- und Kontrastanpassung nach dem Scannen anwenden</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.Name" xml:space="preserve">
         <value>cbBrightnessContrastAfterScan</value>
@@ -526,7 +526,7 @@
         <value>0</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Twain Implementation:</value>
+        <value>Twain Implementierung:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -634,7 +634,7 @@
         <value>37</value>
     </data>
     <data name="groupBox3.Text" xml:space="preserve">
-        <value>Blank Pages</value>
+        <value>Leere Seiten</value>
     </data>
     <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
         <value>groupBox3</value>
@@ -664,7 +664,7 @@
         <value>38</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Coverage Threshold</value>
+        <value>Durchschnittlicher Schwellwert</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -691,7 +691,7 @@
         <value>37</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>White Threshold</value>
+        <value>Weiß Schwellwert</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -823,7 +823,7 @@
         <value>17</value>
     </data>
     <data name="cbExcludeBlankPages.Text" xml:space="preserve">
-        <value>Exclude blank pages</value>
+        <value>Leerseiten unterdrücken</value>
     </data>
     <data name="&gt;&gt;cbExcludeBlankPages.Name" xml:space="preserve">
         <value>cbExcludeBlankPages</value>
@@ -906,7 +906,7 @@
         <value>400, 487</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Advanced Profile Settings</value>
+        <value>Erweiterte Profileinstellungen</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

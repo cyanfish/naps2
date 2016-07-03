@@ -177,7 +177,7 @@
         <value>2</value>
     </data>
     <data name="labelSub.Text" xml:space="preserve">
-        <value>{0} / {1} MB</value>
+        <value>{0}/{1} ميغابايت</value>
     </data>
     <data name="&gt;&gt;labelSub.Name" xml:space="preserve">
         <value>labelSub</value>
@@ -204,7 +204,7 @@
         <value>4</value>
     </data>
     <data name="labelTop.Text" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0}/{1} ملفات</value>
     </data>
     <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
         <value>labelTop</value>
@@ -278,7 +278,7 @@
         <value>350, 195</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Download Progress</value>
+        <value>التقدم التنزيل</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FDownloadProgress</value>

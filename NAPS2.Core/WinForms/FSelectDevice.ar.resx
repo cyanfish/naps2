@@ -160,7 +160,7 @@
         <value>1</value>
     </data>
     <data name="btnSelect.Text" xml:space="preserve">
-        <value>&amp;Select</value>
+        <value>اختيار</value>
     </data>
     <data name="&gt;&gt;btnSelect.Name" xml:space="preserve">
         <value>btnSelect</value>
@@ -208,7 +208,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Select Source</value>
+        <value>اختيار مصدر</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FSelectDevice</value>

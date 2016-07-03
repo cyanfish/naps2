@@ -220,7 +220,7 @@
         <value>35, 22</value>
     </data>
     <data name="lblPageTotal.Text" xml:space="preserve">
-        <value>of {0}</value>
+        <value>من {0}</value>
     </data>
     <data name="tsPrev.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -229,7 +229,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsPrev.Text" xml:space="preserve">
-        <value>Previous</value>
+        <value>السابق</value>
     </data>
     <data name="tsNext.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -238,7 +238,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsNext.Text" xml:space="preserve">
-        <value>Next</value>
+        <value>التالي</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>
@@ -247,25 +247,25 @@
         <value>164, 22</value>
     </data>
     <data name="tsRotateLeft.Text" xml:space="preserve">
-        <value>Rotate Left</value>
+        <value>استدارة لليسار</value>
     </data>
     <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsRotateRight.Text" xml:space="preserve">
-        <value>Rotate Right</value>
+        <value>استدارة لليمين</value>
     </data>
     <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsFlip.Text" xml:space="preserve">
-        <value>Flip</value>
+        <value>قلب</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>دوران مخصص</value>
+        <value>استدارة مخصصة</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -274,7 +274,7 @@
         <value>20, 22</value>
     </data>
     <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Rotate</value>
+        <value>تدوير</value>
     </data>
     <data name="tsCrop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -283,7 +283,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>قطع</value>
     </data>
     <data name="tsBrightness.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -393,7 +393,7 @@
         <value>300, 300</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Preview</value>
+        <value>معاينة</value>
     </data>
     <data name="&gt;&gt;tbPageCurrent.Name" xml:space="preserve">
         <value>tbPageCurrent</value>

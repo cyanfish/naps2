@@ -133,7 +133,7 @@
         <value>17</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>حسناً</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -190,7 +190,7 @@
         <value>15</value>
     </data>
     <data name="cbRememberSettings.Text" xml:space="preserve">
-        <value>Remember these settings</value>
+        <value>تذكر هذه الإعدادات</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
         <value>cbRememberSettings</value>
@@ -217,7 +217,7 @@
         <value>16</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Restore &amp;Defaults</value>
+        <value>استعادة الإعدادات الافتراضية</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -295,7 +295,7 @@
         <value>29</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>Jpeg Quality:</value>
+        <value>جودة Jpeg:</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -322,7 +322,7 @@
         <value>30</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>عناصر نائبة</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -397,7 +397,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>For high JPEG qualities (80+), use the Maximum Quality profile option for best results.</value>
+        <value>لجودة JPEG عالية (+80)، استخدم خيار الجودة القصوى في الملف الشخصي للحصول على أفضل النتائج.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>
@@ -454,7 +454,7 @@
         <value>36</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>تخطي مطالبة الحفظ</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>
@@ -507,7 +507,7 @@
         <value>400, 278</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Image Settings</value>
+        <value>إعدادات الصورة</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

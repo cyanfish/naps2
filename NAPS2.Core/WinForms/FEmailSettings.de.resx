@@ -351,7 +351,7 @@
         <value>400, 163</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>E-Mail-Einstellungen</value>
+        <value>Einstellungen für EMail</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

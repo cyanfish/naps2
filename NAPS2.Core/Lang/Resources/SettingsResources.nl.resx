@@ -220,7 +220,7 @@
         <value>Legacy (alleen eigen interface)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>Oude DSM</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

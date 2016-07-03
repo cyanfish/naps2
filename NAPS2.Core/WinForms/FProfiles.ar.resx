@@ -128,19 +128,19 @@
         <value>152, 22</value>
     </data>
     <data name="ctxScan.Text" xml:space="preserve">
-        <value>Scan</value>
+        <value>مسح ضوئي</value>
     </data>
     <data name="ctxEdit.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
     </data>
     <data name="ctxEdit.Text" xml:space="preserve">
-        <value>Edit</value>
+        <value>تحرير</value>
     </data>
     <data name="ctxSetDefault.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
     </data>
     <data name="ctxSetDefault.Text" xml:space="preserve">
-        <value>Set Default</value>
+        <value>تعين كافتراضي</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>149, 6</value>
@@ -162,7 +162,7 @@
         <value>152, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>لصق</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>149, 6</value>
@@ -223,7 +223,7 @@
         <value>1</value>
     </data>
     <data name="btnAdd.Text" xml:space="preserve">
-        <value>&amp;New</value>
+        <value>جديد</value>
     </data>
     <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -256,7 +256,7 @@
         <value>2</value>
     </data>
     <data name="btnEdit.Text" xml:space="preserve">
-        <value>&amp;Edit</value>
+        <value>تحرير</value>
     </data>
     <data name="btnEdit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -319,7 +319,7 @@
         <value>4</value>
     </data>
     <data name="btnDone.Text" xml:space="preserve">
-        <value>&amp;Done</value>
+        <value>تم</value>
     </data>
     <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
         <value>btnDone</value>
@@ -361,7 +361,7 @@
         <value>5</value>
     </data>
     <data name="btnScan.Text" xml:space="preserve">
-        <value>&amp;Scan</value>
+        <value>مسح ضوئي</value>
     </data>
     <data name="btnScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>BottomCenter</value>
@@ -414,7 +414,7 @@
         <value>650, 181</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Profiles</value>
+        <value>الملفات الشخصية</value>
     </data>
     <data name="&gt;&gt;ctxScan.Name" xml:space="preserve">
         <value>ctxScan</value>

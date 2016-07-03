@@ -580,13 +580,13 @@
         <value>39, 46</value>
     </data>
     <data name="rdSeparateByPatchT.Size" type="System.Drawing.Size, System.Drawing">
-        <value>211, 17</value>
+        <value>144, 17</value>
     </data>
     <data name="rdSeparateByPatchT.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Patch-T 로 파일 분리 (TWAIN 만 가능)</value>
+        <value>Separate files by Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -996,7 +996,7 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=4.6.1.31733, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.2.1.29171, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;folderBrowserDialog1.Name" xml:space="preserve">
         <value>folderBrowserDialog1</value>
@@ -1008,6 +1008,6 @@
         <value>FBatchScan</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.6.1.31733, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.2.1.29171, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

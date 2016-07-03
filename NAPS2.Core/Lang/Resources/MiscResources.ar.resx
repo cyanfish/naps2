@@ -118,10 +118,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ChooseProfile" xml:space="preserve">
-        <value>Choose Profile</value>
+        <value>اختيار ملف الشخصي</value>
     </data>
     <data name="Clear" xml:space="preserve">
-        <value>Clear</value>
+        <value>محو</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
         <value>أمتأكد من أنك تريد مسح {0} عنصر؟</value>
@@ -130,202 +130,202 @@
         <value>أمتأكد أنك ترغب في حذف هذا/هذه {0} العنصر/العناصر؟</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Are you sure you want to delete {0} profiles?</value>
+        <value>هل أنت متأكد من أنك تريد حذف الملفات الشخصية {0}؟</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
         <value>أمتأكدٌ أنّك تريد حذف الملف الشخصي هذا {0}؟</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>The file {0} already exists. Do you want to overwrite it?</value>
+        <value>الملف {0} موجود بالفعل. هل تريد الكتابة فوقه؟</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>حدف</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>The selected scanner could not be found.</value>
+        <value>تعذر العثور على الماسح الضوئي المحدد.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>The selected scanner is offline.</value>
+        <value>الماسح الضوئي المحدد غير متصل.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>You don't have permission to save files at this location.</value>
+        <value>ليس لديك إذن لحفظ الملفات في هذا الموقع.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>خطأ</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Bitmap Files (*.bmp)</value>
+        <value>ملفات صور نقطية (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
-        <value>Enhanced Windows MetaFile (*.emf)</value>
+        <value>Windows ملف التعريف المحسن (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
-        <value>Exchangeable Image File (*.exif)</value>
+        <value>ملف صورة قابلة لإستبدال (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
-        <value>GIF File (*.gif)</value>
+        <value>ملف GIF (*.gif)</value>
     </data>
     <data name="FileTypeJpeg" xml:space="preserve">
-        <value>JPEG File (*.jpg, *.jpeg)</value>
+        <value>ملف JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>مستند PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>PNG File (*.png)</value>
+        <value>ملف PNG (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>ملف TIFF (*.tiff، *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
-        <value>Name missing.</value>
+        <value>الاسم مفقود.</value>
     </data>
     <data name="NAPS2" xml:space="preserve">
         <value>NAPS2</value>
     </data>
     <data name="NoDeviceSelected" xml:space="preserve">
-        <value>No device selected.</value>
+        <value>لم يتم تحديد أي جهاز.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>No scanning device was found.</value>
+        <value>لم يتم العثور على أي جهاز مسح الضوئي.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
-        <value>Overwrite File</value>
+        <value>الكتابة فوق الملف</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
-        <value>{0} of {1}</value>
+        <value>{0} من {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
-        <value>Scanned Image</value>
+        <value>صورة ممسوحة ضوئياً</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Select a profile before clicking Scan.</value>
+        <value>حدد ملف شخصي قبل النقر فوق مسح ضوئي.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>حدث خطأ مع تعريف المسح الضوئي..</value>
     </data>
     <data name="Version" xml:space="preserve">
-        <value>Version {0}</value>
+        <value>الإصدارة {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
         <value>حدث خطأ أثناء محاولة إرسال بريد إلكتروني.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Automatic Updates</value>
+        <value>التحديثات التلقائية</value>
     </data>
     <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>تنزيل</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>Download and Install</value>
+        <value>تنزيل وتثبيت</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Do you want NAPS2 to automatically check for updates?</value>
+        <value>هل تريد NAPS2 التحقق من وجود تحديثات تلقائياً؟</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Not Now</value>
+        <value>ليس الآن</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
         <value>نسخة جديدة من NAPS2 متوفرة، هل تريد التحديث الآن ؟</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Installation Complete</value>
+        <value>اكتمل التثبيت.</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Installation complete. Do you want to restart NAPS2 now?</value>
+        <value>اكتمل التثبيت. هل تريد إعادة تشغيل NAPS2 الآن؟</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installation failed.</value>
+        <value>فشل التثبيت.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installation Failed</value>
+        <value>فشل التثبيت</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>الكل ({0})</value>
+        <value>كل ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>مختار ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>حجم التنزيل المقدّر: {0} ميغابايت</value>
     </data>
     <data name="FilesProgressFormat" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0}/{1} ملفات</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
-        <value>{0} / {1} MB</value>
+        <value>{0}/{1} ميغابايت</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
-        <value>The file '{0}' could not be imported.</value>
+        <value>لا يمكن استيراد الملف '{0}'.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
+        <value>لا يمكن استيراد الملف '{0}'. يمكن استيراد ملفات PDF فقط التي تم إنشاؤها بواسطة NAPS2.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
-        <value>Download Error</value>
+        <value>خطأ في التنزيل</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>One or more files could not be downloaded.</value>
+        <value>تعذر تنزيل ملف واحد أو أكثر.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Custom ({0}x{1} {2})</value>
+        <value>مخصص ({0} × {1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
-        <value>Scan</value>
+        <value>مسح ضوئي</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>هل أنت متأكد من أنك تريد التراجع عن التغييرات التي أجريتها على {0} صورة؟</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>إعادة تعيين الصورة</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>لديك تغييرات غير محفوظة. هل أنت متأكد من أنك تريد الخروج وتجاهل هذه التغييرات؟</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Unsaved Changes</value>
+        <value>التغييرات التي لم يتم حفظها</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>يمسح ضوئياً الصفحة {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>لا يدعم الماسح الضوئي المحدد باستخدام علبة تغذية. إذا كان الماسح الضوئي الخاص يوجد به مغذي، حاول استخدام برنامج تشغيل مختلف.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>لا توجد صفحات في المغذي.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>You do not have permission to copy content from the file '{0}'.</value>
+        <value>ليس لديك الإذن لنسخ المحتوى من الملف '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
         <value>حدث خطأ أثناء محاولة حفظ الملف.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>من {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>حدث خطأ غير معروف أثناء المسح الضوئي على دفعات.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>الدفعات تم إلغائها.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
         <value>جارِ الإلغاء....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>اكتملت الدفعات بنجاح.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>المسح الضوئي على دفعات توقف بسبب خطأ.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>Scanning page {0}...</value>
+        <value>يمسح ضوئياً الصفحة {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Scanning page {0} (scan {1})...</value>
+        <value>يمسح ضوئياً الصفحة {0} (مسح ضوئي) {1}...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Waiting for scan {0}...</value>
+        <value>في انتظار المسح الضوئي {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>إلغاء</value>
@@ -334,34 +334,34 @@
         <value>إغلاق</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Saving batch results...</value>
+        <value>حفظ نتائج الدفعات...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+        <value>الماسح الضوئي المحدد لا يدعم استخدام الوضع المزدوج. إذا كان ماسحك الضوئي من المفترض أن يدعم الوضع المزدوج، حاول استخدام تعريف مختلف.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importing {0}...</value>
+        <value>يستورد {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Import Progress</value>
+        <value>تقدم الاستيراد</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Recovering...</value>
+        <value>يستردّ...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Recovery Progress</value>
+        <value>تقدّم الاسترداد</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Save Images Progress</value>
+        <value>تقدم حفظ الصور</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>تقدم حفظ PDF</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Saving {0}...</value>
+        <value>يحفظ {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
         <value>ينسخ...</value>
@@ -370,10 +370,10 @@
         <value>تقدم النسخ</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>يستورد...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>Email PDF Progress</value>
+        <value>تقدم إرسال PDF بالبريد</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
         <value>حدث خطأ عند محاولة الحفظ الآلي.</value>
@@ -382,36 +382,39 @@
         <value>كل الملفات</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>ملفات صور</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>الماسح الضوئي المحدد مشغول.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>غطاء الماسح الضوئي مفتوح.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>الماسح الضوئي لديه ورق منحشر.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>الماسح الضوئي يقوم بالإحماء.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
         <value>هناك تحديث متاح للـ OCR.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>حفظت الصورة.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} صور محفوظة.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>تم حفظ PDF.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
-        <value>{0} ({1}x{2} {3})</value>
+        <value>{0} ({1} × {2} {3})</value>
     </data>
     <data name="ConfirmDelete" xml:space="preserve">
         <value>Are you sure you want to delete "{0}"?</value>
+    </data>
+    <data name="FileInUse" xml:space="preserve">
+        <value>The file could not be overwritten because it is currently in use.</value>
     </data>
 </root>
