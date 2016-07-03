@@ -180,8 +180,11 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 // The final pipeline step is pretty fast, so updating progress here is more accurate
-                Interlocked.Increment(ref progress);
-                progressCallback(progress);
+                if (progressCallback(progress))
+                {
+                    Interlocked.Increment(ref progress);
+                    progressCallback(progress);
+                }
 
                 return Tuple.Create(page, ocrResult);
             }).StepBlock().Run((page, ocrResult) =>
