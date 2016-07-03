@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {
@@ -43,6 +44,7 @@ namespace NAPS2.Ocr
             {
                 throw new InvalidOperationException();
             }
+            PathHelper.EnsureParentDirExists(Path);
             File.Move(sourcePath, Path);
         }
     }
