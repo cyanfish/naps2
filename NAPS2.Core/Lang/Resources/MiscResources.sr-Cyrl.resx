@@ -385,7 +385,7 @@
         <value>Сликовне датотеке</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Одабрани скенер није укључен.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>The scanner's cover is open.</value>

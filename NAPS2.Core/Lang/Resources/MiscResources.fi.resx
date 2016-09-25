@@ -169,7 +169,7 @@
         <value>JPEG-tiedosto (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF-tiedosto (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>PNG-tiedosto (*.png)</value>
@@ -385,7 +385,7 @@
         <value>Image Files</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Valittu skanneri on offline-tilassa.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>The scanner's cover is open.</value>

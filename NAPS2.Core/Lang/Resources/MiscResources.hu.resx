@@ -385,7 +385,7 @@
         <value>Image Files</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>A kiválasztott képolvasó nem elérhető.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>The scanner's cover is open.</value>

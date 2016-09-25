@@ -134,7 +134,7 @@
         <value>152, 22</value>
     </data>
     <data name="ctxEdit.Text" xml:space="preserve">
-        <value>Edit</value>
+        <value>Muuda</value>
     </data>
     <data name="ctxSetDefault.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -256,7 +256,7 @@
         <value>2</value>
     </data>
     <data name="btnEdit.Text" xml:space="preserve">
-        <value>&amp;Edit</value>
+        <value>Muuda</value>
     </data>
     <data name="btnEdit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
@@ -319,7 +319,7 @@
         <value>4</value>
     </data>
     <data name="btnDone.Text" xml:space="preserve">
-        <value>&amp;Done</value>
+        <value>Valmis</value>
     </data>
     <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
         <value>btnDone</value>

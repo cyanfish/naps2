@@ -334,7 +334,7 @@
         <value>11</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>Keywords:</value>
+        <value>Märksõnad:</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -982,7 +982,7 @@
         <value>7</value>
     </data>
     <data name="cbAllowPrinting.Text" xml:space="preserve">
-        <value>Allow Printing</value>
+        <value>Luba printimine</value>
     </data>
     <data name="&gt;&gt;cbAllowPrinting.Name" xml:space="preserve">
         <value>cbAllowPrinting</value>
@@ -1033,7 +1033,7 @@
         <value>3</value>
     </data>
     <data name="lblUserPassword.Text" xml:space="preserve">
-        <value>User Password:</value>
+        <value>Kasutaja parool:</value>
     </data>
     <data name="&gt;&gt;lblUserPassword.Name" xml:space="preserve">
         <value>lblUserPassword</value>
@@ -1243,7 +1243,7 @@
         <value>32</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Default File Path:</value>
+        <value>Vaikimisi faili asukoht:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>

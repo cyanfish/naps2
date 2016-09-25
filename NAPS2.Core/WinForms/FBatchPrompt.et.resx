@@ -139,7 +139,7 @@
         <value>5</value>
     </data>
     <data name="btnDone.Text" xml:space="preserve">
-        <value>&amp;Done</value>
+        <value>Valmis</value>
     </data>
     <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
         <value>btnDone</value>

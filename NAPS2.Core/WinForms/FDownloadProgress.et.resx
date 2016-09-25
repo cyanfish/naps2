@@ -278,7 +278,7 @@
         <value>350, 195</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Download Progress</value>
+        <value>Allalaadimise edenemine</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FDownloadProgress</value>

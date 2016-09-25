@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ChooseProfile" xml:space="preserve">
+        <value>Chọn thuộc tính</value>
+    </data>
+    <data name="Clear" xml:space="preserve">
+        <value>Xóa</value>
+    </data>
+    <data name="ConfirmClearItems" xml:space="preserve">
+        <value>Bạn có chắc chắn bạn muốn xóa {0} sản phẩm (s)?</value>
+    </data>
+    <data name="ConfirmDeleteItems" xml:space="preserve">
+        <value>Bạn có chắc chắn muốn xóa {0} sản phẩm (s)?</value>
+    </data>
+    <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
+        <value>Bạn có chắc chắn muốn xóa {0} hồ sơ?</value>
+    </data>
+    <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
+        <value>Bạn có chắc chắn bạn muốn xóa hồ sơ {0}?</value>
+    </data>
+    <data name="ConfirmOverwriteFile" xml:space="preserve">
+        <value>The file {0} already exists. Do you want to overwrite it?</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Xóa</value>
+    </data>
+    <data name="DeviceNotFound" xml:space="preserve">
+        <value>The selected scanner could not be found.</value>
+    </data>
+    <data name="DeviceOffline" xml:space="preserve">
+        <value>The selected scanner is offline.</value>
+    </data>
+    <data name="DontHavePermission" xml:space="preserve">
+        <value>You don't have permission to save files at this location.</value>
+    </data>
+    <data name="Error" xml:space="preserve">
+        <value>Lỗi</value>
+    </data>
+    <data name="FileTypeBmp" xml:space="preserve">
+        <value>Bitmap Files (*.bmp)</value>
+    </data>
+    <data name="FileTypeEmf" xml:space="preserve">
+        <value>Enhanced Windows MetaFile (*.emf)</value>
+    </data>
+    <data name="FileTypeExif" xml:space="preserve">
+        <value>Exchangeable Image File (*.exif)</value>
+    </data>
+    <data name="FileTypeGif" xml:space="preserve">
+        <value>GIF File (*.gif)</value>
+    </data>
+    <data name="FileTypeJpeg" xml:space="preserve">
+        <value>JPEG File (*.jpg, *.jpeg)</value>
+    </data>
+    <data name="FileTypePdf" xml:space="preserve">
+        <value>PDF Document (*.pdf)</value>
+    </data>
+    <data name="FileTypePng" xml:space="preserve">
+        <value>PNG File (*.png)</value>
+    </data>
+    <data name="FileTypeTiff" xml:space="preserve">
+        <value>TIFF File (*.tiff, *.tif)</value>
+    </data>
+    <data name="NameMissing" xml:space="preserve">
+        <value>Name missing.</value>
+    </data>
+    <data name="NAPS2" xml:space="preserve">
+        <value>NAPS2</value>
+    </data>
+    <data name="NoDeviceSelected" xml:space="preserve">
+        <value>No device selected.</value>
+    </data>
+    <data name="NoDevicesFound" xml:space="preserve">
+        <value>No scanning device was found.</value>
+    </data>
+    <data name="OverwriteFile" xml:space="preserve">
+        <value>Overwrite File</value>
+    </data>
+    <data name="PdfStatus" xml:space="preserve">
+        <value>{0} of {1}</value>
+    </data>
+    <data name="ScannedImage" xml:space="preserve">
+        <value>Scanned Image</value>
+    </data>
+    <data name="SelectProfileBeforeScan" xml:space="preserve">
+        <value>Select a profile before clicking Scan.</value>
+    </data>
+    <data name="UnknownDriverError" xml:space="preserve">
+        <value>Có lỗi xảy ra với trình điều khiển máy quét.</value>
+    </data>
+    <data name="Version" xml:space="preserve">
+        <value>Version {0}</value>
+    </data>
+    <data name="EmailError" xml:space="preserve">
+        <value>Có lỗi xảy ra trong khi đang cố gắng để gửi một email.</value>
+    </data>
+    <data name="AutoUpdates" xml:space="preserve">
+        <value>Tự động Cập nhật</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>Tải Về</value>
+    </data>
+    <data name="DownloadAndInstall" xml:space="preserve">
+        <value>Tải về và cài đặt</value>
+    </data>
+    <data name="EnableAutoUpdates" xml:space="preserve">
+        <value>Bạn có muốn NAPS2 tự động kiểm tra các bản cập nhật?</value>
+    </data>
+    <data name="NotNow" xml:space="preserve">
+        <value>Not Now</value>
+    </data>
+    <data name="UpdateNow" xml:space="preserve">
+        <value>NAPS2 có sẵnMột phiên bản mới hơn. Bạn có muốn cập nhật bây giờ?</value>
+    </data>
+    <data name="InstallComplete" xml:space="preserve">
+        <value>Cài đặt thành công</value>
+    </data>
+    <data name="InstallCompletePromptRestart" xml:space="preserve">
+        <value>Cài đặt hoàn tất. Bạn có muốn khởi động lại NAPS2 bây giờ?</value>
+    </data>
+    <data name="InstallFailed" xml:space="preserve">
+        <value>Cài đặt thất bại.</value>
+    </data>
+    <data name="InstallFailedTitle" xml:space="preserve">
+        <value>Cài đặt bị lỗi</value>
+    </data>
+    <data name="AllCount" xml:space="preserve">
+        <value>Tất cả ({0})</value>
+    </data>
+    <data name="SelectedCount" xml:space="preserve">
+        <value>Selected ({0})</value>
+    </data>
+    <data name="EstimatedDownloadSize" xml:space="preserve">
+        <value>Ước tính kích thước download: {0} MB</value>
+    </data>
+    <data name="FilesProgressFormat" xml:space="preserve">
+        <value>{0} / {1} files</value>
+    </data>
+    <data name="SizeProgress" xml:space="preserve">
+        <value>{0} / {1} MB</value>
+    </data>
+    <data name="ImportErrorCouldNot" xml:space="preserve">
+        <value>The file '{0}' could not be imported.</value>
+    </data>
+    <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
+        <value>The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
+    </data>
+    <data name="DownloadError" xml:space="preserve">
+        <value>Tải Về lỗi</value>
+    </data>
+    <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
+        <value>One or more files could not be downloaded.</value>
+    </data>
+    <data name="CustomPageSizeFormat" xml:space="preserve">
+        <value>Tùy chỉnh ({0}x{1} {2})</value>
+    </data>
+    <data name="Scan" xml:space="preserve">
+        <value>Scan</value>
+    </data>
+    <data name="ConfirmResetImages" xml:space="preserve">
+        <value>Bạn có chắc chắn bạn muốn hoàn tác các thay đổi đến {0} hình ảnh (s)?</value>
+    </data>
+    <data name="ResetImage" xml:space="preserve">
+        <value>Reset Image</value>
+    </data>
+    <data name="ExitWithUnsavedChanges" xml:space="preserve">
+        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+    </data>
+    <data name="UnsavedChanges" xml:space="preserve">
+        <value>Unsaved Changes</value>
+    </data>
+    <data name="ScanPageProgress" xml:space="preserve">
+        <value>Scanning page {0}</value>
+    </data>
+    <data name="NoFeederSupport" xml:space="preserve">
+        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    </data>
+    <data name="NoPagesInFeeder" xml:space="preserve">
+        <value>No pages are in the feeder.</value>
+    </data>
+    <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+        <value>You do not have permission to copy content from the file '{0}'.</value>
+    </data>
+    <data name="ErrorSaving" xml:space="preserve">
+        <value>Có lỗi xảy ra khi cố gắng để lưu các tập tin.</value>
+    </data>
+    <data name="OfN" xml:space="preserve">
+        <value>of {0}</value>
+    </data>
+    <data name="BatchError" xml:space="preserve">
+        <value>xảy ra một lỗi không rõ trong đợt quét.</value>
+    </data>
+    <data name="BatchStatusCancelled" xml:space="preserve">
+        <value>Hủy Scan hàng loạt.</value>
+    </data>
+    <data name="BatchStatusCancelling" xml:space="preserve">
+        <value>Đang dừng....</value>
+    </data>
+    <data name="BatchStatusComplete" xml:space="preserve">
+        <value>Scan hàng loạt thành công.</value>
+    </data>
+    <data name="BatchStatusError" xml:space="preserve">
+        <value>Scan hàng loạt dừng lại do lỗi.</value>
+    </data>
+    <data name="BatchStatusPage" xml:space="preserve">
+        <value>Scanning page {0}...</value>
+    </data>
+    <data name="BatchStatusScanPage" xml:space="preserve">
+        <value>Scanning page {0} (scan {1})...</value>
+    </data>
+    <data name="BatchStatusWaitingForScan" xml:space="preserve">
+        <value>Waiting for scan {0}...</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Hủy</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>Đóng</value>
+    </data>
+    <data name="BatchStatusSaving" xml:space="preserve">
+        <value>Saving batch results...</value>
+    </data>
+    <data name="NoDuplexSupport" xml:space="preserve">
+        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    </data>
+    <data name="ProgressFormat" xml:space="preserve">
+        <value>{0} / {1}</value>
+    </data>
+    <data name="ImportingFormat" xml:space="preserve">
+        <value>Đang chèn {0}...</value>
+    </data>
+    <data name="ImportProgress" xml:space="preserve">
+        <value>Chèn xong</value>
+    </data>
+    <data name="Recovering" xml:space="preserve">
+        <value>Recovering...</value>
+    </data>
+    <data name="RecoveryProgress" xml:space="preserve">
+        <value>Recovery Progress</value>
+    </data>
+    <data name="SaveImagesProgress" xml:space="preserve">
+        <value>Save Images Progress</value>
+    </data>
+    <data name="SavePdfProgress" xml:space="preserve">
+        <value>Save PDF Progress</value>
+    </data>
+    <data name="SavingFormat" xml:space="preserve">
+        <value>Saving {0}...</value>
+    </data>
+    <data name="Copying" xml:space="preserve">
+        <value>Đang sao chép...</value>
+    </data>
+    <data name="CopyProgress" xml:space="preserve">
+        <value>Sao chép Tiến trình</value>
+    </data>
+    <data name="Importing" xml:space="preserve">
+        <value>Đang chèn...</value>
+    </data>
+    <data name="EmailPdfProgress" xml:space="preserve">
+        <value>Email PDF Progress</value>
+    </data>
+    <data name="AutoSaveError" xml:space="preserve">
+        <value>Có lỗi xảy ra khi cố gắng tự động Lưu.</value>
+    </data>
+    <data name="FileTypeAllFiles" xml:space="preserve">
+        <value>Tất cả các tập tin</value>
+    </data>
+    <data name="FileTypeImageFiles" xml:space="preserve">
+        <value>TỆP ẢNH</value>
+    </data>
+    <data name="DeviceBusy" xml:space="preserve">
+        <value>The selected scanner is busy.</value>
+    </data>
+    <data name="DeviceCoverOpen" xml:space="preserve">
+        <value>The scanner's cover is open.</value>
+    </data>
+    <data name="DevicePaperJam" xml:space="preserve">
+        <value>The scanner has a paper jam.</value>
+    </data>
+    <data name="DeviceWarmingUp" xml:space="preserve">
+        <value>The scanner is warming up.</value>
+    </data>
+    <data name="OcrUpdateAvailable" xml:space="preserve">
+        <value>Một bản cập nhật để OCR có sẵn.</value>
+    </data>
+    <data name="ImageSaved" xml:space="preserve">
+        <value>Lưu ảnh.</value>
+    </data>
+    <data name="ImagesSaved" xml:space="preserve">
+        <value>{0} images saved.</value>
+    </data>
+    <data name="PdfSaved" xml:space="preserve">
+        <value>PDF saved.</value>
+    </data>
+    <data name="NamedPageSizeFormat" xml:space="preserve">
+        <value>{0} ({1}x{2} {3})</value>
+    </data>
+    <data name="ConfirmDelete" xml:space="preserve">
+        <value>Are you sure you want to delete "{0}"?</value>
+    </data>
+    <data name="FileInUse" xml:space="preserve">
+        <value>The file could not be overwritten because it is currently in use.</value>
+    </data>
+</root>

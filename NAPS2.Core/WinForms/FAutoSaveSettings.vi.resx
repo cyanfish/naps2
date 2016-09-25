@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="btnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+        <value>217, 186</value>
+    </data>
+    <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+        <value>75, 23</value>
+    </data>
+    <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+        <value>18</value>
+    </data>
+    <data name="btnOK.Text" xml:space="preserve">
+        <value>Đồng Ý</value>
+    </data>
+    <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+        <value>btnOK</value>
+    </data>
+    <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+        <value>10</value>
+    </data>
+    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+        <value>298, 186</value>
+    </data>
+    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+        <value>75, 23</value>
+    </data>
+    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+        <value>19</value>
+    </data>
+    <data name="btnCancel.Text" xml:space="preserve">
+        <value>Hủy</value>
+    </data>
+    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+        <value>btnCancel</value>
+    </data>
+    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+        <value>9</value>
+    </data>
+    <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <value>17, 17</value>
+    </metadata>
+    <data name="linkPatchCodeInfo.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="linkPatchCodeInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="linkPatchCodeInfo.Location" type="System.Drawing.Point, System.Drawing">
+        <value>8, 136</value>
+    </data>
+    <data name="linkPatchCodeInfo.Size" type="System.Drawing.Size, System.Drawing">
+        <value>51, 13</value>
+    </data>
+    <data name="linkPatchCodeInfo.TabIndex" type="System.Int32, mscorlib">
+        <value>23</value>
+    </data>
+    <data name="linkPatchCodeInfo.Text" xml:space="preserve">
+        <value>Thêm thông tin</value>
+    </data>
+    <data name="&gt;&gt;linkPatchCodeInfo.Name" xml:space="preserve">
+        <value>linkPatchCodeInfo</value>
+    </data>
+    <data name="&gt;&gt;linkPatchCodeInfo.Type" xml:space="preserve">
+        <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;linkPatchCodeInfo.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;linkPatchCodeInfo.ZOrder" xml:space="preserve">
+        <value>5</value>
+    </data>
+    <data name="rdSeparateByPatchT.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="rdSeparateByPatchT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="rdSeparateByPatchT.Location" type="System.Drawing.Point, System.Drawing">
+        <value>11, 116</value>
+    </data>
+    <data name="rdSeparateByPatchT.Size" type="System.Drawing.Size, System.Drawing">
+        <value>144, 17</value>
+    </data>
+    <data name="rdSeparateByPatchT.TabIndex" type="System.Int32, mscorlib">
+        <value>22</value>
+    </data>
+    <data name="rdSeparateByPatchT.Text" xml:space="preserve">
+        <value>Tập tin riêng biệt của Patch-T</value>
+    </data>
+    <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
+        <value>rdSeparateByPatchT</value>
+    </data>
+    <data name="&gt;&gt;rdSeparateByPatchT.Type" xml:space="preserve">
+        <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;rdSeparateByPatchT.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;rdSeparateByPatchT.ZOrder" xml:space="preserve">
+        <value>6</value>
+    </data>
+    <data name="rdFilePerPage.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="rdFilePerPage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="rdFilePerPage.Location" type="System.Drawing.Point, System.Drawing">
+        <value>11, 70</value>
+    </data>
+    <data name="rdFilePerPage.Size" type="System.Drawing.Size, System.Drawing">
+        <value>106, 17</value>
+    </data>
+    <data name="rdFilePerPage.TabIndex" type="System.Int32, mscorlib">
+        <value>21</value>
+    </data>
+    <data name="rdFilePerPage.Text" xml:space="preserve">
+        <value>Một tập tin cho mỗi trang</value>
+    </data>
+    <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
+        <value>rdFilePerPage</value>
+    </data>
+    <data name="&gt;&gt;rdFilePerPage.Type" xml:space="preserve">
+        <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;rdFilePerPage.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;rdFilePerPage.ZOrder" xml:space="preserve">
+        <value>7</value>
+    </data>
+    <data name="rdFilePerScan.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>TopLeft</value>
+    </data>
+    <data name="rdFilePerScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="rdFilePerScan.Location" type="System.Drawing.Point, System.Drawing">
+        <value>11, 93</value>
+    </data>
+    <data name="rdFilePerScan.Size" type="System.Drawing.Size, System.Drawing">
+        <value>322, 23</value>
+    </data>
+    <data name="rdFilePerScan.TabIndex" type="System.Int32, mscorlib">
+        <value>20</value>
+    </data>
+    <data name="rdFilePerScan.Text" xml:space="preserve">
+        <value>Một tập tin cho mỗi quét</value>
+    </data>
+    <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>TopLeft</value>
+    </data>
+    <data name="&gt;&gt;rdFilePerScan.Name" xml:space="preserve">
+        <value>rdFilePerScan</value>
+    </data>
+    <data name="&gt;&gt;rdFilePerScan.Type" xml:space="preserve">
+        <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;rdFilePerScan.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;rdFilePerScan.ZOrder" xml:space="preserve">
+        <value>8</value>
+    </data>
+    <data name="btnChooseFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="btnChooseFolder.Location" type="System.Drawing.Point, System.Drawing">
+        <value>339, 24</value>
+    </data>
+    <data name="btnChooseFolder.Size" type="System.Drawing.Size, System.Drawing">
+        <value>34, 22</value>
+    </data>
+    <data name="btnChooseFolder.TabIndex" type="System.Int32, mscorlib">
+        <value>27</value>
+    </data>
+    <data name="btnChooseFolder.Text" xml:space="preserve">
+        <value>...</value>
+    </data>
+    <data name="&gt;&gt;btnChooseFolder.Name" xml:space="preserve">
+        <value>btnChooseFolder</value>
+    </data>
+    <data name="&gt;&gt;btnChooseFolder.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;btnChooseFolder.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;btnChooseFolder.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="linkPlaceholders.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="linkPlaceholders.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="linkPlaceholders.Location" type="System.Drawing.Point, System.Drawing">
+        <value>8, 48</value>
+    </data>
+    <data name="linkPlaceholders.Size" type="System.Drawing.Size, System.Drawing">
+        <value>68, 13</value>
+    </data>
+    <data name="linkPlaceholders.TabIndex" type="System.Int32, mscorlib">
+        <value>26</value>
+    </data>
+    <data name="linkPlaceholders.Text" xml:space="preserve">
+        <value>Placeholders</value>
+    </data>
+    <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
+        <value>linkPlaceholders</value>
+    </data>
+    <data name="&gt;&gt;linkPlaceholders.Type" xml:space="preserve">
+        <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;linkPlaceholders.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;linkPlaceholders.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="txtFilePath.Location" type="System.Drawing.Point, System.Drawing">
+        <value>11, 25</value>
+    </data>
+    <data name="txtFilePath.Size" type="System.Drawing.Size, System.Drawing">
+        <value>322, 20</value>
+    </data>
+    <data name="txtFilePath.TabIndex" type="System.Int32, mscorlib">
+        <value>25</value>
+    </data>
+    <data name="&gt;&gt;txtFilePath.Name" xml:space="preserve">
+        <value>txtFilePath</value>
+    </data>
+    <data name="&gt;&gt;txtFilePath.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;txtFilePath.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;txtFilePath.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="lblFilePath.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="lblFilePath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="lblFilePath.Location" type="System.Drawing.Point, System.Drawing">
+        <value>8, 9</value>
+    </data>
+    <data name="lblFilePath.Size" type="System.Drawing.Size, System.Drawing">
+        <value>50, 13</value>
+    </data>
+    <data name="lblFilePath.TabIndex" type="System.Int32, mscorlib">
+        <value>24</value>
+    </data>
+    <data name="lblFilePath.Text" xml:space="preserve">
+        <value>Đường dẫn:</value>
+    </data>
+    <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
+        <value>lblFilePath</value>
+    </data>
+    <data name="&gt;&gt;lblFilePath.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;lblFilePath.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;lblFilePath.ZOrder" xml:space="preserve">
+        <value>4</value>
+    </data>
+    <data name="cbClearAfterSave.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
+    </data>
+    <data name="cbClearAfterSave.Location" type="System.Drawing.Point, System.Drawing">
+        <value>11, 160</value>
+    </data>
+    <data name="cbClearAfterSave.Size" type="System.Drawing.Size, System.Drawing">
+        <value>144, 17</value>
+    </data>
+    <data name="cbClearAfterSave.TabIndex" type="System.Int32, mscorlib">
+        <value>28</value>
+    </data>
+    <data name="cbClearAfterSave.Text" xml:space="preserve">
+        <value>Xóa ảnh sau khi lưu</value>
+    </data>
+    <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
+        <value>cbClearAfterSave</value>
+    </data>
+    <data name="&gt;&gt;cbClearAfterSave.Type" xml:space="preserve">
+        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;cbClearAfterSave.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;cbClearAfterSave.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <value>True</value>
+    </metadata>
+    <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+        <value>6, 13</value>
+    </data>
+    <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+        <value>385, 221</value>
+    </data>
+    <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAxAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAL////wH///8B////Af//
+        /wH///8BrHE086tuMf+qay3/qmwv/6ptMf+qbTH/qm0x/6psL/+qay3/q24x/6twNPH///8B////Af//
+        /wH///8B////AatuMf/ur2D///fe/+mpW//qq17/6qtf/+qrXv/pqVr///fe/+6vYP+rbjD/AAAAMwAA
+        ADMAAAAzAAAAMwAAACOqay3///bd//zt0v/879X//fHZ//3w1//87tT//O3S//zt0f//9t3/qGkr/6tu
+        Mf+qbC//qmst/6tuL/+gaTDBqmwu/+iwaP/97tT/3ZxP/96gVP/dnlL//e/W/9qXR//87dH/565n/6Vm
+        KP/ur2L/6qlb///23P/0wYD/q20v/6psL//ntHL//vHY/9mcUv/boVn/26BY/9mcUf/979X//O3S/+ay
+        b/+jYyT///Xc//zt0v/87M////Xa/6lrLP+qbC//6Ld4//7x2P/VmlP/2J9a/9ifW//WnFb/3a1w//7v
+        1f/ntXb/pGMk///02//irGj/++vO//LMmP+qayz/qmwv/+e5f///8df/0JVP/9ObV//Tm1j/0ppV/9CV
+        Tv//89r/5rl//6VmJ//doFT//fDW//zs0f/uwYn/qmst/6psLv/nu4T//vDV/8qPSv/NlVL/16Zo/+i/
+        i//ovon/5ryG/+m/iv+mZyr/2qBa/9SXTv/979T/7sWQ/6prLf+qbC7/5b2K//3u0v//8db/xY1I/+bA
+        jv+/iU//pmco/6VkJv/pxZT/pmcq/9WdWP/Rlk////LZ/+7Klv+qbC7/qmss/+XAjv/97ND/u4E6///w
+        1f/szaP/pWUm/9uiWv/oyJz/z6Ju/7+JTf/pwY3/6L+K/+a8hv/pwIr/q20v/6prK///9dr//ezO//3s
+        z//+7tL/686m/6VjIv/oyqD/zqFu/7FzMf/ow5D/wIlQ/6ZnKP+lZCb/68aV/6xuMP+rbS7/5suj///1
+        2f/ixZr/48ad/+XJof/nzKT/zaNx/65uKv//9Nr/5sOS/6ZmJ//co1r/6cqe/9Onc/+tcDKtrnE0satt
+        Lv+qayv/qmsr/6prLP+qair/p2Uk/8eYZf//89f///DU/+TDlv+lYyP/6cyi/9Kndf+rbi+n////Af//
+        /wH///8B////Af///wH///8BrW8x/+nQqf//+d//48ac/+PHnv/myqL/6M+n/9Gqev+rbS+n////Af//
+        /wH///8B////Af///wH///8B////Aa5yNK+rbC7/wY5Y/6lpKv+qayz/q2wu/6xtL/+tbzGt////Af//
+        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        //8AAP//AAD//w==
+</value>
+    </data>
+    <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+        <value>9999, 260</value>
+    </data>
+    <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+        <value>350, 260</value>
+    </data>
+    <data name="$this.Text" xml:space="preserve">
+        <value>Cài đặt Tự động Lưu</value>
+    </data>
+    <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
+        <value>ilProfileIcons</value>
+    </data>
+    <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.2.1.29171, Culture=neutral, PublicKeyToken=null</value>
+    </data>
+    <data name="&gt;&gt;$this.Name" xml:space="preserve">
+        <value>FAutoSaveSettings</value>
+    </data>
+    <data name="&gt;&gt;$this.Type" xml:space="preserve">
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.2.1.29171, Culture=neutral, PublicKeyToken=null</value>
+    </data>
+</root>

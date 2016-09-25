@@ -196,10 +196,7 @@
         <value>28</value>
     </data>
     <data name="labelCopyright.Text" xml:space="preserve">
-        <value>Copyright © 2009 Pavel Sorejs
-Copyright © 2012 Michael Adams
-Copyright © 2013 Peter De Leeuw
-Copyright © 2012-2015 Ben Olden-Cooligan</value>
+        <value>Copyright © 2009 Pavel Sorejs\nCopyright © 2012 Michael Adams\nCopyright © 2013 Peter De Leeuw\nCopyright © 2012-2015 Ben Olden-Cooligan</value>
     </data>
     <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
         <value>labelCopyright</value>
@@ -470,7 +467,7 @@ Copyright © 2012-2015 Ben Olden-Cooligan</value>
         <value>31</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Icons from:</value>
+        <value>Ikoonid pärinevad:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>

@@ -156,7 +156,7 @@
         <value>5</value>
     </data>
     <data name="btnDownload.Text" xml:space="preserve">
-        <value>&amp;Download</value>
+        <value>Lae alla</value>
     </data>
     <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
         <value>btnDownload</value>

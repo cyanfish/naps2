@@ -1243,7 +1243,7 @@
         <value>32</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Default File Path:</value>
+        <value>Nome de ficheiro por omissão:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>

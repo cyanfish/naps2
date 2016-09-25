@@ -658,7 +658,7 @@
         <value>21</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Auto-incrementing number (4 digits)</value>
+        <value>自动递增（2个数字）</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>
@@ -712,7 +712,7 @@
         <value>23</value>
     </data>
     <data name="label11.Text" xml:space="preserve">
-        <value>Auto-incrementing number (3 digits)</value>
+        <value>自动递增（2个数字）</value>
     </data>
     <data name="&gt;&gt;label11.Name" xml:space="preserve">
         <value>label11</value>

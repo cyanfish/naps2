@@ -283,7 +283,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Lõika</value>
     </data>
     <data name="tsBrightness.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

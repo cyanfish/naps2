@@ -118,7 +118,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Black &amp; White</value>
+        <value>Must ja valge</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
         <value>24-bitine värv</value>
@@ -211,7 +211,7 @@
         <value>Söötur</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
-        <value>Glass</value>
+        <value>Klaas</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
         <value>Default</value>

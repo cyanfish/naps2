@@ -505,7 +505,7 @@
         <value>0</value>
     </data>
     <data name="lblProfile.Text" xml:space="preserve">
-        <value>Profile:</value>
+        <value>Profiilid:</value>
     </data>
     <data name="&gt;&gt;lblProfile.Name" xml:space="preserve">
         <value>lblProfile</value>

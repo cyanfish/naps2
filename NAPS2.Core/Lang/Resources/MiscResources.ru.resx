@@ -415,6 +415,6 @@
         <value>Are you sure you want to delete "{0}"?</value>
     </data>
     <data name="FileInUse" xml:space="preserve">
-        <value>The file could not be overwritten because it is currently in use.</value>
+        <value>Файл не может быть перезаписан, так как он используется.</value>
     </data>
 </root>

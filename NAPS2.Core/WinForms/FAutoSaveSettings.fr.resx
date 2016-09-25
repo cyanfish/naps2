@@ -223,7 +223,7 @@
         <value>22</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T</value>
+        <value>Séparer les fichiers par Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>

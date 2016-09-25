@@ -592,7 +592,7 @@
         <value>129, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>&amp;Crop</value>
+        <value>Lõika</value>
     </data>
     <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -784,7 +784,7 @@
         <value>83, 51</value>
     </data>
     <data name="toolStripDropDownButton1.Text" xml:space="preserve">
-        <value>&amp;Language</value>
+        <value>Keel</value>
     </data>
     <data name="toolStripDropDownButton1.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>

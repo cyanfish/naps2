@@ -933,7 +933,7 @@
         <value>1</value>
     </data>
     <data name="rdWIA.Text" xml:space="preserve">
-        <value>WIA Driver</value>
+        <value>WIA draiver</value>
     </data>
     <data name="&gt;&gt;rdWIA.Name" xml:space="preserve">
         <value>rdWIA</value>
@@ -1065,7 +1065,7 @@
         <value>31</value>
     </data>
     <data name="linkAutoSaveSettings.Text" xml:space="preserve">
-        <value>Auto Save Settings</value>
+        <value>Automaatselt salvestamise seaded</value>
     </data>
     <data name="&gt;&gt;linkAutoSaveSettings.Name" xml:space="preserve">
         <value>linkAutoSaveSettings</value>
@@ -1095,7 +1095,7 @@
         <value>32</value>
     </data>
     <data name="btnAdvanced.Text" xml:space="preserve">
-        <value>&amp;Advanced</value>
+        <value>Profiili lisavalikud</value>
     </data>
     <data name="&gt;&gt;btnAdvanced.Name" xml:space="preserve">
         <value>btnAdvanced</value>
