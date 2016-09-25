@@ -20,9 +20,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using NAPS2.Config;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -79,16 +81,30 @@ namespace NAPS2.Scan.Wia
                     throw new NoDuplexSupportException();
                 }
                 int pageNumber = 1;
-                bool cancel;
+                int retryCount = 0;
+                bool retry = false;
+                bool cancel = false;
                 do
                 {
                     ScannedImage image;
                     try
                     {
-                        image = TransferImage(eventLoop, pageNumber++, out cancel);
+                        image = TransferImage(eventLoop, pageNumber, out cancel);
+                        pageNumber++;
+                        Debug.WriteLine("Succeeded with retry count {0}", retryCount);
+                        retryCount = 0;
+                        retry = false;
                     }
-                    catch (ScanDriverException)
+                    catch (ScanDriverException e)
                     {
+                        if (e.InnerException is COMException && (uint)((COMException) e.InnerException).ErrorCode == 0x80004005 && retryCount < 10)
+                        {
+                            Thread.Sleep(1000);
+                            retryCount += 1;
+                            Debug.WriteLine("Retrying {0}", retryCount);
+                            retry = true;
+                            continue;
+                        }
                         throw;
                     }
                     catch (Exception e)
@@ -99,7 +115,7 @@ namespace NAPS2.Scan.Wia
                     {
                         yield return image;
                     }
-                } while (!cancel && ScanProfile.PaperSource != ScanSource.Glass);
+                } while (retry || (!cancel && ScanProfile.PaperSource != ScanSource.Glass));
             }
         }
 
@@ -108,6 +124,7 @@ namespace NAPS2.Scan.Wia
             try
             {
                 var transfer = ScanParams.NoUI ? backgroundWiaTransfer : foregroundWiaTransfer;
+                ChaosMonkey.MaybeError(0.5, new COMException("Fail", -2147467259));
                 using (var stream = transfer.Transfer(pageNumber, eventLoop, WiaApi.Formats.BMP))
                 {
                     if (stream == null)

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-18 15:23+0000\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
 "PO-Revision-Date: 2016-05-19 13:14+0000\n"
 "Last-Translator: karlis <karlis.irmejs@limbazi.lv>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.5.1.3\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-POOTLE-MTIME: 1463663653.000000\n"
 
@@ -165,8 +165,8 @@ msgid "Apply brightness/contrast after scan"
 msgstr "Pēc skenēšanas koriģēt spilgtumu/kontrastu"
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
-#: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Pielietot visiem {0} iezīmētajiem attēliem"
@@ -276,25 +276,25 @@ msgstr "Tukšās lapas"
 msgid "Brightness"
 msgstr "Spilgtums"
 
-#: FImageSettings.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
-#: FSelectDevice.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FEmailSettings.resx$btnCancel.Text$Message
+#: FSelectDevice.resx$btnCancel.Text$Message
+#: FScanProgress.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
 #: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
@@ -340,6 +340,7 @@ msgstr "Savietojamība"
 msgid "Contrast"
 msgstr "Kontrasts"
 
+#: FProfiles.resx$ctxCopy.Text$Message
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "Kopēt"
@@ -416,8 +417,8 @@ msgstr "Noņemt kārtojumu"
 #: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Dzēst"
@@ -501,6 +502,7 @@ msgid "Enhanced Windows MetaFile (*.emf)"
 msgstr "Enhanced Windows MetaFile (*.emf)"
 
 #: MiscResources.resx$Error$Message
+#: FError.resx$$this.Text$Message
 msgid "Error"
 msgstr "Kļūda"
 
@@ -784,9 +786,10 @@ msgstr "OCR valoda"
 #: FAutoSaveSettings.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
+#: FError.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
@@ -863,16 +866,17 @@ msgstr "Papīra avots"
 msgid "Password"
 msgstr "Parole"
 
+#: FProfiles.resx$ctxPaste.Text$Message
 #: FDesktop.resx$ctxPaste.Text$Message
 msgid "Paste"
 msgstr "Ielīmēt"
 
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FPlaceholders.resx$gboxPlaceholders.Text$Message
-#: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Vietrāži"
@@ -949,9 +953,9 @@ msgstr "Atiestatīt attēlu"
 msgid "Resolution"
 msgstr "Izšķirtspēja"
 
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
-#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Atiestatīt uz noklusēto"
@@ -960,8 +964,8 @@ msgstr "Atiestatīt uz noklusēto"
 msgid "Reverse"
 msgstr "Apvērst"
 
-#: FRotate.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
+#: FRotate.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
@@ -1087,8 +1091,8 @@ msgstr "Izvēlēti ({0})"
 
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
-msgid "Separate files by Patch-T (TWAIN only)"
-msgstr "Atdalīt datnes pēc Patch-T (tikai TWAIN)"
+msgid "Separate files by Patch-T"
+msgstr ""
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -1124,6 +1128,10 @@ msgstr "TIFF datne (*.tiff, *.tif)"
 msgid "TWAIN Driver"
 msgstr "TWAIN draiveris"
 
+#: FError.resx$linkDetails.Text$Message
+msgid "Technical Details"
+msgstr ""
+
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
 msgstr "Datni '{0}' nevarēja importēt"
@@ -1133,6 +1141,10 @@ msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 c
 msgstr ""
 "Datni '{0}' nevarēja importēt. Importēt iespējams tikai ar NAPS2 ģenerētas "
 "PDF datnes"
+
+#: MiscResources.resx$FileInUse$Message
+msgid "The file could not be overwritten because it is currently in use"
+msgstr ""
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -1345,3 +1357,6 @@ msgstr "{0} attēli saglabāti"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} no {1}"
+
+#~ msgid "Separate files by Patch-T (TWAIN only)"
+#~ msgstr "Atdalīt datnes pēc Patch-T (tikai TWAIN)"

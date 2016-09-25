@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 22:06+0000\n"
-"PO-Revision-Date: 2016-03-29 15:19+0000\n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2016-07-21 19:52+0000\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1459264756.000000\n"
+"X-POOTLE-MTIME: 1469130733.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -167,8 +167,8 @@ msgid "Apply brightness/contrast after scan"
 msgstr "Appliquer luminosité/contraste après acquisition"
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
-#: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Appliquer à toutes les {0} images sélectionnées"
@@ -278,25 +278,25 @@ msgstr "Pages blanches"
 msgid "Brightness"
 msgstr "Luminosité "
 
-#: FImageSettings.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
-#: FScanProgress.resx$btnCancel.Text$Message
-#: FSelectDevice.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FEmailSettings.resx$btnCancel.Text$Message
+#: FSelectDevice.resx$btnCancel.Text$Message
+#: FScanProgress.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
 #: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FContrast.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FCrop.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
@@ -342,6 +342,7 @@ msgstr "Compatibilité"
 msgid "Contrast"
 msgstr "Contraste "
 
+#: FProfiles.resx$ctxCopy.Text$Message
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "Copier"
@@ -418,8 +419,8 @@ msgstr "Désappairer [142536>123456]"
 #: FProfiles.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Supprimer"
@@ -503,6 +504,7 @@ msgid "Enhanced Windows MetaFile (*.emf)"
 msgstr "Fichier EMF (*.emf)"
 
 #: MiscResources.resx$Error$Message
+#: FError.resx$$this.Text$Message
 msgid "Error"
 msgstr "Erreur"
 
@@ -786,9 +788,10 @@ msgstr "Langue OCR "
 #: FAutoSaveSettings.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
+#: FError.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FContrast.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
@@ -865,16 +868,17 @@ msgstr "Source du papier "
 msgid "Password"
 msgstr "Mot de passe"
 
+#: FProfiles.resx$ctxPaste.Text$Message
 #: FDesktop.resx$ctxPaste.Text$Message
 msgid "Paste"
 msgstr "Coller"
 
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
-#: FPlaceholders.resx$gboxPlaceholders.Text$Message
-#: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Chaînes de substitution"
@@ -951,9 +955,9 @@ msgstr "Rétablir l'image"
 msgid "Resolution"
 msgstr "Résolution "
 
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
-#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Valeurs par défaut"
@@ -962,8 +966,8 @@ msgstr "Valeurs par défaut"
 msgid "Reverse"
 msgstr "Inverser"
 
-#: FRotate.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
+#: FRotate.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
@@ -1089,8 +1093,8 @@ msgstr "Sélection ({0})"
 
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
-msgid "Separate files by Patch-T (TWAIN only)"
-msgstr "Séparer les fichiers par Patch-T (TWAIN seulement)"
+msgid "Separate files by Patch-T"
+msgstr "Séparer les fichiers par Patch-T"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -1126,6 +1130,10 @@ msgstr "Fichier TIFF (*.tiff, *.tif)"
 msgid "TWAIN Driver"
 msgstr "Pilote TWAIN"
 
+#: FError.resx$linkDetails.Text$Message
+msgid "Technical Details"
+msgstr "Détails techniques"
+
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
 msgstr "Le fichier « {0} » n'a pas pu être importé"
@@ -1135,6 +1143,10 @@ msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 c
 msgstr ""
 "Le fichier « {0} » n'a pas pu être importé. Seuls les fichiers PDF générés "
 "par NAPS2 peuvent être importés"
+
+#: MiscResources.resx$FileInUse$Message
+msgid "The file could not be overwritten because it is currently in use"
+msgstr "Le fichier ne peut pas être écrasé car il est en cours d'utilisation"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -1349,6 +1361,9 @@ msgstr "{0} images enregistrées"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} sur {1}"
+
+#~ msgid "Separate files by Patch-T (TWAIN only)"
+#~ msgstr "Séparer les fichiers par Patch-T (TWAIN seulement)"
 
 #~ msgid "Default File Name"
 #~ msgstr "Nom de fichier prédéfini "

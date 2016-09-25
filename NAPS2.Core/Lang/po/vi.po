@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2015-08-07 11:52+0000\n"
-"Last-Translator: danfong <danfong.hsieh@gmail.com>\n"
+"PO-Revision-Date: 2016-09-17 12:50+0000\n"
+"Last-Translator: lehoangphihai <lehoangphihai@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: zh-TW\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1438948365.0\n"
+"X-POOTLE-MTIME: 1474116628.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -32,7 +32,7 @@ msgstr "200 dpi"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "24 位元色彩"
+msgstr "24-bit Color"
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
@@ -53,7 +53,7 @@ msgstr "800 dpi"
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "有新版本的 NAPS2 可用。您要馬上更新嗎?"
+msgstr "NAPS2 có sẵnMột phiên bản mới hơn. Bạn có muốn cập nhật bây giờ?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -70,19 +70,19 @@ msgstr "A5 (148x210 mm)"
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
 msgid "About"
-msgstr "關於"
+msgstr "Thông Tin Phần Mềm"
 
 #: FScanProgress.resx$$this.Text$Message
 msgid "Acquiring data"
-msgstr "正在取得資料"
+msgstr "Thu thập dữ liệu"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
-msgstr ""
+msgstr "Nâng cao"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
 msgid "Advanced Profile Settings"
-msgstr ""
+msgstr "Cài đặt chi tiết"
 
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
@@ -90,143 +90,143 @@ msgstr ""
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr "全部 ({0})"
+msgstr "Tất cả ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr ""
+msgstr "Tất cả các tập tin"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
-msgstr "允許註釋"
+msgstr "Cho phép ghi chú"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr "允許內容複製"
+msgstr "Cho phép sao chép nội dung"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "允許對協助工具內容複製"
+msgstr "Cho phép sao chép chỉnh sửa nội dung"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr "允許文件組件"
+msgstr "Cho phép tài liệu Assembly"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
-msgstr "允許文件修改"
+msgstr "Cho phép tài liệu Modification"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr "允許表單填寫"
+msgstr "Cho phép Điền Form"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr "允許完整品質列印"
+msgstr "Cho phép cải thiện bản In"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
-msgstr "允許列印"
+msgstr "Cho phép in"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "Alternate Deinterleave"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Alternate Interleave"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
-msgstr ""
+msgstr "Có lỗi xảy ra khi cố gắng tự động Lưu"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
-msgstr "儲存此檔時發生錯誤"
+msgstr "Có lỗi xảy ra khi cố gắng để lưu các tập tin"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
-msgstr "嘗試發送電子郵件時發生錯誤"
+msgstr "Có lỗi xảy ra trong khi đang cố gắng để gửi một email"
 
 #: MiscResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver"
-msgstr "掃瞄時發生錯誤。"
+msgstr "Có lỗi xảy ra với trình điều khiển máy quét"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr ""
+msgstr "xảy ra một lỗi không rõ trong đợt quét"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr ""
+msgstr "Một bản cập nhật để OCR có sẵn"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
-msgstr ""
+msgstr "Áp dụng độ sáng / tương phản sau khi quét"
 
 #: FContrast.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
-msgstr ""
+msgstr "Áp dụng cho tất cả {0} hình ảnh được chọn"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "您確定要清除 {0} 個項目嗎?"
+msgstr "Bạn có chắc chắn bạn muốn xóa {0} sản phẩm (s)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete "{0}"?"
-msgstr ""
+msgstr "Bạn có chắc chắn muốn xóa \"{0}\"?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "您確定要刪除設定檔 {0}?"
+msgstr "Bạn có chắc chắn bạn muốn xóa hồ sơ {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "您確定要刪除 {0} 個項目嗎?"
+msgstr "Bạn có chắc chắn muốn xóa {0} sản phẩm (s)?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "您確定要刪除 {0} 個設定檔嗎?"
+msgstr "Bạn có chắc chắn muốn xóa {0} hồ sơ?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "您確定要復原您的變更到 {0} 個圖像嗎?"
+msgstr "Bạn có chắc chắn bạn muốn hoàn tác các thay đổi đến {0} hình ảnh (s)?"
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr "附件名稱"
+msgstr "Tên tập tin đính kèm"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr "作者"
+msgstr "Tác giả"
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
 msgid "Auto Save Settings"
-msgstr ""
+msgstr "Cài đặt Tự động Lưu"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr "自動遞增數(1 個數字)"
+msgstr "số tự động-incrementing (1 chữ số)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "自動遞增數(2 個數字)"
+msgstr "số tự động-incrementing (2 chữ số)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "自動遞增數(3 個數字)"
+msgstr "số tự động-incrementing (3 chữ số)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "自動遞增數(4 個數字)"
+msgstr "số tự động-incrementing (4 chữ số)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr "自動更新"
+msgstr "Tự động Cập nhật"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -239,42 +239,42 @@ msgstr "B5 (176x250 mm)"
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
 msgid "Batch Scan"
-msgstr ""
+msgstr "Scan hàng loạt"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled"
-msgstr ""
+msgstr "Hủy Scan hàng loạt"
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully"
-msgstr ""
+msgstr "Scan hàng loạt thành công"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
-msgstr ""
+msgstr "Scan hàng loạt dừng lại do lỗi"
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
-msgstr "位元深度"
+msgstr "Chiều sâu"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "點陣圖檔 (*.bmp)"
+msgstr "Bitmap Files (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 msgid "Black & White"
-msgstr "黑白"
+msgstr "Trắng & Đen"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
-msgstr ""
+msgstr "Trang Trắng"
 
 #: FDesktop.resx$tsBrightness.Text$Message
 #: FViewer.resx$tsBrightness.Text$Message
 #: FBrightness.resx$$this.Text$Message
 #: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
-msgstr "亮度"
+msgstr "Độ sáng"
 
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
@@ -298,60 +298,60 @@ msgstr "亮度"
 #: FBrightness.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
-msgstr "取消"
+msgstr "Hủy"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
-msgstr ""
+msgstr "Đang dừng"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr "置中"
+msgstr "Canh giữa"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr "選擇設定檔"
+msgstr "Chọn thuộc tính"
 
 #: FEditProfile.resx$btnChooseDevice.Text$Message
 msgid "Choose device"
-msgstr "選擇裝置"
+msgstr "Chọn Ổ Đĩa"
 
 #: FDesktop.resx$tsClear.Text$Message
 #: MiscResources.resx$Clear$Message
 msgid "Clear"
-msgstr "清除"
+msgstr "Xóa"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr ""
+msgstr "Xóa ảnh sau khi lưu"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 msgid "Compatibility"
-msgstr ""
+msgstr "Khả năng tương thích"
 
 #: FDesktop.resx$tsContrast.Text$Message
 #: FViewer.resx$tsContrast.Text$Message
 #: FContrast.resx$$this.Text$Message
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
-msgstr "對比"
+msgstr "Tương phản"
 
 #: FProfiles.resx$ctxCopy.Text$Message
 #: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
-msgstr "複製"
+msgstr "Sao chép"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr ""
+msgstr "Sao chép Tiến trình"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
-msgstr ""
+msgstr "Đang sao chép"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
@@ -363,7 +363,7 @@ msgstr "Copyright © 2012 Michael Adams"
 
 #: FAbout.resx__3$labelCopyright.Text$Message
 msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr "版權所有 © 2012-2014 Ben Olden-Cooligan"
+msgstr "Copyright © 2012-2015 Ben Olden-Cooligan"
 
 #: FAbout.resx__2$labelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
@@ -371,47 +371,47 @@ msgstr "Copyright © 2013 Peter De Leeuw"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
-msgstr ""
+msgstr "Bảo hiểm Threshold"
 
 #: FDesktop.resx$tsCrop.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
-msgstr "裁剪"
+msgstr "Chỉnh sửa"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
-msgstr "自訂"
+msgstr "Tùy chỉnh"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr "自訂 ({0}x{1} {2})"
+msgstr "Tùy chỉnh ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
 msgid "Custom Page Size"
-msgstr "自訂頁面大小"
+msgstr "Tùy chỉnh kiểu giấy"
 
 #: FDesktop.resx$tsCustomRotation.Text$Message
 #: FViewer.resx$tsCustomRotation.Text$Message
 msgid "Custom Rotation"
-msgstr "自訂旋轉"
+msgstr "Tùy chỉnh xoay"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
-msgstr "天 (01-31)"
+msgstr "Ngày(01-31)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
 msgid "Default"
-msgstr ""
+msgstr "Mặc định"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Path"
-msgstr ""
+msgstr "Đường dẫn mặc định"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr "去掉間隔"
+msgstr "Deinterleave"
 
 #: FRecover.resx$btnDelete.Text$Message
 #: FProfiles.resx$btnDelete.Text$Message
@@ -421,291 +421,293 @@ msgstr "去掉間隔"
 #: FProfiles.resx$ctxDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
-msgstr "刪除"
+msgstr "Xóa"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
-msgstr "裝置"
+msgstr "Thiết bị"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "Kích thước"
 
 #: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
-msgstr "顯示名稱"
+msgstr "Hiển thị tên"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr "您要 NAPS2 自動檢查更新嗎?"
+msgstr "Bạn có muốn NAPS2 tự động kiểm tra các bản cập nhật?"
 
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
-msgstr "完成"
+msgstr "Xong"
 
 #: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
 #: MiscResources.resx$Download$Message
 msgid "Download"
-msgstr "下載"
+msgstr "Tải Về"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "下載發生錯誤"
+msgstr "Tải Về lỗi"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr "下載進度"
+msgstr "Tiến độ tải về"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
 msgid "Download and Install"
-msgstr "下載並安裝"
+msgstr "Tải về và cài đặt"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "雙面"
+msgstr "Hai mặt"
 
 #: FProfiles.resx$btnEdit.Text$Message
 #: FProfiles.resx$ctxEdit.Text$Message
 msgid "Edit"
-msgstr "編輯"
+msgstr "Sửa"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "電子郵件發送 PDF"
+msgstr "Email PDF"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr ""
+msgstr "Email PDF Progress"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
 msgid "Email Settings"
-msgstr "電子郵件設定"
+msgstr "Cài đặt Email"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
-msgstr ""
+msgstr "Kích hoạt Lưu tự động"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr "加密 PDF"
+msgstr "Mã hóa PDF"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr "加密"
+msgstr "Encryption"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Windows 增強型中繼檔 (*.emf)"
+msgstr "Enhanced Windows MetaFile (*.emf)"
 
 #: MiscResources.resx$Error$Message
 #: FError.resx$$this.Text$Message
 msgid "Error"
-msgstr "錯誤"
+msgstr "Lỗi"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
 msgid "Estimated download size: {0} MB"
-msgstr "估計下載大小: {0} MB"
+msgstr "Ước tính kích thước download: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "可交換式影像檔案 (*.exif)"
+msgstr "Exchangeable Image File (*.exif)"
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
-msgstr ""
+msgstr "Loại trừ các trang trống"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "送紙器"
+msgstr "Feeder"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr "檔案名稱"
+msgstr "Tên tệp"
 
 #: FBatchScan.resx$lblFilePath.Text$Message
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr ""
+msgstr "Đường dẫn"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
 msgid "Flip"
-msgstr "翻轉"
+msgstr "Lật"
 
 #: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
 msgid "Flip duplexed pages"
-msgstr ""
+msgstr "Lật 2 mặt trang"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
-msgstr "對於高 JPEG 品質 (80+)，要獲得最佳結果請使用最大品質設定檔選項"
+msgstr ""
+"Đối với JPG cao chất (80+), sử dụng tùy chọn hồ sơ chất lượng tối đa cho kết "
+"quả tốt nhất"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Force matching page size"
-msgstr ""
+msgstr "kích thước trang phù hợp "
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF 檔 (*.gif)"
+msgstr "GIF File (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr "獲取更多的語言"
+msgstr "Thêm Ngôn ngữ"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "半透明"
+msgstr "Kính"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr "灰階"
+msgstr "Grayscale"
 
 #: FEditProfile.resx$label9.Text$Message
 msgid "Horizontal align"
-msgstr "水平對齊"
+msgstr "Chỉnh chiều ngang"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr "小時 (0-23)"
+msgstr "Giờ (0-23)"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
-msgstr "圖示來源"
+msgstr "Icons from"
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
-msgstr "圖像"
+msgstr "Ảnh"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr ""
+msgstr "TỆP ẢNH"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
-msgstr ""
+msgstr "Chất lượng ảnh"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
 msgid "Image Settings"
-msgstr "圖像設定"
+msgstr "Cài đặt ảnh"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr ""
+msgstr "Lưu ảnh"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
-msgstr "匯入"
+msgstr "Chèn"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr ""
+msgstr "Chèn xong"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
-msgstr ""
+msgstr "Đang chèn"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
-msgstr ""
+msgstr "Đang chèn {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
-msgstr "安裝完成"
+msgstr "Cài đặt thành công"
 
 #: MiscResources.resx$InstallFailedTitle$Message
 msgid "Installation Failed"
-msgstr "安裝失敗"
+msgstr "Cài đặt bị lỗi"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "安裝完成。您要馬上將 NAPS2 重新啟動嗎?"
+msgstr "Cài đặt hoàn tất. Bạn có muốn khởi động lại NAPS2 bây giờ?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed"
-msgstr "安裝失敗"
+msgstr "Cài đặt thất bại"
 
 #: FDesktop.resx$tsInterleave.Text$Message
 msgid "Interleave"
-msgstr "間隔"
+msgstr "Interleave"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "JPEG 檔 (*.jpg, *.jpeg)"
+msgstr "JPEG File (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr "JPEG 品質"
+msgstr "Jpeg Quality"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr "關鍵字"
+msgstr "Từ khóa"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
-msgstr "語言"
+msgstr "Ngôn ngữ"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr "靠左"
+msgstr "Trái"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr ""
+msgstr "Legacy (native UI only)"
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
-msgstr ""
+msgstr "Tải hình ảnh vào NAPS2"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
-msgstr "主工具列"
+msgstr "Thanh công cụ chính"
 
 #: FOcrSetup.resx$checkBoxEnableOcr.Text$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "使用 OCR 讓 PDF 可搜尋"
+msgstr "Hãy tìm kiếm các file PDF sử dụng OCR"
 
 #: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr "最高品質 (大檔)"
+msgstr "Chất lượng tối đa (tập tin lớn)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
-msgstr "中繼資料"
+msgstr "Metadata"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr "分鐘 (00-59)"
+msgstr "Phút (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
-msgstr "月份 (01-12)"
+msgstr "Tháng (01-12)"
 
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 #: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
-msgstr ""
+msgstr "Thêm thông tin"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
-msgstr "下移"
+msgstr "Chuyển xuống"
 
 #: FDesktop.resx$tsMove.TextFirst$Message
 msgid "Move Up"
-msgstr "上移"
+msgstr "Chuyển lên"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr ""
+msgstr "Quét nhiều (trễ cố định giữa quét)"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr ""
+msgstr "Quét nhiều (nhắc giữa quét)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -713,69 +715,69 @@ msgstr "NAPS2"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "Tên (bắt buộc)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr "缺少名稱"
+msgstr "Đặt tên lỗi"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
-msgstr "新增"
+msgstr "Mới"
 
 #: FDesktop.resx$tsNewProfile.Text$Message
 msgid "New Profile"
-msgstr "新增設定檔"
+msgstr "Hồ sơ mới"
 
 #: FViewer.resx$tsNext.Text$Message
 msgid "Next"
-msgstr "下一頁"
+msgstr "Tới"
 
 #: FBatchPrompt.resx$$this.Text$Message
 msgid "Next Scan"
-msgstr ""
+msgstr "Quét Trang tiếp"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
-msgstr "尚未選擇裝置"
+msgstr "Không có thiết bị được lựa chọn"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr "沒有頁面在送紙器中"
+msgstr "Không trang sau nằm trong máng"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
-msgstr "找不到掃瞄裝置"
+msgstr "Không thấy thiết bị quét"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
-msgstr "Not Another PDF Scanner 2"
+msgstr "Không thấy Scanner PDF 2"
 
 #: FUpdate.resx$btnCancel.Text$Message
 #: FRecover.resx$btnCancel.Text$Message
 #: MiscResources.resx$NotNow$Message
 msgid "Not Now"
-msgstr "現在不要"
+msgstr "bây giờ không thấy"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr ""
+msgstr "Số trang quét"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "光學辨識(OCR)"
+msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr "OCR 下載"
+msgstr "Tải OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
-msgstr "OCR 安裝"
+msgstr "Cài đặt OCR"
 
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
-msgstr "OCR 語言"
+msgstr "Ngôn ngữ OCR"
 
 #: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FEditProfile.resx$btnOK.Text$Message
@@ -794,80 +796,80 @@ msgstr "OCR 語言"
 #: FCrop.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
-msgstr "確定"
+msgstr "Đồng Ý"
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr ""
+msgstr "Offset width based on alignment (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
-msgstr ""
+msgstr "DSN Cũ"
 
 #: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
-msgstr ""
+msgstr "Một tập tin cho mỗi trang"
 
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr ""
+msgstr "Một tập tin cho mỗi quét"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
-msgstr "無法下載一個或多個檔案"
+msgstr "Một hoặc nhiều tập tin không thể được tải về"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
-msgstr ""
+msgstr "Mở Thư mục"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr ""
+msgstr "Đầu ra"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
-msgstr "覆寫檔案"
+msgstr "Ghi đè Tiệp"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr "擁有者密碼"
+msgstr "Owner Password"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr ""
+msgstr "Tài liệu PDF  (*.pdf)"
 
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 msgid "PDF Settings"
-msgstr "PDF 設定"
+msgstr "Cài đặt PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr ""
+msgstr "Lưu PDF"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr "PNG 檔 (*.png)"
+msgstr "Tệp PNG  (*.png)"
 
 #: FEditProfile.resx$label4.Text$Message
 msgid "Page size"
-msgstr "頁面大小"
+msgstr "Kích thước trang"
 
 #: FEditProfile.resx$label2.Text$Message
 msgid "Paper source"
-msgstr "紙張來源"
+msgstr "Trang gốc"
 
 #: FPdfPassword.resx$$this.Text$Message
 msgid "Password"
-msgstr "密碼"
+msgstr "Mật Khẩu"
 
 #: FProfiles.resx$ctxPaste.Text$Message
 #: FDesktop.resx$ctxPaste.Text$Message
 msgid "Paste"
-msgstr ""
+msgstr "Dán"
 
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
@@ -877,157 +879,157 @@ msgstr ""
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr "版面配置區"
+msgstr "Placeholders"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr ""
+msgstr "Nhấn Start khi đã sẵn sàng"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
 msgid "Preview"
-msgstr "預覽"
+msgstr "Xem trước"
 
 #: FViewer.resx$tsPrev.Text$Message
 msgid "Previous"
-msgstr "上一頁"
+msgstr "Lùi lại"
 
 #: FDesktop.resx$tsPrint.Text$Message
 msgid "Print"
-msgstr "列印"
+msgstr "In"
 
 #: FBatchScan.resx$lblProfile.Text$Message
 msgid "Profile"
-msgstr ""
+msgstr "Hồ sơ"
 
 #: FEditProfile.resx$$this.Text$Message
 msgid "Profile Settings"
-msgstr "設定檔設定"
+msgstr "Cài đặt Hồ sơ"
 
 #: FDesktop.resx$tsProfiles.Text$Message
 #: FProfiles.resx$$this.Text$Message
 msgid "Profiles"
-msgstr "設定檔"
+msgstr "Profiles"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
-msgstr ""
+msgstr "Sẵn sàng cho quét {0}"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
-msgstr "修復"
+msgstr "Phục hồi"
 
 #: FRecover.resx$$this.Text$Message
 msgid "Recover Scanned Images"
-msgstr "復原掃瞄過的圖像"
+msgstr "Khôi phục hình ảnh scan"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
-msgstr ""
+msgstr "Đang Khôi Phục"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr ""
+msgstr "Khôi Phục thành công"
 
 #: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr "記住這些設定"
+msgstr "Ghi các thiết lập"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
-msgstr "重新排序"
+msgstr "Sắp xếp lại"
 
 #: FDesktop.resx$tsReset.Text$Message
 msgid "Reset"
-msgstr "重設"
+msgstr "Thiết lập lại"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr "重設圖像"
+msgstr "Thiết lập lại hình ảnh"
 
 #: FEditProfile.resx$label5.Text$Message
 msgid "Resolution"
-msgstr "解析度"
+msgstr "Nghị quyết"
 
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr "還原預設值"
+msgstr "Khôi phục mặc định"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
-msgstr "反轉"
+msgstr "Đảo ngược"
 
 #: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
-msgstr "還原"
+msgstr "Trở lại"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
-msgstr "靠右"
+msgstr "Phải"
 
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
 msgid "Rotate"
-msgstr "旋轉"
+msgstr "Xoay"
 
 #: FDesktop.resx$tsRotateLeft.Text$Message
 #: FViewer.resx$tsRotateLeft.Text$Message
 msgid "Rotate Left"
-msgstr "向左旋轉"
+msgstr "Xoay Trái"
 
 #: FDesktop.resx$tsRotateRight.Text$Message
 #: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
-msgstr "向右旋轉"
+msgstr "Xoay Phải"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
-msgstr "儲存圖像"
+msgstr "Lưu Ảnh"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr ""
+msgstr "Lưu hình ảnh tiến độ"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 msgid "Save PDF"
-msgstr "儲存 PDF"
+msgstr "Lưu PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr ""
+msgstr "Lưu Tiến độ PDF"
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr ""
+msgstr "Lưu vào một tập tin duy nhất"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
-msgstr ""
+msgstr "Lưu vào nhiều file"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
-msgstr ""
+msgstr "Lưu vào nhiều file"
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}"
-msgstr ""
+msgstr "Đang Lưu..{0}"
 
 #: FEditProfile.resx$label10.Text$Message
 msgid "Scale"
-msgstr "縮放比例"
+msgstr "Tỉ lệ"
 
 #: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
 msgid "Scale With Window"
-msgstr "使用視窗比例"
+msgstr "Tỉ lệ với cửa sổ"
 
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
@@ -1035,49 +1037,49 @@ msgstr "使用視窗比例"
 #: MiscResources.resx$Scan$Message
 #: FProfiles.resx$ctxScan.Text$Message
 msgid "Scan"
-msgstr "掃瞄"
+msgstr "Quét"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
 msgid "Scan Configuration"
-msgstr ""
+msgstr "Cấu hình quét"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
-msgstr "已掃瞄的圖像"
+msgstr "Quét Ảnh"
 
 #: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
-msgstr "掃瞄頁面 {0}"
+msgstr "Trang quét {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr ""
+msgstr "Đang quét trang {0} (Quét {1})"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr "秒鐘 (00-59)"
+msgstr "Giây (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
 msgid "Select"
-msgstr ""
+msgstr "Chọn"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
-msgstr "全選"
+msgstr "Chọn hết"
 
 #: FSelectDevice.resx$$this.Text$Message
 msgid "Select Source"
-msgstr ""
+msgstr "Chọn nguồn"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "按下 [掃瞄] 前請先選擇設定檔"
+msgstr "Chọn một cấu hình trước khi bấm Scan"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr "請選擇一個或多個語言"
+msgstr "Chọn một hoặc nhiều ngôn ngữ"
 
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
@@ -1085,114 +1087,120 @@ msgstr "請選擇一個或多個語言"
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
-msgstr "已選 ({0})"
+msgstr "Chọn ({0})"
 
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T"
-msgstr ""
+msgstr "Tập tin riêng biệt của Patch-T"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
-msgstr "設為預設"
+msgstr "Về mặc định"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
-msgstr "顯示"
+msgstr "Xem"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr ""
+msgstr "quét đơn"
 
 #: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
 msgid "Skip save prompt"
-msgstr ""
+msgstr "Bỏ qua Lưu nhanh "
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
-msgstr ""
+msgstr "Bắt Đầu"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr "主旨"
+msgstr "Tiêu đề"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr "TIFF 檔 (*.tiff, *.tif)"
+msgstr "TIFF File (*.tiff, *.tif)"
 
 #: FEditProfile.resx$rdTWAIN.Text$Message
 msgid "TWAIN Driver"
-msgstr "TWAIN 驅動程式"
+msgstr "TWAIN Driver"
 
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "Chi tiết kỹ thuật"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
-msgstr "檔案 '{0}' 無法匯入"
+msgstr "Các tập tin '{0}' không thể chèn được"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
-msgstr "檔案 '{0}' 無法匯入。僅能匯入 NAPS2 產生的 PDF 檔"
+msgstr ""
+"Các tập tin '{0}' không thể chèn được. Chỉ những tập tin PDF được tạo bởi "
+"NAPS2 có thể được chèn"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
-msgstr ""
+msgstr "Các tập tin có thể không được ghi đè bởi vì nó hiện đang sử dụng"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "檔案 {0} 已經存在，您要將它覆寫嗎?"
+msgstr "Các tập tin {0} đã tồn tại. Bạn có muốn ghi đè không?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
-msgstr "下列檔案有加密，需要密碼來開啟: {0}"
+msgstr "Các tập tin sau đây được mã hóa và yêu cầu mật khẩu để mở: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
-msgstr ""
+msgstr "Máy quét có kẹt giấy"
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up"
-msgstr ""
+msgstr "Máy quét đang ấm dần lên"
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
-msgstr ""
+msgstr "Nắp máy quét mở"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
-msgstr "找不到所選的掃瞄器。"
+msgstr "Máy quét chọn không thể được tìm thấy"
 
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
-msgstr "所選掃瞄器不支援使用送紙器。如果您的掃瞄器沒有送紙器，請試著使用不同的驅動程式"
+msgstr ""
+"Máy quét chọn không hỗ trợ sử dụng một feeder. Nếu máy quét của bạn không có "
+"một feeder, hãy thử sử dụng một trình điều khiển khác nhau"
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr ""
+"Máy quét chọn không hỗ trợ sử dụng hai mặt. Nếu máy quét của bạn phải hỗ trợ "
+"hai mặt, hãy thử sử dụng một trình điều khiển khác nhau"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
-msgstr ""
+msgstr "Máy quét chọn đang bận"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
-msgstr "所選的掃瞄器離線"
+msgstr "Máy quét chọn đang ẩn"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
-msgstr ""
+msgstr "Thời gian giữa quét (giây)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr "標題"
+msgstr "Tiêu đề"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
 msgid "Twain Implementation"
-msgstr ""
+msgstr "Twain thực hiện"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1204,52 +1212,52 @@ msgstr "US Letter (8.5x11 in)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
-msgstr "未儲存的變更"
+msgstr "Thay đổi chưa được lưu"
 
 #: FUpdate.resx$$this.Text$Message
 msgid "Update NAPS2"
-msgstr "更新 NAPS2"
+msgstr "Cập Nhật NAPS2"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
-msgstr "使用原生使用者介面"
+msgstr "Sử dụng giao diện người dùng tự nhiên"
 
 #: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
-msgstr "使用預定義設定"
+msgstr "Sử dụng các thiết lập được xác định trước"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr "使用者密碼"
+msgstr "Dùng Mật khẩu"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
-msgstr "使用 OCR 需要您去下載每個您想要掃瞄的語言"
+msgstr "Sử dụng OCR đòi hỏi bạn phải tải về từng ngôn ngữ mà bạn muốn quét"
 
 #: MiscResources.resx$Version$Message
 msgid "Version {0}"
-msgstr "版本 {0}"
+msgstr "Phiên bản {0}"
 
 #: FDesktop.resx$tsView.Text$Message
 #: FDesktop.resx$ctxView.Text$Message
 msgid "View"
-msgstr "檢視"
+msgstr "Xem"
 
 #: FEditProfile.resx$rdWIA.Text$Message
 msgid "WIA Driver"
-msgstr "WIA 驅動程式"
+msgstr "WIA Driver"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
-msgstr "等待 TWAIN 完成"
+msgstr "Đang chờ TWAIN để hoàn thành"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr ""
+msgstr "Đang chờ quét {0}"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
-msgstr ""
+msgstr "Ngưỡng trắng"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
@@ -1257,45 +1265,45 @@ msgstr "X"
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
-msgstr "年份"
+msgstr "Năm"
 
 #: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
-msgstr "年份 (00-99)"
+msgstr "Năm (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'"
-msgstr "您沒有權限從檔案 '{0}' 複製內容"
+msgstr "Bạn không có quyền sao chép nội dung từ file '{0}'"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
-msgstr "您沒有在該位置儲存檔案的權限。"
+msgstr "Bạn không có quyền để lưu các tập tin tại vị trí này"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
-msgstr "您有未儲存的變更。您確定要結束並放棄那些變更嗎?"
+msgstr ""
+"Bạn có thay đổi chưa được lưu. Bạn có chắc chắn muốn thoát ra và loại bỏ "
+"những thay đổi?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
-msgstr "縮放"
+msgstr "Phóng"
 
 #: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
 msgid "Zoom Actual"
-msgstr "縮放實際大小"
+msgstr "Phóng thực tế"
 
 #: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
-#, fuzzy
 msgid "Zoom In"
-msgstr "放大"
+msgstr "Phóng To"
 
 #: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#, fuzzy
 msgid "Zoom Out"
-msgstr "縮小"
+msgstr "Thu Nhỏ"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "公分"
+msgstr "cm"
 
 #: FAbout.resx$linkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
@@ -1307,24 +1315,24 @@ msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "單位"
+msgstr "trong"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr "毫米"
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 #: FViewer.resx$lblPageTotal.Text$Message
 msgid "of {0}"
-msgstr "/ {0}"
+msgstr "of {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -1334,58 +1342,18 @@ msgstr "{0} / {1} MB"
 #: MiscResources.resx$FilesProgressFormat$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
 msgid "{0} / {1} files"
-msgstr "{0} / {1} 檔案"
+msgstr "{0} / {1} files"
 
 #: FRecover.resx$lblPrompt.Text$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "在 {1} 上已掃瞄 {0} 個圖像，在 {2} 可能沒有被儲存，且可復原。您要將它們復原嗎?"
+msgstr ""
+"{0} hình ảnh) quét trên {1} tại {2} có thể không được lưu lại, và có thể "
+"phục hồi được. Bạn có muốn khôi phục chúng?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
-msgstr ""
+msgstr "{0} hình ảnh được lưu"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
-msgstr "{0} / {1}"
-
-#~ msgid "Default File Name"
-#~ msgstr "預設檔案名稱"
-
-#~ msgid "Substitutions"
-#~ msgstr "替代"
-
-#~ msgid "PDF document (*.pdf)"
-#~ msgstr "PDF 文件 (*.pdf)"
-
-#~ msgid "Saving to PDF"
-#~ msgstr "儲存成 PDF"
-
-#~ msgid "File Name Substitutions"
-#~ msgstr "檔案名稱替代"
-
-#~ msgid "http://sourceforge.com/projects/naps2"
-#~ msgstr "http://sourceforge.com/projects/naps2"
-
-#~ msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
-#~ msgstr "Copyright © 2012-2014 Ben Olden-Cooligan"
-
-#~ msgid "Add"
-#~ msgstr "加入"
-
-#~ msgid "Choose Icon"
-#~ msgstr "選擇圖示"
-
-#~ msgid "Manage Profiles"
-#~ msgstr "管理設定檔"
-
-#~ msgid "Quick Scan"
-#~ msgstr "快速掃瞄"
-
-#~ msgid "Zoom in"
-#~ msgstr "放大"
-
-#~ msgid "Zoom out"
-#~ msgstr "縮小"
-
-#~ msgid "Use native WIA UI"
-#~ msgstr "使用原生 WIA 使用者介面"
+msgstr "{0} tới {1}"

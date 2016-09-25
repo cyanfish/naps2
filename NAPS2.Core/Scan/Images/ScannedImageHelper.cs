@@ -135,11 +135,21 @@ namespace NAPS2.Scan.Images
                 if (pageDimensions.Width > pageDimensions.Height && width < height)
                 {
                     // Flip dimensions
-                    result.SetResolution((float)(output.Width / pageDimensions.HeightInInches()), (float)(output.Height / pageDimensions.WidthInInches()));
+                    result = new CropTransform
+                    {
+                        Right = (int)((width - (float)pageDimensions.HeightInInches()) * output.HorizontalResolution),
+                        Bottom = (int)((height - (float)pageDimensions.WidthInInches()) * output.VerticalResolution)
+                    }.Perform(result);
+                    // result.SetResolution((float)(output.Width / pageDimensions.HeightInInches()), (float)(output.Height / pageDimensions.WidthInInches()));
                 }
                 else
                 {
-                    result.SetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
+                    result = new CropTransform
+                    {
+                        Right = (int)((width - (float)pageDimensions.WidthInInches()) * output.HorizontalResolution),
+                        Bottom = (int)((height - (float)pageDimensions.HeightInInches()) * output.VerticalResolution)
+                    }.Perform(result);
+                    //result.SetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
                 }
             }
 
