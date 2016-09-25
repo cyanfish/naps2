@@ -225,4 +225,10 @@
   <data name="lv" xml:space="preserve">
     <value>Latviešu valoda</value>
   </data>
+  <data name="af" xml:space="preserve">
+    <value>Afrikaans</value>
+  </data>
+  <data name="vi" xml:space="preserve">
+    <value>Tiếng việt</value>
+  </data>
 </root>

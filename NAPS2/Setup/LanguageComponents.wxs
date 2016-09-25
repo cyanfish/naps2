@@ -3,6 +3,7 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
   <Fragment Id='LanguageComponentsFragment'>
     <ComponentGroup Id="LangComponents">
+      <ComponentRef Id="LangComponent_af" />
       <ComponentRef Id="LangComponent_ar" />
       <ComponentRef Id="LangComponent_bg" />
       <ComponentRef Id="LangComponent_ca" />
@@ -36,11 +37,17 @@
       <ComponentRef Id="LangComponent_sv" />
       <ComponentRef Id="LangComponent_tr" />
       <ComponentRef Id="LangComponent_uk" />
+      <ComponentRef Id="LangComponent_vi" />
       <ComponentRef Id="LangComponent_zh_CHS" />
       <ComponentRef Id="LangComponent_zh_TW" />
     </ComponentGroup>
 
     <DirectoryRef Id="LIBFOLDER">
+      <Directory Id="LangFolder_af" Name="af">
+        <Component Id="LangComponent_af">
+          <File Source="..\NAPS2\bin\InstallerMSI\af\NAPS2.Core.resources.dll" Id="LangFile_af" />
+        </Component>
+      </Directory>
       <Directory Id="LangFolder_ar" Name="ar">
         <Component Id="LangComponent_ar">
           <File Source="..\NAPS2\bin\InstallerMSI\ar\NAPS2.Core.resources.dll" Id="LangFile_ar" />
@@ -204,6 +211,11 @@
       <Directory Id="LangFolder_uk" Name="uk">
         <Component Id="LangComponent_uk">
           <File Source="..\NAPS2\bin\InstallerMSI\uk\NAPS2.Core.resources.dll" Id="LangFile_uk" />
+        </Component>
+      </Directory>
+      <Directory Id="LangFolder_vi" Name="vi">
+        <Component Id="LangComponent_vi">
+          <File Source="..\NAPS2\bin\InstallerMSI\vi\NAPS2.Core.resources.dll" Id="LangFile_vi" />
         </Component>
       </Directory>
       <Directory Id="LangFolder_zh_CHS" Name="zh-CHS">

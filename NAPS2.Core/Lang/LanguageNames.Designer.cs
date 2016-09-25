@@ -61,6 +61,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Afrikaans.
+        /// </summary>
+        internal static string af {
+            get {
+                return ResourceManager.GetString("af", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to العَرَبِية.
         /// </summary>
         internal static string ar {
@@ -372,6 +381,15 @@ namespace NAPS2.Lang {
         internal static string uk {
             get {
                 return ResourceManager.GetString("uk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tiếng việt.
+        /// </summary>
+        internal static string vi {
+            get {
+                return ResourceManager.GetString("vi", resourceCulture);
             }
         }
         
