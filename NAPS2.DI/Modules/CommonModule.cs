@@ -16,7 +16,6 @@ using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
-using NAPS2.Update;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject.Modules;
@@ -58,16 +57,6 @@ namespace NAPS2.DI.Modules
             Bind<ImageSettingsContainer>().ToSelf().InSingletonScope();
             Bind<EmailSettingsContainer>().ToSelf().InSingletonScope();
 
-            // Update
-            Bind<IAutoUpdater>().To<AutoUpdater>();
-            Bind<ICurrentVersionSource>().To<CurrentVersionSource>();
-            // TODO: Link to web
-            Bind<ILatestVersionSource>().To<LatestVersionSource>().WithConstructorArgument("versionFileUrl", "file://" + Path.Combine(Environment.CurrentDirectory, "../../../version.xml"));
-            Bind<IUrlFileDownloader>().To<UrlFileDownloader>();
-            Bind<IUrlStreamReader>().To<UrlStreamReader>();
-            Bind<IUrlTextReader>().To<UrlTextReader>();
-            Bind<Edition>().ToConstant(GetEdition());
-
             // Host
             Bind<IX86HostServiceFactory>().To<NinjectX86HostServiceFactory>();
             Bind<IX86HostService>().ToMethod(ctx => X86HostManager.Connect());
@@ -84,21 +73,6 @@ namespace NAPS2.DI.Modules
             Log.Logger = new NLogLogger();
 #if DEBUG
             Debug.Listeners.Add(new NLogTraceListener());
-#endif
-        }
-
-        private Edition GetEdition()
-        {
-#if STANDALONE_ZIP
-            return Edition.StandaloneZIP;
-#elif STANDALONE_7Z
-            return Edition.Standalone7Z;
-#elif INSTALLER_EXE
-            return Edition.InstallerEXE;
-#elif INSTALLER_MSI
-            return Edition.InstallerMSI;
-#else // Debug
-            return Edition.InstallerEXE;
 #endif
         }
     }

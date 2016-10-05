@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan;
-using NAPS2.Update;
 
 namespace NAPS2.Config
 {
@@ -42,8 +41,6 @@ namespace NAPS2.Config
         public MessageBoxIcon StartupMessageIcon { get; set; }
 
         public ScanProfile DefaultProfileSettings { get; set; }
-
-        public AutoUpdateStatus AutoUpdate { get; set; }
 
         public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
