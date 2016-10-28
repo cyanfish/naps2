@@ -36,11 +36,11 @@ namespace NAPS2
         {
             if (args.Contains(X86HostManager.HOST_ARG))
             {
-                X86HostEntryPoint.Run(args);
+                typeof(X86HostEntryPoint).GetMethod("Run").Invoke(null, new object[] {args});
             }
             else
             {
-                WinFormsEntryPoint.Run(args);
+                typeof(WinFormsEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
             }
         }
     }

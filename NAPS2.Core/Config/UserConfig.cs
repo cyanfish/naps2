@@ -28,7 +28,6 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Images;
-using NAPS2.Update;
 
 namespace NAPS2.Config
 {
@@ -48,8 +47,6 @@ namespace NAPS2.Config
         public string Culture { get; set; }
 
         public List<FormState> FormStates { get; set; }
-
-        public AutoUpdateStatus AutoUpdate { get; set; }
 
         public DateTime? LastUpdateCheckDate { get; set; }
 
