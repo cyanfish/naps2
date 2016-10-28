@@ -331,6 +331,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slovenščina.
+        /// </summary>
+        internal static string sl {
+            get {
+                return ResourceManager.GetString("sl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shqip.
         /// </summary>
         internal static string sq {

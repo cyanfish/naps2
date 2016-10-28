@@ -231,4 +231,7 @@
   <data name="vi" xml:space="preserve">
     <value>Tiếng việt</value>
   </data>
+  <data name="sl" xml:space="preserve">
+    <value>Slovenščina</value>
+  </data>
 </root>
