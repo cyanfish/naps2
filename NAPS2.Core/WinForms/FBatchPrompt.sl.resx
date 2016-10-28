@@ -117,83 +117,107 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="btnDone.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>MiddleLeft</value>
+    </data>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="btnDone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>215, 41</value>
+    <data name="btnDone.Location" type="System.Drawing.Point, System.Drawing">
+        <value>123, 31</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
+    <data name="btnDone.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+        <value>5, 0, 4, 0</value>
+    </data>
+    <data name="btnDone.Size" type="System.Drawing.Size, System.Drawing">
+        <value>105, 32</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-        <value>2</value>
+    <data name="btnDone.TabIndex" type="System.Int32, mscorlib">
+        <value>5</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
-        <value>Anulo</value>
+    <data name="btnDone.Text" xml:space="preserve">
+        <value>Končaj</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
+        <value>btnDone</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;btnDone.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;btnDone.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>1</value>
+    <data name="&gt;&gt;btnDone.ZOrder" xml:space="preserve">
+        <value>0</value>
     </data>
-    <data name="btnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="btnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+        <value>MiddleLeft</value>
+    </data>
+    <data name="btnScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnSelect.Location" type="System.Drawing.Point, System.Drawing">
-        <value>215, 12</value>
+    <data name="btnScan.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 31</value>
     </data>
-    <data name="btnSelect.Size" type="System.Drawing.Size, System.Drawing">
-        <value>75, 23</value>
+    <data name="btnScan.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+        <value>4, 0, 4, 0</value>
     </data>
-    <data name="btnSelect.TabIndex" type="System.Int32, mscorlib">
-        <value>1</value>
+    <data name="btnScan.Size" type="System.Drawing.Size, System.Drawing">
+        <value>105, 32</value>
     </data>
-    <data name="btnSelect.Text" xml:space="preserve">
-        <value>Zgjidh</value>
+    <data name="btnScan.TabIndex" type="System.Int32, mscorlib">
+        <value>4</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Name" xml:space="preserve">
-        <value>btnSelect</value>
+    <data name="btnScan.Text" xml:space="preserve">
+        <value>&amp;Scan</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Type" xml:space="preserve">
+    <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
+        <value>btnScan</value>
+    </data>
+    <data name="&gt;&gt;btnScan.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Parent" xml:space="preserve">
+    <data name="&gt;&gt;btnScan.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnSelect.ZOrder" xml:space="preserve">
-        <value>2</value>
+    <data name="&gt;&gt;btnScan.ZOrder" xml:space="preserve">
+        <value>1</value>
     </data>
-    <data name="listboxDevices.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 12</value>
+    <data name="lblStatus.AutoSize" type="System.Boolean, mscorlib">
+        <value>True</value>
     </data>
-    <data name="listboxDevices.Size" type="System.Drawing.Size, System.Drawing">
-        <value>197, 108</value>
+    <data name="lblStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
     </data>
-    <data name="listboxDevices.TabIndex" type="System.Int32, mscorlib">
+    <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 9</value>
+    </data>
+    <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+        <value>99, 13</value>
+    </data>
+    <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Name" xml:space="preserve">
-        <value>listboxDevices</value>
+    <data name="lblStatus.Text" xml:space="preserve">
+        <value>Ready for scan {0}.</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
+        <value>lblStatus</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Parent" xml:space="preserve">
+    <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
+        <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.ZOrder" xml:space="preserve">
-        <value>0</value>
+    <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
+        <value>2</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
@@ -202,18 +226,24 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>302, 132</value>
+        <value>240, 75</value>
+    </data>
+    <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+        <value>500, 114</value>
+    </data>
+    <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+        <value>256, 114</value>
     </data>
     <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Zgjidh burimin</value>
+        <value>Naslednje branje</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FSelectDevice</value>
+        <value>FBatchPrompt</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.5.1.32878, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31408, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

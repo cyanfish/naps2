@@ -178,10 +178,10 @@
         <value>A5 (148 x 210 mm)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250 x 353 mm)</value>
+        <value>B4 (250x353 mm)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176 x 250 mm)</value>
+        <value>B5 (176x250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
         <value>E personalizuar...</value>
@@ -214,13 +214,13 @@
         <value>Xham</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>E paracaktuar</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>E vjetër (vetëm ndërfaqja e përdoruesit origjinale)</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>DSM e vjetër</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

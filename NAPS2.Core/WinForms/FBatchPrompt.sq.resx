@@ -205,7 +205,7 @@
         <value>3</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>Ready for scan {0}.</value>
+        <value>Gati për skanim {0}.</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -238,7 +238,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Next Scan</value>
+        <value>Skanimi tjetër</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FBatchPrompt</value>

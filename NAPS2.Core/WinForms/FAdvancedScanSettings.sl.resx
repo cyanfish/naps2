@@ -160,7 +160,7 @@
         <value>19</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Anulo</value>
+        <value>&amp;Cancel</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -190,7 +190,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>Cilësi maksimale (skedarë të mëdhenj)</value>
+        <value>Maximum quality (velika datoteka)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>
@@ -268,7 +268,7 @@
         <value>35</value>
     </data>
     <data name="groupBox1.Text" xml:space="preserve">
-        <value>Cilësia e imazhit</value>
+        <value>Kvaliteta slike</value>
     </data>
     <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
         <value>groupBox1</value>
@@ -364,7 +364,7 @@
         <value>36</value>
     </data>
     <data name="groupBox2.Text" xml:space="preserve">
-        <value>Pajtueshmëria</value>
+        <value>Združljivost</value>
     </data>
     <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
         <value>groupBox2</value>
@@ -394,7 +394,7 @@
         <value>5</value>
     </data>
     <data name="cbFlipDuplex.Text" xml:space="preserve">
-        <value>Kthe përmbys faqet duplekse</value>
+        <value>Flip duplexed pages</value>
     </data>
     <data name="&gt;&gt;cbFlipDuplex.Name" xml:space="preserve">
         <value>cbFlipDuplex</value>
@@ -451,7 +451,7 @@
         <value>3</value>
     </data>
     <data name="cbForcePageSize.Text" xml:space="preserve">
-        <value>Force matching page size</value>
+        <value>Vsili ujemanje velikosti strani</value>
     </data>
     <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
         <value>cbForcePageSize</value>
@@ -478,7 +478,7 @@
         <value>2</value>
     </data>
     <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-        <value>Zbato shkëlqimin/kontrastin pas skanimit</value>
+        <value>Uporabi svetlost/kontrast po branju</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.Name" xml:space="preserve">
         <value>cbBrightnessContrastAfterScan</value>
@@ -526,7 +526,7 @@
         <value>0</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Implementimi i Twain:</value>
+        <value>Twain Implementation:</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -634,7 +634,7 @@
         <value>37</value>
     </data>
     <data name="groupBox3.Text" xml:space="preserve">
-        <value>Faqet bosh</value>
+        <value>Blank Pages</value>
     </data>
     <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
         <value>groupBox3</value>
@@ -664,7 +664,7 @@
         <value>38</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Limiti i mbulimit</value>
+        <value>Coverage Threshold</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -823,7 +823,7 @@
         <value>17</value>
     </data>
     <data name="cbExcludeBlankPages.Text" xml:space="preserve">
-        <value>Përjashto faqet bosh</value>
+        <value>Izpusti prazne strani</value>
     </data>
     <data name="&gt;&gt;cbExcludeBlankPages.Name" xml:space="preserve">
         <value>cbExcludeBlankPages</value>
@@ -853,7 +853,7 @@
         <value>38</value>
     </data>
     <data name="btnRestoreDefaults.Text" xml:space="preserve">
-        <value>Rikthe të paracaktuarat</value>
+        <value>Restore &amp;Defaults</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
         <value>btnRestoreDefaults</value>
@@ -906,7 +906,7 @@
         <value>400, 487</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Cilësimet e avancuara të profilit</value>
+        <value>Napredne nastavitve profila</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

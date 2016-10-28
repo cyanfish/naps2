@@ -148,7 +148,7 @@
         <value>Skaneri i zgjedhur është jashtë linje.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Nuk ke të drejta për të kopjuar përmbajtjen nga skedari '{0}'.</value>
+        <value>Nuk ke të drejta për të ruajtur skedarët në këtë vendndodhje.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Gabim</value>
@@ -169,7 +169,7 @@
         <value>Skedar JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>Dokument PDF (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Skedar PNG (*.png)</value>
@@ -265,7 +265,7 @@
         <value>Gabim gjatë shkarkimit</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>Një ose më shumë skedar s'mund të shkarkoheshin.</value>
+        <value>Një ose më shumë skedarë s'mund të shkarkoheshin.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
         <value>E personalizuar ({0}x{1} {2})</value>
@@ -304,109 +304,109 @@
         <value>nga {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>Ndodhi një gabim i panjohur gjatë skanimit në grup.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>Grupi u anulua.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Cancelling....</value>
+        <value>Po anulon....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>Grupi përfundoi me sukses.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>Skanimi në grup ndaloi për shkak gabimi.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
         <value>Po skanon faqen {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Scanning page {0} (scan {1})...</value>
+        <value>Po skanon faqen {0} (skanimi {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Waiting for scan {0}...</value>
+        <value>Po pret për skanimin {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>Anulo</value>
     </data>
     <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Mbyll</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Saving batch results...</value>
+        <value>Po ruan rezultatet në grup...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+        <value>Skaneri i zgjedhur nuk e mbështet dupleksin. Nëse skaneri supozohet se e pranon dupleksin, provoni të përdorni një drejtues tjetër..</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importing {0}...</value>
+        <value>Po importon {0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Import Progress</value>
+        <value>Progresi i importit</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Recovering...</value>
+        <value>Po rikuperohet...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Recovery Progress</value>
+        <value>Progresi i rekuperimit</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Save Images Progress</value>
+        <value>Progresi i ruajtjes së imazheve</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>Progresi i ruajtjes së PDF</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Saving {0}...</value>
+        <value>Po ruan {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>Po kopjon...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>Progresi i kopjimit</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Po importon...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>Email PDF Progress</value>
+        <value>Progresi i email të PDF</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>Ndodhi një gabim gjatë provës për ruajtjen automatike.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Të gjithë skedarët</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>Skedarët e imazhit</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Skaneri i zgjedhur është i zënë.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>Mbulesa e skanerit është e hapur.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>Skaneri ka një bllokim letre.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>Skaneri po ngrohet.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>Një përditësim i OCR është i disponueshëm.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>Imazhi u ruajt.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} imazhe u ruajtën.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>PDF u ruajt.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
         <value>{0} ({1}x{2} {3})</value>
@@ -415,6 +415,6 @@
         <value>Are you sure you want to delete "{0}"?</value>
     </data>
     <data name="FileInUse" xml:space="preserve">
-        <value>The file could not be overwritten because it is currently in use.</value>
+        <value>Skedari nuk mund të mbishkruhej sepse aktualisht është në përdorim.</value>
     </data>
 </root>
