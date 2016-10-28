@@ -30,7 +30,7 @@ namespace NAPS2.Console
         [STAThread]
         static void Main(string[] args)
         {
-            ConsoleEntryPoint.Run(args);
+            typeof(ConsoleEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
         }
     }
 }

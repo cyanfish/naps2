@@ -33,7 +33,7 @@ namespace NAPS2_64
         [STAThread]
         static void Main(string[] args)
         {
-            WinFormsEntryPoint.Run(args);
+            typeof(WinFormsEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
         }
     }
 }
