@@ -121,6 +121,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ocr\PlatformSupport.cs" />
+    <Compile Include="Util\AutoDeskew.cs" />
     <Compile Include="Util\DownloadFormat.cs" />
     <Compile Include="Util\DownloadInfo.cs" />
     <Compile Include="Ocr\Language.cs" />

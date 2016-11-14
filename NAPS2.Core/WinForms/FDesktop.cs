@@ -713,6 +713,26 @@ namespace NAPS2.WinForms
             changeTracker.HasUnsavedChanges = true;
         }
 
+        private void RotateAutomatic()
+        {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
+            UpdateThumbnails(imageList.RotateAutomatic(SelectedIndices), false, true);
+            changeTracker.HasUnsavedChanges = true;
+        }
+
+        private void ResetTransform()
+        {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
+            UpdateThumbnails(imageList.RotateAutomatic(SelectedIndices), false, true);
+            changeTracker.HasUnsavedChanges = true;
+        }
+
         private void PreviewImage()
         {
             if (SelectedIndices.Any())
@@ -1413,6 +1433,11 @@ namespace NAPS2.WinForms
                 form.ShowDialog();
                 UpdateThumbnails(SelectedIndices.ToList(), false, true);
             }
+        }
+
+        private void tsAutomaticRotation_Click(object sender, EventArgs e)
+        {
+            RotateAutomatic();
         }
 
         #endregion

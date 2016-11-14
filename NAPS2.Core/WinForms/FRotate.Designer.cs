@@ -36,6 +36,7 @@ namespace NAPS2.WinForms
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRevert = new System.Windows.Forms.Button();
+            this.btnAutoDeskew = new System.Windows.Forms.Button();
             this.txtAngle = new System.Windows.Forms.TextBox();
             this.tbAngle = new System.Windows.Forms.TrackBar();
             this.checkboxApplyToSelected = new System.Windows.Forms.CheckBox();
@@ -45,9 +46,9 @@ namespace NAPS2.WinForms
             // 
             // pictureBox
             // 
+            resources.ApplyResources(this.pictureBox, "pictureBox");
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            resources.ApplyResources(this.pictureBox, "pictureBox");
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.TabStop = false;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
@@ -85,10 +86,12 @@ namespace NAPS2.WinForms
             // tbAngle
             // 
             resources.ApplyResources(this.tbAngle, "tbAngle");
-            this.tbAngle.Maximum = 1800;
-            this.tbAngle.Minimum = -1800;
+            this.tbAngle.LargeChange = 50;
+            this.tbAngle.Maximum = 18000;
+            this.tbAngle.Minimum = -18000;
             this.tbAngle.Name = "tbAngle";
-            this.tbAngle.TickFrequency = 450;
+            this.tbAngle.SmallChange = 10;
+            this.tbAngle.TickFrequency = 4500;
             this.tbAngle.Scroll += new System.EventHandler(this.tbAngle_Scroll);
             // 
             // checkboxApplyToSelected
@@ -97,12 +100,20 @@ namespace NAPS2.WinForms
             this.checkboxApplyToSelected.Name = "checkboxApplyToSelected";
             this.checkboxApplyToSelected.UseVisualStyleBackColor = true;
             // 
+            // btnAutoDeskew
+            // 
+            resources.ApplyResources(this.btnAutoDeskew, "btnAutoDeskew");
+            this.btnAutoDeskew.Name = "btnAutoDeskew";
+            this.btnAutoDeskew.UseVisualStyleBackColor = true;
+            this.btnAutoDeskew.Click += new System.EventHandler(this.btnAutoDeskew_Click);
+            // 
             // FRotate
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.checkboxApplyToSelected);
             this.Controls.Add(this.btnRevert);
+            this.Controls.Add(this.btnAutoDeskew);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtAngle);
@@ -125,10 +136,9 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnRevert;
+        private System.Windows.Forms.Button btnAutoDeskew;
         private System.Windows.Forms.TextBox txtAngle;
         private System.Windows.Forms.TrackBar tbAngle;
         private System.Windows.Forms.CheckBox checkboxApplyToSelected;
-
-
     }
 }

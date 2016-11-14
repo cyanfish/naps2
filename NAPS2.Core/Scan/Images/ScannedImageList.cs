@@ -126,6 +126,17 @@ namespace NAPS2.Scan.Images
             return selection.ToList();
         }
 
+        public IEnumerable<int> RotateAutomatic(IEnumerable<int> selection)
+        {
+            foreach (int i in selection)
+            {
+                var deskew = -Images[i].GetImage().GetSkewAngle();
+                Images[i].AddTransform(new RotationTransform(deskew));
+                Images[i].SetThumbnail(ThumbnailRenderer.RenderThumbnail(Images[i]));
+            }
+            return selection.ToList();
+        }
+
         public void Delete(IEnumerable<int> selection)
         {
             foreach (ScannedImage img in Images.ElementsAt(selection))

@@ -103,6 +103,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
+            this.tsAutomaticRotation = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -501,7 +502,8 @@ namespace NAPS2.WinForms
             this.tsRotateLeft,
             this.tsRotateRight,
             this.tsFlip,
-            this.tsCustomRotation});
+            this.tsCustomRotation,
+            this.tsAutomaticRotation});
             this.tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise;
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
             this.tsdRotate.Name = "tsdRotate";
@@ -658,6 +660,12 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
+            // tsAutomaticRotation
+            // 
+            this.tsAutomaticRotation.Name = "tsAutomaticRotation";
+            resources.ApplyResources(this.tsAutomaticRotation, "tsAutomaticRotation");
+            this.tsAutomaticRotation.Click += new System.EventHandler(this.tsAutomaticRotation_Click);
+            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
@@ -748,6 +756,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnZoomMouseCatcher;
         private System.Windows.Forms.ToolStripMenuItem ctxPaste;
         private System.Windows.Forms.ToolStripButton tsPrint;
+        private System.Windows.Forms.ToolStripMenuItem tsAutomaticRotation;
     }
 }
 
