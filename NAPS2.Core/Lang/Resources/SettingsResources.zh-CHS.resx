@@ -118,13 +118,13 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Black &amp; White</value>
+        <value>黑与白</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
         <value>24位色彩</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
-        <value>Grayscale</value>
+        <value>灰阶</value>
     </data>
     <data name="Dpi_100" xml:space="preserve">
         <value>100 dpi</value>
@@ -154,19 +154,19 @@
         <value>居中</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
-        <value>Left</value>
+        <value>左对齐</value>
     </data>
     <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Right</value>
+        <value>右对齐</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
-        <value>cm</value>
+        <value>厘米（公分）</value>
     </data>
     <data name="PageSizeUnit_Inch" xml:space="preserve">
-        <value>in</value>
+        <value>单位</value>
     </data>
     <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-        <value>mm</value>
+        <value>毫米</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
         <value>A3 (297x420 mm)</value>
@@ -184,7 +184,7 @@
         <value>B5 (176x250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Custom...</value>
+        <value>自定义...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
         <value>US Legal (8.5x14 in)</value>
@@ -205,22 +205,22 @@
         <value>1:8</value>
     </data>
     <data name="Source_Duplex" xml:space="preserve">
-        <value>Duplex</value>
+        <value>双面</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
-        <value>Feeder</value>
+        <value>进纸器</value>
     </data>
     <data name="Source_Glass" xml:space="preserve">
-        <value>Glass</value>
+        <value>半透明</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>默认值</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>保留（本地用户界面）</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>旧 DSM</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

@@ -136,196 +136,196 @@
         <value>您确定要删除这个{0}设置吗？</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>The file {0} already exists. Do you want to overwrite it?</value>
+        <value>已存在该文件{0}，请您确认是否覆盖？</value>
     </data>
     <data name="Delete" xml:space="preserve">
-        <value>Delete</value>
+        <value>删除</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>The selected scanner could not be found.</value>
+        <value>无法找到所选的扫描仪.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>The selected scanner is offline.</value>
+        <value>选定的扫描仪处于脱机状态.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>You don't have permission to save files at this location.</value>
+        <value>您没有保存文件的权限.</value>
     </data>
     <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>错误</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Bitmap Files (*.bmp)</value>
+        <value>位图文件(*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
-        <value>Enhanced Windows MetaFile (*.emf)</value>
+        <value>增强的Windows图元文件 (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
-        <value>Exchangeable Image File (*.exif)</value>
+        <value>可交换图像文件 (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
-        <value>GIF File (*.gif)</value>
+        <value>GIF 文件 (*.gif)</value>
     </data>
     <data name="FileTypeJpeg" xml:space="preserve">
-        <value>JPEG File (*.jpg, *.jpeg)</value>
+        <value>JPEG 文件(*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF 文档(*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>PNG File (*.png)</value>
+        <value>PNG 文件(*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>TIFF 文件 (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
-        <value>Name missing.</value>
+        <value>缺少名称.</value>
     </data>
     <data name="NAPS2" xml:space="preserve">
         <value>NAPS2</value>
     </data>
     <data name="NoDeviceSelected" xml:space="preserve">
-        <value>No device selected.</value>
+        <value>尚未选择装置.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>No scanning device was found.</value>
+        <value>找不到扫瞄装置.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
-        <value>Overwrite File</value>
+        <value>覆盖文件</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
         <value>{0} of {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
-        <value>Scanned Image</value>
+        <value>已扫瞄的图像</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Select a profile before clicking Scan.</value>
+        <value>按下 [扫瞄] 前请先选择配置文件.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>扫描文件失败！.</value>
     </data>
     <data name="Version" xml:space="preserve">
-        <value>Version {0}</value>
+        <value>版本 {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
         <value>尝试发送邮件时发生错误！.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Automatic Updates</value>
+        <value>自动更新</value>
     </data>
     <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>下载</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>Download and Install</value>
+        <value>下载且安装</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Do you want NAPS2 to automatically check for updates?</value>
+        <value>您需要NAPS2马上进行检查且自动更新吗？</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Not Now</value>
+        <value>现在不要</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
         <value>有新版本的NAPS2可用。您需要马上更新吗？</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Installation Complete</value>
+        <value>安装完成</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Installation complete. Do you want to restart NAPS2 now?</value>
+        <value>安装完成。您需要立即重新启动NAPS2吗？</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installation failed.</value>
+        <value>安装失败.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installation Failed</value>
+        <value>安装失败</value>
     </data>
     <data name="AllCount" xml:space="preserve">
         <value>全部({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>已选 ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
-        <value>Estimated download size: {0} MB</value>
+        <value>估计下载大小: {0} MB</value>
     </data>
     <data name="FilesProgressFormat" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} 文件</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
         <value>{0} / {1} MB</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
-        <value>The file '{0}' could not be imported.</value>
+        <value>无法导入文件'{0}'.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
+        <value>无法导入文件'{0}'.只有NAPS2生成的PDF才可导入.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
-        <value>Download Error</value>
+        <value>下载发生错误</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>One or more files could not be downloaded.</value>
+        <value>无法下载一个或多个文件 .</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Custom ({0}x{1} {2})</value>
+        <value>自定义({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
-        <value>Scan</value>
+        <value>扫瞄</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
         <value>您确定要复原您的变更到{0}到图像吗？</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>重置图像</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>您有未保存的修改.您确定要放弃这些修改吗？</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Unsaved Changes</value>
+        <value>未保存的更改</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>扫瞄页面 {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>所选的扫描仪不支持使用进纸器。如果您的扫描仪确实有一个进纸器，请尝试使用不同的驱动程序.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>No pages are in the feeder.</value>
+        <value>没有页面在进纸器中.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>You do not have permission to copy content from the file '{0}'.</value>
+        <value>您没有从文件'{0}'中复制内容的权限.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
         <value>存储为文件时失败！.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>/ {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
         <value>批量扫描时发生一个未知错误！.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>批量取消.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Cancelling....</value>
+        <value>取消中....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>批量操作完成.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>批量扫描由于错误而停止.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>Scanning page {0}...</value>
+        <value>扫瞄页面 {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Scanning page {0} (scan {1})...</value>
+        <value>扫瞄页面 {0}(扫描 {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Waiting for scan {0}...</value>
+        <value>等待扫描{ 0 }...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>取消</value>
@@ -334,46 +334,46 @@
         <value>关闭</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Saving batch results...</value>
+        <value>保存批量扫描结果...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+        <value>所选的扫描仪不支持使用双面打印。如果您的扫描仪应该支持双面打印，请尝试使用不同的驱动程序.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
     <data name="ImportingFormat" xml:space="preserve">
-        <value>Importing {0}...</value>
+        <value>导入中{0}...</value>
     </data>
     <data name="ImportProgress" xml:space="preserve">
-        <value>Import Progress</value>
+        <value>导入进度</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Recovering...</value>
+        <value>修复中...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Recovery Progress</value>
+        <value>修复进度</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Save Images Progress</value>
+        <value>储存图像进度</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>储存PDF进度</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Saving {0}...</value>
+        <value>保存 {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>复制中...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>复制进度</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>导入中...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>Email PDF Progress</value>
+        <value>邮件发送PDF进度</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
         <value>试图自动保存时发生错误！.</value>
@@ -382,31 +382,31 @@
         <value>所有文件</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Image Files</value>
+        <value>图像文件</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>选定的扫描仪正忙.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>扫描仪是否已经打开后盖？.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>扫描仪已卡纸.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>扫描仪正在预热.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
         <value>OCR有可用更新！.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
-        <value>Image saved.</value>
+        <value>图像保存.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} 图像保存.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>PDF 保存.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
         <value>{0} ({1}x{2} {3})</value>
@@ -415,6 +415,6 @@
         <value>Are you sure you want to delete "{0}"?</value>
     </data>
     <data name="FileInUse" xml:space="preserve">
-        <value>The file could not be overwritten because it is currently in use.</value>
+        <value>不能覆盖正在使用的文件.</value>
     </data>
 </root>
