@@ -26,6 +26,7 @@ using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
 namespace NAPS2.Scan
@@ -53,8 +54,15 @@ namespace NAPS2.Scan
             driver.DialogParent = dialogParent;
             driver.ScanProfile = scanProfile;
             driver.ScanParams = scanParams;
+
             try
             {
+                // Compose actions for post processing of scanned images
+                var ppactions = new List<Action<ScannedImage>>();
+                if (scanProfile.AutoDeskew)
+                    ppactions.Add(img => img.AddTransform(new RotationTransform(-img.GetImage().GetSkewAngle())));
+
+                // Perform scan
                 if (scanProfile.Device == null)
                 {
                     // The profile has no device specified, so prompt the user to choose one
@@ -83,7 +91,7 @@ namespace NAPS2.Scan
                     if (scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
                     {
                         // Auto save without piping images
-                        var images = driver.Scan().ToList();
+                        var images = driver.Scan().PostProcess(ppactions).ToList();
                         if (autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
                         {
                             foreach (ScannedImage img in images)
@@ -115,7 +123,7 @@ namespace NAPS2.Scan
                 else
                 {
                     // No auto save, so just pipe images back as we get them
-                    foreach (ScannedImage scannedImage in driver.Scan())
+                    foreach (ScannedImage scannedImage in driver.Scan().PostProcess(ppactions))
                     {
                         imageCallback(scannedImage);
                     }
@@ -133,6 +141,19 @@ namespace NAPS2.Scan
                     errorOutput.DisplayError(e.Message);
                 }
             }
+        }
+    }
+
+    static class ScanPerformerPostProcessExtensions
+    {
+        public static IEnumerable<ScannedImage> PostProcess(this IEnumerable<ScannedImage> images,
+            List<Action<ScannedImage>> postProcessActions)
+        {
+            return images.Select(img =>
+            {
+                postProcessActions.ForEach(ppact => ppact(img));
+                return img;
+            });
         }
     }
 }

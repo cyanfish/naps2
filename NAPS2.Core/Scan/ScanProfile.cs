@@ -120,6 +120,8 @@ namespace NAPS2.Scan
         public bool WiaOffsetWidth { get; set; }
 
         public bool FlipDuplexedPages { get; set; }
+
+        public bool AutoDeskew { get; set; }
     }
 
     [Serializable]
