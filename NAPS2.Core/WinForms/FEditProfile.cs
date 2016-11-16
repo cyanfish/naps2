@@ -100,6 +100,8 @@ namespace NAPS2.WinForms
             rdbNative.Checked = ScanProfile.UseNativeUI;
             rdbConfig.Checked = !ScanProfile.UseNativeUI;
 
+            cbAutoDeskew.Checked = ScanProfile.AutoDeskew;
+
             // Start triggering onChange events again
             suppressChangeEvent = false;
 
@@ -312,7 +314,9 @@ namespace NAPS2.WinForms
 
                 ExcludeBlankPages = ScanProfile.ExcludeBlankPages,
                 BlankPageWhiteThreshold = ScanProfile.BlankPageWhiteThreshold,
-                BlankPageCoverageThreshold = ScanProfile.BlankPageCoverageThreshold
+                BlankPageCoverageThreshold = ScanProfile.BlankPageCoverageThreshold,
+
+                AutoDeskew = cbAutoDeskew.Checked
             };
         }
 

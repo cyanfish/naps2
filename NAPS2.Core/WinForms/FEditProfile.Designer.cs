@@ -70,6 +70,7 @@ namespace NAPS2.WinForms
             this.cbAutoSave = new System.Windows.Forms.CheckBox();
             this.linkAutoSaveSettings = new System.Windows.Forms.LinkLabel();
             this.btnAdvanced = new System.Windows.Forms.Button();
+            this.cbAutoDeskew = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).BeginInit();
@@ -305,11 +306,18 @@ namespace NAPS2.WinForms
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
+            // cbAutoDeskew
+            // 
+            resources.ApplyResources(this.cbAutoDeskew, "cbAutoDeskew");
+            this.cbAutoDeskew.Name = "cbAutoDeskew";
+            this.cbAutoDeskew.UseVisualStyleBackColor = true;
+            // 
             // FEditProfile
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbAutoDeskew);
             this.Controls.Add(this.btnAdvanced);
             this.Controls.Add(this.linkAutoSaveSettings);
             this.Controls.Add(this.cbAutoSave);
@@ -392,5 +400,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.CheckBox cbAutoSave;
         private System.Windows.Forms.LinkLabel linkAutoSaveSettings;
         private System.Windows.Forms.Button btnAdvanced;
+        private System.Windows.Forms.CheckBox cbAutoDeskew;
     }
 }

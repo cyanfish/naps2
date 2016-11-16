@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2", "NAPS2\NAPS2.csproj", "{EAC4A133-93BE-4400-BFA9-CEB1615693C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Tests", "NAPS2.Tests\NAPS2.Tests.csproj", "{11FC4BE1-882D-4ABA-8781-2F3F77DF9453}"
@@ -25,6 +27,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2_64", "NAPS2_64\NAPS2_64.csproj", "{BA9A65A0-00FE-4BF4-A023-7D804817453F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2_64.Console", "NAPS2_64.Console\NAPS2_64.Console.csproj", "{2982FF97-C9E3-412F-AEB5-E52E27E5C850}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Tools.RTTPostProcessor", "NAPS2.Tools\RTTPostProcessor\NAPS2.Tools.RTTPostProcessor.csproj", "{7CFF244F-0612-4BE3-83C3-D619683EACD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -339,6 +343,42 @@ Global
 		{2982FF97-C9E3-412F-AEB5-E52E27E5C850}.StandaloneZIP|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2982FF97-C9E3-412F-AEB5-E52E27E5C850}.StandaloneZIP|Mixed Platforms.Build.0 = Release|Any CPU
 		{2982FF97-C9E3-412F-AEB5-E52E27E5C850}.StandaloneZIP|x86.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Debug|x86.Build.0 = Debug|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerEXE|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerEXE|Any CPU.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerEXE|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerEXE|Mixed Platforms.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerEXE|x86.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerEXE|x86.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerMSI|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerMSI|Any CPU.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerMSI|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerMSI|Mixed Platforms.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerMSI|x86.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.InstallerMSI|x86.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Release|x86.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Release|x86.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Standalone7Z|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Standalone7Z|Any CPU.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Standalone7Z|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Standalone7Z|Mixed Platforms.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Standalone7Z|x86.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.Standalone7Z|x86.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.StandaloneZIP|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.StandaloneZIP|Any CPU.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.StandaloneZIP|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.StandaloneZIP|Mixed Platforms.Build.0 = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.StandaloneZIP|x86.ActiveCfg = Release|Any CPU
+		{7CFF244F-0612-4BE3-83C3-D619683EACD2}.StandaloneZIP|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

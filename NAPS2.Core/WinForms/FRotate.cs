@@ -83,7 +83,7 @@ namespace NAPS2.WinForms
                     .HeightToForm()
                 .Bind(btnOK, btnCancel, txtAngle)
                     .RightToForm()
-                .Bind(tbAngle, txtAngle, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
+                .Bind(tbAngle, txtAngle, checkboxApplyToSelected, btnRevert, btnOK, btnCancel, btnAutoDeskew)
                     .BottomToForm()
                 .Activate();
             Size = new Size(600, 600);
@@ -96,7 +96,7 @@ namespace NAPS2.WinForms
 
         private void UpdateTransform()
         {
-            RotationTransform.Angle = tbAngle.Value / 10.0;
+            RotationTransform.Angle = tbAngle.Value / 100.0;
             UpdatePreviewBox();
         }
 
@@ -149,7 +149,7 @@ namespace NAPS2.WinForms
         {
             RotationTransform = new RotationTransform();
             tbAngle.Value = 0;
-            txtAngle.Text = (tbAngle.Value / 10.0).ToString("G");
+            txtAngle.Text = (tbAngle.Value / 100.0).ToString("G");
             UpdatePreviewBox();
         }
 
@@ -171,7 +171,7 @@ namespace NAPS2.WinForms
             double valueDouble;
             if (double.TryParse(txtAngle.Text.Replace('\u00B0'.ToString(CultureInfo.InvariantCulture), ""), out valueDouble))
             {
-                int value = (int)Math.Round(valueDouble * 10);
+                int value = (int)Math.Round(valueDouble * 100);
                 if (value >= tbAngle.Minimum && value <= tbAngle.Maximum)
                 {
                     tbAngle.Value = value;
@@ -186,7 +186,7 @@ namespace NAPS2.WinForms
 
         private void tbAngle_Scroll(object sender, EventArgs e)
         {
-            txtAngle.Text = (tbAngle.Value / 10.0).ToString("G") + '\u00B0';
+            txtAngle.Text = (tbAngle.Value / 100.0).ToString("G") + '\u00B0';
             UpdateTransform();
         }
 
@@ -230,7 +230,7 @@ namespace NAPS2.WinForms
                 {
                     newAngle += 360.0;
                 }
-                tbAngle.Value = (int)Math.Round(newAngle * 10);
+                tbAngle.Value = (int)Math.Round(newAngle * 100);
                 tbAngle_Scroll(null, null);
             }
             pictureBox.Invalidate();
@@ -240,6 +240,12 @@ namespace NAPS2.WinForms
         {
             guideEnd = e.Location;
             pictureBox.Invalidate();
+        }
+
+        private void btnAutoDeskew_Click(object sender, EventArgs e)
+        {
+            tbAngle.Value = Convert.ToInt32(Math.Round(Image.GetImage().GetSkewAngle() * -100));
+            tbAngle_Scroll(null, null);
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)

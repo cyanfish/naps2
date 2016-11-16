@@ -121,9 +121,29 @@ function Publish-NAPS2-Standalone {
 
 function Update-Lang {
     param([Parameter(Position=0)] [String] $LanguageCode)
+
+    $langGenTool="C:\Program Files\RTT\RTT64.exe"
+    if (-Not (Test-Path $langGenTool)) {
+        Write-Host "Resource Translation Toolkit not installed. Please download from https://www.funduc.com/rtt.htm and install."
+        exit
+    }
+
+    $postProcessTool=[System.IO.Path]::GetFullPath((Join-Path (Join-Path (pwd) fred\frog) "..\..\NAPS2.Tools\RTTPostProcessor\bin\Debug\NAPS2.Tools.RTTPostProcessor.exe"))
+    if (-Not (Test-Path $postProcessTool)) {
+        Write-Host "RTTPostProcessor not built. Please build NAPS2.Tools.RTTPostProcessor.csproj, Target=Debug"
+        exit;
+    }
+    
+    exit
     foreach ($ResourceFolder in ("..\..\NAPS2.Core\Lang\Resources\", "..\..\NAPS2.Core\WinForms\")) {
         foreach ($ResourceFile in (Get-ChildItem $ResourceFolder | where { $_.Name -match '^[a-zA-Z-]+\.resx$' })) {
-            & "C:\Program Files\RTT\RTT64.exe" /S"$($ResourceFile.FullName)" /T"$($ResourceFile.FullName -replace '\.resx$', ".$LanguageCode.resx" )" /M"..\..\NAPS2.Core\Lang\po\$LanguageCode.po" /O"NUL"
+            Write-Host "Generating Resx: "$($ResourceFile.FullName -replace '\.resx$', ".$LanguageCode.resx" )
+            & $langGenTool /S"$($ResourceFile.FullName)" /T"$($ResourceFile.FullName -replace '\.resx$', ".$LanguageCode.resx" )" /M"..\..\NAPS2.Core\Lang\po\$LanguageCode.po" /O"NUL"
         }
+        Start-Sleep -Seconds 1
+        foreach ($ResourceFile in (Get-ChildItem $ResourceFolder | where { $_.Name -match '^[a-zA-Z-]+\.resx$' })) {
+            & $postProcessTool "$($ResourceFile.FullName -replace '\.resx$', ".$LanguageCode.resx" )"
+        }
+        Start-Sleep -Seconds 1
     }
 }
