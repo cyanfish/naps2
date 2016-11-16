@@ -133,7 +133,7 @@
         <value>18</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>确定</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -193,7 +193,7 @@
         <value>23</value>
     </data>
     <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-        <value>More info</value>
+        <value>更多信息</value>
     </data>
     <data name="&gt;&gt;linkPatchCodeInfo.Name" xml:space="preserve">
         <value>linkPatchCodeInfo</value>
@@ -223,7 +223,7 @@
         <value>22</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T</value>
+        <value>单独的文件选择Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -253,7 +253,7 @@
         <value>21</value>
     </data>
     <data name="rdFilePerPage.Text" xml:space="preserve">
-        <value>One file per page</value>
+        <value>每页一个文件</value>
     </data>
     <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
         <value>rdFilePerPage</value>
@@ -283,7 +283,7 @@
         <value>20</value>
     </data>
     <data name="rdFilePerScan.Text" xml:space="preserve">
-        <value>One file per scan</value>
+        <value>每扫描一个文件</value>
     </data>
     <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopLeft</value>
@@ -343,7 +343,7 @@
         <value>26</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>占位符</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -394,7 +394,7 @@
         <value>24</value>
     </data>
     <data name="lblFilePath.Text" xml:space="preserve">
-        <value>File path:</value>
+        <value>文件路径:</value>
     </data>
     <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
         <value>lblFilePath</value>

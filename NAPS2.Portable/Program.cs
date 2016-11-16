@@ -15,7 +15,7 @@ namespace NAPS2.Portable
             if (portableExeDir != null)
             {
                 var portableExePath = Path.Combine(portableExeDir, @"App\NAPS2.exe");
-                typeof(Process).GetMethod("Start").Invoke(null, new object[] { portableExePath });
+                typeof(Process).GetMethod("Start", new[] { typeof(string) }).Invoke(null, new object[] { portableExePath });
             }
         }
     }

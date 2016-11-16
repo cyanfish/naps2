@@ -155,7 +155,7 @@ namespace NAPS2.ImportExport.Images
                         i++;
                     }
 
-                    Status.Success = true;
+                    Status.Success = FirstFileSaved != null;
                 }
                 catch (UnauthorizedAccessException ex)
                 {
