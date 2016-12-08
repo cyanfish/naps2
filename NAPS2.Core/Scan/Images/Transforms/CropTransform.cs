@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 
 namespace NAPS2.Scan.Images.Transforms
@@ -15,10 +16,13 @@ namespace NAPS2.Scan.Images.Transforms
 
         public override Bitmap Perform(Bitmap bitmap)
         {
-            var result = new Bitmap(Math.Max(bitmap.Width - Left - Right, 1), Math.Max(bitmap.Height - Top - Bottom, 1));
+            int width = Math.Max(bitmap.Width - Left - Right, 1);
+            int height = Math.Max(bitmap.Height - Top - Bottom, 1);
+            var result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
             result.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
             using (var g = Graphics.FromImage(result))
             {
+                g.Clear(Color.White);
                 g.DrawImage(bitmap, new Rectangle(-Left, -Top, bitmap.Width, bitmap.Height));
             }
             OptimizePixelFormat(bitmap, ref result);
