@@ -92,35 +92,45 @@ namespace NAPS2.Scan.Twain
             };
             session.DataTransferred += (sender, eventArgs) =>
             {
-                Debug.WriteLine("NAPS2.TW - DataTransferred");
-                pageNumber++;
-                using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
+                try
                 {
-                    using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
+                    Debug.WriteLine("NAPS2.TW - DataTransferred");
+                    pageNumber++;
+                    using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
                     {
-                        if (blankDetector.ExcludePage(result, scanProfile))
+                        using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
                         {
-                            return;
-                        }
-
-                        var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
-                            ? ScanBitDepth.BlackWhite
-                            : ScanBitDepth.C24Bit;
-                        var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
-                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                        if (scanParams.DetectPatchCodes)
-                        {
-                            foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
+                            if (blankDetector.ExcludePage(result, scanProfile))
                             {
-                                if (patchCodeInfo.ReturnCode == ReturnCode.Success)
+                                return;
+                            }
+
+                            var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
+                                ? ScanBitDepth.BlackWhite
+                                : ScanBitDepth.C24Bit;
+                            var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                            image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
+                            if (scanParams.DetectPatchCodes)
+                            {
+                                foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))
                                 {
-                                    image.PatchCode = GetPatchCode(patchCodeInfo);
+                                    if (patchCodeInfo.ReturnCode == ReturnCode.Success)
+                                    {
+                                        image.PatchCode = GetPatchCode(patchCodeInfo);
+                                    }
                                 }
                             }
+                            ScannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
+                            images.Add(image);
                         }
-                        ScannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
-                        images.Add(image);
                     }
+                }
+                 catch (Exception ex)
+                {
+                    Debug.WriteLine("NAPS2.TW - DataTransferred - Error");
+                    error = ex;
+                    cancel = true;
+                    twainForm.Close();
                 }
             };
             session.TransferError += (sender, eventArgs) =>
