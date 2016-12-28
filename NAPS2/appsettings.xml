@@ -8,6 +8,7 @@
   <SaveButtonDefaultAction>SaveAll</SaveButtonDefaultAction>
   <HideEmailButton>false</HideEmailButton>
   <HidePrintButton>false</HidePrintButton>
+  <HideOCRButton>false</HideOCRButton>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
   <LockUnspecifiedDevices>false</LockUnspecifiedDevices>
