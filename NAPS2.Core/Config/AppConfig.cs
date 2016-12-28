@@ -47,6 +47,8 @@ namespace NAPS2.Config
         public bool HideEmailButton { get; set; }
 
         public bool HidePrintButton { get; set; }
+        
+        public bool HideOCRButton { get; set; }
 
         public bool DisableAutoSave { get; set; }
 
