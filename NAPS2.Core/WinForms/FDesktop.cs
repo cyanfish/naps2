@@ -146,6 +146,10 @@ namespace NAPS2.WinForms
             {
                 tStrip.Items.Remove(tsPrint);
             }
+            if (appConfigManager.Config.HideOCRButton)
+            {
+                tStrip.Items.Remove(tsOCR);
+            }
 
             LoadToolStripLocation();
             RelayoutToolbar();
