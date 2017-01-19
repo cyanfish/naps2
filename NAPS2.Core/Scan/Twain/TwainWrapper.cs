@@ -83,12 +83,19 @@ namespace NAPS2.Scan.Twain
 
             int pageNumber = 0;
 
+            bool useMemXfer = false;
+            TWImageInfo pendingImageInfo = null;
+
             session.TransferReady += (sender, eventArgs) =>
             {
                 Debug.WriteLine("NAPS2.TW - TransferReady");
                 if (cancel)
                 {
                     eventArgs.CancelAll = true;
+                }
+                if (useMemXfer)
+                {
+                    pendingImageInfo = eventArgs.PendingImageInfo;
                 }
             };
             session.DataTransferred += (sender, eventArgs) =>
@@ -97,9 +104,9 @@ namespace NAPS2.Scan.Twain
                 {
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
                     pageNumber++;
-                    using (var output = eventArgs.NativeData != IntPtr.Zero
-                                        ? Image.FromStream(eventArgs.GetNativeImageStream())
-                                        : GetBitmapFromMemXFer(eventArgs))
+                    using (var output = useMemXfer && pendingImageInfo != null
+                                        ? GetBitmapFromMemXFer(eventArgs.MemoryData, pendingImageInfo)
+                                        : Image.FromStream(eventArgs.GetNativeImageStream()))
                     {
                         using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
                         {
@@ -194,6 +201,7 @@ namespace NAPS2.Scan.Twain
                         return;
                     }
                     ConfigureDS(ds, scanProfile, scanParams);
+                    useMemXfer = ds.Capabilities.ICapXferMech.GetCurrent() == XferMech.Memory;
                     var ui = scanProfile.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
                     Debug.WriteLine("NAPS2.TW - Enabling DS");
                     rc = ds.Enable(ui, true, twainForm.Handle);
@@ -240,17 +248,17 @@ namespace NAPS2.Scan.Twain
             return images;
         }
 
-        private static Bitmap GetBitmapFromMemXFer(DataTransferredEventArgs eventArgs)
+        private static Bitmap GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
         {
-            int bytesPerPixel = eventArgs.MemoryData.Length/(eventArgs.ImageInfo.ImageWidth*eventArgs.ImageInfo.ImageLength);
+            int bytesPerPixel = memoryData.Length / (imageInfo.ImageWidth * imageInfo.ImageLength);
             PixelFormat pixelFormat = bytesPerPixel == 0 ? PixelFormat.Format1bppIndexed : PixelFormat.Format24bppRgb;
-            int imageWidth = eventArgs.ImageInfo.ImageWidth;
-            int imageHeight = eventArgs.ImageInfo.ImageLength;
+            int imageWidth = imageInfo.ImageWidth;
+            int imageHeight = imageInfo.ImageLength;
             var bitmap = new Bitmap(imageWidth, imageHeight, pixelFormat);
             var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
             try
             {
-                byte[] source = eventArgs.MemoryData;
+                byte[] source = memoryData;
                 if (bytesPerPixel == 1)
                 {
                     // No 8-bit greyscale format, so we have to transform into 24-bit
