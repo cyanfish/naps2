@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -96,7 +97,9 @@ namespace NAPS2.Scan.Twain
                 {
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
                     pageNumber++;
-                    using (var output = Image.FromStream(eventArgs.GetNativeImageStream()))
+                    using (var output = eventArgs.NativeData != IntPtr.Zero
+                                        ? Image.FromStream(eventArgs.GetNativeImageStream())
+                                        : GetBitmapFromMemXFer(eventArgs))
                     {
                         using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
                         {
@@ -125,7 +128,7 @@ namespace NAPS2.Scan.Twain
                         }
                     }
                 }
-                 catch (Exception ex)
+                catch (Exception ex)
                 {
                     Debug.WriteLine("NAPS2.TW - DataTransferred - Error");
                     error = ex;
@@ -235,6 +238,43 @@ namespace NAPS2.Scan.Twain
             }
 
             return images;
+        }
+
+        private static Bitmap GetBitmapFromMemXFer(DataTransferredEventArgs eventArgs)
+        {
+            int bytesPerPixel = eventArgs.MemoryData.Length/(eventArgs.ImageInfo.ImageWidth*eventArgs.ImageInfo.ImageLength);
+            PixelFormat pixelFormat = bytesPerPixel == 0 ? PixelFormat.Format1bppIndexed : PixelFormat.Format24bppRgb;
+            int imageWidth = eventArgs.ImageInfo.ImageWidth;
+            int imageHeight = eventArgs.ImageInfo.ImageLength;
+            var bitmap = new Bitmap(imageWidth, imageHeight, pixelFormat);
+            var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            try
+            {
+                byte[] source = eventArgs.MemoryData;
+                if (bytesPerPixel == 1)
+                {
+                    // No 8-bit greyscale format, so we have to transform into 24-bit
+                    int rowWidth = data.Stride;
+                    int originalRowWidth = source.Length/imageHeight;
+                    byte[] source2 = new byte[rowWidth*imageHeight];
+                    for (int row = 0; row < imageHeight; row++)
+                    {
+                        for (int col = 0; col < imageWidth; col++)
+                        {
+                            source2[row*rowWidth + col*3] = source[row*originalRowWidth + col];
+                            source2[row*rowWidth + col*3 + 1] = source[row*originalRowWidth + col];
+                            source2[row*rowWidth + col*3 + 2] = source[row*originalRowWidth + col];
+                        }
+                    }
+                    source = source2;
+                }
+                Marshal.Copy(source, 0, data.Scan0, source.Length);
+            }
+            finally
+            {
+                bitmap.UnlockBits(data);
+            }
+            return bitmap;
         }
 
         private static PatchCode GetPatchCode(TWInfo patchCodeInfo)
