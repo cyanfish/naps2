@@ -85,7 +85,7 @@ namespace NAPS2.WinForms
 
         private void AdjustZoom()
         {
-            if (tsStretch.Checked)
+            if (tsStretch.Checked && tiffviewer1.ImageWidth != 0 && tiffviewer1.ImageHeight != 0)
             {
                 double containerWidth = Math.Max(tiffviewer1.Width - 20, 0);
                 double containerHeight = Math.Max(tiffviewer1.Height - 20, 0);
