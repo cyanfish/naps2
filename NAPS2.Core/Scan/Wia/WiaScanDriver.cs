@@ -36,6 +36,8 @@ namespace NAPS2.Scan.Wia
     {
         public const string DRIVER_NAME = "wia";
 
+        private const int MAX_RETRIES = 5;
+
         private readonly IWiaTransfer backgroundWiaTransfer;
         private readonly IWiaTransfer foregroundWiaTransfer;
         private readonly ThreadFactory threadFactory;
@@ -89,19 +91,23 @@ namespace NAPS2.Scan.Wia
                     ScannedImage image;
                     try
                     {
+                        if (pageNumber > 1 && ScanProfile.WiaDelayBetweenScans)
+                        {
+                            int delay = (int) (ScanProfile.WiaDelayBetweenScansSeconds.Clamp(0, 30) * 1000);
+                            Thread.Sleep(delay);
+                        }
                         image = TransferImage(eventLoop, pageNumber, out cancel);
                         pageNumber++;
-                        Debug.WriteLine("Succeeded with retry count {0}", retryCount);
                         retryCount = 0;
                         retry = false;
                     }
                     catch (ScanDriverException e)
                     {
-                        if (e.InnerException is COMException && (uint)((COMException) e.InnerException).ErrorCode == 0x80004005 && retryCount < 10)
+                        if (ScanProfile.WiaRetryOnFailure && e.InnerException is COMException 
+                            && (uint)((COMException) e.InnerException).ErrorCode == 0x80004005 && retryCount < MAX_RETRIES)
                         {
                             Thread.Sleep(1000);
                             retryCount += 1;
-                            Debug.WriteLine("Retrying {0}", retryCount);
                             retry = true;
                             continue;
                         }
