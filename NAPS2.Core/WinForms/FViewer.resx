@@ -148,7 +148,7 @@
     <value>tiffViewer1</value>
   </data>
   <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=4.1.1.632, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=5.3.3.34011, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -260,6 +260,12 @@
   </data>
   <data name="tsFlip.Text" xml:space="preserve">
     <value>Flip</value>
+  </data>
+  <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="tsDeskew.Text" xml:space="preserve">
+    <value>Deskew</value>
   </data>
   <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
@@ -480,10 +486,16 @@
   <data name="&gt;&gt;tsDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tsDeskew.Name" xml:space="preserve">
+    <value>tsDeskew</value>
+  </data>
+  <data name="&gt;&gt;tsDeskew.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FViewer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.1.632, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.3.3.34011, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

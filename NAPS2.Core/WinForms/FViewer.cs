@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
+using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 
@@ -31,12 +32,14 @@ namespace NAPS2.WinForms
         private ToolStripButton tsContrast;
         private ToolStripButton tsDelete;
         private TiffViewerCtl tiffViewer1;
-
+        private ToolStripMenuItem tsDeskew;
         private readonly ChangeTracker changeTracker;
+        private readonly IOperationFactory operationFactory;
 
-        public FViewer(ChangeTracker changeTracker)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory)
         {
             this.changeTracker = changeTracker;
+            this.operationFactory = operationFactory;
             InitializeComponent();
         }
 
@@ -113,6 +116,7 @@ namespace NAPS2.WinForms
             this.tsBrightness = new System.Windows.Forms.ToolStripButton();
             this.tsContrast = new System.Windows.Forms.ToolStripButton();
             this.tsDelete = new System.Windows.Forms.ToolStripButton();
+            this.tsDeskew = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -196,6 +200,7 @@ namespace NAPS2.WinForms
             this.tsRotateLeft,
             this.tsRotateRight,
             this.tsFlip,
+            this.tsDeskew,
             this.tsCustomRotation});
             this.tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise_small;
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
@@ -261,6 +266,12 @@ namespace NAPS2.WinForms
             this.tsDelete.Name = "tsDelete";
             this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
             // 
+            // tsDeskew
+            // 
+            this.tsDeskew.Name = "tsDeskew";
+            resources.ApplyResources(this.tsDeskew, "tsDeskew");
+            this.tsDeskew.Click += new System.EventHandler(this.tsDeskew_Click);
+            // 
             // FViewer
             // 
             resources.ApplyResources(this, "$this");
@@ -317,6 +328,20 @@ namespace NAPS2.WinForms
             ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate180FlipNone);
             UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
+        }
+
+        private void tsDeskew_Click(object sender, EventArgs e)
+        {
+            var op = operationFactory.Create<DeskewOperation>();
+            var progressForm = FormFactory.Create<FProgress>();
+            progressForm.Operation = op;
+
+            if (op.Start(new [] { ImageList.Images[ImageIndex] }))
+            {
+                progressForm.ShowDialog();
+                UpdateImage();
+                UpdateCallback(Enumerable.Range(ImageIndex, 1));
+            }
         }
 
         private void tsCustomRotation_Click(object sender, EventArgs e)
