@@ -66,8 +66,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTwain.3.3.9.4\lib\net40-Client\NTwain.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NAPS2\Setup\lib\NTwain.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp">
       <HintPath>..\NAPS2\Setup\lib\PdfSharp.dll</HintPath>
