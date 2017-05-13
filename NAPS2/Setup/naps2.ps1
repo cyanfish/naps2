@@ -109,7 +109,7 @@ function Publish-NAPS2-Standalone {
 		mkdir $LibDir64
 		cp "lib\64\twaindsm.dll" $LibDir64
 	}
-    foreach ($File in ("..\appsettings.xml", "lib\twaindsm.dll", "lib\wiaaut.dll", "license.txt")) {
+    foreach ($File in ("..\appsettings.xml", "lib\twaindsm.dll", "lib\wiaaut.dll", "..\..\LICENSE", "..\..\CONTRIBUTORS")) {
         cp $File $AppDir
     }
     if (Test-Path $ArchiveFile) {

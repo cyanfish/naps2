@@ -71,7 +71,8 @@
         <!-- Configuration -->
         <File Source="..\NAPS2\appsettings.xml" />
         <!-- License -->
-        <File Source="..\NAPS2\Setup\license.txt" />
+        <File Source="..\LICENSE" />
+        <File Source="..\CONTRIBUTORS" />
       </Component>
     </DirectoryRef>
     

@@ -17,7 +17,7 @@ OutputBaseFilename=naps2-{#AppVersion}-setup
 Compression=lzma
 SolidCompression=yes
 
-LicenseFile=license.txt     
+LicenseFile=..\..\LICENSE
 UninstallDisplayIcon={app}\scanner-app.ico
 
 [Languages]
@@ -39,7 +39,8 @@ Source: "..\bin\InstallerEXE\NLog.dll"; DestDir: "{app}\lib"; Flags: ignoreversi
 Source: "..\bin\InstallerEXE\NTwain.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\zxing.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\appsettings.xml"; DestDir: "{app}"; Flags: ignoreversion           
-Source: "license.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\CONTRIBUTORS"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\NAPS2.Console\bin\InstallerEXE\CommandLine.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
