@@ -91,14 +91,20 @@ namespace NAPS2.WinForms
                         working = true;
                         previewOutOfDate = false;
                         var result = RotationTransform.Perform((Bitmap)workingImage.Clone());
-                        Invoke(new MethodInvoker(() =>
+                        try
                         {
-                            if (pictureBox.Image != null)
+                            Invoke(new MethodInvoker(() =>
                             {
-                                pictureBox.Image.Dispose();
-                            }
-                            pictureBox.Image = result;
-                        }));
+                                if (pictureBox.Image != null)
+                                {
+                                    pictureBox.Image.Dispose();
+                                }
+                                pictureBox.Image = result;
+                            }));
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                        }
                         working = false;
                     }
                 }, null, 0, 100);
