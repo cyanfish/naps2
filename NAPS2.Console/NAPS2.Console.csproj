@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="NAPS2.Console.licenseheader" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
