@@ -84,7 +84,6 @@ namespace NAPS2.Scan.Twain
             int pageNumber = 0;
 
             bool useMemXfer = false;
-            TWImageInfo pendingImageInfo = null;
 
             session.TransferReady += (sender, eventArgs) =>
             {
@@ -93,10 +92,6 @@ namespace NAPS2.Scan.Twain
                 {
                     eventArgs.CancelAll = true;
                 }
-                if (useMemXfer)
-                {
-                    pendingImageInfo = eventArgs.PendingImageInfo;
-                }
             };
             session.DataTransferred += (sender, eventArgs) =>
             {
@@ -104,8 +99,8 @@ namespace NAPS2.Scan.Twain
                 {
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
                     pageNumber++;
-                    using (var output = useMemXfer && pendingImageInfo != null
-                                        ? GetBitmapFromMemXFer(eventArgs.MemoryData, pendingImageInfo)
+                    using (var output = useMemXfer
+                                        ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
                                         : Image.FromStream(eventArgs.GetNativeImageStream()))
                     {
                         using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
