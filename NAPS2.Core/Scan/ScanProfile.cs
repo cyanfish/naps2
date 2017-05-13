@@ -45,6 +45,7 @@ namespace NAPS2.Scan
             Quality = 75;
             BlankPageWhiteThreshold = 70;
             BlankPageCoverageThreshold = 25;
+            WiaDelayBetweenScansSeconds = 2.0;
         }
 
         public ScanProfile Clone()
@@ -120,6 +121,12 @@ namespace NAPS2.Scan
         public int BlankPageCoverageThreshold { get; set; }
 
         public bool WiaOffsetWidth { get; set; }
+
+        public bool WiaRetryOnFailure { get; set; }
+
+        public bool WiaDelayBetweenScans { get; set; }
+
+        public double WiaDelayBetweenScansSeconds { get; set; }
 
         public bool FlipDuplexedPages { get; set; }
     }
