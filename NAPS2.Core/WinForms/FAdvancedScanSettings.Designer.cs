@@ -57,6 +57,7 @@ namespace NAPS2.WinForms
             this.txtWhiteThreshold = new System.Windows.Forms.TextBox();
             this.cbExcludeBlankPages = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
+            this.cbForcePageSizeCrop = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageQuality)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -111,6 +112,7 @@ namespace NAPS2.WinForms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbForcePageSizeCrop);
             this.groupBox2.Controls.Add(this.cbFlipDuplex);
             this.groupBox2.Controls.Add(this.cbWiaOffsetWidth);
             this.groupBox2.Controls.Add(this.cbForcePageSize);
@@ -222,6 +224,12 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults.UseVisualStyleBackColor = true;
             this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
+            // cbForcePageSizeCrop
+            // 
+            resources.ApplyResources(this.cbForcePageSizeCrop, "cbForcePageSizeCrop");
+            this.cbForcePageSizeCrop.Name = "cbForcePageSizeCrop";
+            this.cbForcePageSizeCrop.UseVisualStyleBackColor = true;
+            // 
             // FAdvancedScanSettings
             // 
             this.AcceptButton = this.btnOK;
@@ -275,5 +283,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.CheckBox cbWiaOffsetWidth;
         private System.Windows.Forms.CheckBox cbFlipDuplex;
         private System.Windows.Forms.Button btnRestoreDefaults;
+        private System.Windows.Forms.CheckBox cbForcePageSizeCrop;
     }
 }

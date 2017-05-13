@@ -109,6 +109,8 @@ namespace NAPS2.Scan
 
         public bool ForcePageSize { get; set; }
 
+        public bool ForcePageSizeCrop { get; set; }
+
         public TwainImpl TwainImpl { get; set; }
 
         public bool ExcludeBlankPages { get; set; }

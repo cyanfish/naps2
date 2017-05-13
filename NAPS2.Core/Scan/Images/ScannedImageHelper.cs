@@ -122,7 +122,7 @@ namespace NAPS2.Scan.Images
             }
             var result = ImageScaleHelper.ScaleImage(output, scaleFactor);
 
-            if (!profile.UseNativeUI && profile.ForcePageSize)
+            if (!profile.UseNativeUI && (profile.ForcePageSize || profile.ForcePageSizeCrop))
             {
                 float width = output.Width / output.HorizontalResolution;
                 float height = output.Height / output.VerticalResolution;
@@ -134,22 +134,34 @@ namespace NAPS2.Scan.Images
                 PageDimensions pageDimensions = profile.PageSize.PageDimensions() ?? profile.CustomPageSize;
                 if (pageDimensions.Width > pageDimensions.Height && width < height)
                 {
-                    // Flip dimensions
-                    result = new CropTransform
+                    if (profile.ForcePageSizeCrop)
                     {
-                        Right = (int)((width - (float)pageDimensions.HeightInInches()) * output.HorizontalResolution),
-                        Bottom = (int)((height - (float)pageDimensions.WidthInInches()) * output.VerticalResolution)
-                    }.Perform(result);
-                    // result.SetResolution((float)(output.Width / pageDimensions.HeightInInches()), (float)(output.Height / pageDimensions.WidthInInches()));
+                        result = new CropTransform
+                        {
+                            Right = (int) ((width - (float) pageDimensions.HeightInInches()) * output.HorizontalResolution),
+                            Bottom = (int) ((height - (float) pageDimensions.WidthInInches()) * output.VerticalResolution)
+                        }.Perform(result);
+                    }
+                    else
+                    {
+                        result.SetResolution((float) (output.Width / pageDimensions.HeightInInches()),
+                            (float) (output.Height / pageDimensions.WidthInInches()));
+                    }
                 }
                 else
                 {
-                    result = new CropTransform
+                    if (profile.ForcePageSizeCrop)
                     {
-                        Right = (int)((width - (float)pageDimensions.WidthInInches()) * output.HorizontalResolution),
-                        Bottom = (int)((height - (float)pageDimensions.HeightInInches()) * output.VerticalResolution)
-                    }.Perform(result);
-                    //result.SetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
+                        result = new CropTransform
+                        {
+                            Right = (int) ((width - (float) pageDimensions.WidthInInches()) * output.HorizontalResolution),
+                            Bottom = (int) ((height - (float) pageDimensions.HeightInInches()) * output.VerticalResolution)
+                        }.Perform(result);
+                    }
+                    else
+                    {
+                        result.SetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
+                    }
                 }
             }
 
