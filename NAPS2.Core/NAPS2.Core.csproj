@@ -275,6 +275,7 @@
     <Compile Include="Scan\Wia\ForegroundWiaTransfer.cs" />
     <Compile Include="Operation\OperationErrorEventArgs.cs" />
     <Compile Include="Operation\OperationStatus.cs" />
+    <Compile Include="Util\NumberExtensions.cs" />
     <Compile Include="Util\PathHelper.cs" />
     <Compile Include="Util\Pipeline.cs" />
     <Compile Include="Util\Pipes.cs" />
