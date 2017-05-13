@@ -70,6 +70,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deskewing....
+        /// </summary>
+        internal static string AutoDeskewing {
+            get {
+                return ResourceManager.GetString("AutoDeskewing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deskew Progress.
+        /// </summary>
+        internal static string AutoDeskewProgress {
+            get {
+                return ResourceManager.GetString("AutoDeskewProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when trying to auto save..
         /// </summary>
         internal static string AutoSaveError {

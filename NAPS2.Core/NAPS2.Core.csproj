@@ -113,6 +113,7 @@
     <Compile Include="ImportExport\DirectImportOperation.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
+    <Compile Include="Scan\Images\DeskewOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
     <Compile Include="ImportExport\SaveSeparatorHelper.cs" />
     <Compile Include="Lang\ConsoleResources\ConsoleResources.Designer.cs">
@@ -121,6 +122,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ocr\PlatformSupport.cs" />
+    <Compile Include="Scan\Images\AutoDeskew.cs" />
     <Compile Include="Util\DownloadFormat.cs" />
     <Compile Include="Util\DownloadInfo.cs" />
     <Compile Include="Ocr\Language.cs" />

@@ -693,6 +693,25 @@ namespace NAPS2.WinForms
             changeTracker.HasUnsavedChanges = true;
         }
 
+        private void Deskew()
+        {
+            if (!SelectedIndices.Any())
+            {
+                return;
+            }
+
+            var op = operationFactory.Create<DeskewOperation>();
+            var progressForm = FormFactory.Create<FProgress>();
+            progressForm.Operation = op;
+            
+            if (op.Start(SelectedImages.ToList()))
+            {
+                progressForm.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList(), false, true);
+                changeTracker.HasUnsavedChanges = true;
+            }
+        }
+
         private void PreviewImage()
         {
             if (SelectedIndices.Any())
@@ -1381,6 +1400,11 @@ namespace NAPS2.WinForms
         private void tsFlip_Click(object sender, EventArgs e)
         {
             Flip();
+        }
+
+        private void tsDeskew_Click(object sender, EventArgs e)
+        {
+            Deskew();
         }
 
         private void tsCustomRotation_Click(object sender, EventArgs e)

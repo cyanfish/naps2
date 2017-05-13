@@ -85,6 +85,7 @@ namespace NAPS2.WinForms
             this.tsRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.tsRotateRight = new System.Windows.Forms.ToolStripMenuItem();
             this.tsFlip = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsDeskew = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCustomRotation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMove = new NAPS2.WinForms.ToolStripDoubleButton();
             this.tsdReorder = new System.Windows.Forms.ToolStripDropDownButton();
@@ -501,6 +502,7 @@ namespace NAPS2.WinForms
             this.tsRotateLeft,
             this.tsRotateRight,
             this.tsFlip,
+            this.tsDeskew,
             this.tsCustomRotation});
             this.tsdRotate.Image = global::NAPS2.Icons.arrow_rotate_anticlockwise;
             resources.ApplyResources(this.tsdRotate, "tsdRotate");
@@ -528,6 +530,12 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsFlip, "tsFlip");
             this.tsFlip.Name = "tsFlip";
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
+            // 
+            // tsDeskew
+            // 
+            resources.ApplyResources(this.tsDeskew, "tsDeskew");
+            this.tsDeskew.Name = "tsDeskew";
+            this.tsDeskew.Click += new System.EventHandler(this.tsDeskew_Click);
             // 
             // tsCustomRotation
             // 
@@ -748,6 +756,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnZoomMouseCatcher;
         private System.Windows.Forms.ToolStripMenuItem ctxPaste;
         private System.Windows.Forms.ToolStripButton tsPrint;
+        private System.Windows.Forms.ToolStripMenuItem tsDeskew;
     }
 }
 
