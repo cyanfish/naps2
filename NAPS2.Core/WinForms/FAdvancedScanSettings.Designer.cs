@@ -42,6 +42,9 @@ namespace NAPS2.WinForms
             this.tbImageQuality = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtWiaDelayBetweenScansSeconds = new System.Windows.Forms.TextBox();
+            this.cbWiaDelayBetweenScans = new System.Windows.Forms.CheckBox();
+            this.cbWiaRetryOnFailure = new System.Windows.Forms.CheckBox();
             this.cbForcePageSizeCrop = new System.Windows.Forms.CheckBox();
             this.cbFlipDuplex = new System.Windows.Forms.CheckBox();
             this.cbWiaOffsetWidth = new System.Windows.Forms.CheckBox();
@@ -58,15 +61,15 @@ namespace NAPS2.WinForms
             this.txtWhiteThreshold = new System.Windows.Forms.TextBox();
             this.cbExcludeBlankPages = new System.Windows.Forms.CheckBox();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
-            this.cbWiaRetryOnFailure = new System.Windows.Forms.CheckBox();
-            this.cbWiaDelayBetweenScans = new System.Windows.Forms.CheckBox();
-            this.txtWiaDelayBetweenScansSeconds = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbAutoDeskew = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageQuality)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbCoverageThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbWhiteThreshold)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOK
@@ -128,6 +131,24 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // txtWiaDelayBetweenScansSeconds
+            // 
+            resources.ApplyResources(this.txtWiaDelayBetweenScansSeconds, "txtWiaDelayBetweenScansSeconds");
+            this.txtWiaDelayBetweenScansSeconds.Name = "txtWiaDelayBetweenScansSeconds";
+            // 
+            // cbWiaDelayBetweenScans
+            // 
+            resources.ApplyResources(this.cbWiaDelayBetweenScans, "cbWiaDelayBetweenScans");
+            this.cbWiaDelayBetweenScans.Name = "cbWiaDelayBetweenScans";
+            this.cbWiaDelayBetweenScans.UseVisualStyleBackColor = true;
+            this.cbWiaDelayBetweenScans.CheckedChanged += new System.EventHandler(this.cbWiaDelayBetweenScans_CheckedChanged);
+            // 
+            // cbWiaRetryOnFailure
+            // 
+            resources.ApplyResources(this.cbWiaRetryOnFailure, "cbWiaRetryOnFailure");
+            this.cbWiaRetryOnFailure.Name = "cbWiaRetryOnFailure";
+            this.cbWiaRetryOnFailure.UseVisualStyleBackColor = true;
             // 
             // cbForcePageSizeCrop
             // 
@@ -236,29 +257,25 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults.UseVisualStyleBackColor = true;
             this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
-            // cbWiaRetryOnFailure
+            // groupBox4
             // 
-            resources.ApplyResources(this.cbWiaRetryOnFailure, "cbWiaRetryOnFailure");
-            this.cbWiaRetryOnFailure.Name = "cbWiaRetryOnFailure";
-            this.cbWiaRetryOnFailure.UseVisualStyleBackColor = true;
+            this.groupBox4.Controls.Add(this.cbAutoDeskew);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
             // 
-            // cbWiaDelayBetweenScans
+            // cbAutoDeskew
             // 
-            resources.ApplyResources(this.cbWiaDelayBetweenScans, "cbWiaDelayBetweenScans");
-            this.cbWiaDelayBetweenScans.Name = "cbWiaDelayBetweenScans";
-            this.cbWiaDelayBetweenScans.UseVisualStyleBackColor = true;
-            this.cbWiaDelayBetweenScans.CheckedChanged += new System.EventHandler(this.cbWiaDelayBetweenScans_CheckedChanged);
-            // 
-            // txtWiaDelayBetweenScansSeconds
-            // 
-            resources.ApplyResources(this.txtWiaDelayBetweenScansSeconds, "txtWiaDelayBetweenScansSeconds");
-            this.txtWiaDelayBetweenScansSeconds.Name = "txtWiaDelayBetweenScansSeconds";
+            resources.ApplyResources(this.cbAutoDeskew, "cbAutoDeskew");
+            this.cbAutoDeskew.Name = "cbAutoDeskew";
+            this.cbAutoDeskew.UseVisualStyleBackColor = true;
             // 
             // FAdvancedScanSettings
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnRestoreDefaults);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -277,6 +294,8 @@ namespace NAPS2.WinForms
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbCoverageThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbWhiteThreshold)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,5 +330,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.CheckBox cbWiaDelayBetweenScans;
         private System.Windows.Forms.CheckBox cbWiaRetryOnFailure;
         private System.Windows.Forms.TextBox txtWiaDelayBetweenScansSeconds;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox cbAutoDeskew;
     }
 }

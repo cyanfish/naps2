@@ -285,6 +285,7 @@ namespace NAPS2.WinForms
                 AutoSaveSettings = ScanProfile.AutoSaveSettings,
                 Quality = ScanProfile.Quality,
                 BrightnessContrastAfterScan = ScanProfile.BrightnessContrastAfterScan,
+                AutoDeskew = ScanProfile.AutoDeskew,
                 WiaOffsetWidth = ScanProfile.WiaOffsetWidth,
                 WiaRetryOnFailure = ScanProfile.WiaRetryOnFailure,
                 WiaDelayBetweenScans = ScanProfile.WiaDelayBetweenScans,

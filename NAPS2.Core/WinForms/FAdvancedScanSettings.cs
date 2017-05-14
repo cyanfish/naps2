@@ -46,6 +46,7 @@ namespace NAPS2.WinForms
             tbImageQuality.Value = scanProfile.Quality;
             txtImageQuality.Text = scanProfile.Quality.ToString("G");
             cbBrightnessContrastAfterScan.Checked = scanProfile.BrightnessContrastAfterScan;
+            cbAutoDeskew.Checked = scanProfile.AutoDeskew;
             cbWiaOffsetWidth.Checked = scanProfile.WiaOffsetWidth;
             cbWiaRetryOnFailure.Checked = scanProfile.WiaRetryOnFailure;
             cbWiaDelayBetweenScans.Checked = scanProfile.WiaDelayBetweenScans;
@@ -86,6 +87,7 @@ namespace NAPS2.WinForms
             ScanProfile.Quality = tbImageQuality.Value;
             ScanProfile.MaxQuality = cbHighQuality.Checked;
             ScanProfile.BrightnessContrastAfterScan = cbBrightnessContrastAfterScan.Checked;
+            ScanProfile.AutoDeskew = cbAutoDeskew.Checked;
             ScanProfile.WiaOffsetWidth = cbWiaOffsetWidth.Checked;
             ScanProfile.WiaRetryOnFailure = cbWiaRetryOnFailure.Checked;
             ScanProfile.WiaDelayBetweenScans = cbWiaDelayBetweenScans.Checked;

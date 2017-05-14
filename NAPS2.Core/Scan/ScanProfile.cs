@@ -86,6 +86,8 @@ namespace NAPS2.Scan
 
         public int Quality { get; set; }
 
+        public bool AutoDeskew { get; set; }
+
         public bool BrightnessContrastAfterScan { get; set; }
 
         public bool ForcePageSize { get; set; }
