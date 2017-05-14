@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
-using ZXing;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NAPS2.Util
 {
@@ -46,7 +49,11 @@ namespace NAPS2.Util
             public double d;
         }
         // The Bitmap
-        Image cBmp;
+        int width;
+        int height;
+        int stride;
+        byte[] bitmapBytes;
+        bool bw;
         // The range of angles to search for lines
         readonly double cAlphaStart = -20;
         readonly double cAlphaStep = 0.2;
@@ -126,27 +133,49 @@ namespace NAPS2.Util
             }
             return hl;
         }
-        public gmseDeskew(Image bmp)
+
+        public gmseDeskew(Bitmap bitmap)
         {
-            cBmp = bmp;
+            width = bitmap.Width;
+            height = bitmap.Height;
+            if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
+            {
+                bw = true;
+                LoadBitmap(bitmap);
+            }
+            else if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                LoadBitmap(bitmap);
+            }
+            else
+            {
+                throw new ArgumentException("Unsupported pixel format");
+            }
+        }
+
+        private void LoadBitmap(Bitmap bitmap)
+        {
+            var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            stride = Math.Abs(data.Stride);
+            bitmapBytes = new byte[stride * data.Height];
+            Marshal.Copy(data.Scan0, bitmapBytes, 0, bitmapBytes.Length);
+            bitmap.UnlockBits(data);
         }
 
         // Hough Transforamtion:
         private void Calc(Func<bool> cancel)
         {
-            int x;
-            int y;
-            int hMin = cBmp.Height / 4;
-            int hMax = cBmp.Height * 3 / 4;
+            int hMin = height / 4;
+            int hMax = height * 3 / 4;
 
             Init();
-            for (y = hMin; y <= hMax; y++)
+            Parallel.For(hMin, hMax + 1, y =>
             {
                 if (cancel())
                 {
                     return;
                 }
-                for (x = 1; x <= cBmp.Width - 2; x++)
+                for (int x = 1; x <= width - 2; x++)
                 {
                     // Only lower edges are considered.
                     if (IsBlack(x, y))
@@ -157,7 +186,7 @@ namespace NAPS2.Util
                         }
                     }
                 }
-            }
+            });
         }
         // Calculate all lines through the point (x,y).
         private void Calc(int x, int y)
@@ -170,11 +199,11 @@ namespace NAPS2.Util
             for (alpha = 0; alpha <= cSteps - 1; alpha++)
             {
                 d = y * cCosA[alpha] - x * cSinA[alpha];
-                dIndex = (int)CalcDIndex(d);
+                dIndex = (int)(d - cDMin);
                 Index = dIndex * cSteps + alpha;
                 try
                 {
-                    cHMatrix[Index] += 1;
+                    Interlocked.Increment(ref cHMatrix[Index]);
                 }
                 catch (Exception ex)
                 {
@@ -182,18 +211,22 @@ namespace NAPS2.Util
                 }
             }
         }
-        private double CalcDIndex(double d)
-        {
-            return Convert.ToInt32(d - cDMin);
-        }
         private bool IsBlack(int x, int y)
         {
-            Color c = default(Color);
-            double luminance;
-
-            c = ((Bitmap)cBmp).GetPixel(x, y);
-            luminance = (c.R * 0.299) + (c.G * 0.587) + (c.B * 0.114);
-            return luminance < 140;
+            if (bw)
+            {
+                var b = bitmapBytes[y * stride + (x >> 3)];
+                var mask = (byte)(0x80 >> (x & 0x7));
+                return (b & mask) == 0;
+            }
+            else
+            {
+                int r = bitmapBytes[stride * y + x * 3];
+                int g = bitmapBytes[stride * y + x * 3 + 1];
+                int b = bitmapBytes[stride * y + x * 3 + 2];
+                double luminance = (r * 0.299) + (g * 0.587) + (b * 0.114);
+                return luminance < 140;
+            }
         }
         private void Init()
         {
@@ -210,8 +243,8 @@ namespace NAPS2.Util
                 cCosA[i] = Math.Cos(angle);
             }
             // Range of d:
-            cDMin = -cBmp.Width;
-            cDCount = (int)(2 * (cBmp.Width + cBmp.Height) / cDStep);
+            cDMin = -width;
+            cDCount = (int)(2 * (width + height) / cDStep);
             cHMatrix = new int[cDCount * cSteps + 1];
         }
 
