@@ -1,5 +1,5 @@
 ﻿function Get-MSBuild-Path {
-    [IO.Path]::Combine((Get-ItemProperty -path HKLM:\SOFTWARE\Microsoft\MSBuild\ToolsVersions\14.0).MSBuildToolsPath, "msbuild.exe")
+    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
 }
 
 function Get-7z-Path {
