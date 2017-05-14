@@ -23,6 +23,7 @@ namespace NAPS2.Scan.Twain
         private readonly IFormFactory formFactory;
         private readonly IBlankDetector blankDetector;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageHelper scannedImageHelper;
 
         static TwainWrapper()
         {
@@ -44,11 +45,12 @@ namespace NAPS2.Scan.Twain
 #endif
         }
 
-        public TwainWrapper(IFormFactory formFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer)
+        public TwainWrapper(IFormFactory formFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
         {
             this.formFactory = formFactory;
             this.blankDetector = blankDetector;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageHelper = scannedImageHelper;
         }
 
         public List<ScanDevice> GetDeviceList(TwainImpl twainImpl)
@@ -103,7 +105,7 @@ namespace NAPS2.Scan.Twain
                                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
                                         : Image.FromStream(eventArgs.GetNativeImageStream()))
                     {
-                        using (var result = ScannedImageHelper.PostProcessStep1(output, scanProfile))
+                        using (var result = scannedImageHelper.PostProcessStep1(output, scanProfile))
                         {
                             if (blankDetector.ExcludePage(result, scanProfile))
                             {
@@ -125,7 +127,7 @@ namespace NAPS2.Scan.Twain
                                     }
                                 }
                             }
-                            ScannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
+                            scannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
                             images.Add(image);
                         }
                     }

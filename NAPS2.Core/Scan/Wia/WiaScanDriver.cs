@@ -23,14 +23,16 @@ namespace NAPS2.Scan.Wia
         private readonly ThreadFactory threadFactory;
         private readonly IBlankDetector blankDetector;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageHelper scannedImageHelper;
 
-        public WiaScanDriver(BackgroundWiaTransfer backgroundWiaTransfer, ForegroundWiaTransfer foregroundWiaTransfer, ThreadFactory threadFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer)
+        public WiaScanDriver(BackgroundWiaTransfer backgroundWiaTransfer, ForegroundWiaTransfer foregroundWiaTransfer, ThreadFactory threadFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
         {
             this.backgroundWiaTransfer = backgroundWiaTransfer;
             this.foregroundWiaTransfer = foregroundWiaTransfer;
             this.threadFactory = threadFactory;
             this.blankDetector = blankDetector;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageHelper = scannedImageHelper;
         }
 
         public override string DriverName
@@ -121,7 +123,7 @@ namespace NAPS2.Scan.Wia
                     cancel = false;
                     using (Image output = Image.FromStream(stream))
                     {
-                        using (var result = ScannedImageHelper.PostProcessStep1(output, ScanProfile))
+                        using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
                         {
                             if (blankDetector.ExcludePage(result, ScanProfile))
                             {
@@ -130,7 +132,7 @@ namespace NAPS2.Scan.Wia
                             ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
                             var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                             image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                            ScannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber);
+                            scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber);
                             return image;
                         }
                     }

@@ -4,12 +4,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using NAPS2.Operation;
 using NAPS2.Scan.Images.Transforms;
 using ZXing;
 
 namespace NAPS2.Scan.Images
 {
-    internal static class ScannedImageHelper
+    public class ScannedImageHelper
     {
         public static string SaveSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, int quality, out ImageFormat imageFormat)
         {
@@ -92,7 +93,18 @@ namespace NAPS2.Scan.Images
             return tempFilePath;
         }
 
-        public static Bitmap PostProcessStep1(Image output, ScanProfile profile)
+        private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly IOperationFactory operationFactory;
+        private readonly IOperationProgress operationProgress;
+
+        public ScannedImageHelper(ThumbnailRenderer thumbnailRenderer, IOperationFactory operationFactory, IOperationProgress operationProgress)
+        {
+            this.thumbnailRenderer = thumbnailRenderer;
+            this.operationFactory = operationFactory;
+            this.operationProgress = operationProgress;
+        }
+
+        public Bitmap PostProcessStep1(Image output, ScanProfile profile)
         {
             double scaleFactor = 1;
             if (!profile.UseNativeUI)
@@ -147,22 +159,30 @@ namespace NAPS2.Scan.Images
             return result;
         }
 
-        public static void PostProcessStep2(ScannedImage image, Bitmap bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber)
+        public void PostProcessStep2(ScannedImage image, Bitmap bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber)
         {
             if (!profile.UseNativeUI && profile.BrightnessContrastAfterScan)
             {
                 if (profile.Brightness != 0)
                 {
-                    AddTransformAndUpdateThumbnail(image, new BrightnessTransform { Brightness = profile.Brightness });
+                    AddTransformAndUpdateThumbnail(image, ref bitmap, new BrightnessTransform { Brightness = profile.Brightness });
                 }
                 if (profile.Contrast != 0)
                 {
-                    AddTransformAndUpdateThumbnail(image, new TrueContrastTransform { Contrast = profile.Contrast });
+                    AddTransformAndUpdateThumbnail(image, ref bitmap, new TrueContrastTransform { Contrast = profile.Contrast });
                 }
             }
             if (profile.FlipDuplexedPages && pageNumber % 2 == 0)
             {
-                AddTransformAndUpdateThumbnail(image, new RotationTransform(RotateFlipType.Rotate180FlipNone));
+                AddTransformAndUpdateThumbnail(image, ref bitmap, new RotationTransform(RotateFlipType.Rotate180FlipNone));
+            }
+            if (profile.AutoDeskew)
+            {
+                var op = operationFactory.Create<DeskewOperation>();
+                if (op.Start(new[] { image }))
+                {
+                    operationProgress.ShowProgress(op);
+                }
             }
             if (scanParams.DetectPatchCodes && image.PatchCode == PatchCode.None)
             {
@@ -195,13 +215,14 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        private static void AddTransformAndUpdateThumbnail(ScannedImage image, Transform transform)
+        private void AddTransformAndUpdateThumbnail(ScannedImage image, ref Bitmap bitmap, Transform transform)
         {
             image.AddTransform(transform);
             var thumbnail = image.GetThumbnail(null);
             if (thumbnail != null)
             {
-                image.SetThumbnail(transform.Perform(thumbnail));
+                bitmap = transform.Perform(bitmap);
+                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
             }
         }
     }
