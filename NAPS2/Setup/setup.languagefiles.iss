@@ -21,6 +21,7 @@ Source: "..\bin\InstallerEXE\lt\NAPS2.Core.resources.dll"; DestDir: "{app}\\lib\
 Source: "..\bin\InstallerEXE\lv\NAPS2.Core.resources.dll"; DestDir: "{app}\\lib\lv"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\nb\NAPS2.Core.resources.dll"; DestDir: "{app}\\lib\nb"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\nl\NAPS2.Core.resources.dll"; DestDir: "{app}\\lib\nl"; Flags: ignoreversion
+Source: "..\bin\InstallerEXE\nn\NAPS2.Core.resources.dll"; DestDir: "{app}\\lib\nn"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\pl\NAPS2.Core.resources.dll"; DestDir: "{app}\\lib\pl"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\pt-BR\NAPS2.Core.resources.dll"; DestDir: "{app}\\lib\pt-BR"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\pt-PT\NAPS2.Core.resources.dll"; DestDir: "{app}\\lib\pt-PT"; Flags: ignoreversion

@@ -277,6 +277,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nynorsk.
+        /// </summary>
+        internal static string nn {
+            get {
+                return ResourceManager.GetString("nn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Polski.
         /// </summary>
         internal static string pl {

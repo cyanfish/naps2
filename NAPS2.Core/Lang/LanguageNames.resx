@@ -234,4 +234,7 @@
   <data name="sl" xml:space="preserve">
     <value>Slovenščina</value>
   </data>
+  <data name="nn" xml:space="preserve">
+    <value>Nynorsk</value>
+  </data>
 </root>
