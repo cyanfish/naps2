@@ -16,9 +16,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport;
-using NAPS2.ImportExport.Email;
-using NAPS2.ImportExport.Images;
-using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
@@ -37,9 +34,7 @@ namespace NAPS2.WinForms
     public partial class FDesktop : FormBase
     {
         #region Dependencies
-
-        private readonly IEmailer emailer;
-        private readonly IScannedImageImporter scannedImageImporter;
+        
         private readonly StringWrapper stringWrapper;
         private readonly AppConfigManager appConfigManager;
         private readonly RecoveryManager recoveryManager;
@@ -48,15 +43,11 @@ namespace NAPS2.WinForms
         private readonly IScanPerformer scanPerformer;
         private readonly IScannedImagePrinter scannedImagePrinter;
         private readonly ChangeTracker changeTracker;
-        private readonly EmailSettingsContainer emailSettingsContainer;
-        private readonly FileNamePlaceholders fileNamePlaceholders;
-        private readonly ImageSettingsContainer imageSettingsContainer;
-        private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly StillImage stillImage;
         private readonly IOperationFactory operationFactory;
         private readonly IUserConfigManager userConfigManager;
         private readonly KeyboardShortcutManager ksm;
-        private readonly DialogHelper dialogHelper;
+        private readonly WinFormsExportHelper exportHelper;
 
         #endregion
 
@@ -73,28 +64,22 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(IEmailer emailer, StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, IScannedImageImporter scannedImageImporter, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, EmailSettingsContainer emailSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, PdfSettingsContainer pdfSettingsContainer, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, DialogHelper dialogHelper)
+        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper)
         {
-            this.emailer = emailer;
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
             this.recoveryManager = recoveryManager;
-            this.scannedImageImporter = scannedImageImporter;
             this.ocrDependencyManager = ocrDependencyManager;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.scannedImagePrinter = scannedImagePrinter;
             this.changeTracker = changeTracker;
-            this.emailSettingsContainer = emailSettingsContainer;
-            this.fileNamePlaceholders = fileNamePlaceholders;
-            this.imageSettingsContainer = imageSettingsContainer;
-            this.pdfSettingsContainer = pdfSettingsContainer;
             this.stillImage = stillImage;
             this.operationFactory = operationFactory;
             this.userConfigManager = userConfigManager;
             this.ksm = ksm;
             this.thumbnailRenderer = thumbnailRenderer;
-            this.dialogHelper = dialogHelper;
+            this.exportHelper = exportHelper;
             InitializeComponent();
 
             Shown += FDesktop_Shown;
@@ -761,139 +746,31 @@ namespace NAPS2.WinForms
 
         private void SavePDF(List<ScannedImage> images)
         {
-            if (images.Any())
+            if (exportHelper.SavePDF(images))
             {
-                string savePath;
-
-                var pdfSettings = pdfSettingsContainer.PdfSettings;
-                if (pdfSettings.SkipSavePrompt && Path.IsPathRooted(pdfSettings.DefaultFileName))
+                if (appConfigManager.Config.DeleteAfterSaving)
                 {
-                    savePath = pdfSettings.DefaultFileName;
-                }
-                else
-                {
-                    if (!dialogHelper.PromptToSavePdf(pdfSettings.DefaultFileName, out savePath))
-                    {
-                        return;
-                    }
-                }
-
-                var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
-                if (ExportPDF(subSavePath, images, false))
-                {
-                    changeTracker.HasUnsavedChanges = false;
-                    if (appConfigManager.Config.DeleteAfterSaving)
-                    {
-                        imageList.Delete(imageList.Images.IndiciesOf(images));
-                        UpdateThumbnails(Enumerable.Empty<int>(), false, false);
-                    }
-                    notify.PdfSaved(subSavePath);
+                    imageList.Delete(imageList.Images.IndiciesOf(images));
+                    UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                 }
             }
-        }
-
-        private bool ExportPDF(string filename, List<ScannedImage> images, bool email)
-        {
-            var op = operationFactory.Create<SavePdfOperation>();
-            var progressForm = FormFactory.Create<FProgress>();
-            progressForm.Operation = op;
-
-            var pdfSettings = pdfSettingsContainer.PdfSettings;
-            pdfSettings.Metadata.Creator = MiscResources.NAPS2;
-            var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
-            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrLanguageCode, email))
-            {
-                progressForm.ShowDialog();
-            }
-            return op.Status.Success;
         }
 
         private void SaveImages(List<ScannedImage> images)
         {
-            if (images.Any())
+            if (exportHelper.SaveImages(images))
             {
-                string savePath;
-
-                var imageSettings = imageSettingsContainer.ImageSettings;
-                if (imageSettings.SkipSavePrompt && Path.IsPathRooted(imageSettings.DefaultFileName))
+                if (appConfigManager.Config.DeleteAfterSaving)
                 {
-                    savePath = imageSettings.DefaultFileName;
-                }
-                else
-                {
-                    if (!dialogHelper.PromptToSaveImage(imageSettings.DefaultFileName, out savePath))
-                    {
-                        return;
-                    }
-                }
-
-                var op = operationFactory.Create<SaveImagesOperation>();
-                var progressForm = FormFactory.Create<FProgress>();
-                progressForm.Operation = op;
-                progressForm.Start = () => op.Start(savePath, DateTime.Now, images);
-                progressForm.ShowDialog();
-                if (op.Status.Success)
-                {
-                    changeTracker.HasUnsavedChanges = false;
-                    if (appConfigManager.Config.DeleteAfterSaving)
-                    {
-                        imageList.Delete(imageList.Images.IndiciesOf(images));
-                        UpdateThumbnails(Enumerable.Empty<int>(), false, false);
-                    }
-                    notify.ImagesSaved(images.Count, op.FirstFileSaved);
+                    imageList.Delete(imageList.Images.IndiciesOf(images));
+                    UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                 }
             }
         }
 
         private void EmailPDF(List<ScannedImage> images)
         {
-            if (images.Any())
-            {
-                var emailSettings = emailSettingsContainer.EmailSettings;
-                var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
-                var attachmentName = new string(emailSettings.AttachmentName.Where(x => !invalidChars.Contains(x)).ToArray());
-                if (string.IsNullOrEmpty(attachmentName))
-                {
-                    attachmentName = "Scan.pdf";
-                }
-                if (!attachmentName.EndsWith(".pdf", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    attachmentName += ".pdf";
-                }
-                attachmentName = fileNamePlaceholders.SubstitutePlaceholders(attachmentName, DateTime.Now, false);
-
-                var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
-                tempFolder.Create();
-                try
-                {
-                    string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
-                    if (!ExportPDF(targetPath, images, true))
-                    {
-                        // Cancel or error
-                        return;
-                    }
-                    var message = new EmailMessage
-                    {
-                        Attachments =
-                        {
-                            new EmailAttachment
-                            {
-                                FilePath = targetPath,
-                                AttachmentName = attachmentName
-                            }
-                        }
-                    };
-
-                    if (emailer.SendEmail(message))
-                    {
-                        changeTracker.HasUnsavedChanges = false;
-                    }
-                }
-                finally
-                {
-                    tempFolder.Delete(true);
-                }
-            }
+            exportHelper.EmailPDF(images);
         }
 
         private void Import()

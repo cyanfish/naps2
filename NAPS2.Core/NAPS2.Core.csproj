@@ -519,6 +519,7 @@
     <Compile Include="WinForms\ToolStripDoubleButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WinForms\WinFormsExportHelper.cs" />
     <Compile Include="WinForms\WinFormsOperationProgress.cs" />
     <Compile Include="WinForms\WinFormsOverwritePrompt.cs">
       <SubType>Code</SubType>
