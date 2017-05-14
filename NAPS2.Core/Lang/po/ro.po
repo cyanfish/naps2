@@ -84,9 +84,9 @@ msgstr ""
 msgid "Advanced Profile Settings"
 msgstr ""
 
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -137,8 +137,9 @@ msgid "Alternate Interleave"
 msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
+#, fuzzy
 msgid "An error occurred when trying to auto save"
-msgstr ""
+msgstr "A aparut o eroare in timpul salvării fisierului"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
@@ -164,8 +165,8 @@ msgstr ""
 msgid "Apply brightness/contrast after scan"
 msgstr ""
 
-#: FContrast.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FContrast.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBrightness.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
@@ -176,8 +177,9 @@ msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "Sigur doriți să ștergeți {0} element(e)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
+#, fuzzy
 msgid "Are you sure you want to delete "{0}"?"
-msgstr ""
+msgstr "Sigur doriți să ștergeți {0} element(e)?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -221,8 +223,9 @@ msgid "Auto-incrementing number (3 digits)"
 msgstr "Incrementează automat numarul (trei cifre)"
 
 #: FPlaceholders.resx$label10.Text$Message
+#, fuzzy
 msgid "Auto-incrementing number (4 digits)"
-msgstr ""
+msgstr "Incrementează automat numatul (doua cifre)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
@@ -277,25 +280,25 @@ msgid "Brightness"
 msgstr "Luminozitate"
 
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
-#: FPlaceholders.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
+#: FPlaceholders.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
-#: FImageSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
 #: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
-#: FDownloadProgress.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
-#: FContrast.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FRotate.resx$btnCancel.Text$Message
+#: FContrast.resx$btnCancel.Text$Message
 #: FBrightness.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Renunță"
@@ -354,20 +357,8 @@ msgid "Copying"
 msgstr ""
 
 #: FAbout.resx$labelCopyright.Text$Message
-msgid "Copyright © 2009 Pavel Sorejs"
-msgstr "Copyright © 2009 Pavel Sorejs"
-
-#: FAbout.resx__1$labelCopyright.Text$Message
-msgid "Copyright © 2012 Michael Adams"
-msgstr "Copyright © 2012 Michael Adams"
-
-#: FAbout.resx__3$labelCopyright.Text$Message
-msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-msgstr "Copyright © 2012-2015 Ben Olden-Cooligan"
-
-#: FAbout.resx__2$labelCopyright.Text$Message
-msgid "Copyright © 2013 Peter De Leeuw"
-msgstr "Copyright © 2013 Peter De Leeuw"
+msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -378,6 +369,10 @@ msgstr ""
 #: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr "Decupează"
+
+#: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
+msgid "Crop to page size"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -406,22 +401,44 @@ msgstr ""
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
+#, fuzzy
 msgid "Default File Path"
-msgstr ""
+msgstr "Nume Fișier Implicit"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
 msgstr "Intercalare"
 
-#: FRecover.resx$btnDelete.Text$Message
+#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
+msgid "Delay between scans (WIA)"
+msgstr ""
+
 #: FProfiles.resx$btnDelete.Text$Message
+#: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Șterge"
+
+#: FDesktop.resx$tsDeskew.Text$Message
+#: FViewer.resx$tsDeskew.Text$Message
+msgid "Deskew"
+msgstr ""
+
+#: MiscResources.resx$AutoDeskewProgress$Message
+msgid "Deskew Progress"
+msgstr ""
+
+#: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
+msgid "Deskew scanned pages"
+msgstr ""
+
+#: MiscResources.resx$AutoDeskewing$Message
+msgid "Deskewing"
+msgstr ""
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -547,10 +564,6 @@ msgstr ""
 "Pentru o calitate ridicata JPEG (80+), utilizați profilul Calitate Maxima "
 "pentru rezultate mai bune"
 
-#: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
-msgid "Force matching page size"
-msgstr ""
-
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
 msgstr "Fișier GIF (*.gif)"
@@ -633,8 +646,9 @@ msgid "Installation failed"
 msgstr "Instalarea a eșuat"
 
 #: FDesktop.resx$tsInterleave.Text$Message
+#, fuzzy
 msgid "Interleave"
-msgstr ""
+msgstr "Intercalare"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -779,21 +793,21 @@ msgstr "Configurează OCR"
 msgid "OCR language"
 msgstr "Limba OCR"
 
-#: FAdvancedScanSettings.resx$btnOK.Text$Message
-#: FEditProfile.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FEmailSettings.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FEmailSettings.resx$btnOK.Text$Message
+#: FEditProfile.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FError.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FContrast.resx$btnOK.Text$Message
-#: FRotate.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
+#: FRotate.resx$btnOK.Text$Message
+#: FContrast.resx$btnOK.Text$Message
 #: FBrightness.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
@@ -872,15 +886,19 @@ msgstr "Parolă"
 msgid "Paste"
 msgstr ""
 
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
 #: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Înlocuitor"
+
+#: FAdvancedScanSettings.resx$groupBox4.Text$Message
+msgid "Post-processing"
+msgstr ""
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
@@ -912,6 +930,10 @@ msgstr "Configurări profil"
 #: FProfiles.resx$$this.Text$Message
 msgid "Profiles"
 msgstr "Profiluri"
+
+#: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
+msgid "Prompt for file path"
+msgstr ""
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -955,20 +977,24 @@ msgstr "Resetează Imaginea"
 msgid "Resolution"
 msgstr "Rezoluție"
 
-#: FImageSettings.resx$btnRestoreDefaults.Text$Message
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FEmailSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Restaurare valori implicite"
+
+#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
+msgid "Retry on failure (WIA)"
+msgstr ""
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr "Inversează"
 
-#: FCrop.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
 #: FContrast.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
 #: FBrightness.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "Revenire"
@@ -993,6 +1019,10 @@ msgstr "Rotește la stânga"
 msgid "Rotate Right"
 msgstr "Rotește la dreapta"
 
+#: FViewer.resx$tsSaveImage.Text$Message
+msgid "Save Image"
+msgstr ""
+
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
 msgstr "Salvează imaginile"
@@ -1002,6 +1032,7 @@ msgid "Save Images Progress"
 msgstr ""
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
+#: FViewer.resx$tsSavePDF.Text$Message
 msgid "Save PDF"
 msgstr "Salvează PDF"
 
@@ -1083,9 +1114,9 @@ msgstr "Selectați un profil înainte de a apăsa Scanare"
 msgid "Select one or more languages"
 msgstr "Alegeți una sau mai multe limbi"
 
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
-#: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1116,6 +1147,10 @@ msgstr ""
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
+msgstr ""
+
+#: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
+msgid "Stretch to page size"
 msgstr ""
 
 #: FPdfSettings.resx$label5.Text$Message
@@ -1181,8 +1216,9 @@ msgid "The selected scanner does not support using duplex. If your scanner is su
 msgstr ""
 
 #: MiscResources.resx$DeviceBusy$Message
+#, fuzzy
 msgid "The selected scanner is busy"
-msgstr ""
+msgstr "Scanerul selectat este deconectat"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
@@ -1225,8 +1261,9 @@ msgid "Use predefined settings"
 msgstr "Folosește configurările prestabilite"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
+#, fuzzy
 msgid "User Password"
-msgstr ""
+msgstr "Parolă Autor"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
@@ -1353,6 +1390,18 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} din {1}"
+
+#~ msgid "Copyright © 2009 Pavel Sorejs"
+#~ msgstr "Copyright © 2009 Pavel Sorejs"
+
+#~ msgid "Copyright © 2012 Michael Adams"
+#~ msgstr "Copyright © 2012 Michael Adams"
+
+#~ msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
+#~ msgstr "Copyright © 2012-2015 Ben Olden-Cooligan"
+
+#~ msgid "Copyright © 2013 Peter De Leeuw"
+#~ msgstr "Copyright © 2013 Peter De Leeuw"
 
 #~ msgid "Default File Name"
 #~ msgstr "Nume Fișier Implicit"
