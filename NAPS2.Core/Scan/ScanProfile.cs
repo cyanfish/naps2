@@ -128,6 +128,8 @@ namespace NAPS2.Scan
 
         public string FilePath { get; set; }
 
+        public bool PromptForFilePath { get; set; }
+
         public bool ClearImagesAfterSaving { get; set; }
 
         public SaveSeparator Separator { get; set; }

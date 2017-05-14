@@ -46,6 +46,7 @@ namespace NAPS2.WinForms
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.lblFilePath = new System.Windows.Forms.Label();
             this.cbClearAfterSave = new System.Windows.Forms.CheckBox();
+            this.cbPromptForFilePath = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnOK
@@ -119,11 +120,18 @@ namespace NAPS2.WinForms
             this.cbClearAfterSave.Name = "cbClearAfterSave";
             this.cbClearAfterSave.UseVisualStyleBackColor = true;
             // 
+            // cbPromptForFilePath
+            // 
+            resources.ApplyResources(this.cbPromptForFilePath, "cbPromptForFilePath");
+            this.cbPromptForFilePath.Name = "cbPromptForFilePath";
+            this.cbPromptForFilePath.UseVisualStyleBackColor = true;
+            // 
             // FAutoSaveSettings
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbPromptForFilePath);
             this.Controls.Add(this.cbClearAfterSave);
             this.Controls.Add(this.btnChooseFolder);
             this.Controls.Add(this.linkPlaceholders);
@@ -157,5 +165,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.TextBox txtFilePath;
         private System.Windows.Forms.Label lblFilePath;
         private System.Windows.Forms.CheckBox cbClearAfterSave;
+        private System.Windows.Forms.CheckBox cbPromptForFilePath;
     }
 }

@@ -25,6 +25,7 @@ namespace NAPS2.WinForms
             if (ScanProfile.AutoSaveSettings != null)
             {
                 txtFilePath.Text = ScanProfile.AutoSaveSettings.FilePath;
+                cbPromptForFilePath.Checked = ScanProfile.AutoSaveSettings.PromptForFilePath;
                 cbClearAfterSave.Checked = ScanProfile.AutoSaveSettings.ClearImagesAfterSaving;
                 if (ScanProfile.AutoSaveSettings.Separator == SaveSeparator.FilePerScan)
                 {
@@ -60,6 +61,7 @@ namespace NAPS2.WinForms
             ScanProfile.AutoSaveSettings = new AutoSaveSettings
             {
                 FilePath = txtFilePath.Text,
+                PromptForFilePath = cbPromptForFilePath.Checked,
                 ClearImagesAfterSaving = cbClearAfterSave.Checked,
                 Separator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
                           : rdSeparateByPatchT.Checked ? SaveSeparator.PatchT
@@ -69,7 +71,7 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtFilePath.Text))
+            if (string.IsNullOrWhiteSpace(txtFilePath.Text) && !cbPromptForFilePath.Checked)
             {
                 txtFilePath.Focus();
                 return;

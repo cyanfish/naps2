@@ -23,8 +23,9 @@ namespace NAPS2.ImportExport
         private readonly IErrorOutput errorOutput;
         private readonly AppConfigManager appConfigManager;
         private readonly FileNamePlaceholders fileNamePlaceholders;
+        private readonly DialogHelper dialogHelper;
 
-        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders)
+        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper)
         {
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
@@ -33,6 +34,7 @@ namespace NAPS2.ImportExport
             this.errorOutput = errorOutput;
             this.appConfigManager = appConfigManager;
             this.fileNamePlaceholders = fileNamePlaceholders;
+            this.dialogHelper = dialogHelper;
         }
 
         public bool Save(AutoSaveSettings settings, List<ScannedImage> images, ISaveNotify notify)
@@ -70,7 +72,7 @@ namespace NAPS2.ImportExport
                 return false;
             }
         }
-
+        
         private bool SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<ScannedImage> images, ISaveNotify notify, ref string firstFileSaved)
         {
             if (images.Count == 0)
@@ -78,7 +80,14 @@ namespace NAPS2.ImportExport
                 return true;
             }
             var form = formFactory.Create<FProgress>();
-            var subPath = fileNamePlaceholders.SubstitutePlaceholders(settings.FilePath, now, true, i);
+            string subPath = fileNamePlaceholders.SubstitutePlaceholders(settings.FilePath, now, true, i);
+            if (settings.PromptForFilePath)
+            {
+                if (dialogHelper.PromptToSavePdfOrImage(subPath, out string newPath))
+                {
+                    subPath = fileNamePlaceholders.SubstitutePlaceholders(newPath, now, true, i);
+                }
+            }
             var extension = Path.GetExtension(subPath);
             if (extension != null && extension.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase))
             {
