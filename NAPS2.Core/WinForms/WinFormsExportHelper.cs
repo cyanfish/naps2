@@ -23,13 +23,13 @@ namespace NAPS2.WinForms
         private readonly DialogHelper dialogHelper;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ChangeTracker changeTracker;
-        private readonly ISaveNotify notify;
+        private readonly NotificationManager notify;
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly IUserConfigManager userConfigManager;
         private readonly IEmailer emailer;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, ISaveNotify notify, IOperationFactory operationFactory, IFormFactory formFactory, IUserConfigManager userConfigManager, IEmailer emailer)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, NotificationManager notify, IOperationFactory operationFactory, IFormFactory formFactory, IUserConfigManager userConfigManager, IEmailer emailer)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
