@@ -53,7 +53,7 @@ namespace NAPS2.Util
         int height;
         int stride;
         byte[] bitmapBytes;
-        bool bw;
+        PixelFormat pf;
         // The range of angles to search for lines
         readonly double cAlphaStart = -20;
         readonly double cAlphaStep = 0.2;
@@ -134,19 +134,8 @@ namespace NAPS2.Util
         {
             width = bitmap.Width;
             height = bitmap.Height;
-            if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
-            {
-                bw = true;
-                LoadBitmap(bitmap);
-            }
-            else if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
-            {
-                LoadBitmap(bitmap);
-            }
-            else
-            {
-                throw new ArgumentException("Unsupported pixel format");
-            }
+            pf = bitmap.PixelFormat;
+            LoadBitmap(bitmap);
         }
 
         private void LoadBitmap(Bitmap bitmap)
@@ -205,19 +194,31 @@ namespace NAPS2.Util
         }
         private bool IsBlack(int x, int y)
         {
-            if (bw)
+            if (pf == PixelFormat.Format1bppIndexed)
             {
                 var b = bitmapBytes[y * stride + (x >> 3)];
                 var mask = (byte)(0x80 >> (x & 0x7));
                 return (b & mask) == 0;
             }
-            else
+            else if (pf == PixelFormat.Format24bppRgb)
             {
                 int r = bitmapBytes[stride * y + x * 3];
                 int g = bitmapBytes[stride * y + x * 3 + 1];
                 int b = bitmapBytes[stride * y + x * 3 + 2];
                 double luminance = (r * 0.299) + (g * 0.587) + (b * 0.114);
                 return luminance < 140;
+            }
+            else if (pf == PixelFormat.Format32bppArgb)
+            {
+                int r = bitmapBytes[stride * y + x * 4 + 1];
+                int g = bitmapBytes[stride * y + x * 4 + 2];
+                int b = bitmapBytes[stride * y + x * 4 + 3];
+                double luminance = (r * 0.299) + (g * 0.587) + (b * 0.114);
+                return luminance < 140;
+            }
+            else
+            {
+                throw new ArgumentException("Unsupported pixel format");
             }
         }
         private void Init()
