@@ -99,7 +99,7 @@ namespace NAPS2.ImportExport.Pdf
             cancel = true;
         }
 
-        public void WaitUntilFinished()
+        public override void WaitUntilFinished()
         {
             thread.Join();
         }

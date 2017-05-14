@@ -95,6 +95,7 @@
     <Compile Include="Automation\AutomatedScanningOptions.cs" />
     <Compile Include="Automation\CommandLineOptions.cs" />
     <Compile Include="Automation\ConsoleErrorOutput.cs" />
+    <Compile Include="Automation\ConsoleOperationProgress.cs" />
     <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Config\KeyboardShortcuts.cs" />
@@ -123,6 +124,7 @@
     </Compile>
     <Compile Include="Ocr\PlatformSupport.cs" />
     <Compile Include="Scan\Images\AutoDeskew.cs" />
+    <Compile Include="Operation\IOperationProgress.cs" />
     <Compile Include="Util\DownloadFormat.cs" />
     <Compile Include="Util\DownloadInfo.cs" />
     <Compile Include="Ocr\Language.cs" />
@@ -517,6 +519,7 @@
     <Compile Include="WinForms\ToolStripDoubleButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WinForms\WinFormsOperationProgress.cs" />
     <Compile Include="WinForms\WinFormsOverwritePrompt.cs">
       <SubType>Code</SubType>
     </Compile>

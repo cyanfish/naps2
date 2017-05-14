@@ -84,7 +84,7 @@ namespace NAPS2.ImportExport
             Status.Success = true;
         }
 
-        public void WaitUntilFinished()
+        public override void WaitUntilFinished()
         {
             thread.Join();
         }

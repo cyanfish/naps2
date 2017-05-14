@@ -74,7 +74,7 @@ namespace NAPS2.Scan.Images
             cancel = true;
         }
 
-        public void WaitUntilFinished()
+        public override void WaitUntilFinished()
         {
             thread.Join();
         }

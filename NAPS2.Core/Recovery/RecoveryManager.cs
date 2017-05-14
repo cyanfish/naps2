@@ -49,6 +49,7 @@ namespace NAPS2.Recovery
             private int imageCount;
             private DateTime scannedDateTime;
             private bool cancel;
+            private Thread thread;
 
             public RecoveryOperation(IFormFactory formFactory, ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer)
             {
@@ -87,7 +88,7 @@ namespace NAPS2.Recovery
                     switch (PromptToRecover())
                     {
                         case DialogResult.Yes: // Recover
-                            threadFactory.StartThread(() =>
+                            thread = threadFactory.StartThread(() =>
                             {
                                 try
                                 {
@@ -210,6 +211,13 @@ namespace NAPS2.Recovery
             public override void Cancel()
             {
                 cancel = true;
+            }
+
+            public override void WaitUntilFinished()
+            {
+                if (thread != null) {
+                    thread.Join();
+                }
             }
         }
     }

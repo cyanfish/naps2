@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia;
 using NAPS2.Util;
@@ -17,6 +18,7 @@ namespace NAPS2.DI.Modules
             Bind<IPdfPasswordProvider>().To<ConsolePdfPasswordProvider>();
             Bind<IErrorOutput>().To<ConsoleErrorOutput>();
             Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
+            Bind<IOperationProgress>().To<ConsoleOperationProgress>();
             Bind<ThumbnailRenderer>().To<NullThumbnailRenderer>();
         }
     }

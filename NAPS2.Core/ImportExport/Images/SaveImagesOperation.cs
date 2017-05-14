@@ -178,7 +178,12 @@ namespace NAPS2.ImportExport.Images
             cancel = true;
         }
 
-        public void WaitUntilFinished(bool throwOnError = true)
+        public override void WaitUntilFinished()
+        {
+            WaitUntilFinished(true);
+        }
+
+        public void WaitUntilFinished(bool throwOnError)
         {
             thread.Join();
             if (throwOnError && LastError != null)

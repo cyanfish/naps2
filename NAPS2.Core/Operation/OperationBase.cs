@@ -14,6 +14,8 @@ namespace NAPS2.Operation
 
         public abstract void Cancel();
 
+        public abstract void WaitUntilFinished();
+
         public event EventHandler StatusChanged;
 
         public event EventHandler Finished;
