@@ -39,8 +39,10 @@ namespace NAPS2.ImportExport
             {
                 return null;
             }
+            // Start with environment variables
+            string result = Environment.ExpandEnvironmentVariables(fileNameWithPath);
             // Most placeholders don't need a special case
-            string result = Placeholders.Aggregate(fileNameWithPath, (current, ph) => current.Replace(ph.Key, ph.Value(dateTime)));
+            result = Placeholders.Aggregate(result, (current, ph) => current.Replace(ph.Key, ph.Value(dateTime)));
             // One does, however
             var match = NumberPlaceholderPattern.Match(result);
             if (match.Success)
