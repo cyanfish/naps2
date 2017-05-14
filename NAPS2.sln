@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2", "NAPS2\NAPS2.csproj", "{EAC4A133-93BE-4400-BFA9-CEB1615693C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Tests", "NAPS2.Tests\NAPS2.Tests.csproj", "{11FC4BE1-882D-4ABA-8781-2F3F77DF9453}"
@@ -254,6 +256,7 @@ Global
 		{4D349529-149B-498B-8A55-373E6A67E1F0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{4D349529-149B-498B-8A55-373E6A67E1F0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{4D349529-149B-498B-8A55-373E6A67E1F0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4D349529-149B-498B-8A55-373E6A67E1F0}.Debug|x86.Build.0 = Debug|Any CPU
 		{4D349529-149B-498B-8A55-373E6A67E1F0}.InstallerEXE|Any CPU.ActiveCfg = Release|Any CPU
 		{4D349529-149B-498B-8A55-373E6A67E1F0}.InstallerEXE|Any CPU.Build.0 = Release|Any CPU
 		{4D349529-149B-498B-8A55-373E6A67E1F0}.InstallerEXE|Mixed Platforms.ActiveCfg = Release|Any CPU
