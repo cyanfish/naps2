@@ -41,27 +41,39 @@ namespace NAPS2.Scan.Images
 
             thread = threadFactory.StartThread(() =>
             {
-                foreach (var img in images)
+                Pipeline.For(images).StepParallel(img =>
                 {
+                    if (cancel)
+                    {
+                        return null;
+                    }
                     Bitmap bitmap = img.GetImage();
                     try
                     {
+                        if (cancel)
+                        {
+                            return null;
+                        }
                         var transform = RotationTransform.Auto(bitmap);
                         if (cancel)
                         {
-                            break;
+                            return null;
                         }
-                        img.AddTransform(transform);
                         bitmap = transform.Perform(bitmap);
                         img.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
-                        Status.CurrentProgress++;
-                        InvokeStatusChanged();
+                        return Tuple.Create(img, transform);
                     }
                     finally
                     {
                         bitmap.Dispose();
                     }
-                }
+                }).Step((img, transform) =>
+                {
+                    img.AddTransform(transform);
+                    Status.CurrentProgress++;
+                    InvokeStatusChanged();
+                    return img;
+                }).Run();
                 Status.Success = !cancel;
                 InvokeFinished();
             });
