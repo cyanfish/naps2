@@ -142,13 +142,13 @@
         <value>Elimina</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>Il dispositivo selezionato non è stato trovato.</value>
+        <value>Lo scanner selezionato non è stato trovato.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>Il dispositivo selezionato non è in linea.</value>
+        <value>Lo scanner selezionato è disconnesso.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>Non puoi salvare i files in questo percorso.</value>
+        <value>Non hai i permessi per salvare i files in questo percorso.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Errore</value>
@@ -175,7 +175,7 @@
         <value>PNG File (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>File TIFF (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
         <value>Nome mancante.</value>
@@ -217,10 +217,10 @@
         <value>Scarica</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>Scarica e Installa</value>
+        <value>Scarica e installa</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Vuoi che NAPS2 controlli automaticamente gli aggiornamenti?</value>
+        <value>Vuoi che NAPS2 controlli automaticamente la disponibilità di aggiornamenti?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
         <value>Non ora</value>
@@ -235,10 +235,10 @@
         <value>Installazione completata. Vuoi riavviare NAPS2 ora?</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
-        <value>Installazione non riuscita.</value>
+        <value>Installazione fallita.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Installazione non riuscita</value>
+        <value>Installazione fallita</value>
     </data>
     <data name="AllCount" xml:space="preserve">
         <value>Tutti ({0})</value>
@@ -259,7 +259,7 @@
         <value>Il file '{0}' non può essere importato.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>Il file '{0}' non può essere importato. Solo i PDF generati da NAPS2 possono essere importati.</value>
+        <value>Il file '{0}' non può essere importato. Solo i files PDF generati da NAPS2 possono essere importati.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
         <value>Errore nel download</value>
@@ -280,7 +280,7 @@
         <value>Resetta Immagine</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>Ci sono modifiche non salvate. Sicuro di voler uscire ed eliminare tali modifiche?</value>
+        <value>Ci sono modifiche non salvate. Sei sicuro di voler uscire ed abbandonare tali modifiche?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
         <value>Modifiche non salvate</value>
@@ -289,13 +289,13 @@
         <value>Digitalizzazione pagina {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo scanner ha un alimentatore, prova un driver differente.</value>
+        <value>Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo scanner ha un alimentatore, prova ad usare un driver differente.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
         <value>Non ci sono fogli nel caricatore.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>Non hai i parmessi per copiare il contenuto del file '{0}'.</value>
+        <value>Non hai i permessi per copiare il contenuto dal file '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
         <value>Si è verificato un errore durante il salvataggio del file.</value>
@@ -325,7 +325,7 @@
         <value>Scansione pagina {0} (scansione {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Attesa per la scansione {0} ...</value>
+        <value>In attesa per la scansione {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>Annulla</value>
@@ -337,7 +337,7 @@
         <value>Salvataggio risultati della serie...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner dispone di supporto duplex, provare un driver differente.</value>
+        <value>Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner ha un supporto duplex, prova ad usare un driver differente.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
@@ -385,7 +385,7 @@
         <value>Files immagini</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>Lo scanner selezionato non è in linea.</value>
+        <value>Lo scanner selezionato è occupato.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>Coperchio dello scanner aperto.</value>
@@ -394,7 +394,7 @@
         <value>Carta inceppata nello scanner.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>Riscaldamento scanner.</value>
+        <value>Surriscaldamento scanner.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
         <value>E' disponibile un aggiornamento per l'OCR.</value>
@@ -415,6 +415,12 @@
         <value>Are you sure you want to delete "{0}"?</value>
     </data>
     <data name="FileInUse" xml:space="preserve">
-        <value>The file could not be overwritten because it is currently in use.</value>
+        <value>Il file non può essere sovrascritto perchè è attualmente in uso.</value>
+    </data>
+    <data name="AutoDeskewing" xml:space="preserve">
+        <value>Deskewing...</value>
+    </data>
+    <data name="AutoDeskewProgress" xml:space="preserve">
+        <value>Deskew Progress</value>
     </data>
 </root>

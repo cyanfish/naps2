@@ -156,7 +156,7 @@
         <value>1</value>
     </data>
     <data name="btnInstall.Text" xml:space="preserve">
-        <value>Scarica e &amp;Installa</value>
+        <value>Scarica e installa</value>
     </data>
     <data name="&gt;&gt;btnInstall.Name" xml:space="preserve">
         <value>btnInstall</value>

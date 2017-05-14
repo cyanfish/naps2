@@ -658,7 +658,7 @@
         <value>21</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Auto-incrementing number (4 digits)</value>
+        <value>Incrementează automat numatul (doua cifre)</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>

@@ -417,4 +417,10 @@
     <data name="FileInUse" xml:space="preserve">
         <value>不能覆盖正在使用的文件.</value>
     </data>
+    <data name="AutoDeskewing" xml:space="preserve">
+        <value>Deskewing...</value>
+    </data>
+    <data name="AutoDeskewProgress" xml:space="preserve">
+        <value>Deskew Progress</value>
+    </data>
 </root>

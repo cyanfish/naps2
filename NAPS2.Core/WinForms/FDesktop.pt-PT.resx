@@ -213,56 +213,8 @@
     <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>233, 17</value>
     </metadata>
-    <data name="ctxView.Font" type="System.Drawing.Font, System.Drawing">
-        <value>Segoe UI, 9pt, style=Bold</value>
-    </data>
-    <data name="ctxView.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="ctxView.Text" xml:space="preserve">
-        <value>View</value>
-    </data>
-    <data name="ctxSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>161, 6</value>
-    </data>
-    <data name="ctxSelectAll.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-        <value>Ctrl+A</value>
-    </data>
-    <data name="ctxSelectAll.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="ctxSelectAll.Text" xml:space="preserve">
-        <value>Select All</value>
-    </data>
-    <data name="ctxCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-        <value>Ctrl+C</value>
-    </data>
-    <data name="ctxCopy.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="ctxCopy.Text" xml:space="preserve">
-        <value>Copiar</value>
-    </data>
-    <data name="ctxPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-        <value>Ctrl+V</value>
-    </data>
-    <data name="ctxPaste.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
-    </data>
-    <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-        <value>161, 6</value>
-    </data>
-    <data name="ctxDelete.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="ctxDelete.Text" xml:space="preserve">
-        <value>Eliminar</value>
-    </data>
     <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-        <value>165, 148</value>
+        <value>165, 126</value>
     </data>
     <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
         <value>contextMenuStrip</value>
@@ -286,7 +238,7 @@
         <value>thumbnailList1</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=5.0.3.40975, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=5.3.3.33840, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -350,24 +302,6 @@
     </metadata>
     <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
         <value>None</value>
-    </data>
-    <data name="tsNewProfile.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsNewProfile.Size" type="System.Drawing.Size, System.Drawing">
-        <value>135, 22</value>
-    </data>
-    <data name="tsNewProfile.Text" xml:space="preserve">
-        <value>&amp;Novo Perfil</value>
-    </data>
-    <data name="tsBatchScan.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsBatchScan.Size" type="System.Drawing.Size, System.Drawing">
-        <value>135, 22</value>
-    </data>
-    <data name="tsBatchScan.Text" xml:space="preserve">
-        <value>&amp;Batch Scan</value>
     </data>
     <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -456,27 +390,6 @@
     <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 54</value>
     </data>
-    <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
-        <value>143, 22</value>
-    </data>
-    <data name="tsSavePDFAll.Text" xml:space="preserve">
-        <value>Todos</value>
-    </data>
-    <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-        <value>143, 22</value>
-    </data>
-    <data name="tsSavePDFSelected.Text" xml:space="preserve">
-        <value>&amp;Selected ({0})</value>
-    </data>
-    <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-        <value>140, 6</value>
-    </data>
-    <data name="tsPDFSettings.Size" type="System.Drawing.Size, System.Drawing">
-        <value>143, 22</value>
-    </data>
-    <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>Definições &amp;PDF</value>
-    </data>
     <data name="tsdSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
@@ -489,27 +402,6 @@
     <data name="tsdSavePDF.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
     </data>
-    <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
-        <value>152, 22</value>
-    </data>
-    <data name="tsSaveImagesAll.Text" xml:space="preserve">
-        <value>Todos</value>
-    </data>
-    <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
-        <value>152, 22</value>
-    </data>
-    <data name="tsSaveImagesSelected.Text" xml:space="preserve">
-        <value>&amp;Selected ({0})</value>
-    </data>
-    <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-        <value>149, 6</value>
-    </data>
-    <data name="tsImageSettings.Size" type="System.Drawing.Size, System.Drawing">
-        <value>152, 22</value>
-    </data>
-    <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>Definições da &amp;Imagem</value>
-    </data>
     <data name="tsdSaveImages.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
@@ -521,33 +413,6 @@
     </data>
     <data name="tsdSaveImages.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
-    </data>
-    <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
-        <value>148, 22</value>
-    </data>
-    <data name="tsEmailPDFAll.Text" xml:space="preserve">
-        <value>Todos</value>
-    </data>
-    <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
-        <value>148, 22</value>
-    </data>
-    <data name="tsEmailPDFSelected.Text" xml:space="preserve">
-        <value>&amp;Selected ({0})</value>
-    </data>
-    <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-        <value>145, 6</value>
-    </data>
-    <data name="tsEmailSettings.Size" type="System.Drawing.Size, System.Drawing">
-        <value>148, 22</value>
-    </data>
-    <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>Definições de &amp;Email</value>
-    </data>
-    <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
-        <value>148, 22</value>
-    </data>
-    <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>Definições &amp;PDF</value>
     </data>
     <data name="tsdEmailPDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -575,51 +440,6 @@
     </data>
     <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 54</value>
-    </data>
-    <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
-    </data>
-    <data name="tsView.Text" xml:space="preserve">
-        <value>&amp;View</value>
-    </data>
-    <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-        <value>126, 6</value>
-    </data>
-    <data name="tsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsCrop.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
-    </data>
-    <data name="tsCrop.Text" xml:space="preserve">
-        <value>Recortar</value>
-    </data>
-    <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsBrightness.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
-    </data>
-    <data name="tsBrightness.Text" xml:space="preserve">
-        <value>&amp;Brilho</value>
-    </data>
-    <data name="tsContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsContrast.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
-    </data>
-    <data name="tsContrast.Text" xml:space="preserve">
-        <value>&amp;Contraste</value>
-    </data>
-    <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-        <value>126, 6</value>
-    </data>
-    <data name="tsReset.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
-    </data>
-    <data name="tsReset.Text" xml:space="preserve">
-        <value>&amp;Reset</value>
     </data>
     <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -660,6 +480,15 @@
     <data name="tsFlip.Text" xml:space="preserve">
         <value>Rodar</value>
     </data>
+    <data name="tsDeskew.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="tsDeskew.Text" xml:space="preserve">
+        <value>&amp;Deskew</value>
+    </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
@@ -686,54 +515,6 @@
     </data>
     <data name="tsMove.TextSecond" xml:space="preserve">
         <value>Mover para baixo</value>
-    </data>
-    <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
-        <value>190, 22</value>
-    </data>
-    <data name="tsInterleave.Text" xml:space="preserve">
-        <value>&amp;Intercalamento</value>
-    </data>
-    <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
-        <value>190, 22</value>
-    </data>
-    <data name="tsDeinterleave.Text" xml:space="preserve">
-        <value>&amp;Desintercalar</value>
-    </data>
-    <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-        <value>187, 6</value>
-    </data>
-    <data name="tsAltInterleave.Size" type="System.Drawing.Size, System.Drawing">
-        <value>190, 22</value>
-    </data>
-    <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>&amp;Alternate Interleave</value>
-    </data>
-    <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
-        <value>190, 22</value>
-    </data>
-    <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>A&amp;lternate Deinterleave</value>
-    </data>
-    <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>187, 6</value>
-    </data>
-    <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
-        <value>143, 22</value>
-    </data>
-    <data name="tsReverseAll.Text" xml:space="preserve">
-        <value>Todos</value>
-    </data>
-    <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
-        <value>143, 22</value>
-    </data>
-    <data name="tsReverseSelected.Text" xml:space="preserve">
-        <value>&amp;Selected ({0})</value>
-    </data>
-    <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
-        <value>190, 22</value>
-    </data>
-    <data name="tsReverse.Text" xml:space="preserve">
-        <value>&amp;Reverse</value>
     </data>
     <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -844,7 +625,7 @@
         <value>3, 0</value>
     </data>
     <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
-        <value>1184, 54</value>
+        <value>1201, 54</value>
     </data>
     <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
         <value>12</value>
@@ -887,6 +668,234 @@
     </data>
     <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
         <value>1</value>
+    </data>
+    <data name="ctxView.Font" type="System.Drawing.Font, System.Drawing">
+        <value>Segoe UI, 9pt, style=Bold</value>
+    </data>
+    <data name="ctxView.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="ctxView.Text" xml:space="preserve">
+        <value>View</value>
+    </data>
+    <data name="ctxSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>161, 6</value>
+    </data>
+    <data name="ctxSelectAll.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+        <value>Ctrl+A</value>
+    </data>
+    <data name="ctxSelectAll.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="ctxSelectAll.Text" xml:space="preserve">
+        <value>Select All</value>
+    </data>
+    <data name="ctxCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+        <value>Ctrl+C</value>
+    </data>
+    <data name="ctxCopy.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="ctxCopy.Text" xml:space="preserve">
+        <value>Copiar</value>
+    </data>
+    <data name="ctxPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+        <value>Ctrl+V</value>
+    </data>
+    <data name="ctxPaste.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="ctxPaste.Text" xml:space="preserve">
+        <value>Paste</value>
+    </data>
+    <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>161, 6</value>
+    </data>
+    <data name="ctxDelete.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="ctxDelete.Text" xml:space="preserve">
+        <value>Eliminar</value>
+    </data>
+    <data name="tsNewProfile.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsNewProfile.Size" type="System.Drawing.Size, System.Drawing">
+        <value>135, 22</value>
+    </data>
+    <data name="tsNewProfile.Text" xml:space="preserve">
+        <value>&amp;Novo Perfil</value>
+    </data>
+    <data name="tsBatchScan.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsBatchScan.Size" type="System.Drawing.Size, System.Drawing">
+        <value>135, 22</value>
+    </data>
+    <data name="tsBatchScan.Text" xml:space="preserve">
+        <value>&amp;Batch Scan</value>
+    </data>
+    <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
+        <value>143, 22</value>
+    </data>
+    <data name="tsSavePDFAll.Text" xml:space="preserve">
+        <value>Todos</value>
+    </data>
+    <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
+        <value>143, 22</value>
+    </data>
+    <data name="tsSavePDFSelected.Text" xml:space="preserve">
+        <value>&amp;Selected ({0})</value>
+    </data>
+    <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+        <value>140, 6</value>
+    </data>
+    <data name="tsPDFSettings.Size" type="System.Drawing.Size, System.Drawing">
+        <value>143, 22</value>
+    </data>
+    <data name="tsPDFSettings.Text" xml:space="preserve">
+        <value>Definições &amp;PDF</value>
+    </data>
+    <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
+        <value>152, 22</value>
+    </data>
+    <data name="tsSaveImagesAll.Text" xml:space="preserve">
+        <value>Todos</value>
+    </data>
+    <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
+        <value>152, 22</value>
+    </data>
+    <data name="tsSaveImagesSelected.Text" xml:space="preserve">
+        <value>&amp;Selected ({0})</value>
+    </data>
+    <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+        <value>149, 6</value>
+    </data>
+    <data name="tsImageSettings.Size" type="System.Drawing.Size, System.Drawing">
+        <value>152, 22</value>
+    </data>
+    <data name="tsImageSettings.Text" xml:space="preserve">
+        <value>Definições da &amp;Imagem</value>
+    </data>
+    <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
+        <value>148, 22</value>
+    </data>
+    <data name="tsEmailPDFAll.Text" xml:space="preserve">
+        <value>Todos</value>
+    </data>
+    <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
+        <value>148, 22</value>
+    </data>
+    <data name="tsEmailPDFSelected.Text" xml:space="preserve">
+        <value>&amp;Selected ({0})</value>
+    </data>
+    <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+        <value>145, 6</value>
+    </data>
+    <data name="tsEmailSettings.Size" type="System.Drawing.Size, System.Drawing">
+        <value>148, 22</value>
+    </data>
+    <data name="tsEmailSettings.Text" xml:space="preserve">
+        <value>Definições de &amp;Email</value>
+    </data>
+    <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>148, 22</value>
+    </data>
+    <data name="tsPdfSettings2.Text" xml:space="preserve">
+        <value>Definições &amp;PDF</value>
+    </data>
+    <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
+        <value>129, 22</value>
+    </data>
+    <data name="tsView.Text" xml:space="preserve">
+        <value>&amp;View</value>
+    </data>
+    <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+        <value>126, 6</value>
+    </data>
+    <data name="tsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsCrop.Size" type="System.Drawing.Size, System.Drawing">
+        <value>129, 22</value>
+    </data>
+    <data name="tsCrop.Text" xml:space="preserve">
+        <value>Recortar</value>
+    </data>
+    <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsBrightness.Size" type="System.Drawing.Size, System.Drawing">
+        <value>129, 22</value>
+    </data>
+    <data name="tsBrightness.Text" xml:space="preserve">
+        <value>&amp;Brilho</value>
+    </data>
+    <data name="tsContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsContrast.Size" type="System.Drawing.Size, System.Drawing">
+        <value>129, 22</value>
+    </data>
+    <data name="tsContrast.Text" xml:space="preserve">
+        <value>&amp;Contraste</value>
+    </data>
+    <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+        <value>126, 6</value>
+    </data>
+    <data name="tsReset.Size" type="System.Drawing.Size, System.Drawing">
+        <value>129, 22</value>
+    </data>
+    <data name="tsReset.Text" xml:space="preserve">
+        <value>&amp;Reset</value>
+    </data>
+    <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
+        <value>190, 22</value>
+    </data>
+    <data name="tsInterleave.Text" xml:space="preserve">
+        <value>&amp;Intercalamento</value>
+    </data>
+    <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
+        <value>190, 22</value>
+    </data>
+    <data name="tsDeinterleave.Text" xml:space="preserve">
+        <value>&amp;Desintercalar</value>
+    </data>
+    <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+        <value>187, 6</value>
+    </data>
+    <data name="tsAltInterleave.Size" type="System.Drawing.Size, System.Drawing">
+        <value>190, 22</value>
+    </data>
+    <data name="tsAltInterleave.Text" xml:space="preserve">
+        <value>&amp;Alternate Interleave</value>
+    </data>
+    <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
+        <value>190, 22</value>
+    </data>
+    <data name="tsAltDeinterleave.Text" xml:space="preserve">
+        <value>A&amp;lternate Deinterleave</value>
+    </data>
+    <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>187, 6</value>
+    </data>
+    <data name="tsReverse.Size" type="System.Drawing.Size, System.Drawing">
+        <value>190, 22</value>
+    </data>
+    <data name="tsReverse.Text" xml:space="preserve">
+        <value>&amp;Reverse</value>
+    </data>
+    <data name="tsReverseAll.Size" type="System.Drawing.Size, System.Drawing">
+        <value>143, 22</value>
+    </data>
+    <data name="tsReverseAll.Text" xml:space="preserve">
+        <value>Todos</value>
+    </data>
+    <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
+        <value>143, 22</value>
+    </data>
+    <data name="tsReverseSelected.Text" xml:space="preserve">
+        <value>&amp;Selected ({0})</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
@@ -1187,6 +1196,12 @@
     <data name="&gt;&gt;tsFlip.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
+    <data name="&gt;&gt;tsDeskew.Name" xml:space="preserve">
+        <value>tsDeskew</value>
+    </data>
+    <data name="&gt;&gt;tsDeskew.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
     <data name="&gt;&gt;tsCustomRotation.Name" xml:space="preserve">
         <value>tsCustomRotation</value>
     </data>
@@ -1197,7 +1212,7 @@
         <value>tsMove</value>
     </data>
     <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=5.0.3.40975, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=5.3.3.33840, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
         <value>tsdReorder</value>
@@ -1299,6 +1314,6 @@
         <value>FDesktop</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.0.3.40975, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.3.3.33840, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

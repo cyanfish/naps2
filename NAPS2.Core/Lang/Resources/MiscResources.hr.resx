@@ -385,7 +385,7 @@
         <value>Image Files</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Odabrani skener nije uključen.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>The scanner's cover is open.</value>
@@ -416,5 +416,11 @@
     </data>
     <data name="FileInUse" xml:space="preserve">
         <value>The file could not be overwritten because it is currently in use.</value>
+    </data>
+    <data name="AutoDeskewing" xml:space="preserve">
+        <value>Deskewing...</value>
+    </data>
+    <data name="AutoDeskewProgress" xml:space="preserve">
+        <value>Deskew Progress</value>
     </data>
 </root>

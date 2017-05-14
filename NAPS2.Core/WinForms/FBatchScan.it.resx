@@ -183,7 +183,7 @@
         <value>3</value>
     </data>
     <data name="btnStart.Text" xml:space="preserve">
-        <value>Avvio</value>
+        <value>Avvia</value>
     </data>
     <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
         <value>btnStart</value>
@@ -235,7 +235,7 @@
         <value>2</value>
     </data>
     <data name="lblTimeBetweenScans.Text" xml:space="preserve">
-        <value>Tempo tra le scansioni (secondi):</value>
+        <value>Intervallo tra le scansioni (secondi):</value>
     </data>
     <data name="&gt;&gt;lblTimeBetweenScans.Name" xml:space="preserve">
         <value>lblTimeBetweenScans</value>
@@ -586,7 +586,7 @@
         <value>2</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T</value>
+        <value>Separa files tramite Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>

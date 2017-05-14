@@ -228,7 +228,7 @@
         <value>8</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>L'uso dell'OCR richiede che venga scaricata ogni lingua che vuoi usare.</value>
+        <value>L'uso dell'OCR richiede che venga scaricata ogni lingua che vuoi far riconoscere.</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>

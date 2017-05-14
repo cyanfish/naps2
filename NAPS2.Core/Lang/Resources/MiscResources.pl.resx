@@ -417,4 +417,10 @@
     <data name="FileInUse" xml:space="preserve">
         <value>Plik nie mógł zostać zastąpiony, ponieważ jest obecnie w użyciu.</value>
     </data>
+    <data name="AutoDeskewing" xml:space="preserve">
+        <value>Deskewing...</value>
+    </data>
+    <data name="AutoDeskewProgress" xml:space="preserve">
+        <value>Deskew Progress</value>
+    </data>
 </root>

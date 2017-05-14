@@ -292,7 +292,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Usa configurazione predefinita</value>
+        <value>Usa impostazioni predefinite</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -319,7 +319,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Usa UI nativo</value>
+        <value>Usa UI nativa</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>

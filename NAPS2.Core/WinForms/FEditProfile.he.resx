@@ -1065,7 +1065,7 @@
         <value>31</value>
     </data>
     <data name="linkAutoSaveSettings.Text" xml:space="preserve">
-        <value>Auto Save Settings</value>
+        <value>הגדרות שמירה אוטומטית</value>
     </data>
     <data name="&gt;&gt;linkAutoSaveSettings.Name" xml:space="preserve">
         <value>linkAutoSaveSettings</value>

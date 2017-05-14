@@ -417,4 +417,10 @@
     <data name="FileInUse" xml:space="preserve">
         <value>Файл не может быть перезаписан, так как он используется.</value>
     </data>
+    <data name="AutoDeskewing" xml:space="preserve">
+        <value>Deskewing...</value>
+    </data>
+    <data name="AutoDeskewProgress" xml:space="preserve">
+        <value>Deskew Progress</value>
+    </data>
 </root>

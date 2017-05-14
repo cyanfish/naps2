@@ -307,16 +307,16 @@
         <value>שגיאה בלתי ידוע אירע בעת סריקת אצווה.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>האצווה בוטלה.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
         <value>Cancelling....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>אצווה הושלמה בהצלחה.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>סריקה אצווה נעצרה עקב שגיאה.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
         <value>סורק עמוד {0}...</value>
@@ -364,10 +364,10 @@
         <value>Saving {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>העתקה...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>התקדמות העתקה</value>
     </data>
     <data name="Importing" xml:space="preserve">
         <value>Importing...</value>
@@ -385,7 +385,7 @@
         <value>Image Files</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>הסורק שנבחר איננו מקוון (OFFLINE).</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>The scanner's cover is open.</value>
@@ -397,7 +397,7 @@
         <value>The scanner is warming up.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>עדכון ל- OCR זמין.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
         <value>Image saved.</value>
@@ -416,5 +416,11 @@
     </data>
     <data name="FileInUse" xml:space="preserve">
         <value>The file could not be overwritten because it is currently in use.</value>
+    </data>
+    <data name="AutoDeskewing" xml:space="preserve">
+        <value>Deskewing...</value>
+    </data>
+    <data name="AutoDeskewProgress" xml:space="preserve">
+        <value>Deskew Progress</value>
     </data>
 </root>

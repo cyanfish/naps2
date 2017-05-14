@@ -123,7 +123,7 @@
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
     <data name="labelProductName.Location" type="System.Drawing.Point, System.Drawing">
-        <value>149, 12</value>
+        <value>139, 12</value>
     </data>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     <data name="labelProductName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -154,7 +154,7 @@
         <value>True</value>
     </data>
     <data name="labelVersion.Location" type="System.Drawing.Point, System.Drawing">
-        <value>149, 28</value>
+        <value>139, 28</value>
     </data>
     <data name="labelVersion.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>6, 0, 3, 0</value>
@@ -184,19 +184,19 @@
         <value>True</value>
     </data>
     <data name="labelCopyright.Location" type="System.Drawing.Point, System.Drawing">
-        <value>149, 69</value>
+        <value>139, 69</value>
     </data>
     <data name="labelCopyright.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>6, 12, 3, 0</value>
     </data>
     <data name="labelCopyright.Size" type="System.Drawing.Size, System.Drawing">
-        <value>214, 52</value>
+        <value>232, 13</value>
     </data>
     <data name="labelCopyright.TabIndex" type="System.Int32, mscorlib">
         <value>28</value>
     </data>
     <data name="labelCopyright.Text" xml:space="preserve">
-        <value>כל הזכויות שמורות © 2009 Pavel Sorejs\nכל הזכויות שמורות © 2012 Michael Adams\nכל הזכויות שמורות © 2013 Peter De Leeuw\nכל הזכויות שמורות © 2012-2015 Ben Olden-Cooligan</value>
+        <value>Copyright 2009, 2012-2017 NAPS2 Contributors</value>
     </data>
     <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
         <value>labelCopyright</value>
@@ -216,8 +216,11 @@
     <data name="okButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
         <value>None</value>
     </data>
+    <data name="okButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
     <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-        <value>351, 140</value>
+        <value>336, 100</value>
     </data>
     <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
         <value>72, 24</value>
@@ -406,11 +409,17 @@
         RK5CYII=
 </value>
     </data>
+    <data name="logoPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
     <data name="logoPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 12</value>
+        <value>10, 8</value>
     </data>
     <data name="logoPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-        <value>128, 128</value>
+        <value>120, 120</value>
+    </data>
+    <data name="logoPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+        <value>StretchImage</value>
     </data>
     <data name="logoPictureBox.TabIndex" type="System.Int32, mscorlib">
         <value>26</value>
@@ -431,7 +440,7 @@
         <value>True</value>
     </data>
     <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-        <value>150, 42</value>
+        <value>140, 42</value>
     </data>
     <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
         <value>117, 13</value>
@@ -458,7 +467,7 @@
         <value>True</value>
     </data>
     <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-        <value>149, 133</value>
+        <value>139, 96</value>
     </data>
     <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
         <value>59, 13</value>
@@ -485,7 +494,7 @@
         <value>True</value>
     </data>
     <data name="linkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-        <value>150, 146</value>
+        <value>140, 109</value>
     </data>
     <data name="linkLabel2.Size" type="System.Drawing.Size, System.Drawing">
         <value>171, 13</value>
@@ -515,7 +524,7 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>435, 176</value>
+        <value>420, 136</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
@@ -540,6 +549,9 @@
         //8AAP//AAD//w==
 </value>
     </data>
+    <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
     <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>9, 9, 9, 9</value>
     </data>
@@ -553,6 +565,6 @@
         <value>FAbout</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.1.5955, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.3.3.30949, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

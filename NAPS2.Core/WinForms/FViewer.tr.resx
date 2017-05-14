@@ -148,7 +148,7 @@
         <value>tiffViewer1</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=4.1.1.632, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=5.3.3.38155, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -261,6 +261,12 @@
     <data name="tsFlip.Text" xml:space="preserve">
         <value>Döndür</value>
     </data>
+    <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="tsDeskew.Text" xml:space="preserve">
+        <value>Deskew</value>
+    </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
@@ -303,6 +309,30 @@
     <data name="tsContrast.Text" xml:space="preserve">
         <value>Karşıtlık</value>
     </data>
+    <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 25</value>
+    </data>
+    <data name="tsSavePDF.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsSavePDF.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsSavePDF.Text" xml:space="preserve">
+        <value>PDF Kaydet</value>
+    </data>
+    <data name="tsSaveImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsSaveImage.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsSaveImage.Text" xml:space="preserve">
+        <value>Save Image</value>
+    </data>
+    <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>6, 25</value>
+    </data>
     <data name="tsDelete.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
@@ -316,7 +346,7 @@
         <value>3, 0</value>
     </data>
     <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>269, 25</value>
+        <value>327, 25</value>
     </data>
     <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
@@ -449,6 +479,12 @@
     <data name="&gt;&gt;tsFlip.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
+    <data name="&gt;&gt;tsDeskew.Name" xml:space="preserve">
+        <value>tsDeskew</value>
+    </data>
+    <data name="&gt;&gt;tsDeskew.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
     <data name="&gt;&gt;tsCustomRotation.Name" xml:space="preserve">
         <value>tsCustomRotation</value>
     </data>
@@ -473,6 +509,30 @@
     <data name="&gt;&gt;tsContrast.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
+    <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+        <value>toolStripSeparator3</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsSavePDF.Name" xml:space="preserve">
+        <value>tsSavePDF</value>
+    </data>
+    <data name="&gt;&gt;tsSavePDF.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsSaveImage.Name" xml:space="preserve">
+        <value>tsSaveImage</value>
+    </data>
+    <data name="&gt;&gt;tsSaveImage.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+        <value>toolStripSeparator2</value>
+    </data>
+    <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
     <data name="&gt;&gt;tsDelete.Name" xml:space="preserve">
         <value>tsDelete</value>
     </data>
@@ -483,6 +543,6 @@
         <value>FViewer</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.1.1.632, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.3.3.38155, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

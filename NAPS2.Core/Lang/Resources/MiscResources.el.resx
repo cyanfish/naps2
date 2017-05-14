@@ -417,4 +417,10 @@
     <data name="FileInUse" xml:space="preserve">
         <value>Το αρχείο είναι σε χρήση και είναι αδύνατο να αντικατασταθεί.</value>
     </data>
+    <data name="AutoDeskewing" xml:space="preserve">
+        <value>Deskewing...</value>
+    </data>
+    <data name="AutoDeskewProgress" xml:space="preserve">
+        <value>Deskew Progress</value>
+    </data>
 </root>
