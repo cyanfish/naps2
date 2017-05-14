@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
@@ -34,12 +35,20 @@ namespace NAPS2.WinForms
         private TiffViewerCtl tiffViewer1;
         private ToolStripMenuItem tsDeskew;
         private readonly ChangeTracker changeTracker;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripButton tsSavePDF;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton tsSaveImage;
         private readonly IOperationFactory operationFactory;
+        private readonly WinFormsExportHelper exportHelper;
+        private readonly AppConfigManager appConfigManager;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, AppConfigManager appConfigManager)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
+            this.exportHelper = exportHelper;
+            this.appConfigManager = appConfigManager;
             InitializeComponent();
         }
 
@@ -111,12 +120,16 @@ namespace NAPS2.WinForms
             this.tsRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.tsRotateRight = new System.Windows.Forms.ToolStripMenuItem();
             this.tsFlip = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsDeskew = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCustomRotation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCrop = new System.Windows.Forms.ToolStripButton();
             this.tsBrightness = new System.Windows.Forms.ToolStripButton();
             this.tsContrast = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsSavePDF = new System.Windows.Forms.ToolStripButton();
+            this.tsSaveImage = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsDelete = new System.Windows.Forms.ToolStripButton();
-            this.tsDeskew = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -157,6 +170,10 @@ namespace NAPS2.WinForms
             this.tsCrop,
             this.tsBrightness,
             this.tsContrast,
+            this.toolStripSeparator3,
+            this.tsSavePDF,
+            this.tsSaveImage,
+            this.toolStripSeparator2,
             this.tsDelete});
             this.toolStrip1.Name = "toolStrip1";
             // 
@@ -228,6 +245,12 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsFlip, "tsFlip");
             this.tsFlip.Click += new System.EventHandler(this.tsFlip_Click);
             // 
+            // tsDeskew
+            // 
+            this.tsDeskew.Name = "tsDeskew";
+            resources.ApplyResources(this.tsDeskew, "tsDeskew");
+            this.tsDeskew.Click += new System.EventHandler(this.tsDeskew_Click);
+            // 
             // tsCustomRotation
             // 
             this.tsCustomRotation.Name = "tsCustomRotation";
@@ -258,6 +281,32 @@ namespace NAPS2.WinForms
             this.tsContrast.Name = "tsContrast";
             this.tsContrast.Click += new System.EventHandler(this.tsContrast_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // tsSavePDF
+            // 
+            this.tsSavePDF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsSavePDF.Image = global::NAPS2.Icons.file_extension_pdf_small;
+            resources.ApplyResources(this.tsSavePDF, "tsSavePDF");
+            this.tsSavePDF.Name = "tsSavePDF";
+            this.tsSavePDF.Click += new System.EventHandler(this.tsSavePDF_Click);
+            // 
+            // tsSaveImage
+            // 
+            this.tsSaveImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsSaveImage.Image = global::NAPS2.Icons.picture_small;
+            resources.ApplyResources(this.tsSaveImage, "tsSaveImage");
+            this.tsSaveImage.Name = "tsSaveImage";
+            this.tsSaveImage.Click += new System.EventHandler(this.tsSaveImage_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
             // tsDelete
             // 
             this.tsDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -265,12 +314,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsDelete, "tsDelete");
             this.tsDelete.Name = "tsDelete";
             this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
-            // 
-            // tsDeskew
-            // 
-            this.tsDeskew.Name = "tsDeskew";
-            resources.ApplyResources(this.tsDeskew, "tsDeskew");
-            this.tsDeskew.Click += new System.EventHandler(this.tsDeskew_Click);
             // 
             // FViewer
             // 
@@ -336,7 +379,7 @@ namespace NAPS2.WinForms
             var progressForm = FormFactory.Create<FProgress>();
             progressForm.Operation = op;
 
-            if (op.Start(new [] { ImageList.Images[ImageIndex] }))
+            if (op.Start(new[] { ImageList.Images[ImageIndex] }))
             {
                 progressForm.ShowDialog();
                 UpdateImage();
@@ -384,32 +427,59 @@ namespace NAPS2.WinForms
         {
             if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, 1), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                // Need to dispose the bitmap first to avoid file access issues
-                tiffViewer1.Image.Dispose();
-                // Actually delete the image
-                ImageList.Delete(Enumerable.Range(ImageIndex, 1));
-                // Update FDesktop in the background
-                DeleteCallback();
+                DeleteCurrentImage();
+            }
+        }
 
-                if (ImageList.Images.Any())
+        private void DeleteCurrentImage()
+        {
+            // Need to dispose the bitmap first to avoid file access issues
+            tiffViewer1.Image.Dispose();
+            // Actually delete the image
+            ImageList.Delete(Enumerable.Range(ImageIndex, 1));
+            // Update FDesktop in the background
+            DeleteCallback();
+
+            if (ImageList.Images.Any())
+            {
+                changeTracker.HasUnsavedChanges = true;
+                // Update the GUI for the newly displayed image
+                if (ImageIndex >= ImageList.Images.Count)
                 {
-                    changeTracker.HasUnsavedChanges = true;
-                    // Update the GUI for the newly displayed image
-                    if (ImageIndex >= ImageList.Images.Count)
-                    {
-                        GoTo(ImageList.Images.Count - 1);
-                    }
-                    else
-                    {
-                        UpdateImage();
-                    }
-                    lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
+                    GoTo(ImageList.Images.Count - 1);
                 }
                 else
                 {
-                    changeTracker.HasUnsavedChanges = false;
-                    // No images left to display, so no point keeping the form open
-                    Close();
+                    UpdateImage();
+                }
+                lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
+            }
+            else
+            {
+                changeTracker.HasUnsavedChanges = false;
+                // No images left to display, so no point keeping the form open
+                Close();
+            }
+        }
+
+        private void tsSavePDF_Click(object sender, EventArgs e)
+        {
+            if (exportHelper.SavePDF(new List<ScannedImage> { ImageList.Images[ImageIndex] }))
+            {
+                if (appConfigManager.Config.DeleteAfterSaving)
+                {
+                    DeleteCurrentImage();
+                }
+            }
+        }
+
+        private void tsSaveImage_Click(object sender, EventArgs e)
+        {
+            if (exportHelper.SaveImages(new List<ScannedImage> { ImageList.Images[ImageIndex] }))
+            {
+                if (appConfigManager.Config.DeleteAfterSaving)
+                {
+                    DeleteCurrentImage();
                 }
             }
         }
