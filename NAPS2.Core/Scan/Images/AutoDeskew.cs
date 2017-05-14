@@ -13,16 +13,16 @@ namespace NAPS2.Util
 {
     public static class AutoDeskewExtensions
     {
-        public static double GetSkewAngle(this Bitmap bmp, Func<bool> cancel)
+        public static double GetSkewAngle(this Bitmap bmp)
         {
             var sk = new gmseDeskew(bmp);
-            return sk.GetSkewAngle(cancel);
+            return sk.GetSkewAngle();
         }
 
-        public static double GetSkewAngle(this Image img, Func<bool> cancel)
+        public static double GetSkewAngle(this Image img)
         {
             var bmp = new Bitmap(img, img.Width, img.Height);
-            var res = bmp.GetSkewAngle(cancel);
+            var res = bmp.GetSkewAngle();
             bmp.Dispose();
             return res;
         }
@@ -69,7 +69,7 @@ namespace NAPS2.Util
 
         int[] cHMatrix;
         // Calculate the skew angle of the image cBmp.
-        public double GetSkewAngle(Func<bool> cancel)
+        public double GetSkewAngle()
         {
             HougLine[] hl;
             int i;
@@ -77,9 +77,9 @@ namespace NAPS2.Util
             int count = 0;
 
             // Hough Transformation
-            Calc(cancel);
+            Calc();
             // Top 20 of the detected lines in the image.
-            hl = GetTop(20, cancel);
+            hl = GetTop(20);
             // Average angle of the lines
             for (i = 0; i <= 19; i++)
             {
@@ -90,7 +90,7 @@ namespace NAPS2.Util
         }
 
         // Calculate the Count lines in the image with most points.
-        private HougLine[] GetTop(int Count, Func<bool> cancel)
+        private HougLine[] GetTop(int Count)
         {
             HougLine[] hl;
             int i;
@@ -106,10 +106,6 @@ namespace NAPS2.Util
             }
             for (i = 0; i <= cHMatrix.Length - 1; i++)
             {
-                if (i % 100 == 0 && cancel())
-                {
-                    return hl;
-                }
                 if (cHMatrix[i] > hl[Count - 1].Count)
                 {
                     hl[Count - 1].Count = cHMatrix[i];
@@ -163,18 +159,14 @@ namespace NAPS2.Util
         }
 
         // Hough Transforamtion:
-        private void Calc(Func<bool> cancel)
+        private void Calc()
         {
             int hMin = height / 4;
             int hMax = height * 3 / 4;
 
             Init();
-            Parallel.For(hMin, hMax + 1, y =>
+            for(int y = hMin; y <= hMax; y++)
             {
-                if (cancel())
-                {
-                    return;
-                }
                 for (int x = 1; x <= width - 2; x++)
                 {
                     // Only lower edges are considered.
@@ -186,7 +178,7 @@ namespace NAPS2.Util
                         }
                     }
                 }
-            });
+            }
         }
         // Calculate all lines through the point (x,y).
         private void Calc(int x, int y)
@@ -203,7 +195,7 @@ namespace NAPS2.Util
                 Index = dIndex * cSteps + alpha;
                 try
                 {
-                    Interlocked.Increment(ref cHMatrix[Index]);
+                    cHMatrix[Index]++;
                 }
                 catch (Exception ex)
                 {

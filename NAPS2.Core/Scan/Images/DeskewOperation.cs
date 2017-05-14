@@ -46,7 +46,7 @@ namespace NAPS2.Scan.Images
                     Bitmap bitmap = img.GetImage();
                     try
                     {
-                        var transform = RotationTransform.Auto(bitmap, () => cancel);
+                        var transform = RotationTransform.Auto(bitmap);
                         if (cancel)
                         {
                             break;
