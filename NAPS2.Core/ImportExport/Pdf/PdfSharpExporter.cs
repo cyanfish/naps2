@@ -10,6 +10,7 @@ using NAPS2.Util;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
 
 namespace NAPS2.ImportExport.Pdf
@@ -86,16 +87,26 @@ namespace NAPS2.ImportExport.Pdf
             int progress = 0;
             foreach (var image in images)
             {
-                using (Stream stream = image.GetImageStream())
-                using (var img = new Bitmap(stream))
+                if (image.Source != null && !image.RecoveryIndexImage.TransformList.Any())
                 {
-                    if (!progressCallback(progress))
+                    // Pull the PDF content directly from the source to maintain objects, dpi, etc.
+                    // TODO: Fix for password-protected documents
+                    PdfDocument sourceDoc = PdfReader.Open(image.Source.FilePath, PdfDocumentOpenMode.Import);
+                    document.AddPage(sourceDoc.Pages[image.Source.PageNumber - 1]);
+                }
+                else
+                {
+                    using (Stream stream = image.GetImageStream())
+                    using (var img = new Bitmap(stream))
                     {
-                        return false;
-                    }
+                        if (!progressCallback(progress))
+                        {
+                            return false;
+                        }
 
-                    PdfPage page = document.AddPage();
-                    DrawImageOnPage(page, img);
+                        PdfPage page = document.AddPage();
+                        DrawImageOnPage(page, img);
+                    }
                 }
                 progress++;
             }
@@ -117,26 +128,39 @@ namespace NAPS2.ImportExport.Pdf
                     return null;
                 }
 
-                using (Stream stream = image.GetImageStream())
-                using (var img = new Bitmap(stream))
+                if (image.Source != null && !image.RecoveryIndexImage.TransformList.Any())
                 {
-                    if (!progressCallback(progress))
+                    // TODO: Maybe allow OCR to be used?
+                    // Also consider - maybe we can use this to prevent duplicate OCR after import.
+                    // But we would still need some way to re-run it e.g. with a different language.
+                    // TODO: Clean up the common code between here and above
+                    PdfDocument sourceDoc = PdfReader.Open(image.Source.FilePath, PdfDocumentOpenMode.Import);
+                    document.AddPage(sourceDoc.Pages[image.Source.PageNumber - 1]);
+                    return null;
+                }
+                else
+                {
+                    using (Stream stream = image.GetImageStream())
+                    using (var img = new Bitmap(stream))
                     {
-                        return null;
+                        if (!progressCallback(progress))
+                        {
+                            return null;
+                        }
+
+                        PdfPage page = document.AddPage();
+                        DrawImageOnPage(page, img);
+
+                        if (!progressCallback(progress))
+                        {
+                            return null;
+                        }
+
+                        string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+                        img.Save(tempImageFilePath);
+
+                        return Tuple.Create(page, tempImageFilePath);
                     }
-
-                    PdfPage page = document.AddPage();
-                    DrawImageOnPage(page, img);
-
-                    if (!progressCallback(progress))
-                    {
-                        return null;
-                    }
-
-                    string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-                    img.Save(tempImageFilePath);
-
-                    return Tuple.Create(page, tempImageFilePath);
                 }
             }).StepParallel((page, tempImageFilePath) =>
             {

@@ -62,6 +62,7 @@ namespace NAPS2.ImportExport.Pdf
                     {
                         var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
                         image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                        // TODO: Recovery index needs to store this, maybe (but we wouldn't be able to keep a lock...)
                         image.Source = new ScannedImage.SourceInfo
                         {
                             FilePath = filePath,

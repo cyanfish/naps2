@@ -51,6 +51,9 @@ namespace NAPS2.ImportExport.Pdf
                 });
                 if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                 {
+                    // TODO: If we export a page directly, then try and import again this condition won't be hit
+                    // Maybe we need some kind of per-page annotation
+                    // Or a flag for generic pdf handling on the overall doc, but then we'd need the generic importer to be able to pull images directly
                     return genericPdfImporter.Import(filePath, progressCallback);
                 }
                 if (passwordAttempts > 0
