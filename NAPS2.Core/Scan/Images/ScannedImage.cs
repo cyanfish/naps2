@@ -42,6 +42,8 @@ namespace NAPS2.Scan.Images
 
         public PatchCode PatchCode { get; set; }
 
+        public SourceInfo Source { get; set; }
+
         public ImageFormat FileFormat { get { return recoveryImage.FileFormat; } }
 
         public RecoveryIndexImage RecoveryIndexImage
@@ -80,16 +82,14 @@ namespace NAPS2.Scan.Images
         {
             lock (this)
             {
-                if (recoveryImage != null)
-                {
-                    // Delete the image data on disk
-                    recoveryImage.Dispose();
-                }
+                // Delete the image data on disk
+                recoveryImage?.Dispose();
                 if (thumbnail != null)
                 {
                     thumbnail.Dispose();
                     thumbnail = null;
                 }
+                Source?.FileLock?.Dispose();
             }
         }
 
@@ -143,6 +143,15 @@ namespace NAPS2.Scan.Images
         public void MovedTo(int index)
         {
             recoveryImage.Move(index);
+        }
+
+        public class SourceInfo
+        {
+            public string FilePath { get; set; }
+
+            public int PageNumber { get; set; }
+
+            public IDisposable FileLock { get; set;  }
         }
     }
 }

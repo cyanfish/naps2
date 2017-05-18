@@ -412,6 +412,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download Needed.
+        /// </summary>
+        internal static string DownloadNeeded {
+            get {
+                return ResourceManager.GetString("DownloadNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to send an email..
         /// </summary>
         internal static string EmailError {
@@ -795,6 +804,15 @@ namespace NAPS2.Lang.Resources {
         internal static string OverwriteFile {
             get {
                 return ResourceManager.GetString("OverwriteFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An additional component is needed to import this PDF file. Would you like to download it now?.
+        /// </summary>
+        internal static string PdfImportComponentNeeded {
+            get {
+                return ResourceManager.GetString("PdfImportComponentNeeded", resourceCulture);
             }
         }
         

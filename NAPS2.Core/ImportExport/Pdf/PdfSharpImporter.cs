@@ -21,12 +21,14 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly IGenericPdfImporter genericPdfImporter;
 
-        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer)
+        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer, IGenericPdfImporter genericPdfImporter)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.genericPdfImporter = genericPdfImporter;
         }
 
         public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
@@ -49,8 +51,7 @@ namespace NAPS2.ImportExport.Pdf
                 });
                 if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                 {
-                    errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
-                    return Enumerable.Empty<ScannedImage>();
+                    return genericPdfImporter.Import(filePath, progressCallback);
                 }
                 if (passwordAttempts > 0
                     && !document.SecuritySettings.HasOwnerPermissions
