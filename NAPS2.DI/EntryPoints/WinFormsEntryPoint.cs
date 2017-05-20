@@ -17,7 +17,6 @@ namespace NAPS2.DI.EntryPoints
         public static void Run(string[] args)
         {
             var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
-            ScannedImage.PdfRenderer = kernel.Get<GhostscriptPdfRenderer>();
 
             var lifecycle = kernel.Get<Lifecycle>();
             lifecycle.ParseArgs(args);

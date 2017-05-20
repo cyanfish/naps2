@@ -18,10 +18,12 @@ namespace NAPS2.ImportExport.Pdf
     public class PdfSharpExporter : IPdfExporter
     {
         private readonly IOcrEngine ocrEngine;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
-        public PdfSharpExporter(IOcrEngine ocrEngine)
+        public PdfSharpExporter(IOcrEngine ocrEngine, ScannedImageRenderer scannedImageRenderer)
         {
             this.ocrEngine = ocrEngine;
+            this.scannedImageRenderer = scannedImageRenderer;
         }
 
         public bool Export(string path, IEnumerable<ScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
@@ -93,7 +95,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 else
                 {
-                    using (Stream stream = image.GetImageStream())
+                    using (Stream stream = scannedImageRenderer.RenderToStream(image))
                     using (var img = new Bitmap(stream))
                     {
                         if (!progressCallback(progress))
@@ -134,7 +136,7 @@ namespace NAPS2.ImportExport.Pdf
                     return null;
                 }
 
-                using (Stream stream = image.GetImageStream())
+                using (Stream stream = scannedImageRenderer.RenderToStream(image))
                 using (var img = new Bitmap(stream))
                 {
                     if (!progressCallback(progress))

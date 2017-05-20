@@ -16,16 +16,18 @@ namespace NAPS2.WinForms
     {
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
         private Bitmap workingImage;
         private bool previewOutOfDate;
         private bool working;
         private Timer previewTimer;
 
-        public FRotate(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer)
+        public FRotate(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
         {
             this.changeTracker = changeTracker;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
 
             RotationTransform = new RotationTransform();
@@ -68,7 +70,7 @@ namespace NAPS2.WinForms
                 .Activate();
             Size = new Size(600, 600);
 
-            workingImage = Image.GetImage();
+            workingImage = scannedImageRenderer.Render(Image);
             pictureBox.Image = (Bitmap)workingImage.Clone();
             txtAngle.Text += '\u00B0';
             UpdatePreviewBox();

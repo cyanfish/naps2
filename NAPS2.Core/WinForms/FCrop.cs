@@ -15,16 +15,18 @@ namespace NAPS2.WinForms
     {
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
         private Bitmap workingImage, workingImage2;
         private bool previewOutOfDate;
         private bool working;
         private Timer previewTimer;
 
-        public FCrop(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer)
+        public FCrop(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
         {
             this.changeTracker = changeTracker;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
 
             CropTransform = new CropTransform();
@@ -77,8 +79,8 @@ namespace NAPS2.WinForms
                 .Activate();
             Size = new Size(600, 600);
 
-            workingImage = Image.GetImage();
-            workingImage2 = Image.GetImage();
+            workingImage = scannedImageRenderer.Render(Image);
+            workingImage2 = scannedImageRenderer.Render(Image);
             UpdateCropBounds();
             UpdatePreviewBox();
 
@@ -199,7 +201,7 @@ namespace NAPS2.WinForms
                 if (TransformMultiple)
                 {
                     // With multiple images, we need to have the transform scaled in case they're different sizes
-                    using (var referenceBitmap = Image.GetImage())
+                    using (var referenceBitmap = scannedImageRenderer.Render(Image))
                     {
                         foreach (var img in ImagesToTransform)
                         {
@@ -220,7 +222,7 @@ namespace NAPS2.WinForms
 
         private CropTransform ScaleCropTransform(ScannedImage img, Bitmap referenceBitmap)
         {
-            using (var bitmap = img.GetImage())
+            using (var bitmap = scannedImageRenderer.Render(Image))
             {
                 double xScale = bitmap.Width / (double)referenceBitmap.Width,
                        yScale = bitmap.Height / (double)referenceBitmap.Height;

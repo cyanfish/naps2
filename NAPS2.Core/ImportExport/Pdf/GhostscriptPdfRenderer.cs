@@ -10,7 +10,6 @@ using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
@@ -22,17 +21,15 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IFormFactory formFactory;
         private readonly AppConfigManager appConfigManager;
         private readonly IErrorOutput errorOutput;
-        private readonly ThumbnailRenderer thumbnailRenderer;
 
         private readonly Lazy<byte[]> gsLibBytes;
 
-        public GhostscriptPdfRenderer(OcrDependencyManager ocrDependencyManager, IFormFactory formFactory, AppConfigManager appConfigManager, IErrorOutput errorOutput, ThumbnailRenderer thumbnailRenderer)
+        public GhostscriptPdfRenderer(OcrDependencyManager ocrDependencyManager, IFormFactory formFactory, AppConfigManager appConfigManager, IErrorOutput errorOutput)
         {
             this.ocrDependencyManager = ocrDependencyManager;
             this.formFactory = formFactory;
             this.appConfigManager = appConfigManager;
             this.errorOutput = errorOutput;
-            this.thumbnailRenderer = thumbnailRenderer;
 
             gsLibBytes = new Lazy<byte[]>(() => File.ReadAllBytes(ocrDependencyManager.Components.Ghostscript921.Path));
         }

@@ -21,12 +21,14 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
-        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer)
+        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageRenderer = scannedImageRenderer;
         }
 
         public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
@@ -144,7 +146,7 @@ namespace NAPS2.ImportExport.Pdf
             document.Save(pdfPath);
 
             var image = ScannedImage.FromSinglePagePdf(pdfPath, false);
-            using (var bitmap = image.GetImage())
+            using (var bitmap = scannedImageRenderer.Render(image))
             {
                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
             }

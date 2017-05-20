@@ -17,14 +17,16 @@ namespace NAPS2.Scan.Images
     {
         private readonly ThreadFactory threadFactory;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
         private bool cancel;
         private Thread thread;
 
-        public DeskewOperation(ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer)
+        public DeskewOperation(ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
         {
             this.threadFactory = threadFactory;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageRenderer = scannedImageRenderer;
 
             AllowCancel = true;
         }
@@ -47,7 +49,7 @@ namespace NAPS2.Scan.Images
                     {
                         return null;
                     }
-                    Bitmap bitmap = img.GetImage();
+                    Bitmap bitmap = scannedImageRenderer.Render(img);
                     try
                     {
                         if (cancel)

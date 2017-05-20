@@ -11,6 +11,13 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PrintDocumentPrinter : IScannedImagePrinter
     {
+        private readonly ScannedImageRenderer scannedImageRenderer;
+
+        public PrintDocumentPrinter(ScannedImageRenderer scannedImageRenderer)
+        {
+            this.scannedImageRenderer = scannedImageRenderer;
+        }
+
         public bool PromptToPrint(List<ScannedImage> images, List<ScannedImage> selectedImages)
         {
             if (!images.Any())
@@ -65,7 +72,7 @@ namespace NAPS2.ImportExport.Pdf
             int i = 0;
             printDocument.PrintPage += (sender, e) =>
             {
-                var image = imagesToPrint[i].GetImage();
+                var image = scannedImageRenderer.Render(imagesToPrint[i]);
                 try
                 {
                     var pb = e.PageBounds;

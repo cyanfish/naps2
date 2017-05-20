@@ -15,20 +15,22 @@ namespace NAPS2.Scan.Images
         public const int STEP_SIZE = 32;
 
         private readonly IUserConfigManager userConfigManager;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
-        public ThumbnailRenderer(IUserConfigManager userConfigManager)
+        public ThumbnailRenderer(IUserConfigManager userConfigManager, ScannedImageRenderer scannedImageRenderer)
         {
             this.userConfigManager = userConfigManager;
+            this.scannedImageRenderer = scannedImageRenderer;
         }
 
         public Bitmap RenderThumbnail(ScannedImage scannedImage)
         {
-            return RenderThumbnail(scannedImage.GetImage(), userConfigManager.Config.ThumbnailSize);
+            return RenderThumbnail(scannedImageRenderer.Render(scannedImage), userConfigManager.Config.ThumbnailSize);
         }
 
         public Bitmap RenderThumbnail(ScannedImage scannedImage, int size)
         {
-            return RenderThumbnail(scannedImage.GetImage(), size);
+            return RenderThumbnail(scannedImageRenderer.Render(scannedImage), size);
         }
 
         public Bitmap RenderThumbnail(Bitmap b)

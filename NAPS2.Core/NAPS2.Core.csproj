@@ -130,6 +130,7 @@
     <Compile Include="Ocr\PlatformSupport.cs" />
     <Compile Include="Scan\Images\AutoDeskew.cs" />
     <Compile Include="Operation\IOperationProgress.cs" />
+    <Compile Include="Scan\Images\ScannedImageRenderer.cs" />
     <Compile Include="Util\DownloadFormat.cs" />
     <Compile Include="Util\DownloadInfo.cs" />
     <Compile Include="Ocr\Language.cs" />

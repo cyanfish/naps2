@@ -9,9 +9,16 @@ using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {
-    class TiffHelper
+    public class TiffHelper
     {
-        public static bool SaveMultipage(List<ScannedImage> images, string location, Func<int, bool> progressCallback)
+        private readonly ScannedImageRenderer scannedImageRenderer;
+
+        public TiffHelper(ScannedImageRenderer scannedImageRenderer)
+        {
+            this.scannedImageRenderer = scannedImageRenderer;
+        }
+
+        public bool SaveMultipage(List<ScannedImage> images, string location, Func<int, bool> progressCallback)
         {
             try
             {
@@ -30,7 +37,7 @@ namespace NAPS2.ImportExport.Images
                     Encoder iparam = Encoder.Compression;
                     var iparamPara = new EncoderParameter(iparam, (long)(EncoderValue.CompressionLZW));
                     iparams.Param[0] = iparamPara;
-                    using (var bitmap = images[0].GetImage())
+                    using (var bitmap = scannedImageRenderer.Render(images[0]))
                     {
                         bitmap.Save(location, codecInfo, iparams);
                     }
@@ -53,7 +60,7 @@ namespace NAPS2.ImportExport.Images
                     encoderParams.Param[1] = SaveEncodeParam;
 
                     File.Delete(location);
-                    using (var bitmap0 = images[0].GetImage())
+                    using (var bitmap0 = scannedImageRenderer.Render(images[0]))
                     {
                         bitmap0.Save(location, codecInfo, encoderParams);
 
@@ -74,7 +81,7 @@ namespace NAPS2.ImportExport.Images
                                 (long) EncoderValue.CompressionLZW);
                             encoderParams.Param[0] = CompressionEncodeParam;
                             encoderParams.Param[1] = SaveEncodeParam;
-                            using (var bitmap = images[i].GetImage())
+                            using (var bitmap = scannedImageRenderer.Render(images[i]))
                             {
                                 bitmap0.SaveAdd(bitmap, encoderParams);
                             }
@@ -95,7 +102,8 @@ namespace NAPS2.ImportExport.Images
             }
 
         }
-        private static ImageCodecInfo GetCodecForString(string type)
+
+        private ImageCodecInfo GetCodecForString(string type)
         {
             ImageCodecInfo[] info = ImageCodecInfo.GetImageEncoders();
             return info.FirstOrDefault(t => t.FormatDescription.Equals(type));

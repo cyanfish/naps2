@@ -23,8 +23,6 @@ namespace NAPS2.Scan.Images
 
         private Bitmap thumbnail;
 
-        public static IPdfRenderer PdfRenderer { get; set; }
-
         public static ScannedImage FromSinglePagePdf(string pdfPath, bool copy)
         {
             return new ScannedImage(pdfPath, copy);
@@ -75,27 +73,6 @@ namespace NAPS2.Scan.Images
         public string RecoveryFilePath => recoveryImage.FilePath;
 
         public long Size => new FileInfo(recoveryImage.FilePath).Length;
-
-        public Bitmap GetImage()
-        {
-            var bitmap = recoveryImage.FileFormat == null
-                ? PdfRenderer.Render(recoveryImage.FilePath).Single()
-                : new Bitmap(recoveryImage.FilePath);
-            lock (transformList)
-            {
-                return Transform.PerformAll(bitmap, transformList);
-            }
-        }
-
-        public Stream GetImageStream()
-        {
-            using (var transformed = GetImage())
-            {
-                var stream = new MemoryStream();
-                transformed.Save(stream, recoveryImage.FileFormat ?? (RecoveryIndexImage.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg));
-                return stream;
-            }
-        }
 
         public void Dispose()
         {

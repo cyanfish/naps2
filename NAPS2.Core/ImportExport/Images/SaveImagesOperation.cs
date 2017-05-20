@@ -20,16 +20,20 @@ namespace NAPS2.ImportExport.Images
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOverwritePrompt overwritePrompt;
         private readonly ThreadFactory threadFactory;
+        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly TiffHelper tiffHelper;
 
         private bool cancel;
         private Thread thread;
 
-        public SaveImagesOperation(FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory)
+        public SaveImagesOperation(FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, ScannedImageRenderer scannedImageRenderer, TiffHelper tiffHelper)
         {
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.overwritePrompt = overwritePrompt;
             this.threadFactory = threadFactory;
+            this.scannedImageRenderer = scannedImageRenderer;
+            this.tiffHelper = tiffHelper;
 
             ProgressTitle = MiscResources.SaveImagesProgress;
             AllowCancel = true;
@@ -76,7 +80,7 @@ namespace NAPS2.ImportExport.Images
                             }
                         }
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
-                        Status.Success = TiffHelper.SaveMultipage(images, subFileName, j =>
+                        Status.Success = tiffHelper.SaveMultipage(images, subFileName, j =>
                         {
                             Status.CurrentProgress = j;
                             InvokeStatusChanged();
@@ -109,7 +113,7 @@ namespace NAPS2.ImportExport.Images
                                 return;
                             }
                         }
-                        using (Bitmap baseImage = img.GetImage())
+                        using (Bitmap baseImage = scannedImageRenderer.Render(img))
                         {
                             if (images.Count == 1)
                             {

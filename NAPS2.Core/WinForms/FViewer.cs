@@ -42,13 +42,15 @@ namespace NAPS2.WinForms
         private readonly IOperationFactory operationFactory;
         private readonly WinFormsExportHelper exportHelper;
         private readonly AppConfigManager appConfigManager;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, AppConfigManager appConfigManager)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, AppConfigManager appConfigManager, ScannedImageRenderer scannedImageRenderer)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.exportHelper = exportHelper;
             this.appConfigManager = appConfigManager;
+            this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
         }
 
@@ -60,7 +62,7 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs e)
         {
-            tiffViewer1.Image = ImageList.Images[ImageIndex].GetImage();
+            tiffViewer1.Image = scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
             tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.InvariantCulture);
             lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
         }
@@ -80,7 +82,7 @@ namespace NAPS2.WinForms
         private void UpdateImage()
         {
             tiffViewer1.Image.Dispose();
-            tiffViewer1.Image = ImageList.Images[ImageIndex].GetImage();
+            tiffViewer1.Image = scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
         }
 
         protected override void Dispose(bool disposing)

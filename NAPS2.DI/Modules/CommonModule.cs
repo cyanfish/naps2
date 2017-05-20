@@ -32,6 +32,7 @@ namespace NAPS2.DI.Modules
             Bind<IScannedImageImporter>().To<ScannedImageImporter>();
             Bind<IPdfImporter>().To<PdfSharpImporter>();
             Bind<IImageImporter>().To<ImageImporter>();
+            Bind<IPdfRenderer>().To<GhostscriptPdfRenderer>();
 
             // Export
             Bind<IPdfExporter>().To<PdfSharpExporter>();

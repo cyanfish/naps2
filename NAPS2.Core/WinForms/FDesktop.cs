@@ -48,6 +48,7 @@ namespace NAPS2.WinForms
         private readonly IUserConfigManager userConfigManager;
         private readonly KeyboardShortcutManager ksm;
         private readonly WinFormsExportHelper exportHelper;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
         #endregion
 
@@ -64,7 +65,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper)
+        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer)
         {
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
@@ -80,6 +81,7 @@ namespace NAPS2.WinForms
             this.ksm = ksm;
             this.thumbnailRenderer = thumbnailRenderer;
             this.exportHelper = exportHelper;
+            this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
 
             Shown += FDesktop_Shown;
@@ -1434,7 +1436,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private static IDataObject GetDataObjectForImages(IEnumerable<ScannedImage> images, bool includeBitmap)
+        private IDataObject GetDataObjectForImages(IEnumerable<ScannedImage> images, bool includeBitmap)
         {
             var imageList = images.ToList();
             IDataObject ido = new DataObject();
@@ -1444,7 +1446,7 @@ namespace NAPS2.WinForms
             }
             if (includeBitmap)
             {
-                using (var firstBitmap = imageList[0].GetImage())
+                using (var firstBitmap = scannedImageRenderer.Render(imageList[0]))
                 {
                     ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
                     ido.SetData(DataFormats.Rtf, true, RtfEncodeImages(firstBitmap, imageList));
@@ -1454,7 +1456,7 @@ namespace NAPS2.WinForms
             return ido;
         }
 
-        private static string RtfEncodeImages(Bitmap firstBitmap, List<ScannedImage> images)
+        private string RtfEncodeImages(Bitmap firstBitmap, List<ScannedImage> images)
         {
             var sb = new StringBuilder();
             sb.Append("{");
@@ -1464,7 +1466,7 @@ namespace NAPS2.WinForms
             }
             foreach (var img in images.Skip(1))
             {
-                using (var bitmap = img.GetImage())
+                using (var bitmap = scannedImageRenderer.Render(img))
                 {
                     if (!AppendRtfEncodedImage(bitmap, img.FileFormat, sb, true))
                     {
