@@ -21,14 +21,12 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
         private readonly ThumbnailRenderer thumbnailRenderer;
-        private readonly IGenericPdfImporter genericPdfImporter;
 
-        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer, IGenericPdfImporter genericPdfImporter)
+        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
             this.thumbnailRenderer = thumbnailRenderer;
-            this.genericPdfImporter = genericPdfImporter;
         }
 
         public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
@@ -41,7 +39,7 @@ namespace NAPS2.ImportExport.Pdf
             bool aborted = false;
             try
             {
-                PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.ReadOnly, args =>
+                PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.Import, args =>
                 {
                     if (!pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++, out args.Password))
                     {
@@ -49,19 +47,16 @@ namespace NAPS2.ImportExport.Pdf
                         aborted = true;
                     }
                 });
-                if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
-                {
-                    // TODO: If we export a page directly, then try and import again this condition won't be hit
-                    // Maybe we need some kind of per-page annotation
-                    // Or a flag for generic pdf handling on the overall doc, but then we'd need the generic importer to be able to pull images directly
-                    return genericPdfImporter.Import(filePath, progressCallback);
-                }
                 if (passwordAttempts > 0
                     && !document.SecuritySettings.HasOwnerPermissions
                     && !document.SecuritySettings.PermitExtractContent)
                 {
                     errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
                     return Enumerable.Empty<ScannedImage>();
+                }
+                if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
+                {
+                    return document.Pages.Cast<PdfPage>().Select(ExportRawPdfPage);
                 }
 
                 int i = 0;
@@ -86,14 +81,16 @@ namespace NAPS2.ImportExport.Pdf
 
         private IEnumerable<ScannedImage> GetImagesFromPage(PdfPage page)
         {
-            // Get resources dictionary
-            PdfDictionary resources = page.Elements.GetDictionary("/Resources");
-            if (resources == null)
+            if (page.CustomValues.Elements.ContainsKey("/NAPS2ImportedPage"))
             {
+                yield return ExportRawPdfPage(page);
                 yield break;
             }
+
+            // Get resources dictionary
+            PdfDictionary resources = page.Elements.GetDictionary("/Resources");
             // Get external objects dictionary
-            PdfDictionary xObjects = resources.Elements.GetDictionary("/XObject");
+            PdfDictionary xObjects = resources?.Elements.GetDictionary("/XObject");
             if (xObjects == null)
             {
                 yield break;
@@ -102,11 +99,7 @@ namespace NAPS2.ImportExport.Pdf
             foreach (PdfItem item in xObjects.Elements.Values)
             {
                 var reference = item as PdfReference;
-                if (reference == null)
-                {
-                    continue;
-                }
-                var xObject = reference.Value as PdfDictionary;
+                var xObject = reference?.Value as PdfDictionary;
                 // Is external object an image?
                 if (xObject != null && xObject.Elements.GetString("/Subtype") == "/Image")
                 {
@@ -141,6 +134,21 @@ namespace NAPS2.ImportExport.Pdf
                     }
                 }
             }
+        }
+
+        private ScannedImage ExportRawPdfPage(PdfPage page)
+        {
+            string pdfPath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+            var document = new PdfDocument();
+            document.Pages.Add(page);
+            document.Save(pdfPath);
+
+            var image = ScannedImage.FromSinglePagePdf(pdfPath, false);
+            using (var bitmap = image.GetImage())
+            {
+                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+            }
+            return image;
         }
 
         private ScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes)

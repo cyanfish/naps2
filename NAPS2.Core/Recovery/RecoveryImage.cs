@@ -81,6 +81,10 @@ namespace NAPS2.Recovery
 
         private static string GetExtension(ImageFormat imageFormat)
         {
+            if (ReferenceEquals(imageFormat, null))
+            {
+                return ".pdf";
+            }
             if (Equals(imageFormat, ImageFormat.Png))
             {
                 return ".png";

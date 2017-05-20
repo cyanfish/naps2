@@ -16,7 +16,7 @@ using NAPS2.WinForms;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class GhostscriptPdfImporter : IGenericPdfImporter
+    public class GhostscriptPdfRenderer : IPdfRenderer
     {
         private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IFormFactory formFactory;
@@ -24,53 +24,40 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IErrorOutput errorOutput;
         private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public GhostscriptPdfImporter(OcrDependencyManager ocrDependencyManager, IFormFactory formFactory, AppConfigManager appConfigManager, IErrorOutput errorOutput, ThumbnailRenderer thumbnailRenderer)
+        private readonly Lazy<byte[]> gsLibBytes;
+
+        public GhostscriptPdfRenderer(OcrDependencyManager ocrDependencyManager, IFormFactory formFactory, AppConfigManager appConfigManager, IErrorOutput errorOutput, ThumbnailRenderer thumbnailRenderer)
         {
             this.ocrDependencyManager = ocrDependencyManager;
             this.formFactory = formFactory;
             this.appConfigManager = appConfigManager;
             this.errorOutput = errorOutput;
             this.thumbnailRenderer = thumbnailRenderer;
+
+            gsLibBytes = new Lazy<byte[]>(() => File.ReadAllBytes(ocrDependencyManager.Components.Ghostscript921.Path));
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
+        public IEnumerable<Bitmap> Render(string path)
         {
-            // TODO: Pass in password somehow - perhaps add an optional parameter to the parent interface?
-            // Or cache the value somehow in pdfpasswordprovider
-
             if (appConfigManager.Config.DisableGenericPdfImport || !VerifyDependencies())
             {
-                errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
+                errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(path)));
                 yield break;
             }
 
             // TODO: Maybe allow this to be configured
             int dpi = ScanDpi.Dpi300.ToIntDpi();
 
-            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 var rasterizer = new GhostscriptRasterizer();
-                rasterizer.Open(stream, File.ReadAllBytes(ocrDependencyManager.Components.Ghostscript921.Path));
+                rasterizer.Open(stream, gsLibBytes.Value);
 
                 for (int pageNumber = 1; pageNumber <= rasterizer.PageCount; pageNumber++)
                 {
-                    if (!progressCallback(pageNumber - 1, rasterizer.PageCount))
-                    {
-                        break;
-                    }
-                    using (var bitmap = (Bitmap) rasterizer.GetPage(dpi, dpi, pageNumber))
-                    {
-                        var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
-                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
-                        // TODO: Recovery index needs to store this, maybe (but we wouldn't be able to keep a lock...)
-                        image.Source = new ScannedImage.SourceInfo
-                        {
-                            FilePath = filePath,
-                            PageNumber = pageNumber,
-                            FileLock = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read)
-                        };
-                        yield return image;
-                    }
+                    var bitmap = (Bitmap)rasterizer.GetPage(dpi, dpi, pageNumber);
+                    bitmap.SetResolution(dpi, dpi);
+                    yield return bitmap;
                 }
             }
         }

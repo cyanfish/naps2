@@ -117,8 +117,8 @@
     <Compile Include="ImportExport\DirectImportOperation.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
-    <Compile Include="ImportExport\Pdf\GhostscriptPdfImporter.cs" />
-    <Compile Include="ImportExport\Pdf\IGenericPdfImporter.cs" />
+    <Compile Include="ImportExport\Pdf\GhostscriptPdfRenderer.cs" />
+    <Compile Include="ImportExport\Pdf\IPdfRenderer.cs" />
     <Compile Include="Scan\Images\DeskewOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
     <Compile Include="ImportExport\SaveSeparatorHelper.cs" />

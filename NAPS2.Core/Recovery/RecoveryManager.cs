@@ -138,9 +138,16 @@ namespace NAPS2.Recovery
 
                     string imagePath = Path.Combine(folderToRecoverFrom.FullName, indexImage.FileName);
                     ScannedImage scannedImage;
-                    using (var bitmap = new Bitmap(imagePath))
+                    if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                     {
-                        scannedImage = new ScannedImage(bitmap, indexImage.BitDepth, indexImage.HighQuality, -1);
+                        scannedImage = ScannedImage.FromSinglePagePdf(imagePath, true);
+                    }
+                    else
+                    {
+                        using (var bitmap = new Bitmap(imagePath))
+                        {
+                            scannedImage = new ScannedImage(bitmap, indexImage.BitDepth, indexImage.HighQuality, -1);
+                        }
                     }
                     foreach (var transform in indexImage.TransformList)
                     {

@@ -87,12 +87,9 @@ namespace NAPS2.ImportExport.Pdf
             int progress = 0;
             foreach (var image in images)
             {
-                if (image.Source != null && !image.RecoveryIndexImage.TransformList.Any())
+                if (image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any())
                 {
-                    // Pull the PDF content directly from the source to maintain objects, dpi, etc.
-                    // TODO: Fix for password-protected documents
-                    PdfDocument sourceDoc = PdfReader.Open(image.Source.FilePath, PdfDocumentOpenMode.Import);
-                    document.AddPage(sourceDoc.Pages[image.Source.PageNumber - 1]);
+                    CopyPdfPageToDoc(document, image);
                 }
                 else
                 {
@@ -128,39 +125,35 @@ namespace NAPS2.ImportExport.Pdf
                     return null;
                 }
 
-                if (image.Source != null && !image.RecoveryIndexImage.TransformList.Any())
+                if (image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any())
                 {
                     // TODO: Maybe allow OCR to be used?
                     // Also consider - maybe we can use this to prevent duplicate OCR after import.
                     // But we would still need some way to re-run it e.g. with a different language.
-                    // TODO: Clean up the common code between here and above
-                    PdfDocument sourceDoc = PdfReader.Open(image.Source.FilePath, PdfDocumentOpenMode.Import);
-                    document.AddPage(sourceDoc.Pages[image.Source.PageNumber - 1]);
+                    CopyPdfPageToDoc(document, image);
                     return null;
                 }
-                else
+
+                using (Stream stream = image.GetImageStream())
+                using (var img = new Bitmap(stream))
                 {
-                    using (Stream stream = image.GetImageStream())
-                    using (var img = new Bitmap(stream))
+                    if (!progressCallback(progress))
                     {
-                        if (!progressCallback(progress))
-                        {
-                            return null;
-                        }
-
-                        PdfPage page = document.AddPage();
-                        DrawImageOnPage(page, img);
-
-                        if (!progressCallback(progress))
-                        {
-                            return null;
-                        }
-
-                        string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-                        img.Save(tempImageFilePath);
-
-                        return Tuple.Create(page, tempImageFilePath);
+                        return null;
                     }
+
+                    PdfPage page = document.AddPage();
+                    DrawImageOnPage(page, img);
+
+                    if (!progressCallback(progress))
+                    {
+                        return null;
+                    }
+
+                    string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+                    img.Save(tempImageFilePath);
+
+                    return Tuple.Create(page, tempImageFilePath);
                 }
             }).StepParallel((page, tempImageFilePath) =>
             {
@@ -206,6 +199,15 @@ namespace NAPS2.ImportExport.Pdf
                 DrawOcrTextOnPage(page, ocrResult);
             });
             return progressCallback(progress);
+        }
+
+        private void CopyPdfPageToDoc(PdfDocument destDoc, ScannedImage image)
+        {
+            // Pull the PDF content directly to maintain objects, dpi, etc.
+            PdfDocument sourceDoc = PdfReader.Open(image.RecoveryFilePath, PdfDocumentOpenMode.Import);
+            PdfPage sourcePage = sourceDoc.Pages.Cast<PdfPage>().Single();
+            PdfPage destPage = destDoc.AddPage(sourcePage);
+            destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue();
         }
 
         private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)

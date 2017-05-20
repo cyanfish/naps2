@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
 
@@ -20,6 +22,13 @@ namespace NAPS2.Scan.Images
         private readonly List<Transform> transformList;
 
         private Bitmap thumbnail;
+
+        public static IPdfRenderer PdfRenderer { get; set; }
+
+        public static ScannedImage FromSinglePagePdf(string pdfPath, bool copy)
+        {
+            return new ScannedImage(pdfPath, copy);
+        }
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
@@ -40,28 +49,38 @@ namespace NAPS2.Scan.Images
             transformList = recoveryImage.IndexImage.TransformList;
         }
 
+        private ScannedImage(string pdfPath, bool copy)
+        {
+            transformList = new List<Transform>();
+            recoveryImage = RecoveryImage.CreateNew(null, ScanBitDepth.C24Bit, false, transformList);
+
+            if (copy)
+            {
+                File.Copy(pdfPath, recoveryImage.FilePath);
+            }
+            else
+            {
+                File.Move(pdfPath, recoveryImage.FilePath);
+            }
+
+            recoveryImage.Save();
+        }
+
         public PatchCode PatchCode { get; set; }
 
-        public SourceInfo Source { get; set; }
+        public ImageFormat FileFormat => recoveryImage.FileFormat;
 
-        public ImageFormat FileFormat { get { return recoveryImage.FileFormat; } }
+        public RecoveryIndexImage RecoveryIndexImage => recoveryImage.IndexImage;
 
-        public RecoveryIndexImage RecoveryIndexImage
-        {
-            get
-            {
-                return recoveryImage.IndexImage;
-            }
-        }
+        public string RecoveryFilePath => recoveryImage.FilePath;
 
-        public long Size
-        {
-            get { return new FileInfo(recoveryImage.FilePath).Length; }
-        }
+        public long Size => new FileInfo(recoveryImage.FilePath).Length;
 
         public Bitmap GetImage()
         {
-            var bitmap = new Bitmap(recoveryImage.FilePath);
+            var bitmap = recoveryImage.FileFormat == null
+                ? PdfRenderer.Render(recoveryImage.FilePath).Single()
+                : new Bitmap(recoveryImage.FilePath);
             lock (transformList)
             {
                 return Transform.PerformAll(bitmap, transformList);
@@ -73,7 +92,7 @@ namespace NAPS2.Scan.Images
             using (var transformed = GetImage())
             {
                 var stream = new MemoryStream();
-                transformed.Save(stream, recoveryImage.FileFormat);
+                transformed.Save(stream, recoveryImage.FileFormat ?? (RecoveryIndexImage.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg));
                 return stream;
             }
         }
@@ -89,7 +108,6 @@ namespace NAPS2.Scan.Images
                     thumbnail.Dispose();
                     thumbnail = null;
                 }
-                Source?.FileLock?.Dispose();
             }
         }
 
@@ -143,15 +161,6 @@ namespace NAPS2.Scan.Images
         public void MovedTo(int index)
         {
             recoveryImage.Move(index);
-        }
-
-        public class SourceInfo
-        {
-            public string FilePath { get; set; }
-
-            public int PageNumber { get; set; }
-
-            public IDisposable FileLock { get; set;  }
         }
     }
 }

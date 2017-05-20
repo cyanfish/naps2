@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using NAPS2.DI.Modules;
+using NAPS2.ImportExport.Pdf;
+using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject;
@@ -15,6 +17,7 @@ namespace NAPS2.DI.EntryPoints
         public static void Run(string[] args)
         {
             var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
+            ScannedImage.PdfRenderer = kernel.Get<GhostscriptPdfRenderer>();
 
             var lifecycle = kernel.Get<Lifecycle>();
             lifecycle.ParseArgs(args);
