@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using NAPS2.Dependencies;
 using NAPS2.Lang.Resources;
 using NAPS2.Util;
 

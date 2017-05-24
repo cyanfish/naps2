@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using NAPS2.Config;
 using NAPS2.Util;
 
-namespace NAPS2.Ocr
+namespace NAPS2.Dependencies
 {
-    public class OcrComponent
+    public class ExternalComponent
     {
         public static string BasePath { get; set; }
 
+        public static void InitBasePath(AppConfigManager appConfigManager)
+        {
+            var customPath = appConfigManager.Config.ComponentsPath;
+            BasePath = string.IsNullOrWhiteSpace(customPath)
+                ? Paths.Components
+                : Environment.ExpandEnvironmentVariables(customPath);
+        }
+
         private readonly PlatformSupport platformSupport;
 
-        public OcrComponent(string path, PlatformSupport platformSupport = null)
+        public ExternalComponent(string path, PlatformSupport platformSupport = null)
         {
             this.platformSupport = platformSupport;
             Path = System.IO.Path.Combine(BasePath, path);

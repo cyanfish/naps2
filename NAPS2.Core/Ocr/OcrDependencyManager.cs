@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Dependencies;
 using NAPS2.Lang;
 using NAPS2.Util;
 
@@ -10,38 +11,18 @@ namespace NAPS2.Ocr
 {
     public class OcrDependencyManager
     {
-        private readonly AppConfigManager appConfigManager;
-
         public OcrDependencyManager(AppConfigManager appConfigManager)
         {
-            this.appConfigManager = appConfigManager;
-
-            OcrComponent.BasePath = ComponentsPath;
+            ExternalComponent.InitBasePath(appConfigManager);
             Components = new OcrComponents();
             Downloads = new OcrDownloads();
-        }
-
-        private string ComponentsPath
-        {
-            get
-            {
-                var customPath = appConfigManager.Config.ComponentsPath;
-                if (string.IsNullOrWhiteSpace(customPath))
-                {
-                    return Paths.Components;
-                }
-                else
-                {
-                    return Environment.ExpandEnvironmentVariables(customPath);
-                }
-            }
         }
 
         public readonly OcrComponents Components;
 
         public readonly OcrDownloads Downloads;
 
-        public OcrComponent InstalledTesseractExe
+        public ExternalComponent InstalledTesseractExe
         {
             get
             {
@@ -212,40 +193,27 @@ namespace NAPS2.Ocr
 
         public class OcrComponents
         {
-            public readonly OcrComponent Tesseract304Xp = new OcrComponent(@"tesseract-3.0.4\tesseract_xp.exe", PlatformSupport.Windows);
+            public readonly ExternalComponent Tesseract304Xp = new ExternalComponent(@"tesseract-3.0.4\tesseract_xp.exe", PlatformSupport.Windows);
 
-            public readonly OcrComponent Tesseract304 = new OcrComponent(@"tesseract-3.0.4\tesseract.exe", PlatformSupport.Windows.Except(PlatformSupport.WindowsXp));
+            public readonly ExternalComponent Tesseract304 = new ExternalComponent(@"tesseract-3.0.4\tesseract.exe", PlatformSupport.Windows.Except(PlatformSupport.WindowsXp));
 
-            public readonly OcrComponent Tesseract302 = new OcrComponent(@"tesseract-3.0.2\tesseract.exe", PlatformSupport.Windows);
+            public readonly ExternalComponent Tesseract302 = new ExternalComponent(@"tesseract-3.0.2\tesseract.exe", PlatformSupport.Windows);
 
-            public readonly IDictionary<string, OcrComponent> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.4\tessdata", x.Filename.Replace(".gz", ""))));
+            public readonly IDictionary<string, ExternalComponent> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new ExternalComponent(Path.Combine(@"tesseract-3.0.4\tessdata", x.Filename.Replace(".gz", ""))));
 
             // The set of 302 languages is actually smaller, but that has no practical effect so we don't have to store the difference anywhere
-            public readonly IDictionary<string, OcrComponent> Tesseract302Languages = LanguageData.ToDictionary(x => x.Code, x => new OcrComponent(Path.Combine(@"tesseract-3.0.2\tessdata", x.Filename.Replace(".gz", ""))));
-
-            private readonly OcrComponent ghostscript921X32 = new OcrComponent(@"gs-9.21\gsdll32.dll", PlatformSupport.Windows);
-
-            private readonly OcrComponent ghostscript921X64 = new OcrComponent(@"gs-9.21\gsdll64.dll", PlatformSupport.Windows);
-
-            public OcrComponent Ghostscript921 => Environment.Is64BitProcess ? ghostscript921X64 : ghostscript921X32;
+            public readonly IDictionary<string, ExternalComponent> Tesseract302Languages = LanguageData.ToDictionary(x => x.Code, x => new ExternalComponent(Path.Combine(@"tesseract-3.0.2\tessdata", x.Filename.Replace(".gz", ""))));
         }
 
         public class OcrDownloads
         {
             private const string URL_FORMAT = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download";
-            private const string GS_URL_FORMAT = @"https://sourceforge.net/projects/naps2/files/components/gs-9.21/{0}/download";
 
             public readonly DownloadInfo Tesseract304Xp = new DownloadInfo("tesseract_xp.exe.gz", URL_FORMAT, 1.32, "98d15e4765caae864f16fa2ab106e3fd6adbe8c3", DownloadFormat.Gzip);
 
             public readonly DownloadInfo Tesseract304 = new DownloadInfo("tesseract.exe.gz", URL_FORMAT, 1.32, "0b0fd21cd886c04c60ed5c3f38b9120b408139b3", DownloadFormat.Gzip);
 
             public readonly IDictionary<string, DownloadInfo> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new DownloadInfo(x.Filename, URL_FORMAT, x.Size, x.Sha1, DownloadFormat.Gzip));
-            
-            private readonly DownloadInfo ghostscript921X32 = new DownloadInfo("gsdll32.dll.gz", GS_URL_FORMAT, 10.39, "fd7446a05efaf467f5f6a7123c525b0fc7bde711", DownloadFormat.Gzip);
-
-            private readonly DownloadInfo ghostscript921X64 = new DownloadInfo("gsdll64.dll.gz", GS_URL_FORMAT, 10.78, "de173f9020c21784727f8c749190d610e4856a0c", DownloadFormat.Gzip);
-
-            public DownloadInfo Ghostscript921 => Environment.Is64BitProcess ? ghostscript921X64 : ghostscript921X32;
         }
         
         private class OcrLanguage

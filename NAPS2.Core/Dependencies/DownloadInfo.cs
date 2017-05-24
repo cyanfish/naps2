@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NAPS2.Util
+namespace NAPS2.Dependencies
 {
     public class DownloadInfo
     {
