@@ -44,9 +44,6 @@ namespace NAPS2.Scan.Images.Transforms
             return bitmap;
         }
 
-        public override bool IsNull
-        {
-            get { return Contrast == 0; }
-        }
+        public override bool IsNull => Contrast == 0;
     }
 }

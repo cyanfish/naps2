@@ -41,10 +41,7 @@ namespace NAPS2.WinForms
             labelPage.Text = string.Format(MiscResources.ScanPageProgress, PageNumber);
         }
 
-        protected override bool ShowWithoutActivation
-        {
-            get { return true; }
-        }
+        protected override bool ShowWithoutActivation => true;
 
         private void FScanProgress_Shown(object sender, EventArgs e)
         {
@@ -52,13 +49,10 @@ namespace NAPS2.WinForms
             {
                 try
                 {
-                    if (wia.Item != null)
+                    var imageFile = (ImageFile) wia.Item?.Transfer(Format);
+                    if (imageFile != null)
                     {
-                        var imageFile = (ImageFile)wia.Item.Transfer(Format);
-                        if (imageFile != null)
-                        {
-                            ImageStream = new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
-                        }
+                        ImageStream = new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
                     }
                 }
                 catch (Exception ex)

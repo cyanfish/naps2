@@ -37,9 +37,6 @@ namespace NAPS2.Scan.Images.Transforms
             return bitmap;
         }
 
-        public override bool IsNull
-        {
-            get { return Brightness == 0; }
-        }
+        public override bool IsNull => Brightness == 0;
     }
 }

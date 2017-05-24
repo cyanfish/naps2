@@ -10,13 +10,8 @@ namespace NAPS2.Util
 
         public static ILogger Logger
         {
-            get { return _logger; }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException("value");
-                _logger = value;
-            }
+            get => _logger;
+            set => _logger = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public static void Error(string message, params object[] args)

@@ -18,8 +18,8 @@ namespace NAPS2.ImportExport.Pdf
 
         public PdfSettings PdfSettings
         {
-            get { return localPdfSettings ?? userConfigManager.Config.PdfSettings ?? new PdfSettings(); }
-            set { localPdfSettings = value; }
+            get => localPdfSettings ?? userConfigManager.Config.PdfSettings ?? new PdfSettings();
+            set => localPdfSettings = value;
         }
     }
 }

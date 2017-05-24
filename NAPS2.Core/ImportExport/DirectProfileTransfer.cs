@@ -21,10 +21,10 @@ namespace NAPS2.ImportExport
             ScanProfile.IsDeviceLocked = false;
         }
 
-        public int ProcessID { get; private set; }
+        public int ProcessID { get; }
 
-        public ScanProfile ScanProfile { get; private set; }
+        public ScanProfile ScanProfile { get; }
 
-        public bool Locked { get; private set; }
+        public bool Locked { get; }
     }
 }

@@ -29,12 +29,12 @@ namespace NAPS2.Util
         /// <summary>
         /// Gets the size of each element in the unmanaged array in bytes.
         /// </summary>
-        public int ElementSize { get; private set; }
+        public int ElementSize { get; }
 
         /// <summary>
         /// Gets the number of elements in the unmanaged array.
         /// </summary>
-        public int Length { get; private set; }
+        public int Length { get; }
 
         /// <summary>
         /// Gets the pointer offset to access the element of the unmanaged array at the given index.
@@ -45,7 +45,7 @@ namespace NAPS2.Util
         {
             if (index < 0 || index >= Length)
             {
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
             return index * ElementSize;
         }
@@ -83,12 +83,6 @@ namespace NAPS2.Util
         /// </summary>
         /// <param name="index">The index of the item to access.</param>
         /// <returns>The pointer to the element.</returns>
-        public IntPtr this[int index]
-        {
-            get
-            {
-                return PointerWithOffset(index);
-            }
-        }
+        public IntPtr this[int index] => PointerWithOffset(index);
     }
 }

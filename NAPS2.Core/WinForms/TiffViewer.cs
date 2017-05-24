@@ -86,8 +86,7 @@ namespace NAPS2.WinForms
                     }
                 }
             }
-            get
-            { return xzoom; }
+            get => xzoom;
         }
 
         public event EventHandler<EventArgs> ZoomChanged;
@@ -103,8 +102,7 @@ namespace NAPS2.WinForms
         {
             if (disposing)
             {
-                if (components != null)
-                    components.Dispose();
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }

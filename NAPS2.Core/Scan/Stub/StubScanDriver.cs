@@ -76,6 +76,6 @@ namespace NAPS2.Scan.Stub
             return image;
         }
 
-        public string DriverName { get; private set; }
+        public string DriverName { get; }
     }
 }

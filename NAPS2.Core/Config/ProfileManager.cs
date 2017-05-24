@@ -19,7 +19,7 @@ namespace NAPS2.Config
             this.appConfigManager = appConfigManager;
         }
 
-        public List<ScanProfile> Profiles { get { return Config; } }
+        public List<ScanProfile> Profiles => Config;
 
         public ScanProfile DefaultProfile
         {

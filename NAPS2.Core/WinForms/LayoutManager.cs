@@ -53,13 +53,13 @@ namespace NAPS2.WinForms
         /// <summary>
         /// Gets the form whose layout the LayoutManager is managing.
         /// </summary>
-        public Form Form { get; private set; }
+        public Form Form { get; }
 
         /// <summary>
         /// Gets a list of bindings belonging to the LayoutManager.
         /// Changes to this list are applied at activation.
         /// </summary>
-        public List<Binding> Bindings { get; private set; }
+        public List<Binding> Bindings { get; }
 
         /// <summary>
         /// Gets a value indicating whether the LayoutManager has been activated (but not deacivated since).
@@ -248,7 +248,7 @@ namespace NAPS2.WinForms
                 Dependencies = new HashSet<Control>();
             }
 
-            public HashSet<Control> Dependencies { get; private set; }
+            public HashSet<Control> Dependencies { get; }
 
             protected override Expression VisitMember(MemberExpression node)
             {
@@ -286,11 +286,11 @@ namespace NAPS2.WinForms
                 compiledValueFunc = valueFunc.Compile();
             }
 
-            public Control Control { get; private set; }
+            public Control Control { get; }
 
-            public BindingType BindingType { get; private set; }
+            public BindingType BindingType { get; }
 
-            public Expression<Func<int>> ValueFunc { get; private set; }
+            public Expression<Func<int>> ValueFunc { get; }
 
             internal int InitialValue { get; set; }
 
@@ -340,13 +340,7 @@ namespace NAPS2.WinForms
                 }
             }
 
-            internal int DependentValue
-            {
-                get
-                {
-                    return compiledValueFunc();
-                }
-            }
+            internal int DependentValue => compiledValueFunc();
         }
 
         public enum BindingType

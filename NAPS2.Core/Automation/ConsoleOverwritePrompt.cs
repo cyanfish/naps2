@@ -11,7 +11,7 @@ namespace NAPS2.Automation
     {
         public static bool ForceOverwrite { get; set; }
 
-        private IErrorOutput errorOutput;
+        private readonly IErrorOutput errorOutput;
 
         public ConsoleOverwritePrompt(IErrorOutput errorOutput)
         {

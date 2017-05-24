@@ -22,45 +22,15 @@ namespace NAPS2
 
         private static readonly string ComponentsPath = Path.Combine(AppDataPath, "components");
 
-        public static string AppData
-        {
-            get
-            {
-                return EnsureFolderExists(AppDataPath);
-            }
-        }
+        public static string AppData => EnsureFolderExists(AppDataPath);
 
-        public static string Executable
-        {
-            get
-            {
-                return EnsureFolderExists(ExecutablePath);
-            }
-        }
+        public static string Executable => EnsureFolderExists(ExecutablePath);
 
-        public static string Temp
-        {
-            get
-            {
-                return EnsureFolderExists(TempPath);
-            }
-        }
+        public static string Temp => EnsureFolderExists(TempPath);
 
-        public static string Recovery
-        {
-            get
-            {
-                return EnsureFolderExists(RecoveryPath);
-            }
-        }
+        public static string Recovery => EnsureFolderExists(RecoveryPath);
 
-        public static string Components
-        {
-            get
-            {
-                return EnsureFolderExists(ComponentsPath);
-            }
-        }
+        public static string Components => EnsureFolderExists(ComponentsPath);
 
         private static string EnsureFolderExists(string folderPath)
         {

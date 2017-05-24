@@ -89,15 +89,9 @@ namespace NAPS2.WinForms
         {
             if (disposing)
             {
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-                if (tiffViewer1 != null)
-                {
-                    tiffViewer1.Image.Dispose();
-                    tiffViewer1.Dispose();
-                }
+                components?.Dispose();
+                tiffViewer1?.Image.Dispose();
+                tiffViewer1?.Dispose();
             }
             base.Dispose(disposing);
         }

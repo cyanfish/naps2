@@ -15,14 +15,14 @@ namespace NAPS2.Dependencies
             Format = format;
         }
 
-        public string FileName { get; private set; }
+        public string FileName { get; }
 
-        public string Url { get; private set; }
+        public string Url { get; }
 
-        public DownloadFormat Format { get; private set; }
+        public DownloadFormat Format { get; }
 
-        public double Size { get; private set; }
+        public double Size { get; }
 
-        public string Sha1 { get; private set; }
+        public string Sha1 { get; }
     }
 }

@@ -30,7 +30,7 @@ namespace NAPS2.WinForms
 
         public IOperation Operation
         {
-            get { return operation; }
+            get => operation;
             set
             {
                 operation = value;

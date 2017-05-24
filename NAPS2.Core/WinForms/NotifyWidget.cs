@@ -41,10 +41,7 @@ namespace NAPS2.WinForms
 
         private void DoHideNotify()
         {
-            if (HideNotify != null)
-            {
-                HideNotify(this, new EventArgs());
-            }
+            HideNotify?.Invoke(this, new EventArgs());
             hideTimer.Stop();
         }
 

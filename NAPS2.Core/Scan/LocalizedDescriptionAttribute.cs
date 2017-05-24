@@ -17,9 +17,6 @@ namespace NAPS2.Scan
             resourceManager = new ResourceManager(resourceType);
         }
 
-        public override string Description
-        {
-            get { return resourceManager.GetString(resourceName); }
-        }
+        public override string Description => resourceManager.GetString(resourceName);
     }
 }

@@ -18,13 +18,7 @@ namespace NAPS2.Recovery
         {
         }
 
-        public RecoveryIndex Index
-        {
-            get
-            {
-                return Config;
-            }
-        }
+        public RecoveryIndex Index => Config;
 
         protected override RecoveryIndex Deserialize(Stream configFileStream)
         {

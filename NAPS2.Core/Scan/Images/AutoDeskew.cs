@@ -5,11 +5,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace NAPS2.Util
+namespace NAPS2.Scan.Images
 {
     public static class AutoDeskewExtensions
     {

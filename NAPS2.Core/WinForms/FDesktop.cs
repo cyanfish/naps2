@@ -120,10 +120,7 @@ namespace NAPS2.WinForms
             AssignKeyboardShortcuts();
             UpdateScanButton();
 
-            if (layoutManager != null)
-            {
-                layoutManager.Deactivate();
-            }
+            layoutManager?.Deactivate();
             btnZoomIn.Location = new Point(btnZoomIn.Location.X, thumbnailList1.Height - 33);
             btnZoomOut.Location = new Point(btnZoomOut.Location.X, thumbnailList1.Height - 33);
             btnZoomMouseCatcher.Location = new Point(btnZoomMouseCatcher.Location.X, thumbnailList1.Height - 33);
@@ -340,8 +337,7 @@ namespace NAPS2.WinForms
         {
             Activate();
             ScanProfile profile;
-            if (profileManager.DefaultProfile != null && profileManager.DefaultProfile.Device != null
-                && profileManager.DefaultProfile.Device.ID == deviceID)
+            if (profileManager.DefaultProfile?.Device?.ID == deviceID)
             {
                 // Try to use the default profile if it has the right device
                 profile = profileManager.DefaultProfile;
@@ -434,10 +430,7 @@ namespace NAPS2.WinForms
 
         private IEnumerable<int> SelectedIndices
         {
-            get
-            {
-                return thumbnailList1.SelectedIndices.Cast<int>();
-            }
+            get => thumbnailList1.SelectedIndices.Cast<int>();
             set
             {
                 disableSelectedIndexChangedEvent = true;
@@ -451,10 +444,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private IEnumerable<ScannedImage> SelectedImages
-        {
-            get { return imageList.Images.ElementsAt(SelectedIndices); }
-        }
+        private IEnumerable<ScannedImage> SelectedImages => imageList.Images.ElementsAt(SelectedIndices);
 
         public void ReceiveScannedImage(ScannedImage scannedImage)
         {
@@ -1581,11 +1571,8 @@ namespace NAPS2.WinForms
 
         private void RenderThumbnails(int thumbnailSize, IEnumerable<ScannedImage> imagesToRenderThumbnailsFor)
         {
-            if (renderThumbnailsCts != null)
-            {
-                // Cancel any previous task so that no two run at the same time
-                renderThumbnailsCts.Cancel();
-            }
+            // Cancel any previous task so that no two run at the same time
+            renderThumbnailsCts?.Cancel();
             renderThumbnailsCts = new CancellationTokenSource();
             var ct = renderThumbnailsCts.Token;
             Task.Factory.StartNew(() =>

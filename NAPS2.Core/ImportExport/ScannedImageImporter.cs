@@ -23,7 +23,7 @@ namespace NAPS2.ImportExport
         {
             if (filePath == null)
             {
-                throw new ArgumentNullException("filePath");
+                throw new ArgumentNullException(nameof(filePath));
             }
             switch (Path.GetExtension(filePath).ToLowerInvariant())
             {

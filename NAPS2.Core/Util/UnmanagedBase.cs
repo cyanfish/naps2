@@ -22,13 +22,7 @@ namespace NAPS2.Util
         /// <summary>
         /// Gets a value indicated whether the unmanaged structure is null.
         /// </summary>
-        public bool IsNull
-        {
-            get
-            {
-                return Pointer == IntPtr.Zero;
-            }
-        }
+        public bool IsNull => Pointer == IntPtr.Zero;
 
         /// <summary>
         /// Gets a pointer to the unmanaged structure. If the provided value was null, this is IntPtr.Zero.

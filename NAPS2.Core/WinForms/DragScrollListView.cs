@@ -26,10 +26,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        private int EdgeSize
-        {
-            get { return Font.Height; }
-        }
+        private int EdgeSize => Font.Height;
 
         private void InitializeComponent()
         {

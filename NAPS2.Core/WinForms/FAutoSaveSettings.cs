@@ -49,10 +49,7 @@ namespace NAPS2.WinForms
                 .Activate();
         }
 
-        public bool Result
-        {
-            get { return result; }
-        }
+        public bool Result => result;
 
         public ScanProfile ScanProfile { get; set; }
 

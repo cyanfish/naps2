@@ -55,8 +55,8 @@ namespace NAPS2.Recovery
 
         public static int RecoveryFileNumber
         {
-            get { return _recoveryFileNumber; }
-            set { _recoveryFileNumber = value; }
+            get => _recoveryFileNumber;
+            set => _recoveryFileNumber = value;
         }
 
         public static RecoveryImage CreateNew(ImageFormat fileFormat, ScanBitDepth bitDepth, bool highQuality, List<Transform> transformList)
@@ -129,13 +129,13 @@ namespace NAPS2.Recovery
             Save();
         }
 
-        public ImageFormat FileFormat { get; private set; }
+        public ImageFormat FileFormat { get; }
 
-        public string FileName { get; private set; }
+        public string FileName { get; }
 
-        public string FilePath { get; private set; }
+        public string FilePath { get; }
 
-        public RecoveryIndexImage IndexImage { get; private set; }
+        public RecoveryIndexImage IndexImage { get; }
 
         public void Save()
         {

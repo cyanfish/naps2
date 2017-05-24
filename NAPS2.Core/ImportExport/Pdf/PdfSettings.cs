@@ -21,28 +21,14 @@ namespace NAPS2.ImportExport.Pdf
 
         public PdfMetadata Metadata
         {
-            get { return metadata; }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-                metadata = value;
-            }
+            get => metadata;
+            set => metadata = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public PdfEncryption Encryption
         {
-            get { return encryption; }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-                encryption = value;
-            }
+            get => encryption;
+            set => encryption = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

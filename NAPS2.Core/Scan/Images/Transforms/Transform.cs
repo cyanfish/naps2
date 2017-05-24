@@ -109,6 +109,6 @@ namespace NAPS2.Scan.Images.Transforms
         /// <summary>
         /// Gets a value that indicates whether the transform is a null transformation (i.e. has no effect).
         /// </summary>
-        public virtual bool IsNull { get { return false; } }
+        public virtual bool IsNull => false;
     }
 }

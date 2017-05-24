@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
 
-namespace NAPS2.ImportExport.Pdf
+namespace NAPS2.ImportExport
 {
     public class PrintDocumentPrinter : IScannedImagePrinter
     {

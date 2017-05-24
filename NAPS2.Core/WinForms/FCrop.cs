@@ -38,18 +38,9 @@ namespace NAPS2.WinForms
 
         public CropTransform CropTransform { get; private set; }
 
-        private bool TransformMultiple
-        {
-            get { return SelectedImages != null && checkboxApplyToSelected.Checked; }
-        }
+        private bool TransformMultiple => SelectedImages != null && checkboxApplyToSelected.Checked;
 
-        private IEnumerable<ScannedImage> ImagesToTransform
-        {
-            get
-            {
-                return TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
-            }
-        }
+        private IEnumerable<ScannedImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
@@ -172,10 +163,7 @@ namespace NAPS2.WinForms
                         {
                             Invoke(new MethodInvoker(() =>
                             {
-                                if (pictureBox.Image != null)
-                                {
-                                    pictureBox.Image.Dispose();
-                                }
+                                pictureBox.Image?.Dispose();
                                 pictureBox.Image = bitmap;
                             }));
                         }
@@ -266,14 +254,8 @@ namespace NAPS2.WinForms
         {
             workingImage.Dispose();
             workingImage2.Dispose();
-            if (pictureBox.Image != null)
-            {
-                pictureBox.Image.Dispose();
-            }
-            if (previewTimer != null)
-            {
-                previewTimer.Dispose();
-            }
+            pictureBox.Image?.Dispose();
+            previewTimer?.Dispose();
         }
 
         private Point dragStartCoords;

@@ -50,45 +50,15 @@ namespace NAPS2.WinForms
             }
         }
 
-        public string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetEntryAssembly().GetName().Version.ToString();
-            }
-        }
+        public string AssemblyVersion => Assembly.GetEntryAssembly().GetName().Version.ToString();
 
-        public string AssemblyDescription
-        {
-            get
-            {
-                return GetAssemblyAttributeValue<AssemblyDescriptionAttribute>(x => x.Description);
-            }
-        }
+        public string AssemblyDescription => GetAssemblyAttributeValue<AssemblyDescriptionAttribute>(x => x.Description);
 
-        public string AssemblyProduct
-        {
-            get
-            {
-                return GetAssemblyAttributeValue<AssemblyProductAttribute>(x => x.Product);
-            }
-        }
+        public string AssemblyProduct => GetAssemblyAttributeValue<AssemblyProductAttribute>(x => x.Product);
 
-        public string AssemblyCopyright
-        {
-            get
-            {
-                return GetAssemblyAttributeValue<AssemblyCopyrightAttribute>(x => x.Copyright);
-            }
-        }
+        public string AssemblyCopyright => GetAssemblyAttributeValue<AssemblyCopyrightAttribute>(x => x.Copyright);
 
-        public string AssemblyCompany
-        {
-            get
-            {
-                return GetAssemblyAttributeValue<AssemblyCompanyAttribute>(x => x.Company);
-            }
-        }
+        public string AssemblyCompany => GetAssemblyAttributeValue<AssemblyCompanyAttribute>(x => x.Company);
 
         #endregion
 

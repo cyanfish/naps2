@@ -35,10 +35,7 @@ namespace NAPS2.Scan.Wia
             this.scannedImageHelper = scannedImageHelper;
         }
 
-        public override string DriverName
-        {
-            get { return DRIVER_NAME; }
-        }
+        public override string DriverName => DRIVER_NAME;
 
         protected override ScanDevice PromptForDeviceInternal()
         {

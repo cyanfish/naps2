@@ -140,17 +140,11 @@ namespace NAPS2.WinForms
 
             if (currentButton == 0)
             {
-                if (ClickFirst != null)
-                {
-                    ClickFirst.Invoke(this, e);
-                }
+                ClickFirst?.Invoke(this, e);
             }
             else if (currentButton == 1)
             {
-                if (ClickSecond != null)
-                {
-                    ClickSecond.Invoke(this, e);
-                }
+                ClickSecond?.Invoke(this, e);
             }
         }
     }

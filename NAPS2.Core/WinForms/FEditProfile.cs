@@ -166,23 +166,17 @@ namespace NAPS2.WinForms
             cmbPage.SelectedIndex = cmbPage.Items.Count - 2;
         }
 
-        public bool Result
-        {
-            get { return result; }
-        }
+        public bool Result => result;
 
         public ScanProfile ScanProfile
         {
-            get { return scanProfile; }
-            set { scanProfile = value.Clone(); }
+            get => scanProfile;
+            set => scanProfile = value.Clone();
         }
 
         private string DeviceDriverName
         {
-            get
-            {
-                return rdTWAIN.Checked ? TwainScanDriver.DRIVER_NAME : WiaScanDriver.DRIVER_NAME;
-            }
+            get => rdTWAIN.Checked ? TwainScanDriver.DRIVER_NAME : WiaScanDriver.DRIVER_NAME;
             set
             {
                 if (value == TwainScanDriver.DRIVER_NAME)
@@ -198,7 +192,7 @@ namespace NAPS2.WinForms
 
         public ScanDevice CurrentDevice
         {
-            get { return currentDevice; }
+            get => currentDevice;
             set
             {
                 currentDevice = value;

@@ -11,6 +11,6 @@ namespace NAPS2.Config
         {
         }
 
-        public new UserConfig Config { get { return base.Config; } }
+        public new UserConfig Config => base.Config;
     }
 }

@@ -87,7 +87,7 @@ namespace NAPS2.Scan.Twain.Legacy
                 form.Activated += FTwainGui_Activated;
             }
 
-            public List<ScannedImage> Bitmaps { get; private set; }
+            public List<ScannedImage> Bitmaps { get; }
 
             public bool PreFilterMessage(ref Message m)
             {

@@ -293,7 +293,7 @@ namespace NAPS2.Scan
             };
         }
 
-        public PageDimensions PageDimensions { get; private set; }
+        public PageDimensions PageDimensions { get; }
     }
 
     public enum PageSizeUnit

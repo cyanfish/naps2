@@ -18,8 +18,8 @@ namespace NAPS2.ImportExport.Images
 
         public ImageSettings ImageSettings
         {
-            get { return localImageSettings ?? userConfigManager.Config.ImageSettings ?? new ImageSettings(); }
-            set { localImageSettings = value; }
+            get => localImageSettings ?? userConfigManager.Config.ImageSettings ?? new ImageSettings();
+            set => localImageSettings = value;
         }
     }
 }

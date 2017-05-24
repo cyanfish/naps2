@@ -17,8 +17,8 @@ namespace NAPS2.ImportExport.Email
 
         public EmailSettings EmailSettings
         {
-            get { return localEmailSettings ?? userConfigManager.Config.EmailSettings ?? new EmailSettings(); }
-            set { localEmailSettings = value; }
+            get => localEmailSettings ?? userConfigManager.Config.EmailSettings ?? new EmailSettings();
+            set => localEmailSettings = value;
         }
     }
 }

@@ -37,13 +37,7 @@ namespace NAPS2.WinForms
 
         public BrightnessTransform BrightnessTransform { get; private set; }
 
-        private IEnumerable<ScannedImage> ImagesToTransform
-        {
-            get
-            {
-                return SelectedImages != null && checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
-            }
-        }
+        private IEnumerable<ScannedImage> ImagesToTransform => SelectedImages != null && checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
@@ -94,10 +88,7 @@ namespace NAPS2.WinForms
                         {
                             Invoke(new MethodInvoker(() =>
                             {
-                                if (pictureBox.Image != null)
-                                {
-                                    pictureBox.Image.Dispose();
-                                }
+                                pictureBox.Image?.Dispose();
                                 pictureBox.Image = result;
                             }));
                         }
@@ -141,14 +132,8 @@ namespace NAPS2.WinForms
         private void FCrop_FormClosed(object sender, FormClosedEventArgs e)
         {
             workingImage.Dispose();
-            if (pictureBox.Image != null)
-            {
-                pictureBox.Image.Dispose();
-            }
-            if (previewTimer != null)
-            {
-                previewTimer.Dispose();
-            }
+            pictureBox.Image?.Dispose();
+            previewTimer?.Dispose();
         }
 
         private void txtBrightness_TextChanged(object sender, EventArgs e)

@@ -27,7 +27,7 @@ namespace NAPS2.Dependencies
             Path = System.IO.Path.Combine(BasePath, path);
         }
 
-        public string Path { get; private set; }
+        public string Path { get; }
 
         public bool IsInstalled
         {
@@ -41,10 +41,7 @@ namespace NAPS2.Dependencies
             }
         }
 
-        public bool IsSupported
-        {
-            get { return platformSupport == null || platformSupport.Validate(); }
-        }
+        public bool IsSupported => platformSupport == null || platformSupport.Validate();
 
         public void Install(string sourcePath)
         {

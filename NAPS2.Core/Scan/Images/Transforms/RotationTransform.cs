@@ -60,8 +60,8 @@ namespace NAPS2.Scan.Images.Transforms
 
         public double Angle
         {
-            get { return angle; }
-            set { angle = NormalizeAngle(value); }
+            get => angle;
+            set => angle = NormalizeAngle(value);
         }
 
         public override Bitmap Perform(Bitmap bitmap)
@@ -120,9 +120,6 @@ namespace NAPS2.Scan.Images.Transforms
             return new RotationTransform(Angle + other2.Angle);
         }
 
-        public override bool IsNull
-        {
-            get { return Math.Abs(Angle - 0.0) < TOLERANCE; }
-        }
+        public override bool IsNull => Math.Abs(Angle - 0.0) < TOLERANCE;
     }
 }

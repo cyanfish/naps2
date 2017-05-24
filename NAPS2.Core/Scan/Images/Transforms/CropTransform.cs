@@ -47,9 +47,6 @@ namespace NAPS2.Scan.Images.Transforms
             };
         }
 
-        public override bool IsNull
-        {
-            get { return Left == 0 && Right == 0 && Top == 0 && Bottom == 0; }
-        }
+        public override bool IsNull => Left == 0 && Right == 0 && Top == 0 && Bottom == 0;
     }
 }

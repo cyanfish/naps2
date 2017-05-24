@@ -36,7 +36,7 @@ namespace NAPS2.WinForms
 
         public Image Image
         {
-            get { return image; }
+            get => image;
             set
             {
                 image = value;
@@ -50,10 +50,7 @@ namespace NAPS2.WinForms
         {
             if (disposing)
             {
-                if (components != null)
-                {
-                    components.Dispose();
-                }
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -13,8 +13,8 @@ namespace NAPS2.Scan.Wia
             Device = device;
         }
 
-        public Device Device { get; private set; }
+        public Device Device { get; }
 
-        public Item Item { get; private set; }
+        public Item Item { get; }
     }
 }

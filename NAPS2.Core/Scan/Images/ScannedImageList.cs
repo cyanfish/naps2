@@ -18,7 +18,7 @@ namespace NAPS2.Scan.Images
 
         public ThumbnailRenderer ThumbnailRenderer { get; set; }
 
-        public List<ScannedImage> Images { get; private set; }
+        public List<ScannedImage> Images { get; }
 
         public IEnumerable<int> MoveUp(IEnumerable<int> selection)
         {

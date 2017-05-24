@@ -20,10 +20,10 @@ namespace NAPS2.ImportExport
             }
         }
 
-        public int ProcessID { get; private set; }
+        public int ProcessID { get; }
 
-        public RecoveryIndexImage[] ImageRecovery { get; private set; }
+        public RecoveryIndexImage[] ImageRecovery { get; }
 
-        public string RecoveryFolder { get; set; }
+        public string RecoveryFolder { get; }
     }
 }

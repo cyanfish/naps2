@@ -24,15 +24,9 @@ namespace NAPS2.Scan.Twain
             this.formFactory = formFactory;
         }
 
-        public override string DriverName
-        {
-            get { return DRIVER_NAME; }
-        }
+        public override string DriverName => DRIVER_NAME;
 
-        private bool UseHostService
-        {
-            get { return ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess; }
-        }
+        private bool UseHostService => ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess;
 
         protected override ScanDevice PromptForDeviceInternal()
         {

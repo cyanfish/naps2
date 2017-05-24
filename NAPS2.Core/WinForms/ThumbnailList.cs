@@ -22,16 +22,13 @@ namespace NAPS2.WinForms
 
         public ThumbnailRenderer ThumbnailRenderer
         {
-            set
-            {
-                thumbnails = new ThumbnailCache(value);
-            }
+            set => thumbnails = new ThumbnailCache(value);
         }
 
         public Size ThumbnailSize
         {
-            get { return ilThumbnailList.ImageSize; }
-            set { ilThumbnailList.ImageSize = value; }
+            get => ilThumbnailList.ImageSize;
+            set => ilThumbnailList.ImageSize = value;
         }
 
         public void UpdateImages(List<ScannedImage> images, List<int> selection = null)

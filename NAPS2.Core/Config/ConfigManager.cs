@@ -16,7 +16,7 @@ namespace NAPS2.Config
 
         private T config;
 
-        public ConfigManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Func<T> factory)
+        protected ConfigManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Func<T> factory)
         {
             primaryConfigPath = Path.Combine(recoveryFolderPath, indexFileName);
             if (secondaryFolder != null)
