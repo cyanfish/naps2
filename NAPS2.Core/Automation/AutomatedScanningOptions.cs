@@ -18,6 +18,9 @@ namespace NAPS2.Automation
                                           " Only works if the profile has Auto Save enabled.")]
         public bool AutoSave { get; set; }
 
+        [Option("install", HelpText = "Use this option to download and install optional components (e.g. \"ocr-eng\", \"generic-import\").")]
+        public string Install { get; set; }
+
         [Option('p', "profile", HelpText = "The name of the profile to use for scanning." +
                                            " If not specified, the most-recently-used profile from the GUI is selected.")]
         public string ProfileName { get; set; }

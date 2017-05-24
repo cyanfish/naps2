@@ -7,15 +7,18 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using NAPS2.Config;
+using NAPS2.Dependencies;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.ConsoleResources;
+using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
+using NAPS2.WinForms;
 
 namespace NAPS2.Automation
 {
@@ -32,6 +35,8 @@ namespace NAPS2.Automation
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOperationFactory operationFactory;
         private readonly AppConfigManager appConfigManager;
+        private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly IFormFactory formFactory;
 
         private readonly AutomatedScanningOptions options;
         private ScannedImageList imageList;
@@ -40,7 +45,7 @@ namespace NAPS2.Automation
         private DateTime startTime;
         private string actualOutputPath;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
         {
             this.options = options;
             this.profileManager = profileManager;
@@ -54,6 +59,8 @@ namespace NAPS2.Automation
             this.imageSettingsContainer = imageSettingsContainer;
             this.operationFactory = operationFactory;
             this.appConfigManager = appConfigManager;
+            this.ocrDependencyManager = ocrDependencyManager;
+            this.formFactory = formFactory;
         }
 
         private void OutputVerbose(string value, params object[] args)
@@ -75,6 +82,15 @@ namespace NAPS2.Automation
 
                 startTime = DateTime.Now;
                 ConsoleOverwritePrompt.ForceOverwrite = options.ForceOverwrite;
+
+                if (options.Install != null)
+                {
+                    InstallComponents();
+                    if (options.OutputPath == null && options.EmailFileName == null && !options.AutoSave)
+                    {
+                        return;
+                    }
+                }
 
                 if (!PreCheckOverwriteFile())
                 {
@@ -132,6 +148,53 @@ namespace NAPS2.Automation
             }
         }
 
+        private void InstallComponents()
+        {
+            var availableComponents = new List<(DownloadInfo download, ExternalComponent component)>();
+            if (ocrDependencyManager.Components.Tesseract304.IsSupported)
+            {
+                availableComponents.Add((ocrDependencyManager.Downloads.Tesseract304, ocrDependencyManager.Components.Tesseract304));
+            } else if (ocrDependencyManager.Components.Tesseract304Xp.IsSupported)
+            {
+                availableComponents.Add((ocrDependencyManager.Downloads.Tesseract304Xp, ocrDependencyManager.Components.Tesseract304Xp));
+            }
+            foreach (var lang in ocrDependencyManager.Languages.Keys)
+            {
+                availableComponents.Add((ocrDependencyManager.Downloads.Tesseract304Languages[lang], ocrDependencyManager.Components.Tesseract304Languages[lang]));
+            }
+            availableComponents.Add((GhostscriptPdfRenderer.Dependencies.GhostscriptDownload, GhostscriptPdfRenderer.Dependencies.GhostscriptComponent));
+
+            var componentDict = availableComponents.ToDictionary(x => x.component.Id.ToLowerInvariant());
+            var installId = options.Install.ToLowerInvariant();
+            if (!componentDict.TryGetValue(installId, out var toInstall))
+            {
+                Console.WriteLine(ConsoleResources.ComponentNotAvailable);
+                return;
+            }
+            if (toInstall.component.IsInstalled)
+            {
+                Console.WriteLine(ConsoleResources.ComponentAlreadyInstalled);
+                return;
+            }
+            // Using a form here is not ideal (since this is supposed to be a console app), but good enough for now
+            // Especially considering wia/twain often show forms anyway
+            var progressForm = formFactory.Create<FDownloadProgress>();
+            if (toInstall.component.Id.StartsWith("ocr-") && componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.component.IsInstalled)
+            {
+                progressForm.QueueFile(ocrExe.download, ocrExe.component.Install);
+                if (options.Verbose)
+                {
+                    Console.WriteLine(ConsoleResources.Installing, ocrExe.component.Id);
+                }
+            }
+            progressForm.QueueFile(toInstall.download, toInstall.component.Install);
+            if (options.Verbose)
+            {
+                Console.WriteLine(ConsoleResources.Installing, toInstall.component.Id);
+            }
+            progressForm.ShowDialog();
+        }
+        
         private void ReorderScannedImages()
         {
             var e = new List<int>();
@@ -300,7 +363,7 @@ namespace NAPS2.Automation
         public bool ValidateOptions()
         {
             // Most validation is done by the CommandLineParser library, but some constraints that can't be represented by that API need to be checked here
-            if (options.OutputPath == null && options.EmailFileName == null && !options.AutoSave)
+            if (options.OutputPath == null && options.EmailFileName == null && options.Install == null && !options.AutoSave)
             {
                 errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequired);
                 return false;

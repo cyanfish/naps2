@@ -17,15 +17,15 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class GhostscriptPdfRenderer : IPdfRenderer
     {
-        private readonly IFormFactory formFactory;
+        private readonly IComponentInstallPrompt componentInstallPrompt;
         private readonly AppConfigManager appConfigManager;
         private readonly IErrorOutput errorOutput;
 
         private readonly Lazy<byte[]> gsLibBytes;
 
-        public GhostscriptPdfRenderer(IFormFactory formFactory, AppConfigManager appConfigManager, IErrorOutput errorOutput)
+        public GhostscriptPdfRenderer(IComponentInstallPrompt componentInstallPrompt, AppConfigManager appConfigManager, IErrorOutput errorOutput)
         {
-            this.formFactory = formFactory;
+            this.componentInstallPrompt = componentInstallPrompt;
             this.appConfigManager = appConfigManager;
             this.errorOutput = errorOutput;
 
@@ -68,18 +68,10 @@ namespace NAPS2.ImportExport.Pdf
             {
                 return false;
             }
-            // TODO: Change behaviour for console
-            if (MessageBox.Show(MiscResources.PdfImportComponentNeeded, MiscResources.DownloadNeeded, MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                var progressForm = formFactory.Create<FDownloadProgress>();
-                progressForm.QueueFile(Dependencies.GhostscriptDownload,
-                    path => Dependencies.GhostscriptComponent.Install(path));
-                progressForm.ShowDialog();
-            }
-            return Dependencies.GhostscriptComponent.IsInstalled;
+            return componentInstallPrompt.PromptToInstall(Dependencies.GhostscriptDownload, Dependencies.GhostscriptComponent, MiscResources.PdfImportComponentNeeded);
         }
 
-        private static class Dependencies
+        public static class Dependencies
         {
             private const string DOWNLOAD_URL_FORMAT = @"https://sourceforge.net/projects/naps2/files/components/gs-9.21/{0}/download";
 
@@ -89,9 +81,9 @@ namespace NAPS2.ImportExport.Pdf
 
             public static DownloadInfo GhostscriptDownload => Environment.Is64BitProcess ? GhostscriptDownload64 : GhostscriptDownload32;
 
-            private static readonly ExternalComponent GhostscriptComponent32 = new ExternalComponent(@"gs-9.21\gsdll32.dll", PlatformSupport.Windows);
+            private static readonly ExternalComponent GhostscriptComponent32 = new ExternalComponent("generic-import", @"gs-9.21\gsdll32.dll", PlatformSupport.Windows);
 
-            private static readonly ExternalComponent GhostscriptComponent64 = new ExternalComponent(@"gs-9.21\gsdll64.dll", PlatformSupport.Windows);
+            private static readonly ExternalComponent GhostscriptComponent64 = new ExternalComponent("generic-import", @"gs-9.21\gsdll64.dll", PlatformSupport.Windows);
 
             public static ExternalComponent GhostscriptComponent => Environment.Is64BitProcess ? GhostscriptComponent64 : GhostscriptComponent32;
         }

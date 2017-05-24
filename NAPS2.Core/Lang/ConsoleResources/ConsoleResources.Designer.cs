@@ -106,6 +106,33 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The specified component is already installed..
+        /// </summary>
+        internal static string ComponentAlreadyInstalled {
+            get {
+                return ResourceManager.GetString("ComponentAlreadyInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An additional component is needed to perform this operation. Run &quot;NAPS2.Console --install {0}&quot; to install it..
+        /// </summary>
+        internal static string ComponentNeeded {
+            get {
+                return ResourceManager.GetString("ComponentNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified component to install is not available. Check your spelling..
+        /// </summary>
+        internal static string ComponentNotAvailable {
+            get {
+                return ResourceManager.GetString("ComponentNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The encryption configuration file could not be loaded..
         /// </summary>
         internal static string CouldntLoadEncryptionConfig {
@@ -278,6 +305,15 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installing {0}....
+        /// </summary>
+        internal static string Installing {
+            get {
+                return ResourceManager.GetString("Installing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NAPS2.
         /// </summary>
         internal static string NAPS2 {
@@ -341,7 +377,8 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified profile is unavailable or ambiguous.\r\nUse the --profile option to specify a profile by name..
+        ///   Looks up a localized string similar to The specified profile is unavailable or ambiguous.
+        ///Use the --profile option to specify a profile by name..
         /// </summary>
         internal static string ProfileUnavailableOrAmbiguous {
             get {

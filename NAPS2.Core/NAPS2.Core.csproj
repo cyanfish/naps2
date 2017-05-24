@@ -81,6 +81,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.1\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
@@ -101,6 +104,7 @@
     <Compile Include="Automation\ConsoleOperationProgress.cs" />
     <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
+    <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
     <Compile Include="Config\KeyboardShortcuts.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Host\BackgroundForm.cs">
@@ -118,6 +122,7 @@
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptPdfRenderer.cs" />
+    <Compile Include="Dependencies\IComponentInstallPrompt.cs" />
     <Compile Include="ImportExport\Pdf\IPdfRenderer.cs" />
     <Compile Include="Scan\Images\DeskewOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
@@ -525,6 +530,7 @@
     <Compile Include="WinForms\ToolStripDoubleButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WinForms\WinFormsComponentInstallPrompt.cs" />
     <Compile Include="WinForms\WinFormsExportHelper.cs" />
     <Compile Include="WinForms\WinFormsOperationProgress.cs" />
     <Compile Include="WinForms\WinFormsOverwritePrompt.cs">

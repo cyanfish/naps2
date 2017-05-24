@@ -163,7 +163,8 @@
     <value>No scanned pages to export.</value>
   </data>
   <data name="ProfileUnavailableOrAmbiguous" xml:space="preserve">
-    <value>The specified profile is unavailable or ambiguous.\r\nUse the --profile option to specify a profile by name.</value>
+    <value>The specified profile is unavailable or ambiguous.
+Use the --profile option to specify a profile by name.</value>
   </data>
   <data name="Attaching" xml:space="preserve">
     <value>Attaching {0}...</value>
@@ -234,5 +235,17 @@ Use the "--importpassword" option.</value>
   </data>
   <data name="OutputOrEmailRequiredForImport" xml:space="preserve">
     <value>At least one of the -o/--output or -e/--email options must be specified if -i/--import is specified. Import does not work with -a/--autosave.</value>
+  </data>
+  <data name="ComponentAlreadyInstalled" xml:space="preserve">
+    <value>The specified component is already installed.</value>
+  </data>
+  <data name="ComponentNeeded" xml:space="preserve">
+    <value>An additional component is needed to perform this operation. Run "NAPS2.Console --install {0}" to install it.</value>
+  </data>
+  <data name="ComponentNotAvailable" xml:space="preserve">
+    <value>The specified component to install is not available. Check your spelling.</value>
+  </data>
+  <data name="Installing" xml:space="preserve">
+    <value>Installing {0}...</value>
   </data>
 </root>

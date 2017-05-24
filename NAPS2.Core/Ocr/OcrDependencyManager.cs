@@ -178,16 +178,16 @@ namespace NAPS2.Ocr
 
         public class OcrComponents
         {
-            public readonly ExternalComponent Tesseract304Xp = new ExternalComponent(@"tesseract-3.0.4\tesseract_xp.exe", PlatformSupport.Windows);
+            public readonly ExternalComponent Tesseract304Xp = new ExternalComponent("ocr", @"tesseract-3.0.4\tesseract_xp.exe", PlatformSupport.Windows);
 
-            public readonly ExternalComponent Tesseract304 = new ExternalComponent(@"tesseract-3.0.4\tesseract.exe", PlatformSupport.Windows.Except(PlatformSupport.WindowsXp));
+            public readonly ExternalComponent Tesseract304 = new ExternalComponent("ocr", @"tesseract-3.0.4\tesseract.exe", PlatformSupport.Windows.Except(PlatformSupport.WindowsXp));
 
-            public readonly ExternalComponent Tesseract302 = new ExternalComponent(@"tesseract-3.0.2\tesseract.exe", PlatformSupport.Windows);
+            public readonly ExternalComponent Tesseract302 = new ExternalComponent("ocr", @"tesseract-3.0.2\tesseract.exe", PlatformSupport.Windows);
 
-            public readonly IDictionary<string, ExternalComponent> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new ExternalComponent(Path.Combine(@"tesseract-3.0.4\tessdata", x.Filename.Replace(".gz", ""))));
+            public readonly IDictionary<string, ExternalComponent> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new ExternalComponent($"ocr-{x.Code}", Path.Combine(@"tesseract-3.0.4\tessdata", x.Filename.Replace(".gz", ""))));
 
             // The set of 302 languages is actually smaller, but that has no practical effect so we don't have to store the difference anywhere
-            public readonly IDictionary<string, ExternalComponent> Tesseract302Languages = LanguageData.ToDictionary(x => x.Code, x => new ExternalComponent(Path.Combine(@"tesseract-3.0.2\tessdata", x.Filename.Replace(".gz", ""))));
+            public readonly IDictionary<string, ExternalComponent> Tesseract302Languages = LanguageData.ToDictionary(x => x.Code, x => new ExternalComponent($"ocr-{x.Code}", Path.Combine(@"tesseract-3.0.2\tessdata", x.Filename.Replace(".gz", ""))));
         }
 
         public class OcrDownloads
