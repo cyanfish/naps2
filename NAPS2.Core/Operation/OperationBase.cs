@@ -26,28 +26,19 @@ namespace NAPS2.Operation
 
         protected void InvokeFinished()
         {
-            if (Finished != null)
-            {
-                Finished.Invoke(this, new EventArgs());
-            }
+            Finished?.Invoke(this, new EventArgs());
         }
 
         protected void InvokeStatusChanged()
         {
-            if (StatusChanged != null)
-            {
-                StatusChanged.Invoke(this, new EventArgs());
-            }
+            StatusChanged?.Invoke(this, new EventArgs());
         }
 
         protected void InvokeError(string message, Exception exception)
         {
             var args = new OperationErrorEventArgs(message, exception);
             LastError = args;
-            if (Error != null)
-            {
-                Error.Invoke(this, args);
-            }
+            Error?.Invoke(this, args);
         }
     }
 }

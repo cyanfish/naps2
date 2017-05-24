@@ -105,10 +105,7 @@ namespace NAPS2.Util
                 Registry.LocalMachine.DeleteSubKey(REGKEY_AUTOPLAY_HANDLER_NAPS2, false);
                 using (var key2 = Registry.LocalMachine.OpenSubKey(REGKEY_STI_APP, true))
                 {
-                    if (key2 != null)
-                    {
-                        key2.DeleteValue("NAPS2", false);
-                    }
+                    key2?.DeleteValue("NAPS2", false);
                 }
                 Registry.LocalMachine.DeleteSubKey(REGKEY_STI_EVENT_NAPS2, false);
 

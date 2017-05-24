@@ -128,10 +128,7 @@ namespace NAPS2.Scan.Images
 
         public void SetThumbnail(Bitmap bitmap)
         {
-            if (thumbnail != null)
-            {
-                thumbnail.Dispose();
-            }
+            thumbnail?.Dispose();
             thumbnail = bitmap;
         }
 

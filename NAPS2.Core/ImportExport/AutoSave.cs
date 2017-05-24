@@ -106,9 +106,9 @@ namespace NAPS2.ImportExport
                 {
                     firstFileSaved = subPath;
                 }
-                if (op.Status.Success && notify != null)
+                if (op.Status.Success)
                 {
-                    notify.PdfSaved(subPath);
+                    notify?.PdfSaved(subPath);
                 }
                 return op.Status.Success;
             }
@@ -124,9 +124,9 @@ namespace NAPS2.ImportExport
                 {
                     firstFileSaved = op.FirstFileSaved;
                 }
-                if (op.Status.Success && notify != null)
+                if (op.Status.Success)
                 {
-                    notify.ImagesSaved(images.Count, op.FirstFileSaved);
+                    notify?.ImagesSaved(images.Count, op.FirstFileSaved);
                 }
                 return op.Status.Success;
             }

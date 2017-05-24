@@ -9,7 +9,7 @@ namespace NAPS2.Automation
     {
         public void DisplayError(string errorMessage)
         {
-            System.Console.WriteLine(errorMessage);
+            Console.WriteLine(errorMessage);
         }
 
         public void DisplayError(string errorMessage, string details)
