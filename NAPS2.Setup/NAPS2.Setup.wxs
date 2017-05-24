@@ -87,6 +87,8 @@
         <File Source="..\NAPS2\bin\InstallerMSI\NLog.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\NTwain.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\zxing.dll" />
+        <File Source="..\NAPS2\bin\InstallerMSI\Ghostscript.NET.dll" />
+        <File Source="..\NAPS2\bin\InstallerMSI\System.ValueTuple.dll" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\CommandLine.dll" />
       </Component>
     </DirectoryRef>
