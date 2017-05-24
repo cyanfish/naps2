@@ -222,9 +222,7 @@ namespace NAPS2.Recovery
 
             public override void WaitUntilFinished()
             {
-                if (thread != null) {
-                    thread.Join();
-                }
+                thread?.Join();
             }
         }
     }
