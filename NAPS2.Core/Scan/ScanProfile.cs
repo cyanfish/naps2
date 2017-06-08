@@ -139,6 +139,8 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Default")]
         Default,
+        [LocalizedDescription(typeof(SettingsResources), "TwainImpl_MemXfer")]
+        MemXfer,
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_OldDsm")]
         OldDsm,
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Legacy")]

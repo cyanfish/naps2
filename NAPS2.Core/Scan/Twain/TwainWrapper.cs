@@ -85,8 +85,6 @@ namespace NAPS2.Scan.Twain
 
             int pageNumber = 0;
 
-            bool useMemXfer = false;
-
             session.TransferReady += (sender, eventArgs) =>
             {
                 Debug.WriteLine("NAPS2.TW - TransferReady");
@@ -101,7 +99,7 @@ namespace NAPS2.Scan.Twain
                 {
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
                     pageNumber++;
-                    using (var output = useMemXfer
+                    using (var output = scanProfile.TwainImpl == TwainImpl.MemXfer
                                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
                                         : Image.FromStream(eventArgs.GetNativeImageStream()))
                     {
@@ -198,7 +196,6 @@ namespace NAPS2.Scan.Twain
                         return;
                     }
                     ConfigureDS(ds, scanProfile, scanParams);
-                    useMemXfer = ds.Capabilities.ICapXferMech.GetCurrent() == XferMech.Memory;
                     var ui = scanProfile.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
                     Debug.WriteLine("NAPS2.TW - Enabling DS");
                     rc = ds.Enable(ui, true, twainForm.Handle);
@@ -308,6 +305,12 @@ namespace NAPS2.Scan.Twain
             if (scanProfile.UseNativeUI)
             {
                 return;
+            }
+
+            // Transfer Mode
+            if (scanProfile.TwainImpl == TwainImpl.MemXfer)
+            {
+                ds.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
             }
 
             // Paper Source
