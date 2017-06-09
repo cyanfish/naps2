@@ -23,13 +23,12 @@ namespace NAPS2.WinForms
         private readonly DialogHelper dialogHelper;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ChangeTracker changeTracker;
-        private readonly NotificationManager notify;
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly IUserConfigManager userConfigManager;
         private readonly IEmailer emailer;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, NotificationManager notify, IOperationFactory operationFactory, IFormFactory formFactory, IUserConfigManager userConfigManager, IEmailer emailer)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, IUserConfigManager userConfigManager, IEmailer emailer)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -37,14 +36,13 @@ namespace NAPS2.WinForms
             this.dialogHelper = dialogHelper;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.changeTracker = changeTracker;
-            this.notify = notify;
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
             this.userConfigManager = userConfigManager;
             this.emailer = emailer;
         }
 
-        public bool SavePDF(List<ScannedImage> images)
+        public bool SavePDF(List<ScannedImage> images, ISaveNotify notify)
         {
             if (images.Any())
             {
@@ -67,7 +65,7 @@ namespace NAPS2.WinForms
                 if (ExportPDF(subSavePath, images, false))
                 {
                     changeTracker.HasUnsavedChanges = false;
-                    notify.PdfSaved(subSavePath);
+                    notify?.PdfSaved(subSavePath);
                     return true;
                 }
             }
@@ -90,7 +88,7 @@ namespace NAPS2.WinForms
             return op.Status.Success;
         }
 
-        public bool SaveImages(List<ScannedImage> images)
+        public bool SaveImages(List<ScannedImage> images, ISaveNotify notify)
         {
             if (images.Any())
             {
@@ -117,7 +115,7 @@ namespace NAPS2.WinForms
                 if (op.Status.Success)
                 {
                     changeTracker.HasUnsavedChanges = false;
-                    notify.ImagesSaved(images.Count, op.FirstFileSaved);
+                    notify?.ImagesSaved(images.Count, op.FirstFileSaved);
                     return true;
                 }
             }

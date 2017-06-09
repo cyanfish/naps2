@@ -738,7 +738,7 @@ namespace NAPS2.WinForms
 
         private void SavePDF(List<ScannedImage> images)
         {
-            if (exportHelper.SavePDF(images))
+            if (exportHelper.SavePDF(images, notify))
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
@@ -750,7 +750,7 @@ namespace NAPS2.WinForms
 
         private void SaveImages(List<ScannedImage> images)
         {
-            if (exportHelper.SaveImages(images))
+            if (exportHelper.SaveImages(images, notify))
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {

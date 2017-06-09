@@ -460,7 +460,7 @@ namespace NAPS2.WinForms
 
         private void tsSavePDF_Click(object sender, EventArgs e)
         {
-            if (exportHelper.SavePDF(new List<ScannedImage> { ImageList.Images[ImageIndex] }))
+            if (exportHelper.SavePDF(new List<ScannedImage> { ImageList.Images[ImageIndex] }, null))
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
@@ -471,7 +471,7 @@ namespace NAPS2.WinForms
 
         private void tsSaveImage_Click(object sender, EventArgs e)
         {
-            if (exportHelper.SaveImages(new List<ScannedImage> { ImageList.Images[ImageIndex] }))
+            if (exportHelper.SaveImages(new List<ScannedImage> { ImageList.Images[ImageIndex] }, null))
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
