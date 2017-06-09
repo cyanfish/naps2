@@ -22,13 +22,15 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IPdfPasswordProvider pdfPasswordProvider;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly IPdfRenderer pdfRenderer;
 
-        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
+        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer, IPdfRenderer pdfRenderer)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
             this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageRenderer = scannedImageRenderer;
+            this.pdfRenderer = pdfRenderer;
         }
 
         public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
@@ -58,13 +60,14 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                 {
+                    pdfRenderer.ThrowIfCantRender();
                     return document.Pages.Cast<PdfPage>().Select(ExportRawPdfPage);
                 }
 
                 int i = 0;
                 return document.Pages.Cast<PdfPage>().TakeWhile(page => progressCallback(i++, document.PageCount)).SelectMany(GetImagesFromPage);
             }
-            catch (NotImplementedException e)
+            catch (ImageRenderException e)
             {
                 errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
                 Log.ErrorException("Error importing PDF file.", e);

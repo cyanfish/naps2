@@ -121,6 +121,7 @@
     <Compile Include="ImportExport\DirectImportOperation.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
+    <Compile Include="ImportExport\ImageRenderException.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptPdfRenderer.cs" />
     <Compile Include="Dependencies\IComponentInstallPrompt.cs" />
     <Compile Include="ImportExport\Pdf\IPdfRenderer.cs" />

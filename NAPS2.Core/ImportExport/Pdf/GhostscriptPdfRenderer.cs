@@ -33,13 +33,17 @@ namespace NAPS2.ImportExport.Pdf
             ExternalComponent.InitBasePath(appConfigManager);
         }
 
-        public IEnumerable<Bitmap> Render(string path)
+        public void ThrowIfCantRender()
         {
             if (appConfigManager.Config.DisableGenericPdfImport || !VerifyDependencies())
             {
-                errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(path)));
-                yield break;
+                throw new ImageRenderException();
             }
+        }
+
+        public IEnumerable<Bitmap> Render(string path)
+        {
+            ThrowIfCantRender();
 
             // TODO: Maybe allow this to be configured
             int dpi = ScanDpi.Dpi300.ToIntDpi();
