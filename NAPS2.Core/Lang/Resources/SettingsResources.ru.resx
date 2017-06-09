@@ -169,7 +169,7 @@
         <value>мм</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297 x 420 мм)</value>
+        <value>A3 (297x420 мм)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
         <value>A4 (210x297 мм)</value>
@@ -218,6 +218,9 @@
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
         <value>Наследие (только пользовательский интерфейс)</value>
+    </data>
+    <data name="TwainImpl_MemXfer" xml:space="preserve">
+        <value>Alternative Transfer</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Старый DSM</value>

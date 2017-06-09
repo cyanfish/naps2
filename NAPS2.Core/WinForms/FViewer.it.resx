@@ -265,7 +265,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsDeskew.Text" xml:space="preserve">
-        <value>Deskew</value>
+        <value>Ruota ed allinea</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
@@ -328,7 +328,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsSaveImage.Text" xml:space="preserve">
-        <value>Save Image</value>
+        <value>Salva Immagine</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>

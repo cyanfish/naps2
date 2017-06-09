@@ -220,13 +220,13 @@
         <value>Установить</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Включить автопроверку обновлений NAPS2?</value>
+        <value>Автоматически проверять обновления NAPS2?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
         <value>Не сейчас</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Доступна новая версия NAPS2. Хотите обновить сейчас?</value>
+        <value>Доступна новая версия NAPS2. Обновить сейчас?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Установка завершена</value>
@@ -418,9 +418,15 @@
         <value>Файл не может быть перезаписан, так как он используется.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Выравнивание...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Выравниваем...</value>
+    </data>
+    <data name="DownloadNeeded" xml:space="preserve">
+        <value>Download Needed</value>
+    </data>
+    <data name="PdfImportComponentNeeded" xml:space="preserve">
+        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
     </data>
 </root>

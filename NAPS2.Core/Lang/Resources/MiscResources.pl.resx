@@ -418,9 +418,15 @@
         <value>Plik nie mógł zostać zastąpiony, ponieważ jest obecnie w użyciu.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Prostowanie...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Postęp prostowania</value>
+    </data>
+    <data name="DownloadNeeded" xml:space="preserve">
+        <value>Download Needed</value>
+    </data>
+    <data name="PdfImportComponentNeeded" xml:space="preserve">
+        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
     </data>
 </root>

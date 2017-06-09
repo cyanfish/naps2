@@ -423,4 +423,10 @@
     <data name="AutoDeskewProgress" xml:space="preserve">
         <value>Deskew Progress</value>
     </data>
+    <data name="DownloadNeeded" xml:space="preserve">
+        <value>Download Needed</value>
+    </data>
+    <data name="PdfImportComponentNeeded" xml:space="preserve">
+        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    </data>
 </root>

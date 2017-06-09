@@ -451,7 +451,7 @@
         <value>29</value>
     </data>
     <data name="cbPromptForFilePath.Text" xml:space="preserve">
-        <value>Prompt for file path</value>
+        <value>Προτροπή για διαδρομή αρχείου</value>
     </data>
     <data name="&gt;&gt;cbPromptForFilePath.Name" xml:space="preserve">
         <value>cbPromptForFilePath</value>

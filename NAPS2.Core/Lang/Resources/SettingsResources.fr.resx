@@ -151,7 +151,7 @@
         <value>800 ppp</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
-        <value>Centrré</value>
+        <value>Centré</value>
     </data>
     <data name="HorizontalAlign_Left" xml:space="preserve">
         <value>Gauche</value>
@@ -218,6 +218,9 @@
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
         <value>Ancienne (interface native seulement)</value>
+    </data>
+    <data name="TwainImpl_MemXfer" xml:space="preserve">
+        <value>Alternative Transfer</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Ancien DSM</value>

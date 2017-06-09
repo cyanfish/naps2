@@ -124,13 +124,13 @@
         <value>Limpar</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Confirma a limpeza de {0} itens ?</value>
+        <value>Confirma a limpeza de {0} item(s)?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Confirma a remoção de {0} itens ?</value>
+        <value>Confirma a remoção de {0} item(s)?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Confirma remoção de {0} perfis? </value>
+        <value>Confirma remoção de {0} perfis?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
         <value>Confirma a remoção do perfil {0}?</value>
@@ -166,7 +166,7 @@
         <value>Arquivo GIF (*.gif)</value>
     </data>
     <data name="FileTypeJpeg" xml:space="preserve">
-        <value>Arquivo JPG (*.jpg, *.jpeg)</value>
+        <value>Arquivo JPEG (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
         <value>Documento PDF (*.pdf)</value>
@@ -259,7 +259,7 @@
         <value>O arquivo '{0}' não pode ser importado.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>O arquivo '{0}' não pode ser importado. Somente arquivos gerados pelo NAPS2 podem ser importados.</value>
+        <value>O arquivo '{0}' não pode ser importado. Somente arquivos PDF gerados pelo NAPS2 podem ser importados.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
         <value>Erro no download</value>
@@ -415,12 +415,18 @@
         <value>Are you sure you want to delete "{0}"?</value>
     </data>
     <data name="FileInUse" xml:space="preserve">
-        <value>The file could not be overwritten because it is currently in use.</value>
+        <value>O Arquivo não pode ser sobrescrito porque está atualmente em uso.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Alinhando...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Progresso da Correção</value>
+    </data>
+    <data name="DownloadNeeded" xml:space="preserve">
+        <value>Download Needed</value>
+    </data>
+    <data name="PdfImportComponentNeeded" xml:space="preserve">
+        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
     </data>
 </root>

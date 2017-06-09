@@ -418,9 +418,15 @@
         <value>Le fichier ne peut pas être écrasé car il est en cours d'utilisation.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Réalignement…...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Progression du réalignement</value>
+    </data>
+    <data name="DownloadNeeded" xml:space="preserve">
+        <value>Download Needed</value>
+    </data>
+    <data name="PdfImportComponentNeeded" xml:space="preserve">
+        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
     </data>
 </root>

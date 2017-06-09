@@ -322,7 +322,7 @@
         <value>8</value>
     </data>
     <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-        <value>Delay between scans (WIA)</value>
+        <value>Odklad mezi skeny (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaDelayBetweenScans.Name" xml:space="preserve">
         <value>cbWiaDelayBetweenScans</value>
@@ -352,7 +352,7 @@
         <value>7</value>
     </data>
     <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-        <value>Retry on failure (WIA)</value>
+        <value>Opakovat při selhání (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaRetryOnFailure.Name" xml:space="preserve">
         <value>cbWiaRetryOnFailure</value>
@@ -382,7 +382,7 @@
         <value>6</value>
     </data>
     <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
-        <value>Crop to page size</value>
+        <value>Oříznout na velikost stránky</value>
     </data>
     <data name="&gt;&gt;cbForcePageSizeCrop.Name" xml:space="preserve">
         <value>cbForcePageSizeCrop</value>
@@ -469,7 +469,7 @@
         <value>3</value>
     </data>
     <data name="cbForcePageSize.Text" xml:space="preserve">
-        <value>Stretch to page size</value>
+        <value>Roztáhnout na velikost stránky</value>
     </data>
     <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
         <value>cbForcePageSize</value>
@@ -841,7 +841,7 @@
         <value>17</value>
     </data>
     <data name="cbAutoDeskew.Text" xml:space="preserve">
-        <value>Deskew scanned pages</value>
+        <value>Odstranit zešikmení skenovaných stránek</value>
     </data>
     <data name="&gt;&gt;cbAutoDeskew.Name" xml:space="preserve">
         <value>cbAutoDeskew</value>
@@ -865,7 +865,7 @@
         <value>39</value>
     </data>
     <data name="groupBox4.Text" xml:space="preserve">
-        <value>Post-processing</value>
+        <value>Následné zpracování</value>
     </data>
     <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
         <value>groupBox4</value>

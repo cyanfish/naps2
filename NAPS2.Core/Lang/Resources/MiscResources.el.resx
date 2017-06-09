@@ -199,7 +199,7 @@
         <value>Σαρωμένη Εικόνα</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Απαραίτητη η επιλογή προφίλ πριν γίνει κλικ στην Σάρωση.</value>
+        <value>Δεν έχει επιλεγεί προφίλ.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>Σφάλμα του οδηγού σάρωσης.</value>
@@ -418,9 +418,15 @@
         <value>Το αρχείο είναι σε χρήση και είναι αδύνατο να αντικατασταθεί.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Διόρθωση Ασυμμετρίας...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Πρόοδος Διόρθωσης Ασυμμετρίας</value>
+    </data>
+    <data name="DownloadNeeded" xml:space="preserve">
+        <value>Download Needed</value>
+    </data>
+    <data name="PdfImportComponentNeeded" xml:space="preserve">
+        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
     </data>
 </root>
