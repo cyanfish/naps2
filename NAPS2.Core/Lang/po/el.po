@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2016-07-07 08:29+0000\n"
+"PO-Revision-Date: 2017-05-27 07:06+0000\n"
 "Last-Translator: solidhit <solidhit2003@yahoo.gr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1467880158.000000\n"
+"X-POOTLE-MTIME: 1495868773.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -357,7 +357,7 @@ msgstr "Αντιγραφή"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright 2009, 2012-2017 Συνεργάτες NAPS2"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -371,7 +371,7 @@ msgstr "Περικοπή"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Περικοπή στο μέγεθος σελίδας"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -409,7 +409,7 @@ msgstr "Αποπαρεμβολή [142536...]"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Καθυστέρηση μεταξύ σαρώσεων (WIA)"
 
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
@@ -424,19 +424,19 @@ msgstr "Διαγραφή"
 #: FDesktop.resx$tsDeskew.Text$Message
 #: FViewer.resx$tsDeskew.Text$Message
 msgid "Deskew"
-msgstr ""
+msgstr "Διόρθωση Ασυμμετρίας"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Πρόοδος Διόρθωσης Ασυμμετρίας"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Διόρθωση ασυμμετρίας σαρωμένων σελίδων"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr ""
+msgstr "Διόρθωση Ασυμμετρίας"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -559,8 +559,8 @@ msgstr "Αναστροφή σελίδων διπλής όψης"
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
-"Για υψηλές ποιότητες JPEG (80+), συνιστάται η επιλογή του προφίλ Μέγιστη "
-"Ποιότητα"
+"Για υψηλές ποιότητες JPEG (80+), συνιστάται η επιλογή του προφίλ 'Μέγιστη "
+"Ποιότητα'"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -894,7 +894,7 @@ msgstr "Δεσμευτικά Θέσεων (Placeholders)"
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "Μετά την επεξεργασία"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
@@ -928,7 +928,7 @@ msgstr "Προφίλ"
 
 #: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Προτροπή για διαδρομή αρχείου"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -981,7 +981,7 @@ msgstr "Επαναφορά Προεπιλογών"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
-msgstr ""
+msgstr "Επανάληψη μετά απο αποτυχία (WIA)"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -1016,7 +1016,7 @@ msgstr "Περιστροφή Δεξιά"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
-msgstr ""
+msgstr "Αποθήκευση Εικόνας"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1103,7 +1103,7 @@ msgstr "Επιλογή Προέλευσης"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
-msgstr "Απαραίτητη η επιλογή προφίλ πριν γίνει κλικ στην Σάρωση"
+msgstr "Δεν έχει επιλεγεί προφίλ"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
@@ -1146,7 +1146,7 @@ msgstr "Έναρξη"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Επέκταση στο μέγεθος σελίδας"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"

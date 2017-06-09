@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2016-03-29 21:05+0000\n"
+"PO-Revision-Date: 2017-05-15 19:22+0000\n"
 "Last-Translator: rpozzebon <rodrigo.pozzebon@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1459285528.000000\n"
+"X-POOTLE-MTIME: 1494876122.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -173,11 +173,11 @@ msgstr "Aplicar para todas as {0} imagens selecionadas"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Confirma a limpeza de {0} itens ?"
+msgstr "Confirma a limpeza de {0} item(s)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete "{0}"?"
-msgstr "Confirma a remoção de {0} itens ?"
+msgstr "Confirma a remoção de {0} item(s)?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -185,11 +185,11 @@ msgstr "Confirma a remoção do perfil {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Confirma a remoção de {0} itens ?"
+msgstr "Confirma a remoção de {0} item(s)?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Confirma remoção de {0} perfis? "
+msgstr "Confirma remoção de {0} perfis?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -355,7 +355,7 @@ msgstr "Copiando"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright 2009, 2012-2017 NAPS2 Contributors"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -369,7 +369,7 @@ msgstr "Cortar"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Cortar para o tamanho da página"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -407,7 +407,7 @@ msgstr "Desintercalar"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Pausa entre digitalizações (WIA)"
 
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
@@ -422,19 +422,19 @@ msgstr "Apagar"
 #: FDesktop.resx$tsDeskew.Text$Message
 #: FViewer.resx$tsDeskew.Text$Message
 msgid "Deskew"
-msgstr ""
+msgstr "Endireitar"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Progresso da Correção"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Endireitar páginas digitalizadas"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr ""
+msgstr "Alinhando"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -586,7 +586,7 @@ msgstr "Hora (0-23)"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
-msgstr "Ícones de "
+msgstr "Ícones de"
 
 #: FDesktop.resx$tsdImage.Text$Message
 msgid "Image"
@@ -647,7 +647,7 @@ msgstr "Intercalar"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "Arquivo JPG (*.jpg, *.jpeg)"
+msgstr "Arquivo JPEG (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
@@ -892,7 +892,7 @@ msgstr "Substituições"
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "Pós-processamento"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
@@ -926,7 +926,7 @@ msgstr "Perfis"
 
 #: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Solicitar o caminho do arquivo"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
@@ -979,7 +979,7 @@ msgstr "Restaurar padrões"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
-msgstr ""
+msgstr "Repetir em caso de falha (WIA)"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
@@ -1014,7 +1014,7 @@ msgstr "Girar para direita"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
-msgstr ""
+msgstr "Salvar Imagem"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1118,7 +1118,7 @@ msgstr "Selecionado ({0})"
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T"
-msgstr ""
+msgstr "Separar Arquivos por Patch-T"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
@@ -1144,7 +1144,7 @@ msgstr "Iniciar"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Estender para o tamanho da página"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
@@ -1160,7 +1160,7 @@ msgstr "Driver TWAIN"
 
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "Detalhes Técnicos"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1169,12 +1169,12 @@ msgstr "O arquivo '{0}' não pode ser importado"
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
 msgstr ""
-"O arquivo '{0}' não pode ser importado. Somente arquivos gerados pelo NAPS2 "
-"podem ser importados"
+"O arquivo '{0}' não pode ser importado. Somente arquivos PDF gerados pelo "
+"NAPS2 podem ser importados"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
-msgstr ""
+msgstr "O Arquivo não pode ser sobrescrito porque está atualmente em uso"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
