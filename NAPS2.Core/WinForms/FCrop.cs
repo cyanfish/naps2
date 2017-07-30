@@ -210,7 +210,7 @@ namespace NAPS2.WinForms
 
         private CropTransform ScaleCropTransform(ScannedImage img, Bitmap referenceBitmap)
         {
-            using (var bitmap = scannedImageRenderer.Render(Image))
+            using (var bitmap = scannedImageRenderer.Render(img))
             {
                 double xScale = bitmap.Width / (double)referenceBitmap.Width,
                        yScale = bitmap.Height / (double)referenceBitmap.Height;
