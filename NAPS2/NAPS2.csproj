@@ -204,7 +204,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>call "$(VS110COMNTOOLS)..\tools\vsvars32.bat"
+    <PostBuildEvent>call "%25vsappiddir%25..\tools\vsdevcmd.bat"
 editbin /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
