@@ -96,7 +96,7 @@ namespace NAPS2.ImportExport.Pdf
                 else
                 {
                     using (Stream stream = scannedImageRenderer.RenderToStream(image))
-                    using (var img = new Bitmap(stream))
+                    using (var img = XImage.FromStream(stream))
                     {
                         if (!progressCallback(progress))
                         {
@@ -137,7 +137,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 using (Stream stream = scannedImageRenderer.RenderToStream(image))
-                using (var img = new Bitmap(stream))
+                using (var img = XImage.FromStream(stream))
                 {
                     if (!progressCallback(progress))
                     {
@@ -153,7 +153,7 @@ namespace NAPS2.ImportExport.Pdf
                     }
 
                     string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-                    img.Save(tempImageFilePath);
+                    img.GdiImage.Save(tempImageFilePath);
 
                     return Tuple.Create(page, tempImageFilePath);
                 }
@@ -231,7 +231,7 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
 
-        private static void DrawImageOnPage(PdfPage page, Bitmap img)
+        private static void DrawImageOnPage(PdfPage page, XImage img)
         {
             Size realSize = GetRealSize(img);
             page.Width = realSize.Width;
@@ -242,22 +242,22 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
 
-        private static Size GetRealSize(Bitmap img)
+        private static Size GetRealSize(XImage img)
         {
-            float hAdjust = 72 / img.HorizontalResolution;
-            float vAdjust = 72 / img.VerticalResolution;
-            double realWidth = img.Width * hAdjust;
-            double realHeight = img.Height * vAdjust;
+            double hAdjust = 72 / img.HorizontalResolution;
+            double vAdjust = 72 / img.VerticalResolution;
+            double realWidth = img.PixelWidth * hAdjust;
+            double realHeight = img.PixelHeight * vAdjust;
             return new Size((int)realWidth, (int)realHeight);
         }
 
-        private static RectangleF AdjustBounds(Rectangle b, float hAdjust, float vAdjust)
+        private static XRect AdjustBounds(Rectangle b, float hAdjust, float vAdjust)
         {
-            var adjustedBounds = new RectangleF(b.X * hAdjust, b.Y * vAdjust, b.Width * hAdjust, b.Height * vAdjust);
+            var adjustedBounds = new XRect(b.X * hAdjust, b.Y * vAdjust, b.Width * hAdjust, b.Height * vAdjust);
             return adjustedBounds;
         }
 
-        private static int CalculateFontSize(string text, RectangleF adjustedBounds, XGraphics gfx)
+        private static int CalculateFontSize(string text, XRect adjustedBounds, XGraphics gfx)
         {
             int fontSizeGuess = Math.Max(1, (int)(adjustedBounds.Height));
             var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
