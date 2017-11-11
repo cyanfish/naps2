@@ -34,7 +34,7 @@ namespace NAPS2.WinForms
     public partial class FDesktop : FormBase
     {
         #region Dependencies
-        
+
         private readonly StringWrapper stringWrapper;
         private readonly AppConfigManager appConfigManager;
         private readonly RecoveryManager recoveryManager;
@@ -680,7 +680,7 @@ namespace NAPS2.WinForms
             var op = operationFactory.Create<DeskewOperation>();
             var progressForm = FormFactory.Create<FProgress>();
             progressForm.Operation = op;
-            
+
             if (op.Start(SelectedImages.ToList()))
             {
                 progressForm.ShowDialog();
@@ -1518,7 +1518,7 @@ namespace NAPS2.WinForms
         private void StepThumbnailSize(double step)
         {
             int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
-            thumbnailSize += (int)(ThumbnailRenderer.STEP_SIZE * step);
+            thumbnailSize = (int)ThumbnailRenderer.StepNumberToSize(ThumbnailRenderer.SizeToStepNumber(thumbnailSize) + step);
             thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailRenderer.MAX_SIZE), ThumbnailRenderer.MIN_SIZE);
             ResizeThumbnails(thumbnailSize);
         }
@@ -1566,7 +1566,7 @@ namespace NAPS2.WinForms
         {
             const int LVM_FIRST = 0x1000;
             const int LVM_SETICONSPACING = LVM_FIRST + 53;
-            Win32.SendMessage(list.Handle, LVM_SETICONSPACING, IntPtr.Zero, (IntPtr) (int) (((ushort) hspacing) | (uint) (vspacing << 16)));
+            Win32.SendMessage(list.Handle, LVM_SETICONSPACING, IntPtr.Zero, (IntPtr)(int)(((ushort)hspacing) | (uint)(vspacing << 16)));
         }
 
         private void RenderThumbnails(int thumbnailSize, IEnumerable<ScannedImage> imagesToRenderThumbnailsFor)
