@@ -43,12 +43,14 @@ namespace NAPS2.Scan.Images
 
             thread = threadFactory.StartThread(() =>
             {
+                var memoryLimitingSem = new Semaphore(4, 4);
                 Pipeline.For(images).StepParallel(img =>
                 {
                     if (cancel)
                     {
                         return null;
                     }
+                    memoryLimitingSem.WaitOne();
                     Bitmap bitmap = scannedImageRenderer.Render(img);
                     try
                     {
@@ -68,6 +70,7 @@ namespace NAPS2.Scan.Images
                     finally
                     {
                         bitmap.Dispose();
+                        memoryLimitingSem.Release();
                     }
                 }).Step((img, transform) =>
                 {
