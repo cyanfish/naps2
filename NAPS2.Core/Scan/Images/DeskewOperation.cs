@@ -19,7 +19,7 @@ namespace NAPS2.Scan.Images
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageRenderer scannedImageRenderer;
 
-        private bool cancel;
+        private volatile bool cancel;
         private Thread thread;
 
         public DeskewOperation(ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
@@ -65,6 +65,14 @@ namespace NAPS2.Scan.Images
                         }
                         bitmap = transform.Perform(bitmap);
                         img.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+
+                        // The final pipeline step is pretty fast, so updating progress here is more accurate
+                        lock (this)
+                        {
+                            Status.CurrentProgress += 1;
+                        }
+                        InvokeStatusChanged();
+
                         return Tuple.Create(img, transform);
                     }
                     finally
@@ -75,8 +83,6 @@ namespace NAPS2.Scan.Images
                 }).Step((img, transform) =>
                 {
                     img.AddTransform(transform);
-                    Status.CurrentProgress++;
-                    InvokeStatusChanged();
                     return img;
                 }).Run();
                 Status.Success = !cancel;
