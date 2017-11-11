@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -129,6 +130,9 @@ namespace NAPS2.ImportExport.Pdf
                             case "/FlateDecode":
                                 yield return ExportAsPngImage(page, xObject);
                                 break;
+                            case "/CCITTFaxDecode":
+                                yield return ExportG4(page, xObject);
+                                break;
                             default:
                                 throw new NotImplementedException("Unsupported image encoding");
                         }
@@ -248,6 +252,81 @@ namespace NAPS2.ImportExport.Pdf
             {
                 bitmap.UnlockBits(data);
             }
+        }
+
+        // Sample full tiff          LEN-------------------                                                  DATA------------------                                                              WIDTH-----------------                                                  HEIGHT----------------                                                  BITS PER COMP---------                                                                                                                                                                                                                                                                          REALLEN---------------
+        // { 0x49, 0x49, 0x2A, 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x99, 0x99, 0x99, 0x99, 0x07, 0x00, 0x00, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x77, 0x77, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x88, 0x88, 0x00, 0x00, 0x02, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
+        private static readonly byte[] TiffBeforeDataLen = { 0x49, 0x49, 0x2A, 0x00 };
+        private static readonly byte[] TiffBeforeData = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        private static readonly byte[] TiffBeforeWidth = { 0x07, 0x00, 0x00, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00 };
+        private static readonly byte[] TiffBeforeHeight = { 0x01, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00 };
+        private static readonly byte[] TiffBeforeBits = { 0x02, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00 };
+        private static readonly byte[] TiffBeforeRealLen = { 0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00 };
+        private static readonly byte[] TiffTrailer = { 0x00, 0x00, 0x00, 0x00 };
+
+        private ScannedImage ExportG4(PdfPage page, PdfDictionary imageObject)
+        {
+            int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
+            int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
+            int bitsPerComponent = imageObject.Elements.GetInteger(PdfImage.Keys.BitsPerComponent);
+
+            byte[] imageBytes = imageObject.Stream.Value;
+
+            // We don't have easy access to a standalone CCITT G4 decoder, so we'll make use of the .NET TIFF decoder
+            // by constructing a valid TIFF file "manually" and directly injecting the bytestream
+            var stream = new MemoryStream();
+            Write(stream, TiffBeforeDataLen);
+            // The bytestream is 2-padded, so we may need to append an extra zero byte
+            if (imageBytes.Length % 2 == 1)
+            {
+                Write(stream, imageBytes.Length + 0x11);
+            }
+            else
+            {
+                Write(stream, imageBytes.Length + 0x10);
+            }
+            Write(stream, TiffBeforeData);
+            Write(stream, imageBytes);
+            if (imageBytes.Length % 2 == 1)
+            {
+                Write(stream, new byte[] { 0x00 });
+            }
+            Write(stream, TiffBeforeWidth);
+            Write(stream, width);
+            Write(stream, TiffBeforeHeight);
+            Write(stream, height);
+            Write(stream, TiffBeforeBits);
+            Write(stream, bitsPerComponent);
+            Write(stream, TiffBeforeRealLen);
+            Write(stream, imageBytes.Length);
+            Write(stream, TiffTrailer);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            using (Bitmap bitmap = (Bitmap)Image.FromStream(stream))
+            {
+                bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
+
+                var image = new ScannedImage(bitmap, ScanBitDepth.BlackWhite, true, -1);
+                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                return image;
+            }
+        }
+
+        private void Write(MemoryStream stream, byte[] bytes)
+        {
+            stream.Write(bytes, 0, bytes.Length);
+        }
+
+        private void Write(MemoryStream stream, int value)
+        {
+            byte[] bytes = BitConverter.GetBytes(value);
+            if (!BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(bytes);
+            }
+            Debug.Assert(bytes.Length == 4);
+            stream.Write(bytes, 0, bytes.Length);
         }
     }
 }
