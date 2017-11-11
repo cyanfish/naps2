@@ -24,6 +24,14 @@ namespace NAPS2.Config
 
         public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
+        public bool HideOcrButton { get; set; }
+
+        public bool HideImportButton { get; set; }
+
+        public bool HideSavePdfButton { get; set; }
+
+        public bool HideSaveImagesButton { get; set; }
+
         public bool HideEmailButton { get; set; }
 
         public bool HidePrintButton { get; set; }

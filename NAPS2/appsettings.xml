@@ -6,6 +6,10 @@
   <StartupMessageText></StartupMessageText>
   <StartupMessageIcon>Information</StartupMessageIcon>
   <SaveButtonDefaultAction>SaveAll</SaveButtonDefaultAction>
+  <HideOcrButton>false</HideOcrButton>
+  <HideImportButton>false</HideImportButton>
+  <HideSavePdfButton>false</HideSavePdfButton>
+  <HideSaveImagesButton>false</HideSaveImagesButton>
   <HideEmailButton>false</HideEmailButton>
   <HidePrintButton>false</HidePrintButton>
   <DisableAutoSave>false</DisableAutoSave>

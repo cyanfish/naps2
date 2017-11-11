@@ -105,6 +105,22 @@ namespace NAPS2.WinForms
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             SetThumbnailSpacing(thumbnailSize);
 
+            if (appConfigManager.Config.HideOcrButton)
+            {
+                tStrip.Items.Remove(tsOcr);
+            }
+            if (appConfigManager.Config.HideImportButton)
+            {
+                tStrip.Items.Remove(tsImport);
+            }
+            if (appConfigManager.Config.HideSavePdfButton)
+            {
+                tStrip.Items.Remove(tsdSavePDF);
+            }
+            if (appConfigManager.Config.HideSaveImagesButton)
+            {
+                tStrip.Items.Remove(tsdSaveImages);
+            }
             if (appConfigManager.Config.HideEmailButton)
             {
                 tStrip.Items.Remove(tsdEmailPDF);
@@ -1004,6 +1020,11 @@ namespace NAPS2.WinForms
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideOcrButton)
+            {
+                return;
+            }
+
             if (ocrDependencyManager.TesseractExeRequiresFix && !appConfigManager.Config.NoUpdatePrompt)
             {
                 // Re-download a fixed version on Windows XP if needed
@@ -1035,11 +1056,21 @@ namespace NAPS2.WinForms
 
         private void tsImport_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideImportButton)
+            {
+                return;
+            }
+
             Import();
         }
 
         private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideSavePdfButton)
+            {
+                return;
+            }
+
             var action = appConfigManager.Config.SaveButtonDefaultAction;
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
@@ -1059,6 +1090,11 @@ namespace NAPS2.WinForms
 
         private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideSaveImagesButton)
+            {
+                return;
+            }
+
             var action = appConfigManager.Config.SaveButtonDefaultAction;
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
@@ -1144,11 +1180,21 @@ namespace NAPS2.WinForms
 
         private void tsSavePDFAll_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideSavePdfButton)
+            {
+                return;
+            }
+
             SavePDF(imageList.Images);
         }
 
         private void tsSavePDFSelected_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideSavePdfButton)
+            {
+                return;
+            }
+
             SavePDF(SelectedImages.ToList());
         }
 
@@ -1159,11 +1205,21 @@ namespace NAPS2.WinForms
 
         private void tsSaveImagesAll_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideSaveImagesButton)
+            {
+                return;
+            }
+
             SaveImages(imageList.Images);
         }
 
         private void tsSaveImagesSelected_Click(object sender, EventArgs e)
         {
+            if (appConfigManager.Config.HideSaveImagesButton)
+            {
+                return;
+            }
+
             SaveImages(SelectedImages.ToList());
         }
 
