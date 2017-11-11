@@ -11,7 +11,7 @@ namespace NAPS2.Scan.Images
     {
         public const int MIN_SIZE = 64;
         public const int DEFAULT_SIZE = 128;
-        public const int MAX_SIZE = 256;
+        public const int MAX_SIZE = 1024;
         public const int STEP_SIZE = 32;
 
         private readonly IUserConfigManager userConfigManager;

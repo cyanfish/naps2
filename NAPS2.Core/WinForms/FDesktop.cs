@@ -1555,7 +1555,7 @@ namespace NAPS2.WinForms
         {
             thumbnailList1.Padding = new Padding(0, 20, 0, 0);
             const int MIN_PADDING = 6;
-            const int MAX_PADDING = 18;
+            const int MAX_PADDING = 66;
             // Linearly scale the padding with the thumbnail size
             int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailRenderer.MIN_SIZE) / (ThumbnailRenderer.MAX_SIZE - ThumbnailRenderer.MIN_SIZE);
             int spacing = thumbnailSize + padding * 2;

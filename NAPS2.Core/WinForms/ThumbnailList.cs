@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Scan.Images;
@@ -12,6 +13,23 @@ namespace NAPS2.WinForms
     public partial class ThumbnailList : DragScrollListView
     {
         private ThumbnailCache thumbnails;
+
+        static ThumbnailList()
+        {
+            // Simple hack to let the listview have larger thumbnails than 256x256
+            SetPrivateStaticField(typeof(ImageList), "maxImageWidth", ThumbnailRenderer.MAX_SIZE);
+            SetPrivateStaticField(typeof(ImageList), "maxImageHeight", ThumbnailRenderer.MAX_SIZE);
+        }
+
+        private static void SetPrivateStaticField(Type type, string fieldName, object value)
+        {
+            var field = type.GetField(fieldName, BindingFlags.Static | BindingFlags.NonPublic);
+            if (field == null)
+            {
+                throw new ArgumentException("Field does not exist");
+            }
+            field.SetValue(null, value);
+        }
 
         public ThumbnailList()
         {
