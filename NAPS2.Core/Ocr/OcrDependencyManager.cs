@@ -11,8 +11,13 @@ namespace NAPS2.Ocr
 {
     public class OcrDependencyManager
     {
-        public OcrDependencyManager(AppConfigManager appConfigManager)
+        private readonly AppConfigManager appConfigManager;
+        private readonly UserConfigManager userConfigManager;
+
+        public OcrDependencyManager(AppConfigManager appConfigManager, UserConfigManager userConfigManager)
         {
+            this.appConfigManager = appConfigManager;
+            this.userConfigManager = userConfigManager;
             ExternalComponent.InitBasePath(appConfigManager);
             Components = new OcrComponents();
             Downloads = new OcrDownloads();
@@ -21,6 +26,50 @@ namespace NAPS2.Ocr
         public readonly OcrComponents Components;
 
         public readonly OcrDownloads Downloads;
+
+        public string DefaultLanguageCode
+        {
+            get
+            {
+                // Prioritize app-level overrides
+                if (appConfigManager.Config.OcrState == OcrState.Disabled)
+                {
+                    return null;
+                }
+                if (appConfigManager.Config.OcrState == OcrState.Enabled)
+                {
+                    // Prioritize the app-level language
+                    if (!string.IsNullOrWhiteSpace(appConfigManager.Config.OcrDefaultLanguage))
+                    {
+                        return appConfigManager.Config.OcrDefaultLanguage;
+                    }
+                    // Fall back to the user-selected language
+                    if (!string.IsNullOrWhiteSpace(userConfigManager.Config.OcrLanguageCode))
+                    {
+                        return userConfigManager.Config.OcrLanguageCode;
+                    }
+                    // Fall back to an arbitrary installed language (probably there is only one)
+                    return InstalledTesseractLanguages.OrderBy(x => x.Name).Select(x => x.Code).FirstOrDefault();
+                }
+                // No overrides, so prioritize the user settings
+                if (userConfigManager.Config.EnableOcr)
+                {
+                    // Prioritize the user-selected language
+                    if (!string.IsNullOrWhiteSpace(userConfigManager.Config.OcrLanguageCode))
+                    {
+                        return userConfigManager.Config.OcrLanguageCode;
+                    }
+                    // Fall back to the app-level language
+                    if (!string.IsNullOrWhiteSpace(appConfigManager.Config.OcrDefaultLanguage))
+                    {
+                        return appConfigManager.Config.OcrDefaultLanguage;
+                    }
+                    // Fall back to an arbitrary installed language (probably there is only one)
+                    return InstalledTesseractLanguages.OrderBy(x => x.Name).Select(x => x.Code).FirstOrDefault();
+                }
+                return null;
+            }
+        }
 
         public ExternalComponent InstalledTesseractExe
         {

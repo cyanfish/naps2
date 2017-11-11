@@ -9,6 +9,7 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
+using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -25,10 +26,10 @@ namespace NAPS2.WinForms
         private readonly ChangeTracker changeTracker;
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
-        private readonly IUserConfigManager userConfigManager;
+        private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IEmailer emailer;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, IUserConfigManager userConfigManager, IEmailer emailer)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrDependencyManager ocrDependencyManager, IEmailer emailer)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -38,7 +39,7 @@ namespace NAPS2.WinForms
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
-            this.userConfigManager = userConfigManager;
+            this.ocrDependencyManager = ocrDependencyManager;
             this.emailer = emailer;
         }
 
@@ -80,8 +81,7 @@ namespace NAPS2.WinForms
 
             var pdfSettings = pdfSettingsContainer.PdfSettings;
             pdfSettings.Metadata.Creator = MiscResources.NAPS2;
-            var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
-            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrLanguageCode, email))
+            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrDependencyManager.DefaultLanguageCode, email))
             {
                 progressForm.ShowDialog();
             }

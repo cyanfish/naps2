@@ -60,6 +60,10 @@ namespace NAPS2.Config
 
         public double OcrTimeoutInSeconds { get; set; }
 
+        public OcrState OcrState { get; set; }
+        
+        public string OcrDefaultLanguage { get; set; }
+
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }
 }

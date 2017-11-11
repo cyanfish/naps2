@@ -6,6 +6,7 @@ using NAPS2.Config;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
+using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -19,18 +20,18 @@ namespace NAPS2.ImportExport
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly IUserConfigManager userConfigManager;
+        private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IErrorOutput errorOutput;
         private readonly AppConfigManager appConfigManager;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly DialogHelper dialogHelper;
 
-        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper)
+        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper)
         {
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.userConfigManager = userConfigManager;
+            this.ocrDependencyManager = ocrDependencyManager;
             this.errorOutput = errorOutput;
             this.appConfigManager = appConfigManager;
             this.fileNamePlaceholders = fileNamePlaceholders;
@@ -97,8 +98,7 @@ namespace NAPS2.ImportExport
                 }
                 var op = operationFactory.Create<SavePdfOperation>();
                 form.Operation = op;
-                var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
-                if (op.Start(subPath, now, images, pdfSettingsContainer.PdfSettings, ocrLanguageCode, false))
+                if (op.Start(subPath, now, images, pdfSettingsContainer.PdfSettings, ocrDependencyManager.DefaultLanguageCode, false))
                 {
                     form.ShowDialog();
                 }

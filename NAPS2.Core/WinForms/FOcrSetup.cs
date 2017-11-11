@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Ocr;
 
 namespace NAPS2.WinForms
@@ -9,10 +10,12 @@ namespace NAPS2.WinForms
     public partial class FOcrSetup : FormBase
     {
         private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly AppConfigManager appConfigManager;
 
-        public FOcrSetup(OcrDependencyManager ocrDependencyManager)
+        public FOcrSetup(OcrDependencyManager ocrDependencyManager, AppConfigManager appConfigManager)
         {
             this.ocrDependencyManager = ocrDependencyManager;
+            this.appConfigManager = appConfigManager;
             InitializeComponent();
         }
 
@@ -29,11 +32,28 @@ namespace NAPS2.WinForms
             comboLanguages.DisplayMember = "Name";
             comboLanguages.ValueMember = "Code";
 
-            checkBoxEnableOcr.Checked = UserConfigManager.Config.EnableOcr;
-            comboLanguages.SelectedValue = UserConfigManager.Config.OcrLanguageCode;
-            if (comboLanguages.SelectedValue == null)
+            if (appConfigManager.Config.OcrState == OcrState.Enabled)
             {
-                comboLanguages.SelectedValue = comboLanguages.Items.Cast<string>().FirstOrDefault();
+                checkBoxEnableOcr.Checked = true;
+                comboLanguages.SelectedValue = appConfigManager.Config.OcrDefaultLanguage ?? "";
+                if (comboLanguages.SelectedValue == null)
+                {
+                    comboLanguages.SelectedValue = comboLanguages.Items.Cast<Language>().Select(x => x.Code).FirstOrDefault();
+                }
+            }
+            else if (appConfigManager.Config.OcrState == OcrState.Disabled)
+            {
+                checkBoxEnableOcr.Checked = false;
+                comboLanguages.SelectedValue = "";
+            }
+            else
+            {
+                checkBoxEnableOcr.Checked = UserConfigManager.Config.EnableOcr;
+                comboLanguages.SelectedValue = UserConfigManager.Config.OcrLanguageCode ?? appConfigManager.Config.OcrDefaultLanguage ?? "";
+                if (comboLanguages.SelectedValue == null)
+                {
+                    comboLanguages.SelectedValue = comboLanguages.Items.Cast<Language>().Select(x => x.Code).FirstOrDefault();
+                }
             }
 
             UpdateView();
@@ -49,7 +69,15 @@ namespace NAPS2.WinForms
 
         private void UpdateView()
         {
-            comboLanguages.Enabled = checkBoxEnableOcr.Checked;
+            bool canChangeEnabled = appConfigManager.Config.OcrState == OcrState.UserConfig;
+            bool canChangeLanguage = appConfigManager.Config.OcrState == OcrState.UserConfig
+                                     || appConfigManager.Config.OcrState == OcrState.Enabled
+                                        && string.IsNullOrWhiteSpace(appConfigManager.Config.OcrDefaultLanguage);
+            checkBoxEnableOcr.Enabled = canChangeEnabled;
+            comboLanguages.Enabled = checkBoxEnableOcr.Checked && canChangeLanguage;
+            linkGetLanguages.Enabled = canChangeLanguage;
+            label1.Enabled = canChangeLanguage;
+            btnOK.Enabled = canChangeEnabled || canChangeLanguage;
         }
 
         private void checkBoxEnableOcr_CheckedChanged(object sender, EventArgs e)

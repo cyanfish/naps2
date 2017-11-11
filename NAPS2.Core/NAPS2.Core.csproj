@@ -106,6 +106,7 @@
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
     <Compile Include="Config\KeyboardShortcuts.cs" />
+    <Compile Include="Config\OcrState.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Host\BackgroundForm.cs">
       <SubType>Form</SubType>

@@ -10,6 +10,7 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
+using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
@@ -26,10 +27,10 @@ namespace NAPS2.Scan.Batch
         private readonly IPdfExporter pdfExporter;
         private readonly IOperationFactory operationFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly UserConfigManager userConfigManager;
+        private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IFormFactory formFactory;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
+        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
         {
             this.scanPerformer = scanPerformer;
             this.profileManager = profileManager;
@@ -37,13 +38,13 @@ namespace NAPS2.Scan.Batch
             this.pdfExporter = pdfExporter;
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.userConfigManager = userConfigManager;
+            this.ocrDependencyManager = ocrDependencyManager;
             this.formFactory = formFactory;
         }
 
         public void PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
-            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, userConfigManager, formFactory)
+            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, ocrDependencyManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -61,14 +62,14 @@ namespace NAPS2.Scan.Batch
             private readonly IPdfExporter pdfExporter;
             private readonly IOperationFactory operationFactory;
             private readonly PdfSettingsContainer pdfSettingsContainer;
-            private readonly UserConfigManager userConfigManager;
+            private readonly OcrDependencyManager ocrDependencyManager;
             private readonly IFormFactory formFactory;
 
             private ScanProfile profile;
             private ScanParams scanParams;
             private List<List<ScannedImage>> scans;
 
-            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, UserConfigManager userConfigManager, IFormFactory formFactory)
+            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
             {
                 this.scanPerformer = scanPerformer;
                 this.profileManager = profileManager;
@@ -76,7 +77,7 @@ namespace NAPS2.Scan.Batch
                 this.pdfExporter = pdfExporter;
                 this.operationFactory = operationFactory;
                 this.pdfSettingsContainer = pdfSettingsContainer;
-                this.userConfigManager = userConfigManager;
+                this.ocrDependencyManager = ocrDependencyManager;
                 this.formFactory = formFactory;
             }
 
@@ -288,8 +289,7 @@ namespace NAPS2.Scan.Batch
                     {
                         subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
                     }
-                    var ocrLanguageCode = userConfigManager.Config.EnableOcr ? userConfigManager.Config.OcrLanguageCode : null;
-                    pdfExporter.Export(subPath, images, pdfSettingsContainer.PdfSettings, ocrLanguageCode, j => true);
+                    pdfExporter.Export(subPath, images, pdfSettingsContainer.PdfSettings, ocrDependencyManager.DefaultLanguageCode, j => true);
                 }
                 else
                 {

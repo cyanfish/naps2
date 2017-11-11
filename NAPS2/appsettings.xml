@@ -24,6 +24,8 @@
   <SingleInstance>false</SingleInstance>
   <ComponentsPath></ComponentsPath>
   <OcrTimeoutInSeconds>60</OcrTimeoutInSeconds>
+  <OcrState>UserConfig</OcrState>
+  <OcrDefaultLanguage></OcrDefaultLanguage>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
     <!--

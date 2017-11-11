@@ -479,8 +479,8 @@ namespace NAPS2.Automation
 
             var pdfSettings = new PdfSettings { Metadata = metadata, Encryption = encryption };
 
-            bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr);
-            string ocrLanguageCode = useOcr ? (options.OcrLang ?? userConfigManager.Config.OcrLanguageCode) : null;
+            bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr || appConfigManager.Config.OcrState == OcrState.Enabled);
+            string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrDependencyManager.DefaultLanguageCode) : null;
 
             var op = operationFactory.Create<SavePdfOperation>();
             int i = -1;
