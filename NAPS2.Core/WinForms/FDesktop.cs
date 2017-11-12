@@ -1291,6 +1291,18 @@ namespace NAPS2.WinForms
             }
         }
 
+        private void tsSharpen_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FSharpen>();
+                form.Image = SelectedImages.First();
+                form.SelectedImages = SelectedImages.ToList();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList(), false, true);
+            }
+        }
+
         private void tsReset_Click(object sender, EventArgs e)
         {
             ResetImage();

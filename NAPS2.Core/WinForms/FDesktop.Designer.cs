@@ -103,6 +103,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
+            this.tsSharpen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -443,6 +444,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator6,
             this.tsCrop,
             this.tsBrightnessContrast,
+            this.tsSharpen,
             this.toolStripSeparator7,
             this.tsReset});
             this.tsdImage.Image = global::NAPS2.Icons.picture_edit;
@@ -657,6 +659,13 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
+            // tsSharpen
+            // 
+            this.tsSharpen.Image = global::NAPS2.Icons.sharpen;
+            resources.ApplyResources(this.tsSharpen, "tsSharpen");
+            this.tsSharpen.Name = "tsSharpen";
+            this.tsSharpen.Click += new System.EventHandler(this.tsSharpen_Click);
+            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
@@ -747,6 +756,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem ctxPaste;
         private System.Windows.Forms.ToolStripButton tsPrint;
         private System.Windows.Forms.ToolStripMenuItem tsDeskew;
+        private System.Windows.Forms.ToolStripMenuItem tsSharpen;
     }
 }
 

@@ -344,12 +344,6 @@
     <Compile Include="WinForms\FBatchScan.Designer.cs">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\FBrightness.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForms\FBrightness.Designer.cs">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForms\FContrast.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -478,6 +472,12 @@
     </Compile>
     <Compile Include="WinForms\FSelectDevice.Designer.cs">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FSharpen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FSharpen.Designer.cs">
+      <DependentUpon>FSharpen.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FTwainGui.cs">
       <SubType>Form</SubType>
@@ -1259,128 +1259,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchScan.zh-TW.resx">
       <DependentUpon>FBatchScan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.af.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.ar.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.bg.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.ca.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.cs.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.da.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.de.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.el.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.es.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.et.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.fa.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.fi.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.fr.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.he.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.hr.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.hu.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.it.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.ko.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.lt.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.lv.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.nb.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.nl.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.nn.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.pl.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.pt-BR.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.pt-PT.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.ro.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.ru.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.sk.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.sl.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.sq.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.sr-Cyrl.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.sr-Latn.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.sv.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.tr.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.uk.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.vi.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.zh-CHS.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightness.zh-TW.resx">
-      <DependentUpon>FBrightness.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FContrast.af.resx">
       <DependentUpon>FContrast.cs</DependentUpon>
@@ -3914,6 +3792,126 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSelectDevice.zh-TW.resx">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.af.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.ar.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.bg.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.ca.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.cs.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.da.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.de.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.el.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.es.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.et.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.fa.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.fi.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.fr.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.he.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.hr.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.hu.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.it.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.ko.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.lt.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.lv.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.nb.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.nl.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.nn.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.pl.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.pt-BR.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.pt-PT.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.ro.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.ru.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.sk.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.sl.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.sq.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.sr-Cyrl.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.sr-Latn.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.sv.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.tr.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.uk.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.vi.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.zh-CHS.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.zh-TW.resx">
+      <DependentUpon>FSharpen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FTwainGui.af.resx">
       <DependentUpon>FTwainGui.cs</DependentUpon>
