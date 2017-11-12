@@ -394,6 +394,6 @@
     <value>FCrop</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.6.1.28222, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.28951, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
