@@ -10,7 +10,7 @@ using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class FBrightness : FormBase
+    partial class FSharpen : FormBase
     {
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
@@ -21,21 +21,21 @@ namespace NAPS2.WinForms
         private bool working;
         private Timer previewTimer;
 
-        public FBrightness(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
+        public FSharpen(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
         {
             this.changeTracker = changeTracker;
             this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
 
-            BrightnessTransform = new BrightnessTransform();
+            SharpenTransform = new SharpenTransform();
         }
 
         public ScannedImage Image { get; set; }
 
         public List<ScannedImage> SelectedImages { get; set; }
 
-        public BrightnessTransform BrightnessTransform { get; private set; }
+        public SharpenTransform SharpenTransform { get; private set; }
 
         private IEnumerable<ScannedImage> ImagesToTransform => SelectedImages != null && checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
 
@@ -51,13 +51,13 @@ namespace NAPS2.WinForms
             }
 
             new LayoutManager(this)
-                .Bind(tbBrightness, pictureBox)
+                .Bind(tbSharpen, pictureBox)
                     .WidthToForm()
                 .Bind(pictureBox)
                     .HeightToForm()
-                .Bind(btnOK, btnCancel, txtBrightness)
+                .Bind(btnOK, btnCancel, txtSharpen)
                     .RightToForm()
-                .Bind(tbBrightness, txtBrightness, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
+                .Bind(tbSharpen, txtSharpen, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
                     .BottomToForm()
                 .Activate();
             Size = new Size(600, 600);
@@ -69,7 +69,7 @@ namespace NAPS2.WinForms
 
         private void UpdateTransform()
         {
-            BrightnessTransform.Brightness = tbBrightness.Value;
+            SharpenTransform.Sharpness = tbSharpen.Value;
             UpdatePreviewBox();
         }
 
@@ -83,7 +83,7 @@ namespace NAPS2.WinForms
                     {
                         working = true;
                         previewOutOfDate = false;
-                        var result = BrightnessTransform.Perform((Bitmap)workingImage.Clone());
+                        var result = SharpenTransform.Perform((Bitmap)workingImage.Clone());
                         try
                         {
                             Invoke(new MethodInvoker(() =>
@@ -109,11 +109,11 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (!BrightnessTransform.IsNull)
+            if (!SharpenTransform.IsNull)
             {
                 foreach (var img in ImagesToTransform)
                 {
-                    img.AddTransform(BrightnessTransform);
+                    img.AddTransform(SharpenTransform);
                     img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
                 }
                 changeTracker.HasUnsavedChanges = true;
@@ -123,35 +123,35 @@ namespace NAPS2.WinForms
 
         private void btnRevert_Click(object sender, EventArgs e)
         {
-            BrightnessTransform = new BrightnessTransform();
-            tbBrightness.Value = 0;
-            txtBrightness.Text = tbBrightness.Value.ToString("G");
+            SharpenTransform = new SharpenTransform();
+            tbSharpen.Value = 0;
+            txtSharpen.Text = tbSharpen.Value.ToString("G");
             UpdatePreviewBox();
         }
 
-        private void FCrop_FormClosed(object sender, FormClosedEventArgs e)
+        private void FSharpen_FormClosed(object sender, FormClosedEventArgs e)
         {
             workingImage.Dispose();
             pictureBox.Image?.Dispose();
             previewTimer?.Dispose();
         }
 
-        private void txtBrightness_TextChanged(object sender, EventArgs e)
+        private void txtSharpen_TextChanged(object sender, EventArgs e)
         {
             int value;
-            if (int.TryParse(txtBrightness.Text, out value))
+            if (int.TryParse(txtSharpen.Text, out value))
             {
-                if (value >= tbBrightness.Minimum && value <= tbBrightness.Maximum)
+                if (value >= tbSharpen.Minimum && value <= tbSharpen.Maximum)
                 {
-                    tbBrightness.Value = value;
+                    tbSharpen.Value = value;
                 }
             }
             UpdateTransform();
         }
 
-        private void tbBrightness_Scroll(object sender, EventArgs e)
+        private void tbSharpen_Scroll(object sender, EventArgs e)
         {
-            txtBrightness.Text = tbBrightness.Value.ToString("G");
+            txtSharpen.Text = tbSharpen.Value.ToString("G");
             UpdateTransform();
         }
     }

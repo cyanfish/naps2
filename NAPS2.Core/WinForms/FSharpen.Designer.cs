@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.WinForms
 {
-    partial class FBrightness
+    partial class FSharpen
     {
         /// <summary>
         /// Required designer variable.
@@ -31,16 +31,16 @@ namespace NAPS2.WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FBrightness));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FSharpen));
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRevert = new System.Windows.Forms.Button();
-            this.txtBrightness = new System.Windows.Forms.TextBox();
-            this.tbBrightness = new System.Windows.Forms.TrackBar();
+            this.txtSharpen = new System.Windows.Forms.TextBox();
+            this.tbSharpen = new System.Windows.Forms.TrackBar();
             this.checkboxApplyToSelected = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSharpen)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -71,20 +71,20 @@ namespace NAPS2.WinForms
             this.btnRevert.UseVisualStyleBackColor = true;
             this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
             // 
-            // txtBrightness
+            // txtSharpen
             // 
-            resources.ApplyResources(this.txtBrightness, "txtBrightness");
-            this.txtBrightness.Name = "txtBrightness";
-            this.txtBrightness.TextChanged += new System.EventHandler(this.txtBrightness_TextChanged);
+            resources.ApplyResources(this.txtSharpen, "txtSharpen");
+            this.txtSharpen.Name = "txtSharpen";
+            this.txtSharpen.TextChanged += new System.EventHandler(this.txtSharpen_TextChanged);
             // 
-            // tbBrightness
+            // tbSharpen
             // 
-            resources.ApplyResources(this.tbBrightness, "tbBrightness");
-            this.tbBrightness.Maximum = 1000;
-            this.tbBrightness.Minimum = -1000;
-            this.tbBrightness.Name = "tbBrightness";
-            this.tbBrightness.TickFrequency = 200;
-            this.tbBrightness.Scroll += new System.EventHandler(this.tbBrightness_Scroll);
+            resources.ApplyResources(this.tbSharpen, "tbSharpen");
+            this.tbSharpen.Maximum = 1000;
+            this.tbSharpen.Minimum = -1000;
+            this.tbSharpen.Name = "tbSharpen";
+            this.tbSharpen.TickFrequency = 200;
+            this.tbSharpen.Scroll += new System.EventHandler(this.tbSharpen_Scroll);
             // 
             // checkboxApplyToSelected
             // 
@@ -92,7 +92,7 @@ namespace NAPS2.WinForms
             this.checkboxApplyToSelected.Name = "checkboxApplyToSelected";
             this.checkboxApplyToSelected.UseVisualStyleBackColor = true;
             // 
-            // FBrightness
+            // FSharpen
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,15 +100,15 @@ namespace NAPS2.WinForms
             this.Controls.Add(this.btnRevert);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.txtBrightness);
-            this.Controls.Add(this.tbBrightness);
+            this.Controls.Add(this.txtSharpen);
+            this.Controls.Add(this.tbSharpen);
             this.Controls.Add(this.pictureBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FBrightness";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FCrop_FormClosed);
+            this.Name = "FSharpen";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FSharpen_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSharpen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,8 +120,8 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnRevert;
-        private System.Windows.Forms.TextBox txtBrightness;
-        private System.Windows.Forms.TrackBar tbBrightness;
+        private System.Windows.Forms.TextBox txtSharpen;
+        private System.Windows.Forms.TrackBar tbSharpen;
         private System.Windows.Forms.CheckBox checkboxApplyToSelected;
 
 
