@@ -304,4 +304,19 @@
   <data name="picture_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\picture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="color_gradient" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\color_gradient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="color_management" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\color_management.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="contrast_high" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\contrast_high.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="contrast_with_sun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\contrast_with_sun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sharpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\sharpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

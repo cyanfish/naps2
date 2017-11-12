@@ -303,6 +303,26 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap color_gradient {
+            get {
+                object obj = ResourceManager.GetObject("color_gradient", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap color_management {
+            get {
+                object obj = ResourceManager.GetObject("color_management", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap color_wheel {
             get {
                 object obj = ResourceManager.GetObject("color_wheel", resourceCulture);
@@ -316,6 +336,26 @@ namespace NAPS2 {
         internal static System.Drawing.Bitmap contrast {
             get {
                 object obj = ResourceManager.GetObject("contrast", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap contrast_high {
+            get {
+                object obj = ResourceManager.GetObject("contrast_high", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap contrast_with_sun {
+            get {
+                object obj = ResourceManager.GetObject("contrast_with_sun", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -576,6 +616,16 @@ namespace NAPS2 {
         internal static System.Drawing.Bitmap scanner_large {
             get {
                 object obj = ResourceManager.GetObject("scanner_large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sharpen {
+            get {
+                object obj = ResourceManager.GetObject("sharpen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
