@@ -1291,6 +1291,30 @@ namespace NAPS2.WinForms
             }
         }
 
+        private void tsHueSaturation_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FHueSaturation>();
+                form.Image = SelectedImages.First();
+                form.SelectedImages = SelectedImages.ToList();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList(), false, true);
+            }
+        }
+
+        private void tsBlackWhite_Click(object sender, EventArgs e)
+        {
+            if (SelectedIndices.Any())
+            {
+                var form = FormFactory.Create<FBlackWhite>();
+                form.Image = SelectedImages.First();
+                form.SelectedImages = SelectedImages.ToList();
+                form.ShowDialog();
+                UpdateThumbnails(SelectedIndices.ToList(), false, true);
+            }
+        }
+
         private void tsSharpen_Click(object sender, EventArgs e)
         {
             if (SelectedIndices.Any())

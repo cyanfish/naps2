@@ -153,6 +153,9 @@
     <Compile Include="Scan\Images\NullThumbnailRenderer.cs" />
     <Compile Include="Scan\Images\ThresholdBlankDetector.cs" />
     <Compile Include="Scan\Images\ThumbnailCache.cs" />
+    <Compile Include="Scan\Images\Transforms\BlackWhiteTransform.cs" />
+    <Compile Include="Scan\Images\Transforms\SaturationTransform.cs" />
+    <Compile Include="Scan\Images\Transforms\HueTransform.cs" />
     <Compile Include="Scan\Images\Transforms\SharpenTransform.cs" />
     <Compile Include="Scan\Images\Transforms\TrueContrastTransform.cs" />
     <Compile Include="Scan\PatchCode.cs" />
@@ -344,6 +347,12 @@
     <Compile Include="WinForms\FBatchScan.Designer.cs">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\FHueSaturation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FHueSaturation.Designer.cs">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FContrast.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -472,6 +481,12 @@
     </Compile>
     <Compile Include="WinForms\FSelectDevice.Designer.cs">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FBlackWhite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FBlackWhite.Designer.cs">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FSharpen.cs">
       <SubType>Form</SubType>
@@ -1259,6 +1274,127 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchScan.zh-TW.resx">
       <DependentUpon>FBatchScan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.af.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.ar.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.bg.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.ca.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.cs.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.da.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.de.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.el.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.es.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.et.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.fa.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.fi.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.fr.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.he.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.hr.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.hu.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.it.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.ko.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.lt.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.lv.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.nb.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.nl.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.nn.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.pl.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.pt-BR.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.pt-PT.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.ro.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.ru.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.sk.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.sl.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.sq.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.sr-Cyrl.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.sr-Latn.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.sv.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.tr.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.uk.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.vi.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.zh-CHS.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.zh-TW.resx">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FContrast.af.resx">
       <DependentUpon>FContrast.cs</DependentUpon>
@@ -3792,6 +3928,127 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSelectDevice.zh-TW.resx">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.af.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.ar.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.bg.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.ca.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.cs.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.da.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.de.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.el.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.es.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.et.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.fa.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.fi.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.fr.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.he.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.hr.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.hu.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.it.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.ko.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.lt.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.lv.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.nb.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.nl.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.nn.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.pl.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.pt-BR.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.pt-PT.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.ro.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.ru.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.sk.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.sl.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.sq.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.sr-Cyrl.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.sr-Latn.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.sv.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.tr.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.uk.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.vi.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.zh-CHS.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.zh-TW.resx">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSharpen.af.resx">
       <DependentUpon>FSharpen.cs</DependentUpon>
