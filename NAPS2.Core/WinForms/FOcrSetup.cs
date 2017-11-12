@@ -38,7 +38,7 @@ namespace NAPS2.WinForms
                 comboLanguages.SelectedValue = appConfigManager.Config.OcrDefaultLanguage ?? "";
                 if (comboLanguages.SelectedValue == null)
                 {
-                    comboLanguages.SelectedValue = comboLanguages.Items.Cast<Language>().Select(x => x.Code).FirstOrDefault();
+                    comboLanguages.SelectedValue = comboLanguages.Items.Cast<Language>().Select(x => x.Code).FirstOrDefault() ?? "";
                 }
             }
             else if (appConfigManager.Config.OcrState == OcrState.Disabled)
@@ -52,7 +52,7 @@ namespace NAPS2.WinForms
                 comboLanguages.SelectedValue = UserConfigManager.Config.OcrLanguageCode ?? appConfigManager.Config.OcrDefaultLanguage ?? "";
                 if (comboLanguages.SelectedValue == null)
                 {
-                    comboLanguages.SelectedValue = comboLanguages.Items.Cast<Language>().Select(x => x.Code).FirstOrDefault();
+                    comboLanguages.SelectedValue = comboLanguages.Items.Cast<Language>().Select(x => x.Code).FirstOrDefault() ?? "";
                 }
             }
 

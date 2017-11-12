@@ -78,10 +78,11 @@ namespace NAPS2.ImportExport.Pdf
         public static class Dependencies
         {
             private const string DOWNLOAD_URL_FORMAT = @"https://sourceforge.net/projects/naps2/files/components/gs-9.21/{0}/download";
+            private const string XP_DOWNLOAD_URL_FORMAT = @"http://xp-mirror.naps2.com/gs-9.21/{0}";
 
-            private static readonly DownloadInfo GhostscriptDownload32 = new DownloadInfo("gsdll32.dll.gz", DOWNLOAD_URL_FORMAT, 10.39, "fd7446a05efaf467f5f6a7123c525b0fc7bde711", DownloadFormat.Gzip);
+            private static readonly DownloadInfo GhostscriptDownload32 = new DownloadInfo("gsdll32.dll.gz", DOWNLOAD_URL_FORMAT, XP_DOWNLOAD_URL_FORMAT, 10.39, "fd7446a05efaf467f5f6a7123c525b0fc7bde711", DownloadFormat.Gzip);
 
-            private static readonly DownloadInfo GhostscriptDownload64 = new DownloadInfo("gsdll64.dll.gz", DOWNLOAD_URL_FORMAT, 10.78, "de173f9020c21784727f8c749190d610e4856a0c", DownloadFormat.Gzip);
+            private static readonly DownloadInfo GhostscriptDownload64 = new DownloadInfo("gsdll64.dll.gz", DOWNLOAD_URL_FORMAT, XP_DOWNLOAD_URL_FORMAT, 10.78, "de173f9020c21784727f8c749190d610e4856a0c", DownloadFormat.Gzip);
 
             public static DownloadInfo GhostscriptDownload => Environment.Is64BitProcess ? GhostscriptDownload64 : GhostscriptDownload32;
 

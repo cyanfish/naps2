@@ -6,10 +6,17 @@ namespace NAPS2.Dependencies
 {
     public class DownloadInfo
     {
-        public DownloadInfo(string fileName, string urlFormat, double size, string sha1, DownloadFormat format)
+        public DownloadInfo(string fileName, string urlFormat, string xpUrlFormat, double size, string sha1, DownloadFormat format)
         {
             FileName = fileName;
-            Url = string.Format(urlFormat, fileName);
+            if (PlatformSupport.WindowsXp.Validate())
+            {
+                Url = string.Format(xpUrlFormat, fileName);
+            }
+            else
+            {
+                Url = string.Format(urlFormat, fileName);
+            }
             Size = size;
             Sha1 = sha1;
             Format = format;

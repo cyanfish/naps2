@@ -242,12 +242,13 @@ namespace NAPS2.Ocr
         public class OcrDownloads
         {
             private const string URL_FORMAT = @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download";
+            private const string XP_URL_FORMAT = @"http://xp-mirror.naps2.com/tesseract-3.04/{0}";
 
-            public readonly DownloadInfo Tesseract304Xp = new DownloadInfo("tesseract_xp.exe.gz", URL_FORMAT, 1.32, "98d15e4765caae864f16fa2ab106e3fd6adbe8c3", DownloadFormat.Gzip);
+            public readonly DownloadInfo Tesseract304Xp = new DownloadInfo("tesseract_xp.exe.gz", URL_FORMAT, XP_URL_FORMAT, 1.32, "98d15e4765caae864f16fa2ab106e3fd6adbe8c3", DownloadFormat.Gzip);
 
-            public readonly DownloadInfo Tesseract304 = new DownloadInfo("tesseract.exe.gz", URL_FORMAT, 1.32, "0b0fd21cd886c04c60ed5c3f38b9120b408139b3", DownloadFormat.Gzip);
+            public readonly DownloadInfo Tesseract304 = new DownloadInfo("tesseract.exe.gz", URL_FORMAT, XP_URL_FORMAT, 1.32, "0b0fd21cd886c04c60ed5c3f38b9120b408139b3", DownloadFormat.Gzip);
 
-            public readonly IDictionary<string, DownloadInfo> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new DownloadInfo(x.Filename, URL_FORMAT, x.Size, x.Sha1, DownloadFormat.Gzip));
+            public readonly IDictionary<string, DownloadInfo> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new DownloadInfo(x.Filename, URL_FORMAT, XP_URL_FORMAT, x.Size, x.Sha1, DownloadFormat.Gzip));
         }
         
         private class OcrLanguage
