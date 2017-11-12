@@ -7,11 +7,11 @@ namespace NAPS2.ImportExport.Images
 {
     public class ImageSettingsContainer
     {
-        private readonly UserConfigManager userConfigManager;
+        private readonly IUserConfigManager userConfigManager;
 
         private ImageSettings localImageSettings;
 
-        public ImageSettingsContainer(UserConfigManager userConfigManager)
+        public ImageSettingsContainer(IUserConfigManager userConfigManager)
         {
             this.userConfigManager = userConfigManager;
         }

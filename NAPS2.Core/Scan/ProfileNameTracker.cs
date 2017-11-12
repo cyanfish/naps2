@@ -8,9 +8,9 @@ namespace NAPS2.Scan
 {
     public class ProfileNameTracker
     {
-        private readonly UserConfigManager userConfigManager;
+        private readonly IUserConfigManager userConfigManager;
 
-        public ProfileNameTracker(UserConfigManager userConfigManager)
+        public ProfileNameTracker(IUserConfigManager userConfigManager)
         {
             this.userConfigManager = userConfigManager;
         }

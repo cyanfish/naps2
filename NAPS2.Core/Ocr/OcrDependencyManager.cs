@@ -12,9 +12,9 @@ namespace NAPS2.Ocr
     public class OcrDependencyManager
     {
         private readonly AppConfigManager appConfigManager;
-        private readonly UserConfigManager userConfigManager;
+        private readonly IUserConfigManager userConfigManager;
 
-        public OcrDependencyManager(AppConfigManager appConfigManager, UserConfigManager userConfigManager)
+        public OcrDependencyManager(AppConfigManager appConfigManager, IUserConfigManager userConfigManager)
         {
             this.appConfigManager = appConfigManager;
             this.userConfigManager = userConfigManager;

@@ -6,11 +6,11 @@ namespace NAPS2.ImportExport.Email
 {
     public class EmailSettingsContainer
     {
-        private readonly UserConfigManager userConfigManager;
+        private readonly IUserConfigManager userConfigManager;
 
         private EmailSettings localEmailSettings;
 
-        public EmailSettingsContainer(UserConfigManager userConfigManager)
+        public EmailSettingsContainer(IUserConfigManager userConfigManager)
         {
             this.userConfigManager = userConfigManager;
         }

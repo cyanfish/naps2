@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -246,9 +247,21 @@ namespace NAPS2.ImportExport.Pdf
                     var adjustedHeight = gfx.MeasureString(element.Text, font).Height;
                     var verticalOffset = (adjustedBounds.Height - adjustedHeight)/2;
                     adjustedBounds.Offset(0, (float) verticalOffset);
-                    tf.DrawString(element.Text, font, XBrushes.Transparent, adjustedBounds);
+                    tf.DrawString(ocrResult.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
                 }
             }
+        }
+
+        private static string ReverseText(string text)
+        {
+            TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(text);
+            List<string> elements = new List<string>();
+            while (enumerator.MoveNext())
+            {
+                elements.Add(enumerator.GetTextElement());
+            }
+            elements.Reverse();
+            return string.Concat(elements);
         }
 
         private static void DrawImageOnPage(PdfPage page, XImage img)
