@@ -354,12 +354,6 @@
     <Compile Include="WinForms\FHueSaturation.Designer.cs">
       <DependentUpon>FHueSaturation.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\FContrast.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForms\FContrast.Designer.cs">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForms\FCrop.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1396,128 +1390,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FHueSaturation.zh-TW.resx">
       <DependentUpon>FHueSaturation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.af.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.ar.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.bg.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.ca.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.cs.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.da.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.de.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.el.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.es.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.et.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.fa.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.fi.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.fr.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.he.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.hr.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.hu.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.it.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.ko.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.lt.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.lv.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.nb.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.nl.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.nn.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.pl.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.pt-BR.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.pt-PT.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.ro.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.ru.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.sk.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.sl.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.sq.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.sr-Cyrl.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.sr-Latn.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.sv.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.tr.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.uk.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.vi.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.zh-CHS.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FContrast.zh-TW.resx">
-      <DependentUpon>FContrast.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FCrop.af.resx">
       <DependentUpon>FCrop.cs</DependentUpon>
@@ -5102,6 +4974,8 @@
     <Content Include="Icons\close.png" />
     <None Include="Icons\color_gradient.png" />
     <None Include="Icons\color_management.png" />
+    <Content Include="Icons\color_management.ico" />
+    <Content Include="Icons\color_wheel.ico" />
     <Content Include="Icons\color_wheel.png" />
     <Content Include="Icons\contrast.ico" />
     <Content Include="Icons\contrast.png" />
@@ -5109,6 +4983,8 @@
     <Content Include="Icons\arrow_up-small.png" />
     <None Include="Icons\contrast_with_sun.png" />
     <None Include="Icons\contrast_high.png" />
+    <Content Include="Icons\contrast_high.ico" />
+    <Content Include="Icons\contrast_with_sun.ico" />
     <Content Include="Icons\control_play_blue-small.png" />
     <Content Include="Icons\email.ico" />
     <Content Include="Icons\file_extension_pdf.ico" />
@@ -5122,6 +4998,7 @@
     <Content Include="Icons\scanner-lock-default.png" />
     <Content Include="Icons\scanner-lock.png" />
     <None Include="Icons\sharpen.png" />
+    <Content Include="Icons\sharpen.ico" />
     <Content Include="Icons\text.ico" />
     <Content Include="Icons\text.png" />
     <Content Include="Icons\transform_crop.ico" />
