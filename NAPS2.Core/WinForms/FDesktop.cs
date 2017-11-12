@@ -868,8 +868,8 @@ namespace NAPS2.WinForms
             ksm.Assign(ks.EmailPDF, tsdEmailPDF);
             ksm.Assign(ks.EmailPDFAll, tsEmailPDFAll);
             ksm.Assign(ks.EmailPDFSelected, tsEmailPDFSelected);
-            ksm.Assign(ks.ImageBrightness, tsBrightness);
-            ksm.Assign(ks.ImageContrast, tsContrast);
+            ksm.Assign(ks.ImageBrightness, tsBrightnessContrast);
+            ksm.Assign(ks.ImageContrast, tsBrightnessContrast);
             ksm.Assign(ks.ImageCrop, tsCrop);
             ksm.Assign(ks.ImageReset, tsReset);
             ksm.Assign(ks.ImageView, tsView);
@@ -1279,23 +1279,11 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsBrightness_Click(object sender, EventArgs e)
+        private void tsBrightnessContrast_Click(object sender, EventArgs e)
         {
             if (SelectedIndices.Any())
             {
-                var form = FormFactory.Create<FBrightness>();
-                form.Image = SelectedImages.First();
-                form.SelectedImages = SelectedImages.ToList();
-                form.ShowDialog();
-                UpdateThumbnails(SelectedIndices.ToList(), false, true);
-            }
-        }
-
-        private void tsContrast_Click(object sender, EventArgs e)
-        {
-            if (SelectedIndices.Any())
-            {
-                var form = FormFactory.Create<FContrast>();
+                var form = FormFactory.Create<FBrightnessContrast>();
                 form.Image = SelectedImages.First();
                 form.SelectedImages = SelectedImages.ToList();
                 form.ShowDialog();

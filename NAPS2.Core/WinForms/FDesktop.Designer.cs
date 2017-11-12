@@ -77,8 +77,7 @@ namespace NAPS2.WinForms
             this.tsView = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsCrop = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsBrightness = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsContrast = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsBrightnessContrast = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsReset = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdRotate = new System.Windows.Forms.ToolStripDropDownButton();
@@ -443,8 +442,7 @@ namespace NAPS2.WinForms
             this.tsView,
             this.toolStripSeparator6,
             this.tsCrop,
-            this.tsBrightness,
-            this.tsContrast,
+            this.tsBrightnessContrast,
             this.toolStripSeparator7,
             this.tsReset});
             this.tsdImage.Image = global::NAPS2.Icons.picture_edit;
@@ -471,19 +469,12 @@ namespace NAPS2.WinForms
             this.tsCrop.Name = "tsCrop";
             this.tsCrop.Click += new System.EventHandler(this.tsCrop_Click);
             // 
-            // tsBrightness
+            // tsBrightnessContrast
             // 
-            this.tsBrightness.Image = global::NAPS2.Icons.weather_sun;
-            resources.ApplyResources(this.tsBrightness, "tsBrightness");
-            this.tsBrightness.Name = "tsBrightness";
-            this.tsBrightness.Click += new System.EventHandler(this.tsBrightness_Click);
-            // 
-            // tsContrast
-            // 
-            this.tsContrast.Image = global::NAPS2.Icons.contrast;
-            resources.ApplyResources(this.tsContrast, "tsContrast");
-            this.tsContrast.Name = "tsContrast";
-            this.tsContrast.Click += new System.EventHandler(this.tsContrast_Click);
+            this.tsBrightnessContrast.Image = global::NAPS2.Icons.contrast_with_sun;
+            resources.ApplyResources(this.tsBrightnessContrast, "tsBrightnessContrast");
+            this.tsBrightnessContrast.Name = "tsBrightnessContrast";
+            this.tsBrightnessContrast.Click += new System.EventHandler(this.tsBrightnessContrast_Click);
             // 
             // toolStripSeparator7
             // 
@@ -731,8 +722,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripDropDownButton tsdImage;
         private System.Windows.Forms.ToolStripMenuItem tsView;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripMenuItem tsBrightness;
-        private System.Windows.Forms.ToolStripMenuItem tsContrast;
+        private System.Windows.Forms.ToolStripMenuItem tsBrightnessContrast;
         private System.Windows.Forms.ToolStripMenuItem tsCrop;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsReset;

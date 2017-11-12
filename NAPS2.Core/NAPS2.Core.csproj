@@ -153,6 +153,7 @@
     <Compile Include="Scan\Images\NullThumbnailRenderer.cs" />
     <Compile Include="Scan\Images\ThresholdBlankDetector.cs" />
     <Compile Include="Scan\Images\ThumbnailCache.cs" />
+    <Compile Include="Scan\Images\Transforms\SharpenTransform.cs" />
     <Compile Include="Scan\Images\Transforms\TrueContrastTransform.cs" />
     <Compile Include="Scan\PatchCode.cs" />
     <Compile Include="Scan\ProfileNameTracker.cs" />
@@ -390,6 +391,12 @@
     </Compile>
     <Compile Include="WinForms\FError.Designer.cs">
       <DependentUpon>FError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FBrightnessContrast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FBrightnessContrast.Designer.cs">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FImageSettings.cs">
       <SubType>Form</SubType>
@@ -2222,6 +2229,126 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FError.zh-TW.resx">
       <DependentUpon>FError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.af.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.ar.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.bg.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.ca.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.cs.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.da.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.de.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.el.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.es.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.et.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.fa.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.fi.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.fr.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.he.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.hr.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.hu.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.it.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.ko.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.lt.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.lv.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.nb.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.nl.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.nn.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.pl.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.pt-BR.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.pt-PT.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.ro.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.ru.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.sk.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.sl.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.sq.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.sr-Cyrl.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.sr-Latn.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.sv.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.tr.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.uk.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.vi.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.zh-CHS.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.zh-TW.resx">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FImageSettings.af.resx">
       <DependentUpon>FImageSettings.cs</DependentUpon>
@@ -4717,11 +4844,15 @@
     <Content Include="Icons\arrow_right.png" />
     <Content Include="Icons\arrow_rotate_anticlockwise-small.ico" />
     <Content Include="Icons\close.png" />
+    <None Include="Icons\color_gradient.png" />
+    <None Include="Icons\color_management.png" />
     <Content Include="Icons\color_wheel.png" />
     <Content Include="Icons\contrast.ico" />
     <Content Include="Icons\contrast.png" />
     <Content Include="Icons\arrow_down-small.png" />
     <Content Include="Icons\arrow_up-small.png" />
+    <None Include="Icons\contrast_with_sun.png" />
+    <None Include="Icons\contrast_high.png" />
     <Content Include="Icons\control_play_blue-small.png" />
     <Content Include="Icons\email.ico" />
     <Content Include="Icons\file_extension_pdf.ico" />
@@ -4734,6 +4865,7 @@
     <Content Include="Icons\printer.png" />
     <Content Include="Icons\scanner-lock-default.png" />
     <Content Include="Icons\scanner-lock.png" />
+    <None Include="Icons\sharpen.png" />
     <Content Include="Icons\text.ico" />
     <Content Include="Icons\text.png" />
     <Content Include="Icons\transform_crop.ico" />
