@@ -49,7 +49,7 @@ namespace NAPS2.Scan.Images.Transforms
             p.Entries[1] = Color.White;
             monoBitmap.Palette = p;
 
-            data = monoBitmap.LockBits(new Rectangle(0, 0, monoBitmap.Width, monoBitmap.Height), ImageLockMode.ReadOnly, monoBitmap.PixelFormat);
+            data = monoBitmap.LockBits(new Rectangle(0, 0, monoBitmap.Width, monoBitmap.Height), ImageLockMode.WriteOnly, monoBitmap.PixelFormat);
             stride = Math.Abs(data.Stride);
             for (int y = 0; y < data.Height; y++)
             {
