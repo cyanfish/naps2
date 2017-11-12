@@ -100,9 +100,13 @@
     <EmailPDFSelected></EmailPDFSelected>
     <Print>Ctrl+P</Print>
     <ImageView></ImageView>
+    <ImageBlackWhite></ImageBlackWhite>
     <ImageBrightness></ImageBrightness>
     <ImageContrast></ImageContrast>
     <ImageCrop></ImageCrop>
+    <ImageHue></ImageHue>
+    <ImageSaturation></ImageSaturation>
+    <ImageSharpen></ImageSharpen>
     <ImageReset></ImageReset>
     <RotateLeft></RotateLeft>
     <RotateRight></RotateRight>

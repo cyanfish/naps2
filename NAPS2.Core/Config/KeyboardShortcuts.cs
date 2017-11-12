@@ -43,9 +43,13 @@ namespace NAPS2.Config
         public string Print { get; set; }
 
         public string ImageView { get; set; }
+        public string ImageBlackWhite { get; set; }
         public string ImageBrightness { get; set; }
         public string ImageContrast { get; set; }
         public string ImageCrop { get; set; }
+        public string ImageHue { get; set; }
+        public string ImageSaturation { get; set; }
+        public string ImageSharpen { get; set; }
         public string ImageReset { get; set; }
 
         public string RotateLeft { get; set; }

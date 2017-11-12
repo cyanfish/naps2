@@ -868,9 +868,13 @@ namespace NAPS2.WinForms
             ksm.Assign(ks.EmailPDF, tsdEmailPDF);
             ksm.Assign(ks.EmailPDFAll, tsEmailPDFAll);
             ksm.Assign(ks.EmailPDFSelected, tsEmailPDFSelected);
+            ksm.Assign(ks.ImageBlackWhite, tsBlackWhite);
             ksm.Assign(ks.ImageBrightness, tsBrightnessContrast);
             ksm.Assign(ks.ImageContrast, tsBrightnessContrast);
             ksm.Assign(ks.ImageCrop, tsCrop);
+            ksm.Assign(ks.ImageHue, tsHueSaturation);
+            ksm.Assign(ks.ImageSaturation, tsHueSaturation);
+            ksm.Assign(ks.ImageSharpen, tsSharpen);
             ksm.Assign(ks.ImageReset, tsReset);
             ksm.Assign(ks.ImageView, tsView);
             ksm.Assign(ks.Import, tsImport);
