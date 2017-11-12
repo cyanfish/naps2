@@ -148,7 +148,7 @@
         <value>tiffViewer1</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=5.3.3.38155, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=5.5.0.42778, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -243,36 +243,6 @@
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>
     </data>
-    <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsRotateLeft.Text" xml:space="preserve">
-        <value>Rotér til venstre</value>
-    </data>
-    <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsRotateRight.Text" xml:space="preserve">
-        <value>Rotér til højre</value>
-    </data>
-    <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsFlip.Text" xml:space="preserve">
-        <value>Spejling</value>
-    </data>
-    <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsDeskew.Text" xml:space="preserve">
-        <value>Deskew</value>
-    </data>
-    <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>Custom Rotation</value>
-    </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
@@ -291,23 +261,41 @@
     <data name="tsCrop.Text" xml:space="preserve">
         <value>Crop</value>
     </data>
-    <data name="tsBrightness.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <data name="tsBrightnessContrast.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
-    <data name="tsBrightness.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="tsBrightnessContrast.Size" type="System.Drawing.Size, System.Drawing">
         <value>23, 22</value>
     </data>
-    <data name="tsBrightness.Text" xml:space="preserve">
-        <value>Lysstyrke</value>
+    <data name="tsBrightnessContrast.Text" xml:space="preserve">
+        <value>Brightness / Contrast</value>
     </data>
-    <data name="tsContrast.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <data name="tsHueSaturation.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
-    <data name="tsContrast.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="tsHueSaturation.Size" type="System.Drawing.Size, System.Drawing">
         <value>23, 22</value>
     </data>
-    <data name="tsContrast.Text" xml:space="preserve">
-        <value>Kontrast</value>
+    <data name="tsHueSaturation.Text" xml:space="preserve">
+        <value>Hue / Saturation</value>
+    </data>
+    <data name="tsBlackWhite.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsBlackWhite.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsBlackWhite.Text" xml:space="preserve">
+        <value>Black and White</value>
+    </data>
+    <data name="tsSharpen.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+        <value>Magenta</value>
+    </data>
+    <data name="tsSharpen.Size" type="System.Drawing.Size, System.Drawing">
+        <value>23, 22</value>
+    </data>
+    <data name="tsSharpen.Text" xml:space="preserve">
+        <value>Sharpen</value>
     </data>
     <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>
@@ -346,7 +334,7 @@
         <value>3, 0</value>
     </data>
     <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-        <value>327, 25</value>
+        <value>373, 25</value>
     </data>
     <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
@@ -386,6 +374,36 @@
     </data>
     <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
         <value>0</value>
+    </data>
+    <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="tsRotateLeft.Text" xml:space="preserve">
+        <value>Rotér til venstre</value>
+    </data>
+    <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="tsRotateRight.Text" xml:space="preserve">
+        <value>Rotér til højre</value>
+    </data>
+    <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="tsFlip.Text" xml:space="preserve">
+        <value>Spejling</value>
+    </data>
+    <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="tsDeskew.Text" xml:space="preserve">
+        <value>Deskew</value>
+    </data>
+    <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="tsCustomRotation.Text" xml:space="preserve">
+        <value>Custom Rotation</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <value>True</value>
@@ -497,16 +515,10 @@
     <data name="&gt;&gt;tsCrop.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsBrightness.Name" xml:space="preserve">
-        <value>tsBrightness</value>
+    <data name="&gt;&gt;tsBrightnessContrast.Name" xml:space="preserve">
+        <value>tsBrightnessContrast</value>
     </data>
-    <data name="&gt;&gt;tsBrightness.Type" xml:space="preserve">
-        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;tsContrast.Name" xml:space="preserve">
-        <value>tsContrast</value>
-    </data>
-    <data name="&gt;&gt;tsContrast.Type" xml:space="preserve">
+    <data name="&gt;&gt;tsBrightnessContrast.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
@@ -539,10 +551,28 @@
     <data name="&gt;&gt;tsDelete.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
+    <data name="&gt;&gt;tsSharpen.Name" xml:space="preserve">
+        <value>tsSharpen</value>
+    </data>
+    <data name="&gt;&gt;tsSharpen.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsBlackWhite.Name" xml:space="preserve">
+        <value>tsBlackWhite</value>
+    </data>
+    <data name="&gt;&gt;tsBlackWhite.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsHueSaturation.Name" xml:space="preserve">
+        <value>tsHueSaturation</value>
+    </data>
+    <data name="&gt;&gt;tsHueSaturation.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FViewer</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.3.3.38155, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.42778, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

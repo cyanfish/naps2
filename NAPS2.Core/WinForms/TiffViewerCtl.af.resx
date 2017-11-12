@@ -154,7 +154,7 @@
     <value>tiffviewer1</value>
   </data>
   <data name="&gt;&gt;tiffviewer1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.TiffViewer, NAPS2.Core, Version=4.1.1.264, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.TiffViewer, NAPS2.Core, Version=5.5.0.36524, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tiffviewer1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>

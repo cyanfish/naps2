@@ -216,52 +216,52 @@
     <data name="&gt;&gt;btnRevert.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="txtBrightness.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="txtSharpen.Location" type="System.Drawing.Point, System.Drawing">
         <value>270, 197</value>
     </data>
-    <data name="txtBrightness.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="txtSharpen.Size" type="System.Drawing.Size, System.Drawing">
         <value>38, 20</value>
     </data>
-    <data name="txtBrightness.TabIndex" type="System.Int32, mscorlib">
+    <data name="txtSharpen.TabIndex" type="System.Int32, mscorlib">
         <value>6</value>
     </data>
-    <data name="txtBrightness.Text" xml:space="preserve">
+    <data name="txtSharpen.Text" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="&gt;&gt;txtBrightness.Name" xml:space="preserve">
-        <value>txtBrightness</value>
+    <data name="&gt;&gt;txtSharpen.Name" xml:space="preserve">
+        <value>txtSharpen</value>
     </data>
-    <data name="&gt;&gt;txtBrightness.Type" xml:space="preserve">
+    <data name="&gt;&gt;txtSharpen.Type" xml:space="preserve">
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;txtBrightness.Parent" xml:space="preserve">
+    <data name="&gt;&gt;txtSharpen.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;txtBrightness.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;txtSharpen.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
-    <data name="tbBrightness.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="tbSharpen.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="tbBrightness.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="tbSharpen.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 197</value>
     </data>
-    <data name="tbBrightness.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="tbSharpen.Size" type="System.Drawing.Size, System.Drawing">
         <value>252, 45</value>
     </data>
-    <data name="tbBrightness.TabIndex" type="System.Int32, mscorlib">
+    <data name="tbSharpen.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
     </data>
-    <data name="&gt;&gt;tbBrightness.Name" xml:space="preserve">
-        <value>tbBrightness</value>
+    <data name="&gt;&gt;tbSharpen.Name" xml:space="preserve">
+        <value>tbSharpen</value>
     </data>
-    <data name="&gt;&gt;tbBrightness.Type" xml:space="preserve">
+    <data name="&gt;&gt;tbSharpen.Type" xml:space="preserve">
         <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tbBrightness.Parent" xml:space="preserve">
+    <data name="&gt;&gt;tbSharpen.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;tbBrightness.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;tbSharpen.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
     <data name="checkboxApplyToSelected.AutoSize" type="System.Boolean, mscorlib">
@@ -302,23 +302,23 @@
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAD///8B////Af///wH///8B////Af///wEAAAAHAAAAMwAAAAf///8B////Af///wH///8B////Af//
-        /wH///8B////Af///wH///8BAAAAHQAAADMAAAAZCj5sSReS//8KPmxJAAAAGQAAADMAAAAd////Af//
-        /wH///8B////Af///wH///8B////ARWF6JsYlP//EnbQkReQ/PMbl///F5D88xJ20JEYlP//FYXom///
-        /wH///8B////Af///wH///8BAAAAHQAAACEUgeWzIZ3//x6b//8fm///IJz//x+b//8em///IZ3//xSB
-        5bMAAAAhAAAAHf///wH///8B////ARN926UTgeS1GZT+/SWj//8kov//JKL//ySi//8kov//JKL//yWj
-        //8ZlP79E4HktRN926X///8B////Af///wEclv//L6v//ymo//8op///KKf//yin//8op///KKf//yin
-        //8op///Kaj//y+r//8clv//////Af///wEAAAAHEHXRkTSs//8trf//Laz//y2s//8trP//Laz//y2s
-        //8trP//Laz//y2t//80rP//EHXRkQAAAAf///8BCTtoTRmU/PMtrv//MbH//zGx//8xsf//MbH//zGx
-        //8xsf//MbH//zGx//8xsf//La7//xmU/PMJO2hN////AROP//9kyP//RL7//zS2//81tv//Nbb//zW2
-        //81tv//Nbb//zW2//81tv//NLb//0S+//9kyP//E4///////wEUkP8fJ5v98VfE//83u///OLv//zm7
-        //85u///Obv//zm7//85u///OLv//ze7//9XxP//J5v98RSQ/x////8B////AQtx0JExuP//OsH//zzB
-        //89wf//PsH//z7B//8+wf//PcH//zzB//86wf//Mbj//wtx0JH///8B////Af///wExof//qOz//5jj
-        //9Ex///P8X//z/F//9Axv//P8X//z/F//9Ex///mOP//6js//8xof//////Af///wH///8BEo//jQyK
-        /6FAqv/9XNX//1vT//9c0v//P8r//1zS//9b0///XNX//0Cq//0Miv+hEo//jf///wH///8B////Af//
-        /wH///8BCoLwq8H3//+d3///oeP//3Le//+h4///nd///8H3//8KgvCr////Af///wH///8B////Af//
-        /wH///8B////ARGO/403pP//B4j/dzGg/++/8v//MaD/7weI/3c3pP//EY7/jf///wH///8B////Af//
-        /wH///8B////Af///wH///8B////Af///wERjv8fDo3//xGO/x////8B////Af///wH///8B////Af//
+        AAAAAAAtAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAA
+        ADMAAAAtpqam6aioqP+np6f/p6en/6enp/+np6f/qamp/4iIiP+IiIj/qamp/6enp/+np6f/p6en/6en
+        p/+oqKj/pqam6aioqP////////////////////////////////+4tbb/ubW2////////////////////
+        /////////////6ioqP+np6f//////0epjP9QrZL/UK2S/1Ctkv9Qr5T/YIt//1SMeP82soT/Nq+D/zav
+        g/82r4P/Lat9//////+np6f/p6en//////9UtZH/XrqX/166l/9eupf/XbyY/2iRgv9niHz/WqeN/1um
+        jP9bpoz/W6aM/1Cghf//////p6en/6enp///////Qp+R/02kl/9NpJf/TaSX/0ymmP9hh4H/Y4SB/1Cg
+        lf9RnpT/UZ6U/1GelP9GmI7//////6enp/+np6f//////zuYqv9Fnq//RZ6v/0Wer/9En7H/XIWN/1p+
+        gv9Bkpv/RJKb/0eUnP9HlJ3/OIyX//////+np6f/p6en//////+TqKj/ma2t/5mtrf+Zra3/mq+v/4CJ
+        iv+6san/y+Ps/5PAzP9Olq3/PYuk/9bSr///////p6en/6enp///////1L2l/9fBqv/Xwar/18Gq/9vE
+        rf+jlIz/rKCE///wzP////7////5//rgs///3qT//////6enp/+np6f///////bMnv/3z6P/98+j//fP
+        o///0qf/OJBg/wCIRP//3J3//9aX///Wlv//15n//9SU//////+np6f/p6en///////uxov/9syV//vO
+        mf/8z5r//9Gd/wCJR/8AzqX/AIRD///Tjf//zYX//8uD///Jfv//////p6en/6ioqP///////////1m5
+        kf8Ah0T/AIhG/wCJR/8AiUb/AMef/wDIoP8Agj3//////////////////////6ioqP+rq6vjqKio/7Gp
+        rf8AiUP/AMan/wDFpP8AxaT/AMOi/wC/mv8WxqX/euTV/wCFPf+wqKz/p6en/6ioqP+rq6up////Af//
+        /wH///8BAIxIpQCNS/8AjEr/AIxK/wCIRP+K4tf/feDT/wCJRf////8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wEAi0n/kubg/wCIRP////8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8BAI5NqQCMSv////8B////Af///wH///8B////Af//
         /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
         //8AAP//AAD//w==
 </value>
@@ -333,12 +333,12 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Fényerő</value>
+        <value>Sharpen</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FBrightness</value>
+        <value>FSharpen</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.28575, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.36980, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

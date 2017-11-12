@@ -238,7 +238,7 @@
         <value>thumbnailList1</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=5.3.3.33840, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
@@ -441,6 +441,69 @@
     <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 54</value>
     </data>
+    <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
+        <value>185, 22</value>
+    </data>
+    <data name="tsView.Text" xml:space="preserve">
+        <value>Pogled</value>
+    </data>
+    <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+        <value>182, 6</value>
+    </data>
+    <data name="tsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsCrop.Size" type="System.Drawing.Size, System.Drawing">
+        <value>185, 22</value>
+    </data>
+    <data name="tsCrop.Text" xml:space="preserve">
+        <value>&amp;Crop</value>
+    </data>
+    <data name="tsBrightnessContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsBrightnessContrast.Size" type="System.Drawing.Size, System.Drawing">
+        <value>185, 22</value>
+    </data>
+    <data name="tsBrightnessContrast.Text" xml:space="preserve">
+        <value>&amp;Brightness / Contrast</value>
+    </data>
+    <data name="tsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsHueSaturation.Size" type="System.Drawing.Size, System.Drawing">
+        <value>185, 22</value>
+    </data>
+    <data name="tsHueSaturation.Text" xml:space="preserve">
+        <value>&amp;Hue / Saturation</value>
+    </data>
+    <data name="tsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsBlackWhite.Size" type="System.Drawing.Size, System.Drawing">
+        <value>185, 22</value>
+    </data>
+    <data name="tsBlackWhite.Text" xml:space="preserve">
+        <value>Black and &amp;White</value>
+    </data>
+    <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
+    </data>
+    <data name="tsSharpen.Size" type="System.Drawing.Size, System.Drawing">
+        <value>185, 22</value>
+    </data>
+    <data name="tsSharpen.Text" xml:space="preserve">
+        <value>&amp;Sharpen</value>
+    </data>
+    <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+        <value>182, 6</value>
+    </data>
+    <data name="tsReset.Size" type="System.Drawing.Size, System.Drawing">
+        <value>185, 22</value>
+    </data>
+    <data name="tsReset.Text" xml:space="preserve">
+        <value>&amp;Reset</value>
+    </data>
     <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
@@ -452,48 +515,6 @@
     </data>
     <data name="tsdImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
-    </data>
-    <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsRotateLeft.Text" xml:space="preserve">
-        <value>Rotiraj levo</value>
-    </data>
-    <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsRotateRight.Text" xml:space="preserve">
-        <value>&amp;Rotiraj desno</value>
-    </data>
-    <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsFlip.Text" xml:space="preserve">
-        <value>Okreni</value>
-    </data>
-    <data name="tsDeskew.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-        <value>None</value>
-    </data>
-    <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsDeskew.Text" xml:space="preserve">
-        <value>&amp;Deskew</value>
-    </data>
-    <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
-        <value>164, 22</value>
-    </data>
-    <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>&amp;Custom Rotation</value>
     </data>
     <data name="tsdRotate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -804,50 +825,47 @@
     <data name="tsPdfSettings2.Text" xml:space="preserve">
         <value>&amp;PDF Settings</value>
     </data>
-    <data name="tsView.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
-    </data>
-    <data name="tsView.Text" xml:space="preserve">
-        <value>Pogled</value>
-    </data>
-    <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-        <value>126, 6</value>
-    </data>
-    <data name="tsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsCrop.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
+    <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
     </data>
-    <data name="tsCrop.Text" xml:space="preserve">
-        <value>&amp;Crop</value>
+    <data name="tsRotateLeft.Text" xml:space="preserve">
+        <value>Rotiraj levo</value>
     </data>
-    <data name="tsBrightness.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsBrightness.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
+    <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
     </data>
-    <data name="tsBrightness.Text" xml:space="preserve">
-        <value>Osvjetljenost</value>
+    <data name="tsRotateRight.Text" xml:space="preserve">
+        <value>&amp;Rotiraj desno</value>
     </data>
-    <data name="tsContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsContrast.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
+    <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
     </data>
-    <data name="tsContrast.Text" xml:space="preserve">
-        <value>Kontrast</value>
+    <data name="tsFlip.Text" xml:space="preserve">
+        <value>Okreni</value>
     </data>
-    <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-        <value>126, 6</value>
+    <data name="tsDeskew.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+        <value>None</value>
     </data>
-    <data name="tsReset.Size" type="System.Drawing.Size, System.Drawing">
-        <value>129, 22</value>
+    <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
     </data>
-    <data name="tsReset.Text" xml:space="preserve">
-        <value>&amp;Reset</value>
+    <data name="tsDeskew.Text" xml:space="preserve">
+        <value>&amp;Deskew</value>
+    </data>
+    <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
+        <value>164, 22</value>
+    </data>
+    <data name="tsCustomRotation.Text" xml:space="preserve">
+        <value>&amp;Custom Rotation</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
@@ -1148,16 +1166,16 @@
     <data name="&gt;&gt;tsCrop.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsBrightness.Name" xml:space="preserve">
-        <value>tsBrightness</value>
+    <data name="&gt;&gt;tsBrightnessContrast.Name" xml:space="preserve">
+        <value>tsBrightnessContrast</value>
     </data>
-    <data name="&gt;&gt;tsBrightness.Type" xml:space="preserve">
+    <data name="&gt;&gt;tsBrightnessContrast.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsContrast.Name" xml:space="preserve">
-        <value>tsContrast</value>
+    <data name="&gt;&gt;tsSharpen.Name" xml:space="preserve">
+        <value>tsSharpen</value>
     </data>
-    <data name="&gt;&gt;tsContrast.Type" xml:space="preserve">
+    <data name="&gt;&gt;tsSharpen.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
@@ -1212,7 +1230,7 @@
         <value>tsMove</value>
     </data>
     <data name="&gt;&gt;tsMove.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=5.3.3.33840, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ToolStripDoubleButton, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;tsdReorder.Name" xml:space="preserve">
         <value>tsdReorder</value>
@@ -1310,10 +1328,22 @@
     <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
+    <data name="&gt;&gt;tsHueSaturation.Name" xml:space="preserve">
+        <value>tsHueSaturation</value>
+    </data>
+    <data name="&gt;&gt;tsHueSaturation.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tsBlackWhite.Name" xml:space="preserve">
+        <value>tsBlackWhite</value>
+    </data>
+    <data name="&gt;&gt;tsBlackWhite.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FDesktop</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.3.3.33840, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

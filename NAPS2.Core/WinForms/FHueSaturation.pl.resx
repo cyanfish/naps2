@@ -142,10 +142,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;pictureBox.ZOrder" xml:space="preserve">
-        <value>6</value>
+        <value>8</value>
     </data>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>152, 263</value>
+        <value>152, 302</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -166,10 +166,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-        <value>3</value>
+        <value>6</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>233, 263</value>
+        <value>233, 302</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -190,10 +190,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>2</value>
+        <value>5</value>
     </data>
     <data name="btnRevert.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 263</value>
+        <value>12, 302</value>
     </data>
     <data name="btnRevert.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -214,61 +214,61 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnRevert.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
-    <data name="txtBrightness.Location" type="System.Drawing.Point, System.Drawing">
-        <value>270, 197</value>
-    </data>
-    <data name="txtBrightness.Size" type="System.Drawing.Size, System.Drawing">
-        <value>38, 20</value>
-    </data>
-    <data name="txtBrightness.TabIndex" type="System.Int32, mscorlib">
-        <value>6</value>
-    </data>
-    <data name="txtBrightness.Text" xml:space="preserve">
-        <value>0</value>
-    </data>
-    <data name="&gt;&gt;txtBrightness.Name" xml:space="preserve">
-        <value>txtBrightness</value>
-    </data>
-    <data name="&gt;&gt;txtBrightness.Type" xml:space="preserve">
-        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;txtBrightness.Parent" xml:space="preserve">
-        <value>$this</value>
-    </data>
-    <data name="&gt;&gt;txtBrightness.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
-    <data name="tbBrightness.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
+    <data name="txtHue.Location" type="System.Drawing.Point, System.Drawing">
+        <value>270, 197</value>
     </data>
-    <data name="tbBrightness.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 197</value>
+    <data name="txtHue.Size" type="System.Drawing.Size, System.Drawing">
+        <value>38, 20</value>
     </data>
-    <data name="tbBrightness.Size" type="System.Drawing.Size, System.Drawing">
-        <value>252, 45</value>
+    <data name="txtHue.TabIndex" type="System.Int32, mscorlib">
+        <value>6</value>
     </data>
-    <data name="tbBrightness.TabIndex" type="System.Int32, mscorlib">
-        <value>5</value>
+    <data name="txtHue.Text" xml:space="preserve">
+        <value>0</value>
     </data>
-    <data name="&gt;&gt;tbBrightness.Name" xml:space="preserve">
-        <value>tbBrightness</value>
+    <data name="&gt;&gt;txtHue.Name" xml:space="preserve">
+        <value>txtHue</value>
     </data>
-    <data name="&gt;&gt;tbBrightness.Type" xml:space="preserve">
-        <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <data name="&gt;&gt;txtHue.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tbBrightness.Parent" xml:space="preserve">
+    <data name="&gt;&gt;txtHue.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;tbBrightness.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;txtHue.ZOrder" xml:space="preserve">
+        <value>7</value>
+    </data>
+    <data name="tbHue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="tbHue.Location" type="System.Drawing.Point, System.Drawing">
+        <value>27, 197</value>
+    </data>
+    <data name="tbHue.Size" type="System.Drawing.Size, System.Drawing">
+        <value>237, 45</value>
+    </data>
+    <data name="tbHue.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
+    </data>
+    <data name="&gt;&gt;tbHue.Name" xml:space="preserve">
+        <value>tbHue</value>
+    </data>
+    <data name="&gt;&gt;tbHue.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tbHue.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;tbHue.ZOrder" xml:space="preserve">
+        <value>10</value>
     </data>
     <data name="checkboxApplyToSelected.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
     <data name="checkboxApplyToSelected.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 238</value>
+        <value>12, 277</value>
     </data>
     <data name="checkboxApplyToSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>173, 17</value>
@@ -289,6 +289,99 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;checkboxApplyToSelected.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="txtSaturation.Location" type="System.Drawing.Point, System.Drawing">
+        <value>270, 236</value>
+    </data>
+    <data name="txtSaturation.Size" type="System.Drawing.Size, System.Drawing">
+        <value>38, 20</value>
+    </data>
+    <data name="txtSaturation.TabIndex" type="System.Int32, mscorlib">
+        <value>12</value>
+    </data>
+    <data name="txtSaturation.Text" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="&gt;&gt;txtSaturation.Name" xml:space="preserve">
+        <value>txtSaturation</value>
+    </data>
+    <data name="&gt;&gt;txtSaturation.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;txtSaturation.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;txtSaturation.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="tbSaturation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="tbSaturation.Location" type="System.Drawing.Point, System.Drawing">
+        <value>27, 236</value>
+    </data>
+    <data name="tbSaturation.Size" type="System.Drawing.Size, System.Drawing">
+        <value>237, 45</value>
+    </data>
+    <data name="tbSaturation.TabIndex" type="System.Int32, mscorlib">
+        <value>11</value>
+    </data>
+    <data name="&gt;&gt;tbSaturation.Name" xml:space="preserve">
+        <value>tbSaturation</value>
+    </data>
+    <data name="&gt;&gt;tbSaturation.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tbSaturation.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;tbSaturation.ZOrder" xml:space="preserve">
+        <value>9</value>
+    </data>
+    <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 200</value>
+    </data>
+    <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>16, 16</value>
+    </data>
+    <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+        <value>13</value>
+    </data>
+    <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+        <value>pictureBox1</value>
+    </data>
+    <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 239</value>
+    </data>
+    <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>16, 16</value>
+    </data>
+    <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
+        <value>14</value>
+    </data>
+    <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+        <value>pictureBox2</value>
+    </data>
+    <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+        <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -298,28 +391,28 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>320, 298</value>
+        <value>320, 337</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAD///8B////Af///wH///8B////Af///wEAAAAHAAAAMwAAAAf///8B////Af///wH///8B////Af//
-        /wH///8B////Af///wH///8BAAAAHQAAADMAAAAZCj5sSReS//8KPmxJAAAAGQAAADMAAAAd////Af//
-        /wH///8B////Af///wH///8B////ARWF6JsYlP//EnbQkReQ/PMbl///F5D88xJ20JEYlP//FYXom///
-        /wH///8B////Af///wH///8BAAAAHQAAACEUgeWzIZ3//x6b//8fm///IJz//x+b//8em///IZ3//xSB
-        5bMAAAAhAAAAHf///wH///8B////ARN926UTgeS1GZT+/SWj//8kov//JKL//ySi//8kov//JKL//yWj
-        //8ZlP79E4HktRN926X///8B////Af///wEclv//L6v//ymo//8op///KKf//yin//8op///KKf//yin
-        //8op///Kaj//y+r//8clv//////Af///wEAAAAHEHXRkTSs//8trf//Laz//y2s//8trP//Laz//y2s
-        //8trP//Laz//y2t//80rP//EHXRkQAAAAf///8BCTtoTRmU/PMtrv//MbH//zGx//8xsf//MbH//zGx
-        //8xsf//MbH//zGx//8xsf//La7//xmU/PMJO2hN////AROP//9kyP//RL7//zS2//81tv//Nbb//zW2
-        //81tv//Nbb//zW2//81tv//NLb//0S+//9kyP//E4///////wEUkP8fJ5v98VfE//83u///OLv//zm7
-        //85u///Obv//zm7//85u///OLv//ze7//9XxP//J5v98RSQ/x////8B////AQtx0JExuP//OsH//zzB
-        //89wf//PsH//z7B//8+wf//PcH//zzB//86wf//Mbj//wtx0JH///8B////Af///wExof//qOz//5jj
-        //9Ex///P8X//z/F//9Axv//P8X//z/F//9Ex///mOP//6js//8xof//////Af///wH///8BEo//jQyK
-        /6FAqv/9XNX//1vT//9c0v//P8r//1zS//9b0///XNX//0Cq//0Miv+hEo//jf///wH///8B////Af//
-        /wH///8BCoLwq8H3//+d3///oeP//3Le//+h4///nd///8H3//8KgvCr////Af///wH///8B////Af//
-        /wH///8B////ARGO/403pP//B4j/dzGg/++/8v//MaD/7weI/3c3pP//EY7/jf///wH///8B////Af//
-        /wH///8B////Af///wH///8B////Af///wERjv8fDo3//xGO/x////8B////Af///wH///8B////Af//
-        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        AAAAAAAjAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAA
+        ADMAAAAtqnkXwbZ/D/+1fQv/tX0L/7V9C/+1fQr/tH4K/7R+Cf+0fgn/tH4I/7V+CP+2fgf/t34H/7d+
+        Cf+3fw7/s4AY4bZ/D///////////////////////////////////////////////////////////////
+        /////////////7d/Dv+1fQv//////4goAP+bRAL/qVoa/71eNP//B2r//xVu//8Svf//A7H/qR/X/y43
+        //8aG///AAD///////+3fQn/tX0L///////YZw3/s2Yo/7dzPf/Dik//5XV1//9Ulv//V9H/8lPR/15y
+        //9VV///QEX//yNH+f//////t30H/7R8C////////YEi//+bTv/pnGH/1Zpp/9qtdv/9kan//4vj/6OT
+        /f9+iP//cYr6/1yK8v8yafX//////7d9B/+0fAv///////59K///lFb//6Z0//+3jv/7v5r//saj/+C8
+        //+kuP//krD5/36d9v9kh/P/PGn1//////+3fAf/tXsL//////+9/wH/yf8z/9X/V//f/3b/2f+W/87/
+        sf+89///oOf//3vS/v9byf//Ob///wWt////////t3wH/7V6C///////wP8A/9D/K//B/1X/rv9z/7v/
+        hf+M/7b/jvn//5zs//+E5///X8///zC0//8Apv///////7h8B/+1egv//////5//AP+J/zD/j/9J/6L/
+        Wv99/4f/TP+t/1r6//9r7///ceT//1vj//8/2v//ALX///////+4ewf/tXsK//////9X/wD/a/8J/3v/
+        IP94/z//Bf+Q/xD/kP8e+P//EPj//0Di//8z2v//G9j//wDU////////tnsI/7V8C///////////////
+        /////////////////////////////////////////////////////////////7V8Cv+1fg//+ODA/+Gl
+        S//ipk//4qdQ/+KnT//jp07/46dO/+OnTf/jp03/46dN/+OnTf/jp0v/4qZJ//jgv/+2fg//toAT//LY
+        rv/UkiL/1JQm/9SUJ//UlCf/1JQn/9SUJ//UlCf/1JQn/9SUJ//UlCf/1JQm/9SSIv/y2K7/toAT/7iC
+        F//u0Jv/7M6Y/+zOmv/szpr/7M6a/+zOmv/szpr/7M6a/+zOmv/szpr/7M6a/+zOmv/szpj/7tCb/7iC
+        F/+6hRzFuIIX/7eBFv+3gRb/t4EW/7eBFv+3gRb/t4EW/7eBFv+3gRb/t4EW/7eBFv+3gRb/t4EW/7iC
+        F/+6hRzvAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
         //8AAP//AAD//w==
 </value>
     </data>
@@ -333,12 +426,12 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Jasność</value>
+        <value>Hue / Saturation</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FBrightness</value>
+        <value>FHueSaturation</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.28575, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

@@ -142,10 +142,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;pictureBox.ZOrder" xml:space="preserve">
-        <value>6</value>
+        <value>8</value>
     </data>
     <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-        <value>152, 263</value>
+        <value>152, 302</value>
     </data>
     <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -166,10 +166,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-        <value>3</value>
+        <value>6</value>
     </data>
     <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-        <value>233, 263</value>
+        <value>233, 302</value>
     </data>
     <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -190,10 +190,10 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>2</value>
+        <value>5</value>
     </data>
     <data name="btnRevert.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 263</value>
+        <value>12, 302</value>
     </data>
     <data name="btnRevert.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
@@ -214,7 +214,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnRevert.ZOrder" xml:space="preserve">
-        <value>1</value>
+        <value>4</value>
     </data>
     <data name="txtBrightness.Location" type="System.Drawing.Point, System.Drawing">
         <value>270, 197</value>
@@ -238,16 +238,16 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;txtBrightness.ZOrder" xml:space="preserve">
-        <value>4</value>
+        <value>7</value>
     </data>
     <data name="tbBrightness.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <data name="tbBrightness.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 197</value>
+        <value>27, 197</value>
     </data>
     <data name="tbBrightness.Size" type="System.Drawing.Size, System.Drawing">
-        <value>252, 45</value>
+        <value>237, 45</value>
     </data>
     <data name="tbBrightness.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
@@ -262,13 +262,13 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;tbBrightness.ZOrder" xml:space="preserve">
-        <value>5</value>
+        <value>10</value>
     </data>
     <data name="checkboxApplyToSelected.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
     <data name="checkboxApplyToSelected.Location" type="System.Drawing.Point, System.Drawing">
-        <value>12, 238</value>
+        <value>12, 277</value>
     </data>
     <data name="checkboxApplyToSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>173, 17</value>
@@ -289,6 +289,99 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;checkboxApplyToSelected.ZOrder" xml:space="preserve">
+        <value>3</value>
+    </data>
+    <data name="txtContrast.Location" type="System.Drawing.Point, System.Drawing">
+        <value>270, 236</value>
+    </data>
+    <data name="txtContrast.Size" type="System.Drawing.Size, System.Drawing">
+        <value>38, 20</value>
+    </data>
+    <data name="txtContrast.TabIndex" type="System.Int32, mscorlib">
+        <value>12</value>
+    </data>
+    <data name="txtContrast.Text" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="&gt;&gt;txtContrast.Name" xml:space="preserve">
+        <value>txtContrast</value>
+    </data>
+    <data name="&gt;&gt;txtContrast.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;txtContrast.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;txtContrast.ZOrder" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="tbContrast.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="tbContrast.Location" type="System.Drawing.Point, System.Drawing">
+        <value>27, 236</value>
+    </data>
+    <data name="tbContrast.Size" type="System.Drawing.Size, System.Drawing">
+        <value>237, 45</value>
+    </data>
+    <data name="tbContrast.TabIndex" type="System.Int32, mscorlib">
+        <value>11</value>
+    </data>
+    <data name="&gt;&gt;tbContrast.Name" xml:space="preserve">
+        <value>tbContrast</value>
+    </data>
+    <data name="&gt;&gt;tbContrast.Type" xml:space="preserve">
+        <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;tbContrast.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;tbContrast.ZOrder" xml:space="preserve">
+        <value>9</value>
+    </data>
+    <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 200</value>
+    </data>
+    <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+        <value>16, 16</value>
+    </data>
+    <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+        <value>13</value>
+    </data>
+    <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+        <value>pictureBox1</value>
+    </data>
+    <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+        <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <value>NoControl</value>
+    </data>
+    <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 239</value>
+    </data>
+    <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+        <value>16, 16</value>
+    </data>
+    <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
+        <value>14</value>
+    </data>
+    <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+        <value>pictureBox2</value>
+    </data>
+    <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+        <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -298,28 +391,28 @@
         <value>6, 13</value>
     </data>
     <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-        <value>320, 298</value>
+        <value>320, 337</value>
     </data>
     <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAD///8B////Af///wH///8B////Af///wEAAAAHAAAAMwAAAAf///8B////Af///wH///8B////Af//
-        /wH///8B////Af///wH///8BAAAAHQAAADMAAAAZCj5sSReS//8KPmxJAAAAGQAAADMAAAAd////Af//
-        /wH///8B////Af///wH///8B////ARWF6JsYlP//EnbQkReQ/PMbl///F5D88xJ20JEYlP//FYXom///
-        /wH///8B////Af///wH///8BAAAAHQAAACEUgeWzIZ3//x6b//8fm///IJz//x+b//8em///IZ3//xSB
-        5bMAAAAhAAAAHf///wH///8B////ARN926UTgeS1GZT+/SWj//8kov//JKL//ySi//8kov//JKL//yWj
-        //8ZlP79E4HktRN926X///8B////Af///wEclv//L6v//ymo//8op///KKf//yin//8op///KKf//yin
-        //8op///Kaj//y+r//8clv//////Af///wEAAAAHEHXRkTSs//8trf//Laz//y2s//8trP//Laz//y2s
-        //8trP//Laz//y2t//80rP//EHXRkQAAAAf///8BCTtoTRmU/PMtrv//MbH//zGx//8xsf//MbH//zGx
-        //8xsf//MbH//zGx//8xsf//La7//xmU/PMJO2hN////AROP//9kyP//RL7//zS2//81tv//Nbb//zW2
-        //81tv//Nbb//zW2//81tv//NLb//0S+//9kyP//E4///////wEUkP8fJ5v98VfE//83u///OLv//zm7
-        //85u///Obv//zm7//85u///OLv//ze7//9XxP//J5v98RSQ/x////8B////AQtx0JExuP//OsH//zzB
-        //89wf//PsH//z7B//8+wf//PcH//zzB//86wf//Mbj//wtx0JH///8B////Af///wExof//qOz//5jj
-        //9Ex///P8X//z/F//9Axv//P8X//z/F//9Ex///mOP//6js//8xof//////Af///wH///8BEo//jQyK
-        /6FAqv/9XNX//1vT//9c0v//P8r//1zS//9b0///XNX//0Cq//0Miv+hEo//jf///wH///8B////Af//
-        /wH///8BCoLwq8H3//+d3///oeP//3Le//+h4///nd///8H3//8KgvCr////Af///wH///8B////Af//
-        /wH///8B////ARGO/403pP//B4j/dzGg/++/8v//MaD/7weI/3c3pP//EY7/jf///wH///8B////Af//
-        /wH///8B////Af///wH///8B////Af///wERjv8fDo3//xGO/x////8B////Af///wH///8B////Af//
-        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        AAD///8B////Af///wH///8BAAAAHwAAADEAAAAzAAAAMwAAADMAAAAxAAAAH////wH///8B////Af//
+        /wH///8B////Af///wEAAAAPAAAAM0tJSKtSUE/5UU9O/1BOTv9NS0r/SkhH+UA+PqsAAAAzAAAAD///
+        /wH///8B////Af///wEAAAAPS0pJa2NhYP9fXl3/ZmRj/2hmZf9oZmX/aGZl/2ZkY/9aWFf/SEZF/y8u
+        LWsAAAAP////Af///wH///8BWllYa4WDgv9qaGf/bmxr/2JhYP9dW1r/WlhX/11bWv9jY2L/c3Fw/25s
+        a/9JR0f/Ly4ta////wH///8BAAAAH5eVlP/t7u3/ysnJ/0pIR/9SUVD/VlZV/1hXVv9YV1b/V1ZV/1hW
+        Vf96eHf/eXd2/0ZEQ/8AAAAf////AZGPjanOzcz/+vv6//f49/+4t7b/R0ZF/1FQT/9VVFP/VlVU/1ZV
+        VP9UU1L/VVNS/4yKiv9samn/Pz0+qf///wGjoZ/58fDv//Hx8P/u7ez/9vX0/7e2tf9FREP/T05N/1NS
+        Uf9UU1L/U1NS/1BQT/90c3L/k5KS/0ZEQ/n///8BpKKg//z7+//s6+r/6eno/+zs6//09fT/tbW0/0NB
+        Qf9NS0v/UU9P/1JQUP9PTU3/XFpa/66trP9IRkX/////AbOxr//7+/z/5ufm/+fn5v/n5+b/6urp//Lz
+        8v+zsrL/QT8//0tJSf9JR0f/RkdL/zJTcf+traz/RkVE/////wGnpaP//f39/+jo5//m5eP/5uXk/+fl
+        5P/p6Of/8vHw/7KxsP87OTn/IYLW/x+I4P8clvv/Lpjx/zZYeP8AAAAHqqel+fX09P/v7u7/4+Lg/+Tj
+        4v/k4+L/5OPi/+fm5f/w7u3/Npfm/yOg/f8mpP//JqT//yak//8llev/GIzwaa6rqZXV1dT//f7+/+Tj
+        4v/h4eD/4uLh/+Li4f/i4uH/09fZ/zym9P8vrv//L67//y+u//8vrv//L67//xN603X///8Bramn//Pz
+        8//7+vr/4uHg/9/e3f/g397/4N/e/6fI5/9Luf3/Nrj//ze4//83uP//Nrj//0G8//8zpf7D////AbKu
+        rFuxr6z/9vX1///////v7+//4+Pi/9zb2v/j4+L/Xrr2/1TL//8+w///PsP//z/D//9q0v//I4/tZf//
+        /wH///8Bsq6sR6yppv/Z2Nf//f3+/////////////////7bb/v9rxPj/fdn//2vX//+F3///IZX6kxKP
+        /yP///8B////Af///wH///8BrquolauopfenpaP/pqOh/6SioP+joZ/3Y57RvyGX/2FSs//DJ5v/XRGO
+        /yP///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
         //8AAP//AAD//w==
 </value>
     </data>
@@ -333,12 +426,12 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Lysstyrke</value>
+        <value>Brightness / Contrast</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
-        <value>FBrightness</value>
+        <value>FBrightnessContrast</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.2.3.28575, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.35860, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>
