@@ -136,6 +136,14 @@ msgstr ""
 msgid "Alternate Interleave"
 msgstr ""
 
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Alternative Transfer"
+msgstr ""
+
+#: MiscResources.resx$PdfImportComponentNeeded$Message
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgstr ""
+
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
 msgstr ""
@@ -164,10 +172,12 @@ msgstr ""
 msgid "Apply brightness/contrast after scan"
 msgstr ""
 
+#: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
+#: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
+#: FSharpen.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
-#: FContrast.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
-#: FBrightness.resx$checkboxApplyToSelected.Text$Message
+#: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr ""
 
@@ -265,37 +275,48 @@ msgstr ""
 msgid "Black & White"
 msgstr "Must ja valge"
 
+#: FDesktop.resx$tsBlackWhite.Text$Message
+#: FViewer.resx$tsBlackWhite.Text$Message
+#: FBlackWhite.resx$$this.Text$Message
+msgid "Black and White"
+msgstr ""
+
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
 msgstr "Tühjad lehed"
 
-#: FDesktop.resx$tsBrightness.Text$Message
-#: FViewer.resx$tsBrightness.Text$Message
-#: FBrightness.resx$$this.Text$Message
 #: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Heledus"
 
+#: FDesktop.resx$tsBrightnessContrast.Text$Message
+#: FViewer.resx$tsBrightnessContrast.Text$Message
+#: FBrightnessContrast.resx$$this.Text$Message
+msgid "Brightness / Contrast"
+msgstr ""
+
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
-#: FContrast.resx$btnCancel.Text$Message
-#: FBrightness.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
+#: FBrightnessContrast.resx$btnCancel.Text$Message
+#: FHueSaturation.resx$btnCancel.Text$Message
+#: FSharpen.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: FBlackWhite.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Loobu"
@@ -333,9 +354,6 @@ msgstr ""
 msgid "Compatibility"
 msgstr ""
 
-#: FDesktop.resx$tsContrast.Text$Message
-#: FViewer.resx$tsContrast.Text$Message
-#: FContrast.resx$$this.Text$Message
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
 msgstr "Kontrast"
@@ -412,8 +430,8 @@ msgstr ""
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
-#: MiscResources.resx$Delete$Message
 #: FProfiles.resx$ctxDelete.Text$Message
+#: MiscResources.resx$Delete$Message
 #: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
@@ -466,6 +484,10 @@ msgstr "Lae alla"
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
 msgstr "Allalaadimise viga"
+
+#: MiscResources.resx$DownloadNeeded$Message
+msgid "Download Needed"
+msgstr ""
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
@@ -581,6 +603,12 @@ msgstr "Horisontaalne peegeldamine"
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
 msgstr "Tund (0-23)"
+
+#: FDesktop.resx$tsHueSaturation.Text$Message
+#: FViewer.resx$tsHueSaturation.Text$Message
+#: FHueSaturation.resx$$this.Text$Message
+msgid "Hue / Saturation"
+msgstr ""
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -786,22 +814,24 @@ msgstr "OCR häälestaja"
 msgid "OCR language"
 msgstr "OCR keel"
 
-#: FImageSettings.resx$btnOK.Text$Message
-#: FAutoSaveSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FAdvancedScanSettings.resx$btnOK.Text$Message
-#: FEmailSettings.resx$btnOK.Text$Message
-#: FEditProfile.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FError.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FEditProfile.resx$btnOK.Text$Message
+#: FEmailSettings.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
-#: FContrast.resx$btnOK.Text$Message
-#: FBrightness.resx$btnOK.Text$Message
+#: FSharpen.resx$btnOK.Text$Message
+#: FHueSaturation.resx$btnOK.Text$Message
+#: FBrightnessContrast.resx$btnOK.Text$Message
+#: FBlackWhite.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Olgu"
 
@@ -878,12 +908,12 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
-#: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Kohahoidjad"
@@ -968,9 +998,9 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
-#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
-#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
+#: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr ""
@@ -983,10 +1013,12 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
+#: FHueSaturation.resx$btnRevert.Text$Message
+#: FSharpen.resx$btnRevert.Text$Message
+#: FBrightnessContrast.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
-#: FContrast.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
-#: FBrightness.resx$btnRevert.Text$Message
+#: FBlackWhite.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr ""
 
@@ -1011,8 +1043,9 @@ msgid "Rotate Right"
 msgstr "Pööramine paremale"
 
 #: FViewer.resx$tsSaveImage.Text$Message
+#, fuzzy
 msgid "Save Image"
-msgstr ""
+msgstr "Piltide salvestamine"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1106,8 +1139,8 @@ msgid "Select one or more languages"
 msgstr ""
 
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
+#: FDesktop.resx$tsEmailPDFSelected.Text$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1120,6 +1153,12 @@ msgstr ""
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
+msgstr ""
+
+#: FDesktop.resx$tsSharpen.Text$Message
+#: FViewer.resx$tsSharpen.Text$Message
+#: FSharpen.resx$$this.Text$Message
+msgid "Sharpen"
 msgstr ""
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
