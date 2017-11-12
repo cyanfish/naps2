@@ -103,6 +103,9 @@ namespace NAPS2.WinForms
                         catch (ObjectDisposedException)
                         {
                         }
+                        catch (InvalidOperationException)
+                        {
+                        }
                         working = false;
                     }
                 }, null, 0, 100);
