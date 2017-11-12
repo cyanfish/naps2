@@ -151,7 +151,9 @@ namespace NAPS2.WinForms
                 }
                 if (!txtAngle.Text.Contains('\u00B0'))
                 {
+                    var (ss, sl) = (txtAngle.SelectionStart, txtAngle.SelectionLength);
                     txtAngle.Text += '\u00B0';
+                    (txtAngle.SelectionStart, txtAngle.SelectionLength) = (ss, sl);
                 }
             }
             UpdateTransform();
