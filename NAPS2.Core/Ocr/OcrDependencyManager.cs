@@ -114,7 +114,7 @@ namespace NAPS2.Ocr
         {
             new OcrLanguage { Filename = "afr.traineddata.gz", Code = "afr", LangName = "Afrikaans", Size = 1.93, Sha1 = "a669186130bf1fc6c78226ac868c82b70a44c70b" },
             new OcrLanguage { Filename = "amh.traineddata.gz", Code = "amh", LangName = "Amharic", Size = 1.03, Sha1 = "1153cbbac7306d42e72ca639ff3f36f45dcb15a2" },
-            new OcrLanguage { Filename = "ara.traineddata.gz", Code = "ara", LangName = "Arabic", Size = 1.62, Sha1 = "87b76c73fdcc4c54ec1f03d83b6df665430c2b06" },
+            new OcrLanguage { Filename = "ara.traineddata.gz", Code = "ara", LangName = "Arabic", Size = 1.62, Sha1 = "87b76c73fdcc4c54ec1f03d83b6df665430c2b06", RTL = true },
             new OcrLanguage { Filename = "asm.traineddata.gz", Code = "asm", LangName = "Assamese", Size = 6.56, Sha1 = "223900790d10f638b7dca2a8b8e8a15295d1f19c" },
             new OcrLanguage { Filename = "aze.traineddata.gz", Code = "aze", LangName = "Azerbaijani", Size = 2.54, Sha1 = "01607e49fe6ba6604f65d9b57c77b403ab74040a" },
             new OcrLanguage { Filename = "aze_cyrl.traineddata.gz", Code = "aze_cyrl", LangName = "Azerbaijani (Cyrillic)", Size = 0.97, Sha1 = "f9c9b153e8825bb92d9c8005342ac3d5ea81d0bc" },
@@ -142,7 +142,7 @@ namespace NAPS2.Ocr
             new OcrLanguage { Filename = "equ.traineddata.gz", Code = "equ", LangName = "Math / equation detection", Size = 0.78, Sha1 = "c9bc582875cf7c7903b529a9cdb0b9f4669b840d" },
             new OcrLanguage { Filename = "est.traineddata.gz", Code = "est", LangName = "Estonian", Size = 3.62, Sha1 = "d743f2456fa32ce7bbbb80cb40951eb742692596" },
             new OcrLanguage { Filename = "eus.traineddata.gz", Code = "eus", LangName = "Basque", Size = 1.83, Sha1 = "d991552b861e5ea1dca59ffca7e295b323e62bbf" },
-            new OcrLanguage { Filename = "fas.traineddata.gz", Code = "fas", LangName = "Persian", Size = 1.75, Sha1 = "c8a7a6b11c3f455b07a397af2e51705a68ff5f77" },
+            new OcrLanguage { Filename = "fas.traineddata.gz", Code = "fas", LangName = "Persian", Size = 1.75, Sha1 = "c8a7a6b11c3f455b07a397af2e51705a68ff5f77", RTL = true },
             new OcrLanguage { Filename = "fin.traineddata.gz", Code = "fin", LangName = "Finnish", Size = 4.98, Sha1 = "90232ad3572901a35bd4bbc736d47184171fa0fd" },
             new OcrLanguage { Filename = "fra.traineddata.gz", Code = "fra", LangName = "French", Size = 5.65, Sha1 = "2bebc5a4c981443c1cbff254e0ca3120004a6c7b" },
             new OcrLanguage { Filename = "frk.traineddata.gz", Code = "frk", LangName = "Frankish", Size = 6.64, Sha1 = "1a6984f8b5768ae663f293ea04594fca229bdb16" },
@@ -152,7 +152,7 @@ namespace NAPS2.Ocr
             new OcrLanguage { Filename = "grc.traineddata.gz", Code = "grc", LangName = "Ancient Greek", Size = 1.88, Sha1 = "ae58a943620c485d33ba95b3fcaca79314105d56" },
             new OcrLanguage { Filename = "guj.traineddata.gz", Code = "guj", LangName = "Gujarati", Size = 4.39, Sha1 = "f469d7257f39dcdd0668d768886f19084816b10e" },
             new OcrLanguage { Filename = "hat.traineddata.gz", Code = "hat", LangName = "Haitian", Size = 0.49, Sha1 = "1667e25ebfe6dc74695af413f291e20f1eec552a" },
-            new OcrLanguage { Filename = "heb.traineddata.gz", Code = "heb", LangName = "Hebrew", Size = 1.51, Sha1 = "64401c999ef08d6190a11a4347c8f9acf40a8e50" },
+            new OcrLanguage { Filename = "heb.traineddata.gz", Code = "heb", LangName = "Hebrew", Size = 1.51, Sha1 = "64401c999ef08d6190a11a4347c8f9acf40a8e50", RTL = true },
             new OcrLanguage { Filename = "hin.traineddata.gz", Code = "hin", LangName = "Hindi", Size = 6.28, Sha1 = "dae6a9a729ad84eded87fef69004d89249170d44" },
             new OcrLanguage { Filename = "hrv.traineddata.gz", Code = "hrv", LangName = "Croatian", Size = 3.33, Sha1 = "b05db705553607afe3d3f2385dc7f272f348a59c" },
             new OcrLanguage { Filename = "hun.traineddata.gz", Code = "hun", LangName = "Hungarian", Size = 4.62, Sha1 = "250f8b5ad6464e3f0ad8694c0b54392cf6c9d73b" },
@@ -170,7 +170,7 @@ namespace NAPS2.Ocr
             new OcrLanguage { Filename = "khm.traineddata.gz", Code = "khm", LangName = "Central Khmer", Size = 20.96, Sha1 = "d5a542959114b154db4db61419cd57aba1e3cf5a" },
             new OcrLanguage { Filename = "kir.traineddata.gz", Code = "kir", LangName = "Kirghiz", Size = 2.02, Sha1 = "ee9ba20cde7597688140fc43b14e49417d1052b7" },
             new OcrLanguage { Filename = "kor.traineddata.gz", Code = "kor", LangName = "Korean", Size = 5.11, Sha1 = "39b452ede31b196c66442ea580b5664377eabdab" },
-            new OcrLanguage { Filename = "kur.traineddata.gz", Code = "kur", LangName = "Kurdish", Size = 0.73, Sha1 = "a36683c3f62415e1d12529b7642b9463c880db0c" },
+            new OcrLanguage { Filename = "kur.traineddata.gz", Code = "kur", LangName = "Kurdish", Size = 0.73, Sha1 = "a36683c3f62415e1d12529b7642b9463c880db0c", RTL = true },
             new OcrLanguage { Filename = "lao.traineddata.gz", Code = "lao", LangName = "Lao", Size = 8.70, Sha1 = "95dbad397571d2d2c13ed63ddc16a51fca343cfb" },
             new OcrLanguage { Filename = "lat.traineddata.gz", Code = "lat", LangName = "Latin", Size = 2.04, Sha1 = "43dc27088ecce88915f6de15c7f6ec9037eebfee" },
             new OcrLanguage { Filename = "lav.traineddata.gz", Code = "lav", LangName = "Latvian", Size = 2.91, Sha1 = "db4e13d875a4c88bd6d8873a7db95fcbd7f9114b" },
@@ -214,7 +214,7 @@ namespace NAPS2.Ocr
             new OcrLanguage { Filename = "tur.traineddata.gz", Code = "tur", LangName = "Turkish", Size = 5.61, Sha1 = "8d72dc5ec5f22073f6b3ae2f79534e36aa8f63e8" },
             new OcrLanguage { Filename = "uig.traineddata.gz", Code = "uig", LangName = "Uighur", Size = 0.72, Sha1 = "d20262f24476229539b4b87efa9327428052b241" },
             new OcrLanguage { Filename = "ukr.traineddata.gz", Code = "ukr", LangName = "Ukrainian", Size = 2.92, Sha1 = "0871744dfacfa446e212e5c7e671c790b5fdd2f0" },
-            new OcrLanguage { Filename = "urd.traineddata.gz", Code = "urd", LangName = "Urdu", Size = 1.83, Sha1 = "be2964ca83114ee04b3a258e71525b8a1a670c97" },
+            new OcrLanguage { Filename = "urd.traineddata.gz", Code = "urd", LangName = "Urdu", Size = 1.83, Sha1 = "be2964ca83114ee04b3a258e71525b8a1a670c97", RTL = true },
             new OcrLanguage { Filename = "uzb.traineddata.gz", Code = "uzb", LangName = "Uzbek", Size = 1.55, Sha1 = "8de3127c90628514d61c0ded9510d4b2728f4b69" },
             new OcrLanguage { Filename = "uzb_cyrl.traineddata.gz", Code = "uzb_cyrl", LangName = "Uzbek (Cyrillic)", Size = 1.19, Sha1 = "e1190d147d6ce3770d768724c82e103b06c93061" },
             new OcrLanguage { Filename = "vie.traineddata.gz", Code = "vie", LangName = "Vietnamese", Size = 2.27, Sha1 = "571e132cd3ed26f5c33943efe7aa17835d277a15" },
@@ -223,7 +223,7 @@ namespace NAPS2.Ocr
 
         #endregion
 
-        public readonly IDictionary<string, Language> Languages = LanguageData.ToDictionary(x => x.Code, x => new Language(x.Code, x.LangName));
+        public readonly IDictionary<string, Language> Languages = LanguageData.ToDictionary(x => x.Code, x => new Language(x.Code, x.LangName, x.RTL));
 
         public class OcrComponents
         {
@@ -261,6 +261,8 @@ namespace NAPS2.Ocr
             public double Size { get; set; }
 
             public string Sha1 { get; set; }
+
+            public bool RTL { get; set; }
         }
     }
 }

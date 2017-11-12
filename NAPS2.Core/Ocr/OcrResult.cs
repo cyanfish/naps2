@@ -10,5 +10,7 @@ namespace NAPS2.Ocr
         public Rectangle PageBounds { get; set; }
 
         public IEnumerable<OcrResultElement> Elements { get; set; }
+
+        public bool RightToLeft { get; set; }
     }
 }

@@ -105,7 +105,8 @@ namespace NAPS2.Ocr
                         .First(),
                     Elements = hocrDocument.Descendants()
                         .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
-                        .Select(x => new OcrResultElement { Text = x.Value, Bounds = GetBounds(x.Attribute("title")) })
+                        .Select(x => new OcrResultElement { Text = x.Value, Bounds = GetBounds(x.Attribute("title")) }),
+                    RightToLeft = ocrDependencyManager.InstalledTesseractLanguages.Where(x => x.Code == langCode).Select(x => x.RTL).FirstOrDefault()
                 };
             }
             catch (Exception e)
