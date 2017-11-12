@@ -69,6 +69,8 @@ namespace NAPS2.WinForms
             workingImage = scannedImageRenderer.Render(Image);
             pictureBox.Image = (Bitmap)workingImage.Clone();
             UpdatePreviewBox();
+
+            ActiveControl = txtBrightness;
         }
 
         private void UpdateTransform()

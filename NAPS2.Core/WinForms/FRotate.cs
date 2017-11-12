@@ -68,6 +68,8 @@ namespace NAPS2.WinForms
             pictureBox.Image = (Bitmap)workingImage.Clone();
             txtAngle.Text += '\u00B0';
             UpdatePreviewBox();
+
+            ActiveControl = txtAngle;
         }
 
         private void UpdateTransform()
