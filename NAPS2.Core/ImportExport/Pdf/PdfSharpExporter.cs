@@ -89,7 +89,9 @@ namespace NAPS2.ImportExport.Pdf
             int progress = 0;
             foreach (var image in images)
             {
-                if (image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any())
+                bool importedPdfPassThrough = image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any();
+
+                if (importedPdfPassThrough)
                 {
                     CopyPdfPageToDoc(document, image);
                 }
@@ -127,13 +129,28 @@ namespace NAPS2.ImportExport.Pdf
                     return null;
                 }
 
-                if (image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any())
+                bool importedPdfPassThrough = image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any();
+
+                PdfPage page;
+                if (importedPdfPassThrough)
                 {
-                    // TODO: Maybe allow OCR to be used?
-                    // Also consider - maybe we can use this to prevent duplicate OCR after import.
-                    // But we would still need some way to re-run it e.g. with a different language.
-                    CopyPdfPageToDoc(document, image);
-                    return null;
+                    page = CopyPdfPageToDoc(document, image);
+
+                    // Scan through the page looking for text
+                    var elements = page.Contents.Elements;
+                    for (int i = 0; i < elements.Count; i++)
+                    {
+                        string textAndFormatting = elements.GetDictionary(i).Stream.ToString();
+                        if (textAndFormatting.Contains("BT")) // BT = begin text block
+                        {
+                            // This page already contains text, don't use OCR
+                            return null;
+                        }
+                    }
+                }
+                else
+                {
+                    page = document.AddPage();
                 }
 
                 using (Stream stream = scannedImageRenderer.RenderToStream(image))
@@ -144,8 +161,10 @@ namespace NAPS2.ImportExport.Pdf
                         return null;
                     }
 
-                    PdfPage page = document.AddPage();
-                    DrawImageOnPage(page, img);
+                    if (!importedPdfPassThrough)
+                    {
+                        DrawImageOnPage(page, img);
+                    }
 
                     if (!progressCallback(progress))
                     {
@@ -203,13 +222,14 @@ namespace NAPS2.ImportExport.Pdf
             return progressCallback(progress);
         }
 
-        private void CopyPdfPageToDoc(PdfDocument destDoc, ScannedImage image)
+        private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, ScannedImage image)
         {
             // Pull the PDF content directly to maintain objects, dpi, etc.
             PdfDocument sourceDoc = PdfReader.Open(image.RecoveryFilePath, PdfDocumentOpenMode.Import);
             PdfPage sourcePage = sourceDoc.Pages.Cast<PdfPage>().Single();
             PdfPage destPage = destDoc.AddPage(sourcePage);
             destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue();
+            return destPage;
         }
 
         private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
