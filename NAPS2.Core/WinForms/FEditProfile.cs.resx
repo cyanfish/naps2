@@ -292,7 +292,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Použít defaultní nastavení</value>
+        <value>Použít výchozí nastavení</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>
@@ -319,7 +319,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Použít nativní uzivatelske prostredi</value>
+        <value>Použít nativní rozhraní</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -750,7 +750,7 @@
         <value>23</value>
     </data>
     <data name="label8.Text" xml:space="preserve">
-        <value>Zobrazované jméno:</value>
+        <value>Zobrazovaný název:</value>
     </data>
     <data name="&gt;&gt;label8.Name" xml:space="preserve">
         <value>label8</value>

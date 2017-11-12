@@ -220,7 +220,7 @@
         <value>Savietojams (tikai standarta saskarne)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Alternatīvā pārnešana</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Vecais DSM</value>

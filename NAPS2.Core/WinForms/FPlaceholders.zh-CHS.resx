@@ -442,7 +442,7 @@
         <value>13</value>
     </data>
     <data name="label6.Text" xml:space="preserve">
-        <value>天 (01-31)</value>
+        <value>日 (01-31)</value>
     </data>
     <data name="&gt;&gt;label6.Name" xml:space="preserve">
         <value>label6</value>
@@ -604,7 +604,7 @@
         <value>19</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>秒钟 (00-59)</value>
+        <value>秒 (00-59)</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>

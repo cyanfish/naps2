@@ -1095,7 +1095,7 @@
         <value>32</value>
     </data>
     <data name="btnAdvanced.Text" xml:space="preserve">
-        <value>&amp;Advanced</value>
+        <value>Haladó</value>
     </data>
     <data name="&gt;&gt;btnAdvanced.Name" xml:space="preserve">
         <value>btnAdvanced</value>

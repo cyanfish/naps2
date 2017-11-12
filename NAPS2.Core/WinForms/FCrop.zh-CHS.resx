@@ -331,7 +331,7 @@
         <value>11</value>
     </data>
     <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-        <value>适用于所有{0}选定图像？ </value>
+        <value>应用到所有已选定的{0}个图像</value>
     </data>
     <data name="&gt;&gt;checkboxApplyToSelected.Name" xml:space="preserve">
         <value>checkboxApplyToSelected</value>
@@ -393,6 +393,6 @@
         <value>FCrop</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.6.1.28222, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.28951, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

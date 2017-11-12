@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>{ 1 }在{ 2 }上扫描的{ 0 }图像（s）可能没有被保存，并且是可恢复的。你想恢复他们吗？</value>
+        <value>于 {1}  通过 {2} 扫描的 {0} 张图像可能还没有被保存，并且是可恢复的。你想恢复它们吗？</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -204,7 +204,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>现在不要</value>
+        <value>暂时不需要</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -232,7 +232,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>修复扫描过的图像</value>
+        <value>修复已扫描的图像</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FRecover</value>

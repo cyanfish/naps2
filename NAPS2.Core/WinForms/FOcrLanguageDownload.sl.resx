@@ -132,7 +132,7 @@
         <value>3</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Select one or more languages:</value>
+        <value>Izberite enega ali več jezikov:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -180,7 +180,7 @@
         <value>6</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>&amp;Cancel</value>
+        <value>Prekliči</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -228,7 +228,7 @@
         <value>8</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Using OCR requires you to download each language you want to scan.</value>
+        <value>Uporaba OCR zahteva prenos jezikov, ki jih boste uporabljali pri skeniranju.</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -305,7 +305,7 @@
         <value>439, 310</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>OCR Download</value>
+        <value>OCR Prenos</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FOcrLanguageDownload</value>

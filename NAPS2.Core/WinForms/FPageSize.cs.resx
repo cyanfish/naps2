@@ -201,7 +201,7 @@
         <value>8</value>
     </data>
     <data name="labelX.Text" xml:space="preserve">
-        <value>X</value>
+        <value>×</value>
     </data>
     <data name="&gt;&gt;labelX.Name" xml:space="preserve">
         <value>labelX</value>
@@ -270,7 +270,7 @@
         <value>11</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Jméno (volitelné)</value>
+        <value>Název (volitelné)</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>
@@ -399,7 +399,7 @@
         <value>327, 177</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Uživatelská velikost papíru</value>
+        <value>Vlastní velikost papíru</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FPageSize</value>

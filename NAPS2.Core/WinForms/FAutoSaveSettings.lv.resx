@@ -223,7 +223,7 @@
         <value>22</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T</value>
+        <value>Sadalīt datnēs pēc Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -451,7 +451,7 @@
         <value>29</value>
     </data>
     <data name="cbPromptForFilePath.Text" xml:space="preserve">
-        <value>Prompt for file path</value>
+        <value>Datnes ceļa dialogs</value>
     </data>
     <data name="&gt;&gt;cbPromptForFilePath.Name" xml:space="preserve">
         <value>cbPromptForFilePath</value>

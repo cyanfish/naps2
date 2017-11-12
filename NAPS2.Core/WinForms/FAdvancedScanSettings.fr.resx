@@ -322,7 +322,7 @@
         <value>8</value>
     </data>
     <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-        <value>Délai entre les acquisitions (WIA)</value>
+        <value>Délai entre acquisitions (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaDelayBetweenScans.Name" xml:space="preserve">
         <value>cbWiaDelayBetweenScans</value>
@@ -352,7 +352,7 @@
         <value>7</value>
     </data>
     <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-        <value>Réessayer si échec (WAI)</value>
+        <value>Réessayer en cas d'échec (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaRetryOnFailure.Name" xml:space="preserve">
         <value>cbWiaRetryOnFailure</value>

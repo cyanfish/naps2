@@ -128,7 +128,7 @@
         <value>152, 22</value>
     </data>
     <data name="ctxScan.Text" xml:space="preserve">
-        <value>扫瞄</value>
+        <value>扫描</value>
     </data>
     <data name="ctxEdit.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -361,7 +361,7 @@
         <value>5</value>
     </data>
     <data name="btnScan.Text" xml:space="preserve">
-        <value>扫瞄</value>
+        <value>扫描</value>
     </data>
     <data name="btnScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>BottomCenter</value>

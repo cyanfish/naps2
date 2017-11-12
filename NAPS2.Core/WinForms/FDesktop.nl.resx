@@ -859,7 +859,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsDeskew.Text" xml:space="preserve">
-        <value>&amp;Deskew</value>
+        <value>Rechtzetten</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>

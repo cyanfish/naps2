@@ -424,9 +424,9 @@
         <value>Πρόοδος Διόρθωσης Ασυμμετρίας</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>Λήψη Απαραίτητη</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>Ένα πρόσθετο συστατικό είναι απαραίτητο για την εισαγωγή αυτού του PDF. Θέλετε την λήψη του τώρα;</value>
     </data>
 </root>

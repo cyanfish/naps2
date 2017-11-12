@@ -118,43 +118,43 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ChooseProfile" xml:space="preserve">
-        <value>Izberi profil</value>
+        <value>Izberi Profil</value>
     </data>
     <data name="Clear" xml:space="preserve">
         <value>Počisti</value>
     </data>
     <data name="ConfirmClearItems" xml:space="preserve">
-        <value>Are you sure you want to clear {0} item(s)?</value>
+        <value>Ali ste prepričani, da želite počistiti {0} elementov?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>Are you sure you want to delete {0} item(s)?</value>
+        <value>Ali ste prepričani, da želite izbrisati {0} elementov?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>Are you sure you want to delete {0} profiles?</value>
+        <value>Ali ste prepričani, da želite izbrisati {0} profilov?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Are you sure you want to delete the profile {0}?</value>
+        <value>Ali ste prepričani, da želite izbrisati profil {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>The file {0} already exists. Do you want to overwrite it?</value>
+        <value>Datoteka {0} že obstaja. Ali jo želite prepisati?</value>
     </data>
     <data name="Delete" xml:space="preserve">
-        <value>Zbriši</value>
+        <value>Izbriši</value>
     </data>
     <data name="DeviceNotFound" xml:space="preserve">
-        <value>The selected scanner could not be found.</value>
+        <value>Izbranega skenerja ni bilo mogoče najti.</value>
     </data>
     <data name="DeviceOffline" xml:space="preserve">
-        <value>The selected scanner is offline.</value>
+        <value>Izbran skener je izklopljen.</value>
     </data>
     <data name="DontHavePermission" xml:space="preserve">
-        <value>You don't have permission to save files at this location.</value>
+        <value>Nimate pravic za shanjevanje datotek na tem mestu.</value>
     </data>
     <data name="Error" xml:space="preserve">
         <value>Napaka</value>
     </data>
     <data name="FileTypeBmp" xml:space="preserve">
-        <value>Bitmap Files (*.bmp)</value>
+        <value>Bitmap datoteke (*.bmp)</value>
     </data>
     <data name="FileTypeEmf" xml:space="preserve">
         <value>Enhanced Windows MetaFile (*.emf)</value>
@@ -169,13 +169,13 @@
         <value>JPEG File (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF Dokument (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
-        <value>PNG File (*.png)</value>
+        <value>PNG Datoteka (*.png)</value>
     </data>
     <data name="FileTypeTiff" xml:space="preserve">
-        <value>TIFF File (*.tiff, *.tif)</value>
+        <value>TIFF Datoteka (*.tiff, *.tif)</value>
     </data>
     <data name="NameMissing" xml:space="preserve">
         <value>Manjka ime.</value>
@@ -187,31 +187,31 @@
         <value>Naprava ni izbrana.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>Ne najdem nobene naprave za optično branje.</value>
+        <value>Ne najdem naprave za skeniranje.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
-        <value>Overwrite File</value>
+        <value>Prepiši Datoteko</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
-        <value>{0} of {1}</value>
+        <value>{0} od {1}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
-        <value>Scanned Image</value>
+        <value>Skenirana Slika</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Select a profile before clicking Scan.</value>
+        <value>Izberite profil preden pritisnete Skeniraj.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Prišlo je do napake v gonilniku optičnega branja.</value>
+        <value>Pri gonilniku skenerja je prišlo do napake.</value>
     </data>
     <data name="Version" xml:space="preserve">
-        <value>Version {0}</value>
+        <value>Različica {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>Prišlo je do napake med pošiljanjem pošte.</value>
+        <value>Pri pošiljanju pošte je prišlo do napake.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
-        <value>Samodejne nadgradnje</value>
+        <value>Samodejna Posodobitev</value>
     </data>
     <data name="Download" xml:space="preserve">
         <value>Prenesi</value>
@@ -220,16 +220,16 @@
         <value>Prenesi in namesti</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Želite da NAPS2 samodejno preverja za nadgradnje?</value>
+        <value>Želite da NAPS2 samodejno preverja za posodobitve?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>Ne zdaj</value>
+        <value>Ne Sedaj</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Na voljo je nova verzija NAPS2. Ali želite posodobitev zdaj?</value>
+        <value>Na voljo je nova različica NAPS2. Ali želite posodobiti sedaj?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
-        <value>Namestitev zaključena</value>
+        <value>Namestitev Zaključena</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
         <value>Namestitev zaključena. Želite ponovno zagnati NAPS2?</value>
@@ -238,106 +238,106 @@
         <value>Namestitev spodletela.</value>
     </data>
     <data name="InstallFailedTitle" xml:space="preserve">
-        <value>Namestitev spodletela</value>
+        <value>Namestitev Spodletela</value>
     </data>
     <data name="AllCount" xml:space="preserve">
         <value>Vse ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>Selected ({0})</value>
+        <value>Izbranih ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
         <value>Ocenjena velikost prenosa: {0} MB</value>
     </data>
     <data name="FilesProgressFormat" xml:space="preserve">
-        <value>{0} / {1} files</value>
+        <value>{0} / {1} datotek</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
         <value>{0} / {1} MB</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
-        <value>The file '{0}' could not be imported.</value>
+        <value>Datoteke '{0}' ni bilo mogoče uvoziti.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
+        <value>Datoteke '{0}' ni bilo mogoče uvoziti. Uvožene so lahko samo PDF datoteke narejene v NAPS2.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
         <value>Napaka med prenosom</value>
     </data>
     <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-        <value>One or more files could not be downloaded.</value>
+        <value>Ene ali več datotek ni bilo mogoče prenesti.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
         <value>Po meri ({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
-        <value>Scan</value>
+        <value>Skeniraj</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>Ali ste prepričani, da želite razveljaviti spremembe na {0} slikah?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
-        <value>Reset Image</value>
+        <value>Ponastavi Sliko</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+        <value>Imate neshranjene spremembe. Ali ste prepričani, da želite zavreči spremembe in zapreti program?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
-        <value>Unsaved Changes</value>
+        <value>Neshranjene Spremembe</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>Skeniram stran {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
-        <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+        <value>Izbran skener ne podpira avtomatskega podajalnika. Če skener vsebuje avtomatski podajalnik, poizkusite z drugim gonilnikom.</value>
     </data>
     <data name="NoPagesInFeeder" xml:space="preserve">
-        <value>Ni listov v podajalniku.</value>
+        <value>V podajalniku ni listov.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>You do not have permission to copy content from the file '{0}'.</value>
+        <value>Nimate pravic za kopiranje vsebine iz datoteke '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>Prišlo je do napake pri shranjevanju datoteke.</value>
+        <value>Pri shranjevanju datoteke je prišlo do napake.</value>
     </data>
     <data name="OfN" xml:space="preserve">
-        <value>of {0}</value>
+        <value>od {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>Prišlo je do neznane napake med serijskim optičnim branjem.</value>
+        <value>Med zaporednim skeniranjem je prišlo do napake.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>Zaporedno skeniranje preklicano.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
         <value>Prekinitev....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>Zaporedno skeniranje uspešno zaključeno.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>Zaporedno skeniranje se je ustavilo zaradi napake.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>Scanning page {0}...</value>
+        <value>Skeniram stran {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>Scanning page {0} (scan {1})...</value>
+        <value>Skeniram stran {0} (sken {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>Waiting for scan {0}...</value>
+        <value>Čakam na skeniranje {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
-        <value>Cancel</value>
+        <value>Prekliči</value>
     </data>
     <data name="Close" xml:space="preserve">
         <value>Zapri</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Saving batch results...</value>
+        <value>Shranjujem rezultate skeniranja...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+        <value>Izbran skener ne podpira obojestranskega skeniranja. Če bi naj vaš skener podpiral obojestransko skeniranje, poizkusite z drugim gonilnikom.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
@@ -349,25 +349,25 @@
         <value>Uvoz v teku</value>
     </data>
     <data name="Recovering" xml:space="preserve">
-        <value>Recovering...</value>
+        <value>Rešujem...</value>
     </data>
     <data name="RecoveryProgress" xml:space="preserve">
-        <value>Recovery Progress</value>
+        <value>Potek Reševanja</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>Save Images Progress</value>
+        <value>Potek Shranjevanja Slik</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>Potek Shranjevanja PDF</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>Saving {0}...</value>
+        <value>Shranjujem {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>Kopiranje...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>Potek Kopiranja</value>
     </data>
     <data name="Importing" xml:space="preserve">
         <value>Uvažanje...</value>
@@ -376,37 +376,37 @@
         <value>Pošiljanje PDF v teku</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>Prišlo je do napake pri avtomatskem shranjevanju.</value>
+        <value>Pri samodejnem shranjevanju je prišlo do napake.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Vse datoteke</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
-        <value>Slikovne datoteke</value>
+        <value>Slikovne Datoteke</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>Izbran skener je zaseden.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>The scanner's cover is open.</value>
+        <value>Pokrov skenerja je odprt.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
-        <value>The scanner has a paper jam.</value>
+        <value>Papir v skenerju se je zagozdil.</value>
     </data>
     <data name="DeviceWarmingUp" xml:space="preserve">
-        <value>The scanner is warming up.</value>
+        <value>Skener se ogreva.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>Na voljo je posodobitev OCR.</value>
+        <value>Na voljo je posodobitev za OCR.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
         <value>Slika shranjena.</value>
     </data>
     <data name="ImagesSaved" xml:space="preserve">
-        <value>{0} images saved.</value>
+        <value>{0} slik shranjenih.</value>
     </data>
     <data name="PdfSaved" xml:space="preserve">
-        <value>PDF saved.</value>
+        <value>PDF shranjen.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
         <value>{0} ({1}x{2} {3})</value>
@@ -415,18 +415,18 @@
         <value>Are you sure you want to delete "{0}"?</value>
     </data>
     <data name="FileInUse" xml:space="preserve">
-        <value>The file could not be overwritten because it is currently in use.</value>
+        <value>Datoteke ni bilo mogoče prepisati, ker je odprta v drugem programu.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Poravnavanje...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Potek Poravnave</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>Potreben prenos</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>Za uvoz te PDF datoteke je potrebna dodatna komponenta. Jo želite prenesti sedaj?</value>
     </data>
 </root>

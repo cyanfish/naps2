@@ -190,7 +190,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>最大质量（大文件）</value>
+        <value>最佳质量（大文件）</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>
@@ -322,7 +322,7 @@
         <value>8</value>
     </data>
     <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-        <value>Delay between scans (WIA)</value>
+        <value>每次扫描之间的间隔 (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaDelayBetweenScans.Name" xml:space="preserve">
         <value>cbWiaDelayBetweenScans</value>
@@ -352,7 +352,7 @@
         <value>7</value>
     </data>
     <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-        <value>Retry on failure (WIA)</value>
+        <value>失败时重试 (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaRetryOnFailure.Name" xml:space="preserve">
         <value>cbWiaRetryOnFailure</value>
@@ -382,7 +382,7 @@
         <value>6</value>
     </data>
     <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
-        <value>Crop to page size</value>
+        <value>裁剪到纸张大小</value>
     </data>
     <data name="&gt;&gt;cbForcePageSizeCrop.Name" xml:space="preserve">
         <value>cbForcePageSizeCrop</value>
@@ -469,7 +469,7 @@
         <value>3</value>
     </data>
     <data name="cbForcePageSize.Text" xml:space="preserve">
-        <value>Stretch to page size</value>
+        <value>扩展至纸张大小</value>
     </data>
     <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
         <value>cbForcePageSize</value>
@@ -625,7 +625,7 @@
         <value>37</value>
     </data>
     <data name="label2.Text" xml:space="preserve">
-        <value>白色的阀值</value>
+        <value>白色阀值</value>
     </data>
     <data name="&gt;&gt;label2.Name" xml:space="preserve">
         <value>label2</value>
@@ -841,7 +841,7 @@
         <value>17</value>
     </data>
     <data name="cbAutoDeskew.Text" xml:space="preserve">
-        <value>Deskew scanned pages</value>
+        <value>倾斜校正已经扫描的页面</value>
     </data>
     <data name="&gt;&gt;cbAutoDeskew.Name" xml:space="preserve">
         <value>cbAutoDeskew</value>
@@ -865,7 +865,7 @@
         <value>39</value>
     </data>
     <data name="groupBox4.Text" xml:space="preserve">
-        <value>Post-processing</value>
+        <value>后处理</value>
     </data>
     <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
         <value>groupBox4</value>

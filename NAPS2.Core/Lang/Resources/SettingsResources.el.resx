@@ -220,7 +220,7 @@
         <value>Παρωχημένο (εγγενές περιβάλλον μόνο)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Εναλλακτική Μεταφορά</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Παλαιός Διαχειριστής Πηγής Δεδομένων (DSM)</value>

@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>Na voljo je nova verzija NAPS2. Ali želite posodobitev zdaj?</value>
+        <value>Na voljo je nova različica NAPS2. Ali želite posodobiti sedaj?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -204,7 +204,7 @@
         <value>3</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>&amp;Ne zdaj</value>
+        <value>&amp;Ne Sedaj</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -228,7 +228,7 @@
         <value>306, 136</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Update NAPS2</value>
+        <value>Posodobi NAPS2</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FUpdate</value>

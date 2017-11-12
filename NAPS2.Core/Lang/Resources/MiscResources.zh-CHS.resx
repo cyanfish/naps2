@@ -184,22 +184,22 @@
         <value>NAPS2</value>
     </data>
     <data name="NoDeviceSelected" xml:space="preserve">
-        <value>尚未选择装置.</value>
+        <value>尚未选择设备.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
-        <value>找不到扫瞄装置.</value>
+        <value>没有找到扫描设备.</value>
     </data>
     <data name="OverwriteFile" xml:space="preserve">
         <value>覆盖文件</value>
     </data>
     <data name="PdfStatus" xml:space="preserve">
-        <value>{0} of {1}</value>
+        <value>{1} 中的 {0}</value>
     </data>
     <data name="ScannedImage" xml:space="preserve">
-        <value>已扫瞄的图像</value>
+        <value>已扫描的图像</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>按下 [扫瞄] 前请先选择配置文件.</value>
+        <value>点击 [扫描] 前请先选择配置文件.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>扫描文件失败！.</value>
@@ -217,13 +217,13 @@
         <value>下载</value>
     </data>
     <data name="DownloadAndInstall" xml:space="preserve">
-        <value>下载且安装</value>
+        <value>下载并安装</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>您需要NAPS2马上进行检查且自动更新吗？</value>
+        <value>你需要 NAPS2 自动检查更新吗？</value>
     </data>
     <data name="NotNow" xml:space="preserve">
-        <value>现在不要</value>
+        <value>暂时不需要</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
         <value>有新版本的NAPS2可用。您需要马上更新吗？</value>
@@ -244,13 +244,13 @@
         <value>全部({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
-        <value>已选 ({0})</value>
+        <value>已选择 ({0})</value>
     </data>
     <data name="EstimatedDownloadSize" xml:space="preserve">
         <value>估计下载大小: {0} MB</value>
     </data>
     <data name="FilesProgressFormat" xml:space="preserve">
-        <value>{0} / {1} 文件</value>
+        <value>{0} / {1} 个文件</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
         <value>{0} / {1} MB</value>
@@ -259,7 +259,7 @@
         <value>无法导入文件'{0}'.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>无法导入文件'{0}'.只有NAPS2生成的PDF才可导入.</value>
+        <value>无法导入文件 '{0}'。 只有 NAPS2 生成的 PDF 才能被导入.</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
         <value>下载发生错误</value>
@@ -271,7 +271,7 @@
         <value>自定义({0}x{1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
-        <value>扫瞄</value>
+        <value>扫描</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
         <value>您确定要复原您的变更到{0}到图像吗？</value>
@@ -286,7 +286,7 @@
         <value>未保存的更改</value>
     </data>
     <data name="ScanPageProgress" xml:space="preserve">
-        <value>扫瞄页面 {0}</value>
+        <value>正在扫描页面 {0}</value>
     </data>
     <data name="NoFeederSupport" xml:space="preserve">
         <value>所选的扫描仪不支持使用进纸器。如果您的扫描仪确实有一个进纸器，请尝试使用不同的驱动程序.</value>
@@ -319,13 +319,13 @@
         <value>批量扫描由于错误而停止.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
-        <value>扫瞄页面 {0}...</value>
+        <value>正在扫描页面 {0}...</value>
     </data>
     <data name="BatchStatusScanPage" xml:space="preserve">
-        <value>扫瞄页面 {0}(扫描 {1})...</value>
+        <value>正在扫描页面 {0} (扫描 {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>等待扫描{ 0 }...</value>
+        <value>正在等待扫描 { 0 }...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>取消</value>
@@ -337,7 +337,7 @@
         <value>保存批量扫描结果...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
-        <value>所选的扫描仪不支持使用双面打印。如果您的扫描仪应该支持双面打印，请尝试使用不同的驱动程序.</value>
+        <value>所选的扫描仪不支持使用双面扫描。如果您的扫描仪支持双面扫描，请尝试使用不同的驱动程序.</value>
     </data>
     <data name="ProgressFormat" xml:space="preserve">
         <value>{0} / {1}</value>
@@ -355,13 +355,13 @@
         <value>修复进度</value>
     </data>
     <data name="SaveImagesProgress" xml:space="preserve">
-        <value>储存图像进度</value>
+        <value>图片保存进度</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>储存PDF进度</value>
+        <value>PDF 保存进度</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
-        <value>保存 {0}...</value>
+        <value>正在保存 {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
         <value>复制中...</value>
@@ -388,7 +388,7 @@
         <value>选定的扫描仪正忙.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
-        <value>扫描仪是否已经打开后盖？.</value>
+        <value>扫描仪的盖子是否被打开？.</value>
     </data>
     <data name="DevicePaperJam" xml:space="preserve">
         <value>扫描仪已卡纸.</value>
@@ -415,18 +415,18 @@
         <value>Are you sure you want to delete "{0}"?</value>
     </data>
     <data name="FileInUse" xml:space="preserve">
-        <value>不能覆盖正在使用的文件.</value>
+        <value>文件不能被覆盖，因为它正在被使用.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>正在倾斜校正...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>倾斜校正进度</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>需要下载</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>需要额外的组件来导入这个 PDF 文件，您想要现在开始下载吗？</value>
     </data>
 </root>

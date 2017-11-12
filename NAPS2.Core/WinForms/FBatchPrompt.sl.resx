@@ -175,7 +175,7 @@
         <value>4</value>
     </data>
     <data name="btnScan.Text" xml:space="preserve">
-        <value>&amp;Scan</value>
+        <value>&amp;Skeniraj</value>
     </data>
     <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
         <value>btnScan</value>
@@ -205,7 +205,7 @@
         <value>3</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>Ready for scan {0}.</value>
+        <value>Pripravljen na skeniranje {0}.</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -238,7 +238,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Naslednje branje</value>
+        <value>Naslednje Skeniranje</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FBatchPrompt</value>

@@ -154,7 +154,7 @@
         <value>8</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>OK</value>
+        <value>V redu</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -178,7 +178,7 @@
         <value>9</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Cancel</value>
+        <value>Prekliči</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -202,7 +202,7 @@
         <value>7</value>
     </data>
     <data name="btnRevert.Text" xml:space="preserve">
-        <value>Revert</value>
+        <value>Povrni</value>
     </data>
     <data name="&gt;&gt;btnRevert.Name" xml:space="preserve">
         <value>btnRevert</value>
@@ -223,7 +223,7 @@
         <value>38, 20</value>
     </data>
     <data name="txtHue.TabIndex" type="System.Int32, mscorlib">
-        <value>6</value>
+        <value>3</value>
     </data>
     <data name="txtHue.Text" xml:space="preserve">
         <value>0</value>
@@ -250,7 +250,7 @@
         <value>237, 45</value>
     </data>
     <data name="tbHue.TabIndex" type="System.Int32, mscorlib">
-        <value>5</value>
+        <value>1</value>
     </data>
     <data name="&gt;&gt;tbHue.Name" xml:space="preserve">
         <value>tbHue</value>
@@ -274,10 +274,10 @@
         <value>173, 17</value>
     </data>
     <data name="checkboxApplyToSelected.TabIndex" type="System.Int32, mscorlib">
-        <value>10</value>
+        <value>5</value>
     </data>
     <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-        <value>Uporabi na vseh {0} izbranih slikah</value>
+        <value>Uveljavi na vseh {0} izbranih slikah</value>
     </data>
     <data name="&gt;&gt;checkboxApplyToSelected.Name" xml:space="preserve">
         <value>checkboxApplyToSelected</value>
@@ -298,7 +298,7 @@
         <value>38, 20</value>
     </data>
     <data name="txtSaturation.TabIndex" type="System.Int32, mscorlib">
-        <value>12</value>
+        <value>4</value>
     </data>
     <data name="txtSaturation.Text" xml:space="preserve">
         <value>0</value>
@@ -325,7 +325,7 @@
         <value>237, 45</value>
     </data>
     <data name="tbSaturation.TabIndex" type="System.Int32, mscorlib">
-        <value>11</value>
+        <value>2</value>
     </data>
     <data name="&gt;&gt;tbSaturation.Name" xml:space="preserve">
         <value>tbSaturation</value>
@@ -432,6 +432,6 @@
         <value>FHueSaturation</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.29164, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

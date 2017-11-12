@@ -118,10 +118,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-        <value>Black &amp; White</value>
+        <value>Črno-belo</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit Color</value>
+        <value>24-bit Barvno</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Sivine</value>
@@ -157,7 +157,7 @@
         <value>Levo</value>
     </data>
     <data name="HorizontalAlign_Right" xml:space="preserve">
-        <value>Right</value>
+        <value>Desno</value>
     </data>
     <data name="PageSizeUnit_Centimetre" xml:space="preserve">
         <value>cm</value>
@@ -205,7 +205,7 @@
         <value>1:8</value>
     </data>
     <data name="Source_Duplex" xml:space="preserve">
-        <value>Duplex</value>
+        <value>Obojestransko</value>
     </data>
     <data name="Source_Feeder" xml:space="preserve">
         <value>Podajalec</value>
@@ -220,10 +220,10 @@
         <value>Opuščeno (samo osnovni UI)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Alternativni Prenos</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>Star DSM</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

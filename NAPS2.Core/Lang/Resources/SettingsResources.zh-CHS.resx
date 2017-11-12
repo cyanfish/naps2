@@ -214,13 +214,13 @@
         <value>半透明</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>默认值</value>
+        <value>默认</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>保留（本地用户界面）</value>
+        <value>传统（原生用户界面）</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>替代传输</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>旧 DSM</value>

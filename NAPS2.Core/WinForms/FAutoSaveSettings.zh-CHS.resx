@@ -223,7 +223,7 @@
         <value>22</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>单独的文件选择Patch-T</value>
+        <value>通过 Patch-T 分离文件</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -421,7 +421,7 @@
         <value>28</value>
     </data>
     <data name="cbClearAfterSave.Text" xml:space="preserve">
-        <value>清除所有的保存的图像！</value>
+        <value>保存后清除图片</value>
     </data>
     <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
         <value>cbClearAfterSave</value>
@@ -451,7 +451,7 @@
         <value>29</value>
     </data>
     <data name="cbPromptForFilePath.Text" xml:space="preserve">
-        <value>Prompt for file path</value>
+        <value>文件路径提示</value>
     </data>
     <data name="&gt;&gt;cbPromptForFilePath.Name" xml:space="preserve">
         <value>cbPromptForFilePath</value>

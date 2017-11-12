@@ -127,28 +127,28 @@
         <value>Stupně šedi</value>
     </data>
     <data name="Dpi_100" xml:space="preserve">
-        <value>100 dpi</value>
+        <value>100 dpi</value>
     </data>
     <data name="Dpi_1200" xml:space="preserve">
-        <value>1200 dpi</value>
+        <value>1 200 dpi</value>
     </data>
     <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+        <value>150 dpi</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
-        <value>200 dpi</value>
+        <value>200 dpi</value>
     </data>
     <data name="Dpi_300" xml:space="preserve">
-        <value>300 dpi</value>
+        <value>300 dpi</value>
     </data>
     <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+        <value>400 dpi</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
-        <value>600 dpi</value>
+        <value>600 dpi</value>
     </data>
     <data name="Dpi_800" xml:space="preserve">
-        <value>800 dpi</value>
+        <value>800 dpi</value>
     </data>
     <data name="HorizontalAlign_Center" xml:space="preserve">
         <value>Centrovat</value>
@@ -169,28 +169,28 @@
         <value>mm</value>
     </data>
     <data name="PageSize_A3" xml:space="preserve">
-        <value>A3 (297 x 420 mm)</value>
+        <value>A3 (297 × 420 mm)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210 x 297 mm)</value>
+        <value>A4 (210 × 297 mm)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148 x 210 mm)</value>
+        <value>A5 (148 × 210 mm)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
-        <value>B4 (250x353 mm)</value>
+        <value>B4 (250 × 353 mm)</value>
     </data>
     <data name="PageSize_B5" xml:space="preserve">
-        <value>B5 (176x250 mm)</value>
+        <value>B5 (176 × 250 mm)</value>
     </data>
     <data name="PageSize_Custom" xml:space="preserve">
-        <value>Uživatelský...</value>
+        <value>Vlastní...</value>
     </data>
     <data name="PageSize_Legal" xml:space="preserve">
-        <value>US Legal (8.5x14 in)</value>
+        <value>US Legal (8,5 × 14 in)</value>
     </data>
     <data name="PageSize_Letter" xml:space="preserve">
-        <value>US Letter (8.5x11 in)</value>
+        <value>US Letter (8.5 × 11 in)</value>
     </data>
     <data name="Scale_1_1" xml:space="preserve">
         <value>1:1</value>
@@ -220,7 +220,7 @@
         <value>Legacy (pouze nativní UI)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Alternativní přenos</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Staré DSM</value>

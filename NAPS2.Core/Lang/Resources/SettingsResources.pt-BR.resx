@@ -220,7 +220,7 @@
         <value>Legado (UI nativa apenas)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Transferência Alternativa</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>DSM Antigo</value>

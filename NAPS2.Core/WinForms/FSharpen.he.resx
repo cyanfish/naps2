@@ -223,7 +223,7 @@
         <value>38, 20</value>
     </data>
     <data name="txtSharpen.TabIndex" type="System.Int32, mscorlib">
-        <value>6</value>
+        <value>2</value>
     </data>
     <data name="txtSharpen.Text" xml:space="preserve">
         <value>0</value>
@@ -250,7 +250,7 @@
         <value>252, 45</value>
     </data>
     <data name="tbSharpen.TabIndex" type="System.Int32, mscorlib">
-        <value>5</value>
+        <value>1</value>
     </data>
     <data name="&gt;&gt;tbSharpen.Name" xml:space="preserve">
         <value>tbSharpen</value>
@@ -274,7 +274,7 @@
         <value>173, 17</value>
     </data>
     <data name="checkboxApplyToSelected.TabIndex" type="System.Int32, mscorlib">
-        <value>10</value>
+        <value>3</value>
     </data>
     <data name="checkboxApplyToSelected.Text" xml:space="preserve">
         <value>החל על כל {0} התמונות שנבחרו</value>
@@ -339,6 +339,6 @@
         <value>FSharpen</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.36980, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.29164, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

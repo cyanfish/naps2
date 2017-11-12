@@ -424,9 +424,9 @@
         <value>Postęp prostowania</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>Potrzebne pobranie</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>Do zaimportowania tego pliku PDF potrzebny jest dodatkowy składnik. Czy chcesz go teraz pobrać?</value>
     </data>
 </root>

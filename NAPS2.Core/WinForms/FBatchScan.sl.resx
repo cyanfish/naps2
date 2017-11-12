@@ -135,7 +135,7 @@
         <value>1</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>Press Start when ready.</value>
+        <value>Pritisnite Začni, ko boste pripravljeni.</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -159,7 +159,7 @@
         <value>2</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>Cancel</value>
+        <value>Prekliči</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -235,7 +235,7 @@
         <value>2</value>
     </data>
     <data name="lblTimeBetweenScans.Text" xml:space="preserve">
-        <value>Time between scans (seconds):</value>
+        <value>Čas med posameznimi skeni (v sekundah):</value>
     </data>
     <data name="&gt;&gt;lblTimeBetweenScans.Name" xml:space="preserve">
         <value>lblTimeBetweenScans</value>
@@ -283,7 +283,7 @@
         <value>0</value>
     </data>
     <data name="lblNumberOfScans.Text" xml:space="preserve">
-        <value>Število branj:</value>
+        <value>Število strani:</value>
     </data>
     <data name="&gt;&gt;lblNumberOfScans.Name" xml:space="preserve">
         <value>lblNumberOfScans</value>
@@ -334,7 +334,7 @@
         <value>2</value>
     </data>
     <data name="rdMultipleScansPrompt.Text" xml:space="preserve">
-        <value>Več branj (poziv med posameznimi branji)</value>
+        <value>Več strani (poziv med posameznimi branji)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansPrompt.Name" xml:space="preserve">
         <value>rdMultipleScansPrompt</value>
@@ -364,7 +364,7 @@
         <value>1</value>
     </data>
     <data name="rdMultipleScansDelay.Text" xml:space="preserve">
-        <value>Več branj (določen zamik med posameznimi branji)</value>
+        <value>Več strani (časovni zamik med posameznimi branji)</value>
     </data>
     <data name="&gt;&gt;rdMultipleScansDelay.Name" xml:space="preserve">
         <value>rdMultipleScansDelay</value>
@@ -391,7 +391,7 @@
         <value>0</value>
     </data>
     <data name="rdSingleScan.Text" xml:space="preserve">
-        <value>Single scan</value>
+        <value>Skeniraj eno</value>
     </data>
     <data name="&gt;&gt;rdSingleScan.Name" xml:space="preserve">
         <value>rdSingleScan</value>
@@ -505,7 +505,7 @@
         <value>0</value>
     </data>
     <data name="lblProfile.Text" xml:space="preserve">
-        <value>Profile:</value>
+        <value>Profil:</value>
     </data>
     <data name="&gt;&gt;lblProfile.Name" xml:space="preserve">
         <value>lblProfile</value>
@@ -529,7 +529,7 @@
         <value>4</value>
     </data>
     <data name="groupboxScanConfig.Text" xml:space="preserve">
-        <value>Scan Configuration</value>
+        <value>Nastavitev Skeniranja</value>
     </data>
     <data name="&gt;&gt;groupboxScanConfig.Name" xml:space="preserve">
         <value>groupboxScanConfig</value>
@@ -586,7 +586,7 @@
         <value>2</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T</value>
+        <value>Loči datoteke po Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -616,7 +616,7 @@
         <value>1</value>
     </data>
     <data name="rdFilePerPage.Text" xml:space="preserve">
-        <value>One file per page</value>
+        <value>Ena datoteka na stran</value>
     </data>
     <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
         <value>rdFilePerPage</value>
@@ -646,7 +646,7 @@
         <value>0</value>
     </data>
     <data name="rdFilePerScan.Text" xml:space="preserve">
-        <value>One file per scan</value>
+        <value>Ena datoteka na sken</value>
     </data>
     <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopLeft</value>
@@ -727,7 +727,7 @@
         <value>4</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Mesta</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -829,7 +829,7 @@
         <value>2</value>
     </data>
     <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-        <value>Save to multiple files</value>
+        <value>Shrani v več datotek</value>
     </data>
     <data name="&gt;&gt;rdSaveToMultipleFiles.Name" xml:space="preserve">
         <value>rdSaveToMultipleFiles</value>
@@ -859,7 +859,7 @@
         <value>1</value>
     </data>
     <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-        <value>Save to a single file</value>
+        <value>Shrani v eno datoteko</value>
     </data>
     <data name="&gt;&gt;rdSaveToSingleFile.Name" xml:space="preserve">
         <value>rdSaveToSingleFile</value>
@@ -934,7 +934,7 @@
         <value>7</value>
     </data>
     <data name="groupboxOutput.Text" xml:space="preserve">
-        <value>Output</value>
+        <value>Izhod</value>
     </data>
     <data name="&gt;&gt;groupboxOutput.Name" xml:space="preserve">
         <value>groupboxOutput</value>
@@ -984,7 +984,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Serijsko branje</value>
+        <value>Zaporedno Skeniranje</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
         <value>toolStripSeparator1</value>

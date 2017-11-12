@@ -418,15 +418,15 @@
         <value>Overschrijven bestand mislukt want het is in gebruik.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Aan het rechtzetten...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Voortgang rechtzetten</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>Download vereist</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>Er is een additioneel component nodig om deze PDF te importeren. Nu downloaden?</value>
     </data>
 </root>

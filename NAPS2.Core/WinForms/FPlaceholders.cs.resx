@@ -604,7 +604,7 @@
         <value>19</value>
     </data>
     <data name="label9.Text" xml:space="preserve">
-        <value>Vteřina (00-59)</value>
+        <value>Sekunda (00-59)</value>
     </data>
     <data name="&gt;&gt;label9.Name" xml:space="preserve">
         <value>label9</value>

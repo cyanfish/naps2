@@ -150,7 +150,7 @@
         <value>1</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>&amp;Cancel</value>
+        <value>Prekliči</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -177,7 +177,7 @@
         <value>4</value>
     </data>
     <data name="labelPage.Text" xml:space="preserve">
-        <value>Scanning page {0}</value>
+        <value>Skeniram stran {0}</value>
     </data>
     <data name="&gt;&gt;labelPage.Name" xml:space="preserve">
         <value>labelPage</value>
@@ -207,7 +207,7 @@
         <value>388, 149</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Zajem podatkov</value>
+        <value>Zajemam podatke</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FScanProgress</value>

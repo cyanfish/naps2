@@ -169,7 +169,7 @@
         <value>Soubor JPEG (*.jpg, *.jpeg) </value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF dokument (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>Soubor PNG (*.png)</value>
@@ -220,13 +220,13 @@
         <value>Stažení a instalace</value>
     </data>
     <data name="EnableAutoUpdates" xml:space="preserve">
-        <value>Chcete automaticky kontrolovat aktualizace?</value>
+        <value>Chcete automaticky vyhledávat aktualizace?</value>
     </data>
     <data name="NotNow" xml:space="preserve">
         <value>Teď ne</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Je k dispozici nová verze aplikace NAPS2. Přejete si spustit aktualizaci?</value>
+        <value>K dispozici je nová verze aplikace NAPS2. Přejete si spustit aktualizaci?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Instalace dokončena</value>
@@ -250,10 +250,10 @@
         <value>Odhadovaná velikost stažení: {0} MB</value>
     </data>
     <data name="FilesProgressFormat" xml:space="preserve">
-        <value>{0} / {1} souborů</value>
+        <value>{0}/{1} souborů</value>
     </data>
     <data name="SizeProgress" xml:space="preserve">
-        <value>{0} / {1} MB</value>
+        <value>{0}/{1} MB</value>
     </data>
     <data name="ImportErrorCouldNot" xml:space="preserve">
         <value>Soubor '{0}' nelze importovat.</value>
@@ -268,7 +268,7 @@
         <value>Jeden nebo více souborů nelze stáhnout.</value>
     </data>
     <data name="CustomPageSizeFormat" xml:space="preserve">
-        <value>Uživatelský ({0}x{1} {2})</value>
+        <value>Vlastní ({0} × {1} {2})</value>
     </data>
     <data name="Scan" xml:space="preserve">
         <value>Skenovat</value>
@@ -409,7 +409,7 @@
         <value>PDF uloženo.</value>
     </data>
     <data name="NamedPageSizeFormat" xml:space="preserve">
-        <value>{0} ({1}x{2} {3})</value>
+        <value>{0} ({1} × {2} {3})</value>
     </data>
     <data name="ConfirmDelete" xml:space="preserve">
         <value>Are you sure you want to delete "{0}"?</value>
@@ -424,9 +424,9 @@
         <value>Průběh odstraňování zešikmení</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>Potřebné stažení</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>K importu tohoto PDF je nutná doplňující komponenta. Chcete ji teď stáhnout?</value>
     </data>
 </root>

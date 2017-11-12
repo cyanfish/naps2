@@ -379,7 +379,7 @@
         <value>An error occurred when trying to auto save.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Minden fájl</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
         <value>Image Files</value>

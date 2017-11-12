@@ -175,7 +175,7 @@
         <value>4</value>
     </data>
     <data name="btnScan.Text" xml:space="preserve">
-        <value>扫瞄</value>
+        <value>扫描</value>
     </data>
     <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
         <value>btnScan</value>

@@ -220,7 +220,7 @@
         <value>35, 22</value>
     </data>
     <data name="lblPageTotal.Text" xml:space="preserve">
-        <value>of {0}</value>
+        <value>od {0}</value>
     </data>
     <data name="tsPrev.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -229,7 +229,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsPrev.Text" xml:space="preserve">
-        <value>Previous</value>
+        <value>Prejšnji</value>
     </data>
     <data name="tsNext.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -250,7 +250,7 @@
         <value>20, 22</value>
     </data>
     <data name="tsdRotate.Text" xml:space="preserve">
-        <value>Rotate</value>
+        <value>Zasukaj</value>
     </data>
     <data name="tsCrop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -259,7 +259,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Crop</value>
+        <value>Obreži</value>
     </data>
     <data name="tsBrightnessContrast.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -307,7 +307,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsSavePDF.Text" xml:space="preserve">
-        <value>Save PDF</value>
+        <value>Shrani PDF</value>
     </data>
     <data name="tsSaveImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -316,7 +316,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsSaveImage.Text" xml:space="preserve">
-        <value>Save Image</value>
+        <value>Shrani Sliko</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>
@@ -328,7 +328,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsDelete.Text" xml:space="preserve">
-        <value>Zbriši</value>
+        <value>Izbriši</value>
     </data>
     <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 0</value>
@@ -379,25 +379,25 @@
         <value>164, 22</value>
     </data>
     <data name="tsRotateLeft.Text" xml:space="preserve">
-        <value>Rotate Left</value>
+        <value>Zasukaj v levo</value>
     </data>
     <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsRotateRight.Text" xml:space="preserve">
-        <value>Rotate Right</value>
+        <value>Zasukaj v desno</value>
     </data>
     <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsFlip.Text" xml:space="preserve">
-        <value>Flip</value>
+        <value>Preslikaj</value>
     </data>
     <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsDeskew.Text" xml:space="preserve">
-        <value>Deskew</value>
+        <value>Poravnaj</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
@@ -441,7 +441,7 @@
         <value>300, 300</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Preview</value>
+        <value>Predogled</value>
     </data>
     <data name="&gt;&gt;tbPageCurrent.Name" xml:space="preserve">
         <value>tbPageCurrent</value>

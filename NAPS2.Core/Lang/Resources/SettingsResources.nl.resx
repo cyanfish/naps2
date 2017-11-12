@@ -220,7 +220,7 @@
         <value>Legacy (alleen eigen interface)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Alternatieve overdracht</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Oude DSM</value>

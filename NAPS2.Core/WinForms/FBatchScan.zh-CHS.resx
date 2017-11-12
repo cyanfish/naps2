@@ -135,7 +135,7 @@
         <value>1</value>
     </data>
     <data name="lblStatus.Text" xml:space="preserve">
-        <value>当就绪时启动.</value>
+        <value>当就绪时点击开始.</value>
     </data>
     <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
         <value>lblStatus</value>
@@ -235,7 +235,7 @@
         <value>2</value>
     </data>
     <data name="lblTimeBetweenScans.Text" xml:space="preserve">
-        <value>扫描时间（秒）:</value>
+        <value>扫描之间的间隔（秒）:</value>
     </data>
     <data name="&gt;&gt;lblTimeBetweenScans.Name" xml:space="preserve">
         <value>lblTimeBetweenScans</value>
@@ -391,7 +391,7 @@
         <value>0</value>
     </data>
     <data name="rdSingleScan.Text" xml:space="preserve">
-        <value>单独扫描</value>
+        <value>单次扫描</value>
     </data>
     <data name="&gt;&gt;rdSingleScan.Name" xml:space="preserve">
         <value>rdSingleScan</value>
@@ -529,7 +529,7 @@
         <value>4</value>
     </data>
     <data name="groupboxScanConfig.Text" xml:space="preserve">
-        <value>扫描配置</value>
+        <value>扫描设置</value>
     </data>
     <data name="&gt;&gt;groupboxScanConfig.Name" xml:space="preserve">
         <value>groupboxScanConfig</value>
@@ -586,7 +586,7 @@
         <value>2</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>单独的文件选择Patch-T</value>
+        <value>通过 Patch-T 分离文件</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -859,7 +859,7 @@
         <value>1</value>
     </data>
     <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-        <value>保存为一个单独文件</value>
+        <value>保存为单个文件</value>
     </data>
     <data name="&gt;&gt;rdSaveToSingleFile.Name" xml:space="preserve">
         <value>rdSaveToSingleFile</value>

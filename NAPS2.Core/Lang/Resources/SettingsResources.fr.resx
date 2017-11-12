@@ -220,7 +220,7 @@
         <value>Ancienne (interface native seulement)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Transfert alternatif</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Ancien DSM</value>

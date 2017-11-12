@@ -424,9 +424,9 @@
         <value>Progresso da Correção</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>Download Necessário</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>É necessário um componente adicional para importar este arquivo PDF. Gostaria de baixá-lo agora?</value>
     </data>
 </root>

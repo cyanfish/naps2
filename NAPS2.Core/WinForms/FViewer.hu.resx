@@ -316,7 +316,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsSaveImage.Text" xml:space="preserve">
-        <value>Save Image</value>
+        <value>Képek mentése</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>

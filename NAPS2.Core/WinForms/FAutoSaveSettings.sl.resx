@@ -133,7 +133,7 @@
         <value>18</value>
     </data>
     <data name="btnOK.Text" xml:space="preserve">
-        <value>&amp;OK</value>
+        <value>V redu</value>
     </data>
     <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
         <value>btnOK</value>
@@ -160,7 +160,7 @@
         <value>19</value>
     </data>
     <data name="btnCancel.Text" xml:space="preserve">
-        <value>&amp;Cancel</value>
+        <value>Prekliči</value>
     </data>
     <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
         <value>btnCancel</value>
@@ -223,7 +223,7 @@
         <value>22</value>
     </data>
     <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-        <value>Separate files by Patch-T</value>
+        <value>Loči datoteke po Patch-T</value>
     </data>
     <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
         <value>rdSeparateByPatchT</value>
@@ -253,7 +253,7 @@
         <value>21</value>
     </data>
     <data name="rdFilePerPage.Text" xml:space="preserve">
-        <value>One file per page</value>
+        <value>Ena datoteka na stran</value>
     </data>
     <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
         <value>rdFilePerPage</value>
@@ -283,7 +283,7 @@
         <value>20</value>
     </data>
     <data name="rdFilePerScan.Text" xml:space="preserve">
-        <value>One file per scan</value>
+        <value>Ena datoteka na sken</value>
     </data>
     <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopLeft</value>
@@ -343,7 +343,7 @@
         <value>26</value>
     </data>
     <data name="linkPlaceholders.Text" xml:space="preserve">
-        <value>Placeholders</value>
+        <value>Mesta</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
         <value>linkPlaceholders</value>
@@ -421,7 +421,7 @@
         <value>28</value>
     </data>
     <data name="cbClearAfterSave.Text" xml:space="preserve">
-        <value>Počisti slike po shranjevanju</value>
+        <value>Po shranjevanju počisti slike</value>
     </data>
     <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
         <value>cbClearAfterSave</value>
@@ -451,7 +451,7 @@
         <value>29</value>
     </data>
     <data name="cbPromptForFilePath.Text" xml:space="preserve">
-        <value>Prompt for file path</value>
+        <value>Zahtevaj vnos poti datoteke</value>
     </data>
     <data name="&gt;&gt;cbPromptForFilePath.Name" xml:space="preserve">
         <value>cbPromptForFilePath</value>
@@ -504,7 +504,7 @@
         <value>350, 303</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Nastavitve samodejnega shranjevanja</value>
+        <value>Nastavitve Samodejnega Shranjevanja</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>
