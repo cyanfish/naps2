@@ -36,7 +36,10 @@ namespace NAPS2.Scan.Images
             using (var transformed = Render(image))
             {
                 var stream = new MemoryStream();
-                transformed.Save(stream, image.FileFormat ?? (image.RecoveryIndexImage.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg));
+                var format = transformed.PixelFormat == PixelFormat.Format1bppIndexed
+                    ? ImageFormat.Png
+                    : image.FileFormat ?? (image.RecoveryIndexImage.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg);
+                transformed.Save(stream, format);
                 return stream;
             }
         }

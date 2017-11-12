@@ -14,6 +14,9 @@ namespace NAPS2.Scan.Images.Transforms
     [XmlInclude(typeof(ContrastTransform))]
     [XmlInclude(typeof(TrueContrastTransform))]
     [XmlInclude(typeof(SharpenTransform))]
+    [XmlInclude(typeof(HueTransform))]
+    [XmlInclude(typeof(SaturationTransform))]
+    [XmlInclude(typeof(BlackWhiteTransform))]
     [Serializable]
     public abstract class Transform
     {
