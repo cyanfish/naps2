@@ -45,14 +45,18 @@ namespace NAPS2.WinForms
         private ToolStripButton tsBlackWhite;
         private ToolStripButton tsSharpen;
         private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly KeyboardShortcutManager ksm;
+        private readonly UserConfigManager userConfigManager;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, AppConfigManager appConfigManager, ScannedImageRenderer scannedImageRenderer)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, AppConfigManager appConfigManager, ScannedImageRenderer scannedImageRenderer, KeyboardShortcutManager ksm, UserConfigManager userConfigManager)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.exportHelper = exportHelper;
             this.appConfigManager = appConfigManager;
             this.scannedImageRenderer = scannedImageRenderer;
+            this.ksm = ksm;
+            this.userConfigManager = userConfigManager;
             InitializeComponent();
         }
 
@@ -76,6 +80,8 @@ namespace NAPS2.WinForms
             {
                 toolStrip1.Items.Remove(tsSaveImage);
             }
+
+            AssignKeyboardShortcuts();
         }
 
         private void GoTo(int index)
@@ -531,47 +537,76 @@ namespace NAPS2.WinForms
 
         private void tiffViewer1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control || e.Shift || e.Alt)
+            if (!(e.Control || e.Shift || e.Alt))
             {
-                return;
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        Close();
+                        return;
+                    case Keys.PageDown:
+                    case Keys.Right:
+                    case Keys.Down:
+                        GoTo(ImageIndex + 1);
+                        return;
+                    case Keys.PageUp:
+                    case Keys.Left:
+                    case Keys.Up:
+                        GoTo(ImageIndex - 1);
+                        return;
+                }
             }
-            switch (e.KeyCode)
-            {
-                case Keys.Escape:
-                    Close();
-                    break;
-                case Keys.PageDown:
-                case Keys.Right:
-                case Keys.Down:
-                    GoTo(ImageIndex + 1);
-                    break;
-                case Keys.PageUp:
-                case Keys.Left:
-                case Keys.Up:
-                    GoTo(ImageIndex - 1);
-                    break;
-            }
+
+            ksm.Perform(e.KeyData);
         }
 
         private void tbPageCurrent_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control || e.Shift || e.Alt)
+            if (!(e.Control || e.Shift || e.Alt))
             {
-                return;
+                switch (e.KeyCode)
+                {
+                    case Keys.PageDown:
+                    case Keys.Right:
+                    case Keys.Down:
+                        GoTo(ImageIndex + 1);
+                        return;
+                    case Keys.PageUp:
+                    case Keys.Left:
+                    case Keys.Up:
+                        GoTo(ImageIndex - 1);
+                        return;
+                }
             }
-            switch (e.KeyCode)
-            {
-                case Keys.PageDown:
-                case Keys.Right:
-                case Keys.Down:
-                    GoTo(ImageIndex + 1);
-                    break;
-                case Keys.PageUp:
-                case Keys.Left:
-                case Keys.Up:
-                    GoTo(ImageIndex - 1);
-                    break;
-            }
+
+            ksm.Perform(e.KeyData);
+        }
+
+        private void AssignKeyboardShortcuts()
+        {
+            // Defaults
+
+            ksm.Assign("Del", tsDelete);
+
+            // Configured
+
+            var ks = userConfigManager.Config.KeyboardShortcuts ?? appConfigManager.Config.KeyboardShortcuts ?? new KeyboardShortcuts();
+
+            ksm.Assign(ks.Delete, tsDelete);
+            ksm.Assign(ks.ImageBlackWhite, tsBlackWhite);
+            ksm.Assign(ks.ImageBrightness, tsBrightnessContrast);
+            ksm.Assign(ks.ImageContrast, tsBrightnessContrast);
+            ksm.Assign(ks.ImageCrop, tsCrop);
+            ksm.Assign(ks.ImageHue, tsHueSaturation);
+            ksm.Assign(ks.ImageSaturation, tsHueSaturation);
+            ksm.Assign(ks.ImageSharpen, tsSharpen);
+
+            ksm.Assign(ks.RotateCustom, tsCustomRotation);
+            ksm.Assign(ks.RotateFlip, tsFlip);
+            ksm.Assign(ks.RotateLeft, tsRotateLeft);
+            ksm.Assign(ks.RotateRight, tsRotateRight);
+            ksm.Assign(ks.SaveImages, tsSaveImage);
+            ksm.Assign(ks.SavePDF, tsSavePDF);
         }
     }
 }
