@@ -148,7 +148,7 @@
     <value>tiffViewer1</value>
   </data>
   <data name="&gt;&gt;tiffViewer1.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=5.3.3.38155, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.TiffViewerCtl, NAPS2.Core, Version=5.5.0.35980, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tiffViewer1.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -291,23 +291,14 @@
   <data name="tsCrop.Text" xml:space="preserve">
     <value>Crop</value>
   </data>
-  <data name="tsBrightness.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="tsBrightnessContrast.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="tsBrightness.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tsBrightnessContrast.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="tsBrightness.Text" xml:space="preserve">
-    <value>Brightness</value>
-  </data>
-  <data name="tsContrast.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tsContrast.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="tsContrast.Text" xml:space="preserve">
-    <value>Contrast</value>
+  <data name="tsBrightnessContrast.Text" xml:space="preserve">
+    <value>Brightness / Contrast</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -346,7 +337,7 @@
     <value>3, 0</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 25</value>
+    <value>304, 25</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -498,16 +489,10 @@
   <data name="&gt;&gt;tsCrop.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsBrightness.Name" xml:space="preserve">
-    <value>tsBrightness</value>
+  <data name="&gt;&gt;tsBrightnessContrast.Name" xml:space="preserve">
+    <value>tsBrightnessContrast</value>
   </data>
-  <data name="&gt;&gt;tsBrightness.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsContrast.Name" xml:space="preserve">
-    <value>tsContrast</value>
-  </data>
-  <data name="&gt;&gt;tsContrast.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsBrightnessContrast.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
@@ -544,6 +529,6 @@
     <value>FViewer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.3.3.38155, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.5.0.35980, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

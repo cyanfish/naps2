@@ -29,8 +29,7 @@ namespace NAPS2.WinForms
         private ToolStripMenuItem tsFlip;
         private ToolStripMenuItem tsCustomRotation;
         private ToolStripButton tsCrop;
-        private ToolStripButton tsBrightness;
-        private ToolStripButton tsContrast;
+        private ToolStripButton tsBrightnessContrast;
         private ToolStripButton tsDelete;
         private TiffViewerCtl tiffViewer1;
         private ToolStripMenuItem tsDeskew;
@@ -65,6 +64,15 @@ namespace NAPS2.WinForms
             tiffViewer1.Image = scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
             tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.InvariantCulture);
             lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
+
+            if (appConfigManager.Config.HideSavePdfButton)
+            {
+                toolStrip1.Items.Remove(tsSavePDF);
+            }
+            if (appConfigManager.Config.HideSaveImagesButton)
+            {
+                toolStrip1.Items.Remove(tsSaveImage);
+            }
         }
 
         private void GoTo(int index)
@@ -119,8 +127,7 @@ namespace NAPS2.WinForms
             this.tsDeskew = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCustomRotation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCrop = new System.Windows.Forms.ToolStripButton();
-            this.tsBrightness = new System.Windows.Forms.ToolStripButton();
-            this.tsContrast = new System.Windows.Forms.ToolStripButton();
+            this.tsBrightnessContrast = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsSavePDF = new System.Windows.Forms.ToolStripButton();
             this.tsSaveImage = new System.Windows.Forms.ToolStripButton();
@@ -164,8 +171,7 @@ namespace NAPS2.WinForms
             this.toolStripSeparator1,
             this.tsdRotate,
             this.tsCrop,
-            this.tsBrightness,
-            this.tsContrast,
+            this.tsBrightnessContrast,
             this.toolStripSeparator3,
             this.tsSavePDF,
             this.tsSaveImage,
@@ -261,21 +267,13 @@ namespace NAPS2.WinForms
             this.tsCrop.Name = "tsCrop";
             this.tsCrop.Click += new System.EventHandler(this.tsCrop_Click);
             // 
-            // tsBrightness
+            // tsBrightnessContrast
             // 
-            this.tsBrightness.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsBrightness.Image = global::NAPS2.Icons.weather_sun;
-            resources.ApplyResources(this.tsBrightness, "tsBrightness");
-            this.tsBrightness.Name = "tsBrightness";
-            this.tsBrightness.Click += new System.EventHandler(this.tsBrightness_Click);
-            // 
-            // tsContrast
-            // 
-            this.tsContrast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsContrast.Image = global::NAPS2.Icons.contrast;
-            resources.ApplyResources(this.tsContrast, "tsContrast");
-            this.tsContrast.Name = "tsContrast";
-            this.tsContrast.Click += new System.EventHandler(this.tsContrast_Click);
+            this.tsBrightnessContrast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsBrightnessContrast.Image = global::NAPS2.Icons.contrast_with_sun;
+            resources.ApplyResources(this.tsBrightnessContrast, "tsBrightnessContrast");
+            this.tsBrightnessContrast.Name = "tsBrightnessContrast";
+            this.tsBrightnessContrast.Click += new System.EventHandler(this.tsBrightnessContrast_Click);
             // 
             // toolStripSeparator3
             // 
@@ -401,18 +399,9 @@ namespace NAPS2.WinForms
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsBrightness_Click(object sender, EventArgs e)
+        private void tsBrightnessContrast_Click(object sender, EventArgs e)
         {
-            var form = FormFactory.Create<FBrightness>();
-            form.Image = ImageList.Images[ImageIndex];
-            form.ShowDialog();
-            UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
-        }
-
-        private void tsContrast_Click(object sender, EventArgs e)
-        {
-            var form = FormFactory.Create<FContrast>();
+            var form = FormFactory.Create<FBrightnessContrast>();
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             UpdateImage();
@@ -479,7 +468,6 @@ namespace NAPS2.WinForms
                 }
             }
         }
-
         private void tiffViewer1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
