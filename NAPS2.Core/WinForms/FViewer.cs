@@ -468,17 +468,26 @@ namespace NAPS2.WinForms
                 }
             }
         }
+
         private void tiffViewer1_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Control || e.Shift || e.Alt)
+            {
+                return;
+            }
             switch (e.KeyCode)
             {
                 case Keys.Escape:
                     Close();
                     break;
                 case Keys.PageDown:
+                case Keys.Right:
+                case Keys.Down:
                     GoTo(ImageIndex + 1);
                     break;
                 case Keys.PageUp:
+                case Keys.Left:
+                case Keys.Up:
                     GoTo(ImageIndex - 1);
                     break;
             }
@@ -486,12 +495,20 @@ namespace NAPS2.WinForms
 
         private void tbPageCurrent_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Control || e.Shift || e.Alt)
+            {
+                return;
+            }
             switch (e.KeyCode)
             {
                 case Keys.PageDown:
+                case Keys.Right:
+                case Keys.Down:
                     GoTo(ImageIndex + 1);
                     break;
                 case Keys.PageUp:
+                case Keys.Left:
+                case Keys.Up:
                     GoTo(ImageIndex - 1);
                     break;
             }

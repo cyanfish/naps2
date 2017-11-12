@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -101,6 +102,48 @@ namespace NAPS2.WinForms
         {
             // Pass through events to the parent form in case it listens for them
             OnKeyDown(e);
+
+            if (e.Control || e.Alt || e.Shift)
+            {
+                int m = e.Control ? 10 : e.Alt ? 5 : 1;
+                if (e.KeyCode == Keys.Up)
+                {
+                    DeltaScroll(tiffviewer1.VerticalScroll, -m);
+                }
+                if (e.KeyCode == Keys.Down)
+                {
+                    DeltaScroll(tiffviewer1.VerticalScroll, m);
+                }
+                if (e.KeyCode == Keys.Left)
+                {
+                    DeltaScroll(tiffviewer1.HorizontalScroll, -m);
+                }
+                if (e.KeyCode == Keys.Right)
+                {
+                    DeltaScroll(tiffviewer1.HorizontalScroll, m);
+                }
+            }
+        }
+
+        private void tiffviewer1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void DeltaScroll(ScrollProperties scroll, int direction)
+        {
+            int newValue = (scroll.Value + scroll.SmallChange * direction).Clamp(scroll.Minimum, scroll.Maximum);
+            // For whatever reason the scroll value is "sticky". Changing it twice seems to work fine.
+            scroll.Value = newValue;
+            scroll.Value = newValue;
         }
 
         #region Component Designer generated code
@@ -146,8 +189,9 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tiffviewer1, "tiffviewer1");
             this.tiffviewer1.BackColor = System.Drawing.Color.White;
             this.tiffviewer1.Name = "tiffviewer1";
-            this.tiffviewer1.Zoom = 0;
+            this.tiffviewer1.Zoom = 0D;
             this.tiffviewer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tiffviewer1_KeyDown);
+            this.tiffviewer1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tiffviewer1_PreviewKeyDown);
             // 
             // tStrip
             // 
