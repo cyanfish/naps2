@@ -154,6 +154,7 @@
     <Compile Include="Scan\Images\ThresholdBlankDetector.cs" />
     <Compile Include="Scan\Images\ThumbnailCache.cs" />
     <Compile Include="Scan\Images\Transforms\BlackWhiteTransform.cs" />
+    <Compile Include="Scan\Images\Transforms\ColorHelper.cs" />
     <Compile Include="Scan\Images\Transforms\SaturationTransform.cs" />
     <Compile Include="Scan\Images\Transforms\HueTransform.cs" />
     <Compile Include="Scan\Images\Transforms\SharpenTransform.cs" />
