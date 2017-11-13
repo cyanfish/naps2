@@ -17,8 +17,15 @@ namespace NAPS2.WinForms
         static ThumbnailList()
         {
             // Simple hack to let the listview have larger thumbnails than 256x256
-            SetPrivateStaticField(typeof(ImageList), "maxImageWidth", ThumbnailRenderer.MAX_SIZE);
-            SetPrivateStaticField(typeof(ImageList), "maxImageHeight", ThumbnailRenderer.MAX_SIZE);
+            try
+            {
+                SetPrivateStaticField(typeof(ImageList), "maxImageWidth", ThumbnailRenderer.MAX_SIZE);
+                SetPrivateStaticField(typeof(ImageList), "maxImageHeight", ThumbnailRenderer.MAX_SIZE);
+            }
+            catch (Exception)
+            {
+                ThumbnailRenderer.MAX_SIZE = 256;
+            }
         }
 
         private static void SetPrivateStaticField(Type type, string fieldName, object value)
