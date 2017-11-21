@@ -90,6 +90,20 @@ namespace NAPS2.WinForms
             ((Control) this).Invoke(action);
         }
 
+        public void SafeInvoke(Action action)
+        {
+            try
+            {
+                Invoke(action);
+            }
+            catch (ObjectDisposedException)
+            {
+            }
+            catch (InvalidOperationException)
+            {
+            }
+        }
+
         #endregion
 
         protected void UpdateRTL()

@@ -271,11 +271,11 @@ namespace NAPS2.WinForms
             {
                 if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE))
                 {
-                    Invoke(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
+                    SafeInvoke(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
                 }
                 if (msg.Equals(Pipes.MSG_ACTIVATE))
                 {
-                    Invoke(() =>
+                    SafeInvoke(() =>
                     {
                         var form = Application.OpenForms.Cast<Form>().Last();
                         if (form.WindowState == FormWindowState.Minimized)
@@ -464,7 +464,7 @@ namespace NAPS2.WinForms
 
         public void ReceiveScannedImage(ScannedImage scannedImage)
         {
-            Invoke(() =>
+            SafeInvoke(() =>
             {
                 imageList.Images.Add(scannedImage);
                 AppendThumbnail(scannedImage);
@@ -1692,7 +1692,7 @@ namespace NAPS2.WinForms
                     }
                     // Do the rest of the stuff on the UI thread to help with synchronization
                     ScannedImage img1 = img;
-                    Invoke(() =>
+                    SafeInvoke(() =>
                     {
                         if (ct.IsCancellationRequested)
                         {

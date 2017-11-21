@@ -86,17 +86,11 @@ namespace NAPS2.WinForms
                         working = true;
                         previewOutOfDate = false;
                         var result = BlackWhiteTransform.Perform((Bitmap)workingImage.Clone());
-                        try
+                        SafeInvoke(() =>
                         {
-                            Invoke(new MethodInvoker(() =>
-                            {
-                                pictureBox.Image?.Dispose();
-                                pictureBox.Image = result;
-                            }));
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                        }
+                            pictureBox.Image?.Dispose();
+                            pictureBox.Image = result;
+                        });
                         working = false;
                     }
                 }, null, 0, 100);

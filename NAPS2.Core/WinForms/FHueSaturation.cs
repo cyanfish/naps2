@@ -92,20 +92,11 @@ namespace NAPS2.WinForms
                         previewOutOfDate = false;
                         var result = HueTransform.Perform((Bitmap)workingImage.Clone());
                         result = SaturationTransform.Perform(result);
-                        try
+                        SafeInvoke(() =>
                         {
-                            Invoke(new MethodInvoker(() =>
-                            {
-                                pictureBox.Image?.Dispose();
-                                pictureBox.Image = result;
-                            }));
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                        }
-                        catch (InvalidOperationException)
-                        {
-                        }
+                            pictureBox.Image?.Dispose();
+                            pictureBox.Image = result;
+                        });
                         working = false;
                     }
                 }, null, 0, 100);

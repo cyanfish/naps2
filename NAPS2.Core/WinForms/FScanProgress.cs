@@ -49,7 +49,7 @@ namespace NAPS2.WinForms
             {
                 try
                 {
-                    var imageFile = (ImageFile) wia.Item?.Transfer(Format);
+                    var imageFile = (ImageFile)wia.Item?.Transfer(Format);
                     if (imageFile != null)
                     {
                         ImageStream = new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
@@ -59,12 +59,12 @@ namespace NAPS2.WinForms
                 {
                     Exception = ex;
                 }
-                Invoke(new MethodInvoker(() =>
+                SafeInvoke(() =>
                 {
                     DialogResult = cancel ? DialogResult.Cancel : DialogResult.OK;
                     isComplete = true;
                     Close();
-                }));
+                });
             });
         }
 

@@ -159,17 +159,11 @@ namespace NAPS2.WinForms
                             g.ResetClip();
                             g.DrawRectangle(new Pen(Color.Black, 2.0f), cropBorderRect);
                         }
-                        try
+                        SafeInvoke(() =>
                         {
-                            Invoke(new MethodInvoker(() =>
-                            {
-                                pictureBox.Image?.Dispose();
-                                pictureBox.Image = bitmap;
-                            }));
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                        }
+                            pictureBox.Image?.Dispose();
+                            pictureBox.Image = bitmap;
+                        });
                         working = false;
                     }
                 }, null, 0, 100);

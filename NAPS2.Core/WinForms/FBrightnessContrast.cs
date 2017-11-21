@@ -92,17 +92,11 @@ namespace NAPS2.WinForms
                         previewOutOfDate = false;
                         var result = BrightnessTransform.Perform((Bitmap)workingImage.Clone());
                         result = TrueContrastTransform.Perform(result);
-                        try
+                        SafeInvoke(() =>
                         {
-                            Invoke(new MethodInvoker(() =>
-                            {
-                                pictureBox.Image?.Dispose();
-                                pictureBox.Image = result;
-                            }));
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                        }
+                            pictureBox.Image?.Dispose();
+                            pictureBox.Image = result;
+                        });
                         working = false;
                     }
                 }, null, 0, 100);

@@ -198,7 +198,7 @@ namespace NAPS2.Scan.Batch
                     if (profile.DriverName == TwainScanDriver.DRIVER_NAME || profile.UseNativeUI)
                     {
                         // Apart from WIA with predefined settings, the actual scan needs to be done on the UI thread
-                        BatchForm.Invoke(() => DoScan(scanNumber, scan, pageNumber));
+                        BatchForm.SafeInvoke(() => DoScan(scanNumber, scan, pageNumber));
                     }
                     else
                     {

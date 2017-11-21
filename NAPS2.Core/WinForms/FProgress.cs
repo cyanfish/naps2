@@ -45,14 +45,14 @@ namespace NAPS2.WinForms
 
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
-            Invoke(() => errorOutput.DisplayError(e.ErrorMessage, e.Exception));
+            SafeInvoke(() => errorOutput.DisplayError(e.ErrorMessage, e.Exception));
         }
 
         void operation_StatusChanged(object sender, EventArgs e)
         {
             if (loaded)
             {
-                Invoke(DisplayProgress);
+                SafeInvoke(DisplayProgress);
             }
         }
 
@@ -61,7 +61,7 @@ namespace NAPS2.WinForms
             finished = true;
             if (loaded)
             {
-                Invoke(Close);
+                SafeInvoke(Close);
             }
         }
 
