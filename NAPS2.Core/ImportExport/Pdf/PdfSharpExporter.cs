@@ -142,10 +142,27 @@ namespace NAPS2.ImportExport.Pdf
                     for (int i = 0; i < elements.Count; i++)
                     {
                         string textAndFormatting = elements.GetDictionary(i).Stream.ToString();
-                        if (textAndFormatting.Contains("BT")) // BT = begin text block
+                        var reader = new StringReader(textAndFormatting);
+                        bool inTextBlock = false;
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            // This page already contains text, don't use OCR
-                            return null;
+                            if (line.EndsWith("BT"))
+                            {
+                                inTextBlock = true;
+                            }
+                            else if (line.EndsWith("ET"))
+                            {
+                                inTextBlock = false;
+                            }
+                            else if (inTextBlock &&
+                                          (line.EndsWith("TJ") || line.EndsWith("Tj")
+                                           || line.EndsWith("\"") || line.EndsWith("'")))
+                            {
+                                // Text-showing operators
+                                // Since this page already contains text, don't use OCR
+                                return null;
+                            }
                         }
                     }
                 }
@@ -240,13 +257,13 @@ namespace NAPS2.ImportExport.Pdf
                 var tf = new XTextFormatter(gfx);
                 foreach (var element in ocrResult.Elements)
                 {
-                    var adjustedBounds = AdjustBounds(element.Bounds, (float) page.Width/ocrResult.PageBounds.Width, (float) page.Height/ocrResult.PageBounds.Height);
+                    var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
                     var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
                     var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
                         new XPdfFontOptions(PdfFontEncoding.Unicode));
                     var adjustedHeight = gfx.MeasureString(element.Text, font).Height;
-                    var verticalOffset = (adjustedBounds.Height - adjustedHeight)/2;
-                    adjustedBounds.Offset(0, (float) verticalOffset);
+                    var verticalOffset = (adjustedBounds.Height - adjustedHeight) / 2;
+                    adjustedBounds.Offset(0, (float)verticalOffset);
                     tf.DrawString(ocrResult.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
                 }
             }
