@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 
@@ -39,6 +40,7 @@ namespace NAPS2.ImportExport.Images
                     iparams.Param[0] = iparamPara;
                     using (var bitmap = scannedImageRenderer.Render(images[0]))
                     {
+                        ValidateBitmap(bitmap);
                         bitmap.Save(location, codecInfo, iparams);
                     }
                 }
@@ -62,6 +64,7 @@ namespace NAPS2.ImportExport.Images
                     File.Delete(location);
                     using (var bitmap0 = scannedImageRenderer.Render(images[0]))
                     {
+                        ValidateBitmap(bitmap0);
                         bitmap0.Save(location, codecInfo, encoderParams);
 
                         for (int i = 1; i < images.Count; i++)
@@ -83,6 +86,7 @@ namespace NAPS2.ImportExport.Images
                             encoderParams.Param[1] = SaveEncodeParam;
                             using (var bitmap = scannedImageRenderer.Render(images[i]))
                             {
+                                ValidateBitmap(bitmap);
                                 bitmap0.SaveAdd(bitmap, encoderParams);
                             }
                         }
@@ -101,6 +105,33 @@ namespace NAPS2.ImportExport.Images
                 throw new Exception("Error saving TIFF", ex);
             }
 
+        }
+
+        private void ValidateBitmap(Bitmap bitmap)
+        {
+            if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed
+                && bitmap.Palette.Entries.Length == 2
+                && bitmap.Palette.Entries[0].ToArgb() == Color.White.ToArgb()
+                && bitmap.Palette.Entries[1].ToArgb() == Color.Black.ToArgb())
+            {
+                // Inverted palette (0 = white); some scanners may produce bitmaps like this
+                // It won't encode properly in a TIFF, so we need to invert the encoding
+                var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+                var stride = Math.Abs(data.Stride);
+                for (int y = 0; y < data.Height; y++)
+                {
+                    for (int x = 0; x < data.Width; x += 8)
+                    {
+                        byte b = Marshal.ReadByte(data.Scan0 + y * stride + x / 8);
+                        int bits = Math.Min(8, data.Width - x);
+                        b ^= (byte)(0xFF << (8 - bits));
+                        Marshal.WriteByte(data.Scan0 + y * stride + x / 8, b);
+                    }
+                }
+                bitmap.UnlockBits(data);
+                bitmap.Palette.Entries[0] = Color.Black;
+                bitmap.Palette.Entries[1] = Color.White;
+            }
         }
 
         private ImageCodecInfo GetCodecForString(string type)
