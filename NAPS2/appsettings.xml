@@ -23,7 +23,7 @@
   <DisableSaveNotifications>false</DisableSaveNotifications>
   <SingleInstance>false</SingleInstance>
   <ComponentsPath></ComponentsPath>
-  <OcrTimeoutInSeconds>60</OcrTimeoutInSeconds>
+  <OcrTimeoutInSeconds>120</OcrTimeoutInSeconds>
   <OcrState>UserConfig</OcrState>
   <OcrDefaultLanguage></OcrDefaultLanguage>
   <DefaultProfileSettings>
