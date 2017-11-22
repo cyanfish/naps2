@@ -207,8 +207,9 @@ namespace NAPS2.ImportExport.Pdf
                     {
                         return null;
                     }
-
-                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode);
+                    
+                    // ReSharper disable once AccessToModifiedClosure
+                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode, () => !progressCallback(progress));
                 }
                 finally
                 {

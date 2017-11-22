@@ -13,7 +13,8 @@ namespace NAPS2.Ocr
 {
     public class TesseractOcrEngine : IOcrEngine
     {
-        private const int DEFAULT_TIMEOUT = 60 * 1000;
+        private const int DEFAULT_TIMEOUT = 120 * 1000;
+        private const int CHECK_INTERVAL = 500;
 
         private readonly OcrDependencyManager ocrDependencyManager;
         private readonly AppConfigManager appConfigManager;
@@ -34,7 +35,7 @@ namespace NAPS2.Ocr
             return langCode.Split('+').All(code => ocrDependencyManager.InstalledTesseractLanguages.Any(x => x.Code == code));
         }
 
-        public OcrResult ProcessImage(string imagePath, string langCode)
+        public OcrResult ProcessImage(string imagePath, string langCode, Func<bool> cancelCallback)
         {
             string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             string tempHocrFilePathWithExt = tempHocrFilePath + (ocrDependencyManager.HasNewTesseractExe ? ".hocr" : ".html");
@@ -69,20 +70,27 @@ namespace NAPS2.Ocr
                 {
                     timeout = DEFAULT_TIMEOUT;
                 }
-                if (!tesseractProcess.WaitForExit(timeout))
+                var stopwatch = Stopwatch.StartNew();
+                while (!tesseractProcess.WaitForExit(CHECK_INTERVAL))
                 {
-                    Log.Error("OCR process timed out.");
-                    try
+                    if (stopwatch.ElapsedMilliseconds >= timeout || cancelCallback())
                     {
-                        tesseractProcess.Kill();
-                        // Wait a bit to give the process time to release its file handles
-                        Thread.Sleep(200);
+                        if (stopwatch.ElapsedMilliseconds >= timeout)
+                        {
+                            Log.Error("OCR process timed out.");
+                        }
+                        try
+                        {
+                            tesseractProcess.Kill();
+                            // Wait a bit to give the process time to release its file handles
+                            Thread.Sleep(200);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.ErrorException("Error killing OCR process", e);
+                        }
+                        return null;
                     }
-                    catch (Exception e)
-                    {
-                        Log.ErrorException("Error killing OCR process", e);
-                    }
-                    return null;
                 }
 #if DEBUG
                 var output = tesseractProcess.StandardOutput.ReadToEnd();
