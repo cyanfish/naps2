@@ -14,13 +14,26 @@ namespace NAPS2.Scan.Images.Transforms
 
         public override Bitmap Perform(Bitmap bitmap)
         {
+            int bytesPerPixel;
+            if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                bytesPerPixel = 3;
+            }
+            else if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
+            {
+                bytesPerPixel = 4;
+            }
+            else
+            {
+                // No need to handle 1bpp since hue shifts are null transforms
+                return bitmap;
+            }
+
             double hueShiftAdjusted = HueShift / 2000.0 * 360;
             if (hueShiftAdjusted < 0)
             {
                 hueShiftAdjusted += 360;
             }
-
-            EnsurePixelFormat(ref bitmap);
             
             var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
             var stride = Math.Abs(data.Stride);
@@ -28,9 +41,9 @@ namespace NAPS2.Scan.Images.Transforms
             {
                 for (int x = 0; x < data.Width; x++)
                 {
-                    int r = Marshal.ReadByte(data.Scan0 + stride * y + x * 3);
-                    int g = Marshal.ReadByte(data.Scan0 + stride * y + x * 3 + 1);
-                    int b = Marshal.ReadByte(data.Scan0 + stride * y + x * 3 + 2);
+                    int r = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel);
+                    int g = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel + 1);
+                    int b = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel + 2);
 
                     Color c = Color.FromArgb(255, r, g, b);
                     double h, s, v;
@@ -40,9 +53,9 @@ namespace NAPS2.Scan.Images.Transforms
 
                     c = ColorHelper.ColorFromHSV(h, s, v);
 
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * 3, c.R);
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * 3 + 1, c.G);
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * 3 + 2, c.B);
+                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel, c.R);
+                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel + 1, c.G);
+                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel + 2, c.B);
                 }
             }
             bitmap.UnlockBits(data);

@@ -17,6 +17,19 @@ namespace NAPS2.Scan.Images.Transforms
             double saturationAdjusted = Saturation / 1000.0 + 1;
 
             EnsurePixelFormat(ref bitmap);
+            int bytesPerPixel;
+            if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                bytesPerPixel = 3;
+            }
+            else if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
+            {
+                bytesPerPixel = 4;
+            }
+            else
+            {
+                return bitmap;
+            }
 
             var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
             var stride = Math.Abs(data.Stride);
@@ -24,9 +37,9 @@ namespace NAPS2.Scan.Images.Transforms
             {
                 for (int x = 0; x < data.Width; x++)
                 {
-                    int r = Marshal.ReadByte(data.Scan0 + stride * y + x * 3);
-                    int g = Marshal.ReadByte(data.Scan0 + stride * y + x * 3 + 1);
-                    int b = Marshal.ReadByte(data.Scan0 + stride * y + x * 3 + 2);
+                    int r = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel);
+                    int g = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel + 1);
+                    int b = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel + 2);
 
                     Color c = Color.FromArgb(255, r, g, b);
                     double h, s, v;
@@ -36,9 +49,9 @@ namespace NAPS2.Scan.Images.Transforms
 
                     c = ColorHelper.ColorFromHSL(h, s, v);
 
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * 3, c.R);
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * 3 + 1, c.G);
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * 3 + 2, c.B);
+                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel, c.R);
+                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel + 1, c.G);
+                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel + 2, c.B);
                 }
             }
             bitmap.UnlockBits(data);

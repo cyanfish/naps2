@@ -17,6 +17,18 @@ namespace NAPS2.Scan.Images.Transforms
             double sharpnessAdjusted = Sharpness / 1000.0;
 
             EnsurePixelFormat(ref bitmap);
+            int bytesPerPixel;
+            if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                bytesPerPixel = 3;
+            } else if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
+            {
+                bytesPerPixel = 4;
+            }
+            else
+            {
+                return bitmap;
+            }
 
             // From https://stackoverflow.com/a/17596299
 
@@ -45,7 +57,7 @@ namespace NAPS2.Scan.Images.Transforms
             // Lock image bits for read/write.
             BitmapData pbits = bitmap.LockBits(new Rectangle(0, 0, width, height),
                 ImageLockMode.ReadWrite,
-                PixelFormat.Format24bppRgb);
+                bitmap.PixelFormat);
 
             // Declare an array to hold the bytes of the bitmap.
             int bytes = pbits.Stride * height;
@@ -69,14 +81,14 @@ namespace NAPS2.Scan.Images.Transforms
                             int imageX = (x - s + filterX + width) % width;
                             int imageY = (y - s + filterY + height) % height;
 
-                            rgb = imageY * pbits.Stride + 3 * imageX;
+                            rgb = imageY * pbits.Stride + bytesPerPixel * imageX;
 
                             red += rgbValues[rgb + 2] * filter[filterX, filterY];
                             green += rgbValues[rgb + 1] * filter[filterX, filterY];
                             blue += rgbValues[rgb + 0] * filter[filterX, filterY];
                         }
 
-                        rgb = y * pbits.Stride + 3 * x;
+                        rgb = y * pbits.Stride + bytesPerPixel * x;
 
                         int r = Math.Min(Math.Max((int)(factor * red + (bias * rgbValues[rgb + 2])), 0), 255);
                         int g = Math.Min(Math.Max((int)(factor * green + (bias * rgbValues[rgb + 1])), 0), 255);
@@ -92,7 +104,7 @@ namespace NAPS2.Scan.Images.Transforms
             {
                 for (int y = s; y < height - s; y++)
                 {
-                    rgb = y * pbits.Stride + 3 * x;
+                    rgb = y * pbits.Stride + bytesPerPixel * x;
 
                     rgbValues[rgb + 2] = result[x, y].R;
                     rgbValues[rgb + 1] = result[x, y].G;

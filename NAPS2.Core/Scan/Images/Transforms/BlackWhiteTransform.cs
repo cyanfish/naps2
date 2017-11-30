@@ -14,7 +14,16 @@ namespace NAPS2.Scan.Images.Transforms
 
         public override Bitmap Perform(Bitmap bitmap)
         {
-            if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
+            int bytesPerPixel;
+            if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                bytesPerPixel = 3;
+            }
+            else if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
+            {
+                bytesPerPixel = 4;
+            }
+            else
             {
                 return bitmap;
             }
@@ -31,9 +40,9 @@ namespace NAPS2.Scan.Images.Transforms
             {
                 for (int x = 0; x < data.Width; x++)
                 {
-                    int r = bytes[stride * y + x * 3];
-                    int g = bytes[stride * y + x * 3 + 1];
-                    int b = bytes[stride * y + x * 3 + 2];
+                    int r = bytes[stride * y + x * bytesPerPixel];
+                    int g = bytes[stride * y + x * bytesPerPixel + 1];
+                    int b = bytes[stride * y + x * bytesPerPixel + 2];
                     // Use standard values for grayscale conversion to weight the RGB values
                     int luma = r * 299 + g * 587 + b * 114;
                     if (luma >= thresholdAdjusted)
