@@ -2,3 +2,4 @@ Desktop.ini
 packages/
 *.user
 *.suo
+.vs/
