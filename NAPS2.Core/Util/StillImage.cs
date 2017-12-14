@@ -59,7 +59,7 @@ namespace NAPS2.Util
                     key1.SetValue("Action", "Scan with NAPS2");
                     key1.SetValue("CLSID", "WIACLSID");
                     key1.SetValue("DefaultIcon", "sti.dll,0");
-                    key1.SetValue("InitCmdLine", string.Format("/WiaCmd;{0} /StiDevice:%1 /StiEvent:%2;", exe));
+                    key1.SetValue("InitCmdLine", $"/WiaCmd;{exe} /StiDevice:%1 /StiEvent:%2;");
                     key1.SetValue("Provider", "NAPS2");
                 }
 
@@ -70,9 +70,9 @@ namespace NAPS2.Util
 
                 using (var key3 = Registry.LocalMachine.CreateSubKey(REGKEY_STI_EVENT_NAPS2))
                 {
-                    key3.SetValue("Cmdline", string.Format("{0} /StiDevice:%1 /StiEvent:%2", exe));
+                    key3.SetValue("Cmdline", $"{exe} /StiDevice:%1 /StiEvent:%2");
                     key3.SetValue("Desc", "Scan with NAPS2");
-                    key3.SetValue("Icon", string.Format("{0},0", exe));
+                    key3.SetValue("Icon", $"{exe},0");
                     key3.SetValue("Name", "NAPS2");
                 }
 

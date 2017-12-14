@@ -44,7 +44,7 @@ namespace NAPS2.Ocr
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = ocrDependencyManager.InstalledTesseractExe.Path,
-                    Arguments = string.Format("\"{0}\" \"{1}\" -l {2} hocr", imagePath, tempHocrFilePath, langCode),
+                    Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {langCode} hocr",
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
