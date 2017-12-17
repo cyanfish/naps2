@@ -145,12 +145,15 @@ namespace NAPS2.Recovery
             }
             if (_recoveryIndexManager != null)
             {
-                if (!saved)
+                lock (_recoveryIndexManager)
                 {
-                    _recoveryIndexManager.Index.Images.Add(IndexImage);
-                    saved = true;
+                    if (!saved)
+                    {
+                        _recoveryIndexManager.Index.Images.Add(IndexImage);
+                        saved = true;
+                    }
+                    _recoveryIndexManager.Save();
                 }
-                _recoveryIndexManager.Save();
             }
         }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
@@ -97,11 +98,11 @@ namespace NAPS2.Scan.Images
 
         public IEnumerable<int> RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
         {
-            foreach (int i in selection)
+            Parallel.ForEach(selection.ToList(), i =>
             {
                 Images[i].AddTransform(new RotationTransform(rotateFlipType));
                 Images[i].SetThumbnail(ThumbnailRenderer.RenderThumbnail(Images[i]));
-            }
+            });
             return selection.ToList();
         }
 
@@ -235,11 +236,11 @@ namespace NAPS2.Scan.Images
 
         public IEnumerable<int> ResetTransforms(IEnumerable<int> selection)
         {
-            foreach (ScannedImage img in Images.ElementsAt(selection))
+            Parallel.ForEach(Images.ElementsAt(selection).ToList(), img =>
             {
                 img.ResetTransforms();
                 img.SetThumbnail(ThumbnailRenderer.RenderThumbnail(img));
-            }
+            });
             return selection.ToList();
         }
     }
