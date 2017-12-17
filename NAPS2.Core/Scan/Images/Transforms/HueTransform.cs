@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
+using NAPS2.Core.Unsafe;
 
 namespace NAPS2.Scan.Images.Transforms
 {
@@ -29,38 +30,29 @@ namespace NAPS2.Scan.Images.Transforms
                 return bitmap;
             }
 
-            double hueShiftAdjusted = HueShift / 2000.0 * 360;
+            float hueShiftAdjusted = HueShift / 2000f * 360;
             if (hueShiftAdjusted < 0)
             {
                 hueShiftAdjusted += 360;
             }
-            
-            var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-            var stride = Math.Abs(data.Stride);
-            for (int y = 0; y < data.Height; y++)
-            {
-                for (int x = 0; x < data.Width; x++)
-                {
-                    int r = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel);
-                    int g = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel + 1);
-                    int b = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel + 2);
 
-                    Color c = Color.FromArgb(255, r, g, b);
-                    double h, s, v;
-                    ColorHelper.ColorToHSV(c, out h, out s, out v);
-
-                    h = (h + hueShiftAdjusted) % 360;
-
-                    c = ColorHelper.ColorFromHSV(h, s, v);
-
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel, c.R);
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel + 1, c.G);
-                    Marshal.WriteByte(data.Scan0 + stride * y + x * bytesPerPixel + 2, c.B);
-                }
-            }
-            bitmap.UnlockBits(data);
+            UnsafeImageOps.HueShift(bitmap, bytesPerPixel, hueShiftAdjusted);
             
             return bitmap;
+        }
+
+        public override bool CanSimplify(Transform other)
+        {
+            return other is HueTransform;
+        }
+
+        public override Transform Simplify(Transform other)
+        {
+            var other2 = (HueTransform)other;
+            return new HueTransform
+            {
+                HueShift = (HueShift + other2.HueShift + 3000) % 2000 - 1000
+            };
         }
 
         public override bool IsNull => HueShift == 0;
