@@ -90,8 +90,15 @@ namespace NAPS2.WinForms
                     {
                         working = true;
                         previewOutOfDate = false;
-                        var result = HueTransform.Perform((Bitmap)workingImage.Clone());
-                        result = SaturationTransform.Perform(result);
+                        var result = (Bitmap)workingImage.Clone();
+                        if (!HueTransform.IsNull)
+                        {
+                            result = HueTransform.Perform(result);
+                        }
+                        if (!SaturationTransform.IsNull)
+                        {
+                            result = SaturationTransform.Perform(result);
+                        }
                         SafeInvoke(() =>
                         {
                             pictureBox.Image?.Dispose();

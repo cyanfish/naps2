@@ -90,8 +90,15 @@ namespace NAPS2.WinForms
                     {
                         working = true;
                         previewOutOfDate = false;
-                        var result = BrightnessTransform.Perform((Bitmap)workingImage.Clone());
-                        result = TrueContrastTransform.Perform(result);
+                        var result = (Bitmap) workingImage.Clone();
+                        if (!BrightnessTransform.IsNull)
+                        {
+                            result = BrightnessTransform.Perform(result);
+                        }
+                        if (!TrueContrastTransform.IsNull)
+                        {
+                            result = TrueContrastTransform.Perform(result);
+                        }
                         SafeInvoke(() =>
                         {
                             pictureBox.Image?.Dispose();
