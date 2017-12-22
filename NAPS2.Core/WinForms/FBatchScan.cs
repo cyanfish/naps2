@@ -369,9 +369,12 @@ namespace NAPS2.WinForms
         {
             if (batchRunning)
             {
-                cancelBatch = true;
-                btnCancel.Enabled = false;
-                lblStatus.Text = MiscResources.BatchStatusCancelling;
+                if (MessageBox.Show(MiscResources.ConfirmCancelBatch, MiscResources.CancelBatch, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    cancelBatch = true;
+                    btnCancel.Enabled = false;
+                    lblStatus.Text = MiscResources.BatchStatusCancelling;
+                }
             }
             else
             {

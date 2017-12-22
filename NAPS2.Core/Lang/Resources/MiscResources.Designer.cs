@@ -19,7 +19,7 @@ namespace NAPS2.Lang.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class MiscResources {
@@ -196,6 +196,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel Batch.
+        /// </summary>
+        internal static string CancelBatch {
+            get {
+                return ResourceManager.GetString("CancelBatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose Profile.
         /// </summary>
         internal static string ChooseProfile {
@@ -219,6 +228,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to cancel the batch scan?.
+        /// </summary>
+        internal static string ConfirmCancelBatch {
+            get {
+                return ResourceManager.GetString("ConfirmCancelBatch", resourceCulture);
             }
         }
         
