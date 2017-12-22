@@ -42,6 +42,7 @@ namespace NAPS2.ImportExport.Pdf
             }
             int passwordAttempts = 0;
             bool aborted = false;
+            int i = 0;
             try
             {
                 PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.Import, args =>
@@ -62,10 +63,9 @@ namespace NAPS2.ImportExport.Pdf
                 if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                 {
                     pdfRenderer.ThrowIfCantRender();
-                    return document.Pages.Cast<PdfPage>().Select(ExportRawPdfPage);
+                    return document.Pages.Cast<PdfPage>().TakeWhile(page => progressCallback(i++, document.PageCount)).Select(ExportRawPdfPage);
                 }
 
-                int i = 0;
                 return document.Pages.Cast<PdfPage>().TakeWhile(page => progressCallback(i++, document.PageCount)).SelectMany(GetImagesFromPage);
             }
             catch (ImageRenderException e)
