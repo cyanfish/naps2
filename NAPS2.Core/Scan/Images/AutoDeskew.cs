@@ -147,11 +147,8 @@ namespace NAPS2.Scan.Images
         // Hough Transforamtion:
         private void Calc()
         {
-            int hMin = height / 4;
-            int hMax = height * 3 / 4;
-
             Init();
-            for(int y = hMin; y <= hMax; y++)
+            for(int y = 1; y <= height - 2; y++)
             {
                 for (int x = 1; x <= width - 2; x++)
                 {
