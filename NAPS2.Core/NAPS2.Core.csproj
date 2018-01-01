@@ -23,6 +23,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'InstallerEXE|x86'">
     <OutputPath>bin\x86\InstallerEXE\</OutputPath>
@@ -32,6 +33,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'InstallerMSI|x86'">
     <OutputPath>bin\x86\InstallerMSI\</OutputPath>
@@ -41,6 +43,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StandaloneZIP|x86'">
     <OutputPath>bin\x86\StandaloneZIP\</OutputPath>
@@ -50,6 +53,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Standalone7Z|x86'">
     <OutputPath>bin\x86\Standalone7Z\</OutputPath>
@@ -59,6 +63,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
@@ -167,6 +172,7 @@
     <Compile Include="Scan\Twain\Legacy\TwainDefs.cs" />
     <Compile Include="Scan\Twain\Legacy\TwainLib.cs" />
     <Compile Include="Scan\Twain\TwainWrapper.cs" />
+    <Compile Include="Unsafe\UnsafeImageOps.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\ChaosMonkey.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
@@ -5045,12 +5051,6 @@
     <None Include="Icons\cancel-small.png" />
     <None Include="Icons\blueprints.png" />
     <None Include="Icons\blueprints-small.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Core.Unsafe\NAPS2.Core.Unsafe.csproj">
-      <Project>{3E165A45-0797-48EA-B38C-5D1364ED6E65}</Project>
-      <Name>NAPS2.Core.Unsafe</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

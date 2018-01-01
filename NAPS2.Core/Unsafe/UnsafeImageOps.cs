@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace NAPS2.Core.Unsafe
+namespace NAPS2.Unsafe
 {
     public static class UnsafeImageOps
     {
