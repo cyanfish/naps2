@@ -6,17 +6,10 @@ namespace NAPS2.Dependencies
 {
     public class DownloadInfo
     {
-        public DownloadInfo(string fileName, string urlFormat, string xpUrlFormat, double size, string sha1, DownloadFormat format)
+        public DownloadInfo(string fileName, List<(PlatformSupport, string)> urlFormats, double size, string sha1, DownloadFormat format)
         {
             FileName = fileName;
-            if (PlatformSupport.WindowsXp.Validate())
-            {
-                Url = string.Format(xpUrlFormat, fileName);
-            }
-            else
-            {
-                Url = string.Format(urlFormat, fileName);
-            }
+            Urls = urlFormats.Where(x => x.Item1.Validate()).Select(x => string.Format(x.Item2, fileName)).ToList();
             Size = size;
             Sha1 = sha1;
             Format = format;
@@ -24,7 +17,7 @@ namespace NAPS2.Dependencies
 
         public string FileName { get; }
 
-        public string Url { get; }
+        public List<string> Urls { get; }
 
         public DownloadFormat Format { get; }
 

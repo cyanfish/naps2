@@ -10,6 +10,8 @@ namespace NAPS2.Dependencies
 
         public static readonly PlatformSupport WindowsXp = Windows.And(new PlatformSupport(() => Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor >= 1));
 
+        public static readonly PlatformSupport ModernWindows = Windows.Except(WindowsXp);
+
         private readonly Func<bool> predicate;
 
         private PlatformSupport(Func<bool> predicate)

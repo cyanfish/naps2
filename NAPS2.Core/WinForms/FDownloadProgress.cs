@@ -16,6 +16,7 @@ namespace NAPS2.WinForms
     {
         private readonly List<QueueItem> filesToDownload = new List<QueueItem>();
         private int filesDownloaded = 0;
+        private int urlIndex = 0;
         private double currentFileSize = 0.0;
         private double currentFileProgress = 0.0;
         private bool hasError;
@@ -97,14 +98,19 @@ namespace NAPS2.WinForms
             {
                 var prev = filesToDownload[filesDownloaded];
                 Directory.Delete(prev.TempFolder, true);
-                if (!cancel)
+                if (cancel)
                 {
-                    Close();
-                    MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                return;
+                // Retry if possible
+                urlIndex++;
+                hasError = false;
             }
-            if (filesDownloaded > 0)
+            else
+            {
+                urlIndex = 0;
+            }
+            if (filesDownloaded > 0 && urlIndex == 0)
             {
                 var prev = filesToDownload[filesDownloaded - 1];
                 var filePath = Path.Combine(prev.TempFolder, prev.DownloadInfo.FileName);
@@ -125,10 +131,16 @@ namespace NAPS2.WinForms
                 Close();
                 return;
             }
+            if (urlIndex >= filesToDownload[filesDownloaded].DownloadInfo.Urls.Count)
+            {
+                Close();
+                MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var next = filesToDownload[filesDownloaded];
             next.TempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             Directory.CreateDirectory(next.TempFolder);
-            client.DownloadFileAsync(new Uri(next.DownloadInfo.Url), Path.Combine(next.TempFolder, next.DownloadInfo.FileName));
+            client.DownloadFileAsync(new Uri(next.DownloadInfo.Urls[urlIndex]), Path.Combine(next.TempFolder, next.DownloadInfo.FileName));
         }
 
         public void QueueFile(DownloadInfo downloadInfo, Action<string> fileCallback)
