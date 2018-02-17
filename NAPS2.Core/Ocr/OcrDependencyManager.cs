@@ -245,7 +245,7 @@ namespace NAPS2.Ocr
             {
                 (PlatformSupport.ModernWindows, @"https://github.com/cyanfish/naps2-components/releases/download/tessseract-3.04/{0}"),
                 (PlatformSupport.ModernWindows, @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download"),
-                (PlatformSupport.Windows, @"http://xp-mirror.naps2.com/tesseract-3.04/{0}")
+                (PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-3.04/{0}")
             };
 
             public readonly DownloadInfo Tesseract304Xp = new DownloadInfo("tesseract_xp.exe.gz", UrlFormats, 1.32, "98d15e4765caae864f16fa2ab106e3fd6adbe8c3", DownloadFormat.Gzip);
