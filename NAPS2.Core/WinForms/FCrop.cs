@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
@@ -186,11 +185,11 @@ namespace NAPS2.WinForms
                     // With multiple images, we need to have the transform scaled in case they're different sizes
                     using (var referenceBitmap = scannedImageRenderer.Render(Image))
                     {
-                        Parallel.ForEach(ImagesToTransform, img =>
+                        foreach (var img in ImagesToTransform)
                         {
                             img.AddTransform(ScaleCropTransform(img, referenceBitmap));
                             img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
-                        });
+                        }
                     }
                 }
                 else

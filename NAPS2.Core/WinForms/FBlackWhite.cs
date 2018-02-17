@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
@@ -108,11 +107,11 @@ namespace NAPS2.WinForms
         {
             if (!BlackWhiteTransform.IsNull)
             {
-                Parallel.ForEach(ImagesToTransform, img =>
+                foreach (var img in ImagesToTransform)
                 {
                     img.AddTransform(BlackWhiteTransform);
                     img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
-                });
+                }
                 changeTracker.HasUnsavedChanges = true;
             }
             Close();
