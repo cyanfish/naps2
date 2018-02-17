@@ -24,6 +24,18 @@ namespace NAPS2.WinForms
 
         private readonly WebClient client = new WebClient();
 
+        static FDownloadProgress()
+        {
+            try
+            {
+                const int tls12 = 3072;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType) tls12;
+            }
+            catch (NotSupportedException)
+            {
+            }
+        }
+
         public FDownloadProgress()
         {
             InitializeComponent();
