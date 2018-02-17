@@ -202,7 +202,7 @@
         <value>7</value>
     </data>
     <data name="btnRevert.Text" xml:space="preserve">
-        <value>Revert</value>
+        <value>Vend tilbage</value>
     </data>
     <data name="&gt;&gt;btnRevert.Name" xml:space="preserve">
         <value>btnRevert</value>
@@ -277,7 +277,7 @@
         <value>3</value>
     </data>
     <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-        <value>Apply to all {0} selected images</value>
+        <value>Tilføj til alle {0} valgte billeder</value>
     </data>
     <data name="&gt;&gt;checkboxApplyToSelected.Name" xml:space="preserve">
         <value>checkboxApplyToSelected</value>
@@ -333,7 +333,7 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Sharpen</value>
+        <value>Gør skarpere</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FSharpen</value>

@@ -358,7 +358,7 @@
         <value>Save Images Progress</value>
     </data>
     <data name="SavePdfProgress" xml:space="preserve">
-        <value>Save PDF Progress</value>
+        <value>Email PDF Progress</value>
     </data>
     <data name="SavingFormat" xml:space="preserve">
         <value>Saving {0}...</value>
@@ -428,5 +428,11 @@
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
         <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    </data>
+    <data name="ConfirmCancelBatch" xml:space="preserve">
+        <value>Are you sure you want to cancel the batch scan?</value>
+    </data>
+    <data name="CancelBatch" xml:space="preserve">
+        <value>Cancel Batch</value>
     </data>
 </root>

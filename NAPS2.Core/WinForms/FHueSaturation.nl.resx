@@ -426,7 +426,7 @@
         <value>CenterScreen</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Hue / Saturation</value>
+        <value>Tint / verzadiging</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FHueSaturation</value>

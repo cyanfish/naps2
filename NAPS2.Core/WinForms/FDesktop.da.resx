@@ -457,7 +457,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>&amp;Crop</value>
+        <value>Beskær</value>
     </data>
     <data name="tsBrightnessContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -466,7 +466,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBrightnessContrast.Text" xml:space="preserve">
-        <value>&amp;Brightness / Contrast</value>
+        <value>Lysstyrke / Kontrast</value>
     </data>
     <data name="tsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -475,7 +475,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsHueSaturation.Text" xml:space="preserve">
-        <value>&amp;Hue / Saturation</value>
+        <value>Farve / Mætning</value>
     </data>
     <data name="tsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -484,7 +484,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBlackWhite.Text" xml:space="preserve">
-        <value>Black and &amp;White</value>
+        <value>Sort/hvid</value>
     </data>
     <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -493,7 +493,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsSharpen.Text" xml:space="preserve">
-        <value>&amp;Sharpen</value>
+        <value>Gør skarpere</value>
     </data>
     <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
         <value>182, 6</value>
@@ -502,7 +502,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsReset.Text" xml:space="preserve">
-        <value>&amp;Reset</value>
+        <value>Nulstil</value>
     </data>
     <data name="tsdImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -511,7 +511,7 @@
         <value>64, 51</value>
     </data>
     <data name="tsdImage.Text" xml:space="preserve">
-        <value>Ima&amp;ge</value>
+        <value>Billede</value>
     </data>
     <data name="tsdImage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
@@ -727,7 +727,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>Indsæt</value>
     </data>
     <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -745,7 +745,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsNewProfile.Text" xml:space="preserve">
-        <value>&amp;New Profile</value>
+        <value>&amp;Ny profil</value>
     </data>
     <data name="tsBatchScan.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -775,7 +775,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>&amp;PDF Settings</value>
+        <value>&amp;PDF indstillinger</value>
     </data>
     <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -796,7 +796,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>&amp;Image Settings</value>
+        <value>Billedindstillinger</value>
     </data>
     <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -817,13 +817,13 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>&amp;Email Settings</value>
+        <value>&amp;Email indstillinger</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>&amp;PDF Settings</value>
+        <value>&amp;PDF indstillinger</value>
     </data>
     <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -859,13 +859,13 @@
         <value>164, 22</value>
     </data>
     <data name="tsDeskew.Text" xml:space="preserve">
-        <value>&amp;Deskew</value>
+        <value>Ret op</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>&amp;Custom Rotation</value>
+        <value>Brugerdefineret rotation</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
@@ -886,13 +886,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>&amp;Alternate Interleave</value>
+        <value>Skift Interleave</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>A&amp;lternate Deinterleave</value>
+        <value>Skift Deinterleave</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>

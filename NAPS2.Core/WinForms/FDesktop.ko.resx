@@ -466,7 +466,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBrightnessContrast.Text" xml:space="preserve">
-        <value>&amp;Brightness / Contrast</value>
+        <value>밝기 / 명암</value>
     </data>
     <data name="tsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -475,7 +475,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsHueSaturation.Text" xml:space="preserve">
-        <value>&amp;Hue / Saturation</value>
+        <value>색조 / 채도</value>
     </data>
     <data name="tsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -484,7 +484,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBlackWhite.Text" xml:space="preserve">
-        <value>Black and &amp;White</value>
+        <value>흑백</value>
     </data>
     <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -493,7 +493,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsSharpen.Text" xml:space="preserve">
-        <value>&amp;Sharpen</value>
+        <value>샤픈</value>
     </data>
     <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
         <value>182, 6</value>
@@ -859,7 +859,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsDeskew.Text" xml:space="preserve">
-        <value>&amp;Deskew</value>
+        <value>기울기 보정</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
@@ -886,13 +886,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>인터리브 교체</value>
+        <value>대체 인터리브</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>디인터리브 교체</value>
+        <value>대체 디인터리브</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>

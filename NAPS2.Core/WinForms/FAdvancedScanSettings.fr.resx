@@ -382,7 +382,7 @@
         <value>6</value>
     </data>
     <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
-        <value>Rogner aux dimensions de la page</value>
+        <value>Recadrer aux dimensions de la page</value>
     </data>
     <data name="&gt;&gt;cbForcePageSizeCrop.Name" xml:space="preserve">
         <value>cbForcePageSizeCrop</value>

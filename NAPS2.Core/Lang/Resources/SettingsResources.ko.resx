@@ -220,10 +220,10 @@
         <value>레거시 (네이티브 UI 만 가능)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>대체 전송</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>구 DSM</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

@@ -132,7 +132,7 @@
         <value>0</value>
     </data>
     <data name="lblPrompt.Text" xml:space="preserve">
-        <value>NAPS2 'nin daha yeni bir versiyonu mevcut. Şimdi güncellemek ister misiniz?</value>
+        <value>NAPS2'nin daha yeni bir sürümü var. Şimdi güncellemek ister misiniz?</value>
     </data>
     <data name="&gt;&gt;lblPrompt.Name" xml:space="preserve">
         <value>lblPrompt</value>
@@ -228,7 +228,7 @@
         <value>306, 136</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>NAPS2 'yi Güncelle</value>
+        <value>NAPS2'yi Güncelle</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FUpdate</value>

@@ -466,7 +466,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBrightnessContrast.Text" xml:space="preserve">
-        <value>&amp;Brightness / Contrast</value>
+        <value>Parlaklık / Karşıtlık</value>
     </data>
     <data name="tsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -475,7 +475,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsHueSaturation.Text" xml:space="preserve">
-        <value>&amp;Hue / Saturation</value>
+        <value>Renk Tonu / Doygunluk</value>
     </data>
     <data name="tsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -484,7 +484,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBlackWhite.Text" xml:space="preserve">
-        <value>Black and &amp;White</value>
+        <value>Siyah ve Beyaz</value>
     </data>
     <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -493,7 +493,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsSharpen.Text" xml:space="preserve">
-        <value>&amp;Sharpen</value>
+        <value>Keskinleştir</value>
     </data>
     <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
         <value>182, 6</value>
@@ -727,7 +727,7 @@
         <value>164, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>Yapıştır</value>
     </data>
     <data name="ctxSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>161, 6</value>
@@ -754,7 +754,7 @@
         <value>135, 22</value>
     </data>
     <data name="tsBatchScan.Text" xml:space="preserve">
-        <value>&amp;Batch Scan</value>
+        <value>Yığın Tarama</value>
     </data>
     <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
@@ -775,7 +775,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsPDFSettings.Text" xml:space="preserve">
-        <value>&amp;PDF Settings</value>
+        <value>&amp;PDF Ayarları</value>
     </data>
     <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -796,7 +796,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsImageSettings.Text" xml:space="preserve">
-        <value>&amp;Image Settings</value>
+        <value>Resim Ayarları</value>
     </data>
     <data name="tsEmailPDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -817,13 +817,13 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailSettings.Text" xml:space="preserve">
-        <value>&amp;Email Settings</value>
+        <value>&amp;E-Posta Ayarları</value>
     </data>
     <data name="tsPdfSettings2.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
     </data>
     <data name="tsPdfSettings2.Text" xml:space="preserve">
-        <value>&amp;PDF Settings</value>
+        <value>&amp;PDF Ayarları</value>
     </data>
     <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -850,7 +850,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsFlip.Text" xml:space="preserve">
-        <value>Döndür</value>
+        <value>Ters Yüz Et</value>
     </data>
     <data name="tsDeskew.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -859,7 +859,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsDeskew.Text" xml:space="preserve">
-        <value>&amp;Deskew</value>
+        <value>Eğriliği &amp;Düzelt</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
@@ -886,13 +886,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>&amp;Alternate Interleave</value>
+        <value>&amp;Alternatif Yığım</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>A&amp;lternate Deinterleave</value>
+        <value>Alternatif Tersine Yığım</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>

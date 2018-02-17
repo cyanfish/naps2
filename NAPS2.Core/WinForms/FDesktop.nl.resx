@@ -466,7 +466,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBrightnessContrast.Text" xml:space="preserve">
-        <value>&amp;Brightness / Contrast</value>
+        <value>Helderheid / contrast</value>
     </data>
     <data name="tsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -475,7 +475,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsHueSaturation.Text" xml:space="preserve">
-        <value>&amp;Hue / Saturation</value>
+        <value>Tint / verzadiging</value>
     </data>
     <data name="tsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -484,7 +484,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBlackWhite.Text" xml:space="preserve">
-        <value>Black and &amp;White</value>
+        <value>Zwart-wit</value>
     </data>
     <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -493,7 +493,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsSharpen.Text" xml:space="preserve">
-        <value>&amp;Sharpen</value>
+        <value>Verscherpen</value>
     </data>
     <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
         <value>182, 6</value>

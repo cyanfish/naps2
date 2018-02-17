@@ -130,7 +130,7 @@
         <value>{0} 개의 이미지를 삭제하시겠습니까?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-        <value>{0} 프로파일을 삭제하시겠습니까?</value>
+        <value>{0} 개의 프로파일을 삭제하시겠습니까?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
         <value>{0} 프로파일을 삭제하시겠습니까?</value>
@@ -385,7 +385,7 @@
         <value>이미지 파일</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>선택된 스캐너의 연결이 끊겼습니다. .</value>
+        <value>선택된 스캐너가 사용 중 입니다..</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>스캐너 커버 열림.</value>
@@ -397,7 +397,7 @@
         <value>스캐너 예열 중.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>OCR 업데이트를 사용할 수 있습니다..</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
         <value>이미지가 저장되었습니다.</value>
@@ -418,15 +418,21 @@
         <value>파일이 사용 중이므로 덮어쓰기 할 수 없습니다.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>기울기 보정...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>기울기 보정</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>다운로드가 필요합니다</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>이 PDF 파일을 불러오기 위해서는 추가적인 컴포넌트가 필요합니다. 지금 다운로드 하시겠습니까?</value>
+    </data>
+    <data name="ConfirmCancelBatch" xml:space="preserve">
+        <value>Are you sure you want to cancel the batch scan?</value>
+    </data>
+    <data name="CancelBatch" xml:space="preserve">
+        <value>Cancel Batch</value>
     </data>
 </root>

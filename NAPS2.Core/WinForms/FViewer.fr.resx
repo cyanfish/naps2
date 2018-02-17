@@ -259,7 +259,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Rogner</value>
+        <value>Recadrer</value>
     </data>
     <data name="tsBrightnessContrast.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

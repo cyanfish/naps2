@@ -214,16 +214,16 @@
         <value>Üst Kapak</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>Öntanımlı</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>Legacy (native UI only)</value>
+        <value>Eski (yalnızca yerli kullanıcı arayüzü)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Alternatif Aktarım</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
-        <value>Old DSM</value>
+        <value>Eski DSM</value>
     </data>
     <data name="TwainImpl_X64" xml:space="preserve">
         <value>x64</value>

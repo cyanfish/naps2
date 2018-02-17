@@ -484,7 +484,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBlackWhite.Text" xml:space="preserve">
-        <value>Black and &amp;White</value>
+        <value>Fekete-fehér</value>
     </data>
     <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -886,7 +886,7 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>&amp;Alternate Interleave</value>
+        <value>&amp;Alternatív képminőség javítás</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>

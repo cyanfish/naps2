@@ -140,7 +140,7 @@
         <value>152, 22</value>
     </data>
     <data name="ctxSetDefault.Text" xml:space="preserve">
-        <value>Set Default</value>
+        <value>Sæt standard</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>149, 6</value>
@@ -162,7 +162,7 @@
         <value>152, 22</value>
     </data>
     <data name="ctxPaste.Text" xml:space="preserve">
-        <value>Paste</value>
+        <value>Indsæt</value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>149, 6</value>
@@ -223,7 +223,7 @@
         <value>1</value>
     </data>
     <data name="btnAdd.Text" xml:space="preserve">
-        <value>&amp;New</value>
+        <value>&amp;Ny</value>
     </data>
     <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>

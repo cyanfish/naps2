@@ -658,7 +658,7 @@
         <value>21</value>
     </data>
     <data name="label10.Text" xml:space="preserve">
-        <value>Auto-incrémentation (4 chiffres)</value>
+        <value>Numéro auto-incrémenté (4 chiffres)</value>
     </data>
     <data name="&gt;&gt;label10.Name" xml:space="preserve">
         <value>label10</value>
@@ -712,7 +712,7 @@
         <value>23</value>
     </data>
     <data name="label11.Text" xml:space="preserve">
-        <value>Auto-incrémentation (3 chiffres)</value>
+        <value>Numéro auto-incrémenté (3 chiffres)</value>
     </data>
     <data name="&gt;&gt;label11.Name" xml:space="preserve">
         <value>label11</value>
@@ -766,7 +766,7 @@
         <value>25</value>
     </data>
     <data name="label12.Text" xml:space="preserve">
-        <value>Auto-incrémentation (2 chiffres)</value>
+        <value>Numéro auto-incrémenté (2 chiffres)</value>
     </data>
     <data name="&gt;&gt;label12.Name" xml:space="preserve">
         <value>label12</value>
@@ -820,7 +820,7 @@
         <value>27</value>
     </data>
     <data name="label13.Text" xml:space="preserve">
-        <value>Auto-incrémentation (1 chiffre)</value>
+        <value>Numéro auto-incrémenté (1 chiffre)</value>
     </data>
     <data name="&gt;&gt;label13.Name" xml:space="preserve">
         <value>label13</value>

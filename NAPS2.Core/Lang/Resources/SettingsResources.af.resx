@@ -121,7 +121,7 @@
         <value>Trắng &amp; Đen</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit Color</value>
+        <value> ,</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Grayscale</value>

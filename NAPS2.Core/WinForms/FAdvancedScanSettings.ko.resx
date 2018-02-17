@@ -322,7 +322,7 @@
         <value>8</value>
     </data>
     <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-        <value>Delay between scans (WIA)</value>
+        <value>스캔 간 지연 (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaDelayBetweenScans.Name" xml:space="preserve">
         <value>cbWiaDelayBetweenScans</value>
@@ -352,7 +352,7 @@
         <value>7</value>
     </data>
     <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-        <value>Retry on failure (WIA)</value>
+        <value>실패시 재시도 (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaRetryOnFailure.Name" xml:space="preserve">
         <value>cbWiaRetryOnFailure</value>
@@ -382,7 +382,7 @@
         <value>6</value>
     </data>
     <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
-        <value>Crop to page size</value>
+        <value>용지 사이즈에 맞춰 자르기</value>
     </data>
     <data name="&gt;&gt;cbForcePageSizeCrop.Name" xml:space="preserve">
         <value>cbForcePageSizeCrop</value>
@@ -412,7 +412,7 @@
         <value>5</value>
     </data>
     <data name="cbFlipDuplex.Text" xml:space="preserve">
-        <value>Flip duplexed pages</value>
+        <value>양면 인쇄 된 페이지 뒤집기</value>
     </data>
     <data name="&gt;&gt;cbFlipDuplex.Name" xml:space="preserve">
         <value>cbFlipDuplex</value>
@@ -442,7 +442,7 @@
         <value>4</value>
     </data>
     <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-        <value>Offset width based on alignment (WIA)</value>
+        <value>정렬을 기반으로 한 오프셋 폭 (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
         <value>cbWiaOffsetWidth</value>
@@ -469,7 +469,7 @@
         <value>3</value>
     </data>
     <data name="cbForcePageSize.Text" xml:space="preserve">
-        <value>Stretch to page size</value>
+        <value>용지 사이즈에 맞춰 늘리기</value>
     </data>
     <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
         <value>cbForcePageSize</value>
@@ -841,7 +841,7 @@
         <value>17</value>
     </data>
     <data name="cbAutoDeskew.Text" xml:space="preserve">
-        <value>Deskew scanned pages</value>
+        <value>스캔 된 페이지 기울기 보정</value>
     </data>
     <data name="&gt;&gt;cbAutoDeskew.Name" xml:space="preserve">
         <value>cbAutoDeskew</value>
@@ -865,7 +865,7 @@
         <value>39</value>
     </data>
     <data name="groupBox4.Text" xml:space="preserve">
-        <value>Post-processing</value>
+        <value>후처리</value>
     </data>
     <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
         <value>groupBox4</value>

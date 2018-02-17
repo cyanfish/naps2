@@ -457,7 +457,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsCrop.Text" xml:space="preserve">
-        <value>Rogner</value>
+        <value>Recadrer</value>
     </data>
     <data name="tsBrightnessContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
