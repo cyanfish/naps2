@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2017-11-18 13:31+0000\n"
+"PO-Revision-Date: 2017-11-22 21:17+0000\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.5.1.3\n"
+"X-Generator: Translate Toolkit 1.13.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1511011902.000000\n"
+"X-POOTLE-MTIME: 1511385464.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -50,8 +50,8 @@ msgstr "600 ppp"
 msgid "800 dpi"
 msgstr "800 ppp"
 
-#: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
+#: MiscResources.resx$UpdateNow$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
 msgstr ""
 "Une nouvelle version de NAPS2 est disponible. Faut-il mettre à jour "
@@ -71,10 +71,12 @@ msgstr "A5 (148 x 210 mm)"
 
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
+#: FAbout.resx$$Message
 msgid "About"
 msgstr "À propos"
 
 #: FScanProgress.resx$$this.Text$Message
+#: FScanProgress.resx$$Message
 msgid "Acquiring data"
 msgstr "Acquisition des données"
 
@@ -83,12 +85,13 @@ msgid "Advanced"
 msgstr "Avancés…"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
+#: FAdvancedScanSettings.resx$$Message
 msgid "Advanced Profile Settings"
 msgstr "Paramètres de profil avancés"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -177,17 +180,25 @@ msgid "Apply brightness/contrast after scan"
 msgstr "Appliquer luminosité/contraste après acquisition"
 
 #: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
-#: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
-#: FSharpen.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FSharpen.resx$checkboxApplyToSelected.Text$Message
 #: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Appliquer à toutes les {0} images sélectionnées"
+
+#: MiscResources.resx$ConfirmCancelBatch$Message
+msgid "Are you sure you want to cancel the batch scan?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "Faut-il vraiment supprimer {0} élément(s) ?"
+
+#: MiscResources.resx$ConfirmDelete$Message
+msgid "Are you sure you want to delete"
+msgstr ""
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete "{0}"?"
@@ -219,24 +230,25 @@ msgstr "Auteur "
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
+#: FAutoSaveSettings.resx$$Message
 msgid "Auto Save Settings"
 msgstr "Paramètres d'enregistrement automatique"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr "Auto-incrémentation (1 chiffre)"
+msgstr "Numéro auto-incrémenté (1 chiffre)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "Auto-incrémentation (2 chiffres)"
+msgstr "Numéro auto-incrémenté (2 chiffres)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "Auto-incrémentation (3 chiffres)"
+msgstr "Numéro auto-incrémenté (3 chiffres)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "Auto-incrémentation (4 chiffres)"
+msgstr "Numéro auto-incrémenté (4 chiffres)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
@@ -252,6 +264,7 @@ msgstr "B5 (176x250 mm)"
 
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
+#: FBatchScan.resx$$Message
 msgid "Batch Scan"
 msgstr "Acquisition par lot"
 
@@ -282,6 +295,7 @@ msgstr "Noir et blanc"
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
+#: FBlackWhite.resx$$Message
 msgid "Black and White"
 msgstr "Noir et blanc"
 
@@ -294,36 +308,41 @@ msgid "Brightness"
 msgstr "Luminosité "
 
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
-#: FViewer.resx$tsBrightnessContrast.Text$Message
 #: FBrightnessContrast.resx$$this.Text$Message
+#: FViewer.resx$tsBrightnessContrast.Text$Message
+#: FBrightnessContrast.resx$$Message
 msgid "Brightness / Contrast"
 msgstr "Luminosité / Contraste"
 
-#: FEmailSettings.resx$btnCancel.Text$Message
+#: FAutoSaveSettings.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
-#: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FDownloadProgress.resx$btnCancel.Text$Message
-#: FEditProfile.resx$btnCancel.Text$Message
-#: FAutoSaveSettings.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FBrightnessContrast.resx$btnCancel.Text$Message
-#: FHueSaturation.resx$btnCancel.Text$Message
 #: FSharpen.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
-#: FCrop.resx$btnCancel.Text$Message
-#: FBlackWhite.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: FHueSaturation.resx$btnCancel.Text$Message
+#: FBlackWhite.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 msgid "Cancel"
 msgstr "Annuler"
+
+#: MiscResources.resx$CancelBatch$Message
+msgid "Cancel Batch"
+msgstr ""
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -362,8 +381,8 @@ msgstr "Compatibilité"
 msgid "Contrast"
 msgstr "Contraste "
 
-#: FProfiles.resx$ctxCopy.Text$Message
 #: FDesktop.resx$ctxCopy.Text$Message
+#: FProfiles.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "Copier"
 
@@ -384,14 +403,15 @@ msgid "Coverage Threshold"
 msgstr "Seuil de couverture"
 
 #: FDesktop.resx$tsCrop.Text$Message
-#: FViewer.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
+#: FViewer.resx$tsCrop.Text$Message
+#: FCrop.resx$$Message
 msgid "Crop"
-msgstr "Rogner"
+msgstr "Recadrer"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr "Rogner aux dimensions de la page"
+msgstr "Recadrer aux dimensions de la page"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -402,6 +422,7 @@ msgid "Custom ({0}x{1} {2})"
 msgstr "Personnalisé ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
+#: FPageSize.resx$$Message
 msgid "Custom Page Size"
 msgstr "Taille de page personnalisée"
 
@@ -434,10 +455,10 @@ msgstr "Délai entre acquisitions (WIA)"
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 #: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FViewer.resx$tsDelete.Text$Message
-#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -494,6 +515,7 @@ msgid "Download Needed"
 msgstr "Téléchargement requis"
 
 #: FDownloadProgress.resx$$this.Text$Message
+#: FDownloadProgress.resx$$Message
 msgid "Download Progress"
 msgstr "Progression du téléchargement"
 
@@ -521,6 +543,7 @@ msgstr "Progression de l'envoi du PDF par courriel"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
+#: FEmailSettings.resx$$Message
 msgid "Email Settings"
 msgstr "Paramètres de messagerie"
 
@@ -540,8 +563,9 @@ msgstr "Chiffrement"
 msgid "Enhanced Windows MetaFile (*.emf)"
 msgstr "Fichier EMF (*.emf)"
 
-#: MiscResources.resx$Error$Message
 #: FError.resx$$this.Text$Message
+#: MiscResources.resx$Error$Message
+#: FError.resx$$Message
 msgid "Error"
 msgstr "Erreur"
 
@@ -613,6 +637,7 @@ msgstr "Heure (0-23)"
 #: FDesktop.resx$tsHueSaturation.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
+#: FHueSaturation.resx$$Message
 msgid "Hue / Saturation"
 msgstr "Teinte / Saturation"
 
@@ -634,6 +659,7 @@ msgstr "Qualité d'image"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
+#: FImageSettings.resx$$Message
 msgid "Image Settings"
 msgstr "Paramètres d'image"
 
@@ -775,6 +801,7 @@ msgid "Next"
 msgstr "Suivant"
 
 #: FBatchPrompt.resx$$this.Text$Message
+#: FBatchPrompt.resx$$Message
 msgid "Next Scan"
 msgstr "Prochaine acquisition"
 
@@ -791,6 +818,7 @@ msgid "No scanning device was found"
 msgstr "Aucun périphérique d'acquisition n'a été trouvé"
 
 #: FDesktop.resx$$this.Text$Message
+#: FDesktop.resx$$Message
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
 
@@ -809,10 +837,12 @@ msgid "OCR"
 msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
+#: FOcrLanguageDownload.resx$$Message
 msgid "OCR Download"
 msgstr "Téléchargement OCR (reconnaissance optique de caractères)"
 
 #: FOcrSetup.resx$$this.Text$Message
+#: FOcrSetup.resx$$Message
 msgid "OCR Setup"
 msgstr "Configuration OCR (reconnaissance optique de caractères)"
 
@@ -820,24 +850,24 @@ msgstr "Configuration OCR (reconnaissance optique de caractères)"
 msgid "OCR language"
 msgstr "Langue OCR "
 
+#: FEditProfile.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FError.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
-#: FAutoSaveSettings.resx$btnOK.Text$Message
-#: FEditProfile.resx$btnOK.Text$Message
+#: FError.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
-#: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
+#: FBlackWhite.resx$btnOK.Text$Message
+#: FBrightnessContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
 #: FSharpen.resx$btnOK.Text$Message
 #: FHueSaturation.resx$btnOK.Text$Message
-#: FBrightnessContrast.resx$btnOK.Text$Message
-#: FBlackWhite.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "OK"
 
@@ -849,8 +879,8 @@ msgstr "Largeur de décalage basée sur l'alignement (WIA)"
 msgid "Old DSM"
 msgstr "Ancien DSM"
 
-#: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
+#: FBatchScan.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
 msgstr "Un fichier par page"
 
@@ -886,6 +916,7 @@ msgstr "Document PDF (*.pdf)"
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
+#: FPdfSettings.resx$$Message
 msgid "PDF Settings"
 msgstr "Paramètres PDF"
 
@@ -906,6 +937,7 @@ msgid "Paper source"
 msgstr "Source du papier "
 
 #: FPdfPassword.resx$$this.Text$Message
+#: FPdfPassword.resx$$Message
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -915,12 +947,12 @@ msgid "Paste"
 msgstr "Coller"
 
 #: FPlaceholders.resx$$this.Text$Message
-#: FBatchScan.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Chaînes de substitution"
 
@@ -950,11 +982,13 @@ msgid "Profile"
 msgstr "Profil "
 
 #: FEditProfile.resx$$this.Text$Message
+#: FEditProfile.resx$$Message
 msgid "Profile Settings"
 msgstr "Paramètres de profil"
 
 #: FDesktop.resx$tsProfiles.Text$Message
 #: FProfiles.resx$$this.Text$Message
+#: FProfiles.resx$$Message
 msgid "Profiles"
 msgstr "Profils"
 
@@ -971,6 +1005,7 @@ msgid "Recover"
 msgstr "Récupérer"
 
 #: FRecover.resx$$this.Text$Message
+#: FRecover.resx$$Message
 msgid "Recover Scanned Images"
 msgstr "Récupérer des images numérisées"
 
@@ -982,9 +1017,9 @@ msgstr "Récupération"
 msgid "Recovery Progress"
 msgstr "Progression de la récupération"
 
-#: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
+#: FPdfSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr "Mémoriser ces paramètres"
 
@@ -1004,9 +1039,9 @@ msgstr "Rétablir l'image"
 msgid "Resolution"
 msgstr "Résolution "
 
+#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
-#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Valeurs par défaut"
@@ -1019,12 +1054,12 @@ msgstr "Réessayer en cas d'échec (WIA)"
 msgid "Reverse"
 msgstr "Inverser"
 
-#: FHueSaturation.resx$btnRevert.Text$Message
-#: FSharpen.resx$btnRevert.Text$Message
-#: FBrightnessContrast.resx$btnRevert.Text$Message
-#: FRotate.resx$btnRevert.Text$Message
-#: FCrop.resx$btnRevert.Text$Message
 #: FBlackWhite.resx$btnRevert.Text$Message
+#: FRotate.resx$btnRevert.Text$Message
+#: FSharpen.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
+#: FHueSaturation.resx$btnRevert.Text$Message
+#: FBrightnessContrast.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "Rétablir"
 
@@ -1035,6 +1070,7 @@ msgstr "Droite"
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
+#: FRotate.resx$$Message
 msgid "Rotate"
 msgstr "Rotation"
 
@@ -1096,8 +1132,8 @@ msgstr "Mettre à l'échelle de la fenêtre"
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
-#: MiscResources.resx$Scan$Message
 #: FProfiles.resx$ctxScan.Text$Message
+#: MiscResources.resx$Scan$Message
 msgid "Scan"
 msgstr "Numériser"
 
@@ -1109,8 +1145,8 @@ msgstr "Configuration d'acquisition"
 msgid "Scanned Image"
 msgstr "Image numérisée"
 
-#: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
+#: MiscResources.resx$ScanPageProgress$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
 msgstr "Acquisition de la page {0}..."
@@ -1132,6 +1168,7 @@ msgid "Select All"
 msgstr "Tout sélectionner"
 
 #: FSelectDevice.resx$$this.Text$Message
+#: FSelectDevice.resx$$Message
 msgid "Select Source"
 msgstr "Sélectionner une source"
 
@@ -1161,13 +1198,14 @@ msgid "Set Default"
 msgstr "Définir par défaut"
 
 #: FDesktop.resx$tsSharpen.Text$Message
-#: FViewer.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
+#: FViewer.resx$tsSharpen.Text$Message
+#: FSharpen.resx$$Message
 msgid "Sharpen"
 msgstr "Accentuation"
 
-#: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
+#: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 msgid "Show"
 msgstr "Afficher"
 
@@ -1288,6 +1326,7 @@ msgid "Unsaved Changes"
 msgstr "Modifications non sauvegardées"
 
 #: FUpdate.resx$$this.Text$Message
+#: FUpdate.resx$$Message
 msgid "Update NAPS2"
 msgstr "Mettre à jour NAPS2"
 

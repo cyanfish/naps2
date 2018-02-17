@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2016-11-24 07:57+0000\n"
-"Last-Translator: minan <minankarakus@gmail.com>\n"
+"PO-Revision-Date: 2018-01-28 17:26+0000\n"
+"Last-Translator: etc <etcetin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.13.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1479974269.000000\n"
+"X-POOTLE-MTIME: 1517160398.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -50,11 +50,10 @@ msgstr "600 dpi"
 msgid "800 dpi"
 msgstr "800 dpi"
 
-#: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
+#: MiscResources.resx$UpdateNow$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr ""
-"NAPS2 'nin daha yeni bir versiyonu mevcut. Şimdi güncellemek ister misiniz?"
+msgstr "NAPS2'nin daha yeni bir sürümü var. Şimdi güncellemek ister misiniz?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -70,24 +69,27 @@ msgstr "A5 (148x210 mm)"
 
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
+#: FAbout.resx$$Message
 msgid "About"
 msgstr "Hakkında"
 
 #: FScanProgress.resx$$this.Text$Message
+#: FScanProgress.resx$$Message
 msgid "Acquiring data"
-msgstr ""
+msgstr "Veri elde ediliyor"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
 msgstr "Gelişmiş"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
+#: FAdvancedScanSettings.resx$$Message
 msgid "Advanced Profile Settings"
 msgstr "Gelişmiş Profil Ayarları"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsReverseAll.Text$Message
 #: FDesktop.resx$tsSaveImagesAll.Text$Message
+#: FDesktop.resx$tsReverseAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -95,7 +97,7 @@ msgstr "Tümü ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr ""
+msgstr "Tüm Dosyalar"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
@@ -107,15 +109,15 @@ msgstr "İçerik Kopyalamaya İzin Ver"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr ""
+msgstr "Erişilebilirlik İçin İçerik Kopyalamaya İzin Ver"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr ""
+msgstr "Belge Toparlamaya İzin Ver"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
-msgstr ""
+msgstr "Belge Düzenlemeye İzin Ver"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
@@ -131,24 +133,25 @@ msgstr "Baskıya İzin Ver"
 
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "Alternatif Tersine Yığım"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Alternatif Yığım"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
-msgstr ""
+msgstr "Alternatif Aktarım"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr ""
+"Bu PDF dosyasını içe aktarmak için ek bileşen gerekiyor. Şimdi indirmek "
+"ister misiniz?"
 
 #: MiscResources.resx$AutoSaveError$Message
-#, fuzzy
 msgid "An error occurred when trying to auto save"
-msgstr "Dosyayı kaydetmeye çalışırken bir hata oluştu.\n"
+msgstr "Kendiliğinden kaydetme denenirken hata oluştu"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
@@ -164,33 +167,40 @@ msgstr "Tarayıcı sürücüsü ile ilgili bir hata oluştu"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
-msgstr "Dosyayı kaydetmeye çalışırken bir hata oluştu.\n"
+msgstr "Yığın tarama sırasında bilinmeyen bir hata oluştu"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
-msgstr ""
+msgstr "OCR için bir güncelleme var"
 
 #: FAdvancedScanSettings.resx$cbBrightnessContrastAfterScan.Text$Message
 msgid "Apply brightness/contrast after scan"
-msgstr ""
+msgstr "Taramadan sonra parlaklık/karşıtlık uygula"
 
 #: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
-#: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
-#: FSharpen.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FSharpen.resx$checkboxApplyToSelected.Text$Message
 #: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
+msgstr "Seçili {0} resmin tümüne uygula"
+
+#: MiscResources.resx$ConfirmCancelBatch$Message
+msgid "Are you sure you want to cancel the batch scan?"
 msgstr ""
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "{0} adet öğeyi temizlemek istediğinize emin misiniz?"
+msgstr "{0} adet ögeyi temizlemek istediğinize emin misiniz?"
 
 #: MiscResources.resx$ConfirmDelete$Message
-#, fuzzy
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete "{0}"?"
-msgstr "{0} adet öğeyi silmek istediğinize emin misiniz?"
+msgstr "\"{0}\" ögesini silmek istediğinize emin misiniz?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -198,7 +208,7 @@ msgstr "{0} profilini silmek istediğinize emin misiniz?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "{0} adet öğeyi silmek istediğinize emin misiniz?"
+msgstr "{0} adet ögeyi silmek istediğinize emin misiniz?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
@@ -211,36 +221,37 @@ msgstr ""
 
 #: FEmailSettings.resx$label1.Text$Message
 msgid "Attachment Name"
-msgstr ""
+msgstr "Ek Adı"
 
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
-msgstr ""
+msgstr "Yazar"
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
+#: FAutoSaveSettings.resx$$Message
 msgid "Auto Save Settings"
-msgstr ""
+msgstr "Kendiliğinden Kaydetme Ayarları"
 
 #: FPlaceholders.resx$label13.Text$Message
 msgid "Auto-incrementing number (1 digit)"
-msgstr ""
+msgstr "Kendiliğinden artan sayı (1 hane)"
 
 #: FPlaceholders.resx$label12.Text$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr ""
+msgstr "Kendiliğinden artan sayı (2 hane)"
 
 #: FPlaceholders.resx$label11.Text$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr ""
+msgstr "Kendiliğinden artan sayı (3 hane)"
 
 #: FPlaceholders.resx$label10.Text$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr ""
+msgstr "Kendiliğinden artan sayı (4 hane)"
 
 #: MiscResources.resx$AutoUpdates$Message
 msgid "Automatic Updates"
-msgstr "Otomatik Güncellemeler"
+msgstr "Kendiliğinden Güncellemeler"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -252,20 +263,21 @@ msgstr "B5 (176x250 mm)"
 
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
+#: FBatchScan.resx$$Message
 msgid "Batch Scan"
-msgstr ""
+msgstr "Yığın Tarama"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled"
-msgstr ""
+msgstr "Yığın iptal edildi"
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully"
-msgstr ""
+msgstr "Yığın başarıyla tamamlandı"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error"
-msgstr ""
+msgstr "Yığın tarama hata nedeniyle durdu"
 
 #: FEditProfile.resx$label3.Text$Message
 msgid "Bit depth"
@@ -282,52 +294,58 @@ msgstr "Siyah & Beyaz"
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
+#: FBlackWhite.resx$$Message
 msgid "Black and White"
-msgstr ""
+msgstr "Siyah ve Beyaz"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
-msgstr ""
+msgstr "Boş Sayfalar"
 
 #: FEditProfile.resx$label6.Text$Message
 msgid "Brightness"
 msgstr "Parlaklık"
 
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
-#: FViewer.resx$tsBrightnessContrast.Text$Message
 #: FBrightnessContrast.resx$$this.Text$Message
+#: FViewer.resx$tsBrightnessContrast.Text$Message
+#: FBrightnessContrast.resx$$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Parlaklık / Karşıtlık"
 
-#: FEmailSettings.resx$btnCancel.Text$Message
+#: FAutoSaveSettings.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
+#: FEmailSettings.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
 #: FOcrSetup.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
-#: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FDownloadProgress.resx$btnCancel.Text$Message
-#: FEditProfile.resx$btnCancel.Text$Message
-#: FAutoSaveSettings.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FBrightnessContrast.resx$btnCancel.Text$Message
-#: FHueSaturation.resx$btnCancel.Text$Message
 #: FSharpen.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
-#: FCrop.resx$btnCancel.Text$Message
-#: FBlackWhite.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
+#: FRotate.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: FHueSaturation.resx$btnCancel.Text$Message
+#: FBlackWhite.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
 msgid "Cancel"
 msgstr "Vazgeç"
 
+#: MiscResources.resx$CancelBatch$Message
+msgid "Cancel Batch"
+msgstr ""
+
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
-msgstr ""
+msgstr "İptal ediliyor"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -348,50 +366,51 @@ msgstr "Temizle"
 
 #: FAutoSaveSettings.resx$cbClearAfterSave.Text$Message
 msgid "Clear images after saving"
-msgstr ""
+msgstr "Kaydettikten sonra resimleri temizle"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 msgid "Compatibility"
-msgstr ""
+msgstr "Uyumluluk"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
 msgstr "Karşıtlık"
 
-#: FProfiles.resx$ctxCopy.Text$Message
 #: FDesktop.resx$ctxCopy.Text$Message
+#: FProfiles.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "Kopyala"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr ""
+msgstr "Kopyalama Süreci"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying"
-msgstr ""
+msgstr "Kopyalanıyor"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
-msgstr ""
+msgstr "Telif Hakkı 2009, 2012-2017 NAPS2 Katkıcıları"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
-msgstr ""
+msgstr "Kapsam Eşiği"
 
 #: FDesktop.resx$tsCrop.Text$Message
-#: FViewer.resx$tsCrop.Text$Message
 #: FCrop.resx$$this.Text$Message
+#: FViewer.resx$tsCrop.Text$Message
+#: FCrop.resx$$Message
 msgid "Crop"
 msgstr "Kırp"
 
 #: FAdvancedScanSettings.resx$cbForcePageSizeCrop.Text$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Sayfa boyutuna kırp"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom"
@@ -402,6 +421,7 @@ msgid "Custom ({0}x{1} {2})"
 msgstr "Özel ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
+#: FPageSize.resx$$Message
 msgid "Custom Page Size"
 msgstr "Özel Sayfa Boyutu"
 
@@ -412,16 +432,16 @@ msgstr "Özel Döndürme"
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
-msgstr ""
+msgstr "Gün (01-31)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
 msgid "Default"
-msgstr ""
+msgstr "Öntanımlı"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
 msgid "Default File Path"
-msgstr ""
+msgstr "Öntanımlı Dosya Yolu"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -429,34 +449,34 @@ msgstr "Boşluk Çıkar"
 
 #: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
 msgid "Delay between scans (WIA)"
-msgstr ""
+msgstr "Taramalar arası gecikme (WIA)"
 
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 #: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
 #: FViewer.resx$tsDelete.Text$Message
-#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Sil"
 
 #: FDesktop.resx$tsDeskew.Text$Message
 #: FViewer.resx$tsDeskew.Text$Message
 msgid "Deskew"
-msgstr ""
+msgstr "Eğriliği Düzelt"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Eğriliği Düzeltme Süreci"
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Taranan sayfaların eğriliğini düzelt"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
-msgstr ""
+msgstr "Eğrilik Düzeltiliyor"
 
 #: FEditProfile.resx$label1.Text$Message
 msgid "Device"
@@ -464,7 +484,7 @@ msgstr "Aygıt"
 
 #: FPageSize.resx$label2.Text$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "Boyutlar"
 
 #: FEditProfile.resx$label8.Text$Message
 msgid "Display name"
@@ -472,8 +492,7 @@ msgstr "Görünüm adı"
 
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr ""
-"NAPS2 'nin otomatik olarak güncellemeleri kontrol etmesini ister misiniz?"
+msgstr "NAPS2'nin güncellemeleri kendiliğinden denetlemesini ister misiniz?"
 
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
@@ -492,11 +511,12 @@ msgstr "İndirme Hatası"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "İndirme Gerekli"
 
 #: FDownloadProgress.resx$$this.Text$Message
+#: FDownloadProgress.resx$$Message
 msgid "Download Progress"
-msgstr "İndirme Durumu"
+msgstr "İndirme Süreci"
 
 #: FUpdate.resx$btnInstall.Text$Message
 #: MiscResources.resx$DownloadAndInstall$Message
@@ -518,31 +538,33 @@ msgstr "PDF Gönder"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr ""
+msgstr "E-Posta PDF Süreci"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
+#: FEmailSettings.resx$$Message
 msgid "Email Settings"
-msgstr ""
+msgstr "E-Posta Ayarları"
 
 #: FEditProfile.resx$cbAutoSave.Text$Message
 msgid "Enable Auto Save"
-msgstr ""
+msgstr "Kendiliğinden Kaydetmeyi Etkinleştir"
 
 #: FPdfSettings.resx$cbEncryptPdf.Text$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "PDF'yi Şifrele"
 
 #: FPdfSettings.resx$groupProtection.Text$Message
 msgid "Encryption"
-msgstr ""
+msgstr "Şifreleme"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
 msgstr "Gelişmiş Windows Meta Dosyası (*.emf)"
 
-#: MiscResources.resx$Error$Message
 #: FError.resx$$this.Text$Message
+#: MiscResources.resx$Error$Message
+#: FError.resx$$Message
 msgid "Error"
 msgstr "Hata"
 
@@ -553,11 +575,11 @@ msgstr "Tahmini indirme boyutu: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "Değiştirilebilir Resim Dosyası (*.exif)"
+msgstr "Takas Edilebilir Resim Dosyası (*.exif)"
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
-msgstr ""
+msgstr "Boş sayfaları dışarıda bırak"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -565,25 +587,27 @@ msgstr "Besleyici"
 
 #: FPlaceholders.resx$label1.Text$Message
 msgid "File Name"
-msgstr ""
+msgstr "Dosya Adı"
 
 #: FBatchScan.resx$lblFilePath.Text$Message
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
 msgid "File path"
-msgstr ""
+msgstr "Dosya yolu"
 
 #: FDesktop.resx$tsFlip.Text$Message
 #: FViewer.resx$tsFlip.Text$Message
 msgid "Flip"
-msgstr "Döndür"
+msgstr "Ters Yüz Et"
 
 #: FAdvancedScanSettings.resx$cbFlipDuplex.Text$Message
 msgid "Flip duplexed pages"
-msgstr ""
+msgstr "Çift taraflı sayfaları ters yüz et"
 
 #: FImageSettings.resx$lblWarning.Text$Message
 msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
 msgstr ""
+"Yüksek JPEG kalitesi (80+) için, en iyi sonuçlar için En Yüksek Kalite "
+"profil seçeneğini kullanın"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -591,7 +615,7 @@ msgstr "GIF Dosyası (*.gif)"
 
 #: FOcrSetup.resx$linkGetLanguages.Text$Message
 msgid "Get more languages"
-msgstr "Daha fazla dil yükle"
+msgstr "Daha çok dil yükle"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -607,13 +631,14 @@ msgstr "Yatay hizalama"
 
 #: FPlaceholders.resx$label7.Text$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "Saat (0-23)"
 
 #: FDesktop.resx$tsHueSaturation.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
+#: FHueSaturation.resx$$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Renk Tonu / Doygunluk"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -625,20 +650,21 @@ msgstr "Resim"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr ""
+msgstr "Resim Dosyaları"
 
 #: FAdvancedScanSettings.resx$groupBox1.Text$Message
 msgid "Image Quality"
-msgstr ""
+msgstr "Resim Kalitesi"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
+#: FImageSettings.resx$$Message
 msgid "Image Settings"
-msgstr ""
+msgstr "Resim Ayarları"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved"
-msgstr ""
+msgstr "Resim kaydedildi"
 
 #: FDesktop.resx$tsImport.Text$Message
 msgid "Import"
@@ -646,15 +672,15 @@ msgstr "İçe Aktar"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr ""
+msgstr "İçe Aktarım Süreci"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing"
-msgstr ""
+msgstr "İçe Aktarılıyor"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
-msgstr ""
+msgstr "{0} içe aktarılıyor"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -683,11 +709,11 @@ msgstr "JPEG Dosyası (*.jpg, *.jpeg)"
 
 #: FImageSettings.resx$label2.Text$Message
 msgid "Jpeg Quality"
-msgstr ""
+msgstr "Jpeg Kalitesi"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
-msgstr ""
+msgstr "Anahtar Sözcükler"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -699,11 +725,11 @@ msgstr "Sol"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr ""
+msgstr "Eski (yalnızca yerli kullanıcı arayüzü)"
 
 #: FBatchScan.resx$rdLoadIntoNaps2.Text$Message
 msgid "Load images into NAPS2"
-msgstr ""
+msgstr "Resimleri NAPS2'ye yükle"
 
 #: FDesktop.resx$tStrip.Text$Message
 msgid "Main toolbar"
@@ -715,24 +741,24 @@ msgstr "OCR kullanarak aranabilir PDF oluştur"
 
 #: FAdvancedScanSettings.resx$cbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
-msgstr "Maksimum kalite (Büyük dosyalar)"
+msgstr "En yüksek kalite (büyük dosyalar)"
 
 #: FPdfSettings.resx$groupMetadata.Text$Message
 msgid "Metadata"
-msgstr ""
+msgstr "Üst Veri"
 
 #: FPlaceholders.resx$label8.Text$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "Dakika (00-59)"
 
 #: FPlaceholders.resx$label5.Text$Message
 msgid "Month (01-12)"
-msgstr ""
+msgstr "Ay (01-12)"
 
 #: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 #: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
-msgstr ""
+msgstr "Daha çok bilgi"
 
 #: FDesktop.resx$tsMove.TextSecond$Message
 msgid "Move Down"
@@ -744,11 +770,11 @@ msgstr "Yukarı Taşı"
 
 #: FBatchScan.resx$rdMultipleScansDelay.Text$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr ""
+msgstr "Çoklu tarama (taramalar arası sabit gecikme)"
 
 #: FBatchScan.resx$rdMultipleScansPrompt.Text$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr ""
+msgstr "Çoklu tarama (taramalar arası komut istemi)"
 
 #: MiscResources.resx$NAPS2$Message
 msgid "NAPS2"
@@ -756,11 +782,11 @@ msgstr "NAPS2"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "Ad (isteğe bağlı)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing"
-msgstr "İsim eksik"
+msgstr "Ad eksik"
 
 #: FProfiles.resx$btnAdd.Text$Message
 msgid "New"
@@ -775,8 +801,9 @@ msgid "Next"
 msgstr "İleri"
 
 #: FBatchPrompt.resx$$this.Text$Message
+#: FBatchPrompt.resx$$Message
 msgid "Next Scan"
-msgstr ""
+msgstr "Sonraki Tarama"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 msgid "No device selected"
@@ -784,13 +811,14 @@ msgstr "Hiç bir aygıt seçilmedi"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder"
-msgstr ""
+msgstr "Besleyicide sayfa yok"
 
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
 msgstr "Hiçbir tarama aygıtı bulunamadı"
 
 #: FDesktop.resx$$this.Text$Message
+#: FDesktop.resx$$Message
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
 
@@ -802,17 +830,19 @@ msgstr "Şimdi Değil"
 
 #: FBatchScan.resx$lblNumberOfScans.Text$Message
 msgid "Number of scans"
-msgstr ""
+msgstr "Tarama sayısı"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
 msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
+#: FOcrLanguageDownload.resx$$Message
 msgid "OCR Download"
 msgstr "OCR Dili Yükle"
 
 #: FOcrSetup.resx$$this.Text$Message
+#: FOcrSetup.resx$$Message
 msgid "OCR Setup"
 msgstr "OCR Kurulumu"
 
@@ -820,56 +850,56 @@ msgstr "OCR Kurulumu"
 msgid "OCR language"
 msgstr "OCR dili"
 
+#: FEditProfile.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
 #: FOcrSetup.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FError.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
-#: FAutoSaveSettings.resx$btnOK.Text$Message
-#: FEditProfile.resx$btnOK.Text$Message
+#: FError.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
-#: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
+#: FBlackWhite.resx$btnOK.Text$Message
+#: FBrightnessContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
 #: FSharpen.resx$btnOK.Text$Message
 #: FHueSaturation.resx$btnOK.Text$Message
-#: FBrightnessContrast.resx$btnOK.Text$Message
-#: FBlackWhite.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Tamam"
 
 #: FAdvancedScanSettings.resx$cbWiaOffsetWidth.Text$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr ""
+msgstr "Hizalamayı taban alan ofset genişliği (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
-msgstr ""
+msgstr "Eski DSM"
 
-#: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
+#: FBatchScan.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
-msgstr ""
+msgstr "Sayfa başı tek dosya"
 
 #: FBatchScan.resx$rdFilePerScan.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
-msgstr ""
+msgstr "Tarama başı tek dosya"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded"
-msgstr "Bir ya da daha fazla dosya indirilemedi"
+msgstr "Bir veya daha çok dosya indirilemedi"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
-msgstr ""
+msgstr "Klasörü Aç"
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
-msgstr ""
+msgstr "Çıktı"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -877,22 +907,22 @@ msgstr "Dosyanın Üzerine Yaz"
 
 #: FPdfSettings.resx$lblOwnerPassword.Text$Message
 msgid "Owner Password"
-msgstr ""
+msgstr "Sahip Parolası"
 
 #: MiscResources.resx$FileTypePdf$Message
-#, fuzzy
 msgid "PDF Document (*.pdf)"
-msgstr "PDF doküman (*.pdf)"
+msgstr "PDF Belgesi (*.pdf)"
 
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
+#: FPdfSettings.resx$$Message
 msgid "PDF Settings"
-msgstr ""
+msgstr "PDF Ayarları"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
-msgstr ""
+msgstr "PDF kaydedildi"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -907,31 +937,32 @@ msgid "Paper source"
 msgstr "Kağıt kaynağı"
 
 #: FPdfPassword.resx$$this.Text$Message
+#: FPdfPassword.resx$$Message
 msgid "Password"
-msgstr ""
+msgstr "Parola"
 
 #: FProfiles.resx$ctxPaste.Text$Message
 #: FDesktop.resx$ctxPaste.Text$Message
 msgid "Paste"
-msgstr ""
+msgstr "Yapıştır"
 
 #: FPlaceholders.resx$$this.Text$Message
-#: FBatchScan.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
-msgstr ""
+msgstr "Yer tutucular"
 
 #: FAdvancedScanSettings.resx$groupBox4.Text$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "İleri İşleme"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr ""
+msgstr "Hazır olduğunda Başlat'a basın"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -947,48 +978,50 @@ msgid "Print"
 msgstr "Yazdır"
 
 #: FBatchScan.resx$lblProfile.Text$Message
-#, fuzzy
 msgid "Profile"
-msgstr "Profiller"
+msgstr "Profil"
 
 #: FEditProfile.resx$$this.Text$Message
+#: FEditProfile.resx$$Message
 msgid "Profile Settings"
 msgstr "Profil Ayarları"
 
 #: FDesktop.resx$tsProfiles.Text$Message
 #: FProfiles.resx$$this.Text$Message
+#: FProfiles.resx$$Message
 msgid "Profiles"
 msgstr "Profiller"
 
 #: FAutoSaveSettings.resx$cbPromptForFilePath.Text$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Dosya yolu için komut iste"
 
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
-msgstr ""
+msgstr "{0}. tarama için hazır"
 
 #: FRecover.resx$btnRecover.Text$Message
 msgid "Recover"
 msgstr "Kurtar"
 
 #: FRecover.resx$$this.Text$Message
+#: FRecover.resx$$Message
 msgid "Recover Scanned Images"
-msgstr "Taranmış İmajları Kurtar"
+msgstr "Taranmış Resimleri Kurtar"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering"
-msgstr ""
+msgstr "Kurtarılıyor"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr ""
+msgstr "Kurtarma Süreci"
 
-#: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
+#: FPdfSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
-msgstr ""
+msgstr "Bu ayarları anımsa"
 
 #: FDesktop.resx$tsdReorder.Text$Message
 msgid "Reorder"
@@ -1006,27 +1039,27 @@ msgstr "Resmi Sıfırla"
 msgid "Resolution"
 msgstr "Çözünürlük"
 
+#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
-#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Öntanımlıları Geri Yükle"
 
 #: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
 msgid "Retry on failure (WIA)"
-msgstr ""
+msgstr "Arızada yeniden dene (WIA)"
 
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr "Ters Çevir"
 
-#: FHueSaturation.resx$btnRevert.Text$Message
-#: FSharpen.resx$btnRevert.Text$Message
-#: FBrightnessContrast.resx$btnRevert.Text$Message
-#: FRotate.resx$btnRevert.Text$Message
-#: FCrop.resx$btnRevert.Text$Message
 #: FBlackWhite.resx$btnRevert.Text$Message
+#: FRotate.resx$btnRevert.Text$Message
+#: FSharpen.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
+#: FHueSaturation.resx$btnRevert.Text$Message
+#: FBrightnessContrast.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "Geri Al"
 
@@ -1037,6 +1070,7 @@ msgstr "Sağ"
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
+#: FRotate.resx$$Message
 msgid "Rotate"
 msgstr "Çevir"
 
@@ -1052,7 +1086,7 @@ msgstr "Sağa Çevir"
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
-msgstr ""
+msgstr "Resmi Kaydet"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1060,7 +1094,7 @@ msgstr "Resimleri Kaydet"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr ""
+msgstr "Resimleri Kaydetme Süreci"
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
@@ -1069,23 +1103,23 @@ msgstr "PDF Kaydet"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr ""
+msgstr "PDF Kaydetme Süreci"
 
 #: FBatchScan.resx$rdSaveToSingleFile.Text$Message
 msgid "Save to a single file"
-msgstr ""
+msgstr "Tek dosyaya kaydet"
 
 #: FBatchScan.resx$rdSaveToMultipleFiles.Text$Message
 msgid "Save to multiple files"
-msgstr ""
+msgstr "Çoklu dosyalara kaydet"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results"
-msgstr ""
+msgstr "Yığın sonuçları kaydediliyor"
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}"
-msgstr ""
+msgstr "{0} kaydediliyor"
 
 #: FEditProfile.resx$label10.Text$Message
 msgid "Scale"
@@ -1098,44 +1132,45 @@ msgstr "Pencereye Göre Ölçeklendir"
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
-#: MiscResources.resx$Scan$Message
 #: FProfiles.resx$ctxScan.Text$Message
+#: MiscResources.resx$Scan$Message
 msgid "Scan"
 msgstr "Tara"
 
 #: FBatchScan.resx$groupboxScanConfig.Text$Message
 msgid "Scan Configuration"
-msgstr ""
+msgstr "Tarama Yapılandırması"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
 msgstr "Taranmış Resim"
 
-#: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
+#: MiscResources.resx$ScanPageProgress$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
-msgstr ""
+msgstr "{0}. sayfa taranıyor"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})"
-msgstr ""
+msgstr "{0}. sayfa taranıyor ({1}. tarama)"
 
 #: FPlaceholders.resx$label9.Text$Message
 msgid "Second (00-59)"
-msgstr ""
+msgstr "Saniye (00-59)"
 
 #: FSelectDevice.resx$btnSelect.Text$Message
 msgid "Select"
-msgstr ""
+msgstr "Seç"
 
 #: FDesktop.resx$ctxSelectAll.Text$Message
 msgid "Select All"
 msgstr "Tümünü Seç"
 
 #: FSelectDevice.resx$$this.Text$Message
+#: FSelectDevice.resx$$Message
 msgid "Select Source"
-msgstr ""
+msgstr "Kaynağı Seç"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan"
@@ -1143,7 +1178,7 @@ msgstr "Tara ya tıklamadan önce bir profil seçiniz"
 
 #: FOcrLanguageDownload.resx$label3.Text$Message
 msgid "Select one or more languages"
-msgstr "Bir ya da daha fazla dil seçin"
+msgstr "Bir veya daha çok dil seçin"
 
 #: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsReverseSelected.Text$Message
@@ -1156,43 +1191,44 @@ msgstr "Seçilen ({0})"
 #: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T"
-msgstr ""
+msgstr "Dosyaları Patch-T'ye göre ayır"
 
 #: FProfiles.resx$ctxSetDefault.Text$Message
 msgid "Set Default"
 msgstr "Varsayılan Olarak Ata"
 
 #: FDesktop.resx$tsSharpen.Text$Message
-#: FViewer.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
+#: FViewer.resx$tsSharpen.Text$Message
+#: FSharpen.resx$$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Keskinleştir"
 
-#: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
+#: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 msgid "Show"
-msgstr ""
+msgstr "Göster"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
-msgstr ""
+msgstr "Tekli tarama"
 
 #: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
 msgid "Skip save prompt"
-msgstr ""
+msgstr "Kaydetme istemini atla"
 
 #: FBatchScan.resx$btnStart.Text$Message
 msgid "Start"
-msgstr ""
+msgstr "Başlat"
 
 #: FAdvancedScanSettings.resx$cbForcePageSize.Text$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Sayfa boyutuna ger"
 
 #: FPdfSettings.resx$label5.Text$Message
 msgid "Subject"
-msgstr ""
+msgstr "Konu"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1204,7 +1240,7 @@ msgstr "TWAIN Sürücüsü"
 
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "Teknik Ayrıntılar"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1218,7 +1254,7 @@ msgstr ""
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use"
-msgstr ""
+msgstr "Dosyanın üzerine yazılamaz çünkü şu anda kullanımda"
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -1226,19 +1262,19 @@ msgstr "{0} dosyası zaten mevcut. Üzerine yazmak ister misiniz?"
 
 #: FPdfPassword.resx$lblPrompt.Text$Message
 msgid "The following file is encrypted and requires a password to open: {0}"
-msgstr ""
+msgstr "Şu dosya şifrelenmiş ve açmak için parola gerekiyor: {0}"
 
 #: MiscResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam"
-msgstr ""
+msgstr "Tarayıcıda kağıt sıkışması var"
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up"
-msgstr ""
+msgstr "Tarayıcı ısınıyor"
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
-msgstr ""
+msgstr "Tarayıcının kapağı açık"
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1247,10 +1283,14 @@ msgstr "Seçilen tarayıcı bulunamadı"
 #: MiscResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
 msgstr ""
+"Seçilen tarayıcı, besleyici kullanmayı desteklemiyor. Eğer tarayıcınızın bir "
+"besleyicisi varsa başka bir sürücü kullanmayı deneyin"
 
 #: MiscResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
 msgstr ""
+"Seçilen tarayıcı, çift taraflı kullanımı desteklemiyor. Eğer tarayıcınız "
+"çift taraflı kullanımı destekliyorsa başka bir sürücü kullanmayı deneyin"
 
 #: MiscResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy"
@@ -1262,15 +1302,15 @@ msgstr "Seçilen tarayıcı çevrim dışı"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
-msgstr ""
+msgstr "Taramalar arası zaman (saniye)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
-msgstr ""
+msgstr "Başlık"
 
 #: FAdvancedScanSettings.resx$label1.Text$Message
 msgid "Twain Implementation"
-msgstr ""
+msgstr "Twain Uyarlaması"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1285,8 +1325,9 @@ msgid "Unsaved Changes"
 msgstr "Kaydedilmemiş Değişiklikler"
 
 #: FUpdate.resx$$this.Text$Message
+#: FUpdate.resx$$Message
 msgid "Update NAPS2"
-msgstr "NAPS2 'yi Güncelle"
+msgstr "NAPS2'yi Güncelle"
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1298,7 +1339,7 @@ msgstr "Ön tanımlı ayarları kullan"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
-msgstr ""
+msgstr "Kullanıcı Parolası"
 
 #: FOcrLanguageDownload.resx$label1.Text$Message
 msgid "Using OCR requires you to download each language you want to scan"
@@ -1323,11 +1364,11 @@ msgstr "Tamamlamak için TWAIN bekleniyor"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr ""
+msgstr "{0}. tarama için bekleniyor"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
-msgstr ""
+msgstr "Beyaz Eşiği"
 
 #: FPageSize.resx$labelX.Text$Message
 msgid "X"
@@ -1335,15 +1376,15 @@ msgstr "X"
 
 #: FPlaceholders.resx$label3.Text$Message
 msgid "Year"
-msgstr ""
+msgstr "Yıl"
 
 #: FPlaceholders.resx$label4.Text$Message
 msgid "Year (00-99)"
-msgstr ""
+msgstr "Yıl (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'"
-msgstr ""
+msgstr "'{0}' dosyasından içeriği kopyalamaya yetkiniz yok"
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location"
@@ -1381,7 +1422,7 @@ msgstr "http://www.fatcow.com/free-icons"
 
 #: FAbout.resx$linkLabel1.Text$Message
 msgid "http://www.naps2.com"
-msgstr ""
+msgstr "http://www.naps2.com"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1398,11 +1439,12 @@ msgstr " / {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
+#, fuzzy
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
@@ -1422,7 +1464,7 @@ msgstr ""
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved"
-msgstr ""
+msgstr "{0} resim kaydedildi"
 
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
