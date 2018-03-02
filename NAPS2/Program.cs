@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.DI.EntryPoints;
-using NAPS2.Host;
+using NAPS2.Worker;
 
 namespace NAPS2
 {
@@ -14,9 +14,9 @@ namespace NAPS2
         [STAThread]
         static void Main(string[] args)
         {
-            if (args.Contains(X86HostManager.HOST_ARG))
+            if (args.Contains(WorkerManager.WORKER_EXE_ARG))
             {
-                typeof(X86HostEntryPoint).GetMethod("Run").Invoke(null, new object[] {args});
+                typeof(WorkerEntryPoint).GetMethod("Run").Invoke(null, new object[] {args});
             }
             else
             {

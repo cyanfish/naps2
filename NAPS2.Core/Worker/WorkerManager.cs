@@ -10,23 +10,23 @@ namespace NAPS2.Worker
 {
     public static class WorkerManager
     {
-        public const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2_32/{0}/x86host";
-        public const string HOST_EXE_NAME = "NAPS2.exe";
-        public const string HOST_ARG = "/32BitHost";
+        public const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2/{0}/worker";
+        public const string WORKER_EXE_NAME = "NAPS2.exe";
+        public const string WORKER_EXE_ARG = "/32BitHost";
 
         public static Process StartHostProcess()
         {
             var dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            var hostProcessPath = Path.Combine(dir, HOST_EXE_NAME);
+            var workerProcessPath = Path.Combine(dir, WORKER_EXE_NAME);
             var proc = Process.Start(new ProcessStartInfo {
-                FileName = hostProcessPath,
-                Arguments = HOST_ARG,
+                FileName = workerProcessPath,
+                Arguments = WORKER_EXE_ARG,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
             });
             if (proc == null)
             {
-                throw new Exception("Could not start 32-bit host process");
+                throw new Exception("Could not start worker process");
             }
 
             try

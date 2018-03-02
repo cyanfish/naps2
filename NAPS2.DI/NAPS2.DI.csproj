@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryPoints\ConsoleEntryPoint.cs" />
-    <Compile Include="EntryPoints\X86HostEntryPoint.cs" />
+    <Compile Include="EntryPoints\WorkerEntryPoint.cs" />
     <Compile Include="Modules\CommonModule.cs" />
     <Compile Include="Modules\ConsoleModule.cs" />
     <Compile Include="Modules\WinFormsModule.cs" />
