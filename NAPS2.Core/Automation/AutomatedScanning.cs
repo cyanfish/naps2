@@ -43,7 +43,7 @@ namespace NAPS2.Automation
         private int pagesScanned;
         private int totalPagesScanned;
         private DateTime startTime;
-        private string actualOutputPath;
+        private List<string> actualOutputPaths;
 
         public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
         {
@@ -310,19 +310,24 @@ namespace NAPS2.Automation
             tempFolder.Create();
             try
             {
-                string attachmentName = fileNamePlaceholders.SubstitutePlaceholders(options.EmailFileName, startTime, false);
-                string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
+                string targetPath = Path.Combine(tempFolder.FullName, options.EmailFileName);
                 if (IsPdfFile(targetPath))
                 {
                     if (options.OutputPath != null && IsPdfFile(options.OutputPath))
                     {
                         // The scan has already been exported to PDF, so use that file
-                        OutputVerbose(ConsoleResources.AttachingExportedPDF, attachmentName);
-                        message.Attachments.Add(new EmailAttachment
+                        OutputVerbose(ConsoleResources.AttachingExportedPDF);
+                        int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
+                        int i = 0;
+                        foreach (var path in actualOutputPaths)
                         {
-                            FilePath = actualOutputPath,
-                            AttachmentName = attachmentName
-                        });
+                            string attachmentName = fileNamePlaceholders.SubstitutePlaceholders(options.EmailFileName, startTime, false, i++, scanList.Count > 1 ? digits : 0);
+                            message.Attachments.Add(new EmailAttachment
+                            {
+                                FilePath = path,
+                                AttachmentName = attachmentName
+                            });
+                        }
                     }
                     else
                     {
@@ -451,12 +456,8 @@ namespace NAPS2.Automation
 
         private void ExportToPdf()
         {
-            // Get a local copy of the path just for output
-            actualOutputPath = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
-            if (DoExportToPdf(options.OutputPath, false))
-            {
-                OutputVerbose(ConsoleResources.SuccessfullySavedPdf, actualOutputPath);
-            }
+            actualOutputPaths = new List<string>();
+            DoExportToPdf(options.OutputPath, false);
         }
 
         private bool DoExportToPdf(string path, bool email)
@@ -503,6 +504,7 @@ namespace NAPS2.Automation
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr || appConfigManager.Config.OcrState == OcrState.Enabled);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrDependencyManager.DefaultLanguageCode) : null;
 
+            int scanIndex = 0;
             foreach (var fileContents in scanList)
             {
                 var op = operationFactory.Create<SavePdfOperation>();
@@ -515,11 +517,18 @@ namespace NAPS2.Automation
                         i = op.Status.CurrentProgress;
                     }
                 };
-                op.Start(path, startTime, fileContents, pdfSettings, ocrLanguageCode, email);
+                int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
+                string actualPath = fileNamePlaceholders.SubstitutePlaceholders(path, startTime, true, scanIndex++, scanList.Count > 1 ? digits : 0);
+                op.Start(actualPath, startTime, fileContents, pdfSettings, ocrLanguageCode, email);
                 op.WaitUntilFinished();
                 if (!op.Status.Success)
                 {
                     return false;
+                }
+                actualOutputPaths.Add(actualPath);
+                if (!email)
+                {
+                    OutputVerbose(ConsoleResources.SuccessfullySavedPdf, actualPath);
                 }
             }
             return true;
