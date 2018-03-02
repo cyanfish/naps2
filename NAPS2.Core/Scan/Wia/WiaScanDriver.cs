@@ -109,7 +109,7 @@ namespace NAPS2.Scan.Wia
             try
             {
                 var transfer = ScanParams.NoUI ? backgroundWiaTransfer : foregroundWiaTransfer;
-                ChaosMonkey.MaybeError(0.5, new COMException("Fail", -2147467259));
+                ChaosMonkey.MaybeError(0, new COMException("Fail", -2147467259));
                 using (var stream = transfer.Transfer(pageNumber, eventLoop, WiaApi.Formats.BMP))
                 {
                     if (stream == null)
