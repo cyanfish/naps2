@@ -55,7 +55,7 @@ namespace NAPS2.ImportExport
                 {
                     Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
                     InvokeStatusChanged();
-                    var images = scannedImageImporter.Import(fileName, (i, j) =>
+                    var images = scannedImageImporter.Import(fileName, Slice.Default, (i, j) =>
                     {
                         if (oneFile)
                         {

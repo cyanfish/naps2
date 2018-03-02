@@ -265,7 +265,8 @@ namespace NAPS2.Automation
                 i++;
                 try
                 {
-                    var images = scannedImageImporter.Import(filePath, (j, k) => true).ToList();
+                    var slice = Slice.Parse(filePath, out string actualPath);
+                    var images = scannedImageImporter.Import(actualPath, slice, (j, k) => true).ToList();
                     scanList.Add(images);
                 }
                 catch (Exception ex)

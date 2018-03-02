@@ -34,7 +34,7 @@ namespace NAPS2.ImportExport.Pdf
             this.pdfRenderer = pdfRenderer;
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
+        public IEnumerable<ScannedImage> Import(string filePath, Slice slice, Func<int, int, bool> progressCallback)
         {
             if (!progressCallback(0, 0))
             {
@@ -63,10 +63,16 @@ namespace NAPS2.ImportExport.Pdf
                 if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                 {
                     pdfRenderer.ThrowIfCantRender();
-                    return document.Pages.Cast<PdfPage>().TakeWhile(page => progressCallback(i++, document.PageCount)).Select(ExportRawPdfPage);
+                    return slice.Indices(document.PageCount)
+                                .Select(index => document.Pages[index])
+                                .TakeWhile(page => progressCallback(i++, document.PageCount))
+                                .Select(ExportRawPdfPage);
                 }
 
-                return document.Pages.Cast<PdfPage>().TakeWhile(page => progressCallback(i++, document.PageCount)).SelectMany(GetImagesFromPage);
+                return slice.Indices(document.PageCount)
+                            .Select(index => document.Pages[index])
+                            .TakeWhile(page => progressCallback(i++, document.PageCount))
+                            .SelectMany(GetImagesFromPage);
             }
             catch (ImageRenderException e)
             {

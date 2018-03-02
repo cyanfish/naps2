@@ -15,7 +15,7 @@ namespace NAPS2.Automation
         public string OutputPath { get; set; }
 
         [Option('a', "autosave", HelpText = "Use the Auto Save settings from the selected profile." +
-                                          " Only works if the profile has Auto Save enabled.")]
+                                            " Only works if the profile has Auto Save enabled.")]
         public bool AutoSave { get; set; }
 
         [Option("install", HelpText = "Use this option to download and install optional components (e.g. \"ocr-eng\", \"generic-import\").")]
@@ -27,7 +27,8 @@ namespace NAPS2.Automation
 
         [Option('i', "import", HelpText = "The name and path of one or more pdf/image files to import." +
                                           " Imported files are prepended to the output in the order they are specified." +
-                                          " Multiple files are separated by a semicolon (\";\").")]
+                                          " Multiple files are separated by a semicolon (\";\")." +
+                                          " Slice notation can be used to only import some pages (e.g. \"[0]\" for the first page or \"[:2]\" for the first two pages).")]
         public string ImportPath { get; set; }
 
         [Option("importpassword", HelpText = "The password to use to import one or more encrypted PDF files.")]
@@ -53,7 +54,7 @@ namespace NAPS2.Automation
         #endregion
 
         #region Order Options
-        
+
         [Option("interleave", HelpText = "Interleave pages before saving.")]
         public bool Interleave { get; set; }
 
@@ -133,12 +134,12 @@ namespace NAPS2.Automation
         public string EmailFileName { get; set; }
 
         [Option("subject", HelpText = "The email message's subject." +
-            //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
+                                      //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
                                       " Requires -e/--email.")]
         public string EmailSubject { get; set; }
 
         [Option("body", HelpText = "The email message's body text." +
-            //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
+                                   //" You can use \"<date>\" and/or \"<time>\" to insert the date/time of the scan." +
                                    " Requires -e/--email.")]
         public string EmailBody { get; set; }
 

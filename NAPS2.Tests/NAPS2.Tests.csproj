@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Base\BasePdfExporterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\SliceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="in\test.1p.in.pdf">
@@ -84,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Integration\" />
-    <Folder Include="Unit\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Core\NAPS2.Core.csproj">

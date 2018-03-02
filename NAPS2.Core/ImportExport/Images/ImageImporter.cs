@@ -18,7 +18,7 @@ namespace NAPS2.ImportExport.Images
             this.thumbnailRenderer = thumbnailRenderer;
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, Func<int, int, bool> progressCallback)
+        public IEnumerable<ScannedImage> Import(string filePath, Slice slice, Func<int, int, bool> progressCallback)
         {
             if (!progressCallback(0, 1))
             {
@@ -38,13 +38,14 @@ namespace NAPS2.ImportExport.Images
             using (toImport)
             {
                 int frameCount = toImport.GetFrameCount(FrameDimension.Page);
-                for (int i = 0; i < frameCount; ++i)
+                int i = 0;
+                foreach(var frameIndex in slice.Indices(frameCount))
                 {
-                    if (!progressCallback(i, frameCount))
+                    if (!progressCallback(i++, frameCount))
                     {
                         yield break;
                     }
-                    toImport.SelectActiveFrame(FrameDimension.Page, i);
+                    toImport.SelectActiveFrame(FrameDimension.Page, frameIndex);
                     var image = new ScannedImage(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
                     image.SetThumbnail(thumbnailRenderer.RenderThumbnail(toImport));
                     yield return image;
