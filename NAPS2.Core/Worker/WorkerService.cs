@@ -22,6 +22,11 @@ namespace NAPS2.Worker
             this.twainWrapper = twainWrapper;
         }
 
+        public void Init()
+        {
+            OperationContext.Current.Channel.Closed += (sender, args) => Application.Exit();
+        }
+
         public void SetRecoveryFolder(string path)
         {
             RecoveryImage.RecoveryFolder = new DirectoryInfo(path);
@@ -36,6 +41,10 @@ namespace NAPS2.Worker
         {
             RecoveryImage.RecoveryFileNumber = recoveryFileNumber;
             return twainWrapper.Scan(ParentForm, true, scanDevice, scanProfile, scanParams).Select(x => x.RecoveryIndexImage).ToList();
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

@@ -8,8 +8,11 @@ using NAPS2.Scan;
 namespace NAPS2.Worker
 {
     [ServiceContract]
-    public interface IWorkerService
+    public interface IWorkerService : IDisposable
     {
+        [OperationContract]
+        void Init();
+
         [OperationContract]
         void SetRecoveryFolder(string path);
 

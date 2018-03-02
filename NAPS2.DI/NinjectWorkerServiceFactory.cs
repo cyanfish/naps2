@@ -17,7 +17,9 @@ namespace NAPS2.DI
 
         public IWorkerService Create()
         {
-            return kernel.Get<IWorkerService>();
+            var service = kernel.Get<IWorkerService>();
+            service.Init();
+            return service;
         }
     }
 }

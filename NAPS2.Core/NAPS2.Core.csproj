@@ -116,6 +116,7 @@
     <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Worker\WorkerServiceExtensions.cs" />
     <Compile Include="Worker\WorkerService.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>

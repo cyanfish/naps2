@@ -61,7 +61,10 @@ namespace NAPS2.Scan.Twain
             var twainImpl = ScanProfile != null ? ScanProfile.TwainImpl : TwainImpl.Default;
             if (UseWorker)
             {
-                return workerServiceFactory.Create().TwainGetDeviceList(twainImpl);
+                using(var service = workerServiceFactory.Create())
+                {
+                    return service.TwainGetDeviceList(twainImpl);
+                }
             }
             return twainWrapper.GetDeviceList(twainImpl);
         }
@@ -72,11 +75,13 @@ namespace NAPS2.Scan.Twain
             {
                 return RunInForm(formFactory.Create<FTwainGui>(), () =>
                 {
-                    var service = workerServiceFactory.Create();
-                    service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
-                    return service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
-                        .Select(x => new ScannedImage(x))
-                        .ToList();
+                    using (var service = workerServiceFactory.Create())
+                    {
+                        service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
+                        return service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
+                            .Select(x => new ScannedImage(x))
+                            .ToList();
+                    }
                 });
             }
             return twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams);

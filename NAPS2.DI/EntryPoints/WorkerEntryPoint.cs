@@ -17,6 +17,10 @@ namespace NAPS2.DI.EntryPoints
         {
             try
             {
+#if DEBUG && false
+                Debugger.Launch();
+#endif
+
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
                 var workerService = kernel.Get<WorkerService>();
 
