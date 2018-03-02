@@ -16,6 +16,11 @@ namespace NAPS2.Scan.Images
             Images = new List<ScannedImage>();
         }
 
+        public ScannedImageList(List<ScannedImage> images)
+        {
+            Images = images;
+        }
+
         public ThumbnailRenderer ThumbnailRenderer { get; set; }
 
         public List<ScannedImage> Images { get; }

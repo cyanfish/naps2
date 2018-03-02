@@ -39,7 +39,7 @@ namespace NAPS2.Automation
         private readonly IFormFactory formFactory;
 
         private readonly AutomatedScanningOptions options;
-        private ScannedImageList imageList;
+        private List<List<ScannedImage>> scanList;
         private int pagesScanned;
         private int totalPagesScanned;
         private DateTime startTime;
@@ -62,6 +62,8 @@ namespace NAPS2.Automation
             this.ocrDependencyManager = ocrDependencyManager;
             this.formFactory = formFactory;
         }
+
+        public IEnumerable<ScannedImage> AllImages => scanList.SelectMany(x => x);
 
         private void OutputVerbose(string value, params object[] args)
         {
@@ -96,8 +98,8 @@ namespace NAPS2.Automation
                 {
                     return;
                 }
-
-                imageList = new ScannedImageList();
+                
+                scanList = new List<List<ScannedImage>>();
 
                 if (options.ImportPath != null)
                 {
@@ -127,12 +129,10 @@ namespace NAPS2.Automation
                     EmailScannedImages();
                 }
 
-                foreach (var image in imageList.Images)
+                foreach (var image in AllImages)
                 {
                     image.Dispose();
                 }
-
-                imageList = null;
             }
             catch (Exception ex)
             {
@@ -197,28 +197,38 @@ namespace NAPS2.Automation
         
         private void ReorderScannedImages()
         {
-            var e = new List<int>();
+            var sep = options.SplitPatchT ? SaveSeparator.PatchT
+                : options.SplitScans ? SaveSeparator.FilePerScan
+                    : options.SplitSize > 0 || options.Split ? SaveSeparator.FilePerPage
+                        : SaveSeparator.None;
+            scanList = SaveSeparatorHelper.SeparateScans(scanList, sep, options.SplitSize).Where(x => x.Count > 0).ToList();
 
-            if (options.AltDeinterleave)
+            foreach (var scan in scanList)
             {
-                imageList.AltDeinterleave(e);
-            }
-            else if (options.Deinterleave)
-            {
-                imageList.Deinterleave(e);
-            }
-            else if (options.AltInterleave)
-            {
-                imageList.AltInterleave(e);
-            }
-            else if (options.Interleave)
-            {
-                imageList.Interleave(e);
-            }
+                var imageList = new ScannedImageList(scan);
+                var e = new List<int>();
 
-            if (options.Reverse)
-            {
-                imageList.Reverse(e);
+                if (options.AltDeinterleave)
+                {
+                    imageList.AltDeinterleave(e);
+                }
+                else if (options.Deinterleave)
+                {
+                    imageList.Deinterleave(e);
+                }
+                else if (options.AltInterleave)
+                {
+                    imageList.AltInterleave(e);
+                }
+                else if (options.Interleave)
+                {
+                    imageList.Interleave(e);
+                }
+
+                if (options.Reverse)
+                {
+                    imageList.Reverse(e);
+                }
             }
         }
 
@@ -250,11 +260,13 @@ namespace NAPS2.Automation
             int i = 0;
             foreach (var filePath in filePaths)
             {
+                // TODO: Recognize and apply slices. Also, enhance the importer so unused pages aren't loaded at all.
+                // Perhaps create a Slice util class to encapsulate the logic, and allow it to be passed in.
                 i++;
                 try
                 {
-                    var images = scannedImageImporter.Import(filePath, (j, k) => true);
-                    imageList.Images.AddRange(images);
+                    var images = scannedImageImporter.Import(filePath, (j, k) => true).ToList();
+                    scanList.Add(images);
                 }
                 catch (Exception ex)
                 {
@@ -268,7 +280,7 @@ namespace NAPS2.Automation
 
         private void EmailScannedImages()
         {
-            if (imageList.Images.Count == 0)
+            if (scanList.Count == 0)
             {
                 errorOutput.DisplayError(ConsoleResources.NoPagesToEmail);
                 return;
@@ -378,7 +390,7 @@ namespace NAPS2.Automation
 
         private void ExportScannedImages()
         {
-            if (imageList.Images.Count == 0)
+            if (scanList.Count == 0)
             {
                 errorOutput.DisplayError(ConsoleResources.NoPagesToExport);
                 return;
@@ -414,18 +426,22 @@ namespace NAPS2.Automation
         {
             // TODO: If I add new image settings this may break things
             imageSettingsContainer.ImageSettings = new ImageSettings { JpegQuality = options.JpegQuality };
-            var op = operationFactory.Create<SaveImagesOperation>();
-            int i = -1;
-            op.StatusChanged += (sender, args) =>
+
+            foreach (var scan in scanList)
             {
-                if (op.Status.CurrentProgress > i)
+                var op = operationFactory.Create<SaveImagesOperation>();
+                int i = -1;
+                op.StatusChanged += (sender, args) =>
                 {
-                    OutputVerbose(ConsoleResources.ExportingImage, op.Status.CurrentProgress + 1, imageList.Images.Count);
-                    i = op.Status.CurrentProgress;
-                }
-            };
-            op.Start(outputPath, startTime, imageList.Images);
-            op.WaitUntilFinished();
+                    if (op.Status.CurrentProgress > i)
+                    {
+                        OutputVerbose(ConsoleResources.ExportingImage, op.Status.CurrentProgress + 1, scan.Count);
+                        i = op.Status.CurrentProgress;
+                    }
+                };
+                op.Start(outputPath, startTime, scan);
+                op.WaitUntilFinished();
+            }
         }
 
         private void ExportToPdf()
@@ -482,19 +498,26 @@ namespace NAPS2.Automation
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr || appConfigManager.Config.OcrState == OcrState.Enabled);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrDependencyManager.DefaultLanguageCode) : null;
 
-            var op = operationFactory.Create<SavePdfOperation>();
-            int i = -1;
-            op.StatusChanged += (sender, args) =>
+            foreach (var fileContents in scanList)
             {
-                if (op.Status.CurrentProgress > i)
+                var op = operationFactory.Create<SavePdfOperation>();
+                int i = -1;
+                op.StatusChanged += (sender, args) =>
                 {
-                    OutputVerbose(ConsoleResources.ExportingPage, op.Status.CurrentProgress + 1, imageList.Images.Count);
-                    i = op.Status.CurrentProgress;
+                    if (op.Status.CurrentProgress > i)
+                    {
+                        OutputVerbose(ConsoleResources.ExportingPage, op.Status.CurrentProgress + 1, fileContents.Count);
+                        i = op.Status.CurrentProgress;
+                    }
+                };
+                op.Start(path, startTime, fileContents, pdfSettings, ocrLanguageCode, email);
+                op.WaitUntilFinished();
+                if (!op.Status.Success)
+                {
+                    return false;
                 }
-            };
-            op.Start(path, startTime, imageList.Images, pdfSettings, ocrLanguageCode, email);
-            op.WaitUntilFinished();
-            return op.Status.Success;
+            }
+            return true;
         }
 
         private void PerformScan(ScanProfile profile)
@@ -522,7 +545,8 @@ namespace NAPS2.Automation
                 }
                 OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
                 pagesScanned = 0;
-                scanPerformer.PerformScan(profile, new ScanParams { NoUI = true, NoAutoSave = !options.AutoSave }, parentWindow, null, ReceiveScannedImage);
+                scanList.Add(new List<ScannedImage>());
+                scanPerformer.PerformScan(profile, new ScanParams { NoUI = true, NoAutoSave = !options.AutoSave, DetectPatchCodes = options.SplitPatchT }, parentWindow, null, ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }
@@ -558,7 +582,7 @@ namespace NAPS2.Automation
 
         public void ReceiveScannedImage(ScannedImage scannedImage)
         {
-            imageList.Images.Add(scannedImage);
+            scanList.Last().Add(scannedImage);
             pagesScanned++;
             totalPagesScanned++;
             OutputVerbose(ConsoleResources.ScannedPage, totalPagesScanned);

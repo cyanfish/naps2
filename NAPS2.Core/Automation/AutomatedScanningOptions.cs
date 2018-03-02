@@ -71,6 +71,22 @@ namespace NAPS2.Automation
 
         #endregion
 
+        #region Split Options
+
+        [Option("split", HelpText = "Split the pages into individual PDF/TIFF files.")]
+        public bool Split { get; set; }
+
+        [Option("splitscans", HelpText = "Split the pages into multiple PDF/TIFF files, one for each scan.")]
+        public bool SplitScans { get; set; }
+
+        [Option("splitpatcht", HelpText = "Split the pages into multiple PDF/TIFF files, separating by Patch-T.")]
+        public bool SplitPatchT { get; set; }
+
+        [Option("splitsize", HelpText = "Split the pages into multiple PDF/TIFF files with the given number of pages per file.")]
+        public int SplitSize { get; set; }
+
+        #endregion
+
         #region PDF Options
 
         [Option("pdftitle", HelpText = "The title for generated PDF metadata.")]
