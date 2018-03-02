@@ -8,6 +8,6 @@ namespace NAPS2.ImportExport
 {
     public interface IScannedImageImporter
     {
-        IEnumerable<ScannedImage> Import(string filePath, Slice slice, Func<int, int, bool> progressCallback);
+        IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, Func<int, int, bool> progressCallback);
     }
 }

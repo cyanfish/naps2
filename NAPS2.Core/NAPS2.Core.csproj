@@ -128,6 +128,7 @@
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\ImageRenderException.cs" />
+    <Compile Include="ImportExport\ImportParams.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptPdfRenderer.cs" />
     <Compile Include="Dependencies\IComponentInstallPrompt.cs" />
     <Compile Include="ImportExport\Pdf\IPdfRenderer.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Scan\Images\Transforms\SharpenTransform.cs" />
     <Compile Include="Scan\Images\Transforms\TrueContrastTransform.cs" />
     <Compile Include="Scan\PatchCode.cs" />
+    <Compile Include="Scan\PatchCodeDetector.cs" />
     <Compile Include="Scan\ProfileNameTracker.cs" />
     <Compile Include="Scan\ScanParams.cs" />
     <Compile Include="Scan\Twain\Legacy\DibUtils.cs" />

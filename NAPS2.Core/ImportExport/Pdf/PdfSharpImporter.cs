@@ -34,7 +34,7 @@ namespace NAPS2.ImportExport.Pdf
             this.pdfRenderer = pdfRenderer;
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, Slice slice, Func<int, int, bool> progressCallback)
+        public IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, Func<int, int, bool> progressCallback)
         {
             if (!progressCallback(0, 0))
             {
@@ -63,16 +63,16 @@ namespace NAPS2.ImportExport.Pdf
                 if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                 {
                     pdfRenderer.ThrowIfCantRender();
-                    return slice.Indices(document.PageCount)
-                                .Select(index => document.Pages[index])
-                                .TakeWhile(page => progressCallback(i++, document.PageCount))
-                                .Select(ExportRawPdfPage);
+                    return importParams.Slice.Indices(document.PageCount)
+                                             .Select(index => document.Pages[index])
+                                             .TakeWhile(page => progressCallback(i++, document.PageCount))
+                                             .Select(page => ExportRawPdfPage(page, importParams));
                 }
 
-                return slice.Indices(document.PageCount)
-                            .Select(index => document.Pages[index])
-                            .TakeWhile(page => progressCallback(i++, document.PageCount))
-                            .SelectMany(GetImagesFromPage);
+                return importParams.Slice.Indices(document.PageCount)
+                                         .Select(index => document.Pages[index])
+                                         .TakeWhile(page => progressCallback(i++, document.PageCount))
+                                         .SelectMany(page => GetImagesFromPage(page, importParams));
             }
             catch (ImageRenderException e)
             {
@@ -90,12 +90,12 @@ namespace NAPS2.ImportExport.Pdf
                 return Enumerable.Empty<ScannedImage>();
             }
         }
-
-        private IEnumerable<ScannedImage> GetImagesFromPage(PdfPage page)
+        
+        private IEnumerable<ScannedImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
         {
             if (page.CustomValues.Elements.ContainsKey("/NAPS2ImportedPage"))
             {
-                yield return ExportRawPdfPage(page);
+                yield return ExportRawPdfPage(page, importParams);
                 yield break;
             }
 
@@ -124,20 +124,20 @@ namespace NAPS2.ImportExport.Pdf
                     if (elementAsArray != null)
                     {
                         // JPEG ["/DCTDecode", "/FlateDecode"]
-                        yield return ExportJpegImage(page, Filtering.Decode(xObject.Stream.Value, "/FlateDecode"));
+                        yield return ExportJpegImage(page, Filtering.Decode(xObject.Stream.Value, "/FlateDecode"), importParams);
                     }
                     else if (elementAsName != null)
                     {
                         switch (elementAsName.Value)
                         {
                             case "/DCTDecode":
-                                yield return ExportJpegImage(page, xObject.Stream.Value);
+                                yield return ExportJpegImage(page, xObject.Stream.Value, importParams);
                                 break;
                             case "/FlateDecode":
-                                yield return ExportAsPngImage(page, xObject);
+                                yield return ExportAsPngImage(page, xObject, importParams);
                                 break;
                             case "/CCITTFaxDecode":
-                                yield return ExportG4(page, xObject);
+                                yield return ExportG4(page, xObject, importParams);
                                 break;
                             default:
                                 throw new NotImplementedException("Unsupported image encoding");
@@ -151,7 +151,7 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
 
-        private ScannedImage ExportRawPdfPage(PdfPage page)
+        private ScannedImage ExportRawPdfPage(PdfPage page, ImportParams importParams)
         {
             string pdfPath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             var document = new PdfDocument();
@@ -162,11 +162,15 @@ namespace NAPS2.ImportExport.Pdf
             using (var bitmap = scannedImageRenderer.Render(image))
             {
                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                if (importParams.DetectPatchCodes)
+                {
+                    image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                }
             }
             return image;
         }
 
-        private ScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes)
+        private ScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes, ImportParams importParams)
         {
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using (var memoryStream = new MemoryStream(imageBytes))
@@ -176,12 +180,16 @@ namespace NAPS2.ImportExport.Pdf
                     bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
                     var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
                     image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                    if (importParams.DetectPatchCodes)
+                    {
+                        image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                    }
                     return image;
                 }
             }
         }
 
-        private ScannedImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject)
+        private ScannedImage ExportAsPngImage(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
         {
             int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
             int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
@@ -212,6 +220,10 @@ namespace NAPS2.ImportExport.Pdf
                 bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
                 var image = new ScannedImage(bitmap, bitDepth, true, -1);
                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                if (importParams.DetectPatchCodes)
+                {
+                    image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                }
                 return image;
             }
         }
@@ -271,7 +283,7 @@ namespace NAPS2.ImportExport.Pdf
         private static readonly byte[] TiffBeforeRealLen = { 0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00 };
         private static readonly byte[] TiffTrailer = { 0x00, 0x00, 0x00, 0x00 };
 
-        private ScannedImage ExportG4(PdfPage page, PdfDictionary imageObject)
+        private ScannedImage ExportG4(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
         {
             int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
             int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
@@ -315,6 +327,10 @@ namespace NAPS2.ImportExport.Pdf
 
                 var image = new ScannedImage(bitmap, ScanBitDepth.BlackWhite, true, -1);
                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                if (importParams.DetectPatchCodes)
+                {
+                    image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                }
                 return image;
             }
         }
