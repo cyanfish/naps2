@@ -10,17 +10,39 @@ namespace NAPS2.Worker
 {
     public static class WorkerManager
     {
-        public const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2/{0}/worker";
-        public const string WORKER_EXE_NAME = "NAPS2.exe";
-        public const string WORKER_EXE_ARG = "/32BitHost";
+        public const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2.Worker/{0}";
+        public const string WORKER_EXE_NAME = "NAPS2.Worker.exe";
+        public static readonly string[] SearchDirs =
+        {
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+            Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
+        };
+
+        private static string _workerExePath;
+
+        public static string WorkerExePath
+        {
+            get
+            {
+                if (_workerExePath == null)
+                {
+                    foreach (var dir in SearchDirs)
+                    {
+                        _workerExePath = Path.Combine(dir, WORKER_EXE_NAME);
+                        if (File.Exists(WorkerExePath))
+                        {
+                            break;
+                        }
+                    }
+                }
+                return _workerExePath;
+            }
+        }
 
         public static Process StartHostProcess()
         {
-            var dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            var workerProcessPath = Path.Combine(dir, WORKER_EXE_NAME);
             var proc = Process.Start(new ProcessStartInfo {
-                FileName = workerProcessPath,
-                Arguments = WORKER_EXE_ARG,
+                FileName = WorkerExePath,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
             });

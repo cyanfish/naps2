@@ -22,6 +22,7 @@
     <Feature Id="MainApplication" Title="NAPS2" Level="1">
       <ComponentRef Id="Exec" />
       <ComponentRef Id="Deps" />
+      <ComponentRef Id="Deps64" />
       <ComponentRef Id="twaindsm" />
       <ComponentRef Id="wiaaut" />
       <ComponentRef Id="ApplicationShortcut" />
@@ -32,7 +33,9 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLFOLDER" Name="NAPS2">
-          <Directory Id="LIBFOLDER" Name="lib" />
+          <Directory Id="LIBFOLDER" Name="lib">
+            <Directory Id="LIB64FOLDER" Name="64" />
+          </Directory>
         </Directory>
       </Directory>
       <Directory Id="ProgramMenuFolder">
@@ -90,6 +93,13 @@
         <File Source="..\NAPS2\bin\InstallerMSI\Ghostscript.NET.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\System.ValueTuple.dll" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\CommandLine.dll" />
+      </Component>
+    </DirectoryRef>
+    
+    <DirectoryRef Id="LIB64FOLDER">
+      <Component Id="Deps64" Guid="247ECEC0-290D-490D-B942-7239870AAF7D">
+        <!-- Dependencies -->
+        <File Source="..\NAPS2\Setup\lib\64\twaindsm.dll" Id="twaindsm64" />
       </Component>
     </DirectoryRef>
     

@@ -18,16 +18,16 @@ namespace NAPS2.DI.EntryPoints
             try
             {
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
-                var hostService = kernel.Get<WorkerService>();
+                var workerService = kernel.Get<WorkerService>();
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
                 string pipeName = string.Format(WorkerManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
                 var form = new BackgroundForm();
-                hostService.ParentForm = form;
+                workerService.ParentForm = form;
 
-                using (var host = new ServiceHost(hostService))
+                using (var host = new ServiceHost(workerService))
                 {
                     host.AddServiceEndpoint(typeof (IWorkerService),
                         new NetNamedPipeBinding {ReceiveTimeout = TimeSpan.FromHours(24), SendTimeout = TimeSpan.FromHours(24)}, pipeName);
@@ -39,7 +39,7 @@ namespace NAPS2.DI.EntryPoints
             catch (Exception ex)
             {
                 Console.Write('k');
-                Log.FatalException("An error occurred that caused the 32-bit host application to close.", ex);
+                Log.FatalException("An error occurred that caused the worker application to close.", ex);
                 Environment.Exit(1);
             }
         }

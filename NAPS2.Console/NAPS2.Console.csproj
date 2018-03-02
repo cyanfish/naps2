@@ -90,6 +90,10 @@
       <Project>{4d349529-149b-498b-8a55-373e6a67e1f0}</Project>
       <Name>NAPS2.DI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NAPS2_64\NAPS2.Worker.csproj">
+      <Project>{ba9a65a0-00fe-4bf4-a023-7d804817453f}</Project>
+      <Name>NAPS2.Worker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

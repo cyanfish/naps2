@@ -27,7 +27,6 @@ namespace NAPS2.Scan.Twain
 
         static TwainWrapper()
         {
-#if STANDALONE
             // Path to the folder containing the 64-bit twaindsm.dll relative to NAPS2.Core.dll
             const string lib64Dir = "64";
             if (Environment.Is64BitProcess)
@@ -39,7 +38,6 @@ namespace NAPS2.Scan.Twain
                     Win32.SetDllDirectory(System.IO.Path.Combine(coreDllDir, lib64Dir));
                 }
             }
-#endif
 #if DEBUG
             PlatformInfo.Current.Log.IsDebugEnabled = true;
 #endif

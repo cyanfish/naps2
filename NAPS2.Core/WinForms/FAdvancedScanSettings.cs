@@ -22,10 +22,7 @@ namespace NAPS2.WinForms
             cmbTwainImpl.Items.Add(TwainImpl.MemXfer);
             cmbTwainImpl.Items.Add(TwainImpl.OldDsm);
             cmbTwainImpl.Items.Add(TwainImpl.Legacy);
-            if (Environment.Is64BitProcess)
-            {
-                cmbTwainImpl.Items.Add(TwainImpl.X64);
-            }
+            cmbTwainImpl.Items.Add(TwainImpl.X64);
         }
 
         protected override void OnLoad(object sender, EventArgs e)
@@ -55,10 +52,7 @@ namespace NAPS2.WinForms
             cbForcePageSize.Checked = scanProfile.ForcePageSize;
             cbForcePageSizeCrop.Checked = scanProfile.ForcePageSizeCrop;
             cbFlipDuplex.Checked = scanProfile.FlipDuplexedPages;
-            if (scanProfile.TwainImpl != TwainImpl.X64 || Environment.Is64BitProcess)
-            {
-                cmbTwainImpl.SelectedIndex = (int) scanProfile.TwainImpl;
-            }
+            cmbTwainImpl.SelectedIndex = (int) scanProfile.TwainImpl;
             cbExcludeBlankPages.Checked = scanProfile.ExcludeBlankPages;
             tbWhiteThreshold.Value = scanProfile.BlankPageWhiteThreshold;
             txtWhiteThreshold.Text = scanProfile.BlankPageWhiteThreshold.ToString("G");

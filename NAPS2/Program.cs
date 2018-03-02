@@ -14,14 +14,7 @@ namespace NAPS2
         [STAThread]
         static void Main(string[] args)
         {
-            if (args.Contains(WorkerManager.WORKER_EXE_ARG))
-            {
-                typeof(WorkerEntryPoint).GetMethod("Run").Invoke(null, new object[] {args});
-            }
-            else
-            {
-                typeof(WinFormsEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
-            }
+            typeof(WinFormsEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
         }
     }
 }
