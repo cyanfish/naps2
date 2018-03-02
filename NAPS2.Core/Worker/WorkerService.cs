@@ -8,16 +8,16 @@ using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 
-namespace NAPS2.Host
+namespace NAPS2.Worker
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
-    public class X86HostService : IX86HostService
+    public class WorkerService : IWorkerService
     {
         private readonly TwainWrapper twainWrapper;
 
         public Form ParentForm { get; set; }
 
-        public X86HostService(TwainWrapper twainWrapper)
+        public WorkerService(TwainWrapper twainWrapper)
         {
             this.twainWrapper = twainWrapper;
         }

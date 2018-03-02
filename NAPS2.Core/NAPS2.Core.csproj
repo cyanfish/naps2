@@ -113,10 +113,10 @@
     <Compile Include="Config\KeyboardShortcuts.cs" />
     <Compile Include="Config\OcrState.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
-    <Compile Include="Host\BackgroundForm.cs">
+    <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Host\X86HostService.cs" />
+    <Compile Include="Worker\WorkerService.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -211,9 +211,9 @@
     </Compile>
     <Compile Include="Util\ConditionalControls.cs" />
     <Compile Include="Operation\IOperation.cs" />
-    <Compile Include="Host\IX86HostServiceFactory.cs" />
+    <Compile Include="Worker\IWorkerServiceFactory.cs" />
     <Compile Include="Util\IOverwritePrompt.cs" />
-    <Compile Include="Host\IX86HostService.cs" />
+    <Compile Include="Worker\IWorkerService.cs" />
     <Compile Include="Util\ISaveNotify.cs" />
     <Compile Include="Util\Lifecycle.cs" />
     <Compile Include="Util\Log.cs" />
@@ -309,7 +309,7 @@
     <Compile Include="Util\PathHelper.cs" />
     <Compile Include="Util\Pipeline.cs" />
     <Compile Include="Util\Pipes.cs" />
-    <Compile Include="Host\ProcessJob.cs" />
+    <Compile Include="Worker\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />
     <Compile Include="Util\KeyboardShortcutManager.cs" />
     <Compile Include="Util\Slice.cs" />
@@ -319,7 +319,7 @@
     <Compile Include="Util\Unmanaged.cs" />
     <Compile Include="Util\UnmanagedArray.cs" />
     <Compile Include="Util\UnmanagedBase.cs" />
-    <Compile Include="Host\X86HostManager.cs" />
+    <Compile Include="Worker\WorkerManager.cs" />
     <Compile Include="Util\Win32.cs" />
     <Compile Include="WinForms\DialogHelper.cs">
       <SubType>Code</SubType>

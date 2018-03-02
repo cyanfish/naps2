@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Host;
 using NAPS2.Recovery;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
+using NAPS2.Worker;
 
 namespace NAPS2.Scan.Twain
 {
@@ -13,13 +13,13 @@ namespace NAPS2.Scan.Twain
     {
         public const string DRIVER_NAME = "twain";
         
-        private readonly IX86HostServiceFactory x86HostServiceFactory;
+        private readonly IWorkerServiceFactory workerServiceFactory;
         private readonly TwainWrapper twainWrapper;
         private readonly IFormFactory formFactory;
 
-        public TwainScanDriver(IX86HostServiceFactory x86HostServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory)
+        public TwainScanDriver(IWorkerServiceFactory workerServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory)
         {
-            this.x86HostServiceFactory = x86HostServiceFactory;
+            this.workerServiceFactory = workerServiceFactory;
             this.twainWrapper = twainWrapper;
             this.formFactory = formFactory;
         }
@@ -54,7 +54,7 @@ namespace NAPS2.Scan.Twain
             var twainImpl = ScanProfile != null ? ScanProfile.TwainImpl : TwainImpl.Default;
             if (UseHostService)
             {
-                return x86HostServiceFactory.Create().TwainGetDeviceList(twainImpl);
+                return workerServiceFactory.Create().TwainGetDeviceList(twainImpl);
             }
             return twainWrapper.GetDeviceList(twainImpl);
         }
@@ -65,7 +65,7 @@ namespace NAPS2.Scan.Twain
             {
                 return RunInForm(formFactory.Create<FTwainGui>(), () =>
                 {
-                    var service = x86HostServiceFactory.Create();
+                    var service = workerServiceFactory.Create();
                     service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
                     return service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
                         .Select(x => new ScannedImage(x))

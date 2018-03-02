@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
-using NAPS2.Host;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -18,6 +17,7 @@ using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Util;
 using NAPS2.WinForms;
+using NAPS2.Worker;
 using Ninject.Modules;
 using NLog;
 using ILogger = NAPS2.Util.ILogger;
@@ -59,8 +59,8 @@ namespace NAPS2.DI.Modules
             Bind<EmailSettingsContainer>().ToSelf().InSingletonScope();
 
             // Host
-            Bind<IX86HostServiceFactory>().To<NinjectX86HostServiceFactory>();
-            Bind<IX86HostService>().ToMethod(ctx => X86HostManager.Connect());
+            Bind<IWorkerServiceFactory>().To<NinjectWorkerServiceFactory>();
+            Bind<IWorkerService>().ToMethod(ctx => WorkerManager.StartWorker());
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();

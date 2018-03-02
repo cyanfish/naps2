@@ -5,10 +5,10 @@ using System.ServiceModel;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 
-namespace NAPS2.Host
+namespace NAPS2.Worker
 {
     [ServiceContract]
-    public interface IX86HostService
+    public interface IWorkerService
     {
         [OperationContract]
         void SetRecoveryFolder(string path);

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace NAPS2.Host
+namespace NAPS2.Worker
 {
     public class Job : IDisposable
     {

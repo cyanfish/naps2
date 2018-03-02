@@ -64,7 +64,7 @@
     <Compile Include="NinjectFormFactory.cs" />
     <Compile Include="NinjectOperationFactory.cs" />
     <Compile Include="NinjectScanDriverFactory.cs" />
-    <Compile Include="NinjectX86HostServiceFactory.cs" />
+    <Compile Include="NinjectWorkerServiceFactory.cs" />
     <Compile Include="NLogLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntryPoints\WinFormsEntryPoint.cs" />

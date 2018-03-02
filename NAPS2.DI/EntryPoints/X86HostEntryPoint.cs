@@ -5,8 +5,8 @@ using System.Linq;
 using System.ServiceModel;
 using System.Windows.Forms;
 using NAPS2.DI.Modules;
-using NAPS2.Host;
 using NAPS2.Util;
+using NAPS2.Worker;
 using Ninject;
 
 namespace NAPS2.DI.EntryPoints
@@ -29,18 +29,18 @@ namespace NAPS2.DI.EntryPoints
             try
             {
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
-                var hostService = kernel.Get<X86HostService>();
+                var hostService = kernel.Get<WorkerService>();
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                string pipeName = string.Format(X86HostManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
+                string pipeName = string.Format(WorkerManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
                 var form = new BackgroundForm();
                 hostService.ParentForm = form;
 
                 using (var host = new ServiceHost(hostService))
                 {
-                    host.AddServiceEndpoint(typeof (IX86HostService),
+                    host.AddServiceEndpoint(typeof (IWorkerService),
                         new NetNamedPipeBinding {ReceiveTimeout = TimeSpan.FromHours(24), SendTimeout = TimeSpan.FromHours(24)}, pipeName);
                     host.Open();
                     Console.Write('k');
