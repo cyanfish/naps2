@@ -8,10 +8,11 @@ using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
+using NAPS2.Worker;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class SavePdfOperation : OperationBase
+    public class SavePdfOperation : WorkerOperation
     {
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly IPdfExporter pdfExporter;
@@ -21,7 +22,8 @@ namespace NAPS2.ImportExport.Pdf
         private bool cancel;
         private Thread thread;
 
-        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory)
+        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, IWorkerServiceFactory workerServiceFactory)
+            : base(workerServiceFactory)
         {
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
@@ -59,12 +61,22 @@ namespace NAPS2.ImportExport.Pdf
             {
                 try
                 {
-                    Status.Success = pdfExporter.Export(subFileName, images, pdfSettings, ocrLanguageCode, i =>
+                    if (UseWorker)
                     {
-                        Status.CurrentProgress = i;
-                        InvokeStatusChanged();
-                        return !cancel;
-                    });
+                        using (var service = WorkerServiceFactory.Create())
+                        {
+                            // TODO
+                        }
+                    }
+                    else
+                    {
+                        Status.Success = pdfExporter.Export(subFileName, images, pdfSettings, ocrLanguageCode, i =>
+                        {
+                            Status.CurrentProgress = i;
+                            InvokeStatusChanged();
+                            return !cancel;
+                        });
+                    }
                 }
                 catch (UnauthorizedAccessException ex)
                 {

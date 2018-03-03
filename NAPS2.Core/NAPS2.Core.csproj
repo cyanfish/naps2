@@ -113,6 +113,7 @@
     <Compile Include="Config\KeyboardShortcuts.cs" />
     <Compile Include="Config\OcrState.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
+    <Compile Include="Operation\WorkerOperation.cs" />
     <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
