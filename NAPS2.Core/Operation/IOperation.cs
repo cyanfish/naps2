@@ -11,11 +11,7 @@ namespace NAPS2.Operation
 
         bool AllowCancel { get; }
 
-        bool AllowBackground { get; }
-
         OperationStatus Status { get; }
-
-        Task<bool> AsyncSuccess { get; }
 
         void Cancel();
 
