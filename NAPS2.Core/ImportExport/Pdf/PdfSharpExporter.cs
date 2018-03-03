@@ -27,7 +27,7 @@ namespace NAPS2.ImportExport.Pdf
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
-        public bool Export(string path, IEnumerable<ScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
+        public bool Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
             var document = new PdfDocument();
             document.Info.Author = settings.Metadata.Author;
@@ -71,10 +71,10 @@ namespace NAPS2.ImportExport.Pdf
                     Log.Error("OCR files not available for '{0}'.", ocrLanguageCode);
                 }
             }
-
+            
             bool result = useOcr
-                ? BuildDocumentWithOcr(progressCallback, document, images, ocrLanguageCode)
-                : BuildDocumentWithoutOcr(progressCallback, document, images);
+                ? BuildDocumentWithOcr(progressCallback, document, snapshots, ocrLanguageCode)
+                : BuildDocumentWithoutOcr(progressCallback, document, snapshots);
             if (!result)
             {
                 return false;
@@ -85,20 +85,20 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithoutOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images)
+        private bool BuildDocumentWithoutOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage.Snapshot> snapshots)
         {
             int progress = 0;
-            foreach (var image in images)
+            foreach (var snapshot in snapshots)
             {
-                bool importedPdfPassThrough = image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any();
+                bool importedPdfPassThrough = snapshot.Source.FileFormat == null && !snapshot.TransformList.Any();
 
                 if (importedPdfPassThrough)
                 {
-                    CopyPdfPageToDoc(document, image);
+                    CopyPdfPageToDoc(document, snapshot.Source);
                 }
                 else
                 {
-                    using (Stream stream = scannedImageRenderer.RenderToStream(image))
+                    using (Stream stream = scannedImageRenderer.RenderToStream(snapshot))
                     using (var img = XImage.FromStream(stream))
                     {
                         if (!progressCallback(progress))
@@ -115,13 +115,13 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
+        private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage.Snapshot> snapshots, string ocrLanguageCode)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
             // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
 
             int progress = 0;
-            Pipeline.For(images).Step(image =>
+            Pipeline.For(snapshots).Step(snapshot =>
             {
                 // Step 1: Load the image into memory, draw it on a new PDF page, and save a copy of the processed image to disk for OCR
 
@@ -130,12 +130,12 @@ namespace NAPS2.ImportExport.Pdf
                     return null;
                 }
 
-                bool importedPdfPassThrough = image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any();
+                bool importedPdfPassThrough = snapshot.Source.FileFormat == null && !snapshot.TransformList.Any();
 
                 PdfPage page;
                 if (importedPdfPassThrough)
                 {
-                    page = CopyPdfPageToDoc(document, image);
+                    page = CopyPdfPageToDoc(document, snapshot.Source);
 
                     // Scan through the page looking for text
                     var elements = page.Contents.Elements;
@@ -171,7 +171,7 @@ namespace NAPS2.ImportExport.Pdf
                     page = document.AddPage();
                 }
 
-                using (Stream stream = scannedImageRenderer.RenderToStream(image))
+                using (Stream stream = scannedImageRenderer.RenderToStream(snapshot))
                 using (var img = XImage.FromStream(stream))
                 {
                     if (!progressCallback(progress))

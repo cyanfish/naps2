@@ -20,20 +20,26 @@ namespace NAPS2.Scan.Images
             this.pdfRenderer = pdfRenderer;
         }
 
-        public Bitmap Render(ScannedImage image)
+        public Bitmap Render(ScannedImage image, List<Transform> transforms = null)
         {
+            transforms = transforms ?? image.RecoveryIndexImage.TransformList;
             var bitmap = image.FileFormat == null
                 ? pdfRenderer.Render(image.RecoveryFilePath).Single()
                 : new Bitmap(image.RecoveryFilePath);
             lock (image.RecoveryIndexImage.TransformList)
             {
-                return Transform.PerformAll(bitmap, image.RecoveryIndexImage.TransformList);
+                return Transform.PerformAll(bitmap, transforms);
             }
         }
 
-        public Stream RenderToStream(ScannedImage image)
+        public Bitmap Render(ScannedImage.Snapshot snapshot)
         {
-            using (var transformed = Render(image))
+            return Render(snapshot.Source, snapshot.TransformList);
+        }
+
+        public Stream RenderToStream(ScannedImage image, List<Transform> transforms = null)
+        {
+            using (var transformed = Render(image, transforms))
             {
                 var stream = new MemoryStream();
                 var format = transformed.PixelFormat == PixelFormat.Format1bppIndexed
@@ -42,6 +48,11 @@ namespace NAPS2.Scan.Images
                 transformed.Save(stream, format);
                 return stream;
             }
+        }
+
+        public Stream RenderToStream(ScannedImage.Snapshot snapshot)
+        {
+            return RenderToStream(snapshot.Source, snapshot.TransformList);
         }
     }
 }

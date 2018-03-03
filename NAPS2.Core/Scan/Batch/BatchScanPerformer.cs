@@ -289,7 +289,18 @@ namespace NAPS2.Scan.Batch
                     {
                         subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
                     }
-                    pdfExporter.Export(subPath, images, pdfSettingsContainer.PdfSettings, ocrDependencyManager.DefaultLanguageCode, j => true);
+                    var snapshots = images.Select(x => x.Preserve()).ToList();
+                    try
+                    {
+                        pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, ocrDependencyManager.DefaultLanguageCode, j => true);
+                    }
+                    finally
+                    {
+                        foreach (var s in snapshots)
+                        {
+                            s.Dispose();
+                        }
+                    }
                 }
                 else
                 {

@@ -23,6 +23,9 @@ namespace NAPS2.Scan.Images
 
         private Bitmap thumbnail;
 
+        private bool disposed;
+        private int snapshotCount;
+
         public static ScannedImage FromSinglePagePdf(string pdfPath, bool copy)
         {
             return new ScannedImage(pdfPath, copy);
@@ -78,6 +81,10 @@ namespace NAPS2.Scan.Images
         {
             lock (this)
             {
+                disposed = true;
+                // TODO: Does this work as intended? Since the recovery image isn't removed from the index
+                if (snapshotCount != 0) return;
+
                 // Delete the image data on disk
                 recoveryImage?.Dispose();
                 if (thumbnail != null)
@@ -135,6 +142,51 @@ namespace NAPS2.Scan.Images
         public void MovedTo(int index)
         {
             recoveryImage.Move(index);
+        }
+
+        public Snapshot Preserve()
+        {
+            return new Snapshot(this);
+        }
+
+        public class Snapshot : IDisposable
+        {
+            private bool disposed;
+
+            internal Snapshot(ScannedImage source)
+            {
+                lock (source)
+                {
+                    if (source.disposed)
+                    {
+                        throw new ObjectDisposedException("source");
+                    }
+                    source.snapshotCount++;
+                    Source = source;
+                    lock (source.transformList)
+                    {
+                        TransformList = source.transformList.ToList();
+                    }
+                }
+            }
+
+            public ScannedImage Source { get; }
+
+            public List<Transform> TransformList { get; }
+
+            public void Dispose()
+            {
+                if (disposed) return;
+                lock (Source)
+                {
+                    disposed = true;
+                    Source.snapshotCount--;
+                    if (Source.disposed && Source.snapshotCount == 0)
+                    {
+                        Source.Dispose();
+                    }
+                }
+            }
         }
     }
 }

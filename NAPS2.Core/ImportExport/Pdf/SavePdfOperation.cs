@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
@@ -18,17 +19,19 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IPdfExporter pdfExporter;
         private readonly IOverwritePrompt overwritePrompt;
         private readonly ThreadFactory threadFactory;
+        private readonly AppConfigManager appConfigManager;
 
         private bool cancel;
         private Thread thread;
 
-        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, IWorkerServiceFactory workerServiceFactory)
+        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, AppConfigManager appConfigManager, IWorkerServiceFactory workerServiceFactory)
             : base(workerServiceFactory)
         {
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
             this.overwritePrompt = overwritePrompt;
             this.threadFactory = threadFactory;
+            this.appConfigManager = appConfigManager;
 
             AllowCancel = true;
         }
@@ -57,6 +60,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
             }
 
+            var snapshots = images.Select(x => x.Preserve()).ToList();
             thread = threadFactory.StartThread(() =>
             {
                 try
@@ -70,7 +74,7 @@ namespace NAPS2.ImportExport.Pdf
                     }
                     else
                     {
-                        Status.Success = pdfExporter.Export(subFileName, images, pdfSettings, ocrLanguageCode, i =>
+                        Status.Success = pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrLanguageCode, i =>
                         {
                             Status.CurrentProgress = i;
                             InvokeStatusChanged();
@@ -98,6 +102,13 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     Log.ErrorException(MiscResources.ErrorSaving, ex);
                     InvokeError(MiscResources.ErrorSaving, ex);
+                }
+                finally
+                {
+                    foreach (var s in snapshots)
+                    {
+                        s.Dispose();
+                    }
                 }
                 GC.Collect();
                 InvokeFinished();
