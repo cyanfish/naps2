@@ -15,11 +15,11 @@ namespace NAPS2.DI
             this.kernel = kernel;
         }
 
-        public IWorkerService Create()
+        public WorkerContext Create()
         {
-            var service = kernel.Get<IWorkerService>();
-            service.Init();
-            return service;
+            var worker = kernel.Get<WorkerContext>();
+            worker.Service.Init();
+            return worker;
         }
     }
 }

@@ -115,15 +115,17 @@ namespace NAPS2.Recovery
 
         private RecoveryImage(RecoveryIndexImage recoveryIndexImage)
         {
-            if (_recoveryIndexManager.Index.Images.Contains(recoveryIndexImage))
+            if (_recoveryIndexManager != null && _recoveryIndexManager.Index.Images.Contains(recoveryIndexImage))
             {
                 throw new ArgumentException("Recovery image already exists in index");
             }
 
             string ext = Path.GetExtension(recoveryIndexImage.FileName);
-            FileFormat = ".png".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ? ImageFormat.Png : ImageFormat.Jpeg;
+            FileFormat = ".png".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ? ImageFormat.Png
+                : ".pdf".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ? null
+                : ImageFormat.Jpeg;
             FileName = recoveryIndexImage.FileName;
-            _recoveryFileNumber++;
+            _recoveryFileNumber++; // TODO: Is this needed?
             FilePath = Path.Combine(RecoveryFolder.FullName, FileName);
             IndexImage = recoveryIndexImage;
             Save();

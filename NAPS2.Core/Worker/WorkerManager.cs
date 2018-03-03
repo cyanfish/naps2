@@ -22,7 +22,7 @@ namespace NAPS2.Worker
 
         private static string _workerExePath;
 
-        private static BlockingCollection<IWorkerService> _workerQueue;
+        private static BlockingCollection<WorkerContext> _workerQueue;
 
         private static string WorkerExePath
         {
@@ -45,7 +45,8 @@ namespace NAPS2.Worker
 
         private static Process StartWorkerProcess()
         {
-            var proc = Process.Start(new ProcessStartInfo {
+            var proc = Process.Start(new ProcessStartInfo
+            {
                 FileName = WorkerExePath,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
@@ -70,20 +71,24 @@ namespace NAPS2.Worker
 
             return proc;
         }
-        
+
         private static void StartWorkerService()
         {
             Task.Factory.StartNew(() =>
             {
                 var proc = StartWorkerProcess();
                 var pipeName = string.Format(PIPE_NAME_FORMAT, proc.Id);
-                var channelFactory = new ChannelFactory<IWorkerService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) },
+                var callback = new WorkerCallback();
+                var instanceContext = new InstanceContext(callback);
+                var channelFactory = new DuplexChannelFactory<IWorkerService>(instanceContext,
+                    new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) },
                     new EndpointAddress(pipeName));
-                _workerQueue.Add(channelFactory.CreateChannel());
+                var channel = channelFactory.CreateChannel();
+                _workerQueue.Add(new WorkerContext { Service = channel, Callback = callback });
             });
         }
 
-        public static IWorkerService NextWorker()
+        public static WorkerContext NextWorker()
         {
             StartWorkerService();
             return _workerQueue.Take();
@@ -93,7 +98,7 @@ namespace NAPS2.Worker
         {
             if (_workerQueue == null)
             {
-                _workerQueue = new BlockingCollection<IWorkerService>();
+                _workerQueue = new BlockingCollection<WorkerContext>();
                 StartWorkerService();
             }
         }

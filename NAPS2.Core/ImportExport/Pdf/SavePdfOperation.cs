@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
+using NAPS2.Recovery;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.Worker;
@@ -67,9 +68,17 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     if (UseWorker)
                     {
-                        using (var service = WorkerServiceFactory.Create())
+                        using (var worker = WorkerServiceFactory.Create())
                         {
-                            // TODO
+                            worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
+                            worker.Callback.OnProgress += i =>
+                            {
+                                Status.CurrentProgress = i;
+                                InvokeStatusChanged();
+                                return !cancel;
+                            };
+                            worker.Service.ExportPdf(subFileName, snapshots.Select(ScannedImage.Snapshot.Export).ToList(), pdfSettings, ocrLanguageCode);
+                            Status.Success = worker.Callback.WaitForFinish();
                         }
                     }
                     else

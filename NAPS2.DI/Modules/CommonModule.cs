@@ -60,7 +60,7 @@ namespace NAPS2.DI.Modules
 
             // Host
             Bind<IWorkerServiceFactory>().To<NinjectWorkerServiceFactory>();
-            Bind<IWorkerService>().ToMethod(ctx => WorkerManager.NextWorker());
+            Bind<WorkerContext>().ToMethod(ctx => WorkerManager.NextWorker());
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();

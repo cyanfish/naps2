@@ -6,6 +6,6 @@ namespace NAPS2.Worker
 {
     public interface IWorkerServiceFactory
     {
-        IWorkerService Create();
+        WorkerContext Create();
     }
 }

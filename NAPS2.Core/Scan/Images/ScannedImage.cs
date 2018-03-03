@@ -153,6 +153,17 @@ namespace NAPS2.Scan.Images
         {
             private bool disposed;
 
+            public static (RecoveryIndexImage, List<Transform>) Export(Snapshot snapshot)
+            {
+                return (snapshot.Source.RecoveryIndexImage, snapshot.TransformList);
+            }
+
+            public static Snapshot Import((RecoveryIndexImage, List<Transform>) exported)
+            {
+                var (recoveryIndexImage, transformList) = exported;
+                return new Snapshot(new ScannedImage(recoveryIndexImage), transformList);
+            }
+
             internal Snapshot(ScannedImage source)
             {
                 lock (source)
@@ -168,6 +179,12 @@ namespace NAPS2.Scan.Images
                         TransformList = source.transformList.ToList();
                     }
                 }
+            }
+
+            private Snapshot(ScannedImage source, List<Transform> transformList)
+            {
+                Source = source;
+                TransformList = transformList;
             }
 
             public ScannedImage Source { get; }

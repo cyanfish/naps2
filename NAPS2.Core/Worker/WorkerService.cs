@@ -2,29 +2,38 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Windows.Forms;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
 using NAPS2.Scan.Twain;
 
 namespace NAPS2.Worker
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
+        IncludeExceptionDetailInFaults = true,
+        ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class WorkerService : IWorkerService
     {
         private readonly TwainWrapper twainWrapper;
+        private readonly IPdfExporter pdfExporter;
 
         public Form ParentForm { get; set; }
 
-        public WorkerService(TwainWrapper twainWrapper)
+        public WorkerService(TwainWrapper twainWrapper, IPdfExporter pdfExporter)
         {
             this.twainWrapper = twainWrapper;
+            this.pdfExporter = pdfExporter;
         }
 
         public void Init()
         {
             OperationContext.Current.Channel.Closed += (sender, args) => Application.Exit();
+            Callback = OperationContext.Current.GetCallbackChannel<IWorkerCallback>();
         }
 
         public void SetRecoveryFolder(string path)
@@ -46,5 +55,33 @@ namespace NAPS2.Worker
         public void Dispose()
         {
         }
+
+        public void ExportPdf(string subFileName, List<(RecoveryIndexImage, List<Transform>)> snapshotPairs, PdfSettings pdfSettings, string ocrLanguageCode)
+        {
+            WrapOperation(() =>
+            {
+                var snapshots = snapshotPairs.Select(ScannedImage.Snapshot.Import).ToList();
+                return pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrLanguageCode, Callback.Progress);
+            });
+        }
+
+        private void WrapOperation(Func<bool> op)
+        {
+            bool success = false;
+            try
+            {
+                success = op();
+            }
+            catch (Exception e)
+            {
+                Callback.Error(e);
+            }
+            finally
+            {
+                Callback.Finish(success);
+            }
+        }
+
+        public IWorkerCallback Callback { get; set; }
     }
 }

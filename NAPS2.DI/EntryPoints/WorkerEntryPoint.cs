@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.DI.Modules;
 using NAPS2.Util;
@@ -17,7 +18,7 @@ namespace NAPS2.DI.EntryPoints
         {
             try
             {
-#if DEBUG && false
+#if DEBUG
                 Debugger.Launch();
 #endif
 
@@ -26,6 +27,8 @@ namespace NAPS2.DI.EntryPoints
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+
+                Application.ThreadException += UnhandledException;
 
                 string pipeName = string.Format(WorkerManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);
                 var form = new BackgroundForm();
@@ -46,6 +49,11 @@ namespace NAPS2.DI.EntryPoints
                 Log.FatalException("An error occurred that caused the worker application to close.", ex);
                 Environment.Exit(1);
             }
+        }
+
+        private static void UnhandledException(object sender, ThreadExceptionEventArgs threadExceptionEventArgs)
+        {
+            Log.FatalException("An error occurred that caused the worker to close.", threadExceptionEventArgs.Exception);
         }
     }
 }
