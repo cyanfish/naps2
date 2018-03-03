@@ -48,7 +48,6 @@ namespace NAPS2.Recovery
             private RecoveryIndexManager recoveryIndexManager;
             private int imageCount;
             private DateTime scannedDateTime;
-            private bool cancel;
             private Thread thread;
 
             public RecoveryOperation(IFormFactory formFactory, ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer)
@@ -67,7 +66,6 @@ namespace NAPS2.Recovery
                 {
                     StatusText = MiscResources.Recovering
                 };
-                cancel = false;
 
                 folderToRecoverFrom = FindAndLockFolderToRecoverFrom();
                 if (folderToRecoverFrom == null)
@@ -213,11 +211,6 @@ namespace NAPS2.Recovery
                     // Some problem, e.g. the folder is already locked
                     return false;
                 }
-            }
-
-            public override void Cancel()
-            {
-                cancel = true;
             }
 
             public override void WaitUntilFinished()

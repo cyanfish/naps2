@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using NAPS2.Util;
 
 namespace NAPS2.Worker
 {
@@ -9,12 +10,12 @@ namespace NAPS2.Worker
     public interface IWorkerCallback
     {
         [OperationContract]
-        bool Progress(int current);
+        bool Progress(int current, int max);
 
         [OperationContract(IsOneWay = true)]
         void Finish(bool success);
 
-        event Func<int, bool> OnProgress;
+        event ProgressHandler OnProgress;
 
         bool WaitForFinish();
 

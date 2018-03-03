@@ -18,8 +18,7 @@ namespace NAPS2.Scan.Images
         private readonly ThreadFactory threadFactory;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageRenderer scannedImageRenderer;
-
-        private volatile bool cancel;
+        
         private Thread thread;
 
         public DeskewOperation(ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
@@ -39,7 +38,6 @@ namespace NAPS2.Scan.Images
                 StatusText = MiscResources.AutoDeskewing,
                 MaxProgress = images.Count
             };
-            cancel = false;
 
             thread = threadFactory.StartThread(() =>
             {
@@ -90,11 +88,6 @@ namespace NAPS2.Scan.Images
             });
 
             return true;
-        }
-
-        public override void Cancel()
-        {
-            cancel = true;
         }
 
         public override void WaitUntilFinished()

@@ -16,8 +16,7 @@ namespace NAPS2.ImportExport
     {
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ThreadFactory threadFactory;
-
-        private bool cancel;
+        
         private Thread thread;
 
         public DirectImportOperation(ThumbnailRenderer thumbnailRenderer, ThreadFactory threadFactory)
@@ -36,7 +35,6 @@ namespace NAPS2.ImportExport
                 StatusText = copy ? MiscResources.Copying : MiscResources.Importing,
                 MaxProgress = data.ImageRecovery.Length
             };
-            cancel = false;
 
             thread = threadFactory.StartThread(() =>
             {
@@ -82,11 +80,6 @@ namespace NAPS2.ImportExport
         public override void WaitUntilFinished()
         {
             thread.Join();
-        }
-
-        public override void Cancel()
-        {
-            cancel = true;
         }
     }
 }

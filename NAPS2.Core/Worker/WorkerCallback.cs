@@ -15,12 +15,12 @@ namespace NAPS2.Worker
         private bool success;
         private Exception exception;
 
-        public bool Progress(int current)
+        public bool Progress(int current, int max)
         {
-            return OnProgress?.Invoke(current) ?? false;
+            return OnProgress?.Invoke(current, max) ?? false;
         }
 
-        public event Func<int, bool> OnProgress;
+        public event ProgressHandler OnProgress;
 
         public void Finish(bool success)
         {

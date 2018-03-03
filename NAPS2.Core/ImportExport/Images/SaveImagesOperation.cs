@@ -22,8 +22,7 @@ namespace NAPS2.ImportExport.Images
         private readonly ThreadFactory threadFactory;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly TiffHelper tiffHelper;
-
-        private bool cancel;
+        
         private Thread thread;
 
         public SaveImagesOperation(FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, ScannedImageRenderer scannedImageRenderer, TiffHelper tiffHelper)
@@ -55,7 +54,6 @@ namespace NAPS2.ImportExport.Images
             {
                 MaxProgress = images.Count
             };
-            cancel = false;
 
             thread = threadFactory.StartThread(() =>
             {
@@ -80,12 +78,7 @@ namespace NAPS2.ImportExport.Images
                             }
                         }
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
-                        Status.Success = tiffHelper.SaveMultipage(images, subFileName, j =>
-                        {
-                            Status.CurrentProgress = j;
-                            InvokeStatusChanged();
-                            return !cancel;
-                        });
+                        Status.Success = tiffHelper.SaveMultipage(images, subFileName, OnProgress);
                         FirstFileSaved = subFileName;
                         return;
                     }
@@ -175,11 +168,6 @@ namespace NAPS2.ImportExport.Images
             {
                 image.Save(path, format);
             }
-        }
-
-        public override void Cancel()
-        {
-            cancel = true;
         }
 
         public override void WaitUntilFinished()

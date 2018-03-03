@@ -21,8 +21,7 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IOverwritePrompt overwritePrompt;
         private readonly ThreadFactory threadFactory;
         private readonly AppConfigManager appConfigManager;
-
-        private bool cancel;
+        
         private Thread thread;
 
         public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, AppConfigManager appConfigManager, IWorkerServiceFactory workerServiceFactory)
@@ -46,7 +45,6 @@ namespace NAPS2.ImportExport.Pdf
                 StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName)),
                 MaxProgress = images.Count
             };
-            cancel = false;
 
             if (Directory.Exists(subFileName))
             {
@@ -71,24 +69,14 @@ namespace NAPS2.ImportExport.Pdf
                         using (var worker = WorkerServiceFactory.Create())
                         {
                             worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
-                            worker.Callback.OnProgress += i =>
-                            {
-                                Status.CurrentProgress = i;
-                                InvokeStatusChanged();
-                                return !cancel;
-                            };
+                            worker.Callback.OnProgress += OnProgress;
                             worker.Service.ExportPdf(subFileName, snapshots.Select(ScannedImage.Snapshot.Export).ToList(), pdfSettings, ocrLanguageCode);
                             Status.Success = worker.Callback.WaitForFinish();
                         }
                     }
                     else
                     {
-                        Status.Success = pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrLanguageCode, i =>
-                        {
-                            Status.CurrentProgress = i;
-                            InvokeStatusChanged();
-                            return !cancel;
-                        });
+                        Status.Success = pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrLanguageCode, OnProgress);
                     }
                 }
                 catch (UnauthorizedAccessException ex)
@@ -124,11 +112,6 @@ namespace NAPS2.ImportExport.Pdf
             });
 
             return true;
-        }
-
-        public override void Cancel()
-        {
-            cancel = true;
         }
 
         public override void WaitUntilFinished()

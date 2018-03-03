@@ -34,7 +34,7 @@ namespace NAPS2.ImportExport.Pdf
             this.pdfRenderer = pdfRenderer;
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, Func<int, int, bool> progressCallback)
+        public IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
         {
             if (!progressCallback(0, 0))
             {

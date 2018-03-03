@@ -115,6 +115,7 @@
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Operation\WorkerOperation.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
+    <Compile Include="Util\ProgressHandler.cs" />
     <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -292,7 +292,7 @@ namespace NAPS2.Scan.Batch
                     var snapshots = images.Select(x => x.Preserve()).ToList();
                     try
                     {
-                        pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, ocrDependencyManager.DefaultLanguageCode, j => true);
+                        pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, ocrDependencyManager.DefaultLanguageCode, (j, k) => true);
                     }
                     finally
                     {

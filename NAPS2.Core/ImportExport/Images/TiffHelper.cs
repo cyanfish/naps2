@@ -19,13 +19,13 @@ namespace NAPS2.ImportExport.Images
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
-        public bool SaveMultipage(List<ScannedImage> images, string location, Func<int, bool> progressCallback)
+        public bool SaveMultipage(List<ScannedImage> images, string location, ProgressHandler progressCallback)
         {
             try
             {
                 ImageCodecInfo codecInfo = GetCodecForString("TIFF");
 
-                if (!progressCallback(0))
+                if (!progressCallback(0, images.Count))
                 {
                     return false;
                 }
@@ -72,7 +72,7 @@ namespace NAPS2.ImportExport.Images
                             if (images[i] == null)
                                 break;
 
-                            if (!progressCallback(i))
+                            if (!progressCallback(i, images.Count))
                             {
                                 bitmap0.Dispose();
                                 File.Delete(location);

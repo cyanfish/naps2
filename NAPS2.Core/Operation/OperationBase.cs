@@ -6,13 +6,18 @@ namespace NAPS2.Operation
 {
     public abstract class OperationBase : IOperation
     {
+        protected volatile bool cancel;
+
         public string ProgressTitle { get; protected set; }
 
         public bool AllowCancel { get; protected set; }
 
         public OperationStatus Status { get; protected set; }
 
-        public abstract void Cancel();
+        public void Cancel()
+        {
+            cancel = true;
+        }
 
         public abstract void WaitUntilFinished();
 
@@ -39,6 +44,14 @@ namespace NAPS2.Operation
             var args = new OperationErrorEventArgs(message, exception);
             LastError = args;
             Error?.Invoke(this, args);
+        }
+
+        protected bool OnProgress(int current, int max)
+        {
+            Status.CurrentProgress = current;
+            Status.MaxProgress = max;
+            InvokeStatusChanged();
+            return !cancel;
         }
     }
 }

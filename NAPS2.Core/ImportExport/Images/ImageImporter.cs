@@ -18,7 +18,7 @@ namespace NAPS2.ImportExport.Images
             this.thumbnailRenderer = thumbnailRenderer;
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, Func<int, int, bool> progressCallback)
+        public IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
         {
             if (!progressCallback(0, 1))
             {

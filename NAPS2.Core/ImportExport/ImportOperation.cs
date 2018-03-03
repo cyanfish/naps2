@@ -17,7 +17,6 @@ namespace NAPS2.ImportExport
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly ThreadFactory threadFactory;
 
-        private bool cancel;
         private Thread thread;
 
         public ImportOperation(IScannedImageImporter scannedImageImporter, ThreadFactory threadFactory)
@@ -36,7 +35,6 @@ namespace NAPS2.ImportExport
             {
                 MaxProgress = oneFile ? 0 : filesToImport.Count
             };
-            cancel = false;
 
             thread = threadFactory.StartThread(() =>
             {
@@ -55,16 +53,7 @@ namespace NAPS2.ImportExport
                 {
                     Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
                     InvokeStatusChanged();
-                    var images = scannedImageImporter.Import(fileName, new ImportParams(), (i, j) =>
-                    {
-                        if (oneFile)
-                        {
-                            Status.CurrentProgress = i;
-                            Status.MaxProgress = j;
-                            InvokeStatusChanged();
-                        }
-                        return !cancel;
-                    });
+                    var images = scannedImageImporter.Import(fileName, new ImportParams(), oneFile ? OnProgress : new ProgressHandler((j, k) => !cancel));
                     foreach (var img in images)
                     {
                         imageCallback(img);
@@ -87,11 +76,6 @@ namespace NAPS2.ImportExport
         public override void WaitUntilFinished()
         {
             thread.Join();
-        }
-
-        public override void Cancel()
-        {
-            cancel = true;
         }
     }
 }

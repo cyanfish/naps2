@@ -27,7 +27,7 @@ namespace NAPS2.ImportExport.Pdf
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
-        public bool Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
+        public bool Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, string ocrLanguageCode, ProgressHandler progressCallback)
         {
             var document = new PdfDocument();
             document.Info.Author = settings.Metadata.Author;
@@ -85,7 +85,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithoutOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage.Snapshot> snapshots)
+        private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, PdfDocument document, ICollection<ScannedImage.Snapshot> snapshots)
         {
             int progress = 0;
             foreach (var snapshot in snapshots)
@@ -101,7 +101,7 @@ namespace NAPS2.ImportExport.Pdf
                     using (Stream stream = scannedImageRenderer.RenderToStream(snapshot))
                     using (var img = XImage.FromStream(stream))
                     {
-                        if (!progressCallback(progress))
+                        if (!progressCallback(progress, snapshots.Count))
                         {
                             return false;
                         }
@@ -115,7 +115,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage.Snapshot> snapshots, string ocrLanguageCode)
+        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, ICollection<ScannedImage.Snapshot> snapshots, string ocrLanguageCode)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
             // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
@@ -125,7 +125,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 // Step 1: Load the image into memory, draw it on a new PDF page, and save a copy of the processed image to disk for OCR
 
-                if (!progressCallback(progress))
+                if (!progressCallback(progress, snapshots.Count))
                 {
                     return null;
                 }
@@ -174,7 +174,7 @@ namespace NAPS2.ImportExport.Pdf
                 using (Stream stream = scannedImageRenderer.RenderToStream(snapshot))
                 using (var img = XImage.FromStream(stream))
                 {
-                    if (!progressCallback(progress))
+                    if (!progressCallback(progress, snapshots.Count))
                     {
                         return null;
                     }
@@ -184,7 +184,7 @@ namespace NAPS2.ImportExport.Pdf
                         DrawImageOnPage(page, img);
                     }
 
-                    if (!progressCallback(progress))
+                    if (!progressCallback(progress, snapshots.Count))
                     {
                         return null;
                     }
@@ -203,13 +203,13 @@ namespace NAPS2.ImportExport.Pdf
                 OcrResult ocrResult;
                 try
                 {
-                    if (!progressCallback(progress))
+                    if (!progressCallback(progress, snapshots.Count))
                     {
                         return null;
                     }
                     
                     // ReSharper disable once AccessToModifiedClosure
-                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode, () => !progressCallback(progress));
+                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode, () => !progressCallback(progress, snapshots.Count));
                 }
                 finally
                 {
@@ -217,10 +217,10 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 // The final pipeline step is pretty fast, so updating progress here is more accurate
-                if (progressCallback(progress))
+                if (progressCallback(progress, snapshots.Count))
                 {
                     Interlocked.Increment(ref progress);
-                    progressCallback(progress);
+                    progressCallback(progress, snapshots.Count);
                 }
 
                 return Tuple.Create(page, ocrResult);
@@ -232,13 +232,13 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     return;
                 }
-                if (!progressCallback(progress))
+                if (!progressCallback(progress, snapshots.Count))
                 {
                     return;
                 }
                 DrawOcrTextOnPage(page, ocrResult);
             });
-            return progressCallback(progress);
+            return progressCallback(progress, snapshots.Count);
         }
 
         private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, ScannedImage image)
