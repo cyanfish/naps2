@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Automation;
 using NAPS2.DI.Modules;
+using NAPS2.Worker;
 using Ninject;
 using Ninject.Parameters;
 
@@ -19,6 +20,7 @@ namespace NAPS2.DI.EntryPoints
             {
                 return;
             }
+            WorkerManager.Init();
             var scanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
             scanning.Execute();
         }

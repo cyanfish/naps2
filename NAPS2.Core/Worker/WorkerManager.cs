@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace NAPS2.Worker
 {
@@ -20,7 +22,9 @@ namespace NAPS2.Worker
 
         private static string _workerExePath;
 
-        public static string WorkerExePath
+        private static BlockingCollection<IWorkerService> _workerQueue;
+
+        private static string WorkerExePath
         {
             get
             {
@@ -39,7 +43,7 @@ namespace NAPS2.Worker
             }
         }
 
-        public static Process StartHostProcess()
+        private static Process StartWorkerProcess()
         {
             var proc = Process.Start(new ProcessStartInfo {
                 FileName = WorkerExePath,
@@ -66,14 +70,32 @@ namespace NAPS2.Worker
 
             return proc;
         }
-
-        public static IWorkerService StartWorker()
+        
+        private static void StartWorkerService()
         {
-            var proc = StartHostProcess();
-            var pipeName = string.Format(PIPE_NAME_FORMAT, proc.Id);
-            var channelFactory = new ChannelFactory<IWorkerService>(new NetNamedPipeBinding {SendTimeout = TimeSpan.FromHours(24)},
-                new EndpointAddress(pipeName));
-            return channelFactory.CreateChannel();
+            Task.Factory.StartNew(() =>
+            {
+                var proc = StartWorkerProcess();
+                var pipeName = string.Format(PIPE_NAME_FORMAT, proc.Id);
+                var channelFactory = new ChannelFactory<IWorkerService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) },
+                    new EndpointAddress(pipeName));
+                _workerQueue.Add(channelFactory.CreateChannel());
+            });
+        }
+
+        public static IWorkerService NextWorker()
+        {
+            StartWorkerService();
+            return _workerQueue.Take();
+        }
+
+        public static void Init()
+        {
+            if (_workerQueue == null)
+            {
+                _workerQueue = new BlockingCollection<IWorkerService>();
+                StartWorkerService();
+            }
         }
     }
 }

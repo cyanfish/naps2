@@ -8,6 +8,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
+using NAPS2.Worker;
 using Ninject;
 
 namespace NAPS2.DI.EntryPoints
@@ -21,6 +22,7 @@ namespace NAPS2.DI.EntryPoints
             var lifecycle = kernel.Get<Lifecycle>();
             lifecycle.ParseArgs(args);
             lifecycle.ExitIfRedundant();
+            WorkerManager.Init();
 
             kernel.Get<CultureInitializer>().InitCulture(Thread.CurrentThread);
 
