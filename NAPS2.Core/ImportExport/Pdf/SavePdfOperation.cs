@@ -70,7 +70,7 @@ namespace NAPS2.ImportExport.Pdf
                         {
                             worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
                             worker.Callback.OnProgress += OnProgress;
-                            worker.Service.ExportPdf(subFileName, snapshots.Select(ScannedImage.Snapshot.Export).ToList(), pdfSettings, ocrLanguageCode);
+                            worker.Service.ExportPdf(subFileName, snapshots.Export(), pdfSettings, ocrLanguageCode);
                             Status.Success = worker.Callback.WaitForFinish();
                         }
                     }

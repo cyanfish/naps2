@@ -56,13 +56,14 @@ namespace NAPS2.Worker
         {
         }
 
-        public void ExportPdf(string subFileName, List<(RecoveryIndexImage, List<Transform>)> snapshotPairs, PdfSettings pdfSettings, string ocrLanguageCode)
+        public void ExportPdf(string subFileName, List<ScannedImage.SnapshotExport> snapshots, PdfSettings pdfSettings, string ocrLanguageCode)
         {
-            WrapOperation(() =>
-            {
-                var snapshots = snapshotPairs.Select(ScannedImage.Snapshot.Import).ToList();
-                return pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrLanguageCode, Callback.Progress);
-            });
+            // TODO: Make a type for a serializable snapshot
+            // TODO: Other operations. Import. Recovery. Save images. Password and ghostscript callbacks.
+            // Figure out ghostscript operation in general.
+            // Also - consider off-process thumbnail rendering. That's probably IO bound though, right?
+            // So parellization doesn't help. The only benefit would be memory. Which is not a bad benefit.
+            WrapOperation(() => pdfExporter.Export(subFileName, snapshots.Import(), pdfSettings, ocrLanguageCode, Callback.Progress));
         }
 
         private void WrapOperation(Func<bool> op)

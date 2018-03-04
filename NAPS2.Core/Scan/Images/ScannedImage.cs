@@ -153,15 +153,14 @@ namespace NAPS2.Scan.Images
         {
             private bool disposed;
 
-            public static (RecoveryIndexImage, List<Transform>) Export(Snapshot snapshot)
+            public static SnapshotExport Export(Snapshot snapshot)
             {
-                return (snapshot.Source.RecoveryIndexImage, snapshot.TransformList);
+                return new SnapshotExport(snapshot.Source.RecoveryIndexImage, snapshot.TransformList);
             }
 
-            public static Snapshot Import((RecoveryIndexImage, List<Transform>) exported)
+            public static Snapshot Import(SnapshotExport export)
             {
-                var (recoveryIndexImage, transformList) = exported;
-                return new Snapshot(new ScannedImage(recoveryIndexImage), transformList);
+                return new Snapshot(new ScannedImage(export.RecoveryIndexImage), export.TransformList);
             }
 
             internal Snapshot(ScannedImage source)
@@ -204,6 +203,19 @@ namespace NAPS2.Scan.Images
                     }
                 }
             }
+        }
+
+        public class SnapshotExport
+        {
+            public SnapshotExport(RecoveryIndexImage recoveryIndexImage, List<Transform> transformList)
+            {
+                RecoveryIndexImage = recoveryIndexImage;
+                TransformList = transformList;
+            }
+
+            public RecoveryIndexImage RecoveryIndexImage { get; }
+
+            public List<Transform> TransformList { get; }
         }
     }
 }

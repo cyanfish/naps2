@@ -5,7 +5,7 @@ using System.ServiceModel;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Recovery;
 using NAPS2.Scan;
-using NAPS2.Scan.Images.Transforms;
+using NAPS2.Scan.Images;
 
 namespace NAPS2.Worker
 {
@@ -25,6 +25,6 @@ namespace NAPS2.Worker
         List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams);
 
         [OperationContract(IsOneWay = true)]
-        void ExportPdf(string subFileName, List<(RecoveryIndexImage, List<Transform>)> snapshotPairs, PdfSettings pdfSettings, string ocrLanguageCode);
+        void ExportPdf(string subFileName, List<ScannedImage.SnapshotExport> snapshots, PdfSettings pdfSettings, string ocrLanguageCode);
     }
 }
