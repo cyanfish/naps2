@@ -260,8 +260,6 @@ namespace NAPS2.Automation
             int i = 0;
             foreach (var filePath in filePaths)
             {
-                // TODO: Recognize and apply slices. Also, enhance the importer so unused pages aren't loaded at all.
-                // Perhaps create a Slice util class to encapsulate the logic, and allow it to be passed in.
                 i++;
                 try
                 {
