@@ -430,9 +430,9 @@
         <value>Bu PDF dosyasını içe aktarmak için ek bileşen gerekiyor. Şimdi indirmek ister misiniz?</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Yığın taramayı iptal etmek istediğinize emin misiniz?</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Yığını İptal Et</value>
     </data>
 </root>

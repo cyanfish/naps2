@@ -220,7 +220,7 @@
         <value>Gammal (bare maskinen sitt oppsettvindu)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Alternativ overføring</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Gammal DSM</value>

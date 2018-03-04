@@ -418,21 +418,21 @@
         <value>Fila kunne ikkje overskrivast fordi den er i bruk.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Oppretting...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Oppretting framdrift</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>Nedlasting nødvendig</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>Ein tilleggskomponent trengs for import av denne PDF-fila. Vil du lasta den ned nå?</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Er du sikker på at du vil avbryta sats-skanninga?</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Avbryt sats</value>
     </data>
 </root>

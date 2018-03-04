@@ -307,13 +307,13 @@
         <value>Nieznany błąd wystąpił podczas skanowania wsadowego.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Anulowano wsad.</value>
+        <value>Anulowano przetwarzanie.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
         <value>Anulowanie....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Wsad wykonano pomyślnie.</value>
+        <value>Przetwarzanie wykonano pomyślnie.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
         <value>Skanowanie wsadowe zatrzymane z powodu błędu.</value>
@@ -334,7 +334,7 @@
         <value>Zamknij</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
-        <value>Zapisywanie wyników skanowania wsadowego...</value>
+        <value>Zapisywanie wyników przetwarzania...</value>
     </data>
     <data name="NoDuplexSupport" xml:space="preserve">
         <value>Wybrany skaner nie obsługuje druku obustronnego. Jeśli twój skaner powinien wspierać druk obustronny, spróbuj użyć innego sterownika.</value>
@@ -430,9 +430,9 @@
         <value>Do zaimportowania tego pliku PDF potrzebny jest dodatkowy składnik. Czy chcesz go teraz pobrać?</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Czy na pewno chcesz anulować skanowanie wsadowe?</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Anuluj przetwarzanie</value>
     </data>
 </root>

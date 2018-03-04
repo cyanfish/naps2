@@ -778,7 +778,7 @@
         <value>8</value>
     </data>
     <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
-        <value>Consenti Stampa ad alta qualità</value>
+        <value>Consenti stampa ad alta qualità</value>
     </data>
     <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
         <value>cbAllowFullQualityPrinting</value>
@@ -808,7 +808,7 @@
         <value>14</value>
     </data>
     <data name="cbAllowFormFilling.Text" xml:space="preserve">
-        <value>Consenti Compilazione Modulo</value>
+        <value>Consenti compilazione modulo</value>
     </data>
     <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
         <value>cbAllowFormFilling</value>
@@ -838,7 +838,7 @@
         <value>13</value>
     </data>
     <data name="cbAllowAnnotations.Text" xml:space="preserve">
-        <value>Consenti Annotazioni</value>
+        <value>Consenti annotazioni</value>
     </data>
     <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
         <value>cbAllowAnnotations</value>
@@ -868,7 +868,7 @@
         <value>12</value>
     </data>
     <data name="cbAllowContentCopyingForAccessibility.Text" xml:space="preserve">
-        <value>Consenti la Copia dei contenuti per Accessibilità</value>
+        <value>Consenti la copia dei contenuti per accessibilità</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Name" xml:space="preserve">
         <value>cbAllowContentCopyingForAccessibility</value>
@@ -898,7 +898,7 @@
         <value>11</value>
     </data>
     <data name="cbAllowContentCopying.Text" xml:space="preserve">
-        <value>Consenti la Copia dei Contenuti</value>
+        <value>Consenti la copia dei contenuti</value>
     </data>
     <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
         <value>cbAllowContentCopying</value>
@@ -928,7 +928,7 @@
         <value>10</value>
     </data>
     <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>Consenti Composizione Documento</value>
+        <value>Consenti composizione documento</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
         <value>cbAllowDocumentAssembly</value>
@@ -955,7 +955,7 @@
         <value>9</value>
     </data>
     <data name="cbAllowDocumentModification.Text" xml:space="preserve">
-        <value>Consenti Modifica Documento</value>
+        <value>Consenti modifica documento</value>
     </data>
     <data name="&gt;&gt;cbAllowDocumentModification.Name" xml:space="preserve">
         <value>cbAllowDocumentModification</value>

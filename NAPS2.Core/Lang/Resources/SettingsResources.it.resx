@@ -220,7 +220,7 @@
         <value>Eredita (solo UI nativo)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>E' neccessario un componente aggiuntivo per importare questo fle PDF. Voui scaricarlo ora?</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Vecchio DSM</value>

@@ -220,7 +220,7 @@
         <value>veraltet (nur Treiberoberfläche)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Alternative Übertragung</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Alte Datenquellenverwaltung</value>

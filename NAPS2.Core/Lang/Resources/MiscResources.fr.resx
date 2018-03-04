@@ -430,9 +430,9 @@
         <value>Un composant supplémentaire est requis pour importer ce fichier PDF. Faut-il le télécharger maintenant ?</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Faut-il vraiment annuler l'acquisition par lot ?</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Annuler le lot</value>
     </data>
 </root>

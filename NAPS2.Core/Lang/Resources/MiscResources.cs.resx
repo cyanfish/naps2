@@ -430,9 +430,9 @@
         <value>K importu tohoto PDF je nutná doplňující komponenta. Chcete ji teď stáhnout?</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Určitě chcete přerušit dávkové skenování?</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Přerušit dávku</value>
     </data>
 </root>
