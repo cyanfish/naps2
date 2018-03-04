@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2017-06-06 09:31+0000\n"
+"PO-Revision-Date: 2018-02-20 18:33+0000\n"
 "Last-Translator: Antonino <antoninomurabito@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.13.0\n"
+"X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1496741505.000000\n"
+"X-POOTLE-MTIME: 1519151630.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -97,35 +97,35 @@ msgstr "Tutti ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr "Tutti i files"
+msgstr "Tutti i file"
 
 #: FPdfSettings.resx$cbAllowAnnotations.Text$Message
 msgid "Allow Annotations"
-msgstr "Consenti Annotazioni"
+msgstr "Consenti annotazioni"
 
 #: FPdfSettings.resx$cbAllowContentCopying.Text$Message
 msgid "Allow Content Copying"
-msgstr "Consenti la Copia dei Contenuti"
+msgstr "Consenti la copia dei contenuti"
 
 #: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "Consenti la Copia dei contenuti per Accessibilità"
+msgstr "Consenti la copia dei contenuti per accessibilità"
 
 #: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
 msgid "Allow Document Assembly"
-msgstr "Consenti Composizione Documento"
+msgstr "Consenti composizione documento"
 
 #: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
 msgid "Allow Document Modification"
-msgstr "Consenti Modifica Documento"
+msgstr "Consenti modifica documento"
 
 #: FPdfSettings.resx$cbAllowFormFilling.Text$Message
 msgid "Allow Form Filling"
-msgstr "Consenti Compilazione Modulo"
+msgstr "Consenti compilazione modulo"
 
 #: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
 msgid "Allow Full Quality Printing"
-msgstr "Consenti Stampa ad alta qualità"
+msgstr "Consenti stampa ad alta qualità"
 
 #: FPdfSettings.resx$cbAllowPrinting.Text$Message
 msgid "Allow Printing"
@@ -142,10 +142,14 @@ msgstr "Interleave alternativo"
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
 msgstr ""
+"E' neccessario un componente aggiuntivo per importare questo fle PDF. Voui "
+"scaricarlo ora?"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr ""
+"Per importare questo file PDF è necessario un componente aggiuntivo. Vuoi "
+"scaricarlo ora?"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -186,7 +190,7 @@ msgstr "Applica a tutte le {0} immagini selezionate"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Sei sicuro di voler annullare la scansione batch?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -194,7 +198,7 @@ msgstr "Vuoi cancellare il(i) {0} oggetto(i)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete"
-msgstr ""
+msgstr "Sei sicuro di voler eliminare"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete "{0}"?"
@@ -292,7 +296,6 @@ msgstr "Bianco e nero"
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
 #: FBlackWhite.resx$$Message
-#, fuzzy
 msgid "Black and White"
 msgstr "Bianco e nero"
 
@@ -309,7 +312,7 @@ msgstr "Luminosità"
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 #: FBrightnessContrast.resx$$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Luminosità/contrasto"
 
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FEditProfile.resx$btnCancel.Text$Message
@@ -339,7 +342,7 @@ msgstr "Annulla"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Annulla batch"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -510,7 +513,7 @@ msgstr "Errore nel download"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Necessario download"
 
 #: FDownloadProgress.resx$$this.Text$Message
 #: FDownloadProgress.resx$$Message
@@ -637,7 +640,7 @@ msgstr "Ora (0-23)"
 #: FHueSaturation.resx$$this.Text$Message
 #: FHueSaturation.resx$$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Tonalità/saturazione"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -1200,7 +1203,7 @@ msgstr "Imposta predefinito"
 #: FViewer.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Focalizzare"
 
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
