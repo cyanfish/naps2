@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms
 {
@@ -21,6 +20,7 @@ namespace NAPS2.WinForms
             this.userConfigManager = userConfigManager;
             this.dialogHelper = dialogHelper;
             InitializeComponent();
+            AddEnumItems<PdfCompat>(cmbCompat);
         }
 
         protected override void OnLoad(object sender, EventArgs e)
@@ -50,14 +50,15 @@ namespace NAPS2.WinForms
             cbEncryptPdf.Checked = pdfSettings.Encryption.EncryptPdf;
             txtOwnerPassword.Text = pdfSettings.Encryption.OwnerPassword;
             txtUserPassword.Text = pdfSettings.Encryption.UserPassword;
-            cbAllowContentCopyingForAccessibility.Checked = pdfSettings.Encryption.AllowContentCopyingForAccessibility;
-            cbAllowAnnotations.Checked = pdfSettings.Encryption.AllowAnnotations;
-            cbAllowDocumentAssembly.Checked = pdfSettings.Encryption.AllowDocumentAssembly;
-            cbAllowContentCopying.Checked = pdfSettings.Encryption.AllowContentCopying;
-            cbAllowFormFilling.Checked = pdfSettings.Encryption.AllowFormFilling;
-            cbAllowFullQualityPrinting.Checked = pdfSettings.Encryption.AllowFullQualityPrinting;
-            cbAllowDocumentModification.Checked = pdfSettings.Encryption.AllowDocumentModification;
-            cbAllowPrinting.Checked = pdfSettings.Encryption.AllowPrinting;
+            clbPerms.SetItemChecked(0, pdfSettings.Encryption.AllowPrinting);
+            clbPerms.SetItemChecked(1, pdfSettings.Encryption.AllowFullQualityPrinting);
+            clbPerms.SetItemChecked(2, pdfSettings.Encryption.AllowDocumentModification);
+            clbPerms.SetItemChecked(3, pdfSettings.Encryption.AllowDocumentAssembly);
+            clbPerms.SetItemChecked(4, pdfSettings.Encryption.AllowContentCopying);
+            clbPerms.SetItemChecked(5, pdfSettings.Encryption.AllowContentCopyingForAccessibility);
+            clbPerms.SetItemChecked(6, pdfSettings.Encryption.AllowAnnotations);
+            clbPerms.SetItemChecked(7, pdfSettings.Encryption.AllowFormFilling);
+            cmbCompat.SelectedIndex = (int) pdfSettings.Compat;
         }
 
         private void UpdateEnabled()
@@ -67,10 +68,7 @@ namespace NAPS2.WinForms
             bool encrypt = cbEncryptPdf.Checked;
             txtUserPassword.Enabled = txtOwnerPassword.Enabled = cbShowOwnerPassword.Enabled = cbShowUserPassword.Enabled =
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
-            cbAllowAnnotations.Enabled =
-                cbAllowContentCopying.Enabled = cbAllowContentCopyingForAccessibility.Enabled =
-                    cbAllowDocumentAssembly.Enabled = cbAllowDocumentModification.Enabled = cbAllowFormFilling.Enabled =
-                        cbAllowFullQualityPrinting.Enabled = cbAllowPrinting.Enabled = encrypt;
+            clbPerms.Enabled = encrypt;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -91,15 +89,16 @@ namespace NAPS2.WinForms
                     EncryptPdf = cbEncryptPdf.Checked,
                     OwnerPassword = txtOwnerPassword.Text,
                     UserPassword = txtUserPassword.Text,
-                    AllowContentCopyingForAccessibility = cbAllowContentCopyingForAccessibility.Checked,
-                    AllowAnnotations = cbAllowAnnotations.Checked,
-                    AllowDocumentAssembly = cbAllowDocumentAssembly.Checked,
-                    AllowContentCopying = cbAllowContentCopying.Checked,
-                    AllowFormFilling = cbAllowFormFilling.Checked,
-                    AllowFullQualityPrinting = cbAllowFullQualityPrinting.Checked,
-                    AllowDocumentModification = cbAllowDocumentModification.Checked,
-                    AllowPrinting = cbAllowPrinting.Checked
-                }
+                    AllowPrinting = clbPerms.GetItemChecked(0),
+                    AllowFullQualityPrinting = clbPerms.GetItemChecked(1),
+                    AllowDocumentModification = clbPerms.GetItemChecked(2),
+                    AllowDocumentAssembly = clbPerms.GetItemChecked(3),
+                    AllowContentCopying = clbPerms.GetItemChecked(4),
+                    AllowContentCopyingForAccessibility = clbPerms.GetItemChecked(5),
+                    AllowAnnotations = clbPerms.GetItemChecked(6),
+                    AllowFormFilling = clbPerms.GetItemChecked(7)
+                },
+                Compat = (PdfCompat)cmbCompat.SelectedIndex
             };
 
             pdfSettingsContainer.PdfSettings = pdfSettings;
