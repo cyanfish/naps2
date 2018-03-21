@@ -28,7 +28,7 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(btnOK, btnCancel, cbShowOwnerPassword, cbShowUserPassword, btnChooseFolder)
                     .RightToForm()
-                .Bind(groupMetadata, groupProtection)
+                .Bind(groupMetadata, groupProtection, groupCompat, clbPerms)
                     .WidthToForm()
                 .Bind(txtDefaultFilePath, txtTitle, txtAuthor, txtSubject, txtKeywords, txtOwnerPassword, txtUserPassword)
                     .WidthToForm()

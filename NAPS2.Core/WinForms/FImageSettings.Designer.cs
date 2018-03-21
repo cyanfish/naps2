@@ -41,14 +41,20 @@ namespace NAPS2.WinForms
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
             this.txtDefaultFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.txtJpegQuality = new System.Windows.Forms.TextBox();
             this.tbJpegQuality = new System.Windows.Forms.TrackBar();
             this.lblWarning = new System.Windows.Forms.Label();
             this.btnChooseFolder = new System.Windows.Forms.Button();
             this.cbSkipSavePrompt = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbTiffCompr = new System.Windows.Forms.ComboBox();
+            this.cbSinglePageTiff = new System.Windows.Forms.CheckBox();
+            this.groupJpeg = new System.Windows.Forms.GroupBox();
+            this.groupTiff = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).BeginInit();
+            this.groupJpeg.SuspendLayout();
+            this.groupTiff.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOK
@@ -89,11 +95,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
             // linkPlaceholders
             // 
             resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
@@ -133,27 +134,65 @@ namespace NAPS2.WinForms
             this.cbSkipSavePrompt.Name = "cbSkipSavePrompt";
             this.cbSkipSavePrompt.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // cmbTiffCompr
+            // 
+            this.cmbTiffCompr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTiffCompr.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbTiffCompr, "cmbTiffCompr");
+            this.cmbTiffCompr.Name = "cmbTiffCompr";
+            // 
+            // cbSinglePageTiff
+            // 
+            resources.ApplyResources(this.cbSinglePageTiff, "cbSinglePageTiff");
+            this.cbSinglePageTiff.Name = "cbSinglePageTiff";
+            this.cbSinglePageTiff.UseVisualStyleBackColor = true;
+            // 
+            // groupJpeg
+            // 
+            this.groupJpeg.Controls.Add(this.lblWarning);
+            this.groupJpeg.Controls.Add(this.tbJpegQuality);
+            this.groupJpeg.Controls.Add(this.txtJpegQuality);
+            resources.ApplyResources(this.groupJpeg, "groupJpeg");
+            this.groupJpeg.Name = "groupJpeg";
+            this.groupJpeg.TabStop = false;
+            // 
+            // groupTiff
+            // 
+            this.groupTiff.Controls.Add(this.label3);
+            this.groupTiff.Controls.Add(this.cmbTiffCompr);
+            this.groupTiff.Controls.Add(this.cbSinglePageTiff);
+            resources.ApplyResources(this.groupTiff, "groupTiff");
+            this.groupTiff.Name = "groupTiff";
+            this.groupTiff.TabStop = false;
+            // 
             // FImageSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupTiff);
+            this.Controls.Add(this.groupJpeg);
             this.Controls.Add(this.cbSkipSavePrompt);
             this.Controls.Add(this.btnChooseFolder);
-            this.Controls.Add(this.lblWarning);
-            this.Controls.Add(this.txtJpegQuality);
             this.Controls.Add(this.linkPlaceholders);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtDefaultFilePath);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRestoreDefaults);
             this.Controls.Add(this.cbRememberSettings);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.tbJpegQuality);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FImageSettings";
             ((System.ComponentModel.ISupportInitialize)(this.tbJpegQuality)).EndInit();
+            this.groupJpeg.ResumeLayout(false);
+            this.groupJpeg.PerformLayout();
+            this.groupTiff.ResumeLayout(false);
+            this.groupTiff.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,12 +207,16 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Button btnRestoreDefaults;
         private System.Windows.Forms.TextBox txtDefaultFilePath;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel linkPlaceholders;
         private System.Windows.Forms.TextBox txtJpegQuality;
         private System.Windows.Forms.TrackBar tbJpegQuality;
         private System.Windows.Forms.Label lblWarning;
         private System.Windows.Forms.Button btnChooseFolder;
         private System.Windows.Forms.CheckBox cbSkipSavePrompt;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbTiffCompr;
+        private System.Windows.Forms.CheckBox cbSinglePageTiff;
+        private System.Windows.Forms.GroupBox groupJpeg;
+        private System.Windows.Forms.GroupBox groupTiff;
     }
 }

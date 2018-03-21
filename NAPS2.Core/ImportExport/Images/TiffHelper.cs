@@ -36,35 +36,26 @@ namespace NAPS2.ImportExport.Images
                 {
                     var iparams = new EncoderParameters(1);
                     Encoder iparam = Encoder.Compression;
-                    var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression));
-                    iparams.Param[0] = iparamPara;
                     using (var bitmap = scannedImageRenderer.Render(images[0]))
                     {
                         ValidateBitmap(bitmap);
+                        var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
+                        iparams.Param[0] = iparamPara;
                         bitmap.Save(location, codecInfo, iparams);
                     }
                 }
                 else if (images.Count > 1)
                 {
-                    Encoder saveEncoder;
-                    Encoder compressionEncoder;
-                    EncoderParameter SaveEncodeParam;
-                    EncoderParameter CompressionEncodeParam;
                     var encoderParams = new EncoderParameters(2);
-
-                    saveEncoder = Encoder.SaveFlag;
-                    compressionEncoder = Encoder.Compression;
-
-                    // Save the first page (frame).
-                    SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
-                    CompressionEncodeParam = new EncoderParameter(compressionEncoder, (long)EncoderValue.CompressionLZW);
-                    encoderParams.Param[0] = CompressionEncodeParam;
-                    encoderParams.Param[1] = SaveEncodeParam;
+                    var saveEncoder = Encoder.SaveFlag;
+                    var compressionEncoder = Encoder.Compression;
 
                     File.Delete(location);
                     using (var bitmap0 = scannedImageRenderer.Render(images[0]))
                     {
                         ValidateBitmap(bitmap0);
+                        encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
+                        encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame); ;
                         bitmap0.Save(location, codecInfo, encoderParams);
 
                         for (int i = 1; i < images.Count; i++)
@@ -79,20 +70,16 @@ namespace NAPS2.ImportExport.Images
                                 return false;
                             }
 
-                            SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);
-                            CompressionEncodeParam = new EncoderParameter(compressionEncoder,
-                                (long)EncoderValue.CompressionLZW);
-                            encoderParams.Param[0] = CompressionEncodeParam;
-                            encoderParams.Param[1] = SaveEncodeParam;
                             using (var bitmap = scannedImageRenderer.Render(images[i]))
                             {
                                 ValidateBitmap(bitmap);
+                                encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));
+                                encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);
                                 bitmap0.SaveAdd(bitmap, encoderParams);
                             }
                         }
 
-                        SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.Flush);
-                        encoderParams.Param[0] = SaveEncodeParam;
+                        encoderParams.Param[0] = new EncoderParameter(saveEncoder, (long)EncoderValue.Flush);
                         bitmap0.SaveAdd(encoderParams);
                     }
                 }
@@ -107,7 +94,7 @@ namespace NAPS2.ImportExport.Images
 
         }
 
-        private EncoderValue GetEncoderValue(TiffCompression compression)
+        private EncoderValue GetEncoderValue(TiffCompression compression, Bitmap bitmap)
         {
             switch (compression)
             {
@@ -115,8 +102,20 @@ namespace NAPS2.ImportExport.Images
                     return EncoderValue.CompressionNone;
                 case TiffCompression.Ccitt4:
                     return EncoderValue.CompressionCCITT4;
-                default:
+                case TiffCompression.Lzw:
                     return EncoderValue.CompressionLZW;
+                default:
+                    if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed
+                        && bitmap.Palette.Entries.Length == 2
+                        && bitmap.Palette.Entries[0].ToArgb() == Color.Black.ToArgb()
+                        && bitmap.Palette.Entries[1].ToArgb() == Color.White.ToArgb())
+                    {
+                        return EncoderValue.CompressionCCITT4;
+                    }
+                    else
+                    {
+                        return EncoderValue.CompressionLZW;
+                    }
             }
         }
 

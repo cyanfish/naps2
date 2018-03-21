@@ -26,6 +26,7 @@ namespace NAPS2.ImportExport.Images
 
     public enum TiffCompression
     {
+        Auto,
         Lzw,
         Ccitt4,
         None
