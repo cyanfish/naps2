@@ -111,6 +111,9 @@ namespace NAPS2.Automation
         [Option("usesavedencryptconfig", HelpText = "Use the encryption configured in the GUI, if any, for the generated PDF.")]
         public bool UseSavedEncryptConfig { get; set; }
 
+        [Option("pdfcompat", HelpText = "The standard to use for the generated PDF. Possible values: default, A1-b, A2-b, A3-b, A3-u")]
+        public string PdfCompat { get; set; }
+
         #endregion
 
         #region OCR Options

@@ -98,7 +98,7 @@ namespace NAPS2.Automation
                 {
                     return;
                 }
-                
+
                 scanList = new List<List<ScannedImage>>();
 
                 if (options.ImportPath != null)
@@ -154,7 +154,8 @@ namespace NAPS2.Automation
             if (ocrDependencyManager.Components.Tesseract304.IsSupported)
             {
                 availableComponents.Add((ocrDependencyManager.Downloads.Tesseract304, ocrDependencyManager.Components.Tesseract304));
-            } else if (ocrDependencyManager.Components.Tesseract304Xp.IsSupported)
+            }
+            else if (ocrDependencyManager.Components.Tesseract304Xp.IsSupported)
             {
                 availableComponents.Add((ocrDependencyManager.Downloads.Tesseract304Xp, ocrDependencyManager.Components.Tesseract304Xp));
             }
@@ -194,7 +195,7 @@ namespace NAPS2.Automation
             }
             progressForm.ShowDialog();
         }
-        
+
         private void ReorderScannedImages()
         {
             var sep = options.SplitPatchT ? SaveSeparator.PatchT
@@ -497,7 +498,29 @@ namespace NAPS2.Automation
                 }
             }
 
-            var pdfSettings = new PdfSettings { Metadata = metadata, Encryption = encryption };
+            var compat = PdfCompat.Default;
+            if (options.PdfCompat != null)
+            {
+                var t = options.PdfCompat.Replace(" ", "").Replace("-", "").ToLowerInvariant();
+                if (t.EndsWith("a1b"))
+                {
+                    compat = PdfCompat.PdfA1B;
+                }
+                else if (t.EndsWith("a2b"))
+                {
+                    compat = PdfCompat.PdfA2B;
+                }
+                else if (t.EndsWith("a3b"))
+                {
+                    compat = PdfCompat.PdfA3B;
+                }
+                else if (t.EndsWith("a3u"))
+                {
+                    compat = PdfCompat.PdfA3U;
+                }
+            }
+
+            var pdfSettings = new PdfSettings { Metadata = metadata, Encryption = encryption, Compat = compat };
 
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr || appConfigManager.Config.OcrState == OcrState.Enabled);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrDependencyManager.DefaultLanguageCode) : null;
