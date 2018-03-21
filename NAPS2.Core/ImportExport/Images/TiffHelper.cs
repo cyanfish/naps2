@@ -19,7 +19,7 @@ namespace NAPS2.ImportExport.Images
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
-        public bool SaveMultipage(List<ScannedImage> images, string location, Func<int, bool> progressCallback)
+        public bool SaveMultipage(List<ScannedImage> images, string location, TiffCompression compression, Func<int, bool> progressCallback)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace NAPS2.ImportExport.Images
                 {
                     var iparams = new EncoderParameters(1);
                     Encoder iparam = Encoder.Compression;
-                    var iparamPara = new EncoderParameter(iparam, (long)(EncoderValue.CompressionLZW));
+                    var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression));
                     iparams.Param[0] = iparamPara;
                     using (var bitmap = scannedImageRenderer.Render(images[0]))
                     {
@@ -79,9 +79,9 @@ namespace NAPS2.ImportExport.Images
                                 return false;
                             }
 
-                            SaveEncodeParam = new EncoderParameter(saveEncoder, (long) EncoderValue.FrameDimensionPage);
+                            SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.FrameDimensionPage);
                             CompressionEncodeParam = new EncoderParameter(compressionEncoder,
-                                (long) EncoderValue.CompressionLZW);
+                                (long)EncoderValue.CompressionLZW);
                             encoderParams.Param[0] = CompressionEncodeParam;
                             encoderParams.Param[1] = SaveEncodeParam;
                             using (var bitmap = scannedImageRenderer.Render(images[i]))
@@ -91,7 +91,7 @@ namespace NAPS2.ImportExport.Images
                             }
                         }
 
-                        SaveEncodeParam = new EncoderParameter(saveEncoder, (long) EncoderValue.Flush);
+                        SaveEncodeParam = new EncoderParameter(saveEncoder, (long)EncoderValue.Flush);
                         encoderParams.Param[0] = SaveEncodeParam;
                         bitmap0.SaveAdd(encoderParams);
                     }
@@ -105,6 +105,19 @@ namespace NAPS2.ImportExport.Images
                 throw new Exception("Error saving TIFF", ex);
             }
 
+        }
+
+        private EncoderValue GetEncoderValue(TiffCompression compression)
+        {
+            switch (compression)
+            {
+                case TiffCompression.None:
+                    return EncoderValue.CompressionNone;
+                case TiffCompression.Ccitt4:
+                    return EncoderValue.CompressionCCITT4;
+                default:
+                    return EncoderValue.CompressionLZW;
+            }
         }
 
         private void ValidateBitmap(Bitmap bitmap)

@@ -18,5 +18,16 @@ namespace NAPS2.ImportExport.Images
         public bool SkipSavePrompt { get; set; }
 
         public int JpegQuality { get; set; }
+
+        public TiffCompression TiffCompression { get; set; }
+
+        public bool SinglePageTiff { get; set; }
+    }
+
+    public enum TiffCompression
+    {
+        Lzw,
+        Ccitt4,
+        None
     }
 }
