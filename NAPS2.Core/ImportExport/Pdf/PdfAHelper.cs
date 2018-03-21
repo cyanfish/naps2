@@ -10,17 +10,34 @@ namespace NAPS2.ImportExport.Pdf
 {
     public static class PdfAHelper
     {
-        public static void CreateXmpMetadata(PdfDocument document)
+        public static void CreateXmpMetadata(PdfDocument document, PdfCompat compat)
         {
             var metadataDict = new PdfDictionary(document);
             metadataDict.Elements["/Type"] = new PdfName("/Metadata");
             metadataDict.Elements["/Subtype"] = new PdfName("/XML");
-            metadataDict.CreateStream(CreateRawXmpMetadata(document.Info));
+            metadataDict.CreateStream(CreateRawXmpMetadata(document.Info, GetConformance(compat)));
             document.Internals.AddObject(metadataDict);
             document.Internals.Catalog.Elements["/Metadata"] = metadataDict.Reference;
         }
 
-        private static byte[] CreateRawXmpMetadata(PdfDocumentInformation info)
+        private static (string, string) GetConformance(PdfCompat compat)
+        {
+            switch (compat)
+            {
+                case PdfCompat.PdfA1B:
+                    return ("1", "B");
+                case PdfCompat.PdfA2B:
+                    return ("2", "B");
+                case PdfCompat.PdfA3B:
+                    return ("3", "B");
+                case PdfCompat.PdfA3U:
+                    return ("3", "U");
+                default:
+                    return ("", "");
+            }
+        }
+
+        private static byte[] CreateRawXmpMetadata(PdfDocumentInformation info, (string, string) conformance)
         {
             // TODO: Remember to test unicode metadata
             string xml = $@"<?xpacket begin=""ï»¿"" id=""W5M0MpCehiHzreSzNTczkc9d""?>
@@ -37,8 +54,8 @@ namespace NAPS2.ImportExport.Pdf
       xmp:CreateDate=""{info.CreationDate:yyyy'-'MM'-'dd'T'HH':'mm':'ssK}""
       xmp:ModifyDate=""{info.ModificationDate:yyyy'-'MM'-'dd'T'HH':'mm':'ssK}""
       xmp:CreatorTool=""{info.Creator}""
-      pdfaid:part=""1""
-      pdfaid:conformance=""B"">
+      pdfaid:part=""{ conformance.Item1 }""
+      pdfaid:conformance=""{ conformance.Item2 }"">
 	  <dc:creator>
         <rdf:Seq>
           <rdf:li>{info.Author}</rdf:li>
@@ -66,7 +83,12 @@ namespace NAPS2.ImportExport.Pdf
             return Encoding.UTF8.GetBytes(xml);
         }
 
-        public static void SetDocColorMode(PdfDocument document)
+        public static void DisableTransparency(PdfDocument document)
+        {
+            document.Options.ColorMode = PdfColorMode.Undefined;
+        }
+
+        public static void SetColorProfile(PdfDocument document)
         {
             var iccProfile = new PdfDictionary(document);
             iccProfile.Elements["/Alternate"] = new PdfName("/DeviceRGB");
@@ -75,7 +97,6 @@ namespace NAPS2.ImportExport.Pdf
             iccProfile.CreateStream(IccPofileBytes);
             document.Internals.AddObject(iccProfile);
 
-            document.Options.ColorMode = PdfColorMode.Undefined;
             var intent = new PdfDictionary(document);
             intent.Elements["/Type"] = new PdfName("/OutputIntent");
             intent.Elements["/S"] = new PdfName("/GTS_PDFA1");
@@ -85,12 +106,24 @@ namespace NAPS2.ImportExport.Pdf
             document.Internals.Catalog.Elements["/OutputIntents"] = new PdfArray(document, intent);
         }
 
-        public static void ProcessCidFonts(PdfDocument document)
+        public static void SetCidStream(PdfDocument document)
         {
-            //var cidStream = new PdfDictionary(document);
-            //cidStream.CreateStream(new byte[] { 0 });
-            //document.Internals.AddObject(cidStream);
+            var cidStream = new PdfDictionary(document);
+            cidStream.CreateStream(new byte[] { 0 });
+            document.Internals.AddObject(cidStream);
 
+            foreach (var font in document.Internals.GetAllObjects().OfType<PdfDictionary>())
+            {
+                var type = font.Elements["/Type"] as PdfName;
+                if (type != null && type.Value == "/FontDescriptor")
+                {
+                    font.Elements["/CIDSet"] = cidStream.Reference;
+                }
+            }
+        }
+
+        public static void SetCidMap(PdfDocument document)
+        {
             foreach (var font in document.Internals.GetAllObjects().OfType<PdfFont>())
             {
                 var subtype = font.Elements["/Subtype"] as PdfName;
@@ -99,15 +132,6 @@ namespace NAPS2.ImportExport.Pdf
                     font.Elements["/CIDToGIDMap"] = new PdfName("/Identity");
                 }
             }
-
-            //foreach (var font in document.Internals.GetAllObjects().OfType<PdfDictionary>())
-            //{
-            //    var type = font.Elements["/Type"] as PdfName;
-            //    if (type != null && type.Value == "/FontDescriptor")
-            //    {
-            //        font.Elements["/CIDSet"] = cidStream.Reference;
-            //    }
-            //}
         }
 
         private static readonly byte[] IccPofileBytes = { 0x78, 0x9C, 0xB5, 0x96, 0x69, 0x50, 0x13, 0xD9, 0x16, 0xC7, 0x6F, 0x77, 0xF6, 0x8D, 0x2D, 0x01, 0x01, 0x59, 0xC2, 0xBE, 0x86, 0x4D, 0x96, 0x00, 0xB2, 0x86, 0x2D, 0xA0, 0x82, 0x80, 0x6C, 0xA2, 0x12, 0x92, 0x00, 0x61, 0x09, 0x10, 0x12, 0xC0, 0x5D, 0x11, 0x51, 0x81, 0x11, 0x45, 0x44, 0x04, 0x5C, 0x40, 0x06, 0x45, 0x1C, 0x70, 0x74, 0x58, 0x64, 0x10, 0x11, 0x51, 0xDC, 0x06, 0x05, 0x05, 0x54, 0x5C, 0x82, 0x0C, 0x0A, 0xCA, 0x38, 0x38, 0x8A, 0x1B, 0x2A, 0xAF, 0x03, 0x1F, 0x74, 0xEA, 0x4D, 0xD5, 0xAB, 0x57, 0xAF, 0xDE, 0xBF, 0xAA, 0xBB, 0x7F, 0x7D, 0xEA, 0x9C, 0xDB, 0xE7, 0x9E, 0xFB, 0xA1, 0xFF, 0x00,

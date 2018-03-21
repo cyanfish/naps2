@@ -84,9 +84,14 @@ namespace NAPS2.ImportExport.Pdf
             document.Info.ModificationDate = now;
             if (settings.Compat == PdfCompat.PdfA1B)
             {
-                PdfAHelper.SetDocColorMode(document);
-                PdfAHelper.CreateXmpMetadata(document);
-                PdfAHelper.ProcessCidFonts(document);
+                PdfAHelper.SetCidStream(document);
+                PdfAHelper.DisableTransparency(document);
+            }
+            if (settings.Compat != PdfCompat.Default)
+            {
+                PdfAHelper.SetColorProfile(document);
+                PdfAHelper.SetCidMap(document);
+                PdfAHelper.CreateXmpMetadata(document, settings.Compat);
             }
 
             PathHelper.EnsureParentDirExists(path);
@@ -293,7 +298,7 @@ namespace NAPS2.ImportExport.Pdf
 
         private static void DrawImageOnPage(PdfPage page, XImage img, PdfSettings settings)
         {
-            if (settings.Compat == PdfCompat.PdfA1B || settings.Compat == PdfCompat.NoInterp)
+            if (settings.Compat != PdfCompat.Default)
             {
                 img.Interpolate = false;
             }

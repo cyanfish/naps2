@@ -19,7 +19,7 @@ namespace NAPS2.Lang.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class SettingsResources {
@@ -282,6 +282,51 @@ namespace NAPS2.Lang.Resources {
         internal static string PageSizeUnit_Millimetre {
             get {
                 return ResourceManager.GetString("PageSizeUnit_Millimetre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        internal static string PdfCompat_Default {
+            get {
+                return ResourceManager.GetString("PdfCompat_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF/A-1b.
+        /// </summary>
+        internal static string PdfCompat_PdfA1B {
+            get {
+                return ResourceManager.GetString("PdfCompat_PdfA1B", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF/A-2b.
+        /// </summary>
+        internal static string PdfCompat_PdfA2B {
+            get {
+                return ResourceManager.GetString("PdfCompat_PdfA2B", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF/A-3b.
+        /// </summary>
+        internal static string PdfCompat_PdfA3B {
+            get {
+                return ResourceManager.GetString("PdfCompat_PdfA3B", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF/A-3u.
+        /// </summary>
+        internal static string PdfCompat_PdfA3U {
+            get {
+                return ResourceManager.GetString("PdfCompat_PdfA3U", resourceCulture);
             }
         }
         
