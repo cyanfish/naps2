@@ -57,8 +57,7 @@ namespace NAPS2.ImportExport.Pdf
                 document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
                 document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
-
-
+            
             bool useOcr = false;
             if (ocrLanguageCode != null)
             {
@@ -73,11 +72,21 @@ namespace NAPS2.ImportExport.Pdf
             }
 
             bool result = useOcr
-                ? BuildDocumentWithOcr(progressCallback, document, images, ocrLanguageCode)
-                : BuildDocumentWithoutOcr(progressCallback, document, images);
+                ? BuildDocumentWithOcr(progressCallback, document, settings, images, ocrLanguageCode)
+                : BuildDocumentWithoutOcr(progressCallback, document, settings, images);
             if (!result)
             {
                 return false;
+            }
+
+            var now = DateTime.Now;
+            document.Info.CreationDate = now;
+            document.Info.ModificationDate = now;
+            if (settings.Compat == PdfCompat.PdfA1B)
+            {
+                PdfAHelper.SetDocColorMode(document);
+                PdfAHelper.CreateXmpMetadata(document);
+                PdfAHelper.ProcessCidFonts(document);
             }
 
             PathHelper.EnsureParentDirExists(path);
@@ -85,7 +94,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithoutOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images)
+        private bool BuildDocumentWithoutOcr(Func<int, bool> progressCallback, PdfDocument document, PdfSettings settings, IEnumerable<ScannedImage> images)
         {
             int progress = 0;
             foreach (var image in images)
@@ -107,7 +116,7 @@ namespace NAPS2.ImportExport.Pdf
                         }
 
                         PdfPage page = document.AddPage();
-                        DrawImageOnPage(page, img);
+                        DrawImageOnPage(page, img, settings);
                     }
                 }
                 progress++;
@@ -115,7 +124,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, IEnumerable<ScannedImage> images, string ocrLanguageCode)
+        private bool BuildDocumentWithOcr(Func<int, bool> progressCallback, PdfDocument document, PdfSettings settings, IEnumerable<ScannedImage> images, string ocrLanguageCode)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
             // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
@@ -181,7 +190,7 @@ namespace NAPS2.ImportExport.Pdf
 
                     if (!importedPdfPassThrough)
                     {
-                        DrawImageOnPage(page, img);
+                        DrawImageOnPage(page, img, settings);
                     }
 
                     if (!progressCallback(progress))
@@ -247,7 +256,7 @@ namespace NAPS2.ImportExport.Pdf
             PdfDocument sourceDoc = PdfReader.Open(image.RecoveryFilePath, PdfDocumentOpenMode.Import);
             PdfPage sourcePage = sourceDoc.Pages.Cast<PdfPage>().Single();
             PdfPage destPage = destDoc.AddPage(sourcePage);
-            destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue();
+            destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue(new byte[] { 0xFF });
             return destPage;
         }
 
@@ -282,8 +291,12 @@ namespace NAPS2.ImportExport.Pdf
             return string.Concat(elements);
         }
 
-        private static void DrawImageOnPage(PdfPage page, XImage img)
+        private static void DrawImageOnPage(PdfPage page, XImage img, PdfSettings settings)
         {
+            if (settings.Compat == PdfCompat.PdfA1B || settings.Compat == PdfCompat.NoInterp)
+            {
+                img.Interpolate = false;
+            }
             Size realSize = GetRealSize(img);
             page.Width = realSize.Width;
             page.Height = realSize.Height;
