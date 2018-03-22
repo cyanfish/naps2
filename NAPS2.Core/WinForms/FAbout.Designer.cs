@@ -40,7 +40,9 @@ namespace NAPS2.WinForms
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.btnDonate = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDonate)).BeginInit();
             this.SuspendLayout();
             // 
             // labelProductName
@@ -89,10 +91,20 @@ namespace NAPS2.WinForms
             this.linkLabel2.TabStop = true;
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
+            // btnDonate
+            // 
+            this.btnDonate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDonate.Image = global::NAPS2.Icons.btn_donate_LG;
+            resources.ApplyResources(this.btnDonate, "btnDonate");
+            this.btnDonate.Name = "btnDonate";
+            this.btnDonate.TabStop = false;
+            this.btnDonate.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // FAbout
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDonate);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.okButton);
@@ -106,6 +118,7 @@ namespace NAPS2.WinForms
             this.MinimizeBox = false;
             this.Name = "FAbout";
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDonate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,6 +134,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel2;
-
+        private System.Windows.Forms.PictureBox btnDonate;
     }
 }

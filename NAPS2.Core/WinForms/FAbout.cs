@@ -71,5 +71,10 @@ namespace NAPS2.WinForms
         {
             Process.Start(linkLabel2.Text);
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.naps2.com/donate");
+        }
     }
 }

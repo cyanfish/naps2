@@ -4976,8 +4976,7 @@
     <None Include="Icons\arrow_up.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\picture.png" />
-    <None Include="Resources\file_extension_pdf.png" />
+    <None Include="Icons\btn_donate_LG.gif" />
     <None Include="Icons\application_cascade.png" />
     <Content Include="Icons\application_cascade.ico" />
     <Content Include="Icons\arrow_left.png" />
