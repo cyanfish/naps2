@@ -39,7 +39,6 @@ namespace NAPS2.ImportExport.Pdf
 
         private static byte[] CreateRawXmpMetadata(PdfDocumentInformation info, (string, string) conformance)
         {
-            // TODO: Remember to test unicode metadata
             string xml = $@"<?xpacket begin=""ï»¿"" id=""W5M0MpCehiHzreSzNTczkc9d""?>
 <x:xmpmeta xmlns:x=""adobe:ns:meta/"" x:xmptk=""Adobe XMP Core 5.1.0-jc003"">
   <rdf:RDF xmlns:rdf=""http://www.w3.org/1999/02/22-rdf-syntax-ns#"">

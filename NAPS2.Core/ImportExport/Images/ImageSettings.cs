@@ -23,12 +23,4 @@ namespace NAPS2.ImportExport.Images
 
         public bool SinglePageTiff { get; set; }
     }
-
-    public enum TiffCompression
-    {
-        Auto,
-        Lzw,
-        Ccitt4,
-        None
-    }
 }

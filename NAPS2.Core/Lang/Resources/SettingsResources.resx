@@ -228,6 +228,18 @@
   <data name="Source_Glass" xml:space="preserve">
     <value>Glass</value>
   </data>
+  <data name="TiffComp_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="TiffComp_Ccitt4" xml:space="preserve">
+    <value>CCITT4</value>
+  </data>
+  <data name="TiffComp_Lzw" xml:space="preserve">
+    <value>LZW</value>
+  </data>
+  <data name="TiffComp_None" xml:space="preserve">
+    <value>None</value>
+  </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>Default</value>
   </data>

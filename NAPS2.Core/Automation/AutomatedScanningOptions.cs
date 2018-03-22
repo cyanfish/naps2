@@ -177,6 +177,9 @@ namespace NAPS2.Automation
         [Option("jpegquality", DefaultValue = 75, HelpText = "The quality of saved JPEG files (0-100, default 75).")]
         public int JpegQuality { get; set; }
 
+        [Option("tiffcomp", HelpText = "The compression to use for TIFF files. Possible values: auto, lzw, ccitt4, none")]
+        public string TiffComp { get; set; }
+        
         #endregion
     }
 }

@@ -126,6 +126,7 @@
     <Compile Include="ImportExport\DirectProfileTransfer.cs" />
     <Compile Include="ImportExport\DirectImportOperation.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
+    <Compile Include="ImportExport\Images\TiffCompression.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\ImageRenderException.cs" />
     <Compile Include="ImportExport\ImportParams.cs" />

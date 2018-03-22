@@ -434,7 +434,11 @@ namespace NAPS2.Automation
         private void DoExportToImageFiles(string outputPath)
         {
             // TODO: If I add new image settings this may break things
-            imageSettingsContainer.ImageSettings = new ImageSettings { JpegQuality = options.JpegQuality };
+            imageSettingsContainer.ImageSettings = new ImageSettings
+            {
+                JpegQuality = options.JpegQuality,
+                TiffCompression = Enum.TryParse<TiffCompression>(options.TiffComp, true, out var tc) ? tc : TiffCompression.Auto
+            };
 
             foreach (var scan in scanList)
             {

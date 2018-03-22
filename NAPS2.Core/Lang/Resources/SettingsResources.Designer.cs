@@ -394,6 +394,42 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto.
+        /// </summary>
+        internal static string TiffComp_Auto {
+            get {
+                return ResourceManager.GetString("TiffComp_Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CCITT4.
+        /// </summary>
+        internal static string TiffComp_Ccitt4 {
+            get {
+                return ResourceManager.GetString("TiffComp_Ccitt4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LZW.
+        /// </summary>
+        internal static string TiffComp_Lzw {
+            get {
+                return ResourceManager.GetString("TiffComp_Lzw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string TiffComp_None {
+            get {
+                return ResourceManager.GetString("TiffComp_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
         internal static string TwainImpl_Default {
