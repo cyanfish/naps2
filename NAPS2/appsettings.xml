@@ -26,6 +26,7 @@
   <OcrTimeoutInSeconds>120</OcrTimeoutInSeconds>
   <OcrState>UserConfig</OcrState>
   <OcrDefaultLanguage></OcrDefaultLanguage>
+  <ForcePdfCompat></ForcePdfCompat>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
     <!--

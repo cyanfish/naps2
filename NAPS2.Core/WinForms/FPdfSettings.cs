@@ -13,12 +13,14 @@ namespace NAPS2.WinForms
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly IUserConfigManager userConfigManager;
         private readonly DialogHelper dialogHelper;
+        private readonly AppConfigManager appConfigManager;
 
-        public FPdfSettings(PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, DialogHelper dialogHelper)
+        public FPdfSettings(PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, DialogHelper dialogHelper, AppConfigManager appConfigManager)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.userConfigManager = userConfigManager;
             this.dialogHelper = dialogHelper;
+            this.appConfigManager = appConfigManager;
             InitializeComponent();
             AddEnumItems<PdfCompat>(cmbCompat);
         }
@@ -58,7 +60,7 @@ namespace NAPS2.WinForms
             clbPerms.SetItemChecked(5, pdfSettings.Encryption.AllowContentCopyingForAccessibility);
             clbPerms.SetItemChecked(6, pdfSettings.Encryption.AllowAnnotations);
             clbPerms.SetItemChecked(7, pdfSettings.Encryption.AllowFormFilling);
-            cmbCompat.SelectedIndex = (int) pdfSettings.Compat;
+            cmbCompat.SelectedIndex = (int)(appConfigManager.Config.ForcePdfCompat ?? pdfSettings.Compat);
         }
 
         private void UpdateEnabled()
@@ -69,6 +71,8 @@ namespace NAPS2.WinForms
             txtUserPassword.Enabled = txtOwnerPassword.Enabled = cbShowOwnerPassword.Enabled = cbShowUserPassword.Enabled =
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
             clbPerms.Enabled = encrypt;
+
+            cmbCompat.Enabled = appConfigManager.Config.ForcePdfCompat == null;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
