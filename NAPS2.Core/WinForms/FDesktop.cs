@@ -307,6 +307,7 @@ namespace NAPS2.WinForms
                 userConfigManager.Config.FirstRunDate = DateTime.Now;
                 userConfigManager.Save();
             }
+#if !INSTALLER_MSI
             else if (!appConfigManager.Config.HideDonateButton &&
                 userConfigManager.Config.LastDonatePromptDate == null &&
                 DateTime.Now - userConfigManager.Config.FirstRunDate > TimeSpan.FromDays(30))
@@ -315,6 +316,7 @@ namespace NAPS2.WinForms
                 userConfigManager.Save();
                 notify.DonatePrompt();
             }
+#endif
         }
 
         #endregion
