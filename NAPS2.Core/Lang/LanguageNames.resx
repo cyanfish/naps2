@@ -237,4 +237,7 @@
   <data name="nn" xml:space="preserve">
     <value>Nynorsk</value>
   </data>
+  <data name="si" xml:space="preserve">
+    <value>සිංහල</value>
+  </data>
 </root>

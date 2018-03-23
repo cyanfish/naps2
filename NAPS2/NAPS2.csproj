@@ -164,6 +164,7 @@
     <Content Include="Setup\lib\64\twaindsm.dll" />
     <Content Include="Setup\lib\NTwain.dll" />
     <Content Include="Setup\lib\twaindsm.dll" />
+    <Content Include="Setup\setup.iss" />
     <Content Include="Setup\setup.languagefiles.iss">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,7 +174,6 @@
     <None Include="Setup\lib\PdfSharp.dll" />
     <Content Include="scanner-app.ico" />
     <Content Include="Setup\license.txt" />
-    <Content Include="Setup\setup.iss" />
     <None Include="Setup\lib\wiaaut.dll" />
   </ItemGroup>
   <ItemGroup>
