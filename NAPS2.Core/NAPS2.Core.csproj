@@ -543,6 +543,9 @@
     <Compile Include="WinForms\OneImageSavedNotifyWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForms\DonatePromptNotifyWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForms\PdfSavedNotifyWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -43,6 +43,11 @@ namespace NAPS2.WinForms
             }
         }
 
+        public void DonatePrompt()
+        {
+            Show(new DonatePromptNotifyWidget());
+        }
+
         private void Show(NotifyWidget n)
         {
             if (appConfigManager.Config.DisableSaveNotifications)

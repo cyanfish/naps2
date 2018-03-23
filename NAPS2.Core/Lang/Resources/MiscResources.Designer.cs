@@ -394,6 +394,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Donate.
+        /// </summary>
+        internal static string Donate {
+            get {
+                return ResourceManager.GetString("Donate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NAPS2 is completely free. Consider making a donation..
+        /// </summary>
+        internal static string DonatePrompt {
+            get {
+                return ResourceManager.GetString("DonatePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You don&apos;t have permission to save files at this location..
         /// </summary>
         internal static string DontHavePermission {
