@@ -60,7 +60,8 @@ namespace NAPS2.WinForms
             clbPerms.SetItemChecked(5, pdfSettings.Encryption.AllowContentCopyingForAccessibility);
             clbPerms.SetItemChecked(6, pdfSettings.Encryption.AllowAnnotations);
             clbPerms.SetItemChecked(7, pdfSettings.Encryption.AllowFormFilling);
-            cmbCompat.SelectedIndex = (int)(appConfigManager.Config.ForcePdfCompat ?? pdfSettings.Compat);
+            var forced = appConfigManager.Config.ForcePdfCompat;
+            cmbCompat.SelectedIndex = (int)(forced == PdfCompat.Default ? pdfSettings.Compat : forced);
         }
 
         private void UpdateEnabled()
@@ -72,7 +73,7 @@ namespace NAPS2.WinForms
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
             clbPerms.Enabled = encrypt;
 
-            cmbCompat.Enabled = appConfigManager.Config.ForcePdfCompat == null;
+            cmbCompat.Enabled = appConfigManager.Config.ForcePdfCompat == PdfCompat.Default;
         }
 
         private void btnOK_Click(object sender, EventArgs e)

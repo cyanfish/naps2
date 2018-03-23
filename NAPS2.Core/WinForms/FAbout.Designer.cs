@@ -98,7 +98,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.btnDonate, "btnDonate");
             this.btnDonate.Name = "btnDonate";
             this.btnDonate.TabStop = false;
-            this.btnDonate.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.btnDonate.Click += new System.EventHandler(this.btnDonate_Click);
             // 
             // FAbout
             // 

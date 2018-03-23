@@ -32,7 +32,8 @@ namespace NAPS2.ImportExport.Pdf
 
         public bool Export(string path, IEnumerable<ScannedImage> images, PdfSettings settings, string ocrLanguageCode, Func<int, bool> progressCallback)
         {
-            var compat = appConfigManager.Config.ForcePdfCompat ?? settings.Compat;
+            var forced = appConfigManager.Config.ForcePdfCompat;
+            var compat = forced == PdfCompat.Default ? settings.Compat : forced;
 
             var document = new PdfDocument();
             document.Info.Author = settings.Metadata.Author;

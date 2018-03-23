@@ -307,7 +307,8 @@ namespace NAPS2.WinForms
                 userConfigManager.Config.FirstRunDate = DateTime.Now;
                 userConfigManager.Save();
             }
-            else if (userConfigManager.Config.LastDonatePromptDate == null &&
+            else if (!appConfigManager.Config.HideDonateButton &&
+                userConfigManager.Config.LastDonatePromptDate == null &&
                 DateTime.Now - userConfigManager.Config.FirstRunDate > TimeSpan.FromDays(30))
             {
                 userConfigManager.Config.LastDonatePromptDate = DateTime.Now;

@@ -37,6 +37,8 @@ namespace NAPS2.Config
 
         public bool HidePrintButton { get; set; }
 
+        public bool HideDonateButton { get; set; }
+
         public bool DisableAutoSave { get; set; }
 
         public bool LockSystemProfiles { get; set; }
@@ -65,7 +67,7 @@ namespace NAPS2.Config
         
         public string OcrDefaultLanguage { get; set; }
 
-        public PdfCompat? ForcePdfCompat { get; set; } 
+        public PdfCompat ForcePdfCompat { get; set; } 
 
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }
