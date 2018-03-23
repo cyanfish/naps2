@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2017-11-13 02:48+0000\n"
+"PO-Revision-Date: 2018-03-23 04:31+0000\n"
 "Last-Translator: rpozzebon <rodrigo.pozzebon@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt-BR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1510541329.000000\n"
+"X-POOTLE-MTIME: 1521779482.000000\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -96,35 +96,35 @@ msgstr "Todos ({0})"
 msgid "All Files"
 msgstr "Todos os Arquivos"
 
-#: FPdfSettings.resx$cbAllowAnnotations.Text$Message
+#: FPdfSettings.resx$clbPerms.Items6$Message
 msgid "Allow Annotations"
 msgstr "Permitir anotações"
 
-#: FPdfSettings.resx$cbAllowContentCopying.Text$Message
+#: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
 msgstr "Permitir Cópia do Conteúdo"
 
-#: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
+#: FPdfSettings.resx$clbPerms.Items5$Message
 msgid "Allow Content Copying for Accessibility"
 msgstr "Permitir Cópia de Conteúdo para Acessibilidade"
 
-#: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
+#: FPdfSettings.resx$clbPerms.Items3$Message
 msgid "Allow Document Assembly"
 msgstr "Permitir União do Documento"
 
-#: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
+#: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
 msgstr "Permitir Modificação do Documento"
 
-#: FPdfSettings.resx$cbAllowFormFilling.Text$Message
+#: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
 msgstr "Permitir Preenchimento de Formulário"
 
-#: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
 msgstr "Permitir Qualidade Máxima da Impressão"
 
-#: FPdfSettings.resx$cbAllowPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items$Message
 msgid "Allow Printing"
 msgstr "Permitir Impressão"
 
@@ -176,12 +176,16 @@ msgstr "Aplicar Brilho/Contraste após digitalizar"
 
 #: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
 #: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
-#: FSharpen.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FSharpen.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Aplicar para todas as {0} imagens selecionadas"
+
+#: MiscResources.resx$ConfirmCancelBatch$Message
+msgid "Are you sure you want to cancel the batch scan?"
+msgstr "Tem certeza de que deseja cancelar a digitalização em lote?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -214,6 +218,10 @@ msgstr "Nome do anexo"
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
 msgstr "Autor"
+
+#: SettingsResources.resx$TiffComp_Auto$Message
+msgid "Auto"
+msgstr "Automático"
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
@@ -297,31 +305,39 @@ msgstr "Brilho"
 msgid "Brightness / Contrast"
 msgstr "Brilho / Contraste"
 
+#: SettingsResources.resx$TiffComp_Ccitt4$Message
+msgid "CCITT4"
+msgstr "CCITT4"
+
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FBrightnessContrast.resx$btnCancel.Text$Message
-#: FHueSaturation.resx$btnCancel.Text$Message
-#: FSharpen.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
-#: FCrop.resx$btnCancel.Text$Message
-#: FBlackWhite.resx$btnCancel.Text$Message
 #: FRotate.resx$btnCancel.Text$Message
+#: FHueSaturation.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
+#: FSharpen.resx$btnCancel.Text$Message
+#: FBlackWhite.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Cancelar"
+
+#: MiscResources.resx$CancelBatch$Message
+msgid "Cancel Batch"
+msgstr "Cancelar Lote"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -352,9 +368,14 @@ msgstr "Limpar imagens após salvar"
 msgid "Close"
 msgstr "Fechar"
 
+#: FPdfSettings.resx$groupCompat.Text$Message
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 msgid "Compatibility"
 msgstr "Compatibilidade"
+
+#: FImageSettings.resx$label3.Text$Message
+msgid "Compression"
+msgstr "Compressão"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -413,6 +434,7 @@ msgid "Day (01-31)"
 msgstr "Dia (01-31)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$PdfCompat_Default$Message
 msgid "Default"
 msgstr "Padrão"
 
@@ -432,8 +454,8 @@ msgstr "Pausa entre digitalizações (WIA)"
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
@@ -471,6 +493,10 @@ msgstr "Nome para exibição"
 #: MiscResources.resx$EnableAutoUpdates$Message
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "Deseja que o NAPS2 verifique automaticamente por atualizações?"
+
+#: MiscResources.resx$Donate$Message
+msgid "Donate"
+msgstr "Doar"
 
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
@@ -511,7 +537,7 @@ msgstr "Editar"
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
 msgid "Email PDF"
-msgstr "E-mail"
+msgstr "Email PDF"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
@@ -550,7 +576,7 @@ msgstr "Tamanho estimado do download: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "Arquivo EXIF"
+msgstr "Exchangeable Image File (*.exif)"
 
 #: FAdvancedScanSettings.resx$cbExcludeBlankPages.Text$Message
 msgid "Exclude blank pages"
@@ -579,10 +605,10 @@ msgid "Flip duplexed pages"
 msgstr "Virar páginas frente e verso"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results"
 msgstr ""
-"Usar acima de 80 para JPEG de alta qualidade. Use a opção máxima para obter "
-"melhores resultados"
+"Para altas qualidades de JPEG (80+), aumente também a Qualidade da Imagem no "
+"seu Perfil para obter melhores resultados"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -679,13 +705,17 @@ msgstr "Intercalar"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "Arquivo JPEG (*.jpg, *.jpeg)"
 
-#: FImageSettings.resx$label2.Text$Message
+#: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
 msgstr "Qualidade JPEG"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
 msgstr "Palavras-chave"
+
+#: SettingsResources.resx$TiffComp_Lzw$Message
+msgid "LZW"
+msgstr "LZW"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -752,6 +782,10 @@ msgstr "Múltiplas digitalizações (Solicitar confirmação entre cada uma)"
 msgid "NAPS2"
 msgstr "NAPS2"
 
+#: MiscResources.resx$DonatePrompt$Message
+msgid "NAPS2 is completely free. Consider making a donation"
+msgstr "NAPS2 é totalmente gratuito. Considere fazer uma doação"
+
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
 msgstr "Nome (opcional)"
@@ -788,6 +822,10 @@ msgstr "Sem papel no alimentador"
 msgid "No scanning device was found"
 msgstr "Nenhum scanner foi encontrado"
 
+#: SettingsResources.resx$TiffComp_None$Message
+msgid "None"
+msgstr "Nenhuma"
+
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
@@ -818,12 +856,12 @@ msgstr "Configuração do OCR"
 msgid "OCR language"
 msgstr "Idioma do OCR"
 
-#: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
 #: FError.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
 #: FEditProfile.resx$btnOK.Text$Message
@@ -832,8 +870,8 @@ msgstr "Idioma do OCR"
 #: FAbout.resx$okButton.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
-#: FSharpen.resx$btnOK.Text$Message
 #: FHueSaturation.resx$btnOK.Text$Message
+#: FSharpen.resx$btnOK.Text$Message
 #: FBrightnessContrast.resx$btnOK.Text$Message
 #: FBlackWhite.resx$btnOK.Text$Message
 msgid "OK"
@@ -891,6 +929,22 @@ msgstr "Configurações de PDF"
 msgid "PDF saved"
 msgstr "PDF salvo"
 
+#: SettingsResources.resx$PdfCompat_PdfA1B$Message
+msgid "PDF/A-1b"
+msgstr "PDF/A-1b"
+
+#: SettingsResources.resx$PdfCompat_PdfA2B$Message
+msgid "PDF/A-2b"
+msgstr "PDF/A-2b"
+
+#: SettingsResources.resx$PdfCompat_PdfA3B$Message
+msgid "PDF/A-3b"
+msgstr "PDF/A-3b"
+
+#: SettingsResources.resx$PdfCompat_PdfA3U$Message
+msgid "PDF/A-3u"
+msgstr "PDF/A-3u"
+
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
 msgstr "Arquivo PNG (*.png)"
@@ -912,12 +966,12 @@ msgstr "Senha"
 msgid "Paste"
 msgstr "Colar"
 
+#: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FPlaceholders.resx$gboxPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Substituições"
@@ -1017,10 +1071,10 @@ msgstr "Repetir em caso de falha (WIA)"
 msgid "Reverse"
 msgstr "Inverter"
 
+#: FRotate.resx$btnRevert.Text$Message
 #: FHueSaturation.resx$btnRevert.Text$Message
 #: FSharpen.resx$btnRevert.Text$Message
 #: FBrightnessContrast.resx$btnRevert.Text$Message
-#: FRotate.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
 #: FBlackWhite.resx$btnRevert.Text$Message
 msgid "Revert"
@@ -1169,6 +1223,10 @@ msgstr "Nitidez"
 msgid "Show"
 msgstr "Mostrar"
 
+#: FImageSettings.resx$cbSinglePageTiff.Text$Message
+msgid "Single page files"
+msgstr "Arquivos de página única"
+
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
 msgstr "Única digitalização"
@@ -1259,6 +1317,10 @@ msgstr "O scanner escolhido está ocupado"
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "O scanner escolhido está offline"
+
+#: FImageSettings.resx$groupTiff.Text$Message
+msgid "Tiff Options"
+msgstr "Opções Tiff"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1427,6 +1489,11 @@ msgstr "{0} imagens salvas"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} de {1}"
+
+#~ msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
+#~ msgstr ""
+#~ "Usar acima de 80 para JPEG de alta qualidade. Use a opção máxima para obter "
+#~ "melhores resultados"
 
 #~ msgid "Copyright © 2009 Pavel Sorejs"
 #~ msgstr "Copyright © 2009 Pavel Sorejs"

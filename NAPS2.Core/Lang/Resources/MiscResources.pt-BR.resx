@@ -160,7 +160,7 @@
         <value>Arquivo EMF (*.emf)</value>
     </data>
     <data name="FileTypeExif" xml:space="preserve">
-        <value>Arquivo EXIF</value>
+        <value>Exchangeable Image File (*.exif)</value>
     </data>
     <data name="FileTypeGif" xml:space="preserve">
         <value>Arquivo GIF (*.gif)</value>
@@ -430,15 +430,15 @@
         <value>É necessário um componente adicional para importar este arquivo PDF. Gostaria de baixá-lo agora?</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Tem certeza de que deseja cancelar a digitalização em lote?</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Cancelar Lote</value>
     </data>
     <data name="Donate" xml:space="preserve">
-        <value>Donate</value>
+        <value>Doar</value>
     </data>
     <data name="DonatePrompt" xml:space="preserve">
-        <value>NAPS2 is completely free. Consider making a donation.</value>
+        <value>NAPS2 é totalmente gratuito. Considere fazer uma doação.</value>
     </data>
 </root>
