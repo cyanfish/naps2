@@ -17,14 +17,16 @@ namespace NAPS2.Scan
         private readonly IAutoSave autoSave;
         private readonly AppConfigManager appConfigManager;
         private readonly IProfileManager profileManager;
+        private readonly WindowsEventLogger eventLogger;
 
-        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, AppConfigManager appConfigManager, IProfileManager profileManager)
+        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, AppConfigManager appConfigManager, IProfileManager profileManager, WindowsEventLogger eventLogger)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
             this.autoSave = autoSave;
             this.appConfigManager = appConfigManager;
             this.profileManager = profileManager;
+            this.eventLogger = eventLogger;
         }
 
         public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify, Action<ScannedImage> imageCallback)
@@ -33,6 +35,7 @@ namespace NAPS2.Scan
             driver.DialogParent = dialogParent;
             driver.ScanProfile = scanProfile;
             driver.ScanParams = scanParams;
+            int pagesScanned = 0;
             try
             {
                 if (scanProfile.Device == null)
@@ -64,6 +67,7 @@ namespace NAPS2.Scan
                     {
                         // Auto save without piping images
                         var images = driver.Scan().ToList();
+                        pagesScanned = images.Count;
                         if (autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
                         {
                             foreach (ScannedImage img in images)
@@ -88,6 +92,7 @@ namespace NAPS2.Scan
                         {
                             imageCallback(scannedImage);
                             images.Add(scannedImage);
+                            pagesScanned++;
                         }
                         autoSave.Save(scanProfile.AutoSaveSettings, images, notify);
                     }
@@ -98,8 +103,11 @@ namespace NAPS2.Scan
                     foreach (ScannedImage scannedImage in driver.Scan())
                     {
                         imageCallback(scannedImage);
+                        pagesScanned++;
                     }
                 }
+
+                eventLogger.ScanComplete(scanProfile, pagesScanned);
             }
             catch (ScanDriverException e)
             {

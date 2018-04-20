@@ -511,6 +511,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scan Complete.
+        /// </summary>
+        internal static string EventScanComplete {
+            get {
+                return ResourceManager.GetString("EventScanComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have unsaved changes. Are you sure you want to exit and discard those changes?.
         /// </summary>
         internal static string ExitWithUnsavedChanges {
