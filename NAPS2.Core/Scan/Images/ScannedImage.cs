@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
@@ -205,6 +206,7 @@ namespace NAPS2.Scan.Images
             }
         }
 
+        [DataContract]
         public class SnapshotExport
         {
             public SnapshotExport(RecoveryIndexImage recoveryIndexImage, List<Transform> transformList)
@@ -213,9 +215,11 @@ namespace NAPS2.Scan.Images
                 TransformList = transformList;
             }
 
-            public RecoveryIndexImage RecoveryIndexImage { get; }
+            [DataMember]
+            public RecoveryIndexImage RecoveryIndexImage { get; protected set; }
 
-            public List<Transform> TransformList { get; }
+            [DataMember]
+            public List<Transform> TransformList { get; protected set; }
         }
     }
 }

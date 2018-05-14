@@ -19,7 +19,7 @@ namespace NAPS2.DI.EntryPoints
             try
             {
 #if DEBUG
-                Debugger.Launch();
+                // Debugger.Launch();
 #endif
 
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
