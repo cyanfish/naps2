@@ -155,7 +155,7 @@ namespace NAPS2.ImportExport.Images
             PathHelper.EnsureParentDirExists(path);
             if (Equals(format, ImageFormat.Tiff))
             {
-                tiffHelper.SaveMultipage(new List<ScannedImage> { image }, path, imageSettingsContainer.ImageSettings.TiffCompression, i => true);
+                tiffHelper.SaveMultipage(new List<ScannedImage> { image }, path, imageSettingsContainer.ImageSettings.TiffCompression, (i, j) => true);
             }
             else if (Equals(format, ImageFormat.Jpeg))
             {

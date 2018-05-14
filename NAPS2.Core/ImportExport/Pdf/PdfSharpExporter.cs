@@ -105,7 +105,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, IEnumerable<ScannedImage> images)
+        private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
         {
             int progress = 0;
             foreach (var snapshot in snapshots)
@@ -135,7 +135,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, IEnumerable<ScannedImage> images, string ocrLanguageCode)
+        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, string ocrLanguageCode)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
             // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
