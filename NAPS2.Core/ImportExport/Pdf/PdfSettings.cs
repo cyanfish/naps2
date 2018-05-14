@@ -30,5 +30,7 @@ namespace NAPS2.ImportExport.Pdf
             get => encryption;
             set => encryption = value ?? throw new ArgumentNullException(nameof(value));
         }
+
+        public PdfCompat Compat { get; set; }
     }
 }

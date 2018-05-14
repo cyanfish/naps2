@@ -300,6 +300,23 @@ namespace NAPS2.WinForms
 
             // If NAPS2 was started by the scanner button, do the appropriate actions automatically
             RunStillImageEvents();
+
+            // Show a donation prompt after a month of use
+            if (userConfigManager.Config.FirstRunDate == null)
+            {
+                userConfigManager.Config.FirstRunDate = DateTime.Now;
+                userConfigManager.Save();
+            }
+#if !INSTALLER_MSI
+            else if (!appConfigManager.Config.HideDonateButton &&
+                userConfigManager.Config.LastDonatePromptDate == null &&
+                DateTime.Now - userConfigManager.Config.FirstRunDate > TimeSpan.FromDays(30))
+            {
+                userConfigManager.Config.LastDonatePromptDate = DateTime.Now;
+                userConfigManager.Save();
+                notify.DonatePrompt();
+            }
+#endif
         }
 
         #endregion

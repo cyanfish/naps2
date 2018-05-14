@@ -12,6 +12,7 @@
   <HideSaveImagesButton>false</HideSaveImagesButton>
   <HideEmailButton>false</HideEmailButton>
   <HidePrintButton>false</HidePrintButton>
+  <HideDonateButton>false</HideDonateButton>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
   <LockUnspecifiedDevices>false</LockUnspecifiedDevices>
@@ -26,6 +27,7 @@
   <OcrTimeoutInSeconds>120</OcrTimeoutInSeconds>
   <OcrState>UserConfig</OcrState>
   <OcrDefaultLanguage></OcrDefaultLanguage>
+  <ForcePdfCompat>Default</ForcePdfCompat>
   <DefaultProfileSettings>
     <DriverName>wia</DriverName>
     <!--

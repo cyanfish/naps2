@@ -5,13 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms
 {
     partial class FAbout : FormBase
     {
-        public FAbout()
+        public FAbout(AppConfigManager appConfigManager)
         {
             RestoreFormState = false;
             InitializeComponent();
@@ -23,6 +24,11 @@ namespace NAPS2.WinForms
             labelCopyright.Text = labelCopyright.Text.Replace("\\n", "\n");
             // Grow the form to fit the copyright text if necessary
             Width = Math.Max(Width, labelCopyright.Right + 25);
+
+            if (appConfigManager.Config.HideDonateButton)
+            {
+                btnDonate.Visible = false;
+            }
         }
 
         #region Assembly Attribute Accessors
@@ -70,6 +76,11 @@ namespace NAPS2.WinForms
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(linkLabel2.Text);
+        }
+
+        private void btnDonate_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.naps2.com/donate");
         }
     }
 }

@@ -435,4 +435,13 @@
   <data name="CancelBatch" xml:space="preserve">
     <value>Cancel Batch</value>
   </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="DonatePrompt" xml:space="preserve">
+    <value>NAPS2 is completely free. Consider making a donation.</value>
+  </data>
+  <data name="EventScanComplete" xml:space="preserve">
+    <value>Scan Complete</value>
+  </data>
 </root>

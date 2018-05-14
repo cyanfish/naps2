@@ -268,7 +268,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsBrightnessContrast.Text" xml:space="preserve">
-        <value>Brightness / Contrast</value>
+        <value>Luminosità/contrasto</value>
     </data>
     <data name="tsHueSaturation.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -277,7 +277,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsHueSaturation.Text" xml:space="preserve">
-        <value>Hue / Saturation</value>
+        <value>Tonalità/saturazione</value>
     </data>
     <data name="tsBlackWhite.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -295,7 +295,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsSharpen.Text" xml:space="preserve">
-        <value>Sharpen</value>
+        <value>Focalizzare</value>
     </data>
     <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 25</value>

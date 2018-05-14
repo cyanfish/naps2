@@ -133,12 +133,15 @@
     <Compile Include="ImportExport\DirectProfileTransfer.cs" />
     <Compile Include="ImportExport\DirectImportOperation.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
+    <Compile Include="ImportExport\Images\TiffCompression.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
     <Compile Include="ImportExport\ImageRenderException.cs" />
     <Compile Include="ImportExport\ImportParams.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptPdfRenderer.cs" />
     <Compile Include="Dependencies\IComponentInstallPrompt.cs" />
     <Compile Include="ImportExport\Pdf\IPdfRenderer.cs" />
+    <Compile Include="ImportExport\Pdf\PdfAHelper.cs" />
+    <Compile Include="ImportExport\Pdf\PdfCompat.cs" />
     <Compile Include="Scan\Images\DeskewOperation.cs" />
     <Compile Include="ImportExport\Pdf\SavePdfOperation.cs" />
     <Compile Include="ImportExport\SaveSeparatorHelper.cs" />
@@ -219,6 +222,7 @@
     <Compile Include="Util\ConditionalControls.cs" />
     <Compile Include="Operation\IOperation.cs" />
     <Compile Include="Worker\IWorkerServiceFactory.cs" />
+    <Compile Include="Util\WindowsEventLogger.cs" />
     <Compile Include="Util\IOverwritePrompt.cs" />
     <Compile Include="Worker\IWorkerService.cs" />
     <Compile Include="Util\ISaveNotify.cs" />
@@ -547,6 +551,9 @@
     <Compile Include="WinForms\OneImageSavedNotifyWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForms\DonatePromptNotifyWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForms\PdfSavedNotifyWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -625,6 +632,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\MiscResources.ro.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.ru.resx" Condition="'$(Configuration)' != 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.si.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.sk.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.sl.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.sq.resx" Condition="'$(Configuration)' != 'Debug'" />
@@ -670,6 +678,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\SettingsResources.ro.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.ru.resx" Condition="'$(Configuration)' != 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.si.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.sk.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.sl.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.sq.resx" Condition="'$(Configuration)' != 'Debug'" />
@@ -768,6 +777,9 @@
       <DependentUpon>FAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAbout.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -891,6 +903,9 @@
     <EmbeddedResource Include="WinForms\FAdvancedScanSettings.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAdvancedScanSettings.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAdvancedScanSettings.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -1012,6 +1027,9 @@
     <EmbeddedResource Include="WinForms\FAutoSaveSettings.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAutoSaveSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAutoSaveSettings.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAutoSaveSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAutoSaveSettings.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAutoSaveSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -1130,6 +1148,9 @@
       <DependentUpon>FBatchPrompt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchPrompt.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FBatchPrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBatchPrompt.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBatchPrompt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchPrompt.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1253,6 +1274,9 @@
     <EmbeddedResource Include="WinForms\FBatchScan.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBatchScan.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FBatchScan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchScan.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </EmbeddedResource>
@@ -1372,6 +1396,9 @@
       <DependentUpon>FHueSaturation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FHueSaturation.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FHueSaturation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FHueSaturation.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FHueSaturation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FHueSaturation.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1496,6 +1523,9 @@
     <EmbeddedResource Include="WinForms\FCrop.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FCrop.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FCrop.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FCrop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FCrop.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FCrop.cs</DependentUpon>
     </EmbeddedResource>
@@ -1618,6 +1648,9 @@
     <EmbeddedResource Include="WinForms\FDesktop.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FDesktop.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FDesktop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
@@ -1736,6 +1769,9 @@
       <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDownloadProgress.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FDownloadProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FDownloadProgress.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDownloadProgress.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1859,6 +1895,9 @@
     <EmbeddedResource Include="WinForms\FEditProfile.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEditProfile.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditProfile.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -1978,6 +2017,9 @@
       <DependentUpon>FEmailSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEmailSettings.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FEmailSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEmailSettings.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2100,6 +2142,9 @@
     <EmbeddedResource Include="WinForms\FError.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FError.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FError.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FError.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FError.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FError.cs</DependentUpon>
     </EmbeddedResource>
@@ -2218,6 +2263,9 @@
       <DependentUpon>FBrightnessContrast.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBrightnessContrast.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBrightnessContrast.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBrightnessContrast.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2341,6 +2389,9 @@
     <EmbeddedResource Include="WinForms\FImageSettings.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FImageSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FImageSettings.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FImageSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FImageSettings.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FImageSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -2459,6 +2510,9 @@
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FOcrLanguageDownload.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2581,6 +2635,9 @@
     <EmbeddedResource Include="WinForms\FOcrSetup.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FOcrSetup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FOcrSetup.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FOcrSetup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrSetup.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FOcrSetup.cs</DependentUpon>
     </EmbeddedResource>
@@ -2701,6 +2758,9 @@
     <EmbeddedResource Include="WinForms\FPageSize.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPageSize.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPageSize.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FPageSize.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPageSize.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPageSize.cs</DependentUpon>
     </EmbeddedResource>
@@ -2819,6 +2879,9 @@
       <DependentUpon>FPdfPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfPassword.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FPdfPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfPassword.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPdfPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfPassword.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2942,6 +3005,9 @@
     <EmbeddedResource Include="WinForms\FPdfSettings.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPdfSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPdfSettings.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FPdfSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfSettings.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPdfSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -3060,6 +3126,9 @@
       <DependentUpon>FPlaceholders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPlaceholders.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FPlaceholders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FPlaceholders.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPlaceholders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPlaceholders.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3183,6 +3252,9 @@
     <EmbeddedResource Include="WinForms\FProfiles.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FProfiles.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FProfiles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FProfiles.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
@@ -3303,6 +3375,9 @@
     <EmbeddedResource Include="WinForms\FProgress.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FProgress.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FProgress.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FProgress.cs</DependentUpon>
     </EmbeddedResource>
@@ -3421,6 +3496,9 @@
       <DependentUpon>FRecover.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRecover.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FRecover.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FRecover.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRecover.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRecover.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3545,6 +3623,9 @@
     <EmbeddedResource Include="WinForms\FRotate.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRotate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FRotate.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FRotate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRotate.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRotate.cs</DependentUpon>
     </EmbeddedResource>
@@ -3665,6 +3746,9 @@
     <EmbeddedResource Include="WinForms\FScanProgress.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FScanProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FScanProgress.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FScanProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FScanProgress.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FScanProgress.cs</DependentUpon>
     </EmbeddedResource>
@@ -3783,6 +3867,9 @@
       <DependentUpon>FSelectDevice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSelectDevice.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FSelectDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSelectDevice.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSelectDevice.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3906,6 +3993,9 @@
     <EmbeddedResource Include="WinForms\FBlackWhite.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBlackWhite.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBlackWhite.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBlackWhite.cs</DependentUpon>
     </EmbeddedResource>
@@ -4024,6 +4114,9 @@
       <DependentUpon>FSharpen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSharpen.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FSharpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FSharpen.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FSharpen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSharpen.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4147,6 +4240,9 @@
     <EmbeddedResource Include="WinForms\FTwainGui.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FTwainGui.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FTwainGui.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FTwainGui.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </EmbeddedResource>
@@ -4265,6 +4361,9 @@
       <DependentUpon>FUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FUpdate.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FUpdate.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FUpdate.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4388,6 +4487,9 @@
     <EmbeddedResource Include="WinForms\FViewer.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FViewer.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FViewer.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -4506,6 +4608,9 @@
       <DependentUpon>NotifyWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\NotifyWidget.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>NotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\NotifyWidget.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>NotifyWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\NotifyWidget.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4629,6 +4734,9 @@
     <EmbeddedResource Include="WinForms\ThumbnailList.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ThumbnailList.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ThumbnailList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\ThumbnailList.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
@@ -4748,6 +4856,9 @@
       <DependentUpon>TiffViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewer.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>TiffViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\TiffViewer.si.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>TiffViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewer.sk.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4871,6 +4982,9 @@
     <EmbeddedResource Include="WinForms\TiffViewerCtl.ru.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\TiffViewerCtl.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>TiffViewerCtl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewerCtl.sk.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
@@ -4980,8 +5094,7 @@
     <None Include="Icons\arrow_up.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\picture.png" />
-    <None Include="Resources\file_extension_pdf.png" />
+    <None Include="Icons\btn_donate_LG.gif" />
     <None Include="Icons\application_cascade.png" />
     <Content Include="Icons\application_cascade.ico" />
     <Content Include="Icons\arrow_left.png" />

@@ -46,16 +46,16 @@
             // 
             // linkLabel1
             // 
-            this.linkLabel1.AutoEllipsis = true;
             resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.AutoEllipsis = true;
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // btnClose
             // 
+            resources.ApplyResources(this.btnClose, "btnClose");
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btnClose, "btnClose");
             this.btnClose.Image = global::NAPS2.Icons.close;
             this.btnClose.Name = "btnClose";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -99,10 +99,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblTitle;
+        protected System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Timer hideTimer;
+        protected System.Windows.Forms.Timer hideTimer;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
     }

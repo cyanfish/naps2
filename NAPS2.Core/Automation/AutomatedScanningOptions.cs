@@ -111,6 +111,9 @@ namespace NAPS2.Automation
         [Option("usesavedencryptconfig", HelpText = "Use the encryption configured in the GUI, if any, for the generated PDF.")]
         public bool UseSavedEncryptConfig { get; set; }
 
+        [Option("pdfcompat", HelpText = "The standard to use for the generated PDF. Possible values: default, A1-b, A2-b, A3-b, A3-u")]
+        public string PdfCompat { get; set; }
+
         #endregion
 
         #region OCR Options
@@ -174,6 +177,9 @@ namespace NAPS2.Automation
         [Option("jpegquality", DefaultValue = 75, HelpText = "The quality of saved JPEG files (0-100, default 75).")]
         public int JpegQuality { get; set; }
 
+        [Option("tiffcomp", HelpText = "The compression to use for TIFF files. Possible values: auto, lzw, ccitt4, none")]
+        public string TiffComp { get; set; }
+        
         #endregion
     }
 }

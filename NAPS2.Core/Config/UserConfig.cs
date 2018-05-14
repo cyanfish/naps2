@@ -30,6 +30,10 @@ namespace NAPS2.Config
 
         public DateTime? LastUpdateCheckDate { get; set; }
 
+        public DateTime? FirstRunDate { get; set; }
+
+        public DateTime? LastDonatePromptDate { get; set; }
+
         public bool EnableOcr { get; set; }
 
         public string OcrLanguageCode { get; set; }

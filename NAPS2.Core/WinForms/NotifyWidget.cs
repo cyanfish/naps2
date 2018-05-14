@@ -27,8 +27,15 @@ namespace NAPS2.WinForms
             if (lblTitle.Width > Width - 35)
             {
                 Width = lblTitle.Width + 35;
-                btnClose.Location = new Point(Width - 24, btnClose.Location.Y);
-                linkLabel1.Width = Width - 10;
+            }
+            if (lblTitle.Height > Height - 35)
+            {
+                Height = lblTitle.Height + 35;
+            }
+
+            if (folderTarget == null)
+            {
+                contextMenuStrip1.Enabled = false;
             }
         }
 

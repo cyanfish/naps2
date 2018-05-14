@@ -430,9 +430,15 @@
         <value>Ένα πρόσθετο συστατικό είναι απαραίτητο για την εισαγωγή αυτού του PDF. Θέλετε την λήψη του τώρα;</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Θέλετε σίγουρα την ακύρωση της μαζικής σάρωσης;</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Ακύρωση της μαζικής σάρωσης</value>
+    </data>
+    <data name="Donate" xml:space="preserve">
+        <value>Donate</value>
+    </data>
+    <data name="DonatePrompt" xml:space="preserve">
+        <value>NAPS2 is completely free. Consider making a donation.</value>
     </data>
 </root>

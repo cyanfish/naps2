@@ -373,7 +373,7 @@
         <value>Importation...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>Progression de l'envoi du PDF par courriel</value>
+        <value>Progression du PDF par courriel</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
         <value>Une erreur s'est produite en essayant d'enregistrer automatiquement.</value>
@@ -430,9 +430,15 @@
         <value>Un composant supplémentaire est requis pour importer ce fichier PDF. Faut-il le télécharger maintenant ?</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Faut-il vraiment annuler l'acquisition par lot ?</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Annuler le lot</value>
+    </data>
+    <data name="Donate" xml:space="preserve">
+        <value>Donate</value>
+    </data>
+    <data name="DonatePrompt" xml:space="preserve">
+        <value>NAPS2 is completely free. Consider making a donation.</value>
     </data>
 </root>

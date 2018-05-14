@@ -22,6 +22,7 @@ namespace NAPS2.WinForms
             this.userConfigManager = userConfigManager;
             this.dialogHelper = dialogHelper;
             InitializeComponent();
+            AddEnumItems<TiffCompression>(cmbTiffCompr);
         }
 
         protected override void OnLoad(object sender, EventArgs e)
@@ -31,7 +32,7 @@ namespace NAPS2.WinForms
                     .BottomToForm()
                 .Bind(txtJpegQuality, btnOK, btnCancel, btnChooseFolder)
                     .RightToForm()
-                .Bind(txtDefaultFilePath, tbJpegQuality, lblWarning)
+                .Bind(txtDefaultFilePath, tbJpegQuality, lblWarning, groupTiff, groupJpeg)
                     .WidthToForm()
                 .Activate();
 
@@ -45,6 +46,8 @@ namespace NAPS2.WinForms
             txtDefaultFilePath.Text = imageSettings.DefaultFileName;
             cbSkipSavePrompt.Checked = imageSettings.SkipSavePrompt;
             txtJpegQuality.Text = imageSettings.JpegQuality.ToString(CultureInfo.InvariantCulture);
+            cmbTiffCompr.SelectedIndex = (int) imageSettings.TiffCompression;
+            cbSinglePageTiff.Checked = imageSettings.SinglePageTiff;
         }
 
         private void UpdateEnabled()
@@ -63,7 +66,9 @@ namespace NAPS2.WinForms
             {
                 DefaultFileName = txtDefaultFilePath.Text,
                 SkipSavePrompt = cbSkipSavePrompt.Checked,
-                JpegQuality = tbJpegQuality.Value
+                JpegQuality = tbJpegQuality.Value,
+                TiffCompression = (TiffCompression)cmbTiffCompr.SelectedIndex,
+                SinglePageTiff = cbSinglePageTiff.Checked
             };
 
             imageSettingsContainer.ImageSettings = imageSettings;

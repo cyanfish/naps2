@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using NAPS2.Config;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -20,15 +21,20 @@ namespace NAPS2.ImportExport.Pdf
     {
         private readonly IOcrEngine ocrEngine;
         private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly AppConfigManager appConfigManager;
 
-        public PdfSharpExporter(IOcrEngine ocrEngine, ScannedImageRenderer scannedImageRenderer)
+        public PdfSharpExporter(IOcrEngine ocrEngine, ScannedImageRenderer scannedImageRenderer, AppConfigManager appConfigManager)
         {
             this.ocrEngine = ocrEngine;
             this.scannedImageRenderer = scannedImageRenderer;
+            this.appConfigManager = appConfigManager;
         }
 
         public bool Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, string ocrLanguageCode, ProgressHandler progressCallback)
         {
+            var forced = appConfigManager.Config.ForcePdfCompat;
+            var compat = forced == PdfCompat.Default ? settings.Compat : forced;
+
             var document = new PdfDocument();
             document.Info.Author = settings.Metadata.Author;
             document.Info.Creator = settings.Metadata.Creator;
@@ -57,8 +63,7 @@ namespace NAPS2.ImportExport.Pdf
                 document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
                 document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
-
-
+            
             bool useOcr = false;
             if (ocrLanguageCode != null)
             {
@@ -73,11 +78,26 @@ namespace NAPS2.ImportExport.Pdf
             }
             
             bool result = useOcr
-                ? BuildDocumentWithOcr(progressCallback, document, snapshots, ocrLanguageCode)
-                : BuildDocumentWithoutOcr(progressCallback, document, snapshots);
+                ? BuildDocumentWithOcr(progressCallback, document, compat, snapshots, ocrLanguageCode)
+                : BuildDocumentWithoutOcr(progressCallback, document, compat, snapshots);
             if (!result)
             {
                 return false;
+            }
+
+            var now = DateTime.Now;
+            document.Info.CreationDate = now;
+            document.Info.ModificationDate = now;
+            if (compat == PdfCompat.PdfA1B)
+            {
+                PdfAHelper.SetCidStream(document);
+                PdfAHelper.DisableTransparency(document);
+            }
+            if (compat != PdfCompat.Default)
+            {
+                PdfAHelper.SetColorProfile(document);
+                PdfAHelper.SetCidMap(document);
+                PdfAHelper.CreateXmpMetadata(document, compat);
             }
 
             PathHelper.EnsureParentDirExists(path);
@@ -85,7 +105,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, PdfDocument document, ICollection<ScannedImage.Snapshot> snapshots)
+        private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, IEnumerable<ScannedImage> images)
         {
             int progress = 0;
             foreach (var snapshot in snapshots)
@@ -107,7 +127,7 @@ namespace NAPS2.ImportExport.Pdf
                         }
 
                         PdfPage page = document.AddPage();
-                        DrawImageOnPage(page, img);
+                        DrawImageOnPage(page, img, compat);
                     }
                 }
                 progress++;
@@ -115,7 +135,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, ICollection<ScannedImage.Snapshot> snapshots, string ocrLanguageCode)
+        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, IEnumerable<ScannedImage> images, string ocrLanguageCode)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
             // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
@@ -181,7 +201,7 @@ namespace NAPS2.ImportExport.Pdf
 
                     if (!importedPdfPassThrough)
                     {
-                        DrawImageOnPage(page, img);
+                        DrawImageOnPage(page, img, compat);
                     }
 
                     if (!progressCallback(progress, snapshots.Count))
@@ -247,7 +267,7 @@ namespace NAPS2.ImportExport.Pdf
             PdfDocument sourceDoc = PdfReader.Open(image.RecoveryFilePath, PdfDocumentOpenMode.Import);
             PdfPage sourcePage = sourceDoc.Pages.Cast<PdfPage>().Single();
             PdfPage destPage = destDoc.AddPage(sourcePage);
-            destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue();
+            destPage.CustomValues["/NAPS2ImportedPage"] = new PdfCustomValue(new byte[] { 0xFF });
             return destPage;
         }
 
@@ -282,8 +302,12 @@ namespace NAPS2.ImportExport.Pdf
             return string.Concat(elements);
         }
 
-        private static void DrawImageOnPage(PdfPage page, XImage img)
+        private static void DrawImageOnPage(PdfPage page, XImage img, PdfCompat compat)
         {
+            if (compat != PdfCompat.Default)
+            {
+                img.Interpolate = false;
+            }
             Size realSize = GetRealSize(img);
             page.Width = realSize.Width;
             page.Height = realSize.Height;

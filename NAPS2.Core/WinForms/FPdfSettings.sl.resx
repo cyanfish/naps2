@@ -145,7 +145,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-        <value>10</value>
+        <value>11</value>
     </data>
     <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
@@ -172,7 +172,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-        <value>9</value>
+        <value>10</value>
     </data>
     <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>17, 17</value>
@@ -295,7 +295,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;groupMetadata.ZOrder" xml:space="preserve">
-        <value>8</value>
+        <value>9</value>
     </data>
     <data name="txtKeywords.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 149</value>
@@ -501,6 +501,18 @@
     <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
         <value>7</value>
     </data>
+    <data name="&gt;&gt;clbPerms.Name" xml:space="preserve">
+        <value>clbPerms</value>
+    </data>
+    <data name="&gt;&gt;clbPerms.Type" xml:space="preserve">
+        <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;clbPerms.Parent" xml:space="preserve">
+        <value>groupProtection</value>
+    </data>
+    <data name="&gt;&gt;clbPerms.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
     <data name="&gt;&gt;cbShowUserPassword.Name" xml:space="preserve">
         <value>cbShowUserPassword</value>
     </data>
@@ -511,7 +523,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;cbShowUserPassword.ZOrder" xml:space="preserve">
-        <value>0</value>
+        <value>1</value>
     </data>
     <data name="&gt;&gt;cbShowOwnerPassword.Name" xml:space="preserve">
         <value>cbShowOwnerPassword</value>
@@ -523,103 +535,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;cbShowOwnerPassword.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
-        <value>cbAllowFullQualityPrinting</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFullQualityPrinting.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFullQualityPrinting.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFullQualityPrinting.ZOrder" xml:space="preserve">
         <value>2</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
-        <value>cbAllowFormFilling</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFormFilling.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFormFilling.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFormFilling.ZOrder" xml:space="preserve">
-        <value>3</value>
-    </data>
-    <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
-        <value>cbAllowAnnotations</value>
-    </data>
-    <data name="&gt;&gt;cbAllowAnnotations.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowAnnotations.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowAnnotations.ZOrder" xml:space="preserve">
-        <value>4</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Name" xml:space="preserve">
-        <value>cbAllowContentCopyingForAccessibility</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.ZOrder" xml:space="preserve">
-        <value>5</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
-        <value>cbAllowContentCopying</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopying.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopying.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopying.ZOrder" xml:space="preserve">
-        <value>6</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
-        <value>cbAllowDocumentAssembly</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentAssembly.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentAssembly.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentAssembly.ZOrder" xml:space="preserve">
-        <value>7</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentModification.Name" xml:space="preserve">
-        <value>cbAllowDocumentModification</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentModification.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentModification.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentModification.ZOrder" xml:space="preserve">
-        <value>8</value>
-    </data>
-    <data name="&gt;&gt;cbAllowPrinting.Name" xml:space="preserve">
-        <value>cbAllowPrinting</value>
-    </data>
-    <data name="&gt;&gt;cbAllowPrinting.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowPrinting.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowPrinting.ZOrder" xml:space="preserve">
-        <value>9</value>
     </data>
     <data name="&gt;&gt;txtUserPassword.Name" xml:space="preserve">
         <value>txtUserPassword</value>
@@ -631,7 +547,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;txtUserPassword.ZOrder" xml:space="preserve">
-        <value>10</value>
+        <value>3</value>
     </data>
     <data name="&gt;&gt;lblUserPassword.Name" xml:space="preserve">
         <value>lblUserPassword</value>
@@ -643,7 +559,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;lblUserPassword.ZOrder" xml:space="preserve">
-        <value>11</value>
+        <value>4</value>
     </data>
     <data name="&gt;&gt;txtOwnerPassword.Name" xml:space="preserve">
         <value>txtOwnerPassword</value>
@@ -655,7 +571,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;txtOwnerPassword.ZOrder" xml:space="preserve">
-        <value>12</value>
+        <value>5</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
         <value>lblOwnerPassword</value>
@@ -667,7 +583,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.ZOrder" xml:space="preserve">
-        <value>13</value>
+        <value>6</value>
     </data>
     <data name="&gt;&gt;cbEncryptPdf.Name" xml:space="preserve">
         <value>cbEncryptPdf</value>
@@ -679,13 +595,13 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;cbEncryptPdf.ZOrder" xml:space="preserve">
-        <value>14</value>
+        <value>7</value>
     </data>
     <data name="groupProtection.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 272</value>
     </data>
     <data name="groupProtection.Size" type="System.Drawing.Size, System.Drawing">
-        <value>408, 304</value>
+        <value>408, 250</value>
     </data>
     <data name="groupProtection.TabIndex" type="System.Int32, mscorlib">
         <value>21</value>
@@ -703,7 +619,52 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;groupProtection.ZOrder" xml:space="preserve">
-        <value>7</value>
+        <value>8</value>
+    </data>
+    <data name="clbPerms.Items" xml:space="preserve">
+        <value>Dovoli Tiskanje</value>
+    </data>
+    <data name="clbPerms.Items1" xml:space="preserve">
+        <value>Dovoli Tiskanje v Polni Kvaliteti</value>
+    </data>
+    <data name="clbPerms.Items2" xml:space="preserve">
+        <value>Dovoli Spreminjanje Dokumenta</value>
+    </data>
+    <data name="clbPerms.Items3" xml:space="preserve">
+        <value>Dovoli Sestavo Dokumenta</value>
+    </data>
+    <data name="clbPerms.Items4" xml:space="preserve">
+        <value>Dovoli Kopiranje Vsebine</value>
+    </data>
+    <data name="clbPerms.Items5" xml:space="preserve">
+        <value>Dovoli Kopiranje Vsebine za Dostopnost</value>
+    </data>
+    <data name="clbPerms.Items6" xml:space="preserve">
+        <value>Dovoli Opombe</value>
+    </data>
+    <data name="clbPerms.Items7" xml:space="preserve">
+        <value>Dovoli Izpolnjevanje Obrazca</value>
+    </data>
+    <data name="clbPerms.Location" type="System.Drawing.Point, System.Drawing">
+        <value>6, 120</value>
+    </data>
+    <data name="clbPerms.Size" type="System.Drawing.Size, System.Drawing">
+        <value>396, 120</value>
+    </data>
+    <data name="clbPerms.TabIndex" type="System.Int32, mscorlib">
+        <value>17</value>
+    </data>
+    <data name="&gt;&gt;clbPerms.Name" xml:space="preserve">
+        <value>clbPerms</value>
+    </data>
+    <data name="&gt;&gt;clbPerms.Type" xml:space="preserve">
+        <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;clbPerms.Parent" xml:space="preserve">
+        <value>groupProtection</value>
+    </data>
+    <data name="&gt;&gt;clbPerms.ZOrder" xml:space="preserve">
+        <value>0</value>
     </data>
     <data name="cbShowUserPassword.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -733,7 +694,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;cbShowUserPassword.ZOrder" xml:space="preserve">
-        <value>0</value>
+        <value>1</value>
     </data>
     <data name="cbShowOwnerPassword.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -760,241 +721,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;cbShowOwnerPassword.ZOrder" xml:space="preserve">
-        <value>1</value>
-    </data>
-    <data name="cbAllowFullQualityPrinting.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="cbAllowFullQualityPrinting.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="cbAllowFullQualityPrinting.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 143</value>
-    </data>
-    <data name="cbAllowFullQualityPrinting.Size" type="System.Drawing.Size, System.Drawing">
-        <value>143, 17</value>
-    </data>
-    <data name="cbAllowFullQualityPrinting.TabIndex" type="System.Int32, mscorlib">
-        <value>8</value>
-    </data>
-    <data name="cbAllowFullQualityPrinting.Text" xml:space="preserve">
-        <value>Dovoli Tiskanje v Polni Kvaliteti</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFullQualityPrinting.Name" xml:space="preserve">
-        <value>cbAllowFullQualityPrinting</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFullQualityPrinting.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFullQualityPrinting.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFullQualityPrinting.ZOrder" xml:space="preserve">
         <value>2</value>
-    </data>
-    <data name="cbAllowFormFilling.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="cbAllowFormFilling.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="cbAllowFormFilling.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 281</value>
-    </data>
-    <data name="cbAllowFormFilling.Size" type="System.Drawing.Size, System.Drawing">
-        <value>106, 17</value>
-    </data>
-    <data name="cbAllowFormFilling.TabIndex" type="System.Int32, mscorlib">
-        <value>14</value>
-    </data>
-    <data name="cbAllowFormFilling.Text" xml:space="preserve">
-        <value>Dovoli Izpolnjevanje Obrazca</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFormFilling.Name" xml:space="preserve">
-        <value>cbAllowFormFilling</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFormFilling.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFormFilling.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowFormFilling.ZOrder" xml:space="preserve">
-        <value>3</value>
-    </data>
-    <data name="cbAllowAnnotations.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="cbAllowAnnotations.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="cbAllowAnnotations.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 258</value>
-    </data>
-    <data name="cbAllowAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-        <value>110, 17</value>
-    </data>
-    <data name="cbAllowAnnotations.TabIndex" type="System.Int32, mscorlib">
-        <value>13</value>
-    </data>
-    <data name="cbAllowAnnotations.Text" xml:space="preserve">
-        <value>Dovoli Opombe</value>
-    </data>
-    <data name="&gt;&gt;cbAllowAnnotations.Name" xml:space="preserve">
-        <value>cbAllowAnnotations</value>
-    </data>
-    <data name="&gt;&gt;cbAllowAnnotations.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowAnnotations.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowAnnotations.ZOrder" xml:space="preserve">
-        <value>4</value>
-    </data>
-    <data name="cbAllowContentCopyingForAccessibility.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="cbAllowContentCopyingForAccessibility.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="cbAllowContentCopyingForAccessibility.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 235</value>
-    </data>
-    <data name="cbAllowContentCopyingForAccessibility.Size" type="System.Drawing.Size, System.Drawing">
-        <value>207, 17</value>
-    </data>
-    <data name="cbAllowContentCopyingForAccessibility.TabIndex" type="System.Int32, mscorlib">
-        <value>12</value>
-    </data>
-    <data name="cbAllowContentCopyingForAccessibility.Text" xml:space="preserve">
-        <value>Dovoli Kopiranje Vsebine za Dostopnost</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Name" xml:space="preserve">
-        <value>cbAllowContentCopyingForAccessibility</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopyingForAccessibility.ZOrder" xml:space="preserve">
-        <value>5</value>
-    </data>
-    <data name="cbAllowContentCopying.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="cbAllowContentCopying.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="cbAllowContentCopying.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 212</value>
-    </data>
-    <data name="cbAllowContentCopying.Size" type="System.Drawing.Size, System.Drawing">
-        <value>132, 17</value>
-    </data>
-    <data name="cbAllowContentCopying.TabIndex" type="System.Int32, mscorlib">
-        <value>11</value>
-    </data>
-    <data name="cbAllowContentCopying.Text" xml:space="preserve">
-        <value>Dovoli Kopiranje Vsebine</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopying.Name" xml:space="preserve">
-        <value>cbAllowContentCopying</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopying.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopying.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowContentCopying.ZOrder" xml:space="preserve">
-        <value>6</value>
-    </data>
-    <data name="cbAllowDocumentAssembly.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="cbAllowDocumentAssembly.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-        <value>NoControl</value>
-    </data>
-    <data name="cbAllowDocumentAssembly.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 189</value>
-    </data>
-    <data name="cbAllowDocumentAssembly.Size" type="System.Drawing.Size, System.Drawing">
-        <value>150, 17</value>
-    </data>
-    <data name="cbAllowDocumentAssembly.TabIndex" type="System.Int32, mscorlib">
-        <value>10</value>
-    </data>
-    <data name="cbAllowDocumentAssembly.Text" xml:space="preserve">
-        <value>Dovoli Sestavo Dokumenta</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentAssembly.Name" xml:space="preserve">
-        <value>cbAllowDocumentAssembly</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentAssembly.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentAssembly.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentAssembly.ZOrder" xml:space="preserve">
-        <value>7</value>
-    </data>
-    <data name="cbAllowDocumentModification.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="cbAllowDocumentModification.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 166</value>
-    </data>
-    <data name="cbAllowDocumentModification.Size" type="System.Drawing.Size, System.Drawing">
-        <value>163, 17</value>
-    </data>
-    <data name="cbAllowDocumentModification.TabIndex" type="System.Int32, mscorlib">
-        <value>9</value>
-    </data>
-    <data name="cbAllowDocumentModification.Text" xml:space="preserve">
-        <value>Dovoli Spreminjanje Dokumenta</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentModification.Name" xml:space="preserve">
-        <value>cbAllowDocumentModification</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentModification.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentModification.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowDocumentModification.ZOrder" xml:space="preserve">
-        <value>8</value>
-    </data>
-    <data name="cbAllowPrinting.AutoSize" type="System.Boolean, mscorlib">
-        <value>True</value>
-    </data>
-    <data name="cbAllowPrinting.Location" type="System.Drawing.Point, System.Drawing">
-        <value>6, 120</value>
-    </data>
-    <data name="cbAllowPrinting.Size" type="System.Drawing.Size, System.Drawing">
-        <value>89, 17</value>
-    </data>
-    <data name="cbAllowPrinting.TabIndex" type="System.Int32, mscorlib">
-        <value>7</value>
-    </data>
-    <data name="cbAllowPrinting.Text" xml:space="preserve">
-        <value>Dovoli Tiskanje</value>
-    </data>
-    <data name="&gt;&gt;cbAllowPrinting.Name" xml:space="preserve">
-        <value>cbAllowPrinting</value>
-    </data>
-    <data name="&gt;&gt;cbAllowPrinting.Type" xml:space="preserve">
-        <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </data>
-    <data name="&gt;&gt;cbAllowPrinting.Parent" xml:space="preserve">
-        <value>groupProtection</value>
-    </data>
-    <data name="&gt;&gt;cbAllowPrinting.ZOrder" xml:space="preserve">
-        <value>9</value>
     </data>
     <data name="txtUserPassword.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 94</value>
@@ -1015,7 +742,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;txtUserPassword.ZOrder" xml:space="preserve">
-        <value>10</value>
+        <value>3</value>
     </data>
     <data name="lblUserPassword.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -1045,7 +772,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;lblUserPassword.ZOrder" xml:space="preserve">
-        <value>11</value>
+        <value>4</value>
     </data>
     <data name="txtOwnerPassword.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 55</value>
@@ -1066,7 +793,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;txtOwnerPassword.ZOrder" xml:space="preserve">
-        <value>12</value>
+        <value>5</value>
     </data>
     <data name="lblOwnerPassword.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -1093,7 +820,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;lblOwnerPassword.ZOrder" xml:space="preserve">
-        <value>13</value>
+        <value>6</value>
     </data>
     <data name="cbEncryptPdf.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -1120,7 +847,7 @@
         <value>groupProtection</value>
     </data>
     <data name="&gt;&gt;cbEncryptPdf.ZOrder" xml:space="preserve">
-        <value>14</value>
+        <value>7</value>
     </data>
     <data name="cbRememberSettings.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -1147,7 +874,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;cbRememberSettings.ZOrder" xml:space="preserve">
-        <value>6</value>
+        <value>7</value>
     </data>
     <data name="btnRestoreDefaults.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -1174,7 +901,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnRestoreDefaults.ZOrder" xml:space="preserve">
-        <value>5</value>
+        <value>6</value>
     </data>
     <data name="linkPlaceholders.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -1204,7 +931,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;linkPlaceholders.ZOrder" xml:space="preserve">
-        <value>2</value>
+        <value>3</value>
     </data>
     <data name="txtDefaultFilePath.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 25</value>
@@ -1225,7 +952,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;txtDefaultFilePath.ZOrder" xml:space="preserve">
-        <value>3</value>
+        <value>4</value>
     </data>
     <data name="label1.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -1255,7 +982,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-        <value>4</value>
+        <value>5</value>
     </data>
     <data name="btnChooseFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
@@ -1282,7 +1009,7 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;btnChooseFolder.ZOrder" xml:space="preserve">
-        <value>1</value>
+        <value>2</value>
     </data>
     <data name="cbSkipSavePrompt.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
@@ -1309,6 +1036,51 @@
         <value>$this</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.ZOrder" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="cmbCompat.Location" type="System.Drawing.Point, System.Drawing">
+        <value>6, 19</value>
+    </data>
+    <data name="cmbCompat.Size" type="System.Drawing.Size, System.Drawing">
+        <value>217, 21</value>
+    </data>
+    <data name="cmbCompat.TabIndex" type="System.Int32, mscorlib">
+        <value>0</value>
+    </data>
+    <data name="&gt;&gt;cmbCompat.Name" xml:space="preserve">
+        <value>cmbCompat</value>
+    </data>
+    <data name="&gt;&gt;cmbCompat.Type" xml:space="preserve">
+        <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;cmbCompat.Parent" xml:space="preserve">
+        <value>groupCompat</value>
+    </data>
+    <data name="&gt;&gt;cmbCompat.ZOrder" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="groupCompat.Location" type="System.Drawing.Point, System.Drawing">
+        <value>12, 528</value>
+    </data>
+    <data name="groupCompat.Size" type="System.Drawing.Size, System.Drawing">
+        <value>408, 48</value>
+    </data>
+    <data name="groupCompat.TabIndex" type="System.Int32, mscorlib">
+        <value>21</value>
+    </data>
+    <data name="groupCompat.Text" xml:space="preserve">
+        <value>Združljivost</value>
+    </data>
+    <data name="&gt;&gt;groupCompat.Name" xml:space="preserve">
+        <value>groupCompat</value>
+    </data>
+    <data name="&gt;&gt;groupCompat.Type" xml:space="preserve">
+        <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
+    <data name="&gt;&gt;groupCompat.Parent" xml:space="preserve">
+        <value>$this</value>
+    </data>
+    <data name="&gt;&gt;groupCompat.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1356,12 +1128,12 @@
         <value>ilProfileIcons</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.0.2.24539, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.7.1.29988, Culture=neutral, PublicKeyToken=null</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FPdfSettings</value>
     </data>
     <data name="&gt;&gt;$this.Type" xml:space="preserve">
-        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.0.2.24539, Culture=neutral, PublicKeyToken=null</value>
+        <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.7.1.29988, Culture=neutral, PublicKeyToken=null</value>
     </data>
 </root>

@@ -68,7 +68,7 @@ namespace NAPS2.ImportExport.Images
                     }
                     ImageFormat format = GetImageFormat(subFileName);
 
-                    if (Equals(format, ImageFormat.Tiff))
+                    if (Equals(format, ImageFormat.Tiff) && !imageSettingsContainer.ImageSettings.SinglePageTiff)
                     {
                         if (File.Exists(subFileName))
                         {
@@ -78,13 +78,13 @@ namespace NAPS2.ImportExport.Images
                             }
                         }
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
-                        Status.Success = tiffHelper.SaveMultipage(images, subFileName, OnProgress);
+                        Status.Success = tiffHelper.SaveMultipage(images, subFileName, imageSettingsContainer.ImageSettings.TiffCompression, OnProgress);
                         FirstFileSaved = subFileName;
                         return;
                     }
 
                     int i = 0;
-                    int digits = (int) Math.Floor(Math.Log10(images.Count)) + 1;
+                    int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
                     foreach (ScannedImage img in images)
                     {
                         if (cancel)
@@ -106,27 +106,24 @@ namespace NAPS2.ImportExport.Images
                                 return;
                             }
                         }
-                        using (Bitmap baseImage = scannedImageRenderer.Render(img))
+                        if (images.Count == 1)
                         {
-                            if (images.Count == 1)
-                            {
-                                Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
-                                InvokeStatusChanged();
-                                DoSaveImage(baseImage, subFileName, format);
-                                FirstFileSaved = subFileName;
-                            }
-                            else
-                            {
-                                var fileNameN = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i,
-                                    digits);
-                                Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
-                                InvokeStatusChanged();
-                                DoSaveImage(baseImage, fileNameN, format);
+                            Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
+                            InvokeStatusChanged();
+                            DoSaveImage(img, subFileName, format);
+                            FirstFileSaved = subFileName;
+                        }
+                        else
+                        {
+                            var fileNameN = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i,
+                                digits);
+                            Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
+                            InvokeStatusChanged();
+                            DoSaveImage(img, fileNameN, format);
 
-                                if (i == 0)
-                                {
-                                    FirstFileSaved = fileNameN;
-                                }
+                            if (i == 0)
+                            {
+                                FirstFileSaved = fileNameN;
                             }
                         }
                         i++;
@@ -153,20 +150,30 @@ namespace NAPS2.ImportExport.Images
             return true;
         }
 
-        private void DoSaveImage(Bitmap image, string path, ImageFormat format)
+        private void DoSaveImage(ScannedImage image, string path, ImageFormat format)
         {
             PathHelper.EnsureParentDirExists(path);
-            if (Equals(format, ImageFormat.Jpeg))
+            if (Equals(format, ImageFormat.Tiff))
+            {
+                tiffHelper.SaveMultipage(new List<ScannedImage> { image }, path, imageSettingsContainer.ImageSettings.TiffCompression, i => true);
+            }
+            else if (Equals(format, ImageFormat.Jpeg))
             {
                 var quality = Math.Max(Math.Min(imageSettingsContainer.ImageSettings.JpegQuality, 100), 0);
                 var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
-                image.Save(path, encoder, encoderParams);
+                using (Bitmap bitmap = scannedImageRenderer.Render(image))
+                {
+                    bitmap.Save(path, encoder, encoderParams);
+                }
             }
             else
             {
-                image.Save(path, format);
+                using (Bitmap bitmap = scannedImageRenderer.Render(image))
+                {
+                    bitmap.Save(path, format);
+                }
             }
         }
 
