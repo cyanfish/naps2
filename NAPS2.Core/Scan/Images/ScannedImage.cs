@@ -206,7 +206,7 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        [DataContract]
+        [Serializable]
         public class SnapshotExport
         {
             public SnapshotExport(RecoveryIndexImage recoveryIndexImage, List<Transform> transformList)
@@ -214,11 +214,9 @@ namespace NAPS2.Scan.Images
                 RecoveryIndexImage = recoveryIndexImage;
                 TransformList = transformList;
             }
-
-            [DataMember]
+            
             public RecoveryIndexImage RecoveryIndexImage { get; protected set; }
-
-            [DataMember]
+            
             public List<Transform> TransformList { get; protected set; }
         }
     }
