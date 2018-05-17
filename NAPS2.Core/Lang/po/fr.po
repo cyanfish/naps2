@@ -168,7 +168,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "Une erreur s'est produite avec le pilote d'acquisition"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
+msgid "An unknown error occurred during the batch scan"
 msgstr "Une erreur inconnue s'est produite lors de l'acquisition par lot"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message

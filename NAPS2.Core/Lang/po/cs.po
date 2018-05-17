@@ -166,7 +166,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "Došlo k chybě ovladače skeneru"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
+msgid "An unknown error occurred during the batch scan"
 msgstr "Během dávkového skenování došlo k chybě"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message

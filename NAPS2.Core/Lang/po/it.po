@@ -168,7 +168,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "Errore del driver di scansione"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
+msgid "An unknown error occurred during the batch scan"
 msgstr "Errore sconosciuto durante la scansione batch"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message

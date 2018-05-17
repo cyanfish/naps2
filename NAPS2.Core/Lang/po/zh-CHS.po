@@ -164,7 +164,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "扫描文件失败！"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
+msgid "An unknown error occurred during the batch scan"
 msgstr "批量扫描时发生一个未知错误！"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message

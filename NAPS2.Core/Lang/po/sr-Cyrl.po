@@ -162,7 +162,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "Дошло је до грешке са дрajвером за скенер"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
+msgid "An unknown error occurred during the batch scan"
 msgstr "Дошло је до непознате грешке у току пакетног скенирања"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message

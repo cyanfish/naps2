@@ -106,7 +106,7 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An unknown error ocurred during the batch scan..
+        ///   Looks up a localized string similar to An unknown error occurred during the batch scan..
         /// </summary>
         internal static string BatchError {
             get {

@@ -164,7 +164,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "حدث خطأ مع تعريف المسح الضوئي."
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
+msgid "An unknown error occurred during the batch scan"
 msgstr "حدث خطأ غير معروف أثناء المسح الضوئي على دفعات"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message

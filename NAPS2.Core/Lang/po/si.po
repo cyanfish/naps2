@@ -166,7 +166,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "පරිලෝකකයෙහි උපක්‍රම ධාවකයෙහි දෝෂයක් පැනනැගිනි"
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
+msgid "An unknown error occurred during the batch scan"
 msgstr "කාණ්ඩ පරිලෝකනයේදී නාදුනන දෝෂයක් හටගැනින"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message

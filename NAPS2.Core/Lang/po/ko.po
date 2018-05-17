@@ -164,7 +164,7 @@ msgid "An error occurred with the scanning driver"
 msgstr "스캔 중 오류가 발생했습니다."
 
 #: MiscResources.resx$BatchError$Message
-msgid "An unknown error ocurred during the batch scan"
+msgid "An unknown error occurred during the batch scan"
 msgstr "일괄 스캔 중 오류가 발생했습니다."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
