@@ -116,38 +116,41 @@ namespace NAPS2.ImportExport.Pdf
                 if (xObject != null && xObject.Elements.GetString("/Subtype") == "/Image")
                 {
                     // Support multiple filter schemes
-                    // For JPEG: "/DCTDecode" OR ["/DCTDecode", "/FlateDecode"]
-                    // For PNG: "/FlateDecode"
                     var element = xObject.Elements.Single(x => x.Key == "/Filter");
                     var elementAsArray = element.Value as PdfArray;
                     var elementAsName = element.Value as PdfName;
                     if (elementAsArray != null)
                     {
-                        // JPEG ["/DCTDecode", "/FlateDecode"]
-                        yield return ExportJpegImage(page, Filtering.Decode(xObject.Stream.Value, "/FlateDecode"), importParams);
+                        string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()).ToArray();
+                        if (arrayElements.Length == 2)
+                        {
+                            yield return DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams);
+                        }
                     }
                     else if (elementAsName != null)
                     {
-                        switch (elementAsName.Value)
-                        {
-                            case "/DCTDecode":
-                                yield return ExportJpegImage(page, xObject.Stream.Value, importParams);
-                                break;
-                            case "/FlateDecode":
-                                yield return ExportAsPngImage(page, xObject, importParams);
-                                break;
-                            case "/CCITTFaxDecode":
-                                yield return ExportG4(page, xObject, importParams);
-                                break;
-                            default:
-                                throw new NotImplementedException("Unsupported image encoding");
-                        }
+                        yield return DecodeImage(elementAsName.Value, page, xObject, xObject.Stream.Value, importParams);
                     }
                     else
                     {
                         throw new NotImplementedException("Unsupported filter");
                     }
                 }
+            }
+        }
+
+        private ScannedImage DecodeImage(string encoding, PdfPage page, PdfDictionary xObject, byte[] stream, ImportParams importParams)
+        {
+            switch (encoding)
+            {
+                case "/DCTDecode":
+                    return ExportJpegImage(page, stream, importParams);
+                case "/FlateDecode":
+                    return ExportAsPngImage(page, xObject, importParams);
+                case "/CCITTFaxDecode":
+                    return ExportG4(page, xObject, stream, importParams);
+                default:
+                    throw new NotImplementedException("Unsupported image encoding");
             }
         }
 
@@ -283,13 +286,11 @@ namespace NAPS2.ImportExport.Pdf
         private static readonly byte[] TiffBeforeRealLen = { 0x03, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x11, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x15, 0x01, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x17, 0x01, 0x04, 0x00, 0x01, 0x00, 0x00, 0x00 };
         private static readonly byte[] TiffTrailer = { 0x00, 0x00, 0x00, 0x00 };
 
-        private ScannedImage ExportG4(PdfPage page, PdfDictionary imageObject, ImportParams importParams)
+        private ScannedImage ExportG4(PdfPage page, PdfDictionary imageObject, byte[] imageBytes, ImportParams importParams)
         {
             int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
             int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
             int bitsPerComponent = imageObject.Elements.GetInteger(PdfImage.Keys.BitsPerComponent);
-
-            byte[] imageBytes = imageObject.Stream.Value;
 
             // We don't have easy access to a standalone CCITT G4 decoder, so we'll make use of the .NET TIFF decoder
             // by constructing a valid TIFF file "manually" and directly injecting the bytestream
