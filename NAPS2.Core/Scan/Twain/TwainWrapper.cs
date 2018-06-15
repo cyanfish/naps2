@@ -257,18 +257,31 @@ namespace NAPS2.Scan.Twain
                 {
                     // No 8-bit greyscale format, so we have to transform into 24-bit
                     int rowWidth = data.Stride;
-                    int originalRowWidth = source.Length/imageHeight;
-                    byte[] source2 = new byte[rowWidth*imageHeight];
+                    int originalRowWidth = source.Length / imageHeight;
+                    byte[] source2 = new byte[rowWidth * imageHeight];
                     for (int row = 0; row < imageHeight; row++)
                     {
                         for (int col = 0; col < imageWidth; col++)
                         {
-                            source2[row*rowWidth + col*3] = source[row*originalRowWidth + col];
-                            source2[row*rowWidth + col*3 + 1] = source[row*originalRowWidth + col];
-                            source2[row*rowWidth + col*3 + 2] = source[row*originalRowWidth + col];
+                            source2[row * rowWidth + col * 3] = source[row * originalRowWidth + col];
+                            source2[row * rowWidth + col * 3 + 1] = source[row * originalRowWidth + col];
+                            source2[row * rowWidth + col * 3 + 2] = source[row * originalRowWidth + col];
                         }
                     }
                     source = source2;
+                }
+                else
+                {
+                    // Colors are provided as BGR, they need to be swapped to RGB
+                    int rowWidth = data.Stride;
+                    for (int row = 0; row < imageHeight; row++)
+                    {
+                        for (int col = 0; col < imageWidth; col++)
+                        {
+                            (source[row * rowWidth + col * 3], source[row * rowWidth + col * 3 + 2]) =
+                                (source[row * rowWidth + col * 3 + 2], source[row * rowWidth + col * 3]);
+                        }
+                    }
                 }
                 Marshal.Copy(source, 0, data.Scan0, source.Length);
             }
