@@ -770,7 +770,7 @@ namespace NAPS2.WinForms
 
         #region Actions - Save/Email/Import
 
-        private void SavePDF(List<ScannedImage> images, string savePath = null)
+        private bool SavePDF(List<ScannedImage> images, string savePath = null)
         {
             if (exportHelper.SavePDF(images, notify, savePath))
             {
@@ -779,7 +779,10 @@ namespace NAPS2.WinForms
                     imageList.Delete(imageList.Images.IndiciesOf(images));
                     UpdateThumbnails(Enumerable.Empty<int>(), false, false);
                 }
+
+                return true;
             }
+            return false;
         }
 
         private void SaveImages(List<ScannedImage> images)
@@ -1203,9 +1206,7 @@ namespace NAPS2.WinForms
         private void tsSavePDFAll_Click(object sender, EventArgs e)
         {
             if (appConfigManager.Config.HideSavePdfButton)
-            {
                 return;
-            }
 
             SavePDF(imageList.Images);
         }
@@ -1213,9 +1214,7 @@ namespace NAPS2.WinForms
         private void tsSavePDFSelected_Click(object sender, EventArgs e)
         {
             if (appConfigManager.Config.HideSavePdfButton)
-            {
                 return;
-            }
 
             SavePDF(SelectedImages.ToList());
         }
@@ -1228,12 +1227,12 @@ namespace NAPS2.WinForms
             notify.ResetLastPdfSaved();
             string savePath = null;
 
-            imageList.Images.ForEach(a=>
+            foreach (var image in imageList.Images)
             {
-                SavePDF(new List<ScannedImage> {a}, savePath);
+                if (!SavePDF(new List<ScannedImage> { image }, savePath))
+                    break;
                 savePath = GetNextSaveFilePath();
-                
-              });
+            }
         }
 
         private string GetNextSaveFilePath()
