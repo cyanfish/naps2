@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
@@ -43,32 +41,28 @@ namespace NAPS2.WinForms
             this.emailer = emailer;
         }
 
-        public bool SavePDF(List<ScannedImage> images, ISaveNotify notify)
+        public bool SavePDF(List<ScannedImage> images, ISaveNotify notify, string savePath = null)
         {
-            if (images.Any())
-            {
-                string savePath;
+            if (!images.Any()) return false;
 
+            if (string.IsNullOrEmpty(savePath))
+            {
                 var pdfSettings = pdfSettingsContainer.PdfSettings;
                 if (pdfSettings.SkipSavePrompt && Path.IsPathRooted(pdfSettings.DefaultFileName))
-                {
                     savePath = pdfSettings.DefaultFileName;
-                }
                 else
                 {
                     if (!dialogHelper.PromptToSavePdf(pdfSettings.DefaultFileName, out savePath))
-                    {
                         return false;
-                    }
                 }
+            }
 
-                var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
-                if (ExportPDF(subSavePath, images, false))
-                {
-                    changeTracker.HasUnsavedChanges = false;
-                    notify?.PdfSaved(subSavePath);
-                    return true;
-                }
+            var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
+            if (ExportPDF(subSavePath, images, false))
+            {
+                changeTracker.HasUnsavedChanges = false;
+                notify?.PdfSaved(subSavePath);
+                return true;
             }
             return false;
         }

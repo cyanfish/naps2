@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -769,9 +770,9 @@ namespace NAPS2.WinForms
 
         #region Actions - Save/Email/Import
 
-        private void SavePDF(List<ScannedImage> images)
+        private void SavePDF(List<ScannedImage> images, string savePath = null)
         {
-            if (exportHelper.SavePDF(images, notify))
+            if (exportHelper.SavePDF(images, notify, savePath))
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
@@ -1217,6 +1218,54 @@ namespace NAPS2.WinForms
             }
 
             SavePDF(SelectedImages.ToList());
+        }
+
+        private void onePageToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (appConfigManager.Config.HideSavePdfButton)
+                return;
+
+            notify.ResetLastPdfSaved();
+            string savePath = null;
+
+            imageList.Images.ForEach(a=>
+            {
+                SavePDF(new List<ScannedImage> {a}, savePath);
+                savePath = GetNextSaveFilePath();
+                
+              });
+        }
+
+        private string GetNextSaveFilePath()
+        {
+            var pageNumber = ExtractPageNumber(notify.LastPdfSaved) + 1;
+            
+            return Path.Combine(
+                Path.GetDirectoryName(notify.LastPdfSaved),
+                RemovePageNumber(Path.GetFileNameWithoutExtension(notify.LastPdfSaved)) + $"({pageNumber})" +
+                Path.GetExtension(notify.LastPdfSaved));
+                
+            int ExtractPageNumber(string path)
+            {
+                var bound = GetBoundedParenthesis(path);
+                if (bound.endParenthesis == -1) return 1;
+                return int.Parse(path.Substring(bound.firstParenthesis + 1, bound.endParenthesis - bound.firstParenthesis - 1));
+            }
+
+            (int firstParenthesis, int endParenthesis) GetBoundedParenthesis(string path)
+            {
+                var endParenthesis = path.LastIndexOf(")");
+                var firstParenthesis = path.LastIndexOf("(");
+                return (firstParenthesis, endParenthesis);
+            }
+
+            string RemovePageNumber(string path)
+            {
+                var bound = GetBoundedParenthesis(path);
+                return bound.endParenthesis == - 1 ?
+                    path :
+                    path.Remove(bound.firstParenthesis, bound.endParenthesis - bound.firstParenthesis + 1);
+            }
         }
 
         private void tsPDFSettings_Click(object sender, EventArgs e)

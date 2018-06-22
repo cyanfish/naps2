@@ -58,6 +58,7 @@ namespace NAPS2.WinForms
             this.tsdSavePDF = new System.Windows.Forms.ToolStripSplitButton();
             this.tsSavePDFAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSavePDFSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.onePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsPDFSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdSaveImages = new System.Windows.Forms.ToolStripSplitButton();
@@ -78,6 +79,8 @@ namespace NAPS2.WinForms
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsCrop = new System.Windows.Forms.ToolStripMenuItem();
             this.tsBrightnessContrast = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsHueSaturation = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsBlackWhite = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSharpen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsReset = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,8 +107,6 @@ namespace NAPS2.WinForms
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.tsHueSaturation = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsBlackWhite = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -176,6 +177,7 @@ namespace NAPS2.WinForms
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxView,
             this.ctxSeparator1,
@@ -315,6 +317,7 @@ namespace NAPS2.WinForms
             // 
             this.tsdSavePDF.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsSavePDFAll,
+            this.onePageToolStripMenuItem,
             this.tsSavePDFSelected,
             this.toolStripSeparator10,
             this.tsPDFSettings});
@@ -335,6 +338,12 @@ namespace NAPS2.WinForms
             this.tsSavePDFSelected.Name = "tsSavePDFSelected";
             resources.ApplyResources(this.tsSavePDFSelected, "tsSavePDFSelected");
             this.tsSavePDFSelected.Click += new System.EventHandler(this.tsSavePDFSelected_Click);
+            // 
+            // onePageToolStripMenuItem
+            // 
+            this.onePageToolStripMenuItem.Name = "onePageToolStripMenuItem";
+            resources.ApplyResources(this.onePageToolStripMenuItem, "onePageToolStripMenuItem");
+            this.onePageToolStripMenuItem.Click += new System.EventHandler(this.onePageToolStripMenuItem_Click_1);
             // 
             // toolStripSeparator10
             // 
@@ -481,6 +490,20 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsBrightnessContrast, "tsBrightnessContrast");
             this.tsBrightnessContrast.Name = "tsBrightnessContrast";
             this.tsBrightnessContrast.Click += new System.EventHandler(this.tsBrightnessContrast_Click);
+            // 
+            // tsHueSaturation
+            // 
+            this.tsHueSaturation.Image = global::NAPS2.Icons.color_management;
+            resources.ApplyResources(this.tsHueSaturation, "tsHueSaturation");
+            this.tsHueSaturation.Name = "tsHueSaturation";
+            this.tsHueSaturation.Click += new System.EventHandler(this.tsHueSaturation_Click);
+            // 
+            // tsBlackWhite
+            // 
+            this.tsBlackWhite.Image = global::NAPS2.Icons.contrast_high;
+            resources.ApplyResources(this.tsBlackWhite, "tsBlackWhite");
+            this.tsBlackWhite.Name = "tsBlackWhite";
+            this.tsBlackWhite.Click += new System.EventHandler(this.tsBlackWhite_Click);
             // 
             // tsSharpen
             // 
@@ -670,20 +693,6 @@ namespace NAPS2.WinForms
             this.tsAbout.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.tsAbout.Click += new System.EventHandler(this.tsAbout_Click);
             // 
-            // tsHueSaturation
-            // 
-            this.tsHueSaturation.Image = global::NAPS2.Icons.color_management;
-            resources.ApplyResources(this.tsHueSaturation, "tsHueSaturation");
-            this.tsHueSaturation.Name = "tsHueSaturation";
-            this.tsHueSaturation.Click += new System.EventHandler(this.tsHueSaturation_Click);
-            // 
-            // tsBlackWhite
-            // 
-            this.tsBlackWhite.Image = global::NAPS2.Icons.contrast_high;
-            resources.ApplyResources(this.tsBlackWhite, "tsBlackWhite");
-            this.tsBlackWhite.Name = "tsBlackWhite";
-            this.tsBlackWhite.Click += new System.EventHandler(this.tsBlackWhite_Click);
-            // 
             // FDesktop
             // 
             resources.ApplyResources(this, "$this");
@@ -777,6 +786,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsSharpen;
         private System.Windows.Forms.ToolStripMenuItem tsHueSaturation;
         private System.Windows.Forms.ToolStripMenuItem tsBlackWhite;
+        private System.Windows.Forms.ToolStripMenuItem onePageToolStripMenuItem;
     }
 }
 

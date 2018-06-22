@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Util;
 
@@ -19,6 +16,8 @@ namespace NAPS2.WinForms
 
         private readonly List<NotifyWidget> slots = new List<NotifyWidget>();
 
+        public string LastPdfSaved { get; private set; }
+
         public NotificationManager(FormBase parentForm, AppConfigManager appConfigManager)
         {
             this.parentForm = parentForm;
@@ -26,8 +25,11 @@ namespace NAPS2.WinForms
             parentForm.Resize += parentForm_Resize;
         }
 
+        public void ResetLastPdfSaved() => LastPdfSaved = null;
+
         public void PdfSaved(string path)
         {
+            LastPdfSaved = path;
             Show(new PdfSavedNotifyWidget(path));
         }
 
@@ -42,6 +44,7 @@ namespace NAPS2.WinForms
                 Show(new ImagesSavedNotifyWidget(imageCount, path));
             }
         }
+
 
         public void DonatePrompt()
         {
