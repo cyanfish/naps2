@@ -57,8 +57,8 @@ namespace NAPS2.WinForms
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsdSavePDF = new System.Windows.Forms.ToolStripSplitButton();
             this.tsSavePDFAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSavePdfOnePerPage = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSavePDFSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.onePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsPDFSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsdSaveImages = new System.Windows.Forms.ToolStripSplitButton();
@@ -317,7 +317,7 @@ namespace NAPS2.WinForms
             // 
             this.tsdSavePDF.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsSavePDFAll,
-            this.onePageToolStripMenuItem,
+            this.tsSavePdfOnePerPage,
             this.tsSavePDFSelected,
             this.toolStripSeparator10,
             this.tsPDFSettings});
@@ -333,17 +333,17 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsSavePDFAll, "tsSavePDFAll");
             this.tsSavePDFAll.Click += new System.EventHandler(this.tsSavePDFAll_Click);
             // 
+            // tsSavePdfOnePerPage
+            // 
+            this.tsSavePdfOnePerPage.Name = "tsSavePdfOnePerPage";
+            resources.ApplyResources(this.tsSavePdfOnePerPage, "tsSavePdfOnePerPage");
+            this.tsSavePdfOnePerPage.Click += new System.EventHandler(this.onePageToolStripMenuItem_Click_1);
+            // 
             // tsSavePDFSelected
             // 
             this.tsSavePDFSelected.Name = "tsSavePDFSelected";
             resources.ApplyResources(this.tsSavePDFSelected, "tsSavePDFSelected");
             this.tsSavePDFSelected.Click += new System.EventHandler(this.tsSavePDFSelected_Click);
-            // 
-            // onePageToolStripMenuItem
-            // 
-            this.onePageToolStripMenuItem.Name = "onePageToolStripMenuItem";
-            resources.ApplyResources(this.onePageToolStripMenuItem, "onePageToolStripMenuItem");
-            this.onePageToolStripMenuItem.Click += new System.EventHandler(this.onePageToolStripMenuItem_Click_1);
             // 
             // toolStripSeparator10
             // 
@@ -786,7 +786,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.ToolStripMenuItem tsSharpen;
         private System.Windows.Forms.ToolStripMenuItem tsHueSaturation;
         private System.Windows.Forms.ToolStripMenuItem tsBlackWhite;
-        private System.Windows.Forms.ToolStripMenuItem onePageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsSavePdfOnePerPage;
     }
 }
 

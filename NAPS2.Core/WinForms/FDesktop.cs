@@ -525,13 +525,16 @@ namespace NAPS2.WinForms
         private void UpdateToolbar()
         {
             // "All" dropdown items
-            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text = tsReverseAll.Text =
+            tsSavePDFAll.Text = tsSaveImagesAll.Text = tsEmailPDFAll.Text = tsReverseAll.Text = 
                 string.Format(MiscResources.AllCount, imageList.Images.Count);
+
+            tsSavePdfOnePerPage.Text = string.Format(MiscResources.AllSeparateCount, imageList.Images.Count);
+
             tsSavePDFAll.Enabled = tsSaveImagesAll.Enabled = tsEmailPDFAll.Enabled = tsReverseAll.Enabled =
                 imageList.Images.Any();
 
             // "Selected" dropdown items
-            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text = tsReverseSelected.Text =
+            tsSavePDFSelected.Text = tsSaveImagesSelected.Text = tsEmailPDFSelected.Text = tsReverseSelected.Text = 
                 string.Format(MiscResources.SelectedCount, SelectedIndices.Count());
             tsSavePDFSelected.Enabled = tsSaveImagesSelected.Enabled = tsEmailPDFSelected.Enabled = tsReverseSelected.Enabled =
                 SelectedIndices.Any();
