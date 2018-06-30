@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using NAPS2.Config;
-using NAPS2.ImportExport;
+﻿using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -13,6 +7,10 @@ using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace NAPS2.WinForms
 {
@@ -24,12 +22,12 @@ namespace NAPS2.WinForms
         private readonly DialogHelper dialogHelper;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ChangeTracker changeTracker;
-        private readonly IOperationFactory operationFactory;
+        private readonly IOperationFactory OperationFactory;
         private readonly IFormFactory formFactory;
         private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IEmailer emailer;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrDependencyManager ocrDependencyManager, IEmailer emailer)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory OperationFactory, IFormFactory formFactory, OcrDependencyManager ocrDependencyManager, IEmailer emailer)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -37,7 +35,7 @@ namespace NAPS2.WinForms
             this.dialogHelper = dialogHelper;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.changeTracker = changeTracker;
-            this.operationFactory = operationFactory;
+            this.OperationFactory = OperationFactory;
             this.formFactory = formFactory;
             this.ocrDependencyManager = ocrDependencyManager;
             this.emailer = emailer;
@@ -45,7 +43,7 @@ namespace NAPS2.WinForms
 
         public bool SavePDF(List<ScannedImage> images, ISaveNotify notify)
         {
-            if (images.Any())
+            if (images.Count > 0)
             {
                 string savePath;
 
@@ -75,7 +73,7 @@ namespace NAPS2.WinForms
 
         public bool ExportPDF(string filename, List<ScannedImage> images, bool email)
         {
-            var op = operationFactory.Create<SavePdfOperation>();
+            var op = OperationFactory.Create<SavePdfOperation>();
             var progressForm = formFactory.Create<FProgress>();
             progressForm.Operation = op;
 
@@ -90,7 +88,7 @@ namespace NAPS2.WinForms
 
         public bool SaveImages(List<ScannedImage> images, ISaveNotify notify)
         {
-            if (images.Any())
+            if (images.Count > 0)
             {
                 string savePath;
 
@@ -107,7 +105,7 @@ namespace NAPS2.WinForms
                     }
                 }
 
-                var op = operationFactory.Create<SaveImagesOperation>();
+                var op = OperationFactory.Create<SaveImagesOperation>();
                 var progressForm = formFactory.Create<FProgress>();
                 progressForm.Operation = op;
                 progressForm.Start = () => op.Start(savePath, DateTime.Now, images);
@@ -124,7 +122,7 @@ namespace NAPS2.WinForms
 
         public bool EmailPDF(List<ScannedImage> images)
         {
-            if (images.Any())
+            if (images.Count > 0)
             {
                 var emailSettings = emailSettingsContainer.EmailSettings;
                 var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());

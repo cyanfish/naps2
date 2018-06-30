@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using NAPS2.Host;
 using NAPS2.Recovery;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NAPS2.Scan.Twain
 {
     public class TwainScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "twain";
-        
+
         private readonly IX86HostServiceFactory x86HostServiceFactory;
         private readonly TwainWrapper twainWrapper;
         private readonly IFormFactory formFactory;
@@ -32,7 +32,7 @@ namespace NAPS2.Scan.Twain
         {
             var deviceList = GetDeviceList();
 
-            if (!deviceList.Any())
+            if (deviceList.Count == 0)
             {
                 throw new NoDevicesFoundException();
             }
@@ -46,12 +46,12 @@ namespace NAPS2.Scan.Twain
         protected override List<ScanDevice> GetDeviceListInternal()
         {
             // Exclude WIA proxy devices since NAPS2 already supports WIA
-            return GetFullDeviceList().Where(x => !x.ID.StartsWith("WIA-")).ToList();
+            return GetFullDeviceList().Where(x => !x.ID.StartsWith("WIA-", StringComparison.CurrentCulture)).ToList();
         }
 
         private IEnumerable<ScanDevice> GetFullDeviceList()
         {
-            var twainImpl = ScanProfile != null ? ScanProfile.TwainImpl : TwainImpl.Default;
+            var twainImpl = ScanProfile?.TwainImpl ?? TwainImpl.Default;
             if (UseHostService)
             {
                 return x86HostServiceFactory.Create().TwainGetDeviceList(twainImpl);
@@ -97,13 +97,7 @@ namespace NAPS2.Scan.Twain
                     form.Close();
                 }
             };
-            form.Closing += (sender, args) =>
-            {
-                if (!done)
-                {
-                    args.Cancel = true;
-                }
-            };
+            form.Closing += (sender, args) => args.Cancel |= !done;
             form.ShowDialog();
 
             if (error != null)

@@ -1,13 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace NAPS2.Scan.Twain.Legacy
 {
@@ -135,6 +134,7 @@ namespace NAPS2.Scan.Twain.Legacy
 
                 return true;
             }
+
             private void EndingScan()
             {
                 if (msgfilter)

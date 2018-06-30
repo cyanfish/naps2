@@ -1,16 +1,16 @@
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class FBlackWhite : FormBase
+    internal partial class FBlackWhite : FormBase
     {
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
@@ -41,7 +41,7 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            if (SelectedImages != null && SelectedImages.Count > 1)
+            if (SelectedImages?.Count > 1)
             {
                 checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
             }
@@ -51,19 +51,19 @@ namespace NAPS2.WinForms
             }
 
             new LayoutManager(this)
-                .Bind(tbThreshold, pictureBox)
+                .Bind(tbThreshold, PictureBox)
                     .WidthToForm()
-                .Bind(pictureBox)
+                .Bind(PictureBox)
                     .HeightToForm()
-                .Bind(btnOK, btnCancel, txtThreshold)
+                .Bind(BtnOK, BtnCancel, txtThreshold)
                     .RightToForm()
-                .Bind(tbThreshold, txtThreshold, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
+                .Bind(tbThreshold, txtThreshold, checkboxApplyToSelected, BtnRevert, BtnOK, BtnCancel)
                     .BottomToForm()
                 .Activate();
             Size = new Size(600, 600);
 
             workingImage = scannedImageRenderer.Render(Image);
-            pictureBox.Image = (Bitmap)workingImage.Clone();
+            PictureBox.Image = (Bitmap)workingImage.Clone();
             UpdatePreviewBox();
 
             ActiveControl = txtThreshold;
@@ -88,8 +88,8 @@ namespace NAPS2.WinForms
                         var result = BlackWhiteTransform.Perform((Bitmap)workingImage.Clone());
                         SafeInvoke(() =>
                         {
-                            pictureBox.Image?.Dispose();
-                            pictureBox.Image = result;
+                            PictureBox.Image?.Dispose();
+                            PictureBox.Image = result;
                         });
                         working = false;
                     }
@@ -98,12 +98,12 @@ namespace NAPS2.WinForms
             previewOutOfDate = true;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             if (!BlackWhiteTransform.IsNull)
             {
@@ -117,7 +117,7 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnRevert_Click(object sender, EventArgs e)
+        private void BtnRevert_Click(object sender, EventArgs e)
         {
             BlackWhiteTransform = new BlackWhiteTransform();
             tbThreshold.Value = 0;
@@ -128,14 +128,13 @@ namespace NAPS2.WinForms
         private void FBlackWhite_FormClosed(object sender, FormClosedEventArgs e)
         {
             workingImage.Dispose();
-            pictureBox.Image?.Dispose();
+            PictureBox.Image?.Dispose();
             previewTimer?.Dispose();
         }
 
-        private void txtBlackWhite_TextChanged(object sender, EventArgs e)
+        private void TxtBlackWhite_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtThreshold.Text, out value))
+            if (int.TryParse(txtThreshold.Text, out int value))
             {
                 if (value >= tbThreshold.Minimum && value <= tbThreshold.Maximum)
                 {
@@ -145,7 +144,7 @@ namespace NAPS2.WinForms
             UpdateTransform();
         }
 
-        private void tbBlackWhite_Scroll(object sender, EventArgs e)
+        private void TbBlackWhite_Scroll(object sender, EventArgs e)
         {
             txtThreshold.Text = tbThreshold.Value.ToString("G");
             UpdateTransform();

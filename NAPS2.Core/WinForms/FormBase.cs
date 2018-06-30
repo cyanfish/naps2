@@ -1,10 +1,10 @@
-﻿using System;
+﻿using NAPS2.Config;
+using NAPS2.Scan;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Config;
-using NAPS2.Scan;
 
 namespace NAPS2.WinForms
 {
@@ -62,7 +62,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        #endregion
+        #endregion Helper Properties
 
         #region Helper Methods
 
@@ -80,14 +80,14 @@ namespace NAPS2.WinForms
             combo.Format += format;
         }
 
-        void Combo_Format(object sender, ListControlConvertEventArgs e)
+        private void Combo_Format(object sender, ListControlConvertEventArgs e)
         {
             e.Value = ((Enum)e.ListItem).Description();
         }
 
         public void Invoke(Action action)
         {
-            ((Control) this).Invoke(action);
+            ((Control)this).Invoke(action);
         }
 
         public void SafeInvoke(Action action)
@@ -104,7 +104,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        #endregion
+        #endregion Helper Methods
 
         protected void UpdateRTL()
         {
@@ -189,6 +189,6 @@ namespace NAPS2.WinForms
             }
         }
 
-        #endregion
+        #endregion Event Handlers
     }
 }

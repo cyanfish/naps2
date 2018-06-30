@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NAPS2.ImportExport;
+﻿using NAPS2.ImportExport;
 
 namespace NAPS2.Scan.Batch
 {
@@ -21,7 +17,7 @@ namespace NAPS2.Scan.Batch
 
         public double ScanIntervalSeconds { get; set; }
 
-        public BatchOutputType OutputType { get; set;  }
+        public BatchOutputType OutputType { get; set; }
 
         public SaveSeparator SaveSeparator { get; set; }
 

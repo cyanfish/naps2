@@ -1,12 +1,11 @@
-﻿using System;
+﻿using NAPS2.Recovery;
+using NAPS2.Scan;
+using NAPS2.Scan.Twain;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows.Forms;
-using NAPS2.Recovery;
-using NAPS2.Scan;
-using NAPS2.Scan.Twain;
 
 namespace NAPS2.Host
 {

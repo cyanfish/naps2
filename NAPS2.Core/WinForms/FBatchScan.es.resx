@@ -149,52 +149,52 @@
     <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>313, 12</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>Cancelar</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="btnStart.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnStart.Location" type="System.Drawing.Point, System.Drawing">
         <value>232, 12</value>
     </data>
-    <data name="btnStart.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnStart.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnStart.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnStart.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="btnStart.Text" xml:space="preserve">
+    <data name="BtnStart.Text" xml:space="preserve">
         <value>Comenzar</value>
     </data>
-    <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
-        <value>btnStart</value>
+    <data name="&gt;&gt;BtnStart.Name" xml:space="preserve">
+        <value>BtnStart</value>
     </data>
-    <data name="&gt;&gt;btnStart.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnStart.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnStart.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnStart.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnStart.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnStart.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
     <data name="txtTimeBetweenScans.Location" type="System.Drawing.Point, System.Drawing">
@@ -426,49 +426,49 @@
     <data name="&gt;&gt;panelScanType.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="btnAddProfile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnAddProfile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnAddProfile.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnAddProfile.Location" type="System.Drawing.Point, System.Drawing">
         <value>347, 35</value>
     </data>
-    <data name="btnAddProfile.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnAddProfile.Size" type="System.Drawing.Size, System.Drawing">
         <value>23, 23</value>
     </data>
-    <data name="btnAddProfile.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnAddProfile.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="&gt;&gt;btnAddProfile.Name" xml:space="preserve">
-        <value>btnAddProfile</value>
+    <data name="&gt;&gt;BtnAddProfile.Name" xml:space="preserve">
+        <value>BtnAddProfile</value>
     </data>
-    <data name="&gt;&gt;btnAddProfile.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnAddProfile.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnAddProfile.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnAddProfile.Parent" xml:space="preserve">
         <value>groupboxScanConfig</value>
     </data>
-    <data name="&gt;&gt;btnAddProfile.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnAddProfile.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="btnEditProfile.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnEditProfile.Location" type="System.Drawing.Point, System.Drawing">
         <value>318, 35</value>
     </data>
-    <data name="btnEditProfile.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnEditProfile.Size" type="System.Drawing.Size, System.Drawing">
         <value>23, 23</value>
     </data>
-    <data name="btnEditProfile.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnEditProfile.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="&gt;&gt;btnEditProfile.Name" xml:space="preserve">
-        <value>btnEditProfile</value>
+    <data name="&gt;&gt;BtnEditProfile.Name" xml:space="preserve">
+        <value>BtnEditProfile</value>
     </data>
-    <data name="&gt;&gt;btnEditProfile.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnEditProfile.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnEditProfile.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnEditProfile.Parent" xml:space="preserve">
         <value>groupboxScanConfig</value>
     </data>
-    <data name="&gt;&gt;btnEditProfile.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnEditProfile.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
     <data name="comboProfile.Location" type="System.Drawing.Point, System.Drawing">
@@ -543,31 +543,31 @@
     <data name="&gt;&gt;groupboxScanConfig.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="linkPatchCodeInfo.AutoSize" type="System.Boolean, mscorlib">
+    <data name="LinkPatchCodeInfo.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="linkPatchCodeInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LinkPatchCodeInfo.Location" type="System.Drawing.Point, System.Drawing">
         <value>36, 66</value>
     </data>
-    <data name="linkPatchCodeInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LinkPatchCodeInfo.Size" type="System.Drawing.Size, System.Drawing">
         <value>51, 13</value>
     </data>
-    <data name="linkPatchCodeInfo.TabIndex" type="System.Int32, mscorlib">
+    <data name="LinkPatchCodeInfo.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="linkPatchCodeInfo.Text" xml:space="preserve">
+    <data name="LinkPatchCodeInfo.Text" xml:space="preserve">
         <value>More info</value>
     </data>
-    <data name="&gt;&gt;linkPatchCodeInfo.Name" xml:space="preserve">
-        <value>linkPatchCodeInfo</value>
+    <data name="&gt;&gt;LinkPatchCodeInfo.Name" xml:space="preserve">
+        <value>LinkPatchCodeInfo</value>
     </data>
-    <data name="&gt;&gt;linkPatchCodeInfo.Type" xml:space="preserve">
+    <data name="&gt;&gt;LinkPatchCodeInfo.Type" xml:space="preserve">
         <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;linkPatchCodeInfo.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LinkPatchCodeInfo.Parent" xml:space="preserve">
         <value>panelSaveSeparator</value>
     </data>
-    <data name="&gt;&gt;linkPatchCodeInfo.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LinkPatchCodeInfo.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <data name="rdSeparateByPatchT.AutoSize" type="System.Boolean, mscorlib">
@@ -684,82 +684,82 @@
     <data name="&gt;&gt;panelSaveSeparator.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="btnChooseFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnChooseFolder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnChooseFolder.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnChooseFolder.Location" type="System.Drawing.Point, System.Drawing">
         <value>327, 18</value>
     </data>
-    <data name="btnChooseFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnChooseFolder.Size" type="System.Drawing.Size, System.Drawing">
         <value>34, 22</value>
     </data>
-    <data name="btnChooseFolder.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnChooseFolder.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
     </data>
-    <data name="btnChooseFolder.Text" xml:space="preserve">
+    <data name="BtnChooseFolder.Text" xml:space="preserve">
         <value>...</value>
     </data>
-    <data name="&gt;&gt;btnChooseFolder.Name" xml:space="preserve">
-        <value>btnChooseFolder</value>
+    <data name="&gt;&gt;BtnChooseFolder.Name" xml:space="preserve">
+        <value>BtnChooseFolder</value>
     </data>
-    <data name="&gt;&gt;btnChooseFolder.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnChooseFolder.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnChooseFolder.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnChooseFolder.Parent" xml:space="preserve">
         <value>panelSaveTo</value>
     </data>
-    <data name="&gt;&gt;btnChooseFolder.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnChooseFolder.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="linkPlaceholders.AutoSize" type="System.Boolean, mscorlib">
+    <data name="LinkPlaceholders.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="linkPlaceholders.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="LinkPlaceholders.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="linkPlaceholders.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LinkPlaceholders.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 42</value>
     </data>
-    <data name="linkPlaceholders.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LinkPlaceholders.Size" type="System.Drawing.Size, System.Drawing">
         <value>68, 13</value>
     </data>
-    <data name="linkPlaceholders.TabIndex" type="System.Int32, mscorlib">
+    <data name="LinkPlaceholders.TabIndex" type="System.Int32, mscorlib">
         <value>4</value>
     </data>
-    <data name="linkPlaceholders.Text" xml:space="preserve">
+    <data name="LinkPlaceholders.Text" xml:space="preserve">
         <value>Marcadores de posición</value>
     </data>
-    <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
-        <value>linkPlaceholders</value>
+    <data name="&gt;&gt;LinkPlaceholders.Name" xml:space="preserve">
+        <value>LinkPlaceholders</value>
     </data>
-    <data name="&gt;&gt;linkPlaceholders.Type" xml:space="preserve">
+    <data name="&gt;&gt;LinkPlaceholders.Type" xml:space="preserve">
         <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;linkPlaceholders.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LinkPlaceholders.Parent" xml:space="preserve">
         <value>panelSaveTo</value>
     </data>
-    <data name="&gt;&gt;linkPlaceholders.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LinkPlaceholders.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="txtFilePath.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="TxtFilePath.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 19</value>
     </data>
-    <data name="txtFilePath.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TxtFilePath.Size" type="System.Drawing.Size, System.Drawing">
         <value>318, 20</value>
     </data>
-    <data name="txtFilePath.TabIndex" type="System.Int32, mscorlib">
+    <data name="TxtFilePath.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="&gt;&gt;txtFilePath.Name" xml:space="preserve">
-        <value>txtFilePath</value>
+    <data name="&gt;&gt;TxtFilePath.Name" xml:space="preserve">
+        <value>TxtFilePath</value>
     </data>
-    <data name="&gt;&gt;txtFilePath.Type" xml:space="preserve">
+    <data name="&gt;&gt;TxtFilePath.Type" xml:space="preserve">
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;txtFilePath.Parent" xml:space="preserve">
+    <data name="&gt;&gt;TxtFilePath.Parent" xml:space="preserve">
         <value>panelSaveTo</value>
     </data>
-    <data name="&gt;&gt;txtFilePath.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;TxtFilePath.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
     <data name="lblFilePath.AutoSize" type="System.Boolean, mscorlib">

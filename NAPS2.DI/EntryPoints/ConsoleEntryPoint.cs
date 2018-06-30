@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CommandLine;
 using NAPS2.Automation;
 using NAPS2.DI.Modules;
 using Ninject;
@@ -13,14 +11,8 @@ namespace NAPS2.DI.EntryPoints
         public static void Run(string[] args)
         {
             var kernel = new StandardKernel(new CommonModule(), new ConsoleModule());
-
-            var options = new AutomatedScanningOptions();
-            if (!CommandLine.Parser.Default.ParseArguments(args, options))
-            {
-                return;
-            }
-            var scanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
-            scanning.Execute();
+            CommandLine.Parser.Default.ParseArguments<AutomatedScanningOptions>(args)
+                .WithParsed<AutomatedScanningOptions>(opts => kernel.Get<AutomatedScanning>(new ConstructorArgument("options", opts)).Execute());
         }
     }
 }

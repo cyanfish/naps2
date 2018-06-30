@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using NAPS2.ImportExport;
-using NAPS2.Lang.Resources;
+﻿using NAPS2.Lang.Resources;
 using NAPS2.Operation;
-using NAPS2.Scan.Images;
 using NAPS2.Util;
+using System;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
     public partial class FProgress : FormBase
     {
         private readonly IErrorOutput errorOutput;
-
         private volatile bool loaded;
         private volatile bool finished;
         private IOperation operation;
@@ -24,7 +17,6 @@ namespace NAPS2.WinForms
         {
             this.errorOutput = errorOutput;
             InitializeComponent();
-
             RestoreFormState = false;
         }
 
@@ -34,21 +26,21 @@ namespace NAPS2.WinForms
             set
             {
                 operation = value;
-                operation.StatusChanged += operation_StatusChanged;
-                operation.Error += operation_Error;
-                operation.Finished += operation_Finished;
-                btnCancel.Visible = operation.AllowCancel;
+                operation.StatusChanged += Operation_StatusChanged;
+                operation.Error += Operation_Error;
+                operation.Finished += Operation_Finished;
+                BtnCancel.Visible = Operation.AllowCancel;
             }
         }
 
         public Func<bool> Start { get; set; }
 
-        void operation_Error(object sender, OperationErrorEventArgs e)
+        private void Operation_Error(object sender, OperationErrorEventArgs e)
         {
             SafeInvoke(() => errorOutput.DisplayError(e.ErrorMessage, e.Exception));
         }
 
-        void operation_StatusChanged(object sender, EventArgs e)
+        private void Operation_StatusChanged(object sender, EventArgs e)
         {
             if (loaded)
             {
@@ -56,7 +48,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        void operation_Finished(object sender, EventArgs e)
+        private void Operation_Finished(object sender, EventArgs e)
         {
             finished = true;
             if (loaded)
@@ -68,14 +60,14 @@ namespace NAPS2.WinForms
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             new LayoutManager(this)
-                .Bind(progressBar, labelStatus)
+                .Bind(progressBar, LabelStatus)
                     .WidthToForm()
-                .Bind(btnCancel)
+                .Bind(BtnCancel)
                     .RightToForm()
                 .Activate();
 
             loaded = true;
-            Text = operation.ProgressTitle;
+            Text = Operation.ProgressTitle;
 
             DisplayProgress();
             if (finished)
@@ -99,22 +91,22 @@ namespace NAPS2.WinForms
         private void DisplayProgress()
         {
             var status = Operation.Status ?? new OperationStatus();
-            labelStatus.Text = status.StatusText;
+            LabelStatus.Text = status.StatusText;
             if (status.MaxProgress == 1 || status.IndeterminateProgress)
             {
-                labelNumber.Text = "";
+                LabelNumber.Text = "";
                 progressBar.Style = ProgressBarStyle.Marquee;
             }
             else if (status.MaxProgress == 0)
             {
-                labelNumber.Text = "";
+                LabelNumber.Text = "";
                 progressBar.Style = ProgressBarStyle.Continuous;
                 progressBar.Value = 0;
                 progressBar.Maximum = 1;
             }
             else
             {
-                labelNumber.Text = string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
+                LabelNumber.Text = string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
                 progressBar.Style = ProgressBarStyle.Continuous;
                 progressBar.Value = status.CurrentProgress;
                 progressBar.Maximum = status.MaxProgress;
@@ -122,12 +114,12 @@ namespace NAPS2.WinForms
             // Force the progress bar to render immediately
             if (progressBar.Value < progressBar.Maximum)
             {
-                progressBar.Value += 1;
-                progressBar.Value -= 1;
+                progressBar.Value++;
+                progressBar.Value--;
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             TryCancelOp();
         }
@@ -146,7 +138,7 @@ namespace NAPS2.WinForms
             if (Operation.AllowCancel)
             {
                 Operation.Cancel();
-                btnCancel.Enabled = false;
+                BtnCancel.Enabled = false;
             }
         }
     }

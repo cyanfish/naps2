@@ -1,12 +1,11 @@
+using NAPS2.Scan.Images;
+using NAPS2.Util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using NAPS2.Scan.Images;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {
@@ -49,13 +48,13 @@ namespace NAPS2.ImportExport.Images
                     var encoderParams = new EncoderParameters(2);
                     var saveEncoder = Encoder.SaveFlag;
                     var compressionEncoder = Encoder.Compression;
-
                     File.Delete(location);
+                    // TODO: https://docs.microsoft.com/en-us/visualstudio/code-quality/ca2202-do-not-dispose-objects-multiple-times
                     using (var bitmap0 = scannedImageRenderer.Render(images[0]))
                     {
                         ValidateBitmap(bitmap0);
                         encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
-                        encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame); ;
+                        encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
                         bitmap0.Save(location, codecInfo, encoderParams);
 
                         for (int i = 1; i < images.Count; i++)
@@ -84,14 +83,11 @@ namespace NAPS2.ImportExport.Images
                     }
                 }
                 return true;
-
-
             }
             catch (Exception ex)
             {
                 throw new Exception("Error saving TIFF", ex);
             }
-
         }
 
         private EncoderValue GetEncoderValue(TiffCompression compression, Bitmap bitmap)
@@ -100,10 +96,13 @@ namespace NAPS2.ImportExport.Images
             {
                 case TiffCompression.None:
                     return EncoderValue.CompressionNone;
+
                 case TiffCompression.Ccitt4:
                     return EncoderValue.CompressionCCITT4;
+
                 case TiffCompression.Lzw:
                     return EncoderValue.CompressionLZW;
+
                 default:
                     if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed
                         && bitmap.Palette.Entries.Length == 2
@@ -134,10 +133,10 @@ namespace NAPS2.ImportExport.Images
                 {
                     for (int x = 0; x < data.Width; x += 8)
                     {
-                        byte b = Marshal.ReadByte(data.Scan0 + y * stride + x / 8);
+                        byte b = Marshal.ReadByte(data.Scan0 + (y * stride) + (x / 8));
                         int bits = Math.Min(8, data.Width - x);
                         b ^= (byte)(0xFF << (8 - bits));
-                        Marshal.WriteByte(data.Scan0 + y * stride + x / 8, b);
+                        Marshal.WriteByte(data.Scan0 + (y * stride) + (x / 8), b);
                     }
                 }
                 bitmap.UnlockBits(data);
@@ -149,7 +148,7 @@ namespace NAPS2.ImportExport.Images
         private ImageCodecInfo GetCodecForString(string type)
         {
             ImageCodecInfo[] info = ImageCodecInfo.GetImageEncoders();
-            return info.FirstOrDefault(t => t.FormatDescription.Equals(type));
+            return Array.Find(info, t => t.FormatDescription.Equals(type));
         }
     }
 }

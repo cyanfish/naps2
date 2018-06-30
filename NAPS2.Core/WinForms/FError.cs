@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace NAPS2.WinForms
@@ -12,7 +10,7 @@ namespace NAPS2.WinForms
         {
             RestoreFormState = false;
             InitializeComponent();
-            AcceptButton = btnOK;
+            AcceptButton = BtnOK;
         }
 
         public string ErrorMessage { get; set; }
@@ -22,7 +20,7 @@ namespace NAPS2.WinForms
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             lblErrorText.Text = ErrorMessage;
-            txtDetails.Text = Details;
+            TxtDetails.Text = Details;
             ShowHideDetails();
         }
 
@@ -32,22 +30,22 @@ namespace NAPS2.WinForms
             base.OnPaint(e);
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void linkDetails_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkDetails_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ShowHideDetails();
         }
 
         private void ShowHideDetails()
         {
-            txtDetails.Visible = !txtDetails.Visible;
-            Height += (txtDetails.Height + 27) * (txtDetails.Visible ? 1 : -1);
-            btnOK.Top += (txtDetails.Height + 27) * (txtDetails.Visible ? 1 : -1);
+            TxtDetails.Visible = !TxtDetails.Visible;
+            Height += (TxtDetails.Height + 27) * (TxtDetails.Visible ? 1 : -1);
+            BtnOK.Top += (TxtDetails.Height + 27) * (TxtDetails.Visible ? 1 : -1);
         }
     }
 }

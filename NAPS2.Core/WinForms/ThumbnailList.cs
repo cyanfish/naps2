@@ -1,12 +1,10 @@
-using System;
+using NAPS2.Scan.Images;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using NAPS2.Config;
-using NAPS2.Scan.Images;
 
 namespace NAPS2.WinForms
 {
@@ -83,8 +81,8 @@ namespace NAPS2.WinForms
             }
 
             // Determine the smallest range that contains all images in the selection
-            int min = selection == null || !selection.Any() ? 0 : selection.Min();
-            int max = selection == null || !selection.Any() ? images.Count : selection.Max() + 1;
+            int min = selection?.Any() != true ? 0 : selection.Min();
+            int max = selection?.Any() != true ? images.Count : selection.Max() + 1;
 
             for (int i = min; i < max; i++)
             {

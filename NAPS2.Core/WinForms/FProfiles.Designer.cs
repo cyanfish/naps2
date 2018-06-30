@@ -41,12 +41,12 @@ namespace NAPS2.WinForms
             this.ctxEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSetDefault = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnDone = new System.Windows.Forms.Button();
+            this.BtnAdd = new System.Windows.Forms.Button();
+            this.BtnEdit = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
+            this.BtnDone = new System.Windows.Forms.Button();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
-            this.btnScan = new System.Windows.Forms.Button();
+            this.BtnScan = new System.Windows.Forms.Button();
             this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -62,14 +62,14 @@ namespace NAPS2.WinForms
             this.lvProfiles.MultiSelect = false;
             this.lvProfiles.Name = "lvProfiles";
             this.lvProfiles.UseCompatibleStateImageBehavior = false;
-            this.lvProfiles.ItemActivate += new System.EventHandler(this.lvProfiles_ItemActivate);
-            this.lvProfiles.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lvProfiles_ItemDrag);
-            this.lvProfiles.SelectedIndexChanged += new System.EventHandler(this.lvProfiles_SelectedIndexChanged);
-            this.lvProfiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragDrop);
-            this.lvProfiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragEnter);
-            this.lvProfiles.DragOver += new System.Windows.Forms.DragEventHandler(this.lvProfiles_DragOver);
-            this.lvProfiles.DragLeave += new System.EventHandler(this.lvProfiles_DragLeave);
-            this.lvProfiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvProfiles_KeyDown);
+            this.lvProfiles.ItemActivate += new System.EventHandler(this.LvProfiles_ItemActivate);
+            this.lvProfiles.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.LvProfiles_ItemDrag);
+            this.lvProfiles.SelectedIndexChanged += new System.EventHandler(this.LvProfiles_SelectedIndexChanged);
+            this.lvProfiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.LvProfiles_DragDrop);
+            this.lvProfiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.LvProfiles_DragEnter);
+            this.lvProfiles.DragOver += new System.Windows.Forms.DragEventHandler(this.LvProfiles_DragOver);
+            this.lvProfiles.DragLeave += new System.EventHandler(this.LvProfiles_DragLeave);
+            this.lvProfiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LvProfiles_KeyDown);
             // 
             // contextMenuStrip
             // 
@@ -84,14 +84,14 @@ namespace NAPS2.WinForms
             this.ctxDelete});
             this.contextMenuStrip.Name = "contextMenuStrip";
             resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
-            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip_Opening);
             // 
             // ctxScan
             // 
             resources.ApplyResources(this.ctxScan, "ctxScan");
             this.ctxScan.Image = global::NAPS2.Icons.control_play_blue_small;
             this.ctxScan.Name = "ctxScan";
-            this.ctxScan.Click += new System.EventHandler(this.ctxScan_Click);
+            this.ctxScan.Click += new System.EventHandler(this.CtxScan_Click);
             // 
             // toolStripSeparator1
             // 
@@ -103,73 +103,73 @@ namespace NAPS2.WinForms
             this.ctxEdit.Image = global::NAPS2.Icons.pencil_small;
             this.ctxEdit.Name = "ctxEdit";
             resources.ApplyResources(this.ctxEdit, "ctxEdit");
-            this.ctxEdit.Click += new System.EventHandler(this.ctxEdit_Click);
+            this.ctxEdit.Click += new System.EventHandler(this.CtxEdit_Click);
             // 
             // ctxSetDefault
             // 
             this.ctxSetDefault.Image = global::NAPS2.Icons.accept_small;
             this.ctxSetDefault.Name = "ctxSetDefault";
             resources.ApplyResources(this.ctxSetDefault, "ctxSetDefault");
-            this.ctxSetDefault.Click += new System.EventHandler(this.ctxSetDefault_Click);
+            this.ctxSetDefault.Click += new System.EventHandler(this.CtxSetDefault_Click);
             // 
             // ctxDelete
             // 
             this.ctxDelete.Image = global::NAPS2.Icons.cross_small;
             this.ctxDelete.Name = "ctxDelete";
             resources.ApplyResources(this.ctxDelete, "ctxDelete");
-            this.ctxDelete.Click += new System.EventHandler(this.ctxDelete_Click);
+            this.ctxDelete.Click += new System.EventHandler(this.CtxDelete_Click);
             // 
-            // btnAdd
+            // BtnAdd
             // 
-            resources.ApplyResources(this.btnAdd, "btnAdd");
-            this.btnAdd.Image = global::NAPS2.Icons.add_small;
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            resources.ApplyResources(this.BtnAdd, "BtnAdd");
+            this.BtnAdd.Image = global::NAPS2.Icons.add_small;
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.UseVisualStyleBackColor = true;
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
-            // btnEdit
+            // BtnEdit
             // 
-            this.btnEdit.Image = global::NAPS2.Icons.pencil_small;
-            resources.ApplyResources(this.btnEdit, "btnEdit");
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.BtnEdit.Image = global::NAPS2.Icons.pencil_small;
+            resources.ApplyResources(this.BtnEdit, "BtnEdit");
+            this.BtnEdit.Name = "BtnEdit";
+            this.BtnEdit.UseVisualStyleBackColor = true;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
-            // btnDelete
+            // BtnDelete
             // 
-            this.btnDelete.Image = global::NAPS2.Icons.cross_small;
-            resources.ApplyResources(this.btnDelete, "btnDelete");
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.BtnDelete.Image = global::NAPS2.Icons.cross_small;
+            resources.ApplyResources(this.BtnDelete, "BtnDelete");
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.UseVisualStyleBackColor = true;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // btnDone
+            // BtnDone
             // 
-            resources.ApplyResources(this.btnDone, "btnDone");
-            this.btnDone.Name = "btnDone";
-            this.btnDone.UseVisualStyleBackColor = true;
-            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+            resources.ApplyResources(this.BtnDone, "BtnDone");
+            this.BtnDone.Name = "BtnDone";
+            this.BtnDone.UseVisualStyleBackColor = true;
+            this.BtnDone.Click += new System.EventHandler(this.BtnDone_Click);
             // 
-            // btnScan
+            // BtnScan
             // 
-            this.btnScan.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.btnScan, "btnScan");
-            this.btnScan.Image = global::NAPS2.Icons.control_play_blue;
-            this.btnScan.Name = "btnScan";
-            this.btnScan.UseVisualStyleBackColor = true;
-            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+            this.BtnScan.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.BtnScan, "BtnScan");
+            this.BtnScan.Image = global::NAPS2.Icons.control_play_blue;
+            this.BtnScan.Name = "BtnScan";
+            this.BtnScan.UseVisualStyleBackColor = true;
+            this.BtnScan.Click += new System.EventHandler(this.BtnScan_Click);
             // 
             // ctxCopy
             // 
             this.ctxCopy.Name = "ctxCopy";
             resources.ApplyResources(this.ctxCopy, "ctxCopy");
-            this.ctxCopy.Click += new System.EventHandler(this.ctxCopy_Click);
+            this.ctxCopy.Click += new System.EventHandler(this.CtxCopy_Click);
             // 
             // ctxPaste
             // 
             this.ctxPaste.Name = "ctxPaste";
             resources.ApplyResources(this.ctxPaste, "ctxPaste");
-            this.ctxPaste.Click += new System.EventHandler(this.ctxPaste_Click);
+            this.ctxPaste.Click += new System.EventHandler(this.CtxPaste_Click);
             // 
             // toolStripSeparator2
             // 
@@ -180,11 +180,11 @@ namespace NAPS2.WinForms
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnScan);
-            this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.BtnScan);
+            this.Controls.Add(this.BtnDone);
+            this.Controls.Add(this.BtnDelete);
+            this.Controls.Add(this.BtnEdit);
+            this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.lvProfiles);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -197,12 +197,12 @@ namespace NAPS2.WinForms
         #endregion
 
         private System.Windows.Forms.ListView lvProfiles;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnDone;
+        private System.Windows.Forms.Button BtnAdd;
+        private System.Windows.Forms.Button BtnEdit;
+        private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.Button BtnDone;
         private ILProfileIcons ilProfileIcons;
-        private System.Windows.Forms.Button btnScan;
+        private System.Windows.Forms.Button BtnScan;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem ctxScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

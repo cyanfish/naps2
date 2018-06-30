@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.Config;
+using NAPS2.Scan.Images.Transforms;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Xml.Serialization;
-using NAPS2.Config;
-using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Recovery
 {

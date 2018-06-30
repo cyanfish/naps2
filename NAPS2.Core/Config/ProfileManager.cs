@@ -1,11 +1,11 @@
+using NAPS2.Scan;
+using NAPS2.Scan.Twain;
+using NAPS2.Scan.Wia;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using NAPS2.Scan;
-using NAPS2.Scan.Twain;
-using NAPS2.Scan.Wia;
 
 namespace NAPS2.Config
 {
@@ -27,9 +27,9 @@ namespace NAPS2.Config
             {
                 if (Profiles.Count == 1)
                 {
-                    return Profiles.First();
+                    return Profiles[0];
                 }
-                return Profiles.FirstOrDefault(x => x.IsDefault);
+                return Profiles.Find(x => x.IsDefault);
             }
             set
             {
@@ -174,8 +174,8 @@ namespace NAPS2.Config
         private List<ScanProfile> ReadVeryOldProfiles(Stream configFileStream)
         {
             // For compatibility with profiles.xml from old versions, load OldScanSettings instead of ScanProfile (which is used exclusively now)
-            var deprecatedSerializer = new XmlSerializer(typeof (List<OldScanSettings>));
-            var profiles = (List<OldScanSettings>) deprecatedSerializer.Deserialize(configFileStream);
+            var deprecatedSerializer = new XmlSerializer(typeof(List<OldScanSettings>));
+            var profiles = (List<OldScanSettings>)deprecatedSerializer.Deserialize(configFileStream);
 
             // Okay, we've read the old version of profiles.txt. Since we're going to eventually change it to the new version, make a backup in case the user downgrades.
             File.Copy(primaryConfigPath, primaryConfigPath + ".bak", true);
@@ -202,8 +202,7 @@ namespace NAPS2.Config
                     // If the driver is WIA and the profile type is not Extended, that meant the native UI was to be used
                     UseNativeUI = profile.DriverName == WiaScanDriver.DRIVER_NAME
                 };
-                var ext = profile as OldExtendedScanSettings;
-                if (ext != null)
+                if (profile is OldExtendedScanSettings ext)
                 {
                     result.AfterScanScale = ext.AfterScanScale;
                     result.BitDepth = ext.BitDepth;

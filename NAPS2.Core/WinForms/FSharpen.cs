@@ -1,16 +1,16 @@
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class FSharpen : FormBase
+    internal partial class FSharpen : FormBase
     {
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
@@ -41,7 +41,7 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            if (SelectedImages != null && SelectedImages.Count > 1)
+            if (SelectedImages?.Count > 1)
             {
                 checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
             }
@@ -51,27 +51,27 @@ namespace NAPS2.WinForms
             }
 
             new LayoutManager(this)
-                .Bind(tbSharpen, pictureBox)
+                .Bind(TbSharpen, PictureBox)
                     .WidthToForm()
-                .Bind(pictureBox)
+                .Bind(PictureBox)
                     .HeightToForm()
-                .Bind(btnOK, btnCancel, txtSharpen)
+                .Bind(BtnOK, BtnCancel, TxtSharpen)
                     .RightToForm()
-                .Bind(tbSharpen, txtSharpen, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
+                .Bind(TbSharpen, TxtSharpen, checkboxApplyToSelected, BtnRevert, BtnOK, BtnCancel)
                     .BottomToForm()
                 .Activate();
             Size = new Size(600, 600);
 
             workingImage = scannedImageRenderer.Render(Image);
-            pictureBox.Image = (Bitmap)workingImage.Clone();
+            PictureBox.Image = (Bitmap)workingImage.Clone();
             UpdatePreviewBox();
 
-            ActiveControl = txtSharpen;
+            ActiveControl = TxtSharpen;
         }
 
         private void UpdateTransform()
         {
-            SharpenTransform.Sharpness = tbSharpen.Value;
+            SharpenTransform.Sharpness = TbSharpen.Value;
             UpdatePreviewBox();
         }
 
@@ -88,8 +88,8 @@ namespace NAPS2.WinForms
                         var result = SharpenTransform.Perform((Bitmap)workingImage.Clone());
                         SafeInvoke(() =>
                         {
-                            pictureBox.Image?.Dispose();
-                            pictureBox.Image = result;
+                            PictureBox.Image?.Dispose();
+                            PictureBox.Image = result;
                         });
                         working = false;
                     }
@@ -98,12 +98,12 @@ namespace NAPS2.WinForms
             previewOutOfDate = true;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             if (!SharpenTransform.IsNull)
             {
@@ -117,37 +117,36 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnRevert_Click(object sender, EventArgs e)
+        private void BtnRevert_Click(object sender, EventArgs e)
         {
             SharpenTransform = new SharpenTransform();
-            tbSharpen.Value = 0;
-            txtSharpen.Text = tbSharpen.Value.ToString("G");
+            TbSharpen.Value = 0;
+            TxtSharpen.Text = TbSharpen.Value.ToString("G");
             UpdatePreviewBox();
         }
 
         private void FSharpen_FormClosed(object sender, FormClosedEventArgs e)
         {
             workingImage.Dispose();
-            pictureBox.Image?.Dispose();
+            PictureBox.Image?.Dispose();
             previewTimer?.Dispose();
         }
 
-        private void txtSharpen_TextChanged(object sender, EventArgs e)
+        private void TxtSharpen_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtSharpen.Text, out value))
+            if (int.TryParse(TxtSharpen.Text, out int value))
             {
-                if (value >= tbSharpen.Minimum && value <= tbSharpen.Maximum)
+                if (value >= TbSharpen.Minimum && value <= TbSharpen.Maximum)
                 {
-                    tbSharpen.Value = value;
+                    TbSharpen.Value = value;
                 }
             }
             UpdateTransform();
         }
 
-        private void tbSharpen_Scroll(object sender, EventArgs e)
+        private void TbSharpen_Scroll(object sender, EventArgs e)
         {
-            txtSharpen.Text = tbSharpen.Value.ToString("G");
+            TxtSharpen.Text = TbSharpen.Value.ToString("G");
             UpdateTransform();
         }
     }

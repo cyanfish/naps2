@@ -1,10 +1,10 @@
+using NAPS2.Lang.Resources;
+using NAPS2.Scan.Exceptions;
+using NAPS2.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using NAPS2.Lang.Resources;
-using NAPS2.Scan.Exceptions;
-using NAPS2.Util;
 using WIA;
 
 namespace NAPS2.Scan.Wia
@@ -72,7 +72,7 @@ namespace NAPS2.Scan.Wia
             public const string BMP = "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}";
         }
 
-        #endregion
+        #endregion WIA Constants
 
         #region Device/Item Management
 
@@ -178,9 +178,9 @@ namespace NAPS2.Scan.Wia
             {
                 throw error;
             }
-            if (error is COMException)
+            if (error is COMException cOMException)
             {
-                ThrowDeviceError((COMException)error);
+                ThrowDeviceError(cOMException);
             }
             throw new ScanDriverUnknownException(error);
         }
@@ -218,7 +218,7 @@ namespace NAPS2.Scan.Wia
             throw new ScanDriverUnknownException(e);
         }
 
-        #endregion
+        #endregion Device/Item Management
 
         #region Device/Item Configuration
 
@@ -240,9 +240,11 @@ namespace NAPS2.Scan.Wia
                 case ScanBitDepth.Grayscale:
                     SetItemIntProperty(item, 2, ItemProperties.DATA_TYPE);
                     break;
+
                 case ScanBitDepth.C24Bit:
                     SetItemIntProperty(item, 3, ItemProperties.DATA_TYPE);
                     break;
+
                 case ScanBitDepth.BlackWhite:
                     SetItemIntProperty(item, 0, ItemProperties.DATA_TYPE);
                     break;
@@ -314,16 +316,18 @@ namespace NAPS2.Scan.Wia
                 case ScanSource.Glass:
                     SetDeviceIntProperty(device, Source.FLATBED, DeviceProperties.PAPER_SOURCE);
                     break;
+
                 case ScanSource.Feeder:
                     SetDeviceIntProperty(device, Source.FEEDER, DeviceProperties.PAPER_SOURCE);
                     break;
+
                 case ScanSource.Duplex:
                     SetDeviceIntProperty(device, Source.DUPLEX | Source.FEEDER, DeviceProperties.PAPER_SOURCE);
                     break;
             }
         }
 
-        #endregion
+        #endregion Device/Item Configuration
 
         #region Derived Properties
 
@@ -345,7 +349,7 @@ namespace NAPS2.Scan.Wia
             return (status & Status.FEED_READY) != 0;
         }
 
-        #endregion
+        #endregion Derived Properties
 
         #region WIA Property Getters and Setters
 
@@ -446,7 +450,7 @@ namespace NAPS2.Scan.Wia
                     int expectedAbs = value - expectedMin;
                     int expectedRange = expectedMax - expectedMin;
                     int actualRange = property.SubTypeMax - property.SubTypeMin;
-                    int actualValue = expectedAbs * actualRange / expectedRange + property.SubTypeMin;
+                    int actualValue = (expectedAbs * actualRange / expectedRange) + property.SubTypeMin;
                     if (property.SubTypeStep != 0)
                     {
                         actualValue -= actualValue % property.SubTypeStep;
@@ -466,6 +470,6 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        #endregion
+        #endregion WIA Property Getters and Setters
     }
 }

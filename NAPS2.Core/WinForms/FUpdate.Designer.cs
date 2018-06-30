@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FUpdate));
             this.lblPrompt = new System.Windows.Forms.Label();
-            this.btnInstall = new System.Windows.Forms.Button();
-            this.btnDownload = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnInstall = new System.Windows.Forms.Button();
+            this.BtnDownload = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblPrompt
@@ -40,34 +40,34 @@
             resources.ApplyResources(this.lblPrompt, "lblPrompt");
             this.lblPrompt.Name = "lblPrompt";
             // 
-            // btnInstall
+            // BtnInstall
             // 
-            resources.ApplyResources(this.btnInstall, "btnInstall");
-            this.btnInstall.Name = "btnInstall";
-            this.btnInstall.UseVisualStyleBackColor = true;
-            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
+            resources.ApplyResources(this.BtnInstall, "BtnInstall");
+            this.BtnInstall.Name = "BtnInstall";
+            this.BtnInstall.UseVisualStyleBackColor = true;
+            this.BtnInstall.Click += new System.EventHandler(this.BtnInstall_Click);
             // 
-            // btnDownload
+            // BtnDownload
             // 
-            resources.ApplyResources(this.btnDownload, "btnDownload");
-            this.btnDownload.Name = "btnDownload";
-            this.btnDownload.UseVisualStyleBackColor = true;
-            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
+            resources.ApplyResources(this.BtnDownload, "BtnDownload");
+            this.BtnDownload.Name = "BtnDownload";
+            this.BtnDownload.UseVisualStyleBackColor = true;
+            this.BtnDownload.Click += new System.EventHandler(this.BtnDownload_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // FUpdate
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnDownload);
-            this.Controls.Add(this.btnInstall);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnDownload);
+            this.Controls.Add(this.BtnInstall);
             this.Controls.Add(this.lblPrompt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -80,8 +80,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblPrompt;
-        private System.Windows.Forms.Button btnInstall;
-        private System.Windows.Forms.Button btnDownload;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnInstall;
+        private System.Windows.Forms.Button BtnDownload;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }

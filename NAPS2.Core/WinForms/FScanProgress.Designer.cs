@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FScanProgress));
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.labelPage = new System.Windows.Forms.Label();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.LabelPage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // progressBar
@@ -42,24 +42,24 @@
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar.Value = 100;
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // labelPage
+            // LabelPage
             // 
-            resources.ApplyResources(this.labelPage, "labelPage");
-            this.labelPage.Name = "labelPage";
+            resources.ApplyResources(this.LabelPage, "LabelPage");
+            this.LabelPage.Name = "LabelPage";
             // 
             // FScanProgress
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelPage);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.LabelPage);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.progressBar);
             this.MaximizeBox = false;
             this.Name = "FScanProgress";
@@ -75,7 +75,7 @@
         #endregion
 
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label labelPage;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Label LabelPage;
     }
 }

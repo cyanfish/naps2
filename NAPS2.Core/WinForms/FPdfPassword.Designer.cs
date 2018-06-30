@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPdfPassword));
             this.lblPrompt = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnOK = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -40,19 +40,19 @@
             resources.ApplyResources(this.lblPrompt, "lblPrompt");
             this.lblPrompt.Name = "lblPrompt";
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // txtPassword
             // 
@@ -65,8 +65,8 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnOK);
             this.Controls.Add(this.lblPrompt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -80,8 +80,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblPrompt;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Button BtnOK;
         private System.Windows.Forms.TextBox txtPassword;
     }
 }

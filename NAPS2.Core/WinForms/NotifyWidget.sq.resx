@@ -153,64 +153,64 @@
     <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="linkLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <data name="LinkLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
         <value>Bottom, Left, Right</value>
     </data>
-    <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
         <value>7, 27</value>
     </data>
-    <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
         <value>150, 13</value>
     </data>
-    <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
+    <data name="LinkLabel1.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
-        <value>linkLabel1</value>
+    <data name="&gt;&gt;LinkLabel1.Name" xml:space="preserve">
+        <value>LinkLabel1</value>
     </data>
-    <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
+    <data name="&gt;&gt;LinkLabel1.Type" xml:space="preserve">
         <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LinkLabel1.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LinkLabel1.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="btnClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <data name="BtnClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
         <value>Top, Right</value>
     </data>
-    <data name="btnClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <data name="BtnClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
         <value>Flat</value>
     </data>
-    <data name="btnClose.Font" type="System.Drawing.Font, System.Drawing">
+    <data name="BtnClose.Font" type="System.Drawing.Font, System.Drawing">
         <value>Microsoft Sans Serif, 12pt</value>
     </data>
-    <data name="btnClose.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnClose.Location" type="System.Drawing.Point, System.Drawing">
         <value>132, 4</value>
     </data>
-    <data name="btnClose.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <data name="BtnClose.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>0, 0, 1, 1</value>
     </data>
-    <data name="btnClose.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnClose.Size" type="System.Drawing.Size, System.Drawing">
         <value>20, 20</value>
     </data>
-    <data name="btnClose.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnClose.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
-        <value>btnClose</value>
+    <data name="&gt;&gt;BtnClose.Name" xml:space="preserve">
+        <value>BtnClose</value>
     </data>
-    <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnClose.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnClose.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnClose.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <metadata name="hideTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <metadata name="HideTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>17, 17</value>
     </metadata>
     <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -225,10 +225,10 @@
     <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
         <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="openFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="OpenFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
         <value>139, 22</value>
     </data>
-    <data name="openFolderToolStripMenuItem.Text" xml:space="preserve">
+    <data name="OpenFolderToolStripMenuItem.Text" xml:space="preserve">
         <value>Hap Dosjen</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -240,16 +240,16 @@
     <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
         <value>156, 46</value>
     </data>
-    <data name="&gt;&gt;hideTimer.Name" xml:space="preserve">
-        <value>hideTimer</value>
+    <data name="&gt;&gt;HideTimer.Name" xml:space="preserve">
+        <value>HideTimer</value>
     </data>
-    <data name="&gt;&gt;hideTimer.Type" xml:space="preserve">
+    <data name="&gt;&gt;HideTimer.Type" xml:space="preserve">
         <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;openFolderToolStripMenuItem.Name" xml:space="preserve">
-        <value>openFolderToolStripMenuItem</value>
+    <data name="&gt;&gt;OpenFolderToolStripMenuItem.Name" xml:space="preserve">
+        <value>OpenFolderToolStripMenuItem</value>
     </data>
-    <data name="&gt;&gt;openFolderToolStripMenuItem.Type" xml:space="preserve">
+    <data name="&gt;&gt;OpenFolderToolStripMenuItem.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">

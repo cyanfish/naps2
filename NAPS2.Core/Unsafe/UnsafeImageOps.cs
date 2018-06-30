@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NAPS2.Unsafe
@@ -23,10 +21,10 @@ namespace NAPS2.Unsafe
             {
                 for (int y = start; y < end; y++)
                 {
-                    byte* row = data + stride * y;
+                    byte* row = data + (stride * y);
                     for (int x = 0; x < w; x++)
                     {
-                        byte* pixel = row + x * bytesPerPixel;
+                        byte* pixel = row + (x * bytesPerPixel);
                         byte r = *pixel;
                         byte g = *(pixel + 1);
                         byte b = *(pixel + 2);
@@ -47,11 +45,11 @@ namespace NAPS2.Unsafe
                         }
                         else if (g == max)
                         {
-                            hue = 2 + (b - r) / delta;
+                            hue = 2 + ((b - r) / delta);
                         }
                         else if (b == max)
                         {
-                            hue = 4 + (r - g) / delta;
+                            hue = 4 + ((r - g) / delta);
                         }
                         hue += hueShift;
                         hue = (hue + 6) % 6;
@@ -64,44 +62,45 @@ namespace NAPS2.Unsafe
 
                         byte v = (byte)(val);
                         byte p = (byte)(val * (1 - sat));
-                        byte q = (byte)(val * (1 - f * sat));
-                        byte t = (byte)(val * (1 - (1 - f) * sat));
+                        byte q = (byte)(val * (1 - (f * sat)));
+                        byte t = (byte)(val * (1 - ((1 - f) * sat)));
+                        switch (hi)
+                        {
+                            case 0:
+                                r = v;
+                                g = t;
+                                b = p;
+                                break;
 
-                        if (hi == 0)
-                        {
-                            r = v;
-                            g = t;
-                            b = p;
-                        }
-                        else if (hi == 1)
-                        {
-                            r = q;
-                            g = v;
-                            b = p;
-                        }
-                        else if (hi == 2)
-                        {
-                            r = p;
-                            g = v;
-                            b = t;
-                        }
-                        else if (hi == 3)
-                        {
-                            r = p;
-                            g = q;
-                            b = v;
-                        }
-                        else if (hi == 4)
-                        {
-                            r = t;
-                            g = p;
-                            b = v;
-                        }
-                        else
-                        {
-                            r = v;
-                            g = p;
-                            b = q;
+                            case 1:
+                                r = q;
+                                g = v;
+                                b = p;
+                                break;
+
+                            case 2:
+                                r = p;
+                                g = v;
+                                b = t;
+                                break;
+
+                            case 3:
+                                r = p;
+                                g = q;
+                                b = v;
+                                break;
+
+                            case 4:
+                                r = t;
+                                g = p;
+                                b = v;
+                                break;
+
+                            default:
+                                r = v;
+                                g = p;
+                                b = q;
+                                break;
                         }
 
                         *pixel = r;

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
-using NAPS2.Lang.Resources;
+﻿using NAPS2.Lang.Resources;
 using NAPS2.Operation;
-using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Threading;
 
 namespace NAPS2.Scan.Images
 {
@@ -21,6 +17,7 @@ namespace NAPS2.Scan.Images
 
         private volatile bool cancel;
         private Thread thread;
+        private readonly object _lockObject = new object();
 
         public DeskewOperation(ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
         {
@@ -67,9 +64,9 @@ namespace NAPS2.Scan.Images
                         img.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
 
                         // The final pipeline step is pretty fast, so updating progress here is more accurate
-                        lock (this)
+                        lock (_lockObject)
                         {
-                            Status.CurrentProgress += 1;
+                            Status.CurrentProgress++;
                         }
                         InvokeStatusChanged();
 

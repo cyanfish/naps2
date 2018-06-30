@@ -1,11 +1,8 @@
-﻿using System;
+﻿using NAPS2.Config;
+using NAPS2.Dependencies;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
-using NAPS2.Dependencies;
-using NAPS2.Lang;
-using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {
@@ -100,13 +97,13 @@ namespace NAPS2.Ocr
                     : Components.Tesseract302Languages;
                 return languageComponents.Where(x => x.Value.IsInstalled).Select(x => Languages[x.Key]);
             }
-        } 
+        }
 
         public bool HasNewTesseractExe => Components.Tesseract304.IsInstalled || Components.Tesseract304Xp.IsInstalled;
 
         public bool IsOcrSupported => PlatformSupport.Windows.Validate();
 
-        public bool TesseractExeRequiresFix => InstalledTesseractExe != null && !InstalledTesseractExe.IsSupported && IsOcrSupported;
+        public bool TesseractExeRequiresFix => InstalledTesseractExe?.IsSupported == false && IsOcrSupported;
 
         #region Language Data (auto-generated)
 
@@ -221,7 +218,7 @@ namespace NAPS2.Ocr
             new OcrLanguage { Filename = "yid.traineddata.gz", Code = "yid", LangName = "Yiddish", Size = 1.60, Sha1 = "0dbb6e19b660b57283f954eb5183cc2f3677fdda" },
         };
 
-        #endregion
+        #endregion Language Data (auto-generated)
 
         public readonly IDictionary<string, Language> Languages = LanguageData.ToDictionary(x => x.Code, x => new Language(x.Code, x.LangName, x.RTL));
 
@@ -243,9 +240,9 @@ namespace NAPS2.Ocr
         {
             private static readonly List<(PlatformSupport, string)> UrlFormats = new List<(PlatformSupport, string)>
             {
-                (PlatformSupport.ModernWindows, @"https://github.com/cyanfish/naps2-components/releases/download/tessseract-3.04/{0}"),
-                (PlatformSupport.ModernWindows, @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download"),
-                (PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-3.04/{0}")
+                (PlatformSupport.ModernWindows, "https://github.com/cyanfish/naps2-components/releases/download/tessseract-3.04/{0}"),
+                (PlatformSupport.ModernWindows, "https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download"),
+                (PlatformSupport.WindowsXp, "http://xp-mirror.naps2.com/tesseract-3.04/{0}")
             };
 
             public readonly DownloadInfo Tesseract304Xp = new DownloadInfo("tesseract_xp.exe.gz", UrlFormats, 1.32, "98d15e4765caae864f16fa2ab106e3fd6adbe8c3", DownloadFormat.Gzip);
@@ -254,7 +251,7 @@ namespace NAPS2.Ocr
 
             public readonly IDictionary<string, DownloadInfo> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new DownloadInfo(x.Filename, UrlFormats, x.Size, x.Sha1, DownloadFormat.Gzip));
         }
-        
+
         private class OcrLanguage
         {
             public string Filename { get; set; }

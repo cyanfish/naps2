@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
     public partial class NotifyWidget : UserControl
     {
-        private readonly string linkTarget;
+        private readonly string LinkTarget;
         private readonly string folderTarget;
 
-        public NotifyWidget(string title, string linkLabel, string linkTarget, string folderTarget)
+        public NotifyWidget(string title, string LinkLabel, string LinkTarget, string folderTarget)
         {
-            this.linkTarget = linkTarget;
+            this.LinkTarget = LinkTarget;
             this.folderTarget = folderTarget;
             InitializeComponent();
 
             lblTitle.Text = title;
-            linkLabel1.Text = linkLabel;
+            LinkLabel1.Text = LinkLabel;
 
             if (lblTitle.Width > Width - 35)
             {
@@ -33,63 +27,60 @@ namespace NAPS2.WinForms
                 Height = lblTitle.Height + 35;
             }
 
-            if (folderTarget == null)
-            {
-                contextMenuStrip1.Enabled = false;
-            }
+            contextMenuStrip1.Enabled &= folderTarget != null;
         }
 
         public event EventHandler HideNotify;
 
-        private void hideTimer_Tick(object sender, EventArgs e)
+        private void HideTimer_Tick(object sender, EventArgs e)
         {
             DoHideNotify();
         }
 
         private void DoHideNotify()
         {
-            HideNotify?.Invoke(this, new EventArgs());
-            hideTimer.Stop();
+            HideNotify?.Invoke(this, EventArgs.Empty);
+            HideTimer.Stop();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
             DoHideNotify();
         }
 
         private void NotifyWidget_MouseEnter(object sender, EventArgs e)
         {
-            hideTimer.Stop();
+            HideTimer.Stop();
         }
 
         private void NotifyWidget_MouseLeave(object sender, EventArgs e)
         {
-            hideTimer.Start();
+            HideTimer.Start();
         }
 
         public void ShowNotify()
         {
-            hideTimer.Start();
+            HideTimer.Start();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                contextMenuStrip1.Show(linkLabel1, linkLabel1.Location);
+                contextMenuStrip1.Show(LinkLabel1, LinkLabel1.Location);
             }
             else
             {
                 Process.Start(new ProcessStartInfo
                 {
                     UseShellExecute = true,
-                    FileName = linkTarget,
+                    FileName = LinkTarget,
                     Verb = "open"
                 });
             }
         }
 
-        private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo
             {

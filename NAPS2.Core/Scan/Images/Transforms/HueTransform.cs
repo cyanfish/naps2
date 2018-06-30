@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.Unsafe;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Runtime.InteropServices;
-using NAPS2.Unsafe;
 
 namespace NAPS2.Scan.Images.Transforms
 {
@@ -37,7 +34,7 @@ namespace NAPS2.Scan.Images.Transforms
             }
 
             UnsafeImageOps.HueShift(bitmap, bytesPerPixel, hueShiftAdjusted);
-            
+
             return bitmap;
         }
 
@@ -51,7 +48,7 @@ namespace NAPS2.Scan.Images.Transforms
             var other2 = (HueTransform)other;
             return new HueTransform
             {
-                HueShift = (HueShift + other2.HueShift + 3000) % 2000 - 1000
+                HueShift = ((HueShift + other2.HueShift + 3000) % 2000) - 1000
             };
         }
 

@@ -1,24 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Win32;
 using System.Reflection;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace NAPS2.Util
 {
     public class StillImage
     {
+#pragma warning disable RCS1213 // Remove unused member declaration.
         private const string GUID_DEVICE_ARRIVED_LAUNCH = "{740d9ee6-70f1-11d1-ad10-00a02438ad48}";
+#pragma warning restore RCS1213 // Remove unused member declaration.
+#pragma warning disable RCS1213 // Remove unused member declaration.
         private const string GUID_SCAN_IMAGE = "{a6c5a715-8c6e-11d2-977a-0000f87a926f}";
+#pragma warning restore RCS1213 // Remove unused member declaration.
+#pragma warning disable RCS1213 // Remove unused member declaration.
         private const string GUID_SCAN_PRINT_IMAGE = "{b441f425-8c6e-11d2-977a-0000f87a926f}";
+#pragma warning restore RCS1213 // Remove unused member declaration.
+#pragma warning disable RCS1213 // Remove unused member declaration.
         private const string GUID_SCAN_FAX_IMAGE = "{c00eb793-8c6e-11d2-977a-0000f87a926f}";
+#pragma warning restore RCS1213 // Remove unused member declaration.
 
         private const string REGKEY_AUTOPLAY_HANDLER_NAPS2 = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{1c3a7177-f3a7-439e-be47-e304a185f932}";
         private const string REGKEY_STI_APP = @"SOFTWARE\Microsoft\Windows\CurrentVersion\StillImage\Registered Applications";
         private const string REGKEY_STI_EVENT_NAPS2 = @"SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{1c3a7177-f3a7-439e-be47-e304a185f932}";
         private const string REGKEY_IMAGE_EVENTS = @"SYSTEM\CurrentControlSet\Control\Class\{6bdd1fc6-810f-11d0-bec7-08002be2092f}\0000\Events";
-
 
         public void RegisterSti(bool silent)
         {
@@ -49,7 +53,7 @@ namespace NAPS2.Util
             RegisterOk = true;
             if (!silent)
             {
-                MessageBox.Show(@"Successfully registered STI. A reboot may be needed.");
+                MessageBox.Show("Successfully registered STI. A reboot may be needed.");
             }
         }
 
@@ -74,7 +78,7 @@ namespace NAPS2.Util
             RegisterOk = true;
             if (!silent)
             {
-                MessageBox.Show(@"Successfully unregistered STI. A reboot may be needed.");
+                MessageBox.Show("Successfully unregistered STI. A reboot may be needed.");
             }
         }
 

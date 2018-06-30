@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NAPS2.Scan.Exceptions
 {
+    [Serializable()]
     public abstract class ScanDriverException : Exception
     {
         protected ScanDriverException(string message)
@@ -13,6 +12,14 @@ namespace NAPS2.Scan.Exceptions
 
         protected ScanDriverException(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        protected ScanDriverException()
+        {
+        }
+
+        protected ScanDriverException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
         {
         }
     }

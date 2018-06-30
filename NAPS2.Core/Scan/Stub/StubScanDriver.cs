@@ -1,10 +1,8 @@
-using System;
+using NAPS2.Scan.Images;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Scan.Images;
 
 namespace NAPS2.Scan.Stub
 {
@@ -55,8 +53,10 @@ namespace NAPS2.Scan.Stub
                 {
                     case ScanSource.Glass:
                         return 1;
+
                     case ScanSource.Feeder:
                         return 3;
+
                     case ScanSource.Duplex:
                         return 4;
                 }

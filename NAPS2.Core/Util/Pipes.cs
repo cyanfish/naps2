@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
-using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -22,6 +20,7 @@ namespace NAPS2.Util
         // This could be edtion/version-specific, but I like the idea that if the user is running a portable version and
         // happens to have NAPS2 installed too, the scan button will propagate to the portable version.
         private const string PIPE_NAME_FORMAT = "NAPS2_PIPE_86a6ef67-742a-44ec-9ca5-64c5bddfd013_{0}";
+
         // The timeout is small since pipe connections should be on the local machine only.
         private const int TIMEOUT = 1000;
 
@@ -115,8 +114,8 @@ namespace NAPS2.Util
         /// </summary>
         private class StreamString
         {
-            private Stream ioStream;
-            private UnicodeEncoding streamEncoding;
+            private readonly Stream ioStream;
+            private readonly UnicodeEncoding streamEncoding;
 
             public StreamString(Stream ioStream)
             {
@@ -126,8 +125,7 @@ namespace NAPS2.Util
 
             public string ReadString()
             {
-                int len;
-                len = ioStream.ReadByte() * 256;
+                int len = ioStream.ReadByte() * 256;
                 len += ioStream.ReadByte();
                 byte[] inBuffer = new byte[len];
                 ioStream.Read(inBuffer, 0, len);

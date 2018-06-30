@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NAPS2.Util
 {
-    public class Log
+    public static class Log
     {
         private static ILogger _logger = new NullLogger();
 

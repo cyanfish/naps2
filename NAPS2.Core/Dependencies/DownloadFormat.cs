@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 
 namespace NAPS2.Dependencies
 {
@@ -16,7 +14,7 @@ namespace NAPS2.Dependencies
         {
             public override string Prepare(string tempFilePath)
             {
-                if (!tempFilePath.EndsWith(".gz"))
+                if (!tempFilePath.EndsWith(".gz", StringComparison.Ordinal))
                 {
                     throw new ArgumentException();
                 }
@@ -27,16 +25,11 @@ namespace NAPS2.Dependencies
 
             private static void Extract(string sourcePath, string destPath)
             {
+                // TODO: https://docs.microsoft.com/en-us/visualstudio/code-quality/ca2202-do-not-dispose-objects-multiple-times
                 using (FileStream inFile = new FileInfo(sourcePath).OpenRead())
-                {
-                    using (FileStream outFile = File.Create(destPath))
-                    {
-                        using (GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress))
-                        {
-                            decompress.CopyTo(outFile);
-                        }
-                    }
-                }
+                using (FileStream outFile = File.Create(destPath))
+                using (GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress))
+                    decompress.CopyTo(outFile);
             }
         }
     }

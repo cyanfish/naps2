@@ -1,11 +1,11 @@
-﻿using System;
+﻿using NAPS2.Config;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows.Forms;
-using NAPS2.Config;
 
 namespace NAPS2.Util
 {
@@ -15,7 +15,9 @@ namespace NAPS2.Util
     public class Lifecycle
     {
         private const string STI_DEVICE_PREFIX = "/StiDevice:";
+#pragma warning disable RCS1213 // Remove unused member declaration.
         private const string STI_EVENT_PREFIX = "/StiEvent:";
+#pragma warning restore RCS1213 // Remove unused member declaration.
 
         private readonly StillImage sti;
         private readonly AppConfigManager appConfigManager;
@@ -44,7 +46,7 @@ namespace NAPS2.Util
             {
                 try
                 {
-                    if (arg.StartsWith(STI_DEVICE_PREFIX))
+                    if (arg.StartsWith(STI_DEVICE_PREFIX, StringComparison.CurrentCulture))
                     {
                         sti.DeviceID = arg.Substring(STI_DEVICE_PREFIX.Length);
                         sti.DoScan = true;
@@ -76,7 +78,7 @@ namespace NAPS2.Util
                     Log.ErrorException($"Error running {arg}", ex);
                     if (!silent)
                     {
-                        MessageBox.Show($@"Error running {arg}. Maybe run as administrator?");
+                        MessageBox.Show($"Error running {arg}. Maybe run as administrator?");
                     }
                 }
             }

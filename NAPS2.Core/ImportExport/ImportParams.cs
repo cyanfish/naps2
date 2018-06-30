@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NAPS2.Util;
+﻿using NAPS2.Util;
 
 namespace NAPS2.ImportExport
 {

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace NAPS2.Scan.Images.Transforms
 {
@@ -23,26 +20,33 @@ namespace NAPS2.Scan.Images.Transforms
         public static Color ColorFromHSV(double hue, double saturation, double value)
         {
             int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
-            double f = hue / 60 - Math.Floor(hue / 60);
+            double f = (hue / 60) - Math.Floor(hue / 60);
 
-            value = value * 255;
+            value *= 255;
             int v = Convert.ToInt32(value);
             int p = Convert.ToInt32(value * (1 - saturation));
-            int q = Convert.ToInt32(value * (1 - f * saturation));
-            int t = Convert.ToInt32(value * (1 - (1 - f) * saturation));
+            int q = Convert.ToInt32(value * (1 - (f * saturation)));
+            int t = Convert.ToInt32(value * (1 - ((1 - f) * saturation)));
+            switch (hi)
+            {
+                case 0:
+                    return Color.FromArgb(255, v, t, p);
 
-            if (hi == 0)
-                return Color.FromArgb(255, v, t, p);
-            else if (hi == 1)
-                return Color.FromArgb(255, q, v, p);
-            else if (hi == 2)
-                return Color.FromArgb(255, p, v, t);
-            else if (hi == 3)
-                return Color.FromArgb(255, p, q, v);
-            else if (hi == 4)
-                return Color.FromArgb(255, t, p, v);
-            else
-                return Color.FromArgb(255, v, p, q);
+                case 1:
+                    return Color.FromArgb(255, q, v, p);
+
+                case 2:
+                    return Color.FromArgb(255, p, v, t);
+
+                case 3:
+                    return Color.FromArgb(255, p, q, v);
+
+                case 4:
+                    return Color.FromArgb(255, t, p, v);
+
+                default:
+                    return Color.FromArgb(255, v, p, q);
+            }
         }
 
         public static void ColorToHSL(Color color, out double hue, out double saturation, out double brightness)
@@ -55,9 +59,9 @@ namespace NAPS2.Scan.Images.Transforms
         // From https://blogs.msdn.microsoft.com/cjacks/2006/04/12/converting-from-hsb-to-rgb-in-net/
         public static Color ColorFromHSL(double h, double s, double b)
         {
-            int a = 255;
+            const int a = 255;
 
-            if (s == 0)
+            if (Math.Abs(s) < Single.Epsilon)
             {
                 return Color.FromArgb(a, Convert.ToInt32(b * 255),
                     Convert.ToInt32(b * 255), Convert.ToInt32(b * 255));
@@ -86,11 +90,11 @@ namespace NAPS2.Scan.Images.Transforms
             h -= 2f * (double)Math.Floor(((iSextant + 1f) % 6f) / 2f);
             if (0 == iSextant % 2)
             {
-                fMid = h * (fMax - fMin) + fMin;
+                fMid = (h * (fMax - fMin)) + fMin;
             }
             else
             {
-                fMid = fMin - h * (fMax - fMin);
+                fMid = fMin - (h * (fMax - fMin));
             }
 
             iMax = Convert.ToInt32(fMax * 255);
@@ -101,14 +105,19 @@ namespace NAPS2.Scan.Images.Transforms
             {
                 case 1:
                     return Color.FromArgb(a, iMid, iMax, iMin);
+
                 case 2:
                     return Color.FromArgb(a, iMin, iMax, iMid);
+
                 case 3:
                     return Color.FromArgb(a, iMin, iMid, iMax);
+
                 case 4:
                     return Color.FromArgb(a, iMid, iMin, iMax);
+
                 case 5:
                     return Color.FromArgb(a, iMax, iMin, iMid);
+
                 default:
                     return Color.FromArgb(a, iMax, iMid, iMin);
             }

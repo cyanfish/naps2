@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
 using NAPS2.Lang.Resources;
 using NAPS2.Util;
+using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace NAPS2.ImportExport.Email.Mapi
 {
@@ -25,19 +24,19 @@ namespace NAPS2.ImportExport.Email.Mapi
         /// <summary>
         /// Sends an email described by the given message object.
         /// </summary>
-        /// <param name="message">The object describing the email message.</param>
+        /// <param name="emailMessage">The object describing the email message.</param>
         /// <returns>Returns true if the message was sent, false if the user aborted.</returns>
-        public bool SendEmail(EmailMessage message)
+        public bool SendEmail(EmailMessage emailMessage)
         {
             // Translate files & recipients to unmanaged MAPI structures
-            using (var files = Unmanaged.CopyOf(GetFiles(message)))
-            using (var recips = Unmanaged.CopyOf(GetRecips(message)))
+            using (var files = Unmanaged.CopyOf(GetFiles(emailMessage)))
+            using (var recips = Unmanaged.CopyOf(GetRecips(emailMessage)))
             {
                 // Create a MAPI structure for the entirety of the message
                 var mapiMessage = new MapiMessage
                 {
-                    subject = message.Subject,
-                    noteText = message.BodyText,
+                    subject = emailMessage.Subject,
+                    noteText = emailMessage.BodyText,
                     recips = recips,
                     recipCount = recips.Length,
                     files = files,
@@ -46,11 +45,11 @@ namespace NAPS2.ImportExport.Email.Mapi
 
                 // Determine the flags used to send the message
                 var flags = MapiSendMailFlags.None;
-                if (!message.AutoSend)
+                if (!emailMessage.AutoSend)
                 {
                     flags |= MapiSendMailFlags.Dialog;
                 }
-                if (!message.AutoSend || !message.SilentSend)
+                if (!emailMessage.AutoSend || !emailMessage.SilentSend)
                 {
                     flags |= MapiSendMailFlags.LogonUI;
                 }

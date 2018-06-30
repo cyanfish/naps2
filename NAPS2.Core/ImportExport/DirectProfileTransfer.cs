@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.Scan;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using NAPS2.Scan;
 
 namespace NAPS2.ImportExport
 {

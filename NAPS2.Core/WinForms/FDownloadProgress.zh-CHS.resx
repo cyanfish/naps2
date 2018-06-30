@@ -140,82 +140,82 @@
     <data name="&gt;&gt;progressBarSub.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>354, 121</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>取消</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="labelSub.AutoSize" type="System.Boolean, mscorlib">
+    <data name="LabelSub.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="labelSub.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LabelSub.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 118</value>
     </data>
-    <data name="labelSub.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LabelSub.Size" type="System.Drawing.Size, System.Drawing">
         <value>65, 13</value>
     </data>
-    <data name="labelSub.TabIndex" type="System.Int32, mscorlib">
+    <data name="LabelSub.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="labelSub.Text" xml:space="preserve">
+    <data name="LabelSub.Text" xml:space="preserve">
         <value>{0} / {1} MB</value>
     </data>
-    <data name="&gt;&gt;labelSub.Name" xml:space="preserve">
-        <value>labelSub</value>
+    <data name="&gt;&gt;LabelSub.Name" xml:space="preserve">
+        <value>LabelSub</value>
     </data>
-    <data name="&gt;&gt;labelSub.Type" xml:space="preserve">
+    <data name="&gt;&gt;LabelSub.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;labelSub.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LabelSub.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;labelSub.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LabelSub.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="labelTop.AutoSize" type="System.Boolean, mscorlib">
+    <data name="LabelTop.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="labelTop.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LabelTop.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 53</value>
     </data>
-    <data name="labelTop.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LabelTop.Size" type="System.Drawing.Size, System.Drawing">
         <value>67, 13</value>
     </data>
-    <data name="labelTop.TabIndex" type="System.Int32, mscorlib">
+    <data name="LabelTop.TabIndex" type="System.Int32, mscorlib">
         <value>4</value>
     </data>
-    <data name="labelTop.Text" xml:space="preserve">
+    <data name="LabelTop.Text" xml:space="preserve">
         <value>{0} / {1} 个文件</value>
     </data>
-    <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
-        <value>labelTop</value>
+    <data name="&gt;&gt;LabelTop.Name" xml:space="preserve">
+        <value>LabelTop</value>
     </data>
-    <data name="&gt;&gt;labelTop.Type" xml:space="preserve">
+    <data name="&gt;&gt;LabelTop.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;labelTop.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LabelTop.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;labelTop.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LabelTop.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <data name="progressBarTop.Location" type="System.Drawing.Point, System.Drawing">

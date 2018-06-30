@@ -1,3 +1,6 @@
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -5,14 +8,11 @@ using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class FRotate : FormBase
+    internal partial class FRotate : FormBase
     {
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
@@ -43,7 +43,7 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            if (SelectedImages != null && SelectedImages.Count > 1)
+            if (SelectedImages?.Count > 1)
             {
                 checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
             }
@@ -53,28 +53,28 @@ namespace NAPS2.WinForms
             }
 
             new LayoutManager(this)
-                .Bind(tbAngle, pictureBox)
+                .Bind(TbAngle, PictureBox)
                     .WidthToForm()
-                .Bind(pictureBox)
+                .Bind(PictureBox)
                     .HeightToForm()
-                .Bind(btnOK, btnCancel, txtAngle)
+                .Bind(BtnOK, BtnCancel, TxtAngle)
                     .RightToForm()
-                .Bind(tbAngle, txtAngle, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
+                .Bind(TbAngle, TxtAngle, checkboxApplyToSelected, BtnRevert, BtnOK, BtnCancel)
                     .BottomToForm()
                 .Activate();
             Size = new Size(600, 600);
 
             workingImage = scannedImageRenderer.Render(Image);
-            pictureBox.Image = (Bitmap)workingImage.Clone();
-            txtAngle.Text += '\u00B0';
+            PictureBox.Image = (Bitmap)workingImage.Clone();
+            TxtAngle.Text += '\u00B0';
             UpdatePreviewBox();
 
-            ActiveControl = txtAngle;
+            ActiveControl = TxtAngle;
         }
 
         private void UpdateTransform()
         {
-            RotationTransform.Angle = tbAngle.Value / 10.0;
+            RotationTransform.Angle = TbAngle.Value / 10.0;
             UpdatePreviewBox();
         }
 
@@ -91,8 +91,8 @@ namespace NAPS2.WinForms
                         var result = RotationTransform.Perform((Bitmap)workingImage.Clone());
                         SafeInvoke(() =>
                         {
-                            pictureBox.Image?.Dispose();
-                            pictureBox.Image = result;
+                            PictureBox.Image?.Dispose();
+                            PictureBox.Image = result;
                         });
                         working = false;
                     }
@@ -101,12 +101,12 @@ namespace NAPS2.WinForms
             previewOutOfDate = true;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             if (!RotationTransform.IsNull)
             {
@@ -120,44 +120,43 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnRevert_Click(object sender, EventArgs e)
+        private void BtnRevert_Click(object sender, EventArgs e)
         {
             RotationTransform = new RotationTransform();
-            tbAngle.Value = 0;
-            txtAngle.Text = (tbAngle.Value / 10.0).ToString("G");
+            TbAngle.Value = 0;
+            TxtAngle.Text = (TbAngle.Value / 10.0).ToString("G");
             UpdatePreviewBox();
         }
 
         private void FRotate_FormClosed(object sender, FormClosedEventArgs e)
         {
             workingImage.Dispose();
-            pictureBox.Image?.Dispose();
+            PictureBox.Image?.Dispose();
             previewTimer?.Dispose();
         }
 
-        private void txtAngle_TextChanged(object sender, EventArgs e)
+        private void TxtAngle_TextChanged(object sender, EventArgs e)
         {
-            double valueDouble;
-            if (double.TryParse(txtAngle.Text.Replace('\u00B0'.ToString(CultureInfo.InvariantCulture), ""), out valueDouble))
+            if (double.TryParse(TxtAngle.Text.Replace('\u00B0'.ToString(CultureInfo.InvariantCulture), ""), out double valueDouble))
             {
                 int value = (int)Math.Round(valueDouble * 10);
-                if (value >= tbAngle.Minimum && value <= tbAngle.Maximum)
+                if (value >= TbAngle.Minimum && value <= TbAngle.Maximum)
                 {
-                    tbAngle.Value = value;
+                    TbAngle.Value = value;
                 }
-                if (!txtAngle.Text.Contains('\u00B0'))
+                if (!TxtAngle.Text.Contains('\u00B0'))
                 {
-                    var (ss, sl) = (txtAngle.SelectionStart, txtAngle.SelectionLength);
-                    txtAngle.Text += '\u00B0';
-                    (txtAngle.SelectionStart, txtAngle.SelectionLength) = (ss, sl);
+                    var (ss, sl) = (TxtAngle.SelectionStart, TxtAngle.SelectionLength);
+                    TxtAngle.Text += '\u00B0';
+                    (TxtAngle.SelectionStart, TxtAngle.SelectionLength) = (ss, sl);
                 }
             }
             UpdateTransform();
         }
 
-        private void tbAngle_Scroll(object sender, EventArgs e)
+        private void TbAngle_Scroll(object sender, EventArgs e)
         {
-            txtAngle.Text = (tbAngle.Value / 10.0).ToString("G") + '\u00B0';
+            TxtAngle.Text = (TbAngle.Value / 10.0).ToString("G") + '\u00B0';
             UpdateTransform();
         }
 
@@ -167,19 +166,19 @@ namespace NAPS2.WinForms
         private const int MIN_LINE_DISTANCE = 50;
         private const float LINE_PEN_SIZE = 1;
 
-        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             guideExists = true;
             guideStart = guideEnd = e.Location;
-            pictureBox.Invalidate();
+            PictureBox.Invalidate();
         }
 
-        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             guideExists = false;
             var dx = guideEnd.X - guideStart.X;
             var dy = guideEnd.Y - guideStart.Y;
-            var distance = Math.Sqrt(dx * dx + dy * dy);
+            var distance = Math.Sqrt((dx * dx) + (dy * dy));
             if (distance > MIN_LINE_DISTANCE)
             {
                 var angle = -Math.Atan2(dy, dx) * 180.0 / Math.PI;
@@ -191,7 +190,7 @@ namespace NAPS2.WinForms
                 {
                     angle += 90.0;
                 }
-                var oldAngle = tbAngle.Value / 10.0;
+                var oldAngle = TbAngle.Value / 10.0;
                 var newAngle = angle + oldAngle;
                 while (newAngle > 180.0)
                 {
@@ -201,19 +200,19 @@ namespace NAPS2.WinForms
                 {
                     newAngle += 360.0;
                 }
-                tbAngle.Value = (int)Math.Round(newAngle * 10);
-                tbAngle_Scroll(null, null);
+                TbAngle.Value = (int)Math.Round(newAngle * 10);
+                TbAngle_Scroll(null, null);
             }
-            pictureBox.Invalidate();
+            PictureBox.Invalidate();
         }
 
-        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             guideEnd = e.Location;
-            pictureBox.Invalidate();
+            PictureBox.Invalidate();
         }
 
-        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
             if (guideExists)
             {

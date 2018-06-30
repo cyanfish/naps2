@@ -1,16 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
     public class TiffViewer : UserControl
     {
-        private readonly Container components = null;
-
         private Image image;
         private PictureBox pbox;
         private double xzoom;
@@ -82,7 +77,7 @@ namespace NAPS2.WinForms
                     if (ZoomChanged != null)
                     {
                         pbox.Cursor = HorizontalScroll.Visible || VerticalScroll.Visible ? Cursors.Hand : Cursors.Default;
-                        ZoomChanged.Invoke(this, new EventArgs());
+                        ZoomChanged.Invoke(this, EventArgs.Empty);
                     }
                 }
             }
@@ -98,18 +93,9 @@ namespace NAPS2.WinForms
             pbox.Height = 1;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                components?.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         protected override void OnMouseWheel(MouseEventArgs e)
         {
-            if (ModifierKeys.HasFlag(Keys.Control))
+            if ((ModifierKeys & Keys.Control) != 0)
             {
                 StepZoom(e.Delta / (double)SystemInformation.MouseWheelScrollDelta);
             }
@@ -130,6 +116,7 @@ namespace NAPS2.WinForms
                         StepZoom(-1);
                     }
                     break;
+
                 case Keys.Oemplus:
                     if (e.Control)
                     {
@@ -146,12 +133,12 @@ namespace NAPS2.WinForms
 
         private Point mousePos;
 
-        private void pbox_MouseDown(object sender, MouseEventArgs e)
+        private void Pbox_MouseDown(object sender, MouseEventArgs e)
         {
             mousePos = e.Location;
         }
 
-        private void pbox_MouseMove(object sender, MouseEventArgs e)
+        private void Pbox_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -160,37 +147,38 @@ namespace NAPS2.WinForms
         }
 
         #region Component Designer generated code
+
         /// <summary>
-        /// Required method for Designer support - do not modify 
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TiffViewer));
-            this.pbox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbox)).BeginInit();
-            this.SuspendLayout();
-            // 
+            pbox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(pbox)).BeginInit();
+            SuspendLayout();
+            //
             // pbox
-            // 
-            resources.ApplyResources(this.pbox, "pbox");
-            this.pbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbox.Name = "pbox";
-            this.pbox.TabStop = false;
-            this.pbox.SizeMode = PictureBoxSizeMode.Zoom;
-            this.pbox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_MouseDown);
-            this.pbox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_MouseMove);
-            // 
+            //
+            resources.ApplyResources(pbox, "pbox");
+            pbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pbox.Name = "pbox";
+            pbox.TabStop = false;
+            pbox.SizeMode = PictureBoxSizeMode.Zoom;
+            pbox.MouseDown += Pbox_MouseDown;
+            pbox.MouseMove += Pbox_MouseMove;
+            //
             // TiffViewer
-            // 
+            //
             resources.ApplyResources(this, "$this");
-            this.BackColor = System.Drawing.Color.LightGray;
-            this.Controls.Add(this.pbox);
-            this.Name = "TiffViewer";
-            ((System.ComponentModel.ISupportInitialize)(this.pbox)).EndInit();
-            this.ResumeLayout(false);
-
+            BackColor = System.Drawing.Color.LightGray;
+            Controls.Add(pbox);
+            Name = "TiffViewer";
+            ((System.ComponentModel.ISupportInitialize)(pbox)).EndInit();
+            ResumeLayout(false);
         }
-        #endregion
+
+        #endregion Component Designer generated code
     }
 }

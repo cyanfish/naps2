@@ -1,13 +1,11 @@
+using NAPS2.Recovery;
+using NAPS2.Scan.Images.Transforms;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using NAPS2.ImportExport.Pdf;
-using NAPS2.Recovery;
-using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images
 {
@@ -22,6 +20,7 @@ namespace NAPS2.Scan.Images
         private readonly List<Transform> transformList;
 
         private Bitmap thumbnail;
+        private readonly object _lockObject = new object();
 
         public static ScannedImage FromSinglePagePdf(string pdfPath, bool copy)
         {
@@ -30,8 +29,7 @@ namespace NAPS2.Scan.Images
 
         public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
-            ImageFormat fileFormat;
-            string tempFilePath = ScannedImageHelper.SaveSmallestBitmap(img, bitDepth, highQuality, quality, out fileFormat);
+            string tempFilePath = ScannedImageHelper.SaveSmallestBitmap(img, bitDepth, highQuality, quality, out ImageFormat fileFormat);
 
             transformList = new List<Transform>();
             recoveryImage = RecoveryImage.CreateNew(fileFormat, bitDepth, highQuality, transformList);
@@ -74,20 +72,6 @@ namespace NAPS2.Scan.Images
 
         public long Size => new FileInfo(recoveryImage.FilePath).Length;
 
-        public void Dispose()
-        {
-            lock (this)
-            {
-                // Delete the image data on disk
-                recoveryImage?.Dispose();
-                if (thumbnail != null)
-                {
-                    thumbnail.Dispose();
-                    thumbnail = null;
-                }
-            }
-        }
-
         public void AddTransform(Transform transform)
         {
             lock (transformList)
@@ -121,10 +105,7 @@ namespace NAPS2.Scan.Images
             return (Bitmap)thumbnail.Clone();
         }
 
-        public object GetThumbnailState()
-        {
-            return thumbnail;
-        }
+        public object GetThumbnailState() => thumbnail;
 
         public void SetThumbnail(Bitmap bitmap)
         {
@@ -132,9 +113,38 @@ namespace NAPS2.Scan.Images
             thumbnail = bitmap;
         }
 
-        public void MovedTo(int index)
+        public void MovedTo(int index) => recoveryImage.Move(index);
+
+        #region IDisposable Support
+
+        private bool disposed; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
         {
-            recoveryImage.Move(index);
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    lock (_lockObject)
+                    {
+                        // Delete the image data on disk
+                        recoveryImage?.Dispose();
+                        if (thumbnail != null)
+                        {
+                            thumbnail.Dispose();
+                            thumbnail = null;
+                        }
+                    }
+                }
+                disposed = true;
+            }
         }
+
+        // This code added to correctly implement the disposable pattern.
+        void IDisposable.Dispose() => Dispose(true);
+
+        public void Dispose() => Dispose(true);
+
+        #endregion IDisposable Support
     }
 }

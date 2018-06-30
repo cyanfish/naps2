@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace NAPS2.Dependencies
 {
-    public class PlatformSupport
+    public sealed class PlatformSupport
     {
         public static readonly PlatformSupport Windows = new PlatformSupport(() => Environment.OSVersion.Platform == PlatformID.Win32NT);
 
@@ -23,7 +22,7 @@ namespace NAPS2.Dependencies
         {
             return predicate();
         }
-        
+
         public PlatformSupport And(params PlatformSupport[] platforms)
         {
             return new PlatformSupport(() => Validate() && platforms.All(x => x.Validate()));

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -43,11 +42,10 @@ namespace NAPS2.Util
             //        nextPiece = text.Substring(lastBreak, lastSpace - lastBreak);
             //        result.Append(nextPiece);
             //        lastSpace = -1;
-            //        lastBreak = 
+            //        lastBreak =
             //    }
             //    else
             //    {
-
             //    }
             //}
         }

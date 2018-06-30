@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using NAPS2.Lang.ConsoleResources;
+﻿using NAPS2.Lang.ConsoleResources;
 using NAPS2.Util;
+using System.Windows.Forms;
 
 namespace NAPS2.Automation
 {

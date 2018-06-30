@@ -118,59 +118,59 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="checkBoxEnableOcr.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CheckBoxEnableOcr.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="checkBoxEnableOcr.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CheckBoxEnableOcr.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 12</value>
     </data>
-    <data name="checkBoxEnableOcr.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CheckBoxEnableOcr.Size" type="System.Drawing.Size, System.Drawing">
         <value>191, 17</value>
     </data>
-    <data name="checkBoxEnableOcr.TabIndex" type="System.Int32, mscorlib">
+    <data name="CheckBoxEnableOcr.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
     </data>
-    <data name="checkBoxEnableOcr.Text" xml:space="preserve">
+    <data name="CheckBoxEnableOcr.Text" xml:space="preserve">
         <value>Gör PDF:er sökbara med hjälp av OCR</value>
     </data>
-    <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
-        <value>checkBoxEnableOcr</value>
+    <data name="&gt;&gt;CheckBoxEnableOcr.Name" xml:space="preserve">
+        <value>CheckBoxEnableOcr</value>
     </data>
-    <data name="&gt;&gt;checkBoxEnableOcr.Type" xml:space="preserve">
+    <data name="&gt;&gt;CheckBoxEnableOcr.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;checkBoxEnableOcr.Parent" xml:space="preserve">
+    <data name="&gt;&gt;CheckBoxEnableOcr.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;checkBoxEnableOcr.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CheckBoxEnableOcr.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
-    <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 41</value>
     </data>
-    <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
         <value>80, 13</value>
     </data>
-    <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label1.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="label1.Text" xml:space="preserve">
+    <data name="Label1.Text" xml:space="preserve">
         <value>OCR-språk:</value>
     </data>
-    <data name="&gt;&gt;label1.Name" xml:space="preserve">
-        <value>label1</value>
+    <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+        <value>Label1</value>
     </data>
-    <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label1.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
     <data name="comboLanguages.Location" type="System.Drawing.Point, System.Drawing">
@@ -195,82 +195,82 @@
         <value>3</value>
     </data>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>233, 65</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>Avbryt</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="linkGetLanguages.AutoSize" type="System.Boolean, mscorlib">
+    <data name="LinkGetLanguages.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="linkGetLanguages.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LinkGetLanguages.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 70</value>
     </data>
-    <data name="linkGetLanguages.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LinkGetLanguages.Size" type="System.Drawing.Size, System.Drawing">
         <value>102, 13</value>
     </data>
-    <data name="linkGetLanguages.TabIndex" type="System.Int32, mscorlib">
+    <data name="LinkGetLanguages.TabIndex" type="System.Int32, mscorlib">
         <value>4</value>
     </data>
-    <data name="linkGetLanguages.Text" xml:space="preserve">
+    <data name="LinkGetLanguages.Text" xml:space="preserve">
         <value>Hämta fler språk</value>
     </data>
-    <data name="&gt;&gt;linkGetLanguages.Name" xml:space="preserve">
-        <value>linkGetLanguages</value>
+    <data name="&gt;&gt;LinkGetLanguages.Name" xml:space="preserve">
+        <value>LinkGetLanguages</value>
     </data>
-    <data name="&gt;&gt;linkGetLanguages.Type" xml:space="preserve">
+    <data name="&gt;&gt;LinkGetLanguages.Type" xml:space="preserve">
         <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;linkGetLanguages.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LinkGetLanguages.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;linkGetLanguages.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LinkGetLanguages.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnOK.Location" type="System.Drawing.Point, System.Drawing">
         <value>152, 65</value>
     </data>
-    <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnOK.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
     </data>
-    <data name="btnOK.Text" xml:space="preserve">
+    <data name="BtnOK.Text" xml:space="preserve">
         <value>&amp;OK</value>
     </data>
-    <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
-        <value>btnOK</value>
+    <data name="&gt;&gt;BtnOK.Name" xml:space="preserve">
+        <value>BtnOK</value>
     </data>
-    <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

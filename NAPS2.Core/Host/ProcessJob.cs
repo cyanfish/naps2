@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Host
@@ -9,19 +7,18 @@ namespace NAPS2.Host
     public class Job : IDisposable
     {
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-        static extern IntPtr CreateJobObject(IntPtr a, string lpName);
+        private static extern IntPtr CreateJobObject(IntPtr a, string lpName);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool SetInformationJobObject(IntPtr hJob, JobObjectInfoType infoType, IntPtr lpJobObjectInfo, UInt32 cbJobObjectInfoLength);
+        private static extern bool SetInformationJobObject(IntPtr hJob, JobObjectInfoType infoType, IntPtr lpJobObjectInfo, UInt32 cbJobObjectInfoLength);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool AssignProcessToJobObject(IntPtr job, IntPtr process);
+        private static extern bool AssignProcessToJobObject(IntPtr job, IntPtr process);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool CloseHandle(IntPtr hObject);
+        private static extern bool CloseHandle(IntPtr hObject);
 
         private IntPtr handle;
-        private bool disposed;
 
         public Job()
         {
@@ -45,43 +42,43 @@ namespace NAPS2.Host
                 throw new Exception(string.Format("Unable to set information.  Error: {0}", Marshal.GetLastWin32Error()));
         }
 
-        public void Dispose()
+        public bool AddProcess(IntPtr processHandle) => AssignProcessToJobObject(handle, processHandle);
+
+        public bool AddProcess(int processId) => AddProcess(Process.GetProcessById(processId).Handle);
+
+        #region IDisposable Support
+
+        private bool disposed; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && !disposed)
+            {
+                CloseHandle(handle);
+                handle = IntPtr.Zero;
+                disposed = true;
+            }
+        }
+
+        ~Job()
+        {
+            Dispose(false);
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        void IDisposable.Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        private void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
+        public void Dispose() => Dispose(true);
 
-            if (disposing) { }
-
-            Close();
-            disposed = true;
-        }
-
-        public void Close()
-        {
-            CloseHandle(handle);
-            handle = IntPtr.Zero;
-        }
-
-        public bool AddProcess(IntPtr processHandle)
-        {
-            return AssignProcessToJobObject(handle, processHandle);
-        }
-
-        public bool AddProcess(int processId)
-        {
-            return AddProcess(Process.GetProcessById(processId).Handle);
-        }
-
+        #endregion IDisposable Support
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    struct IO_COUNTERS
+    internal struct IO_COUNTERS
     {
         public UInt64 ReadOperationCount;
         public UInt64 WriteOperationCount;
@@ -91,9 +88,8 @@ namespace NAPS2.Host
         public UInt64 OtherTransferCount;
     }
 
-
     [StructLayout(LayoutKind.Sequential)]
-    struct JOBOBJECT_BASIC_LIMIT_INFORMATION
+    internal struct JOBOBJECT_BASIC_LIMIT_INFORMATION
     {
         public Int64 PerProcessUserTimeLimit;
         public Int64 PerJobUserTimeLimit;
@@ -110,12 +106,16 @@ namespace NAPS2.Host
     public struct SECURITY_ATTRIBUTES
     {
         public UInt32 nLength;
-        public IntPtr lpSecurityDescriptor;
+#pragma warning disable RCS1213 // Remove unused member declaration.
+#pragma warning disable IDE0044 // Add readonly modifier
+        private IntPtr lpSecurityDescriptor;
+#pragma warning restore IDE0044 // Add readonly modifier
+#pragma warning restore RCS1213 // Remove unused member declaration.
         public Int32 bInheritHandle;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION
+    internal struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION
     {
         public JOBOBJECT_BASIC_LIMIT_INFORMATION BasicLimitInformation;
         public IO_COUNTERS IoInfo;
@@ -127,12 +127,12 @@ namespace NAPS2.Host
 
     public enum JobObjectInfoType
     {
-        AssociateCompletionPortInformation = 7,
         BasicLimitInformation = 2,
         BasicUIRestrictions = 4,
-        EndOfJobTimeInformation = 6,
-        ExtendedLimitInformation = 9,
         SecurityLimitInformation = 5,
+        EndOfJobTimeInformation = 6,
+        AssociateCompletionPortInformation = 7,
+        ExtendedLimitInformation = 9,
         GroupInformation = 11
     }
 }

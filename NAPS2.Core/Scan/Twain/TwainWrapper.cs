@@ -1,4 +1,10 @@
-﻿using System;
+﻿using NAPS2.Scan.Exceptions;
+using NAPS2.Scan.Images;
+using NAPS2.Util;
+using NAPS2.WinForms;
+using NTwain;
+using NTwain.Data;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -7,12 +13,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Images;
-using NAPS2.WinForms;
-using NTwain;
-using NTwain.Data;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Twain
 {
@@ -88,10 +88,7 @@ namespace NAPS2.Scan.Twain
             session.TransferReady += (sender, eventArgs) =>
             {
                 Debug.WriteLine("NAPS2.TW - TransferReady");
-                if (cancel)
-                {
-                    eventArgs.CancelAll = true;
-                }
+                eventArgs.CancelAll |= cancel;
             };
             session.DataTransferred += (sender, eventArgs) =>
             {
@@ -263,9 +260,9 @@ namespace NAPS2.Scan.Twain
                     {
                         for (int col = 0; col < imageWidth; col++)
                         {
-                            source2[row * rowWidth + col * 3] = source[row * originalRowWidth + col];
-                            source2[row * rowWidth + col * 3 + 1] = source[row * originalRowWidth + col];
-                            source2[row * rowWidth + col * 3 + 2] = source[row * originalRowWidth + col];
+                            source2[(row * rowWidth) + (col * 3)] = source[(row * originalRowWidth) + col];
+                            source2[(row * rowWidth) + (col * 3) + 1] = source[(row * originalRowWidth) + col];
+                            source2[(row * rowWidth) + (col * 3) + 2] = source[(row * originalRowWidth) + col];
                         }
                     }
                     source = source2;
@@ -278,8 +275,8 @@ namespace NAPS2.Scan.Twain
                     {
                         for (int col = 0; col < imageWidth; col++)
                         {
-                            (source[row * rowWidth + col * 3], source[row * rowWidth + col * 3 + 2]) =
-                                (source[row * rowWidth + col * 3 + 2], source[row * rowWidth + col * 3]);
+                            (source[(row * rowWidth) + (col * 3)], source[(row * rowWidth) + (col * 3) + 2]) =
+                                (source[(row * rowWidth) + (col * 3) + 2], source[(row * rowWidth) + (col * 3)]);
                         }
                     }
                 }
@@ -298,16 +295,22 @@ namespace NAPS2.Scan.Twain
             {
                 case NTwain.Data.PatchCode.Patch1:
                     return PatchCode.Patch1;
+
                 case NTwain.Data.PatchCode.Patch2:
                     return PatchCode.Patch2;
+
                 case NTwain.Data.PatchCode.Patch3:
                     return PatchCode.Patch3;
+
                 case NTwain.Data.PatchCode.Patch4:
                     return PatchCode.Patch4;
+
                 case NTwain.Data.PatchCode.Patch6:
                     return PatchCode.Patch6;
+
                 case NTwain.Data.PatchCode.PatchT:
                     return PatchCode.PatchT;
+
                 default:
                     throw new ArgumentException();
             }
@@ -333,10 +336,12 @@ namespace NAPS2.Scan.Twain
                     ds.Capabilities.CapFeederEnabled.SetValue(BoolType.False);
                     ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
                     break;
+
                 case ScanSource.Feeder:
                     ds.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
                     ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
                     break;
+
                 case ScanSource.Duplex:
                     ds.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
                     ds.Capabilities.CapDuplexEnabled.SetValue(BoolType.True);
@@ -349,9 +354,11 @@ namespace NAPS2.Scan.Twain
                 case ScanBitDepth.C24Bit:
                     ds.Capabilities.ICapPixelType.SetValue(PixelType.RGB);
                     break;
+
                 case ScanBitDepth.Grayscale:
                     ds.Capabilities.ICapPixelType.SetValue(PixelType.Gray);
                     break;
+
                 case ScanBitDepth.BlackWhite:
                     ds.Capabilities.ICapPixelType.SetValue(PixelType.BlackWhite);
                     break;
@@ -375,8 +382,7 @@ namespace NAPS2.Scan.Twain
                 horizontalOffset = (pageMaxWidth - pageWidth);
 
             ds.Capabilities.ICapUnits.SetValue(Unit.Inches);
-            TWImageLayout imageLayout;
-            ds.DGImage.ImageLayout.Get(out imageLayout);
+            ds.DGImage.ImageLayout.Get(out TWImageLayout imageLayout);
             imageLayout.Frame = new TWFrame
             {
                 Left = horizontalOffset,

@@ -34,72 +34,72 @@ namespace NAPS2.WinForms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FEditProfile));
-            this.txtDevice = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnChooseDevice = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.TxtDevice = new System.Windows.Forms.TextBox();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.BtnChooseDevice = new System.Windows.Forms.Button();
+            this.Label2 = new System.Windows.Forms.Label();
             this.cmbSource = new System.Windows.Forms.ComboBox();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.BtnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rdbConfig = new System.Windows.Forms.RadioButton();
+            this.RdbConfig = new System.Windows.Forms.RadioButton();
             this.rdbNative = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
+            this.Label3 = new System.Windows.Forms.Label();
             this.cmbDepth = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmbPage = new System.Windows.Forms.ComboBox();
+            this.Label4 = new System.Windows.Forms.Label();
+            this.CmbPage = new System.Windows.Forms.ComboBox();
             this.cmbResolution = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.trBrightness = new System.Windows.Forms.TrackBar();
-            this.label7 = new System.Windows.Forms.Label();
-            this.trContrast = new System.Windows.Forms.TrackBar();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.Label5 = new System.Windows.Forms.Label();
+            this.Label6 = new System.Windows.Forms.Label();
+            this.TrBrightness = new System.Windows.Forms.TrackBar();
+            this.Label7 = new System.Windows.Forms.Label();
+            this.TrContrast = new System.Windows.Forms.TrackBar();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.pctIcon = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.Label8 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.cmbAlign = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.Label9 = new System.Windows.Forms.Label();
             this.cmbScale = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.Label10 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdTWAIN = new System.Windows.Forms.RadioButton();
-            this.rdWIA = new System.Windows.Forms.RadioButton();
-            this.txtBrightness = new System.Windows.Forms.TextBox();
-            this.txtContrast = new System.Windows.Forms.TextBox();
+            this.RdWIA = new System.Windows.Forms.RadioButton();
+            this.TxtBrightness = new System.Windows.Forms.TextBox();
+            this.TxtContrast = new System.Windows.Forms.TextBox();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
-            this.cbAutoSave = new System.Windows.Forms.CheckBox();
-            this.linkAutoSaveSettings = new System.Windows.Forms.LinkLabel();
-            this.btnAdvanced = new System.Windows.Forms.Button();
+            this.CbAutoSave = new System.Windows.Forms.CheckBox();
+            this.LinkAutoSaveSettings = new System.Windows.Forms.LinkLabel();
+            this.BtnAdvanced = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trContrast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrContrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // txtDevice
+            // TxtDevice
             // 
-            resources.ApplyResources(this.txtDevice, "txtDevice");
-            this.txtDevice.Name = "txtDevice";
-            this.txtDevice.ReadOnly = true;
-            this.txtDevice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDevice_KeyDown);
+            resources.ApplyResources(this.TxtDevice, "TxtDevice");
+            this.TxtDevice.Name = "TxtDevice";
+            this.TxtDevice.ReadOnly = true;
+            this.TxtDevice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtDevice_KeyDown);
             // 
-            // label1
+            // Label1
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.Name = "Label1";
             // 
-            // btnChooseDevice
+            // BtnChooseDevice
             // 
-            resources.ApplyResources(this.btnChooseDevice, "btnChooseDevice");
-            this.btnChooseDevice.Name = "btnChooseDevice";
-            this.btnChooseDevice.UseVisualStyleBackColor = true;
-            this.btnChooseDevice.Click += new System.EventHandler(this.btnChooseDevice_Click);
+            resources.ApplyResources(this.BtnChooseDevice, "BtnChooseDevice");
+            this.BtnChooseDevice.Name = "BtnChooseDevice";
+            this.BtnChooseDevice.UseVisualStyleBackColor = true;
+            this.BtnChooseDevice.Click += new System.EventHandler(this.BtnChooseDevice_Click);
             // 
-            // label2
+            // Label2
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.Label2, "Label2");
+            this.Label2.Name = "Label2";
             // 
             // cmbSource
             // 
@@ -108,27 +108,27 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.cmbSource, "cmbSource");
             this.cmbSource.Name = "cmbSource";
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.rdbConfig);
+            this.panel1.Controls.Add(this.RdbConfig);
             this.panel1.Controls.Add(this.rdbNative);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
-            // rdbConfig
+            // RdbConfig
             // 
-            resources.ApplyResources(this.rdbConfig, "rdbConfig");
-            this.rdbConfig.Name = "rdbConfig";
-            this.rdbConfig.TabStop = true;
-            this.rdbConfig.UseVisualStyleBackColor = true;
-            this.rdbConfig.CheckedChanged += new System.EventHandler(this.rdbConfig_CheckedChanged);
+            resources.ApplyResources(this.RdbConfig, "RdbConfig");
+            this.RdbConfig.Name = "RdbConfig";
+            this.RdbConfig.TabStop = true;
+            this.RdbConfig.UseVisualStyleBackColor = true;
+            this.RdbConfig.CheckedChanged += new System.EventHandler(this.RdbConfig_CheckedChanged);
             // 
             // rdbNative
             // 
@@ -136,12 +136,12 @@ namespace NAPS2.WinForms
             this.rdbNative.Name = "rdbNative";
             this.rdbNative.TabStop = true;
             this.rdbNative.UseVisualStyleBackColor = true;
-            this.rdbNative.CheckedChanged += new System.EventHandler(this.rdbNativeWIA_CheckedChanged);
+            this.rdbNative.CheckedChanged += new System.EventHandler(this.RdbNativeWIA_CheckedChanged);
             // 
-            // label3
+            // Label3
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.Label3, "Label3");
+            this.Label3.Name = "Label3";
             // 
             // cmbDepth
             // 
@@ -150,18 +150,18 @@ namespace NAPS2.WinForms
             this.cmbDepth.FormattingEnabled = true;
             this.cmbDepth.Name = "cmbDepth";
             // 
-            // label4
+            // Label4
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.Label4, "Label4");
+            this.Label4.Name = "Label4";
             // 
-            // cmbPage
+            // CmbPage
             // 
-            this.cmbPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cmbPage, "cmbPage");
-            this.cmbPage.FormattingEnabled = true;
-            this.cmbPage.Name = "cmbPage";
-            this.cmbPage.SelectedIndexChanged += new System.EventHandler(this.cmbPage_SelectedIndexChanged);
+            this.CmbPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.CmbPage, "CmbPage");
+            this.CmbPage.FormattingEnabled = true;
+            this.CmbPage.Name = "CmbPage";
+            this.CmbPage.SelectedIndexChanged += new System.EventHandler(this.CmbPage_SelectedIndexChanged);
             // 
             // cmbResolution
             // 
@@ -170,45 +170,45 @@ namespace NAPS2.WinForms
             this.cmbResolution.FormattingEnabled = true;
             this.cmbResolution.Name = "cmbResolution";
             // 
-            // label5
+            // Label5
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            resources.ApplyResources(this.Label5, "Label5");
+            this.Label5.Name = "Label5";
             // 
-            // label6
+            // Label6
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.Label6, "Label6");
+            this.Label6.Name = "Label6";
             // 
-            // trBrightness
+            // TrBrightness
             // 
-            resources.ApplyResources(this.trBrightness, "trBrightness");
-            this.trBrightness.Maximum = 1000;
-            this.trBrightness.Minimum = -1000;
-            this.trBrightness.Name = "trBrightness";
-            this.trBrightness.TickFrequency = 200;
-            this.trBrightness.Scroll += new System.EventHandler(this.trBrightness_Scroll);
+            resources.ApplyResources(this.TrBrightness, "TrBrightness");
+            this.TrBrightness.Maximum = 1000;
+            this.TrBrightness.Minimum = -1000;
+            this.TrBrightness.Name = "TrBrightness";
+            this.TrBrightness.TickFrequency = 200;
+            this.TrBrightness.Scroll += new System.EventHandler(this.TrBrightness_Scroll);
             // 
-            // label7
+            // Label7
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            resources.ApplyResources(this.Label7, "Label7");
+            this.Label7.Name = "Label7";
             // 
-            // trContrast
+            // TrContrast
             // 
-            resources.ApplyResources(this.trContrast, "trContrast");
-            this.trContrast.Maximum = 1000;
-            this.trContrast.Minimum = -1000;
-            this.trContrast.Name = "trContrast";
-            this.trContrast.TickFrequency = 200;
-            this.trContrast.Scroll += new System.EventHandler(this.trContrast_Scroll);
+            resources.ApplyResources(this.TrContrast, "TrContrast");
+            this.TrContrast.Maximum = 1000;
+            this.TrContrast.Minimum = -1000;
+            this.TrContrast.Name = "TrContrast";
+            this.TrContrast.TickFrequency = 200;
+            this.TrContrast.Scroll += new System.EventHandler(this.TrContrast_Scroll);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // pctIcon
             // 
@@ -216,10 +216,10 @@ namespace NAPS2.WinForms
             this.pctIcon.Name = "pctIcon";
             this.pctIcon.TabStop = false;
             // 
-            // label8
+            // Label8
             // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
+            resources.ApplyResources(this.Label8, "Label8");
+            this.Label8.Name = "Label8";
             // 
             // txtName
             // 
@@ -233,10 +233,10 @@ namespace NAPS2.WinForms
             this.cmbAlign.FormattingEnabled = true;
             this.cmbAlign.Name = "cmbAlign";
             // 
-            // label9
+            // Label9
             // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
+            resources.ApplyResources(this.Label9, "Label9");
+            this.Label9.Name = "Label9";
             // 
             // cmbScale
             // 
@@ -245,15 +245,15 @@ namespace NAPS2.WinForms
             this.cmbScale.FormattingEnabled = true;
             this.cmbScale.Name = "cmbScale";
             // 
-            // label10
+            // Label10
             // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
+            resources.ApplyResources(this.Label10, "Label10");
+            this.Label10.Name = "Label10";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.rdTWAIN);
-            this.panel2.Controls.Add(this.rdWIA);
+            this.panel2.Controls.Add(this.RdWIA);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
@@ -264,89 +264,89 @@ namespace NAPS2.WinForms
             this.rdTWAIN.TabStop = true;
             this.rdTWAIN.UseVisualStyleBackColor = true;
             // 
-            // rdWIA
+            // RdWIA
             // 
-            resources.ApplyResources(this.rdWIA, "rdWIA");
-            this.rdWIA.Name = "rdWIA";
-            this.rdWIA.TabStop = true;
-            this.rdWIA.UseVisualStyleBackColor = true;
-            this.rdWIA.CheckedChanged += new System.EventHandler(this.rdWIA_CheckedChanged);
+            resources.ApplyResources(this.RdWIA, "RdWIA");
+            this.RdWIA.Name = "RdWIA";
+            this.RdWIA.TabStop = true;
+            this.RdWIA.UseVisualStyleBackColor = true;
+            this.RdWIA.CheckedChanged += new System.EventHandler(this.RdWIA_CheckedChanged);
             // 
-            // txtBrightness
+            // TxtBrightness
             // 
-            resources.ApplyResources(this.txtBrightness, "txtBrightness");
-            this.txtBrightness.Name = "txtBrightness";
-            this.txtBrightness.TextChanged += new System.EventHandler(this.txtBrightness_TextChanged);
+            resources.ApplyResources(this.TxtBrightness, "TxtBrightness");
+            this.TxtBrightness.Name = "TxtBrightness";
+            this.TxtBrightness.TextChanged += new System.EventHandler(this.TxtBrightness_TextChanged);
             // 
-            // txtContrast
+            // TxtContrast
             // 
-            resources.ApplyResources(this.txtContrast, "txtContrast");
-            this.txtContrast.Name = "txtContrast";
-            this.txtContrast.TextChanged += new System.EventHandler(this.txtContrast_TextChanged);
+            resources.ApplyResources(this.TxtContrast, "TxtContrast");
+            this.TxtContrast.Name = "TxtContrast";
+            this.TxtContrast.TextChanged += new System.EventHandler(this.TxtContrast_TextChanged);
             // 
-            // cbAutoSave
+            // CbAutoSave
             // 
-            resources.ApplyResources(this.cbAutoSave, "cbAutoSave");
-            this.cbAutoSave.Name = "cbAutoSave";
-            this.cbAutoSave.UseVisualStyleBackColor = true;
-            this.cbAutoSave.CheckedChanged += new System.EventHandler(this.cbAutoSave_CheckedChanged);
+            resources.ApplyResources(this.CbAutoSave, "CbAutoSave");
+            this.CbAutoSave.Name = "CbAutoSave";
+            this.CbAutoSave.UseVisualStyleBackColor = true;
+            this.CbAutoSave.CheckedChanged += new System.EventHandler(this.CbAutoSave_CheckedChanged);
             // 
-            // linkAutoSaveSettings
+            // LinkAutoSaveSettings
             // 
-            resources.ApplyResources(this.linkAutoSaveSettings, "linkAutoSaveSettings");
-            this.linkAutoSaveSettings.Name = "linkAutoSaveSettings";
-            this.linkAutoSaveSettings.TabStop = true;
-            this.linkAutoSaveSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAutoSaveSettings_LinkClicked);
+            resources.ApplyResources(this.LinkAutoSaveSettings, "LinkAutoSaveSettings");
+            this.LinkAutoSaveSettings.Name = "LinkAutoSaveSettings";
+            this.LinkAutoSaveSettings.TabStop = true;
+            this.LinkAutoSaveSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkAutoSaveSettings_LinkClicked);
             // 
-            // btnAdvanced
+            // BtnAdvanced
             // 
-            resources.ApplyResources(this.btnAdvanced, "btnAdvanced");
-            this.btnAdvanced.Name = "btnAdvanced";
-            this.btnAdvanced.UseVisualStyleBackColor = true;
-            this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
+            resources.ApplyResources(this.BtnAdvanced, "BtnAdvanced");
+            this.BtnAdvanced.Name = "BtnAdvanced";
+            this.BtnAdvanced.UseVisualStyleBackColor = true;
+            this.BtnAdvanced.Click += new System.EventHandler(this.BtnAdvanced_Click);
             // 
             // FEditProfile
             // 
-            this.AcceptButton = this.btnOK;
+            this.AcceptButton = this.BtnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnAdvanced);
-            this.Controls.Add(this.linkAutoSaveSettings);
-            this.Controls.Add(this.cbAutoSave);
-            this.Controls.Add(this.txtContrast);
-            this.Controls.Add(this.txtBrightness);
+            this.Controls.Add(this.BtnAdvanced);
+            this.Controls.Add(this.LinkAutoSaveSettings);
+            this.Controls.Add(this.CbAutoSave);
+            this.Controls.Add(this.TxtContrast);
+            this.Controls.Add(this.TxtBrightness);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.cmbScale);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.Label10);
             this.Controls.Add(this.cmbAlign);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.Label9);
             this.Controls.Add(this.txtName);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.Label8);
             this.Controls.Add(this.pctIcon);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.trContrast);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.trBrightness);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.TrContrast);
+            this.Controls.Add(this.Label7);
+            this.Controls.Add(this.TrBrightness);
+            this.Controls.Add(this.Label6);
             this.Controls.Add(this.cmbResolution);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.cmbPage);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.Label5);
+            this.Controls.Add(this.CmbPage);
+            this.Controls.Add(this.Label4);
             this.Controls.Add(this.cmbDepth);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.Label3);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.BtnOK);
             this.Controls.Add(this.cmbSource);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnChooseDevice);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtDevice);
+            this.Controls.Add(this.Label2);
+            this.Controls.Add(this.BtnChooseDevice);
+            this.Controls.Add(this.Label1);
+            this.Controls.Add(this.TxtDevice);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FEditProfile";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trContrast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrContrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -356,41 +356,41 @@ namespace NAPS2.WinForms
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtDevice;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnChooseDevice;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox TxtDevice;
+        private System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.Button BtnChooseDevice;
+        private System.Windows.Forms.Label Label2;
         private System.Windows.Forms.ComboBox cmbSource;
-        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button BtnOK;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton rdbConfig;
+        private System.Windows.Forms.RadioButton RdbConfig;
         private System.Windows.Forms.RadioButton rdbNative;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Label3;
         private System.Windows.Forms.ComboBox cmbDepth;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cmbPage;
+        private System.Windows.Forms.Label Label4;
+        private System.Windows.Forms.ComboBox CmbPage;
         private System.Windows.Forms.ComboBox cmbResolution;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TrackBar trBrightness;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TrackBar trContrast;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label Label5;
+        private System.Windows.Forms.Label Label6;
+        private System.Windows.Forms.TrackBar TrBrightness;
+        private System.Windows.Forms.Label Label7;
+        private System.Windows.Forms.TrackBar TrContrast;
+        private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.PictureBox pctIcon;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label Label8;
         private System.Windows.Forms.TextBox txtName;
         private ILProfileIcons ilProfileIcons;
         private System.Windows.Forms.ComboBox cmbAlign;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label Label9;
         private System.Windows.Forms.ComboBox cmbScale;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label Label10;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton rdTWAIN;
-        private System.Windows.Forms.RadioButton rdWIA;
-        private System.Windows.Forms.TextBox txtBrightness;
-        private System.Windows.Forms.TextBox txtContrast;
-        private System.Windows.Forms.CheckBox cbAutoSave;
-        private System.Windows.Forms.LinkLabel linkAutoSaveSettings;
-        private System.Windows.Forms.Button btnAdvanced;
+        private System.Windows.Forms.RadioButton RdWIA;
+        private System.Windows.Forms.TextBox TxtBrightness;
+        private System.Windows.Forms.TextBox TxtContrast;
+        private System.Windows.Forms.CheckBox CbAutoSave;
+        private System.Windows.Forms.LinkLabel LinkAutoSaveSettings;
+        private System.Windows.Forms.Button BtnAdvanced;
     }
 }

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using NAPS2.Lang.Resources;
+﻿using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -14,6 +6,14 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Pdf.Filters;
 using PdfSharp.Pdf.IO;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -90,7 +90,7 @@ namespace NAPS2.ImportExport.Pdf
                 return Enumerable.Empty<ScannedImage>();
             }
         }
-        
+
         private IEnumerable<ScannedImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
         {
             if (page.CustomValues.Elements.ContainsKey("/NAPS2ImportedPage"))
@@ -113,13 +113,12 @@ namespace NAPS2.ImportExport.Pdf
                 var reference = item as PdfReference;
                 var xObject = reference?.Value as PdfDictionary;
                 // Is external object an image?
-                if (xObject != null && xObject.Elements.GetString("/Subtype") == "/Image")
+                if (xObject?.Elements.GetString("/Subtype") == "/Image")
                 {
                     // Support multiple filter schemes
                     var element = xObject.Elements.Single(x => x.Key == "/Filter");
-                    var elementAsArray = element.Value as PdfArray;
                     var elementAsName = element.Value as PdfName;
-                    if (elementAsArray != null)
+                    if (element.Value is PdfArray elementAsArray)
                     {
                         string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()).ToArray();
                         if (arrayElements.Length == 2)
@@ -145,10 +144,13 @@ namespace NAPS2.ImportExport.Pdf
             {
                 case "/DCTDecode":
                     return ExportJpegImage(page, stream, importParams);
+
                 case "/FlateDecode":
                     return ExportAsPngImage(page, xObject, importParams);
+
                 case "/CCITTFaxDecode":
                     return ExportG4(page, xObject, stream, importParams);
+
                 default:
                     throw new NotImplementedException("Unsupported image encoding");
             }
@@ -175,20 +177,19 @@ namespace NAPS2.ImportExport.Pdf
 
         private ScannedImage ExportJpegImage(PdfPage page, byte[] imageBytes, ImportParams importParams)
         {
+            // TODO: https://docs.microsoft.com/en-us/visualstudio/code-quality/ca2202-do-not-dispose-objects-multiple-times
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using (var memoryStream = new MemoryStream(imageBytes))
+            using (var bitmap = new Bitmap(memoryStream))
             {
-                using (var bitmap = new Bitmap(memoryStream))
+                bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
+                var scannedImage = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
+                scannedImage.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                if (importParams.DetectPatchCodes)
                 {
-                    bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                    var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
-                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
-                    if (importParams.DetectPatchCodes)
-                    {
-                        image.PatchCode = PatchCodeDetector.Detect(bitmap);
-                    }
-                    return image;
+                    scannedImage.PatchCode = PatchCodeDetector.Detect(bitmap);
                 }
+                return scannedImage;
             }
         }
 
@@ -197,7 +198,6 @@ namespace NAPS2.ImportExport.Pdf
             int width = imageObject.Elements.GetInteger(PdfImage.Keys.Width);
             int height = imageObject.Elements.GetInteger(PdfImage.Keys.Height);
             int bitsPerComponent = imageObject.Elements.GetInteger(PdfImage.Keys.BitsPerComponent);
-
             var buffer = imageObject.Stream.UnfilteredValue;
 
             Bitmap bitmap;
@@ -209,11 +209,13 @@ namespace NAPS2.ImportExport.Pdf
                     bitDepth = ScanBitDepth.C24Bit;
                     RgbToBitmapUnmanaged(height, width, bitmap, buffer);
                     break;
+
                 case 1:
                     bitmap = new Bitmap(width, height, PixelFormat.Format1bppIndexed);
                     bitDepth = ScanBitDepth.BlackWhite;
                     BlackAndWhiteToBitmapUnmanaged(height, width, bitmap, buffer);
                     break;
+
                 default:
                     throw new NotImplementedException("Unsupported image encoding (expected 24 bpp or 1bpp)");
             }
@@ -240,8 +242,8 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     for (int x = 0; x < width; x++)
                     {
-                        IntPtr pixelData = data.Scan0 + y * data.Stride + x * 3;
-                        int bufferIndex = (y * width + x) * 3;
+                        IntPtr pixelData = data.Scan0 + (y * data.Stride) + (x * 3);
+                        int bufferIndex = ((y * width) + x) * 3;
                         Marshal.WriteByte(pixelData, rgbBuffer[bufferIndex + 2]);
                         Marshal.WriteByte(pixelData + 1, rgbBuffer[bufferIndex + 1]);
                         Marshal.WriteByte(pixelData + 2, rgbBuffer[bufferIndex]);
@@ -259,13 +261,13 @@ namespace NAPS2.ImportExport.Pdf
             BitmapData data = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format1bppIndexed);
             try
             {
-                int bytesPerRow = (width - 1) / 8 + 1;
+                int bytesPerRow = ((width - 1) / 8) + 1;
                 for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < bytesPerRow; x++)
                     {
-                        IntPtr pixelData = data.Scan0 + y * data.Stride + x;
-                        Marshal.WriteByte(pixelData, bwBuffer[y * bytesPerRow + x]);
+                        IntPtr pixelData = data.Scan0 + (y * data.Stride) + x;
+                        Marshal.WriteByte(pixelData, bwBuffer[(y * bytesPerRow) + x]);
                     }
                 }
             }

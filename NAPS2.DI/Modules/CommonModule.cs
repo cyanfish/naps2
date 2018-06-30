@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using NAPS2.Config;
+﻿using NAPS2.Config;
 using NAPS2.Host;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
@@ -20,6 +15,7 @@ using NAPS2.Util;
 using NAPS2.WinForms;
 using Ninject.Modules;
 using NLog;
+using System.Diagnostics;
 using ILogger = NAPS2.Util.ILogger;
 
 namespace NAPS2.DI.Modules

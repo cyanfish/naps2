@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Images.Transforms
@@ -40,14 +38,14 @@ namespace NAPS2.Scan.Images.Transforms
             {
                 for (int x = 0; x < data.Width; x++)
                 {
-                    int r = bytes[stride * y + x * bytesPerPixel];
-                    int g = bytes[stride * y + x * bytesPerPixel + 1];
-                    int b = bytes[stride * y + x * bytesPerPixel + 2];
+                    int r = bytes[(stride * y) + (x * bytesPerPixel)];
+                    int g = bytes[(stride * y) + (x * bytesPerPixel) + 1];
+                    int b = bytes[(stride * y) + (x * bytesPerPixel) + 2];
                     // Use standard values for grayscale conversion to weight the RGB values
-                    int luma = r * 299 + g * 587 + b * 114;
+                    int luma = (r * 299) + (g * 587) + (b * 114);
                     if (luma >= thresholdAdjusted)
                     {
-                        bits[data.Width * y + x] = 1;
+                        bits[(data.Width * y) + x] = 1;
                     }
                 }
             }
@@ -70,10 +68,10 @@ namespace NAPS2.Scan.Images.Transforms
                         b <<= 1;
                         if (x + k < data.Width)
                         {
-                            b |= bits[y * data.Width + x + k];
+                            b |= bits[(y * data.Width) + x + k];
                         }
                     }
-                    Marshal.WriteByte(data.Scan0 + y * stride + x / 8, b);
+                    Marshal.WriteByte(data.Scan0 + (y * stride) + (x / 8), b);
                 }
             }
             monoBitmap.UnlockBits(data);

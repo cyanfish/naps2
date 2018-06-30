@@ -54,7 +54,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: FManageProfiles.resx$btnAdd.Text$Message
+#: FManageProfiles.resx$BtnAdd.Text$Message
 msgid "Add"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr ""
 
-#: FEditScanSettings.resx$label3.Text$Message
+#: FEditScanSettings.resx$Label3.Text$Message
 msgid "Bit depth"
 msgstr ""
 
@@ -94,11 +94,11 @@ msgstr ""
 msgid "Black & White"
 msgstr ""
 
-#: FEditScanSettings.resx$label6.Text$Message
+#: FEditScanSettings.resx$Label6.Text$Message
 msgid "Brightness"
 msgstr ""
 
-#: FEditScanSettings.resx$btnCancel.Text$Message
+#: FEditScanSettings.resx$BtnCancel.Text$Message
 msgid "Cancel"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Choose Profile"
 msgstr ""
 
-#: FEditScanSettings.resx$btnChooseDevice.Text$Message
+#: FEditScanSettings.resx$BtnChooseDevice.Text$Message
 msgid "Choose device"
 msgstr ""
 
@@ -124,40 +124,40 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: FEditScanSettings.resx$label7.Text$Message
+#: FEditScanSettings.resx$Label7.Text$Message
 msgid "Contrast"
 msgstr ""
 
-#: FAbout.resx$labelCopyright.Text$Message
+#: FAbout.resx$LabelCopyright.Text$Message
 msgid "Copyright © 2009 Pavel Sorejs"
 msgstr ""
 
-#: FAbout.resx__1$labelCopyright.Text$Message
+#: FAbout.resx__1$LabelCopyright.Text$Message
 msgid "Copyright © 2012 Michael Adams"
 msgstr ""
 
-#: FAbout.resx__3$labelCopyright.Text$Message
+#: FAbout.resx__3$LabelCopyright.Text$Message
 msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
 msgstr ""
 
-#: FAbout.resx__2$labelCopyright.Text$Message
+#: FAbout.resx__2$LabelCopyright.Text$Message
 msgid "Copyright © 2013 Peter De Leeuw"
 msgstr ""
 
 #: MiscResources.resx$Delete$Message
-#: FDesktop.resx$tsDelete.Text$Message
+#: FDesktop.resx$TsDelete.Text$Message
 msgid "Delete"
 msgstr ""
 
-#: FEditScanSettings.resx$label1.Text$Message
+#: FEditScanSettings.resx$Label1.Text$Message
 msgid "Device"
 msgstr ""
 
-#: FEditScanSettings.resx$label8.Text$Message
+#: FEditScanSettings.resx$Label8.Text$Message
 msgid "Display name"
 msgstr ""
 
-#: FChooseProfile.resx$btnDone.Text$Message
+#: FChooseProfile.resx$BtnDone.Text$Message
 msgid "Done"
 msgstr ""
 
@@ -165,7 +165,7 @@ msgstr ""
 msgid "Duplex"
 msgstr ""
 
-#: FManageProfiles.resx$btnEdit.Text$Message
+#: FManageProfiles.resx$BtnEdit.Text$Message
 msgid "Edit"
 msgstr ""
 
@@ -193,7 +193,7 @@ msgstr ""
 msgid "Feeder"
 msgstr ""
 
-#: FDesktop.resx$tsFlip.Text$Message
+#: FDesktop.resx$TsFlip.Text$Message
 msgid "Flip"
 msgstr ""
 
@@ -209,11 +209,11 @@ msgstr ""
 msgid "Grayscale"
 msgstr ""
 
-#: FEditScanSettings.resx$label9.Text$Message
+#: FEditScanSettings.resx$Label9.Text$Message
 msgid "Horizontal align"
 msgstr ""
 
-#: FAbout.resx$label1.Text$Message
+#: FAbout.resx$Label1.Text$Message
 msgid "Icons from"
 msgstr ""
 
@@ -229,15 +229,15 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#: FDesktop.resx$tStrip.Text$Message
+#: FDesktop.resx$TStrip.Text$Message
 msgid "Main toolbar"
 msgstr ""
 
-#: FChooseProfile.resx$btnProfiles.Text$Message
+#: FChooseProfile.resx$BtnProfiles.Text$Message
 msgid "Manage Profiles"
 msgstr ""
 
-#: FEditScanSettings.resx$cbHighQuality.Text$Message
+#: FEditScanSettings.resx$CbHighQuality.Text$Message
 msgid "Maximum quality (large files)"
 msgstr ""
 
@@ -269,8 +269,8 @@ msgstr ""
 msgid "Not Another PDF Scanner 2"
 msgstr ""
 
-#: FEditScanSettings.resx$btnOK.Text$Message
-#: FManageProfiles.resx$btnOK.Text$Message
+#: FEditScanSettings.resx$BtnOK.Text$Message
+#: FManageProfiles.resx$BtnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
 msgid "OK"
 msgstr ""
@@ -287,11 +287,11 @@ msgstr ""
 msgid "PNG File (*.png)"
 msgstr ""
 
-#: FEditScanSettings.resx$label4.Text$Message
+#: FEditScanSettings.resx$Label4.Text$Message
 msgid "Page size"
 msgstr ""
 
-#: FEditScanSettings.resx$label2.Text$Message
+#: FEditScanSettings.resx$Label2.Text$Message
 msgid "Paper source"
 msgstr ""
 
@@ -308,7 +308,7 @@ msgstr ""
 msgid "Profiles"
 msgstr ""
 
-#: FEditScanSettings.resx$label5.Text$Message
+#: FEditScanSettings.resx$Label5.Text$Message
 msgid "Resolution"
 msgstr ""
 
@@ -316,33 +316,33 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: FDesktop.resx$tsRotateLeft.Text$Message
+#: FDesktop.resx$TsRotateLeft.Text$Message
 msgid "Rotate Left"
 msgstr ""
 
-#: FDesktop.resx$tsRotateRight.Text$Message
+#: FDesktop.resx$TsRotateRight.Text$Message
 msgid "Rotate Right"
 msgstr ""
 
-#: FDesktop.resx$tsSaveImage.Text$Message
+#: FDesktop.resx$TsSaveImage.Text$Message
 msgid "Save Images"
 msgstr ""
 
-#: FDesktop.resx$tsSavePDF.Text$Message
+#: FDesktop.resx$TsSavePDF.Text$Message
 msgid "Save PDF"
 msgstr ""
 
-#: FPDFSave.resx$label1.Text$Message
+#: FPDFSave.resx$Label1.Text$Message
 msgid "Saving to PDF"
 msgstr ""
 
-#: TiffViewerCtl.resx$tsStretch.ToolTipText$Message
-#: FEditScanSettings.resx$label10.Text$Message
+#: TiffViewerCtl.resx$TsStretch.ToolTipText$Message
+#: FEditScanSettings.resx$Label10.Text$Message
 msgid "Scale"
 msgstr ""
 
-#: FChooseProfile.resx$btnScan.Text$Message
-#: FDesktop.resx$tsScan.Text$Message
+#: FChooseProfile.resx$BtnScan.Text$Message
+#: FDesktop.resx$TsScan.Text$Message
 msgid "Scan"
 msgstr ""
 
@@ -382,11 +382,11 @@ msgstr ""
 msgid "US Letter (8.5x11 in)"
 msgstr ""
 
-#: FEditScanSettings.resx$rdbNativeWIA.Text$Message
+#: FEditScanSettings.resx$RdbNativeWIA.Text$Message
 msgid "Use native WIA UI"
 msgstr ""
 
-#: FEditScanSettings.resx$rdbConfig.Text$Message
+#: FEditScanSettings.resx$RdbConfig.Text$Message
 msgid "Use predefined settings"
 msgstr ""
 
@@ -394,11 +394,11 @@ msgstr ""
 msgid "Version {0}"
 msgstr ""
 
-#: FEditScanSettings.resx$rdWIA.Text$Message
+#: FEditScanSettings.resx$RdWIA.Text$Message
 msgid "WIA Driver"
 msgstr ""
 
-#: FTwainGui.resx$label1.Text$Message
+#: FTwainGui.resx$Label1.Text$Message
 msgid "Waiting for TWAIN to complete"
 msgstr ""
 
@@ -406,24 +406,24 @@ msgstr ""
 msgid "You don't have permission to save files at this location"
 msgstr ""
 
-#: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
+#: TiffViewerCtl.resx$TsZoom.ToolTipText$Message
 msgid "Zoom"
 msgstr ""
 
-#: TiffViewerCtl.resx$tsZoomPlus.ToolTipText$Message
+#: TiffViewerCtl.resx$TsZoomPlus.ToolTipText$Message
 msgid "Zoom in"
 msgstr ""
 
-#: TiffViewerCtl.resx$tsZoomOut.ToolTipText$Message
-#: TiffViewerCtl.resx$tsZoomActual.ToolTipText$Message
+#: TiffViewerCtl.resx$TsZoomOut.ToolTipText$Message
+#: TiffViewerCtl.resx$TsZoomActual.ToolTipText$Message
 msgid "Zoom out"
 msgstr ""
 
-#: FAbout.resx$linkLabel1.Text$Message
+#: FAbout.resx$LinkLabel1.Text$Message
 msgid "http://sourceforge.com/projects/naps2"
 msgstr ""
 
-#: FAbout.resx$linkLabel2.Text$Message
+#: FAbout.resx$LinkLabel2.Text$Message
 msgid "http://www.fatcow.com/free-icons"
 msgstr ""
 

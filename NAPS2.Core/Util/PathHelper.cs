@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 
 namespace NAPS2.Util
 {
@@ -11,7 +7,7 @@ namespace NAPS2.Util
         public static void EnsureParentDirExists(string filePath)
         {
             var parentDir = new FileInfo(filePath).Directory;
-            if (parentDir != null && !parentDir.Exists)
+            if (parentDir?.Exists == false)
             {
                 parentDir.Create();
             }

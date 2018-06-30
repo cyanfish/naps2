@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace NAPS2.ImportExport.Email.Mapi
+﻿namespace NAPS2.ImportExport.Email.Mapi
 {
     // Documented at:
     // http://msdn.microsoft.com/en-us/library/windows/desktop/hh707275%28v=vs.85%29.aspx#MAPI_FORCE_UNICODE
@@ -11,18 +7,17 @@ namespace NAPS2.ImportExport.Email.Mapi
         Success = 0,
         UserAbort = 1,
         Failure = 2,
-
-        AmbiguousRecipient = 21,
-        AttachmentNotFound = 11,
-        AttachmentOpenFailure = 12,
-        BadRecipType = 15,
-        InsufficientMemory = 5,
-        InvalidRecips = 25,
         LoginFailure = 3,
-        TextTooLarge = 18,
+        InsufficientMemory = 5,
         TooManyFiles = 9,
         TooManyRecipients = 10,
-        UnicodeNotSupported = 27,
-        UnknownRecipient = 14
+        AttachmentNotFound = 11,
+        AttachmentOpenFailure = 12,
+        UnknownRecipient = 14,
+        BadRecipType = 15,
+        TextTooLarge = 18,
+        AmbiguousRecipient = 21,
+        InvalidRecips = 25,
+        UnicodeNotSupported = 27
     }
 }

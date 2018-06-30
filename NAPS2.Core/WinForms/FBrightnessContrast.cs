@@ -1,16 +1,16 @@
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class FBrightnessContrast : FormBase
+    internal partial class FBrightnessContrast : FormBase
     {
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
@@ -44,7 +44,7 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            if (SelectedImages != null && SelectedImages.Count > 1)
+            if (SelectedImages?.Count > 1)
             {
                 checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
             }
@@ -54,29 +54,29 @@ namespace NAPS2.WinForms
             }
 
             new LayoutManager(this)
-                .Bind(tbBrightness, tbContrast, pictureBox)
+                .Bind(TbBrightness, TbContrast, PictureBox)
                     .WidthToForm()
-                .Bind(pictureBox)
+                .Bind(PictureBox)
                     .HeightToForm()
-                .Bind(btnOK, btnCancel, txtBrightness, txtContrast)
+                .Bind(BtnOK, BtnCancel, TxtBrightness, TxtContrast)
                     .RightToForm()
-                .Bind(tbBrightness, txtBrightness, tbContrast, txtContrast, pictureBox1, pictureBox2,
-                      checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
+                .Bind(TbBrightness, TxtBrightness, TbContrast, TxtContrast, PictureBox1, PictureBox2,
+                      checkboxApplyToSelected, BtnRevert, BtnOK, BtnCancel)
                     .BottomToForm()
                 .Activate();
             Size = new Size(600, 600);
 
             workingImage = scannedImageRenderer.Render(Image);
-            pictureBox.Image = (Bitmap)workingImage.Clone();
+            PictureBox.Image = (Bitmap)workingImage.Clone();
             UpdatePreviewBox();
 
-            ActiveControl = txtBrightness;
+            ActiveControl = TxtBrightness;
         }
 
         private void UpdateTransform()
         {
-            BrightnessTransform.Brightness = tbBrightness.Value;
-            TrueContrastTransform.Contrast = tbContrast.Value;
+            BrightnessTransform.Brightness = TbBrightness.Value;
+            TrueContrastTransform.Contrast = TbContrast.Value;
             UpdatePreviewBox();
         }
 
@@ -90,7 +90,7 @@ namespace NAPS2.WinForms
                     {
                         working = true;
                         previewOutOfDate = false;
-                        var result = (Bitmap) workingImage.Clone();
+                        var result = (Bitmap)workingImage.Clone();
                         if (!BrightnessTransform.IsNull)
                         {
                             result = BrightnessTransform.Perform(result);
@@ -101,8 +101,8 @@ namespace NAPS2.WinForms
                         }
                         SafeInvoke(() =>
                         {
-                            pictureBox.Image?.Dispose();
-                            pictureBox.Image = result;
+                            PictureBox.Image?.Dispose();
+                            PictureBox.Image = result;
                         });
                         working = false;
                     }
@@ -111,12 +111,12 @@ namespace NAPS2.WinForms
             previewOutOfDate = true;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             if (!BrightnessTransform.IsNull || !TrueContrastTransform.IsNull)
             {
@@ -131,59 +131,57 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnRevert_Click(object sender, EventArgs e)
+        private void BtnRevert_Click(object sender, EventArgs e)
         {
             BrightnessTransform = new BrightnessTransform();
             TrueContrastTransform = new TrueContrastTransform();
-            tbBrightness.Value = 0;
-            tbContrast.Value = 0;
-            txtBrightness.Text = tbBrightness.Value.ToString("G");
-            txtContrast.Text = tbContrast.Value.ToString("G");
+            TbBrightness.Value = 0;
+            TbContrast.Value = 0;
+            TxtBrightness.Text = TbBrightness.Value.ToString("G");
+            TxtContrast.Text = TbContrast.Value.ToString("G");
             UpdatePreviewBox();
         }
 
         private void FCrop_FormClosed(object sender, FormClosedEventArgs e)
         {
             workingImage.Dispose();
-            pictureBox.Image?.Dispose();
+            PictureBox.Image?.Dispose();
             previewTimer?.Dispose();
         }
 
-        private void txtBrightness_TextChanged(object sender, EventArgs e)
+        private void TxtBrightness_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtBrightness.Text, out value))
+            if (int.TryParse(TxtBrightness.Text, out int value))
             {
-                if (value >= tbBrightness.Minimum && value <= tbBrightness.Maximum)
+                if (value >= TbBrightness.Minimum && value <= TbBrightness.Maximum)
                 {
-                    tbBrightness.Value = value;
+                    TbBrightness.Value = value;
                 }
             }
             UpdateTransform();
         }
 
-        private void tbBrightness_Scroll(object sender, EventArgs e)
+        private void TbBrightness_Scroll(object sender, EventArgs e)
         {
-            txtBrightness.Text = tbBrightness.Value.ToString("G");
+            TxtBrightness.Text = TbBrightness.Value.ToString("G");
             UpdateTransform();
         }
 
-        private void txtContrast_TextChanged(object sender, EventArgs e)
+        private void TxtContrast_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtContrast.Text, out value))
+            if (int.TryParse(TxtContrast.Text, out int value))
             {
-                if (value >= tbContrast.Minimum && value <= tbContrast.Maximum)
+                if (value >= TbContrast.Minimum && value <= TbContrast.Maximum)
                 {
-                    tbContrast.Value = value;
+                    TbContrast.Value = value;
                 }
             }
             UpdateTransform();
         }
 
-        private void tbContrast_Scroll(object sender, EventArgs e)
+        private void TbContrast_Scroll(object sender, EventArgs e)
         {
-            txtContrast.Text = tbContrast.Value.ToString("G");
+            TxtContrast.Text = TbContrast.Value.ToString("G");
             UpdateTransform();
         }
     }

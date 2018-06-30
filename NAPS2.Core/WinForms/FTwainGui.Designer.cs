@@ -36,20 +36,20 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FTwainGui));
-            this.label1 = new System.Windows.Forms.Label();
+            this.Label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // Label1
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.Name = "Label1";
             // 
             // FTwainGui
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FTwainGui";
             this.ShowInTaskbar = false;
@@ -59,6 +59,6 @@ namespace NAPS2.WinForms
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Label1;
     }
 }

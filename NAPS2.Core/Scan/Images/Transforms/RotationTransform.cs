@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Images.Transforms
 {
@@ -39,15 +36,19 @@ namespace NAPS2.Scan.Images.Transforms
                 case RotateFlipType.Rotate90FlipNone:
                     Angle = 90.0;
                     break;
+
                 case RotateFlipType.Rotate180FlipNone:
                     Angle = 180.0;
                     break;
+
                 case RotateFlipType.Rotate270FlipNone:
                     Angle = 270.0;
                     break;
+
                 case RotateFlipType.RotateNoneFlipNone:
                     Angle = 0.0;
                     break;
+
                 default:
                     throw new ArgumentException();
             }
@@ -86,7 +87,7 @@ namespace NAPS2.Scan.Images.Transforms
                 return bitmap;
             }
             Bitmap result;
-            if (Angle > 45.0 && Angle < 135.0 || Angle > 225.0 && Angle < 315.0)
+            if ((Angle > 45.0 && Angle < 135.0) || (Angle > 225.0 && Angle < 315.0))
             {
                 result = new Bitmap(bitmap.Height, bitmap.Width);
                 result.SetResolution(bitmap.VerticalResolution, bitmap.HorizontalResolution);

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using NAPS2.Scan;
+using NAPS2.Scan.Images;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using NAPS2.Scan;
-using NAPS2.Scan.Images;
 
 namespace NAPS2.ImportExport
 {
@@ -19,54 +18,59 @@ namespace NAPS2.ImportExport
         /// <returns></returns>
         public static IEnumerable<List<ScannedImage>> SeparateScans(IEnumerable<IEnumerable<ScannedImage>> scans, SaveSeparator separator, int splitSize = 1)
         {
-            if (separator == SaveSeparator.FilePerScan)
+            switch (separator)
             {
-                foreach (var scan in scans)
-                {
-                    yield return scan.ToList();
-                }
-            }
-            else if (separator == SaveSeparator.FilePerPage)
-            {
-                splitSize = Math.Max(splitSize, 1);
-                foreach (var scan in scans.Select(x => x.ToList()))
-                {
-                    for (int i = 0; i < scan.Count; i += splitSize)
+                case SaveSeparator.FilePerScan:
+                    foreach (var scan in scans)
                     {
-                        yield return scan.Skip(i).Take(splitSize).ToList();
+                        yield return scan.ToList();
                     }
-                }
-            }
-            else if (separator == SaveSeparator.PatchT)
-            {
-                var images = new List<ScannedImage>();
-                foreach (var scan in scans)
-                {
-                    foreach (var image in scan)
+
+                    break;
+
+                case SaveSeparator.FilePerPage:
+                    splitSize = Math.Max(splitSize, 1);
+                    foreach (var scan in scans.Select(x => x.ToList()))
                     {
-                        if (image.PatchCode == PatchCode.PatchT)
+                        for (int i = 0; i < scan.Count; i += splitSize)
                         {
-                            image.Dispose();
-                            if (images.Count > 0)
+                            yield return scan.Skip(i).Take(splitSize).ToList();
+                        }
+                    }
+
+                    break;
+
+                case SaveSeparator.PatchT:
+                    var images = new List<ScannedImage>();
+                    foreach (var scan in scans)
+                    {
+                        foreach (var image in scan)
+                        {
+                            if (image.PatchCode == PatchCode.PatchT)
                             {
-                                yield return images;
-                                images = new List<ScannedImage>();
+                                image.Dispose();
+                                if (images.Count > 0)
+                                {
+                                    yield return images;
+                                    images = new List<ScannedImage>();
+                                }
+                            }
+                            else
+                            {
+                                images.Add(image);
                             }
                         }
-                        else
-                        {
-                            images.Add(image);
-                        }
                     }
-                }
-                if (images.Count > 0)
-                {
-                    yield return images;
-                }
-            }
-            else
-            {
-                yield return scans.SelectMany(x => x.ToList()).ToList();
+                    if (images.Count > 0)
+                    {
+                        yield return images;
+                    }
+
+                    break;
+
+                default:
+                    yield return scans.SelectMany(x => x.ToList()).ToList();
+                    break;
             }
         }
     }

@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
@@ -10,6 +5,10 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Util;
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
@@ -41,14 +40,14 @@ namespace NAPS2.WinForms
             AddEnumItems<ScanDpi>(cmbResolution);
             AddEnumItems<ScanScale>(cmbScale);
             AddEnumItems<ScanSource>(cmbSource);
-            cmbPage.Format += (sender, e) =>
+            CmbPage.Format += (sender, e) =>
             {
                 var item = (PageSizeListItem)e.ListItem;
                 e.Value = item.Label;
             };
         }
 
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             // Don't trigger any onChange events
             suppressChangeEvent = true;
@@ -65,51 +64,51 @@ namespace NAPS2.WinForms
             cmbSource.SelectedIndex = (int)ScanProfile.PaperSource;
             cmbDepth.SelectedIndex = (int)ScanProfile.BitDepth;
             cmbResolution.SelectedIndex = (int)ScanProfile.Resolution;
-            txtContrast.Text = ScanProfile.Contrast.ToString("G");
-            txtBrightness.Text = ScanProfile.Brightness.ToString("G");
+            TxtContrast.Text = ScanProfile.Contrast.ToString("G");
+            TxtBrightness.Text = ScanProfile.Brightness.ToString("G");
             UpdatePageSizeList();
             SelectPageSize();
             cmbScale.SelectedIndex = (int)ScanProfile.AfterScanScale;
             cmbAlign.SelectedIndex = (int)ScanProfile.PageAlign;
 
-            cbAutoSave.Checked = ScanProfile.EnableAutoSave;
+            CbAutoSave.Checked = ScanProfile.EnableAutoSave;
 
             // The setter updates the driver selection checkboxes
             DeviceDriverName = ScanProfile.DriverName;
 
             rdbNative.Checked = ScanProfile.UseNativeUI;
-            rdbConfig.Checked = !ScanProfile.UseNativeUI;
+            RdbConfig.Checked = !ScanProfile.UseNativeUI;
 
             // Start triggering onChange events again
             suppressChangeEvent = false;
 
             UpdateEnabledControls();
 
-            linkAutoSaveSettings.Location = new Point(cbAutoSave.Right, linkAutoSaveSettings.Location.Y);
+            LinkAutoSaveSettings.Location = new Point(CbAutoSave.Right, LinkAutoSaveSettings.Location.Y);
             new LayoutManager(this)
-                .Bind(txtName, txtDevice, panel1, panel2)
+                .Bind(txtName, TxtDevice, panel1, panel2)
                     .WidthToForm()
-                .Bind(pctIcon, btnChooseDevice, btnOK, btnCancel)
+                .Bind(pctIcon, BtnChooseDevice, BtnOK, BtnCancel)
                     .RightToForm()
-                .Bind(cmbAlign, cmbDepth, cmbPage, cmbResolution, cmbScale, cmbSource, trBrightness, trContrast, rdbConfig, rdbNative)
+                .Bind(cmbAlign, cmbDepth, CmbPage, cmbResolution, cmbScale, cmbSource, TrBrightness, TrContrast, RdbConfig, rdbNative)
                     .WidthTo(() => Width / 2)
-                .Bind(rdTWAIN, rdbNative, label3, cmbDepth, label9, cmbAlign, label10, cmbScale, label7, trContrast)
+                .Bind(rdTWAIN, rdbNative, Label3, cmbDepth, Label9, cmbAlign, Label10, cmbScale, Label7, TrContrast)
                     .LeftTo(() => Width / 2)
-                .Bind(txtBrightness)
-                    .LeftTo(() => trBrightness.Right)
-                .Bind(txtContrast)
-                    .LeftTo(() => trContrast.Right)
+                .Bind(TxtBrightness)
+                    .LeftTo(() => TrBrightness.Right)
+                .Bind(TxtContrast)
+                    .LeftTo(() => TrContrast.Right)
                 .Activate();
         }
 
         private void UpdatePageSizeList()
         {
-            cmbPage.Items.Clear();
+            CmbPage.Items.Clear();
 
             // Defaults
             foreach (ScanPageSize item in Enum.GetValues(typeof(ScanPageSize)))
             {
-                cmbPage.Items.Add(new PageSizeListItem
+                CmbPage.Items.Add(new PageSizeListItem
                 {
                     Type = item,
                     Label = item.Description()
@@ -119,7 +118,7 @@ namespace NAPS2.WinForms
             // Custom Presets
             foreach (var preset in UserConfigManager.Config.CustomPageSizePresets.OrderBy(x => x.Name))
             {
-                cmbPage.Items.Insert(cmbPage.Items.Count - 1, new PageSizeListItem
+                CmbPage.Items.Insert(CmbPage.Items.Count - 1, new PageSizeListItem
                 {
                     Type = ScanPageSize.Custom,
                     Label = string.Format(MiscResources.NamedPageSizeFormat, preset.Name, preset.Dimens.Width, preset.Dimens.Height, preset.Dimens.Unit.Description()),
@@ -137,24 +136,24 @@ namespace NAPS2.WinForms
             }
             else
             {
-                cmbPage.SelectedIndex = (int) ScanProfile.PageSize;
+                CmbPage.SelectedIndex = (int)ScanProfile.PageSize;
             }
         }
 
         private void SelectCustomPageSize(string name, PageDimensions dimens)
         {
-            for (int i = 0; i < cmbPage.Items.Count; i++)
+            for (int i = 0; i < CmbPage.Items.Count; i++)
             {
-                var item = (PageSizeListItem) cmbPage.Items[i];
+                var item = (PageSizeListItem)CmbPage.Items[i];
                 if (item.Type == ScanPageSize.Custom && item.CustomName == name && item.CustomDimens == dimens)
                 {
-                    cmbPage.SelectedIndex = i;
+                    CmbPage.SelectedIndex = i;
                     return;
                 }
             }
 
             // Not found, so insert a new item
-            cmbPage.Items.Insert(cmbPage.Items.Count - 1, new PageSizeListItem
+            CmbPage.Items.Insert(CmbPage.Items.Count - 1, new PageSizeListItem
             {
                 Type = ScanPageSize.Custom,
                 Label = string.IsNullOrEmpty(name)
@@ -163,7 +162,7 @@ namespace NAPS2.WinForms
                 CustomName = name,
                 CustomDimens = dimens
             });
-            cmbPage.SelectedIndex = cmbPage.Items.Count - 2;
+            CmbPage.SelectedIndex = CmbPage.Items.Count - 2;
         }
 
         public bool Result => result;
@@ -185,7 +184,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    rdWIA.Checked = true;
+                    RdWIA.Checked = true;
                 }
             }
         }
@@ -196,7 +195,7 @@ namespace NAPS2.WinForms
             set
             {
                 currentDevice = value;
-                txtDevice.Text = (value == null ? "" : value.Name);
+                TxtDevice.Text = (value == null ? "" : value.Name);
             }
         }
 
@@ -210,8 +209,8 @@ namespace NAPS2.WinForms
                 ScanDevice device = driver.PromptForDevice();
                 if (device != null)
                 {
-                    if (string.IsNullOrEmpty(txtName.Text) ||
-                        CurrentDevice != null && CurrentDevice.Name == txtName.Text)
+                    if (string.IsNullOrEmpty(txtName.Text)
+                        || (CurrentDevice != null && CurrentDevice.Name == txtName.Text))
                     {
                         txtName.Text = device.Name;
                     }
@@ -232,7 +231,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void btnChooseDevice_Click(object sender, EventArgs e)
+        private void BtnChooseDevice_Click(object sender, EventArgs e)
         {
             ChooseDevice(DeviceDriverName);
         }
@@ -247,7 +246,7 @@ namespace NAPS2.WinForms
                 }
                 return;
             }
-            var pageSize = (PageSizeListItem) cmbPage.SelectedItem;
+            var pageSize = (PageSizeListItem)CmbPage.SelectedItem;
             if (ScanProfile.DisplayName != null)
             {
                 profileNameTracker.RenamingProfile(ScanProfile.DisplayName, txtName.Text);
@@ -266,8 +265,8 @@ namespace NAPS2.WinForms
 
                 AfterScanScale = (ScanScale)cmbScale.SelectedIndex,
                 BitDepth = (ScanBitDepth)cmbDepth.SelectedIndex,
-                Brightness = trBrightness.Value,
-                Contrast = trContrast.Value,
+                Brightness = TrBrightness.Value,
+                Contrast = TrContrast.Value,
                 PageAlign = (ScanHorizontalAlign)cmbAlign.SelectedIndex,
                 PageSize = pageSize.Type,
                 CustomPageSizeName = pageSize.CustomName,
@@ -275,7 +274,7 @@ namespace NAPS2.WinForms
                 Resolution = (ScanDpi)cmbResolution.SelectedIndex,
                 PaperSource = (ScanSource)cmbSource.SelectedIndex,
 
-                EnableAutoSave = cbAutoSave.Checked,
+                EnableAutoSave = CbAutoSave.Checked,
                 AutoSaveSettings = ScanProfile.AutoSaveSettings,
                 Quality = ScanProfile.Quality,
                 BrightnessContrastAfterScan = ScanProfile.BrightnessContrastAfterScan,
@@ -295,11 +294,11 @@ namespace NAPS2.WinForms
             };
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             // Note: If CurrentDevice is null, that's fine. A prompt will be shown when scanning.
 
-            if (txtName.Text == "")
+            if (txtName.Text?.Length == 0)
             {
                 errorOutput.DisplayError(MiscResources.NameMissing);
                 return;
@@ -309,17 +308,17 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void rdbConfig_CheckedChanged(object sender, EventArgs e)
+        private void RdbConfig_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabledControls();
         }
 
-        private void rdbNativeWIA_CheckedChanged(object sender, EventArgs e)
+        private void RdbNativeWIA_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabledControls();
         }
@@ -329,38 +328,38 @@ namespace NAPS2.WinForms
             if (!suppressChangeEvent)
             {
                 suppressChangeEvent = true;
-                
+
                 bool locked = ScanProfile.IsLocked;
                 bool deviceLocked = ScanProfile.IsDeviceLocked;
-                bool settingsEnabled = !locked && rdbConfig.Checked;
+                bool settingsEnabled = !locked && RdbConfig.Checked;
 
                 txtName.Enabled = !locked;
-                rdWIA.Enabled = rdTWAIN.Enabled = !locked;
-                txtDevice.Enabled = !deviceLocked;
-                btnChooseDevice.Enabled = !deviceLocked;
-                rdbConfig.Enabled = rdbNative.Enabled = !locked;
+                RdWIA.Enabled = rdTWAIN.Enabled = !locked;
+                TxtDevice.Enabled = !deviceLocked;
+                BtnChooseDevice.Enabled = !deviceLocked;
+                RdbConfig.Enabled = rdbNative.Enabled = !locked;
 
                 cmbSource.Enabled = settingsEnabled;
                 cmbResolution.Enabled = settingsEnabled;
-                cmbPage.Enabled = settingsEnabled;
+                CmbPage.Enabled = settingsEnabled;
                 cmbDepth.Enabled = settingsEnabled;
                 cmbAlign.Enabled = settingsEnabled;
                 cmbScale.Enabled = settingsEnabled;
-                trBrightness.Enabled = settingsEnabled;
-                trContrast.Enabled = settingsEnabled;
-                txtBrightness.Enabled = settingsEnabled;
-                txtContrast.Enabled = settingsEnabled;
+                TrBrightness.Enabled = settingsEnabled;
+                TrContrast.Enabled = settingsEnabled;
+                TxtBrightness.Enabled = settingsEnabled;
+                TxtContrast.Enabled = settingsEnabled;
 
-                cbAutoSave.Enabled = !locked && !appConfigManager.Config.DisableAutoSave;
-                linkAutoSaveSettings.Visible = !locked && !appConfigManager.Config.DisableAutoSave;
+                CbAutoSave.Enabled = !locked && !appConfigManager.Config.DisableAutoSave;
+                LinkAutoSaveSettings.Visible = !locked && !appConfigManager.Config.DisableAutoSave;
 
-                btnAdvanced.Enabled = !locked;
+                BtnAdvanced.Enabled = !locked;
 
                 suppressChangeEvent = false;
             }
         }
 
-        private void rdWIA_CheckedChanged(object sender, EventArgs e)
+        private void RdWIA_CheckedChanged(object sender, EventArgs e)
         {
             if (!suppressChangeEvent)
             {
@@ -370,46 +369,44 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void txtBrightness_TextChanged(object sender, EventArgs e)
+        private void TxtBrightness_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtBrightness.Text, out value))
+            if (int.TryParse(TxtBrightness.Text, out int value))
             {
-                if (value >= trBrightness.Minimum && value <= trBrightness.Maximum)
+                if (value >= TrBrightness.Minimum && value <= TrBrightness.Maximum)
                 {
-                    trBrightness.Value = value;
+                    TrBrightness.Value = value;
                 }
             }
         }
 
-        private void trBrightness_Scroll(object sender, EventArgs e)
+        private void TrBrightness_Scroll(object sender, EventArgs e)
         {
-            txtBrightness.Text = trBrightness.Value.ToString("G");
+            TxtBrightness.Text = TrBrightness.Value.ToString("G");
         }
 
-        private void txtContrast_TextChanged(object sender, EventArgs e)
+        private void TxtContrast_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtContrast.Text, out value))
+            if (int.TryParse(TxtContrast.Text, out int value))
             {
-                if (value >= trContrast.Minimum && value <= trContrast.Maximum)
+                if (value >= TrContrast.Minimum && value <= TrContrast.Maximum)
                 {
-                    trContrast.Value = value;
+                    TrContrast.Value = value;
                 }
             }
         }
 
-        private void trContrast_Scroll(object sender, EventArgs e)
+        private void TrContrast_Scroll(object sender, EventArgs e)
         {
-            txtContrast.Text = trContrast.Value.ToString("G");
+            TxtContrast.Text = TrContrast.Value.ToString("G");
         }
 
         private int lastPageSizeIndex = -1;
-        private PageSizeListItem lastPageSizeItem = null;
+        private PageSizeListItem lastPageSizeItem;
 
-        private void cmbPage_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbPage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbPage.SelectedIndex == cmbPage.Items.Count - 1)
+            if (CmbPage.SelectedIndex == CmbPage.Items.Count - 1)
             {
                 // "Custom..." selected
                 var form = FormFactory.Create<FPageSize>();
@@ -423,14 +420,14 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    cmbPage.SelectedIndex = lastPageSizeIndex;
+                    CmbPage.SelectedIndex = lastPageSizeIndex;
                 }
             }
-            lastPageSizeIndex = cmbPage.SelectedIndex;
-            lastPageSizeItem = (PageSizeListItem)cmbPage.SelectedItem;
+            lastPageSizeIndex = CmbPage.SelectedIndex;
+            lastPageSizeItem = (PageSizeListItem)CmbPage.SelectedItem;
         }
 
-        private void linkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (appConfigManager.Config.DisableAutoSave)
             {
@@ -442,7 +439,7 @@ namespace NAPS2.WinForms
             form.ShowDialog();
         }
 
-        private void btnAdvanced_Click(object sender, EventArgs e)
+        private void BtnAdvanced_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FAdvancedScanSettings>();
             ScanProfile.DriverName = DeviceDriverName;
@@ -451,26 +448,23 @@ namespace NAPS2.WinForms
             form.ShowDialog();
         }
 
-        private void cbAutoSave_CheckedChanged(object sender, EventArgs e)
+        private void CbAutoSave_CheckedChanged(object sender, EventArgs e)
         {
             if (!suppressChangeEvent)
             {
-                if (cbAutoSave.Checked)
+                if (CbAutoSave.Checked)
                 {
-                    linkAutoSaveSettings.Enabled = true;
+                    LinkAutoSaveSettings.Enabled = true;
                     var form = FormFactory.Create<FAutoSaveSettings>();
                     form.ScanProfile = ScanProfile;
                     form.ShowDialog();
-                    if (!form.Result)
-                    {
-                        cbAutoSave.Checked = false;
-                    }
+                    CbAutoSave.Checked &= form.Result;
                 }
             }
-            linkAutoSaveSettings.Enabled = cbAutoSave.Checked;
+            LinkAutoSaveSettings.Enabled = CbAutoSave.Checked;
         }
 
-        private void txtDevice_KeyDown(object sender, KeyEventArgs e)
+        private void TxtDevice_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {

@@ -130,84 +130,84 @@
         <value>4</value>
     </data>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnZoomIn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <data name="BtnZoomIn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
         <value>Flat</value>
     </data>
-    <data name="btnZoomIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnZoomIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnZoomIn.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnZoomIn.Location" type="System.Drawing.Point, System.Drawing">
         <value>32, 439</value>
     </data>
-    <data name="btnZoomIn.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnZoomIn.Size" type="System.Drawing.Size, System.Drawing">
         <value>23, 23</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnZoomIn.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnZoomIn.TabIndex" type="System.Int32, mscorlib">
         <value>9</value>
     </data>
-    <data name="&gt;&gt;btnZoomIn.Name" xml:space="preserve">
-        <value>btnZoomIn</value>
+    <data name="&gt;&gt;BtnZoomIn.Name" xml:space="preserve">
+        <value>BtnZoomIn</value>
     </data>
-    <data name="&gt;&gt;btnZoomIn.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomIn.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnZoomIn.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomIn.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
     </data>
-    <data name="&gt;&gt;btnZoomIn.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomIn.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="btnZoomOut.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <data name="BtnZoomOut.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
         <value>Flat</value>
     </data>
-    <data name="btnZoomOut.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnZoomOut.Location" type="System.Drawing.Point, System.Drawing">
         <value>10, 439</value>
     </data>
-    <data name="btnZoomOut.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnZoomOut.Size" type="System.Drawing.Size, System.Drawing">
         <value>23, 23</value>
     </data>
-    <data name="btnZoomOut.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnZoomOut.TabIndex" type="System.Int32, mscorlib">
         <value>8</value>
     </data>
-    <data name="&gt;&gt;btnZoomOut.Name" xml:space="preserve">
-        <value>btnZoomOut</value>
+    <data name="&gt;&gt;BtnZoomOut.Name" xml:space="preserve">
+        <value>BtnZoomOut</value>
     </data>
-    <data name="&gt;&gt;btnZoomOut.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomOut.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnZoomOut.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomOut.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
     </data>
-    <data name="&gt;&gt;btnZoomOut.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomOut.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="btnZoomMouseCatcher.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <data name="BtnZoomMouseCatcher.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
         <value>Flat</value>
     </data>
-    <data name="btnZoomMouseCatcher.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnZoomMouseCatcher.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnZoomMouseCatcher.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnZoomMouseCatcher.Location" type="System.Drawing.Point, System.Drawing">
         <value>10, 439</value>
     </data>
-    <data name="btnZoomMouseCatcher.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnZoomMouseCatcher.Size" type="System.Drawing.Size, System.Drawing">
         <value>45, 23</value>
     </data>
-    <data name="btnZoomMouseCatcher.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnZoomMouseCatcher.TabIndex" type="System.Int32, mscorlib">
         <value>10</value>
     </data>
-    <data name="&gt;&gt;btnZoomMouseCatcher.Name" xml:space="preserve">
-        <value>btnZoomMouseCatcher</value>
+    <data name="&gt;&gt;BtnZoomMouseCatcher.Name" xml:space="preserve">
+        <value>BtnZoomMouseCatcher</value>
     </data>
-    <data name="&gt;&gt;btnZoomMouseCatcher.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomMouseCatcher.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnZoomMouseCatcher.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomMouseCatcher.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
     </data>
-    <data name="&gt;&gt;btnZoomMouseCatcher.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnZoomMouseCatcher.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
     <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -222,28 +222,28 @@
     <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
         <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="thumbnailList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <data name="ThumbnailList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
         <value>Fill</value>
     </data>
-    <data name="thumbnailList1.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="ThumbnailList1.Location" type="System.Drawing.Point, System.Drawing">
         <value>0, 0</value>
     </data>
-    <data name="thumbnailList1.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="ThumbnailList1.Size" type="System.Drawing.Size, System.Drawing">
         <value>1204, 472</value>
     </data>
-    <data name="thumbnailList1.TabIndex" type="System.Int32, mscorlib">
+    <data name="ThumbnailList1.TabIndex" type="System.Int32, mscorlib">
         <value>7</value>
     </data>
-    <data name="&gt;&gt;thumbnailList1.Name" xml:space="preserve">
-        <value>thumbnailList1</value>
+    <data name="&gt;&gt;ThumbnailList1.Name" xml:space="preserve">
+        <value>ThumbnailList1</value>
     </data>
-    <data name="&gt;&gt;thumbnailList1.Type" xml:space="preserve">
+    <data name="&gt;&gt;ThumbnailList1.Type" xml:space="preserve">
         <value>NAPS2.WinForms.ThumbnailList, NAPS2.Core, Version=5.5.0.37941, Culture=neutral, PublicKeyToken=null</value>
     </data>
-    <data name="&gt;&gt;thumbnailList1.Parent" xml:space="preserve">
+    <data name="&gt;&gt;ThumbnailList1.Parent" xml:space="preserve">
         <value>toolStripContainer1.ContentPanel</value>
     </data>
-    <data name="&gt;&gt;thumbnailList1.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;ThumbnailList1.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
     <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
@@ -297,22 +297,22 @@
     <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
         <value>13</value>
     </data>
-    <metadata name="tStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <metadata name="TStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>152, 17</value>
     </metadata>
-    <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <data name="TStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <data name="TsScan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
-    <data name="tsScan.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsScan.Size" type="System.Drawing.Size, System.Drawing">
         <value>58, 51</value>
     </data>
-    <data name="tsScan.Text" xml:space="preserve">
+    <data name="TsScan.Text" xml:space="preserve">
         <value>Scannen</value>
     </data>
-    <data name="tsScan.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <data name="TsScan.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
     </data>
     <data name="tsProfiles.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -450,49 +450,49 @@
     <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
         <value>182, 6</value>
     </data>
-    <data name="tsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsCrop.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsCrop.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsCrop.Size" type="System.Drawing.Size, System.Drawing">
         <value>185, 22</value>
     </data>
-    <data name="tsCrop.Text" xml:space="preserve">
+    <data name="TsCrop.Text" xml:space="preserve">
         <value>Zuschneiden</value>
     </data>
-    <data name="tsBrightnessContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsBrightnessContrast.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsBrightnessContrast.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsBrightnessContrast.Size" type="System.Drawing.Size, System.Drawing">
         <value>185, 22</value>
     </data>
-    <data name="tsBrightnessContrast.Text" xml:space="preserve">
+    <data name="TsBrightnessContrast.Text" xml:space="preserve">
         <value>Helligkeit / Kontrast</value>
     </data>
-    <data name="tsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsHueSaturation.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsHueSaturation.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsHueSaturation.Size" type="System.Drawing.Size, System.Drawing">
         <value>185, 22</value>
     </data>
-    <data name="tsHueSaturation.Text" xml:space="preserve">
+    <data name="TsHueSaturation.Text" xml:space="preserve">
         <value>Farbton / Sättigung</value>
     </data>
-    <data name="tsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsBlackWhite.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsBlackWhite.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsBlackWhite.Size" type="System.Drawing.Size, System.Drawing">
         <value>185, 22</value>
     </data>
-    <data name="tsBlackWhite.Text" xml:space="preserve">
+    <data name="TsBlackWhite.Text" xml:space="preserve">
         <value>Schwarz-&amp;Weiß</value>
     </data>
-    <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsSharpen.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsSharpen.Size" type="System.Drawing.Size, System.Drawing">
         <value>185, 22</value>
     </data>
-    <data name="tsSharpen.Text" xml:space="preserve">
+    <data name="TsSharpen.Text" xml:space="preserve">
         <value>&amp;Schärfen</value>
     </data>
     <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
@@ -552,16 +552,16 @@
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>6, 54</value>
     </data>
-    <data name="tsDelete.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <data name="TsDelete.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
     </data>
-    <data name="tsDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsDelete.Size" type="System.Drawing.Size, System.Drawing">
         <value>64, 51</value>
     </data>
-    <data name="tsDelete.Text" xml:space="preserve">
+    <data name="TsDelete.Text" xml:space="preserve">
         <value>Löschen</value>
     </data>
-    <data name="tsDelete.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <data name="TsDelete.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
     </data>
     <data name="tsClear.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -642,28 +642,28 @@
     <data name="tsAbout.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
         <value>ImageAboveText</value>
     </data>
-    <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="TStrip.Location" type="System.Drawing.Point, System.Drawing">
         <value>3, 0</value>
     </data>
-    <data name="tStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TStrip.Size" type="System.Drawing.Size, System.Drawing">
         <value>1201, 54</value>
     </data>
-    <data name="tStrip.TabIndex" type="System.Int32, mscorlib">
+    <data name="TStrip.TabIndex" type="System.Int32, mscorlib">
         <value>12</value>
     </data>
-    <data name="tStrip.Text" xml:space="preserve">
+    <data name="TStrip.Text" xml:space="preserve">
         <value>Hauptwerkzeugleiste</value>
     </data>
-    <data name="&gt;&gt;tStrip.Name" xml:space="preserve">
-        <value>tStrip</value>
+    <data name="&gt;&gt;TStrip.Name" xml:space="preserve">
+        <value>TStrip</value>
     </data>
-    <data name="&gt;&gt;tStrip.Type" xml:space="preserve">
+    <data name="&gt;&gt;TStrip.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tStrip.Parent" xml:space="preserve">
+    <data name="&gt;&gt;TStrip.Parent" xml:space="preserve">
         <value>toolStripContainer1.TopToolStripPanel</value>
     </data>
-    <data name="&gt;&gt;tStrip.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;TStrip.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
@@ -738,13 +738,13 @@
     <data name="ctxDelete.Text" xml:space="preserve">
         <value>Löschen</value>
     </data>
-    <data name="tsNewProfile.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsNewProfile.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsNewProfile.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsNewProfile.Size" type="System.Drawing.Size, System.Drawing">
         <value>135, 22</value>
     </data>
-    <data name="tsNewProfile.Text" xml:space="preserve">
+    <data name="TsNewProfile.Text" xml:space="preserve">
         <value>&amp;Neues Profil</value>
     </data>
     <data name="tsBatchScan.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
@@ -756,16 +756,16 @@
     <data name="tsBatchScan.Text" xml:space="preserve">
         <value>Stapel-Scan</value>
     </data>
-    <data name="tsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsSavePDFAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
     </data>
-    <data name="tsSavePDFAll.Text" xml:space="preserve">
+    <data name="TsSavePDFAll.Text" xml:space="preserve">
         <value>&amp;Alle ({0})</value>
     </data>
-    <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
     </data>
-    <data name="tsSavePDFSelected.Text" xml:space="preserve">
+    <data name="TsSavePDFSelected.Text" xml:space="preserve">
         <value>Ausgewählt ({0})</value>
     </data>
     <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
@@ -777,16 +777,16 @@
     <data name="tsPDFSettings.Text" xml:space="preserve">
         <value>&amp;PDF Einstellungen</value>
     </data>
-    <data name="tsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsSaveImagesAll.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
     </data>
-    <data name="tsSaveImagesAll.Text" xml:space="preserve">
+    <data name="TsSaveImagesAll.Text" xml:space="preserve">
         <value>&amp;Alle ({0})</value>
     </data>
-    <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
     </data>
-    <data name="tsSaveImagesSelected.Text" xml:space="preserve">
+    <data name="TsSaveImagesSelected.Text" xml:space="preserve">
         <value>Ausgewählt ({0})</value>
     </data>
     <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
@@ -825,46 +825,46 @@
     <data name="tsPdfSettings2.Text" xml:space="preserve">
         <value>&amp;PDF Einstellungen</value>
     </data>
-    <data name="tsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsRotateLeft.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
-    <data name="tsRotateLeft.Text" xml:space="preserve">
+    <data name="TsRotateLeft.Text" xml:space="preserve">
         <value>&amp;Links drehen</value>
     </data>
-    <data name="tsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsRotateRight.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
-    <data name="tsRotateRight.Text" xml:space="preserve">
+    <data name="TsRotateRight.Text" xml:space="preserve">
         <value>&amp;Rechts drehen</value>
     </data>
-    <data name="tsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsFlip.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsFlip.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
-    <data name="tsFlip.Text" xml:space="preserve">
+    <data name="TsFlip.Text" xml:space="preserve">
         <value>Spiegeln</value>
     </data>
-    <data name="tsDeskew.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <data name="TsDeskew.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsDeskew.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
-    <data name="tsDeskew.Text" xml:space="preserve">
+    <data name="TsDeskew.Text" xml:space="preserve">
         <value>Schräglagenkorrektur</value>
     </data>
-    <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>
     </data>
-    <data name="tsCustomRotation.Text" xml:space="preserve">
+    <data name="TsCustomRotation.Text" xml:space="preserve">
         <value>Benutzerdefinierter Rotation</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
@@ -992,16 +992,16 @@
     <data name="&gt;&gt;ctxDelete.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsScan.Name" xml:space="preserve">
-        <value>tsScan</value>
+    <data name="&gt;&gt;TsScan.Name" xml:space="preserve">
+        <value>TsScan</value>
     </data>
-    <data name="&gt;&gt;tsScan.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsScan.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsNewProfile.Name" xml:space="preserve">
-        <value>tsNewProfile</value>
+    <data name="&gt;&gt;TsNewProfile.Name" xml:space="preserve">
+        <value>TsNewProfile</value>
     </data>
-    <data name="&gt;&gt;tsNewProfile.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsNewProfile.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;tsBatchScan.Name" xml:space="preserve">
@@ -1040,16 +1040,16 @@
     <data name="&gt;&gt;tsdSavePDF.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsSavePDFAll.Name" xml:space="preserve">
-        <value>tsSavePDFAll</value>
+    <data name="&gt;&gt;TsSavePDFAll.Name" xml:space="preserve">
+        <value>TsSavePDFAll</value>
     </data>
-    <data name="&gt;&gt;tsSavePDFAll.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsSavePDFAll.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsSavePDFSelected.Name" xml:space="preserve">
-        <value>tsSavePDFSelected</value>
+    <data name="&gt;&gt;TsSavePDFSelected.Name" xml:space="preserve">
+        <value>TsSavePDFSelected</value>
     </data>
-    <data name="&gt;&gt;tsSavePDFSelected.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsSavePDFSelected.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
@@ -1070,16 +1070,16 @@
     <data name="&gt;&gt;tsdSaveImages.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsSaveImagesAll.Name" xml:space="preserve">
-        <value>tsSaveImagesAll</value>
+    <data name="&gt;&gt;TsSaveImagesAll.Name" xml:space="preserve">
+        <value>TsSaveImagesAll</value>
     </data>
-    <data name="&gt;&gt;tsSaveImagesAll.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsSaveImagesAll.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsSaveImagesSelected.Name" xml:space="preserve">
-        <value>tsSaveImagesSelected</value>
+    <data name="&gt;&gt;TsSaveImagesSelected.Name" xml:space="preserve">
+        <value>TsSaveImagesSelected</value>
     </data>
-    <data name="&gt;&gt;tsSaveImagesSelected.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsSaveImagesSelected.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
@@ -1160,22 +1160,22 @@
     <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsCrop.Name" xml:space="preserve">
-        <value>tsCrop</value>
+    <data name="&gt;&gt;TsCrop.Name" xml:space="preserve">
+        <value>TsCrop</value>
     </data>
-    <data name="&gt;&gt;tsCrop.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsCrop.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsBrightnessContrast.Name" xml:space="preserve">
-        <value>tsBrightnessContrast</value>
+    <data name="&gt;&gt;TsBrightnessContrast.Name" xml:space="preserve">
+        <value>TsBrightnessContrast</value>
     </data>
-    <data name="&gt;&gt;tsBrightnessContrast.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsBrightnessContrast.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsSharpen.Name" xml:space="preserve">
-        <value>tsSharpen</value>
+    <data name="&gt;&gt;TsSharpen.Name" xml:space="preserve">
+        <value>TsSharpen</value>
     </data>
-    <data name="&gt;&gt;tsSharpen.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsSharpen.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
@@ -1196,34 +1196,34 @@
     <data name="&gt;&gt;tsdRotate.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsRotateLeft.Name" xml:space="preserve">
-        <value>tsRotateLeft</value>
+    <data name="&gt;&gt;TsRotateLeft.Name" xml:space="preserve">
+        <value>TsRotateLeft</value>
     </data>
-    <data name="&gt;&gt;tsRotateLeft.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsRotateLeft.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsRotateRight.Name" xml:space="preserve">
-        <value>tsRotateRight</value>
+    <data name="&gt;&gt;TsRotateRight.Name" xml:space="preserve">
+        <value>TsRotateRight</value>
     </data>
-    <data name="&gt;&gt;tsRotateRight.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsRotateRight.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsFlip.Name" xml:space="preserve">
-        <value>tsFlip</value>
+    <data name="&gt;&gt;TsFlip.Name" xml:space="preserve">
+        <value>TsFlip</value>
     </data>
-    <data name="&gt;&gt;tsFlip.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsFlip.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsDeskew.Name" xml:space="preserve">
-        <value>tsDeskew</value>
+    <data name="&gt;&gt;TsDeskew.Name" xml:space="preserve">
+        <value>TsDeskew</value>
     </data>
-    <data name="&gt;&gt;tsDeskew.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsDeskew.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsCustomRotation.Name" xml:space="preserve">
-        <value>tsCustomRotation</value>
+    <data name="&gt;&gt;TsCustomRotation.Name" xml:space="preserve">
+        <value>TsCustomRotation</value>
     </data>
-    <data name="&gt;&gt;tsCustomRotation.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsCustomRotation.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;tsMove.Name" xml:space="preserve">
@@ -1298,10 +1298,10 @@
     <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsDelete.Name" xml:space="preserve">
-        <value>tsDelete</value>
+    <data name="&gt;&gt;TsDelete.Name" xml:space="preserve">
+        <value>TsDelete</value>
     </data>
-    <data name="&gt;&gt;tsDelete.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsDelete.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;tsClear.Name" xml:space="preserve">
@@ -1328,16 +1328,16 @@
     <data name="&gt;&gt;tsAbout.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsHueSaturation.Name" xml:space="preserve">
-        <value>tsHueSaturation</value>
+    <data name="&gt;&gt;TsHueSaturation.Name" xml:space="preserve">
+        <value>TsHueSaturation</value>
     </data>
-    <data name="&gt;&gt;tsHueSaturation.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsHueSaturation.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tsBlackWhite.Name" xml:space="preserve">
-        <value>tsBlackWhite</value>
+    <data name="&gt;&gt;TsBlackWhite.Name" xml:space="preserve">
+        <value>TsBlackWhite</value>
     </data>
-    <data name="&gt;&gt;tsBlackWhite.Type" xml:space="preserve">
+    <data name="&gt;&gt;TsBlackWhite.Type" xml:space="preserve">
         <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">

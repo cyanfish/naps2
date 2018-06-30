@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -11,11 +10,8 @@ namespace NAPS2.WinForms
     {
         private int currentButton = -1;
 
-        public ToolStripDoubleButton()
-        {
-        }
-
         public event EventHandler ClickFirst;
+
         public event EventHandler ClickSecond;
 
         public Image ImageFirst { get; set; }
@@ -23,6 +19,7 @@ namespace NAPS2.WinForms
 
         [Localizable(true)]
         public string TextFirst { get; set; }
+
         [Localizable(true)]
         public string TextSecond { get; set; }
 
@@ -31,13 +28,13 @@ namespace NAPS2.WinForms
         public override Size GetPreferredSize(Size constrainingSize)
         {
             bool wrap = false;
-            var sumWidth = Padding.Left + Padding.Right +
-                           Math.Max(ImageFirst != null ? ImageFirst.Width : 0,
-                               ImageSecond != null ? ImageSecond.Width : 0)
+            var sumWidth = Padding.Left + Padding.Right
+                           + Math.Max(ImageFirst?.Width ?? 0,
+                               ImageSecond?.Width ?? 0)
                            + Math.Max(MeasureTextWidth(TextFirst, ref wrap), MeasureTextWidth(TextSecond, ref wrap));
-            var sumHeight = Padding.Top + Padding.Bottom +
-                           (ImageFirst != null ? ImageFirst.Height : 0)
-                           + (ImageSecond != null ? ImageSecond.Height : 0)
+            var sumHeight = Padding.Top + Padding.Bottom
+                           + (ImageFirst?.Height ?? 0)
+                           + (ImageSecond?.Height ?? 0)
                            + 16 + (wrap ? 12 : 0);
             return new Size(sumWidth, sumHeight);
         }
@@ -75,7 +72,7 @@ namespace NAPS2.WinForms
             var oldHeight = Height;
             var oldParent = Parent;
             Parent = null;
-            Height = Height / 2;
+            Height /= 2;
             e.Graphics.TranslateTransform(0, currentButton == 1 ? Height : 0);
             renderer.DrawButtonBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
             e.Graphics.TranslateTransform(0, currentButton == 1 ? -Height : 0);
@@ -94,11 +91,11 @@ namespace NAPS2.WinForms
             {
                 if (Enabled)
                 {
-                    e.Graphics.DrawImage(ImageFirst, new Point(Padding.Left, Height / 4 - ImageFirst.Height / 2));
+                    e.Graphics.DrawImage(ImageFirst, new Point(Padding.Left, (Height / 4) - (ImageFirst.Height / 2)));
                 }
                 else
                 {
-                    ControlPaint.DrawImageDisabled(e.Graphics, ImageFirst, Padding.Left, Height / 4 - ImageFirst.Height / 2, Color.Transparent);
+                    ControlPaint.DrawImageDisabled(e.Graphics, ImageFirst, Padding.Left, (Height / 4) - (ImageFirst.Height / 2), Color.Transparent);
                 }
 
                 var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, textWidth, Height / 2);
@@ -109,11 +106,11 @@ namespace NAPS2.WinForms
             {
                 if (Enabled)
                 {
-                    e.Graphics.DrawImage(ImageSecond, new Point(Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2));
+                    e.Graphics.DrawImage(ImageSecond, new Point(Padding.Left, (Height * 3 / 4) - (ImageSecond.Height / 2)));
                 }
                 else
                 {
-                    ControlPaint.DrawImageDisabled(e.Graphics, ImageSecond, Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2, Color.Transparent);
+                    ControlPaint.DrawImageDisabled(e.Graphics, ImageSecond, Padding.Left, (Height * 3 / 4) - (ImageSecond.Height / 2), Color.Transparent);
                 }
 
                 var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, textWidth, Height / 2);

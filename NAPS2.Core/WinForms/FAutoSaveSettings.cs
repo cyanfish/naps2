@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.ImportExport;
 using NAPS2.Scan;
+using System;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
@@ -20,11 +18,11 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             if (ScanProfile.AutoSaveSettings != null)
             {
-                txtFilePath.Text = ScanProfile.AutoSaveSettings.FilePath;
+                TxtFilePath.Text = ScanProfile.AutoSaveSettings.FilePath;
                 cbPromptForFilePath.Checked = ScanProfile.AutoSaveSettings.PromptForFilePath;
                 cbClearAfterSave.Checked = ScanProfile.AutoSaveSettings.ClearImagesAfterSaving;
                 if (ScanProfile.AutoSaveSettings.Separator == SaveSeparator.FilePerScan)
@@ -42,9 +40,9 @@ namespace NAPS2.WinForms
             }
 
             new LayoutManager(this)
-                .Bind(txtFilePath)
+                .Bind(TxtFilePath)
                     .WidthToForm()
-                .Bind(btnChooseFolder, btnOK, btnCancel)
+                .Bind(BtnChooseFolder, BtnOK, BtnCancel)
                     .RightToForm()
                 .Activate();
         }
@@ -57,7 +55,7 @@ namespace NAPS2.WinForms
         {
             ScanProfile.AutoSaveSettings = new AutoSaveSettings
             {
-                FilePath = txtFilePath.Text,
+                FilePath = TxtFilePath.Text,
                 PromptForFilePath = cbPromptForFilePath.Checked,
                 ClearImagesAfterSaving = cbClearAfterSave.Checked,
                 Separator = rdFilePerScan.Checked ? SaveSeparator.FilePerScan
@@ -66,11 +64,11 @@ namespace NAPS2.WinForms
             };
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtFilePath.Text) && !cbPromptForFilePath.Checked)
+            if (string.IsNullOrWhiteSpace(TxtFilePath.Text) && !cbPromptForFilePath.Checked)
             {
-                txtFilePath.Focus();
+                TxtFilePath.Focus();
                 return;
             }
             result = true;
@@ -78,31 +76,30 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnChooseFolder_Click(object sender, EventArgs e)
+        private void BtnChooseFolder_Click(object sender, EventArgs e)
         {
-            string savePath;
-            if (dialogHelper.PromptToSavePdfOrImage(null, out savePath))
+            if (dialogHelper.PromptToSavePdfOrImage(null, out string savePath))
             {
-                txtFilePath.Text = savePath;
+                TxtFilePath.Text = savePath;
             }
         }
 
-        private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = FormFactory.Create<FPlaceholders>();
-            form.FileName = txtFilePath.Text;
+            form.FileName = TxtFilePath.Text;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                txtFilePath.Text = form.FileName;
+                TxtFilePath.Text = form.FileName;
             }
         }
 
-        private void linkPatchCodeInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkPatchCodeInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(FBatchScan.PATCH_CODE_INFO_URL);
         }

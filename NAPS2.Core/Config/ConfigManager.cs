@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml.Serialization;
 using NAPS2.Util;
+using System;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace NAPS2.Config
 {

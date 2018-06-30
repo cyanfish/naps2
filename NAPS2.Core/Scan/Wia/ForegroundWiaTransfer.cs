@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.WinForms;
+using System.IO;
+using System.Windows.Forms;
 using WIA;
 
 namespace NAPS2.Scan.Wia

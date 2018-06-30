@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Util
@@ -27,7 +25,7 @@ namespace NAPS2.Util
 
         public Unmanaged(T value)
         {
-            if (!ReferenceEquals(value, null))
+            if (!System.Collections.Generic.EqualityComparer<T>.Default.Equals(value, default(T)))
             {
                 Size = Marshal.SizeOf(typeof(T));
                 Pointer = Marshal.AllocHGlobal(Size);

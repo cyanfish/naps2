@@ -1,8 +1,7 @@
-﻿using System;
+﻿using NAPS2.Scan;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan;
 
 namespace NAPS2.WinForms
 {
@@ -12,52 +11,52 @@ namespace NAPS2.WinForms
         {
             RestoreFormState = false;
             InitializeComponent();
-            AcceptButton = btnSelect;
-            CancelButton = btnCancel;
+            AcceptButton = BtnSelect;
+            CancelButton = BtnCancel;
         }
 
-        public List<ScanDevice> DeviceList { get; set; } 
+        public List<ScanDevice> DeviceList { get; set; }
 
         public ScanDevice SelectedDevice { get; private set; }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             new LayoutManager(this)
-                .Bind(listboxDevices)
+                .Bind(ListboxDevices)
                     .WidthToForm()
                     .HeightToForm()
-                .Bind(btnSelect, btnCancel)
+                .Bind(BtnSelect, BtnCancel)
                     .RightToForm()
                 .Activate();
 
             foreach (var device in DeviceList)
             {
-                listboxDevices.Items.Add(device);
+                ListboxDevices.Items.Add(device);
             }
-            if (listboxDevices.Items.Count > 0)
+            if (ListboxDevices.Items.Count > 0)
             {
-                listboxDevices.SelectedIndex = 0;
+                ListboxDevices.SelectedIndex = 0;
             }
         }
 
-        private void listboxDevices_Format(object sender, ListControlConvertEventArgs e)
+        private void ListboxDevices_Format(object sender, ListControlConvertEventArgs e)
         {
             e.Value = ((ScanDevice)e.ListItem).Name;
         }
 
-        private void btnSelect_Click(object sender, EventArgs e)
+        private void BtnSelect_Click(object sender, EventArgs e)
         {
-            if (listboxDevices.SelectedItem == null)
+            if (ListboxDevices.SelectedItem == null)
             {
-                listboxDevices.Focus();
+                ListboxDevices.Focus();
                 return;
             }
             DialogResult = DialogResult.OK;
-            SelectedDevice = ((ScanDevice) listboxDevices.SelectedItem);
+            SelectedDevice = ((ScanDevice)ListboxDevices.SelectedItem);
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

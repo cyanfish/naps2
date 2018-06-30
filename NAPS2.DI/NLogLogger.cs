@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
+using System;
+using System.IO;
 
 namespace NAPS2.DI
 {

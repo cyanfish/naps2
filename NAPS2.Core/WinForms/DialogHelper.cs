@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using NAPS2.Config;
+﻿using NAPS2.Config;
 using NAPS2.Lang.Resources;
+using System.IO;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
@@ -85,22 +82,28 @@ namespace NAPS2.WinForms
                 case "bmp":
                     sd.FilterIndex = 1;
                     break;
+
                 case "emf":
                     sd.FilterIndex = 2;
                     break;
+
                 case "exif":
                     sd.FilterIndex = 3;
                     break;
+
                 case "gif":
                     sd.FilterIndex = 4;
                     break;
+
                 case "png":
                     sd.FilterIndex = 6;
                     break;
+
                 case "tif":
                 case "tiff":
                     sd.FilterIndex = 7;
                     break;
+
                 default: // Jpeg
                     sd.FilterIndex = 5;
                     break;

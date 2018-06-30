@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
-using NAPS2.Config;
+﻿using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -14,8 +7,14 @@ using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
-using NAPS2.Util;
 using NAPS2.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace NAPS2.Scan.Batch
 {
@@ -25,18 +24,18 @@ namespace NAPS2.Scan.Batch
         private readonly IProfileManager profileManager;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly IPdfExporter pdfExporter;
-        private readonly IOperationFactory operationFactory;
+        private readonly IOperationFactory OperationFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IFormFactory formFactory;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
+        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory OperationFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
         {
             this.scanPerformer = scanPerformer;
             this.profileManager = profileManager;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
-            this.operationFactory = operationFactory;
+            this.OperationFactory = OperationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.ocrDependencyManager = ocrDependencyManager;
             this.formFactory = formFactory;
@@ -44,7 +43,7 @@ namespace NAPS2.Scan.Batch
 
         public void PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
-            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, ocrDependencyManager, formFactory)
+            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, OperationFactory, pdfSettingsContainer, ocrDependencyManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -60,7 +59,7 @@ namespace NAPS2.Scan.Batch
             private readonly IProfileManager profileManager;
             private readonly FileNamePlaceholders fileNamePlaceholders;
             private readonly IPdfExporter pdfExporter;
-            private readonly IOperationFactory operationFactory;
+            private readonly IOperationFactory OperationFactory;
             private readonly PdfSettingsContainer pdfSettingsContainer;
             private readonly OcrDependencyManager ocrDependencyManager;
             private readonly IFormFactory formFactory;
@@ -69,13 +68,13 @@ namespace NAPS2.Scan.Batch
             private ScanParams scanParams;
             private List<List<ScannedImage>> scans;
 
-            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
+            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory OperationFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
             {
                 this.scanPerformer = scanPerformer;
                 this.profileManager = profileManager;
                 this.fileNamePlaceholders = fileNamePlaceholders;
                 this.pdfExporter = pdfExporter;
-                this.operationFactory = operationFactory;
+                this.OperationFactory = OperationFactory;
                 this.pdfSettingsContainer = pdfSettingsContainer;
                 this.ocrDependencyManager = ocrDependencyManager;
                 this.formFactory = formFactory;
@@ -113,51 +112,54 @@ namespace NAPS2.Scan.Batch
             private void Input()
             {
                 scans = new List<List<ScannedImage>>();
-
-                if (Settings.ScanType == BatchScanType.Single)
+                switch (Settings.ScanType)
                 {
-                    if (!InputOneScan(-1))
-                    {
-                        return;
-                    }
-                }
-                else if (Settings.ScanType == BatchScanType.MultipleWithDelay)
-                {
-                    for (int i = 0; i < Settings.ScanCount; i++)
-                    {
-                        if (i != 0)
+                    case BatchScanType.Single:
+                        if (!InputOneScan(-1))
                         {
-                            string status = string.Format(MiscResources.BatchStatusWaitingForScan, i + 1);
-                            if (!ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds), TimeSpan.FromSeconds(1),
-                                () => ProgressCallback(status)))
+                            return;
+                        }
+
+                        break;
+
+                    case BatchScanType.MultipleWithDelay:
+                        for (var a = 0; a < Settings.ScanCount; a++)
+                        {
+                            if (a != 0)
+                            {
+                                string status = string.Format(MiscResources.BatchStatusWaitingForScan, a + 1);
+                                if (!ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds), TimeSpan.FromSeconds(1),
+                                    () => ProgressCallback(status)))
+                                {
+                                    return;
+                                }
+                            }
+                            if (!InputOneScan(a))
+                            {
+                                return;
+                            }
+                            if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, a + 2)))
                             {
                                 return;
                             }
                         }
-                        if (!InputOneScan(i))
+
+                        break;
+
+                    case BatchScanType.MultipleWithPrompt:
+                        int i = 0;
+                        do
                         {
-                            return;
-                        }
-                        if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 2)))
-                        {
-                            return;
-                        }
-                    }
-                }
-                else if (Settings.ScanType == BatchScanType.MultipleWithPrompt)
-                {
-                    int i = 0;
-                    do
-                    {
-                        if (!InputOneScan(i++))
-                        {
-                            return;
-                        }
-                        if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1)))
-                        {
-                            return;
-                        }
-                    } while (PromptForNextScan());
+                            if (!InputOneScan(i++))
+                            {
+                                return;
+                            }
+                            if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1)))
+                            {
+                                return;
+                            }
+                        } while (PromptForNextScan());
+                        break;
                 }
             }
 
@@ -246,33 +248,37 @@ namespace NAPS2.Scan.Batch
 
                 var now = DateTime.Now;
                 var allImages = scans.SelectMany(x => x).ToList();
+                switch (Settings.OutputType)
+                {
+                    case BatchOutputType.Load:
+                        foreach (var image in allImages)
+                        {
+                            LoadImageCallback(image);
+                        }
 
-                if (Settings.OutputType == BatchOutputType.Load)
-                {
-                    foreach (var image in allImages)
-                    {
-                        LoadImageCallback(image);
-                    }
-                }
-                else if (Settings.OutputType == BatchOutputType.SingleFile)
-                {
-                    Save(now, 0, allImages);
-                    foreach (var img in allImages)
-                    {
-                        img.Dispose();
-                    }
-                }
-                else if (Settings.OutputType == BatchOutputType.MultipleFiles)
-                {
-                    int i = 0;
-                    foreach (var imageList in SaveSeparatorHelper.SeparateScans(scans, Settings.SaveSeparator))
-                    {
-                        Save(now, i++, imageList);
-                        foreach (var img in imageList)
+                        break;
+
+                    case BatchOutputType.SingleFile:
+                        Save(now, 0, allImages);
+                        foreach (var img in allImages)
                         {
                             img.Dispose();
                         }
-                    }
+
+                        break;
+
+                    case BatchOutputType.MultipleFiles:
+                        int i = 0;
+                        foreach (var imageList in SaveSeparatorHelper.SeparateScans(scans, Settings.SaveSeparator))
+                        {
+                            Save(now, i++, imageList);
+                            foreach (var img in imageList)
+                            {
+                                img.Dispose();
+                            }
+                        }
+
+                        break;
                 }
             }
 
@@ -283,7 +289,7 @@ namespace NAPS2.Scan.Batch
                     return;
                 }
                 var subPath = fileNamePlaceholders.SubstitutePlaceholders(Settings.SavePath, now, true, i);
-                if (GetSavePathExtension().ToLower() == ".pdf")
+                if (string.Equals(GetSavePathExtension(), ".pdf", StringComparison.CurrentCultureIgnoreCase))
                 {
                     if (File.Exists(subPath))
                     {
@@ -293,7 +299,7 @@ namespace NAPS2.Scan.Batch
                 }
                 else
                 {
-                    var op = operationFactory.Create<SaveImagesOperation>();
+                    var op = OperationFactory.Create<SaveImagesOperation>();
                     op.Start(subPath, now, images, true);
                     op.WaitUntilFinished();
                 }

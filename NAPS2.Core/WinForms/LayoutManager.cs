@@ -1,17 +1,19 @@
-﻿using System;
+﻿using NAPS2.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Forms;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
     /// <summary>
+    /// <para>
     /// A layout manager for WinForms that takes advantage of the relative sizes and positions of controls from the WinForms designer.
     /// When the LayoutManager is activated, the layout will initially stay the same and then smoothly change as the form is resized.
     /// Note that the layout manager is designed to be "stretch-only", i.e. it won't change the flow of the controls.
-    /// 
+    /// </para>
+    /// <para>
     /// LayoutManager provides fluent syntax that is typically used similarly to the following:
     ///     new LayoutManager(this)                 // Init layout manager with a reference to the form
     ///         .Bind(control1)                     // Start describing bindings for control1
@@ -20,11 +22,13 @@ namespace NAPS2.WinForms
     ///             .Right(() => control3.Right)    // Both control1 and control2's right sides should stay aligned with control3's right side
     ///             .BottomToForm()                 // Both control1 and control2's bottom side should stay aligned with the form's bottom side
     ///         .Activate();                        // Start laying out controls in response to Resize events
-    /// 
+    /// </para>
+    /// <para>
     /// Note that the following bindings (for example) are equivalent:
     ///     .LeftToForm()
     ///     .LeftTo(() => form.Left)
-    /// 
+    /// </para>
+    /// <para>
     /// The more general form of binding (e.g. LeftTo) can be used with arbitrary expressions.
     /// Note that dependency tracking will only work if the dependent controls are accessed in the expression.
     /// Examples:
@@ -32,6 +36,7 @@ namespace NAPS2.WinForms
     ///     .LeftTo(() => control1.Left + control2.Width + SomeFunction())  // OK if SomeFunction doesn't depend on the size or position of any controls other than control1 or control2
     ///     .LeftTo(() => SomeFunction(control1))                           // OK
     ///     .LeftTo(() => SomeFunctionDependingOnControl1())                // NOT OK
+    /// </para>
     /// </summary>
     public class LayoutManager
     {
@@ -89,7 +94,7 @@ namespace NAPS2.WinForms
                 Form.Resize += OnFormResize;
                 Activated = true;
 
-                // Prepare a dependency graph for the controls 
+                // Prepare a dependency graph for the controls
                 var controls = new HashSet<Control>(); // Nodes
                 var controlBindings = new Dictionary<Control, HashSet<Binding>>(); // Node values
                 var dependencies = new Dictionary<Control, HashSet<Control>>(); // Edges (direction 1)
@@ -204,6 +209,7 @@ namespace NAPS2.WinForms
                         case BindingType.Top:
                             binding.Value = binding.DependentValue + offset;
                             break;
+
                         case BindingType.Right:
                             bool hasWidthBinding = bindings.Any(x => x.BindingType == BindingType.Width);
                             bool hasLeftBinding = bindings.Any(x => x.BindingType == BindingType.Left);
@@ -220,6 +226,7 @@ namespace NAPS2.WinForms
                                 control.Left = binding.DependentValue + offset - control.Width;
                             }
                             break;
+
                         case BindingType.Bottom:
                             bool hasHeightBinding = bindings.Any(x => x.BindingType == BindingType.Height);
                             bool hasTopBinding = bindings.Any(x => x.BindingType == BindingType.Top);
@@ -304,16 +311,22 @@ namespace NAPS2.WinForms
                     {
                         case BindingType.Width:
                             return Control.Width;
+
                         case BindingType.Height:
                             return Control.Height;
+
                         case BindingType.Left:
                             return Control.Left;
+
                         case BindingType.Right:
                             return Control.Right;
+
                         case BindingType.Top:
                             return Control.Top;
+
                         case BindingType.Bottom:
                             return Control.Bottom;
+
                         default:
                             throw new InvalidOperationException();
                     }
@@ -325,15 +338,19 @@ namespace NAPS2.WinForms
                         case BindingType.Width:
                             Control.Width = value;
                             break;
+
                         case BindingType.Height:
                             Control.Height = value;
                             break;
+
                         case BindingType.Left:
                             Control.Left = value;
                             break;
+
                         case BindingType.Top:
                             Control.Top = value;
                             break;
+
                         default:
                             throw new InvalidOperationException();
                     }

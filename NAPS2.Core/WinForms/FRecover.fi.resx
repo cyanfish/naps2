@@ -146,76 +146,76 @@
     <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="btnRecover.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnRecover.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 58</value>
     </data>
-    <data name="btnRecover.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnRecover.Size" type="System.Drawing.Size, System.Drawing">
         <value>120, 30</value>
     </data>
-    <data name="btnRecover.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnRecover.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnRecover.Text" xml:space="preserve">
+    <data name="BtnRecover.Text" xml:space="preserve">
         <value>&amp;Recover</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Name" xml:space="preserve">
-        <value>btnRecover</value>
+    <data name="&gt;&gt;BtnRecover.Name" xml:space="preserve">
+        <value>BtnRecover</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnRecover.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnRecover.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnRecover.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnRecover.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnRecover.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnDelete.Location" type="System.Drawing.Point, System.Drawing">
         <value>138, 58</value>
     </data>
-    <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnDelete.Size" type="System.Drawing.Size, System.Drawing">
         <value>120, 30</value>
     </data>
-    <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnDelete.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="btnDelete.Text" xml:space="preserve">
+    <data name="BtnDelete.Text" xml:space="preserve">
         <value>Poista</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
-        <value>btnDelete</value>
+    <data name="&gt;&gt;BtnDelete.Name" xml:space="preserve">
+        <value>BtnDelete</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnDelete.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnDelete.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnDelete.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>264, 58</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>120, 30</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>&amp;Not Now</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Images;
-using NAPS2.Lang.Resources;
+using System;
+using System.Globalization;
+using System.IO;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
@@ -25,14 +22,14 @@ namespace NAPS2.WinForms
             AddEnumItems<TiffCompression>(cmbTiffCompr);
         }
 
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             new LayoutManager(this)
-                .Bind(btnRestoreDefaults, btnOK, btnCancel)
+                .Bind(BtnRestoreDefaults, BtnOK, BtnCancel)
                     .BottomToForm()
-                .Bind(txtJpegQuality, btnOK, btnCancel, btnChooseFolder)
+                .Bind(TxtJpegQuality, BtnOK, BtnCancel, BtnChooseFolder)
                     .RightToForm()
-                .Bind(txtDefaultFilePath, tbJpegQuality, lblWarning, groupTiff, groupJpeg)
+                .Bind(TxtDefaultFilePath, TbJpegQuality, lblWarning, groupTiff, groupJpeg)
                     .WidthToForm()
                 .Activate();
 
@@ -43,30 +40,30 @@ namespace NAPS2.WinForms
 
         private void UpdateValues(ImageSettings imageSettings)
         {
-            txtDefaultFilePath.Text = imageSettings.DefaultFileName;
+            TxtDefaultFilePath.Text = imageSettings.DefaultFileName;
             cbSkipSavePrompt.Checked = imageSettings.SkipSavePrompt;
-            txtJpegQuality.Text = imageSettings.JpegQuality.ToString(CultureInfo.InvariantCulture);
-            cmbTiffCompr.SelectedIndex = (int) imageSettings.TiffCompression;
+            TxtJpegQuality.Text = imageSettings.JpegQuality.ToString(CultureInfo.InvariantCulture);
+            cmbTiffCompr.SelectedIndex = (int)imageSettings.TiffCompression;
             cbSinglePageTiff.Checked = imageSettings.SinglePageTiff;
         }
 
         private void UpdateEnabled()
         {
-            cbSkipSavePrompt.Enabled = Path.IsPathRooted(txtDefaultFilePath.Text);
+            cbSkipSavePrompt.Enabled = Path.IsPathRooted(TxtDefaultFilePath.Text);
         }
 
-        private void txtDefaultFilePath_TextChanged(object sender, EventArgs e)
+        private void TxtDefaultFilePath_TextChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             var imageSettings = new ImageSettings
             {
-                DefaultFileName = txtDefaultFilePath.Text,
+                DefaultFileName = TxtDefaultFilePath.Text,
                 SkipSavePrompt = cbSkipSavePrompt.Checked,
-                JpegQuality = tbJpegQuality.Value,
+                JpegQuality = TbJpegQuality.Value,
                 TiffCompression = (TiffCompression)cmbTiffCompr.SelectedIndex,
                 SinglePageTiff = cbSinglePageTiff.Checked
             };
@@ -78,50 +75,48 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnRestoreDefaults_Click(object sender, EventArgs e)
+        private void BtnRestoreDefaults_Click(object sender, EventArgs e)
         {
             UpdateValues(new ImageSettings());
             cbRememberSettings.Checked = false;
         }
 
-        private void tbJpegQuality_Scroll(object sender, EventArgs e)
+        private void TbJpegQuality_Scroll(object sender, EventArgs e)
         {
-            txtJpegQuality.Text = tbJpegQuality.Value.ToString("G");
+            TxtJpegQuality.Text = TbJpegQuality.Value.ToString("G");
         }
 
-        private void txtJpegQuality_TextChanged(object sender, EventArgs e)
+        private void TxtJpegQuality_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtJpegQuality.Text, out value))
+            if (int.TryParse(TxtJpegQuality.Text, out int value))
             {
-                if (value >= tbJpegQuality.Minimum && value <= tbJpegQuality.Maximum)
+                if (value >= TbJpegQuality.Minimum && value <= TbJpegQuality.Maximum)
                 {
-                    tbJpegQuality.Value = value;
+                    TbJpegQuality.Value = value;
                 }
             }
         }
 
-        private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = FormFactory.Create<FPlaceholders>();
-            form.FileName = txtDefaultFilePath.Text;
+            form.FileName = TxtDefaultFilePath.Text;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                txtDefaultFilePath.Text = form.FileName;
+                TxtDefaultFilePath.Text = form.FileName;
             }
         }
 
-        private void btnChooseFolder_Click(object sender, EventArgs e)
+        private void BtnChooseFolder_Click(object sender, EventArgs e)
         {
-            string savePath;
-            if (dialogHelper.PromptToSaveImage(txtDefaultFilePath.Text, out savePath))
+            if (dialogHelper.PromptToSaveImage(TxtDefaultFilePath.Text, out string savePath))
             {
-                txtDefaultFilePath.Text = savePath;
+                TxtDefaultFilePath.Text = savePath;
             }
         }
     }

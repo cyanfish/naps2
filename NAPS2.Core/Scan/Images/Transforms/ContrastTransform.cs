@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 
 namespace NAPS2.Scan.Images.Transforms
 {
@@ -13,7 +11,7 @@ namespace NAPS2.Scan.Images.Transforms
 
         public override Bitmap Perform(Bitmap bitmap)
         {
-            float contrastAdjusted = Contrast / 1000f + 1.0f;
+            float contrastAdjusted = (Contrast / 1000f) + 1.0f;
 
             EnsurePixelFormat(ref bitmap);
             using (var g = Graphics.FromImage(bitmap))

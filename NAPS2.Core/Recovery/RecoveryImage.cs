@@ -1,19 +1,17 @@
-﻿using System;
+﻿using NAPS2.Scan;
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using NAPS2.Scan;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 
 namespace NAPS2.Recovery
 {
-    public class RecoveryImage : IDisposable
+    public sealed class RecoveryImage : IDisposable
     {
         public const string LOCK_FILE_NAME = ".lock";
 
@@ -21,8 +19,6 @@ namespace NAPS2.Recovery
         private static FileInfo _recoveryLockFile;
         private static FileStream _recoveryLock;
         private static RecoveryIndexManager _recoveryIndexManager;
-
-        private static int _recoveryFileNumber = 1;
 
         public static bool DisableRecoveryCleanup { get; set; }
 
@@ -53,11 +49,7 @@ namespace NAPS2.Recovery
             }
         }
 
-        public static int RecoveryFileNumber
-        {
-            get => _recoveryFileNumber;
-            set => _recoveryFileNumber = value;
-        }
+        public static int RecoveryFileNumber { get; set; } = 1;
 
         public static RecoveryImage CreateNew(ImageFormat fileFormat, ScanBitDepth bitDepth, bool highQuality, List<Transform> transformList)
         {
@@ -81,7 +73,7 @@ namespace NAPS2.Recovery
 
         private static string GetExtension(ImageFormat imageFormat)
         {
-            if (ReferenceEquals(imageFormat, null))
+            if (imageFormat is null)
             {
                 return ".pdf";
             }
@@ -102,7 +94,7 @@ namespace NAPS2.Recovery
         private RecoveryImage(ImageFormat fileFormat, ScanBitDepth bitDepth, bool highQuality, List<Transform> transformList)
         {
             FileFormat = fileFormat;
-            FileName = (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture) + GetExtension(FileFormat);
+            FileName = (RecoveryImage.RecoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture) + GetExtension(FileFormat);
             FilePath = Path.Combine(RecoveryFolder.FullName, FileName);
             IndexImage = new RecoveryIndexImage
             {
@@ -123,7 +115,7 @@ namespace NAPS2.Recovery
             string ext = Path.GetExtension(recoveryIndexImage.FileName);
             FileFormat = ".png".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ? ImageFormat.Png : ImageFormat.Jpeg;
             FileName = recoveryIndexImage.FileName;
-            _recoveryFileNumber++;
+            RecoveryImage.RecoveryFileNumber++;
             FilePath = Path.Combine(RecoveryFolder.FullName, FileName);
             IndexImage = recoveryIndexImage;
             Save();

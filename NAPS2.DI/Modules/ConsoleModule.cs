@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using NAPS2.Automation;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
-using NAPS2.Scan.Wia;
 using NAPS2.Util;
 using Ninject.Modules;
 

@@ -1,34 +1,29 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
-    partial class FAbout : FormBase
+    internal partial class FAbout : FormBase
     {
         public FAbout(AppConfigManager appConfigManager)
         {
             RestoreFormState = false;
             InitializeComponent();
-            labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = String.Format(MiscResources.Version, AssemblyVersion);
+            LabelProductName.Text = AssemblyProduct;
+            LabelVersion.Text = String.Format(MiscResources.Version, AssemblyVersion);
 
             // Some of the localization tools I use don't handle line breaks consistently.
             // This compensates by replacing "\n" with actual line breaks. --Ben
-            labelCopyright.Text = labelCopyright.Text.Replace("\\n", "\n");
+            LabelCopyright.Text = LabelCopyright.Text.Replace("\\n", "\n");
             // Grow the form to fit the copyright text if necessary
-            Width = Math.Max(Width, labelCopyright.Right + 25);
+            Width = Math.Max(Width, LabelCopyright.Right + 25);
 
-            if (appConfigManager.Config.HideDonateButton)
-            {
-                btnDonate.Visible = false;
-            }
+            BtnDonate.Visible &= !appConfigManager.Config.HideDonateButton;
         }
 
         #region Assembly Attribute Accessors
@@ -66,19 +61,19 @@ namespace NAPS2.WinForms
 
         public string AssemblyCompany => GetAssemblyAttributeValue<AssemblyCompanyAttribute>(x => x.Company);
 
-        #endregion
+        #endregion Assembly Attribute Accessors
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(linkLabel1.Text);
+            Process.Start(LinkLabel1.Text);
         }
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(linkLabel2.Text);
+            Process.Start(LinkLabel2.Text);
         }
 
-        private void btnDonate_Click(object sender, EventArgs e)
+        private void BtnDonate_Click(object sender, EventArgs e)
         {
             Process.Start("https://www.naps2.com/donate");
         }

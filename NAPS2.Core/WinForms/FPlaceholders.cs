@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.ImportExport;
+using System;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.ImportExport;
 
 namespace NAPS2.WinForms
 {
@@ -15,15 +14,15 @@ namespace NAPS2.WinForms
             this.fileNamePlaceholders = fileNamePlaceholders;
             RestoreFormState = false;
             InitializeComponent();
-            AcceptButton = btnOK;
-            CancelButton = btnCancel;
+            AcceptButton = BtnOK;
+            CancelButton = BtnCancel;
         }
 
         public string FileName { get; set; }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            txtFileName.Text = FileName;
+            TxtFileName.Text = FileName;
 
             // We have to populate the placeholder button texts manually to avoid localization.
             // Annoying, but oh well.
@@ -50,31 +49,31 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
-            FileName = txtFileName.Text;
+            FileName = TxtFileName.Text;
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private void phButton_Click(object sender, EventArgs e)
+        private void PhButton_Click(object sender, EventArgs e)
         {
             var ph = ((Button)sender).Text;
-            var cursorPos = txtFileName.SelectionStart + txtFileName.SelectionLength;
-            txtFileName.Text = txtFileName.Text.Insert(cursorPos, ph);
-            txtFileName.Select(cursorPos + ph.Length, 0);
-            txtFileName.Focus();
+            var cursorPos = TxtFileName.SelectionStart + TxtFileName.SelectionLength;
+            TxtFileName.Text = TxtFileName.Text.Insert(cursorPos, ph);
+            TxtFileName.Select(cursorPos + ph.Length, 0);
+            TxtFileName.Focus();
         }
 
-        private void txtFileName_TextChanged(object sender, EventArgs e)
+        private void TxtFileName_TextChanged(object sender, EventArgs e)
         {
-            lblPreview.Text = fileNamePlaceholders.SubstitutePlaceholders(txtFileName.Text, DateTime.Now, false);
+            lblPreview.Text = fileNamePlaceholders.SubstitutePlaceholders(TxtFileName.Text, DateTime.Now, false);
         }
     }
 }

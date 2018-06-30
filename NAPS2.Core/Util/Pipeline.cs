@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NAPS2.Util
@@ -15,6 +14,7 @@ namespace NAPS2.Util
         /// <summary>
         /// Creates a pipeline to process the given input.
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="input"></param>
         /// <returns></returns>
         public static IPipelineSyntax<T> For<T>(IEnumerable<T> input)
@@ -97,7 +97,7 @@ namespace NAPS2.Util
                         foreach (var item in input)
                         {
                             var result = func(item);
-                            if (!ReferenceEquals(result, null))
+                            if (!EqualityComparer<T2>.Default.Equals(result, default(T2)))
                             {
                                 collection.Add(result);
                             }
@@ -149,7 +149,7 @@ namespace NAPS2.Util
                         Parallel.ForEach(input, item =>
                         {
                             var result = func(item);
-                            if (!ReferenceEquals(result, null))
+                            if (!EqualityComparer<T2>.Default.Equals(result, default(T2)))
                             {
                                 collection.Add(result);
                             }
@@ -198,7 +198,7 @@ namespace NAPS2.Util
                                 while (resultBuffer.ContainsKey(outputIndex))
                                 {
                                     var output = resultBuffer[outputIndex];
-                                    if (!ReferenceEquals(output, null))
+                                    if (!EqualityComparer<T2>.Default.Equals(output, default(T2)))
                                     {
                                         collection.Add(output);
                                     }
@@ -234,6 +234,7 @@ namespace NAPS2.Util
             /// <summary>
             /// Adds a new step to the pipeline.
             /// </summary>
+            /// <typeparam name="T2"></typeparam>
             /// <param name="pipelineStepFunc"></param>
             /// <returns></returns>
             IPipelineSyntax<T2> Step<T2>(Func<T, T2> pipelineStepFunc);
@@ -241,6 +242,7 @@ namespace NAPS2.Util
             /// <summary>
             /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order is maintained.
             /// </summary>
+            /// <typeparam name="T2"></typeparam>
             /// <param name="pipelineStepFunc"></param>
             /// <returns></returns>
             IPipelineSyntax<T2> StepParallel<T2>(Func<T, T2> pipelineStepFunc);
@@ -268,6 +270,9 @@ namespace NAPS2.Util
         /// <summary>
         /// Adds a new step to the pipeline.
         /// </summary>
+        /// <typeparam name="TIn1"></typeparam>
+        /// <typeparam name="TIn2"></typeparam>
+        /// <typeparam name="T2"></typeparam>
         /// <param name="syntax"></param>
         /// <param name="pipelineStepFunc"></param>
         /// <returns></returns>
@@ -279,6 +284,9 @@ namespace NAPS2.Util
         /// <summary>
         /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order is maintained.
         /// </summary>
+        /// <typeparam name="TIn1"></typeparam>
+        /// <typeparam name="TIn2"></typeparam>
+        /// <typeparam name="T2"></typeparam>
         /// <param name="syntax"></param>
         /// <param name="pipelineStepFunc"></param>
         /// <returns></returns>
@@ -290,6 +298,8 @@ namespace NAPS2.Util
         /// <summary>
         /// Runs the pipeline with the previously defined steps, performing the specified action on each item in the result. Blocks until the pipeline is finished.
         /// </summary>
+        /// <typeparam name="TIn1"></typeparam>
+        /// <typeparam name="TIn2"></typeparam>
         /// <param name="syntax"></param>
         /// <param name="pipelineFinishAction"></param>
         public static void Run<TIn1, TIn2>(this IPipelineSyntax<Tuple<TIn1, TIn2>> syntax, Action<TIn1, TIn2> pipelineFinishAction)
@@ -297,6 +307,6 @@ namespace NAPS2.Util
             syntax.Run(tuple => pipelineFinishAction(tuple.Item1, tuple.Item2));
         }
 
-        #endregion
+        #endregion Extensions for Tuples
     }
 }

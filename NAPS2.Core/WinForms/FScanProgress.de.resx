@@ -140,55 +140,55 @@
     <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>285, 75</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>Abbrechen</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="labelPage.AutoSize" type="System.Boolean, mscorlib">
+    <data name="LabelPage.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="labelPage.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LabelPage.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 9</value>
     </data>
-    <data name="labelPage.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LabelPage.Size" type="System.Drawing.Size, System.Drawing">
         <value>96, 13</value>
     </data>
-    <data name="labelPage.TabIndex" type="System.Int32, mscorlib">
+    <data name="LabelPage.TabIndex" type="System.Int32, mscorlib">
         <value>4</value>
     </data>
-    <data name="labelPage.Text" xml:space="preserve">
+    <data name="LabelPage.Text" xml:space="preserve">
         <value>Seite {0} wird eingescannt</value>
     </data>
-    <data name="&gt;&gt;labelPage.Name" xml:space="preserve">
-        <value>labelPage</value>
+    <data name="&gt;&gt;LabelPage.Name" xml:space="preserve">
+        <value>LabelPage</value>
     </data>
-    <data name="&gt;&gt;labelPage.Type" xml:space="preserve">
+    <data name="&gt;&gt;LabelPage.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;labelPage.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LabelPage.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;labelPage.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LabelPage.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

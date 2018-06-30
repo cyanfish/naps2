@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.Lang.Resources;
+using NAPS2.Operation;
+using NAPS2.Scan.Images;
+using NAPS2.Util;
+using NAPS2.WinForms;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Lang.Resources;
-using NAPS2.Operation;
-using NAPS2.Scan.Images;
-using NAPS2.Util;
-using NAPS2.WinForms;
 
 namespace NAPS2.Recovery
 {
@@ -37,7 +36,7 @@ namespace NAPS2.Recovery
             }
         }
 
-        private class RecoveryOperation : OperationBase
+        private class RecoveryOperation : OperationBase, IDisposable
         {
             private readonly IFormFactory formFactory;
             private readonly ThreadFactory threadFactory;
@@ -107,10 +106,12 @@ namespace NAPS2.Recovery
                                 }
                             });
                             return true;
+
                         case DialogResult.No: // Delete
                             ReleaseFolderLock();
                             DeleteFolder();
                             break;
+
                         default: // Not Now
                             ReleaseFolderLock();
                             break;
@@ -223,6 +224,11 @@ namespace NAPS2.Recovery
             public override void WaitUntilFinished()
             {
                 thread?.Join();
+            }
+
+            public void Dispose()
+            {
+                ((IDisposable)lockFile).Dispose();
             }
         }
     }

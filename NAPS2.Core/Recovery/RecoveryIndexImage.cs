@@ -1,9 +1,8 @@
 ﻿using NAPS2.Scan;
+using NAPS2.Scan.Images.Transforms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Recovery
 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using NAPS2.WinForms;
 using System.Windows.Forms;
-using NAPS2.WinForms;
 
 namespace NAPS2.ImportExport.Pdf
 {

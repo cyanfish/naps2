@@ -2,34 +2,18 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using NAPS2.Config;
 
 namespace NAPS2.Scan.Images
 {
     public class ThumbnailCache : IDisposable
     {
-        private readonly Dictionary<ScannedImage, CacheItem> cache = new Dictionary<ScannedImage,CacheItem>();
+        private readonly Dictionary<ScannedImage, CacheItem> cache = new Dictionary<ScannedImage, CacheItem>();
 
         private readonly ThumbnailRenderer thumbnailRenderer;
 
         public ThumbnailCache(ThumbnailRenderer thumbnailRenderer)
         {
             this.thumbnailRenderer = thumbnailRenderer;
-        }
-
-        ~ThumbnailCache()
-        {
-            Dispose();
-        }
-
-        public void Dispose()
-        {
-            foreach (var item in cache.Values)
-            {
-                item.Thumbnail.Dispose();
-            }
-            cache.Clear();
         }
 
         public Bitmap this[ScannedImage scannedImage]
@@ -78,5 +62,35 @@ namespace NAPS2.Scan.Images
 
             public object State { get; set; }
         }
+
+        #region IDisposable Support
+
+        private bool disposed; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && !disposed)
+            {
+                foreach (var item in cache.Values) item.Thumbnail.Dispose();
+                cache.Clear();
+                disposed = true;
+            }
+        }
+
+        ~ThumbnailCache()
+        {
+            Dispose(false);
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        void IDisposable.Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public void Dispose() => Dispose(true);
+
+        #endregion IDisposable Support
     }
 }

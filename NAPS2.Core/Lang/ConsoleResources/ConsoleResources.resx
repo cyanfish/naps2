@@ -240,7 +240,7 @@ Use the "--importpassword" option.</value>
     <value>The specified component is already installed.</value>
   </data>
   <data name="ComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to perform this operation. Run "NAPS2.Console --install {0}" to install it.</value>
+    <value>An additional component is needed to perform this Operation. Run "NAPS2.Console --install {0}" to install it.</value>
   </data>
   <data name="ComponentNotAvailable" xml:space="preserve">
     <value>The specified component to install is not available. Check your spelling.</value>

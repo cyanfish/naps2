@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace NAPS2.WinForms
@@ -11,23 +9,23 @@ namespace NAPS2.WinForms
         {
             RestoreFormState = false;
             InitializeComponent();
-            AcceptButton = btnInstall;
-            CancelButton = btnCancel;
+            AcceptButton = BtnInstall;
+            CancelButton = BtnCancel;
         }
 
-        private void btnInstall_Click(object sender, EventArgs e)
+        private void BtnInstall_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Yes;
             Close();
         }
 
-        private void btnDownload_Click(object sender, EventArgs e)
+        private void BtnDownload_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

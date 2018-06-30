@@ -1,11 +1,10 @@
-﻿using System;
+﻿using NAPS2.Scan;
+using NAPS2.Scan.Images;
+using NAPS2.Util;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using NAPS2.Scan;
-using NAPS2.Scan.Images;
-using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {
@@ -39,7 +38,7 @@ namespace NAPS2.ImportExport.Images
             {
                 int frameCount = toImport.GetFrameCount(FrameDimension.Page);
                 int i = 0;
-                foreach(var frameIndex in importParams.Slice.Indices(frameCount))
+                foreach (var frameIndex in importParams.Slice.Indices(frameCount))
                 {
                     if (!progressCallback(i++, frameCount))
                     {

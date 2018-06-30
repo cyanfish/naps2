@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using NAPS2.Config;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
+using System;
 
 namespace NAPS2.WinForms
 {
@@ -17,7 +15,7 @@ namespace NAPS2.WinForms
             this.appConfigManager = appConfigManager;
             InitializeComponent();
 
-            cmbTwainImpl.Format += (sender, e) => e.Value = ((Enum) e.ListItem).Description();
+            cmbTwainImpl.Format += (sender, e) => e.Value = ((Enum)e.ListItem).Description();
             cmbTwainImpl.Items.Add(TwainImpl.Default);
             cmbTwainImpl.Items.Add(TwainImpl.MemXfer);
             cmbTwainImpl.Items.Add(TwainImpl.OldDsm);
@@ -28,57 +26,57 @@ namespace NAPS2.WinForms
             }
         }
 
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             UpdateValues(ScanProfile);
             UpdateEnabled();
 
             new LayoutManager(this)
-                .Bind(groupBox1, groupBox2, groupBox3, tbImageQuality, tbWhiteThreshold, tbCoverageThreshold)
+                .Bind(GroupBox1, GroupBox2, GroupBox3, tbImageQuality, TbWhiteThreshold, TbCoverageThreshold)
                     .WidthToForm()
-                .Bind(txtImageQuality, txtWhiteThreshold, txtCoverageThreshold, btnOK, btnCancel)
+                .Bind(txtImageQuality, TxtWhiteThreshold, TxtCoverageThreshold, BtnOK, BtnCancel)
                     .RightToForm()
                 .Activate();
         }
 
         private void UpdateValues(ScanProfile scanProfile)
         {
-            cbHighQuality.Checked = scanProfile.MaxQuality;
+            CbHighQuality.Checked = scanProfile.MaxQuality;
             tbImageQuality.Value = scanProfile.Quality;
             txtImageQuality.Text = scanProfile.Quality.ToString("G");
             cbBrightnessContrastAfterScan.Checked = scanProfile.BrightnessContrastAfterScan;
-            cbAutoDeskew.Checked = scanProfile.AutoDeskew;
-            cbWiaOffsetWidth.Checked = scanProfile.WiaOffsetWidth;
-            cbWiaRetryOnFailure.Checked = scanProfile.WiaRetryOnFailure;
-            cbWiaDelayBetweenScans.Checked = scanProfile.WiaDelayBetweenScans;
+            CbAutoDeskew.Checked = scanProfile.AutoDeskew;
+            CbWiaOffsetWidth.Checked = scanProfile.WiaOffsetWidth;
+            CbWiaRetryOnFailure.Checked = scanProfile.WiaRetryOnFailure;
+            CbWiaDelayBetweenScans.Checked = scanProfile.WiaDelayBetweenScans;
             txtWiaDelayBetweenScansSeconds.Text = scanProfile.WiaDelayBetweenScansSeconds.ToString("G");
-            cbForcePageSize.Checked = scanProfile.ForcePageSize;
-            cbForcePageSizeCrop.Checked = scanProfile.ForcePageSizeCrop;
+            CbForcePageSize.Checked = scanProfile.ForcePageSize;
+            CbForcePageSizeCrop.Checked = scanProfile.ForcePageSizeCrop;
             cbFlipDuplex.Checked = scanProfile.FlipDuplexedPages;
             if (scanProfile.TwainImpl != TwainImpl.X64 || Environment.Is64BitProcess)
             {
-                cmbTwainImpl.SelectedIndex = (int) scanProfile.TwainImpl;
+                cmbTwainImpl.SelectedIndex = (int)scanProfile.TwainImpl;
             }
-            cbExcludeBlankPages.Checked = scanProfile.ExcludeBlankPages;
-            tbWhiteThreshold.Value = scanProfile.BlankPageWhiteThreshold;
-            txtWhiteThreshold.Text = scanProfile.BlankPageWhiteThreshold.ToString("G");
-            tbCoverageThreshold.Value = scanProfile.BlankPageCoverageThreshold;
-            txtCoverageThreshold.Text = scanProfile.BlankPageCoverageThreshold.ToString("G");
+            CbExcludeBlankPages.Checked = scanProfile.ExcludeBlankPages;
+            TbWhiteThreshold.Value = scanProfile.BlankPageWhiteThreshold;
+            TxtWhiteThreshold.Text = scanProfile.BlankPageWhiteThreshold.ToString("G");
+            TbCoverageThreshold.Value = scanProfile.BlankPageCoverageThreshold;
+            TxtCoverageThreshold.Text = scanProfile.BlankPageCoverageThreshold.ToString("G");
         }
 
         private void UpdateEnabled()
         {
             cmbTwainImpl.Enabled = ScanProfile.DriverName == TwainScanDriver.DRIVER_NAME;
-            cbWiaOffsetWidth.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
-            cbWiaRetryOnFailure.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
-            cbWiaDelayBetweenScans.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
-            txtWiaDelayBetweenScansSeconds.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME && cbWiaDelayBetweenScans.Checked;
-            tbImageQuality.Enabled = !cbHighQuality.Checked;
-            txtImageQuality.Enabled = !cbHighQuality.Checked;
-            tbWhiteThreshold.Enabled = cbExcludeBlankPages.Checked && ScanProfile.BitDepth != ScanBitDepth.BlackWhite;
-            txtWhiteThreshold.Enabled = cbExcludeBlankPages.Checked && ScanProfile.BitDepth != ScanBitDepth.BlackWhite;
-            tbCoverageThreshold.Enabled = cbExcludeBlankPages.Checked;
-            txtCoverageThreshold.Enabled = cbExcludeBlankPages.Checked;
+            CbWiaOffsetWidth.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
+            CbWiaRetryOnFailure.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
+            CbWiaDelayBetweenScans.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
+            txtWiaDelayBetweenScansSeconds.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME && CbWiaDelayBetweenScans.Checked;
+            tbImageQuality.Enabled = !CbHighQuality.Checked;
+            txtImageQuality.Enabled = !CbHighQuality.Checked;
+            TbWhiteThreshold.Enabled = CbExcludeBlankPages.Checked && ScanProfile.BitDepth != ScanBitDepth.BlackWhite;
+            TxtWhiteThreshold.Enabled = CbExcludeBlankPages.Checked && ScanProfile.BitDepth != ScanBitDepth.BlackWhite;
+            TbCoverageThreshold.Enabled = CbExcludeBlankPages.Checked;
+            TxtCoverageThreshold.Enabled = CbExcludeBlankPages.Checked;
         }
 
         public ScanProfile ScanProfile { get; set; }
@@ -86,48 +84,47 @@ namespace NAPS2.WinForms
         private void SaveSettings()
         {
             ScanProfile.Quality = tbImageQuality.Value;
-            ScanProfile.MaxQuality = cbHighQuality.Checked;
+            ScanProfile.MaxQuality = CbHighQuality.Checked;
             ScanProfile.BrightnessContrastAfterScan = cbBrightnessContrastAfterScan.Checked;
-            ScanProfile.AutoDeskew = cbAutoDeskew.Checked;
-            ScanProfile.WiaOffsetWidth = cbWiaOffsetWidth.Checked;
-            ScanProfile.WiaRetryOnFailure = cbWiaRetryOnFailure.Checked;
-            ScanProfile.WiaDelayBetweenScans = cbWiaDelayBetweenScans.Checked;
+            ScanProfile.AutoDeskew = CbAutoDeskew.Checked;
+            ScanProfile.WiaOffsetWidth = CbWiaOffsetWidth.Checked;
+            ScanProfile.WiaRetryOnFailure = CbWiaRetryOnFailure.Checked;
+            ScanProfile.WiaDelayBetweenScans = CbWiaDelayBetweenScans.Checked;
             if (double.TryParse(txtWiaDelayBetweenScansSeconds.Text, out double value))
             {
                 ScanProfile.WiaDelayBetweenScansSeconds = value;
             }
-            ScanProfile.ForcePageSize = cbForcePageSize.Checked;
-            ScanProfile.ForcePageSizeCrop = cbForcePageSizeCrop.Checked;
+            ScanProfile.ForcePageSize = CbForcePageSize.Checked;
+            ScanProfile.ForcePageSizeCrop = CbForcePageSizeCrop.Checked;
             ScanProfile.FlipDuplexedPages = cbFlipDuplex.Checked;
             if (cmbTwainImpl.SelectedIndex != -1)
             {
-                ScanProfile.TwainImpl = (TwainImpl) cmbTwainImpl.SelectedIndex;
+                ScanProfile.TwainImpl = (TwainImpl)cmbTwainImpl.SelectedIndex;
             }
-            ScanProfile.ExcludeBlankPages = cbExcludeBlankPages.Checked;
-            ScanProfile.BlankPageWhiteThreshold = tbWhiteThreshold.Value;
-            ScanProfile.BlankPageCoverageThreshold = tbCoverageThreshold.Value;
+            ScanProfile.ExcludeBlankPages = CbExcludeBlankPages.Checked;
+            ScanProfile.BlankPageWhiteThreshold = TbWhiteThreshold.Value;
+            ScanProfile.BlankPageCoverageThreshold = TbCoverageThreshold.Value;
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             SaveSettings();
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void tbImageQuality_Scroll(object sender, EventArgs e)
+        private void TbImageQuality_Scroll(object sender, EventArgs e)
         {
             txtImageQuality.Text = tbImageQuality.Value.ToString("G");
         }
 
-        private void txtImageQuality_TextChanged(object sender, EventArgs e)
+        private void TxtImageQuality_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtImageQuality.Text, out value))
+            if (int.TryParse(txtImageQuality.Text, out int value))
             {
                 if (value >= tbImageQuality.Minimum && value <= tbImageQuality.Maximum)
                 {
@@ -136,56 +133,54 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void cbHighQuality_CheckedChanged(object sender, EventArgs e)
+        private void CbHighQuality_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
         }
 
-        private void cbExcludeBlankPages_CheckedChanged(object sender, EventArgs e)
+        private void CbExcludeBlankPages_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
         }
 
-        private void cbWiaDelayBetweenScans_CheckedChanged(object sender, EventArgs e)
+        private void CbWiaDelayBetweenScans_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
         }
 
-        private void tbWhiteThreshold_Scroll(object sender, EventArgs e)
+        private void TbWhiteThreshold_Scroll(object sender, EventArgs e)
         {
-            txtWhiteThreshold.Text = tbWhiteThreshold.Value.ToString("G");
+            TxtWhiteThreshold.Text = TbWhiteThreshold.Value.ToString("G");
         }
 
-        private void txtWhiteThreshold_TextChanged(object sender, EventArgs e)
+        private void TxtWhiteThreshold_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtWhiteThreshold.Text, out value))
+            if (int.TryParse(TxtWhiteThreshold.Text, out int value))
             {
-                if (value >= tbWhiteThreshold.Minimum && value <= tbWhiteThreshold.Maximum)
+                if (value >= TbWhiteThreshold.Minimum && value <= TbWhiteThreshold.Maximum)
                 {
-                    tbWhiteThreshold.Value = value;
+                    TbWhiteThreshold.Value = value;
                 }
             }
         }
 
-        private void tbCoverageThreshold_Scroll(object sender, EventArgs e)
+        private void TbCoverageThreshold_Scroll(object sender, EventArgs e)
         {
-            txtCoverageThreshold.Text = tbCoverageThreshold.Value.ToString("G");
+            TxtCoverageThreshold.Text = TbCoverageThreshold.Value.ToString("G");
         }
 
-        private void txtCoverageThreshold_TextChanged(object sender, EventArgs e)
+        private void TxtCoverageThreshold_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtCoverageThreshold.Text, out value))
+            if (int.TryParse(TxtCoverageThreshold.Text, out int value))
             {
-                if (value >= tbCoverageThreshold.Minimum && value <= tbCoverageThreshold.Maximum)
+                if (value >= TbCoverageThreshold.Minimum && value <= TbCoverageThreshold.Maximum)
                 {
-                    tbCoverageThreshold.Value = value;
+                    TbCoverageThreshold.Value = value;
                 }
             }
         }
 
-        private void btnRestoreDefaults_Click(object sender, EventArgs e)
+        private void BtnRestoreDefaults_Click(object sender, EventArgs e)
         {
             UpdateValues(appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION });
         }

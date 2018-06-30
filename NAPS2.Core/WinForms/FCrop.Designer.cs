@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.WinForms
 {
-    partial class FCrop
+    partial class FCrop : IEquatable<FCrop>, IDisposable
     {
         /// <summary>
         /// Required designer variable.
@@ -17,9 +17,7 @@ namespace NAPS2.WinForms
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
@@ -32,80 +30,80 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FCrop));
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.tbRight = new System.Windows.Forms.TrackBar();
-            this.tbLeft = new System.Windows.Forms.TrackBar();
-            this.tbTop = new System.Windows.Forms.TrackBar();
-            this.tbBottom = new System.Windows.Forms.TrackBar();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnRevert = new System.Windows.Forms.Button();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.TbRight = new System.Windows.Forms.TrackBar();
+            this.TbLeft = new System.Windows.Forms.TrackBar();
+            this.TbTop = new System.Windows.Forms.TrackBar();
+            this.TbBottom = new System.Windows.Forms.TrackBar();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnRevert = new System.Windows.Forms.Button();
             this.checkboxApplyToSelected = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbTop)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBottom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbTop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbBottom)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox
+            // PictureBox
             // 
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            resources.ApplyResources(this.pictureBox, "pictureBox");
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.TabStop = false;
-            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
-            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
+            resources.ApplyResources(this.PictureBox, "PictureBox");
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.TabStop = false;
+            this.PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
+            this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             // 
-            // tbRight
+            // TbRight
             // 
-            resources.ApplyResources(this.tbRight, "tbRight");
-            this.tbRight.Name = "tbRight";
-            this.tbRight.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbRight.Scroll += new System.EventHandler(this.tbRight_Scroll);
+            resources.ApplyResources(this.TbRight, "TbRight");
+            this.TbRight.Name = "TbRight";
+            this.TbRight.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.TbRight.Scroll += new System.EventHandler(this.TbRight_Scroll);
             // 
-            // tbLeft
+            // TbLeft
             // 
-            resources.ApplyResources(this.tbLeft, "tbLeft");
-            this.tbLeft.Name = "tbLeft";
-            this.tbLeft.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbLeft.Scroll += new System.EventHandler(this.tbLeft_Scroll);
+            resources.ApplyResources(this.TbLeft, "TbLeft");
+            this.TbLeft.Name = "TbLeft";
+            this.TbLeft.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.TbLeft.Scroll += new System.EventHandler(this.TbLeft_Scroll);
             // 
-            // tbTop
+            // TbTop
             // 
-            resources.ApplyResources(this.tbTop, "tbTop");
-            this.tbTop.Name = "tbTop";
-            this.tbTop.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbTop.Scroll += new System.EventHandler(this.tbTop_Scroll);
+            resources.ApplyResources(this.TbTop, "TbTop");
+            this.TbTop.Name = "TbTop";
+            this.TbTop.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.TbTop.Scroll += new System.EventHandler(this.TbTop_Scroll);
             // 
-            // tbBottom
+            // TbBottom
             // 
-            resources.ApplyResources(this.tbBottom, "tbBottom");
-            this.tbBottom.Name = "tbBottom";
-            this.tbBottom.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbBottom.Scroll += new System.EventHandler(this.tbBottom_Scroll);
+            resources.ApplyResources(this.TbBottom, "TbBottom");
+            this.TbBottom.Name = "TbBottom";
+            this.TbBottom.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.TbBottom.Scroll += new System.EventHandler(this.TbBottom_Scroll);
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // btnRevert
+            // BtnRevert
             // 
-            resources.ApplyResources(this.btnRevert, "btnRevert");
-            this.btnRevert.Name = "btnRevert";
-            this.btnRevert.UseVisualStyleBackColor = true;
-            this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
+            resources.ApplyResources(this.BtnRevert, "BtnRevert");
+            this.BtnRevert.Name = "BtnRevert";
+            this.BtnRevert.UseVisualStyleBackColor = true;
+            this.BtnRevert.Click += new System.EventHandler(this.BtnRevert_Click);
             // 
             // checkboxApplyToSelected
             // 
@@ -115,43 +113,48 @@ namespace NAPS2.WinForms
             // 
             // FCrop
             // 
-            this.AcceptButton = this.btnOK;
+            this.AcceptButton = this.BtnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.btnRevert);
+            this.CancelButton = this.BtnCancel;
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnOK);
+            this.Controls.Add(this.BtnRevert);
             this.Controls.Add(this.checkboxApplyToSelected);
-            this.Controls.Add(this.tbRight);
-            this.Controls.Add(this.tbBottom);
-            this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.tbLeft);
-            this.Controls.Add(this.tbTop);
+            this.Controls.Add(this.TbRight);
+            this.Controls.Add(this.TbBottom);
+            this.Controls.Add(this.PictureBox);
+            this.Controls.Add(this.TbLeft);
+            this.Controls.Add(this.TbTop);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FCrop";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FCrop_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbTop)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBottom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbTop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbBottom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
+        public bool Equals(FCrop other)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.TrackBar tbRight;
-        private System.Windows.Forms.TrackBar tbLeft;
-        private System.Windows.Forms.TrackBar tbTop;
-        private System.Windows.Forms.TrackBar tbBottom;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnRevert;
+        private System.Windows.Forms.PictureBox PictureBox;
+        private System.Windows.Forms.TrackBar TbRight;
+        private System.Windows.Forms.TrackBar TbLeft;
+        private System.Windows.Forms.TrackBar TbTop;
+        private System.Windows.Forms.TrackBar TbBottom;
+        private System.Windows.Forms.Button BtnOK;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Button BtnRevert;
         private System.Windows.Forms.CheckBox checkboxApplyToSelected;
 
 

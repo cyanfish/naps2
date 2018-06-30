@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PdfSharp.Pdf;
+using PdfSharp.Pdf.Advanced;
 using System.Linq;
 using System.Text;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.Advanced;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -26,12 +23,16 @@ namespace NAPS2.ImportExport.Pdf
             {
                 case PdfCompat.PdfA1B:
                     return ("1", "B");
+
                 case PdfCompat.PdfA2B:
                     return ("2", "B");
+
                 case PdfCompat.PdfA3B:
                     return ("3", "B");
+
                 case PdfCompat.PdfA3U:
                     return ("3", "U");
+
                 default:
                     return ("", "");
             }
@@ -77,7 +78,7 @@ namespace NAPS2.ImportExport.Pdf
       </dc:description>
 	  </rdf:Description>
   </rdf:RDF>
-</x:xmpmeta>                                                                            
+</x:xmpmeta>
 <?xpacket end=""w""?>";
             return Encoding.UTF8.GetBytes(xml);
         }
@@ -114,7 +115,7 @@ namespace NAPS2.ImportExport.Pdf
             foreach (var font in document.Internals.GetAllObjects().OfType<PdfDictionary>())
             {
                 var type = font.Elements["/Type"] as PdfName;
-                if (type != null && type.Value == "/FontDescriptor")
+                if (type?.Value == "/FontDescriptor")
                 {
                     font.Elements["/CIDSet"] = cidStream.Reference;
                 }
@@ -126,7 +127,7 @@ namespace NAPS2.ImportExport.Pdf
             foreach (var font in document.Internals.GetAllObjects().OfType<PdfFont>())
             {
                 var subtype = font.Elements["/Subtype"] as PdfName;
-                if (subtype != null && subtype.Value.StartsWith("/CID"))
+                if (subtype?.Value.StartsWith("/CID", System.StringComparison.CurrentCulture) == true)
                 {
                     font.Elements["/CIDToGIDMap"] = new PdfName("/Identity");
                 }

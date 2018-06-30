@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
@@ -13,8 +5,13 @@ using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
-using NAPS2.Scan.Twain;
 using NAPS2.Util;
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
@@ -32,8 +29,8 @@ namespace NAPS2.WinForms
         private readonly ThreadFactory threadFactory;
         private readonly DialogHelper dialogHelper;
 
-        private bool batchRunning = false;
-        private bool cancelBatch = false;
+        private bool batchRunning;
+        private bool cancelBatch;
         private Thread batchThread;
 
         public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, ThreadFactory threadFactory, DialogHelper dialogHelper)
@@ -61,13 +58,13 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(groupboxScanConfig, groupboxOutput,
                       panelSaveSeparator, panelSaveTo, panelSaveType, panelScanDetails, panelScanType,
-                      comboProfile, txtFilePath, lblStatus)
+                      comboProfile, TxtFilePath, lblStatus)
                     .WidthToForm()
-                .Bind(btnEditProfile, btnAddProfile, btnStart, btnCancel, btnChooseFolder)
+                .Bind(BtnEditProfile, BtnAddProfile, BtnStart, BtnCancel, BtnChooseFolder)
                     .RightToForm()
                 .Activate();
 
-            btnAddProfile.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
+            BtnAddProfile.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
 
             ConditionalControls.LockHeight(this);
 
@@ -95,7 +92,7 @@ namespace NAPS2.WinForms
             rdFilePerPage.Checked = BatchSettings.SaveSeparator == SaveSeparator.FilePerPage;
             rdSeparateByPatchT.Checked = BatchSettings.SaveSeparator == SaveSeparator.PatchT;
 
-            txtFilePath.Text = BatchSettings.SavePath;
+            TxtFilePath.Text = BatchSettings.SavePath;
         }
 
         private bool ValidateSettings()
@@ -115,8 +112,7 @@ namespace NAPS2.WinForms
 
             if (rdMultipleScansDelay.Checked)
             {
-                int scanCount;
-                if (!int.TryParse(txtNumberOfScans.Text, out scanCount) || scanCount <= 0)
+                if (!int.TryParse(txtNumberOfScans.Text, out int scanCount) || scanCount <= 0)
                 {
                     ok = false;
                     scanCount = 0;
@@ -124,8 +120,7 @@ namespace NAPS2.WinForms
                 }
                 BatchSettings.ScanCount = scanCount;
 
-                double scanInterval;
-                if (!double.TryParse(txtTimeBetweenScans.Text, out scanInterval) || scanInterval < 0)
+                if (!double.TryParse(txtTimeBetweenScans.Text, out double scanInterval) || scanInterval < 0)
                 {
                     ok = false;
                     scanInterval = 0;
@@ -142,11 +137,11 @@ namespace NAPS2.WinForms
                                         : rdSeparateByPatchT.Checked ? SaveSeparator.PatchT
                                         : SaveSeparator.FilePerPage;
 
-            BatchSettings.SavePath = txtFilePath.Text;
+            BatchSettings.SavePath = TxtFilePath.Text;
             if (BatchSettings.OutputType != BatchOutputType.Load && string.IsNullOrWhiteSpace(BatchSettings.SavePath))
             {
                 ok = false;
-                txtFilePath.Focus();
+                TxtFilePath.Focus();
             }
 
             return ok;
@@ -156,8 +151,8 @@ namespace NAPS2.WinForms
         {
             comboProfile.Items.Clear();
             comboProfile.Items.AddRange(profileManager.Profiles.Cast<object>().ToArray());
-            if (BatchSettings.ProfileDisplayName != null &&
-                profileManager.Profiles.Any(x => x.DisplayName == BatchSettings.ProfileDisplayName))
+            if (BatchSettings.ProfileDisplayName != null
+                && profileManager.Profiles.Any(x => x.DisplayName == BatchSettings.ProfileDisplayName))
             {
                 comboProfile.Text = BatchSettings.ProfileDisplayName;
             }
@@ -200,16 +195,15 @@ namespace NAPS2.WinForms
             ConditionalControls.LockHeight(this);
         }
 
-        private void btnChooseFolder_Click(object sender, EventArgs e)
+        private void BtnChooseFolder_Click(object sender, EventArgs e)
         {
-            string savePath;
-            if (dialogHelper.PromptToSavePdfOrImage(null, out savePath))
+            if (dialogHelper.PromptToSavePdfOrImage(null, out string savePath))
             {
-                txtFilePath.Text = savePath;
+                TxtFilePath.Text = savePath;
             }
         }
 
-        private void linkPatchCodeInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkPatchCodeInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(PATCH_CODE_INFO_URL);
         }
@@ -219,7 +213,7 @@ namespace NAPS2.WinForms
             e.Value = ((ScanProfile)e.ListItem).DisplayName;
         }
 
-        private void btnEditProfile_Click(object sender, EventArgs e)
+        private void BtnEditProfile_Click(object sender, EventArgs e)
         {
             if (comboProfile.SelectedItem != null)
             {
@@ -236,12 +230,12 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void btnAddProfile_Click(object sender, EventArgs e)
+        private void BtnAddProfile_Click(object sender, EventArgs e)
         {
             if (!(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked)))
             {
                 var fedit = FormFactory.Create<FEditProfile>();
-                fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile {Version = ScanProfile.CURRENT_VERSION};
+                fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
@@ -253,7 +247,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void BtnStart_Click(object sender, EventArgs e)
         {
             if (batchRunning)
             {
@@ -269,9 +263,9 @@ namespace NAPS2.WinForms
             cancelBatch = false;
 
             // Update UI
-            btnStart.Enabled = false;
-            btnCancel.Enabled = true;
-            btnCancel.Text = MiscResources.Cancel;
+            BtnStart.Enabled = false;
+            BtnCancel.Enabled = true;
+            BtnCancel.Text = MiscResources.Cancel;
             EnableDisableSettings(false);
 
             // Start the batch
@@ -333,18 +327,15 @@ namespace NAPS2.WinForms
             {
                 Log.ErrorException("Error in batch scan", ex);
                 errorOutput.DisplayError(MiscResources.BatchError, ex);
-                SafeInvoke(() =>
-                {
-                    lblStatus.Text = MiscResources.BatchStatusError;
-                });
+                SafeInvoke(() => lblStatus.Text = MiscResources.BatchStatusError);
             }
             SafeInvoke(() =>
             {
                 batchRunning = false;
                 cancelBatch = false;
-                btnStart.Enabled = true;
-                btnCancel.Enabled = true;
-                btnCancel.Text = MiscResources.Close;
+                BtnStart.Enabled = true;
+                BtnCancel.Enabled = true;
+                BtnCancel.Text = MiscResources.Close;
                 EnableDisableSettings(true);
                 Activate();
             });
@@ -356,23 +347,20 @@ namespace NAPS2.WinForms
             {
                 if (!cancelBatch)
                 {
-                    SafeInvoke(() =>
-                    {
-                        lblStatus.Text = status;
-                    });
+                    SafeInvoke(() => lblStatus.Text = status);
                 }
                 return !cancelBatch;
             };
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             if (batchRunning)
             {
                 if (MessageBox.Show(MiscResources.ConfirmCancelBatch, MiscResources.CancelBatch, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     cancelBatch = true;
-                    btnCancel.Enabled = false;
+                    BtnCancel.Enabled = false;
                     lblStatus.Text = MiscResources.BatchStatusCancelling;
                 }
             }
@@ -384,20 +372,16 @@ namespace NAPS2.WinForms
 
         private void FBatchScan_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (cancelBatch)
-            {
-                // Keep dialog open while cancel is in progress to avoid concurrency issues
-                e.Cancel = true;
-            }
+            e.Cancel |= cancelBatch;
         }
 
-        private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = FormFactory.Create<FPlaceholders>();
-            form.FileName = txtFilePath.Text;
+            form.FileName = TxtFilePath.Text;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                txtFilePath.Text = form.FileName;
+                TxtFilePath.Text = form.FileName;
             }
         }
     }

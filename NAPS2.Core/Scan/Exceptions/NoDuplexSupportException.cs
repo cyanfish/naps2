@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using NAPS2.Lang.Resources;
+using System;
 
 namespace NAPS2.Scan.Exceptions
 {
+    [Serializable()]
     public class NoDuplexSupportException : ScanDriverException
     {
         public NoDuplexSupportException()
@@ -24,6 +23,10 @@ namespace NAPS2.Scan.Exceptions
 
         public NoDuplexSupportException(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        protected NoDuplexSupportException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
         {
         }
     }

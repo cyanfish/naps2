@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using NAPS2.Config;
+﻿using NAPS2.Config;
 using NAPS2.Util;
+using System;
+using System.IO;
 
 namespace NAPS2.Dependencies
 {
@@ -44,7 +42,7 @@ namespace NAPS2.Dependencies
             }
         }
 
-        public bool IsSupported => platformSupport == null || platformSupport.Validate();
+        public bool IsSupported => platformSupport?.Validate() != false;
 
         public void Install(string sourcePath)
         {

@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRecover));
             this.lblPrompt = new System.Windows.Forms.Label();
-            this.btnRecover = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnRecover = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblPrompt
@@ -40,34 +40,34 @@
             resources.ApplyResources(this.lblPrompt, "lblPrompt");
             this.lblPrompt.Name = "lblPrompt";
             // 
-            // btnRecover
+            // BtnRecover
             // 
-            resources.ApplyResources(this.btnRecover, "btnRecover");
-            this.btnRecover.Name = "btnRecover";
-            this.btnRecover.UseVisualStyleBackColor = true;
-            this.btnRecover.Click += new System.EventHandler(this.btnRecover_Click);
+            resources.ApplyResources(this.BtnRecover, "BtnRecover");
+            this.BtnRecover.Name = "BtnRecover";
+            this.BtnRecover.UseVisualStyleBackColor = true;
+            this.BtnRecover.Click += new System.EventHandler(this.BtnRecover_Click);
             // 
-            // btnDelete
+            // BtnDelete
             // 
-            resources.ApplyResources(this.btnDelete, "btnDelete");
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            resources.ApplyResources(this.BtnDelete, "BtnDelete");
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.UseVisualStyleBackColor = true;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // FRecover
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnRecover);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnDelete);
+            this.Controls.Add(this.BtnRecover);
             this.Controls.Add(this.lblPrompt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -80,8 +80,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblPrompt;
-        private System.Windows.Forms.Button btnRecover;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnRecover;
+        private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }

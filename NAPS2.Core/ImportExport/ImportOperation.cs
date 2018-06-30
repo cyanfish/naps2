@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using NAPS2.Lang.Resources;
+﻿using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 
 namespace NAPS2.ImportExport
 {

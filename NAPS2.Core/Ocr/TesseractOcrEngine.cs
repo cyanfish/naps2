@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.Config;
+using NAPS2.Util;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
-using NAPS2.Config;
-using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {

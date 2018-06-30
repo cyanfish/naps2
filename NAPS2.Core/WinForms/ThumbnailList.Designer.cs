@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.WinForms
 {
-    partial class ThumbnailList
+    partial class ThumbnailList : IDisposable
     {
         /// <summary> 
         /// Required designer variable.
@@ -18,9 +18,7 @@ namespace NAPS2.WinForms
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 

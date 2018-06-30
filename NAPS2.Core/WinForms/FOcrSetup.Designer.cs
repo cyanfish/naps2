@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FOcrSetup));
-            this.checkBoxEnableOcr = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.CheckBoxEnableOcr = new System.Windows.Forms.CheckBox();
+            this.Label1 = new System.Windows.Forms.Label();
             this.comboLanguages = new System.Windows.Forms.ComboBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.linkGetLanguages = new System.Windows.Forms.LinkLabel();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.LinkGetLanguages = new System.Windows.Forms.LinkLabel();
+            this.BtnOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // checkBoxEnableOcr
+            // CheckBoxEnableOcr
             // 
-            resources.ApplyResources(this.checkBoxEnableOcr, "checkBoxEnableOcr");
-            this.checkBoxEnableOcr.Name = "checkBoxEnableOcr";
-            this.checkBoxEnableOcr.UseVisualStyleBackColor = true;
-            this.checkBoxEnableOcr.CheckedChanged += new System.EventHandler(this.checkBoxEnableOcr_CheckedChanged);
+            resources.ApplyResources(this.CheckBoxEnableOcr, "CheckBoxEnableOcr");
+            this.CheckBoxEnableOcr.Name = "CheckBoxEnableOcr";
+            this.CheckBoxEnableOcr.UseVisualStyleBackColor = true;
+            this.CheckBoxEnableOcr.CheckedChanged += new System.EventHandler(this.CheckBoxEnableOcr_CheckedChanged);
             // 
-            // label1
+            // Label1
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.Name = "Label1";
             // 
             // comboLanguages
             // 
@@ -56,37 +56,37 @@
             resources.ApplyResources(this.comboLanguages, "comboLanguages");
             this.comboLanguages.Name = "comboLanguages";
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // linkGetLanguages
+            // LinkGetLanguages
             // 
-            resources.ApplyResources(this.linkGetLanguages, "linkGetLanguages");
-            this.linkGetLanguages.Name = "linkGetLanguages";
-            this.linkGetLanguages.TabStop = true;
-            this.linkGetLanguages.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkGetLanguages_LinkClicked);
+            resources.ApplyResources(this.LinkGetLanguages, "LinkGetLanguages");
+            this.LinkGetLanguages.Name = "LinkGetLanguages";
+            this.LinkGetLanguages.TabStop = true;
+            this.LinkGetLanguages.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkGetLanguages_LinkClicked);
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // FOcrSetup
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.linkGetLanguages);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.BtnOK);
+            this.Controls.Add(this.LinkGetLanguages);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.comboLanguages);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkBoxEnableOcr);
+            this.Controls.Add(this.Label1);
+            this.Controls.Add(this.CheckBoxEnableOcr);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FOcrSetup";
@@ -97,11 +97,11 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox checkBoxEnableOcr;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox CheckBoxEnableOcr;
+        private System.Windows.Forms.Label Label1;
         private System.Windows.Forms.ComboBox comboLanguages;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.LinkLabel linkGetLanguages;
-        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.LinkLabel LinkGetLanguages;
+        private System.Windows.Forms.Button BtnOK;
     }
 }

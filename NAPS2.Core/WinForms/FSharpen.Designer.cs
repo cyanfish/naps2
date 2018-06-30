@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.WinForms
 {
-    partial class FSharpen
+    partial class FSharpen : IEquatable<FSharpen>, IDisposable
     {
         /// <summary>
         /// Required designer variable.
@@ -17,9 +17,7 @@ namespace NAPS2.WinForms
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
@@ -32,60 +30,60 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FSharpen));
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnRevert = new System.Windows.Forms.Button();
-            this.txtSharpen = new System.Windows.Forms.TextBox();
-            this.tbSharpen = new System.Windows.Forms.TrackBar();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnRevert = new System.Windows.Forms.Button();
+            this.TxtSharpen = new System.Windows.Forms.TextBox();
+            this.TbSharpen = new System.Windows.Forms.TrackBar();
             this.checkboxApplyToSelected = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSharpen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbSharpen)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox
+            // PictureBox
             // 
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.pictureBox, "pictureBox");
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.TabStop = false;
+            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.PictureBox, "PictureBox");
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.TabStop = false;
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // btnRevert
+            // BtnRevert
             // 
-            resources.ApplyResources(this.btnRevert, "btnRevert");
-            this.btnRevert.Name = "btnRevert";
-            this.btnRevert.UseVisualStyleBackColor = true;
-            this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
+            resources.ApplyResources(this.BtnRevert, "BtnRevert");
+            this.BtnRevert.Name = "BtnRevert";
+            this.BtnRevert.UseVisualStyleBackColor = true;
+            this.BtnRevert.Click += new System.EventHandler(this.BtnRevert_Click);
             // 
-            // txtSharpen
+            // TxtSharpen
             // 
-            resources.ApplyResources(this.txtSharpen, "txtSharpen");
-            this.txtSharpen.Name = "txtSharpen";
-            this.txtSharpen.TextChanged += new System.EventHandler(this.txtSharpen_TextChanged);
+            resources.ApplyResources(this.TxtSharpen, "TxtSharpen");
+            this.TxtSharpen.Name = "TxtSharpen";
+            this.TxtSharpen.TextChanged += new System.EventHandler(this.TxtSharpen_TextChanged);
             // 
-            // tbSharpen
+            // TbSharpen
             // 
-            resources.ApplyResources(this.tbSharpen, "tbSharpen");
-            this.tbSharpen.Maximum = 1000;
-            this.tbSharpen.Minimum = -1000;
-            this.tbSharpen.Name = "tbSharpen";
-            this.tbSharpen.TickFrequency = 200;
-            this.tbSharpen.Scroll += new System.EventHandler(this.tbSharpen_Scroll);
+            resources.ApplyResources(this.TbSharpen, "TbSharpen");
+            this.TbSharpen.Maximum = 1000;
+            this.TbSharpen.Minimum = -1000;
+            this.TbSharpen.Name = "TbSharpen";
+            this.TbSharpen.TickFrequency = 200;
+            this.TbSharpen.Scroll += new System.EventHandler(this.TbSharpen_Scroll);
             // 
             // checkboxApplyToSelected
             // 
@@ -95,36 +93,41 @@ namespace NAPS2.WinForms
             // 
             // FSharpen
             // 
-            this.AcceptButton = this.btnOK;
+            this.AcceptButton = this.BtnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
+            this.CancelButton = this.BtnCancel;
             this.Controls.Add(this.checkboxApplyToSelected);
-            this.Controls.Add(this.btnRevert);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.txtSharpen);
-            this.Controls.Add(this.tbSharpen);
-            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.BtnRevert);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnOK);
+            this.Controls.Add(this.TxtSharpen);
+            this.Controls.Add(this.TbSharpen);
+            this.Controls.Add(this.PictureBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FSharpen";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FSharpen_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSharpen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TbSharpen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
+        public bool Equals(FSharpen other)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnRevert;
-        private System.Windows.Forms.TextBox txtSharpen;
-        private System.Windows.Forms.TrackBar tbSharpen;
+        private System.Windows.Forms.PictureBox PictureBox;
+        private System.Windows.Forms.Button BtnOK;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Button BtnRevert;
+        private System.Windows.Forms.TextBox TxtSharpen;
+        private System.Windows.Forms.TrackBar TbSharpen;
         private System.Windows.Forms.CheckBox checkboxApplyToSelected;
 
 

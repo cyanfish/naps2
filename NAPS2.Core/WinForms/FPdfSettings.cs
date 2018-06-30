@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Pdf;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
@@ -25,14 +23,14 @@ namespace NAPS2.WinForms
             AddEnumItems<PdfCompat>(cmbCompat);
         }
 
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             new LayoutManager(this)
-                .Bind(btnOK, btnCancel, cbShowOwnerPassword, cbShowUserPassword, btnChooseFolder)
+                .Bind(BtnOK, BtnCancel, CbShowOwnerPassword, CbShowUserPassword, BtnChooseFolder)
                     .RightToForm()
                 .Bind(groupMetadata, groupProtection, groupCompat, clbPerms)
                     .WidthToForm()
-                .Bind(txtDefaultFilePath, txtTitle, txtAuthor, txtSubject, txtKeywords, txtOwnerPassword, txtUserPassword)
+                .Bind(TxtDefaultFilePath, txtTitle, TxtAuthor, TxtSubject, txtKeywords, txtOwnerPassword, txtUserPassword)
                     .WidthToForm()
                 .Activate();
 
@@ -43,13 +41,13 @@ namespace NAPS2.WinForms
 
         private void UpdateValues(PdfSettings pdfSettings)
         {
-            txtDefaultFilePath.Text = pdfSettings.DefaultFileName;
+            TxtDefaultFilePath.Text = pdfSettings.DefaultFileName;
             cbSkipSavePrompt.Checked = pdfSettings.SkipSavePrompt;
             txtTitle.Text = pdfSettings.Metadata.Title;
-            txtAuthor.Text = pdfSettings.Metadata.Author;
-            txtSubject.Text = pdfSettings.Metadata.Subject;
+            TxtAuthor.Text = pdfSettings.Metadata.Author;
+            TxtSubject.Text = pdfSettings.Metadata.Subject;
             txtKeywords.Text = pdfSettings.Metadata.Keywords;
-            cbEncryptPdf.Checked = pdfSettings.Encryption.EncryptPdf;
+            CbEncryptPdf.Checked = pdfSettings.Encryption.EncryptPdf;
             txtOwnerPassword.Text = pdfSettings.Encryption.OwnerPassword;
             txtUserPassword.Text = pdfSettings.Encryption.UserPassword;
             clbPerms.SetItemChecked(0, pdfSettings.Encryption.AllowPrinting);
@@ -66,32 +64,32 @@ namespace NAPS2.WinForms
 
         private void UpdateEnabled()
         {
-            cbSkipSavePrompt.Enabled = Path.IsPathRooted(txtDefaultFilePath.Text);
+            cbSkipSavePrompt.Enabled = Path.IsPathRooted(TxtDefaultFilePath.Text);
 
-            bool encrypt = cbEncryptPdf.Checked;
-            txtUserPassword.Enabled = txtOwnerPassword.Enabled = cbShowOwnerPassword.Enabled = cbShowUserPassword.Enabled =
+            bool encrypt = CbEncryptPdf.Checked;
+            txtUserPassword.Enabled = txtOwnerPassword.Enabled = CbShowOwnerPassword.Enabled = CbShowUserPassword.Enabled =
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
             clbPerms.Enabled = encrypt;
 
             cmbCompat.Enabled = appConfigManager.Config.ForcePdfCompat == PdfCompat.Default;
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             var pdfSettings = new PdfSettings
             {
-                DefaultFileName = txtDefaultFilePath.Text,
+                DefaultFileName = TxtDefaultFilePath.Text,
                 SkipSavePrompt = cbSkipSavePrompt.Checked,
                 Metadata =
                 {
                     Title = txtTitle.Text,
-                    Author = txtAuthor.Text,
-                    Subject = txtSubject.Text,
+                    Author = TxtAuthor.Text,
+                    Subject = TxtSubject.Text,
                     Keywords = txtKeywords.Text
                 },
                 Encryption =
                 {
-                    EncryptPdf = cbEncryptPdf.Checked,
+                    EncryptPdf = CbEncryptPdf.Checked,
                     OwnerPassword = txtOwnerPassword.Text,
                     UserPassword = txtUserPassword.Text,
                     AllowPrinting = clbPerms.GetItemChecked(0),
@@ -113,54 +111,53 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnRestoreDefaults_Click(object sender, EventArgs e)
+        private void BtnRestoreDefaults_Click(object sender, EventArgs e)
         {
             UpdateValues(new PdfSettings());
             UpdateEnabled();
             cbRememberSettings.Checked = false;
         }
 
-        private void txtDefaultFilePath_TextChanged(object sender, EventArgs e)
+        private void TxtDefaultFilePath_TextChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
         }
 
-        private void cbEncryptPdf_CheckedChanged(object sender, EventArgs e)
+        private void CbEncryptPdf_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
         }
 
-        private void cbShowOwnerPassword_CheckedChanged(object sender, EventArgs e)
+        private void CbShowOwnerPassword_CheckedChanged(object sender, EventArgs e)
         {
-            txtOwnerPassword.UseSystemPasswordChar = !cbShowOwnerPassword.Checked;
+            txtOwnerPassword.UseSystemPasswordChar = !CbShowOwnerPassword.Checked;
         }
 
-        private void cbShowUserPassword_CheckedChanged(object sender, EventArgs e)
+        private void CbShowUserPassword_CheckedChanged(object sender, EventArgs e)
         {
-            txtUserPassword.UseSystemPasswordChar = !cbShowUserPassword.Checked;
+            txtUserPassword.UseSystemPasswordChar = !CbShowUserPassword.Checked;
         }
 
-        private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = FormFactory.Create<FPlaceholders>();
-            form.FileName = txtDefaultFilePath.Text;
+            form.FileName = TxtDefaultFilePath.Text;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                txtDefaultFilePath.Text = form.FileName;
+                TxtDefaultFilePath.Text = form.FileName;
             }
         }
 
-        private void btnChooseFolder_Click(object sender, EventArgs e)
+        private void BtnChooseFolder_Click(object sender, EventArgs e)
         {
-            string savePath;
-            if (dialogHelper.PromptToSavePdf(txtDefaultFilePath.Text, out savePath))
+            if (dialogHelper.PromptToSavePdf(TxtDefaultFilePath.Text, out string savePath))
             {
-                txtDefaultFilePath.Text = savePath;
+                TxtDefaultFilePath.Text = savePath;
             }
         }
     }

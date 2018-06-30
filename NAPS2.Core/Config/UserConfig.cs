@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Images;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace NAPS2.Config
 {

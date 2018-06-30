@@ -1,20 +1,20 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Twain.Legacy
 {
-
-    internal class TwProtocol
+    internal class TwProtocol : IEquatable<TwProtocol>
     {									// TWON_PROTOCOL...
         public const short MAJOR = 1;
         public const short MINOR = 9;
+
+        public bool Equals(TwProtocol other) => throw new NotImplementedException();
     }
 
     [Flags]
     internal enum TwDG : short
-    {									// DG_.....
+    {                                   // DG_.....
+        Null = 0x0000,
         Control = 0x0001,
         Image = 0x0002,
         Audio = 0x0004
@@ -191,10 +191,13 @@ namespace NAPS2.Scan.Twain.Legacy
         public short ProtocolMajor;
         public short ProtocolMinor;
         public int SupportedGroups;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 34)]
         public string Manufacturer;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 34)]
         public string ProductFamily;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 34)]
         public string ProductName;
     }
@@ -206,6 +209,7 @@ namespace NAPS2.Scan.Twain.Legacy
         public short MinorNum;
         public short Language;
         public short Country;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 34)]
         public string Info;
     }
@@ -226,12 +230,18 @@ namespace NAPS2.Scan.Twain.Legacy
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
-    internal struct TwEvent
+    internal struct TwEvent : IEquatable<TwEvent>, IDisposable
     {									// TW_EVENT
         public IntPtr EventPtr;
         public short Message;
-    }
 
+        public bool Equals(TwEvent other) => throw new NotImplementedException();
+
+        void IDisposable.Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
     internal class TwImageInfo
@@ -241,8 +251,10 @@ namespace NAPS2.Scan.Twain.Legacy
         public int ImageWidth;
         public int ImageLength;
         public short SamplesPerPixel;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
         public short[] BitsPerSample;
+
         public short BitsPerPixel;
         public short Planar;
         public short PixelType;
@@ -262,10 +274,8 @@ namespace NAPS2.Scan.Twain.Legacy
         public short Whole;
         public ushort Frac;
 
-        public float ToFloat()
-        {
-            return Whole + (Frac / 65536.0f);
-        }
+        public float ToFloat() => Whole + (Frac / 65536.0f);
+
         public void FromFloat(float f)
         {
             var i = (int)((f * 65536.0f) + 0.5f);
@@ -275,13 +285,14 @@ namespace NAPS2.Scan.Twain.Legacy
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
-    internal class TwCapability
+    internal class TwCapability : IEquatable<TwCapability>, IDisposable
     {									// TW_CAPABILITY
         public TwCapability(TwCap cap)
         {
             Cap = (short)cap;
             ConType = -1;
         }
+
         public TwCapability(TwCap cap, short sval)
         {
             Cap = (short)cap;
@@ -292,13 +303,54 @@ namespace NAPS2.Scan.Twain.Legacy
             Marshal.WriteInt32(pv, 2, sval);
             Twain.GlobalUnlock(Handle);
         }
+
         ~TwCapability()
         {
             if (Handle != IntPtr.Zero)
                 Twain.GlobalFree(Handle);
         }
+
         public short Cap;
         public short ConType;
         public IntPtr Handle;
+
+        public bool Equals(TwCapability other) => throw new NotImplementedException();
+
+        #region IDisposable Support
+
+        private bool disposedValue; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~TwCapability() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        void IDisposable.Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+
+        #endregion IDisposable Support
     }
 }

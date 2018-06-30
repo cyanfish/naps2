@@ -118,75 +118,75 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnDone.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="BtnDone.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnDone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="BtnDone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnDone.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="BtnDone.Location" type="System.Drawing.Point, System.Drawing">
     <value>123, 31</value>
   </data>
-  <data name="btnDone.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="BtnDone.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 4, 0</value>
   </data>
-  <data name="btnDone.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="BtnDone.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 32</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnDone.TabIndex" type="System.Int32, mscorlib">
+  <data name="BtnDone.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="btnDone.Text" xml:space="preserve">
+  <data name="BtnDone.Text" xml:space="preserve">
     <value>&amp;Done</value>
   </data>
-  <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
-    <value>btnDone</value>
+  <data name="&gt;&gt;BtnDone.Name" xml:space="preserve">
+    <value>BtnDone</value>
   </data>
-  <data name="&gt;&gt;btnDone.Type" xml:space="preserve">
+  <data name="&gt;&gt;BtnDone.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnDone.Parent" xml:space="preserve">
+  <data name="&gt;&gt;BtnDone.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnDone.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;BtnDone.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+  <data name="BtnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="btnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="BtnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="btnScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="BtnScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnScan.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="BtnScan.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 31</value>
   </data>
-  <data name="btnScan.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="BtnScan.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="btnScan.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="BtnScan.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 32</value>
   </data>
-  <data name="btnScan.TabIndex" type="System.Int32, mscorlib">
+  <data name="BtnScan.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="btnScan.Text" xml:space="preserve">
+  <data name="BtnScan.Text" xml:space="preserve">
     <value>&amp;Scan</value>
   </data>
-  <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
-    <value>btnScan</value>
+  <data name="&gt;&gt;BtnScan.Name" xml:space="preserve">
+    <value>BtnScan</value>
   </data>
-  <data name="&gt;&gt;btnScan.Type" xml:space="preserve">
+  <data name="&gt;&gt;BtnScan.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnScan.Parent" xml:space="preserve">
+  <data name="&gt;&gt;BtnScan.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnScan.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;BtnScan.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblStatus.AutoSize" type="System.Boolean, mscorlib">

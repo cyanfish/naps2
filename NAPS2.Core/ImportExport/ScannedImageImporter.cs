@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using NAPS2.ImportExport.Images;
+﻿using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan.Images;
-using NAPS2.Util;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace NAPS2.ImportExport
 {
@@ -30,6 +28,7 @@ namespace NAPS2.ImportExport
             {
                 case ".pdf":
                     return pdfImporter.Import(filePath, importParams, progressCallback);
+
                 default:
                     return imageImporter.Import(filePath, importParams, progressCallback);
             }

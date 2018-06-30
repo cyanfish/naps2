@@ -34,33 +34,33 @@ namespace NAPS2.WinForms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPdfSettings));
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.groupMetadata = new System.Windows.Forms.GroupBox();
             this.txtKeywords = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtSubject = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtAuthor = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.Label6 = new System.Windows.Forms.Label();
+            this.TxtSubject = new System.Windows.Forms.TextBox();
+            this.Label5 = new System.Windows.Forms.Label();
+            this.TxtAuthor = new System.Windows.Forms.TextBox();
+            this.Label3 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.Label4 = new System.Windows.Forms.Label();
             this.groupProtection = new System.Windows.Forms.GroupBox();
             this.clbPerms = new System.Windows.Forms.CheckedListBox();
-            this.cbShowUserPassword = new System.Windows.Forms.CheckBox();
-            this.cbShowOwnerPassword = new System.Windows.Forms.CheckBox();
+            this.CbShowUserPassword = new System.Windows.Forms.CheckBox();
+            this.CbShowOwnerPassword = new System.Windows.Forms.CheckBox();
             this.txtUserPassword = new System.Windows.Forms.TextBox();
             this.lblUserPassword = new System.Windows.Forms.Label();
             this.txtOwnerPassword = new System.Windows.Forms.TextBox();
             this.lblOwnerPassword = new System.Windows.Forms.Label();
-            this.cbEncryptPdf = new System.Windows.Forms.CheckBox();
+            this.CbEncryptPdf = new System.Windows.Forms.CheckBox();
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
-            this.btnRestoreDefaults = new System.Windows.Forms.Button();
-            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
-            this.txtDefaultFilePath = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnChooseFolder = new System.Windows.Forms.Button();
+            this.BtnRestoreDefaults = new System.Windows.Forms.Button();
+            this.LinkPlaceholders = new System.Windows.Forms.LinkLabel();
+            this.TxtDefaultFilePath = new System.Windows.Forms.TextBox();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.BtnChooseFolder = new System.Windows.Forms.Button();
             this.cbSkipSavePrompt = new System.Windows.Forms.CheckBox();
             this.groupCompat = new System.Windows.Forms.GroupBox();
             this.cmbCompat = new System.Windows.Forms.ComboBox();
@@ -69,30 +69,30 @@ namespace NAPS2.WinForms
             this.groupCompat.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // groupMetadata
             // 
             this.groupMetadata.Controls.Add(this.txtKeywords);
-            this.groupMetadata.Controls.Add(this.label6);
-            this.groupMetadata.Controls.Add(this.txtSubject);
-            this.groupMetadata.Controls.Add(this.label5);
-            this.groupMetadata.Controls.Add(this.txtAuthor);
-            this.groupMetadata.Controls.Add(this.label3);
+            this.groupMetadata.Controls.Add(this.Label6);
+            this.groupMetadata.Controls.Add(this.TxtSubject);
+            this.groupMetadata.Controls.Add(this.Label5);
+            this.groupMetadata.Controls.Add(this.TxtAuthor);
+            this.groupMetadata.Controls.Add(this.Label3);
             this.groupMetadata.Controls.Add(this.txtTitle);
-            this.groupMetadata.Controls.Add(this.label4);
+            this.groupMetadata.Controls.Add(this.Label4);
             resources.ApplyResources(this.groupMetadata, "groupMetadata");
             this.groupMetadata.Name = "groupMetadata";
             this.groupMetadata.TabStop = false;
@@ -102,51 +102,51 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.txtKeywords, "txtKeywords");
             this.txtKeywords.Name = "txtKeywords";
             // 
-            // label6
+            // Label6
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.Label6, "Label6");
+            this.Label6.Name = "Label6";
             // 
-            // txtSubject
+            // TxtSubject
             // 
-            resources.ApplyResources(this.txtSubject, "txtSubject");
-            this.txtSubject.Name = "txtSubject";
+            resources.ApplyResources(this.TxtSubject, "TxtSubject");
+            this.TxtSubject.Name = "TxtSubject";
             // 
-            // label5
+            // Label5
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            resources.ApplyResources(this.Label5, "Label5");
+            this.Label5.Name = "Label5";
             // 
-            // txtAuthor
+            // TxtAuthor
             // 
-            resources.ApplyResources(this.txtAuthor, "txtAuthor");
-            this.txtAuthor.Name = "txtAuthor";
+            resources.ApplyResources(this.TxtAuthor, "TxtAuthor");
+            this.TxtAuthor.Name = "TxtAuthor";
             // 
-            // label3
+            // Label3
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.Label3, "Label3");
+            this.Label3.Name = "Label3";
             // 
             // txtTitle
             // 
             resources.ApplyResources(this.txtTitle, "txtTitle");
             this.txtTitle.Name = "txtTitle";
             // 
-            // label4
+            // Label4
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.Label4, "Label4");
+            this.Label4.Name = "Label4";
             // 
             // groupProtection
             // 
             this.groupProtection.Controls.Add(this.clbPerms);
-            this.groupProtection.Controls.Add(this.cbShowUserPassword);
-            this.groupProtection.Controls.Add(this.cbShowOwnerPassword);
+            this.groupProtection.Controls.Add(this.CbShowUserPassword);
+            this.groupProtection.Controls.Add(this.CbShowOwnerPassword);
             this.groupProtection.Controls.Add(this.txtUserPassword);
             this.groupProtection.Controls.Add(this.lblUserPassword);
             this.groupProtection.Controls.Add(this.txtOwnerPassword);
             this.groupProtection.Controls.Add(this.lblOwnerPassword);
-            this.groupProtection.Controls.Add(this.cbEncryptPdf);
+            this.groupProtection.Controls.Add(this.CbEncryptPdf);
             resources.ApplyResources(this.groupProtection, "groupProtection");
             this.groupProtection.Name = "groupProtection";
             this.groupProtection.TabStop = false;
@@ -169,19 +169,19 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.clbPerms, "clbPerms");
             this.clbPerms.Name = "clbPerms";
             // 
-            // cbShowUserPassword
+            // CbShowUserPassword
             // 
-            resources.ApplyResources(this.cbShowUserPassword, "cbShowUserPassword");
-            this.cbShowUserPassword.Name = "cbShowUserPassword";
-            this.cbShowUserPassword.UseVisualStyleBackColor = true;
-            this.cbShowUserPassword.CheckedChanged += new System.EventHandler(this.cbShowUserPassword_CheckedChanged);
+            resources.ApplyResources(this.CbShowUserPassword, "CbShowUserPassword");
+            this.CbShowUserPassword.Name = "CbShowUserPassword";
+            this.CbShowUserPassword.UseVisualStyleBackColor = true;
+            this.CbShowUserPassword.CheckedChanged += new System.EventHandler(this.CbShowUserPassword_CheckedChanged);
             // 
-            // cbShowOwnerPassword
+            // CbShowOwnerPassword
             // 
-            resources.ApplyResources(this.cbShowOwnerPassword, "cbShowOwnerPassword");
-            this.cbShowOwnerPassword.Name = "cbShowOwnerPassword";
-            this.cbShowOwnerPassword.UseVisualStyleBackColor = true;
-            this.cbShowOwnerPassword.CheckedChanged += new System.EventHandler(this.cbShowOwnerPassword_CheckedChanged);
+            resources.ApplyResources(this.CbShowOwnerPassword, "CbShowOwnerPassword");
+            this.CbShowOwnerPassword.Name = "CbShowOwnerPassword";
+            this.CbShowOwnerPassword.UseVisualStyleBackColor = true;
+            this.CbShowOwnerPassword.CheckedChanged += new System.EventHandler(this.CbShowOwnerPassword_CheckedChanged);
             // 
             // txtUserPassword
             // 
@@ -205,12 +205,12 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.lblOwnerPassword, "lblOwnerPassword");
             this.lblOwnerPassword.Name = "lblOwnerPassword";
             // 
-            // cbEncryptPdf
+            // CbEncryptPdf
             // 
-            resources.ApplyResources(this.cbEncryptPdf, "cbEncryptPdf");
-            this.cbEncryptPdf.Name = "cbEncryptPdf";
-            this.cbEncryptPdf.UseVisualStyleBackColor = true;
-            this.cbEncryptPdf.CheckedChanged += new System.EventHandler(this.cbEncryptPdf_CheckedChanged);
+            resources.ApplyResources(this.CbEncryptPdf, "CbEncryptPdf");
+            this.CbEncryptPdf.Name = "CbEncryptPdf";
+            this.CbEncryptPdf.UseVisualStyleBackColor = true;
+            this.CbEncryptPdf.CheckedChanged += new System.EventHandler(this.CbEncryptPdf_CheckedChanged);
             // 
             // cbRememberSettings
             // 
@@ -218,37 +218,37 @@ namespace NAPS2.WinForms
             this.cbRememberSettings.Name = "cbRememberSettings";
             this.cbRememberSettings.UseVisualStyleBackColor = true;
             // 
-            // btnRestoreDefaults
+            // BtnRestoreDefaults
             // 
-            resources.ApplyResources(this.btnRestoreDefaults, "btnRestoreDefaults");
-            this.btnRestoreDefaults.Name = "btnRestoreDefaults";
-            this.btnRestoreDefaults.UseVisualStyleBackColor = true;
-            this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
+            resources.ApplyResources(this.BtnRestoreDefaults, "BtnRestoreDefaults");
+            this.BtnRestoreDefaults.Name = "BtnRestoreDefaults";
+            this.BtnRestoreDefaults.UseVisualStyleBackColor = true;
+            this.BtnRestoreDefaults.Click += new System.EventHandler(this.BtnRestoreDefaults_Click);
             // 
-            // linkPlaceholders
+            // LinkPlaceholders
             // 
-            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
-            this.linkPlaceholders.Name = "linkPlaceholders";
-            this.linkPlaceholders.TabStop = true;
-            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
+            resources.ApplyResources(this.LinkPlaceholders, "LinkPlaceholders");
+            this.LinkPlaceholders.Name = "LinkPlaceholders";
+            this.LinkPlaceholders.TabStop = true;
+            this.LinkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkPlaceholders_LinkClicked);
             // 
-            // txtDefaultFilePath
+            // TxtDefaultFilePath
             // 
-            resources.ApplyResources(this.txtDefaultFilePath, "txtDefaultFilePath");
-            this.txtDefaultFilePath.Name = "txtDefaultFilePath";
-            this.txtDefaultFilePath.TextChanged += new System.EventHandler(this.txtDefaultFilePath_TextChanged);
+            resources.ApplyResources(this.TxtDefaultFilePath, "TxtDefaultFilePath");
+            this.TxtDefaultFilePath.Name = "TxtDefaultFilePath";
+            this.TxtDefaultFilePath.TextChanged += new System.EventHandler(this.TxtDefaultFilePath_TextChanged);
             // 
-            // label1
+            // Label1
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.Name = "Label1";
             // 
-            // btnChooseFolder
+            // BtnChooseFolder
             // 
-            resources.ApplyResources(this.btnChooseFolder, "btnChooseFolder");
-            this.btnChooseFolder.Name = "btnChooseFolder";
-            this.btnChooseFolder.UseVisualStyleBackColor = true;
-            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
+            resources.ApplyResources(this.BtnChooseFolder, "BtnChooseFolder");
+            this.BtnChooseFolder.Name = "BtnChooseFolder";
+            this.BtnChooseFolder.UseVisualStyleBackColor = true;
+            this.BtnChooseFolder.Click += new System.EventHandler(this.BtnChooseFolder_Click);
             // 
             // cbSkipSavePrompt
             // 
@@ -276,16 +276,16 @@ namespace NAPS2.WinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupCompat);
             this.Controls.Add(this.cbSkipSavePrompt);
-            this.Controls.Add(this.btnChooseFolder);
-            this.Controls.Add(this.linkPlaceholders);
-            this.Controls.Add(this.txtDefaultFilePath);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnRestoreDefaults);
+            this.Controls.Add(this.BtnChooseFolder);
+            this.Controls.Add(this.LinkPlaceholders);
+            this.Controls.Add(this.TxtDefaultFilePath);
+            this.Controls.Add(this.Label1);
+            this.Controls.Add(this.BtnRestoreDefaults);
             this.Controls.Add(this.cbRememberSettings);
             this.Controls.Add(this.groupProtection);
             this.Controls.Add(this.groupMetadata);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnOK);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FPdfSettings";
@@ -301,32 +301,32 @@ namespace NAPS2.WinForms
 
         #endregion
 
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnOK;
+        private System.Windows.Forms.Button BtnCancel;
         private ILProfileIcons ilProfileIcons;
         private System.Windows.Forms.GroupBox groupMetadata;
         private System.Windows.Forms.GroupBox groupProtection;
-        private System.Windows.Forms.CheckBox cbEncryptPdf;
+        private System.Windows.Forms.CheckBox CbEncryptPdf;
         private System.Windows.Forms.CheckBox cbRememberSettings;
         private System.Windows.Forms.TextBox txtOwnerPassword;
         private System.Windows.Forms.Label lblOwnerPassword;
         private System.Windows.Forms.TextBox txtUserPassword;
         private System.Windows.Forms.Label lblUserPassword;
-        private System.Windows.Forms.Button btnRestoreDefaults;
-        private System.Windows.Forms.TextBox txtAuthor;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button BtnRestoreDefaults;
+        private System.Windows.Forms.TextBox TxtAuthor;
+        private System.Windows.Forms.Label Label3;
         private System.Windows.Forms.TextBox txtTitle;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtSubject;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label Label4;
+        private System.Windows.Forms.TextBox TxtSubject;
+        private System.Windows.Forms.Label Label5;
         private System.Windows.Forms.TextBox txtKeywords;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox cbShowUserPassword;
-        private System.Windows.Forms.CheckBox cbShowOwnerPassword;
-        private System.Windows.Forms.LinkLabel linkPlaceholders;
-        private System.Windows.Forms.TextBox txtDefaultFilePath;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnChooseFolder;
+        private System.Windows.Forms.Label Label6;
+        private System.Windows.Forms.CheckBox CbShowUserPassword;
+        private System.Windows.Forms.CheckBox CbShowOwnerPassword;
+        private System.Windows.Forms.LinkLabel LinkPlaceholders;
+        private System.Windows.Forms.TextBox TxtDefaultFilePath;
+        private System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.Button BtnChooseFolder;
         private System.Windows.Forms.CheckBox cbSkipSavePrompt;
         private System.Windows.Forms.CheckedListBox clbPerms;
         private System.Windows.Forms.GroupBox groupCompat;

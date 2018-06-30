@@ -34,41 +34,41 @@ namespace NAPS2.WinForms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAutoSaveSettings));
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
-            this.linkPatchCodeInfo = new System.Windows.Forms.LinkLabel();
+            this.LinkPatchCodeInfo = new System.Windows.Forms.LinkLabel();
             this.rdSeparateByPatchT = new System.Windows.Forms.RadioButton();
             this.rdFilePerPage = new System.Windows.Forms.RadioButton();
             this.rdFilePerScan = new System.Windows.Forms.RadioButton();
-            this.btnChooseFolder = new System.Windows.Forms.Button();
-            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
-            this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.BtnChooseFolder = new System.Windows.Forms.Button();
+            this.LinkPlaceholders = new System.Windows.Forms.LinkLabel();
+            this.TxtFilePath = new System.Windows.Forms.TextBox();
             this.lblFilePath = new System.Windows.Forms.Label();
             this.cbClearAfterSave = new System.Windows.Forms.CheckBox();
             this.cbPromptForFilePath = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // linkPatchCodeInfo
+            // LinkPatchCodeInfo
             // 
-            resources.ApplyResources(this.linkPatchCodeInfo, "linkPatchCodeInfo");
-            this.linkPatchCodeInfo.Name = "linkPatchCodeInfo";
-            this.linkPatchCodeInfo.TabStop = true;
-            this.linkPatchCodeInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPatchCodeInfo_LinkClicked);
+            resources.ApplyResources(this.LinkPatchCodeInfo, "LinkPatchCodeInfo");
+            this.LinkPatchCodeInfo.Name = "LinkPatchCodeInfo";
+            this.LinkPatchCodeInfo.TabStop = true;
+            this.LinkPatchCodeInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkPatchCodeInfo_LinkClicked);
             // 
             // rdSeparateByPatchT
             // 
@@ -90,24 +90,24 @@ namespace NAPS2.WinForms
             this.rdFilePerScan.Name = "rdFilePerScan";
             this.rdFilePerScan.UseVisualStyleBackColor = true;
             // 
-            // btnChooseFolder
+            // BtnChooseFolder
             // 
-            resources.ApplyResources(this.btnChooseFolder, "btnChooseFolder");
-            this.btnChooseFolder.Name = "btnChooseFolder";
-            this.btnChooseFolder.UseVisualStyleBackColor = true;
-            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
+            resources.ApplyResources(this.BtnChooseFolder, "BtnChooseFolder");
+            this.BtnChooseFolder.Name = "BtnChooseFolder";
+            this.BtnChooseFolder.UseVisualStyleBackColor = true;
+            this.BtnChooseFolder.Click += new System.EventHandler(this.BtnChooseFolder_Click);
             // 
-            // linkPlaceholders
+            // LinkPlaceholders
             // 
-            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
-            this.linkPlaceholders.Name = "linkPlaceholders";
-            this.linkPlaceholders.TabStop = true;
-            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
+            resources.ApplyResources(this.LinkPlaceholders, "LinkPlaceholders");
+            this.LinkPlaceholders.Name = "LinkPlaceholders";
+            this.LinkPlaceholders.TabStop = true;
+            this.LinkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkPlaceholders_LinkClicked);
             // 
-            // txtFilePath
+            // TxtFilePath
             // 
-            resources.ApplyResources(this.txtFilePath, "txtFilePath");
-            this.txtFilePath.Name = "txtFilePath";
+            resources.ApplyResources(this.TxtFilePath, "TxtFilePath");
+            this.TxtFilePath.Name = "TxtFilePath";
             // 
             // lblFilePath
             // 
@@ -128,21 +128,21 @@ namespace NAPS2.WinForms
             // 
             // FAutoSaveSettings
             // 
-            this.AcceptButton = this.btnOK;
+            this.AcceptButton = this.BtnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.cbPromptForFilePath);
             this.Controls.Add(this.cbClearAfterSave);
-            this.Controls.Add(this.btnChooseFolder);
-            this.Controls.Add(this.linkPlaceholders);
-            this.Controls.Add(this.txtFilePath);
+            this.Controls.Add(this.BtnChooseFolder);
+            this.Controls.Add(this.LinkPlaceholders);
+            this.Controls.Add(this.TxtFilePath);
             this.Controls.Add(this.lblFilePath);
-            this.Controls.Add(this.linkPatchCodeInfo);
+            this.Controls.Add(this.LinkPatchCodeInfo);
             this.Controls.Add(this.rdSeparateByPatchT);
             this.Controls.Add(this.rdFilePerPage);
             this.Controls.Add(this.rdFilePerScan);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnOK);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FAutoSaveSettings";
@@ -153,16 +153,16 @@ namespace NAPS2.WinForms
 
         #endregion
 
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnOK;
+        private System.Windows.Forms.Button BtnCancel;
         private ILProfileIcons ilProfileIcons;
-        private System.Windows.Forms.LinkLabel linkPatchCodeInfo;
+        private System.Windows.Forms.LinkLabel LinkPatchCodeInfo;
         private System.Windows.Forms.RadioButton rdSeparateByPatchT;
         private System.Windows.Forms.RadioButton rdFilePerPage;
         private System.Windows.Forms.RadioButton rdFilePerScan;
-        private System.Windows.Forms.Button btnChooseFolder;
-        private System.Windows.Forms.LinkLabel linkPlaceholders;
-        private System.Windows.Forms.TextBox txtFilePath;
+        private System.Windows.Forms.Button BtnChooseFolder;
+        private System.Windows.Forms.LinkLabel LinkPlaceholders;
+        private System.Windows.Forms.TextBox TxtFilePath;
         private System.Windows.Forms.Label lblFilePath;
         private System.Windows.Forms.CheckBox cbClearAfterSave;
         private System.Windows.Forms.CheckBox cbPromptForFilePath;

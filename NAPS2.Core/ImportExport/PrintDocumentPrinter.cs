@@ -1,11 +1,11 @@
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.ImportExport
 {
@@ -20,13 +20,13 @@ namespace NAPS2.ImportExport
 
         public bool PromptToPrint(List<ScannedImage> images, List<ScannedImage> selectedImages)
         {
-            if (!images.Any())
+            if (images.Count == 0)
             {
                 return false;
             }
             var printDialog = new PrintDialog
             {
-                AllowSelection = selectedImages.Any(),
+                AllowSelection = selectedImages.Count > 0,
                 AllowSomePages = true,
                 PrinterSettings =
                 {
@@ -51,14 +51,17 @@ namespace NAPS2.ImportExport
                 case PrintRange.AllPages:
                     imagesToPrint = images;
                     break;
+
                 case PrintRange.Selection:
                     imagesToPrint = selectedImages;
                     break;
+
                 case PrintRange.SomePages:
                     int start = printerSettings.FromPage - 1;
                     int length = printerSettings.ToPage - start;
                     imagesToPrint = images.Skip(start).Take(length).ToList();
                     break;
+
                 default:
                     imagesToPrint = new List<ScannedImage>();
                     break;

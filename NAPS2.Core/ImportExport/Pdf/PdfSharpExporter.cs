@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using NAPS2.Config;
+﻿using NAPS2.Config;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -14,6 +7,13 @@ using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -63,7 +63,7 @@ namespace NAPS2.ImportExport.Pdf
                 document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
                 document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
-            
+
             bool useOcr = false;
             if (ocrLanguageCode != null)
             {
@@ -110,7 +110,7 @@ namespace NAPS2.ImportExport.Pdf
             int progress = 0;
             foreach (var image in images)
             {
-                bool importedPdfPassThrough = image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any();
+                bool importedPdfPassThrough = image.FileFormat == null && image.RecoveryIndexImage.TransformList.Count == 0;
 
                 if (importedPdfPassThrough)
                 {
@@ -150,7 +150,7 @@ namespace NAPS2.ImportExport.Pdf
                     return null;
                 }
 
-                bool importedPdfPassThrough = image.FileFormat == null && !image.RecoveryIndexImage.TransformList.Any();
+                bool importedPdfPassThrough = image.FileFormat == null && image.RecoveryIndexImage.TransformList.Count == 0;
 
                 PdfPage page;
                 if (importedPdfPassThrough)
@@ -167,17 +167,17 @@ namespace NAPS2.ImportExport.Pdf
                         string line;
                         while ((line = reader.ReadLine()) != null)
                         {
-                            if (line.EndsWith("BT"))
+                            if (line.EndsWith("BT", StringComparison.CurrentCulture))
                             {
                                 inTextBlock = true;
                             }
-                            else if (line.EndsWith("ET"))
+                            else if (line.EndsWith("ET", StringComparison.CurrentCulture))
                             {
                                 inTextBlock = false;
                             }
-                            else if (inTextBlock &&
-                                          (line.EndsWith("TJ") || line.EndsWith("Tj")
-                                           || line.EndsWith("\"") || line.EndsWith("'")))
+                            else if (inTextBlock
+                                          && (line.EndsWith("TJ", StringComparison.CurrentCulture) || line.EndsWith("Tj", StringComparison.CurrentCulture)
+                                           || line.EndsWith("\"", StringComparison.CurrentCulture) || line.EndsWith("'", StringComparison.CurrentCulture)))
                             {
                                 // Text-showing operators
                                 // Since this page already contains text, don't use OCR
@@ -227,7 +227,7 @@ namespace NAPS2.ImportExport.Pdf
                     {
                         return null;
                     }
-                    
+
                     // ReSharper disable once AccessToModifiedClosure
                     ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode, () => !progressCallback(progress));
                 }
@@ -304,10 +304,7 @@ namespace NAPS2.ImportExport.Pdf
 
         private static void DrawImageOnPage(PdfPage page, XImage img, PdfCompat compat)
         {
-            if (compat != PdfCompat.Default)
-            {
-                img.Interpolate = false;
-            }
+            img.Interpolate &= compat == PdfCompat.Default;
             Size realSize = GetRealSize(img);
             page.Width = realSize.Width;
             page.Height = realSize.Height;

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace NAPS2.Portable
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             var portableExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (portableExeDir != null)

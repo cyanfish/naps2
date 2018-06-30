@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Twain.Legacy
 {
-    internal class DibUtils
+    internal static class DibUtils
     {
         [DllImport("gdi32.dll", ExactSpelling = true)]
         internal static extern int SetDIBitsToDevice(IntPtr hdc, int xdst, int ydst,

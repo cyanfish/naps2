@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using NAPS2.Config;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace NAPS2.Scan.Images
 {
@@ -121,6 +119,8 @@ namespace NAPS2.Scan.Images
 
         public IEnumerable<int> Interleave(IEnumerable<int> selection)
         {
+            if (selection == null)
+                throw new System.ArgumentNullException(nameof(selection));
             // Partition the image list in two
             int count = Images.Count;
             int split = (count + 1) / 2;
@@ -142,6 +142,8 @@ namespace NAPS2.Scan.Images
 
         public IEnumerable<int> Deinterleave(IEnumerable<int> selection)
         {
+            if (selection == null)
+                throw new System.ArgumentNullException(nameof(selection));
             // Duplicate the list
             int count = Images.Count;
             int split = (count + 1) / 2;
@@ -155,7 +157,7 @@ namespace NAPS2.Scan.Images
             }
             for (int i = 0; i < (count - split); ++i)
             {
-                Images.Add(images[i * 2 + 1]);
+                Images.Add(images[(i * 2) + 1]);
             }
 
             RecoveryImage.Refresh(Images);
@@ -166,6 +168,8 @@ namespace NAPS2.Scan.Images
 
         public IEnumerable<int> AltInterleave(IEnumerable<int> selectedIndices)
         {
+            if (selectedIndices == null)
+                throw new System.ArgumentNullException(nameof(selectedIndices));
             // Partition the image list in two
             int count = Images.Count;
             int split = (count + 1) / 2;
@@ -173,10 +177,11 @@ namespace NAPS2.Scan.Images
             var p2 = Images.Skip(split).ToList();
 
             // Rebuild the image list, taking alternating images from each the partitions (the latter in reverse order)
+            // TODO: verify this; the order of Operations wasn't set, and the results seemed off before making changes.
             Images.Clear();
             for (int i = 0; i < count; ++i)
             {
-                Images.Add(i % 2 == 0 ? p1[i / 2] : p2[p2.Count - 1 - i / 2]);
+                Images.Add(i % 2 == 0 ? p1[i / 2] : p2[p2.Count - 1 - (i / 2)]);
             }
 
             RecoveryImage.Refresh(Images);
@@ -187,6 +192,8 @@ namespace NAPS2.Scan.Images
 
         public IEnumerable<int> AltDeinterleave(IEnumerable<int> selectedIndices)
         {
+            if (selectedIndices == null)
+                throw new System.ArgumentNullException(nameof(selectedIndices));
             // Duplicate the list
             int count = Images.Count;
             int split = (count + 1) / 2;
@@ -200,7 +207,7 @@ namespace NAPS2.Scan.Images
             }
             for (int i = count - split - 1; i >= 0; --i)
             {
-                Images.Add(images[i * 2 + 1]);
+                Images.Add(images[(i * 2) + 1]);
             }
 
             RecoveryImage.Refresh(Images);

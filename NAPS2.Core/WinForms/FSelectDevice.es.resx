@@ -118,81 +118,81 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>215, 41</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>&amp;Cancelar</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="btnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnSelect.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnSelect.Location" type="System.Drawing.Point, System.Drawing">
         <value>215, 12</value>
     </data>
-    <data name="btnSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnSelect.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnSelect.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnSelect.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnSelect.Text" xml:space="preserve">
+    <data name="BtnSelect.Text" xml:space="preserve">
         <value>&amp;Seleccionar</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Name" xml:space="preserve">
-        <value>btnSelect</value>
+    <data name="&gt;&gt;BtnSelect.Name" xml:space="preserve">
+        <value>BtnSelect</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnSelect.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnSelect.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnSelect.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnSelect.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnSelect.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="listboxDevices.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="ListboxDevices.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 12</value>
     </data>
-    <data name="listboxDevices.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="ListboxDevices.Size" type="System.Drawing.Size, System.Drawing">
         <value>197, 108</value>
     </data>
-    <data name="listboxDevices.TabIndex" type="System.Int32, mscorlib">
+    <data name="ListboxDevices.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Name" xml:space="preserve">
-        <value>listboxDevices</value>
+    <data name="&gt;&gt;ListboxDevices.Name" xml:space="preserve">
+        <value>ListboxDevices</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Type" xml:space="preserve">
+    <data name="&gt;&gt;ListboxDevices.Type" xml:space="preserve">
         <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.Parent" xml:space="preserve">
+    <data name="&gt;&gt;ListboxDevices.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;listboxDevices.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;ListboxDevices.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using NAPS2.Util;
+using System;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Scan.Exceptions;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Wia
 {
@@ -61,14 +57,12 @@ namespace NAPS2.Scan.Wia
         public T GetSync<T>(Func<WiaState, T> action)
         {
             T value = default(T);
-            DoSync(wia =>
-            {
-                value = action(wia);
-            });
+            // TODO: https://github.com/JosefPihrt/Roslynator/blob/master/docs/analyzers/RCS1021.md
+            DoSync(wia => value = action(wia));
             return value;
         }
 
-        public void DoAsync(Action<WiaState> action)
+        public void Do(Action<WiaState> action)
         {
             form.BeginInvoke(new Action(() =>
             {
@@ -78,22 +72,6 @@ namespace NAPS2.Scan.Wia
                 }
                 action(wiaState);
             }));
-        }
-
-        public void Dispose()
-        {
-            if (thread != null)
-            {
-                try
-                {
-                    form.Invoke(new Action(Application.ExitThread));
-                }
-                catch (Exception ex)
-                {
-                    Log.ErrorException("Error disposing WIA event loop", ex);
-                }
-                thread = null;
-            }
         }
 
         private WiaState InitWia()
@@ -114,5 +92,40 @@ namespace NAPS2.Scan.Wia
             form.Load += (sender, e) => initWaiter.Set();
             Application.Run(form);
         }
+
+        #region IDisposable Support
+
+        private bool disposed; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    if (thread != null)
+                    {
+                        try
+                        {
+                            initWaiter.Dispose();
+                            form.Invoke(new Action(Application.ExitThread));
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.ErrorException("Error disposing WIA event loop", ex);
+                        }
+                        thread = null;
+                    }
+                }
+                disposed = true;
+            }
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        void IDisposable.Dispose() => Dispose(true);
+
+        public void Dispose() => Dispose(true);
+
+        #endregion IDisposable Support
     }
 }

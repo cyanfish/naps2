@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.Util;
+using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
-using NAPS2.Util;
 
 namespace NAPS2.Host
 {
@@ -17,7 +15,7 @@ namespace NAPS2.Host
 
         private static readonly Lazy<ChannelFactory<IX86HostService>> ChannelFactory = new Lazy<ChannelFactory<IX86HostService>>(
                 () => new ChannelFactory<IX86HostService>(new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) }, new EndpointAddress(PipeName)));
-        
+
         private static Process _hostProcess;
 
         public static string PipeName { get; set; }
@@ -30,7 +28,8 @@ namespace NAPS2.Host
             }
             var dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             var hostProcessPath = Path.Combine(dir, HOST_EXE_NAME);
-            _hostProcess = Process.Start(new ProcessStartInfo {
+            _hostProcess = Process.Start(new ProcessStartInfo
+            {
                 FileName = hostProcessPath,
                 Arguments = HOST_ARG,
                 RedirectStandardOutput = true,

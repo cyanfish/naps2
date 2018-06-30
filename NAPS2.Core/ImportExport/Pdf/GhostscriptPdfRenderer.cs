@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using Ghostscript.NET.Rasterizer;
+﻿using Ghostscript.NET.Rasterizer;
 using NAPS2.Config;
 using NAPS2.Dependencies;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Util;
-using NAPS2.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -79,9 +75,9 @@ namespace NAPS2.ImportExport.Pdf
         {
             private static readonly List<(PlatformSupport, string)> UrlFormats = new List<(PlatformSupport, string)>
             {
-                (PlatformSupport.ModernWindows, @"https://github.com/cyanfish/naps2-components/releases/download/gs-9.21/{0}"),
-                (PlatformSupport.ModernWindows, @"https://sourceforge.net/projects/naps2/files/components/gs-9.21/{0}/download"),
-                (PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/gs-9.21/{0}")
+                (PlatformSupport.ModernWindows, "https://github.com/cyanfish/naps2-components/releases/download/gs-9.21/{0}"),
+                (PlatformSupport.ModernWindows, "https://sourceforge.net/projects/naps2/files/components/gs-9.21/{0}/download"),
+                (PlatformSupport.WindowsXp, "http://xp-mirror.naps2.com/gs-9.21/{0}")
             };
 
             private static readonly DownloadInfo GhostscriptDownload32 = new DownloadInfo("gsdll32.dll.gz", UrlFormats, 10.39, "fd7446a05efaf467f5f6a7123c525b0fc7bde711", DownloadFormat.Gzip);

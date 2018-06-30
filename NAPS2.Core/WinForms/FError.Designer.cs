@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FError));
             this.lblErrorText = new System.Windows.Forms.Label();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.linkDetails = new System.Windows.Forms.LinkLabel();
-            this.txtDetails = new System.Windows.Forms.TextBox();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.LinkDetails = new System.Windows.Forms.LinkLabel();
+            this.TxtDetails = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblErrorText
@@ -40,33 +40,33 @@
             resources.ApplyResources(this.lblErrorText, "lblErrorText");
             this.lblErrorText.Name = "lblErrorText";
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // linkDetails
+            // LinkDetails
             // 
-            resources.ApplyResources(this.linkDetails, "linkDetails");
-            this.linkDetails.Name = "linkDetails";
-            this.linkDetails.TabStop = true;
-            this.linkDetails.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDetails_LinkClicked);
+            resources.ApplyResources(this.LinkDetails, "LinkDetails");
+            this.LinkDetails.Name = "LinkDetails";
+            this.LinkDetails.TabStop = true;
+            this.LinkDetails.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkDetails_LinkClicked);
             // 
-            // txtDetails
+            // TxtDetails
             // 
-            resources.ApplyResources(this.txtDetails, "txtDetails");
-            this.txtDetails.Name = "txtDetails";
-            this.txtDetails.ReadOnly = true;
+            resources.ApplyResources(this.TxtDetails, "TxtDetails");
+            this.TxtDetails.Name = "TxtDetails";
+            this.TxtDetails.ReadOnly = true;
             // 
             // FError
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtDetails);
-            this.Controls.Add(this.linkDetails);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.TxtDetails);
+            this.Controls.Add(this.LinkDetails);
+            this.Controls.Add(this.BtnOK);
             this.Controls.Add(this.lblErrorText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -80,8 +80,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblErrorText;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.LinkLabel linkDetails;
-        private System.Windows.Forms.TextBox txtDetails;
+        private System.Windows.Forms.Button BtnOK;
+        private System.Windows.Forms.LinkLabel LinkDetails;
+        private System.Windows.Forms.TextBox TxtDetails;
     }
 }

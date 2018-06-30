@@ -1,24 +1,23 @@
-﻿using System;
+﻿using NAPS2.Dependencies;
+using NAPS2.Lang.Resources;
+using NAPS2.Util;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Windows.Forms;
-using NAPS2.Dependencies;
-using NAPS2.Lang.Resources;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
     public partial class FDownloadProgress : FormBase
     {
         private readonly List<QueueItem> filesToDownload = new List<QueueItem>();
-        private int filesDownloaded = 0;
-        private int urlIndex = 0;
-        private double currentFileSize = 0.0;
-        private double currentFileProgress = 0.0;
+        private int filesDownloaded;
+        private int urlIndex;
+        private double currentFileSize;
+        private double currentFileProgress;
         private bool hasError;
         private bool cancel;
 
@@ -29,7 +28,7 @@ namespace NAPS2.WinForms
             try
             {
                 const int tls12 = 3072;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType) tls12;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)tls12;
             }
             catch (NotSupportedException)
             {
@@ -49,7 +48,7 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(progressBarTop, progressBarSub)
                     .WidthToForm()
-                .Bind(btnCancel)
+                .Bind(BtnCancel)
                     .RightToForm()
                 .Activate();
 
@@ -58,14 +57,14 @@ namespace NAPS2.WinForms
             StartNextDownload();
         }
 
-        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             currentFileProgress = e.BytesReceived;
             currentFileSize = e.TotalBytesToReceive;
             DisplayProgress();
         }
 
-        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             var file = filesToDownload[filesDownloaded];
             if (e.Error != null)
@@ -76,7 +75,7 @@ namespace NAPS2.WinForms
                     Log.ErrorException("Error downloading file: " + file.DownloadInfo.FileName, e.Error);
                 }
             }
-            else if (file.DownloadInfo.Sha1 != CalculateSha1((Path.Combine(file.TempFolder, file.DownloadInfo.FileName))))
+            else if (file.DownloadInfo.Sha1 != CalculateSha1(Path.Combine(file.TempFolder, file.DownloadInfo.FileName)))
             {
                 hasError = true;
                 Log.Error("Error downloading file (invalid checksum): " + file.DownloadInfo.FileName);
@@ -162,17 +161,17 @@ namespace NAPS2.WinForms
 
         private void DisplayProgress()
         {
-            labelTop.Text = string.Format(MiscResources.FilesProgressFormat, filesDownloaded, filesToDownload.Count);
+            LabelTop.Text = string.Format(MiscResources.FilesProgressFormat, filesDownloaded, filesToDownload.Count);
             progressBarTop.Maximum = filesToDownload.Count * 1000;
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            progressBarTop.Value = filesDownloaded * 1000 + (currentFileSize == 0 ? 0 : (int)(currentFileProgress / currentFileSize * 1000));
-            labelSub.Text = string.Format(MiscResources.SizeProgress, (currentFileProgress / 1000000.0).ToString("f1"), (currentFileSize / 1000000.0).ToString("f1"));
+            progressBarTop.Value = (filesDownloaded * 1000) + (Math.Abs(currentFileSize) < Single.Epsilon ? 0 : (int)(currentFileProgress / currentFileSize * 1000));
+            LabelSub.Text = string.Format(MiscResources.SizeProgress, (currentFileProgress / 1000000.0).ToString("f1"), (currentFileSize / 1000000.0).ToString("f1"));
             progressBarSub.Maximum = (int)(currentFileSize);
             progressBarSub.Value = (int)(currentFileProgress);
             Refresh();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace NAPS2.Util
 {
-    public class Slice
+    public sealed class Slice
     {
         public static readonly Slice Default = new Slice(null, null, null);
 

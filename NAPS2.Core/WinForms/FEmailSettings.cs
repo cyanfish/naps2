@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Email;
+using System;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
@@ -19,14 +17,14 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override void OnLoad(object sender, EventArgs eventArgs)
         {
             new LayoutManager(this)
-                .Bind(btnRestoreDefaults, btnOK, btnCancel)
+                .Bind(BtnRestoreDefaults, BtnOK, BtnCancel)
                     .BottomToForm()
-                .Bind(btnOK, btnCancel)
+                .Bind(BtnOK, BtnCancel)
                     .RightToForm()
-                .Bind(txtAttachmentName)
+                .Bind(TxtAttachmentName)
                     .WidthToForm()
                 .Activate();
 
@@ -36,14 +34,14 @@ namespace NAPS2.WinForms
 
         private void UpdateValues(EmailSettings emailSettings)
         {
-            txtAttachmentName.Text = emailSettings.AttachmentName;
+            TxtAttachmentName.Text = emailSettings.AttachmentName;
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             var emailSettings = new EmailSettings
             {
-                AttachmentName = txtAttachmentName.Text
+                AttachmentName = TxtAttachmentName.Text
             };
 
             emailSettingsContainer.EmailSettings = emailSettings;
@@ -53,24 +51,24 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnRestoreDefaults_Click(object sender, EventArgs e)
+        private void BtnRestoreDefaults_Click(object sender, EventArgs e)
         {
             UpdateValues(new EmailSettings());
             cbRememberSettings.Checked = false;
         }
 
-        private void linkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkPlaceholders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = FormFactory.Create<FPlaceholders>();
-            form.FileName = txtAttachmentName.Text;
+            form.FileName = TxtAttachmentName.Text;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                txtAttachmentName.Text = form.FileName;
+                TxtAttachmentName.Text = form.FileName;
             }
         }
     }

@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
-using NAPS2.Config;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace NAPS2.Scan.Wia
 {
@@ -72,7 +69,7 @@ namespace NAPS2.Scan.Wia
                     {
                         if (pageNumber > 1 && ScanProfile.WiaDelayBetweenScans)
                         {
-                            int delay = (int) (ScanProfile.WiaDelayBetweenScansSeconds.Clamp(0, 30) * 1000);
+                            int delay = (int)(ScanProfile.WiaDelayBetweenScansSeconds.Clamp(0, 30) * 1000);
                             Thread.Sleep(delay);
                         }
                         image = TransferImage(eventLoop, pageNumber, out cancel);
@@ -82,11 +79,11 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (ScanDriverException e)
                     {
-                        if (ScanProfile.WiaRetryOnFailure && e.InnerException is COMException 
-                            && (uint)((COMException) e.InnerException).ErrorCode == 0x80004005 && retryCount < MAX_RETRIES)
+                        if (ScanProfile.WiaRetryOnFailure && e.InnerException is COMException
+                            && (uint)((COMException)e.InnerException).ErrorCode == 0x80004005 && retryCount < MAX_RETRIES)
                         {
                             Thread.Sleep(1000);
-                            retryCount += 1;
+                            retryCount++;
                             retry = true;
                             continue;
                         }

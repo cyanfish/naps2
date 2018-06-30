@@ -1,11 +1,8 @@
-﻿using System;
+﻿using NAPS2.Config;
+using NAPS2.Util;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using NAPS2.Config;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -14,16 +11,16 @@ namespace NAPS2.WinForms
         private const int PADDING_X = 25, PADDING_Y = 25;
         private const int SPACING_Y = 20;
 
-        private readonly FormBase parentForm;
+        private readonly FormBase ParentForm;
         private readonly AppConfigManager appConfigManager;
 
         private readonly List<NotifyWidget> slots = new List<NotifyWidget>();
 
-        public NotificationManager(FormBase parentForm, AppConfigManager appConfigManager)
+        public NotificationManager(FormBase ParentForm, AppConfigManager appConfigManager)
         {
-            this.parentForm = parentForm;
+            this.ParentForm = ParentForm;
             this.appConfigManager = appConfigManager;
-            parentForm.Resize += parentForm_Resize;
+            ParentForm.Resize += ParentForm_Resize;
         }
 
         public void PdfSaved(string path)
@@ -62,7 +59,7 @@ namespace NAPS2.WinForms
             n.ShowNotify();
         }
 
-        private void parentForm_Resize(object sender, EventArgs e)
+        private void ParentForm_Resize(object sender, EventArgs e)
         {
             for (int i = 0; i < slots.Count; i++)
             {
@@ -78,7 +75,7 @@ namespace NAPS2.WinForms
             var index = slots.IndexOf(n);
             if (index != -1)
             {
-                parentForm.Controls.Remove(n);
+                ParentForm.Controls.Remove(n);
                 slots[index] = null;
             }
         }
@@ -95,14 +92,14 @@ namespace NAPS2.WinForms
             {
                 slots[index] = n;
             }
-            parentForm.Controls.Add(n);
+            ParentForm.Controls.Add(n);
             return index;
         }
 
         private Point GetPosition(NotifyWidget n, int slot)
         {
-            return new Point(parentForm.ClientSize.Width - n.Width - PADDING_X,
-                parentForm.ClientSize.Height - n.Height - PADDING_Y - (n.Height + SPACING_Y) * slot);
+            return new Point(ParentForm.ClientSize.Width - n.Width - PADDING_X,
+                ParentForm.ClientSize.Height - n.Height - PADDING_Y - ((n.Height + SPACING_Y) * slot));
         }
     }
 }

@@ -34,29 +34,29 @@ namespace NAPS2.WinForms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FEmailSettings));
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.cbRememberSettings = new System.Windows.Forms.CheckBox();
-            this.btnRestoreDefaults = new System.Windows.Forms.Button();
-            this.txtAttachmentName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
+            this.BtnRestoreDefaults = new System.Windows.Forms.Button();
+            this.TxtAttachmentName = new System.Windows.Forms.TextBox();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.LinkPlaceholders = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // cbRememberSettings
             // 
@@ -64,41 +64,41 @@ namespace NAPS2.WinForms
             this.cbRememberSettings.Name = "cbRememberSettings";
             this.cbRememberSettings.UseVisualStyleBackColor = true;
             // 
-            // btnRestoreDefaults
+            // BtnRestoreDefaults
             // 
-            resources.ApplyResources(this.btnRestoreDefaults, "btnRestoreDefaults");
-            this.btnRestoreDefaults.Name = "btnRestoreDefaults";
-            this.btnRestoreDefaults.UseVisualStyleBackColor = true;
-            this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
+            resources.ApplyResources(this.BtnRestoreDefaults, "BtnRestoreDefaults");
+            this.BtnRestoreDefaults.Name = "BtnRestoreDefaults";
+            this.BtnRestoreDefaults.UseVisualStyleBackColor = true;
+            this.BtnRestoreDefaults.Click += new System.EventHandler(this.BtnRestoreDefaults_Click);
             // 
-            // txtAttachmentName
+            // TxtAttachmentName
             // 
-            resources.ApplyResources(this.txtAttachmentName, "txtAttachmentName");
-            this.txtAttachmentName.Name = "txtAttachmentName";
+            resources.ApplyResources(this.TxtAttachmentName, "TxtAttachmentName");
+            this.TxtAttachmentName.Name = "TxtAttachmentName";
             // 
-            // label1
+            // Label1
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.Name = "Label1";
             // 
-            // linkPlaceholders
+            // LinkPlaceholders
             // 
-            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
-            this.linkPlaceholders.Name = "linkPlaceholders";
-            this.linkPlaceholders.TabStop = true;
-            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
+            resources.ApplyResources(this.LinkPlaceholders, "LinkPlaceholders");
+            this.LinkPlaceholders.Name = "LinkPlaceholders";
+            this.LinkPlaceholders.TabStop = true;
+            this.LinkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkPlaceholders_LinkClicked);
             // 
             // FEmailSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.linkPlaceholders);
-            this.Controls.Add(this.txtAttachmentName);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnRestoreDefaults);
+            this.Controls.Add(this.LinkPlaceholders);
+            this.Controls.Add(this.TxtAttachmentName);
+            this.Controls.Add(this.Label1);
+            this.Controls.Add(this.BtnRestoreDefaults);
             this.Controls.Add(this.cbRememberSettings);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnOK);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FEmailSettings";
@@ -109,13 +109,13 @@ namespace NAPS2.WinForms
 
         #endregion
 
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnOK;
+        private System.Windows.Forms.Button BtnCancel;
         private ILProfileIcons ilProfileIcons;
         private System.Windows.Forms.CheckBox cbRememberSettings;
-        private System.Windows.Forms.Button btnRestoreDefaults;
-        private System.Windows.Forms.TextBox txtAttachmentName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel linkPlaceholders;
+        private System.Windows.Forms.Button BtnRestoreDefaults;
+        private System.Windows.Forms.TextBox TxtAttachmentName;
+        private System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.LinkLabel LinkPlaceholders;
     }
 }

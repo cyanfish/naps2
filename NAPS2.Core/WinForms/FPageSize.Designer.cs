@@ -29,41 +29,41 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPageSize));
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.textboxWidth = new System.Windows.Forms.TextBox();
-            this.labelX = new System.Windows.Forms.Label();
+            this.LabelX = new System.Windows.Forms.Label();
             this.textboxHeight = new System.Windows.Forms.TextBox();
             this.comboUnit = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboName = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.ComboName = new System.Windows.Forms.ComboBox();
+            this.Label2 = new System.Windows.Forms.Label();
+            this.BtnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // textboxWidth
             // 
             resources.ApplyResources(this.textboxWidth, "textboxWidth");
             this.textboxWidth.Name = "textboxWidth";
             // 
-            // labelX
+            // LabelX
             // 
-            resources.ApplyResources(this.labelX, "labelX");
-            this.labelX.Name = "labelX";
+            resources.ApplyResources(this.LabelX, "LabelX");
+            this.LabelX.Name = "LabelX";
             // 
             // textboxHeight
             // 
@@ -77,46 +77,46 @@
             resources.ApplyResources(this.comboUnit, "comboUnit");
             this.comboUnit.Name = "comboUnit";
             // 
-            // label1
+            // Label1
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.Name = "Label1";
             // 
-            // comboName
+            // ComboName
             // 
-            this.comboName.FormattingEnabled = true;
-            resources.ApplyResources(this.comboName, "comboName");
-            this.comboName.Name = "comboName";
-            this.comboName.SelectionChangeCommitted += new System.EventHandler(this.comboName_SelectionChangeCommitted);
-            this.comboName.TextChanged += new System.EventHandler(this.comboName_TextChanged);
+            this.ComboName.FormattingEnabled = true;
+            resources.ApplyResources(this.ComboName, "ComboName");
+            this.ComboName.Name = "ComboName";
+            this.ComboName.SelectionChangeCommitted += new System.EventHandler(this.ComboName_SelectionChangeCommitted);
+            this.ComboName.TextChanged += new System.EventHandler(this.ComboName_TextChanged);
             // 
-            // label2
+            // Label2
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.Label2, "Label2");
+            this.Label2.Name = "Label2";
             // 
-            // btnDelete
+            // BtnDelete
             // 
-            resources.ApplyResources(this.btnDelete, "btnDelete");
-            this.btnDelete.Image = global::NAPS2.Icons.cross_small;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            resources.ApplyResources(this.BtnDelete, "BtnDelete");
+            this.BtnDelete.Image = global::NAPS2.Icons.cross_small;
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.UseVisualStyleBackColor = true;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // FPageSize
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboName);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.BtnDelete);
+            this.Controls.Add(this.Label2);
+            this.Controls.Add(this.ComboName);
+            this.Controls.Add(this.Label1);
             this.Controls.Add(this.comboUnit);
             this.Controls.Add(this.textboxHeight);
-            this.Controls.Add(this.labelX);
+            this.Controls.Add(this.LabelX);
             this.Controls.Add(this.textboxWidth);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnOK);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FPageSize";
@@ -127,16 +127,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnOK;
+        private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.TextBox textboxWidth;
-        private System.Windows.Forms.Label labelX;
+        private System.Windows.Forms.Label LabelX;
         private System.Windows.Forms.TextBox textboxHeight;
         private System.Windows.Forms.ComboBox comboUnit;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboName;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.ComboBox ComboName;
+        private System.Windows.Forms.Label Label2;
+        private System.Windows.Forms.Button BtnDelete;
 
     }
 }

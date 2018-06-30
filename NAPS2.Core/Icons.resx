@@ -319,7 +319,7 @@
   <data name="sharpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\sharpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btn_donate_LG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\btn_donate_LG.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Btn_donate_LG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\Btn_donate_LG.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

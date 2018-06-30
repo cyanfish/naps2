@@ -204,178 +204,178 @@
     <data name="&gt;&gt;lvProfiles.ZOrder" xml:space="preserve">
         <value>6</value>
     </data>
-    <data name="btnAdd.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <data name="BtnAdd.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="btnAdd.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnAdd.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleLeft</value>
     </data>
-    <data name="btnAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnAdd.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 98</value>
     </data>
-    <data name="btnAdd.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <data name="BtnAdd.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>4, 0, 4, 0</value>
     </data>
-    <data name="btnAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnAdd.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 32</value>
     </data>
-    <data name="btnAdd.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnAdd.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnAdd.Text" xml:space="preserve">
+    <data name="BtnAdd.Text" xml:space="preserve">
         <value>&amp;Ny</value>
     </data>
-    <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
     </data>
-    <data name="&gt;&gt;btnAdd.Name" xml:space="preserve">
-        <value>btnAdd</value>
+    <data name="&gt;&gt;BtnAdd.Name" xml:space="preserve">
+        <value>BtnAdd</value>
     </data>
-    <data name="&gt;&gt;btnAdd.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnAdd.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnAdd.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnAdd.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnAdd.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
-    <data name="btnEdit.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnEdit.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleLeft</value>
     </data>
-    <data name="btnEdit.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnEdit.Location" type="System.Drawing.Point, System.Drawing">
         <value>93, 98</value>
     </data>
-    <data name="btnEdit.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <data name="BtnEdit.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>5, 0, 4, 0</value>
     </data>
-    <data name="btnEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnEdit.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 32</value>
     </data>
-    <data name="btnEdit.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnEdit.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="btnEdit.Text" xml:space="preserve">
+    <data name="BtnEdit.Text" xml:space="preserve">
         <value>Rediger</value>
     </data>
-    <data name="btnEdit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnEdit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
     </data>
-    <data name="&gt;&gt;btnEdit.Name" xml:space="preserve">
-        <value>btnEdit</value>
+    <data name="&gt;&gt;BtnEdit.Name" xml:space="preserve">
+        <value>BtnEdit</value>
     </data>
-    <data name="&gt;&gt;btnEdit.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnEdit.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnEdit.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnEdit.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnEdit.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnEdit.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
-    <data name="btnDelete.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnDelete.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleLeft</value>
     </data>
-    <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnDelete.Location" type="System.Drawing.Point, System.Drawing">
         <value>174, 98</value>
     </data>
-    <data name="btnDelete.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <data name="BtnDelete.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>4, 0, 4, 0</value>
     </data>
-    <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnDelete.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 32</value>
     </data>
-    <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnDelete.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="btnDelete.Text" xml:space="preserve">
+    <data name="BtnDelete.Text" xml:space="preserve">
         <value>Slet</value>
     </data>
-    <data name="btnDelete.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnDelete.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleRight</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
-        <value>btnDelete</value>
+    <data name="&gt;&gt;BtnDelete.Name" xml:space="preserve">
+        <value>BtnDelete</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnDelete.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnDelete.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnDelete.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="btnDone.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnDone.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>MiddleLeft</value>
     </data>
-    <data name="btnDone.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnDone.Location" type="System.Drawing.Point, System.Drawing">
         <value>581, 98</value>
     </data>
-    <data name="btnDone.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnDone.Size" type="System.Drawing.Size, System.Drawing">
         <value>94, 32</value>
     </data>
-    <data name="btnDone.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnDone.TabIndex" type="System.Int32, mscorlib">
         <value>4</value>
     </data>
-    <data name="btnDone.Text" xml:space="preserve">
+    <data name="BtnDone.Text" xml:space="preserve">
         <value>Fuldført</value>
     </data>
-    <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
-        <value>btnDone</value>
+    <data name="&gt;&gt;BtnDone.Name" xml:space="preserve">
+        <value>BtnDone</value>
     </data>
-    <data name="&gt;&gt;btnDone.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnDone.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnDone.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnDone.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnDone.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnDone.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
     <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>19, 22</value>
     </metadata>
-    <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <data name="BtnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
         <value>None</value>
     </data>
-    <data name="btnScan.Font" type="System.Drawing.Font, System.Drawing">
+    <data name="BtnScan.Font" type="System.Drawing.Font, System.Drawing">
         <value>Microsoft Sans Serif, 8.25pt</value>
     </data>
-    <data name="btnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>TopCenter</value>
     </data>
-    <data name="btnScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnScan.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnScan.Location" type="System.Drawing.Point, System.Drawing">
         <value>581, 12</value>
     </data>
-    <data name="btnScan.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <data name="BtnScan.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
         <value>0, 10, 0, 6</value>
     </data>
-    <data name="btnScan.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnScan.Size" type="System.Drawing.Size, System.Drawing">
         <value>94, 80</value>
     </data>
-    <data name="btnScan.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnScan.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
     </data>
-    <data name="btnScan.Text" xml:space="preserve">
+    <data name="BtnScan.Text" xml:space="preserve">
         <value>&amp;Skan</value>
     </data>
-    <data name="btnScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <data name="BtnScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
         <value>BottomCenter</value>
     </data>
-    <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
-        <value>btnScan</value>
+    <data name="&gt;&gt;BtnScan.Name" xml:space="preserve">
+        <value>BtnScan</value>
     </data>
-    <data name="&gt;&gt;btnScan.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnScan.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnScan.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnScan.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnScan.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnScan.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

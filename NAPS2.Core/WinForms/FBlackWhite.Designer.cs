@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.WinForms
 {
-    partial class FBlackWhite
+    partial class FBlackWhite : IEquatable<FBlackWhite>, IDisposable
     {
         /// <summary>
         /// Required designer variable.
@@ -17,9 +17,7 @@ namespace NAPS2.WinForms
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
@@ -32,50 +30,50 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FBlackWhite));
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnRevert = new System.Windows.Forms.Button();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnRevert = new System.Windows.Forms.Button();
             this.txtThreshold = new System.Windows.Forms.TextBox();
             this.tbThreshold = new System.Windows.Forms.TrackBar();
             this.checkboxApplyToSelected = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbThreshold)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox
+            // PictureBox
             // 
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.pictureBox, "pictureBox");
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.TabStop = false;
+            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.PictureBox, "PictureBox");
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.TabStop = false;
             // 
-            // btnOK
+            // BtnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Name = "btnOK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            resources.ApplyResources(this.BtnOK, "BtnOK");
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.UseVisualStyleBackColor = true;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // btnRevert
+            // BtnRevert
             // 
-            resources.ApplyResources(this.btnRevert, "btnRevert");
-            this.btnRevert.Name = "btnRevert";
-            this.btnRevert.UseVisualStyleBackColor = true;
-            this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
+            resources.ApplyResources(this.BtnRevert, "BtnRevert");
+            this.BtnRevert.Name = "BtnRevert";
+            this.BtnRevert.UseVisualStyleBackColor = true;
+            this.BtnRevert.Click += new System.EventHandler(this.BtnRevert_Click);
             // 
             // txtThreshold
             // 
             resources.ApplyResources(this.txtThreshold, "txtThreshold");
             this.txtThreshold.Name = "txtThreshold";
-            this.txtThreshold.TextChanged += new System.EventHandler(this.txtBlackWhite_TextChanged);
+            this.txtThreshold.TextChanged += new System.EventHandler(this.TxtBlackWhite_TextChanged);
             // 
             // tbThreshold
             // 
@@ -84,7 +82,7 @@ namespace NAPS2.WinForms
             this.tbThreshold.Minimum = -1000;
             this.tbThreshold.Name = "tbThreshold";
             this.tbThreshold.TickFrequency = 200;
-            this.tbThreshold.Scroll += new System.EventHandler(this.tbBlackWhite_Scroll);
+            this.tbThreshold.Scroll += new System.EventHandler(this.TbBlackWhite_Scroll);
             // 
             // checkboxApplyToSelected
             // 
@@ -94,34 +92,39 @@ namespace NAPS2.WinForms
             // 
             // FBlackWhite
             // 
-            this.AcceptButton = this.btnOK;
+            this.AcceptButton = this.BtnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
+            this.CancelButton = this.BtnCancel;
             this.Controls.Add(this.checkboxApplyToSelected);
-            this.Controls.Add(this.btnRevert);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.BtnRevert);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnOK);
             this.Controls.Add(this.txtThreshold);
             this.Controls.Add(this.tbThreshold);
-            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.PictureBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FBlackWhite";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FBlackWhite_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbThreshold)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
+        public bool Equals(FBlackWhite other)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnRevert;
+        private System.Windows.Forms.PictureBox PictureBox;
+        private System.Windows.Forms.Button BtnOK;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Button BtnRevert;
         private System.Windows.Forms.TextBox txtThreshold;
         private System.Windows.Forms.TrackBar tbThreshold;
         private System.Windows.Forms.CheckBox checkboxApplyToSelected;

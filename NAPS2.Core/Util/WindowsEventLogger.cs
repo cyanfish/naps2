@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Windows.Forms;
-using NAPS2.Config;
+﻿using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
+using System;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace NAPS2.Util
 {
@@ -30,14 +26,14 @@ namespace NAPS2.Util
                 EventLog.CreateEventSource(SOURCE_NAME, LOG_NAME);
                 if (!silent)
                 {
-                    MessageBox.Show(@"Successfully created event source.");
+                    MessageBox.Show("Successfully created event source.");
                 }
             }
             else
             {
                 if (!silent)
                 {
-                    MessageBox.Show(@"Event source already exists.");
+                    MessageBox.Show("Event source already exists.");
                 }
             }
         }

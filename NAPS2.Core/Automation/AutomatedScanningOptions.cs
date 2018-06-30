@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CommandLine;
+﻿using CommandLine;
+using System;
 
 namespace NAPS2.Automation
 {
@@ -13,6 +11,11 @@ namespace NAPS2.Automation
                                           " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
                                           " Placeholders can be used (e.g. $(YYYY)-$(MM)-$(DD) for the date, $(hh)_$(mm)_$(ss) for the time, $(nnnn) for an auto-incrementing number).")]
         public string OutputPath { get; set; }
+
+        public static explicit operator Type(AutomatedScanningOptions v)
+        {
+            throw new NotImplementedException();
+        }
 
         [Option('a', "autosave", HelpText = "Use the Auto Save settings from the selected profile." +
                                             " Only works if the profile has Auto Save enabled.")]
@@ -38,10 +41,10 @@ namespace NAPS2.Automation
                                            " If not specified, no output is displayed if the scan is successful.")]
         public bool Verbose { get; set; }
 
-        [Option('n', "number", DefaultValue = 1, HelpText = "The number of scans to perform.")]
+        [Option('n', "number", Default = 1, HelpText = "The number of scans to perform.")]
         public int Number { get; set; }
 
-        [Option('d', "delay", DefaultValue = 0, HelpText = "The delay (in milliseconds) between each scan.")]
+        [Option('d', "delay", Default = 0, HelpText = "The delay (in milliseconds) between each scan.")]
         public int Delay { get; set; }
 
         [Option('f', "force", HelpText = "Overwrite existing files." +
@@ -51,7 +54,7 @@ namespace NAPS2.Automation
         [Option('w', "wait", HelpText = "After finishing, wait for user input (enter/return) before exiting.")]
         public bool WaitForEnter { get; set; }
 
-        #endregion
+        #endregion General Options
 
         #region Order Options
 
@@ -70,7 +73,7 @@ namespace NAPS2.Automation
         [Option("reverse", HelpText = "Reverse pages before saving.")]
         public bool Reverse { get; set; }
 
-        #endregion
+        #endregion Order Options
 
         #region Split Options
 
@@ -86,7 +89,7 @@ namespace NAPS2.Automation
         [Option("splitsize", HelpText = "Split the pages into multiple PDF/TIFF files with the given number of pages per file.")]
         public int SplitSize { get; set; }
 
-        #endregion
+        #endregion Split Options
 
         #region PDF Options
 
@@ -114,7 +117,7 @@ namespace NAPS2.Automation
         [Option("pdfcompat", HelpText = "The standard to use for the generated PDF. Possible values: default, A1-b, A2-b, A3-b, A3-u")]
         public string PdfCompat { get; set; }
 
-        #endregion
+        #endregion PDF Options
 
         #region OCR Options
 
@@ -127,7 +130,7 @@ namespace NAPS2.Automation
         [Option("ocrlang", HelpText = "The three-letter code for the language used for OCR (e.g. 'eng' for English, 'fra' for French, etc.). Implies --enableocr.")]
         public string OcrLang { get; set; }
 
-        #endregion
+        #endregion OCR Options
 
         #region Email Options
 
@@ -170,16 +173,16 @@ namespace NAPS2.Automation
                                          " Requires --autosend.")]
         public bool EmailSilentSend { get; set; }
 
-        #endregion
+        #endregion Email Options
 
         #region Image Options
 
-        [Option("jpegquality", DefaultValue = 75, HelpText = "The quality of saved JPEG files (0-100, default 75).")]
+        [Option("jpegquality", Default = 75, HelpText = "The quality of saved JPEG files (0-100, default 75).")]
         public int JpegQuality { get; set; }
 
         [Option("tiffcomp", HelpText = "The compression to use for TIFF files. Possible values: auto, lzw, ccitt4, none")]
         public string TiffComp { get; set; }
-        
-        #endregion
+
+        #endregion Image Options
     }
 }

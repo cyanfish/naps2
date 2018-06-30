@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using NAPS2.Lang.Resources;
+﻿using NAPS2.Lang.Resources;
 using NAPS2.Scan.Wia;
+using System;
+using System.IO;
+using System.Windows.Forms;
 using WIA;
 
 namespace NAPS2.WinForms
@@ -34,18 +32,18 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(progressBar)
                     .WidthToForm()
-                .Bind(btnCancel)
+                .Bind(BtnCancel)
                     .RightToForm()
                 .Activate();
 
-            labelPage.Text = string.Format(MiscResources.ScanPageProgress, PageNumber);
+            LabelPage.Text = string.Format(MiscResources.ScanPageProgress, PageNumber);
         }
 
         protected override bool ShowWithoutActivation => true;
 
         private void FScanProgress_Shown(object sender, EventArgs e)
         {
-            EventLoop.DoAsync(wia =>
+            EventLoop.Do(wia =>
             {
                 try
                 {
@@ -68,19 +66,15 @@ namespace NAPS2.WinForms
             });
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             cancel = true;
-            btnCancel.Enabled = false;
+            BtnCancel.Enabled = false;
         }
 
         private void FScanProgress_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!isComplete)
-            {
-                // Prevent simultaneous transfers by refusing to close until the transfer is complete
-                e.Cancel = true;
-            }
+            e.Cancel |= !isComplete;
         }
     }
 }

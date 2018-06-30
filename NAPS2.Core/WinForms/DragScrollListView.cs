@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.Util;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -17,9 +13,9 @@ namespace NAPS2.WinForms
         private System.ComponentModel.IContainer components;
         private int mintScrollDirection;
 
-        const int WM_VSCROLL = 277; // Vertical scroll
-        const int SB_LINEUP = 0; // Scrolls one line up
-        const int SB_LINEDOWN = 1; // Scrolls one line down
+        private const int WM_VSCROLL = 277; // Vertical scroll
+        private const int SB_LINEUP = 0; // Scrolls one line up
+        private const int SB_LINEDOWN = 1; // Scrolls one line down
 
         public DragScrollListView()
         {
@@ -30,19 +26,18 @@ namespace NAPS2.WinForms
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.tmrLVScroll = new System.Windows.Forms.Timer(this.components);
-            this.SuspendLayout();
-            // 
+            components = new System.ComponentModel.Container();
+            tmrLVScroll = new System.Windows.Forms.Timer(components);
+            SuspendLayout();
+            //
             // tmrLVScroll
-            // 
-            this.tmrLVScroll.Tick += new System.EventHandler(this.tmrLVScroll_Tick);
-            // 
+            //
+            tmrLVScroll.Tick += TmrLVScroll_Tick;
+            //
             // ListViewBase
-            // 
-            this.DragOver += new System.Windows.Forms.DragEventHandler(this.ListViewBase_DragOver);
-            this.ResumeLayout(false);
-
+            //
+            DragOver += ListViewBase_DragOver;
+            ResumeLayout(false);
         }
 
         private void ListViewBase_DragOver(object sender, DragEventArgs e)
@@ -67,7 +62,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tmrLVScroll_Tick(object sender, EventArgs e)
+        private void TmrLVScroll_Tick(object sender, EventArgs e)
         {
             Win32.SendMessage(Handle, WM_VSCROLL, (IntPtr)mintScrollDirection, IntPtr.Zero);
         }

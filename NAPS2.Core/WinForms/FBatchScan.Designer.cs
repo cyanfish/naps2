@@ -37,8 +37,8 @@ namespace NAPS2.WinForms
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.lblStatus = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnStart = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnStart = new System.Windows.Forms.Button();
             this.groupboxScanConfig = new System.Windows.Forms.GroupBox();
             this.panelScanDetails = new System.Windows.Forms.Panel();
             this.txtTimeBetweenScans = new System.Windows.Forms.TextBox();
@@ -49,20 +49,20 @@ namespace NAPS2.WinForms
             this.rdMultipleScansPrompt = new System.Windows.Forms.RadioButton();
             this.rdMultipleScansDelay = new System.Windows.Forms.RadioButton();
             this.rdSingleScan = new System.Windows.Forms.RadioButton();
-            this.btnAddProfile = new System.Windows.Forms.Button();
-            this.btnEditProfile = new System.Windows.Forms.Button();
+            this.BtnAddProfile = new System.Windows.Forms.Button();
+            this.BtnEditProfile = new System.Windows.Forms.Button();
             this.comboProfile = new System.Windows.Forms.ComboBox();
             this.lblProfile = new System.Windows.Forms.Label();
             this.groupboxOutput = new System.Windows.Forms.GroupBox();
             this.panelSaveSeparator = new System.Windows.Forms.Panel();
-            this.linkPatchCodeInfo = new System.Windows.Forms.LinkLabel();
+            this.LinkPatchCodeInfo = new System.Windows.Forms.LinkLabel();
             this.rdSeparateByPatchT = new System.Windows.Forms.RadioButton();
             this.rdFilePerPage = new System.Windows.Forms.RadioButton();
             this.rdFilePerScan = new System.Windows.Forms.RadioButton();
             this.panelSaveTo = new System.Windows.Forms.Panel();
-            this.btnChooseFolder = new System.Windows.Forms.Button();
-            this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
-            this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.BtnChooseFolder = new System.Windows.Forms.Button();
+            this.LinkPlaceholders = new System.Windows.Forms.LinkLabel();
+            this.TxtFilePath = new System.Windows.Forms.TextBox();
             this.lblFilePath = new System.Windows.Forms.Label();
             this.panelSaveType = new System.Windows.Forms.Panel();
             this.rdSaveToMultipleFiles = new System.Windows.Forms.RadioButton();
@@ -89,26 +89,26 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.lblStatus, "lblStatus");
             this.lblStatus.Name = "lblStatus";
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // btnStart
+            // BtnStart
             // 
-            resources.ApplyResources(this.btnStart, "btnStart");
-            this.btnStart.Name = "btnStart";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            resources.ApplyResources(this.BtnStart, "BtnStart");
+            this.BtnStart.Name = "BtnStart";
+            this.BtnStart.UseVisualStyleBackColor = true;
+            this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // groupboxScanConfig
             // 
             this.groupboxScanConfig.Controls.Add(this.panelScanDetails);
             this.groupboxScanConfig.Controls.Add(this.panelScanType);
-            this.groupboxScanConfig.Controls.Add(this.btnAddProfile);
-            this.groupboxScanConfig.Controls.Add(this.btnEditProfile);
+            this.groupboxScanConfig.Controls.Add(this.BtnAddProfile);
+            this.groupboxScanConfig.Controls.Add(this.BtnEditProfile);
             this.groupboxScanConfig.Controls.Add(this.comboProfile);
             this.groupboxScanConfig.Controls.Add(this.lblProfile);
             resources.ApplyResources(this.groupboxScanConfig, "groupboxScanConfig");
@@ -174,21 +174,21 @@ namespace NAPS2.WinForms
             this.rdSingleScan.UseVisualStyleBackColor = true;
             this.rdSingleScan.CheckedChanged += new System.EventHandler(this.rdSingleScan_CheckedChanged);
             // 
-            // btnAddProfile
+            // BtnAddProfile
             // 
-            this.btnAddProfile.Image = global::NAPS2.Icons.add_small;
-            resources.ApplyResources(this.btnAddProfile, "btnAddProfile");
-            this.btnAddProfile.Name = "btnAddProfile";
-            this.btnAddProfile.UseVisualStyleBackColor = true;
-            this.btnAddProfile.Click += new System.EventHandler(this.btnAddProfile_Click);
+            this.BtnAddProfile.Image = global::NAPS2.Icons.add_small;
+            resources.ApplyResources(this.BtnAddProfile, "BtnAddProfile");
+            this.BtnAddProfile.Name = "BtnAddProfile";
+            this.BtnAddProfile.UseVisualStyleBackColor = true;
+            this.BtnAddProfile.Click += new System.EventHandler(this.BtnAddProfile_Click);
             // 
-            // btnEditProfile
+            // BtnEditProfile
             // 
-            this.btnEditProfile.Image = global::NAPS2.Icons.pencil_small;
-            resources.ApplyResources(this.btnEditProfile, "btnEditProfile");
-            this.btnEditProfile.Name = "btnEditProfile";
-            this.btnEditProfile.UseVisualStyleBackColor = true;
-            this.btnEditProfile.Click += new System.EventHandler(this.btnEditProfile_Click);
+            this.BtnEditProfile.Image = global::NAPS2.Icons.pencil_small;
+            resources.ApplyResources(this.BtnEditProfile, "BtnEditProfile");
+            this.BtnEditProfile.Name = "BtnEditProfile";
+            this.BtnEditProfile.UseVisualStyleBackColor = true;
+            this.BtnEditProfile.Click += new System.EventHandler(this.BtnEditProfile_Click);
             // 
             // comboProfile
             // 
@@ -214,19 +214,19 @@ namespace NAPS2.WinForms
             // 
             // panelSaveSeparator
             // 
-            this.panelSaveSeparator.Controls.Add(this.linkPatchCodeInfo);
+            this.panelSaveSeparator.Controls.Add(this.LinkPatchCodeInfo);
             this.panelSaveSeparator.Controls.Add(this.rdSeparateByPatchT);
             this.panelSaveSeparator.Controls.Add(this.rdFilePerPage);
             this.panelSaveSeparator.Controls.Add(this.rdFilePerScan);
             resources.ApplyResources(this.panelSaveSeparator, "panelSaveSeparator");
             this.panelSaveSeparator.Name = "panelSaveSeparator";
             // 
-            // linkPatchCodeInfo
+            // LinkPatchCodeInfo
             // 
-            resources.ApplyResources(this.linkPatchCodeInfo, "linkPatchCodeInfo");
-            this.linkPatchCodeInfo.Name = "linkPatchCodeInfo";
-            this.linkPatchCodeInfo.TabStop = true;
-            this.linkPatchCodeInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPatchCodeInfo_LinkClicked);
+            resources.ApplyResources(this.LinkPatchCodeInfo, "LinkPatchCodeInfo");
+            this.LinkPatchCodeInfo.Name = "LinkPatchCodeInfo";
+            this.LinkPatchCodeInfo.TabStop = true;
+            this.LinkPatchCodeInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkPatchCodeInfo_LinkClicked);
             // 
             // rdSeparateByPatchT
             // 
@@ -250,31 +250,31 @@ namespace NAPS2.WinForms
             // 
             // panelSaveTo
             // 
-            this.panelSaveTo.Controls.Add(this.btnChooseFolder);
-            this.panelSaveTo.Controls.Add(this.linkPlaceholders);
-            this.panelSaveTo.Controls.Add(this.txtFilePath);
+            this.panelSaveTo.Controls.Add(this.BtnChooseFolder);
+            this.panelSaveTo.Controls.Add(this.LinkPlaceholders);
+            this.panelSaveTo.Controls.Add(this.TxtFilePath);
             this.panelSaveTo.Controls.Add(this.lblFilePath);
             resources.ApplyResources(this.panelSaveTo, "panelSaveTo");
             this.panelSaveTo.Name = "panelSaveTo";
             // 
-            // btnChooseFolder
+            // BtnChooseFolder
             // 
-            resources.ApplyResources(this.btnChooseFolder, "btnChooseFolder");
-            this.btnChooseFolder.Name = "btnChooseFolder";
-            this.btnChooseFolder.UseVisualStyleBackColor = true;
-            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
+            resources.ApplyResources(this.BtnChooseFolder, "BtnChooseFolder");
+            this.BtnChooseFolder.Name = "BtnChooseFolder";
+            this.BtnChooseFolder.UseVisualStyleBackColor = true;
+            this.BtnChooseFolder.Click += new System.EventHandler(this.BtnChooseFolder_Click);
             // 
-            // linkPlaceholders
+            // LinkPlaceholders
             // 
-            resources.ApplyResources(this.linkPlaceholders, "linkPlaceholders");
-            this.linkPlaceholders.Name = "linkPlaceholders";
-            this.linkPlaceholders.TabStop = true;
-            this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
+            resources.ApplyResources(this.LinkPlaceholders, "LinkPlaceholders");
+            this.LinkPlaceholders.Name = "LinkPlaceholders";
+            this.LinkPlaceholders.TabStop = true;
+            this.LinkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkPlaceholders_LinkClicked);
             // 
-            // txtFilePath
+            // TxtFilePath
             // 
-            resources.ApplyResources(this.txtFilePath, "txtFilePath");
-            this.txtFilePath.Name = "txtFilePath";
+            resources.ApplyResources(this.TxtFilePath, "TxtFilePath");
+            this.TxtFilePath.Name = "TxtFilePath";
             // 
             // lblFilePath
             // 
@@ -317,8 +317,8 @@ namespace NAPS2.WinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupboxOutput);
             this.Controls.Add(this.groupboxScanConfig);
-            this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.BtnStart);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.lblStatus);
             this.MaximizeBox = false;
             this.Name = "FBatchScan";
@@ -345,11 +345,11 @@ namespace NAPS2.WinForms
         private ILProfileIcons ilProfileIcons;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Button BtnStart;
         private System.Windows.Forms.GroupBox groupboxScanConfig;
-        private System.Windows.Forms.Button btnAddProfile;
-        private System.Windows.Forms.Button btnEditProfile;
+        private System.Windows.Forms.Button BtnAddProfile;
+        private System.Windows.Forms.Button BtnEditProfile;
         private System.Windows.Forms.ComboBox comboProfile;
         private System.Windows.Forms.Label lblProfile;
         private System.Windows.Forms.Panel panelScanType;
@@ -362,16 +362,16 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Label lblTimeBetweenScans;
         private System.Windows.Forms.GroupBox groupboxOutput;
         private System.Windows.Forms.Panel panelSaveTo;
-        private System.Windows.Forms.Button btnChooseFolder;
-        private System.Windows.Forms.LinkLabel linkPlaceholders;
-        private System.Windows.Forms.TextBox txtFilePath;
+        private System.Windows.Forms.Button BtnChooseFolder;
+        private System.Windows.Forms.LinkLabel LinkPlaceholders;
+        private System.Windows.Forms.TextBox TxtFilePath;
         private System.Windows.Forms.Label lblFilePath;
         private System.Windows.Forms.Panel panelSaveType;
         private System.Windows.Forms.RadioButton rdSaveToMultipleFiles;
         private System.Windows.Forms.RadioButton rdSaveToSingleFile;
         private System.Windows.Forms.RadioButton rdLoadIntoNaps2;
         private System.Windows.Forms.Panel panelSaveSeparator;
-        private System.Windows.Forms.LinkLabel linkPatchCodeInfo;
+        private System.Windows.Forms.LinkLabel LinkPatchCodeInfo;
         private System.Windows.Forms.RadioButton rdSeparateByPatchT;
         private System.Windows.Forms.RadioButton rdFilePerPage;
         private System.Windows.Forms.RadioButton rdFilePerScan;

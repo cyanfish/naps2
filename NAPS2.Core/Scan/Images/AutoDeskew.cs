@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Images
@@ -12,7 +10,7 @@ namespace NAPS2.Scan.Images
     {
         public static double GetSkewAngle(this Bitmap bmp)
         {
-            var sk = new gmseDeskew(bmp);
+            var sk = new GmseDeskew(bmp);
             return sk.GetSkewAngle();
         }
 
@@ -32,39 +30,51 @@ namespace NAPS2.Scan.Images
     //
     // Ported to C# by Peter Hommel in 2016
     // https://github.com/phommel
-    public class gmseDeskew
+    public class GmseDeskew
     {
         // Representation of a line in the image.
         public class HougLine
         {
             // Count of points in the line.
             public int Count;
+
             // Index in Matrix.
             public int Index;
+
             // The line is represented as all x,y that solve y*cos(alpha)-x*sin(alpha)=d
             public double Alpha;
+
             public double d;
         }
+
         // The Bitmap
-        int width;
-        int height;
-        int stride;
-        byte[] bitmapBytes;
-        PixelFormat pf;
+        private readonly int width;
+
+        private readonly int height;
+        private int stride;
+        private byte[] bitmapBytes;
+        private readonly PixelFormat pf;
+
         // The range of angles to search for lines
-        readonly double cAlphaStart = -20;
-        readonly double cAlphaStep = 0.2;
-        int cSteps = 40 * 5;
+        private readonly double cAlphaStart = -20;
+
+        private readonly double cAlphaStep = 0.2;
+        private readonly int cSteps = 40 * 5;
+
         // Precalculation of sin and cos.
-        double[] cSinA;
-        double[] cCosA;
+        private double[] cSinA;
+
+        private double[] cCosA;
+
         // Range of d
-        double cDMin;
-        readonly double cDStep = 1;
-        int cDCount;
+        private double cDMin;
+
+        private readonly double cDStep = 1;
+        private int cDCount;
         // Count of points that fit in a line.
 
-        int[] cHMatrix;
+        private int[] cHMatrix;
+
         // Calculate the skew angle of the image cBmp.
         public double GetSkewAngle()
         {
@@ -81,7 +91,7 @@ namespace NAPS2.Scan.Images
             for (i = 0; i <= 19; i++)
             {
                 sum += hl[i].Alpha;
-                count += 1;
+                count++;
             }
             return sum / count;
         }
@@ -113,21 +123,21 @@ namespace NAPS2.Scan.Images
                         tmp = hl[j];
                         hl[j] = hl[j - 1];
                         hl[j - 1] = tmp;
-                        j -= 1;
+                        j--;
                     }
                 }
             }
             for (i = 0; i <= Count - 1; i++)
             {
                 dIndex = hl[i].Index / cSteps;
-                AlphaIndex = hl[i].Index - dIndex * cSteps;
+                AlphaIndex = hl[i].Index - (dIndex * cSteps);
                 hl[i].Alpha = GetAlpha(AlphaIndex);
                 hl[i].d = dIndex + cDMin;
             }
             return hl;
         }
 
-        public gmseDeskew(Bitmap bitmap)
+        public GmseDeskew(Bitmap bitmap)
         {
             width = bitmap.Width;
             height = bitmap.Height;
@@ -148,7 +158,7 @@ namespace NAPS2.Scan.Images
         private void Calc()
         {
             Init();
-            for(int y = 1; y <= height - 2; y++)
+            for (int y = 1; y <= height - 2; y++)
             {
                 for (int x = 1; x <= width - 2; x++)
                 {
@@ -163,6 +173,7 @@ namespace NAPS2.Scan.Images
                 }
             }
         }
+
         // Calculate all lines through the point (x,y).
         private void Calc(int x, int y)
         {
@@ -173,9 +184,9 @@ namespace NAPS2.Scan.Images
 
             for (alpha = 0; alpha <= cSteps - 1; alpha++)
             {
-                d = y * cCosA[alpha] - x * cSinA[alpha];
+                d = (y * cCosA[alpha]) - (x * cSinA[alpha]);
                 dIndex = (int)(d - cDMin);
-                Index = dIndex * cSteps + alpha;
+                Index = (dIndex * cSteps) + alpha;
                 try
                 {
                     cHMatrix[Index]++;
@@ -186,35 +197,33 @@ namespace NAPS2.Scan.Images
                 }
             }
         }
+
         private bool IsBlack(int x, int y)
         {
-            if (pf == PixelFormat.Format1bppIndexed)
+            // luminance = (r * 0.299) + (g * 0.587) + (b * 0.114)
+            int r, g, b;
+            switch (pf)
             {
-                var b = bitmapBytes[y * stride + (x >> 3)];
-                var mask = (byte)(0x80 >> (x & 0x7));
-                return (b & mask) == 0;
-            }
-            else if (pf == PixelFormat.Format24bppRgb)
-            {
-                int r = bitmapBytes[stride * y + x * 3];
-                int g = bitmapBytes[stride * y + x * 3 + 1];
-                int b = bitmapBytes[stride * y + x * 3 + 2];
-                double luminance = (r * 0.299) + (g * 0.587) + (b * 0.114);
-                return luminance < 140;
-            }
-            else if (pf == PixelFormat.Format32bppArgb)
-            {
-                int r = bitmapBytes[stride * y + x * 4 + 1];
-                int g = bitmapBytes[stride * y + x * 4 + 2];
-                int b = bitmapBytes[stride * y + x * 4 + 3];
-                double luminance = (r * 0.299) + (g * 0.587) + (b * 0.114);
-                return luminance < 140;
-            }
-            else
-            {
-                throw new ArgumentException("Unsupported pixel format");
+                case PixelFormat.Format1bppIndexed:
+                    b = bitmapBytes[(y * stride) + (x >> 3)];
+                    return (b & (byte)(0x80 >> (x & 0x7))) == 0; // "mask" integrated into return value
+                case PixelFormat.Format24bppRgb:
+                    r = bitmapBytes[(stride * y) + (x * 3)];
+                    g = bitmapBytes[(stride * y) + (x * 3) + 1];
+                    b = bitmapBytes[(stride * y) + (x * 3) + 2];
+                    return ((r * 0.299) + (g * 0.587) + (b * 0.114)) < 140;
+
+                case PixelFormat.Format32bppArgb:
+                    r = bitmapBytes[(stride * y) + (x * 4) + 1];
+                    g = bitmapBytes[(stride * y) + (x * 4) + 2];
+                    b = bitmapBytes[(stride * y) + (x * 4) + 3];
+                    return ((r * 0.299) + (g * 0.587) + (b * 0.114)) < 140;
+
+                default:
+                    throw new ArgumentException("Unsupported pixel format");
             }
         }
+
         private void Init()
         {
             int i;
@@ -232,12 +241,12 @@ namespace NAPS2.Scan.Images
             // Range of d:
             cDMin = -width;
             cDCount = (int)(2 * (width + height) / cDStep);
-            cHMatrix = new int[cDCount * cSteps + 1];
+            cHMatrix = new int[(cDCount * cSteps) + 1];
         }
 
         public double GetAlpha(int Index)
         {
-            return cAlphaStart + Index * cAlphaStep;
+            return cAlphaStart + (Index * cAlphaStep);
         }
     }
 }

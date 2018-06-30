@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -17,7 +15,7 @@ namespace NAPS2.Scan.Twain.Legacy
         DeviceEvent = 4
     }
 
-    internal class Twain
+    internal class Twain : IDisposable
     {
         private const short COUNTRY_USA = 1;
         private const short LANGUAGE_USA = 13;
@@ -30,9 +28,9 @@ namespace NAPS2.Scan.Twain.Legacy
         public Twain()
         {
             appid = new TwIdentity
-                {
-                    Id = IntPtr.Zero,
-                    Version =
+            {
+                Id = IntPtr.Zero,
+                Version =
                         {
                             MajorNum = 1,
                             MinorNum = 1,
@@ -40,13 +38,13 @@ namespace NAPS2.Scan.Twain.Legacy
                             Country = COUNTRY_USA,
                             Info = "Hack 1"
                         },
-                    ProtocolMajor = TwProtocol.MAJOR,
-                    ProtocolMinor = TwProtocol.MINOR,
-                    SupportedGroups = (int)(TwDG.Image | TwDG.Control),
-                    Manufacturer = "NETMaster",
-                    ProductFamily = "Freeware",
-                    ProductName = "Hack"
-                };
+                ProtocolMajor = TwProtocol.MAJOR,
+                ProtocolMinor = TwProtocol.MINOR,
+                SupportedGroups = (int)(TwDG.Image | TwDG.Control),
+                Manufacturer = "NETMaster",
+                ProductFamily = "Freeware",
+                ProductName = "Hack"
+            };
 
             srcds = new TwIdentity { Id = IntPtr.Zero };
 
@@ -312,15 +310,19 @@ namespace NAPS2.Scan.Twain.Legacy
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
         internal static extern IntPtr GlobalAlloc(int flags, int size);
+
         [DllImport("kernel32.dll", ExactSpelling = true)]
         internal static extern IntPtr GlobalLock(IntPtr handle);
+
         [DllImport("kernel32.dll", ExactSpelling = true)]
         internal static extern bool GlobalUnlock(IntPtr handle);
+
         [DllImport("kernel32.dll", ExactSpelling = true)]
         internal static extern IntPtr GlobalFree(IntPtr handle);
 
         [DllImport("user32.dll", ExactSpelling = true)]
         private static extern int GetMessagePos();
+
         [DllImport("user32.dll", ExactSpelling = true)]
         private static extern int GetMessageTime();
 
@@ -344,5 +346,42 @@ namespace NAPS2.Scan.Twain.Legacy
             public int x;
             public int y;
         }
+
+        #region IDisposable Support
+
+        private bool disposedValue; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~Twain() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        void IDisposable.Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+
+        #endregion IDisposable Support
     } // class Twain
 }

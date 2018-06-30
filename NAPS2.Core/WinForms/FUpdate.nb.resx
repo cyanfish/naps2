@@ -146,76 +146,76 @@
     <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="btnInstall.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnInstall.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 58</value>
     </data>
-    <data name="btnInstall.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnInstall.Size" type="System.Drawing.Size, System.Drawing">
         <value>282, 30</value>
     </data>
-    <data name="btnInstall.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnInstall.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnInstall.Text" xml:space="preserve">
+    <data name="BtnInstall.Text" xml:space="preserve">
         <value>Last ned og installer</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Name" xml:space="preserve">
-        <value>btnInstall</value>
+    <data name="&gt;&gt;BtnInstall.Name" xml:space="preserve">
+        <value>BtnInstall</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnInstall.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnInstall.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnInstall.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnInstall.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnInstall.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="btnDownload.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnDownload.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 94</value>
     </data>
-    <data name="btnDownload.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnDownload.Size" type="System.Drawing.Size, System.Drawing">
         <value>138, 30</value>
     </data>
-    <data name="btnDownload.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnDownload.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="btnDownload.Text" xml:space="preserve">
+    <data name="BtnDownload.Text" xml:space="preserve">
         <value>Nedlasting</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
-        <value>btnDownload</value>
+    <data name="&gt;&gt;BtnDownload.Name" xml:space="preserve">
+        <value>BtnDownload</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnDownload.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnDownload.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnDownload.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnDownload.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnDownload.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>156, 94</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>138, 30</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>Ikke nå</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

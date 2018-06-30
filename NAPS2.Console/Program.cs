@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NAPS2.DI.EntryPoints;
+﻿using NAPS2.DI.EntryPoints;
+using System;
 
 namespace NAPS2.Console
 {
-    static class Program
+    internal static class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             typeof(ConsoleEntryPoint).GetMethod("Run").Invoke(null, new object[] { args });
         }

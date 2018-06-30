@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NAPS2.Operation;
+using NAPS2.Scan.Images.Transforms;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using NAPS2.Operation;
-using NAPS2.Scan.Images.Transforms;
-using ZXing;
 
 namespace NAPS2.Scan.Images
 {
@@ -94,14 +92,14 @@ namespace NAPS2.Scan.Images
         }
 
         private readonly ThumbnailRenderer thumbnailRenderer;
-        private readonly IOperationFactory operationFactory;
-        private readonly IOperationProgress operationProgress;
+        private readonly IOperationFactory OperationFactory;
+        private readonly IOperationProgress OperationProgress;
 
-        public ScannedImageHelper(ThumbnailRenderer thumbnailRenderer, IOperationFactory operationFactory, IOperationProgress operationProgress)
+        public ScannedImageHelper(ThumbnailRenderer thumbnailRenderer, IOperationFactory OperationFactory, IOperationProgress OperationProgress)
         {
             this.thumbnailRenderer = thumbnailRenderer;
-            this.operationFactory = operationFactory;
-            this.operationProgress = operationProgress;
+            this.OperationFactory = OperationFactory;
+            this.OperationProgress = OperationProgress;
         }
 
         public Bitmap PostProcessStep1(Image output, ScanProfile profile)
@@ -129,14 +127,14 @@ namespace NAPS2.Scan.Images
                     {
                         result = new CropTransform
                         {
-                            Right = (int) ((width - (float) pageDimensions.HeightInInches()) * output.HorizontalResolution),
-                            Bottom = (int) ((height - (float) pageDimensions.WidthInInches()) * output.VerticalResolution)
+                            Right = (int)((width - (float)pageDimensions.HeightInInches()) * output.HorizontalResolution),
+                            Bottom = (int)((height - (float)pageDimensions.WidthInInches()) * output.VerticalResolution)
                         }.Perform(result);
                     }
                     else
                     {
-                        result.SetResolution((float) (output.Width / pageDimensions.HeightInInches()),
-                            (float) (output.Height / pageDimensions.WidthInInches()));
+                        result.SetResolution((float)(output.Width / pageDimensions.HeightInInches()),
+                            (float)(output.Height / pageDimensions.WidthInInches()));
                     }
                 }
                 else
@@ -145,8 +143,8 @@ namespace NAPS2.Scan.Images
                     {
                         result = new CropTransform
                         {
-                            Right = (int) ((width - (float) pageDimensions.WidthInInches()) * output.HorizontalResolution),
-                            Bottom = (int) ((height - (float) pageDimensions.HeightInInches()) * output.VerticalResolution)
+                            Right = (int)((width - (float)pageDimensions.WidthInInches()) * output.HorizontalResolution),
+                            Bottom = (int)((height - (float)pageDimensions.HeightInInches()) * output.VerticalResolution)
                         }.Perform(result);
                     }
                     else
@@ -178,10 +176,10 @@ namespace NAPS2.Scan.Images
             }
             if (profile.AutoDeskew)
             {
-                var op = operationFactory.Create<DeskewOperation>();
+                var op = OperationFactory.Create<DeskewOperation>();
                 if (op.Start(new[] { image }))
                 {
-                    operationProgress.ShowProgress(op);
+                    OperationProgress.ShowProgress(op);
                 }
             }
             if (scanParams.DetectPatchCodes && image.PatchCode == PatchCode.None)

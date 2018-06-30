@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NAPS2.Util;
+﻿using NAPS2.Util;
 using NUnit.Framework;
 
 namespace NAPS2.Tests.Unit
 {
     [TestFixture(Category = "unit,fast")]
-    class SliceTests
+    internal class SliceTests
     {
         [Test]
         public void Parse()
         {
-            string rest;
-            AssertSlice(Slice.Parse("[]", out rest), null, null, null, null);
+            AssertSlice(Slice.Parse("[]", out string rest), null, null, null, null);
 
             AssertSlice(Slice.Parse("[0]", out rest), 0, null, null, null);
             AssertSlice(Slice.Parse("[1]", out rest), 1, null, null, null);
             AssertSlice(Slice.Parse("[-1]", out rest), -1, null, null, null);
             AssertSlice(Slice.Parse("[-2]", out rest), -2, null, null, null);
             AssertSlice(Slice.Parse("[asdpsakoid2238(*S(D)*A(]", out rest), null, null, null, null);
-            
+
             AssertSlice(Slice.Parse("[2:]", out rest), null, 2, null, null);
             AssertSlice(Slice.Parse("[:2]", out rest), null, null, 2, null);
             AssertSlice(Slice.Parse("[2:-2]", out rest), null, 2, -2, null);
@@ -42,14 +36,14 @@ namespace NAPS2.Tests.Unit
         [Test]
         public void Indices()
         {
-            CollectionAssert.AreEqual(new [] { 0 }, Slice.Item(0).Indices(7));
-            CollectionAssert.AreEqual(new [] { 1 }, Slice.Item(1).Indices(7));
-            CollectionAssert.AreEqual(new [] { 6 }, Slice.Item(-1).Indices(7));
-            CollectionAssert.AreEqual(new [] { 5 }, Slice.Item(-2).Indices(7));
+            CollectionAssert.AreEqual(new[] { 0 }, Slice.Item(0).Indices(7));
+            CollectionAssert.AreEqual(new[] { 1 }, Slice.Item(1).Indices(7));
+            CollectionAssert.AreEqual(new[] { 6 }, Slice.Item(-1).Indices(7));
+            CollectionAssert.AreEqual(new[] { 5 }, Slice.Item(-2).Indices(7));
             CollectionAssert.AreEqual(new int[] { }, Slice.Item(7).Indices(7));
-            CollectionAssert.AreEqual(new [] { 0 }, Slice.Item(-7).Indices(7));
+            CollectionAssert.AreEqual(new[] { 0 }, Slice.Item(-7).Indices(7));
             CollectionAssert.AreEqual(new int[] { }, Slice.Item(-8).Indices(7));
-            
+
             CollectionAssert.AreEqual(new[] { 0, 1, 2, 3, 4, 5, 6 }, Slice.Range(null, null, null).Indices(7));
 
             CollectionAssert.AreEqual(new[] { 2, 3, 4, 5, 6 }, Slice.Range(2, null, null).Indices(7));

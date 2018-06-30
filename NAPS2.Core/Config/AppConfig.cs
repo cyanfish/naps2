@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Scan;
+using System.Windows.Forms;
 
 namespace NAPS2.Config
 {
@@ -64,10 +61,10 @@ namespace NAPS2.Config
         public double OcrTimeoutInSeconds { get; set; }
 
         public OcrState OcrState { get; set; }
-        
+
         public string OcrDefaultLanguage { get; set; }
 
-        public PdfCompat ForcePdfCompat { get; set; } 
+        public PdfCompat ForcePdfCompat { get; set; }
 
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
     }

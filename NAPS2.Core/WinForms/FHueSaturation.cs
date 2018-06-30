@@ -1,16 +1,16 @@
+using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class FHueSaturation : FormBase
+    internal partial class FHueSaturation : FormBase
     {
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
@@ -44,7 +44,7 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            if (SelectedImages != null && SelectedImages.Count > 1)
+            if (SelectedImages?.Count > 1)
             {
                 checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
             }
@@ -54,29 +54,29 @@ namespace NAPS2.WinForms
             }
 
             new LayoutManager(this)
-                .Bind(tbHue, tbSaturation, pictureBox)
+                .Bind(TbHue, TbSaturation, PictureBox)
                     .WidthToForm()
-                .Bind(pictureBox)
+                .Bind(PictureBox)
                     .HeightToForm()
-                .Bind(btnOK, btnCancel, txtHue, txtSaturation)
+                .Bind(BtnOK, BtnCancel, TxtHue, TxtSaturation)
                     .RightToForm()
-                .Bind(tbHue, txtHue, tbSaturation, txtSaturation, pictureBox1, pictureBox2,
-                      checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
+                .Bind(TbHue, TxtHue, TbSaturation, TxtSaturation, PictureBox1, PictureBox2,
+                      checkboxApplyToSelected, BtnRevert, BtnOK, BtnCancel)
                     .BottomToForm()
                 .Activate();
             Size = new Size(600, 600);
 
             workingImage = scannedImageRenderer.Render(Image);
-            pictureBox.Image = (Bitmap)workingImage.Clone();
+            PictureBox.Image = (Bitmap)workingImage.Clone();
             UpdatePreviewBox();
 
-            ActiveControl = txtHue;
+            ActiveControl = TxtHue;
         }
 
         private void UpdateTransform()
         {
-            HueTransform.HueShift = tbHue.Value;
-            SaturationTransform.Saturation = tbSaturation.Value;
+            HueTransform.HueShift = TbHue.Value;
+            SaturationTransform.Saturation = TbSaturation.Value;
             UpdatePreviewBox();
         }
 
@@ -101,8 +101,8 @@ namespace NAPS2.WinForms
                         }
                         SafeInvoke(() =>
                         {
-                            pictureBox.Image?.Dispose();
-                            pictureBox.Image = result;
+                            PictureBox.Image?.Dispose();
+                            PictureBox.Image = result;
                         });
                         working = false;
                     }
@@ -111,12 +111,12 @@ namespace NAPS2.WinForms
             previewOutOfDate = true;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             if (!HueTransform.IsNull || !SaturationTransform.IsNull)
             {
@@ -131,59 +131,57 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnRevert_Click(object sender, EventArgs e)
+        private void BtnRevert_Click(object sender, EventArgs e)
         {
             HueTransform = new HueTransform();
             SaturationTransform = new SaturationTransform();
-            tbHue.Value = 0;
-            tbSaturation.Value = 0;
-            txtHue.Text = tbHue.Value.ToString("G");
-            txtSaturation.Text = tbSaturation.Value.ToString("G");
+            TbHue.Value = 0;
+            TbSaturation.Value = 0;
+            TxtHue.Text = TbHue.Value.ToString("G");
+            TxtSaturation.Text = TbSaturation.Value.ToString("G");
             UpdatePreviewBox();
         }
 
         private void FCrop_FormClosed(object sender, FormClosedEventArgs e)
         {
             workingImage.Dispose();
-            pictureBox.Image?.Dispose();
+            PictureBox.Image?.Dispose();
             previewTimer?.Dispose();
         }
 
-        private void txtHue_TextChanged(object sender, EventArgs e)
+        private void TxtHue_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtHue.Text, out value))
+            if (int.TryParse(TxtHue.Text, out int value))
             {
-                if (value >= tbHue.Minimum && value <= tbHue.Maximum)
+                if (value >= TbHue.Minimum && value <= TbHue.Maximum)
                 {
-                    tbHue.Value = value;
+                    TbHue.Value = value;
                 }
             }
             UpdateTransform();
         }
 
-        private void tbHue_Scroll(object sender, EventArgs e)
+        private void TbHue_Scroll(object sender, EventArgs e)
         {
-            txtHue.Text = tbHue.Value.ToString("G");
+            TxtHue.Text = TbHue.Value.ToString("G");
             UpdateTransform();
         }
 
-        private void txtSaturation_TextChanged(object sender, EventArgs e)
+        private void TxtSaturation_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtSaturation.Text, out value))
+            if (int.TryParse(TxtSaturation.Text, out int value))
             {
-                if (value >= tbSaturation.Minimum && value <= tbSaturation.Maximum)
+                if (value >= TbSaturation.Minimum && value <= TbSaturation.Maximum)
                 {
-                    tbSaturation.Value = value;
+                    TbSaturation.Value = value;
                 }
             }
             UpdateTransform();
         }
 
-        private void tbSaturation_Scroll(object sender, EventArgs e)
+        private void TbSaturation_Scroll(object sender, EventArgs e)
         {
-            txtSaturation.Text = tbSaturation.Value.ToString("G");
+            TxtSaturation.Text = TbSaturation.Value.ToString("G");
             UpdateTransform();
         }
     }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace NAPS2.WinForms
@@ -11,7 +9,7 @@ namespace NAPS2.WinForms
         {
             RestoreFormState = false;
             InitializeComponent();
-            AcceptButton = btnScan;
+            AcceptButton = BtnScan;
         }
 
         public int ScanNumber { get; set; }
@@ -21,21 +19,21 @@ namespace NAPS2.WinForms
             lblStatus.Text = string.Format(lblStatus.Text, ScanNumber);
 
             new LayoutManager(this)
-                .Bind(btnScan, btnDone)
+                .Bind(BtnScan, BtnDone)
                     .WidthTo(() => Width / 2)
-                .Bind(btnDone)
-                    .LeftTo(() => btnScan.Right);
+                .Bind(BtnDone)
+                    .LeftTo(() => BtnScan.Right);
 
             Activate();
         }
 
-        private void btnScan_Click(object sender, EventArgs e)
+        private void BtnScan_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void btnDone_Click(object sender, EventArgs e)
+        private void BtnDone_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

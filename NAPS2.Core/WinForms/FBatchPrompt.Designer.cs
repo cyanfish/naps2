@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FBatchPrompt));
-            this.btnDone = new System.Windows.Forms.Button();
-            this.btnScan = new System.Windows.Forms.Button();
+            this.BtnDone = new System.Windows.Forms.Button();
+            this.BtnScan = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnDone
+            // BtnDone
             // 
-            resources.ApplyResources(this.btnDone, "btnDone");
-            this.btnDone.Name = "btnDone";
-            this.btnDone.UseVisualStyleBackColor = true;
-            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+            resources.ApplyResources(this.BtnDone, "BtnDone");
+            this.BtnDone.Name = "BtnDone";
+            this.BtnDone.UseVisualStyleBackColor = true;
+            this.BtnDone.Click += new System.EventHandler(this.BtnDone_Click);
             // 
-            // btnScan
+            // BtnScan
             // 
-            resources.ApplyResources(this.btnScan, "btnScan");
-            this.btnScan.Image = global::NAPS2.Icons.control_play_blue_small;
-            this.btnScan.Name = "btnScan";
-            this.btnScan.UseVisualStyleBackColor = true;
-            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+            resources.ApplyResources(this.BtnScan, "BtnScan");
+            this.BtnScan.Image = global::NAPS2.Icons.control_play_blue_small;
+            this.BtnScan.Name = "BtnScan";
+            this.BtnScan.UseVisualStyleBackColor = true;
+            this.BtnScan.Click += new System.EventHandler(this.BtnScan_Click);
             // 
             // lblStatus
             // 
@@ -58,8 +58,8 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.btnScan);
+            this.Controls.Add(this.BtnDone);
+            this.Controls.Add(this.BtnScan);
             this.Controls.Add(this.lblStatus);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -72,8 +72,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.Button btnScan;
+        private System.Windows.Forms.Button BtnDone;
+        private System.Windows.Forms.Button BtnScan;
         private System.Windows.Forms.Label lblStatus;
 
     }

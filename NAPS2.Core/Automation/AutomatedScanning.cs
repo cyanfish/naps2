@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
-using System.Xml.Serialization;
-using NAPS2.Config;
+﻿using NAPS2.Config;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
@@ -19,6 +11,14 @@ using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace NAPS2.Automation
 {
@@ -33,7 +33,7 @@ namespace NAPS2.Automation
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
-        private readonly IOperationFactory operationFactory;
+        private readonly IOperationFactory OperationFactory;
         private readonly AppConfigManager appConfigManager;
         private readonly OcrDependencyManager ocrDependencyManager;
         private readonly IFormFactory formFactory;
@@ -45,7 +45,7 @@ namespace NAPS2.Automation
         private DateTime startTime;
         private List<string> actualOutputPaths;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory OperationFactory, AppConfigManager appConfigManager, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
         {
             this.options = options;
             this.profileManager = profileManager;
@@ -57,7 +57,7 @@ namespace NAPS2.Automation
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
-            this.operationFactory = operationFactory;
+            this.OperationFactory = OperationFactory;
             this.appConfigManager = appConfigManager;
             this.ocrDependencyManager = ocrDependencyManager;
             this.formFactory = formFactory;
@@ -108,8 +108,7 @@ namespace NAPS2.Automation
 
                 if (options.Number > 0)
                 {
-                    ScanProfile profile;
-                    if (!GetProfile(out profile))
+                    if (!GetProfile(out ScanProfile profile))
                     {
                         return;
                     }
@@ -180,7 +179,7 @@ namespace NAPS2.Automation
             // Using a form here is not ideal (since this is supposed to be a console app), but good enough for now
             // Especially considering wia/twain often show forms anyway
             var progressForm = formFactory.Create<FDownloadProgress>();
-            if (toInstall.component.Id.StartsWith("ocr-") && componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.component.IsInstalled)
+            if (toInstall.component.Id.StartsWith("ocr-", StringComparison.CurrentCulture) && componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.component.IsInstalled)
             {
                 progressForm.QueueFile(ocrExe.download, ocrExe.component.Install);
                 if (options.Verbose)
@@ -289,7 +288,6 @@ namespace NAPS2.Automation
                 errorOutput.DisplayError(ConsoleResources.NoPagesToEmail);
                 return;
             }
-
 
             OutputVerbose(ConsoleResources.Emailing);
 
@@ -421,7 +419,7 @@ namespace NAPS2.Automation
         {
             string extension = Path.GetExtension(path);
             Debug.Assert(extension != null);
-            return extension.ToLower() == ".pdf";
+            return string.Equals(extension, ".pdf", StringComparison.CurrentCultureIgnoreCase);
         }
 
         private void ExportToImageFiles()
@@ -442,7 +440,7 @@ namespace NAPS2.Automation
 
             foreach (var scan in scanList)
             {
-                var op = operationFactory.Create<SaveImagesOperation>();
+                var op = OperationFactory.Create<SaveImagesOperation>();
                 int i = -1;
                 op.StatusChanged += (sender, args) =>
                 {
@@ -506,19 +504,19 @@ namespace NAPS2.Automation
             if (options.PdfCompat != null)
             {
                 var t = options.PdfCompat.Replace(" ", "").Replace("-", "").ToLowerInvariant();
-                if (t.EndsWith("a1b"))
+                if (t.EndsWith("a1b", StringComparison.CurrentCulture))
                 {
                     compat = PdfCompat.PdfA1B;
                 }
-                else if (t.EndsWith("a2b"))
+                else if (t.EndsWith("a2b", StringComparison.CurrentCulture))
                 {
                     compat = PdfCompat.PdfA2B;
                 }
-                else if (t.EndsWith("a3b"))
+                else if (t.EndsWith("a3b", StringComparison.CurrentCulture))
                 {
                     compat = PdfCompat.PdfA3B;
                 }
-                else if (t.EndsWith("a3u"))
+                else if (t.EndsWith("a3u", StringComparison.CurrentCulture))
                 {
                     compat = PdfCompat.PdfA3U;
                 }
@@ -532,7 +530,7 @@ namespace NAPS2.Automation
             int scanIndex = 0;
             foreach (var fileContents in scanList)
             {
-                var op = operationFactory.Create<SavePdfOperation>();
+                var op = OperationFactory.Create<SavePdfOperation>();
                 int i = -1;
                 op.StatusChanged += (sender, args) =>
                 {
@@ -601,13 +599,8 @@ namespace NAPS2.Automation
                 }
                 else
                 {
-                    // Use the profile with the specified name (case-sensitive)
-                    profile = profileManager.Profiles.FirstOrDefault(x => x.DisplayName == options.ProfileName);
-                    if (profile == null)
-                    {
-                        // If none found, try case-insensitive
-                        profile = profileManager.Profiles.First(x => x.DisplayName.ToLower() == options.ProfileName.ToLower());
-                    }
+                    // Use the profile with the specified name (case-sensitive); but if none found, try case-insensitive
+                    profile = profileManager.Profiles.Find(x => x.DisplayName == options.ProfileName) ?? profileManager.Profiles.First(x => string.Equals(x.DisplayName, options.ProfileName, StringComparison.CurrentCultureIgnoreCase));
                 }
             }
             catch (InvalidOperationException)

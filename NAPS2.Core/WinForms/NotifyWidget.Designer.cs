@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotifyWidget));
             this.lblTitle = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.hideTimer = new System.Windows.Forms.Timer(this.components);
+            this.LinkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.BtnClose = new System.Windows.Forms.Button();
+            this.HideTimer = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,40 +44,40 @@
             resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
             // 
-            // linkLabel1
+            // LinkLabel1
             // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.linkLabel1.AutoEllipsis = true;
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            resources.ApplyResources(this.LinkLabel1, "LinkLabel1");
+            this.LinkLabel1.AutoEllipsis = true;
+            this.LinkLabel1.Name = "LinkLabel1";
+            this.LinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
-            // btnClose
+            // BtnClose
             // 
-            resources.ApplyResources(this.btnClose, "btnClose");
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.Image = global::NAPS2.Icons.close;
-            this.btnClose.Name = "btnClose";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            resources.ApplyResources(this.BtnClose, "BtnClose");
+            this.BtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnClose.FlatAppearance.BorderSize = 0;
+            this.BtnClose.Image = global::NAPS2.Icons.close;
+            this.BtnClose.Name = "BtnClose";
+            this.BtnClose.UseVisualStyleBackColor = true;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
-            // hideTimer
+            // HideTimer
             // 
-            this.hideTimer.Interval = 5000;
-            this.hideTimer.Tick += new System.EventHandler(this.hideTimer_Tick);
+            this.HideTimer.Interval = 5000;
+            this.HideTimer.Tick += new System.EventHandler(this.HideTimer_Tick);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFolderToolStripMenuItem});
+            this.OpenFolderToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
-            // openFolderToolStripMenuItem
+            // OpenFolderToolStripMenuItem
             // 
-            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            resources.ApplyResources(this.openFolderToolStripMenuItem, "openFolderToolStripMenuItem");
-            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
+            this.OpenFolderToolStripMenuItem.Name = "OpenFolderToolStripMenuItem";
+            resources.ApplyResources(this.OpenFolderToolStripMenuItem, "OpenFolderToolStripMenuItem");
+            this.OpenFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenFolderToolStripMenuItem_Click);
             // 
             // NotifyWidget
             // 
@@ -85,8 +85,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.BtnClose);
+            this.Controls.Add(this.LinkLabel1);
             this.Controls.Add(this.lblTitle);
             this.Name = "NotifyWidget";
             this.MouseEnter += new System.EventHandler(this.NotifyWidget_MouseEnter);
@@ -100,10 +100,10 @@
         #endregion
 
         protected System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button btnClose;
-        protected System.Windows.Forms.Timer hideTimer;
+        private System.Windows.Forms.LinkLabel LinkLabel1;
+        private System.Windows.Forms.Button BtnClose;
+        protected System.Windows.Forms.Timer HideTimer;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OpenFolderToolStripMenuItem;
     }
 }

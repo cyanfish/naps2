@@ -32,33 +32,33 @@ namespace NAPS2.WinForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAbout));
-            this.labelProductName = new System.Windows.Forms.Label();
-            this.labelVersion = new System.Windows.Forms.Label();
-            this.labelCopyright = new System.Windows.Forms.Label();
+            this.LabelProductName = new System.Windows.Forms.Label();
+            this.LabelVersion = new System.Windows.Forms.Label();
+            this.LabelCopyright = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.btnDonate = new System.Windows.Forms.PictureBox();
+            this.LinkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.LinkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.BtnDonate = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDonate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnDonate)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelProductName
+            // LabelProductName
             // 
-            resources.ApplyResources(this.labelProductName, "labelProductName");
-            this.labelProductName.Name = "labelProductName";
+            resources.ApplyResources(this.LabelProductName, "LabelProductName");
+            this.LabelProductName.Name = "LabelProductName";
             // 
-            // labelVersion
+            // LabelVersion
             // 
-            resources.ApplyResources(this.labelVersion, "labelVersion");
-            this.labelVersion.Name = "labelVersion";
+            resources.ApplyResources(this.LabelVersion, "LabelVersion");
+            this.LabelVersion.Name = "LabelVersion";
             // 
-            // labelCopyright
+            // LabelCopyright
             // 
-            resources.ApplyResources(this.labelCopyright, "labelCopyright");
-            this.labelCopyright.Name = "labelCopyright";
+            resources.ApplyResources(this.LabelCopyright, "LabelCopyright");
+            this.LabelCopyright.Name = "LabelCopyright";
             // 
             // okButton
             // 
@@ -72,53 +72,53 @@ namespace NAPS2.WinForms
             this.logoPictureBox.Name = "logoPictureBox";
             this.logoPictureBox.TabStop = false;
             // 
-            // linkLabel1
+            // LinkLabel1
             // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            resources.ApplyResources(this.LinkLabel1, "LinkLabel1");
+            this.LinkLabel1.Name = "LinkLabel1";
+            this.LinkLabel1.TabStop = true;
+            this.LinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
-            // label1
+            // Label1
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.Name = "Label1";
             // 
-            // linkLabel2
+            // LinkLabel2
             // 
-            resources.ApplyResources(this.linkLabel2, "linkLabel2");
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            resources.ApplyResources(this.LinkLabel2, "LinkLabel2");
+            this.LinkLabel2.Name = "LinkLabel2";
+            this.LinkLabel2.TabStop = true;
+            this.LinkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
             // 
-            // btnDonate
+            // BtnDonate
             // 
-            this.btnDonate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDonate.Image = global::NAPS2.Icons.btn_donate_LG;
-            resources.ApplyResources(this.btnDonate, "btnDonate");
-            this.btnDonate.Name = "btnDonate";
-            this.btnDonate.TabStop = false;
-            this.btnDonate.Click += new System.EventHandler(this.btnDonate_Click);
+            this.BtnDonate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnDonate.Image = global::NAPS2.Icons.Btn_donate_LG;
+            resources.ApplyResources(this.BtnDonate, "BtnDonate");
+            this.BtnDonate.Name = "BtnDonate";
+            this.BtnDonate.TabStop = false;
+            this.BtnDonate.Click += new System.EventHandler(this.BtnDonate_Click);
             // 
             // FAbout
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnDonate);
-            this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.BtnDonate);
+            this.Controls.Add(this.LinkLabel2);
+            this.Controls.Add(this.Label1);
             this.Controls.Add(this.okButton);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.LinkLabel1);
             this.Controls.Add(this.logoPictureBox);
-            this.Controls.Add(this.labelProductName);
-            this.Controls.Add(this.labelVersion);
-            this.Controls.Add(this.labelCopyright);
+            this.Controls.Add(this.LabelProductName);
+            this.Controls.Add(this.LabelVersion);
+            this.Controls.Add(this.LabelCopyright);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FAbout";
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDonate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnDonate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,14 +126,14 @@ namespace NAPS2.WinForms
 
         #endregion
 
-        private System.Windows.Forms.Label labelProductName;
-        private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.Label labelCopyright;
+        private System.Windows.Forms.Label LabelProductName;
+        private System.Windows.Forms.Label LabelVersion;
+        private System.Windows.Forms.Label LabelCopyright;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.PictureBox logoPictureBox;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.PictureBox btnDonate;
+        private System.Windows.Forms.LinkLabel LinkLabel1;
+        private System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.LinkLabel LinkLabel2;
+        private System.Windows.Forms.PictureBox BtnDonate;
     }
 }

@@ -118,90 +118,90 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnOK.Location" type="System.Drawing.Point, System.Drawing">
         <value>264, 530</value>
     </data>
-    <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnOK.TabIndex" type="System.Int32, mscorlib">
         <value>18</value>
     </data>
-    <data name="btnOK.Text" xml:space="preserve">
+    <data name="BtnOK.Text" xml:space="preserve">
         <value>&amp;OK</value>
     </data>
-    <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
-        <value>btnOK</value>
+    <data name="&gt;&gt;BtnOK.Name" xml:space="preserve">
+        <value>BtnOK</value>
     </data>
-    <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.ZOrder" xml:space="preserve">
         <value>6</value>
     </data>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>345, 530</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>19</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>Avbryt</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
-    <data name="cbHighQuality.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CbHighQuality.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="cbHighQuality.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="CbHighQuality.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="cbHighQuality.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CbHighQuality.Location" type="System.Drawing.Point, System.Drawing">
         <value>9, 19</value>
     </data>
-    <data name="cbHighQuality.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CbHighQuality.Size" type="System.Drawing.Size, System.Drawing">
         <value>156, 17</value>
     </data>
-    <data name="cbHighQuality.TabIndex" type="System.Int32, mscorlib">
+    <data name="CbHighQuality.TabIndex" type="System.Int32, mscorlib">
         <value>17</value>
     </data>
-    <data name="cbHighQuality.Text" xml:space="preserve">
+    <data name="CbHighQuality.Text" xml:space="preserve">
         <value>Maximal kvalitet (stora filer)</value>
     </data>
-    <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
-        <value>cbHighQuality</value>
+    <data name="&gt;&gt;CbHighQuality.Name" xml:space="preserve">
+        <value>CbHighQuality</value>
     </data>
-    <data name="&gt;&gt;cbHighQuality.Type" xml:space="preserve">
+    <data name="&gt;&gt;CbHighQuality.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbHighQuality.Parent" xml:space="preserve">
-        <value>groupBox1</value>
+    <data name="&gt;&gt;CbHighQuality.Parent" xml:space="preserve">
+        <value>GroupBox1</value>
     </data>
-    <data name="&gt;&gt;cbHighQuality.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CbHighQuality.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
     <metadata name="ilProfileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -226,7 +226,7 @@
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;txtImageQuality.Parent" xml:space="preserve">
-        <value>groupBox1</value>
+        <value>GroupBox1</value>
     </data>
     <data name="&gt;&gt;txtImageQuality.ZOrder" xml:space="preserve">
         <value>1</value>
@@ -253,33 +253,33 @@
         <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;tbImageQuality.Parent" xml:space="preserve">
-        <value>groupBox1</value>
+        <value>GroupBox1</value>
     </data>
     <data name="&gt;&gt;tbImageQuality.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 12</value>
     </data>
-    <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
         <value>408, 81</value>
     </data>
-    <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
         <value>35</value>
     </data>
-    <data name="groupBox1.Text" xml:space="preserve">
+    <data name="GroupBox1.Text" xml:space="preserve">
         <value>Bildkvalitet</value>
     </data>
-    <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-        <value>groupBox1</value>
+    <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+        <value>GroupBox1</value>
     </data>
-    <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
         <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
     <data name="txtWiaDelayBetweenScansSeconds.Location" type="System.Drawing.Point, System.Drawing">
@@ -301,99 +301,99 @@
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;txtWiaDelayBetweenScansSeconds.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+        <value>GroupBox2</value>
     </data>
     <data name="&gt;&gt;txtWiaDelayBetweenScansSeconds.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="cbWiaDelayBetweenScans.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CbWiaDelayBetweenScans.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="cbWiaDelayBetweenScans.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="CbWiaDelayBetweenScans.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="cbWiaDelayBetweenScans.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CbWiaDelayBetweenScans.Location" type="System.Drawing.Point, System.Drawing">
         <value>9, 88</value>
     </data>
-    <data name="cbWiaDelayBetweenScans.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CbWiaDelayBetweenScans.Size" type="System.Drawing.Size, System.Drawing">
         <value>158, 17</value>
     </data>
-    <data name="cbWiaDelayBetweenScans.TabIndex" type="System.Int32, mscorlib">
+    <data name="CbWiaDelayBetweenScans.TabIndex" type="System.Int32, mscorlib">
         <value>8</value>
     </data>
-    <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
+    <data name="CbWiaDelayBetweenScans.Text" xml:space="preserve">
         <value>Delay between scans (WIA)</value>
     </data>
-    <data name="&gt;&gt;cbWiaDelayBetweenScans.Name" xml:space="preserve">
-        <value>cbWiaDelayBetweenScans</value>
+    <data name="&gt;&gt;CbWiaDelayBetweenScans.Name" xml:space="preserve">
+        <value>CbWiaDelayBetweenScans</value>
     </data>
-    <data name="&gt;&gt;cbWiaDelayBetweenScans.Type" xml:space="preserve">
+    <data name="&gt;&gt;CbWiaDelayBetweenScans.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbWiaDelayBetweenScans.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+    <data name="&gt;&gt;CbWiaDelayBetweenScans.Parent" xml:space="preserve">
+        <value>GroupBox2</value>
     </data>
-    <data name="&gt;&gt;cbWiaDelayBetweenScans.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CbWiaDelayBetweenScans.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="cbWiaRetryOnFailure.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CbWiaRetryOnFailure.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="cbWiaRetryOnFailure.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="CbWiaRetryOnFailure.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="cbWiaRetryOnFailure.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CbWiaRetryOnFailure.Location" type="System.Drawing.Point, System.Drawing">
         <value>9, 65</value>
     </data>
-    <data name="cbWiaRetryOnFailure.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CbWiaRetryOnFailure.Size" type="System.Drawing.Size, System.Drawing">
         <value>127, 17</value>
     </data>
-    <data name="cbWiaRetryOnFailure.TabIndex" type="System.Int32, mscorlib">
+    <data name="CbWiaRetryOnFailure.TabIndex" type="System.Int32, mscorlib">
         <value>7</value>
     </data>
-    <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
+    <data name="CbWiaRetryOnFailure.Text" xml:space="preserve">
         <value>Retry on failure (WIA)</value>
     </data>
-    <data name="&gt;&gt;cbWiaRetryOnFailure.Name" xml:space="preserve">
-        <value>cbWiaRetryOnFailure</value>
+    <data name="&gt;&gt;CbWiaRetryOnFailure.Name" xml:space="preserve">
+        <value>CbWiaRetryOnFailure</value>
     </data>
-    <data name="&gt;&gt;cbWiaRetryOnFailure.Type" xml:space="preserve">
+    <data name="&gt;&gt;CbWiaRetryOnFailure.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbWiaRetryOnFailure.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+    <data name="&gt;&gt;CbWiaRetryOnFailure.Parent" xml:space="preserve">
+        <value>GroupBox2</value>
     </data>
-    <data name="&gt;&gt;cbWiaRetryOnFailure.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CbWiaRetryOnFailure.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="cbForcePageSizeCrop.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CbForcePageSizeCrop.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="cbForcePageSizeCrop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="CbForcePageSizeCrop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="cbForcePageSizeCrop.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CbForcePageSizeCrop.Location" type="System.Drawing.Point, System.Drawing">
         <value>9, 134</value>
     </data>
-    <data name="cbForcePageSizeCrop.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CbForcePageSizeCrop.Size" type="System.Drawing.Size, System.Drawing">
         <value>108, 17</value>
     </data>
-    <data name="cbForcePageSizeCrop.TabIndex" type="System.Int32, mscorlib">
+    <data name="CbForcePageSizeCrop.TabIndex" type="System.Int32, mscorlib">
         <value>6</value>
     </data>
-    <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
+    <data name="CbForcePageSizeCrop.Text" xml:space="preserve">
         <value>Crop to page size</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSizeCrop.Name" xml:space="preserve">
-        <value>cbForcePageSizeCrop</value>
+    <data name="&gt;&gt;CbForcePageSizeCrop.Name" xml:space="preserve">
+        <value>CbForcePageSizeCrop</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSizeCrop.Type" xml:space="preserve">
+    <data name="&gt;&gt;CbForcePageSizeCrop.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSizeCrop.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+    <data name="&gt;&gt;CbForcePageSizeCrop.Parent" xml:space="preserve">
+        <value>GroupBox2</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSizeCrop.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CbForcePageSizeCrop.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
     <data name="cbFlipDuplex.AutoSize" type="System.Boolean, mscorlib">
@@ -421,66 +421,66 @@
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;cbFlipDuplex.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+        <value>GroupBox2</value>
     </data>
     <data name="&gt;&gt;cbFlipDuplex.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
-    <data name="cbWiaOffsetWidth.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CbWiaOffsetWidth.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="cbWiaOffsetWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="CbWiaOffsetWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="cbWiaOffsetWidth.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CbWiaOffsetWidth.Location" type="System.Drawing.Point, System.Drawing">
         <value>9, 42</value>
     </data>
-    <data name="cbWiaOffsetWidth.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CbWiaOffsetWidth.Size" type="System.Drawing.Size, System.Drawing">
         <value>207, 17</value>
     </data>
-    <data name="cbWiaOffsetWidth.TabIndex" type="System.Int32, mscorlib">
+    <data name="CbWiaOffsetWidth.TabIndex" type="System.Int32, mscorlib">
         <value>4</value>
     </data>
-    <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
+    <data name="CbWiaOffsetWidth.Text" xml:space="preserve">
         <value>Offset breddbaserad vid justering (WIA)</value>
     </data>
-    <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
-        <value>cbWiaOffsetWidth</value>
+    <data name="&gt;&gt;CbWiaOffsetWidth.Name" xml:space="preserve">
+        <value>CbWiaOffsetWidth</value>
     </data>
-    <data name="&gt;&gt;cbWiaOffsetWidth.Type" xml:space="preserve">
+    <data name="&gt;&gt;CbWiaOffsetWidth.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbWiaOffsetWidth.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+    <data name="&gt;&gt;CbWiaOffsetWidth.Parent" xml:space="preserve">
+        <value>GroupBox2</value>
     </data>
-    <data name="&gt;&gt;cbWiaOffsetWidth.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CbWiaOffsetWidth.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
-    <data name="cbForcePageSize.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CbForcePageSize.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="cbForcePageSize.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CbForcePageSize.Location" type="System.Drawing.Point, System.Drawing">
         <value>9, 111</value>
     </data>
-    <data name="cbForcePageSize.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CbForcePageSize.Size" type="System.Drawing.Size, System.Drawing">
         <value>120, 17</value>
     </data>
-    <data name="cbForcePageSize.TabIndex" type="System.Int32, mscorlib">
+    <data name="CbForcePageSize.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="cbForcePageSize.Text" xml:space="preserve">
+    <data name="CbForcePageSize.Text" xml:space="preserve">
         <value>Stretch to page size</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
-        <value>cbForcePageSize</value>
+    <data name="&gt;&gt;CbForcePageSize.Name" xml:space="preserve">
+        <value>CbForcePageSize</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSize.Type" xml:space="preserve">
+    <data name="&gt;&gt;CbForcePageSize.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSize.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+    <data name="&gt;&gt;CbForcePageSize.Parent" xml:space="preserve">
+        <value>GroupBox2</value>
     </data>
-    <data name="&gt;&gt;cbForcePageSize.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CbForcePageSize.ZOrder" xml:space="preserve">
         <value>6</value>
     </data>
     <data name="cbBrightnessContrastAfterScan.AutoSize" type="System.Boolean, mscorlib">
@@ -505,7 +505,7 @@
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+        <value>GroupBox2</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.ZOrder" xml:space="preserve">
         <value>7</value>
@@ -526,357 +526,357 @@
         <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
     <data name="&gt;&gt;cmbTwainImpl.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+        <value>GroupBox2</value>
     </data>
     <data name="&gt;&gt;cmbTwainImpl.ZOrder" xml:space="preserve">
         <value>8</value>
     </data>
-    <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 180</value>
     </data>
-    <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
         <value>113, 13</value>
     </data>
-    <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label1.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
     </data>
-    <data name="label1.Text" xml:space="preserve">
+    <data name="Label1.Text" xml:space="preserve">
         <value>Twain-implementering:</value>
     </data>
-    <data name="&gt;&gt;label1.Name" xml:space="preserve">
-        <value>label1</value>
+    <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+        <value>Label1</value>
     </data>
-    <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label1.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-        <value>groupBox2</value>
+    <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+        <value>GroupBox2</value>
     </data>
-    <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
         <value>9</value>
     </data>
-    <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 296</value>
     </data>
-    <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
         <value>408, 228</value>
     </data>
-    <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
         <value>36</value>
     </data>
-    <data name="groupBox2.Text" xml:space="preserve">
+    <data name="GroupBox2.Text" xml:space="preserve">
         <value>Kompatibilitet</value>
     </data>
-    <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-        <value>groupBox2</value>
+    <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
+        <value>GroupBox2</value>
     </data>
-    <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
         <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 88</value>
     </data>
-    <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
         <value>103, 13</value>
     </data>
-    <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label3.TabIndex" type="System.Int32, mscorlib">
         <value>38</value>
     </data>
-    <data name="label3.Text" xml:space="preserve">
+    <data name="Label3.Text" xml:space="preserve">
         <value>Tröskelvärde</value>
     </data>
-    <data name="&gt;&gt;label3.Name" xml:space="preserve">
-        <value>label3</value>
+    <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+        <value>Label3</value>
     </data>
-    <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label3.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-        <value>groupBox3</value>
+    <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
+        <value>GroupBox3</value>
     </data>
-    <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 41</value>
     </data>
-    <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
         <value>85, 13</value>
     </data>
-    <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label2.TabIndex" type="System.Int32, mscorlib">
         <value>37</value>
     </data>
-    <data name="label2.Text" xml:space="preserve">
+    <data name="Label2.Text" xml:space="preserve">
         <value>Vittröskelvärde:</value>
     </data>
-    <data name="&gt;&gt;label2.Name" xml:space="preserve">
-        <value>label2</value>
+    <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+        <value>Label2</value>
     </data>
-    <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label2.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-        <value>groupBox3</value>
+    <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+        <value>GroupBox3</value>
     </data>
-    <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="tbCoverageThreshold.AutoSize" type="System.Boolean, mscorlib">
+    <data name="TbCoverageThreshold.AutoSize" type="System.Boolean, mscorlib">
         <value>False</value>
     </data>
-    <data name="tbCoverageThreshold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="TbCoverageThreshold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="tbCoverageThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="TbCoverageThreshold.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 104</value>
     </data>
-    <data name="tbCoverageThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TbCoverageThreshold.Size" type="System.Drawing.Size, System.Drawing">
         <value>352, 33</value>
     </data>
-    <data name="tbCoverageThreshold.TabIndex" type="System.Int32, mscorlib">
+    <data name="TbCoverageThreshold.TabIndex" type="System.Int32, mscorlib">
         <value>35</value>
     </data>
-    <data name="&gt;&gt;tbCoverageThreshold.Name" xml:space="preserve">
-        <value>tbCoverageThreshold</value>
+    <data name="&gt;&gt;TbCoverageThreshold.Name" xml:space="preserve">
+        <value>TbCoverageThreshold</value>
     </data>
-    <data name="&gt;&gt;tbCoverageThreshold.Type" xml:space="preserve">
+    <data name="&gt;&gt;TbCoverageThreshold.Type" xml:space="preserve">
         <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tbCoverageThreshold.Parent" xml:space="preserve">
-        <value>groupBox3</value>
+    <data name="&gt;&gt;TbCoverageThreshold.Parent" xml:space="preserve">
+        <value>GroupBox3</value>
     </data>
-    <data name="&gt;&gt;tbCoverageThreshold.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;TbCoverageThreshold.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="txtCoverageThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="TxtCoverageThreshold.Location" type="System.Drawing.Point, System.Drawing">
         <value>364, 104</value>
     </data>
-    <data name="txtCoverageThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TxtCoverageThreshold.Size" type="System.Drawing.Size, System.Drawing">
         <value>38, 20</value>
     </data>
-    <data name="txtCoverageThreshold.TabIndex" type="System.Int32, mscorlib">
+    <data name="TxtCoverageThreshold.TabIndex" type="System.Int32, mscorlib">
         <value>36</value>
     </data>
-    <data name="txtCoverageThreshold.Text" xml:space="preserve">
+    <data name="TxtCoverageThreshold.Text" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="&gt;&gt;txtCoverageThreshold.Name" xml:space="preserve">
-        <value>txtCoverageThreshold</value>
+    <data name="&gt;&gt;TxtCoverageThreshold.Name" xml:space="preserve">
+        <value>TxtCoverageThreshold</value>
     </data>
-    <data name="&gt;&gt;txtCoverageThreshold.Type" xml:space="preserve">
+    <data name="&gt;&gt;TxtCoverageThreshold.Type" xml:space="preserve">
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;txtCoverageThreshold.Parent" xml:space="preserve">
-        <value>groupBox3</value>
+    <data name="&gt;&gt;TxtCoverageThreshold.Parent" xml:space="preserve">
+        <value>GroupBox3</value>
     </data>
-    <data name="&gt;&gt;txtCoverageThreshold.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;TxtCoverageThreshold.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="tbWhiteThreshold.AutoSize" type="System.Boolean, mscorlib">
+    <data name="TbWhiteThreshold.AutoSize" type="System.Boolean, mscorlib">
         <value>False</value>
     </data>
-    <data name="tbWhiteThreshold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="TbWhiteThreshold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="tbWhiteThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="TbWhiteThreshold.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 57</value>
     </data>
-    <data name="tbWhiteThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TbWhiteThreshold.Size" type="System.Drawing.Size, System.Drawing">
         <value>352, 28</value>
     </data>
-    <data name="tbWhiteThreshold.TabIndex" type="System.Int32, mscorlib">
+    <data name="TbWhiteThreshold.TabIndex" type="System.Int32, mscorlib">
         <value>33</value>
     </data>
-    <data name="&gt;&gt;tbWhiteThreshold.Name" xml:space="preserve">
-        <value>tbWhiteThreshold</value>
+    <data name="&gt;&gt;TbWhiteThreshold.Name" xml:space="preserve">
+        <value>TbWhiteThreshold</value>
     </data>
-    <data name="&gt;&gt;tbWhiteThreshold.Type" xml:space="preserve">
+    <data name="&gt;&gt;TbWhiteThreshold.Type" xml:space="preserve">
         <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;tbWhiteThreshold.Parent" xml:space="preserve">
-        <value>groupBox3</value>
+    <data name="&gt;&gt;TbWhiteThreshold.Parent" xml:space="preserve">
+        <value>GroupBox3</value>
     </data>
-    <data name="&gt;&gt;tbWhiteThreshold.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;TbWhiteThreshold.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
-    <data name="txtWhiteThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="TxtWhiteThreshold.Location" type="System.Drawing.Point, System.Drawing">
         <value>364, 57</value>
     </data>
-    <data name="txtWhiteThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TxtWhiteThreshold.Size" type="System.Drawing.Size, System.Drawing">
         <value>38, 20</value>
     </data>
-    <data name="txtWhiteThreshold.TabIndex" type="System.Int32, mscorlib">
+    <data name="TxtWhiteThreshold.TabIndex" type="System.Int32, mscorlib">
         <value>34</value>
     </data>
-    <data name="txtWhiteThreshold.Text" xml:space="preserve">
+    <data name="TxtWhiteThreshold.Text" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="&gt;&gt;txtWhiteThreshold.Name" xml:space="preserve">
-        <value>txtWhiteThreshold</value>
+    <data name="&gt;&gt;TxtWhiteThreshold.Name" xml:space="preserve">
+        <value>TxtWhiteThreshold</value>
     </data>
-    <data name="&gt;&gt;txtWhiteThreshold.Type" xml:space="preserve">
+    <data name="&gt;&gt;TxtWhiteThreshold.Type" xml:space="preserve">
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;txtWhiteThreshold.Parent" xml:space="preserve">
-        <value>groupBox3</value>
+    <data name="&gt;&gt;TxtWhiteThreshold.Parent" xml:space="preserve">
+        <value>GroupBox3</value>
     </data>
-    <data name="&gt;&gt;txtWhiteThreshold.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;TxtWhiteThreshold.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
-    <data name="cbExcludeBlankPages.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CbExcludeBlankPages.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="cbExcludeBlankPages.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="CbExcludeBlankPages.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="cbExcludeBlankPages.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CbExcludeBlankPages.Location" type="System.Drawing.Point, System.Drawing">
         <value>9, 19</value>
     </data>
-    <data name="cbExcludeBlankPages.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CbExcludeBlankPages.Size" type="System.Drawing.Size, System.Drawing">
         <value>125, 17</value>
     </data>
-    <data name="cbExcludeBlankPages.TabIndex" type="System.Int32, mscorlib">
+    <data name="CbExcludeBlankPages.TabIndex" type="System.Int32, mscorlib">
         <value>17</value>
     </data>
-    <data name="cbExcludeBlankPages.Text" xml:space="preserve">
+    <data name="CbExcludeBlankPages.Text" xml:space="preserve">
         <value>Undanta blanka sidor</value>
     </data>
-    <data name="&gt;&gt;cbExcludeBlankPages.Name" xml:space="preserve">
-        <value>cbExcludeBlankPages</value>
+    <data name="&gt;&gt;CbExcludeBlankPages.Name" xml:space="preserve">
+        <value>CbExcludeBlankPages</value>
     </data>
-    <data name="&gt;&gt;cbExcludeBlankPages.Type" xml:space="preserve">
+    <data name="&gt;&gt;CbExcludeBlankPages.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbExcludeBlankPages.Parent" xml:space="preserve">
-        <value>groupBox3</value>
+    <data name="&gt;&gt;CbExcludeBlankPages.Parent" xml:space="preserve">
+        <value>GroupBox3</value>
     </data>
-    <data name="&gt;&gt;cbExcludeBlankPages.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CbExcludeBlankPages.ZOrder" xml:space="preserve">
         <value>6</value>
     </data>
-    <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 99</value>
     </data>
-    <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
         <value>408, 143</value>
     </data>
-    <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
         <value>37</value>
     </data>
-    <data name="groupBox3.Text" xml:space="preserve">
+    <data name="GroupBox3.Text" xml:space="preserve">
         <value>Blanka sidor</value>
     </data>
-    <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-        <value>groupBox3</value>
+    <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
+        <value>GroupBox3</value>
     </data>
-    <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
         <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="btnRestoreDefaults.AutoSize" type="System.Boolean, mscorlib">
+    <data name="BtnRestoreDefaults.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="btnRestoreDefaults.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnRestoreDefaults.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnRestoreDefaults.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnRestoreDefaults.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 530</value>
     </data>
-    <data name="btnRestoreDefaults.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnRestoreDefaults.Size" type="System.Drawing.Size, System.Drawing">
         <value>145, 23</value>
     </data>
-    <data name="btnRestoreDefaults.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnRestoreDefaults.TabIndex" type="System.Int32, mscorlib">
         <value>38</value>
     </data>
-    <data name="btnRestoreDefaults.Text" xml:space="preserve">
+    <data name="BtnRestoreDefaults.Text" xml:space="preserve">
         <value>Återställ standard</value>
     </data>
-    <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
-        <value>btnRestoreDefaults</value>
+    <data name="&gt;&gt;BtnRestoreDefaults.Name" xml:space="preserve">
+        <value>BtnRestoreDefaults</value>
     </data>
-    <data name="&gt;&gt;btnRestoreDefaults.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnRestoreDefaults.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnRestoreDefaults.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnRestoreDefaults.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnRestoreDefaults.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnRestoreDefaults.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="cbAutoDeskew.AutoSize" type="System.Boolean, mscorlib">
+    <data name="CbAutoDeskew.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="cbAutoDeskew.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="CbAutoDeskew.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="cbAutoDeskew.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="CbAutoDeskew.Location" type="System.Drawing.Point, System.Drawing">
         <value>9, 19</value>
     </data>
-    <data name="cbAutoDeskew.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="CbAutoDeskew.Size" type="System.Drawing.Size, System.Drawing">
         <value>141, 17</value>
     </data>
-    <data name="cbAutoDeskew.TabIndex" type="System.Int32, mscorlib">
+    <data name="CbAutoDeskew.TabIndex" type="System.Int32, mscorlib">
         <value>17</value>
     </data>
-    <data name="cbAutoDeskew.Text" xml:space="preserve">
+    <data name="CbAutoDeskew.Text" xml:space="preserve">
         <value>Deskew scanned pages</value>
     </data>
-    <data name="&gt;&gt;cbAutoDeskew.Name" xml:space="preserve">
-        <value>cbAutoDeskew</value>
+    <data name="&gt;&gt;CbAutoDeskew.Name" xml:space="preserve">
+        <value>CbAutoDeskew</value>
     </data>
-    <data name="&gt;&gt;cbAutoDeskew.Type" xml:space="preserve">
+    <data name="&gt;&gt;CbAutoDeskew.Type" xml:space="preserve">
         <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;cbAutoDeskew.Parent" xml:space="preserve">
-        <value>groupBox4</value>
+    <data name="&gt;&gt;CbAutoDeskew.Parent" xml:space="preserve">
+        <value>GroupBox4</value>
     </data>
-    <data name="&gt;&gt;cbAutoDeskew.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;CbAutoDeskew.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
-    <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 248</value>
     </data>
-    <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
         <value>408, 42</value>
     </data>
-    <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+    <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
         <value>39</value>
     </data>
-    <data name="groupBox4.Text" xml:space="preserve">
+    <data name="GroupBox4.Text" xml:space="preserve">
         <value>Post-processing</value>
     </data>
-    <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
-        <value>groupBox4</value>
+    <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
+        <value>GroupBox4</value>
     </data>
-    <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox4.Type" xml:space="preserve">
         <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

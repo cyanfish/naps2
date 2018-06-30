@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FDownloadProgress));
             this.progressBarSub = new System.Windows.Forms.ProgressBar();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.labelSub = new System.Windows.Forms.Label();
-            this.labelTop = new System.Windows.Forms.Label();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.LabelSub = new System.Windows.Forms.Label();
+            this.LabelTop = new System.Windows.Forms.Label();
             this.progressBarTop = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
@@ -42,22 +42,22 @@
             this.progressBarSub.Name = "progressBarSub";
             this.progressBarSub.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            resources.ApplyResources(this.BtnCancel, "BtnCancel");
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // labelSub
+            // LabelSub
             // 
-            resources.ApplyResources(this.labelSub, "labelSub");
-            this.labelSub.Name = "labelSub";
+            resources.ApplyResources(this.LabelSub, "LabelSub");
+            this.LabelSub.Name = "LabelSub";
             // 
-            // labelTop
+            // LabelTop
             // 
-            resources.ApplyResources(this.labelTop, "labelTop");
-            this.labelTop.Name = "labelTop";
+            resources.ApplyResources(this.LabelTop, "LabelTop");
+            this.LabelTop.Name = "LabelTop";
             // 
             // progressBarTop
             // 
@@ -69,10 +69,10 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelTop);
+            this.Controls.Add(this.LabelTop);
             this.Controls.Add(this.progressBarTop);
-            this.Controls.Add(this.labelSub);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.LabelSub);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.progressBarSub);
             this.MaximizeBox = false;
             this.Name = "FDownloadProgress";
@@ -85,9 +85,9 @@
         #endregion
 
         private System.Windows.Forms.ProgressBar progressBarSub;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label labelSub;
-        private System.Windows.Forms.Label labelTop;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Label LabelSub;
+        private System.Windows.Forms.Label LabelTop;
         private System.Windows.Forms.ProgressBar progressBarTop;
     }
 }

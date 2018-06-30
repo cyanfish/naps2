@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Images
 {
-    internal class BitmapHelper
+    internal static class BitmapHelper
     {
         private const int SRCCOPY = 0x00CC0020;
         private const uint BI_RGB = 0;
@@ -71,17 +69,17 @@ namespace NAPS2.Scan.Images
             // "BitmapInfo" is an interop-struct which we define below.
             // In GDI terms, it's a BITMAPHEADERINFO followed by an array of two RGBQUADs
             var bmi = new BitmapInfo
-                {
-                    biSize = 40, // the size of the BITMAPHEADERINFO struct
-                    biWidth = w,
-                    biHeight = h,
-                    biPlanes = 1, // "planes" are confusing. We always use just 1. Read MSDN for more info.
-                    biBitCount = (short)bpp, // ie. 1bpp or 8bpp
-                    biCompression = BI_RGB, // ie. the pixels in our RGBQUAD table are stored as RGBs, not palette indexes
-                    biSizeImage = (uint)(((w + 7) & 0xFFFFFFF8) * h / 8),
-                    biXPelsPerMeter = 1000000, // not really important
-                    biYPelsPerMeter = 1000000 // not really important
-                };
+            {
+                biSize = 40, // the size of the BITMAPHEADERINFO struct
+                biWidth = w,
+                biHeight = h,
+                biPlanes = 1, // "planes" are confusing. We always use just 1. Read MSDN for more info.
+                biBitCount = (short)bpp, // ie. 1bpp or 8bpp
+                biCompression = BI_RGB, // ie. the pixels in our RGBQUAD table are stored as RGBs, not palette indexes
+                biSizeImage = (uint)(((w + 7) & 0xFFFFFFF8) * h / 8),
+                biXPelsPerMeter = 1000000, // not really important
+                biYPelsPerMeter = 1000000 // not really important
+            };
             // Now for the colour table.
             uint ncols = (uint)1 << bpp; // 2 colours for 1bpp; 256 colours for 8bpp
             bmi.biClrUsed = ncols;
@@ -102,10 +100,10 @@ namespace NAPS2.Scan.Images
             // rainbow: bmi.biClrUsed=216; bmi.biClrImportant=216; int[] colv=new int[6]{0,51,102,153,204,255};
             //          for (int i=0; i<216; i++) bmi.cols[i]=MakeRGB(colv[i/36],colv[(i/6)%6],colv[i%6]);
             // optimal: a difficult topic: http://en.wikipedia.org/wiki/Color_quantization
-            // 
+            //
             // Now create the indexed bitmap "hbm0"
-            IntPtr bits0; // not used for our purposes. It returns a pointer to the raw bits that make up the bitmap.
-            IntPtr hbm0 = CreateDIBSection(IntPtr.Zero, ref bmi, DIB_RGB_COLORS, out bits0, IntPtr.Zero, 0);
+            // not used for our purposes. It returns a pointer to the raw bits that make up the bitmap.
+            IntPtr hbm0 = CreateDIBSection(IntPtr.Zero, ref bmi, DIB_RGB_COLORS, out IntPtr bits0, IntPtr.Zero, 0);
             //
             // Step (3): use GDI's BitBlt function to copy from original hbitmap into monocrhome bitmap
             // GDI programming is kind of confusing... nb. The GDI equivalent of "Graphics" is called a "DC".
@@ -141,6 +139,7 @@ namespace NAPS2.Scan.Images
             public uint biCompression, biSizeImage;
             public int biXPelsPerMeter, biYPelsPerMeter;
             public uint biClrUsed, biClrImportant;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
             public uint[] cols;
         }

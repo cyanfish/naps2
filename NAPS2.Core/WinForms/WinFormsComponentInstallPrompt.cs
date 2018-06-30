@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using NAPS2.Dependencies;
+﻿using NAPS2.Dependencies;
 using NAPS2.Lang.Resources;
+using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {

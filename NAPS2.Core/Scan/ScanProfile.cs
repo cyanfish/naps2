@@ -1,11 +1,10 @@
+using NAPS2.ImportExport;
+using NAPS2.Lang.Resources;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
-using NAPS2.ImportExport;
-using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan
 {
@@ -30,7 +29,7 @@ namespace NAPS2.Scan
 
         public ScanProfile Clone()
         {
-            var profile = (ScanProfile) MemberwiseClone();
+            var profile = (ScanProfile)MemberwiseClone();
             if (profile.AutoSaveSettings != null)
             {
                 profile.AutoSaveSettings = AutoSaveSettings.Clone();
@@ -123,7 +122,7 @@ namespace NAPS2.Scan
 
         internal AutoSaveSettings Clone()
         {
-            return (AutoSaveSettings) MemberwiseClone();
+            return (AutoSaveSettings)MemberwiseClone();
         }
 
         public string FilePath { get; set; }
@@ -139,12 +138,16 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Default")]
         Default,
+
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_MemXfer")]
         MemXfer,
+
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_OldDsm")]
         OldDsm,
+
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Legacy")]
         Legacy,
+
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_X64")]
         X64
     }
@@ -153,8 +156,10 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "Source_Glass")]
         Glass,
+
         [LocalizedDescription(typeof(SettingsResources), "Source_Feeder")]
         Feeder,
+
         [LocalizedDescription(typeof(SettingsResources), "Source_Duplex")]
         Duplex
     }
@@ -163,8 +168,10 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "BitDepth_24Color")]
         C24Bit,
+
         [LocalizedDescription(typeof(SettingsResources), "BitDepth_8Grayscale")]
         Grayscale,
+
         [LocalizedDescription(typeof(SettingsResources), "BitDepth_1BlackAndWhite")]
         BlackWhite
     }
@@ -173,18 +180,25 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "Dpi_100")]
         Dpi100,
+
         [LocalizedDescription(typeof(SettingsResources), "Dpi_150")]
         Dpi150,
+
         [LocalizedDescription(typeof(SettingsResources), "Dpi_200")]
         Dpi200,
+
         [LocalizedDescription(typeof(SettingsResources), "Dpi_300")]
         Dpi300,
+
         [LocalizedDescription(typeof(SettingsResources), "Dpi_400")]
         Dpi400,
+
         [LocalizedDescription(typeof(SettingsResources), "Dpi_600")]
         Dpi600,
+
         [LocalizedDescription(typeof(SettingsResources), "Dpi_800")]
         Dpi800,
+
         [LocalizedDescription(typeof(SettingsResources), "Dpi_1200")]
         Dpi1200
     }
@@ -193,8 +207,10 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "HorizontalAlign_Left")]
         Left,
+
         [LocalizedDescription(typeof(SettingsResources), "HorizontalAlign_Center")]
         Center,
+
         [LocalizedDescription(typeof(SettingsResources), "HorizontalAlign_Right")]
         Right
     }
@@ -203,10 +219,13 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "Scale_1_1")]
         OneToOne,
+
         [LocalizedDescription(typeof(SettingsResources), "Scale_1_2")]
         OneToTwo,
+
         [LocalizedDescription(typeof(SettingsResources), "Scale_1_4")]
         OneToFour,
+
         [LocalizedDescription(typeof(SettingsResources), "Scale_1_8")]
         OneToEight
     }
@@ -216,24 +235,31 @@ namespace NAPS2.Scan
         [LocalizedDescription(typeof(SettingsResources), "PageSize_Letter")]
         [PageDimensions("8.5", "11", PageSizeUnit.Inch)]
         Letter,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSize_Legal")]
         [PageDimensions("8.5", "14", PageSizeUnit.Inch)]
         Legal,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSize_A5")]
         [PageDimensions("148", "210", PageSizeUnit.Millimetre)]
         A5,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSize_A4")]
         [PageDimensions("210", "297", PageSizeUnit.Millimetre)]
         A4,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSize_A3")]
         [PageDimensions("297", "420", PageSizeUnit.Millimetre)]
         A3,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSize_B5")]
         [PageDimensions("176", "250", PageSizeUnit.Millimetre)]
         B5,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSize_B4")]
         [PageDimensions("250", "353", PageSizeUnit.Millimetre)]
         B4,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSize_Custom")]
         Custom
     }
@@ -263,7 +289,7 @@ namespace NAPS2.Scan
             {
                 return true;
             }
-            if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            if (x is null || y is null)
             {
                 return false;
             }
@@ -287,7 +313,7 @@ namespace NAPS2.Scan
     {
         public PageDimensionsAttribute(string width, string height, PageSizeUnit unit)
         {
-            this.PageDimensions = new PageDimensions
+            PageDimensions = new PageDimensions
             {
                 Width = decimal.Parse(width, CultureInfo.InvariantCulture),
                 Height = decimal.Parse(height, CultureInfo.InvariantCulture),
@@ -302,8 +328,10 @@ namespace NAPS2.Scan
     {
         [LocalizedDescription(typeof(SettingsResources), "PageSizeUnit_Inch")]
         Inch,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSizeUnit_Centimetre")]
         Centimetre,
+
         [LocalizedDescription(typeof(SettingsResources), "PageSizeUnit_Millimetre")]
         Millimetre
     }
@@ -316,10 +344,13 @@ namespace NAPS2.Scan
             {
                 case PageSizeUnit.Inch:
                     return pageDimensions.Width;
+
                 case PageSizeUnit.Centimetre:
                     return pageDimensions.Width * 0.393701m;
+
                 case PageSizeUnit.Millimetre:
                     return pageDimensions.Width * 0.0393701m;
+
                 default:
                     throw new ArgumentException();
             }
@@ -336,10 +367,13 @@ namespace NAPS2.Scan
             {
                 case PageSizeUnit.Inch:
                     return pageDimensions.Height;
+
                 case PageSizeUnit.Centimetre:
                     return pageDimensions.Height * 0.393701m;
+
                 case PageSizeUnit.Millimetre:
                     return pageDimensions.Height * 0.0393701m;
+
                 default:
                     throw new ArgumentException();
             }
@@ -362,20 +396,28 @@ namespace NAPS2.Scan
             {
                 case ScanDpi.Dpi100:
                     return 100;
+
                 case ScanDpi.Dpi150:
                     return 150;
+
                 case ScanDpi.Dpi200:
                     return 200;
+
                 case ScanDpi.Dpi300:
                     return 300;
+
                 case ScanDpi.Dpi400:
                     return 400;
+
                 case ScanDpi.Dpi600:
                     return 600;
+
                 case ScanDpi.Dpi800:
                     return 800;
+
                 case ScanDpi.Dpi1200:
                     return 1200;
+
                 default:
                     throw new ArgumentException();
             }
@@ -387,12 +429,16 @@ namespace NAPS2.Scan
             {
                 case ScanScale.OneToOne:
                     return 1;
+
                 case ScanScale.OneToTwo:
                     return 2;
+
                 case ScanScale.OneToFour:
                     return 4;
+
                 case ScanScale.OneToEight:
                     return 8;
+
                 default:
                     throw new ArgumentException();
             }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace NAPS2.WinForms
@@ -11,8 +9,8 @@ namespace NAPS2.WinForms
         {
             RestoreFormState = false;
             InitializeComponent();
-            AcceptButton = btnOK;
-            CancelButton = btnCancel;
+            AcceptButton = BtnOK;
+            CancelButton = BtnCancel;
         }
 
         public string FileName { get; set; }
@@ -24,14 +22,14 @@ namespace NAPS2.WinForms
             lblPrompt.Text = string.Format(lblPrompt.Text, FileName);
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             Password = txtPassword.Text;
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

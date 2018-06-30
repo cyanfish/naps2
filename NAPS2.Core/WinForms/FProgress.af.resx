@@ -118,56 +118,56 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>354, 75</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>Hủy</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="labelNumber.AutoSize" type="System.Boolean, mscorlib">
+    <data name="LabelNumber.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="labelNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LabelNumber.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 80</value>
     </data>
-    <data name="labelNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LabelNumber.Size" type="System.Drawing.Size, System.Drawing">
         <value>46, 13</value>
     </data>
-    <data name="labelNumber.TabIndex" type="System.Int32, mscorlib">
+    <data name="LabelNumber.TabIndex" type="System.Int32, mscorlib">
         <value>4</value>
     </data>
-    <data name="labelNumber.Text" xml:space="preserve">
+    <data name="LabelNumber.Text" xml:space="preserve">
         <value>{0} / {1}</value>
     </data>
-    <data name="&gt;&gt;labelNumber.Name" xml:space="preserve">
-        <value>labelNumber</value>
+    <data name="&gt;&gt;LabelNumber.Name" xml:space="preserve">
+        <value>LabelNumber</value>
     </data>
-    <data name="&gt;&gt;labelNumber.Type" xml:space="preserve">
+    <data name="&gt;&gt;LabelNumber.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;labelNumber.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LabelNumber.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;labelNumber.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LabelNumber.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
     <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
@@ -192,28 +192,28 @@
         <value>2</value>
     </data>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="labelStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="LabelStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="labelStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="LabelStatus.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 9</value>
     </data>
-    <data name="labelStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="LabelStatus.Size" type="System.Drawing.Size, System.Drawing">
         <value>417, 19</value>
     </data>
-    <data name="labelStatus.TabIndex" type="System.Int32, mscorlib">
+    <data name="LabelStatus.TabIndex" type="System.Int32, mscorlib">
         <value>5</value>
     </data>
-    <data name="&gt;&gt;labelStatus.Name" xml:space="preserve">
-        <value>labelStatus</value>
+    <data name="&gt;&gt;LabelStatus.Name" xml:space="preserve">
+        <value>LabelStatus</value>
     </data>
-    <data name="&gt;&gt;labelStatus.Type" xml:space="preserve">
+    <data name="&gt;&gt;LabelStatus.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;labelStatus.Parent" xml:space="preserve">
+    <data name="&gt;&gt;LabelStatus.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;labelStatus.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;LabelStatus.ZOrder" xml:space="preserve">
         <value>0</value>
     </data>
     <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

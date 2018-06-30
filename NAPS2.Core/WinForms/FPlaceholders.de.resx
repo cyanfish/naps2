@@ -118,135 +118,135 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
     <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
         <value>309, 86</value>
     </data>
-    <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
     <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-    <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
         <value>2</value>
     </data>
-    <data name="btnCancel.Text" xml:space="preserve">
+    <data name="BtnCancel.Text" xml:space="preserve">
         <value>Abbrechen</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-        <value>btnCancel</value>
+    <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+        <value>BtnCancel</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
-    <data name="btnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="BtnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="BtnOK.Location" type="System.Drawing.Point, System.Drawing">
         <value>228, 86</value>
     </data>
-    <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="BtnOK.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 23</value>
     </data>
-    <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <data name="BtnOK.TabIndex" type="System.Int32, mscorlib">
         <value>1</value>
     </data>
-    <data name="btnOK.Text" xml:space="preserve">
+    <data name="BtnOK.Text" xml:space="preserve">
         <value>&amp;OK</value>
     </data>
-    <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
-        <value>btnOK</value>
+    <data name="&gt;&gt;BtnOK.Name" xml:space="preserve">
+        <value>BtnOK</value>
     </data>
-    <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.Type" xml:space="preserve">
         <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;BtnOK.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
-    <data name="txtFileName.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="TxtFileName.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 25</value>
     </data>
-    <data name="txtFileName.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="TxtFileName.Size" type="System.Drawing.Size, System.Drawing">
         <value>372, 20</value>
     </data>
-    <data name="txtFileName.TabIndex" type="System.Int32, mscorlib">
+    <data name="TxtFileName.TabIndex" type="System.Int32, mscorlib">
         <value>0</value>
     </data>
-    <data name="&gt;&gt;txtFileName.Name" xml:space="preserve">
-        <value>txtFileName</value>
+    <data name="&gt;&gt;TxtFileName.Name" xml:space="preserve">
+        <value>TxtFileName</value>
     </data>
-    <data name="&gt;&gt;txtFileName.Type" xml:space="preserve">
+    <data name="&gt;&gt;TxtFileName.Type" xml:space="preserve">
         <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;txtFileName.Parent" xml:space="preserve">
+    <data name="&gt;&gt;TxtFileName.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;txtFileName.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;TxtFileName.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 9</value>
     </data>
-    <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
         <value>54, 13</value>
     </data>
-    <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label1.TabIndex" type="System.Int32, mscorlib">
         <value>3</value>
     </data>
-    <data name="label1.Text" xml:space="preserve">
+    <data name="Label1.Text" xml:space="preserve">
         <value>Dateiname</value>
     </data>
-    <data name="&gt;&gt;label1.Name" xml:space="preserve">
-        <value>label1</value>
+    <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+        <value>Label1</value>
     </data>
-    <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label1.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
         <value>2</value>
     </data>
-    <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
         <value>12, 48</value>
     </data>
-    <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
         <value>48, 13</value>
     </data>
-    <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label2.TabIndex" type="System.Int32, mscorlib">
         <value>4</value>
     </data>
-    <data name="label2.Text" xml:space="preserve">
+    <data name="Label2.Text" xml:space="preserve">
         <value>Vorschau:</value>
     </data>
-    <data name="&gt;&gt;label2.Name" xml:space="preserve">
-        <value>label2</value>
+    <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+        <value>Label2</value>
     </data>
-    <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label2.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
         <value>$this</value>
     </data>
-    <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
     <data name="lblPreview.Location" type="System.Drawing.Point, System.Drawing">
@@ -291,61 +291,61 @@
     <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
         <value>1</value>
     </data>
-    <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 24</value>
     </data>
-    <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
         <value>29, 13</value>
     </data>
-    <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label3.TabIndex" type="System.Int32, mscorlib">
         <value>7</value>
     </data>
-    <data name="label3.Text" xml:space="preserve">
+    <data name="Label3.Text" xml:space="preserve">
         <value>Jahr</value>
     </data>
-    <data name="&gt;&gt;label3.Name" xml:space="preserve">
-        <value>label3</value>
+    <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+        <value>Label3</value>
     </data>
-    <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label3.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
         <value>3</value>
     </data>
-    <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 53</value>
     </data>
-    <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
         <value>65, 13</value>
     </data>
-    <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label4.TabIndex" type="System.Int32, mscorlib">
         <value>9</value>
     </data>
-    <data name="label4.Text" xml:space="preserve">
+    <data name="Label4.Text" xml:space="preserve">
         <value>Jahr (00-99)</value>
     </data>
-    <data name="&gt;&gt;label4.Name" xml:space="preserve">
-        <value>label4</value>
+    <data name="&gt;&gt;Label4.Name" xml:space="preserve">
+        <value>Label4</value>
     </data>
-    <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label4.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
         <value>7</value>
     </data>
     <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -372,34 +372,34 @@
     <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
         <value>5</value>
     </data>
-    <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 82</value>
     </data>
-    <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
         <value>73, 13</value>
     </data>
-    <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label5.TabIndex" type="System.Int32, mscorlib">
         <value>11</value>
     </data>
-    <data name="label5.Text" xml:space="preserve">
+    <data name="Label5.Text" xml:space="preserve">
         <value>Monat (01-12)</value>
     </data>
-    <data name="&gt;&gt;label5.Name" xml:space="preserve">
-        <value>label5</value>
+    <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+        <value>Label5</value>
     </data>
-    <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label5.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
         <value>11</value>
     </data>
     <data name="button3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -426,34 +426,34 @@
     <data name="&gt;&gt;button3.ZOrder" xml:space="preserve">
         <value>9</value>
     </data>
-    <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 111</value>
     </data>
-    <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
         <value>62, 13</value>
     </data>
-    <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label6.TabIndex" type="System.Int32, mscorlib">
         <value>13</value>
     </data>
-    <data name="label6.Text" xml:space="preserve">
+    <data name="Label6.Text" xml:space="preserve">
         <value>Tag (01-31)</value>
     </data>
-    <data name="&gt;&gt;label6.Name" xml:space="preserve">
-        <value>label6</value>
+    <data name="&gt;&gt;Label6.Name" xml:space="preserve">
+        <value>Label6</value>
     </data>
-    <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label6.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
         <value>15</value>
     </data>
     <data name="button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -480,34 +480,34 @@
     <data name="&gt;&gt;button4.ZOrder" xml:space="preserve">
         <value>13</value>
     </data>
-    <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 140</value>
     </data>
-    <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
         <value>60, 13</value>
     </data>
-    <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label7.TabIndex" type="System.Int32, mscorlib">
         <value>15</value>
     </data>
-    <data name="label7.Text" xml:space="preserve">
+    <data name="Label7.Text" xml:space="preserve">
         <value>Stunde (0-23)</value>
     </data>
-    <data name="&gt;&gt;label7.Name" xml:space="preserve">
-        <value>label7</value>
+    <data name="&gt;&gt;Label7.Name" xml:space="preserve">
+        <value>Label7</value>
     </data>
-    <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label7.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
         <value>19</value>
     </data>
     <data name="button5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -534,34 +534,34 @@
     <data name="&gt;&gt;button5.ZOrder" xml:space="preserve">
         <value>17</value>
     </data>
-    <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 169</value>
     </data>
-    <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
         <value>75, 13</value>
     </data>
-    <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label8.TabIndex" type="System.Int32, mscorlib">
         <value>17</value>
     </data>
-    <data name="label8.Text" xml:space="preserve">
+    <data name="Label8.Text" xml:space="preserve">
         <value>Minute (00-59)</value>
     </data>
-    <data name="&gt;&gt;label8.Name" xml:space="preserve">
-        <value>label8</value>
+    <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+        <value>Label8</value>
     </data>
-    <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label8.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
         <value>23</value>
     </data>
     <data name="button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -588,34 +588,34 @@
     <data name="&gt;&gt;button6.ZOrder" xml:space="preserve">
         <value>21</value>
     </data>
-    <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 198</value>
     </data>
-    <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
         <value>80, 13</value>
     </data>
-    <data name="label9.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label9.TabIndex" type="System.Int32, mscorlib">
         <value>19</value>
     </data>
-    <data name="label9.Text" xml:space="preserve">
+    <data name="Label9.Text" xml:space="preserve">
         <value>Sekunde (00-59)</value>
     </data>
-    <data name="&gt;&gt;label9.Name" xml:space="preserve">
-        <value>label9</value>
+    <data name="&gt;&gt;Label9.Name" xml:space="preserve">
+        <value>Label9</value>
     </data>
-    <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label9.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
         <value>20</value>
     </data>
     <data name="button7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -642,34 +642,34 @@
     <data name="&gt;&gt;button7.ZOrder" xml:space="preserve">
         <value>22</value>
     </data>
-    <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 227</value>
     </data>
-    <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
         <value>172, 13</value>
     </data>
-    <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label10.TabIndex" type="System.Int32, mscorlib">
         <value>21</value>
     </data>
-    <data name="label10.Text" xml:space="preserve">
+    <data name="Label10.Text" xml:space="preserve">
         <value>Automatisches Hochzählen (4 Stellen)</value>
     </data>
-    <data name="&gt;&gt;label10.Name" xml:space="preserve">
-        <value>label10</value>
+    <data name="&gt;&gt;Label10.Name" xml:space="preserve">
+        <value>Label10</value>
     </data>
-    <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label10.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
         <value>16</value>
     </data>
     <data name="button8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -696,34 +696,34 @@
     <data name="&gt;&gt;button8.ZOrder" xml:space="preserve">
         <value>18</value>
     </data>
-    <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 256</value>
     </data>
-    <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
         <value>172, 13</value>
     </data>
-    <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label11.TabIndex" type="System.Int32, mscorlib">
         <value>23</value>
     </data>
-    <data name="label11.Text" xml:space="preserve">
+    <data name="Label11.Text" xml:space="preserve">
         <value>Automatisches Hochzählen (3 Stellen)</value>
     </data>
-    <data name="&gt;&gt;label11.Name" xml:space="preserve">
-        <value>label11</value>
+    <data name="&gt;&gt;Label11.Name" xml:space="preserve">
+        <value>Label11</value>
     </data>
-    <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label11.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
         <value>12</value>
     </data>
     <data name="button9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -750,34 +750,34 @@
     <data name="&gt;&gt;button9.ZOrder" xml:space="preserve">
         <value>14</value>
     </data>
-    <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 285</value>
     </data>
-    <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
         <value>172, 13</value>
     </data>
-    <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label12.TabIndex" type="System.Int32, mscorlib">
         <value>25</value>
     </data>
-    <data name="label12.Text" xml:space="preserve">
+    <data name="Label12.Text" xml:space="preserve">
         <value>Automatisches Hochzählen (2 Stellen)</value>
     </data>
-    <data name="&gt;&gt;label12.Name" xml:space="preserve">
-        <value>label12</value>
+    <data name="&gt;&gt;Label12.Name" xml:space="preserve">
+        <value>Label12</value>
     </data>
-    <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label12.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
         <value>8</value>
     </data>
     <data name="button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -804,34 +804,34 @@
     <data name="&gt;&gt;button10.ZOrder" xml:space="preserve">
         <value>10</value>
     </data>
-    <data name="label13.AutoSize" type="System.Boolean, mscorlib">
+    <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
         <value>True</value>
     </data>
-    <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
         <value>NoControl</value>
     </data>
-    <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
         <value>87, 314</value>
     </data>
-    <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
         <value>167, 13</value>
     </data>
-    <data name="label13.TabIndex" type="System.Int32, mscorlib">
+    <data name="Label13.TabIndex" type="System.Int32, mscorlib">
         <value>27</value>
     </data>
-    <data name="label13.Text" xml:space="preserve">
+    <data name="Label13.Text" xml:space="preserve">
         <value>Automatisches Hochzählen (1 Stelle)</value>
     </data>
-    <data name="&gt;&gt;label13.Name" xml:space="preserve">
-        <value>label13</value>
+    <data name="&gt;&gt;Label13.Name" xml:space="preserve">
+        <value>Label13</value>
     </data>
-    <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <data name="&gt;&gt;Label13.Type" xml:space="preserve">
         <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
-    <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
         <value>gboxPlaceholders</value>
     </data>
-    <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+    <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
         <value>4</value>
     </data>
     <data name="button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
