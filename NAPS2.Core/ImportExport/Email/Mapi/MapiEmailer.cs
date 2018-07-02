@@ -10,6 +10,7 @@ namespace NAPS2.ImportExport.Email.Mapi
     {
         // MAPISendMail is documented at:
         // http://msdn.microsoft.com/en-us/library/windows/desktop/dd296721%28v=vs.85%29.aspx
+        // TODO: migrate to https://github.com/jstedfast/MailKit
 
         [DllImport("MAPI32.DLL")]
         private static extern MapiSendMailReturnCode MAPISendMail(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);

@@ -3,6 +3,13 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+/*
+ * References for updating this as needed...
+ * https://github.com/twain/twain-cs/blob/master/twaincs/source/TWAINH.cs
+ * https://docs.microsoft.com/en-us/dotnet/framework/interop/default-marshaling-for-strings
+ * https://docs.microsoft.com/en-us/visualstudio/code-quality/ca2101-specify-marshaling-for-p-invoke-string-arguments
+*/
+
 namespace NAPS2.Scan.Twain.Legacy
 {
     internal enum TwainCommand
@@ -277,36 +284,36 @@ namespace NAPS2.Scan.Twain.Legacy
         }
 
         // ------ DSM entry point DAT_ variants:
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSMparent([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, ref IntPtr refptr);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSMparent([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, ref IntPtr refptr);
 
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSMident([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwIdentity idds);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSMident([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity idds);
 
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSMstatus([In, Out] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwStatus dsmstat);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSMstatus([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, IntPtr zeroptr, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwStatus dsmstat);
 
         // ------ DSM entry point DAT_ variants to DS:
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSuserif([In, Out] TwIdentity origin, [In, Out] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, TwUserInterface guif);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSuserif([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwUserInterface guif);
 
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSevent([In, Out] TwIdentity origin, [In, Out] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, ref TwEvent evt);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSevent([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.Struct)] ref TwEvent evt);
 
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSstatus([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwStatus dsmstat);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSstatus([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwStatus dsmstat);
 
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DScap([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwCapability capa);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DScap([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwCapability capa);
 
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSiinf([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwImageInfo imginf);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSiinf([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwImageInfo imginf);
 
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSixfer([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, ref IntPtr hbitmap);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSixfer([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.LPStruct)] ref IntPtr hbitmap);
 
-        [DllImport("twain_32.dll", EntryPoint = "#1")]
-        private static extern TwReturnCode DSpxfer([In, Out] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out] TwPendingXfers pxfr);
+        [DllImport("twain_32.dll", EntryPoint = "#1", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
+        private static extern TwReturnCode DSpxfer([In, Out, MarshalAs(UnmanagedType.LPStruct)] TwIdentity origin, [In] TwIdentity dest, TwDG dg, TwData data, TwMessageCode messageCode, [In, Out, MarshalAs(UnmanagedType.LPStruct)] TwPendingXfers pxfr);
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
         internal static extern IntPtr GlobalAlloc(int flags, int size);

@@ -1,6 +1,13 @@
 using System;
 using System.Runtime.InteropServices;
 
+/*
+ * References for updating this as needed...
+ * https://github.com/twain/twain-cs/blob/master/twaincs/source/TWAINH.cs
+ * https://docs.microsoft.com/en-us/dotnet/framework/interop/default-marshaling-for-strings
+ * https://docs.microsoft.com/en-us/visualstudio/code-quality/ca2101-specify-marshaling-for-p-invoke-string-arguments
+*/
+
 namespace NAPS2.Scan.Twain.Legacy
 {
     internal class TwProtocol : IEquatable<TwProtocol>
