@@ -2,17 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2017-04-20 13:55+0000\n"
-"Last-Translator: ShimonShore <ShimonS@most.gov.il>\n"
+"POT-Creation-Date: 2018-06-28 16:40+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.13.0\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1492696544.000000\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -50,8 +48,8 @@ msgstr "600 dpi"
 msgid "800 dpi"
 msgstr "800 dpi"
 
-#: FUpdate.resx$lblPrompt.Text$Message
 #: MiscResources.resx$UpdateNow$Message
+#: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
 msgstr "גרסת תוכנה חדשה יותר זמינה. האם תרצו לעדכן כעת?"
 
@@ -69,12 +67,10 @@ msgstr "A5 (148x210 מ\"מ)"
 
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
-#: FAbout.resx$$Message
 msgid "About"
 msgstr "אודות"
 
 #: FScanProgress.resx$$this.Text$Message
-#: FScanProgress.resx$$Message
 msgid "Acquiring data"
 msgstr "מייבא נתונים"
 
@@ -83,13 +79,12 @@ msgid "Advanced"
 msgstr "מתקדם"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
-#: FAdvancedScanSettings.resx$$Message
 msgid "Advanced Profile Settings"
 msgstr "הגדרות שרת מתקדמות"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -99,35 +94,35 @@ msgstr "הכל ({0})"
 msgid "All Files"
 msgstr "כל הקבצים"
 
-#: FPdfSettings.resx$cbAllowAnnotations.Text$Message
+#: FPdfSettings.resx$clbPerms.Items6$Message
 msgid "Allow Annotations"
 msgstr "לאפשר ביאורים"
 
-#: FPdfSettings.resx$cbAllowContentCopying.Text$Message
+#: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
 msgstr "לאפשר העתקת תוכן"
 
-#: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
+#: FPdfSettings.resx$clbPerms.Items5$Message
 msgid "Allow Content Copying for Accessibility"
 msgstr "לאפשר העתקת תוכן עבור נגישות"
 
-#: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
+#: FPdfSettings.resx$clbPerms.Items3$Message
 msgid "Allow Document Assembly"
 msgstr "לאפשר הרכבת מסמך"
 
-#: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
+#: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
 msgstr "לאפשר שינויים במסמך"
 
-#: FPdfSettings.resx$cbAllowFormFilling.Text$Message
+#: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
 msgstr "לאפשר מילוי טופס"
 
-#: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
 msgstr "לאפשר הדפסה באיכות מירבית"
 
-#: FPdfSettings.resx$cbAllowPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items$Message
 msgid "Allow Printing"
 msgstr "לאפשר הדפסה"
 
@@ -144,7 +139,9 @@ msgid "Alternative Transfer"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgid ""
+"An additional component is needed to import this PDF file. Would you like to "
+"download it now?"
 msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
@@ -176,11 +173,11 @@ msgid "Apply brightness/contrast after scan"
 msgstr "החל בהירות/ניגודיות לאחר הסריקה"
 
 #: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
-#: FCrop.resx$checkboxApplyToSelected.Text$Message
-#: FSharpen.resx$checkboxApplyToSelected.Text$Message
-#: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FSharpen.resx$checkboxApplyToSelected.Text$Message
+#: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "החל על כל {0} התמונות שנבחרו"
 
@@ -193,11 +190,7 @@ msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "בטוחים שתרצו למחוק {0} פריט/ים?"
 
 #: MiscResources.resx$ConfirmDelete$Message
-msgid "Are you sure you want to delete"
-msgstr ""
-
-#: MiscResources.resx$ConfirmDelete$Message
-msgid "Are you sure you want to delete "{0}"?"
+msgid "Are you sure you want to delete \"{0}\"?"
 msgstr "בטוחים שתרצו למחוק \"{0}\"?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
@@ -224,9 +217,12 @@ msgstr "שם קובץ מצורף"
 msgid "Author"
 msgstr "מאת"
 
+#: SettingsResources.resx$TiffComp_Auto$Message
+msgid "Auto"
+msgstr ""
+
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
-#: FAutoSaveSettings.resx$$Message
 msgid "Auto Save Settings"
 msgstr "הגדרות שמירה אוטומטית"
 
@@ -260,7 +256,6 @@ msgstr "B5 (176x250 מ\"מ)"
 
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
-#: FBatchScan.resx$$Message
 msgid "Batch Scan"
 msgstr "סריקה באצווה"
 
@@ -291,9 +286,9 @@ msgstr "שחור/לבן"
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
-#: FBlackWhite.resx$$Message
+#, fuzzy
 msgid "Black and White"
-msgstr ""
+msgstr "שחור/לבן"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -304,35 +299,38 @@ msgid "Brightness"
 msgstr "בהירות"
 
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
-#: FBrightnessContrast.resx$$this.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
-#: FBrightnessContrast.resx$$Message
+#: FBrightnessContrast.resx$$this.Text$Message
 msgid "Brightness / Contrast"
 msgstr ""
 
-#: FAutoSaveSettings.resx$btnCancel.Text$Message
-#: FEditProfile.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FImageSettings.resx$btnCancel.Text$Message
+#: SettingsResources.resx$TiffComp_Ccitt4$Message
+msgid "CCITT4"
+msgstr ""
+
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FDownloadProgress.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FProgress.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
+#: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FBrightnessContrast.resx$btnCancel.Text$Message
-#: FSharpen.resx$btnCancel.Text$Message
-#: FBatchScan.resx$btnCancel.Text$Message
 #: FRotate.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FHueSaturation.resx$btnCancel.Text$Message
-#: FBlackWhite.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
+#: FSharpen.resx$btnCancel.Text$Message
+#: FBlackWhite.resx$btnCancel.Text$Message
+#: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -369,16 +367,21 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: FPdfSettings.resx$groupCompat.Text$Message
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 msgid "Compatibility"
 msgstr "תאימות"
+
+#: FImageSettings.resx$label3.Text$Message
+msgid "Compression"
+msgstr ""
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
 msgstr "ניגודיות"
 
-#: FDesktop.resx$ctxCopy.Text$Message
 #: FProfiles.resx$ctxCopy.Text$Message
+#: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "העתקה"
 
@@ -399,9 +402,8 @@ msgid "Coverage Threshold"
 msgstr "סף כיסוי"
 
 #: FDesktop.resx$tsCrop.Text$Message
-#: FCrop.resx$$this.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
-#: FCrop.resx$$Message
+#: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr "חיתוך"
 
@@ -418,7 +420,6 @@ msgid "Custom ({0}x{1} {2})"
 msgstr "מותאם אישית ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
-#: FPageSize.resx$$Message
 msgid "Custom Page Size"
 msgstr "גודל נייר מותאם אישית"
 
@@ -432,6 +433,7 @@ msgid "Day (01-31)"
 msgstr "יום (01-31)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$PdfCompat_Default$Message
 msgid "Default"
 msgstr "ברירת מחדל"
 
@@ -451,10 +453,10 @@ msgstr ""
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
-#: FDesktop.resx$ctxDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "מחיקה"
 
@@ -491,6 +493,10 @@ msgstr "שם תצוגה"
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "לבדוק האם קיימים עדכוני תוכנה באופן אוטומטי?"
 
+#: MiscResources.resx$Donate$Message
+msgid "Donate"
+msgstr ""
+
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
@@ -511,7 +517,6 @@ msgid "Download Needed"
 msgstr ""
 
 #: FDownloadProgress.resx$$this.Text$Message
-#: FDownloadProgress.resx$$Message
 msgid "Download Progress"
 msgstr "התקדמות ההורדה"
 
@@ -539,7 +544,6 @@ msgstr ""
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
-#: FEmailSettings.resx$$Message
 msgid "Email Settings"
 msgstr "הגדרות דוא\"ל"
 
@@ -559,9 +563,8 @@ msgstr "הצפנה"
 msgid "Enhanced Windows MetaFile (*.emf)"
 msgstr "קובצי מטא מורחבים (‎*.emf)"
 
-#: FError.resx$$this.Text$Message
 #: MiscResources.resx$Error$Message
-#: FError.resx$$Message
+#: FError.resx$$this.Text$Message
 msgid "Error"
 msgstr "שגיאה"
 
@@ -601,10 +604,10 @@ msgid "Flip duplexed pages"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
+msgid ""
+"For high JPEG qualities (80+), also increase Image Quality in your profile "
+"for best results"
 msgstr ""
-"לקובצי JPEG באיכות גבוהה (מעל 80), יש להשתמש בפרופיל איכות מירבית על מנת "
-"להשיג את התוצאות המיטביות"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -633,7 +636,6 @@ msgstr "שעה (0-23)"
 #: FDesktop.resx$tsHueSaturation.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
-#: FHueSaturation.resx$$Message
 msgid "Hue / Saturation"
 msgstr ""
 
@@ -655,7 +657,6 @@ msgstr ""
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
-#: FImageSettings.resx$$Message
 msgid "Image Settings"
 msgstr "הגדרות תמונה"
 
@@ -703,13 +704,17 @@ msgstr "הפרדה"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "קובץ JPEG (*.jpg, *.jpeg)"
 
-#: FImageSettings.resx$label2.Text$Message
+#: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
 msgstr "איכות Jpeg"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
 msgstr "מילות מפתח"
+
+#: SettingsResources.resx$TiffComp_Lzw$Message
+msgid "LZW"
+msgstr ""
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -776,6 +781,10 @@ msgstr ""
 msgid "NAPS2"
 msgstr ""
 
+#: MiscResources.resx$DonatePrompt$Message
+msgid "NAPS2 is completely free. Consider making a donation"
+msgstr ""
+
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
 msgstr ""
@@ -797,7 +806,6 @@ msgid "Next"
 msgstr "הבא"
 
 #: FBatchPrompt.resx$$this.Text$Message
-#: FBatchPrompt.resx$$Message
 msgid "Next Scan"
 msgstr ""
 
@@ -813,8 +821,12 @@ msgstr "אין דפים במזין המסמכים"
 msgid "No scanning device was found"
 msgstr "לא נמצא סורק"
 
+#: SettingsResources.resx$TiffComp_None$Message
+#, fuzzy
+msgid "None"
+msgstr "אישור"
+
 #: FDesktop.resx$$this.Text$Message
-#: FDesktop.resx$$Message
 msgid "Not Another PDF Scanner 2"
 msgstr "לא סתם סורק PDF גרסה 2"
 
@@ -833,12 +845,10 @@ msgid "OCR"
 msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
-#: FOcrLanguageDownload.resx$$Message
 msgid "OCR Download"
 msgstr "הורדת OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
-#: FOcrSetup.resx$$Message
 msgid "OCR Setup"
 msgstr "הגדרות OCR"
 
@@ -846,24 +856,24 @@ msgstr "הגדרות OCR"
 msgid "OCR language"
 msgstr "שפת OCR"
 
-#: FEditProfile.resx$btnOK.Text$Message
-#: FAdvancedScanSettings.resx$btnOK.Text$Message
-#: FAutoSaveSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
 #: FError.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FEditProfile.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FBlackWhite.resx$btnOK.Text$Message
-#: FBrightnessContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
-#: FSharpen.resx$btnOK.Text$Message
 #: FHueSaturation.resx$btnOK.Text$Message
+#: FSharpen.resx$btnOK.Text$Message
+#: FBrightnessContrast.resx$btnOK.Text$Message
+#: FBlackWhite.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "אישור"
 
@@ -875,8 +885,8 @@ msgstr ""
 msgid "Old DSM"
 msgstr ""
 
-#: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 #: FBatchScan.resx$rdFilePerPage.Text$Message
+#: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
 msgstr ""
 
@@ -913,12 +923,27 @@ msgstr "מסמך PDF (*.pdf)"
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
-#: FPdfSettings.resx$$Message
 msgid "PDF Settings"
 msgstr "הגדרות PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA1B$Message
+msgid "PDF/A-1b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA2B$Message
+msgid "PDF/A-2b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA3B$Message
+msgid "PDF/A-3b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA3U$Message
+msgid "PDF/A-3u"
 msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
@@ -934,7 +959,6 @@ msgid "Paper source"
 msgstr "מקור נייר"
 
 #: FPdfPassword.resx$$this.Text$Message
-#: FPdfPassword.resx$$Message
 msgid "Password"
 msgstr "סיסמה"
 
@@ -943,13 +967,13 @@ msgstr "סיסמה"
 msgid "Paste"
 msgstr ""
 
-#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FBatchScan.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "שומרי מקום"
 
@@ -980,13 +1004,11 @@ msgid "Profile"
 msgstr "פרופילים"
 
 #: FEditProfile.resx$$this.Text$Message
-#: FEditProfile.resx$$Message
 msgid "Profile Settings"
 msgstr "הגדרות פרופיל"
 
 #: FDesktop.resx$tsProfiles.Text$Message
 #: FProfiles.resx$$this.Text$Message
-#: FProfiles.resx$$Message
 msgid "Profiles"
 msgstr "פרופילים"
 
@@ -1003,7 +1025,6 @@ msgid "Recover"
 msgstr "שחזור"
 
 #: FRecover.resx$$this.Text$Message
-#: FRecover.resx$$Message
 msgid "Recover Scanned Images"
 msgstr "שחזור תמונות שנסרקו"
 
@@ -1015,9 +1036,9 @@ msgstr ""
 msgid "Recovery Progress"
 msgstr ""
 
+#: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
-#: FPdfSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr "זכור את ההגדרות"
 
@@ -1037,9 +1058,9 @@ msgstr "אפס תמונה"
 msgid "Resolution"
 msgstr "רזולוציה"
 
-#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "שחזור ברירת מחדל"
@@ -1052,12 +1073,12 @@ msgstr ""
 msgid "Reverse"
 msgstr "הפוך"
 
-#: FBlackWhite.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
-#: FSharpen.resx$btnRevert.Text$Message
-#: FCrop.resx$btnRevert.Text$Message
 #: FHueSaturation.resx$btnRevert.Text$Message
+#: FSharpen.resx$btnRevert.Text$Message
 #: FBrightnessContrast.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
+#: FBlackWhite.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "בטל שינויים"
 
@@ -1068,7 +1089,6 @@ msgstr "ימין"
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
-#: FRotate.resx$$Message
 msgid "Rotate"
 msgstr "סובב"
 
@@ -1083,8 +1103,9 @@ msgid "Rotate Right"
 msgstr "סיבוב לימין"
 
 #: FViewer.resx$tsSaveImage.Text$Message
+#, fuzzy
 msgid "Save Image"
-msgstr ""
+msgstr "לשמור תמונות"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1130,8 +1151,8 @@ msgstr "התאם גודל עם החלון"
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
-#: FProfiles.resx$ctxScan.Text$Message
 #: MiscResources.resx$Scan$Message
+#: FProfiles.resx$ctxScan.Text$Message
 msgid "Scan"
 msgstr "סריקה"
 
@@ -1143,8 +1164,8 @@ msgstr ""
 msgid "Scanned Image"
 msgstr "תמונה שנסרקה"
 
-#: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
 msgstr "סורק עמוד {0}"
@@ -1166,7 +1187,6 @@ msgid "Select All"
 msgstr "בחר הכל"
 
 #: FSelectDevice.resx$$this.Text$Message
-#: FSelectDevice.resx$$Message
 msgid "Select Source"
 msgstr ""
 
@@ -1196,16 +1216,19 @@ msgid "Set Default"
 msgstr "הגדר ברירת מחדל"
 
 #: FDesktop.resx$tsSharpen.Text$Message
-#: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
-#: FSharpen.resx$$Message
+#: FSharpen.resx$$this.Text$Message
 msgid "Sharpen"
 msgstr ""
 
-#: FPdfSettings.resx$cbShowUserPassword.Text$Message
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
+#: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
 msgstr "הצג"
+
+#: FImageSettings.resx$cbSinglePageTiff.Text$Message
+msgid "Single page files"
+msgstr ""
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1245,7 +1268,9 @@ msgid "The file '{0}' could not be imported"
 msgstr "לא ניתן לייבא את הקובץ '{0}'"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgid ""
+"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
+"be imported"
 msgstr ""
 "לא ניתן לייבא את הקובץ '{0}'. ניתן לייבא רק קבצים שנוצרו על ידי תוכנה זו"
 
@@ -1278,13 +1303,17 @@ msgid "The selected scanner could not be found"
 msgstr "הסורק שנבחר לא נמצא"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgid ""
+"The selected scanner does not support using a feeder. If your scanner does "
+"have a feeder, try using a different driver"
 msgstr ""
 "הסורק שנבחר איננו תומך במזין מסמכים. אם לסורק יש מזין מסמכים, נסה להשתמש "
 "במנהל התקן אחר"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgid ""
+"The selected scanner does not support using duplex. If your scanner is "
+"supposed to support duplex, try using a different driver"
 msgstr ""
 
 #: MiscResources.resx$DeviceBusy$Message
@@ -1295,6 +1324,10 @@ msgstr "הסורק שנבחר איננו מקוון (OFFLINE)"
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "הסורק שנבחר איננו מקוון (OFFLINE)"
+
+#: FImageSettings.resx$groupTiff.Text$Message
+msgid "Tiff Options"
+msgstr ""
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1321,7 +1354,6 @@ msgid "Unsaved Changes"
 msgstr "שינויים שלא נשמרו"
 
 #: FUpdate.resx$$this.Text$Message
-#: FUpdate.resx$$Message
 msgid "Update NAPS2"
 msgstr "עדכון תוכנה"
 
@@ -1387,7 +1419,9 @@ msgid "You don't have permission to save files at this location"
 msgstr "אין ברשותכם הרשאות מספיקות לשמירת הקובץ במיקום זה"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgid ""
+"You have unsaved changes. Are you sure you want to exit and discard those "
+"changes?"
 msgstr "ישנם שינויים שלא נשמרו. האם לסגור את התוכנה ולאבד את השינויים הללו?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
@@ -1450,7 +1484,9 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} קבצים"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgid ""
+"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
+"recoverable. Do you want to recover them?"
 msgstr ""
 "{0} תמונה/תמונות שנסרקו ב-{1} ב-{2} לא נשמרו, אך ניתן לשחזר אותן. האם לשחזר "
 "אותן?"
@@ -1462,39 +1498,3 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} מתוך {1}"
-
-#~ msgid "Copyright © 2009 Pavel Sorejs"
-#~ msgstr "כל הזכויות שמורות © 2009 Pavel Sorejs"
-
-#~ msgid "Copyright © 2012 Michael Adams"
-#~ msgstr "כל הזכויות שמורות © 2012 Michael Adams"
-
-#~ msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-#~ msgstr "כל הזכויות שמורות © 2012-2015 Ben Olden-Cooligan"
-
-#~ msgid "Copyright © 2013 Peter De Leeuw"
-#~ msgstr "כל הזכויות שמורות © 2013 Peter De Leeuw"
-
-#~ msgid "Default File Name"
-#~ msgstr "שם קובץ ברירת מחדל"
-
-#~ msgid "PDF document (*.pdf)"
-#~ msgstr "מסמך PDF (*.pdf)"
-
-#~ msgid "Saving to PDF"
-#~ msgstr "שומר ל-PDF"
-
-#~ msgid "Add"
-#~ msgstr "הוספה"
-
-#~ msgid "Choose Icon"
-#~ msgstr "בחר צלמית"
-
-#~ msgid "Manage Profiles"
-#~ msgstr "ניהול פרופילים"
-
-#~ msgid "Use native WIA UI"
-#~ msgstr "השתמש בממשק WIA מקורי"
-
-#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
-#~ msgstr "כל הזכויות שמורות © 2012-2013 Ben Olden-Cooligan"

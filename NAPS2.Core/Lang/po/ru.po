@@ -2,17 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2017-05-25 08:57+0000\n"
-"Last-Translator: TwirlFog <twirlfog@gmail.com>\n"
+"POT-Creation-Date: 2018-06-28 16:40+0000\n"
+"PO-Revision-Date: 2018-07-01 23:28+0000\n"
+"Last-Translator: Ben Olden-Cooligan <blue0fish@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.13.0\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1495702624.000000\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1530487705.437144\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -20,35 +19,35 @@ msgstr "100 dpi"
 
 #: SettingsResources.resx$Dpi_1200$Message
 msgid "1200 dpi"
-msgstr "1200 dpi"
+msgstr "1200 точек/дюйм"
 
 #: SettingsResources.resx$Dpi_150$Message
 msgid "150 dpi"
-msgstr "150 dpi"
+msgstr "150 точек/дюйм"
 
 #: SettingsResources.resx$Dpi_200$Message
 msgid "200 dpi"
-msgstr "200 dpi"
+msgstr "200 точек/дюйм"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "24-бит цвет"
+msgstr "Цветной, 24 бит/пикс."
 
 #: SettingsResources.resx$Dpi_300$Message
 msgid "300 dpi"
-msgstr "300 dpi"
+msgstr "300 точек/дюйм"
 
 #: SettingsResources.resx$Dpi_400$Message
 msgid "400 dpi"
-msgstr "400 dpi"
+msgstr "400 точек/дюйм"
 
 #: SettingsResources.resx$Dpi_600$Message
 msgid "600 dpi"
-msgstr "600 dpi"
+msgstr "600 точек/дюйм"
 
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
-msgstr "800 dpi"
+msgstr "800 точек/дюйм"
 
 #: MiscResources.resx$UpdateNow$Message
 #: FUpdate.resx$lblPrompt.Text$Message
@@ -78,11 +77,11 @@ msgstr "Получение данных"
 
 #: FEditProfile.resx$btnAdvanced.Text$Message
 msgid "Advanced"
-msgstr "Дополнительно"
+msgstr "Расширенные"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
 msgid "Advanced Profile Settings"
-msgstr "Дополнительные настройки профиля"
+msgstr "Расширенные настройки профиля"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
@@ -96,35 +95,35 @@ msgstr "Все ({0})"
 msgid "All Files"
 msgstr "Все файлы"
 
-#: FPdfSettings.resx$cbAllowAnnotations.Text$Message
+#: FPdfSettings.resx$clbPerms.Items6$Message
 msgid "Allow Annotations"
 msgstr "Разрешить примечания"
 
-#: FPdfSettings.resx$cbAllowContentCopying.Text$Message
+#: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
 msgstr "Разрешить копирование содержимого"
 
-#: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
+#: FPdfSettings.resx$clbPerms.Items5$Message
 msgid "Allow Content Copying for Accessibility"
 msgstr "Разрешить копирование содержимого для доступа"
 
-#: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
+#: FPdfSettings.resx$clbPerms.Items3$Message
 msgid "Allow Document Assembly"
 msgstr "Разрешить сборку документа"
 
-#: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
+#: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
 msgstr "Разрешить изменение документа"
 
-#: FPdfSettings.resx$cbAllowFormFilling.Text$Message
+#: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
 msgstr "Разрешить заполнение форм"
 
-#: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
 msgstr "Разрешить полнокачественную печать"
 
-#: FPdfSettings.resx$cbAllowPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items$Message
 msgid "Allow Printing"
 msgstr "Разрешить печать"
 
@@ -138,11 +137,14 @@ msgstr "Альтернативное чередование"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
-msgstr ""
+msgstr "Альтернативная передача"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgid ""
+"An additional component is needed to import this PDF file. Would you like to "
+"download it now?"
 msgstr ""
+"Для импорта этого PDF файла необходим доп. компонент. Загрузить его сейчас?"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
@@ -174,19 +176,23 @@ msgstr "Применить яркость/контраст после скани
 
 #: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
 #: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
-#: FSharpen.resx$checkboxApplyToSelected.Text$Message
 #: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FSharpen.resx$checkboxApplyToSelected.Text$Message
 #: FCrop.resx$checkboxApplyToSelected.Text$Message
 #: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Применить ко всем {0} выбранным изображениям"
+
+#: MiscResources.resx$ConfirmCancelBatch$Message
+msgid "Are you sure you want to cancel the batch scan?"
+msgstr "Отменить пакетное сканирование?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "Вы действительно хотите очистить эти объекты ({0} шт.)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
-msgid "Are you sure you want to delete "{0}"?"
+msgid "Are you sure you want to delete \"{0}\"?"
 msgstr "Вы действительно хотите удалить эти ({0} шт.)?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
@@ -212,6 +218,10 @@ msgstr "Имя вложения"
 #: FPdfSettings.resx$label3.Text$Message
 msgid "Author"
 msgstr "Автор"
+
+#: SettingsResources.resx$TiffComp_Auto$Message
+msgid "Auto"
+msgstr "Автоопределение"
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
@@ -278,8 +288,9 @@ msgstr "Чёрно-белое"
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
+#, fuzzy
 msgid "Black and White"
-msgstr ""
+msgstr "Чёрно-белое"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -293,33 +304,41 @@ msgstr "Яркость"
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 #: FBrightnessContrast.resx$$this.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Яркость / Контрастность"
+
+#: SettingsResources.resx$TiffComp_Ccitt4$Message
+msgid "CCITT4"
+msgstr "CCITT4"
 
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
-#: FPdfSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
+#: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
 #: FPageSize.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
 #: FDownloadProgress.resx$btnCancel.Text$Message
 #: FEditProfile.resx$btnCancel.Text$Message
 #: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FBrightnessContrast.resx$btnCancel.Text$Message
-#: FHueSaturation.resx$btnCancel.Text$Message
-#: FSharpen.resx$btnCancel.Text$Message
-#: MiscResources.resx$Cancel$Message
-#: FCrop.resx$btnCancel.Text$Message
-#: FBlackWhite.resx$btnCancel.Text$Message
 #: FRotate.resx$btnCancel.Text$Message
+#: FHueSaturation.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
+#: MiscResources.resx$Cancel$Message
+#: FSharpen.resx$btnCancel.Text$Message
+#: FBlackWhite.resx$btnCancel.Text$Message
 #: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Отмена"
+
+#: MiscResources.resx$CancelBatch$Message
+msgid "Cancel Batch"
+msgstr "Отменить пакетное сканирование"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -350,9 +369,14 @@ msgstr "Очистить картинки после сохранения"
 msgid "Close"
 msgstr "Закрыть"
 
+#: FPdfSettings.resx$groupCompat.Text$Message
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 msgid "Compatibility"
 msgstr "Совместимость"
+
+#: FImageSettings.resx$label3.Text$Message
+msgid "Compression"
+msgstr "Сжатие"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -373,7 +397,7 @@ msgstr "Копирование"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
-msgstr ""
+msgstr "(C) 2009, 2012-2017 Сообщество NAPS2. Все права защищены."
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -411,6 +435,7 @@ msgid "Day (01-31)"
 msgstr "День (0-31)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$PdfCompat_Default$Message
 msgid "Default"
 msgstr "По умолчанию"
 
@@ -430,8 +455,8 @@ msgstr "Пауза между сканированиями (WIA)"
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
@@ -448,7 +473,7 @@ msgstr "Выравниваем..."
 
 #: FAdvancedScanSettings.resx$cbAutoDeskew.Text$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Выровнять отсканированные страницы"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing"
@@ -472,6 +497,10 @@ msgstr "Отображаемое имя"
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "Автоматически проверять обновления NAPS2?"
 
+#: MiscResources.resx$Donate$Message
+msgid "Donate"
+msgstr "Пожертвовать"
+
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
@@ -489,7 +518,7 @@ msgstr "Ошибка загрузки"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Необходимо скачать"
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
@@ -579,10 +608,13 @@ msgid "Flip duplexed pages"
 msgstr "Развернуть дуплексные страницы"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
+msgid ""
+"For high JPEG qualities (80+), also increase Image Quality in your profile "
+"for best results"
 msgstr ""
-"При высоких уровнях качества JPEG (80+) используйте опцию профиля \""
-"Максимальное качество\" для наилучших результатов"
+"При высоком качестве JPEG (80+) рекомендуется увеличить параметр \""
+"Максимальное качество\" в настройках профиля для получения наилучших "
+"результатов сканирования."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -612,7 +644,7 @@ msgstr "Час (0-23)"
 #: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Оттенок / Насыщенность"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -679,13 +711,17 @@ msgstr "Чередовать"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "Файл JPEG (*.jpg, *.jpeg)"
 
-#: FImageSettings.resx$label2.Text$Message
+#: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
 msgstr "Качество JPEG"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
 msgstr "Ключевые слова"
+
+#: SettingsResources.resx$TiffComp_Lzw$Message
+msgid "LZW"
+msgstr "LZW"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -752,6 +788,12 @@ msgstr "Многостраничное сканирование (запрос м
 msgid "NAPS2"
 msgstr "NAPS2"
 
+#: MiscResources.resx$DonatePrompt$Message
+msgid "NAPS2 is completely free. Consider making a donation"
+msgstr ""
+"NAPS2 - бесплатная программа,однако Вы можете пожертвовать деньги на "
+"развитие проекта"
+
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
 msgstr "Имя (опционально)"
@@ -788,6 +830,10 @@ msgstr "В податчике нет листов"
 msgid "No scanning device was found"
 msgstr "Сканеры не найдены"
 
+#: SettingsResources.resx$TiffComp_None$Message
+msgid "None"
+msgstr "Нет"
+
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
@@ -818,12 +864,12 @@ msgstr "Настройка распознавания"
 msgid "OCR language"
 msgstr "Язык распознавания"
 
-#: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
 #: FError.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
 #: FImageSettings.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
 #: FEditProfile.resx$btnOK.Text$Message
@@ -832,8 +878,8 @@ msgstr "Язык распознавания"
 #: FAbout.resx$okButton.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
-#: FSharpen.resx$btnOK.Text$Message
 #: FHueSaturation.resx$btnOK.Text$Message
+#: FSharpen.resx$btnOK.Text$Message
 #: FBrightnessContrast.resx$btnOK.Text$Message
 #: FBlackWhite.resx$btnOK.Text$Message
 msgid "OK"
@@ -891,6 +937,22 @@ msgstr "Настройки PDF"
 msgid "PDF saved"
 msgstr "PDF сохранен"
 
+#: SettingsResources.resx$PdfCompat_PdfA1B$Message
+msgid "PDF/A-1b"
+msgstr "PDF/A-1b"
+
+#: SettingsResources.resx$PdfCompat_PdfA2B$Message
+msgid "PDF/A-2b"
+msgstr "PDF/A-2b"
+
+#: SettingsResources.resx$PdfCompat_PdfA3B$Message
+msgid "PDF/A-3b"
+msgstr "PDF/A-3b"
+
+#: SettingsResources.resx$PdfCompat_PdfA3U$Message
+msgid "PDF/A-3u"
+msgstr "PDF/A-3u"
+
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
 msgstr "Файл PNG (*.png)"
@@ -912,12 +974,12 @@ msgstr "Пароль"
 msgid "Paste"
 msgstr "Вставить"
 
+#: FPlaceholders.resx$gboxPlaceholders.Text$Message
 #: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FPlaceholders.resx$gboxPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Подстановка"
@@ -1017,10 +1079,10 @@ msgstr "Повтор при возникновении ошибки (WIA)"
 msgid "Reverse"
 msgstr "Обратить"
 
+#: FRotate.resx$btnRevert.Text$Message
 #: FHueSaturation.resx$btnRevert.Text$Message
 #: FSharpen.resx$btnRevert.Text$Message
 #: FBrightnessContrast.resx$btnRevert.Text$Message
-#: FRotate.resx$btnRevert.Text$Message
 #: FCrop.resx$btnRevert.Text$Message
 #: FBlackWhite.resx$btnRevert.Text$Message
 msgid "Revert"
@@ -1162,12 +1224,16 @@ msgstr "Установить по умолчанию"
 #: FViewer.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Резкость"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
 msgstr "Показать"
+
+#: FImageSettings.resx$cbSinglePageTiff.Text$Message
+msgid "Single page files"
+msgstr "Одностраничные файлы"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1207,7 +1273,9 @@ msgid "The file '{0}' could not be imported"
 msgstr "Файл '{0}' не может быть импортирован"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgid ""
+"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
+"be imported"
 msgstr ""
 "Не удалось импортировать файл '{0}'. Можно импортировать только PDF-файлы, "
 "созданные NAPS2."
@@ -1241,13 +1309,17 @@ msgid "The selected scanner could not be found"
 msgstr "Не найден выбранный сканер"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgid ""
+"The selected scanner does not support using a feeder. If your scanner does "
+"have a feeder, try using a different driver"
 msgstr ""
 "Выбранный сканер не поддерживает использование автоподатчика. Если ваш "
 "сканер имеет АПД, попробуйте другой драйвер."
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgid ""
+"The selected scanner does not support using duplex. If your scanner is "
+"supposed to support duplex, try using a different driver"
 msgstr ""
 "Выбранный сканер не поддерживает дуплекс. Если Ваш сканер поддерживает "
 "двустраничное сканирование, попробуйте использовать другой драйвер"
@@ -1259,6 +1331,10 @@ msgstr "Выбранный сканер занят"
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "Выбранный сканер отключён"
+
+#: FImageSettings.resx$groupTiff.Text$Message
+msgid "Tiff Options"
+msgstr "Настройки TIFF"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1323,7 +1399,7 @@ msgstr "Ожидание завершения работы TWAIN"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
-msgstr "Ожидание сканирования"
+msgstr "Ожидание сканирования {0}"
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
@@ -1350,7 +1426,9 @@ msgid "You don't have permission to save files at this location"
 msgstr "У вас нет прав на запись в это место"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgid ""
+"You have unsaved changes. Are you sure you want to exit and discard those "
+"changes?"
 msgstr ""
 "Есть несохранённые изменения. Вы уверены, что хотите выйти и отказаться от "
 "этих изменений?"
@@ -1415,7 +1493,9 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} файлов"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgid ""
+"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
+"recoverable. Do you want to recover them?"
 msgstr ""
 "Изображения ({0} шт.), сканированные на {1} в {2}, возможно, не были "
 "сохранены и могут быть восстановлены. Хотите восстановить их?"
@@ -1427,60 +1507,3 @@ msgstr "{0} изображений сохранено"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} из {1}"
-
-#~ msgid "Copyright © 2009 Pavel Sorejs"
-#~ msgstr "Copyright © 2009 Pavel Sorejs"
-
-#~ msgid "Copyright © 2012 Michael Adams"
-#~ msgstr "Copyright © 2012 Michael Adams"
-
-#~ msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-#~ msgstr "Copyright © 2012-2015 Ben Olden-Cooligan"
-
-#~ msgid "Copyright © 2013 Peter De Leeuw"
-#~ msgstr "Copyright © 2013 Peter De Leeuw"
-
-#~ msgid "Force matching page size"
-#~ msgstr "Принудительное соответствие размера страницы"
-
-#~ msgid "Separate files by Patch-T (TWAIN only)"
-#~ msgstr "Разделить файлы по Patch-T (только TWAIN)"
-
-#~ msgid "Default File Name"
-#~ msgstr "Имя файла по умолчанию"
-
-#~ msgid "Substitutions"
-#~ msgstr "Подстановка"
-
-#~ msgid "PDF document (*.pdf)"
-#~ msgstr "Документ PDF (*.pdf)"
-
-#~ msgid "Saving to PDF"
-#~ msgstr "Сохраняется PDF"
-
-#~ msgid "http://sourceforge.com/projects/naps2"
-#~ msgstr "http://sourceforge.com/projects/naps2"
-
-#~ msgid "Copyright © 2012-2014 Ben Olden-Cooligan"
-#~ msgstr "Авторские права принадлежат Ben Olden-Cooligan, 2012-2014"
-
-#~ msgid "Add"
-#~ msgstr "Добавить"
-
-#~ msgid "Choose Icon"
-#~ msgstr "Выбрать значок"
-
-#~ msgid "Manage Profiles"
-#~ msgstr "Управление профилями"
-
-#~ msgid "Zoom in"
-#~ msgstr "Приблизить"
-
-#~ msgid "Zoom out"
-#~ msgstr "Отдалить"
-
-#~ msgid "Use native WIA UI"
-#~ msgstr "Использовать собственный интерфейс WIA"
-
-#~ msgid "Copyright © 2012-2013 Ben Olden-Cooligan"
-#~ msgstr "Авторские права принадлежат Ben Olden-Cooligan, 2012-2013"
