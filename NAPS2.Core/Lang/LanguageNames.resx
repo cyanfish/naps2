@@ -240,4 +240,7 @@
   <data name="si" xml:space="preserve">
     <value>සිංහල</value>
   </data>
+  <data name="ja" xml:space="preserve">
+    <value>日本語</value>
+  </data>
 </root>
