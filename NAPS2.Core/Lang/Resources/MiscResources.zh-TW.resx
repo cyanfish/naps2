@@ -169,7 +169,7 @@
         <value>JPEG 檔 (*.jpg, *.jpeg)</value>
     </data>
     <data name="FileTypePdf" xml:space="preserve">
-        <value>PDF Document (*.pdf)</value>
+        <value>PDF 文件 (*.pdf)</value>
     </data>
     <data name="FileTypePng" xml:space="preserve">
         <value>PNG 檔 (*.png)</value>
@@ -376,7 +376,7 @@
         <value>Email PDF Progress</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>儲存此檔時發生錯誤.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
         <value>All Files</value>
@@ -385,7 +385,7 @@
         <value>Image Files</value>
     </data>
     <data name="DeviceBusy" xml:space="preserve">
-        <value>The selected scanner is busy.</value>
+        <value>所選的掃瞄器離線.</value>
     </data>
     <data name="DeviceCoverOpen" xml:space="preserve">
         <value>The scanner's cover is open.</value>

@@ -238,7 +238,7 @@
         <value>LZW</value>
     </data>
     <data name="TiffComp_None" xml:space="preserve">
-        <value>None</value>
+        <value>אישור</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
         <value>ברירת מחדל</value>

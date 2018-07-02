@@ -829,7 +829,7 @@
         <value>2</value>
     </data>
     <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-        <value>Save to multiple files</value>
+        <value>Spremi u više datoteka</value>
     </data>
     <data name="&gt;&gt;rdSaveToMultipleFiles.Name" xml:space="preserve">
         <value>rdSaveToMultipleFiles</value>
@@ -859,7 +859,7 @@
         <value>1</value>
     </data>
     <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-        <value>Save to a single file</value>
+        <value>Spremi u jednu datoteku</value>
     </data>
     <data name="&gt;&gt;rdSaveToSingleFile.Name" xml:space="preserve">
         <value>rdSaveToSingleFile</value>
@@ -984,7 +984,7 @@
 </value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Batch Scan</value>
+        <value>Serijsko Skeniranje</value>
     </data>
     <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
         <value>toolStripSeparator1</value>

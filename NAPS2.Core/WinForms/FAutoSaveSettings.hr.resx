@@ -421,7 +421,7 @@
         <value>28</value>
     </data>
     <data name="cbClearAfterSave.Text" xml:space="preserve">
-        <value>Clear images after saving</value>
+        <value>Prebriši slike nakon spremanja</value>
     </data>
     <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
         <value>cbClearAfterSave</value>
@@ -504,7 +504,7 @@
         <value>350, 303</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Auto Save Settings</value>
+        <value>Automatski spremi postavke</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

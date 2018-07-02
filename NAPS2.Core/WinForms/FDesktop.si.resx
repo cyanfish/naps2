@@ -892,7 +892,7 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltDeinterleave.Text" xml:space="preserve">
-        <value>A&amp;lternate Deinterleave</value>
+        <value>මාරුවෙන් මාරුවට කොළ එකතු කිරීම </value>
     </data>
     <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>

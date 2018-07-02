@@ -865,7 +865,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsCustomRotation.Text" xml:space="preserve">
-        <value>Benutzerdefinierter Rotation</value>
+        <value>Benutzerdefinierte Rotation</value>
     </data>
     <data name="tsInterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>

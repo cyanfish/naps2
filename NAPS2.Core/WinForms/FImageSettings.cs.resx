@@ -370,7 +370,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+        <value>Pro nejlepší výsledky při vysokých kvalitách JPEG (80+) zvyšte ve svém profilu Kvalitu obrázku.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>
@@ -457,7 +457,7 @@
         <value>37</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Compression:</value>
+        <value>Komprese:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -508,7 +508,7 @@
         <value>39</value>
     </data>
     <data name="cbSinglePageTiff.Text" xml:space="preserve">
-        <value>Single page files</value>
+        <value>Jednostránkové soubory</value>
     </data>
     <data name="&gt;&gt;cbSinglePageTiff.Name" xml:space="preserve">
         <value>cbSinglePageTiff</value>
@@ -556,7 +556,7 @@
         <value>41</value>
     </data>
     <data name="groupTiff.Text" xml:space="preserve">
-        <value>Tiff Options</value>
+        <value>Možnosti Tiff</value>
     </data>
     <data name="&gt;&gt;groupTiff.Name" xml:space="preserve">
         <value>groupTiff</value>

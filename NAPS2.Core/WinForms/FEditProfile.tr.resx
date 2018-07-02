@@ -292,7 +292,7 @@
         <value>5</value>
     </data>
     <data name="rdbConfig.Text" xml:space="preserve">
-        <value>Ön tanımlı ayarları kullan</value>
+        <value>Öntanımlı ayarları kullan</value>
     </data>
     <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
         <value>rdbConfig</value>

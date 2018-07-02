@@ -370,7 +370,7 @@
         <value>33</value>
     </data>
     <data name="lblWarning.Text" xml:space="preserve">
-        <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+        <value>En JPEG haute qualité (80+), augmenter aussi la Qualité d'Image dans le profil pour de meilleurs résultats.</value>
     </data>
     <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
         <value>lblWarning</value>
@@ -508,7 +508,7 @@
         <value>39</value>
     </data>
     <data name="cbSinglePageTiff.Text" xml:space="preserve">
-        <value>Single page files</value>
+        <value>Fichiers à page unique</value>
     </data>
     <data name="&gt;&gt;cbSinglePageTiff.Name" xml:space="preserve">
         <value>cbSinglePageTiff</value>
@@ -556,7 +556,7 @@
         <value>41</value>
     </data>
     <data name="groupTiff.Text" xml:space="preserve">
-        <value>Tiff Options</value>
+        <value>Options Tiff</value>
     </data>
     <data name="&gt;&gt;groupTiff.Name" xml:space="preserve">
         <value>groupTiff</value>

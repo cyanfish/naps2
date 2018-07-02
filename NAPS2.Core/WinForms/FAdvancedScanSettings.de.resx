@@ -190,7 +190,7 @@
         <value>17</value>
     </data>
     <data name="cbHighQuality.Text" xml:space="preserve">
-        <value>Max. Qualität (große Dateien)</value>
+        <value>Maximale Qualität (große Dateien)</value>
     </data>
     <data name="&gt;&gt;cbHighQuality.Name" xml:space="preserve">
         <value>cbHighQuality</value>
@@ -598,7 +598,7 @@
         <value>38</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Durchschnittlicher Schwellwert</value>
+        <value>Deckungsgrad</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>

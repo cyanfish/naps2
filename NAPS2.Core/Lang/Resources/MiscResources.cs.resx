@@ -241,7 +241,7 @@
         <value>Instalace selhala</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>Vše</value>
+        <value>Vše ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
         <value>Vybráno ({0})</value>
@@ -436,9 +436,9 @@
         <value>Přerušit dávku</value>
     </data>
     <data name="Donate" xml:space="preserve">
-        <value>Donate</value>
+        <value>Darovat</value>
     </data>
     <data name="DonatePrompt" xml:space="preserve">
-        <value>NAPS2 is completely free. Consider making a donation.</value>
+        <value>NAPS2 je zcela zdarma. Zvažte poskytnutí daru.</value>
     </data>
 </root>

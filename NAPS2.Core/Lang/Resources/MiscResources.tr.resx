@@ -136,7 +136,7 @@
         <value>{0} profilini silmek istediğinize emin misiniz?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
-        <value>{0} dosyası zaten mevcut. Üzerine yazmak ister misiniz?</value>
+        <value>{0} dosyası zaten var. Üzerine yazmak ister misiniz?</value>
     </data>
     <data name="Delete" xml:space="preserve">
         <value>Sil</value>
@@ -184,7 +184,7 @@
         <value>NAPS2</value>
     </data>
     <data name="NoDeviceSelected" xml:space="preserve">
-        <value>Hiç bir aygıt seçilmedi.</value>
+        <value>Hiçbir aygıt seçilmedi.</value>
     </data>
     <data name="NoDevicesFound" xml:space="preserve">
         <value>Hiçbir tarama aygıtı bulunamadı.</value>
@@ -199,7 +199,7 @@
         <value>Taranmış Resim</value>
     </data>
     <data name="SelectProfileBeforeScan" xml:space="preserve">
-        <value>Tara ya tıklamadan önce bir profil seçiniz.</value>
+        <value>Taraya tıklamadan önce profil seçiniz.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
         <value>Tarayıcı sürücüsü ile ilgili bir hata oluştu.</value>
@@ -232,7 +232,7 @@
         <value>Kurulum Tamamlandı</value>
     </data>
     <data name="InstallCompletePromptRestart" xml:space="preserve">
-        <value>Kurulum Tamamlandı. Şimdi NAPS2 'yi yeniden başlatmak etmek ister misiniz?</value>
+        <value>Kurulum tamamlandı. Şimdi NAPS2'yi yeniden başlatmak etmek ister misiniz?</value>
     </data>
     <data name="InstallFailed" xml:space="preserve">
         <value>Kurulum başarısız.</value>
@@ -259,7 +259,7 @@
         <value>'{0}' dosyası içeri aktarılamadı.</value>
     </data>
     <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-        <value>'{0}' dosyası içeri aktarılamadı. Sadece NAPS2 tarafından üretilen PDF dosyaları içeri aktarılabilir..</value>
+        <value>'{0}' dosyası içeri aktarılamadı. Yalnızca NAPS2 tarafından üretilen PDF dosyaları içeri aktarılabilir..</value>
     </data>
     <data name="DownloadError" xml:space="preserve">
         <value>İndirme Hatası</value>
@@ -298,7 +298,7 @@
         <value>'{0}' dosyasından içeriği kopyalamaya yetkiniz yok.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>Dosyayı kaydetmeye çalışırken bir hata oluştu.\n.</value>
+        <value>Dosya kaydedilmeye çalışılırken bir hata oluştu..</value>
     </data>
     <data name="OfN" xml:space="preserve">
         <value> / {0}</value>
@@ -373,7 +373,7 @@
         <value>İçe Aktarılıyor...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
-        <value>E-Posta PDF Süreci</value>
+        <value>PDF'yi E-Postalama Süreci</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
         <value>Kendiliğinden kaydetme denenirken hata oluştu.</value>
@@ -436,9 +436,9 @@
         <value>Yığını İptal Et</value>
     </data>
     <data name="Donate" xml:space="preserve">
-        <value>Donate</value>
+        <value>Bağış Yap</value>
     </data>
     <data name="DonatePrompt" xml:space="preserve">
-        <value>NAPS2 is completely free. Consider making a donation.</value>
+        <value>NAPS2 tümüyle ücretsizdir. Bağış yapmayı düşünün.</value>
     </data>
 </root>

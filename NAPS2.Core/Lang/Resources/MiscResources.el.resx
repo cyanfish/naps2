@@ -436,9 +436,9 @@
         <value>Ακύρωση της μαζικής σάρωσης</value>
     </data>
     <data name="Donate" xml:space="preserve">
-        <value>Donate</value>
+        <value>Δωρεά</value>
     </data>
     <data name="DonatePrompt" xml:space="preserve">
-        <value>NAPS2 is completely free. Consider making a donation.</value>
+        <value>Το NAPS2 είναι ελεύθερο λογισμικό. Αξιολογήστε την επιλογή μιας δωρεάς.</value>
     </data>
 </root>

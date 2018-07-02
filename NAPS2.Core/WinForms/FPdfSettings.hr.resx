@@ -436,7 +436,7 @@
         <value>7</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Author:</value>
+        <value>Autor:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -622,28 +622,28 @@
         <value>8</value>
     </data>
     <data name="clbPerms.Items" xml:space="preserve">
-        <value>Allow Printing</value>
+        <value>Dozvoli ispis</value>
     </data>
     <data name="clbPerms.Items1" xml:space="preserve">
-        <value>Allow Full Quality Printing</value>
+        <value>Dozvoli punu kvalitetu ispisa</value>
     </data>
     <data name="clbPerms.Items2" xml:space="preserve">
-        <value>Allow Document Modification</value>
+        <value>Dozvoli izmjenu dokumenta</value>
     </data>
     <data name="clbPerms.Items3" xml:space="preserve">
-        <value>Allow Document Assembly</value>
+        <value>Dozvoli sastavljanje dokumenta</value>
     </data>
     <data name="clbPerms.Items4" xml:space="preserve">
-        <value>Allow Content Copying</value>
+        <value>Dozvoli kopiranje sadržaja</value>
     </data>
     <data name="clbPerms.Items5" xml:space="preserve">
-        <value>Allow Content Copying for Accessibility</value>
+        <value>Dozvoli kopiranje sadržaja za olakšani pristup</value>
     </data>
     <data name="clbPerms.Items6" xml:space="preserve">
-        <value>Allow Annotations</value>
+        <value>Dozvoli zabilješke</value>
     </data>
     <data name="clbPerms.Items7" xml:space="preserve">
-        <value>Allow Form Filling</value>
+        <value>Dozvoli popunjavanje forme</value>
     </data>
     <data name="clbPerms.Location" type="System.Drawing.Point, System.Drawing">
         <value>6, 120</value>
@@ -1024,7 +1024,7 @@
         <value>35</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>Preskoči upit prilikom spremanja</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>
@@ -1069,7 +1069,7 @@
         <value>21</value>
     </data>
     <data name="groupCompat.Text" xml:space="preserve">
-        <value>Compatibility</value>
+        <value>Usklađenost</value>
     </data>
     <data name="&gt;&gt;groupCompat.Name" xml:space="preserve">
         <value>groupCompat</value>

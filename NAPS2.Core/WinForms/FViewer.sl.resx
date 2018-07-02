@@ -286,7 +286,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsBlackWhite.Text" xml:space="preserve">
-        <value>Black and White</value>
+        <value>Črno-belo</value>
     </data>
     <data name="tsSharpen.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>

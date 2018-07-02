@@ -319,7 +319,7 @@
         <value>6</value>
     </data>
     <data name="rdbNative.Text" xml:space="preserve">
-        <value>Native Benutzerschnittstelle verwenden</value>
+        <value>Ursprüngliche Oberfäche verwenden</value>
     </data>
     <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
         <value>rdbNative</value>
@@ -1065,7 +1065,7 @@
         <value>31</value>
     </data>
     <data name="linkAutoSaveSettings.Text" xml:space="preserve">
-        <value>Einstellungen zum automatischen Entfernen</value>
+        <value>Einstellungen zum automatischen Speichern</value>
     </data>
     <data name="&gt;&gt;linkAutoSaveSettings.Name" xml:space="preserve">
         <value>linkAutoSaveSettings</value>
@@ -1095,7 +1095,7 @@
         <value>32</value>
     </data>
     <data name="btnAdvanced.Text" xml:space="preserve">
-        <value>Fortgeschritten</value>
+        <value>Erweitert</value>
     </data>
     <data name="&gt;&gt;btnAdvanced.Name" xml:space="preserve">
         <value>btnAdvanced</value>

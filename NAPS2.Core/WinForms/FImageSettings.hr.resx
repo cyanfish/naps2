@@ -427,7 +427,7 @@
         <value>36</value>
     </data>
     <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-        <value>Skip save prompt</value>
+        <value>Preskoči upit prilikom spremanja</value>
     </data>
     <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
         <value>cbSkipSavePrompt</value>
@@ -457,7 +457,7 @@
         <value>37</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Compression:</value>
+        <value>Sažimanje:</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>

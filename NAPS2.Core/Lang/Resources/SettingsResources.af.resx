@@ -133,19 +133,19 @@
         <value>1200 dpi</value>
     </data>
     <data name="Dpi_150" xml:space="preserve">
-        <value>150 dpi</value>
+        <value>100 dpi</value>
     </data>
     <data name="Dpi_200" xml:space="preserve">
-        <value>200 dpi</value>
+        <value>1200 dpi</value>
     </data>
     <data name="Dpi_300" xml:space="preserve">
-        <value>300 dpi</value>
+        <value>100 dpi</value>
     </data>
     <data name="Dpi_400" xml:space="preserve">
-        <value>400 dpi</value>
+        <value>100 dpi</value>
     </data>
     <data name="Dpi_600" xml:space="preserve">
-        <value>600 dpi</value>
+        <value>100 dpi</value>
     </data>
     <data name="Dpi_800" xml:space="preserve">
         <value>800 dpi</value>
@@ -238,7 +238,7 @@
         <value>LZW</value>
     </data>
     <data name="TiffComp_None" xml:space="preserve">
-        <value>None</value>
+        <value>Xong</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
         <value>Mặc định</value>

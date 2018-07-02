@@ -140,7 +140,7 @@
         <value>152, 22</value>
     </data>
     <data name="ctxSetDefault.Text" xml:space="preserve">
-        <value>Varsayılan Olarak Ata</value>
+        <value>Öntanımlı Olarak Ata</value>
     </data>
     <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
         <value>149, 6</value>

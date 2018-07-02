@@ -325,7 +325,7 @@
         <value>正在扫描页面 {0} (扫描 {1})...</value>
     </data>
     <data name="BatchStatusWaitingForScan" xml:space="preserve">
-        <value>正在等待扫描 { 0 }...</value>
+        <value>正在等待扫描 {0}...</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>取消</value>

@@ -127,7 +127,7 @@
         <value>Möchten Sie wirklich {0} Seite(n) löschen?</value>
     </data>
     <data name="ConfirmDeleteItems" xml:space="preserve">
-        <value>{0} Seite(n) wirklich löschen?</value>
+        <value>{0} Element(e) wirklich löschen?</value>
     </data>
     <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
         <value>Möchten Sie wirklich {0} Profile löschen?</value>
@@ -226,7 +226,7 @@
         <value>Jetzt nicht</value>
     </data>
     <data name="UpdateNow" xml:space="preserve">
-        <value>Es ist eine neuere Version von NAPS2 ist verfügbar. Möchten Sie jetzt aktualisieren?</value>
+        <value>Es ist eine neuere Version von NAPS2 verfügbar. Möchten Sie jetzt aktualisieren?</value>
     </data>
     <data name="InstallComplete" xml:space="preserve">
         <value>Installation abgeschlossen</value>
@@ -280,7 +280,7 @@
         <value>Bild zurücksetzen</value>
     </data>
     <data name="ExitWithUnsavedChanges" xml:space="preserve">
-        <value>Es gibt ungespeicherte Änderungen. Änderungen verwerfen und beenden?</value>
+        <value>Es gibt ungespeicherte Änderungen. Möchten Sie das Programm beenden möchten und diese Änderungen?</value>
     </data>
     <data name="UnsavedChanges" xml:space="preserve">
         <value>Ungespeicherte Änderungen</value>
@@ -370,7 +370,7 @@
         <value>Kopierfortschritt</value>
     </data>
     <data name="Importing" xml:space="preserve">
-        <value>Importiere ......</value>
+        <value>Import...</value>
     </data>
     <data name="EmailPdfProgress" xml:space="preserve">
         <value>Email PDF Fortschritt</value>
@@ -397,7 +397,7 @@
         <value>Der Scanner wird vorgewärmt.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>Es ist ein Update für OCR verfügbar!.</value>
+        <value>Es ist ein Update für OCR verfügbar.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
         <value>Bild gespeichert.</value>
@@ -421,7 +421,7 @@
         <value>Ausrichten...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Schräglagenkorrektur Fortschritt</value>
+        <value>Fortschritt Schräglagenkorrektur</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
         <value>Download erforderlich</value>
@@ -436,9 +436,9 @@
         <value> Stapelverarbeitung abbrechen</value>
     </data>
     <data name="Donate" xml:space="preserve">
-        <value>Donate</value>
+        <value>Spenden</value>
     </data>
     <data name="DonatePrompt" xml:space="preserve">
-        <value>NAPS2 is completely free. Consider making a donation.</value>
+        <value>NAPS2 ist vollständig gratis. Unterstützen Sie uns mit einer Spende.</value>
     </data>
 </root>
