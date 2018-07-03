@@ -322,7 +322,7 @@
         <value>8</value>
     </data>
     <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-        <value>Delay between scans (WIA)</value>
+        <value>Odgoda između skeniranja (WIA)</value>
     </data>
     <data name="&gt;&gt;cbWiaDelayBetweenScans.Name" xml:space="preserve">
         <value>cbWiaDelayBetweenScans</value>
@@ -496,7 +496,7 @@
         <value>2</value>
     </data>
     <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-        <value>Apply brightness/contrast after scan</value>
+        <value>Primjeni podešenje svjetlline/kontrasta nakon skeniranja</value>
     </data>
     <data name="&gt;&gt;cbBrightnessContrastAfterScan.Name" xml:space="preserve">
         <value>cbBrightnessContrastAfterScan</value>
@@ -568,7 +568,7 @@
         <value>36</value>
     </data>
     <data name="groupBox2.Text" xml:space="preserve">
-        <value>Compatibility</value>
+        <value>Usklađenost</value>
     </data>
     <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
         <value>groupBox2</value>
@@ -598,7 +598,7 @@
         <value>38</value>
     </data>
     <data name="label3.Text" xml:space="preserve">
-        <value>Coverage Threshold</value>
+        <value>Prag Pokrivanja</value>
     </data>
     <data name="&gt;&gt;label3.Name" xml:space="preserve">
         <value>label3</value>
@@ -781,7 +781,7 @@
         <value>37</value>
     </data>
     <data name="groupBox3.Text" xml:space="preserve">
-        <value>Blank Pages</value>
+        <value>Prazne stranice</value>
     </data>
     <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
         <value>groupBox3</value>
@@ -841,7 +841,7 @@
         <value>17</value>
     </data>
     <data name="cbAutoDeskew.Text" xml:space="preserve">
-        <value>Deskew scanned pages</value>
+        <value>Popravljanje iskrivljene perspektive skeniranih stranica</value>
     </data>
     <data name="&gt;&gt;cbAutoDeskew.Name" xml:space="preserve">
         <value>cbAutoDeskew</value>
@@ -918,7 +918,7 @@
         <value>400, 604</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Advanced Profile Settings</value>
+        <value>Napredna podešavanja profila</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

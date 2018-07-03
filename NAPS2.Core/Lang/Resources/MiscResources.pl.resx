@@ -436,9 +436,9 @@
         <value>Anuluj przetwarzanie</value>
     </data>
     <data name="Donate" xml:space="preserve">
-        <value>Donate</value>
+        <value>Wspomóż</value>
     </data>
     <data name="DonatePrompt" xml:space="preserve">
-        <value>NAPS2 is completely free. Consider making a donation.</value>
+        <value>NAPS2 jest całkowicie bezpłatny. Rozważ przekazanie darowizny.</value>
     </data>
 </root>

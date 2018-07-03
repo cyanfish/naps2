@@ -583,7 +583,7 @@
         <value>CenterParent</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>About</value>
+        <value>O programu</value>
     </data>
     <data name="&gt;&gt;$this.Name" xml:space="preserve">
         <value>FAbout</value>

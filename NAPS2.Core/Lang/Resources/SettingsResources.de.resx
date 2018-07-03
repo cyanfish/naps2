@@ -121,7 +121,7 @@
         <value>Schwarz-Weiß</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-Bit Farbe</value>
+        <value>24-Bit Farbtiefe</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Graustufen</value>
@@ -172,10 +172,10 @@
         <value>A3 (297 × 420 mm)</value>
     </data>
     <data name="PageSize_A4" xml:space="preserve">
-        <value>A4 (210 x 297 mm)</value>
+        <value>A4 (210x297 mm)</value>
     </data>
     <data name="PageSize_A5" xml:space="preserve">
-        <value>A5 (148 × 210 mm)</value>
+        <value>A5 (148x210 mm)</value>
     </data>
     <data name="PageSize_B4" xml:space="preserve">
         <value>B4 (250x353 mm)</value>
@@ -229,7 +229,7 @@
         <value>Flachbett</value>
     </data>
     <data name="TiffComp_Auto" xml:space="preserve">
-        <value>Auto</value>
+        <value>Automatisch</value>
     </data>
     <data name="TiffComp_Ccitt4" xml:space="preserve">
         <value>CCITT4</value>
@@ -238,13 +238,13 @@
         <value>LZW</value>
     </data>
     <data name="TiffComp_None" xml:space="preserve">
-        <value>None</value>
+        <value>Keine</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
         <value>Standard</value>
     </data>
     <data name="TwainImpl_Legacy" xml:space="preserve">
-        <value>veraltet (nur Treiberoberfläche)</value>
+        <value>Altsystem (nur ursprüngliche Oberfläche)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
         <value>Alternative Übertragung</value>

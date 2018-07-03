@@ -232,6 +232,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 日本語.
+        /// </summary>
+        internal static string ja {
+            get {
+                return ResourceManager.GetString("ja", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 한국어.
         /// </summary>
         internal static string ko {

@@ -121,7 +121,7 @@
         <value>Crno/bijelo</value>
     </data>
     <data name="BitDepth_24Color" xml:space="preserve">
-        <value>24-bit Boja</value>
+        <value>24-bitna Boja</value>
     </data>
     <data name="BitDepth_8Grayscale" xml:space="preserve">
         <value>Sivi tonovi</value>
@@ -229,7 +229,7 @@
         <value>Staklo</value>
     </data>
     <data name="TiffComp_Auto" xml:space="preserve">
-        <value>Auto</value>
+        <value>Automatski</value>
     </data>
     <data name="TiffComp_Ccitt4" xml:space="preserve">
         <value>CCITT4</value>
@@ -238,7 +238,7 @@
         <value>LZW</value>
     </data>
     <data name="TiffComp_None" xml:space="preserve">
-        <value>None</value>
+        <value>Gotovo</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
         <value>Default</value>
@@ -247,7 +247,7 @@
         <value>Legacy (native UI only)</value>
     </data>
     <data name="TwainImpl_MemXfer" xml:space="preserve">
-        <value>Alternative Transfer</value>
+        <value>Alternativni Prijenos</value>
     </data>
     <data name="TwainImpl_OldDsm" xml:space="preserve">
         <value>Old DSM</value>

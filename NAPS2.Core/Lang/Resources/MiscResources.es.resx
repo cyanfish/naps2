@@ -295,7 +295,7 @@
         <value>Sin hojas en el alimentador.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>"Usted no tiene permiso para copiar el contenido del archivo \" { 0 }\"".</value>
+        <value>"Usted no tiene permiso para copiar el contenido del archivo \" {0}\"".</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
         <value>Ocurrió un error al intentar guardar el archivo.</value>

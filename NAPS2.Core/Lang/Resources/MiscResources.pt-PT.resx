@@ -241,7 +241,7 @@
         <value>Falha na instalação</value>
     </data>
     <data name="AllCount" xml:space="preserve">
-        <value>Todos</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="SelectedCount" xml:space="preserve">
         <value>Selected ({0})</value>

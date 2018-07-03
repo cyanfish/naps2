@@ -202,13 +202,13 @@
         <value>Izaberite profil pre nego kliknete dugme za skeniranje.</value>
     </data>
     <data name="UnknownDriverError" xml:space="preserve">
-        <value>Desila se greška sa scanning driver-om.</value>
+        <value>Pogreška s upravljačkim programom za skener.</value>
     </data>
     <data name="Version" xml:space="preserve">
         <value>Verzija {0}</value>
     </data>
     <data name="EmailError" xml:space="preserve">
-        <value>Desila se greška u pokušaju slanja mejla..</value>
+        <value>Pogreška pri slanju e-pošte.</value>
     </data>
     <data name="AutoUpdates" xml:space="preserve">
         <value>Automatsko ažuriranje</value>
@@ -274,7 +274,7 @@
         <value>Skeniraj</value>
     </data>
     <data name="ConfirmResetImages" xml:space="preserve">
-        <value>Are you sure you want undo your changes to {0} image(s)?</value>
+        <value>Jeste li sigurni da želite vratiti promjene na {0} slika?</value>
     </data>
     <data name="ResetImage" xml:space="preserve">
         <value>Reset Image</value>
@@ -295,28 +295,28 @@
         <value>No pages are in the feeder.</value>
     </data>
     <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-        <value>You do not have permission to copy content from the file '{0}'.</value>
+        <value>Nemate dozvolu za kopiranje sadržaja iz datoteke '{0}'.</value>
     </data>
     <data name="ErrorSaving" xml:space="preserve">
-        <value>An error occurred when trying to save the file.</value>
+        <value>Pogreška pri spremanju datoteke.</value>
     </data>
     <data name="OfN" xml:space="preserve">
         <value>of {0}</value>
     </data>
     <data name="BatchError" xml:space="preserve">
-        <value>An unknown error ocurred during the batch scan.</value>
+        <value>Nepoznata pogreška prilikom serijskog skeniranja.</value>
     </data>
     <data name="BatchStatusCancelled" xml:space="preserve">
-        <value>Batch cancelled.</value>
+        <value>Serijsko Skeniranje otkazano.</value>
     </data>
     <data name="BatchStatusCancelling" xml:space="preserve">
-        <value>Cancelling....</value>
+        <value>Odustajanje....</value>
     </data>
     <data name="BatchStatusComplete" xml:space="preserve">
-        <value>Batch completed successfully.</value>
+        <value>Serijsko Skeniranje uspješno završeno.</value>
     </data>
     <data name="BatchStatusError" xml:space="preserve">
-        <value>Batch scan stopped due to error.</value>
+        <value>Serijsko Skeniranje prekinuto zbog pogreške.</value>
     </data>
     <data name="BatchStatusPage" xml:space="preserve">
         <value>Scanning page {0}...</value>
@@ -331,7 +331,7 @@
         <value>Prekini</value>
     </data>
     <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Zatvori</value>
     </data>
     <data name="BatchStatusSaving" xml:space="preserve">
         <value>Saving batch results...</value>
@@ -364,10 +364,10 @@
         <value>Saving {0}...</value>
     </data>
     <data name="Copying" xml:space="preserve">
-        <value>Copying...</value>
+        <value>Kopiranje...</value>
     </data>
     <data name="CopyProgress" xml:space="preserve">
-        <value>Copy Progress</value>
+        <value>Napredak Kopiranja</value>
     </data>
     <data name="Importing" xml:space="preserve">
         <value>Importing...</value>
@@ -376,10 +376,10 @@
         <value>Email PDF Progress</value>
     </data>
     <data name="AutoSaveError" xml:space="preserve">
-        <value>An error occurred when trying to auto save.</value>
+        <value>Pogreška pri automatskom spremanju.</value>
     </data>
     <data name="FileTypeAllFiles" xml:space="preserve">
-        <value>All Files</value>
+        <value>Sve datoteke</value>
     </data>
     <data name="FileTypeImageFiles" xml:space="preserve">
         <value>Image Files</value>
@@ -397,7 +397,7 @@
         <value>The scanner is warming up.</value>
     </data>
     <data name="OcrUpdateAvailable" xml:space="preserve">
-        <value>An update to OCR is available.</value>
+        <value>Nadogradnja za OCR je dostupna.</value>
     </data>
     <data name="ImageSaved" xml:space="preserve">
         <value>Image saved.</value>
@@ -418,25 +418,25 @@
         <value>The file could not be overwritten because it is currently in use.</value>
     </data>
     <data name="AutoDeskewing" xml:space="preserve">
-        <value>Deskewing...</value>
+        <value>Proces popravljanja iskrivljene perspektive...</value>
     </data>
     <data name="AutoDeskewProgress" xml:space="preserve">
-        <value>Deskew Progress</value>
+        <value>Napredak popravljanja iskrivljene perspektive</value>
     </data>
     <data name="DownloadNeeded" xml:space="preserve">
-        <value>Download Needed</value>
+        <value>Potrebno je preuzimanje</value>
     </data>
     <data name="PdfImportComponentNeeded" xml:space="preserve">
-        <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+        <value>Dodatna komponenta je potrebna za uvoz ovog PDF-a. Želite li ju preuzeti?</value>
     </data>
     <data name="ConfirmCancelBatch" xml:space="preserve">
-        <value>Are you sure you want to cancel the batch scan?</value>
+        <value>Jeste li sigurni da želite prekinuti serijsko skeniranje?</value>
     </data>
     <data name="CancelBatch" xml:space="preserve">
-        <value>Cancel Batch</value>
+        <value>Odustani od Serijskog Skeniranja</value>
     </data>
     <data name="Donate" xml:space="preserve">
-        <value>Donate</value>
+        <value>Doniraj</value>
     </data>
     <data name="DonatePrompt" xml:space="preserve">
         <value>NAPS2 is completely free. Consider making a donation.</value>

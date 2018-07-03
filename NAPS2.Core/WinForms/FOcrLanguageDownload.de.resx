@@ -228,7 +228,7 @@
         <value>8</value>
     </data>
     <data name="label1.Text" xml:space="preserve">
-        <value>Um die Texterkennung zu verwenden zu können, muss zunächst die entsprechende Sprache heruntergeladen werden.</value>
+        <value>Um die Texterkennung verwenden zu können, müssen die benötigten Sprachen einzeln heruntergeladen werden.</value>
     </data>
     <data name="&gt;&gt;label1.Name" xml:space="preserve">
         <value>label1</value>

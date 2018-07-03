@@ -2,17 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2017-03-27 02:20+0000\n"
-"Last-Translator: nkchinh <g.nkchinh@gmail.com>\n"
+"POT-Creation-Date: 2018-06-28 16:40+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.13.0\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1490581222.000000\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -50,8 +48,8 @@ msgstr "600 dpi"
 msgid "800 dpi"
 msgstr "800 dpi"
 
-#: FUpdate.resx$lblPrompt.Text$Message
 #: MiscResources.resx$UpdateNow$Message
+#: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
 msgstr "NAPS2 có sẵnMột phiên bản mới hơn. Bạn có muốn cập nhật bây giờ?"
 
@@ -69,12 +67,10 @@ msgstr "A5 (148x210 mm)"
 
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
-#: FAbout.resx$$Message
 msgid "About"
 msgstr "Thông Tin Phần Mềm"
 
 #: FScanProgress.resx$$this.Text$Message
-#: FScanProgress.resx$$Message
 msgid "Acquiring data"
 msgstr "Thu thập dữ liệu"
 
@@ -83,13 +79,12 @@ msgid "Advanced"
 msgstr "Nâng cao"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
-#: FAdvancedScanSettings.resx$$Message
 msgid "Advanced Profile Settings"
 msgstr "Cài đặt chi tiết"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -99,35 +94,35 @@ msgstr "Tất cả ({0})"
 msgid "All Files"
 msgstr "Tất cả các tập tin"
 
-#: FPdfSettings.resx$cbAllowAnnotations.Text$Message
+#: FPdfSettings.resx$clbPerms.Items6$Message
 msgid "Allow Annotations"
 msgstr "Cho phép ghi chú"
 
-#: FPdfSettings.resx$cbAllowContentCopying.Text$Message
+#: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
 msgstr "Cho phép sao chép nội dung"
 
-#: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
+#: FPdfSettings.resx$clbPerms.Items5$Message
 msgid "Allow Content Copying for Accessibility"
 msgstr "Cho phép sao chép chỉnh sửa nội dung"
 
-#: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
+#: FPdfSettings.resx$clbPerms.Items3$Message
 msgid "Allow Document Assembly"
 msgstr "Cho phép tài liệu Assembly"
 
-#: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
+#: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
 msgstr "Cho phép tài liệu Modification"
 
-#: FPdfSettings.resx$cbAllowFormFilling.Text$Message
+#: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
 msgstr "Cho phép Điền Form"
 
-#: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
 msgstr "Cho phép cải thiện bản In"
 
-#: FPdfSettings.resx$cbAllowPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items$Message
 msgid "Allow Printing"
 msgstr "Cho phép in"
 
@@ -144,7 +139,9 @@ msgid "Alternative Transfer"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgid ""
+"An additional component is needed to import this PDF file. Would you like to "
+"download it now?"
 msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
@@ -176,11 +173,11 @@ msgid "Apply brightness/contrast after scan"
 msgstr "Áp dụng độ sáng / tương phản sau khi quét"
 
 #: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
-#: FCrop.resx$checkboxApplyToSelected.Text$Message
-#: FSharpen.resx$checkboxApplyToSelected.Text$Message
-#: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FSharpen.resx$checkboxApplyToSelected.Text$Message
+#: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "Áp dụng cho tất cả {0} hình ảnh được chọn"
 
@@ -193,11 +190,7 @@ msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "Bạn có chắc chắn bạn muốn xóa {0} sản phẩm (s)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
-msgid "Are you sure you want to delete"
-msgstr ""
-
-#: MiscResources.resx$ConfirmDelete$Message
-msgid "Are you sure you want to delete "{0}"?"
+msgid "Are you sure you want to delete \"{0}\"?"
 msgstr "Bạn có chắc chắn muốn xóa \"{0}\"?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
@@ -224,9 +217,12 @@ msgstr "Tên tập tin đính kèm"
 msgid "Author"
 msgstr "Tác giả"
 
+#: SettingsResources.resx$TiffComp_Auto$Message
+msgid "Auto"
+msgstr ""
+
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
-#: FAutoSaveSettings.resx$$Message
 msgid "Auto Save Settings"
 msgstr "Cài đặt Tự động Lưu"
 
@@ -260,7 +256,6 @@ msgstr "B5 (176x250 mm)"
 
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
-#: FBatchScan.resx$$Message
 msgid "Batch Scan"
 msgstr "Scan hàng loạt"
 
@@ -291,9 +286,9 @@ msgstr "Trắng & Đen"
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
-#: FBlackWhite.resx$$Message
+#, fuzzy
 msgid "Black and White"
-msgstr ""
+msgstr "Trắng & Đen"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -304,35 +299,38 @@ msgid "Brightness"
 msgstr "Độ sáng"
 
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
-#: FBrightnessContrast.resx$$this.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
-#: FBrightnessContrast.resx$$Message
+#: FBrightnessContrast.resx$$this.Text$Message
 msgid "Brightness / Contrast"
 msgstr ""
 
-#: FAutoSaveSettings.resx$btnCancel.Text$Message
-#: FEditProfile.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FImageSettings.resx$btnCancel.Text$Message
+#: SettingsResources.resx$TiffComp_Ccitt4$Message
+msgid "CCITT4"
+msgstr ""
+
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FDownloadProgress.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FProgress.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
+#: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FBrightnessContrast.resx$btnCancel.Text$Message
-#: FSharpen.resx$btnCancel.Text$Message
-#: FBatchScan.resx$btnCancel.Text$Message
 #: FRotate.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FHueSaturation.resx$btnCancel.Text$Message
-#: FBlackWhite.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
+#: FSharpen.resx$btnCancel.Text$Message
+#: FBlackWhite.resx$btnCancel.Text$Message
+#: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "Hủy"
 
@@ -369,16 +367,21 @@ msgstr "Xóa ảnh sau khi lưu"
 msgid "Close"
 msgstr "Đóng"
 
+#: FPdfSettings.resx$groupCompat.Text$Message
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 msgid "Compatibility"
 msgstr "Khả năng tương thích"
+
+#: FImageSettings.resx$label3.Text$Message
+msgid "Compression"
+msgstr ""
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
 msgstr "Tương phản"
 
-#: FDesktop.resx$ctxCopy.Text$Message
 #: FProfiles.resx$ctxCopy.Text$Message
+#: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "Sao chép"
 
@@ -399,9 +402,8 @@ msgid "Coverage Threshold"
 msgstr "Bảo hiểm Threshold"
 
 #: FDesktop.resx$tsCrop.Text$Message
-#: FCrop.resx$$this.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
-#: FCrop.resx$$Message
+#: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr "Chỉnh sửa"
 
@@ -418,7 +420,6 @@ msgid "Custom ({0}x{1} {2})"
 msgstr "Tùy chỉnh ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
-#: FPageSize.resx$$Message
 msgid "Custom Page Size"
 msgstr "Tùy chỉnh kiểu giấy"
 
@@ -432,6 +433,7 @@ msgid "Day (01-31)"
 msgstr "Ngày(01-31)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$PdfCompat_Default$Message
 msgid "Default"
 msgstr "Mặc định"
 
@@ -451,10 +453,10 @@ msgstr ""
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
-#: FDesktop.resx$ctxDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "Xóa"
 
@@ -491,6 +493,10 @@ msgstr "Hiển thị tên"
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "Bạn có muốn NAPS2 tự động kiểm tra các bản cập nhật?"
 
+#: MiscResources.resx$Donate$Message
+msgid "Donate"
+msgstr ""
+
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
@@ -511,7 +517,6 @@ msgid "Download Needed"
 msgstr ""
 
 #: FDownloadProgress.resx$$this.Text$Message
-#: FDownloadProgress.resx$$Message
 msgid "Download Progress"
 msgstr "Tiến độ tải về"
 
@@ -539,7 +544,6 @@ msgstr "Email PDF Progress"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
-#: FEmailSettings.resx$$Message
 msgid "Email Settings"
 msgstr "Cài đặt Email"
 
@@ -559,9 +563,8 @@ msgstr "Encryption"
 msgid "Enhanced Windows MetaFile (*.emf)"
 msgstr "Enhanced Windows MetaFile (*.emf)"
 
-#: FError.resx$$this.Text$Message
 #: MiscResources.resx$Error$Message
-#: FError.resx$$Message
+#: FError.resx$$this.Text$Message
 msgid "Error"
 msgstr "Lỗi"
 
@@ -601,10 +604,10 @@ msgid "Flip duplexed pages"
 msgstr "Lật 2 mặt trang"
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
+msgid ""
+"For high JPEG qualities (80+), also increase Image Quality in your profile "
+"for best results"
 msgstr ""
-"Đối với JPG cao chất (80+), sử dụng tùy chọn hồ sơ chất lượng tối đa cho kết "
-"quả tốt nhất"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -633,7 +636,6 @@ msgstr "Giờ (0-23)"
 #: FDesktop.resx$tsHueSaturation.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
-#: FHueSaturation.resx$$Message
 msgid "Hue / Saturation"
 msgstr ""
 
@@ -655,7 +657,6 @@ msgstr "Chất lượng ảnh"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
-#: FImageSettings.resx$$Message
 msgid "Image Settings"
 msgstr "Cài đặt ảnh"
 
@@ -703,13 +704,17 @@ msgstr "Interleave"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG File (*.jpg, *.jpeg)"
 
-#: FImageSettings.resx$label2.Text$Message
+#: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
 msgstr "Jpeg Quality"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
 msgstr "Từ khóa"
+
+#: SettingsResources.resx$TiffComp_Lzw$Message
+msgid "LZW"
+msgstr ""
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -776,6 +781,10 @@ msgstr "Quét nhiều (nhắc giữa quét)"
 msgid "NAPS2"
 msgstr "NAPS2"
 
+#: MiscResources.resx$DonatePrompt$Message
+msgid "NAPS2 is completely free. Consider making a donation"
+msgstr ""
+
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
 msgstr "Tên (bắt buộc)"
@@ -797,7 +806,6 @@ msgid "Next"
 msgstr "Tới"
 
 #: FBatchPrompt.resx$$this.Text$Message
-#: FBatchPrompt.resx$$Message
 msgid "Next Scan"
 msgstr "Quét Trang tiếp"
 
@@ -813,8 +821,12 @@ msgstr "Không trang sau nằm trong máng"
 msgid "No scanning device was found"
 msgstr "Không thấy thiết bị quét"
 
+#: SettingsResources.resx$TiffComp_None$Message
+#, fuzzy
+msgid "None"
+msgstr "Xong"
+
 #: FDesktop.resx$$this.Text$Message
-#: FDesktop.resx$$Message
 msgid "Not Another PDF Scanner 2"
 msgstr "Không thấy Scanner PDF 2"
 
@@ -833,12 +845,10 @@ msgid "OCR"
 msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
-#: FOcrLanguageDownload.resx$$Message
 msgid "OCR Download"
 msgstr "Tải OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
-#: FOcrSetup.resx$$Message
 msgid "OCR Setup"
 msgstr "Cài đặt OCR"
 
@@ -846,24 +856,24 @@ msgstr "Cài đặt OCR"
 msgid "OCR language"
 msgstr "Ngôn ngữ OCR"
 
-#: FEditProfile.resx$btnOK.Text$Message
-#: FAdvancedScanSettings.resx$btnOK.Text$Message
-#: FAutoSaveSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
 #: FError.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FEditProfile.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FBlackWhite.resx$btnOK.Text$Message
-#: FBrightnessContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
-#: FSharpen.resx$btnOK.Text$Message
 #: FHueSaturation.resx$btnOK.Text$Message
+#: FSharpen.resx$btnOK.Text$Message
+#: FBrightnessContrast.resx$btnOK.Text$Message
+#: FBlackWhite.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "Đồng Ý"
 
@@ -875,8 +885,8 @@ msgstr "Offset width based on alignment (WIA)"
 msgid "Old DSM"
 msgstr "DSN Cũ"
 
-#: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 #: FBatchScan.resx$rdFilePerPage.Text$Message
+#: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
 msgstr "Một tập tin cho mỗi trang"
 
@@ -912,13 +922,28 @@ msgstr "Tài liệu PDF  (*.pdf)"
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
-#: FPdfSettings.resx$$Message
 msgid "PDF Settings"
 msgstr "Cài đặt PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
 msgstr "Lưu PDF"
+
+#: SettingsResources.resx$PdfCompat_PdfA1B$Message
+msgid "PDF/A-1b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA2B$Message
+msgid "PDF/A-2b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA3B$Message
+msgid "PDF/A-3b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA3U$Message
+msgid "PDF/A-3u"
+msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -933,7 +958,6 @@ msgid "Paper source"
 msgstr "Trang gốc"
 
 #: FPdfPassword.resx$$this.Text$Message
-#: FPdfPassword.resx$$Message
 msgid "Password"
 msgstr "Mật Khẩu"
 
@@ -942,13 +966,13 @@ msgstr "Mật Khẩu"
 msgid "Paste"
 msgstr "Dán"
 
-#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FBatchScan.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "Placeholders"
 
@@ -978,13 +1002,11 @@ msgid "Profile"
 msgstr "Hồ sơ"
 
 #: FEditProfile.resx$$this.Text$Message
-#: FEditProfile.resx$$Message
 msgid "Profile Settings"
 msgstr "Cài đặt Hồ sơ"
 
 #: FDesktop.resx$tsProfiles.Text$Message
 #: FProfiles.resx$$this.Text$Message
-#: FProfiles.resx$$Message
 msgid "Profiles"
 msgstr "Profiles"
 
@@ -1001,7 +1023,6 @@ msgid "Recover"
 msgstr "Phục hồi"
 
 #: FRecover.resx$$this.Text$Message
-#: FRecover.resx$$Message
 msgid "Recover Scanned Images"
 msgstr "Khôi phục hình ảnh scan"
 
@@ -1013,9 +1034,9 @@ msgstr "Đang Khôi Phục"
 msgid "Recovery Progress"
 msgstr "Khôi Phục thành công"
 
+#: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
-#: FPdfSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr "Ghi các thiết lập"
 
@@ -1035,9 +1056,9 @@ msgstr "Thiết lập lại hình ảnh"
 msgid "Resolution"
 msgstr "Nghị quyết"
 
-#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "Khôi phục mặc định"
@@ -1050,12 +1071,12 @@ msgstr ""
 msgid "Reverse"
 msgstr "Đảo ngược"
 
-#: FBlackWhite.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
-#: FSharpen.resx$btnRevert.Text$Message
-#: FCrop.resx$btnRevert.Text$Message
 #: FHueSaturation.resx$btnRevert.Text$Message
+#: FSharpen.resx$btnRevert.Text$Message
 #: FBrightnessContrast.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
+#: FBlackWhite.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "Trở lại"
 
@@ -1066,7 +1087,6 @@ msgstr "Phải"
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
-#: FRotate.resx$$Message
 msgid "Rotate"
 msgstr "Xoay"
 
@@ -1081,8 +1101,9 @@ msgid "Rotate Right"
 msgstr "Xoay Phải"
 
 #: FViewer.resx$tsSaveImage.Text$Message
+#, fuzzy
 msgid "Save Image"
-msgstr ""
+msgstr "Lưu Ảnh"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1128,8 +1149,8 @@ msgstr "Tỉ lệ với cửa sổ"
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
-#: FProfiles.resx$ctxScan.Text$Message
 #: MiscResources.resx$Scan$Message
+#: FProfiles.resx$ctxScan.Text$Message
 msgid "Scan"
 msgstr "Quét"
 
@@ -1141,8 +1162,8 @@ msgstr "Cấu hình quét"
 msgid "Scanned Image"
 msgstr "Quét Ảnh"
 
-#: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
 msgstr "Trang quét {0}"
@@ -1164,7 +1185,6 @@ msgid "Select All"
 msgstr "Chọn hết"
 
 #: FSelectDevice.resx$$this.Text$Message
-#: FSelectDevice.resx$$Message
 msgid "Select Source"
 msgstr "Chọn nguồn"
 
@@ -1194,16 +1214,19 @@ msgid "Set Default"
 msgstr "Về mặc định"
 
 #: FDesktop.resx$tsSharpen.Text$Message
-#: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
-#: FSharpen.resx$$Message
+#: FSharpen.resx$$this.Text$Message
 msgid "Sharpen"
 msgstr ""
 
-#: FPdfSettings.resx$cbShowUserPassword.Text$Message
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
+#: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
 msgstr "Xem"
+
+#: FImageSettings.resx$cbSinglePageTiff.Text$Message
+msgid "Single page files"
+msgstr ""
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1243,7 +1266,9 @@ msgid "The file '{0}' could not be imported"
 msgstr "Các tập tin '{0}' không thể chèn được"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgid ""
+"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
+"be imported"
 msgstr ""
 "Các tập tin '{0}' không thể chèn được. Chỉ những tập tin PDF được tạo bởi "
 "NAPS2 có thể được chèn"
@@ -1277,13 +1302,17 @@ msgid "The selected scanner could not be found"
 msgstr "Máy quét chọn không thể được tìm thấy"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgid ""
+"The selected scanner does not support using a feeder. If your scanner does "
+"have a feeder, try using a different driver"
 msgstr ""
 "Máy quét chọn không hỗ trợ sử dụng một feeder. Nếu máy quét của bạn không có "
 "một feeder, hãy thử sử dụng một trình điều khiển khác nhau"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgid ""
+"The selected scanner does not support using duplex. If your scanner is "
+"supposed to support duplex, try using a different driver"
 msgstr ""
 "Máy quét chọn không hỗ trợ sử dụng hai mặt. Nếu máy quét của bạn phải hỗ trợ "
 "hai mặt, hãy thử sử dụng một trình điều khiển khác nhau"
@@ -1295,6 +1324,10 @@ msgstr "Máy quét chọn đang bận"
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "Máy quét chọn đang ẩn"
+
+#: FImageSettings.resx$groupTiff.Text$Message
+msgid "Tiff Options"
+msgstr ""
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1321,7 +1354,6 @@ msgid "Unsaved Changes"
 msgstr "Thay đổi chưa được lưu"
 
 #: FUpdate.resx$$this.Text$Message
-#: FUpdate.resx$$Message
 msgid "Update NAPS2"
 msgstr "Cập Nhật NAPS2"
 
@@ -1387,7 +1419,9 @@ msgid "You don't have permission to save files at this location"
 msgstr "Bạn không có quyền để lưu các tập tin tại vị trí này"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgid ""
+"You have unsaved changes. Are you sure you want to exit and discard those "
+"changes?"
 msgstr ""
 "Bạn có thay đổi chưa được lưu. Bạn có chắc chắn muốn thoát ra và loại bỏ "
 "những thay đổi?"
@@ -1452,7 +1486,9 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} files"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgid ""
+"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
+"recoverable. Do you want to recover them?"
 msgstr ""
 "{0} hình ảnh) quét trên {1} tại {2} có thể không được lưu lại, và có thể "
 "phục hồi được. Bạn có muốn khôi phục chúng?"
@@ -1464,18 +1500,3 @@ msgstr "{0} hình ảnh được lưu"
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} tới {1}"
-
-#~ msgid "Copyright © 2009 Pavel Sorejs"
-#~ msgstr "Copyright © 2009 Pavel Sorejs"
-
-#~ msgid "Copyright © 2012 Michael Adams"
-#~ msgstr "Copyright © 2012 Michael Adams"
-
-#~ msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-#~ msgstr "Copyright © 2012-2015 Ben Olden-Cooligan"
-
-#~ msgid "Copyright © 2013 Peter De Leeuw"
-#~ msgstr "Copyright © 2013 Peter De Leeuw"
-
-#~ msgid "Force matching page size"
-#~ msgstr "kích thước trang phù hợp "

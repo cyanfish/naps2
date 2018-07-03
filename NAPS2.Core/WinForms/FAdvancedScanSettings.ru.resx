@@ -841,7 +841,7 @@
         <value>17</value>
     </data>
     <data name="cbAutoDeskew.Text" xml:space="preserve">
-        <value>Deskew scanned pages</value>
+        <value>Выровнять отсканированные страницы</value>
     </data>
     <data name="&gt;&gt;cbAutoDeskew.Name" xml:space="preserve">
         <value>cbAutoDeskew</value>
@@ -918,7 +918,7 @@
         <value>400, 604</value>
     </data>
     <data name="$this.Text" xml:space="preserve">
-        <value>Дополнительные настройки профиля</value>
+        <value>Расширенные настройки профиля</value>
     </data>
     <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
         <value>ilProfileIcons</value>

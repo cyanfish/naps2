@@ -238,7 +238,7 @@
         <value>LZW</value>
     </data>
     <data name="TiffComp_None" xml:space="preserve">
-        <value>None</value>
+        <value>완료</value>
     </data>
     <data name="TwainImpl_Default" xml:space="preserve">
         <value>기본값</value>

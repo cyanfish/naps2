@@ -133,7 +133,7 @@
         <value>Sigur doriți să ștergeți {0} profile?</value>
     </data>
     <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-        <value>Sigur doriți să ștergeți profilul %s?</value>
+        <value>Sigur doriți să ștergeți profilul {0}?</value>
     </data>
     <data name="ConfirmOverwriteFile" xml:space="preserve">
         <value>Fișierul {0} deja există. Doriți să-l suprascrieți?</value>

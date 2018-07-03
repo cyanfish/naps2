@@ -2,17 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2016-03-11 21:14+0000\n"
-"Last-Translator: Vahid <va.zahiri@gmail.com>\n"
+"POT-Creation-Date: 2018-06-28 16:40+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.13.0\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-POOTLE-MTIME: 1457730893.000000\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
 
 #: SettingsResources.resx$Dpi_100$Message
 msgid "100 dpi"
@@ -50,8 +48,8 @@ msgstr "۶۰۰ نقطه در اینچ"
 msgid "800 dpi"
 msgstr "۸۰۰ نقطه در اینچ"
 
-#: FUpdate.resx$lblPrompt.Text$Message
 #: MiscResources.resx$UpdateNow$Message
+#: FUpdate.resx$lblPrompt.Text$Message
 msgid "A newer version of NAPS2 is available. Do you want to update now?"
 msgstr "نسخه جدیدتر NAPS2 در دسترس است. آیا مایل به بروز رسانی هستید؟"
 
@@ -69,12 +67,10 @@ msgstr "A5 (۱۴۸×۲۱۰ میلی‌متر)"
 
 #: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
-#: FAbout.resx$$Message
 msgid "About"
 msgstr "درباره"
 
 #: FScanProgress.resx$$this.Text$Message
-#: FScanProgress.resx$$Message
 msgid "Acquiring data"
 msgstr "دستیابی به داده‌ها"
 
@@ -83,13 +79,12 @@ msgid "Advanced"
 msgstr "پیشرفته"
 
 #: FAdvancedScanSettings.resx$$this.Text$Message
-#: FAdvancedScanSettings.resx$$Message
 msgid "Advanced Profile Settings"
 msgstr "تنظیمات پیشرفته پروفایل"
 
 #: FDesktop.resx$tsEmailPDFAll.Text$Message
-#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsReverseAll.Text$Message
+#: FDesktop.resx$tsSaveImagesAll.Text$Message
 #: FDesktop.resx$tsSavePDFAll.Text$Message
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -99,35 +94,35 @@ msgstr "همه ({0})"
 msgid "All Files"
 msgstr "تمام پرونده‌ها"
 
-#: FPdfSettings.resx$cbAllowAnnotations.Text$Message
+#: FPdfSettings.resx$clbPerms.Items6$Message
 msgid "Allow Annotations"
 msgstr "اجازه یادداشت"
 
-#: FPdfSettings.resx$cbAllowContentCopying.Text$Message
+#: FPdfSettings.resx$clbPerms.Items4$Message
 msgid "Allow Content Copying"
 msgstr "اجازه کپی محتوا"
 
-#: FPdfSettings.resx$cbAllowContentCopyingForAccessibility.Text$Message
+#: FPdfSettings.resx$clbPerms.Items5$Message
 msgid "Allow Content Copying for Accessibility"
 msgstr "اجازه کپی محتوا برای دستیابی پذیری"
 
-#: FPdfSettings.resx$cbAllowDocumentAssembly.Text$Message
+#: FPdfSettings.resx$clbPerms.Items3$Message
 msgid "Allow Document Assembly"
 msgstr "اجازه مونتاژ سند"
 
-#: FPdfSettings.resx$cbAllowDocumentModification.Text$Message
+#: FPdfSettings.resx$clbPerms.Items2$Message
 msgid "Allow Document Modification"
 msgstr "اجازه تغییر سند"
 
-#: FPdfSettings.resx$cbAllowFormFilling.Text$Message
+#: FPdfSettings.resx$clbPerms.Items7$Message
 msgid "Allow Form Filling"
 msgstr "اجازه پرکردن فرم"
 
-#: FPdfSettings.resx$cbAllowFullQualityPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items1$Message
 msgid "Allow Full Quality Printing"
 msgstr "اجازه چاپ با کیفیت کامل"
 
-#: FPdfSettings.resx$cbAllowPrinting.Text$Message
+#: FPdfSettings.resx$clbPerms.Items$Message
 msgid "Allow Printing"
 msgstr "اجازه چاپ"
 
@@ -144,7 +139,9 @@ msgid "Alternative Transfer"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgid ""
+"An additional component is needed to import this PDF file. Would you like to "
+"download it now?"
 msgstr ""
 
 #: MiscResources.resx$AutoSaveError$Message
@@ -176,11 +173,11 @@ msgid "Apply brightness/contrast after scan"
 msgstr "اعمال روشنایی و درخشش پس از اسکن"
 
 #: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
-#: FCrop.resx$checkboxApplyToSelected.Text$Message
-#: FSharpen.resx$checkboxApplyToSelected.Text$Message
-#: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
 #: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
+#: FRotate.resx$checkboxApplyToSelected.Text$Message
+#: FSharpen.resx$checkboxApplyToSelected.Text$Message
+#: FCrop.resx$checkboxApplyToSelected.Text$Message
+#: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "اعمال روی {0} عکس انتخاب شده"
 
@@ -193,12 +190,9 @@ msgid "Are you sure you want to clear {0} item(s)?"
 msgstr "آیا مطمئنید که می‌خواهید آیتم {0} را پاک کنید؟"
 
 #: MiscResources.resx$ConfirmDelete$Message
-msgid "Are you sure you want to delete"
-msgstr ""
-
-#: MiscResources.resx$ConfirmDelete$Message
-msgid "Are you sure you want to delete "{0}"?"
-msgstr ""
+#, fuzzy
+msgid "Are you sure you want to delete \"{0}\"?"
+msgstr "آیا مطمئنید که می‌خواهید آیتم {0} حذف کنید؟"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -224,9 +218,12 @@ msgstr "نام های ضمیمه"
 msgid "Author"
 msgstr "مؤلف"
 
+#: SettingsResources.resx$TiffComp_Auto$Message
+msgid "Auto"
+msgstr ""
+
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
-#: FAutoSaveSettings.resx$$Message
 msgid "Auto Save Settings"
 msgstr "ذخیره خودکار تنظیمات‌"
 
@@ -260,7 +257,6 @@ msgstr "ب۵ (۱۷۶ در ۲۵۰ م.م)"
 
 #: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
-#: FBatchScan.resx$$Message
 msgid "Batch Scan"
 msgstr "اسکن دسته‌ای"
 
@@ -291,9 +287,9 @@ msgstr "سیاه و سفید"
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
-#: FBlackWhite.resx$$Message
+#, fuzzy
 msgid "Black and White"
-msgstr ""
+msgstr "سیاه و سفید"
 
 #: FAdvancedScanSettings.resx$groupBox3.Text$Message
 msgid "Blank Pages"
@@ -304,35 +300,38 @@ msgid "Brightness"
 msgstr "روشنایی"
 
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
-#: FBrightnessContrast.resx$$this.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
-#: FBrightnessContrast.resx$$Message
+#: FBrightnessContrast.resx$$this.Text$Message
 msgid "Brightness / Contrast"
 msgstr ""
 
-#: FAutoSaveSettings.resx$btnCancel.Text$Message
-#: FEditProfile.resx$btnCancel.Text$Message
-#: FOcrLanguageDownload.resx$btnCancel.Text$Message
-#: FImageSettings.resx$btnCancel.Text$Message
+#: SettingsResources.resx$TiffComp_Ccitt4$Message
+msgid "CCITT4"
+msgstr ""
+
 #: FEmailSettings.resx$btnCancel.Text$Message
-#: FDownloadProgress.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
+#: FImageSettings.resx$btnCancel.Text$Message
+#: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FPdfPassword.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
+#: FProgress.resx$btnCancel.Text$Message
 #: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FProgress.resx$btnCancel.Text$Message
-#: FPdfPassword.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
+#: FAutoSaveSettings.resx$btnCancel.Text$Message
 #: FAdvancedScanSettings.resx$btnCancel.Text$Message
 #: FBrightnessContrast.resx$btnCancel.Text$Message
-#: FSharpen.resx$btnCancel.Text$Message
-#: FBatchScan.resx$btnCancel.Text$Message
 #: FRotate.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
 #: FHueSaturation.resx$btnCancel.Text$Message
-#: FBlackWhite.resx$btnCancel.Text$Message
+#: FCrop.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
+#: FSharpen.resx$btnCancel.Text$Message
+#: FBlackWhite.resx$btnCancel.Text$Message
+#: FBatchScan.resx$btnCancel.Text$Message
 msgid "Cancel"
 msgstr "لغو"
 
@@ -369,16 +368,21 @@ msgstr "پاک کردن تصویر پس از ذخیره سازی"
 msgid "Close"
 msgstr "بستن"
 
+#: FPdfSettings.resx$groupCompat.Text$Message
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
 msgid "Compatibility"
 msgstr "سازگاری"
+
+#: FImageSettings.resx$label3.Text$Message
+msgid "Compression"
+msgstr ""
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
 msgstr "شفافیت"
 
-#: FDesktop.resx$ctxCopy.Text$Message
 #: FProfiles.resx$ctxCopy.Text$Message
+#: FDesktop.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "رونوشت"
 
@@ -399,9 +403,8 @@ msgid "Coverage Threshold"
 msgstr "آستانه پوشش"
 
 #: FDesktop.resx$tsCrop.Text$Message
-#: FCrop.resx$$this.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
-#: FCrop.resx$$Message
+#: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr "برش کناره‌ها"
 
@@ -418,7 +421,6 @@ msgid "Custom ({0}x{1} {2})"
 msgstr "سفارشی ({0}x{1} {2})"
 
 #: FPageSize.resx$$this.Text$Message
-#: FPageSize.resx$$Message
 msgid "Custom Page Size"
 msgstr "اندازه صفحه سفارشی"
 
@@ -432,13 +434,15 @@ msgid "Day (01-31)"
 msgstr "روز (۳۱-۰)"
 
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$PdfCompat_Default$Message
 msgid "Default"
 msgstr "پیش‌فرض"
 
 #: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
+#, fuzzy
 msgid "Default File Path"
-msgstr ""
+msgstr "نام پرونده پیش فرض"
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
@@ -451,10 +455,10 @@ msgstr ""
 #: FProfiles.resx$btnDelete.Text$Message
 #: FRecover.resx$btnDelete.Text$Message
 #: FDesktop.resx$tsDelete.Text$Message
-#: FDesktop.resx$ctxDelete.Text$Message
-#: FProfiles.resx$ctxDelete.Text$Message
 #: MiscResources.resx$Delete$Message
+#: FProfiles.resx$ctxDelete.Text$Message
 #: FViewer.resx$tsDelete.Text$Message
+#: FDesktop.resx$ctxDelete.Text$Message
 msgid "Delete"
 msgstr "حذف"
 
@@ -491,6 +495,10 @@ msgstr "نام ظاهری"
 msgid "Do you want NAPS2 to automatically check for updates?"
 msgstr "آیا می‌خواهید NAPS2 بصورت خودکار بروزرسانی رو بررسی کند؟"
 
+#: MiscResources.resx$Donate$Message
+msgid "Donate"
+msgstr ""
+
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
 msgid "Done"
@@ -511,7 +519,6 @@ msgid "Download Needed"
 msgstr ""
 
 #: FDownloadProgress.resx$$this.Text$Message
-#: FDownloadProgress.resx$$Message
 msgid "Download Progress"
 msgstr "پیشرفت دانلود"
 
@@ -539,7 +546,6 @@ msgstr "پیشرفت رایانامه PDF"
 
 #: FDesktop.resx$tsEmailSettings.Text$Message
 #: FEmailSettings.resx$$this.Text$Message
-#: FEmailSettings.resx$$Message
 msgid "Email Settings"
 msgstr "تنظیمات رایانامه"
 
@@ -559,9 +565,8 @@ msgstr "رمزگذاری"
 msgid "Enhanced Windows MetaFile (*.emf)"
 msgstr "Enhanced Windows MetaFile (*.emf)"
 
-#: FError.resx$$this.Text$Message
 #: MiscResources.resx$Error$Message
-#: FError.resx$$Message
+#: FError.resx$$this.Text$Message
 msgid "Error"
 msgstr "خطا"
 
@@ -601,10 +606,10 @@ msgid "Flip duplexed pages"
 msgstr ""
 
 #: FImageSettings.resx$lblWarning.Text$Message
-msgid "For high JPEG qualities (80+), use the Maximum Quality profile option for best results"
+msgid ""
+"For high JPEG qualities (80+), also increase Image Quality in your profile "
+"for best results"
 msgstr ""
-"برای پرونده JPEG با کیفیت بالا (۸۰+)، از گزینه پروفایل حداکثر کیفیت برای "
-"بهرین نتیجه استفاده کنید"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -633,7 +638,6 @@ msgstr "ساعت (۰-۲۳)"
 #: FDesktop.resx$tsHueSaturation.Text$Message
 #: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
-#: FHueSaturation.resx$$Message
 msgid "Hue / Saturation"
 msgstr ""
 
@@ -655,7 +659,6 @@ msgstr "کیفیت تصویر"
 
 #: FDesktop.resx$tsImageSettings.Text$Message
 #: FImageSettings.resx$$this.Text$Message
-#: FImageSettings.resx$$Message
 msgid "Image Settings"
 msgstr "تنظیمات تصویر"
 
@@ -703,13 +706,17 @@ msgstr "جایگذاری"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "پرونده JPEG (*.jpg, *.jpeg)"
 
-#: FImageSettings.resx$label2.Text$Message
+#: FImageSettings.resx$groupJpeg.Text$Message
 msgid "Jpeg Quality"
 msgstr "کیفیت Jpeg"
 
 #: FPdfSettings.resx$label6.Text$Message
 msgid "Keywords"
 msgstr "کلیدواژه‌ها"
+
+#: SettingsResources.resx$TiffComp_Lzw$Message
+msgid "LZW"
+msgstr ""
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -776,6 +783,10 @@ msgstr "اسکن چندتایی (اعلان بین اسکن‌ها)"
 msgid "NAPS2"
 msgstr "NAPS2"
 
+#: MiscResources.resx$DonatePrompt$Message
+msgid "NAPS2 is completely free. Consider making a donation"
+msgstr ""
+
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
 msgstr ""
@@ -797,7 +808,6 @@ msgid "Next"
 msgstr "بعدی"
 
 #: FBatchPrompt.resx$$this.Text$Message
-#: FBatchPrompt.resx$$Message
 msgid "Next Scan"
 msgstr "اسکن بعدی"
 
@@ -813,8 +823,12 @@ msgstr "کاغذی داخل خوراک‌دهنده نیست"
 msgid "No scanning device was found"
 msgstr "دستگاه اسکنر یافت نشد"
 
+#: SettingsResources.resx$TiffComp_None$Message
+#, fuzzy
+msgid "None"
+msgstr "انجام شد"
+
 #: FDesktop.resx$$this.Text$Message
-#: FDesktop.resx$$Message
 msgid "Not Another PDF Scanner 2"
 msgstr "نه اسکنر PDF دیگری ۲"
 
@@ -833,12 +847,10 @@ msgid "OCR"
 msgstr "OCR"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
-#: FOcrLanguageDownload.resx$$Message
 msgid "OCR Download"
 msgstr "دریافت OCR"
 
 #: FOcrSetup.resx$$this.Text$Message
-#: FOcrSetup.resx$$Message
 msgid "OCR Setup"
 msgstr "پیکربندی OCR"
 
@@ -846,24 +858,24 @@ msgstr "پیکربندی OCR"
 msgid "OCR language"
 msgstr "زبان OCR"
 
-#: FEditProfile.resx$btnOK.Text$Message
-#: FAdvancedScanSettings.resx$btnOK.Text$Message
-#: FAutoSaveSettings.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FPdfSettings.resx$btnOK.Text$Message
 #: FPdfPassword.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
 #: FError.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
+#: FAutoSaveSettings.resx$btnOK.Text$Message
+#: FEditProfile.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAbout.resx$okButton.Text$Message
-#: FBlackWhite.resx$btnOK.Text$Message
-#: FBrightnessContrast.resx$btnOK.Text$Message
 #: FCrop.resx$btnOK.Text$Message
 #: FRotate.resx$btnOK.Text$Message
-#: FSharpen.resx$btnOK.Text$Message
 #: FHueSaturation.resx$btnOK.Text$Message
+#: FSharpen.resx$btnOK.Text$Message
+#: FBrightnessContrast.resx$btnOK.Text$Message
+#: FBlackWhite.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "تأیید"
 
@@ -875,8 +887,8 @@ msgstr ""
 msgid "Old DSM"
 msgstr ""
 
-#: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 #: FBatchScan.resx$rdFilePerPage.Text$Message
+#: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
 msgstr "یک فایل به ازای هر صفحه"
 
@@ -912,12 +924,27 @@ msgstr "پرونده PDF (*.pdf)"
 #: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
-#: FPdfSettings.resx$$Message
 msgid "PDF Settings"
 msgstr "تنظیمات پی‌دی‌اف"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA1B$Message
+msgid "PDF/A-1b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA2B$Message
+msgid "PDF/A-2b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA3B$Message
+msgid "PDF/A-3b"
+msgstr ""
+
+#: SettingsResources.resx$PdfCompat_PdfA3U$Message
+msgid "PDF/A-3u"
 msgstr ""
 
 #: MiscResources.resx$FileTypePng$Message
@@ -933,7 +960,6 @@ msgid "Paper source"
 msgstr "منبع کاغذ"
 
 #: FPdfPassword.resx$$this.Text$Message
-#: FPdfPassword.resx$$Message
 msgid "Password"
 msgstr "گذرواژه"
 
@@ -942,13 +968,13 @@ msgstr "گذرواژه"
 msgid "Paste"
 msgstr "چسباندن"
 
-#: FPlaceholders.resx$$this.Text$Message
 #: FPlaceholders.resx$gboxPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FBatchScan.resx$linkPlaceholders.Text$Message
+#: FEmailSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
 #: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
-#: FEmailSettings.resx$linkPlaceholders.Text$Message
-#: FBatchScan.resx$linkPlaceholders.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "جانگهدار"
 
@@ -978,13 +1004,11 @@ msgid "Profile"
 msgstr "پروفایل"
 
 #: FEditProfile.resx$$this.Text$Message
-#: FEditProfile.resx$$Message
 msgid "Profile Settings"
 msgstr "تنظیمات پروفایل"
 
 #: FDesktop.resx$tsProfiles.Text$Message
 #: FProfiles.resx$$this.Text$Message
-#: FProfiles.resx$$Message
 msgid "Profiles"
 msgstr "پروفایل‌ها"
 
@@ -1001,7 +1025,6 @@ msgid "Recover"
 msgstr "بازیابی"
 
 #: FRecover.resx$$this.Text$Message
-#: FRecover.resx$$Message
 msgid "Recover Scanned Images"
 msgstr "در حال بازیابی"
 
@@ -1013,9 +1036,9 @@ msgstr "پیشرفت بازیابی"
 msgid "Recovery Progress"
 msgstr "پیشروی بازیابی"
 
+#: FPdfSettings.resx$cbRememberSettings.Text$Message
 #: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
-#: FPdfSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr "این تنظیمات را بخاطر بسپار"
 
@@ -1035,9 +1058,9 @@ msgstr "تنظیم مجدد تصویر"
 msgid "Resolution"
 msgstr "دقت"
 
-#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
+#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "تنظيمات اوليه"
@@ -1050,12 +1073,12 @@ msgstr ""
 msgid "Reverse"
 msgstr "معکوس"
 
-#: FBlackWhite.resx$btnRevert.Text$Message
 #: FRotate.resx$btnRevert.Text$Message
-#: FSharpen.resx$btnRevert.Text$Message
-#: FCrop.resx$btnRevert.Text$Message
 #: FHueSaturation.resx$btnRevert.Text$Message
+#: FSharpen.resx$btnRevert.Text$Message
 #: FBrightnessContrast.resx$btnRevert.Text$Message
+#: FCrop.resx$btnRevert.Text$Message
+#: FBlackWhite.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "برگرداندن"
 
@@ -1066,7 +1089,6 @@ msgstr "راست"
 #: FDesktop.resx$tsdRotate.Text$Message
 #: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
-#: FRotate.resx$$Message
 msgid "Rotate"
 msgstr "چرخش"
 
@@ -1081,8 +1103,9 @@ msgid "Rotate Right"
 msgstr "چرخش راست"
 
 #: FViewer.resx$tsSaveImage.Text$Message
+#, fuzzy
 msgid "Save Image"
-msgstr ""
+msgstr "ذخیره کردن تصاویر"
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
 msgid "Save Images"
@@ -1128,8 +1151,8 @@ msgstr "بزرگنمایی اندازه پنجره"
 #: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
-#: FProfiles.resx$ctxScan.Text$Message
 #: MiscResources.resx$Scan$Message
+#: FProfiles.resx$ctxScan.Text$Message
 msgid "Scan"
 msgstr "اسکن"
 
@@ -1141,8 +1164,8 @@ msgstr "پیکربندی اسکن"
 msgid "Scanned Image"
 msgstr "تصویر اسکن شده"
 
-#: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 msgid "Scanning page {0}"
 msgstr "اسکن صفحه {0}"
@@ -1164,7 +1187,6 @@ msgid "Select All"
 msgstr "انتخاب همه"
 
 #: FSelectDevice.resx$$this.Text$Message
-#: FSelectDevice.resx$$Message
 msgid "Select Source"
 msgstr "انتخاب منبع"
 
@@ -1194,16 +1216,19 @@ msgid "Set Default"
 msgstr "پیش‌فرض کن"
 
 #: FDesktop.resx$tsSharpen.Text$Message
-#: FSharpen.resx$$this.Text$Message
 #: FViewer.resx$tsSharpen.Text$Message
-#: FSharpen.resx$$Message
+#: FSharpen.resx$$this.Text$Message
 msgid "Sharpen"
 msgstr ""
 
-#: FPdfSettings.resx$cbShowUserPassword.Text$Message
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
+#: FPdfSettings.resx$cbShowUserPassword.Text$Message
 msgid "Show"
 msgstr "نمایش"
+
+#: FImageSettings.resx$cbSinglePageTiff.Text$Message
+msgid "Single page files"
+msgstr ""
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1243,7 +1268,9 @@ msgid "The file '{0}' could not be imported"
 msgstr "پرونده '{0}' را نمی‌توان وارد کرد"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported"
+msgid ""
+"The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
+"be imported"
 msgstr ""
 "پروندهٔ '{0}' را نمی‌توان درون‌ریزی کرد. فقط پرونده‌های ایجاد شده بوسیله "
 "NAPS2 را می‌توان درون‌ریزی کرد."
@@ -1277,13 +1304,17 @@ msgid "The selected scanner could not be found"
 msgstr "اسکنر انتخاب شده یافت نشد"
 
 #: MiscResources.resx$NoFeederSupport$Message
-msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver"
+msgid ""
+"The selected scanner does not support using a feeder. If your scanner does "
+"have a feeder, try using a different driver"
 msgstr ""
 "اسکنر انتخاب شده استفاده از خوراک‌دهنده را پشتیبانی نمی‌کند. اگر اسکنر شما "
 "خوراک‌دهنده دارد تلاش کنید از درایور دیگری استفاده کنید"
 
 #: MiscResources.resx$NoDuplexSupport$Message
-msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver"
+msgid ""
+"The selected scanner does not support using duplex. If your scanner is "
+"supposed to support duplex, try using a different driver"
 msgstr ""
 "اسکنر انتخاب شده استفاده از  اسکن دورو را پشتیبانی نمی‌کند. اگر اسکنر "
 "پشتیبانی از اسکن دورو را پیشنهاد می‌دهد، تلاش کنید از درایور دیگری استفاده "
@@ -1296,6 +1327,10 @@ msgstr "اسکنر انتخابی مشغول است"
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
 msgstr "اسکنر انتخابی خاموش است"
+
+#: FImageSettings.resx$groupTiff.Text$Message
+msgid "Tiff Options"
+msgstr ""
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
@@ -1322,7 +1357,6 @@ msgid "Unsaved Changes"
 msgstr "تغییرات ذخیره نشده"
 
 #: FUpdate.resx$$this.Text$Message
-#: FUpdate.resx$$Message
 msgid "Update NAPS2"
 msgstr "بروزرسانی NAPS2"
 
@@ -1390,7 +1424,9 @@ msgid "You don't have permission to save files at this location"
 msgstr "شما اجازه ذخیره پرونده در این محل را ندارید"
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
-msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgid ""
+"You have unsaved changes. Are you sure you want to exit and discard those "
+"changes?"
 msgstr ""
 "شما تغییرات ذخیره شده دارید. آیا مطمئنید می‌خواهید خارج شوید و تغییرات را "
 "نادیده بگیرید؟"
@@ -1455,7 +1491,9 @@ msgid "{0} / {1} files"
 msgstr "{0} / {1} پرونده‌ها"
 
 #: FRecover.resx$lblPrompt.Text$Message
-msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgid ""
+"{0} image(s) scanned on {1} at {2} may not have been saved, and are "
+"recoverable. Do you want to recover them?"
 msgstr ""
 "{0} تصویر اسکن شده از {1} روی {2} ذخیره نشده‌اند و قابل بازیابی هستندُ آیا "
 "مایل به بازیابی آنها هستید؟"
@@ -1467,24 +1505,3 @@ msgstr ""
 #: MiscResources.resx$PdfStatus$Message
 msgid "{0} of {1}"
 msgstr "{0} از {1}"
-
-#~ msgid "Copyright © 2009 Pavel Sorejs"
-#~ msgstr "حق تکثیر © ۲۰۰۹ Pavel Sorejs"
-
-#~ msgid "Copyright © 2012 Michael Adams"
-#~ msgstr "حق تکثیر © ۲۰۱۲ Michael Adams"
-
-#~ msgid "Copyright © 2012-2015 Ben Olden-Cooligan"
-#~ msgstr "حق تکثیر © ۲۰۱۵-۲۰۱۲ Ben Olden-Cooligan"
-
-#~ msgid "Copyright © 2013 Peter De Leeuw"
-#~ msgstr "حق تکثیر © ۲۰۱۳  Peter De Leeuw"
-
-#~ msgid "Force matching page size"
-#~ msgstr "تطابق اجباری اندازه صفحه"
-
-#~ msgid "Separate files by Patch-T (TWAIN only)"
-#~ msgstr "پرونده‌های جداگانه بوسیله وصله-T (فقط TWAIN)"
-
-#~ msgid "Default File Name"
-#~ msgstr "نام پرونده پیش فرض"

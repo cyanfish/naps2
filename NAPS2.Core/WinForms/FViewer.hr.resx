@@ -268,7 +268,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsBrightnessContrast.Text" xml:space="preserve">
-        <value>Brightness / Contrast</value>
+        <value>Svjetlina / Kontrast</value>
     </data>
     <data name="tsHueSaturation.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -307,7 +307,7 @@
         <value>23, 22</value>
     </data>
     <data name="tsSavePDF.Text" xml:space="preserve">
-        <value>Snjimi PDF</value>
+        <value>Spremi PDF</value>
     </data>
     <data name="tsSaveImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
         <value>Magenta</value>
@@ -397,7 +397,7 @@
         <value>164, 22</value>
     </data>
     <data name="tsDeskew.Text" xml:space="preserve">
-        <value>Deskew</value>
+        <value>Popravljanje iskrivljene perspektive</value>
     </data>
     <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
         <value>164, 22</value>

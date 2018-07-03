@@ -484,7 +484,7 @@
         <value>185, 22</value>
     </data>
     <data name="tsBlackWhite.Text" xml:space="preserve">
-        <value>Black and &amp;White</value>
+        <value>Preto e Branco</value>
     </data>
     <data name="tsSharpen.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
         <value>None</value>
@@ -760,7 +760,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsSavePDFAll.Text" xml:space="preserve">
-        <value>Todos</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="tsSavePDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>
@@ -781,7 +781,7 @@
         <value>152, 22</value>
     </data>
     <data name="tsSaveImagesAll.Text" xml:space="preserve">
-        <value>Todos</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="tsSaveImagesSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>152, 22</value>
@@ -802,7 +802,7 @@
         <value>148, 22</value>
     </data>
     <data name="tsEmailPDFAll.Text" xml:space="preserve">
-        <value>Todos</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="tsEmailPDFSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>148, 22</value>
@@ -907,7 +907,7 @@
         <value>143, 22</value>
     </data>
     <data name="tsReverseAll.Text" xml:space="preserve">
-        <value>Todos</value>
+        <value>Todos ({0})</value>
     </data>
     <data name="tsReverseSelected.Size" type="System.Drawing.Size, System.Drawing">
         <value>143, 22</value>

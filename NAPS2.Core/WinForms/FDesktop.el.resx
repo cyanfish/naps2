@@ -871,13 +871,13 @@
         <value>190, 22</value>
     </data>
     <data name="tsInterleave.Text" xml:space="preserve">
-        <value>Παρεμβολή [135246...]</value>
+        <value>Παρεμβολή</value>
     </data>
     <data name="tsDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
     </data>
     <data name="tsDeinterleave.Text" xml:space="preserve">
-        <value>Αποπαρεμβολή [142536...]</value>
+        <value>Αποπαρεμβολή</value>
     </data>
     <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
         <value>187, 6</value>
@@ -886,7 +886,7 @@
         <value>190, 22</value>
     </data>
     <data name="tsAltInterleave.Text" xml:space="preserve">
-        <value>Εναλλακτική Παρεμβολή [162534...]</value>
+        <value>Εναλλακτική Παρεμβολή</value>
     </data>
     <data name="tsAltDeinterleave.Size" type="System.Drawing.Size, System.Drawing">
         <value>190, 22</value>
