@@ -13,5 +13,15 @@ namespace NAPS2.Worker
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             WindowState = FormWindowState.Minimized;
         }
+
+        protected override void SetVisibleCore(bool value)
+        {
+            if (!IsHandleCreated)
+            {
+                CreateHandle();
+                value = false;
+            }
+            base.SetVisibleCore(value);
+        }
     }
 }
