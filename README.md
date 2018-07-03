@@ -21,5 +21,6 @@ Done
 - Used [CodeMaid](http://www.codemaid.net/) to clean-up the code base styling and format.
 
 In Progress
-- Finish off the VS2017 & Roslynator-located warnings and errors.
+- Finish off the VS2017 & Roslynator-located warnings and errors. Vast majority are from using calls to external Windows APIs at this point.
+- Make sure the installer is building correctly.
 - WIABackgroundThread could use additional attention: may be source of issues such as feed scans not working right.
