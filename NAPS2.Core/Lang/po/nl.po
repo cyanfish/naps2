@@ -129,11 +129,11 @@ msgstr "Afdrukken toestaan"
 # This is a hard one to translate. I'll have to see it in context to confirm this is the proper translation.
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
-msgstr "Afwisselend terug tussenvoegen"
+msgstr "Alternatief terug tussenvoegen"
 
 #: FDesktop.resx$tsAltInterleave.Text$Message
 msgid "Alternate Interleave"
-msgstr "Afwisselend tussenvoegen"
+msgstr "Alternatief afwisselend tussenvoegen"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Alternative Transfer"
