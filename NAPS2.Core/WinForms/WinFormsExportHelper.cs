@@ -27,9 +27,9 @@ namespace NAPS2.WinForms
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly OcrDependencyManager ocrDependencyManager;
-        private readonly IEmailer emailer;
+        private readonly IEmailProvider emailProvider;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrDependencyManager ocrDependencyManager, IEmailer emailer)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrDependencyManager ocrDependencyManager, IEmailProvider emailProvider)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -40,7 +40,7 @@ namespace NAPS2.WinForms
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
             this.ocrDependencyManager = ocrDependencyManager;
-            this.emailer = emailer;
+            this.emailProvider = emailProvider;
         }
 
         public bool SavePDF(List<ScannedImage> images, ISaveNotify notify)
@@ -161,7 +161,7 @@ namespace NAPS2.WinForms
                         }
                     };
 
-                    if (emailer.SendEmail(message))
+                    if (emailProvider.SendEmail(message))
                     {
                         changeTracker.HasUnsavedChanges = false;
                         return true;

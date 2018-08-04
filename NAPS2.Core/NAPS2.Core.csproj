@@ -247,8 +247,8 @@
     <Compile Include="ImportExport\Email\EmailMessage.cs" />
     <Compile Include="ImportExport\Email\EmailRecipient.cs" />
     <Compile Include="ImportExport\Email\EmailRecipientType.cs" />
-    <Compile Include="ImportExport\Email\IEmailer.cs" />
-    <Compile Include="ImportExport\Email\Mapi\MapiEmailer.cs" />
+    <Compile Include="ImportExport\Email\IEmailProvider.cs" />
+    <Compile Include="ImportExport\Email\Mapi\MapiEmailProvider.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiFileDesc.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiMessage.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiRecipClass.cs" />

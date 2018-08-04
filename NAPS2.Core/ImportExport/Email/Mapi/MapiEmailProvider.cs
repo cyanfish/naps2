@@ -7,7 +7,7 @@ using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email.Mapi
 {
-    public class MapiEmailer : IEmailer
+    public class MapiEmailProvider : IEmailProvider
     {
         // MAPISendMail is documented at:
         // http://msdn.microsoft.com/en-us/library/windows/desktop/dd296721%28v=vs.85%29.aspx
@@ -17,7 +17,7 @@ namespace NAPS2.ImportExport.Email.Mapi
 
         private readonly IErrorOutput errorOutput;
 
-        public MapiEmailer(IErrorOutput errorOutput)
+        public MapiEmailProvider(IErrorOutput errorOutput)
         {
             this.errorOutput = errorOutput;
         }
