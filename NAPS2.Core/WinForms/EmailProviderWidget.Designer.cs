@@ -34,9 +34,10 @@
             // 
             // pboxIcon
             // 
+            this.pboxIcon.BackColor = System.Drawing.Color.Transparent;
             this.pboxIcon.Location = new System.Drawing.Point(3, 3);
             this.pboxIcon.Name = "pboxIcon";
-            this.pboxIcon.Size = new System.Drawing.Size(46, 46);
+            this.pboxIcon.Size = new System.Drawing.Size(48, 48);
             this.pboxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pboxIcon.TabIndex = 0;
             this.pboxIcon.TabStop = false;
