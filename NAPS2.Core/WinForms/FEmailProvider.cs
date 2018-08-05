@@ -66,7 +66,6 @@ namespace NAPS2.WinForms
             foreach (var widget in providerWidgets)
             {
                 panel1.Controls.Add(widget);
-                widget.BorderStyle = BorderStyle.FixedSingle;
                 widget.Top = panel1.Height;
                 widget.Width = panel1.Width;
                 widget.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;

@@ -10,7 +10,7 @@ using NAPS2.ImportExport.Email;
 
 namespace NAPS2.WinForms
 {
-    public partial class EmailProviderWidget : UserControl
+    public partial class EmailProviderWidget : Button
     {
         public EmailProviderWidget()
         {
@@ -27,8 +27,8 @@ namespace NAPS2.WinForms
 
         public string ProviderName
         {
-            get => lblName.Text;
-            set => lblName.Text = value;
+            get => Text;
+            set => Text = value;
         }
     }
 }
