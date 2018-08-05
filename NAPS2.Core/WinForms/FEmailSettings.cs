@@ -73,5 +73,12 @@ namespace NAPS2.WinForms
                 txtAttachmentName.Text = form.FileName;
             }
         }
+
+        private void btnChangeProvider_Click(object sender, EventArgs e)
+        {
+            var form = FormFactory.Create<FEmailProvider>();
+            // TODO: This should provide a result (though we might ignore it here except to update the UI)
+            form.ShowDialog();
+        }
     }
 }
