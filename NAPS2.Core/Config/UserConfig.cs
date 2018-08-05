@@ -46,6 +46,8 @@ namespace NAPS2.Config
 
         public EmailSettings EmailSettings { get; set; }
 
+        public EmailSetup EmailSetup { get; set; }
+
         public int ThumbnailSize { get; set; }
 
         public BatchSettings LastBatchSettings { get; set; }

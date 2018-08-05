@@ -61,6 +61,7 @@
     <Compile Include="Modules\CommonModule.cs" />
     <Compile Include="Modules\ConsoleModule.cs" />
     <Compile Include="Modules\WinFormsModule.cs" />
+    <Compile Include="NinjectEmailProviderFactory.cs" />
     <Compile Include="NinjectFormFactory.cs" />
     <Compile Include="NinjectOperationFactory.cs" />
     <Compile Include="NinjectScanDriverFactory.cs" />
