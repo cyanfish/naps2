@@ -79,6 +79,9 @@
     <Reference Include="MimeKit, Version=1.22.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>..\packages\MimeKit.1.22.0\lib\net40\MimeKit.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NAPS2\Setup\lib\NTwain.dll</HintPath>
@@ -108,6 +111,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientCreds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientCreds.resx</DependentUpon>
+    </Compile>
     <Compile Include="Automation\AutomatedScanning.cs" />
     <Compile Include="Automation\AutomatedScanningOptions.cs" />
     <Compile Include="Automation\CommandLineOptions.cs" />
@@ -595,6 +603,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ClientCreds.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClientCreds.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Icons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -5313,6 +5325,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>If Not Exist $(ProjectDir)google.credentials.json (
+echo {} &gt; $(ProjectDir)google.credentials.json
+)</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
