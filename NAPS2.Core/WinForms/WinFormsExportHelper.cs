@@ -27,9 +27,9 @@ namespace NAPS2.WinForms
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly OcrDependencyManager ocrDependencyManager;
-        private readonly IEmailProvider emailProvider;
+        private readonly IEmailProviderFactory emailProviderFactory;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrDependencyManager ocrDependencyManager, IEmailProvider emailProvider)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrDependencyManager ocrDependencyManager, IEmailProviderFactory emailProviderFactory)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -40,7 +40,7 @@ namespace NAPS2.WinForms
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
             this.ocrDependencyManager = ocrDependencyManager;
-            this.emailProvider = emailProvider;
+            this.emailProviderFactory = emailProviderFactory;
         }
 
         public bool SavePDF(List<ScannedImage> images, ISaveNotify notify)
@@ -161,7 +161,7 @@ namespace NAPS2.WinForms
                         }
                     };
 
-                    if (emailProvider.SendEmail(message))
+                    if (emailProviderFactory.Default.SendEmail(message))
                     {
                         changeTracker.HasUnsavedChanges = false;
                         return true;
