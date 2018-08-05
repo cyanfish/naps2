@@ -30,5 +30,15 @@ namespace NAPS2.WinForms
             get => Text;
             set => Text = value;
         }
+
+        private void EmailProviderWidget_MouseEnter(object sender, EventArgs e)
+        {
+            BackColor = Color.FromArgb(229, 241, 251);
+        }
+
+        private void EmailProviderWidget_MouseLeave(object sender, EventArgs e)
+        {
+            BackColor = DefaultBackColor;
+        }
     }
 }

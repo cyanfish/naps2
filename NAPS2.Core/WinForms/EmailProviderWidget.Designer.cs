@@ -44,11 +44,15 @@
             // 
             // EmailProviderWidget
             // 
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.pboxIcon);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
             this.Size = new System.Drawing.Size(348, 54);
             this.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.UseVisualStyleBackColor = false;
+            this.MouseEnter += new System.EventHandler(this.EmailProviderWidget_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.EmailProviderWidget_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.pboxIcon)).EndInit();
             this.ResumeLayout(false);
 
