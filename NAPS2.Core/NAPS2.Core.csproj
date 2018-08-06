@@ -94,6 +94,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.1\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
@@ -142,8 +143,11 @@
     <Compile Include="ImportExport\Email\EmailProviderType.cs" />
     <Compile Include="ImportExport\Email\EmailSetup.cs" />
     <Compile Include="ImportExport\Email\IEmailProviderFactory.cs" />
+    <Compile Include="ImportExport\Email\Imap\GmailApi.cs" />
     <Compile Include="ImportExport\Email\Imap\GmailEmailProvider.cs" />
     <Compile Include="ImportExport\Email\Imap\ImapEmailProvider.cs" />
+    <Compile Include="ImportExport\Email\Imap\IOauthProvider.cs" />
+    <Compile Include="ImportExport\Email\Imap\OauthToken.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\Images\TiffCompression.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
@@ -334,6 +338,7 @@
     <Compile Include="Host\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />
     <Compile Include="Util\KeyboardShortcutManager.cs" />
+    <Compile Include="Util\SecureStorage.cs" />
     <Compile Include="Util\Slice.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />
@@ -366,6 +371,12 @@
     </Compile>
     <Compile Include="WinForms\FAdvancedScanSettings.Designer.cs">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FAuthorize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FAuthorize.Designer.cs">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FAutoSaveSettings.cs">
       <SubType>Form</SubType>
@@ -976,6 +987,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAdvancedScanSettings.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.resx">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAutoSaveSettings.af.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAutoSaveSettings.cs</DependentUpon>

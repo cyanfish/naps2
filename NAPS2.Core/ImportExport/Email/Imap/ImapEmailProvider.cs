@@ -28,7 +28,7 @@ namespace NAPS2.ImportExport.Email.Imap
             CopyRecips(emailMessage.Recipients, EmailRecipientType.To, message.To);
             CopyRecips(emailMessage.Recipients, EmailRecipientType.Cc, message.Cc);
             CopyRecips(emailMessage.Recipients, EmailRecipientType.Bcc, message.Bcc);
-            message.Subject = emailMessage.Subject;
+            message.Subject = emailMessage.Subject ?? "";
             message.Body = builder.ToMessageBody();
 
             var client = new ImapClient();

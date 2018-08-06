@@ -51,6 +51,7 @@
             this.Size = new System.Drawing.Size(348, 54);
             this.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.UseVisualStyleBackColor = false;
+            this.Click += new System.EventHandler(this.EmailProviderWidget_Click);
             this.MouseEnter += new System.EventHandler(this.EmailProviderWidget_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.EmailProviderWidget_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.pboxIcon)).EndInit();

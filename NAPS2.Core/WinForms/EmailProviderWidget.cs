@@ -17,7 +17,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        public IEmailProvider Provider { get; set; }
+        public EmailProviderType ProviderType { get; set; }
 
         public Image ProviderIcon
         {
@@ -31,6 +31,8 @@ namespace NAPS2.WinForms
             set => Text = value;
         }
 
+        public Action ClickAction { get; set; }
+
         private void EmailProviderWidget_MouseEnter(object sender, EventArgs e)
         {
             BackColor = Color.FromArgb(229, 241, 251);
@@ -39,6 +41,11 @@ namespace NAPS2.WinForms
         private void EmailProviderWidget_MouseLeave(object sender, EventArgs e)
         {
             BackColor = DefaultBackColor;
+        }
+
+        private void EmailProviderWidget_Click(object sender, EventArgs e)
+        {
+            ClickAction?.Invoke();
         }
     }
 }

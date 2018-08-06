@@ -21,7 +21,7 @@ namespace NAPS2.ImportExport.Email.Imap
 
         protected override string User => userConfigManager.Config.EmailSetup?.GmailUser;
 
-        protected override string AccessToken => ""; // TODO
+        protected override string AccessToken => userConfigManager.Config.EmailSetup?.GmailToken?.AccessToken;
 
         protected override void OpenDraft(IMailFolder drafts, UniqueId messageId)
         {
