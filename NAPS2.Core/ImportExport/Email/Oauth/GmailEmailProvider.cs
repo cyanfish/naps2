@@ -19,26 +19,13 @@ namespace NAPS2.ImportExport.Email.Oauth
             this.userConfigManager = userConfigManager;
             this.gmailOauthProvider = gmailOauthProvider;
         }
-
-        protected string Host => "imap.gmail.com";
-
-        protected string User => userConfigManager.Config.EmailSetup?.GmailUser;
-
-        protected string AccessToken => userConfigManager.Config.EmailSetup?.GmailToken?.AccessToken;
-
-        protected void OpenDraft(IMailFolder drafts, UniqueId messageId)
-        {
-            drafts.Open(FolderAccess.ReadOnly);
-            var gmailId = drafts.Fetch(new List<UniqueId> { messageId }, MessageSummaryItems.GMailMessageId).FirstOrDefault()?.GMailMessageId;
-            var url = gmailId == null
-                ? $"https://mail.google.com/mail/?authuser={User}#drafts" // This shouldn't happen, but handle it anyway
-                : $"https://mail.google.com/mail/?authuser={User}#drafts?compose={gmailId:x}";
-            Process.Start(url);
-        }
-
+        
         protected override void SendMimeMessage(MimeMessage message)
         {
-            gmailOauthProvider.UploadDraft(message.ToString());//Convert.ToBase64String(Encoding.UTF8.GetBytes(message.ToString()))
+            var messageId = gmailOauthProvider.UploadDraft(message.ToString());
+            var userEmail = userConfigManager.Config.EmailSetup?.GmailUser;
+            // Open the draft in the user's browser
+            Process.Start($"https://mail.google.com/mail/?authuser={userEmail}#drafts?compose={messageId}");
         }
     }
 }

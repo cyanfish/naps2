@@ -66,7 +66,7 @@ namespace NAPS2.ImportExport.Email.Oauth
         public string UploadDraft(string messageRaw)
         {
             var resp = PostAuthorized($"https://www.googleapis.com/upload/gmail/v1/users/{User}/drafts?uploadType=multipart", messageRaw, "message/rfc822");
-            return resp.Value<string>("id");
+            return resp.Value<JObject>("message").Value<string>("id");
         }
 
         #endregion
