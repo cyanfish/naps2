@@ -55,6 +55,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             accessTokenEncrypted = reader.ReadElementString();
             refreshTokenEncrypted = reader.ReadElementString();
             Expiry = DateTime.Parse(reader.ReadElementString());
+            reader.ReadEndElement();
         }
 
         public void WriteXml(XmlWriter writer)

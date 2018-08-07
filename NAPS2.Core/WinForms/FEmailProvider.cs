@@ -118,15 +118,6 @@ namespace NAPS2.WinForms
             throw new NotImplementedException();
         }
 
-        private EmailSetup GetOrCreateSetup()
-        {
-            if (UserConfigManager.Config.EmailSetup == null)
-            {
-                UserConfigManager.Config.EmailSetup = new EmailSetup();
-            }
-            return UserConfigManager.Config.EmailSetup;
-        }
-
         private void ShowWidgets()
         {
             int heightDiff = Height - panel1.Height;

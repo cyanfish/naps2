@@ -37,7 +37,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             }
         }
 
-        protected override string Scope => "https://outlook.office.com/mail.readwrite https://outlook.office.com/mail.send offline_access";
+        protected override string Scope => "https://outlook.office.com/mail.readwrite https://outlook.office.com/mail.send https://outlook.office.com/user.read offline_access";
 
         protected override string CodeEndpoint => "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
 
@@ -58,15 +58,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         public string GetEmailAddress()
         {
-            return "";
-            //var resp = GetAuthorized("https://www.googleapis.com/gmail/v1/users/me/profile");
-            //return resp.Value<string>("emailAddress");
+            var resp = GetAuthorized("https://outlook.office.com/api/v1.0/me");
+            return resp.Value<string>("Id");
         }
 
         public string UploadDraft(string messageRaw)
         {
-            var resp = PostAuthorized($"https://www.googleapis.com/upload/gmail/v1/users/{User}/drafts?uploadType=multipart", messageRaw, "message/rfc822");
-            return resp.Value<string>("id");
+            var resp = PostAuthorized("https://outlook.office.com/api/v1.0/me/messages", messageRaw, "application/json");
+            return resp.Value<string>("WebLink");
         }
 
         #endregion

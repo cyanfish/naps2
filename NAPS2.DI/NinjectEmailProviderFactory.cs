@@ -27,6 +27,8 @@ namespace NAPS2.DI
             {
                 case EmailProviderType.Gmail:
                     return kernel.Get<GmailEmailProvider>();
+                case EmailProviderType.OutlookWeb:
+                    return kernel.Get<OutlookWebEmailProvider>();
                 default:
                     return kernel.Get<MapiEmailProvider>();
             }

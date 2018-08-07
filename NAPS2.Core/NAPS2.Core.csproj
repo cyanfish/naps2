@@ -143,6 +143,7 @@
     <Compile Include="ImportExport\Email\EmailProviderType.cs" />
     <Compile Include="ImportExport\Email\EmailSetup.cs" />
     <Compile Include="ImportExport\Email\IEmailProviderFactory.cs" />
+    <Compile Include="ImportExport\Email\Oauth\OutlookWebEmailProvider.cs" />
     <Compile Include="ImportExport\Email\Oauth\OutlookWebOauthProvider.cs" />
     <Compile Include="ImportExport\Email\Oauth\GmailOauthProvider.cs" />
     <Compile Include="ImportExport\Email\Oauth\GmailEmailProvider.cs" />
