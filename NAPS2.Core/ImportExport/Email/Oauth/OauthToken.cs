@@ -10,9 +10,30 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OauthToken : IXmlSerializable
     {
-        public string AccessToken { get; set; }
+        private string accessToken;
+        private string accessTokenEncrypted;
+        private string refreshToken;
+        private string refreshTokenEncrypted;
+        
+        public string AccessToken
+        {
+            get => accessToken;
+            set
+            {
+                accessToken = value;
+                accessTokenEncrypted = null;
+            }
+        }
 
-        public string RefreshToken { get; set; }
+        public string RefreshToken
+        {
+            get => refreshToken;
+            set
+            {
+                refreshToken = value;
+                refreshTokenEncrypted = null;
+            }
+        }
 
         public DateTime Expiry { get; set; }
 
@@ -23,15 +44,19 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         public void ReadXml(XmlReader reader)
         {
-            AccessToken = SecureStorage.Decrypt(reader.ReadElementString());
-            RefreshToken = SecureStorage.Decrypt(reader.ReadElementString());
+            accessTokenEncrypted = reader.ReadElementString();
+            accessToken = SecureStorage.Decrypt(accessTokenEncrypted);
+            refreshTokenEncrypted = reader.ReadElementString();
+            refreshToken = SecureStorage.Decrypt(refreshTokenEncrypted);
             Expiry = DateTime.Parse(reader.ReadElementString());
         }
 
         public void WriteXml(XmlWriter writer)
         {
-            writer.WriteElementString("AccessToken", SecureStorage.Encrypt(AccessToken));
-            writer.WriteElementString("RefreshToken", SecureStorage.Encrypt(RefreshToken));
+            accessTokenEncrypted = accessTokenEncrypted ?? SecureStorage.Encrypt(accessToken);
+            refreshTokenEncrypted = refreshTokenEncrypted ?? SecureStorage.Encrypt(accessToken);
+            writer.WriteElementString("AccessToken", accessTokenEncrypted);
+            writer.WriteElementString("RefreshToken", refreshTokenEncrypted);
             writer.WriteElementString("Expiry", Expiry.ToString("O"));
         }
     }
