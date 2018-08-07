@@ -202,7 +202,7 @@
     <Compile Include="Scan\Twain\Legacy\TwainDefs.cs" />
     <Compile Include="Scan\Twain\Legacy\TwainLib.cs" />
     <Compile Include="Scan\Twain\TwainWrapper.cs" />
-    <Compile Include="Unsafe\UnsafeImageOps.cs" />
+    <Compile Include="Scan\Images\Transforms\UnsafeImageOps.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\ChaosMonkey.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />

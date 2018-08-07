@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NAPS2.Unsafe
+namespace NAPS2.Scan.Images.Transforms
 {
     public static class UnsafeImageOps
     {
