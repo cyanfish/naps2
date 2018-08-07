@@ -80,7 +80,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             cancelToken.ThrowIfCancellationRequested();
 
             // Trade the code in for a token
-            var resp = PostAuthorized(TokenEndpoint, new NameValueCollection
+            var resp = Post(TokenEndpoint, new NameValueCollection
             {
                 {"code", code},
                 {"client_id", ClientCreds.ClientId},
@@ -92,6 +92,24 @@ namespace NAPS2.ImportExport.Email.Oauth
             {
                 AccessToken = resp.Value<string>("access_token"),
                 RefreshToken = resp.Value<string>("refresh_token"),
+                Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
+            });
+        }
+
+        public void RefreshToken()
+        {
+            var resp = Post(TokenEndpoint, new NameValueCollection
+            {
+                {"refresh_token", Token.RefreshToken},
+                {"client_id", ClientCreds.ClientId},
+                {"client_secret", ClientCreds.ClientSecret},
+                {"grant_type", "refresh_token"}
+            });
+            // TODO: Handle failure
+            SaveToken(new OauthToken
+            {
+                AccessToken = resp.Value<string>("access_token"),
+                RefreshToken = Token.RefreshToken,
                 Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
             });
         }
@@ -116,11 +134,6 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected abstract void SaveToken(OauthToken token);
 
-        public void RefreshToken()
-        {
-            throw new NotImplementedException();
-        }
-
         protected JObject Get(string url)
         {
             using (var client = new WebClient())
@@ -139,9 +152,9 @@ namespace NAPS2.ImportExport.Email.Oauth
             }
         }
 
-        protected JObject PostAuthorized(string url, NameValueCollection values)
+        protected JObject Post(string url, NameValueCollection values)
         {
-            using (var client = AuthorizedClient())
+            using (var client = new WebClient())
             {
                 string response = Encoding.UTF8.GetString(client.UploadValues(url, "POST", values));
                 return JObject.Parse(response);
@@ -164,8 +177,10 @@ namespace NAPS2.ImportExport.Email.Oauth
             var token = Token;
             if (token != null)
             {
-                // TODO: Refresh mechanism
-                // Maybe if <10 mins until expiry
+                if (token.Expiry < DateTime.Now + TimeSpan.FromMinutes(10))
+                {
+                    RefreshToken();
+                }
                 client.Headers.Add("Authorization", $"Bearer {token.AccessToken}");
             }
             return client;
