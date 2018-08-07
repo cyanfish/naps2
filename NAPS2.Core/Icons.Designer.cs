@@ -423,6 +423,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap email_setting {
+            get {
+                object obj = ResourceManager.GetObject("email_setting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap file_extension_pdf {
             get {
                 object obj = ResourceManager.GetObject("file_extension_pdf", resourceCulture);
@@ -486,6 +496,16 @@ namespace NAPS2 {
         internal static System.Drawing.Bitmap information {
             get {
                 object obj = ResourceManager.GetObject("information", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mail_yellow {
+            get {
+                object obj = ResourceManager.GetObject("mail_yellow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

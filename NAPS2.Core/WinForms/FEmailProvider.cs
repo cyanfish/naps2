@@ -43,7 +43,7 @@ namespace NAPS2.WinForms
                 providerWidgets.Add(new EmailProviderWidget
                 {
                     ProviderType = EmailProviderType.System,
-                    ProviderIcon = systemEmailClients.GetIcon(clientName),
+                    ProviderIcon = systemEmailClients.GetIcon(clientName) ?? Icons.mail_yellow,
                     ProviderName = clientName,
                     ClickAction = () => ChooseSystem(clientName)
                 });
@@ -74,7 +74,7 @@ namespace NAPS2.WinForms
             providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.CustomSmtp,
-                ProviderIcon = null,
+                ProviderIcon = Icons.email_setting,
                 ProviderName = EmailProviderType.CustomSmtp.Description(),
                 ClickAction = ChooseCustomSmtp
             });
