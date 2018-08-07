@@ -7,8 +7,6 @@ using NAPS2.Config;
 using NAPS2.Host;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
-using NAPS2.ImportExport.Email.Imap;
-using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;

@@ -6,7 +6,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using NAPS2.Util;
 
-namespace NAPS2.ImportExport.Email.Imap
+namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OauthToken : IXmlSerializable
     {

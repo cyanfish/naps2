@@ -7,7 +7,7 @@ using MailKit;
 using MimeKit;
 using NAPS2.Config;
 
-namespace NAPS2.ImportExport.Email.Imap
+namespace NAPS2.ImportExport.Email.Oauth
 {
     public class GmailEmailProvider : MimeEmailProvider
     {

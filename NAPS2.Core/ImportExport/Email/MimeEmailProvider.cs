@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Text;
-using MailKit;
-using MailKit.Net.Imap;
-using MailKit.Security;
 using MimeKit;
 
-namespace NAPS2.ImportExport.Email.Imap
+namespace NAPS2.ImportExport.Email
 {
     public abstract class MimeEmailProvider : IEmailProvider
     {

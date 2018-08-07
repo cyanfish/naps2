@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NAPS2.ImportExport.Email.Imap
+namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OauthClientCreds
     {

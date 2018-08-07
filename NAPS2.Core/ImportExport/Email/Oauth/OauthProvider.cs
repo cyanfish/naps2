@@ -7,11 +7,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 
-namespace NAPS2.ImportExport.Email.Imap
+namespace NAPS2.ImportExport.Email.Oauth
 {
     public abstract class OauthProvider
     {

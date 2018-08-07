@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using NAPS2.ImportExport.Email;
-using NAPS2.ImportExport.Email.Imap;
+using NAPS2.ImportExport.Email.Oauth;
 using NAPS2.Scan;
 
 namespace NAPS2.WinForms

@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.ImportExport.Email.Imap;
+using NAPS2.ImportExport.Email.Oauth;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
