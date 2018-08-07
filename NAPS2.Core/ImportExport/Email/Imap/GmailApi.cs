@@ -10,84 +10,79 @@ using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Imap
 {
-    public class GmailApi : IOauthProvider
+    public partial class GmailApi : OauthApi, IOauthProvider
     {
-        private const string OAUTH_URL_FORMAT =
-            "https://accounts.google.com/o/oauth2/v2/auth?scope={0}&response_type=code&state={1}&redirect_uri={2}&client_id={3}";
-
-        private const string OAUTH_SCOPE = "https://mail.google.com/"; //"https://www.googleapis.com/auth/gmail.compose";
-
-        private const string OAUTH_EXCHANGE_URL = "https://www.googleapis.com/oauth2/v4/token";
-
-        private const string PROFILE_URL = "https://www.googleapis.com/gmail/v1/users/me/profile";
+        private const string OAUTH_SCOPE = "https://www.googleapis.com/auth/gmail.compose";
 
         private readonly IUserConfigManager userConfigManager;
+
+        private OauthClientCreds creds;
 
         public GmailApi(IUserConfigManager userConfigManager)
         {
             this.userConfigManager = userConfigManager;
         }
 
-        public bool HasClientCreds => ClientId != null;
+        public override OauthToken Token => userConfigManager.Config.EmailSetup?.GmailToken;
 
-        private JObject CredData
+        public string UserId => userConfigManager.Config.EmailSetup?.GmailUser;
+
+        public bool HasClientCreds => Creds.ClientId != null;
+
+        private OauthClientCreds Creds
         {
             get
             {
-                var credString = Encoding.UTF8.GetString(ClientCreds.google_credentials);
-                var credObj = JObject.Parse(credString);
-                return credObj.Value<JObject>("installed");
+                if (creds == null)
+                {
+                    var credObj = JObject.Parse(Encoding.UTF8.GetString(ClientCreds.google_credentials));
+                    var installed = credObj.Value<JObject>("installed");
+                    creds = new OauthClientCreds(installed?.Value<string>("client_id"), installed?.Value<string>("client_secret"));
+                }
+                return creds;
             }
         }
-
-        private string ClientId => CredData?.Value<string>("client_id");
-
-        private string ClientSecret => CredData?.Value<string>("client_secret");
 
         public string OauthUrl(string state, string redirectUri)
         {
             // TODO: Check tls settings as in FDownloadProgress
-            return string.Format(OAUTH_URL_FORMAT, OAUTH_SCOPE, state, redirectUri, ClientId);
+            return "https://accounts.google.com/o/oauth2/v2/auth?"
+                   + $"scope={OAUTH_SCOPE}&response_type=code&state={state}&redirect_uri={redirectUri}&client_id={Creds.ClientId}";
         }
 
         public OauthToken AcquireToken(string code, string redirectUri)
         {
-            using (var client = new WebClient())
+            var resp = Post("https://www.googleapis.com/oauth2/v4/token", new NameValueCollection
             {
-                var data = new NameValueCollection
-                {
-                    {"code", code},
-                    {"client_id", ClientId},
-                    {"client_secret", ClientSecret},
-                    {"redirect_uri", redirectUri},
-                    {"grant_type", "authorization_code"}
-                };
-                string response = Encoding.UTF8.GetString(client.UploadValues(OAUTH_EXCHANGE_URL, "POST", data));
-                var obj = JObject.Parse(response);
-                return new OauthToken
-                {
-                    AccessToken = obj.Value<string>("access_token"),
-                    RefreshToken = obj.Value<string>("refresh_token"),
-                    Expiry = DateTime.Now.AddSeconds(obj.Value<int>("expires_in"))
-                };
-            }
+                {"code", code},
+                {"client_id", Creds.ClientId},
+                {"client_secret", Creds.ClientSecret},
+                {"redirect_uri", redirectUri},
+                {"grant_type", "authorization_code"}
+            });
+            return new OauthToken
+            {
+                AccessToken = resp.Value<string>("access_token"),
+                RefreshToken = resp.Value<string>("refresh_token"),
+                Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
+            };
         }
 
-        public void RefreshToken(OauthToken token)
+        public void RefreshToken()
         {
             throw new NotImplementedException();
         }
 
-        public string GetEmail(OauthToken token)
+        public string GetEmail()
         {
-            using (var client = new WebClient())
-            {
-                // TODO: Refresh mechanism
-                client.Headers.Add("Authorization", $"Bearer {token.AccessToken}");
-                string response = client.DownloadString(PROFILE_URL);
-                var obj = JObject.Parse(response);
-                return obj.Value<string>("emailAddress");
-            }
+            var resp = Get("https://www.googleapis.com/gmail/v1/users/me/profile");
+            return resp.Value<string>("emailAddress");
+        }
+
+        public string UploadDraft(string messageRaw)
+        {
+            var resp = Post($"https://www.googleapis.com/upload/gmail/v1/users/{UserId}/drafts?uploadType=multipart", messageRaw, "message/rfc822");
+            return resp.Value<string>("id");
         }
     }
 }

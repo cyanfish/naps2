@@ -4,26 +4,29 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using MailKit;
+using MimeKit;
 using NAPS2.Config;
 
 namespace NAPS2.ImportExport.Email.Imap
 {
-    public class GmailEmailProvider : ImapEmailProvider
+    public class GmailEmailProvider : MimeEmailProvider
     {
         private readonly IUserConfigManager userConfigManager;
+        private readonly GmailApi gmailApi;
 
-        public GmailEmailProvider(IUserConfigManager userConfigManager)
+        public GmailEmailProvider(IUserConfigManager userConfigManager, GmailApi gmailApi)
         {
             this.userConfigManager = userConfigManager;
+            this.gmailApi = gmailApi;
         }
 
-        protected override string Host => "imap.gmail.com";
+        protected string Host => "imap.gmail.com";
 
-        protected override string User => userConfigManager.Config.EmailSetup?.GmailUser;
+        protected string User => userConfigManager.Config.EmailSetup?.GmailUser;
 
-        protected override string AccessToken => userConfigManager.Config.EmailSetup?.GmailToken?.AccessToken;
+        protected string AccessToken => userConfigManager.Config.EmailSetup?.GmailToken?.AccessToken;
 
-        protected override void OpenDraft(IMailFolder drafts, UniqueId messageId)
+        protected void OpenDraft(IMailFolder drafts, UniqueId messageId)
         {
             drafts.Open(FolderAccess.ReadOnly);
             var gmailId = drafts.Fetch(new List<UniqueId> { messageId }, MessageSummaryItems.GMailMessageId).FirstOrDefault()?.GMailMessageId;
@@ -31,6 +34,11 @@ namespace NAPS2.ImportExport.Email.Imap
                 ? $"https://mail.google.com/mail/?authuser={User}#drafts" // This shouldn't happen, but handle it anyway
                 : $"https://mail.google.com/mail/?authuser={User}#drafts?compose={gmailId:x}";
             Process.Start(url);
+        }
+
+        protected override void SendMimeMessage(MimeMessage message)
+        {
+            gmailApi.UploadDraft(message.ToString());//Convert.ToBase64String(Encoding.UTF8.GetBytes(message.ToString()))
         }
     }
 }

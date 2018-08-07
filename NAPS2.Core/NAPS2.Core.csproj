@@ -145,8 +145,10 @@
     <Compile Include="ImportExport\Email\IEmailProviderFactory.cs" />
     <Compile Include="ImportExport\Email\Imap\GmailApi.cs" />
     <Compile Include="ImportExport\Email\Imap\GmailEmailProvider.cs" />
-    <Compile Include="ImportExport\Email\Imap\ImapEmailProvider.cs" />
     <Compile Include="ImportExport\Email\Imap\IOauthProvider.cs" />
+    <Compile Include="ImportExport\Email\Imap\MimeEmailProvider.cs" />
+    <Compile Include="ImportExport\Email\Imap\OauthApi.cs" />
+    <Compile Include="ImportExport\Email\Imap\OauthClientCreds.cs" />
     <Compile Include="ImportExport\Email\Imap\OauthToken.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\Images\TiffCompression.cs" />

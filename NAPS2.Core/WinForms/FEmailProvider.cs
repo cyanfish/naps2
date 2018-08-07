@@ -100,7 +100,7 @@ namespace NAPS2.WinForms
                 var setup = GetOrCreateSetup();
                 setup.ProviderType = EmailProviderType.Gmail;
                 setup.GmailToken = authForm.Token;
-                setup.GmailUser = gmailApi.GetEmail(authForm.Token);
+                setup.GmailUser = gmailApi.GetEmail();
                 UserConfigManager.Save();
                 DialogResult = DialogResult.OK;
                 Close();

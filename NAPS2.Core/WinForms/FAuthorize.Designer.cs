@@ -36,47 +36,32 @@
             // 
             // lblWaiting
             // 
-            this.lblWaiting.AutoSize = true;
-            this.lblWaiting.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.lblWaiting, "lblWaiting");
             this.lblWaiting.Name = "lblWaiting";
-            this.lblWaiting.Size = new System.Drawing.Size(130, 13);
-            this.lblWaiting.TabIndex = 0;
-            this.lblWaiting.Text = "Waiting for authorization...";
             // 
             // linkTryAgain
             // 
-            this.linkTryAgain.AutoSize = true;
-            this.linkTryAgain.Location = new System.Drawing.Point(12, 25);
+            resources.ApplyResources(this.linkTryAgain, "linkTryAgain");
             this.linkTryAgain.Name = "linkTryAgain";
-            this.linkTryAgain.Size = new System.Drawing.Size(51, 13);
-            this.linkTryAgain.TabIndex = 1;
             this.linkTryAgain.TabStop = true;
-            this.linkTryAgain.Text = "Try again";
             this.linkTryAgain.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkTryAgain_LinkClicked);
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(169, 12);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // FAuthorize
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(256, 47);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.linkTryAgain);
             this.Controls.Add(this.lblWaiting);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FAuthorize";
-            this.Text = "Authorize";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FAuthorize_FormClosed);
             this.Load += new System.EventHandler(this.FAuthorize_Load);
             this.ResumeLayout(false);

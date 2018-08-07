@@ -7,10 +7,12 @@ namespace NAPS2.ImportExport.Email.Imap
 {
     public interface IOauthProvider
     {
+        OauthToken Token { get; }
+
         string OauthUrl(string state, string redirectUri);
 
         OauthToken AcquireToken(string code, string redirectUri);
 
-        void RefreshToken(OauthToken token);
+        void RefreshToken();
     }
 }
