@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblWaiting.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
+    <value>12, 17</value>
   </data>
   <data name="lblWaiting.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 13</value>
@@ -144,33 +144,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblWaiting.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="linkTryAgain.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="linkTryAgain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 25</value>
-  </data>
-  <data name="linkTryAgain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
-  </data>
-  <data name="linkTryAgain.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="linkTryAgain.Text" xml:space="preserve">
-    <value>Try again</value>
-  </data>
-  <data name="&gt;&gt;linkTryAgain.Name" xml:space="preserve">
-    <value>linkTryAgain</value>
-  </data>
-  <data name="&gt;&gt;linkTryAgain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;linkTryAgain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;linkTryAgain.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -536,6 +509,6 @@
     <value>FAuthorize</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.41756, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.37340, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -1,6 +1,10 @@
-﻿namespace NAPS2.ImportExport.Email.Imap
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NAPS2.ImportExport.Email.Imap
 {
-    internal class OauthClientCreds
+    public class OauthClientCreds
     {
         public OauthClientCreds(string clientId, string clientSecret)
         {

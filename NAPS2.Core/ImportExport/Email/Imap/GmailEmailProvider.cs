@@ -12,12 +12,12 @@ namespace NAPS2.ImportExport.Email.Imap
     public class GmailEmailProvider : MimeEmailProvider
     {
         private readonly IUserConfigManager userConfigManager;
-        private readonly GmailApi gmailApi;
+        private readonly GmailOauthProvider gmailOauthProvider;
 
-        public GmailEmailProvider(IUserConfigManager userConfigManager, GmailApi gmailApi)
+        public GmailEmailProvider(IUserConfigManager userConfigManager, GmailOauthProvider gmailOauthProvider)
         {
             this.userConfigManager = userConfigManager;
-            this.gmailApi = gmailApi;
+            this.gmailOauthProvider = gmailOauthProvider;
         }
 
         protected string Host => "imap.gmail.com";
@@ -38,7 +38,7 @@ namespace NAPS2.ImportExport.Email.Imap
 
         protected override void SendMimeMessage(MimeMessage message)
         {
-            gmailApi.UploadDraft(message.ToString());//Convert.ToBase64String(Encoding.UTF8.GetBytes(message.ToString()))
+            gmailOauthProvider.UploadDraft(message.ToString());//Convert.ToBase64String(Encoding.UTF8.GetBytes(message.ToString()))
         }
     }
 }

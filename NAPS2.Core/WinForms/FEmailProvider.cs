@@ -15,17 +15,15 @@ namespace NAPS2.WinForms
 {
     public partial class FEmailProvider : FormBase
     {
-        private readonly IEmailProviderFactory emailProviderFactory;
-        private readonly GmailApi gmailApi;
+        private readonly GmailOauthProvider gmailOauthProvider;
 
         private List<EmailProviderWidget> providerWidgets;
         private string[] systemClientNames;
         private string defaultSystemClientName;
 
-        public FEmailProvider(IEmailProviderFactory emailProviderFactory, GmailApi gmailApi)
+        public FEmailProvider(GmailOauthProvider gmailOauthProvider)
         {
-            this.emailProviderFactory = emailProviderFactory;
-            this.gmailApi = gmailApi;
+            this.gmailOauthProvider = gmailOauthProvider;
 
             InitializeComponent();
         }
@@ -93,14 +91,12 @@ namespace NAPS2.WinForms
         private void ChooseGmail()
         {
             var authForm = FormFactory.Create<FAuthorize>();
-            authForm.OauthProvider = gmailApi;
+            authForm.OauthProvider = gmailOauthProvider;
             authForm.ShowDialog();
             if (authForm.DialogResult == DialogResult.OK)
             {
                 var setup = GetOrCreateSetup();
                 setup.ProviderType = EmailProviderType.Gmail;
-                setup.GmailToken = authForm.Token;
-                setup.GmailUser = gmailApi.GetEmail();
                 UserConfigManager.Save();
                 DialogResult = DialogResult.OK;
                 Close();

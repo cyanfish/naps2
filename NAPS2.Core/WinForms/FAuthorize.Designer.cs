@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAuthorize));
             this.lblWaiting = new System.Windows.Forms.Label();
-            this.linkTryAgain = new System.Windows.Forms.LinkLabel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -38,13 +37,6 @@
             // 
             resources.ApplyResources(this.lblWaiting, "lblWaiting");
             this.lblWaiting.Name = "lblWaiting";
-            // 
-            // linkTryAgain
-            // 
-            resources.ApplyResources(this.linkTryAgain, "linkTryAgain");
-            this.linkTryAgain.Name = "linkTryAgain";
-            this.linkTryAgain.TabStop = true;
-            this.linkTryAgain.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkTryAgain_LinkClicked);
             // 
             // btnCancel
             // 
@@ -59,7 +51,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.linkTryAgain);
             this.Controls.Add(this.lblWaiting);
             this.Name = "FAuthorize";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FAuthorize_FormClosed);
@@ -72,7 +63,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblWaiting;
-        private System.Windows.Forms.LinkLabel linkTryAgain;
         private System.Windows.Forms.Button btnCancel;
     }
 }
