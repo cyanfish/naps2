@@ -10,13 +10,13 @@ using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Imap
 {
-    public class GmailOauthProvider : OauthProvider
+    public class OutlookWebOauthProvider : OauthProvider
     {
         private readonly IUserConfigManager userConfigManager;
 
         private OauthClientCreds creds;
 
-        public GmailOauthProvider(IUserConfigManager userConfigManager)
+        public OutlookWebOauthProvider(IUserConfigManager userConfigManager)
         {
             this.userConfigManager = userConfigManager;
         }
@@ -25,22 +25,22 @@ namespace NAPS2.ImportExport.Email.Imap
 
         public override OauthToken Token
         {
-            get => userConfigManager.Config.EmailSetup?.GmailToken;
+            get => userConfigManager.Config.EmailSetup?.OutlookWebToken;
             protected set
             {
                 userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
-                userConfigManager.Config.EmailSetup.GmailToken = value;
+                userConfigManager.Config.EmailSetup.OutlookWebToken = value;
                 userConfigManager.Save();
             }
         }
 
         public override string User
         {
-            get => userConfigManager.Config.EmailSetup?.GmailUser;
+            get => userConfigManager.Config.EmailSetup?.OutlookWebUser;
             protected set
             {
                 userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
-                userConfigManager.Config.EmailSetup.GmailUser = value;
+                userConfigManager.Config.EmailSetup.OutlookWebUser = value;
                 userConfigManager.Save();
             }
         }
@@ -51,19 +51,18 @@ namespace NAPS2.ImportExport.Email.Imap
             {
                 if (creds == null)
                 {
-                    var credObj = JObject.Parse(Encoding.UTF8.GetString(NAPS2.ClientCreds.google_credentials));
-                    var installed = credObj.Value<JObject>("installed");
-                    creds = new OauthClientCreds(installed?.Value<string>("client_id"), installed?.Value<string>("client_secret"));
+                    var credObj = JObject.Parse(Encoding.UTF8.GetString(NAPS2.ClientCreds.microsoft_credentials));
+                    creds = new OauthClientCreds(credObj.Value<string>("client_id"), credObj.Value<string>("client_secret"));
                 }
                 return creds;
             }
         }
 
-        protected override string Scope => "https://www.googleapis.com/auth/gmail.compose";
+        protected override string Scope => "https://outlook.office.com/mail.readwrite https://outlook.office.com/mail.send offline_access";
 
-        protected override string CodeEndpoint => "https://accounts.google.com/o/oauth2/v2/auth";
+        protected override string CodeEndpoint => "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
 
-        protected override string TokenEndpoint => "https://www.googleapis.com/oauth2/v4/token";
+        protected override string TokenEndpoint => "https://login.microsoftonline.com/common/oauth2/v2.0/token";
 
         #endregion
 
@@ -71,8 +70,9 @@ namespace NAPS2.ImportExport.Email.Imap
 
         protected override string GetUser()
         {
-            var resp = GetAuthorized("https://www.googleapis.com/gmail/v1/users/me/profile");
-            return resp.Value<string>("emailAddress");
+            return "";
+            //var resp = GetAuthorized("https://www.googleapis.com/gmail/v1/users/me/profile");
+            //return resp.Value<string>("emailAddress");
         }
 
         public string UploadDraft(string messageRaw)

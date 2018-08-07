@@ -12,6 +12,10 @@ namespace NAPS2.Util
 
         public static string Encrypt(string plaintext)
         {
+            if (plaintext == null)
+            {
+                return null;
+            }
             byte[] salt = new byte[8];
             CryptoRandom.Value.GetBytes(salt);
             // TODO: This won't work for portable...
@@ -21,6 +25,10 @@ namespace NAPS2.Util
 
         public static string Decrypt(string coded)
         {
+            if (coded == null)
+            {
+                return null;
+            }
             string[] parts = coded.Split('-');
             if (parts.Length != 3 || parts[0] != "encrypted")
             {

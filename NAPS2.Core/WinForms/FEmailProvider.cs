@@ -16,14 +16,16 @@ namespace NAPS2.WinForms
     public partial class FEmailProvider : FormBase
     {
         private readonly GmailOauthProvider gmailOauthProvider;
+        private readonly OutlookWebOauthProvider outlookWebOauthProvider;
 
         private List<EmailProviderWidget> providerWidgets;
         private string[] systemClientNames;
         private string defaultSystemClientName;
 
-        public FEmailProvider(GmailOauthProvider gmailOauthProvider)
+        public FEmailProvider(GmailOauthProvider gmailOauthProvider, OutlookWebOauthProvider outlookWebOauthProvider)
         {
             this.gmailOauthProvider = gmailOauthProvider;
+            this.outlookWebOauthProvider = outlookWebOauthProvider;
 
             InitializeComponent();
         }
@@ -44,21 +46,30 @@ namespace NAPS2.WinForms
                     ClickAction = () => ChooseSystem(clientName)
                 });
             }
-            providerWidgets.Add(new EmailProviderWidget
+
+            if (gmailOauthProvider.HasClientCreds)
             {
-                ProviderType = EmailProviderType.Gmail,
-                ProviderIcon = Icons.gmail,
-                ProviderName = EmailProviderType.Gmail.Description(),
-                ClickAction = ChooseGmail
-                
-            });
-            providerWidgets.Add(new EmailProviderWidget
+                providerWidgets.Add(new EmailProviderWidget
+                {
+                    ProviderType = EmailProviderType.Gmail,
+                    ProviderIcon = Icons.gmail,
+                    ProviderName = EmailProviderType.Gmail.Description(),
+                    ClickAction = ChooseGmail
+
+                });
+            }
+
+            if (outlookWebOauthProvider.HasClientCreds)
             {
-                ProviderType = EmailProviderType.OutlookWeb,
-                ProviderIcon = Icons.outlookweb,
-                ProviderName = EmailProviderType.OutlookWeb.Description(),
-                ClickAction = ChooseOutlookWeb
-            });
+                providerWidgets.Add(new EmailProviderWidget
+                {
+                    ProviderType = EmailProviderType.OutlookWeb,
+                    ProviderIcon = Icons.outlookweb,
+                    ProviderName = EmailProviderType.OutlookWeb.Description(),
+                    ClickAction = ChooseOutlookWeb
+                });
+            }
+
             providerWidgets.Add(new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.CustomSmtp,
@@ -96,16 +107,32 @@ namespace NAPS2.WinForms
             if (authForm.DialogResult == DialogResult.OK)
             {
                 var setup = GetOrCreateSetup();
+                // TODO: Maybe combine setting Token, User, and ProviderType in an abstract OauthProvider method.
                 setup.ProviderType = EmailProviderType.Gmail;
                 UserConfigManager.Save();
                 DialogResult = DialogResult.OK;
                 Close();
+                // TODO: Refocus app after the user finishes interaction (which form though?)
+                // TODO: Have multiple progress messages in FAuthorize
             }
         }
 
         private void ChooseOutlookWeb()
         {
-            throw new NotImplementedException();
+            var authForm = FormFactory.Create<FAuthorize>();
+            authForm.OauthProvider = outlookWebOauthProvider;
+            authForm.ShowDialog();
+            if (authForm.DialogResult == DialogResult.OK)
+            {
+                var setup = GetOrCreateSetup();
+                // TODO: Maybe combine setting Token, User, and ProviderType in an abstract OauthProvider method.
+                setup.ProviderType = EmailProviderType.OutlookWeb;
+                UserConfigManager.Save();
+                DialogResult = DialogResult.OK;
+                Close();
+                // TODO: Refocus app after the user finishes interaction (which form though?)
+                // TODO: Have multiple progress messages in FAuthorize
+            }
         }
 
         private void ChooseCustomSmtp()

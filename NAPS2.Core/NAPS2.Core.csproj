@@ -143,6 +143,7 @@
     <Compile Include="ImportExport\Email\EmailProviderType.cs" />
     <Compile Include="ImportExport\Email\EmailSetup.cs" />
     <Compile Include="ImportExport\Email\IEmailProviderFactory.cs" />
+    <Compile Include="ImportExport\Email\Imap\OutlookWebOauthProvider.cs" />
     <Compile Include="ImportExport\Email\Imap\GmailOauthProvider.cs" />
     <Compile Include="ImportExport\Email\Imap\GmailEmailProvider.cs" />
     <Compile Include="ImportExport\Email\Imap\MimeEmailProvider.cs" />
@@ -5227,6 +5228,7 @@
     <None Include="Lang\po\vi.po" />
     <None Include="Lang\po\zh-CHS.po" />
     <None Include="Lang\po\zh-TW.po" />
+    <None Include="microsoft.credentials.json" />
     <None Include="packages.config" />
     <None Include="Icons\accept-small.png" />
   </ItemGroup>
@@ -5343,6 +5345,9 @@
   <PropertyGroup>
     <PreBuildEvent>If Not Exist $(ProjectDir)google.credentials.json (
 echo {} &gt; $(ProjectDir)google.credentials.json
+)
+If Not Exist $(ProjectDir)microsoft.credentials.json (
+echo { client_id: null, client_secret: null } &gt; $(ProjectDir)microsoft.credentials.json
 )</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

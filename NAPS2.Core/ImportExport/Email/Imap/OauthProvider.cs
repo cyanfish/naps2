@@ -15,11 +15,15 @@ namespace NAPS2.ImportExport.Email.Imap
 {
     public abstract class OauthProvider
     {
+        private static readonly int[] PortNumbers = { 50086, 53893, 58985, 49319, 50320 };
+
         public abstract OauthToken Token { get; protected set; }
 
         public abstract string User { get; protected set; }
 
-        protected abstract OauthClientCreds Creds { get; }
+        public bool HasClientCreds => ClientCreds.ClientId != null;
+
+        protected abstract OauthClientCreds ClientCreds { get; }
 
         protected abstract string CodeEndpoint { get; }
 
@@ -33,7 +37,6 @@ namespace NAPS2.ImportExport.Email.Imap
             byte[] buffer = new byte[16];
             SecureStorage.CryptoRandom.Value.GetBytes(buffer);
             string state = string.Join("", buffer.Select(b => b.ToString("x")));
-            // There's a possible race condition here with the port, but meh
             int port = GetUnusedPort();
             var redirectUri = $"http://127.0.0.1:{port}/";
             
@@ -48,7 +51,7 @@ namespace NAPS2.ImportExport.Email.Imap
             // TODO: Catch exception on abort
 
             // Open the user interface (which will redirect to our localhost listener)
-            var url = $"{CodeEndpoint}?scope={Scope}&response_type=code&state={state}&redirect_uri={redirectUri}&client_id={Creds.ClientId}";
+            var url = $"{CodeEndpoint}?scope={Scope}&response_type=code&state={state}&redirect_uri={redirectUri}&client_id={ClientCreds.ClientId}";
             Process.Start(url);
 
             // Wait for the authorization code to be sent to the local socket
@@ -81,8 +84,8 @@ namespace NAPS2.ImportExport.Email.Imap
             var resp = PostAuthorized(TokenEndpoint, new NameValueCollection
             {
                 {"code", code},
-                {"client_id", Creds.ClientId},
-                {"client_secret", Creds.ClientSecret},
+                {"client_id", ClientCreds.ClientId},
+                {"client_secret", ClientCreds.ClientSecret},
                 {"redirect_uri", redirectUri},
                 {"grant_type", "authorization_code"}
             });
@@ -99,11 +102,20 @@ namespace NAPS2.ImportExport.Email.Imap
 
         private static int GetUnusedPort()
         {
-            var listener = new TcpListener(IPAddress.Any, 0);
-            listener.Start();
-            var port = ((IPEndPoint)listener.LocalEndpoint).Port;
-            listener.Stop();
-            return port;
+            foreach (var port in PortNumbers)
+            {
+                try
+                {
+                    var listener = new TcpListener(IPAddress.Any, port);
+                    listener.Start();
+                    listener.Stop();
+                    return port;
+                }
+                catch (SocketException)
+                {
+                }
+            }
+            throw new InvalidOperationException("No available port");
         }
 
         protected abstract string GetUser();
@@ -157,6 +169,7 @@ namespace NAPS2.ImportExport.Email.Imap
             if (token != null)
             {
                 // TODO: Refresh mechanism
+                // Maybe if <10 mins until expiry
                 client.Headers.Add("Authorization", $"Bearer {token.AccessToken}");
             }
             return client;

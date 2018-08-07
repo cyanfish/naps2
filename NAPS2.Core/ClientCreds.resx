@@ -121,4 +121,7 @@
   <data name="google_credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>google.credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="microsoft_credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>microsoft.credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
