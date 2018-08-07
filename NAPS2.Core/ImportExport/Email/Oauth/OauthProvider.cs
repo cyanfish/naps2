@@ -16,9 +16,9 @@ namespace NAPS2.ImportExport.Email.Oauth
     {
         private static readonly int[] PortNumbers = { 50086, 53893, 58985, 49319, 50320 };
 
-        public abstract OauthToken Token { get; protected set; }
+        public abstract OauthToken Token { get; }
 
-        public abstract string User { get; protected set; }
+        public abstract string User { get; }
 
         public bool HasClientCreds => ClientCreds.ClientId != null;
 
@@ -38,7 +38,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             string state = string.Join("", buffer.Select(b => b.ToString("x")));
             int port = GetUnusedPort();
             var redirectUri = $"http://127.0.0.1:{port}/";
-            
+
             // Listen on the redirect uri for the code
             var listener = new HttpListener();
             listener.Prefixes.Add(redirectUri);
@@ -66,7 +66,7 @@ namespace NAPS2.ImportExport.Email.Oauth
                 response.ContentLength64 = responseBytes.Length;
                 response.OutputStream.Write(responseBytes, 0, responseBytes.Length);
                 response.OutputStream.Close();
-                
+
                 // Validate the state (standard oauth2 security)
                 string requestState = queryString.Get("state");
                 if (requestState == state)
@@ -88,15 +88,12 @@ namespace NAPS2.ImportExport.Email.Oauth
                 {"redirect_uri", redirectUri},
                 {"grant_type", "authorization_code"}
             });
-            Token = new OauthToken
+            SaveToken(new OauthToken
             {
                 AccessToken = resp.Value<string>("access_token"),
                 RefreshToken = resp.Value<string>("refresh_token"),
                 Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
-            };
-
-            // Get the user id
-            User = GetUser();
+            });
         }
 
         private static int GetUnusedPort()
@@ -117,7 +114,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             throw new InvalidOperationException("No available port");
         }
 
-        protected abstract string GetUser();
+        protected abstract void SaveToken(OauthToken token);
 
         public void RefreshToken()
         {

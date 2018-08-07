@@ -20,27 +20,9 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         #region Authorization
 
-        public override OauthToken Token
-        {
-            get => userConfigManager.Config.EmailSetup?.OutlookWebToken;
-            protected set
-            {
-                userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
-                userConfigManager.Config.EmailSetup.OutlookWebToken = value;
-                userConfigManager.Save();
-            }
-        }
+        public override OauthToken Token => userConfigManager.Config.EmailSetup?.OutlookWebToken;
 
-        public override string User
-        {
-            get => userConfigManager.Config.EmailSetup?.OutlookWebUser;
-            protected set
-            {
-                userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
-                userConfigManager.Config.EmailSetup.OutlookWebUser = value;
-                userConfigManager.Save();
-            }
-        }
+        public override string User => userConfigManager.Config.EmailSetup?.OutlookWebUser;
 
         protected override OauthClientCreds ClientCreds
         {
@@ -61,11 +43,20 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override string TokenEndpoint => "https://login.microsoftonline.com/common/oauth2/v2.0/token";
 
+        protected override void SaveToken(OauthToken token)
+        {
+            userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
+            userConfigManager.Config.EmailSetup.OutlookWebToken = token;
+            userConfigManager.Config.EmailSetup.OutlookWebUser = GetEmailAddress();
+            userConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.OutlookWeb;
+            userConfigManager.Save();
+        }
+
         #endregion
 
         #region Api Methods
 
-        protected override string GetUser()
+        public string GetEmailAddress()
         {
             return "";
             //var resp = GetAuthorized("https://www.googleapis.com/gmail/v1/users/me/profile");

@@ -20,27 +20,9 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         #region Authorization
 
-        public override OauthToken Token
-        {
-            get => userConfigManager.Config.EmailSetup?.GmailToken;
-            protected set
-            {
-                userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
-                userConfigManager.Config.EmailSetup.GmailToken = value;
-                userConfigManager.Save();
-            }
-        }
+        public override OauthToken Token => userConfigManager.Config.EmailSetup?.GmailToken;
 
-        public override string User
-        {
-            get => userConfigManager.Config.EmailSetup?.GmailUser;
-            protected set
-            {
-                userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
-                userConfigManager.Config.EmailSetup.GmailUser = value;
-                userConfigManager.Save();
-            }
-        }
+        public override string User => userConfigManager.Config.EmailSetup?.GmailUser;
 
         protected override OauthClientCreds ClientCreds
         {
@@ -62,11 +44,20 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override string TokenEndpoint => "https://www.googleapis.com/oauth2/v4/token";
 
+        protected override void SaveToken(OauthToken token)
+        {
+            userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
+            userConfigManager.Config.EmailSetup.GmailToken = token;
+            userConfigManager.Config.EmailSetup.GmailUser = GetEmailAddress();
+            userConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.Gmail;
+            userConfigManager.Save();
+        }
+
         #endregion
 
         #region Api Methods
 
-        protected override string GetUser()
+        public string GetEmailAddress()
         {
             var resp = GetAuthorized("https://www.googleapis.com/gmail/v1/users/me/profile");
             return resp.Value<string>("emailAddress");

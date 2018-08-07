@@ -54,8 +54,7 @@ namespace NAPS2.WinForms
                     ProviderType = EmailProviderType.Gmail,
                     ProviderIcon = Icons.gmail,
                     ProviderName = EmailProviderType.Gmail.Description(),
-                    ClickAction = ChooseGmail
-
+                    ClickAction = () => ChooseOauth(gmailOauthProvider)
                 });
             }
 
@@ -66,7 +65,7 @@ namespace NAPS2.WinForms
                     ProviderType = EmailProviderType.OutlookWeb,
                     ProviderIcon = Icons.outlookweb,
                     ProviderName = EmailProviderType.OutlookWeb.Description(),
-                    ClickAction = ChooseOutlookWeb
+                    ClickAction = () => ChooseOauth(outlookWebOauthProvider)
                 });
             }
 
@@ -85,49 +84,27 @@ namespace NAPS2.WinForms
                 providerWidgets.Remove(defaultWidget);
                 providerWidgets.Insert(0, defaultWidget);
             }
-            
+
             ShowWidgets();
         }
 
         private void ChooseSystem(string clientName)
         {
-            var setup = GetOrCreateSetup();
-            setup.ProviderType = EmailProviderType.System;
-            setup.SystemProviderName = clientName == defaultSystemClientName ? null : clientName;
+            UserConfigManager.Config.EmailSetup = UserConfigManager.Config.EmailSetup ?? new EmailSetup();
+            UserConfigManager.Config.EmailSetup.SystemProviderName = clientName == defaultSystemClientName ? null : clientName;
+            UserConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.System;
             UserConfigManager.Save();
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void ChooseGmail()
+        private void ChooseOauth(OauthProvider provider)
         {
             var authForm = FormFactory.Create<FAuthorize>();
-            authForm.OauthProvider = gmailOauthProvider;
+            authForm.OauthProvider = provider;
             authForm.ShowDialog();
             if (authForm.DialogResult == DialogResult.OK)
             {
-                var setup = GetOrCreateSetup();
-                // TODO: Maybe combine setting Token, User, and ProviderType in an abstract OauthProvider method.
-                setup.ProviderType = EmailProviderType.Gmail;
-                UserConfigManager.Save();
-                DialogResult = DialogResult.OK;
-                Close();
-                // TODO: Refocus app after the user finishes interaction (which form though?)
-                // TODO: Have multiple progress messages in FAuthorize
-            }
-        }
-
-        private void ChooseOutlookWeb()
-        {
-            var authForm = FormFactory.Create<FAuthorize>();
-            authForm.OauthProvider = outlookWebOauthProvider;
-            authForm.ShowDialog();
-            if (authForm.DialogResult == DialogResult.OK)
-            {
-                var setup = GetOrCreateSetup();
-                // TODO: Maybe combine setting Token, User, and ProviderType in an abstract OauthProvider method.
-                setup.ProviderType = EmailProviderType.OutlookWeb;
-                UserConfigManager.Save();
                 DialogResult = DialogResult.OK;
                 Close();
                 // TODO: Refocus app after the user finishes interaction (which form though?)
