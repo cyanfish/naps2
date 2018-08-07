@@ -312,44 +312,26 @@
   <data name="&gt;&gt;linkPlaceholders.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblUser.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblProvider.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="lblUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="lblUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
-  </data>
-  <data name="lblUser.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="&gt;&gt;lblUser.Name" xml:space="preserve">
-    <value>lblUser</value>
-  </data>
-  <data name="&gt;&gt;lblUser.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblUser.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;lblUser.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblProvider.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblProvider.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblProvider.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
+    <value>6, 17</value>
   </data>
   <data name="lblProvider.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 13</value>
+    <value>315, 30</value>
   </data>
   <data name="lblProvider.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
     <value>No provider selected.</value>
+  </data>
+  <data name="lblProvider.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;lblProvider.Name" xml:space="preserve">
     <value>lblProvider</value>
@@ -361,10 +343,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;lblProvider.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="btnChangeProvider.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 19</value>
+    <value>327, 20</value>
   </data>
   <data name="btnChangeProvider.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -385,7 +367,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;btnChangeProvider.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
@@ -457,12 +439,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.8.2.20106, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.8.2.24203, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FEmailSettings</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.20106, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.24203, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

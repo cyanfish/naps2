@@ -160,6 +160,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No provider selected..
+        /// </summary>
+        internal static string EmailProvider_NotSelected {
+            get {
+                return ResourceManager.GetString("EmailProvider_NotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom SMTP.
         /// </summary>
         internal static string EmailProviderType_CustomSmtp {

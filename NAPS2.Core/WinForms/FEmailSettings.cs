@@ -4,18 +4,19 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport.Email;
+using NAPS2.Lang.Resources;
 
 namespace NAPS2.WinForms
 {
     public partial class FEmailSettings : FormBase
     {
         private readonly EmailSettingsContainer emailSettingsContainer;
-        private readonly IUserConfigManager userConfigManager;
+        private readonly SystemEmailClients systemEmailClients;
 
-        public FEmailSettings(EmailSettingsContainer emailSettingsContainer, IUserConfigManager userConfigManager)
+        public FEmailSettings(EmailSettingsContainer emailSettingsContainer, SystemEmailClients systemEmailClients)
         {
             this.emailSettingsContainer = emailSettingsContainer;
-            this.userConfigManager = userConfigManager;
+            this.systemEmailClients = systemEmailClients;
             InitializeComponent();
         }
 
@@ -30,13 +31,37 @@ namespace NAPS2.WinForms
                     .WidthToForm()
                 .Activate();
 
+            UpdateProvider();
             UpdateValues(emailSettingsContainer.EmailSettings);
-            cbRememberSettings.Checked = userConfigManager.Config.EmailSettings != null;
+            cbRememberSettings.Checked = UserConfigManager.Config.EmailSettings != null;
         }
 
         private void UpdateValues(EmailSettings emailSettings)
         {
             txtAttachmentName.Text = emailSettings.AttachmentName;
+        }
+
+        private void UpdateProvider()
+        {
+            var setup = UserConfigManager.Config.EmailSetup;
+            switch (setup?.ProviderType)
+            {
+                case EmailProviderType.Gmail:
+                    lblProvider.Text = SettingsResources.EmailProviderType_Gmail + '\n' + setup.GmailUser;
+                    break;
+                case EmailProviderType.OutlookWeb:
+                    lblProvider.Text = SettingsResources.EmailProviderType_OutlookWeb + '\n' + setup.OutlookWebUser;
+                    break;
+                case EmailProviderType.CustomSmtp:
+                    lblProvider.Text = setup.SmtpHost + '\n' + setup.SmtpUser;
+                    break;
+                case EmailProviderType.System:
+                    lblProvider.Text = setup.SystemProviderName ?? systemEmailClients.GetDefaultName();
+                    break;
+                default:
+                    lblProvider.Text = SettingsResources.EmailProvider_NotSelected;
+                    break;
+            }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -47,8 +72,8 @@ namespace NAPS2.WinForms
             };
 
             emailSettingsContainer.EmailSettings = emailSettings;
-            userConfigManager.Config.EmailSettings = cbRememberSettings.Checked ? emailSettings : null;
-            userConfigManager.Save();
+            UserConfigManager.Config.EmailSettings = cbRememberSettings.Checked ? emailSettings : null;
+            UserConfigManager.Save();
 
             Close();
         }
@@ -77,8 +102,10 @@ namespace NAPS2.WinForms
         private void btnChangeProvider_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FEmailProvider>();
-            // TODO: This should provide a result (though we might ignore it here except to update the UI)
-            form.ShowDialog();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                UpdateProvider();
+            }
         }
     }
 }

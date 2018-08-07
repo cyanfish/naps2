@@ -159,6 +159,9 @@
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Outlook Web Access</value>
   </data>
+  <data name="EmailProvider_NotSelected" xml:space="preserve">
+    <value>No provider selected.</value>
+  </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Center</value>
   </data>

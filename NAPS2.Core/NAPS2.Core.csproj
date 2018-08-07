@@ -150,6 +150,7 @@
     <Compile Include="ImportExport\Email\Oauth\OauthProvider.cs" />
     <Compile Include="ImportExport\Email\Oauth\OauthClientCreds.cs" />
     <Compile Include="ImportExport\Email\Oauth\OauthToken.cs" />
+    <Compile Include="ImportExport\Email\SystemEmailClients.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\Images\TiffCompression.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />

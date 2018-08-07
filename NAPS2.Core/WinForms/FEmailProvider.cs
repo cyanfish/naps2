@@ -17,15 +17,17 @@ namespace NAPS2.WinForms
     {
         private readonly GmailOauthProvider gmailOauthProvider;
         private readonly OutlookWebOauthProvider outlookWebOauthProvider;
+        private readonly SystemEmailClients systemEmailClients;
 
         private List<EmailProviderWidget> providerWidgets;
         private string[] systemClientNames;
         private string defaultSystemClientName;
 
-        public FEmailProvider(GmailOauthProvider gmailOauthProvider, OutlookWebOauthProvider outlookWebOauthProvider)
+        public FEmailProvider(GmailOauthProvider gmailOauthProvider, OutlookWebOauthProvider outlookWebOauthProvider, SystemEmailClients systemEmailClients)
         {
             this.gmailOauthProvider = gmailOauthProvider;
             this.outlookWebOauthProvider = outlookWebOauthProvider;
+            this.systemEmailClients = systemEmailClients;
 
             InitializeComponent();
         }
@@ -33,15 +35,15 @@ namespace NAPS2.WinForms
         private void FEmailProvider_Load(object sender, EventArgs e)
         {
             providerWidgets = new List<EmailProviderWidget>();
-            systemClientNames = GetSystemClientNames();
-            defaultSystemClientName = GetDefaultSystemClientName();
+            systemClientNames = systemEmailClients.GetNames();
+            defaultSystemClientName = systemEmailClients.GetDefaultName();
 
             foreach (var clientName in systemClientNames.OrderBy(x => x == defaultSystemClientName ? 0 : 1))
             {
                 providerWidgets.Add(new EmailProviderWidget
                 {
                     ProviderType = EmailProviderType.System,
-                    ProviderIcon = GetSystemClientIcon(clientName),
+                    ProviderIcon = systemEmailClients.GetIcon(clientName),
                     ProviderName = clientName,
                     ClickAction = () => ChooseSystem(clientName)
                 });
@@ -102,8 +104,7 @@ namespace NAPS2.WinForms
         {
             var authForm = FormFactory.Create<FAuthorize>();
             authForm.OauthProvider = provider;
-            authForm.ShowDialog();
-            if (authForm.DialogResult == DialogResult.OK)
+            if (authForm.ShowDialog() == DialogResult.OK)
             {
                 DialogResult = DialogResult.OK;
                 Close();
@@ -167,44 +168,6 @@ namespace NAPS2.WinForms
                 }
             }
             return null;
-        }
-
-        private string GetDefaultSystemClientName()
-        {
-            using (var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Clients\Mail", false))
-            {
-                return key?.GetValue(null).ToString();
-            }
-        }
-
-        private string[] GetSystemClientNames()
-        {
-            // TODO: Swallow errors
-            using (var clientList = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Clients\Mail", false))
-            {
-                return clientList?.GetSubKeyNames().Where(clientName =>
-                {
-                    using (var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}"))
-                    {
-                        return clientKey?.GetValue("DllPath") != null;
-                    }
-                }).ToArray() ?? new string[0];
-            }
-        }
-
-        private Image GetSystemClientIcon(string clientName)
-        {
-            using (var command = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}\shell\open\command", false))
-            {
-                string commandText = command?.GetValue(null).ToString() ?? "";
-                if (!commandText.StartsWith("\""))
-                {
-                    return null;
-                }
-                string exePath = commandText.Substring(1, commandText.IndexOf("\"", 1, StringComparison.InvariantCulture) - 1);
-                var icon = Icon.ExtractAssociatedIcon(exePath);
-                return icon?.ToBitmap();
-            }
         }
     }
 }
