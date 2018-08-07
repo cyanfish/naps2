@@ -17,7 +17,11 @@ namespace NAPS2.ImportExport.Email.Oauth
         
         public string AccessToken
         {
-            get => accessToken;
+            get
+            {
+                accessToken = accessToken ?? SecureStorage.Decrypt(accessTokenEncrypted);
+                return accessToken;
+            }
             set
             {
                 accessToken = value;
@@ -27,7 +31,11 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         public string RefreshToken
         {
-            get => refreshToken;
+            get
+            {
+                refreshToken = refreshToken ?? SecureStorage.Decrypt(refreshTokenEncrypted);
+                return refreshToken;
+            }
             set
             {
                 refreshToken = value;
@@ -45,9 +53,7 @@ namespace NAPS2.ImportExport.Email.Oauth
         public void ReadXml(XmlReader reader)
         {
             accessTokenEncrypted = reader.ReadElementString();
-            accessToken = SecureStorage.Decrypt(accessTokenEncrypted);
             refreshTokenEncrypted = reader.ReadElementString();
-            refreshToken = SecureStorage.Decrypt(refreshTokenEncrypted);
             Expiry = DateTime.Parse(reader.ReadElementString());
         }
 
