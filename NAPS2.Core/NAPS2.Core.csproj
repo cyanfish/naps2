@@ -5282,13 +5282,13 @@
     <Content Include="Icons\contrast_with_sun.ico" />
     <Content Include="Icons\control_play_blue-small.png" />
     <Content Include="Icons\email.ico" />
-    <None Include="Icons\email.png" />
     <None Include="Icons\email_setting.png" />
     <Content Include="Icons\file_extension_pdf.ico" />
     <None Include="Icons\gmail.png" />
     <Content Include="Icons\image_edit.png" />
     <None Include="Icons\outlookweb.png" />
     <None Include="Icons\mail_yellow.png" />
+    <Content Include="Icons\key.ico" />
     <Content Include="Icons\picture.ico" />
     <Content Include="Icons\pictures.png" />
     <Content Include="Icons\picture_edit.png" />

@@ -21,7 +21,7 @@ namespace NAPS2.ImportExport.Pdf
         private readonly IOverwritePrompt overwritePrompt;
         private readonly ThreadFactory threadFactory;
         private readonly AppConfigManager appConfigManager;
-        
+
         private Thread thread;
 
         public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, AppConfigManager appConfigManager, IWorkerServiceFactory workerServiceFactory)
@@ -64,20 +64,13 @@ namespace NAPS2.ImportExport.Pdf
             {
                 try
                 {
-                    if (UseWorker)
+                    Status.Success = DoWork(new SavePdfWorkArgs
                     {
-                        using (var worker = WorkerServiceFactory.Create())
-                        {
-                            worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
-                            worker.Callback.OnProgress += OnProgress;
-                            worker.Service.ExportPdf(subFileName, snapshots.Export(), pdfSettings, ocrLanguageCode);
-                            Status.Success = worker.Callback.WaitForFinish();
-                        }
-                    }
-                    else
-                    {
-                        Status.Success = pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrLanguageCode, OnProgress);
-                    }
+                        SubFileName = subFileName,
+                        Snapshots = snapshots.Export(),
+                        PdfSettings = pdfSettings,
+                        OcrLanguageCode = ocrLanguageCode
+                    });
                 }
                 catch (UnauthorizedAccessException ex)
                 {
@@ -114,9 +107,24 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
+        protected internal override bool DoWorkInternal(WorkArgs args)
+        {
+            var a = (SavePdfWorkArgs)args;
+            return pdfExporter.Export(a.SubFileName, a.Snapshots.Import(), a.PdfSettings, a.OcrLanguageCode, OnProgress);
+        }
+
         public override void WaitUntilFinished()
         {
             thread.Join();
+        }
+
+        [Serializable]
+        internal class SavePdfWorkArgs : WorkArgs
+        {
+            public string SubFileName { get; set; }
+            public List<ScannedImage.SnapshotExport> Snapshots { get; set; }
+            public PdfSettings PdfSettings { get; set; }
+            public string OcrLanguageCode { get; set; }
         }
     }
 }

@@ -46,8 +46,9 @@ namespace NAPS2.Operation
             Error?.Invoke(this, args);
         }
 
-        protected bool OnProgress(int current, int max)
+        protected virtual bool OnProgress(int current, int max)
         {
+            // TODO: Maybe don't make this virtual. Instead, clone the status object, and project event invocations back to the client.
             Status.CurrentProgress = current;
             Status.MaxProgress = max;
             InvokeStatusChanged();
