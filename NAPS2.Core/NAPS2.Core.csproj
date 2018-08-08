@@ -131,6 +131,7 @@
     <Compile Include="Operation\WorkerOperation.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
     <Compile Include="Util\ProgressHandler.cs" />
+    <Compile Include="Util\SecureString.cs" />
     <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -44,12 +44,15 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override string TokenEndpoint => "https://www.googleapis.com/oauth2/v4/token";
 
-        protected override void SaveToken(OauthToken token)
+        protected override void SaveToken(OauthToken token, bool refresh)
         {
             userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
             userConfigManager.Config.EmailSetup.GmailToken = token;
-            userConfigManager.Config.EmailSetup.GmailUser = GetEmailAddress();
-            userConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.Gmail;
+            if (!refresh)
+            {
+                userConfigManager.Config.EmailSetup.GmailUser = GetEmailAddress();
+                userConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.Gmail;
+            }
             userConfigManager.Save();
         }
 

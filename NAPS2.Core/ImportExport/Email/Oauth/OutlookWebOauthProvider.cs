@@ -43,12 +43,15 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override string TokenEndpoint => "https://login.microsoftonline.com/common/oauth2/v2.0/token";
 
-        protected override void SaveToken(OauthToken token)
+        protected override void SaveToken(OauthToken token, bool refresh)
         {
             userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
             userConfigManager.Config.EmailSetup.OutlookWebToken = token;
-            userConfigManager.Config.EmailSetup.OutlookWebUser = GetEmailAddress();
-            userConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.OutlookWeb;
+            if (!refresh)
+            {
+                userConfigManager.Config.EmailSetup.OutlookWebUser = GetEmailAddress();
+                userConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.OutlookWeb;
+            }
             userConfigManager.Save();
         }
 

@@ -93,7 +93,7 @@ namespace NAPS2.ImportExport.Email.Oauth
                 AccessToken = resp.Value<string>("access_token"),
                 RefreshToken = resp.Value<string>("refresh_token"),
                 Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
-            });
+            }, false);
         }
 
         public void RefreshToken()
@@ -111,7 +111,7 @@ namespace NAPS2.ImportExport.Email.Oauth
                 AccessToken = resp.Value<string>("access_token"),
                 RefreshToken = Token.RefreshToken,
                 Expiry = DateTime.Now.AddSeconds(resp.Value<int>("expires_in"))
-            });
+            }, true);
         }
 
         private static int GetUnusedPort()
@@ -132,7 +132,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             throw new InvalidOperationException("No available port");
         }
 
-        protected abstract void SaveToken(OauthToken token);
+        protected abstract void SaveToken(OauthToken token, bool refresh);
 
         protected JObject Get(string url)
         {
