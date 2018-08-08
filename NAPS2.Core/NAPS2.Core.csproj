@@ -73,6 +73,15 @@
     <Reference Include="Ghostscript.NET, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f85051de34525b59, processorArchitecture=MSIL">
       <HintPath>..\packages\Ghostscript.NET.1.2.1\lib\net40\Ghostscript.NET.dll</HintPath>
     </Reference>
+    <Reference Include="MailKit, Version=1.22.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.1.22.0\lib\net40\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=1.22.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.1.22.0\lib\net40\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NAPS2\Setup\lib\NTwain.dll</HintPath>
@@ -85,6 +94,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.1\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
@@ -102,6 +112,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientCreds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientCreds.resx</DependentUpon>
+    </Compile>
     <Compile Include="Automation\AutomatedScanning.cs" />
     <Compile Include="Automation\AutomatedScanningOptions.cs" />
     <Compile Include="Automation\CommandLineOptions.cs" />
@@ -132,6 +147,18 @@
     <Compile Include="ImportExport\AutoSave.cs" />
     <Compile Include="ImportExport\DirectProfileTransfer.cs" />
     <Compile Include="ImportExport\DirectImportOperation.cs" />
+    <Compile Include="ImportExport\Email\EmailProviderType.cs" />
+    <Compile Include="ImportExport\Email\EmailSetup.cs" />
+    <Compile Include="ImportExport\Email\IEmailProviderFactory.cs" />
+    <Compile Include="ImportExport\Email\Oauth\OutlookWebEmailProvider.cs" />
+    <Compile Include="ImportExport\Email\Oauth\OutlookWebOauthProvider.cs" />
+    <Compile Include="ImportExport\Email\Oauth\GmailOauthProvider.cs" />
+    <Compile Include="ImportExport\Email\Oauth\GmailEmailProvider.cs" />
+    <Compile Include="ImportExport\Email\MimeEmailProvider.cs" />
+    <Compile Include="ImportExport\Email\Oauth\OauthProvider.cs" />
+    <Compile Include="ImportExport\Email\Oauth\OauthClientCreds.cs" />
+    <Compile Include="ImportExport\Email\Oauth\OauthToken.cs" />
+    <Compile Include="ImportExport\Email\Mapi\SystemEmailClients.cs" />
     <Compile Include="ImportExport\IAutoSave.cs" />
     <Compile Include="ImportExport\Images\TiffCompression.cs" />
     <Compile Include="ImportExport\ImportOperation.cs" />
@@ -184,7 +211,7 @@
     <Compile Include="Scan\Twain\Legacy\TwainDefs.cs" />
     <Compile Include="Scan\Twain\Legacy\TwainLib.cs" />
     <Compile Include="Scan\Twain\TwainWrapper.cs" />
-    <Compile Include="Unsafe\UnsafeImageOps.cs" />
+    <Compile Include="Scan\Images\Transforms\UnsafeImageOps.cs" />
     <Compile Include="Util\ChangeTracker.cs" />
     <Compile Include="Util\ChaosMonkey.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
@@ -254,8 +281,8 @@
     <Compile Include="ImportExport\Email\EmailMessage.cs" />
     <Compile Include="ImportExport\Email\EmailRecipient.cs" />
     <Compile Include="ImportExport\Email\EmailRecipientType.cs" />
-    <Compile Include="ImportExport\Email\IEmailer.cs" />
-    <Compile Include="ImportExport\Email\Mapi\MapiEmailer.cs" />
+    <Compile Include="ImportExport\Email\IEmailProvider.cs" />
+    <Compile Include="ImportExport\Email\Mapi\MapiEmailProvider.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiFileDesc.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiMessage.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiRecipClass.cs" />
@@ -322,6 +349,7 @@
     <Compile Include="Worker\ProcessJob.cs" />
     <Compile Include="ImportExport\DirectImageTransfer.cs" />
     <Compile Include="Util\KeyboardShortcutManager.cs" />
+    <Compile Include="Util\SecureStorage.cs" />
     <Compile Include="Util\Slice.cs" />
     <Compile Include="Util\StillImage.cs" />
     <Compile Include="Util\StringWrapper.cs" />
@@ -337,6 +365,12 @@
     <Compile Include="WinForms\DragScrollListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WinForms\EmailProviderWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForms\EmailProviderWidget.Designer.cs">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\FAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -348,6 +382,12 @@
     </Compile>
     <Compile Include="WinForms\FAdvancedScanSettings.Designer.cs">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FAuthorize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FAuthorize.Designer.cs">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FAutoSaveSettings.cs">
       <SubType>Form</SubType>
@@ -366,6 +406,12 @@
     </Compile>
     <Compile Include="WinForms\FBatchScan.Designer.cs">
       <DependentUpon>FBatchScan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FEmailProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FEmailProvider.Designer.cs">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\FHueSaturation.cs">
       <SubType>Form</SubType>
@@ -579,6 +625,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ClientCreds.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClientCreds.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Icons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -691,6 +741,9 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.vi.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'" />
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.resx">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.af.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -945,6 +998,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAdvancedScanSettings.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.resx">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAutoSaveSettings.af.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAutoSaveSettings.cs</DependentUpon>
@@ -1343,6 +1399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditProfile.ja.resx">
       <DependentUpon>FEditProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.resx">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEmailSettings.ja.resx">
       <DependentUpon>FEmailSettings.cs</DependentUpon>
@@ -5178,6 +5237,7 @@
     <None Include="Lang\po\vi.po" />
     <None Include="Lang\po\zh-CHS.po" />
     <None Include="Lang\po\zh-TW.po" />
+    <None Include="microsoft.credentials.json" />
     <None Include="packages.config" />
     <None Include="Icons\accept-small.png" />
   </ItemGroup>
@@ -5222,8 +5282,13 @@
     <Content Include="Icons\contrast_with_sun.ico" />
     <Content Include="Icons\control_play_blue-small.png" />
     <Content Include="Icons\email.ico" />
+    <None Include="Icons\email.png" />
+    <None Include="Icons\email_setting.png" />
     <Content Include="Icons\file_extension_pdf.ico" />
+    <None Include="Icons\gmail.png" />
     <Content Include="Icons\image_edit.png" />
+    <None Include="Icons\outlookweb.png" />
+    <None Include="Icons\mail_yellow.png" />
     <Content Include="Icons\picture.ico" />
     <Content Include="Icons\pictures.png" />
     <Content Include="Icons\picture_edit.png" />
@@ -5289,6 +5354,14 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>If Not Exist $(ProjectDir)google.credentials.json (
+echo {} &gt; $(ProjectDir)google.credentials.json
+)
+If Not Exist $(ProjectDir)microsoft.credentials.json (
+echo { client_id: null, client_secret: null } &gt; $(ProjectDir)microsoft.credentials.json
+)</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -2,24 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email.Mapi
 {
-    public class MapiEmailer : IEmailer
+    public class MapiEmailProvider : IEmailProvider
     {
-        // MAPISendMail is documented at:
-        // http://msdn.microsoft.com/en-us/library/windows/desktop/dd296721%28v=vs.85%29.aspx
-
-        [DllImport("MAPI32.DLL")]
-        private static extern MapiSendMailReturnCode MAPISendMail(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);
-
         private readonly IErrorOutput errorOutput;
+        private readonly SystemEmailClients systemEmailClients;
+        private readonly IUserConfigManager userConfigManager;
 
-        public MapiEmailer(IErrorOutput errorOutput)
+        public MapiEmailProvider(IErrorOutput errorOutput, SystemEmailClients systemEmailClients, IUserConfigManager userConfigManager)
         {
             this.errorOutput = errorOutput;
+            this.systemEmailClients = systemEmailClients;
+            this.userConfigManager = userConfigManager;
         }
 
         /// <summary>
@@ -56,7 +55,9 @@ namespace NAPS2.ImportExport.Email.Mapi
                 }
 
                 // Send the message
-                var returnCode = MAPISendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
+                var clientName = userConfigManager.Config.EmailSetup?.SystemProviderName;
+                var mapiSendMail = systemEmailClients.GetDelegate(clientName);
+                var returnCode = mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
 
                 // Process the result
                 if (returnCode == MapiSendMailReturnCode.UserAbort)

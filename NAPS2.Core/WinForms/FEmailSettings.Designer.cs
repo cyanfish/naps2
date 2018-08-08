@@ -42,6 +42,10 @@ namespace NAPS2.WinForms
             this.txtAttachmentName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.linkPlaceholders = new System.Windows.Forms.LinkLabel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblProvider = new System.Windows.Forms.Label();
+            this.btnChangeProvider = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOK
@@ -88,10 +92,31 @@ namespace NAPS2.WinForms
             this.linkPlaceholders.TabStop = true;
             this.linkPlaceholders.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPlaceholders_LinkClicked);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblProvider);
+            this.groupBox1.Controls.Add(this.btnChangeProvider);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // lblProvider
+            // 
+            resources.ApplyResources(this.lblProvider, "lblProvider");
+            this.lblProvider.Name = "lblProvider";
+            // 
+            // btnChangeProvider
+            // 
+            resources.ApplyResources(this.btnChangeProvider, "btnChangeProvider");
+            this.btnChangeProvider.Name = "btnChangeProvider";
+            this.btnChangeProvider.UseVisualStyleBackColor = true;
+            this.btnChangeProvider.Click += new System.EventHandler(this.btnChangeProvider_Click);
+            // 
             // FEmailSettings
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.linkPlaceholders);
             this.Controls.Add(this.txtAttachmentName);
             this.Controls.Add(this.label1);
@@ -102,6 +127,7 @@ namespace NAPS2.WinForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FEmailSettings";
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,5 +143,8 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.TextBox txtAttachmentName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkPlaceholders;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnChangeProvider;
+        private System.Windows.Forms.Label lblProvider;
     }
 }

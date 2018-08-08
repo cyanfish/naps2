@@ -6,7 +6,6 @@ using System.Linq;
 using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
-using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
@@ -37,8 +36,8 @@ namespace NAPS2.DI.Modules
             // Export
             Bind<IPdfExporter>().To<PdfSharpExporter>();
             Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
-            Bind<IEmailer>().To<MapiEmailer>();
             Bind<IOcrEngine>().To<TesseractOcrEngine>();
+            Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
 
             // Scan
             Bind<IScanPerformer>().To<ScanPerformer>();

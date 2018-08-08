@@ -160,6 +160,42 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No provider selected..
+        /// </summary>
+        internal static string EmailProvider_NotSelected {
+            get {
+                return ResourceManager.GetString("EmailProvider_NotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom SMTP.
+        /// </summary>
+        internal static string EmailProviderType_CustomSmtp {
+            get {
+                return ResourceManager.GetString("EmailProviderType_CustomSmtp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gmail.
+        /// </summary>
+        internal static string EmailProviderType_Gmail {
+            get {
+                return ResourceManager.GetString("EmailProviderType_Gmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outlook Web Access.
+        /// </summary>
+        internal static string EmailProviderType_OutlookWeb {
+            get {
+                return ResourceManager.GetString("EmailProviderType_OutlookWeb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Center.
         /// </summary>
         internal static string HorizontalAlign_Center {

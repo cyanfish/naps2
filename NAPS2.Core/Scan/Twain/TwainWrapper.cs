@@ -268,7 +268,7 @@ namespace NAPS2.Scan.Twain
                     }
                     source = source2;
                 }
-                else
+                else if (bytesPerPixel == 3)
                 {
                     // Colors are provided as BGR, they need to be swapped to RGB
                     int rowWidth = data.Stride;

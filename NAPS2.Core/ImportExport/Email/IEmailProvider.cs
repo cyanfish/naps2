@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.ImportExport.Email
 {
-    public interface IEmailer
+    public interface IEmailProvider
     {
         bool SendEmail(EmailMessage emailMessage);
     }

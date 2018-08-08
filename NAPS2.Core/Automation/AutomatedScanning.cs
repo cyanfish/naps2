@@ -24,7 +24,7 @@ namespace NAPS2.Automation
 {
     public class AutomatedScanning
     {
-        private readonly IEmailer emailer;
+        private readonly IEmailProviderFactory emailProviderFactory;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IErrorOutput errorOutput;
@@ -45,13 +45,13 @@ namespace NAPS2.Automation
         private DateTime startTime;
         private List<string> actualOutputPaths;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailer emailer, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
         {
             this.options = options;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
-            this.emailer = emailer;
+            this.emailProviderFactory = emailProviderFactory;
             this.scannedImageImporter = scannedImageImporter;
             this.userConfigManager = userConfigManager;
             this.pdfSettingsContainer = pdfSettingsContainer;
@@ -353,7 +353,7 @@ namespace NAPS2.Automation
                 }
 
                 OutputVerbose(ConsoleResources.SendingEmail);
-                if (emailer.SendEmail(message))
+                if (emailProviderFactory.Default.SendEmail(message))
                 {
                     OutputVerbose(ConsoleResources.EmailSent);
                 }

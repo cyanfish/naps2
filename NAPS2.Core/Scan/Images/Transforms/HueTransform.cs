@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.InteropServices;
-using NAPS2.Unsafe;
 
 namespace NAPS2.Scan.Images.Transforms
 {
