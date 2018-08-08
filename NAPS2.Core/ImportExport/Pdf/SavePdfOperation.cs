@@ -67,7 +67,7 @@ namespace NAPS2.ImportExport.Pdf
                     Status.Success = DoWork(new SavePdfWorkArgs
                     {
                         SubFileName = subFileName,
-                        Snapshots = snapshots.Export(),
+                        Snapshots = snapshots,
                         PdfSettings = pdfSettings,
                         OcrLanguageCode = ocrLanguageCode
                     });
@@ -110,7 +110,7 @@ namespace NAPS2.ImportExport.Pdf
         protected internal override bool DoWorkInternal(WorkArgs args)
         {
             var a = (SavePdfWorkArgs)args;
-            return pdfExporter.Export(a.SubFileName, a.Snapshots.Import(), a.PdfSettings, a.OcrLanguageCode, OnProgress);
+            return pdfExporter.Export(a.SubFileName, a.Snapshots, a.PdfSettings, a.OcrLanguageCode, OnProgress);
         }
 
         public override void WaitUntilFinished()
@@ -122,7 +122,7 @@ namespace NAPS2.ImportExport.Pdf
         internal class SavePdfWorkArgs : WorkArgs
         {
             public string SubFileName { get; set; }
-            public List<ScannedImage.SnapshotExport> Snapshots { get; set; }
+            public List<ScannedImage.Snapshot> Snapshots { get; set; }
             public PdfSettings PdfSettings { get; set; }
             public string OcrLanguageCode { get; set; }
         }

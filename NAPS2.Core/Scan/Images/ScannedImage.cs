@@ -150,20 +150,13 @@ namespace NAPS2.Scan.Images
             return new Snapshot(this);
         }
 
-        public class Snapshot : IDisposable
+        [Serializable]
+        [KnownType(typeof(RecoveryIndexImage))]
+        [KnownType(typeof(List<Transform>))]
+        public class Snapshot : IDisposable, ISerializable
         {
             private bool disposed;
-
-            public static SnapshotExport Export(Snapshot snapshot)
-            {
-                return new SnapshotExport(snapshot.Source.RecoveryIndexImage, snapshot.TransformList);
-            }
-
-            public static Snapshot Import(SnapshotExport export)
-            {
-                return new Snapshot(new ScannedImage(export.RecoveryIndexImage), export.TransformList);
-            }
-
+            
             internal Snapshot(ScannedImage source)
             {
                 lock (source)
@@ -180,13 +173,7 @@ namespace NAPS2.Scan.Images
                     }
                 }
             }
-
-            private Snapshot(ScannedImage source, List<Transform> transformList)
-            {
-                Source = source;
-                TransformList = transformList;
-            }
-
+            
             public ScannedImage Source { get; }
 
             public List<Transform> TransformList { get; }
@@ -204,20 +191,18 @@ namespace NAPS2.Scan.Images
                     }
                 }
             }
-        }
 
-        [Serializable]
-        public class SnapshotExport
-        {
-            public SnapshotExport(RecoveryIndexImage recoveryIndexImage, List<Transform> transformList)
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
             {
-                RecoveryIndexImage = recoveryIndexImage;
-                TransformList = transformList;
+                info.AddValue("RecoveryIndexImage", Source.RecoveryIndexImage);
+                info.AddValue("TransformList", TransformList);
             }
-            
-            public RecoveryIndexImage RecoveryIndexImage { get; protected set; }
-            
-            public List<Transform> TransformList { get; protected set; }
+
+            private Snapshot(SerializationInfo info, StreamingContext context)
+            {
+                Source = new ScannedImage((RecoveryIndexImage)info.GetValue("RecoveryIndexImage", typeof(RecoveryIndexImage)));
+                TransformList = (List<Transform>)info.GetValue("TransformList", typeof(List<Transform>));
+            }
         }
     }
 }

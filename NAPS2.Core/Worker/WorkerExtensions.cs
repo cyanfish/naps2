@@ -19,15 +19,5 @@ namespace NAPS2.Worker
             new NetDataContractSerializer().Serialize(stream, e);
             callback.Error(stream.ToArray());
         }
-
-        public static List<ScannedImage.SnapshotExport> Export(this IEnumerable<ScannedImage.Snapshot> snapshots)
-        {
-            return snapshots.Select(ScannedImage.Snapshot.Export).ToList();
-        }
-
-        public static List<ScannedImage.Snapshot> Import(this IEnumerable<ScannedImage.SnapshotExport> snapshots)
-        {
-            return snapshots.Select(ScannedImage.Snapshot.Import).ToList();
-        }
     }
 }
