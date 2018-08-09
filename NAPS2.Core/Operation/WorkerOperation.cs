@@ -18,7 +18,7 @@ namespace NAPS2.Operation
             this.workerServiceFactory = workerServiceFactory;
         }
 
-        protected virtual bool UseWorker => !Environment.Is64BitProcess;
+        protected virtual bool UseWorker => true;
 
         public ProgressHandler ProgressProxy { get; set; }
 
