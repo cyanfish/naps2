@@ -9,6 +9,9 @@ using NAPS2.Worker;
 
 namespace NAPS2.Operation
 {
+    /// <summary>
+    /// A base class for operations that can proxy part of the operation to a worker process.
+    /// </summary>
     public abstract class WorkerOperation : OperationBase
     {
         private readonly IWorkerServiceFactory workerServiceFactory;
@@ -18,10 +21,18 @@ namespace NAPS2.Operation
             this.workerServiceFactory = workerServiceFactory;
         }
 
+        /// <summary>
+        /// A value indicating whether DoWork should proxy to a worker process.
+        /// </summary>
         protected virtual bool UseWorker => true;
 
         public ProgressHandler ProgressProxy { get; set; }
 
+        /// <summary>
+        /// Calls DoWorkInternal either directly or through a proxy to a worker process, determined by the value of UseWorker.
+        /// </summary>
+        /// <param name="args">The arguments to be passed to DoWorkInternal.</param>
+        /// <returns>A value indicating whether the operation was successful.</returns>
         protected bool DoWork(WorkArgs args)
         {
             if (UseWorker)
@@ -45,6 +56,11 @@ namespace NAPS2.Operation
             return ProgressProxy?.Invoke(current, max) ?? base.OnProgress(current, max);
         }
 
+        /// <summary>
+        /// The base class for arguments passed to DoWork and consumed by DoWorkInternal.
+        ///
+        /// Subclasses must ensure that they are serializable by DataContractSerializer and will work as intended cross-process.
+        /// </summary>
         [KnownType("DerivedTypes")]
         [Serializable]
         public class WorkArgs

@@ -7,6 +7,9 @@ using NAPS2.Config;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A helper to set the thread culture based on user and app configuration.
+    /// </summary>
     public class CultureInitializer
     {
         private readonly IUserConfigManager userConfigManager;

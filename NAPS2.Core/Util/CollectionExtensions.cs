@@ -7,14 +7,11 @@ namespace NAPS2.Util
 {
     public static class CollectionExtensions
     {
-        public static void RemoveAll(this IList list)
-        {
-            foreach (int i in Enumerable.Range(0, list.Count))
-            {
-                list.RemoveAt(0);
-            }
-        }
-
+        /// <summary>
+        /// Removes multiple elements from the list at the specified indices.
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="indices"></param>
         public static void RemoveAll(this IList list, IEnumerable<int> indices)
         {
             int offset = 0;
@@ -24,11 +21,25 @@ namespace NAPS2.Util
             }
         }
 
+        /// <summary>
+        /// Gets an enumerable of elements at the specified indices.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="indices"></param>
+        /// <returns></returns>
         public static IEnumerable<T> ElementsAt<T>(this IList<T> list, IEnumerable<int> indices)
         {
             return indices.Select(i => list[i]);
         }
 
+        /// <summary>
+        /// Gets an enumerable of indices of the specified elements.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="elements"></param>
+        /// <returns></returns>
         public static IEnumerable<int> IndiciesOf<T>(this IList<T> list, IEnumerable<T> elements)
         {
             return elements.Select(list.IndexOf);

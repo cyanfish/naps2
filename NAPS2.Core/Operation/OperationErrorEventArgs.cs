@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace NAPS2.Operation
 {
+    /// <summary>
+    /// Arguments for the IOperation.Error event.
+    /// </summary>
     public class OperationErrorEventArgs : EventArgs
     {
         public OperationErrorEventArgs(string errorMessage, Exception exception)

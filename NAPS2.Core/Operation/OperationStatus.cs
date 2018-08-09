@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace NAPS2.Operation
 {
+    /// <summary>
+    /// A representation of the current status of an IOperation.
+    /// </summary>
     public class OperationStatus
     {
         public string StatusText { get; set; }

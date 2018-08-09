@@ -73,7 +73,7 @@ namespace NAPS2.Recovery
         {
             if (_recoveryIndexManager != null)
             {
-                _recoveryIndexManager.Index.Images.RemoveAll();
+                _recoveryIndexManager.Index.Images.Clear();
                 _recoveryIndexManager.Index.Images.AddRange(images.Select(x => x.RecoveryIndexImage));
                 _recoveryIndexManager.Save();
             }

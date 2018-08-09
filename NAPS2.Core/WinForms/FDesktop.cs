@@ -251,7 +251,7 @@ namespace NAPS2.WinForms
             // Update localized values
             // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live
             SaveFormState = false;
-            Controls.RemoveAll();
+            Controls.Clear();
             UpdateRTL();
             InitializeComponent();
             PostInitializeComponent();

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace NAPS2.Operation
 {
+    /// <summary>
+    /// A base implementation for IOperation, helping with common event logic.
+    /// </summary>
     public abstract class OperationBase : IOperation
     {
         protected volatile bool cancel;

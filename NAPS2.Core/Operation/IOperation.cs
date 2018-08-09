@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace NAPS2.Operation
 {
+    /// <summary>
+    /// A representation of a long-running operation with progress reporting and cancellation.
+    /// </summary>
     public interface IOperation
     {
         string ProgressTitle { get; }

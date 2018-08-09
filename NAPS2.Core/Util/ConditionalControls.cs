@@ -7,6 +7,11 @@ using System.Windows.Forms;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// Helpers for conditionally visible controls that use simple heuristics help maintain the visual appearance of forms.
+    ///
+    /// For example, if a checkbox is hidden, the form will shrink and controls further down will be moved up to fill the empty space.
+    /// </summary>
     public static class ConditionalControls
     {
         public static void SetVisible(Control control, bool visible)
