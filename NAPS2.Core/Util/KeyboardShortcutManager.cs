@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A helper class to assign keyboard shortcuts to actions or WinForm buttons.
+    /// </summary>
     public class KeyboardShortcutManager
     {
         private readonly Dictionary<Keys, Action> dict = new Dictionary<Keys, Action>();

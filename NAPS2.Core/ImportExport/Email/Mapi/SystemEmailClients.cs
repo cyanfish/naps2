@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
+using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email.Mapi
 {
@@ -58,8 +59,8 @@ namespace NAPS2.ImportExport.Email.Mapi
             {
                 return MAPISendMail;
             }
-            var module = LoadLibrary(dllPath);
-            var addr = GetProcAddress(module, "MAPISendMail");
+            var module = Win32.LoadLibrary(dllPath);
+            var addr = Win32.GetProcAddress(module, "MAPISendMail");
             return (MapiSendMailDelegate)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegate));
         }
 
@@ -78,12 +79,5 @@ namespace NAPS2.ImportExport.Email.Mapi
 
         [DllImport("mapi32.DLL")]
         private static extern MapiSendMailReturnCode MAPISendMail(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);
-        
-        [DllImport("kernel32.dll")]
-        private static extern IntPtr LoadLibrary(string path);
-
-        [DllImport("kernel32.dll")]
-        private static extern IntPtr GetProcAddress(IntPtr module, string procName);
-
     }
 }

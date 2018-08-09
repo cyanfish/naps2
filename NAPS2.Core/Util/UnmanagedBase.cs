@@ -5,6 +5,10 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// Base class for implicitly converting structures to unmanaged objects addressed by IntPtr.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class UnmanagedBase<T> : IDisposable
     {
         private bool disposed;

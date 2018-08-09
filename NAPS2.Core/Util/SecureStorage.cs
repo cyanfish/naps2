@@ -6,6 +6,12 @@ using System.Text;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A class to help encrypt and decrypt passwords/tokens using the ProtectedData API.
+    ///
+    /// The encryption is tied to the current user so other users can't steal credentials.
+    /// It is potentially vulnerable to malicious applications running under the same user.
+    /// </summary>
     public class SecureStorage
     {
         public static Lazy<RNGCryptoServiceProvider> CryptoRandom { get; } = new Lazy<RNGCryptoServiceProvider>();

@@ -7,7 +7,7 @@ using NAPS2.Config;
 namespace NAPS2.Util
 {
     /// <summary>
-    /// Helps manage the lifecycle of the NAPS2 GUI.
+    /// A class to help manage the lifecycle of the NAPS2 GUI.
     /// </summary>
     public class Lifecycle
     {

@@ -6,6 +6,9 @@ using System.Text;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// Helper class for common Win32 methods called via P/Invoke.
+    /// </summary>
     public static class Win32
     {
         [DllImport("shlwapi.dll", CharSet = CharSet.Unicode)]
@@ -25,6 +28,12 @@ namespace NAPS2.Util
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetDllDirectory(string lpPathName);
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr LoadLibrary(string path);
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr GetProcAddress(IntPtr module, string procName);
 
         public enum ShowWindowCommands
         {

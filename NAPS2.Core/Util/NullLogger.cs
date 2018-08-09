@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A default logging implementation that does nothing.
+    /// </summary>
     public class NullLogger : ILogger
     {
         public void Error(string message)

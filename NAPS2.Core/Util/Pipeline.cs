@@ -7,6 +7,19 @@ using System.Threading.Tasks;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A class to help with parallelization using a pipeline model.
+    ///
+    /// Pipelines consist of input, a number of steps, and output.
+    ///
+    /// Pipelines are described using fluent syntax.
+    /// <example>
+    ///     Pipeline.For(images)
+    ///             .Step(LoadImage)
+    ///             .Step(RunOcr)
+    ///             .Run(OutputText);
+    /// </example>
+    /// </summary>
     public static class Pipeline
     {
         private static readonly TaskFactory TaskFactory =

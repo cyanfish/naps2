@@ -5,6 +5,10 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// Helper class for converting structures to unmanaged objects addressed by IntPtr.
+    /// Use the IDisposable pattern to clean up resources.
+    /// </summary>
     public static class Unmanaged
     {
         public static Unmanaged<T> CopyOf<T>(T value)
@@ -18,6 +22,10 @@ namespace NAPS2.Util
         }
     }
 
+    /// <summary>
+    /// Class for implicitly converting structures to unmanaged objects addressed by IntPtr.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Unmanaged<T> : UnmanagedBase<T>
     {
         public Unmanaged()

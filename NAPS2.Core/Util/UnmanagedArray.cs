@@ -5,6 +5,10 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// Class for implicitly converting arrays of structures to unmanaged objects addressed by IntPtr.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class UnmanagedArray<T> : UnmanagedBase<T[]>
     {
         public UnmanagedArray(IEnumerable<T> array)

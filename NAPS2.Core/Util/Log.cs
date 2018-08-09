@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// Logging functionality.
+    /// </summary>
     public class Log
     {
         private static ILogger _logger = new NullLogger();

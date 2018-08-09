@@ -10,7 +10,7 @@ using System.Threading;
 namespace NAPS2.Util
 {
     /// <summary>
-    /// Simple inter-process communication between NAPS2 instances via named pipes.
+    /// A class for simple inter-process communication between NAPS2 instances via named pipes.
     /// </summary>
     public static class Pipes
     {

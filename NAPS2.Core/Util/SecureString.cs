@@ -8,6 +8,12 @@ using System.Xml.Serialization;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A class for strings that are encrypted when XML-serialized.
+    ///
+    /// Includes implicit conversions to and from System.String.
+    /// Encryption and decryption is lazy.
+    /// </summary>
     public class SecureString : IXmlSerializable
     {
         private string value;

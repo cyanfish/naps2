@@ -6,6 +6,9 @@ using System.Threading;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A simple factory class for threads that provides an easy interface and automatically sets the thread culture.
+    /// </summary>
     public class ThreadFactory
     {
         private readonly CultureInitializer cultureInitializer;

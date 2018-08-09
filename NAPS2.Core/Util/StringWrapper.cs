@@ -6,6 +6,9 @@ using System.Text;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A helper class for inserting newlines to break up overly wide text.
+    /// </summary>
     public class StringWrapper
     {
         public string Wrap(string text, int maxWidth, Graphics drawingGraphics, Font drawingFont)
@@ -28,28 +31,6 @@ namespace NAPS2.Util
                 }
             }
             return result.ToString();
-            //int lastSpace = -1;
-            //int lastBreak = 0;
-            //while (true)
-            //{
-            //    int nextSpace = text.IndexOf(" ", lastBreak, StringComparison.Ordinal);
-            //    if (nextSpace == -1)
-            //    {
-            //        nextSpace = text.Length;
-            //    }
-            //    string nextPiece = text.Substring(lastBreak, nextSpace - lastBreak);
-            //    if (drawingGraphics.MeasureString(nextPiece, drawingFont).Width > maxWidth && lastSpace != -1)
-            //    {
-            //        nextPiece = text.Substring(lastBreak, lastSpace - lastBreak);
-            //        result.Append(nextPiece);
-            //        lastSpace = -1;
-            //        lastBreak = 
-            //    }
-            //    else
-            //    {
-
-            //    }
-            //}
         }
     }
 }

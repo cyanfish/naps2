@@ -6,6 +6,13 @@ using System.Text.RegularExpressions;
 
 namespace NAPS2.Util
 {
+    /// <summary>
+    /// A class that represents a Python-style slice of a collection.
+    /// https://stackoverflow.com/questions/509211/understanding-pythons-slice-notation/509295#509295
+    ///
+    /// For example, "2:-3" gets all but the first 2 and last 3 items.
+    /// Stepping is supported too, as in "::2" which gets every other item.
+    /// </summary>
     public class Slice
     {
         public static readonly Slice Default = new Slice(null, null, null);
