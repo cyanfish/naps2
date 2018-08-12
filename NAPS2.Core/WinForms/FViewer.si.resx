@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -211,7 +211,7 @@
     <value>17, 17</value>
   </metadata>
   <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+    <value></value>
   </data>
   <data name="tbPageCurrent.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 25</value>
@@ -220,7 +220,7 @@
     <value>35, 22</value>
   </data>
   <data name="lblPageTotal.Text" xml:space="preserve">
-    <value>of {0}</value>
+    <value></value>
   </data>
   <data name="tsPrev.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -229,7 +229,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsPrev.Text" xml:space="preserve">
-    <value>Previous</value>
+    <value></value>
   </data>
   <data name="tsNext.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -238,7 +238,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsNext.Text" xml:space="preserve">
-    <value>Next</value>
+    <value></value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -250,7 +250,7 @@
     <value>20, 22</value>
   </data>
   <data name="tsdRotate.Text" xml:space="preserve">
-    <value>Rotate</value>
+    <value></value>
   </data>
   <data name="tsCrop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -259,7 +259,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsCrop.Text" xml:space="preserve">
-    <value>Crop</value>
+    <value></value>
   </data>
   <data name="tsBrightnessContrast.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -268,7 +268,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value>Brightness / Contrast</value>
+    <value></value>
   </data>
   <data name="tsHueSaturation.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -277,7 +277,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value></value>
   </data>
   <data name="tsBlackWhite.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -286,7 +286,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsBlackWhite.Text" xml:space="preserve">
-    <value>Black and White</value>
+    <value></value>
   </data>
   <data name="tsSharpen.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -295,7 +295,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsSharpen.Text" xml:space="preserve">
-    <value>Sharpen</value>
+    <value></value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -307,7 +307,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsSavePDF.Text" xml:space="preserve">
-    <value>Save PDF</value>
+    <value></value>
   </data>
   <data name="tsSaveImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -316,7 +316,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsSaveImage.Text" xml:space="preserve">
-    <value>Save Image</value>
+    <value></value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -328,7 +328,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsDelete.Text" xml:space="preserve">
-    <value>Delete</value>
+    <value></value>
   </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
@@ -379,31 +379,31 @@
     <value>164, 22</value>
   </data>
   <data name="tsRotateLeft.Text" xml:space="preserve">
-    <value>Rotate Left</value>
+    <value></value>
   </data>
   <data name="tsRotateRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
   <data name="tsRotateRight.Text" xml:space="preserve">
-    <value>Rotate Right</value>
+    <value></value>
   </data>
   <data name="tsFlip.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
   <data name="tsFlip.Text" xml:space="preserve">
-    <value>Flip</value>
+    <value></value>
   </data>
   <data name="tsDeskew.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
   <data name="tsDeskew.Text" xml:space="preserve">
-    <value>Deskew</value>
+    <value></value>
   </data>
   <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
   <data name="tsCustomRotation.Text" xml:space="preserve">
-    <value>Custom Rotation</value>
+    <value></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -442,7 +442,7 @@
     <value>300, 300</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Preview</value>
+    <value></value>
   </data>
   <data name="&gt;&gt;tbPageCurrent.Name" xml:space="preserve">
     <value>tbPageCurrent</value>

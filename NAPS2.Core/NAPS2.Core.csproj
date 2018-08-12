@@ -648,101 +648,388 @@
       <LastGenOutput>ConsoleResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lang\Resources\MiscResources.af.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.ar.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.bg.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.ca.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.cs.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.da.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.de.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.el.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.es.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.et.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.fa.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.fi.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.fr.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.he.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.hr.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.hu.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.it.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.ja.resx" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.ko.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.lt.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.lv.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.nb.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.nl.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.nn.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.pl.resx" Condition="'$(Configuration)' != 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.af.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.ar.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.bg.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.ca.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.cs.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.da.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.de.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.el.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.es.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.et.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.fa.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.fi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.fr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.he.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.hr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.hu.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.ko.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.lt.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.lv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.nb.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.nl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.nn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.pl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\MiscResources.pseudo.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.pt-PT.resx" Condition="'$(Configuration)' != 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.pt-PT.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\MiscResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MiscResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lang\Resources\MiscResources.ro.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.ru.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.si.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.sk.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.sl.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.sq.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.sr-Cyrl.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.sr-Latn.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.sv.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.tr.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.uk.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.vi.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.af.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.ar.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.bg.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.ca.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.cs.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.da.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.de.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.el.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.es.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.et.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.fa.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.fi.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.fr.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.he.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.hr.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.hu.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.it.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.ja.resx" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.ko.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.lt.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.lv.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.nb.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.nl.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.nn.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.pl.resx" Condition="'$(Configuration)' != 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\MiscResources.ro.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.sk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.sl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.sq.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.sr-Cyrl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.sr-Latn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.sv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.tr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.uk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.vi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\MiscResources.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.af.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.ar.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.bg.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.ca.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.cs.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.da.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.de.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.el.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.es.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.et.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.fa.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.fi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.fr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.he.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.hr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.hu.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.ko.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.lt.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.lv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.nb.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.nl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.nn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.pl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\SettingsResources.pseudo.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.pt-PT.resx" Condition="'$(Configuration)' != 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.pt-PT.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Lang\Resources\SettingsResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SettingsResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>NAPS2.Lang.Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.ro.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.ru.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.si.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.sk.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.sl.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.sq.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.sr-Cyrl.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.sr-Latn.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.sv.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.tr.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.vi.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'" />
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.ro.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.sk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.sl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.sq.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.sr-Cyrl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.sr-Latn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.sv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.tr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.uk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.vi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Resources\SettingsResources.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.af.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.ar.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.bg.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.ca.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.cs.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.da.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.de.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.el.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.es.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.et.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.fa.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.fi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.fr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.he.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.hr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.hu.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.ko.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.lt.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.lv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.nb.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.nl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.nn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.pl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.pt-PT.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\EmailProviderWidget.resx">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.ro.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.sk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.sl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.sq.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.sr-Cyrl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.sr-Latn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.sv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.tr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.uk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.vi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>EmailProviderWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\EmailProviderWidget.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>EmailProviderWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.af.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -753,7 +1040,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.bg.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAbout.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.ca.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAbout.cs</DependentUpon>
@@ -797,7 +1083,7 @@
     <EmbeddedResource Include="WinForms\FAbout.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAbout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAbout.ja.resx">
+    <EmbeddedResource Include="WinForms\FAbout.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAbout.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -924,7 +1210,7 @@
     <EmbeddedResource Include="WinForms\FAdvancedScanSettings.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAdvancedScanSettings.ja.resx">
+    <EmbeddedResource Include="WinForms\FAdvancedScanSettings.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAdvancedScanSettings.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1000,7 +1286,130 @@
     <EmbeddedResource Include="WinForms\FAdvancedScanSettings.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAdvancedScanSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.af.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.ar.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.bg.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.ca.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.cs.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.da.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.de.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.el.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.es.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.et.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.fa.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.fi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.fr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.he.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.hr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.hu.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.ko.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.lt.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.lv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.nb.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.nl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.nn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.pl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.pt-PT.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAuthorize.resx">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.ro.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.sk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.sl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.sq.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.sr-Cyrl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.sr-Latn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.sv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.tr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.uk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.vi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FAuthorize.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAuthorize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAutoSaveSettings.af.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1054,7 +1463,7 @@
     <EmbeddedResource Include="WinForms\FAutoSaveSettings.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAutoSaveSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FAutoSaveSettings.ja.resx">
+    <EmbeddedResource Include="WinForms\FAutoSaveSettings.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FAutoSaveSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FAutoSaveSettings.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1181,7 +1590,7 @@
     <EmbeddedResource Include="WinForms\FBatchPrompt.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBatchPrompt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBatchPrompt.ja.resx">
+    <EmbeddedResource Include="WinForms\FBatchPrompt.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBatchPrompt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchPrompt.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1307,7 +1716,7 @@
     <EmbeddedResource Include="WinForms\FBatchScan.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBatchScan.ja.resx">
+    <EmbeddedResource Include="WinForms\FBatchScan.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBatchScan.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1383,32 +1792,131 @@
     <EmbeddedResource Include="WinForms\FBatchScan.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBatchScan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBlackWhite.ja.resx">
-      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEmailProvider.af.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FBrightnessContrast.ja.resx">
-      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEmailProvider.ar.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FCrop.ja.resx">
-      <DependentUpon>FCrop.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEmailProvider.bg.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FDesktop.ja.resx">
-      <DependentUpon>FDesktop.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEmailProvider.ca.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FDownloadProgress.ja.resx">
-      <DependentUpon>FDownloadProgress.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEmailProvider.cs.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEditProfile.ja.resx">
-      <DependentUpon>FEditProfile.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEmailProvider.da.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.de.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.el.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.es.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.et.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.fa.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.fi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.fr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.he.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.hr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.hu.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.ko.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.lt.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.lv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.nb.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.nl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.nn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.pl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.pt-PT.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEmailProvider.resx">
       <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FEmailSettings.ja.resx">
-      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEmailProvider.ro.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FError.ja.resx">
-      <DependentUpon>FError.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\FEmailProvider.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.sk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.sl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.sq.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.sr-Cyrl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.sr-Latn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.sv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.tr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.uk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.vi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailProvider.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailProvider.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FHueSaturation.af.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FHueSaturation.cs</DependentUpon>
@@ -1461,7 +1969,7 @@
     <EmbeddedResource Include="WinForms\FHueSaturation.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FHueSaturation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FHueSaturation.ja.resx">
+    <EmbeddedResource Include="WinForms\FHueSaturation.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FHueSaturation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FHueSaturation.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1545,7 +2053,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FCrop.bg.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FCrop.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FCrop.ca.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FCrop.cs</DependentUpon>
@@ -1587,6 +2094,9 @@
       <DependentUpon>FCrop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FCrop.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FCrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FCrop.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FCrop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FCrop.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1667,7 +2177,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.ar.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FDesktop.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.bg.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FDesktop.cs</DependentUpon>
@@ -1712,6 +2221,9 @@
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FDesktop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FDesktop.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FDesktop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDesktop.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -1838,6 +2350,9 @@
     <EmbeddedResource Include="WinForms\FDownloadProgress.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FDownloadProgress.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FDownloadProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FDownloadProgress.ko.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FDownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
@@ -1959,6 +2474,9 @@
       <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditProfile.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEditProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEditProfile.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FEditProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEditProfile.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2085,6 +2603,9 @@
     <EmbeddedResource Include="WinForms\FEmailSettings.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FEmailSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FEmailSettings.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FEmailSettings.ko.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FEmailSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -2207,6 +2728,9 @@
       <DependentUpon>FError.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FError.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FError.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FError.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FError.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2332,6 +2856,9 @@
     <EmbeddedResource Include="WinForms\FBrightnessContrast.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBrightnessContrast.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBrightnessContrast.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FBrightnessContrast.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBrightnessContrast.ko.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBrightnessContrast.cs</DependentUpon>
     </EmbeddedResource>
@@ -2455,7 +2982,7 @@
     <EmbeddedResource Include="WinForms\FImageSettings.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FImageSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FImageSettings.ja.resx">
+    <EmbeddedResource Include="WinForms\FImageSettings.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FImageSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FImageSettings.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2582,7 +3109,7 @@
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FOcrLanguageDownload.ja.resx">
+    <EmbeddedResource Include="WinForms\FOcrLanguageDownload.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FOcrLanguageDownload.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrLanguageDownload.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2708,7 +3235,7 @@
     <EmbeddedResource Include="WinForms\FOcrSetup.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FOcrSetup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FOcrSetup.ja.resx">
+    <EmbeddedResource Include="WinForms\FOcrSetup.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FOcrSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FOcrSetup.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2834,7 +3361,7 @@
     <EmbeddedResource Include="WinForms\FPageSize.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPageSize.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPageSize.ja.resx">
+    <EmbeddedResource Include="WinForms\FPageSize.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPageSize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPageSize.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -2960,7 +3487,7 @@
     <EmbeddedResource Include="WinForms\FPdfPassword.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPdfPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPdfPassword.ja.resx">
+    <EmbeddedResource Include="WinForms\FPdfPassword.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPdfPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfPassword.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3086,7 +3613,7 @@
     <EmbeddedResource Include="WinForms\FPdfSettings.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPdfSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPdfSettings.ja.resx">
+    <EmbeddedResource Include="WinForms\FPdfSettings.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPdfSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPdfSettings.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3213,7 +3740,7 @@
     <EmbeddedResource Include="WinForms\FPlaceholders.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPlaceholders.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FPlaceholders.ja.resx">
+    <EmbeddedResource Include="WinForms\FPlaceholders.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FPlaceholders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FPlaceholders.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3339,7 +3866,7 @@
     <EmbeddedResource Include="WinForms\FProfiles.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FProfiles.ja.resx">
+    <EmbeddedResource Include="WinForms\FProfiles.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FProfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FProfiles.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3466,7 +3993,7 @@
     <EmbeddedResource Include="WinForms\FProgress.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FProgress.ja.resx">
+    <EmbeddedResource Include="WinForms\FProgress.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FProgress.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3592,7 +4119,7 @@
     <EmbeddedResource Include="WinForms\FRecover.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRecover.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FRecover.ja.resx">
+    <EmbeddedResource Include="WinForms\FRecover.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRecover.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRecover.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3675,7 +4202,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRotate.bg.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRotate.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRotate.ca.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRotate.cs</DependentUpon>
@@ -3719,7 +4245,7 @@
     <EmbeddedResource Include="WinForms\FRotate.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRotate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FRotate.ja.resx">
+    <EmbeddedResource Include="WinForms\FRotate.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FRotate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FRotate.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3846,7 +4372,7 @@
     <EmbeddedResource Include="WinForms\FScanProgress.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FScanProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FScanProgress.ja.resx">
+    <EmbeddedResource Include="WinForms\FScanProgress.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FScanProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FScanProgress.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -3972,7 +4498,7 @@
     <EmbeddedResource Include="WinForms\FSelectDevice.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FSelectDevice.ja.resx">
+    <EmbeddedResource Include="WinForms\FSelectDevice.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FSelectDevice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSelectDevice.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4096,6 +4622,9 @@
       <DependentUpon>FBlackWhite.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBlackWhite.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>FBlackWhite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FBlackWhite.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FBlackWhite.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FBlackWhite.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4222,7 +4751,7 @@
     <EmbeddedResource Include="WinForms\FSharpen.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FSharpen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FSharpen.ja.resx">
+    <EmbeddedResource Include="WinForms\FSharpen.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FSharpen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FSharpen.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4348,7 +4877,7 @@
     <EmbeddedResource Include="WinForms\FTwainGui.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FTwainGui.ja.resx">
+    <EmbeddedResource Include="WinForms\FTwainGui.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FTwainGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FTwainGui.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4475,7 +5004,7 @@
     <EmbeddedResource Include="WinForms\FUpdate.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FUpdate.ja.resx">
+    <EmbeddedResource Include="WinForms\FUpdate.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FUpdate.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4601,7 +5130,7 @@
     <EmbeddedResource Include="WinForms\FViewer.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\FViewer.ja.resx">
+    <EmbeddedResource Include="WinForms\FViewer.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FViewer.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4728,7 +5257,7 @@
     <EmbeddedResource Include="WinForms\NotifyWidget.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>NotifyWidget.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\NotifyWidget.ja.resx">
+    <EmbeddedResource Include="WinForms\NotifyWidget.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>NotifyWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\NotifyWidget.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4854,7 +5383,7 @@
     <EmbeddedResource Include="WinForms\ThumbnailList.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\ThumbnailList.ja.resx">
+    <EmbeddedResource Include="WinForms\ThumbnailList.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>ThumbnailList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\ThumbnailList.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -4981,7 +5510,7 @@
     <EmbeddedResource Include="WinForms\TiffViewer.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>TiffViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\TiffViewer.ja.resx">
+    <EmbeddedResource Include="WinForms\TiffViewer.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>TiffViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewer.ko.resx" Condition="'$(Configuration)' != 'Debug'">
@@ -5108,7 +5637,7 @@
     <EmbeddedResource Include="WinForms\TiffViewerCtl.it.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\TiffViewerCtl.ja.resx">
+    <EmbeddedResource Include="WinForms\TiffViewerCtl.ja.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>TiffViewerCtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\TiffViewerCtl.ko.resx" Condition="'$(Configuration)' != 'Debug'">
