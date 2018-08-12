@@ -5765,7 +5765,6 @@
     <None Include="Lang\po\vi.po" />
     <None Include="Lang\po\zh-CHS.po" />
     <None Include="Lang\po\zh-TW.po" />
-    <None Include="microsoft.credentials.json" />
     <None Include="packages.config" />
     <None Include="Icons\accept-small.png" />
   </ItemGroup>
