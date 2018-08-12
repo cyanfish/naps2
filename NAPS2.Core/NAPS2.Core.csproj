@@ -367,7 +367,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WinForms\EmailProviderWidget.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="WinForms\EmailProviderWidget.Designer.cs">
       <DependentUpon>EmailProviderWidget.cs</DependentUpon>
@@ -723,7 +723,6 @@
     <EmbeddedResource Include="Lang\Resources\MiscResources.pl.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>MiscResources.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lang\Resources\MiscResources.pseudo.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\MiscResources.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>MiscResources.resx</DependentUpon>
     </EmbeddedResource>
@@ -852,7 +851,6 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.pl.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>SettingsResources.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lang\Resources\SettingsResources.pseudo.resx" Condition="'$(Configuration)' != 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\SettingsResources.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>SettingsResources.resx</DependentUpon>
     </EmbeddedResource>

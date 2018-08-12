@@ -90,7 +90,12 @@ namespace NAPS2.Localization
             var schema = "http://schemas.microsoft.com/developer/msbuild/2003";
 
             var oldElement = doc.Descendants(XName.Get("EmbeddedResource", schema)).FirstOrDefault(x => x.Attribute("Include")?.Value == relativePath);
-            oldElement?.Remove();
+            if (oldElement != null)
+            {
+                // Comment this and uncomment below if conventions change and the project file needs to be updated from scratch
+                return;
+            }
+            // oldElement?.Remove();
 
             var dependentElement = doc.Descendants(XName.Get("EmbeddedResource", schema)).FirstOrDefault(x => x.Attribute("Include")?.Value == relativeDependentPath);
             var doubleDependent = dependentElement?.Element(XName.Get("DependentUpon", schema));
