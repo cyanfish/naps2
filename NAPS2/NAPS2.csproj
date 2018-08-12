@@ -149,7 +149,7 @@
       <LastGenOutput>setup.languagefiles.iss</LastGenOutput>
     </None>
     <None Include="Setup\Update-Language.ps1" />
-    <None Include="Setup\updatetemplates.bat" />
+    <None Include="Setup\Update-Templates.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="appsettings.xml">

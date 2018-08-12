@@ -18,13 +18,13 @@ namespace NAPS2.WinForms
         public event EventHandler ClickFirst;
         public event EventHandler ClickSecond;
 
-        public Image ImageFirst { get; set; }
-        public Image ImageSecond { get; set; }
+        public Image FirstImage { get; set; }
+        public Image SecondImage { get; set; }
 
         [Localizable(true)]
-        public string TextFirst { get; set; }
+        public string FirstText { get; set; }
         [Localizable(true)]
-        public string TextSecond { get; set; }
+        public string SecondText { get; set; }
 
         public int MaxTextWidth { get; set; }
 
@@ -32,12 +32,12 @@ namespace NAPS2.WinForms
         {
             bool wrap = false;
             var sumWidth = Padding.Left + Padding.Right +
-                           Math.Max(ImageFirst != null ? ImageFirst.Width : 0,
-                               ImageSecond != null ? ImageSecond.Width : 0)
-                           + Math.Max(MeasureTextWidth(TextFirst, ref wrap), MeasureTextWidth(TextSecond, ref wrap));
+                           Math.Max(FirstImage != null ? FirstImage.Width : 0,
+                               SecondImage != null ? SecondImage.Width : 0)
+                           + Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
             var sumHeight = Padding.Top + Padding.Bottom +
-                           (ImageFirst != null ? ImageFirst.Height : 0)
-                           + (ImageSecond != null ? ImageSecond.Height : 0)
+                           (FirstImage != null ? FirstImage.Height : 0)
+                           + (SecondImage != null ? SecondImage.Height : 0)
                            + 16 + (wrap ? 12 : 0);
             return new Size(sumWidth, sumHeight);
         }
@@ -83,41 +83,41 @@ namespace NAPS2.WinForms
             Parent = oldParent;
 
             bool wrap = false;
-            int textWidth = Math.Max(MeasureTextWidth(TextFirst, ref wrap), MeasureTextWidth(TextSecond, ref wrap));
+            int textWidth = Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
             var flags = TextFormatFlags.Left | TextFormatFlags.VerticalCenter;
             if (wrap)
             {
                 flags |= TextFormatFlags.WordBreak;
             }
 
-            if (ImageFirst != null && TextFirst != null)
+            if (FirstImage != null && FirstText != null)
             {
                 if (Enabled)
                 {
-                    e.Graphics.DrawImage(ImageFirst, new Point(Padding.Left, Height / 4 - ImageFirst.Height / 2));
+                    e.Graphics.DrawImage(FirstImage, new Point(Padding.Left, Height / 4 - FirstImage.Height / 2));
                 }
                 else
                 {
-                    ControlPaint.DrawImageDisabled(e.Graphics, ImageFirst, Padding.Left, Height / 4 - ImageFirst.Height / 2, Color.Transparent);
+                    ControlPaint.DrawImageDisabled(e.Graphics, FirstImage, Padding.Left, Height / 4 - FirstImage.Height / 2, Color.Transparent);
                 }
 
-                var textRectangle = new Rectangle(Padding.Left + ImageFirst.Width, 0, textWidth, Height / 2);
-                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextFirst, textRectangle, ForeColor, Font, flags));
+                var textRectangle = new Rectangle(Padding.Left + FirstImage.Width, 0, textWidth, Height / 2);
+                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, FirstText, textRectangle, ForeColor, Font, flags));
             }
 
-            if (ImageSecond != null && TextSecond != null)
+            if (SecondImage != null && SecondText != null)
             {
                 if (Enabled)
                 {
-                    e.Graphics.DrawImage(ImageSecond, new Point(Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2));
+                    e.Graphics.DrawImage(SecondImage, new Point(Padding.Left, Height * 3 / 4 - SecondImage.Height / 2));
                 }
                 else
                 {
-                    ControlPaint.DrawImageDisabled(e.Graphics, ImageSecond, Padding.Left, Height * 3 / 4 - ImageSecond.Height / 2, Color.Transparent);
+                    ControlPaint.DrawImageDisabled(e.Graphics, SecondImage, Padding.Left, Height * 3 / 4 - SecondImage.Height / 2, Color.Transparent);
                 }
 
-                var textRectangle = new Rectangle(Padding.Left + ImageSecond.Width, Height / 2, textWidth, Height / 2);
-                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, TextSecond, textRectangle, ForeColor, Font, flags));
+                var textRectangle = new Rectangle(Padding.Left + SecondImage.Width, Height / 2, textWidth, Height / 2);
+                renderer.DrawItemText(new ToolStripItemTextRenderEventArgs(e.Graphics, this, SecondText, textRectangle, ForeColor, Font, flags));
             }
 
             Image = null;

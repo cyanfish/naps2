@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml;
+
+namespace NAPS2.Localization
+{
+    public class Language
+    {
+        public static void Update(string langCode)
+        {
+            var ctx = new LanguageContext(langCode);
+            ctx.Load(Path.Combine(Paths.Root, $@"NAPS2.Core\Lang\po\{langCode}.po"));
+            ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\Resources"));
+            ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\WinForms"));
+        }
+    }
+}
