@@ -148,7 +148,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>setup.languagefiles.iss</LastGenOutput>
     </None>
-    <None Include="Setup\Update-Language.ps1" />
+    <None Include="Setup\Update-Resources.ps1" />
     <None Include="Setup\Update-Templates.ps1" />
   </ItemGroup>
   <ItemGroup>
