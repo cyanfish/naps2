@@ -35,8 +35,8 @@ namespace NAPS2.Localization
                 var hotkeyMatch = HotkeyRegex.Match(original);
                 if (hotkeyMatch.Success)
                 {
-                    prefix = "&amp;";
-                    original = HotkeyRegex.Replace(original, m => m.Groups[2].Value);
+                    prefix = "&";
+                    original = HotkeyRegex.Replace(original, m => m.Groups[1].Value);
                 }
             }
             return true;
