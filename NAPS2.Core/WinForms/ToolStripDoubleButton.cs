@@ -15,8 +15,8 @@ namespace NAPS2.WinForms
         {
         }
 
-        public event EventHandler ClickFirst;
-        public event EventHandler ClickSecond;
+        public event EventHandler FirstClick;
+        public event EventHandler SecondClick;
 
         public Image FirstImage { get; set; }
         public Image SecondImage { get; set; }
@@ -140,11 +140,11 @@ namespace NAPS2.WinForms
 
             if (currentButton == 0)
             {
-                ClickFirst?.Invoke(this, e);
+                FirstClick?.Invoke(this, e);
             }
             else if (currentButton == 1)
             {
-                ClickSecond?.Invoke(this, e);
+                SecondClick?.Invoke(this, e);
             }
         }
     }

@@ -1170,12 +1170,12 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void tsMove_ClickFirst(object sender, EventArgs e)
+        private void tsMove_FirstClick(object sender, EventArgs e)
         {
             MoveUp();
         }
 
-        private void tsMove_ClickSecond(object sender, EventArgs e)
+        private void tsMove_SecondClick(object sender, EventArgs e)
         {
             MoveDown();
         }

@@ -556,8 +556,8 @@ namespace NAPS2.WinForms
             this.tsMove.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             resources.ApplyResources(this.tsMove, "tsMove");
             this.tsMove.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            this.tsMove.ClickFirst += new System.EventHandler(this.tsMove_ClickFirst);
-            this.tsMove.ClickSecond += new System.EventHandler(this.tsMove_ClickSecond);
+            this.tsMove.FirstClick += new System.EventHandler(this.tsMove_FirstClick);
+            this.tsMove.SecondClick += new System.EventHandler(this.tsMove_SecondClick);
             // 
             // tsdReorder
             // 

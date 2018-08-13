@@ -532,10 +532,10 @@
   <data name="tsMove.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 51</value>
   </data>
-  <data name="tsMove.TextFirst" xml:space="preserve">
+  <data name="tsMove.FirstText" xml:space="preserve">
     <value>Move Up</value>
   </data>
-  <data name="tsMove.TextSecond" xml:space="preserve">
+  <data name="tsMove.SecondText" xml:space="preserve">
     <value>Move Down</value>
   </data>
   <data name="tsdReorder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
