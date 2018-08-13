@@ -155,7 +155,7 @@ namespace NAPS2.WinForms
         {
             // Read a list of languages from the Languages.resx file
             var resourceManager = LanguageNames.ResourceManager;
-            var resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            var resourceSet = resourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
             foreach (DictionaryEntry entry in resourceSet.Cast<DictionaryEntry>().OrderBy(x => x.Value))
             {
                 var langCode = ((string)entry.Key).Replace("_", "-");
@@ -176,9 +176,12 @@ namespace NAPS2.WinForms
         private void RelayoutToolbar()
         {
             // Wrap text as necessary
-            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
+            using (var g = CreateGraphics())
             {
-                btn.Text = stringWrapper.Wrap(btn.Text, 80, CreateGraphics(), btn.Font);
+                foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
+                {
+                    btn.Text = stringWrapper.Wrap(btn.Text ?? "", 80, g, btn.Font);
+                }
             }
             ResetToolbarMargin();
             // Recalculate visibility for the below check
