@@ -73,7 +73,7 @@ namespace NAPS2.WinForms
                 return;
             ToolStripRenderer renderer = ToolStripManager.Renderer;
             
-            if (Platform.Compat.UseToolStripRenderHack)
+            if (PlatformCompat.Runtime.UseToolStripRenderHack)
             {
                 var oldHeight = Height;
                 var oldParent = Parent;

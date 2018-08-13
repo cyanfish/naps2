@@ -5,8 +5,8 @@ using System.Text;
 
 namespace NAPS2.Compat
 {
-    public interface IPlatformCompat
+    public class MonoRuntimeCompat : IRuntimeCompat
     {
-        bool UseToolStripRenderHack { get; }
+        public bool UseToolStripRenderHack => false;
     }
 }

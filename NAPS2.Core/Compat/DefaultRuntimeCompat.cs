@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NAPS2.Compat
 {
-    public class DefaultPlatformCompat : IPlatformCompat
+    public class DefaultRuntimeCompat : IRuntimeCompat
     {
         public bool UseToolStripRenderHack => true;
     }
