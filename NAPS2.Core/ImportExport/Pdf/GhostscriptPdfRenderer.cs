@@ -90,9 +90,9 @@ namespace NAPS2.ImportExport.Pdf
 
             public static DownloadInfo GhostscriptDownload => Environment.Is64BitProcess ? GhostscriptDownload64 : GhostscriptDownload32;
 
-            private static readonly ExternalComponent GhostscriptComponent32 = new ExternalComponent("generic-import", @"gs-9.21\gsdll32.dll", PlatformSupport.Windows);
+            private static readonly ExternalComponent GhostscriptComponent32 = new ExternalComponent("generic-import", Path.Combine("gs-9.21", "gsdll32.dll"), PlatformSupport.Windows);
 
-            private static readonly ExternalComponent GhostscriptComponent64 = new ExternalComponent("generic-import", @"gs-9.21\gsdll64.dll", PlatformSupport.Windows);
+            private static readonly ExternalComponent GhostscriptComponent64 = new ExternalComponent("generic-import", Path.Combine("gs-9.21", "gsdll64.dll"), PlatformSupport.Windows);
 
             public static ExternalComponent GhostscriptComponent => Environment.Is64BitProcess ? GhostscriptComponent64 : GhostscriptComponent32;
         }
