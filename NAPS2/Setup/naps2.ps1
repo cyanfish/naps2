@@ -12,7 +12,7 @@ function Get-Inno-Path {
 
 function Get-NAPS2-Version {
     & (Get-MSBuild-Path) ..\NAPS2.csproj /v:q /p:Configuration=Debug | Out-Null
-    $Version = [Reflection.AssemblyName]::GetAssemblyName([IO.Path]::Combine($pwd, "..\bin\StandaloneZIP\NAPS2.exe")).Version
+    $Version = [Reflection.AssemblyName]::GetAssemblyName([IO.Path]::Combine($pwd, "..\bin\Standalone\NAPS2.exe")).Version
     $VersionStr = "" + $Version.Major + "." + $Version.Minor + "." + $Version.Build
     $VersionStr
 }
@@ -50,10 +50,8 @@ function Build-NAPS2 {
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerEXE
     "Building MSI"
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerMSI
-    "Building ZIP"
-    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=StandaloneZIP
-    "Building 7Z"
-    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone7Z
+    "Building Standalone"
+    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone
 	"Build complete."
 }
 

@@ -37,5 +37,5 @@ if (-not [string]::IsNullOrEmpty($Name)) {
 }
 
 # Standalone ZIP/7Z
-Publish-NAPS2-Standalone $PublishDir "StandaloneZIP" ($PublishDir + "naps2-$Name-portable.zip")
-Publish-NAPS2-Standalone $PublishDir "Standalone7Z" ($PublishDir + "naps2-$Name-portable.7z")
+Publish-NAPS2-Standalone $PublishDir "Standalone" ($PublishDir + "naps2-$Name-portable.zip")
+Publish-NAPS2-Standalone $PublishDir "Standalone" ($PublishDir + "naps2-$Name-portable.7z")

@@ -14,7 +14,7 @@
   <Fragment Id='LanguageComponentsFragment'>
 <#
     var setupDirPath = Path.GetDirectoryName(this.Host.TemplateFile);
-    var outputDirPath = Path.Combine(setupDirPath, @"..\..\NAPS2.Core\bin\x86\InstallerEXE");
+    var outputDirPath = Path.Combine(setupDirPath, @"..\..\NAPS2.Core\bin\InstallerEXE");
     var outputDir = new DirectoryInfo(outputDirPath);
 #>
     <ComponentGroup Id="LangComponents">

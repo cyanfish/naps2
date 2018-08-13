@@ -32,9 +32,9 @@ Get-Process | where { $_.ProcessName -eq "NAPS2.vshost" } | kill
 "Building MSI"
 & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerMSI
 "Building ZIP"
-& $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=StandaloneZIP
+& $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone
 
-Publish-NAPS2-Standalone $PublishDir "StandaloneZIP" ($PublishDir + "naps2-$Version-test_$LanguageCode-portable.zip")
+Publish-NAPS2-Standalone $PublishDir "Standalone" ($PublishDir + "naps2-$Version-test_$LanguageCode-portable.zip")
 
 ""
 "Saved to " + ($PublishDir + "naps2-$Version-test_$LanguageCode-portable.zip")

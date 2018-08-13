@@ -74,15 +74,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StandaloneZIP|x86'">
-    <OutputPath>bin\StandaloneZIP\</OutputPath>
-    <DefineConstants>TRACE;STANDALONE STANDALONE_ZIP</DefineConstants>
-    <Optimize>false</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'InstallerMSI|x86'">
     <OutputPath>bin\InstallerMSI\</OutputPath>
     <DefineConstants>TRACE;INSTALLER INSTALLER_MSI</DefineConstants>
@@ -92,9 +83,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Standalone7Z|x86'">
-    <OutputPath>bin\Standalone7Z\</OutputPath>
-    <DefineConstants>TRACE;STANDALONE STANDALONE_7Z</DefineConstants>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Standalone|x86' ">
+    <OutputPath>bin\Standalone\</OutputPath>
+    <DefineConstants>TRACE;STANDALONE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
