@@ -1,3 +1,6 @@
+// See WiaApi.cs for an explanation of this guard
+#if !WINDOWS
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,8 +9,6 @@ using System.Runtime.InteropServices;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
-
-#if !WINDOWS
 
 namespace NAPS2.Scan.Wia
 {

@@ -1,13 +1,13 @@
-﻿using System;
+﻿// See WiaApi.cs for an explanation of this guard
+#if WINDOWS
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
-#if WINDOWS
+using WIA;
 
 namespace NAPS2.Scan.Wia
 {
-    using WIA;
-
     public class WiaState
     {
         public WiaState(Device device, Item item)

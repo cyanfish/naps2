@@ -1,3 +1,10 @@
+// Since WIA is a COM reference, it can't be compiled on other platforms (i.e. Linux).
+// In the NAPS2.Core.csproj file, WIA is defined as a conditional reference.
+// WiaApi.mono.cs and WiaState.mono.cs contain placeholder implementations that don't depend on WIA.
+// This setup lets NAPS2 compile on multiple platforms without changing any code that doesn't directly touch WIA.
+// WIA-related NAPS2 code is never run on non-Windows platforms due to Platform.Compat checks.
+#if WINDOWS
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,13 +13,10 @@ using System.Runtime.InteropServices;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
-
-#if WINDOWS
+using WIA;
 
 namespace NAPS2.Scan.Wia
 {
-    using WIA;
-
     internal static class WiaApi
     {
         #region WIA Constants
