@@ -280,7 +280,7 @@
     <value>3</value>
   </data>
   <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-    <value></value>
+    <value>Apply to all {0} selected images</value>
   </data>
   <data name="&gt;&gt;checkboxApplyToSelected.Name" xml:space="preserve">
     <value>checkboxApplyToSelected</value>

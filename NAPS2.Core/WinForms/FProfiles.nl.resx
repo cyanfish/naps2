@@ -205,7 +205,7 @@
     <value>6</value>
   </data>
   <data name="btnAdd.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Gereed</value>
+    <value>None</value>
   </data>
   <data name="btnAdd.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -223,7 +223,7 @@
     <value>1</value>
   </data>
   <data name="btnAdd.Text" xml:space="preserve">
-    <value>&amp;New</value>
+    <value>&amp;Nieuw</value>
   </data>
   <data name="btnAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -256,7 +256,7 @@
     <value>2</value>
   </data>
   <data name="btnEdit.Text" xml:space="preserve">
-    <value>&amp;Edit</value>
+    <value>&amp;Bewerken</value>
   </data>
   <data name="btnEdit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -289,7 +289,7 @@
     <value>3</value>
   </data>
   <data name="btnDelete.Text" xml:space="preserve">
-    <value>&amp;Delete</value>
+    <value>&amp;Verwijderen</value>
   </data>
   <data name="btnDelete.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -319,7 +319,7 @@
     <value>4</value>
   </data>
   <data name="btnDone.Text" xml:space="preserve">
-    <value>&amp;Done</value>
+    <value>&amp;Gereed</value>
   </data>
   <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
     <value>btnDone</value>
@@ -337,7 +337,7 @@
     <value>19, 22</value>
   </metadata>
   <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Gereed</value>
+    <value>None</value>
   </data>
   <data name="btnScan.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -361,7 +361,7 @@
     <value>5</value>
   </data>
   <data name="btnScan.Text" xml:space="preserve">
-    <value>&amp;Scan</value>
+    <value>&amp;Scannen</value>
   </data>
   <data name="btnScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>

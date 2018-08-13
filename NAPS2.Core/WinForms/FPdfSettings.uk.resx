@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Скасувати</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -622,7 +622,7 @@
     <value>8</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
-    <value>Дозволити друк</value>
+    <value>Allow Printing</value>
   </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Дозволити високоякісний друк</value>
@@ -889,7 +889,7 @@
     <value>16</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;Відновити типові</value>
   </data>
   <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
     <value>btnRestoreDefaults</value>
@@ -1024,7 +1024,7 @@
     <value>35</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-    <value></value>
+    <value>Skip save prompt</value>
   </data>
   <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
     <value>cbSkipSavePrompt</value>
@@ -1069,7 +1069,7 @@
     <value>21</value>
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
-    <value></value>
+    <value>Compatibility</value>
   </data>
   <data name="&gt;&gt;groupCompat.Name" xml:space="preserve">
     <value>groupCompat</value>

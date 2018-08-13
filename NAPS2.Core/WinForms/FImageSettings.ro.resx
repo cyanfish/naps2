@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Renunță</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -217,7 +217,7 @@
     <value>16</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;Restaurare valori implicite</value>
   </data>
   <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
     <value>btnRestoreDefaults</value>
@@ -427,7 +427,7 @@
     <value>36</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-    <value></value>
+    <value>Skip save prompt</value>
   </data>
   <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
     <value>cbSkipSavePrompt</value>
@@ -457,7 +457,7 @@
     <value>37</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Compression:</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -508,7 +508,7 @@
     <value>39</value>
   </data>
   <data name="cbSinglePageTiff.Text" xml:space="preserve">
-    <value></value>
+    <value>Single page files</value>
   </data>
   <data name="&gt;&gt;cbSinglePageTiff.Name" xml:space="preserve">
     <value>cbSinglePageTiff</value>
@@ -532,7 +532,7 @@
     <value>40</value>
   </data>
   <data name="groupJpeg.Text" xml:space="preserve">
-    <value></value>
+    <value>Jpeg Quality</value>
   </data>
   <data name="&gt;&gt;groupJpeg.Name" xml:space="preserve">
     <value>groupJpeg</value>
@@ -556,7 +556,7 @@
     <value>41</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value></value>
+    <value>Tiff Options</value>
   </data>
   <data name="&gt;&gt;groupTiff.Name" xml:space="preserve">
     <value>groupTiff</value>

@@ -160,7 +160,7 @@
     <value>19</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;キャンセル</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -352,7 +352,7 @@
     <value>7</value>
   </data>
   <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-    <value></value>
+    <value>Retry on failure (WIA)</value>
   </data>
   <data name="&gt;&gt;cbWiaRetryOnFailure.Name" xml:space="preserve">
     <value>cbWiaRetryOnFailure</value>
@@ -442,7 +442,7 @@
     <value>4</value>
   </data>
   <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-    <value></value>
+    <value>Offset width based on alignment (WIA)</value>
   </data>
   <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
     <value>cbWiaOffsetWidth</value>
@@ -469,7 +469,7 @@
     <value>3</value>
   </data>
   <data name="cbForcePageSize.Text" xml:space="preserve">
-    <value></value>
+    <value>Stretch to page size</value>
   </data>
   <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
     <value>cbForcePageSize</value>
@@ -625,7 +625,7 @@
     <value>37</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value></value>
+    <value>White Threshold</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

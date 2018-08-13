@@ -118,55 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChooseProfile" xml:space="preserve">
-    <value></value>
+    <value>Choose Profile</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value></value>
+    <value>Clear</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want to clear {0} item(s)?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want to delete {0} item(s)?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want to delete {0} profiles?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want to delete the profile {0}?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value></value>
+    <value>The file {0} already exists. Do you want to overwrite it?</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Slett</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>.</value>
+    <value>The selected scanner could not be found.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>.</value>
+    <value>The selected scanner is offline.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>.</value>
+    <value>You don't have permission to save files at this location.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Feil</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value></value>
+    <value>Bitmap Files (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
-    <value></value>
+    <value>Enhanced Windows MetaFile (*.emf)</value>
   </data>
   <data name="FileTypeExif" xml:space="preserve">
-    <value></value>
+    <value>Exchangeable Image File (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
-    <value></value>
+    <value>GIF File (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value></value>
+    <value>JPEG File (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
     <value>PDF dokument (*.pdf)</value>
@@ -175,7 +175,7 @@
     <value>PNG fil (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
-    <value></value>
+    <value>TIFF File (*.tiff, *.tif)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Navn mangler.</value>
@@ -193,7 +193,7 @@
     <value>OVerskrive fil</value>
   </data>
   <data name="PdfStatus" xml:space="preserve">
-    <value></value>
+    <value>{0} of {1}</value>
   </data>
   <data name="ScannedImage" xml:space="preserve">
     <value>Skannet bilde</value>
@@ -202,16 +202,16 @@
     <value>Velg en profil før du klikker Skann.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>.</value>
+    <value>An error occurred with the scanning driver.</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value></value>
+    <value>Version {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>.</value>
+    <value>An error occurred while trying to send an email.</value>
   </data>
   <data name="AutoUpdates" xml:space="preserve">
-    <value></value>
+    <value>Automatic Updates</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Nedlasting</value>
@@ -226,7 +226,7 @@
     <value>Ikke nå</value>
   </data>
   <data name="UpdateNow" xml:space="preserve">
-    <value></value>
+    <value>A newer version of NAPS2 is available. Do you want to update now?</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Installasjon fullført</value>
@@ -241,22 +241,22 @@
     <value>Installasjon feilet</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value></value>
+    <value>All ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
-    <value></value>
+    <value>Selected ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Anslått størrelse for nedlasting: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
-    <value></value>
+    <value>{0} / {1} files</value>
   </data>
   <data name="SizeProgress" xml:space="preserve">
-    <value></value>
+    <value>{0} / {1} MB</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>.</value>
+    <value>The file '{0}' could not be imported.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
     <value>The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
@@ -268,73 +268,73 @@
     <value>En eller flere filer kunne ikke lastes ned.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value></value>
+    <value>Custom ({0}x{1} {2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
     <value>Skann</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want undo your changes to {0} image(s)?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value></value>
+    <value>Reset Image</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
     <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
-    <value></value>
+    <value>Unsaved Changes</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value></value>
+    <value>Scanning page {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>.</value>
+    <value>No pages are in the feeder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>.</value>
+    <value>You do not have permission to copy content from the file '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>.</value>
+    <value>An error occurred when trying to save the file.</value>
   </data>
   <data name="OfN" xml:space="preserve">
-    <value></value>
+    <value>of {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>.</value>
+    <value>An unknown error ocurred during the batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>.</value>
+    <value>Batch cancelled.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>....</value>
+    <value>Cancelling....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>.</value>
+    <value>Batch completed successfully.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>.</value>
+    <value>Batch scan stopped due to error.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>...</value>
+    <value>Scanning page {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>...</value>
+    <value>Scanning page {0} (scan {1})...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>...</value>
+    <value>Waiting for scan {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value></value>
+    <value>Cancel</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value></value>
+    <value>Close</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>...</value>
+    <value>Saving batch results...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
@@ -343,102 +343,102 @@
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>...</value>
+    <value>Importing {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value></value>
+    <value>Import Progress</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>...</value>
+    <value>Recovering...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value></value>
+    <value>Recovery Progress</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value></value>
+    <value>Save Images Progress</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value></value>
+    <value>Save PDF Progress</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>...</value>
+    <value>Saving {0}...</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>...</value>
+    <value>Copying...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value></value>
+    <value>Copy Progress</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>...</value>
+    <value>Importing...</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value></value>
+    <value>Email PDF Progress</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>.</value>
+    <value>An error occurred when trying to auto save.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
-    <value></value>
+    <value>All Files</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value></value>
+    <value>Image Files</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>.</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner's cover is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner has a paper jam.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner is warming up.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>.</value>
+    <value>An update to OCR is available.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>.</value>
+    <value>Image saved.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>.</value>
+    <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>.</value>
+    <value>PDF saved.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
-    <value></value>
+    <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>.</value>
+    <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>...</value>
+    <value>Deskewing...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value></value>
+    <value>Deskew Progress</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value></value>
+    <value>Download Needed</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
     <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want to cancel the batch scan?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value></value>
+    <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value></value>
+    <value>Donate</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>.</value>
+    <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
 </root>

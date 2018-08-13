@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Отказ</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -217,7 +217,7 @@
     <value>16</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;Възстановяване на настройки по подразбиране</value>
   </data>
   <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
     <value>btnRestoreDefaults</value>

@@ -217,7 +217,7 @@
     <value>3</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Paper source:</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -265,7 +265,7 @@
     <value>18</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>&amp;Olgu</value>
   </data>
   <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>
@@ -292,7 +292,7 @@
     <value>5</value>
   </data>
   <data name="rdbConfig.Text" xml:space="preserve">
-    <value></value>
+    <value>Use predefined settings</value>
   </data>
   <data name="&gt;&gt;rdbConfig.Name" xml:space="preserve">
     <value>rdbConfig</value>
@@ -319,7 +319,7 @@
     <value>6</value>
   </data>
   <data name="rdbNative.Text" xml:space="preserve">
-    <value></value>
+    <value>Use native UI</value>
   </data>
   <data name="&gt;&gt;rdbNative.Name" xml:space="preserve">
     <value>rdbNative</value>
@@ -370,7 +370,7 @@
     <value>9</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Bit depth:</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -424,7 +424,7 @@
     <value>11</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Page size:</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -502,7 +502,7 @@
     <value>13</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Resolution:</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -637,7 +637,7 @@
     <value>19</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Loobu</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -1036,7 +1036,7 @@
     <value>30</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
-    <value></value>
+    <value>Enable Auto Save</value>
   </data>
   <data name="&gt;&gt;cbAutoSave.Name" xml:space="preserve">
     <value>cbAutoSave</value>
@@ -1096,7 +1096,7 @@
     <value>32</value>
   </data>
   <data name="btnAdvanced.Text" xml:space="preserve">
-    <value>&amp;Advanced</value>
+    <value>&amp;Profiili lisavalikud</value>
   </data>
   <data name="&gt;&gt;btnAdvanced.Name" xml:space="preserve">
     <value>btnAdvanced</value>

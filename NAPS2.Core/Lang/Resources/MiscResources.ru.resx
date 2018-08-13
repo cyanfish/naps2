@@ -439,6 +439,6 @@
     <value>Пожертвовать</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>.</value>
+    <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
 </root>

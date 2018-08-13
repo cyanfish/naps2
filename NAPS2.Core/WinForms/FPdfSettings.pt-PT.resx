@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Cancelar</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -385,7 +385,7 @@
     <value>9</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Subject:</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -487,7 +487,7 @@
     <value>5</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Title:</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -622,7 +622,7 @@
     <value>8</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
-    <value>Permitir Impressão</value>
+    <value>Allow Printing</value>
   </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Permitir Impressão de Alta Qualidade</value>
@@ -682,7 +682,7 @@
     <value>16</value>
   </data>
   <data name="cbShowUserPassword.Text" xml:space="preserve">
-    <value></value>
+    <value>Show</value>
   </data>
   <data name="&gt;&gt;cbShowUserPassword.Name" xml:space="preserve">
     <value>cbShowUserPassword</value>
@@ -709,7 +709,7 @@
     <value>15</value>
   </data>
   <data name="cbShowOwnerPassword.Text" xml:space="preserve">
-    <value></value>
+    <value>Show</value>
   </data>
   <data name="&gt;&gt;cbShowOwnerPassword.Name" xml:space="preserve">
     <value>cbShowOwnerPassword</value>
@@ -760,7 +760,7 @@
     <value>3</value>
   </data>
   <data name="lblUserPassword.Text" xml:space="preserve">
-    <value>:</value>
+    <value>User Password:</value>
   </data>
   <data name="&gt;&gt;lblUserPassword.Name" xml:space="preserve">
     <value>lblUserPassword</value>
@@ -808,7 +808,7 @@
     <value>1</value>
   </data>
   <data name="lblOwnerPassword.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Owner Password:</value>
   </data>
   <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
     <value>lblOwnerPassword</value>
@@ -919,7 +919,7 @@
     <value>33</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
-    <value></value>
+    <value>Placeholders</value>
   </data>
   <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
     <value>linkPlaceholders</value>
@@ -1024,7 +1024,7 @@
     <value>35</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-    <value></value>
+    <value>Skip save prompt</value>
   </data>
   <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
     <value>cbSkipSavePrompt</value>
@@ -1069,7 +1069,7 @@
     <value>21</value>
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
-    <value></value>
+    <value>Compatibility</value>
   </data>
   <data name="&gt;&gt;groupCompat.Name" xml:space="preserve">
     <value>groupCompat</value>

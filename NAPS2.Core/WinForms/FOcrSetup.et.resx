@@ -208,7 +208,7 @@
     <value>3</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Loobu</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -235,7 +235,7 @@
     <value>4</value>
   </data>
   <data name="linkGetLanguages.Text" xml:space="preserve">
-    <value></value>
+    <value>Get more languages</value>
   </data>
   <data name="&gt;&gt;linkGetLanguages.Name" xml:space="preserve">
     <value>linkGetLanguages</value>
@@ -259,7 +259,7 @@
     <value>5</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>&amp;Olgu</value>
   </data>
   <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>

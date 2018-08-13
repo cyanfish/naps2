@@ -160,7 +160,7 @@
     <value>19</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Anulo</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -451,7 +451,7 @@
     <value>29</value>
   </data>
   <data name="cbPromptForFilePath.Text" xml:space="preserve">
-    <value></value>
+    <value>Prompt for file path</value>
   </data>
   <data name="&gt;&gt;cbPromptForFilePath.Name" xml:space="preserve">
     <value>cbPromptForFilePath</value>

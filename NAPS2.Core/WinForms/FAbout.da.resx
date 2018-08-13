@@ -214,7 +214,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="okButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Fuldført</value>
+    <value>None</value>
   </data>
   <data name="okButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

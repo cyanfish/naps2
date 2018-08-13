@@ -169,7 +169,7 @@
     <value>JPEG датотека (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value></value>
+    <value>PDF Document (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>PNG датотека (*.png)</value>
@@ -226,7 +226,7 @@
     <value>Не сада</value>
   </data>
   <data name="UpdateNow" xml:space="preserve">
-    <value></value>
+    <value>A newer version of NAPS2 is available. Do you want to update now?</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Инсталација завршена</value>
@@ -367,7 +367,7 @@
     <value>Копирање...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value></value>
+    <value>Copy Progress</value>
   </data>
   <data name="Importing" xml:space="preserve">
     <value>Увозим...</value>
@@ -388,57 +388,57 @@
     <value>Одабрани скенер није укључен.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner's cover is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner has a paper jam.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner is warming up.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>.</value>
+    <value>An update to OCR is available.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>.</value>
+    <value>Image saved.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>.</value>
+    <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>.</value>
+    <value>PDF saved.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
-    <value></value>
+    <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>.</value>
+    <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>...</value>
+    <value>Deskewing...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value></value>
+    <value>Deskew Progress</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value></value>
+    <value>Download Needed</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
     <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want to cancel the batch scan?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value></value>
+    <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value></value>
+    <value>Donate</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>.</value>
+    <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
 </root>

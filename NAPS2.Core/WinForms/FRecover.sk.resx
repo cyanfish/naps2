@@ -156,7 +156,7 @@
     <value>1</value>
   </data>
   <data name="btnRecover.Text" xml:space="preserve">
-    <value>&amp;Recover</value>
+    <value>&amp;Obnoviť</value>
   </data>
   <data name="&gt;&gt;btnRecover.Name" xml:space="preserve">
     <value>btnRecover</value>
@@ -180,7 +180,7 @@
     <value>2</value>
   </data>
   <data name="btnDelete.Text" xml:space="preserve">
-    <value>&amp;Delete</value>
+    <value>&amp;Zmazať</value>
   </data>
   <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
     <value>btnDelete</value>
@@ -204,7 +204,7 @@
     <value>3</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Not Now</value>
+    <value>&amp;Teraz nie</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>

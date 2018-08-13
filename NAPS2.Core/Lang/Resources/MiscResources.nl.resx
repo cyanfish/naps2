@@ -274,7 +274,7 @@
     <value>Scannen</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want undo your changes to {0} image(s)?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>Afbeeldingen resetten</value>
@@ -430,15 +430,15 @@
     <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want to cancel the batch scan?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value></value>
+    <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value></value>
+    <value>Donate</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>.</value>
+    <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
 </root>

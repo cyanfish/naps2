@@ -637,7 +637,7 @@
     <value>19</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Отказ</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -1096,7 +1096,7 @@
     <value>32</value>
   </data>
   <data name="btnAdvanced.Text" xml:space="preserve">
-    <value>&amp;Advanced</value>
+    <value>&amp;Допълнителни настройки</value>
   </data>
   <data name="&gt;&gt;btnAdvanced.Name" xml:space="preserve">
     <value>btnAdvanced</value>

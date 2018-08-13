@@ -196,7 +196,7 @@
     <value>28</value>
   </data>
   <data name="labelCopyright.Text" xml:space="preserve">
-    <value></value>
+    <value>Copyright 2009, 2012-2017 NAPS2 Contributors</value>
   </data>
   <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
     <value>labelCopyright</value>
@@ -214,7 +214,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="okButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Завершити</value>
+    <value>None</value>
   </data>
   <data name="okButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

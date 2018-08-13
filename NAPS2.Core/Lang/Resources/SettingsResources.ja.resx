@@ -175,10 +175,10 @@
     <value>cm</value>
   </data>
   <data name="PageSizeUnit_Inch" xml:space="preserve">
-    <value></value>
+    <value>in</value>
   </data>
   <data name="PageSizeUnit_Millimetre" xml:space="preserve">
-    <value></value>
+    <value>mm</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
     <value>A3 (297x420 mm)</value>
@@ -199,10 +199,10 @@
     <value>カスタム...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value></value>
+    <value>US Legal (8.5x14 in)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value></value>
+    <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>デフォルト</value>
@@ -238,10 +238,10 @@
     <value>フィーダー</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value></value>
+    <value>Glass</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value></value>
+    <value>Auto</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -259,12 +259,12 @@
     <value>スキャナ付属のUIのみを利用</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value></value>
+    <value>Alternative Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value></value>
+    <value>Old DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
-    <value></value>
+    <value>x64</value>
   </data>
 </root>

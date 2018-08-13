@@ -277,7 +277,7 @@
     <value>3</value>
   </data>
   <data name="checkboxApplyToSelected.Text" xml:space="preserve">
-    <value></value>
+    <value>Apply to all {0} selected images</value>
   </data>
   <data name="&gt;&gt;checkboxApplyToSelected.Name" xml:space="preserve">
     <value>checkboxApplyToSelected</value>
@@ -334,7 +334,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value></value>
+    <value>Sharpen</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FSharpen</value>

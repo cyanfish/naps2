@@ -150,7 +150,7 @@
     <value>1</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Renunță</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -204,7 +204,7 @@
     <value>4</value>
   </data>
   <data name="labelTop.Text" xml:space="preserve">
-    <value></value>
+    <value>{0} / {1} files</value>
   </data>
   <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
     <value>labelTop</value>

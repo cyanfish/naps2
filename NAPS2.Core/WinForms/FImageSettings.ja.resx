@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;キャンセル</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -268,7 +268,7 @@
     <value>28</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Default File Path:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -556,7 +556,7 @@
     <value>41</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value></value>
+    <value>Tiff Options</value>
   </data>
   <data name="&gt;&gt;groupTiff.Name" xml:space="preserve">
     <value>groupTiff</value>

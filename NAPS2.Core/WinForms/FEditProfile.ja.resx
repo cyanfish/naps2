@@ -370,7 +370,7 @@
     <value>9</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Bit depth:</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -502,7 +502,7 @@
     <value>13</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Resolution:</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -637,7 +637,7 @@
     <value>19</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;キャンセル</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -880,7 +880,7 @@
     <value>27</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Scale:</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
@@ -907,7 +907,7 @@
     <value>2</value>
   </data>
   <data name="rdTWAIN.Text" xml:space="preserve">
-    <value></value>
+    <value>TWAIN Driver</value>
   </data>
   <data name="&gt;&gt;rdTWAIN.Name" xml:space="preserve">
     <value>rdTWAIN</value>
@@ -1096,7 +1096,7 @@
     <value>32</value>
   </data>
   <data name="btnAdvanced.Text" xml:space="preserve">
-    <value>&amp;Advanced</value>
+    <value>&amp;詳細設定</value>
   </data>
   <data name="&gt;&gt;btnAdvanced.Name" xml:space="preserve">
     <value>btnAdvanced</value>

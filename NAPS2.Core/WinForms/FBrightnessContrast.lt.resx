@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Mastelis</value>
+    <value>Zoom</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox.TabIndex" type="System.Int32, mscorlib">
@@ -427,7 +427,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value></value>
+    <value>Brightness / Contrast</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FBrightnessContrast</value>

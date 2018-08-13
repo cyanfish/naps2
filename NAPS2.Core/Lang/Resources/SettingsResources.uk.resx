@@ -205,19 +205,19 @@
     <value>US Letter (8.5x11 дюймів)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value></value>
+    <value>Default</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
-    <value></value>
+    <value>PDF/A-1b</value>
   </data>
   <data name="PdfCompat_PdfA2B" xml:space="preserve">
-    <value></value>
+    <value>PDF/A-2b</value>
   </data>
   <data name="PdfCompat_PdfA3B" xml:space="preserve">
-    <value></value>
+    <value>PDF/A-3b</value>
   </data>
   <data name="PdfCompat_PdfA3U" xml:space="preserve">
-    <value></value>
+    <value>PDF/A-3u</value>
   </data>
   <data name="Scale_1_1" xml:space="preserve">
     <value>1:1</value>
@@ -241,30 +241,30 @@
     <value>Зі скла</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value></value>
+    <value>Auto</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
-    <value></value>
+    <value>CCITT4</value>
   </data>
   <data name="TiffComp_Lzw" xml:space="preserve">
-    <value></value>
+    <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
     <value>Завершити</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value></value>
+    <value>Default</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value></value>
+    <value>Legacy (native UI only)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value></value>
+    <value>Alternative Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value></value>
+    <value>Old DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
-    <value></value>
+    <value>x64</value>
   </data>
 </root>

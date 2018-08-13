@@ -148,7 +148,7 @@
     <value>Der gewählte Scanner is ausgeschaltet.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>.</value>
+    <value>You don't have permission to save files at this location.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Fehler</value>
@@ -226,7 +226,7 @@
     <value>Jetzt nicht</value>
   </data>
   <data name="UpdateNow" xml:space="preserve">
-    <value></value>
+    <value>A newer version of NAPS2 is available. Do you want to update now?</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Installation abgeschlossen</value>
@@ -415,7 +415,7 @@
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>.</value>
+    <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
     <value>Ausrichten...</value>

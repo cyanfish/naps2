@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Annuleren</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -622,7 +622,7 @@
     <value>8</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
-    <value>Afdrukken toestaan</value>
+    <value>Allow Printing</value>
   </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Afdrukken met volledige kwaliteit toestaan</value>
@@ -889,7 +889,7 @@
     <value>16</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;Standaardinstellingen herstellen</value>
   </data>
   <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
     <value>btnRestoreDefaults</value>

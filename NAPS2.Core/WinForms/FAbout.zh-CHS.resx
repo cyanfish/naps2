@@ -214,7 +214,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="okButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>完成</value>
+    <value>None</value>
   </data>
   <data name="okButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -229,7 +229,7 @@
     <value>29</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>&amp;确定</value>
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>

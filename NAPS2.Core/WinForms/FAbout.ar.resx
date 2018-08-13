@@ -196,7 +196,7 @@
     <value>28</value>
   </data>
   <data name="labelCopyright.Text" xml:space="preserve">
-    <value></value>
+    <value>Copyright 2009, 2012-2017 NAPS2 Contributors</value>
   </data>
   <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
     <value>labelCopyright</value>
@@ -214,7 +214,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="okButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>تم</value>
+    <value>None</value>
   </data>
   <data name="okButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -229,7 +229,7 @@
     <value>29</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>&amp;حسناً</value>
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>

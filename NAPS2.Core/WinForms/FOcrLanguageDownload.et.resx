@@ -132,7 +132,7 @@
     <value>3</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Select one or more languages:</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -156,7 +156,7 @@
     <value>5</value>
   </data>
   <data name="btnDownload.Text" xml:space="preserve">
-    <value>&amp;Download</value>
+    <value>&amp;Lae alla</value>
   </data>
   <data name="&gt;&gt;btnDownload.Name" xml:space="preserve">
     <value>btnDownload</value>
@@ -180,7 +180,7 @@
     <value>6</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Loobu</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -228,7 +228,7 @@
     <value>8</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>.</value>
+    <value>Using OCR requires you to download each language you want to scan.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

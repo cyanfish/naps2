@@ -160,7 +160,7 @@
     <value>19</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Renunță</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -193,7 +193,7 @@
     <value>23</value>
   </data>
   <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-    <value></value>
+    <value>More info</value>
   </data>
   <data name="&gt;&gt;linkPatchCodeInfo.Name" xml:space="preserve">
     <value>linkPatchCodeInfo</value>
@@ -223,7 +223,7 @@
     <value>22</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value></value>
+    <value>Separate files by Patch-T</value>
   </data>
   <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
     <value>rdSeparateByPatchT</value>
@@ -253,7 +253,7 @@
     <value>21</value>
   </data>
   <data name="rdFilePerPage.Text" xml:space="preserve">
-    <value></value>
+    <value>One file per page</value>
   </data>
   <data name="&gt;&gt;rdFilePerPage.Name" xml:space="preserve">
     <value>rdFilePerPage</value>
@@ -283,7 +283,7 @@
     <value>20</value>
   </data>
   <data name="rdFilePerScan.Text" xml:space="preserve">
-    <value></value>
+    <value>One file per scan</value>
   </data>
   <data name="rdFilePerScan.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
@@ -394,7 +394,7 @@
     <value>24</value>
   </data>
   <data name="lblFilePath.Text" xml:space="preserve">
-    <value>:</value>
+    <value>File path:</value>
   </data>
   <data name="&gt;&gt;lblFilePath.Name" xml:space="preserve">
     <value>lblFilePath</value>
@@ -421,7 +421,7 @@
     <value>28</value>
   </data>
   <data name="cbClearAfterSave.Text" xml:space="preserve">
-    <value></value>
+    <value>Clear images after saving</value>
   </data>
   <data name="&gt;&gt;cbClearAfterSave.Name" xml:space="preserve">
     <value>cbClearAfterSave</value>
@@ -451,7 +451,7 @@
     <value>29</value>
   </data>
   <data name="cbPromptForFilePath.Text" xml:space="preserve">
-    <value></value>
+    <value>Prompt for file path</value>
   </data>
   <data name="&gt;&gt;cbPromptForFilePath.Name" xml:space="preserve">
     <value>cbPromptForFilePath</value>
@@ -505,7 +505,7 @@
     <value>350, 303</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value></value>
+    <value>Auto Save Settings</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
     <value>ilProfileIcons</value>

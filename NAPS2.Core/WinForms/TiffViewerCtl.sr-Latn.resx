@@ -217,7 +217,7 @@
     <value>342, 54</value>
   </metadata>
   <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Gotovo</value>
+    <value>None</value>
   </data>
   <data name="tsStretch.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -247,7 +247,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
-    <value></value>
+    <value>Zoom In</value>
   </data>
   <data name="tsZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -256,7 +256,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-    <value></value>
+    <value>Zoom Out</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>

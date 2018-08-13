@@ -211,7 +211,7 @@
     <value>17, 17</value>
   </metadata>
   <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Finalizat</value>
+    <value>None</value>
   </data>
   <data name="tbPageCurrent.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 25</value>
@@ -268,7 +268,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value></value>
+    <value>Brightness / Contrast</value>
   </data>
   <data name="tsHueSaturation.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -277,7 +277,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value></value>
+    <value>Hue / Saturation</value>
   </data>
   <data name="tsBlackWhite.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -295,7 +295,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsSharpen.Text" xml:space="preserve">
-    <value></value>
+    <value>Sharpen</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -397,7 +397,7 @@
     <value>164, 22</value>
   </data>
   <data name="tsDeskew.Text" xml:space="preserve">
-    <value></value>
+    <value>Deskew</value>
   </data>
   <data name="tsCustomRotation.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>

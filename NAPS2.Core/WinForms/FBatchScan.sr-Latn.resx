@@ -391,7 +391,7 @@
     <value>0</value>
   </data>
   <data name="rdSingleScan.Text" xml:space="preserve">
-    <value></value>
+    <value>Single scan</value>
   </data>
   <data name="&gt;&gt;rdSingleScan.Name" xml:space="preserve">
     <value>rdSingleScan</value>
@@ -586,7 +586,7 @@
     <value>2</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value></value>
+    <value>Separate files by Patch-T</value>
   </data>
   <data name="&gt;&gt;rdSeparateByPatchT.Name" xml:space="preserve">
     <value>rdSeparateByPatchT</value>
@@ -727,7 +727,7 @@
     <value>4</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
-    <value></value>
+    <value>Placeholders</value>
   </data>
   <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
     <value>linkPlaceholders</value>

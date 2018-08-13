@@ -217,7 +217,7 @@
     <value>342, 54</value>
   </metadata>
   <data name="tStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fet</value>
+    <value>None</value>
   </data>
   <data name="tsStretch.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -226,7 +226,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsStretch.ToolTipText" xml:space="preserve">
-    <value></value>
+    <value>Scale With Window</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -238,7 +238,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsZoomActual.ToolTipText" xml:space="preserve">
-    <value></value>
+    <value>Zoom Actual</value>
   </data>
   <data name="tsZoomPlus.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -247,7 +247,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
-    <value></value>
+    <value>Zoom In</value>
   </data>
   <data name="tsZoomOut.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -256,7 +256,7 @@
     <value>23, 22</value>
   </data>
   <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-    <value></value>
+    <value>Zoom Out</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -268,7 +268,7 @@
     <value>100%</value>
   </data>
   <data name="tsZoom.ToolTipText" xml:space="preserve">
-    <value></value>
+    <value>Zoom</value>
   </data>
   <data name="tStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>

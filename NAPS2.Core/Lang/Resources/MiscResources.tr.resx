@@ -232,7 +232,7 @@
     <value>Kurulum Tamamlandı</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value></value>
+    <value>Installation complete. Do you want to restart NAPS2 now?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
     <value>Kurulum başarısız.</value>
@@ -274,7 +274,7 @@
     <value>Tara</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want undo your changes to {0} image(s)?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>Resmi Sıfırla</value>

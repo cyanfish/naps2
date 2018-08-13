@@ -220,7 +220,7 @@
     <value>Scarica e installa</value>
   </data>
   <data name="EnableAutoUpdates" xml:space="preserve">
-    <value></value>
+    <value>Do you want NAPS2 to automatically check for updates?</value>
   </data>
   <data name="NotNow" xml:space="preserve">
     <value>Non ora</value>
@@ -436,9 +436,9 @@
     <value>Annulla batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value></value>
+    <value>Donate</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>.</value>
+    <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
 </root>

@@ -133,7 +133,7 @@
     <value>2</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Prekini</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -208,7 +208,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value></value>
+    <value>Select Source</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FSelectDevice</value>

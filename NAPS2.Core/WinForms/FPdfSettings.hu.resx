@@ -133,7 +133,7 @@
     <value>17</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>&amp;Ok</value>
   </data>
   <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>
@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Mégse</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -283,7 +283,7 @@
     <value>20</value>
   </data>
   <data name="groupMetadata.Text" xml:space="preserve">
-    <value></value>
+    <value>Metadata</value>
   </data>
   <data name="&gt;&gt;groupMetadata.Name" xml:space="preserve">
     <value>groupMetadata</value>
@@ -334,7 +334,7 @@
     <value>11</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Keywords:</value>
   </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
@@ -385,7 +385,7 @@
     <value>9</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Subject:</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -487,7 +487,7 @@
     <value>5</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Title:</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -607,7 +607,7 @@
     <value>21</value>
   </data>
   <data name="groupProtection.Text" xml:space="preserve">
-    <value></value>
+    <value>Encryption</value>
   </data>
   <data name="&gt;&gt;groupProtection.Name" xml:space="preserve">
     <value>groupProtection</value>
@@ -622,7 +622,7 @@
     <value>8</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
-    <value>Nyomtatás engedélyezése</value>
+    <value>Allow Printing</value>
   </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Legjobb minőségű nyomtatás engedélyezése</value>
@@ -682,7 +682,7 @@
     <value>16</value>
   </data>
   <data name="cbShowUserPassword.Text" xml:space="preserve">
-    <value></value>
+    <value>Show</value>
   </data>
   <data name="&gt;&gt;cbShowUserPassword.Name" xml:space="preserve">
     <value>cbShowUserPassword</value>
@@ -709,7 +709,7 @@
     <value>15</value>
   </data>
   <data name="cbShowOwnerPassword.Text" xml:space="preserve">
-    <value></value>
+    <value>Show</value>
   </data>
   <data name="&gt;&gt;cbShowOwnerPassword.Name" xml:space="preserve">
     <value>cbShowOwnerPassword</value>
@@ -760,7 +760,7 @@
     <value>3</value>
   </data>
   <data name="lblUserPassword.Text" xml:space="preserve">
-    <value>:</value>
+    <value>User Password:</value>
   </data>
   <data name="&gt;&gt;lblUserPassword.Name" xml:space="preserve">
     <value>lblUserPassword</value>
@@ -808,7 +808,7 @@
     <value>1</value>
   </data>
   <data name="lblOwnerPassword.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Owner Password:</value>
   </data>
   <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
     <value>lblOwnerPassword</value>
@@ -835,7 +835,7 @@
     <value>4</value>
   </data>
   <data name="cbEncryptPdf.Text" xml:space="preserve">
-    <value></value>
+    <value>Encrypt PDF</value>
   </data>
   <data name="&gt;&gt;cbEncryptPdf.Name" xml:space="preserve">
     <value>cbEncryptPdf</value>
@@ -862,7 +862,7 @@
     <value>15</value>
   </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
-    <value></value>
+    <value>Remember these settings</value>
   </data>
   <data name="&gt;&gt;cbRememberSettings.Name" xml:space="preserve">
     <value>cbRememberSettings</value>
@@ -919,7 +919,7 @@
     <value>33</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
-    <value></value>
+    <value>Placeholders</value>
   </data>
   <data name="&gt;&gt;linkPlaceholders.Name" xml:space="preserve">
     <value>linkPlaceholders</value>
@@ -970,7 +970,7 @@
     <value>32</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Default File Path:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -1024,7 +1024,7 @@
     <value>35</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-    <value></value>
+    <value>Skip save prompt</value>
   </data>
   <data name="&gt;&gt;cbSkipSavePrompt.Name" xml:space="preserve">
     <value>cbSkipSavePrompt</value>
@@ -1069,7 +1069,7 @@
     <value>21</value>
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
-    <value></value>
+    <value>Compatibility</value>
   </data>
   <data name="&gt;&gt;groupCompat.Name" xml:space="preserve">
     <value>groupCompat</value>
@@ -1123,7 +1123,7 @@
     <value>400, 677</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value></value>
+    <value>PDF Settings</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
     <value>ilProfileIcons</value>

@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;キャンセル</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -385,7 +385,7 @@
     <value>9</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Subject:</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -622,7 +622,7 @@
     <value>8</value>
   </data>
   <data name="clbPerms.Items" xml:space="preserve">
-    <value>印刷を許可する</value>
+    <value>Allow Printing</value>
   </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>オリジナル画質の印刷を許可する</value>
@@ -760,7 +760,7 @@
     <value>3</value>
   </data>
   <data name="lblUserPassword.Text" xml:space="preserve">
-    <value>:</value>
+    <value>User Password:</value>
   </data>
   <data name="&gt;&gt;lblUserPassword.Name" xml:space="preserve">
     <value>lblUserPassword</value>
@@ -808,7 +808,7 @@
     <value>1</value>
   </data>
   <data name="lblOwnerPassword.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Owner Password:</value>
   </data>
   <data name="&gt;&gt;lblOwnerPassword.Name" xml:space="preserve">
     <value>lblOwnerPassword</value>
@@ -970,7 +970,7 @@
     <value>32</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Default File Path:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

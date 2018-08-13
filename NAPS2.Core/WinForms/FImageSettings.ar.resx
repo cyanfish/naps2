@@ -133,7 +133,7 @@
     <value>17</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>&amp;حسناً</value>
   </data>
   <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>
@@ -160,7 +160,7 @@
     <value>18</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;إلغاء</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -217,7 +217,7 @@
     <value>16</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
-    <value>Restore &amp;Defaults</value>
+    <value>&amp;استعادة الإعدادات الافتراضية</value>
   </data>
   <data name="&gt;&gt;btnRestoreDefaults.Name" xml:space="preserve">
     <value>btnRestoreDefaults</value>
@@ -457,7 +457,7 @@
     <value>37</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Compression:</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -508,7 +508,7 @@
     <value>39</value>
   </data>
   <data name="cbSinglePageTiff.Text" xml:space="preserve">
-    <value></value>
+    <value>Single page files</value>
   </data>
   <data name="&gt;&gt;cbSinglePageTiff.Name" xml:space="preserve">
     <value>cbSinglePageTiff</value>
@@ -556,7 +556,7 @@
     <value>41</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value></value>
+    <value>Tiff Options</value>
   </data>
   <data name="&gt;&gt;groupTiff.Name" xml:space="preserve">
     <value>groupTiff</value>

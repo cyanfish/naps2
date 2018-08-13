@@ -226,7 +226,7 @@
     <value>Pas maintenant</value>
   </data>
   <data name="UpdateNow" xml:space="preserve">
-    <value></value>
+    <value>A newer version of NAPS2 is available. Do you want to update now?</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Installation terminée</value>

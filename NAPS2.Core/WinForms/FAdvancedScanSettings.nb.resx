@@ -268,7 +268,7 @@
     <value>35</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value></value>
+    <value>Image Quality</value>
   </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
@@ -322,7 +322,7 @@
     <value>8</value>
   </data>
   <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-    <value></value>
+    <value>Delay between scans (WIA)</value>
   </data>
   <data name="&gt;&gt;cbWiaDelayBetweenScans.Name" xml:space="preserve">
     <value>cbWiaDelayBetweenScans</value>
@@ -352,7 +352,7 @@
     <value>7</value>
   </data>
   <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-    <value></value>
+    <value>Retry on failure (WIA)</value>
   </data>
   <data name="&gt;&gt;cbWiaRetryOnFailure.Name" xml:space="preserve">
     <value>cbWiaRetryOnFailure</value>
@@ -382,7 +382,7 @@
     <value>6</value>
   </data>
   <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
-    <value></value>
+    <value>Crop to page size</value>
   </data>
   <data name="&gt;&gt;cbForcePageSizeCrop.Name" xml:space="preserve">
     <value>cbForcePageSizeCrop</value>
@@ -412,7 +412,7 @@
     <value>5</value>
   </data>
   <data name="cbFlipDuplex.Text" xml:space="preserve">
-    <value></value>
+    <value>Flip duplexed pages</value>
   </data>
   <data name="&gt;&gt;cbFlipDuplex.Name" xml:space="preserve">
     <value>cbFlipDuplex</value>
@@ -442,7 +442,7 @@
     <value>4</value>
   </data>
   <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-    <value></value>
+    <value>Offset width based on alignment (WIA)</value>
   </data>
   <data name="&gt;&gt;cbWiaOffsetWidth.Name" xml:space="preserve">
     <value>cbWiaOffsetWidth</value>
@@ -469,7 +469,7 @@
     <value>3</value>
   </data>
   <data name="cbForcePageSize.Text" xml:space="preserve">
-    <value></value>
+    <value>Stretch to page size</value>
   </data>
   <data name="&gt;&gt;cbForcePageSize.Name" xml:space="preserve">
     <value>cbForcePageSize</value>
@@ -496,7 +496,7 @@
     <value>2</value>
   </data>
   <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
-    <value></value>
+    <value>Apply brightness/contrast after scan</value>
   </data>
   <data name="&gt;&gt;cbBrightnessContrastAfterScan.Name" xml:space="preserve">
     <value>cbBrightnessContrastAfterScan</value>
@@ -544,7 +544,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>:</value>
+    <value>Twain Implementation:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -568,7 +568,7 @@
     <value>36</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
-    <value></value>
+    <value>Compatibility</value>
   </data>
   <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
     <value>groupBox2</value>
@@ -598,7 +598,7 @@
     <value>38</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value></value>
+    <value>Coverage Threshold</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -625,7 +625,7 @@
     <value>37</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value></value>
+    <value>White Threshold</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -757,7 +757,7 @@
     <value>17</value>
   </data>
   <data name="cbExcludeBlankPages.Text" xml:space="preserve">
-    <value></value>
+    <value>Exclude blank pages</value>
   </data>
   <data name="&gt;&gt;cbExcludeBlankPages.Name" xml:space="preserve">
     <value>cbExcludeBlankPages</value>
@@ -781,7 +781,7 @@
     <value>37</value>
   </data>
   <data name="groupBox3.Text" xml:space="preserve">
-    <value></value>
+    <value>Blank Pages</value>
   </data>
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
@@ -841,7 +841,7 @@
     <value>17</value>
   </data>
   <data name="cbAutoDeskew.Text" xml:space="preserve">
-    <value></value>
+    <value>Deskew scanned pages</value>
   </data>
   <data name="&gt;&gt;cbAutoDeskew.Name" xml:space="preserve">
     <value>cbAutoDeskew</value>
@@ -865,7 +865,7 @@
     <value>39</value>
   </data>
   <data name="groupBox4.Text" xml:space="preserve">
-    <value></value>
+    <value>Post-processing</value>
   </data>
   <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
     <value>groupBox4</value>
@@ -919,7 +919,7 @@
     <value>400, 604</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value></value>
+    <value>Advanced Profile Settings</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Name" xml:space="preserve">
     <value>ilProfileIcons</value>

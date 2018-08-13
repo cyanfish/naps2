@@ -139,7 +139,7 @@
     <value>5</value>
   </data>
   <data name="btnDone.Text" xml:space="preserve">
-    <value>&amp;Done</value>
+    <value>&amp;Utført</value>
   </data>
   <data name="&gt;&gt;btnDone.Name" xml:space="preserve">
     <value>btnDone</value>
@@ -154,7 +154,7 @@
     <value>0</value>
   </data>
   <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Utført</value>
+    <value>None</value>
   </data>
   <data name="btnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -175,7 +175,7 @@
     <value>4</value>
   </data>
   <data name="btnScan.Text" xml:space="preserve">
-    <value>&amp;Scan</value>
+    <value>&amp;Skann</value>
   </data>
   <data name="&gt;&gt;btnScan.Name" xml:space="preserve">
     <value>btnScan</value>

@@ -133,7 +133,7 @@
     <value>2</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Avbryt</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -160,7 +160,7 @@
     <value>1</value>
   </data>
   <data name="btnSelect.Text" xml:space="preserve">
-    <value>&amp;Select</value>
+    <value>&amp;Markera</value>
   </data>
   <data name="&gt;&gt;btnSelect.Name" xml:space="preserve">
     <value>btnSelect</value>

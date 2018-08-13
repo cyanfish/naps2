@@ -187,7 +187,7 @@
     <value>2</value>
   </data>
   <data name="linkDetails.Text" xml:space="preserve">
-    <value></value>
+    <value>Technical Details</value>
   </data>
   <data name="&gt;&gt;linkDetails.Name" xml:space="preserve">
     <value>linkDetails</value>
@@ -241,7 +241,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value></value>
+    <value>Error</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FError</value>

@@ -181,7 +181,7 @@
     <value>שם חסר.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
-    <value></value>
+    <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
     <value>לא נבחר התקן.</value>
@@ -310,7 +310,7 @@
     <value>האצווה בוטלה.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>....</value>
+    <value>Cancelling....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
     <value>אצווה הושלמה בהצלחה.</value>
@@ -322,19 +322,19 @@
     <value>סורק עמוד {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>...</value>
+    <value>Scanning page {0} (scan {1})...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>...</value>
+    <value>Waiting for scan {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>ביטול</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value></value>
+    <value>Close</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>...</value>
+    <value>Saving batch results...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
@@ -343,25 +343,25 @@
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>...</value>
+    <value>Importing {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value></value>
+    <value>Import Progress</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>...</value>
+    <value>Recovering...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value></value>
+    <value>Recovery Progress</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value></value>
+    <value>Save Images Progress</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value></value>
+    <value>Save PDF Progress</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>...</value>
+    <value>Saving {0}...</value>
   </data>
   <data name="Copying" xml:space="preserve">
     <value>העתקה...</value>
@@ -370,10 +370,10 @@
     <value>התקדמות העתקה</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>...</value>
+    <value>Importing...</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value></value>
+    <value>Email PDF Progress</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
     <value>אירעה שגיאה בעת שמירת אוטומטי.</value>
@@ -382,63 +382,63 @@
     <value>כל הקבצים</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value></value>
+    <value>Image Files</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
     <value>הסורק שנבחר איננו מקוון (OFFLINE).</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner's cover is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner has a paper jam.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>.</value>
+    <value>The scanner is warming up.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
     <value>עדכון ל- OCR זמין.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>.</value>
+    <value>Image saved.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>.</value>
+    <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>.</value>
+    <value>PDF saved.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
-    <value></value>
+    <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>.</value>
+    <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>...</value>
+    <value>Deskewing...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value></value>
+    <value>Deskew Progress</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value></value>
+    <value>Download Needed</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
     <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value></value>
+    <value>Are you sure you want to cancel the batch scan?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value></value>
+    <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value></value>
+    <value>Donate</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>.</value>
+    <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
 </root>

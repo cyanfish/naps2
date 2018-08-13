@@ -128,19 +128,19 @@
     <value>152, 22</value>
   </data>
   <data name="ctxScan.Text" xml:space="preserve">
-    <value></value>
+    <value>Scan</value>
   </data>
   <data name="ctxEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
   <data name="ctxEdit.Text" xml:space="preserve">
-    <value></value>
+    <value>Edit</value>
   </data>
   <data name="ctxSetDefault.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
   <data name="ctxSetDefault.Text" xml:space="preserve">
-    <value></value>
+    <value>Set Default</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 6</value>
@@ -153,7 +153,7 @@
     <value>152, 22</value>
   </data>
   <data name="ctxCopy.Text" xml:space="preserve">
-    <value></value>
+    <value>Copy</value>
   </data>
   <data name="ctxPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+V</value>
@@ -162,7 +162,7 @@
     <value>152, 22</value>
   </data>
   <data name="ctxPaste.Text" xml:space="preserve">
-    <value></value>
+    <value>Paste</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 6</value>
@@ -171,7 +171,7 @@
     <value>152, 22</value>
   </data>
   <data name="ctxDelete.Text" xml:space="preserve">
-    <value></value>
+    <value>Delete</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 170</value>
@@ -205,7 +205,7 @@
     <value>6</value>
   </data>
   <data name="btnAdd.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value></value>
+    <value>None</value>
   </data>
   <data name="btnAdd.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -337,7 +337,7 @@
     <value>19, 22</value>
   </metadata>
   <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value></value>
+    <value>None</value>
   </data>
   <data name="btnScan.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -415,7 +415,7 @@
     <value>650, 181</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value></value>
+    <value>Profiles</value>
   </data>
   <data name="&gt;&gt;ctxScan.Name" xml:space="preserve">
     <value>ctxScan</value>

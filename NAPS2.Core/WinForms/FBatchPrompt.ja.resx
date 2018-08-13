@@ -154,7 +154,7 @@
     <value>0</value>
   </data>
   <data name="btnScan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>なし</value>
+    <value>None</value>
   </data>
   <data name="btnScan.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

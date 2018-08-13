@@ -211,7 +211,7 @@
     <value>17, 17</value>
   </metadata>
   <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Aucun</value>
+    <value>None</value>
   </data>
   <data name="tbPageCurrent.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 25</value>

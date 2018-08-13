@@ -153,7 +153,7 @@
     <value>6</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;キャンセル</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -201,7 +201,7 @@
     <value>8</value>
   </data>
   <data name="labelX.Text" xml:space="preserve">
-    <value></value>
+    <value>X</value>
   </data>
   <data name="&gt;&gt;labelX.Name" xml:space="preserve">
     <value>labelX</value>

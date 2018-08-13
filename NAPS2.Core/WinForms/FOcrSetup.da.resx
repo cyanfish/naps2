@@ -132,7 +132,7 @@
     <value>0</value>
   </data>
   <data name="checkBoxEnableOcr.Text" xml:space="preserve">
-    <value>&amp;Make PDFs searchable using OCR</value>
+    <value>&amp;Lav PDF'er søgebar med OCR</value>
   </data>
   <data name="&gt;&gt;checkBoxEnableOcr.Name" xml:space="preserve">
     <value>checkBoxEnableOcr</value>
@@ -208,7 +208,7 @@
     <value>3</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Fortryd</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>

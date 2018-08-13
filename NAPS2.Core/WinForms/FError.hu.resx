@@ -160,7 +160,7 @@
     <value>1</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>&amp;Ok</value>
   </data>
   <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>
@@ -187,7 +187,7 @@
     <value>2</value>
   </data>
   <data name="linkDetails.Text" xml:space="preserve">
-    <value></value>
+    <value>Technical Details</value>
   </data>
   <data name="&gt;&gt;linkDetails.Name" xml:space="preserve">
     <value>linkDetails</value>

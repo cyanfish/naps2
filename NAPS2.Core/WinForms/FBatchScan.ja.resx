@@ -183,7 +183,7 @@
     <value>3</value>
   </data>
   <data name="btnStart.Text" xml:space="preserve">
-    <value></value>
+    <value>Start</value>
   </data>
   <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
     <value>btnStart</value>
@@ -391,7 +391,7 @@
     <value>0</value>
   </data>
   <data name="rdSingleScan.Text" xml:space="preserve">
-    <value></value>
+    <value>Single scan</value>
   </data>
   <data name="&gt;&gt;rdSingleScan.Name" xml:space="preserve">
     <value>rdSingleScan</value>
