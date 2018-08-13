@@ -5886,7 +5886,7 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>If Not Exist $(ProjectDir)google.credentials.json (
+    <PreBuildEvent Condition="'$(OS)' == 'Windows_NT'">If Not Exist $(ProjectDir)google.credentials.json (
 echo {} &gt; $(ProjectDir)google.credentials.json
 )
 If Not Exist $(ProjectDir)microsoft.credentials.json (
