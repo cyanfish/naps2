@@ -45,33 +45,35 @@ namespace NAPS2.Localization
             }
         }
 
-        public void Translate(string folder)
+        public void Translate(string folder, bool winforms)
         {
             foreach (var file in new DirectoryInfo(folder).GetFiles("*.resx"))
             {
                 if (file.Name.Count(x => x == '.') == 1)
                 {
-                    TranslateFile(file);
+                    TranslateFile(file, winforms);
                 }
             }
         }
 
-        private void TranslateFile(FileInfo file)
+        private void TranslateFile(FileInfo file, bool winforms)
         {
             var doc = XDocument.Load(file.FullName, LoadOptions.PreserveWhitespace);
             foreach (var item in doc.Root.Elements("data"))
             {
-                var name = item.Attribute("name")?.Value;
-                var value = item.Element("value")?.Value;
-                if (name == null || value == null || !value.Any(char.IsLetter))
+                var prop = item.Attribute("name")?.Value;
+                var original = item.Element("value")?.Value;
+                if (!Rules.IsTranslatable(winforms, prop, ref original, out string prefix, out string suffix))
                 {
                     continue;
                 }
-                var match = Regex.Match(value, @"[:.]+$");
-                value = Regex.Replace(value, @"[:.]+$", "");
-                if (Strings.ContainsKey(value))
+                if (Strings.ContainsKey(original))
                 {
-                    item.Element("value").Value = Strings[value].Translation + match.Value;
+                    var translation = Strings[original].Translation;
+                    if (!string.IsNullOrWhiteSpace(translation))
+                    {
+                        item.Element("value").Value = prefix + Strings[original].Translation + suffix;
+                    }
                 }
             }
 

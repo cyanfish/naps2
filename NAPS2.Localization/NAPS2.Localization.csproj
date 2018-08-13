@@ -46,6 +46,7 @@
     <Compile Include="Paths.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules.cs" />
     <Compile Include="Templates.cs" />
     <Compile Include="TemplatesContext.cs" />
     <Compile Include="TranslatableString.cs" />

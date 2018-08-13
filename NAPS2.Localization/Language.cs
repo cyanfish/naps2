@@ -12,8 +12,8 @@ namespace NAPS2.Localization
         {
             var ctx = new LanguageContext(langCode);
             ctx.Load(Path.Combine(Paths.Root, $@"NAPS2.Core\Lang\po\{langCode}.po"));
-            ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\Resources"));
-            ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\WinForms"));
+            ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\Lang\Resources"), false);
+            ctx.Translate(Path.Combine(Paths.Root, @"NAPS2.Core\WinForms"), true);
         }
     }
 }

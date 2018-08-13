@@ -26,42 +26,33 @@ msgstr """"
 
         public Dictionary<string, TranslatableString> Strings { get; } = new Dictionary<string, TranslatableString>();
 
-        public void Load(string folder, bool postProcess)
+        public void Load(string folder, bool winforms)
         {
             foreach (var file in new DirectoryInfo(folder).GetFiles("*.resx"))
             {
                 if (file.Name.Count(x => x == '.') == 1)
                 {
-                    LoadFile(file, postProcess);
+                    LoadFile(file, winforms);
                 }
             }
         }
 
-        private void LoadFile(FileInfo file, bool postProcess)
+        private void LoadFile(FileInfo file, bool winforms)
         {
             var doc = XDocument.Load(file.FullName);
             foreach (var item in doc.Root.Elements("data"))
             {
-                var name = item.Attribute("name")?.Value;
-                var value = item.Element("value")?.Value;
-                if (name == null || value == null || !value.Any(char.IsLetter))
+                var prop = item.Attribute("name")?.Value;
+                var original = item.Element("value")?.Value;
+                if (!Rules.IsTranslatable(winforms, prop, ref original, out _, out _))
                 {
                     continue;
                 }
-                value = Regex.Replace(value, @"[:.]+$", "");
-                if (postProcess)
+                if (!Strings.ContainsKey(original))
                 {
-                    if (!Regex.IsMatch(name, @"(Text|Items\d+)$"))
-                    {
-                        continue;
-                    }
-                    value = Regex.Replace(value, @"&(\w)", match => match.Groups[1].Value);
+                    Strings[original] = new TranslatableString { Original = original, Context = new List<string>()};
                 }
-                if (!Strings.ContainsKey(value))
-                {
-                    Strings[value] = new TranslatableString { Original = value, Context = new List<string>()};
-                }
-                Strings[value].Context.Add($"{file.Name}${name}$Message");
+                Strings[original].Context.Add($"{file.Name}${prop}$Message");
             }
         }
 
