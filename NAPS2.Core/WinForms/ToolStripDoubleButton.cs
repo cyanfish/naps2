@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Compat;
 
 namespace NAPS2.WinForms
 {
@@ -71,16 +72,30 @@ namespace NAPS2.WinForms
             if (Owner == null)
                 return;
             ToolStripRenderer renderer = ToolStripManager.Renderer;
-
-            var oldHeight = Height;
-            var oldParent = Parent;
-            Parent = null;
-            Height = Height / 2;
-            e.Graphics.TranslateTransform(0, currentButton == 1 ? Height : 0);
-            renderer.DrawButtonBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
-            e.Graphics.TranslateTransform(0, currentButton == 1 ? -Height : 0);
-            Height = oldHeight;
-            Parent = oldParent;
+            
+            if (Platform.Compat.UseToolStripRenderHack)
+            {
+                var oldHeight = Height;
+                var oldParent = Parent;
+                Parent = null;
+                Height = Height / 2;
+                e.Graphics.TranslateTransform(0, currentButton == 1 ? Height : 0);
+                renderer.DrawButtonBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
+                e.Graphics.TranslateTransform(0, currentButton == 1 ? -Height : 0);
+                Height = oldHeight;
+                Parent = oldParent;
+            }
+            else
+            {
+                if (currentButton == 0)
+                {
+                    e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 0, Width - 1, Height / 2 - 1);
+                }
+                if (currentButton == 1)
+                {
+                    e.Graphics.DrawRectangle(new Pen(Color.Black), 0, Height / 2, Width - 1, Height / 2 - 1);
+                }
+            }
 
             bool wrap = false;
             int textWidth = Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
@@ -132,6 +147,12 @@ namespace NAPS2.WinForms
             {
                 Invalidate();
             }
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            currentButton = -1;
         }
 
         protected override void OnClick(EventArgs e)

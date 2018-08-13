@@ -125,11 +125,15 @@
     <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
+    <Compile Include="Compat\Platform.cs" />
     <Compile Include="Config\KeyboardShortcuts.cs" />
     <Compile Include="Config\OcrState.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Operation\WorkerOperation.cs" />
+    <Compile Include="Compat\DefaultPlatformCompat.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
+    <Compile Include="Compat\IPlatformCompat.cs" />
+    <Compile Include="Compat\MonoPlatformCompat.cs" />
     <Compile Include="Util\ProgressHandler.cs" />
     <Compile Include="Util\SecureString.cs" />
     <Compile Include="Worker\BackgroundForm.cs">
