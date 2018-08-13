@@ -65,6 +65,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <DefineConstants>WINDOWS</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.1.9.71\lib\net40\CommandLine.dll</HintPath>
@@ -131,6 +134,8 @@
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
     <Compile Include="Operation\WorkerOperation.cs" />
     <Compile Include="Compat\DefaultPlatformCompat.cs" />
+    <Compile Include="Scan\Wia\WiaApi.mono.cs" />
+    <Compile Include="Scan\Wia\WiaState.mono.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
     <Compile Include="Compat\IPlatformCompat.cs" />
     <Compile Include="Compat\MonoPlatformCompat.cs" />
@@ -5717,7 +5722,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="WIA">
+    <COMReference Include="WIA" Condition="'$(OS)' == 'Windows_NT'">
       <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>

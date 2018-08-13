@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
-using WIA;
+
+#if WINDOWS
 
 namespace NAPS2.Scan.Wia
 {
+    using WIA;
+
     internal static class WiaApi
     {
         #region WIA Constants
@@ -467,5 +471,19 @@ namespace NAPS2.Scan.Wia
         }
 
         #endregion
+
+        #region Scanning
+
+        public static Stream Transfer(WiaState wia, string format, bool showGui)
+        {
+            var imageFile = showGui
+                ? (ImageFile)new CommonDialogClass().ShowTransfer(wia.Item, format)
+                : (ImageFile)wia.Item?.Transfer(format);
+            return new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
+        }
+
+        #endregion
     }
 }
+        
+#endif

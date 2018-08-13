@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Wia;
-using WIA;
 
 namespace NAPS2.WinForms
 {
@@ -49,11 +48,7 @@ namespace NAPS2.WinForms
             {
                 try
                 {
-                    var imageFile = (ImageFile)wia.Item?.Transfer(Format);
-                    if (imageFile != null)
-                    {
-                        ImageStream = new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
-                    }
+                    ImageStream = WiaApi.Transfer(wia, Format, false);
                 }
                 catch (Exception ex)
                 {

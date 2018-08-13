@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 
-#if WINDOWS
+#if !WINDOWS
 
 namespace NAPS2.Scan.Wia
 {
-    using WIA;
-
     public class WiaState
     {
-        public WiaState(Device device, Item item)
+        public WiaState(object device, object item)
         {
             Item = item;
             Device = device;
         }
 
-        public Device Device { get; }
+        public object Device { get; }
 
-        public Item Item { get; }
+        public object Item { get; }
     }
 }
 
