@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Compat;
 using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
@@ -71,6 +72,11 @@ namespace NAPS2.WinForms
                 contextMenuStrip.Items.Remove(ctxCopy);
                 contextMenuStrip.Items.Remove(ctxPaste);
                 contextMenuStrip.Items.Remove(toolStripSeparator2);
+            }
+
+            if (!PlatformCompat.Runtime.IsImagePaddingSupported)
+            {
+                btnScan.ImageAlign = ContentAlignment.MiddleCenter;
             }
 
             var lm = new LayoutManager(this)

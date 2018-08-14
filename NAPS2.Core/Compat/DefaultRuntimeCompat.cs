@@ -10,5 +10,7 @@ namespace NAPS2.Compat
         public bool UseToolStripRenderHack => true;
 
         public bool SetToolbarFont => false;
+
+        public bool IsImagePaddingSupported => true;
     }
 }
