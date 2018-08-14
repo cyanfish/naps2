@@ -8,5 +8,7 @@ namespace NAPS2.Compat
     public class DefaultRuntimeCompat : IRuntimeCompat
     {
         public bool UseToolStripRenderHack => true;
+
+        public bool SetToolbarFont => false;
     }
 }

@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAPS2.Compat;
 using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.Lang;
@@ -175,11 +176,15 @@ namespace NAPS2.WinForms
 
         private void RelayoutToolbar()
         {
-            // Wrap text as necessary
+            // Resize and wrap text as necessary
             using (var g = CreateGraphics())
             {
                 foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
                 {
+                    if (PlatformCompat.Runtime.SetToolbarFont)
+                    {
+                        btn.Font = new Font("Segoe UI", 9);
+                    }
                     btn.Text = stringWrapper.Wrap(btn.Text ?? "", 80, g, btn.Font);
                 }
             }

@@ -8,5 +8,7 @@ namespace NAPS2.Compat
     public interface IRuntimeCompat
     {
         bool UseToolStripRenderHack { get; }
+
+        bool SetToolbarFont { get; }
     }
 }
