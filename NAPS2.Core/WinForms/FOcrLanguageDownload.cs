@@ -17,22 +17,19 @@ namespace NAPS2.WinForms
             InitializeComponent();
 
             var initialSelection = new HashSet<string>();
-            if (!ocrDependencyManager.HasNewTesseractExe)
+            if (!ocrDependencyManager.HasNewTesseractExe && ocrDependencyManager.Components.Tesseract302.IsInstalled)
             {
-                // The new OCR version hasn't been installed yet, so pre-select some languages
-                if (ocrDependencyManager.Components.Tesseract302.IsInstalled)
+                // Upgrading from an old version, so pre-select previously used languages
+                foreach (var lang in ocrDependencyManager.Components.Tesseract302Languages.Where(x => x.Value.IsInstalled))
                 {
-                    // Upgrading from an old version, so pre-select previously used languages
-                    foreach (var lang in ocrDependencyManager.Components.Tesseract302Languages.Where(x => x.Value.IsInstalled))
-                    {
-                        initialSelection.Add(lang.Key);
-                    }
+                    initialSelection.Add(lang.Key);
                 }
-                else
-                {
-                    // Fresh install, so pre-select English as a sensible default
-                    initialSelection.Add("eng");
-                }
+            }
+
+            if (!ocrDependencyManager.InstalledTesseractLanguages.Any())
+            {
+                // Fresh install, so pre-select English as a sensible default
+                initialSelection.Add("eng");
             }
 
             // Populate the list of language options
@@ -71,13 +68,20 @@ namespace NAPS2.WinForms
             var selectedLanguages = lvLanguages.Items.Cast<ListViewItem>().Where(x => x.Checked).Select(x => ((string)x.Tag));
             double downloadSize = selectedLanguages.Select(x => ocrDependencyManager.Downloads.Tesseract304Languages[x].Size).Sum();
 
-            if (!ocrDependencyManager.Components.Tesseract304.IsInstalled && ocrDependencyManager.Components.Tesseract304.IsSupported)
+            if (ocrDependencyManager.InstalledAndSupportedTesseractExe == null)
             {
-                downloadSize += ocrDependencyManager.Downloads.Tesseract304.Size;
-            }
-            if (!ocrDependencyManager.Components.Tesseract304Xp.IsInstalled && !ocrDependencyManager.Components.Tesseract304.IsSupported)
-            {
-                downloadSize += ocrDependencyManager.Downloads.Tesseract304Xp.Size;
+                if (ocrDependencyManager.Components.Tesseract304.IsSupported)
+                {
+                    downloadSize += ocrDependencyManager.Downloads.Tesseract304.Size;
+                }
+                else if (ocrDependencyManager.Components.Tesseract304Xp.IsSupported)
+                {
+                    downloadSize += ocrDependencyManager.Downloads.Tesseract304Xp.Size;
+                }
+                else if (ocrDependencyManager.Components.Tesseract304Linux.IsSupported)
+                {
+                    downloadSize += ocrDependencyManager.Downloads.Tesseract304Xp.Size;
+                }
             }
 
             labelSizeEstimate.Text = string.Format(MiscResources.EstimatedDownloadSize, downloadSize.ToString("f1"));
@@ -99,15 +103,23 @@ namespace NAPS2.WinForms
         {
             var progressForm = FormFactory.Create<FDownloadProgress>();
 
-            if (!ocrDependencyManager.Components.Tesseract304.IsInstalled && ocrDependencyManager.Components.Tesseract304.IsSupported)
+            if (ocrDependencyManager.InstalledAndSupportedTesseractExe == null)
             {
-                progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304,
-                    path => ocrDependencyManager.Components.Tesseract304.Install(path));
-            }
-            if (!ocrDependencyManager.Components.Tesseract304Xp.IsInstalled && !ocrDependencyManager.Components.Tesseract304.IsSupported)
-            {
-                progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304Xp,
-                    path => ocrDependencyManager.Components.Tesseract304Xp.Install(path));
+                if (ocrDependencyManager.Components.Tesseract304.IsSupported)
+                {
+                    progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304,
+                        path => ocrDependencyManager.Components.Tesseract304.Install(path));
+                }
+                else if (ocrDependencyManager.Components.Tesseract304Xp.IsSupported)
+                {
+                    progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304Xp,
+                        path => ocrDependencyManager.Components.Tesseract304Xp.Install(path));
+                }
+                else if (ocrDependencyManager.Components.Tesseract304Linux.IsSupported)
+                {
+                    //progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304Linux,
+                    //    path => ocrDependencyManager.Components.Tesseract304Linux.Install(path));
+                }
             }
 
             foreach (

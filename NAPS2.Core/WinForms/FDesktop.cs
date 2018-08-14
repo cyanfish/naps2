@@ -1064,7 +1064,7 @@ namespace NAPS2.WinForms
                 progressForm.ShowDialog();
             }
 
-            if (ocrDependencyManager.InstalledTesseractExe != null && ocrDependencyManager.InstalledTesseractLanguages.Any())
+            if (ocrDependencyManager.HasInstalledTesseractExe && ocrDependencyManager.InstalledTesseractLanguages.Any())
             {
                 if (!ocrDependencyManager.HasNewTesseractExe && !appConfigManager.Config.NoUpdatePrompt)
                 {
@@ -1076,7 +1076,7 @@ namespace NAPS2.WinForms
             else
             {
                 FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
-                if (ocrDependencyManager.InstalledTesseractExe != null && ocrDependencyManager.InstalledTesseractLanguages.Any())
+                if (ocrDependencyManager.HasInstalledTesseractExe && ocrDependencyManager.InstalledTesseractLanguages.Any())
                 {
                     FormFactory.Create<FOcrSetup>().ShowDialog();
                 }

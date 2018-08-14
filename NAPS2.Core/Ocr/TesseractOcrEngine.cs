@@ -27,7 +27,7 @@ namespace NAPS2.Ocr
 
         public bool CanProcess(string langCode)
         {
-            if (string.IsNullOrEmpty(langCode) || ocrDependencyManager.InstalledTesseractExe == null)
+            if (string.IsNullOrEmpty(langCode) || !ocrDependencyManager.HasInstalledTesseractExe)
             {
                 return false;
             }
@@ -43,14 +43,14 @@ namespace NAPS2.Ocr
             {
                 var startInfo = new ProcessStartInfo
                 {
-                    FileName = ocrDependencyManager.InstalledTesseractExe.Path,
+                    FileName = ocrDependencyManager.InstalledAndSupportedTesseractExe.Path,
                     Arguments = string.Format("\"{0}\" \"{1}\" -l {2} hocr", imagePath, tempHocrFilePath, langCode),
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
                 };
-                var tessdataParent = new FileInfo(ocrDependencyManager.InstalledTesseractExe.Path).Directory;
+                var tessdataParent = new FileInfo(ocrDependencyManager.InstalledAndSupportedTesseractExe.Path).Directory;
                 if (tessdataParent == null)
                 {
                     throw new InvalidOperationException();

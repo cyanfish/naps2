@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
@@ -20,12 +21,29 @@ namespace NAPS2.Dependencies
         }
 
         private readonly PlatformSupport platformSupport;
-
-        public ExternalComponent(string id, string path, PlatformSupport platformSupport = null)
+        
+        public ExternalComponent(string id, string path, PlatformSupport platformSupport = null, bool allowSystemPath = false)
         {
             Id = id;
             this.platformSupport = platformSupport;
             Path = System.IO.Path.Combine(BasePath, path);
+
+            if (IsSupported && !IsInstalled && allowSystemPath)
+            {
+                try
+                {
+                    var process = Process.Start(System.IO.Path.GetFileName(path));
+                    if (process != null)
+                    {
+                        Path = process.MainModule.FileName;
+                        process.Kill();
+                    }
+                }
+                catch (Exception)
+                {
+                    // Component is not installed on the system path (or had an error)
+                }
+            }
         }
 
         public string Id { get; }

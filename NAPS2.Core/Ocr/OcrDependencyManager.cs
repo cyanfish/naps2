@@ -71,23 +71,23 @@ namespace NAPS2.Ocr
             }
         }
 
-        public ExternalComponent InstalledTesseractExe
+        public bool HasInstalledTesseractExe => Components.Tesseract304Xp.IsInstalled ||
+                                                Components.Tesseract304.IsInstalled ||
+                                                Components.Tesseract302.IsInstalled ||
+                                                Components.Tesseract304Linux.IsInstalled;
+
+        public ExternalComponent InstalledAndSupportedTesseractExe
         {
             get
             {
-                if (Components.Tesseract304Xp.IsInstalled)
+                ExternalComponent InstalledAndSupported(ExternalComponent component)
                 {
-                    return Components.Tesseract304Xp;
+                    return component.IsInstalled && component.IsSupported ? component : null;
                 }
-                if (Components.Tesseract304.IsInstalled)
-                {
-                    return Components.Tesseract304;
-                }
-                if (Components.Tesseract302.IsInstalled)
-                {
-                    return Components.Tesseract302;
-                }
-                return null;
+                return InstalledAndSupported(Components.Tesseract304Xp) ??
+                       InstalledAndSupported(Components.Tesseract304) ??
+                       InstalledAndSupported(Components.Tesseract302) ??
+                       InstalledAndSupported(Components.Tesseract304Linux);
             }
         }
 
@@ -100,13 +100,15 @@ namespace NAPS2.Ocr
                     : Components.Tesseract302Languages;
                 return languageComponents.Where(x => x.Value.IsInstalled).Select(x => Languages[x.Key]);
             }
-        } 
+        }
 
-        public bool HasNewTesseractExe => Components.Tesseract304.IsInstalled || Components.Tesseract304Xp.IsInstalled;
+        public bool HasNewTesseractExe => Components.Tesseract304.IsInstalled ||
+                                          Components.Tesseract304Xp.IsInstalled ||
+                                          Components.Tesseract304Linux.IsInstalled;
 
-        public bool IsOcrSupported => PlatformSupport.Windows.Validate();
+        public bool IsOcrSupported => PlatformSupport.Windows.Or(PlatformSupport.Linux).Validate();
 
-        public bool TesseractExeRequiresFix => InstalledTesseractExe != null && !InstalledTesseractExe.IsSupported && IsOcrSupported;
+        public bool TesseractExeRequiresFix => HasInstalledTesseractExe && InstalledAndSupportedTesseractExe == null && IsOcrSupported;
 
         #region Language Data (auto-generated)
 
@@ -227,6 +229,8 @@ namespace NAPS2.Ocr
 
         public class OcrComponents
         {
+            public readonly ExternalComponent Tesseract304Linux = new ExternalComponent("ocr", Path.Combine("tesseract-3.0.4", "tesseract"), PlatformSupport.Linux, allowSystemPath: true);
+
             public readonly ExternalComponent Tesseract304Xp = new ExternalComponent("ocr", Path.Combine("tesseract-3.0.4", "tesseract_xp.exe"), PlatformSupport.Windows);
 
             public readonly ExternalComponent Tesseract304 = new ExternalComponent("ocr", Path.Combine("tesseract-3.0.4", "tesseract.exe"), PlatformSupport.Windows.Except(PlatformSupport.WindowsXp));
@@ -243,8 +247,8 @@ namespace NAPS2.Ocr
         {
             private static readonly List<(PlatformSupport, string)> UrlFormats = new List<(PlatformSupport, string)>
             {
-                (PlatformSupport.ModernWindows, @"https://github.com/cyanfish/naps2-components/releases/download/tessseract-3.04/{0}"),
-                (PlatformSupport.ModernWindows, @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download"),
+                (PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://github.com/cyanfish/naps2-components/releases/download/tessseract-3.04/{0}"),
+                (PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download"),
                 (PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-3.04/{0}")
             };
 
@@ -254,7 +258,7 @@ namespace NAPS2.Ocr
 
             public readonly IDictionary<string, DownloadInfo> Tesseract304Languages = LanguageData.ToDictionary(x => x.Code, x => new DownloadInfo(x.Filename, UrlFormats, x.Size, x.Sha1, DownloadFormat.Gzip));
         }
-        
+
         private class OcrLanguage
         {
             public string Filename { get; set; }
