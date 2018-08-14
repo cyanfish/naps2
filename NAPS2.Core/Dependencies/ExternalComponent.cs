@@ -21,6 +21,7 @@ namespace NAPS2.Dependencies
         }
 
         private readonly PlatformSupport platformSupport;
+        private readonly string systemPath;
         
         public ExternalComponent(string id, string path, PlatformSupport platformSupport = null, bool allowSystemPath = false)
         {
@@ -35,7 +36,7 @@ namespace NAPS2.Dependencies
                     var process = Process.Start(System.IO.Path.GetFileName(path));
                     if (process != null)
                     {
-                        Path = process.MainModule.FileName;
+                        systemPath = process.MainModule.FileName;
                         process.Kill();
                     }
                 }
@@ -50,10 +51,16 @@ namespace NAPS2.Dependencies
 
         public string Path { get; }
 
+        public string RunPath => systemPath ?? Path;
+
         public bool IsInstalled
         {
             get
             {
+                if (systemPath != null)
+                {
+                    return true;
+                }
                 if (Path == null)
                 {
                     return false;
