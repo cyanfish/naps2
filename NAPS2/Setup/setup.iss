@@ -57,7 +57,7 @@ Source: "..\bin\InstallerEXE\NAPS2.exe.config"; DestDir: "{app}"; Flags: ignorev
 Source: "..\bin\InstallerEXE\NAPS2.Core.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\NAPS2.DI.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\PdfSharp.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Interop.WIA.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "..\..\NAPS2.Core\bin\InstallerEXE\Interop.WIA.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\Ninject.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\NLog.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\NTwain.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
@@ -70,7 +70,7 @@ Source: "..\..\CONTRIBUTORS"; DestDir: "{app}"; DestName: "contributors.txt"; Fl
 Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\NAPS2.Console\bin\InstallerEXE\NAPS2.Console.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\NAPS2.Console\bin\InstallerEXE\CommandLine.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "lib\x64\twaindsm.dll"; DestDir: "{app}\lib\64"; Flags: ignoreversion
+Source: "lib\64\twaindsm.dll"; DestDir: "{app}\lib\64"; Flags: ignoreversion
 Source: "lib\twaindsm.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "lib\wiaaut.dll"; DestDir: "{sys}"; Flags: regserver
 
