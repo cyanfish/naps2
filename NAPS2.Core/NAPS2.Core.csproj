@@ -135,6 +135,11 @@
     <Compile Include="Config\KeyboardShortcuts.cs" />
     <Compile Include="Config\OcrState.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
+    <Compile Include="ImportExport\Pdf\Fonts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fonts.resx</DependentUpon>
+    </Compile>
     <Compile Include="Operation\WorkerOperation.cs" />
     <Compile Include="Compat\DefaultRuntimeCompat.cs" />
     <Compile Include="Scan\Wia\WiaApi.mono.cs" />
@@ -650,6 +655,10 @@
     <EmbeddedResource Include="ILProfileIcons.resx">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\Pdf\Fonts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Fonts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\LanguageNames.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -5736,6 +5745,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ImportExport\Pdf\verdana.ttf" />
     <None Include="Lang\po\af.po" />
     <None Include="Lang\po\ar.po" />
     <None Include="Lang\po\bg.po" />

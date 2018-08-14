@@ -11,6 +11,7 @@ using NAPS2.Scan.Images;
 using NAPS2.Util;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
+using PdfSharp.Fonts;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Security;
@@ -19,6 +20,11 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class PdfSharpExporter : IPdfExporter
     {
+        static PdfSharpExporter()
+        {
+            GlobalFontSettings.FontResolver = new FontResolver();
+        }
+
         private readonly IOcrEngine ocrEngine;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly AppConfigManager appConfigManager;
@@ -280,7 +286,7 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
                     var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                    var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
+                    var font = new XFont("Verdana", adjustedFontSize, XFontStyle.Regular,
                         new XPdfFontOptions(PdfFontEncoding.Unicode));
                     var adjustedHeight = gfx.MeasureString(element.Text, font).Height;
                     var verticalOffset = (adjustedBounds.Height - adjustedHeight) / 2;
@@ -339,10 +345,23 @@ namespace NAPS2.ImportExport.Pdf
         private static int CalculateFontSize(string text, XRect adjustedBounds, XGraphics gfx)
         {
             int fontSizeGuess = Math.Max(1, (int)(adjustedBounds.Height));
-            var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
+            var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Verdana", fontSizeGuess, XFontStyle.Regular));
             double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
             int adjustedFontSize = Math.Max(1, (int)Math.Round(fontSizeGuess * adjustmentFactor));
             return adjustedFontSize;
+        }
+        
+        private class FontResolver : IFontResolver
+        {
+            public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
+            {
+                return new FontResolverInfo(familyName, isBold, isItalic);
+            }
+
+            public byte[] GetFont(string faceName)
+            {
+                return Fonts.verdana;
+            }
         }
     }
 }
