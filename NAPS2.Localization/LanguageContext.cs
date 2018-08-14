@@ -58,13 +58,16 @@ namespace NAPS2.Localization
 
         private void TranslateFile(FileInfo file, bool winforms)
         {
-            var doc = XDocument.Load(file.FullName, LoadOptions.PreserveWhitespace);
-            foreach (var item in doc.Root.Elements("data"))
+            var doc = XDocument.Load(file.FullName);
+
+            foreach (var item in doc.Root.Elements("data").ToList())
             {
                 var prop = item.Attribute("name")?.Value;
                 var original = item.Element("value")?.Value;
                 if (!Rules.IsTranslatable(winforms, prop, ref original, out string prefix, out string suffix))
                 {
+                    // Trim untranslatable strings from localized resx files
+                    item.Remove();
                     continue;
                 }
                 if (Strings.ContainsKey(original))
@@ -77,8 +80,14 @@ namespace NAPS2.Localization
                 }
             }
 
+            // Trim redundant elements from localized resx files
+            doc.DescendantNodes().OfType<XComment>().Remove();
+            doc.Descendants(XName.Get("schema", "http://www.w3.org/2001/XMLSchema")).Remove();
+            doc.Descendants("metadata").Remove();
+            doc.Descendants("assembly").Remove();
+
             string savePath = file.FullName.Replace(".resx", $".{langCode}.resx");
-            doc.Save(savePath, SaveOptions.DisableFormatting);
+            doc.Save(savePath);
 
             UpdateProjectFile(file.FullName, savePath);
         }
