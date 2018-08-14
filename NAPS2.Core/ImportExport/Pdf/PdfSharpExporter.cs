@@ -321,6 +321,10 @@ namespace NAPS2.ImportExport.Pdf
         {
             double hAdjust = 72 / img.HorizontalResolution;
             double vAdjust = 72 / img.VerticalResolution;
+            if (double.IsInfinity(hAdjust) || double.IsInfinity(vAdjust))
+            {
+                hAdjust = vAdjust = 0.75;
+            }
             double realWidth = img.PixelWidth * hAdjust;
             double realHeight = img.PixelHeight * vAdjust;
             return new Size((int)realWidth, (int)realHeight);
