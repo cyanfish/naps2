@@ -168,6 +168,7 @@
       <DependentUpon>LanguageComponents.tt</DependentUpon>
     </Content>
     <Content Include="Setup\lib\64\twaindsm.dll" />
+    <Content Include="Setup\lib\Mono.SANE.dll" />
     <Content Include="Setup\lib\NTwain.dll" />
     <Content Include="Setup\lib\twaindsm.dll" />
     <Content Include="Setup\setup.iss" />
