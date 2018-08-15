@@ -3,7 +3,7 @@
 // WiaApi.mono.cs and WiaState.mono.cs contain placeholder implementations that don't depend on WIA.
 // This setup lets NAPS2 compile on multiple platforms without changing any code that doesn't directly touch WIA.
 // WIA-related NAPS2 code is never run on non-Windows platforms due to PlatformCompat checks.
-#if WINDOWS
+#if !NONWINDOWS
 
 using System;
 using System.Collections.Generic;

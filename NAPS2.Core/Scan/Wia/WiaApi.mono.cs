@@ -1,5 +1,5 @@
 // See WiaApi.cs for an explanation of this guard
-#if !WINDOWS
+#if NONWINDOWS
 
 using System;
 using System.Collections.Generic;
