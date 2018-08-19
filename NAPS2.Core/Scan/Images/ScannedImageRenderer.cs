@@ -4,9 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Text;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images

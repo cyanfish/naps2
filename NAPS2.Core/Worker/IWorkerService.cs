@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using NAPS2.ImportExport.Pdf;
 using NAPS2.Operation;
 using NAPS2.Recovery;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
 
 namespace NAPS2.Worker
 {

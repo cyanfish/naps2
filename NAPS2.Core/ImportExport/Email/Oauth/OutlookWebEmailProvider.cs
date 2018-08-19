@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using MailKit;
-using MimeKit;
 using NAPS2.Config;
 using Newtonsoft.Json.Linq;
 

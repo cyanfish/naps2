@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
-using NAPS2.Scan.Images;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms

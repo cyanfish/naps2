@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using MailKit;
 using MimeKit;
 using NAPS2.Config;
 

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using Ghostscript.NET.Rasterizer;
 using NAPS2.Config;
 using NAPS2.Dependencies;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Util;
-using NAPS2.WinForms;
 
 namespace NAPS2.ImportExport.Pdf
 {

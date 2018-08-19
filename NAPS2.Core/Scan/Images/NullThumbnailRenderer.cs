@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using NAPS2.Config;
 
 namespace NAPS2.Scan.Images

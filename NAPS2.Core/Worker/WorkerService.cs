@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Operation;
 using NAPS2.Recovery;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Transforms;
 using NAPS2.Scan.Twain;
 using NAPS2.Util;
 

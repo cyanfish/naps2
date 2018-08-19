@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using NAPS2.Operation;
 using NAPS2.Scan.Images.Transforms;
-using ZXing;
 
 namespace NAPS2.Scan.Images
 {

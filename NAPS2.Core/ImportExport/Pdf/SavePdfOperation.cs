@@ -7,7 +7,6 @@ using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
-using NAPS2.Recovery;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.Worker;
