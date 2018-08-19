@@ -644,14 +644,7 @@ namespace NAPS2.WinForms
                 {
                     imageList.Delete(SelectedIndices);
                     UpdateThumbnails(Enumerable.Empty<int>(), false, false);
-                    if (imageList.Images.Any())
-                    {
-                        changeTracker.HasUnsavedChanges = true;
-                    }
-                    else
-                    {
-                        changeTracker.HasUnsavedChanges = false;
-                    }
+                    changeTracker.HasUnsavedChanges = imageList.Images.Any();
                 }
             }
         }
