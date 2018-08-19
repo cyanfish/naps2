@@ -81,5 +81,22 @@ namespace NAPS2.Util
                 dict[key].Add(value);
             }
         }
+
+        /// <summary>
+        /// Gets the element for the given key, or default(TKey) if none is present.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
+        {
+            if (dict.ContainsKey(key))
+            {
+                return dict[key];
+            }
+            return default(TValue);
+        }
     }
 }

@@ -111,6 +111,8 @@ namespace NAPS2.Scan
         public double WiaDelayBetweenScansSeconds { get; set; }
 
         public bool FlipDuplexedPages { get; set; }
+
+        public Dictionary<string, string> KeyValueOptions { get; set; }
     }
 
     [Serializable]
