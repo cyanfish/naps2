@@ -110,10 +110,8 @@ namespace NAPS2.ImportExport.Pdf
             // Iterate references to external objects
             foreach (PdfItem item in xObjects.Elements.Values)
             {
-                var reference = item as PdfReference;
-                var xObject = reference?.Value as PdfDictionary;
                 // Is external object an image?
-                if (xObject != null && xObject.Elements.GetString("/Subtype") == "/Image")
+                if ((item as PdfReference)?.Value is PdfDictionary xObject && xObject.Elements.GetString("/Subtype") == "/Image")
                 {
                     // Support multiple filter schemes
                     var element = xObject.Elements.Single(x => x.Key == "/Filter");

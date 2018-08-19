@@ -202,8 +202,7 @@ namespace NAPS2.Config
                     // If the driver is WIA and the profile type is not Extended, that meant the native UI was to be used
                     UseNativeUI = profile.DriverName == WiaScanDriver.DRIVER_NAME
                 };
-                var ext = profile as OldExtendedScanSettings;
-                if (ext != null)
+                if (profile is OldExtendedScanSettings ext)
                 {
                     result.AfterScanScale = ext.AfterScanScale;
                     result.BitDepth = ext.BitDepth;
