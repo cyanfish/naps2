@@ -130,10 +130,10 @@
     <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
-    <Compile Include="Compat\ISystemCompat.cs" />
-    <Compile Include="Compat\LinuxSystemCompat.cs" />
-    <Compile Include="Compat\PlatformCompat.cs" />
-    <Compile Include="Compat\WindowsSystemCompat.cs" />
+    <Compile Include="Platform\ISystemCompat.cs" />
+    <Compile Include="Platform\LinuxSystemCompat.cs" />
+    <Compile Include="Platform\PlatformCompat.cs" />
+    <Compile Include="Platform\WindowsSystemCompat.cs" />
     <Compile Include="Config\KeyboardShortcuts.cs" />
     <Compile Include="Config\OcrState.cs" />
     <Compile Include="Config\SaveButtonDefaultAction.cs" />
@@ -143,14 +143,14 @@
       <DependentUpon>Fonts.resx</DependentUpon>
     </Compile>
     <Compile Include="Operation\WorkerOperation.cs" />
-    <Compile Include="Compat\DefaultRuntimeCompat.cs" />
+    <Compile Include="Platform\DefaultRuntimeCompat.cs" />
     <Compile Include="Scan\KeyValueScanOptions.cs" />
     <Compile Include="Scan\Sane\SaneScanDriver.cs" />
     <Compile Include="Scan\Wia\WiaApi.mono.cs" />
     <Compile Include="Scan\Wia\WiaState.mono.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
-    <Compile Include="Compat\IRuntimeCompat.cs" />
-    <Compile Include="Compat\MonoRuntimeCompat.cs" />
+    <Compile Include="Platform\IRuntimeCompat.cs" />
+    <Compile Include="Platform\MonoRuntimeCompat.cs" />
     <Compile Include="Util\ProgressHandler.cs" />
     <Compile Include="Util\SecureString.cs" />
     <Compile Include="Worker\BackgroundForm.cs">
