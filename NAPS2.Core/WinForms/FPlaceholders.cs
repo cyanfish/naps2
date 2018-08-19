@@ -40,8 +40,8 @@ namespace NAPS2.WinForms
                 FileNamePlaceholders.NUMBER_3_DIGITS,
                 FileNamePlaceholders.NUMBER_2_DIGITS,
                 FileNamePlaceholders.NUMBER_1_DIGIT,
-                string.Format("{0}-{1}-{2}", FileNamePlaceholders.YEAR_4_DIGITS, FileNamePlaceholders.MONTH_2_DIGITS, FileNamePlaceholders.DAY_2_DIGITS),
-                string.Format("{0}_{1}_{2}", FileNamePlaceholders.HOUR_24_CLOCK, FileNamePlaceholders.MINUTE_2_DIGITS, FileNamePlaceholders.SECOND_2_DIGITS),
+                $"{FileNamePlaceholders.YEAR_4_DIGITS}-{FileNamePlaceholders.MONTH_2_DIGITS}-{FileNamePlaceholders.DAY_2_DIGITS}",
+                $"{FileNamePlaceholders.HOUR_24_CLOCK}_{FileNamePlaceholders.MINUTE_2_DIGITS}_{FileNamePlaceholders.SECOND_2_DIGITS}",
             };
             var buttons = gboxPlaceholders.Controls.OfType<Button>().OrderBy(x => x.Top).ThenBy(x => x.Left).ToArray();
             for (int i = 0; i < Math.Min(placeholders.Length, buttons.Length); i++)

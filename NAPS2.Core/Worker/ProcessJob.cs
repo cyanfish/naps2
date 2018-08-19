@@ -42,7 +42,7 @@ namespace NAPS2.Worker
             Marshal.StructureToPtr(extendedInfo, extendedInfoPtr, false);
 
             if (!SetInformationJobObject(handle, JobObjectInfoType.ExtendedLimitInformation, extendedInfoPtr, (uint)length))
-                throw new Exception(string.Format("Unable to set information.  Error: {0}", Marshal.GetLastWin32Error()));
+                throw new Exception($"Unable to set information.  Error: {Marshal.GetLastWin32Error()}");
         }
 
         public void Dispose()
