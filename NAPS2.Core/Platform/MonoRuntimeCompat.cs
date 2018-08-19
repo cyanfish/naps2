@@ -11,5 +11,7 @@ namespace NAPS2.Platform
         public bool SetToolbarFont => true;
 
         public bool IsImagePaddingSupported => false;
+
+        public bool SetImageListSizeOnImageCollection => true;
     }
 }

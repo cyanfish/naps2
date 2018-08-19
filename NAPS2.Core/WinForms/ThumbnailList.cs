@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using NAPS2.Platform;
 using NAPS2.Scan.Images;
 
 namespace NAPS2.WinForms
@@ -16,8 +17,17 @@ namespace NAPS2.WinForms
 
         static ThumbnailList()
         {
-            imageSizeField = typeof(ImageList).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
-            performRecreateHandleMethod = typeof(ImageList).GetMethod("PerformRecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (PlatformCompat.Runtime.SetImageListSizeOnImageCollection)
+            {
+                imageSizeField = typeof(ImageList.ImageCollection).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
+                performRecreateHandleMethod = typeof(ImageList.ImageCollection).GetMethod("RecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
+            }
+            else
+            {
+                imageSizeField = typeof(ImageList).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
+                performRecreateHandleMethod = typeof(ImageList).GetMethod("PerformRecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
+            }
+
             if (imageSizeField == null || performRecreateHandleMethod == null)
             {
                 // No joy, just be happy enough with 256
@@ -42,8 +52,16 @@ namespace NAPS2.WinForms
                 if (imageSizeField != null && performRecreateHandleMethod != null)
                 {
                     // A simple hack to let the listview have larger thumbnails than 256x256
-                    imageSizeField.SetValue(ilThumbnailList, value);
-                    performRecreateHandleMethod.Invoke(ilThumbnailList, new object[] { "ImageSize" });
+                    if (PlatformCompat.Runtime.SetImageListSizeOnImageCollection)
+                    {
+                        imageSizeField.SetValue(ilThumbnailList.Images, value);
+                        performRecreateHandleMethod.Invoke(ilThumbnailList.Images, new object[] { });
+                    }
+                    else
+                    {
+                        imageSizeField.SetValue(ilThumbnailList, value);
+                        performRecreateHandleMethod.Invoke(ilThumbnailList, new object[] { "ImageSize" });
+                    }
                 }
                 else
                 {
