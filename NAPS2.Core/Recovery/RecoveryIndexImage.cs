@@ -12,13 +12,6 @@ namespace NAPS2.Recovery
     {
         public string FileName { get; set; }
 
-        /// <summary>
-        /// Deprecated
-        /// </summary>
-        public RotateFlipType Transform { get; set; }
-
-        public bool ShouldSerializeTransform() => false;
-
         public List<Transform> TransformList { get; set; }
 
         public ScanBitDepth BitDepth { get; set; }
