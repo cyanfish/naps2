@@ -186,9 +186,9 @@ namespace NAPS2.Scan.Wia
             {
                 throw error;
             }
-            if (error is COMException)
+            if (error is COMException comError)
             {
-                ThrowDeviceError((COMException)error);
+                ThrowDeviceError(comError);
             }
             throw new ScanDriverUnknownException(error);
         }

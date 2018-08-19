@@ -251,7 +251,7 @@ namespace NAPS2.Scan
 
         public override bool Equals(Object obj)
         {
-            return obj is PageDimensions && this == (PageDimensions)obj;
+            return obj is PageDimensions pageDimens && this == pageDimens;
         }
 
         public override int GetHashCode()

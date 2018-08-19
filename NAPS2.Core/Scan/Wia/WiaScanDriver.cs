@@ -80,8 +80,8 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (ScanDriverException e)
                     {
-                        if (ScanProfile.WiaRetryOnFailure && e.InnerException is COMException 
-                            && (uint)((COMException) e.InnerException).ErrorCode == 0x80004005 && retryCount < MAX_RETRIES)
+                        if (ScanProfile.WiaRetryOnFailure && e.InnerException is COMException comError 
+                            && (uint)comError.ErrorCode == 0x80004005 && retryCount < MAX_RETRIES)
                         {
                             Thread.Sleep(1000);
                             retryCount += 1;
