@@ -112,7 +112,7 @@ namespace NAPS2.Scan
 
         public bool FlipDuplexedPages { get; set; }
 
-        public Dictionary<string, string> KeyValueOptions { get; set; }
+        public KeyValueScanOptions KeyValueOptions { get; set; }
     }
 
     [Serializable]
