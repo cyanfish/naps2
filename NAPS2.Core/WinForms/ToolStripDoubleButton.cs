@@ -32,14 +32,12 @@ namespace NAPS2.WinForms
         public override Size GetPreferredSize(Size constrainingSize)
         {
             bool wrap = false;
-            var sumWidth = Padding.Left + Padding.Right +
-                           Math.Max(FirstImage != null ? FirstImage.Width : 0,
-                               SecondImage != null ? SecondImage.Width : 0)
+            var sumWidth = Padding.Left + Padding.Right
+                           + Math.Max(FirstImage?.Width ?? 0, SecondImage?.Width ?? 0)
                            + Math.Max(MeasureTextWidth(FirstText, ref wrap), MeasureTextWidth(SecondText, ref wrap));
-            var sumHeight = Padding.Top + Padding.Bottom +
-                           (FirstImage != null ? FirstImage.Height : 0)
-                           + (SecondImage != null ? SecondImage.Height : 0)
-                           + 16 + (wrap ? 12 : 0);
+            var sumHeight = Padding.Top + Padding.Bottom
+                            + (FirstImage?.Height ?? 0) + (SecondImage?.Height ?? 0)
+                            + 16 + (wrap ? 12 : 0);
             return new Size(sumWidth, sumHeight);
         }
 

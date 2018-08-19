@@ -58,7 +58,7 @@ namespace NAPS2.Scan.Twain
 
         private IEnumerable<ScanDevice> GetFullDeviceList()
         {
-            var twainImpl = ScanProfile != null ? ScanProfile.TwainImpl : TwainImpl.Default;
+            var twainImpl = ScanProfile?.TwainImpl ?? TwainImpl.Default;
             if (UseWorker)
             {
                 using(var worker = workerServiceFactory.Create())
