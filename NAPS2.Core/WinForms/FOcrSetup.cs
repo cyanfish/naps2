@@ -36,8 +36,10 @@ namespace NAPS2.WinForms
             {
                 checkBoxEnableOcr.Checked = true;
                 comboLanguages.SelectedValue = appConfigManager.Config.OcrDefaultLanguage ?? "";
+                // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
                 if (comboLanguages.SelectedValue == null)
                 {
+                    // The provided value is not a valid option
                     comboLanguages.SelectedValue = comboLanguages.Items.Cast<Language>().Select(x => x.Code).FirstOrDefault() ?? "";
                 }
             }
@@ -50,8 +52,10 @@ namespace NAPS2.WinForms
             {
                 checkBoxEnableOcr.Checked = UserConfigManager.Config.EnableOcr;
                 comboLanguages.SelectedValue = UserConfigManager.Config.OcrLanguageCode ?? appConfigManager.Config.OcrDefaultLanguage ?? "";
+                // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
                 if (comboLanguages.SelectedValue == null)
                 {
+                    // The provided value is not a valid option
                     comboLanguages.SelectedValue = comboLanguages.Items.Cast<Language>().Select(x => x.Code).FirstOrDefault() ?? "";
                 }
             }

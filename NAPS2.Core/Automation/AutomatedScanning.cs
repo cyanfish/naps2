@@ -600,13 +600,9 @@ namespace NAPS2.Automation
                 }
                 else
                 {
-                    // Use the profile with the specified name (case-sensitive)
-                    profile = profileManager.Profiles.FirstOrDefault(x => x.DisplayName == options.ProfileName);
-                    if (profile == null)
-                    {
-                        // If none found, try case-insensitive
-                        profile = profileManager.Profiles.First(x => x.DisplayName.ToLower() == options.ProfileName.ToLower());
-                    }
+                    // Use the profile with the specified name (try case-sensitive first, then case-insensitive)
+                    profile = profileManager.Profiles.FirstOrDefault(x => x.DisplayName == options.ProfileName) ??
+                              profileManager.Profiles.First(x => x.DisplayName.ToLower() == options.ProfileName.ToLower());
                 }
             }
             catch (InvalidOperationException)
