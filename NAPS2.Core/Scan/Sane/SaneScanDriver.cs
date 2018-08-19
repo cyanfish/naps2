@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -13,11 +14,17 @@ namespace NAPS2.Scan.Sane
 
         private readonly SaneWrapper saneWrapper;
         private readonly IFormFactory formFactory;
+        private readonly IBlankDetector blankDetector;
+        private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageHelper scannedImageHelper;
 
-        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory)
+        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
         {
             this.saneWrapper = saneWrapper;
             this.formFactory = formFactory;
+            this.blankDetector = blankDetector;
+            this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageHelper = scannedImageHelper;
         }
 
         public override string DriverName => DRIVER_NAME;
@@ -44,7 +51,22 @@ namespace NAPS2.Scan.Sane
 
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
-            throw new NotImplementedException();
+            // TODO: Support ADF
+            using (Bitmap output = saneWrapper.ScanOne(ScanDevice.ID, ScanProfile.KeyValueOptions))
+            {
+                using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+                {
+                    if (blankDetector.ExcludePage(result, ScanProfile))
+                    {
+                        yield break;
+                    }
+                    // TODO: Set bit depth correctly
+                    var image = new ScannedImage(result, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
+                    scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1);
+                    yield return image;
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 
 namespace NAPS2.Scan.Sane
@@ -8,11 +9,10 @@ namespace NAPS2.Scan.Sane
     public class SaneWrapper
     {
         private const string SCANIMAGE = "scanimage";
-        private const string DEVICE_LIST_ARGS = @"-f %d|%m%n";
 
         public IEnumerable<ScanDevice> GetDeviceList()
         {
-            var proc = StartProcess(SCANIMAGE, DEVICE_LIST_ARGS);
+            var proc = StartProcess(SCANIMAGE, @"-f %d|%m%n");
 
             string line;
             while ((line = proc.StandardOutput.ReadLine()?.Trim()) != null)
@@ -25,28 +25,39 @@ namespace NAPS2.Scan.Sane
             }
         }
 
+        public Bitmap ScanOne(string deviceId, KeyValueScanOptions options)
+        {
+            var profileOptions = options == null ? "" : string.Join("", options.Select(kvp => $@" {kvp.Key} ""{kvp.Value.Replace("\"", "\\\"")}"""));
+            var allOptions = $@"-d ""{deviceId}"" --format=tiff --progress{profileOptions}";
+            var proc = StartProcess(SCANIMAGE, allOptions);
+            return new Bitmap(proc.StandardOutput.BaseStream);
+        }
+
         private static Process StartProcess(string fileName, string args)
         {
-            Process proc;
             try
             {
-                proc = Process.Start(new ProcessStartInfo
+                var proc = new Process
                 {
-                    FileName = SCANIMAGE,
-                    Arguments = DEVICE_LIST_ARGS,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true
-                });
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = fileName,
+                        Arguments = args,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true
+                    },
+                    // EnableRaisingEvents = true
+                };
+                proc.OutputDataReceived += (sender, eventArgs) => Debug.WriteLine("o: " + eventArgs.Data);
+                proc.ErrorDataReceived += (sender, eventArgs) => Debug.WriteLine("e: " + eventArgs.Data);
+                proc.Start();
+                return proc;
             }
             catch (Exception e)
             {
                 throw new SaneNotAvailableException(e);
             }
-            if (proc == null)
-            {
-                throw new SaneNotAvailableException();
-            }
-            return proc;
         }
     }
 }
