@@ -17,10 +17,7 @@ namespace NAPS2.Recovery
         /// </summary>
         public RotateFlipType Transform { get; set; }
 
-        public bool ShouldSerializeTransform()
-        {
-            return false;
-        }
+        public bool ShouldSerializeTransform() => false;
 
         public List<Transform> TransformList { get; set; }
 

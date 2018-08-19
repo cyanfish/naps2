@@ -127,10 +127,7 @@ namespace NAPS2.Scan.Images
             return (Bitmap)thumbnail.Clone();
         }
 
-        public object GetThumbnailState()
-        {
-            return thumbnail;
-        }
+        public object GetThumbnailState() => thumbnail;
 
         public void SetThumbnail(Bitmap bitmap)
         {
@@ -143,10 +140,7 @@ namespace NAPS2.Scan.Images
             recoveryImage.Move(index);
         }
 
-        public Snapshot Preserve()
-        {
-            return new Snapshot(this);
-        }
+        public Snapshot Preserve() => new Snapshot(this);
 
         [Serializable]
         [KnownType(typeof(RecoveryIndexImage))]

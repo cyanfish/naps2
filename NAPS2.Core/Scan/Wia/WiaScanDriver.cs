@@ -35,15 +35,9 @@ namespace NAPS2.Scan.Wia
 
         public override string DriverName => DRIVER_NAME;
 
-        protected override ScanDevice PromptForDeviceInternal()
-        {
-            return WiaApi.PromptForScanDevice();
-        }
+        protected override ScanDevice PromptForDeviceInternal() => WiaApi.PromptForScanDevice();
 
-        protected override List<ScanDevice> GetDeviceListInternal()
-        {
-            return WiaApi.GetScanDeviceList();
-        }
+        protected override List<ScanDevice> GetDeviceListInternal() => WiaApi.GetScanDeviceList();
 
         protected override IEnumerable<ScannedImage> ScanInternal()
         {

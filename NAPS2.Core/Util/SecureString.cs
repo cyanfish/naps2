@@ -28,15 +28,9 @@ namespace NAPS2.Util
         {
         }
 
-        public static implicit operator SecureString(string s)
-        {
-            return new SecureString(s);
-        }
+        public static implicit operator SecureString(string s) => new SecureString(s);
 
-        public static implicit operator string(SecureString s)
-        {
-            return s.ToString();
-        }
+        public static implicit operator string(SecureString s) => s.ToString();
 
         public override string ToString()
         {
@@ -44,10 +38,7 @@ namespace NAPS2.Util
             return value;
         }
 
-        public XmlSchema GetSchema()
-        {
-            return null;
-        }
+        public XmlSchema GetSchema() => null;
 
         public void ReadXml(XmlReader reader)
         {

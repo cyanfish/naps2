@@ -39,10 +39,7 @@ namespace NAPS2.Scan.Images.Transforms
             return bitmap;
         }
 
-        public override bool CanSimplify(Transform other)
-        {
-            return other is HueTransform;
-        }
+        public override bool CanSimplify(Transform other) => other is HueTransform;
 
         public override Transform Simplify(Transform other)
         {

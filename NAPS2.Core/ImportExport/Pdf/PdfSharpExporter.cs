@@ -358,10 +358,7 @@ namespace NAPS2.ImportExport.Pdf
                 return new FontResolverInfo(familyName, isBold, isItalic);
             }
 
-            public byte[] GetFont(string faceName)
-            {
-                return Fonts.verdana;
-            }
+            public byte[] GetFont(string faceName) => Fonts.verdana;
         }
     }
 }

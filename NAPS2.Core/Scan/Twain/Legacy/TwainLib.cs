@@ -143,10 +143,7 @@ namespace NAPS2.Scan.Twain.Legacy
             return false;
         }
 
-        public string GetCurrentName()
-        {
-            return srcds.ProductName;
-        }
+        public string GetCurrentName() => srcds.ProductName;
 
         public bool Acquire()
         {

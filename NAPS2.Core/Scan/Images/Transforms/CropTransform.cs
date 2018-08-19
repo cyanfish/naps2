@@ -30,10 +30,7 @@ namespace NAPS2.Scan.Images.Transforms
             return result;
         }
 
-        public override bool CanSimplify(Transform other)
-        {
-            return other is CropTransform;
-        }
+        public override bool CanSimplify(Transform other) => other is CropTransform;
 
         public override Transform Simplify(Transform other)
         {

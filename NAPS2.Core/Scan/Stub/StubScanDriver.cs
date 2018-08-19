@@ -25,18 +25,12 @@ namespace NAPS2.Scan.Stub
 
         public IWin32Window DialogParent { get; set; }
 
-        public ScanDevice PromptForDevice()
-        {
-            return new ScanDevice("test", "Test Scanner");
-        }
+        public ScanDevice PromptForDevice() => new ScanDevice("test", "Test Scanner");
 
-        public List<ScanDevice> GetDeviceList()
+        public List<ScanDevice> GetDeviceList() => new List<ScanDevice>
         {
-            return new List<ScanDevice>
-            {
-                new ScanDevice("test", "Test Scanner")
-            };
-        }
+            new ScanDevice("test", "Test Scanner")
+        };
 
         public IEnumerable<ScannedImage> Scan()
         {

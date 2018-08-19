@@ -123,10 +123,7 @@ namespace NAPS2.Scan
             Separator = SaveSeparator.FilePerPage;
         }
 
-        internal AutoSaveSettings Clone()
-        {
-            return (AutoSaveSettings) MemberwiseClone();
-        }
+        internal AutoSaveSettings Clone() => (AutoSaveSettings) MemberwiseClone();
 
         public string FilePath { get; set; }
 
@@ -272,10 +269,7 @@ namespace NAPS2.Scan
             return x.Width == y.Width && x.Height == y.Height && x.Unit == y.Unit;
         }
 
-        public static bool operator !=(PageDimensions x, PageDimensions y)
-        {
-            return !(x == y);
-        }
+        public static bool operator !=(PageDimensions x, PageDimensions y) => !(x == y);
     }
 
     public class NamedPageSize

@@ -81,10 +81,7 @@ namespace NAPS2.Util
                 value = input;
             }
 
-            public override IEnumerable<T> GetOutput(List<Task> taskList)
-            {
-                return value;
-            }
+            public override IEnumerable<T> GetOutput(List<Task> taskList) => value;
         }
 
         private class PipelineStep<T1, T2> : PipelineBase<T2>

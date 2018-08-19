@@ -94,10 +94,7 @@ namespace NAPS2.Scan.Images.Transforms
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public virtual bool CanSimplify(Transform other)
-        {
-            return false;
-        }
+        public virtual bool CanSimplify(Transform other) => false;
 
         /// <summary>
         /// Combines this transform with a previous transform to form a single new transform.

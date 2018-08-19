@@ -108,10 +108,7 @@ namespace NAPS2.Scan.Images.Transforms
             return result;
         }
 
-        public override bool CanSimplify(Transform other)
-        {
-            return other is RotationTransform;
-        }
+        public override bool CanSimplify(Transform other) => other is RotationTransform;
 
         public override Transform Simplify(Transform other)
         {

@@ -62,9 +62,6 @@ namespace NAPS2.Util
 
         protected abstract void DestroyStructures();
 
-        public static implicit operator IntPtr(UnmanagedBase<T> unmanaged)
-        {
-            return unmanaged.Pointer;
-        }
+        public static implicit operator IntPtr(UnmanagedBase<T> unmanaged) => unmanaged.Pointer;
     }
 }

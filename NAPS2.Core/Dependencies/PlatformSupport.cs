@@ -21,11 +21,8 @@ namespace NAPS2.Dependencies
             this.predicate = predicate;
         }
 
-        public bool Validate()
-        {
-            return predicate();
-        }
-        
+        public bool Validate() => predicate();
+
         public PlatformSupport And(params PlatformSupport[] platforms)
         {
             return new PlatformSupport(() => Validate() && platforms.All(x => x.Validate()));

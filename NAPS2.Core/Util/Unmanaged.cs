@@ -11,15 +11,9 @@ namespace NAPS2.Util
     /// </summary>
     public static class Unmanaged
     {
-        public static Unmanaged<T> CopyOf<T>(T value)
-        {
-            return new Unmanaged<T>(value);
-        }
+        public static Unmanaged<T> CopyOf<T>(T value) => new Unmanaged<T>(value);
 
-        public static UnmanagedArray<T> CopyOf<T>(T[] value)
-        {
-            return new UnmanagedArray<T>(value);
-        }
+        public static UnmanagedArray<T> CopyOf<T>(T[] value) => new UnmanagedArray<T>(value);
     }
 
     /// <summary>

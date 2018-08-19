@@ -15,9 +15,6 @@ namespace NAPS2.DI
             this.kernel = kernel;
         }
 
-        public IScanDriver Create(string driverName)
-        {
-            return kernel.Get<IScanDriver>(driverName);
-        }
+        public IScanDriver Create(string driverName) => kernel.Get<IScanDriver>(driverName);
     }
 }

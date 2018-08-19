@@ -13,9 +13,6 @@ namespace NAPS2.Scan.Images
         {
         }
 
-        public override Bitmap RenderThumbnail(Bitmap b, int size)
-        {
-            return null;
-        }
+        public override Bitmap RenderThumbnail(Bitmap b, int size) => null;
     }
 }
