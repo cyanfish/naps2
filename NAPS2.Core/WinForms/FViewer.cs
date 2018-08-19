@@ -368,8 +368,7 @@ namespace NAPS2.WinForms
 
         private void tbPageCurrent_TextChanged(object sender, EventArgs e)
         {
-            int indexOffBy1;
-            if (int.TryParse(tbPageCurrent.Text, out indexOffBy1))
+            if (int.TryParse(tbPageCurrent.Text, out int indexOffBy1))
             {
                 GoTo(indexOffBy1 - 1);
             }

@@ -151,8 +151,7 @@ namespace NAPS2.WinForms
 
         private void txtBrightness_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtBrightness.Text, out value))
+            if (int.TryParse(txtBrightness.Text, out int value))
             {
                 if (value >= tbBrightness.Minimum && value <= tbBrightness.Maximum)
                 {
@@ -170,8 +169,7 @@ namespace NAPS2.WinForms
 
         private void txtContrast_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtContrast.Text, out value))
+            if (int.TryParse(txtContrast.Text, out int value))
             {
                 if (value >= tbContrast.Minimum && value <= tbContrast.Maximum)
                 {

@@ -108,8 +108,7 @@ namespace NAPS2.Automation
 
                 if (options.Number > 0)
                 {
-                    ScanProfile profile;
-                    if (!GetProfile(out profile))
+                    if (!GetProfile(out ScanProfile profile))
                     {
                         return;
                     }

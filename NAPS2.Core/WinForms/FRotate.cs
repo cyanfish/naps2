@@ -137,8 +137,7 @@ namespace NAPS2.WinForms
 
         private void txtAngle_TextChanged(object sender, EventArgs e)
         {
-            double valueDouble;
-            if (double.TryParse(txtAngle.Text.Replace('\u00B0'.ToString(CultureInfo.InvariantCulture), ""), out valueDouble))
+            if (double.TryParse(txtAngle.Text.Replace('\u00B0'.ToString(CultureInfo.InvariantCulture), ""), out double valueDouble))
             {
                 int value = (int)Math.Round(valueDouble * 10);
                 if (value >= tbAngle.Minimum && value <= tbAngle.Maximum)

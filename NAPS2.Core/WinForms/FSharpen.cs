@@ -134,8 +134,7 @@ namespace NAPS2.WinForms
 
         private void txtSharpen_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtSharpen.Text, out value))
+            if (int.TryParse(txtSharpen.Text, out int value))
             {
                 if (value >= tbSharpen.Minimum && value <= tbSharpen.Maximum)
                 {

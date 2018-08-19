@@ -373,8 +373,7 @@ namespace NAPS2.Scan.Twain
                 horizontalOffset = (pageMaxWidth - pageWidth);
 
             ds.Capabilities.ICapUnits.SetValue(Unit.Inches);
-            TWImageLayout imageLayout;
-            ds.DGImage.ImageLayout.Get(out imageLayout);
+            ds.DGImage.ImageLayout.Get(out TWImageLayout imageLayout);
             imageLayout.Frame = new TWFrame
             {
                 Left = horizontalOffset,

@@ -134,8 +134,7 @@ namespace NAPS2.WinForms
 
         private void txtBlackWhite_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtThreshold.Text, out value))
+            if (int.TryParse(txtThreshold.Text, out int value))
             {
                 if (value >= tbThreshold.Minimum && value <= tbThreshold.Maximum)
                 {

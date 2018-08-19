@@ -151,8 +151,7 @@ namespace NAPS2.WinForms
 
         private void txtHue_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtHue.Text, out value))
+            if (int.TryParse(txtHue.Text, out int value))
             {
                 if (value >= tbHue.Minimum && value <= tbHue.Maximum)
                 {
@@ -170,8 +169,7 @@ namespace NAPS2.WinForms
 
         private void txtSaturation_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtSaturation.Text, out value))
+            if (int.TryParse(txtSaturation.Text, out int value))
             {
                 if (value >= tbSaturation.Minimum && value <= tbSaturation.Maximum)
                 {

@@ -157,8 +157,7 @@ namespace NAPS2.WinForms
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
-            string savePath;
-            if (dialogHelper.PromptToSavePdf(txtDefaultFilePath.Text, out savePath))
+            if (dialogHelper.PromptToSavePdf(txtDefaultFilePath.Text, out string savePath))
             {
                 txtDefaultFilePath.Text = savePath;
             }

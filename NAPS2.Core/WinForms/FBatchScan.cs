@@ -113,8 +113,7 @@ namespace NAPS2.WinForms
 
             if (rdMultipleScansDelay.Checked)
             {
-                int scanCount;
-                if (!int.TryParse(txtNumberOfScans.Text, out scanCount) || scanCount <= 0)
+                if (!int.TryParse(txtNumberOfScans.Text, out int scanCount) || scanCount <= 0)
                 {
                     ok = false;
                     scanCount = 0;
@@ -122,8 +121,7 @@ namespace NAPS2.WinForms
                 }
                 BatchSettings.ScanCount = scanCount;
 
-                double scanInterval;
-                if (!double.TryParse(txtTimeBetweenScans.Text, out scanInterval) || scanInterval < 0)
+                if (!double.TryParse(txtTimeBetweenScans.Text, out double scanInterval) || scanInterval < 0)
                 {
                     ok = false;
                     scanInterval = 0;
@@ -200,8 +198,7 @@ namespace NAPS2.WinForms
 
         private void btnChooseFolder_Click(object sender, EventArgs e)
         {
-            string savePath;
-            if (dialogHelper.PromptToSavePdfOrImage(null, out savePath))
+            if (dialogHelper.PromptToSavePdfOrImage(null, out string savePath))
             {
                 txtFilePath.Text = savePath;
             }

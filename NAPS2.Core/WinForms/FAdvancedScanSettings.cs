@@ -120,8 +120,7 @@ namespace NAPS2.WinForms
 
         private void txtImageQuality_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtImageQuality.Text, out value))
+            if (int.TryParse(txtImageQuality.Text, out int value))
             {
                 if (value >= tbImageQuality.Minimum && value <= tbImageQuality.Maximum)
                 {
@@ -152,8 +151,7 @@ namespace NAPS2.WinForms
 
         private void txtWhiteThreshold_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtWhiteThreshold.Text, out value))
+            if (int.TryParse(txtWhiteThreshold.Text, out int value))
             {
                 if (value >= tbWhiteThreshold.Minimum && value <= tbWhiteThreshold.Maximum)
                 {
@@ -169,8 +167,7 @@ namespace NAPS2.WinForms
 
         private void txtCoverageThreshold_TextChanged(object sender, EventArgs e)
         {
-            int value;
-            if (int.TryParse(txtCoverageThreshold.Text, out value))
+            if (int.TryParse(txtCoverageThreshold.Text, out int value))
             {
                 if (value >= tbCoverageThreshold.Minimum && value <= tbCoverageThreshold.Maximum)
                 {

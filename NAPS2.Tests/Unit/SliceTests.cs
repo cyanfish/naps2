@@ -12,21 +12,20 @@ namespace NAPS2.Tests.Unit
         [Test]
         public void Parse()
         {
-            string rest;
-            AssertSlice(Slice.Parse("[]", out rest), null, null, null, null);
+            AssertSlice(Slice.Parse("[]", out _), null, null, null, null);
 
-            AssertSlice(Slice.Parse("[0]", out rest), 0, null, null, null);
-            AssertSlice(Slice.Parse("[1]", out rest), 1, null, null, null);
-            AssertSlice(Slice.Parse("[-1]", out rest), -1, null, null, null);
-            AssertSlice(Slice.Parse("[-2]", out rest), -2, null, null, null);
-            AssertSlice(Slice.Parse("[asdpsakoid2238(*S(D)*A(]", out rest), null, null, null, null);
+            AssertSlice(Slice.Parse("[0]", out _), 0, null, null, null);
+            AssertSlice(Slice.Parse("[1]", out _), 1, null, null, null);
+            AssertSlice(Slice.Parse("[-1]", out _), -1, null, null, null);
+            AssertSlice(Slice.Parse("[-2]", out _), -2, null, null, null);
+            AssertSlice(Slice.Parse("[asdpsakoid2238(*S(D)*A(]", out _), null, null, null, null);
             
-            AssertSlice(Slice.Parse("[2:]", out rest), null, 2, null, null);
-            AssertSlice(Slice.Parse("[:2]", out rest), null, null, 2, null);
-            AssertSlice(Slice.Parse("[2:-2]", out rest), null, 2, -2, null);
-            AssertSlice(Slice.Parse("[::2]", out rest), null, null, null, 2);
-            AssertSlice(Slice.Parse("[::-2]", out rest), null, null, null, -2);
-            AssertSlice(Slice.Parse("[2:3:4]", out rest), null, 2, 3, 4);
+            AssertSlice(Slice.Parse("[2:]", out _), null, 2, null, null);
+            AssertSlice(Slice.Parse("[:2]", out _), null, null, 2, null);
+            AssertSlice(Slice.Parse("[2:-2]", out _), null, 2, -2, null);
+            AssertSlice(Slice.Parse("[::2]", out _), null, null, null, 2);
+            AssertSlice(Slice.Parse("[::-2]", out _), null, null, null, -2);
+            AssertSlice(Slice.Parse("[2:3:4]", out _), null, 2, 3, 4);
         }
 
         private void AssertSlice(Slice s, int? index, int? start, int? end, int? step)

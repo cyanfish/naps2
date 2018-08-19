@@ -89,13 +89,12 @@ namespace NAPS2.WinForms
         private void btnOK_Click(object sender, EventArgs e)
         {
             const NumberStyles numberStyle = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingSign;
-            decimal width, height;
-            if (!decimal.TryParse(textboxWidth.Text, numberStyle, CultureInfo.CurrentCulture, out width))
+            if (!decimal.TryParse(textboxWidth.Text, numberStyle, CultureInfo.CurrentCulture, out decimal width))
             {
                 textboxWidth.Focus();
                 return;
             }
-            if (!decimal.TryParse(textboxHeight.Text, numberStyle, CultureInfo.CurrentCulture, out height))
+            if (!decimal.TryParse(textboxHeight.Text, numberStyle, CultureInfo.CurrentCulture, out decimal height))
             {
                 textboxHeight.Focus();
                 return;

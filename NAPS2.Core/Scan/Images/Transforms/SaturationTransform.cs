@@ -42,8 +42,7 @@ namespace NAPS2.Scan.Images.Transforms
                     int b = Marshal.ReadByte(data.Scan0 + stride * y + x * bytesPerPixel + 2);
 
                     Color c = Color.FromArgb(255, r, g, b);
-                    double h, s, v;
-                    ColorHelper.ColorToHSL(c, out h, out s, out v);
+                    ColorHelper.ColorToHSL(c, out double h, out double s, out double v);
 
                     s = Math.Min(s * saturationAdjusted, 1);
 
