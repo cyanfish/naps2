@@ -96,7 +96,7 @@ namespace NAPS2.Util
             {
                 return dict[key];
             }
-            return default(TValue);
+            return default;
         }
     }
 }

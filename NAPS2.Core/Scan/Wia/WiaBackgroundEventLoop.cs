@@ -58,7 +58,7 @@ namespace NAPS2.Scan.Wia
 
         public T GetSync<T>(Func<WiaState, T> action)
         {
-            T value = default(T);
+            T value = default;
             DoSync(wia =>
             {
                 value = action(wia);

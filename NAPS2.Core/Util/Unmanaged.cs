@@ -29,7 +29,7 @@ namespace NAPS2.Util
     public class Unmanaged<T> : UnmanagedBase<T>
     {
         public Unmanaged()
-            : this(default(T))
+            : this(default)
         {
         }
 
@@ -48,7 +48,7 @@ namespace NAPS2.Util
             if (Pointer == IntPtr.Zero)
             {
                 // T must be a reference type, so this returns null
-                return default(T);
+                return default;
             }
             return (T)Marshal.PtrToStructure(Pointer, typeof(T));
         }
