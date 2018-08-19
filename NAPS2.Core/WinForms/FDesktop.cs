@@ -812,16 +812,16 @@ namespace NAPS2.WinForms
             {
                 Multiselect = true,
                 CheckFileExists = true,
-                Filter = MiscResources.FileTypeAllFiles + "|*.*|" +
-                         MiscResources.FileTypePdf + "|*.pdf|" +
-                         MiscResources.FileTypeImageFiles + "|*.bmp;*.emf;*.exif;*.gif;*.jpg;*.jpeg;*.png;*.tiff;*.tif|" +
-                         MiscResources.FileTypeBmp + "|*.bmp|" +
-                         MiscResources.FileTypeEmf + "|*.emf|" +
-                         MiscResources.FileTypeExif + "|*.exif|" +
-                         MiscResources.FileTypeGif + "|*.gif|" +
-                         MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
-                         MiscResources.FileTypePng + "|*.png|" +
-                         MiscResources.FileTypeTiff + "|*.tiff;*.tif"
+                Filter = MiscResources.FileTypeAllFiles + @"|*.*|" +
+                         MiscResources.FileTypePdf + @"|*.pdf|" +
+                         MiscResources.FileTypeImageFiles + @"|*.bmp;*.emf;*.exif;*.gif;*.jpg;*.jpeg;*.png;*.tiff;*.tif|" +
+                         MiscResources.FileTypeBmp + @"|*.bmp|" +
+                         MiscResources.FileTypeEmf + @"|*.emf|" +
+                         MiscResources.FileTypeExif + @"|*.exif|" +
+                         MiscResources.FileTypeGif + @"|*.gif|" +
+                         MiscResources.FileTypeJpeg + @"|*.jpg;*.jpeg|" +
+                         MiscResources.FileTypePng + @"|*.png|" +
+                         MiscResources.FileTypeTiff + @"|*.tiff;*.tif"
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {

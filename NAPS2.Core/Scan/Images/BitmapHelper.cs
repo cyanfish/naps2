@@ -51,7 +51,7 @@ namespace NAPS2.Scan.Images
         /// <returns>a 1bpp copy of the bitmap</returns>
         public static Bitmap CopyToBpp(Bitmap b, int bpp)
         {
-            if (bpp != 1 && bpp != 8) throw new ArgumentException("1 or 8", nameof(bpp));
+            if (bpp != 1 && bpp != 8) throw new ArgumentException(@"1 or 8", nameof(bpp));
 
             // Plan: built into Windows GDI is the ability to convert
             // bitmaps from one format to another. Most of the time, this

@@ -25,14 +25,14 @@ namespace NAPS2.WinForms
             {
                 OverwritePrompt = false,
                 AddExtension = true,
-                Filter = MiscResources.FileTypePdf + "|*.pdf|" +
-                         MiscResources.FileTypeBmp + "|*.bmp|" +
-                         MiscResources.FileTypeEmf + "|*.emf|" +
-                         MiscResources.FileTypeExif + "|*.exif|" +
-                         MiscResources.FileTypeGif + "|*.gif|" +
-                         MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
-                         MiscResources.FileTypePng + "|*.png|" +
-                         MiscResources.FileTypeTiff + "|*.tiff;*.tif",
+                Filter = MiscResources.FileTypePdf + @"|*.pdf|" +
+                         MiscResources.FileTypeBmp + @"|*.bmp|" +
+                         MiscResources.FileTypeEmf + @"|*.emf|" +
+                         MiscResources.FileTypeExif + @"|*.exif|" +
+                         MiscResources.FileTypeGif + @"|*.gif|" +
+                         MiscResources.FileTypeJpeg + @"|*.jpg;*.jpeg|" +
+                         MiscResources.FileTypePng + @"|*.png|" +
+                         MiscResources.FileTypeTiff + @"|*.tiff;*.tif",
                 FileName = Path.GetFileName(defaultPath),
                 InitialDirectory = GetDir(defaultPath)
             };
@@ -51,7 +51,7 @@ namespace NAPS2.WinForms
             {
                 OverwritePrompt = false,
                 AddExtension = true,
-                Filter = MiscResources.FileTypePdf + "|*.pdf",
+                Filter = MiscResources.FileTypePdf + @"|*.pdf",
                 FileName = Path.GetFileName(defaultPath),
                 InitialDirectory = GetDir(defaultPath)
             };
@@ -70,13 +70,13 @@ namespace NAPS2.WinForms
             {
                 OverwritePrompt = false,
                 AddExtension = true,
-                Filter = MiscResources.FileTypeBmp + "|*.bmp|" +
-                            MiscResources.FileTypeEmf + "|*.emf|" +
-                            MiscResources.FileTypeExif + "|*.exif|" +
-                            MiscResources.FileTypeGif + "|*.gif|" +
-                            MiscResources.FileTypeJpeg + "|*.jpg;*.jpeg|" +
-                            MiscResources.FileTypePng + "|*.png|" +
-                            MiscResources.FileTypeTiff + "|*.tiff;*.tif",
+                Filter = MiscResources.FileTypeBmp + @"|*.bmp|" +
+                            MiscResources.FileTypeEmf + @"|*.emf|" +
+                            MiscResources.FileTypeExif + @"|*.exif|" +
+                            MiscResources.FileTypeGif + @"|*.gif|" +
+                            MiscResources.FileTypeJpeg + @"|*.jpg;*.jpeg|" +
+                            MiscResources.FileTypePng + @"|*.png|" +
+                            MiscResources.FileTypeTiff + @"|*.tiff;*.tif",
                 FileName = Path.GetFileName(defaultPath),
                 InitialDirectory = GetDir(defaultPath)
             };
