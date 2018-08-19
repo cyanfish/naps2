@@ -217,7 +217,6 @@
     <Compile Include="Scan\Images\IBlankDetector.cs" />
     <Compile Include="Scan\Images\NullThumbnailRenderer.cs" />
     <Compile Include="Scan\Images\ThresholdBlankDetector.cs" />
-    <Compile Include="Scan\Images\ThumbnailCache.cs" />
     <Compile Include="Scan\Images\Transforms\BlackWhiteTransform.cs" />
     <Compile Include="Scan\Images\Transforms\ColorHelper.cs" />
     <Compile Include="Scan\Images\Transforms\SaturationTransform.cs" />

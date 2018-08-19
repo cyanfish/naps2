@@ -11,8 +11,6 @@ namespace NAPS2.WinForms
 {
     public partial class ThumbnailList : DragScrollListView
     {
-        private ThumbnailCache thumbnails;
-
         private static readonly FieldInfo imageSizeField;
         private static readonly MethodInfo performRecreateHandleMethod;
 
@@ -34,10 +32,7 @@ namespace NAPS2.WinForms
             LargeImageList = ilThumbnailList;
         }
 
-        public ThumbnailRenderer ThumbnailRenderer
-        {
-            set => thumbnails = new ThumbnailCache(value);
-        }
+        public ThumbnailRenderer ThumbnailRenderer { get; set; }
 
         public Size ThumbnailSize
         {
@@ -89,28 +84,27 @@ namespace NAPS2.WinForms
             {
                 if (i >= ilThumbnailList.Images.Count)
                 {
-                    ilThumbnailList.Images.Add(thumbnails[images[i]]);
+                    ilThumbnailList.Images.Add(images[i].GetThumbnail(ThumbnailRenderer));
                     Debug.Assert(selection == null);
                 }
                 else
                 {
-                    ilThumbnailList.Images[i] = thumbnails[images[i]];
+                    ilThumbnailList.Images[i] = images[i].GetThumbnail(ThumbnailRenderer);
                 }
             }
 
-            thumbnails.TrimCache(images);
             Invalidate();
         }
 
         public void AppendImage(ScannedImage img)
         {
-            ilThumbnailList.Images.Add(thumbnails[img]);
+            ilThumbnailList.Images.Add(img.GetThumbnail(ThumbnailRenderer));
             Items.Add("", ilThumbnailList.Images.Count - 1);
         }
 
         public void ReplaceThumbnail(int index, ScannedImage img)
         {
-            ilThumbnailList.Images[index] = thumbnails[img];
+            ilThumbnailList.Images[index] = img.GetThumbnail(ThumbnailRenderer);
             Invalidate(Items[index].Bounds);
         }
 
@@ -120,7 +114,7 @@ namespace NAPS2.WinForms
             {
                 ilThumbnailList.Images.Clear();
             }
-            var thumbnailArray = images.Select(x => (Image)thumbnails[x]).ToArray();
+            var thumbnailArray = images.Select(x => (Image)x.GetThumbnail(ThumbnailRenderer)).ToArray();
             ilThumbnailList.Images.AddRange(thumbnailArray);
         }
     }

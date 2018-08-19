@@ -59,12 +59,18 @@ namespace NAPS2.Scan.Images
 
         public Bitmap RenderThumbnail(ScannedImage scannedImage)
         {
-            return RenderThumbnail(scannedImageRenderer.Render(scannedImage), userConfigManager.Config.ThumbnailSize);
+            using (var bitmap = scannedImageRenderer.Render(scannedImage))
+            {
+                return RenderThumbnail(bitmap, userConfigManager.Config.ThumbnailSize);
+            }
         }
 
         public Bitmap RenderThumbnail(ScannedImage scannedImage, int size)
         {
-            return RenderThumbnail(scannedImageRenderer.Render(scannedImage), size);
+            using (var bitmap = scannedImageRenderer.Render(scannedImage))
+            {
+                return RenderThumbnail(bitmap, size);
+            }
         }
 
         public Bitmap RenderThumbnail(Bitmap b)
