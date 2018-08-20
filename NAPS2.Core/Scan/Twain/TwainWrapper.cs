@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.WinForms;
@@ -29,7 +30,7 @@ namespace NAPS2.Scan.Twain
         {
             // Path to the folder containing the 64-bit twaindsm.dll relative to NAPS2.Core.dll
             const string lib64Dir = "64";
-            if (Environment.Is64BitProcess)
+            if (Environment.Is64BitProcess && PlatformCompat.System.CanUseWin32)
             {
                 var location = Assembly.GetExecutingAssembly().Location;
                 var coreDllDir = System.IO.Path.GetDirectoryName(location);

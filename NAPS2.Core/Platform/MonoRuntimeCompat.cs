@@ -13,5 +13,7 @@ namespace NAPS2.Platform
         public bool IsImagePaddingSupported => false;
 
         public bool SetImageListSizeOnImageCollection => true;
+
+        public string ExeRunner => "mono";
     }
 }

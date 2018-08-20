@@ -12,7 +12,7 @@ namespace NAPS2.Worker
 
         public void Dispose()
         {
-            Service?.Dispose();
+            ((IDisposable)Service)?.Dispose();
         }
     }
 }

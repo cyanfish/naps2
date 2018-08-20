@@ -11,5 +11,7 @@ namespace NAPS2.Platform
         bool IsTwainDriverSupported { get; }
 
         bool IsSaneDriverSupported { get; }
+
+        bool CanUseWin32 { get; }
     }
 }

@@ -9,7 +9,7 @@ using NAPS2.Scan;
 namespace NAPS2.Worker
 {
     [ServiceContract(CallbackContract = typeof(IWorkerCallback))]
-    public interface IWorkerService : IDisposable
+    public interface IWorkerService
     {
         [OperationContract]
         void Init();

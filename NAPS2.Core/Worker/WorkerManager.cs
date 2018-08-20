@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using NAPS2.Platform;
 
 namespace NAPS2.Worker
 {
@@ -47,7 +48,8 @@ namespace NAPS2.Worker
         {
             var proc = Process.Start(new ProcessStartInfo
             {
-                FileName = WorkerExePath,
+                FileName = PlatformCompat.Runtime.ExeRunner ?? WorkerExePath,
+                Arguments = PlatformCompat.Runtime.ExeRunner != null ? WorkerExePath : "",
                 RedirectStandardOutput = true,
                 UseShellExecute = false
             });
@@ -56,16 +58,20 @@ namespace NAPS2.Worker
                 throw new Exception("Could not start worker process");
             }
 
-            try
-            {
-                var job = new Job();
-                job.AddProcess(proc.Handle);
-            }
-            catch
-            {
-                proc.Kill();
-                throw;
-            }
+			if (PlatformCompat.System.CanUseWin32)
+			{
+				// TODO: Fix this on linux
+				try
+				{
+					var job = new Job();
+					job.AddProcess(proc.Handle);
+				}
+				catch
+				{
+					proc.Kill();
+					throw;
+				}
+			}
 
             proc.StandardOutput.Read();
 

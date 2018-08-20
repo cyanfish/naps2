@@ -13,5 +13,7 @@ namespace NAPS2.Platform
         bool IsImagePaddingSupported { get; }
 
         bool SetImageListSizeOnImageCollection { get; }
+
+        string ExeRunner { get; }
     }
 }
