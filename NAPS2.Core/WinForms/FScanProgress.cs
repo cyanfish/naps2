@@ -71,8 +71,8 @@ namespace NAPS2.WinForms
                 }
                 SafeInvoke(() =>
                 {
-                    DialogResult = cancel ? DialogResult.Cancel : DialogResult.OK;
                     isComplete = true;
+                    DialogResult = cancel ? DialogResult.Cancel : DialogResult.OK;
                     Close();
                 });
             });

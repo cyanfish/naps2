@@ -55,7 +55,11 @@ namespace NAPS2.Scan.Sane
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
             // TODO: Support ADF
-            yield return Transfer();
+            var img = Transfer();
+            if (img != null)
+            {
+                yield return img;
+            }
         }
 
         private ScannedImage Transfer()
@@ -69,7 +73,8 @@ namespace NAPS2.Scan.Sane
             {
                 var form = formFactory.Create<FScanProgress>();
                 form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, ScanProfile.KeyValueOptions, form.OnProgress);
-                form.Show();
+                form.PageNumber = 1;
+                form.ShowDialog();
 
                 if (form.Exception != null)
                 {
