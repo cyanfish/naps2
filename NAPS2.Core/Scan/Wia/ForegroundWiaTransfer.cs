@@ -33,8 +33,7 @@ namespace NAPS2.Scan.Wia
             // so we use the custom form.
             var form = formFactory.Create<FScanProgress>();
             form.PageNumber = pageNumber;
-            form.EventLoop = eventLoop;
-            form.Format = format;
+            form.Transfer = () => eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, false));
             form.ShowDialog();
             if (form.Exception != null)
             {

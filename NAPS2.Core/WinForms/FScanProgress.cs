@@ -1,32 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Wia;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
     public partial class FScanProgress : FormBase
     {
+        private readonly ThreadFactory threadFactory;
+
         private bool isComplete;
         private bool cancel;
 
-        public FScanProgress()
+        public FScanProgress(ThreadFactory threadFactory)
         {
+            this.threadFactory = threadFactory;
+
             InitializeComponent();
         }
 
         public int PageNumber { get; set; }
 
-        public WiaBackgroundEventLoop EventLoop { get; set; }
-
-        public string Format { get; set; }
+        public Func<Stream> Transfer { get; set; }
 
         public Stream ImageStream { get; private set; }
 
         public Exception Exception { get; private set; }
+
+        public bool OnProgress(int current, int max)
+        {
+            SafeInvoke(() =>
+            {
+                progressBar.Style = ProgressBarStyle.Continuous;
+                progressBar.Maximum = max;
+                progressBar.Value = current;
+            });
+            return !cancel;
+        }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
@@ -44,11 +59,11 @@ namespace NAPS2.WinForms
 
         private void FScanProgress_Shown(object sender, EventArgs e)
         {
-            EventLoop.DoAsync(wia =>
+            threadFactory.StartThread(() =>
             {
                 try
                 {
-                    ImageStream = WiaApi.Transfer(wia, Format, false);
+                    ImageStream = Transfer();
                 }
                 catch (Exception ex)
                 {

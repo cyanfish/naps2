@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Sane
 {
     public class SaneWrapper
     {
         private const string SCANIMAGE = "scanimage";
+
+        private readonly Regex ProgressRegex = new Regex(@"^Progress: (\d+(\.\d+)?)%");
 
         public IEnumerable<ScanDevice> GetDeviceList()
         {
@@ -25,12 +29,26 @@ namespace NAPS2.Scan.Sane
             }
         }
 
-        public Bitmap ScanOne(string deviceId, KeyValueScanOptions options)
+        public Stream ScanOne(string deviceId, KeyValueScanOptions options, ProgressHandler progressCallback)
         {
             var profileOptions = options == null ? "" : string.Join("", options.Select(kvp => $@" {kvp.Key} ""{kvp.Value.Replace("\"", "\\\"")}"""));
             var allOptions = $@"-d ""{deviceId}"" --format=tiff --progress{profileOptions}";
             var proc = StartProcess(SCANIMAGE, allOptions);
-            return new Bitmap(proc.StandardOutput.BaseStream);
+            proc.ErrorDataReceived += (sender, args) =>
+            {
+				if (args.Data != null)
+				{
+					var match = ProgressRegex.Match(args.Data);
+					if (match.Success)
+					{
+						progressCallback?.Invoke((int)float.Parse(match.Groups[1].Value) * 10, 1000);
+					}
+				}
+            };
+            proc.BeginErrorReadLine();
+            var outputStream = new MemoryStream();
+            proc.StandardOutput.BaseStream.CopyTo(outputStream);
+            return outputStream;
         }
 
         private static Process StartProcess(string fileName, string args)
@@ -47,10 +65,8 @@ namespace NAPS2.Scan.Sane
                         RedirectStandardOutput = true,
                         RedirectStandardError = true
                     },
-                    // EnableRaisingEvents = true
+                    EnableRaisingEvents = true
                 };
-                proc.OutputDataReceived += (sender, eventArgs) => Debug.WriteLine("o: " + eventArgs.Data);
-                proc.ErrorDataReceived += (sender, eventArgs) => Debug.WriteLine("e: " + eventArgs.Data);
                 proc.Start();
                 return proc;
             }

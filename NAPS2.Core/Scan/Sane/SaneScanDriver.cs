@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Sane
@@ -52,20 +55,48 @@ namespace NAPS2.Scan.Sane
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
             // TODO: Support ADF
-            using (Bitmap output = saneWrapper.ScanOne(ScanDevice.ID, ScanProfile.KeyValueOptions))
+            yield return Transfer();
+        }
+
+        private ScannedImage Transfer()
+        {
+            Stream stream;
+            if (ScanParams.NoUI)
             {
-                using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+                stream = saneWrapper.ScanOne(ScanDevice.ID, ScanProfile.KeyValueOptions, null);
+            }
+            else
+            {
+                var form = formFactory.Create<FScanProgress>();
+                form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, ScanProfile.KeyValueOptions, form.OnProgress);
+                form.Show();
+
+                if (form.Exception != null)
                 {
-                    if (blankDetector.ExcludePage(result, ScanProfile))
-                    {
-                        yield break;
-                    }
-                    // TODO: Set bit depth correctly
-                    var image = new ScannedImage(result, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                    scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1);
-                    yield return image;
+                    form.Exception.PreserveStackTrace();
+                    throw form.Exception;
                 }
+                if (form.DialogResult == DialogResult.Cancel)
+                {
+                    return null;
+                }
+
+                stream = form.ImageStream;
+            }
+            using (stream)
+            using (var output = Image.FromStream(stream))
+            using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+            {
+                if (blankDetector.ExcludePage(result, ScanProfile))
+                {
+                    return null;
+                }
+
+                // TODO: Set bit depth correctly
+                var image = new ScannedImage(result, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
+                scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1);
+                return image;
             }
         }
     }
