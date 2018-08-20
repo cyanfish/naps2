@@ -17,7 +17,6 @@ namespace NAPS2.Scan.Sane
         private const string SCANIMAGE = "scanimage";
         private const int SIGINT = 2;
         private const int SIGTERM = 15;
-        private const int SIGKILL = 9;
         private static readonly Regex ProgressRegex = new Regex(@"^Progress: (\d+(\.\d+)?)%");
 
         private readonly ThreadFactory threadFactory;
@@ -134,7 +133,7 @@ namespace NAPS2.Scan.Sane
                 Signal(proc, SIGTERM);
                 if (!procExitWaitHandle.WaitOne(1000))
                 {
-                    Signal(proc, SIGKILL);
+                    proc.Kill();
                 }
             }
         }
