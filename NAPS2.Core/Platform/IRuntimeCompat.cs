@@ -15,5 +15,7 @@ namespace NAPS2.Platform
         bool SetImageListSizeOnImageCollection { get; }
 
         string ExeRunner { get; }
+
+        bool UseWorker { get; }
     }
 }

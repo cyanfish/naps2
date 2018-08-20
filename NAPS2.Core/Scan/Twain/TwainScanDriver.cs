@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Platform;
 using NAPS2.Recovery;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -33,7 +34,7 @@ namespace NAPS2.Scan.Twain
         // - Minor lag (1-2s) when doing the first WCF call. Should be fixable with pre-cached workers.
         // - General stability needs testing/work
         // - Probably something else I forgot. Thorough testing should reveal more issues.
-        private bool UseWorker => ScanProfile.TwainImpl == TwainImpl.X64 && !Environment.Is64BitProcess;
+        private bool UseWorker => ScanProfile.TwainImpl == TwainImpl.X64 && !Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
 
         protected override ScanDevice PromptForDeviceInternal()
         {

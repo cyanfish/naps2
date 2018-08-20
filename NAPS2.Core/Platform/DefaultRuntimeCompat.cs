@@ -15,5 +15,7 @@ namespace NAPS2.Platform
         public bool SetImageListSizeOnImageCollection => false;
 
         public string ExeRunner => null;
+
+        public bool UseWorker => true;
     }
 }

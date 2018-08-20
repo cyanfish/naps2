@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using NAPS2.Platform;
 using NAPS2.Recovery;
 using NAPS2.Util;
 using NAPS2.Worker;
@@ -24,7 +25,7 @@ namespace NAPS2.Operation
         /// <summary>
         /// A value indicating whether DoWork should proxy to a worker process.
         /// </summary>
-        protected virtual bool UseWorker => true;
+        protected virtual bool UseWorker => PlatformCompat.Runtime.UseWorker;
 
         public ProgressHandler ProgressProxy { get; set; }
 
