@@ -58,20 +58,20 @@ namespace NAPS2.Worker
                 throw new Exception("Could not start worker process");
             }
 
-			if (PlatformCompat.System.CanUseWin32)
-			{
-				// TODO: Fix this on linux
-				try
-				{
-					var job = new Job();
-					job.AddProcess(proc.Handle);
-				}
-				catch
-				{
-					proc.Kill();
-					throw;
-				}
-			}
+            if (PlatformCompat.System.CanUseWin32)
+            {
+                // TODO: Fix this on linux
+                try
+                {
+                    var job = new Job();
+                    job.AddProcess(proc.Handle);
+                }
+                catch
+                {
+                    proc.Kill();
+                    throw;
+                }
+            }
 
             proc.StandardOutput.Read();
 
@@ -102,6 +102,10 @@ namespace NAPS2.Worker
 
         public static void Init()
         {
+            if (!PlatformCompat.Runtime.UseWorker)
+            {
+                return;
+            }
             if (_workerQueue == null)
             {
                 _workerQueue = new BlockingCollection<WorkerContext>();
