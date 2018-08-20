@@ -15,8 +15,17 @@ namespace NAPS2.Scan.Sane
     public class SaneWrapper
     {
         private const string SCANIMAGE = "scanimage";
+        private const int SIGINT = 2;
+        private const int SIGTERM = 15;
+        private const int SIGKILL = 9;
+        private static readonly Regex ProgressRegex = new Regex(@"^Progress: (\d+(\.\d+)?)%");
 
-        private readonly Regex ProgressRegex = new Regex(@"^Progress: (\d+(\.\d+)?)%");
+        private readonly ThreadFactory threadFactory;
+
+        public SaneWrapper(ThreadFactory threadFactory)
+        {
+            this.threadFactory = threadFactory;
+        }
 
         public IEnumerable<ScanDevice> GetDeviceList()
         {
@@ -35,12 +44,20 @@ namespace NAPS2.Scan.Sane
 
         public Stream ScanOne(string deviceId, KeyValueScanOptions options, ProgressHandler progressCallback)
         {
+            // Start the scanning process
             var profileOptions = options == null ? "" : string.Join("", options.Select(kvp => $@" {kvp.Key} ""{kvp.Value.Replace("\"", "\\\"")}"""));
             var allOptions = $@"-d ""{deviceId}"" --format=tiff --progress{profileOptions}";
             var proc = StartProcess(SCANIMAGE, allOptions);
+
+            // Set up state
+            var procExitWaitHandle = new AutoResetEvent(false);
+            var outputFinishedWaitHandle = new AutoResetEvent(false);
             var errorOutput = new List<string>();
-            var waitHandle = new AutoResetEvent(false);
             bool cancelled = false;
+            int currentProgress = 0;
+            const int maxProgress = 1000;
+
+            // Set up events
             proc.ErrorDataReceived += (sender, args) =>
             {
                 if (args.Data != null)
@@ -48,12 +65,7 @@ namespace NAPS2.Scan.Sane
                     var match = ProgressRegex.Match(args.Data);
                     if (match.Success)
                     {
-                        var result = progressCallback?.Invoke((int)float.Parse(match.Groups[1].Value) * 10, 1000);
-                        if (result.HasValue && !result.Value && !cancelled)
-                        {
-                            cancelled = true;
-                            Signal(proc, 2);
-                        }
+                        currentProgress = (int) float.Parse(match.Groups[1].Value) * 10;
                     }
                     else
                     {
@@ -61,30 +73,70 @@ namespace NAPS2.Scan.Sane
                     }
                 }
             };
-            proc.Exited += (sender, args) => waitHandle.Set();
+            proc.Exited += (sender, args) => procExitWaitHandle.Set();
             proc.BeginErrorReadLine();
+
+            // Read the image output into a MemoryStream off-thread
             var outputStream = new MemoryStream();
-            proc.StandardOutput.BaseStream.CopyTo(outputStream);
-            outputStream.Seek(0, SeekOrigin.Begin);
-            waitHandle.WaitOne();
+            threadFactory.StartThread(() =>
+            {
+                proc.StandardOutput.BaseStream.CopyTo(outputStream);
+                outputStream.Seek(0, SeekOrigin.Begin);
+                outputFinishedWaitHandle.Set();
+            });
+
+            // Wait for the process to stop (or for the user to cancel)
+            while (!procExitWaitHandle.WaitOne(200))
+            {
+                if (progressCallback?.Invoke(currentProgress, maxProgress) == false)
+                {
+                    cancelled = true;
+                    SafeStopProcess(proc, procExitWaitHandle);
+                    break;
+                }
+            }
+            // Ensure the image output thread has finished so we don't return an incomplete MemoryStream
+            outputFinishedWaitHandle.WaitOne();
+
             if (cancelled)
             {
+                // The user has cancelled, so we can ignore everything else
                 return null;
             }
             if (errorOutput.Count > 0)
             {
-                string errorMessage = string.Join(". ", errorOutput).Trim();
-                if (errorMessage.EndsWith("Device busy", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    throw new DeviceException(MiscResources.DeviceBusy);
-                }
-                if (errorMessage.EndsWith("Invalid argument", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    throw new DeviceException(MiscResources.DeviceNotFound);
-                }
-                throw new ScanDriverUnknownException(new Exception(errorMessage));
+                // Non-progress output to stderr indicates that the scan was not successful
+                string stderr = string.Join(". ", errorOutput).Trim();
+                ThrowDeviceError(stderr);
             }
+            // No unexpected stderr output, so we can assume that the output stream is complete and valid
             return outputStream;
+        }
+
+        private static void ThrowDeviceError(string stderr)
+        {
+            if (stderr.EndsWith("Device busy", StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new DeviceException(MiscResources.DeviceBusy);
+            }
+            if (stderr.EndsWith("Invalid argument", StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new DeviceException(MiscResources.DeviceNotFound);
+            }
+            throw new ScanDriverUnknownException(new Exception(stderr));
+        }
+
+        private static void SafeStopProcess(Process proc, AutoResetEvent procExitWaitHandle)
+        {
+            Signal(proc, SIGINT);
+            if (!procExitWaitHandle.WaitOne(5000))
+            {
+                Signal(proc, SIGTERM);
+                if (!procExitWaitHandle.WaitOne(1000))
+                {
+                    Signal(proc, SIGKILL);
+                }
+            }
         }
 
         private static void Signal(Process proc, int signum)

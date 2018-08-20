@@ -34,12 +34,15 @@ namespace NAPS2.WinForms
 
         public bool OnProgress(int current, int max)
         {
-            SafeInvoke(() =>
+            if (current > 0)
             {
-                progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Maximum = max;
-                progressBar.Value = current;
-            });
+                SafeInvoke(() =>
+                {
+                    progressBar.Style = ProgressBarStyle.Continuous;
+                    progressBar.Maximum = max;
+                    progressBar.Value = current;
+                });
+            }
             return !cancel;
         }
 
