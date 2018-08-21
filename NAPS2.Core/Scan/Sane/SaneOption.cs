@@ -18,14 +18,18 @@ namespace NAPS2.Scan.Sane
 
         public int Size { get; set; }
 
-        public SaneCapabilities Capabilitieses { get; set; }
+        public SaneCapabilities Capabilities { get; set; }
 
         public SaneConstraintType ConstraintType { get; set; }
 
-        public string[] StringList { get; set; }
+        public List<string> StringList { get; set; }
 
-        public int[] WordList { get; set; }
+        public List<decimal> WordList { get; set; }
 
         public SaneRange Range { get; set; }
+
+        public decimal CurrentNumericValue { get; set; }
+
+        public string CurrentStringValue { get; set; }
     }
 }

@@ -6,10 +6,10 @@ namespace NAPS2.Scan.Sane
 {
     public class SaneRange
     {
-        public int Min { get; set; }
+        public decimal Min { get; set; }
 
-        public int Max { get; set; }
+        public decimal Max { get; set; }
 
-        public int Quant { get; set; }
+        public decimal Quant { get; set; }
     }
 }

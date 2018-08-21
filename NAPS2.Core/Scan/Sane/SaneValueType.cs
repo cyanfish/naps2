@@ -8,8 +8,7 @@ namespace NAPS2.Scan.Sane
     {
         None,
         Bool,
-        Int,
-        Fixed,
+        Numeric,
         String,
         Button,
         Group
