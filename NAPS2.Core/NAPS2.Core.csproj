@@ -160,6 +160,7 @@
     <Compile Include="Platform\IRuntimeCompat.cs" />
     <Compile Include="Platform\MonoRuntimeCompat.cs" />
     <Compile Include="Util\ImageExtensions.cs" />
+    <Compile Include="Util\NaturalStringComparer.cs" />
     <Compile Include="Util\ProgressHandler.cs" />
     <Compile Include="Util\SecureString.cs" />
     <Compile Include="Worker\BackgroundForm.cs">

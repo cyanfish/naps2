@@ -843,7 +843,7 @@ namespace NAPS2.WinForms
         {
             // Custom ordering to account for numbers so that e.g. "10" comes after "2"
             var filesList = files.ToList();
-            filesList.Sort(Win32.StrCmpLogicalW);
+            filesList.Sort(new NaturalStringComparer());
             return filesList;
         }
 
