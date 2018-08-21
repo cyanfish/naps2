@@ -87,10 +87,6 @@ namespace NAPS2.Scan.Wia
                         }
                         throw;
                     }
-                    catch (Exception e)
-                    {
-                        throw new ScanDriverUnknownException(e);
-                    }
                     if (image != null)
                     {
                         yield return image;
@@ -140,14 +136,6 @@ namespace NAPS2.Scan.Wia
                 // At least one page was scanned but now the feeder is empty, so exit normally
                 cancel = true;
                 return null;
-            }
-            catch (ScanDriverException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new ScanDriverUnknownException(e);
             }
         }
     }

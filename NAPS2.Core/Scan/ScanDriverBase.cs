@@ -91,17 +91,29 @@ namespace NAPS2.Scan
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
-            try
+            // Deconstruct a foreach loop so we can use a try-catch block and work around the limitations of "yield return"
+            using (var enumerator = ScanInternal().GetEnumerator())
             {
-                return ScanInternal();
-            }
-            catch (ScanDriverException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new ScanDriverUnknownException(e);
+                while (true)
+                {
+                    try
+                    {
+                        if (!enumerator.MoveNext())
+                        {
+                            break;
+                        }
+                    }
+                    catch (ScanDriverException)
+                    {
+                        throw;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ScanDriverUnknownException(e);
+                    }
+
+                    yield return enumerator.Current;
+                }
             }
         }
 
