@@ -28,7 +28,7 @@ namespace NAPS2.Scan.Sane
 
         public IEnumerable<ScanDevice> GetDeviceList()
         {
-            var proc = StartProcess(SCANIMAGE, @"-f %d|%m%n");
+            var proc = StartProcess(SCANIMAGE, @"--formatted-device-list=%d|%m%n");
 
             string line;
             while ((line = proc.StandardOutput.ReadLine()?.Trim()) != null)
@@ -41,11 +41,17 @@ namespace NAPS2.Scan.Sane
             }
         }
 
+        public SaneOptionCollection GetOptions(string deviceId)
+        {
+            var proc = StartProcess(SCANIMAGE, $@"--help --device-name={deviceId}");
+            return new SaneOptionParser().Parse(proc.StandardOutput);
+        }
+
         public Stream ScanOne(string deviceId, KeyValueScanOptions options, ProgressHandler progressCallback)
         {
             // Start the scanning process
             var profileOptions = options == null ? "" : string.Join("", options.Select(kvp => $@" {kvp.Key} ""{kvp.Value.Replace("\"", "\\\"")}"""));
-            var allOptions = $@"-d ""{deviceId}"" --format=tiff --progress{profileOptions}";
+            var allOptions = $@"--device-name=""{deviceId}"" --format=tiff --progress{profileOptions}";
             var proc = StartProcess(SCANIMAGE, allOptions);
 
             // Set up state
@@ -64,7 +70,7 @@ namespace NAPS2.Scan.Sane
                     var match = ProgressRegex.Match(args.Data);
                     if (match.Success)
                     {
-                        currentProgress = (int) float.Parse(match.Groups[1].Value) * 10;
+                        currentProgress = (int)float.Parse(match.Groups[1].Value) * 10;
                     }
                     else
                     {
