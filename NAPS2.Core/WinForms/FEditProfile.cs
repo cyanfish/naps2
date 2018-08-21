@@ -196,9 +196,13 @@ namespace NAPS2.WinForms
                 {
                     rdSANE.Checked = true;
                 }
-                else
+                else if (value == WiaScanDriver.DRIVER_NAME || PlatformCompat.System.IsWiaDriverSupported)
                 {
                     rdWIA.Checked = true;
+                }
+                else
+                {
+                    rdSANE.Checked = true;
                 }
             }
         }

@@ -29,7 +29,7 @@
   <OcrDefaultLanguage></OcrDefaultLanguage>
   <ForcePdfCompat>Default</ForcePdfCompat>
   <DefaultProfileSettings>
-    <DriverName>wia</DriverName>
+    <DriverName></DriverName>
     <!--
     <Device>
       <ID></ID>
