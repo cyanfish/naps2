@@ -98,5 +98,77 @@ namespace NAPS2.Util
             }
             return default;
         }
+
+        /// <summary>
+        /// Gets the element for the given key, or the provided value if none is present.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue defaultValue)
+        {
+            if (dict.ContainsKey(key))
+            {
+                return dict[key];
+            }
+            return defaultValue;
+        }
+
+        /// <summary>
+        /// Gets the element for the given key, or the provided value if none is present.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> defaultValue)
+        {
+            if (dict.ContainsKey(key))
+            {
+                return dict[key];
+            }
+            return defaultValue();
+        }
+
+        /// <summary>
+        /// Gets the element for the given key, or sets and returns the provided value if none is present.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static TValue GetOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue defaultValue)
+        {
+            if (!dict.ContainsKey(key))
+            {
+                dict[key] = defaultValue;
+            }
+            return dict[key];
+        }
+
+        /// <summary>
+        /// Gets the element for the given key, or sets and returns the provided value if none is present.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static TValue GetOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> defaultValue)
+        {
+            if (!dict.ContainsKey(key))
+            {
+                dict[key] = defaultValue();
+            }
+            return dict[key];
+        }
     }
 }

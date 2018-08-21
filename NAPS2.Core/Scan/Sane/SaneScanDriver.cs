@@ -17,6 +17,8 @@ namespace NAPS2.Scan.Sane
     {
         public const string DRIVER_NAME = "sane";
 
+        private static Dictionary<string, SaneOptionCollection> SaneOptionCache = new Dictionary<string, SaneOptionCollection>();
+
         private readonly SaneWrapper saneWrapper;
         private readonly IFormFactory formFactory;
         private readonly IBlankDetector blankDetector;
@@ -59,7 +61,7 @@ namespace NAPS2.Scan.Sane
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
             // TODO: Support ADF
-            var options = GetOptions();
+            var options = new Lazy<KeyValueScanOptions>(GetOptions);
             var img = Transfer(options);
             if (img != null)
             {
@@ -69,7 +71,7 @@ namespace NAPS2.Scan.Sane
 
         private KeyValueScanOptions GetOptions()
         {
-            var saneOptions = saneWrapper.GetOptions(ScanDevice.ID);
+            var saneOptions = SaneOptionCache.GetOrSet(ScanDevice.ID, () => saneWrapper.GetOptions(ScanDevice.ID));
             var options = new KeyValueScanOptions(ScanProfile.KeyValueOptions ?? new KeyValueScanOptions());
 
             bool ChooseStringOption(string name, Func<string, bool> match)
@@ -202,17 +204,17 @@ namespace NAPS2.Scan.Sane
             return options;
         }
 
-        private ScannedImage Transfer(KeyValueScanOptions options)
+        private ScannedImage Transfer(Lazy<KeyValueScanOptions> options)
         {
             Stream stream;
             if (ScanParams.NoUI)
             {
-                stream = saneWrapper.ScanOne(ScanDevice.ID, options, null);
+                stream = saneWrapper.ScanOne(ScanDevice.ID, options.Value, null);
             }
             else
             {
                 var form = formFactory.Create<FScanProgress>();
-                form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options, form.OnProgress);
+                form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress);
                 form.PageNumber = 1;
                 form.ShowDialog();
 
