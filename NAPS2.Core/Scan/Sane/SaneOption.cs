@@ -32,4 +32,55 @@ namespace NAPS2.Scan.Sane
 
         public string CurrentStringValue { get; set; }
     }
+
+    public enum SaneValueType
+    {
+        None,
+        Bool,
+        Numeric,
+        String,
+        Button,
+        Group
+    }
+
+    public enum SaneUnit
+    {
+        None,
+        Pixel,
+        Bit,
+        Mm,
+        Dpi,
+        Percent,
+        Microsecond
+    }
+
+    [Flags]
+    public enum SaneCapabilities
+    {
+        None = 0,
+        SoftSelect = 1,
+        HardSelect = 2,
+        SoftDetect = 4,
+        Emulated = 8,
+        Automatic = 16,
+        Inactive = 32,
+        Advanced = 64
+    }
+
+    public enum SaneConstraintType
+    {
+        None,
+        Range,
+        WordList,
+        StringList
+    }
+
+    public class SaneRange
+    {
+        public decimal Min { get; set; }
+
+        public decimal Max { get; set; }
+
+        public decimal Quant { get; set; }
+    }
 }

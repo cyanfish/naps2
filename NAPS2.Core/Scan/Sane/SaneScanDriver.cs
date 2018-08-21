@@ -18,7 +18,7 @@ namespace NAPS2.Scan.Sane
     {
         public const string DRIVER_NAME = "sane";
 
-        private static Dictionary<string, SaneOptionCollection> SaneOptionCache = new Dictionary<string, SaneOptionCollection>();
+        private static readonly Dictionary<string, SaneOptionCollection> SaneOptionCache = new Dictionary<string, SaneOptionCollection>();
 
         private readonly SaneWrapper saneWrapper;
         private readonly IFormFactory formFactory;
