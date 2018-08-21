@@ -145,7 +145,7 @@
     <Compile Include="Scan\KeyValueScanOptions.cs" />
     <Compile Include="Scan\Sane\SaneCapabilities.cs" />
     <Compile Include="Scan\Sane\SaneConstraintType.cs" />
-    <Compile Include="Scan\Sane\SaneNotAvailableException.cs" />
+    <Compile Include="Scan\Exceptions\SaneNotAvailableException.cs" />
     <Compile Include="Scan\Sane\SaneOption.cs" />
     <Compile Include="Scan\Sane\SaneOptionCollection.cs" />
     <Compile Include="Scan\Sane\SaneOptionParser.cs" />

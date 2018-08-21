@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Lang.Resources;
-using NAPS2.Scan.Exceptions;
 
-namespace NAPS2.Scan.Sane
+namespace NAPS2.Scan.Exceptions
 {
     public class SaneNotAvailableException : ScanDriverException
     {
