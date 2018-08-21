@@ -117,7 +117,7 @@ namespace NAPS2.WinForms
         public void AppendImage(ScannedImage img)
         {
             ilThumbnailList.Images.Add(img.GetThumbnail(ThumbnailRenderer));
-            Items.Add("", ilThumbnailList.Images.Count - 1);
+            Items.Add(PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "", ilThumbnailList.Images.Count - 1);
         }
 
         public void ReplaceThumbnail(int index, ScannedImage img)

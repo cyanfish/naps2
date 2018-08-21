@@ -555,6 +555,12 @@ namespace NAPS2.WinForms
             btnZoomIn.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize < ThumbnailRenderer.MAX_SIZE;
             btnZoomOut.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize > ThumbnailRenderer.MIN_SIZE;
             tsNewProfile.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
+
+            if (PlatformCompat.Runtime.RefreshListViewAfterChange)
+            {
+                thumbnailList1.Size = new Size(thumbnailList1.Width - 1, thumbnailList1.Height - 1);
+                thumbnailList1.Size = new Size(thumbnailList1.Width + 1, thumbnailList1.Height + 1);
+            }
         }
 
         private void UpdateScanButton()
@@ -1641,12 +1647,12 @@ namespace NAPS2.WinForms
             // Save the new size to config
             UserConfigManager.Config.ThumbnailSize = thumbnailSize;
             UserConfigManager.Save();
-            UpdateToolbar();
             // Adjust the visible thumbnail display with the new size
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             thumbnailList1.RegenerateThumbnailList(imageList.Images);
 
             SetThumbnailSpacing(thumbnailSize);
+            UpdateToolbar();
 
             // Render high-quality thumbnails at the new size in a background task
             // The existing (poorly scaled) thumbnails are used in the meantime

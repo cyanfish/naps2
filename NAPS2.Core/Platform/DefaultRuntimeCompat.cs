@@ -14,6 +14,10 @@ namespace NAPS2.Platform
 
         public bool SetImageListSizeOnImageCollection => false;
 
+        public bool UseSpaceInListViewItem => false;
+
+        public bool RefreshListViewAfterChange => false;
+
         public string ExeRunner => null;
 
         public bool UseWorker => true;
