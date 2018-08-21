@@ -114,6 +114,60 @@ namespace NAPS2.Scan.Images.Transforms
             bitmap.UnlockBits(bitmapData);
         }
 
+        public static unsafe Bitmap ConvertTo1Bpp(Bitmap bitmap, int bytesPerPixel, int threshold)
+        {
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            var stride = Math.Abs(bitmapData.Stride);
+            byte* data = (byte*)bitmapData.Scan0;
+            int h = bitmapData.Height;
+            int w = bitmapData.Width;
+
+            var monoBitmap = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format1bppIndexed);
+            var p = monoBitmap.Palette;
+            p.Entries[0] = Color.Black;
+            p.Entries[1] = Color.White;
+            monoBitmap.Palette = p;
+            var monoBitmapData = monoBitmap.LockBits(new Rectangle(0, 0, monoBitmap.Width, monoBitmap.Height), ImageLockMode.WriteOnly, monoBitmap.PixelFormat);
+            var monoStride = Math.Abs(monoBitmapData.Stride);
+            byte* monoData = (byte*)monoBitmapData.Scan0;
+
+            PartitionRows(h, (start, end) =>
+            {
+                for (int y = start; y < end; y++)
+                {
+                    byte* row = data + stride * y;
+                    for (int x = 0; x < w; x += 8)
+                    {
+                        byte monoByte = 0;
+                        for (int k = 0; k < 8; k++)
+                        {
+                            monoByte <<= 1;
+                            if (x + k < w)
+                            {
+                                byte* pixel = row + (x + k) * bytesPerPixel;
+                                byte r = *pixel;
+                                byte g = *(pixel + 1);
+                                byte b = *(pixel + 2);
+                                // Use standard values for grayscale conversion to weight the RGB values
+                                int luma = r * 299 + g * 587 + b * 114;
+                                if (luma >= threshold)
+                                {
+                                    monoByte |= 1;
+                                }
+                            }
+                        }
+                        *(monoData + y * monoStride + x / 8) = monoByte;
+                    }
+                }
+            });
+            
+            bitmap.UnlockBits(bitmapData);
+            monoBitmap.UnlockBits(monoBitmapData);
+            monoBitmap.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+
+            return monoBitmap;
+        }
+
         private static void PartitionRows(int count, Action<int, int> action)
         {
             const int partitionCount = 8;
