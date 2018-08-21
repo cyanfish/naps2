@@ -13,16 +13,7 @@ namespace NAPS2.Scan.Images.Transforms
 
         public override Bitmap Perform(Bitmap bitmap)
         {
-            int bytesPerPixel;
-            if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
-            {
-                bytesPerPixel = 3;
-            }
-            else if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
-            {
-                bytesPerPixel = 4;
-            }
-            else
+            if (bitmap.PixelFormat != PixelFormat.Format24bppRgb && bitmap.PixelFormat != PixelFormat.Format32bppArgb)
             {
                 // No need to handle 1bpp since hue shifts are null transforms
                 return bitmap;
@@ -34,7 +25,7 @@ namespace NAPS2.Scan.Images.Transforms
                 hueShiftAdjusted += 360;
             }
 
-            UnsafeImageOps.HueShift(bitmap, bytesPerPixel, hueShiftAdjusted);
+            UnsafeImageOps.HueShift(bitmap, hueShiftAdjusted);
             
             return bitmap;
         }

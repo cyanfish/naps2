@@ -14,7 +14,13 @@ namespace NAPS2.Scan.Images
         public static string SaveSmallestBitmap(Bitmap sourceImage, ScanBitDepth bitDepth, bool highQuality, int quality, out ImageFormat imageFormat)
         {
             // Store the image in as little space as possible
-            if (bitDepth == ScanBitDepth.BlackWhite)
+            if (sourceImage.PixelFormat == PixelFormat.Format1bppIndexed)
+            {
+                // Already encoded as 1-bit
+                imageFormat = ImageFormat.Png;
+                return EncodePng(sourceImage);
+            }
+            else if (bitDepth == ScanBitDepth.BlackWhite)
             {
                 // Convert to a 1-bit bitmap before saving to help compression
                 // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant

@@ -9,8 +9,10 @@ namespace NAPS2.Scan.Images.Transforms
 {
     public static class UnsafeImageOps
     {
-        public static unsafe void HueShift(Bitmap bitmap, int bytesPerPixel, float hueShift)
+        public static unsafe void HueShift(Bitmap bitmap, float hueShift)
         {
+            int bytesPerPixel = GetBytesPerPixel(bitmap);
+
             hueShift /= 60;
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
@@ -114,8 +116,27 @@ namespace NAPS2.Scan.Images.Transforms
             bitmap.UnlockBits(bitmapData);
         }
 
-        public static unsafe Bitmap ConvertTo1Bpp(Bitmap bitmap, int bytesPerPixel, int threshold)
+        private static int GetBytesPerPixel(Bitmap bitmap)
         {
+            if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
+            {
+                return 4;
+            }
+            else if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                return 3;
+            }
+            else
+            {
+                throw new ArgumentException("Unsupported pixel format: " + bitmap.PixelFormat);
+            }
+        }
+
+        public static unsafe Bitmap ConvertTo1Bpp(Bitmap bitmap, int threshold)
+        {
+            int thresholdAdjusted = (threshold + 1000) * 255 / 2;
+            int bytesPerPixel = GetBytesPerPixel(bitmap);
+
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
             var stride = Math.Abs(bitmapData.Stride);
             byte* data = (byte*)bitmapData.Scan0;
@@ -150,7 +171,7 @@ namespace NAPS2.Scan.Images.Transforms
                                 byte b = *(pixel + 2);
                                 // Use standard values for grayscale conversion to weight the RGB values
                                 int luma = r * 299 + g * 587 + b * 114;
-                                if (luma >= threshold)
+                                if (luma >= thresholdAdjusted)
                                 {
                                     monoByte |= 1;
                                 }

@@ -14,23 +14,12 @@ namespace NAPS2.Scan.Images.Transforms
 
         public override Bitmap Perform(Bitmap bitmap)
         {
-            int bytesPerPixel;
-            if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
-            {
-                bytesPerPixel = 3;
-            }
-            else if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
-            {
-                bytesPerPixel = 4;
-            }
-            else
+            if (bitmap.PixelFormat != PixelFormat.Format24bppRgb && bitmap.PixelFormat != PixelFormat.Format32bppArgb)
             {
                 return bitmap;
             }
 
-            int thresholdAdjusted = (Threshold + 1000) * 255 / 2;
-
-            var monoBitmap = UnsafeImageOps.ConvertTo1Bpp(bitmap, bytesPerPixel, thresholdAdjusted);
+            var monoBitmap = UnsafeImageOps.ConvertTo1Bpp(bitmap, Threshold);
             bitmap.Dispose();
 
             return monoBitmap;
