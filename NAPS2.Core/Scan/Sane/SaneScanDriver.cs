@@ -117,7 +117,7 @@ namespace NAPS2.Scan.Sane
                             value = mod < opt.Range.Quant / 2 ? value - mod : value + opt.Range.Quant - mod;
                         }
                     }
-                    options[name] = value.ToString(CultureInfo.InvariantCulture);
+                    options[name] = value.ToString("0.#####", CultureInfo.InvariantCulture);
                     return true;
                 }
                 return false;
@@ -163,6 +163,7 @@ namespace NAPS2.Scan.Sane
                     ChooseStringOption("--mode", x => x == "Halftone");
                 }
                 ChooseNumericOption("--depth", 1);
+                ChooseNumericOption("--threshold", (-ScanProfile.Brightness + 1000) / 20m);
             }
 
             var pageDimens = ScanProfile.PageSize.PageDimensions() ?? ScanProfile.CustomPageSize;
