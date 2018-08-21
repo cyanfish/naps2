@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using NAPS2.Platform;
 using NAPS2.Recovery;
+using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 using NAPS2.Worker;
 
@@ -69,7 +70,9 @@ namespace NAPS2.Operation
             // ReSharper disable once UnusedMember.Local
             private static Type[] DerivedTypes()
             {
-                return Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsSubclassOf(typeof(WorkArgs))).ToArray();
+                var argTypes = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsSubclassOf(typeof(WorkArgs)));
+                var transformTypes = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsSubclassOf(typeof(Transform)));
+                return argTypes.Concat(transformTypes).ToArray();
             }
         }
     }
