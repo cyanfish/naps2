@@ -13,15 +13,15 @@ namespace NAPS2.Util
     /// </summary>
     public static class ConditionalControls
     {
-        public static void SetVisible(Control control, bool visible)
+        public static void SetVisible(Control control, bool visible, int margin = 0)
         {
             if (visible)
             {
-                Show(control);
+                Show(control, margin);
             }
             else
             {
-                Hide(control);
+                Hide(control, margin);
             }
         }
 

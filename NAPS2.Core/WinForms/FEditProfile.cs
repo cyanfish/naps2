@@ -94,7 +94,7 @@ namespace NAPS2.WinForms
 
             linkAutoSaveSettings.Location = new Point(cbAutoSave.Right, linkAutoSaveSettings.Location.Y);
             new LayoutManager(this)
-                .Bind(txtName, txtDevice, panel1, panel2)
+                .Bind(txtName, txtDevice, panelUI, panel2)
                     .WidthToForm()
                 .Bind(pctIcon, btnChooseDevice, btnOK, btnCancel)
                     .RightToForm()
@@ -372,6 +372,10 @@ namespace NAPS2.WinForms
                 linkAutoSaveSettings.Visible = !locked && !appConfigManager.Config.DisableAutoSave;
 
                 btnAdvanced.Enabled = !locked;
+
+                ConditionalControls.UnlockHeight(this);
+                ConditionalControls.SetVisible(panelUI, DeviceDriverName != SaneScanDriver.DRIVER_NAME, 20);
+                ConditionalControls.LockHeight(this);
 
                 suppressChangeEvent = false;
             }

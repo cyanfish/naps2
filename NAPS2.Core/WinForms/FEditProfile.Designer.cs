@@ -40,7 +40,7 @@ namespace NAPS2.WinForms
             this.label2 = new System.Windows.Forms.Label();
             this.cmbSource = new System.Windows.Forms.ComboBox();
             this.btnOK = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelUI = new System.Windows.Forms.Panel();
             this.rdbConfig = new System.Windows.Forms.RadioButton();
             this.rdbNative = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
@@ -64,14 +64,14 @@ namespace NAPS2.WinForms
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdTWAIN = new System.Windows.Forms.RadioButton();
             this.rdWIA = new System.Windows.Forms.RadioButton();
+            this.rdSANE = new System.Windows.Forms.RadioButton();
             this.txtBrightness = new System.Windows.Forms.TextBox();
             this.txtContrast = new System.Windows.Forms.TextBox();
             this.ilProfileIcons = new NAPS2.WinForms.ILProfileIcons(this.components);
             this.cbAutoSave = new System.Windows.Forms.CheckBox();
             this.linkAutoSaveSettings = new System.Windows.Forms.LinkLabel();
             this.btnAdvanced = new System.Windows.Forms.Button();
-            this.rdSANE = new System.Windows.Forms.RadioButton();
-            this.panel1.SuspendLayout();
+            this.panelUI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).BeginInit();
@@ -116,12 +116,12 @@ namespace NAPS2.WinForms
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // panel1
+            // panelUI
             // 
-            this.panel1.Controls.Add(this.rdbConfig);
-            this.panel1.Controls.Add(this.rdbNative);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            this.panelUI.Controls.Add(this.rdbConfig);
+            this.panelUI.Controls.Add(this.rdbNative);
+            resources.ApplyResources(this.panelUI, "panelUI");
+            this.panelUI.Name = "panelUI";
             // 
             // rdbConfig
             // 
@@ -275,6 +275,14 @@ namespace NAPS2.WinForms
             this.rdWIA.UseVisualStyleBackColor = true;
             this.rdWIA.CheckedChanged += new System.EventHandler(this.rdDriver_CheckedChanged);
             // 
+            // rdSANE
+            // 
+            resources.ApplyResources(this.rdSANE, "rdSANE");
+            this.rdSANE.Name = "rdSANE";
+            this.rdSANE.TabStop = true;
+            this.rdSANE.UseVisualStyleBackColor = true;
+            this.rdSANE.CheckedChanged += new System.EventHandler(this.rdDriver_CheckedChanged);
+            // 
             // txtBrightness
             // 
             resources.ApplyResources(this.txtBrightness, "txtBrightness");
@@ -308,14 +316,6 @@ namespace NAPS2.WinForms
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
-            // rdSANE
-            // 
-            resources.ApplyResources(this.rdSANE, "rdSANE");
-            this.rdSANE.Name = "rdSANE";
-            this.rdSANE.TabStop = true;
-            this.rdSANE.UseVisualStyleBackColor = true;
-            this.rdSANE.CheckedChanged += new System.EventHandler(this.rdDriver_CheckedChanged);
-            // 
             // FEditProfile
             // 
             this.AcceptButton = this.btnOK;
@@ -345,7 +345,7 @@ namespace NAPS2.WinForms
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbDepth);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelUI);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.cmbSource);
             this.Controls.Add(this.label2);
@@ -355,7 +355,7 @@ namespace NAPS2.WinForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FEditProfile";
-            this.panel1.ResumeLayout(false);
+            this.panelUI.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).EndInit();
@@ -373,7 +373,7 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbSource;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelUI;
         private System.Windows.Forms.RadioButton rdbConfig;
         private System.Windows.Forms.RadioButton rdbNative;
         private System.Windows.Forms.Label label3;

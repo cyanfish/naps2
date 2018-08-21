@@ -103,16 +103,16 @@ namespace NAPS2.Scan.Images
             this.operationProgress = operationProgress;
         }
 
-        public Bitmap PostProcessStep1(Image output, ScanProfile profile)
+        public Bitmap PostProcessStep1(Image output, ScanProfile profile, bool supportsNativeUI = true)
         {
             double scaleFactor = 1;
-            if (!profile.UseNativeUI)
+            if (!profile.UseNativeUI || !supportsNativeUI)
             {
                 scaleFactor = profile.AfterScanScale.ToIntScaleFactor();
             }
             var result = ImageScaleHelper.ScaleImage(output, scaleFactor);
 
-            if (!profile.UseNativeUI && (profile.ForcePageSize || profile.ForcePageSizeCrop))
+            if ((!profile.UseNativeUI || !supportsNativeUI) && (profile.ForcePageSize || profile.ForcePageSizeCrop))
             {
                 float width = output.Width / output.HorizontalResolution;
                 float height = output.Height / output.VerticalResolution;
@@ -158,9 +158,9 @@ namespace NAPS2.Scan.Images
             return result;
         }
 
-        public void PostProcessStep2(ScannedImage image, Bitmap bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber)
+        public void PostProcessStep2(ScannedImage image, Bitmap bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber, bool supportsNativeUI = true)
         {
-            if (!profile.UseNativeUI && profile.BrightnessContrastAfterScan)
+            if ((!profile.UseNativeUI || !supportsNativeUI) && profile.BrightnessContrastAfterScan)
             {
                 if (profile.Brightness != 0)
                 {
