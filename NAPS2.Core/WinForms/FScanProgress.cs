@@ -21,6 +21,7 @@ namespace NAPS2.WinForms
         {
             this.threadFactory = threadFactory;
 
+            RestoreFormState = false;
             InitializeComponent();
         }
 

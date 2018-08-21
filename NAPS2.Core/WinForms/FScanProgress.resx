@@ -206,6 +206,10 @@
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>388, 149</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Acquiring data</value>
   </data>
@@ -213,6 +217,6 @@
     <value>FScanProgress</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31793, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.35863, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
