@@ -53,7 +53,7 @@ namespace NAPS2.ImportExport.Pdf
                 for (int pageNumber = 1; pageNumber <= rasterizer.PageCount; pageNumber++)
                 {
                     var bitmap = (Bitmap)rasterizer.GetPage(dpi, dpi, pageNumber);
-                    bitmap.SetResolution(dpi, dpi);
+                    bitmap.SafeSetResolution(dpi, dpi);
                     yield return bitmap;
                 }
             }

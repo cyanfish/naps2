@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Images.Transforms
 {
@@ -184,7 +185,7 @@ namespace NAPS2.Scan.Images.Transforms
             
             bitmap.UnlockBits(bitmapData);
             monoBitmap.UnlockBits(monoBitmapData);
-            monoBitmap.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+            monoBitmap.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
 
             return monoBitmap;
         }

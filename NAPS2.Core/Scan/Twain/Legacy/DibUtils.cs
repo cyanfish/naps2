@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Twain.Legacy
 {
@@ -36,7 +37,7 @@ namespace NAPS2.Scan.Twain.Legacy
             GlobalFree(dibhand);
             scannedImageGraphics.Dispose();
             bitdepth = binfo.biBitCount;
-            scannedImage.SetResolution(resx, resy);
+            scannedImage.SafeSetResolution(resx, resy);
             return scannedImage;
         }
 

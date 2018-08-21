@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using NAPS2.Operation;
 using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {
@@ -140,7 +141,7 @@ namespace NAPS2.Scan.Images
                     }
                     else
                     {
-                        result.SetResolution((float) (output.Width / pageDimensions.HeightInInches()),
+                        result.SafeSetResolution((float) (output.Width / pageDimensions.HeightInInches()),
                             (float) (output.Height / pageDimensions.WidthInInches()));
                     }
                 }
@@ -156,7 +157,7 @@ namespace NAPS2.Scan.Images
                     }
                     else
                     {
-                        result.SetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
+                        result.SafeSetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
                     }
                 }
             }

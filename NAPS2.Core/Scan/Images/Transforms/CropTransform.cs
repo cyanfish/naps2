@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Images.Transforms
 {
@@ -19,7 +20,7 @@ namespace NAPS2.Scan.Images.Transforms
             int width = Math.Max(bitmap.Width - Left - Right, 1);
             int height = Math.Max(bitmap.Height - Top - Bottom, 1);
             var result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            result.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+            result.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
             using (var g = Graphics.FromImage(result))
             {
                 g.Clear(Color.White);

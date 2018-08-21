@@ -178,7 +178,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 using (var bitmap = new Bitmap(memoryStream))
                 {
-                    bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
+                    bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
                     var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
                     image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
                     if (importParams.DetectPatchCodes)
@@ -218,7 +218,7 @@ namespace NAPS2.ImportExport.Pdf
 
             using (bitmap)
             {
-                bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
+                bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
                 var image = new ScannedImage(bitmap, bitDepth, true, -1);
                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
                 if (importParams.DetectPatchCodes)
@@ -322,7 +322,7 @@ namespace NAPS2.ImportExport.Pdf
 
             using (Bitmap bitmap = (Bitmap)Image.FromStream(stream))
             {
-                bitmap.SetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
+                bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
 
                 var image = new ScannedImage(bitmap, ScanBitDepth.BlackWhite, true, -1);
                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));

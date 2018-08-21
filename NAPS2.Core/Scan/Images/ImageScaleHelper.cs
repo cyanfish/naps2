@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {
@@ -22,7 +23,7 @@ namespace NAPS2.Scan.Images
             {
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.DrawImage(original, 0, 0, (int)realWidth, (int)realHeight);
-                result.SetResolution((float)horizontalRes, (float)verticalRes);
+                result.SafeSetResolution((float)horizontalRes, (float)verticalRes);
                 return result;
             }
         }
