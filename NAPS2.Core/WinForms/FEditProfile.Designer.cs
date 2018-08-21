@@ -70,6 +70,7 @@ namespace NAPS2.WinForms
             this.cbAutoSave = new System.Windows.Forms.CheckBox();
             this.linkAutoSaveSettings = new System.Windows.Forms.LinkLabel();
             this.btnAdvanced = new System.Windows.Forms.Button();
+            this.rdSANE = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).BeginInit();
@@ -254,6 +255,7 @@ namespace NAPS2.WinForms
             // 
             this.panel2.Controls.Add(this.rdTWAIN);
             this.panel2.Controls.Add(this.rdWIA);
+            this.panel2.Controls.Add(this.rdSANE);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
@@ -263,6 +265,7 @@ namespace NAPS2.WinForms
             this.rdTWAIN.Name = "rdTWAIN";
             this.rdTWAIN.TabStop = true;
             this.rdTWAIN.UseVisualStyleBackColor = true;
+            this.rdTWAIN.CheckedChanged += new System.EventHandler(this.rdDriver_CheckedChanged);
             // 
             // rdWIA
             // 
@@ -270,7 +273,7 @@ namespace NAPS2.WinForms
             this.rdWIA.Name = "rdWIA";
             this.rdWIA.TabStop = true;
             this.rdWIA.UseVisualStyleBackColor = true;
-            this.rdWIA.CheckedChanged += new System.EventHandler(this.rdWIA_CheckedChanged);
+            this.rdWIA.CheckedChanged += new System.EventHandler(this.rdDriver_CheckedChanged);
             // 
             // txtBrightness
             // 
@@ -304,6 +307,14 @@ namespace NAPS2.WinForms
             this.btnAdvanced.Name = "btnAdvanced";
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
+            // 
+            // rdSANE
+            // 
+            resources.ApplyResources(this.rdSANE, "rdSANE");
+            this.rdSANE.Name = "rdSANE";
+            this.rdSANE.TabStop = true;
+            this.rdSANE.UseVisualStyleBackColor = true;
+            this.rdSANE.CheckedChanged += new System.EventHandler(this.rdDriver_CheckedChanged);
             // 
             // FEditProfile
             // 
@@ -392,5 +403,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.CheckBox cbAutoSave;
         private System.Windows.Forms.LinkLabel linkAutoSaveSettings;
         private System.Windows.Forms.Button btnAdvanced;
+        private System.Windows.Forms.RadioButton rdSANE;
     }
 }

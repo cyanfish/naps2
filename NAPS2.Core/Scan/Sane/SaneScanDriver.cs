@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -31,6 +32,8 @@ namespace NAPS2.Scan.Sane
         }
 
         public override string DriverName => DRIVER_NAME;
+
+        public override bool IsSupported => PlatformCompat.System.IsSaneDriverSupported;
 
         protected override ScanDevice PromptForDeviceInternal()
         {

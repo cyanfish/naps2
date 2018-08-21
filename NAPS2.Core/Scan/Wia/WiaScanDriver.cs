@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -34,6 +35,8 @@ namespace NAPS2.Scan.Wia
         }
 
         public override string DriverName => DRIVER_NAME;
+
+        public override bool IsSupported => PlatformCompat.System.IsWiaDriverSupported;
 
         protected override ScanDevice PromptForDeviceInternal() => WiaApi.PromptForScanDevice();
 

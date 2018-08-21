@@ -13,6 +13,11 @@ namespace NAPS2.Scan
     public interface IScanDriver
     {
         /// <summary>
+        /// Gets a value indicating whether the driver is supported on the current platform.
+        /// </summary>
+        bool IsSupported { get; }
+
+        /// <summary>
         /// Sets the profile used by the driver for scanning.
         /// This must be set before calling Scan.
         /// </summary>

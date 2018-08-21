@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="Operation\WorkerOperation.cs" />
     <Compile Include="Platform\DefaultRuntimeCompat.cs" />
+    <Compile Include="Scan\Exceptions\DriverNotSupportedException.cs" />
     <Compile Include="Scan\KeyValueScanOptions.cs" />
     <Compile Include="Scan\Sane\SaneNotAvailableException.cs" />
     <Compile Include="Scan\Sane\SaneScanDriver.cs" />

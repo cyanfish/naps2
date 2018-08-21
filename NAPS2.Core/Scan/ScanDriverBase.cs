@@ -11,6 +11,8 @@ namespace NAPS2.Scan
     {
         public abstract string DriverName { get; }
 
+        public abstract bool IsSupported { get; }
+
         public ScanProfile ScanProfile { get; set; }
 
         public ScanParams ScanParams { get; set; }
@@ -21,6 +23,10 @@ namespace NAPS2.Scan
 
         public ScanDevice PromptForDevice()
         {
+            if (!IsSupported)
+            {
+                throw new DriverNotSupportedException();
+            }
             if (DialogParent == null)
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
@@ -43,6 +49,10 @@ namespace NAPS2.Scan
 
         public List<ScanDevice> GetDeviceList()
         {
+            if (!IsSupported)
+            {
+                throw new DriverNotSupportedException();
+            }
             try
             {
                 return GetDeviceListInternal();
@@ -61,6 +71,10 @@ namespace NAPS2.Scan
 
         public IEnumerable<ScannedImage> Scan()
         {
+            if (!IsSupported)
+            {
+                throw new DriverNotSupportedException();
+            }
             if (ScanProfile == null)
             {
                 throw new InvalidOperationException("IScanDriver.ScanProfile must be specified before calling Scan().");

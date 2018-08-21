@@ -27,6 +27,8 @@ namespace NAPS2.Scan.Twain
 
         public override string DriverName => DRIVER_NAME;
 
+        public override bool IsSupported => PlatformCompat.System.IsTwainDriverSupported;
+
         // 64 bit TWAIN support via worker is experimental.
         // Issue list:
         // - Hard to give focus to the TWAIN UI consistently. Maybe leverage the Form.Activated event in NAPS2.exe to call a new method in NAPS2.Worker.

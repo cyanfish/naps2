@@ -457,6 +457,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected driver is not supported on this system..
+        /// </summary>
+        internal static string DriverNotSupported {
+            get {
+                return ResourceManager.GetString("DriverNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to send an email..
         /// </summary>
         internal static string EmailError {

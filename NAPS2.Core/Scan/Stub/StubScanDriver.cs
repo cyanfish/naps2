@@ -71,5 +71,7 @@ namespace NAPS2.Scan.Stub
         }
 
         public string DriverName { get; }
+
+        public bool IsSupported => true;
     }
 }
