@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -72,8 +73,10 @@ namespace NAPS2.Util
             {
                 try
                 {
-                    item.ShortcutKeys = keys;
+                    item.ShortcutKeys = Keys.None;
+                    item.ShortcutKeyDisplayString = TypeDescriptor.GetConverter(typeof(Keys)).ConvertToString(keys);
                     itemDict[keys] = item;
+                    dict[keys] = action;
                 }
                 catch (Exception)
                 {

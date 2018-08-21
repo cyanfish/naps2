@@ -880,6 +880,9 @@ namespace NAPS2.WinForms
             ksm.Assign("Ctrl+OemMinus", btnZoomOut);
             ksm.Assign("Ctrl+Oemplus", btnZoomIn);
             ksm.Assign("Del", ctxDelete);
+            ksm.Assign("Ctrl+A", ctxSelectAll);
+            ksm.Assign("Ctrl+C", ctxCopy);
+            ksm.Assign("Ctrl+V", ctxPaste);
 
             // Configured
 
