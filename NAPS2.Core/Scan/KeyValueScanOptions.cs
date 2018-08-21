@@ -9,6 +9,14 @@ namespace NAPS2.Scan
 {
     public class KeyValueScanOptions : Dictionary<string, string>, IXmlSerializable
     {
+        public KeyValueScanOptions()
+        {
+        }
+
+        public KeyValueScanOptions(IDictionary<string, string> dictionary) : base(dictionary)
+        {
+        }
+
         public XmlSchema GetSchema() => null;
 
         public void ReadXml(XmlReader reader)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -58,24 +59,160 @@ namespace NAPS2.Scan.Sane
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
             // TODO: Support ADF
-            var img = Transfer();
+            var options = GetOptions();
+            var img = Transfer(options);
             if (img != null)
             {
                 yield return img;
             }
         }
 
-        private ScannedImage Transfer()
+        private KeyValueScanOptions GetOptions()
+        {
+            var saneOptions = saneWrapper.GetOptions(ScanDevice.ID);
+            var options = new KeyValueScanOptions(ScanProfile.KeyValueOptions ?? new KeyValueScanOptions());
+
+            bool ChooseStringOption(string name, Func<string, bool> match)
+            {
+                var opt = saneOptions.Get(name);
+                var choice = opt?.StringList?.FirstOrDefault(match);
+                if (choice != null)
+                {
+                    options[name] = choice;
+                    return true;
+                }
+                return false;
+            }
+
+            bool ChooseNumericOption(string name, decimal value)
+            {
+                var opt = saneOptions.Get(name);
+                if (opt?.ConstraintType == SaneConstraintType.WordList)
+                {
+                    var choice = opt.WordList?.OrderBy(x => Math.Abs(x - value)).FirstOrDefault();
+                    if (choice != null)
+                    {
+                        options[name] = choice.Value.ToString(CultureInfo.InvariantCulture);
+                        return true;
+                    }
+                }
+                else if (opt?.ConstraintType == SaneConstraintType.Range)
+                {
+                    if (value < opt.Range.Min)
+                    {
+                        value = opt.Range.Min;
+                    }
+                    if (value > opt.Range.Max)
+                    {
+                        value = opt.Range.Max;
+                    }
+                    if (opt.Range.Quant != 0)
+                    {
+                        var mod = (value - opt.Range.Min) % opt.Range.Quant;
+                        if (mod != 0)
+                        {
+                            value = mod < opt.Range.Quant / 2 ? value - mod : value + opt.Range.Quant - mod;
+                        }
+                    }
+                    options[name] = value.ToString(CultureInfo.InvariantCulture);
+                    return true;
+                }
+                return false;
+            }
+
+            bool IsFlatbedChoice(string choice) => choice.IndexOf("flatbed", StringComparison.InvariantCultureIgnoreCase) >= 0;
+            bool IsFeederChoice(string choice) => new[] { "adf", "feeder", "simplex" }.Any(x => choice.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
+            bool IsDuplexChoice(string choice) => choice.IndexOf("duplex", StringComparison.InvariantCultureIgnoreCase) >= 0;
+
+            if (ScanProfile.PaperSource == ScanSource.Glass)
+            {
+                ChooseStringOption("--source", IsFlatbedChoice);
+            }
+            else if (ScanProfile.PaperSource == ScanSource.Feeder)
+            {
+                if (!ChooseStringOption("--source", x => IsFeederChoice(x) && !IsDuplexChoice(x)))
+                {
+                    ChooseStringOption("--source", IsFeederChoice);
+                }
+            }
+            else if (ScanProfile.PaperSource == ScanSource.Duplex)
+            {
+                if (!ChooseStringOption("--source", IsDuplexChoice))
+                {
+                    ChooseStringOption("--source", IsFeederChoice);
+                }
+            }
+
+            if (ScanProfile.BitDepth == ScanBitDepth.C24Bit)
+            {
+                ChooseStringOption("--mode", x => x == "Color");
+                ChooseNumericOption("--depth", 8);
+            }
+            else if (ScanProfile.BitDepth == ScanBitDepth.Grayscale)
+            {
+                ChooseStringOption("--mode", x => x == "Gray");
+                ChooseNumericOption("--depth", 8);
+            }
+            else if (ScanProfile.BitDepth == ScanBitDepth.BlackWhite)
+            {
+                if (!ChooseStringOption("--mode", x => x == "Lineart"))
+                {
+                    ChooseStringOption("--mode", x => x == "Halftone");
+                }
+                ChooseNumericOption("--depth", 1);
+            }
+
+            var pageDimens = ScanProfile.PageSize.PageDimensions() ?? ScanProfile.CustomPageSize;
+            if (pageDimens != null)
+            {
+                var width = pageDimens.WidthInMm();
+                var height = pageDimens.HeightInMm();
+                ChooseNumericOption("-x", width);
+                ChooseNumericOption("-y", height);
+                var maxWidth = saneOptions.Get("-l")?.Range?.Max;
+                var maxHeight = saneOptions.Get("-t")?.Range?.Max;
+                if (maxWidth != null)
+                {
+                    if (ScanProfile.PageAlign == ScanHorizontalAlign.Center)
+                    {
+                        ChooseNumericOption("-l", (maxWidth.Value - width) / 2);
+                    }
+                    else if (ScanProfile.PageAlign == ScanHorizontalAlign.Right)
+                    {
+                        ChooseNumericOption("-l", maxWidth.Value - width);
+                    }
+                    else
+                    {
+                        ChooseNumericOption("-l", 0);
+                    }
+                }
+                if (maxHeight != null)
+                {
+                    ChooseNumericOption("-t", 0);
+                }
+            }
+
+            var dpi = ScanProfile.Resolution.ToIntDpi();
+            if (!ChooseNumericOption("--resolution", dpi))
+            {
+                ChooseNumericOption("--x-resolution", dpi);
+                ChooseNumericOption("--y-resolution", dpi);
+            }
+
+            return options;
+        }
+
+        private ScannedImage Transfer(KeyValueScanOptions options)
         {
             Stream stream;
             if (ScanParams.NoUI)
             {
-                stream = saneWrapper.ScanOne(ScanDevice.ID, ScanProfile.KeyValueOptions, null);
+                stream = saneWrapper.ScanOne(ScanDevice.ID, options, null);
             }
             else
             {
                 var form = formFactory.Create<FScanProgress>();
-                form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, ScanProfile.KeyValueOptions, form.OnProgress);
+                form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options, form.OnProgress);
                 form.PageNumber = 1;
                 form.ShowDialog();
 
@@ -93,7 +230,7 @@ namespace NAPS2.Scan.Sane
             }
             using (stream)
             using (var output = Image.FromStream(stream))
-            using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+            using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile, false))
             {
                 if (blankDetector.ExcludePage(result, ScanProfile))
                 {
@@ -103,7 +240,7 @@ namespace NAPS2.Scan.Sane
                 // TODO: Set bit depth correctly
                 var image = new ScannedImage(result, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1);
+                scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);
                 return image;
             }
         }

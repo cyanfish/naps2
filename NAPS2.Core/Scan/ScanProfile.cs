@@ -306,6 +306,21 @@ namespace NAPS2.Scan
 
     public static class ScanEnumExtensions
     {
+        public static decimal WidthInMm(this PageDimensions pageDimensions)
+        {
+            switch (pageDimensions.Unit)
+            {
+                case PageSizeUnit.Inch:
+                    return pageDimensions.Width * 25.4m;
+                case PageSizeUnit.Centimetre:
+                    return pageDimensions.Width * 10;
+                case PageSizeUnit.Millimetre:
+                    return pageDimensions.Width;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
         public static decimal WidthInInches(this PageDimensions pageDimensions)
         {
             switch (pageDimensions.Unit)
@@ -324,6 +339,21 @@ namespace NAPS2.Scan
         public static int WidthInThousandthsOfAnInch(this PageDimensions pageDimensions)
         {
             return (int)(WidthInInches(pageDimensions) * 1000);
+        }
+
+        public static decimal HeightInMm(this PageDimensions pageDimensions)
+        {
+            switch (pageDimensions.Unit)
+            {
+                case PageSizeUnit.Inch:
+                    return pageDimensions.Height * 25.4m;
+                case PageSizeUnit.Centimetre:
+                    return pageDimensions.Height * 10;
+                case PageSizeUnit.Millimetre:
+                    return pageDimensions.Height;
+                default:
+                    throw new ArgumentException();
+            }
         }
 
         public static decimal HeightInInches(this PageDimensions pageDimensions)
