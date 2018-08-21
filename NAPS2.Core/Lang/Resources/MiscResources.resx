@@ -442,6 +442,6 @@
     <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages.</value>
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
 </root>

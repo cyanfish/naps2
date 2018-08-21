@@ -916,7 +916,7 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The SANE driver is not available. Make sure to install the required packages..
+        ///   Looks up a localized string similar to The SANE driver is not available. Make sure to install the required packages:.
         /// </summary>
         internal static string SaneNotAvailable {
             get {

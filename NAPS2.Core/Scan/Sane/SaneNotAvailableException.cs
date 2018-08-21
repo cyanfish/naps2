@@ -8,11 +8,13 @@ namespace NAPS2.Scan.Sane
 {
     public class SaneNotAvailableException : ScanDriverException
     {
-        public SaneNotAvailableException() : base(MiscResources.SaneNotAvailable)
+        private const string PACKAGES = "\nsane\nsane-utils";
+
+        public SaneNotAvailableException() : base(MiscResources.SaneNotAvailable + PACKAGES)
         {
         }
 
-        public SaneNotAvailableException(Exception innerException) : base(MiscResources.SaneNotAvailable, innerException)
+        public SaneNotAvailableException(Exception innerException) : base(MiscResources.SaneNotAvailable + PACKAGES, innerException)
         {
         }
     }
