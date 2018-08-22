@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using NAPS2.Config;
-using NAPS2.Util;
 
 namespace NAPS2.Dependencies
 {
@@ -13,6 +10,7 @@ namespace NAPS2.Dependencies
         private readonly PlatformSupport platformSupport;
 
         private bool installed;
+        private DateTime? installCheckTime;
 
         public ExternalSystemComponent(string path, string dataPath, PlatformSupport platformSupport = null)
         {
@@ -23,12 +21,12 @@ namespace NAPS2.Dependencies
 
         private void CheckIfInstalled()
         {
-            if (IsSupported)
+            if (IsSupported && (installCheckTime == null || installCheckTime < DateTime.Now - TimeSpan.FromSeconds(2)))
             {
                 try
                 {
                     var process = Process.Start(Path);
-                    if (process != null)
+                    if (process != null && process.Id != 0)
                     {
                         installed = true;
                         process.Kill();
@@ -38,6 +36,7 @@ namespace NAPS2.Dependencies
                 {
                     // Component is not installed on the system path (or had an error)
                 }
+                installCheckTime = DateTime.Now;
             }
         }
 

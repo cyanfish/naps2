@@ -1015,6 +1015,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The OCR engine is not available. Make sure to install the required package:.
+        /// </summary>
+        internal static string TesseractNotAvailable {
+            get {
+                return ResourceManager.GetString("TesseractNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred with the scanning driver..
         /// </summary>
         internal static string UnknownDriverError {

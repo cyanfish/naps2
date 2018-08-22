@@ -27,7 +27,7 @@ namespace NAPS2.Ocr
 
         public bool CanProcess(string langCode)
         {
-            if (string.IsNullOrEmpty(langCode) || !ocrDependencyManager.HasInstalledTesseractExe)
+            if (string.IsNullOrEmpty(langCode) || ocrDependencyManager.InstalledAndSupportedTesseractExe == null)
             {
                 return false;
             }

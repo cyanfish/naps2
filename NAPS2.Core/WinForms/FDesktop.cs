@@ -1066,7 +1066,12 @@ namespace NAPS2.WinForms
                 progressForm.ShowDialog();
             }
 
-            if (ocrDependencyManager.HasInstalledTesseractExe && ocrDependencyManager.InstalledTesseractLanguages.Any())
+            if (ocrDependencyManager.InstalledAndSupportedTesseractExe == null && ocrDependencyManager.Components.Tesseract304Linux.IsSupported)
+            {
+                const string packages = "\ntesseract-ocr";
+                MessageBox.Show(MiscResources.TesseractNotAvailable + packages, MiscResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (ocrDependencyManager.HasInstalledTesseractExe && ocrDependencyManager.InstalledTesseractLanguages.Any())
             {
                 if (!ocrDependencyManager.HasNewTesseractExe && !appConfigManager.Config.NoUpdatePrompt)
                 {

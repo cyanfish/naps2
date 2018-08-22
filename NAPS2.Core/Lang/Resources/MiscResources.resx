@@ -444,6 +444,9 @@
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
+  </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>The selected driver is not supported on this system.</value>
   </data>
