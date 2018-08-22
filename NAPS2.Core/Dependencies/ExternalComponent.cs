@@ -8,7 +8,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Dependencies
 {
-    public class ExternalComponent
+    public class ExternalComponent : IExternalComponent
     {
         public static string BasePath { get; set; }
 
@@ -21,62 +21,26 @@ namespace NAPS2.Dependencies
         }
 
         private readonly PlatformSupport platformSupport;
-        private readonly string systemPath;
         
-        public ExternalComponent(string id, string path, PlatformSupport platformSupport = null, bool allowSystemPath = false)
+        public ExternalComponent(string id, string path, PlatformSupport platformSupport = null)
         {
             Id = id;
             this.platformSupport = platformSupport;
             Path = System.IO.Path.Combine(BasePath, path);
-
-            if (IsSupported && !IsInstalled && allowSystemPath)
-            {
-                try
-                {
-                    var process = Process.Start(System.IO.Path.GetFileName(path));
-                    if (process != null)
-                    {
-                        systemPath = process.MainModule.FileName;
-                        process.Kill();
-                    }
-                }
-                catch (Exception)
-                {
-                    // Component is not installed on the system path (or had an error)
-                }
-            }
         }
 
         public string Id { get; }
 
         public string Path { get; }
 
-        public string RunPath => systemPath ?? Path;
+        public string DataPath => System.IO.Path.GetDirectoryName(Path);
 
-        public bool IsInstalled
-        {
-            get
-            {
-                if (systemPath != null)
-                {
-                    return true;
-                }
-                if (Path == null)
-                {
-                    return false;
-                }
-                return File.Exists(Path);
-            }
-        }
+        public bool IsInstalled => File.Exists(Path);
 
         public bool IsSupported => platformSupport == null || platformSupport.Validate();
 
         public void Install(string sourcePath)
         {
-            if (Path == null)
-            {
-                throw new InvalidOperationException();
-            }
             PathHelper.EnsureParentDirExists(Path);
             File.Move(sourcePath, Path);
         }

@@ -74,11 +74,11 @@ namespace NAPS2.Ocr
                                                 Components.Tesseract302.IsInstalled ||
                                                 Components.Tesseract304Linux.IsInstalled;
 
-        public ExternalComponent InstalledAndSupportedTesseractExe
+        public IExternalComponent InstalledAndSupportedTesseractExe
         {
             get
             {
-                ExternalComponent InstalledAndSupported(ExternalComponent component)
+                IExternalComponent InstalledAndSupported(IExternalComponent component)
                 {
                     return component.IsInstalled && component.IsSupported ? component : null;
                 }
@@ -227,7 +227,7 @@ namespace NAPS2.Ocr
 
         public class OcrComponents
         {
-            public readonly ExternalComponent Tesseract304Linux = new ExternalComponent("ocr", Path.Combine("tesseract-3.0.4", "tesseract"), PlatformSupport.Linux, allowSystemPath: true);
+            public readonly ExternalSystemComponent Tesseract304Linux = new ExternalSystemComponent("tesseract", "tesseract-3.0.4", PlatformSupport.Linux);
 
             public readonly ExternalComponent Tesseract304Xp = new ExternalComponent("ocr", Path.Combine("tesseract-3.0.4", "tesseract_xp.exe"), PlatformSupport.Windows);
 

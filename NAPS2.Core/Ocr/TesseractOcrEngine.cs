@@ -43,18 +43,14 @@ namespace NAPS2.Ocr
             {
                 var startInfo = new ProcessStartInfo
                 {
-                    FileName = ocrDependencyManager.InstalledAndSupportedTesseractExe.RunPath,
+                    FileName = ocrDependencyManager.InstalledAndSupportedTesseractExe.Path,
                     Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {langCode} hocr",
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
                 };
-                var tessdataParent = new FileInfo(ocrDependencyManager.InstalledAndSupportedTesseractExe.Path).Directory;
-                if (tessdataParent == null)
-                {
-                    throw new InvalidOperationException();
-                }
+                var tessdataParent = new DirectoryInfo(ocrDependencyManager.InstalledAndSupportedTesseractExe.DataPath);
                 var tessdata = new DirectoryInfo(Path.Combine(tessdataParent.FullName, "tessdata"));
                 startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = tessdataParent.FullName;
                 EnsureHocrConfigExists(tessdata);

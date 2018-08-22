@@ -127,6 +127,8 @@
     <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
+    <Compile Include="Dependencies\ExternalSystemComponent.cs" />
+    <Compile Include="Dependencies\IExternalComponent.cs" />
     <Compile Include="Platform\ISystemCompat.cs" />
     <Compile Include="Platform\LinuxSystemCompat.cs" />
     <Compile Include="Platform\PlatformCompat.cs" />
