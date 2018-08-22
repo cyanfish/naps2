@@ -160,6 +160,11 @@ namespace NAPS2.WinForms
             filesToDownload.Add(new QueueItem { DownloadInfo = downloadInfo, FileCallback = fileCallback });
         }
 
+        public void QueueFile(ExternalComponent component)
+        {
+            filesToDownload.Add(new QueueItem { DownloadInfo = component.DownloadInfo, FileCallback = component.Install });
+        }
+
         private void DisplayProgress()
         {
             labelTop.Text = string.Format(MiscResources.FilesProgressFormat, filesDownloaded, filesToDownload.Count);

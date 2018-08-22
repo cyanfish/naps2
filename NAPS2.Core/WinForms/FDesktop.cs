@@ -39,7 +39,7 @@ namespace NAPS2.WinForms
         private readonly StringWrapper stringWrapper;
         private readonly AppConfigManager appConfigManager;
         private readonly RecoveryManager recoveryManager;
-        private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly OcrManager ocrManager;
         private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IScannedImagePrinter scannedImagePrinter;
@@ -66,12 +66,12 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrDependencyManager ocrDependencyManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer)
+        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer)
         {
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
             this.recoveryManager = recoveryManager;
-            this.ocrDependencyManager = ocrDependencyManager;
+            this.ocrManager = ocrManager;
             this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.scannedImagePrinter = scannedImagePrinter;
@@ -1056,24 +1056,23 @@ namespace NAPS2.WinForms
                 return;
             }
 
-            if (ocrDependencyManager.TesseractExeRequiresFix && !appConfigManager.Config.NoUpdatePrompt)
+            if (ocrManager.MustUpgrade && !appConfigManager.Config.NoUpdatePrompt)
             {
                 // Re-download a fixed version on Windows XP if needed
                 MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var progressForm = FormFactory.Create<FDownloadProgress>();
-                progressForm.QueueFile(ocrDependencyManager.Downloads.Tesseract304Xp,
-                    path => ocrDependencyManager.Components.Tesseract304Xp.Install(path));
+                progressForm.QueueFile(ocrManager.UpgradeComponent);
                 progressForm.ShowDialog();
             }
 
-            if (ocrDependencyManager.InstalledAndSupportedTesseractExe == null && ocrDependencyManager.Components.Tesseract304Linux.IsSupported)
+            if (ocrManager.MustInstallPackage)
             {
                 const string packages = "\ntesseract-ocr";
                 MessageBox.Show(MiscResources.TesseractNotAvailable + packages, MiscResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (ocrDependencyManager.HasInstalledTesseractExe && ocrDependencyManager.InstalledTesseractLanguages.Any())
+            else if (ocrManager.IsReady)
             {
-                if (!ocrDependencyManager.HasNewTesseractExe && !appConfigManager.Config.NoUpdatePrompt)
+                if (!ocrManager.CanUpgrade && !appConfigManager.Config.NoUpdatePrompt)
                 {
                     MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
@@ -1083,7 +1082,7 @@ namespace NAPS2.WinForms
             else
             {
                 FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
-                if (ocrDependencyManager.HasInstalledTesseractExe && ocrDependencyManager.InstalledTesseractLanguages.Any())
+                if (ocrManager.IsReady)
                 {
                     FormFactory.Create<FOcrSetup>().ShowDialog();
                 }

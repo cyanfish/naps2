@@ -7,52 +7,50 @@ using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
 using NAPS2.Config;
+using NAPS2.Dependencies;
 using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {
-    public class TesseractOcrEngine : IOcrEngine
+    public abstract class TesseractBaseEngine : IOcrEngine
     {
         private const int DEFAULT_TIMEOUT = 120 * 1000;
         private const int CHECK_INTERVAL = 500;
-
-        private readonly OcrDependencyManager ocrDependencyManager;
+        
         private readonly AppConfigManager appConfigManager;
 
-        public TesseractOcrEngine(OcrDependencyManager ocrDependencyManager, AppConfigManager appConfigManager)
+        protected TesseractBaseEngine(AppConfigManager appConfigManager)
         {
-            this.ocrDependencyManager = ocrDependencyManager;
             this.appConfigManager = appConfigManager;
         }
 
         public bool CanProcess(string langCode)
         {
-            if (string.IsNullOrEmpty(langCode) || ocrDependencyManager.InstalledAndSupportedTesseractExe == null)
+            if (string.IsNullOrEmpty(langCode) || !IsInstalled || !IsSupported)
             {
                 return false;
             }
             // Support multiple specified languages (e.g. "eng+fra")
-            return langCode.Split('+').All(code => ocrDependencyManager.InstalledTesseractLanguages.Any(x => x.Code == code));
+            return langCode.Split('+').All(code => InstalledLanguages.Any(x => x.Code == code));
         }
 
         public OcrResult ProcessImage(string imagePath, string langCode, Func<bool> cancelCallback)
         {
             string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-            string tempHocrFilePathWithExt = tempHocrFilePath + (ocrDependencyManager.HasNewTesseractExe ? ".hocr" : ".html");
+            string tempHocrFilePathWithExt = tempHocrFilePath + TesseractHocrExtension;
             try
             {
                 var startInfo = new ProcessStartInfo
                 {
-                    FileName = ocrDependencyManager.InstalledAndSupportedTesseractExe.Path,
+                    FileName = TesseractExePath,
                     Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {langCode} hocr",
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
                 };
-                var tessdataParent = new DirectoryInfo(ocrDependencyManager.InstalledAndSupportedTesseractExe.DataPath);
-                var tessdata = new DirectoryInfo(Path.Combine(tessdataParent.FullName, "tessdata"));
-                startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = tessdataParent.FullName;
+                startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = TesseractPrefixPath;
+                var tessdata = new DirectoryInfo(Path.Combine(TesseractDataPath, "tessdata"));
                 EnsureHocrConfigExists(tessdata);
                 var tesseractProcess = Process.Start(startInfo);
                 if (tesseractProcess == null)
@@ -110,7 +108,7 @@ namespace NAPS2.Ocr
                     Elements = hocrDocument.Descendants()
                         .Where(x => x.Attributes("class").Any(y => y.Value == "ocrx_word"))
                         .Select(x => new OcrResultElement { Text = x.Value, Bounds = GetBounds(x.Attribute("title")) }),
-                    RightToLeft = ocrDependencyManager.InstalledTesseractLanguages.Where(x => x.Code == langCode).Select(x => x.RTL).FirstOrDefault()
+                    RightToLeft = InstalledLanguages.Where(x => x.Code == langCode).Select(x => x.RTL).FirstOrDefault()
                 };
             }
             catch (Exception e)
@@ -130,6 +128,28 @@ namespace NAPS2.Ocr
                 }
             }
         }
+
+        protected abstract string TesseractExePath { get; }
+
+        protected abstract string TesseractHocrExtension { get; }
+
+        protected abstract string TesseractDataPath { get; }
+
+        protected abstract string TesseractPrefixPath { get; }
+
+        public abstract bool IsSupported { get; }
+
+        public abstract bool IsInstalled { get; }
+
+        public abstract bool IsUpgradable { get; }
+
+        public abstract bool CanInstall { get; }
+
+        public abstract IEnumerable<Language> InstalledLanguages { get; }
+
+        public abstract ExternalComponent Component { get; }
+
+        public abstract IEnumerable<ExternalComponent> LanguageComponents { get; }
 
         private void EnsureHocrConfigExists(DirectoryInfo tessdata)
         {

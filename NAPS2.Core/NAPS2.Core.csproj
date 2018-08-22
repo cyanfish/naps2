@@ -129,6 +129,12 @@
     <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
     <Compile Include="Dependencies\ExternalSystemComponent.cs" />
     <Compile Include="Dependencies\IExternalComponent.cs" />
+    <Compile Include="Ocr\OcrManager.cs" />
+    <Compile Include="Ocr\Tesseract400Beta4Engine.cs" />
+    <Compile Include="Ocr\TesseractSystemEngine.cs" />
+    <Compile Include="Ocr\Tesseract304XpEngine.cs" />
+    <Compile Include="Ocr\Tesseract304Engine.cs" />
+    <Compile Include="Ocr\Tesseract302Engine.cs" />
     <Compile Include="Platform\ISystemCompat.cs" />
     <Compile Include="Platform\LinuxSystemCompat.cs" />
     <Compile Include="Platform\PlatformCompat.cs" />
@@ -284,7 +290,7 @@
     <Compile Include="Util\Log.cs" />
     <Compile Include="Util\NullLogger.cs" />
     <Compile Include="Ocr\IOcrEngine.cs" />
-    <Compile Include="Ocr\TesseractOcrEngine.cs" />
+    <Compile Include="Ocr\TesseractBaseEngine.cs" />
     <Compile Include="Ocr\OcrDependencyManager.cs" />
     <Compile Include="Ocr\OcrResult.cs" />
     <Compile Include="Ocr\OcrResultElement.cs" />
