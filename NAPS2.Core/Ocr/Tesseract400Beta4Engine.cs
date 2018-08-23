@@ -25,6 +25,8 @@ namespace NAPS2.Ocr
 
         public override bool IsUpgradable => false;
 
-        public override bool CanInstall => false;
+        public override bool CanInstall => true;
+
+        protected override DownloadInfo DownloadInfo => new DownloadInfo("tesseract.exe.gz", TesseractMirrors, 1.32, "0b0fd21cd886c04c60ed5c3f38b9120b408139b3", DownloadFormat.Gzip);
     }
 }
