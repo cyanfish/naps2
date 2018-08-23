@@ -23,9 +23,12 @@ namespace NAPS2.Ocr
 
         protected override string TesseractExePath => "tesseract";
 
-        protected override string TesseractDataPath => null;
-
-        protected override string TesseractPrefixPath => null;
+        protected override RunInfo TesseractRunInfo(OcrParams ocrParams) => new RunInfo
+        {
+            Arguments = "",
+            DataPath = null,
+            PrefixPath = null
+        };
 
         protected override string TesseractHocrExtension => ".hocr";
 

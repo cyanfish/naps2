@@ -40,22 +40,23 @@ namespace NAPS2.Ocr
             string tempHocrFilePathWithExt = tempHocrFilePath + TesseractHocrExtension;
             try
             {
+                var runInfo = TesseractRunInfo(ocrParams);
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = Path.Combine(TesseractBasePath, TesseractExePath),
-                    Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {ocrParams.LanguageCode} hocr",
+                    Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {ocrParams.LanguageCode} {runInfo.Arguments} hocr",
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
                 };
-                if (TesseractPrefixPath != null)
+                if (runInfo.PrefixPath != null)
                 {
-                    startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = Path.Combine(TesseractBasePath, TesseractPrefixPath);
+                    startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = Path.Combine(TesseractBasePath, runInfo.PrefixPath);
                 }
-                if (TesseractDataPath != null)
+                if (runInfo.DataPath != null)
                 {
-                    var tessdata = new DirectoryInfo(Path.Combine(TesseractBasePath, TesseractDataPath, "tessdata"));
+                    var tessdata = new DirectoryInfo(Path.Combine(TesseractBasePath, runInfo.DataPath));
                     EnsureHocrConfigExists(tessdata);
                 }
                 var tesseractProcess = Process.Start(startInfo);
@@ -177,9 +178,12 @@ namespace NAPS2.Ocr
 
         protected abstract string TesseractHocrExtension { get; }
 
-        protected virtual string TesseractDataPath => "";
-
-        protected virtual string TesseractPrefixPath => "";
+        protected virtual RunInfo TesseractRunInfo(OcrParams ocrParams) => new RunInfo
+        {
+            Arguments = "",
+            DataPath = "tessdata",
+            PrefixPath = ""
+        };
 
         protected virtual DownloadInfo DownloadInfo => null;
 
@@ -211,6 +215,15 @@ namespace NAPS2.Ocr
             new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-4.00b4/{0}/download"),
             new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-4.00b4/{0}")
         };
+
+        protected class RunInfo
+        {
+            public string Arguments { get; set; }
+
+            public string PrefixPath { get; set; }
+
+            public string DataPath { get; set; }
+        }
 
         protected class TesseractLanguage
         {
