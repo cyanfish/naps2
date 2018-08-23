@@ -6,10 +6,10 @@ namespace NAPS2.Dependencies
 {
     public class DownloadInfo
     {
-        public DownloadInfo(string fileName, List<(PlatformSupport, string)> urlFormats, double size, string sha1, DownloadFormat format)
+        public DownloadInfo(string fileName, List<DownloadMirror> mirrors, double size, string sha1, DownloadFormat format)
         {
             FileName = fileName;
-            Urls = urlFormats.Where(x => x.Item1.Validate()).Select(x => string.Format(x.Item2, fileName)).ToList();
+            Urls = mirrors.Where(x => x.IsSupported).Select(x => x.Url(fileName)).ToList();
             Size = size;
             Sha1 = sha1;
             Format = format;

@@ -35,7 +35,7 @@ namespace NAPS2.Automation
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOperationFactory operationFactory;
         private readonly AppConfigManager appConfigManager;
-        private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly OcrManager ocrManager;
         private readonly IFormFactory formFactory;
 
         private readonly AutomatedScanningOptions options;
@@ -45,7 +45,7 @@ namespace NAPS2.Automation
         private DateTime startTime;
         private List<string> actualOutputPaths;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager, OcrManager ocrManager, IFormFactory formFactory)
         {
             this.options = options;
             this.profileManager = profileManager;
@@ -59,7 +59,7 @@ namespace NAPS2.Automation
             this.imageSettingsContainer = imageSettingsContainer;
             this.operationFactory = operationFactory;
             this.appConfigManager = appConfigManager;
-            this.ocrDependencyManager = ocrDependencyManager;
+            this.ocrManager = ocrManager;
             this.formFactory = formFactory;
         }
 
@@ -149,29 +149,26 @@ namespace NAPS2.Automation
 
         private void InstallComponents()
         {
-            var availableComponents = new List<(DownloadInfo download, ExternalComponent component)>();
-            if (ocrDependencyManager.Components.Tesseract304.IsSupported)
+            var availableComponents = new List<ExternalComponent>();
+            var ocrEngine = ocrManager.EngineToInstall;
+            if (ocrEngine != null)
             {
-                availableComponents.Add((ocrDependencyManager.Downloads.Tesseract304, ocrDependencyManager.Components.Tesseract304));
+                availableComponents.Add(ocrEngine.Component);
+                availableComponents.AddRange(ocrEngine.LanguageComponents);
             }
-            else if (ocrDependencyManager.Components.Tesseract304Xp.IsSupported)
+            if (GhostscriptPdfRenderer.Dependencies.GhostscriptComponent.IsSupported)
             {
-                availableComponents.Add((ocrDependencyManager.Downloads.Tesseract304Xp, ocrDependencyManager.Components.Tesseract304Xp));
+                availableComponents.Add(GhostscriptPdfRenderer.Dependencies.GhostscriptComponent);
             }
-            foreach (var lang in ocrDependencyManager.Languages.Keys)
-            {
-                availableComponents.Add((ocrDependencyManager.Downloads.Tesseract304Languages[lang], ocrDependencyManager.Components.Tesseract304Languages[lang]));
-            }
-            availableComponents.Add((GhostscriptPdfRenderer.Dependencies.GhostscriptDownload, GhostscriptPdfRenderer.Dependencies.GhostscriptComponent));
 
-            var componentDict = availableComponents.ToDictionary(x => x.component.Id.ToLowerInvariant());
+            var componentDict = availableComponents.ToDictionary(x => x.Id.ToLowerInvariant());
             var installId = options.Install.ToLowerInvariant();
             if (!componentDict.TryGetValue(installId, out var toInstall))
             {
                 Console.WriteLine(ConsoleResources.ComponentNotAvailable);
                 return;
             }
-            if (toInstall.component.IsInstalled)
+            if (toInstall.IsInstalled)
             {
                 Console.WriteLine(ConsoleResources.ComponentAlreadyInstalled);
                 return;
@@ -179,18 +176,18 @@ namespace NAPS2.Automation
             // Using a form here is not ideal (since this is supposed to be a console app), but good enough for now
             // Especially considering wia/twain often show forms anyway
             var progressForm = formFactory.Create<FDownloadProgress>();
-            if (toInstall.component.Id.StartsWith("ocr-") && componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.component.IsInstalled)
+            if (toInstall.Id.StartsWith("ocr-", StringComparison.InvariantCulture) && componentDict.TryGetValue("ocr", out var ocrExe) && !ocrExe.IsInstalled)
             {
-                progressForm.QueueFile(ocrExe.download, ocrExe.component.Install);
+                progressForm.QueueFile(ocrExe);
                 if (options.Verbose)
                 {
-                    Console.WriteLine(ConsoleResources.Installing, ocrExe.component.Id);
+                    Console.WriteLine(ConsoleResources.Installing, ocrExe.Id);
                 }
             }
-            progressForm.QueueFile(toInstall.download, toInstall.component.Install);
+            progressForm.QueueFile(toInstall);
             if (options.Verbose)
             {
-                Console.WriteLine(ConsoleResources.Installing, toInstall.component.Id);
+                Console.WriteLine(ConsoleResources.Installing, toInstall.Id);
             }
             progressForm.ShowDialog();
         }
@@ -526,7 +523,8 @@ namespace NAPS2.Automation
             var pdfSettings = new PdfSettings { Metadata = metadata, Encryption = encryption, Compat = compat };
 
             bool useOcr = !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr || appConfigManager.Config.OcrState == OcrState.Enabled);
-            string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrDependencyManager.DefaultLanguageCode) : null;
+            string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrManager.DefaultParams?.LanguageCode) : null;
+            var ocrParams = new OcrParams(ocrLanguageCode, ocrManager.DefaultParams?.Mode ?? OcrMode.Default);
 
             int scanIndex = 0;
             foreach (var fileContents in scanList)
@@ -543,7 +541,7 @@ namespace NAPS2.Automation
                 };
                 int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
                 string actualPath = fileNamePlaceholders.SubstitutePlaceholders(path, startTime, true, scanIndex++, scanList.Count > 1 ? digits : 0);
-                op.Start(actualPath, startTime, fileContents, pdfSettings, ocrLanguageCode, email);
+                op.Start(actualPath, startTime, fileContents, pdfSettings, ocrParams, email);
                 op.WaitUntilFinished();
                 if (!op.Status.Success)
                 {

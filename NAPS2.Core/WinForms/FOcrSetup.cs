@@ -9,12 +9,12 @@ namespace NAPS2.WinForms
 {
     public partial class FOcrSetup : FormBase
     {
-        private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly OcrManager ocrManager;
         private readonly AppConfigManager appConfigManager;
 
-        public FOcrSetup(OcrDependencyManager ocrDependencyManager, AppConfigManager appConfigManager)
+        public FOcrSetup(OcrManager ocrManager, AppConfigManager appConfigManager)
         {
-            this.ocrDependencyManager = ocrDependencyManager;
+            this.ocrManager = ocrManager;
             this.appConfigManager = appConfigManager;
             InitializeComponent();
         }
@@ -65,7 +65,7 @@ namespace NAPS2.WinForms
 
         private void LoadLanguages()
         {
-            var languages = ocrDependencyManager.InstalledTesseractLanguages
+            var languages = ocrManager.ActiveEngine?.InstalledLanguages
                 .OrderBy(x => x.Name)
                 .ToList();
             comboLanguages.DataSource = languages;

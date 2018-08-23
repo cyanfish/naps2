@@ -16,7 +16,7 @@ namespace NAPS2.Ocr
     {
         private const int DEFAULT_TIMEOUT = 120 * 1000;
         private const int CHECK_INTERVAL = 500;
-        
+
         private readonly AppConfigManager appConfigManager;
 
         protected TesseractBaseEngine(AppConfigManager appConfigManager)
@@ -42,16 +42,22 @@ namespace NAPS2.Ocr
             {
                 var startInfo = new ProcessStartInfo
                 {
-                    FileName = TesseractExePath,
+                    FileName = Path.Combine(TesseractBasePath, TesseractExePath),
                     Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {ocrParams.LanguageCode} hocr",
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
                 };
-                startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = TesseractPrefixPath;
-                var tessdata = new DirectoryInfo(Path.Combine(TesseractDataPath, "tessdata"));
-                EnsureHocrConfigExists(tessdata);
+                if (TesseractPrefixPath != null)
+                {
+                    startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = Path.Combine(TesseractBasePath, TesseractPrefixPath);
+                }
+                if (TesseractDataPath != null)
+                {
+                    var tessdata = new DirectoryInfo(Path.Combine(TesseractBasePath, TesseractDataPath, "tessdata"));
+                    EnsureHocrConfigExists(tessdata);
+                }
                 var tesseractProcess = Process.Start(startInfo);
                 if (tesseractProcess == null)
                 {
@@ -165,31 +171,46 @@ namespace NAPS2.Ocr
             return bounds;
         }
 
+        protected abstract string TesseractBasePath { get; }
+
         protected abstract string TesseractExePath { get; }
 
         protected abstract string TesseractHocrExtension { get; }
 
-        protected abstract string TesseractDataPath { get; }
+        protected virtual string TesseractDataPath => "";
 
-        protected abstract string TesseractPrefixPath { get; }
+        protected virtual string TesseractPrefixPath => "";
 
-        public virtual bool IsSupported => PlatformSupport.Validate();
+        protected virtual DownloadInfo DownloadInfo => null;
 
         protected abstract PlatformSupport PlatformSupport { get; }
 
-        public abstract bool IsInstalled { get; }
+        public virtual bool IsSupported => PlatformSupport.Validate();
+
+        public virtual bool IsInstalled => Component.IsInstalled;
 
         public abstract bool IsUpgradable { get; }
 
         public abstract bool CanInstall { get; }
 
-        public abstract IEnumerable<Language> InstalledLanguages { get; }
+        public virtual IEnumerable<Language> InstalledLanguages => LanguageComponents.Where(x => x.IsInstalled).Select(x => Languages[x.Id]);
 
-        public abstract ExternalComponent Component { get; }
+        public virtual IEnumerable<Language> NotInstalledLanguages => LanguageComponents.Where(x => !x.IsInstalled).Select(x => Languages[x.Id]);
 
-        public abstract IEnumerable<ExternalComponent> LanguageComponents { get; }
+        public virtual ExternalComponent Component => new ExternalComponent("ocr", Path.Combine(TesseractBasePath, TesseractExePath), PlatformSupport, DownloadInfo);
 
-        public abstract IEnumerable<OcrMode> SupportedModes { get; }
+        public virtual IEnumerable<ExternalComponent> LanguageComponents => TesseractLanguageData.Select(x =>
+            new ExternalComponent($"ocr-{x.Code}",Path.Combine(TesseractBasePath, "tessdata", x.Filename.Replace(".gz", "")), PlatformSupport,
+                CanInstall ? new DownloadInfo(x.Filename, TesseractMirrors, x.Size, x.Sha1, DownloadFormat.Gzip) : null));
+
+        public virtual IEnumerable<OcrMode> SupportedModes => null;
+
+        protected static readonly List<DownloadMirror> TesseractMirrors = new List<DownloadMirror>
+        {
+            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://github.com/cyanfish/naps2-components/releases/download/tessseract-3.04/{0}"),
+            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-3.04/{0}/download"),
+            new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-3.04/{0}")
+        };
 
         protected class TesseractLanguage
         {
@@ -206,11 +227,11 @@ namespace NAPS2.Ocr
             public bool RTL { get; set; }
         }
 
-        protected readonly IDictionary<string, Language> Languages = LanguageData.ToDictionary(x => x.Code, x => new Language(x.Code, x.LangName, x.RTL));
+        protected readonly IDictionary<string, Language> Languages = TesseractLanguageData.ToDictionary(x => $"ocr-{x.Code}", x => new Language(x.Code, x.LangName, x.RTL));
 
         #region Language Data (auto-generated)
 
-        protected static readonly TesseractLanguage[] LanguageData =
+        protected static readonly TesseractLanguage[] TesseractLanguageData =
         {
             new TesseractLanguage { Filename = "afr.traineddata.gz", Code = "afr", LangName = "Afrikaans", Size = 1.93, Sha1 = "a669186130bf1fc6c78226ac868c82b70a44c70b" },
             new TesseractLanguage { Filename = "amh.traineddata.gz", Code = "amh", LangName = "Amharic", Size = 1.03, Sha1 = "1153cbbac7306d42e72ca639ff3f36f45dcb15a2" },

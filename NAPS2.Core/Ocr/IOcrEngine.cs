@@ -21,6 +21,8 @@ namespace NAPS2.Ocr
 
         IEnumerable<Language> InstalledLanguages { get; }
 
+        IEnumerable<Language> NotInstalledLanguages { get; }
+
         ExternalComponent Component { get; }
 
         IEnumerable<ExternalComponent> LanguageComponents { get; }

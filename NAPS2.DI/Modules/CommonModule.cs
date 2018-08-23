@@ -36,7 +36,6 @@ namespace NAPS2.DI.Modules
             // Export
             Bind<IPdfExporter>().To<PdfSharpExporter>();
             Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
-            Bind<IOcrEngine>().To<TesseractOcrEngine>();
             Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
 
             // Scan

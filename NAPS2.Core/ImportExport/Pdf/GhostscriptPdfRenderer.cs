@@ -74,22 +74,22 @@ namespace NAPS2.ImportExport.Pdf
 
         public static class Dependencies
         {
-            private static readonly List<(PlatformSupport, string)> UrlFormats = new List<(PlatformSupport, string)>
+            private static readonly List<DownloadMirror> Mirrors = new List<DownloadMirror>
             {
-                (PlatformSupport.ModernWindows, @"https://github.com/cyanfish/naps2-components/releases/download/gs-9.21/{0}"),
-                (PlatformSupport.ModernWindows, @"https://sourceforge.net/projects/naps2/files/components/gs-9.21/{0}/download"),
-                (PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/gs-9.21/{0}")
+                new DownloadMirror(PlatformSupport.ModernWindows, @"https://github.com/cyanfish/naps2-components/releases/download/gs-9.21/{0}"),
+                new DownloadMirror(PlatformSupport.ModernWindows, @"https://sourceforge.net/projects/naps2/files/components/gs-9.21/{0}/download"),
+                new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/gs-9.21/{0}")
             };
 
-            private static readonly DownloadInfo GhostscriptDownload32 = new DownloadInfo("gsdll32.dll.gz", UrlFormats, 10.39, "fd7446a05efaf467f5f6a7123c525b0fc7bde711", DownloadFormat.Gzip);
+            private static readonly DownloadInfo GhostscriptDownload32 = new DownloadInfo("gsdll32.dll.gz", Mirrors, 10.39, "fd7446a05efaf467f5f6a7123c525b0fc7bde711", DownloadFormat.Gzip);
 
-            private static readonly DownloadInfo GhostscriptDownload64 = new DownloadInfo("gsdll64.dll.gz", UrlFormats, 10.78, "de173f9020c21784727f8c749190d610e4856a0c", DownloadFormat.Gzip);
+            private static readonly DownloadInfo GhostscriptDownload64 = new DownloadInfo("gsdll64.dll.gz", Mirrors, 10.78, "de173f9020c21784727f8c749190d610e4856a0c", DownloadFormat.Gzip);
 
             public static DownloadInfo GhostscriptDownload => Environment.Is64BitProcess ? GhostscriptDownload64 : GhostscriptDownload32;
 
-            private static readonly ExternalComponent GhostscriptComponent32 = new ExternalComponent("generic-import", Path.Combine("gs-9.21", "gsdll32.dll"), PlatformSupport.Windows);
+            private static readonly ExternalComponent GhostscriptComponent32 = new ExternalComponent("generic-import", Path.Combine(ExternalComponent.BasePath, "gs-9.21", "gsdll32.dll"), PlatformSupport.Windows);
 
-            private static readonly ExternalComponent GhostscriptComponent64 = new ExternalComponent("generic-import", Path.Combine("gs-9.21", "gsdll64.dll"), PlatformSupport.Windows);
+            private static readonly ExternalComponent GhostscriptComponent64 = new ExternalComponent("generic-import", Path.Combine(ExternalComponent.BasePath, "gs-9.21", "gsdll64.dll"), PlatformSupport.Windows);
 
             public static ExternalComponent GhostscriptComponent => Environment.Is64BitProcess ? GhostscriptComponent64 : GhostscriptComponent32;
         }

@@ -18,6 +18,10 @@ namespace NAPS2.Ocr
         {
             this.userConfigManager = userConfigManager;
             this.appConfigManager = appConfigManager;
+
+            ExternalComponent.InitBasePath(appConfigManager);
+
+            // Order is important here. Newer/preferred first
             engines = new List<IOcrEngine>
             {
                 t400B4,
@@ -44,10 +48,34 @@ namespace NAPS2.Ocr
 
         public IOcrEngine ActiveEngine => engines.FirstOrDefault(x => x.IsSupported && x.IsInstalled && x.InstalledLanguages.Any());
 
+        public IOcrEngine InstalledEngine => engines.FirstOrDefault(x => x.IsInstalled && x.InstalledLanguages.Any());
+
+        public IOcrEngine EngineToInstall => engines.FirstOrDefault(x => x.IsSupported && x.CanInstall);
+
         public OcrParams DefaultParams
         {
             get
             {
+                OcrParams AppLevelParams()
+                {
+                    if (!string.IsNullOrWhiteSpace(appConfigManager.Config.OcrDefaultLanguage))
+                    {
+                        return new OcrParams(appConfigManager.Config.OcrDefaultLanguage, appConfigManager.Config.OcrDefaultMode);
+                    }
+                    return null;
+                }
+
+                OcrParams UserLevelParams()
+                {
+                    if (!string.IsNullOrWhiteSpace(userConfigManager.Config.OcrLanguageCode))
+                    {
+                        return new OcrParams(userConfigManager.Config.OcrLanguageCode, userConfigManager.Config.OcrMode);
+                    }
+                    return null;
+                }
+
+                OcrParams ArbitraryParams() => new OcrParams(ActiveEngine?.InstalledLanguages.OrderBy(x => x.Name).Select(x => x.Code).FirstOrDefault(), OcrMode.Default);
+
                 // Prioritize app-level overrides
                 if (appConfigManager.Config.OcrState == OcrState.Disabled)
                 {
@@ -55,34 +83,12 @@ namespace NAPS2.Ocr
                 }
                 if (appConfigManager.Config.OcrState == OcrState.Enabled)
                 {
-                    // Prioritize the app-level language
-                    if (!string.IsNullOrWhiteSpace(appConfigManager.Config.OcrDefaultLanguage))
-                    {
-                        return new OcrParams(appConfigManager.Config.OcrDefaultLanguage, appConfigManager.Config.OcrDefaultMode);
-                    }
-                    // Fall back to the user-selected language
-                    if (!string.IsNullOrWhiteSpace(userConfigManager.Config.OcrLanguageCode))
-                    {
-                        return new OcrParams(userConfigManager.Config.OcrLanguageCode, userConfigManager.Config.OcrMode);
-                    }
-                    // Fall back to an arbitrary installed language (probably there is only one)
-                    return new OcrParams(ActiveEngine?.InstalledLanguages.OrderBy(x => x.Name).Select(x => x.Code).FirstOrDefault(), OcrMode.Default);
+                    return AppLevelParams() ?? UserLevelParams() ?? ArbitraryParams();
                 }
                 // No overrides, so prioritize the user settings
                 if (userConfigManager.Config.EnableOcr)
                 {
-                    // Prioritize the user-selected language
-                    if (!string.IsNullOrWhiteSpace(userConfigManager.Config.OcrLanguageCode))
-                    {
-                        return new OcrParams(userConfigManager.Config.OcrLanguageCode, userConfigManager.Config.OcrMode);
-                    }
-                    // Fall back to the app-level language
-                    if (!string.IsNullOrWhiteSpace(appConfigManager.Config.OcrDefaultLanguage))
-                    {
-                        return new OcrParams(appConfigManager.Config.OcrDefaultLanguage, appConfigManager.Config.OcrDefaultMode);
-                    }
-                    // Fall back to an arbitrary installed language (probably there is only one)
-                    return new OcrParams(ActiveEngine?.InstalledLanguages.OrderBy(x => x.Name).Select(x => x.Code).FirstOrDefault(), OcrMode.Default);
+                    return UserLevelParams() ?? AppLevelParams() ?? ArbitraryParams();
                 }
                 return null;
             }

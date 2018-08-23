@@ -127,6 +127,7 @@
     <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
+    <Compile Include="Dependencies\DownloadMirror.cs" />
     <Compile Include="Dependencies\ExternalSystemComponent.cs" />
     <Compile Include="Dependencies\IExternalComponent.cs" />
     <Compile Include="Ocr\OcrManager.cs" />
@@ -293,7 +294,6 @@
     <Compile Include="Util\NullLogger.cs" />
     <Compile Include="Ocr\IOcrEngine.cs" />
     <Compile Include="Ocr\TesseractBaseEngine.cs" />
-    <Compile Include="Ocr\OcrDependencyManager.cs" />
     <Compile Include="Ocr\OcrResult.cs" />
     <Compile Include="Ocr\OcrResultElement.cs" />
     <Compile Include="Scan\Exceptions\NoFeederSupportException.cs" />
