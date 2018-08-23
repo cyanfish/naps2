@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Images;
@@ -37,6 +38,8 @@ namespace NAPS2.Config
         public bool EnableOcr { get; set; }
 
         public string OcrLanguageCode { get; set; }
+
+        public OcrMode OcrMode { get; set; }
 
         public string LastImageExt { get; set; }
 

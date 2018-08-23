@@ -20,18 +20,18 @@ namespace NAPS2.ImportExport
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly OcrManager ocrManager;
         private readonly IErrorOutput errorOutput;
         private readonly AppConfigManager appConfigManager;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly DialogHelper dialogHelper;
 
-        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper)
+        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper)
         {
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.ocrDependencyManager = ocrDependencyManager;
+            this.ocrManager = ocrManager;
             this.errorOutput = errorOutput;
             this.appConfigManager = appConfigManager;
             this.fileNamePlaceholders = fileNamePlaceholders;
@@ -98,7 +98,7 @@ namespace NAPS2.ImportExport
                 }
                 var op = operationFactory.Create<SavePdfOperation>();
                 form.Operation = op;
-                if (op.Start(subPath, now, images, pdfSettingsContainer.PdfSettings, ocrDependencyManager.DefaultLanguageCode, false))
+                if (op.Start(subPath, now, images, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, false))
                 {
                     form.ShowDialog();
                 }

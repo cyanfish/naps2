@@ -9,7 +9,7 @@ namespace NAPS2.Ocr
     {
         bool CanProcess(string langCode);
 
-        OcrResult ProcessImage(string imagePath, string langCode, Func<bool> cancelCallback);
+        OcrResult ProcessImage(string imagePath, OcrParams ocrParams, Func<bool> cancelCallback);
 
         bool IsSupported { get; }
 
@@ -25,6 +25,6 @@ namespace NAPS2.Ocr
 
         IEnumerable<ExternalComponent> LanguageComponents { get; }
 
-
+        IEnumerable<OcrMode> SupportedModes { get; }
     }
 }

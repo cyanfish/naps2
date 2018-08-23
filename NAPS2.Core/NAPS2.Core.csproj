@@ -130,6 +130,8 @@
     <Compile Include="Dependencies\ExternalSystemComponent.cs" />
     <Compile Include="Dependencies\IExternalComponent.cs" />
     <Compile Include="Ocr\OcrManager.cs" />
+    <Compile Include="Ocr\OcrMode.cs" />
+    <Compile Include="Ocr\OcrParams.cs" />
     <Compile Include="Ocr\Tesseract400Beta4Engine.cs" />
     <Compile Include="Ocr\TesseractSystemEngine.cs" />
     <Compile Include="Ocr\Tesseract304XpEngine.cs" />

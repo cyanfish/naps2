@@ -21,16 +21,19 @@ namespace NAPS2.Dependencies
 
         private readonly PlatformSupport platformSupport;
         
-        public ExternalComponent(string id, string path, PlatformSupport platformSupport = null)
+        public ExternalComponent(string id, string path, PlatformSupport platformSupport = null, DownloadInfo downloadInfo = null)
         {
             Id = id;
-            this.platformSupport = platformSupport;
             Path = System.IO.Path.Combine(BasePath, path);
+            this.platformSupport = platformSupport;
+            DownloadInfo = downloadInfo;
         }
 
         public string Id { get; }
 
         public string Path { get; }
+
+        public DownloadInfo DownloadInfo { get; }
 
         public string DataPath => System.IO.Path.GetDirectoryName(Path);
 

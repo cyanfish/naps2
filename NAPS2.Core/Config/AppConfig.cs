@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Ocr;
 using NAPS2.Scan;
 
 namespace NAPS2.Config
@@ -66,6 +67,8 @@ namespace NAPS2.Config
         public OcrState OcrState { get; set; }
         
         public string OcrDefaultLanguage { get; set; }
+
+        public OcrMode OcrDefaultMode { get; set; }
 
         public PdfCompat ForcePdfCompat { get; set; } 
 

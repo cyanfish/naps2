@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
+using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -35,7 +36,7 @@ namespace NAPS2.ImportExport.Pdf
             AllowCancel = true;
         }
 
-        public bool Start(string fileName, DateTime dateTime, ICollection<ScannedImage> images, PdfSettings pdfSettings, string ocrLanguageCode, bool email)
+        public bool Start(string fileName, DateTime dateTime, ICollection<ScannedImage> images, PdfSettings pdfSettings, OcrParams ocrParams, bool email)
         {
             ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
             var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
@@ -68,7 +69,7 @@ namespace NAPS2.ImportExport.Pdf
                         SubFileName = subFileName,
                         Snapshots = snapshots,
                         PdfSettings = pdfSettings,
-                        OcrLanguageCode = ocrLanguageCode
+                        OcrParams = ocrParams
                     });
                 }
                 catch (UnauthorizedAccessException ex)
@@ -109,7 +110,7 @@ namespace NAPS2.ImportExport.Pdf
         protected internal override bool DoWorkInternal(WorkArgs args)
         {
             var a = (SavePdfWorkArgs)args;
-            return pdfExporter.Export(a.SubFileName, a.Snapshots, a.PdfSettings, a.OcrLanguageCode, OnProgress);
+            return pdfExporter.Export(a.SubFileName, a.Snapshots, a.PdfSettings, a.OcrParams, OnProgress);
         }
 
         public override void WaitUntilFinished()
@@ -123,7 +124,7 @@ namespace NAPS2.ImportExport.Pdf
             public string SubFileName { get; set; }
             public List<ScannedImage.Snapshot> Snapshots { get; set; }
             public PdfSettings PdfSettings { get; set; }
-            public string OcrLanguageCode { get; set; }
+            public OcrParams OcrParams { get; set; }
         }
     }
 }

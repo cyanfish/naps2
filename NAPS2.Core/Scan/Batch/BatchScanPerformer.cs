@@ -26,10 +26,10 @@ namespace NAPS2.Scan.Batch
         private readonly IPdfExporter pdfExporter;
         private readonly IOperationFactory operationFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly OcrDependencyManager ocrDependencyManager;
+        private readonly OcrManager ocrManager;
         private readonly IFormFactory formFactory;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
+        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
         {
             this.scanPerformer = scanPerformer;
             this.profileManager = profileManager;
@@ -37,13 +37,13 @@ namespace NAPS2.Scan.Batch
             this.pdfExporter = pdfExporter;
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.ocrDependencyManager = ocrDependencyManager;
+            this.ocrManager = ocrManager;
             this.formFactory = formFactory;
         }
 
         public void PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
-            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, ocrDependencyManager, formFactory)
+            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, ocrManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -61,14 +61,14 @@ namespace NAPS2.Scan.Batch
             private readonly IPdfExporter pdfExporter;
             private readonly IOperationFactory operationFactory;
             private readonly PdfSettingsContainer pdfSettingsContainer;
-            private readonly OcrDependencyManager ocrDependencyManager;
+            private readonly OcrManager ocrManager;
             private readonly IFormFactory formFactory;
 
             private ScanProfile profile;
             private ScanParams scanParams;
             private List<List<ScannedImage>> scans;
 
-            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrDependencyManager ocrDependencyManager, IFormFactory formFactory)
+            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
             {
                 this.scanPerformer = scanPerformer;
                 this.profileManager = profileManager;
@@ -76,7 +76,7 @@ namespace NAPS2.Scan.Batch
                 this.pdfExporter = pdfExporter;
                 this.operationFactory = operationFactory;
                 this.pdfSettingsContainer = pdfSettingsContainer;
-                this.ocrDependencyManager = ocrDependencyManager;
+                this.ocrManager = ocrManager;
                 this.formFactory = formFactory;
             }
 
@@ -291,7 +291,7 @@ namespace NAPS2.Scan.Batch
                     var snapshots = images.Select(x => x.Preserve()).ToList();
                     try
                     {
-                        pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, ocrDependencyManager.DefaultLanguageCode, (j, k) => true);
+                        pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, (j, k) => true);
                     }
                     finally
                     {

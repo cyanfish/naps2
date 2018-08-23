@@ -36,7 +36,7 @@ namespace NAPS2.ImportExport.Pdf
             this.appConfigManager = appConfigManager;
         }
 
-        public bool Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, string ocrLanguageCode, ProgressHandler progressCallback)
+        public bool Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback)
         {
             var forced = appConfigManager.Config.ForcePdfCompat;
             var compat = forced == PdfCompat.Default ? settings.Compat : forced;
@@ -71,20 +71,20 @@ namespace NAPS2.ImportExport.Pdf
             }
             
             bool useOcr = false;
-            if (ocrLanguageCode != null)
+            if (ocrParams?.LanguageCode != null)
             {
-                if (ocrEngine.CanProcess(ocrLanguageCode))
+                if (ocrEngine.CanProcess(ocrParams.LanguageCode))
                 {
                     useOcr = true;
                 }
                 else
                 {
-                    Log.Error("OCR files not available for '{0}'.", ocrLanguageCode);
+                    Log.Error("OCR files not available for '{0}'.", ocrParams.LanguageCode);
                 }
             }
             
             bool result = useOcr
-                ? BuildDocumentWithOcr(progressCallback, document, compat, snapshots, ocrLanguageCode)
+                ? BuildDocumentWithOcr(progressCallback, document, compat, snapshots, ocrParams)
                 : BuildDocumentWithoutOcr(progressCallback, document, compat, snapshots);
             if (!result)
             {
@@ -141,7 +141,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, string ocrLanguageCode)
+        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrParams ocrParams)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
             // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
@@ -235,7 +235,7 @@ namespace NAPS2.ImportExport.Pdf
                     }
                     
                     // ReSharper disable once AccessToModifiedClosure
-                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrLanguageCode, () => !progressCallback(progress, snapshots.Count));
+                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrParams, () => !progressCallback(progress, snapshots.Count));
                 }
                 finally
                 {
