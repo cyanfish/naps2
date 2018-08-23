@@ -1072,7 +1072,7 @@ namespace NAPS2.WinForms
             }
             else if (ocrManager.IsReady)
             {
-                if (!ocrManager.CanUpgrade && !appConfigManager.Config.NoUpdatePrompt)
+                if (ocrManager.CanUpgrade && !appConfigManager.Config.NoUpdatePrompt)
                 {
                     MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FormFactory.Create<FOcrLanguageDownload>().ShowDialog();

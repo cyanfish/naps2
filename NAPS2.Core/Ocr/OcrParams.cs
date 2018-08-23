@@ -6,6 +6,10 @@ namespace NAPS2.Ocr
 {
     public class OcrParams
     {
+        public OcrParams()
+        {
+        }
+
         public OcrParams(string langCode, OcrMode mode)
         {
             LanguageCode = langCode;

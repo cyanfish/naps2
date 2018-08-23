@@ -25,13 +25,13 @@ namespace NAPS2.ImportExport.Pdf
             GlobalFontSettings.FontResolver = new FontResolver();
         }
 
-        private readonly IOcrEngine ocrEngine;
+        private readonly OcrManager ocrManager;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly AppConfigManager appConfigManager;
 
-        public PdfSharpExporter(IOcrEngine ocrEngine, ScannedImageRenderer scannedImageRenderer, AppConfigManager appConfigManager)
+        public PdfSharpExporter(OcrManager ocrManager, ScannedImageRenderer scannedImageRenderer, AppConfigManager appConfigManager)
         {
-            this.ocrEngine = ocrEngine;
+            this.ocrManager = ocrManager;
             this.scannedImageRenderer = scannedImageRenderer;
             this.appConfigManager = appConfigManager;
         }
@@ -69,22 +69,27 @@ namespace NAPS2.ImportExport.Pdf
                 document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
                 document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
             }
-            
-            bool useOcr = false;
+
+            IOcrEngine ocrEngine = null;
             if (ocrParams?.LanguageCode != null)
             {
-                if (ocrEngine.CanProcess(ocrParams.LanguageCode))
+                var activeEngine = ocrManager.ActiveEngine;
+                if (activeEngine == null)
                 {
-                    useOcr = true;
+                    Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
                 }
-                else
+                else if (!activeEngine.CanProcess(ocrParams.LanguageCode))
                 {
                     Log.Error("OCR files not available for '{0}'.", ocrParams.LanguageCode);
                 }
+                else
+                {
+                    ocrEngine = activeEngine;
+                }
             }
             
-            bool result = useOcr
-                ? BuildDocumentWithOcr(progressCallback, document, compat, snapshots, ocrParams)
+            bool result = ocrEngine != null
+                ? BuildDocumentWithOcr(progressCallback, document, compat, snapshots, ocrEngine, ocrParams)
                 : BuildDocumentWithoutOcr(progressCallback, document, compat, snapshots);
             if (!result)
             {
@@ -141,7 +146,7 @@ namespace NAPS2.ImportExport.Pdf
             return true;
         }
 
-        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, OcrParams ocrParams)
+        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, IOcrEngine ocrEngine, OcrParams ocrParams)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
             // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
