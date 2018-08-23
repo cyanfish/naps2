@@ -8,7 +8,7 @@ namespace NAPS2.Automation
 {
     public class ConsoleComponentInstallPrompt : IComponentInstallPrompt
     {
-        public bool PromptToInstall(DownloadInfo download, ExternalComponent component, string promptText)
+        public bool PromptToInstall(ExternalComponent component, string promptText)
         {
             Console.WriteLine(ConsoleResources.ComponentNeeded, component.Id);
             return false;

@@ -128,8 +128,6 @@
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
     <Compile Include="Dependencies\DownloadMirror.cs" />
-    <Compile Include="Dependencies\ExternalSystemComponent.cs" />
-    <Compile Include="Dependencies\IExternalComponent.cs" />
     <Compile Include="Ocr\OcrManager.cs" />
     <Compile Include="Ocr\OcrMode.cs" />
     <Compile Include="Ocr\OcrParams.cs" />

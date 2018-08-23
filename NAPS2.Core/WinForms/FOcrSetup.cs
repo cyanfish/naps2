@@ -69,6 +69,8 @@ namespace NAPS2.WinForms
                 .OrderBy(x => x.Name)
                 .ToList();
             comboLanguages.DataSource = languages;
+
+            linkGetLanguages.Visible = ocrManager.EngineToInstall != null;
         }
 
         private void UpdateView()

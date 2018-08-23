@@ -227,7 +227,7 @@ namespace NAPS2.Ocr
             public bool RTL { get; set; }
         }
 
-        protected readonly IDictionary<string, Language> Languages = TesseractLanguageData.ToDictionary(x => $"ocr-{x.Code}", x => new Language(x.Code, x.LangName, x.RTL));
+        protected readonly Dictionary<string, Language> Languages = TesseractLanguageData.ToDictionary(x => $"ocr-{x.Code}", x => new Language(x.Code, x.LangName, x.RTL));
 
         #region Language Data (auto-generated)
 

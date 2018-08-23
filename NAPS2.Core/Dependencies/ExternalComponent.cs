@@ -7,7 +7,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Dependencies
 {
-    public class ExternalComponent : IExternalComponent
+    public class ExternalComponent
     {
         public static string BasePath { get; set; }
 
@@ -21,7 +21,7 @@ namespace NAPS2.Dependencies
 
         private readonly PlatformSupport platformSupport;
         
-        public ExternalComponent(string id, string path, PlatformSupport platformSupport = null, DownloadInfo downloadInfo = null)
+        public ExternalComponent(string id, string path, PlatformSupport platformSupport, DownloadInfo downloadInfo)
         {
             Id = id;
             Path = System.IO.Path.Combine(BasePath, path);
@@ -34,8 +34,6 @@ namespace NAPS2.Dependencies
         public string Path { get; }
 
         public DownloadInfo DownloadInfo { get; }
-
-        public string DataPath => System.IO.Path.GetDirectoryName(Path);
 
         public bool IsInstalled => File.Exists(Path);
 
