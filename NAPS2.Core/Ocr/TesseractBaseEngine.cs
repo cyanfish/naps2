@@ -237,7 +237,7 @@ namespace NAPS2.Ocr
             new TesseractLanguage { Filename = "amh.traineddata.gz", Code = "amh", LangName = "Amharic", Size = 1.03, Sha1 = "1153cbbac7306d42e72ca639ff3f36f45dcb15a2" },
             new TesseractLanguage { Filename = "ara.traineddata.gz", Code = "ara", LangName = "Arabic", Size = 1.62, Sha1 = "87b76c73fdcc4c54ec1f03d83b6df665430c2b06", RTL = true },
             new TesseractLanguage { Filename = "asm.traineddata.gz", Code = "asm", LangName = "Assamese", Size = 6.56, Sha1 = "223900790d10f638b7dca2a8b8e8a15295d1f19c" },
-            new TesseractLanguage { Filename = "aze.traineddata.gz", Code = "aze", LangName = "Azerbaijani", Size = 2.54, Sha1 = "01607e49fe6ba6604f65d9b57c77b403ab74040a" },
+            new TesseractLanguage { Filename = "aze.traineddata.gz", Code = "aze", LangName = "Azerbaijani", Size = 2.54, Sha1 = "01607e49fe6ba6604f65d9b57c77b403ab74040a", RTL = true },
             new TesseractLanguage { Filename = "aze_cyrl.traineddata.gz", Code = "aze_cyrl", LangName = "Azerbaijani (Cyrillic)", Size = 0.97, Sha1 = "f9c9b153e8825bb92d9c8005342ac3d5ea81d0bc" },
             new TesseractLanguage { Filename = "bel.traineddata.gz", Code = "bel", LangName = "Belarusian", Size = 2.43, Sha1 = "3ac0935dd22f4f2730286d5cb127324d27718410" },
             new TesseractLanguage { Filename = "ben.traineddata.gz", Code = "ben", LangName = "Bengali", Size = 6.45, Sha1 = "479674b283db6e84fdfb17386056f2e9a5b41b9c" },
