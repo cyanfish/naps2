@@ -37,35 +37,9 @@ namespace NAPS2.WinForms
             }
         }
 
-        public int ImageWidth
-        {
-            get
-            {
-                if (image != null)
-                {
-                    return image.Width;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
+        public int ImageWidth => image?.Width ?? 0;
 
-        public int ImageHeight
-        {
-            get
-            {
-                if (image != null)
-                {
-                    return image.Height;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
+        public int ImageHeight => image?.Height ?? 0;
 
         public double Zoom
         {
@@ -74,8 +48,12 @@ namespace NAPS2.WinForms
                 if (image != null)
                 {
                     xzoom = Math.Max(Math.Min(value, 1000), 10);
-                    double displayWidth = image.Width * ((double)xzoom / 100);
-                    double displayHeight = image.Height * ((double)xzoom / 100) * (image.HorizontalResolution / (double)image.VerticalResolution);
+                    double displayWidth = image.Width * (xzoom / 100);
+                    double displayHeight = image.Height * (xzoom / 100);
+                    if (image.HorizontalResolution > 0 && image.VerticalResolution > 0)
+                    {
+                        displayHeight *= image.HorizontalResolution / (double)image.VerticalResolution;
+                    }
                     pbox.Image = image;
                     pbox.Width = (int)displayWidth;
                     pbox.Height = (int)displayHeight;
