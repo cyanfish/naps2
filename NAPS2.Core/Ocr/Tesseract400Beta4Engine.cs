@@ -30,7 +30,7 @@ namespace NAPS2.Ocr
 
             LanguageComponents = LanguageData.Data.Select(x =>
                 new MultiFileExternalComponent($"ocr-{x.Code}", TesseractBasePath, new[] { $"best/{x.Code}.traineddata", $"fast/{x.Code}.traineddata" },
-                    CanInstall ? new DownloadInfo(x.Filename, Mirrors, x.Size, x.Sha1, DownloadFormat.Zip) : null));
+                    new DownloadInfo(x.Filename, Mirrors, x.Size, x.Sha1, DownloadFormat.Zip)));
         }
 
         protected override RunInfo TesseractRunInfo(OcrParams ocrParams)
