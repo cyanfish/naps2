@@ -36,7 +36,7 @@ namespace NAPS2.Scan.Twain
         // - Minor lag (1-2s) when doing the first WCF call. Should be fixable with pre-cached workers.
         // - General stability needs testing/work
         // - Probably something else I forgot. Thorough testing should reveal more issues.
-        private bool UseWorker => ScanProfile.TwainImpl == TwainImpl.X64 && !Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
+        private bool UseWorker => ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
 
         protected override ScanDevice PromptForDeviceInternal()
         {
@@ -56,7 +56,7 @@ namespace NAPS2.Scan.Twain
         protected override List<ScanDevice> GetDeviceListInternal()
         {
             // Exclude WIA proxy devices since NAPS2 already supports WIA
-            return GetFullDeviceList().Where(x => !x.ID.StartsWith("WIA-")).ToList();
+            return GetFullDeviceList().Where(x => !x.ID.StartsWith("WIA-", StringComparison.InvariantCulture)).ToList();
         }
 
         private IEnumerable<ScanDevice> GetFullDeviceList()
@@ -81,7 +81,7 @@ namespace NAPS2.Scan.Twain
                     using (var worker = workerServiceFactory.Create())
                     {
                         worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
-                        return worker.Service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams)
+                        return worker.Service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams, DialogParent.Handle)
                             .Select(x => new ScannedImage(x))
                             .ToList();
                     }

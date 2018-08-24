@@ -26,7 +26,7 @@ namespace NAPS2.Operation
         /// <summary>
         /// A value indicating whether DoWork should proxy to a worker process.
         /// </summary>
-        protected virtual bool UseWorker => PlatformCompat.Runtime.UseWorker;
+        protected virtual bool UseWorker => false;
 
         public ProgressHandler ProgressProxy { get; set; }
 

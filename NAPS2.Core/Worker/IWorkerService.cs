@@ -21,7 +21,7 @@ namespace NAPS2.Worker
         List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl);
 
         [OperationContract]
-        List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams);
+        List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
 
         [OperationContract(IsOneWay = true)]
         void DoOperationWork(string operationTypeName, WorkerOperation.WorkArgs args);

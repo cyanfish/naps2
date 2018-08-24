@@ -47,10 +47,10 @@ namespace NAPS2.Worker
             return twainWrapper.GetDeviceList(twainImpl);
         }
 
-        public List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd)
         {
             RecoveryImage.RecoveryFileNumber = recoveryFileNumber;
-            return twainWrapper.Scan(ParentForm, true, scanDevice, scanProfile, scanParams).Select(x => x.RecoveryIndexImage).ToList();
+            return twainWrapper.Scan(new Win32Window(hwnd), true, scanDevice, scanProfile, scanParams).Select(x => x.RecoveryIndexImage).ToList();
         }
 
         public void Dispose()
