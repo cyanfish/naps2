@@ -19,8 +19,6 @@ namespace NAPS2.Ocr
             this.userConfigManager = userConfigManager;
             this.appConfigManager = appConfigManager;
 
-            ExternalComponent.InitBasePath(appConfigManager);
-
             // Order is important here. Newer/preferred first
             engines = new List<IOcrEngine>
             {

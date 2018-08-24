@@ -9,11 +9,14 @@ namespace NAPS2.Ocr
 {
     public class Tesseract304Engine : TesseractBaseEngine
     {
-        public Tesseract304Engine(AppConfigManager appConfigManager) : base(appConfigManager)
+        private readonly ComponentManager componentManager;
+
+        public Tesseract304Engine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager)
         {
+            this.componentManager = componentManager;
         }
 
-        protected override string TesseractBasePath => Path.Combine(ExternalComponent.BasePath, "tesseract-3.0.4");
+        protected override string TesseractBasePath => Path.Combine(componentManager.BasePath, "tesseract-3.0.4");
 
         protected override string TesseractExePath => "tesseract.exe";
 
