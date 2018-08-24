@@ -17,6 +17,8 @@ namespace NAPS2.Ocr
 
         public TesseractSystemEngine(AppConfigManager appConfigManager) : base(appConfigManager)
         {
+            // Use the most complete set of language mappings
+            LanguageData = TesseractLanguageData.V400B4;
         }
 
         protected override string TesseractBasePath => "";
@@ -52,6 +54,9 @@ namespace NAPS2.Ocr
             }
         }
 
+
+        public override IEnumerable<Language> NotInstalledLanguages => Enumerable.Empty<Language>();
+
         private void CheckIfInstalled()
         {
             if (IsSupported && (installCheckTime == null || installCheckTime < DateTime.Now - TimeSpan.FromSeconds(2)))
@@ -69,7 +74,7 @@ namespace NAPS2.Ocr
                     if (process != null && process.Id != 0)
                     {
                         var codes = process.StandardError.ReadToEnd().Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries).Where(x => x.Length == 3);
-                        installedLanguages = codes.Select(code => Languages.Get($"ocr-{code}")).Where(lang => lang != null).ToList();
+                        installedLanguages = codes.Select(code => LanguageData.LanguageMap.Get($"ocr-{code}")).Where(lang => lang != null).ToList();
                         isInstalled = true;
                         process.Kill();
                     }

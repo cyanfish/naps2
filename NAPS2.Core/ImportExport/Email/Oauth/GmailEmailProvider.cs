@@ -23,7 +23,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             var messageId = gmailOauthProvider.UploadDraft(message.ToString());
             var userEmail = userConfigManager.Config.EmailSetup?.GmailUser;
             // Open the draft in the user's browser
-            Process.Start($"https://mail.google.com/mail/?authuser={userEmail}#drafts?compose={messageId}");
+            Process.Start($"https://mail.google.com/mail/?authuser={userEmail}#drafts/{messageId}");
         }
     }
 }

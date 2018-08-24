@@ -12,7 +12,7 @@ namespace NAPS2.ImportExport.Email
         {
             var builder = new BodyBuilder
             {
-                TextBody = emailMessage.BodyText
+                TextBody = string.IsNullOrWhiteSpace(emailMessage.BodyText) ? "Test body" : emailMessage.BodyText
             };
             foreach (var attachment in emailMessage.Attachments)
             {
@@ -20,10 +20,11 @@ namespace NAPS2.ImportExport.Email
             }
 
             var message = new MimeMessage();
+            emailMessage.Recipients.Add(new EmailRecipient { Address = "someone@example.com", Name = "Someone", Type = EmailRecipientType.To });
             CopyRecips(emailMessage.Recipients, EmailRecipientType.To, message.To);
             CopyRecips(emailMessage.Recipients, EmailRecipientType.Cc, message.Cc);
             CopyRecips(emailMessage.Recipients, EmailRecipientType.Bcc, message.Bcc);
-            message.Subject = emailMessage.Subject ?? "";
+            message.Subject = string.IsNullOrWhiteSpace(emailMessage.Subject) ? "Scan" : emailMessage.Subject;
             message.Body = builder.ToMessageBody();
 
             SendMimeMessage(message);

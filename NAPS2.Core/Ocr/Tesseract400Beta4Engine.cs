@@ -14,6 +14,8 @@ namespace NAPS2.Ocr
         public Tesseract400Beta4Engine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager)
         {
             this.componentManager = componentManager;
+
+            LanguageData = TesseractLanguageData.V400B4;
         }
 
         protected override string TesseractBasePath => Path.Combine(componentManager.BasePath, "tesseract-4.0.0b4");
@@ -59,7 +61,7 @@ namespace NAPS2.Ocr
 
         protected override DownloadInfo DownloadInfo => new DownloadInfo("tesseract-4.0.0b4.zip", TesseractMirrors, 3.33, "03f4ae58312c1e2329323fe4b555e4f8c7ce8b0e", DownloadFormat.Zip);
 
-        public override IEnumerable<IExternalComponent> LanguageComponents => TesseractLanguageData.Select(x =>
+        public override IEnumerable<IExternalComponent> LanguageComponents => LanguageData.Data.Select(x =>
             new MultiFileExternalComponent($"ocr-{x.Code}", TesseractBasePath, new[] { $"best/{x.Code}.traineddata", $"fast/{x.Code}.traineddata" },
                 CanInstall ? new DownloadInfo(x.Filename, TesseractMirrors, x.Size, x.Sha1, DownloadFormat.Zip) : null));
     }

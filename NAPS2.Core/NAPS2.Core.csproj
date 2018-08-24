@@ -139,6 +139,7 @@
     <Compile Include="Ocr\OcrMode.cs" />
     <Compile Include="Ocr\OcrParams.cs" />
     <Compile Include="Ocr\Tesseract400Beta4Engine.cs" />
+    <Compile Include="Ocr\TesseractLanguageData.cs" />
     <Compile Include="Ocr\TesseractSystemEngine.cs" />
     <Compile Include="Ocr\Tesseract304XpEngine.cs" />
     <Compile Include="Ocr\Tesseract304Engine.cs" />
