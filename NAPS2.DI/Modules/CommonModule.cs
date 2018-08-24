@@ -31,12 +31,13 @@ namespace NAPS2.DI.Modules
             Bind<IScannedImageImporter>().To<ScannedImageImporter>();
             Bind<IPdfImporter>().To<PdfSharpImporter>();
             Bind<IImageImporter>().To<ImageImporter>();
-            Bind<IPdfRenderer>().To<GhostscriptPdfRenderer>();
+            Bind<IPdfRenderer>().To<GhostscriptPdfRenderer>().InSingletonScope();
 
             // Export
             Bind<IPdfExporter>().To<PdfSharpExporter>();
             Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
             Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
+            Bind<OcrManager>().ToSelf().InSingletonScope();
 
             // Scan
             Bind<IScanPerformer>().To<ScanPerformer>();
@@ -45,9 +46,9 @@ namespace NAPS2.DI.Modules
 #else
             Bind<IScanDriverFactory>().To<NinjectScanDriverFactory>();
 #endif
-            Bind<IScanDriver>().To<WiaScanDriver>().Named(WiaScanDriver.DRIVER_NAME);
-            Bind<IScanDriver>().To<TwainScanDriver>().Named(TwainScanDriver.DRIVER_NAME);
-            Bind<IScanDriver>().To<SaneScanDriver>().Named(SaneScanDriver.DRIVER_NAME);
+            Bind<IScanDriver>().To<WiaScanDriver>().InSingletonScope().Named(WiaScanDriver.DRIVER_NAME);
+            Bind<IScanDriver>().To<TwainScanDriver>().InSingletonScope().Named(TwainScanDriver.DRIVER_NAME);
+            Bind<IScanDriver>().To<SaneScanDriver>().InSingletonScope().Named(SaneScanDriver.DRIVER_NAME);
 
             // Config
             Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
