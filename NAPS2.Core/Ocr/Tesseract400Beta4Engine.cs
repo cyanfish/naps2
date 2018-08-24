@@ -9,18 +9,29 @@ namespace NAPS2.Ocr
 {
     public class Tesseract400Beta4Engine : TesseractBaseEngine
     {
-        private readonly ComponentManager componentManager;
+        protected static readonly List<DownloadMirror> Mirrors = new List<DownloadMirror>
+        {
+            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://github.com/cyanfish/naps2-components/releases/download/tesseract-4.00b4/{0}"),
+            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-4.00b4/{0}/download"),
+            new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-4.00b4/{0}")
+        };
 
         public Tesseract400Beta4Engine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager)
         {
-            this.componentManager = componentManager;
-
             LanguageData = TesseractLanguageData.V400B4;
+            TesseractBasePath = Path.Combine(componentManager.BasePath, "tesseract-4.0.0b4");
+            TesseractExePath = Path.Combine("tess64", "tesseract.exe");
+            PlatformSupport = PlatformSupport.ModernWindows64;
+            CanInstall = true;
+            SupportedModes = new[] { OcrMode.Fast, OcrMode.Best, OcrMode.Legacy };
+
+            Component = new MultiFileExternalComponent("ocr", Path.Combine(TesseractBasePath, "tess64"), new[] { "tesseract.exe" },
+                new DownloadInfo("tesseract-4.0.0b4.zip", Mirrors, 3.33, "03f4ae58312c1e2329323fe4b555e4f8c7ce8b0e", DownloadFormat.Zip));
+
+            LanguageComponents = LanguageData.Data.Select(x =>
+                new MultiFileExternalComponent($"ocr-{x.Code}", TesseractBasePath, new[] { $"best/{x.Code}.traineddata", $"fast/{x.Code}.traineddata" },
+                    CanInstall ? new DownloadInfo(x.Filename, Mirrors, x.Size, x.Sha1, DownloadFormat.Zip) : null));
         }
-
-        protected override string TesseractBasePath => Path.Combine(componentManager.BasePath, "tesseract-4.0.0b4");
-
-        protected override string TesseractExePath => Path.Combine("tess64", "tesseract.exe");
 
         protected override RunInfo TesseractRunInfo(OcrParams ocrParams)
         {
@@ -38,31 +49,5 @@ namespace NAPS2.Ocr
                 PrefixPath = folder
             };
         }
-
-        public override IEnumerable<OcrMode> SupportedModes => new[] { OcrMode.Fast, OcrMode.Best, OcrMode.Legacy };
-
-        protected override PlatformSupport PlatformSupport => PlatformSupport.ModernWindows64;
-
-        public override bool CanInstall => true;
-        
-        public override IExternalComponent Component => new MultiFileExternalComponent("ocr", Path.Combine(TesseractBasePath, "tess64"), new[]
-        {
-            "pvt.cppan.demo.danbloomberg.leptonica-1.76.0.dll",
-            "pvt.cppan.demo.jpeg-9.2.0.dll",
-            "pvt.cppan.demo.madler.zlib-1.2.11.dll",
-            "pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll",
-            "pvt.cppan.demo.png-1.6.35.dll",
-            "pvt.cppan.demo.tiff-4.0.9.dll",
-            "pvt.cppan.demo.webp-0.6.1.dll",
-            "pvt.cppan.demo.xz_utils.lzma-5.2.4.dll",
-            "tesseract40.dll",
-            TesseractExePath
-        }, DownloadInfo);
-
-        protected override DownloadInfo DownloadInfo => new DownloadInfo("tesseract-4.0.0b4.zip", TesseractMirrors, 3.33, "03f4ae58312c1e2329323fe4b555e4f8c7ce8b0e", DownloadFormat.Zip);
-
-        public override IEnumerable<IExternalComponent> LanguageComponents => LanguageData.Data.Select(x =>
-            new MultiFileExternalComponent($"ocr-{x.Code}", TesseractBasePath, new[] { $"best/{x.Code}.traineddata", $"fast/{x.Code}.traineddata" },
-                CanInstall ? new DownloadInfo(x.Filename, TesseractMirrors, x.Size, x.Sha1, DownloadFormat.Zip) : null));
     }
 }

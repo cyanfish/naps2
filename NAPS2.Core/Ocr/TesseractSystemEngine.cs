@@ -19,11 +19,11 @@ namespace NAPS2.Ocr
         {
             // Use the most complete set of language mappings
             LanguageData = TesseractLanguageData.V400B4;
+            TesseractBasePath = "";
+            TesseractExePath = "tesseract";
+            PlatformSupport = PlatformSupport.Linux;
+            CanInstall = false;
         }
-
-        protected override string TesseractBasePath => "";
-
-        protected override string TesseractExePath => "tesseract";
 
         protected override RunInfo TesseractRunInfo(OcrParams ocrParams) => new RunInfo
         {
@@ -31,10 +31,6 @@ namespace NAPS2.Ocr
             DataPath = null,
             PrefixPath = null
         };
-
-        protected override PlatformSupport PlatformSupport => PlatformSupport.Linux;
-
-        public override bool CanInstall => false;
 
         public override bool IsInstalled
         {

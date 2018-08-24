@@ -28,15 +28,22 @@ namespace NAPS2.Dependencies
 
         public void Install(string sourcePath)
         {
-            foreach (var sub in subPaths)
+            MoveRecursive(new DirectoryInfo(sourcePath), new DirectoryInfo(RootPath));
+        }
+
+        private void MoveRecursive(DirectoryInfo sourceDir, DirectoryInfo destDir)
+        {
+            if (!destDir.Exists)
             {
-                var srcFile = Path.Combine(sourcePath, sub);
-                var dstFile = Path.Combine(RootPath, sub);
-                if (File.Exists(srcFile))
-                {
-                    PathHelper.EnsureParentDirExists(dstFile);
-                    File.Move(srcFile, dstFile);
-                }
+                destDir.Create();
+            }
+            foreach (var srcFile in sourceDir.EnumerateFiles())
+            {
+                srcFile.MoveTo(Path.Combine(destDir.FullName, srcFile.Name));
+            }
+            foreach (var subDir in sourceDir.EnumerateDirectories())
+            {
+                MoveRecursive(subDir, new DirectoryInfo(Path.Combine(destDir.FullName, subDir.Name)));
             }
         }
     }

@@ -173,11 +173,33 @@ namespace NAPS2.Ocr
             return bounds;
         }
 
-        protected abstract string TesseractBasePath { get; }
+        public bool CanInstall { get; protected set; }
 
-        protected abstract string TesseractExePath { get; }
+        public IEnumerable<OcrMode> SupportedModes { get; protected set; }
 
-        protected virtual string TesseractHocrExtension => ".hocr";
+        public IExternalComponent Component { get; protected set; }
+
+        public IEnumerable<IExternalComponent> LanguageComponents { get; protected set; }
+
+        public virtual bool IsSupported => PlatformSupport.Validate();
+
+        public virtual bool IsInstalled => Component.IsInstalled;
+
+        public virtual IEnumerable<Language> InstalledLanguages => LanguageComponents.Where(x => x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
+
+        public virtual IEnumerable<Language> NotInstalledLanguages => LanguageComponents.Where(x => !x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
+
+        protected string TesseractBasePath { get; set; }
+
+        protected string TesseractExePath { get; set; }
+
+        protected string TesseractHocrExtension { get; set; } = ".hocr";
+
+        protected DownloadInfo DownloadInfo { get; set; }
+
+        protected PlatformSupport PlatformSupport { get; set; }
+
+        protected TesseractLanguageData LanguageData { get; set; }
 
         protected virtual RunInfo TesseractRunInfo(OcrParams ocrParams) => new RunInfo
         {
@@ -186,34 +208,6 @@ namespace NAPS2.Ocr
             PrefixPath = ""
         };
 
-        protected virtual DownloadInfo DownloadInfo => null;
-
-        protected abstract PlatformSupport PlatformSupport { get; }
-
-        public virtual bool IsSupported => PlatformSupport.Validate();
-
-        public virtual bool IsInstalled => Component.IsInstalled;
-
-        public abstract bool CanInstall { get; }
-
-        protected TesseractLanguageData LanguageData { get; set; }
-
-        public virtual IEnumerable<Language> InstalledLanguages => LanguageComponents.Where(x => x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
-
-        public virtual IEnumerable<Language> NotInstalledLanguages => LanguageComponents.Where(x => !x.IsInstalled).Select(x => LanguageData.LanguageMap[x.Id]);
-
-        public virtual IExternalComponent Component => new ExternalComponent("ocr", Path.Combine(TesseractBasePath, TesseractExePath), DownloadInfo);
-
-        public virtual IEnumerable<IExternalComponent> LanguageComponents => null;
-
-        public virtual IEnumerable<OcrMode> SupportedModes => null;
-
-        protected static readonly List<DownloadMirror> TesseractMirrors = new List<DownloadMirror>
-        {
-            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://github.com/cyanfish/naps2-components/releases/download/tesseract-4.00b4/{0}"),
-            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-4.00b4/{0}/download"),
-            new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-4.00b4/{0}")
-        };
 
         protected class RunInfo
         {

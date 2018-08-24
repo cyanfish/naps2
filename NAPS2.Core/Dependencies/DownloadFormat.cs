@@ -55,6 +55,7 @@ namespace NAPS2.Dependencies
 
                 var tempDir = Path.GetDirectoryName(tempFilePath) ?? throw new ArgumentNullException();
                 Extract(tempFilePath, tempDir);
+                File.Delete(tempFilePath);
                 return tempDir;
             }
 

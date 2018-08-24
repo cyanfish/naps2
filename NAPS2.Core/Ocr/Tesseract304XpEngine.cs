@@ -11,12 +11,11 @@ namespace NAPS2.Ocr
     {
         public Tesseract304XpEngine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager, componentManager)
         {
-        }
-        
-        protected override string TesseractExePath => "tesseract_xp.exe";
-        
-        protected override PlatformSupport PlatformSupport => PlatformSupport.Windows;
+            TesseractExePath = "tesseract_xp.exe";
+            PlatformSupport = PlatformSupport.Windows;
 
-        protected override DownloadInfo DownloadInfo => new DownloadInfo("tesseract_xp.exe.gz", TesseractMirrors, 1.32, "98d15e4765caae864f16fa2ab106e3fd6adbe8c3", DownloadFormat.Gzip);
+            Component = new ExternalComponent("ocr", Path.Combine(TesseractBasePath, TesseractExePath),
+                new DownloadInfo("tesseract_xp.exe.gz", Mirrors, 1.32, "98d15e4765caae864f16fa2ab106e3fd6adbe8c3", DownloadFormat.Gzip));
+        }
     }
 }
