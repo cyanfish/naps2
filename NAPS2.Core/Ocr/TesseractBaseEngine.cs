@@ -94,6 +94,7 @@ namespace NAPS2.Ocr
                     }
                 }
 #if DEBUG
+                Debug.WriteLine("Tesseract stopwatch: " + stopwatch.ElapsedMilliseconds);
                 var output = tesseractProcess.StandardOutput.ReadToEnd();
                 if (output.Length > 0)
                 {
@@ -192,8 +193,6 @@ namespace NAPS2.Ocr
         public virtual bool IsSupported => PlatformSupport.Validate();
 
         public virtual bool IsInstalled => Component.IsInstalled;
-
-        public abstract bool IsUpgradable { get; }
 
         public abstract bool CanInstall { get; }
 

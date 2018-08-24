@@ -24,8 +24,6 @@ namespace NAPS2.Ocr
 
         protected override PlatformSupport PlatformSupport => PlatformSupport.Windows;
 
-        public override bool IsUpgradable => true;
-
         public override bool CanInstall => false;
     }
 }

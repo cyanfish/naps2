@@ -34,13 +34,21 @@ namespace NAPS2.Ocr
 
         public bool IsReady => engines.Any(x => x.IsSupported && x.IsInstalled && x.InstalledLanguages.Any());
 
-        public bool IsNewestReady => engines.Any(x => x.IsSupported && x.IsInstalled && !x.IsUpgradable && x.InstalledLanguages.Any());
+        public bool IsNewestReady
+        {
+            get
+            {
+                var latest = engines.FirstOrDefault(x => x.IsSupported);
+                if (latest == null) return false;
+                return latest.IsInstalled && latest.InstalledLanguages.Any();
+            }
+        }
 
         public bool CanUpgrade => !IsNewestReady && engines.Any(x => x.IsInstalled);
 
         public bool MustUpgrade => !IsReady && engines.Any(x => x.IsInstalled);
 
-        public IExternalComponent UpgradeComponent => engines.Where(x => x.IsSupported && !x.IsInstalled && !x.IsUpgradable).Select(x => x.Component).FirstOrDefault();
+        public IExternalComponent UpgradeComponent => engines.Where(x => x.IsSupported).Select(x => x.Component).FirstOrDefault();
 
         public bool MustInstallPackage => engines.All(x => (!x.IsSupported || !x.CanInstall) && !x.IsInstalled);
 
@@ -91,7 +99,5 @@ namespace NAPS2.Ocr
                 return null;
             }
         }
-
-        // TODO: Implement multi-file external components with SharpZipLib to package that as a single download
     }
 }

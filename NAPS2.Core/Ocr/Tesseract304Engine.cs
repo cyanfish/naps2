@@ -22,8 +22,6 @@ namespace NAPS2.Ocr
 
         protected override PlatformSupport PlatformSupport => PlatformSupport.ModernWindows;
 
-        public override bool IsUpgradable => true;
-
         public override bool CanInstall => false;
     }
 }

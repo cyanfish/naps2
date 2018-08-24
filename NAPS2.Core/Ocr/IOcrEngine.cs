@@ -15,8 +15,6 @@ namespace NAPS2.Ocr
 
         bool IsInstalled { get; }
 
-        bool IsUpgradable { get; }
-
         bool CanInstall { get; }
 
         IEnumerable<Language> InstalledLanguages { get; }

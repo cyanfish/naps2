@@ -32,8 +32,6 @@ namespace NAPS2.Ocr
 
         protected override PlatformSupport PlatformSupport => PlatformSupport.Linux;
 
-        public override bool IsUpgradable => false;
-
         public override bool CanInstall => false;
 
         public override bool IsInstalled

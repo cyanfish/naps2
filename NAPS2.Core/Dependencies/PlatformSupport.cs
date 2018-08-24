@@ -12,6 +12,10 @@ namespace NAPS2.Dependencies
 
         public static readonly PlatformSupport ModernWindows = Windows.Except(WindowsXp);
 
+        public static readonly PlatformSupport Amd64 = new PlatformSupport(() => Environment.Is64BitOperatingSystem);
+
+        public static readonly PlatformSupport ModernWindows64 = ModernWindows.And(Amd64);
+
         public static readonly PlatformSupport Linux = new PlatformSupport(() => Environment.OSVersion.Platform == PlatformID.Unix);
 
         private readonly Func<bool> predicate;

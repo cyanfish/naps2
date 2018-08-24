@@ -18,7 +18,7 @@ namespace NAPS2.Ocr
 
         protected override string TesseractBasePath => Path.Combine(componentManager.BasePath, "tesseract-4.0.0b4");
 
-        protected override string TesseractExePath => "tesseract.exe";
+        protected override string TesseractExePath => Path.Combine("tess64", "tesseract.exe");
 
         protected override RunInfo TesseractRunInfo(OcrParams ocrParams)
         {
@@ -39,13 +39,11 @@ namespace NAPS2.Ocr
 
         public override IEnumerable<OcrMode> SupportedModes => new[] { OcrMode.Fast, OcrMode.Best, OcrMode.Legacy };
 
-        protected override PlatformSupport PlatformSupport => PlatformSupport.ModernWindows;
-
-        public override bool IsUpgradable => false;
+        protected override PlatformSupport PlatformSupport => PlatformSupport.ModernWindows64;
 
         public override bool CanInstall => true;
-
-        public override IExternalComponent Component => new MultiFileExternalComponent("ocr", TesseractBasePath, new[]
+        
+        public override IExternalComponent Component => new MultiFileExternalComponent("ocr", Path.Combine(TesseractBasePath, "tess64"), new[]
         {
             "pvt.cppan.demo.danbloomberg.leptonica-1.76.0.dll",
             "pvt.cppan.demo.jpeg-9.2.0.dll",
