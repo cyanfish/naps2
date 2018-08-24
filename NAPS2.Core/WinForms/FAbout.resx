@@ -196,7 +196,7 @@
     <value>28</value>
   </data>
   <data name="labelCopyright.Text" xml:space="preserve">
-    <value>Copyright 2009, 2012-2017 NAPS2 Contributors</value>
+    <value>Copyright 2009, 2012-2018 NAPS2 Contributors</value>
   </data>
   <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
     <value>labelCopyright</value>
@@ -591,6 +591,6 @@
     <value>FAbout</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.7.1.3706, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.103, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
