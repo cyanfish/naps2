@@ -176,7 +176,7 @@ namespace NAPS2.Ocr
 
         protected abstract string TesseractExePath { get; }
 
-        protected abstract string TesseractHocrExtension { get; }
+        protected virtual string TesseractHocrExtension => ".hocr";
 
         protected virtual RunInfo TesseractRunInfo(OcrParams ocrParams) => new RunInfo
         {

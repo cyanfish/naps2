@@ -30,8 +30,6 @@ namespace NAPS2.Ocr
             PrefixPath = null
         };
 
-        protected override string TesseractHocrExtension => ".hocr";
-
         protected override PlatformSupport PlatformSupport => PlatformSupport.Linux;
 
         public override bool IsUpgradable => false;

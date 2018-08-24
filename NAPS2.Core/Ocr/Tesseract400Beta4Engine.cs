@@ -37,7 +37,7 @@ namespace NAPS2.Ocr
             };
         }
 
-        protected override string TesseractHocrExtension => ".hocr";
+        public override IEnumerable<OcrMode> SupportedModes => new[] { OcrMode.Fast, OcrMode.Best, OcrMode.Legacy };
 
         protected override PlatformSupport PlatformSupport => PlatformSupport.ModernWindows;
 
@@ -51,7 +51,5 @@ namespace NAPS2.Ocr
         public override IEnumerable<IExternalComponent> LanguageComponents => TesseractLanguageData.Select(x =>
             new MultiFileExternalComponent($"ocr-{x.Code}", TesseractBasePath, new [] { $"best/{x.Code}.traineddata", $"fast/{x.Code}.traineddata" },
                 CanInstall ? new DownloadInfo(x.Filename, TesseractMirrors, x.Size, x.Sha1, DownloadFormat.Zip) : null));
-
-        public override IEnumerable<OcrMode> SupportedModes => new[] { OcrMode.Fast, OcrMode.Best, OcrMode.Legacy };
     }
 }

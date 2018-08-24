@@ -20,8 +20,6 @@ namespace NAPS2.Ocr
 
         protected override string TesseractExePath => "tesseract.exe";
 
-        protected override string TesseractHocrExtension => ".hocr";
-
         protected override PlatformSupport PlatformSupport => PlatformSupport.ModernWindows;
 
         public override bool IsUpgradable => true;
