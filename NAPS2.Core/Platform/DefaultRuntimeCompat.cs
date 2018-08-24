@@ -12,6 +12,8 @@ namespace NAPS2.Platform
 
         public bool IsImagePaddingSupported => true;
 
+        public bool IsToolbarTextboxSupported => true;
+
         public bool SetImageListSizeOnImageCollection => false;
 
         public bool UseSpaceInListViewItem => false;

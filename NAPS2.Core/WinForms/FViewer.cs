@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
+using NAPS2.Platform;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 
@@ -68,9 +69,11 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs e)
         {
+            tbPageCurrent.Visible = PlatformCompat.Runtime.IsToolbarTextboxSupported;
+
             tiffViewer1.Image = scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
-            tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.InvariantCulture);
-            lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
+            UpdatePage();
+
 
             if (appConfigManager.Config.HideSavePdfButton)
             {
@@ -92,8 +95,18 @@ namespace NAPS2.WinForms
             }
             ImageIndex = index;
             UpdateImage();
-            tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.CurrentCulture);
+            UpdatePage();
             SelectCallback(index);
+        }
+
+        private void UpdatePage()
+        {
+            tbPageCurrent.Text = (ImageIndex + 1).ToString(CultureInfo.CurrentCulture);
+            lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
+            if (!PlatformCompat.Runtime.IsToolbarTextboxSupported)
+            {
+                lblPageTotal.Text = tbPageCurrent.Text + ' ' + lblPageTotal.Text;
+            }
         }
 
         private void UpdateImage()
@@ -137,14 +150,14 @@ namespace NAPS2.WinForms
             this.tsCustomRotation = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCrop = new System.Windows.Forms.ToolStripButton();
             this.tsBrightnessContrast = new System.Windows.Forms.ToolStripButton();
+            this.tsHueSaturation = new System.Windows.Forms.ToolStripButton();
+            this.tsBlackWhite = new System.Windows.Forms.ToolStripButton();
+            this.tsSharpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsSavePDF = new System.Windows.Forms.ToolStripButton();
             this.tsSaveImage = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsDelete = new System.Windows.Forms.ToolStripButton();
-            this.tsSharpen = new System.Windows.Forms.ToolStripButton();
-            this.tsBlackWhite = new System.Windows.Forms.ToolStripButton();
-            this.tsHueSaturation = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -290,6 +303,30 @@ namespace NAPS2.WinForms
             this.tsBrightnessContrast.Name = "tsBrightnessContrast";
             this.tsBrightnessContrast.Click += new System.EventHandler(this.tsBrightnessContrast_Click);
             // 
+            // tsHueSaturation
+            // 
+            this.tsHueSaturation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsHueSaturation.Image = global::NAPS2.Icons.color_management;
+            resources.ApplyResources(this.tsHueSaturation, "tsHueSaturation");
+            this.tsHueSaturation.Name = "tsHueSaturation";
+            this.tsHueSaturation.Click += new System.EventHandler(this.tsHueSaturation_Click);
+            // 
+            // tsBlackWhite
+            // 
+            this.tsBlackWhite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsBlackWhite.Image = global::NAPS2.Icons.contrast_high;
+            resources.ApplyResources(this.tsBlackWhite, "tsBlackWhite");
+            this.tsBlackWhite.Name = "tsBlackWhite";
+            this.tsBlackWhite.Click += new System.EventHandler(this.tsBlackWhite_Click);
+            // 
+            // tsSharpen
+            // 
+            this.tsSharpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsSharpen.Image = global::NAPS2.Icons.sharpen;
+            resources.ApplyResources(this.tsSharpen, "tsSharpen");
+            this.tsSharpen.Name = "tsSharpen";
+            this.tsSharpen.Click += new System.EventHandler(this.tsSharpen_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -323,30 +360,6 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tsDelete, "tsDelete");
             this.tsDelete.Name = "tsDelete";
             this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
-            // 
-            // tsSharpen
-            // 
-            this.tsSharpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsSharpen.Image = global::NAPS2.Icons.sharpen;
-            resources.ApplyResources(this.tsSharpen, "tsSharpen");
-            this.tsSharpen.Name = "tsSharpen";
-            this.tsSharpen.Click += new System.EventHandler(this.tsSharpen_Click);
-            // 
-            // tsBlackWhite
-            // 
-            this.tsBlackWhite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsBlackWhite.Image = global::NAPS2.Icons.contrast_high;
-            resources.ApplyResources(this.tsBlackWhite, "tsBlackWhite");
-            this.tsBlackWhite.Name = "tsBlackWhite";
-            this.tsBlackWhite.Click += new System.EventHandler(this.tsBlackWhite_Click);
-            // 
-            // tsHueSaturation
-            // 
-            this.tsHueSaturation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsHueSaturation.Image = global::NAPS2.Icons.color_management;
-            resources.ApplyResources(this.tsHueSaturation, "tsHueSaturation");
-            this.tsHueSaturation.Name = "tsHueSaturation";
-            this.tsHueSaturation.Click += new System.EventHandler(this.tsHueSaturation_Click);
             // 
             // FViewer
             // 
