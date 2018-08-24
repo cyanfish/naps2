@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using ICSharpCode.SharpZipLib.Zip;
+using NAPS2.Util;
 
 namespace NAPS2.Dependencies
 {
@@ -18,7 +20,7 @@ namespace NAPS2.Dependencies
         {
             public override string Prepare(string tempFilePath)
             {
-                if (!tempFilePath.EndsWith(".gz"))
+                if (!tempFilePath.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
                 {
                     throw new ArgumentException();
                 }
@@ -46,24 +48,27 @@ namespace NAPS2.Dependencies
         {
             public override string Prepare(string tempFilePath)
             {
-                if (!tempFilePath.EndsWith(".zip"))
+                if (!tempFilePath.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase))
                 {
                     throw new ArgumentException();
                 }
-                var pathWithoutGz = tempFilePath.Substring(0, tempFilePath.Length - 3);
-                Extract(tempFilePath, pathWithoutGz);
-                return pathWithoutGz;
+
+                var tempDir = Path.GetDirectoryName(tempFilePath) ?? throw new ArgumentNullException();
+                Extract(tempFilePath, tempDir);
+                return tempDir;
             }
 
-            private static void Extract(string sourcePath, string destPath)
+            private static void Extract(string zipFilePath, string outDir)
             {
-                using (FileStream inFile = new FileInfo(sourcePath).OpenRead())
+                using (var zip = new ZipFile(zipFilePath))
                 {
-                    using (FileStream outFile = File.Create(destPath))
+                    foreach (ZipEntry entry in zip)
                     {
-                        using (GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress))
+                        var destPath = Path.Combine(outDir, entry.Name);
+                        PathHelper.EnsureParentDirExists(destPath);
+                        using (FileStream outFile = File.Create(destPath))
                         {
-                            decompress.CopyTo(outFile);
+                            zip.GetInputStream(entry).CopyTo(outFile);
                         }
                     }
                 }

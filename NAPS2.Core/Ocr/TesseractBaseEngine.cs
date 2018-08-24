@@ -201,17 +201,17 @@ namespace NAPS2.Ocr
 
         public virtual IEnumerable<Language> NotInstalledLanguages => LanguageComponents.Where(x => !x.IsInstalled).Select(x => Languages[x.Id]);
 
-        public virtual ExternalComponent Component => new ExternalComponent("ocr", Path.Combine(TesseractBasePath, TesseractExePath), DownloadInfo);
+        public virtual IExternalComponent Component => new ExternalComponent("ocr", Path.Combine(TesseractBasePath, TesseractExePath), DownloadInfo);
 
-        public virtual IEnumerable<ExternalComponent> LanguageComponents => TesseractLanguageData.Select(x =>
-            new ExternalComponent($"ocr-{x.Code}", Path.Combine(TesseractBasePath, "tessdata", x.Filename.Replace(".gz", "")),
+        public virtual IEnumerable<IExternalComponent> LanguageComponents => TesseractLanguageData.Select(x =>
+            new ExternalComponent($"ocr-{x.Code}", Path.Combine(TesseractBasePath, "tessdata", x.Filename.Replace(".zip", "")),
                 CanInstall ? new DownloadInfo(x.Filename, TesseractMirrors, x.Size, x.Sha1, DownloadFormat.Zip) : null));
 
         public virtual IEnumerable<OcrMode> SupportedModes => null;
 
         protected static readonly List<DownloadMirror> TesseractMirrors = new List<DownloadMirror>
         {
-            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://github.com/cyanfish/naps2-components/releases/download/tessseract-4.00b4/{0}"),
+            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://github.com/cyanfish/naps2-components/releases/download/tesseract-4.00b4/{0}"),
             new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-4.00b4/{0}/download"),
             new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-4.00b4/{0}")
         };

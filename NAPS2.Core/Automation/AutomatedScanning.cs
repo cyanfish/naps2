@@ -151,7 +151,7 @@ namespace NAPS2.Automation
 
         private void InstallComponents()
         {
-            var availableComponents = new List<ExternalComponent>();
+            var availableComponents = new List<IExternalComponent>();
             var ocrEngine = ocrManager.EngineToInstall;
             if (ocrEngine != null)
             {

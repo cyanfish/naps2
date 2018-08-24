@@ -23,9 +23,9 @@ namespace NAPS2.Ocr
 
         IEnumerable<Language> NotInstalledLanguages { get; }
 
-        ExternalComponent Component { get; }
+        IExternalComponent Component { get; }
 
-        IEnumerable<ExternalComponent> LanguageComponents { get; }
+        IEnumerable<IExternalComponent> LanguageComponents { get; }
 
         IEnumerable<OcrMode> SupportedModes { get; }
     }

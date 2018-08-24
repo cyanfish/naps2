@@ -40,7 +40,7 @@ namespace NAPS2.Ocr
 
         public bool MustUpgrade => !IsReady && engines.Any(x => x.IsInstalled);
 
-        public ExternalComponent UpgradeComponent => engines.Where(x => x.IsSupported && !x.IsInstalled && !x.IsUpgradable).Select(x => x.Component).FirstOrDefault();
+        public IExternalComponent UpgradeComponent => engines.Where(x => x.IsSupported && !x.IsInstalled && !x.IsUpgradable).Select(x => x.Component).FirstOrDefault();
 
         public bool MustInstallPackage => engines.All(x => (!x.IsSupported || !x.CanInstall) && !x.IsInstalled);
 
