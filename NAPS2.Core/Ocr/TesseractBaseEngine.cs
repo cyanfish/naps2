@@ -201,10 +201,10 @@ namespace NAPS2.Ocr
 
         public virtual IEnumerable<Language> NotInstalledLanguages => LanguageComponents.Where(x => !x.IsInstalled).Select(x => Languages[x.Id]);
 
-        public virtual ExternalComponent Component => new ExternalComponent("ocr", Path.Combine(TesseractBasePath, TesseractExePath), PlatformSupport, DownloadInfo);
+        public virtual ExternalComponent Component => new ExternalComponent("ocr", Path.Combine(TesseractBasePath, TesseractExePath), DownloadInfo);
 
         public virtual IEnumerable<ExternalComponent> LanguageComponents => TesseractLanguageData.Select(x =>
-            new ExternalComponent($"ocr-{x.Code}", Path.Combine(TesseractBasePath, "tessdata", x.Filename.Replace(".gz", "")), PlatformSupport,
+            new ExternalComponent($"ocr-{x.Code}", Path.Combine(TesseractBasePath, "tessdata", x.Filename.Replace(".gz", "")),
                 CanInstall ? new DownloadInfo(x.Filename, TesseractMirrors, x.Size, x.Sha1, DownloadFormat.Zip) : null));
 
         public virtual IEnumerable<OcrMode> SupportedModes => null;
