@@ -1061,7 +1061,7 @@ namespace NAPS2.WinForms
                 // Re-download a fixed version on Windows XP if needed
                 MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var progressForm = FormFactory.Create<FDownloadProgress>();
-                progressForm.QueueFile(ocrManager.UpgradeComponent);
+                progressForm.QueueFile(ocrManager.EngineToInstall.Component);
                 progressForm.ShowDialog();
             }
 
