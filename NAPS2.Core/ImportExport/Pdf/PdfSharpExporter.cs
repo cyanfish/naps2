@@ -293,9 +293,10 @@ namespace NAPS2.ImportExport.Pdf
                     var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
                     var font = new XFont("Verdana", adjustedFontSize, XFontStyle.Regular,
                         new XPdfFontOptions(PdfFontEncoding.Unicode));
-                    var adjustedHeight = gfx.MeasureString(element.Text, font).Height;
-                    var verticalOffset = (adjustedBounds.Height - adjustedHeight) / 2;
-                    adjustedBounds.Offset(0, (float)verticalOffset);
+                    var adjustedTextSize = gfx.MeasureString(element.Text, font);
+                    var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
+                    var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
+                    adjustedBounds.Offset((float)horizontalOffset, (float)verticalOffset);
                     tf.DrawString(ocrResult.RightToLeft ? ReverseText(element.Text) : element.Text, font, XBrushes.Transparent, adjustedBounds);
                 }
             }
@@ -352,7 +353,7 @@ namespace NAPS2.ImportExport.Pdf
             int fontSizeGuess = Math.Max(1, (int)(adjustedBounds.Height));
             var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Verdana", fontSizeGuess, XFontStyle.Regular));
             double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
-            int adjustedFontSize = Math.Max(1, (int)Math.Round(fontSizeGuess * adjustmentFactor));
+            int adjustedFontSize = Math.Max(1, (int)Math.Floor(fontSizeGuess * adjustmentFactor));
             return adjustedFontSize;
         }
         
