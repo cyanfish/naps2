@@ -28,14 +28,7 @@ namespace NAPS2.Scan.Twain
         public override string DriverName => DRIVER_NAME;
 
         public override bool IsSupported => PlatformCompat.System.IsTwainDriverSupported;
-
-        // 64 bit TWAIN support via worker is experimental.
-        // Issue list:
-        // - Hard to give focus to the TWAIN UI consistently. Maybe leverage the Form.Activated event in NAPS2.exe to call a new method in NAPS2.Worker.
-        // - Relatedly, there's no way to find the TWAIN window from the taskbar. But if the above can work then maybe not needed.
-        // - Minor lag (1-2s) when doing the first WCF call. Should be fixable with pre-cached workers.
-        // - General stability needs testing/work
-        // - Probably something else I forgot. Thorough testing should reveal more issues.
+        
         private bool UseWorker => ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
 
         protected override ScanDevice PromptForDeviceInternal()

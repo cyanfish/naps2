@@ -141,11 +141,8 @@ namespace NAPS2.Scan.Images
         }
 
         public Snapshot Preserve() => new Snapshot(this);
-
-        [Serializable]
-        [KnownType(typeof(RecoveryIndexImage))]
-        [KnownType(typeof(List<Transform>))]
-        public class Snapshot : IDisposable, ISerializable
+        
+        public class Snapshot : IDisposable
         {
             private bool disposed;
             
@@ -182,18 +179,6 @@ namespace NAPS2.Scan.Images
                         Source.Dispose();
                     }
                 }
-            }
-
-            public void GetObjectData(SerializationInfo info, StreamingContext context)
-            {
-                info.AddValue("RecoveryIndexImage", Source.RecoveryIndexImage);
-                info.AddValue("TransformList", TransformList);
-            }
-
-            private Snapshot(SerializationInfo info, StreamingContext context)
-            {
-                Source = new ScannedImage((RecoveryIndexImage)info.GetValue("RecoveryIndexImage", typeof(RecoveryIndexImage)));
-                TransformList = (List<Transform>)info.GetValue("TransformList", typeof(List<Transform>));
             }
         }
     }

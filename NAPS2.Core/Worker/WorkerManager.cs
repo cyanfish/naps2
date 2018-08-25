@@ -60,7 +60,6 @@ namespace NAPS2.Worker
 
             if (PlatformCompat.System.CanUseWin32)
             {
-                // TODO: Fix this on linux
                 try
                 {
                     var job = new Job();
@@ -84,13 +83,11 @@ namespace NAPS2.Worker
             {
                 var proc = StartWorkerProcess();
                 var pipeName = string.Format(PIPE_NAME_FORMAT, proc.Id);
-                var callback = new WorkerCallback();
-                var instanceContext = new InstanceContext(callback);
-                var channelFactory = new DuplexChannelFactory<IWorkerService>(instanceContext,
+                var channelFactory = new ChannelFactory<IWorkerService>(
                     new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) },
                     new EndpointAddress(pipeName));
                 var channel = channelFactory.CreateChannel();
-                _workerQueue.Add(new WorkerContext { Service = channel, Callback = callback });
+                _workerQueue.Add(new WorkerContext { Service = channel });
             });
         }
 

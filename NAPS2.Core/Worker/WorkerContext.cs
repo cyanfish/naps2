@@ -8,8 +8,6 @@ namespace NAPS2.Worker
     {
         public IWorkerService Service { get; set; }
 
-        public IWorkerCallback Callback { get; set; }
-
         public void Dispose()
         {
             ((IDisposable)Service)?.Dispose();

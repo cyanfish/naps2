@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
 using NAPS2.Operation;
@@ -14,24 +13,21 @@ using NAPS2.Worker;
 
 namespace NAPS2.ImportExport.Pdf
 {
-    public class SavePdfOperation : WorkerOperation
+    public class SavePdfOperation : OperationBase
     {
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly IPdfExporter pdfExporter;
         private readonly IOverwritePrompt overwritePrompt;
         private readonly ThreadFactory threadFactory;
-        private readonly AppConfigManager appConfigManager;
 
         private Thread thread;
 
-        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, AppConfigManager appConfigManager, IWorkerServiceFactory workerServiceFactory)
-            : base(workerServiceFactory)
+        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory)
         {
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
             this.overwritePrompt = overwritePrompt;
             this.threadFactory = threadFactory;
-            this.appConfigManager = appConfigManager;
 
             AllowCancel = true;
         }
@@ -64,13 +60,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 try
                 {
-                    Status.Success = DoWork(new SavePdfWorkArgs
-                    {
-                        SubFileName = subFileName,
-                        Snapshots = snapshots,
-                        PdfSettings = pdfSettings,
-                        OcrParams = ocrParams
-                    });
+                    Status.Success = pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress);
                 }
                 catch (UnauthorizedAccessException ex)
                 {
@@ -106,25 +96,10 @@ namespace NAPS2.ImportExport.Pdf
 
             return true;
         }
-
-        protected internal override bool DoWorkInternal(WorkArgs args)
-        {
-            var a = (SavePdfWorkArgs)args;
-            return pdfExporter.Export(a.SubFileName, a.Snapshots, a.PdfSettings, a.OcrParams, OnProgress);
-        }
-
+        
         public override void WaitUntilFinished()
         {
             thread.Join();
-        }
-
-        [Serializable]
-        internal class SavePdfWorkArgs : WorkArgs
-        {
-            public string SubFileName { get; set; }
-            public List<ScannedImage.Snapshot> Snapshots { get; set; }
-            public PdfSettings PdfSettings { get; set; }
-            public OcrParams OcrParams { get; set; }
         }
     }
 }

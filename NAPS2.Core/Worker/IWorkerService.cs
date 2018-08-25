@@ -8,7 +8,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Worker
 {
-    [ServiceContract(CallbackContract = typeof(IWorkerCallback))]
+    [ServiceContract]
     public interface IWorkerService
     {
         [OperationContract]
@@ -22,8 +22,5 @@ namespace NAPS2.Worker
 
         [OperationContract]
         List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
-
-        [OperationContract(IsOneWay = true)]
-        void DoOperationWork(string operationTypeName, WorkerOperation.WorkArgs args);
     }
 }

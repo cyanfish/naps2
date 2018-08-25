@@ -19,22 +19,17 @@ namespace NAPS2.Worker
     public class WorkerService : IWorkerService
     {
         private readonly TwainWrapper twainWrapper;
-        private readonly IPdfExporter pdfExporter;
-        private readonly IOperationFactory operationFactory;
 
         public Form ParentForm { get; set; }
 
-        public WorkerService(TwainWrapper twainWrapper, IPdfExporter pdfExporter, IOperationFactory operationFactory)
+        public WorkerService(TwainWrapper twainWrapper)
         {
             this.twainWrapper = twainWrapper;
-            this.pdfExporter = pdfExporter;
-            this.operationFactory = operationFactory;
         }
 
         public void Init()
         {
             OperationContext.Current.Channel.Closed += (sender, args) => Application.Exit();
-            Callback = OperationContext.Current.GetCallbackChannel<IWorkerCallback>();
         }
 
         public void SetRecoveryFolder(string path)
@@ -56,43 +51,5 @@ namespace NAPS2.Worker
         public void Dispose()
         {
         }
-        
-        public void DoOperationWork(string operationTypeName, WorkerOperation.WorkArgs args)
-        {
-            // TODO: Make a type for a serializable snapshot
-            // TODO: Other operations. Import. Recovery. Save images. Password and ghostscript callbacks.
-            // Figure out ghostscript operation in general.
-            // Also - consider off-process thumbnail rendering. That's probably IO bound though, right?
-            // So parellization doesn't help. The only benefit would be memory. Which is not a bad benefit.
-            var operationType = Type.GetType(operationTypeName);
-            if (operationType == null)
-            {
-                Log.Error($"Operation type not available: {operationTypeName}");
-                return;
-            }
-            var op = (WorkerOperation)typeof(IOperationFactory).GetMethod("Create")?.MakeGenericMethod(operationType).Invoke(operationFactory, new object[0]);
-            if (op == null)
-            {
-                Log.Error($"Could not create operation: {operationTypeName}");
-                return;
-            }
-
-            bool success = false;
-            try
-            {
-                op.ProgressProxy = Callback.Progress;
-                success = op.DoWorkInternal(args);
-            }
-            catch (Exception e)
-            {
-                Callback.Error(e);
-            }
-            finally
-            {
-                Callback.Finish(success);
-            }
-        }
-        
-        public IWorkerCallback Callback { get; set; }
     }
 }
