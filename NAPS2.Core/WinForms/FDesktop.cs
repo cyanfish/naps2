@@ -776,14 +776,17 @@ namespace NAPS2.WinForms
 
         #region Actions - Save/Email/Import
 
-        private void SavePDF(List<ScannedImage> images)
+        private async void SavePDF(List<ScannedImage> images)
         {
-            if (exportHelper.SavePDF(images, notify))
+            if (await exportHelper.SavePDF(images, notify))
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
-                    imageList.Delete(imageList.Images.IndiciesOf(images));
-                    UpdateThumbnails(Enumerable.Empty<int>(), false, false);
+                    SafeInvoke(() =>
+                    {
+                        imageList.Delete(imageList.Images.IndiciesOf(images));
+                        UpdateThumbnails(Enumerable.Empty<int>(), false, false);
+                    });
                 }
             }
         }

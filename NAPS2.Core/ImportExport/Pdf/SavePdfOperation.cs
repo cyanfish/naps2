@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
-using NAPS2.Worker;
 
 namespace NAPS2.ImportExport.Pdf
 {
@@ -18,16 +17,12 @@ namespace NAPS2.ImportExport.Pdf
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly IPdfExporter pdfExporter;
         private readonly IOverwritePrompt overwritePrompt;
-        private readonly ThreadFactory threadFactory;
 
-        private Thread thread;
-
-        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory)
+        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt)
         {
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
             this.overwritePrompt = overwritePrompt;
-            this.threadFactory = threadFactory;
 
             AllowCancel = true;
         }
@@ -56,7 +51,7 @@ namespace NAPS2.ImportExport.Pdf
             }
 
             var snapshots = images.Select(x => x.Preserve()).ToList();
-            thread = threadFactory.StartThread(() =>
+            OperationTask = Task.Factory.StartNew(() =>
             {
                 try
                 {
@@ -92,14 +87,17 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 GC.Collect();
                 InvokeFinished();
+                return Status.Success;
             });
 
             return true;
         }
+
+        public Task<bool> OperationTask { get; private set; }
         
         public override void WaitUntilFinished()
         {
-            thread.Join();
+            OperationTask.Wait();
         }
     }
 }

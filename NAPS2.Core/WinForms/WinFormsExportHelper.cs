@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
@@ -41,7 +42,7 @@ namespace NAPS2.WinForms
             this.emailProviderFactory = emailProviderFactory;
         }
 
-        public bool SavePDF(List<ScannedImage> images, ISaveNotify notify)
+        public async Task<bool> SavePDF(List<ScannedImage> images, ISaveNotify notify)
         {
             if (images.Any())
             {
@@ -61,7 +62,7 @@ namespace NAPS2.WinForms
                 }
 
                 var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
-                if (ExportPDF(subSavePath, images, false))
+                if (await ExportPDF(subSavePath, images, false))
                 {
                     changeTracker.HasUnsavedChanges = false;
                     notify?.PdfSaved(subSavePath);
@@ -71,7 +72,7 @@ namespace NAPS2.WinForms
             return false;
         }
 
-        public bool ExportPDF(string filename, List<ScannedImage> images, bool email)
+        public async Task<bool> ExportPDF(string filename, List<ScannedImage> images, bool email)
         {
             var op = operationFactory.Create<SavePdfOperation>();
             var progressForm = formFactory.Create<FProgress>();
@@ -83,7 +84,7 @@ namespace NAPS2.WinForms
             {
                 progressForm.ShowDialog();
             }
-            return op.Status.Success;
+            return await op.OperationTask;
         }
 
         public bool SaveImages(List<ScannedImage> images, ISaveNotify notify)
@@ -120,7 +121,7 @@ namespace NAPS2.WinForms
             return false;
         }
 
-        public bool EmailPDF(List<ScannedImage> images)
+        public async Task<bool> EmailPDF(List<ScannedImage> images)
         {
             if (images.Any())
             {
@@ -142,7 +143,7 @@ namespace NAPS2.WinForms
                 try
                 {
                     string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
-                    if (!ExportPDF(targetPath, images, true))
+                    if (!await ExportPDF(targetPath, images, true))
                     {
                         // Cancel or error
                         return false;
