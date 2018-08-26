@@ -23,28 +23,22 @@ namespace NAPS2.WinForms
 
         private readonly IProfileManager profileManager;
         private readonly AppConfigManager appConfigManager;
-        private readonly IconButtonSizer iconButtonSizer;
-        private readonly IScanPerformer scanPerformer;
         private readonly IUserConfigManager userConfigManager;
         private readonly BatchScanPerformer batchScanPerformer;
         private readonly IErrorOutput errorOutput;
-        private readonly ThreadFactory threadFactory;
         private readonly DialogHelper dialogHelper;
 
-        private bool batchRunning = false;
-        private bool cancelBatch = false;
+        private bool batchRunning;
+        private bool cancelBatch;
         private Task batchTask;
 
-        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, ThreadFactory threadFactory, DialogHelper dialogHelper)
+        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, DialogHelper dialogHelper)
         {
             this.profileManager = profileManager;
             this.appConfigManager = appConfigManager;
-            this.iconButtonSizer = iconButtonSizer;
-            this.scanPerformer = scanPerformer;
             this.userConfigManager = userConfigManager;
             this.batchScanPerformer = batchScanPerformer;
             this.errorOutput = errorOutput;
-            this.threadFactory = threadFactory;
             this.dialogHelper = dialogHelper;
             InitializeComponent();
 
