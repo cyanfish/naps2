@@ -8,10 +8,12 @@ namespace NAPS2.WinForms
     public class WinFormsOperationProgress : IOperationProgress
     {
         private readonly IFormFactory formFactory;
+        private readonly NotificationManager notificationManager;
 
-        public WinFormsOperationProgress(IFormFactory formFactory)
+        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager)
         {
             this.formFactory = formFactory;
+            this.notificationManager = notificationManager;
         }
 
         public void ShowProgress(IOperation op)
@@ -19,6 +21,11 @@ namespace NAPS2.WinForms
             var form = formFactory.Create<FProgress>();
             form.Operation = op;
             form.ShowDialog();
+
+            if (form.Operation.Success?.IsCompleted == false)
+            {
+                notificationManager.OperationProgress(this, op);
+            }
         }
     }
 }

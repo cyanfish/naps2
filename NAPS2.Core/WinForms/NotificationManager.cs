@@ -13,16 +13,24 @@ namespace NAPS2.WinForms
         private const int PADDING_X = 25, PADDING_Y = 25;
         private const int SPACING_Y = 20;
 
-        private readonly FormBase parentForm;
         private readonly AppConfigManager appConfigManager;
 
         private readonly List<NotifyWidget> slots = new List<NotifyWidget>();
+        private FormBase parentForm;
 
-        public NotificationManager(FormBase parentForm, AppConfigManager appConfigManager)
+        public NotificationManager(AppConfigManager appConfigManager)
         {
-            this.parentForm = parentForm;
             this.appConfigManager = appConfigManager;
-            parentForm.Resize += parentForm_Resize;
+        }
+
+        public FormBase ParentForm
+        {
+            get => parentForm;
+            set
+            {
+                parentForm = value;
+                parentForm.Resize += parentForm_Resize;
+            }
         }
 
         public void PdfSaved(string path)
@@ -47,7 +55,7 @@ namespace NAPS2.WinForms
             Show(new DonatePromptNotifyWidget());
         }
 
-        public void OperationProgress(OperationManager opManager, IOperation op)
+        public void OperationProgress(IOperationProgress opModalProgress, IOperation op)
         {
             //Show(new OperationProgressNotifyWidget(opManager, op));
         }

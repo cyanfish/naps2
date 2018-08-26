@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport;
@@ -41,7 +42,7 @@ namespace NAPS2.Scan.Batch
             this.formFactory = formFactory;
         }
 
-        public void PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Func<string, bool> progressCallback)
+        public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Func<string, bool> progressCallback)
         {
             var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, ocrManager, formFactory)
             {
@@ -50,7 +51,7 @@ namespace NAPS2.Scan.Batch
                 BatchForm = batchForm,
                 LoadImageCallback = imageCallback
             };
-            state.Do();
+            await state.Do();
         }
 
         private class BatchState
@@ -88,7 +89,7 @@ namespace NAPS2.Scan.Batch
 
             public Action<ScannedImage> LoadImageCallback { get; set; }
 
-            public void Do()
+            public async Task Do()
             {
                 profile = profileManager.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
                 scanParams = new ScanParams
@@ -98,66 +99,72 @@ namespace NAPS2.Scan.Batch
                 };
                 try
                 {
-                    Input();
+                    await Input();
                 }
                 catch (Exception)
                 {
                     // Save at least some data so it isn't lost
-                    Output();
+                    await Output();
                     throw;
                 }
-                Output();
+                await Output();
             }
 
-            private void Input()
+            private async Task Input()
             {
-                scans = new List<List<ScannedImage>>();
+                await Task.Factory.StartNew(() =>
+                {
+                    scans = new List<List<ScannedImage>>();
 
-                if (Settings.ScanType == BatchScanType.Single)
-                {
-                    if (!InputOneScan(-1))
+                    if (Settings.ScanType == BatchScanType.Single)
                     {
-                        return;
-                    }
-                }
-                else if (Settings.ScanType == BatchScanType.MultipleWithDelay)
-                {
-                    for (int i = 0; i < Settings.ScanCount; i++)
-                    {
-                        if (i != 0)
+                        if (!InputOneScan(-1))
                         {
-                            string status = string.Format(MiscResources.BatchStatusWaitingForScan, i + 1);
-                            if (!ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds), TimeSpan.FromSeconds(1),
-                                () => ProgressCallback(status)))
+                            return;
+                        }
+                    }
+                    else if (Settings.ScanType == BatchScanType.MultipleWithDelay)
+                    {
+                        for (int i = 0; i < Settings.ScanCount; i++)
+                        {
+                            if (i != 0)
+                            {
+                                string status = string.Format(MiscResources.BatchStatusWaitingForScan, i + 1);
+                                if (!ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds), TimeSpan.FromSeconds(1),
+                                    () => ProgressCallback(status)))
+                                {
+                                    return;
+                                }
+                            }
+
+                            if (!InputOneScan(i))
+                            {
+                                return;
+                            }
+
+                            if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 2)))
                             {
                                 return;
                             }
                         }
-                        if (!InputOneScan(i))
-                        {
-                            return;
-                        }
-                        if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 2)))
-                        {
-                            return;
-                        }
                     }
-                }
-                else if (Settings.ScanType == BatchScanType.MultipleWithPrompt)
-                {
-                    int i = 0;
-                    do
+                    else if (Settings.ScanType == BatchScanType.MultipleWithPrompt)
                     {
-                        if (!InputOneScan(i++))
+                        int i = 0;
+                        do
                         {
-                            return;
-                        }
-                        if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1)))
-                        {
-                            return;
-                        }
-                    } while (PromptForNextScan());
-                }
+                            if (!InputOneScan(i++))
+                            {
+                                return;
+                            }
+
+                            if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1)))
+                            {
+                                return;
+                            }
+                        } while (PromptForNextScan());
+                    }
+                });
             }
 
             private bool ThreadSleepWithCancel(TimeSpan sleepDuration, TimeSpan cancelCheckInterval, Func<bool> cancelCheck)
@@ -239,7 +246,7 @@ namespace NAPS2.Scan.Batch
                 return promptForm.ShowDialog() == DialogResult.OK;
             }
 
-            private void Output()
+            private async Task Output()
             {
                 ProgressCallback(MiscResources.BatchStatusSaving);
 
@@ -255,7 +262,7 @@ namespace NAPS2.Scan.Batch
                 }
                 else if (Settings.OutputType == BatchOutputType.SingleFile)
                 {
-                    Save(now, 0, allImages);
+                    await Save(now, 0, allImages);
                     foreach (var img in allImages)
                     {
                         img.Dispose();
@@ -266,7 +273,7 @@ namespace NAPS2.Scan.Batch
                     int i = 0;
                     foreach (var imageList in SaveSeparatorHelper.SeparateScans(scans, Settings.SaveSeparator))
                     {
-                        Save(now, i++, imageList);
+                        await Save(now, i++, imageList);
                         foreach (var img in imageList)
                         {
                             img.Dispose();
@@ -275,7 +282,7 @@ namespace NAPS2.Scan.Batch
                 }
             }
 
-            private void Save(DateTime now, int i, List<ScannedImage> images)
+            private async Task Save(DateTime now, int i, List<ScannedImage> images)
             {
                 if (images.Count == 0)
                 {
@@ -305,7 +312,7 @@ namespace NAPS2.Scan.Batch
                 {
                     var op = operationFactory.Create<SaveImagesOperation>();
                     op.Start(subPath, now, images, true);
-                    op.WaitUntilFinished();
+                    await op.Success;
                 }
             }
 

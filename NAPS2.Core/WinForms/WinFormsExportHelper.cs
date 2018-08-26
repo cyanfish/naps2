@@ -27,8 +27,9 @@ namespace NAPS2.WinForms
         private readonly IFormFactory formFactory;
         private readonly OcrManager ocrManager;
         private readonly IEmailProviderFactory emailProviderFactory;
+        private readonly IOperationProgress operationProgress;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, IEmailProviderFactory emailProviderFactory)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, IEmailProviderFactory emailProviderFactory, IOperationProgress operationProgress)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -40,6 +41,7 @@ namespace NAPS2.WinForms
             this.formFactory = formFactory;
             this.ocrManager = ocrManager;
             this.emailProviderFactory = emailProviderFactory;
+            this.operationProgress = operationProgress;
         }
 
         public async Task<bool> SavePDF(List<ScannedImage> images, ISaveNotify notify)
@@ -75,19 +77,17 @@ namespace NAPS2.WinForms
         public async Task<bool> ExportPDF(string filename, List<ScannedImage> images, bool email)
         {
             var op = operationFactory.Create<SavePdfOperation>();
-            var progressForm = formFactory.Create<FProgress>();
-            progressForm.Operation = op;
 
             var pdfSettings = pdfSettingsContainer.PdfSettings;
             pdfSettings.Metadata.Creator = MiscResources.NAPS2;
             if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrManager.DefaultParams, email))
             {
-                progressForm.ShowDialog();
+                operationProgress.ShowProgress(op);
             }
-            return await op.OperationTask;
+            return await op.Success;
         }
 
-        public bool SaveImages(List<ScannedImage> images, ISaveNotify notify)
+        public async Task<bool> SaveImages(List<ScannedImage> images, ISaveNotify notify)
         {
             if (images.Any())
             {
@@ -107,11 +107,11 @@ namespace NAPS2.WinForms
                 }
 
                 var op = operationFactory.Create<SaveImagesOperation>();
-                var progressForm = formFactory.Create<FProgress>();
-                progressForm.Operation = op;
-                progressForm.Start = () => op.Start(savePath, DateTime.Now, images);
-                progressForm.ShowDialog();
-                if (op.Status.Success)
+                if (op.Start(savePath, DateTime.Now, images))
+                {
+                    operationProgress.ShowProgress(op);
+                }
+                if (await op.Success)
                 {
                     changeTracker.HasUnsavedChanges = false;
                     notify?.ImagesSaved(images.Count, op.FirstFileSaved);

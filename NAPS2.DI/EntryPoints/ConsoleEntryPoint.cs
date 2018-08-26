@@ -31,7 +31,7 @@ namespace NAPS2.DI.EntryPoints
 
             // Run the scan automation logic
             var scanning = kernel.Get<AutomatedScanning>(new ConstructorArgument("options", options));
-            scanning.Execute();
+            scanning.Execute().Wait();
         }
     }
 }

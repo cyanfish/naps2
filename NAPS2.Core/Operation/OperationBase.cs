@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using NAPS2.Util;
 
 namespace NAPS2.Operation
 {
@@ -9,7 +12,7 @@ namespace NAPS2.Operation
     /// </summary>
     public abstract class OperationBase : IOperation
     {
-        protected volatile bool cancel;
+        private readonly CancellationTokenSource cts = new CancellationTokenSource();
 
         public string ProgressTitle { get; protected set; }
 
@@ -19,31 +22,45 @@ namespace NAPS2.Operation
 
         public OperationStatus Status { get; protected set; }
 
+        public Task<bool> Success { get; protected set; }
+
         public void Cancel()
         {
-            cancel = true;
+            cts.Cancel();
         }
-
-        public abstract void WaitUntilFinished();
 
         public event EventHandler StatusChanged;
 
         public event EventHandler Finished;
 
-        public event EventHandler Success;
-
         public event EventHandler<OperationErrorEventArgs> Error;
 
         protected OperationErrorEventArgs LastError { get; private set; }
 
+        protected CancellationToken CancelToken => cts.Token;
+
+        protected void RunAsync(Func<bool> action)
+        {
+            Success = Task.Factory.StartNew(() =>
+            {
+                // We don't need to catch errors in general. The idea is that for a typical operation,
+                // OperationManager will handle it and show an error message box.
+                // For other uses, consumers should catch the errors.
+                try
+                {
+                    return action();
+                }
+                finally
+                {
+                    InvokeFinished();
+                }
+                // TODO: Maybe try and move away from "return false on cancel" and use cancellation tokens/OperationCancelledException via ct.ThrowIfCancellationRequested
+            }, CancelToken);
+        }
+
         protected void InvokeFinished()
         {
-            Status.Finished = true;
             Finished?.Invoke(this, new EventArgs());
-            if (Status.Success)
-            {
-                Success?.Invoke(this, new EventArgs());
-            }
         }
 
         protected void InvokeStatusChanged()
@@ -63,7 +80,7 @@ namespace NAPS2.Operation
             Status.CurrentProgress = current;
             Status.MaxProgress = max;
             InvokeStatusChanged();
-            return !cancel;
+            return !cts.Token.IsCancellationRequested;
         }
     }
 }

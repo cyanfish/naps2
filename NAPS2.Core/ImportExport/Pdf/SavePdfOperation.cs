@@ -51,11 +51,11 @@ namespace NAPS2.ImportExport.Pdf
             }
 
             var snapshots = images.Select(x => x.Preserve()).ToList();
-            OperationTask = Task.Factory.StartNew(() =>
+            RunAsync(() =>
             {
                 try
                 {
-                    Status.Success = pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress);
+                    return pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress);
                 }
                 catch (UnauthorizedAccessException ex)
                 {
@@ -84,20 +84,12 @@ namespace NAPS2.ImportExport.Pdf
                     {
                         s.Dispose();
                     }
+                    GC.Collect();
                 }
-                GC.Collect();
-                InvokeFinished();
-                return Status.Success;
+                return false;
             });
 
             return true;
-        }
-
-        public Task<bool> OperationTask { get; private set; }
-        
-        public override void WaitUntilFinished()
-        {
-            OperationTask.Wait();
         }
     }
 }

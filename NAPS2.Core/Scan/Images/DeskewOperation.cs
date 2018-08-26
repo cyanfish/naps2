@@ -12,15 +12,11 @@ namespace NAPS2.Scan.Images
 {
     public class DeskewOperation : OperationBase
     {
-        private readonly ThreadFactory threadFactory;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageRenderer scannedImageRenderer;
-        
-        private Thread thread;
 
-        public DeskewOperation(ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
+        public DeskewOperation(ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
         {
-            this.threadFactory = threadFactory;
             this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageRenderer = scannedImageRenderer;
 
@@ -36,12 +32,12 @@ namespace NAPS2.Scan.Images
                 MaxProgress = images.Count
             };
 
-            thread = threadFactory.StartThread(() =>
+            RunAsync(() =>
             {
                 var memoryLimitingSem = new Semaphore(4, 4);
                 Pipeline.For(images).StepParallel(img =>
                 {
-                    if (cancel)
+                    if (CancelToken.IsCancellationRequested)
                     {
                         return null;
                     }
@@ -49,12 +45,12 @@ namespace NAPS2.Scan.Images
                     Bitmap bitmap = scannedImageRenderer.Render(img);
                     try
                     {
-                        if (cancel)
+                        if (CancelToken.IsCancellationRequested)
                         {
                             return null;
                         }
                         var transform = RotationTransform.Auto(bitmap);
-                        if (cancel)
+                        if (CancelToken.IsCancellationRequested)
                         {
                             return null;
                         }
@@ -80,16 +76,10 @@ namespace NAPS2.Scan.Images
                     img.AddTransform(transform);
                     return img;
                 }).Run();
-                Status.Success = !cancel;
-                InvokeFinished();
+                return !CancelToken.IsCancellationRequested;
             });
 
             return true;
-        }
-
-        public override void WaitUntilFinished()
-        {
-            thread.Join();
         }
     }
 }

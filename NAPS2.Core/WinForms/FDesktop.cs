@@ -50,6 +50,7 @@ namespace NAPS2.WinForms
         private readonly KeyboardShortcutManager ksm;
         private readonly WinFormsExportHelper exportHelper;
         private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly NotificationManager notify;
 
         #endregion
 
@@ -60,13 +61,12 @@ namespace NAPS2.WinForms
         private LayoutManager layoutManager;
         private bool disableSelectedIndexChangedEvent;
         private readonly ThumbnailRenderer thumbnailRenderer;
-        private NotificationManager notify;
 
         #endregion
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer)
+        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify)
         {
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
@@ -83,8 +83,10 @@ namespace NAPS2.WinForms
             this.thumbnailRenderer = thumbnailRenderer;
             this.exportHelper = exportHelper;
             this.scannedImageRenderer = scannedImageRenderer;
+            this.notify = notify;
             InitializeComponent();
 
+            notify.ParentForm = this;
             Shown += FDesktop_Shown;
             FormClosing += FDesktop_FormClosing;
             Closed += FDesktop_Closed;
@@ -148,8 +150,6 @@ namespace NAPS2.WinForms
 
             thumbnailList1.MouseWheel += thumbnailList1_MouseWheel;
             thumbnailList1.SizeChanged += (sender, args) => layoutManager.UpdateLayout();
-
-            notify = new NotificationManager(this, appConfigManager);
         }
 
         private void InitLanguageDropdown()
@@ -791,9 +791,9 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void SaveImages(List<ScannedImage> images)
+        private async void SaveImages(List<ScannedImage> images)
         {
-            if (exportHelper.SaveImages(images, notify))
+            if (await exportHelper.SaveImages(images, notify))
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
@@ -803,9 +803,9 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void EmailPDF(List<ScannedImage> images)
+        private async void EmailPDF(List<ScannedImage> images)
         {
-            exportHelper.EmailPDF(images);
+            await exportHelper.EmailPDF(images);
         }
 
         private void Import()

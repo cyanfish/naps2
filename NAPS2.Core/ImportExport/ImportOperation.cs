@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
@@ -13,14 +12,10 @@ namespace NAPS2.ImportExport
     public class ImportOperation : OperationBase
     {
         private readonly IScannedImageImporter scannedImageImporter;
-        private readonly ThreadFactory threadFactory;
 
-        private Thread thread;
-
-        public ImportOperation(IScannedImageImporter scannedImageImporter, ThreadFactory threadFactory)
+        public ImportOperation(IScannedImageImporter scannedImageImporter)
         {
             this.scannedImageImporter = scannedImageImporter;
-            this.threadFactory = threadFactory;
 
             ProgressTitle = MiscResources.ImportProgress;
             AllowCancel = true;
@@ -34,16 +29,21 @@ namespace NAPS2.ImportExport
                 MaxProgress = oneFile ? 0 : filesToImport.Count
             };
 
-            thread = threadFactory.StartThread(() =>
+            RunAsync(() =>
             {
-                Run(filesToImport, imageCallback, oneFile);
-                GC.Collect();
-                InvokeFinished();
+                try
+                {
+                    return Run(filesToImport, imageCallback, oneFile);
+                }
+                finally
+                {
+                    GC.Collect();
+                }
             });
             return true;
         }
 
-        private void Run(IEnumerable<string> filesToImport, Action<ScannedImage> imageCallback, bool oneFile)
+        private bool Run(IEnumerable<string> filesToImport, Action<ScannedImage> imageCallback, bool oneFile)
         {
             foreach (var fileName in filesToImport)
             {
@@ -51,7 +51,7 @@ namespace NAPS2.ImportExport
                 {
                     Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
                     InvokeStatusChanged();
-                    var images = scannedImageImporter.Import(fileName, new ImportParams(), oneFile ? OnProgress : new ProgressHandler((j, k) => !cancel));
+                    var images = scannedImageImporter.Import(fileName, new ImportParams(), oneFile ? OnProgress : new ProgressHandler((j, k) => !CancelToken.IsCancellationRequested));
                     foreach (var img in images)
                     {
                         imageCallback(img);
@@ -68,12 +68,7 @@ namespace NAPS2.ImportExport
                     InvokeStatusChanged();
                 }
             }
-            Status.Success = true;
-        }
-
-        public override void WaitUntilFinished()
-        {
-            thread.Join();
+            return true;
         }
     }
 }

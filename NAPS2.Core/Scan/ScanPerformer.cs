@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport;
@@ -27,7 +28,7 @@ namespace NAPS2.Scan
             this.profileManager = profileManager;
         }
 
-        public void PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify, Action<ScannedImage> imageCallback)
+        public async Task PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify, Action<ScannedImage> imageCallback)
         {
             var driver = driverFactory.Create(scanProfile.DriverName);
             driver.DialogParent = dialogParent;
@@ -64,7 +65,7 @@ namespace NAPS2.Scan
                     {
                         // Auto save without piping images
                         var images = driver.Scan().ToList();
-                        if (autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
+                        if (await autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
                         {
                             foreach (ScannedImage img in images)
                             {
@@ -89,7 +90,7 @@ namespace NAPS2.Scan
                             imageCallback(scannedImage);
                             images.Add(scannedImage);
                         }
-                        autoSave.Save(scanProfile.AutoSaveSettings, images, notify);
+                        await autoSave.Save(scanProfile.AutoSaveSettings, images, notify);
                     }
                 }
                 else

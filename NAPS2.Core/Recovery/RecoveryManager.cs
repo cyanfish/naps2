@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
@@ -16,19 +15,17 @@ namespace NAPS2.Recovery
     public class RecoveryManager
     {
         private readonly IFormFactory formFactory;
-        private readonly ThreadFactory threadFactory;
         private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public RecoveryManager(IFormFactory formFactory, ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer)
+        public RecoveryManager(IFormFactory formFactory, ThumbnailRenderer thumbnailRenderer)
         {
             this.formFactory = formFactory;
-            this.threadFactory = threadFactory;
             this.thumbnailRenderer = thumbnailRenderer;
         }
 
         public void RecoverScannedImages(Action<ScannedImage> imageCallback)
         {
-            var op = new RecoveryOperation(formFactory, threadFactory, thumbnailRenderer);
+            var op = new RecoveryOperation(formFactory, thumbnailRenderer);
             var progressForm = formFactory.Create<FProgress>();
             progressForm.Operation = op;
             if (op.Start(imageCallback))
@@ -40,7 +37,6 @@ namespace NAPS2.Recovery
         private class RecoveryOperation : OperationBase
         {
             private readonly IFormFactory formFactory;
-            private readonly ThreadFactory threadFactory;
             private readonly ThumbnailRenderer thumbnailRenderer;
 
             private FileStream lockFile;
@@ -48,12 +44,10 @@ namespace NAPS2.Recovery
             private RecoveryIndexManager recoveryIndexManager;
             private int imageCount;
             private DateTime scannedDateTime;
-            private Thread thread;
 
-            public RecoveryOperation(IFormFactory formFactory, ThreadFactory threadFactory, ThumbnailRenderer thumbnailRenderer)
+            public RecoveryOperation(IFormFactory formFactory, ThumbnailRenderer thumbnailRenderer)
             {
                 this.formFactory = formFactory;
-                this.threadFactory = threadFactory;
                 this.thumbnailRenderer = thumbnailRenderer;
 
                 ProgressTitle = MiscResources.ImportProgress;
@@ -86,7 +80,7 @@ namespace NAPS2.Recovery
                     switch (PromptToRecover())
                     {
                         case DialogResult.Yes: // Recover
-                            thread = threadFactory.StartThread(() =>
+                            RunAsync(() =>
                             {
                                 try
                                 {
@@ -94,14 +88,14 @@ namespace NAPS2.Recovery
                                     {
                                         ReleaseFolderLock();
                                         DeleteFolder();
-                                        Status.Success = true;
+                                        return true;
                                     }
+                                    return false;
                                 }
                                 finally
                                 {
                                     ReleaseFolderLock();
                                     GC.Collect();
-                                    InvokeFinished();
                                 }
                             });
                             return true;
@@ -129,7 +123,7 @@ namespace NAPS2.Recovery
 
                 foreach (RecoveryIndexImage indexImage in recoveryIndexManager.Index.Images)
                 {
-                    if (cancel)
+                    if (CancelToken.IsCancellationRequested)
                     {
                         return false;
                     }
@@ -211,11 +205,6 @@ namespace NAPS2.Recovery
                     // Some problem, e.g. the folder is already locked
                     return false;
                 }
-            }
-
-            public override void WaitUntilFinished()
-            {
-                thread?.Join();
             }
         }
     }

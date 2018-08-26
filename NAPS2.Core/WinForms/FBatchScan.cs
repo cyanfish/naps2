@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.ImportExport;
@@ -32,7 +33,7 @@ namespace NAPS2.WinForms
 
         private bool batchRunning = false;
         private bool cancelBatch = false;
-        private Thread batchThread;
+        private Task batchTask;
 
         public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, ThreadFactory threadFactory, DialogHelper dialogHelper)
         {
@@ -270,8 +271,7 @@ namespace NAPS2.WinForms
             EnableDisableSettings(false);
 
             // Start the batch
-            batchThread = threadFactory.CreateThread(DoBatchScan);
-            batchThread.Start();
+            batchTask = DoBatchScan();
 
             // Save settings for next time (could also do on form close)
             userConfigManager.Config.LastBatchSettings = BatchSettings;
@@ -299,11 +299,11 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void DoBatchScan()
+        private async Task DoBatchScan()
         {
             try
             {
-                batchScanPerformer.PerformBatchScan(BatchSettings, this,
+                await batchScanPerformer.PerformBatchScan(BatchSettings, this,
                     image => SafeInvoke(() => ImageCallback(image)), ProgressCallback());
                 SafeInvoke(() =>
                 {

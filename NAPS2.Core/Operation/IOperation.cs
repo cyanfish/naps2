@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NAPS2.Operation
 {
@@ -17,15 +18,13 @@ namespace NAPS2.Operation
 
         OperationStatus Status { get; }
 
-        void Cancel();
+        Task<bool> Success { get; }
 
-        void WaitUntilFinished();
+        void Cancel();
 
         event EventHandler StatusChanged;
 
         event EventHandler Finished;
-
-        event EventHandler Success;
 
         event EventHandler<OperationErrorEventArgs> Error;
     }

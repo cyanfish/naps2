@@ -16,9 +16,5 @@ namespace NAPS2.Operation
         public int MaxProgress { get; set; }
 
         public bool IndeterminateProgress { get; set; }
-
-        public bool Success { get; set; }
-
-        public bool Finished { get; set; }
     }
 }

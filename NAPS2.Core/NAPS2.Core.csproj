@@ -163,7 +163,6 @@
     <Compile Include="Ocr\Tesseract304XpEngine.cs" />
     <Compile Include="Ocr\Tesseract304Engine.cs" />
     <Compile Include="Ocr\Tesseract302Engine.cs" />
-    <Compile Include="Operation\OperationManager.cs" />
     <Compile Include="Platform\ISystemCompat.cs" />
     <Compile Include="Platform\LinuxSystemCompat.cs" />
     <Compile Include="Platform\PlatformCompat.cs" />

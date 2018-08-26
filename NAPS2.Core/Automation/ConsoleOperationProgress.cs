@@ -9,7 +9,7 @@ namespace NAPS2.Automation
     {
         public void ShowProgress(IOperation op)
         {
-            op.WaitUntilFinished();
+            op.Success?.Wait();
         }
     }
 }

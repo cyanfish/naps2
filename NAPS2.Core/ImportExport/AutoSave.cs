@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
@@ -25,8 +26,9 @@ namespace NAPS2.ImportExport
         private readonly AppConfigManager appConfigManager;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly DialogHelper dialogHelper;
+        private readonly IOperationProgress operationProgress;
 
-        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper)
+        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper, IOperationProgress operationProgress)
         {
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
@@ -36,9 +38,10 @@ namespace NAPS2.ImportExport
             this.appConfigManager = appConfigManager;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.dialogHelper = dialogHelper;
+            this.operationProgress = operationProgress;
         }
 
-        public bool Save(AutoSaveSettings settings, List<ScannedImage> images, ISaveNotify notify)
+        public async Task<bool> Save(AutoSaveSettings settings, List<ScannedImage> images, ISaveNotify notify)
         {
             if (appConfigManager.Config.DisableAutoSave)
             {
@@ -53,11 +56,17 @@ namespace NAPS2.ImportExport
                 var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator).ToList();
                 foreach (var imageList in scans)
                 {
-                    if (!SaveOneFile(settings, now, i++, imageList, scans.Count == 1 ? notify : null, ref firstFileSaved))
+                    (bool success, string filePath) = await SaveOneFile(settings, now, i++, imageList, scans.Count == 1 ? notify : null);
+                    if (!success)
                     {
                         ok = false;
                     }
+                    if (success && firstFileSaved == null)
+                    {
+                        firstFileSaved = filePath;
+                    }
                 }
+                // TODO: Shouldn't this give duplicate notifications?
                 if (notify != null && scans.Count > 1 && ok)
                 {
                     // Can't just do images.Count because that includes patch codes
@@ -74,13 +83,12 @@ namespace NAPS2.ImportExport
             }
         }
         
-        private bool SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<ScannedImage> images, ISaveNotify notify, ref string firstFileSaved)
+        private async Task<(bool, string)> SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<ScannedImage> images, ISaveNotify notify)
         {
             if (images.Count == 0)
             {
-                return true;
+                return (true, null);
             }
-            var form = formFactory.Create<FProgress>();
             string subPath = fileNamePlaceholders.SubstitutePlaceholders(settings.FilePath, now, true, i);
             if (settings.PromptForFilePath)
             {
@@ -97,38 +105,30 @@ namespace NAPS2.ImportExport
                     subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
                 }
                 var op = operationFactory.Create<SavePdfOperation>();
-                form.Operation = op;
                 if (op.Start(subPath, now, images, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, false))
                 {
-                    form.ShowDialog();
+                    operationProgress.ShowProgress(op);
                 }
-                if (op.Status.Success && firstFileSaved == null)
-                {
-                    firstFileSaved = subPath;
-                }
-                if (op.Status.Success)
+                bool success = await op.Success;
+                if (success)
                 {
                     notify?.PdfSaved(subPath);
                 }
-                return op.Status.Success;
+                return (success, subPath);
             }
             else
             {
                 var op = operationFactory.Create<SaveImagesOperation>();
-                form.Operation = op;
                 if (op.Start(subPath, now, images))
                 {
-                    form.ShowDialog();
+                    operationProgress.ShowProgress(op);
                 }
-                if (op.Status.Success && firstFileSaved == null)
-                {
-                    firstFileSaved = op.FirstFileSaved;
-                }
-                if (op.Status.Success)
+                bool success = await op.Success;
+                if (success)
                 {
                     notify?.ImagesSaved(images.Count, op.FirstFileSaved);
                 }
-                return op.Status.Success;
+                return (success, subPath);
             }
         }
     }

@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
@@ -19,18 +18,14 @@ namespace NAPS2.ImportExport.Images
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOverwritePrompt overwritePrompt;
-        private readonly ThreadFactory threadFactory;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly TiffHelper tiffHelper;
-        
-        private Thread thread;
 
-        public SaveImagesOperation(FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ThreadFactory threadFactory, ScannedImageRenderer scannedImageRenderer, TiffHelper tiffHelper)
+        public SaveImagesOperation(FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ScannedImageRenderer scannedImageRenderer, TiffHelper tiffHelper)
         {
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.overwritePrompt = overwritePrompt;
-            this.threadFactory = threadFactory;
             this.scannedImageRenderer = scannedImageRenderer;
             this.tiffHelper = tiffHelper;
 
@@ -55,7 +50,7 @@ namespace NAPS2.ImportExport.Images
                 MaxProgress = images.Count
             };
 
-            thread = threadFactory.StartThread(() =>
+            RunAsync(() =>
             {
                 try
                 {
@@ -74,22 +69,21 @@ namespace NAPS2.ImportExport.Images
                         {
                             if (overwritePrompt.ConfirmOverwrite(subFileName) != DialogResult.Yes)
                             {
-                                return;
+                                return false;
                             }
                         }
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
-                        Status.Success = tiffHelper.SaveMultipage(images, subFileName, imageSettingsContainer.ImageSettings.TiffCompression, OnProgress);
                         FirstFileSaved = subFileName;
-                        return;
+                        return tiffHelper.SaveMultipage(images, subFileName, imageSettingsContainer.ImageSettings.TiffCompression, OnProgress);
                     }
 
                     int i = 0;
                     int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
                     foreach (ScannedImage img in images)
                     {
-                        if (cancel)
+                        if (CancelToken.IsCancellationRequested)
                         {
-                            return;
+                            return false;
                         }
                         Status.CurrentProgress = i;
                         InvokeStatusChanged();
@@ -103,7 +97,7 @@ namespace NAPS2.ImportExport.Images
                             }
                             if (dialogResult == DialogResult.Cancel)
                             {
-                                return;
+                                return false;
                             }
                         }
                         if (images.Count == 1)
@@ -129,7 +123,7 @@ namespace NAPS2.ImportExport.Images
                         i++;
                     }
 
-                    Status.Success = FirstFileSaved != null;
+                    return FirstFileSaved != null;
                 }
                 catch (UnauthorizedAccessException ex)
                 {
@@ -143,8 +137,8 @@ namespace NAPS2.ImportExport.Images
                 finally
                 {
                     GC.Collect();
-                    InvokeFinished();
                 }
+                return false;
             });
 
             return true;
@@ -174,20 +168,6 @@ namespace NAPS2.ImportExport.Images
                 {
                     bitmap.Save(path, format);
                 }
-            }
-        }
-
-        public override void WaitUntilFinished()
-        {
-            WaitUntilFinished(true);
-        }
-
-        public void WaitUntilFinished(bool throwOnError)
-        {
-            thread.Join();
-            if (throwOnError && LastError != null)
-            {
-                throw new Exception(LastError.ErrorMessage, LastError.Exception);
             }
         }
 
