@@ -33,6 +33,7 @@
             this.labelNumber = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.labelStatus = new System.Windows.Forms.Label();
+            this.btnRunInBG = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -60,10 +61,18 @@
             resources.ApplyResources(this.labelStatus, "labelStatus");
             this.labelStatus.Name = "labelStatus";
             // 
+            // btnRunInBG
+            // 
+            resources.ApplyResources(this.btnRunInBG, "btnRunInBG");
+            this.btnRunInBG.Name = "btnRunInBG";
+            this.btnRunInBG.UseVisualStyleBackColor = true;
+            this.btnRunInBG.Click += new System.EventHandler(this.btnRunInBG_Click);
+            // 
             // FProgress
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRunInBG);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.labelNumber);
             this.Controls.Add(this.progressBar);
@@ -84,5 +93,6 @@
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Button btnRunInBG;
     }
 }

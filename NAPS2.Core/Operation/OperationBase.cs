@@ -15,6 +15,8 @@ namespace NAPS2.Operation
 
         public bool AllowCancel { get; protected set; }
 
+        public bool AllowBackground { get; protected set; }
+
         public OperationStatus Status { get; protected set; }
 
         public void Cancel()
@@ -28,13 +30,20 @@ namespace NAPS2.Operation
 
         public event EventHandler Finished;
 
+        public event EventHandler Success;
+
         public event EventHandler<OperationErrorEventArgs> Error;
 
         protected OperationErrorEventArgs LastError { get; private set; }
 
         protected void InvokeFinished()
         {
+            Status.Finished = true;
             Finished?.Invoke(this, new EventArgs());
+            if (Status.Success)
+            {
+                Success?.Invoke(this, new EventArgs());
+            }
         }
 
         protected void InvokeStatusChanged()

@@ -13,6 +13,8 @@ namespace NAPS2.Operation
 
         bool AllowCancel { get; }
 
+        bool AllowBackground { get; }
+
         OperationStatus Status { get; }
 
         void Cancel();
@@ -22,6 +24,8 @@ namespace NAPS2.Operation
         event EventHandler StatusChanged;
 
         event EventHandler Finished;
+
+        event EventHandler Success;
 
         event EventHandler<OperationErrorEventArgs> Error;
     }

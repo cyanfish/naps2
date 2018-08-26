@@ -64,6 +64,8 @@ namespace NAPS2.DI.Modules
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();
+            Bind<NotificationManager>().ToSelf().InSingletonScope();
+            Bind<OperationManager>().ToSelf().InSingletonScope();
             Bind<IOperationFactory>().To<NinjectOperationFactory>();
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
             Bind<ChangeTracker>().ToSelf().InSingletonScope();

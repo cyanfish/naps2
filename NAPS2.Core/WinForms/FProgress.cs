@@ -14,6 +14,7 @@ namespace NAPS2.WinForms
 
         private volatile bool loaded;
         private volatile bool finished;
+        private volatile bool background;
         private IOperation operation;
 
         public FProgress(IErrorOutput errorOutput)
@@ -41,12 +42,15 @@ namespace NAPS2.WinForms
 
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
-            SafeInvoke(() => errorOutput.DisplayError(e.ErrorMessage, e.Exception));
+            if (!background)
+            {
+                SafeInvoke(() => errorOutput.DisplayError(e.ErrorMessage, e.Exception));
+            }
         }
 
         void operation_StatusChanged(object sender, EventArgs e)
         {
-            if (loaded)
+            if (loaded && !background)
             {
                 SafeInvoke(DisplayProgress);
             }
@@ -55,7 +59,7 @@ namespace NAPS2.WinForms
         void operation_Finished(object sender, EventArgs e)
         {
             finished = true;
-            if (loaded)
+            if (loaded && !background)
             {
                 SafeInvoke(Close);
             }
@@ -66,7 +70,7 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(progressBar, labelStatus)
                     .WidthToForm()
-                .Bind(btnCancel)
+                .Bind(btnRunInBG, btnCancel)
                     .RightToForm()
                 .Activate();
 
@@ -130,7 +134,7 @@ namespace NAPS2.WinForms
 
         private void FDownloadProgress_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!finished)
+            if (!finished && !background)
             {
                 TryCancelOp();
                 e.Cancel = true;
@@ -144,6 +148,12 @@ namespace NAPS2.WinForms
                 Operation.Cancel();
                 btnCancel.Enabled = false;
             }
+        }
+
+        private void btnRunInBG_Click(object sender, EventArgs e)
+        {
+            background = true;
+            Hide();
         }
     }
 }
