@@ -164,7 +164,7 @@ namespace NAPS2.Scan.Batch
                             }
                         } while (PromptForNextScan());
                     }
-                });
+                }, TaskCreationOptions.LongRunning);
             }
 
             private bool ThreadSleepWithCancel(TimeSpan sleepDuration, TimeSpan cancelCheckInterval, Func<bool> cancelCheck)

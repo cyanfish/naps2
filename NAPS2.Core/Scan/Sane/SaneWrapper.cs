@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
@@ -18,13 +19,6 @@ namespace NAPS2.Scan.Sane
         private const int SIGINT = 2;
         private const int SIGTERM = 15;
         private static readonly Regex ProgressRegex = new Regex(@"^Progress: (\d+(\.\d+)?)%");
-
-        private readonly ThreadFactory threadFactory;
-
-        public SaneWrapper(ThreadFactory threadFactory)
-        {
-            this.threadFactory = threadFactory;
-        }
 
         public IEnumerable<ScanDevice> GetDeviceList()
         {
@@ -83,12 +77,12 @@ namespace NAPS2.Scan.Sane
 
             // Read the image output into a MemoryStream off-thread
             var outputStream = new MemoryStream();
-            threadFactory.StartThread(() =>
+            Task.Factory.StartNew(() =>
             {
                 proc.StandardOutput.BaseStream.CopyTo(outputStream);
                 outputStream.Seek(0, SeekOrigin.Begin);
                 outputFinishedWaitHandle.Set();
-            });
+            }, TaskCreationOptions.LongRunning);
 
             // Wait for the process to stop (or for the user to cancel)
             while (!procExitWaitHandle.WaitOne(200))

@@ -51,6 +51,7 @@ namespace NAPS2.WinForms
         private readonly WinFormsExportHelper exportHelper;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly NotificationManager notify;
+        private readonly CultureInitializer cultureInitializer;
 
         #endregion
 
@@ -66,7 +67,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify)
+        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify, CultureInitializer cultureInitializer)
         {
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
@@ -84,6 +85,7 @@ namespace NAPS2.WinForms
             this.exportHelper = exportHelper;
             this.scannedImageRenderer = scannedImageRenderer;
             this.notify = notify;
+            this.cultureInitializer = cultureInitializer;
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -253,8 +255,7 @@ namespace NAPS2.WinForms
             SaveToolStripLocation();
             UserConfigManager.Config.Culture = cultureId;
             UserConfigManager.Save();
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureId);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureId);
+            cultureInitializer.InitCulture(Thread.CurrentThread);
 
             // Update localized values
             // Since all forms are opened modally and this is the root form, it should be the only one that needs to be updated live

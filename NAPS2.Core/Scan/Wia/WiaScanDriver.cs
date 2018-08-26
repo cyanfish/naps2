@@ -19,16 +19,14 @@ namespace NAPS2.Scan.Wia
 
         private readonly IWiaTransfer backgroundWiaTransfer;
         private readonly IWiaTransfer foregroundWiaTransfer;
-        private readonly ThreadFactory threadFactory;
         private readonly IBlankDetector blankDetector;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public WiaScanDriver(BackgroundWiaTransfer backgroundWiaTransfer, ForegroundWiaTransfer foregroundWiaTransfer, ThreadFactory threadFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
+        public WiaScanDriver(BackgroundWiaTransfer backgroundWiaTransfer, ForegroundWiaTransfer foregroundWiaTransfer, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
         {
             this.backgroundWiaTransfer = backgroundWiaTransfer;
             this.foregroundWiaTransfer = foregroundWiaTransfer;
-            this.threadFactory = threadFactory;
             this.blankDetector = blankDetector;
             this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageHelper = scannedImageHelper;
@@ -44,7 +42,7 @@ namespace NAPS2.Scan.Wia
 
         protected override IEnumerable<ScannedImage> ScanInternal()
         {
-            using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice, threadFactory))
+            using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice))
             {
                 bool supportsFeeder = eventLoop.GetSync(wia => WiaApi.DeviceSupportsFeeder(wia.Device));
                 if (ScanProfile.PaperSource != ScanSource.Glass && !supportsFeeder)

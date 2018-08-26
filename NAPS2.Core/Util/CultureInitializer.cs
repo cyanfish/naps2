@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using NAPS2.Config;
+using NAPS2.Lang.Resources;
 
 namespace NAPS2.Util
 {
@@ -24,13 +25,15 @@ namespace NAPS2.Util
         public void InitCulture(Thread thread)
         {
             var cultureId = userConfigManager.Config.Culture ?? appConfigManager.Config.DefaultCulture;
-            if (!String.IsNullOrWhiteSpace(cultureId))
+            if (!string.IsNullOrWhiteSpace(cultureId))
             {
                 try
                 {
                     var culture = new CultureInfo(cultureId);
                     thread.CurrentUICulture = culture;
                     thread.CurrentCulture = culture;
+                    MiscResources.Culture = culture;
+                    SettingsResources.Culture = culture;
                 }
                 catch (CultureNotFoundException e)
                 {

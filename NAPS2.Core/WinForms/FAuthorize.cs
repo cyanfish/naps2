@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Email.Oauth;
 using NAPS2.Util;
@@ -11,14 +12,10 @@ namespace NAPS2.WinForms
 {
     public partial class FAuthorize : FormBase
     {
-        private readonly ThreadFactory threadFactory;
-
         private CancellationTokenSource cancelTokenSource;
 
-        public FAuthorize(ThreadFactory threadFactory)
+        public FAuthorize()
         {
-            this.threadFactory = threadFactory;
-
             RestoreFormState = false;
             InitializeComponent();
         }
@@ -31,7 +28,7 @@ namespace NAPS2.WinForms
             MinimumSize = new Size(Math.Max(lblWaiting.Width + 142, 272), Height);
 
             cancelTokenSource = new CancellationTokenSource();
-            threadFactory.StartThread(() =>
+            Task.Factory.StartNew(() =>
             {
                 try
                 {
@@ -45,7 +42,7 @@ namespace NAPS2.WinForms
                 catch (OperationCanceledException)
                 {
                 }
-            });
+            }, TaskCreationOptions.LongRunning);
         }
 
         private void FAuthorize_FormClosed(object sender, FormClosedEventArgs e)

@@ -55,7 +55,7 @@ namespace NAPS2.Operation
                     InvokeFinished();
                 }
                 // TODO: Maybe try and move away from "return false on cancel" and use cancellation tokens/OperationCancelledException via ct.ThrowIfCancellationRequested
-            }, CancelToken);
+            }, CancelToken, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
 
         protected void InvokeFinished()

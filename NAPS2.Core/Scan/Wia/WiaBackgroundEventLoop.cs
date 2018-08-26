@@ -20,12 +20,12 @@ namespace NAPS2.Scan.Wia
         private Form form;
         private WiaState wiaState;
 
-        public WiaBackgroundEventLoop(ScanProfile profile, ScanDevice scanDevice, ThreadFactory threadFactory)
+        public WiaBackgroundEventLoop(ScanProfile profile, ScanDevice scanDevice)
         {
             this.profile = profile;
             this.scanDevice = scanDevice;
 
-            thread = threadFactory.CreateThread(RunEventLoop);
+            thread = new Thread(RunEventLoop);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
             // Wait for the thread to initialize the background form and event loop

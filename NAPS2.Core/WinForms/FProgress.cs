@@ -76,6 +76,8 @@ namespace NAPS2.WinForms
 
             loaded = true;
             Text = operation.ProgressTitle;
+            btnRunInBG.Visible = operation.AllowBackground;
+            // TODO: Check i10n of button positions, here and in general
 
             DisplayProgress();
             if (finished)

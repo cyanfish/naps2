@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan.Wia;
@@ -12,15 +13,11 @@ namespace NAPS2.WinForms
 {
     public partial class FScanProgress : FormBase
     {
-        private readonly ThreadFactory threadFactory;
-
         private bool isComplete;
         private bool cancel;
 
-        public FScanProgress(ThreadFactory threadFactory)
+        public FScanProgress()
         {
-            this.threadFactory = threadFactory;
-
             RestoreFormState = false;
             InitializeComponent();
         }
@@ -63,7 +60,7 @@ namespace NAPS2.WinForms
 
         private void FScanProgress_Shown(object sender, EventArgs e)
         {
-            threadFactory.StartThread(() =>
+            Task.Factory.StartNew(() =>
             {
                 try
                 {
@@ -79,7 +76,7 @@ namespace NAPS2.WinForms
                     DialogResult = cancel ? DialogResult.Cancel : DialogResult.OK;
                     Close();
                 });
-            });
+            }, TaskCreationOptions.LongRunning);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
