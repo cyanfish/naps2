@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
@@ -28,8 +30,9 @@ namespace NAPS2.WinForms
         private readonly OcrManager ocrManager;
         private readonly IEmailProviderFactory emailProviderFactory;
         private readonly IOperationProgress operationProgress;
+        private readonly IUserConfigManager userConfigManager;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, IEmailProviderFactory emailProviderFactory, IOperationProgress operationProgress)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, IEmailProviderFactory emailProviderFactory, IOperationProgress operationProgress, IUserConfigManager userConfigManager)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -42,6 +45,7 @@ namespace NAPS2.WinForms
             this.ocrManager = ocrManager;
             this.emailProviderFactory = emailProviderFactory;
             this.operationProgress = operationProgress;
+            this.userConfigManager = userConfigManager;
         }
 
         public async Task<bool> SavePDF(List<ScannedImage> images, ISaveNotify notify)
@@ -123,53 +127,65 @@ namespace NAPS2.WinForms
 
         public async Task<bool> EmailPDF(List<ScannedImage> images)
         {
-            if (images.Any())
+            if (!images.Any())
             {
-                var emailSettings = emailSettingsContainer.EmailSettings;
-                var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
-                var attachmentName = new string(emailSettings.AttachmentName.Where(x => !invalidChars.Contains(x)).ToArray());
-                if (string.IsNullOrEmpty(attachmentName))
-                {
-                    attachmentName = "Scan.pdf";
-                }
-                if (!attachmentName.EndsWith(".pdf", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    attachmentName += ".pdf";
-                }
-                attachmentName = fileNamePlaceholders.SubstitutePlaceholders(attachmentName, DateTime.Now, false);
+                return false;
+            }
 
-                var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
-                tempFolder.Create();
-                try
+            if (userConfigManager.Config.EmailSetup == null)
+            {
+                // First run; prompt for a 
+                var form = formFactory.Create<FEmailProvider>();
+                if (form.ShowDialog() != DialogResult.OK)
                 {
-                    string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
-                    if (!await ExportPDF(targetPath, images, true))
+                    return false;
+                }
+            }
+
+            var emailSettings = emailSettingsContainer.EmailSettings;
+            var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+            var attachmentName = new string(emailSettings.AttachmentName.Where(x => !invalidChars.Contains(x)).ToArray());
+            if (string.IsNullOrEmpty(attachmentName))
+            {
+                attachmentName = "Scan.pdf";
+            }
+            if (!attachmentName.EndsWith(".pdf", StringComparison.InvariantCultureIgnoreCase))
+            {
+                attachmentName += ".pdf";
+            }
+            attachmentName = fileNamePlaceholders.SubstitutePlaceholders(attachmentName, DateTime.Now, false);
+
+            var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
+            tempFolder.Create();
+            try
+            {
+                string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
+                if (!await ExportPDF(targetPath, images, true))
+                {
+                    // Cancel or error
+                    return false;
+                }
+                var message = new EmailMessage
+                {
+                    Attachments =
                     {
-                        // Cancel or error
-                        return false;
-                    }
-                    var message = new EmailMessage
-                    {
-                        Attachments =
+                        new EmailAttachment
                         {
-                            new EmailAttachment
-                            {
-                                FilePath = targetPath,
-                                AttachmentName = attachmentName
-                            }
+                            FilePath = targetPath,
+                            AttachmentName = attachmentName
                         }
-                    };
-
-                    if (emailProviderFactory.Default.SendEmail(message))
-                    {
-                        changeTracker.HasUnsavedChanges = false;
-                        return true;
                     }
-                }
-                finally
+                };
+
+                if (emailProviderFactory.Default.SendEmail(message))
                 {
-                    tempFolder.Delete(true);
+                    changeTracker.HasUnsavedChanges = false;
+                    return true;
                 }
+            }
+            finally
+            {
+                tempFolder.Delete(true);
             }
             return false;
         }

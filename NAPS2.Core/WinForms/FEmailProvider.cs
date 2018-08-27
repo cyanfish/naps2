@@ -68,13 +68,13 @@ namespace NAPS2.WinForms
                 });
             }
 
-            providerWidgets.Add(new EmailProviderWidget
-            {
-                ProviderType = EmailProviderType.CustomSmtp,
-                ProviderIcon = Icons.email_setting,
-                ProviderName = EmailProviderType.CustomSmtp.Description(),
-                ClickAction = ChooseCustomSmtp
-            });
+            //providerWidgets.Add(new EmailProviderWidget
+            //{
+            //    ProviderType = EmailProviderType.CustomSmtp,
+            //    ProviderIcon = Icons.email_setting,
+            //    ProviderName = EmailProviderType.CustomSmtp.Description(),
+            //    ClickAction = ChooseCustomSmtp
+            //});
 
             // Put the configured provider at the top
             var defaultWidget = GetDefaultWidget();
@@ -108,11 +108,6 @@ namespace NAPS2.WinForms
                 // TODO: Refocus app after the user finishes interaction (which form though?)
                 // TODO: Have multiple progress messages in FAuthorize
             }
-        }
-
-        private void ChooseCustomSmtp()
-        {
-            throw new NotImplementedException();
         }
 
         private void ShowWidgets()
