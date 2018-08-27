@@ -55,7 +55,7 @@ namespace NAPS2.ImportExport.Images
                     {
                         ValidateBitmap(bitmap0);
                         encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
-                        encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame); ;
+                        encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
                         bitmap0.Save(location, codecInfo, encoderParams);
 
                         for (int i = 1; i < images.Count; i++)
