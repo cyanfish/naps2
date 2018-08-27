@@ -329,10 +329,10 @@
     <Compile Include="Util\CultureInitializer.cs" />
     <Compile Include="Util\IErrorOutput.cs" />
     <Compile Include="Util\ILogger.cs" />
-    <Compile Include="ILProfileIcons.cs">
+    <Compile Include="WinForms\ILProfileIcons.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ILProfileIcons.Designer.cs">
+    <Compile Include="WinForms\ILProfileIcons.Designer.cs">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportExport\Email\EmailAttachment.cs" />
@@ -691,7 +691,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Icons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ILProfileIcons.resx">
+    <EmbeddedResource Include="WinForms\ILProfileIcons.resx">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -5963,5 +5963,5 @@ echo { client_id: null, client_secret: null } &gt; $(ProjectDir)microsoft.creden
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\NAPS2\Setup\CommonTargets.targets"/>
+  <Import Project="..\NAPS2\Setup\CommonTargets.targets" />
 </Project>
