@@ -46,6 +46,8 @@ function Set-NAPS2-Version {
 function Build-NAPS2 {
     $msbuild = Get-MSBuild-Path
     Get-Process | where { $_.ProcessName -eq "NAPS2.vshost" } | kill
+	"Cleaning"
+	& $msbuild ..\..\NAPS2.sln /v:q /t:Clean
     "Building EXE"
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerEXE
     "Building MSI"
