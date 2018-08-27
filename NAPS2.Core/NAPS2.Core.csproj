@@ -5963,4 +5963,5 @@ echo { client_id: null, client_secret: null } &gt; $(ProjectDir)microsoft.creden
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\NAPS2\Setup\CommonTargets.targets"/>
 </Project>

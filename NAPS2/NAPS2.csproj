@@ -250,4 +250,5 @@ editbin /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\NAPS2\Setup\CommonTargets.targets"/>
 </Project>

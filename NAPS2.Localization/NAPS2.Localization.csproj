@@ -56,4 +56,5 @@
     <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\NAPS2\Setup\CommonTargets.targets"/>
 </Project>
