@@ -37,16 +37,18 @@ namespace NAPS2.Ocr
 
         protected override RunInfo TesseractRunInfo(OcrParams ocrParams)
         {
-            string folder = ocrParams.Mode == OcrMode.Fast || ocrParams.Mode == OcrMode.Default ? "fast" : "best";
-            if (!File.Exists(Path.Combine(TesseractBasePath, folder, $"{ocrParams.LanguageCode}.traineddata")))
+            OcrMode mode = ocrParams.Mode;
+            string folder = mode == OcrMode.Fast || mode == OcrMode.Default ? "fast" : "best";
+            if (ocrParams.LanguageCode.Split('+').All(code => !File.Exists(Path.Combine(TesseractBasePath, folder, $"{code.ToLowerInvariant()}.traineddata"))))
             {
                 // Use the other source if the selected one doesn't exist
                 folder = folder == "fast" ? "best" : "fast";
+                mode = folder == "fast" ? OcrMode.Fast : OcrMode.Best;
             }
 
             return new RunInfo
             {
-                Arguments = ocrParams.Mode == OcrMode.Best ? "--oem 1" : ocrParams.Mode == OcrMode.Legacy ? "--oem 0" : "",
+                Arguments = mode == OcrMode.Best ? "--oem 1" : mode == OcrMode.Legacy ? "--oem 0" : "",
                 DataPath = folder,
                 PrefixPath = folder
             };
