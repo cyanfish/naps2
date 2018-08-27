@@ -178,17 +178,17 @@ namespace NAPS2.ImportExport.Pdf
                         string line;
                         while ((line = reader.ReadLine()) != null)
                         {
-                            if (line.EndsWith("BT"))
+                            if (line.EndsWith("BT", StringComparison.InvariantCulture))
                             {
                                 inTextBlock = true;
                             }
-                            else if (line.EndsWith("ET"))
+                            else if (line.EndsWith("ET", StringComparison.InvariantCulture))
                             {
                                 inTextBlock = false;
                             }
                             else if (inTextBlock &&
-                                          (line.EndsWith("TJ") || line.EndsWith("Tj")
-                                           || line.EndsWith("\"") || line.EndsWith("'")))
+                                          (line.EndsWith("TJ", StringComparison.InvariantCulture) || line.EndsWith("Tj", StringComparison.InvariantCulture)
+                                           || line.EndsWith("\"", StringComparison.InvariantCulture) || line.EndsWith("'", StringComparison.InvariantCulture)))
                             {
                                 // Text-showing operators
                                 // Since this page already contains text, don't use OCR

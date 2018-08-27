@@ -125,7 +125,7 @@ namespace NAPS2.ImportExport.Pdf
             foreach (var font in document.Internals.GetAllObjects().OfType<PdfFont>())
             {
                 var subtype = font.Elements["/Subtype"] as PdfName;
-                if (subtype != null && subtype.Value.StartsWith("/CID"))
+                if (subtype != null && subtype.Value.StartsWith("/CID", StringComparison.InvariantCulture))
                 {
                     font.Elements["/CIDToGIDMap"] = new PdfName("/Identity");
                 }

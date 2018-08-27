@@ -25,11 +25,11 @@ namespace NAPS2.Localization
                 while ((line = reader.ReadLine()) != null)
                 {
                     line = line.Trim();
-                    if (line.StartsWith("msgid"))
+                    if (line.StartsWith("msgid", StringComparison.InvariantCulture))
                     {
                         var original = line.Substring(7, line.Length - 8);
                         line = reader.ReadLine();
-                        if (line == null || !line.StartsWith("msgstr"))
+                        if (line == null || !line.StartsWith("msgstr", StringComparison.InvariantCulture))
                         {
                             continue;
                         }

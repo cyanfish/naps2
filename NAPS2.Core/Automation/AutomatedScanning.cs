@@ -504,20 +504,20 @@ namespace NAPS2.Automation
             var compat = PdfCompat.Default;
             if (options.PdfCompat != null)
             {
-                var t = options.PdfCompat.Replace(" ", "").Replace("-", "").ToLowerInvariant();
-                if (t.EndsWith("a1b"))
+                var t = options.PdfCompat.Replace(" ", "").Replace("-", "");
+                if (t.EndsWith("a1b", StringComparison.InvariantCultureIgnoreCase))
                 {
                     compat = PdfCompat.PdfA1B;
                 }
-                else if (t.EndsWith("a2b"))
+                else if (t.EndsWith("a2b", StringComparison.InvariantCultureIgnoreCase))
                 {
                     compat = PdfCompat.PdfA2B;
                 }
-                else if (t.EndsWith("a3b"))
+                else if (t.EndsWith("a3b", StringComparison.InvariantCultureIgnoreCase))
                 {
                     compat = PdfCompat.PdfA3B;
                 }
-                else if (t.EndsWith("a3u"))
+                else if (t.EndsWith("a3u", StringComparison.InvariantCultureIgnoreCase))
                 {
                     compat = PdfCompat.PdfA3U;
                 }

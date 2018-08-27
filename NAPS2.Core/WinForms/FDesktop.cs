@@ -278,7 +278,7 @@ namespace NAPS2.WinForms
             // Receive messages from other processes
             Pipes.StartServer(msg =>
             {
-                if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE))
+                if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE, StringComparison.InvariantCulture))
                 {
                     SafeInvoke(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
                 }

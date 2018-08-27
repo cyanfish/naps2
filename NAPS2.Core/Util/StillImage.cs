@@ -33,7 +33,7 @@ namespace NAPS2.Util
             bool noElevation = args.Any(x => x.Equals("/NoElevation", StringComparison.InvariantCultureIgnoreCase));
             foreach (var arg in args)
             {
-                if (arg.StartsWith(DEVICE_PREFIX))
+                if (arg.StartsWith(DEVICE_PREFIX, StringComparison.InvariantCultureIgnoreCase))
                 {
                     DeviceID = arg.Substring(DEVICE_PREFIX.Length);
                     DoScan = true;

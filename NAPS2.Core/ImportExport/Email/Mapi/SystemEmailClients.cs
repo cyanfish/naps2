@@ -38,7 +38,7 @@ namespace NAPS2.ImportExport.Email.Mapi
             using (var command = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}\shell\open\command", false))
             {
                 string commandText = command?.GetValue(null).ToString() ?? "";
-                if (!commandText.StartsWith("\""))
+                if (!commandText.StartsWith("\"", StringComparison.InvariantCulture))
                 {
                     return null;
                 }
