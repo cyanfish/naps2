@@ -12,21 +12,23 @@ namespace NAPS2.Ocr
         protected static readonly List<DownloadMirror> Mirrors = new List<DownloadMirror>
         {
             new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://github.com/cyanfish/naps2-components/releases/download/tesseract-4.00b4/{0}"),
-            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-4.00b4/{0}/download"),
-            new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-4.00b4/{0}")
+            new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-4.00b4/{0}/download")
         };
 
         public Tesseract400Beta4Engine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager)
         {
+            string exeFolder = Environment.Is64BitProcess ? "tess64" : "tess32";
             LanguageData = TesseractLanguageData.V400B4;
             TesseractBasePath = Path.Combine(componentManager.BasePath, "tesseract-4.0.0b4");
-            TesseractExePath = Path.Combine("tess64", "tesseract.exe");
-            PlatformSupport = PlatformSupport.ModernWindows64;
+            TesseractExePath = Path.Combine(exeFolder, "tesseract.exe");
+            PlatformSupport = PlatformSupport.ModernWindows;
             CanInstall = true;
             SupportedModes = new[] { OcrMode.Fast, OcrMode.Best, OcrMode.Legacy };
 
-            Component = new MultiFileExternalComponent("ocr", Path.Combine(TesseractBasePath, "tess64"), new[] { "tesseract.exe" },
-                new DownloadInfo("tesseract-4.0.0b4.zip", Mirrors, 3.33, "03f4ae58312c1e2329323fe4b555e4f8c7ce8b0e", DownloadFormat.Zip));
+            var download = Environment.Is64BitProcess
+                ? new DownloadInfo("tesseract.exe-dlls-400b4-tess64.zip", Mirrors, 2.61, "03f4ae58312c1e2329323fe4b555e4f8c7ce8b0e", DownloadFormat.Zip)
+                : new DownloadInfo("tesseract.exe-dlls-400b4-tess32.zip", Mirrors, 3.33, "7de12928ec6a7cdb28fb1895a41d637da968eb0c", DownloadFormat.Zip);
+            Component = new MultiFileExternalComponent("ocr", Path.Combine(TesseractBasePath, exeFolder), new[] { "tesseract.exe" }, download);
 
             LanguageComponents = LanguageData.Data.Select(x =>
                 new MultiFileExternalComponent($"ocr-{x.Code}", TesseractBasePath, new[] { $"best/{x.Code}.traineddata", $"fast/{x.Code}.traineddata" },
