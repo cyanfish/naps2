@@ -22,6 +22,6 @@ namespace NAPS2.Platform
 
         public string ExeRunner => null;
 
-        public bool UseWorker => true;
+        public bool UseWorker => Environment.Is64BitProcess;
     }
 }
