@@ -24,7 +24,7 @@
   <DisableSaveNotifications>false</DisableSaveNotifications>
   <SingleInstance>false</SingleInstance>
   <ComponentsPath></ComponentsPath>
-  <OcrTimeoutInSeconds>120</OcrTimeoutInSeconds>
+  <OcrTimeoutInSeconds>240</OcrTimeoutInSeconds>
   <OcrState>UserConfig</OcrState>
   <OcrDefaultLanguage></OcrDefaultLanguage>
   <ForcePdfCompat>Default</ForcePdfCompat>
