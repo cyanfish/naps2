@@ -284,12 +284,19 @@ namespace NAPS2.ImportExport.Pdf
 
         private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
         {
+#if DEBUG && DEBUGOCR
+            using (XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Append))
+#else
             using (XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend))
+#endif
             {
                 var tf = new XTextFormatter(gfx);
                 foreach (var element in ocrResult.Elements)
                 {
                     var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
+#if DEBUG && DEBUGOCR
+                    gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), adjustedBounds);
+#endif
                     var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
                     var font = new XFont("Verdana", adjustedFontSize, XFontStyle.Regular,
                         new XPdfFontOptions(PdfFontEncoding.Unicode));
