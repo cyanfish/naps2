@@ -144,7 +144,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkBoxEnableOcr.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -171,7 +171,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="comboLanguages.Location" type="System.Drawing.Point, System.Drawing">
     <value>132, 38</value>
@@ -192,14 +192,14 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboLanguages.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 65</value>
+    <value>233, 127</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -220,13 +220,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="linkGetLanguages.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="linkGetLanguages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 70</value>
+    <value>12, 132</value>
   </data>
   <data name="linkGetLanguages.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
@@ -247,10 +247,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;linkGetLanguages.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 65</value>
+    <value>152, 127</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -271,6 +271,87 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="comboOcrMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 67</value>
+  </data>
+  <data name="comboOcrMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 21</value>
+  </data>
+  <data name="comboOcrMode.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;comboOcrMode.Name" xml:space="preserve">
+    <value>comboOcrMode</value>
+  </data>
+  <data name="&gt;&gt;comboOcrMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboOcrMode.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboOcrMode.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelOcrMode.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelOcrMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelOcrMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 70</value>
+  </data>
+  <data name="labelOcrMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="labelOcrMode.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelOcrMode.Text" xml:space="preserve">
+    <value>OCR mode:</value>
+  </data>
+  <data name="&gt;&gt;labelOcrMode.Name" xml:space="preserve">
+    <value>labelOcrMode</value>
+  </data>
+  <data name="&gt;&gt;labelOcrMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelOcrMode.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelOcrMode.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="checkBoxRunInBG.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxRunInBG.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBoxRunInBG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 97</value>
+  </data>
+  <data name="checkBoxRunInBG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 17</value>
+  </data>
+  <data name="checkBoxRunInBG.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="checkBoxRunInBG.Text" xml:space="preserve">
+    <value>&amp;Automatically run OCR after scanning</value>
+  </data>
+  <data name="&gt;&gt;checkBoxRunInBG.Name" xml:space="preserve">
+    <value>checkBoxRunInBG</value>
+  </data>
+  <data name="&gt;&gt;checkBoxRunInBG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxRunInBG.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxRunInBG.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -280,7 +361,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>320, 100</value>
+    <value>320, 162</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -307,10 +388,10 @@
 </value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 139</value>
+    <value>1000, 201</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>336, 139</value>
+    <value>336, 201</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>OCR Setup</value>
@@ -319,6 +400,6 @@
     <value>FOcrSetup</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=4.3.1.31793, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.40491, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

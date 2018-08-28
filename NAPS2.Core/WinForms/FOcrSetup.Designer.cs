@@ -35,6 +35,9 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.linkGetLanguages = new System.Windows.Forms.LinkLabel();
             this.btnOK = new System.Windows.Forms.Button();
+            this.comboOcrMode = new System.Windows.Forms.ComboBox();
+            this.labelOcrMode = new System.Windows.Forms.Label();
+            this.checkBoxRunInBG = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkBoxEnableOcr
@@ -77,10 +80,31 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // comboOcrMode
+            // 
+            this.comboOcrMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboOcrMode.FormattingEnabled = true;
+            resources.ApplyResources(this.comboOcrMode, "comboOcrMode");
+            this.comboOcrMode.Name = "comboOcrMode";
+            // 
+            // labelOcrMode
+            // 
+            resources.ApplyResources(this.labelOcrMode, "labelOcrMode");
+            this.labelOcrMode.Name = "labelOcrMode";
+            // 
+            // checkBoxRunInBG
+            // 
+            resources.ApplyResources(this.checkBoxRunInBG, "checkBoxRunInBG");
+            this.checkBoxRunInBG.Name = "checkBoxRunInBG";
+            this.checkBoxRunInBG.UseVisualStyleBackColor = true;
+            // 
             // FOcrSetup
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBoxRunInBG);
+            this.Controls.Add(this.comboOcrMode);
+            this.Controls.Add(this.labelOcrMode);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.linkGetLanguages);
             this.Controls.Add(this.btnCancel);
@@ -103,5 +127,8 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.LinkLabel linkGetLanguages;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.ComboBox comboOcrMode;
+        private System.Windows.Forms.Label labelOcrMode;
+        private System.Windows.Forms.CheckBox checkBoxRunInBG;
     }
 }

@@ -27,6 +27,8 @@
   <OcrTimeoutInSeconds>240</OcrTimeoutInSeconds>
   <OcrState>UserConfig</OcrState>
   <OcrDefaultLanguage></OcrDefaultLanguage>
+  <OcrDefaultMode>Fast</OcrDefaultMode>
+  <OcrDefaultAfterScanning>true</OcrDefaultAfterScanning>
   <ForcePdfCompat>Default</ForcePdfCompat>
   <DefaultProfileSettings>
     <DriverName></DriverName>

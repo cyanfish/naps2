@@ -41,6 +41,8 @@ namespace NAPS2.Config
 
         public OcrMode OcrMode { get; set; }
 
+        public bool? OcrAfterScanning { get; set; }
+
         public string LastImageExt { get; set; }
 
         public PdfSettings PdfSettings { get; set; }

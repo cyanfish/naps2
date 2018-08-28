@@ -70,6 +70,8 @@ namespace NAPS2.Config
 
         public OcrMode OcrDefaultMode { get; set; }
 
+        public bool OcrDefaultAfterScanning { get; set; }
+
         public PdfCompat ForcePdfCompat { get; set; } 
 
         public KeyboardShortcuts KeyboardShortcuts { get; set; }

@@ -22,7 +22,10 @@ namespace NAPS2.WinForms
             cmbTwainImpl.Items.Add(TwainImpl.MemXfer);
             cmbTwainImpl.Items.Add(TwainImpl.OldDsm);
             cmbTwainImpl.Items.Add(TwainImpl.Legacy);
-            cmbTwainImpl.Items.Add(TwainImpl.X64);
+            if (Environment.Is64BitProcess)
+            {
+                cmbTwainImpl.Items.Add(TwainImpl.X64);
+            }
         }
 
         protected override void OnLoad(object sender, EventArgs e)
