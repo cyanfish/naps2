@@ -6,6 +6,10 @@ using ZXing;
 
 namespace NAPS2.Scan
 {
+    /// <summary>
+    /// A wrapper around the ZXing library that detects patch codes.
+    /// http://www.alliancegroup.co.uk/patch-codes.htm
+    /// </summary>
     public class PatchCodeDetector
     {
         public static PatchCode Detect(Bitmap bitmap)

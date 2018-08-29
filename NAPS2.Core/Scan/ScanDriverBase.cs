@@ -7,6 +7,9 @@ using NAPS2.Scan.Images;
 
 namespace NAPS2.Scan
 {
+    /// <summary>
+    /// A base class for IScanDriver implementing common error handling.
+    /// </summary>
     public abstract class ScanDriverBase : IScanDriver
     {
         public abstract string DriverName { get; }

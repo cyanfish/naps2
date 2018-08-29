@@ -7,6 +7,12 @@ using System.Xml.Serialization;
 
 namespace NAPS2.Scan
 {
+    /// <summary>
+    /// A set of key-value options used for scanning.
+    ///
+    /// This is only relevant for SANE. Currently NAPS2 does not actually support viewing/setting custom options.
+    /// If someone was so inclined they could manually set them in the profiles.xml file.
+    /// </summary>
     public class KeyValueScanOptions : Dictionary<string, string>, IXmlSerializable
     {
         public KeyValueScanOptions()

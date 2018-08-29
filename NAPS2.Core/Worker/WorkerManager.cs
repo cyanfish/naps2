@@ -11,6 +11,9 @@ using NAPS2.Platform;
 
 namespace NAPS2.Worker
 {
+    /// <summary>
+    /// A class to manage the lifecycle of NAPS2.Worker.exe instances and hook up the WCF channels.
+    /// </summary>
     public static class WorkerManager
     {
         public const string PIPE_NAME_FORMAT = "net.pipe://localhost/NAPS2.Worker/{0}";

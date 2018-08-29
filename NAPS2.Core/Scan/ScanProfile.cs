@@ -9,6 +9,9 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan
 {
+    /// <summary>
+    /// A class that stores user configuration for scanning, including device selection and other options.
+    /// </summary>
     [Serializable]
     public class ScanProfile
     {
@@ -115,6 +118,9 @@ namespace NAPS2.Scan
         public KeyValueScanOptions KeyValueOptions { get; set; }
     }
 
+    /// <summary>
+    /// User configuration for the Auto Save feature, which saves to a file immediately after scanning.
+    /// </summary>
     [Serializable]
     public class AutoSaveSettings
     {
@@ -134,6 +140,9 @@ namespace NAPS2.Scan
         public SaveSeparator Separator { get; set; }
     }
 
+    /// <summary>
+    /// The type of TWAIN driver implementation (this option is provided for compatibility).
+    /// </summary>
     public enum TwainImpl
     {
         [LocalizedDescription(typeof(SettingsResources), "TwainImpl_Default")]
@@ -148,6 +157,9 @@ namespace NAPS2.Scan
         X64
     }
 
+    /// <summary>
+    /// The physical source of the scanned image (flatbed, feeder).
+    /// </summary>
     public enum ScanSource
     {
         [LocalizedDescription(typeof(SettingsResources), "Source_Glass")]
@@ -158,6 +170,9 @@ namespace NAPS2.Scan
         Duplex
     }
 
+    /// <summary>
+    /// The color depth used for scanning.
+    /// </summary>
     public enum ScanBitDepth
     {
         [LocalizedDescription(typeof(SettingsResources), "BitDepth_24Color")]
@@ -168,6 +183,9 @@ namespace NAPS2.Scan
         BlackWhite
     }
 
+    /// <summary>
+    /// The resolution used for scanning.
+    /// </summary>
     public enum ScanDpi
     {
         [LocalizedDescription(typeof(SettingsResources), "Dpi_100")]
@@ -188,6 +206,9 @@ namespace NAPS2.Scan
         Dpi1200
     }
 
+    /// <summary>
+    /// The physical location of the page relative to the scan area.
+    /// </summary>
     public enum ScanHorizontalAlign
     {
         [LocalizedDescription(typeof(SettingsResources), "HorizontalAlign_Left")]
@@ -198,6 +219,9 @@ namespace NAPS2.Scan
         Right
     }
 
+    /// <summary>
+    /// A scale factor used to shrink the scanned image.
+    /// </summary>
     public enum ScanScale
     {
         [LocalizedDescription(typeof(SettingsResources), "Scale_1_1")]
@@ -210,6 +234,9 @@ namespace NAPS2.Scan
         OneToEight
     }
 
+    /// <summary>
+    /// The page size used for scanning.
+    /// </summary>
     public enum ScanPageSize
     {
         [LocalizedDescription(typeof(SettingsResources), "PageSize_Letter")]
@@ -237,6 +264,9 @@ namespace NAPS2.Scan
         Custom
     }
 
+    /// <summary>
+    /// Configuration for a particular page size.
+    /// </summary>
     [Serializable]
     public class PageDimensions
     {
@@ -272,6 +302,9 @@ namespace NAPS2.Scan
         public static bool operator !=(PageDimensions x, PageDimensions y) => !(x == y);
     }
 
+    /// <summary>
+    /// Configuration for a user-created custom page size.
+    /// </summary>
     public class NamedPageSize
     {
         public string Name { get; set; }
@@ -279,6 +312,9 @@ namespace NAPS2.Scan
         public PageDimensions Dimens { get; set; }
     }
 
+    /// <summary>
+    /// Helper attribute used to assign physical dimensions to the ScanPageSize enum.
+    /// </summary>
     public class PageDimensionsAttribute : Attribute
     {
         public PageDimensionsAttribute(string width, string height, PageSizeUnit unit)
@@ -294,6 +330,9 @@ namespace NAPS2.Scan
         public PageDimensions PageDimensions { get; }
     }
 
+    /// <summary>
+    /// The unit used for Width and Height in PageDimensions.
+    /// </summary>
     public enum PageSizeUnit
     {
         [LocalizedDescription(typeof(SettingsResources), "PageSizeUnit_Inch")]
@@ -304,6 +343,9 @@ namespace NAPS2.Scan
         Millimetre
     }
 
+    /// <summary>
+    /// Helper extensions that get additional information from scan-related objects and enumerations.
+    /// </summary>
     public static class ScanEnumExtensions
     {
         public static decimal WidthInMm(this PageDimensions pageDimensions)

@@ -8,7 +8,7 @@ using NAPS2.Scan.Images;
 namespace NAPS2.Scan
 {
     /// <summary>
-    /// An interface for document scanning drivers (e.g. WIA, TWAIN).
+    /// An interface for document scanning drivers (WIA, TWAIN, SANE).
     /// </summary>
     public interface IScanDriver
     {

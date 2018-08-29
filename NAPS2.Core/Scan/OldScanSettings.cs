@@ -5,6 +5,9 @@ using System.Xml.Serialization;
 
 namespace NAPS2.Scan
 {
+    /// <summary>
+    /// Used for compatibility when reading old profiles.xml files.
+    /// </summary>
     [XmlInclude(typeof(OldExtendedScanSettings))]
     [XmlType("ScanSettings")]
     public class OldScanSettings
@@ -22,6 +25,9 @@ namespace NAPS2.Scan
         public bool IsDefault { get; set; }
     }
 
+    /// <summary>
+    /// Used for compatibility when reading old profiles.xml files.
+    /// </summary>
     [XmlType("ExtendedScanSettings")]
     public class OldExtendedScanSettings : OldScanSettings
     {

@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows.Forms;
-using NAPS2.ImportExport.Pdf;
-using NAPS2.Operation;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
@@ -13,6 +11,9 @@ using NAPS2.Util;
 
 namespace NAPS2.Worker
 {
+    /// <summary>
+    /// The WCF service implementation for NAPS2.Worker.exe.
+    /// </summary>
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
         IncludeExceptionDetailInFaults = true,
         ConcurrencyMode = ConcurrencyMode.Multiple)]

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using NAPS2.Operation;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 
 namespace NAPS2.Worker
 {
+    /// <summary>
+    /// The WCF service interface for NAPS2.Worker.exe.
+    /// </summary>
     [ServiceContract]
     public interface IWorkerService
     {

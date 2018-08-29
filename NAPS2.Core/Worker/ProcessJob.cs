@@ -6,6 +6,11 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2.Worker
 {
+    /// <summary>
+    /// A helper class to provide access to Job Objects. This is used to group NAPS2.Worker.exe processes with
+    /// the calling executable, so that there are no zombie processes left behind if the caller terminates.
+    /// https://docs.microsoft.com/en-us/windows/desktop/procthread/job-objects
+    /// </summary>
     public class Job : IDisposable
     {
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]

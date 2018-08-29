@@ -5,6 +5,10 @@ using System.Windows.Forms;
 
 namespace NAPS2.Worker
 {
+    /// <summary>
+    /// A basic implementation of an invisible form used in NAPS2.Worker.exe as a parent
+    /// for any dialogs that may need to be displayed.
+    /// </summary>
     public class BackgroundForm : Form
     {
         public BackgroundForm()

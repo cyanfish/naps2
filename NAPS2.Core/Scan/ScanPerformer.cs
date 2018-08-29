@@ -11,6 +11,10 @@ using NAPS2.Util;
 
 namespace NAPS2.Scan
 {
+    /// <summary>
+    /// A high-level interface used for scanning.
+    /// This abstracts away the logic of obtaining and using an instance of IScanDriver.
+    /// </summary>
     public class ScanPerformer : IScanPerformer
     {
         private readonly IScanDriverFactory driverFactory;

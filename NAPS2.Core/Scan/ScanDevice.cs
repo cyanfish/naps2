@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace NAPS2.Scan
 {
+    /// <summary>
+    /// The representation of a scanning device identified by a driver.
+    /// </summary>
     [Serializable]
     public class ScanDevice
     {
