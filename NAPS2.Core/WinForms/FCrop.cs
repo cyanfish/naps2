@@ -187,8 +187,9 @@ namespace NAPS2.WinForms
                     {
                         foreach (var img in ImagesToTransform)
                         {
-                            img.AddTransform(ScaleCropTransform(img, referenceBitmap));
-                            img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
+                            var (transform, thumbnail) = ScaleCropTransform(img, referenceBitmap);
+                            img.AddTransform(transform);
+                            img.SetThumbnail(thumbnail);
                         }
                     }
                 }
@@ -202,19 +203,19 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private CropTransform ScaleCropTransform(ScannedImage img, Bitmap referenceBitmap)
+        private (CropTransform, Bitmap) ScaleCropTransform(ScannedImage img, Bitmap referenceBitmap)
         {
             using (var bitmap = scannedImageRenderer.Render(img))
             {
                 double xScale = bitmap.Width / (double)referenceBitmap.Width,
                        yScale = bitmap.Height / (double)referenceBitmap.Height;
-                return new CropTransform
+                return (new CropTransform
                 {
                     Left = (int)Math.Round(CropTransform.Left * xScale),
                     Right = (int)Math.Round(CropTransform.Right * xScale),
                     Top = (int)Math.Round(CropTransform.Top * yScale),
                     Bottom = (int)Math.Round(CropTransform.Bottom * yScale)
-                };
+                }, thumbnailRenderer.RenderThumbnail(bitmap));
             }
         }
 
