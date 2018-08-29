@@ -13,6 +13,9 @@ namespace NAPS2.WinForms
 {
     partial class FCrop : FormBase
     {
+        private static CropTransform _lastTransform;
+        private static Size _lastSize;
+
         private readonly ChangeTracker changeTracker;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageRenderer scannedImageRenderer;
@@ -28,8 +31,6 @@ namespace NAPS2.WinForms
             this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
-
-            CropTransform = new CropTransform();
         }
 
         public ScannedImage Image { get; set; }
@@ -72,6 +73,16 @@ namespace NAPS2.WinForms
 
             workingImage = scannedImageRenderer.Render(Image);
             workingImage2 = scannedImageRenderer.Render(Image);
+
+            if (_lastTransform != null && _lastSize == workingImage.Size)
+            {
+                CropTransform = _lastTransform;
+            }
+            else
+            {
+                CropTransform = new CropTransform();
+            }
+
             UpdateCropBounds();
             UpdatePreviewBox();
 
@@ -120,10 +131,13 @@ namespace NAPS2.WinForms
 
         private void UpdateTransform()
         {
-            CropTransform.Left = Math.Min(tbLeft.Value, tbRight.Value);
-            CropTransform.Right = workingImage.Width - Math.Max(tbLeft.Value, tbRight.Value);
-            CropTransform.Bottom = Math.Min(tbTop.Value, tbBottom.Value);
-            CropTransform.Top = workingImage.Height - Math.Max(tbTop.Value, tbBottom.Value);
+            CropTransform = new CropTransform
+            {
+                Left = Math.Min(tbLeft.Value, tbRight.Value),
+                Right = workingImage.Width - Math.Max(tbLeft.Value, tbRight.Value),
+                Bottom = Math.Min(tbTop.Value, tbBottom.Value),
+                Top = workingImage.Height - Math.Max(tbTop.Value, tbBottom.Value)
+            };
             UpdatePreviewBox();
         }
 
@@ -200,6 +214,8 @@ namespace NAPS2.WinForms
                 }
                 changeTracker.HasUnsavedChanges = true;
             }
+            _lastTransform = CropTransform;
+            _lastSize = workingImage.Size;
             Close();
         }
 
