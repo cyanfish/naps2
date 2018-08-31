@@ -10,3 +10,6 @@ Other links:
 - [File a Ticket](https://sourceforge.net/p/naps2/tickets/) - For bug reports, feature requests, and general support inquiries.
 - [Discussion Forums](https://sourceforge.net/p/naps2/discussion/general/) - For more open-ended discussion.
 - [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M77MFAP2ZV9RG)
+
+## For developers
+Have a look at the [Developer Onboarding](https://www.naps2.com/doc-dev-onboarding.html) page.
