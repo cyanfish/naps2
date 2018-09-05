@@ -216,7 +216,7 @@ namespace NAPS2.Scan.Twain
             };
 
             Debug.WriteLine("NAPS2.TW - Showing TwainForm");
-            twainForm.ShowDialog(dialogParent);
+            twainForm.Show(dialogParent);
             Debug.WriteLine("NAPS2.TW - TwainForm closed");
 
             if (ds != null && session.IsSourceOpen)
