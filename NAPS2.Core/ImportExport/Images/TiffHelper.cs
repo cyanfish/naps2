@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 
@@ -19,24 +20,24 @@ namespace NAPS2.ImportExport.Images
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
-        public bool SaveMultipage(List<ScannedImage> images, string location, TiffCompression compression, ProgressHandler progressCallback)
+        public async Task<bool> SaveMultipage(List<ScannedImage.Snapshot> snapshots, string location, TiffCompression compression, ProgressHandler progressCallback)
         {
             try
             {
                 ImageCodecInfo codecInfo = GetCodecForString("TIFF");
 
-                if (!progressCallback(0, images.Count))
+                if (!progressCallback(0, snapshots.Count))
                 {
                     return false;
                 }
 
                 PathHelper.EnsureParentDirExists(location);
 
-                if (images.Count == 1)
+                if (snapshots.Count == 1)
                 {
                     var iparams = new EncoderParameters(1);
                     Encoder iparam = Encoder.Compression;
-                    using (var bitmap = scannedImageRenderer.Render(images[0]))
+                    using (var bitmap = await scannedImageRenderer.Render(snapshots[0]))
                     {
                         ValidateBitmap(bitmap);
                         var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
@@ -44,33 +45,33 @@ namespace NAPS2.ImportExport.Images
                         bitmap.Save(location, codecInfo, iparams);
                     }
                 }
-                else if (images.Count > 1)
+                else if (snapshots.Count > 1)
                 {
                     var encoderParams = new EncoderParameters(2);
                     var saveEncoder = Encoder.SaveFlag;
                     var compressionEncoder = Encoder.Compression;
 
                     File.Delete(location);
-                    using (var bitmap0 = scannedImageRenderer.Render(images[0]))
+                    using (var bitmap0 = await scannedImageRenderer.Render(snapshots[0]))
                     {
                         ValidateBitmap(bitmap0);
                         encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
                         encoderParams.Param[1] = new EncoderParameter(saveEncoder, (long)EncoderValue.MultiFrame);
                         bitmap0.Save(location, codecInfo, encoderParams);
 
-                        for (int i = 1; i < images.Count; i++)
+                        for (int i = 1; i < snapshots.Count; i++)
                         {
-                            if (images[i] == null)
+                            if (snapshots[i] == null)
                                 break;
 
-                            if (!progressCallback(i, images.Count))
+                            if (!progressCallback(i, snapshots.Count))
                             {
                                 bitmap0.Dispose();
                                 File.Delete(location);
                                 return false;
                             }
 
-                            using (var bitmap = scannedImageRenderer.Render(images[i]))
+                            using (var bitmap = await scannedImageRenderer.Render(snapshots[i]))
                             {
                                 ValidateBitmap(bitmap);
                                 encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));

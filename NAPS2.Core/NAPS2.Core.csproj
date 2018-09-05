@@ -177,6 +177,7 @@
     </Compile>
     <Compile Include="Platform\DefaultRuntimeCompat.cs" />
     <Compile Include="Scan\Exceptions\DriverNotSupportedException.cs" />
+    <Compile Include="Scan\Images\ScannedImageSource.cs" />
     <Compile Include="Scan\KeyValueScanOptions.cs" />
     <Compile Include="Scan\Exceptions\SaneNotAvailableException.cs" />
     <Compile Include="Scan\Sane\SaneOption.cs" />
@@ -197,6 +198,8 @@
     <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Worker\IWorkerCallback.cs" />
+    <Compile Include="Worker\WorkerCallback.cs" />
     <Compile Include="Worker\WorkerContext.cs" />
     <Compile Include="Worker\WorkerService.cs" />
     <Compile Include="Icons.Designer.cs">

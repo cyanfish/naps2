@@ -68,9 +68,10 @@ namespace NAPS2.WinForms
                 }
 
                 var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
+                var changeToken = changeTracker.State;
                 if (await ExportPDF(subSavePath, images, false))
                 {
-                    changeTracker.HasUnsavedChanges = false;
+                    changeTracker.Saved(changeToken);
                     notify?.PdfSaved(subSavePath);
                     return true;
                 }
@@ -111,13 +112,14 @@ namespace NAPS2.WinForms
                 }
 
                 var op = operationFactory.Create<SaveImagesOperation>();
+                var changeToken = changeTracker.State;
                 if (op.Start(savePath, DateTime.Now, images))
                 {
                     operationProgress.ShowProgress(op);
                 }
                 if (await op.Success)
                 {
-                    changeTracker.HasUnsavedChanges = false;
+                    changeTracker.Saved(changeToken);
                     notify?.ImagesSaved(images.Count, op.FirstFileSaved);
                     return true;
                 }
@@ -160,6 +162,7 @@ namespace NAPS2.WinForms
             try
             {
                 string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
+                var changeToken = changeTracker.State;
                 if (!await ExportPDF(targetPath, images, true))
                 {
                     // Cancel or error
@@ -179,7 +182,7 @@ namespace NAPS2.WinForms
 
                 if (emailProviderFactory.Default.SendEmail(message))
                 {
-                    changeTracker.HasUnsavedChanges = false;
+                    changeTracker.Saved(changeToken);
                     return true;
                 }
             }

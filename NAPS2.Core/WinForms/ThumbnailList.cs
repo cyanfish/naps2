@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Platform;
 using NAPS2.Scan.Images;
@@ -132,8 +133,12 @@ namespace NAPS2.WinForms
             {
                 ilThumbnailList.Images.Clear();
             }
-            var thumbnailArray = images.Select(x => (Image)x.GetThumbnail(ThumbnailRenderer)).ToArray();
-            ilThumbnailList.Images.AddRange(thumbnailArray);
+            var list = new List<Image>();
+            foreach (var image in images)
+            {
+                list.Add(image.GetThumbnail(ThumbnailRenderer));
+            }
+            ilThumbnailList.Images.AddRange(list.ToArray());
         }
     }
 }

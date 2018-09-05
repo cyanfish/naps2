@@ -10,7 +10,7 @@ namespace NAPS2.Worker
     /// <summary>
     /// The WCF service interface for NAPS2.Worker.exe.
     /// </summary>
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IWorkerCallback))]
     public interface IWorkerService
     {
         [OperationContract]
@@ -22,7 +22,7 @@ namespace NAPS2.Worker
         [OperationContract]
         List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl);
 
-        [OperationContract]
-        List<RecoveryIndexImage> TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
+        [OperationContract(IsOneWay = true)]
+        void TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
     }
 }

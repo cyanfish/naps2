@@ -42,7 +42,7 @@ namespace NAPS2.Scan.Images
                         return null;
                     }
                     memoryLimitingSem.WaitOne();
-                    Bitmap bitmap = scannedImageRenderer.Render(img);
+                    Bitmap bitmap = scannedImageRenderer.Render(img).Result;
                     try
                     {
                         if (CancelToken.IsCancellationRequested)

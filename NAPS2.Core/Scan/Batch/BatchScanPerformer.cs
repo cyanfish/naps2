@@ -298,14 +298,11 @@ namespace NAPS2.Scan.Batch
                     var snapshots = images.Select(x => x.Preserve()).ToList();
                     try
                     {
-                        pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, (j, k) => true);
+                        await pdfExporter.Export(subPath, snapshots, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, (j, k) => true);
                     }
                     finally
                     {
-                        foreach (var s in snapshots)
-                        {
-                            s.Dispose();
-                        }
+                        snapshots.ForEach(s => s.Dispose());
                     }
                 }
                 else

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
 
@@ -32,13 +33,18 @@ namespace NAPS2.Scan.Stub
             new ScanDevice("test", "Test Scanner")
         };
 
-        public IEnumerable<ScannedImage> Scan()
+        public ScannedImageSource Scan()
         {
-            for (int i = 0; i < ImageCount; i++)
+            var source = new ScannedImageSource.Concrete();
+            Task.Factory.StartNew(() =>
             {
-                Thread.Sleep(500);
-                yield return MakeImage();
-            }
+                for (int i = 0; i < ImageCount; i++)
+                {
+                    Thread.Sleep(500);
+                    source.Put(MakeImage());
+                }
+            }, TaskCreationOptions.LongRunning);
+            return source;
         }
 
         private int ImageCount

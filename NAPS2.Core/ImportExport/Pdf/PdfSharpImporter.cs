@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -34,69 +35,83 @@ namespace NAPS2.ImportExport.Pdf
             this.pdfRenderer = pdfRenderer;
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
+        public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
         {
-            if (!progressCallback(0, 0))
+            var source = new ScannedImageSource.Concrete();
+            Task.Factory.StartNew(async () =>
             {
-                return Enumerable.Empty<ScannedImage>();
-            }
-            int passwordAttempts = 0;
-            bool aborted = false;
-            int i = 0;
-            try
-            {
-                PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.Import, args =>
+                if (!progressCallback(0, 0))
                 {
-                    if (!pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++, out args.Password))
-                    {
-                        args.Abort = true;
-                        aborted = true;
-                    }
-                });
-                if (passwordAttempts > 0
-                    && !document.SecuritySettings.HasOwnerPermissions
-                    && !document.SecuritySettings.PermitExtractContent)
-                {
-                    errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
-                    return Enumerable.Empty<ScannedImage>();
-                }
-                if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
-                {
-                    pdfRenderer.ThrowIfCantRender();
-                    return importParams.Slice.Indices(document.PageCount)
-                                             .Select(index => document.Pages[index])
-                                             .TakeWhile(page => progressCallback(i++, document.PageCount))
-                                             .Select(page => ExportRawPdfPage(page, importParams));
+                    source.Done();
                 }
 
-                return importParams.Slice.Indices(document.PageCount)
-                                         .Select(index => document.Pages[index])
-                                         .TakeWhile(page => progressCallback(i++, document.PageCount))
-                                         .SelectMany(page => GetImagesFromPage(page, importParams));
-            }
-            catch (ImageRenderException e)
-            {
-                errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
-                Log.ErrorException("Error importing PDF file.", e);
-                return Enumerable.Empty<ScannedImage>();
-            }
-            catch (Exception e)
-            {
-                if (!aborted)
+                int passwordAttempts = 0;
+                bool aborted = false;
+                int i = 0;
+                try
                 {
-                    errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
+                    PdfDocument document = PdfReader.Open(filePath, PdfDocumentOpenMode.Import, args =>
+                    {
+                        if (!pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++, out args.Password))
+                        {
+                            args.Abort = true;
+                            aborted = true;
+                        }
+                    });
+                    if (passwordAttempts > 0
+                        && !document.SecuritySettings.HasOwnerPermissions
+                        && !document.SecuritySettings.PermitExtractContent)
+                    {
+                        errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
+                        source.Done();
+                    }
+
+                    var pages = importParams.Slice.Indices(document.PageCount)
+                        .Select(index => document.Pages[index])
+                        .TakeWhile(page => progressCallback(i++, document.PageCount));
+                    if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
+                    {
+                        pdfRenderer.ThrowIfCantRender();
+                        foreach (var page in pages)
+                        {
+                            source.Put(await ExportRawPdfPage(page, importParams));
+                        }
+                    }
+                    else
+                    {
+                        foreach (var page in pages)
+                        {
+                            await GetImagesFromPage(page, importParams, source);
+                        }
+                    }
+                }
+                catch (ImageRenderException e)
+                {
+                    errorOutput.DisplayError(string.Format(MiscResources.ImportErrorNAPS2Pdf, Path.GetFileName(filePath)));
                     Log.ErrorException("Error importing PDF file.", e);
                 }
-                return Enumerable.Empty<ScannedImage>();
-            }
+                catch (Exception e)
+                {
+                    if (!aborted)
+                    {
+                        errorOutput.DisplayError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(filePath)));
+                        Log.ErrorException("Error importing PDF file.", e);
+                    }
+                }
+                finally
+                {
+                    source.Done();
+                }
+            }, TaskCreationOptions.LongRunning);
+            return source;
         }
-        
-        private IEnumerable<ScannedImage> GetImagesFromPage(PdfPage page, ImportParams importParams)
+
+        private async Task GetImagesFromPage(PdfPage page, ImportParams importParams, ScannedImageSource.Concrete source)
         {
             if (page.CustomValues.Elements.ContainsKey("/NAPS2ImportedPage"))
             {
-                yield return ExportRawPdfPage(page, importParams);
-                yield break;
+                source.Put(await ExportRawPdfPage(page, importParams));
+                return;
             }
 
             // Get resources dictionary
@@ -105,7 +120,7 @@ namespace NAPS2.ImportExport.Pdf
             PdfDictionary xObjects = resources?.Elements.GetDictionary("/XObject");
             if (xObjects == null)
             {
-                yield break;
+                return;
             }
             // Iterate references to external objects
             foreach (PdfItem item in xObjects.Elements.Values)
@@ -122,12 +137,12 @@ namespace NAPS2.ImportExport.Pdf
                         string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()).ToArray();
                         if (arrayElements.Length == 2)
                         {
-                            yield return DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams);
+                            source.Put(DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams));
                         }
                     }
                     else if (elementAsName != null)
                     {
-                        yield return DecodeImage(elementAsName.Value, page, xObject, xObject.Stream.Value, importParams);
+                        source.Put(DecodeImage(elementAsName.Value, page, xObject, xObject.Stream.Value, importParams));
                     }
                     else
                     {
@@ -152,7 +167,7 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
 
-        private ScannedImage ExportRawPdfPage(PdfPage page, ImportParams importParams)
+        private async Task<ScannedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
         {
             string pdfPath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             var document = new PdfDocument();
@@ -160,7 +175,7 @@ namespace NAPS2.ImportExport.Pdf
             document.Save(pdfPath);
 
             var image = ScannedImage.FromSinglePagePdf(pdfPath, false);
-            using (var bitmap = scannedImageRenderer.Render(image))
+            using (var bitmap = await scannedImageRenderer.Render(image))
             {
                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
                 if (importParams.DetectPatchCodes)

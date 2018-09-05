@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using NAPS2.Operation;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;

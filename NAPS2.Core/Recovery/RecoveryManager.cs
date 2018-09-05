@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
@@ -80,11 +81,11 @@ namespace NAPS2.Recovery
                     switch (PromptToRecover())
                     {
                         case DialogResult.Yes: // Recover
-                            RunAsync(() =>
+                            RunAsync(async () =>
                             {
                                 try
                                 {
-                                    if (DoRecover(imageCallback))
+                                    if (await DoRecover(imageCallback))
                                     {
                                         ReleaseFolderLock();
                                         DeleteFolder();
@@ -116,7 +117,7 @@ namespace NAPS2.Recovery
                 return false;
             }
 
-            private bool DoRecover(Action<ScannedImage> imageCallback)
+            private async Task<bool> DoRecover(Action<ScannedImage> imageCallback)
             {
                 Status.MaxProgress = recoveryIndexManager.Index.Images.Count;
                 InvokeStatusChanged();
@@ -145,7 +146,7 @@ namespace NAPS2.Recovery
                     {
                         scannedImage.AddTransform(transform);
                     }
-                    scannedImage.SetThumbnail(thumbnailRenderer.RenderThumbnail(scannedImage));
+                    scannedImage.SetThumbnail(await thumbnailRenderer.RenderThumbnail(scannedImage));
                     imageCallback(scannedImage);
 
                     Status.CurrentProgress++;

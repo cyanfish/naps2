@@ -6,8 +6,10 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Transforms;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {
@@ -121,7 +123,7 @@ namespace NAPS2.Scan.Images
                 {
                     return null;
                 }
-                thumbnail = thumbnailRenderer.RenderThumbnail(this);
+                thumbnail = Task.Factory.StartNew(() => thumbnailRenderer.RenderThumbnail(this)).Unwrap().Result;
             }
             Debug.Assert(thumbnail != null);
             return (Bitmap)thumbnail.Clone();

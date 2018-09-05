@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
@@ -67,14 +68,9 @@ namespace NAPS2.WinForms
         public Action<IEnumerable<int>> UpdateCallback { get; set; }
         public Action<int> SelectCallback { get; set; }
 
-        protected override void OnLoad(object sender, EventArgs e)
+        protected override async void OnLoad(object sender, EventArgs e)
         {
             tbPageCurrent.Visible = PlatformCompat.Runtime.IsToolbarTextboxSupported;
-
-            tiffViewer1.Image = scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
-            UpdatePage();
-
-
             if (appConfigManager.Config.HideSavePdfButton)
             {
                 toolStrip1.Items.Remove(tsSavePDF);
@@ -85,18 +81,20 @@ namespace NAPS2.WinForms
             }
 
             AssignKeyboardShortcuts();
+            UpdatePage();
+            await UpdateImage();
         }
 
-        private void GoTo(int index)
+        private async Task GoTo(int index)
         {
             if (index == ImageIndex || index < 0 || index >= ImageList.Images.Count)
             {
                 return;
             }
             ImageIndex = index;
-            UpdateImage();
             UpdatePage();
             SelectCallback(index);
+            await UpdateImage();
         }
 
         private void UpdatePage()
@@ -109,10 +107,11 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void UpdateImage()
+        private async Task UpdateImage()
         {
-            tiffViewer1.Image.Dispose();
-            tiffViewer1.Image = scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
+            var newImage = await scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
+            tiffViewer1.Image?.Dispose();
+            tiffViewer1.Image = newImage;
         }
 
         protected override void Dispose(bool disposing)
@@ -379,46 +378,46 @@ namespace NAPS2.WinForms
         }
         #endregion
 
-        private void tbPageCurrent_TextChanged(object sender, EventArgs e)
+        private async void tbPageCurrent_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(tbPageCurrent.Text, out int indexOffBy1))
             {
-                GoTo(indexOffBy1 - 1);
+                await GoTo(indexOffBy1 - 1);
             }
         }
 
-        private void tsNext_Click(object sender, EventArgs e)
+        private async void tsNext_Click(object sender, EventArgs e)
         {
-            GoTo(ImageIndex + 1);
+            await GoTo(ImageIndex + 1);
         }
 
-        private void tsPrev_Click(object sender, EventArgs e)
+        private async void tsPrev_Click(object sender, EventArgs e)
         {
-            GoTo(ImageIndex - 1);
+            await GoTo(ImageIndex - 1);
         }
 
-        private void tsRotateLeft_Click(object sender, EventArgs e)
+        private async void tsRotateLeft_Click(object sender, EventArgs e)
         {
-            ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate270FlipNone);
-            UpdateImage();
+            await ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate270FlipNone);
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsRotateRight_Click(object sender, EventArgs e)
+        private async void tsRotateRight_Click(object sender, EventArgs e)
         {
-            ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate90FlipNone);
-            UpdateImage();
+            await ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate90FlipNone);
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsFlip_Click(object sender, EventArgs e)
+        private async void tsFlip_Click(object sender, EventArgs e)
         {
-            ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate180FlipNone);
-            UpdateImage();
+            await ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate180FlipNone);
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsDeskew_Click(object sender, EventArgs e)
+        private async void tsDeskew_Click(object sender, EventArgs e)
         {
             var op = operationFactory.Create<DeskewOperation>();
             var progressForm = FormFactory.Create<FProgress>();
@@ -427,74 +426,74 @@ namespace NAPS2.WinForms
             if (op.Start(new[] { ImageList.Images[ImageIndex] }))
             {
                 progressForm.ShowDialog();
-                UpdateImage();
+                await UpdateImage();
                 UpdateCallback(Enumerable.Range(ImageIndex, 1));
             }
         }
 
-        private void tsCustomRotation_Click(object sender, EventArgs e)
+        private async void tsCustomRotation_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FRotate>();
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
-            UpdateImage();
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsCrop_Click(object sender, EventArgs e)
+        private async void tsCrop_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FCrop>();
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
-            UpdateImage();
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsBrightnessContrast_Click(object sender, EventArgs e)
+        private async void tsBrightnessContrast_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FBrightnessContrast>();
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
-            UpdateImage();
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsHueSaturation_Click(object sender, EventArgs e)
+        private async void tsHueSaturation_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FHueSaturation>();
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
-            UpdateImage();
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsBlackWhite_Click(object sender, EventArgs e)
+        private async void tsBlackWhite_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FBlackWhite>();
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
-            UpdateImage();
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsSharpen_Click(object sender, EventArgs e)
+        private async void tsSharpen_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FSharpen>();
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
-            UpdateImage();
+            await UpdateImage();
             UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
-        private void tsDelete_Click(object sender, EventArgs e)
+        private async void tsDelete_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, 1), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                DeleteCurrentImage();
+                await DeleteCurrentImage();
             }
         }
 
-        private void DeleteCurrentImage()
+        private async Task DeleteCurrentImage()
         {
             // Need to dispose the bitmap first to avoid file access issues
             tiffViewer1.Image.Dispose();
@@ -505,21 +504,21 @@ namespace NAPS2.WinForms
 
             if (ImageList.Images.Any())
             {
-                changeTracker.HasUnsavedChanges = true;
+                changeTracker.Made();
                 // Update the GUI for the newly displayed image
                 if (ImageIndex >= ImageList.Images.Count)
                 {
-                    GoTo(ImageList.Images.Count - 1);
+                    await GoTo(ImageList.Images.Count - 1);
                 }
                 else
                 {
-                    UpdateImage();
+                    await UpdateImage();
                 }
                 lblPageTotal.Text = string.Format(MiscResources.OfN, ImageList.Images.Count);
             }
             else
             {
-                changeTracker.HasUnsavedChanges = false;
+                changeTracker.Clear();
                 // No images left to display, so no point keeping the form open
                 Close();
             }
@@ -531,7 +530,7 @@ namespace NAPS2.WinForms
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
-                    SafeInvoke(DeleteCurrentImage);
+                    await DeleteCurrentImage();
                 }
             }
         }
@@ -542,12 +541,12 @@ namespace NAPS2.WinForms
             {
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
-                    SafeInvoke(DeleteCurrentImage);
+                    await DeleteCurrentImage();
                 }
             }
         }
 
-        private void tiffViewer1_KeyDown(object sender, KeyEventArgs e)
+        private async void tiffViewer1_KeyDown(object sender, KeyEventArgs e)
         {
             if (!(e.Control || e.Shift || e.Alt))
             {
@@ -559,12 +558,12 @@ namespace NAPS2.WinForms
                     case Keys.PageDown:
                     case Keys.Right:
                     case Keys.Down:
-                        GoTo(ImageIndex + 1);
+                        await GoTo(ImageIndex + 1);
                         return;
                     case Keys.PageUp:
                     case Keys.Left:
                     case Keys.Up:
-                        GoTo(ImageIndex - 1);
+                        await GoTo(ImageIndex - 1);
                         return;
                 }
             }
@@ -572,7 +571,7 @@ namespace NAPS2.WinForms
             ksm.Perform(e.KeyData);
         }
 
-        private void tbPageCurrent_KeyDown(object sender, KeyEventArgs e)
+        private async void tbPageCurrent_KeyDown(object sender, KeyEventArgs e)
         {
             if (!(e.Control || e.Shift || e.Alt))
             {
@@ -581,12 +580,12 @@ namespace NAPS2.WinForms
                     case Keys.PageDown:
                     case Keys.Right:
                     case Keys.Down:
-                        GoTo(ImageIndex + 1);
+                        await GoTo(ImageIndex + 1);
                         return;
                     case Keys.PageUp:
                     case Keys.Left:
                     case Keys.Up:
-                        GoTo(ImageIndex - 1);
+                        await GoTo(ImageIndex - 1);
                         return;
                 }
             }

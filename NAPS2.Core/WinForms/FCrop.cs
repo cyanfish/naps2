@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
@@ -43,7 +44,7 @@ namespace NAPS2.WinForms
 
         private IEnumerable<ScannedImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
 
-        protected override void OnLoad(object sender, EventArgs eventArgs)
+        protected override async void OnLoad(object sender, EventArgs eventArgs)
         {
             if (SelectedImages != null && SelectedImages.Count > 1)
             {
@@ -71,8 +72,12 @@ namespace NAPS2.WinForms
                 .Activate();
             Size = new Size(600, 600);
 
-            workingImage = scannedImageRenderer.Render(Image);
-            workingImage2 = scannedImageRenderer.Render(Image);
+            // TODO: Display a progress indicator and make sure no errors occur if the user interacts before this is finished
+            // TODO: Make a common base class for image forms
+            // TODO: Optimize the order of operations here
+            // And do that for all image forms.
+            workingImage = await scannedImageRenderer.Render(Image);
+            workingImage2 = await scannedImageRenderer.Render(Image);
 
             if (_lastTransform != null && _lastSize == workingImage.Size)
             {
@@ -190,18 +195,20 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private async void btnOK_Click(object sender, EventArgs e)
         {
+            // TODO: Do this in an operation asynchronously
+            // Same for all such forms
             if (!CropTransform.IsNull)
             {
                 if (TransformMultiple)
                 {
                     // With multiple images, we need to have the transform scaled in case they're different sizes
-                    using (var referenceBitmap = scannedImageRenderer.Render(Image))
+                    using (var referenceBitmap = await scannedImageRenderer.Render(Image))
                     {
                         foreach (var img in ImagesToTransform)
                         {
-                            var (transform, thumbnail) = ScaleCropTransform(img, referenceBitmap);
+                            var (transform, thumbnail) = await ScaleCropTransform(img, referenceBitmap);
                             img.AddTransform(transform);
                             img.SetThumbnail(thumbnail);
                         }
@@ -210,18 +217,18 @@ namespace NAPS2.WinForms
                 else
                 {
                     Image.AddTransform(CropTransform);
-                    Image.SetThumbnail(thumbnailRenderer.RenderThumbnail(Image));
+                    Image.SetThumbnail(await thumbnailRenderer.RenderThumbnail(Image));
                 }
-                changeTracker.HasUnsavedChanges = true;
+                changeTracker.Made();
             }
             _lastTransform = CropTransform;
             _lastSize = workingImage.Size;
             Close();
         }
 
-        private (CropTransform, Bitmap) ScaleCropTransform(ScannedImage img, Bitmap referenceBitmap)
+        private async Task<(CropTransform, Bitmap)> ScaleCropTransform(ScannedImage img, Bitmap referenceBitmap)
         {
-            using (var bitmap = scannedImageRenderer.Render(img))
+            using (var bitmap = await scannedImageRenderer.Render(img))
             {
                 double xScale = bitmap.Width / (double)referenceBitmap.Width,
                        yScale = bitmap.Height / (double)referenceBitmap.Height;

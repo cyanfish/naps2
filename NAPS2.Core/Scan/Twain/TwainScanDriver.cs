@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NAPS2.Platform;
 using NAPS2.Recovery;
 using NAPS2.Scan.Exceptions;
@@ -65,27 +66,32 @@ namespace NAPS2.Scan.Twain
             return twainWrapper.GetDeviceList(twainImpl);
         }
 
-        protected override IEnumerable<ScannedImage> ScanInternal()
+        protected override async Task ScanInternal(ScannedImageSource.Concrete source)
         {
-            if (UseWorker)
+            await Task.Factory.StartNew(() =>
             {
-                return RunInForm(formFactory.Create<FTwainGui>(), () =>
+                if (UseWorker)
                 {
-                    using (var worker = workerServiceFactory.Create())
+                    RunInForm(formFactory.Create<FTwainGui>(), () =>
                     {
-                        worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
-                        return worker.Service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams, DialogParent.Handle)
-                            .Select(x => new ScannedImage(x))
-                            .ToList();
-                    }
-                });
-            }
-            return twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams);
+                        using (var worker = workerServiceFactory.Create())
+                        {
+                            worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
+                            worker.Callback.ImageCallback += source.Put;
+                            worker.Service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams, DialogParent.Handle);
+                            worker.Callback.WaitForFinish();
+                        }
+                    });
+                }
+                else
+                {
+                    ((FormBase) DialogParent).SafeInvoke(() => twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams, source));
+                }
+            }, TaskCreationOptions.LongRunning);
         }
 
-        private T RunInForm<T>(FormBase form, Func<T> func) where T : class
+        private void RunInForm(FormBase form, Action action)
         {
-            T result = null;
             Exception error = null;
             bool done = false;
 
@@ -93,7 +99,7 @@ namespace NAPS2.Scan.Twain
             {
                 try
                 {
-                    result = func();
+                    form.SafeInvoke(action);
                 }
                 catch (Exception ex)
                 {
@@ -122,8 +128,6 @@ namespace NAPS2.Scan.Twain
                 }
                 throw new ScanDriverUnknownException(error);
             }
-
-            return result;
         }
     }
 }

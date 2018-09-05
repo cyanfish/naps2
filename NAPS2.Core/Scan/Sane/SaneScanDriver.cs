@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
@@ -59,14 +60,14 @@ namespace NAPS2.Scan.Sane
             return saneWrapper.GetDeviceList().ToList();
         }
 
-        protected override IEnumerable<ScannedImage> ScanInternal()
+        protected override async Task ScanInternal(ScannedImageSource.Concrete source)
         {
             // TODO: Support ADF
             var options = new Lazy<KeyValueScanOptions>(GetOptions);
-            var img = Transfer(options);
+            var img = await Transfer(options);
             if (img != null)
             {
-                yield return img;
+                source.Put(img);
             }
         }
 
@@ -206,51 +207,54 @@ namespace NAPS2.Scan.Sane
             return options;
         }
 
-        private ScannedImage Transfer(Lazy<KeyValueScanOptions> options)
+        private async Task<ScannedImage> Transfer(Lazy<KeyValueScanOptions> options)
         {
-            Stream stream;
-            if (ScanParams.NoUI)
+            return await Task.Factory.StartNew(() =>
             {
-                stream = saneWrapper.ScanOne(ScanDevice.ID, options.Value, null);
-            }
-            else
-            {
-                var form = formFactory.Create<FScanProgress>();
-                form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress);
-                form.PageNumber = 1;
-                form.ShowDialog();
+                Stream stream;
+                if (ScanParams.NoUI)
+                {
+                    stream = saneWrapper.ScanOne(ScanDevice.ID, options.Value, null);
+                }
+                else
+                {
+                    var form = formFactory.Create<FScanProgress>();
+                    form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress);
+                    form.PageNumber = 1;
+                    form.ShowDialog();
 
-                if (form.Exception != null)
-                {
-                    form.Exception.PreserveStackTrace();
-                    throw form.Exception;
-                }
-                if (form.DialogResult == DialogResult.Cancel)
-                {
-                    return null;
-                }
+                    if (form.Exception != null)
+                    {
+                        form.Exception.PreserveStackTrace();
+                        throw form.Exception;
+                    }
+                    if (form.DialogResult == DialogResult.Cancel)
+                    {
+                        return null;
+                    }
 
-                stream = form.ImageStream;
-            }
-            using (stream)
-            using (var output = Image.FromStream(stream))
-            using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile, false))
-            {
-                if (blankDetector.ExcludePage(result, ScanProfile))
-                {
-                    return null;
+                    stream = form.ImageStream;
                 }
+                using (stream)
+                using (var output = Image.FromStream(stream))
+                using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile, false))
+                {
+                    if (blankDetector.ExcludePage(result, ScanProfile))
+                    {
+                        return null;
+                    }
 
-                // By converting to 1bpp here we avoid the Win32 call in the BitmapHelper conversion
-                // This converter also has the side effect of working even if the scanner doesn't support Lineart
-                using (var encoded = ScanProfile.BitDepth == ScanBitDepth.BlackWhite ? UnsafeImageOps.ConvertTo1Bpp(result, -ScanProfile.Brightness) : result)
-                {
-                    var image = new ScannedImage(encoded, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
-                    scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);
-                    return image;
+                    // By converting to 1bpp here we avoid the Win32 call in the BitmapHelper conversion
+                    // This converter also has the side effect of working even if the scanner doesn't support Lineart
+                    using (var encoded = ScanProfile.BitDepth == ScanBitDepth.BlackWhite ? UnsafeImageOps.ConvertTo1Bpp(result, -ScanProfile.Brightness) : result)
+                    {
+                        var image = new ScannedImage(encoded, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
+                        scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);
+                        return image;
+                    }
                 }
-            }
+            }, TaskCreationOptions.LongRunning);
         }
     }
 }

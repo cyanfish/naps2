@@ -51,11 +51,11 @@ namespace NAPS2.ImportExport.Pdf
             }
 
             var snapshots = images.Select(x => x.Preserve()).ToList();
-            RunAsync(() =>
+            RunAsync(async () =>
             {
                 try
                 {
-                    return pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress);
+                    return await pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress);
                 }
                 catch (UnauthorizedAccessException ex)
                 {
@@ -80,10 +80,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 finally
                 {
-                    foreach (var s in snapshots)
-                    {
-                        s.Dispose();
-                    }
+                    snapshots.ForEach(s => s.Dispose());
                     GC.Collect();
                 }
                 return false;

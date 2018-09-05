@@ -30,7 +30,7 @@ namespace NAPS2.ImportExport
                 MaxProgress = data.ImageRecovery.Length
             };
 
-            RunAsync(() =>
+            RunAsync(async () =>
             {
                 Exception error = null;
                 foreach (var ir in data.ImageRecovery)
@@ -46,7 +46,7 @@ namespace NAPS2.ImportExport
                         {
                             img.AddTransform(transform);
                         }
-                        img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
+                        img.SetThumbnail(await thumbnailRenderer.RenderThumbnail(img));
                         imageCallback(img);
 
                         Status.CurrentProgress++;

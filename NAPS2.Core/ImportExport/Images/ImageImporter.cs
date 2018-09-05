@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Threading.Tasks;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -18,44 +19,64 @@ namespace NAPS2.ImportExport.Images
             this.thumbnailRenderer = thumbnailRenderer;
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
+        public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
         {
-            if (!progressCallback(0, 1))
+            var source = new ScannedImageSource.Concrete();
+            Task.Factory.StartNew(() =>
             {
-                yield break;
-            }
-            Bitmap toImport;
-            try
-            {
-                toImport = new Bitmap(filePath);
-            }
-            catch (Exception e)
-            {
-                Log.ErrorException("Error importing image: " + filePath, e);
-                // Handle and notify the user outside the method so that errors importing multiple files can be aggregated
-                throw;
-            }
-            using (toImport)
-            {
-                int frameCount = toImport.GetFrameCount(FrameDimension.Page);
-                int i = 0;
-                foreach(var frameIndex in importParams.Slice.Indices(frameCount))
+                try
                 {
-                    if (!progressCallback(i++, frameCount))
+                    if (!progressCallback(0, 1))
                     {
-                        yield break;
+                        source.Done();
+                        return;
                     }
-                    toImport.SelectActiveFrame(FrameDimension.Page, frameIndex);
-                    var image = new ScannedImage(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
-                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(toImport));
-                    if (importParams.DetectPatchCodes)
+
+                    Bitmap toImport;
+                    try
                     {
-                        image.PatchCode = PatchCodeDetector.Detect(toImport);
+                        toImport = new Bitmap(filePath);
                     }
-                    yield return image;
+                    catch (Exception e)
+                    {
+                        Log.ErrorException("Error importing image: " + filePath, e);
+                        // Handle and notify the user outside the method so that errors importing multiple files can be aggregated
+                        throw;
+                    }
+
+                    using (toImport)
+                    {
+                        int frameCount = toImport.GetFrameCount(FrameDimension.Page);
+                        int i = 0;
+                        foreach (var frameIndex in importParams.Slice.Indices(frameCount))
+                        {
+                            if (!progressCallback(i++, frameCount))
+                            {
+                                source.Done();
+                                return;
+                            }
+
+                            toImport.SelectActiveFrame(FrameDimension.Page, frameIndex);
+                            var image = new ScannedImage(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
+                            image.SetThumbnail(thumbnailRenderer.RenderThumbnail(toImport));
+                            if (importParams.DetectPatchCodes)
+                            {
+                                image.PatchCode = PatchCodeDetector.Detect(toImport);
+                            }
+
+                            source.Put(image);
+                        }
+
+                        progressCallback(frameCount, frameCount);
+                    }
+                    source.Done();
                 }
-                progressCallback(frameCount, frameCount);
-            }
+                catch(Exception e)
+                {
+                    source.Error(e);
+                }
+            }, TaskCreationOptions.LongRunning);
+            return source;
         }
 
         private bool IsLossless(ImageFormat format)

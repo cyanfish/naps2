@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Threading.Tasks;
 using NAPS2.Config;
 
 namespace NAPS2.Scan.Images
@@ -57,17 +58,25 @@ namespace NAPS2.Scan.Images
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
-        public Bitmap RenderThumbnail(ScannedImage scannedImage)
+        public async Task<Bitmap> RenderThumbnail(ScannedImage scannedImage)
         {
-            using (var bitmap = scannedImageRenderer.Render(scannedImage))
+            using (var bitmap = await scannedImageRenderer.Render(scannedImage))
             {
                 return RenderThumbnail(bitmap, userConfigManager.Config.ThumbnailSize);
             }
         }
 
-        public Bitmap RenderThumbnail(ScannedImage scannedImage, int size)
+        public async Task<Bitmap> RenderThumbnail(ScannedImage scannedImage, int size)
         {
-            using (var bitmap = scannedImageRenderer.Render(scannedImage))
+            using (var bitmap = await scannedImageRenderer.Render(scannedImage))
+            {
+                return RenderThumbnail(bitmap, size);
+            }
+        }
+
+        public async Task<Bitmap> RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
+        {
+            using (var bitmap = await scannedImageRenderer.Render(snapshot))
             {
                 return RenderThumbnail(bitmap, size);
             }
@@ -122,6 +131,7 @@ namespace NAPS2.Scan.Images
                 // Draw a border around the orignal bitmap's content, inside the padding
                 g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
             }
+
             return result;
         }
     }

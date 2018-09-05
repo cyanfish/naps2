@@ -106,7 +106,7 @@ namespace NAPS2.Automation
 
                 if (options.ImportPath != null)
                 {
-                    ImportImages();
+                    await ImportImages();
                 }
 
                 if (options.Number > 0)
@@ -116,7 +116,7 @@ namespace NAPS2.Automation
                         return;
                     }
 
-                    PerformScan(profile);
+                    await PerformScan(profile);
                 }
 
                 ReorderScannedImages();
@@ -128,7 +128,7 @@ namespace NAPS2.Automation
 
                 if (options.EmailFileName != null)
                 {
-                    EmailScannedImages();
+                    await EmailScannedImages();
                 }
 
                 foreach (var image in AllImages)
@@ -250,7 +250,7 @@ namespace NAPS2.Automation
             return true;
         }
 
-        private void ImportImages()
+        private async Task ImportImages()
         {
             OutputVerbose(ConsoleResources.Importing);
 
@@ -268,7 +268,7 @@ namespace NAPS2.Automation
                         Slice = Slice.Parse(filePath, out string actualPath),
                         DetectPatchCodes = options.SplitPatchT
                     };
-                    var images = scannedImageImporter.Import(actualPath, importParams, (j, k) => true).ToList();
+                    var images = await scannedImageImporter.Import(actualPath, importParams, (j, k) => true).ToList();
                     scanList.Add(images);
                 }
                 catch (Exception ex)
@@ -281,7 +281,7 @@ namespace NAPS2.Automation
             }
         }
 
-        private async void EmailScannedImages()
+        private async Task EmailScannedImages()
         {
             if (scanList.Count == 0)
             {
@@ -558,7 +558,7 @@ namespace NAPS2.Automation
             return true;
         }
 
-        private void PerformScan(ScanProfile profile)
+        private async Task PerformScan(ScanProfile profile)
         {
             OutputVerbose(ConsoleResources.BeginningScan);
 
@@ -584,7 +584,7 @@ namespace NAPS2.Automation
                 OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
                 pagesScanned = 0;
                 scanList.Add(new List<ScannedImage>());
-                scanPerformer.PerformScan(profile, new ScanParams { NoUI = true, NoAutoSave = !options.AutoSave, DetectPatchCodes = options.SplitPatchT }, parentWindow, null, ReceiveScannedImage);
+                await scanPerformer.PerformScan(profile, new ScanParams { NoUI = true, NoAutoSave = !options.AutoSave, DetectPatchCodes = options.SplitPatchT }, parentWindow, null, ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Ocr;
 using NAPS2.Scan.Images;
@@ -36,84 +37,90 @@ namespace NAPS2.ImportExport.Pdf
             this.appConfigManager = appConfigManager;
         }
 
-        public bool Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback)
+        public async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback)
         {
-            var forced = appConfigManager.Config.ForcePdfCompat;
-            var compat = forced == PdfCompat.Default ? settings.Compat : forced;
-
-            var document = new PdfDocument();
-            document.Info.Author = settings.Metadata.Author;
-            document.Info.Creator = settings.Metadata.Creator;
-            document.Info.Keywords = settings.Metadata.Keywords;
-            document.Info.Subject = settings.Metadata.Subject;
-            document.Info.Title = settings.Metadata.Title;
-
-            if (settings.Encryption.EncryptPdf
-                && (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword) || !string.IsNullOrEmpty(settings.Encryption.UserPassword)))
+            return await Task.Factory.StartNew(() =>
             {
-                document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
-                if (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword))
-                {
-                    document.SecuritySettings.OwnerPassword = settings.Encryption.OwnerPassword;
-                }
-                if (!string.IsNullOrEmpty(settings.Encryption.UserPassword))
-                {
-                    document.SecuritySettings.UserPassword = settings.Encryption.UserPassword;
-                }
-                document.SecuritySettings.PermitAccessibilityExtractContent = settings.Encryption.AllowContentCopyingForAccessibility;
-                document.SecuritySettings.PermitAnnotations = settings.Encryption.AllowAnnotations;
-                document.SecuritySettings.PermitAssembleDocument = settings.Encryption.AllowDocumentAssembly;
-                document.SecuritySettings.PermitExtractContent = settings.Encryption.AllowContentCopying;
-                document.SecuritySettings.PermitFormsFill = settings.Encryption.AllowFormFilling;
-                document.SecuritySettings.PermitFullQualityPrint = settings.Encryption.AllowFullQualityPrinting;
-                document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
-                document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
-            }
+                var forced = appConfigManager.Config.ForcePdfCompat;
+                var compat = forced == PdfCompat.Default ? settings.Compat : forced;
 
-            IOcrEngine ocrEngine = null;
-            if (ocrParams?.LanguageCode != null)
-            {
-                var activeEngine = ocrManager.ActiveEngine;
-                if (activeEngine == null)
-                {
-                    Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
-                }
-                else if (!activeEngine.CanProcess(ocrParams.LanguageCode))
-                {
-                    Log.Error("OCR files not available for '{0}'.", ocrParams.LanguageCode);
-                }
-                else
-                {
-                    ocrEngine = activeEngine;
-                }
-            }
-            
-            bool result = ocrEngine != null
-                ? BuildDocumentWithOcr(progressCallback, document, compat, snapshots, ocrEngine, ocrParams)
-                : BuildDocumentWithoutOcr(progressCallback, document, compat, snapshots);
-            if (!result)
-            {
-                return false;
-            }
+                var document = new PdfDocument();
+                document.Info.Author = settings.Metadata.Author;
+                document.Info.Creator = settings.Metadata.Creator;
+                document.Info.Keywords = settings.Metadata.Keywords;
+                document.Info.Subject = settings.Metadata.Subject;
+                document.Info.Title = settings.Metadata.Title;
 
-            var now = DateTime.Now;
-            document.Info.CreationDate = now;
-            document.Info.ModificationDate = now;
-            if (compat == PdfCompat.PdfA1B)
-            {
-                PdfAHelper.SetCidStream(document);
-                PdfAHelper.DisableTransparency(document);
-            }
-            if (compat != PdfCompat.Default)
-            {
-                PdfAHelper.SetColorProfile(document);
-                PdfAHelper.SetCidMap(document);
-                PdfAHelper.CreateXmpMetadata(document, compat);
-            }
+                if (settings.Encryption.EncryptPdf
+                    && (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword) || !string.IsNullOrEmpty(settings.Encryption.UserPassword)))
+                {
+                    document.SecuritySettings.DocumentSecurityLevel = PdfDocumentSecurityLevel.Encrypted128Bit;
+                    if (!string.IsNullOrEmpty(settings.Encryption.OwnerPassword))
+                    {
+                        document.SecuritySettings.OwnerPassword = settings.Encryption.OwnerPassword;
+                    }
 
-            PathHelper.EnsureParentDirExists(path);
-            document.Save(path);
-            return true;
+                    if (!string.IsNullOrEmpty(settings.Encryption.UserPassword))
+                    {
+                        document.SecuritySettings.UserPassword = settings.Encryption.UserPassword;
+                    }
+
+                    document.SecuritySettings.PermitAccessibilityExtractContent = settings.Encryption.AllowContentCopyingForAccessibility;
+                    document.SecuritySettings.PermitAnnotations = settings.Encryption.AllowAnnotations;
+                    document.SecuritySettings.PermitAssembleDocument = settings.Encryption.AllowDocumentAssembly;
+                    document.SecuritySettings.PermitExtractContent = settings.Encryption.AllowContentCopying;
+                    document.SecuritySettings.PermitFormsFill = settings.Encryption.AllowFormFilling;
+                    document.SecuritySettings.PermitFullQualityPrint = settings.Encryption.AllowFullQualityPrinting;
+                    document.SecuritySettings.PermitModifyDocument = settings.Encryption.AllowDocumentModification;
+                    document.SecuritySettings.PermitPrint = settings.Encryption.AllowPrinting;
+                }
+
+                IOcrEngine ocrEngine = null;
+                if (ocrParams?.LanguageCode != null)
+                {
+                    var activeEngine = ocrManager.ActiveEngine;
+                    if (activeEngine == null)
+                    {
+                        Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
+                    }
+                    else if (!activeEngine.CanProcess(ocrParams.LanguageCode))
+                    {
+                        Log.Error("OCR files not available for '{0}'.", ocrParams.LanguageCode);
+                    }
+                    else
+                    {
+                        ocrEngine = activeEngine;
+                    }
+                }
+
+                bool result = ocrEngine != null
+                    ? BuildDocumentWithOcr(progressCallback, document, compat, snapshots, ocrEngine, ocrParams)
+                    : BuildDocumentWithoutOcr(progressCallback, document, compat, snapshots);
+                if (!result)
+                {
+                    return false;
+                }
+
+                var now = DateTime.Now;
+                document.Info.CreationDate = now;
+                document.Info.ModificationDate = now;
+                if (compat == PdfCompat.PdfA1B)
+                {
+                    PdfAHelper.SetCidStream(document);
+                    PdfAHelper.DisableTransparency(document);
+                }
+
+                if (compat != PdfCompat.Default)
+                {
+                    PdfAHelper.SetColorProfile(document);
+                    PdfAHelper.SetCidMap(document);
+                    PdfAHelper.CreateXmpMetadata(document, compat);
+                }
+
+                PathHelper.EnsureParentDirExists(path);
+                document.Save(path);
+                return true;
+            }, TaskCreationOptions.LongRunning);
         }
 
         private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
@@ -129,7 +136,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 else
                 {
-                    using (Stream stream = scannedImageRenderer.RenderToStream(snapshot))
+                    using (Stream stream = scannedImageRenderer.RenderToStream(snapshot).Result)
                     using (var img = XImage.FromStream(stream))
                     {
                         if (!progressCallback(progress, snapshots.Count))
@@ -202,7 +209,7 @@ namespace NAPS2.ImportExport.Pdf
                     page = document.AddPage();
                 }
 
-                using (Stream stream = scannedImageRenderer.RenderToStream(snapshot))
+                using (Stream stream = scannedImageRenderer.RenderToStream(snapshot).Result)
                 using (var img = XImage.FromStream(stream))
                 {
                     if (!progressCallback(progress, snapshots.Count))

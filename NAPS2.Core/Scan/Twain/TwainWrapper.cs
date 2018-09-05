@@ -67,17 +67,17 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        public List<ScannedImage> Scan(IWin32Window dialogParent, bool activate, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams)
+        public void Scan(IWin32Window dialogParent, bool activate, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
+            ScannedImageSource.Concrete source)
         {
             if (scanProfile.TwainImpl == TwainImpl.Legacy)
             {
-                return Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, formFactory);
+                Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, formFactory, source);
             }
 
             PlatformInfo.Current.PreferNewDSM = scanProfile.TwainImpl != TwainImpl.OldDsm;
             var session = new TwainSession(TwainAppId);
             var twainForm = formFactory.Create<FTwainGui>();
-            var images = new List<ScannedImage>();
             Exception error = null;
             bool cancel = false;
             DataSource ds = null;
@@ -125,7 +125,9 @@ namespace NAPS2.Scan.Twain
                                 }
                             }
                             scannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
-                            images.Add(image);
+                            Debug.WriteLine("NAPS2.TW - Put start");
+                            source.Put(image);
+                            Debug.WriteLine("NAPS2.TW - Put end");
                         }
                     }
                 }
@@ -237,8 +239,6 @@ namespace NAPS2.Scan.Twain
                 }
                 throw new ScanDriverUnknownException(error);
             }
-
-            return images;
         }
 
         private static Bitmap GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)

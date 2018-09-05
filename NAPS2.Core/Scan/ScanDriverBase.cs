@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -72,7 +73,7 @@ namespace NAPS2.Scan
 
         protected abstract List<ScanDevice> GetDeviceListInternal();
 
-        public IEnumerable<ScannedImage> Scan()
+        public ScannedImageSource Scan()
         {
             if (!IsSupported)
             {
@@ -94,32 +95,27 @@ namespace NAPS2.Scan
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
             }
-            // Deconstruct a foreach loop so we can use a try-catch block and work around the limitations of "yield return"
-            using (var enumerator = ScanInternal().GetEnumerator())
+            
+            var source = new ScannedImageSource.Concrete();
+            Task.Factory.StartNew(async () =>
             {
-                while (true)
+                try
                 {
-                    try
-                    {
-                        if (!enumerator.MoveNext())
-                        {
-                            break;
-                        }
-                    }
-                    catch (ScanDriverException)
-                    {
-                        throw;
-                    }
-                    catch (Exception e)
-                    {
-                        throw new ScanDriverUnknownException(e);
-                    }
-
-                    yield return enumerator.Current;
+                    await ScanInternal(source);
+                    source.Done();
                 }
-            }
+                catch (ScanDriverException e)
+                {
+                    source.Error(e);
+                }
+                catch (Exception e)
+                {
+                    source.Error(new ScanDriverUnknownException(e));
+                }
+            }, TaskCreationOptions.LongRunning);
+            return source;
         }
 
-        protected abstract IEnumerable<ScannedImage> ScanInternal();
+        protected abstract Task ScanInternal(ScannedImageSource.Concrete source);
     }
 }

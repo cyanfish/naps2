@@ -52,7 +52,7 @@ namespace NAPS2.Scan.Twain.Legacy
             return result;
         }
 
-        public static List<ScannedImage> Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, IFormFactory formFactory)
+        public static void Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, IFormFactory formFactory, ScannedImageSource.Concrete source)
         {
             var tw = new Twain();
             if (!tw.Init(pForm.Handle))
@@ -66,7 +66,10 @@ namespace NAPS2.Scan.Twain.Legacy
             var form = formFactory.Create<FTwainGui>();
             var mf = new TwainMessageFilter(settings, tw, form);
             form.ShowDialog(pForm);
-            return mf.Bitmaps;
+            foreach (var b in mf.Bitmaps)
+            {
+                source.Put(b);
+            }
         }
 
         private class TwainMessageFilter : IMessageFilter

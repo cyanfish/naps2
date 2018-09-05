@@ -41,7 +41,7 @@ namespace NAPS2.WinForms
 
         private IEnumerable<ScannedImage> ImagesToTransform => SelectedImages != null && checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
 
-        protected override void OnLoad(object sender, EventArgs eventArgs)
+        protected override async void OnLoad(object sender, EventArgs eventArgs)
         {
             if (SelectedImages != null && SelectedImages.Count > 1)
             {
@@ -64,7 +64,7 @@ namespace NAPS2.WinForms
                 .Activate();
             Size = new Size(600, 600);
 
-            workingImage = scannedImageRenderer.Render(Image);
+            workingImage = await scannedImageRenderer.Render(Image);
             pictureBox.Image = (Bitmap)workingImage.Clone();
             txtAngle.Text += '\u00B0';
             UpdatePreviewBox();
@@ -106,16 +106,16 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private async void btnOK_Click(object sender, EventArgs e)
         {
             if (!RotationTransform.IsNull)
             {
                 foreach (var img in ImagesToTransform)
                 {
                     img.AddTransform(RotationTransform);
-                    img.SetThumbnail(thumbnailRenderer.RenderThumbnail(img));
+                    img.SetThumbnail(await thumbnailRenderer.RenderThumbnail(img));
                 }
-                changeTracker.HasUnsavedChanges = true;
+                changeTracker.Made();
             }
             Close();
         }

@@ -20,7 +20,7 @@ namespace NAPS2.ImportExport
             this.imageImporter = imageImporter;
         }
 
-        public IEnumerable<ScannedImage> Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
+        public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
         {
             if (filePath == null)
             {

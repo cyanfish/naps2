@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
@@ -50,7 +51,8 @@ namespace NAPS2.ImportExport.Images
                 MaxProgress = images.Count
             };
 
-            RunAsync(() =>
+            var snapshots = images.Select(x => x.Preserve()).ToList();
+            RunAsync(async () =>
             {
                 try
                 {
@@ -74,12 +76,12 @@ namespace NAPS2.ImportExport.Images
                         }
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                         FirstFileSaved = subFileName;
-                        return tiffHelper.SaveMultipage(images, subFileName, imageSettingsContainer.ImageSettings.TiffCompression, OnProgress);
+                        return await tiffHelper.SaveMultipage(snapshots, subFileName, imageSettingsContainer.ImageSettings.TiffCompression, OnProgress);
                     }
 
                     int i = 0;
-                    int digits = (int)Math.Floor(Math.Log10(images.Count)) + 1;
-                    foreach (ScannedImage img in images)
+                    int digits = (int)Math.Floor(Math.Log10(snapshots.Count)) + 1;
+                    foreach (ScannedImage.Snapshot snapshot in snapshots)
                     {
                         if (CancelToken.IsCancellationRequested)
                         {
@@ -88,7 +90,7 @@ namespace NAPS2.ImportExport.Images
                         Status.CurrentProgress = i;
                         InvokeStatusChanged();
 
-                        if (images.Count == 1 && File.Exists(subFileName))
+                        if (snapshots.Count == 1 && File.Exists(subFileName))
                         {
                             var dialogResult = overwritePrompt.ConfirmOverwrite(subFileName);
                             if (dialogResult == DialogResult.No)
@@ -100,11 +102,11 @@ namespace NAPS2.ImportExport.Images
                                 return false;
                             }
                         }
-                        if (images.Count == 1)
+                        if (snapshots.Count == 1)
                         {
                             Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                             InvokeStatusChanged();
-                            DoSaveImage(img, subFileName, format);
+                            await DoSaveImage(snapshot, subFileName, format);
                             FirstFileSaved = subFileName;
                         }
                         else
@@ -113,7 +115,7 @@ namespace NAPS2.ImportExport.Images
                                 digits);
                             Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                             InvokeStatusChanged();
-                            DoSaveImage(img, fileNameN, format);
+                            await DoSaveImage(snapshot, fileNameN, format);
 
                             if (i == 0)
                             {
@@ -136,6 +138,7 @@ namespace NAPS2.ImportExport.Images
                 }
                 finally
                 {
+                    snapshots.ForEach(s => s.Dispose());
                     GC.Collect();
                 }
                 return false;
@@ -144,12 +147,12 @@ namespace NAPS2.ImportExport.Images
             return true;
         }
 
-        private void DoSaveImage(ScannedImage image, string path, ImageFormat format)
+        private async Task DoSaveImage(ScannedImage.Snapshot snapshot, string path, ImageFormat format)
         {
             PathHelper.EnsureParentDirExists(path);
             if (Equals(format, ImageFormat.Tiff))
             {
-                tiffHelper.SaveMultipage(new List<ScannedImage> { image }, path, imageSettingsContainer.ImageSettings.TiffCompression, (i, j) => true);
+                await tiffHelper.SaveMultipage(new List<ScannedImage.Snapshot> { snapshot }, path, imageSettingsContainer.ImageSettings.TiffCompression, (i, j) => true);
             }
             else if (Equals(format, ImageFormat.Jpeg))
             {
@@ -157,14 +160,14 @@ namespace NAPS2.ImportExport.Images
                 var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
-                using (Bitmap bitmap = scannedImageRenderer.Render(image))
+                using (Bitmap bitmap = await scannedImageRenderer.Render(snapshot))
                 {
                     bitmap.Save(path, encoder, encoderParams);
                 }
             }
             else
             {
-                using (Bitmap bitmap = scannedImageRenderer.Render(image))
+                using (Bitmap bitmap = await scannedImageRenderer.Render(snapshot))
                 {
                     bitmap.Save(path, format);
                 }

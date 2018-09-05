@@ -39,9 +39,19 @@ namespace NAPS2.Operation
 
         protected CancellationToken CancelToken => cts.Token;
 
+        protected void RunAsync(Func<Task<bool>> action)
+        {
+            Success = StartTask(() => action().Result);
+        }
+
         protected void RunAsync(Func<bool> action)
         {
-            Success = Task.Factory.StartNew(() =>
+            Success = StartTask(action);
+        }
+
+        private Task<T> StartTask<T>(Func<T> action)
+        {
+            return Task.Factory.StartNew(() =>
             {
                 // We don't need to catch errors in general. The idea is that for a typical operation,
                 // OperationManager will handle it and show an error message box.
