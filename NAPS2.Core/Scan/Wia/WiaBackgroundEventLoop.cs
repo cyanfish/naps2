@@ -32,10 +32,10 @@ namespace NAPS2.Scan.Wia
             initWaiter.WaitOne();
         }
 
-        public void DoSync(Action<WiaState> action)
+        public void DoSync(Action<WiaState> action, Form invokeForm)
         {
             Exception error = null;
-            form.Invoke(new Action(() =>
+            (invokeForm ?? form).Invoke(new Action(() =>
             {
                 try
                 {
@@ -56,13 +56,13 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        public T GetSync<T>(Func<WiaState, T> action)
+        public T GetSync<T>(Func<WiaState, T> action, Form invokeForm = null)
         {
             T value = default;
             DoSync(wia =>
             {
                 value = action(wia);
-            });
+            }, invokeForm);
             return value;
         }
 

@@ -16,7 +16,7 @@ namespace NAPS2.Scan.Wia
             this.formFactory = formFactory;
         }
 
-        public Stream Transfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format)
+        public Stream Transfer(int pageNumber, WiaBackgroundEventLoop eventLoop, IWin32Window dialogParent, string format)
         {
             if (eventLoop.GetSync(wia => wia.Item) == null)
             {
@@ -34,7 +34,7 @@ namespace NAPS2.Scan.Wia
             var form = formFactory.Create<FScanProgress>();
             form.PageNumber = pageNumber;
             form.Transfer = () => eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, false));
-            form.ShowDialog();
+            form.ShowDialog(dialogParent);
             if (form.Exception != null)
             {
                 WiaApi.ThrowDeviceError(form.Exception);
