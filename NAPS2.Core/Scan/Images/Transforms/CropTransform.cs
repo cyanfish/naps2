@@ -15,33 +15,45 @@ namespace NAPS2.Scan.Images.Transforms
         public int Top { get; set; }
         public int Bottom { get; set; }
 
+        public int? OriginalWidth { get; set; }
+        public int? OriginalHeight { get; set; }
+
         public override Bitmap Perform(Bitmap bitmap)
         {
-            int width = Math.Max(bitmap.Width - Left - Right, 1);
-            int height = Math.Max(bitmap.Height - Top - Bottom, 1);
+            double xScale = bitmap.Width / (double)(OriginalWidth ?? bitmap.Width),
+                yScale = bitmap.Height / (double)(OriginalHeight ?? bitmap.Height);
+
+            int width = Math.Max(bitmap.Width - (int)Math.Round((Left + Right) * xScale), 1);
+            int height = Math.Max(bitmap.Height - (int)Math.Round((Top + Bottom) * yScale), 1);
             var result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
             result.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
             using (var g = Graphics.FromImage(result))
             {
                 g.Clear(Color.White);
-                g.DrawImage(bitmap, new Rectangle(-Left, -Top, bitmap.Width, bitmap.Height));
+                g.DrawImage(bitmap, new Rectangle((int)Math.Round(-Left * xScale), (int)Math.Round(-Top * yScale), bitmap.Width, bitmap.Height));
             }
             OptimizePixelFormat(bitmap, ref result);
             bitmap.Dispose();
             return result;
         }
 
-        public override bool CanSimplify(Transform other) => other is CropTransform;
+        public override bool CanSimplify(Transform other) => other is CropTransform other2
+                                                             && OriginalHeight.HasValue && OriginalWidth.HasValue
+                                                             && other2.OriginalHeight.HasValue && other2.OriginalWidth.HasValue;
 
         public override Transform Simplify(Transform other)
         {
             var other2 = (CropTransform)other;
+            double xScale = (double)(other2.OriginalWidth - other2.Left - other2.Right) / (double)OriginalWidth;
+            double yScale = (double)(other2.OriginalHeight - other2.Top - other2.Bottom) / (double)OriginalHeight;
             return new CropTransform
             {
-                Left = Left + other2.Left,
-                Right = Right + other2.Right,
-                Top = Top + other2.Top,
-                Bottom = Bottom + other2.Bottom
+                Left = (int)Math.Round(Left * xScale) + other2.Left,
+                Right = (int)Math.Round(Right * xScale) + other2.Right,
+                Top = (int)Math.Round(Top * yScale) + other2.Top,
+                Bottom = (int)Math.Round(Bottom * yScale) + other2.Bottom,
+                OriginalHeight = other2.OriginalHeight,
+                OriginalWidth = other2.OriginalWidth
             };
         }
 

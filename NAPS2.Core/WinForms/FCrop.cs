@@ -85,7 +85,11 @@ namespace NAPS2.WinForms
             }
             else
             {
-                CropTransform = new CropTransform();
+                CropTransform = new CropTransform
+                {
+                    OriginalHeight = workingImage.Height,
+                    OriginalWidth = workingImage.Width
+                };
             }
 
             UpdateCropBounds();
@@ -141,7 +145,9 @@ namespace NAPS2.WinForms
                 Left = Math.Min(tbLeft.Value, tbRight.Value),
                 Right = workingImage.Width - Math.Max(tbLeft.Value, tbRight.Value),
                 Bottom = Math.Min(tbTop.Value, tbBottom.Value),
-                Top = workingImage.Height - Math.Max(tbTop.Value, tbBottom.Value)
+                Top = workingImage.Height - Math.Max(tbTop.Value, tbBottom.Value),
+                OriginalHeight = workingImage.Height,
+                OriginalWidth = workingImage.Width
             };
             UpdatePreviewBox();
         }
@@ -201,23 +207,10 @@ namespace NAPS2.WinForms
             // Same for all such forms
             if (!CropTransform.IsNull)
             {
-                if (TransformMultiple)
+                foreach (var img in ImagesToTransform)
                 {
-                    // With multiple images, we need to have the transform scaled in case they're different sizes
-                    using (var referenceBitmap = await scannedImageRenderer.Render(Image))
-                    {
-                        foreach (var img in ImagesToTransform)
-                        {
-                            var (transform, thumbnail) = await ScaleCropTransform(img, referenceBitmap);
-                            img.AddTransform(transform);
-                            img.SetThumbnail(thumbnail);
-                        }
-                    }
-                }
-                else
-                {
-                    Image.AddTransform(CropTransform);
-                    Image.SetThumbnail(await thumbnailRenderer.RenderThumbnail(Image));
+                    img.AddTransform(CropTransform);
+                    img.SetThumbnail(await thumbnailRenderer.RenderThumbnail(img));
                 }
                 changeTracker.Made();
             }
@@ -226,25 +219,13 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private async Task<(CropTransform, Bitmap)> ScaleCropTransform(ScannedImage img, Bitmap referenceBitmap)
-        {
-            using (var bitmap = await scannedImageRenderer.Render(img))
-            {
-                double xScale = bitmap.Width / (double)referenceBitmap.Width,
-                       yScale = bitmap.Height / (double)referenceBitmap.Height;
-                return (new CropTransform
-                {
-                    Left = (int)Math.Round(CropTransform.Left * xScale),
-                    Right = (int)Math.Round(CropTransform.Right * xScale),
-                    Top = (int)Math.Round(CropTransform.Top * yScale),
-                    Bottom = (int)Math.Round(CropTransform.Bottom * yScale)
-                }, thumbnailRenderer.RenderThumbnail(bitmap));
-            }
-        }
-
         private void btnRevert_Click(object sender, EventArgs e)
         {
-            CropTransform = new CropTransform();
+            CropTransform = new CropTransform
+            {
+                OriginalHeight = workingImage.Height,
+                OriginalWidth = workingImage.Width
+            };
             UpdatePreviewBox();
         }
 
