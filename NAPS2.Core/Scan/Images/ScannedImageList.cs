@@ -263,22 +263,20 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        public IEnumerable<int> RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
+        public void RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
         {
             foreach (ScannedImage img in Images.ElementsAt(selection))
             {
                 img.AddTransform(new RotationTransform(rotateFlipType));
             }
-            return selection.ToList();
         }
 
-        public IEnumerable<int> ResetTransforms(IEnumerable<int> selection)
+        public void ResetTransforms(IEnumerable<int> selection)
         {
             foreach (ScannedImage img in Images.ElementsAt(selection))
             {
                 img.ResetTransforms();
             }
-            return selection.ToList();
         }
     }
 }

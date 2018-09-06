@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -122,13 +123,7 @@ namespace NAPS2.WinForms
             ilThumbnailList.Images.Add(GetThumbnail(img));
             Items.Add(PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "", ilThumbnailList.Images.Count - 1);
         }
-
-        public void SetDirty(int index, ScannedImage img)
-        {
-            ilThumbnailList.Images[index] = DrawHourglass(ilThumbnailList.Images[index]);
-            Invalidate(Items[index].Bounds);
-        }
-
+        
         public void ReplaceThumbnail(int index, ScannedImage img)
         {
             var thumb = GetThumbnail(img);
@@ -155,7 +150,19 @@ namespace NAPS2.WinForms
 
         private Bitmap GetThumbnail(ScannedImage img)
         {
-            return img.GetThumbnail() ?? RenderPlaceholder();
+            lock (this)
+            {
+                var thumb = img.GetThumbnail();
+                if (thumb == null)
+                {
+                    return RenderPlaceholder();
+                }
+                if (img.IsThumbnailDirty)
+                {
+                    thumb = DrawHourglass(thumb);
+                }
+                return thumb;
+            }
         }
 
         private Bitmap RenderPlaceholder()
@@ -168,18 +175,33 @@ namespace NAPS2.WinForms
                 }
                 placeholder?.Dispose();
                 placeholder = new Bitmap(ThumbnailSize.Width, ThumbnailSize.Height);
-                DrawHourglass(placeholder);
+                placeholder = DrawHourglass(placeholder);
                 return placeholder;
             }
         }
 
-        private Image DrawHourglass(Image image)
+        private Bitmap DrawHourglass(Image image)
         {
-            using (var g = Graphics.FromImage(image))
+            var bitmap = new Bitmap(ThumbnailSize.Width, ThumbnailSize.Height);
+            using (var g = Graphics.FromImage(bitmap))
             {
-                g.DrawImage(Icons.hourglass_grey, new Rectangle((image.Width - 32) / 2, (image.Height - 32) / 2, 32, 32));
+                var attrs = new ImageAttributes();
+                attrs.SetColorMatrix(new ColorMatrix
+                {
+                    Matrix33 = 0.3f
+                });
+                g.DrawImage(image,
+                    new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                    0,
+                    0,
+                    image.Width,
+                    image.Height,
+                    GraphicsUnit.Pixel,
+                    attrs);
+                g.DrawImage(Icons.hourglass_grey, new Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
             }
-            return image;
+            image.Dispose();
+            return bitmap;
         }
     }
 }

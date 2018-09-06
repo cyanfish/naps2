@@ -65,7 +65,6 @@ namespace NAPS2.WinForms
         public ScannedImageList ImageList { get; set; }
         public int ImageIndex { get; set; }
         public Action DeleteCallback { get; set; }
-        public Action<IEnumerable<int>> UpdateCallback { get; set; }
         public Action<int> SelectCallback { get; set; }
 
         protected override async void OnLoad(object sender, EventArgs e)
@@ -400,21 +399,18 @@ namespace NAPS2.WinForms
         {
             ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate270FlipNone);
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsRotateRight_Click(object sender, EventArgs e)
         {
             ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate90FlipNone);
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsFlip_Click(object sender, EventArgs e)
         {
             ImageList.RotateFlip(Enumerable.Range(ImageIndex, 1), RotateFlipType.Rotate180FlipNone);
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsDeskew_Click(object sender, EventArgs e)
@@ -427,7 +423,6 @@ namespace NAPS2.WinForms
             {
                 progressForm.ShowDialog();
                 await UpdateImage();
-                UpdateCallback(Enumerable.Range(ImageIndex, 1));
             }
         }
 
@@ -437,7 +432,6 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsCrop_Click(object sender, EventArgs e)
@@ -446,7 +440,6 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsBrightnessContrast_Click(object sender, EventArgs e)
@@ -455,7 +448,6 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsHueSaturation_Click(object sender, EventArgs e)
@@ -464,7 +456,6 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsBlackWhite_Click(object sender, EventArgs e)
@@ -473,7 +464,6 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsSharpen_Click(object sender, EventArgs e)
@@ -482,7 +472,6 @@ namespace NAPS2.WinForms
             form.Image = ImageList.Images[ImageIndex];
             form.ShowDialog();
             await UpdateImage();
-            UpdateCallback(Enumerable.Range(ImageIndex, 1));
         }
 
         private async void tsDelete_Click(object sender, EventArgs e)
