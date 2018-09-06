@@ -14,6 +14,7 @@ namespace NAPS2.Recovery
     public class RecoveryImage : IDisposable
     {
         public const string LOCK_FILE_NAME = ".lock";
+        private static readonly string RecoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
 
         private static DirectoryInfo _recoveryFolder;
         private static FileInfo _recoveryLockFile;
@@ -31,7 +32,7 @@ namespace NAPS2.Recovery
                 if (_recoveryFolder == null)
                 {
                     // Automatically create a recovery folder owned by this process
-                    _recoveryFolder = new DirectoryInfo(Path.Combine(Paths.Recovery, Path.GetRandomFileName()));
+                    _recoveryFolder = new DirectoryInfo(RecoveryFolderPath);
                     _recoveryFolder.Create();
                     _recoveryLockFile = new FileInfo(Path.Combine(_recoveryFolder.FullName, LOCK_FILE_NAME));
                     _recoveryLock = _recoveryLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);

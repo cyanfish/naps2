@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Scan.Images;
 
 namespace NAPS2.Worker
 {
@@ -14,15 +15,15 @@ namespace NAPS2.Worker
     public interface IWorkerService
     {
         [OperationContract]
-        void Init();
-
-        [OperationContract]
-        void SetRecoveryFolder(string path);
+        void Init(string recoveryFolderPath);
 
         [OperationContract]
         List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl);
 
         [OperationContract(IsOneWay = true)]
         void TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
+
+        [OperationContract]
+        byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size);
     }
 }

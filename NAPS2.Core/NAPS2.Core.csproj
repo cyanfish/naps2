@@ -190,6 +190,7 @@
     <Compile Include="Util\ExceptionExtensions.cs" />
     <Compile Include="Platform\IRuntimeCompat.cs" />
     <Compile Include="Platform\MonoRuntimeCompat.cs" />
+    <Compile Include="Util\ExpFallback.cs" />
     <Compile Include="Util\ImageExtensions.cs" />
     <Compile Include="Util\NaturalStringComparer.cs" />
     <Compile Include="Util\ProgressHandler.cs" />

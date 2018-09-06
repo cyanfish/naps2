@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using NAPS2.Recovery;
@@ -130,7 +131,7 @@ namespace NAPS2.Scan.Images
 
         public Bitmap GetThumbnail()
         {
-            return (Bitmap) thumbnail?.Clone();
+            return (Bitmap)thumbnail?.Clone();
         }
 
         public void SetThumbnail(Bitmap bitmap, int? state = null)
@@ -166,10 +167,12 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        public class Snapshot : IDisposable
+        [Serializable]
+        [KnownType("KnownTypes")]
+        public class Snapshot : IDisposable, ISerializable
         {
             private bool disposed;
-            
+
             internal Snapshot(ScannedImage source)
             {
                 lock (source)
@@ -183,7 +186,7 @@ namespace NAPS2.Scan.Images
                     TransformList = source.transformList.ToList();
                 }
             }
-            
+
             public ScannedImage Source { get; }
 
             public List<Transform> TransformList { get; }
@@ -200,6 +203,25 @@ namespace NAPS2.Scan.Images
                         Source.Dispose();
                     }
                 }
+            }
+
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
+                info.AddValue("RecoveryIndexImage", Source.RecoveryIndexImage);
+                info.AddValue("TransformList", TransformList);
+            }
+
+            private Snapshot(SerializationInfo info, StreamingContext context)
+            {
+                Source = new ScannedImage((RecoveryIndexImage)info.GetValue("RecoveryIndexImage", typeof(RecoveryIndexImage)));
+                TransformList = (List<Transform>)info.GetValue("TransformList", typeof(List<Transform>));
+            }
+
+            // ReSharper disable once UnusedMember.Local
+            private static Type[] KnownTypes()
+            {
+                var transformTypes = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsSubclassOf(typeof(Transform)));
+                return transformTypes.Concat(new[] { typeof(List<Transform>), typeof(RecoveryIndexImage) }).ToArray();
             }
         }
     }

@@ -131,8 +131,12 @@ namespace NAPS2.WinForms
 
         public void ReplaceThumbnail(int index, ScannedImage img)
         {
-            ilThumbnailList.Images[index] = GetThumbnail(img);
-            Invalidate(Items[index].Bounds);
+            var thumb = GetThumbnail(img);
+            if (thumb.Size == ThumbnailSize)
+            {
+                ilThumbnailList.Images[index] = thumb;
+                Invalidate(Items[index].Bounds);
+            }
         }
 
         public void RegenerateThumbnailList(List<ScannedImage> images)

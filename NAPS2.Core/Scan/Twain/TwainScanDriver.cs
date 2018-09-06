@@ -75,7 +75,6 @@ namespace NAPS2.Scan.Twain
                 {
                     using (var worker = workerServiceFactory.Create())
                     {
-                        worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
                         worker.Callback.ImageCallback += source.Put;
                         // TODO: RecoveryFileNumber is not async safe
                         worker.Service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams, DialogParent.SafeHandle());

@@ -89,7 +89,11 @@ namespace NAPS2.Worker
                 var callback = new WorkerCallback();
                 var instanceContext = new InstanceContext(callback);
                 var channelFactory = new DuplexChannelFactory<IWorkerService>(instanceContext,
-                    new NetNamedPipeBinding { SendTimeout = TimeSpan.FromHours(24) },
+                    new NetNamedPipeBinding
+                    {
+                        SendTimeout = TimeSpan.FromHours(24),
+                        MaxReceivedMessageSize = int.MaxValue
+                    },
                     new EndpointAddress(pipeName));
                 var channel = channelFactory.CreateChannel();
                 _workerQueue.Add(new WorkerContext { Service = channel, Callback = callback});

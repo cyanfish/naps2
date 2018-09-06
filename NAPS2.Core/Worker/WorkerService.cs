@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Recovery;
 using NAPS2.Scan;
@@ -22,23 +24,21 @@ namespace NAPS2.Worker
     public class WorkerService : IWorkerService
     {
         private readonly TwainWrapper twainWrapper;
+        private readonly ThumbnailRenderer thumbnailRenderer;
 
         public Form ParentForm { get; set; }
 
-        public WorkerService(TwainWrapper twainWrapper)
+        public WorkerService(TwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer)
         {
             this.twainWrapper = twainWrapper;
+            this.thumbnailRenderer = thumbnailRenderer;
         }
 
-        public void Init()
+        public void Init(string recoveryFolderPath)
         {
-            OperationContext.Current.Channel.Closed += (sender, args) => Application.Exit();
+            //OperationContext.Current.Channel.Closed += (sender, args) => Application.Exit();
             Callback = OperationContext.Current.GetCallbackChannel<IWorkerCallback>();
-        }
-
-        public void SetRecoveryFolder(string path)
-        {
-            RecoveryImage.RecoveryFolder = new DirectoryInfo(path);
+            RecoveryImage.RecoveryFolder = new DirectoryInfo(recoveryFolderPath);
         }
 
         public List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl)
@@ -63,6 +63,16 @@ namespace NAPS2.Worker
             {
                 Callback.Finish();
             }
+        }
+
+        public byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
+        {
+            var stream = new MemoryStream();
+            using (var bitmap = Task.Factory.StartNew(() => thumbnailRenderer.RenderThumbnail(snapshot, size)).Unwrap().Result)
+            {
+                bitmap.Save(stream, ImageFormat.Png);
+            }
+            return stream.ToArray();
         }
 
         public void Dispose()

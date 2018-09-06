@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
+using NAPS2.Util;
 
 namespace NAPS2.Worker
 {
@@ -15,7 +17,17 @@ namespace NAPS2.Worker
 
         public void Dispose()
         {
-            ((IDisposable)Service)?.Dispose();
+            try
+            {
+                ((IDisposable) Service)?.Dispose();
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+            }
+            catch (Exception e)
+            {
+                Log.ErrorException("Error cleaning up worker", e);
+            }
         }
     }
 }

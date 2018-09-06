@@ -27,6 +27,7 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia;
 using NAPS2.Util;
+using NAPS2.Worker;
 
 #endregion
 
@@ -53,6 +54,7 @@ namespace NAPS2.WinForms
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly NotificationManager notify;
         private readonly CultureInitializer cultureInitializer;
+        private readonly IWorkerServiceFactory workerServiceFactory;
 
         #endregion
 
@@ -68,7 +70,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify, CultureInitializer cultureInitializer)
+        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory)
         {
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
@@ -87,6 +89,7 @@ namespace NAPS2.WinForms
             this.scannedImageRenderer = scannedImageRenderer;
             this.notify = notify;
             this.cultureInitializer = cultureInitializer;
+            this.workerServiceFactory = workerServiceFactory;
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -530,7 +533,6 @@ namespace NAPS2.WinForms
                         int index = imageList.Images.IndexOf(image);
                         if (index != -1)
                         {
-                            // TODO: Fix deadlock
                             thumbnailList1.ReplaceThumbnail(index, image);
                         }
                     }
@@ -1749,24 +1751,45 @@ namespace NAPS2.WinForms
 
         private void RenderThumbnails()
         {
+            bool useWorker = PlatformCompat.Runtime.UseWorker;
+            var worker = useWorker ? workerServiceFactory.Create() : null;
+            var fallback = new ExpFallback(100, 60 * 1000);
             while (!closed)
             {
                 ScannedImage next;
                 while ((next = GetNextThumbnailToRender()) != null)
                 {
-                    if (!ThumbnailStillNeedsRendering(next))
+                    try
                     {
-                        continue;
-                    }
-                    using (var snapshot = next.Preserve(out var state))
-                    {
-                        // TODO: Do the actual rendering on a (thread-level) worker where supported
-                        var thumb = thumbnailRenderer.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
                         if (!ThumbnailStillNeedsRendering(next))
                         {
                             continue;
                         }
-                        next.SetThumbnail(thumb, state);
+                        using (var snapshot = next.Preserve(out var state))
+                        {
+                            var thumb = worker != null
+                                ? new Bitmap(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)))
+                                : thumbnailRenderer.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
+
+                            if (!ThumbnailStillNeedsRendering(next))
+                            {
+                                continue;
+                            }
+
+                            next.SetThumbnail(thumb, state);
+                        }
+                        fallback.Reset();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.ErrorException("Error rendering thumbnails", e);
+                        if (worker != null)
+                        {
+                            worker.Dispose();
+                            worker = workerServiceFactory.Create();
+                        }
+                        Thread.Sleep(fallback.Value);
+                        fallback.Increase();
                     }
                 }
                 renderThumbnailsWaitHandle.WaitOne();
