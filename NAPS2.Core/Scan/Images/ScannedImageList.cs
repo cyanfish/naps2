@@ -27,215 +27,250 @@ namespace NAPS2.Scan.Images
 
         public IEnumerable<int> MoveUp(IEnumerable<int> selection)
         {
-            var newSelection = new int[selection.Count()];
-            int lowerBound = 0;
-            int j = 0;
-            foreach (int i in selection.OrderBy(x => x))
+            lock (this)
             {
-                if (i != lowerBound++)
+                var newSelection = new int[selection.Count()];
+                int lowerBound = 0;
+                int j = 0;
+                foreach (int i in selection.OrderBy(x => x))
                 {
-                    ScannedImage img = Images[i];
-                    Images.RemoveAt(i);
-                    Images.Insert(i - 1, img);
-                    img.MovedTo(i - 1);
-                    newSelection[j++] = i - 1;
+                    if (i != lowerBound++)
+                    {
+                        ScannedImage img = Images[i];
+                        Images.RemoveAt(i);
+                        Images.Insert(i - 1, img);
+                        img.MovedTo(i - 1);
+                        newSelection[j++] = i - 1;
+                    }
+                    else
+                    {
+                        newSelection[j++] = i;
+                    }
                 }
-                else
-                {
-                    newSelection[j++] = i;
-                }
+
+                return newSelection;
             }
-            return newSelection;
         }
 
         public IEnumerable<int> MoveDown(IEnumerable<int> selection)
         {
-            var newSelection = new int[selection.Count()];
-            int upperBound = Images.Count - 1;
-            int j = 0;
-            foreach (int i in selection.OrderByDescending(x => x))
+            lock (this)
             {
-                if (i != upperBound--)
+                var newSelection = new int[selection.Count()];
+                int upperBound = Images.Count - 1;
+                int j = 0;
+                foreach (int i in selection.OrderByDescending(x => x))
                 {
-                    ScannedImage img = Images[i];
-                    Images.RemoveAt(i);
-                    Images.Insert(i + 1, img);
-                    img.MovedTo(i + 1);
-                    newSelection[j++] = i + 1;
+                    if (i != upperBound--)
+                    {
+                        ScannedImage img = Images[i];
+                        Images.RemoveAt(i);
+                        Images.Insert(i + 1, img);
+                        img.MovedTo(i + 1);
+                        newSelection[j++] = i + 1;
+                    }
+                    else
+                    {
+                        newSelection[j++] = i;
+                    }
                 }
-                else
-                {
-                    newSelection[j++] = i;
-                }
+
+                return newSelection;
             }
-            return newSelection;
         }
 
         public IEnumerable<int> MoveTo(IEnumerable<int> selection, int index)
         {
-            var selList = selection.ToList();
-            var bottom = selList.Where(x => x < index).OrderByDescending(x => x).ToList();
-            var top = selList.Where(x => x >= index).OrderBy(x => x).ToList();
-
-            int offset = 1;
-            foreach (int i in bottom)
+            lock (this)
             {
-                ScannedImage img = Images[i];
-                Images.RemoveAt(i);
-                Images.Insert(index - offset, img);
-                img.MovedTo(index - offset);
-                offset++;
-            }
+                var selList = selection.ToList();
+                var bottom = selList.Where(x => x < index).OrderByDescending(x => x).ToList();
+                var top = selList.Where(x => x >= index).OrderBy(x => x).ToList();
 
-            offset = 0;
-            foreach (int i in top)
-            {
-                ScannedImage img = Images[i];
-                Images.RemoveAt(i);
-                Images.Insert(index + offset, img);
-                img.MovedTo(index + offset);
-                offset++;
-            }
+                int offset = 1;
+                foreach (int i in bottom)
+                {
+                    ScannedImage img = Images[i];
+                    Images.RemoveAt(i);
+                    Images.Insert(index - offset, img);
+                    img.MovedTo(index - offset);
+                    offset++;
+                }
 
-            return Enumerable.Range(index - bottom.Count, selList.Count);
-        }
+                offset = 0;
+                foreach (int i in top)
+                {
+                    ScannedImage img = Images[i];
+                    Images.RemoveAt(i);
+                    Images.Insert(index + offset, img);
+                    img.MovedTo(index + offset);
+                    offset++;
+                }
 
-        public async Task<IEnumerable<int>> RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
-        {
-            foreach (int i in selection)
-            {
-                Images[i].AddTransform(new RotationTransform(rotateFlipType));
-                Images[i].SetThumbnail(await ThumbnailRenderer.RenderThumbnail(Images[i]));
+                return Enumerable.Range(index - bottom.Count, selList.Count);
             }
-            return selection.ToList();
         }
 
         public void Delete(IEnumerable<int> selection)
         {
-            foreach (ScannedImage img in Images.ElementsAt(selection))
+            lock (this)
             {
-                img.Dispose();
+                foreach (ScannedImage img in Images.ElementsAt(selection))
+                {
+                    img.Dispose();
+                }
+
+                Images.RemoveAll(selection);
             }
-            Images.RemoveAll(selection);
         }
 
         public IEnumerable<int> Interleave(IEnumerable<int> selection)
         {
-            // Partition the image list in two
-            int count = Images.Count;
-            int split = (count + 1) / 2;
-            var p1 = Images.Take(split).ToList();
-            var p2 = Images.Skip(split).ToList();
-
-            // Rebuild the image list, taking alternating images from each the partitions
-            Images.Clear();
-            for (int i = 0; i < count; ++i)
+            lock (this)
             {
-                Images.Add(i % 2 == 0 ? p1[i / 2] : p2[i / 2]);
+                // Partition the image list in two
+                int count = Images.Count;
+                int split = (count + 1) / 2;
+                var p1 = Images.Take(split).ToList();
+                var p2 = Images.Skip(split).ToList();
+
+                // Rebuild the image list, taking alternating images from each the partitions
+                Images.Clear();
+                for (int i = 0; i < count; ++i)
+                {
+                    Images.Add(i % 2 == 0 ? p1[i / 2] : p2[i / 2]);
+                }
+
+                RecoveryImage.Refresh(Images);
+
+                // Clear the selection (may be changed in the future to maintain it, but not necessary)
+                return Enumerable.Empty<int>();
             }
-
-            RecoveryImage.Refresh(Images);
-
-            // Clear the selection (may be changed in the future to maintain it, but not necessary)
-            return Enumerable.Empty<int>();
         }
 
         public IEnumerable<int> Deinterleave(IEnumerable<int> selection)
         {
-            // Duplicate the list
-            int count = Images.Count;
-            int split = (count + 1) / 2;
-            var images = Images.ToList();
-
-            // Rebuild the image list, even-indexed images first
-            Images.Clear();
-            for (int i = 0; i < split; ++i)
+            lock (this)
             {
-                Images.Add(images[i * 2]);
-            }
-            for (int i = 0; i < (count - split); ++i)
-            {
-                Images.Add(images[i * 2 + 1]);
-            }
+                // Duplicate the list
+                int count = Images.Count;
+                int split = (count + 1) / 2;
+                var images = Images.ToList();
 
-            RecoveryImage.Refresh(Images);
+                // Rebuild the image list, even-indexed images first
+                Images.Clear();
+                for (int i = 0; i < split; ++i)
+                {
+                    Images.Add(images[i * 2]);
+                }
 
-            // Clear the selection (may be changed in the future to maintain it, but not necessary)
-            return Enumerable.Empty<int>();
+                for (int i = 0; i < (count - split); ++i)
+                {
+                    Images.Add(images[i * 2 + 1]);
+                }
+
+                RecoveryImage.Refresh(Images);
+
+                // Clear the selection (may be changed in the future to maintain it, but not necessary)
+                return Enumerable.Empty<int>();
+            }
         }
 
         public IEnumerable<int> AltInterleave(IEnumerable<int> selectedIndices)
         {
-            // Partition the image list in two
-            int count = Images.Count;
-            int split = (count + 1) / 2;
-            var p1 = Images.Take(split).ToList();
-            var p2 = Images.Skip(split).ToList();
-
-            // Rebuild the image list, taking alternating images from each the partitions (the latter in reverse order)
-            Images.Clear();
-            for (int i = 0; i < count; ++i)
+            lock (this)
             {
-                Images.Add(i % 2 == 0 ? p1[i / 2] : p2[p2.Count - 1 - i / 2]);
+                // Partition the image list in two
+                int count = Images.Count;
+                int split = (count + 1) / 2;
+                var p1 = Images.Take(split).ToList();
+                var p2 = Images.Skip(split).ToList();
+
+                // Rebuild the image list, taking alternating images from each the partitions (the latter in reverse order)
+                Images.Clear();
+                for (int i = 0; i < count; ++i)
+                {
+                    Images.Add(i % 2 == 0 ? p1[i / 2] : p2[p2.Count - 1 - i / 2]);
+                }
+
+                RecoveryImage.Refresh(Images);
+
+                // Clear the selection (may be changed in the future to maintain it, but not necessary)
+                return Enumerable.Empty<int>();
             }
-
-            RecoveryImage.Refresh(Images);
-
-            // Clear the selection (may be changed in the future to maintain it, but not necessary)
-            return Enumerable.Empty<int>();
         }
 
         public IEnumerable<int> AltDeinterleave(IEnumerable<int> selectedIndices)
         {
-            // Duplicate the list
-            int count = Images.Count;
-            int split = (count + 1) / 2;
-            var images = Images.ToList();
-
-            // Rebuild the image list, even-indexed images first (odd-indexed images in reverse order)
-            Images.Clear();
-            for (int i = 0; i < split; ++i)
+            lock (this)
             {
-                Images.Add(images[i * 2]);
-            }
-            for (int i = count - split - 1; i >= 0; --i)
-            {
-                Images.Add(images[i * 2 + 1]);
-            }
+                // Duplicate the list
+                int count = Images.Count;
+                int split = (count + 1) / 2;
+                var images = Images.ToList();
 
-            RecoveryImage.Refresh(Images);
+                // Rebuild the image list, even-indexed images first (odd-indexed images in reverse order)
+                Images.Clear();
+                for (int i = 0; i < split; ++i)
+                {
+                    Images.Add(images[i * 2]);
+                }
 
-            // Clear the selection (may be changed in the future to maintain it, but not necessary)
-            return Enumerable.Empty<int>();
+                for (int i = count - split - 1; i >= 0; --i)
+                {
+                    Images.Add(images[i * 2 + 1]);
+                }
+
+                RecoveryImage.Refresh(Images);
+
+                // Clear the selection (may be changed in the future to maintain it, but not necessary)
+                return Enumerable.Empty<int>();
+            }
         }
 
         public IEnumerable<int> Reverse()
         {
-            Reverse(Enumerable.Range(0, Images.Count));
+            lock (this)
+            {
+                Reverse(Enumerable.Range(0, Images.Count));
 
-            // Selection is unpredictable, so clear it
-            return Enumerable.Empty<int>();
+                // Selection is unpredictable, so clear it
+                return Enumerable.Empty<int>();
+            }
         }
 
         public IEnumerable<int> Reverse(IEnumerable<int> selection)
         {
-            var selectionList = selection.ToList();
-            int pairCount = selectionList.Count / 2;
-
-            // Swap pairs in the selection, excluding the middle element (if the total count is odd)
-            for (int i = 0; i < pairCount; i++)
+            lock (this)
             {
-                int x = selectionList[i];
-                int y = selectionList[selectionList.Count - i - 1];
-                var temp = Images[x];
-                Images[x] = Images[y];
-                Images[y] = temp;
+                var selectionList = selection.ToList();
+                int pairCount = selectionList.Count / 2;
+
+                // Swap pairs in the selection, excluding the middle element (if the total count is odd)
+                for (int i = 0; i < pairCount; i++)
+                {
+                    int x = selectionList[i];
+                    int y = selectionList[selectionList.Count - i - 1];
+                    var temp = Images[x];
+                    Images[x] = Images[y];
+                    Images[y] = temp;
+                }
+
+                RecoveryImage.Refresh(Images);
+
+                // Selection stays the same, so is easy to maintain
+                return selectionList;
             }
+        }
 
-            RecoveryImage.Refresh(Images);
-
-            // Selection stays the same, so is easy to maintain
-            return selectionList;
+        public async Task<IEnumerable<int>> RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
+        {
+            foreach (ScannedImage img in Images.ElementsAt(selection))
+            {
+                img.AddTransform(new RotationTransform(rotateFlipType));
+                img.SetThumbnail(await ThumbnailRenderer.RenderThumbnail(img));
+            }
+            return selection.ToList();
         }
 
         public async Task<IEnumerable<int>> ResetTransforms(IEnumerable<int> selection)

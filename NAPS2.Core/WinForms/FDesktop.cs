@@ -48,6 +48,7 @@ namespace NAPS2.WinForms
         private readonly IOperationFactory operationFactory;
         private readonly IUserConfigManager userConfigManager;
         private readonly KeyboardShortcutManager ksm;
+        private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly WinFormsExportHelper exportHelper;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly NotificationManager notify;
@@ -61,7 +62,6 @@ namespace NAPS2.WinForms
         private CancellationTokenSource renderThumbnailsCts;
         private LayoutManager layoutManager;
         private bool disableSelectedIndexChangedEvent;
-        private readonly ThumbnailRenderer thumbnailRenderer;
 
         #endregion
 
