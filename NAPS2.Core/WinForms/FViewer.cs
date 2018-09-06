@@ -108,8 +108,9 @@ namespace NAPS2.WinForms
 
         private async Task UpdateImage()
         {
-            var newImage = await scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
             tiffViewer1.Image?.Dispose();
+            tiffViewer1.Image = null;
+            var newImage = await scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
             tiffViewer1.Image = newImage;
         }
 
@@ -118,7 +119,7 @@ namespace NAPS2.WinForms
             if (disposing)
             {
                 components?.Dispose();
-                tiffViewer1?.Image.Dispose();
+                tiffViewer1?.Image?.Dispose();
                 tiffViewer1?.Dispose();
             }
             base.Dispose(disposing);
@@ -485,7 +486,7 @@ namespace NAPS2.WinForms
         private async Task DeleteCurrentImage()
         {
             // Need to dispose the bitmap first to avoid file access issues
-            tiffViewer1.Image.Dispose();
+            tiffViewer1.Image?.Dispose();
             // Actually delete the image
             ImageList.Delete(Enumerable.Range(ImageIndex, 1));
             // Update FDesktop in the background

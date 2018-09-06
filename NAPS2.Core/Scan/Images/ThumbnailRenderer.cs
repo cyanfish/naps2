@@ -15,6 +15,8 @@ namespace NAPS2.Scan.Images
         public const int DEFAULT_SIZE = 128;
         public static int MAX_SIZE = 1024;
 
+        private const int OVERSAMPLE = 3;
+
         public static double StepNumberToSize(double stepNumber)
         {
             // 64-256:32:6 256-448:48:4 448-832:64:6 832-1024:96:2
@@ -59,17 +61,14 @@ namespace NAPS2.Scan.Images
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
-        public async Task<Bitmap> RenderThumbnail(ScannedImage scannedImage)
+        public Task<Bitmap> RenderThumbnail(ScannedImage scannedImage)
         {
-            using (var bitmap = await scannedImageRenderer.Render(scannedImage))
-            {
-                return RenderThumbnail(bitmap, userConfigManager.Config.ThumbnailSize);
-            }
+            return RenderThumbnail(scannedImage, userConfigManager.Config.ThumbnailSize);
         }
 
         public async Task<Bitmap> RenderThumbnail(ScannedImage scannedImage, int size)
         {
-            using (var bitmap = await scannedImageRenderer.Render(scannedImage))
+            using (var bitmap = await scannedImageRenderer.Render(scannedImage, size * OVERSAMPLE))
             {
                 return RenderThumbnail(bitmap, size);
             }
@@ -77,7 +76,7 @@ namespace NAPS2.Scan.Images
 
         public async Task<Bitmap> RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
         {
-            using (var bitmap = await scannedImageRenderer.Render(snapshot))
+            using (var bitmap = await scannedImageRenderer.Render(snapshot, size * OVERSAMPLE))
             {
                 return RenderThumbnail(bitmap, size);
             }
