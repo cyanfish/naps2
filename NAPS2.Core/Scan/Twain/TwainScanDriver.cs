@@ -6,6 +6,7 @@ using NAPS2.Platform;
 using NAPS2.Recovery;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 using NAPS2.WinForms;
 using NAPS2.Worker;
 
@@ -72,62 +73,20 @@ namespace NAPS2.Scan.Twain
             {
                 if (UseWorker)
                 {
-                    RunInForm(formFactory.Create<FTwainGui>(), () =>
+                    using (var worker = workerServiceFactory.Create())
                     {
-                        using (var worker = workerServiceFactory.Create())
-                        {
-                            worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
-                            worker.Callback.ImageCallback += source.Put;
-                            worker.Service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams, DialogParent.Handle);
-                            worker.Callback.WaitForFinish();
-                        }
-                    });
+                        worker.Service.SetRecoveryFolder(RecoveryImage.RecoveryFolder.FullName);
+                        worker.Callback.ImageCallback += source.Put;
+                        // TODO: RecoveryFileNumber is not async safe
+                        worker.Service.TwainScan(RecoveryImage.RecoveryFileNumber, ScanDevice, ScanProfile, ScanParams, DialogParent.SafeHandle());
+                        worker.Callback.WaitForFinish();
+                    }
                 }
                 else
                 {
-                    ((FormBase) DialogParent).SafeInvoke(() => twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams, source));
+                    twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams, source);
                 }
             }, TaskCreationOptions.LongRunning);
-        }
-
-        private void RunInForm(FormBase form, Action action)
-        {
-            Exception error = null;
-            bool done = false;
-
-            form.Shown += (sender, args) =>
-            {
-                try
-                {
-                    form.SafeInvoke(action);
-                }
-                catch (Exception ex)
-                {
-                    error = ex;
-                }
-                finally
-                {
-                    done = true;
-                    form.Close();
-                }
-            };
-            form.Closing += (sender, args) =>
-            {
-                if (!done)
-                {
-                    args.Cancel = true;
-                }
-            };
-            form.ShowDialog();
-
-            if (error != null)
-            {
-                if (error is ScanDriverException)
-                {
-                    throw error;
-                }
-                throw new ScanDriverUnknownException(error);
-            }
         }
     }
 }

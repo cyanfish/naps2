@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.WinForms;
 
@@ -34,7 +35,7 @@ namespace NAPS2.Scan.Wia
             var form = formFactory.Create<FScanProgress>();
             form.PageNumber = pageNumber;
             form.Transfer = () => eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, false));
-            form.ShowDialog(dialogParent);
+            SynchronizationContext.Current.Send(s => form.ShowDialog(), null);
             if (form.Exception != null)
             {
                 WiaApi.ThrowDeviceError(form.Exception);

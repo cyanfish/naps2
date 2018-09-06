@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
@@ -73,6 +74,7 @@ namespace NAPS2.Scan.Twain
             if (scanProfile.TwainImpl == TwainImpl.Legacy)
             {
                 Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, formFactory, source);
+                return;
             }
 
             PlatformInfo.Current.PreferNewDSM = scanProfile.TwainImpl != TwainImpl.OldDsm;
@@ -216,7 +218,7 @@ namespace NAPS2.Scan.Twain
             };
 
             Debug.WriteLine("NAPS2.TW - Showing TwainForm");
-            twainForm.Show(dialogParent);
+            SynchronizationContext.Current.Send(s => twainForm.ShowDialog(), null);
             Debug.WriteLine("NAPS2.TW - TwainForm closed");
 
             if (ds != null && session.IsSourceOpen)

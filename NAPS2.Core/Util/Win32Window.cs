@@ -17,4 +17,18 @@ namespace NAPS2.Util
 
         public IntPtr Handle { get; }
     }
+
+    public static class Win32WindowExtensions
+    {
+        public static IntPtr SafeHandle(this IWin32Window window)
+        {
+            if (window is Form form)
+            {
+                IntPtr hwnd = IntPtr.Zero;
+                form.Invoke(new Action(() => hwnd = window.Handle));
+                return hwnd;
+            }
+            return window.Handle;
+        }
+    }
 }
