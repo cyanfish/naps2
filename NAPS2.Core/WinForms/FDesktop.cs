@@ -1746,10 +1746,10 @@ namespace NAPS2.WinForms
             var fallback = new ExpFallback(100, 60 * 1000);
             while (!closed)
             {
-                ScannedImage next;
-                while ((next = GetNextThumbnailToRender()) != null)
+                try
                 {
-                    try
+                    ScannedImage next;
+                    while ((next = GetNextThumbnailToRender()) != null)
                     {
                         if (!ThumbnailStillNeedsRendering(next))
                         {
@@ -1770,17 +1770,18 @@ namespace NAPS2.WinForms
                         }
                         fallback.Reset();
                     }
-                    catch (Exception e)
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error rendering thumbnails", e);
+                    if (worker != null)
                     {
-                        Log.ErrorException("Error rendering thumbnails", e);
-                        if (worker != null)
-                        {
-                            worker.Dispose();
-                            worker = workerServiceFactory.Create();
-                        }
-                        Thread.Sleep(fallback.Value);
-                        fallback.Increase();
+                        worker.Dispose();
+                        worker = workerServiceFactory.Create();
                     }
+                    Thread.Sleep(fallback.Value);
+                    fallback.Increase();
+                    continue;
                 }
                 renderThumbnailsWaitHandle.WaitOne();
             }
