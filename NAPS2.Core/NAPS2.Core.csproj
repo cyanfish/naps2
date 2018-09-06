@@ -5877,6 +5877,7 @@
     <None Include="Icons\email_setting.png" />
     <Content Include="Icons\file_extension_pdf.ico" />
     <None Include="Icons\gmail.png" />
+    <None Include="Icons\hourglass_grey.png" />
     <Content Include="Icons\image_edit.png" />
     <None Include="Icons\outlookweb.png" />
     <None Include="Icons\mail_yellow.png" />

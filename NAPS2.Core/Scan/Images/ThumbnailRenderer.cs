@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
 
@@ -127,7 +128,17 @@ namespace NAPS2.Scan.Images
 
                 // Draw the original bitmap onto the new bitmap, using the calculated location and dimensions
                 // Note that there may be some padding if the aspect ratios don't match
-                g.DrawImage(b, left, top, width, height);
+                int maxHeightPerDraw = (int)Math.Round(3e6 / b.Width);
+                for (int y = 0; y < b.Height; y += maxHeightPerDraw)
+                {
+                    // Big drawing operations are split up to avoid blocking the UI thread (GDI+ uses global locks)
+                    // TODO: May want to undo this after switching to a worker
+                    int srcHeight = Math.Min(b.Height, y + maxHeightPerDraw) - y;
+                    var destRect = new RectangleF(left, top + y * (float)height / b.Height, width, height * (float)srcHeight / b.Height);
+                    var srcRect = new RectangleF(0, y, b.Width, srcHeight);
+                    g.DrawImage(b, destRect, srcRect, GraphicsUnit.Pixel);
+                    Thread.Sleep(1);
+                }
                 // Draw a border around the orignal bitmap's content, inside the padding
                 g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
             }

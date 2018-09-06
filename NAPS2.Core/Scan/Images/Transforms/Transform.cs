@@ -25,8 +25,12 @@ namespace NAPS2.Scan.Images.Transforms
             return transforms.Aggregate(bitmap, (current, t) => t.Perform(current));
         }
 
-        public static void AddOrSimplify(IList<Transform> transformList, Transform transform)
+        public static bool AddOrSimplify(IList<Transform> transformList, Transform transform)
         {
+            if (transform.IsNull)
+            {
+                return false;
+            }
             var last = transformList.LastOrDefault();
             if (transform.CanSimplify(last))
             {
@@ -40,10 +44,11 @@ namespace NAPS2.Scan.Images.Transforms
                     transformList[transformList.Count - 1] = transform.Simplify(last);
                 }
             }
-            else if (!transform.IsNull)
+            else
             {
                 transformList.Add(transform);
             }
+            return true;
         }
 
         /// <summary>

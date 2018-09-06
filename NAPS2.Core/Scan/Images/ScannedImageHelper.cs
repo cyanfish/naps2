@@ -200,7 +200,7 @@ namespace NAPS2.Scan.Images
         private void AddTransformAndUpdateThumbnail(ScannedImage image, ref Bitmap bitmap, Transform transform)
         {
             image.AddTransform(transform);
-            var thumbnail = image.GetThumbnail(null);
+            var thumbnail = image.GetThumbnail();
             if (thumbnail != null)
             {
                 bitmap = transform.Perform(bitmap);

@@ -24,6 +24,8 @@ namespace NAPS2.Scan.Images
         private readonly List<Transform> transformList;
 
         private Bitmap thumbnail;
+        private int thumbnailState;
+        private int transformState;
 
         private bool disposed;
         private int snapshotCount;
@@ -98,44 +100,55 @@ namespace NAPS2.Scan.Images
 
         public void AddTransform(Transform transform)
         {
-            lock (transformList)
+            lock (this)
             {
                 // Also updates the recovery index since they reference the same list
-                Transform.AddOrSimplify(transformList, transform);
+                if (!Transform.AddOrSimplify(transformList, transform))
+                {
+                    return;
+                }
+                transformState++;
             }
             recoveryImage.Save();
+            ThumbnailInvalidated?.Invoke(this, new EventArgs());
         }
 
         public void ResetTransforms()
         {
-            lock (transformList)
+            lock (this)
             {
+                if (transformList.Count == 0)
+                {
+                    return;
+                }
                 transformList.Clear();
+                transformState++;
             }
             recoveryImage.Save();
+            ThumbnailInvalidated?.Invoke(this, new EventArgs());
         }
 
-        public Bitmap GetThumbnail(ThumbnailRenderer thumbnailRenderer)
+        public Bitmap GetThumbnail()
         {
-            if (thumbnail == null)
+            return (Bitmap) thumbnail?.Clone();
+        }
+
+        public void SetThumbnail(Bitmap bitmap, int? state = null)
+        {
+            lock (this)
             {
-                if (thumbnailRenderer == null)
-                {
-                    return null;
-                }
-                thumbnail = Task.Factory.StartNew(() => thumbnailRenderer.RenderThumbnail(this)).Unwrap().Result;
+                thumbnail?.Dispose();
+                thumbnail = bitmap;
+                thumbnailState = state ?? transformState;
             }
-            Debug.Assert(thumbnail != null);
-            return (Bitmap)thumbnail.Clone();
+            ThumbnailChanged?.Invoke(this, new EventArgs());
         }
 
-        public object GetThumbnailState() => thumbnail;
+        public bool IsThumbnailDirty => thumbnailState != transformState;
 
-        public void SetThumbnail(Bitmap bitmap)
-        {
-            thumbnail?.Dispose();
-            thumbnail = bitmap;
-        }
+        public EventHandler ThumbnailChanged;
+
+        public EventHandler ThumbnailInvalidated;
 
         public void MovedTo(int index)
         {
@@ -143,7 +156,16 @@ namespace NAPS2.Scan.Images
         }
 
         public Snapshot Preserve() => new Snapshot(this);
-        
+
+        public Snapshot Preserve(out int state)
+        {
+            lock (this)
+            {
+                state = transformState;
+                return Preserve();
+            }
+        }
+
         public class Snapshot : IDisposable
         {
             private bool disposed;
@@ -158,10 +180,7 @@ namespace NAPS2.Scan.Images
                     }
                     source.snapshotCount++;
                     Source = source;
-                    lock (source.transformList)
-                    {
-                        TransformList = source.transformList.ToList();
-                    }
+                    TransformList = source.transformList.ToList();
                 }
             }
             

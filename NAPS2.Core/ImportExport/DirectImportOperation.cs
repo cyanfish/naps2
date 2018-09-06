@@ -46,6 +46,7 @@ namespace NAPS2.ImportExport
                         {
                             img.AddTransform(transform);
                         }
+                        // TODO: Don't bother, here, in recovery, etc.
                         img.SetThumbnail(await thumbnailRenderer.RenderThumbnail(img));
                         imageCallback(img);
 

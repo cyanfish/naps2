@@ -116,7 +116,7 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private async void btnOK_Click(object sender, EventArgs e)
+        private void btnOK_Click(object sender, EventArgs e)
         {
             if (!HueTransform.IsNull || !SaturationTransform.IsNull)
             {
@@ -124,7 +124,6 @@ namespace NAPS2.WinForms
                 {
                     img.AddTransform(HueTransform);
                     img.AddTransform(SaturationTransform);
-                    img.SetThumbnail(await thumbnailRenderer.RenderThumbnail(img));
                 }
                 changeTracker.Made();
             }

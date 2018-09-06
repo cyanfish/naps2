@@ -36,6 +36,8 @@ namespace NAPS2.WinForms
             }
         }
 
+        private Bitmap placeholder;
+
         public ThumbnailList()
         {
             InitializeComponent();
@@ -103,12 +105,12 @@ namespace NAPS2.WinForms
             {
                 if (i >= ilThumbnailList.Images.Count)
                 {
-                    ilThumbnailList.Images.Add(images[i].GetThumbnail(ThumbnailRenderer));
+                    ilThumbnailList.Images.Add(GetThumbnail(images[i]));
                     Debug.Assert(selection == null);
                 }
                 else
                 {
-                    ilThumbnailList.Images[i] = images[i].GetThumbnail(ThumbnailRenderer);
+                    ilThumbnailList.Images[i] = GetThumbnail(images[i]);
                 }
             }
 
@@ -117,13 +119,19 @@ namespace NAPS2.WinForms
 
         public void AppendImage(ScannedImage img)
         {
-            ilThumbnailList.Images.Add(img.GetThumbnail(ThumbnailRenderer));
+            ilThumbnailList.Images.Add(GetThumbnail(img));
             Items.Add(PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "", ilThumbnailList.Images.Count - 1);
+        }
+
+        public void SetDirty(int index, ScannedImage img)
+        {
+            ilThumbnailList.Images[index] = DrawHourglass(ilThumbnailList.Images[index]);
+            Invalidate(Items[index].Bounds);
         }
 
         public void ReplaceThumbnail(int index, ScannedImage img)
         {
-            ilThumbnailList.Images[index] = img.GetThumbnail(ThumbnailRenderer);
+            ilThumbnailList.Images[index] = GetThumbnail(img);
             Invalidate(Items[index].Bounds);
         }
 
@@ -136,9 +144,38 @@ namespace NAPS2.WinForms
             var list = new List<Image>();
             foreach (var image in images)
             {
-                list.Add(image.GetThumbnail(ThumbnailRenderer));
+                list.Add(GetThumbnail(image));
             }
             ilThumbnailList.Images.AddRange(list.ToArray());
+        }
+
+        private Bitmap GetThumbnail(ScannedImage img)
+        {
+            return img.GetThumbnail() ?? RenderPlaceholder();
+        }
+
+        private Bitmap RenderPlaceholder()
+        {
+            lock (this)
+            {
+                if (placeholder?.Size == ThumbnailSize)
+                {
+                    return placeholder;
+                }
+                placeholder?.Dispose();
+                placeholder = new Bitmap(ThumbnailSize.Width, ThumbnailSize.Height);
+                DrawHourglass(placeholder);
+                return placeholder;
+            }
+        }
+
+        private Image DrawHourglass(Image image)
+        {
+            using (var g = Graphics.FromImage(image))
+            {
+                g.DrawImage(Icons.hourglass_grey, new Rectangle((image.Width - 32) / 2, (image.Height - 32) / 2, 32, 32));
+            }
+            return image;
         }
     }
 }

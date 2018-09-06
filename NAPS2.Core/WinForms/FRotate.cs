@@ -106,14 +106,13 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private async void btnOK_Click(object sender, EventArgs e)
+        private void btnOK_Click(object sender, EventArgs e)
         {
             if (!RotationTransform.IsNull)
             {
                 foreach (var img in ImagesToTransform)
                 {
                     img.AddTransform(RotationTransform);
-                    img.SetThumbnail(await thumbnailRenderer.RenderThumbnail(img));
                 }
                 changeTracker.Made();
             }

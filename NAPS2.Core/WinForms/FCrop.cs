@@ -201,16 +201,13 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        private async void btnOK_Click(object sender, EventArgs e)
+        private void btnOK_Click(object sender, EventArgs e)
         {
-            // TODO: Do this in an operation asynchronously
-            // Same for all such forms
             if (!CropTransform.IsNull)
             {
                 foreach (var img in ImagesToTransform)
                 {
                     img.AddTransform(CropTransform);
-                    img.SetThumbnail(await thumbnailRenderer.RenderThumbnail(img));
                 }
                 changeTracker.Made();
             }

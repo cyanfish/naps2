@@ -55,7 +55,12 @@ namespace NAPS2.Scan.Images
                             return null;
                         }
                         bitmap = transform.Perform(bitmap);
-                        img.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                        var thumbnail = thumbnailRenderer.RenderThumbnail(bitmap);
+                        lock (img)
+                        {
+                            img.AddTransform(transform);
+                            img.SetThumbnail(thumbnail);
+                        }
 
                         // The final pipeline step is pretty fast, so updating progress here is more accurate
                         lock (this)
@@ -71,10 +76,6 @@ namespace NAPS2.Scan.Images
                         bitmap.Dispose();
                         memoryLimitingSem.Release();
                     }
-                }).Step((img, transform) =>
-                {
-                    img.AddTransform(transform);
-                    return img;
                 }).Run();
                 return !CancelToken.IsCancellationRequested;
             });

@@ -59,7 +59,8 @@ namespace NAPS2.WinForms
         #region State Fields
 
         private readonly ScannedImageList imageList = new ScannedImageList();
-        private CancellationTokenSource renderThumbnailsCts;
+        private readonly AutoResetEvent renderThumbnailsWaitHandle = new AutoResetEvent(false);
+        private bool closed = false;
         private LayoutManager layoutManager;
         private bool disableSelectedIndexChangedEvent;
 
@@ -307,6 +308,8 @@ namespace NAPS2.WinForms
             // Allow scanned images to be recovered in case of an unexpected close
             recoveryManager.RecoverScannedImages(ReceiveScannedImage);
 
+            new Thread(RenderThumbnails).Start();
+
             // If NAPS2 was started by the scanner button, do the appropriate actions automatically
             RunStillImageEvents();
 
@@ -361,6 +364,8 @@ namespace NAPS2.WinForms
             SaveToolStripLocation();
             Pipes.KillServer();
             imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
+            closed = true;
+            renderThumbnailsWaitHandle.Set();
         }
 
         #endregion
@@ -508,7 +513,52 @@ namespace NAPS2.WinForms
         private void AppendThumbnail(ScannedImage scannedImage)
         {
             thumbnailList1.AppendImage(scannedImage);
+            scannedImage.ThumbnailChanged += ImageThumbnailChanged;
+            scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
             UpdateToolbar();
+        }
+
+        private void ImageThumbnailChanged(object sender, EventArgs e)
+        {
+            SafeInvoke(() =>
+            {
+                var image = (ScannedImage)sender;
+                lock (image)
+                {
+                    lock (imageList)
+                    {
+                        int index = imageList.Images.IndexOf(image);
+                        if (index != -1)
+                        {
+                            // TODO: Fix deadlock
+                            thumbnailList1.ReplaceThumbnail(index, image);
+                        }
+                    }
+                }
+            });
+        }
+
+        private void ImageThumbnailInvalidated(object sender, EventArgs e)
+        {
+            SafeInvoke(() =>
+            {
+                var image = (ScannedImage)sender;
+                lock (image)
+                {
+                    lock (imageList)
+                    {
+                        int index = imageList.Images.IndexOf(image);
+                        if (index != -1)
+                        {
+                            if (image.IsThumbnailDirty)
+                            {
+                                thumbnailList1.SetDirty(index, image);
+                            }
+                        }
+                    }
+                }
+            });
+            renderThumbnailsWaitHandle.Set();
         }
 
         private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, bool optimizeForSelection)
@@ -688,33 +738,33 @@ namespace NAPS2.WinForms
             changeTracker.Made();
         }
 
-        private async Task RotateLeft()
+        private void RotateLeft()
         {
             if (!SelectedIndices.Any())
             {
                 return;
             }
-            UpdateThumbnails(await imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone), false, true);
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone), false, true);
             changeTracker.Made();
         }
 
-        private async Task RotateRight()
+        private void RotateRight()
         {
             if (!SelectedIndices.Any())
             {
                 return;
             }
-            UpdateThumbnails(await imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone), false, true);
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone), false, true);
             changeTracker.Made();
         }
 
-        private async Task Flip()
+        private void Flip()
         {
             if (!SelectedIndices.Any())
             {
                 return;
             }
-            UpdateThumbnails(await imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY), false, true);
+            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY), false, true);
             changeTracker.Made();
         }
 
@@ -768,13 +818,13 @@ namespace NAPS2.WinForms
             UpdateScanButton();
         }
 
-        private async Task ResetImage()
+        private void ResetImage()
         {
             if (SelectedIndices.Any())
             {
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmResetImages, SelectedIndices.Count()), MiscResources.ResetImage, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    UpdateThumbnails(await imageList.ResetTransforms(SelectedIndices), false, true);
+                    UpdateThumbnails(imageList.ResetTransforms(SelectedIndices), false, true);
                     changeTracker.Made();
                 }
             }
@@ -1374,28 +1424,28 @@ namespace NAPS2.WinForms
             }
         }
 
-        private async void tsReset_Click(object sender, EventArgs e)
+        private void tsReset_Click(object sender, EventArgs e)
         {
-            await ResetImage();
+            ResetImage();
         }
 
         #endregion
 
         #region Event Handlers - Rotate Menu
 
-        private async void tsRotateLeft_Click(object sender, EventArgs e)
+        private void tsRotateLeft_Click(object sender, EventArgs e)
         {
-            await RotateLeft();
+            RotateLeft();
         }
 
-        private async void tsRotateRight_Click(object sender, EventArgs e)
+        private void tsRotateRight_Click(object sender, EventArgs e)
         {
-            await RotateRight();
+            RotateRight();
         }
 
-        private async void tsFlip_Click(object sender, EventArgs e)
+        private void tsFlip_Click(object sender, EventArgs e)
         {
-            await Flip();
+            Flip();
         }
 
         private void tsDeskew_Click(object sender, EventArgs e)
@@ -1676,7 +1726,7 @@ namespace NAPS2.WinForms
 
             // Render high-quality thumbnails at the new size in a background task
             // The existing (poorly scaled) thumbnails are used in the meantime
-            RenderThumbnails(thumbnailSize, imageList.Images.ToList());
+            renderThumbnailsWaitHandle.Set();
         }
 
         private void SetThumbnailSpacing(int thumbnailSize)
@@ -1697,66 +1747,74 @@ namespace NAPS2.WinForms
             Win32.SendMessage(list.Handle, LVM_SETICONSPACING, IntPtr.Zero, (IntPtr)(int)(((ushort)hspacing) | (uint)(vspacing << 16)));
         }
 
-        private void RenderThumbnails(int thumbnailSize, IEnumerable<ScannedImage> imagesToRenderThumbnailsFor)
+        private void RenderThumbnails()
         {
-            // Cancel any previous task so that no two run at the same time
-            renderThumbnailsCts?.Cancel();
-            renderThumbnailsCts = new CancellationTokenSource();
-            var ct = renderThumbnailsCts.Token;
-            Task.Factory.StartNew(async () =>
+            while (!closed)
             {
-                foreach (var img in imagesToRenderThumbnailsFor)
+                ScannedImage next;
+                while ((next = GetNextThumbnailToRender()) != null)
                 {
-                    if (ct.IsCancellationRequested)
+                    if (!ThumbnailStillNeedsRendering(next))
                     {
-                        break;
+                        continue;
                     }
-                    object oldState;
-                    Bitmap thumbnail;
-                    using (var snapshot = img.Preserve())
+                    using (var snapshot = next.Preserve(out var state))
                     {
-                        if (ct.IsCancellationRequested)
+                        // TODO: Do the actual rendering on a (thread-level) worker where supported
+                        var thumb = thumbnailRenderer.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
+                        if (!ThumbnailStillNeedsRendering(next))
                         {
-                            break;
-                        }
-                        // Save the state to check later for concurrent changes
-                        oldState = snapshot.Source.GetThumbnailState();
-                        // Render the thumbnail
-                        try
-                        {
-                            thumbnail = await thumbnailRenderer.RenderThumbnail(snapshot, thumbnailSize);
-                        }
-                        catch
-                        {
-                            // An error occurred, which could mean the image was deleted
-                            // In any case we don't need to worry too much about it and can move on to the next
                             continue;
                         }
+                        next.SetThumbnail(thumb, state);
                     }
-                    // Do the rest of the stuff on the UI thread to help with synchronization
-                    ScannedImage img1 = img;
-                    SafeInvoke(() =>
-                    {
-                        if (ct.IsCancellationRequested)
-                        {
-                            return;
-                        }
-                        // Check for concurrent transformations
-                        if (oldState != img1.GetThumbnailState())
-                        {
-                            // The thumbnail has been concurrently updated
-                            return;
-                        }
-                        // Checks passed, so use the newly rendered thumbnail at the appropriate index
-                        img1.SetThumbnail(thumbnail);
-                        int index = imageList.Images.IndexOf(img1);
-                        if (index != -1)
-                        {
-                            thumbnailList1.ReplaceThumbnail(index, img1);
-                        }
-                    });
                 }
-            }, ct);
+                renderThumbnailsWaitHandle.WaitOne();
+            }
+        }
+
+        private bool ThumbnailStillNeedsRendering(ScannedImage next)
+        {
+            lock (next)
+            {
+                var thumb = next.GetThumbnail();
+                return thumb == null || next.IsThumbnailDirty || thumb.Size != thumbnailList1.ThumbnailSize;
+            }
+        }
+
+        private ScannedImage GetNextThumbnailToRender()
+        {
+            List<ScannedImage> listCopy;
+            lock (imageList)
+            {
+                listCopy = imageList.Images.ToList();
+            }
+            // Look for images without thumbnails
+            foreach (var img in listCopy)
+            {
+                if (img.GetThumbnail() == null)
+                {
+                    return img;
+                }
+            }
+            // Look for images with dirty thumbnails
+            foreach (var img in listCopy)
+            {
+                if (img.IsThumbnailDirty)
+                {
+                    return img;
+                }
+            }
+            // Look for images with mis-sized thumbnails
+            foreach (var img in listCopy)
+            {
+                if (img.GetThumbnail()?.Size != thumbnailList1.ThumbnailSize)
+                {
+                    return img;
+                }
+            }
+            // Nothing to render
+            return null;
         }
 
         private void btnZoomOut_Click(object sender, EventArgs e)
