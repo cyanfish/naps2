@@ -6,70 +6,35 @@ using System.Windows.Forms;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
-using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class FBrightnessContrast : FormBase
+    partial class FBrightnessContrast : ImageForm
     {
-        private readonly ChangeTracker changeTracker;
-        private readonly ThumbnailRenderer thumbnailRenderer;
-        private readonly ScannedImageRenderer scannedImageRenderer;
-
-        private Bitmap workingImage;
-        private bool previewOutOfDate;
-        private bool working;
-        private Timer previewTimer;
-
         public FBrightnessContrast(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
+            : base(changeTracker, thumbnailRenderer, scannedImageRenderer)
         {
-            this.changeTracker = changeTracker;
-            this.thumbnailRenderer = thumbnailRenderer;
-            this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
-
-            BrightnessTransform = new BrightnessTransform();
-            TrueContrastTransform = new TrueContrastTransform();
         }
 
-        public ScannedImage Image { get; set; }
+        public BrightnessTransform BrightnessTransform { get; private set; } = new BrightnessTransform();
 
-        public List<ScannedImage> SelectedImages { get; set; }
+        public TrueContrastTransform TrueContrastTransform { get; private set; } = new TrueContrastTransform();
 
-        public BrightnessTransform BrightnessTransform { get; private set; }
+        protected override PictureBox PictureBox => pictureBox;
 
-        public TrueContrastTransform TrueContrastTransform { get; private set; }
-
-        private IEnumerable<ScannedImage> ImagesToTransform => SelectedImages != null && checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
-
-        protected override async void OnLoad(object sender, EventArgs eventArgs)
+        public override IEnumerable<Transform> Transforms
         {
-            if (SelectedImages != null && SelectedImages.Count > 1)
+            get
             {
-                checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
+                yield return BrightnessTransform;
+                yield return TrueContrastTransform;
             }
-            else
-            {
-                ConditionalControls.Hide(checkboxApplyToSelected, 6);
-            }
+        }
 
-            new LayoutManager(this)
-                .Bind(tbBrightness, tbContrast, pictureBox)
-                    .WidthToForm()
-                .Bind(pictureBox)
-                    .HeightToForm()
-                .Bind(btnOK, btnCancel, txtBrightness, txtContrast)
-                    .RightToForm()
-                .Bind(tbBrightness, txtBrightness, tbContrast, txtContrast, pictureBox1, pictureBox2,
-                      checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
-                    .BottomToForm()
-                .Activate();
-            Size = new Size(600, 600);
-
-            workingImage = await scannedImageRenderer.Render(Image);
+        protected override void AfterOnLoad()
+        {
             pictureBox.Image = (Bitmap)workingImage.Clone();
-            UpdatePreviewBox();
-
             ActiveControl = txtBrightness;
         }
 
@@ -79,58 +44,24 @@ namespace NAPS2.WinForms
             TrueContrastTransform.Contrast = tbContrast.Value;
             UpdatePreviewBox();
         }
-
-        private void UpdatePreviewBox()
+        
+        protected override Bitmap RenderPreview()
         {
-            if (previewTimer == null)
+            var result = (Bitmap) workingImage.Clone();
+            if (!BrightnessTransform.IsNull)
             {
-                previewTimer = new Timer((obj) =>
-                {
-                    if (previewOutOfDate && !working)
-                    {
-                        working = true;
-                        previewOutOfDate = false;
-                        var result = (Bitmap) workingImage.Clone();
-                        if (!BrightnessTransform.IsNull)
-                        {
-                            result = BrightnessTransform.Perform(result);
-                        }
-                        if (!TrueContrastTransform.IsNull)
-                        {
-                            result = TrueContrastTransform.Perform(result);
-                        }
-                        SafeInvoke(() =>
-                        {
-                            pictureBox.Image?.Dispose();
-                            pictureBox.Image = result;
-                        });
-                        working = false;
-                    }
-                }, null, 0, 100);
+                result = BrightnessTransform.Perform(result);
             }
-            previewOutOfDate = true;
-        }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            if (!BrightnessTransform.IsNull || !TrueContrastTransform.IsNull)
+            if (!TrueContrastTransform.IsNull)
             {
-                foreach (var img in ImagesToTransform)
-                {
-                    img.AddTransform(BrightnessTransform);
-                    img.AddTransform(TrueContrastTransform);
-                }
-                changeTracker.Made();
+                result = TrueContrastTransform.Perform(result);
             }
-            Close();
+
+            return result;
         }
 
-        private void btnRevert_Click(object sender, EventArgs e)
+        protected override void ResetTransform()
         {
             BrightnessTransform = new BrightnessTransform();
             TrueContrastTransform = new TrueContrastTransform();
@@ -138,16 +69,8 @@ namespace NAPS2.WinForms
             tbContrast.Value = 0;
             txtBrightness.Text = tbBrightness.Value.ToString("G");
             txtContrast.Text = tbContrast.Value.ToString("G");
-            UpdatePreviewBox();
         }
-
-        private void FCrop_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            workingImage.Dispose();
-            pictureBox.Image?.Dispose();
-            previewTimer?.Dispose();
-        }
-
+        
         private void txtBrightness_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(txtBrightness.Text, out int value))

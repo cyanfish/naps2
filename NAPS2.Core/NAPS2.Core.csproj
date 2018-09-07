@@ -196,6 +196,12 @@
     <Compile Include="Util\ProgressHandler.cs" />
     <Compile Include="Util\SecureString.cs" />
     <Compile Include="Util\Win32Window.cs" />
+    <Compile Include="WinForms\ImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\ImageForm.Designer.cs">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -695,9 +701,259 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Icons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.af.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.ar.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.bg.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.ca.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.cs.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.da.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.de.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.el.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.es.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.et.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.fa.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.fi.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.fr.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.he.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.hr.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.hu.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.it.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.ja.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.ko.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.lt.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.lv.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.nb.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.nl.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.nn.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.pl.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.pt-BR.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.pt-PT.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.ro.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.ru.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.si.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.sk.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.sl.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.sq.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.sr-Cyrl.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.sr-Latn.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.sv.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.tr.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.uk.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.vi.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.zh-CHS.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ImageForm.zh-TW.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.af.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.ar.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.bg.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.ca.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.cs.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.da.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.de.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.el.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.es.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.et.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.fa.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.fi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.fr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.he.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.hr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.hu.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.it.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.ja.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.ko.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.lt.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.lv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.nb.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.nl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.nn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.pl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.pt-BR.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.pt-PT.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\ILProfileIcons.resx">
       <DependentUpon>ILProfileIcons.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.ro.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.ru.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.si.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.sk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.sl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.sq.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.sr-Cyrl.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.sr-Latn.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.sv.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.tr.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.uk.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.vi.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.zh-CHS.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\ILProfileIcons.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
+      <DependentUpon>ILProfileIcons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportExport\Pdf\Fonts.resx">
       <Generator>ResXFileCodeGenerator</Generator>
