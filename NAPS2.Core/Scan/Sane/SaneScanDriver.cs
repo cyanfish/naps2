@@ -62,12 +62,36 @@ namespace NAPS2.Scan.Sane
 
         protected override async Task ScanInternal(ScannedImageSource.Concrete source)
         {
-            // TODO: Support ADF
+            // TODO: Test ADF
             var options = new Lazy<KeyValueScanOptions>(GetOptions);
-            var img = await Transfer(options);
+            int pageNumber = 1;
+            var (img, cancel) = await Transfer(options, pageNumber);
             if (img != null)
             {
                 source.Put(img);
+            }
+
+            if (!cancel && ScanProfile.PaperSource != ScanSource.Glass)
+            {
+                try
+                {
+                    while (true)
+                    {
+                        (img, cancel) = await Transfer(options, ++pageNumber);
+                        if (cancel)
+                        {
+                            break;
+                        }
+                        if (img != null)
+                        {
+                            source.Put(img);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error in SANE. This may be a normal ADF termination.", e);
+                }
             }
         }
 
@@ -134,16 +158,18 @@ namespace NAPS2.Scan.Sane
             }
             else if (ScanProfile.PaperSource == ScanSource.Feeder)
             {
-                if (!ChooseStringOption("--source", x => IsFeederChoice(x) && !IsDuplexChoice(x)))
+                if (!ChooseStringOption("--source", x => IsFeederChoice(x) && !IsDuplexChoice(x)) &&
+                    !ChooseStringOption("--source", IsFeederChoice) &&
+                    !ChooseStringOption("--source", IsDuplexChoice))
                 {
-                    ChooseStringOption("--source", IsFeederChoice);
+                    throw new NoFeederSupportException();
                 }
             }
             else if (ScanProfile.PaperSource == ScanSource.Duplex)
             {
                 if (!ChooseStringOption("--source", IsDuplexChoice))
                 {
-                    ChooseStringOption("--source", IsFeederChoice);
+                    throw new NoDuplexSupportException();
                 }
             }
 
@@ -207,7 +233,7 @@ namespace NAPS2.Scan.Sane
             return options;
         }
 
-        private async Task<ScannedImage> Transfer(Lazy<KeyValueScanOptions> options)
+        private async Task<(ScannedImage, bool)> Transfer(Lazy<KeyValueScanOptions> options, int pageNumber)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -220,7 +246,7 @@ namespace NAPS2.Scan.Sane
                 {
                     var form = formFactory.Create<FScanProgress>();
                     form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress);
-                    form.PageNumber = 1;
+                    form.PageNumber = pageNumber;
                     form.ShowDialog();
 
                     if (form.Exception != null)
@@ -230,7 +256,7 @@ namespace NAPS2.Scan.Sane
                     }
                     if (form.DialogResult == DialogResult.Cancel)
                     {
-                        return null;
+                        return (null, true);
                     }
 
                     stream = form.ImageStream;
@@ -241,7 +267,7 @@ namespace NAPS2.Scan.Sane
                 {
                     if (blankDetector.ExcludePage(result, ScanProfile))
                     {
-                        return null;
+                        return (null, false);
                     }
 
                     // By converting to 1bpp here we avoid the Win32 call in the BitmapHelper conversion
@@ -251,7 +277,7 @@ namespace NAPS2.Scan.Sane
                         var image = new ScannedImage(encoded, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                         image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
                         scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);
-                        return image;
+                        return (image, false);
                     }
                 }
             }, TaskCreationOptions.LongRunning);
