@@ -35,15 +35,6 @@ namespace NAPS2.WinForms
             txtSaturation.Text = tbSaturation.Value.ToString("G");
         }
 
-        protected override void UpdateThumbnail(ScannedImage img)
-        {
-            var thumb = img.GetThumbnail();
-            if (thumb != null)
-            {
-                img.SetThumbnail(SaturationTransform.Perform(HueTransform.Perform(thumb)));
-            }
-        }
-
         private void UpdateTransform()
         {
             HueTransform.HueShift = tbHue.Value;

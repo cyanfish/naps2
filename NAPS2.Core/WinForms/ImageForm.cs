@@ -118,10 +118,6 @@ namespace NAPS2.WinForms
             previewOutOfDate = true;
         }
 
-        protected virtual void UpdateThumbnail(ScannedImage img)
-        {
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -139,7 +135,6 @@ namespace NAPS2.WinForms
                         {
                             img.AddTransform(t);
                         }
-                        UpdateThumbnail(img);
                     }
                 }
                 changeTracker.Made();
