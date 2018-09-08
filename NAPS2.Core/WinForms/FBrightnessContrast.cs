@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
@@ -22,40 +21,10 @@ namespace NAPS2.WinForms
 
         public TrueContrastTransform TrueContrastTransform { get; private set; } = new TrueContrastTransform();
 
+        protected override IEnumerable<Transform> Transforms => new Transform[] { BrightnessTransform, TrueContrastTransform };
+
         protected override PictureBox PictureBox => pictureBox;
-
-        protected override IEnumerable<Transform> Transforms
-        {
-            get
-            {
-                yield return BrightnessTransform;
-                yield return TrueContrastTransform;
-            }
-        }
-
-        private void UpdateTransform()
-        {
-            BrightnessTransform.Brightness = tbBrightness.Value;
-            TrueContrastTransform.Contrast = tbContrast.Value;
-            UpdatePreviewBox();
-        }
         
-        protected override Bitmap RenderPreview()
-        {
-            var result = (Bitmap) workingImage.Clone();
-            if (!BrightnessTransform.IsNull)
-            {
-                result = BrightnessTransform.Perform(result);
-            }
-
-            if (!TrueContrastTransform.IsNull)
-            {
-                result = TrueContrastTransform.Perform(result);
-            }
-
-            return result;
-        }
-
         protected override void ResetTransform()
         {
             BrightnessTransform = new BrightnessTransform();
@@ -65,7 +34,14 @@ namespace NAPS2.WinForms
             txtBrightness.Text = tbBrightness.Value.ToString("G");
             txtContrast.Text = tbContrast.Value.ToString("G");
         }
-        
+
+        private void UpdateTransform()
+        {
+            BrightnessTransform.Brightness = tbBrightness.Value;
+            TrueContrastTransform.Contrast = tbContrast.Value;
+            UpdatePreviewBox();
+        }
+
         private void txtBrightness_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(txtBrightness.Text, out int value))

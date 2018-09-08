@@ -12,126 +12,39 @@ using Timer = System.Threading.Timer;
 
 namespace NAPS2.WinForms
 {
-    partial class FRotate : FormBase
+    partial class FRotate : ImageForm
     {
-        private readonly ChangeTracker changeTracker;
-        private readonly ThumbnailRenderer thumbnailRenderer;
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private const int MIN_LINE_DISTANCE = 50;
+        private const float LINE_PEN_SIZE = 1;
 
-        private Bitmap workingImage;
-        private bool previewOutOfDate;
-        private bool working;
-        private Timer previewTimer;
+        private bool guideExists;
+        private Point guideStart, guideEnd;
 
         public FRotate(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
+            : base(changeTracker, thumbnailRenderer, scannedImageRenderer)
         {
-            this.changeTracker = changeTracker;
-            this.thumbnailRenderer = thumbnailRenderer;
-            this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
-
-            RotationTransform = new RotationTransform();
+            txtAngle.Text += '\u00B0';
+            ActiveControl = txtAngle;
         }
 
-        public ScannedImage Image { get; set; }
+        public RotationTransform RotationTransform { get; private set; } = new RotationTransform();
 
-        public List<ScannedImage> SelectedImages { get; set; }
+        protected override IEnumerable<Transform> Transforms => new[] { RotationTransform };
 
-        public RotationTransform RotationTransform { get; private set; }
+        protected override PictureBox PictureBox => pictureBox;
 
-        private IEnumerable<ScannedImage> ImagesToTransform => SelectedImages != null && checkboxApplyToSelected.Checked ? SelectedImages : Enumerable.Repeat(Image, 1);
-
-        protected override async void OnLoad(object sender, EventArgs eventArgs)
+        protected override void ResetTransform()
         {
-            if (SelectedImages != null && SelectedImages.Count > 1)
-            {
-                checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
-            }
-            else
-            {
-                ConditionalControls.Hide(checkboxApplyToSelected, 6);
-            }
-
-            new LayoutManager(this)
-                .Bind(tbAngle, pictureBox)
-                    .WidthToForm()
-                .Bind(pictureBox)
-                    .HeightToForm()
-                .Bind(btnOK, btnCancel, txtAngle)
-                    .RightToForm()
-                .Bind(tbAngle, txtAngle, checkboxApplyToSelected, btnRevert, btnOK, btnCancel)
-                    .BottomToForm()
-                .Activate();
-            Size = new Size(600, 600);
-
-            workingImage = await scannedImageRenderer.Render(Image);
-            pictureBox.Image = (Bitmap)workingImage.Clone();
-            txtAngle.Text += '\u00B0';
-            UpdatePreviewBox();
-
-            ActiveControl = txtAngle;
+            RotationTransform = new RotationTransform();
+            tbAngle.Value = 0;
+            txtAngle.Text = (tbAngle.Value / 10.0).ToString("G");
         }
 
         private void UpdateTransform()
         {
             RotationTransform.Angle = tbAngle.Value / 10.0;
             UpdatePreviewBox();
-        }
-
-        private void UpdatePreviewBox()
-        {
-            if (previewTimer == null)
-            {
-                previewTimer = new Timer((obj) =>
-                {
-                    if (previewOutOfDate && !working)
-                    {
-                        working = true;
-                        previewOutOfDate = false;
-                        var result = RotationTransform.Perform((Bitmap)workingImage.Clone());
-                        SafeInvoke(() =>
-                        {
-                            pictureBox.Image?.Dispose();
-                            pictureBox.Image = result;
-                        });
-                        working = false;
-                    }
-                }, null, 0, 100);
-            }
-            previewOutOfDate = true;
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            if (!RotationTransform.IsNull)
-            {
-                foreach (var img in ImagesToTransform)
-                {
-                    img.AddTransform(RotationTransform);
-                }
-                changeTracker.Made();
-            }
-            Close();
-        }
-
-        private void btnRevert_Click(object sender, EventArgs e)
-        {
-            RotationTransform = new RotationTransform();
-            tbAngle.Value = 0;
-            txtAngle.Text = (tbAngle.Value / 10.0).ToString("G");
-            UpdatePreviewBox();
-        }
-
-        private void FRotate_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            workingImage.Dispose();
-            pictureBox.Image?.Dispose();
-            previewTimer?.Dispose();
         }
 
         private void txtAngle_TextChanged(object sender, EventArgs e)
@@ -158,12 +71,6 @@ namespace NAPS2.WinForms
             txtAngle.Text = (tbAngle.Value / 10.0).ToString("G") + '\u00B0';
             UpdateTransform();
         }
-
-        private bool guideExists;
-        private Point guideStart, guideEnd;
-
-        private const int MIN_LINE_DISTANCE = 50;
-        private const float LINE_PEN_SIZE = 1;
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {

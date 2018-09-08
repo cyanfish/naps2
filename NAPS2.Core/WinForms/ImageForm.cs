@@ -21,12 +21,9 @@ namespace NAPS2.WinForms
         private bool working;
         private Timer previewTimer;
 
-        protected ImageForm()
+        private ImageForm()
         {
-            if (!DesignMode)
-            {
-                throw new InvalidOperationException();
-            }
+            // For the designer only
             InitializeComponent();
         }
 
@@ -52,7 +49,15 @@ namespace NAPS2.WinForms
 
         protected virtual Bitmap RenderPreview()
         {
-            throw new NotImplementedException();
+            var result = (Bitmap)workingImage.Clone();
+            foreach (var transform in Transforms)
+            {
+                if (!transform.IsNull)
+                {
+                    result = transform.Perform(result);
+                }
+            }
+            return result;
         }
 
         protected virtual void InitTransform()
