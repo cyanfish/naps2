@@ -89,10 +89,9 @@ namespace NAPS2.WinForms
 
             Size = new Size(600, 600);
 
-            // TODO: Optimize the order of operations here
-            // And do that for all image forms.
-            workingImage = await scannedImageRenderer.Render(Image);
-            workingImage2 = await scannedImageRenderer.Render(Image);
+            var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
+            workingImage = await scannedImageRenderer.Render(Image, maxDimen * 2);
+            workingImage2 = (Bitmap)workingImage.Clone();
 
             InitTransform();
             UpdatePreviewBox();

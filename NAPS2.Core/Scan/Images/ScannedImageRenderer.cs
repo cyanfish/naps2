@@ -35,7 +35,7 @@ namespace NAPS2.Scan.Images
                 var bitmap = snapshot.Source.FileFormat == null
                     ? pdfRenderer.Render(snapshot.Source.RecoveryFilePath).Single()
                     : new Bitmap(snapshot.Source.RecoveryFilePath);
-                if (snapshot.TransformList.Count > 0 && outputSize > 0)
+                if (outputSize > 0)
                 {
                     bitmap = ShrinkBitmap(bitmap, outputSize);
                 }
