@@ -32,6 +32,7 @@ namespace NAPS2.ImportExport.Images
 
             ProgressTitle = MiscResources.SaveImagesProgress;
             AllowCancel = true;
+            AllowBackground = true;
         }
 
         public string FirstFileSaved { get; private set; }

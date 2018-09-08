@@ -202,6 +202,15 @@
     <Compile Include="WinForms\ImageForm.Designer.cs">
       <DependentUpon>ImageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\NotifyWidgetBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForms\OperationProgressNotifyWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForms\OperationProgressNotifyWidget.Designer.cs">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </Compile>
     <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5523,6 +5532,132 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\FViewer.zh-TW.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>FViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.af.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.ar.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.bg.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.ca.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.cs.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.da.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.de.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.el.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.es.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.et.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.fa.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.fi.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.fr.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.he.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.hr.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.hu.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.it.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.ja.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.ko.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.lt.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.lv.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.nb.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.nl.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.nn.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.pl.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.pt-BR.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.pt-PT.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.ro.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.ru.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.si.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.sk.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.sl.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.sq.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.sr-Cyrl.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.sr-Latn.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.sv.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.tr.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.uk.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.vi.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.zh-CHS.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.zh-TW.resx">
+      <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\NotifyWidget.af.resx" Condition="'$(Configuration)' != 'Debug'">
       <DependentUpon>NotifyWidget.cs</DependentUpon>

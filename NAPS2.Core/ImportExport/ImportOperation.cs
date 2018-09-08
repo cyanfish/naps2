@@ -19,6 +19,7 @@ namespace NAPS2.ImportExport
 
             ProgressTitle = MiscResources.ImportProgress;
             AllowCancel = true;
+            AllowBackground = true;
         }
 
         public bool Start(List<string> filesToImport, Action<ScannedImage> imageCallback)

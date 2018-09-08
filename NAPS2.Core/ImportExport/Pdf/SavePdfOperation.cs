@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
@@ -25,6 +24,7 @@ namespace NAPS2.ImportExport.Pdf
             this.overwritePrompt = overwritePrompt;
 
             AllowCancel = true;
+            AllowBackground = true;
         }
 
         public bool Start(string fileName, DateTime dateTime, ICollection<ScannedImage> images, PdfSettings pdfSettings, OcrParams ocrParams, bool email)

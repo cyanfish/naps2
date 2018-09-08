@@ -21,6 +21,7 @@ namespace NAPS2.Scan.Images
             this.scannedImageRenderer = scannedImageRenderer;
 
             AllowCancel = true;
+            AllowBackground = true;
         }
 
         public bool Start(ICollection<ScannedImage> images)

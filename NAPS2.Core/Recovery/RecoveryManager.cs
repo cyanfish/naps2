@@ -17,21 +17,21 @@ namespace NAPS2.Recovery
     {
         private readonly IFormFactory formFactory;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly IOperationProgress operationProgress;
 
-        public RecoveryManager(IFormFactory formFactory, ThumbnailRenderer thumbnailRenderer)
+        public RecoveryManager(IFormFactory formFactory, ThumbnailRenderer thumbnailRenderer, IOperationProgress operationProgress)
         {
             this.formFactory = formFactory;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.operationProgress = operationProgress;
         }
 
         public void RecoverScannedImages(Action<ScannedImage> imageCallback)
         {
             var op = new RecoveryOperation(formFactory, thumbnailRenderer);
-            var progressForm = formFactory.Create<FProgress>();
-            progressForm.Operation = op;
             if (op.Start(imageCallback))
             {
-                progressForm.ShowDialog();
+                operationProgress.ShowProgress(op);
             }
         }
 
@@ -53,6 +53,7 @@ namespace NAPS2.Recovery
 
                 ProgressTitle = MiscResources.ImportProgress;
                 AllowCancel = true;
+                AllowBackground = true;
             }
 
             public bool Start(Action<ScannedImage> imageCallback)

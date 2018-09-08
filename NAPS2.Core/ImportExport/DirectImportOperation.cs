@@ -19,6 +19,7 @@ namespace NAPS2.ImportExport
             this.thumbnailRenderer = thumbnailRenderer;
 
             AllowCancel = true;
+            AllowBackground = true;
         }
 
         public bool Start(DirectImageTransfer data, bool copy, Action<ScannedImage> imageCallback)

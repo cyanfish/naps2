@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace NAPS2.WinForms
 {
-    public partial class NotifyWidget : UserControl
+    public partial class NotifyWidget : NotifyWidgetBase
     {
         private readonly string linkTarget;
         private readonly string folderTarget;
@@ -35,8 +35,6 @@ namespace NAPS2.WinForms
             }
         }
 
-        public event EventHandler HideNotify;
-
         private void hideTimer_Tick(object sender, EventArgs e)
         {
             DoHideNotify();
@@ -44,7 +42,7 @@ namespace NAPS2.WinForms
 
         private void DoHideNotify()
         {
-            HideNotify?.Invoke(this, new EventArgs());
+            InvokeHideNotify();
             hideTimer.Stop();
         }
 
@@ -63,7 +61,7 @@ namespace NAPS2.WinForms
             hideTimer.Start();
         }
 
-        public void ShowNotify()
+        public override void ShowNotify()
         {
             hideTimer.Start();
         }
