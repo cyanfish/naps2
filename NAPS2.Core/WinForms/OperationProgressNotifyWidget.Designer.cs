@@ -41,7 +41,7 @@
             // 
             resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Click += new System.EventHandler(this.OperationProgressNotifyWidget_Click);
+            this.lblTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperationProgressNotifyWidget_Click);
             // 
             // contextMenuStrip1
             // 
@@ -60,7 +60,7 @@
             // 
             resources.ApplyResources(this.progressBar, "progressBar");
             this.progressBar.Name = "progressBar";
-            this.progressBar.Click += new System.EventHandler(this.OperationProgressNotifyWidget_Click);
+            this.progressBar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperationProgressNotifyWidget_Click);
             // 
             // OperationProgressNotifyWidget
             // 
@@ -72,7 +72,7 @@
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.lblTitle);
             this.Name = "OperationProgressNotifyWidget";
-            this.Click += new System.EventHandler(this.OperationProgressNotifyWidget_Click);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperationProgressNotifyWidget_Click);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -17,7 +17,8 @@ namespace NAPS2.WinForms
 
             this.opModalProgress = opModalProgress;
             this.op = op;
-            
+
+            cancelToolStripMenuItem.Visible = op.AllowCancel;
             op.StatusChanged += Op_StatusChanged;
             op.Finished += Op_Finished;
             DisplayProgress();
@@ -76,10 +77,13 @@ namespace NAPS2.WinForms
             cancelToolStripMenuItem.Enabled = false;
         }
 
-        private void OperationProgressNotifyWidget_Click(object sender, EventArgs e)
+        private void OperationProgressNotifyWidget_Click(object sender, MouseEventArgs e)
         {
-            DoHideNotify();
-            opModalProgress.ShowProgress(op);
+            if (e.Button == MouseButtons.Left)
+            {
+                DoHideNotify();
+                opModalProgress.ShowProgress(op);
+            }
         }
     }
 }
