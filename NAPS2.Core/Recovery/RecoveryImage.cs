@@ -72,9 +72,12 @@ namespace NAPS2.Recovery
         {
             if (_recoveryIndexManager != null)
             {
-                _recoveryIndexManager.Index.Images.Clear();
-                _recoveryIndexManager.Index.Images.AddRange(images.Select(x => x.RecoveryIndexImage));
-                _recoveryIndexManager.Save();
+                lock (_recoveryIndexManager)
+                {
+                    _recoveryIndexManager.Index.Images.Clear();
+                    _recoveryIndexManager.Index.Images.AddRange(images.Select(x => x.RecoveryIndexImage));
+                    _recoveryIndexManager.Save();
+                }
             }
         }
 
@@ -164,9 +167,12 @@ namespace NAPS2.Recovery
             {
                 throw new InvalidOperationException();
             }
-            _recoveryIndexManager.Index.Images.Remove(IndexImage);
-            _recoveryIndexManager.Index.Images.Insert(index, IndexImage);
-            _recoveryIndexManager.Save();
+            lock (_recoveryIndexManager)
+            {
+                _recoveryIndexManager.Index.Images.Remove(IndexImage);
+                _recoveryIndexManager.Index.Images.Insert(index, IndexImage);
+                _recoveryIndexManager.Save();
+            }
         }
 
         public void Dispose()
@@ -176,8 +182,11 @@ namespace NAPS2.Recovery
                 if (_recoveryIndexManager != null && !DisableRecoveryCleanup && File.Exists(FilePath))
                 {
                     File.Delete(FilePath);
-                    _recoveryIndexManager.Index.Images.Remove(IndexImage);
-                    _recoveryIndexManager.Save();
+                    lock (_recoveryIndexManager)
+                    {
+                        _recoveryIndexManager.Index.Images.Remove(IndexImage);
+                        _recoveryIndexManager.Save();
+                    }
                     if (_recoveryIndexManager.Index.Images.Count == 0)
                     {
                         _recoveryLock.Dispose();
