@@ -270,7 +270,7 @@ namespace NAPS2.WinForms
             UpdateRTL();
             InitializeComponent();
             PostInitializeComponent();
-            UpdateThumbnails();
+            AddThumbnails();
             Focus();
             WindowState = FormWindowState.Normal;
             DoRestoreFormState();
@@ -311,7 +311,7 @@ namespace NAPS2.WinForms
             }
 
             // Allow scanned images to be recovered in case of an unexpected close
-            recoveryManager.RecoverScannedImages(ReceiveScannedImage);
+            recoveryManager.RecoverScannedImages(ReceiveScannedImage());
 
             new Thread(RenderThumbnails).Start();
 
@@ -435,7 +435,7 @@ namespace NAPS2.WinForms
             if (profile != null)
             {
                 // We got a profile, yay, so we can actually do the scan now
-                scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage);
+                scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage());
                 Activate();
             }
         }
@@ -444,7 +444,7 @@ namespace NAPS2.WinForms
         {
             if (profileManager.DefaultProfile != null)
             {
-                scanPerformer.PerformScan(profileManager.DefaultProfile, new ScanParams(), this, notify, ReceiveScannedImage);
+                scanPerformer.PerformScan(profileManager.DefaultProfile, new ScanParams(), this, notify, ReceiveScannedImage());
                 Activate();
             }
             else if (profileManager.Profiles.Count == 0)
@@ -472,7 +472,7 @@ namespace NAPS2.WinForms
 
             UpdateScanButton();
 
-            scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), this, notify, ReceiveScannedImage);
+            scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), this, notify, ReceiveScannedImage());
             Activate();
         }
 
@@ -498,26 +498,71 @@ namespace NAPS2.WinForms
 
         private IEnumerable<ScannedImage> SelectedImages => imageList.Images.ElementsAt(SelectedIndices);
 
-        public void ReceiveScannedImage(ScannedImage scannedImage)
+        /// <summary>
+        /// Constructs a receiver for scanned images.
+        /// This keeps images from the same source together, even if multiple sources are providing images at the same time.
+        /// </summary>
+        /// <returns></returns>
+        public Action<ScannedImage> ReceiveScannedImage()
         {
-            SafeInvoke(() =>
+            ScannedImage last = null;
+            return scannedImage =>
             {
-                imageList.Images.Add(scannedImage);
-                AppendThumbnail(scannedImage);
-                changeTracker.Made();
-                Application.DoEvents();
-            });
+                SafeInvoke(() =>
+                {
+                    lock (imageList)
+                    {
+                        // Default to the end of the list
+                        int index = imageList.Images.Count;
+                        // Use the index after the last image from the same source (if it exists)
+                        if (last != null)
+                        {
+                            int lastIndex = imageList.Images.IndexOf(last);
+                            if (lastIndex != -1)
+                            {
+                                Debug.WriteLine($"{lastIndex} {index}");
+                                index = lastIndex + 1;
+                            }
+                        }
+                        imageList.Images.Insert(index, scannedImage);
+                        InsertThumbnail(index, scannedImage);
+                        last = scannedImage;
+                    }
+                    changeTracker.Made();
+                });
+            };
         }
 
-        private void UpdateThumbnails()
+        private void AddThumbnails()
         {
-            thumbnailList1.UpdateImages(imageList.Images);
+            thumbnailList1.AddedImages(imageList.Images);
             UpdateToolbar();
         }
 
-        private void AppendThumbnail(ScannedImage scannedImage)
+        private void DeleteThumbnails()
         {
-            thumbnailList1.AppendImage(scannedImage);
+            thumbnailList1.DeletedImages(imageList.Images);
+            UpdateToolbar();
+        }
+
+        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, bool optimizeForSelection)
+        {
+            thumbnailList1.UpdatedImages(imageList.Images, optimizeForSelection ? SelectedIndices.Concat(selection).ToList() : null);
+            SelectedIndices = selection;
+            UpdateToolbar();
+
+            if (scrollToSelection)
+            {
+                // Scroll to selection
+                // If selection is empty (e.g. after interleave), this scrolls to top
+                thumbnailList1.EnsureVisible(SelectedIndices.LastOrDefault());
+                thumbnailList1.EnsureVisible(SelectedIndices.FirstOrDefault());
+            }
+        }
+
+        private void InsertThumbnail(int index, ScannedImage scannedImage)
+        {
+            thumbnailList1.InsertImage(index, scannedImage);
             scannedImage.ThumbnailChanged += ImageThumbnailChanged;
             scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
             UpdateToolbar();
@@ -560,21 +605,6 @@ namespace NAPS2.WinForms
                 }
                 renderThumbnailsWaitHandle.Set();
             });
-        }
-
-        private void UpdateThumbnails(IEnumerable<int> selection, bool scrollToSelection, bool optimizeForSelection)
-        {
-            thumbnailList1.UpdateImages(imageList.Images, optimizeForSelection ? SelectedIndices.Concat(selection).ToList() : null);
-            SelectedIndices = selection;
-            UpdateToolbar();
-
-            if (scrollToSelection)
-            {
-                // Scroll to selection
-                // If selection is empty (e.g. after interleave), this scrolls to top
-                thumbnailList1.EnsureVisible(SelectedIndices.LastOrDefault());
-                thumbnailList1.EnsureVisible(SelectedIndices.FirstOrDefault());
-            }
         }
 
         #endregion
@@ -644,7 +674,7 @@ namespace NAPS2.WinForms
 
                     UpdateScanButton();
 
-                    scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage);
+                    scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage());
                     Activate();
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
@@ -688,7 +718,7 @@ namespace NAPS2.WinForms
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmClearItems, imageList.Images.Count), MiscResources.Clear, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
-                    UpdateThumbnails();
+                    DeleteThumbnails();
                     changeTracker.Clear();
                 }
             }
@@ -701,7 +731,7 @@ namespace NAPS2.WinForms
                 if (MessageBox.Show(string.Format(MiscResources.ConfirmDeleteItems, SelectedIndices.Count()), MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     imageList.Delete(SelectedIndices);
-                    UpdateThumbnails(Enumerable.Empty<int>(), false, false);
+                    DeleteThumbnails();
                     if (imageList.Images.Any())
                     {
                         changeTracker.Made();
@@ -795,7 +825,7 @@ namespace NAPS2.WinForms
                 {
                     viewer.ImageList = imageList;
                     viewer.ImageIndex = SelectedIndices.First();
-                    viewer.DeleteCallback = UpdateThumbnails;
+                    viewer.DeleteCallback = DeleteThumbnails;
                     viewer.SelectCallback = i =>
                     {
                         if (SelectedIndices.Count() <= 1)
@@ -812,7 +842,7 @@ namespace NAPS2.WinForms
         private void ShowProfilesForm()
         {
             var form = FormFactory.Create<FProfiles>();
-            form.ImageCallback = ReceiveScannedImage;
+            form.ImageCallback = ReceiveScannedImage();
             form.ShowDialog();
             UpdateScanButton();
         }
@@ -842,7 +872,7 @@ namespace NAPS2.WinForms
                     SafeInvoke(() =>
                     {
                         imageList.Delete(imageList.Images.IndiciesOf(images));
-                        UpdateThumbnails(Enumerable.Empty<int>(), false, false);
+                        DeleteThumbnails();
                     });
                 }
             }
@@ -855,7 +885,7 @@ namespace NAPS2.WinForms
                 if (appConfigManager.Config.DeleteAfterSaving)
                 {
                     imageList.Delete(imageList.Images.IndiciesOf(images));
-                    UpdateThumbnails(Enumerable.Empty<int>(), false, false);
+                    DeleteThumbnails();
                 }
             }
         }
@@ -891,7 +921,7 @@ namespace NAPS2.WinForms
         private void ImportFiles(IEnumerable<string> files)
         {
             var op = operationFactory.Create<ImportOperation>();
-            if (op.Start(OrderFiles(files), ReceiveScannedImage))
+            if (op.Start(OrderFiles(files), ReceiveScannedImage()))
             {
                 operationProgress.ShowProgress(op);
             }
@@ -908,7 +938,7 @@ namespace NAPS2.WinForms
         private void ImportDirect(DirectImageTransfer data, bool copy)
         {
             var op = operationFactory.Create<DirectImportOperation>();
-            if (op.Start(data, copy, ReceiveScannedImage))
+            if (op.Start(data, copy, ReceiveScannedImage()))
             {
                 operationProgress.ShowProgress(op);
             }
@@ -1095,7 +1125,7 @@ namespace NAPS2.WinForms
         private void tsBatchScan_Click(object sender, EventArgs e)
         {
             var form = FormFactory.Create<FBatchScan>();
-            form.ImageCallback = ReceiveScannedImage;
+            form.ImageCallback = ReceiveScannedImage();
             form.ShowDialog();
             UpdateScanButton();
         }
@@ -1708,8 +1738,11 @@ namespace NAPS2.WinForms
             UserConfigManager.Config.ThumbnailSize = thumbnailSize;
             UserConfigManager.Save();
             // Adjust the visible thumbnail display with the new size
-            thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
-            thumbnailList1.RegenerateThumbnailList(imageList.Images);
+            lock (thumbnailList1)
+            {
+                thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
+                thumbnailList1.RegenerateThumbnailList(imageList.Images);
+            }
 
             SetThumbnailSpacing(thumbnailSize);
             UpdateToolbar();

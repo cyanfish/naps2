@@ -74,78 +74,104 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void UpdateImages(List<ScannedImage> images, List<int> selection = null)
+        private string ItemText => PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "";
+
+        private List<ScannedImage> CurrentImages => Items.Cast<ListViewItem>().Select(x => (ScannedImage) x.Tag).ToList();
+
+        public void AddedImages(List<ScannedImage> allImages)
         {
-            if (images.Count == 0)
+            lock (this)
             {
-                // Fast case
-                Items.Clear();
-                ilThumbnailList.Images.Clear();
-            }
-            else
-            {
-                int delta = images.Count - Items.Count;
-                for (int i = 0; i < delta; i++)
+                foreach (var newImg in allImages.Except(CurrentImages))
                 {
-                    Items.Add("", i);
-                    Debug.Assert(selection == null);
-                }
-                for (int i = 0; i < -delta; i++)
-                {
-                    Items.RemoveAt(Items.Count - 1);
-                    ilThumbnailList.Images.RemoveAt(ilThumbnailList.Images.Count - 1);
-                    Debug.Assert(selection == null);
+                    ilThumbnailList.Images.Add(GetThumbnail(newImg));
+                    Items.Insert(allImages.IndexOf(newImg), ItemText, ilThumbnailList.Images.Count - 1).Tag = newImg;
                 }
             }
-
-            // Determine the smallest range that contains all images in the selection
-            int min = selection == null || !selection.Any() ? 0 : selection.Min();
-            int max = selection == null || !selection.Any() ? images.Count : selection.Max() + 1;
-
-            for (int i = min; i < max; i++)
-            {
-                if (i >= ilThumbnailList.Images.Count)
-                {
-                    ilThumbnailList.Images.Add(GetThumbnail(images[i]));
-                    Debug.Assert(selection == null);
-                }
-                else
-                {
-                    ilThumbnailList.Images[i] = GetThumbnail(images[i]);
-                }
-            }
-
             Invalidate();
         }
 
-        public void AppendImage(ScannedImage img)
+        public void DeletedImages(List<ScannedImage> allImages)
         {
-            ilThumbnailList.Images.Add(GetThumbnail(img));
-            Items.Add(PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "", ilThumbnailList.Images.Count - 1);
+            lock (this)
+            {
+                foreach (var oldImg in CurrentImages.Except(allImages))
+                {
+                    var item = Items.Cast<ListViewItem>().First(x => x.Tag == oldImg);
+                    foreach (ListViewItem item2 in Items)
+                    {
+                        if (item2.ImageIndex > item.ImageIndex)
+                        {
+                            item2.ImageIndex -= 1;
+                        }
+                    }
+                    ilThumbnailList.Images.RemoveAt(item.ImageIndex);
+                    Items.RemoveAt(item.Index);
+                }
+            }
+            Invalidate();
+        }
+
+        public void UpdatedImages(List<ScannedImage> images, List<int> selection)
+        {
+            lock (this)
+            {
+                int min = selection == null || !selection.Any() ? 0 : selection.Min();
+                int max = selection == null || !selection.Any() ? images.Count : selection.Max() + 1;
+
+                for (int i = min; i < max; i++)
+                {
+                    int imageIndex = Items[i].ImageIndex;
+                    ilThumbnailList.Images[imageIndex] = GetThumbnail(images[i]);
+                }
+            }
+            Invalidate();
+        }
+        
+        public void InsertImage(int index, ScannedImage img)
+        {
+            lock (this)
+            {
+                ilThumbnailList.Images.Add(GetThumbnail(img));
+                Items.Insert(index, ItemText, ilThumbnailList.Images.Count - 1).Tag = img;
+            }
         }
         
         public void ReplaceThumbnail(int index, ScannedImage img)
         {
-            var thumb = GetThumbnail(img);
-            if (thumb.Size == ThumbnailSize)
+            lock (this)
             {
-                ilThumbnailList.Images[index] = thumb;
-                Invalidate(Items[index].Bounds);
+                var thumb = GetThumbnail(img);
+                if (thumb.Size == ThumbnailSize)
+                {
+                    ilThumbnailList.Images[index] = thumb;
+                    Invalidate(Items[index].Bounds);
+                }
             }
         }
 
         public void RegenerateThumbnailList(List<ScannedImage> images)
         {
-            if (ilThumbnailList.Images.Count > 0)
+            lock (this)
             {
-                ilThumbnailList.Images.Clear();
+                if (ilThumbnailList.Images.Count > 0)
+                {
+                    ilThumbnailList.Images.Clear();
+                }
+
+                var list = new List<Image>();
+                foreach (var image in images)
+                {
+                    list.Add(GetThumbnail(image));
+                }
+
+                foreach (ListViewItem item in Items)
+                {
+                    item.ImageIndex = item.Index;
+                }
+
+                ilThumbnailList.Images.AddRange(list.ToArray());
             }
-            var list = new List<Image>();
-            foreach (var image in images)
-            {
-                list.Add(GetThumbnail(image));
-            }
-            ilThumbnailList.Images.AddRange(list.ToArray());
         }
 
         private Bitmap GetThumbnail(ScannedImage img)
