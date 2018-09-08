@@ -737,33 +737,36 @@ namespace NAPS2.WinForms
             changeTracker.Made();
         }
 
-        private void RotateLeft()
+        private async Task RotateLeft()
         {
             if (!SelectedIndices.Any())
             {
                 return;
             }
-            imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone);
+            changeTracker.Made();
+            await imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone);
             changeTracker.Made();
         }
 
-        private void RotateRight()
+        private async Task RotateRight()
         {
             if (!SelectedIndices.Any())
             {
                 return;
             }
-            imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone);
+            changeTracker.Made();
+            await imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone);
             changeTracker.Made();
         }
 
-        private void Flip()
+        private async Task Flip()
         {
             if (!SelectedIndices.Any())
             {
                 return;
             }
-            imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY);
+            changeTracker.Made();
+            await imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY);
             changeTracker.Made();
         }
 
@@ -1425,19 +1428,19 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Rotate Menu
 
-        private void tsRotateLeft_Click(object sender, EventArgs e)
+        private async void tsRotateLeft_Click(object sender, EventArgs e)
         {
-            RotateLeft();
+            await RotateLeft();
         }
 
-        private void tsRotateRight_Click(object sender, EventArgs e)
+        private async void tsRotateRight_Click(object sender, EventArgs e)
         {
-            RotateRight();
+            await RotateRight();
         }
 
-        private void tsFlip_Click(object sender, EventArgs e)
+        private async void tsFlip_Click(object sender, EventArgs e)
         {
-            Flip();
+            await Flip();
         }
 
         private void tsDeskew_Click(object sender, EventArgs e)

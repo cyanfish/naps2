@@ -10,8 +10,8 @@ namespace NAPS2.WinForms
 {
     partial class FHueSaturation : ImageForm
     {
-        public FHueSaturation(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
-            : base(changeTracker, thumbnailRenderer, scannedImageRenderer)
+        public FHueSaturation(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
+            : base(changeTracker, scannedImageRenderer)
         {
             InitializeComponent();
             ActiveControl = txtHue;
@@ -33,6 +33,15 @@ namespace NAPS2.WinForms
             tbSaturation.Value = 0;
             txtHue.Text = tbHue.Value.ToString("G");
             txtSaturation.Text = tbSaturation.Value.ToString("G");
+        }
+
+        protected override void UpdateThumbnail(ScannedImage img)
+        {
+            var thumb = img.GetThumbnail();
+            if (thumb != null)
+            {
+                img.SetThumbnail(SaturationTransform.Perform(HueTransform.Perform(thumb)));
+            }
         }
 
         private void UpdateTransform()

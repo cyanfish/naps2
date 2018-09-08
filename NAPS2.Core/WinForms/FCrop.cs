@@ -18,8 +18,8 @@ namespace NAPS2.WinForms
         private Point dragStartCoords;
         private LayoutManager lm;
 
-        public FCrop(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
-            : base(changeTracker, thumbnailRenderer, scannedImageRenderer)
+        public FCrop(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
+            : base(changeTracker, scannedImageRenderer)
         {
             InitializeComponent();
 

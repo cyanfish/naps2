@@ -263,12 +263,25 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        public void RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
+        public async Task RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
         {
-            foreach (ScannedImage img in Images.ElementsAt(selection))
+            var images = Images.ElementsAt(selection).ToList();
+            await Task.Factory.StartNew(() =>
             {
-                img.AddTransform(new RotationTransform(rotateFlipType));
-            }
+                foreach (ScannedImage img in images)
+                {
+                    lock (img)
+                    {
+                        var transform = new RotationTransform(rotateFlipType);
+                        img.AddTransform(transform);
+                        var thumb = img.GetThumbnail();
+                        if (thumb != null)
+                        {
+                            img.SetThumbnail(transform.Perform(thumb));
+                        }
+                    }
+                }
+            });
         }
 
         public void ResetTransforms(IEnumerable<int> selection)

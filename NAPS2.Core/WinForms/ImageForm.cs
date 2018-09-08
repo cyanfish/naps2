@@ -13,7 +13,6 @@ namespace NAPS2.WinForms
     partial class ImageForm : FormBase
     {
         private readonly ChangeTracker changeTracker;
-        private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageRenderer scannedImageRenderer;
 
         protected Bitmap workingImage, workingImage2;
@@ -27,10 +26,9 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        protected ImageForm(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
+        protected ImageForm(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
         {
             this.changeTracker = changeTracker;
-            this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageRenderer = scannedImageRenderer;
             InitializeComponent();
         }
@@ -120,6 +118,10 @@ namespace NAPS2.WinForms
             previewOutOfDate = true;
         }
 
+        protected virtual void UpdateThumbnail(ScannedImage img)
+        {
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -131,9 +133,13 @@ namespace NAPS2.WinForms
             {
                 foreach (var img in ImagesToTransform)
                 {
-                    foreach (var t in Transforms)
+                    lock (img)
                     {
-                        img.AddTransform(t);
+                        foreach (var t in Transforms)
+                        {
+                            img.AddTransform(t);
+                        }
+                        UpdateThumbnail(img);
                     }
                 }
                 changeTracker.Made();
