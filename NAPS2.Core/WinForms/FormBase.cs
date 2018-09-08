@@ -107,7 +107,16 @@ namespace NAPS2.WinForms
 
         public void SafeInvokeAsync(Action action)
         {
-            Task.Factory.StartNew(() => SafeInvoke(action));
+            try
+            {
+                BeginInvoke(action);
+            }
+            catch (ObjectDisposedException)
+            {
+            }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         #endregion
