@@ -23,7 +23,10 @@ namespace NAPS2.WinForms
 
         protected ImageForm()
         {
-            // For the designer only
+            if (!DesignMode)
+            {
+                throw new InvalidOperationException();
+            }
             InitializeComponent();
         }
 
@@ -39,13 +42,32 @@ namespace NAPS2.WinForms
 
         public List<ScannedImage> SelectedImages { get; set; }
 
-        public virtual IEnumerable<Transform> Transforms => throw new NotImplementedException();
+        protected virtual IEnumerable<Transform> Transforms => throw new NotImplementedException();
+
+        protected virtual PictureBox PictureBox => throw new NotImplementedException();
 
         private bool TransformMultiple => SelectedImages != null && checkboxApplyToSelected.Checked;
 
         private IEnumerable<ScannedImage> ImagesToTransform => TransformMultiple ? SelectedImages : Enumerable.Repeat(Image, 1);
 
-        protected override async void OnLoad(object sender, EventArgs eventArgs)
+        protected virtual Bitmap RenderPreview()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual void InitTransform()
+        {
+        }
+
+        protected virtual void ResetTransform()
+        {
+        }
+
+        protected virtual void TransformSaved()
+        {
+        }
+
+        private async void ImageForm_Load(object sender, EventArgs e)
         {
             if (SelectedImages != null && SelectedImages.Count > 1)
             {
@@ -57,23 +79,15 @@ namespace NAPS2.WinForms
             }
 
             Size = new Size(600, 600);
-            
+
             // TODO: Optimize the order of operations here
             // And do that for all image forms.
             workingImage = await scannedImageRenderer.Render(Image);
             workingImage2 = await scannedImageRenderer.Render(Image);
 
-            AfterOnLoad();
-
+            InitTransform();
             UpdatePreviewBox();
         }
-
-        protected virtual void AfterOnLoad()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual PictureBox PictureBox => throw new NotImplementedException();
         
         protected void UpdatePreviewBox()
         {
@@ -98,11 +112,6 @@ namespace NAPS2.WinForms
             previewOutOfDate = true;
         }
 
-        protected virtual Bitmap RenderPreview()
-        {
-            throw new NotImplementedException();
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -125,17 +134,11 @@ namespace NAPS2.WinForms
             Close();
         }
 
-        protected virtual void TransformSaved()
-        {
-        }
-
         private void btnRevert_Click(object sender, EventArgs e)
         {
             ResetTransform();
             UpdatePreviewBox();
         }
-
-        protected virtual void ResetTransform() => throw new NotImplementedException();
 
         private void ImageForm_FormClosed(object sender, FormClosedEventArgs e)
         {

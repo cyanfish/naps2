@@ -80,6 +80,7 @@ namespace NAPS2.WinForms
             this.MinimizeBox = false;
             this.Name = "ImageForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ImageForm_FormClosed);
+            this.Load += new System.EventHandler(this.ImageForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

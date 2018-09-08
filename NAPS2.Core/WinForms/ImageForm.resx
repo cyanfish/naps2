@@ -256,6 +256,6 @@
     <value>ImageForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.1271, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.8.2.3040, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

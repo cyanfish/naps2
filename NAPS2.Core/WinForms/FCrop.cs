@@ -14,12 +14,20 @@ namespace NAPS2.WinForms
     {
         private static CropTransform _lastTransform;
         private static Size _lastSize;
-        
+
+        private Point dragStartCoords;
+
         public FCrop(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
             : base(changeTracker, thumbnailRenderer, scannedImageRenderer)
         {
             InitializeComponent();
         }
+
+        public CropTransform CropTransform { get; private set; }
+
+        protected override IEnumerable<Transform> Transforms => new[] { CropTransform };
+
+        protected override PictureBox PictureBox => pictureBox;
 
         protected override Bitmap RenderPreview()
         {
@@ -48,17 +56,8 @@ namespace NAPS2.WinForms
 
             return bitmap;
         }
-        
-        public CropTransform CropTransform { get; private set; }
 
-        public override IEnumerable<Transform> Transforms
-        {
-            get { yield return CropTransform; }
-        }
-
-        protected override PictureBox PictureBox => pictureBox;
-
-        protected override void AfterOnLoad()
+        protected override void InitTransform()
         {
             if (_lastTransform != null && _lastSize == workingImage.Size)
             {
@@ -78,6 +77,12 @@ namespace NAPS2.WinForms
                 OriginalHeight = workingImage.Height,
                 OriginalWidth = workingImage.Width
             };
+        }
+
+        protected override void TransformSaved()
+        {
+            _lastTransform = CropTransform;
+            _lastSize = workingImage.Size;
         }
 
         private void UpdateCropBounds()
@@ -103,13 +108,7 @@ namespace NAPS2.WinForms
             };
             UpdatePreviewBox();
         }
-        
-        protected override void TransformSaved()
-        {
-            _lastTransform = CropTransform;
-            _lastSize = workingImage.Size;
-        }
-        
+
         private void tbLeft_Scroll(object sender, EventArgs e)
         {
             UpdateTransform();
@@ -129,8 +128,6 @@ namespace NAPS2.WinForms
         {
             UpdateTransform();
         }
-
-        private Point dragStartCoords;
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {

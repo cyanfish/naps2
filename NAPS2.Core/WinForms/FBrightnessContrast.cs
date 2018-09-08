@@ -15,6 +15,7 @@ namespace NAPS2.WinForms
             : base(changeTracker, thumbnailRenderer, scannedImageRenderer)
         {
             InitializeComponent();
+            ActiveControl = txtBrightness;
         }
 
         public BrightnessTransform BrightnessTransform { get; private set; } = new BrightnessTransform();
@@ -23,19 +24,13 @@ namespace NAPS2.WinForms
 
         protected override PictureBox PictureBox => pictureBox;
 
-        public override IEnumerable<Transform> Transforms
+        protected override IEnumerable<Transform> Transforms
         {
             get
             {
                 yield return BrightnessTransform;
                 yield return TrueContrastTransform;
             }
-        }
-
-        protected override void AfterOnLoad()
-        {
-            pictureBox.Image = (Bitmap)workingImage.Clone();
-            ActiveControl = txtBrightness;
         }
 
         private void UpdateTransform()
