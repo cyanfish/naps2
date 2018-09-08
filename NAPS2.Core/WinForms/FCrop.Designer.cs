@@ -59,6 +59,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tbRight, "tbRight");
             this.tbRight.Name = "tbRight";
             this.tbRight.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tbRight.Value = 10;
             this.tbRight.Scroll += new System.EventHandler(this.tbRight_Scroll);
             // 
             // tbLeft
@@ -73,6 +74,7 @@ namespace NAPS2.WinForms
             resources.ApplyResources(this.tbTop, "tbTop");
             this.tbTop.Name = "tbTop";
             this.tbTop.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tbTop.Value = 10;
             this.tbTop.Scroll += new System.EventHandler(this.tbTop_Scroll);
             // 
             // tbBottom

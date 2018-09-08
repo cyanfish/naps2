@@ -16,11 +16,21 @@ namespace NAPS2.WinForms
         private static Size _lastSize;
 
         private Point dragStartCoords;
+        private LayoutManager lm;
 
         public FCrop(ChangeTracker changeTracker, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
             : base(changeTracker, thumbnailRenderer, scannedImageRenderer)
         {
             InitializeComponent();
+
+            lm = new LayoutManager(this)
+                .Bind(tbLeft, tbRight)
+                    .WidthTo(() => (int)(GetImageWidthRatio() * pictureBox.Width))
+                    .LeftTo(() => (int)((1 - GetImageWidthRatio()) * pictureBox.Width / 2))
+                .Bind(tbTop, tbBottom)
+                    .HeightTo(() => (int)(GetImageHeightRatio() * pictureBox.Height))
+                    .TopTo(() => (int)((1 - GetImageHeightRatio()) * pictureBox.Height / 2))
+                .Activate();
         }
 
         public CropTransform CropTransform { get; private set; }
@@ -68,6 +78,7 @@ namespace NAPS2.WinForms
                 ResetTransform();
             }
             UpdateCropBounds();
+            lm.UpdateLayout();
         }
 
         protected override void ResetTransform()
@@ -83,6 +94,36 @@ namespace NAPS2.WinForms
         {
             _lastTransform = CropTransform;
             _lastSize = workingImage.Size;
+        }
+
+        private double GetImageWidthRatio()
+        {
+            if (workingImage == null)
+            {
+                return 1;
+            }
+            double imageAspect = workingImage.Width / (double)workingImage.Height;
+            double pboxAspect = pictureBox.Width / (double)pictureBox.Height;
+            if (imageAspect > pboxAspect)
+            {
+                return 1;
+            }
+            return imageAspect / pboxAspect;
+        }
+
+        private double GetImageHeightRatio()
+        {
+            if (workingImage == null)
+            {
+                return 1;
+            }
+            double imageAspect = workingImage.Width / (double)workingImage.Height;
+            double pboxAspect = pictureBox.Width / (double)pictureBox.Height;
+            if (pboxAspect > imageAspect)
+            {
+                return 1;
+            }
+            return pboxAspect / imageAspect;
         }
 
         private void UpdateCropBounds()
