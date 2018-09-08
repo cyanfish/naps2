@@ -31,8 +31,9 @@ namespace NAPS2.Util
             {
                 return;
             }
+            var bottomAnchorControls = FindAndRemoveBottomAnchor(control.FindForm());
             int height = control.Height + margin;
-            int bottom = LocationInForm(control).Y + height;
+            int bottom = LocationInForm(control).Y + control.Height;
             foreach (var c in EnumerateParents(control))
             {
                 c.Height -= height;
@@ -45,6 +46,7 @@ namespace NAPS2.Util
                 }
             }
             control.Visible = false;
+            AddBottomAnchor(bottomAnchorControls);
         }
 
         public static void Show(Control control, int margin = 0)
@@ -53,6 +55,7 @@ namespace NAPS2.Util
             {
                 return;
             }
+            var bottomAnchorControls = FindAndRemoveBottomAnchor(control.FindForm());
             int height = control.Height + margin;
             int top = LocationInForm(control).Y;
             foreach (var c in EnumerateParents(control))
@@ -67,6 +70,7 @@ namespace NAPS2.Util
                 }
             }
             control.Visible = true;
+            AddBottomAnchor(bottomAnchorControls);
         }
 
         public static void LockHeight(Form form)
@@ -95,6 +99,12 @@ namespace NAPS2.Util
             return EnumerateParents(control).SelectMany(x => x.Controls.Cast<Control>()).Except(parentsAndSelf);
         }
 
+        private static IEnumerable<Control> EnumerateDescendents(Control control)
+        {
+            var children = control.Controls.Cast<Control>().ToList();
+            return children.Concat(children.SelectMany(EnumerateDescendents));
+        }
+
         private static Point LocationInForm(Control control)
         {
             var x = control.Location.X;
@@ -108,6 +118,24 @@ namespace NAPS2.Util
                 }
             }
             return new Point(x, y);
+        }
+
+        private static List<(Control, AnchorStyles)> FindAndRemoveBottomAnchor(Form form)
+        {
+            var controls = EnumerateDescendents(form).Where(x => (x.Anchor & AnchorStyles.Bottom) == AnchorStyles.Bottom).Select(c => (c, c.Anchor)).ToList();
+            foreach (var (c, a) in controls)
+            {
+                c.Anchor = a & ~AnchorStyles.Bottom | AnchorStyles.Top;
+            }
+            return controls;
+        }
+
+        private static void AddBottomAnchor(List<(Control, AnchorStyles)> controls)
+        {
+            foreach (var (c, a) in controls)
+            {
+                c.Anchor = a;
+            }
         }
     }
 }

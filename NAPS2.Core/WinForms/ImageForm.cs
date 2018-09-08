@@ -74,6 +74,10 @@ namespace NAPS2.WinForms
 
         private async void ImageForm_Load(object sender, EventArgs e)
         {
+            checkboxApplyToSelected.BringToFront();
+            btnRevert.BringToFront();
+            btnCancel.BringToFront();
+            btnOK.BringToFront();
             if (SelectedImages != null && SelectedImages.Count > 1)
             {
                 checkboxApplyToSelected.Text = string.Format(checkboxApplyToSelected.Text, SelectedImages.Count);
