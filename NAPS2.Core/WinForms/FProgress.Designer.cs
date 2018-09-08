@@ -81,7 +81,6 @@
             this.MaximizeBox = false;
             this.Name = "FProgress";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FDownloadProgress_FormClosing);
-            this.Shown += new System.EventHandler(this.FProgress_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

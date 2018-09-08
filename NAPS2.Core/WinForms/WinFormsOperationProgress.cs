@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using NAPS2.Operation;
 
 namespace NAPS2.WinForms
@@ -22,9 +23,9 @@ namespace NAPS2.WinForms
             form.Operation = op;
             form.ShowDialog();
 
-            if (form.Operation.Success?.IsCompleted == false)
+            if (!form.Operation.IsFinished)
             {
-                notificationManager.OperationProgress(this, op);
+                SynchronizationContext.Current.Send(s => notificationManager.OperationProgress(this, op), null);
             }
         }
     }

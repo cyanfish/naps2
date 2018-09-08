@@ -49,8 +49,9 @@ namespace NAPS2.WinForms
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly KeyboardShortcutManager ksm;
         private readonly IUserConfigManager userConfigManager;
+        private readonly IOperationProgress operationProgress;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, AppConfigManager appConfigManager, ScannedImageRenderer scannedImageRenderer, KeyboardShortcutManager ksm, IUserConfigManager userConfigManager)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, AppConfigManager appConfigManager, ScannedImageRenderer scannedImageRenderer, KeyboardShortcutManager ksm, IUserConfigManager userConfigManager, IOperationProgress operationProgress)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
@@ -59,6 +60,7 @@ namespace NAPS2.WinForms
             this.scannedImageRenderer = scannedImageRenderer;
             this.ksm = ksm;
             this.userConfigManager = userConfigManager;
+            this.operationProgress = operationProgress;
             InitializeComponent();
         }
 
@@ -417,12 +419,9 @@ namespace NAPS2.WinForms
         private async void tsDeskew_Click(object sender, EventArgs e)
         {
             var op = operationFactory.Create<DeskewOperation>();
-            var progressForm = FormFactory.Create<FProgress>();
-            progressForm.Operation = op;
-
             if (op.Start(new[] { ImageList.Images[ImageIndex] }))
             {
-                progressForm.ShowDialog();
+                operationProgress.ShowProgress(op);
                 await UpdateImage();
             }
         }

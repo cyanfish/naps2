@@ -59,7 +59,9 @@
             // progressBar
             // 
             resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.MarqueeAnimationSpeed = 50;
             this.progressBar.Name = "progressBar";
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperationProgressNotifyWidget_Click);
             // 
             // OperationProgressNotifyWidget

@@ -24,6 +24,8 @@ namespace NAPS2.Operation
 
         public Task<bool> Success { get; protected set; }
 
+        public bool IsFinished { get; protected set; }
+
         public void Cancel()
         {
             cts.Cancel();
@@ -70,6 +72,7 @@ namespace NAPS2.Operation
 
         protected void InvokeFinished()
         {
+            IsFinished = true;
             Finished?.Invoke(this, new EventArgs());
         }
 

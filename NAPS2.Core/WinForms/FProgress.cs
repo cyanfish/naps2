@@ -13,7 +13,6 @@ namespace NAPS2.WinForms
         private readonly IErrorOutput errorOutput;
 
         private volatile bool loaded;
-        private volatile bool finished;
         private volatile bool background;
         private IOperation operation;
 
@@ -38,8 +37,6 @@ namespace NAPS2.WinForms
             }
         }
 
-        public Func<bool> Start { get; set; }
-
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
             if (!background)
@@ -58,7 +55,6 @@ namespace NAPS2.WinForms
 
         void operation_Finished(object sender, EventArgs e)
         {
-            finished = true;
             if (loaded && !background)
             {
                 SafeInvoke(Close);
@@ -80,21 +76,9 @@ namespace NAPS2.WinForms
             // TODO: Check i10n of button positions, here and in general
 
             DisplayProgress();
-            if (finished)
+            if (operation.IsFinished)
             {
                 Close();
-            }
-        }
-
-        private void FProgress_Shown(object sender, EventArgs e)
-        {
-            if (Start != null)
-            {
-                if (!Start())
-                {
-                    finished = true;
-                    Close();
-                }
             }
         }
 
@@ -136,7 +120,7 @@ namespace NAPS2.WinForms
 
         private void FDownloadProgress_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!finished && !background)
+            if (!operation.IsFinished && !background)
             {
                 TryCancelOp();
                 e.Cancel = true;

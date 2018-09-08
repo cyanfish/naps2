@@ -153,6 +153,12 @@
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>123, 17</value>
   </metadata>
+  <data name="cancelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 22</value>
+  </data>
+  <data name="cancelToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 26</value>
   </data>
@@ -161,12 +167,6 @@
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="cancelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 22</value>
-  </data>
-  <data name="cancelToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cancel</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 26</value>
@@ -187,7 +187,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -196,7 +196,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 42</value>
+    <value>150, 40</value>
   </data>
   <data name="&gt;&gt;cancelToolStripMenuItem.Name" xml:space="preserve">
     <value>cancelToolStripMenuItem</value>
@@ -208,6 +208,6 @@
     <value>OperationProgressNotifyWidget</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.NotifyWidgetBase, NAPS2.Core, Version=5.8.2.28709, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.NotifyWidgetBase, NAPS2.Core, Version=5.8.2.29512, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

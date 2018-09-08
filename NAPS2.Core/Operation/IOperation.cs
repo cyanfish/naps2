@@ -20,6 +20,8 @@ namespace NAPS2.Operation
 
         Task<bool> Success { get; }
 
+        bool IsFinished { get; }
+
         void Cancel();
 
         event EventHandler StatusChanged;

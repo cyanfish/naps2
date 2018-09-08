@@ -55,6 +55,7 @@ namespace NAPS2.WinForms
         private readonly NotificationManager notify;
         private readonly CultureInitializer cultureInitializer;
         private readonly IWorkerServiceFactory workerServiceFactory;
+        private readonly IOperationProgress operationProgress;
 
         #endregion
 
@@ -70,7 +71,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory)
+        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, IOperationProgress operationProgress)
         {
             this.stringWrapper = stringWrapper;
             this.appConfigManager = appConfigManager;
@@ -90,6 +91,7 @@ namespace NAPS2.WinForms
             this.notify = notify;
             this.cultureInitializer = cultureInitializer;
             this.workerServiceFactory = workerServiceFactory;
+            this.operationProgress = operationProgress;
             InitializeComponent();
 
             notify.ParentForm = this;
@@ -778,12 +780,9 @@ namespace NAPS2.WinForms
             }
 
             var op = operationFactory.Create<DeskewOperation>();
-            var progressForm = FormFactory.Create<FProgress>();
-            progressForm.Operation = op;
-
             if (op.Start(SelectedImages.ToList()))
             {
-                progressForm.ShowDialog();
+                operationProgress.ShowProgress(op);
                 changeTracker.Made();
             }
         }
@@ -892,11 +891,9 @@ namespace NAPS2.WinForms
         private void ImportFiles(IEnumerable<string> files)
         {
             var op = operationFactory.Create<ImportOperation>();
-            var progressForm = FormFactory.Create<FProgress>();
-            progressForm.Operation = op;
             if (op.Start(OrderFiles(files), ReceiveScannedImage))
             {
-                progressForm.ShowDialog();
+                operationProgress.ShowProgress(op);
             }
         }
 
@@ -911,11 +908,9 @@ namespace NAPS2.WinForms
         private void ImportDirect(DirectImageTransfer data, bool copy)
         {
             var op = operationFactory.Create<DirectImportOperation>();
-            var progressForm = FormFactory.Create<FProgress>();
-            progressForm.Operation = op;
             if (op.Start(data, copy, ReceiveScannedImage))
             {
-                progressForm.ShowDialog();
+                operationProgress.ShowProgress(op);
             }
         }
 
