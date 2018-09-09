@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Platform;
 using NAPS2.Scan.Images;
@@ -76,16 +74,24 @@ namespace NAPS2.WinForms
 
         private string ItemText => PlatformCompat.Runtime.UseSpaceInListViewItem ? " " : "";
 
-        private List<ScannedImage> CurrentImages => Items.Cast<ListViewItem>().Select(x => (ScannedImage) x.Tag).ToList();
+        private List<ScannedImage> CurrentImages => Items.Cast<ListViewItem>().Select(x => (ScannedImage)x.Tag).ToList();
 
         public void AddedImages(List<ScannedImage> allImages)
         {
             lock (this)
             {
-                foreach (var newImg in allImages.Except(CurrentImages))
+                for (int i = 0; i < ilThumbnailList.Images.Count; i++)
                 {
-                    ilThumbnailList.Images.Add(GetThumbnail(newImg));
-                    Items.Insert(allImages.IndexOf(newImg), ItemText, ilThumbnailList.Images.Count - 1).Tag = newImg;
+                    if (Items[i].Tag != allImages[i])
+                    {
+                        ilThumbnailList.Images[i] = GetThumbnail(allImages[i]);
+                        Items[i].Tag = allImages[i];
+                    }
+                }
+                for (int i = ilThumbnailList.Images.Count; i < allImages.Count; i++)
+                {
+                    ilThumbnailList.Images.Add(GetThumbnail(allImages[i]));
+                    Items.Add(ItemText, i).Tag = allImages[i];
                 }
             }
             Invalidate();
@@ -127,16 +133,7 @@ namespace NAPS2.WinForms
             }
             Invalidate();
         }
-        
-        public void InsertImage(int index, ScannedImage img)
-        {
-            lock (this)
-            {
-                ilThumbnailList.Images.Add(GetThumbnail(img));
-                Items.Insert(index, ItemText, ilThumbnailList.Images.Count - 1).Tag = img;
-            }
-        }
-        
+
         public void ReplaceThumbnail(int index, ScannedImage img)
         {
             lock (this)

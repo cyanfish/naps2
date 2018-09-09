@@ -525,7 +525,9 @@ namespace NAPS2.WinForms
                             }
                         }
                         imageList.Images.Insert(index, scannedImage);
-                        InsertThumbnail(index, scannedImage);
+                        scannedImage.ThumbnailChanged += ImageThumbnailChanged;
+                        scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
+                        AddThumbnails();
                         last = scannedImage;
                     }
                     changeTracker.Made();
@@ -558,14 +560,6 @@ namespace NAPS2.WinForms
                 thumbnailList1.EnsureVisible(SelectedIndices.LastOrDefault());
                 thumbnailList1.EnsureVisible(SelectedIndices.FirstOrDefault());
             }
-        }
-
-        private void InsertThumbnail(int index, ScannedImage scannedImage)
-        {
-            thumbnailList1.InsertImage(index, scannedImage);
-            scannedImage.ThumbnailChanged += ImageThumbnailChanged;
-            scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
-            UpdateToolbar();
         }
 
         private void ImageThumbnailChanged(object sender, EventArgs e)
