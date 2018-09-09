@@ -342,6 +342,8 @@ namespace NAPS2.WinForms
 
         private void FDesktop_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (closed) return;
+
             if (operationProgress.ActiveOperations.Any())
             {
                 if (e.CloseReason == CloseReason.UserClosing)
@@ -377,6 +379,20 @@ namespace NAPS2.WinForms
                 {
                     RecoveryImage.DisableRecoveryCleanup = true;
                 }
+            }
+
+            if (!e.Cancel && operationProgress.ActiveOperations.Any())
+            {
+                operationProgress.ActiveOperations.ForEach(op => op.Cancel());
+                closed = true;
+                e.Cancel = true;
+                Hide();
+                ShowInTaskbar = false;
+                Task.Factory.StartNew(() =>
+                {
+                    Task.WaitAll(operationProgress.ActiveOperations.Select(op => op.Success).ToArray<Task>());
+                    SafeInvoke(Close);
+                });
             }
         }
 
