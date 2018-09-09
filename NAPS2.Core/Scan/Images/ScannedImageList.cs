@@ -115,12 +115,14 @@ namespace NAPS2.Scan.Images
         {
             lock (this)
             {
-                foreach (ScannedImage img in Images.ElementsAt(selection))
+                using (RecoveryImage.DeferSave())
                 {
-                    img.Dispose();
+                    foreach (ScannedImage img in Images.ElementsAt(selection))
+                    {
+                        img.Dispose();
+                    }
+                    Images.RemoveAll(selection);
                 }
-
-                Images.RemoveAll(selection);
             }
         }
 

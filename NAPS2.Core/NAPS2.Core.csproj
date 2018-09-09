@@ -187,6 +187,7 @@
     <Compile Include="Scan\Sane\SaneWrapper.cs" />
     <Compile Include="Scan\Wia\WiaApi.mono.cs" />
     <Compile Include="Scan\Wia\WiaState.mono.cs" />
+    <Compile Include="Util\DeferredAction.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
     <Compile Include="Platform\IRuntimeCompat.cs" />
     <Compile Include="Platform\MonoRuntimeCompat.cs" />

@@ -23,6 +23,20 @@ namespace NAPS2.Recovery
 
         private static int _recoveryFileNumber = 1;
 
+        private static readonly DeferredAction DeferredSave = new DeferredAction(() =>
+        {
+            if (_recoveryIndexManager != null)
+            {
+                lock (_recoveryIndexManager)
+                {
+                    if (_recoveryFolder != null)
+                    {
+                        _recoveryIndexManager.Save();
+                    }
+                }
+            }
+        });
+
         public static bool DisableRecoveryCleanup { get; set; }
 
         public static DirectoryInfo RecoveryFolder
@@ -56,6 +70,11 @@ namespace NAPS2.Recovery
         {
             get => _recoveryFileNumber;
             set => _recoveryFileNumber = value;
+        }
+
+        public static IDisposable DeferSave()
+        {
+            return DeferredSave.Defer();
         }
 
         public static RecoveryImage CreateNew(ImageFormat fileFormat, ScanBitDepth bitDepth, bool highQuality, List<Transform> transformList)
@@ -185,7 +204,10 @@ namespace NAPS2.Recovery
                     lock (_recoveryIndexManager)
                     {
                         _recoveryIndexManager.Index.Images.Remove(IndexImage);
-                        _recoveryIndexManager.Save();
+                        if (!DeferredSave.IsDeferred)
+                        {
+                            _recoveryIndexManager.Save();
+                        }
                     }
                     if (_recoveryIndexManager.Index.Images.Count == 0)
                     {

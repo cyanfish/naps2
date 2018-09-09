@@ -105,18 +105,27 @@ namespace NAPS2.WinForms
             lock (this)
             {
                 BeginUpdate();
-                foreach (var oldImg in CurrentImages.Except(allImages))
+                if (allImages.Count == 0)
                 {
-                    var item = Items.Cast<ListViewItem>().First(x => x.Tag == oldImg);
-                    foreach (ListViewItem item2 in Items)
+                    ilThumbnailList.Images.Clear();
+                    Items.Clear();
+                }
+                else
+                {
+                    foreach (var oldImg in CurrentImages.Except(allImages))
                     {
-                        if (item2.ImageIndex > item.ImageIndex)
+                        var item = Items.Cast<ListViewItem>().First(x => x.Tag == oldImg);
+                        foreach (ListViewItem item2 in Items)
                         {
-                            item2.ImageIndex -= 1;
+                            if (item2.ImageIndex > item.ImageIndex)
+                            {
+                                item2.ImageIndex -= 1;
+                            }
                         }
+
+                        ilThumbnailList.Images.RemoveAt(item.ImageIndex);
+                        Items.RemoveAt(item.Index);
                     }
-                    ilThumbnailList.Images.RemoveAt(item.ImageIndex);
-                    Items.RemoveAt(item.Index);
                 }
                 EndUpdate();
             }
