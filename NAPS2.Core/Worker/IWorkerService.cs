@@ -21,7 +21,7 @@ namespace NAPS2.Worker
         List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl);
 
         [OperationContract(IsOneWay = true)]
-        void TwainScan(int recoveryFileNumber, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
+        void TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
 
         [OperationContract]
         byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size);

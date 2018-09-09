@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
@@ -22,6 +23,7 @@ namespace NAPS2.Recovery
         private static RecoveryIndexManager _recoveryIndexManager;
 
         private static int _recoveryFileNumber = 1;
+        private static readonly object RecoveryFileNumberLock = new object();
 
         private static readonly DeferredAction DeferredSave = new DeferredAction(() =>
         {
@@ -66,12 +68,6 @@ namespace NAPS2.Recovery
             }
         }
 
-        public static int RecoveryFileNumber
-        {
-            get => _recoveryFileNumber;
-            set => _recoveryFileNumber = value;
-        }
-
         public static IDisposable DeferSave()
         {
             return DeferredSave.Defer();
@@ -100,6 +96,15 @@ namespace NAPS2.Recovery
             }
         }
 
+        private static string GetNextFileName()
+        {
+            lock (RecoveryFileNumberLock)
+            {
+                // Use an incrementing number + the process ID to ensure uniqueness
+                return $"{Process.GetCurrentProcess().Id}_{(_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture)}";
+            }
+        }
+
         private static string GetExtension(ImageFormat imageFormat)
         {
             if (ReferenceEquals(imageFormat, null))
@@ -123,7 +128,7 @@ namespace NAPS2.Recovery
         private RecoveryImage(ImageFormat fileFormat, ScanBitDepth bitDepth, bool highQuality, List<Transform> transformList)
         {
             FileFormat = fileFormat;
-            FileName = (_recoveryFileNumber++).ToString("D5", CultureInfo.InvariantCulture) + GetExtension(FileFormat);
+            FileName = GetNextFileName() + GetExtension(FileFormat);
             FilePath = Path.Combine(RecoveryFolder.FullName, FileName);
             IndexImage = new RecoveryIndexImage
             {
@@ -146,7 +151,6 @@ namespace NAPS2.Recovery
                 : ".pdf".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ? null
                 : ImageFormat.Jpeg;
             FileName = recoveryIndexImage.FileName;
-            _recoveryFileNumber++; // TODO: Is this needed?
             FilePath = Path.Combine(RecoveryFolder.FullName, FileName);
             IndexImage = recoveryIndexImage;
             Save();
