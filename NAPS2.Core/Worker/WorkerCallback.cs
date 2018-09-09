@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -17,9 +18,14 @@ namespace NAPS2.Worker
 
         public event Action<ScannedImage> ImageCallback;
 
-        public void TwainImageReceived(RecoveryIndexImage image)
+        public void TwainImageReceived(RecoveryIndexImage image, byte[] thumbnail)
         {
-            ImageCallback?.Invoke(new ScannedImage(image));
+            var scannedImage = new ScannedImage(image);
+            if (thumbnail != null)
+            {
+                scannedImage.SetThumbnail(new Bitmap(new MemoryStream(thumbnail)));
+            }
+            ImageCallback?.Invoke(scannedImage);
         }
 
         public void Finish()

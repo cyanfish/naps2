@@ -564,6 +564,8 @@ namespace NAPS2.WinForms
                     }
                     changeTracker.Made();
                 });
+                // Trigger thumbnail rendering just in case the received image is out of date
+                renderThumbnailsWaitHandle.Set();
             };
         }
 

@@ -91,7 +91,14 @@ namespace NAPS2.Worker
 
             public override void Put(ScannedImage image)
             {
-                callback.TwainImageReceived(image.RecoveryIndexImage);
+                MemoryStream stream = null;
+                var thumb = image.GetThumbnail();
+                if (thumb != null)
+                {
+                    stream = new MemoryStream();
+                    thumb.Save(stream, ImageFormat.Png);
+                }
+                callback.TwainImageReceived(image.RecoveryIndexImage, stream?.ToArray());
             }
         }
     }
