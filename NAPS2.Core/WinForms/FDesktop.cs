@@ -520,7 +520,6 @@ namespace NAPS2.WinForms
                             int lastIndex = imageList.Images.IndexOf(last);
                             if (lastIndex != -1)
                             {
-                                Debug.WriteLine($"{lastIndex} {index}");
                                 index = lastIndex + 1;
                             }
                         }
