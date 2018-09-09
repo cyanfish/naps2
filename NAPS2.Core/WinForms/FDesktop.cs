@@ -342,7 +342,34 @@ namespace NAPS2.WinForms
 
         private void FDesktop_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (changeTracker.HasUnsavedChanges)
+            if (operationProgress.ActiveOperations.Any())
+            {
+                if (e.CloseReason == CloseReason.UserClosing)
+                {
+                    var result = MessageBox.Show(MiscResources.ExitWithActiveOperations, MiscResources.ActiveOperations,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                    if (result == DialogResult.Yes)
+                    {
+                        foreach (var op in operationProgress.ActiveOperations)
+                        {
+                            op.Cancel();
+                        }
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    foreach (var op in operationProgress.ActiveOperations)
+                    {
+                        op.Cancel();
+                    }
+                    RecoveryImage.DisableRecoveryCleanup = true;
+                }
+            }
+            else if (changeTracker.HasUnsavedChanges)
             {
                 if (e.CloseReason == CloseReason.UserClosing)
                 {

@@ -11,5 +11,7 @@ namespace NAPS2.Automation
         {
             op.Success?.Wait();
         }
+
+        public IEnumerable<IOperation> ActiveOperations => throw new NotImplementedException();
     }
 }

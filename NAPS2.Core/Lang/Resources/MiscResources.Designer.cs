@@ -61,6 +61,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operation in Progress.
+        /// </summary>
+        internal static string ActiveOperations {
+            get {
+                return ResourceManager.GetString("ActiveOperations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All ({0}).
         /// </summary>
         internal static string AllCount {
@@ -516,6 +525,15 @@ namespace NAPS2.Lang.Resources {
         internal static string EstimatedDownloadSize {
             get {
                 return ResourceManager.GetString("EstimatedDownloadSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An operation is in progress. Are you sure you want to exit and cancel the operation?.
+        /// </summary>
+        internal static string ExitWithActiveOperations {
+            get {
+                return ResourceManager.GetString("ExitWithActiveOperations", resourceCulture);
             }
         }
         
