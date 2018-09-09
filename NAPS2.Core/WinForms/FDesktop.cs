@@ -525,6 +525,7 @@ namespace NAPS2.WinForms
                             }
                         }
                         imageList.Images.Insert(index, scannedImage);
+                        scannedImage.MovedTo(index);
                         scannedImage.ThumbnailChanged += ImageThumbnailChanged;
                         scannedImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
                         AddThumbnails();
