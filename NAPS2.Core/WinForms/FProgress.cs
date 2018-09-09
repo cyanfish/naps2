@@ -95,15 +95,15 @@ namespace NAPS2.WinForms
             {
                 labelNumber.Text = "";
                 progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Value = 0;
                 progressBar.Maximum = 1;
+                progressBar.Value = 0;
             }
             else
             {
                 labelNumber.Text = string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
                 progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Value = status.CurrentProgress;
                 progressBar.Maximum = status.MaxProgress;
+                progressBar.Value = status.CurrentProgress;
             }
             // Force the progress bar to render immediately
             if (progressBar.Value < progressBar.Maximum)

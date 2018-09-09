@@ -35,14 +35,14 @@ namespace NAPS2.WinForms
             else if (status.MaxProgress == 0)
             {
                 progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Value = 0;
                 progressBar.Maximum = 1;
+                progressBar.Value = 0;
             }
             else
             {
                 progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Value = status.CurrentProgress;
                 progressBar.Maximum = status.MaxProgress;
+                progressBar.Value = status.CurrentProgress;
             }
             // Force the progress bar to render immediately
             if (progressBar.Value < progressBar.Maximum)
