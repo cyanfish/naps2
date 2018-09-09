@@ -81,6 +81,7 @@ namespace NAPS2.WinForms
         {
             lock (this)
             {
+                BeginUpdate();
                 for (int i = 0; i < ilThumbnailList.Images.Count; i++)
                 {
                     if (Items[i].Tag != allImages[i])
@@ -94,6 +95,7 @@ namespace NAPS2.WinForms
                     ilThumbnailList.Images.Add(GetThumbnail(allImages[i]));
                     Items.Add(ItemText, i).Tag = allImages[i];
                 }
+                EndUpdate();
             }
             Invalidate();
         }
@@ -102,6 +104,7 @@ namespace NAPS2.WinForms
         {
             lock (this)
             {
+                BeginUpdate();
                 foreach (var oldImg in CurrentImages.Except(allImages))
                 {
                     var item = Items.Cast<ListViewItem>().First(x => x.Tag == oldImg);
@@ -115,6 +118,7 @@ namespace NAPS2.WinForms
                     ilThumbnailList.Images.RemoveAt(item.ImageIndex);
                     Items.RemoveAt(item.Index);
                 }
+                EndUpdate();
             }
             Invalidate();
         }
@@ -123,6 +127,7 @@ namespace NAPS2.WinForms
         {
             lock (this)
             {
+                BeginUpdate();
                 int min = selection == null || !selection.Any() ? 0 : selection.Min();
                 int max = selection == null || !selection.Any() ? images.Count : selection.Max() + 1;
 
@@ -131,6 +136,7 @@ namespace NAPS2.WinForms
                     int imageIndex = Items[i].ImageIndex;
                     ilThumbnailList.Images[imageIndex] = GetThumbnail(images[i]);
                 }
+                EndUpdate();
             }
             Invalidate();
         }
@@ -139,12 +145,14 @@ namespace NAPS2.WinForms
         {
             lock (this)
             {
+                BeginUpdate();
                 var thumb = GetThumbnail(img);
                 if (thumb.Size == ThumbnailSize)
                 {
                     ilThumbnailList.Images[index] = thumb;
                     Invalidate(Items[index].Bounds);
                 }
+                EndUpdate();
             }
         }
 
@@ -152,6 +160,7 @@ namespace NAPS2.WinForms
         {
             lock (this)
             {
+                BeginUpdate();
                 if (ilThumbnailList.Images.Count > 0)
                 {
                     ilThumbnailList.Images.Clear();
@@ -169,6 +178,7 @@ namespace NAPS2.WinForms
                 }
 
                 ilThumbnailList.Images.AddRange(list.ToArray());
+                EndUpdate();
             }
         }
 
