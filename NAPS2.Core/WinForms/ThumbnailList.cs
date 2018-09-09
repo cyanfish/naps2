@@ -17,6 +17,7 @@ namespace NAPS2.WinForms
 
         static ThumbnailList()
         {
+            // Try to enable larger thumbnails via a reflection hack
             if (PlatformCompat.Runtime.SetImageListSizeOnImageCollection)
             {
                 imageSizeField = typeof(ImageList.ImageCollection).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
