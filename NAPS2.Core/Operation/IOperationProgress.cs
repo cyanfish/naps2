@@ -11,7 +11,13 @@ namespace NAPS2.Operation
     /// </summary>
     public interface IOperationProgress
     {
+        void Attach(IOperation op);
+
         void ShowProgress(IOperation op);
+
+        void ShowModalProgress(IOperation op);
+
+        void ShowBackgroundProgress(IOperation op);
 
         List<IOperation> ActiveOperations { get; }
     }

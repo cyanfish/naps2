@@ -7,11 +7,19 @@ namespace NAPS2.Automation
 {
     public class ConsoleOperationProgress : IOperationProgress
     {
+        public void Attach(IOperation op)
+        {
+        }
+
         public void ShowProgress(IOperation op)
         {
             op.Success?.Wait();
         }
 
-        public List<IOperation> ActiveOperations => throw new NotImplementedException();
+        public void ShowModalProgress(IOperation op) => throw new InvalidOperationException();
+
+        public void ShowBackgroundProgress(IOperation op) => throw new InvalidOperationException();
+
+        public List<IOperation> ActiveOperations => throw new InvalidOperationException();
     }
 }

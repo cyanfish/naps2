@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using NAPS2.Config;
 using NAPS2.Operation;
 
 namespace NAPS2.WinForms
@@ -10,27 +11,68 @@ namespace NAPS2.WinForms
     {
         private readonly IFormFactory formFactory;
         private readonly NotificationManager notificationManager;
+        private readonly IUserConfigManager userConfigManager;
 
-        private readonly List<IOperation> activeOperations = new List<IOperation>();
+        private readonly HashSet<IOperation> activeOperations = new HashSet<IOperation>();
 
-        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager)
+        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, IUserConfigManager userConfigManager)
         {
             this.formFactory = formFactory;
             this.notificationManager = notificationManager;
+            this.userConfigManager = userConfigManager;
+        }
+
+        public void Attach(IOperation op)
+        {
+            lock (this)
+            {
+                if (!activeOperations.Contains(op))
+                {
+                    activeOperations.Add(op);
+                    op.Finished += (sender, args) => activeOperations.Remove(op);
+                    if (op.IsFinished) activeOperations.Remove(op);
+                }
+            }
         }
 
         public void ShowProgress(IOperation op)
         {
-            lock (this)
+            if (userConfigManager.Config.BackgroundOperations.Contains(op.GetType().Name))
             {
-                activeOperations.Add(op);
-                op.Finished += (sender, args) => activeOperations.Remove(op);
-                if (op.IsFinished) activeOperations.Remove(op);
+                ShowBackgroundProgress(op);
+            }
+            else
+            {
+                ShowModalProgress(op);
+            }
+        }
+
+        public void ShowModalProgress(IOperation op)
+        {
+            Attach(op);
+
+            userConfigManager.Config.BackgroundOperations.Remove(op.GetType().Name);
+            userConfigManager.Save();
+
+            if (!op.IsFinished)
+            {
+                var form = formFactory.Create<FProgress>();
+                form.Operation = op;
+                form.ShowDialog();
             }
 
-            var form = formFactory.Create<FProgress>();
-            form.Operation = op;
-            form.ShowDialog();
+            if (!op.IsFinished)
+            {
+                ShowBackgroundProgress(op);
+            }
+        }
+
+        public void ShowBackgroundProgress(IOperation op)
+        {
+            Attach(op);
+
+            userConfigManager.Config.BackgroundOperations.Add(op.GetType().Name);
+            userConfigManager.Save();
 
             if (!op.IsFinished)
             {

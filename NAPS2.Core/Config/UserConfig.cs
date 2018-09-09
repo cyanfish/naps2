@@ -22,6 +22,8 @@ namespace NAPS2.Config
 
         public List<FormState> FormStates { get; set; } = new List<FormState>();
 
+        public HashSet<string> BackgroundOperations { get; set; } = new HashSet<string>();
+
         public DateTime? LastUpdateCheckDate { get; set; }
 
         public DateTime? FirstRunDate { get; set; }

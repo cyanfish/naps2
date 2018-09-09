@@ -8,14 +8,14 @@ namespace NAPS2.WinForms
 {
     public partial class OperationProgressNotifyWidget : NotifyWidgetBase
     {
-        private readonly IOperationProgress opModalProgress;
+        private readonly IOperationProgress operationProgress;
         private readonly IOperation op;
 
-        public OperationProgressNotifyWidget(IOperationProgress opModalProgress, IOperation op)
+        public OperationProgressNotifyWidget(IOperationProgress operationProgress, IOperation op)
         {
             InitializeComponent();
 
-            this.opModalProgress = opModalProgress;
+            this.operationProgress = operationProgress;
             this.op = op;
 
             cancelToolStripMenuItem.Visible = op.AllowCancel;
@@ -82,7 +82,7 @@ namespace NAPS2.WinForms
             if (e.Button == MouseButtons.Left)
             {
                 DoHideNotify();
-                opModalProgress.ShowProgress(op);
+                operationProgress.ShowModalProgress(op);
             }
         }
     }
