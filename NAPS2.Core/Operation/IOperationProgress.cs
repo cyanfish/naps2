@@ -13,6 +13,6 @@ namespace NAPS2.Operation
     {
         void ShowProgress(IOperation op);
 
-        IEnumerable<IOperation> ActiveOperations { get; }
+        List<IOperation> ActiveOperations { get; }
     }
 }

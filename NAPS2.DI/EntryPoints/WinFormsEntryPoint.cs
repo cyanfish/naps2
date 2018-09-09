@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.DI.Modules;
+using NAPS2.Operation;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using NAPS2.Worker;
@@ -38,6 +40,11 @@ namespace NAPS2.DI.EntryPoints
             // Show the main form
             var formFactory = kernel.Get<IFormFactory>();
             Application.Run(formFactory.Create<FDesktop>());
+
+            // Cancel and then wait for any pending operations so they can safely clean up
+            var operationProgress = kernel.Get<IOperationProgress>();
+            operationProgress.ActiveOperations.ForEach(op => op.Cancel());
+            Task.WaitAll(operationProgress.ActiveOperations.Select(op => op.Success).ToArray<Task>());
         }
 
         private static void UnhandledException(object sender, ThreadExceptionEventArgs threadExceptionEventArgs)

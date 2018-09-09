@@ -348,24 +348,13 @@ namespace NAPS2.WinForms
                 {
                     var result = MessageBox.Show(MiscResources.ExitWithActiveOperations, MiscResources.ActiveOperations,
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                    if (result == DialogResult.Yes)
-                    {
-                        foreach (var op in operationProgress.ActiveOperations)
-                        {
-                            op.Cancel();
-                        }
-                    }
-                    else
+                    if (result != DialogResult.Yes)
                     {
                         e.Cancel = true;
                     }
                 }
                 else
                 {
-                    foreach (var op in operationProgress.ActiveOperations)
-                    {
-                        op.Cancel();
-                    }
                     RecoveryImage.DisableRecoveryCleanup = true;
                 }
             }

@@ -17,7 +17,7 @@ namespace NAPS2.DI.Modules
             Bind<IPdfPasswordProvider>().To<WinFormsPdfPasswordProvider>();
             Bind<IErrorOutput>().To<MessageBoxErrorOutput>();
             Bind<IOverwritePrompt>().To<WinFormsOverwritePrompt>();
-            Bind<IOperationProgress>().To<WinFormsOperationProgress>();
+            Bind<IOperationProgress>().To<WinFormsOperationProgress>().InSingletonScope();
             Bind<IComponentInstallPrompt>().To<WinFormsComponentInstallPrompt>();
         }
     }

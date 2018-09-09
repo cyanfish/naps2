@@ -38,7 +38,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public IEnumerable<IOperation> ActiveOperations
+        public List<IOperation> ActiveOperations
         {
             get
             {
