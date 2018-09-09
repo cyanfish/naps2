@@ -14,20 +14,13 @@ namespace NAPS2.Config
 {
     public class UserConfig
     {
-        public UserConfig()
-        {
-            FormStates = new List<FormState>();
-            CustomPageSizePresets = new List<NamedPageSize>();
-            ThumbnailSize = ThumbnailRenderer.DEFAULT_SIZE;
-        }
-
         public const int CURRENT_VERSION = 2;
 
         public int Version { get; set; }
 
         public string Culture { get; set; }
 
-        public List<FormState> FormStates { get; set; }
+        public List<FormState> FormStates { get; set; } = new List<FormState>();
 
         public DateTime? LastUpdateCheckDate { get; set; }
 
@@ -53,7 +46,7 @@ namespace NAPS2.Config
 
         public EmailSetup EmailSetup { get; set; }
 
-        public int ThumbnailSize { get; set; }
+        public int ThumbnailSize { get; set; } = ThumbnailRenderer.DEFAULT_SIZE;
 
         public BatchSettings LastBatchSettings { get; set; }
 
@@ -61,6 +54,6 @@ namespace NAPS2.Config
 
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
 
-        public List<NamedPageSize> CustomPageSizePresets { get; set; }
+        public List<NamedPageSize> CustomPageSizePresets { get; set; } = new List<NamedPageSize>();
     }
 }
