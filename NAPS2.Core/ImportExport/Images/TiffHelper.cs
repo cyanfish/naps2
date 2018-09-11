@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
@@ -20,13 +21,14 @@ namespace NAPS2.ImportExport.Images
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
-        public async Task<bool> SaveMultipage(List<ScannedImage.Snapshot> snapshots, string location, TiffCompression compression, ProgressHandler progressCallback)
+        public async Task<bool> SaveMultipage(List<ScannedImage.Snapshot> snapshots, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             try
             {
                 ImageCodecInfo codecInfo = GetCodecForString("TIFF");
 
-                if (!progressCallback(0, snapshots.Count))
+                progressCallback(0, snapshots.Count);
+                if (cancelToken.IsCancellationRequested)
                 {
                     return false;
                 }
@@ -64,7 +66,8 @@ namespace NAPS2.ImportExport.Images
                             if (snapshots[i] == null)
                                 break;
 
-                            if (!progressCallback(i, snapshots.Count))
+                            progressCallback(i, snapshots.Count);
+                            if (cancelToken.IsCancellationRequested)
                             {
                                 bitmap0.Dispose();
                                 File.Delete(location);

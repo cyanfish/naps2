@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -19,14 +20,14 @@ namespace NAPS2.ImportExport.Images
             this.thumbnailRenderer = thumbnailRenderer;
         }
 
-        public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
+        public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             var source = new ScannedImageSource.Concrete();
             Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    if (!progressCallback(0, 1))
+                    if (cancelToken.IsCancellationRequested)
                     {
                         source.Done();
                         return;
@@ -50,7 +51,8 @@ namespace NAPS2.ImportExport.Images
                         int i = 0;
                         foreach (var frameIndex in importParams.Slice.Indices(frameCount))
                         {
-                            if (!progressCallback(i++, frameCount))
+                            progressCallback(i++, frameCount);
+                            if (cancelToken.IsCancellationRequested)
                             {
                                 source.Done();
                                 return;

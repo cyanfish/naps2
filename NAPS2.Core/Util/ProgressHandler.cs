@@ -9,6 +9,5 @@ namespace NAPS2.Util
     /// </summary>
     /// <param name="current">The number of completed items.</param>
     /// <param name="max">The total number of items.</param>
-    /// <returns>True if the operation should continue, false if it should abort.</returns>
-    public delegate bool ProgressHandler(int current, int max);
+    public delegate void ProgressHandler(int current, int max);
 }

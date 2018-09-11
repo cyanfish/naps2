@@ -37,7 +37,7 @@ namespace NAPS2.ImportExport.Pdf
             this.appConfigManager = appConfigManager;
         }
 
-        public async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback)
+        public async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -94,8 +94,8 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 bool result = ocrEngine != null
-                    ? BuildDocumentWithOcr(progressCallback, document, compat, snapshots, ocrEngine, ocrParams)
-                    : BuildDocumentWithoutOcr(progressCallback, document, compat, snapshots);
+                    ? BuildDocumentWithOcr(progressCallback, cancelToken, document, compat, snapshots, ocrEngine, ocrParams)
+                    : BuildDocumentWithoutOcr(progressCallback, cancelToken, document, compat, snapshots);
                 if (!result)
                 {
                     return false;
@@ -123,9 +123,10 @@ namespace NAPS2.ImportExport.Pdf
             }, TaskCreationOptions.LongRunning);
         }
 
-        private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
+        private bool BuildDocumentWithoutOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots)
         {
             int progress = 0;
+            progressCallback(progress, snapshots.Count);
             foreach (var snapshot in snapshots)
             {
                 bool importedPdfPassThrough = snapshot.Source.FileFormat == null && !snapshot.TransformList.Any();
@@ -139,7 +140,7 @@ namespace NAPS2.ImportExport.Pdf
                     using (Stream stream = scannedImageRenderer.RenderToStream(snapshot).Result)
                     using (var img = XImage.FromStream(stream))
                     {
-                        if (!progressCallback(progress, snapshots.Count))
+                        if (cancelToken.IsCancellationRequested)
                         {
                             return false;
                         }
@@ -149,21 +150,23 @@ namespace NAPS2.ImportExport.Pdf
                     }
                 }
                 progress++;
+                progressCallback(progress, snapshots.Count);
             }
             return true;
         }
 
-        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, IOcrEngine ocrEngine, OcrParams ocrParams)
+        private bool BuildDocumentWithOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, IOcrEngine ocrEngine, OcrParams ocrParams)
         {
             // Use a pipeline so that multiple pages/images can be processed in parallel
             // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
 
             int progress = 0;
+            progressCallback(progress, snapshots.Count);
             Pipeline.For(snapshots).Step(snapshot =>
             {
                 // Step 1: Load the image into memory, draw it on a new PDF page, and save a copy of the processed image to disk for OCR
-
-                if (!progressCallback(progress, snapshots.Count))
+                
+                if (cancelToken.IsCancellationRequested)
                 {
                     return null;
                 }
@@ -212,7 +215,7 @@ namespace NAPS2.ImportExport.Pdf
                 using (Stream stream = scannedImageRenderer.RenderToStream(snapshot).Result)
                 using (var img = XImage.FromStream(stream))
                 {
-                    if (!progressCallback(progress, snapshots.Count))
+                    if (cancelToken.IsCancellationRequested)
                     {
                         return null;
                     }
@@ -222,7 +225,7 @@ namespace NAPS2.ImportExport.Pdf
                         DrawImageOnPage(page, img, compat);
                     }
 
-                    if (!progressCallback(progress, snapshots.Count))
+                    if (cancelToken.IsCancellationRequested)
                     {
                         return null;
                     }
@@ -241,13 +244,13 @@ namespace NAPS2.ImportExport.Pdf
                 OcrResult ocrResult;
                 try
                 {
-                    if (!progressCallback(progress, snapshots.Count))
+                    if (cancelToken.IsCancellationRequested)
                     {
                         return null;
                     }
                     
                     // ReSharper disable once AccessToModifiedClosure
-                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrParams, () => !progressCallback(progress, snapshots.Count));
+                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrParams, cancelToken);
                 }
                 finally
                 {
@@ -255,7 +258,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
 
                 // The final pipeline step is pretty fast, so updating progress here is more accurate
-                if (progressCallback(progress, snapshots.Count))
+                if (!cancelToken.IsCancellationRequested)
                 {
                     Interlocked.Increment(ref progress);
                     progressCallback(progress, snapshots.Count);
@@ -270,13 +273,13 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     return;
                 }
-                if (!progressCallback(progress, snapshots.Count))
+                if (cancelToken.IsCancellationRequested)
                 {
                     return;
                 }
                 DrawOcrTextOnPage(page, ocrResult);
             });
-            return progressCallback(progress, snapshots.Count);
+            return !cancelToken.IsCancellationRequested;
         }
 
         private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, ScannedImage image)

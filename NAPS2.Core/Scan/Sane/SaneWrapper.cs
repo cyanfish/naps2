@@ -41,7 +41,7 @@ namespace NAPS2.Scan.Sane
             return new SaneOptionParser().Parse(proc.StandardOutput);
         }
 
-        public Stream ScanOne(string deviceId, KeyValueScanOptions options, ProgressHandler progressCallback)
+        public Stream ScanOne(string deviceId, KeyValueScanOptions options, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             // Start the scanning process
             var profileOptions = options == null ? "" : string.Join("", options.Select(kvp => $@" {kvp.Key} ""{kvp.Value.Replace("\"", "\\\"")}"""));
@@ -53,7 +53,6 @@ namespace NAPS2.Scan.Sane
             var outputFinishedWaitHandle = new AutoResetEvent(false);
             var errorOutput = new List<string>();
             bool cancelled = false;
-            int currentProgress = 0;
             const int maxProgress = 1000;
 
             // Set up events
@@ -64,7 +63,7 @@ namespace NAPS2.Scan.Sane
                     var match = ProgressRegex.Match(args.Data);
                     if (match.Success)
                     {
-                        currentProgress = (int)float.Parse(match.Groups[1].Value) * 10;
+                        progressCallback?.Invoke((int)float.Parse(match.Groups[1].Value) * 10, maxProgress);
                     }
                     else
                     {
@@ -87,7 +86,7 @@ namespace NAPS2.Scan.Sane
             // Wait for the process to stop (or for the user to cancel)
             while (!procExitWaitHandle.WaitOne(200))
             {
-                if (progressCallback?.Invoke(currentProgress, maxProgress) == false)
+                if (cancelToken.IsCancellationRequested)
                 {
                     cancelled = true;
                     SafeStopProcess(proc, procExitWaitHandle);

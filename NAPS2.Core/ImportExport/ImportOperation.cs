@@ -40,7 +40,7 @@ namespace NAPS2.ImportExport
                         {
                             Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
                             InvokeStatusChanged();
-                            var imageSrc = scannedImageImporter.Import(fileName, new ImportParams(), oneFile ? OnProgress : new ProgressHandler((j, k) => !CancelToken.IsCancellationRequested));
+                            var imageSrc = scannedImageImporter.Import(fileName, new ImportParams(), oneFile ? OnProgress : new ProgressHandler((j, k) => { }), CancelToken);
                             await imageSrc.ForEach(imageCallback);
                         }
                         catch (Exception ex)

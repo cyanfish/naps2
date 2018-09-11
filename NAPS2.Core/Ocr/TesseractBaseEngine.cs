@@ -34,7 +34,7 @@ namespace NAPS2.Ocr
             return langCode.Split('+').All(code => InstalledLanguages.Any(x => x.Code == code));
         }
 
-        public OcrResult ProcessImage(string imagePath, OcrParams ocrParams, Func<bool> cancelCallback)
+        public OcrResult ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
         {
             string tempHocrFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             string tempHocrFilePathWithExt = tempHocrFilePath + TesseractHocrExtension;
@@ -74,7 +74,7 @@ namespace NAPS2.Ocr
                 var stopwatch = Stopwatch.StartNew();
                 while (!tesseractProcess.WaitForExit(CHECK_INTERVAL))
                 {
-                    if (stopwatch.ElapsedMilliseconds >= timeout || cancelCallback())
+                    if (stopwatch.ElapsedMilliseconds >= timeout || cancelToken.IsCancellationRequested)
                     {
                         if (stopwatch.ElapsedMilliseconds >= timeout)
                         {

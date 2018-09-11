@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
@@ -35,12 +36,12 @@ namespace NAPS2.ImportExport.Pdf
             this.pdfRenderer = pdfRenderer;
         }
 
-        public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback)
+        public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             var source = new ScannedImageSource.Concrete();
             Task.Factory.StartNew(async () =>
             {
-                if (!progressCallback(0, 0))
+                if (cancelToken.IsCancellationRequested)
                 {
                     source.Done();
                 }
@@ -68,7 +69,11 @@ namespace NAPS2.ImportExport.Pdf
 
                     var pages = importParams.Slice.Indices(document.PageCount)
                         .Select(index => document.Pages[index])
-                        .TakeWhile(page => progressCallback(i++, document.PageCount));
+                        .TakeWhile(page =>
+                        {
+                            progressCallback(i++, document.PageCount);
+                            return !cancelToken.IsCancellationRequested;
+                        });
                     if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                     {
                         pdfRenderer.ThrowIfCantRender();

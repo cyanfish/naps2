@@ -55,7 +55,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 try
                 {
-                    return await pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress);
+                    return await pdfExporter.Export(subFileName, snapshots, pdfSettings, ocrParams, OnProgress, CancelToken);
                 }
                 catch (UnauthorizedAccessException ex)
                 {

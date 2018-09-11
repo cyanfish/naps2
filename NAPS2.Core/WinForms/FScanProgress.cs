@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
@@ -13,11 +14,13 @@ namespace NAPS2.WinForms
 {
     public partial class FScanProgress : FormBase
     {
+        private readonly CancellationTokenSource cts = new CancellationTokenSource();
         private bool isComplete;
-        private bool cancel;
 
         public FScanProgress()
         {
+            CancelToken = cts.Token;
+
             RestoreFormState = false;
             InitializeComponent();
         }
@@ -30,7 +33,9 @@ namespace NAPS2.WinForms
 
         public Exception Exception { get; private set; }
 
-        public bool OnProgress(int current, int max)
+        public CancellationToken CancelToken { get; private set; }
+
+        public void OnProgress(int current, int max)
         {
             if (current > 0)
             {
@@ -41,7 +46,6 @@ namespace NAPS2.WinForms
                     progressBar.Value = current;
                 });
             }
-            return !cancel;
         }
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
@@ -73,7 +77,7 @@ namespace NAPS2.WinForms
                 SafeInvoke(() =>
                 {
                     isComplete = true;
-                    DialogResult = cancel ? DialogResult.Cancel : DialogResult.OK;
+                    DialogResult = CancelToken.IsCancellationRequested ? DialogResult.Cancel : DialogResult.OK;
                     Close();
                 });
             }, TaskCreationOptions.LongRunning);
@@ -81,7 +85,7 @@ namespace NAPS2.WinForms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            cancel = true;
+            cts.Cancel();
             btnCancel.Enabled = false;
         }
 

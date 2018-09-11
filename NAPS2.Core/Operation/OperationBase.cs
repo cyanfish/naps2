@@ -88,12 +88,11 @@ namespace NAPS2.Operation
             Error?.Invoke(this, args);
         }
 
-        protected bool OnProgress(int current, int max)
+        protected void OnProgress(int current, int max)
         {
             Status.CurrentProgress = current;
             Status.MaxProgress = max;
             InvokeStatusChanged();
-            return !cts.Token.IsCancellationRequested;
         }
     }
 }

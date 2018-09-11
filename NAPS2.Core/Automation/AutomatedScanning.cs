@@ -268,7 +268,7 @@ namespace NAPS2.Automation
                         Slice = Slice.Parse(filePath, out string actualPath),
                         DetectPatchCodes = options.SplitPatchT
                     };
-                    var images = await scannedImageImporter.Import(actualPath, importParams, (j, k) => true).ToList();
+                    var images = await scannedImageImporter.Import(actualPath, importParams, (j, k) => { }, CancellationToken.None).ToList();
                     scanList.Add(images);
                 }
                 catch (Exception ex)

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Platform;
@@ -240,12 +241,12 @@ namespace NAPS2.Scan.Sane
                 Stream stream;
                 if (ScanParams.NoUI)
                 {
-                    stream = saneWrapper.ScanOne(ScanDevice.ID, options.Value, null);
+                    stream = saneWrapper.ScanOne(ScanDevice.ID, options.Value, null, CancellationToken.None);
                 }
                 else
                 {
                     var form = formFactory.Create<FScanProgress>();
-                    form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress);
+                    form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress, form.CancelToken);
                     form.PageNumber = pageNumber;
                     form.ShowDialog();
 

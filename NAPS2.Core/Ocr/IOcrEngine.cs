@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr
@@ -9,7 +10,7 @@ namespace NAPS2.Ocr
     {
         bool CanProcess(string langCode);
 
-        OcrResult ProcessImage(string imagePath, OcrParams ocrParams, Func<bool> cancelCallback);
+        OcrResult ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken);
 
         bool IsSupported { get; }
 
