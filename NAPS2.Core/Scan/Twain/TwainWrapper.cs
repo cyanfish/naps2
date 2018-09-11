@@ -327,6 +327,12 @@ namespace NAPS2.Scan.Twain
                 ds.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
             }
 
+            // Hide UI for console
+            if (scanParams.NoUI)
+            {
+                ds.Capabilities.CapIndicators.SetValue(BoolType.False);
+            }
+
             // Paper Source
             switch (scanProfile.PaperSource)
             {
