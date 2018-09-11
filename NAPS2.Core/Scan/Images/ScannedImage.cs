@@ -161,15 +161,6 @@ namespace NAPS2.Scan.Images
 
         public Snapshot Preserve() => new Snapshot(this);
 
-        public Snapshot Preserve(out int state)
-        {
-            lock (this)
-            {
-                state = transformState;
-                return Preserve();
-            }
-        }
-
         [Serializable]
         [KnownType("KnownTypes")]
         public class Snapshot : IDisposable, ISerializable
@@ -187,12 +178,15 @@ namespace NAPS2.Scan.Images
                     source.snapshotCount++;
                     Source = source;
                     TransformList = source.transformList.ToList();
+                    TransformState = source.transformState;
                 }
             }
 
             public ScannedImage Source { get; }
 
             public List<Transform> TransformList { get; }
+
+            public int TransformState { get; }
 
             public void Dispose()
             {
@@ -212,12 +206,14 @@ namespace NAPS2.Scan.Images
             {
                 info.AddValue("RecoveryIndexImage", Source.RecoveryIndexImage);
                 info.AddValue("TransformList", TransformList);
+                info.AddValue("TransformState", TransformState);
             }
 
             private Snapshot(SerializationInfo info, StreamingContext context)
             {
                 Source = new ScannedImage((RecoveryIndexImage)info.GetValue("RecoveryIndexImage", typeof(RecoveryIndexImage)));
                 TransformList = (List<Transform>)info.GetValue("TransformList", typeof(List<Transform>));
+                TransformState = (int)info.GetValue("TransformState", typeof(int));
             }
 
             // ReSharper disable once UnusedMember.Local

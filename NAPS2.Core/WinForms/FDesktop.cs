@@ -1814,7 +1814,7 @@ namespace NAPS2.WinForms
                         {
                             continue;
                         }
-                        using (var snapshot = next.Preserve(out var state))
+                        using (var snapshot = next.Preserve())
                         {
                             var thumb = worker != null
                                 ? new Bitmap(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)))
@@ -1825,7 +1825,7 @@ namespace NAPS2.WinForms
                                 continue;
                             }
 
-                            next.SetThumbnail(thumb, state);
+                            next.SetThumbnail(thumb, snapshot.TransformState);
                         }
                         fallback.Reset();
                     }
