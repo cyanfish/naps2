@@ -844,6 +844,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OCR Progress.
+        /// </summary>
+        internal static string OcrProgress {
+            get {
+                return ResourceManager.GetString("OcrProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An update to OCR is available..
         /// </summary>
         internal static string OcrUpdateAvailable {
@@ -939,6 +948,15 @@ namespace NAPS2.Lang.Resources {
         internal static string ResetImage {
             get {
                 return ResourceManager.GetString("ResetImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running OCR....
+        /// </summary>
+        internal static string RunningOcr {
+            get {
+                return ResourceManager.GetString("RunningOcr", resourceCulture);
             }
         }
         

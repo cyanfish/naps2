@@ -456,4 +456,10 @@
   <data name="DriverNotSupported" xml:space="preserve">
     <value>The selected driver is not supported on this system.</value>
   </data>
+  <data name="OcrProgress" xml:space="preserve">
+    <value>OCR Progress</value>
+  </data>
+  <data name="RunningOcr" xml:space="preserve">
+    <value>Running OCR...</value>
+  </data>
 </root>

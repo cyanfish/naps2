@@ -18,7 +18,8 @@ namespace NAPS2.Automation
 
         public void ShowModalProgress(IOperation op) => throw new InvalidOperationException();
 
-        public void ShowBackgroundProgress(IOperation op) => throw new InvalidOperationException();
+        public void ShowBackgroundProgress(IOperation op) {
+        }
 
         public List<IOperation> ActiveOperations => throw new InvalidOperationException();
     }

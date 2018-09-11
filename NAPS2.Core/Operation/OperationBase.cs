@@ -26,7 +26,7 @@ namespace NAPS2.Operation
 
         public bool IsFinished { get; protected set; }
 
-        public void Cancel()
+        public virtual void Cancel()
         {
             cts.Cancel();
         }
