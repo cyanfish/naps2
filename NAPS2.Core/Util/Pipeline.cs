@@ -286,6 +286,17 @@ namespace NAPS2.Util
         }
 
         /// <summary>
+        /// Adds a new step to the pipeline.
+        /// </summary>
+        /// <param name="syntax"></param>
+        /// <param name="pipelineStepFunc"></param>
+        /// <returns></returns>
+        public static IPipelineSyntax<T2> Step<TIn1, TIn2, TIn3, T2>(this IPipelineSyntax<Tuple<TIn1, TIn2, TIn3>> syntax, Func<TIn1, TIn2, TIn3, T2> pipelineStepFunc)
+        {
+            return syntax.Step(tuple => pipelineStepFunc(tuple.Item1, tuple.Item2, tuple.Item3));
+        }
+
+        /// <summary>
         /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order is maintained.
         /// </summary>
         /// <param name="syntax"></param>
@@ -297,6 +308,17 @@ namespace NAPS2.Util
         }
 
         /// <summary>
+        /// Adds a new step to the pipeline, where multiple items can be processed at once. Note: order is maintained.
+        /// </summary>
+        /// <param name="syntax"></param>
+        /// <param name="pipelineStepFunc"></param>
+        /// <returns></returns>
+        public static IPipelineSyntax<T2> StepParallel<TIn1, TIn2, TIn3, T2>(this IPipelineSyntax<Tuple<TIn1, TIn2, TIn3>> syntax, Func<TIn1, TIn2, TIn3, T2> pipelineStepFunc)
+        {
+            return syntax.StepParallel(tuple => pipelineStepFunc(tuple.Item1, tuple.Item2, tuple.Item3));
+        }
+
+        /// <summary>
         /// Runs the pipeline with the previously defined steps, performing the specified action on each item in the result. Blocks until the pipeline is finished.
         /// </summary>
         /// <param name="syntax"></param>
@@ -304,6 +326,16 @@ namespace NAPS2.Util
         public static void Run<TIn1, TIn2>(this IPipelineSyntax<Tuple<TIn1, TIn2>> syntax, Action<TIn1, TIn2> pipelineFinishAction)
         {
             syntax.Run(tuple => pipelineFinishAction(tuple.Item1, tuple.Item2));
+        }
+
+        /// <summary>
+        /// Runs the pipeline with the previously defined steps, performing the specified action on each item in the result. Blocks until the pipeline is finished.
+        /// </summary>
+        /// <param name="syntax"></param>
+        /// <param name="pipelineFinishAction"></param>
+        public static void Run<TIn1, TIn2, TIn3>(this IPipelineSyntax<Tuple<TIn1, TIn2, TIn3>> syntax, Action<TIn1, TIn2, TIn3> pipelineFinishAction)
+        {
+            syntax.Run(tuple => pipelineFinishAction(tuple.Item1, tuple.Item2, tuple.Item3));
         }
 
         #endregion
