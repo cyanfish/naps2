@@ -112,13 +112,13 @@ namespace NAPS2.Scan.Batch
 
             private async Task Input()
             {
-                await Task.Factory.StartNew(() =>
+                await Task.Factory.StartNew(async () =>
                 {
                     scans = new List<List<ScannedImage>>();
 
                     if (Settings.ScanType == BatchScanType.Single)
                     {
-                        if (!InputOneScan(-1))
+                        if (!await InputOneScan(-1))
                         {
                             return;
                         }
@@ -137,7 +137,7 @@ namespace NAPS2.Scan.Batch
                                 }
                             }
 
-                            if (!InputOneScan(i))
+                            if (!await InputOneScan(i))
                             {
                                 return;
                             }
@@ -153,7 +153,7 @@ namespace NAPS2.Scan.Batch
                         int i = 0;
                         do
                         {
-                            if (!InputOneScan(i++))
+                            if (!await InputOneScan(i++))
                             {
                                 return;
                             }
@@ -164,7 +164,7 @@ namespace NAPS2.Scan.Batch
                             }
                         } while (PromptForNextScan());
                     }
-                }, TaskCreationOptions.LongRunning);
+                }, TaskCreationOptions.LongRunning).Unwrap();
             }
 
             private bool ThreadSleepWithCancel(TimeSpan sleepDuration, TimeSpan cancelCheckInterval, Func<bool> cancelCheck)
@@ -189,7 +189,7 @@ namespace NAPS2.Scan.Batch
                 return true;
             }
 
-            private bool InputOneScan(int scanNumber)
+            private async Task<bool> InputOneScan(int scanNumber)
             {
                 var scan = new List<ScannedImage>();
                 int pageNumber = 1;
@@ -201,15 +201,7 @@ namespace NAPS2.Scan.Batch
                 }
                 try
                 {
-                    if (profile.DriverName == TwainScanDriver.DRIVER_NAME || profile.UseNativeUI)
-                    {
-                        // Apart from WIA with predefined settings, the actual scan needs to be done on the UI thread
-                        BatchForm.SafeInvoke(() => DoScan(scanNumber, scan, pageNumber));
-                    }
-                    else
-                    {
-                        DoScan(scanNumber, scan, pageNumber);
-                    }
+                    await DoScan(scanNumber, scan, pageNumber);
                 }
                 catch (OperationCanceledException)
                 {
@@ -225,9 +217,9 @@ namespace NAPS2.Scan.Batch
                 return true;
             }
 
-            private void DoScan(int scanNumber, List<ScannedImage> scan, int pageNumber)
+            private async Task DoScan(int scanNumber, List<ScannedImage> scan, int pageNumber)
             {
-                scanPerformer.PerformScan(profile, scanParams, BatchForm, null, image =>
+                await scanPerformer.PerformScan(profile, scanParams, BatchForm, null, image =>
                 {
                     scan.Add(image);
                     if (!ProgressCallback(scanNumber == -1
