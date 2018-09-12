@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using NAPS2.Util;
@@ -15,6 +16,8 @@ namespace NAPS2.Worker
 
         public IWorkerCallback Callback { get; set; }
 
+        public Process Process { get; set; }
+
         public void Dispose()
         {
             try
@@ -23,6 +26,14 @@ namespace NAPS2.Worker
             }
             catch (CommunicationObjectFaultedException)
             {
+            }
+            catch (Exception e)
+            {
+                Log.ErrorException("Error cleaning up worker", e);
+            }
+            try
+            {
+                Process.Kill();
             }
             catch (Exception e)
             {

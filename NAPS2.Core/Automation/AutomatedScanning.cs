@@ -571,8 +571,7 @@ namespace NAPS2.Automation
                     return;
                 }
             }
-
-            IWin32Window parentWindow = new Form { Visible = false };
+            
             totalPagesScanned = 0;
             foreach (int i in Enumerable.Range(1, options.Number))
             {
@@ -584,7 +583,7 @@ namespace NAPS2.Automation
                 OutputVerbose(ConsoleResources.StartingScan, i, options.Number);
                 pagesScanned = 0;
                 scanList.Add(new List<ScannedImage>());
-                await scanPerformer.PerformScan(profile, new ScanParams { NoUI = true, NoAutoSave = !options.AutoSave, DetectPatchCodes = options.SplitPatchT }, parentWindow, null, ReceiveScannedImage);
+                await scanPerformer.PerformScan(profile, new ScanParams { NoUI = true, NoAutoSave = !options.AutoSave, DetectPatchCodes = options.SplitPatchT }, null, null, ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }

@@ -15,6 +15,7 @@ using NAPS2.WinForms;
 using NTwain;
 using NTwain.Data;
 using NAPS2.Util;
+using NAPS2.Worker;
 
 namespace NAPS2.Scan.Twain
 {
@@ -71,6 +72,10 @@ namespace NAPS2.Scan.Twain
         public void Scan(IWin32Window dialogParent, bool activate, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
             ScannedImageSource.Concrete source)
         {
+            if (dialogParent == null)
+            {
+                dialogParent = new BackgroundForm();
+            }
             if (scanProfile.TwainImpl == TwainImpl.Legacy)
             {
                 Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, formFactory, source);
@@ -79,7 +84,7 @@ namespace NAPS2.Scan.Twain
 
             PlatformInfo.Current.PreferNewDSM = scanProfile.TwainImpl != TwainImpl.OldDsm;
             var session = new TwainSession(TwainAppId);
-            var twainForm = formFactory.Create<FTwainGui>();
+            var twainForm = scanParams.NoUI ? new Form { WindowState = FormWindowState.Minimized, ShowInTaskbar = false } : formFactory.Create<FTwainGui>();
             Exception error = null;
             bool cancel = false;
             DataSource ds = null;
@@ -168,7 +173,7 @@ namespace NAPS2.Scan.Twain
 
             twainForm.Shown += (sender, eventArgs) =>
             {
-                if (activate)
+                if (!scanParams.NoUI && activate)
                 {
                     // TODO: Set this flag based on whether NAPS2 already has focus
                     // http://stackoverflow.com/questions/7162834/determine-if-current-application-is-activated-has-focus

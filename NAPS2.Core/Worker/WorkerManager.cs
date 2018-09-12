@@ -96,7 +96,7 @@ namespace NAPS2.Worker
                     },
                     new EndpointAddress(pipeName));
                 var channel = channelFactory.CreateChannel();
-                _workerQueue.Add(new WorkerContext { Service = channel, Callback = callback});
+                _workerQueue.Add(new WorkerContext { Service = channel, Callback = callback, Process = proc });
             });
         }
 

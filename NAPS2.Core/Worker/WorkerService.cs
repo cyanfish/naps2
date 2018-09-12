@@ -36,7 +36,6 @@ namespace NAPS2.Worker
 
         public void Init(string recoveryFolderPath)
         {
-            //OperationContext.Current.Channel.Closed += (sender, args) => Application.Exit();
             Callback = OperationContext.Current.GetCallbackChannel<IWorkerCallback>();
             RecoveryImage.RecoveryFolder = new DirectoryInfo(recoveryFolderPath);
         }
@@ -50,7 +49,7 @@ namespace NAPS2.Worker
         {
             try
             {
-                twainWrapper.Scan(new Win32Window(hwnd), true, scanDevice, scanProfile, scanParams, new WorkerImageSource(Callback));
+                twainWrapper.Scan(hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), true, scanDevice, scanProfile, scanParams, new WorkerImageSource(Callback));
             }
             catch (Exception e)
             {

@@ -91,9 +91,9 @@ namespace NAPS2.Scan
             {
                 throw new InvalidOperationException("IScanDriver.ScanDevice must be specified before calling Scan().");
             }
-            if (DialogParent == null)
+            if (DialogParent == null && !ScanParams.NoUI)
             {
-                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan().");
+                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan() without NoUI.");
             }
             
             var source = new ScannedImageSource.Concrete();

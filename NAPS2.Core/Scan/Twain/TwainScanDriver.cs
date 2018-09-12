@@ -76,7 +76,7 @@ namespace NAPS2.Scan.Twain
                     using (var worker = workerServiceFactory.Create())
                     {
                         worker.Callback.ImageCallback += source.Put;
-                        worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent.SafeHandle());
+                        worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent?.SafeHandle() ?? IntPtr.Zero);
                         worker.Callback.WaitForFinish();
                     }
                 }
