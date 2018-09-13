@@ -28,6 +28,30 @@ namespace NAPS2.Scan.Images
             }
         }
 
+        public ScannedImageSource Then(Action<ScannedImage> action)
+        {
+            return new ThenSource(this, action);
+        }
+
+        private class ThenSource : ScannedImageSource
+        {
+            private readonly ScannedImageSource inner;
+            private readonly Action<ScannedImage> action;
+
+            public ThenSource(ScannedImageSource scannedImageSource, Action<ScannedImage> action)
+            {
+                inner = scannedImageSource;
+                this.action = action;
+            }
+
+            public override async Task<ScannedImage> Next()
+            {
+                var image = await inner.Next();
+                action(image);
+                return image;
+            }
+        }
+
         public class Concrete : ScannedImageSource
         {
             private readonly BlockingCollection<ScannedImage> collection = new BlockingCollection<ScannedImage>();

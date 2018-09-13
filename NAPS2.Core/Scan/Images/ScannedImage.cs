@@ -96,6 +96,8 @@ namespace NAPS2.Scan.Images
                     thumbnail.Dispose();
                     thumbnail = null;
                 }
+
+                FullyDisposed?.Invoke(this, new EventArgs());
             }
         }
 
@@ -153,6 +155,8 @@ namespace NAPS2.Scan.Images
         public EventHandler ThumbnailChanged;
 
         public EventHandler ThumbnailInvalidated;
+
+        public EventHandler FullyDisposed;
 
         public void MovedTo(int index)
         {

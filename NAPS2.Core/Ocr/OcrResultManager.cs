@@ -46,7 +46,7 @@ namespace NAPS2.Ocr
                     File.Delete(tempImageFilePath);
                     return req.Result;
                 }
-                // Manage ownership of the provided temp file, if any
+                // Manage ownership of the provided temp file
                 if (req.TempImageFilePath == null)
                 {
                     req.TempImageFilePath = tempImageFilePath;
@@ -68,17 +68,80 @@ namespace NAPS2.Ocr
                 // Decrement the reference count
                 req.ForegroundCount -= 1;
                 // If all requestors have cancelled and there's no result to cache, delete the request
-                if (req.ForegroundCount + req.BackgroundCount == 0 && req.Result == null)
-                {
-                    if (!req.IsProcessing) File.Delete(tempImageFilePath);
-                    req.CancelSource.Cancel();
-                    requestCache.Remove(req.Params);
-                }
+                DestroyRequest(req);
             }
             // If no requests are pending, stop the worker threads
             EnsureWorkerThreads();
             // May return null if cancelled
             return req.Result;
+        }
+
+        public void StartBackground(ScannedImage.Snapshot snapshot)
+        {
+            OcrRequest req;
+            CancellationTokenSource cts = new CancellationTokenSource();
+            lock (this)
+            {
+                var ocrEngine = ocrManager.ActiveEngine;
+                if (ocrEngine == null) return;
+                var ocrParams = ocrManager.DefaultParams;
+
+                var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
+                req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
+                // Fast path for cached results
+                if (req.Result != null)
+                {
+                    return;
+                }
+                // Manage ownership of the provided snapshot
+                if (req.Snapshot == null)
+                {
+                    req.Snapshot = snapshot;
+                }
+                else
+                {
+                    snapshot.Dispose();
+                }
+                // Increment the reference count
+                req.BackgroundCount += 1;
+                snapshot.Source.ThumbnailInvalidated += (sender, args) => cts.Cancel();
+                snapshot.Source.FullyDisposed += (sender, args) => cts.Cancel();
+                queueWaitHandle.Set();
+            }
+            // If no worker threads are running, start them
+            EnsureWorkerThreads();
+            var op = StartingOne();
+            Task.Factory.StartNew(() =>
+            {
+                WaitHandle.WaitAny(new[] {req.WaitHandle, cts.Token.WaitHandle, op.CancelToken.WaitHandle});
+                lock (this)
+                {
+                    // Decrement the reference count
+                    req.BackgroundCount -= 1;
+                    // If all requestors have cancelled and there's no result to cache, delete the request
+                    DestroyRequest(req);
+                }
+                FinishedOne();
+                // If no requests are pending, stop the worker threads
+                EnsureWorkerThreads();
+            }, TaskCreationOptions.LongRunning);
+        }
+
+        private void DestroyRequest(OcrRequest req)
+        {
+            if (req.ForegroundCount + req.BackgroundCount == 0)
+            {
+                if (!req.IsProcessing)
+                {
+                    req.Snapshot?.Dispose();
+                    if (req.TempImageFilePath != null) File.Delete(req.TempImageFilePath);
+                }
+                if (req.Result == null)
+                {
+                    req.CancelSource.Cancel();
+                    requestCache.Remove(req.Params);
+                }
+            }
         }
 
         private void EnsureWorkerThreads()
@@ -155,7 +218,7 @@ namespace NAPS2.Ocr
             }
         }
         
-        private void StartingOne()
+        private OcrResultOperation StartingOne()
         {
             lock (this)
             {
@@ -165,6 +228,7 @@ namespace NAPS2.Ocr
                     operationProgress.ShowBackgroundProgress(currentOp);
                 }
                 currentOp.IncrementMax();
+                return currentOp;
             }
         }
 

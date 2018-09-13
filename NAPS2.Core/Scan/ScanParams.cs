@@ -15,5 +15,7 @@ namespace NAPS2.Scan
         public bool NoUI { get; set; }
 
         public bool NoAutoSave { get; set; }
+
+        public bool? DoOcr { get; set; }
     }
 }

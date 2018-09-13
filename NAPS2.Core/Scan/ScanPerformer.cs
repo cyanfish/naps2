@@ -22,14 +22,16 @@ namespace NAPS2.Scan
         private readonly IAutoSave autoSave;
         private readonly AppConfigManager appConfigManager;
         private readonly IProfileManager profileManager;
+        private readonly ScannedImageHelper scannedImageHelper;
 
-        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, AppConfigManager appConfigManager, IProfileManager profileManager)
+        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, AppConfigManager appConfigManager, IProfileManager profileManager, ScannedImageHelper scannedImageHelper)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
             this.autoSave = autoSave;
             this.appConfigManager = appConfigManager;
             this.profileManager = profileManager;
+            this.scannedImageHelper = scannedImageHelper;
         }
 
         public async Task PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify, Action<ScannedImage> imageCallback)
@@ -62,13 +64,16 @@ namespace NAPS2.Scan
                     driver.ScanDevice = scanProfile.Device;
                 }
 
+                // Start the scan
+                var source = driver.Scan().Then(img => scannedImageHelper.RunBackgroundOcr(img, scanParams));
+
                 bool doAutoSave = !scanParams.NoAutoSave && !appConfigManager.Config.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
                 if (doAutoSave)
                 {
                     if (scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
                     {
                         // Auto save without piping images
-                        var images = await driver.Scan().ToList();
+                        var images = await source.ToList();
                         if (await autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
                         {
                             foreach (ScannedImage img in images)
@@ -89,7 +94,7 @@ namespace NAPS2.Scan
                     {
                         // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
                         var images = new List<ScannedImage>();
-                        await driver.Scan().ForEach(scannedImage =>
+                        await source.ForEach(scannedImage =>
                         {
                             imageCallback(scannedImage);
                             images.Add(scannedImage);
@@ -100,7 +105,7 @@ namespace NAPS2.Scan
                 else
                 {
                     // No auto save, so just pipe images back as we get them
-                    await driver.Scan().ForEach(imageCallback);
+                    await source.ForEach(imageCallback);
                 }
             }
             catch (ScanDriverException e)
