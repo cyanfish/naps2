@@ -12,8 +12,10 @@ namespace NAPS2.Ocr
 {
     public class OcrResultManager
     {
-        private readonly Dictionary<ScannedImage, Task<OcrResult>> taskMap = new Dictionary<ScannedImage, Task<OcrResult>>();
-        private readonly Semaphore semaphore = new Semaphore(2, 2); // TODO: Set in the constructor based on the engine
+        private readonly Dictionary<OcrRequestParams, OcrRequest> requestCache = new Dictionary<OcrRequestParams, OcrRequest>();
+        private readonly AutoResetEvent queueWaitHandle = new AutoResetEvent(false);
+        private readonly List<Task> workerTasks = new List<Task>();
+        private CancellationTokenSource workerCts = new CancellationTokenSource();
 
         private readonly OcrManager ocrManager;
         private readonly ScannedImageRenderer renderer;
@@ -28,50 +30,133 @@ namespace NAPS2.Ocr
             this.operationProgress = operationProgress;
         }
 
-        public Task<OcrResult> GetTask(ScannedImage image)
+        public async Task<OcrResult> StartForeground(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
+        {
+            OcrRequest req;
+            lock (this)
+            {
+                ocrEngine = ocrEngine ?? ocrManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
+                ocrParams = ocrParams ?? ocrManager.DefaultParams;
+
+                var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
+                req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
+                // Fast path for cached results
+                if (req.Result != null)
+                {
+                    File.Delete(tempImageFilePath);
+                    return req.Result;
+                }
+                // Manage ownership of the provided temp file, if any
+                if (req.TempImageFilePath == null)
+                {
+                    req.TempImageFilePath = tempImageFilePath;
+                }
+                else
+                {
+                    File.Delete(tempImageFilePath);
+                }
+                // Increment the reference count
+                req.ForegroundCount += 1;
+                queueWaitHandle.Set();
+            }
+            // If no worker threads are running, start them
+            EnsureWorkerThreads();
+            // Wait for completion or cancellation
+            await Task.Factory.StartNew(() => WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle }), TaskCreationOptions.LongRunning);
+            lock (this)
+            {
+                // Decrement the reference count
+                req.ForegroundCount -= 1;
+                // If all requestors have cancelled and there's no result to cache, delete the request
+                if (req.ForegroundCount + req.BackgroundCount == 0 && req.Result == null)
+                {
+                    if (!req.IsProcessing) File.Delete(tempImageFilePath);
+                    req.CancelSource.Cancel();
+                    requestCache.Remove(req.Params);
+                }
+            }
+            // If no requests are pending, stop the worker threads
+            EnsureWorkerThreads();
+            // May return null if cancelled
+            return req.Result;
+        }
+
+        private void EnsureWorkerThreads()
         {
             lock (this)
             {
-                return taskMap.GetOrSet(image, () => RunOcr(image));
+                bool hasPending = requestCache.Values.Any(x => x.ForegroundCount + x.BackgroundCount > 0);
+                if (workerTasks.Count == 0 && hasPending)
+                {
+                    for (int i = 0; i < Environment.ProcessorCount; i++)
+                    {
+                        workerTasks.Add(Task.Factory.StartNew(() => RunWorkerTask(workerCts), TaskCreationOptions.LongRunning).Unwrap());
+                    }
+                }
+                if (workerTasks.Count > 0 && !hasPending)
+                {
+                    workerCts.Cancel();
+                    workerTasks.Clear();
+                    workerCts = new CancellationTokenSource();
+                }
             }
         }
 
-        private Task<OcrResult> RunOcr(ScannedImage image)
+        private async Task RunWorkerTask(CancellationTokenSource cts)
         {
-            StartingOne();
-            return Task.Factory.StartNew(async () =>
+            while (true)
             {
-                semaphore.WaitOne();
-                try
+                // Wait for a queued ocr request to become available
+                WaitHandle.WaitAny(new[] { queueWaitHandle, cts.Token.WaitHandle });
+                if (cts.IsCancellationRequested)
                 {
-                    using (var snapshot = image.Preserve())
+                    return;
+                }
+                // Get the next queued request
+                OcrRequest next;
+                string tempImageFilePath;
+                lock (this)
+                {
+                    next = requestCache.Values
+                        .OrderByDescending(x => x.ForegroundCount)
+                        .ThenByDescending(x => x.BackgroundCount)
+                        .FirstOrDefault(x => x.BackgroundCount + x.ForegroundCount > 0 && !x.IsProcessing && x.Result == null);
+                    if (next == null)
                     {
-                        string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-                        using (var bitmap = await renderer.Render(snapshot))
-                        {
-                            bitmap.Save(tempImageFilePath);
-                        }
-                        try
-                        {
-                            // TODO: Also cancel on image disposal
-                            return ocrManager.ActiveEngine?.ProcessImage(tempImageFilePath, ocrManager.DefaultParams, () => currentOp.CancelToken.IsCancellationRequested);
-                        }
-                        finally
-                        {
-                            File.Delete(tempImageFilePath);
-                        }
+                        continue;
+                    }
+                    next.IsProcessing = true;
+                    tempImageFilePath = next.TempImageFilePath;
+                }
+                // If not already provided, render the image to a file
+                if (tempImageFilePath == null)
+                {
+                    tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+                    using (var bitmap = await renderer.Render(next.Snapshot))
+                    {
+                        bitmap.Save(tempImageFilePath);
                     }
                 }
-                finally
+                // Actually run OCR
+                var result = next.Params.Engine.ProcessImage(tempImageFilePath, next.Params.OcrParams, next.CancelSource.Token);
+                // Update the request
+                lock (this)
                 {
-                    semaphore.Release();
-                    FinishedOne();
+                    if (result != null)
+                    {
+                        next.Result = result;
+                    }
+                    next.IsProcessing = false;
+                    next.WaitHandle.Set();
                 }
-            }, TaskCreationOptions.LongRunning).Unwrap();
+                // Clean up
+                File.Delete(tempImageFilePath);
+                next.Snapshot?.Dispose();
+            }
         }
-
+        
         private void StartingOne()
-        {   
+        {
             lock (this)
             {
                 if (currentOp == null)

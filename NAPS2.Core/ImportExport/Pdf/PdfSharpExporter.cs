@@ -29,12 +29,14 @@ namespace NAPS2.ImportExport.Pdf
         private readonly OcrManager ocrManager;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly AppConfigManager appConfigManager;
+        private readonly OcrResultManager ocrResultManager;
 
-        public PdfSharpExporter(OcrManager ocrManager, ScannedImageRenderer scannedImageRenderer, AppConfigManager appConfigManager)
+        public PdfSharpExporter(OcrManager ocrManager, ScannedImageRenderer scannedImageRenderer, AppConfigManager appConfigManager, OcrResultManager ocrResultManager)
         {
             this.ocrManager = ocrManager;
             this.scannedImageRenderer = scannedImageRenderer;
             this.appConfigManager = appConfigManager;
+            this.ocrResultManager = ocrResultManager;
         }
 
         public async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -233,9 +235,9 @@ namespace NAPS2.ImportExport.Pdf
                     string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
                     img.GdiImage.Save(tempImageFilePath);
 
-                    return Tuple.Create(page, tempImageFilePath);
+                    return Tuple.Create(page, tempImageFilePath, snapshot);
                 }
-            }).StepParallel((page, tempImageFilePath) =>
+            }).StepParallel((page, tempImageFilePath, snapshot) =>
             {
                 // Step 2: Run OCR on the processsed image file
                 // This step is doubly parallel since not only can it run alongside other stages of the pipeline,
@@ -250,7 +252,7 @@ namespace NAPS2.ImportExport.Pdf
                     }
                     
                     // ReSharper disable once AccessToModifiedClosure
-                    ocrResult = ocrEngine.ProcessImage(tempImageFilePath, ocrParams, cancelToken);
+                    ocrResult = ocrResultManager.StartForeground(ocrEngine, snapshot, tempImageFilePath, ocrParams, cancelToken).Result;
                 }
                 finally
                 {
