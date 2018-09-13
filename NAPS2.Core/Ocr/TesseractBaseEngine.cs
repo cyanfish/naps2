@@ -14,7 +14,7 @@ namespace NAPS2.Ocr
 {
     public abstract class TesseractBaseEngine : IOcrEngine
     {
-        private const int DEFAULT_TIMEOUT = 240 * 1000;
+        private const int DEFAULT_TIMEOUT = 600 * 1000;
         private const int CHECK_INTERVAL = 500;
 
         private readonly AppConfigManager appConfigManager;
