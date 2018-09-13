@@ -243,21 +243,13 @@ namespace NAPS2.ImportExport.Pdf
                 // This step is doubly parallel since not only can it run alongside other stages of the pipeline,
                 // multiple files can also be OCR'd at once (no interdependencies, it doesn't touch the document)
 
-                OcrResult ocrResult;
-                try
-                {
-                    if (cancelToken.IsCancellationRequested)
-                    {
-                        return null;
-                    }
-                    
-                    // ReSharper disable once AccessToModifiedClosure
-                    ocrResult = ocrResultManager.StartForeground(ocrEngine, snapshot, tempImageFilePath, ocrParams, cancelToken).Result;
-                }
-                finally
+                if (cancelToken.IsCancellationRequested)
                 {
                     File.Delete(tempImageFilePath);
+                    return null;
                 }
+                
+                var ocrResult = ocrResultManager.StartForeground(ocrEngine, snapshot, tempImageFilePath, ocrParams, cancelToken).Result;
 
                 // The final pipeline step is pretty fast, so updating progress here is more accurate
                 if (!cancelToken.IsCancellationRequested)
