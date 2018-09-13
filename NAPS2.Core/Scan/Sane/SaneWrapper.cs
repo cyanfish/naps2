@@ -49,8 +49,8 @@ namespace NAPS2.Scan.Sane
             var proc = StartProcess(SCANIMAGE, allOptions);
 
             // Set up state
-            var procExitWaitHandle = new AutoResetEvent(false);
-            var outputFinishedWaitHandle = new AutoResetEvent(false);
+            var procExitWaitHandle = new ManualResetEvent(false);
+            var outputFinishedWaitHandle = new ManualResetEvent(false);
             var errorOutput = new List<string>();
             bool cancelled = false;
             const int maxProgress = 1000;
@@ -84,14 +84,11 @@ namespace NAPS2.Scan.Sane
             }, TaskCreationOptions.LongRunning);
 
             // Wait for the process to stop (or for the user to cancel)
-            while (!procExitWaitHandle.WaitOne(200))
+            WaitHandle.WaitAny(new[] { procExitWaitHandle, cancelToken.WaitHandle });
+            if (cancelToken.IsCancellationRequested)
             {
-                if (cancelToken.IsCancellationRequested)
-                {
-                    cancelled = true;
-                    SafeStopProcess(proc, procExitWaitHandle);
-                    break;
-                }
+                cancelled = true;
+                SafeStopProcess(proc, procExitWaitHandle);
             }
             // Ensure the image output thread has finished so we don't return an incomplete MemoryStream
             outputFinishedWaitHandle.WaitOne();
@@ -124,7 +121,7 @@ namespace NAPS2.Scan.Sane
             throw new ScanDriverUnknownException(new Exception(stderr));
         }
 
-        private static void SafeStopProcess(Process proc, AutoResetEvent procExitWaitHandle)
+        private static void SafeStopProcess(Process proc, WaitHandle procExitWaitHandle)
         {
             Signal(proc, SIGINT);
             if (!procExitWaitHandle.WaitOne(5000))
