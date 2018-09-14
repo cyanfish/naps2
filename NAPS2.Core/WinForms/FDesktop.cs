@@ -277,7 +277,7 @@ namespace NAPS2.WinForms
             SaveFormState = true;
         }
 
-        private void FDesktop_Shown(object sender, EventArgs e)
+        private async void FDesktop_Shown(object sender, EventArgs e)
         {
             UpdateToolbar();
 
@@ -286,7 +286,7 @@ namespace NAPS2.WinForms
             {
                 if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE, StringComparison.InvariantCulture))
                 {
-                    SafeInvoke(() => ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
+                    SafeInvoke(async () => await ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
                 }
                 if (msg.Equals(Pipes.MSG_ACTIVATE))
                 {
@@ -316,7 +316,7 @@ namespace NAPS2.WinForms
             new Thread(RenderThumbnails).Start();
 
             // If NAPS2 was started by the scanner button, do the appropriate actions automatically
-            RunStillImageEvents();
+            await RunStillImageEvents();
 
             // Show a donation prompt after a month of use
             if (userConfigManager.Config.FirstRunDate == null)
@@ -348,11 +348,14 @@ namespace NAPS2.WinForms
             {
                 if (e.CloseReason == CloseReason.UserClosing)
                 {
-                    var result = MessageBox.Show(MiscResources.ExitWithActiveOperations, MiscResources.ActiveOperations,
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                    if (result != DialogResult.Yes)
+                    if (operationProgress.ActiveOperations.Any(x => !x.SkipExitPrompt))
                     {
-                        e.Cancel = true;
+                        var result = MessageBox.Show(MiscResources.ExitWithActiveOperations, MiscResources.ActiveOperations,
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                        if (result != DialogResult.Yes)
+                        {
+                            e.Cancel = true;
+                        }
                     }
                 }
                 else
@@ -390,7 +393,7 @@ namespace NAPS2.WinForms
                 ShowInTaskbar = false;
                 Task.Factory.StartNew(() =>
                 {
-                    Task.WaitAll(operationProgress.ActiveOperations.Select(op => op.Success).ToArray<Task>());
+                    operationProgress.ActiveOperations.ForEach(op => op.Wait());
                     SafeInvoke(Close);
                 });
             }
@@ -409,15 +412,15 @@ namespace NAPS2.WinForms
 
         #region Scanning and Still Image
 
-        private void RunStillImageEvents()
+        private async Task RunStillImageEvents()
         {
             if (stillImage.DoScan)
             {
-                ScanWithDevice(stillImage.DeviceID);
+                await ScanWithDevice(stillImage.DeviceID);
             }
         }
 
-        private void ScanWithDevice(string deviceID)
+        private async Task ScanWithDevice(string deviceID)
         {
             Activate();
             ScanProfile profile;
@@ -467,21 +470,21 @@ namespace NAPS2.WinForms
             if (profile != null)
             {
                 // We got a profile, yay, so we can actually do the scan now
-                scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage());
+                await scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage());
                 Activate();
             }
         }
 
-        private void ScanDefault()
+        private async Task ScanDefault()
         {
             if (profileManager.DefaultProfile != null)
             {
-                scanPerformer.PerformScan(profileManager.DefaultProfile, new ScanParams(), this, notify, ReceiveScannedImage());
+                await scanPerformer.PerformScan(profileManager.DefaultProfile, new ScanParams(), this, notify, ReceiveScannedImage());
                 Activate();
             }
             else if (profileManager.Profiles.Count == 0)
             {
-                ScanWithNewProfile();
+                await ScanWithNewProfile();
             }
             else
             {
@@ -489,7 +492,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        private void ScanWithNewProfile()
+        private async Task ScanWithNewProfile()
         {
             var editSettingsForm = FormFactory.Create<FEditProfile>();
             editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
@@ -504,7 +507,7 @@ namespace NAPS2.WinForms
 
             UpdateScanButton();
 
-            scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), this, notify, ReceiveScannedImage());
+            await scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), this, notify, ReceiveScannedImage());
             Activate();
         }
 
@@ -695,14 +698,14 @@ namespace NAPS2.WinForms
                     ImageScaling = ToolStripItemImageScaling.None
                 };
                 AssignProfileShortcut(i, item);
-                item.Click += (sender, args) =>
+                item.Click += async (sender, args) =>
                 {
                     profileManager.DefaultProfile = profile;
                     profileManager.Save();
 
                     UpdateScanButton();
 
-                    scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage());
+                    await scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage());
                     Activate();
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
@@ -1140,14 +1143,14 @@ namespace NAPS2.WinForms
 
         #region Event Handlers - Toolbar
 
-        private void tsScan_ButtonClick(object sender, EventArgs e)
+        private async void tsScan_ButtonClick(object sender, EventArgs e)
         {
-            ScanDefault();
+            await ScanDefault();
         }
 
-        private void tsNewProfile_Click(object sender, EventArgs e)
+        private async void tsNewProfile_Click(object sender, EventArgs e)
         {
-            ScanWithNewProfile();
+            await ScanWithNewProfile();
         }
 
         private void tsBatchScan_Click(object sender, EventArgs e)

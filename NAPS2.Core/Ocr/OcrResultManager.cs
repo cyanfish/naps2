@@ -224,7 +224,7 @@ namespace NAPS2.Ocr
             {
                 if (currentOp == null)
                 {
-                    currentOp = new OcrResultOperation();
+                    currentOp = new OcrResultOperation(workerTasks);
                     operationProgress.ShowBackgroundProgress(currentOp);
                 }
                 currentOp.IncrementMax();

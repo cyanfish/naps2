@@ -20,11 +20,18 @@ namespace NAPS2.Operation
 
         public bool AllowBackground { get; protected set; }
 
+        public bool SkipExitPrompt { get; protected set; }
+
         public OperationStatus Status { get; protected set; }
 
         public Task<bool> Success { get; protected set; }
 
         public bool IsFinished { get; protected set; }
+
+        public virtual void Wait()
+        {
+            Success?.Wait();
+        }
 
         public virtual void Cancel()
         {

@@ -199,7 +199,7 @@ namespace NAPS2.Scan.Images
                 if (op.Start(new[] { image }))
                 {
                     operationProgress.ShowProgress(op);
-                    op.Success.Wait();
+                    op.Wait();
                 }
             }
             if (scanParams.DetectPatchCodes && image.PatchCode == PatchCode.None)

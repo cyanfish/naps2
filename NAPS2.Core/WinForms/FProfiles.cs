@@ -222,7 +222,7 @@ namespace NAPS2.WinForms
             PerformScan();
         }
 
-        private void PerformScan()
+        private async void PerformScan()
         {
             if (profileManager.Profiles.Count == 0)
             {
@@ -256,7 +256,7 @@ namespace NAPS2.WinForms
                 SelectProfile(x => x == profile);
             }
             profileManager.Save();
-            scanPerformer.PerformScan(SelectedProfile, new ScanParams(), this, null, ImageCallback);
+            await scanPerformer.PerformScan(SelectedProfile, new ScanParams(), this, null, ImageCallback);
             Activate();
         }
 

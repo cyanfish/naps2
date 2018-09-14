@@ -16,11 +16,15 @@ namespace NAPS2.Operation
 
         bool AllowBackground { get; }
 
+        bool SkipExitPrompt { get; }
+
         OperationStatus Status { get; }
 
         Task<bool> Success { get; }
 
         bool IsFinished { get; }
+
+        void Wait();
 
         void Cancel();
 
