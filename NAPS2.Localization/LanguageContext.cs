@@ -58,6 +58,7 @@ namespace NAPS2.Localization
         private void TranslateFile(FileInfo file, bool winforms)
         {
             var doc = XDocument.Load(file.FullName);
+            bool hasSomethingTranslatable = false;
 
             foreach (var item in doc.Root.Elements("data").ToList())
             {
@@ -69,6 +70,7 @@ namespace NAPS2.Localization
                     item.Remove();
                     continue;
                 }
+                hasSomethingTranslatable = true;
                 if (Strings.ContainsKey(original))
                 {
                     var translation = Strings[original].Translation;
@@ -78,6 +80,8 @@ namespace NAPS2.Localization
                     }
                 }
             }
+
+            if (!hasSomethingTranslatable) return;
 
             // Trim redundant elements from localized resx files
             doc.DescendantNodes().OfType<XComment>().Remove();
