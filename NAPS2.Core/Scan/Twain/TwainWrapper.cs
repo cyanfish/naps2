@@ -56,6 +56,18 @@ namespace NAPS2.Scan.Twain
 
         public List<ScanDevice> GetDeviceList(TwainImpl twainImpl)
         {
+            var deviceList = InternalGetDeviceList(twainImpl);
+            if (twainImpl == TwainImpl.Default && deviceList.Count == 0)
+            {
+                // Fall back to OldDsm in case of no devices
+                // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
+                deviceList = InternalGetDeviceList(TwainImpl.OldDsm);
+            }
+            return deviceList;
+        }
+
+        private static List<ScanDevice> InternalGetDeviceList(TwainImpl twainImpl)
+        {
             PlatformInfo.Current.PreferNewDSM = twainImpl != TwainImpl.OldDsm;
             var session = new TwainSession(TwainAppId);
             session.Open();
@@ -65,24 +77,53 @@ namespace NAPS2.Scan.Twain
             }
             finally
             {
-                session.Close();
+                try
+                {
+                    session.Close();
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error closing TWAIN session", e);
+                }
             }
         }
 
         public void Scan(IWin32Window dialogParent, bool activate, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
             ScannedImageSource.Concrete source)
         {
+            try
+            {
+                InternalScan(scanProfile.TwainImpl, dialogParent, activate, scanDevice, scanProfile, scanParams, source);
+            }
+            catch (DeviceNotFoundException)
+            {
+                if (scanProfile.TwainImpl == TwainImpl.Default)
+                {
+                    // Fall back to OldDsm in case of no devices
+                    // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
+                    InternalScan(TwainImpl.OldDsm, dialogParent, activate, scanDevice, scanProfile, scanParams, source);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private void InternalScan(TwainImpl twainImpl, IWin32Window dialogParent, bool activate, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
+            ScannedImageSource.Concrete source)
+        {
             if (dialogParent == null)
             {
                 dialogParent = new BackgroundForm();
             }
-            if (scanProfile.TwainImpl == TwainImpl.Legacy)
+            if (twainImpl == TwainImpl.Legacy)
             {
                 Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, formFactory, source);
                 return;
             }
 
-            PlatformInfo.Current.PreferNewDSM = scanProfile.TwainImpl != TwainImpl.OldDsm;
+            PlatformInfo.Current.PreferNewDSM = twainImpl != TwainImpl.OldDsm;
             var session = new TwainSession(TwainAppId);
             var twainForm = scanParams.NoUI ? new Form { WindowState = FormWindowState.Minimized, ShowInTaskbar = false } : formFactory.Create<FTwainGui>();
             Exception error = null;
@@ -105,7 +146,7 @@ namespace NAPS2.Scan.Twain
                 {
                     Debug.WriteLine("NAPS2.TW - DataTransferred");
                     pageNumber++;
-                    using (var output = scanProfile.TwainImpl == TwainImpl.MemXfer
+                    using (var output = twainImpl == TwainImpl.MemXfer
                                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
                                         : Image.FromStream(eventArgs.GetNativeImageStream()))
                     {
