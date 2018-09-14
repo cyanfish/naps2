@@ -32,7 +32,10 @@ namespace NAPS2.Config
             {
                 if (config == null)
                 {
-                    Load();
+                    lock (this)
+                    {
+                        if (config == null) Load();
+                    }
                 }
                 return config;
             }
@@ -40,25 +43,32 @@ namespace NAPS2.Config
 
         public virtual void Load()
         {
-            config = null;
-            config = TryLoadConfig(primaryConfigPath);
-            if (config == null && secondaryConfigPath != null)
+            lock (this)
             {
-                config = TryLoadConfig(secondaryConfigPath);
-            }
-            if (config == null)
-            {
-                config = factory();
+                config = null;
+                config = TryLoadConfig(primaryConfigPath);
+                if (config == null && secondaryConfigPath != null)
+                {
+                    config = TryLoadConfig(secondaryConfigPath);
+                }
+
+                if (config == null)
+                {
+                    config = factory();
+                }
             }
         }
 
         public void Save()
         {
-            using (Stream strFile = File.Open(primaryConfigPath, FileMode.Create))
+            lock (this)
             {
-                var serializer = new XmlSerializer(typeof(T));
-                // TODO: Rather than overwrite, do the write-to-temp/move song-and-dance to avoid corruption
-                serializer.Serialize(strFile, config);
+                using (Stream strFile = File.Open(primaryConfigPath, FileMode.Create))
+                {
+                    var serializer = new XmlSerializer(typeof(T));
+                    // TODO: Rather than overwrite, do the write-to-temp/move song-and-dance to avoid corruption
+                    serializer.Serialize(strFile, config);
+                }
             }
         }
 
