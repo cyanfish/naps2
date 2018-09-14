@@ -47,7 +47,7 @@ namespace NAPS2.Scan.Images
             public override async Task<ScannedImage> Next()
             {
                 var image = await inner.Next();
-                action(image);
+                if (image != null) action(image);
                 return image;
             }
         }
