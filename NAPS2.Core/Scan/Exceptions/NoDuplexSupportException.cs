@@ -5,6 +5,7 @@ using NAPS2.Lang.Resources;
 
 namespace NAPS2.Scan.Exceptions
 {
+    [Serializable]
     public class NoDuplexSupportException : ScanDriverException
     {
         public NoDuplexSupportException()
