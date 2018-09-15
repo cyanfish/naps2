@@ -21,7 +21,8 @@ namespace NAPS2.Ocr
             SkipExitPrompt = true;
             Status = new OperationStatus
             {
-                StatusText = MiscResources.RunningOcr
+                StatusText = MiscResources.RunningOcr,
+                IndeterminateProgress = true
             };
         }
 
