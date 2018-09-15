@@ -483,6 +483,10 @@ namespace NAPS2.Scan.Wia
             var imageFile = showGui
                 ? (ImageFile)new CommonDialogClass().ShowTransfer(wia.Item, format)
                 : (ImageFile)wia.Item?.Transfer(format);
+            if (imageFile?.FileData == null)
+            {
+                return null;
+            }
             return new MemoryStream((byte[])imageFile.FileData.get_BinaryData());
         }
 
