@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Ocr;
 
 namespace NAPS2.Scan
 {
@@ -17,5 +18,7 @@ namespace NAPS2.Scan
         public bool NoAutoSave { get; set; }
 
         public bool? DoOcr { get; set; }
+
+        public OcrParams OcrParams { get; set; }
     }
 }

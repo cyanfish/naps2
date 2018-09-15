@@ -233,7 +233,10 @@ namespace NAPS2.ImportExport.Pdf
                     }
 
                     string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-                    img.GdiImage.Save(tempImageFilePath);
+                    if (!ocrRequestQueue.HasCachedResult(ocrEngine, snapshot, ocrParams))
+                    {
+                        img.GdiImage.Save(tempImageFilePath);
+                    }
 
                     return Tuple.Create(page, tempImageFilePath, snapshot);
                 }

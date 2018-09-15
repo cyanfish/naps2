@@ -278,6 +278,8 @@ namespace NAPS2.Scan.Sane
                         var image = new ScannedImage(encoded, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                         image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
                         scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);
+                        string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
+                        scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
                         return (image, false);
                     }
                 }

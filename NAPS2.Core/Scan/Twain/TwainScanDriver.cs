@@ -19,12 +19,14 @@ namespace NAPS2.Scan.Twain
         private readonly IWorkerServiceFactory workerServiceFactory;
         private readonly TwainWrapper twainWrapper;
         private readonly IFormFactory formFactory;
+        private readonly ScannedImageHelper scannedImageHelper;
 
-        public TwainScanDriver(IWorkerServiceFactory workerServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory)
+        public TwainScanDriver(IWorkerServiceFactory workerServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory, ScannedImageHelper scannedImageHelper)
         {
             this.workerServiceFactory = workerServiceFactory;
             this.twainWrapper = twainWrapper;
             this.formFactory = formFactory;
+            this.scannedImageHelper = scannedImageHelper;
         }
 
         public override string DriverName => DRIVER_NAME;
@@ -75,14 +77,18 @@ namespace NAPS2.Scan.Twain
                 {
                     using (var worker = workerServiceFactory.Create())
                     {
-                        worker.Callback.ImageCallback += source.Put;
+                        worker.Callback.ImageCallback += (img, tempPath) =>
+                        {
+                            scannedImageHelper.RunBackgroundOcr(img, ScanParams, tempPath);
+                            source.Put(img);
+                        };
                         worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent?.SafeHandle() ?? IntPtr.Zero);
                         worker.Callback.WaitForFinish();
                     }
                 }
                 else
                 {
-                    twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams, source);
+                    twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams, source, scannedImageHelper.RunBackgroundOcr);
                 }
             }, TaskCreationOptions.LongRunning);
         }

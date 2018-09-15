@@ -122,6 +122,8 @@ namespace NAPS2.Scan.Wia
                                 var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                                 image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
                                 scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber);
+                                string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
+                                scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
                                 return (image, false);
                             }
                         }

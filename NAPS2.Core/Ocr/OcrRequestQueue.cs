@@ -30,6 +30,17 @@ namespace NAPS2.Ocr
             this.operationProgress = operationProgress;
         }
 
+        public bool HasCachedResult(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, OcrParams ocrParams)
+        {
+            ocrEngine = ocrEngine ?? ocrManager.ActiveEngine ?? throw new ArgumentException("No OCR engine available");
+            ocrParams = ocrParams ?? ocrManager.DefaultParams;
+            var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
+            lock (this)
+            {
+                return requestCache.ContainsKey(reqParams) && requestCache[reqParams].Result != null;
+            }
+        }
+
         public async Task<OcrResult> QueueForeground(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
         {
             OcrRequest req;
@@ -76,7 +87,7 @@ namespace NAPS2.Ocr
             return req.Result;
         }
 
-        public void QueueBackground(ScannedImage.Snapshot snapshot)
+        public void QueueBackground(ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams)
         {
             OcrRequest req;
             CancellationTokenSource cts = new CancellationTokenSource();
@@ -84,7 +95,7 @@ namespace NAPS2.Ocr
             {
                 var ocrEngine = ocrManager.ActiveEngine;
                 if (ocrEngine == null) return;
-                var ocrParams = ocrManager.DefaultParams;
+                ocrParams = ocrParams ?? ocrManager.DefaultParams;
 
                 var reqParams = new OcrRequestParams(snapshot, ocrEngine, ocrParams);
                 req = requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams));
@@ -93,14 +104,14 @@ namespace NAPS2.Ocr
                 {
                     return;
                 }
-                // Manage ownership of the provided snapshot
-                if (req.Snapshot == null)
+                // Manage ownership of the provided temp file
+                if (req.TempImageFilePath == null)
                 {
-                    req.Snapshot = snapshot;
+                    req.TempImageFilePath = tempImageFilePath;
                 }
                 else
                 {
-                    snapshot.Dispose();
+                    File.Delete(tempImageFilePath);
                 }
                 // Increment the reference count
                 req.BackgroundCount += 1;
@@ -133,8 +144,7 @@ namespace NAPS2.Ocr
             {
                 if (!req.IsProcessing)
                 {
-                    req.Snapshot?.Dispose();
-                    if (req.TempImageFilePath != null) File.Delete(req.TempImageFilePath);
+                    File.Delete(req.TempImageFilePath);
                 }
                 if (req.Result == null)
                 {
@@ -153,7 +163,7 @@ namespace NAPS2.Ocr
                 {
                     for (int i = 0; i < Environment.ProcessorCount; i++)
                     {
-                        workerTasks.Add(Task.Factory.StartNew(() => RunWorkerTask(workerCts), TaskCreationOptions.LongRunning).Unwrap());
+                        workerTasks.Add(Task.Factory.StartNew(() => RunWorkerTask(workerCts), TaskCreationOptions.LongRunning));
                     }
                 }
                 if (workerTasks.Count > 0 && !hasPending)
@@ -165,7 +175,7 @@ namespace NAPS2.Ocr
             }
         }
 
-        private async Task RunWorkerTask(CancellationTokenSource cts)
+        private void RunWorkerTask(CancellationTokenSource cts)
         {
             while (true)
             {
@@ -191,15 +201,6 @@ namespace NAPS2.Ocr
                     next.IsProcessing = true;
                     tempImageFilePath = next.TempImageFilePath;
                 }
-                // If not already provided, render the image to a file
-                if (tempImageFilePath == null)
-                {
-                    tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-                    using (var bitmap = await renderer.Render(next.Snapshot))
-                    {
-                        bitmap.Save(tempImageFilePath);
-                    }
-                }
                 // Actually run OCR
                 var result = next.Params.Engine.ProcessImage(tempImageFilePath, next.Params.OcrParams, next.CancelSource.Token);
                 // Update the request
@@ -214,7 +215,6 @@ namespace NAPS2.Ocr
                 }
                 // Clean up
                 File.Delete(tempImageFilePath);
-                next.Snapshot?.Dispose();
             }
         }
         

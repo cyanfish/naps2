@@ -16,16 +16,16 @@ namespace NAPS2.Worker
         private bool finished;
         private Exception exception;
 
-        public event Action<ScannedImage> ImageCallback;
+        public event Action<ScannedImage, string> ImageCallback;
 
-        public void TwainImageReceived(RecoveryIndexImage image, byte[] thumbnail)
+        public void TwainImageReceived(RecoveryIndexImage image, byte[] thumbnail, string tempImageFilePath)
         {
             var scannedImage = new ScannedImage(image);
             if (thumbnail != null)
             {
                 scannedImage.SetThumbnail(new Bitmap(new MemoryStream(thumbnail)));
             }
-            ImageCallback?.Invoke(scannedImage);
+            ImageCallback?.Invoke(scannedImage, tempImageFilePath);
         }
 
         public void Finish()

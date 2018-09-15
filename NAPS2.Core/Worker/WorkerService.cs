@@ -49,7 +49,8 @@ namespace NAPS2.Worker
         {
             try
             {
-                twainWrapper.Scan(hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), true, scanDevice, scanProfile, scanParams, new WorkerImageSource(Callback));
+                var imagePathDict = new Dictionary<ScannedImage, string>();
+                twainWrapper.Scan(hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), true, scanDevice, scanProfile, scanParams, new WorkerImageSource(Callback, imagePathDict), (img, _, path) => imagePathDict.Add(img, path));
             }
             catch (Exception e)
             {
@@ -82,10 +83,12 @@ namespace NAPS2.Worker
         private class WorkerImageSource : ScannedImageSource.Concrete
         {
             private readonly IWorkerCallback callback;
+            private readonly Dictionary<ScannedImage, string> imagePathDict;
 
-            public WorkerImageSource(IWorkerCallback callback)
+            public WorkerImageSource(IWorkerCallback callback, Dictionary<ScannedImage, string> imagePathDict)
             {
                 this.callback = callback;
+                this.imagePathDict = imagePathDict;
             }
 
             public override void Put(ScannedImage image)
@@ -97,7 +100,7 @@ namespace NAPS2.Worker
                     stream = new MemoryStream();
                     thumb.Save(stream, ImageFormat.Png);
                 }
-                callback.TwainImageReceived(image.RecoveryIndexImage, stream?.ToArray());
+                callback.TwainImageReceived(image.RecoveryIndexImage, stream?.ToArray(), imagePathDict[image]);
             }
         }
     }

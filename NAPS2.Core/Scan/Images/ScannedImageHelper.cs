@@ -208,15 +208,34 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        public void RunBackgroundOcr(ScannedImage image, ScanParams scanParams)
+        public bool ShouldDoBackgroundOcr(ScanParams scanParams)
         {
             bool ocrEnabled = ocrManager.DefaultParams != null;
             bool afterScanning = appConfigManager.Config.OcrState == OcrState.Enabled && appConfigManager.Config.OcrDefaultAfterScanning
                                  || appConfigManager.Config.OcrState == OcrState.UserConfig &&
                                  (userConfigManager.Config.OcrAfterScanning ?? appConfigManager.Config.OcrDefaultAfterScanning);
-            if (scanParams.DoOcr ?? (ocrEnabled && afterScanning))
+            return scanParams.DoOcr ?? (ocrEnabled && afterScanning);
+        }
+
+        public string SaveForBackgroundOcr(Bitmap bitmap, ScanParams scanParams)
+        {
+            if (ShouldDoBackgroundOcr(scanParams))
             {
-                ocrRequestQueue.QueueBackground(image.Preserve());
+                string tempPath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+                bitmap.Save(tempPath);
+                return tempPath;
+            }
+            return null;
+        }
+
+        public void RunBackgroundOcr(ScannedImage image, ScanParams scanParams, string tempPath)
+        {
+            if (ShouldDoBackgroundOcr(scanParams))
+            {
+                using (var snapshot = image.Preserve())
+                {
+                    ocrRequestQueue.QueueBackground(snapshot, tempPath, scanParams.OcrParams);
+                }
             }
         }
 

@@ -17,8 +17,6 @@ namespace NAPS2.Ocr
 
         public string TempImageFilePath { get; set; }
 
-        public ScannedImage.Snapshot Snapshot { get; set; }
-
         public CancellationTokenSource CancelSource { get; } = new CancellationTokenSource();
 
         public ManualResetEvent WaitHandle { get; } = new ManualResetEvent(false);

@@ -89,11 +89,11 @@ namespace NAPS2.Scan.Twain
         }
 
         public void Scan(IWin32Window dialogParent, bool activate, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
-            ScannedImageSource.Concrete source)
+            ScannedImageSource.Concrete source, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
         {
             try
             {
-                InternalScan(scanProfile.TwainImpl, dialogParent, activate, scanDevice, scanProfile, scanParams, source);
+                InternalScan(scanProfile.TwainImpl, dialogParent, activate, scanDevice, scanProfile, scanParams, source, runBackgroundOcr);
             }
             catch (DeviceNotFoundException)
             {
@@ -101,7 +101,7 @@ namespace NAPS2.Scan.Twain
                 {
                     // Fall back to OldDsm in case of no devices
                     // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
-                    InternalScan(TwainImpl.OldDsm, dialogParent, activate, scanDevice, scanProfile, scanParams, source);
+                    InternalScan(TwainImpl.OldDsm, dialogParent, activate, scanDevice, scanProfile, scanParams, source, runBackgroundOcr);
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace NAPS2.Scan.Twain
         }
 
         private void InternalScan(TwainImpl twainImpl, IWin32Window dialogParent, bool activate, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
-            ScannedImageSource.Concrete source)
+            ScannedImageSource.Concrete source, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
         {
             if (dialogParent == null)
             {
@@ -173,6 +173,8 @@ namespace NAPS2.Scan.Twain
                                 }
                             }
                             scannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
+                            string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, scanParams);
+                            runBackgroundOcr(image, scanParams, tempPath);
                             Debug.WriteLine("NAPS2.TW - Put start");
                             source.Put(image);
                             Debug.WriteLine("NAPS2.TW - Put end");

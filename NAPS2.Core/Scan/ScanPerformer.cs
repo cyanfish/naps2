@@ -65,7 +65,7 @@ namespace NAPS2.Scan
                 }
 
                 // Start the scan
-                var source = driver.Scan().Then(img => scannedImageHelper.RunBackgroundOcr(img, scanParams));
+                var source = driver.Scan();
 
                 bool doAutoSave = !scanParams.NoAutoSave && !appConfigManager.Config.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
                 if (doAutoSave)
