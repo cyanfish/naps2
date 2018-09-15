@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Scan;
@@ -89,6 +88,13 @@ namespace NAPS2.WinForms
         public void Invoke(Action action)
         {
             ((Control) this).Invoke(action);
+        }
+
+        public T InvokeGet<T>(Func<T> func)
+        {
+            T value = default;
+            Invoke(() => value = func());
+            return value;
         }
 
         public void SafeInvoke(Action action)

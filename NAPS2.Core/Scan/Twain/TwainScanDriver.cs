@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using NAPS2.Platform;
 using NAPS2.Recovery;
 using NAPS2.Scan.Exceptions;
@@ -88,7 +89,7 @@ namespace NAPS2.Scan.Twain
                 }
                 else
                 {
-                    twainWrapper.Scan(DialogParent, false, ScanDevice, ScanProfile, ScanParams, source, scannedImageHelper.RunBackgroundOcr);
+                    twainWrapper.Scan((FormBase)Application.OpenForms[0], DialogParent, ScanDevice, ScanProfile, ScanParams, source, scannedImageHelper.RunBackgroundOcr);
                 }
             }, TaskCreationOptions.LongRunning);
         }

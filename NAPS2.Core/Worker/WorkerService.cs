@@ -12,6 +12,7 @@ using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Util;
+using NAPS2.WinForms;
 
 namespace NAPS2.Worker
 {
@@ -26,7 +27,7 @@ namespace NAPS2.Worker
         private readonly TwainWrapper twainWrapper;
         private readonly ThumbnailRenderer thumbnailRenderer;
 
-        public Form ParentForm { get; set; }
+        public FormBase ParentForm { get; set; }
 
         public WorkerService(TwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer)
         {
@@ -47,21 +48,25 @@ namespace NAPS2.Worker
 
         public void TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd)
         {
-            try
+            Task.Factory.StartNew(() =>
             {
-                var imagePathDict = new Dictionary<ScannedImage, string>();
-                twainWrapper.Scan(hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), true, scanDevice, scanProfile, scanParams, new WorkerImageSource(Callback, imagePathDict), (img, _, path) => imagePathDict.Add(img, path));
-            }
-            catch (Exception e)
-            {
-                var stream = new MemoryStream();
-                new NetDataContractSerializer().Serialize(stream, e);
-                Callback.Error(stream.ToArray());
-            }
-            finally
-            {
-                Callback.Finish();
-            }
+                try
+                {
+                    var imagePathDict = new Dictionary<ScannedImage, string>();
+                    twainWrapper.Scan(ParentForm, hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), scanDevice, scanProfile, scanParams,
+                        new WorkerImageSource(Callback, imagePathDict), (img, _, path) => imagePathDict.Add(img, path));
+                }
+                catch (Exception e)
+                {
+                    var stream = new MemoryStream();
+                    new NetDataContractSerializer().Serialize(stream, e);
+                    Callback.Error(stream.ToArray());
+                }
+                finally
+                {
+                    Callback.Finish();
+                }
+            }, TaskCreationOptions.LongRunning);
         }
 
         public byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
