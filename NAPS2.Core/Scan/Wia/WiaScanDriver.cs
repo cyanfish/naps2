@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
+using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Wia
 {
@@ -18,19 +21,17 @@ namespace NAPS2.Scan.Wia
 
         private const int MAX_RETRIES = 5;
 
-        private readonly IWiaTransfer backgroundWiaTransfer;
-        private readonly IWiaTransfer foregroundWiaTransfer;
         private readonly IBlankDetector blankDetector;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageHelper scannedImageHelper;
+        private readonly IFormFactory formFactory;
 
-        public WiaScanDriver(BackgroundWiaTransfer backgroundWiaTransfer, ForegroundWiaTransfer foregroundWiaTransfer, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
+        public WiaScanDriver(IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper, IFormFactory formFactory)
         {
-            this.backgroundWiaTransfer = backgroundWiaTransfer;
-            this.foregroundWiaTransfer = foregroundWiaTransfer;
             this.blankDetector = blankDetector;
             this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageHelper = scannedImageHelper;
+            this.formFactory = formFactory;
         }
 
         public override string DriverName => DRIVER_NAME;
@@ -66,7 +67,7 @@ namespace NAPS2.Scan.Wia
                     {
                         if (pageNumber > 1 && ScanProfile.WiaDelayBetweenScans)
                         {
-                            int delay = (int) (ScanProfile.WiaDelayBetweenScansSeconds.Clamp(0, 30) * 1000);
+                            int delay = (int)(ScanProfile.WiaDelayBetweenScansSeconds.Clamp(0, 30) * 1000);
                             Thread.Sleep(delay);
                         }
                         (image, cancel) = await TransferImage(eventLoop, pageNumber);
@@ -76,7 +77,7 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (ScanDriverException e)
                     {
-                        if (ScanProfile.WiaRetryOnFailure && e.InnerException is COMException comError 
+                        if (ScanProfile.WiaRetryOnFailure && e.InnerException is COMException comError
                             && (uint)comError.ErrorCode == 0x80004005 && retryCount < MAX_RETRIES)
                         {
                             Thread.Sleep(1000);
@@ -100,9 +101,8 @@ namespace NAPS2.Scan.Wia
             {
                 try
                 {
-                    var transfer = ScanParams.NoUI ? backgroundWiaTransfer : foregroundWiaTransfer;
                     ChaosMonkey.MaybeError(0, new COMException("Fail", -2147467259));
-                    using (var stream = transfer.Transfer(pageNumber, eventLoop, DialogParent, WiaApi.Formats.BMP))
+                    using (var stream = DoTransfer(pageNumber, eventLoop, WiaApi.Formats.BMP))
                     {
                         if (stream == null)
                         {
@@ -141,6 +141,53 @@ namespace NAPS2.Scan.Wia
                     return (null, true);
                 }
             }, TaskCreationOptions.LongRunning);
+        }
+
+        private Stream DoTransfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format)
+        {
+            var invoker = (FormBase)DialogParent;
+            if (eventLoop.GetSync(wia => wia.Item) == null)
+            {
+                return null;
+            }
+            if (ScanParams.NoUI)
+            {
+                return eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, false));
+            }
+            if (pageNumber == 1)
+            {
+                // The only downside of the common dialog is that it steals focus.
+                // If this is the first page, then the user has just pressed the scan button, so that's not
+                // an issue and we can use it and get the benefits of progress display and immediate cancellation.
+                return ScanParams.Modal
+                    ? eventLoop.GetSync(wia => invoker.InvokeGet(() => WiaApi.Transfer(wia, format, true)))
+                    : eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, true));
+            }
+            // For subsequent pages, we don't want to take focus in case the user has switched applications,
+            // so we use the custom form.
+            var form = formFactory.Create<FScanProgress>();
+            var waitHandle = new AutoResetEvent(false);
+            form.PageNumber = pageNumber;
+            form.Transfer = () => eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, false));
+            form.Closed += (sender, args) => waitHandle.Set();
+            if (ScanParams.Modal)
+            {
+                invoker.Invoke(() => form.ShowDialog(DialogParent));
+            }
+            else
+            {
+                invoker.Invoke(() => form.Show(DialogParent));
+            }
+            waitHandle.WaitOne();
+            if (form.Exception != null)
+            {
+                WiaApi.ThrowDeviceError(form.Exception);
+            }
+            if (form.DialogResult == DialogResult.Cancel)
+            {
+                return null;
+            }
+            return form.ImageStream;
         }
     }
 }
