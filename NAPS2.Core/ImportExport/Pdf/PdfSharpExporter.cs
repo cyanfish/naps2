@@ -29,14 +29,14 @@ namespace NAPS2.ImportExport.Pdf
         private readonly OcrManager ocrManager;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly AppConfigManager appConfigManager;
-        private readonly OcrResultManager ocrResultManager;
+        private readonly OcrRequestQueue ocrRequestQueue;
 
-        public PdfSharpExporter(OcrManager ocrManager, ScannedImageRenderer scannedImageRenderer, AppConfigManager appConfigManager, OcrResultManager ocrResultManager)
+        public PdfSharpExporter(OcrManager ocrManager, ScannedImageRenderer scannedImageRenderer, AppConfigManager appConfigManager, OcrRequestQueue ocrRequestQueue)
         {
             this.ocrManager = ocrManager;
             this.scannedImageRenderer = scannedImageRenderer;
             this.appConfigManager = appConfigManager;
-            this.ocrResultManager = ocrResultManager;
+            this.ocrRequestQueue = ocrRequestQueue;
         }
 
         public async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -249,7 +249,7 @@ namespace NAPS2.ImportExport.Pdf
                     return null;
                 }
                 
-                var ocrResult = ocrResultManager.StartForeground(ocrEngine, snapshot, tempImageFilePath, ocrParams, cancelToken).Result;
+                var ocrResult = ocrRequestQueue.QueueForeground(ocrEngine, snapshot, tempImageFilePath, ocrParams, cancelToken).Result;
 
                 // The final pipeline step is pretty fast, so updating progress here is more accurate
                 if (!cancelToken.IsCancellationRequested)

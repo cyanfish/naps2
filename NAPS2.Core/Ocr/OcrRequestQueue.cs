@@ -10,7 +10,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {
-    public class OcrResultManager
+    public class OcrRequestQueue
     {
         private readonly Dictionary<OcrRequestParams, OcrRequest> requestCache = new Dictionary<OcrRequestParams, OcrRequest>();
         private readonly AutoResetEvent queueWaitHandle = new AutoResetEvent(false);
@@ -21,16 +21,16 @@ namespace NAPS2.Ocr
         private readonly ScannedImageRenderer renderer;
         private readonly IOperationProgress operationProgress;
 
-        private OcrResultOperation currentOp;
+        private OcrOperation currentOp;
 
-        public OcrResultManager(OcrManager ocrManager, ScannedImageRenderer renderer, IOperationProgress operationProgress)
+        public OcrRequestQueue(OcrManager ocrManager, ScannedImageRenderer renderer, IOperationProgress operationProgress)
         {
             this.ocrManager = ocrManager;
             this.renderer = renderer;
             this.operationProgress = operationProgress;
         }
 
-        public async Task<OcrResult> StartForeground(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
+        public async Task<OcrResult> QueueForeground(IOcrEngine ocrEngine, ScannedImage.Snapshot snapshot, string tempImageFilePath, OcrParams ocrParams, CancellationToken cancelToken)
         {
             OcrRequest req;
             lock (this)
@@ -76,7 +76,7 @@ namespace NAPS2.Ocr
             return req.Result;
         }
 
-        public void StartBackground(ScannedImage.Snapshot snapshot)
+        public void QueueBackground(ScannedImage.Snapshot snapshot)
         {
             OcrRequest req;
             CancellationTokenSource cts = new CancellationTokenSource();
@@ -218,13 +218,13 @@ namespace NAPS2.Ocr
             }
         }
         
-        private OcrResultOperation StartingOne()
+        private OcrOperation StartingOne()
         {
             lock (this)
             {
                 if (currentOp == null)
                 {
-                    currentOp = new OcrResultOperation(workerTasks);
+                    currentOp = new OcrOperation(workerTasks);
                     operationProgress.ShowBackgroundProgress(currentOp);
                 }
                 currentOp.IncrementMax();

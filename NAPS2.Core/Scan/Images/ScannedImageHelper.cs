@@ -107,17 +107,17 @@ namespace NAPS2.Scan.Images
         private readonly IOperationProgress operationProgress;
         private readonly AppConfigManager appConfigManager;
         private readonly IUserConfigManager userConfigManager;
-        private readonly OcrResultManager ocrResultManager;
+        private readonly OcrRequestQueue ocrRequestQueue;
         private readonly OcrManager ocrManager;
 
-        public ScannedImageHelper(ThumbnailRenderer thumbnailRenderer, IOperationFactory operationFactory, IOperationProgress operationProgress, AppConfigManager appConfigManager, IUserConfigManager userConfigManager, OcrResultManager ocrResultManager, OcrManager ocrManager)
+        public ScannedImageHelper(ThumbnailRenderer thumbnailRenderer, IOperationFactory operationFactory, IOperationProgress operationProgress, AppConfigManager appConfigManager, IUserConfigManager userConfigManager, OcrRequestQueue ocrRequestQueue, OcrManager ocrManager)
         {
             this.thumbnailRenderer = thumbnailRenderer;
             this.operationFactory = operationFactory;
             this.operationProgress = operationProgress;
             this.appConfigManager = appConfigManager;
             this.userConfigManager = userConfigManager;
-            this.ocrResultManager = ocrResultManager;
+            this.ocrRequestQueue = ocrRequestQueue;
             this.ocrManager = ocrManager;
         }
 
@@ -216,7 +216,7 @@ namespace NAPS2.Scan.Images
                                  (userConfigManager.Config.OcrAfterScanning ?? appConfigManager.Config.OcrDefaultAfterScanning);
             if (scanParams.DoOcr ?? (ocrEnabled && afterScanning))
             {
-                ocrResultManager.StartBackground(image.Preserve());
+                ocrRequestQueue.QueueBackground(image.Preserve());
             }
         }
 

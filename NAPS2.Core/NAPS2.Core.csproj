@@ -159,8 +159,8 @@
     <Compile Include="Ocr\OcrParams.cs" />
     <Compile Include="Ocr\OcrRequest.cs" />
     <Compile Include="Ocr\OcrRequestParams.cs" />
-    <Compile Include="Ocr\OcrResultManager.cs" />
-    <Compile Include="Ocr\OcrResultOperation.cs" />
+    <Compile Include="Ocr\OcrRequestQueue.cs" />
+    <Compile Include="Ocr\OcrOperation.cs" />
     <Compile Include="Ocr\Tesseract400Beta4Engine.cs" />
     <Compile Include="Ocr\TesseractLanguageData.cs" />
     <Compile Include="Ocr\TesseractSystemEngine.cs" />

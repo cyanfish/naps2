@@ -8,11 +8,11 @@ using NAPS2.Operation;
 
 namespace NAPS2.Ocr
 {
-    public class OcrResultOperation : OperationBase
+    public class OcrOperation : OperationBase
     {
         private readonly List<Task> workerTasks;
 
-        public OcrResultOperation(List<Task> workerTasks)
+        public OcrOperation(List<Task> workerTasks)
         {
             this.workerTasks = workerTasks;
             ProgressTitle = MiscResources.OcrProgress;

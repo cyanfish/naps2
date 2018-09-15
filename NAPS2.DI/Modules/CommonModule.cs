@@ -38,7 +38,7 @@ namespace NAPS2.DI.Modules
             Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
             Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
             Bind<OcrManager>().ToSelf().InSingletonScope();
-            Bind<OcrResultManager>().ToSelf().InSingletonScope();
+            Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
 
             // Scan
             Bind<IScanPerformer>().To<ScanPerformer>();
