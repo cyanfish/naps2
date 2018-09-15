@@ -14,7 +14,7 @@ namespace NAPS2.Ocr
     {
         private readonly Dictionary<OcrRequestParams, OcrRequest> requestCache = new Dictionary<OcrRequestParams, OcrRequest>();
         private readonly AutoResetEvent queueWaitHandle = new AutoResetEvent(false);
-        private readonly List<Task> workerTasks = new List<Task>();
+        private List<Task> workerTasks = new List<Task>();
         private CancellationTokenSource workerCts = new CancellationTokenSource();
 
         private readonly OcrManager ocrManager;
@@ -169,7 +169,7 @@ namespace NAPS2.Ocr
                 if (workerTasks.Count > 0 && !hasPending)
                 {
                     workerCts.Cancel();
-                    workerTasks.Clear();
+                    workerTasks = new List<Task>();
                     workerCts = new CancellationTokenSource();
                 }
             }
