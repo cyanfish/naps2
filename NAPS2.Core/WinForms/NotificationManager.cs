@@ -62,7 +62,7 @@ namespace NAPS2.WinForms
 
         private void Show(NotifyWidgetBase n)
         {
-            if (appConfigManager.Config.DisableSaveNotifications)
+            if (appConfigManager.Config.DisableSaveNotifications && n is NotifyWidget)
             {
                 return;
             }
