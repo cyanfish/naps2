@@ -147,7 +147,7 @@ namespace NAPS2.Ocr
                 if (req.Result == null)
                 {
                     req.CancelSource.Cancel();
-                    requestCache.Remove(req.Params);
+                    if (requestCache.Get(req.Params) == req) requestCache.Remove(req.Params);
                 }
             }
         }
@@ -210,7 +210,7 @@ namespace NAPS2.Ocr
                     }
                     if (next.Result == null)
                     {
-                        requestCache.Remove(next.Params);
+                        if (requestCache.Get(next.Params) == next) requestCache.Remove(next.Params);
                     }
                     next.IsProcessing = false;
                     next.WaitHandle.Set();
