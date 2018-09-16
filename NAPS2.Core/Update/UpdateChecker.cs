@@ -37,22 +37,27 @@ namespace NAPS2.Update
             {
                 var versionName = release.Value<string>("name");
                 var version = ParseVersion(versionName);
+
+                // if (currentVersion >= version) continue;
+
                 var gte = release["requires"].Value<string>("gte");
                 var gteVersion = gte != null ? ParseVersion(gte) : null;
-                if ((gteVersion == null || currentVersion >= gteVersion))// && currentVersion < version)
+                if (gteVersion != null && currentVersion < gteVersion) continue;
+
+                var updateFile = release["files"].Value<JToken>(UPDATE_FILE_EXT);
+                if (updateFile == null) continue;
+
+                var sha1 = updateFile.Value<string>("sha1");
+                var sig = updateFile.Value<string>("sig");
+                if (sha1 == null || sig == null) continue;
+
+                return new UpdateInfo
                 {
-                    var updateFile = release["files"].Value<JToken>(UPDATE_FILE_EXT);
-                    if (updateFile != null)
-                    {
-                        return new UpdateInfo
-                        {
-                            Name = versionName,
-                            DownloadUrl = updateFile.Value<string>("url"),
-                            Sha1 = Convert.FromBase64String(updateFile.Value<string>("sha1")),
-                            Signature = Convert.FromBase64String(updateFile.Value<string>("sig"))
-                        };
-                    }
-                }
+                    Name = versionName,
+                    DownloadUrl = updateFile.Value<string>("url"),
+                    Sha1 = Convert.FromBase64String(sha1),
+                    Signature = Convert.FromBase64String(sig)
+                };
             }
             return null;
         }

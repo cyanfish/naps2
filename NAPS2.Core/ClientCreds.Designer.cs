@@ -79,5 +79,15 @@ namespace NAPS2 {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] naps2_public {
+            get {
+                object obj = ResourceManager.GetObject("naps2_public", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

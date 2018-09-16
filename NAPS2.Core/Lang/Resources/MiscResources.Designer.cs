@@ -1105,6 +1105,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured when trying to install the update..
+        /// </summary>
+        internal static string UpdateError {
+            get {
+                return ResourceManager.GetString("UpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A newer version of NAPS2 is available. Do you want to update now?.
         /// </summary>
         internal static string UpdateNow {

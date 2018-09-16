@@ -39,6 +39,7 @@ namespace NAPS2.WinForms
 
         void operation_Error(object sender, OperationErrorEventArgs e)
         {
+            // TODO: Operation error for background
             if (!background)
             {
                 SafeInvoke(() => errorOutput.DisplayError(e.ErrorMessage, e.Exception));

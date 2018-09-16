@@ -5,14 +5,19 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
+using NAPS2.Util;
 
 namespace NAPS2.Update
 {
     public class UpdateOperation : OperationBase
     {
+        private readonly IErrorOutput errorOutput;
+
         private WebClient client;
         private UpdateInfo update;
         private string tempFolder;
@@ -30,8 +35,10 @@ namespace NAPS2.Update
             }
         }
 
-        public UpdateOperation()
+        public UpdateOperation(IErrorOutput errorOutput)
         {
+            this.errorOutput = errorOutput;
+
             ProgressTitle = MiscResources.UpdateProgress;
             AllowBackground = true;
             AllowCancel = true;
@@ -56,12 +63,56 @@ namespace NAPS2.Update
 
         private void DownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            // TODO: Verify sha1/sig
-            // TODO: Standalone install
-            Process.Start(tempPath);
-            // TODO: Clean up temp file somehow
-            InvokeFinished();
+            try
+            {
+                if (!VerifyHash())
+                {
+                    Log.Error($"Update error for {update.Name}: hash does not match");
+                    errorOutput.DisplayError(MiscResources.UpdateError);
+                    return;
+                }
+
+                if (!VerifySignature())
+                {
+                    Log.Error($"Update error for {update.Name}: signature does not validate");
+                    errorOutput.DisplayError(MiscResources.UpdateError);
+                    return;
+                }
+
+                // TODO: Standalone install
+                Process.Start(tempPath);
+                // TODO: Clean up temp file somehow
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException("Update error", ex);
+                errorOutput.DisplayError(MiscResources.UpdateError);
+                return;
+            }
+            finally
+            {
+                InvokeFinished();
+            }
             Application.OpenForms.OfType<Form>().FirstOrDefault()?.Close();
+        }
+
+        private bool VerifyHash()
+        {
+            using (var sha = new SHA1Managed())
+            {
+                using (FileStream stream = File.OpenRead(tempPath))
+                {
+                    byte[] checksum = sha.ComputeHash(stream);
+                    return checksum.SequenceEqual(update.Sha1);
+                }
+            }
+        }
+
+        private bool VerifySignature()
+        {
+            var cert = new X509Certificate2(ClientCreds.naps2_public);
+            var csp = (RSACryptoServiceProvider)cert.PublicKey.Key;
+            return csp.VerifyHash(update.Sha1, CryptoConfig.MapNameToOID("SHA1"), update.Signature);
         }
 
         private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
