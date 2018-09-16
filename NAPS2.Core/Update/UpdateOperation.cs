@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
@@ -19,6 +20,7 @@ namespace NAPS2.Update
     {
         private readonly IErrorOutput errorOutput;
 
+        private readonly ManualResetEvent waitHandle = new ManualResetEvent(false);
         private WebClient client;
         private UpdateInfo update;
         private string tempFolder;
@@ -62,24 +64,41 @@ namespace NAPS2.Update
             client.DownloadFileAsync(new Uri(updateInfo.DownloadUrl), tempPath);
         }
 
+        public override void Cancel()
+        {
+            client.CancelAsync();
+        }
+
+        public override void Wait()
+        {
+            waitHandle.WaitOne();
+        }
+
         private void DownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
             try
             {
+                if (e.Cancelled)
+                {
+                    return;
+                }
+                if (e.Error != null)
+                {
+                    e.Error.PreserveStackTrace();
+                    throw e.Error;
+                }
                 if (!VerifyHash())
                 {
                     Log.Error($"Update error for {update.Name}: hash does not match");
                     errorOutput.DisplayError(MiscResources.UpdateError);
                     return;
                 }
-
                 if (!VerifySignature())
                 {
                     Log.Error($"Update error for {update.Name}: signature does not validate");
                     errorOutput.DisplayError(MiscResources.UpdateError);
                     return;
                 }
-                // TODO: Cancel
                 // TODO: Standalone install
                 Process.Start(new ProcessStartInfo
                 {
@@ -96,6 +115,7 @@ namespace NAPS2.Update
             finally
             {
                 InvokeFinished();
+                waitHandle.Set();
             }
             RecoveryImage.DisableRecoveryCleanup = true;
             Application.OpenForms.OfType<Form>().FirstOrDefault()?.Close();
