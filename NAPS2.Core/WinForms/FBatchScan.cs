@@ -30,7 +30,6 @@ namespace NAPS2.WinForms
 
         private bool batchRunning;
         private CancellationTokenSource cts = new CancellationTokenSource();
-        private Task batchTask;
 
         public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, DialogHelper dialogHelper)
         {
