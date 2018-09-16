@@ -167,6 +167,7 @@
     <Compile Include="Ocr\Tesseract304XpEngine.cs" />
     <Compile Include="Ocr\Tesseract304Engine.cs" />
     <Compile Include="Ocr\Tesseract302Engine.cs" />
+    <Compile Include="Operation\OperationProgressType.cs" />
     <Compile Include="Platform\ISystemCompat.cs" />
     <Compile Include="Platform\LinuxSystemCompat.cs" />
     <Compile Include="Platform\PlatformCompat.cs" />
@@ -191,6 +192,9 @@
     <Compile Include="Scan\Sane\SaneWrapper.cs" />
     <Compile Include="Scan\Wia\WiaApi.mono.cs" />
     <Compile Include="Scan\Wia\WiaState.mono.cs" />
+    <Compile Include="Update\UpdateOperation.cs" />
+    <Compile Include="Update\UpdateInfo.cs" />
+    <Compile Include="Update\UpdateChecker.cs" />
     <Compile Include="Util\DeferredAction.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
     <Compile Include="Platform\IRuntimeCompat.cs" />

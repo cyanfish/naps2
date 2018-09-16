@@ -100,7 +100,9 @@ namespace NAPS2.WinForms
             }
             else
             {
-                labelNumber.Text = string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
+                labelNumber.Text = status.ProgressType == OperationProgressType.MB
+                    ? string.Format(MiscResources.SizeProgress, (status.CurrentProgress / 1000000.0).ToString("f1"), (status.MaxProgress / 1000000.0).ToString("f1"))
+                    : string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
                 progressBar.Style = ProgressBarStyle.Continuous;
                 progressBar.Maximum = status.MaxProgress;
                 progressBar.Value = status.CurrentProgress;

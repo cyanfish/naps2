@@ -16,7 +16,9 @@ namespace NAPS2.Automation
             op.Wait();
         }
 
-        public void ShowModalProgress(IOperation op) => throw new InvalidOperationException();
+        public void ShowModalProgress(IOperation op)
+        {
+        }
 
         public void ShowBackgroundProgress(IOperation op) {
         }

@@ -214,6 +214,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking....
+        /// </summary>
+        internal static string CheckingForUpdates {
+            get {
+                return ResourceManager.GetString("CheckingForUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose Profile.
         /// </summary>
         internal static string ChooseProfile {
@@ -727,6 +736,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install {0}.
+        /// </summary>
+        internal static string Install {
+            get {
+                return ResourceManager.GetString("Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installation Complete.
         /// </summary>
         internal static string InstallComplete {
@@ -840,6 +858,15 @@ namespace NAPS2.Lang.Resources {
         internal static string NotNow {
             get {
                 return ResourceManager.GetString("NotNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No updates available..
+        /// </summary>
+        internal static string NoUpdates {
+            get {
+                return ResourceManager.GetString("NoUpdates", resourceCulture);
             }
         }
         
@@ -1083,6 +1110,24 @@ namespace NAPS2.Lang.Resources {
         internal static string UpdateNow {
             get {
                 return ResourceManager.GetString("UpdateNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Progress.
+        /// </summary>
+        internal static string UpdateProgress {
+            get {
+                return ResourceManager.GetString("UpdateProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating....
+        /// </summary>
+        internal static string Updating {
+            get {
+                return ResourceManager.GetString("Updating", resourceCulture);
             }
         }
         

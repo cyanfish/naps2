@@ -24,6 +24,8 @@ namespace NAPS2.Config
 
         public HashSet<string> BackgroundOperations { get; set; } = new HashSet<string>();
 
+        public bool CheckForUpdates { get; set; }
+
         public DateTime? LastUpdateCheckDate { get; set; }
 
         public DateTime? FirstRunDate { get; set; }
