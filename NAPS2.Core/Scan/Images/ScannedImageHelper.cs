@@ -235,7 +235,7 @@ namespace NAPS2.Scan.Images
                 {
                     if (scanParams.DoOcr == true)
                     {
-                        var task = ocrRequestQueue.QueueForeground(null, snapshot, tempPath, scanParams.OcrParams, scanParams.OcrCancelToken);
+                        ocrRequestQueue.QueueForeground(null, snapshot, tempPath, scanParams.OcrParams, scanParams.OcrCancelToken).AssertNoAwait();
                     }
                     else
                     {

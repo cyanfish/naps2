@@ -265,7 +265,7 @@ namespace NAPS2.WinForms
             EnableDisableSettings(false);
 
             // Start the batch
-            batchTask = DoBatchScan();
+            DoBatchScan().AssertNoAwait();
 
             // Save settings for next time (could also do on form close)
             userConfigManager.Config.LastBatchSettings = BatchSettings;

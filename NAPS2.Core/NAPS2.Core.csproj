@@ -200,6 +200,7 @@
     <Compile Include="Util\NaturalStringComparer.cs" />
     <Compile Include="Util\ProgressHandler.cs" />
     <Compile Include="Util\SecureString.cs" />
+    <Compile Include="Util\TaskExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
     <Compile Include="WinForms\ImageForm.cs">
       <SubType>Form</SubType>
@@ -6238,5 +6239,5 @@ echo { client_id: null, client_secret: null } &gt; $(ProjectDir)microsoft.creden
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\NAPS2\Setup\CommonTargets.targets"/>
+  <Import Project="..\NAPS2\Setup\CommonTargets.targets" />
 </Project>
