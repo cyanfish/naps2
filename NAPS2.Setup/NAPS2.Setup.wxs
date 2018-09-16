@@ -71,6 +71,8 @@
         <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.exe.config" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe" />
         <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe.config" />
+        <File Source="..\NAPS2.Worker\bin\InstallerMSI\NAPS2.Worker.exe" />
+        <File Source="..\NAPS2.Worker\bin\InstallerMSI\NAPS2.Worker.exe.config" />
         <!-- Configuration -->
         <File Source="..\NAPS2\appsettings.xml" />
         <!-- License -->
@@ -102,8 +104,6 @@
         <File Source="..\NAPS2\bin\InstallerMSI\System.Threading.Tasks.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\System.ValueTuple.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\zxing.dll" />
-        <File Source="..\NAPS2.Worker\bin\InstallerMSI\NAPS2.Worker.exe" />
-        <File Source="..\NAPS2.Worker\bin\InstallerMSI\NAPS2.Worker.exe.config" />
       </Component>
     </DirectoryRef>
     
