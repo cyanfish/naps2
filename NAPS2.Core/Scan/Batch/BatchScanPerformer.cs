@@ -42,12 +42,13 @@ namespace NAPS2.Scan.Batch
             this.formFactory = formFactory;
         }
 
-        public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Func<string, bool> progressCallback)
+        public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
         {
             var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, ocrManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
+                CancelToken = cancelToken,
                 BatchForm = batchForm,
                 LoadImageCallback = imageCallback
             };
@@ -83,7 +84,9 @@ namespace NAPS2.Scan.Batch
 
             public BatchSettings Settings { get; set; }
 
-            public Func<string, bool> ProgressCallback { get; set; }
+            public Action<string> ProgressCallback { get; set; }
+
+            public CancellationToken CancelToken { get; set; }
 
             public FormBase BatchForm { get; set; }
 
@@ -97,7 +100,8 @@ namespace NAPS2.Scan.Batch
                     DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == SaveSeparator.PatchT,
                     NoUI = true,
                     DoOcr = Settings.OutputType == BatchOutputType.Load ? (bool?)null // Use the default behaviour if we don't know what will be done with the images
-                        : GetSavePathExtension().ToLower() == ".pdf" && ocrManager.DefaultParams?.LanguageCode != null
+                        : GetSavePathExtension().ToLower() == ".pdf" && ocrManager.DefaultParams?.LanguageCode != null,
+                    OcrCancelToken = CancelToken
                 };
                 try
                 {
@@ -131,9 +135,8 @@ namespace NAPS2.Scan.Batch
                         {
                             if (i != 0)
                             {
-                                string status = string.Format(MiscResources.BatchStatusWaitingForScan, i + 1);
-                                if (!ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds), TimeSpan.FromSeconds(1),
-                                    () => ProgressCallback(status)))
+                                ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
+                                if (!ThreadSleepWithCancel(TimeSpan.FromSeconds(Settings.ScanIntervalSeconds), TimeSpan.FromSeconds(1), CancelToken))
                                 {
                                     return;
                                 }
@@ -144,7 +147,8 @@ namespace NAPS2.Scan.Batch
                                 return;
                             }
 
-                            if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 2)))
+                            ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 2));
+                            if (CancelToken.IsCancellationRequested)
                             {
                                 return;
                             }
@@ -160,7 +164,8 @@ namespace NAPS2.Scan.Batch
                                 return;
                             }
 
-                            if (!ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1)))
+                            ProgressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
+                            if (CancelToken.IsCancellationRequested)
                             {
                                 return;
                             }
@@ -169,7 +174,7 @@ namespace NAPS2.Scan.Batch
                 }, TaskCreationOptions.LongRunning).Unwrap();
             }
 
-            private bool ThreadSleepWithCancel(TimeSpan sleepDuration, TimeSpan cancelCheckInterval, Func<bool> cancelCheck)
+            private bool ThreadSleepWithCancel(TimeSpan sleepDuration, TimeSpan cancelCheckInterval, CancellationToken cancelToken)
             {
                 while (sleepDuration > TimeSpan.Zero)
                 {
@@ -183,7 +188,7 @@ namespace NAPS2.Scan.Batch
                         Thread.Sleep(sleepDuration);
                         sleepDuration = TimeSpan.Zero;
                     }
-                    if (!cancelCheck())
+                    if (cancelToken.IsCancellationRequested)
                     {
                         return false;
                     }
@@ -195,9 +200,10 @@ namespace NAPS2.Scan.Batch
             {
                 var scan = new List<ScannedImage>();
                 int pageNumber = 1;
-                if (!ProgressCallback(scanNumber == -1
+                ProgressCallback(scanNumber == -1
                     ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                    : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1)))
+                    : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
+                if (CancelToken.IsCancellationRequested)
                 {
                     return false;
                 }
@@ -224,12 +230,10 @@ namespace NAPS2.Scan.Batch
                 await scanPerformer.PerformScan(profile, scanParams, BatchForm, null, image =>
                 {
                     scan.Add(image);
-                    if (!ProgressCallback(scanNumber == -1
+                    ProgressCallback(scanNumber == -1
                         ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                        : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1)))
-                    {
-                        throw new OperationCanceledException();
-                    }
+                        : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
+                    CancelToken.ThrowIfCancellationRequested();
                 });
             }
 
