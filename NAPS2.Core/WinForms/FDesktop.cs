@@ -366,7 +366,7 @@ namespace NAPS2.WinForms
             }
             else if (changeTracker.HasUnsavedChanges)
             {
-                if (e.CloseReason == CloseReason.UserClosing)
+                if (e.CloseReason == CloseReason.UserClosing && !RecoveryImage.DisableRecoveryCleanup)
                 {
                     var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
@@ -388,13 +388,13 @@ namespace NAPS2.WinForms
             if (!e.Cancel && operationProgress.ActiveOperations.Any())
             {
                 operationProgress.ActiveOperations.ForEach(op => op.Cancel());
-                closed = true;
                 e.Cancel = true;
                 Hide();
                 ShowInTaskbar = false;
                 Task.Factory.StartNew(() =>
                 {
                     operationProgress.ActiveOperations.ForEach(op => op.Wait());
+                    closed = true;
                     SafeInvoke(Close);
                 });
             }

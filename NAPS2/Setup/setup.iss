@@ -21,7 +21,7 @@ LicenseFile=..\..\LICENSE
 UninstallDisplayIcon={app}\scanner-app.ico
 
 [Run]
-Filename: "{app}\NAPS2.exe"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\NAPS2.exe"; Flags: nowait postinstall
 
 [Languages]
 Name: "english";              MessagesFile: "compiler:Default.isl"

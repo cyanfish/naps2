@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
+using NAPS2.Recovery;
 using NAPS2.Util;
 
 namespace NAPS2.Update
@@ -78,10 +79,13 @@ namespace NAPS2.Update
                     errorOutput.DisplayError(MiscResources.UpdateError);
                     return;
                 }
-
+                // TODO: Cancel
                 // TODO: Standalone install
-                Process.Start(tempPath);
-                // TODO: Clean up temp file somehow
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = tempPath,
+                    Arguments = "/SILENT /CLOSEAPPLICATIONS"
+                });
             }
             catch (Exception ex)
             {
@@ -93,6 +97,7 @@ namespace NAPS2.Update
             {
                 InvokeFinished();
             }
+            RecoveryImage.DisableRecoveryCleanup = true;
             Application.OpenForms.OfType<Form>().FirstOrDefault()?.Close();
         }
 
