@@ -20,6 +20,9 @@ SolidCompression=yes
 LicenseFile=..\..\LICENSE
 UninstallDisplayIcon={app}\scanner-app.ico
 
+[Run]
+Filename: "{app}\NAPS2.exe"; Flags: nowait postinstall skipifsilent
+
 [Languages]
 Name: "english";              MessagesFile: "compiler:Default.isl"
 Name: "BrazilianPortuguese";  MessagesFile: "C:\Program Files (x86)\Inno Setup 5\Languages\BrazilianPortuguese.isl"; 
