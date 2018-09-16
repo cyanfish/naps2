@@ -19,6 +19,8 @@ namespace NAPS2.DI.EntryPoints
             // Initialize Ninject (the DI framework)
             var kernel = new StandardKernel(new CommonModule(), new ConsoleModule());
 
+            Paths.ClearTemp();
+
             // Parse the command-line arguments (and display help text if appropriate)
             var options = new AutomatedScanningOptions();
             if (!CommandLine.Parser.Default.ParseArguments(args, options))

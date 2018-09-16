@@ -21,6 +21,8 @@ namespace NAPS2.DI.EntryPoints
             // Initialize Ninject (the DI framework)
             var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
 
+            Paths.ClearTemp();
+
             // Parse the command-line arguments and see if we're doing something other than displaying the main form
             var lifecycle = kernel.Get<Lifecycle>();
             lifecycle.ParseArgs(args);

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Util;
 
 namespace NAPS2
 {
@@ -31,6 +33,27 @@ namespace NAPS2
         public static string Recovery => EnsureFolderExists(RecoveryPath);
 
         public static string Components => EnsureFolderExists(ComponentsPath);
+
+        /// <summary>
+        /// Safely deletes the NAPS2 temp folder. If other NAPS2 or NAPS2.Console processes are running, the folder will be left alone.
+        /// </summary>
+        public static void ClearTemp()
+        {
+            try
+            {
+                var otherNaps2Processes = Process.GetProcesses().Where(x =>
+                    x.ProcessName.IndexOf("NAPS2", StringComparison.OrdinalIgnoreCase) >= 0 &&
+                    x.Id != Process.GetCurrentProcess().Id);
+                if (!otherNaps2Processes.Any())
+                {
+                    Directory.Delete(TempPath, true);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.ErrorException("Error clearing temp files", e);
+            }
+        }
 
         private static string EnsureFolderExists(string folderPath)
         {
