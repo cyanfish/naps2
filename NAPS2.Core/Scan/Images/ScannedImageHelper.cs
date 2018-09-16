@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Ocr;
 using NAPS2.Operation;
@@ -234,7 +233,14 @@ namespace NAPS2.Scan.Images
             {
                 using (var snapshot = image.Preserve())
                 {
-                    ocrRequestQueue.QueueBackground(snapshot, tempPath, scanParams.OcrParams);
+                    if (scanParams.DoOcr == true)
+                    {
+                        var task = ocrRequestQueue.QueueForeground(null, snapshot, tempPath, scanParams.OcrParams, scanParams.OcrCancelToken);
+                    }
+                    else
+                    {
+                        ocrRequestQueue.QueueBackground(snapshot, tempPath, scanParams.OcrParams);
+                    }
                 }
             }
         }

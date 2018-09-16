@@ -95,7 +95,9 @@ namespace NAPS2.Scan.Batch
                 scanParams = new ScanParams
                 {
                     DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == SaveSeparator.PatchT,
-                    NoUI = true
+                    NoUI = true,
+                    DoOcr = Settings.OutputType == BatchOutputType.Load ? (bool?)null // Use the default behaviour if we don't know what will be done with the images
+                        : GetSavePathExtension().ToLower() == ".pdf" && ocrManager.DefaultParams?.LanguageCode != null
                 };
                 try
                 {
