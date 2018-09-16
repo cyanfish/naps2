@@ -15,7 +15,7 @@ namespace NAPS2.DI.EntryPoints
     /// <summary>
     /// The entry point for NAPS2.Worker.exe, an off-process worker.
     ///
-    /// Unlike NAPS2.exe which is restricted by driver use, NAPS2.Worker.exe can run in 64-bit mode on compatible systems.
+    /// NAPS2.Worker.exe runs in 32-bit mode for compatibility with 32-bit TWAIN drivers.
     /// </summary>
     public static class WorkerEntryPoint
     {
