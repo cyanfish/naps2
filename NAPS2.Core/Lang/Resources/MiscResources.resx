@@ -210,24 +210,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>An error occurred while trying to send an email.</value>
   </data>
-  <data name="AutoUpdates" xml:space="preserve">
-    <value>Automatic Updates</value>
-  </data>
-  <data name="Download" xml:space="preserve">
-    <value>Download</value>
-  </data>
-  <data name="DownloadAndInstall" xml:space="preserve">
-    <value>Download and Install</value>
-  </data>
-  <data name="EnableAutoUpdates" xml:space="preserve">
-    <value>Do you want NAPS2 to automatically check for updates?</value>
-  </data>
-  <data name="NotNow" xml:space="preserve">
-    <value>Not Now</value>
-  </data>
-  <data name="UpdateNow" xml:space="preserve">
-    <value>A newer version of NAPS2 is available. Do you want to update now?</value>
-  </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Installation Complete</value>
   </data>
