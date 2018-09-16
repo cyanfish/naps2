@@ -60,6 +60,19 @@ namespace NAPS2.WinForms
             Show(new OperationProgressNotifyWidget(opModalProgress, op));
         }
 
+        public void Rebuild()
+        {
+            var old = slots.ToList();
+            slots.Clear();
+            for (int i = 0; i < old.Count; i++)
+            {
+                if (old[i] != null)
+                {
+                    Show(old[i].Clone());
+                }
+            }
+        }
+
         private void Show(NotifyWidgetBase n)
         {
             if (appConfigManager.Config.DisableSaveNotifications && n is NotifyWidget)

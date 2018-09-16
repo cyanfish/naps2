@@ -271,6 +271,7 @@ namespace NAPS2.WinForms
             InitializeComponent();
             PostInitializeComponent();
             AddThumbnails();
+            notify.Rebuild();
             Focus();
             WindowState = FormWindowState.Normal;
             DoRestoreFormState();

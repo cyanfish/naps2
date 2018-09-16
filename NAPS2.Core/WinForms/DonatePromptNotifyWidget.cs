@@ -12,5 +12,7 @@ namespace NAPS2.WinForms
         {
             hideTimer.Interval = 60 * 1000;
         }
+
+        public override NotifyWidgetBase Clone() => new DonatePromptNotifyWidget();
     }
 }

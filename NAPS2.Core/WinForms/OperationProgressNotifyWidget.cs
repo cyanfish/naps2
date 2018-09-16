@@ -24,6 +24,8 @@ namespace NAPS2.WinForms
             DisplayProgress();
         }
 
+        public override NotifyWidgetBase Clone() => new OperationProgressNotifyWidget(operationProgress, op);
+
         private void DisplayProgress()
         {
             var status = op.Status ?? new OperationStatus();

@@ -36,5 +36,7 @@ namespace NAPS2.WinForms
             {
             }
         }
+
+        public virtual NotifyWidgetBase Clone() => throw new NotImplementedException();
     }
 }
