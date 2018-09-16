@@ -18,15 +18,13 @@ namespace NAPS2.Ocr
         private CancellationTokenSource workerCts = new CancellationTokenSource();
 
         private readonly OcrManager ocrManager;
-        private readonly ScannedImageRenderer renderer;
         private readonly IOperationProgress operationProgress;
 
         private OcrOperation currentOp;
 
-        public OcrRequestQueue(OcrManager ocrManager, ScannedImageRenderer renderer, IOperationProgress operationProgress)
+        public OcrRequestQueue(OcrManager ocrManager, IOperationProgress operationProgress)
         {
             this.ocrManager = ocrManager;
-            this.renderer = renderer;
             this.operationProgress = operationProgress;
         }
 
@@ -209,6 +207,10 @@ namespace NAPS2.Ocr
                     if (result != null)
                     {
                         next.Result = result;
+                    }
+                    if (next.Result == null)
+                    {
+                        requestCache.Remove(next.Params);
                     }
                     next.IsProcessing = false;
                     next.WaitHandle.Set();
