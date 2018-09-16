@@ -41,6 +41,8 @@ namespace NAPS2
         {
             try
             {
+                if (!Directory.Exists(TempPath)) return;
+
                 var otherNaps2Processes = Process.GetProcesses().Where(x =>
                     x.ProcessName.IndexOf("NAPS2", StringComparison.OrdinalIgnoreCase) >= 0 &&
                     x.Id != Process.GetCurrentProcess().Id);
