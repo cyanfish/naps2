@@ -31,6 +31,12 @@ namespace NAPS2.DI.EntryPoints
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
                 var workerService = kernel.Get<WorkerService>();
 
+                // Expect a single argument, the parent process id
+                if (args.Length != 1 || !int.TryParse(args[0], out int procId) || !IsProcessRunning(procId))
+                {
+                    return;
+                }
+
                 // Set up basic application configuration
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -58,6 +64,19 @@ namespace NAPS2.DI.EntryPoints
                 Console.Write('k');
                 Log.FatalException("An error occurred that caused the worker application to close.", ex);
                 Environment.Exit(1);
+            }
+        }
+
+        private static bool IsProcessRunning(int procId)
+        {
+            try
+            {
+                var proc = Process.GetProcessById(procId);
+                return !proc.HasExited;
+            }
+            catch (ArgumentException)
+            {
+                return false;
             }
         }
 

@@ -49,10 +49,11 @@ namespace NAPS2.Worker
 
         private static Process StartWorkerProcess()
         {
+            var parentId = Process.GetCurrentProcess().Id;
             var proc = Process.Start(new ProcessStartInfo
             {
                 FileName = PlatformCompat.Runtime.ExeRunner ?? WorkerExePath,
-                Arguments = PlatformCompat.Runtime.ExeRunner != null ? WorkerExePath : "",
+                Arguments = PlatformCompat.Runtime.ExeRunner != null ? $"{WorkerExePath} {parentId}" : $"{parentId}",
                 RedirectStandardOutput = true,
                 UseShellExecute = false
             });
