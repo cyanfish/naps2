@@ -49,9 +49,14 @@ namespace NAPS2.WinForms
                     .TopTo(() => Height / 2)
                 .Activate();
 
+#if INSTALLER_MSI
+            ConditionalControls.Hide(cbCheckForUpdates, 15);
+            ConditionalControls.Hide(lblUpdateStatus, 5);
+#else
             cbCheckForUpdates.Checked = userConfigManager.Config.CheckForUpdates;
             UpdateControls();
             DoUpdateCheck();
+#endif
         }
 
         private void DoUpdateCheck()
@@ -121,7 +126,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        #region Assembly Attribute Accessors
+#region Assembly Attribute Accessors
 
         private static string GetAssemblyAttributeValue<T>(Func<T, string> selector)
         {
@@ -156,7 +161,7 @@ namespace NAPS2.WinForms
 
         public string AssemblyCompany => GetAssemblyAttributeValue<AssemblyCompanyAttribute>(x => x.Company);
 
-        #endregion
+#endregion
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
