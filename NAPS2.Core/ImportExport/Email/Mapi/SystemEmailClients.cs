@@ -50,17 +50,17 @@ namespace NAPS2.ImportExport.Email.Mapi
 
         internal MapiSendMailDelegate GetDelegate(string clientName)
         {
-            if (clientName == null)
-            {
-                return MAPISendMail;
-            }
-            var dllPath = GetDllPath(clientName);
+            var dllPath = clientName == null ? null : GetDllPath(clientName);
             if (dllPath == null)
             {
-                return MAPISendMail;
+                dllPath = "mapi32.dll";
             }
             var module = Win32.LoadLibrary(dllPath);
-            var addr = Win32.GetProcAddress(module, "MAPISendMail");
+            var addr = Win32.GetProcAddress(module, "MAPISendMailW");
+            if (addr == IntPtr.Zero)
+            {
+                addr = Win32.GetProcAddress(module, "MAPISendMailHelper");
+            }
             return (MapiSendMailDelegate)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegate));
         }
 
@@ -72,12 +72,8 @@ namespace NAPS2.ImportExport.Email.Mapi
             }
         }
 
-        internal delegate MapiSendMailReturnCode MapiSendMailDelegate(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);
-
         // MAPISendMail is documented at:
         // http://msdn.microsoft.com/en-us/library/windows/desktop/dd296721%28v=vs.85%29.aspx
-
-        [DllImport("mapi32.DLL")]
-        private static extern MapiSendMailReturnCode MAPISendMail(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);
+        internal delegate MapiSendMailReturnCode MapiSendMailDelegate(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);
     }
 }

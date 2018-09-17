@@ -9,7 +9,7 @@ namespace NAPS2.ImportExport.Email.Mapi
     /// A MAPI structure describing an email sender or recipient.
     /// Documented at: http://msdn.microsoft.com/en-us/library/windows/desktop/dd296720%28v=vs.85%29.aspx
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal class MapiRecipDesc
     {
         public int reserved;
