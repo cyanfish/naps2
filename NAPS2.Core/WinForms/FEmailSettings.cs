@@ -25,9 +25,9 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(btnRestoreDefaults, btnOK, btnCancel)
                     .BottomToForm()
-                .Bind(btnOK, btnCancel)
+                .Bind(btnOK, btnCancel, btnChangeProvider)
                     .RightToForm()
-                .Bind(txtAttachmentName)
+                .Bind(txtAttachmentName, groupBox1)
                     .WidthToForm()
                 .Activate();
 
