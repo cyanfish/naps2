@@ -118,6 +118,10 @@ msgstr ""
 msgid "Allow Full Quality Printing"
 msgstr ""
 
+#: FPdfSettings.resx$clbPerms.Items$Message
+msgid "Allow Printing"
+msgstr ""
+
 #: FDesktop.resx$tsAltDeinterleave.Text$Message
 msgid "Alternate Deinterleave"
 msgstr ""

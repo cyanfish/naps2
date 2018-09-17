@@ -9,7 +9,7 @@ namespace NAPS2.Localization
     {
         private static readonly Regex SuffixRegex = new Regex(@"[:.]+$");
         private static readonly Regex HotkeyRegex = new Regex(@"&(\w)");
-        private static readonly Regex TextPropRegex = new Regex(@"(Text|Items\d+)$");
+        private static readonly Regex TextPropRegex = new Regex(@"(Text|Items\d*)$");
 
         public static bool IsTranslatable(bool winforms, string prop, ref string original, out string prefix, out string suffix)
         {
