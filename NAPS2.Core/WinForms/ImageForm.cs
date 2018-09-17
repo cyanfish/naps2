@@ -151,8 +151,8 @@ namespace NAPS2.WinForms
 
         private void ImageForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            workingImage.Dispose();
-            workingImage2.Dispose();
+            workingImage?.Dispose();
+            workingImage2?.Dispose();
             PictureBox.Image?.Dispose();
             previewTimer?.Dispose();
         }
