@@ -1,6 +1,6 @@
 . .\naps2.ps1
 
-$Localize = "..\..\NAPS2.Localization\bin\Release\NAPS2.Localization.exe"
+$Localize = "..\..\NAPS2.Localization\bin\Debug\NAPS2.Localization.exe"
 
 if (Test-Path $Localize) {
 	& $Localize templates
