@@ -465,4 +465,7 @@
   <data name="UpdateAvailable" xml:space="preserve">
     <value>An update is available.</value>
   </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>An error occurred when trying to authorize.</value>
+  </data>
 </root>

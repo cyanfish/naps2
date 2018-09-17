@@ -6,16 +6,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Email.Oauth;
+using NAPS2.Lang.Resources;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
     public partial class FAuthorize : FormBase
     {
+        private readonly IErrorOutput errorOutput;
         private CancellationTokenSource cancelTokenSource;
 
-        public FAuthorize()
+        public FAuthorize(IErrorOutput errorOutput)
         {
+            this.errorOutput = errorOutput;
             RestoreFormState = false;
             InitializeComponent();
         }
@@ -41,6 +44,16 @@ namespace NAPS2.WinForms
                 }
                 catch (OperationCanceledException)
                 {
+                }
+                catch (Exception ex)
+                {
+                    errorOutput.DisplayError(MiscResources.AuthError, ex);
+                    Log.ErrorException("Error acquiring Oauth token", ex);
+                    Invoke(() =>
+                    {
+                        DialogResult = DialogResult.Cancel;
+                        Close();
+                    });
                 }
             }, TaskCreationOptions.LongRunning);
         }
