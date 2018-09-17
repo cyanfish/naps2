@@ -5,16 +5,18 @@
 
 # Rebuild NAPS2
 
+$msbuild = Get-MSBuild-Path
+& $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Debug
+
 $Version = Get-NAPS2-Version
 $PublishDir = "..\publish\$Version\"
 if (-not (Test-Path $PublishDir)) {
     mkdir $PublishDir
 }
-$msbuild = Get-MSBuild-Path
 Get-Process | where { $_.ProcessName -eq "NAPS2.vshost" } | kill
-"Building MSI"
-& $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerMSI
+
 "Building ZIP"
+& $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone /t:Clean
 if ($d) {
     & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone /t:Rebuild /p:DefineConstants=DEBUG%3BSTANDALONE
 } else {
