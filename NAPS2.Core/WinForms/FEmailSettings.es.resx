@@ -19,7 +19,7 @@
     <value>&amp;Cancelar</value>
   </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
-    <value>Recuerde estas configuraciones</value>
+    <value>Recuerde esta configuración</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
     <value>&amp;Restaurar los valores predeterminados</value>
@@ -40,6 +40,6 @@
     <value>Provider</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Ajustes del correo electrónico</value>
+    <value>Configuración del correo electrónico</value>
   </data>
 </root>

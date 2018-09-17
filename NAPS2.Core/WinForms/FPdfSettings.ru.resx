@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Шифрование</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Разрешить печать</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Разрешить полнокачественную печать</value>
   </data>

@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>التشفير</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>السماح بالطباعة</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>السماح بالطباعة بالجودة الكاملة</value>
   </data>

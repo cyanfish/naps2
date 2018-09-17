@@ -43,16 +43,16 @@
     <value>&amp;Recortar</value>
   </data>
   <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value>&amp;Brightness / Contrast</value>
+    <value>&amp;Brillo / Contraste</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value>&amp;Hue / Saturation</value>
+    <value>&amp;Tono / Saturación</value>
   </data>
   <data name="tsBlackWhite.Text" xml:space="preserve">
     <value>&amp;Blanco y negro</value>
   </data>
   <data name="tsSharpen.Text" xml:space="preserve">
-    <value>&amp;Sharpen</value>
+    <value>&amp;Enfoque</value>
   </data>
   <data name="tsReset.Text" xml:space="preserve">
     <value>&amp;Reiniciar</value>
@@ -73,7 +73,7 @@
     <value>&amp;Reordenar</value>
   </data>
   <data name="tsDelete.Text" xml:space="preserve">
-    <value>&amp;Borrar</value>
+    <value>&amp;Eliminar</value>
   </data>
   <data name="tsClear.Text" xml:space="preserve">
     <value>&amp;Limpiar</value>
@@ -100,10 +100,10 @@
     <value>Pegar</value>
   </data>
   <data name="ctxDelete.Text" xml:space="preserve">
-    <value>Borrar</value>
+    <value>Eliminar</value>
   </data>
   <data name="tsNewProfile.Text" xml:space="preserve">
-    <value>&amp;Nuevo Perfil</value>
+    <value>&amp;Nuevo perfil</value>
   </data>
   <data name="tsBatchScan.Text" xml:space="preserve">
     <value>&amp;Escanear por lotes</value>
@@ -115,7 +115,7 @@
     <value>&amp;Seleccionado ({0})</value>
   </data>
   <data name="tsPDFSettings.Text" xml:space="preserve">
-    <value>&amp;Configuraciones PDF</value>
+    <value>&amp;Configuración de PDF</value>
   </data>
   <data name="tsSaveImagesAll.Text" xml:space="preserve">
     <value>&amp;Todo ({0})</value>
@@ -133,10 +133,10 @@
     <value>&amp;Seleccionado ({0})</value>
   </data>
   <data name="tsEmailSettings.Text" xml:space="preserve">
-    <value>&amp;Ajustes del correo electrónico</value>
+    <value>&amp;Configuración del correo electrónico</value>
   </data>
   <data name="tsPdfSettings2.Text" xml:space="preserve">
-    <value>&amp;Configuraciones PDF</value>
+    <value>&amp;Configuración de PDF</value>
   </data>
   <data name="tsRotateLeft.Text" xml:space="preserve">
     <value>&amp;Girar a la izquierda</value>
@@ -148,7 +148,7 @@
     <value>&amp;Voltear</value>
   </data>
   <data name="tsDeskew.Text" xml:space="preserve">
-    <value>&amp;Deskew</value>
+    <value>&amp;Corregir sesgo</value>
   </data>
   <data name="tsCustomRotation.Text" xml:space="preserve">
     <value>&amp;Rotación personalizada</value>
@@ -160,10 +160,10 @@
     <value>&amp;Desentrelazar</value>
   </data>
   <data name="tsAltInterleave.Text" xml:space="preserve">
-    <value>&amp;Alternate Interleave</value>
+    <value>&amp;Entrelazado alternativo</value>
   </data>
   <data name="tsAltDeinterleave.Text" xml:space="preserve">
-    <value>A&amp;lternate Deinterleave</value>
+    <value>&amp;Desentrelazado alternativo</value>
   </data>
   <data name="tsReverse.Text" xml:space="preserve">
     <value>&amp;Invertir</value>

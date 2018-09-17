@@ -28,10 +28,10 @@
     <value>Usar configuración predefinida</value>
   </data>
   <data name="rdbNative.Text" xml:space="preserve">
-    <value>Usar interfaz nativo</value>
+    <value>Usar interfaz nativa</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Profundidad de bit:</value>
+    <value>Profundidad de color:</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Tamaño de página:</value>
@@ -63,11 +63,14 @@
   <data name="rdWIA.Text" xml:space="preserve">
     <value>Controlador WIA</value>
   </data>
+  <data name="rdSANE.Text" xml:space="preserve">
+    <value>SANE Driver</value>
+  </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
-    <value>Enable Auto Save</value>
+    <value>Activar autoguardado</value>
   </data>
   <data name="linkAutoSaveSettings.Text" xml:space="preserve">
-    <value>Guardar configuración de automóviles</value>
+    <value>Configuración de autoguardado</value>
   </data>
   <data name="btnAdvanced.Text" xml:space="preserve">
     <value>&amp;Avanzadas</value>

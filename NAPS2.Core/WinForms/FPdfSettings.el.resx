@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Κρυπτογράφηση</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Να Επιτρέπεται Εκτύπωση</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Να Επιτρέπεται Εκτύπωση Μέγιστης Ποιότητας</value>
   </data>

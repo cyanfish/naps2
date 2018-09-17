@@ -133,7 +133,7 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Utført</value>
+    <value>Ingen</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>Standard</value>

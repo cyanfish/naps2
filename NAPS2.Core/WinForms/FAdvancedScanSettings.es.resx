@@ -25,22 +25,22 @@
     <value>Calidad de imagen</value>
   </data>
   <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-    <value>Delay between scans (WIA)</value>
+    <value>Pausa entre escaneos (WIA)</value>
   </data>
   <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-    <value>Retry on failure (WIA)</value>
+    <value>Reintentar al fallar (WIA)</value>
   </data>
   <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
-    <value>Crop to page size</value>
+    <value>Recortar a tamaño de página</value>
   </data>
   <data name="cbFlipDuplex.Text" xml:space="preserve">
-    <value>Flip duplexed pages</value>
+    <value>Voltear las páginas a doble cara</value>
   </data>
   <data name="cbWiaOffsetWidth.Text" xml:space="preserve">
-    <value>Offset width based on alignment (WIA)</value>
+    <value>Ancho de desplazamiento basado en alineación (WIA)</value>
   </data>
   <data name="cbForcePageSize.Text" xml:space="preserve">
-    <value>Stretch to page size</value>
+    <value>Estirar hasta tamaño de página</value>
   </data>
   <data name="cbBrightnessContrastAfterScan.Text" xml:space="preserve">
     <value>Aplicar el brillo/contraste tras el escaneo</value>
@@ -52,7 +52,7 @@
     <value>Compatibilidad</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Coverage Threshold</value>
+    <value>Umbral de cobertura</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Umbral de blanco</value>
@@ -61,18 +61,18 @@
     <value>Excluir las páginas en blanco</value>
   </data>
   <data name="groupBox3.Text" xml:space="preserve">
-    <value>Paginas en blanco</value>
+    <value>Páginas en blanco</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
     <value>&amp;Restaurar los valores predeterminados</value>
   </data>
   <data name="cbAutoDeskew.Text" xml:space="preserve">
-    <value>Deskew scanned pages</value>
+    <value>Corregir sesgo de las páginas escaneadas</value>
   </data>
   <data name="groupBox4.Text" xml:space="preserve">
-    <value>Post-processing</value>
+    <value>Posprocesamiento</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Preferencias de perfil avanzadas</value>
+    <value>Configuración de perfil avanzada</value>
   </data>
 </root>

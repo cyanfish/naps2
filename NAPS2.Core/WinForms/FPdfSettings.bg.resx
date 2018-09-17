@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Шифроване</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Разреши принтиране</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Разрешаване на принтиране с високо качество</value>
   </data>

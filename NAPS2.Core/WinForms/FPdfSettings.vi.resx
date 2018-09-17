@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Encryption</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Cho phép in</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Cho phép cải thiện bản In</value>
   </data>

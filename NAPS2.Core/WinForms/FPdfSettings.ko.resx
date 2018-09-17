@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>암호화</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>인쇄 허용</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>고품질 인쇄 허용</value>
   </data>

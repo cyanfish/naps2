@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="labelCopyright.Text" xml:space="preserve">
-    <value>Copyright 2009, 2012-2017 NAPS2 Contributors</value>
+    <value>Copyright 2009, 2012-2018 NAPS2 Contributors</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
     <value>&amp;OK</value>
@@ -26,6 +26,9 @@
   </data>
   <data name="linkLabel2.Text" xml:space="preserve">
     <value>http://www.fatcow.com/free-icons</value>
+  </data>
+  <data name="cbCheckForUpdates.Text" xml:space="preserve">
+    <value>Check for updates</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Par</value>

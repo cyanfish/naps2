@@ -28,16 +28,16 @@
     <value>Apgriezt</value>
   </data>
   <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value>Brightness / Contrast</value>
+    <value>Spilgtums / Kontrasts</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>Tonis / Piesātinājums</value>
   </data>
   <data name="tsBlackWhite.Text" xml:space="preserve">
     <value>Melns &amp; balts</value>
   </data>
   <data name="tsSharpen.Text" xml:space="preserve">
-    <value>Sharpen</value>
+    <value>Asināt</value>
   </data>
   <data name="tsSavePDF.Text" xml:space="preserve">
     <value>Saglabāt PDF</value>

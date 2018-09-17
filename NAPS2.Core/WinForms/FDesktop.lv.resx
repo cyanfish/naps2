@@ -43,16 +43,16 @@
     <value>&amp;Apgriezt</value>
   </data>
   <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value>&amp;Brightness / Contrast</value>
+    <value>&amp;Spilgtums / Kontrasts</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value>&amp;Hue / Saturation</value>
+    <value>&amp;Tonis / Piesātinājums</value>
   </data>
   <data name="tsBlackWhite.Text" xml:space="preserve">
     <value>&amp;Melns &amp; balts</value>
   </data>
   <data name="tsSharpen.Text" xml:space="preserve">
-    <value>&amp;Sharpen</value>
+    <value>&amp;Asināt</value>
   </data>
   <data name="tsReset.Text" xml:space="preserve">
     <value>&amp;Atiestatīt</value>

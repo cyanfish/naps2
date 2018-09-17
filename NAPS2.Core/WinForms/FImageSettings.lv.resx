@@ -37,16 +37,16 @@
     <value>Izlaist saglabāšanas dialogu</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Compression:</value>
+    <value>Kompresija:</value>
   </data>
   <data name="cbSinglePageTiff.Text" xml:space="preserve">
-    <value>Single page files</value>
+    <value>Vienas lappuses datnes</value>
   </data>
   <data name="groupJpeg.Text" xml:space="preserve">
     <value>JPEG kvalitāte</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>Tiff iestatījumi</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Attēla iestatījumi</value>

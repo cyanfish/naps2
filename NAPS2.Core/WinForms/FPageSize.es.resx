@@ -19,7 +19,7 @@
     <value>&amp;Cancelar</value>
   </data>
   <data name="labelX.Text" xml:space="preserve">
-    <value>Tamaño de Pagina</value>
+    <value>X</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Nombre (opcional)</value>
@@ -28,6 +28,6 @@
     <value>Dimensiones</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Personalizar Tamaño de Pagina</value>
+    <value>Tamaño de página personalizado</value>
   </data>
 </root>

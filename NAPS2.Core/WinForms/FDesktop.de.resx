@@ -19,7 +19,7 @@
     <value>&amp;Profile</value>
   </data>
   <data name="tsOcr.Text" xml:space="preserve">
-    <value>&amp;Texterkennung</value>
+    <value>&amp;Optische Texterkennung</value>
   </data>
   <data name="tsImport.Text" xml:space="preserve">
     <value>&amp;Importieren</value>

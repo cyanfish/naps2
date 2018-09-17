@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>رمزگذاری</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>اجازه چاپ</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>اجازه چاپ با کیفیت کامل</value>
   </data>

@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Shifrimi</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Lejo printimin</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Lejo printimin me cilësi të plotë</value>
   </data>

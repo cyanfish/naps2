@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>加密</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>允許列印</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>允許完整品質列印</value>
   </data>

@@ -27,6 +27,12 @@
   <data name="btnOK.Text" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
+  <data name="labelOcrMode.Text" xml:space="preserve">
+    <value>OCR mode:</value>
+  </data>
+  <data name="checkBoxRunInBG.Text" xml:space="preserve">
+    <value>&amp;Automatically run OCR after scanning</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configurar OCR</value>
   </data>

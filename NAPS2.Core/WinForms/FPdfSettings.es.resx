@@ -19,7 +19,7 @@
     <value>&amp;Cancelar</value>
   </data>
   <data name="groupMetadata.Text" xml:space="preserve">
-    <value>Metadato</value>
+    <value>Metadatos</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Palabras clave:</value>
@@ -35,6 +35,9 @@
   </data>
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Cifrado</value>
+  </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Permitir impresión</value>
   </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Permitir impresión de calidad total</value>
@@ -67,13 +70,13 @@
     <value>Contraseña de usuario:</value>
   </data>
   <data name="lblOwnerPassword.Text" xml:space="preserve">
-    <value>Contraseña de Propietario:</value>
+    <value>Contraseña de propietario:</value>
   </data>
   <data name="cbEncryptPdf.Text" xml:space="preserve">
     <value>Cifrar PDF</value>
   </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
-    <value>Recuerde estas configuraciones</value>
+    <value>Recuerde esta configuración</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
     <value>&amp;Restaurar los valores predeterminados</value>
@@ -82,15 +85,15 @@
     <value>Marcadores de posición</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Nombre de archivo por defecto:</value>
+    <value>Ruta predeterminada:</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-    <value>Skip save prompt</value>
+    <value>Omitir aviso de guardado</value>
   </data>
   <data name="groupCompat.Text" xml:space="preserve">
     <value>Compatibilidad</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Configuraciones PDF</value>
+    <value>Configuración de PDF</value>
   </data>
 </root>

@@ -22,6 +22,6 @@
     <value>Listo para el escaneo {0}.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Siguiente Escaneo</value>
+    <value>Siguiente escaneo</value>
   </data>
 </root>

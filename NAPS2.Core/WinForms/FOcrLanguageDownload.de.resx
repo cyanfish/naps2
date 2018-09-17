@@ -28,6 +28,6 @@
     <value>Geschätzte Download-Größe: {0} MB</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Sprachpaket herunterladen</value>
+    <value>OCR-Sprachpaket herunterladen</value>
   </data>
 </root>

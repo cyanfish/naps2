@@ -28,7 +28,7 @@
     <value>Pegar</value>
   </data>
   <data name="ctxDelete.Text" xml:space="preserve">
-    <value>Borrar</value>
+    <value>Eliminar</value>
   </data>
   <data name="btnAdd.Text" xml:space="preserve">
     <value>&amp;Nuevo</value>
@@ -37,7 +37,7 @@
     <value>&amp;Editar</value>
   </data>
   <data name="btnDelete.Text" xml:space="preserve">
-    <value>&amp;Borrar</value>
+    <value>&amp;Eliminar</value>
   </data>
   <data name="btnDone.Text" xml:space="preserve">
     <value>&amp;Terminado</value>

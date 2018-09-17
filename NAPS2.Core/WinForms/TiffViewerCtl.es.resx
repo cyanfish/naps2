@@ -13,18 +13,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="tsStretch.ToolTipText" xml:space="preserve">
-    <value>Escala con Ventana</value>
+    <value>Escalar con ventana</value>
   </data>
   <data name="tsZoomActual.ToolTipText" xml:space="preserve">
-    <value>Acercamiento Actual</value>
+    <value>Zoom actual</value>
   </data>
   <data name="tsZoomPlus.ToolTipText" xml:space="preserve">
-    <value>Acercar</value>
+    <value>Acercarse</value>
   </data>
   <data name="tsZoomOut.ToolTipText" xml:space="preserve">
-    <value>Alejar</value>
+    <value>Alejarse</value>
   </data>
   <data name="tsZoom.ToolTipText" xml:space="preserve">
-    <value>Esperando que TWAIN finalice</value>
+    <value>Zoom</value>
   </data>
 </root>

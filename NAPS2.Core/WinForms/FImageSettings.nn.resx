@@ -37,16 +37,16 @@
     <value>Hopp over lagre-spørsmål</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Compression:</value>
+    <value>Komprimering:</value>
   </data>
   <data name="cbSinglePageTiff.Text" xml:space="preserve">
-    <value>Single page files</value>
+    <value>Enkelside filer</value>
   </data>
   <data name="groupJpeg.Text" xml:space="preserve">
     <value>Jpeg-kvalitet</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>Innstillingar for Tiff</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Bildesettingar</value>

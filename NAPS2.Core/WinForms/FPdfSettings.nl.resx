@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Versleuteling</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Afdrukken toestaan</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Afdrukken met volledige kwaliteit toestaan</value>
   </data>

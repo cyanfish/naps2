@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Енкрипција</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Дозволи штампу</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Дозволи штампу највишег квалитета</value>
   </data>

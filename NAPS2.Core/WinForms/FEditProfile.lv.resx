@@ -63,6 +63,9 @@
   <data name="rdWIA.Text" xml:space="preserve">
     <value>WIA draiveris</value>
   </data>
+  <data name="rdSANE.Text" xml:space="preserve">
+    <value>SANE Driver</value>
+  </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
     <value>Iespējot automātisku saglabāšanu</value>
   </data>

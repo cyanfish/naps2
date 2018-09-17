@@ -19,16 +19,16 @@
     <value>&amp;Cancelar</value>
   </data>
   <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-    <value>More info</value>
+    <value>Más información</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value>Separate files by Patch-T</value>
+    <value>Separar archivos usando Patch-T</value>
   </data>
   <data name="rdFilePerPage.Text" xml:space="preserve">
-    <value>One file per page</value>
+    <value>Un archivo por página</value>
   </data>
   <data name="rdFilePerScan.Text" xml:space="preserve">
-    <value>One file per scan</value>
+    <value>Un archivo por escaneo</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
     <value>Marcadores de posición</value>
@@ -40,9 +40,9 @@
     <value>Borrar las imágenes después de guardar</value>
   </data>
   <data name="cbPromptForFilePath.Text" xml:space="preserve">
-    <value>Prompt for file path</value>
+    <value>Preguntar ruta de archivo</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Guardar configuración de automóviles</value>
+    <value>Configuración de autoguardado</value>
   </data>
 </root>

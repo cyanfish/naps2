@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Šifravimas</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Leisti spausdinti</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Leisti spausdinti visiškos kokybės</value>
   </data>

@@ -19,13 +19,13 @@
     <value>&amp;Cancelar</value>
   </data>
   <data name="cbRememberSettings.Text" xml:space="preserve">
-    <value>Recuerde estas configuraciones</value>
+    <value>Recuerde esta configuración</value>
   </data>
   <data name="btnRestoreDefaults.Text" xml:space="preserve">
     <value>&amp;Restaurar los valores predeterminados</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Nombre de archivo por defecto:</value>
+    <value>Ruta predeterminada:</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
     <value>Marcadores de posición</value>
@@ -34,19 +34,19 @@
     <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
-    <value>Skip save prompt</value>
+    <value>Omitir aviso de guardado</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Compression:</value>
+    <value>Compresión:</value>
   </data>
   <data name="cbSinglePageTiff.Text" xml:space="preserve">
-    <value>Single page files</value>
+    <value>Archivos de una única página</value>
   </data>
   <data name="groupJpeg.Text" xml:space="preserve">
     <value>Calidad Jpeg</value>
   </data>
   <data name="groupTiff.Text" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>Opciones Tiff</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configuración de la imagen</value>

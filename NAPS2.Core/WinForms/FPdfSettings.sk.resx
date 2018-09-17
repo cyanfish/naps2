@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Šifrovanie</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Povoliť tlač</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Povoliť tlač v plnej kvalite</value>
   </data>

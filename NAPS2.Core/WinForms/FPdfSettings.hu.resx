@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Encryption</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Nyomtatás engedélyezése</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Legjobb minőségű nyomtatás engedélyezése</value>
   </data>

@@ -40,7 +40,7 @@
     <value>Komprimierung:</value>
   </data>
   <data name="cbSinglePageTiff.Text" xml:space="preserve">
-    <value>Dateien mit einzelnen Seiten</value>
+    <value>Dateien mit einer Seite</value>
   </data>
   <data name="groupJpeg.Text" xml:space="preserve">
     <value>JPEG-Qualität</value>

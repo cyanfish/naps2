@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Verschlüsselung</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Drucken erlauben</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Erlaube Druck in höchster Qualität</value>
   </data>

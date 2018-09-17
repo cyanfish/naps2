@@ -160,10 +160,10 @@
     <value>&amp;Terug tussenvoegen</value>
   </data>
   <data name="tsAltInterleave.Text" xml:space="preserve">
-    <value>&amp;Afwisselend tussenvoegen</value>
+    <value>&amp;Alternatief afwisselend tussenvoegen</value>
   </data>
   <data name="tsAltDeinterleave.Text" xml:space="preserve">
-    <value>&amp;Afwisselend terug tussenvoegen</value>
+    <value>&amp;Alternatief terug tussenvoegen</value>
   </data>
   <data name="tsReverse.Text" xml:space="preserve">
     <value>&amp;Omdraaien</value>

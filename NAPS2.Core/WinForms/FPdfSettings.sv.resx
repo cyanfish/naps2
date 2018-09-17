@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>Kryptering</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>Tillåt utskrift</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>Tillåt full utskriftskvalitet</value>
   </data>

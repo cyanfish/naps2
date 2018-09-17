@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblPageTotal.Text" xml:space="preserve">
-    <value>De {0}</value>
+    <value>de {0}</value>
   </data>
   <data name="tsPrev.Text" xml:space="preserve">
     <value>Anterior</value>
@@ -28,25 +28,25 @@
     <value>Recortar</value>
   </data>
   <data name="tsBrightnessContrast.Text" xml:space="preserve">
-    <value>Brightness / Contrast</value>
+    <value>Brillo / Contraste</value>
   </data>
   <data name="tsHueSaturation.Text" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>Tono / Saturación</value>
   </data>
   <data name="tsBlackWhite.Text" xml:space="preserve">
     <value>Blanco y negro</value>
   </data>
   <data name="tsSharpen.Text" xml:space="preserve">
-    <value>Sharpen</value>
+    <value>Enfoque</value>
   </data>
   <data name="tsSavePDF.Text" xml:space="preserve">
     <value>Guardar PDF</value>
   </data>
   <data name="tsSaveImage.Text" xml:space="preserve">
-    <value>Guardar imágenes</value>
+    <value>Guardar imagen</value>
   </data>
   <data name="tsDelete.Text" xml:space="preserve">
-    <value>Borrar</value>
+    <value>Eliminar</value>
   </data>
   <data name="tsRotateLeft.Text" xml:space="preserve">
     <value>Girar a la izquierda</value>
@@ -58,7 +58,7 @@
     <value>Voltear</value>
   </data>
   <data name="tsDeskew.Text" xml:space="preserve">
-    <value>Deskew</value>
+    <value>Corregir sesgo</value>
   </data>
   <data name="tsCustomRotation.Text" xml:space="preserve">
     <value>Rotación personalizada</value>

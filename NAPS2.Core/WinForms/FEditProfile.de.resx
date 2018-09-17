@@ -25,7 +25,7 @@
     <value>&amp;OK</value>
   </data>
   <data name="rdbConfig.Text" xml:space="preserve">
-    <value>Vordefinierte Einstellungen</value>
+    <value>Vordefinierte Einstellungen verwenden</value>
   </data>
   <data name="rdbNative.Text" xml:space="preserve">
     <value>Ursprüngliche Oberfäche verwenden</value>
@@ -62,6 +62,9 @@
   </data>
   <data name="rdWIA.Text" xml:space="preserve">
     <value>WIA Treiber</value>
+  </data>
+  <data name="rdSANE.Text" xml:space="preserve">
+    <value>SANE Driver</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
     <value>Erlaube automatisches Speichern</value>

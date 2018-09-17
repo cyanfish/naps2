@@ -19,40 +19,40 @@
     <value>Cancelar</value>
   </data>
   <data name="btnStart.Text" xml:space="preserve">
-    <value>Comenzar</value>
+    <value>Iniciar</value>
   </data>
   <data name="lblTimeBetweenScans.Text" xml:space="preserve">
     <value>Tiempo entre escaneos (segundos):</value>
   </data>
   <data name="lblNumberOfScans.Text" xml:space="preserve">
-    <value>Number of scans:</value>
+    <value>Número de escaneos:</value>
   </data>
   <data name="rdMultipleScansPrompt.Text" xml:space="preserve">
-    <value>Multiple scans (prompt between scans)</value>
+    <value>Múltiples escaneos (preguntar entre escaneos)</value>
   </data>
   <data name="rdMultipleScansDelay.Text" xml:space="preserve">
-    <value>Multiple scans (fixed delay between scans)</value>
+    <value>Múltiples escaneos (pausa fija entre escaneos)</value>
   </data>
   <data name="rdSingleScan.Text" xml:space="preserve">
-    <value>Escáner sencillo</value>
+    <value>Escaneo sencillo</value>
   </data>
   <data name="lblProfile.Text" xml:space="preserve">
     <value>Perfil:</value>
   </data>
   <data name="groupboxScanConfig.Text" xml:space="preserve">
-    <value>Scan Configuration</value>
+    <value>Configuración del escaneo</value>
   </data>
   <data name="linkPatchCodeInfo.Text" xml:space="preserve">
-    <value>More info</value>
+    <value>Más información</value>
   </data>
   <data name="rdSeparateByPatchT.Text" xml:space="preserve">
-    <value>Separate files by Patch-T</value>
+    <value>Separar archivos usando Patch-T</value>
   </data>
   <data name="rdFilePerPage.Text" xml:space="preserve">
-    <value>One file per page</value>
+    <value>Un archivo por página</value>
   </data>
   <data name="rdFilePerScan.Text" xml:space="preserve">
-    <value>One file per scan</value>
+    <value>Un archivo por escaneo</value>
   </data>
   <data name="linkPlaceholders.Text" xml:space="preserve">
     <value>Marcadores de posición</value>
@@ -61,13 +61,13 @@
     <value>Ruta del archivo:</value>
   </data>
   <data name="rdSaveToMultipleFiles.Text" xml:space="preserve">
-    <value>Save to multiple files</value>
+    <value>Guardar en múltiples archivos</value>
   </data>
   <data name="rdSaveToSingleFile.Text" xml:space="preserve">
-    <value>Save to a single file</value>
+    <value>Guardar en un único archivo</value>
   </data>
   <data name="rdLoadIntoNaps2.Text" xml:space="preserve">
-    <value>Load images into NAPS2</value>
+    <value>Cargar imágenes en NAPS2</value>
   </data>
   <data name="groupboxOutput.Text" xml:space="preserve">
     <value>Destino</value>

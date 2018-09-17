@@ -36,6 +36,9 @@
   <data name="groupProtection.Text" xml:space="preserve">
     <value>הצפנה</value>
   </data>
+  <data name="clbPerms.Items" xml:space="preserve">
+    <value>לאפשר הדפסה</value>
+  </data>
   <data name="clbPerms.Items1" xml:space="preserve">
     <value>לאפשר הדפסה באיכות מירבית</value>
   </data>
