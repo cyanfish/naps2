@@ -5,10 +5,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.Zip;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Recovery;
@@ -58,6 +60,7 @@ namespace NAPS2.Update
             tempFolder = Path.Combine(Paths.Temp, Path.GetRandomFileName());
             Directory.CreateDirectory(tempFolder);
             tempPath = Path.Combine(tempFolder, updateInfo.DownloadUrl.Substring(updateInfo.DownloadUrl.LastIndexOf('/') + 1));
+
             client = new WebClient();
             client.DownloadProgressChanged += DownloadProgress;
             client.DownloadFileCompleted += DownloadCompleted;
@@ -99,12 +102,12 @@ namespace NAPS2.Update
                     errorOutput.DisplayError(MiscResources.UpdateError);
                     return;
                 }
-                // TODO: Standalone install
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = tempPath,
-                    Arguments = "/SILENT /CLOSEAPPLICATIONS"
-                });
+
+#if STANDALONE
+                InstallZip();
+#else
+                InstallExe();
+#endif
             }
             catch (Exception ex)
             {
@@ -119,6 +122,61 @@ namespace NAPS2.Update
             }
             RecoveryImage.DisableRecoveryCleanup = true;
             Application.OpenForms.OfType<Form>().FirstOrDefault()?.Close();
+        }
+
+        private void InstallExe()
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = tempPath,
+                Arguments = "/SILENT /CLOSEAPPLICATIONS"
+            });
+        }
+
+        private void InstallZip()
+        {
+            using (var zip = new ZipFile(tempPath))
+            {
+                foreach (ZipEntry entry in zip)
+                {
+                    if (!entry.IsFile) continue;
+                    var destPath = Path.Combine(tempFolder, entry.Name);
+                    PathHelper.EnsureParentDirExists(destPath);
+                    using (FileStream outFile = File.Create(destPath))
+                    {
+                        zip.GetInputStream(entry).CopyTo(outFile);
+                    }
+                }
+            }
+            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
+            string portableLauncherPath = Path.Combine(assemblyFolder, "..", "..", "NAPS2.Portable.exe");
+            AtomicReplaceFile(Path.Combine(tempFolder, "NAPS2.Portable.exe"), portableLauncherPath);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = portableLauncherPath,
+                Arguments = $"/Update {Process.GetCurrentProcess().Id} \"{Path.Combine(tempFolder, "App")}\""
+            });
+        }
+
+        private void AtomicReplaceFile(string source, string dest)
+        {
+            if (!File.Exists(dest))
+            {
+                File.Move(source, dest);
+                return;
+            }
+            string temp = dest + ".old";
+            File.Move(dest, temp);
+            try
+            {
+                File.Move(source, dest);
+                File.Delete(temp);
+            }
+            catch (Exception)
+            {
+                File.Move(temp, dest);
+                throw;
+            }
         }
 
         private bool VerifyHash()
