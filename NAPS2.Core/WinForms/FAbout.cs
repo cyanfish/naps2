@@ -65,6 +65,15 @@ namespace NAPS2.WinForms
             {
                 updateChecker.CheckForUpdates().ContinueWith(task =>
                 {
+                    if (task.IsFaulted)
+                    {
+                        Log.ErrorException("Error checking for updates", task.Exception);
+                    }
+                    else
+                    {
+                        userConfigManager.Config.LastUpdateCheckDate = DateTime.Now;
+                        userConfigManager.Save();
+                    }
                     update = task.Result;
                     hasCheckedForUpdates = true;
                     SafeInvoke(UpdateControls);

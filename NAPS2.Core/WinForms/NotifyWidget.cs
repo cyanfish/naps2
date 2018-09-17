@@ -40,7 +40,7 @@ namespace NAPS2.WinForms
             DoHideNotify();
         }
 
-        private void DoHideNotify()
+        protected void DoHideNotify()
         {
             InvokeHideNotify();
             hideTimer.Stop();
@@ -66,7 +66,7 @@ namespace NAPS2.WinForms
             hideTimer.Start();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        protected virtual void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {

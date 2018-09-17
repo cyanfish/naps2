@@ -462,4 +462,7 @@
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
   </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>An update is available.</value>
+  </data>
 </root>

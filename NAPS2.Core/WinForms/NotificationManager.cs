@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using NAPS2.Config;
 using NAPS2.Operation;
+using NAPS2.Update;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -58,6 +59,11 @@ namespace NAPS2.WinForms
         public void OperationProgress(IOperationProgress opModalProgress, IOperation op)
         {
             Show(new OperationProgressNotifyWidget(opModalProgress, op));
+        }
+
+        public void UpdateAvailable(UpdateChecker updateChecker, UpdateInfo update)
+        {
+            Show(new UpdateAvailableNotifyWidget(updateChecker, update));
         }
 
         public void Rebuild()

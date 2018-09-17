@@ -221,6 +221,9 @@
     <Compile Include="WinForms\OperationProgressNotifyWidget.Designer.cs">
       <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\UpdateAvailableNotifyWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Worker\BackgroundForm.cs">
       <SubType>Form</SubType>
     </Compile>

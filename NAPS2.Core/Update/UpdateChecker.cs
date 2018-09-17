@@ -29,6 +29,8 @@ namespace NAPS2.Update
             this.operationProgress = operationProgress;
         }
 
+        public TimeSpan CheckInterval => TimeSpan.FromDays(7);
+
         public async Task<UpdateInfo> CheckForUpdates()
         {
             var json = await GetJson(UPDATE_CHECK_ENDPOINT);
