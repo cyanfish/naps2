@@ -57,8 +57,8 @@
             // 
             // labelStatus
             // 
-            this.labelStatus.AutoEllipsis = true;
             resources.ApplyResources(this.labelStatus, "labelStatus");
+            this.labelStatus.AutoEllipsis = true;
             this.labelStatus.Name = "labelStatus";
             // 
             // btnRunInBG

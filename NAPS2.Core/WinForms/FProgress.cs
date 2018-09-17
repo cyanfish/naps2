@@ -64,17 +64,9 @@ namespace NAPS2.WinForms
 
         protected override void OnLoad(object sender, EventArgs eventArgs)
         {
-            new LayoutManager(this)
-                .Bind(progressBar, labelStatus)
-                    .WidthToForm()
-                .Bind(btnRunInBG, btnCancel)
-                    .RightToForm()
-                .Activate();
-
             loaded = true;
             Text = operation.ProgressTitle;
             btnRunInBG.Visible = operation.AllowBackground;
-            // TODO: Check i10n of button positions, here and in general
 
             DisplayProgress();
             if (operation.IsFinished)
