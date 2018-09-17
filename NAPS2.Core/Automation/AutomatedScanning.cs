@@ -552,7 +552,7 @@ namespace NAPS2.Automation
                 };
                 int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
                 string actualPath = fileNamePlaceholders.SubstitutePlaceholders(path, startTime, true, scanIndex++, scanList.Count > 1 ? digits : 0);
-                op.Start(actualPath, startTime, fileContents, pdfSettings, ocrParams, email);
+                op.Start(actualPath, startTime, fileContents, pdfSettings, ocrParams, email, null);
                 if (!await op.Success)
                 {
                     return false;

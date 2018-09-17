@@ -468,4 +468,10 @@
   <data name="AuthError" xml:space="preserve">
     <value>An error occurred when trying to authorize.</value>
   </data>
+  <data name="UploadingEmail" xml:space="preserve">
+    <value>Uploading email...</value>
+  </data>
+  <data name="ErrorEmailing" xml:space="preserve">
+    <value>An error occurred when trying to send the email.</value>
+  </data>
 </root>

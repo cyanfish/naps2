@@ -493,6 +493,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when trying to send the email..
+        /// </summary>
+        internal static string ErrorEmailing {
+            get {
+                return ResourceManager.GetString("ErrorEmailing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when trying to save the file..
         /// </summary>
         internal static string ErrorSaving {
@@ -1101,6 +1110,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Updating {
             get {
                 return ResourceManager.GetString("Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading email....
+        /// </summary>
+        internal static string UploadingEmail {
+            get {
+                return ResourceManager.GetString("UploadingEmail", resourceCulture);
             }
         }
         

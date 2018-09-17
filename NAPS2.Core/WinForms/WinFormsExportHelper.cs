@@ -69,7 +69,7 @@ namespace NAPS2.WinForms
 
                 var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
                 var changeToken = changeTracker.State;
-                if (await ExportPDF(subSavePath, images, false))
+                if (await ExportPDF(subSavePath, images, false, null))
                 {
                     changeTracker.Saved(changeToken);
                     notify?.PdfSaved(subSavePath);
@@ -79,13 +79,13 @@ namespace NAPS2.WinForms
             return false;
         }
 
-        public async Task<bool> ExportPDF(string filename, List<ScannedImage> images, bool email)
+        public async Task<bool> ExportPDF(string filename, List<ScannedImage> images, bool email, EmailMessage emailMessage)
         {
             var op = operationFactory.Create<SavePdfOperation>();
 
             var pdfSettings = pdfSettingsContainer.PdfSettings;
             pdfSettings.Metadata.Creator = MiscResources.NAPS2;
-            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrManager.DefaultParams, email))
+            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrManager.DefaultParams, email, emailMessage))
             {
                 operationProgress.ShowProgress(op);
             }
@@ -163,11 +163,7 @@ namespace NAPS2.WinForms
             {
                 string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
                 var changeToken = changeTracker.State;
-                if (!await ExportPDF(targetPath, images, true))
-                {
-                    // Cancel or error
-                    return false;
-                }
+
                 var message = new EmailMessage
                 {
                     Attachments =
@@ -180,7 +176,7 @@ namespace NAPS2.WinForms
                     }
                 };
 
-                if (emailProviderFactory.Default.SendEmail(message))
+                if (await ExportPDF(targetPath, images, true, message))
                 {
                     changeTracker.Saved(changeToken);
                     return true;

@@ -105,7 +105,7 @@ namespace NAPS2.ImportExport
                     subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
                 }
                 var op = operationFactory.Create<SavePdfOperation>();
-                if (op.Start(subPath, now, images, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, false))
+                if (op.Start(subPath, now, images, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, false, null))
                 {
                     operationProgress.ShowProgress(op);
                 }
