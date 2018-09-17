@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 16:40+0000\n"
+"POT-Creation-Date: 2018-09-17 18:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,7 +185,7 @@ msgstr "Pielietot visiem {0} iezīmētajiem attēliem"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "Vai tiešām vēlaties pārtraukt partijas skenēšanu?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -221,7 +221,7 @@ msgstr "Autors"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
@@ -288,7 +288,6 @@ msgstr "Melns & balts"
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
 #: FBlackWhite.resx$$this.Text$Message
-#, fuzzy
 msgid "Black and White"
 msgstr "Melns & balts"
 
@@ -304,11 +303,11 @@ msgstr "Spilgtums"
 #: FViewer.resx$tsBrightnessContrast.Text$Message
 #: FBrightnessContrast.resx$$this.Text$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Spilgtums / Kontrasts"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
@@ -338,7 +337,7 @@ msgstr "Atcelt"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "Atcelt partiju"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling"
@@ -376,7 +375,7 @@ msgstr "Savietojamība"
 
 #: FImageSettings.resx$label3.Text$Message
 msgid "Compression"
-msgstr ""
+msgstr "Kompresija"
 
 #: FEditProfile.resx$label7.Text$Message
 msgid "Contrast"
@@ -397,7 +396,7 @@ msgstr "Kopē"
 
 #: FAbout.resx$labelCopyright.Text$Message
 msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright 2009, 2012-2017 NAPS2 Contributors"
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -497,7 +496,7 @@ msgstr "Vai vēlaties lai NAPS2 veic automātisku atjauninājumu pārbaudi?"
 
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "Ziedot"
 
 #: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
@@ -610,6 +609,8 @@ msgid ""
 "For high JPEG qualities (80+), also increase Image Quality in your profile "
 "for best results"
 msgstr ""
+"Ja iestatīta augsta JPEG kvalitāte (80+), paaugstini iestatījumu Attēla "
+"kvalitāte arī profilā, lai iegūtu labāko rezultātu"
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -639,7 +640,7 @@ msgstr "Stunda (0-23)"
 #: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Tonis / Piesātinājums"
 
 #: FAbout.resx$label1.Text$Message
 msgid "Icons from"
@@ -716,7 +717,7 @@ msgstr "Atslēgvārdi"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: FDesktop.resx$toolStripDropDownButton1.Text$Message
 msgid "Language"
@@ -785,7 +786,7 @@ msgstr "NAPS2"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation"
-msgstr ""
+msgstr "NAPS2 ir pilnīgi bez maksas. Apsveriet iespēju ziedot"
 
 #: FPageSize.resx$label1.Text$Message
 msgid "Name (optional)"
@@ -824,9 +825,8 @@ msgid "No scanning device was found"
 msgstr "Netika atrasta skenēšanas ierīce"
 
 #: SettingsResources.resx$TiffComp_None$Message
-#, fuzzy
 msgid "None"
-msgstr "Pabeigts"
+msgstr "Nav"
 
 #: FDesktop.resx$$this.Text$Message
 msgid "Not Another PDF Scanner 2"
@@ -933,19 +933,19 @@ msgstr "PDF saglabāts"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1218,7 +1218,7 @@ msgstr "Uzstādīt noklusējumu"
 #: FViewer.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Asināt"
 
 #: FPdfSettings.resx$cbShowOwnerPassword.Text$Message
 #: FPdfSettings.resx$cbShowUserPassword.Text$Message
@@ -1227,7 +1227,7 @@ msgstr "Rādīt"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr ""
+msgstr "Vienas lappuses datnes"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1271,7 +1271,7 @@ msgid ""
 "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can "
 "be imported"
 msgstr ""
-"Datni '{0}' nevarēja importēt. Importēt iespējams tikai ar NAPS2 ģenerētas "
+"Datni '{0}' nevarēja importēt. Importēt iespējams tikai ar NAPS2 izveidotas "
 "PDF datnes"
 
 #: MiscResources.resx$FileInUse$Message
@@ -1328,7 +1328,7 @@ msgstr "Izvēlētais skeneris ir bezsaistē"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "Tiff iestatījumi"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"

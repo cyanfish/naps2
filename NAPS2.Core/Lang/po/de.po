@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 16:40+0000\n"
+"POT-Creation-Date: 2018-09-17 18:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -846,11 +846,11 @@ msgstr "Anzahl der Scans"
 
 #: FDesktop.resx$tsOcr.Text$Message
 msgid "OCR"
-msgstr "Texterkennung"
+msgstr "Optische Texterkennung"
 
 #: FOcrLanguageDownload.resx$$this.Text$Message
 msgid "OCR Download"
-msgstr "Sprachpaket herunterladen"
+msgstr "OCR-Sprachpaket herunterladen"
 
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
@@ -986,7 +986,7 @@ msgstr "Nachbearbeitung"
 
 #: FBatchScan.resx$lblStatus.Text$Message
 msgid "Press Start when ready"
-msgstr "Um zu beginnen Start drücken"
+msgstr "Start drücken wenn bereit"
 
 #: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
@@ -1229,7 +1229,7 @@ msgstr "Anzeigen"
 
 #: FImageSettings.resx$cbSinglePageTiff.Text$Message
 msgid "Single page files"
-msgstr "Dateien mit einzelnen Seiten"
+msgstr "Dateien mit einer Seite"
 
 #: FBatchScan.resx$rdSingleScan.Text$Message
 msgid "Single scan"
@@ -1328,7 +1328,7 @@ msgstr "Der gewählte Scanner ist in Benutzung"
 
 #: MiscResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline"
-msgstr "Der gewählte Scanner is ausgeschaltet"
+msgstr "Der gewählte Scanner ist ausgeschaltet (offline)"
 
 #: FImageSettings.resx$groupTiff.Text$Message
 msgid "Tiff Options"
@@ -1336,7 +1336,7 @@ msgstr "Tiff Einstellungen"
 
 #: FBatchScan.resx$lblTimeBetweenScans.Text$Message
 msgid "Time between scans (seconds)"
-msgstr "Zeit zwischen Scans (Sekunden)"
+msgstr "Zeit zwischen den Scans (Sekunden)"
 
 #: FPdfSettings.resx$label4.Text$Message
 msgid "Title"
@@ -1368,7 +1368,7 @@ msgstr "Ursprüngliche Oberfäche verwenden"
 
 #: FEditProfile.resx$rdbConfig.Text$Message
 msgid "Use predefined settings"
-msgstr "Vordefinierte Einstellungen"
+msgstr "Vordefinierte Einstellungen verwenden"
 
 #: FPdfSettings.resx$lblUserPassword.Text$Message
 msgid "User Password"
@@ -1395,7 +1395,7 @@ msgstr "WIA Treiber"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
-msgstr "Warte auf TWAIN"
+msgstr "Warte auf TWAIN zur Fertigstellung"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
@@ -1432,8 +1432,8 @@ msgid ""
 "You have unsaved changes. Are you sure you want to exit and discard those "
 "changes?"
 msgstr ""
-"Es gibt ungespeicherte Änderungen. Möchten Sie das Programm beenden möchten "
-"und diese Änderungen?"
+"Es gibt ungespeicherte Änderungen. Möchten Sie das Programm beenden und "
+"diese Änderungen verwerfen?"
 
 #: TiffViewerCtl.resx$tsZoom.ToolTipText$Message
 msgid "Zoom"
