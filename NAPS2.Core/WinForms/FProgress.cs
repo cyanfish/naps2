@@ -134,7 +134,7 @@ namespace NAPS2.WinForms
         private void btnRunInBG_Click(object sender, EventArgs e)
         {
             background = true;
-            Hide();
+            Close();
         }
     }
 }
