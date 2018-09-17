@@ -49,10 +49,6 @@ msgstr ""
 msgid "800 dpi"
 msgstr ""
 
-#: FUpdate.resx$lblPrompt.Text$Message
-msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr ""
-
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
 msgstr ""
@@ -528,7 +524,6 @@ msgid "Done"
 msgstr ""
 
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
-#: FUpdate.resx$btnDownload.Text$Message
 msgid "Download"
 msgstr ""
 
@@ -542,10 +537,6 @@ msgstr ""
 
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
-msgstr ""
-
-#: FUpdate.resx$btnInstall.Text$Message
-msgid "Download and Install"
 msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
@@ -868,7 +859,6 @@ msgid "Not Another PDF Scanner 2"
 msgstr ""
 
 #: FRecover.resx$btnCancel.Text$Message
-#: FUpdate.resx$btnCancel.Text$Message
 msgid "Not Now"
 msgstr ""
 
@@ -1408,10 +1398,6 @@ msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
-msgstr ""
-
-#: FUpdate.resx$$this.Text$Message
-msgid "Update NAPS2"
 msgstr ""
 
 #: MiscResources.resx$UpdateProgress$Message
