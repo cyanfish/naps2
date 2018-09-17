@@ -200,7 +200,6 @@
     <None Include="Setup\lib\Interop.WIA.dll" />
     <None Include="Setup\lib\PdfSharp.dll" />
     <Content Include="scanner-app.ico" />
-    <Content Include="Setup\license.txt" />
     <None Include="Setup\lib\wiaaut.dll" />
   </ItemGroup>
   <ItemGroup>
@@ -250,5 +249,5 @@ editbin /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\NAPS2\Setup\CommonTargets.targets"/>
+  <Import Project="..\NAPS2\Setup\CommonTargets.targets" />
 </Project>
