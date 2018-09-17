@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 18:01+0000\n"
+"POT-Creation-Date: 2018-09-17 20:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,11 +47,6 @@ msgstr "600 dpi"
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
 msgstr "800 dpi"
-
-#: MiscResources.resx$UpdateNow$Message
-#: FUpdate.resx$lblPrompt.Text$Message
-msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "Een nieuwe versie van NAPS2 is beschikbaar. Wilt u nu bijwerken?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -147,6 +142,14 @@ msgstr ""
 "Er is een additioneel component nodig om deze PDF te importeren. Nu "
 "downloaden?"
 
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occured when trying to install the update"
+msgstr ""
+
+#: MiscResources.resx$AuthError$Message
+msgid "An error occurred when trying to authorize"
+msgstr ""
+
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
 msgstr "Er was een fout bij het automatisch opslaan"
@@ -154,6 +157,10 @@ msgstr "Er was een fout bij het automatisch opslaan"
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
 msgstr "Er was een fout bij het opslaan van het bestand"
+
+#: MiscResources.resx$ErrorEmailing$Message
+msgid "An error occurred when trying to send the email"
+msgstr ""
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -163,9 +170,19 @@ msgstr "Fout bij het versturen van de e-mail"
 msgid "An error occurred with the scanning driver"
 msgstr "Fout met het stuurprogramma van de scanner"
 
+#: MiscResources.resx$ExitWithActiveOperations$Message
+msgid ""
+"An operation is in progress. Are you sure you want to exit and cancel the "
+"operation?"
+msgstr ""
+
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
 msgstr "Er is een onbekende fout opgetreden tijdens het batch scannen."
+
+#: MiscResources.resx$UpdateAvailable$Message
+msgid "An update is available"
+msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -221,6 +238,10 @@ msgstr "Naam bijlage"
 msgid "Author"
 msgstr "Auteur"
 
+#: FAuthorize.resx$$this.Text$Message
+msgid "Authorize"
+msgstr ""
+
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
 msgstr ""
@@ -246,9 +267,9 @@ msgstr "Automatisch ophogend nummer (3 cijfers)"
 msgid "Auto-incrementing number (4 digits)"
 msgstr "Automatisch ophogend nummer (4 cijfers)"
 
-#: MiscResources.resx$AutoUpdates$Message
-msgid "Automatic Updates"
-msgstr "Automatische updates"
+#: FOcrSetup.resx$checkBoxRunInBG.Text$Message
+msgid "Automatically run OCR after scanning"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -349,6 +370,22 @@ msgstr "Bezig met annuleren"
 msgid "Center"
 msgstr "Centreren"
 
+#: FEmailSettings.resx$btnChangeProvider.Text$Message
+msgid "Change"
+msgstr ""
+
+#: FAbout.resx$cbCheckForUpdates.Text$Message
+msgid "Check for updates"
+msgstr ""
+
+#: MiscResources.resx$CheckingForUpdates$Message
+msgid "Checking"
+msgstr ""
+
+#: FEmailProvider.resx$$this.Text$Message
+msgid "Choose Email Provider"
+msgstr ""
+
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
 msgstr "Profiel kiezen"
@@ -397,8 +434,8 @@ msgid "Copying"
 msgstr "Bezig met kopiëren"
 
 #: FAbout.resx$labelCopyright.Text$Message
-msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
-msgstr "Copyright 2009, 2012-2017 NAPS2 Contributors"
+msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -430,6 +467,10 @@ msgstr "Aangepaste paginagrootte"
 #: FViewer.resx$tsCustomRotation.Text$Message
 msgid "Custom Rotation"
 msgstr "Aangepast roteren"
+
+#: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
+msgid "Custom SMTP"
+msgstr ""
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -492,10 +533,6 @@ msgstr "Afmetingen"
 msgid "Display name"
 msgstr "Schermnaam"
 
-#: MiscResources.resx$EnableAutoUpdates$Message
-msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr "Wilt u dat NAPS2 automatisch zoekt naar updates?"
-
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
 msgstr ""
@@ -522,11 +559,6 @@ msgstr "Download vereist"
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
 msgstr "Downloadvoortgang"
-
-#: FUpdate.resx$btnInstall.Text$Message
-#: MiscResources.resx$DownloadAndInstall$Message
-msgid "Download and Install"
-msgstr "Downloaden en installeren"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -624,6 +656,10 @@ msgstr "Meer talen installeren"
 msgid "Glass"
 msgstr "Glasplaat"
 
+#: SettingsResources.resx$EmailProviderType_Gmail$Message
+msgid "Gmail"
+msgstr ""
+
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "Grijswaarden"
@@ -682,6 +718,10 @@ msgstr "Bezig met importeren"
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
 msgstr "Importeren {0}"
+
+#: MiscResources.resx$Install$Message
+msgid "Install {0}"
+msgstr ""
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -821,9 +861,18 @@ msgstr "Geen apparaat geselecteerd"
 msgid "No pages are in the feeder"
 msgstr "Geen pagina's in de invoerlade"
 
+#: FEmailSettings.resx$lblProvider.Text$Message
+#: SettingsResources.resx$EmailProvider_NotSelected$Message
+msgid "No provider selected"
+msgstr ""
+
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
 msgstr "Geen scanapparaat gevonden"
+
+#: MiscResources.resx$NoUpdates$Message
+msgid "No updates available"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
 #, fuzzy
@@ -852,6 +901,10 @@ msgstr "OCR"
 msgid "OCR Download"
 msgstr "OCR downloaden"
 
+#: MiscResources.resx$OcrProgress$Message
+msgid "OCR Progress"
+msgstr ""
+
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
 msgstr "OCR instellingen"
@@ -859,6 +912,10 @@ msgstr "OCR instellingen"
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
 msgstr "OCR taal"
+
+#: FOcrSetup.resx$labelOcrMode.Text$Message
+msgid "OCR mode"
+msgstr ""
 
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
@@ -906,6 +963,14 @@ msgstr "Download mislukt voor 1 of meerdere bestanden"
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
 msgstr "Map openen"
+
+#: MiscResources.resx$ActiveOperations$Message
+msgid "Operation in Progress"
+msgstr ""
+
+#: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
+msgid "Outlook Web Access"
+msgstr ""
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -1018,6 +1083,10 @@ msgstr "Profielen"
 msgid "Prompt for file path"
 msgstr "Vraag om bestandspad"
 
+#: FEmailSettings.resx$groupBox1.Text$Message
+msgid "Provider"
+msgstr ""
+
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
 msgstr "Klaar voor scannen {0}"
@@ -1103,6 +1172,18 @@ msgstr "Linksom draaien"
 #: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
 msgstr "Rechtsom draaien"
+
+#: FProgress.resx$btnRunInBG.Text$Message
+msgid "Run in Background"
+msgstr ""
+
+#: MiscResources.resx$RunningOcr$Message
+msgid "Running OCR"
+msgstr ""
+
+#: FEditProfile.resx$rdSANE.Text$Message
+msgid "SANE Driver"
+msgstr ""
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
@@ -1264,6 +1345,16 @@ msgstr "TWAIN driver"
 msgid "Technical Details"
 msgstr "Technische details"
 
+#: MiscResources.resx$TesseractNotAvailable$Message
+msgid ""
+"The OCR engine is not available. Make sure to install the required package"
+msgstr ""
+
+#: MiscResources.resx$SaneNotAvailable$Message
+msgid ""
+"The SANE driver is not available. Make sure to install the required packages"
+msgstr ""
+
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
 msgstr "Bestand '{0}' kon niet worden geïmporteerd"
@@ -1301,6 +1392,10 @@ msgstr "De scanner warmt op"
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
 msgstr "Het deksel van de scanner is open"
+
+#: MiscResources.resx$DriverNotSupported$Message
+msgid "The selected driver is not supported on this system"
+msgstr ""
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1358,9 +1453,17 @@ msgstr "US Letter (8.5x11 in)"
 msgid "Unsaved Changes"
 msgstr "Niet-opgeslagen wijzigingen"
 
-#: FUpdate.resx$$this.Text$Message
-msgid "Update NAPS2"
-msgstr "NAPS2 updaten"
+#: MiscResources.resx$UpdateProgress$Message
+msgid "Update Progress"
+msgstr ""
+
+#: MiscResources.resx$Updating$Message
+msgid "Updating"
+msgstr ""
+
+#: MiscResources.resx$UploadingEmail$Message
+msgid "Uploading email"
+msgstr ""
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1394,6 +1497,10 @@ msgstr "WIA driver"
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
 msgstr "Wachten op TWAIN scan"
+
+#: FAuthorize.resx$lblWaiting.Text$Message
+msgid "Waiting for authorization"
+msgstr ""
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"

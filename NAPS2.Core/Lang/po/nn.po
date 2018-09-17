@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 18:01+0000\n"
+"POT-Creation-Date: 2018-09-17 20:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,11 +47,6 @@ msgstr "600 dpi"
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
 msgstr "800 dpi"
-
-#: MiscResources.resx$UpdateNow$Message
-#: FUpdate.resx$lblPrompt.Text$Message
-msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "Ein ny versjon av NAPS2 er tilgjengeleg. Vil du oppdatera nå?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -146,6 +141,14 @@ msgstr ""
 "Ein tilleggskomponent trengs for import av denne PDF-fila. Vil du lasta den "
 "ned nå?"
 
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occured when trying to install the update"
+msgstr ""
+
+#: MiscResources.resx$AuthError$Message
+msgid "An error occurred when trying to authorize"
+msgstr ""
+
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
 msgstr "Feil ved autolagring"
@@ -153,6 +156,10 @@ msgstr "Feil ved autolagring"
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
 msgstr "Feil ved lagring av fila"
+
+#: MiscResources.resx$ErrorEmailing$Message
+msgid "An error occurred when trying to send the email"
+msgstr ""
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -162,9 +169,19 @@ msgstr "Feil ved sending av epost"
 msgid "An error occurred with the scanning driver"
 msgstr "Ukjend feil med skanne-drivaren"
 
+#: MiscResources.resx$ExitWithActiveOperations$Message
+msgid ""
+"An operation is in progress. Are you sure you want to exit and cancel the "
+"operation?"
+msgstr ""
+
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
 msgstr "Ukjend feil ved gruppeskanning"
+
+#: MiscResources.resx$UpdateAvailable$Message
+msgid "An update is available"
+msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -219,6 +236,10 @@ msgstr "Vedleggsnamn"
 msgid "Author"
 msgstr "Forfattar"
 
+#: FAuthorize.resx$$this.Text$Message
+msgid "Authorize"
+msgstr ""
+
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
 msgstr "Auto"
@@ -244,9 +265,9 @@ msgstr "Auto-inkrementer nummer (3 siffer)"
 msgid "Auto-incrementing number (4 digits)"
 msgstr "Auto-inkrementer nummer (4 siffer)"
 
-#: MiscResources.resx$AutoUpdates$Message
-msgid "Automatic Updates"
-msgstr "Automatisk oppdatering"
+#: FOcrSetup.resx$checkBoxRunInBG.Text$Message
+msgid "Automatically run OCR after scanning"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -347,6 +368,22 @@ msgstr "Avbryter"
 msgid "Center"
 msgstr "Senter"
 
+#: FEmailSettings.resx$btnChangeProvider.Text$Message
+msgid "Change"
+msgstr ""
+
+#: FAbout.resx$cbCheckForUpdates.Text$Message
+msgid "Check for updates"
+msgstr ""
+
+#: MiscResources.resx$CheckingForUpdates$Message
+msgid "Checking"
+msgstr ""
+
+#: FEmailProvider.resx$$this.Text$Message
+msgid "Choose Email Provider"
+msgstr ""
+
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
 msgstr "Vel profil"
@@ -395,8 +432,8 @@ msgid "Copying"
 msgstr "Kopierer"
 
 #: FAbout.resx$labelCopyright.Text$Message
-msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
-msgstr "Copyright 2009, 2012-2017 NAPS2 Bidragsytarar"
+msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
@@ -428,6 +465,10 @@ msgstr "Eigendefinert sidestorleik"
 #: FViewer.resx$tsCustomRotation.Text$Message
 msgid "Custom Rotation"
 msgstr "Eigendefinert rotasjon"
+
+#: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
+msgid "Custom SMTP"
+msgstr ""
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -490,10 +531,6 @@ msgstr "Dimensjonar"
 msgid "Display name"
 msgstr "Displaynavn"
 
-#: MiscResources.resx$EnableAutoUpdates$Message
-msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr "Vil du at NAPS2 skal sjå etter oppdateringar automatisk?"
-
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
 msgstr "Doner"
@@ -520,11 +557,6 @@ msgstr "Nedlasting nødvendig"
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
 msgstr "Nedlasting framdrift"
-
-#: FUpdate.resx$btnInstall.Text$Message
-#: MiscResources.resx$DownloadAndInstall$Message
-msgid "Download and Install"
-msgstr "Last ned og installer"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -624,6 +656,10 @@ msgstr "Hent fleire språk"
 msgid "Glass"
 msgstr "Glas"
 
+#: SettingsResources.resx$EmailProviderType_Gmail$Message
+msgid "Gmail"
+msgstr ""
+
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "Gråskala"
@@ -682,6 +718,10 @@ msgstr "Importerer"
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
 msgstr "Importerer {0}"
+
+#: MiscResources.resx$Install$Message
+msgid "Install {0}"
+msgstr ""
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -820,9 +860,18 @@ msgstr "Ingen skannar vald"
 msgid "No pages are in the feeder"
 msgstr "Der er ingen ark i mataren"
 
+#: FEmailSettings.resx$lblProvider.Text$Message
+#: SettingsResources.resx$EmailProvider_NotSelected$Message
+msgid "No provider selected"
+msgstr ""
+
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
 msgstr "Ingen skannar vart funnen"
+
+#: MiscResources.resx$NoUpdates$Message
+msgid "No updates available"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -850,6 +899,10 @@ msgstr "OCR"
 msgid "OCR Download"
 msgstr "OCR nedlasting"
 
+#: MiscResources.resx$OcrProgress$Message
+msgid "OCR Progress"
+msgstr ""
+
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
 msgstr "OCR oppsett"
@@ -857,6 +910,10 @@ msgstr "OCR oppsett"
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
 msgstr "OCR språk"
+
+#: FOcrSetup.resx$labelOcrMode.Text$Message
+msgid "OCR mode"
+msgstr ""
 
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
@@ -904,6 +961,14 @@ msgstr "Ei eller fleire filer vart ikkje lasta ned"
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
 msgstr "Opne folder"
+
+#: MiscResources.resx$ActiveOperations$Message
+msgid "Operation in Progress"
+msgstr ""
+
+#: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
+msgid "Outlook Web Access"
+msgstr ""
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -1016,6 +1081,10 @@ msgstr "Profilar"
 msgid "Prompt for file path"
 msgstr "Spør etter fil-sti"
 
+#: FEmailSettings.resx$groupBox1.Text$Message
+msgid "Provider"
+msgstr ""
+
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
 msgstr "Klar for skann {0}"
@@ -1101,6 +1170,18 @@ msgstr "Roter venstre"
 #: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
 msgstr "Roter høgre"
+
+#: FProgress.resx$btnRunInBG.Text$Message
+msgid "Run in Background"
+msgstr ""
+
+#: MiscResources.resx$RunningOcr$Message
+msgid "Running OCR"
+msgstr ""
+
+#: FEditProfile.resx$rdSANE.Text$Message
+msgid "SANE Driver"
+msgstr ""
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
@@ -1262,6 +1343,16 @@ msgstr "TWAIN driver"
 msgid "Technical Details"
 msgstr "Tekniske detaljar"
 
+#: MiscResources.resx$TesseractNotAvailable$Message
+msgid ""
+"The OCR engine is not available. Make sure to install the required package"
+msgstr ""
+
+#: MiscResources.resx$SaneNotAvailable$Message
+msgid ""
+"The SANE driver is not available. Make sure to install the required packages"
+msgstr ""
+
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
 msgstr "Fila '{0}' kunne ikkje importerast"
@@ -1297,6 +1388,10 @@ msgstr "Skannaren varmer opp"
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
 msgstr "Skannardekselet er opent"
+
+#: MiscResources.resx$DriverNotSupported$Message
+msgid "The selected driver is not supported on this system"
+msgstr ""
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1354,9 +1449,17 @@ msgstr "US Letter (8.5x11 in)"
 msgid "Unsaved Changes"
 msgstr "Ulagra endringar"
 
-#: FUpdate.resx$$this.Text$Message
-msgid "Update NAPS2"
-msgstr "Oppdater NAPS2"
+#: MiscResources.resx$UpdateProgress$Message
+msgid "Update Progress"
+msgstr ""
+
+#: MiscResources.resx$Updating$Message
+msgid "Updating"
+msgstr ""
+
+#: MiscResources.resx$UploadingEmail$Message
+msgid "Uploading email"
+msgstr ""
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1390,6 +1493,10 @@ msgstr "WIA driver"
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
 msgstr "Venter på at TWAIN blir ferdig"
+
+#: FAuthorize.resx$lblWaiting.Text$Message
+msgid "Waiting for authorization"
+msgstr ""
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"

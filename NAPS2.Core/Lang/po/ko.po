@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 18:01+0000\n"
+"POT-Creation-Date: 2018-09-17 20:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,11 +48,6 @@ msgstr "600 dpi"
 msgid "800 dpi"
 msgstr "800 dpi"
 
-#: MiscResources.resx$UpdateNow$Message
-#: FUpdate.resx$lblPrompt.Text$Message
-msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "새로운 버전의 NAPS2 를 사용할 수 있습니다. 지금 업데이트 하시겠습니까?"
-
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
 msgstr "A3 (297x420 mm)"
@@ -65,8 +60,8 @@ msgstr "A4 (210x297 mm)"
 msgid "A5 (148x210 mm)"
 msgstr "A5 (148x210 mm)"
 
-#: FDesktop.resx$tsAbout.Text$Message
 #: FAbout.resx$$this.Text$Message
+#: FDesktop.resx$tsAbout.Text$Message
 msgid "About"
 msgstr "정보"
 
@@ -144,6 +139,14 @@ msgid ""
 "download it now?"
 msgstr "이 PDF 파일을 불러오기 위해서는 추가적인 컴포넌트가 필요합니다. 지금 다운로드 하시겠습니까?"
 
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occured when trying to install the update"
+msgstr ""
+
+#: MiscResources.resx$AuthError$Message
+msgid "An error occurred when trying to authorize"
+msgstr ""
+
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save"
 msgstr "파일을 자동으로 저장하는 중 오류가 발생했습니다."
@@ -151,6 +154,10 @@ msgstr "파일을 자동으로 저장하는 중 오류가 발생했습니다."
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file"
 msgstr "파일을 저장하는 중 오류가 발생했습니다."
+
+#: MiscResources.resx$ErrorEmailing$Message
+msgid "An error occurred when trying to send the email"
+msgstr ""
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
@@ -160,9 +167,19 @@ msgstr "이메일을 보내는 중 오류가 발생했습니다."
 msgid "An error occurred with the scanning driver"
 msgstr "스캔 중 오류가 발생했습니다."
 
+#: MiscResources.resx$ExitWithActiveOperations$Message
+msgid ""
+"An operation is in progress. Are you sure you want to exit and cancel the "
+"operation?"
+msgstr ""
+
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
 msgstr "일괄 스캔 중 오류가 발생했습니다."
+
+#: MiscResources.resx$UpdateAvailable$Message
+msgid "An update is available"
+msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available"
@@ -172,12 +189,7 @@ msgstr "OCR 업데이트를 사용할 수 있습니다."
 msgid "Apply brightness/contrast after scan"
 msgstr "스캔 후 밝기/대비 적용"
 
-#: FBrightnessContrast.resx$checkboxApplyToSelected.Text$Message
-#: FHueSaturation.resx$checkboxApplyToSelected.Text$Message
-#: FRotate.resx$checkboxApplyToSelected.Text$Message
-#: FSharpen.resx$checkboxApplyToSelected.Text$Message
-#: FCrop.resx$checkboxApplyToSelected.Text$Message
-#: FBlackWhite.resx$checkboxApplyToSelected.Text$Message
+#: ImageForm.resx$checkboxApplyToSelected.Text$Message
 msgid "Apply to all {0} selected images"
 msgstr "선택된 {0} 개의 이미지에 적용"
 
@@ -217,12 +229,16 @@ msgstr "첨부명"
 msgid "Author"
 msgstr "작성자"
 
+#: FAuthorize.resx$$this.Text$Message
+msgid "Authorize"
+msgstr ""
+
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
 msgstr ""
 
-#: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 #: FAutoSaveSettings.resx$$this.Text$Message
+#: FEditProfile.resx$linkAutoSaveSettings.Text$Message
 msgid "Auto Save Settings"
 msgstr "자동 저장 설정"
 
@@ -242,9 +258,9 @@ msgstr "자동 증가 번호 (세자리)"
 msgid "Auto-incrementing number (4 digits)"
 msgstr "자동 증가 번호 (네자리)"
 
-#: MiscResources.resx$AutoUpdates$Message
-msgid "Automatic Updates"
-msgstr "자동 업데이트"
+#: FOcrSetup.resx$checkBoxRunInBG.Text$Message
+msgid "Automatically run OCR after scanning"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -254,8 +270,8 @@ msgstr "B4 (250x353 mm)"
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 mm)"
 
-#: FDesktop.resx$tsBatchScan.Text$Message
 #: FBatchScan.resx$$this.Text$Message
+#: FDesktop.resx$tsBatchScan.Text$Message
 msgid "Batch Scan"
 msgstr "일괄 스캔"
 
@@ -283,9 +299,9 @@ msgstr "비트맵 파일 (*.bmp)"
 msgid "Black & White"
 msgstr "흑백"
 
+#: FBlackWhite.resx$$this.Text$Message
 #: FDesktop.resx$tsBlackWhite.Text$Message
 #: FViewer.resx$tsBlackWhite.Text$Message
-#: FBlackWhite.resx$$this.Text$Message
 msgid "Black and White"
 msgstr "흑백"
 
@@ -297,9 +313,9 @@ msgstr "빈 페이지"
 msgid "Brightness"
 msgstr "밝기"
 
+#: FBrightnessContrast.resx$$this.Text$Message
 #: FDesktop.resx$tsBrightnessContrast.Text$Message
 #: FViewer.resx$tsBrightnessContrast.Text$Message
-#: FBrightnessContrast.resx$$this.Text$Message
 msgid "Brightness / Contrast"
 msgstr "밝기 / 명암"
 
@@ -307,29 +323,26 @@ msgstr "밝기 / 명암"
 msgid "CCITT4"
 msgstr ""
 
+#: FAdvancedScanSettings.resx$btnCancel.Text$Message
+#: FAuthorize.resx$btnCancel.Text$Message
+#: FAutoSaveSettings.resx$btnCancel.Text$Message
+#: FBatchScan.resx$btnCancel.Text$Message
+#: FDownloadProgress.resx$btnCancel.Text$Message
+#: FEditProfile.resx$btnCancel.Text$Message
 #: FEmailSettings.resx$btnCancel.Text$Message
 #: FImageSettings.resx$btnCancel.Text$Message
 #: FOcrLanguageDownload.resx$btnCancel.Text$Message
+#: FOcrSetup.resx$btnCancel.Text$Message
+#: FPageSize.resx$btnCancel.Text$Message
 #: FPdfPassword.resx$btnCancel.Text$Message
 #: FPdfSettings.resx$btnCancel.Text$Message
 #: FPlaceholders.resx$btnCancel.Text$Message
-#: FPageSize.resx$btnCancel.Text$Message
 #: FProgress.resx$btnCancel.Text$Message
-#: FSelectDevice.resx$btnCancel.Text$Message
 #: FScanProgress.resx$btnCancel.Text$Message
-#: FOcrSetup.resx$btnCancel.Text$Message
-#: FDownloadProgress.resx$btnCancel.Text$Message
-#: FEditProfile.resx$btnCancel.Text$Message
-#: FAutoSaveSettings.resx$btnCancel.Text$Message
-#: FAdvancedScanSettings.resx$btnCancel.Text$Message
-#: FBrightnessContrast.resx$btnCancel.Text$Message
-#: FRotate.resx$btnCancel.Text$Message
-#: FHueSaturation.resx$btnCancel.Text$Message
-#: FCrop.resx$btnCancel.Text$Message
+#: FSelectDevice.resx$btnCancel.Text$Message
+#: ImageForm.resx$btnCancel.Text$Message
 #: MiscResources.resx$Cancel$Message
-#: FSharpen.resx$btnCancel.Text$Message
-#: FBlackWhite.resx$btnCancel.Text$Message
-#: FBatchScan.resx$btnCancel.Text$Message
+#: OperationProgressNotifyWidget.resx$cancelToolStripMenuItem.Text$Message
 msgid "Cancel"
 msgstr "취소"
 
@@ -344,6 +357,22 @@ msgstr "취소하기"
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
 msgstr "중앙"
+
+#: FEmailSettings.resx$btnChangeProvider.Text$Message
+msgid "Change"
+msgstr ""
+
+#: FAbout.resx$cbCheckForUpdates.Text$Message
+msgid "Check for updates"
+msgstr ""
+
+#: MiscResources.resx$CheckingForUpdates$Message
+msgid "Checking"
+msgstr ""
+
+#: FEmailProvider.resx$$this.Text$Message
+msgid "Choose Email Provider"
+msgstr ""
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -366,8 +395,8 @@ msgstr "자동저장 후 이미지 비우기"
 msgid "Close"
 msgstr "닫기"
 
-#: FPdfSettings.resx$groupCompat.Text$Message
 #: FAdvancedScanSettings.resx$groupBox2.Text$Message
+#: FPdfSettings.resx$groupCompat.Text$Message
 msgid "Compatibility"
 msgstr "호환성"
 
@@ -379,8 +408,8 @@ msgstr ""
 msgid "Contrast"
 msgstr "대비"
 
-#: FProfiles.resx$ctxCopy.Text$Message
 #: FDesktop.resx$ctxCopy.Text$Message
+#: FProfiles.resx$ctxCopy.Text$Message
 msgid "Copy"
 msgstr "복사"
 
@@ -393,16 +422,16 @@ msgid "Copying"
 msgstr "복사 중"
 
 #: FAbout.resx$labelCopyright.Text$Message
-msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
-msgstr "저작권자 2009, 2012-2017 NAPS2 기부자"
+msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
+msgstr ""
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
 msgid "Coverage Threshold"
 msgstr "적용범위 임계값"
 
+#: FCrop.resx$$this.Text$Message
 #: FDesktop.resx$tsCrop.Text$Message
 #: FViewer.resx$tsCrop.Text$Message
-#: FCrop.resx$$this.Text$Message
 msgid "Crop"
 msgstr "잘라내기"
 
@@ -427,17 +456,21 @@ msgstr "페이지 크기 사용자 설정"
 msgid "Custom Rotation"
 msgstr "사용자 정의 회전"
 
+#: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
+msgid "Custom SMTP"
+msgstr ""
+
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
 msgstr "일자 (01-31)"
 
-#: SettingsResources.resx$TwainImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
+#: SettingsResources.resx$TwainImpl_Default$Message
 msgid "Default"
 msgstr "기본값"
 
-#: FPdfSettings.resx$label1.Text$Message
 #: FImageSettings.resx$label1.Text$Message
+#: FPdfSettings.resx$label1.Text$Message
 msgid "Default File Path"
 msgstr "기본 파일 경로"
 
@@ -449,13 +482,13 @@ msgstr "디인터리브"
 msgid "Delay between scans (WIA)"
 msgstr "스캔 간 지연 (WIA)"
 
-#: FProfiles.resx$btnDelete.Text$Message
-#: FRecover.resx$btnDelete.Text$Message
-#: FDesktop.resx$tsDelete.Text$Message
-#: MiscResources.resx$Delete$Message
-#: FProfiles.resx$ctxDelete.Text$Message
-#: FViewer.resx$tsDelete.Text$Message
 #: FDesktop.resx$ctxDelete.Text$Message
+#: FDesktop.resx$tsDelete.Text$Message
+#: FProfiles.resx$btnDelete.Text$Message
+#: FProfiles.resx$ctxDelete.Text$Message
+#: FRecover.resx$btnDelete.Text$Message
+#: FViewer.resx$tsDelete.Text$Message
+#: MiscResources.resx$Delete$Message
 msgid "Delete"
 msgstr "삭제"
 
@@ -488,22 +521,16 @@ msgstr "크기"
 msgid "Display name"
 msgstr "표시 이름"
 
-#: MiscResources.resx$EnableAutoUpdates$Message
-msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr "NAPS2 의 자동 업데이트를 허용하시겠습니까?"
-
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
 msgstr ""
 
-#: FProfiles.resx$btnDone.Text$Message
 #: FBatchPrompt.resx$btnDone.Text$Message
+#: FProfiles.resx$btnDone.Text$Message
 msgid "Done"
 msgstr "완료"
 
-#: FUpdate.resx$btnDownload.Text$Message
 #: FOcrLanguageDownload.resx$btnDownload.Text$Message
-#: MiscResources.resx$Download$Message
 msgid "Download"
 msgstr "다운로드"
 
@@ -518,11 +545,6 @@ msgstr "다운로드가 필요합니다"
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
 msgstr "다운로드 진행상황"
-
-#: FUpdate.resx$btnInstall.Text$Message
-#: MiscResources.resx$DownloadAndInstall$Message
-msgid "Download and Install"
-msgstr "다운로드 및 설치"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -562,13 +584,13 @@ msgstr "암호화"
 msgid "Enhanced Windows MetaFile (*.emf)"
 msgstr "확장 메타 파일 (*.emf)"
 
-#: MiscResources.resx$Error$Message
 #: FError.resx$$this.Text$Message
+#: MiscResources.resx$Error$Message
 msgid "Error"
 msgstr "오류"
 
-#: MiscResources.resx$EstimatedDownloadSize$Message
 #: FOcrLanguageDownload.resx$labelSizeEstimate.Text$Message
+#: MiscResources.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "예상 다운로드 용량: {0} MB"
 
@@ -588,8 +610,8 @@ msgstr "공급기"
 msgid "File Name"
 msgstr "파일명"
 
-#: FBatchScan.resx$lblFilePath.Text$Message
 #: FAutoSaveSettings.resx$lblFilePath.Text$Message
+#: FBatchScan.resx$lblFilePath.Text$Message
 msgid "File path"
 msgstr "파일 경로"
 
@@ -620,6 +642,10 @@ msgstr "더 많은 언어 설치하기"
 msgid "Glass"
 msgstr "평판"
 
+#: SettingsResources.resx$EmailProviderType_Gmail$Message
+msgid "Gmail"
+msgstr ""
+
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "회색조"
@@ -633,8 +659,8 @@ msgid "Hour (0-23)"
 msgstr "시간 (0-23)"
 
 #: FDesktop.resx$tsHueSaturation.Text$Message
-#: FViewer.resx$tsHueSaturation.Text$Message
 #: FHueSaturation.resx$$this.Text$Message
+#: FViewer.resx$tsHueSaturation.Text$Message
 msgid "Hue / Saturation"
 msgstr "색조 / 채도"
 
@@ -678,6 +704,10 @@ msgstr "가져오는 중입니다"
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
 msgstr "{0} 가져오는 중"
+
+#: MiscResources.resx$Install$Message
+msgid "Install {0}"
+msgstr ""
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -755,16 +785,16 @@ msgstr "분 (00-59)"
 msgid "Month (01-12)"
 msgstr "월 (01-12)"
 
-#: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 #: FAutoSaveSettings.resx$linkPatchCodeInfo.Text$Message
+#: FBatchScan.resx$linkPatchCodeInfo.Text$Message
 msgid "More info"
 msgstr "상세 정보"
 
-#: FDesktop.resx$tsMove.TextSecond$Message
+#: FDesktop.resx$tsMove.SecondText$Message
 msgid "Move Down"
 msgstr "아래로 이동"
 
-#: FDesktop.resx$tsMove.TextFirst$Message
+#: FDesktop.resx$tsMove.FirstText$Message
 msgid "Move Up"
 msgstr "위로 이동"
 
@@ -816,9 +846,18 @@ msgstr "선택된 장치가 없습니다."
 msgid "No pages are in the feeder"
 msgstr "공급장치에 용지가 없습니다."
 
+#: FEmailSettings.resx$lblProvider.Text$Message
+#: SettingsResources.resx$EmailProvider_NotSelected$Message
+msgid "No provider selected"
+msgstr ""
+
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
 msgstr "스캔 장치를 찾을 수 없습니다."
+
+#: MiscResources.resx$NoUpdates$Message
+msgid "No updates available"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
 #, fuzzy
@@ -829,9 +868,7 @@ msgstr "완료"
 msgid "Not Another PDF Scanner 2"
 msgstr "Not Another PDF Scanner 2"
 
-#: FUpdate.resx$btnCancel.Text$Message
 #: FRecover.resx$btnCancel.Text$Message
-#: MiscResources.resx$NotNow$Message
 msgid "Not Now"
 msgstr "나중에"
 
@@ -847,6 +884,10 @@ msgstr "OCR"
 msgid "OCR Download"
 msgstr "OCR 다운로드"
 
+#: MiscResources.resx$OcrProgress$Message
+msgid "OCR Progress"
+msgstr ""
+
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
 msgstr "OCR 설정"
@@ -855,24 +896,23 @@ msgstr "OCR 설정"
 msgid "OCR language"
 msgstr "OCR 언어"
 
-#: FPdfPassword.resx$btnOK.Text$Message
-#: FPdfSettings.resx$btnOK.Text$Message
-#: FError.resx$btnOK.Text$Message
-#: FPageSize.resx$btnOK.Text$Message
-#: FPlaceholders.resx$btnOK.Text$Message
-#: FOcrSetup.resx$btnOK.Text$Message
-#: FImageSettings.resx$btnOK.Text$Message
+#: FOcrSetup.resx$labelOcrMode.Text$Message
+msgid "OCR mode"
+msgstr ""
+
+#: FAbout.resx$okButton.Text$Message
+#: FAdvancedScanSettings.resx$btnOK.Text$Message
 #: FAutoSaveSettings.resx$btnOK.Text$Message
 #: FEditProfile.resx$btnOK.Text$Message
 #: FEmailSettings.resx$btnOK.Text$Message
-#: FAdvancedScanSettings.resx$btnOK.Text$Message
-#: FAbout.resx$okButton.Text$Message
-#: FCrop.resx$btnOK.Text$Message
-#: FRotate.resx$btnOK.Text$Message
-#: FHueSaturation.resx$btnOK.Text$Message
-#: FSharpen.resx$btnOK.Text$Message
-#: FBrightnessContrast.resx$btnOK.Text$Message
-#: FBlackWhite.resx$btnOK.Text$Message
+#: FError.resx$btnOK.Text$Message
+#: FImageSettings.resx$btnOK.Text$Message
+#: FOcrSetup.resx$btnOK.Text$Message
+#: FPageSize.resx$btnOK.Text$Message
+#: FPdfPassword.resx$btnOK.Text$Message
+#: FPdfSettings.resx$btnOK.Text$Message
+#: FPlaceholders.resx$btnOK.Text$Message
+#: ImageForm.resx$btnOK.Text$Message
 msgid "OK"
 msgstr "확인"
 
@@ -884,13 +924,13 @@ msgstr "정렬을 기반으로 한 오프셋 폭 (WIA)"
 msgid "Old DSM"
 msgstr "구 DSM"
 
-#: FBatchScan.resx$rdFilePerPage.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerPage.Text$Message
+#: FBatchScan.resx$rdFilePerPage.Text$Message
 msgid "One file per page"
 msgstr "페이지 당 한 개 파일"
 
-#: FBatchScan.resx$rdFilePerScan.Text$Message
 #: FAutoSaveSettings.resx$rdFilePerScan.Text$Message
+#: FBatchScan.resx$rdFilePerScan.Text$Message
 msgid "One file per scan"
 msgstr "스캔 당 한 개 파일"
 
@@ -901,6 +941,14 @@ msgstr "한개 또는 그 이상의 파일을 다운로드 할 수 없습니다.
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
 msgstr "폴더 열기"
+
+#: MiscResources.resx$ActiveOperations$Message
+msgid "Operation in Progress"
+msgstr ""
+
+#: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
+msgid "Outlook Web Access"
+msgstr ""
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
 msgid "Output"
@@ -918,8 +966,8 @@ msgstr "소유자 암호"
 msgid "PDF Document (*.pdf)"
 msgstr "PDF 문서 (*.pdf)"
 
-#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FDesktop.resx$tsPDFSettings.Text$Message
+#: FDesktop.resx$tsPdfSettings2.Text$Message
 #: FPdfSettings.resx$$this.Text$Message
 msgid "PDF Settings"
 msgstr "PDF 설정"
@@ -960,18 +1008,18 @@ msgstr "용지 공급"
 msgid "Password"
 msgstr "암호"
 
-#: FProfiles.resx$ctxPaste.Text$Message
 #: FDesktop.resx$ctxPaste.Text$Message
+#: FProfiles.resx$ctxPaste.Text$Message
 msgid "Paste"
 msgstr "붙여넣기"
 
-#: FPlaceholders.resx$gboxPlaceholders.Text$Message
-#: FPlaceholders.resx$$this.Text$Message
-#: FImageSettings.resx$linkPlaceholders.Text$Message
+#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
 #: FBatchScan.resx$linkPlaceholders.Text$Message
 #: FEmailSettings.resx$linkPlaceholders.Text$Message
+#: FImageSettings.resx$linkPlaceholders.Text$Message
 #: FPdfSettings.resx$linkPlaceholders.Text$Message
-#: FAutoSaveSettings.resx$linkPlaceholders.Text$Message
+#: FPlaceholders.resx$$this.Text$Message
+#: FPlaceholders.resx$gboxPlaceholders.Text$Message
 msgid "Placeholders"
 msgstr "파일명 형식"
 
@@ -983,8 +1031,8 @@ msgstr "후처리"
 msgid "Press Start when ready"
 msgstr "준비가 되면 시작을 눌러주세요."
 
-#: FViewer.resx$$this.Text$Message
 #: FPlaceholders.resx$label2.Text$Message
+#: FViewer.resx$$this.Text$Message
 msgid "Preview"
 msgstr "미리보기"
 
@@ -1013,6 +1061,10 @@ msgstr "프로파일"
 msgid "Prompt for file path"
 msgstr "파일 경로창"
 
+#: FEmailSettings.resx$groupBox1.Text$Message
+msgid "Provider"
+msgstr ""
+
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
 msgstr "{0} 개의 스캔 준비됨"
@@ -1033,9 +1085,9 @@ msgstr "복구 중"
 msgid "Recovery Progress"
 msgstr "복구 진행 상황"
 
-#: FPdfSettings.resx$cbRememberSettings.Text$Message
-#: FImageSettings.resx$cbRememberSettings.Text$Message
 #: FEmailSettings.resx$cbRememberSettings.Text$Message
+#: FImageSettings.resx$cbRememberSettings.Text$Message
+#: FPdfSettings.resx$cbRememberSettings.Text$Message
 msgid "Remember these settings"
 msgstr "설정값 기억"
 
@@ -1055,10 +1107,10 @@ msgstr "이미지 초기화"
 msgid "Resolution"
 msgstr "해상도"
 
+#: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
+#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
 #: FImageSettings.resx$btnRestoreDefaults.Text$Message
 #: FPdfSettings.resx$btnRestoreDefaults.Text$Message
-#: FEmailSettings.resx$btnRestoreDefaults.Text$Message
-#: FAdvancedScanSettings.resx$btnRestoreDefaults.Text$Message
 msgid "Restore Defaults"
 msgstr "초기설정으로 복원"
 
@@ -1070,12 +1122,7 @@ msgstr "실패시 재시도 (WIA)"
 msgid "Reverse"
 msgstr "뒤집기"
 
-#: FRotate.resx$btnRevert.Text$Message
-#: FHueSaturation.resx$btnRevert.Text$Message
-#: FSharpen.resx$btnRevert.Text$Message
-#: FBrightnessContrast.resx$btnRevert.Text$Message
-#: FCrop.resx$btnRevert.Text$Message
-#: FBlackWhite.resx$btnRevert.Text$Message
+#: ImageForm.resx$btnRevert.Text$Message
 msgid "Revert"
 msgstr "되돌림"
 
@@ -1084,8 +1131,8 @@ msgid "Right"
 msgstr "오른쪽"
 
 #: FDesktop.resx$tsdRotate.Text$Message
-#: FViewer.resx$tsdRotate.Text$Message
 #: FRotate.resx$$this.Text$Message
+#: FViewer.resx$tsdRotate.Text$Message
 msgid "Rotate"
 msgstr "회전"
 
@@ -1098,6 +1145,18 @@ msgstr "왼쪽으로 회전"
 #: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
 msgstr "오른쪽으로 회전"
+
+#: FProgress.resx$btnRunInBG.Text$Message
+msgid "Run in Background"
+msgstr ""
+
+#: MiscResources.resx$RunningOcr$Message
+msgid "Running OCR"
+msgstr ""
+
+#: FEditProfile.resx$rdSANE.Text$Message
+msgid "SANE Driver"
+msgstr ""
 
 #: FViewer.resx$tsSaveImage.Text$Message
 msgid "Save Image"
@@ -1144,11 +1203,11 @@ msgstr "크기 조정"
 msgid "Scale With Window"
 msgstr "창 크기와 함께 크기 변경"
 
-#: FProfiles.resx$btnScan.Text$Message
 #: FBatchPrompt.resx$btnScan.Text$Message
 #: FDesktop.resx$tsScan.Text$Message
-#: MiscResources.resx$Scan$Message
+#: FProfiles.resx$btnScan.Text$Message
 #: FProfiles.resx$ctxScan.Text$Message
+#: MiscResources.resx$Scan$Message
 msgid "Scan"
 msgstr "스캔"
 
@@ -1160,9 +1219,9 @@ msgstr "스캔 설정"
 msgid "Scanned Image"
 msgstr "스캔된 이미지"
 
-#: MiscResources.resx$ScanPageProgress$Message
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
+#: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
 msgstr "{0} 페이지 스캔 중"
 
@@ -1194,16 +1253,16 @@ msgstr "스캔을 클릭하기 전에 프로파일을 선택 해 주세요."
 msgid "Select one or more languages"
 msgstr "한 개 또는 그 이상의 언어를 선택 해 주세요."
 
-#: FDesktop.resx$tsSaveImagesSelected.Text$Message
-#: FDesktop.resx$tsReverseSelected.Text$Message
 #: FDesktop.resx$tsEmailPDFSelected.Text$Message
+#: FDesktop.resx$tsReverseSelected.Text$Message
+#: FDesktop.resx$tsSaveImagesSelected.Text$Message
 #: FDesktop.resx$tsSavePDFSelected.Text$Message
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "{0} 개 선택됨"
 
-#: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 #: FAutoSaveSettings.resx$rdSeparateByPatchT.Text$Message
+#: FBatchScan.resx$rdSeparateByPatchT.Text$Message
 msgid "Separate files by Patch-T"
 msgstr "Patch-T 를 통한 파일 분할"
 
@@ -1212,8 +1271,8 @@ msgid "Set Default"
 msgstr "기본값 설정"
 
 #: FDesktop.resx$tsSharpen.Text$Message
-#: FViewer.resx$tsSharpen.Text$Message
 #: FSharpen.resx$$this.Text$Message
+#: FViewer.resx$tsSharpen.Text$Message
 msgid "Sharpen"
 msgstr "샤픈"
 
@@ -1230,8 +1289,8 @@ msgstr ""
 msgid "Single scan"
 msgstr "한 장 스캔"
 
-#: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
 #: FImageSettings.resx$cbSkipSavePrompt.Text$Message
+#: FPdfSettings.resx$cbSkipSavePrompt.Text$Message
 msgid "Skip save prompt"
 msgstr "저장 확인창 건너뛰기"
 
@@ -1258,6 +1317,16 @@ msgstr "TWAIN 드라이버"
 #: FError.resx$linkDetails.Text$Message
 msgid "Technical Details"
 msgstr "기술 상세"
+
+#: MiscResources.resx$TesseractNotAvailable$Message
+msgid ""
+"The OCR engine is not available. Make sure to install the required package"
+msgstr ""
+
+#: MiscResources.resx$SaneNotAvailable$Message
+msgid ""
+"The SANE driver is not available. Make sure to install the required packages"
+msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
@@ -1292,6 +1361,10 @@ msgstr "스캐너 예열 중"
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
 msgstr "스캐너 커버 열림"
+
+#: MiscResources.resx$DriverNotSupported$Message
+msgid "The selected driver is not supported on this system"
+msgstr ""
 
 #: MiscResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found"
@@ -1345,9 +1418,17 @@ msgstr "US Letter (8.5x11 in)"
 msgid "Unsaved Changes"
 msgstr "저장되지 않은 변경 사항"
 
-#: FUpdate.resx$$this.Text$Message
-msgid "Update NAPS2"
-msgstr "NAPS2 업데이트"
+#: MiscResources.resx$UpdateProgress$Message
+msgid "Update Progress"
+msgstr ""
+
+#: MiscResources.resx$Updating$Message
+msgid "Updating"
+msgstr ""
+
+#: MiscResources.resx$UploadingEmail$Message
+msgid "Uploading email"
+msgstr ""
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1369,8 +1450,8 @@ msgstr "OCR 을 이용하여 스캔하고자 하는 각 언어를 선택 해 주
 msgid "Version {0}"
 msgstr "{0} 버전"
 
-#: FDesktop.resx$tsView.Text$Message
 #: FDesktop.resx$ctxView.Text$Message
+#: FDesktop.resx$tsView.Text$Message
 msgid "View"
 msgstr "보기"
 
@@ -1381,6 +1462,10 @@ msgstr "WIA 드라이버"
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
 msgstr "TWAIN 완료 대기중"
+
+#: FAuthorize.resx$lblWaiting.Text$Message
+msgid "Waiting for authorization"
+msgstr ""
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}"
@@ -1452,8 +1537,8 @@ msgstr "in"
 msgid "mm"
 msgstr "mm"
 
-#: MiscResources.resx$OfN$Message
 #: FViewer.resx$lblPageTotal.Text$Message
+#: MiscResources.resx$OfN$Message
 msgid "of {0}"
 msgstr "of {0}"
 
@@ -1465,13 +1550,13 @@ msgstr "x64"
 msgid "{0} ({1}x{2} {3})"
 msgstr "{0} ({1}x{2} {3})"
 
-#: MiscResources.resx$SizeProgress$Message
 #: FDownloadProgress.resx$labelSub.Text$Message
+#: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
 msgstr "{0} / {1} MB"
 
-#: MiscResources.resx$FilesProgressFormat$Message
 #: FDownloadProgress.resx$labelTop.Text$Message
+#: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
 msgstr "{0} / {1} 파일"
 

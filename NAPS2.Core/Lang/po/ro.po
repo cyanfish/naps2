@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 18:01+0000\n"
+"POT-Creation-Date: 2018-09-17 20:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,11 +47,6 @@ msgstr "600 dpi"
 #: SettingsResources.resx$Dpi_800$Message
 msgid "800 dpi"
 msgstr "800 dpi"
-
-#: MiscResources.resx$UpdateNow$Message
-#: FUpdate.resx$lblPrompt.Text$Message
-msgid "A newer version of NAPS2 is available. Do you want to update now?"
-msgstr "Este disponibilă o versiune nouă de NPAS2. Doriți să actualizați acum?"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -144,6 +139,14 @@ msgid ""
 "download it now?"
 msgstr ""
 
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occured when trying to install the update"
+msgstr ""
+
+#: MiscResources.resx$AuthError$Message
+msgid "An error occurred when trying to authorize"
+msgstr ""
+
 #: MiscResources.resx$AutoSaveError$Message
 #, fuzzy
 msgid "An error occurred when trying to auto save"
@@ -153,6 +156,10 @@ msgstr "A aparut o eroare in timpul salvării fisierului"
 msgid "An error occurred when trying to save the file"
 msgstr "A aparut o eroare in timpul salvării fisierului"
 
+#: MiscResources.resx$ErrorEmailing$Message
+msgid "An error occurred when trying to send the email"
+msgstr ""
+
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email"
 msgstr "A intervenit o eroare la trimiterea email-ului."
@@ -161,8 +168,18 @@ msgstr "A intervenit o eroare la trimiterea email-ului."
 msgid "An error occurred with the scanning driver"
 msgstr "A apărut o eroare la driver-ul de scanare."
 
+#: MiscResources.resx$ExitWithActiveOperations$Message
+msgid ""
+"An operation is in progress. Are you sure you want to exit and cancel the "
+"operation?"
+msgstr ""
+
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error ocurred during the batch scan"
+msgstr ""
+
+#: MiscResources.resx$UpdateAvailable$Message
+msgid "An update is available"
 msgstr ""
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
@@ -219,6 +236,10 @@ msgstr "Nume ataşament"
 msgid "Author"
 msgstr "Autor"
 
+#: FAuthorize.resx$$this.Text$Message
+msgid "Authorize"
+msgstr ""
+
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
 msgstr ""
@@ -245,9 +266,9 @@ msgstr "Incrementează automat numarul (trei cifre)"
 msgid "Auto-incrementing number (4 digits)"
 msgstr "Incrementează automat numatul (doua cifre)"
 
-#: MiscResources.resx$AutoUpdates$Message
-msgid "Automatic Updates"
-msgstr "Actualizări automate"
+#: FOcrSetup.resx$checkBoxRunInBG.Text$Message
+msgid "Automatically run OCR after scanning"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -349,6 +370,22 @@ msgstr ""
 msgid "Center"
 msgstr "Centrează"
 
+#: FEmailSettings.resx$btnChangeProvider.Text$Message
+msgid "Change"
+msgstr ""
+
+#: FAbout.resx$cbCheckForUpdates.Text$Message
+msgid "Check for updates"
+msgstr ""
+
+#: MiscResources.resx$CheckingForUpdates$Message
+msgid "Checking"
+msgstr ""
+
+#: FEmailProvider.resx$$this.Text$Message
+msgid "Choose Email Provider"
+msgstr ""
+
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
 msgstr "Alegeți profilul"
@@ -397,7 +434,7 @@ msgid "Copying"
 msgstr ""
 
 #: FAbout.resx$labelCopyright.Text$Message
-msgid "Copyright 2009, 2012-2017 NAPS2 Contributors"
+msgid "Copyright 2009, 2012-2018 NAPS2 Contributors"
 msgstr ""
 
 #: FAdvancedScanSettings.resx$label3.Text$Message
@@ -430,6 +467,10 @@ msgstr "Marime pagină personalizată"
 #: FViewer.resx$tsCustomRotation.Text$Message
 msgid "Custom Rotation"
 msgstr "Rotatie personalizată"
+
+#: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
+msgid "Custom SMTP"
+msgstr ""
 
 #: FPlaceholders.resx$label6.Text$Message
 msgid "Day (01-31)"
@@ -493,10 +534,6 @@ msgstr ""
 msgid "Display name"
 msgstr "Nume afișat"
 
-#: MiscResources.resx$EnableAutoUpdates$Message
-msgid "Do you want NAPS2 to automatically check for updates?"
-msgstr "Doriți ca NAPS2 să caute automat actualizările?"
-
 #: MiscResources.resx$Donate$Message
 msgid "Donate"
 msgstr ""
@@ -523,11 +560,6 @@ msgstr ""
 #: FDownloadProgress.resx$$this.Text$Message
 msgid "Download Progress"
 msgstr "Progresul descărcării"
-
-#: FUpdate.resx$btnInstall.Text$Message
-#: MiscResources.resx$DownloadAndInstall$Message
-msgid "Download and Install"
-msgstr "Descarcă și instalează"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -625,6 +657,10 @@ msgstr "Instalează mai multe limbi"
 msgid "Glass"
 msgstr "Sticlă"
 
+#: SettingsResources.resx$EmailProviderType_Gmail$Message
+msgid "Gmail"
+msgstr ""
+
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "Tonuri de gri"
@@ -682,6 +718,10 @@ msgstr ""
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}"
+msgstr ""
+
+#: MiscResources.resx$Install$Message
+msgid "Install {0}"
 msgstr ""
 
 #: MiscResources.resx$InstallComplete$Message
@@ -822,9 +862,18 @@ msgstr "Nici un dispozitiv selectat"
 msgid "No pages are in the feeder"
 msgstr "Nici o foaie in alimentator"
 
+#: FEmailSettings.resx$lblProvider.Text$Message
+#: SettingsResources.resx$EmailProvider_NotSelected$Message
+msgid "No provider selected"
+msgstr ""
+
 #: MiscResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found"
 msgstr "Nu a fost găsit nici un dispozitiv scaner"
+
+#: MiscResources.resx$NoUpdates$Message
+msgid "No updates available"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_None$Message
 #, fuzzy
@@ -853,6 +902,10 @@ msgstr "OCR"
 msgid "OCR Download"
 msgstr "Descarcă OCR"
 
+#: MiscResources.resx$OcrProgress$Message
+msgid "OCR Progress"
+msgstr ""
+
 #: FOcrSetup.resx$$this.Text$Message
 msgid "OCR Setup"
 msgstr "Configurează OCR"
@@ -860,6 +913,10 @@ msgstr "Configurează OCR"
 #: FOcrSetup.resx$label1.Text$Message
 msgid "OCR language"
 msgstr "Limba OCR"
+
+#: FOcrSetup.resx$labelOcrMode.Text$Message
+msgid "OCR mode"
+msgstr ""
 
 #: FPdfPassword.resx$btnOK.Text$Message
 #: FPdfSettings.resx$btnOK.Text$Message
@@ -906,6 +963,14 @@ msgstr "Unul sau mai multe fișiere nu s-au putut descărca"
 
 #: NotifyWidget.resx$openFolderToolStripMenuItem.Text$Message
 msgid "Open Folder"
+msgstr ""
+
+#: MiscResources.resx$ActiveOperations$Message
+msgid "Operation in Progress"
+msgstr ""
+
+#: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
+msgid "Outlook Web Access"
 msgstr ""
 
 #: FBatchScan.resx$groupboxOutput.Text$Message
@@ -1021,6 +1086,10 @@ msgstr "Profiluri"
 msgid "Prompt for file path"
 msgstr ""
 
+#: FEmailSettings.resx$groupBox1.Text$Message
+msgid "Provider"
+msgstr ""
+
 #: FBatchPrompt.resx$lblStatus.Text$Message
 msgid "Ready for scan {0}"
 msgstr ""
@@ -1106,6 +1175,18 @@ msgstr "Rotește la stânga"
 #: FViewer.resx$tsRotateRight.Text$Message
 msgid "Rotate Right"
 msgstr "Rotește la dreapta"
+
+#: FProgress.resx$btnRunInBG.Text$Message
+msgid "Run in Background"
+msgstr ""
+
+#: MiscResources.resx$RunningOcr$Message
+msgid "Running OCR"
+msgstr ""
+
+#: FEditProfile.resx$rdSANE.Text$Message
+msgid "SANE Driver"
+msgstr ""
 
 #: FViewer.resx$tsSaveImage.Text$Message
 #, fuzzy
@@ -1268,6 +1349,16 @@ msgstr "Driver TWAIN"
 msgid "Technical Details"
 msgstr ""
 
+#: MiscResources.resx$TesseractNotAvailable$Message
+msgid ""
+"The OCR engine is not available. Make sure to install the required package"
+msgstr ""
+
+#: MiscResources.resx$SaneNotAvailable$Message
+msgid ""
+"The SANE driver is not available. Make sure to install the required packages"
+msgstr ""
+
 #: MiscResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported"
 msgstr "Fișierul '{0}' nu a putut fi importat"
@@ -1302,6 +1393,10 @@ msgstr ""
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open"
+msgstr ""
+
+#: MiscResources.resx$DriverNotSupported$Message
+msgid "The selected driver is not supported on this system"
 msgstr ""
 
 #: MiscResources.resx$DeviceNotFound$Message
@@ -1357,9 +1452,17 @@ msgstr "US Letter (8.5x11 in)"
 msgid "Unsaved Changes"
 msgstr ""
 
-#: FUpdate.resx$$this.Text$Message
-msgid "Update NAPS2"
-msgstr "Actualizează NAPS2"
+#: MiscResources.resx$UpdateProgress$Message
+msgid "Update Progress"
+msgstr ""
+
+#: MiscResources.resx$Updating$Message
+msgid "Updating"
+msgstr ""
+
+#: MiscResources.resx$UploadingEmail$Message
+msgid "Uploading email"
+msgstr ""
 
 #: FEditProfile.resx$rdbNative.Text$Message
 msgid "Use native UI"
@@ -1393,6 +1496,10 @@ msgstr "Driver WIA"
 
 #: FTwainGui.resx$label1.Text$Message
 msgid "Waiting for TWAIN to complete"
+msgstr ""
+
+#: FAuthorize.resx$lblWaiting.Text$Message
+msgid "Waiting for authorization"
 msgstr ""
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
