@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Config;
+using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth
@@ -19,7 +22,7 @@ namespace NAPS2.ImportExport.Email.Oauth
             this.outlookWebOauthProvider = outlookWebOauthProvider;
         }
 
-        public bool SendEmail(EmailMessage emailMessage)
+        public async Task<bool> SendEmail(EmailMessage emailMessage, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             var messageObj = new JObject
             {
@@ -39,7 +42,7 @@ namespace NAPS2.ImportExport.Email.Oauth
                     { "ContentBytes", Convert.ToBase64String(File.ReadAllBytes(attachment.FilePath)) }
                 }))}
             };
-            var respUrl = outlookWebOauthProvider.UploadDraft(messageObj.ToString());
+            var respUrl = await outlookWebOauthProvider.UploadDraft(messageObj.ToString(), progressCallback, cancelToken);
 
             // Open the draft in the user's browser
             Process.Start(respUrl + "&ispopout=0");

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Config;
+using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth
@@ -66,9 +69,13 @@ namespace NAPS2.ImportExport.Email.Oauth
             return resp.Value<string>("emailAddress");
         }
 
-        public string UploadDraft(string messageRaw)
+        public async Task<string> UploadDraft(string messageRaw, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            var resp = PostAuthorized($"https://www.googleapis.com/upload/gmail/v1/users/{User}/drafts?uploadType=multipart", messageRaw, "message/rfc822");
+            var resp = await PostAuthorized($"https://www.googleapis.com/upload/gmail/v1/users/{User}/drafts?uploadType=multipart",
+                messageRaw,
+                "message/rfc822",
+                progressCallback,
+                cancelToken);
             return resp.Value<JObject>("message").Value<string>("id");
         }
 

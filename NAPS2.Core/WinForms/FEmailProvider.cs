@@ -105,8 +105,6 @@ namespace NAPS2.WinForms
             {
                 DialogResult = DialogResult.OK;
                 Close();
-                // TODO: Refocus app after the user finishes interaction (which form though?)
-                // TODO: Have multiple progress messages in FAuthorize
             }
         }
 

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using MimeKit;
+using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Email
 {
     public abstract class MimeEmailProvider : IEmailProvider
     {
-        public bool SendEmail(EmailMessage emailMessage)
+        public async Task<bool> SendEmail(EmailMessage emailMessage, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
             var builder = new BodyBuilder
             {
@@ -27,12 +30,12 @@ namespace NAPS2.ImportExport.Email
             message.Subject = emailMessage.Subject ?? "";
             message.Body = builder.ToMessageBody();
 
-            SendMimeMessage(message);
+            await SendMimeMessage(message, progressCallback, cancelToken);
 
             return true;
         }
 
-        protected abstract void SendMimeMessage(MimeMessage message);
+        protected abstract Task SendMimeMessage(MimeMessage message, ProgressHandler progressCallback, CancellationToken cancelToken);
 
         private void CopyRecips(List<EmailRecipient> recips, EmailRecipientType type, InternetAddressList outputList)
         {

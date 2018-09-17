@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using NAPS2.Config;
+using NAPS2.Util;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.ImportExport.Email.Oauth
@@ -65,9 +68,9 @@ namespace NAPS2.ImportExport.Email.Oauth
             return resp.Value<string>("Id");
         }
 
-        public string UploadDraft(string messageRaw)
+        public async Task<string> UploadDraft(string messageRaw, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            var resp = PostAuthorized("https://outlook.office.com/api/v1.0/me/messages", messageRaw, "application/json");
+            var resp = await PostAuthorized("https://outlook.office.com/api/v1.0/me/messages", messageRaw, "application/json", progressCallback, cancelToken);
             return resp.Value<string>("WebLink");
         }
 

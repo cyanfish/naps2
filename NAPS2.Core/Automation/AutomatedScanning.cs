@@ -363,7 +363,7 @@ namespace NAPS2.Automation
                 }
 
                 OutputVerbose(ConsoleResources.SendingEmail);
-                if (emailProviderFactory.Default.SendEmail(message))
+                if (await emailProviderFactory.Default.SendEmail(message, (j, k) => { }, CancellationToken.None))
                 {
                     OutputVerbose(ConsoleResources.EmailSent);
                 }

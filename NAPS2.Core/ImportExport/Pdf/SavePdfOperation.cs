@@ -93,11 +93,15 @@ namespace NAPS2.ImportExport.Pdf
                     Status.StatusText = MiscResources.UploadingEmail;
                     Status.CurrentProgress = 0;
                     Status.MaxProgress = 1;
+                    Status.ProgressType = OperationProgressType.MB;
                     InvokeStatusChanged();
 
                     try
                     {
-                        result = emailProviderFactory.Default.SendEmail(emailMessage);
+                        result = await emailProviderFactory.Default.SendEmail(emailMessage, OnProgress, CancelToken);
+                    }
+                    catch (OperationCanceledException)
+                    {
                     }
                     catch (Exception ex)
                     {
