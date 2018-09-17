@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Ocr;
+using NAPS2.Platform;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using PdfSharp.Drawing;
@@ -23,7 +25,10 @@ namespace NAPS2.ImportExport.Pdf
     {
         static PdfSharpExporter()
         {
-            GlobalFontSettings.FontResolver = new FontResolver();
+            if (PlatformCompat.System.UseUnixFontResolver)
+            {
+                GlobalFontSettings.FontResolver = new UnixFontResolver();
+            }
         }
 
         private readonly OcrManager ocrManager;
@@ -300,12 +305,16 @@ namespace NAPS2.ImportExport.Pdf
                 var tf = new XTextFormatter(gfx);
                 foreach (var element in ocrResult.Elements)
                 {
+                    if (string.IsNullOrEmpty(element.Text)) continue;
+
                     var adjustedBounds = AdjustBounds(element.Bounds, (float)page.Width / ocrResult.PageBounds.Width, (float)page.Height / ocrResult.PageBounds.Height);
 #if DEBUG && DEBUGOCR
                     gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), adjustedBounds);
 #endif
                     var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
-                    var font = new XFont("Verdana", adjustedFontSize, XFontStyle.Regular,
+                    // Special case to avoid accidentally recognizing big lines as dashes/underscores
+                    if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) continue;
+                    var font = new XFont("Times New Roman", adjustedFontSize, XFontStyle.Regular,
                         new XPdfFontOptions(PdfFontEncoding.Unicode));
                     var adjustedTextSize = gfx.MeasureString(element.Text, font);
                     var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
@@ -365,20 +374,38 @@ namespace NAPS2.ImportExport.Pdf
         private static int CalculateFontSize(string text, XRect adjustedBounds, XGraphics gfx)
         {
             int fontSizeGuess = Math.Max(1, (int)(adjustedBounds.Height));
-            var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Verdana", fontSizeGuess, XFontStyle.Regular));
+            var measuredBoundsForGuess = gfx.MeasureString(text, new XFont("Times New Roman", fontSizeGuess, XFontStyle.Regular));
             double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
             int adjustedFontSize = Math.Max(1, (int)Math.Floor(fontSizeGuess * adjustmentFactor));
             return adjustedFontSize;
         }
         
-        private class FontResolver : IFontResolver
+        private class UnixFontResolver : IFontResolver
         {
+            private byte[] fontData;
+
             public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
             {
                 return new FontResolverInfo(familyName, isBold, isItalic);
             }
 
-            public byte[] GetFont(string faceName) => Fonts.verdana;
+            public byte[] GetFont(string faceName)
+            {
+                if (fontData == null)
+                {
+                    var proc = Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "fc-list",
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false
+                    });
+                    var fonts = proc.StandardOutput.ReadToEnd().Split('\n').Select(x => x.Split(':')[0]);
+                    // TODO: Maybe add more fonts here?
+                    var freeserif = fonts.First(f => f.EndsWith("FreeSerif.ttf", StringComparison.OrdinalIgnoreCase));
+                    fontData = File.ReadAllBytes(freeserif);
+                }
+                return fontData;
+            }
         }
     }
 }

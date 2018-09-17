@@ -13,5 +13,7 @@ namespace NAPS2.Platform
         public bool IsSaneDriverSupported => false;
 
         public bool CanUseWin32 => true;
+
+        public bool UseUnixFontResolver => false;
     }
 }

@@ -13,5 +13,7 @@ namespace NAPS2.Platform
         bool IsSaneDriverSupported { get; }
 
         bool CanUseWin32 { get; }
+
+        bool UseUnixFontResolver { get; }
     }
 }
