@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using NAPS2.Recovery;
+using NAPS2.ImportExport.Email;
+using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 
@@ -22,6 +23,9 @@ namespace NAPS2.Worker
 
         [OperationContract(IsOneWay = true)]
         void TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
+
+        [OperationContract]
+        MapiSendMailReturnCode SendMapiEmail(EmailMessage message);
 
         [OperationContract]
         byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size);

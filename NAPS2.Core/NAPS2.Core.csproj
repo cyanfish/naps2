@@ -153,6 +153,7 @@
     <Compile Include="Dependencies\DownloadMirror.cs" />
     <Compile Include="Dependencies\MultiFileExternalComponent.cs" />
     <Compile Include="Dependencies\IExternalComponent.cs" />
+    <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptManager.cs" />
     <Compile Include="Ocr\OcrManager.cs" />
     <Compile Include="Ocr\OcrMode.cs" />

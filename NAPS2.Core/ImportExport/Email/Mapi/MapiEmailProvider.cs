@@ -5,22 +5,26 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
+using NAPS2.Platform;
 using NAPS2.Util;
+using NAPS2.Worker;
 
 namespace NAPS2.ImportExport.Email.Mapi
 {
     public class MapiEmailProvider : IEmailProvider
     {
+        private readonly IWorkerServiceFactory workerServiceFactory;
+        private readonly MapiWrapper mapiWrapper;
         private readonly IErrorOutput errorOutput;
-        private readonly SystemEmailClients systemEmailClients;
-        private readonly IUserConfigManager userConfigManager;
 
-        public MapiEmailProvider(IErrorOutput errorOutput, SystemEmailClients systemEmailClients, IUserConfigManager userConfigManager)
+        public MapiEmailProvider(IWorkerServiceFactory workerServiceFactory, MapiWrapper mapiWrapper, IErrorOutput errorOutput)
         {
+            this.workerServiceFactory = workerServiceFactory;
+            this.mapiWrapper = mapiWrapper;
             this.errorOutput = errorOutput;
-            this.systemEmailClients = systemEmailClients;
-            this.userConfigManager = userConfigManager;
         }
+
+        private bool UseWorker => Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
 
         /// <summary>
         /// Sends an email described by the given message object.
@@ -33,76 +37,35 @@ namespace NAPS2.ImportExport.Email.Mapi
         {
             return await Task.Factory.StartNew(() =>
             {
-                // Translate files & recipients to unmanaged MAPI structures
-                using (var files = Unmanaged.CopyOf(GetFiles(message)))
-                using (var recips = Unmanaged.CopyOf(GetRecips(message)))
+                MapiSendMailReturnCode returnCode;
+
+                if (UseWorker)
                 {
-                    // Create a MAPI structure for the entirety of the message
-                    var mapiMessage = new MapiMessage
+                    using (var worker = workerServiceFactory.Create())
                     {
-                        subject = message.Subject,
-                        noteText = message.BodyText,
-                        recips = recips,
-                        recipCount = recips.Length,
-                        files = files,
-                        fileCount = files.Length
-                    };
-
-                    // Determine the flags used to send the message
-                    var flags = MapiSendMailFlags.None;
-                    if (!message.AutoSend)
-                    {
-                        flags |= MapiSendMailFlags.Dialog;
+                        returnCode = worker.Service.SendMapiEmail(message);
                     }
-
-                    if (!message.AutoSend || !message.SilentSend)
-                    {
-                        flags |= MapiSendMailFlags.LogonUI;
-                    }
-
-                    // Send the message
-                    var clientName = userConfigManager.Config.EmailSetup?.SystemProviderName;
-                    var mapiSendMail = systemEmailClients.GetDelegate(clientName);
-                    var returnCode = mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
-
-                    // Process the result
-                    if (returnCode == MapiSendMailReturnCode.UserAbort)
-                    {
-                        return false;
-                    }
-
-                    if (returnCode != MapiSendMailReturnCode.Success)
-                    {
-                        Log.Error("Error sending email. MAPI error code: {0}", returnCode);
-                        errorOutput.DisplayError(MiscResources.EmailError, $"MAPI returned error code: {returnCode}");
-                        return false;
-                    }
-
-                    return true;
                 }
+                else
+                {
+                    returnCode = mapiWrapper.SendEmail(message);
+                }
+
+                // Process the result
+                if (returnCode == MapiSendMailReturnCode.UserAbort)
+                {
+                    return false;
+                }
+
+                if (returnCode != MapiSendMailReturnCode.Success)
+                {
+                    Log.Error("Error sending email. MAPI error code: {0}", returnCode);
+                    errorOutput.DisplayError(MiscResources.EmailError, $"MAPI returned error code: {returnCode}");
+                    return false;
+                }
+
+                return true;
             });
-        }
-
-        private static MapiRecipDesc[] GetRecips(EmailMessage message)
-        {
-            return message.Recipients.Select(recipient => new MapiRecipDesc
-            {
-                name = recipient.Name,
-                address = "SMTP:" + recipient.Address,
-                recipClass = recipient.Type == EmailRecipientType.Cc ? MapiRecipClass.Cc
-                    : recipient.Type == EmailRecipientType.Bcc ? MapiRecipClass.Bcc
-                        : MapiRecipClass.To
-            }).ToArray();
-        }
-
-        private static MapiFileDesc[] GetFiles(EmailMessage message)
-        {
-            return message.Attachments.Select(attachment => new MapiFileDesc
-            {
-                position = -1,
-                path = attachment.FilePath,
-                name = attachment.AttachmentName
-            }).ToArray();
         }
     }
 }

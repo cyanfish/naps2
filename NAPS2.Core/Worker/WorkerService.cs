@@ -7,6 +7,8 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAPS2.ImportExport.Email;
+using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
@@ -26,13 +28,15 @@ namespace NAPS2.Worker
     {
         private readonly TwainWrapper twainWrapper;
         private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly MapiWrapper mapiWrapper;
 
         public FormBase ParentForm { get; set; }
 
-        public WorkerService(TwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer)
+        public WorkerService(TwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, MapiWrapper mapiWrapper)
         {
             this.twainWrapper = twainWrapper;
             this.thumbnailRenderer = thumbnailRenderer;
+            this.mapiWrapper = mapiWrapper;
         }
 
         public void Init(string recoveryFolderPath)
@@ -67,6 +71,11 @@ namespace NAPS2.Worker
                     Callback.Finish();
                 }
             }, TaskCreationOptions.LongRunning);
+        }
+
+        public MapiSendMailReturnCode SendMapiEmail(EmailMessage message)
+        {
+            return mapiWrapper.SendEmail(message);
         }
 
         public byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
