@@ -33,21 +33,8 @@ namespace NAPS2.Ocr
 
         public new CancellationToken CancelToken => base.CancelToken;
 
-        public void IncrementMax()
-        {
-            Status.MaxProgress += 1;
-            InvokeStatusChanged();
-        }
+        public new void InvokeStatusChanged() => base.InvokeStatusChanged();
 
-        public void IncrementCurrent()
-        {
-            Status.CurrentProgress += 1;
-            InvokeStatusChanged();
-        }
-
-        public void Finish()
-        {
-            InvokeFinished();
-        }
+        public new void InvokeFinished() => base.InvokeFinished();
     }
 }

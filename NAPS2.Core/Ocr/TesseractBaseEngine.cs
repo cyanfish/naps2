@@ -93,7 +93,7 @@ namespace NAPS2.Ocr
                         return null;
                     }
                 }
-#if DEBUG
+#if DEBUG && DEBUGTESS
                 Debug.WriteLine("Tesseract stopwatch: " + stopwatch.ElapsedMilliseconds);
                 var output = tesseractProcess.StandardOutput.ReadToEnd();
                 if (output.Length > 0)

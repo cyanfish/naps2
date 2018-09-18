@@ -13,7 +13,7 @@ namespace NAPS2.Ocr
     public class OcrRequestQueue
     {
         private readonly Dictionary<OcrRequestParams, OcrRequest> requestCache = new Dictionary<OcrRequestParams, OcrRequest>();
-        private readonly AutoResetEvent queueWaitHandle = new AutoResetEvent(false);
+        private readonly Semaphore queueWaitHandle = new Semaphore(0, Int32.MaxValue);
         private List<Task> workerTasks = new List<Task>();
         private CancellationTokenSource workerCts = new CancellationTokenSource();
 
@@ -52,7 +52,7 @@ namespace NAPS2.Ocr
                 // Fast path for cached results
                 if (req.Result != null)
                 {
-                    File.Delete(tempImageFilePath);
+                    SafeDelete(tempImageFilePath);
                     return req.Result;
                 }
                 // Manage ownership of the provided temp file
@@ -62,16 +62,26 @@ namespace NAPS2.Ocr
                 }
                 else
                 {
-                    File.Delete(tempImageFilePath);
+                    SafeDelete(tempImageFilePath);
                 }
                 // Increment the reference count
                 req.ForegroundCount += 1;
-                queueWaitHandle.Set();
+                queueWaitHandle.Release();
             }
             // If no worker threads are running, start them
             EnsureWorkerThreads();
             // Wait for completion or cancellation
-            await Task.Factory.StartNew(() => WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle }), TaskCreationOptions.LongRunning);
+            await Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    WaitHandle.WaitAny(new[] { req.WaitHandle, cancelToken.WaitHandle });
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error in OcrRequestQueue.QueueForeground response task", e);
+                }
+            }, TaskCreationOptions.LongRunning);
             lock (this)
             {
                 // Decrement the reference count
@@ -109,30 +119,38 @@ namespace NAPS2.Ocr
                 }
                 else
                 {
-                    File.Delete(tempImageFilePath);
+                    SafeDelete(tempImageFilePath);
                 }
                 // Increment the reference count
                 req.BackgroundCount += 1;
                 snapshot.Source.ThumbnailInvalidated += (sender, args) => cts.Cancel();
                 snapshot.Source.FullyDisposed += (sender, args) => cts.Cancel();
-                queueWaitHandle.Set();
+                queueWaitHandle.Release();
             }
             // If no worker threads are running, start them
             EnsureWorkerThreads();
             var op = StartingOne();
             Task.Factory.StartNew(() =>
             {
-                WaitHandle.WaitAny(new[] {req.WaitHandle, cts.Token.WaitHandle, op.CancelToken.WaitHandle});
-                lock (this)
+                try
                 {
-                    // Decrement the reference count
-                    req.BackgroundCount -= 1;
-                    // If all requestors have cancelled and there's no result to cache, delete the request
-                    DestroyRequest(req);
+                    WaitHandle.WaitAny(new[] { req.WaitHandle, cts.Token.WaitHandle, op.CancelToken.WaitHandle });
+                    lock (this)
+                    {
+                        // Decrement the reference count
+                        req.BackgroundCount -= 1;
+                        // If all requestors have cancelled and there's no result to cache, delete the request
+                        DestroyRequest(req);
+                    }
+
+                    FinishedOne();
+                    // If no requests are pending, stop the worker threads
+                    EnsureWorkerThreads();
                 }
-                FinishedOne();
-                // If no requests are pending, stop the worker threads
-                EnsureWorkerThreads();
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error in OcrRequestQueue.QueueBackground response task", e);
+                }
             }, TaskCreationOptions.LongRunning);
         }
 
@@ -142,13 +160,33 @@ namespace NAPS2.Ocr
             {
                 if (!req.IsProcessing)
                 {
-                    File.Delete(req.TempImageFilePath);
+                    SafeDelete(req.TempImageFilePath);
                 }
                 if (req.Result == null)
                 {
                     req.CancelSource.Cancel();
                     if (requestCache.Get(req.Params) == req) requestCache.Remove(req.Params);
                 }
+            }
+        }
+
+        private static void SafeDelete(string path)
+        {
+            try
+            {
+                try
+                {
+                    File.Delete(path);
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(100);
+                    File.Delete(path);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.ErrorException("Error deleting temp OCR file", e);
             }
         }
 
@@ -175,75 +213,106 @@ namespace NAPS2.Ocr
 
         private void RunWorkerTask(CancellationTokenSource cts)
         {
-            while (true)
+            try
             {
-                // Wait for a queued ocr request to become available
-                WaitHandle.WaitAny(new[] { queueWaitHandle, cts.Token.WaitHandle });
-                if (cts.IsCancellationRequested)
+                while (true)
                 {
-                    return;
-                }
-                // Get the next queued request
-                OcrRequest next;
-                string tempImageFilePath;
-                lock (this)
-                {
-                    next = requestCache.Values
-                        .OrderByDescending(x => x.ForegroundCount)
-                        .ThenByDescending(x => x.BackgroundCount)
-                        .FirstOrDefault(x => x.BackgroundCount + x.ForegroundCount > 0 && !x.IsProcessing && x.Result == null);
-                    if (next == null)
+                    // Wait for a queued ocr request to become available
+                    WaitHandle.WaitAny(new[] {queueWaitHandle, cts.Token.WaitHandle});
+                    if (cts.IsCancellationRequested)
                     {
-                        continue;
+                        return;
                     }
-                    next.IsProcessing = true;
-                    tempImageFilePath = next.TempImageFilePath;
-                }
-                // Actually run OCR
-                var result = next.Params.Engine.ProcessImage(tempImageFilePath, next.Params.OcrParams, next.CancelSource.Token);
-                // Update the request
-                lock (this)
-                {
-                    if (result != null)
+
+                    // Get the next queued request
+                    OcrRequest next;
+                    string tempImageFilePath;
+                    lock (this)
                     {
-                        next.Result = result;
+                        next = requestCache.Values
+                            .OrderByDescending(x => x.ForegroundCount)
+                            .ThenByDescending(x => x.BackgroundCount)
+                            .FirstOrDefault(x => x.BackgroundCount + x.ForegroundCount > 0 && !x.IsProcessing && x.Result == null);
+                        if (next == null)
+                        {
+                            continue;
+                        }
+
+                        next.IsProcessing = true;
+                        tempImageFilePath = next.TempImageFilePath;
                     }
-                    if (next.Result == null)
+
+                    // Actually run OCR
+                    var result = next.Params.Engine.ProcessImage(tempImageFilePath, next.Params.OcrParams, next.CancelSource.Token);
+                    // Update the request
+                    lock (this)
                     {
-                        if (requestCache.Get(next.Params) == next) requestCache.Remove(next.Params);
+                        if (result != null)
+                        {
+                            next.Result = result;
+                        }
+
+                        if (next.Result == null)
+                        {
+                            if (requestCache.Get(next.Params) == next) requestCache.Remove(next.Params);
+                        }
+
+                        next.IsProcessing = false;
+                        next.WaitHandle.Set();
                     }
-                    next.IsProcessing = false;
-                    next.WaitHandle.Set();
+
+                    // Clean up
+                    SafeDelete(tempImageFilePath);
                 }
-                // Clean up
-                File.Delete(tempImageFilePath);
+            }
+            catch (Exception e)
+            {
+                Log.ErrorException("Error in OcrRequestQueue.RunWorkerTask", e);
             }
         }
-        
+
         private OcrOperation StartingOne()
         {
+            OcrOperation op;
+            bool started = false;
             lock (this)
             {
                 if (currentOp == null)
                 {
                     currentOp = new OcrOperation(workerTasks);
-                    operationProgress.ShowBackgroundProgress(currentOp);
+                    started = true;
                 }
-                currentOp.IncrementMax();
-                return currentOp;
+                op = currentOp;
+                op.Status.MaxProgress += 1;
+                op.Status.StatusText = $"{op.Status.CurrentProgress} / {op.Status.MaxProgress}";
             }
+            op.InvokeStatusChanged();
+            if (started)
+            {
+                operationProgress.ShowBackgroundProgress(op);
+            }
+            return op;
         }
 
         private void FinishedOne()
         {
+            OcrOperation op;
+            bool finished = false;
             lock (this)
             {
-                currentOp.IncrementCurrent();
+                op = currentOp;
+                currentOp.Status.CurrentProgress += 1;
+                op.Status.StatusText = $"{op.Status.CurrentProgress} / {op.Status.MaxProgress}";
                 if (currentOp.Status.CurrentProgress == currentOp.Status.MaxProgress)
                 {
-                    currentOp.Finish();
                     currentOp = null;
+                    finished = true;
                 }
+            }
+            op.InvokeStatusChanged();
+            if (finished)
+            {
+                op.InvokeFinished();
             }
         }
     }
