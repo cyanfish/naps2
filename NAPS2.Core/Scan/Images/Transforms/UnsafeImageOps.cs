@@ -10,6 +10,90 @@ namespace NAPS2.Scan.Images.Transforms
 {
     public static class UnsafeImageOps
     {
+        public static unsafe void ChangeBrightness(Bitmap bitmap, float brightnessAdjusted)
+        {
+            int bytesPerPixel = GetBytesPerPixel(bitmap);
+
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            int stride = Math.Abs(bitmapData.Stride);
+            int h = bitmapData.Height;
+            int w = bitmapData.Width;
+
+            brightnessAdjusted *= 255;
+
+            byte* data = (byte*)bitmapData.Scan0;
+            PartitionRows(h, (start, end) =>
+            {
+                for (int y = start; y < end; y++)
+                {
+                    byte* row = data + stride * y;
+                    for (int x = 0; x < w; x++)
+                    {
+                        byte* pixel = row + x * bytesPerPixel;
+                        byte r = *pixel;
+                        byte g = *(pixel + 1);
+                        byte b = *(pixel + 2);
+
+                        int r2 = (int)(r + brightnessAdjusted);
+                        int g2 = (int)(g + brightnessAdjusted);
+                        int b2 = (int)(b + brightnessAdjusted);
+
+                        r = (byte)(r2 < 0 ? 0 : r2 > 255 ? 255 : r2);
+                        g = (byte)(g2 < 0 ? 0 : g2 > 255 ? 255 : g2);
+                        b = (byte)(b2 < 0 ? 0 : b2 > 255 ? 255 : b2);
+
+                        *pixel = r;
+                        *(pixel + 1) = g;
+                        *(pixel + 2) = b;
+                    }
+                }
+            });
+
+            bitmap.UnlockBits(bitmapData);
+        }
+
+        public static unsafe void ChangeContrast(Bitmap bitmap, float contrastAdjusted, float offset)
+        {
+            int bytesPerPixel = GetBytesPerPixel(bitmap);
+
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            int stride = Math.Abs(bitmapData.Stride);
+            int h = bitmapData.Height;
+            int w = bitmapData.Width;
+
+            offset *= 255;
+
+            byte* data = (byte*)bitmapData.Scan0;
+            PartitionRows(h, (start, end) =>
+            {
+                for (int y = start; y < end; y++)
+                {
+                    byte* row = data + stride * y;
+                    for (int x = 0; x < w; x++)
+                    {
+                        byte* pixel = row + x * bytesPerPixel;
+                        byte r = *pixel;
+                        byte g = *(pixel + 1);
+                        byte b = *(pixel + 2);
+
+                        int r2 = (int)(r * contrastAdjusted + offset);
+                        int g2 = (int)(g * contrastAdjusted + offset);
+                        int b2 = (int)(b * contrastAdjusted + offset);
+
+                        r = (byte)(r2 < 0 ? 0 : r2 > 255 ? 255 : r2);
+                        g = (byte)(g2 < 0 ? 0 : g2 > 255 ? 255 : g2);
+                        b = (byte)(b2 < 0 ? 0 : b2 > 255 ? 255 : b2);
+
+                        *pixel = r;
+                        *(pixel + 1) = g;
+                        *(pixel + 2) = b;
+                    }
+                }
+            });
+
+            bitmap.UnlockBits(bitmapData);
+        }
+
         public static unsafe void HueShift(Bitmap bitmap, float hueShift)
         {
             int bytesPerPixel = GetBytesPerPixel(bitmap);
@@ -182,7 +266,7 @@ namespace NAPS2.Scan.Images.Transforms
                     }
                 }
             });
-            
+
             bitmap.UnlockBits(bitmapData);
             monoBitmap.UnlockBits(monoBitmapData);
             monoBitmap.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);

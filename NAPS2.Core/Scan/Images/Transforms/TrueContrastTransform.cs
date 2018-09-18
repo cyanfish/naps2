@@ -18,29 +18,7 @@ namespace NAPS2.Scan.Images.Transforms
             float offset = (1.0f - contrastAdjusted) / 2.0f;
 
             EnsurePixelFormat(ref bitmap);
-            using (var g = Graphics.FromImage(bitmap))
-            {
-                var attrs = new ImageAttributes();
-                attrs.SetColorMatrix(new ColorMatrix
-                {
-                    Matrix00 = contrastAdjusted,
-                    Matrix11 = contrastAdjusted,
-                    Matrix22 = contrastAdjusted,
-                    Matrix33 = 1.0f,
-                    Matrix44 = 1.0f,
-                    Matrix40 = offset,
-                    Matrix41 = offset,
-                    Matrix42 = offset,
-                });
-                g.DrawImage(bitmap,
-                    new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                    0,
-                    0,
-                    bitmap.Width,
-                    bitmap.Height,
-                    GraphicsUnit.Pixel,
-                    attrs);
-            }
+            UnsafeImageOps.ChangeContrast(bitmap, contrastAdjusted, offset);
             return bitmap;
         }
 
