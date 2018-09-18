@@ -40,7 +40,7 @@ namespace NAPS2.Update
                 var versionName = release.Value<string>("name");
                 var version = ParseVersion(versionName);
 
-                // if (currentVersion >= version) continue;
+                if (currentVersion >= version) continue;
 
                 var gte = release["requires"].Value<string>("gte");
                 var gteVersion = gte != null ? ParseVersion(gte) : null;
