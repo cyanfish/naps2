@@ -164,18 +164,17 @@ namespace NAPS2.ImportExport.Pdf
 
         private bool BuildDocumentWithOcr(ProgressHandler progressCallback, CancellationToken cancelToken, PdfDocument document, PdfCompat compat, ICollection<ScannedImage.Snapshot> snapshots, IOcrEngine ocrEngine, OcrParams ocrParams)
         {
-            // Use a pipeline so that multiple pages/images can be processed in parallel
-            // Note: No locks needed on the document because the design of the pipeline ensures no two threads will work on it at once
-
             int progress = 0;
             progressCallback(progress, snapshots.Count);
-            Pipeline.For(snapshots).Step(snapshot =>
+
+            List<(PdfPage, Task<OcrResult>)> ocrPairs = new List<(PdfPage, Task<OcrResult>)>();
+
+            // Step 1: Create the pages, draw the images, and start OCR
+            foreach (var snapshot in snapshots)
             {
-                // Step 1: Load the image into memory, draw it on a new PDF page, and save a copy of the processed image to disk for OCR
-                
                 if (cancelToken.IsCancellationRequested)
                 {
-                    return null;
+                    break;
                 }
 
                 bool importedPdfPassThrough = snapshot.Source.FileFormat == null && !snapshot.TransformList.Any();
@@ -184,34 +183,10 @@ namespace NAPS2.ImportExport.Pdf
                 if (importedPdfPassThrough)
                 {
                     page = CopyPdfPageToDoc(document, snapshot.Source);
-
-                    // Scan through the page looking for text
-                    var elements = page.Contents.Elements;
-                    for (int i = 0; i < elements.Count; i++)
+                    if (PageContainsText(page))
                     {
-                        string textAndFormatting = elements.GetDictionary(i).Stream.ToString();
-                        var reader = new StringReader(textAndFormatting);
-                        bool inTextBlock = false;
-                        string line;
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            if (line.EndsWith("BT", StringComparison.InvariantCulture))
-                            {
-                                inTextBlock = true;
-                            }
-                            else if (line.EndsWith("ET", StringComparison.InvariantCulture))
-                            {
-                                inTextBlock = false;
-                            }
-                            else if (inTextBlock &&
-                                          (line.EndsWith("TJ", StringComparison.InvariantCulture) || line.EndsWith("Tj", StringComparison.InvariantCulture)
-                                           || line.EndsWith("\"", StringComparison.InvariantCulture) || line.EndsWith("'", StringComparison.InvariantCulture)))
-                            {
-                                // Text-showing operators
-                                // Since this page already contains text, don't use OCR
-                                return null;
-                            }
-                        }
+                        // Since this page already contains text, don't use OCR
+                        continue;
                     }
                 }
                 else
@@ -219,12 +194,14 @@ namespace NAPS2.ImportExport.Pdf
                     page = document.AddPage();
                 }
 
+                string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+
                 using (Stream stream = scannedImageRenderer.RenderToStream(snapshot).Result)
                 using (var img = XImage.FromStream(stream))
                 {
                     if (cancelToken.IsCancellationRequested)
                     {
-                        return null;
+                        break;
                     }
 
                     if (!importedPdfPassThrough)
@@ -234,54 +211,84 @@ namespace NAPS2.ImportExport.Pdf
 
                     if (cancelToken.IsCancellationRequested)
                     {
-                        return null;
+                        break;
                     }
 
-                    string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
                     if (!ocrRequestQueue.HasCachedResult(ocrEngine, snapshot, ocrParams))
                     {
                         img.GdiImage.Save(tempImageFilePath);
                     }
-
-                    return Tuple.Create(page, tempImageFilePath, snapshot);
                 }
-            }).StepParallel((page, tempImageFilePath, snapshot) =>
-            {
-                // Step 2: Run OCR on the processsed image file
-                // This step is doubly parallel since not only can it run alongside other stages of the pipeline,
-                // multiple files can also be OCR'd at once (no interdependencies, it doesn't touch the document)
 
                 if (cancelToken.IsCancellationRequested)
                 {
                     File.Delete(tempImageFilePath);
-                    return null;
+                    break;
                 }
-                
-                var ocrResult = ocrRequestQueue.QueueForeground(ocrEngine, snapshot, tempImageFilePath, ocrParams, cancelToken).Result;
 
-                // The final pipeline step is pretty fast, so updating progress here is more accurate
-                if (!cancelToken.IsCancellationRequested)
+                // Start OCR
+                var ocrTask = ocrRequestQueue.QueueForeground(ocrEngine, snapshot, tempImageFilePath, ocrParams, cancelToken);
+                ocrTask.ContinueWith(task =>
                 {
-                    Interlocked.Increment(ref progress);
-                    progressCallback(progress, snapshots.Count);
-                }
+                    // This is the best place to put progress reporting
+                    // Long-running OCR is done, and drawing text on the page (step 2) is very fast
+                    if (!cancelToken.IsCancellationRequested)
+                    {
+                        Interlocked.Increment(ref progress);
+                        progressCallback(progress, snapshots.Count);
+                    }
+                }, TaskContinuationOptions.ExecuteSynchronously);
+                // Record the page and task for step 2
+                ocrPairs.Add((page, ocrTask));
+            }
 
-                return Tuple.Create(page, ocrResult);
-            }).StepBlock().Run((page, ocrResult) =>
+            // Step 2: Wait for all the OCR results, and draw the text on each page
+            foreach (var (page, ocrTask) in ocrPairs)
             {
-                // Step 3: Draw the OCR text on the PDF page
-
-                if (ocrResult == null)
-                {
-                    return;
-                }
                 if (cancelToken.IsCancellationRequested)
                 {
-                    return;
+                    break;
                 }
-                DrawOcrTextOnPage(page, ocrResult);
-            });
+                if (ocrTask.Result == null)
+                {
+                    continue;
+                }
+                DrawOcrTextOnPage(page, ocrTask.Result);
+            }
+            
             return !cancelToken.IsCancellationRequested;
+        }
+
+        private bool PageContainsText(PdfPage page)
+        {
+            var elements = page.Contents.Elements;
+            for (int i = 0; i < elements.Count; i++)
+            {
+                string textAndFormatting = elements.GetDictionary(i).Stream.ToString();
+                var reader = new StringReader(textAndFormatting);
+                bool inTextBlock = false;
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (line.EndsWith("BT", StringComparison.InvariantCulture))
+                    {
+                        inTextBlock = true;
+                    }
+                    else if (line.EndsWith("ET", StringComparison.InvariantCulture))
+                    {
+                        inTextBlock = false;
+                    }
+                    else if (inTextBlock &&
+                             (line.EndsWith("TJ", StringComparison.InvariantCulture) || line.EndsWith("Tj", StringComparison.InvariantCulture)
+                                                                                     || line.EndsWith("\"", StringComparison.InvariantCulture) ||
+                                                                                     line.EndsWith("'", StringComparison.InvariantCulture)))
+                    {
+                        // Text-showing operators
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private PdfPage CopyPdfPageToDoc(PdfDocument destDoc, ScannedImage image)
