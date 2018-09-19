@@ -78,7 +78,7 @@ namespace NAPS2.Scan.Twain
                     {
                         worker.Callback.ImageCallback += (img, tempPath) =>
                         {
-                            scannedImageHelper.RunBackgroundOcr(img, ScanParams, tempPath);
+                            if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, ScanParams, tempPath);
                             source.Put(img);
                         };
                         worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent?.SafeHandle() ?? IntPtr.Zero);

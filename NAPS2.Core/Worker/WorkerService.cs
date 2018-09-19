@@ -112,7 +112,7 @@ namespace NAPS2.Worker
                     stream = new MemoryStream();
                     thumb.Save(stream, ImageFormat.Png);
                 }
-                callback.TwainImageReceived(image.RecoveryIndexImage, stream?.ToArray(), imagePathDict[image]);
+                callback.TwainImageReceived(image.RecoveryIndexImage, stream?.ToArray(), imagePathDict.Get(image));
             }
         }
     }

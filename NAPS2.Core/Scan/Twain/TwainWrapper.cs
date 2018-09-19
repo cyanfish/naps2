@@ -226,8 +226,8 @@ namespace NAPS2.Scan.Twain
             {
                 try
                 {
-                    var windowHandle = (Invoker.Current as Form ?? dialogParent).Handle;
-                    ReturnCode rc = session.Open(new WindowsFormsMessageLoopHook(windowHandle));
+                    var windowHandle = (Invoker.Current as Form)?.Handle;
+                    ReturnCode rc = windowHandle != null ? session.Open(new WindowsFormsMessageLoopHook(windowHandle.Value)) : session.Open();
                     if (rc != ReturnCode.Success)
                     {
                         Debug.WriteLine("NAPS2.TW - Could not open session - {0}", rc);
@@ -250,7 +250,7 @@ namespace NAPS2.Scan.Twain
                     ConfigureDS(ds, scanProfile, scanParams);
                     var ui = scanProfile.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
                     Debug.WriteLine("NAPS2.TW - Enabling DS");
-                    rc = scanParams.NoUI ? ds.Enable(ui, true, windowHandle) : ds.Enable(ui, true, twainForm.Handle);
+                    rc = scanParams.NoUI ? ds.Enable(ui, true, windowHandle ?? IntPtr.Zero) : ds.Enable(ui, true, twainForm.Handle);
                     Debug.WriteLine("NAPS2.TW - Enable finished");
                     if (rc != ReturnCode.Success)
                     {
