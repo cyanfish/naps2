@@ -21,8 +21,9 @@ namespace NAPS2.WinForms
             cancelToolStripMenuItem.Visible = op.AllowCancel;
             op.StatusChanged += Op_StatusChanged;
             op.Finished += Op_Finished;
-            DisplayProgress();
         }
+
+        public override void ShowNotify() => DisplayProgress();
 
         public override NotifyWidgetBase Clone() => new OperationProgressNotifyWidget(operationProgress, op);
 
