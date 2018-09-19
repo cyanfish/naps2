@@ -17,7 +17,7 @@ namespace NAPS2.Ocr
 
         public Tesseract400Beta4Engine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager)
         {
-            string exeFolder = Environment.Is64BitProcess ? "tess64" : "tess32";
+            string exeFolder = Environment.Is64BitProcess ? "w64" : "w32";
             LanguageData = TesseractLanguageData.V400B4;
             TesseractBasePath = Path.Combine(componentManager.BasePath, "tesseract-4.0.0b4");
             TesseractExePath = Path.Combine(exeFolder, "tesseract.exe");
@@ -26,8 +26,8 @@ namespace NAPS2.Ocr
             SupportedModes = new[] { OcrMode.Fast, OcrMode.Best, OcrMode.Legacy };
 
             var download = Environment.Is64BitProcess
-                ? new DownloadInfo("tesseract.exe-dlls-400b4-tess64.zip", Mirrors, 2.61, "03f4ae58312c1e2329323fe4b555e4f8c7ce8b0e", DownloadFormat.Zip)
-                : new DownloadInfo("tesseract.exe-dlls-400b4-tess32.zip", Mirrors, 3.33, "7de12928ec6a7cdb28fb1895a41d637da968eb0c", DownloadFormat.Zip);
+                ? new DownloadInfo("tesseract.exe.w64.zip", Mirrors, 1.83, "4eba9aaf8800a100ef059c512be572e39ae72f4d", DownloadFormat.Zip)
+                : new DownloadInfo("tesseract.exe.w32.zip", Mirrors, 1.56, "300ad281a5fa1c734dbb4a8a4dd49e3a8ab921a4", DownloadFormat.Zip);
             Component = new MultiFileExternalComponent("ocr", Path.Combine(TesseractBasePath, exeFolder), new[] { "tesseract.exe" }, download);
 
             LanguageComponents = LanguageData.Data.Select(x =>
