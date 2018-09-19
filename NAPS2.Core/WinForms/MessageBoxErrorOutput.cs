@@ -18,17 +18,17 @@ namespace NAPS2.WinForms
 
         public void DisplayError(string errorMessage)
         {
-            MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Invoker.Current.SafeInvoke(() => MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error));
         }
 
         public void DisplayError(string errorMessage, string details)
         {
-            dialogHelper.ShowErrorWithDetails(errorMessage, details);
+            Invoker.Current.SafeInvoke(() => dialogHelper.ShowErrorWithDetails(errorMessage, details));
         }
 
         public void DisplayError(string errorMessage, Exception exception)
         {
-            dialogHelper.ShowErrorWithDetails(errorMessage, exception.ToString());
+            Invoker.Current.SafeInvoke(() => dialogHelper.ShowErrorWithDetails(errorMessage, exception.ToString()));
         }
     }
 }

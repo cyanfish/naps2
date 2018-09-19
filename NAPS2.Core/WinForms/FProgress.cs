@@ -33,18 +33,8 @@ namespace NAPS2.WinForms
             {
                 operation = value;
                 operation.StatusChanged += operation_StatusChanged;
-                operation.Error += operation_Error;
                 operation.Finished += operation_Finished;
                 btnCancel.Visible = operation.AllowCancel;
-            }
-        }
-
-        void operation_Error(object sender, OperationErrorEventArgs e)
-        {
-            // TODO: Operation error for background
-            if (!background)
-            {
-                SafeInvoke(() => errorOutput.DisplayError(e.ErrorMessage, e.Exception));
             }
         }
 
