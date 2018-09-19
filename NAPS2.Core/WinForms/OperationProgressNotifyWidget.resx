@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>123, 17</value>
@@ -167,6 +167,9 @@
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="progressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 26</value>
@@ -187,6 +190,36 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblNumber.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 8</value>
+  </data>
+  <data name="lblNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lblNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblNumber.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;lblNumber.Name" xml:space="preserve">
+    <value>lblNumber</value>
+  </data>
+  <data name="&gt;&gt;lblNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumber.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNumber.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -208,6 +241,6 @@
     <value>OperationProgressNotifyWidget</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.NotifyWidgetBase, NAPS2.Core, Version=5.8.2.29512, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.NotifyWidgetBase, NAPS2.Core, Version=6.0.1.27018, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -284,7 +284,6 @@ namespace NAPS2.Ocr
                 }
                 op = currentOp;
                 op.Status.MaxProgress += 1;
-                op.Status.StatusText = $"{op.Status.CurrentProgress} / {op.Status.MaxProgress}";
             }
             op.InvokeStatusChanged();
             if (started)
@@ -302,7 +301,6 @@ namespace NAPS2.Ocr
             {
                 op = currentOp;
                 currentOp.Status.CurrentProgress += 1;
-                op.Status.StatusText = $"{op.Status.CurrentProgress} / {op.Status.MaxProgress}";
                 if (currentOp.Status.CurrentProgress == currentOp.Status.MaxProgress)
                 {
                     currentOp = null;

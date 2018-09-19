@@ -29,31 +29,17 @@ namespace NAPS2.WinForms
 
         private void DisplayProgress()
         {
-            var status = op.Status ?? new OperationStatus();
-            lblTitle.Text = status.StatusText;
-            if (status.MaxProgress == 1 || status.IndeterminateProgress)
+            var lblNumberRight = lblNumber.Right;
+            operationProgress.RenderStatus(op, lblTitle, lblNumber, progressBar);
+            if (op.Status?.IndeterminateProgress != true)
             {
-                progressBar.Style = ProgressBarStyle.Marquee;
+                // Don't display the number if the progress bar is precise
+                // Otherwise, the widget will be too cluttered
+                // The number is only shown for OcrOperation at the moment
+                lblNumber.Text = "";
             }
-            else if (status.MaxProgress == 0)
-            {
-                progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Maximum = 1;
-                progressBar.Value = 0;
-            }
-            else
-            {
-                progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Maximum = status.MaxProgress;
-                progressBar.Value = status.CurrentProgress;
-            }
-            // Force the progress bar to render immediately
-            if (progressBar.Value < progressBar.Maximum)
-            {
-                progressBar.Value += 1;
-                progressBar.Value -= 1;
-            }
-            Width = Math.Max(Width, lblTitle.Width + 22);
+            lblNumber.Left = lblNumberRight - lblNumber.Width;
+            Width = Math.Max(Width, lblTitle.Width + lblNumber.Width + 22);
             Height = Math.Max(Height, lblTitle.Height + 35);
         }
 

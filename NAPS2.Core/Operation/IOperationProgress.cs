@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace NAPS2.Operation
 {
@@ -18,6 +19,8 @@ namespace NAPS2.Operation
         void ShowModalProgress(IOperation op);
 
         void ShowBackgroundProgress(IOperation op);
+
+        void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar);
 
         List<IOperation> ActiveOperations { get; }
     }

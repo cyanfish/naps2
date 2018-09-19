@@ -11,14 +11,16 @@ namespace NAPS2.WinForms
     public partial class FProgress : FormBase
     {
         private readonly IErrorOutput errorOutput;
+        private readonly IOperationProgress operationProgress;
 
         private volatile bool loaded;
         private volatile bool background;
         private IOperation operation;
 
-        public FProgress(IErrorOutput errorOutput)
+        public FProgress(IErrorOutput errorOutput, IOperationProgress operationProgress)
         {
             this.errorOutput = errorOutput;
+            this.operationProgress = operationProgress;
             InitializeComponent();
 
             RestoreFormState = false;
@@ -77,35 +79,7 @@ namespace NAPS2.WinForms
 
         private void DisplayProgress()
         {
-            var status = Operation.Status ?? new OperationStatus();
-            labelStatus.Text = status.StatusText;
-            if (status.MaxProgress == 1 || status.IndeterminateProgress)
-            {
-                labelNumber.Text = "";
-                progressBar.Style = ProgressBarStyle.Marquee;
-            }
-            else if (status.MaxProgress == 0)
-            {
-                labelNumber.Text = "";
-                progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Maximum = 1;
-                progressBar.Value = 0;
-            }
-            else
-            {
-                labelNumber.Text = status.ProgressType == OperationProgressType.MB
-                    ? string.Format(MiscResources.SizeProgress, (status.CurrentProgress / 1000000.0).ToString("f1"), (status.MaxProgress / 1000000.0).ToString("f1"))
-                    : string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
-                progressBar.Style = ProgressBarStyle.Continuous;
-                progressBar.Maximum = status.MaxProgress;
-                progressBar.Value = status.CurrentProgress;
-            }
-            // Force the progress bar to render immediately
-            if (progressBar.Value < progressBar.Maximum)
-            {
-                progressBar.Value += 1;
-                progressBar.Value -= 1;
-            }
+            operationProgress.RenderStatus(Operation, labelStatus, labelNumber, progressBar);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Operation;
 using NAPS2.Update;
@@ -88,6 +89,7 @@ namespace NAPS2.WinForms
 
             int slot = FillNextSlot(n);
             n.Location = GetPosition(n, slot);
+            n.Resize += parentForm_Resize;
             n.BringToFront();
             n.HideNotify += (sender, args) => ClearSlot(n);
             n.ShowNotify();

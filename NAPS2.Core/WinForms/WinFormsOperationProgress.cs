@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 
 namespace NAPS2.WinForms
@@ -77,6 +79,39 @@ namespace NAPS2.WinForms
             if (!op.IsFinished)
             {
                 notificationManager.ParentForm.SafeInvoke(() => notificationManager.OperationProgress(this, op));
+            }
+        }
+
+        public void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar)
+        {
+            var status = op.Status ?? new OperationStatus();
+            textLabel.Text = status.StatusText;
+            progressBar.Style = status.MaxProgress == 1 || status.IndeterminateProgress
+                ? ProgressBarStyle.Marquee
+                : ProgressBarStyle.Continuous;
+            if (status.MaxProgress == 1 || status.ProgressType == OperationProgressType.None)
+            {
+                numberLabel.Text = "";
+            }
+            else if (status.MaxProgress == 0)
+            {
+                numberLabel.Text = "";
+                progressBar.Maximum = 1;
+                progressBar.Value = 0;
+            }
+            else
+            {
+                numberLabel.Text = status.ProgressType == OperationProgressType.MB
+                    ? string.Format(MiscResources.SizeProgress, (status.CurrentProgress / 1000000.0).ToString("f1"), (status.MaxProgress / 1000000.0).ToString("f1"))
+                    : string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
+                progressBar.Maximum = status.MaxProgress;
+                progressBar.Value = status.CurrentProgress;
+            }
+            // Force the progress bar to render immediately
+            if (progressBar.Value < progressBar.Maximum)
+            {
+                progressBar.Value += 1;
+                progressBar.Value -= 1;
             }
         }
 
