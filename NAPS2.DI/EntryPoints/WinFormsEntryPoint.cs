@@ -39,7 +39,9 @@ namespace NAPS2.DI.EntryPoints
 
             // Show the main form
             var formFactory = kernel.Get<IFormFactory>();
-            Application.Run(formFactory.Create<FDesktop>());
+            var desktop = formFactory.Create<FDesktop>();
+            Invoker.Current = desktop;
+            Application.Run(desktop);
         }
 
         private static void UnhandledException(object sender, ThreadExceptionEventArgs threadExceptionEventArgs)

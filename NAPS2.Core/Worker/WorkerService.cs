@@ -30,8 +30,6 @@ namespace NAPS2.Worker
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly MapiWrapper mapiWrapper;
 
-        public FormBase ParentForm { get; set; }
-
         public WorkerService(TwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, MapiWrapper mapiWrapper)
         {
             this.twainWrapper = twainWrapper;
@@ -57,7 +55,7 @@ namespace NAPS2.Worker
                 try
                 {
                     var imagePathDict = new Dictionary<ScannedImage, string>();
-                    twainWrapper.Scan(ParentForm, hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), scanDevice, scanProfile, scanParams,
+                    twainWrapper.Scan(hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), scanDevice, scanProfile, scanParams,
                         new WorkerImageSource(Callback, imagePathDict), (img, _, path) => imagePathDict.Add(img, path));
                 }
                 catch (Exception e)

@@ -45,7 +45,7 @@ namespace NAPS2.DI.EntryPoints
                 // Set up a form for the worker process
                 // A parent form is needed for some operations, namely 64-bit TWAIN scanning
                 var form = new BackgroundForm();
-                workerService.ParentForm = form;
+                Invoker.Current = form;
 
                 // Connect to the main NAPS2 process and listen for assigned work
                 string pipeName = string.Format(WorkerManager.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id);

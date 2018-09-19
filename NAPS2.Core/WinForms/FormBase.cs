@@ -5,10 +5,11 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Scan;
+using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
-    public class FormBase : Form
+    public class FormBase : Form, IInvoker
     {
         private bool loaded;
 
@@ -206,7 +207,7 @@ namespace NAPS2.WinForms
         {
             if (SaveFormState)
             {
-                UserConfigManager.Save();
+                UserConfigManager?.Save();
             }
         }
 

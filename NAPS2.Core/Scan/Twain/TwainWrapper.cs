@@ -88,12 +88,12 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        public void Scan(FormBase invoker, IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
+        public void Scan(IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
             ScannedImageSource.Concrete source, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
         {
             try
             {
-                InternalScan(scanProfile.TwainImpl, invoker, dialogParent, scanDevice, scanProfile, scanParams, source, runBackgroundOcr);
+                InternalScan(scanProfile.TwainImpl, dialogParent, scanDevice, scanProfile, scanParams, source, runBackgroundOcr);
             }
             catch (DeviceNotFoundException)
             {
@@ -101,7 +101,7 @@ namespace NAPS2.Scan.Twain
                 {
                     // Fall back to OldDsm in case of no devices
                     // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
-                    InternalScan(TwainImpl.OldDsm, invoker, dialogParent, scanDevice, scanProfile, scanParams, source, runBackgroundOcr);
+                    InternalScan(TwainImpl.OldDsm, dialogParent, scanDevice, scanProfile, scanParams, source, runBackgroundOcr);
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        private void InternalScan(TwainImpl twainImpl, FormBase invoker, IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
+        private void InternalScan(TwainImpl twainImpl, IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
             ScannedImageSource.Concrete source, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
         {
             if (dialogParent == null)
@@ -125,7 +125,7 @@ namespace NAPS2.Scan.Twain
 
             PlatformInfo.Current.PreferNewDSM = twainImpl != TwainImpl.OldDsm;
             var session = new TwainSession(TwainAppId);
-            var twainForm = invoker.InvokeGet(() => scanParams.NoUI ? null : formFactory.Create<FTwainGui>());
+            var twainForm = Invoker.Current.InvokeGet(() => scanParams.NoUI ? null : formFactory.Create<FTwainGui>());
             Exception error = null;
             bool cancel = false;
             DataSource ds = null;
@@ -218,7 +218,7 @@ namespace NAPS2.Scan.Twain
                 waitHandle.Set();
                 if (!scanParams.NoUI)
                 {
-                    invoker.Invoke(() => twainForm.Close());
+                    Invoker.Current.Invoke(() => twainForm.Close());
                 }
             }
 
@@ -226,7 +226,8 @@ namespace NAPS2.Scan.Twain
             {
                 try
                 {
-                    ReturnCode rc = session.Open(new WindowsFormsMessageLoopHook(invoker.Handle));
+                    var windowHandle = (Invoker.Current as Form ?? dialogParent).Handle;
+                    ReturnCode rc = session.Open(new WindowsFormsMessageLoopHook(windowHandle));
                     if (rc != ReturnCode.Success)
                     {
                         Debug.WriteLine("NAPS2.TW - Could not open session - {0}", rc);
@@ -249,7 +250,7 @@ namespace NAPS2.Scan.Twain
                     ConfigureDS(ds, scanProfile, scanParams);
                     var ui = scanProfile.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
                     Debug.WriteLine("NAPS2.TW - Enabling DS");
-                    rc = scanParams.NoUI ? ds.Enable(ui, true, invoker.Handle) : ds.Enable(ui, true, twainForm.Handle);
+                    rc = scanParams.NoUI ? ds.Enable(ui, true, windowHandle) : ds.Enable(ui, true, twainForm.Handle);
                     Debug.WriteLine("NAPS2.TW - Enable finished");
                     if (rc != ReturnCode.Success)
                     {
@@ -274,17 +275,17 @@ namespace NAPS2.Scan.Twain
             if (scanParams.NoUI)
             {
                 Debug.WriteLine("NAPS2.TW - Init with no form");
-                invoker.Invoke(InitTwain);
+                Invoker.Current.Invoke(InitTwain);
             }
             else if (!scanParams.Modal)
             {
                 Debug.WriteLine("NAPS2.TW - Init with non-modal form");
-                invoker.Invoke(() => twainForm.Show(dialogParent));
+                Invoker.Current.Invoke(() => twainForm.Show(dialogParent));
             }
             else
             {
                 Debug.WriteLine("NAPS2.TW - Init with modal form");
-                invoker.Invoke(() => twainForm.ShowDialog(dialogParent));
+                Invoker.Current.Invoke(() => twainForm.ShowDialog(dialogParent));
             }
             waitHandle.WaitOne();
             Debug.WriteLine("NAPS2.TW - Operation complete");

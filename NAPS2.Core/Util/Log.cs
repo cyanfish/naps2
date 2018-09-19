@@ -7,7 +7,7 @@ namespace NAPS2.Util
     /// <summary>
     /// Logging functionality.
     /// </summary>
-    public class Log
+    public static class Log
     {
         private static ILogger _logger = new NullLogger();
 
