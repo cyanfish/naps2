@@ -155,6 +155,9 @@
     <Compile Include="Dependencies\IExternalComponent.cs" />
     <Compile Include="ImportExport\Email\Mapi\MapiWrapper.cs" />
     <Compile Include="ImportExport\Pdf\GhostscriptManager.cs" />
+    <Compile Include="Logging\EventParams.cs" />
+    <Compile Include="Logging\EventType.cs" />
+    <Compile Include="Logging\IEventLogger.cs" />
     <Compile Include="Ocr\OcrManager.cs" />
     <Compile Include="Ocr\OcrMode.cs" />
     <Compile Include="Ocr\OcrParams.cs" />
@@ -206,6 +209,7 @@
     <Compile Include="Util\TaskExtensions.cs" />
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
+    <Compile Include="Logging\WindowsEventLogger.cs" />
     <Compile Include="WinForms\ImageForm.cs">
       <SubType>Form</SubType>
     </Compile>
