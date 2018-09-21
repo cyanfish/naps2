@@ -344,8 +344,8 @@
     <Compile Include="Worker\IWorkerService.cs" />
     <Compile Include="Util\ISaveNotify.cs" />
     <Compile Include="Util\Lifecycle.cs" />
-    <Compile Include="Util\Log.cs" />
-    <Compile Include="Util\NullLogger.cs" />
+    <Compile Include="Logging\Log.cs" />
+    <Compile Include="Logging\NullLogger.cs" />
     <Compile Include="Ocr\IOcrEngine.cs" />
     <Compile Include="Ocr\TesseractBaseEngine.cs" />
     <Compile Include="Ocr\OcrResult.cs" />
@@ -360,7 +360,7 @@
     <Compile Include="Scan\IScanDriverFactory.cs" />
     <Compile Include="Util\CultureInitializer.cs" />
     <Compile Include="Util\IErrorOutput.cs" />
-    <Compile Include="Util\ILogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="WinForms\ILProfileIcons.cs">
       <SubType>Component</SubType>
     </Compile>
