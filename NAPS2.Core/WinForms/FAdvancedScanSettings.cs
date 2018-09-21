@@ -16,6 +16,7 @@ namespace NAPS2.WinForms
         {
             this.appConfigManager = appConfigManager;
             InitializeComponent();
+            txtWiaDelayBetweenScansSeconds.Left = cbWiaDelayBetweenScans.Right + 6;
 
             cmbTwainImpl.Format += (sender, e) => e.Value = ((Enum) e.ListItem).Description();
             cmbTwainImpl.Items.Add(TwainImpl.Default);
