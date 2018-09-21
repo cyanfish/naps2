@@ -166,7 +166,7 @@
     <value>Alterações não salvas</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Operação em Progresso</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Digitalizando página {0}</value>
@@ -328,42 +328,42 @@
     <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>O driver selecionado não é suportado neste sistema.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Progresso do OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Executando OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Progresso da Atualização</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Atualizando...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Nenhuma atualização disponível.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Verificando...</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Ocorreu um erro ao tentar instalar a atualização.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Instalar {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Uma atualização está disponível.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Ocorreu um erro ao tentar autorizar.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Enviando e-mail...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Ocorreu um erro ao tentar enviar o e-mail.</value>
   </data>
 </root>

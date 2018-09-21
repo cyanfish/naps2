@@ -31,13 +31,13 @@
     <value>Symbole zastępcze</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Nie wybrano dostawcy.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>Zmień</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Provider</value>
+    <value>Dostawca</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Ustawienia e-mail</value>

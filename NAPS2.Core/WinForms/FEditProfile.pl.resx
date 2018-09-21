@@ -64,7 +64,7 @@
     <value>Sterownik WIA</value>
   </data>
   <data name="rdSANE.Text" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>Sterownik SANE</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
     <value>Włącz automatyczne zapisywanie</value>

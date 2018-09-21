@@ -166,7 +166,7 @@
     <value>Niezapisane zmiany</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Operacja w toku</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Skanowanie strony {0}</value>
@@ -328,42 +328,42 @@
     <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Wybrany sterownik nie jest obsługiwany w tym systemie.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Postęp OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Uruchamianie OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Postęp aktualizacji</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Aktualizacja...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Brak dostępnych aktualizacji.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Sprawdzanie...</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Wystąpił błąd podczas próby zainstalowania aktualizacji.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Zainstaluj {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Aktualizacja jest dostępna.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Wystąpił błąd podczas próby autoryzacji.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Przesyłanie wiadomości e-mail...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Wystąpił błąd podczas próby wysłania e-maila.</value>
   </data>
 </root>

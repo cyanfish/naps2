@@ -64,7 +64,7 @@
     <value>Driver WIA</value>
   </data>
   <data name="rdSANE.Text" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>Driver SANE</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
     <value>Ativar Auto Salvamento</value>
