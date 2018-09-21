@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Security.Principal;
+using System.Windows.Forms;
 using NAPS2.Config;
 
 namespace NAPS2.Util
@@ -26,7 +29,93 @@ namespace NAPS2.Util
         /// <param name="args"></param>
         public void ParseArgs(string[] args)
         {
+            bool silent = args.Any(x => x.Equals("/Silent", StringComparison.InvariantCultureIgnoreCase));
+            bool noElevation = args.Any(x => x.Equals("/NoElevation", StringComparison.InvariantCultureIgnoreCase));
+
+            void Out(string message)
+            {
+                if (!silent)
+                {
+                    MessageBox.Show(message);
+                }
+            }
+
+            bool ElevationRequired(Action action)
+            {
+                try
+                {
+                    action();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    if (!noElevation && !IsElevated)
+                    {
+                        RelaunchAsElevated();
+                        return false;
+                    }
+                    throw;
+                }
+            }
+
             sti.ParseArgs(args);
+
+            if (sti.ShouldRegister)
+            {
+                try
+                {
+                    if (ElevationRequired(sti.Register))
+                    {
+                        Out(@"Successfully registered STI. A reboot may be needed.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorException("Error registering STI", ex);
+                    Out(@"Error registering STI. Maybe run as administrator?");
+                    Environment.Exit(1);
+                }
+            }
+            else if (sti.ShouldUnregister)
+            {
+                try
+                {
+                    if (ElevationRequired(sti.Unregister))
+                    {
+                        Out(@"Successfully unregistered STI. A reboot may be needed.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorException("Error unregistering STI", ex);
+                    Out(@"Error unregistering STI. Maybe run as administrator?");
+                    Environment.Exit(1);
+                }
+            }
+        }
+
+        private bool IsElevated
+        {
+            get
+            {
+                var identity = WindowsIdentity.GetCurrent();
+                if (identity == null)
+                {
+                    return false;
+                }
+                var pricipal = new WindowsPrincipal(identity);
+                return pricipal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+        }
+
+        private void RelaunchAsElevated()
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                Verb = "runas",
+                FileName = Assembly.GetEntryAssembly().Location,
+                Arguments = string.Join(" ", Environment.GetCommandLineArgs().Skip(1)) + " /NoElevation"
+            });
         }
 
         /// <summary>
@@ -34,14 +123,14 @@ namespace NAPS2.Util
         /// </summary>
         public void ExitIfRedundant()
         {
-            if (sti.Registered)
+            if (sti.ShouldRegister || sti.ShouldUnregister)
             {
                 // Was just started by the user to (un)register STI
-                Environment.Exit(sti.RegisterOk ? 0 : 1);
+                Environment.Exit(0);
             }
 
             // If this instance of NAPS2 was spawned by STI, then there may be another instance of NAPS2 we want to get the scan signal instead
-            if (sti.DoScan)
+            if (sti.ShouldScan)
             {
                 // Try each possible process in turn until one receives the message (most recently started first)
                 foreach (var process in GetOtherNaps2Processes())

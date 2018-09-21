@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Security.Principal;
-using System.Windows.Forms;
 using Microsoft.Win32;
 
 namespace NAPS2.Util
@@ -29,150 +26,76 @@ namespace NAPS2.Util
 
         public void ParseArgs(string[] args)
         {
-            bool silent = args.Any(x => x.Equals("/Silent", StringComparison.InvariantCultureIgnoreCase));
-            bool noElevation = args.Any(x => x.Equals("/NoElevation", StringComparison.InvariantCultureIgnoreCase));
             foreach (var arg in args)
             {
                 if (arg.StartsWith(DEVICE_PREFIX, StringComparison.InvariantCultureIgnoreCase))
                 {
                     DeviceID = arg.Substring(DEVICE_PREFIX.Length);
-                    DoScan = true;
+                    ShouldScan = true;
                 }
                 else if (arg.Equals("/RegisterSti", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    RegisterSti(silent, noElevation);
-                    Registered = true;
+                    ShouldRegister = true;
                 }
                 else if (arg.Equals("/UnregisterSti", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    UnregisterSti(silent, noElevation);
-                    Registered = true;
+                    ShouldUnregister = true;
                 }
             }
         }
 
-        private void RegisterSti(bool silent, bool noElevation)
+        public void Register()
         {
-            try
+            var exe = Assembly.GetEntryAssembly().Location;
+
+            using (var key1 = Registry.LocalMachine.CreateSubKey(REGKEY_AUTOPLAY_HANDLER_NAPS2))
             {
-                var exe = Assembly.GetEntryAssembly().Location;
-
-                using (var key1 = Registry.LocalMachine.CreateSubKey(REGKEY_AUTOPLAY_HANDLER_NAPS2))
-                {
-                    key1.SetValue("Action", "Scan with NAPS2");
-                    key1.SetValue("CLSID", "WIACLSID");
-                    key1.SetValue("DefaultIcon", "sti.dll,0");
-                    key1.SetValue("InitCmdLine", $"/WiaCmd;{exe} /StiDevice:%1 /StiEvent:%2;");
-                    key1.SetValue("Provider", "NAPS2");
-                }
-
-                using (var key2 = Registry.LocalMachine.CreateSubKey(REGKEY_STI_APP))
-                {
-                    key2.SetValue("NAPS2", exe);
-                }
-
-                using (var key3 = Registry.LocalMachine.CreateSubKey(REGKEY_STI_EVENT_NAPS2))
-                {
-                    key3.SetValue("Cmdline", $"{exe} /StiDevice:%1 /StiEvent:%2");
-                    key3.SetValue("Desc", "Scan with NAPS2");
-                    key3.SetValue("Icon", $"{exe},0");
-                    key3.SetValue("Name", "NAPS2");
-                }
-
-                RegisterOk = true;
-                if (!silent)
-                {
-                    MessageBox.Show(@"Successfully registered STI. A reboot may be needed.");
-                }
+                key1.SetValue("Action", "Scan with NAPS2");
+                key1.SetValue("CLSID", "WIACLSID");
+                key1.SetValue("DefaultIcon", "sti.dll,0");
+                key1.SetValue("InitCmdLine", $"/WiaCmd;{exe} /StiDevice:%1 /StiEvent:%2;");
+                key1.SetValue("Provider", "NAPS2");
             }
-            catch (Exception ex)
-            {
-                if (!noElevation && !IsElevated)
-                {
-                    RelaunchAsElevated();
-                    return;
-                }
 
-                Log.ErrorException("Error registering STI", ex);
-                if (!silent)
-                {
-                    MessageBox.Show(@"Error registering STI. Maybe run as administrator?");
-                }
+            using (var key2 = Registry.LocalMachine.CreateSubKey(REGKEY_STI_APP))
+            {
+                key2.SetValue("NAPS2", exe);
+            }
+
+            using (var key3 = Registry.LocalMachine.CreateSubKey(REGKEY_STI_EVENT_NAPS2))
+            {
+                key3.SetValue("Cmdline", $"{exe} /StiDevice:%1 /StiEvent:%2");
+                key3.SetValue("Desc", "Scan with NAPS2");
+                key3.SetValue("Icon", $"{exe},0");
+                key3.SetValue("Name", "NAPS2");
             }
         }
 
-        private void UnregisterSti(bool silent, bool noElevation)
+        public void Unregister()
         {
-            try
+            Registry.LocalMachine.DeleteSubKey(REGKEY_AUTOPLAY_HANDLER_NAPS2, false);
+            using (var key2 = Registry.LocalMachine.OpenSubKey(REGKEY_STI_APP, true))
             {
-                Registry.LocalMachine.DeleteSubKey(REGKEY_AUTOPLAY_HANDLER_NAPS2, false);
-                using (var key2 = Registry.LocalMachine.OpenSubKey(REGKEY_STI_APP, true))
-                {
-                    key2?.DeleteValue("NAPS2", false);
-                }
-                Registry.LocalMachine.DeleteSubKey(REGKEY_STI_EVENT_NAPS2, false);
-
-                var events = Registry.LocalMachine.OpenSubKey(REGKEY_IMAGE_EVENTS, true);
-                if (events != null)
-                {
-                    foreach (var eventType in events.GetSubKeyNames())
-                    {
-                        events.DeleteSubKey(eventType + @"\{1C3A7177-F3A7-439E-BE47-E304A185F932}", false);
-                    }
-                }
-
-                RegisterOk = true;
-                if (!silent)
-                {
-                    MessageBox.Show(@"Successfully unregistered STI. A reboot may be needed.");
-                }
+                key2?.DeleteValue("NAPS2", false);
             }
-            catch (Exception ex)
-            {
-                if (!noElevation && !IsElevated)
-                {
-                    RelaunchAsElevated();
-                    return;
-                }
+            Registry.LocalMachine.DeleteSubKey(REGKEY_STI_EVENT_NAPS2, false);
 
-                Log.ErrorException("Error unregistering STI", ex);
-                if (!silent)
+            var events = Registry.LocalMachine.OpenSubKey(REGKEY_IMAGE_EVENTS, true);
+            if (events != null)
+            {
+                foreach (var eventType in events.GetSubKeyNames())
                 {
-                    MessageBox.Show(@"Error unregistering STI. Maybe run as administrator?");
+                    events.DeleteSubKey(eventType + @"\{1C3A7177-F3A7-439E-BE47-E304A185F932}", false);
                 }
             }
         }
 
-        public bool IsElevated
-        {
-            get
-            {
-                var identity = WindowsIdentity.GetCurrent();
-                if (identity == null)
-                {
-                    return false;
-                }
-                var pricipal = new WindowsPrincipal(identity);
-                return pricipal.IsInRole(WindowsBuiltInRole.Administrator);
-            }
-        }
+        public bool ShouldScan { get; private set; }
 
-        private void RelaunchAsElevated()
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                Verb = "runas",
-                FileName = Assembly.GetEntryAssembly().Location,
-                Arguments = string.Join(" ", Environment.GetCommandLineArgs().Skip(1)) + " /NoElevation"
-            });
-        }
+        public bool ShouldRegister { get; private set; }
 
-        public string DeviceID { get; private set; }
+        public bool ShouldUnregister { get; private set; }
 
-        public bool DoScan { get; private set; }
-
-        public bool Registered { get; set; }
-
-        public bool RegisterOk { get; set; }
+        public string DeviceID { get; set; }
     }
 }

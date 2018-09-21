@@ -441,7 +441,7 @@ namespace NAPS2.WinForms
 
         private async Task RunStillImageEvents()
         {
-            if (stillImage.DoScan)
+            if (stillImage.ShouldScan)
             {
                 await ScanWithDevice(stillImage.DeviceID);
             }
