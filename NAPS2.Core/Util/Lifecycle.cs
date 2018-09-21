@@ -17,6 +17,8 @@ namespace NAPS2.Util
         private readonly StillImage sti;
         private readonly AppConfigManager appConfigManager;
 
+        private int returnCode;
+
         public Lifecycle(StillImage sti, AppConfigManager appConfigManager)
         {
             this.sti = sti;
@@ -32,6 +34,7 @@ namespace NAPS2.Util
             bool silent = args.Any(x => x.Equals("/Silent", StringComparison.InvariantCultureIgnoreCase));
             bool noElevation = args.Any(x => x.Equals("/NoElevation", StringComparison.InvariantCultureIgnoreCase));
 
+            // Utility function to send a message to the user (if /Silent is not specified)
             void Out(string message)
             {
                 if (!silent)
@@ -40,6 +43,7 @@ namespace NAPS2.Util
                 }
             }
 
+            // Utility function to run the given action, elevating to admin permissions if necessary (and /NoElevation is not specified)
             bool ElevationRequired(Action action)
             {
                 try
@@ -58,8 +62,10 @@ namespace NAPS2.Util
                 }
             }
 
+            // Let StillImage figure out what it should do from the command-line args
             sti.ParseArgs(args);
 
+            // Actually do any specified StillImage actions
             if (sti.ShouldRegister)
             {
                 try
@@ -73,7 +79,7 @@ namespace NAPS2.Util
                 {
                     Log.ErrorException("Error registering STI", ex);
                     Out(@"Error registering STI. Maybe run as administrator?");
-                    Environment.Exit(1);
+                    returnCode = 1;
                 }
             }
             else if (sti.ShouldUnregister)
@@ -89,7 +95,7 @@ namespace NAPS2.Util
                 {
                     Log.ErrorException("Error unregistering STI", ex);
                     Out(@"Error unregistering STI. Maybe run as administrator?");
-                    Environment.Exit(1);
+                    returnCode = 1;
                 }
             }
         }
@@ -126,7 +132,7 @@ namespace NAPS2.Util
             if (sti.ShouldRegister || sti.ShouldUnregister)
             {
                 // Was just started by the user to (un)register STI
-                Environment.Exit(0);
+                Environment.Exit(returnCode);
             }
 
             // If this instance of NAPS2 was spawned by STI, then there may be another instance of NAPS2 we want to get the scan signal instead
