@@ -76,13 +76,13 @@ namespace NAPS2.Util
         public static void LockHeight(Form form)
         {
             form.MaximumSize = new Size(int.MaxValue, form.Height);
-            form.MinimumSize = new Size(0, form.Height);
+            form.MinimumSize = new Size(form.MinimumSize.Width, form.Height);
         }
 
         public static void UnlockHeight(Form form)
         {
             form.MaximumSize = new Size(0, 0);
-            form.MinimumSize = new Size(0, 0);
+            form.MinimumSize = new Size(form.MinimumSize.Width, 0);
         }
 
         private static IEnumerable<Control> EnumerateParents(Control control)
