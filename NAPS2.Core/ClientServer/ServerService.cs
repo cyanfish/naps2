@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using NAPS2.Platform;
+using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Sane;
 using NAPS2.Scan.Twain;
@@ -62,8 +63,16 @@ namespace NAPS2.ClientServer
                 // TODO: Also should think about avoiding the intermediate filesystem
                 using (image)
                 {
+                    var indexImage = image.RecoveryIndexImage;
                     var imageBytes = File.ReadAllBytes(image.RecoveryFilePath);
-                    callback.ImageReceived(imageBytes, image.RecoveryIndexImage);
+                    var sanitizedIndexImage = new RecoveryIndexImage
+                    {
+                        FileName = Path.GetExtension(indexImage.FileName),
+                        TransformList = indexImage.TransformList,
+                        BitDepth = indexImage.BitDepth,
+                        HighQuality = indexImage.HighQuality
+                    };
+                    callback.ImageReceived(imageBytes, sanitizedIndexImage);
                 }
             });
         }
