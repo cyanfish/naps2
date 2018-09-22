@@ -12,6 +12,9 @@ using NAPS2.Scan.Wia;
 
 namespace NAPS2.ClientServer
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
+        IncludeExceptionDetailInFaults = true,
+        ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class ScanService : IScanService
     {
         private readonly IScanDriverFactory scanDriverFactory;
@@ -30,14 +33,17 @@ namespace NAPS2.ClientServer
             {
                 driverNames.Add(WiaScanDriver.DRIVER_NAME);
             }
+
             if (PlatformCompat.System.IsTwainDriverSupported)
             {
                 driverNames.Add(TwainScanDriver.DRIVER_NAME);
             }
+
             if (PlatformCompat.System.IsSaneDriverSupported)
             {
                 driverNames.Add(SaneScanDriver.DRIVER_NAME);
             }
+
             return driverNames;
         }
 

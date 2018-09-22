@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading;
 using System.Windows.Forms;
+using NAPS2.ClientServer;
 using NAPS2.DI.Modules;
 using NAPS2.Util;
 using NAPS2.Worker;
@@ -21,6 +23,7 @@ namespace NAPS2.DI.EntryPoints
             {
                 // Initialize Ninject (the DI framework)
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
+                var scanService = kernel.Get<ScanService>();
 
                 // Set up basic application configuration
                 Application.EnableVisualStyles();
@@ -31,7 +34,14 @@ namespace NAPS2.DI.EntryPoints
                 var form = new BackgroundForm();
                 Invoker.Current = form;
 
-                // TODO: Listen for requests
+                // Listen for requests
+                using (var host = new ServiceHost(scanService))
+                {
+                    host.AddServiceEndpoint(typeof(IScanService),
+                        new NetTcpBinding {ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1)}, "net.tcp://0.0.0.0:33277");
+                    host.Open();
+                    Application.Run(form);
+                }
             }
             catch (Exception ex)
             {
