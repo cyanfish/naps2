@@ -120,6 +120,7 @@ namespace NAPS2.Scan
         public KeyValueScanOptions KeyValueOptions { get; set; }
     }
 
+    [Serializable]
     public class ScanProxyConfig
     {
         public string Name { get; set; }
