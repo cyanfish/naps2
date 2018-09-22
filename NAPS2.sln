@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Worker", "NAPS2.Worke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Localization", "NAPS2.Localization\NAPS2.Localization.csproj", "{F6CD6C88-49EA-4443-BB45-69FB79788C61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Server", "NAPS2.Server\NAPS2.Server.csproj", "{BC0E3031-6C00-4707-A424-4FF04425D719}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -126,6 +128,16 @@ Global
 		{F6CD6C88-49EA-4443-BB45-69FB79788C61}.InstallerMSI|x86.Build.0 = Debug|Any CPU
 		{F6CD6C88-49EA-4443-BB45-69FB79788C61}.Standalone|x86.ActiveCfg = Debug|Any CPU
 		{F6CD6C88-49EA-4443-BB45-69FB79788C61}.Standalone|x86.Build.0 = Debug|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.Debug|x86.Build.0 = Debug|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.DebugLang|x86.ActiveCfg = Debug|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.DebugLang|x86.Build.0 = Debug|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.InstallerEXE|x86.ActiveCfg = InstallerEXE|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.InstallerEXE|x86.Build.0 = InstallerEXE|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.InstallerMSI|x86.ActiveCfg = InstallerMSI|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.InstallerMSI|x86.Build.0 = InstallerMSI|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.Standalone|x86.ActiveCfg = Standalone|Any CPU
+		{BC0E3031-6C00-4707-A424-4FF04425D719}.Standalone|x86.Build.0 = Standalone|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
