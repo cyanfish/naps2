@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.WinForms;
 
 namespace NAPS2.Scan
 {
@@ -13,6 +14,13 @@ namespace NAPS2.Scan
     /// </summary>
     public abstract class ScanDriverBase : IScanDriver
     {
+        private readonly IFormFactory formFactory;
+
+        protected ScanDriverBase(IFormFactory formFactory)
+        {
+            this.formFactory = formFactory;
+        }
+
         public abstract string DriverName { get; }
 
         public abstract bool IsSupported { get; }
@@ -49,7 +57,20 @@ namespace NAPS2.Scan
             }
         }
 
-        protected abstract ScanDevice PromptForDeviceInternal();
+        protected virtual ScanDevice PromptForDeviceInternal()
+        {
+            var deviceList = GetDeviceList();
+
+            if (!deviceList.Any())
+            {
+                throw new NoDevicesFoundException();
+            }
+
+            var form = formFactory.Create<FSelectDevice>();
+            form.DeviceList = deviceList;
+            form.ShowDialog();
+            return form.SelectedDevice;
+        }
 
         public List<ScanDevice> GetDeviceList()
         {

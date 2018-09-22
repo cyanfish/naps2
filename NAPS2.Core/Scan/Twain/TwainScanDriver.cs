@@ -21,6 +21,7 @@ namespace NAPS2.Scan.Twain
         private readonly ScannedImageHelper scannedImageHelper;
 
         public TwainScanDriver(IWorkerServiceFactory workerServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory, ScannedImageHelper scannedImageHelper)
+            : base(formFactory)
         {
             this.workerServiceFactory = workerServiceFactory;
             this.twainWrapper = twainWrapper;
@@ -33,22 +34,7 @@ namespace NAPS2.Scan.Twain
         public override bool IsSupported => PlatformCompat.System.IsTwainDriverSupported;
         
         private bool UseWorker => ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
-
-        protected override ScanDevice PromptForDeviceInternal()
-        {
-            var deviceList = GetDeviceList();
-
-            if (!deviceList.Any())
-            {
-                throw new NoDevicesFoundException();
-            }
-
-            var form = formFactory.Create<FSelectDevice>();
-            form.DeviceList = deviceList;
-            form.ShowDialog();
-            return form.SelectedDevice;
-        }
-
+        
         protected override List<ScanDevice> GetDeviceListInternal()
         {
             // Exclude WIA proxy devices since NAPS2 already supports WIA

@@ -29,6 +29,7 @@ namespace NAPS2.Scan.Sane
         private readonly ScannedImageHelper scannedImageHelper;
 
         public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
+            : base(formFactory)
         {
             this.saneWrapper = saneWrapper;
             this.formFactory = formFactory;
@@ -40,21 +41,6 @@ namespace NAPS2.Scan.Sane
         public override string DriverName => DRIVER_NAME;
 
         public override bool IsSupported => PlatformCompat.System.IsSaneDriverSupported;
-
-        protected override ScanDevice PromptForDeviceInternal()
-        {
-            var deviceList = GetDeviceList();
-
-            if (!deviceList.Any())
-            {
-                throw new NoDevicesFoundException();
-            }
-
-            var form = formFactory.Create<FSelectDevice>();
-            form.DeviceList = deviceList;
-            form.ShowDialog();
-            return form.SelectedDevice;
-        }
 
         protected override List<ScanDevice> GetDeviceListInternal()
         {

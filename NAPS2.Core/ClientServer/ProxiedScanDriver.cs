@@ -19,6 +19,7 @@ namespace NAPS2.ClientServer
         private readonly IFormFactory formFactory;
 
         public ProxiedScanDriver(ClientContextFactory clientContextFactory, IFormFactory formFactory)
+            : base(formFactory)
         {
             this.clientContextFactory = clientContextFactory;
             this.formFactory = formFactory;
@@ -27,21 +28,6 @@ namespace NAPS2.ClientServer
         public override string DriverName => DRIVER_NAME;
 
         public override bool IsSupported => true;
-
-        protected override ScanDevice PromptForDeviceInternal()
-        {
-            var deviceList = GetDeviceList();
-
-            if (!deviceList.Any())
-            {
-                throw new NoDevicesFoundException();
-            }
-
-            var form = formFactory.Create<FSelectDevice>();
-            form.DeviceList = deviceList;
-            form.ShowDialog();
-            return form.SelectedDevice;
-        }
 
         protected override List<ScanDevice> GetDeviceListInternal()
         {
@@ -62,10 +48,6 @@ namespace NAPS2.ClientServer
 
         protected override Task ScanInternal(ScannedImageSource.Concrete source)
         {
-            if (ScanProfile == null)
-            {
-                throw new InvalidOperationException("ScanProfile must be set before calling methods on ProxiedScanDriver.");
-            }
             if (ScanProfile.ProxyConfig == null)
             {
                 throw new InvalidOperationException("ScanProfile.ProxyConfig must be specified to use ProxiedScanDriver.");

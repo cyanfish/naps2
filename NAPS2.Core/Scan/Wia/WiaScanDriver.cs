@@ -27,6 +27,7 @@ namespace NAPS2.Scan.Wia
         private readonly IFormFactory formFactory;
 
         public WiaScanDriver(IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper, IFormFactory formFactory)
+            : base(formFactory)
         {
             this.blankDetector = blankDetector;
             this.thumbnailRenderer = thumbnailRenderer;
