@@ -17,7 +17,6 @@ namespace NAPS2.Scan.Twain
         
         private readonly IWorkerServiceFactory workerServiceFactory;
         private readonly TwainWrapper twainWrapper;
-        private readonly IFormFactory formFactory;
         private readonly ScannedImageHelper scannedImageHelper;
 
         public TwainScanDriver(IWorkerServiceFactory workerServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory, ScannedImageHelper scannedImageHelper)
@@ -25,7 +24,6 @@ namespace NAPS2.Scan.Twain
         {
             this.workerServiceFactory = workerServiceFactory;
             this.twainWrapper = twainWrapper;
-            this.formFactory = formFactory;
             this.scannedImageHelper = scannedImageHelper;
         }
 

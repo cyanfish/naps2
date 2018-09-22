@@ -16,13 +16,11 @@ namespace NAPS2.ClientServer
         public const string DRIVER_NAME = "proxy";
 
         private readonly ClientContextFactory clientContextFactory;
-        private readonly IFormFactory formFactory;
 
         public ProxiedScanDriver(ClientContextFactory clientContextFactory, IFormFactory formFactory)
             : base(formFactory)
         {
             this.clientContextFactory = clientContextFactory;
-            this.formFactory = formFactory;
         }
 
         public override string DriverName => DRIVER_NAME;
