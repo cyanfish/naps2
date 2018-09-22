@@ -47,6 +47,8 @@ namespace NAPS2.Scan
         [XmlIgnore]
         public bool IsDeviceLocked { get; set; }
 
+        public ScanProxyConfig ProxyConfig { get; set; }
+
         public ScanDevice Device { get; set; }
 
         public string DriverName { get; set; }
@@ -116,6 +118,17 @@ namespace NAPS2.Scan
         public bool FlipDuplexedPages { get; set; }
 
         public KeyValueScanOptions KeyValueOptions { get; set; }
+    }
+
+    public class ScanProxyConfig
+    {
+        public string Name { get; set; }
+
+        public string RemoteDriverName { get; set; }
+
+        public string Ip { get; set; }
+
+        public int Port { get; set; }
     }
 
     /// <summary>

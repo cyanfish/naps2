@@ -96,7 +96,7 @@ namespace NAPS2.Recovery
             }
         }
 
-        private static string GetNextFileName()
+        public static string GetNextFileName()
         {
             lock (RecoveryFileNumberLock)
             {

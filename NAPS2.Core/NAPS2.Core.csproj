@@ -149,8 +149,11 @@
     <Compile Include="Automation\ConsoleOverwritePrompt.cs" />
     <Compile Include="Automation\ConsolePdfPasswordProvider.cs" />
     <Compile Include="Automation\ConsoleComponentInstallPrompt.cs" />
+    <Compile Include="ClientServer\ClientContext.cs" />
+    <Compile Include="ClientServer\ClientContextFactory.cs" />
     <Compile Include="ClientServer\IServerCallback.cs" />
     <Compile Include="ClientServer\IServerService.cs" />
+    <Compile Include="ClientServer\ProxiedScanDriver.cs" />
     <Compile Include="ClientServer\ServerCallback.cs" />
     <Compile Include="ClientServer\ServerService.cs" />
     <Compile Include="Dependencies\ComponentManager.cs" />
