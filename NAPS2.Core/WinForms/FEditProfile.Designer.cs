@@ -71,6 +71,7 @@ namespace NAPS2.WinForms
             this.cbAutoSave = new System.Windows.Forms.CheckBox();
             this.linkAutoSaveSettings = new System.Windows.Forms.LinkLabel();
             this.btnAdvanced = new System.Windows.Forms.Button();
+            this.btnNetwork = new System.Windows.Forms.Button();
             this.panelUI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trContrast)).BeginInit();
@@ -316,11 +317,19 @@ namespace NAPS2.WinForms
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
+            // btnNetwork
+            // 
+            resources.ApplyResources(this.btnNetwork, "btnNetwork");
+            this.btnNetwork.Image = global::NAPS2.Icons.wireless16;
+            this.btnNetwork.Name = "btnNetwork";
+            this.btnNetwork.UseVisualStyleBackColor = true;
+            // 
             // FEditProfile
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnNetwork);
             this.Controls.Add(this.btnAdvanced);
             this.Controls.Add(this.linkAutoSaveSettings);
             this.Controls.Add(this.cbAutoSave);
@@ -404,5 +413,6 @@ namespace NAPS2.WinForms
         private System.Windows.Forms.LinkLabel linkAutoSaveSettings;
         private System.Windows.Forms.Button btnAdvanced;
         private System.Windows.Forms.RadioButton rdSANE;
+        private System.Windows.Forms.Button btnNetwork;
     }
 }

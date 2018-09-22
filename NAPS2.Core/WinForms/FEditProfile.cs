@@ -38,6 +38,7 @@ namespace NAPS2.WinForms
             this.profileNameTracker = profileNameTracker;
             this.appConfigManager = appConfigManager;
             InitializeComponent();
+            btnNetwork.Left = btnChooseDevice.Right + 6;
 
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);
@@ -96,7 +97,7 @@ namespace NAPS2.WinForms
             new LayoutManager(this)
                 .Bind(txtName, txtDevice, panelUI, panel2)
                     .WidthToForm()
-                .Bind(pctIcon, btnChooseDevice, btnOK, btnCancel)
+                .Bind(pctIcon, btnChooseDevice, btnNetwork, btnOK, btnCancel)
                     .RightToForm()
                 .Bind(cmbAlign, cmbDepth, cmbPage, cmbResolution, cmbScale, cmbSource, trBrightness, trContrast, rdbConfig, rdbNative)
                     .WidthTo(() => Width / 2)
