@@ -6,8 +6,8 @@ using NAPS2.Scan;
 
 namespace NAPS2.ClientServer
 {
-    [ServiceContract(CallbackContract = typeof(IServerCallback))]
-    public interface IServerService
+    [ServiceContract(CallbackContract = typeof(IScanCallback))]
+    public interface IScanService
     {
         [OperationContract]
         List<string> GetSupportedDriverNames();

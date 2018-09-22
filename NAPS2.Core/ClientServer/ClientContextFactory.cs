@@ -12,9 +12,9 @@ namespace NAPS2.ClientServer
         {
             // TODO: Validate IP
             var uri = new Uri($"net.tcp://{proxyConfig.Ip}:{proxyConfig.Port}/NAPS2.Server");
-            var callback = new ServerCallback();
+            var callback = new ScanCallback();
             var instanceContext = new InstanceContext(callback);
-            var channelFactory = new DuplexChannelFactory<IServerService>(instanceContext,
+            var channelFactory = new DuplexChannelFactory<IScanService>(instanceContext,
                 new NetTcpBinding
                 {
                     MaxReceivedMessageSize = 1024 * 1024 * 1024

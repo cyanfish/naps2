@@ -6,7 +6,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.ClientServer
 {
-    public class ServerCallback : IServerCallback
+    public class ScanCallback : IScanCallback
     {
         public void ImageReceived(byte[] imageData, RecoveryIndexImage indexImage)
         {

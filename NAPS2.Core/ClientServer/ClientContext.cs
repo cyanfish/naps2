@@ -8,9 +8,9 @@ namespace NAPS2.ClientServer
 {
     public class ClientContext : IDisposable
     {
-        public IServerService Service { get; set; }
+        public IScanService Service { get; set; }
 
-        public IServerCallback Callback { get; set; }
+        public IScanCallback Callback { get; set; }
 
         public void Dispose()
         {

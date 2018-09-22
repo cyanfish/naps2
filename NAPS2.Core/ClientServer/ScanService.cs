@@ -12,12 +12,12 @@ using NAPS2.Scan.Wia;
 
 namespace NAPS2.ClientServer
 {
-    public class ServerService : IServerService
+    public class ScanService : IScanService
     {
         private readonly IScanDriverFactory scanDriverFactory;
         private readonly IScanPerformer scanPerformer;
 
-        public ServerService(IScanDriverFactory scanDriverFactory, IScanPerformer scanPerformer)
+        public ScanService(IScanDriverFactory scanDriverFactory, IScanPerformer scanPerformer)
         {
             this.scanDriverFactory = scanDriverFactory;
             this.scanPerformer = scanPerformer;
@@ -56,7 +56,7 @@ namespace NAPS2.ClientServer
                 NoAutoSave = true,
                 DoOcr = false
             };
-            var callback = OperationContext.Current.GetCallbackChannel<IServerCallback>();
+            var callback = OperationContext.Current.GetCallbackChannel<IScanCallback>();
             scanPerformer.PerformScan(scanProfile, internalParams, null, null, image =>
             {
                 // TODO: Should stream this
