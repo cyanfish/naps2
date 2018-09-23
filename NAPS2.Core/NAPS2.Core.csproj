@@ -246,6 +246,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Worker\IWorkerCallback.cs" />
+    <Compile Include="Worker\ScanDriverExceptionDetail.cs" />
     <Compile Include="Worker\WorkerCallback.cs" />
     <Compile Include="Worker\WorkerContext.cs" />
     <Compile Include="Worker\WorkerService.cs" />

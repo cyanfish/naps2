@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
@@ -21,8 +22,9 @@ namespace NAPS2.Worker
         [OperationContract]
         List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl);
 
-        [OperationContract(IsOneWay = true)]
-        void TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
+        [FaultContract(typeof(ScanDriverExceptionDetail))]
+        [OperationContract]
+        Task TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
 
         [OperationContract]
         MapiSendMailReturnCode SendMapiEmail(EmailMessage message);

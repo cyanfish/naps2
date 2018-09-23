@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Platform;
-using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
@@ -54,7 +53,7 @@ namespace NAPS2.Scan.Twain
 
         protected override async Task ScanInternal(ScannedImageSource.Concrete source)
         {
-            await Task.Factory.StartNew(() =>
+            await Task.Factory.StartNew(async () =>
             {
                 if (UseWorker)
                 {
@@ -65,15 +64,14 @@ namespace NAPS2.Scan.Twain
                             if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, ScanParams, tempPath);
                             source.Put(img);
                         };
-                        worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent?.SafeHandle() ?? IntPtr.Zero);
-                        worker.Callback.WaitForFinish();
+                        await worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent?.SafeHandle() ?? IntPtr.Zero);
                     }
                 }
                 else
                 {
                     twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams, source, scannedImageHelper.RunBackgroundOcr);
                 }
-            }, TaskCreationOptions.LongRunning);
+            }, TaskCreationOptions.LongRunning).Unwrap();
         }
     }
 }
