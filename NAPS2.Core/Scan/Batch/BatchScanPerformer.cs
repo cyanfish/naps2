@@ -214,7 +214,7 @@ namespace NAPS2.Scan.Batch
                     ProgressCallback(scanNumber == -1
                         ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
                         : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-                });
+                }, CancelToken);
             }
 
             private bool PromptForNextScan()
