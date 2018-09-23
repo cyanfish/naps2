@@ -15,7 +15,6 @@ using NAPS2.WinForms;
 using NTwain;
 using NTwain.Data;
 using NAPS2.Util;
-using NAPS2.Worker;
 
 namespace NAPS2.Scan.Twain
 {

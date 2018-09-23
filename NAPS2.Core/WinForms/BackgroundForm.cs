@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using NAPS2.WinForms;
 
-namespace NAPS2.Worker
+namespace NAPS2.WinForms
 {
     /// <summary>
-    /// A basic implementation of an invisible form used in NAPS2.Worker.exe as a parent
-    /// for any dialogs that may need to be displayed.
+    /// A basic implementation of an invisible form.
     /// </summary>
     public class BackgroundForm : FormBase
     {
