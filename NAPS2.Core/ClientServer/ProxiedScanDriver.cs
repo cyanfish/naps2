@@ -18,11 +18,13 @@ namespace NAPS2.ClientServer
 
         private readonly ClientContextFactory clientContextFactory;
         private readonly ScannedImageHelper scannedImageHelper;
+        private readonly IFormFactory formFactory;
 
         public ProxiedScanDriver(ClientContextFactory clientContextFactory, IFormFactory formFactory, ScannedImageHelper scannedImageHelper)
             : base(formFactory)
         {
             this.clientContextFactory = clientContextFactory;
+            this.formFactory = formFactory;
             this.scannedImageHelper = scannedImageHelper;
         }
 
@@ -60,7 +62,10 @@ namespace NAPS2.ClientServer
                 {
                     using (var client = clientContextFactory.Create(ScanProfile.ProxyConfig))
                     {
+                        var noUi = ScanParams.NoUI;
+                        FScanProgress form = Invoker.Current.InvokeGet(() => noUi ? null : formFactory.Create<FScanProgress>());
                         int pageNumber = 1;
+
                         client.Callback.ImageCallback += (imageBytes, indexImage) =>
                         {
                             indexImage.FileName = RecoveryImage.GetNextFileName() + Path.GetExtension(indexImage.FileName);
@@ -72,8 +77,34 @@ namespace NAPS2.ClientServer
                                 scannedImageHelper.PostProcessStep2(image, bitmap, ScanProfile, ScanParams, pageNumber++, false);
                             }
                             source.Put(image);
+                            if (form != null)
+                            {
+                                form.PageNumber = pageNumber;
+                                Invoker.Current.SafeInvoke(() => form.RefreshStatus());
+                            }
                         };
-                        await client.Service.Scan(ScanProfile, ScanParams);
+
+                        var scanTask = client.Service.Scan(ScanProfile, ScanParams);
+
+                        if (!noUi)
+                        {
+                            form.PageNumber = pageNumber;
+                            form.AsyncTransfer = async () => await scanTask;
+                        }
+                        if (noUi)
+                        {
+                            await scanTask;
+                        }
+                        else if (ScanParams.Modal)
+                        {
+                            Invoker.Current.SafeInvoke(() => form.ShowDialog());
+                        }
+                        else
+                        {
+                            Invoker.Current.SafeInvoke(() => form.Show());
+                            // TODO: Cancellation
+                            await scanTask;
+                        }
                     }
                 }
                 catch (Exception e)

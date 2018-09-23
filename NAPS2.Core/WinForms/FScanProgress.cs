@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
-using NAPS2.Scan.Wia;
-using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
@@ -28,6 +25,8 @@ namespace NAPS2.WinForms
         public int PageNumber { get; set; }
 
         public Func<Stream> Transfer { get; set; }
+
+        public Func<Task> AsyncTransfer { get; set; }
 
         public Stream ImageStream { get; private set; }
 
@@ -57,6 +56,11 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Activate();
 
+            RefreshStatus();
+        }
+
+        public void RefreshStatus()
+        {
             labelPage.Text = string.Format(MiscResources.ScanPageProgress, PageNumber);
         }
 
@@ -64,11 +68,18 @@ namespace NAPS2.WinForms
 
         private void FScanProgress_Shown(object sender, EventArgs e)
         {
-            Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(async () =>
             {
                 try
                 {
-                    ImageStream = Transfer();
+                    if (Transfer != null)
+                    {
+                        ImageStream = Transfer();
+                    }
+                    if (AsyncTransfer != null)
+                    {
+                        await AsyncTransfer();
+                    }
                 }
                 catch (Exception ex)
                 {
