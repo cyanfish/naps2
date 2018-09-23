@@ -59,7 +59,7 @@ namespace NAPS2.ClientServer
             return driver.GetDeviceList();
         }
 
-        public async Task Scan(ScanProfile scanProfile, ScanParams scanParams)
+        public async Task<int> Scan(ScanProfile scanProfile, ScanParams scanParams)
         {
             if (scanProfile.DriverName == ProxiedScanDriver.DRIVER_NAME)
             {
@@ -79,6 +79,7 @@ namespace NAPS2.ClientServer
 
             var callback = OperationContext.Current.GetCallbackChannel<IScanCallback>();
 
+            int pages = 0;
             await scanPerformer.PerformScan(scanProfile, internalParams, null, null, image =>
             {
                 // TODO: Should stream this
@@ -95,8 +96,10 @@ namespace NAPS2.ClientServer
                         HighQuality = indexImage.HighQuality
                     };
                     callback.ImageReceived(imageBytes, sanitizedIndexImage);
+                    pages++;
                 }
             });
+            return pages;
         }
     }
 }

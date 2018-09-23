@@ -17,6 +17,6 @@ namespace NAPS2.ClientServer
         List<ScanDevice> GetDeviceList(ScanProfile scanProfile);
 
         [OperationContract]
-        Task Scan(ScanProfile scanProfile, ScanParams scanParams);
+        Task<int> Scan(ScanProfile scanProfile, ScanParams scanParams);
     }
 }
