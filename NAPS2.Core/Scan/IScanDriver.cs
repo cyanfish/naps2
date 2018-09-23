@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -39,6 +40,11 @@ namespace NAPS2.Scan
         /// Sets the parent window used when creating dialogs. This must be set before calling PromptForDevice or Scan.
         /// </summary>
         IWin32Window DialogParent { set; }
+
+        /// <summary>
+        /// Sets the cancellation token used to cancel an ongoing scan.
+        /// </summary>
+        CancellationToken CancelToken { set; }
 
         /// <summary>
         /// Gets the name used to look up the driver in the IScanDriverFactory.

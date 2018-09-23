@@ -26,6 +26,8 @@ namespace NAPS2.Scan.Stub
 
         public IWin32Window DialogParent { get; set; }
 
+        public CancellationToken CancelToken { get; set; }
+
         public ScanDevice PromptForDevice() => new ScanDevice("test", "Test Scanner");
 
         public List<ScanDevice> GetDeviceList() => new List<ScanDevice>
