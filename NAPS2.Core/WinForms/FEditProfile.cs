@@ -353,10 +353,11 @@ namespace NAPS2.WinForms
             if (!suppressChangeEvent)
             {
                 suppressChangeEvent = true;
-                
+
+                bool canUseNativeUi = DeviceDriverName != SaneScanDriver.DRIVER_NAME && !useProxy;
                 bool locked = ScanProfile.IsLocked;
                 bool deviceLocked = ScanProfile.IsDeviceLocked;
-                bool settingsEnabled = !locked && rdbConfig.Checked;
+                bool settingsEnabled = !locked && (rdbConfig.Checked || !canUseNativeUi);
 
                 txtName.Enabled = !locked;
                 rdWIA.Enabled = rdTWAIN.Enabled = rdSANE.Enabled = !locked;
@@ -381,7 +382,7 @@ namespace NAPS2.WinForms
                 btnAdvanced.Enabled = !locked;
 
                 ConditionalControls.UnlockHeight(this);
-                ConditionalControls.SetVisible(panelUI, DeviceDriverName != SaneScanDriver.DRIVER_NAME, 20);
+                ConditionalControls.SetVisible(panelUI, canUseNativeUi, 20);
                 ConditionalControls.LockHeight(this);
 
                 suppressChangeEvent = false;
@@ -524,6 +525,7 @@ namespace NAPS2.WinForms
             {
                 ScanProfile.ProxyConfig = form.ProxyConfig;
                 useProxy = form.UseProxy;
+                UpdateEnabledControls();
             }
         }
     }
