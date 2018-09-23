@@ -25,7 +25,6 @@ namespace NAPS2.Scan.Twain
 
         private readonly IFormFactory formFactory;
         private readonly IBlankDetector blankDetector;
-        private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageHelper scannedImageHelper;
 
         static TwainWrapper()
@@ -46,11 +45,10 @@ namespace NAPS2.Scan.Twain
 #endif
         }
 
-        public TwainWrapper(IFormFactory formFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
+        public TwainWrapper(IFormFactory formFactory, IBlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
         {
             this.formFactory = formFactory;
             this.blankDetector = blankDetector;
-            this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageHelper = scannedImageHelper;
         }
 
@@ -162,7 +160,6 @@ namespace NAPS2.Scan.Twain
                                 ? ScanBitDepth.BlackWhite
                                 : ScanBitDepth.C24Bit;
                             var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
-                            image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
                             if (scanParams.DetectPatchCodes)
                             {
                                 foreach (var patchCodeInfo in eventArgs.GetExtImageInfo(ExtendedImageInfo.PatchCode))

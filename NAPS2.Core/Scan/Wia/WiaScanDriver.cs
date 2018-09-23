@@ -22,15 +22,13 @@ namespace NAPS2.Scan.Wia
         private const int MAX_RETRIES = 5;
 
         private readonly IBlankDetector blankDetector;
-        private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageHelper scannedImageHelper;
         private readonly IFormFactory formFactory;
 
-        public WiaScanDriver(IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper, IFormFactory formFactory)
+        public WiaScanDriver(IBlankDetector blankDetector, ScannedImageHelper scannedImageHelper, IFormFactory formFactory)
             : base(formFactory)
         {
             this.blankDetector = blankDetector;
-            this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageHelper = scannedImageHelper;
             this.formFactory = formFactory;
         }
@@ -121,7 +119,6 @@ namespace NAPS2.Scan.Wia
 
                                 ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
                                 var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
                                 scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber);
                                 string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
                                 scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);

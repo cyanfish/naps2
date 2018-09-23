@@ -177,6 +177,14 @@ namespace NAPS2.Scan.Images
 
         public void PostProcessStep2(ScannedImage image, Bitmap bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber, bool supportsNativeUI = true)
         {
+            if (!scanParams.NoThumbnails)
+            {
+                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+            }
+            if (scanParams.SkipPostProcessing)
+            {
+                return;
+            }
             if ((!profile.UseNativeUI || !supportsNativeUI) && profile.BrightnessContrastAfterScan)
             {
                 if (profile.Brightness != 0)

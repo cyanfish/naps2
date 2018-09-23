@@ -25,16 +25,14 @@ namespace NAPS2.Scan.Sane
         private readonly SaneWrapper saneWrapper;
         private readonly IFormFactory formFactory;
         private readonly IBlankDetector blankDetector;
-        private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, IBlankDetector blankDetector, ThumbnailRenderer thumbnailRenderer, ScannedImageHelper scannedImageHelper)
+        public SaneScanDriver(SaneWrapper saneWrapper, IFormFactory formFactory, IBlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
             : base(formFactory)
         {
             this.saneWrapper = saneWrapper;
             this.formFactory = formFactory;
             this.blankDetector = blankDetector;
-            this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageHelper = scannedImageHelper;
         }
 
@@ -262,7 +260,6 @@ namespace NAPS2.Scan.Sane
                     using (var encoded = ScanProfile.BitDepth == ScanBitDepth.BlackWhite ? UnsafeImageOps.ConvertTo1Bpp(result, -ScanProfile.Brightness) : result)
                     {
                         var image = new ScannedImage(encoded, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(result));
                         scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);
                         string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
                         scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
