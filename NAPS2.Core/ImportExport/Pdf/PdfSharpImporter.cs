@@ -180,12 +180,18 @@ namespace NAPS2.ImportExport.Pdf
             document.Save(pdfPath);
 
             var image = ScannedImage.FromSinglePagePdf(pdfPath, false);
-            using (var bitmap = await scannedImageRenderer.Render(image))
+            if (!importParams.NoThumbnails || importParams.DetectPatchCodes)
             {
-                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
-                if (importParams.DetectPatchCodes)
+                using (var bitmap = await scannedImageRenderer.Render(image))
                 {
-                    image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                    if (!importParams.NoThumbnails)
+                    {
+                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                    }
+                    if (importParams.DetectPatchCodes)
+                    {
+                        image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                    }
                 }
             }
             return image;
@@ -200,7 +206,10 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
                     var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
-                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                    if (!importParams.NoThumbnails)
+                    {
+                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                    }
                     if (importParams.DetectPatchCodes)
                     {
                         image.PatchCode = PatchCodeDetector.Detect(bitmap);
@@ -240,7 +249,10 @@ namespace NAPS2.ImportExport.Pdf
             {
                 bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
                 var image = new ScannedImage(bitmap, bitDepth, true, -1);
-                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                if (!importParams.NoThumbnails)
+                {
+                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                }
                 if (importParams.DetectPatchCodes)
                 {
                     image.PatchCode = PatchCodeDetector.Detect(bitmap);
@@ -345,7 +357,10 @@ namespace NAPS2.ImportExport.Pdf
                 bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
 
                 var image = new ScannedImage(bitmap, ScanBitDepth.BlackWhite, true, -1);
-                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                if (!importParams.NoThumbnails)
+                {
+                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                }
                 if (importParams.DetectPatchCodes)
                 {
                     image.PatchCode = PatchCodeDetector.Detect(bitmap);
