@@ -13,7 +13,7 @@ using NAPS2.Scan.Wia;
 
 namespace NAPS2.ClientServer
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
         IncludeExceptionDetailInFaults = true,
         ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class ScanService : IScanService

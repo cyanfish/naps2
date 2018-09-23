@@ -39,8 +39,9 @@ namespace NAPS2.DI.EntryPoints
                 Invoker.Current = form;
 
                 // Listen for requests
-                using (var host = new ServiceHost(scanService))
+                using (var host = new ServiceHost(typeof(ScanService)))
                 {
+                    host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
                     host.AddServiceEndpoint(typeof(IScanService),
                         new NetTcpBinding {ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1)}, "net.tcp://0.0.0.0:33277/NAPS2.Server");
                     host.Open();
