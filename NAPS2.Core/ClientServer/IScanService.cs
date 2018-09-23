@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using NAPS2.Scan;
 
 namespace NAPS2.ClientServer
@@ -16,6 +17,6 @@ namespace NAPS2.ClientServer
         List<ScanDevice> GetDeviceList(string driverName);
 
         [OperationContract]
-        void Scan(ScanProfile scanProfile, ScanParams scanParams);
+        Task Scan(ScanProfile scanProfile, ScanParams scanParams);
     }
 }

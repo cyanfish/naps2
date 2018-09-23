@@ -25,6 +25,9 @@ namespace NAPS2.DI.EntryPoints
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
                 var scanService = kernel.Get<ScanService>();
 
+                // Start a pending worker process
+                WorkerManager.Init();
+
                 // Set up basic application configuration
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -38,7 +41,7 @@ namespace NAPS2.DI.EntryPoints
                 using (var host = new ServiceHost(scanService))
                 {
                     host.AddServiceEndpoint(typeof(IScanService),
-                        new NetTcpBinding {ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1)}, "net.tcp://0.0.0.0:33277");
+                        new NetTcpBinding {ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1)}, "net.tcp://0.0.0.0:33277/NAPS2.Server");
                     host.Open();
                     Application.Run(form);
                 }

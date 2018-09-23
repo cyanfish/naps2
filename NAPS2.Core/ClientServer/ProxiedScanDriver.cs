@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Recovery;
 using NAPS2.Scan;
-using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.ClientServer
@@ -51,23 +51,30 @@ namespace NAPS2.ClientServer
                 throw new InvalidOperationException("ScanProfile.ProxyConfig must be specified to use ProxiedScanDriver.");
             }
 
-            return Task.Factory.StartNew(() =>
+            return Task.Factory.StartNew(async () =>
             {
-                using (var client = clientContextFactory.Create(ScanProfile.ProxyConfig))
+                try
                 {
-                    client.Callback.ImageCallback += (imageBytes, indexImage) =>
+                    using (var client = clientContextFactory.Create(ScanProfile.ProxyConfig))
                     {
-                        indexImage.FileName = RecoveryImage.GetNextFileName() + Path.GetExtension(indexImage.FileName);
-                        var recoveryFilePath = Path.Combine(RecoveryImage.RecoveryFolder.FullName, indexImage.FileName);
-                        File.WriteAllBytes(recoveryFilePath, imageBytes);
-                        var image = new ScannedImage(indexImage);
-                        // TODO: Post-processing etc.
-                        // TODO: Also add a ScanParams flag to disable post-processing on the server
-                        source.Put(image);
-                    };
-                    client.Service.Scan(ScanProfile, ScanParams);
+                        client.Callback.ImageCallback += (imageBytes, indexImage) =>
+                        {
+                            indexImage.FileName = RecoveryImage.GetNextFileName() + Path.GetExtension(indexImage.FileName);
+                            var recoveryFilePath = Path.Combine(RecoveryImage.RecoveryFolder.FullName, indexImage.FileName);
+                            File.WriteAllBytes(recoveryFilePath, imageBytes);
+                            var image = new ScannedImage(indexImage);
+                            // TODO: Post-processing etc.
+                            // TODO: Also add a ScanParams flag to disable post-processing on the server
+                            source.Put(image);
+                        };
+                        await client.Service.Scan(ScanProfile, ScanParams);
+                    }
                 }
-            }, TaskCreationOptions.LongRunning);
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error scanning with proxy", e);
+                }
+            }, TaskCreationOptions.LongRunning).Unwrap();
         }
     }
 }

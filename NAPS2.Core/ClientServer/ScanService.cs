@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using NAPS2.Platform;
 using NAPS2.Recovery;
 using NAPS2.Scan;
@@ -53,8 +54,12 @@ namespace NAPS2.ClientServer
             return driver.GetDeviceList();
         }
 
-        public void Scan(ScanProfile scanProfile, ScanParams scanParams)
+        public async Task Scan(ScanProfile scanProfile, ScanParams scanParams)
         {
+            if (scanProfile.DriverName == ProxiedScanDriver.DRIVER_NAME)
+            {
+                scanProfile.DriverName = scanProfile.ProxyConfig.RemoteDriverName;
+            }
             var internalParams = new ScanParams
             {
                 DetectPatchCodes = scanParams.DetectPatchCodes,
@@ -63,7 +68,7 @@ namespace NAPS2.ClientServer
                 DoOcr = false
             };
             var callback = OperationContext.Current.GetCallbackChannel<IScanCallback>();
-            scanPerformer.PerformScan(scanProfile, internalParams, null, null, image =>
+            await scanPerformer.PerformScan(scanProfile, internalParams, null, null, image =>
             {
                 // TODO: Should stream this
                 // TODO: Also should think about avoiding the intermediate filesystem
