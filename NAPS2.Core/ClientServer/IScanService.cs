@@ -19,7 +19,7 @@ namespace NAPS2.ClientServer
         [OperationContract]
         Task<int> Scan(ScanProfile scanProfile, ScanParams scanParams);
 
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void CancelScan();
     }
 }

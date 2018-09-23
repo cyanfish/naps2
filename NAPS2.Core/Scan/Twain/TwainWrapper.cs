@@ -175,13 +175,6 @@ namespace NAPS2.Scan.Twain
                             source.Put(image);
                         }
                     }
-
-                    if (cancelToken.IsCancellationRequested)
-                    {
-                        Debug.WriteLine("NAPS2.TW - User Cancel");
-                        cancel = true;
-                        StopTwain();
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -259,6 +252,15 @@ namespace NAPS2.Scan.Twain
                     {
                         Debug.WriteLine("NAPS2.TW - Enable failed - {0}, rc");
                         StopTwain();
+                    }
+                    else
+                    {
+                        cancelToken.Register(() =>
+                        {
+                            Debug.WriteLine("NAPS2.TW - User Cancel");
+                            cancel = true;
+                            session.ForceStepDown(5);
+                        });
                     }
                 }
                 catch (Exception ex)
