@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml.Serialization;
 using NAPS2.Config;
 using NAPS2.Dependencies;
@@ -277,7 +276,8 @@ namespace NAPS2.Automation
                     var importParams = new ImportParams
                     {
                         Slice = Slice.Parse(filePath, out string actualPath),
-                        DetectPatchCodes = options.SplitPatchT
+                        DetectPatchCodes = options.SplitPatchT,
+                        NoThumbnails = true
                     };
                     var images = await scannedImageImporter.Import(actualPath, importParams, (j, k) => { }, CancellationToken.None).ToList();
                     scanList.Add(images);
@@ -595,6 +595,7 @@ namespace NAPS2.Automation
                 {
                     NoUI = true,
                     NoAutoSave = !options.AutoSave,
+                    NoThumbnails = true,
                     DetectPatchCodes = options.SplitPatchT,
                     DoOcr = ocrParams?.LanguageCode != null,
                     OcrParams = ocrParams
