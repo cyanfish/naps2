@@ -58,7 +58,7 @@ namespace NAPS2.Scan.Wia
                 int pageNumber = 1;
                 int retryCount = 0;
                 bool retry = false;
-                bool cancel = false;
+                bool done = false;
                 do
                 {
                     ScannedImage image;
@@ -69,7 +69,7 @@ namespace NAPS2.Scan.Wia
                             int delay = (int)(ScanProfile.WiaDelayBetweenScansSeconds.Clamp(0, 30) * 1000);
                             Thread.Sleep(delay);
                         }
-                        (image, cancel) = await TransferImage(eventLoop, pageNumber);
+                        (image, done) = await TransferImage(eventLoop, pageNumber);
                         pageNumber++;
                         retryCount = 0;
                         retry = false;
@@ -90,7 +90,7 @@ namespace NAPS2.Scan.Wia
                     {
                         source.Put(image);
                     }
-                } while (retry || (!cancel && ScanProfile.PaperSource != ScanSource.Glass));
+                } while (!CancelToken.IsCancellationRequested && (retry || !done && ScanProfile.PaperSource != ScanSource.Glass));
             }
         }
 

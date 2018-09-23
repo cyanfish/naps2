@@ -64,12 +64,13 @@ namespace NAPS2.Scan.Twain
                             if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, ScanParams, tempPath);
                             source.Put(img);
                         };
+                        CancelToken.Register(worker.Service.CancelTwainScan);
                         await worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent?.SafeHandle() ?? IntPtr.Zero);
                     }
                 }
                 else
                 {
-                    twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams, source, scannedImageHelper.RunBackgroundOcr);
+                    twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams, CancelToken, source, scannedImageHelper.RunBackgroundOcr);
                 }
             }, TaskCreationOptions.LongRunning).Unwrap();
         }

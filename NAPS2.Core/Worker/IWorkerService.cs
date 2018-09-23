@@ -27,6 +27,9 @@ namespace NAPS2.Worker
         Task TwainScan(ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr hwnd);
 
         [OperationContract]
+        void CancelTwainScan();
+
+        [OperationContract]
         MapiSendMailReturnCode SendMapiEmail(EmailMessage message);
 
         [OperationContract]

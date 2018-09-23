@@ -50,20 +50,20 @@ namespace NAPS2.Scan.Sane
             // TODO: Test ADF
             var options = new Lazy<KeyValueScanOptions>(GetOptions);
             int pageNumber = 1;
-            var (img, cancel) = await Transfer(options, pageNumber);
+            var (img, done) = await Transfer(options, pageNumber);
             if (img != null)
             {
                 source.Put(img);
             }
 
-            if (!cancel && ScanProfile.PaperSource != ScanSource.Glass)
+            if (!done && ScanProfile.PaperSource != ScanSource.Glass)
             {
                 try
                 {
                     while (true)
                     {
-                        (img, cancel) = await Transfer(options, ++pageNumber);
-                        if (cancel)
+                        (img, done) = await Transfer(options, ++pageNumber);
+                        if (done)
                         {
                             break;
                         }
@@ -225,12 +225,13 @@ namespace NAPS2.Scan.Sane
                 Stream stream;
                 if (ScanParams.NoUI)
                 {
-                    stream = saneWrapper.ScanOne(ScanDevice.ID, options.Value, null, CancellationToken.None);
+                    stream = saneWrapper.ScanOne(ScanDevice.ID, options.Value, null, CancelToken);
                 }
                 else
                 {
                     var form = formFactory.Create<FScanProgress>();
-                    form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress, form.CancelToken);
+                    var unifiedCancelToken = CancellationTokenSource.CreateLinkedTokenSource(form.CancelToken, CancelToken).Token;
+                    form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress, unifiedCancelToken);
                     form.PageNumber = pageNumber;
                     ((FormBase)Application.OpenForms[0]).SafeInvoke(() => form.ShowDialog());
 
@@ -245,6 +246,10 @@ namespace NAPS2.Scan.Sane
                     }
 
                     stream = form.ImageStream;
+                }
+                if (stream == null)
+                {
+                    return (null, true);
                 }
                 using (stream)
                 using (var output = Image.FromStream(stream))

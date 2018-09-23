@@ -4,6 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -19,7 +20,7 @@ namespace NAPS2.Worker
     /// <summary>
     /// The WCF service implementation for NAPS2.Worker.exe.
     /// </summary>
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
         IncludeExceptionDetailInFaults = true,
         ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class WorkerService : IWorkerService
@@ -27,6 +28,8 @@ namespace NAPS2.Worker
         private readonly TwainWrapper twainWrapper;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly MapiWrapper mapiWrapper;
+
+        private CancellationTokenSource twainScanCts = new CancellationTokenSource();
 
         public WorkerService(TwainWrapper twainWrapper, ThumbnailRenderer thumbnailRenderer, MapiWrapper mapiWrapper)
         {
@@ -53,7 +56,7 @@ namespace NAPS2.Worker
                 await Task.Factory.StartNew(() =>
                 {
                     var imagePathDict = new Dictionary<ScannedImage, string>();
-                    twainWrapper.Scan(hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), scanDevice, scanProfile, scanParams,
+                    twainWrapper.Scan(hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), scanDevice, scanProfile, scanParams, twainScanCts.Token,
                         new WorkerImageSource(Callback, imagePathDict), (img, _, path) => imagePathDict.Add(img, path));
                 }, TaskCreationOptions.LongRunning);
             }
@@ -61,6 +64,11 @@ namespace NAPS2.Worker
             {
                 throw new FaultException<ScanDriverExceptionDetail>(new ScanDriverExceptionDetail(e));
             }
+        }
+
+        public void CancelTwainScan()
+        {
+            twainScanCts.Cancel();
         }
 
         public MapiSendMailReturnCode SendMapiEmail(EmailMessage message)
