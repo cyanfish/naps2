@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Platform;
 using NAPS2.Recovery;
@@ -20,6 +21,8 @@ namespace NAPS2.ClientServer
     {
         private readonly IScanDriverFactory scanDriverFactory;
         private readonly IScanPerformer scanPerformer;
+
+        private CancellationTokenSource scanCts = new CancellationTokenSource();
 
         public ScanService(IScanDriverFactory scanDriverFactory, IScanPerformer scanPerformer)
         {
@@ -65,6 +68,10 @@ namespace NAPS2.ClientServer
             {
                 scanProfile.DriverName = scanProfile.ProxyDriverName;
             }
+            if (scanProfile.TwainImpl == TwainImpl.Legacy)
+            {
+                scanProfile.TwainImpl = TwainImpl.OldDsm;
+            }
             scanProfile.UseNativeUI = false;
 
             var internalParams = new ScanParams
@@ -98,8 +105,13 @@ namespace NAPS2.ClientServer
                     callback.ImageReceived(imageBytes, sanitizedIndexImage);
                     pages++;
                 }
-            });
+            }, scanCts.Token);
             return pages;
+        }
+
+        public void CancelScan()
+        {
+            scanCts.Cancel();
         }
     }
 }

@@ -24,7 +24,6 @@ namespace NAPS2.DI.EntryPoints
             {
                 // Initialize Ninject (the DI framework)
                 var kernel = new StandardKernel(new CommonModule(), new WinFormsModule());
-                var scanService = kernel.Get<ScanService>();
 
                 // Start a pending worker process
                 WorkerManager.Init();

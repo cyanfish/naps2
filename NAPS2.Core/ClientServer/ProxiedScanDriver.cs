@@ -106,7 +106,10 @@ namespace NAPS2.ClientServer
                         {
                             form.PageNumber = pageNumber;
                             form.AsyncTransfer = async () => await scanTask;
+                            form.CancelToken.Register(client.Service.CancelScan);
                         }
+                        CancelToken.Register(client.Service.CancelScan);
+
                         if (noUi)
                         {
                             await scanTask;
@@ -118,7 +121,6 @@ namespace NAPS2.ClientServer
                         else
                         {
                             Invoker.Current.SafeInvoke(() => form.Show());
-                            // TODO: Cancellation
                             await scanTask;
                         }
                     }

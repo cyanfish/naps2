@@ -178,6 +178,7 @@ namespace NAPS2.Scan.Twain
 
                     if (cancelToken.IsCancellationRequested)
                     {
+                        Debug.WriteLine("NAPS2.TW - User Cancel");
                         cancel = true;
                         StopTwain();
                     }
