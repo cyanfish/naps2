@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.ClientServer;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
 using NAPS2.Platform;
@@ -25,6 +26,7 @@ namespace NAPS2.WinForms
         private ScanProfile scanProfile;
         private ScanDevice currentDevice;
         private bool isDefault;
+        private bool useProxy;
 
         private int iconID;
         private bool result;
@@ -68,6 +70,7 @@ namespace NAPS2.WinForms
                 CurrentDevice = ScanProfile.Device;
             }
             isDefault = ScanProfile.IsDefault;
+            useProxy = ScanProfile.DriverName == ProxiedScanDriver.DRIVER_NAME;
             iconID = ScanProfile.IconID;
 
             cmbSource.SelectedIndex = (int)ScanProfile.PaperSource;
@@ -83,7 +86,7 @@ namespace NAPS2.WinForms
             cbAutoSave.Checked = ScanProfile.EnableAutoSave;
 
             // The setter updates the driver selection checkboxes
-            DeviceDriverName = ScanProfile.DriverName;
+            DeviceDriverName = useProxy ? ScanProfile.ProxyDriverName : ScanProfile.DriverName;
 
             rdbNative.Checked = ScanProfile.UseNativeUI;
             rdbConfig.Checked = !ScanProfile.UseNativeUI;
@@ -252,7 +255,8 @@ namespace NAPS2.WinForms
 
         private void btnChooseDevice_Click(object sender, EventArgs e)
         {
-            ChooseDevice(DeviceDriverName);
+            ScanProfile.ProxyDriverName = useProxy ? DeviceDriverName : null;
+            ChooseDevice(useProxy ? ProxiedScanDriver.DRIVER_NAME : DeviceDriverName);
         }
 
         private void SaveSettings()
@@ -276,7 +280,9 @@ namespace NAPS2.WinForms
 
                 Device = CurrentDevice,
                 IsDefault = isDefault,
-                DriverName = DeviceDriverName,
+                DriverName = useProxy ? ProxiedScanDriver.DRIVER_NAME : DeviceDriverName,
+                ProxyConfig = ScanProfile.ProxyConfig,
+                ProxyDriverName = useProxy ? DeviceDriverName : null,
                 DisplayName = txtName.Text,
                 IconID = iconID,
                 MaxQuality = ScanProfile.MaxQuality,
@@ -507,6 +513,18 @@ namespace NAPS2.WinForms
             public string CustomName { get; set; }
 
             public PageDimensions CustomDimens { get; set; }
+        }
+
+        private void btnNetwork_Click(object sender, EventArgs e)
+        {
+            var form = FormFactory.Create<FProxyConfig>();
+            form.ProxyConfig = ScanProfile.ProxyConfig;
+            form.UseProxy = useProxy;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ScanProfile.ProxyConfig = form.ProxyConfig;
+                useProxy = form.UseProxy;
+            }
         }
     }
 }

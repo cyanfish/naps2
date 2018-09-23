@@ -217,6 +217,12 @@
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
     <Compile Include="Logging\WindowsEventLogger.cs" />
+    <Compile Include="WinForms\FProxyConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FProxyConfig.Designer.cs">
+      <DependentUpon>FProxyConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\ImageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -724,6 +730,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FProxyConfig.resx">
+      <DependentUpon>FProxyConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\ImageForm.af.resx">
       <DependentUpon>ImageForm.cs</DependentUpon>

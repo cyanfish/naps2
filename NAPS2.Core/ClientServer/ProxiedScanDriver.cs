@@ -40,7 +40,7 @@ namespace NAPS2.ClientServer
 
             using (var client = clientContextFactory.Create(ScanProfile.ProxyConfig))
             {
-                return client.Service.GetDeviceList(ScanProfile.ProxyConfig.RemoteDriverName);
+                return client.Service.GetDeviceList(ScanProfile);
             }
         }
 

@@ -48,9 +48,14 @@ namespace NAPS2.ClientServer
             return driverNames;
         }
 
-        public List<ScanDevice> GetDeviceList(string driverName)
+        public List<ScanDevice> GetDeviceList(ScanProfile scanProfile)
         {
-            var driver = scanDriverFactory.Create(driverName);
+            if (scanProfile.DriverName == ProxiedScanDriver.DRIVER_NAME)
+            {
+                scanProfile.DriverName = scanProfile.ProxyDriverName;
+            }
+            var driver = scanDriverFactory.Create(scanProfile.DriverName);
+            driver.ScanProfile = scanProfile;
             return driver.GetDeviceList();
         }
 
@@ -58,7 +63,7 @@ namespace NAPS2.ClientServer
         {
             if (scanProfile.DriverName == ProxiedScanDriver.DRIVER_NAME)
             {
-                scanProfile.DriverName = scanProfile.ProxyConfig.RemoteDriverName;
+                scanProfile.DriverName = scanProfile.ProxyDriverName;
             }
             var internalParams = new ScanParams
             {

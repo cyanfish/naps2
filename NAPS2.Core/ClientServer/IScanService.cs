@@ -14,7 +14,7 @@ namespace NAPS2.ClientServer
         List<string> GetSupportedDriverNames();
 
         [OperationContract]
-        List<ScanDevice> GetDeviceList(string driverName);
+        List<ScanDevice> GetDeviceList(ScanProfile scanProfile);
 
         [OperationContract]
         Task Scan(ScanProfile scanProfile, ScanParams scanParams);

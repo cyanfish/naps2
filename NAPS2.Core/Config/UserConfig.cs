@@ -59,5 +59,7 @@ namespace NAPS2.Config
         public KeyboardShortcuts KeyboardShortcuts { get; set; }
 
         public List<NamedPageSize> CustomPageSizePresets { get; set; } = new List<NamedPageSize>();
+
+        public List<ScanProxyConfig> SavedProxies { get; set; } = new List<ScanProxyConfig>();
     }
 }
