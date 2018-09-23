@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,11 +17,13 @@ namespace NAPS2.ClientServer
         public const string DRIVER_NAME = "proxy";
 
         private readonly ClientContextFactory clientContextFactory;
+        private readonly ScannedImageHelper scannedImageHelper;
 
-        public ProxiedScanDriver(ClientContextFactory clientContextFactory, IFormFactory formFactory)
+        public ProxiedScanDriver(ClientContextFactory clientContextFactory, IFormFactory formFactory, ScannedImageHelper scannedImageHelper)
             : base(formFactory)
         {
             this.clientContextFactory = clientContextFactory;
+            this.scannedImageHelper = scannedImageHelper;
         }
 
         public override string DriverName => DRIVER_NAME;
@@ -57,14 +60,17 @@ namespace NAPS2.ClientServer
                 {
                     using (var client = clientContextFactory.Create(ScanProfile.ProxyConfig))
                     {
+                        int pageNumber = 1;
                         client.Callback.ImageCallback += (imageBytes, indexImage) =>
                         {
                             indexImage.FileName = RecoveryImage.GetNextFileName() + Path.GetExtension(indexImage.FileName);
                             var recoveryFilePath = Path.Combine(RecoveryImage.RecoveryFolder.FullName, indexImage.FileName);
                             File.WriteAllBytes(recoveryFilePath, imageBytes);
                             var image = new ScannedImage(indexImage);
-                            // TODO: Post-processing etc.
-                            // TODO: Also add a ScanParams flag to disable post-processing on the server
+                            using (var bitmap = new Bitmap(new MemoryStream(imageBytes)))
+                            {
+                                scannedImageHelper.PostProcessStep2(image, bitmap, ScanProfile, ScanParams, pageNumber++, false);
+                            }
                             source.Put(image);
                         };
                         await client.Service.Scan(ScanProfile, ScanParams);

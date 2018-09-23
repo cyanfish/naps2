@@ -65,14 +65,20 @@ namespace NAPS2.ClientServer
             {
                 scanProfile.DriverName = scanProfile.ProxyDriverName;
             }
+            scanProfile.UseNativeUI = false;
+
             var internalParams = new ScanParams
             {
                 DetectPatchCodes = scanParams.DetectPatchCodes,
                 NoUI = true,
                 NoAutoSave = true,
-                DoOcr = false
+                DoOcr = false,
+                NoThumbnails = true,
+                SkipPostProcessing = true
             };
+
             var callback = OperationContext.Current.GetCallbackChannel<IScanCallback>();
+
             await scanPerformer.PerformScan(scanProfile, internalParams, null, null, image =>
             {
                 // TODO: Should stream this
