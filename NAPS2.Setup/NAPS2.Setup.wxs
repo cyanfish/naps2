@@ -73,6 +73,8 @@
         <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe.config" />
         <File Source="..\NAPS2.Worker\bin\InstallerMSI\NAPS2.Worker.exe" />
         <File Source="..\NAPS2.Worker\bin\InstallerMSI\NAPS2.Worker.exe.config" />
+        <File Source="..\NAPS2.Server\bin\InstallerMSI\NAPS2.Server.exe" />
+        <File Source="..\NAPS2.Server\bin\InstallerMSI\NAPS2.Server.exe.config" />
         <!-- Configuration -->
         <File Source="..\NAPS2\appsettings.xml" />
         <!-- License -->
