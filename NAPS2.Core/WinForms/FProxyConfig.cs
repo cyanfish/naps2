@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using NAPS2.ClientServer;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 
@@ -38,6 +40,24 @@ namespace NAPS2.WinForms
             cbUseProxy.Checked = UseProxy;
             UpdateDropdown();
             UpdateControls();
+
+            new Thread(() => ServerDiscovery.SendBroadcast((computerName, ep) =>
+            {
+                SafeInvoke(() =>
+                {
+                    if (string.IsNullOrWhiteSpace(txtIP.Text))
+                    {
+                        // TODO: Maybe add all responses to dropdown/saved
+                        ProxyConfig = new ScanProxyConfig
+                        {
+                            Name = computerName,
+                            Ip = ep.Address.ToString(),
+                            Port = ep.Port
+                        };
+                        UpdateControls();
+                    }
+                });
+            })).Start();
         }
 
         private void UpdateDropdown()

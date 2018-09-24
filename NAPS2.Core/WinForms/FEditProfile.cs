@@ -255,8 +255,9 @@ namespace NAPS2.WinForms
 
         private void btnChooseDevice_Click(object sender, EventArgs e)
         {
+            ScanProfile.DriverName = useProxy ? ProxiedScanDriver.DRIVER_NAME : DeviceDriverName;
             ScanProfile.ProxyDriverName = useProxy ? DeviceDriverName : null;
-            ChooseDevice(useProxy ? ProxiedScanDriver.DRIVER_NAME : DeviceDriverName);
+            ChooseDevice(ScanProfile.DriverName);
         }
 
         private void SaveSettings()

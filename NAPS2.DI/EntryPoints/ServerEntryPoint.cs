@@ -48,6 +48,8 @@ namespace NAPS2.DI.EntryPoints
                     }
                 }
 
+                new Thread(() => ServerDiscovery.ListenForBroadcast(port)).Start();
+
                 // Listen for requests
                 using (var host = new ServiceHost(typeof(ScanService)))
                 {
