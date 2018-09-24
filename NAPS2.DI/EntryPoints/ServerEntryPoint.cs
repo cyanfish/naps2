@@ -48,18 +48,25 @@ namespace NAPS2.DI.EntryPoints
                     }
                 }
 
-                new Thread(() => ServerDiscovery.ListenForBroadcast(port)).Start();
+                new Thread(() => ServerDiscovery.ListenForBroadcast(port)) { IsBackground = true }.Start();
 
                 // Listen for requests
                 using (var host = new ServiceHost(typeof(ScanService)))
                 {
                     var serverIcon = new ServerNotifyIcon(port, () => form.Close());
-                    serverIcon.Show();
+                    host.Opened += (sender, eventArgs) => serverIcon.Show();
                     host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
                     host.AddServiceEndpoint(typeof(IScanService),
-                        new NetTcpBinding {ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1)}, $"net.tcp://0.0.0.0:{port}/NAPS2.Server");
+                        new NetTcpBinding { ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1) }, $"net.tcp://0.0.0.0:{port}/NAPS2.Server");
                     host.Open();
-                    Application.Run(form);
+                    try
+                    {
+                        Application.Run(form);
+                    }
+                    finally
+                    {
+                        serverIcon.Hide();
+                    }
                 }
             }
             catch (Exception ex)

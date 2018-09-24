@@ -35,5 +35,10 @@ namespace NAPS2.WinForms
             NotifyIcon.Visible = true;
             NotifyIcon.ShowBalloonTip(5000);
         }
+
+        public void Hide()
+        {
+            NotifyIcon.Visible = false;
+        }
     }
 }
