@@ -18,6 +18,8 @@ namespace NAPS2.DI.EntryPoints
     /// </summary>
     public static class ServerEntryPoint
     {
+        private const int DEFAULT_PORT = 33277;
+
         public static void Run(string[] args)
         {
             try
@@ -37,12 +39,23 @@ namespace NAPS2.DI.EntryPoints
                 var form = new BackgroundForm();
                 Invoker.Current = form;
 
+                int port = DEFAULT_PORT;
+                foreach (var portArg in args.Where(a => a.StartsWith("/Port:", StringComparison.OrdinalIgnoreCase)))
+                {
+                    if (int.TryParse(portArg.Substring(6), out int parsedPort))
+                    {
+                        port = parsedPort;
+                    }
+                }
+
                 // Listen for requests
                 using (var host = new ServiceHost(typeof(ScanService)))
                 {
+                    var serverIcon = new ServerNotifyIcon(port, () => form.Close());
+                    serverIcon.Show();
                     host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
                     host.AddServiceEndpoint(typeof(IScanService),
-                        new NetTcpBinding {ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1)}, "net.tcp://0.0.0.0:33277/NAPS2.Server");
+                        new NetTcpBinding {ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1)}, $"net.tcp://0.0.0.0:{port}/NAPS2.Server");
                     host.Open();
                     Application.Run(form);
                 }

@@ -763,6 +763,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Listening on port {0}.
+        /// </summary>
+        internal static string ListeningOnPort {
+            get {
+                return ResourceManager.GetString("ListeningOnPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} ({1}x{2} {3}).
         /// </summary>
         internal static string NamedPageSizeFormat {
@@ -786,6 +795,15 @@ namespace NAPS2.Lang.Resources {
         internal static string NAPS2 {
             get {
                 return ResourceManager.GetString("NAPS2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NAPS2 Server.
+        /// </summary>
+        internal static string Naps2Server {
+            get {
+                return ResourceManager.GetString("Naps2Server", resourceCulture);
             }
         }
         
@@ -1038,6 +1056,15 @@ namespace NAPS2.Lang.Resources {
         internal static string SelectProfileBeforeScan {
             get {
                 return ResourceManager.GetString("SelectProfileBeforeScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server started.
+        /// </summary>
+        internal static string ServerStarted {
+            get {
+                return ResourceManager.GetString("ServerStarted", resourceCulture);
             }
         }
         

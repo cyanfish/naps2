@@ -239,6 +239,7 @@
     <Compile Include="WinForms\OperationProgressNotifyWidget.Designer.cs">
       <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\ServerNotifyIcon.cs" />
     <Compile Include="WinForms\UpdateAvailableNotifyWidget.cs">
       <SubType>UserControl</SubType>
     </Compile>
