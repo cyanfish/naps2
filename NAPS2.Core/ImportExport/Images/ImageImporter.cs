@@ -60,7 +60,10 @@ namespace NAPS2.ImportExport.Images
 
                             toImport.SelectActiveFrame(FrameDimension.Page, frameIndex);
                             var image = new ScannedImage(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
-                            image.SetThumbnail(thumbnailRenderer.RenderThumbnail(toImport));
+                            if (!importParams.NoThumbnails)
+                            {
+                                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(toImport));
+                            }
                             if (importParams.DetectPatchCodes)
                             {
                                 image.PatchCode = PatchCodeDetector.Detect(toImport);
