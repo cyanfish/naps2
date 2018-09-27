@@ -47,7 +47,8 @@ namespace NAPS2.WinForms
             {
                 if (image != null)
                 {
-                    xzoom = Math.Max(Math.Min(value, 1000), 10);
+                    double maxZoom = Math.Sqrt(1e8 / (image.Width * (double) image.Height)) * 100;
+                    xzoom = Math.Max(Math.Min(value, maxZoom), 10);
                     double displayWidth = image.Width * (xzoom / 100);
                     double displayHeight = image.Height * (xzoom / 100);
                     if (image.HorizontalResolution > 0 && image.VerticalResolution > 0)
