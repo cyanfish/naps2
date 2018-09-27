@@ -17,7 +17,8 @@ namespace NAPS2.ClientServer
             var channelFactory = new DuplexChannelFactory<IScanService>(instanceContext,
                 new NetTcpBinding
                 {
-                    MaxReceivedMessageSize = 1024 * 1024 * 1024
+                    MaxReceivedMessageSize = 1024 * 1024 * 1024,
+                    Security = { Mode = SecurityMode.None }
                 },
                 new EndpointAddress(uri));
             var channel = channelFactory.CreateChannel();

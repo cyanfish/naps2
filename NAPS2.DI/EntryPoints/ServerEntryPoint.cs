@@ -56,8 +56,16 @@ namespace NAPS2.DI.EntryPoints
                     var serverIcon = new ServerNotifyIcon(port, () => form.Close());
                     host.Opened += (sender, eventArgs) => serverIcon.Show();
                     host.Description.Behaviors.Add(new ServiceFactoryBehavior(() => kernel.Get<ScanService>()));
-                    host.AddServiceEndpoint(typeof(IScanService),
-                        new NetTcpBinding { ReceiveTimeout = TimeSpan.FromHours(1), SendTimeout = TimeSpan.FromHours(1) }, $"net.tcp://0.0.0.0:{port}/NAPS2.Server");
+                    var binding = new NetTcpBinding
+                    {
+                        ReceiveTimeout = TimeSpan.FromHours(1),
+                        SendTimeout = TimeSpan.FromHours(1),
+                        Security =
+                        {
+                            Mode = SecurityMode.None
+                        }
+                    };
+                    host.AddServiceEndpoint(typeof(IScanService), binding, $"net.tcp://0.0.0.0:{port}/NAPS2.Server");
                     host.Open();
                     try
                     {
