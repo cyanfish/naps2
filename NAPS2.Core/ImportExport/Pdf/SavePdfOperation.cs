@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Email;
 using NAPS2.Lang.Resources;
@@ -113,6 +114,30 @@ namespace NAPS2.ImportExport.Pdf
 
                 return result;
             });
+            Success.ContinueWith(task =>
+            {
+                if (task.Result)
+                {
+                    if (email)
+                    {
+                        Log.Event(EventType.Email, new EventParams
+                        {
+                            Name = MiscResources.EmailPdf,
+                            Pages = snapshots.Count,
+                            FileFormat = ".pdf"
+                        });
+                    }
+                    else
+                    {
+                        Log.Event(EventType.SavePdf, new EventParams
+                        {
+                            Name = MiscResources.SavePdf,
+                            Pages = snapshots.Count,
+                            FileFormat = ".pdf"
+                        });
+                    }
+                }
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
 
             return true;
         }

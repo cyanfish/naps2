@@ -19,6 +19,7 @@ namespace NAPS2.Util
         private readonly AppConfigManager appConfigManager;
         private readonly WindowsEventLogger windowsEventLogger;
 
+        private bool shouldCreateEventSource;
         private int returnCode;
 
         public Lifecycle(StillImage sti, AppConfigManager appConfigManager, WindowsEventLogger windowsEventLogger)
@@ -102,7 +103,8 @@ namespace NAPS2.Util
                 }
             }
 
-            if (args.Any(x => x.Equals("/CreateEventSource", StringComparison.InvariantCultureIgnoreCase)))
+            shouldCreateEventSource = args.Any(x => x.Equals("/CreateEventSource", StringComparison.InvariantCultureIgnoreCase));
+            if (shouldCreateEventSource)
             {
                 try
                 {
@@ -149,7 +151,7 @@ namespace NAPS2.Util
         /// </summary>
         public void ExitIfRedundant()
         {
-            if (sti.ShouldRegister || sti.ShouldUnregister)
+            if (sti.ShouldRegister || sti.ShouldUnregister || shouldCreateEventSource)
             {
                 // Was just started by the user to (un)register STI
                 Environment.Exit(returnCode);

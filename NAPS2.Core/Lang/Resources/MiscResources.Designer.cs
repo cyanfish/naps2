@@ -475,6 +475,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email PDF.
+        /// </summary>
+        internal static string EmailPdf {
+            get {
+                return ResourceManager.GetString("EmailPdf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email PDF Progress.
         /// </summary>
         internal static string EmailPdfProgress {
@@ -934,6 +943,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print.
+        /// </summary>
+        internal static string Print {
+            get {
+                return ResourceManager.GetString("Print", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} / {1}.
         /// </summary>
         internal static string ProgressFormat {
@@ -988,11 +1006,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save Images.
+        /// </summary>
+        internal static string SaveImages {
+            get {
+                return ResourceManager.GetString("SaveImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Images Progress.
         /// </summary>
         internal static string SaveImagesProgress {
             get {
                 return ResourceManager.GetString("SaveImagesProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save PDF.
+        /// </summary>
+        internal static string SavePdf {
+            get {
+                return ResourceManager.GetString("SavePdf", resourceCulture);
             }
         }
         

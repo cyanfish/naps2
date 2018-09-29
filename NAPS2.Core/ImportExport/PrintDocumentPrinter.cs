@@ -5,6 +5,8 @@ using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
@@ -105,6 +107,14 @@ namespace NAPS2.ImportExport
                     };
                     printDocument.PrinterSettings = printerSettings;
                     printDocument.Print();
+                    
+                    Log.Event(EventType.Print, new EventParams
+                    {
+                        Name = MiscResources.Print,
+                        Pages = snapshots.Count,
+                        DeviceName = printDocument.PrinterSettings.PrinterName
+                    });
+
                     return true;
                 }
                 finally
