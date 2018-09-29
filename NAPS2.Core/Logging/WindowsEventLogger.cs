@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Forms;
 using NAPS2.Config;
-using NAPS2.Util;
 
 namespace NAPS2.Logging
 {
@@ -20,28 +18,17 @@ namespace NAPS2.Logging
             this.appConfigManager = appConfigManager;
         }
 
-        public void CreateEventSource(bool silent)
+        public void CreateEventSource()
         {
             if (!EventLog.SourceExists(SOURCE_NAME))
             {
                 EventLog.CreateEventSource(SOURCE_NAME, LOG_NAME);
-                if (!silent)
-                {
-                    MessageBox.Show(@"Successfully created event source.");
-                }
-            }
-            else
-            {
-                if (!silent)
-                {
-                    MessageBox.Show(@"Event source already exists.");
-                }
             }
         }
 
         public void LogEvent(EventType eventType, EventParams eventParams)
         {
-            // TODO: AppConfig check
+            if ((eventType & appConfigManager.Config.EventLogging) != eventType) return;
             try
             {
                 EventLog.WriteEntry(SOURCE_NAME, eventParams.ToString(), EventLogEntryType.Information);

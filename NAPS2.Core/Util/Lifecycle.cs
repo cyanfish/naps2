@@ -17,13 +17,15 @@ namespace NAPS2.Util
     {
         private readonly StillImage sti;
         private readonly AppConfigManager appConfigManager;
+        private readonly WindowsEventLogger windowsEventLogger;
 
         private int returnCode;
 
-        public Lifecycle(StillImage sti, AppConfigManager appConfigManager)
+        public Lifecycle(StillImage sti, AppConfigManager appConfigManager, WindowsEventLogger windowsEventLogger)
         {
             this.sti = sti;
             this.appConfigManager = appConfigManager;
+            this.windowsEventLogger = windowsEventLogger;
         }
 
         /// <summary>
@@ -73,13 +75,13 @@ namespace NAPS2.Util
                 {
                     if (ElevationRequired(sti.Register))
                     {
-                        Out(@"Successfully registered STI. A reboot may be needed.");
+                        Out("Successfully registered STI. A reboot may be needed.");
                     }
                 }
                 catch (Exception ex)
                 {
                     Log.ErrorException("Error registering STI", ex);
-                    Out(@"Error registering STI. Maybe run as administrator?");
+                    Out("Error registering STI. Maybe run as administrator?");
                     returnCode = 1;
                 }
             }
@@ -89,13 +91,30 @@ namespace NAPS2.Util
                 {
                     if (ElevationRequired(sti.Unregister))
                     {
-                        Out(@"Successfully unregistered STI. A reboot may be needed.");
+                        Out("Successfully unregistered STI. A reboot may be needed.");
                     }
                 }
                 catch (Exception ex)
                 {
                     Log.ErrorException("Error unregistering STI", ex);
-                    Out(@"Error unregistering STI. Maybe run as administrator?");
+                    Out("Error unregistering STI. Maybe run as administrator?");
+                    returnCode = 1;
+                }
+            }
+
+            if (args.Any(x => x.Equals("/CreateEventSource", StringComparison.InvariantCultureIgnoreCase)))
+            {
+                try
+                {
+                    if (ElevationRequired(windowsEventLogger.CreateEventSource))
+                    {
+                        Out("Successfully created event source.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorException("Error creating event source", ex);
+                    Out("Error creating event source. Maybe run as administrator?");
                     returnCode = 1;
                 }
             }

@@ -30,6 +30,7 @@
   <OcrDefaultMode>Fast</OcrDefaultMode>
   <OcrDefaultAfterScanning>true</OcrDefaultAfterScanning>
   <ForcePdfCompat>Default</ForcePdfCompat>
+  <EventLogging>None</EventLogging>
   <DefaultProfileSettings>
     <DriverName></DriverName>
     <!--
