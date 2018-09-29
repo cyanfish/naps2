@@ -16,6 +16,7 @@ namespace NAPS2.WinForms
         private readonly ScannedImageRenderer scannedImageRenderer;
 
         protected Bitmap workingImage, workingImage2;
+        private bool initComplete;
         private bool previewOutOfDate;
         private bool working;
         private Timer previewTimer;
@@ -98,30 +99,42 @@ namespace NAPS2.WinForms
             workingImage2 = (Bitmap)workingImage.Clone();
 
             InitTransform();
+            lock (this)
+            {
+                initComplete = true;
+            }
+
             UpdatePreviewBox();
         }
-        
+
         protected void UpdatePreviewBox()
         {
             if (previewTimer == null)
             {
-                previewTimer = new Timer((obj) =>
+                previewTimer = new Timer(_ =>
                 {
-                    if (previewOutOfDate && !working)
+                    lock (this)
                     {
+                        if (!initComplete || !IsHandleCreated || !previewOutOfDate || working) return;
                         working = true;
                         previewOutOfDate = false;
-                        var bitmap = RenderPreview();
-                        SafeInvoke(() =>
-                        {
-                            PictureBox.Image?.Dispose();
-                            PictureBox.Image = bitmap;
-                        });
+                    }
+                    var bitmap = RenderPreview();
+                    SafeInvoke(() =>
+                    {
+                        PictureBox.Image?.Dispose();
+                        PictureBox.Image = bitmap;
+                    });
+                    lock (this)
+                    {
                         working = false;
                     }
                 }, null, 0, 100);
             }
-            previewOutOfDate = true;
+            lock (this)
+            {
+                previewOutOfDate = true;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -18,6 +18,8 @@ namespace NAPS2.WinForms
         private Point dragStartCoords;
         private LayoutManager lm;
 
+        private int originalWidth, originalHeight;
+
         public FCrop(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
             : base(changeTracker, scannedImageRenderer)
         {
@@ -31,6 +33,8 @@ namespace NAPS2.WinForms
                     .HeightTo(() => (int)(GetImageHeightRatio() * pictureBox.Height))
                     .TopTo(() => (int)((1 - GetImageHeightRatio()) * pictureBox.Height / 2))
                 .Activate();
+
+            originalWidth = originalHeight = 1000;
         }
 
         public CropTransform CropTransform { get; private set; }
@@ -41,25 +45,25 @@ namespace NAPS2.WinForms
 
         protected override Bitmap RenderPreview()
         {
-            var bitmap = new Bitmap(workingImage2.Width, workingImage2.Height);
+            var bitmap = new Bitmap(originalWidth, originalHeight);
             using (var g = Graphics.FromImage(bitmap))
             {
                 g.Clear(Color.Transparent);
                 var attrs = new ImageAttributes();
                 attrs.SetColorMatrix(new ColorMatrix { Matrix33 = 0.5f });
                 g.DrawImage(workingImage2,
-                    new Rectangle(0, 0, workingImage2.Width, workingImage2.Height),
+                    new Rectangle(0, 0, originalWidth, originalHeight),
                     0,
                     0,
-                    workingImage2.Width,
-                    workingImage2.Height,
+                    originalWidth,
+                    originalHeight,
                     GraphicsUnit.Pixel,
                     attrs);
                 var cropBorderRect = new Rectangle(CropTransform.Left, CropTransform.Top,
-                    workingImage2.Width - CropTransform.Left - CropTransform.Right,
-                    workingImage2.Height - CropTransform.Top - CropTransform.Bottom);
+                    originalWidth - CropTransform.Left - CropTransform.Right,
+                    originalHeight - CropTransform.Top - CropTransform.Bottom);
                 g.SetClip(cropBorderRect);
-                g.DrawImage(workingImage2, new Rectangle(0, 0, workingImage2.Width, workingImage2.Height));
+                g.DrawImage(workingImage2, new Rectangle(0, 0, originalWidth, originalHeight));
                 g.ResetClip();
                 g.DrawRectangle(new Pen(Color.Black, 2.0f), cropBorderRect);
             }
@@ -69,6 +73,8 @@ namespace NAPS2.WinForms
 
         protected override void InitTransform()
         {
+            originalWidth = workingImage.Width;
+            originalHeight = workingImage.Height;
             if (_lastTransform != null && _lastSize == workingImage.Size)
             {
                 CropTransform = _lastTransform;
@@ -85,8 +91,8 @@ namespace NAPS2.WinForms
         {
             CropTransform = new CropTransform
             {
-                OriginalHeight = workingImage.Height,
-                OriginalWidth = workingImage.Width
+                OriginalHeight = originalHeight,
+                OriginalWidth = originalWidth
             };
         }
 
@@ -102,7 +108,7 @@ namespace NAPS2.WinForms
             {
                 return 1;
             }
-            double imageAspect = workingImage.Width / (double)workingImage.Height;
+            double imageAspect = originalWidth / (double)originalHeight;
             double pboxAspect = pictureBox.Width / (double)pictureBox.Height;
             if (imageAspect > pboxAspect)
             {
@@ -117,7 +123,7 @@ namespace NAPS2.WinForms
             {
                 return 1;
             }
-            double imageAspect = workingImage.Width / (double)workingImage.Height;
+            double imageAspect = originalWidth / (double)originalHeight;
             double pboxAspect = pictureBox.Width / (double)pictureBox.Height;
             if (pboxAspect > imageAspect)
             {
@@ -128,12 +134,12 @@ namespace NAPS2.WinForms
 
         private void UpdateCropBounds()
         {
-            tbLeft.Maximum = tbRight.Maximum = workingImage.Width;
-            tbTop.Maximum = tbBottom.Maximum = workingImage.Height;
+            tbLeft.Maximum = tbRight.Maximum = originalWidth;
+            tbTop.Maximum = tbBottom.Maximum = originalHeight;
 
             tbLeft.Value = tbTop.Value = 0;
-            tbRight.Value = workingImage.Width;
-            tbTop.Value = workingImage.Height;
+            tbRight.Value = originalWidth;
+            tbTop.Value = originalHeight;
         }
 
         private void UpdateTransform()
@@ -141,11 +147,11 @@ namespace NAPS2.WinForms
             CropTransform = new CropTransform
             {
                 Left = Math.Min(tbLeft.Value, tbRight.Value),
-                Right = workingImage.Width - Math.Max(tbLeft.Value, tbRight.Value),
+                Right = originalWidth - Math.Max(tbLeft.Value, tbRight.Value),
                 Bottom = Math.Min(tbTop.Value, tbBottom.Value),
-                Top = workingImage.Height - Math.Max(tbTop.Value, tbBottom.Value),
-                OriginalHeight = workingImage.Height,
-                OriginalWidth = workingImage.Width
+                Top = originalHeight - Math.Max(tbTop.Value, tbBottom.Value),
+                OriginalHeight = originalHeight,
+                OriginalWidth = originalWidth
             };
             UpdatePreviewBox();
         }
@@ -192,13 +198,13 @@ namespace NAPS2.WinForms
                 }
                 if (dragEndCoords.Y > dragStartCoords.Y)
                 {
-                    tbTop.Value = workingImage.Height - dragStartCoords.Y;
-                    tbBottom.Value = workingImage.Height - dragEndCoords.Y;
+                    tbTop.Value = originalHeight - dragStartCoords.Y;
+                    tbBottom.Value = originalHeight - dragEndCoords.Y;
                 }
                 else
                 {
-                    tbTop.Value = workingImage.Height - dragEndCoords.Y;
-                    tbBottom.Value = workingImage.Height - dragStartCoords.Y;
+                    tbTop.Value = originalHeight - dragEndCoords.Y;
+                    tbBottom.Value = originalHeight - dragStartCoords.Y;
                 }
                 UpdateTransform();
             }
@@ -208,7 +214,7 @@ namespace NAPS2.WinForms
         {
             double px = point.X - 1;
             double py = point.Y - 1;
-            double imageAspect = workingImage.Width / (double)workingImage.Height;
+            double imageAspect = originalWidth / (double)originalHeight;
             double pboxWidth = (pictureBox.Width - 2);
             double pboxHeight = (pictureBox.Height - 2);
             double pboxAspect = pboxWidth / pboxHeight;
@@ -224,10 +230,10 @@ namespace NAPS2.WinForms
                 var emptyHeight = ((1 - pboxAspect / imageAspect) / 2 * pboxHeight);
                 py = (imageAspect / pboxAspect * (py - emptyHeight));
             }
-            double x = px / pboxWidth * workingImage.Width;
-            double y = py / pboxHeight * workingImage.Height;
-            x = Math.Max(Math.Min(x, workingImage.Width), 0);
-            y = Math.Max(Math.Min(y, workingImage.Height), 0);
+            double x = px / pboxWidth * originalWidth;
+            double y = py / pboxHeight * originalHeight;
+            x = Math.Max(Math.Min(x, originalWidth), 0);
+            y = Math.Max(Math.Min(y, originalHeight), 0);
             return new Point((int)Math.Round(x), (int)Math.Round(y));
         }
     }
