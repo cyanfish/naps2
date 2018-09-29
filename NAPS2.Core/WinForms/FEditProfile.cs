@@ -42,6 +42,8 @@ namespace NAPS2.WinForms
             this.appConfigManager = appConfigManager;
             InitializeComponent();
             btnNetwork.Left = btnChooseDevice.Right + 6;
+            // TODO: Remove this to reenable
+            btnNetwork.Visible = false;
 
             AddEnumItems<ScanHorizontalAlign>(cmbAlign);
             AddEnumItems<ScanBitDepth>(cmbDepth);

@@ -90,7 +90,7 @@ function Publish-NAPS2-Standalone {
         mkdir $LangDir
         cp ($BinDir + "$LanguageCode\NAPS2.Core.resources.dll") $LangDir
     }
-    foreach ($Dir in ($BinDir, $CmdBinDir, $ServerBinDir)) {
+    foreach ($Dir in ($BinDir, $CmdBinDir)) {
         foreach ($File in (Get-ChildItem $Dir | where { $_.Name -match '(?<!vshost)\.exe(\.config)?$' })) {
             cp $File.FullName $AppDir
         }
