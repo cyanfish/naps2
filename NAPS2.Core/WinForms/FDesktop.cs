@@ -1934,12 +1934,12 @@ namespace NAPS2.WinForms
 
         #region Drag/Drop
 
-        private void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
+        private async void thumbnailList1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             // Provide drag data
             if (SelectedIndices.Any())
             {
-                var ido = GetDataObjectForImages(SelectedImages, false);
+                var ido = await GetDataObjectForImages(SelectedImages, false);
                 DoDragDrop(ido, DragDropEffects.Move | DragDropEffects.Copy);
             }
         }
