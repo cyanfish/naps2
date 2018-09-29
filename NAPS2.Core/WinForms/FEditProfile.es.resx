@@ -64,7 +64,7 @@
     <value>Controlador WIA</value>
   </data>
   <data name="rdSANE.Text" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>Controlador SANE</value>
   </data>
   <data name="cbAutoSave.Text" xml:space="preserve">
     <value>Activar autoguardado</value>

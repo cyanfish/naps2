@@ -234,14 +234,23 @@
   <data name="RecoveryProgress" xml:space="preserve">
     <value>Herstelvoortgang</value>
   </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Afbeeldingen opslaan</value>
+  </data>
   <data name="SaveImagesProgress" xml:space="preserve">
     <value>Voortgang afbeeldingen opslaan</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>PDF opslaan</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
     <value>PDF voortgang bewaren</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
     <value>Bezig met opslaan {0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Afdrukken</value>
   </data>
   <data name="Copying" xml:space="preserve">
     <value>Bezig met kopiëren...</value>
@@ -251,6 +260,9 @@
   </data>
   <data name="Importing" xml:space="preserve">
     <value>Bezig met importeren...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>PDF mailen</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
     <value>E-mail PDF voortgang</value>
@@ -365,5 +377,14 @@
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>An error occurred when trying to send the email.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
   </data>
 </root>

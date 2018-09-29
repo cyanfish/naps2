@@ -31,13 +31,13 @@
     <value>Marcadores de posición</value>
   </data>
   <data name="lblProvider.Text" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>No se ha seleccionado ningún proveedor.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>Cambiar</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Provider</value>
+    <value>Proveedor</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configuración del correo electrónico</value>

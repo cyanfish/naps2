@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="labelCopyright.Text" xml:space="preserve">
-    <value>Copyright 2009, 2012-2018 NAPS2 Contributors</value>
+    <value>Copyright 2009, 2012-2018 Colaboradores NAPS2</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
     <value>&amp;Aceptar</value>
@@ -28,7 +28,7 @@
     <value>http://www.fatcow.com/free-icons</value>
   </data>
   <data name="cbCheckForUpdates.Text" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>Comprobar si hay actualizaciones</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Acerca de</value>

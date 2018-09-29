@@ -34,10 +34,10 @@
     <value>No provider selected.</value>
   </data>
   <data name="btnChangeProvider.Text" xml:space="preserve">
-    <value>Change</value>
+    <value>Ndrysho</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Provider</value>
+    <value>Siguruesi i shërbimit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Cilësimet e emailit</value>

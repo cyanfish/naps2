@@ -166,7 +166,7 @@
     <value>Ndryshimet e pa ruajtura</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Veprimi në progres</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Po skanon faqen {0}</value>
@@ -234,14 +234,23 @@
   <data name="RecoveryProgress" xml:space="preserve">
     <value>Progresi i rekuperimit</value>
   </data>
+  <data name="SaveImages" xml:space="preserve">
+    <value>Ruaj imazhet</value>
+  </data>
   <data name="SaveImagesProgress" xml:space="preserve">
     <value>Progresi i ruajtjes së imazheve</value>
+  </data>
+  <data name="SavePdf" xml:space="preserve">
+    <value>Ruaj PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
     <value>Progresi i ruajtjes së PDF</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
     <value>Po ruan {0}...</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Printo</value>
   </data>
   <data name="Copying" xml:space="preserve">
     <value>Po kopjon...</value>
@@ -251,6 +260,9 @@
   </data>
   <data name="Importing" xml:space="preserve">
     <value>Po importon...</value>
+  </data>
+  <data name="EmailPdf" xml:space="preserve">
+    <value>Dërgo PDF me email</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
     <value>Progresi i email të PDF</value>
@@ -316,7 +328,7 @@
     <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Dhuro</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 is completely free. Consider making a donation.</value>
@@ -331,39 +343,48 @@
     <value>The selected driver is not supported on this system.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Progresi i OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Po ekzekuton OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Progresi i përditësimit</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Po përditëson...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
     <value>No updates available.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Po kontrollon...</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occured when trying to install the update.</value>
+    <value>Ndodhi një gabim gjatë instalimit të përditësimit .</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Instalo {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Një përditësim i disponueshëm.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Ndodhi një gabim gjatë provës për të autorizuar.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Po ngarkon emailin...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Ndodhi një gabim gjatë provës për të dërguar email.</value>
+  </data>
+  <data name="Naps2Server" xml:space="preserve">
+    <value>NAPS2 Server</value>
+  </data>
+  <data name="ServerStarted" xml:space="preserve">
+    <value>Server started</value>
+  </data>
+  <data name="ListeningOnPort" xml:space="preserve">
+    <value>Listening on port {0}</value>
   </data>
 </root>

@@ -46,13 +46,13 @@
     <value>800 dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>SMTP e personalizuar</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Hyrja nga Uebi në Outlook</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
     <value>No provider selected.</value>
@@ -124,7 +124,7 @@
     <value>Xham</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Automatike</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -142,7 +142,7 @@
     <value>E vjetër (vetëm ndërfaqja e përdoruesit origjinale)</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Alternative Transfer</value>
+    <value>Transfertë alternative</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>DSM e vjetër</value>

@@ -16,6 +16,6 @@
     <value>&amp;Cancelar</value>
   </data>
   <data name="btnRunInBG.Text" xml:space="preserve">
-    <value>Run in &amp;Background</value>
+    <value>&amp;Ejecutar en segundo plano</value>
   </data>
 </root>
