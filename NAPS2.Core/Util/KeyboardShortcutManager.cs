@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Logging;
 
 namespace NAPS2.Util
 {

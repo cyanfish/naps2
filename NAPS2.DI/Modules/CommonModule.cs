@@ -23,7 +23,7 @@ using NAPS2.Worker;
 using Ninject;
 using Ninject.Modules;
 using NLog;
-using ILogger = NAPS2.Util.ILogger;
+using ILogger = NAPS2.Logging.ILogger;
 
 namespace NAPS2.DI.Modules
 {

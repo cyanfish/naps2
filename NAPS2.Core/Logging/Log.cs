@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Logging;
+using NAPS2.Util;
 
-namespace NAPS2.Util
+namespace NAPS2.Logging
 {
     /// <summary>
     /// Logging functionality.

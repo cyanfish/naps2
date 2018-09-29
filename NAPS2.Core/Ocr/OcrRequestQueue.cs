@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
 using NAPS2.Util;

@@ -12,6 +12,7 @@ using System.Threading;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Zip;
 using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Recovery;
 using NAPS2.Util;

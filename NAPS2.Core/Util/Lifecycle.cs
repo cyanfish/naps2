@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Windows.Forms;
 using NAPS2.Config;
+using NAPS2.Logging;
 
 namespace NAPS2.Util
 {

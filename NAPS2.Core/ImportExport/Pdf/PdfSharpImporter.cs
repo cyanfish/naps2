@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Util;

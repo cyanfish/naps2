@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Util;
 using WIA;

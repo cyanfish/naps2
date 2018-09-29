@@ -5,10 +5,11 @@ using System.Linq;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using ILogger = NAPS2.Logging.ILogger;
 
 namespace NAPS2.DI
 {
-    public class NLogLogger : Util.ILogger
+    public class NLogLogger : ILogger
     {
         private readonly Logger logger;
 

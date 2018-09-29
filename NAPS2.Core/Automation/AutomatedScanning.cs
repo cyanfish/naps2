@@ -13,6 +13,7 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.ConsoleResources;
+using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;

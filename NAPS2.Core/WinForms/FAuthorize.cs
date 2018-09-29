@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.ImportExport.Email.Oauth;
 using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms

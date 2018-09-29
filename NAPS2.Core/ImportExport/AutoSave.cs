@@ -7,6 +7,7 @@ using NAPS2.Config;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Scan;

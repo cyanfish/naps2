@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.Platform;
 using NAPS2.Util;
 using NAPS2.Worker;
