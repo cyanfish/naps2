@@ -8,8 +8,10 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
+using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Operation;
+using NAPS2.Platform;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Sane;
@@ -18,6 +20,7 @@ using NAPS2.Scan.Wia;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using NAPS2.Worker;
+using Ninject;
 using Ninject.Modules;
 using NLog;
 using ILogger = NAPS2.Util.ILogger;
@@ -76,6 +79,10 @@ namespace NAPS2.DI.Modules
             Bind<IAutoSave>().To<AutoSave>();
 
             Log.Logger = new NLogLogger();
+            if (PlatformCompat.System.CanUseWin32)
+            {
+                Log.EventLogger = Kernel.Get<WindowsEventLogger>();
+            }
 #if DEBUG
             Debug.Listeners.Add(new NLogTraceListener());
 #endif
