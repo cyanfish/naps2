@@ -137,9 +137,10 @@ namespace NAPS2.WinForms
             tbLeft.Maximum = tbRight.Maximum = originalWidth;
             tbTop.Maximum = tbBottom.Maximum = originalHeight;
 
-            tbLeft.Value = tbTop.Value = 0;
-            tbRight.Value = originalWidth;
-            tbTop.Value = originalHeight;
+            tbLeft.Value = CropTransform.Left;
+            tbBottom.Value = CropTransform.Bottom;
+            tbRight.Value = originalWidth - CropTransform.Right;
+            tbTop.Value = originalHeight - CropTransform.Top;
         }
 
         private void UpdateTransform()
