@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Localization", "NAPS2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Server", "NAPS2.Server\NAPS2.Server.csproj", "{BC0E3031-6C00-4707-A424-4FF04425D719}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NAPS2.WIA", "C:\Users\Ben\Documents\Visual Studio 2017\Projects\NAPS2\NAPS2.WIA\NAPS2.WIA.vcxproj", "{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -138,6 +140,16 @@ Global
 		{BC0E3031-6C00-4707-A424-4FF04425D719}.InstallerMSI|x86.Build.0 = InstallerMSI|Any CPU
 		{BC0E3031-6C00-4707-A424-4FF04425D719}.Standalone|x86.ActiveCfg = Standalone|Any CPU
 		{BC0E3031-6C00-4707-A424-4FF04425D719}.Standalone|x86.Build.0 = Standalone|Any CPU
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Debug|x86.ActiveCfg = Debug|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Debug|x86.Build.0 = Debug|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.DebugLang|x86.ActiveCfg = Debug|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.DebugLang|x86.Build.0 = Debug|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerEXE|x86.ActiveCfg = Release|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerEXE|x86.Build.0 = Release|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerMSI|x86.ActiveCfg = Release|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerMSI|x86.Build.0 = Release|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Standalone|x86.ActiveCfg = Release|Win32
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Standalone|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
