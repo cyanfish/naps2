@@ -27,5 +27,8 @@ namespace NAPS2.Scan.Wia.Native
 
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint Download(IntPtr transfer, int flags, [MarshalAs(UnmanagedType.FunctionPtr)] TransferStatusCallback func);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint CancelTransfer(IntPtr transfer);
     }
 }

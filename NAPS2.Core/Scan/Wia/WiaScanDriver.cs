@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAPS2.Lang.Resources;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
@@ -20,8 +21,6 @@ namespace NAPS2.Scan.Wia
     public class WiaScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "wia";
-
-        private const int MAX_RETRIES = 5;
 
         private readonly IBlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
@@ -41,187 +40,203 @@ namespace NAPS2.Scan.Wia
 
         public override bool IsSupported => PlatformCompat.System.IsWiaDriverSupported;
 
-        protected override ScanDevice PromptForDeviceInternal() => WiaApi.PromptForScanDevice();
-
-        protected override List<ScanDevice> GetDeviceListInternal() => WiaApi.GetScanDeviceList();
+        protected override List<ScanDevice> GetDeviceListInternal()
+        {
+            using (var deviceManager = new WiaDeviceManager())
+            {
+                return deviceManager.GetDevices().Select(x => new ScanDevice(x.Id(), x.Name())).ToList();
+            }
+        }
 
         protected override async Task ScanInternal(ScannedImageSource.Concrete source)
         {
-            using (var deviceManager = new WiaDeviceManager())
-            using (var device = deviceManager.FindDevice(ScanProfile.Device.ID))
-            using (var item = device.FindSubItem("Feeder"))
-            using (var transfer = item.StartTransfer())
+            try
             {
-                // TODO: Props
-                NativeWiaMethods.SetItemProperty(item.Handle, WiaApi.DeviceProperties.PAGES, 0);
-
-                int pageNumber = 1;
-                transfer.PageScanned += (sender, args) =>
+                using (var deviceManager = new WiaDeviceManager())
+                using (var device = deviceManager.FindDevice(ScanProfile.Device.ID))
+                using (var item = device.FindSubItem("Feeder"))
+                using (var transfer = item.StartTransfer())
                 {
-                    using (args.Stream)
-                    using (Image output = Image.FromStream(args.Stream))
-                    using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+                    if (ScanProfile.PaperSource != ScanSource.Glass && !device.SupportsFeeder())
                     {
-                        if (blankDetector.ExcludePage(result, ScanProfile))
-                        {
-                            return;
-                        }
-
-                        ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
-                        var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                        scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber++);
-                        string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
-                        scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
-                        source.Put(image);
+                        throw new NoFeederSupportException();
                     }
-                };
-                transfer.Download();
-            }
-            return;
 
-            using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice))
-            {
-                bool supportsFeeder = eventLoop.GetSync(wia => WiaApi.DeviceSupportsFeeder(wia.Device));
-                if (ScanProfile.PaperSource != ScanSource.Glass && !supportsFeeder)
-                {
-                    throw new NoFeederSupportException();
-                }
-                bool supportsDuplex = eventLoop.GetSync(wia => WiaApi.DeviceSupportsDuplex(wia.Device));
-                if (ScanProfile.PaperSource == ScanSource.Duplex && !supportsDuplex)
-                {
-                    throw new NoDuplexSupportException();
-                }
-                int pageNumber = 1;
-                int retryCount = 0;
-                bool retry = false;
-                bool done = false;
-                do
-                {
-                    ScannedImage image;
-                    try
+                    if (ScanProfile.PaperSource == ScanSource.Duplex && !device.SupportsDuplex())
                     {
-                        if (pageNumber > 1 && ScanProfile.WiaDelayBetweenScans)
-                        {
-                            int delay = (int)(ScanProfile.WiaDelayBetweenScansSeconds.Clamp(0, 30) * 1000);
-                            Thread.Sleep(delay);
-                        }
-                        (image, done) = await TransferImage(eventLoop, pageNumber);
-                        pageNumber++;
-                        retryCount = 0;
-                        retry = false;
+                        throw new NoDuplexSupportException();
                     }
-                    catch (ScanDriverException e)
-                    {
-                        if (ScanProfile.WiaRetryOnFailure && e.InnerException is COMException comError
-                            && (uint)comError.ErrorCode == 0x80004005 && retryCount < MAX_RETRIES)
-                        {
-                            Thread.Sleep(1000);
-                            retryCount += 1;
-                            retry = true;
-                            continue;
-                        }
-                        throw;
-                    }
-                    if (image != null)
-                    {
-                        source.Put(image);
-                    }
-                } while (!CancelToken.IsCancellationRequested && (retry || !done && ScanProfile.PaperSource != ScanSource.Glass));
-            }
-        }
 
-        private async Task<(ScannedImage, bool)> TransferImage(WiaBackgroundEventLoop eventLoop, int pageNumber)
-        {
-            return await Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    ChaosMonkey.MaybeError(0, new COMException("Fail", -2147467259));
-                    using (var stream = DoTransfer(pageNumber, eventLoop, WiaApi.Formats.BMP))
-                    {
-                        if (stream == null)
-                        {
-                            return (null, true);
-                        }
+                    // TODO: Test 64-bit wia and figure out if I need the worker
 
-                        using (Image output = Image.FromStream(stream))
+                    // TODO: Delete the delay/retry options in ScanProfile
+
+                    // TODO: Props
+                    ConfigureDeviceProps(device);
+                    ConfigureItemProps(device, item);
+                    // TODO: Format BMP "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}"
+
+                    // TODO: Arrrggg... WIA native UI is an option I'm supposed to support.
+                    item.Property(WiaPropertyId.IPS_PAGES).Value = 0;
+
+                    // TODO: Progress form (operation?)
+                    // TODO: Use ScanParams.Modal as needed
+
+                    int pageNumber = 1;
+                    transfer.PageScanned += (sender, args) =>
+                    {
+                        using (args.Stream)
+                        using (Image output = Image.FromStream(args.Stream))
+                        using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
                         {
-                            using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+                            if (blankDetector.ExcludePage(result, ScanProfile))
                             {
-                                if (blankDetector.ExcludePage(result, ScanProfile))
-                                {
-                                    return (null, false);
-                                }
-
-                                ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
-                                var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                                scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber);
-                                string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
-                                scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
-                                return (image, false);
+                                return;
                             }
-                        }
-                    }
-                }
-                catch (NoPagesException)
-                {
-                    if (ScanProfile.PaperSource != ScanSource.Glass && pageNumber == 1)
-                    {
-                        // No pages were in the feeder, so show the user an error
-                        throw new NoPagesException();
-                    }
 
-                    // At least one page was scanned but now the feeder is empty, so exit normally
-                    return (null, true);
+                            ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
+                            var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                            scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber++);
+                            string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
+                            scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
+                            source.Put(image);
+                        }
+                    };
+                    using (CancelToken.Register(transfer.Cancel))
+                    {
+                        // TODO: Maybe wrap the entire thing in a task; some parts might hang
+                        await Task.Factory.StartNew(transfer.Download, TaskCreationOptions.LongRunning);
+                    }
                 }
-            }, TaskCreationOptions.LongRunning);
+            }
+            catch (WiaException e)
+            {
+                ThrowDeviceError(e);
+            }
         }
 
-        private Stream DoTransfer(int pageNumber, WiaBackgroundEventLoop eventLoop, string format)
+        private void ConfigureItemProps(WiaItem device, WiaItem item)
         {
-            var invoker = (FormBase)DialogParent;
-            if (eventLoop.GetSync(wia => wia.Item) == null)
+            switch (ScanProfile.BitDepth)
             {
-                return null;
+                case ScanBitDepth.Grayscale:
+                    item.SetProperty(WiaPropertyId.IPA_DATATYPE, 2);
+                    break;
+                case ScanBitDepth.C24Bit:
+                    item.SetProperty(WiaPropertyId.IPA_DATATYPE, 3);
+                    break;
+                case ScanBitDepth.BlackWhite:
+                    item.SetProperty(WiaPropertyId.IPA_DATATYPE, 0);
+                    break;
             }
-            if (ScanParams.NoUI)
+
+            int maxResolution = Math.Min(item.GetPropertyMax(WiaPropertyId.IPS_YRES), item.GetPropertyMax(WiaPropertyId.IPS_XRES));
+            int resolution = Math.Min(ScanProfile.Resolution.ToIntDpi(), maxResolution);
+            item.SetProperty(WiaPropertyId.IPS_YRES, resolution);
+            item.SetProperty(WiaPropertyId.IPS_XRES, resolution);
+
+            PageDimensions pageDimensions = ScanProfile.PageSize.PageDimensions() ?? ScanProfile.CustomPageSize;
+            if (pageDimensions == null)
             {
-                return eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, false));
+                throw new InvalidOperationException("No page size specified");
             }
-            if (pageNumber == 1)
+            int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * resolution / 1000;
+            int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
+
+            int horizontalSize =
+                (int)device.Property(ScanProfile.PaperSource == ScanSource.Glass
+                    ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
+                    : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE).Value;
+            int verticalSize =
+                (int)device.Property(ScanProfile.PaperSource == ScanSource.Glass
+                    ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
+                    : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE).Value;
+            
+            int pagemaxwidth = horizontalSize * resolution / 1000;
+            int pagemaxheight = verticalSize * resolution / 1000;
+
+            int horizontalPos = 0;
+            if (ScanProfile.PageAlign == ScanHorizontalAlign.Center)
+                horizontalPos = (pagemaxwidth - pageWidth) / 2;
+            else if (ScanProfile.PageAlign == ScanHorizontalAlign.Left)
+                horizontalPos = (pagemaxwidth - pageWidth);
+
+            pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
+            pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
+
+            if (ScanProfile.WiaOffsetWidth)
             {
-                // The only downside of the common dialog is that it steals focus.
-                // If this is the first page, then the user has just pressed the scan button, so that's not
-                // an issue and we can use it and get the benefits of progress display and immediate cancellation.
-                return ScanParams.Modal
-                    ? eventLoop.GetSync(wia => invoker.InvokeGet(() => WiaApi.Transfer(wia, format, true)))
-                    : eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, true));
-            }
-            // For subsequent pages, we don't want to take focus in case the user has switched applications,
-            // so we use the custom form.
-            var form = formFactory.Create<FScanProgress>();
-            var waitHandle = new AutoResetEvent(false);
-            form.PageNumber = pageNumber;
-            form.Transfer = () => eventLoop.GetSync(wia => WiaApi.Transfer(wia, format, false));
-            form.Closed += (sender, args) => waitHandle.Set();
-            if (ScanParams.Modal)
-            {
-                invoker.Invoke(() => form.ShowDialog(DialogParent));
+                item.SetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth + horizontalPos);
+                item.SetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
             }
             else
             {
-                invoker.Invoke(() => form.Show(DialogParent));
+                item.SetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth);
+                item.SetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
             }
-            waitHandle.WaitOne();
-            if (form.Exception != null)
+            item.SetProperty(WiaPropertyId.IPS_YEXTENT, pageHeight);
+
+            if (!ScanProfile.BrightnessContrastAfterScan)
             {
-                WiaApi.ThrowDeviceError(form.Exception);
+                item.SetPropertyRange(WiaPropertyId.IPS_CONTRAST, ScanProfile.Contrast, -1000, 1000);
+                item.SetPropertyRange(WiaPropertyId.IPS_BRIGHTNESS, ScanProfile.Brightness, -1000, 1000);
             }
-            if (form.DialogResult == DialogResult.Cancel)
+        }
+
+        private void ConfigureDeviceProps(WiaItem device)
+        {
+            if (ScanProfile.PaperSource != ScanSource.Glass && device.SupportsFeeder())
             {
-                return null;
+                device.SetProperty(WiaPropertyId.DPS_PAGES, 0);
             }
-            return form.ImageStream;
+
+            switch (ScanProfile.PaperSource)
+            {
+                // TODO: Also use this to select the device
+                case ScanSource.Glass:
+                    device.SetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FLATBED);
+                    break;
+                case ScanSource.Feeder:
+                    device.SetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER);
+                    break;
+                case ScanSource.Duplex:
+                    device.SetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.DUPLEX);
+                    break;
+            }
+        }
+
+        private void ThrowDeviceError(WiaException e)
+        {
+            // TODO: Figure out what error code FindDevice returns and throw DeviceNotFoundException
+            if (e.ErrorCode == WiaErrorCodes.NO_DEVICE_FOUND)
+            {
+                throw new NoDevicesFoundException();
+            }
+            if (e.ErrorCode == WiaErrorCodes.OUT_OF_PAPER)
+            {
+                throw new NoPagesException();
+            }
+            if (e.ErrorCode == WiaErrorCodes.OFFLINE)
+            {
+                throw new DeviceException(MiscResources.DeviceOffline);
+            }
+            if (e.ErrorCode == WiaErrorCodes.BUSY)
+            {
+                throw new DeviceException(MiscResources.DeviceBusy);
+            }
+            if (e.ErrorCode == WiaErrorCodes.COVER_OPEN)
+            {
+                throw new DeviceException(MiscResources.DeviceCoverOpen);
+            }
+            if (e.ErrorCode == WiaErrorCodes.PAPER_JAM)
+            {
+                throw new DeviceException(MiscResources.DevicePaperJam);
+            }
+            if (e.ErrorCode == WiaErrorCodes.WARMING_UP)
+            {
+                throw new DeviceException(MiscResources.DeviceWarmingUp);
+            }
+            throw new ScanDriverUnknownException(e);
         }
     }
 }

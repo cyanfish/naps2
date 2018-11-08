@@ -27,6 +27,7 @@ using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia;
+using NAPS2.Scan.Wia.Native;
 using NAPS2.Update;
 using NAPS2.Util;
 using NAPS2.Worker;
@@ -477,10 +478,13 @@ namespace NAPS2.WinForms
                 try
                 {
                     // Populate the device field automatically (because we can do that!)
-                    string deviceName = WiaApi.GetDeviceName(deviceID);
-                    editSettingsForm.CurrentDevice = new ScanDevice(deviceID, deviceName);
+                    using (var deviceManager = new WiaDeviceManager())
+                    using (var device = deviceManager.FindDevice(deviceID))
+                    {
+                        editSettingsForm.CurrentDevice = new ScanDevice(deviceID, device.Name());
+                    }
                 }
-                catch (DeviceNotFoundException)
+                catch (WiaException)
                 {
                 }
                 editSettingsForm.ShowDialog();

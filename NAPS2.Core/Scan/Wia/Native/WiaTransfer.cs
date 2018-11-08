@@ -30,6 +30,11 @@ namespace NAPS2.Scan.Wia.Native
             WiaException.Check(NativeWiaMethods.Download(Handle, 0, TransferStatusCallback));
         }
 
+        public void Cancel()
+        {
+            WiaException.Check(NativeWiaMethods.CancelTransfer(Handle));
+        }
+
         private void TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, IStream stream)
         {
             if (hresult != 0)

@@ -14,7 +14,7 @@ namespace NAPS2.Scan.Wia.Native
             }
         }
 
-        public WiaException(uint errorCode)
+        public WiaException(uint errorCode) : base($"WIA error code {errorCode:X}")
         {
             ErrorCode = errorCode;
         }
