@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
+using NAPS2.Scan.Wia.Native;
 
 namespace NAPS2.Scan
 {
@@ -116,6 +117,8 @@ namespace NAPS2.Scan
         public bool WiaDelayBetweenScans { get; set; }
 
         public double WiaDelayBetweenScansSeconds { get; set; }
+
+        public WiaVersion? WiaVersion { get; set; }
 
         public bool FlipDuplexedPages { get; set; }
 

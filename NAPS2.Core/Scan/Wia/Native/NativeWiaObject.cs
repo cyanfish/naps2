@@ -10,13 +10,15 @@ namespace NAPS2.Scan.Wia.Native
         private bool disposed;
         private IntPtr handle;
 
-        protected NativeWiaObject(IntPtr handle)
+        protected NativeWiaObject(WiaVersion version, IntPtr handle)
         {
+            Version = version;
             Handle = handle;
         }
 
-        protected NativeWiaObject()
+        protected NativeWiaObject(WiaVersion version)
         {
+            Version = version;
         }
 
         protected internal IntPtr Handle
@@ -28,6 +30,8 @@ namespace NAPS2.Scan.Wia.Native
             }
             protected set => handle = value;
         }
+
+        public WiaVersion Version { get; }
 
         private void EnsureNotDisposed()
         {

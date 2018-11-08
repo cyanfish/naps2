@@ -9,18 +9,32 @@ namespace NAPS2.Scan.Wia.Native
     internal static class NativeWiaMethods
     {
         [DllImport("NAPS2.WIA.dll")]
-        public static extern uint GetDeviceManager([Out] out IntPtr deviceManager);
+        public static extern uint GetDeviceManager1([Out] out IntPtr deviceManager);
 
         [DllImport("NAPS2.WIA.dll")]
-        public static extern uint GetDevice(IntPtr deviceManager, [MarshalAs(UnmanagedType.BStr)] string deviceId, [Out] out IntPtr device);
+        public static extern uint GetDeviceManager2([Out] out IntPtr deviceManager);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint GetDevice1(IntPtr deviceManager, [MarshalAs(UnmanagedType.BStr)] string deviceId, [Out] out IntPtr device);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint GetDevice2(IntPtr deviceManager, [MarshalAs(UnmanagedType.BStr)] string deviceId, [Out] out IntPtr device);
 
         public delegate void EnumDeviceCallback(IntPtr devicePropStorage);
 
         [DllImport("NAPS2.WIA.dll")]
-        public static extern uint EnumerateDevices(IntPtr deviceManager, [MarshalAs(UnmanagedType.FunctionPtr)] EnumDeviceCallback func);
+        public static extern uint EnumerateDevices1(IntPtr deviceManager, [MarshalAs(UnmanagedType.FunctionPtr)] EnumDeviceCallback func);
 
         [DllImport("NAPS2.WIA.dll")]
-        public static extern uint GetItem(IntPtr device, [MarshalAs(UnmanagedType.BStr)] string itemId, [Out] out IntPtr item);
+        public static extern uint EnumerateDevices2(IntPtr deviceManager, [MarshalAs(UnmanagedType.FunctionPtr)] EnumDeviceCallback func);
+
+        public delegate void EnumItemCallback(IntPtr item);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint EnumerateItems1(IntPtr item, [MarshalAs(UnmanagedType.FunctionPtr)] EnumItemCallback func);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint EnumerateItems2(IntPtr item, [MarshalAs(UnmanagedType.FunctionPtr)] EnumItemCallback func);
 
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint GetItemPropertyStorage(IntPtr item, out IntPtr propStorage);
@@ -40,14 +54,23 @@ namespace NAPS2.Scan.Wia.Native
         public static extern uint SetPropertyInt(IntPtr propStorage, int propId, int value);
 
         [DllImport("NAPS2.WIA.dll")]
-        public static extern uint StartTransfer(IntPtr item, [Out] out IntPtr transfer);
+        public static extern uint StartTransfer1(IntPtr item, [Out] out IntPtr transfer);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint StartTransfer2(IntPtr item, [Out] out IntPtr transfer);
 
         public delegate void TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, [MarshalAs(UnmanagedType.Interface)] IStream stream);
 
         [DllImport("NAPS2.WIA.dll")]
-        public static extern uint Download(IntPtr transfer, int flags, [MarshalAs(UnmanagedType.FunctionPtr)] TransferStatusCallback func);
+        public static extern uint Download1(IntPtr transfer, [MarshalAs(UnmanagedType.FunctionPtr)] TransferStatusCallback func);
 
         [DllImport("NAPS2.WIA.dll")]
-        public static extern uint CancelTransfer(IntPtr transfer);
+        public static extern uint Download2(IntPtr transfer, [MarshalAs(UnmanagedType.FunctionPtr)] TransferStatusCallback func);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint CancelTransfer1(IntPtr transfer);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint CancelTransfer2(IntPtr transfer);
     }
 }

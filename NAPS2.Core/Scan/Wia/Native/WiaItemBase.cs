@@ -8,7 +8,7 @@ namespace NAPS2.Scan.Wia.Native
     {
         private WiaPropertyCollection properties;
 
-        protected internal WiaItemBase(IntPtr handle) : base(handle)
+        protected internal WiaItemBase(WiaVersion version, IntPtr handle) : base(version, handle)
         {
         }
 
@@ -19,21 +19,24 @@ namespace NAPS2.Scan.Wia.Native
                 if (properties == null)
                 {
                     WiaException.Check(NativeWiaMethods.GetItemPropertyStorage(Handle, out var propStorage));
-                    properties = new WiaPropertyCollection(propStorage);
+                    properties = new WiaPropertyCollection(Version, propStorage);
                 }
                 return properties;
             }
         }
 
-        public IEnumerable<WiaItem> GetSubItems()
+        public List<WiaItem> GetSubItems()
         {
-            return null;
+            var items = new List<WiaItem>();
+            WiaException.Check(Version == WiaVersion.Wia10
+                ? NativeWiaMethods.EnumerateItems1(Handle, itemHandle => items.Add(new WiaItem(Version, itemHandle)))
+                : NativeWiaMethods.EnumerateItems2(Handle, itemHandle => items.Add(new WiaItem(Version, itemHandle))));
+            return items;
         }
 
         public WiaItem FindSubItem(string name)
         {
-            WiaException.Check(NativeWiaMethods.GetItem(Handle, name, out var itemHandle));
-            return new WiaItem(itemHandle);
+            return GetSubItems().FirstOrDefault(x => x.Name() == name);
         }
 
         protected override void Dispose(bool disposing)

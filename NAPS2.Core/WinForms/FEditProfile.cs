@@ -312,6 +312,7 @@ namespace NAPS2.WinForms
                 WiaRetryOnFailure = ScanProfile.WiaRetryOnFailure,
                 WiaDelayBetweenScans = ScanProfile.WiaDelayBetweenScans,
                 WiaDelayBetweenScansSeconds = ScanProfile.WiaDelayBetweenScansSeconds,
+                WiaVersion = ScanProfile.WiaVersion,
                 ForcePageSize = ScanProfile.ForcePageSize,
                 ForcePageSizeCrop = ScanProfile.ForcePageSizeCrop,
                 FlipDuplexedPages = ScanProfile.FlipDuplexedPages,

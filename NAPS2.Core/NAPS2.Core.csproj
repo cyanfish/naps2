@@ -218,6 +218,7 @@
     <Compile Include="Scan\Wia\Native\WiaTransfer.cs" />
     <Compile Include="Scan\Wia\Native\WiaItem.cs" />
     <Compile Include="Scan\Wia\Native\WiaItemExtensions.cs" />
+    <Compile Include="Scan\Wia\Native\WiaVersion.cs" />
     <Compile Include="Update\UpdateOperation.cs" />
     <Compile Include="Update\UpdateInfo.cs" />
     <Compile Include="Update\UpdateChecker.cs" />

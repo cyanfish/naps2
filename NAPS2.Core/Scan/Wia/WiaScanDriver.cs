@@ -42,7 +42,7 @@ namespace NAPS2.Scan.Wia
 
         protected override List<ScanDevice> GetDeviceListInternal()
         {
-            using (var deviceManager = new WiaDeviceManager())
+            using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion ?? WiaVersion.Wia10))
             {
                 return deviceManager.GetDeviceInfos().Select(x =>
                 {
@@ -58,9 +58,9 @@ namespace NAPS2.Scan.Wia
         {
             try
             {
-                using (var deviceManager = new WiaDeviceManager())
+                using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion ?? WiaVersion.Wia10))
                 using (var device = deviceManager.FindDevice(ScanProfile.Device.ID))
-                using (var item = device.FindSubItem("Feeder"))
+                using (var item = GetItem(device))
                 using (var transfer = item.StartTransfer())
                 {
                     if (ScanProfile.PaperSource != ScanSource.Glass && !device.SupportsFeeder())
@@ -77,13 +77,21 @@ namespace NAPS2.Scan.Wia
 
                     // TODO: Delete the delay/retry options in ScanProfile (but make sure not to break xml parsing)
 
-                    // TODO: Props
+                    // TODO: Props subtype/range. Do we need to manually validate before writing?
+                    // TODO: Seems like the COM uses WIA 1.0. Do I need to support both? Can I just use 1.0, is that okay? Probably I should have both for compatibility purposes...
                     ConfigureDeviceProps(device);
-                    ConfigureItemProps(item);
+                    ConfigureItemProps(device, item);
                     // TODO: Format BMP "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}"
 
                     // TODO: Arrrggg... WIA native UI is an option I'm supposed to support.
-                    item.Properties[WiaPropertyId.IPS_PAGES].Value = 0;
+                    if (device.Version == WiaVersion.Wia10)
+                    {
+                        device.Properties[WiaPropertyId.DPS_PAGES].Value = 0;
+                    }
+                    else
+                    {
+                        item.Properties[WiaPropertyId.IPS_PAGES].Value = 0;
+                    }
 
                     // TODO: Progress form (operation?)
                     // TODO: Use ScanParams.Modal as needed
@@ -121,7 +129,27 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void ConfigureItemProps(WiaItem item)
+        private WiaItem GetItem(WiaDevice device)
+        {
+            if (device.Version == WiaVersion.Wia10)
+            {
+                // In WIA 1.0, the root device only has a single child, "Scan"
+                // https://docs.microsoft.com/en-us/windows-hardware/drivers/image/wia-scanner-tree
+                return device.GetSubItems().First();
+            }
+            else
+            {
+                // In WIA 2.0, the root device may have multiple children, i.e. "Flatbed" and "Feeder"
+                // https://docs.microsoft.com/en-us/windows-hardware/drivers/image/non-duplex-capable-document-feeder
+                // The "Feeder" child may also have a pair of children (for front/back sides with duplex)
+                // https://docs.microsoft.com/en-us/windows-hardware/drivers/image/simple-duplex-capable-document-feeder
+                var items = device.GetSubItems();
+                var preferredItemName = ScanProfile.PaperSource == ScanSource.Glass ? "Flatbed" : "Feeder";
+                return items.FirstOrDefault(x => x.Name() == preferredItemName) ?? items.First();
+            }
+        }
+
+        private void ConfigureItemProps(WiaDevice device, WiaItem item)
         {
             switch (ScanProfile.BitDepth)
             {
@@ -148,9 +176,24 @@ namespace NAPS2.Scan.Wia
             }
             int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * resolution / 1000;
             int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
-
-            int horizontalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
-            int verticalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
+            
+            int horizontalSize, verticalSize;
+            if (device.Version == WiaVersion.Wia10)
+            {
+                horizontalSize =
+                    (int)device.Properties[ScanProfile.PaperSource == ScanSource.Glass
+                        ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
+                        : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
+                verticalSize =
+                    (int)device.Properties[ScanProfile.PaperSource == ScanSource.Glass
+                        ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
+                        : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
+            }
+            else
+            {
+                horizontalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
+                verticalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
+            }
 
             int pagemaxwidth = horizontalSize * resolution / 1000;
             int pagemaxheight = verticalSize * resolution / 1000;

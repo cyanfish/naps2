@@ -13,7 +13,7 @@ namespace NAPS2.Scan.Wia.Native
         private const int MSG_END_STREAM = 2;
         private const int MSG_END_TRANSFER = 3;
 
-        protected internal WiaTransfer(IntPtr handle) : base(handle)
+        protected internal WiaTransfer(WiaVersion version, IntPtr handle) : base(version, handle)
         {
         }
 
@@ -27,12 +27,16 @@ namespace NAPS2.Scan.Wia.Native
 
         public void Download()
         {
-            WiaException.Check(NativeWiaMethods.Download(Handle, 0, TransferStatusCallback));
+            WiaException.Check(Version == WiaVersion.Wia10
+                ? NativeWiaMethods.Download1(Handle, TransferStatusCallback)
+                : NativeWiaMethods.Download2(Handle, TransferStatusCallback));
         }
 
         public void Cancel()
         {
-            WiaException.Check(NativeWiaMethods.CancelTransfer(Handle));
+            WiaException.Check(Version == WiaVersion.Wia10
+                ? NativeWiaMethods.CancelTransfer1(Handle)
+                : NativeWiaMethods.CancelTransfer2(Handle));
         }
 
         private void TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, IStream stream)

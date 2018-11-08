@@ -6,9 +6,9 @@ namespace NAPS2.Scan.Wia.Native
 {
     public class WiaDeviceInfo : NativeWiaObject, IWiaDeviceProps
     {
-        protected internal WiaDeviceInfo(IntPtr propStorageHandle)
+        protected internal WiaDeviceInfo(WiaVersion version, IntPtr propStorageHandle) : base(version)
         {
-            Properties = new WiaPropertyCollection(propStorageHandle);
+            Properties = new WiaPropertyCollection(version, propStorageHandle);
         }
 
         public WiaPropertyCollection Properties { get; }
