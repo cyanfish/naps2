@@ -58,6 +58,7 @@ namespace NAPS2.Scan.Wia
                 int pageNumber = 1;
                 transfer.PageScanned += (sender, args) =>
                 {
+                    using (args.Stream)
                     using (Image output = Image.FromStream(args.Stream))
                     using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
                     {

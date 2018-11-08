@@ -7,7 +7,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace NAPS2.Scan.Wia.Native
 {
-    public class NativeStreamWrapper : System.IO.Stream
+    public class NativeStreamWrapper : Stream
     {
         private readonly IStream source;
         private readonly IntPtr nativeLong;
@@ -88,6 +88,12 @@ namespace NAPS2.Scan.Wia.Native
             if (offset != 0) throw new NotImplementedException();
             source.Write(buffer, count, IntPtr.Zero);
             position += count;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            Marshal.Release(Marshal.GetIUnknownForObject(source));
         }
     }
 }

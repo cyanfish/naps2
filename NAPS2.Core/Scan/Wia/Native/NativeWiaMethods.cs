@@ -9,9 +9,6 @@ namespace NAPS2.Scan.Wia.Native
     internal static class NativeWiaMethods
     {
         [DllImport("NAPS2.WIA.dll")]
-        public static extern void Release(IntPtr obj);
-
-        [DllImport("NAPS2.WIA.dll")]
         public static extern uint GetDeviceManager([Out] out IntPtr deviceManager);
 
         [DllImport("NAPS2.WIA.dll")]

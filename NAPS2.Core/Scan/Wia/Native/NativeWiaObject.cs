@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Wia.Native
 {
@@ -40,7 +41,7 @@ namespace NAPS2.Scan.Wia.Native
         {
             if (!disposed)
             {
-                NativeWiaMethods.Release(Handle);
+                Marshal.Release(Handle);
                 disposed = true;
             }
         }
