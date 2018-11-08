@@ -36,13 +36,24 @@ namespace NAPS2.Scan.Wia.Native
             }
         }
 
-        public void Dispose()
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
             {
                 NativeWiaMethods.Release(Handle);
                 disposed = true;
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~NativeWiaObject()
+        {
+            Dispose(false);
         }
     }
 }

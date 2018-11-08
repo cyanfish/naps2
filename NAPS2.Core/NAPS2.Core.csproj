@@ -198,6 +198,7 @@
     <Compile Include="Scan\Sane\SaneOptionParser.cs" />
     <Compile Include="Scan\Sane\SaneScanDriver.cs" />
     <Compile Include="Scan\Sane\SaneWrapper.cs" />
+    <Compile Include="Scan\Wia\Native\NativeStreamWrapper.cs" />
     <Compile Include="Scan\Wia\Native\NativeWiaMethods.cs" />
     <Compile Include="Scan\Wia\Native\WiaDeviceManager.cs" />
     <Compile Include="Scan\Wia\Native\WiaErrorCodes.cs" />

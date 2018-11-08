@@ -10,8 +10,10 @@ using System.Windows.Forms;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
 using NAPS2.WinForms;
+using NAPS2.Worker;
 
 namespace NAPS2.Scan.Wia
 {
@@ -24,13 +26,15 @@ namespace NAPS2.Scan.Wia
         private readonly IBlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
         private readonly IFormFactory formFactory;
+        private readonly IWorkerServiceFactory workerServiceFactory;
 
-        public WiaScanDriver(IBlankDetector blankDetector, ScannedImageHelper scannedImageHelper, IFormFactory formFactory)
+        public WiaScanDriver(IBlankDetector blankDetector, ScannedImageHelper scannedImageHelper, IFormFactory formFactory, IWorkerServiceFactory workerServiceFactory)
             : base(formFactory)
         {
             this.blankDetector = blankDetector;
             this.scannedImageHelper = scannedImageHelper;
             this.formFactory = formFactory;
+            this.workerServiceFactory = workerServiceFactory;
         }
 
         public override string DriverName => DRIVER_NAME;
@@ -43,6 +47,37 @@ namespace NAPS2.Scan.Wia
 
         protected override async Task ScanInternal(ScannedImageSource.Concrete source)
         {
+            using (var deviceManager = new WiaDeviceManager())
+            using (var device = deviceManager.FindDevice(ScanProfile.Device.ID))
+            using (var item = device.FindSubItem("Feeder"))
+            using (var transfer = item.StartTransfer())
+            {
+                // TODO: Props
+                NativeWiaMethods.SetItemProperty(item.Handle, WiaApi.DeviceProperties.PAGES, 0);
+
+                int pageNumber = 1;
+                transfer.PageScanned += (sender, args) =>
+                {
+                    using (Image output = Image.FromStream(args.Stream))
+                    using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+                    {
+                        if (blankDetector.ExcludePage(result, ScanProfile))
+                        {
+                            return;
+                        }
+
+                        ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
+                        var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                        scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber++);
+                        string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
+                        scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
+                        source.Put(image);
+                    }
+                };
+                transfer.Download();
+            }
+            return;
+
             using (var eventLoop = new WiaBackgroundEventLoop(ScanProfile, ScanDevice))
             {
                 bool supportsFeeder = eventLoop.GetSync(wia => WiaApi.DeviceSupportsFeeder(wia.Device));
