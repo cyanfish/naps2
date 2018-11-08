@@ -198,6 +198,9 @@
     <Compile Include="Scan\Sane\SaneOptionParser.cs" />
     <Compile Include="Scan\Sane\SaneScanDriver.cs" />
     <Compile Include="Scan\Sane\SaneWrapper.cs" />
+    <Compile Include="Scan\Wia\Native\IWiaItemProps.cs" />
+    <Compile Include="Scan\Wia\Native\IWiaDeviceProps.cs" />
+    <Compile Include="Scan\Wia\Native\IWiaProps.cs" />
     <Compile Include="Scan\Wia\Native\NativeStreamWrapper.cs" />
     <Compile Include="Scan\Wia\Native\NativeWiaMethods.cs" />
     <Compile Include="Scan\Wia\Native\WiaDevice.cs" />
@@ -205,6 +208,9 @@
     <Compile Include="Scan\Wia\Native\WiaErrorCodes.cs" />
     <Compile Include="Scan\Wia\Native\WiaException.cs" />
     <Compile Include="Scan\Wia\Native\NativeWiaObject.cs" />
+    <Compile Include="Scan\Wia\Native\WiaDeviceInfo.cs" />
+    <Compile Include="Scan\Wia\Native\WiaItemBase.cs" />
+    <Compile Include="Scan\Wia\Native\WiaPropertyCollection.cs" />
     <Compile Include="Scan\Wia\Native\WiaProperty.cs" />
     <Compile Include="Scan\Wia\Native\WiaPropertyId.cs" />
     <Compile Include="Scan\Wia\Native\WiaPropertyValue.cs" />

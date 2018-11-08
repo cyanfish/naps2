@@ -6,37 +6,37 @@ namespace NAPS2.Scan.Wia.Native
 {
     public static class WiaItemExtensions
     {
-        public static string Id(this WiaDevice device)
+        public static string Id(this IWiaDeviceProps device)
         {
-            return device.Property(WiaPropertyId.DIP_DEV_ID).Value.ToString();
+            return device.Properties[WiaPropertyId.DIP_DEV_ID].Value.ToString();
         }
 
-        public static string Name(this WiaDevice device)
+        public static string Name(this IWiaDeviceProps device)
         {
-            return device.Property(WiaPropertyId.DIP_DEV_NAME).Value.ToString();
+            return device.Properties[WiaPropertyId.DIP_DEV_NAME].Value.ToString();
         }
 
-        public static bool SupportsFeeder(this WiaDevice device)
+        public static bool SupportsFeeder(this IWiaDeviceProps device)
         {
-            int capabilities = (int)device.Property(WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES).Value;
+            int capabilities = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
             return (capabilities & WiaPropertyValue.FEEDER) != 0;
         }
 
-        public static bool SupportsDuplex(this WiaDevice device)
+        public static bool SupportsDuplex(this IWiaDeviceProps device)
         {
-            int capabilities = (int)device.Property(WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES).Value;
+            int capabilities = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
             return (capabilities & WiaPropertyValue.DUPLEX) != 0;
         }
 
-        public static bool FeederReady(this WiaDevice device)
+        public static bool FeederReady(this IWiaDeviceProps device)
         {
-            int status = (int)device.Property(WiaPropertyId.DPS_DOCUMENT_HANDLING_STATUS).Value;
+            int status = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_STATUS].Value;
             return (status & WiaPropertyValue.FEED_READY) != 0;
         }
 
         public static void SetProperty(this WiaItem item, int propId, int value)
         {
-            var prop = item.Property(propId);
+            var prop = item.Properties[propId];
             if (prop != null)
             {
                 prop.Value = value;
@@ -45,7 +45,7 @@ namespace NAPS2.Scan.Wia.Native
 
         public static void SetPropertyRange(this WiaItem item, int propId, int value, int expectedMin, int expectedMax)
         {
-            var prop = item.Property(propId);
+            var prop = item.Properties[propId];
             if (prop != null)
             {
                 int expectedAbs = value - expectedMin;
@@ -62,9 +62,9 @@ namespace NAPS2.Scan.Wia.Native
             }
         }
 
-        public static int GetPropertyMax(this WiaItem item, int propId)
+        public static int GetPropertyMax(this IWiaProps item, int propId)
         {
-            var prop = item.Property(propId);
+            var prop = item.Properties[propId];
             if (prop != null)
             {
                 if (prop.SubType == WiaProperty.SubTypes.Range)

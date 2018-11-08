@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.Scan.Wia.Native
 {
-    public class WiaDevice : WiaItem
+    public class WiaDevice : WiaItemBase, IWiaDeviceProps
     {
         protected internal WiaDevice(IntPtr handle) : base(handle)
         {

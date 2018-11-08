@@ -14,8 +14,16 @@ namespace NAPS2.Scan.Wia.Native
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint GetDevice(IntPtr deviceManager, [MarshalAs(UnmanagedType.BStr)] string deviceId, [Out] out IntPtr device);
 
+        public delegate void EnumDeviceCallback(IntPtr devicePropStorage);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint EnumerateDevices(IntPtr deviceManager, [MarshalAs(UnmanagedType.FunctionPtr)] EnumDeviceCallback func);
+
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint GetItem(IntPtr device, [MarshalAs(UnmanagedType.BStr)] string itemId, [Out] out IntPtr item);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint GetItemPropertyStorage(IntPtr item, out IntPtr propStorage);
 
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint SetItemProperty(IntPtr item, int propId, int value);

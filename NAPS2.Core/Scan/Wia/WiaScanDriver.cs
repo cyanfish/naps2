@@ -44,7 +44,7 @@ namespace NAPS2.Scan.Wia
         {
             using (var deviceManager = new WiaDeviceManager())
             {
-                return deviceManager.GetDevices().Select(x => new ScanDevice(x.Id(), x.Name())).ToList();
+                return deviceManager.GetDeviceInfos().Select(x => new ScanDevice(x.Id(), x.Name())).ToList();
             }
         }
 
@@ -77,7 +77,7 @@ namespace NAPS2.Scan.Wia
                     // TODO: Format BMP "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}"
 
                     // TODO: Arrrggg... WIA native UI is an option I'm supposed to support.
-                    item.Property(WiaPropertyId.IPS_PAGES).Value = 0;
+                    item.Properties[WiaPropertyId.IPS_PAGES].Value = 0;
 
                     // TODO: Progress form (operation?)
                     // TODO: Use ScanParams.Modal as needed
@@ -144,13 +144,13 @@ namespace NAPS2.Scan.Wia
             int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
 
             int horizontalSize =
-                (int)device.Property(ScanProfile.PaperSource == ScanSource.Glass
+                (int)device.Properties[ScanProfile.PaperSource == ScanSource.Glass
                     ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
-                    : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE).Value;
+                    : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
             int verticalSize =
-                (int)device.Property(ScanProfile.PaperSource == ScanSource.Glass
+                (int)device.Properties[ScanProfile.PaperSource == ScanSource.Glass
                     ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
-                    : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE).Value;
+                    : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
 
             int pagemaxwidth = horizontalSize * resolution / 1000;
             int pagemaxheight = verticalSize * resolution / 1000;
