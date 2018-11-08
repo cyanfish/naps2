@@ -43,6 +43,8 @@ namespace NAPS2.Scan.Wia.Native
         public const int IPS_BRIGHTNESS = 6154;
         public const int IPS_CONTRAST = 6155;
         public const int IPS_ORIENTATION = 6156;
+        public const int IPS_MAX_HORIZONTAL_SIZE = 6165;
+        public const int IPS_MAX_VERTICAL_SIZE = 6166;
         public const int IPS_PAGES = 3096;
     }
 }

@@ -41,7 +41,10 @@ namespace NAPS2.Scan.Wia.Native
         {
             if (!disposed)
             {
-                Marshal.Release(Handle);
+                if (Handle != IntPtr.Zero)
+                {
+                    Marshal.Release(Handle);
+                }
                 disposed = true;
             }
         }

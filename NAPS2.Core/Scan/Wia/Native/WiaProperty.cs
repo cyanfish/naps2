@@ -6,29 +6,44 @@ namespace NAPS2.Scan.Wia.Native
 {
     public class WiaProperty
     {
-        private object value;
-
-        protected internal WiaProperty(WiaItem owner, int id)
+        protected internal WiaProperty(IntPtr storage, int id, string name, ushort type)
         {
-            Owner = owner;
+            Storage = storage;
             Id = id;
+            Name = name;
+            Type = type;
         }
 
-        private WiaItem Owner { get; }
+        private IntPtr Storage { get; }
 
         public int Id { get; set; }
+
+        public string Name { get; }
+
+        public ushort Type { get; }
 
         // TODO: Full R/W impl
         public object Value
         {
-            get => value;
+            get
+            {
+                if (Type == WiaPropertyType.I4)
+                {
+                    WiaException.Check(NativeWiaMethods.GetPropertyInt(Storage, Id, out int value));
+                    return value;
+                }
+                if (Type == WiaPropertyType.BSTR)
+                {
+                    WiaException.Check(NativeWiaMethods.GetPropertyBstr(Storage, Id, out string value));
+                    return value;
+                }
+                throw new NotImplementedException("Not implemented property type");
+            }
             set
             {
-                if (value is int valueInt)
+                if (Type == WiaPropertyType.I4)
                 {
-                    WiaException.Check(NativeWiaMethods.SetItemProperty(Owner.Handle, Id, valueInt));
-                    // TODO: Get the value from the backing in case it changes
-                    this.value = value;
+                    WiaException.Check(NativeWiaMethods.SetPropertyInt(Storage, Id, (int)value));
                 }
                 else
                 {
@@ -46,6 +61,8 @@ namespace NAPS2.Scan.Wia.Native
         public int SubTypeStep { get; set; }
 
         public object[] SubTypeValues { get; set; }
+
+        public override string ToString() => Name;
 
         public enum SubTypes
         {

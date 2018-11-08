@@ -16,25 +16,25 @@ namespace NAPS2.Scan.Wia.Native
             return device.Properties[WiaPropertyId.DIP_DEV_NAME].Value.ToString();
         }
 
-        public static bool SupportsFeeder(this IWiaDeviceProps device)
+        public static bool SupportsFeeder(this WiaDevice device)
         {
             int capabilities = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
             return (capabilities & WiaPropertyValue.FEEDER) != 0;
         }
 
-        public static bool SupportsDuplex(this IWiaDeviceProps device)
+        public static bool SupportsDuplex(this WiaDevice device)
         {
             int capabilities = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
             return (capabilities & WiaPropertyValue.DUPLEX) != 0;
         }
 
-        public static bool FeederReady(this IWiaDeviceProps device)
+        public static bool FeederReady(this WiaDevice device)
         {
             int status = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_STATUS].Value;
             return (status & WiaPropertyValue.FEED_READY) != 0;
         }
 
-        public static void SetProperty(this WiaItem item, int propId, int value)
+        public static void SetProperty(this WiaItemBase item, int propId, int value)
         {
             var prop = item.Properties[propId];
             if (prop != null)
@@ -43,7 +43,7 @@ namespace NAPS2.Scan.Wia.Native
             }
         }
 
-        public static void SetPropertyRange(this WiaItem item, int propId, int value, int expectedMin, int expectedMax)
+        public static void SetPropertyRange(this WiaItemBase item, int propId, int value, int expectedMin, int expectedMax)
         {
             var prop = item.Properties[propId];
             if (prop != null)

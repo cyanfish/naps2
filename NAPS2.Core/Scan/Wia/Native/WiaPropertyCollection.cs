@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Wia.Native
 {
-    public class WiaPropertyCollection
+    public class WiaPropertyCollection : NativeWiaObject
     {
         private readonly Dictionary<int, WiaProperty> propertyDict;
 
-        public WiaPropertyCollection(IntPtr propertyStorageHandle)
+        public WiaPropertyCollection(IntPtr propertyStorageHandle) : base(propertyStorageHandle)
         {
             propertyDict = new Dictionary<int, WiaProperty>();
-            // TODO
-            try
-            {
-            }
-            finally
-            {
-                Marshal.Release(propertyStorageHandle);
-            }
+            WiaException.Check(NativeWiaMethods.EnumerateProperties(Handle,
+                (id, name, type) => propertyDict.Add(id, new WiaProperty(Handle, id, name, type))));
         }
-
+        
         public WiaProperty this[int propId] => propertyDict.Get(propId);
     }
 }

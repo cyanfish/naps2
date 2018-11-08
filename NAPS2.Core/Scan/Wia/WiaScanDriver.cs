@@ -44,7 +44,13 @@ namespace NAPS2.Scan.Wia
         {
             using (var deviceManager = new WiaDeviceManager())
             {
-                return deviceManager.GetDeviceInfos().Select(x => new ScanDevice(x.Id(), x.Name())).ToList();
+                return deviceManager.GetDeviceInfos().Select(x =>
+                {
+                    using (x)
+                    {
+                        return new ScanDevice(x.Id(), x.Name());
+                    }
+                }).ToList();
             }
         }
 
@@ -73,7 +79,7 @@ namespace NAPS2.Scan.Wia
 
                     // TODO: Props
                     ConfigureDeviceProps(device);
-                    ConfigureItemProps(device, item);
+                    ConfigureItemProps(item);
                     // TODO: Format BMP "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}"
 
                     // TODO: Arrrggg... WIA native UI is an option I'm supposed to support.
@@ -115,7 +121,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void ConfigureItemProps(WiaDevice device, WiaItem item)
+        private void ConfigureItemProps(WiaItem item)
         {
             switch (ScanProfile.BitDepth)
             {
@@ -143,14 +149,8 @@ namespace NAPS2.Scan.Wia
             int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * resolution / 1000;
             int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
 
-            int horizontalSize =
-                (int)device.Properties[ScanProfile.PaperSource == ScanSource.Glass
-                    ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
-                    : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
-            int verticalSize =
-                (int)device.Properties[ScanProfile.PaperSource == ScanSource.Glass
-                    ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
-                    : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
+            int horizontalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
+            int verticalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
 
             int pagemaxwidth = horizontalSize * resolution / 1000;
             int pagemaxheight = verticalSize * resolution / 1000;

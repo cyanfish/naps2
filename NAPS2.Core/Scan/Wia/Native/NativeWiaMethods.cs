@@ -25,8 +25,19 @@ namespace NAPS2.Scan.Wia.Native
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint GetItemPropertyStorage(IntPtr item, out IntPtr propStorage);
 
+        public delegate void EnumPropertyCallback(int propId, [MarshalAs(UnmanagedType.LPWStr)] string propName, ushort propType);
+
         [DllImport("NAPS2.WIA.dll")]
-        public static extern uint SetItemProperty(IntPtr item, int propId, int value);
+        public static extern uint EnumerateProperties(IntPtr propStorage, [MarshalAs(UnmanagedType.FunctionPtr)] EnumPropertyCallback func);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint GetPropertyBstr(IntPtr propStorage, int propId, [MarshalAs(UnmanagedType.BStr), Out] out string value);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint GetPropertyInt(IntPtr propStorage, int propId, [Out] out int value);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint SetPropertyInt(IntPtr propStorage, int propId, int value);
 
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint StartTransfer(IntPtr item, [Out] out IntPtr transfer);

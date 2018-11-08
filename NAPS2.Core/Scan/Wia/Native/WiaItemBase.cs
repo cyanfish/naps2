@@ -35,5 +35,14 @@ namespace NAPS2.Scan.Wia.Native
             WiaException.Check(NativeWiaMethods.GetItem(Handle, name, out var itemHandle));
             return new WiaItem(itemHandle);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                properties?.Dispose();
+            }
+        }
     }
 }
