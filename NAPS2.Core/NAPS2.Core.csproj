@@ -200,6 +200,7 @@
     <Compile Include="Scan\Sane\SaneWrapper.cs" />
     <Compile Include="Scan\Wia\Native\NativeStreamWrapper.cs" />
     <Compile Include="Scan\Wia\Native\NativeWiaMethods.cs" />
+    <Compile Include="Scan\Wia\Native\WiaDevice.cs" />
     <Compile Include="Scan\Wia\Native\WiaDeviceManager.cs" />
     <Compile Include="Scan\Wia\Native\WiaErrorCodes.cs" />
     <Compile Include="Scan\Wia\Native\WiaException.cs" />
@@ -209,7 +210,7 @@
     <Compile Include="Scan\Wia\Native\WiaPropertyValue.cs" />
     <Compile Include="Scan\Wia\Native\WiaTransfer.cs" />
     <Compile Include="Scan\Wia\Native\WiaItem.cs" />
-    <Compile Include="Scan\Wia\WiaItemExtensions.cs" />
+    <Compile Include="Scan\Wia\Native\WiaItemExtensions.cs" />
     <Compile Include="Update\UpdateOperation.cs" />
     <Compile Include="Update\UpdateInfo.cs" />
     <Compile Include="Update\UpdateChecker.cs" />

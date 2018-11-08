@@ -1,35 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Scan.Wia.Native;
 
-namespace NAPS2.Scan.Wia
+namespace NAPS2.Scan.Wia.Native
 {
     public static class WiaItemExtensions
     {
-        public static string Id(this WiaItem item)
+        public static string Id(this WiaDevice device)
         {
-            return item.Property(WiaPropertyId.DIP_DEV_ID).Value.ToString();
+            return device.Property(WiaPropertyId.DIP_DEV_ID).Value.ToString();
         }
 
-        public static string Name(this WiaItem item)
+        public static string Name(this WiaDevice device)
         {
-            return item.Property(WiaPropertyId.DIP_DEV_NAME).Value.ToString();
+            return device.Property(WiaPropertyId.DIP_DEV_NAME).Value.ToString();
         }
 
-        public static bool SupportsFeeder(this WiaItem device)
+        public static bool SupportsFeeder(this WiaDevice device)
         {
             int capabilities = (int)device.Property(WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES).Value;
             return (capabilities & WiaPropertyValue.FEEDER) != 0;
         }
 
-        public static bool SupportsDuplex(this WiaItem device)
+        public static bool SupportsDuplex(this WiaDevice device)
         {
             int capabilities = (int)device.Property(WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES).Value;
             return (capabilities & WiaPropertyValue.DUPLEX) != 0;
         }
 
-        public static bool FeederReady(this WiaItem device)
+        public static bool FeederReady(this WiaDevice device)
         {
             int status = (int)device.Property(WiaPropertyId.DPS_DOCUMENT_HANDLING_STATUS).Value;
             return (status & WiaPropertyValue.FEED_READY) != 0;

@@ -69,7 +69,7 @@ namespace NAPS2.Scan.Wia
 
                     // TODO: Test 64-bit wia and figure out if I need the worker
 
-                    // TODO: Delete the delay/retry options in ScanProfile
+                    // TODO: Delete the delay/retry options in ScanProfile (but make sure not to break xml parsing)
 
                     // TODO: Props
                     ConfigureDeviceProps(device);
@@ -115,7 +115,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void ConfigureItemProps(WiaItem device, WiaItem item)
+        private void ConfigureItemProps(WiaDevice device, WiaItem item)
         {
             switch (ScanProfile.BitDepth)
             {
@@ -151,7 +151,7 @@ namespace NAPS2.Scan.Wia
                 (int)device.Property(ScanProfile.PaperSource == ScanSource.Glass
                     ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
                     : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE).Value;
-            
+
             int pagemaxwidth = horizontalSize * resolution / 1000;
             int pagemaxheight = verticalSize * resolution / 1000;
 
@@ -183,7 +183,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void ConfigureDeviceProps(WiaItem device)
+        private void ConfigureDeviceProps(WiaDevice device)
         {
             if (ScanProfile.PaperSource != ScanSource.Glass && device.SupportsFeeder())
             {

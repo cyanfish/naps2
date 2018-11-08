@@ -16,15 +16,15 @@ namespace NAPS2.Scan.Wia.Native
         {
         }
         
-        public IEnumerable<WiaItem> GetDevices()
+        public IEnumerable<WiaDevice> GetDevices()
         {
             return null;
         }
 
-        public WiaItem FindDevice(string deviceID)
+        public WiaDevice FindDevice(string deviceID)
         {
             WiaException.Check(NativeWiaMethods.GetDevice(Handle, deviceID, out var deviceHandle));
-            return new WiaItem(deviceHandle);
+            return new WiaDevice(deviceHandle);
         }
     }
 }
