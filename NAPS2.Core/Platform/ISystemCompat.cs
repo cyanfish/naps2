@@ -15,5 +15,7 @@ namespace NAPS2.Platform
         bool CanUseWin32 { get; }
 
         bool UseUnixFontResolver { get; }
+
+        bool IsWia20Supported { get; }
     }
 }

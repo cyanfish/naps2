@@ -13,6 +13,8 @@ namespace NAPS2.Scan.Wia.Native
         private const int MSG_END_STREAM = 2;
         private const int MSG_END_TRANSFER = 3;
 
+        private bool cancel;
+
         protected internal WiaTransfer(WiaVersion version, IntPtr handle) : base(version, handle)
         {
         }
@@ -23,29 +25,27 @@ namespace NAPS2.Scan.Wia.Native
 
         public event EventHandler TransferComplete;
 
-        public event EventHandler<TransferErrorEventArgs> TransferError;
-
-        public void Download()
+        public bool Download()
         {
-            WiaException.Check(Version == WiaVersion.Wia10
+            var hr = Version == WiaVersion.Wia10
                 ? NativeWiaMethods.Download1(Handle, TransferStatusCallback)
-                : NativeWiaMethods.Download2(Handle, TransferStatusCallback));
+                : NativeWiaMethods.Download2(Handle, TransferStatusCallback);
+            if (hr == 1)
+            {
+                // User cancelled
+                return false;
+            }
+            WiaException.Check(hr);
+            return true;
         }
 
         public void Cancel()
         {
-            WiaException.Check(Version == WiaVersion.Wia10
-                ? NativeWiaMethods.CancelTransfer1(Handle)
-                : NativeWiaMethods.CancelTransfer2(Handle));
+            cancel = true;
         }
 
-        private void TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, IStream stream)
+        private bool TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, IStream stream)
         {
-            if (hresult != 0)
-            {
-                TransferError?.Invoke(this, new TransferErrorEventArgs(hresult));
-                return;
-            }
             switch (msgType)
             {
                 case MSG_STATUS:
@@ -58,6 +58,7 @@ namespace NAPS2.Scan.Wia.Native
                     TransferComplete?.Invoke(this, EventArgs.Empty);
                     break;
             }
+            return !cancel;
         }
 
         public class ProgressEventArgs : EventArgs

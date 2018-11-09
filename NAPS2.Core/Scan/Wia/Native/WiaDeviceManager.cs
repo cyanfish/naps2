@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Platform;
 
 namespace NAPS2.Scan.Wia.Native
 {
     public class WiaDeviceManager : NativeWiaObject
     {
-        public WiaDeviceManager(WiaVersion version) : base(version)
+        public static WiaVersion DefaultWiaVersion => PlatformCompat.System.IsWia20Supported ? WiaVersion.Wia20 : WiaVersion.Wia10;
+
+        public WiaDeviceManager(WiaVersion? version = null) : base(version ?? DefaultWiaVersion)
         {
             WiaException.Check(version == WiaVersion.Wia10
                 ? NativeWiaMethods.GetDeviceManager1(out var handle)

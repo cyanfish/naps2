@@ -8,6 +8,7 @@ namespace NAPS2.Operation
     {
         Default,
         None,
+        BarOnly,
         MB
     }
 }

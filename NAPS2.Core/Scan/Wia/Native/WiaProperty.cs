@@ -21,8 +21,7 @@ namespace NAPS2.Scan.Wia.Native
         public string Name { get; }
 
         public ushort Type { get; }
-
-        // TODO: Full R/W impl
+        
         public object Value
         {
             get
@@ -51,6 +50,9 @@ namespace NAPS2.Scan.Wia.Native
                 }
             }
         }
+
+        // TODO: Load attributes
+        // https://docs.microsoft.com/en-us/windows/desktop/api/wia_xp/nf-wia_xp-iwiapropertystorage-getpropertyattributes
 
         public SubTypes SubType { get; set; }
 

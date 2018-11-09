@@ -59,18 +59,12 @@ namespace NAPS2.Scan.Wia.Native
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint StartTransfer2(IntPtr item, [Out] out IntPtr transfer);
 
-        public delegate void TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, [MarshalAs(UnmanagedType.Interface)] IStream stream);
+        public delegate bool TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, [MarshalAs(UnmanagedType.Interface)] IStream stream);
 
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint Download1(IntPtr transfer, [MarshalAs(UnmanagedType.FunctionPtr)] TransferStatusCallback func);
 
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint Download2(IntPtr transfer, [MarshalAs(UnmanagedType.FunctionPtr)] TransferStatusCallback func);
-
-        [DllImport("NAPS2.WIA.dll")]
-        public static extern uint CancelTransfer1(IntPtr transfer);
-
-        [DllImport("NAPS2.WIA.dll")]
-        public static extern uint CancelTransfer2(IntPtr transfer);
     }
 }

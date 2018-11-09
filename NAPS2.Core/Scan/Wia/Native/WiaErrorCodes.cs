@@ -4,6 +4,11 @@ using System.Linq;
 
 namespace NAPS2.Scan.Wia.Native
 {
+    /// <summary>
+    /// Error code constants.
+    ///
+    /// https://docs.microsoft.com/en-us/windows/desktop/wia/-wia-error-codes
+    /// </summary>
     public static class WiaErrorCodes
     {
         public const uint OUT_OF_PAPER = 0x80210003;

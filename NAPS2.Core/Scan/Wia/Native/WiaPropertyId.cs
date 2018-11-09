@@ -11,6 +11,12 @@ namespace NAPS2.Scan.Wia.Native
     /// D = device, I = item
     /// I = information, P = property
     /// A = all, S = scanner, C = camera
+    ///
+    /// https://docs.microsoft.com/en-us/windows/desktop/wia/-wia-wiadeviceinfoprop
+    /// https://docs.microsoft.com/en-us/windows/desktop/wia/-wia-wiaitempropcommondevice
+    /// https://docs.microsoft.com/en-us/windows/desktop/wia/-wia-wiaitempropscannerdevice
+    /// https://docs.microsoft.com/en-us/windows/desktop/wia/-wia-wiaitempropcommonitem
+    /// https://docs.microsoft.com/en-us/windows/desktop/wia/-wia-wiaitempropscanneritem
     /// </summary>
     public static class WiaPropertyId
     {
@@ -45,6 +51,7 @@ namespace NAPS2.Scan.Wia.Native
         public const int IPS_ORIENTATION = 6156;
         public const int IPS_MAX_HORIZONTAL_SIZE = 6165;
         public const int IPS_MAX_VERTICAL_SIZE = 6166;
+        public const int IPS_DOCUMENT_HANDLING_SELECT = 3088;
         public const int IPS_PAGES = 3096;
     }
 }

@@ -478,7 +478,7 @@ namespace NAPS2.WinForms
                 try
                 {
                     // Populate the device field automatically (because we can do that!)
-                    using (var deviceManager = new WiaDeviceManager(WiaVersion.Wia10))
+                    using (var deviceManager = new WiaDeviceManager())
                     using (var device = deviceManager.FindDevice(deviceID))
                     {
                         editSettingsForm.CurrentDevice = new ScanDevice(deviceID, device.Name());

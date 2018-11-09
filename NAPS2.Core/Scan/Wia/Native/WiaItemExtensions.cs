@@ -71,22 +71,5 @@ namespace NAPS2.Scan.Wia.Native
                 prop.Value = actualValue;
             }
         }
-
-        public static int GetPropertyMax(this IWiaProps item, int propId)
-        {
-            var prop = item.Properties[propId];
-            if (prop != null)
-            {
-                if (prop.SubType == WiaProperty.SubTypes.Range)
-                {
-                    return prop.SubTypeMax;
-                }
-                if (prop.SubType == WiaProperty.SubTypes.List && prop.SubTypeValues.Any())
-                {
-                    return prop.SubTypeValues.Cast<int>().Max();
-                }
-            }
-            return int.MaxValue;
-        }
     }
 }

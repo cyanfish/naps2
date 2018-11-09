@@ -61,6 +61,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Acquiring data....
+        /// </summary>
+        internal static string AcquiringData {
+            get {
+                return ResourceManager.GetString("AcquiringData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation in Progress.
         /// </summary>
         internal static string ActiveOperations {
@@ -1074,6 +1083,24 @@ namespace NAPS2.Lang.Resources {
         internal static string ScanPageProgress {
             get {
                 return ResourceManager.GetString("ScanPageProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Progress.
+        /// </summary>
+        internal static string ScanProgress {
+            get {
+                return ResourceManager.GetString("ScanProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning page {0}....
+        /// </summary>
+        internal static string ScanProgressPage {
+            get {
+                return ResourceManager.GetString("ScanProgressPage", resourceCulture);
             }
         }
         

@@ -99,6 +99,12 @@ namespace NAPS2.WinForms
                 progressBar.Maximum = 1;
                 progressBar.Value = 0;
             }
+            else if (status.ProgressType == OperationProgressType.BarOnly)
+            {
+                numberLabel.Text = "";
+                progressBar.Maximum = status.MaxProgress;
+                progressBar.Value = status.CurrentProgress;
+            }
             else
             {
                 numberLabel.Text = status.ProgressType == OperationProgressType.MB
