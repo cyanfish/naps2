@@ -9,6 +9,9 @@ namespace NAPS2.Scan.Wia.Native
     {
         public static WiaVersion DefaultWiaVersion => PlatformCompat.System.IsWia20Supported ? WiaVersion.Wia20 : WiaVersion.Wia10;
 
+        private const int SCANNER_DEVICE_TYPE = 1;
+        private const int SELECT_DEVICE_NODEFAULT = 1;
+
         public WiaDeviceManager(WiaVersion? version = null) : base(version ?? DefaultWiaVersion)
         {
             WiaException.Check(version == WiaVersion.Wia10
@@ -36,6 +39,19 @@ namespace NAPS2.Scan.Wia.Native
                 ? NativeWiaMethods.GetDevice1(Handle, deviceID, out var deviceHandle)
                 : NativeWiaMethods.GetDevice2(Handle, deviceID, out deviceHandle));
             return new WiaDevice(Version, deviceHandle);
+        }
+
+        public WiaDevice PromptForDevice(IntPtr parentWindowHandle)
+        {
+            var hr = Version == WiaVersion.Wia10
+                ? NativeWiaMethods.SelectDevice1(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, SELECT_DEVICE_NODEFAULT, out _, out var deviceHandle)
+                : NativeWiaMethods.SelectDevice2(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, SELECT_DEVICE_NODEFAULT, out _, out deviceHandle);
+            if (hr == 1)
+            {
+                return null;
+            }
+            WiaException.Check(hr);
+            return new WiaDevice(Version, deviceHandle);;
         }
     }
 }

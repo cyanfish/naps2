@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
-using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Platform;
-using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
@@ -32,15 +29,30 @@ namespace NAPS2.Scan.Wia
 
         public override bool IsSupported => PlatformCompat.System.IsWiaDriverSupported;
 
+        protected override ScanDevice PromptForDeviceInternal()
+        {
+            using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
+            {
+                using (var device = deviceManager.PromptForDevice(DialogParent.Handle))
+                {
+                    if (device == null)
+                    {
+                        return null;
+                    }
+                    return new ScanDevice(device.Id(), device.Name());
+                }
+            }
+        }
+
         protected override List<ScanDevice> GetDeviceListInternal()
         {
             using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
             {
-                return deviceManager.GetDeviceInfos().Select(x =>
+                return deviceManager.GetDeviceInfos().Select(deviceInfo =>
                 {
-                    using (x)
+                    using (deviceInfo)
                     {
-                        return new ScanDevice(x.Id(), x.Name());
+                        return new ScanDevice(deviceInfo.Id(), deviceInfo.Name());
                     }
                 }).ToList();
             }

@@ -66,5 +66,11 @@ namespace NAPS2.Scan.Wia.Native
 
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint Download2(IntPtr transfer, [MarshalAs(UnmanagedType.FunctionPtr)] TransferStatusCallback func);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint SelectDevice1(IntPtr deviceManager, IntPtr hwnd, int deviceType, int flags, [MarshalAs(UnmanagedType.BStr), Out] out string deviceId, [Out] out IntPtr device);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint SelectDevice2(IntPtr deviceManager, IntPtr hwnd, int deviceType, int flags, [MarshalAs(UnmanagedType.BStr), Out] out string deviceId, [Out] out IntPtr device);
     }
 }
