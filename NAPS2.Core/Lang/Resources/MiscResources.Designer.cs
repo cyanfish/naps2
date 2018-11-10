@@ -1087,15 +1087,6 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scan Progress.
-        /// </summary>
-        internal static string ScanProgress {
-            get {
-                return ResourceManager.GetString("ScanProgress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Scanning page {0}....
         /// </summary>
         internal static string ScanProgressPage {

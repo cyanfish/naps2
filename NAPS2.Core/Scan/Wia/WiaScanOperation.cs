@@ -34,7 +34,7 @@ namespace NAPS2.Scan.Wia
         {
             ScanProfile = scanProfile;
             ScanParams = scanParams;
-            ProgressTitle = MiscResources.ScanProgress;
+            ProgressTitle = ScanProfile.Device?.Name;
             Status = new OperationStatus
             {
                 StatusText = ScanProfile.PaperSource == ScanSource.Glass
@@ -91,6 +91,9 @@ namespace NAPS2.Scan.Wia
                     throw new NoDuplexSupportException();
                 }
 
+                ProgressTitle = device.Name();
+                InvokeStatusChanged();
+
                 // TODO: Test 64-bit wia and figure out if I need the worker
 
                 // TODO: Delete the delay/retry options in ScanProfile (but make sure not to break xml parsing)
@@ -126,7 +129,7 @@ namespace NAPS2.Scan.Wia
 
                         if (ScanProfile.PaperSource != ScanSource.Glass)
                         {
-                            Status.StatusText = string.Format(MiscResources.ScanProgressPage, 1);
+                            Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
                             Status.CurrentProgress = 0;
                             InvokeStatusChanged();
                         }

@@ -495,9 +495,6 @@
   <data name="ListeningOnPort" xml:space="preserve">
     <value>Listening on port {0}</value>
   </data>
-  <data name="ScanProgress" xml:space="preserve">
-    <value>Scan Progress</value>
-  </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Scanning page {0}...</value>
   </data>
