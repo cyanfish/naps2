@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.Scan.Wia.Native
 {
-    public class WiaItemBase : NativeWiaObject, IWiaProps
+    public class WiaItemBase : NativeWiaObject
     {
         private WiaPropertyCollection properties;
 

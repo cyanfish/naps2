@@ -16,12 +16,12 @@ namespace NAPS2.Scan.Wia.Native
             return device.Properties[WiaPropertyId.DIP_DEV_NAME].Value.ToString();
         }
 
-        public static string Name(this IWiaItemProps item)
+        public static string Name(this WiaItem item)
         {
             return item.Properties[WiaPropertyId.IPA_ITEM_NAME].Value.ToString();
         }
 
-        public static string FullName(this IWiaItemProps item)
+        public static string FullName(this WiaItem item)
         {
             return item.Properties[WiaPropertyId.IPA_FULL_ITEM_NAME].Value.ToString();
         }

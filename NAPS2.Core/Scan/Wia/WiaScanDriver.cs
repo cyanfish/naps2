@@ -14,7 +14,7 @@ namespace NAPS2.Scan.Wia
     public class WiaScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "wia";
-        
+
         private readonly IOperationFactory operationFactory;
         private readonly IOperationProgress operationProgress;
 
@@ -63,7 +63,7 @@ namespace NAPS2.Scan.Wia
             var op = operationFactory.Create<WiaScanOperation>();
             using (CancelToken.Register(op.Cancel))
             {
-                op.Start(ScanProfile, ScanParams, source);
+                op.Start(ScanProfile, ScanParams, DialogParent, source);
                 Invoker.Current.SafeInvoke(() => operationProgress.ShowProgress(op));
                 await op.Success;
             }

@@ -72,5 +72,17 @@ namespace NAPS2.Scan.Wia.Native
 
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint SelectDevice2(IntPtr deviceManager, IntPtr hwnd, int deviceType, int flags, [MarshalAs(UnmanagedType.BStr), Out] out string deviceId, [Out] out IntPtr device);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint GetImage1(IntPtr deviceManager, IntPtr hwnd, int deviceType, int flags, int intent, [MarshalAs(UnmanagedType.BStr)] string filePath, IntPtr item);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint GetImage2(IntPtr deviceManager, IntPtr hwnd, int flags, [MarshalAs(UnmanagedType.BStr)] string folder, [MarshalAs(UnmanagedType.BStr)] string fileName, int numFiles, [MarshalAs(UnmanagedType.BStr)] string deviceId, [In, Out] ref IntPtr item);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint ConfigureDevice1(IntPtr device, IntPtr hwnd, int flags, int intent, [In, Out] ref int itemCount, [In, Out] ref IntPtr[] items);
+
+        [DllImport("NAPS2.WIA.dll")]
+        public static extern uint ConfigureDevice2(IntPtr device, int flags, IntPtr hwnd, [MarshalAs(UnmanagedType.BStr)] string folder, [MarshalAs(UnmanagedType.BStr)] string fileName, [In, Out] ref int numFiles, [In, Out] ref string[] filePaths, IntPtr[] items);
     }
 }

@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using NAPS2.Platform;
 
 namespace NAPS2.Scan.Wia.Native
 {
     public class WiaDeviceManager : NativeWiaObject
     {
-        public static WiaVersion DefaultWiaVersion => PlatformCompat.System.IsWia20Supported ? WiaVersion.Wia20 : WiaVersion.Wia10;
-
         private const int SCANNER_DEVICE_TYPE = 1;
         private const int SELECT_DEVICE_NODEFAULT = 1;
 
-        public WiaDeviceManager(WiaVersion? version = null) : base(version ?? DefaultWiaVersion)
+        public WiaDeviceManager() : base(WiaVersion.Default)
         {
-            WiaException.Check(version == WiaVersion.Wia10
+        }
+
+        public WiaDeviceManager(WiaVersion version) : base(version)
+        {
+            WiaException.Check(Version == WiaVersion.Wia10
                 ? NativeWiaMethods.GetDeviceManager1(out var handle)
                 : NativeWiaMethods.GetDeviceManager2(out handle));
             Handle = handle;
@@ -52,6 +54,20 @@ namespace NAPS2.Scan.Wia.Native
             }
             WiaException.Check(hr);
             return new WiaDevice(Version, deviceHandle);;
+        }
+
+        public WiaItem PromptForItem(IntPtr parentWindowHandle, WiaDevice device)
+        {
+            IntPtr itemHandle = IntPtr.Zero;
+            var hr = Version == WiaVersion.Wia10
+                ? NativeWiaMethods.GetImage1(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, 0, 0, Path.Combine(Paths.Temp, Path.GetRandomFileName()), IntPtr.Zero)
+                : NativeWiaMethods.GetImage2(Handle, parentWindowHandle, 0, Paths.Temp, Path.GetRandomFileName(), 0, device.Id(), ref itemHandle);
+            if (hr == 1)
+            {
+                return null;
+            }
+            WiaException.Check(hr);
+            return new WiaItem(Version, itemHandle);
         }
     }
 }

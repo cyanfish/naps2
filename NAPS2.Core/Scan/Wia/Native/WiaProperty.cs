@@ -36,7 +36,7 @@ namespace NAPS2.Scan.Wia.Native
                     WiaException.Check(NativeWiaMethods.GetPropertyBstr(Storage, Id, out string value));
                     return value;
                 }
-                throw new NotImplementedException("Not implemented property type");
+                throw new NotImplementedException($"Not implemented property type: {Type}");
             }
             set
             {
@@ -46,7 +46,7 @@ namespace NAPS2.Scan.Wia.Native
                 }
                 else
                 {
-                    throw new NotImplementedException("Not implemented property type");
+                    throw new NotImplementedException($"Not implemented property type: {Type}");
                 }
             }
         }

@@ -118,7 +118,7 @@ namespace NAPS2.Scan
 
         public double WiaDelayBetweenScansSeconds { get; set; }
 
-        public WiaVersion? WiaVersion { get; set; }
+        public WiaVersion WiaVersion { get; set; }
 
         public bool FlipDuplexedPages { get; set; }
 

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia.Native;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Wia
 {
@@ -30,10 +32,13 @@ namespace NAPS2.Scan.Wia
 
         private ScanParams ScanParams { get; set; }
 
-        public bool Start(ScanProfile scanProfile, ScanParams scanParams, ScannedImageSource.Concrete source)
+        private IWin32Window DialogParent { get; set; }
+
+        public bool Start(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ScannedImageSource.Concrete source)
         {
             ScanProfile = scanProfile;
             ScanParams = scanParams;
+            DialogParent = dialogParent;
             ProgressTitle = ScanProfile.Device?.Name;
             Status = new OperationStatus
             {
@@ -43,7 +48,7 @@ namespace NAPS2.Scan.Wia
                 MaxProgress = 100,
                 ProgressType = OperationProgressType.BarOnly
             };
-            
+
             RunAsync(() =>
             {
                 try
@@ -79,8 +84,13 @@ namespace NAPS2.Scan.Wia
             using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
             using (var device = deviceManager.FindDevice(ScanProfile.Device.ID))
             using (var item = GetItem(device))
-            using (var transfer = item.StartTransfer())
+            using (var transfer = item?.StartTransfer())
             {
+                if (transfer == null)
+                {
+                    return;
+                }
+
                 if (ScanProfile.PaperSource != ScanSource.Glass && !device.SupportsFeeder())
                 {
                     throw new NoFeederSupportException();
@@ -149,7 +159,17 @@ namespace NAPS2.Scan.Wia
 
         private WiaItem GetItem(WiaDevice device)
         {
-            if (device.Version == WiaVersion.Wia10)
+            if (ScanProfile.UseNativeUI)
+            {
+                // TODO: For native UI, (a) always use WIA 1.0, probably (b) use the worker to run the thing as 32-bit
+                // TODO: Come to think of it, that's exactly the same behaviour as wiaaut. Maybe just use that.
+                // TODO: Upon further reflection (a) use WIA 2.0 by default since it works with all scanners. That's more important than slight weirdness.
+                // TODO: (b) For WIA 1.0 worker use, we can do the transfer locally and just use the worker to serialize an item id (?) + map of property values.
+                // TODO: The worker can enumerate all properties, then show the window (using the serialized window handle), then do a diff and send over all
+                // TODO: different property id/value pairs to be set on the client. Integers only.
+                return device.PromptToConfigure(Invoker.Current.InvokeGet(() => DialogParent.Handle));
+            }
+            else if (device.Version == WiaVersion.Wia10)
             {
                 // In WIA 1.0, the root device only has a single child, "Scan"
                 // https://docs.microsoft.com/en-us/windows-hardware/drivers/image/wia-scanner-tree
@@ -169,6 +189,11 @@ namespace NAPS2.Scan.Wia
 
         private void ConfigureProps(WiaDevice device, WiaItem item)
         {
+            if (ScanProfile.UseNativeUI)
+            {
+                return;
+            }
+
             if (ScanProfile.PaperSource != ScanSource.Glass && device.SupportsFeeder())
             {
                 if (device.Version == WiaVersion.Wia10)

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.Scan.Wia.Native
 {
-    public class WiaItem : WiaItemBase, IWiaItemProps
+    public class WiaItem : WiaItemBase
     {
         protected internal WiaItem(WiaVersion version, IntPtr handle) : base(version, handle)
         {

@@ -12,5 +12,14 @@ namespace NAPS2.Scan.Wia.Native
         }
 
         public WiaPropertyCollection Properties { get; }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                Properties?.Dispose();
+            }
+        }
     }
 }

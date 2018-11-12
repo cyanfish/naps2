@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Wia.Native
 {
-    public class WiaPropertyCollection : NativeWiaObject
+    public class WiaPropertyCollection : NativeWiaObject, IEnumerable<WiaProperty>
     {
         private readonly Dictionary<int, WiaProperty> propertyDict;
 
@@ -17,5 +18,9 @@ namespace NAPS2.Scan.Wia.Native
         }
         
         public WiaProperty this[int propId] => propertyDict.Get(propId);
+
+        public IEnumerator<WiaProperty> GetEnumerator() => propertyDict.Values.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

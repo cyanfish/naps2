@@ -7,11 +7,19 @@ namespace NAPS2.Scan.Wia.Native
 {
     public abstract class NativeWiaObject : IDisposable
     {
+        public static WiaVersion DefaultWiaVersion =>
+            Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Major <= 5
+                ? WiaVersion.Wia10 : WiaVersion.Wia20;
+
         private bool disposed;
         private IntPtr handle;
 
         protected NativeWiaObject(WiaVersion version, IntPtr handle)
         {
+            if (version == WiaVersion.Default)
+            {
+                version = DefaultWiaVersion;
+            }
             Version = version;
             Handle = handle;
         }
