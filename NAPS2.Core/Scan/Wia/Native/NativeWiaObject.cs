@@ -24,9 +24,8 @@ namespace NAPS2.Scan.Wia.Native
             Handle = handle;
         }
 
-        protected NativeWiaObject(WiaVersion version)
+        protected NativeWiaObject(WiaVersion version) : this(version, IntPtr.Zero)
         {
-            Version = version;
         }
 
         protected internal IntPtr Handle

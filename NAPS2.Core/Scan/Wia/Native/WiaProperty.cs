@@ -51,7 +51,7 @@ namespace NAPS2.Scan.Wia.Native
             }
         }
 
-        // TODO: Load attributes
+        // TODO: Load attributes. Maybe inside a WiaPropertyAttributes class, Attributes property?
         // https://docs.microsoft.com/en-us/windows/desktop/api/wia_xp/nf-wia_xp-iwiapropertystorage-getpropertyattributes
 
         public SubTypes SubType { get; set; }
