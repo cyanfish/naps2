@@ -70,10 +70,6 @@ namespace NAPS2.Scan.Wia
                     ScanException = e;
                     return false;
                 }
-                finally
-                {
-                    InvokeFinished();
-                }
             });
 
             return true;
@@ -121,28 +117,35 @@ namespace NAPS2.Scan.Wia
                 int pageNumber = 1;
                 transfer.PageScanned += (sender, args) =>
                 {
-                    using (args.Stream)
-                    using (Image output = Image.FromStream(args.Stream))
-                    using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+                    try
                     {
-                        if (blankDetector.ExcludePage(result, ScanProfile))
+                        using (args.Stream)
+                        using (Image output = Image.FromStream(args.Stream))
+                        using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
                         {
-                            return;
-                        }
+                            if (blankDetector.ExcludePage(result, ScanProfile))
+                            {
+                                return;
+                            }
 
-                        ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
-                        var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                        scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber++);
-                        string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
-                        scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
-                        source.Put(image);
+                            ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
+                            var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                            scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber++);
+                            string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
+                            scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
+                            source.Put(image);
 
-                        if (ScanProfile.PaperSource != ScanSource.Glass)
-                        {
-                            Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
-                            Status.CurrentProgress = 0;
-                            InvokeStatusChanged();
+                            if (ScanProfile.PaperSource != ScanSource.Glass)
+                            {
+                                Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
+                                Status.CurrentProgress = 0;
+                                InvokeStatusChanged();
+                            }
                         }
+                    }
+                    catch (Exception e)
+                    {
+                        ScanException = e;
                     }
                 };
                 transfer.Progress += (sender, args) =>

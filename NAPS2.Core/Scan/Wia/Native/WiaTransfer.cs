@@ -52,7 +52,15 @@ namespace NAPS2.Scan.Wia.Native
                     Progress?.Invoke(this, new ProgressEventArgs(percent));
                     break;
                 case MSG_END_STREAM:
-                    PageScanned?.Invoke(this, new PageScannedEventArgs(new NativeStreamWrapper(stream)));
+                    var wrappedStream = new NativeStreamWrapper(stream);
+                    if (cancel)
+                    {
+                        wrappedStream.Dispose();
+                    }
+                    else
+                    {
+                        PageScanned?.Invoke(this, new PageScannedEventArgs(wrappedStream));
+                    }
                     break;
                 case MSG_END_TRANSFER:
                     TransferComplete?.Invoke(this, EventArgs.Empty);
