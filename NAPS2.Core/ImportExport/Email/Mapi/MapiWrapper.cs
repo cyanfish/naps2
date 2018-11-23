@@ -20,7 +20,26 @@ namespace NAPS2.ImportExport.Email.Mapi
 
         public MapiSendMailReturnCode SendEmail(EmailMessage message)
         {
-            // Translate files & recipients to unmanaged MAPI structures
+            var clientName = userConfigManager.Config.EmailSetup?.SystemProviderName;
+            var (mapiSendMail, mapiSendMailW) = systemEmailClients.GetDelegate(clientName, out bool unicode);
+
+            // Determine the flags used to send the message
+            var flags = MapiSendMailFlags.None;
+            if (!message.AutoSend)
+            {
+                flags |= MapiSendMailFlags.Dialog;
+            }
+
+            if (!message.AutoSend || !message.SilentSend)
+            {
+                flags |= MapiSendMailFlags.LogonUI;
+            }
+
+            return unicode ? SendMailW(mapiSendMailW, message, flags) : SendMail(mapiSendMail, message, flags);
+        }
+
+        private static MapiSendMailReturnCode SendMail(SystemEmailClients.MapiSendMailDelegate mapiSendMail, EmailMessage message, MapiSendMailFlags flags)
+        {
             using (var files = Unmanaged.CopyOf(GetFiles(message)))
             using (var recips = Unmanaged.CopyOf(GetRecips(message)))
             {
@@ -35,22 +54,29 @@ namespace NAPS2.ImportExport.Email.Mapi
                     fileCount = files.Length
                 };
 
-                // Determine the flags used to send the message
-                var flags = MapiSendMailFlags.None;
-                if (!message.AutoSend)
-                {
-                    flags |= MapiSendMailFlags.Dialog;
-                }
+                // Send the message
+                return mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
+            }
+        }
 
-                if (!message.AutoSend || !message.SilentSend)
+        private static MapiSendMailReturnCode SendMailW(SystemEmailClients.MapiSendMailDelegateW mapiSendMailW, EmailMessage message, MapiSendMailFlags flags)
+        {
+            using (var files = Unmanaged.CopyOf(GetFilesW(message)))
+            using (var recips = Unmanaged.CopyOf(GetRecipsW(message)))
+            {
+                // Create a MAPI structure for the entirety of the message
+                var mapiMessage = new MapiMessageW
                 {
-                    flags |= MapiSendMailFlags.LogonUI;
-                }
+                    subject = message.Subject,
+                    noteText = message.BodyText,
+                    recips = recips,
+                    recipCount = recips.Length,
+                    files = files,
+                    fileCount = files.Length
+                };
 
                 // Send the message
-                var clientName = userConfigManager.Config.EmailSetup?.SystemProviderName;
-                var mapiSendMail = systemEmailClients.GetDelegate(clientName);
-                return mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
+                return mapiSendMailW(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
             }
         }
 
@@ -66,9 +92,31 @@ namespace NAPS2.ImportExport.Email.Mapi
             }).ToArray();
         }
 
+        private static MapiRecipDescW[] GetRecipsW(EmailMessage message)
+        {
+            return message.Recipients.Select(recipient => new MapiRecipDescW
+            {
+                name = recipient.Name,
+                address = "SMTP:" + recipient.Address,
+                recipClass = recipient.Type == EmailRecipientType.Cc ? MapiRecipClass.Cc
+                    : recipient.Type == EmailRecipientType.Bcc ? MapiRecipClass.Bcc
+                    : MapiRecipClass.To
+            }).ToArray();
+        }
+
         private static MapiFileDesc[] GetFiles(EmailMessage message)
         {
             return message.Attachments.Select(attachment => new MapiFileDesc
+            {
+                position = -1,
+                path = attachment.FilePath,
+                name = attachment.AttachmentName
+            }).ToArray();
+        }
+
+        private static MapiFileDescW[] GetFilesW(EmailMessage message)
+        {
+            return message.Attachments.Select(attachment => new MapiFileDescW
             {
                 position = -1,
                 path = attachment.FilePath,
