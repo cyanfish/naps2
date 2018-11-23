@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
@@ -10,6 +9,7 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
+using NAPS2.Worker;
 
 namespace NAPS2.Scan.Wia
 {
@@ -17,11 +17,13 @@ namespace NAPS2.Scan.Wia
     {
         private readonly ScannedImageHelper scannedImageHelper;
         private readonly IBlankDetector blankDetector;
+        private readonly IWorkerServiceFactory workerServiceFactory;
 
-        public WiaScanOperation(ScannedImageHelper scannedImageHelper, IBlankDetector blankDetector)
+        public WiaScanOperation(ScannedImageHelper scannedImageHelper, IBlankDetector blankDetector, IWorkerServiceFactory workerServiceFactory)
         {
             this.scannedImageHelper = scannedImageHelper;
             this.blankDetector = blankDetector;
+            this.workerServiceFactory = workerServiceFactory;
             AllowCancel = true;
             AllowBackground = true;
         }
@@ -59,7 +61,7 @@ namespace NAPS2.Scan.Wia
                     }
                     catch (WiaException e)
                     {
-                        ThrowDeviceError(e);
+                        WiaScanErrors.ThrowDeviceError(e);
                     }
 
                     return true;
@@ -170,7 +172,24 @@ namespace NAPS2.Scan.Wia
                 // TODO: (b) For WIA 1.0 worker use, we can do the transfer locally and just use the worker to serialize an item id (?) + map of property values.
                 // TODO: The worker can enumerate all properties, then show the window (using the serialized window handle), then do a diff and send over all
                 // TODO: different property id/value pairs to be set on the client. Integers only.
-                return device.PromptToConfigure(Invoker.Current.InvokeGet(() => DialogParent.Handle));
+                var hwnd = Invoker.Current.InvokeGet(() => DialogParent.Handle);
+                bool useWorker = Environment.Is64BitProcess && device.Version == WiaVersion.Wia10;
+                if (useWorker)
+                {
+                    WiaConfiguration config;
+                    using (var worker = workerServiceFactory.Create())
+                    {
+                        config = worker.Service.Wia10NativeUI(device.Id(), hwnd);
+                    }
+                    var item = device.FindSubItem(config.ItemName);
+                    device.Properties.DeserializeEditable(device.Properties.Delta(config.DeviceProps));
+                    item.Properties.DeserializeEditable(item.Properties.Delta(config.ItemProps));
+                    return item;
+                }
+                else
+                {
+                    return device.PromptToConfigure(hwnd);
+                }
             }
             else if (device.Version == WiaVersion.Wia10)
             {
@@ -196,7 +215,7 @@ namespace NAPS2.Scan.Wia
             {
                 return;
             }
-
+            
             if (ScanProfile.PaperSource != ScanSource.Glass && device.SupportsFeeder())
             {
                 if (device.Version == WiaVersion.Wia10)
@@ -311,40 +330,6 @@ namespace NAPS2.Scan.Wia
                 item.SetPropertyRange(WiaPropertyId.IPS_CONTRAST, ScanProfile.Contrast, -1000, 1000);
                 item.SetPropertyRange(WiaPropertyId.IPS_BRIGHTNESS, ScanProfile.Brightness, -1000, 1000);
             }
-        }
-
-        private void ThrowDeviceError(WiaException e)
-        {
-            // TODO: Figure out what error code FindDevice returns and throw DeviceNotFoundException
-            if (e.ErrorCode == WiaErrorCodes.NO_DEVICE_FOUND)
-            {
-                throw new NoDevicesFoundException();
-            }
-            if (e.ErrorCode == WiaErrorCodes.OUT_OF_PAPER)
-            {
-                throw new NoPagesException();
-            }
-            if (e.ErrorCode == WiaErrorCodes.OFFLINE)
-            {
-                throw new DeviceException(MiscResources.DeviceOffline);
-            }
-            if (e.ErrorCode == WiaErrorCodes.BUSY)
-            {
-                throw new DeviceException(MiscResources.DeviceBusy);
-            }
-            if (e.ErrorCode == WiaErrorCodes.COVER_OPEN)
-            {
-                throw new DeviceException(MiscResources.DeviceCoverOpen);
-            }
-            if (e.ErrorCode == WiaErrorCodes.PAPER_JAM)
-            {
-                throw new DeviceException(MiscResources.DevicePaperJam);
-            }
-            if (e.ErrorCode == WiaErrorCodes.WARMING_UP)
-            {
-                throw new DeviceException(MiscResources.DeviceWarmingUp);
-            }
-            throw new ScanDriverUnknownException(e);
         }
     }
 }

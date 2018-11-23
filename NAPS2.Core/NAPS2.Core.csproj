@@ -215,8 +215,10 @@
     <Compile Include="Scan\Wia\Native\WiaPropertyValue.cs" />
     <Compile Include="Scan\Wia\Native\WiaTransfer.cs" />
     <Compile Include="Scan\Wia\Native\WiaItem.cs" />
-    <Compile Include="Scan\Wia\Native\WiaItemExtensions.cs" />
+    <Compile Include="Scan\Wia\Native\WiaExtensions.cs" />
     <Compile Include="Scan\Wia\Native\WiaVersion.cs" />
+    <Compile Include="Scan\Wia\WiaConfiguration.cs" />
+    <Compile Include="Scan\Wia\WiaScanErrors.cs" />
     <Compile Include="Scan\Wia\WiaScanOperation.cs" />
     <Compile Include="Update\UpdateOperation.cs" />
     <Compile Include="Update\UpdateInfo.cs" />

@@ -13,6 +13,8 @@ using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Twain;
+using NAPS2.Scan.Wia;
+using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
 
 namespace NAPS2.Worker
@@ -42,6 +44,36 @@ namespace NAPS2.Worker
         {
             Callback = OperationContext.Current.GetCallbackChannel<IWorkerCallback>();
             RecoveryImage.RecoveryFolder = new DirectoryInfo(recoveryFolderPath);
+        }
+
+        public WiaConfiguration Wia10NativeUI(string deviceId, IntPtr hwnd)
+        {
+            try
+            {
+                try
+                {
+                    using (var deviceManager = new WiaDeviceManager(WiaVersion.Wia10))
+                    using (var device = deviceManager.FindDevice(deviceId))
+                    {
+                        var item = device.PromptToConfigure(hwnd);
+                        return new WiaConfiguration
+                        {
+                            DeviceProps = device.Properties.SerializeEditable(),
+                            ItemProps = item.Properties.SerializeEditable(),
+                            ItemName = item.Name()
+                        };
+                    }
+                }
+                catch (WiaException e)
+                {
+                    WiaScanErrors.ThrowDeviceError(e);
+                    throw new InvalidOperationException();
+                }
+            }
+            catch (ScanDriverException e)
+            {
+                throw new FaultException<ScanDriverExceptionDetail>(new ScanDriverExceptionDetail(e));
+            }
         }
 
         public List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl)

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NAPS2.Scan.Wia.Native
 {
-    public static class WiaItemExtensions
+    public static class WiaExtensions
     {
         public static string Id(this IWiaDeviceProps device)
         {
@@ -69,6 +69,37 @@ namespace NAPS2.Scan.Wia.Native
                 actualValue = Math.Min(actualValue, prop.SubTypeMax);
                 actualValue = Math.Max(actualValue, prop.SubTypeMin);
                 prop.Value = actualValue;
+            }
+        }
+
+        public static Dictionary<int, object> SerializeEditable(this WiaPropertyCollection props)
+        {
+            return props.Where(x => x.Type == WiaPropertyType.I4).ToDictionary(x => x.Id, x => x.Value);
+        }
+
+        public static Dictionary<int, object> Delta(this WiaPropertyCollection props, Dictionary<int, object> target)
+        {
+            var source = props.SerializeEditable();
+            var delta = new Dictionary<int, object>();
+            foreach (var kvp in target)
+            {
+                if (source.ContainsKey(kvp.Key) && !Equals(source[kvp.Key], kvp.Value))
+                {
+                    delta.Add(kvp.Key, kvp.Value);
+                }
+            }
+            return delta;
+        }
+
+        public static void DeserializeEditable(this WiaPropertyCollection props, Dictionary<int, object> values)
+        {
+            foreach (var kvp in values)
+            {
+                var prop = props[kvp.Key];
+                if (prop != null)
+                {
+                    prop.Value = kvp.Value;
+                }
             }
         }
     }

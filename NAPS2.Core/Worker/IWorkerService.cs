@@ -7,6 +7,7 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Wia;
 
 namespace NAPS2.Worker
 {
@@ -18,6 +19,9 @@ namespace NAPS2.Worker
     {
         [OperationContract]
         void Init(string recoveryFolderPath);
+
+        [OperationContract]
+        WiaConfiguration Wia10NativeUI(string scanDevice, IntPtr hwnd);
 
         [OperationContract]
         List<ScanDevice> TwainGetDeviceList(TwainImpl twainImpl);

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using NAPS2.Platform;
 
 namespace NAPS2.Scan.Wia.Native
 {
     public abstract class NativeWiaObject : IDisposable
     {
-        public static WiaVersion DefaultWiaVersion =>
-            Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Major <= 5
-                ? WiaVersion.Wia10 : WiaVersion.Wia20;
+        public static WiaVersion DefaultWiaVersion => PlatformCompat.System.IsWia20Supported ? WiaVersion.Wia20 : WiaVersion.Wia10;
 
         private bool disposed;
         private IntPtr handle;

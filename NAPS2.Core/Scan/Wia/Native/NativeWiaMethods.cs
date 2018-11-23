@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using NAPS2.Platform;
+using NAPS2.Util;
 
 namespace NAPS2.Scan.Wia.Native
 {
     internal static class NativeWiaMethods
     {
+        static NativeWiaMethods()
+        {
+            const string lib64Dir = "64";
+            if (Environment.Is64BitProcess && PlatformCompat.System.CanUseWin32)
+            {
+                var location = Assembly.GetExecutingAssembly().Location;
+                var coreDllDir = System.IO.Path.GetDirectoryName(location);
+                if (coreDllDir != null)
+                {
+                    Win32.SetDllDirectory(System.IO.Path.Combine(coreDllDir, lib64Dir));
+                }
+            }
+        }
+
         [DllImport("NAPS2.WIA.dll")]
         public static extern uint GetDeviceManager1([Out] out IntPtr deviceManager);
 
