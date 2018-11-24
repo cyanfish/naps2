@@ -6,6 +6,8 @@ namespace NAPS2.Scan.Wia.Native
 {
     public class WiaProperty
     {
+        private WiaPropertyAttributes attributes;
+
         protected internal WiaProperty(IntPtr storage, int id, string name, ushort type)
         {
             Storage = storage;
@@ -51,27 +53,19 @@ namespace NAPS2.Scan.Wia.Native
             }
         }
 
-        // TODO: Load attributes. Maybe inside a WiaPropertyAttributes class, Attributes property?
-        // https://docs.microsoft.com/en-us/windows/desktop/api/wia_xp/nf-wia_xp-iwiapropertystorage-getpropertyattributes
-
-        public SubTypes SubType { get; set; }
-
-        public int SubTypeMax { get; set; }
-
-        public int SubTypeMin { get; set; }
-
-        public int SubTypeStep { get; set; }
-
-        public object[] SubTypeValues { get; set; }
+        public WiaPropertyAttributes Attributes
+        {
+            get
+            {
+                if (attributes == null)
+                {
+                    attributes = new WiaPropertyAttributes(Storage, Id);
+                }
+                return attributes;
+            }
+        }
 
         public override string ToString() => Name;
 
-        public enum SubTypes
-        {
-            None,
-            Range,
-            List,
-            Flag
-        }
     }
 }

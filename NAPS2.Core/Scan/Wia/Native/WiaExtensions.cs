@@ -60,14 +60,14 @@ namespace NAPS2.Scan.Wia.Native
             {
                 int expectedAbs = value - expectedMin;
                 int expectedRange = expectedMax - expectedMin;
-                int actualRange = prop.SubTypeMax - prop.SubTypeMin;
-                int actualValue = expectedAbs * actualRange / expectedRange + prop.SubTypeMin;
-                if (prop.SubTypeStep != 0)
+                int actualRange = prop.Attributes.Max - prop.Attributes.Min;
+                int actualValue = expectedAbs * actualRange / expectedRange + prop.Attributes.Min;
+                if (prop.Attributes.Step != 0)
                 {
-                    actualValue -= actualValue % prop.SubTypeStep;
+                    actualValue -= actualValue % prop.Attributes.Step;
                 }
-                actualValue = Math.Min(actualValue, prop.SubTypeMax);
-                actualValue = Math.Max(actualValue, prop.SubTypeMin);
+                actualValue = Math.Min(actualValue, prop.Attributes.Max);
+                actualValue = Math.Max(actualValue, prop.Attributes.Min);
                 prop.Value = actualValue;
             }
         }

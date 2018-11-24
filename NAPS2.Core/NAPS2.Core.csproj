@@ -208,9 +208,11 @@
     <Compile Include="Scan\Wia\Native\NativeWiaObject.cs" />
     <Compile Include="Scan\Wia\Native\WiaDeviceInfo.cs" />
     <Compile Include="Scan\Wia\Native\WiaItemBase.cs" />
+    <Compile Include="Scan\Wia\Native\WiaPropertyAttributes.cs" />
     <Compile Include="Scan\Wia\Native\WiaPropertyCollection.cs" />
     <Compile Include="Scan\Wia\Native\WiaProperty.cs" />
     <Compile Include="Scan\Wia\Native\WiaPropertyId.cs" />
+    <Compile Include="Scan\Wia\Native\WiaPropertySubType.cs" />
     <Compile Include="Scan\Wia\Native\WiaPropertyType.cs" />
     <Compile Include="Scan\Wia\Native\WiaPropertyValue.cs" />
     <Compile Include="Scan\Wia\Native\WiaTransfer.cs" />
