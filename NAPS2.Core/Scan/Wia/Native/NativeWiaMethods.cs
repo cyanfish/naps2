@@ -71,6 +71,18 @@ namespace NAPS2.Scan.Wia.Native
         public static extern uint SetPropertyInt(IntPtr propStorage, int propId, int value);
 
         [DllImport("NAPS2.WIA.dll")]
+        public static extern uint GetPropertyAttributes(
+            IntPtr propStorage,
+            int propId,
+            [Out] out int flags,
+            [Out] out int min,
+            [Out] out int nom,
+            [Out] out int max,
+            [Out] out int step,
+            [Out] out int numElems,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 7), Out] out int[] elems);
+        
+        [DllImport("NAPS2.WIA.dll")]
         public static extern uint StartTransfer1(IntPtr item, [Out] out IntPtr transfer);
 
         [DllImport("NAPS2.WIA.dll")]

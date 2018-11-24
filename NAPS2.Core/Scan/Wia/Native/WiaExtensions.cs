@@ -53,6 +53,35 @@ namespace NAPS2.Scan.Wia.Native
             }
         }
 
+        public static void SetPropertyClosest(this WiaItemBase item, int propId, ref int value)
+        {
+            var prop = item.Properties[propId];
+            if (prop != null)
+            {
+                if (prop.Attributes.Flags.HasFlag(WiaPropertyFlags.List))
+                {
+                    int value2 = value;
+                    var choice = prop.Attributes.Values.OfType<int>().OrderBy(x => Math.Abs(x - value2)).Cast<int?>().FirstOrDefault();
+                    if (choice != null)
+                    {
+                        prop.Value = choice.Value;
+                        value = choice.Value;
+                    }
+                }
+                else
+                {
+                    // Not a list, try to set the property directly
+                    try
+                    {
+                        prop.Value = value;
+                    }
+                    catch (WiaException)
+                    {
+                    }
+                }
+            }
+        }
+
         public static void SetPropertyRange(this WiaItemBase item, int propId, int value, int expectedMin, int expectedMax)
         {
             var prop = item.Properties[propId];

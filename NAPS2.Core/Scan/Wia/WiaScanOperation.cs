@@ -359,19 +359,19 @@ namespace NAPS2.Scan.Wia
                     item.SetProperty(WiaPropertyId.IPA_DATATYPE, 0);
                     break;
             }
-
-            // TODO: Need to somehow find the list of valid resolutions, and pick the closest one to the user selection.
-            int resolution = ScanProfile.Resolution.ToIntDpi();
-            item.SetProperty(WiaPropertyId.IPS_YRES, resolution);
-            item.SetProperty(WiaPropertyId.IPS_XRES, resolution);
+            
+            int xRes = ScanProfile.Resolution.ToIntDpi();
+            int yRes = xRes;
+            item.SetPropertyClosest(WiaPropertyId.IPS_XRES, ref xRes);
+            item.SetPropertyClosest(WiaPropertyId.IPS_YRES, ref yRes);
 
             PageDimensions pageDimensions = ScanProfile.PageSize.PageDimensions() ?? ScanProfile.CustomPageSize;
             if (pageDimensions == null)
             {
                 throw new InvalidOperationException("No page size specified");
             }
-            int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * resolution / 1000;
-            int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * resolution / 1000;
+            int pageWidth = pageDimensions.WidthInThousandthsOfAnInch() * xRes / 1000;
+            int pageHeight = pageDimensions.HeightInThousandthsOfAnInch() * yRes / 1000;
 
             int horizontalSize, verticalSize;
             if (device.Version == WiaVersion.Wia10)
@@ -391,8 +391,8 @@ namespace NAPS2.Scan.Wia
                 verticalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
             }
 
-            int pagemaxwidth = horizontalSize * resolution / 1000;
-            int pagemaxheight = verticalSize * resolution / 1000;
+            int pagemaxwidth = horizontalSize * xRes / 1000;
+            int pagemaxheight = verticalSize * yRes / 1000;
 
             int horizontalPos = 0;
             if (ScanProfile.PageAlign == ScanHorizontalAlign.Center)
