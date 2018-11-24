@@ -25,7 +25,7 @@ namespace NAPS2.Scan.Wia.Native
         protected internal WiaDeviceManager(WiaVersion version, IntPtr handle) : base(version, handle)
         {
         }
-        
+
         public IEnumerable<WiaDeviceInfo> GetDeviceInfos()
         {
             List<WiaDeviceInfo> result = new List<WiaDeviceInfo>();
@@ -53,21 +53,24 @@ namespace NAPS2.Scan.Wia.Native
                 return null;
             }
             WiaException.Check(hr);
-            return new WiaDevice(Version, deviceHandle);;
+            return new WiaDevice(Version, deviceHandle); ;
         }
 
-        public WiaItem PromptForItem(IntPtr parentWindowHandle, WiaDevice device)
+        public string[] PromptForImage(IntPtr parentWindowHandle, WiaDevice device)
         {
+            var fileName = Path.GetRandomFileName();
             IntPtr itemHandle = IntPtr.Zero;
+            int fileCount = 0;
+            string[] filePaths = new string[10];
             var hr = Version == WiaVersion.Wia10
-                ? NativeWiaMethods.GetImage1(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, 0, 0, Path.Combine(Paths.Temp, Path.GetRandomFileName()), IntPtr.Zero)
-                : NativeWiaMethods.GetImage2(Handle, parentWindowHandle, 0, Paths.Temp, Path.GetRandomFileName(), 0, device.Id(), ref itemHandle);
+                ? NativeWiaMethods.GetImage1(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, 0, 0, Path.Combine(Paths.Temp, fileName), IntPtr.Zero)
+                : NativeWiaMethods.GetImage2(Handle, 0, device.Id(), parentWindowHandle, Paths.Temp, fileName, ref fileCount, ref filePaths, ref itemHandle);
             if (hr == 1)
             {
                 return null;
             }
             WiaException.Check(hr);
-            return new WiaItem(Version, itemHandle);
+            return filePaths ?? new[] { Path.Combine(Paths.Temp, fileName) };
         }
     }
 }

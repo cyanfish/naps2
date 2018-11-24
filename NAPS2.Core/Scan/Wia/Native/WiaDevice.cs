@@ -13,13 +13,14 @@ namespace NAPS2.Scan.Wia.Native
         
         public WiaItem PromptToConfigure(IntPtr parentWindowHandle)
         {
+            if (Version == WiaVersion.Wia20)
+            {
+                throw new InvalidOperationException("WIA 2.0 does not support PromptToConfigure. Use WiaDeviceManager.PromptForImage if you want to use the native WIA 2.0 UI.");
+            }
+
             int itemCount = 0;
-            IntPtr[] items = new IntPtr[5];
-            int fileCount = 0;
-            string[] filePaths = new string[0];
-            var hr = Version == WiaVersion.Wia10
-                ? NativeWiaMethods.ConfigureDevice1(Handle, parentWindowHandle, 0, 0, ref itemCount, ref items)
-                : NativeWiaMethods.ConfigureDevice2(Handle, 0, parentWindowHandle, Paths.Temp, Path.GetRandomFileName(), ref fileCount, ref filePaths, items);
+            IntPtr[] items = null;
+            var hr = NativeWiaMethods.ConfigureDevice1(Handle, parentWindowHandle, 0, 0, ref itemCount, ref items);
             if (hr == 1)
             {
                 return null;
