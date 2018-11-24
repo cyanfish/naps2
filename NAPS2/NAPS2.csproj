@@ -188,11 +188,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageComponents.tt</DependentUpon>
     </Content>
-    <Content Include="Setup\lib\64\NAPS2.WIA.dll" />
+    <ContentWithTargetPath Include="Setup\lib\dbg\64\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>64\NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Setup\lib\64\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>64\NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Setup\lib\dbg\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Setup\lib\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
     <Content Include="Setup\lib\64\twaindsm.dll" />
     <Content Include="Setup\lib\NTwain.dll" />
     <Content Include="Setup\lib\twaindsm.dll" />
-    <Content Include="Setup\lib\NAPS2.WIA.dll" />
     <Content Include="Setup\setup.iss" />
     <Content Include="Setup\setup.languagefiles.iss">
       <AutoGen>True</AutoGen>
@@ -234,8 +248,10 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
-    <PostBuildEvent Condition="'$(OS)' == 'Windows_NT'">call "%25vsappiddir%25..\..\VC\Auxiliary\Build\vcvars32.bat" x86
-editbin /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent Condition="'$(OS)' == 'Windows_NT'">
+      call "%25vsappiddir%25..\..\VC\Auxiliary\Build\vcvars32.bat" x86
+      editbin /LARGEADDRESSAWARE "$(TargetPath)"
+    </PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

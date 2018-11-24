@@ -106,6 +106,28 @@
       <Name>NAPS2.Worker</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ContentWithTargetPath Include="..\NAPS2\Setup\lib\dbg\64\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\dbg\64\NAPS2.WIA.dll</Link>
+      <TargetPath>64\NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2\Setup\lib\64\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\64\NAPS2.WIA.dll</Link>
+      <TargetPath>64\NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2\Setup\lib\dbg\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\dbg\NAPS2.WIA.dll</Link>
+      <TargetPath>NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2\Setup\lib\NAPS2.WIA.dll">
+      <CopyToOutputDirectory Condition=" '$(Configuration)' != 'Debug' And '$(Configuration)' != 'DebugLang' ">PreserveNewest</CopyToOutputDirectory>
+      <Link>lib\NAPS2.WIA.dll</Link>
+      <TargetPath>NAPS2.WIA.dll</TargetPath>
+    </ContentWithTargetPath>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
@@ -124,5 +146,5 @@ editbin /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\NAPS2\Setup\CommonTargets.targets"/>
+  <Import Project="..\NAPS2\Setup\CommonTargets.targets" />
 </Project>

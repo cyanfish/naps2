@@ -140,16 +140,11 @@ Global
 		{BC0E3031-6C00-4707-A424-4FF04425D719}.InstallerMSI|x86.Build.0 = InstallerMSI|Any CPU
 		{BC0E3031-6C00-4707-A424-4FF04425D719}.Standalone|x86.ActiveCfg = Standalone|Any CPU
 		{BC0E3031-6C00-4707-A424-4FF04425D719}.Standalone|x86.Build.0 = Standalone|Any CPU
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Debug|x86.ActiveCfg = Debug|x64
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Debug|x86.Build.0 = Debug|x64
+		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Debug|x86.ActiveCfg = Debug|Win32
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.DebugLang|x86.ActiveCfg = Debug|Win32
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.DebugLang|x86.Build.0 = Debug|Win32
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerEXE|x86.ActiveCfg = Release|Win32
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerEXE|x86.Build.0 = Release|Win32
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerMSI|x86.ActiveCfg = Release|Win32
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerMSI|x86.Build.0 = Release|Win32
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Standalone|x86.ActiveCfg = Release|Win32
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Standalone|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
