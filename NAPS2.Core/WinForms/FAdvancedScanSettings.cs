@@ -5,6 +5,7 @@ using NAPS2.Config;
 using NAPS2.Scan;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
+using NAPS2.Scan.Wia.Native;
 
 namespace NAPS2.WinForms
 {
@@ -16,16 +17,12 @@ namespace NAPS2.WinForms
         {
             this.appConfigManager = appConfigManager;
             InitializeComponent();
-            txtWiaDelayBetweenScansSeconds.Left = cbWiaDelayBetweenScans.Right + 6;
 
-            cmbTwainImpl.Format += (sender, e) => e.Value = ((Enum) e.ListItem).Description();
-            cmbTwainImpl.Items.Add(TwainImpl.Default);
-            cmbTwainImpl.Items.Add(TwainImpl.MemXfer);
-            cmbTwainImpl.Items.Add(TwainImpl.OldDsm);
-            cmbTwainImpl.Items.Add(TwainImpl.Legacy);
-            if (Environment.Is64BitProcess)
+            AddEnumItems<WiaVersion>(cmbWiaVersion);
+            AddEnumItems<TwainImpl>(cmbTwainImpl);
+            if (!Environment.Is64BitProcess)
             {
-                cmbTwainImpl.Items.Add(TwainImpl.X64);
+                cmbTwainImpl.Items.Remove(TwainImpl.X64);
             }
         }
 
@@ -50,13 +47,11 @@ namespace NAPS2.WinForms
             cbBrightnessContrastAfterScan.Checked = scanProfile.BrightnessContrastAfterScan;
             cbAutoDeskew.Checked = scanProfile.AutoDeskew;
             cbWiaOffsetWidth.Checked = scanProfile.WiaOffsetWidth;
-            cbWiaRetryOnFailure.Checked = scanProfile.WiaRetryOnFailure;
-            cbWiaDelayBetweenScans.Checked = scanProfile.WiaDelayBetweenScans;
-            txtWiaDelayBetweenScansSeconds.Text = scanProfile.WiaDelayBetweenScansSeconds.ToString("G");
+            cmbWiaVersion.SelectedIndex = (int)scanProfile.WiaVersion;
             cbForcePageSize.Checked = scanProfile.ForcePageSize;
             cbForcePageSizeCrop.Checked = scanProfile.ForcePageSizeCrop;
             cbFlipDuplex.Checked = scanProfile.FlipDuplexedPages;
-            cmbTwainImpl.SelectedIndex = (int) scanProfile.TwainImpl;
+            cmbTwainImpl.SelectedIndex = (int)scanProfile.TwainImpl;
             cbExcludeBlankPages.Checked = scanProfile.ExcludeBlankPages;
             tbWhiteThreshold.Value = scanProfile.BlankPageWhiteThreshold;
             txtWhiteThreshold.Text = scanProfile.BlankPageWhiteThreshold.ToString("G");
@@ -68,9 +63,7 @@ namespace NAPS2.WinForms
         {
             cmbTwainImpl.Enabled = ScanProfile.DriverName == TwainScanDriver.DRIVER_NAME;
             cbWiaOffsetWidth.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
-            cbWiaRetryOnFailure.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
-            cbWiaDelayBetweenScans.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
-            txtWiaDelayBetweenScansSeconds.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME && cbWiaDelayBetweenScans.Checked;
+            cmbWiaVersion.Enabled = ScanProfile.DriverName == WiaScanDriver.DRIVER_NAME;
             tbImageQuality.Enabled = !cbHighQuality.Checked;
             txtImageQuality.Enabled = !cbHighQuality.Checked;
             tbWhiteThreshold.Enabled = cbExcludeBlankPages.Checked && ScanProfile.BitDepth != ScanBitDepth.BlackWhite;
@@ -88,18 +81,16 @@ namespace NAPS2.WinForms
             ScanProfile.BrightnessContrastAfterScan = cbBrightnessContrastAfterScan.Checked;
             ScanProfile.AutoDeskew = cbAutoDeskew.Checked;
             ScanProfile.WiaOffsetWidth = cbWiaOffsetWidth.Checked;
-            ScanProfile.WiaRetryOnFailure = cbWiaRetryOnFailure.Checked;
-            ScanProfile.WiaDelayBetweenScans = cbWiaDelayBetweenScans.Checked;
-            if (double.TryParse(txtWiaDelayBetweenScansSeconds.Text, out double value))
+            if (cmbWiaVersion.SelectedIndex != -1)
             {
-                ScanProfile.WiaDelayBetweenScansSeconds = value;
+                ScanProfile.WiaVersion = (WiaVersion)cmbWiaVersion.SelectedIndex;
             }
             ScanProfile.ForcePageSize = cbForcePageSize.Checked;
             ScanProfile.ForcePageSizeCrop = cbForcePageSizeCrop.Checked;
             ScanProfile.FlipDuplexedPages = cbFlipDuplex.Checked;
             if (cmbTwainImpl.SelectedIndex != -1)
             {
-                ScanProfile.TwainImpl = (TwainImpl) cmbTwainImpl.SelectedIndex;
+                ScanProfile.TwainImpl = (TwainImpl)cmbTwainImpl.SelectedIndex;
             }
             ScanProfile.ExcludeBlankPages = cbExcludeBlankPages.Checked;
             ScanProfile.BlankPageWhiteThreshold = tbWhiteThreshold.Value;
@@ -139,11 +130,6 @@ namespace NAPS2.WinForms
         }
 
         private void cbExcludeBlankPages_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateEnabled();
-        }
-
-        private void cbWiaDelayBetweenScans_CheckedChanged(object sender, EventArgs e)
         {
             UpdateEnabled();
         }

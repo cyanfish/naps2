@@ -509,5 +509,32 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("TwainImpl_X64", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        internal static string WiaVersion_Default {
+            get {
+                return ResourceManager.GetString("WiaVersion_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1.0.
+        /// </summary>
+        internal static string WiaVersion_Wia10 {
+            get {
+                return ResourceManager.GetString("WiaVersion_Wia10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2.0.
+        /// </summary>
+        internal static string WiaVersion_Wia20 {
+            get {
+                return ResourceManager.GetString("WiaVersion_Wia20", resourceCulture);
+            }
+        }
     }
 }

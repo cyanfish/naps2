@@ -267,4 +267,13 @@
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
+  <data name="WiaVersion_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="WiaVersion_Wia10" xml:space="preserve">
+    <value>1.0</value>
+  </data>
+  <data name="WiaVersion_Wia20" xml:space="preserve">
+    <value>2.0</value>
+  </data>
 </root>

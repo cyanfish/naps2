@@ -282,89 +282,56 @@
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="txtWiaDelayBetweenScansSeconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 86</value>
+  <data name="cmbWiaVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 153</value>
   </data>
-  <data name="txtWiaDelayBetweenScansSeconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 20</value>
+  <data name="cmbWiaVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 21</value>
   </data>
-  <data name="txtWiaDelayBetweenScansSeconds.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
-  </data>
-  <data name="txtWiaDelayBetweenScansSeconds.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtWiaDelayBetweenScansSeconds.Name" xml:space="preserve">
-    <value>txtWiaDelayBetweenScansSeconds</value>
-  </data>
-  <data name="&gt;&gt;txtWiaDelayBetweenScansSeconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtWiaDelayBetweenScansSeconds.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;txtWiaDelayBetweenScansSeconds.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cbWiaDelayBetweenScans.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cbWiaDelayBetweenScans.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cbWiaDelayBetweenScans.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 88</value>
-  </data>
-  <data name="cbWiaDelayBetweenScans.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 17</value>
-  </data>
-  <data name="cbWiaDelayBetweenScans.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmbWiaVersion.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-    <value>Delay between scans (WIA)</value>
+  <data name="&gt;&gt;cmbWiaVersion.Name" xml:space="preserve">
+    <value>cmbWiaVersion</value>
   </data>
-  <data name="&gt;&gt;cbWiaDelayBetweenScans.Name" xml:space="preserve">
-    <value>cbWiaDelayBetweenScans</value>
+  <data name="&gt;&gt;cmbWiaVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbWiaDelayBetweenScans.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbWiaDelayBetweenScans.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmbWiaVersion.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="&gt;&gt;cbWiaDelayBetweenScans.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;cmbWiaVersion.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="cbWiaRetryOnFailure.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cbWiaRetryOnFailure.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cbWiaRetryOnFailure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 65</value>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 137</value>
   </data>
-  <data name="cbWiaRetryOnFailure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 17</value>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
   </data>
-  <data name="cbWiaRetryOnFailure.TabIndex" type="System.Int32, mscorlib">
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-    <value>Retry on failure (WIA)</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Wia Version:</value>
   </data>
-  <data name="&gt;&gt;cbWiaRetryOnFailure.Name" xml:space="preserve">
-    <value>cbWiaRetryOnFailure</value>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
   </data>
-  <data name="&gt;&gt;cbWiaRetryOnFailure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbWiaRetryOnFailure.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="&gt;&gt;cbWiaRetryOnFailure.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="cbForcePageSizeCrop.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -373,7 +340,7 @@
     <value>NoControl</value>
   </data>
   <data name="cbForcePageSizeCrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 134</value>
+    <value>9, 88</value>
   </data>
   <data name="cbForcePageSizeCrop.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 17</value>
@@ -394,7 +361,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cbForcePageSizeCrop.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="cbFlipDuplex.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="cbFlipDuplex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 157</value>
+    <value>9, 111</value>
   </data>
   <data name="cbFlipDuplex.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 17</value>
@@ -424,7 +391,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cbFlipDuplex.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="cbWiaOffsetWidth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -454,13 +421,13 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cbWiaOffsetWidth.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="cbForcePageSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="cbForcePageSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 111</value>
+    <value>9, 65</value>
   </data>
   <data name="cbForcePageSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 17</value>
@@ -481,7 +448,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cbForcePageSize.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="cbBrightnessContrastAfterScan.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -508,7 +475,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cbBrightnessContrastAfterScan.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="cmbTwainImpl.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 196</value>
@@ -529,7 +496,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cmbTwainImpl.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -556,7 +523,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 296</value>
@@ -925,12 +892,12 @@
     <value>ilProfileIcons</value>
   </data>
   <data name="&gt;&gt;ilProfileIcons.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=5.3.3.34143, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.ILProfileIcons, NAPS2.Core, Version=6.0.3.32183, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FAdvancedScanSettings</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=5.3.3.34143, Culture=neutral, PublicKeyToken=null</value>
+    <value>NAPS2.WinForms.FormBase, NAPS2.Core, Version=6.0.3.32183, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
