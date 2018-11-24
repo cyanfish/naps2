@@ -24,7 +24,6 @@
       <ComponentRef Id="Deps" />
       <ComponentRef Id="Deps64" />
       <ComponentRef Id="twaindsm" />
-      <ComponentRef Id="wiaaut" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="RegistryEntries" />
       <ComponentGroupRef Id="LangComponents" />
@@ -89,7 +88,6 @@
         <File Source="..\NAPS2\bin\InstallerMSI\CommandLine.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\Ghostscript.NET.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\ICSharpCode.SharpZipLib.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\Interop.WIA.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\Microsoft.Threading.Tasks.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\Microsoft.Threading.Tasks.Extensions.dll" />
@@ -104,6 +102,7 @@
         <File Source="..\NAPS2\bin\InstallerMSI\System.Threading.Tasks.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\System.ValueTuple.dll" />
         <File Source="..\NAPS2\bin\InstallerMSI\zxing.dll" />
+        <File Source="..\NAPS2\Setup\lib\NAPS2.WIA.dll" />
       </Component>
     </DirectoryRef>
     
@@ -111,6 +110,7 @@
       <Component Id="Deps64" Guid="247ECEC0-290D-490D-B942-7239870AAF7D">
         <!-- Dependencies -->
         <File Source="..\NAPS2\Setup\lib\64\twaindsm.dll" Id="twaindsm64" />
+        <File Source="..\NAPS2\Setup\lib\64\NAPS2.WIA.dll" Id="naps2wia64" />
       </Component>
     </DirectoryRef>
     
@@ -118,9 +118,6 @@
       <!-- System Dependencies -->
       <Component Id="twaindsm" Guid="A55F9DBB-0A42-44B9-8C58-87F06A2075BA" Permanent="yes">
         <File Source="..\NAPS2\Setup\lib\twaindsm.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="wiaaut" Guid="9E7EF98E-5E9E-4838-8554-43EFB5ECF949" Permanent="yes">
-        <File Source="..\NAPS2\Setup\lib\wiaaut.dll" KeyPath="yes" />
       </Component>
     </DirectoryRef>
 

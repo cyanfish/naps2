@@ -98,11 +98,13 @@ function Publish-NAPS2-Standalone {
             cp $File.FullName $LibDir
         }
     }
+    foreach ($File in ("..\appsettings.xml", "lib\twaindsm.dll", "lib\NAPS2.WIA.dll")) {
+        cp $File $LibDir
+    }
 	$LibDir64 = $LibDir + "64\"
 	mkdir $LibDir64
-	cp "lib\64\twaindsm.dll" $LibDir64
-    foreach ($File in ("..\appsettings.xml", "lib\twaindsm.dll", "lib\wiaaut.dll")) {
-        cp $File $AppDir
+	foreach ($File in ("lib\64\twaindsm.dll", "lib\64\NAPS2.WIA.dll")) {
+        cp $File $LibDir64
     }
 	cp "..\..\LICENSE" ($AppDir + "license.txt")
 	cp "..\..\CONTRIBUTORS" ($AppDir + "contributors.txt")

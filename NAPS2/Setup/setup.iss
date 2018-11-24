@@ -62,7 +62,6 @@ Source: "..\bin\InstallerEXE\NAPS2.DI.dll"; DestDir: "{app}\lib"; Flags: ignorev
 Source: "..\bin\InstallerEXE\CommandLine.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\Ghostscript.NET.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
-Source: "..\bin\InstallerEXE\Interop.WIA.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\Microsoft.Threading.Tasks.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\Microsoft.Threading.Tasks.Extensions.Desktop.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "..\bin\InstallerEXE\Microsoft.Threading.Tasks.Extensions.dll"; DestDir: "{app}\lib"; Flags: ignoreversion
@@ -86,7 +85,8 @@ Source: "..\..\NAPS2.Worker\bin\InstallerEXE\NAPS2.Worker.exe"; DestDir: "{app}"
 Source: "..\..\NAPS2.Worker\bin\InstallerEXE\NAPS2.Worker.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\64\twaindsm.dll"; DestDir: "{app}\lib\64"; Flags: ignoreversion
 Source: "lib\twaindsm.dll"; DestDir: "{sys}"; Flags: sharedfile
-Source: "lib\wiaaut.dll"; DestDir: "{sys}"; Flags: regserver
+Source: "lib\64\NAPS2.WIA.dll"; DestDir: "{app}\lib\64"; Flags: regserver
+Source: "lib\NAPS2.WIA.dll"; DestDir: "{app}\lib"; Flags: regserver
 
 ; Delete files from old locations in case of upgrade
 [InstallDelete]

@@ -188,19 +188,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageComponents.tt</DependentUpon>
     </Content>
+    <Content Include="Setup\lib\64\NAPS2.WIA.dll" />
     <Content Include="Setup\lib\64\twaindsm.dll" />
     <Content Include="Setup\lib\NTwain.dll" />
     <Content Include="Setup\lib\twaindsm.dll" />
+    <Content Include="Setup\lib\NAPS2.WIA.dll" />
     <Content Include="Setup\setup.iss" />
     <Content Include="Setup\setup.languagefiles.iss">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>setup.languagefiles.tt</DependentUpon>
     </Content>
-    <None Include="Setup\lib\Interop.WIA.dll" />
     <None Include="Setup\lib\PdfSharp.dll" />
     <Content Include="scanner-app.ico" />
-    <None Include="Setup\lib\wiaaut.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
