@@ -98,7 +98,15 @@ namespace NAPS2.Scan.Wia.Native
                 var prop = props[kvp.Key];
                 if (prop != null)
                 {
-                    prop.Value = kvp.Value;
+                    try
+                    {
+                        prop.Value = kvp.Value;
+                    }
+                    catch (WiaException)
+                    {
+                        // Skip non-writable properties
+                        // Ideally this would not be done with an exception...
+                    }
                 }
             }
         }

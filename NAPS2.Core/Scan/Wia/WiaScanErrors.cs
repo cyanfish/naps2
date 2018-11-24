@@ -16,7 +16,7 @@ namespace NAPS2.Scan.Wia
             {
                 throw new NoDevicesFoundException();
             }
-            if (e.ErrorCode == WiaErrorCodes.OUT_OF_PAPER)
+            if (e.ErrorCode == WiaErrorCodes.PAPER_EMPTY)
             {
                 throw new NoPagesException();
             }

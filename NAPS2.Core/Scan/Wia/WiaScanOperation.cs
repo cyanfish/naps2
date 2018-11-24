@@ -82,82 +82,101 @@ namespace NAPS2.Scan.Wia
             using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
             using (var device = deviceManager.FindDevice(ScanProfile.Device.ID))
             using (var item = GetItem(device))
-            using (var transfer = item?.StartTransfer())
             {
-                if (transfer == null)
+                if (item == null)
                 {
                     return;
-                }
-
-                if (ScanProfile.PaperSource != ScanSource.Glass && !device.SupportsFeeder())
-                {
-                    throw new NoFeederSupportException();
-                }
-
-                if (ScanProfile.PaperSource == ScanSource.Duplex && !device.SupportsDuplex())
-                {
-                    throw new NoDuplexSupportException();
                 }
 
                 ProgressTitle = device.Name();
                 InvokeStatusChanged();
 
-                // TODO: Test 64-bit wia and figure out if I need the worker
-
-                // TODO: Delete the delay/retry options in ScanProfile (but make sure not to break xml parsing)
-
-                // TODO: Catch and log E_INVALIDARG when setting properties
-
                 ConfigureProps(device, item);
-                // TODO: Format BMP "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}"
 
-                // TODO: For WIA native UI, use WiaDevMgr::GetImageDlg (and SelectDeviceDlgID for device selection)
-
-                // TODO: Progress form (operation?)
-                // TODO: Use ScanParams.Modal as needed
-
-                int pageNumber = 1;
-                transfer.PageScanned += (sender, args) =>
+                using (var transfer = item.StartTransfer())
                 {
-                    try
+                    if (ScanProfile.PaperSource != ScanSource.Glass && !device.SupportsFeeder())
                     {
-                        using (args.Stream)
-                        using (Image output = Image.FromStream(args.Stream))
-                        using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
+                        throw new NoFeederSupportException();
+                    }
+
+                    if (ScanProfile.PaperSource == ScanSource.Duplex && !device.SupportsDuplex())
+                    {
+                        throw new NoDuplexSupportException();
+                    }
+
+                    // TODO: Delete the delay/retry options in ScanProfile (but make sure not to break xml parsing)
+
+                    // TODO: Catch and log E_INVALIDARG when setting properties
+
+                    // TODO: Format BMP "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}"
+
+                    // TODO: Use ScanParams.Modal as needed
+
+                    // TODO: WIA 2.0 native UI file loading
+
+                    int pageNumber = 1;
+                    transfer.PageScanned += (sender, args) =>
+                    {
+                        try
                         {
-                            if (blankDetector.ExcludePage(result, ScanProfile))
+                            using (args.Stream)
+                            using (Image output = Image.FromStream(args.Stream))
+                            using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
                             {
-                                return;
+                                if (blankDetector.ExcludePage(result, ScanProfile))
+                                {
+                                    return;
+                                }
+
+                                ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
+                                var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
+                                scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber++);
+                                string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
+                                scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
+                                source.Put(image);
+
+                                if (ScanProfile.PaperSource != ScanSource.Glass)
+                                {
+                                    Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
+                                    Status.CurrentProgress = 0;
+                                    InvokeStatusChanged();
+                                }
                             }
+                        }
+                        catch (Exception e)
+                        {
+                            ScanException = e;
+                        }
+                    };
+                    transfer.Progress += (sender, args) =>
+                    {
+                        Status.CurrentProgress = args.Percent;
+                        InvokeStatusChanged();
+                    };
+                    using (CancelToken.Register(transfer.Cancel))
+                    {
+                        transfer.Download();
 
-                            ScanBitDepth bitDepth = ScanProfile.UseNativeUI ? ScanBitDepth.C24Bit : ScanProfile.BitDepth;
-                            var image = new ScannedImage(result, bitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                            scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, pageNumber++);
-                            string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
-                            scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
-                            source.Put(image);
-
-                            if (ScanProfile.PaperSource != ScanSource.Glass)
+                        if (device.Version == WiaVersion.Wia10)
+                        {
+                            // For WIA 1.0 feeder scans, we need to repeatedly call Download until WIA_ERROR_PAPER_EMPTY is received.
+                            var handling = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT].Value;
+                            if ((handling & WiaPropertyValue.FEEDER) != 0)
                             {
-                                Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
-                                Status.CurrentProgress = 0;
-                                InvokeStatusChanged();
+                                try
+                                {
+                                    while (!CancelToken.IsCancellationRequested)
+                                    {
+                                        transfer.Download();
+                                    }
+                                }
+                                catch (WiaException e) when (e.ErrorCode == WiaErrorCodes.PAPER_EMPTY)
+                                {
+                                }
                             }
                         }
                     }
-                    catch (Exception e)
-                    {
-                        ScanException = e;
-                    }
-                };
-                transfer.Progress += (sender, args) =>
-                {
-                    Status.CurrentProgress = args.Percent;
-                    InvokeStatusChanged();
-                };
-                using (CancelToken.Register(transfer.Cancel))
-                {
-                    transfer.Download();
                 }
             }
         }
@@ -166,12 +185,6 @@ namespace NAPS2.Scan.Wia
         {
             if (ScanProfile.UseNativeUI)
             {
-                // TODO: For native UI, (a) always use WIA 1.0, probably (b) use the worker to run the thing as 32-bit
-                // TODO: Come to think of it, that's exactly the same behaviour as wiaaut. Maybe just use that.
-                // TODO: Upon further reflection (a) use WIA 2.0 by default since it works with all scanners. That's more important than slight weirdness.
-                // TODO: (b) For WIA 1.0 worker use, we can do the transfer locally and just use the worker to serialize an item id (?) + map of property values.
-                // TODO: The worker can enumerate all properties, then show the window (using the serialized window handle), then do a diff and send over all
-                // TODO: different property id/value pairs to be set on the client. Integers only.
                 var hwnd = Invoker.Current.InvokeGet(() => DialogParent.Handle);
                 bool useWorker = Environment.Is64BitProcess && device.Version == WiaVersion.Wia10;
                 if (useWorker)
@@ -215,12 +228,11 @@ namespace NAPS2.Scan.Wia
             {
                 return;
             }
-            
-            if (ScanProfile.PaperSource != ScanSource.Glass && device.SupportsFeeder())
+
+            if (ScanProfile.PaperSource != ScanSource.Glass)
             {
                 if (device.Version == WiaVersion.Wia10)
                 {
-                    // TODO: When implementing in C++, make sure we transfer as many pages as needed
                     device.SetProperty(WiaPropertyId.DPS_PAGES, 1);
                 }
                 else
