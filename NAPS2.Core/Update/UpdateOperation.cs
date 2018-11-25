@@ -73,9 +73,11 @@ namespace NAPS2.Update
             client.CancelAsync();
         }
 
-        public override void Wait()
+        public override void Wait(CancellationToken cancelToken)
         {
-            waitHandle.WaitOne();
+            while (!waitHandle.WaitOne(1000) && !cancelToken.IsCancellationRequested)
+            {
+            }
         }
 
         private void DownloadCompleted(object sender, AsyncCompletedEventArgs e)

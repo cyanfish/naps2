@@ -421,7 +421,15 @@ namespace NAPS2.WinForms
                 ShowInTaskbar = false;
                 Task.Factory.StartNew(() =>
                 {
-                    operationProgress.ActiveOperations.ForEach(op => op.Wait());
+                    var timeoutCts = new CancellationTokenSource();
+                    timeoutCts.CancelAfter(TimeSpan.FromSeconds(60));
+                    try
+                    {
+                        operationProgress.ActiveOperations.ForEach(op => op.Wait(timeoutCts.Token));
+                    }
+                    catch (OperationCanceledException)
+                    {
+                    }
                     closed = true;
                     SafeInvoke(Close);
                 });

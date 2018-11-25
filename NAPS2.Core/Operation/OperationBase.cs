@@ -28,9 +28,9 @@ namespace NAPS2.Operation
 
         public bool IsFinished { get; protected set; }
 
-        public virtual void Wait()
+        public virtual void Wait(CancellationToken cancelToken = default)
         {
-            Success?.Wait();
+            Success?.Wait(cancelToken);
         }
 
         public virtual void Cancel()

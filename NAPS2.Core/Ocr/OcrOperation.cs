@@ -26,9 +26,9 @@ namespace NAPS2.Ocr
             };
         }
 
-        public override void Wait()
+        public override void Wait(CancellationToken cancelToken)
         {
-            Task.WaitAll(workerTasks.ToArray());
+            Task.WaitAll(workerTasks.ToArray(), cancelToken);
         }
 
         public new CancellationToken CancelToken => base.CancelToken;

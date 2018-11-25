@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NAPS2.Operation
@@ -24,7 +25,7 @@ namespace NAPS2.Operation
 
         bool IsFinished { get; }
 
-        void Wait();
+        void Wait(CancellationToken cancelToken = default);
 
         void Cancel();
 
