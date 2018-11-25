@@ -11,10 +11,9 @@ namespace NAPS2.Scan.Wia
     {
         public static void ThrowDeviceError(WiaException e)
         {
-            // TODO: Figure out what error code FindDevice returns and throw DeviceNotFoundException
-            if (e.ErrorCode == WiaErrorCodes.NO_DEVICE_FOUND)
+            if (e.ErrorCode == WiaErrorCodes.NO_DEVICE_AVAILABLE)
             {
-                throw new NoDevicesFoundException();
+                throw new DeviceNotFoundException();
             }
             if (e.ErrorCode == WiaErrorCodes.PAPER_EMPTY)
             {

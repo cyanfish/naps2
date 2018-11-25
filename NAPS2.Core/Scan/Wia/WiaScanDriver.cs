@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Operation;
 using NAPS2.Platform;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
@@ -31,16 +32,24 @@ namespace NAPS2.Scan.Wia
 
         protected override ScanDevice PromptForDeviceInternal()
         {
-            using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
+            try
             {
-                using (var device = deviceManager.PromptForDevice(DialogParent.Handle))
+                using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
                 {
-                    if (device == null)
+                    using (var device = deviceManager.PromptForDevice(DialogParent.Handle))
                     {
-                        return null;
+                        if (device == null)
+                        {
+                            return null;
+                        }
+
+                        return new ScanDevice(device.Id(), device.Name());
                     }
-                    return new ScanDevice(device.Id(), device.Name());
                 }
+            }
+            catch (WiaException e) when (e.ErrorCode == WiaErrorCodes.NO_DEVICE_AVAILABLE)
+            {
+                throw new NoDevicesFoundException();
             }
         }
 

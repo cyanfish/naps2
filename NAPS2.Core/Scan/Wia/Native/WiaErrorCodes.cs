@@ -12,7 +12,7 @@ namespace NAPS2.Scan.Wia.Native
     public static class WiaErrorCodes
     {
         public const uint PAPER_EMPTY = 0x80210003;
-        public const uint NO_DEVICE_FOUND = 0x80210015;
+        public const uint NO_DEVICE_AVAILABLE = 0x80210015;
         public const uint OFFLINE = 0x80210005;
         public const uint PAPER_JAM = 0x80210002;
         public const uint BUSY = 0x80210006;
