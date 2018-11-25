@@ -128,9 +128,7 @@ namespace NAPS2.Scan.Wia.Native
 
         public static Dictionary<int, object> SerializeEditable(this WiaPropertyCollection props)
         {
-            return props
-                .Where(x => x.Type == WiaPropertyType.I4 && x.Attributes.Flags.HasFlag(WiaPropertyFlags.ReadWrite))
-                .ToDictionary(x => x.Id, x => x.Value);
+            return props.Where(x => x.Type == WiaPropertyType.I4).ToDictionary(x => x.Id, x => x.Value);
         }
 
         public static Dictionary<int, object> Delta(this WiaPropertyCollection props, Dictionary<int, object> target)
@@ -152,9 +150,18 @@ namespace NAPS2.Scan.Wia.Native
             foreach (var kvp in values)
             {
                 var prop = props[kvp.Key];
-                if (prop != null && prop.Attributes.Flags.HasFlag(WiaPropertyFlags.Write))
+                if (prop != null)
                 {
-                    prop.Value = kvp.Value;
+                    try
+                    {
+                        prop.Value = kvp.Value;
+                    }
+                    catch (ArgumentException)
+                    {
+                    }
+                    catch (WiaException)
+                    {
+                    }
                 }
             }
         }

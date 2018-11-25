@@ -20,6 +20,7 @@ namespace NAPS2.Worker
         [OperationContract]
         void Init(string recoveryFolderPath);
 
+        [FaultContract(typeof(ScanDriverExceptionDetail))]
         [OperationContract]
         WiaConfiguration Wia10NativeUI(string scanDevice, IntPtr hwnd);
 
