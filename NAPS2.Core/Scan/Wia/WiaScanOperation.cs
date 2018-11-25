@@ -64,6 +64,10 @@ namespace NAPS2.Scan.Wia
                 ProgressType = OperationProgressType.BarOnly
             };
 
+            // TODO: NoUI
+            // TODO: Test native UI in console behaviour (versus older behaviour)
+            // TODO: What happens if you close FDesktop while a batch scan is in progress?
+
             RunAsync(() =>
             {
                 try
