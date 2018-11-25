@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Logging;
 
 namespace NAPS2.Scan.Wia.Native
 {
@@ -49,7 +50,14 @@ namespace NAPS2.Scan.Wia.Native
             var prop = item.Properties[propId];
             if (prop != null)
             {
-                prop.Value = value;
+                try
+                {
+                    prop.Value = value;
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorException("Error setting property", e);
+                }
             }
         }
 
@@ -75,8 +83,9 @@ namespace NAPS2.Scan.Wia.Native
                     {
                         prop.Value = value;
                     }
-                    catch (WiaException)
+                    catch (Exception e)
                     {
+                        Log.ErrorException("Error setting property", e);
                     }
                 }
             }
@@ -87,23 +96,41 @@ namespace NAPS2.Scan.Wia.Native
             var prop = item.Properties[propId];
             if (prop != null)
             {
-                int expectedAbs = value - expectedMin;
-                int expectedRange = expectedMax - expectedMin;
-                int actualRange = prop.Attributes.Max - prop.Attributes.Min;
-                int actualValue = expectedAbs * actualRange / expectedRange + prop.Attributes.Min;
-                if (prop.Attributes.Step != 0)
+                if (prop.Attributes.Flags.HasFlag(WiaPropertyFlags.Range))
                 {
-                    actualValue -= actualValue % prop.Attributes.Step;
+                    int expectedAbs = value - expectedMin;
+                    int expectedRange = expectedMax - expectedMin;
+                    int actualRange = prop.Attributes.Max - prop.Attributes.Min;
+                    int actualValue = expectedAbs * actualRange / expectedRange + prop.Attributes.Min;
+                    if (prop.Attributes.Step != 0)
+                    {
+                        actualValue -= actualValue % prop.Attributes.Step;
+                    }
+
+                    actualValue = Math.Min(actualValue, prop.Attributes.Max);
+                    actualValue = Math.Max(actualValue, prop.Attributes.Min);
+                    prop.Value = actualValue;
                 }
-                actualValue = Math.Min(actualValue, prop.Attributes.Max);
-                actualValue = Math.Max(actualValue, prop.Attributes.Min);
-                prop.Value = actualValue;
+                else
+                {
+                    // Not a range, try to set the property directly
+                    try
+                    {
+                        prop.Value = value;
+                    }
+                    catch (Exception e)
+                    {
+                        Log.ErrorException("Error setting property", e);
+                    }
+                }
             }
         }
 
         public static Dictionary<int, object> SerializeEditable(this WiaPropertyCollection props)
         {
-            return props.Where(x => x.Type == WiaPropertyType.I4).ToDictionary(x => x.Id, x => x.Value);
+            return props
+                .Where(x => x.Type == WiaPropertyType.I4 && x.Attributes.Flags.HasFlag(WiaPropertyFlags.ReadWrite))
+                .ToDictionary(x => x.Id, x => x.Value);
         }
 
         public static Dictionary<int, object> Delta(this WiaPropertyCollection props, Dictionary<int, object> target)
@@ -125,17 +152,9 @@ namespace NAPS2.Scan.Wia.Native
             foreach (var kvp in values)
             {
                 var prop = props[kvp.Key];
-                if (prop != null)
+                if (prop != null && prop.Attributes.Flags.HasFlag(WiaPropertyFlags.Write))
                 {
-                    try
-                    {
-                        prop.Value = kvp.Value;
-                    }
-                    catch (WiaException)
-                    {
-                        // Skip non-writable properties
-                        // Ideally this would not be done with an exception...
-                    }
+                    prop.Value = kvp.Value;
                 }
             }
         }

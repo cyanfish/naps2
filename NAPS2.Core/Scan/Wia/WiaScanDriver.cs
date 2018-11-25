@@ -64,7 +64,17 @@ namespace NAPS2.Scan.Wia
             using (CancelToken.Register(op.Cancel))
             {
                 op.Start(ScanProfile, ScanParams, DialogParent, source);
-                Invoker.Current.SafeInvoke(() => operationProgress.ShowProgress(op));
+                Invoker.Current.SafeInvoke(() =>
+                {
+                    if (ScanParams.Modal)
+                    {
+                        operationProgress.ShowModalProgress(op);
+                    }
+                    else
+                    {
+                        operationProgress.ShowBackgroundProgress(op);
+                    }
+                });
                 await op.Success;
             }
 

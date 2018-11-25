@@ -42,28 +42,26 @@ namespace NAPS2.Scan.Wia.Native
             }
             set
             {
+                uint hr;
                 if (Type == WiaPropertyType.I4)
                 {
-                    WiaException.Check(NativeWiaMethods.SetPropertyInt(Storage, Id, (int)value));
+                    hr = NativeWiaMethods.SetPropertyInt(Storage, Id, (int) value);
                 }
                 else
                 {
                     throw new NotImplementedException($"Not implemented property type: {Type}");
                 }
+
+                if (hr == Hresult.E_INVALIDARG)
+                {
+                    throw new ArgumentException($"Could not set property {Id} ({Name}) value to \"{value}\"", nameof(value));
+                }
+
+                WiaException.Check(hr);
             }
         }
 
-        public WiaPropertyAttributes Attributes
-        {
-            get
-            {
-                if (attributes == null)
-                {
-                    attributes = new WiaPropertyAttributes(Storage, Id);
-                }
-                return attributes;
-            }
-        }
+        public WiaPropertyAttributes Attributes => attributes ?? (attributes = new WiaPropertyAttributes(Storage, Id));
 
         public override string ToString() => Name;
 

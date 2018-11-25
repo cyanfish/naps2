@@ -205,13 +205,7 @@ namespace NAPS2.Scan.Wia
                 {
                     throw new NoDuplexSupportException();
                 }
-
-                // TODO: Delete the delay/retry options in ScanProfile (but make sure not to break xml parsing)
-
-                // TODO: Catch and log E_INVALIDARG when setting properties
-
-                // TODO: Use ScanParams.Modal as needed
-
+                
                 int pageNumber = 1;
                 transfer.PageScanned += (sender, args) =>
                 {
