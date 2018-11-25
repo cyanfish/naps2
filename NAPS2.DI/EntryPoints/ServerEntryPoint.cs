@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.ClientServer;
 using NAPS2.DI.Modules;
@@ -35,6 +36,7 @@ namespace NAPS2.DI.EntryPoints
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ThreadException += UnhandledException;
+                TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
                 // Set up a form for the server process
                 var form = new BackgroundForm();
@@ -85,9 +87,15 @@ namespace NAPS2.DI.EntryPoints
             }
         }
 
-        private static void UnhandledException(object sender, ThreadExceptionEventArgs threadExceptionEventArgs)
+        private static void UnhandledTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            Log.FatalException("An error occurred that caused the server to close.", threadExceptionEventArgs.Exception);
+            Log.FatalException("An error occurred that caused the server task to terminate.", e.Exception);
+            e.SetObserved();
+        }
+
+        private static void UnhandledException(object sender, ThreadExceptionEventArgs e)
+        {
+            Log.FatalException("An error occurred that caused the server to close.", e.Exception);
         }
     }
 }
