@@ -1,4 +1,6 @@
-﻿function Get-MSBuild-Path {
+﻿$SolutionRoot = ".."
+
+function Get-MSBuild-Path {
     "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
 }
 
@@ -11,8 +13,8 @@ function Get-Inno-Path {
 }
 
 function Get-NAPS2-Version {
-    & (Get-MSBuild-Path) ..\NAPS2.csproj /v:q /p:Configuration=Debug | Out-Null
-    $Version = [Reflection.AssemblyName]::GetAssemblyName([IO.Path]::Combine($pwd, "..\bin\Debug\NAPS2.exe")).Version
+    & (Get-MSBuild-Path) "$SolutionRoot\NAPS2.App.WinForms\NAPS2.App.WinForms.csproj" /v:q /p:Configuration=Debug | Out-Null
+    $Version = [Reflection.AssemblyName]::GetAssemblyName([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.WinForms\bin\Debug\NAPS2.exe")).Version
     $VersionStr = "" + $Version.Major + "." + $Version.Minor + "." + $Version.Build
     $VersionStr
 }
@@ -34,33 +36,34 @@ function Set-Assembly-Version {
 
 function Set-NAPS2-Version {
     param([Parameter(Position=0)] [String] $Version)
-    Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\Properties\AssemblyInfo.cs")) $Version".*"
-	Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2.Worker\Properties\AssemblyInfo.cs")) $Version".*"
-	Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2.Server\Properties\AssemblyInfo.cs")) $Version".*"
-    Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2.Core\Properties\AssemblyInfo.cs")) $Version".*"
-    Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2.Console\Properties\AssemblyInfo.cs")) $Version".*"
-    Set-Assembly-Version ([IO.Path]::Combine($pwd, "..\..\NAPS2.Portable\Properties\AssemblyInfo.cs")) $Version".*"
+    Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.WinForms\Properties\AssemblyInfo.cs")) $Version".*"
+	Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.Worker\Properties\AssemblyInfo.cs")) $Version".*"
+	Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.Server\Properties\AssemblyInfo.cs")) $Version".*"
+    Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.Sdk\Properties\AssemblyInfo.cs")) $Version".*"
+    Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.Lib.Common\Properties\AssemblyInfo.cs")) $Version".*"
+    Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.Console\Properties\AssemblyInfo.cs")) $Version".*"
+    Set-Assembly-Version ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.App.PortableLauncher\Properties\AssemblyInfo.cs")) $Version".*"
     Replace-Content ([IO.Path]::Combine($pwd, "setup.iss")) '^#define AppVersion "[^"]+"' "#define AppVersion `"$Version`""
     # TODO: Do some XML processing instead of this flaky replacement
-    Replace-Content ([IO.Path]::Combine($pwd, "..\..\NAPS2.Setup\NAPS2.Setup.wxs")) '^      Version="[^"]+"' "      Version=`"$Version`""
+    Replace-Content ([IO.Path]::Combine($pwd, "$SolutionRoot\NAPS2.Setup.Msi\NAPS2.Setup.Msi.wxs")) '^      Version="[^"]+"' "      Version=`"$Version`""
 }
 
 function Build-NAPS2 {
     $msbuild = Get-MSBuild-Path
     Get-Process | where { $_.ProcessName -eq "NAPS2.vshost" } | kill
 	"Cleaning"
-	& $msbuild ..\..\NAPS2.sln /v:q /t:Clean
+	& $msbuild "$SolutionRoot\NAPS2.sln" /v:q /t:Clean
     "Building EXE"
-    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerEXE
+    & $msbuild "$SolutionRoot\NAPS2.sln" /v:q /p:Configuration=InstallerEXE
     "Building MSI"
-    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerMSI
+    & $msbuild "$SolutionRoot\NAPS2.sln" /v:q /p:Configuration=InstallerMSI
     "Building Standalone"
-    & $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone
+    & $msbuild "$SolutionRoot\NAPS2.sln" /v:q /p:Configuration=Standalone
 	"Build complete."
 }
 
 function Get-NAPS2-Languages {
-    Get-ChildItem ..\..\NAPS2.Core\Lang\po\ |
+    Get-ChildItem "$SolutionRoot\NAPS2.Sdk\Lang\po\" |
         foreach { $_.Name -replace ".po", "" } |
         where { $_ -ne "templatest" } |
         where { $_ -ne "en" }
@@ -80,10 +83,10 @@ function Publish-NAPS2-Standalone {
     mkdir $StandaloneDir
     mkdir $AppDir
     mkdir $DataDir
-    $BinDir = "..\bin\$Configuration\"
-    $CmdBinDir = "..\..\NAPS2.Console\bin\$Configuration\"
-    $ServerBinDir = "..\..\NAPS2.Server\bin\$Configuration\"
-    $PortableBinDir = "..\..\NAPS2.Portable\bin\Release\"
+    $BinDir = "$SolutionRoot\NAPS2.App.WinForms\bin\$Configuration\"
+    $CmdBinDir = "$SolutionRoot\NAPS2.App.Console\bin\$Configuration\"
+    $ServerBinDir = "$SolutionRoot\NAPS2.App.Server\bin\$Configuration\"
+    $PortableBinDir = "$SolutionRoot\NAPS2.App.PortableLauncher\bin\Release\"
     cp ($PortableBinDir + "NAPS2.Portable.exe") $StandaloneDir
     foreach ($LanguageCode in Get-NAPS2-Languages) {
         $LangDir = $LibDir + "$LanguageCode\"
@@ -98,7 +101,7 @@ function Publish-NAPS2-Standalone {
             cp $File.FullName $LibDir
         }
     }
-    foreach ($File in ("..\appsettings.xml", "lib\twaindsm.dll", "lib\NAPS2.WIA.dll")) {
+    foreach ($File in ("$SolutionRoot\NAPS2.App.WinForms\appsettings.xml", "lib\twaindsm.dll", "lib\NAPS2.WIA.dll")) {
         cp $File $LibDir
     }
 	$LibDir64 = $LibDir + "64\"
@@ -106,8 +109,8 @@ function Publish-NAPS2-Standalone {
 	foreach ($File in ("lib\64\twaindsm.dll", "lib\64\NAPS2.WIA.dll")) {
         cp $File $LibDir64
     }
-	cp "..\..\LICENSE" ($AppDir + "license.txt")
-	cp "..\..\CONTRIBUTORS" ($AppDir + "contributors.txt")
+	cp "$SolutionRoot\LICENSE" ($AppDir + "license.txt")
+	cp "$SolutionRoot\CONTRIBUTORS" ($AppDir + "contributors.txt")
     if (Test-Path $ArchiveFile) {
         rm $ArchiveFile
     }

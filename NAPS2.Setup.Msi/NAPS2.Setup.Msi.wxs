@@ -10,14 +10,14 @@
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <Media Id="1" Cabinet="NAPS2.cab" EmbedCab="yes" CompressionLevel="high" />
 
-    <Icon Id="icon.ico" SourceFile="..\NAPS2.Core\Icons\scanner.ico"/>
+    <Icon Id="icon.ico" SourceFile="..\NAPS2.Sdk\Icons\scanner.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
 
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
     <UIRef Id="WixUI_InstallDir" />
-    <WixVariable Id="WixUILicenseRtf" Value="..\NAPS2\Setup\license.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="..\NAPS2.Setup\license.rtf" />
 
     <Feature Id="MainApplication" Title="NAPS2" Level="1">
       <ComponentRef Id="Exec" />
@@ -66,14 +66,14 @@
     <DirectoryRef Id="INSTALLFOLDER">
       <Component Id="Exec" Guid="3ED24800-E1D9-4D64-A106-6DC3597D9266">
         <!-- EXEs -->
-        <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.exe" />
-        <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.exe.config" />
-        <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe" />
-        <File Source="..\NAPS2.Console\bin\InstallerMSI\NAPS2.Console.exe.config" />
-        <File Source="..\NAPS2.Worker\bin\InstallerMSI\NAPS2.Worker.exe" />
-        <File Source="..\NAPS2.Worker\bin\InstallerMSI\NAPS2.Worker.exe.config" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.exe" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.exe.config" />
+        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\NAPS2.Console.exe" />
+        <File Source="..\NAPS2.App.Console\bin\InstallerMSI\NAPS2.Console.exe.config" />
+        <File Source="..\NAPS2.App.Worker\bin\InstallerMSI\NAPS2.Worker.exe" />
+        <File Source="..\NAPS2.App.Worker\bin\InstallerMSI\NAPS2.Worker.exe.config" />
         <!-- Configuration -->
-        <File Source="..\NAPS2\appsettings.xml" />
+        <File Source="..\NAPS2.App.WinForms\appsettings.xml" />
         <!-- License -->
         <File Source="..\LICENSE" Name="license.txt" />
         <File Source="..\CONTRIBUTORS" Name="contributors.txt" />
@@ -83,41 +83,41 @@
     <DirectoryRef Id="LIBFOLDER">
       <Component Id="Deps" Guid="04AC2B17-BDFA-4AA0-B8CA-0AE208D9193A">
         <!-- Dependencies -->
-        <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.Core.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\NAPS2.DI.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\CommandLine.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\Ghostscript.NET.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\ICSharpCode.SharpZipLib.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\Microsoft.Threading.Tasks.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\Microsoft.Threading.Tasks.Extensions.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\MimeKit.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\Newtonsoft.Json.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\Ninject.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\NLog.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\NTwain.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\PdfSharp.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\System.IO.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\System.Runtime.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\System.Threading.Tasks.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\System.ValueTuple.dll" />
-        <File Source="..\NAPS2\bin\InstallerMSI\zxing.dll" />
-        <File Source="..\NAPS2\Setup\lib\NAPS2.WIA.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.Core.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NAPS2.DI.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\CommandLine.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Ghostscript.NET.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\ICSharpCode.SharpZipLib.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Microsoft.Threading.Tasks.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Microsoft.Threading.Tasks.Extensions.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\MimeKit.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Newtonsoft.Json.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\Ninject.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NLog.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\NTwain.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\PdfSharp.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.IO.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.Runtime.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.Threading.Tasks.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\System.ValueTuple.dll" />
+        <File Source="..\NAPS2.App.WinForms\bin\InstallerMSI\zxing.dll" />
+        <File Source="..\NAPS2.Setup\lib\NAPS2.WIA.dll" />
       </Component>
     </DirectoryRef>
     
     <DirectoryRef Id="LIB64FOLDER">
       <Component Id="Deps64" Guid="247ECEC0-290D-490D-B942-7239870AAF7D">
         <!-- Dependencies -->
-        <File Source="..\NAPS2\Setup\lib\64\twaindsm.dll" Id="twaindsm64" />
-        <File Source="..\NAPS2\Setup\lib\64\NAPS2.WIA.dll" Id="naps2wia64" />
+        <File Source="..\NAPS2.Setup\lib\64\twaindsm.dll" Id="twaindsm64" />
+        <File Source="..\NAPS2.Setup\lib\64\NAPS2.WIA.dll" Id="naps2wia64" />
       </Component>
     </DirectoryRef>
     
     <DirectoryRef Id="SystemFolder">
       <!-- System Dependencies -->
       <Component Id="twaindsm" Guid="A55F9DBB-0A42-44B9-8C58-87F06A2075BA" Permanent="yes">
-        <File Source="..\NAPS2\Setup\lib\twaindsm.dll" KeyPath="yes" />
+        <File Source="..\NAPS2.Setup\lib\twaindsm.dll" KeyPath="yes" />
       </Component>
     </DirectoryRef>
 

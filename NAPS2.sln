@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2", "NAPS2\NAPS2.csproj", "{EAC4A133-93BE-4400-BFA9-CEB1615693C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.WinForms", "NAPS2.App.WinForms\NAPS2.App.WinForms.csproj", "{EAC4A133-93BE-4400-BFA9-CEB1615693C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Tests", "NAPS2.Tests\NAPS2.Tests.csproj", "{11FC4BE1-882D-4ABA-8781-2F3F77DF9453}"
 EndProject
@@ -14,30 +14,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F6CC4F
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Console", "NAPS2.Console\NAPS2.Console.csproj", "{2A321772-75B2-4601-A718-AF0A2370E6A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Console", "NAPS2.App.Console\NAPS2.App.Console.csproj", "{2A321772-75B2-4601-A718-AF0A2370E6A8}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "NAPS2.Setup", "NAPS2.Setup\NAPS2.Setup.wixproj", "{A5C805D1-6F2E-42E2-8BB9-FA2DB89976F1}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "NAPS2.Setup.Msi", "NAPS2.Setup.Msi\NAPS2.Setup.Msi.wixproj", "{A5C805D1-6F2E-42E2-8BB9-FA2DB89976F1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EAC4A133-93BE-4400-BFA9-CEB1615693C4} = {EAC4A133-93BE-4400-BFA9-CEB1615693C4}
 		{2A321772-75B2-4601-A718-AF0A2370E6A8} = {2A321772-75B2-4601-A718-AF0A2370E6A8}
 		{968378FA-A649-4058-A928-1FCD97B23070} = {968378FA-A649-4058-A928-1FCD97B23070}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Core", "NAPS2.Core\NAPS2.Core.csproj", "{968378FA-A649-4058-A928-1FCD97B23070}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk", "NAPS2.Sdk\NAPS2.Sdk.csproj", "{968378FA-A649-4058-A928-1FCD97B23070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Portable", "NAPS2.Portable\NAPS2.Portable.csproj", "{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.PortableLauncher", "NAPS2.App.PortableLauncher\NAPS2.App.PortableLauncher.csproj", "{A6BCC071-7667-4F8B-ACC2-6FC7F4A9CD32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.DI", "NAPS2.DI\NAPS2.DI.csproj", "{4D349529-149B-498B-8A55-373E6A67E1F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Lib.Common", "NAPS2.Lib.Common\NAPS2.Lib.Common.csproj", "{4D349529-149B-498B-8A55-373E6A67E1F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Worker", "NAPS2.Worker\NAPS2.Worker.csproj", "{BA9A65A0-00FE-4BF4-A023-7D804817453F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Worker", "NAPS2.App.Worker\NAPS2.App.Worker.csproj", "{BA9A65A0-00FE-4BF4-A023-7D804817453F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Localization", "NAPS2.Localization\NAPS2.Localization.csproj", "{F6CD6C88-49EA-4443-BB45-69FB79788C61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Tools.Localization", "NAPS2.Tools.Localization\NAPS2.Tools.Localization.csproj", "{F6CD6C88-49EA-4443-BB45-69FB79788C61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Server", "NAPS2.Server\NAPS2.Server.csproj", "{BC0E3031-6C00-4707-A424-4FF04425D719}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Server", "NAPS2.App.Server\NAPS2.App.Server.csproj", "{BC0E3031-6C00-4707-A424-4FF04425D719}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NAPS2.WIA", "C:\Users\Ben\Documents\Visual Studio 2017\Projects\NAPS2\NAPS2.WIA\NAPS2.WIA.vcxproj", "{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NAPS2.Sdk.NativeWia", "NAPS2.Sdk.NativeWia\NAPS2.Sdk.NativeWia.vcxproj", "{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NAPS2.Setup", "NAPS2.Setup\NAPS2.Setup.csproj", "{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NAPS2.Setup\NAPS2.Setup.projitems*{c12acb2c-184f-4cbd-9fbc-ce1331cf592e}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		DebugLang|x86 = DebugLang|x86
@@ -145,6 +150,12 @@ Global
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerEXE|x86.ActiveCfg = Release|Win32
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerMSI|x86.ActiveCfg = Release|Win32
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Standalone|x86.ActiveCfg = Release|Win32
+		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.DebugLang|x86.ActiveCfg = Debug|Any CPU
+		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.InstallerEXE|x86.ActiveCfg = Debug|Any CPU
+		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.InstallerMSI|x86.ActiveCfg = Debug|Any CPU
+		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.Standalone|x86.ActiveCfg = Debug|Any CPU
+		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.Standalone|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

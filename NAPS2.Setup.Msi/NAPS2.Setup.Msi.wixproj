@@ -23,10 +23,10 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\NAPS2\Setup\LanguageComponents.wxs">
+    <Compile Include="..\NAPS2.Setup\LanguageComponents.wxs">
       <Link>LanguageComponents.wxs</Link>
     </Compile>
-    <Compile Include="NAPS2.Setup.wxs" />
+    <Compile Include="NAPS2.Setup.Msi.wxs" />
   </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixUIExtension">
@@ -43,5 +43,5 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
-  <Import Project="..\NAPS2\Setup\CommonTargets.targets"/>
+  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
 </Project>

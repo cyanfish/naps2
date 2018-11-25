@@ -12,7 +12,7 @@ if ([string]::IsNullOrEmpty($Name)) {
     $Name = $Version
 }
 
-$PublishDir = "..\publish\$Version\"
+$PublishDir = "$SolutionRoot\NAPS2.Setup\publish\$Version\"
 if (-not (Test-Path $PublishDir)) {
     mkdir $PublishDir
 } elseif (-not $Force) {
@@ -25,7 +25,7 @@ Set-NAPS2-Version $Version
 Build-NAPS2
 
 # MSI Installer
-cp "..\..\NAPS2.Setup\bin\Release\NAPS2.Setup.msi" ($PublishDir + "naps2-$Name-setup.msi")
+cp "$SolutionRoot\NAPS2.Setup.Msi\bin\Release\NAPS2.Setup.msi" ($PublishDir + "naps2-$Name-setup.msi")
 
 # EXE Installer
 & (Get-Inno-Path) "setup.iss"

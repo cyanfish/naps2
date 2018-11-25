@@ -100,9 +100,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Core\NAPS2.Core.csproj">
+    <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj">
       <Project>{968378fa-a649-4058-a928-1fcd97b23070}</Project>
-      <Name>NAPS2.Core</Name>
+      <Name>NAPS2.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -122,5 +122,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\NAPS2\Setup\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\CommonTargets.targets" />
 </Project>
