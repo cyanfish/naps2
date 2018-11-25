@@ -22,6 +22,8 @@ namespace NAPS2.Scan.Wia
         private readonly IBlankDetector blankDetector;
         private readonly IWorkerServiceFactory workerServiceFactory;
 
+        private readonly SmoothProgress smoothProgress = new SmoothProgress();
+
         public WiaScanOperation(ScannedImageHelper scannedImageHelper, IBlankDetector blankDetector, IWorkerServiceFactory workerServiceFactory)
         {
             this.scannedImageHelper = scannedImageHelper;
@@ -29,6 +31,14 @@ namespace NAPS2.Scan.Wia
             this.workerServiceFactory = workerServiceFactory;
             AllowCancel = true;
             AllowBackground = true;
+
+            smoothProgress.OutputProgressChanged += SmoothProgressChanged;
+        }
+
+        private void SmoothProgressChanged(object sender, SmoothProgress.ProgressChangeEventArgs args)
+        {
+            Status.CurrentProgress = (int)(args.Value * Status.MaxProgress);
+            InvokeStatusChanged();
         }
 
         public Exception ScanException { get; private set; }
@@ -50,7 +60,7 @@ namespace NAPS2.Scan.Wia
                 StatusText = ScanProfile.PaperSource == ScanSource.Glass
                     ? MiscResources.AcquiringData
                     : string.Format(MiscResources.ScanProgressPage, 1),
-                MaxProgress = 100,
+                MaxProgress = 1000,
                 ProgressType = OperationProgressType.BarOnly
             };
 
@@ -60,6 +70,7 @@ namespace NAPS2.Scan.Wia
                 {
                     try
                     {
+                        smoothProgress.Reset();
                         Scan(source);
                     }
                     catch (WiaException e)
@@ -74,6 +85,10 @@ namespace NAPS2.Scan.Wia
                     // Don't call InvokeError; the driver will do the actual error handling
                     ScanException = e;
                     return false;
+                }
+                finally
+                {
+                    smoothProgress.Reset();
                 }
             });
 
@@ -114,8 +129,7 @@ namespace NAPS2.Scan.Wia
             if (ScanProfile.PaperSource != ScanSource.Glass)
             {
                 Status.StatusText = string.Format(MiscResources.ScanProgressPage, pageNumber);
-                Status.CurrentProgress = 0;
-                InvokeStatusChanged();
+                smoothProgress.Reset();
             }
         }
 
@@ -190,22 +204,20 @@ namespace NAPS2.Scan.Wia
 
         private void DoTransfer(ScannedImageSource.Concrete source, WiaDevice device, WiaItem item)
         {
-            InitProgress(device);
+            if (ScanProfile.PaperSource != ScanSource.Glass && !device.SupportsFeeder())
+            {
+                throw new NoFeederSupportException();
+            }
+            if (ScanProfile.PaperSource == ScanSource.Duplex && !device.SupportsDuplex())
+            {
+                throw new NoDuplexSupportException();
+            }
 
+            InitProgress(device);
             ConfigureProps(device, item);
 
             using (var transfer = item.StartTransfer())
             {
-                if (ScanProfile.PaperSource != ScanSource.Glass && !device.SupportsFeeder())
-                {
-                    throw new NoFeederSupportException();
-                }
-
-                if (ScanProfile.PaperSource == ScanSource.Duplex && !device.SupportsDuplex())
-                {
-                    throw new NoDuplexSupportException();
-                }
-                
                 int pageNumber = 1;
                 transfer.PageScanned += (sender, args) =>
                 {
@@ -222,31 +234,23 @@ namespace NAPS2.Scan.Wia
                         ScanException = e;
                     }
                 };
-                transfer.Progress += (sender, args) =>
-                {
-                    Status.CurrentProgress = args.Percent;
-                    InvokeStatusChanged();
-                };
+                transfer.Progress += (sender, args) => smoothProgress.InputProgressChanged(args.Percent / 100.0);
                 using (CancelToken.Register(transfer.Cancel))
                 {
                     transfer.Download();
 
-                    if (device.Version == WiaVersion.Wia10)
+                    if (device.Version == WiaVersion.Wia10 && ScanProfile.PaperSource != ScanSource.Glass)
                     {
                         // For WIA 1.0 feeder scans, we need to repeatedly call Download until WIA_ERROR_PAPER_EMPTY is received.
-                        var handling = (int) device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT].Value;
-                        if ((handling & WiaPropertyValue.FEEDER) != 0)
+                        try
                         {
-                            try
+                            while (!CancelToken.IsCancellationRequested)
                             {
-                                while (!CancelToken.IsCancellationRequested)
-                                {
-                                    transfer.Download();
-                                }
+                                transfer.Download();
                             }
-                            catch (WiaException e) when (e.ErrorCode == WiaErrorCodes.PAPER_EMPTY)
-                            {
-                            }
+                        }
+                        catch (WiaException e) when (e.ErrorCode == WiaErrorCodes.PAPER_EMPTY)
+                        {
                         }
                     }
                 }
@@ -353,7 +357,7 @@ namespace NAPS2.Scan.Wia
                     item.SetProperty(WiaPropertyId.IPA_DATATYPE, 0);
                     break;
             }
-            
+
             int xRes = ScanProfile.Resolution.ToIntDpi();
             int yRes = xRes;
             item.SetPropertyClosest(WiaPropertyId.IPS_XRES, ref xRes);

@@ -239,6 +239,7 @@
     <Compile Include="Util\ProgressHandler.cs" />
     <Compile Include="Util\SecureString.cs" />
     <Compile Include="Util\ServiceFactoryBehavior.cs" />
+    <Compile Include="Util\SmoothProgress.cs" />
     <Compile Include="Util\TaskExtensions.cs" />
     <Compile Include="Util\WebClientExtensions.cs" />
     <Compile Include="Util\Win32Window.cs" />
