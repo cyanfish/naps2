@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace NAPS2.Config
 {
-    public interface IUserConfigManager
+    public interface IConfigManager<out T>
     {
-        UserConfig Config { get; }
+        T Config { get; }
         void Load();
         void Save();
     }

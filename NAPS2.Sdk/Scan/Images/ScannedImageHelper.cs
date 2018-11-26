@@ -104,18 +104,14 @@ namespace NAPS2.Scan.Images
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly IOperationFactory operationFactory;
         private readonly IOperationProgress operationProgress;
-        private readonly AppConfigManager appConfigManager;
-        private readonly IUserConfigManager userConfigManager;
         private readonly OcrRequestQueue ocrRequestQueue;
         private readonly OcrManager ocrManager;
 
-        public ScannedImageHelper(ThumbnailRenderer thumbnailRenderer, IOperationFactory operationFactory, IOperationProgress operationProgress, AppConfigManager appConfigManager, IUserConfigManager userConfigManager, OcrRequestQueue ocrRequestQueue, OcrManager ocrManager)
+        public ScannedImageHelper(ThumbnailRenderer thumbnailRenderer, IOperationFactory operationFactory, IOperationProgress operationProgress, OcrRequestQueue ocrRequestQueue, OcrManager ocrManager)
         {
             this.thumbnailRenderer = thumbnailRenderer;
             this.operationFactory = operationFactory;
             this.operationProgress = operationProgress;
-            this.appConfigManager = appConfigManager;
-            this.userConfigManager = userConfigManager;
             this.ocrRequestQueue = ocrRequestQueue;
             this.ocrManager = ocrManager;
         }
@@ -218,9 +214,9 @@ namespace NAPS2.Scan.Images
         public bool ShouldDoBackgroundOcr(ScanParams scanParams)
         {
             bool ocrEnabled = ocrManager.DefaultParams != null;
-            bool afterScanning = appConfigManager.Config.OcrState == OcrState.Enabled && appConfigManager.Config.OcrDefaultAfterScanning
-                                 || appConfigManager.Config.OcrState == OcrState.UserConfig &&
-                                 (userConfigManager.Config.OcrAfterScanning ?? appConfigManager.Config.OcrDefaultAfterScanning);
+            bool afterScanning = AppConfig.Current.OcrState == OcrState.Enabled && AppConfig.Current.OcrDefaultAfterScanning
+                                 || AppConfig.Current.OcrState == OcrState.UserConfig &&
+                                 (UserConfig.Current.OcrAfterScanning ?? AppConfig.Current.OcrDefaultAfterScanning);
             return scanParams.DoOcr ?? (ocrEnabled && afterScanning);
         }
 

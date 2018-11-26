@@ -11,16 +11,12 @@ namespace NAPS2.WinForms
     public partial class FPdfSettings : FormBase
     {
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly IUserConfigManager userConfigManager;
         private readonly DialogHelper dialogHelper;
-        private readonly AppConfigManager appConfigManager;
 
-        public FPdfSettings(PdfSettingsContainer pdfSettingsContainer, IUserConfigManager userConfigManager, DialogHelper dialogHelper, AppConfigManager appConfigManager)
+        public FPdfSettings(PdfSettingsContainer pdfSettingsContainer, DialogHelper dialogHelper)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.userConfigManager = userConfigManager;
             this.dialogHelper = dialogHelper;
-            this.appConfigManager = appConfigManager;
             InitializeComponent();
             AddEnumItems<PdfCompat>(cmbCompat);
         }
@@ -38,7 +34,7 @@ namespace NAPS2.WinForms
 
             UpdateValues(pdfSettingsContainer.PdfSettings);
             UpdateEnabled();
-            cbRememberSettings.Checked = userConfigManager.Config.PdfSettings != null;
+            cbRememberSettings.Checked = UserConfig.Current.PdfSettings != null;
         }
 
         private void UpdateValues(PdfSettings pdfSettings)
@@ -60,7 +56,7 @@ namespace NAPS2.WinForms
             clbPerms.SetItemChecked(5, pdfSettings.Encryption.AllowContentCopyingForAccessibility);
             clbPerms.SetItemChecked(6, pdfSettings.Encryption.AllowAnnotations);
             clbPerms.SetItemChecked(7, pdfSettings.Encryption.AllowFormFilling);
-            var forced = appConfigManager.Config.ForcePdfCompat;
+            var forced = AppConfig.Current.ForcePdfCompat;
             cmbCompat.SelectedIndex = (int)(forced == PdfCompat.Default ? pdfSettings.Compat : forced);
         }
 
@@ -73,7 +69,7 @@ namespace NAPS2.WinForms
                 lblUserPassword.Enabled = lblOwnerPassword.Enabled = encrypt;
             clbPerms.Enabled = encrypt;
 
-            cmbCompat.Enabled = appConfigManager.Config.ForcePdfCompat == PdfCompat.Default;
+            cmbCompat.Enabled = AppConfig.Current.ForcePdfCompat == PdfCompat.Default;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -107,8 +103,8 @@ namespace NAPS2.WinForms
             };
 
             pdfSettingsContainer.PdfSettings = pdfSettings;
-            userConfigManager.Config.PdfSettings = cbRememberSettings.Checked ? pdfSettings : null;
-            userConfigManager.Save();
+            UserConfig.Current.PdfSettings = cbRememberSettings.Checked ? pdfSettings : null;
+            UserConfig.Manager.Save();
 
             Close();
         }

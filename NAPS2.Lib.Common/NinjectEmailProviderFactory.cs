@@ -12,12 +12,10 @@ namespace NAPS2.DI
     public class NinjectEmailProviderFactory : IEmailProviderFactory
     {
         private readonly IKernel kernel;
-        private readonly IUserConfigManager userConfigManager;
 
-        public NinjectEmailProviderFactory(IKernel kernel, IUserConfigManager userConfigManager)
+        public NinjectEmailProviderFactory(IKernel kernel)
         {
             this.kernel = kernel;
-            this.userConfigManager = userConfigManager;
         }
 
         public IEmailProvider Create(EmailProviderType type)
@@ -37,7 +35,7 @@ namespace NAPS2.DI
         {
             get
             {
-                var config = userConfigManager.Config;
+                var config = UserConfig.Current;
                 var providerType = config.EmailSetup?.ProviderType ?? EmailProviderType.System;
                 return Create(providerType);
             }

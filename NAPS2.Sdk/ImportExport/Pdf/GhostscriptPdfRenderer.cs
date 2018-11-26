@@ -9,7 +9,6 @@ using NAPS2.Dependencies;
 using NAPS2.Lang.Resources;
 using NAPS2.Scan;
 using NAPS2.Util;
-using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
 namespace NAPS2.ImportExport.Pdf
@@ -17,17 +16,13 @@ namespace NAPS2.ImportExport.Pdf
     public class GhostscriptPdfRenderer : IPdfRenderer
     {
         private readonly IComponentInstallPrompt componentInstallPrompt;
-        private readonly AppConfigManager appConfigManager;
-        private readonly IErrorOutput errorOutput;
         private readonly GhostscriptManager ghostscriptManager;
 
         private readonly Lazy<byte[]> gsLibBytes;
 
-        public GhostscriptPdfRenderer(IComponentInstallPrompt componentInstallPrompt, AppConfigManager appConfigManager, IErrorOutput errorOutput, GhostscriptManager ghostscriptManager)
+        public GhostscriptPdfRenderer(IComponentInstallPrompt componentInstallPrompt, GhostscriptManager ghostscriptManager)
         {
             this.componentInstallPrompt = componentInstallPrompt;
-            this.appConfigManager = appConfigManager;
-            this.errorOutput = errorOutput;
             this.ghostscriptManager = ghostscriptManager;
 
             gsLibBytes = new Lazy<byte[]>(() => File.ReadAllBytes(ghostscriptManager.GhostscriptComponent.Path));
@@ -35,7 +30,7 @@ namespace NAPS2.ImportExport.Pdf
 
         public void ThrowIfCantRender()
         {
-            if (appConfigManager.Config.DisableGenericPdfImport || !VerifyDependencies())
+            if (AppConfig.Current.DisableGenericPdfImport || !VerifyDependencies())
             {
                 throw new ImageRenderException();
             }
@@ -75,7 +70,7 @@ namespace NAPS2.ImportExport.Pdf
             {
                 return true;
             }
-            if (appConfigManager.Config.NoUpdatePrompt)
+            if (AppConfig.Current.NoUpdatePrompt)
             {
                 return false;
             }

@@ -30,12 +30,10 @@ namespace NAPS2.Automation
         private readonly IScanPerformer scanPerformer;
         private readonly IErrorOutput errorOutput;
         private readonly IScannedImageImporter scannedImageImporter;
-        private readonly IUserConfigManager userConfigManager;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOperationFactory operationFactory;
-        private readonly AppConfigManager appConfigManager;
         private readonly OcrManager ocrManager;
         private readonly IFormFactory formFactory;
         private readonly GhostscriptManager ghostscriptManager;
@@ -48,7 +46,7 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, IUserConfigManager userConfigManager, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, AppConfigManager appConfigManager, OcrManager ocrManager, IFormFactory formFactory, GhostscriptManager ghostscriptManager)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory, GhostscriptManager ghostscriptManager)
         {
             this.options = options;
             this.profileManager = profileManager;
@@ -56,12 +54,10 @@ namespace NAPS2.Automation
             this.errorOutput = errorOutput;
             this.emailProviderFactory = emailProviderFactory;
             this.scannedImageImporter = scannedImageImporter;
-            this.userConfigManager = userConfigManager;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.operationFactory = operationFactory;
-            this.appConfigManager = appConfigManager;
             this.ocrManager = ocrManager;
             this.formFactory = formFactory;
             this.ghostscriptManager = ghostscriptManager;
@@ -156,7 +152,7 @@ namespace NAPS2.Automation
         private void ConfigureOcr()
         {
             bool canUseOcr = IsPdfFile(options.OutputPath) || IsPdfFile(options.EmailFileName);
-            bool useOcr = canUseOcr && !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || userConfigManager.Config.EnableOcr || appConfigManager.Config.OcrState == OcrState.Enabled);
+            bool useOcr = canUseOcr && !options.DisableOcr && (options.EnableOcr || options.OcrLang != null || UserConfig.Current.EnableOcr || AppConfig.Current.OcrState == OcrState.Enabled);
             string ocrLanguageCode = useOcr ? (options.OcrLang ?? ocrManager.DefaultParams?.LanguageCode) : null;
             ocrParams = new OcrParams(ocrLanguageCode, ocrManager.DefaultParams?.Mode ?? OcrMode.Default);
         }
@@ -571,7 +567,7 @@ namespace NAPS2.Automation
         {
             OutputVerbose(ConsoleResources.BeginningScan);
 
-            bool autoSaveEnabled = !appConfigManager.Config.DisableAutoSave && profile.EnableAutoSave && profile.AutoSaveSettings != null;
+            bool autoSaveEnabled = !AppConfig.Current.DisableAutoSave && profile.EnableAutoSave && profile.AutoSaveSettings != null;
             if (options.AutoSave && !autoSaveEnabled)
             {
                 errorOutput.DisplayError(ConsoleResources.AutoSaveNotEnabled);

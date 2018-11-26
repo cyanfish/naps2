@@ -12,20 +12,13 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OutlookWebOauthProvider : OauthProvider
     {
-        private readonly IUserConfigManager userConfigManager;
-
         private OauthClientCreds creds;
-
-        public OutlookWebOauthProvider(IUserConfigManager userConfigManager)
-        {
-            this.userConfigManager = userConfigManager;
-        }
 
         #region Authorization
 
-        public override OauthToken Token => userConfigManager.Config.EmailSetup?.OutlookWebToken;
+        public override OauthToken Token => UserConfig.Current.EmailSetup?.OutlookWebToken;
 
-        public override string User => userConfigManager.Config.EmailSetup?.OutlookWebUser;
+        public override string User => UserConfig.Current.EmailSetup?.OutlookWebUser;
 
         protected override OauthClientCreds ClientCreds
         {
@@ -48,14 +41,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override void SaveToken(OauthToken token, bool refresh)
         {
-            userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
-            userConfigManager.Config.EmailSetup.OutlookWebToken = token;
+            UserConfig.Current.EmailSetup = UserConfig.Current.EmailSetup ?? new EmailSetup();
+            UserConfig.Current.EmailSetup.OutlookWebToken = token;
             if (!refresh)
             {
-                userConfigManager.Config.EmailSetup.OutlookWebUser = GetEmailAddress();
-                userConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.OutlookWeb;
+                UserConfig.Current.EmailSetup.OutlookWebUser = GetEmailAddress();
+                UserConfig.Current.EmailSetup.ProviderType = EmailProviderType.OutlookWeb;
             }
-            userConfigManager.Save();
+            UserConfig.Manager.Save();
         }
 
         #endregion

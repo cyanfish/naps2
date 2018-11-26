@@ -28,8 +28,6 @@ namespace NAPS2.WinForms
 
         public IFormFactory FormFactory { get; set; }
 
-        public IUserConfigManager UserConfigManager { get; set; }
-
         protected bool RestoreFormState { get; set; }
 
         protected bool SaveFormState { get; set; }
@@ -40,12 +38,12 @@ namespace NAPS2.WinForms
         {
             get
             {
-                if (UserConfigManager == null)
+                if (UserConfig.Manager == null)
                 {
                     // Should only occur with the designer
                     return new List<FormState>();
                 }
-                return UserConfigManager.Config.FormStates;
+                return UserConfig.Current.FormStates;
             }
         }
 
@@ -207,7 +205,7 @@ namespace NAPS2.WinForms
         {
             if (SaveFormState)
             {
-                UserConfigManager?.Save();
+                UserConfig.Manager?.Save();
             }
         }
 

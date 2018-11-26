@@ -15,15 +15,13 @@ namespace NAPS2.WinForms
 {
     partial class FAbout : FormBase
     {
-        private readonly IUserConfigManager userConfigManager;
         private readonly UpdateChecker updateChecker;
 
         private bool hasCheckedForUpdates;
         private UpdateInfo update;
 
-        public FAbout(AppConfigManager appConfigManager, IUserConfigManager userConfigManager, UpdateChecker updateChecker)
+        public FAbout(UpdateChecker updateChecker)
         {
-            this.userConfigManager = userConfigManager;
             this.updateChecker = updateChecker;
 
             RestoreFormState = false;
@@ -37,7 +35,7 @@ namespace NAPS2.WinForms
             // Grow the form to fit the copyright text if necessary
             Width = Math.Max(Width, labelCopyright.Right + 25);
 
-            if (appConfigManager.Config.HideDonateButton)
+            if (AppConfig.Current.HideDonateButton)
             {
                 btnDonate.Visible = false;
             }
@@ -54,7 +52,7 @@ namespace NAPS2.WinForms
             ConditionalControls.Hide(cbCheckForUpdates, 15);
             ConditionalControls.Hide(lblUpdateStatus, 5);
 #else
-            cbCheckForUpdates.Checked = userConfigManager.Config.CheckForUpdates;
+            cbCheckForUpdates.Checked = UserConfig.Current.CheckForUpdates;
             UpdateControls();
             DoUpdateCheck();
 #endif
@@ -72,8 +70,8 @@ namespace NAPS2.WinForms
                     }
                     else
                     {
-                        userConfigManager.Config.LastUpdateCheckDate = DateTime.Now;
-                        userConfigManager.Save();
+                        UserConfig.Current.LastUpdateCheckDate = DateTime.Now;
+                        UserConfig.Manager.Save();
                     }
                     update = task.Result;
                     hasCheckedForUpdates = true;
@@ -122,8 +120,8 @@ namespace NAPS2.WinForms
 
         private void cbCheckForUpdates_CheckedChanged(object sender, EventArgs e)
         {
-            userConfigManager.Config.CheckForUpdates = cbCheckForUpdates.Checked;
-            userConfigManager.Save();
+            UserConfig.Current.CheckForUpdates = cbCheckForUpdates.Checked;
+            UserConfig.Manager.Save();
             UpdateControls();
             DoUpdateCheck();
         }

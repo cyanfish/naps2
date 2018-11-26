@@ -10,12 +10,10 @@ namespace NAPS2.WinForms
 {
     public class DialogHelper
     {
-        private readonly IUserConfigManager userConfigManager;
         private readonly IFormFactory formFactory;
 
-        public DialogHelper(IUserConfigManager userConfigManager, IFormFactory formFactory)
+        public DialogHelper(IFormFactory formFactory)
         {
-            this.userConfigManager = userConfigManager;
             this.formFactory = formFactory;
         }
 
@@ -80,7 +78,7 @@ namespace NAPS2.WinForms
                 FileName = Path.GetFileName(defaultPath),
                 InitialDirectory = GetDir(defaultPath)
             };
-            switch ((userConfigManager.Config.LastImageExt ?? "").ToLowerInvariant())
+            switch ((UserConfig.Current.LastImageExt ?? "").ToLowerInvariant())
             {
                 case "bmp":
                     sd.FilterIndex = 1;
@@ -108,8 +106,8 @@ namespace NAPS2.WinForms
             if (sd.ShowDialog() == DialogResult.OK)
             {
                 savePath = sd.FileName;
-                userConfigManager.Config.LastImageExt = (Path.GetExtension(savePath) ?? "").Replace(".", "");
-                userConfigManager.Save();
+                UserConfig.Current.LastImageExt = (Path.GetExtension(savePath) ?? "").Replace(".", "");
+                UserConfig.Manager.Save();
                 return true;
             }
             savePath = null;

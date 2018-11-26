@@ -20,23 +20,19 @@ namespace NAPS2.ImportExport
     public class AutoSave : IAutoSave
     {
         private readonly IOperationFactory operationFactory;
-        private readonly IFormFactory formFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly OcrManager ocrManager;
         private readonly IErrorOutput errorOutput;
-        private readonly AppConfigManager appConfigManager;
         private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly DialogHelper dialogHelper;
         private readonly IOperationProgress operationProgress;
 
-        public AutoSave(IOperationFactory operationFactory, IFormFactory formFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, AppConfigManager appConfigManager, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper, IOperationProgress operationProgress)
+        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper, IOperationProgress operationProgress)
         {
             this.operationFactory = operationFactory;
-            this.formFactory = formFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.ocrManager = ocrManager;
             this.errorOutput = errorOutput;
-            this.appConfigManager = appConfigManager;
             this.fileNamePlaceholders = fileNamePlaceholders;
             this.dialogHelper = dialogHelper;
             this.operationProgress = operationProgress;
@@ -44,7 +40,7 @@ namespace NAPS2.ImportExport
 
         public async Task<bool> Save(AutoSaveSettings settings, List<ScannedImage> images, ISaveNotify notify)
         {
-            if (appConfigManager.Config.DisableAutoSave)
+            if (AppConfig.Current.DisableAutoSave)
             {
                 return false;
             }

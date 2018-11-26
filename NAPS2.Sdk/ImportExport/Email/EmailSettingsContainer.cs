@@ -6,18 +6,11 @@ namespace NAPS2.ImportExport.Email
 {
     public class EmailSettingsContainer
     {
-        private readonly IUserConfigManager userConfigManager;
-
         private EmailSettings localEmailSettings;
-
-        public EmailSettingsContainer(IUserConfigManager userConfigManager)
-        {
-            this.userConfigManager = userConfigManager;
-        }
-
+        
         public EmailSettings EmailSettings
         {
-            get => localEmailSettings ?? userConfigManager.Config.EmailSettings ?? new EmailSettings();
+            get => localEmailSettings ?? UserConfig.Current.EmailSettings ?? new EmailSettings();
             set => localEmailSettings = value;
         }
     }

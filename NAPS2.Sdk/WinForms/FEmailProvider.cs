@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Email.Oauth;
@@ -89,10 +90,10 @@ namespace NAPS2.WinForms
 
         private void ChooseSystem(string clientName)
         {
-            UserConfigManager.Config.EmailSetup = UserConfigManager.Config.EmailSetup ?? new EmailSetup();
-            UserConfigManager.Config.EmailSetup.SystemProviderName = clientName == defaultSystemClientName ? null : clientName;
-            UserConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.System;
-            UserConfigManager.Save();
+            UserConfig.Current.EmailSetup = UserConfig.Current.EmailSetup ?? new EmailSetup();
+            UserConfig.Current.EmailSetup.SystemProviderName = clientName == defaultSystemClientName ? null : clientName;
+            UserConfig.Current.EmailSetup.ProviderType = EmailProviderType.System;
+            UserConfig.Manager.Save();
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -128,7 +129,7 @@ namespace NAPS2.WinForms
 
         private EmailProviderWidget GetDefaultWidget()
         {
-            var setup = UserConfigManager.Config.EmailSetup;
+            var setup = UserConfig.Current.EmailSetup;
             foreach (var widget in providerWidgets)
             {
                 if (widget.ProviderType == (setup?.ProviderType ?? EmailProviderType.System))

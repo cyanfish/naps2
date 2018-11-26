@@ -12,13 +12,11 @@ namespace NAPS2.WinForms
     public partial class FOcrSetup : FormBase
     {
         private readonly OcrManager ocrManager;
-        private readonly AppConfigManager appConfigManager;
         private readonly List<OcrMode> availableModes;
 
-        public FOcrSetup(OcrManager ocrManager, AppConfigManager appConfigManager)
+        public FOcrSetup(OcrManager ocrManager)
         {
             this.ocrManager = ocrManager;
-            this.appConfigManager = appConfigManager;
             InitializeComponent();
 
             comboOcrMode.Format += (sender, e) => e.Value = ((Enum)e.ListItem).Description();
@@ -50,14 +48,14 @@ namespace NAPS2.WinForms
             labelOcrMode.Visible = availableModes != null;
             ConditionalControls.LockHeight(this);
 
-            if (appConfigManager.Config.OcrState == OcrState.Enabled)
+            if (AppConfig.Current.OcrState == OcrState.Enabled)
             {
                 checkBoxEnableOcr.Checked = true;
-                SetSelectedValue(comboLanguages, appConfigManager.Config.OcrDefaultLanguage ?? "");
-                SetSelectedItem(comboOcrMode, appConfigManager.Config.OcrDefaultMode);
-                checkBoxRunInBG.Checked = appConfigManager.Config.OcrDefaultAfterScanning;
+                SetSelectedValue(comboLanguages, AppConfig.Current.OcrDefaultLanguage ?? "");
+                SetSelectedItem(comboOcrMode, AppConfig.Current.OcrDefaultMode);
+                checkBoxRunInBG.Checked = AppConfig.Current.OcrDefaultAfterScanning;
             }
-            else if (appConfigManager.Config.OcrState == OcrState.Disabled)
+            else if (AppConfig.Current.OcrState == OcrState.Disabled)
             {
                 checkBoxEnableOcr.Checked = false;
                 comboLanguages.SelectedValue = "";
@@ -66,10 +64,10 @@ namespace NAPS2.WinForms
             }
             else
             {
-                checkBoxEnableOcr.Checked = UserConfigManager.Config.EnableOcr;
-                SetSelectedValue(comboLanguages, UserConfigManager.Config.OcrLanguageCode ?? appConfigManager.Config.OcrDefaultLanguage ?? "");
-                SetSelectedItem(comboOcrMode, UserConfigManager.Config.OcrMode == OcrMode.Default ? appConfigManager.Config.OcrDefaultMode : UserConfigManager.Config.OcrMode);
-                checkBoxRunInBG.Checked = UserConfigManager.Config.OcrAfterScanning ?? appConfigManager.Config.OcrDefaultAfterScanning;
+                checkBoxEnableOcr.Checked = UserConfig.Current.EnableOcr;
+                SetSelectedValue(comboLanguages, UserConfig.Current.OcrLanguageCode ?? AppConfig.Current.OcrDefaultLanguage ?? "");
+                SetSelectedItem(comboOcrMode, UserConfig.Current.OcrMode == OcrMode.Default ? AppConfig.Current.OcrDefaultMode : UserConfig.Current.OcrMode);
+                checkBoxRunInBG.Checked = UserConfig.Current.OcrAfterScanning ?? AppConfig.Current.OcrDefaultAfterScanning;
             }
 
             UpdateView();
@@ -107,10 +105,10 @@ namespace NAPS2.WinForms
 
         private void UpdateView()
         {
-            bool canChangeEnabled = appConfigManager.Config.OcrState == OcrState.UserConfig;
-            bool canChangeLanguage = appConfigManager.Config.OcrState == OcrState.UserConfig
-                                     || appConfigManager.Config.OcrState == OcrState.Enabled
-                                        && string.IsNullOrWhiteSpace(appConfigManager.Config.OcrDefaultLanguage);
+            bool canChangeEnabled = AppConfig.Current.OcrState == OcrState.UserConfig;
+            bool canChangeLanguage = AppConfig.Current.OcrState == OcrState.UserConfig
+                                     || AppConfig.Current.OcrState == OcrState.Enabled
+                                        && string.IsNullOrWhiteSpace(AppConfig.Current.OcrDefaultLanguage);
             checkBoxEnableOcr.Enabled = canChangeEnabled;
             comboLanguages.Enabled = checkBoxEnableOcr.Checked && canChangeLanguage;
             linkGetLanguages.Enabled = canChangeLanguage;
@@ -140,13 +138,13 @@ namespace NAPS2.WinForms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.OcrState == OcrState.UserConfig)
+            if (AppConfig.Current.OcrState == OcrState.UserConfig)
             {
-                UserConfigManager.Config.EnableOcr = checkBoxEnableOcr.Checked;
-                UserConfigManager.Config.OcrLanguageCode = (string) comboLanguages.SelectedValue;
-                UserConfigManager.Config.OcrMode = availableModes != null ? (OcrMode) comboOcrMode.SelectedItem : OcrMode.Default;
-                UserConfigManager.Config.OcrAfterScanning = checkBoxRunInBG.Checked;
-                UserConfigManager.Save();
+                UserConfig.Current.EnableOcr = checkBoxEnableOcr.Checked;
+                UserConfig.Current.OcrLanguageCode = (string) comboLanguages.SelectedValue;
+                UserConfig.Current.OcrMode = availableModes != null ? (OcrMode) comboOcrMode.SelectedItem : OcrMode.Default;
+                UserConfig.Current.OcrAfterScanning = checkBoxRunInBG.Checked;
+                UserConfig.Manager.Save();
             }
             Close();
         }

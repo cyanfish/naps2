@@ -16,7 +16,7 @@ namespace NAPS2.Ocr
             new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-3.04/{0}")
         };
 
-        public Tesseract304Engine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager)
+        public Tesseract304Engine(ComponentManager componentManager)
         {
             LanguageData = TesseractLanguageData.V304;
             TesseractBasePath = Path.Combine(componentManager.BasePath, "tesseract-3.0.4");

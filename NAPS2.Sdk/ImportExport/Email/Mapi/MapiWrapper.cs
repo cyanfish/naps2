@@ -10,17 +10,15 @@ namespace NAPS2.ImportExport.Email.Mapi
     public class MapiWrapper
     {
         private readonly SystemEmailClients systemEmailClients;
-        private readonly IUserConfigManager userConfigManager;
 
-        public MapiWrapper(SystemEmailClients systemEmailClients, IUserConfigManager userConfigManager)
+        public MapiWrapper(SystemEmailClients systemEmailClients)
         {
             this.systemEmailClients = systemEmailClients;
-            this.userConfigManager = userConfigManager;
         }
 
         public MapiSendMailReturnCode SendEmail(EmailMessage message)
         {
-            var clientName = userConfigManager.Config.EmailSetup?.SystemProviderName;
+            var clientName = UserConfig.Current.EmailSetup?.SystemProviderName;
             var (mapiSendMail, mapiSendMailW) = systemEmailClients.GetDelegate(clientName, out bool unicode);
 
             // Determine the flags used to send the message

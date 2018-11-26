@@ -7,22 +7,15 @@ namespace NAPS2.Dependencies
 {
     public class ComponentManager
     {
-        private readonly AppConfigManager appConfigManager;
-
         private string basePath;
-
-        public ComponentManager(AppConfigManager appConfigManager)
-        {
-            this.appConfigManager = appConfigManager;
-        }
-
+        
         public string BasePath
         {
             get
             {
                 if (basePath == null)
                 {
-                    var customPath = appConfigManager.Config.ComponentsPath;
+                    var customPath = AppConfig.Current.ComponentsPath;
                     basePath = string.IsNullOrWhiteSpace(customPath)
                         ? Paths.Components
                         : Environment.ExpandEnvironmentVariables(customPath);

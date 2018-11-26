@@ -51,19 +51,17 @@ namespace NAPS2.Scan.Images
             }
             return (size - 832) / 96 + 16;
         }
-
-        private readonly IUserConfigManager userConfigManager;
+        
         private readonly ScannedImageRenderer scannedImageRenderer;
 
-        public ThumbnailRenderer(IUserConfigManager userConfigManager, ScannedImageRenderer scannedImageRenderer)
+        public ThumbnailRenderer(ScannedImageRenderer scannedImageRenderer)
         {
-            this.userConfigManager = userConfigManager;
             this.scannedImageRenderer = scannedImageRenderer;
         }
 
         public Task<Bitmap> RenderThumbnail(ScannedImage scannedImage)
         {
-            return RenderThumbnail(scannedImage, userConfigManager.Config.ThumbnailSize);
+            return RenderThumbnail(scannedImage, UserConfig.Current.ThumbnailSize);
         }
 
         public Task<Bitmap> RenderThumbnail(ScannedImage scannedImage, int size)
@@ -84,7 +82,7 @@ namespace NAPS2.Scan.Images
 
         public Bitmap RenderThumbnail(Bitmap b)
         {
-            return RenderThumbnail(b, userConfigManager.Config.ThumbnailSize);
+            return RenderThumbnail(b, UserConfig.Current.ThumbnailSize);
         }
 
         /// <summary>

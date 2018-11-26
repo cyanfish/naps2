@@ -353,14 +353,12 @@
     <Compile Include="Util\ChaosMonkey.cs" />
     <Compile Include="Util\CollectionExtensions.cs" />
     <Compile Include="Config\AppConfig.cs" />
-    <Compile Include="Config\AppConfigManager.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\FormState.cs" />
     <Compile Include="Config\IProfileManager.cs" />
-    <Compile Include="Config\IUserConfigManager.cs" />
+    <Compile Include="Config\IConfigManager.cs" />
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
-    <Compile Include="Config\UserConfigManager.cs" />
     <Compile Include="ImportExport\FileNamePlaceholders.cs" />
     <Compile Include="ImportExport\Email\EmailSettings.cs" />
     <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />

@@ -11,12 +11,9 @@ namespace NAPS2.Config
 {
     public class ProfileManager : ConfigManager<List<ScanProfile>>, IProfileManager
     {
-        private readonly AppConfigManager appConfigManager;
-
-        public ProfileManager(AppConfigManager appConfigManager)
+        public ProfileManager()
             : base("profiles.xml", Paths.AppData, Paths.Executable, () => new List<ScanProfile>())
         {
-            this.appConfigManager = appConfigManager;
         }
 
         public List<ScanProfile> Profiles => Config;
@@ -44,7 +41,7 @@ namespace NAPS2.Config
         public override void Load()
         {
             base.Load();
-            if (appConfigManager.Config.LockSystemProfiles)
+            if (AppConfig.Current.LockSystemProfiles)
             {
                 var systemProfiles = TryLoadConfig(secondaryConfigPath);
                 if (systemProfiles != null)
@@ -52,7 +49,7 @@ namespace NAPS2.Config
                     foreach (var systemProfile in systemProfiles)
                     {
                         systemProfile.IsLocked = true;
-                        systemProfile.IsDeviceLocked = (systemProfile.Device != null || appConfigManager.Config.LockUnspecifiedDevices);
+                        systemProfile.IsDeviceLocked = (systemProfile.Device != null || AppConfig.Current.LockUnspecifiedDevices);
                     }
                     var systemProfileNames = new HashSet<string>(systemProfiles.Select(x => x.DisplayName));
                     foreach (var profile in Config.ToList())
@@ -73,7 +70,7 @@ namespace NAPS2.Config
                             systemProfileNames.Remove(profile.DisplayName);
                         }
                     }
-                    if (systemProfiles.Count > 0 && appConfigManager.Config.NoUserProfiles)
+                    if (systemProfiles.Count > 0 && AppConfig.Current.NoUserProfiles)
                     {
                         Config.Clear();
                     }

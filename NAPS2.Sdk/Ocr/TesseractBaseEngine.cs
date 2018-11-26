@@ -18,13 +18,6 @@ namespace NAPS2.Ocr
         private const int DEFAULT_TIMEOUT = 600 * 1000;
         private const int CHECK_INTERVAL = 500;
 
-        private readonly AppConfigManager appConfigManager;
-
-        protected TesseractBaseEngine(AppConfigManager appConfigManager)
-        {
-            this.appConfigManager = appConfigManager;
-        }
-
         public bool CanProcess(string langCode)
         {
             if (string.IsNullOrEmpty(langCode) || !IsInstalled || !IsSupported)
@@ -67,7 +60,7 @@ namespace NAPS2.Ocr
                     Log.Error("Couldn't start OCR process.");
                     return null;
                 }
-                var timeout = (int)(appConfigManager.Config.OcrTimeoutInSeconds * 1000);
+                var timeout = (int)(AppConfig.Current.OcrTimeoutInSeconds * 1000);
                 if (timeout == 0)
                 {
                     timeout = DEFAULT_TIMEOUT;

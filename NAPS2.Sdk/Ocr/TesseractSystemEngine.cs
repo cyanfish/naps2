@@ -15,7 +15,7 @@ namespace NAPS2.Ocr
         private DateTime? installCheckTime;
         private List<Language> installedLanguages;
 
-        public TesseractSystemEngine(AppConfigManager appConfigManager) : base(appConfigManager)
+        public TesseractSystemEngine()
         {
             // Use the most complete set of language mappings
             LanguageData = TesseractLanguageData.V400B4;

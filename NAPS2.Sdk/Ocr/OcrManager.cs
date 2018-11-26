@@ -9,16 +9,10 @@ namespace NAPS2.Ocr
 {
     public class OcrManager
     {
-        private readonly IUserConfigManager userConfigManager;
-        private readonly AppConfigManager appConfigManager;
-
         private readonly List<IOcrEngine> engines;
 
-        public OcrManager(Tesseract302Engine t302, Tesseract304Engine t304, Tesseract304XpEngine t304Xp, Tesseract400Beta4Engine t400B4, TesseractSystemEngine tsys, IUserConfigManager userConfigManager, AppConfigManager appConfigManager)
+        public OcrManager(Tesseract302Engine t302, Tesseract304Engine t304, Tesseract304XpEngine t304Xp, Tesseract400Beta4Engine t400B4, TesseractSystemEngine tsys)
         {
-            this.userConfigManager = userConfigManager;
-            this.appConfigManager = appConfigManager;
-
             // Order is important here. Newer/preferred first
             engines = new List<IOcrEngine>
             {
@@ -62,18 +56,18 @@ namespace NAPS2.Ocr
             {
                 OcrParams AppLevelParams()
                 {
-                    if (!string.IsNullOrWhiteSpace(appConfigManager.Config.OcrDefaultLanguage))
+                    if (!string.IsNullOrWhiteSpace(AppConfig.Current.OcrDefaultLanguage))
                     {
-                        return new OcrParams(appConfigManager.Config.OcrDefaultLanguage, appConfigManager.Config.OcrDefaultMode);
+                        return new OcrParams(AppConfig.Current.OcrDefaultLanguage, AppConfig.Current.OcrDefaultMode);
                     }
                     return null;
                 }
 
                 OcrParams UserLevelParams()
                 {
-                    if (!string.IsNullOrWhiteSpace(userConfigManager.Config.OcrLanguageCode))
+                    if (!string.IsNullOrWhiteSpace(UserConfig.Current.OcrLanguageCode))
                     {
-                        return new OcrParams(userConfigManager.Config.OcrLanguageCode, userConfigManager.Config.OcrMode);
+                        return new OcrParams(UserConfig.Current.OcrLanguageCode, UserConfig.Current.OcrMode);
                     }
                     return null;
                 }
@@ -81,16 +75,16 @@ namespace NAPS2.Ocr
                 OcrParams ArbitraryParams() => new OcrParams(ActiveEngine?.InstalledLanguages.OrderBy(x => x.Name).Select(x => x.Code).FirstOrDefault(), OcrMode.Default);
 
                 // Prioritize app-level overrides
-                if (appConfigManager.Config.OcrState == OcrState.Disabled)
+                if (AppConfig.Current.OcrState == OcrState.Disabled)
                 {
                     return null;
                 }
-                if (appConfigManager.Config.OcrState == OcrState.Enabled)
+                if (AppConfig.Current.OcrState == OcrState.Enabled)
                 {
                     return AppLevelParams() ?? UserLevelParams() ?? ArbitraryParams();
                 }
                 // No overrides, so prioritize the user settings
-                if (userConfigManager.Config.EnableOcr)
+                if (UserConfig.Current.EnableOcr)
                 {
                     return UserLevelParams() ?? AppLevelParams() ?? ArbitraryParams();
                 }

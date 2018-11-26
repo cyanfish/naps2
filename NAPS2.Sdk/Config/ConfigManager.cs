@@ -8,7 +8,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Config
 {
-    public abstract class ConfigManager<T> where T : class
+    public class ConfigManager<T> : IConfigManager<T> where T : class
     {
         protected readonly string primaryConfigPath;
         protected readonly string secondaryConfigPath;
@@ -17,7 +17,7 @@ namespace NAPS2.Config
 
         private T config;
 
-        protected ConfigManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Func<T> factory)
+        public ConfigManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Func<T> factory)
         {
             primaryConfigPath = Path.Combine(recoveryFolderPath, indexFileName);
             if (secondaryFolder != null)
@@ -27,7 +27,7 @@ namespace NAPS2.Config
             this.factory = factory;
         }
 
-        protected T Config
+        public T Config
         {
             get
             {

@@ -13,12 +13,10 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class OutlookWebEmailProvider : IEmailProvider
     {
-        private readonly IUserConfigManager userConfigManager;
         private readonly OutlookWebOauthProvider outlookWebOauthProvider;
 
-        public OutlookWebEmailProvider(IUserConfigManager userConfigManager, OutlookWebOauthProvider outlookWebOauthProvider)
+        public OutlookWebEmailProvider(OutlookWebOauthProvider outlookWebOauthProvider)
         {
-            this.userConfigManager = userConfigManager;
             this.outlookWebOauthProvider = outlookWebOauthProvider;
         }
 

@@ -9,7 +9,7 @@ namespace NAPS2.Ocr
 {
     public class Tesseract304XpEngine : Tesseract304Engine
     {
-        public Tesseract304XpEngine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager, componentManager)
+        public Tesseract304XpEngine(ComponentManager componentManager) : base(componentManager)
         {
             TesseractExePath = "tesseract_xp.exe";
             PlatformSupport = PlatformSupport.Windows;

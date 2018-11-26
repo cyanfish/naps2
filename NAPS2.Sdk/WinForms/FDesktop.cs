@@ -41,7 +41,6 @@ namespace NAPS2.WinForms
         #region Dependencies
 
         private readonly StringWrapper stringWrapper;
-        private readonly AppConfigManager appConfigManager;
         private readonly RecoveryManager recoveryManager;
         private readonly OcrManager ocrManager;
         private readonly IProfileManager profileManager;
@@ -50,7 +49,6 @@ namespace NAPS2.WinForms
         private readonly ChangeTracker changeTracker;
         private readonly StillImage stillImage;
         private readonly IOperationFactory operationFactory;
-        private readonly IUserConfigManager userConfigManager;
         private readonly KeyboardShortcutManager ksm;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly WinFormsExportHelper exportHelper;
@@ -75,10 +73,9 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, AppConfigManager appConfigManager, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, IUserConfigManager userConfigManager, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, IOperationProgress operationProgress, UpdateChecker updateChecker)
+        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, IOperationProgress operationProgress, UpdateChecker updateChecker)
         {
             this.stringWrapper = stringWrapper;
-            this.appConfigManager = appConfigManager;
             this.recoveryManager = recoveryManager;
             this.ocrManager = ocrManager;
             this.profileManager = profileManager;
@@ -87,7 +84,6 @@ namespace NAPS2.WinForms
             this.changeTracker = changeTracker;
             this.stillImage = stillImage;
             this.operationFactory = operationFactory;
-            this.userConfigManager = userConfigManager;
             this.ksm = ksm;
             this.thumbnailRenderer = thumbnailRenderer;
             this.exportHelper = exportHelper;
@@ -117,31 +113,31 @@ namespace NAPS2.WinForms
         {
             imageList.ThumbnailRenderer = thumbnailRenderer;
             thumbnailList1.ThumbnailRenderer = thumbnailRenderer;
-            int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
+            int thumbnailSize = UserConfig.Current.ThumbnailSize;
             thumbnailList1.ThumbnailSize = new Size(thumbnailSize, thumbnailSize);
             SetThumbnailSpacing(thumbnailSize);
 
-            if (appConfigManager.Config.HideOcrButton)
+            if (AppConfig.Current.HideOcrButton)
             {
                 tStrip.Items.Remove(tsOcr);
             }
-            if (appConfigManager.Config.HideImportButton)
+            if (AppConfig.Current.HideImportButton)
             {
                 tStrip.Items.Remove(tsImport);
             }
-            if (appConfigManager.Config.HideSavePdfButton)
+            if (AppConfig.Current.HideSavePdfButton)
             {
                 tStrip.Items.Remove(tsdSavePDF);
             }
-            if (appConfigManager.Config.HideSaveImagesButton)
+            if (AppConfig.Current.HideSaveImagesButton)
             {
                 tStrip.Items.Remove(tsdSaveImages);
             }
-            if (appConfigManager.Config.HideEmailButton)
+            if (AppConfig.Current.HideEmailButton)
             {
                 tStrip.Items.Remove(tsdEmailPDF);
             }
-            if (appConfigManager.Config.HidePrintButton)
+            if (AppConfig.Current.HidePrintButton)
             {
                 tStrip.Items.Remove(tsPrint);
             }
@@ -264,8 +260,8 @@ namespace NAPS2.WinForms
         private void SetCulture(string cultureId)
         {
             SaveToolStripLocation();
-            UserConfigManager.Config.Culture = cultureId;
-            UserConfigManager.Save();
+            UserConfig.Current.Culture = cultureId;
+            UserConfig.Manager.Save();
             cultureInitializer.InitCulture(Thread.CurrentThread);
 
             // Update localized values
@@ -309,7 +305,7 @@ namespace NAPS2.WinForms
             });
 
             // If configured (e.g. by a business), show a customizable message box on application startup.
-            var appConfig = appConfigManager.Config;
+            var appConfig = AppConfig.Current;
             if (!string.IsNullOrWhiteSpace(appConfig.StartupMessageText))
             {
                 MessageBox.Show(appConfig.StartupMessageText, appConfig.StartupMessageTitle, MessageBoxButtons.OK,
@@ -325,24 +321,24 @@ namespace NAPS2.WinForms
             await RunStillImageEvents();
 
             // Show a donation prompt after a month of use
-            if (userConfigManager.Config.FirstRunDate == null)
+            if (UserConfig.Current.FirstRunDate == null)
             {
-                userConfigManager.Config.FirstRunDate = DateTime.Now;
-                userConfigManager.Save();
+                UserConfig.Current.FirstRunDate = DateTime.Now;
+                UserConfig.Manager.Save();
             }
 #if !INSTALLER_MSI
-            else if (!appConfigManager.Config.HideDonateButton &&
-                userConfigManager.Config.LastDonatePromptDate == null &&
-                DateTime.Now - userConfigManager.Config.FirstRunDate > TimeSpan.FromDays(30))
+            else if (!AppConfig.Current.HideDonateButton &&
+                UserConfig.Current.LastDonatePromptDate == null &&
+                DateTime.Now - UserConfig.Current.FirstRunDate > TimeSpan.FromDays(30))
             {
-                userConfigManager.Config.LastDonatePromptDate = DateTime.Now;
-                userConfigManager.Save();
+                UserConfig.Current.LastDonatePromptDate = DateTime.Now;
+                UserConfig.Manager.Save();
                 notify.DonatePrompt();
             }
 
-            if (userConfigManager.Config.CheckForUpdates &&
-                (userConfigManager.Config.LastUpdateCheckDate == null ||
-                 userConfigManager.Config.LastUpdateCheckDate < DateTime.Now - updateChecker.CheckInterval))
+            if (UserConfig.Current.CheckForUpdates &&
+                (UserConfig.Current.LastUpdateCheckDate == null ||
+                 UserConfig.Current.LastUpdateCheckDate < DateTime.Now - updateChecker.CheckInterval))
             {
                 updateChecker.CheckForUpdates().ContinueWith(task =>
                 {
@@ -352,8 +348,8 @@ namespace NAPS2.WinForms
                     }
                     else
                     {
-                        userConfigManager.Config.LastUpdateCheckDate = DateTime.Now;
-                        userConfigManager.Save();
+                        UserConfig.Current.LastUpdateCheckDate = DateTime.Now;
+                        UserConfig.Manager.Save();
                     }
                     var update = task.Result;
                     if (update != null)
@@ -474,14 +470,14 @@ namespace NAPS2.WinForms
             }
             if (profile == null)
             {
-                if (appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+                if (AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
                 {
                     return;
                 }
 
                 // No profile for the device we're scanning with, so prompt to create one
                 var editSettingsForm = FormFactory.Create<FEditProfile>();
-                editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ??
+                editSettingsForm.ScanProfile = AppConfig.Current.DefaultProfileSettings ??
                                                new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
                 try
                 {
@@ -535,7 +531,7 @@ namespace NAPS2.WinForms
         private async Task ScanWithNewProfile()
         {
             var editSettingsForm = FormFactory.Create<FEditProfile>();
-            editSettingsForm.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
+            editSettingsForm.ScanProfile = AppConfig.Current.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             editSettingsForm.ShowDialog();
             if (!editSettingsForm.Result)
             {
@@ -705,9 +701,9 @@ namespace NAPS2.WinForms
             ctxSelectAll.Enabled = imageList.Images.Any();
 
             // Other
-            btnZoomIn.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize < ThumbnailRenderer.MAX_SIZE;
-            btnZoomOut.Enabled = imageList.Images.Any() && UserConfigManager.Config.ThumbnailSize > ThumbnailRenderer.MIN_SIZE;
-            tsNewProfile.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
+            btnZoomIn.Enabled = imageList.Images.Any() && UserConfig.Current.ThumbnailSize < ThumbnailRenderer.MAX_SIZE;
+            btnZoomOut.Enabled = imageList.Images.Any() && UserConfig.Current.ThumbnailSize > ThumbnailRenderer.MIN_SIZE;
+            tsNewProfile.Enabled = !(AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
 
             if (PlatformCompat.Runtime.RefreshListViewAfterChange)
             {
@@ -761,13 +757,13 @@ namespace NAPS2.WinForms
 
         private void SaveToolStripLocation()
         {
-            UserConfigManager.Config.DesktopToolStripDock = tStrip.Parent.Dock;
-            UserConfigManager.Save();
+            UserConfig.Current.DesktopToolStripDock = tStrip.Parent.Dock;
+            UserConfig.Manager.Save();
         }
 
         private void LoadToolStripLocation()
         {
-            var dock = UserConfigManager.Config.DesktopToolStripDock;
+            var dock = UserConfig.Current.DesktopToolStripDock;
             if (dock != DockStyle.None)
             {
                 var panel = toolStripContainer1.Controls.OfType<ToolStripPanel>().FirstOrDefault(x => x.Dock == dock);
@@ -938,7 +934,7 @@ namespace NAPS2.WinForms
         {
             if (await exportHelper.SavePDF(images, notify))
             {
-                if (appConfigManager.Config.DeleteAfterSaving)
+                if (AppConfig.Current.DeleteAfterSaving)
                 {
                     SafeInvoke(() =>
                     {
@@ -953,7 +949,7 @@ namespace NAPS2.WinForms
         {
             if (await exportHelper.SaveImages(images, notify))
             {
-                if (appConfigManager.Config.DeleteAfterSaving)
+                if (AppConfig.Current.DeleteAfterSaving)
                 {
                     imageList.Delete(imageList.Images.IndiciesOf(images));
                     DeleteThumbnails();
@@ -1043,7 +1039,7 @@ namespace NAPS2.WinForms
 
             // Configured
 
-            var ks = userConfigManager.Config.KeyboardShortcuts ?? appConfigManager.Config.KeyboardShortcuts ?? new KeyboardShortcuts();
+            var ks = UserConfig.Current.KeyboardShortcuts ?? AppConfig.Current.KeyboardShortcuts ?? new KeyboardShortcuts();
 
             ksm.Assign(ks.About, tsAbout);
             ksm.Assign(ks.BatchScan, tsBatchScan);
@@ -1103,7 +1099,7 @@ namespace NAPS2.WinForms
 
         private string GetProfileShortcut(int i)
         {
-            var ks = userConfigManager.Config.KeyboardShortcuts ?? appConfigManager.Config.KeyboardShortcuts ?? new KeyboardShortcuts();
+            var ks = UserConfig.Current.KeyboardShortcuts ?? AppConfig.Current.KeyboardShortcuts ?? new KeyboardShortcuts();
             switch (i)
             {
                 case 1:
@@ -1208,12 +1204,12 @@ namespace NAPS2.WinForms
 
         private void tsOcr_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideOcrButton)
+            if (AppConfig.Current.HideOcrButton)
             {
                 return;
             }
 
-            if (ocrManager.MustUpgrade && !appConfigManager.Config.NoUpdatePrompt)
+            if (ocrManager.MustUpgrade && !AppConfig.Current.NoUpdatePrompt)
             {
                 // Re-download a fixed version on Windows XP if needed
                 MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1229,7 +1225,7 @@ namespace NAPS2.WinForms
             }
             else if (ocrManager.IsReady)
             {
-                if (ocrManager.CanUpgrade && !appConfigManager.Config.NoUpdatePrompt)
+                if (ocrManager.CanUpgrade && !AppConfig.Current.NoUpdatePrompt)
                 {
                     MessageBox.Show(MiscResources.OcrUpdateAvailable, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FormFactory.Create<FOcrLanguageDownload>().ShowDialog();
@@ -1248,7 +1244,7 @@ namespace NAPS2.WinForms
 
         private void tsImport_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideImportButton)
+            if (AppConfig.Current.HideImportButton)
             {
                 return;
             }
@@ -1258,12 +1254,12 @@ namespace NAPS2.WinForms
 
         private void tsdSavePDF_ButtonClick(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideSavePdfButton)
+            if (AppConfig.Current.HideSavePdfButton)
             {
                 return;
             }
 
-            var action = appConfigManager.Config.SaveButtonDefaultAction;
+            var action = AppConfig.Current.SaveButtonDefaultAction;
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1282,12 +1278,12 @@ namespace NAPS2.WinForms
 
         private void tsdSaveImages_ButtonClick(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideSaveImagesButton)
+            if (AppConfig.Current.HideSaveImagesButton)
             {
                 return;
             }
 
-            var action = appConfigManager.Config.SaveButtonDefaultAction;
+            var action = AppConfig.Current.SaveButtonDefaultAction;
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1306,12 +1302,12 @@ namespace NAPS2.WinForms
 
         private void tsdEmailPDF_ButtonClick(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideEmailButton)
+            if (AppConfig.Current.HideEmailButton)
             {
                 return;
             }
 
-            var action = appConfigManager.Config.SaveButtonDefaultAction;
+            var action = AppConfig.Current.SaveButtonDefaultAction;
 
             if (action == SaveButtonDefaultAction.AlwaysPrompt
                 || action == SaveButtonDefaultAction.PromptIfSelected && SelectedIndices.Any())
@@ -1330,7 +1326,7 @@ namespace NAPS2.WinForms
 
         private async void tsPrint_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HidePrintButton)
+            if (AppConfig.Current.HidePrintButton)
             {
                 return;
             }
@@ -1373,7 +1369,7 @@ namespace NAPS2.WinForms
 
         private void tsSavePDFAll_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideSavePdfButton)
+            if (AppConfig.Current.HideSavePdfButton)
             {
                 return;
             }
@@ -1383,7 +1379,7 @@ namespace NAPS2.WinForms
 
         private void tsSavePDFSelected_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideSavePdfButton)
+            if (AppConfig.Current.HideSavePdfButton)
             {
                 return;
             }
@@ -1398,7 +1394,7 @@ namespace NAPS2.WinForms
 
         private void tsSaveImagesAll_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideSaveImagesButton)
+            if (AppConfig.Current.HideSaveImagesButton)
             {
                 return;
             }
@@ -1408,7 +1404,7 @@ namespace NAPS2.WinForms
 
         private void tsSaveImagesSelected_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideSaveImagesButton)
+            if (AppConfig.Current.HideSaveImagesButton)
             {
                 return;
             }
@@ -1423,7 +1419,7 @@ namespace NAPS2.WinForms
 
         private void tsEmailPDFAll_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideEmailButton)
+            if (AppConfig.Current.HideEmailButton)
             {
                 return;
             }
@@ -1433,7 +1429,7 @@ namespace NAPS2.WinForms
 
         private void tsEmailPDFSelected_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.HideEmailButton)
+            if (AppConfig.Current.HideEmailButton)
             {
                 return;
             }
@@ -1786,7 +1782,7 @@ namespace NAPS2.WinForms
 
         private void StepThumbnailSize(double step)
         {
-            int thumbnailSize = UserConfigManager.Config.ThumbnailSize;
+            int thumbnailSize = UserConfig.Current.ThumbnailSize;
             thumbnailSize = (int)ThumbnailRenderer.StepNumberToSize(ThumbnailRenderer.SizeToStepNumber(thumbnailSize) + step);
             thumbnailSize = Math.Max(Math.Min(thumbnailSize, ThumbnailRenderer.MAX_SIZE), ThumbnailRenderer.MIN_SIZE);
             ResizeThumbnails(thumbnailSize);
@@ -1806,8 +1802,8 @@ namespace NAPS2.WinForms
             }
 
             // Save the new size to config
-            UserConfigManager.Config.ThumbnailSize = thumbnailSize;
-            UserConfigManager.Save();
+            UserConfig.Current.ThumbnailSize = thumbnailSize;
+            UserConfig.Manager.Save();
             // Adjust the visible thumbnail display with the new size
             lock (thumbnailList1)
             {

@@ -34,14 +34,12 @@ namespace NAPS2.ImportExport.Pdf
 
         private readonly OcrManager ocrManager;
         private readonly ScannedImageRenderer scannedImageRenderer;
-        private readonly AppConfigManager appConfigManager;
         private readonly OcrRequestQueue ocrRequestQueue;
 
-        public PdfSharpExporter(OcrManager ocrManager, ScannedImageRenderer scannedImageRenderer, AppConfigManager appConfigManager, OcrRequestQueue ocrRequestQueue)
+        public PdfSharpExporter(OcrManager ocrManager, ScannedImageRenderer scannedImageRenderer, OcrRequestQueue ocrRequestQueue)
         {
             this.ocrManager = ocrManager;
             this.scannedImageRenderer = scannedImageRenderer;
-            this.appConfigManager = appConfigManager;
             this.ocrRequestQueue = ocrRequestQueue;
         }
 
@@ -49,7 +47,7 @@ namespace NAPS2.ImportExport.Pdf
         {
             return await Task.Factory.StartNew(() =>
             {
-                var forced = appConfigManager.Config.ForcePdfCompat;
+                var forced = AppConfig.Current.ForcePdfCompat;
                 var compat = forced == PdfCompat.Default ? settings.Compat : forced;
 
                 var document = new PdfDocument();

@@ -22,15 +22,13 @@ namespace NAPS2.WinForms
         private const int DEFAULT_LOCK_PROFILE_ICON_ID = 5;
 
         private readonly IProfileManager profileManager;
-        private readonly AppConfigManager appConfigManager;
         private readonly IconButtonSizer iconButtonSizer;
         private readonly IScanPerformer scanPerformer;
         private readonly ProfileNameTracker profileNameTracker;
 
-        public FProfiles(IProfileManager profileManager, AppConfigManager appConfigManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker)
+        public FProfiles(IProfileManager profileManager, IconButtonSizer iconButtonSizer, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker)
         {
             this.profileManager = profileManager;
-            this.appConfigManager = appConfigManager;
             this.iconButtonSizer = iconButtonSizer;
             this.scanPerformer = scanPerformer;
             this.profileNameTracker = profileNameTracker;
@@ -62,13 +60,13 @@ namespace NAPS2.WinForms
         protected override void OnLoad(object sender, EventArgs e)
         {
             lvProfiles.LargeImageList = ilProfileIcons.IconsList;
-            btnAdd.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
+            btnAdd.Enabled = !(AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             UpdateProfiles();
             SelectProfile(x => x.IsDefault);
 
-            if (appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+            if (AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
             {
                 contextMenuStrip.Items.Remove(ctxCopy);
                 contextMenuStrip.Items.Remove(ctxPaste);
@@ -134,7 +132,7 @@ namespace NAPS2.WinForms
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var fedit = FormFactory.Create<FEditProfile>();
-            fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
+            fedit.ScanProfile = AppConfig.Current.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             fedit.ShowDialog();
             if (fedit.Result)
             {
@@ -352,7 +350,7 @@ namespace NAPS2.WinForms
 
         private void ctxPaste_Click(object sender, EventArgs e)
         {
-            if (appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+            if (AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
             {
                 return;
             }
@@ -383,7 +381,7 @@ namespace NAPS2.WinForms
         private void lvProfiles_DragEnter(object sender, DragEventArgs e)
         {
             // Determine if drop data is compatible
-            if (appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+            if (AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
             {
                 return;
             }
@@ -417,7 +415,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    if (!(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked)))
+                    if (!(AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked)))
                     {
                         AddProfile(data.ScanProfile);
                     }

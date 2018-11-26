@@ -11,11 +11,8 @@ namespace NAPS2.WinForms
 {
     public partial class FAdvancedScanSettings : FormBase
     {
-        private readonly AppConfigManager appConfigManager;
-
-        public FAdvancedScanSettings(AppConfigManager appConfigManager)
+        public FAdvancedScanSettings()
         {
-            this.appConfigManager = appConfigManager;
             InitializeComponent();
 
             AddEnumItems<WiaVersion>(cmbWiaVersion);
@@ -168,7 +165,7 @@ namespace NAPS2.WinForms
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
         {
-            UpdateValues(appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION });
+            UpdateValues(AppConfig.Current.DefaultProfileSettings ?? new ScanProfile { Version = ScanProfile.CURRENT_VERSION });
         }
     }
 }

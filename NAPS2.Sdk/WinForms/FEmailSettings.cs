@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Lang.Resources;
@@ -33,7 +34,7 @@ namespace NAPS2.WinForms
 
             UpdateProvider();
             UpdateValues(emailSettingsContainer.EmailSettings);
-            cbRememberSettings.Checked = UserConfigManager.Config.EmailSettings != null;
+            cbRememberSettings.Checked = UserConfig.Current.EmailSettings != null;
         }
 
         private void UpdateValues(EmailSettings emailSettings)
@@ -43,7 +44,7 @@ namespace NAPS2.WinForms
 
         private void UpdateProvider()
         {
-            var setup = UserConfigManager.Config.EmailSetup;
+            var setup = UserConfig.Current.EmailSetup;
             switch (setup?.ProviderType)
             {
                 case EmailProviderType.Gmail:
@@ -72,8 +73,8 @@ namespace NAPS2.WinForms
             };
 
             emailSettingsContainer.EmailSettings = emailSettings;
-            UserConfigManager.Config.EmailSettings = cbRememberSettings.Checked ? emailSettings : null;
-            UserConfigManager.Save();
+            UserConfig.Current.EmailSettings = cbRememberSettings.Checked ? emailSettings : null;
+            UserConfig.Manager.Save();
 
             Close();
         }

@@ -16,16 +16,14 @@ namespace NAPS2.Util
     public class Lifecycle
     {
         private readonly StillImage sti;
-        private readonly AppConfigManager appConfigManager;
         private readonly WindowsEventLogger windowsEventLogger;
 
         private bool shouldCreateEventSource;
         private int returnCode;
 
-        public Lifecycle(StillImage sti, AppConfigManager appConfigManager, WindowsEventLogger windowsEventLogger)
+        public Lifecycle(StillImage sti, WindowsEventLogger windowsEventLogger)
         {
             this.sti = sti;
-            this.appConfigManager = appConfigManager;
             this.windowsEventLogger = windowsEventLogger;
         }
 
@@ -174,7 +172,7 @@ namespace NAPS2.Util
             }
 
             // Only start one instance if configured for SingleInstance
-            if (appConfigManager.Config.SingleInstance)
+            if (AppConfig.Current.SingleInstance)
             {
                 // See if there's another NAPS2 process running
                 foreach (var process in GetOtherNaps2Processes())

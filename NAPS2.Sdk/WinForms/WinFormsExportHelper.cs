@@ -28,11 +28,9 @@ namespace NAPS2.WinForms
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly OcrManager ocrManager;
-        private readonly IEmailProviderFactory emailProviderFactory;
         private readonly IOperationProgress operationProgress;
-        private readonly IUserConfigManager userConfigManager;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, IEmailProviderFactory emailProviderFactory, IOperationProgress operationProgress, IUserConfigManager userConfigManager)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, IOperationProgress operationProgress)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
@@ -43,9 +41,7 @@ namespace NAPS2.WinForms
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
             this.ocrManager = ocrManager;
-            this.emailProviderFactory = emailProviderFactory;
             this.operationProgress = operationProgress;
-            this.userConfigManager = userConfigManager;
         }
 
         public async Task<bool> SavePDF(List<ScannedImage> images, ISaveNotify notify)
@@ -134,7 +130,7 @@ namespace NAPS2.WinForms
                 return false;
             }
 
-            if (userConfigManager.Config.EmailSetup == null)
+            if (UserConfig.Current.EmailSetup == null)
             {
                 // First run; prompt for a 
                 var form = formFactory.Create<FEmailProvider>();

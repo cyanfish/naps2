@@ -13,15 +13,13 @@ namespace NAPS2.WinForms
     {
         private readonly IFormFactory formFactory;
         private readonly NotificationManager notificationManager;
-        private readonly IUserConfigManager userConfigManager;
 
         private readonly HashSet<IOperation> activeOperations = new HashSet<IOperation>();
 
-        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager, IUserConfigManager userConfigManager)
+        public WinFormsOperationProgress(IFormFactory formFactory, NotificationManager notificationManager)
         {
             this.formFactory = formFactory;
             this.notificationManager = notificationManager;
-            this.userConfigManager = userConfigManager;
         }
 
         public void Attach(IOperation op)
@@ -39,7 +37,7 @@ namespace NAPS2.WinForms
 
         public void ShowProgress(IOperation op)
         {
-            if (userConfigManager.Config.BackgroundOperations.Contains(op.GetType().Name))
+            if (UserConfig.Current.BackgroundOperations.Contains(op.GetType().Name))
             {
                 ShowBackgroundProgress(op);
             }
@@ -53,8 +51,8 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            userConfigManager.Config.BackgroundOperations.Remove(op.GetType().Name);
-            userConfigManager.Save();
+            UserConfig.Current.BackgroundOperations.Remove(op.GetType().Name);
+            UserConfig.Manager.Save();
 
             if (!op.IsFinished)
             {
@@ -73,8 +71,8 @@ namespace NAPS2.WinForms
         {
             Attach(op);
 
-            userConfigManager.Config.BackgroundOperations.Add(op.GetType().Name);
-            userConfigManager.Save();
+            UserConfig.Current.BackgroundOperations.Add(op.GetType().Name);
+            UserConfig.Manager.Save();
 
             if (!op.IsFinished)
             {

@@ -23,18 +23,14 @@ namespace NAPS2.Scan
         private readonly IScanDriverFactory driverFactory;
         private readonly IErrorOutput errorOutput;
         private readonly IAutoSave autoSave;
-        private readonly AppConfigManager appConfigManager;
         private readonly IProfileManager profileManager;
-        private readonly ScannedImageHelper scannedImageHelper;
 
-        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, AppConfigManager appConfigManager, IProfileManager profileManager, ScannedImageHelper scannedImageHelper)
+        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, IProfileManager profileManager)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
             this.autoSave = autoSave;
-            this.appConfigManager = appConfigManager;
             this.profileManager = profileManager;
-            this.scannedImageHelper = scannedImageHelper;
         }
 
         public async Task PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify,
@@ -56,7 +52,7 @@ namespace NAPS2.Scan
                         // User cancelled
                         return;
                     }
-                    if (appConfigManager.Config.AlwaysRememberDevice)
+                    if (AppConfig.Current.AlwaysRememberDevice)
                     {
                         scanProfile.Device = device;
                         profileManager.Save();
@@ -73,7 +69,7 @@ namespace NAPS2.Scan
                 int imageCount = 0;
                 var source = driver.Scan().Then(img => imageCount++);
 
-                bool doAutoSave = !scanParams.NoAutoSave && !appConfigManager.Config.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
+                bool doAutoSave = !scanParams.NoAutoSave && !AppConfig.Current.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
                 if (doAutoSave)
                 {
                     if (scanProfile.AutoSaveSettings.ClearImagesAfterSaving)

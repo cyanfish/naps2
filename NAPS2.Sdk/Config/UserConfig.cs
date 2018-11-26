@@ -16,6 +16,16 @@ namespace NAPS2.Config
     {
         public const int CURRENT_VERSION = 2;
 
+        private static IConfigManager<UserConfig> _manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, () => new UserConfig { Version = CURRENT_VERSION });
+
+        public static IConfigManager<UserConfig> Manager
+        {
+            get => _manager;
+            set => _manager = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        public static UserConfig Current => Manager.Config;
+
         public int Version { get; set; }
 
         public string Culture { get; set; }

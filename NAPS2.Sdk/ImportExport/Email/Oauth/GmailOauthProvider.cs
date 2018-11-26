@@ -12,20 +12,13 @@ namespace NAPS2.ImportExport.Email.Oauth
 {
     public class GmailOauthProvider : OauthProvider
     {
-        private readonly IUserConfigManager userConfigManager;
-
         private OauthClientCreds creds;
-
-        public GmailOauthProvider(IUserConfigManager userConfigManager)
-        {
-            this.userConfigManager = userConfigManager;
-        }
 
         #region Authorization
 
-        public override OauthToken Token => userConfigManager.Config.EmailSetup?.GmailToken;
+        public override OauthToken Token => UserConfig.Current.EmailSetup?.GmailToken;
 
-        public override string User => userConfigManager.Config.EmailSetup?.GmailUser;
+        public override string User => UserConfig.Current.EmailSetup?.GmailUser;
 
         protected override OauthClientCreds ClientCreds
         {
@@ -49,14 +42,14 @@ namespace NAPS2.ImportExport.Email.Oauth
 
         protected override void SaveToken(OauthToken token, bool refresh)
         {
-            userConfigManager.Config.EmailSetup = userConfigManager.Config.EmailSetup ?? new EmailSetup();
-            userConfigManager.Config.EmailSetup.GmailToken = token;
+            UserConfig.Current.EmailSetup = UserConfig.Current.EmailSetup ?? new EmailSetup();
+            UserConfig.Current.EmailSetup.GmailToken = token;
             if (!refresh)
             {
-                userConfigManager.Config.EmailSetup.GmailUser = GetEmailAddress();
-                userConfigManager.Config.EmailSetup.ProviderType = EmailProviderType.Gmail;
+                UserConfig.Current.EmailSetup.GmailUser = GetEmailAddress();
+                UserConfig.Current.EmailSetup.ProviderType = EmailProviderType.Gmail;
             }
-            userConfigManager.Save();
+            UserConfig.Manager.Save();
         }
 
         #endregion

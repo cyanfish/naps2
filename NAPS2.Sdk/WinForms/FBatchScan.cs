@@ -23,8 +23,6 @@ namespace NAPS2.WinForms
         public const string PATCH_CODE_INFO_URL = "http://www.naps2.com/doc-batch-scan.html#patch-t";
 
         private readonly IProfileManager profileManager;
-        private readonly AppConfigManager appConfigManager;
-        private readonly IUserConfigManager userConfigManager;
         private readonly BatchScanPerformer batchScanPerformer;
         private readonly IErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
@@ -32,11 +30,9 @@ namespace NAPS2.WinForms
         private bool batchRunning;
         private CancellationTokenSource cts = new CancellationTokenSource();
 
-        public FBatchScan(IProfileManager profileManager, AppConfigManager appConfigManager, IUserConfigManager userConfigManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, DialogHelper dialogHelper)
+        public FBatchScan(IProfileManager profileManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, DialogHelper dialogHelper)
         {
             this.profileManager = profileManager;
-            this.appConfigManager = appConfigManager;
-            this.userConfigManager = userConfigManager;
             this.batchScanPerformer = batchScanPerformer;
             this.errorOutput = errorOutput;
             this.dialogHelper = dialogHelper;
@@ -60,11 +56,11 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Activate();
 
-            btnAddProfile.Enabled = !(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
+            btnAddProfile.Enabled = !(AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
 
             ConditionalControls.LockHeight(this);
 
-            BatchSettings = userConfigManager.Config.LastBatchSettings ?? new BatchSettings();
+            BatchSettings = UserConfig.Current.LastBatchSettings ?? new BatchSettings();
             UpdateUIFromSettings();
         }
 
@@ -228,10 +224,10 @@ namespace NAPS2.WinForms
 
         private void btnAddProfile_Click(object sender, EventArgs e)
         {
-            if (!(appConfigManager.Config.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked)))
+            if (!(AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked)))
             {
                 var fedit = FormFactory.Create<FEditProfile>();
-                fedit.ScanProfile = appConfigManager.Config.DefaultProfileSettings ?? new ScanProfile {Version = ScanProfile.CURRENT_VERSION};
+                fedit.ScanProfile = AppConfig.Current.DefaultProfileSettings ?? new ScanProfile {Version = ScanProfile.CURRENT_VERSION};
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
@@ -268,8 +264,8 @@ namespace NAPS2.WinForms
             DoBatchScan().AssertNoAwait();
 
             // Save settings for next time (could also do on form close)
-            userConfigManager.Config.LastBatchSettings = BatchSettings;
-            userConfigManager.Save();
+            UserConfig.Current.LastBatchSettings = BatchSettings;
+            UserConfig.Manager.Save();
         }
 
         private void EnableDisableSettings(bool enabled)

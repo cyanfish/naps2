@@ -9,7 +9,7 @@ namespace NAPS2.Ocr
 {
     public class Tesseract302Engine : TesseractBaseEngine
     {
-        public Tesseract302Engine(AppConfigManager appConfigManager, ComponentManager componentManager) : base(appConfigManager)
+        public Tesseract302Engine(ComponentManager componentManager)
         {
             // Using the newer data since we just need the 302 engine for backwards compatibility
             LanguageData = TesseractLanguageData.V304;

@@ -42,24 +42,20 @@ namespace NAPS2.WinForms
         private ToolStripButton tsSaveImage;
         private readonly IOperationFactory operationFactory;
         private readonly WinFormsExportHelper exportHelper;
-        private readonly AppConfigManager appConfigManager;
         private ToolStripButton tsHueSaturation;
         private ToolStripButton tsBlackWhite;
         private ToolStripButton tsSharpen;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly KeyboardShortcutManager ksm;
-        private readonly IUserConfigManager userConfigManager;
         private readonly IOperationProgress operationProgress;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, AppConfigManager appConfigManager, ScannedImageRenderer scannedImageRenderer, KeyboardShortcutManager ksm, IUserConfigManager userConfigManager, IOperationProgress operationProgress)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, KeyboardShortcutManager ksm, IOperationProgress operationProgress)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.exportHelper = exportHelper;
-            this.appConfigManager = appConfigManager;
             this.scannedImageRenderer = scannedImageRenderer;
             this.ksm = ksm;
-            this.userConfigManager = userConfigManager;
             this.operationProgress = operationProgress;
             InitializeComponent();
         }
@@ -72,11 +68,11 @@ namespace NAPS2.WinForms
         protected override async void OnLoad(object sender, EventArgs e)
         {
             tbPageCurrent.Visible = PlatformCompat.Runtime.IsToolbarTextboxSupported;
-            if (appConfigManager.Config.HideSavePdfButton)
+            if (AppConfig.Current.HideSavePdfButton)
             {
                 toolStrip1.Items.Remove(tsSavePDF);
             }
-            if (appConfigManager.Config.HideSaveImagesButton)
+            if (AppConfig.Current.HideSaveImagesButton)
             {
                 toolStrip1.Items.Remove(tsSaveImage);
             }
@@ -517,7 +513,7 @@ namespace NAPS2.WinForms
         {
             if (await exportHelper.SavePDF(new List<ScannedImage> { ImageList.Images[ImageIndex] }, null))
             {
-                if (appConfigManager.Config.DeleteAfterSaving)
+                if (AppConfig.Current.DeleteAfterSaving)
                 {
                     await DeleteCurrentImage();
                 }
@@ -528,7 +524,7 @@ namespace NAPS2.WinForms
         {
             if (await exportHelper.SaveImages(new List<ScannedImage> { ImageList.Images[ImageIndex] }, null))
             {
-                if (appConfigManager.Config.DeleteAfterSaving)
+                if (AppConfig.Current.DeleteAfterSaving)
                 {
                     await DeleteCurrentImage();
                 }
@@ -590,7 +586,7 @@ namespace NAPS2.WinForms
 
             // Configured
 
-            var ks = userConfigManager.Config.KeyboardShortcuts ?? appConfigManager.Config.KeyboardShortcuts ?? new KeyboardShortcuts();
+            var ks = UserConfig.Current.KeyboardShortcuts ?? AppConfig.Current.KeyboardShortcuts ?? new KeyboardShortcuts();
 
             ksm.Assign(ks.Delete, tsDelete);
             ksm.Assign(ks.ImageBlackWhite, tsBlackWhite);

@@ -12,13 +12,11 @@ namespace NAPS2.WinForms
     public partial class FImageSettings : FormBase
     {
         private readonly ImageSettingsContainer imageSettingsContainer;
-        private readonly IUserConfigManager userConfigManager;
         private readonly DialogHelper dialogHelper;
 
-        public FImageSettings(ImageSettingsContainer imageSettingsContainer, IUserConfigManager userConfigManager, DialogHelper dialogHelper)
+        public FImageSettings(ImageSettingsContainer imageSettingsContainer, DialogHelper dialogHelper)
         {
             this.imageSettingsContainer = imageSettingsContainer;
-            this.userConfigManager = userConfigManager;
             this.dialogHelper = dialogHelper;
             InitializeComponent();
             AddEnumItems<TiffCompression>(cmbTiffCompr);
@@ -37,7 +35,7 @@ namespace NAPS2.WinForms
 
             UpdateValues(imageSettingsContainer.ImageSettings);
             UpdateEnabled();
-            cbRememberSettings.Checked = userConfigManager.Config.ImageSettings != null;
+            cbRememberSettings.Checked = UserConfig.Current.ImageSettings != null;
         }
 
         private void UpdateValues(ImageSettings imageSettings)
@@ -71,8 +69,8 @@ namespace NAPS2.WinForms
             };
 
             imageSettingsContainer.ImageSettings = imageSettings;
-            userConfigManager.Config.ImageSettings = cbRememberSettings.Checked ? imageSettings : null;
-            userConfigManager.Save();
+            UserConfig.Current.ImageSettings = cbRememberSettings.Checked ? imageSettings : null;
+            UserConfig.Manager.Save();
 
             Close();
         }

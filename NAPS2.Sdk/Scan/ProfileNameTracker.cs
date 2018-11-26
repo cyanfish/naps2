@@ -12,25 +12,18 @@ namespace NAPS2.Scan
     /// </summary>
     public class ProfileNameTracker
     {
-        private readonly IUserConfigManager userConfigManager;
-
-        public ProfileNameTracker(IUserConfigManager userConfigManager)
-        {
-            this.userConfigManager = userConfigManager;
-        }
-
         public void RenamingProfile(string oldName, string newName)
         {
             if (string.IsNullOrEmpty(oldName))
             {
                 return;
             }
-            if (userConfigManager.Config.LastBatchSettings != null)
+            if (UserConfig.Current.LastBatchSettings != null)
             {
-                if (userConfigManager.Config.LastBatchSettings.ProfileDisplayName == oldName)
+                if (UserConfig.Current.LastBatchSettings.ProfileDisplayName == oldName)
                 {
-                    userConfigManager.Config.LastBatchSettings.ProfileDisplayName = newName;
-                    userConfigManager.Save();
+                    UserConfig.Current.LastBatchSettings.ProfileDisplayName = newName;
+                    UserConfig.Manager.Save();
                 }
             }
         }
@@ -41,12 +34,12 @@ namespace NAPS2.Scan
             {
                 return;
             }
-            if (userConfigManager.Config.LastBatchSettings != null)
+            if (UserConfig.Current.LastBatchSettings != null)
             {
-                if (userConfigManager.Config.LastBatchSettings.ProfileDisplayName == name)
+                if (UserConfig.Current.LastBatchSettings.ProfileDisplayName == name)
                 {
-                    userConfigManager.Config.LastBatchSettings.ProfileDisplayName = null;
-                    userConfigManager.Save();
+                    UserConfig.Current.LastBatchSettings.ProfileDisplayName = null;
+                    UserConfig.Manager.Save();
                 }
             }
         }

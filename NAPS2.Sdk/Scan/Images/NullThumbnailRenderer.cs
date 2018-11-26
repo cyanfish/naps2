@@ -9,8 +9,8 @@ namespace NAPS2.Scan.Images
 {
     public class NullThumbnailRenderer : ThumbnailRenderer
     {
-        public NullThumbnailRenderer(IUserConfigManager userConfigManager, ScannedImageRenderer scannedImageRenderer)
-            : base(userConfigManager, scannedImageRenderer)
+        public NullThumbnailRenderer(ScannedImageRenderer scannedImageRenderer)
+            : base(scannedImageRenderer)
         {
         }
         

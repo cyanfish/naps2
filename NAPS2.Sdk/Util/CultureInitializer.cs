@@ -14,18 +14,9 @@ namespace NAPS2.Util
     /// </summary>
     public class CultureInitializer
     {
-        private readonly IUserConfigManager userConfigManager;
-        private readonly AppConfigManager appConfigManager;
-
-        public CultureInitializer(IUserConfigManager userConfigManager, AppConfigManager appConfigManager)
-        {
-            this.userConfigManager = userConfigManager;
-            this.appConfigManager = appConfigManager;
-        }
-
         public void InitCulture(Thread thread)
         {
-            var cultureId = userConfigManager.Config.Culture ?? appConfigManager.Config.DefaultCulture;
+            var cultureId = UserConfig.Current.Culture ?? AppConfig.Current.DefaultCulture;
             if (!string.IsNullOrWhiteSpace(cultureId))
             {
                 try

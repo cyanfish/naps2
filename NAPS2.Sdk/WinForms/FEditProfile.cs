@@ -22,7 +22,6 @@ namespace NAPS2.WinForms
         private readonly IScanDriverFactory driverFactory;
         private readonly IErrorOutput errorOutput;
         private readonly ProfileNameTracker profileNameTracker;
-        private readonly AppConfigManager appConfigManager;
 
         private ScanProfile scanProfile;
         private ScanDevice currentDevice;
@@ -34,12 +33,11 @@ namespace NAPS2.WinForms
 
         private bool suppressChangeEvent;
 
-        public FEditProfile(IScanDriverFactory driverFactory, IErrorOutput errorOutput, ProfileNameTracker profileNameTracker, AppConfigManager appConfigManager)
+        public FEditProfile(IScanDriverFactory driverFactory, IErrorOutput errorOutput, ProfileNameTracker profileNameTracker)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
             this.profileNameTracker = profileNameTracker;
-            this.appConfigManager = appConfigManager;
             InitializeComponent();
             btnNetwork.Left = btnChooseDevice.Right + 6;
             // TODO: Remove this to reenable
@@ -131,7 +129,7 @@ namespace NAPS2.WinForms
             }
 
             // Custom Presets
-            foreach (var preset in UserConfigManager.Config.CustomPageSizePresets.OrderBy(x => x.Name))
+            foreach (var preset in UserConfig.Current.CustomPageSizePresets.OrderBy(x => x.Name))
             {
                 cmbPage.Items.Insert(cmbPage.Items.Count - 1, new PageSizeListItem
                 {
@@ -381,8 +379,8 @@ namespace NAPS2.WinForms
                 txtBrightness.Enabled = settingsEnabled;
                 txtContrast.Enabled = settingsEnabled;
 
-                cbAutoSave.Enabled = !locked && !appConfigManager.Config.DisableAutoSave;
-                linkAutoSaveSettings.Visible = !locked && !appConfigManager.Config.DisableAutoSave;
+                cbAutoSave.Enabled = !locked && !AppConfig.Current.DisableAutoSave;
+                linkAutoSaveSettings.Visible = !locked && !AppConfig.Current.DisableAutoSave;
 
                 btnAdvanced.Enabled = !locked;
 
@@ -464,7 +462,7 @@ namespace NAPS2.WinForms
 
         private void linkAutoSaveSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (appConfigManager.Config.DisableAutoSave)
+            if (AppConfig.Current.DisableAutoSave)
             {
                 return;
             }
