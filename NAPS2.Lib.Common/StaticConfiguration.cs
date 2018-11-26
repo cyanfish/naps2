@@ -17,8 +17,8 @@ namespace NAPS2.DI
                 Log.EventLogger = new WindowsEventLogger();
             }
 
-            UserConfig.Manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, () => new UserConfig { Version = UserConfig.CURRENT_VERSION });
-            AppConfig.Manager = new ConfigManager<AppConfig>("appsettings.xml", Paths.Executable, null, () => new AppConfig { Version = AppConfig.CURRENT_VERSION });
+            UserConfig.Manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, UserConfig.Create);
+            AppConfig.Manager = new ConfigManager<AppConfig>("appsettings.xml", Paths.Executable, null, AppConfig.Create);
         }
     }
 }

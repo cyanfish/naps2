@@ -16,7 +16,7 @@ namespace NAPS2.Config
     {
         public const int CURRENT_VERSION = 2;
 
-        private static IConfigManager<UserConfig> _manager = new StubConfigManager<UserConfig>(new UserConfig { Version = CURRENT_VERSION });
+        private static IConfigManager<UserConfig> _manager = new StubConfigManager<UserConfig>(Create());
 
         public static IConfigManager<UserConfig> Manager
         {
@@ -25,6 +25,8 @@ namespace NAPS2.Config
         }
 
         public static UserConfig Current => Manager.Config;
+
+        public static UserConfig Create() => new UserConfig { Version = CURRENT_VERSION };
 
         public int Version { get; set; }
 
