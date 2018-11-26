@@ -360,7 +360,7 @@
     <Compile Include="Config\IConfigManager.cs" />
     <Compile Include="Config\ProfileManager.cs" />
     <Compile Include="Config\UserConfig.cs" />
-    <Compile Include="ImportExport\FileNamePlaceholders.cs" />
+    <Compile Include="ImportExport\Placeholders.cs" />
     <Compile Include="ImportExport\Email\EmailSettings.cs" />
     <Compile Include="ImportExport\Email\EmailSettingsContainer.cs" />
     <Compile Include="ImportExport\Images\ImageSettings.cs" />

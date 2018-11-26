@@ -23,17 +23,15 @@ namespace NAPS2.ImportExport
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly OcrManager ocrManager;
         private readonly IErrorOutput errorOutput;
-        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly DialogHelper dialogHelper;
         private readonly IOperationProgress operationProgress;
 
-        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, FileNamePlaceholders fileNamePlaceholders, DialogHelper dialogHelper, IOperationProgress operationProgress)
+        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, DialogHelper dialogHelper, IOperationProgress operationProgress)
         {
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.ocrManager = ocrManager;
             this.errorOutput = errorOutput;
-            this.fileNamePlaceholders = fileNamePlaceholders;
             this.dialogHelper = dialogHelper;
             this.operationProgress = operationProgress;
         }
@@ -47,13 +45,13 @@ namespace NAPS2.ImportExport
             try
             {
                 bool ok = true;
-                DateTime now = DateTime.Now;
+                var placeholders = Placeholders.All.WithDate(DateTime.Now);
                 int i = 0;
                 string firstFileSaved = null;
                 var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator).ToList();
                 foreach (var imageList in scans)
                 {
-                    (bool success, string filePath) = await SaveOneFile(settings, now, i++, imageList, scans.Count == 1 ? notify : null);
+                    (bool success, string filePath) = await SaveOneFile(settings, placeholders, i++, imageList, scans.Count == 1 ? notify : null);
                     if (!success)
                     {
                         ok = false;
@@ -80,18 +78,18 @@ namespace NAPS2.ImportExport
             }
         }
         
-        private async Task<(bool, string)> SaveOneFile(AutoSaveSettings settings, DateTime now, int i, List<ScannedImage> images, ISaveNotify notify)
+        private async Task<(bool, string)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i, List<ScannedImage> images, ISaveNotify notify)
         {
             if (images.Count == 0)
             {
                 return (true, null);
             }
-            string subPath = fileNamePlaceholders.SubstitutePlaceholders(settings.FilePath, now, true, i);
+            string subPath = placeholders.Substitute(settings.FilePath, true, i);
             if (settings.PromptForFilePath)
             {
                 if (dialogHelper.PromptToSavePdfOrImage(subPath, out string newPath))
                 {
-                    subPath = fileNamePlaceholders.SubstitutePlaceholders(newPath, now, true, i);
+                    subPath = placeholders.Substitute(newPath, true, i);
                 }
             }
             var extension = Path.GetExtension(subPath);
@@ -99,10 +97,10 @@ namespace NAPS2.ImportExport
             {
                 if (File.Exists(subPath))
                 {
-                    subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
+                    subPath = placeholders.Substitute(subPath, true, 0, 1);
                 }
                 var op = operationFactory.Create<SavePdfOperation>();
-                if (op.Start(subPath, now, images, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, false, null))
+                if (op.Start(subPath, placeholders, images, pdfSettingsContainer.PdfSettings, ocrManager.DefaultParams, false, null))
                 {
                     operationProgress.ShowProgress(op);
                 }
@@ -116,7 +114,7 @@ namespace NAPS2.ImportExport
             else
             {
                 var op = operationFactory.Create<SaveImagesOperation>();
-                if (op.Start(subPath, now, images))
+                if (op.Start(subPath, placeholders, images))
                 {
                     operationProgress.ShowProgress(op);
                 }

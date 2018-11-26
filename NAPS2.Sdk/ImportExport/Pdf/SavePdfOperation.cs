@@ -16,14 +16,12 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class SavePdfOperation : OperationBase
     {
-        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly IPdfExporter pdfExporter;
         private readonly IOverwritePrompt overwritePrompt;
         private readonly IEmailProviderFactory emailProviderFactory;
 
-        public SavePdfOperation(FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, IEmailProviderFactory emailProviderFactory)
+        public SavePdfOperation(IPdfExporter pdfExporter, IOverwritePrompt overwritePrompt, IEmailProviderFactory emailProviderFactory)
         {
-            this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
             this.overwritePrompt = overwritePrompt;
             this.emailProviderFactory = emailProviderFactory;
@@ -32,10 +30,10 @@ namespace NAPS2.ImportExport.Pdf
             AllowBackground = true;
         }
 
-        public bool Start(string fileName, DateTime dateTime, ICollection<ScannedImage> images, PdfSettings pdfSettings, OcrParams ocrParams, bool email, EmailMessage emailMessage)
+        public bool Start(string fileName, Placeholders placeholders, ICollection<ScannedImage> images, PdfSettings pdfSettings, OcrParams ocrParams, bool email, EmailMessage emailMessage)
         {
             ProgressTitle = email ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
-            var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime);
+            var subFileName = placeholders.Substitute(fileName);
             Status = new OperationStatus
             {
                 StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName)),
@@ -45,7 +43,7 @@ namespace NAPS2.ImportExport.Pdf
             if (Directory.Exists(subFileName))
             {
                 // Not supposed to be a directory, but ok...
-                subFileName = fileNamePlaceholders.SubstitutePlaceholders(Path.Combine(subFileName, "$(n).pdf"), dateTime);
+                subFileName = placeholders.Substitute(Path.Combine(subFileName, "$(n).pdf"));
             }
             if (File.Exists(subFileName))
             {

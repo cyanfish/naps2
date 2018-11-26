@@ -18,15 +18,13 @@ namespace NAPS2.ImportExport.Images
 {
     public class SaveImagesOperation : OperationBase
     {
-        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOverwritePrompt overwritePrompt;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly TiffHelper tiffHelper;
 
-        public SaveImagesOperation(FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ScannedImageRenderer scannedImageRenderer, TiffHelper tiffHelper)
+        public SaveImagesOperation(ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ScannedImageRenderer scannedImageRenderer, TiffHelper tiffHelper)
         {
-            this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.overwritePrompt = overwritePrompt;
             this.scannedImageRenderer = scannedImageRenderer;
@@ -44,10 +42,10 @@ namespace NAPS2.ImportExport.Images
         /// If multiple images are provided, they will be saved to files with numeric identifiers, e.g. img1.jpg, img2.jpg, etc..
         /// </summary>
         /// <param name="fileName">The name of the file to save. For multiple images, this is modified by appending a number before the extension.</param>
-        /// <param name="dateTime"></param>
+        /// <param name="placeholders"></param>
         /// <param name="images">The collection of images to save.</param>
         /// <param name="batch"></param>
-        public bool Start(string fileName, DateTime dateTime, List<ScannedImage> images, bool batch = false)
+        public bool Start(string fileName, Placeholders placeholders, List<ScannedImage> images, bool batch = false)
         {
             Status = new OperationStatus
             {
@@ -59,12 +57,12 @@ namespace NAPS2.ImportExport.Images
             {
                 try
                 {
-                    var subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, batch);
+                    var subFileName = placeholders.Substitute(fileName, batch);
                     if (Directory.Exists(subFileName))
                     {
                         // Not supposed to be a directory, but ok...
                         fileName = Path.Combine(subFileName, "$(n).jpg");
-                        subFileName = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, batch);
+                        subFileName = placeholders.Substitute(fileName, batch);
                     }
                     ImageFormat format = GetImageFormat(subFileName);
 
@@ -114,7 +112,7 @@ namespace NAPS2.ImportExport.Images
                         }
                         else
                         {
-                            var fileNameN = fileNamePlaceholders.SubstitutePlaceholders(fileName, dateTime, true, i,
+                            var fileNameN = placeholders.Substitute(fileName, true, i,
                                 digits);
                             Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                             InvokeStatusChanged();

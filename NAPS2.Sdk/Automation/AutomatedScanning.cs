@@ -31,7 +31,6 @@ namespace NAPS2.Automation
         private readonly IErrorOutput errorOutput;
         private readonly IScannedImageImporter scannedImageImporter;
         private readonly PdfSettingsContainer pdfSettingsContainer;
-        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOperationFactory operationFactory;
         private readonly OcrManager ocrManager;
@@ -42,11 +41,11 @@ namespace NAPS2.Automation
         private List<List<ScannedImage>> scanList;
         private int pagesScanned;
         private int totalPagesScanned;
-        private DateTime startTime;
+        private Placeholders placeholders;
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, FileNamePlaceholders fileNamePlaceholders, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory, GhostscriptManager ghostscriptManager)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory, GhostscriptManager ghostscriptManager)
         {
             this.options = options;
             this.profileManager = profileManager;
@@ -55,7 +54,6 @@ namespace NAPS2.Automation
             this.emailProviderFactory = emailProviderFactory;
             this.scannedImageImporter = scannedImageImporter;
             this.pdfSettingsContainer = pdfSettingsContainer;
-            this.fileNamePlaceholders = fileNamePlaceholders;
             this.imageSettingsContainer = imageSettingsContainer;
             this.operationFactory = operationFactory;
             this.ocrManager = ocrManager;
@@ -82,7 +80,7 @@ namespace NAPS2.Automation
                     return;
                 }
 
-                startTime = DateTime.Now;
+                placeholders = Placeholders.All.WithDate(DateTime.Now);
                 ConsoleOverwritePrompt.ForceOverwrite = options.ForceOverwrite;
 
                 if (options.Install != null)
@@ -246,7 +244,7 @@ namespace NAPS2.Automation
                 // Email, so no check needed
                 return true;
             }
-            var subPath = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
+            var subPath = placeholders.Substitute(options.OutputPath);
             if (IsPdfFile(subPath)
                 && File.Exists(subPath)
                 && !options.ForceOverwrite)
@@ -302,8 +300,8 @@ namespace NAPS2.Automation
 
             var message = new EmailMessage
             {
-                Subject = fileNamePlaceholders.SubstitutePlaceholders(options.EmailSubject, startTime, false) ?? "",
-                BodyText = fileNamePlaceholders.SubstitutePlaceholders(options.EmailBody, startTime, false),
+                Subject = placeholders.Substitute(options.EmailSubject, false) ?? "",
+                BodyText = placeholders.Substitute(options.EmailBody, false),
                 AutoSend = options.EmailAutoSend,
                 SilentSend = options.EmailSilentSend
             };
@@ -327,7 +325,7 @@ namespace NAPS2.Automation
                         int i = 0;
                         foreach (var path in actualOutputPaths)
                         {
-                            string attachmentName = fileNamePlaceholders.SubstitutePlaceholders(options.EmailFileName, startTime, false, i++, scanList.Count > 1 ? digits : 0);
+                            string attachmentName = placeholders.Substitute(options.EmailFileName, false, i++, scanList.Count > 1 ? digits : 0);
                             message.Attachments.Add(new EmailAttachment
                             {
                                 FilePath = path,
@@ -434,7 +432,7 @@ namespace NAPS2.Automation
 
         private async Task ExportToImageFiles()
         {
-            var path = fileNamePlaceholders.SubstitutePlaceholders(options.OutputPath, startTime);
+            var path = placeholders.Substitute(options.OutputPath);
             await DoExportToImageFiles(options.OutputPath);
             OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
         }
@@ -460,7 +458,7 @@ namespace NAPS2.Automation
                         i = op.Status.CurrentProgress;
                     }
                 };
-                op.Start(outputPath, startTime, scan);
+                op.Start(outputPath, placeholders, scan);
                 await op.Success;
             }
         }
@@ -548,8 +546,8 @@ namespace NAPS2.Automation
                     }
                 };
                 int digits = (int)Math.Floor(Math.Log10(scanList.Count)) + 1;
-                string actualPath = fileNamePlaceholders.SubstitutePlaceholders(path, startTime, true, scanIndex++, scanList.Count > 1 ? digits : 0);
-                op.Start(actualPath, startTime, fileContents, pdfSettings, ocrParams, email, null);
+                string actualPath = placeholders.Substitute(path, true, scanIndex++, scanList.Count > 1 ? digits : 0);
+                op.Start(actualPath, placeholders, fileContents, pdfSettings, ocrParams, email, null);
                 if (!await op.Success)
                 {
                     return false;

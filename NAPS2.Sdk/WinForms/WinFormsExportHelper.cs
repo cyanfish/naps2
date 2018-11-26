@@ -23,20 +23,18 @@ namespace NAPS2.WinForms
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly EmailSettingsContainer emailSettingsContainer;
         private readonly DialogHelper dialogHelper;
-        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly ChangeTracker changeTracker;
         private readonly IOperationFactory operationFactory;
         private readonly IFormFactory formFactory;
         private readonly OcrManager ocrManager;
         private readonly IOperationProgress operationProgress;
 
-        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, FileNamePlaceholders fileNamePlaceholders, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, IOperationProgress operationProgress)
+        public WinFormsExportHelper(PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, EmailSettingsContainer emailSettingsContainer, DialogHelper dialogHelper, ChangeTracker changeTracker, IOperationFactory operationFactory, IFormFactory formFactory, OcrManager ocrManager, IOperationProgress operationProgress)
         {
             this.pdfSettingsContainer = pdfSettingsContainer;
             this.imageSettingsContainer = imageSettingsContainer;
             this.emailSettingsContainer = emailSettingsContainer;
             this.dialogHelper = dialogHelper;
-            this.fileNamePlaceholders = fileNamePlaceholders;
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.formFactory = formFactory;
@@ -63,7 +61,7 @@ namespace NAPS2.WinForms
                     }
                 }
 
-                var subSavePath = fileNamePlaceholders.SubstitutePlaceholders(savePath, DateTime.Now);
+                var subSavePath = Placeholders.All.Substitute(savePath);
                 var changeToken = changeTracker.State;
                 if (await ExportPDF(subSavePath, images, false, null))
                 {
@@ -81,7 +79,7 @@ namespace NAPS2.WinForms
 
             var pdfSettings = pdfSettingsContainer.PdfSettings;
             pdfSettings.Metadata.Creator = MiscResources.NAPS2;
-            if (op.Start(filename, DateTime.Now, images, pdfSettings, ocrManager.DefaultParams, email, emailMessage))
+            if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettings, ocrManager.DefaultParams, email, emailMessage))
             {
                 operationProgress.ShowProgress(op);
             }
@@ -109,7 +107,7 @@ namespace NAPS2.WinForms
 
                 var op = operationFactory.Create<SaveImagesOperation>();
                 var changeToken = changeTracker.State;
-                if (op.Start(savePath, DateTime.Now, images))
+                if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images))
                 {
                     operationProgress.ShowProgress(op);
                 }
@@ -151,7 +149,7 @@ namespace NAPS2.WinForms
             {
                 attachmentName += ".pdf";
             }
-            attachmentName = fileNamePlaceholders.SubstitutePlaceholders(attachmentName, DateTime.Now, false);
+            attachmentName = Placeholders.All.Substitute(attachmentName, false);
 
             var tempFolder = new DirectoryInfo(Path.Combine(Paths.Temp, Path.GetRandomFileName()));
             tempFolder.Create();

@@ -23,18 +23,16 @@ namespace NAPS2.Scan.Batch
     {
         private readonly IScanPerformer scanPerformer;
         private readonly IProfileManager profileManager;
-        private readonly FileNamePlaceholders fileNamePlaceholders;
         private readonly IPdfExporter pdfExporter;
         private readonly IOperationFactory operationFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly OcrManager ocrManager;
         private readonly IFormFactory formFactory;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
+        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
         {
             this.scanPerformer = scanPerformer;
             this.profileManager = profileManager;
-            this.fileNamePlaceholders = fileNamePlaceholders;
             this.pdfExporter = pdfExporter;
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
@@ -44,7 +42,7 @@ namespace NAPS2.Scan.Batch
 
         public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
         {
-            var state = new BatchState(scanPerformer, profileManager, fileNamePlaceholders, pdfExporter, operationFactory, pdfSettingsContainer, ocrManager, formFactory)
+            var state = new BatchState(scanPerformer, profileManager, pdfExporter, operationFactory, pdfSettingsContainer, ocrManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -59,7 +57,6 @@ namespace NAPS2.Scan.Batch
         {
             private readonly IScanPerformer scanPerformer;
             private readonly IProfileManager profileManager;
-            private readonly FileNamePlaceholders fileNamePlaceholders;
             private readonly IPdfExporter pdfExporter;
             private readonly IOperationFactory operationFactory;
             private readonly PdfSettingsContainer pdfSettingsContainer;
@@ -70,11 +67,10 @@ namespace NAPS2.Scan.Batch
             private ScanParams scanParams;
             private List<List<ScannedImage>> scans;
 
-            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, FileNamePlaceholders fileNamePlaceholders, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
+            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
             {
                 this.scanPerformer = scanPerformer;
                 this.profileManager = profileManager;
-                this.fileNamePlaceholders = fileNamePlaceholders;
                 this.pdfExporter = pdfExporter;
                 this.operationFactory = operationFactory;
                 this.pdfSettingsContainer = pdfSettingsContainer;
@@ -228,7 +224,7 @@ namespace NAPS2.Scan.Batch
             {
                 ProgressCallback(MiscResources.BatchStatusSaving);
 
-                var now = DateTime.Now;
+                var placeholders = Placeholders.All.WithDate(DateTime.Now);
                 var allImages = scans.SelectMany(x => x).ToList();
 
                 if (Settings.OutputType == BatchOutputType.Load)
@@ -240,7 +236,7 @@ namespace NAPS2.Scan.Batch
                 }
                 else if (Settings.OutputType == BatchOutputType.SingleFile)
                 {
-                    await Save(now, 0, allImages);
+                    await Save(placeholders, 0, allImages);
                     foreach (var img in allImages)
                     {
                         img.Dispose();
@@ -251,7 +247,7 @@ namespace NAPS2.Scan.Batch
                     int i = 0;
                     foreach (var imageList in SaveSeparatorHelper.SeparateScans(scans, Settings.SaveSeparator))
                     {
-                        await Save(now, i++, imageList);
+                        await Save(placeholders, i++, imageList);
                         foreach (var img in imageList)
                         {
                             img.Dispose();
@@ -260,18 +256,18 @@ namespace NAPS2.Scan.Batch
                 }
             }
 
-            private async Task Save(DateTime now, int i, List<ScannedImage> images)
+            private async Task Save(Placeholders placeholders, int i, List<ScannedImage> images)
             {
                 if (images.Count == 0)
                 {
                     return;
                 }
-                var subPath = fileNamePlaceholders.SubstitutePlaceholders(Settings.SavePath, now, true, i);
+                var subPath = placeholders.Substitute(Settings.SavePath, true, i);
                 if (GetSavePathExtension().ToLower() == ".pdf")
                 {
                     if (File.Exists(subPath))
                     {
-                        subPath = fileNamePlaceholders.SubstitutePlaceholders(subPath, now, true, 0, 1);
+                        subPath = placeholders.Substitute(subPath, true, 0, 1);
                     }
                     var snapshots = images.Select(x => x.Preserve()).ToList();
                     try
@@ -286,7 +282,7 @@ namespace NAPS2.Scan.Batch
                 else
                 {
                     var op = operationFactory.Create<SaveImagesOperation>();
-                    op.Start(subPath, now, images, true);
+                    op.Start(subPath, placeholders, images, true);
                     await op.Success;
                 }
             }
