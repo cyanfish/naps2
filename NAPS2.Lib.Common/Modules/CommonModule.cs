@@ -76,11 +76,7 @@ namespace NAPS2.DI.Modules
             Bind<IBlankDetector>().To<ThresholdBlankDetector>();
             Bind<IAutoSave>().To<AutoSave>();
 
-            Log.Logger = new NLogLogger();
-            if (PlatformCompat.System.CanUseWin32)
-            {
-                Log.EventLogger = Kernel.Get<WindowsEventLogger>();
-            }
+            StaticConfiguration.Initialize();
 #if DEBUG
             Debug.Listeners.Add(new NLogTraceListener());
 #endif

@@ -13,7 +13,7 @@ namespace NAPS2.Config
     {
         public const int CURRENT_VERSION = 2;
 
-        private static IConfigManager<AppConfig> _manager = new ConfigManager<AppConfig>("appsettings.xml", Paths.Executable, null, () => new AppConfig { Version = CURRENT_VERSION });
+        private static IConfigManager<AppConfig> _manager = new StubConfigManager<AppConfig>(new AppConfig { Version = CURRENT_VERSION });
 
         public static IConfigManager<AppConfig> Manager
         {
@@ -76,14 +76,14 @@ namespace NAPS2.Config
         public double OcrTimeoutInSeconds { get; set; }
 
         public OcrState OcrState { get; set; }
-        
+
         public string OcrDefaultLanguage { get; set; }
 
         public OcrMode OcrDefaultMode { get; set; }
 
         public bool OcrDefaultAfterScanning { get; set; }
 
-        public PdfCompat ForcePdfCompat { get; set; } 
+        public PdfCompat ForcePdfCompat { get; set; }
 
         public EventType EventLogging { get; set; }
 

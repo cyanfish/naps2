@@ -16,7 +16,7 @@ namespace NAPS2.Config
     {
         public const int CURRENT_VERSION = 2;
 
-        private static IConfigManager<UserConfig> _manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, () => new UserConfig { Version = CURRENT_VERSION });
+        private static IConfigManager<UserConfig> _manager = new StubConfigManager<UserConfig>(new UserConfig { Version = CURRENT_VERSION });
 
         public static IConfigManager<UserConfig> Manager
         {
