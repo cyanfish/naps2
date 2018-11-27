@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr
 {
     public class Tesseract304XpEngine : Tesseract304Engine
     {
-        public Tesseract304XpEngine(ComponentManager componentManager) : base(componentManager)
+        public Tesseract304XpEngine(string basePath) : base(basePath)
         {
             TesseractExePath = "tesseract_xp.exe";
             PlatformSupport = PlatformSupport.Windows;

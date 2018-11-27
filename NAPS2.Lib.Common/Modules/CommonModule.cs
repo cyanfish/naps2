@@ -20,9 +20,7 @@ using NAPS2.Scan.Wia;
 using NAPS2.Util;
 using NAPS2.WinForms;
 using NAPS2.Worker;
-using Ninject;
 using Ninject.Modules;
-using NLog;
 using ILogger = NAPS2.Logging.ILogger;
 
 namespace NAPS2.DI.Modules
@@ -41,7 +39,7 @@ namespace NAPS2.DI.Modules
             Bind<IPdfExporter>().To<PdfSharpExporter>();
             Bind<IScannedImagePrinter>().To<PrintDocumentPrinter>();
             Bind<IEmailProviderFactory>().To<NinjectEmailProviderFactory>();
-            Bind<OcrManager>().ToSelf().InSingletonScope();
+            Bind<OcrManager>().ToMethod(ctx => OcrManager.Default);
             Bind<OcrRequestQueue>().ToSelf().InSingletonScope();
 
             // Scan
@@ -77,9 +75,6 @@ namespace NAPS2.DI.Modules
             Bind<IAutoSave>().To<AutoSave>();
 
             StaticConfiguration.Initialize();
-#if DEBUG
-            Debug.Listeners.Add(new NLogTraceListener());
-#endif
         }
     }
 }

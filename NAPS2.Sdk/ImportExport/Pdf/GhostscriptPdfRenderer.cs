@@ -15,30 +15,16 @@ namespace NAPS2.ImportExport.Pdf
 {
     public class GhostscriptPdfRenderer : IPdfRenderer
     {
-        private readonly IComponentInstallPrompt componentInstallPrompt;
-        private readonly GhostscriptManager ghostscriptManager;
-
-        private readonly Lazy<byte[]> gsLibBytes;
-
-        public GhostscriptPdfRenderer(IComponentInstallPrompt componentInstallPrompt, GhostscriptManager ghostscriptManager)
-        {
-            this.componentInstallPrompt = componentInstallPrompt;
-            this.ghostscriptManager = ghostscriptManager;
-
-            gsLibBytes = new Lazy<byte[]>(() => File.ReadAllBytes(ghostscriptManager.GhostscriptComponent.Path));
-        }
-
-        public void ThrowIfCantRender()
-        {
-            if (AppConfig.Current.DisableGenericPdfImport || !VerifyDependencies())
-            {
-                throw new ImageRenderException();
-            }
-        }
+        private static byte[] _gsLibBytes;
 
         public IEnumerable<Bitmap> Render(string path)
         {
             ThrowIfCantRender();
+
+            if (_gsLibBytes == null)
+            {
+                _gsLibBytes = File.ReadAllBytes(GhostscriptManager.GhostscriptComponent.Path);
+            }
 
             // TODO: Maybe allow this to be configured
             int dpi = ScanDpi.Dpi300.ToIntDpi();
@@ -53,7 +39,7 @@ namespace NAPS2.ImportExport.Pdf
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 var rasterizer = new GhostscriptRasterizer();
-                rasterizer.Open(stream, gsLibBytes.Value);
+                rasterizer.Open(stream, _gsLibBytes);
 
                 for (int pageNumber = 1; pageNumber <= rasterizer.PageCount; pageNumber++)
                 {
@@ -64,17 +50,21 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
 
-        private bool VerifyDependencies()
+        public void PromptToInstallIfNeeded(IComponentInstallPrompt componentInstallPrompt)
         {
-            if (ghostscriptManager.GhostscriptComponent.IsInstalled)
+            if (AppConfig.Current.NoUpdatePrompt || AppConfig.Current.DisableGenericPdfImport)
             {
-                return true;
+                return;
             }
-            if (AppConfig.Current.NoUpdatePrompt)
+            componentInstallPrompt.PromptToInstall(GhostscriptManager.GhostscriptComponent, MiscResources.PdfImportComponentNeeded);
+        }
+
+        public void ThrowIfCantRender()
+        {
+            if (AppConfig.Current.DisableGenericPdfImport || !GhostscriptManager.GhostscriptComponent.IsInstalled)
             {
-                return false;
+                throw new ImageRenderException();
             }
-            return componentInstallPrompt.PromptToInstall(ghostscriptManager.GhostscriptComponent, MiscResources.PdfImportComponentNeeded);
         }
     }
 }

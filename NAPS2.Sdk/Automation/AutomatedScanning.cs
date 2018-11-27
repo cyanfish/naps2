@@ -35,7 +35,6 @@ namespace NAPS2.Automation
         private readonly IOperationFactory operationFactory;
         private readonly OcrManager ocrManager;
         private readonly IFormFactory formFactory;
-        private readonly GhostscriptManager ghostscriptManager;
 
         private readonly AutomatedScanningOptions options;
         private List<List<ScannedImage>> scanList;
@@ -45,7 +44,7 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory, GhostscriptManager ghostscriptManager)
+        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory)
         {
             this.options = options;
             this.profileManager = profileManager;
@@ -58,7 +57,6 @@ namespace NAPS2.Automation
             this.operationFactory = operationFactory;
             this.ocrManager = ocrManager;
             this.formFactory = formFactory;
-            this.ghostscriptManager = ghostscriptManager;
         }
 
         public IEnumerable<ScannedImage> AllImages => scanList.SelectMany(x => x);
@@ -164,9 +162,9 @@ namespace NAPS2.Automation
                 availableComponents.Add(ocrEngine.Component);
                 availableComponents.AddRange(ocrEngine.LanguageComponents);
             }
-            if (ghostscriptManager.IsSupported)
+            if (GhostscriptManager.IsSupported)
             {
-                availableComponents.Add(ghostscriptManager.GhostscriptComponent);
+                availableComponents.Add(GhostscriptManager.GhostscriptComponent);
             }
 
             var componentDict = availableComponents.ToDictionary(x => x.Id.ToLowerInvariant());

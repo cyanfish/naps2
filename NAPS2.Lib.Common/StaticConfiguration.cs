@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
+using NAPS2.Ocr;
 using NAPS2.Platform;
+using NLog;
 
 namespace NAPS2.DI
 {
@@ -16,9 +20,20 @@ namespace NAPS2.DI
             {
                 Log.EventLogger = new WindowsEventLogger();
             }
+#if DEBUG
+            Debug.Listeners.Add(new NLogTraceListener());
+#endif
 
             UserConfig.Manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, UserConfig.Create);
             AppConfig.Manager = new ConfigManager<AppConfig>("appsettings.xml", Paths.Executable, null, AppConfig.Create);
+
+            var customPath = AppConfig.Current.ComponentsPath;
+            var basePath = string.IsNullOrWhiteSpace(customPath)
+                ? Paths.Components
+                : Environment.ExpandEnvironmentVariables(customPath);
+
+            GhostscriptManager.BasePath = basePath;
+            OcrManager.Default = new OcrManager(basePath);
         }
     }
 }

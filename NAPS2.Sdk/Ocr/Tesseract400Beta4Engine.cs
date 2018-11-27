@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr
@@ -15,11 +14,11 @@ namespace NAPS2.Ocr
             new DownloadMirror(PlatformSupport.ModernWindows.Or(PlatformSupport.Linux), @"https://sourceforge.net/projects/naps2/files/components/tesseract-4.0.0b4/{0}/download")
         };
 
-        public Tesseract400Beta4Engine(ComponentManager componentManager)
+        public Tesseract400Beta4Engine(string basePath)
         {
             string exeFolder = Environment.Is64BitProcess ? "w64" : "w32";
             LanguageData = TesseractLanguageData.V400B4;
-            TesseractBasePath = Path.Combine(componentManager.BasePath, "tesseract-4.0.0b4");
+            TesseractBasePath = Path.Combine(basePath, "tesseract-4.0.0b4");
             TesseractExePath = Path.Combine(exeFolder, "tesseract.exe");
             PlatformSupport = PlatformSupport.ModernWindows;
             CanInstall = true;

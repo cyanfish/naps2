@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using NAPS2.Config;
-using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr
 {
@@ -11,16 +9,42 @@ namespace NAPS2.Ocr
     {
         private readonly List<IOcrEngine> engines;
 
-        public OcrManager(Tesseract302Engine t302, Tesseract304Engine t304, Tesseract304XpEngine t304Xp, Tesseract400Beta4Engine t400B4, TesseractSystemEngine tsys)
+        private static OcrManager _default;
+
+        public static OcrManager Default
         {
-            // Order is important here. Newer/preferred first
+            // TODO: Verify package info
+            get => _default ?? throw new InvalidOperationException(
+                       "OcrManager.Default must be initialized first. You can do one of the following: " +
+                       "(a) Install the NAPS2.Sdk.Windows.Tesseract package. " + 
+                       "(b) Create an instance of OcrManager with the path to the NAPS2 Tesseract installation. " +
+                       "(c) Create an instance of OcrManager with TesseractSystemEngine if Tesseract is on the system path. " +
+                       "(d) Create an instance of OcrManager with your own custom engine configuration.");
+            set => _default = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        /// <summary>
+        /// Creates a new instance of OcrManager with the specified engines. The order of engines is important; preferred/newer first.
+        /// </summary>
+        /// <param name="orderedEngineList"></param>
+        public OcrManager(IEnumerable<IOcrEngine> orderedEngineList)
+        {
+            engines = orderedEngineList.ToList();
+        }
+
+        /// <summary>
+        /// Creates a new instance of OcrManager with the default set of engines.
+        /// <param name="basePath">The base path for installed engines.</param>
+        /// </summary>
+        public OcrManager(string basePath)
+        {
             engines = new List<IOcrEngine>
             {
-                t400B4,
-                t304,
-                t304Xp,
-                t302,
-                tsys
+                new Tesseract400Beta4Engine(basePath),
+                new Tesseract304Engine(basePath),
+                new Tesseract304XpEngine(basePath),
+                new Tesseract302Engine(basePath),
+                new TesseractSystemEngine()
             };
         }
 

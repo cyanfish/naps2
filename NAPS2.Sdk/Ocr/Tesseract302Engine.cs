@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr
 {
     public class Tesseract302Engine : TesseractBaseEngine
     {
-        public Tesseract302Engine(ComponentManager componentManager)
+        public Tesseract302Engine(string basePath)
         {
             // Using the newer data since we just need the 302 engine for backwards compatibility
             LanguageData = TesseractLanguageData.V304;
-            TesseractBasePath = Path.Combine(componentManager.BasePath, "tesseract-3.0.2");
+            TesseractBasePath = Path.Combine(basePath, "tesseract-3.0.2");
             TesseractExePath = "tesseract.exe";
             TesseractHocrExtension = ".html";
             PlatformSupport = PlatformSupport.Windows;

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using NAPS2.Dependencies;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Scan;
@@ -27,14 +28,16 @@ namespace NAPS2.ImportExport.Pdf
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly IPdfRenderer pdfRenderer;
+        private readonly IComponentInstallPrompt componentInstallPrompt;
 
-        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer, IPdfRenderer pdfRenderer)
+        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer, IPdfRenderer pdfRenderer, IComponentInstallPrompt componentInstallPrompt)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
             this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageRenderer = scannedImageRenderer;
             this.pdfRenderer = pdfRenderer;
+            this.componentInstallPrompt = componentInstallPrompt;
         }
 
         public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -77,6 +80,7 @@ namespace NAPS2.ImportExport.Pdf
                         });
                     if (document.Info.Creator != MiscResources.NAPS2 && document.Info.Author != MiscResources.NAPS2)
                     {
+                        pdfRenderer.PromptToInstallIfNeeded(componentInstallPrompt);
                         pdfRenderer.ThrowIfCantRender();
                         foreach (var page in pages)
                         {

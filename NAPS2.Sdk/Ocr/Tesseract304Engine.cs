@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NAPS2.Config;
 using NAPS2.Dependencies;
 
 namespace NAPS2.Ocr
@@ -16,10 +15,10 @@ namespace NAPS2.Ocr
             new DownloadMirror(PlatformSupport.WindowsXp, @"http://xp-mirror.naps2.com/tesseract-3.04/{0}")
         };
 
-        public Tesseract304Engine(ComponentManager componentManager)
+        public Tesseract304Engine(string basePath)
         {
             LanguageData = TesseractLanguageData.V304;
-            TesseractBasePath = Path.Combine(componentManager.BasePath, "tesseract-3.0.4");
+            TesseractBasePath = Path.Combine(basePath, "tesseract-3.0.4");
             TesseractExePath = "tesseract.exe";
             PlatformSupport = PlatformSupport.ModernWindows;
             CanInstall = true;
