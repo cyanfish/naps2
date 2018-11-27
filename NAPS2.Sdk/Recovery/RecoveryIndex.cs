@@ -8,6 +8,8 @@ namespace NAPS2.Recovery
     {
         public const int CURRENT_VERSION = 1;
 
+        public static RecoveryIndex Create() => new RecoveryIndex { Version = CURRENT_VERSION };
+
         public RecoveryIndex()
         {
             Images = new List<RecoveryIndexImage>();
