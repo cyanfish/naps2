@@ -31,17 +31,17 @@ namespace NAPS2.ImportExport.Pdf
                 GlobalFontSettings.FontResolver = new UnixFontResolver();
             }
         }
-
-        private readonly OcrManager ocrManager;
+        
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly OcrRequestQueue ocrRequestQueue;
 
-        public PdfSharpExporter(OcrManager ocrManager, ScannedImageRenderer scannedImageRenderer, OcrRequestQueue ocrRequestQueue)
+        public PdfSharpExporter(ScannedImageRenderer scannedImageRenderer, OcrRequestQueue ocrRequestQueue)
         {
-            this.ocrManager = ocrManager;
             this.scannedImageRenderer = scannedImageRenderer;
             this.ocrRequestQueue = ocrRequestQueue;
         }
+
+        public OcrManager OcrManager { get; set; }
 
         public async Task<bool> Export(string path, ICollection<ScannedImage.Snapshot> snapshots, PdfSettings settings, OcrParams ocrParams, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
@@ -84,7 +84,7 @@ namespace NAPS2.ImportExport.Pdf
                 IOcrEngine ocrEngine = null;
                 if (ocrParams?.LanguageCode != null)
                 {
-                    var activeEngine = ocrManager.ActiveEngine;
+                    var activeEngine = (OcrManager ?? OcrManager.Default).ActiveEngine;
                     if (activeEngine == null)
                     {
                         Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
