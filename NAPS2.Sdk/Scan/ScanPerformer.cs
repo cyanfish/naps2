@@ -9,7 +9,7 @@ using NAPS2.ImportExport;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Util;
 
 namespace NAPS2.Scan

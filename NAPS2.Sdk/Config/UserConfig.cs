@@ -8,7 +8,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 
 namespace NAPS2.Config
 {

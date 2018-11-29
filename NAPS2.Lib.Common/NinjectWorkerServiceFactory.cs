@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using NAPS2.Recovery;
-using NAPS2.Scan.Images.Storage;
+using NAPS2.Images.Storage;
 using NAPS2.Worker;
 using Ninject;
 

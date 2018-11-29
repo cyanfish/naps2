@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Scan.Wia;
 
 namespace NAPS2.Worker

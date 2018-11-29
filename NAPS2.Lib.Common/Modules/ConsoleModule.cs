@@ -5,7 +5,7 @@ using NAPS2.Automation;
 using NAPS2.Dependencies;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Operation;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Util;
 using Ninject.Modules;
 

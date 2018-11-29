@@ -6,8 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using NAPS2.Platform;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Storage;
+using NAPS2.Images;
+using NAPS2.Images.Storage;
 
 namespace NAPS2.WinForms
 {

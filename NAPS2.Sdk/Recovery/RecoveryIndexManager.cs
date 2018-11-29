@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using NAPS2.Config;
-using NAPS2.Scan.Images.Transforms;
+using NAPS2.Images.Transforms;
 
 namespace NAPS2.Recovery
 {

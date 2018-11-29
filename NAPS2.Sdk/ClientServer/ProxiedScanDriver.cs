@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using NAPS2.Logging;
 using NAPS2.Recovery;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Util;
 using NAPS2.WinForms;
 

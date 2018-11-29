@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 
 namespace NAPS2.Ocr
 {

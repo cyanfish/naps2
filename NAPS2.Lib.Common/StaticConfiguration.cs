@@ -8,7 +8,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;
-using NAPS2.Scan.Images.Storage;
+using NAPS2.Images.Storage;
 using NLog;
 
 namespace NAPS2.DI

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 
 namespace NAPS2.ImportExport
 {

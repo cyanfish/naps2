@@ -11,7 +11,7 @@ using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Scan.Wia.Native;

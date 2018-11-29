@@ -12,7 +12,7 @@ using NAPS2.ImportExport.Pdf;
 using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
 using NAPS2.Operation;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms

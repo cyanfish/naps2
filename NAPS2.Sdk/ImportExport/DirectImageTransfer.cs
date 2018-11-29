@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using NAPS2.Recovery;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 
 namespace NAPS2.ImportExport
 {

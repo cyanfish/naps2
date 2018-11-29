@@ -10,7 +10,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Platform;
 using NAPS2.Scan;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms

@@ -15,7 +15,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Recovery;
-using NAPS2.Scan.Images.Storage;
+using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.Update

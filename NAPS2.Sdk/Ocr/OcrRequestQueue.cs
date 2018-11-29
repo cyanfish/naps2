@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Logging;
 using NAPS2.Operation;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Util;
 
 namespace NAPS2.Ocr

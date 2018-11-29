@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.WinForms;
 using NAPS2.Worker;
 

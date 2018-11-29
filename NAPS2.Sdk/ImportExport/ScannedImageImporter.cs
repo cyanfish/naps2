@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Scan.Images;
+using NAPS2.Images;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport

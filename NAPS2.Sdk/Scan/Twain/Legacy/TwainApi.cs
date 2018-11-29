@@ -6,8 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Logging;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Images;
-using NAPS2.Scan.Images.Storage;
+using NAPS2.Images;
+using NAPS2.Images.Storage;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
