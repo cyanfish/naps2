@@ -7,8 +7,40 @@ namespace NAPS2.Scan.Images.Storage
 {
     public interface IMemoryStorageFactory
     {
-        IStorage FromBmpStream(Stream stream);
+        /// <summary>
+        /// Decodes an image from the given stream and file extension.
+        /// </summary>
+        /// <param name="stream">The image data, in a common format (JPEG, PNG, etc).</param>
+        /// <param name="ext">A file extension hinting at the image format. When possible, the contents of the stream should be used to definitively determine the image format.</param>
+        /// <returns></returns>
+        IMemoryStorage Decode(Stream stream, string ext);
 
-        IStorage FromDimensions(int width, int height, StoragePixelFormat pixelFormat);
+        /// <summary>
+        /// Decodes an image from the given file path.
+        /// </summary>
+        /// <param name="path">The image path.</param>
+        /// <returns></returns>
+        IMemoryStorage Decode(string path);
+
+        /// <summary>
+        /// Decodes an image from the given stream and file extension.
+        /// If there are multiple images (e.g. TIFF), multiple results will be returned;
+        /// however, only the enumerator's current IStorage is guaranteed to be valid.
+        /// </summary>
+        /// <param name="stream">The image data, in a common format (JPEG, PNG, etc).</param>
+        /// <param name="ext">A file extension hinting at the image format. When possible, the contents of the stream should be used to definitively determine the image format.</param>
+        /// <param name="count">The number of returned images.</param>
+        /// <returns></returns>
+        IEnumerable<IMemoryStorage> DecodeMultiple(Stream stream, string ext, out int count);
+
+        /// <summary>
+        /// Decodes an image from the given file path.
+        /// </summary>
+        /// <param name="path">The image path.</param>
+        /// <param name="count">The number of returned images.</param>
+        /// <returns></returns>
+        IEnumerable<IMemoryStorage> DecodeMultiple(string path, out int count);
+
+        IMemoryStorage FromDimensions(int width, int height, StoragePixelFormat pixelFormat);
     }
 }

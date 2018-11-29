@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NAPS2.Scan.Images.Storage
 {
-    public class PdfFileStorage : IStorage
+    public class PdfFileStorage : IFileStorage
     {
         public PdfFileStorage(string fullPath)
         {

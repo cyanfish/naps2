@@ -11,6 +11,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Platform;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -109,7 +110,7 @@ namespace NAPS2.WinForms
             tiffViewer1.Image?.Dispose();
             tiffViewer1.Image = null;
             var newImage = await scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
-            tiffViewer1.Image = newImage;
+            tiffViewer1.Image = ((GdiStorage)newImage).Bitmap;
         }
 
         protected override void Dispose(bool disposing)

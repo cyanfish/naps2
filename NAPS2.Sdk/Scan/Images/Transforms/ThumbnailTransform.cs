@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NAPS2.Config;
 
 namespace NAPS2.Scan.Images.Transforms
 {
     [Serializable]
-    public class SharpenTransform : Transform
+    public class ThumbnailTransform : Transform
     {
-        public int Sharpness { get; set; }
-
-        public override bool IsNull => Sharpness == 0;
+        public int Size { get; set; } = UserConfig.Current.ThumbnailSize;
     }
 }

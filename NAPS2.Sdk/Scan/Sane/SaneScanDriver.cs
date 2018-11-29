@@ -11,6 +11,7 @@ using NAPS2.Logging;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 using NAPS2.WinForms;
@@ -253,7 +254,7 @@ namespace NAPS2.Scan.Sane
                     return (null, true);
                 }
                 using (stream)
-                using (var output = Image.FromStream(stream))
+                using (var output = StorageManager.MemoryStorageFactory.Decode(stream, ".bmp"))
                 using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile, false))
                 {
                     if (blankDetector.ExcludePage(result, ScanProfile))
@@ -263,7 +264,7 @@ namespace NAPS2.Scan.Sane
 
                     // By converting to 1bpp here we avoid the Win32 call in the BitmapHelper conversion
                     // This converter also has the side effect of working even if the scanner doesn't support Lineart
-                    using (var encoded = ScanProfile.BitDepth == ScanBitDepth.BlackWhite ? UnsafeImageOps.ConvertTo1Bpp(result, -ScanProfile.Brightness) : result)
+                    using (var encoded = ScanProfile.BitDepth == ScanBitDepth.BlackWhite ? StorageManager.PerformTransform(result, new BlackWhiteTransform { Threshold = -ScanProfile.Brightness }) : result)
                     {
                         var image = new ScannedImage(encoded, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                         scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);

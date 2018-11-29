@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using NAPS2.Logging;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
@@ -129,7 +130,7 @@ namespace NAPS2.Scan.Twain.Legacy
 
                                 using (Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount))
                                 {
-                                    Bitmaps.Add(new ScannedImage(bmp, bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality, settings.Quality));
+                                    Bitmaps.Add(new ScannedImage(new GdiStorage(bmp), bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality, settings.Quality));
                                 }
                             }
                             form.Close();

@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using NAPS2.Recovery;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
@@ -16,70 +17,85 @@ namespace NAPS2.Scan.Images
 {
     public class ScannedImage : IDisposable
     {
-        // Store the base image and metadata on disk using a separate class to manage lifetime
-        // If NAPS2 crashes, the image data can be recovered by the next instance of NAPS2 to start
-        private readonly RecoveryImage recoveryImage;
-
-        // Store a base image and transform pair (rather than doing the actual transform on the base image)
-        // so that JPEG degradation is minimized when multiple rotations/flips are performed
-        private readonly List<Transform> transformList;
-
-        private Bitmap thumbnail;
+        private IMemoryStorage thumbnail;
         private int thumbnailState;
         private int transformState;
 
         private bool disposed;
         private int snapshotCount;
 
-        public static ScannedImage FromSinglePagePdf(string pdfPath, bool copy)
+        //public static ScannedImage FromSinglePagePdf(string pdfPath, bool copy)
+        //{
+        //    return new ScannedImage(pdfPath, copy);
+        //}
+
+        //public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
+        //{
+        //    string tempFilePath = ScannedImageHelper.SaveSmallestBitmap(img, bitDepth, highQuality, quality, out ImageFormat fileFormat);
+
+        //    transformList = new List<Transform>();
+        //    recoveryImage = RecoveryImage.CreateNew(fileFormat, bitDepth, highQuality, transformList);
+
+        //    File.Move(tempFilePath, recoveryImage.FilePath);
+
+        //    recoveryImage.Save();
+        //}
+
+        //public ScannedImage(RecoveryIndexImage recoveryIndexImage)
+        //{
+        //    recoveryImage = RecoveryImage.LoadExisting(recoveryIndexImage);
+        //    transformList = recoveryImage.IndexImage.TransformList;
+        //}
+
+        //private ScannedImage(string pdfPath, bool copy)
+        //{
+        //    transformList = new List<Transform>();
+        //    recoveryImage = RecoveryImage.CreateNew(null, ScanBitDepth.C24Bit, false, transformList);
+
+        //    if (copy)
+        //    {
+        //        File.Copy(pdfPath, recoveryImage.FilePath);
+        //    }
+        //    else
+        //    {
+        //        File.Move(pdfPath, recoveryImage.FilePath);
+        //    }
+
+        //    recoveryImage.Save();
+        //}
+
+        public ScannedImage(IStorage storage) : this(storage, new StorageConvertParams())
         {
-            return new ScannedImage(pdfPath, copy);
         }
 
-        public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
+        public ScannedImage(IStorage storage, StorageConvertParams convertParams)
         {
-            string tempFilePath = ScannedImageHelper.SaveSmallestBitmap(img, bitDepth, highQuality, quality, out ImageFormat fileFormat);
-
-            transformList = new List<Transform>();
-            recoveryImage = RecoveryImage.CreateNew(fileFormat, bitDepth, highQuality, transformList);
-
-            File.Move(tempFilePath, recoveryImage.FilePath);
-
-            recoveryImage.Save();
+            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
+            Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
+            Metadata.Commit();
         }
 
-        public ScannedImage(RecoveryIndexImage recoveryIndexImage)
+        public ScannedImage(IStorage storage, IImageMetadata metadata, StorageConvertParams convertParams)
         {
-            recoveryImage = RecoveryImage.LoadExisting(recoveryIndexImage);
-            transformList = recoveryImage.IndexImage.TransformList;
+            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
+            Metadata = metadata;
         }
 
-        private ScannedImage(string pdfPath, bool copy)
+        public ScannedImage(IStorage storage, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
-            transformList = new List<Transform>();
-            recoveryImage = RecoveryImage.CreateNew(null, ScanBitDepth.C24Bit, false, transformList);
-
-            if (copy)
-            {
-                File.Copy(pdfPath, recoveryImage.FilePath);
-            }
-            else
-            {
-                File.Move(pdfPath, recoveryImage.FilePath);
-            }
-
-            recoveryImage.Save();
+            BackingStorage = StorageManager.ConvertToBacking(storage, new StorageConvertParams { Lossless = highQuality, LossyQuality = quality });
+            Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
+            // TODO: Is this stuff really needed in metadata?
+            Metadata.BitDepth = bitDepth;
+            Metadata.Lossless = highQuality;
+            Metadata.Commit();
         }
+
+        public IStorage BackingStorage { get; }
+
+        public IImageMetadata Metadata { get; }
 
         public PatchCode PatchCode { get; set; }
-
-        public ImageFormat FileFormat => recoveryImage.FileFormat;
-
-        public RecoveryIndexImage RecoveryIndexImage => recoveryImage.IndexImage;
-
-        public string RecoveryFilePath => recoveryImage.FilePath;
-
-        public long Size => new FileInfo(recoveryImage.FilePath).Length;
 
         public void Dispose()
         {
@@ -90,7 +106,7 @@ namespace NAPS2.Scan.Images
                 if (snapshotCount != 0) return;
 
                 // Delete the image data on disk
-                recoveryImage?.Dispose();
+                BackingStorage?.Dispose();
                 if (thumbnail != null)
                 {
                     thumbnail.Dispose();
@@ -106,13 +122,13 @@ namespace NAPS2.Scan.Images
             lock (this)
             {
                 // Also updates the recovery index since they reference the same list
-                if (!Transform.AddOrSimplify(transformList, transform))
+                if (!Transform.AddOrSimplify(Metadata.TransformList, transform))
                 {
                     return;
                 }
                 transformState++;
             }
-            recoveryImage.Save();
+            Metadata.Commit();
             ThumbnailInvalidated?.Invoke(this, new EventArgs());
         }
 
@@ -120,26 +136,26 @@ namespace NAPS2.Scan.Images
         {
             lock (this)
             {
-                if (transformList.Count == 0)
+                if (Metadata.TransformList.Count == 0)
                 {
                     return;
                 }
-                transformList.Clear();
+                Metadata.TransformList.Clear();
                 transformState++;
             }
-            recoveryImage.Save();
+            Metadata.Commit();
             ThumbnailInvalidated?.Invoke(this, new EventArgs());
         }
 
-        public Bitmap GetThumbnail()
+        public IMemoryStorage GetThumbnail()
         {
             lock (this)
             {
-                return (Bitmap) thumbnail?.Clone();
+                return thumbnail?.Clone();
             }
         }
 
-        public void SetThumbnail(Bitmap bitmap, int? state = null)
+        public void SetThumbnail(IMemoryStorage bitmap, int? state = null)
         {
             lock (this)
             {
@@ -160,7 +176,8 @@ namespace NAPS2.Scan.Images
 
         public void MovedTo(int index)
         {
-            recoveryImage.Move(index);
+            Metadata.Index = index;
+            Metadata.Commit();
         }
 
         public Snapshot Preserve() => new Snapshot(this);
@@ -181,7 +198,7 @@ namespace NAPS2.Scan.Images
                     }
                     source.snapshotCount++;
                     Source = source;
-                    TransformList = source.transformList.ToList();
+                    TransformList = source.Metadata.TransformList.ToList();
                     TransformState = source.transformState;
                 }
             }

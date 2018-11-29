@@ -5,13 +5,10 @@ using System.Linq;
 
 namespace NAPS2.Scan.Images.Storage
 {
-    public class FileStorage : IStorage
+    public class FileStorage : IFileStorage
     {
-        private readonly FileStorageManager fileStorageManager;
-
-        public FileStorage(FileStorageManager fileStorageManager, string fullPath)
+        public FileStorage(string fullPath)
         {
-            this.fileStorageManager = fileStorageManager;
             FullPath = fullPath ?? throw new ArgumentNullException(nameof(fullPath));
         }
 
@@ -22,7 +19,6 @@ namespace NAPS2.Scan.Images.Storage
             try
             {
                 File.Delete(FullPath);
-                fileStorageManager.Detach(FullPath);
             }
             catch (IOException)
             {

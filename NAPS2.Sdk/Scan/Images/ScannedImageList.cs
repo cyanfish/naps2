@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Recovery;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
@@ -279,7 +280,7 @@ namespace NAPS2.Scan.Images
                         var thumb = img.GetThumbnail();
                         if (thumb != null)
                         {
-                            img.SetThumbnail(transform.Perform(thumb));
+                            img.SetThumbnail(StorageManager.PerformTransform(thumb, transform));
                         }
                     }
                 }

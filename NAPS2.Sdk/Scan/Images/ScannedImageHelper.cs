@@ -7,6 +7,7 @@ using System.Linq;
 using NAPS2.Config;
 using NAPS2.Ocr;
 using NAPS2.Operation;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
@@ -101,29 +102,28 @@ namespace NAPS2.Scan.Images
             return tempFilePath;
         }
 
-        private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly IOperationFactory operationFactory;
         private readonly IOperationProgress operationProgress;
         private readonly OcrRequestQueue ocrRequestQueue;
         private readonly OcrManager ocrManager;
 
-        public ScannedImageHelper(ThumbnailRenderer thumbnailRenderer, IOperationFactory operationFactory, IOperationProgress operationProgress, OcrRequestQueue ocrRequestQueue, OcrManager ocrManager)
+        public ScannedImageHelper(IOperationFactory operationFactory, IOperationProgress operationProgress, OcrRequestQueue ocrRequestQueue, OcrManager ocrManager)
         {
-            this.thumbnailRenderer = thumbnailRenderer;
             this.operationFactory = operationFactory;
             this.operationProgress = operationProgress;
             this.ocrRequestQueue = ocrRequestQueue;
             this.ocrManager = ocrManager;
         }
 
-        public Bitmap PostProcessStep1(Image output, ScanProfile profile, bool supportsNativeUI = true)
+        public IMemoryStorage PostProcessStep1(IMemoryStorage output, ScanProfile profile, bool supportsNativeUI = true)
         {
             double scaleFactor = 1;
             if (!profile.UseNativeUI || !supportsNativeUI)
             {
                 scaleFactor = profile.AfterScanScale.ToIntScaleFactor();
             }
-            var result = ImageScaleHelper.ScaleImage(output, scaleFactor);
+            // TODO: Scale
+            var result = output;//ImageScaleHelper.ScaleImage(output, scaleFactor);
 
             if ((!profile.UseNativeUI || !supportsNativeUI) && (profile.ForcePageSize || profile.ForcePageSizeCrop))
             {
@@ -139,31 +139,31 @@ namespace NAPS2.Scan.Images
                 {
                     if (profile.ForcePageSizeCrop)
                     {
-                        result = new CropTransform
+                        result = StorageManager.PerformTransform(result, new CropTransform
                         {
-                            Right = (int) ((width - (float) pageDimensions.HeightInInches()) * output.HorizontalResolution),
-                            Bottom = (int) ((height - (float) pageDimensions.WidthInInches()) * output.VerticalResolution)
-                        }.Perform(result);
+                            Right = (int)((width - (float)pageDimensions.HeightInInches()) * output.HorizontalResolution),
+                            Bottom = (int)((height - (float)pageDimensions.WidthInInches()) * output.VerticalResolution)
+                        });
                     }
                     else
                     {
-                        result.SafeSetResolution((float) (output.Width / pageDimensions.HeightInInches()),
-                            (float) (output.Height / pageDimensions.WidthInInches()));
+                        result.SetResolution((float)(output.Width / pageDimensions.HeightInInches()),
+                            (float)(output.Height / pageDimensions.WidthInInches()));
                     }
                 }
                 else
                 {
                     if (profile.ForcePageSizeCrop)
                     {
-                        result = new CropTransform
+                        result = StorageManager.PerformTransform(result, new CropTransform
                         {
-                            Right = (int) ((width - (float) pageDimensions.WidthInInches()) * output.HorizontalResolution),
-                            Bottom = (int) ((height - (float) pageDimensions.HeightInInches()) * output.VerticalResolution)
-                        }.Perform(result);
+                            Right = (int)((width - (float)pageDimensions.WidthInInches()) * output.HorizontalResolution),
+                            Bottom = (int)((height - (float)pageDimensions.HeightInInches()) * output.VerticalResolution)
+                        });
                     }
                     else
                     {
-                        result.SafeSetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
+                        result.SetResolution((float)(output.Width / pageDimensions.WidthInInches()), (float)(output.Height / pageDimensions.HeightInInches()));
                     }
                 }
             }
@@ -171,11 +171,11 @@ namespace NAPS2.Scan.Images
             return result;
         }
 
-        public void PostProcessStep2(ScannedImage image, Bitmap bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber, bool supportsNativeUI = true)
+        public void PostProcessStep2(ScannedImage image, IMemoryStorage bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber, bool supportsNativeUI = true)
         {
             if (!scanParams.NoThumbnails)
             {
-                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                image.SetThumbnail(StorageManager.PerformTransform(bitmap, new ThumbnailTransform()));
             }
             if (scanParams.SkipPostProcessing)
             {
@@ -220,13 +220,13 @@ namespace NAPS2.Scan.Images
             return scanParams.DoOcr ?? (ocrEnabled && afterScanning);
         }
 
-        public string SaveForBackgroundOcr(Bitmap bitmap, ScanParams scanParams)
+        public string SaveForBackgroundOcr(IMemoryStorage bitmap, ScanParams scanParams)
         {
             if (ShouldDoBackgroundOcr(scanParams))
             {
-                string tempPath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
-                bitmap.Save(tempPath);
-                return tempPath;
+                var fileStorage = StorageManager.Convert<FileStorage>(bitmap, new StorageConvertParams { Temporary = true });
+                // TODO: Maybe return the storage rather than the path
+                return fileStorage.FullPath;
             }
             return null;
         }
@@ -249,14 +249,14 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        private void AddTransformAndUpdateThumbnail(ScannedImage image, ref Bitmap bitmap, Transform transform)
+        private void AddTransformAndUpdateThumbnail(ScannedImage image, ref IMemoryStorage bitmap, Transform transform)
         {
             image.AddTransform(transform);
             var thumbnail = image.GetThumbnail();
             if (thumbnail != null)
             {
-                bitmap = transform.Perform(bitmap);
-                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                bitmap = StorageManager.PerformTransform(bitmap, transform);
+                image.SetThumbnail(StorageManager.PerformTransform(bitmap, new ThumbnailTransform()));
             }
         }
     }

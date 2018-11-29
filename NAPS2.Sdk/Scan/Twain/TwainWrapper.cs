@@ -12,6 +12,7 @@ using NAPS2.Logging;
 using NAPS2.Platform;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.WinForms;
 using NTwain;
 using NTwain.Data;
@@ -147,7 +148,7 @@ namespace NAPS2.Scan.Twain
                     pageNumber++;
                     using (var output = twainImpl == TwainImpl.MemXfer
                                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
-                                        : Image.FromStream(eventArgs.GetNativeImageStream()))
+                                        : StorageManager.MemoryStorageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))
                     {
                         using (var result = scannedImageHelper.PostProcessStep1(output, scanProfile))
                         {
@@ -156,7 +157,7 @@ namespace NAPS2.Scan.Twain
                                 return;
                             }
 
-                            var bitDepth = output.PixelFormat == PixelFormat.Format1bppIndexed
+                            var bitDepth = output.PixelFormat == StoragePixelFormat.BW1
                                 ? ScanBitDepth.BlackWhite
                                 : ScanBitDepth.C24Bit;
                             var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
@@ -318,21 +319,21 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        private static Bitmap GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
+        private static IMemoryStorage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
         {
             int bytesPerPixel = memoryData.Length / (imageInfo.ImageWidth * imageInfo.ImageLength);
-            PixelFormat pixelFormat = bytesPerPixel == 0 ? PixelFormat.Format1bppIndexed : PixelFormat.Format24bppRgb;
+            var pixelFormat = bytesPerPixel == 0 ? StoragePixelFormat.BW1: StoragePixelFormat.RGB24;
             int imageWidth = imageInfo.ImageWidth;
             int imageHeight = imageInfo.ImageLength;
-            var bitmap = new Bitmap(imageWidth, imageHeight, pixelFormat);
-            var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            var bitmap = StorageManager.MemoryStorageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
+            var data = bitmap.Lock(out var scan0, out var stride);
             try
             {
                 byte[] source = memoryData;
                 if (bytesPerPixel == 1)
                 {
                     // No 8-bit greyscale format, so we have to transform into 24-bit
-                    int rowWidth = data.Stride;
+                    int rowWidth = stride;
                     int originalRowWidth = source.Length / imageHeight;
                     byte[] source2 = new byte[rowWidth * imageHeight];
                     for (int row = 0; row < imageHeight; row++)
@@ -349,7 +350,7 @@ namespace NAPS2.Scan.Twain
                 else if (bytesPerPixel == 3)
                 {
                     // Colors are provided as BGR, they need to be swapped to RGB
-                    int rowWidth = data.Stride;
+                    int rowWidth = stride;
                     for (int row = 0; row < imageHeight; row++)
                     {
                         for (int col = 0; col < imageWidth; col++)
@@ -359,11 +360,11 @@ namespace NAPS2.Scan.Twain
                         }
                     }
                 }
-                Marshal.Copy(source, 0, data.Scan0, source.Length);
+                Marshal.Copy(source, 0, scan0, source.Length);
             }
             finally
             {
-                bitmap.UnlockBits(data);
+                bitmap.Unlock(data);
             }
             return bitmap;
         }

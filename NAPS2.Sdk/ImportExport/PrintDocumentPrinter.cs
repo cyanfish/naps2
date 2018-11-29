@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
@@ -88,7 +89,7 @@ namespace NAPS2.ImportExport
                             if (Math.Sign(image.Width - image.Height) != Math.Sign(pb.Width - pb.Height))
                             {
                                 // Flip portrait/landscape to match output
-                                image = new RotationTransform(90).Perform(image);
+                                image = StorageManager.PerformTransform(image, new RotationTransform(90));
                             }
 
                             // Fit the image into the output rect while maintaining its aspect ratio
@@ -96,7 +97,7 @@ namespace NAPS2.ImportExport
                                 ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
                                 : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
 
-                            e.Graphics.DrawImage(image, rect);
+                            e.Graphics.DrawImage(StorageManager.Convert<GdiStorage>(image).Bitmap, rect);
                         }
                         finally
                         {

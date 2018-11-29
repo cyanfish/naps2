@@ -26,6 +26,7 @@ using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Wia;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Update;
@@ -1701,7 +1702,7 @@ namespace NAPS2.WinForms
             }
             if (includeBitmap)
             {
-                using (var firstBitmap = await scannedImageRenderer.Render(imageList[0]))
+                using (var firstBitmap = ((GdiStorage) await scannedImageRenderer.Render(imageList[0])).Bitmap)
                 {
                     ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
                     ido.SetData(DataFormats.Rtf, true, await RtfEncodeImages(firstBitmap, imageList));
@@ -1721,7 +1722,7 @@ namespace NAPS2.WinForms
             }
             foreach (var img in images.Skip(1))
             {
-                using (var bitmap = await scannedImageRenderer.Render(img))
+                using (var bitmap = ((GdiStorage)await scannedImageRenderer.Render(img)).Bitmap)
                 {
                     if (!AppendRtfEncodedImage(bitmap, img.FileFormat, sb, true))
                     {
@@ -1863,7 +1864,7 @@ namespace NAPS2.WinForms
                             {
                                 continue;
                             }
-
+                            
                             next.SetThumbnail(thumb, snapshot.TransformState);
                         }
                         fallback.Reset();

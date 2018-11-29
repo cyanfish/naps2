@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using NAPS2.Logging;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
+using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
@@ -34,10 +36,11 @@ namespace NAPS2.ImportExport.Images
                         return;
                     }
 
-                    Bitmap toImport;
+                    IEnumerable<IMemoryStorage> toImport;
+                    int frameCount;
                     try
                     {
-                        toImport = new Bitmap(filePath);
+                        toImport = StorageManager.MemoryStorageFactory.DecodeMultiple(filePath, out frameCount);
                     }
                     catch (Exception e)
                     {
@@ -46,28 +49,27 @@ namespace NAPS2.ImportExport.Images
                         throw;
                     }
 
-                    using (toImport)
+                    foreach (var frame in toImport)
                     {
-                        int frameCount = toImport.GetFrameCount(FrameDimension.Page);
-                        int i = 0;
-                        foreach (var frameIndex in importParams.Slice.Indices(frameCount))
+                        using (frame)
                         {
+                            int i = 0;
                             progressCallback(i++, frameCount);
                             if (cancelToken.IsCancellationRequested)
                             {
                                 source.Done();
                                 return;
                             }
-
-                            toImport.SelectActiveFrame(FrameDimension.Page, frameIndex);
-                            var image = new ScannedImage(toImport, ScanBitDepth.C24Bit, IsLossless(toImport.RawFormat), -1);
+                            
+                            var image = new ScannedImage(frame, ScanBitDepth.C24Bit, frame.IsOriginalLossless, -1);
                             if (!importParams.NoThumbnails)
                             {
-                                image.SetThumbnail(thumbnailRenderer.RenderThumbnail(toImport));
+                                image.SetThumbnail(StorageManager.PerformTransform(frame, new ThumbnailTransform()));
                             }
+
                             if (importParams.DetectPatchCodes)
                             {
-                                image.PatchCode = PatchCodeDetector.Detect(toImport);
+                                image.PatchCode = PatchCodeDetector.Detect(frame);
                             }
 
                             source.Put(image);
@@ -75,6 +77,7 @@ namespace NAPS2.ImportExport.Images
 
                         progressCallback(frameCount, frameCount);
                     }
+
                     source.Done();
                 }
                 catch(Exception e)
@@ -83,11 +86,6 @@ namespace NAPS2.ImportExport.Images
                 }
             }, TaskCreationOptions.LongRunning);
             return source;
-        }
-
-        private bool IsLossless(ImageFormat format)
-        {
-            return Equals(format, ImageFormat.Bmp) || Equals(format, ImageFormat.Png);
         }
     }
 }

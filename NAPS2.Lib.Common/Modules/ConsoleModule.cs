@@ -20,7 +20,6 @@ namespace NAPS2.DI.Modules
             Bind<IOverwritePrompt>().To<ConsoleOverwritePrompt>();
             Bind<IOperationProgress>().To<ConsoleOperationProgress>();
             Bind<IComponentInstallPrompt>().To<ConsoleComponentInstallPrompt>();
-            Bind<ThumbnailRenderer>().To<NullThumbnailRenderer>();
         }
     }
 }

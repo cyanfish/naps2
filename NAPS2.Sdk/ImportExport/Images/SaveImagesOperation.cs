@@ -12,6 +12,7 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
@@ -173,14 +174,15 @@ namespace NAPS2.ImportExport.Images
                 var encoder = ImageCodecInfo.GetImageEncoders().First(x => x.FormatID == ImageFormat.Jpeg.Guid);
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
-                using (Bitmap bitmap = await scannedImageRenderer.Render(snapshot))
+                // TODO: Something more generic
+                using (Bitmap bitmap = ((GdiStorage) await scannedImageRenderer.Render(snapshot)).Bitmap)
                 {
                     bitmap.Save(path, encoder, encoderParams);
                 }
             }
             else
             {
-                using (Bitmap bitmap = await scannedImageRenderer.Render(snapshot))
+                using (Bitmap bitmap = ((GdiStorage)await scannedImageRenderer.Render(snapshot)).Bitmap)
                 {
                     bitmap.Save(path, format);
                 }

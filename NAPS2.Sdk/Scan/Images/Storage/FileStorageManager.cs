@@ -7,15 +7,14 @@ namespace NAPS2.Scan.Images.Storage
 {
     public class FileStorageManager
     {
+        private static FileStorageManager _default = new FileStorageManager();
+
+        public static FileStorageManager Default
+        {
+            get => _default;
+            set => _default = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
         public virtual string NextFilePath() => Path.Combine(Paths.Temp, Path.GetRandomFileName());
-
-        public virtual void Attach(string path)
-        {
-            // TODO: Separate all this stuff out completely.
-        }
-
-        public virtual void Detach(string path)
-        {
-        }
     }
 }

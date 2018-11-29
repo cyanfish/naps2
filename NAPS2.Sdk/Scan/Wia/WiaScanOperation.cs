@@ -10,6 +10,7 @@ using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
 using NAPS2.Worker;
@@ -137,7 +138,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void ProduceImage(ScannedImageSource.Concrete source, Image output, ref int pageNumber)
+        private void ProduceImage(ScannedImageSource.Concrete source, IMemoryStorage output, ref int pageNumber)
         {
             using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
             {
@@ -179,13 +180,13 @@ namespace NAPS2.Scan.Wia
                 foreach (var path in paths)
                 {
                     using (var stream = new FileStream(path, FileMode.Open))
-                    using (var output = Image.FromStream(stream))
                     {
-                        int frameCount = output.GetFrameCount(FrameDimension.Page);
-                        for (int i = 0; i < frameCount; i++)
+                        foreach (var storage in StorageManager.MemoryStorageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
                         {
-                            output.SelectActiveFrame(FrameDimension.Page, i);
-                            ProduceImage(source, output, ref pageNumber);
+                            using (storage)
+                            {
+                                ProduceImage(source, storage, ref pageNumber);
+                            }
                         }
                     }
                 }
@@ -228,9 +229,9 @@ namespace NAPS2.Scan.Wia
                     try
                     {
                         using (args.Stream)
-                        using (var output = Image.FromStream(args.Stream))
+                        using (var storage = StorageManager.MemoryStorageFactory.Decode(args.Stream, ".bmp"))
                         {
-                            ProduceImage(source, output, ref pageNumber);
+                            ProduceImage(source, storage, ref pageNumber);
                         }
                     }
                     catch (Exception e)

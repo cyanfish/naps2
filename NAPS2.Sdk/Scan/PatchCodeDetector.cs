@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Scan.Images.Storage;
 using ZXing;
 
 namespace NAPS2.Scan
@@ -12,10 +13,15 @@ namespace NAPS2.Scan
     /// </summary>
     public class PatchCodeDetector
     {
-        public static PatchCode Detect(Bitmap bitmap)
+        public static PatchCode Detect(IMemoryStorage bitmap)
         {
+            // TODO: Make more generic
+            if (!(bitmap is GdiStorage gdiStorage))
+            {
+                throw new InvalidOperationException("Patch code detection only supported for GdiStorage");
+            }
             IBarcodeReader reader = new BarcodeReader();
-            var barcodeResult = reader.Decode(bitmap);
+            var barcodeResult = reader.Decode(gdiStorage.Bitmap);
             if (barcodeResult != null)
             {
                 switch (barcodeResult.Text)

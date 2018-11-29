@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
@@ -39,7 +40,8 @@ namespace NAPS2.ImportExport.Images
                 {
                     var iparams = new EncoderParameters(1);
                     Encoder iparam = Encoder.Compression;
-                    using (var bitmap = await scannedImageRenderer.Render(snapshots[0]))
+                    // TODO: More generic (?)
+                    using (var bitmap = ((GdiStorage)await scannedImageRenderer.Render(snapshots[0])).Bitmap)
                     {
                         ValidateBitmap(bitmap);
                         var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
@@ -54,7 +56,7 @@ namespace NAPS2.ImportExport.Images
                     var compressionEncoder = Encoder.Compression;
 
                     File.Delete(location);
-                    using (var bitmap0 = await scannedImageRenderer.Render(snapshots[0]))
+                    using (var bitmap0 = ((GdiStorage)await scannedImageRenderer.Render(snapshots[0])).Bitmap)
                     {
                         ValidateBitmap(bitmap0);
                         encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
@@ -74,7 +76,7 @@ namespace NAPS2.ImportExport.Images
                                 return false;
                             }
 
-                            using (var bitmap = await scannedImageRenderer.Render(snapshots[i]))
+                            using (var bitmap = ((GdiStorage)await scannedImageRenderer.Render(snapshots[i])).Bitmap)
                             {
                                 ValidateBitmap(bitmap);
                                 encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));

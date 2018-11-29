@@ -51,88 +51,21 @@ namespace NAPS2.Scan.Images
             }
             return (size - 832) / 96 + 16;
         }
-        
-        private readonly ScannedImageRenderer scannedImageRenderer;
 
-        public ThumbnailRenderer(ScannedImageRenderer scannedImageRenderer)
-        {
-            this.scannedImageRenderer = scannedImageRenderer;
-        }
+        //public Task<Bitmap> RenderThumbnail(ScannedImage scannedImage, int size)
+        //{
+        //    using (var snapshot = scannedImage.Preserve())
+        //    {
+        //        return RenderThumbnail(snapshot, size);
+        //    }
+        //}
 
-        public Task<Bitmap> RenderThumbnail(ScannedImage scannedImage)
-        {
-            return RenderThumbnail(scannedImage, UserConfig.Current.ThumbnailSize);
-        }
-
-        public Task<Bitmap> RenderThumbnail(ScannedImage scannedImage, int size)
-        {
-            using (var snapshot = scannedImage.Preserve())
-            {
-                return RenderThumbnail(snapshot, size);
-            }
-        }
-
-        public async Task<Bitmap> RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
-        {
-            using (var bitmap = await scannedImageRenderer.Render(snapshot, snapshot.TransformList.Count == 0 ? 0 : size * OVERSAMPLE))
-            {
-                return RenderThumbnail(bitmap, size);
-            }
-        }
-
-        public Bitmap RenderThumbnail(Bitmap b)
-        {
-            return RenderThumbnail(b, UserConfig.Current.ThumbnailSize);
-        }
-
-        /// <summary>
-        /// Gets a bitmap resized to fit within a thumbnail rectangle, including a border around the picture.
-        /// </summary>
-        /// <param name="b">The bitmap to resize.</param>
-        /// <param name="size">The maximum width and height of the thumbnail.</param>
-        /// <returns>The thumbnail bitmap.</returns>
-        public virtual Bitmap RenderThumbnail(Bitmap b, int size)
-        {
-            var result = new Bitmap(size, size);
-            using (Graphics g = Graphics.FromImage(result))
-            {
-                // The location and dimensions of the old bitmap, scaled and positioned within the thumbnail bitmap
-                int left, top, width, height;
-
-                // We want a nice thumbnail, so use the maximum quality interpolation
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                if (b.Width > b.Height)
-                {
-                    // Fill the new bitmap's width
-                    width = size;
-                    left = 0;
-                    // Scale the drawing height to match the original bitmap's aspect ratio
-                    height = (int)(b.Height * (size / (double)b.Width));
-                    // Center the drawing vertically
-                    top = (size - height) / 2;
-                }
-                else
-                {
-                    // Fill the new bitmap's height
-                    height = size;
-                    top = 0;
-                    // Scale the drawing width to match the original bitmap's aspect ratio
-                    width = (int)(b.Width * (size / (double)b.Height));
-                    // Center the drawing horizontally
-                    left = (size - width) / 2;
-                }
-
-                // Draw the original bitmap onto the new bitmap, using the calculated location and dimensions
-                // Note that there may be some padding if the aspect ratios don't match
-                var destRect = new RectangleF(left, top, width, height);
-                var srcRect = new RectangleF(0, 0, b.Width, b.Height);
-                g.DrawImage(b, destRect, srcRect, GraphicsUnit.Pixel);
-                // Draw a border around the orignal bitmap's content, inside the padding
-                g.DrawRectangle(Pens.Black, left, top, width - 1, height - 1);
-            }
-
-            return result;
-        }
+        //public async Task<Bitmap> RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
+        //{
+        //    using (var bitmap = await scannedImageRenderer.Render(snapshot, snapshot.TransformList.Count == 0 ? 0 : size * OVERSAMPLE))
+        //    {
+        //        return RenderThumbnail(bitmap, size);
+        //    }
+        //}
     }
 }

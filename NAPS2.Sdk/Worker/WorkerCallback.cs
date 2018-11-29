@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 
 namespace NAPS2.Worker
 {
@@ -17,7 +18,7 @@ namespace NAPS2.Worker
             var scannedImage = new ScannedImage(image);
             if (thumbnail != null)
             {
-                scannedImage.SetThumbnail(new Bitmap(new MemoryStream(thumbnail)));
+                scannedImage.SetThumbnail(StorageManager.MemoryStorageFactory.Decode(new MemoryStream(thumbnail), ".bmp"));
             }
             ImageCallback?.Invoke(scannedImage, tempImageFilePath);
         }

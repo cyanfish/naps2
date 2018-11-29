@@ -13,6 +13,8 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Scan;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
+using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
@@ -179,19 +181,22 @@ namespace NAPS2.ImportExport.Pdf
 
         private async Task<ScannedImage> ExportRawPdfPage(PdfPage page, ImportParams importParams)
         {
-            string pdfPath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
+            string pdfPath = FileStorageManager.Default.NextFilePath();
             var document = new PdfDocument();
             document.Pages.Add(page);
             document.Save(pdfPath);
 
-            var image = ScannedImage.FromSinglePagePdf(pdfPath, false);
+            // TODO: It would make sense to have in-memory PDFs be an option.
+            // TODO: Really, ConvertToBacking should convert PdfStorage -> PdfFileStorage.
+            // TODO: Then we wouldn't need a static FileStorageManager.
+            var image = new ScannedImage(new PdfFileStorage(pdfPath));
             if (!importParams.NoThumbnails || importParams.DetectPatchCodes)
             {
                 using (var bitmap = await scannedImageRenderer.Render(image))
                 {
                     if (!importParams.NoThumbnails)
                     {
-                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                        image.SetThumbnail(StorageManager.PerformTransform(bitmap, new ThumbnailTransform()));
                     }
                     if (importParams.DetectPatchCodes)
                     {
@@ -207,17 +212,17 @@ namespace NAPS2.ImportExport.Pdf
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using (var memoryStream = new MemoryStream(imageBytes))
             {
-                using (var bitmap = new Bitmap(memoryStream))
+                using (var storage = StorageManager.MemoryStorageFactory.Decode(memoryStream, ".jpg"))
                 {
-                    bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                    var image = new ScannedImage(bitmap, ScanBitDepth.C24Bit, false, -1);
+                    storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
+                    var image = new ScannedImage(storage, ScanBitDepth.C24Bit, false, -1);
                     if (!importParams.NoThumbnails)
                     {
-                        image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                        image.SetThumbnail(StorageManager.PerformTransform(storage, new ThumbnailTransform()));
                     }
                     if (importParams.DetectPatchCodes)
                     {
-                        image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                        image.PatchCode = PatchCodeDetector.Detect(storage);
                     }
                     return image;
                 }
@@ -232,51 +237,51 @@ namespace NAPS2.ImportExport.Pdf
 
             var buffer = imageObject.Stream.UnfilteredValue;
 
-            Bitmap bitmap;
+            IMemoryStorage storage;
             ScanBitDepth bitDepth;
             switch (bitsPerComponent)
             {
                 case 8:
-                    bitmap = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+                    storage = StorageManager.MemoryStorageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
                     bitDepth = ScanBitDepth.C24Bit;
-                    RgbToBitmapUnmanaged(height, width, bitmap, buffer);
+                    RgbToBitmapUnmanaged(storage, buffer);
                     break;
                 case 1:
-                    bitmap = new Bitmap(width, height, PixelFormat.Format1bppIndexed);
+                    storage = StorageManager.MemoryStorageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
                     bitDepth = ScanBitDepth.BlackWhite;
-                    BlackAndWhiteToBitmapUnmanaged(height, width, bitmap, buffer);
+                    BlackAndWhiteToBitmapUnmanaged(storage, buffer);
                     break;
                 default:
                     throw new NotImplementedException("Unsupported image encoding (expected 24 bpp or 1bpp)");
             }
 
-            using (bitmap)
+            using (storage)
             {
-                bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
-                var image = new ScannedImage(bitmap, bitDepth, true, -1);
+                storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
+                var image = new ScannedImage(storage, bitDepth, true, -1);
                 if (!importParams.NoThumbnails)
                 {
-                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                    image.SetThumbnail(StorageManager.PerformTransform(storage, new ThumbnailTransform()));
                 }
                 if (importParams.DetectPatchCodes)
                 {
-                    image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                    image.PatchCode = PatchCodeDetector.Detect(storage);
                 }
                 return image;
             }
         }
 
-        private static void RgbToBitmapUnmanaged(int height, int width, Bitmap bitmap, byte[] rgbBuffer)
+        private static void RgbToBitmapUnmanaged(IMemoryStorage storage, byte[] rgbBuffer)
         {
-            BitmapData data = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+            var data = storage.Lock(out var scan0, out var stride);
             try
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < storage.Height; y++)
                 {
-                    for (int x = 0; x < width; x++)
+                    for (int x = 0; x < storage.Width; x++)
                     {
-                        IntPtr pixelData = data.Scan0 + y * data.Stride + x * 3;
-                        int bufferIndex = (y * width + x) * 3;
+                        IntPtr pixelData = scan0 + y * stride + x * 3;
+                        int bufferIndex = (y * storage.Width + x) * 3;
                         Marshal.WriteByte(pixelData, rgbBuffer[bufferIndex + 2]);
                         Marshal.WriteByte(pixelData + 1, rgbBuffer[bufferIndex + 1]);
                         Marshal.WriteByte(pixelData + 2, rgbBuffer[bufferIndex]);
@@ -285,28 +290,28 @@ namespace NAPS2.ImportExport.Pdf
             }
             finally
             {
-                bitmap.UnlockBits(data);
+                storage.Unlock(data);
             }
         }
 
-        private static void BlackAndWhiteToBitmapUnmanaged(int height, int width, Bitmap bitmap, byte[] bwBuffer)
+        private static void BlackAndWhiteToBitmapUnmanaged(IMemoryStorage storage, byte[] bwBuffer)
         {
-            BitmapData data = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format1bppIndexed);
+            var data = storage.Lock(out var scan0, out var stride);
             try
             {
-                int bytesPerRow = (width - 1) / 8 + 1;
-                for (int y = 0; y < height; y++)
+                int bytesPerRow = (storage.Width - 1) / 8 + 1;
+                for (int y = 0; y < storage.Height; y++)
                 {
                     for (int x = 0; x < bytesPerRow; x++)
                     {
-                        IntPtr pixelData = data.Scan0 + y * data.Stride + x;
+                        IntPtr pixelData = scan0 + y * stride + x;
                         Marshal.WriteByte(pixelData, bwBuffer[y * bytesPerRow + x]);
                     }
                 }
             }
             finally
             {
-                bitmap.UnlockBits(data);
+                storage.Unlock(data);
             }
         }
 
@@ -357,18 +362,18 @@ namespace NAPS2.ImportExport.Pdf
             Write(stream, TiffTrailer);
             stream.Seek(0, SeekOrigin.Begin);
 
-            using (Bitmap bitmap = (Bitmap)Image.FromStream(stream))
+            using (var storage = StorageManager.MemoryStorageFactory.Decode(stream, ".tiff"))
             {
-                bitmap.SafeSetResolution(bitmap.Width / (float)page.Width.Inch, bitmap.Height / (float)page.Height.Inch);
+                storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 
-                var image = new ScannedImage(bitmap, ScanBitDepth.BlackWhite, true, -1);
+                var image = new ScannedImage(storage, ScanBitDepth.BlackWhite, true, -1);
                 if (!importParams.NoThumbnails)
                 {
-                    image.SetThumbnail(thumbnailRenderer.RenderThumbnail(bitmap));
+                    image.SetThumbnail(StorageManager.PerformTransform(storage, new ThumbnailTransform()));
                 }
                 if (importParams.DetectPatchCodes)
                 {
-                    image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                    image.PatchCode = PatchCodeDetector.Detect(storage);
                 }
                 return image;
             }

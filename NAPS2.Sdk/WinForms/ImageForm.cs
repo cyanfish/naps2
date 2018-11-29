@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 using Timer = System.Threading.Timer;
@@ -54,7 +55,8 @@ namespace NAPS2.WinForms
             {
                 if (!transform.IsNull)
                 {
-                    result = transform.Perform(result);
+                    // TODO: Maybe the working images etc. should be storage
+                    result = ((GdiStorage)StorageManager.PerformTransform(new GdiStorage(result), transform)).Bitmap;
                 }
             }
             return result;
@@ -90,7 +92,7 @@ namespace NAPS2.WinForms
             Size = new Size(600, 600);
 
             var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
-            workingImage = await scannedImageRenderer.Render(Image, maxDimen * 2);
+            workingImage = ((GdiStorage)await scannedImageRenderer.Render(Image, maxDimen * 2)).Bitmap;
             if (closed)
             {
                 workingImage?.Dispose();

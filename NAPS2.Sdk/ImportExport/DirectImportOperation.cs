@@ -7,17 +7,18 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
-using NAPS2.Util;
+using NAPS2.Scan.Images.Storage;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.ImportExport
 {
     public class DirectImportOperation : OperationBase
     {
-        private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageRenderer scannedImageRenderer;
 
-        public DirectImportOperation(ThumbnailRenderer thumbnailRenderer)
+        public DirectImportOperation(ScannedImageRenderer scannedImageRenderer)
         {
-            this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageRenderer = scannedImageRenderer;
 
             AllowCancel = true;
             AllowBackground = true;
@@ -40,16 +41,16 @@ namespace NAPS2.ImportExport
                     try
                     {
                         ScannedImage img;
-                        using (var bitmap = new Bitmap(Path.Combine(data.RecoveryFolder, ir.FileName)))
+                        using (var storage = StorageManager.ConvertToMemory(new FileStorage(Path.Combine(data.RecoveryFolder, ir.FileName)), new StorageConvertParams()))
                         {
-                            img = new ScannedImage(bitmap, ir.BitDepth, ir.HighQuality, -1);
+                            img = new ScannedImage(storage, ir.BitDepth, ir.HighQuality, -1);
                         }
                         foreach (var transform in ir.TransformList)
                         {
                             img.AddTransform(transform);
                         }
                         // TODO: Don't bother, here, in recovery, etc.
-                        img.SetThumbnail(await thumbnailRenderer.RenderThumbnail(img));
+                        img.SetThumbnail(StorageManager.PerformTransform(await scannedImageRenderer.Render(img), new ThumbnailTransform()));
                         imageCallback(img);
 
                         Status.CurrentProgress++;

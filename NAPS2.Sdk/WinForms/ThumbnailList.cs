@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using NAPS2.Platform;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
 
 namespace NAPS2.WinForms
 {
@@ -195,7 +196,7 @@ namespace NAPS2.WinForms
         {
             lock (this)
             {
-                var thumb = img.GetThumbnail();
+                var thumb = ((GdiStorage)img.GetThumbnail()).Bitmap;
                 if (thumb == null)
                 {
                     return RenderPlaceholder();

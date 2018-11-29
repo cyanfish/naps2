@@ -19,6 +19,18 @@ namespace NAPS2.Scan.Images.Storage
 
         public int Height => Bitmap.Height;
 
+        public float HorizontalResolution => Bitmap.HorizontalResolution;
+
+        public float VerticalResolution => Bitmap.VerticalResolution;
+
+        public void SetResolution(float xDpi, float yDpi)
+        {
+            if (xDpi > 0 && yDpi > 0)
+            {
+                Bitmap.SetResolution(xDpi, yDpi);
+            }
+        }
+
         public StoragePixelFormat PixelFormat
         {
             get
@@ -37,11 +49,13 @@ namespace NAPS2.Scan.Images.Storage
             }
         }
 
+        public bool IsOriginalLossless => Equals(Bitmap.RawFormat, ImageFormat.Bmp) || Equals(Bitmap.RawFormat, ImageFormat.Png);
+
         public object Lock(out IntPtr scan0, out int stride)
         {
             var bitmapData = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), ImageLockMode.ReadWrite, Bitmap.PixelFormat);
             scan0 = bitmapData.Scan0;
-            stride = bitmapData.Stride;
+            stride = Math.Abs(bitmapData.Stride);
             return bitmapData;
         }
 
@@ -54,6 +68,11 @@ namespace NAPS2.Scan.Images.Storage
         public void Dispose()
         {
             Bitmap.Dispose();
+        }
+
+        public IMemoryStorage Clone()
+        {
+            return new GdiStorage((Bitmap)Bitmap.Clone());
         }
     }
 }
