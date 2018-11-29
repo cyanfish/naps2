@@ -13,11 +13,12 @@ namespace NAPS2.ImportExport
         public DirectImageTransfer(IEnumerable<ScannedImage> selectedImages)
         {
             ProcessID = Process.GetCurrentProcess().Id;
-            ImageRecovery = selectedImages.Select(x => x.RecoveryIndexImage).ToArray();
-            if (ImageRecovery.Length > 0)
-            {
-                RecoveryFolder = RecoveryImage.RecoveryFolder.FullName;
-            }
+            // TODO
+            //ImageRecovery = selectedImages.Select(x => x.RecoveryIndexImage).ToArray();
+            //if (ImageRecovery.Length > 0)
+            //{
+            //    RecoveryFolder = RecoveryImage.RecoveryFolder.FullName;
+            //}
         }
 
         public int ProcessID { get; }

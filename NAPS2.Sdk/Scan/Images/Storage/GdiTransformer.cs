@@ -10,19 +10,9 @@ using NAPS2.Util;
 
 namespace NAPS2.Scan.Images.Storage
 {
-    public class GdiTransformer :
-        ITransformer<GdiStorage, BrightnessTransform>,
-        ITransformer<GdiStorage, ContrastTransform>,
-        ITransformer<GdiStorage, TrueContrastTransform>,
-        ITransformer<GdiStorage, HueTransform>,
-        ITransformer<GdiStorage, SaturationTransform>,
-        ITransformer<GdiStorage, SharpenTransform>,
-        ITransformer<GdiStorage, RotationTransform>,
-        ITransformer<GdiStorage, CropTransform>,
-        ITransformer<GdiStorage, BlackWhiteTransform>,
-        ITransformer<GdiStorage, ThumbnailTransform>,
-        ITransformer<GdiStorage, ScaleTransform>
+    public class GdiTransformer
     {
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, BrightnessTransform transform)
         {
             var bitmap = storage.Bitmap;
@@ -32,6 +22,7 @@ namespace NAPS2.Scan.Images.Storage
             return new GdiStorage(bitmap);
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, ContrastTransform transform)
         {
             float contrastAdjusted = transform.Contrast / 1000f + 1.0f;
@@ -59,6 +50,7 @@ namespace NAPS2.Scan.Images.Storage
             return storage;
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, TrueContrastTransform transform)
         {
             // convert +/-1000 input range to a logarithmic scaled multiplier
@@ -73,6 +65,7 @@ namespace NAPS2.Scan.Images.Storage
             return storage;
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, HueTransform transform)
         {
             if (storage.PixelFormat != StoragePixelFormat.RGB24 && storage.PixelFormat != StoragePixelFormat.ARGB32)
@@ -92,6 +85,7 @@ namespace NAPS2.Scan.Images.Storage
             return storage;
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, SaturationTransform transform)
         {
             double saturationAdjusted = transform.Saturation / 1000.0 + 1;
@@ -139,6 +133,7 @@ namespace NAPS2.Scan.Images.Storage
             return storage;
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, SharpenTransform transform)
         {
             double sharpnessAdjusted = transform.Sharpness / 1000.0;
@@ -249,6 +244,7 @@ namespace NAPS2.Scan.Images.Storage
             return storage;
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, RotationTransform transform)
         {
 
@@ -295,6 +291,7 @@ namespace NAPS2.Scan.Images.Storage
             return new GdiStorage(result);
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, CropTransform transform)
         {
             double xScale = storage.Width / (double)(transform.OriginalWidth ?? storage.Width),
@@ -316,6 +313,7 @@ namespace NAPS2.Scan.Images.Storage
             return new GdiStorage(result);
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, ScaleTransform transform)
         {
             double realWidth = storage.Width / transform.ScaleFactor;
@@ -334,6 +332,7 @@ namespace NAPS2.Scan.Images.Storage
             }
         }
 
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, BlackWhiteTransform transform)
         {
             if (storage.PixelFormat != StoragePixelFormat.RGB24 && storage.PixelFormat != StoragePixelFormat.ARGB32)
@@ -353,6 +352,7 @@ namespace NAPS2.Scan.Images.Storage
         /// <param name="storage">The bitmap to resize.</param>
         /// <param name="transform">The maximum width and height of the thumbnail.</param>
         /// <returns>The thumbnail bitmap.</returns>
+        [Transformer]
         public GdiStorage PerformTransform(GdiStorage storage, ThumbnailTransform transform)
         {
             var result = new Bitmap(transform.Size, transform.Size);

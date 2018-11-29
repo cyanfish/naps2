@@ -15,12 +15,13 @@ namespace NAPS2.Worker
 
         public void TwainImageReceived(RecoveryIndexImage image, byte[] thumbnail, string tempImageFilePath)
         {
-            var scannedImage = new ScannedImage(image);
-            if (thumbnail != null)
-            {
-                scannedImage.SetThumbnail(StorageManager.MemoryStorageFactory.Decode(new MemoryStream(thumbnail), ".bmp"));
-            }
-            ImageCallback?.Invoke(scannedImage, tempImageFilePath);
+            // TODO
+            //var scannedImage = new ScannedImage(image);
+            //if (thumbnail != null)
+            //{
+            //    scannedImage.SetThumbnail(StorageManager.MemoryStorageFactory.Decode(new MemoryStream(thumbnail), ".bmp"));
+            //}
+            //ImageCallback?.Invoke(scannedImage, tempImageFilePath);
         }
     }
 }

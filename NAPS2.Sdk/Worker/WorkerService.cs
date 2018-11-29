@@ -43,7 +43,8 @@ namespace NAPS2.Worker
         public void Init(string recoveryFolderPath)
         {
             Callback = OperationContext.Current.GetCallbackChannel<IWorkerCallback>();
-            RecoveryImage.RecoveryFolder = new DirectoryInfo(recoveryFolderPath);
+            // TODO
+            //RecoveryImage.RecoveryFolder = new DirectoryInfo(recoveryFolderPath);
         }
 
         public WiaConfiguration Wia10NativeUI(string deviceId, IntPtr hwnd)
@@ -111,10 +112,11 @@ namespace NAPS2.Worker
         public byte[] RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
         {
             var stream = new MemoryStream();
-            using (var bitmap = Task.Factory.StartNew(() => thumbnailRenderer.RenderThumbnail(snapshot, size)).Unwrap().Result)
-            {
-                bitmap.Save(stream, ImageFormat.Png);
-            }
+            // TODO
+            //using (var bitmap = Task.Factory.StartNew(() => thumbnailRenderer.RenderThumbnail(snapshot, size)).Unwrap().Result)
+            //{
+            //    bitmap.Save(stream, ImageFormat.Png);
+            //}
             return stream.ToArray();
         }
 
@@ -137,14 +139,15 @@ namespace NAPS2.Worker
 
             public override void Put(ScannedImage image)
             {
-                MemoryStream stream = null;
-                var thumb = image.GetThumbnail();
-                if (thumb != null)
-                {
-                    stream = new MemoryStream();
-                    thumb.Save(stream, ImageFormat.Png);
-                }
-                callback.TwainImageReceived(image.RecoveryIndexImage, stream?.ToArray(), imagePathDict.Get(image));
+                // TODO
+                //MemoryStream stream = null;
+                //var thumb = image.GetThumbnail();
+                //if (thumb != null)
+                //{
+                //    stream = new MemoryStream();
+                //    thumb.Save(stream, ImageFormat.Png);
+                //}
+                //callback.TwainImageReceived(image.RecoveryIndexImage, stream?.ToArray(), imagePathDict.Get(image));
             }
         }
     }

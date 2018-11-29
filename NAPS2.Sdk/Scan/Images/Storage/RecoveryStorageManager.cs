@@ -6,14 +6,13 @@ using System.IO;
 using System.Linq;
 using NAPS2.Config;
 using NAPS2.Recovery;
+using NAPS2.Scan.Images.Transforms;
 
 namespace NAPS2.Scan.Images.Storage
 {
     public class RecoveryStorageManager : FileStorageManager, IImageMetadataFactory
     {
         public const string LOCK_FILE_NAME = ".lock";
-
-        private readonly string recoveryFolderPath;
 
         private int fileNumber;
         private bool folderCreated;
@@ -23,8 +22,12 @@ namespace NAPS2.Scan.Images.Storage
 
         public RecoveryStorageManager(string recoveryFolderPath)
         {
-            this.recoveryFolderPath = recoveryFolderPath;
+            this.RecoveryFolderPath = recoveryFolderPath;
         }
+
+        public string RecoveryFolderPath { get; }
+
+        public bool DisableRecoveryCleanup { get; set; }
 
         public RecoveryIndex Index
         {
@@ -37,19 +40,20 @@ namespace NAPS2.Scan.Images.Storage
 
         public override string NextFilePath()
         {
+            EnsureFolderCreated();
             string fileName = $"{Process.GetCurrentProcess().Id}_{(++fileNumber).ToString("D5", CultureInfo.InvariantCulture)}";
-            return Path.Combine(recoveryFolderPath, fileName);
+            return Path.Combine(RecoveryFolderPath, fileName);
         }
 
         private void EnsureFolderCreated()
         {
             if (!folderCreated)
             {
-                var folder = new DirectoryInfo(recoveryFolderPath);
+                var folder = new DirectoryInfo(RecoveryFolderPath);
                 folder.Create();
-                folderLockFile = new FileInfo(Path.Combine(recoveryFolderPath, LOCK_FILE_NAME));
+                folderLockFile = new FileInfo(Path.Combine(RecoveryFolderPath, LOCK_FILE_NAME));
                 folderLock = folderLockFile.Open(FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                indexConfigManager = new ConfigManager<RecoveryIndex>("index.xml", recoveryFolderPath, null, RecoveryIndex.Create);
+                indexConfigManager = new ConfigManager<RecoveryIndex>("index.xml", RecoveryFolderPath, null, RecoveryIndex.Create);
                 folderCreated = true;
             }
         }
@@ -71,7 +75,8 @@ namespace NAPS2.Scan.Images.Storage
             }
             return new RecoverableImageMetadata(this, new RecoveryIndexImage
             {
-                FileName = Path.GetFileName(fileStorage.FullPath)
+                FileName = Path.GetFileName(fileStorage.FullPath),
+                TransformList = new List<Transform>()
             });
         }
     }

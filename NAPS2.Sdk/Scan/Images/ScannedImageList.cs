@@ -116,14 +116,15 @@ namespace NAPS2.Scan.Images
         {
             lock (this)
             {
-                using (RecoveryImage.DeferSave())
-                {
+                // TODO
+                //using (RecoveryImage.DeferSave())
+                //{
                     foreach (ScannedImage img in Images.ElementsAt(selection))
                     {
                         img.Dispose();
                     }
                     Images.RemoveAll(selection);
-                }
+                //}
             }
         }
 
@@ -144,7 +145,8 @@ namespace NAPS2.Scan.Images
                     Images.Add(i % 2 == 0 ? p1[i / 2] : p2[i / 2]);
                 }
 
-                RecoveryImage.Refresh(Images);
+                // TODO
+                // RecoveryImage.Refresh(Images);
 
                 // Clear the selection (may be changed in the future to maintain it, but not necessary)
                 return Enumerable.Empty<int>();
@@ -172,7 +174,8 @@ namespace NAPS2.Scan.Images
                     Images.Add(images[i * 2 + 1]);
                 }
 
-                RecoveryImage.Refresh(Images);
+                // TODO
+                // RecoveryImage.Refresh(Images);
 
                 // Clear the selection (may be changed in the future to maintain it, but not necessary)
                 return Enumerable.Empty<int>();
@@ -196,7 +199,8 @@ namespace NAPS2.Scan.Images
                     Images.Add(i % 2 == 0 ? p1[i / 2] : p2[p2.Count - 1 - i / 2]);
                 }
 
-                RecoveryImage.Refresh(Images);
+                // TODO
+                // RecoveryImage.Refresh(Images);
 
                 // Clear the selection (may be changed in the future to maintain it, but not necessary)
                 return Enumerable.Empty<int>();
@@ -224,7 +228,8 @@ namespace NAPS2.Scan.Images
                     Images.Add(images[i * 2 + 1]);
                 }
 
-                RecoveryImage.Refresh(Images);
+                // TODO
+                // RecoveryImage.Refresh(Images);
 
                 // Clear the selection (may be changed in the future to maintain it, but not necessary)
                 return Enumerable.Empty<int>();
@@ -259,7 +264,8 @@ namespace NAPS2.Scan.Images
                     Images[y] = temp;
                 }
 
-                RecoveryImage.Refresh(Images);
+                // TODO
+                // RecoveryImage.Refresh(Images);
 
                 // Selection stays the same, so is easy to maintain
                 return selectionList;

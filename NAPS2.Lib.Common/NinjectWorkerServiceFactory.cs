@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using NAPS2.Recovery;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Worker;
 using Ninject;
 
@@ -22,13 +23,14 @@ namespace NAPS2.DI
             var worker = kernel.Get<WorkerContext>();
             try
             {
-                worker.Service.Init(RecoveryImage.RecoveryFolder.FullName);
+                // TODO: Simplify
+                worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Default).RecoveryFolderPath);
             }
             catch (EndpointNotFoundException)
             {
                 // Retry once
                 worker = kernel.Get<WorkerContext>();
-                worker.Service.Init(RecoveryImage.RecoveryFolder.FullName);
+                worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Default).RecoveryFolderPath);
             }
             return worker;
         }

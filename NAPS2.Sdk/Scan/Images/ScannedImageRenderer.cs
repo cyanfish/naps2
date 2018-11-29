@@ -55,12 +55,11 @@ namespace NAPS2.Scan.Images
         {
             using (var transformed = await Render(snapshot))
             {
-                var stream = new MemoryStream();
-                var format = transformed.PixelFormat == PixelFormat.Format1bppIndexed
-                    ? ImageFormat.Png
-                    : snapshot.Source.FileFormat ?? (snapshot.Source.RecoveryIndexImage.HighQuality ? ImageFormat.Png : ImageFormat.Jpeg);
-                transformed.Save(stream, format);
-                return stream;
+                return StorageManager.Convert<MemoryStreamStorage>(transformed, new StorageConvertParams
+                {
+                    // TODO: Is this right?
+                    Lossless = snapshot.Source.Metadata.Lossless
+                }).Stream;
             }
         }
     }

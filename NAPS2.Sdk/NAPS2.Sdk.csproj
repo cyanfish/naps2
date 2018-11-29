@@ -195,7 +195,7 @@
     <Compile Include="Scan\Images\Storage\IFileStorage.cs" />
     <Compile Include="Scan\Images\Storage\IImageMetadata.cs" />
     <Compile Include="Scan\Images\Storage\IImageMetadataFactory.cs" />
-    <Compile Include="Scan\Images\Storage\ITransformer.cs" />
+    <Compile Include="Scan\Images\Storage\MemoryStreamStorage.cs" />
     <Compile Include="Scan\Images\Storage\PdfFileStorage.cs" />
     <Compile Include="Scan\Images\Storage\FileStorageManager.cs" />
     <Compile Include="Scan\Images\Storage\GdiFileConverter.cs" />
@@ -204,7 +204,6 @@
     <Compile Include="Scan\Images\Storage\FileStorage.cs" />
     <Compile Include="Scan\Images\Storage\IMemoryStorage.cs" />
     <Compile Include="Scan\Images\Storage\IStorage.cs" />
-    <Compile Include="Scan\Images\Storage\IStorageConverter.cs" />
     <Compile Include="Scan\Images\Storage\IMemoryStorageFactory.cs" />
     <Compile Include="Scan\Images\Storage\RecoverableImageMetadata.cs" />
     <Compile Include="Scan\Images\Storage\RecoveryStorageManager.cs" />
@@ -213,6 +212,8 @@
     <Compile Include="Scan\Images\Storage\StoragePixelFormat.cs" />
     <Compile Include="Scan\Images\Storage\StubImageMetadata.cs" />
     <Compile Include="Scan\Images\Storage\StubImageMetadataFactory.cs" />
+    <Compile Include="Scan\Images\Storage\StorageConverterAttribute.cs" />
+    <Compile Include="Scan\Images\Storage\TransformerAttribute.cs" />
     <Compile Include="Scan\Images\Transforms\ThumbnailTransform.cs" />
     <Compile Include="Scan\Images\Transforms\ScaleTransform.cs" />
     <Compile Include="Scan\KeyValueScanOptions.cs" />

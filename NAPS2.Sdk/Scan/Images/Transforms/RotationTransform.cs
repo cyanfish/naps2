@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using NAPS2.Scan.Images.Storage;
 
 namespace NAPS2.Scan.Images.Transforms
 {
@@ -20,7 +21,7 @@ namespace NAPS2.Scan.Images.Transforms
             return mod;
         }
 
-        public static RotationTransform Auto(Bitmap bitmap)
+        public static RotationTransform Auto(IMemoryStorage bitmap)
         {
             return new RotationTransform(-bitmap.GetSkewAngle());
         }

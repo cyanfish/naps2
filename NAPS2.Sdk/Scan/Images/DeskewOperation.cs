@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;
+using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 
@@ -12,12 +13,10 @@ namespace NAPS2.Scan.Images
 {
     public class DeskewOperation : OperationBase
     {
-        private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly ScannedImageRenderer scannedImageRenderer;
 
-        public DeskewOperation(ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer)
+        public DeskewOperation(ScannedImageRenderer scannedImageRenderer)
         {
-            this.thumbnailRenderer = thumbnailRenderer;
             this.scannedImageRenderer = scannedImageRenderer;
 
             AllowCancel = true;
@@ -43,7 +42,7 @@ namespace NAPS2.Scan.Images
                         return null;
                     }
                     memoryLimitingSem.WaitOne();
-                    Bitmap bitmap = scannedImageRenderer.Render(img).Result;
+                    var bitmap = scannedImageRenderer.Render(img).Result;
                     try
                     {
                         if (CancelToken.IsCancellationRequested)
@@ -55,8 +54,8 @@ namespace NAPS2.Scan.Images
                         {
                             return null;
                         }
-                        bitmap = transform.Perform(bitmap);
-                        var thumbnail = thumbnailRenderer.RenderThumbnail(bitmap);
+                        bitmap = StorageManager.PerformTransform(bitmap, transform);
+                        var thumbnail = StorageManager.PerformTransform(bitmap, new ThumbnailTransform());
                         lock (img)
                         {
                             img.AddTransform(transform);

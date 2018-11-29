@@ -93,17 +93,18 @@ namespace NAPS2.ClientServer
                 // TODO: Also should think about avoiding the intermediate filesystem
                 using (image)
                 {
-                    var indexImage = image.RecoveryIndexImage;
-                    var imageBytes = File.ReadAllBytes(image.RecoveryFilePath);
-                    var sanitizedIndexImage = new RecoveryIndexImage
-                    {
-                        FileName = Path.GetExtension(indexImage.FileName),
-                        TransformList = indexImage.TransformList,
-                        BitDepth = indexImage.BitDepth,
-                        HighQuality = indexImage.HighQuality
-                    };
-                    callback.ImageReceived(imageBytes, sanitizedIndexImage);
-                    pages++;
+                    // TODO
+                    //var indexImage = image.RecoveryIndexImage;
+                    //var imageBytes = File.ReadAllBytes(image.RecoveryFilePath);
+                    //var sanitizedIndexImage = new RecoveryIndexImage
+                    //{
+                    //    FileName = Path.GetExtension(indexImage.FileName),
+                    //    TransformList = indexImage.TransformList,
+                    //    BitDepth = indexImage.BitDepth,
+                    //    HighQuality = indexImage.HighQuality
+                    //};
+                    //callback.ImageReceived(imageBytes, sanitizedIndexImage);
+                    //pages++;
                 }
             }, scanCts.Token);
             return pages;

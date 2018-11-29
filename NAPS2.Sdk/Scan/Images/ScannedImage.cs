@@ -225,14 +225,16 @@ namespace NAPS2.Scan.Images
 
             public void GetObjectData(SerializationInfo info, StreamingContext context)
             {
-                info.AddValue("RecoveryIndexImage", Source.RecoveryIndexImage);
+                // TODO
+                //info.AddValue("RecoveryIndexImage", Source.RecoveryIndexImage);
                 info.AddValue("TransformList", TransformList);
                 info.AddValue("TransformState", TransformState);
             }
 
             private Snapshot(SerializationInfo info, StreamingContext context)
             {
-                Source = new ScannedImage((RecoveryIndexImage)info.GetValue("RecoveryIndexImage", typeof(RecoveryIndexImage)));
+                // TODO
+                //Source = new ScannedImage((RecoveryIndexImage)info.GetValue("RecoveryIndexImage", typeof(RecoveryIndexImage)));
                 TransformList = (List<Transform>)info.GetValue("TransformList", typeof(List<Transform>));
                 TransformState = (int)info.GetValue("TransformState", typeof(int));
             }

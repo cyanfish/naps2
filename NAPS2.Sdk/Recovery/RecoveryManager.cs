@@ -9,6 +9,8 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Scan.Images;
+using NAPS2.Scan.Images.Storage;
+using NAPS2.Scan.Images.Transforms;
 using NAPS2.Util;
 using NAPS2.WinForms;
 
@@ -17,19 +19,19 @@ namespace NAPS2.Recovery
     public class RecoveryManager
     {
         private readonly IFormFactory formFactory;
-        private readonly ThumbnailRenderer thumbnailRenderer;
+        private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly IOperationProgress operationProgress;
 
-        public RecoveryManager(IFormFactory formFactory, ThumbnailRenderer thumbnailRenderer, IOperationProgress operationProgress)
+        public RecoveryManager(IFormFactory formFactory, ScannedImageRenderer scannedImageRenderer, IOperationProgress operationProgress)
         {
             this.formFactory = formFactory;
-            this.thumbnailRenderer = thumbnailRenderer;
+            this.scannedImageRenderer = scannedImageRenderer;
             this.operationProgress = operationProgress;
         }
 
         public void RecoverScannedImages(Action<ScannedImage> imageCallback)
         {
-            var op = new RecoveryOperation(formFactory, thumbnailRenderer);
+            var op = new RecoveryOperation(formFactory, scannedImageRenderer);
             if (op.Start(imageCallback))
             {
                 operationProgress.ShowProgress(op);
@@ -39,7 +41,7 @@ namespace NAPS2.Recovery
         private class RecoveryOperation : OperationBase
         {
             private readonly IFormFactory formFactory;
-            private readonly ThumbnailRenderer thumbnailRenderer;
+            private readonly ScannedImageRenderer scannedImageRenderer;
 
             private FileStream lockFile;
             private DirectoryInfo folderToRecoverFrom;
@@ -47,10 +49,10 @@ namespace NAPS2.Recovery
             private int imageCount;
             private DateTime scannedDateTime;
 
-            public RecoveryOperation(IFormFactory formFactory, ThumbnailRenderer thumbnailRenderer)
+            public RecoveryOperation(IFormFactory formFactory, ScannedImageRenderer scannedImageRenderer)
             {
                 this.formFactory = formFactory;
-                this.thumbnailRenderer = thumbnailRenderer;
+                this.scannedImageRenderer = scannedImageRenderer;
 
                 ProgressTitle = MiscResources.ImportProgress;
                 AllowCancel = true;
@@ -135,11 +137,13 @@ namespace NAPS2.Recovery
                     ScannedImage scannedImage;
                     if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                     {
-                        scannedImage = ScannedImage.FromSinglePagePdf(imagePath, true);
+                        string newPath = FileStorageManager.Default.NextFilePath();
+                        File.Copy(imagePath, newPath);
+                        scannedImage = new ScannedImage(new PdfFileStorage(newPath));
                     }
                     else
                     {
-                        using (var bitmap = new Bitmap(imagePath))
+                        using (var bitmap = StorageManager.MemoryStorageFactory.Decode(imagePath))
                         {
                             scannedImage = new ScannedImage(bitmap, indexImage.BitDepth, indexImage.HighQuality, -1);
                         }
@@ -148,7 +152,7 @@ namespace NAPS2.Recovery
                     {
                         scannedImage.AddTransform(transform);
                     }
-                    scannedImage.SetThumbnail(await thumbnailRenderer.RenderThumbnail(scannedImage));
+                    scannedImage.SetThumbnail(StorageManager.PerformTransform(await scannedImageRenderer.Render(scannedImage), new ThumbnailTransform()));
                     imageCallback(scannedImage);
 
                     Status.CurrentProgress++;
@@ -199,7 +203,7 @@ namespace NAPS2.Recovery
             {
                 try
                 {
-                    string lockFilePath = Path.Combine(recoveryFolder.FullName, RecoveryImage.LOCK_FILE_NAME);
+                    string lockFilePath = Path.Combine(recoveryFolder.FullName, RecoveryStorageManager.LOCK_FILE_NAME);
                     lockFile = new FileStream(lockFilePath, FileMode.Open);
                     return true;
                 }

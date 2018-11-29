@@ -73,21 +73,22 @@ namespace NAPS2.ClientServer
                         {
                             try
                             {
-                                indexImage.FileName = RecoveryImage.GetNextFileName() + Path.GetExtension(indexImage.FileName);
-                                var recoveryFilePath = Path.Combine(RecoveryImage.RecoveryFolder.FullName, indexImage.FileName);
-                                File.WriteAllBytes(recoveryFilePath, imageBytes);
-                                var image = new ScannedImage(indexImage);
-                                using (var bitmap = new Bitmap(new MemoryStream(imageBytes)))
-                                {
-                                    scannedImageHelper.PostProcessStep2(image, bitmap, ScanProfile, ScanParams, pageNumber++, false);
-                                }
+                                // TODO
+                                //indexImage.FileName = RecoveryImage.GetNextFileName() + Path.GetExtension(indexImage.FileName);
+                                //var recoveryFilePath = Path.Combine(RecoveryImage.RecoveryFolder.FullName, indexImage.FileName);
+                                //File.WriteAllBytes(recoveryFilePath, imageBytes);
+                                //var image = new ScannedImage(indexImage);
+                                //using (var bitmap = new Bitmap(new MemoryStream(imageBytes)))
+                                //{
+                                //    scannedImageHelper.PostProcessStep2(image, bitmap, ScanProfile, ScanParams, pageNumber++, false);
+                                //}
 
-                                source.Put(image);
-                                if (form != null)
-                                {
-                                    form.PageNumber = pageNumber;
-                                    Invoker.Current.SafeInvoke(() => form.RefreshStatus());
-                                }
+                                //source.Put(image);
+                                //if (form != null)
+                                //{
+                                //    form.PageNumber = pageNumber;
+                                //    Invoker.Current.SafeInvoke(() => form.RefreshStatus());
+                                //}
                             }
                             finally
                             {

@@ -5,23 +5,16 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
+using NAPS2.Scan.Images.Storage;
 
 namespace NAPS2.Scan.Images
 {
     public static class AutoDeskewExtensions
     {
-        public static double GetSkewAngle(this Bitmap bmp)
+        public static double GetSkewAngle(this IMemoryStorage bmp)
         {
             var sk = new gmseDeskew(bmp);
             return sk.GetSkewAngle();
-        }
-
-        public static double GetSkewAngle(this Image img)
-        {
-            var bmp = new Bitmap(img, img.Width, img.Height);
-            var res = bmp.GetSkewAngle();
-            bmp.Dispose();
-            return res;
         }
     }
 
@@ -50,7 +43,7 @@ namespace NAPS2.Scan.Images
         int height;
         int stride;
         byte[] bitmapBytes;
-        PixelFormat pf;
+        StoragePixelFormat pf;
         // The range of angles to search for lines
         readonly double cAlphaStart = -20;
         readonly double cAlphaStep = 0.2;
@@ -127,7 +120,7 @@ namespace NAPS2.Scan.Images
             return hl;
         }
 
-        public gmseDeskew(Bitmap bitmap)
+        public gmseDeskew(IMemoryStorage bitmap)
         {
             width = bitmap.Width;
             height = bitmap.Height;
@@ -135,13 +128,13 @@ namespace NAPS2.Scan.Images
             LoadBitmap(bitmap);
         }
 
-        private void LoadBitmap(Bitmap bitmap)
+        private void LoadBitmap(IMemoryStorage bitmap)
         {
-            var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
-            stride = Math.Abs(data.Stride);
-            bitmapBytes = new byte[stride * data.Height];
-            Marshal.Copy(data.Scan0, bitmapBytes, 0, bitmapBytes.Length);
-            bitmap.UnlockBits(data);
+            var data = bitmap.Lock(out var scan0, out stride);
+            stride = Math.Abs(stride);
+            bitmapBytes = new byte[stride * bitmap.Height];
+            Marshal.Copy(scan0, bitmapBytes, 0, bitmapBytes.Length);
+            bitmap.Unlock(data);
         }
 
         // Hough Transforamtion:
@@ -188,13 +181,13 @@ namespace NAPS2.Scan.Images
         }
         private bool IsBlack(int x, int y)
         {
-            if (pf == PixelFormat.Format1bppIndexed)
+            if (pf == StoragePixelFormat.BW1)
             {
                 var b = bitmapBytes[y * stride + (x >> 3)];
                 var mask = (byte)(0x80 >> (x & 0x7));
                 return (b & mask) == 0;
             }
-            else if (pf == PixelFormat.Format24bppRgb)
+            else if (pf == StoragePixelFormat.RGB24)
             {
                 int r = bitmapBytes[stride * y + x * 3];
                 int g = bitmapBytes[stride * y + x * 3 + 1];
@@ -202,7 +195,7 @@ namespace NAPS2.Scan.Images
                 double luminance = (r * 0.299) + (g * 0.587) + (b * 0.114);
                 return luminance < 140;
             }
-            else if (pf == PixelFormat.Format32bppArgb)
+            else if (pf == StoragePixelFormat.ARGB32)
             {
                 int r = bitmapBytes[stride * y + x * 4 + 1];
                 int g = bitmapBytes[stride * y + x * 4 + 2];

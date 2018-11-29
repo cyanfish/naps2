@@ -7,7 +7,7 @@ namespace NAPS2.Scan.Images.Storage
 {
     public class StubImageMetadata : IImageMetadata
     {
-        public List<Transform> TransformList { get; set; }
+        public List<Transform> TransformList { get; set; } = new List<Transform>();
 
         public int Index { get; set; }
 

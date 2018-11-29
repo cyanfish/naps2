@@ -23,14 +23,25 @@ namespace NAPS2.Scan.Images.Storage
 
         private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
 
-        public static void RegisterTransformer(object transformer)
+        public static void RegisterTransformers(Type imageType, object transformerObj)
         {
-            foreach (var interfaceType in transformer.GetType().GetInterfaces().Where(x => x.Name == "ITransformer"))
+            if (!typeof(IMemoryStorage).IsAssignableFrom(imageType))
             {
-                var genericArgs = interfaceType.GetGenericArguments();
-                Transformers.Add((genericArgs[0], genericArgs[1]), (transformer, interfaceType.GetMethod("PerformTransform")));
+                throw new ArgumentException($"The image type must implement {nameof(IMemoryStorage)}.", nameof(imageType));
             }
-
+            foreach (var method in transformerObj.GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(TransformerAttribute), true).Any()))
+            {
+                var methodParams = method.GetParameters();
+                var storageType = methodParams[0].ParameterType;
+                var transformType = methodParams[1].ParameterType;
+                if (methodParams.Length == 2 &&
+                    typeof(IMemoryStorage).IsAssignableFrom(method.ReturnType) &&
+                    storageType.IsAssignableFrom(imageType) &&
+                    typeof(Transform).IsAssignableFrom(transformType))
+                {
+                    Transformers.Add((imageType, transformType), (transformerObj, method));
+                }
+            }
         }
 
         public static IMemoryStorage PerformTransform(IMemoryStorage storage, Transform transform)
@@ -53,9 +64,22 @@ namespace NAPS2.Scan.Images.Storage
 
         private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Converters = new Dictionary<(Type, Type), (object, MethodInfo)>();
 
-        public static void RegisterConverter<TStorage1, TStorage2>(IStorageConverter<TStorage1, TStorage2> converter) where TStorage1 : IStorage where TStorage2 : IStorage
+        public static void RegisterConverters(object converterObj)
         {
-            Converters.Add((typeof(TStorage1), typeof(TStorage2)), (converter, typeof(IStorageConverter<TStorage1, TStorage2>).GetMethod("Convert")));
+            foreach (var method in converterObj.GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(StorageConverterAttribute), true).Any()))
+            {
+                var methodParams = method.GetParameters();
+                var inputType = methodParams[0].ParameterType;
+                var outputType = method.ReturnType;
+                var paramsType = methodParams[1].ParameterType;
+                if (methodParams.Length == 2 &&
+                    typeof(IStorage).IsAssignableFrom(inputType) &&
+                    typeof(IStorage).IsAssignableFrom(outputType) &&
+                    paramsType == typeof(StorageConvertParams))
+                {
+                    Converters.Add((inputType, outputType), (converterObj, method));
+                }
+            }
         }
 
         public static IStorage ConvertToBacking(IStorage storage, StorageConvertParams convertParams)
@@ -106,11 +130,8 @@ namespace NAPS2.Scan.Images.Storage
 
         static StorageManager()
         {
-            var gdiFileConverter = new GdiFileConverter(new FileStorageManager());
-            RegisterConverter<GdiStorage, FileStorage>(gdiFileConverter);
-            RegisterConverter<FileStorage, GdiStorage>(gdiFileConverter);
-            var gdiTransformer = new GdiTransformer();
-            RegisterTransformer(gdiTransformer);
+            RegisterConverters(new GdiFileConverter());
+            RegisterTransformers(typeof(GdiStorage), new GdiTransformer());
         }
     }
 }

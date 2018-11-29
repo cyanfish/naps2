@@ -386,12 +386,13 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    RecoveryImage.DisableRecoveryCleanup = true;
+                    // TODO: Make nicer.
+                    ((RecoveryStorageManager)FileStorageManager.Default).DisableRecoveryCleanup = true;
                 }
             }
             else if (changeTracker.HasUnsavedChanges)
             {
-                if (e.CloseReason == CloseReason.UserClosing && !RecoveryImage.DisableRecoveryCleanup)
+                if (e.CloseReason == CloseReason.UserClosing && !((RecoveryStorageManager)FileStorageManager.Default).DisableRecoveryCleanup)
                 {
                     var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
@@ -406,7 +407,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    RecoveryImage.DisableRecoveryCleanup = true;
+                    ((RecoveryStorageManager)FileStorageManager.Default).DisableRecoveryCleanup = true;
                 }
             }
 
@@ -1702,7 +1703,7 @@ namespace NAPS2.WinForms
             }
             if (includeBitmap)
             {
-                using (var firstBitmap = ((GdiStorage) await scannedImageRenderer.Render(imageList[0])).Bitmap)
+                using (var firstBitmap = ((GdiStorage)await scannedImageRenderer.Render(imageList[0])).Bitmap)
                 {
                     ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
                     ido.SetData(DataFormats.Rtf, true, await RtfEncodeImages(firstBitmap, imageList));
@@ -1716,7 +1717,8 @@ namespace NAPS2.WinForms
         {
             var sb = new StringBuilder();
             sb.Append("{");
-            if (!AppendRtfEncodedImage(firstBitmap, images[0].FileFormat, sb, false))
+            // TODO: Is this the right format?
+            if (!AppendRtfEncodedImage(firstBitmap, firstBitmap.RawFormat, sb, false))
             {
                 return null;
             }
@@ -1724,7 +1726,8 @@ namespace NAPS2.WinForms
             {
                 using (var bitmap = ((GdiStorage)await scannedImageRenderer.Render(img)).Bitmap)
                 {
-                    if (!AppendRtfEncodedImage(bitmap, img.FileFormat, sb, true))
+                    // TODO: Is this the right format?
+                    if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
                     {
                         break;
                     }
@@ -1857,14 +1860,14 @@ namespace NAPS2.WinForms
                         using (var snapshot = next.Preserve())
                         {
                             var thumb = worker != null
-                                ? new Bitmap(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)))
-                                : thumbnailRenderer.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
+                                ? StorageManager.MemoryStorageFactory.Decode(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)), ".jpg")
+                                : scannedImageRenderer.Render(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
 
                             if (!ThumbnailStillNeedsRendering(next))
                             {
                                 continue;
                             }
-                            
+
                             next.SetThumbnail(thumb, snapshot.TransformState);
                         }
                         fallback.Reset();
@@ -1891,7 +1894,7 @@ namespace NAPS2.WinForms
             lock (next)
             {
                 var thumb = next.GetThumbnail();
-                return thumb == null || next.IsThumbnailDirty || thumb.Size != thumbnailList1.ThumbnailSize;
+                return thumb == null || next.IsThumbnailDirty || thumb.Width != thumbnailList1.ThumbnailSize.Width || thumb.Height != thumbnailList1.ThumbnailSize.Height;
             }
         }
 
@@ -1921,7 +1924,8 @@ namespace NAPS2.WinForms
             // Look for images with mis-sized thumbnails
             foreach (var img in listCopy)
             {
-                if (img.GetThumbnail()?.Size != thumbnailList1.ThumbnailSize)
+                var thumb = img.GetThumbnail();
+                if (thumb == null || thumb.Width != thumbnailList1.ThumbnailSize.Width || thumb.Height != thumbnailList1.ThumbnailSize.Height)
                 {
                     return img;
                 }
