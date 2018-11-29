@@ -7,8 +7,8 @@ namespace NAPS2.Scan.Images
 {
     public interface IBlankDetector
     {
-        bool IsBlank(IMemoryStorage bitmap, int whiteThresholdNorm, int coverageThresholdNorm);
+        bool IsBlank(IImage image, int whiteThresholdNorm, int coverageThresholdNorm);
 
-        bool ExcludePage(IMemoryStorage bitmap, ScanProfile scanProfile);
+        bool ExcludePage(IImage image, ScanProfile scanProfile);
     }
 }

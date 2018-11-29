@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace NAPS2.Scan.Images.Storage
 {
-    public class GdiStorage : IMemoryStorage
+    public class GdiImage : IImage
     {
-        public GdiStorage(Bitmap bitmap)
+        public GdiImage(Bitmap bitmap)
         {
             Bitmap = bitmap ?? throw new ArgumentNullException(nameof(bitmap));
         }
@@ -70,9 +70,9 @@ namespace NAPS2.Scan.Images.Storage
             Bitmap.Dispose();
         }
 
-        public IMemoryStorage Clone()
+        public IImage Clone()
         {
-            return new GdiStorage((Bitmap)Bitmap.Clone());
+            return new GdiImage((Bitmap)Bitmap.Clone());
         }
     }
 }

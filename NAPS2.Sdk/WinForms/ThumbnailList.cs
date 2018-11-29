@@ -196,7 +196,7 @@ namespace NAPS2.WinForms
         {
             lock (this)
             {
-                var thumb = ((GdiStorage)img.GetThumbnail()).Bitmap;
+                var thumb = ((GdiImage)img.GetThumbnail()).Bitmap;
                 if (thumb == null)
                 {
                     return RenderPlaceholder();

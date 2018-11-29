@@ -148,7 +148,7 @@ namespace NAPS2.Scan.Twain
                     pageNumber++;
                     using (var output = twainImpl == TwainImpl.MemXfer
                                         ? GetBitmapFromMemXFer(eventArgs.MemoryData, eventArgs.ImageInfo)
-                                        : StorageManager.MemoryStorageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))
+                                        : StorageManager.ImageFactory.Decode(eventArgs.GetNativeImageStream(), ".bmp"))
                     {
                         using (var result = scannedImageHelper.PostProcessStep1(output, scanProfile))
                         {
@@ -319,13 +319,13 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        private static IMemoryStorage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
+        private static IImage GetBitmapFromMemXFer(byte[] memoryData, TWImageInfo imageInfo)
         {
             int bytesPerPixel = memoryData.Length / (imageInfo.ImageWidth * imageInfo.ImageLength);
             var pixelFormat = bytesPerPixel == 0 ? StoragePixelFormat.BW1: StoragePixelFormat.RGB24;
             int imageWidth = imageInfo.ImageWidth;
             int imageHeight = imageInfo.ImageLength;
-            var bitmap = StorageManager.MemoryStorageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
+            var bitmap = StorageManager.ImageFactory.FromDimensions(imageWidth, imageHeight, pixelFormat);
             var data = bitmap.Lock(out var scan0, out var stride);
             try
             {

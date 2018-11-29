@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Images.Storage
 {
@@ -13,11 +12,11 @@ namespace NAPS2.Scan.Images.Storage
 
         public static Type PreferredBackingStorageType { get; set; } = typeof(FileStorage);
 
-        public static Type PreferredMemoryStorageType { get; set; } = typeof(GdiStorage);
+        public static Type PreferredImageType { get; set; } = typeof(GdiImage);
 
         public static HashSet<Type> BackingStorageTypes { get; set; } = new HashSet<Type> { typeof(FileStorage), typeof(PdfFileStorage) };
 
-        public static IMemoryStorageFactory MemoryStorageFactory { get; set; } = new GdiStorageFactory();
+        public static IImageFactory ImageFactory { get; set; } = new GdiImageFactory();
 
         public static IImageMetadataFactory ImageMetadataFactory { get; set; }
 
@@ -25,9 +24,9 @@ namespace NAPS2.Scan.Images.Storage
 
         public static void RegisterTransformers(Type imageType, object transformerObj)
         {
-            if (!typeof(IMemoryStorage).IsAssignableFrom(imageType))
+            if (!typeof(IImage).IsAssignableFrom(imageType))
             {
-                throw new ArgumentException($"The image type must implement {nameof(IMemoryStorage)}.", nameof(imageType));
+                throw new ArgumentException($"The image type must implement {nameof(IImage)}.", nameof(imageType));
             }
             foreach (var method in transformerObj.GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(TransformerAttribute), true).Any()))
             {
@@ -35,7 +34,7 @@ namespace NAPS2.Scan.Images.Storage
                 var storageType = methodParams[0].ParameterType;
                 var transformType = methodParams[1].ParameterType;
                 if (methodParams.Length == 2 &&
-                    typeof(IMemoryStorage).IsAssignableFrom(method.ReturnType) &&
+                    typeof(IImage).IsAssignableFrom(method.ReturnType) &&
                     storageType.IsAssignableFrom(imageType) &&
                     typeof(Transform).IsAssignableFrom(transformType))
                 {
@@ -44,22 +43,22 @@ namespace NAPS2.Scan.Images.Storage
             }
         }
 
-        public static IMemoryStorage PerformTransform(IMemoryStorage storage, Transform transform)
+        public static IImage PerformTransform(IImage image, Transform transform)
         {
             try
             {
-                var (transformer, perform) = Transformers[(storage.GetType(), transform.GetType())];
-                return (IMemoryStorage)perform.Invoke(transformer, new object[] { storage, transform });
+                var (transformer, perform) = Transformers[(image.GetType(), transform.GetType())];
+                return (IImage)perform.Invoke(transformer, new object[] { image, transform });
             }
             catch (KeyNotFoundException)
             {
-                throw new ArgumentException($"No transformer exists for {storage.GetType().Name} and {transform.GetType().Name}");
+                throw new ArgumentException($"No transformer exists for {image.GetType().Name} and {transform.GetType().Name}");
             }
         }
 
-        public static IMemoryStorage PerformAllTransforms(IMemoryStorage storage, IEnumerable<Transform> transforms)
+        public static IImage PerformAllTransforms(IImage image, IEnumerable<Transform> transforms)
         {
-            return transforms.Aggregate(storage, PerformTransform);
+            return transforms.Aggregate(image, PerformTransform);
         }
 
         private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Converters = new Dictionary<(Type, Type), (object, MethodInfo)>();
@@ -91,13 +90,13 @@ namespace NAPS2.Scan.Images.Storage
             return Convert(storage, PreferredBackingStorageType, convertParams);
         }
 
-        public static IMemoryStorage ConvertToMemory(IStorage storage, StorageConvertParams convertParams)
+        public static IImage ConvertToImage(IStorage storage, StorageConvertParams convertParams)
         {
-            if (storage is IMemoryStorage memStorage)
+            if (storage is IImage memStorage)
             {
                 return memStorage;
             }
-            return (IMemoryStorage)Convert(storage, PreferredMemoryStorageType, convertParams);
+            return (IImage)Convert(storage, PreferredImageType, convertParams);
         }
 
         public static TStorage Convert<TStorage>(IStorage storage)
@@ -130,8 +129,8 @@ namespace NAPS2.Scan.Images.Storage
 
         static StorageManager()
         {
-            RegisterConverters(new GdiFileConverter());
-            RegisterTransformers(typeof(GdiStorage), new GdiTransformer());
+            RegisterConverters(new GdiConverters());
+            RegisterTransformers(typeof(GdiImage), new GdiTransformers());
         }
     }
 }

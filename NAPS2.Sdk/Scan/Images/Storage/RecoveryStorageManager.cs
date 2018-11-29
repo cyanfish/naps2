@@ -22,7 +22,7 @@ namespace NAPS2.Scan.Images.Storage
 
         public RecoveryStorageManager(string recoveryFolderPath)
         {
-            this.RecoveryFolderPath = recoveryFolderPath;
+            RecoveryFolderPath = recoveryFolderPath;
         }
 
         public string RecoveryFolderPath { get; }

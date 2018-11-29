@@ -17,42 +17,42 @@ namespace NAPS2.Scan.Images
         private const double COVERAGE_THRESHOLD_MIN = 0.00;
         private const double COVERAGE_THRESHOLD_MAX = 0.01;
 
-        public bool IsBlank(IMemoryStorage bitmap, int whiteThresholdNorm, int coverageThresholdNorm)
+        public bool IsBlank(IImage image, int whiteThresholdNorm, int coverageThresholdNorm)
         {
-            if (bitmap.PixelFormat == StoragePixelFormat.BW1)
+            if (image.PixelFormat == StoragePixelFormat.BW1)
             {
                 // TODO: Make more generic
-                if (!(bitmap is GdiStorage gdiStorage))
+                if (!(image is GdiImage gdiImage))
                 {
                     throw new InvalidOperationException("Patch code detection only supported for GdiStorage");
                 }
-                using (var bitmap2 = BitmapHelper.CopyToBpp(gdiStorage.Bitmap, 8))
+                using (var bitmap2 = BitmapHelper.CopyToBpp(gdiImage.Bitmap, 8))
                 {
-                    return IsBlankRGB(new GdiStorage(bitmap2), whiteThresholdNorm, coverageThresholdNorm);
+                    return IsBlankRGB(new GdiImage(bitmap2), whiteThresholdNorm, coverageThresholdNorm);
                 }
             }
-            if (bitmap.PixelFormat != StoragePixelFormat.RGB24)
+            if (image.PixelFormat != StoragePixelFormat.RGB24)
             {
                 return false;
             }
-            return IsBlankRGB(bitmap, whiteThresholdNorm, coverageThresholdNorm);
+            return IsBlankRGB(image, whiteThresholdNorm, coverageThresholdNorm);
         }
 
-        private static bool IsBlankRGB(IMemoryStorage bitmap, int whiteThresholdNorm, int coverageThresholdNorm)
+        private static bool IsBlankRGB(IImage image, int whiteThresholdNorm, int coverageThresholdNorm)
         {
             var whiteThreshold = (int)Math.Round(WHITE_THRESHOLD_MIN + (whiteThresholdNorm / 100.0) * (WHITE_THRESHOLD_MAX - WHITE_THRESHOLD_MIN));
             var coverageThreshold = COVERAGE_THRESHOLD_MIN + (coverageThresholdNorm / 100.0) * (COVERAGE_THRESHOLD_MAX - COVERAGE_THRESHOLD_MIN);
 
-            long totalPixels = bitmap.Width * bitmap.Height;
+            long totalPixels = image.Width * image.Height;
             long matchPixels = 0;
 
-            var data = bitmap.Lock(out var scan0, out var stride);
-            var bytes = new byte[stride * bitmap.Height];
+            var data = image.Lock(out var scan0, out var stride);
+            var bytes = new byte[stride * image.Height];
             Marshal.Copy(scan0, bytes, 0, bytes.Length);
-            bitmap.Unlock(data);
-            for (int x = 0; x < bitmap.Width; x++)
+            image.Unlock(data);
+            for (int x = 0; x < image.Width; x++)
             {
-                for (int y = 0; y < bitmap.Height; y++)
+                for (int y = 0; y < image.Height; y++)
                 {
                     int r = bytes[stride * y + x * 3];
                     int g = bytes[stride * y + x * 3 + 1];
@@ -70,9 +70,9 @@ namespace NAPS2.Scan.Images
             return coverage < coverageThreshold;
         }
 
-        public bool ExcludePage(IMemoryStorage bitmap, ScanProfile scanProfile)
+        public bool ExcludePage(IImage image, ScanProfile scanProfile)
         {
-            return scanProfile.ExcludeBlankPages && IsBlank(bitmap, scanProfile.BlankPageWhiteThreshold, scanProfile.BlankPageCoverageThreshold);
+            return scanProfile.ExcludeBlankPages && IsBlank(image, scanProfile.BlankPageWhiteThreshold, scanProfile.BlankPageCoverageThreshold);
         }
     }
 }

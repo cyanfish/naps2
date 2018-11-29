@@ -41,7 +41,7 @@ namespace NAPS2.ImportExport
                     try
                     {
                         ScannedImage img;
-                        using (var storage = StorageManager.ConvertToMemory(new FileStorage(Path.Combine(data.RecoveryFolder, ir.FileName)), new StorageConvertParams()))
+                        using (var storage = StorageManager.ConvertToImage(new FileStorage(Path.Combine(data.RecoveryFolder, ir.FileName)), new StorageConvertParams()))
                         {
                             img = new ScannedImage(storage, ir.BitDepth, ir.HighQuality, -1);
                         }

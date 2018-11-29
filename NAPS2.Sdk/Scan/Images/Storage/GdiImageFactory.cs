@@ -7,39 +7,39 @@ using System.Linq;
 
 namespace NAPS2.Scan.Images.Storage
 {
-    public class GdiStorageFactory : IMemoryStorageFactory
+    public class GdiImageFactory : IImageFactory
     {
-        public IMemoryStorage Decode(Stream stream, string ext) => new GdiStorage(new Bitmap(stream));
+        public IImage Decode(Stream stream, string ext) => new GdiImage(new Bitmap(stream));
 
-        public IMemoryStorage Decode(string path) => new GdiStorage(new Bitmap(path));
+        public IImage Decode(string path) => new GdiImage(new Bitmap(path));
 
-        public IEnumerable<IMemoryStorage> DecodeMultiple(Stream stream, string ext, out int count)
+        public IEnumerable<IImage> DecodeMultiple(Stream stream, string ext, out int count)
         {
             var bitmap = new Bitmap(stream);
             count = bitmap.GetFrameCount(FrameDimension.Page);
             return EnumerateFrames(bitmap, count);
         }
 
-        public IEnumerable<IMemoryStorage> DecodeMultiple(string path, out int count)
+        public IEnumerable<IImage> DecodeMultiple(string path, out int count)
         {
             var bitmap = new Bitmap(path);
             count = bitmap.GetFrameCount(FrameDimension.Page);
             return EnumerateFrames(bitmap, count);
         }
 
-        private IEnumerable<IMemoryStorage> EnumerateFrames(Bitmap bitmap, int count)
+        private IEnumerable<IImage> EnumerateFrames(Bitmap bitmap, int count)
         {
             using (bitmap)
             {
                 for (int i = 0; i < count; i++)
                 {
                     bitmap.SelectActiveFrame(FrameDimension.Page, i);
-                    yield return new GdiStorage((Bitmap) bitmap.Clone());
+                    yield return new GdiImage((Bitmap) bitmap.Clone());
                 }
             }
         }
 
-        public IMemoryStorage FromDimensions(int width, int height, StoragePixelFormat pixelFormat) => new GdiStorage(new Bitmap(width, height, GdiPixelFormat(pixelFormat)));
+        public IImage FromDimensions(int width, int height, StoragePixelFormat pixelFormat) => new GdiImage(new Bitmap(width, height, GdiPixelFormat(pixelFormat)));
 
         private PixelFormat GdiPixelFormat(StoragePixelFormat pixelFormat)
         {

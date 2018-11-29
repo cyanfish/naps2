@@ -11,9 +11,9 @@ namespace NAPS2.Scan.Images
 {
     public static class AutoDeskewExtensions
     {
-        public static double GetSkewAngle(this IMemoryStorage bmp)
+        public static double GetSkewAngle(this IImage image)
         {
-            var sk = new gmseDeskew(bmp);
+            var sk = new gmseDeskew(image);
             return sk.GetSkewAngle();
         }
     }
@@ -120,21 +120,21 @@ namespace NAPS2.Scan.Images
             return hl;
         }
 
-        public gmseDeskew(IMemoryStorage bitmap)
+        public gmseDeskew(IImage image)
         {
-            width = bitmap.Width;
-            height = bitmap.Height;
-            pf = bitmap.PixelFormat;
-            LoadBitmap(bitmap);
+            width = image.Width;
+            height = image.Height;
+            pf = image.PixelFormat;
+            LoadImage(image);
         }
 
-        private void LoadBitmap(IMemoryStorage bitmap)
+        private void LoadImage(IImage image)
         {
-            var data = bitmap.Lock(out var scan0, out stride);
+            var data = image.Lock(out var scan0, out stride);
             stride = Math.Abs(stride);
-            bitmapBytes = new byte[stride * bitmap.Height];
+            bitmapBytes = new byte[stride * image.Height];
             Marshal.Copy(scan0, bitmapBytes, 0, bitmapBytes.Length);
-            bitmap.Unlock(data);
+            image.Unlock(data);
         }
 
         // Hough Transforamtion:

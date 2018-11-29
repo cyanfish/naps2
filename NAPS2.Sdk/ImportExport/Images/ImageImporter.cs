@@ -36,11 +36,11 @@ namespace NAPS2.ImportExport.Images
                         return;
                     }
 
-                    IEnumerable<IMemoryStorage> toImport;
+                    IEnumerable<IImage> toImport;
                     int frameCount;
                     try
                     {
-                        toImport = StorageManager.MemoryStorageFactory.DecodeMultiple(filePath, out frameCount);
+                        toImport = StorageManager.ImageFactory.DecodeMultiple(filePath, out frameCount);
                     }
                     catch (Exception e)
                     {

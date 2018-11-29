@@ -254,7 +254,7 @@ namespace NAPS2.Scan.Sane
                     return (null, true);
                 }
                 using (stream)
-                using (var output = StorageManager.MemoryStorageFactory.Decode(stream, ".bmp"))
+                using (var output = StorageManager.ImageFactory.Decode(stream, ".bmp"))
                 using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile, false))
                 {
                     if (blankDetector.ExcludePage(result, ScanProfile))

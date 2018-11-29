@@ -143,7 +143,7 @@ namespace NAPS2.Recovery
                     }
                     else
                     {
-                        using (var bitmap = StorageManager.MemoryStorageFactory.Decode(imagePath))
+                        using (var bitmap = StorageManager.ImageFactory.Decode(imagePath))
                         {
                             scannedImage = new ScannedImage(bitmap, indexImage.BitDepth, indexImage.HighQuality, -1);
                         }

@@ -110,7 +110,7 @@ namespace NAPS2.WinForms
             tiffViewer1.Image?.Dispose();
             tiffViewer1.Image = null;
             var newImage = await scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
-            tiffViewer1.Image = ((GdiStorage)newImage).Bitmap;
+            tiffViewer1.Image = ((GdiImage)newImage).Bitmap;
         }
 
         protected override void Dispose(bool disposing)

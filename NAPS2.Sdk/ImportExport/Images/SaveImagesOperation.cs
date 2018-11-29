@@ -175,14 +175,14 @@ namespace NAPS2.ImportExport.Images
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
                 // TODO: Something more generic
-                using (Bitmap bitmap = ((GdiStorage) await scannedImageRenderer.Render(snapshot)).Bitmap)
+                using (Bitmap bitmap = ((GdiImage) await scannedImageRenderer.Render(snapshot)).Bitmap)
                 {
                     bitmap.Save(path, encoder, encoderParams);
                 }
             }
             else
             {
-                using (Bitmap bitmap = ((GdiStorage)await scannedImageRenderer.Render(snapshot)).Bitmap)
+                using (Bitmap bitmap = ((GdiImage)await scannedImageRenderer.Render(snapshot)).Bitmap)
                 {
                     bitmap.Save(path, format);
                 }

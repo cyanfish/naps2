@@ -130,7 +130,7 @@ namespace NAPS2.Scan.Twain.Legacy
 
                                 using (Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount))
                                 {
-                                    Bitmaps.Add(new ScannedImage(new GdiStorage(bmp), bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality, settings.Quality));
+                                    Bitmaps.Add(new ScannedImage(new GdiImage(bmp), bitcount == 1 ? ScanBitDepth.BlackWhite : ScanBitDepth.C24Bit, settings.MaxQuality, settings.Quality));
                                 }
                             }
                             form.Close();

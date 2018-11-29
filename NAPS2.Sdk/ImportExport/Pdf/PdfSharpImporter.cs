@@ -212,7 +212,7 @@ namespace NAPS2.ImportExport.Pdf
             // Fortunately JPEG has native support in PDF and exporting an image is just writing the stream to a file.
             using (var memoryStream = new MemoryStream(imageBytes))
             {
-                using (var storage = StorageManager.MemoryStorageFactory.Decode(memoryStream, ".jpg"))
+                using (var storage = StorageManager.ImageFactory.Decode(memoryStream, ".jpg"))
                 {
                     storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
                     var image = new ScannedImage(storage, ScanBitDepth.C24Bit, false, -1);
@@ -237,17 +237,17 @@ namespace NAPS2.ImportExport.Pdf
 
             var buffer = imageObject.Stream.UnfilteredValue;
 
-            IMemoryStorage storage;
+            IImage storage;
             ScanBitDepth bitDepth;
             switch (bitsPerComponent)
             {
                 case 8:
-                    storage = StorageManager.MemoryStorageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
+                    storage = StorageManager.ImageFactory.FromDimensions(width, height, StoragePixelFormat.RGB24);
                     bitDepth = ScanBitDepth.C24Bit;
                     RgbToBitmapUnmanaged(storage, buffer);
                     break;
                 case 1:
-                    storage = StorageManager.MemoryStorageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
+                    storage = StorageManager.ImageFactory.FromDimensions(width, height, StoragePixelFormat.BW1);
                     bitDepth = ScanBitDepth.BlackWhite;
                     BlackAndWhiteToBitmapUnmanaged(storage, buffer);
                     break;
@@ -271,17 +271,17 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
 
-        private static void RgbToBitmapUnmanaged(IMemoryStorage storage, byte[] rgbBuffer)
+        private static void RgbToBitmapUnmanaged(IImage image, byte[] rgbBuffer)
         {
-            var data = storage.Lock(out var scan0, out var stride);
+            var data = image.Lock(out var scan0, out var stride);
             try
             {
-                for (int y = 0; y < storage.Height; y++)
+                for (int y = 0; y < image.Height; y++)
                 {
-                    for (int x = 0; x < storage.Width; x++)
+                    for (int x = 0; x < image.Width; x++)
                     {
                         IntPtr pixelData = scan0 + y * stride + x * 3;
-                        int bufferIndex = (y * storage.Width + x) * 3;
+                        int bufferIndex = (y * image.Width + x) * 3;
                         Marshal.WriteByte(pixelData, rgbBuffer[bufferIndex + 2]);
                         Marshal.WriteByte(pixelData + 1, rgbBuffer[bufferIndex + 1]);
                         Marshal.WriteByte(pixelData + 2, rgbBuffer[bufferIndex]);
@@ -290,17 +290,17 @@ namespace NAPS2.ImportExport.Pdf
             }
             finally
             {
-                storage.Unlock(data);
+                image.Unlock(data);
             }
         }
 
-        private static void BlackAndWhiteToBitmapUnmanaged(IMemoryStorage storage, byte[] bwBuffer)
+        private static void BlackAndWhiteToBitmapUnmanaged(IImage image, byte[] bwBuffer)
         {
-            var data = storage.Lock(out var scan0, out var stride);
+            var data = image.Lock(out var scan0, out var stride);
             try
             {
-                int bytesPerRow = (storage.Width - 1) / 8 + 1;
-                for (int y = 0; y < storage.Height; y++)
+                int bytesPerRow = (image.Width - 1) / 8 + 1;
+                for (int y = 0; y < image.Height; y++)
                 {
                     for (int x = 0; x < bytesPerRow; x++)
                     {
@@ -311,7 +311,7 @@ namespace NAPS2.ImportExport.Pdf
             }
             finally
             {
-                storage.Unlock(data);
+                image.Unlock(data);
             }
         }
 
@@ -362,7 +362,7 @@ namespace NAPS2.ImportExport.Pdf
             Write(stream, TiffTrailer);
             stream.Seek(0, SeekOrigin.Begin);
 
-            using (var storage = StorageManager.MemoryStorageFactory.Decode(stream, ".tiff"))
+            using (var storage = StorageManager.ImageFactory.Decode(stream, ".tiff"))
             {
                 storage.SetResolution(storage.Width / (float)page.Width.Inch, storage.Height / (float)page.Height.Inch);
 

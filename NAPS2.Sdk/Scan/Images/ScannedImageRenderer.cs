@@ -21,7 +21,7 @@ namespace NAPS2.Scan.Images
             this.pdfRenderer = pdfRenderer;
         }
 
-        public async Task<IMemoryStorage> Render(ScannedImage image, int outputSize = 0)
+        public async Task<IImage> Render(ScannedImage image, int outputSize = 0)
         {
             using (var snapshot = image.Preserve())
             {
@@ -29,11 +29,11 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        public async Task<IMemoryStorage> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
+        public async Task<IImage> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
         {
             return await Task.Factory.StartNew(() =>
             {
-                var storage = StorageManager.ConvertToMemory(snapshot.Source.BackingStorage, new StorageConvertParams());
+                var storage = StorageManager.ConvertToImage(snapshot.Source.BackingStorage, new StorageConvertParams());
                 if (outputSize > 0)
                 {
                     double scaleFactor = Math.Min(outputSize / (double)storage.Height, outputSize / (double)storage.Width);

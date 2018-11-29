@@ -97,7 +97,7 @@ namespace NAPS2.ImportExport
                                 ? new Rectangle(pb.Left, pb.Top, image.Width * pb.Height / image.Height, pb.Height)
                                 : new Rectangle(pb.Left, pb.Top, pb.Width, image.Height * pb.Width / image.Width);
 
-                            e.Graphics.DrawImage(StorageManager.Convert<GdiStorage>(image).Bitmap, rect);
+                            e.Graphics.DrawImage(StorageManager.Convert<GdiImage>(image).Bitmap, rect);
                         }
                         finally
                         {

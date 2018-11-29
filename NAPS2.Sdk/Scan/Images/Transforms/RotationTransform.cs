@@ -21,9 +21,9 @@ namespace NAPS2.Scan.Images.Transforms
             return mod;
         }
 
-        public static RotationTransform Auto(IMemoryStorage bitmap)
+        public static RotationTransform Auto(IImage image)
         {
-            return new RotationTransform(-bitmap.GetSkewAngle());
+            return new RotationTransform(-image.GetSkewAngle());
         }
 
         private double angle;

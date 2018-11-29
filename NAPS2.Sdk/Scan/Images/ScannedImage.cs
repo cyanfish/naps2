@@ -1,69 +1,23 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
 using NAPS2.Recovery;
 using NAPS2.Scan.Images.Storage;
 using NAPS2.Scan.Images.Transforms;
-using NAPS2.Util;
 
 namespace NAPS2.Scan.Images
 {
     public class ScannedImage : IDisposable
     {
-        private IMemoryStorage thumbnail;
+        private IImage thumbnail;
         private int thumbnailState;
         private int transformState;
 
         private bool disposed;
         private int snapshotCount;
-
-        //public static ScannedImage FromSinglePagePdf(string pdfPath, bool copy)
-        //{
-        //    return new ScannedImage(pdfPath, copy);
-        //}
-
-        //public ScannedImage(Bitmap img, ScanBitDepth bitDepth, bool highQuality, int quality)
-        //{
-        //    string tempFilePath = ScannedImageHelper.SaveSmallestBitmap(img, bitDepth, highQuality, quality, out ImageFormat fileFormat);
-
-        //    transformList = new List<Transform>();
-        //    recoveryImage = RecoveryImage.CreateNew(fileFormat, bitDepth, highQuality, transformList);
-
-        //    File.Move(tempFilePath, recoveryImage.FilePath);
-
-        //    recoveryImage.Save();
-        //}
-
-        //public ScannedImage(RecoveryIndexImage recoveryIndexImage)
-        //{
-        //    recoveryImage = RecoveryImage.LoadExisting(recoveryIndexImage);
-        //    transformList = recoveryImage.IndexImage.TransformList;
-        //}
-
-        //private ScannedImage(string pdfPath, bool copy)
-        //{
-        //    transformList = new List<Transform>();
-        //    recoveryImage = RecoveryImage.CreateNew(null, ScanBitDepth.C24Bit, false, transformList);
-
-        //    if (copy)
-        //    {
-        //        File.Copy(pdfPath, recoveryImage.FilePath);
-        //    }
-        //    else
-        //    {
-        //        File.Move(pdfPath, recoveryImage.FilePath);
-        //    }
-
-        //    recoveryImage.Save();
-        //}
-
+        
         public ScannedImage(IStorage storage) : this(storage, new StorageConvertParams())
         {
         }
@@ -147,7 +101,7 @@ namespace NAPS2.Scan.Images
             ThumbnailInvalidated?.Invoke(this, new EventArgs());
         }
 
-        public IMemoryStorage GetThumbnail()
+        public IImage GetThumbnail()
         {
             lock (this)
             {
@@ -155,12 +109,12 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        public void SetThumbnail(IMemoryStorage bitmap, int? state = null)
+        public void SetThumbnail(IImage image, int? state = null)
         {
             lock (this)
             {
                 thumbnail?.Dispose();
-                thumbnail = bitmap;
+                thumbnail = image;
                 thumbnailState = state ?? transformState;
             }
             ThumbnailChanged?.Invoke(this, new EventArgs());

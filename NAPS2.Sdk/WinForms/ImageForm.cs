@@ -56,7 +56,7 @@ namespace NAPS2.WinForms
                 if (!transform.IsNull)
                 {
                     // TODO: Maybe the working images etc. should be storage
-                    result = ((GdiStorage)StorageManager.PerformTransform(new GdiStorage(result), transform)).Bitmap;
+                    result = ((GdiImage)StorageManager.PerformTransform(new GdiImage(result), transform)).Bitmap;
                 }
             }
             return result;
@@ -92,7 +92,7 @@ namespace NAPS2.WinForms
             Size = new Size(600, 600);
 
             var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
-            workingImage = ((GdiStorage)await scannedImageRenderer.Render(Image, maxDimen * 2)).Bitmap;
+            workingImage = ((GdiImage)await scannedImageRenderer.Render(Image, maxDimen * 2)).Bitmap;
             if (closed)
             {
                 workingImage?.Dispose();

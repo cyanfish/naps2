@@ -1703,7 +1703,7 @@ namespace NAPS2.WinForms
             }
             if (includeBitmap)
             {
-                using (var firstBitmap = ((GdiStorage)await scannedImageRenderer.Render(imageList[0])).Bitmap)
+                using (var firstBitmap = ((GdiImage)await scannedImageRenderer.Render(imageList[0])).Bitmap)
                 {
                     ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
                     ido.SetData(DataFormats.Rtf, true, await RtfEncodeImages(firstBitmap, imageList));
@@ -1724,7 +1724,7 @@ namespace NAPS2.WinForms
             }
             foreach (var img in images.Skip(1))
             {
-                using (var bitmap = ((GdiStorage)await scannedImageRenderer.Render(img)).Bitmap)
+                using (var bitmap = ((GdiImage)await scannedImageRenderer.Render(img)).Bitmap)
                 {
                     // TODO: Is this the right format?
                     if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
@@ -1860,7 +1860,7 @@ namespace NAPS2.WinForms
                         using (var snapshot = next.Preserve())
                         {
                             var thumb = worker != null
-                                ? StorageManager.MemoryStorageFactory.Decode(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)), ".jpg")
+                                ? StorageManager.ImageFactory.Decode(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)), ".jpg")
                                 : scannedImageRenderer.Render(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
 
                             if (!ThumbnailStillNeedsRendering(next))

@@ -5,7 +5,7 @@ using System.Linq;
 namespace NAPS2.Scan.Images.Storage
 {
     // TODO: Maybe just call this IImage.
-    public interface IMemoryStorage : IStorage
+    public interface IImage : IStorage
     {
         int Width { get; }
 
@@ -25,6 +25,6 @@ namespace NAPS2.Scan.Images.Storage
 
         void Unlock(object state);
 
-        IMemoryStorage Clone();
+        IImage Clone();
     }
 }

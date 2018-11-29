@@ -13,15 +13,15 @@ namespace NAPS2.Scan
     /// </summary>
     public class PatchCodeDetector
     {
-        public static PatchCode Detect(IMemoryStorage bitmap)
+        public static PatchCode Detect(IImage image)
         {
             // TODO: Make more generic
-            if (!(bitmap is GdiStorage gdiStorage))
+            if (!(image is GdiImage gdiImage))
             {
                 throw new InvalidOperationException("Patch code detection only supported for GdiStorage");
             }
             IBarcodeReader reader = new BarcodeReader();
-            var barcodeResult = reader.Decode(gdiStorage.Bitmap);
+            var barcodeResult = reader.Decode(gdiImage.Bitmap);
             if (barcodeResult != null)
             {
                 switch (barcodeResult.Text)

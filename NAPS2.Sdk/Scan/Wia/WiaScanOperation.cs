@@ -138,7 +138,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void ProduceImage(ScannedImageSource.Concrete source, IMemoryStorage output, ref int pageNumber)
+        private void ProduceImage(ScannedImageSource.Concrete source, IImage output, ref int pageNumber)
         {
             using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile))
             {
@@ -181,7 +181,7 @@ namespace NAPS2.Scan.Wia
                 {
                     using (var stream = new FileStream(path, FileMode.Open))
                     {
-                        foreach (var storage in StorageManager.MemoryStorageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
+                        foreach (var storage in StorageManager.ImageFactory.DecodeMultiple(stream, Path.GetExtension(path), out _))
                         {
                             using (storage)
                             {
@@ -229,7 +229,7 @@ namespace NAPS2.Scan.Wia
                     try
                     {
                         using (args.Stream)
-                        using (var storage = StorageManager.MemoryStorageFactory.Decode(args.Stream, ".bmp"))
+                        using (var storage = StorageManager.ImageFactory.Decode(args.Stream, ".bmp"))
                         {
                             ProduceImage(source, storage, ref pageNumber);
                         }

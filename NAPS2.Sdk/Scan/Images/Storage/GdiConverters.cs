@@ -7,10 +7,10 @@ using System.Linq;
 
 namespace NAPS2.Scan.Images.Storage
 {
-    public class GdiFileConverter
+    public class GdiConverters
     {
         [StorageConverter]
-        public FileStorage ConvertToFile(GdiStorage input, StorageConvertParams convertParams)
+        public FileStorage ConvertToFile(GdiImage input, StorageConvertParams convertParams)
         {
             if (convertParams.Temporary)
             {
@@ -20,19 +20,19 @@ namespace NAPS2.Scan.Images.Storage
             }
             else
             {
-                // TODO: Save smallest
-                string ext = convertParams.Lossless ? ".png" : ".jpg";
+                var tempPath = ScannedImageHelper.SaveSmallestBitmap(input.Bitmap, convertParams.BitDepth, convertParams.Lossless, convertParams.LossyQuality, out ImageFormat fileFormat);
+                string ext = Equals(fileFormat, ImageFormat.Png) ? ".png" : ".jpg";
                 var path = FileStorageManager.Default.NextFilePath() + ext;
-                input.Bitmap.Save(path);
+                File.Move(tempPath, path);
                 return new FileStorage(path);
             }
         }
 
         [StorageConverter]
-        public GdiStorage ConvertToGdi(FileStorage input, StorageConvertParams convertParams) => new GdiStorage(new Bitmap(input.FullPath));
+        public GdiImage ConvertToGdi(FileStorage input, StorageConvertParams convertParams) => new GdiImage(new Bitmap(input.FullPath));
 
         [StorageConverter]
-        public MemoryStreamStorage ConvertToMemoryStream(GdiStorage input, StorageConvertParams convertParams)
+        public MemoryStreamStorage ConvertToMemoryStream(GdiImage input, StorageConvertParams convertParams)
         {
             var stream = new MemoryStream();
             // TODO: Better format choice?

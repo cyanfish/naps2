@@ -115,7 +115,7 @@ namespace NAPS2.Scan.Images
             this.ocrManager = ocrManager;
         }
 
-        public IMemoryStorage PostProcessStep1(IMemoryStorage output, ScanProfile profile, bool supportsNativeUI = true)
+        public IImage PostProcessStep1(IImage output, ScanProfile profile, bool supportsNativeUI = true)
         {
             double scaleFactor = 1;
             if (!profile.UseNativeUI || !supportsNativeUI)
@@ -171,11 +171,11 @@ namespace NAPS2.Scan.Images
             return result;
         }
 
-        public void PostProcessStep2(ScannedImage image, IMemoryStorage bitmap, ScanProfile profile, ScanParams scanParams, int pageNumber, bool supportsNativeUI = true)
+        public void PostProcessStep2(ScannedImage scannedImage, IImage image, ScanProfile profile, ScanParams scanParams, int pageNumber, bool supportsNativeUI = true)
         {
             if (!scanParams.NoThumbnails)
             {
-                image.SetThumbnail(StorageManager.PerformTransform(bitmap, new ThumbnailTransform()));
+                scannedImage.SetThumbnail(StorageManager.PerformTransform(image, new ThumbnailTransform()));
             }
             if (scanParams.SkipPostProcessing)
             {
@@ -185,29 +185,29 @@ namespace NAPS2.Scan.Images
             {
                 if (profile.Brightness != 0)
                 {
-                    AddTransformAndUpdateThumbnail(image, ref bitmap, new BrightnessTransform { Brightness = profile.Brightness });
+                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new BrightnessTransform { Brightness = profile.Brightness });
                 }
                 if (profile.Contrast != 0)
                 {
-                    AddTransformAndUpdateThumbnail(image, ref bitmap, new TrueContrastTransform { Contrast = profile.Contrast });
+                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new TrueContrastTransform { Contrast = profile.Contrast });
                 }
             }
             if (profile.FlipDuplexedPages && pageNumber % 2 == 0)
             {
-                AddTransformAndUpdateThumbnail(image, ref bitmap, new RotationTransform(RotateFlipType.Rotate180FlipNone));
+                AddTransformAndUpdateThumbnail(scannedImage, ref image, new RotationTransform(RotateFlipType.Rotate180FlipNone));
             }
             if (profile.AutoDeskew)
             {
                 var op = operationFactory.Create<DeskewOperation>();
-                if (op.Start(new[] { image }))
+                if (op.Start(new[] { scannedImage }))
                 {
                     operationProgress.ShowProgress(op);
                     op.Wait();
                 }
             }
-            if (scanParams.DetectPatchCodes && image.PatchCode == PatchCode.None)
+            if (scanParams.DetectPatchCodes && scannedImage.PatchCode == PatchCode.None)
             {
-                image.PatchCode = PatchCodeDetector.Detect(bitmap);
+                scannedImage.PatchCode = PatchCodeDetector.Detect(image);
             }
         }
 
@@ -220,7 +220,7 @@ namespace NAPS2.Scan.Images
             return scanParams.DoOcr ?? (ocrEnabled && afterScanning);
         }
 
-        public string SaveForBackgroundOcr(IMemoryStorage bitmap, ScanParams scanParams)
+        public string SaveForBackgroundOcr(IImage bitmap, ScanParams scanParams)
         {
             if (ShouldDoBackgroundOcr(scanParams))
             {
@@ -249,14 +249,14 @@ namespace NAPS2.Scan.Images
             }
         }
 
-        private void AddTransformAndUpdateThumbnail(ScannedImage image, ref IMemoryStorage bitmap, Transform transform)
+        private void AddTransformAndUpdateThumbnail(ScannedImage scannedImage, ref IImage image, Transform transform)
         {
-            image.AddTransform(transform);
-            var thumbnail = image.GetThumbnail();
+            scannedImage.AddTransform(transform);
+            var thumbnail = scannedImage.GetThumbnail();
             if (thumbnail != null)
             {
-                bitmap = StorageManager.PerformTransform(bitmap, transform);
-                image.SetThumbnail(StorageManager.PerformTransform(bitmap, new ThumbnailTransform()));
+                image = StorageManager.PerformTransform(image, transform);
+                scannedImage.SetThumbnail(StorageManager.PerformTransform(image, new ThumbnailTransform()));
             }
         }
     }
