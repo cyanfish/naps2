@@ -50,7 +50,7 @@ namespace NAPS2.ImportExport
                             img.AddTransform(transform);
                         }
                         // TODO: Don't bother, here, in recovery, etc.
-                        img.SetThumbnail(StorageManager.PerformTransform(await scannedImageRenderer.Render(img), new ThumbnailTransform()));
+                        img.SetThumbnail(Transform.Perform(await scannedImageRenderer.Render(img), new ThumbnailTransform()));
                         imageCallback(img);
 
                         Status.CurrentProgress++;

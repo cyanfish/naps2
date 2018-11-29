@@ -9,6 +9,7 @@ using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;
 using NAPS2.Images.Storage;
+using NAPS2.Images.Transforms;
 using NLog;
 
 namespace NAPS2.DI
@@ -41,6 +42,10 @@ namespace NAPS2.DI
             var rsm = new RecoveryStorageManager(recoveryFolderPath);
             FileStorageManager.Default = rsm;
             StorageManager.ImageMetadataFactory = rsm;
+
+
+            StorageManager.RegisterConverters(new GdiConverters());
+            Transform.RegisterTransformers(typeof(GdiImage), new GdiTransformers());
         }
     }
 }

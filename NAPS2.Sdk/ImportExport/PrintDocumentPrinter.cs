@@ -89,7 +89,7 @@ namespace NAPS2.ImportExport
                             if (Math.Sign(image.Width - image.Height) != Math.Sign(pb.Width - pb.Height))
                             {
                                 // Flip portrait/landscape to match output
-                                image = StorageManager.PerformTransform(image, new RotationTransform(90));
+                                image = Transform.Perform(image, new RotationTransform(90));
                             }
 
                             // Fit the image into the output rect while maintaining its aspect ratio

@@ -54,8 +54,8 @@ namespace NAPS2.Images
                         {
                             return null;
                         }
-                        bitmap = StorageManager.PerformTransform(bitmap, transform);
-                        var thumbnail = StorageManager.PerformTransform(bitmap, new ThumbnailTransform());
+                        bitmap = Transform.Perform(bitmap, transform);
+                        var thumbnail = Transform.Perform(bitmap, new ThumbnailTransform());
                         lock (img)
                         {
                             img.AddTransform(transform);

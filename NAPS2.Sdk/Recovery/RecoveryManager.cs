@@ -152,7 +152,7 @@ namespace NAPS2.Recovery
                     {
                         scannedImage.AddTransform(transform);
                     }
-                    scannedImage.SetThumbnail(StorageManager.PerformTransform(await scannedImageRenderer.Render(scannedImage), new ThumbnailTransform()));
+                    scannedImage.SetThumbnail(Transform.Perform(await scannedImageRenderer.Render(scannedImage), new ThumbnailTransform()));
                     imageCallback(scannedImage);
 
                     Status.CurrentProgress++;

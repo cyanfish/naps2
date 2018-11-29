@@ -213,7 +213,7 @@
     <Compile Include="Images\Storage\StubImageMetadata.cs" />
     <Compile Include="Images\Storage\StubImageMetadataFactory.cs" />
     <Compile Include="Images\Storage\StorageConverterAttribute.cs" />
-    <Compile Include="Images\Storage\TransformerAttribute.cs" />
+    <Compile Include="Images\Transforms\TransformerAttribute.cs" />
     <Compile Include="Images\Transforms\ThumbnailTransform.cs" />
     <Compile Include="Images\Transforms\ScaleTransform.cs" />
     <Compile Include="Scan\KeyValueScanOptions.cs" />

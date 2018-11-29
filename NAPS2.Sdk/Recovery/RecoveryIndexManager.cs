@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -22,7 +21,7 @@ namespace NAPS2.Recovery
 
         protected override RecoveryIndex Deserialize(Stream configFileStream)
         {
-            var serializer = new XmlSerializer(typeof(RecoveryIndex));
+            var serializer = new XmlSerializer(typeof(RecoveryIndex), Transform.KnownTransformTypes.ToArray());
             return (RecoveryIndex)serializer.Deserialize(configFileStream);
         }
     }

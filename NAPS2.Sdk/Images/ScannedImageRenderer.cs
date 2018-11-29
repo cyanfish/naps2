@@ -1,26 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
-using NAPS2.ImportExport.Pdf;
 
 namespace NAPS2.Images
 {
     public class ScannedImageRenderer
     {
-        private readonly IPdfRenderer pdfRenderer;
-
-        public ScannedImageRenderer(IPdfRenderer pdfRenderer)
-        {
-            this.pdfRenderer = pdfRenderer;
-        }
-
         public async Task<IImage> Render(ScannedImage image, int outputSize = 0)
         {
             using (var snapshot = image.Preserve())
@@ -37,9 +26,9 @@ namespace NAPS2.Images
                 if (outputSize > 0)
                 {
                     double scaleFactor = Math.Min(outputSize / (double)storage.Height, outputSize / (double)storage.Width);
-                    storage = StorageManager.PerformTransform(storage, new ScaleTransform { ScaleFactor = scaleFactor });
+                    storage = Transform.Perform(storage, new ScaleTransform { ScaleFactor = scaleFactor });
                 }
-                return StorageManager.PerformAllTransforms(storage, snapshot.TransformList);
+                return Transform.PerformAll(storage, snapshot.TransformList);
             });
         }
 

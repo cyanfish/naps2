@@ -286,7 +286,7 @@ namespace NAPS2.Images
                         var thumb = img.GetThumbnail();
                         if (thumb != null)
                         {
-                            img.SetThumbnail(StorageManager.PerformTransform(thumb, transform));
+                            img.SetThumbnail(Transform.Perform(thumb, transform));
                         }
                     }
                 }

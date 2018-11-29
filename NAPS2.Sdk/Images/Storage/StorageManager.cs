@@ -19,48 +19,7 @@ namespace NAPS2.Images.Storage
         public static IImageFactory ImageFactory { get; set; } = new GdiImageFactory();
 
         public static IImageMetadataFactory ImageMetadataFactory { get; set; }
-
-        private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
-
-        public static void RegisterTransformers(Type imageType, object transformerObj)
-        {
-            if (!typeof(IImage).IsAssignableFrom(imageType))
-            {
-                throw new ArgumentException($"The image type must implement {nameof(IImage)}.", nameof(imageType));
-            }
-            foreach (var method in transformerObj.GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(TransformerAttribute), true).Any()))
-            {
-                var methodParams = method.GetParameters();
-                var storageType = methodParams[0].ParameterType;
-                var transformType = methodParams[1].ParameterType;
-                if (methodParams.Length == 2 &&
-                    typeof(IImage).IsAssignableFrom(method.ReturnType) &&
-                    storageType.IsAssignableFrom(imageType) &&
-                    typeof(Transform).IsAssignableFrom(transformType))
-                {
-                    Transformers.Add((imageType, transformType), (transformerObj, method));
-                }
-            }
-        }
-
-        public static IImage PerformTransform(IImage image, Transform transform)
-        {
-            try
-            {
-                var (transformer, perform) = Transformers[(image.GetType(), transform.GetType())];
-                return (IImage)perform.Invoke(transformer, new object[] { image, transform });
-            }
-            catch (KeyNotFoundException)
-            {
-                throw new ArgumentException($"No transformer exists for {image.GetType().Name} and {transform.GetType().Name}");
-            }
-        }
-
-        public static IImage PerformAllTransforms(IImage image, IEnumerable<Transform> transforms)
-        {
-            return transforms.Aggregate(image, PerformTransform);
-        }
-
+        
         private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Converters = new Dictionary<(Type, Type), (object, MethodInfo)>();
 
         public static void RegisterConverters(object converterObj)
@@ -125,12 +84,6 @@ namespace NAPS2.Images.Storage
             {
                 throw new ArgumentException($"No converter exists from {storage.GetType().Name} to {PreferredBackingStorageType.Name}");
             }
-        }
-
-        static StorageManager()
-        {
-            RegisterConverters(new GdiConverters());
-            RegisterTransformers(typeof(GdiImage), new GdiTransformers());
         }
     }
 }

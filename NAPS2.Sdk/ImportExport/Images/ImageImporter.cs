@@ -64,7 +64,7 @@ namespace NAPS2.ImportExport.Images
                             var image = new ScannedImage(frame, ScanBitDepth.C24Bit, frame.IsOriginalLossless, -1);
                             if (!importParams.NoThumbnails)
                             {
-                                image.SetThumbnail(StorageManager.PerformTransform(frame, new ThumbnailTransform()));
+                                image.SetThumbnail(Transform.Perform(frame, new ThumbnailTransform()));
                             }
 
                             if (importParams.DetectPatchCodes)

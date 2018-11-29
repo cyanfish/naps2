@@ -56,7 +56,7 @@ namespace NAPS2.WinForms
                 if (!transform.IsNull)
                 {
                     // TODO: Maybe the working images etc. should be storage
-                    result = ((GdiImage)StorageManager.PerformTransform(new GdiImage(result), transform)).Bitmap;
+                    result = ((GdiImage)Transform.Perform(new GdiImage(result), transform)).Bitmap;
                 }
             }
             return result;

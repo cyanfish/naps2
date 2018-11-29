@@ -196,7 +196,7 @@ namespace NAPS2.ImportExport.Pdf
                 {
                     if (!importParams.NoThumbnails)
                     {
-                        image.SetThumbnail(StorageManager.PerformTransform(bitmap, new ThumbnailTransform()));
+                        image.SetThumbnail(Transform.Perform(bitmap, new ThumbnailTransform()));
                     }
                     if (importParams.DetectPatchCodes)
                     {
@@ -218,7 +218,7 @@ namespace NAPS2.ImportExport.Pdf
                     var image = new ScannedImage(storage, ScanBitDepth.C24Bit, false, -1);
                     if (!importParams.NoThumbnails)
                     {
-                        image.SetThumbnail(StorageManager.PerformTransform(storage, new ThumbnailTransform()));
+                        image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform()));
                     }
                     if (importParams.DetectPatchCodes)
                     {
@@ -261,7 +261,7 @@ namespace NAPS2.ImportExport.Pdf
                 var image = new ScannedImage(storage, bitDepth, true, -1);
                 if (!importParams.NoThumbnails)
                 {
-                    image.SetThumbnail(StorageManager.PerformTransform(storage, new ThumbnailTransform()));
+                    image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform()));
                 }
                 if (importParams.DetectPatchCodes)
                 {
@@ -369,7 +369,7 @@ namespace NAPS2.ImportExport.Pdf
                 var image = new ScannedImage(storage, ScanBitDepth.BlackWhite, true, -1);
                 if (!importParams.NoThumbnails)
                 {
-                    image.SetThumbnail(StorageManager.PerformTransform(storage, new ThumbnailTransform()));
+                    image.SetThumbnail(Transform.Perform(storage, new ThumbnailTransform()));
                 }
                 if (importParams.DetectPatchCodes)
                 {

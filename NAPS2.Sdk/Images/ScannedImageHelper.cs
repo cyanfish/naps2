@@ -140,7 +140,7 @@ namespace NAPS2.Images
                 {
                     if (profile.ForcePageSizeCrop)
                     {
-                        result = StorageManager.PerformTransform(result, new CropTransform
+                        result = Transform.Perform(result, new CropTransform
                         {
                             Right = (int)((width - (float)pageDimensions.HeightInInches()) * output.HorizontalResolution),
                             Bottom = (int)((height - (float)pageDimensions.WidthInInches()) * output.VerticalResolution)
@@ -156,7 +156,7 @@ namespace NAPS2.Images
                 {
                     if (profile.ForcePageSizeCrop)
                     {
-                        result = StorageManager.PerformTransform(result, new CropTransform
+                        result = Transform.Perform(result, new CropTransform
                         {
                             Right = (int)((width - (float)pageDimensions.WidthInInches()) * output.HorizontalResolution),
                             Bottom = (int)((height - (float)pageDimensions.HeightInInches()) * output.VerticalResolution)
@@ -176,7 +176,7 @@ namespace NAPS2.Images
         {
             if (!scanParams.NoThumbnails)
             {
-                scannedImage.SetThumbnail(StorageManager.PerformTransform(image, new ThumbnailTransform()));
+                scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform()));
             }
             if (scanParams.SkipPostProcessing)
             {
@@ -256,8 +256,8 @@ namespace NAPS2.Images
             var thumbnail = scannedImage.GetThumbnail();
             if (thumbnail != null)
             {
-                image = StorageManager.PerformTransform(image, transform);
-                scannedImage.SetThumbnail(StorageManager.PerformTransform(image, new ThumbnailTransform()));
+                image = Transform.Perform(image, transform);
+                scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform()));
             }
         }
     }
