@@ -2,7 +2,7 @@
 
 . .\naps2.ps1
 
-$Localize = "..\..\NAPS2.Localization\bin\Debug\NAPS2.Localization.exe"
+$Localize = "$SolutionRoot\NAPS2.Tools.Localization\bin\Debug\NAPS2.Localization.exe"
 
 if (Test-Path $Localize) {
 	if ($LanguageCode -eq $null -or $LanguageCode -eq "") {
@@ -15,5 +15,5 @@ if (Test-Path $Localize) {
 		& $Localize language $LanguageCode
 	}
 } else {
-	"NAPS2.Localization is not built"
+	"NAPS2.Tools.Localization is not built"
 }

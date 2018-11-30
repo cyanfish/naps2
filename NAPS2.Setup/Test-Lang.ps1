@@ -17,22 +17,22 @@ if ([string]::IsNullOrEmpty($LanguageCode)) {
 		return
 	}
 }
-Invoke-WebRequest -Uri $PoUrl -OutFile "..\..\NAPS2.Core\Lang\po\$LanguageCode.po"
+Invoke-WebRequest -Uri $PoUrl -OutFile "$SolutionRoot\NAPS2.Sdk\Lang\po\$LanguageCode.po"
 Update-Lang $LanguageCode
 
 # Rebuild NAPS2
 
 $Version = Get-NAPS2-Version
-$PublishDir = "..\publish\$Version\"
+$PublishDir = "$SolutionRoot\NAPS2.Setup\publish\$Version\"
 if (-not (Test-Path $PublishDir)) {
     mkdir $PublishDir
 }
 $msbuild = Get-MSBuild-Path
 Get-Process | where { $_.ProcessName -eq "NAPS2.vshost" } | kill
 "Building MSI"
-& $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=InstallerMSI
+& $msbuild "$SolutionRoot\NAPS2.sln" /v:q /p:Configuration=InstallerMSI
 "Building ZIP"
-& $msbuild ..\..\NAPS2.sln /v:q /p:Configuration=Standalone
+& $msbuild "$SolutionRoot\NAPS2.sln" /v:q /p:Configuration=Standalone
 
 Publish-NAPS2-Standalone $PublishDir "Standalone" ($PublishDir + "naps2-$Version-test_$LanguageCode-portable.zip")
 
@@ -42,6 +42,6 @@ Publish-NAPS2-Standalone $PublishDir "Standalone" ($PublishDir + "naps2-$Version
 
 $confirmation = Read-Host "Revert changes (y/n)"
 if ($confirmation -eq 'y') {
-    & git checkout -- "..\..\*.po"
-    & git checkout -- "..\..\*.resx"
+    & git checkout -- "$SolutionRoot\*.po"
+    & git checkout -- "$SolutionRoot\*.resx"
 }
