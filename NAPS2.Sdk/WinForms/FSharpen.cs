@@ -32,7 +32,7 @@ namespace NAPS2.WinForms
 
         private void UpdateTransform()
         {
-            SharpenTransform.Sharpness = tbSharpen.Value;
+            SharpenTransform = new SharpenTransform(tbSharpen.Value);
             UpdatePreviewBox();
         }
         

@@ -6,7 +6,16 @@ namespace NAPS2.Images.Transforms
 {
     public class TrueContrastTransform : Transform
     {
-        public int Contrast { get; set; }
+        public TrueContrastTransform()
+        {
+        }
+
+        public TrueContrastTransform(int contrast)
+        {
+            Contrast = contrast;
+        }
+
+        public int Contrast { get; }
 
         public override bool IsNull => Contrast == 0;
     }

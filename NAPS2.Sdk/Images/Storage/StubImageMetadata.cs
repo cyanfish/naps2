@@ -20,11 +20,11 @@ namespace NAPS2.Images.Storage
         {
         }
 
-        public bool CanSerialize => true;
+        public bool CanSerialize => false;
 
-        public byte[] Serialize(IStorage storage) => throw new InvalidOperationException();
+        public byte[] Serialize(IStorage storage) => throw new NotSupportedException();
 
-        public IStorage Deserialize(byte[] serializedData) => throw new InvalidOperationException();
+        public IStorage Deserialize(byte[] serializedData) => throw new NotSupportedException();
 
         public void Dispose()
         {

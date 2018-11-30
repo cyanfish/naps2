@@ -845,7 +845,7 @@ namespace NAPS2.WinForms
                 return;
             }
             changeTracker.Made();
-            await imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone);
+            await imageList.RotateFlip(SelectedIndices, 270);
             changeTracker.Made();
         }
 
@@ -856,7 +856,7 @@ namespace NAPS2.WinForms
                 return;
             }
             changeTracker.Made();
-            await imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone);
+            await imageList.RotateFlip(SelectedIndices, 90);
             changeTracker.Made();
         }
 
@@ -867,7 +867,7 @@ namespace NAPS2.WinForms
                 return;
             }
             changeTracker.Made();
-            await imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY);
+            await imageList.RotateFlip(SelectedIndices, 180);
             changeTracker.Made();
         }
 

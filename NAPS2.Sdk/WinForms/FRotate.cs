@@ -43,7 +43,7 @@ namespace NAPS2.WinForms
 
         private void UpdateTransform()
         {
-            RotationTransform.Angle = tbAngle.Value / 10.0;
+            RotationTransform = new RotationTransform(tbAngle.Value / 10.0);
             UpdatePreviewBox();
         }
 

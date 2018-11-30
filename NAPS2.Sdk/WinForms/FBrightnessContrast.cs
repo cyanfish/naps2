@@ -37,8 +37,8 @@ namespace NAPS2.WinForms
 
         private void UpdateTransform()
         {
-            BrightnessTransform.Brightness = tbBrightness.Value;
-            TrueContrastTransform.Contrast = tbContrast.Value;
+            BrightnessTransform = new BrightnessTransform(tbBrightness.Value);
+            TrueContrastTransform = new TrueContrastTransform(tbContrast.Value);
             UpdatePreviewBox();
         }
 

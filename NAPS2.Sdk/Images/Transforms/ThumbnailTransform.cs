@@ -5,9 +5,18 @@ using NAPS2.Config;
 
 namespace NAPS2.Images.Transforms
 {
-    [Serializable]
     public class ThumbnailTransform : Transform
     {
-        public int Size { get; set; } = UserConfig.Current.ThumbnailSize;
+        public ThumbnailTransform()
+        {
+            Size = UserConfig.Current.ThumbnailSize;
+        }
+
+        public ThumbnailTransform(int size)
+        {
+            Size = size;
+        }
+
+        public int Size { get; }
     }
 }

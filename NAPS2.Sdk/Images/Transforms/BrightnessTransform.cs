@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 namespace NAPS2.Images.Transforms
 {
-    [Serializable]
     public class BrightnessTransform : Transform
     {
-        public int Brightness { get; set; }
+        public BrightnessTransform()
+        {
+        }
+
+        public BrightnessTransform(int brightness)
+        {
+            Brightness = brightness;
+        }
+
+        public int Brightness { get; }
 
         public override bool IsNull => Brightness == 0;
     }

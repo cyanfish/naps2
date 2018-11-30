@@ -4,10 +4,18 @@ using System.Linq;
 
 namespace NAPS2.Images.Transforms
 {
-    [Serializable]
     public class ContrastTransform : Transform
     {
-        public int Contrast { get; set; }
+        public ContrastTransform()
+        {
+        }
+
+        public ContrastTransform(int contrast)
+        {
+            Contrast = contrast;
+        }
+
+        public int Contrast { get; }
 
         public override bool IsNull => Contrast == 0;
     }

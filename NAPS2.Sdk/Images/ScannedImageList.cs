@@ -272,7 +272,7 @@ namespace NAPS2.Images
             }
         }
 
-        public async Task RotateFlip(IEnumerable<int> selection, RotateFlipType rotateFlipType)
+        public async Task RotateFlip(IEnumerable<int> selection, double angle)
         {
             var images = Images.ElementsAt(selection).ToList();
             await Task.Factory.StartNew(() =>
@@ -281,7 +281,7 @@ namespace NAPS2.Images
                 {
                     lock (img)
                     {
-                        var transform = new RotationTransform(rotateFlipType);
+                        var transform = new RotationTransform(angle);
                         img.AddTransform(transform);
                         var thumb = img.GetThumbnail();
                         if (thumb != null)

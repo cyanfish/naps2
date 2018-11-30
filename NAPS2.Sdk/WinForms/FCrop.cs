@@ -89,11 +89,7 @@ namespace NAPS2.WinForms
 
         protected override void ResetTransform()
         {
-            CropTransform = new CropTransform
-            {
-                OriginalHeight = originalHeight,
-                OriginalWidth = originalWidth
-            };
+            CropTransform = new CropTransform(0, 0, 0, 0, originalWidth, originalHeight);
         }
 
         protected override void TransformSaved()
@@ -146,14 +142,14 @@ namespace NAPS2.WinForms
         private void UpdateTransform()
         {
             CropTransform = new CropTransform
-            {
-                Left = Math.Min(tbLeft.Value, tbRight.Value),
-                Right = originalWidth - Math.Max(tbLeft.Value, tbRight.Value),
-                Bottom = Math.Min(tbTop.Value, tbBottom.Value),
-                Top = originalHeight - Math.Max(tbTop.Value, tbBottom.Value),
-                OriginalHeight = originalHeight,
-                OriginalWidth = originalWidth
-            };
+            (
+                Math.Min(tbLeft.Value, tbRight.Value),
+                originalWidth - Math.Max(tbLeft.Value, tbRight.Value),
+                Math.Min(tbTop.Value, tbBottom.Value),
+                originalHeight - Math.Max(tbTop.Value, tbBottom.Value),
+                originalWidth,
+                originalHeight
+            );
             UpdatePreviewBox();
         }
 

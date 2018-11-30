@@ -74,13 +74,14 @@ namespace NAPS2.Images
 
         public void AddTransform(Transform transform)
         {
+            if (transform.IsNull)
+            {
+                return;
+            }
             lock (this)
             {
                 // Also updates the recovery index since they reference the same list
-                if (!Transform.AddOrSimplify(Metadata.TransformList, transform))
-                {
-                    return;
-                }
+                Transform.AddOrSimplify(Metadata.TransformList, transform);
                 transformState++;
             }
             Metadata.Commit();

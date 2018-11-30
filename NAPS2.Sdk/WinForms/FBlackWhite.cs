@@ -32,7 +32,7 @@ namespace NAPS2.WinForms
 
         private void UpdateTransform()
         {
-            BlackWhiteTransform.Threshold = tbThreshold.Value;
+            BlackWhiteTransform = new BlackWhiteTransform(tbThreshold.Value);
             UpdatePreviewBox();
         }
 

@@ -24,8 +24,8 @@ namespace NAPS2.Automation
         public void ShowBackgroundProgress(IOperation op) {
         }
 
-        public void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar) => throw new InvalidOperationException();
+        public void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar) => throw new NotSupportedException();
 
-        public List<IOperation> ActiveOperations => throw new InvalidOperationException();
+        public List<IOperation> ActiveOperations => throw new NotSupportedException();
     }
 }

@@ -4,10 +4,18 @@ using System.Linq;
 
 namespace NAPS2.Images.Transforms
 {
-    [Serializable]
     public class SaturationTransform : Transform
     {
-        public int Saturation { get; set; }
+        public SaturationTransform()
+        {
+        }
+
+        public SaturationTransform(int saturation)
+        {
+            Saturation = saturation;
+        }
+
+        public int Saturation { get; }
 
         public override bool IsNull => Saturation == 0;
     }

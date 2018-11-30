@@ -37,8 +37,8 @@ namespace NAPS2.WinForms
 
         private void UpdateTransform()
         {
-            HueTransform.HueShift = tbHue.Value;
-            SaturationTransform.Saturation = tbSaturation.Value;
+            HueTransform = new HueTransform(tbHue.Value);
+            SaturationTransform = new SaturationTransform(tbSaturation.Value);
             UpdatePreviewBox();
         }
         

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using NAPS2.Images.Storage;
 
 namespace NAPS2.Images.Transforms
 {
-    [Serializable]
     public class RotationTransform : Transform
     {
         public const double TOLERANCE = 0.001;
@@ -21,48 +19,18 @@ namespace NAPS2.Images.Transforms
             return mod;
         }
 
-        public static RotationTransform Auto(IImage image)
-        {
-            return new RotationTransform(-image.GetSkewAngle());
-        }
-
-        private double angle;
+        public static RotationTransform Auto(IImage image) => new RotationTransform(-image.GetSkewAngle());
 
         public RotationTransform()
         {
         }
 
-        public RotationTransform(RotateFlipType rotateFlipType)
-        {
-            switch (rotateFlipType)
-            {
-                case RotateFlipType.Rotate90FlipNone:
-                    Angle = 90.0;
-                    break;
-                case RotateFlipType.Rotate180FlipNone:
-                    Angle = 180.0;
-                    break;
-                case RotateFlipType.Rotate270FlipNone:
-                    Angle = 270.0;
-                    break;
-                case RotateFlipType.RotateNoneFlipNone:
-                    Angle = 0.0;
-                    break;
-                default:
-                    throw new ArgumentException();
-            }
-        }
-
         public RotationTransform(double angle)
         {
-            Angle = angle;
+            Angle = NormalizeAngle(angle);
         }
 
-        public double Angle
-        {
-            get => angle;
-            set => angle = NormalizeAngle(value);
-        }
+        public double Angle { get; }
 
         public override bool CanSimplify(Transform other) => other is RotationTransform;
 

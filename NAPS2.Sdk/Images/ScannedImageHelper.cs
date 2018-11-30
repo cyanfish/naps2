@@ -140,11 +140,12 @@ namespace NAPS2.Images
                 {
                     if (profile.ForcePageSizeCrop)
                     {
-                        result = Transform.Perform(result, new CropTransform
-                        {
-                            Right = (int)((width - (float)pageDimensions.HeightInInches()) * output.HorizontalResolution),
-                            Bottom = (int)((height - (float)pageDimensions.WidthInInches()) * output.VerticalResolution)
-                        });
+                        result = Transform.Perform(result, new CropTransform(
+                            0,
+                            (int)((width - (float)pageDimensions.HeightInInches()) * output.HorizontalResolution),
+                            0,
+                            (int)((height - (float)pageDimensions.WidthInInches()) * output.VerticalResolution)
+                        ));
                     }
                     else
                     {
@@ -157,10 +158,12 @@ namespace NAPS2.Images
                     if (profile.ForcePageSizeCrop)
                     {
                         result = Transform.Perform(result, new CropTransform
-                        {
-                            Right = (int)((width - (float)pageDimensions.WidthInInches()) * output.HorizontalResolution),
-                            Bottom = (int)((height - (float)pageDimensions.HeightInInches()) * output.VerticalResolution)
-                        });
+                        (
+                            0,
+                            (int)((width - (float)pageDimensions.WidthInInches()) * output.HorizontalResolution),
+                            0,
+                            (int)((height - (float)pageDimensions.HeightInInches()) * output.VerticalResolution)
+                        ));
                     }
                     else
                     {
@@ -186,16 +189,16 @@ namespace NAPS2.Images
             {
                 if (profile.Brightness != 0)
                 {
-                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new BrightnessTransform { Brightness = profile.Brightness });
+                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new BrightnessTransform(profile.Brightness));
                 }
                 if (profile.Contrast != 0)
                 {
-                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new TrueContrastTransform { Contrast = profile.Contrast });
+                    AddTransformAndUpdateThumbnail(scannedImage, ref image, new TrueContrastTransform(profile.Contrast));
                 }
             }
             if (profile.FlipDuplexedPages && pageNumber % 2 == 0)
             {
-                AddTransformAndUpdateThumbnail(scannedImage, ref image, new RotationTransform(RotateFlipType.Rotate180FlipNone));
+                AddTransformAndUpdateThumbnail(scannedImage, ref image, new RotationTransform(180));
             }
             if (profile.AutoDeskew)
             {

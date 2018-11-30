@@ -4,10 +4,18 @@ using System.Linq;
 
 namespace NAPS2.Images.Transforms
 {
-    [Serializable]
     public class SharpenTransform : Transform
     {
-        public int Sharpness { get; set; }
+        public SharpenTransform()
+        {
+        }
+
+        public SharpenTransform(int sharpness)
+        {
+            Sharpness = sharpness;
+        }
+
+        public int Sharpness { get; }
 
         public override bool IsNull => Sharpness == 0;
     }

@@ -4,10 +4,19 @@ using System.Linq;
 
 namespace NAPS2.Images.Transforms
 {
-    [Serializable]
     public class ScaleTransform : Transform
     {
-        public double ScaleFactor { get; set; }
+        public ScaleTransform()
+        {
+            ScaleFactor = 1.0;
+        }
+
+        public ScaleTransform(double scaleFactor)
+        {
+            ScaleFactor = scaleFactor;
+        }
+
+        public double ScaleFactor { get; }
 
         public override bool IsNull => ScaleFactor == 1;
     }

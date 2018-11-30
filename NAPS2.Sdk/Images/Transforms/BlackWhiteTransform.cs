@@ -4,9 +4,17 @@ using System.Linq;
 
 namespace NAPS2.Images.Transforms
 {
-    [Serializable]
     public class BlackWhiteTransform : Transform
     {
-        public int Threshold { get; set; }
+        public BlackWhiteTransform()
+        {
+        }
+
+        public BlackWhiteTransform(int threshold)
+        {
+            Threshold = threshold;
+        }
+        
+        public int Threshold { get; }
     }
 }

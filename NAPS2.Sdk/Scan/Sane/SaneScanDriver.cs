@@ -264,7 +264,7 @@ namespace NAPS2.Scan.Sane
 
                     // By converting to 1bpp here we avoid the Win32 call in the BitmapHelper conversion
                     // This converter also has the side effect of working even if the scanner doesn't support Lineart
-                    using (var encoded = ScanProfile.BitDepth == ScanBitDepth.BlackWhite ? Transform.Perform(result, new BlackWhiteTransform { Threshold = -ScanProfile.Brightness }) : result)
+                    using (var encoded = ScanProfile.BitDepth == ScanBitDepth.BlackWhite ? Transform.Perform(result, new BlackWhiteTransform(-ScanProfile.Brightness)) : result)
                     {
                         var image = new ScannedImage(encoded, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
                         scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);

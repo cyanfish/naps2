@@ -8,12 +8,22 @@ namespace NAPS2.Images.Transforms
 {
     public abstract class Transform
     {
+        /// <summary>
+        /// Gets a list of Transform subclasses. This is used for serialization.
+        /// If you create a custom Transform subclass, you should add it to this list.
+        /// </summary>
         public static List<Type> KnownTransformTypes { get; } = Assembly
             .GetExecutingAssembly()
             .GetTypes()
             .Where(t => typeof(Transform).IsAssignableFrom(t))
             .ToList(); private static readonly Dictionary<(Type, Type), (object, MethodInfo)> Transformers = new Dictionary<(Type, Type), (object, MethodInfo)>();
-
+        
+        /// <summary>
+        /// Enumerates all methods on transformerObj that have a TransformerAttribute and registers them
+        /// for future use in Transform.Perform and Transform.PerformAll with the specified image type.
+        /// </summary>
+        /// <param name="imageType"></param>
+        /// <param name="transformerObj"></param>
         public static void RegisterTransformers(Type imageType, object transformerObj)
         {
             if (!typeof(IImage).IsAssignableFrom(imageType))
@@ -35,6 +45,13 @@ namespace NAPS2.Images.Transforms
             }
         }
 
+        // TODO: Describe ownership transfer
+        /// <summary>
+        /// Performs the specified transformation on the specified image using a compatible transformer.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="transform"></param>
+        /// <returns></returns>
         public static IImage Perform(IImage image, Transform transform)
         {
             try
@@ -48,13 +65,24 @@ namespace NAPS2.Images.Transforms
             }
         }
 
+        /// <summary>
+        /// Performs the specified transformations on the specified image using a compatible transformer.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="transforms"></param>
+        /// <returns></returns>
         public static IImage PerformAll(IImage image, IEnumerable<Transform> transforms) => transforms.Aggregate(image, Perform);
 
-        public static bool AddOrSimplify(IList<Transform> transformList, Transform transform)
+        /// <summary>
+        /// Appends the specified transform to the list, merging with the previous transform on the list if simplication is possible.
+        /// </summary>
+        /// <param name="transformList"></param>
+        /// <param name="transform"></param>
+        public static void AddOrSimplify(IList<Transform> transformList, Transform transform)
         {
             if (transform.IsNull)
             {
-                return false;
+                return;
             }
             var last = transformList.LastOrDefault();
             if (transform.CanSimplify(last))
@@ -73,7 +101,6 @@ namespace NAPS2.Images.Transforms
             {
                 transformList.Add(transform);
             }
-            return true;
         }
         
         /// <summary>
