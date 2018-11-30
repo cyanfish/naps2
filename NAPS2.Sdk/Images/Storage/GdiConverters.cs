@@ -10,7 +10,7 @@ namespace NAPS2.Images.Storage
     public class GdiConverters
     {
         [StorageConverter]
-        public FileStorage ConvertToFile(GdiImage input, StorageConvertParams convertParams)
+        public IFileStorage ConvertToFile(GdiImage input, StorageConvertParams convertParams)
         {
             if (convertParams.Temporary)
             {
@@ -22,7 +22,7 @@ namespace NAPS2.Images.Storage
             {
                 var tempPath = ScannedImageHelper.SaveSmallestBitmap(input.Bitmap, convertParams.BitDepth, convertParams.Lossless, convertParams.LossyQuality, out ImageFormat fileFormat);
                 string ext = Equals(fileFormat, ImageFormat.Png) ? ".png" : ".jpg";
-                var path = FileStorageManager.Default.NextFilePath() + ext;
+                var path = FileStorageManager.Current.NextFilePath() + ext;
                 File.Move(tempPath, path);
                 return new FileStorage(path);
             }

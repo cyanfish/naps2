@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using NAPS2.Images.Storage;
@@ -8,8 +7,7 @@ using NAPS2.Images.Transforms;
 
 namespace NAPS2.Images
 {
-    // TODO: Delete this in favour of IScannedImageRenderer and implementors
-    public class ScannedImageRenderer
+    public class ImageRenderer : IScannedImageRenderer<IImage>
     {
         public async Task<IImage> Render(ScannedImage image, int outputSize = 0)
         {
@@ -31,26 +29,6 @@ namespace NAPS2.Images
                 }
                 return Transform.PerformAll(storage, snapshot.TransformList);
             });
-        }
-
-        public async Task<Stream> RenderToStream(ScannedImage image)
-        {
-            using (var snapshot = image.Preserve())
-            {
-                return await RenderToStream(snapshot);
-            }
-        }
-
-        public async Task<Stream> RenderToStream(ScannedImage.Snapshot snapshot)
-        {
-            using (var transformed = await Render(snapshot))
-            {
-                return StorageManager.Convert<MemoryStreamStorage>(transformed, new StorageConvertParams
-                {
-                    // TODO: Is this right?
-                    Lossless = snapshot.Source.Metadata.Lossless
-                }).Stream;
-            }
         }
     }
 }

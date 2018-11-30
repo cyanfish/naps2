@@ -12,33 +12,41 @@ namespace NAPS2.Images
 {
     public class ScannedImage : IDisposable
     {
+        public static void ConfigureBackingStorage<TStorage>() where TStorage : IStorage
+        {
+            BackingStorageType = typeof(TStorage);
+        }
+
+        public static Type BackingStorageType { get; private set; } = typeof(IImage);
+
         private IImage thumbnail;
         private int thumbnailState;
         private int transformState;
 
         private bool disposed;
         private int snapshotCount;
-        
+
         public ScannedImage(IStorage storage) : this(storage, new StorageConvertParams())
         {
         }
 
         public ScannedImage(IStorage storage, StorageConvertParams convertParams)
         {
-            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
+            BackingStorage = StorageManager.Convert(storage, BackingStorageType, convertParams);
             Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
             Metadata.Commit();
         }
 
         public ScannedImage(IStorage storage, IImageMetadata metadata, StorageConvertParams convertParams)
         {
-            BackingStorage = StorageManager.ConvertToBacking(storage, convertParams);
+            BackingStorage = StorageManager.Convert(storage, BackingStorageType, convertParams);
             Metadata = metadata;
         }
 
         public ScannedImage(IStorage storage, ScanBitDepth bitDepth, bool highQuality, int quality)
         {
-            BackingStorage = StorageManager.ConvertToBacking(storage, new StorageConvertParams { Lossless = highQuality, LossyQuality = quality });
+            var convertParams = new StorageConvertParams { Lossless = highQuality, LossyQuality = quality };
+            BackingStorage = StorageManager.Convert(storage, BackingStorageType, convertParams);
             Metadata = StorageManager.ImageMetadataFactory.CreateMetadata(BackingStorage);
             // TODO: Is this stuff really needed in metadata?
             Metadata.BitDepth = bitDepth;

@@ -24,13 +24,13 @@ namespace NAPS2.DI
             try
             {
                 // TODO: Simplify
-                worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Default).RecoveryFolderPath);
+                worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
             }
             catch (EndpointNotFoundException)
             {
                 // Retry once
                 worker = kernel.Get<WorkerContext>();
-                worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Default).RecoveryFolderPath);
+                worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
             }
             return worker;
         }

@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Config;
+using NAPS2.Images.Storage;
+using NAPS2.Images.Transforms;
 
 namespace NAPS2.Images
 {
-    public class ThumbnailRenderer
+    public class ThumbnailRenderer : IScannedImageRenderer<IImage>
     {
+        // TODO: None of this static stuff is at all core SDK. Move it to FDesktop or something.
         public const int MIN_SIZE = 64;
         public const int DEFAULT_SIZE = 128;
         public static int MAX_SIZE = 1024;
@@ -52,20 +52,36 @@ namespace NAPS2.Images
             return (size - 832) / 96 + 16;
         }
 
-        //public Task<Bitmap> RenderThumbnail(ScannedImage scannedImage, int size)
-        //{
-        //    using (var snapshot = scannedImage.Preserve())
-        //    {
-        //        return RenderThumbnail(snapshot, size);
-        //    }
-        //}
+        private readonly IScannedImageRenderer<IImage> imageRenderer;
 
-        //public async Task<Bitmap> RenderThumbnail(ScannedImage.Snapshot snapshot, int size)
-        //{
-        //    using (var bitmap = await scannedImageRenderer.Render(snapshot, snapshot.TransformList.Count == 0 ? 0 : size * OVERSAMPLE))
-        //    {
-        //        return RenderThumbnail(bitmap, size);
-        //    }
-        //}
+        public ThumbnailRenderer()
+        {
+            imageRenderer = new ImageRenderer();
+        }
+
+        public ThumbnailRenderer(IScannedImageRenderer<IImage> imageRenderer)
+        {
+            this.imageRenderer = imageRenderer;
+        }
+
+        public async Task<IImage> Render(ScannedImage image, int outputSize = 0)
+        {
+            using (var snapshot = image.Preserve())
+            {
+                return await Render(snapshot, outputSize);
+            }
+        }
+
+        public async Task<IImage> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
+        {
+            if (outputSize == 0)
+            {
+                outputSize = UserConfig.Current.ThumbnailSize;
+            }
+            using (var bitmap = await imageRenderer.Render(snapshot, snapshot.TransformList.Count == 0 ? 0 : outputSize * OVERSAMPLE))
+            {
+                return Transform.Perform(bitmap, new ThumbnailTransform(outputSize));
+            }
+        }
     }
 }

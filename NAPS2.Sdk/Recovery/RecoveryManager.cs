@@ -137,7 +137,7 @@ namespace NAPS2.Recovery
                     ScannedImage scannedImage;
                     if (".pdf".Equals(Path.GetExtension(imagePath), StringComparison.InvariantCultureIgnoreCase))
                     {
-                        string newPath = FileStorageManager.Default.NextFilePath();
+                        string newPath = FileStorageManager.Current.NextFilePath();
                         File.Copy(imagePath, newPath);
                         scannedImage = new ScannedImage(new PdfFileStorage(newPath));
                     }

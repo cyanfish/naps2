@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using NAPS2.Images.Storage;
+
+namespace NAPS2.Images
+{
+    public class MemoryStreamRenderer : IScannedImageRenderer<MemoryStream>
+    {
+        private readonly IScannedImageRenderer<IImage> imageRenderer;
+
+        public MemoryStreamRenderer()
+        {
+            imageRenderer = new ImageRenderer();
+        }
+
+        public MemoryStreamRenderer(IScannedImageRenderer<IImage> imageRenderer)
+        {
+            this.imageRenderer = imageRenderer;
+        }
+
+        public async Task<MemoryStream> Render(ScannedImage image, int outputSize = 0)
+        {
+            using (var snapshot = image.Preserve())
+            {
+                return await Render(snapshot, outputSize);
+            }
+        }
+
+        public async Task<MemoryStream> Render(ScannedImage.Snapshot snapshot, int outputSize = 0)
+        {
+            using (var transformed = await imageRenderer.Render(snapshot))
+            {
+                return StorageManager.Convert<MemoryStreamStorage>(transformed, new StorageConvertParams
+                {
+                    // TODO: Is this right?
+                    Lossless = snapshot.Source.Metadata.Lossless
+                }).Stream;
+            }
+        }
+    }
+}

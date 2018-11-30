@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NAPS2.Config;
+using NAPS2.Images;
 using NAPS2.ImportExport.Pdf;
 using NAPS2.Logging;
 using NAPS2.Ocr;
@@ -40,12 +41,9 @@ namespace NAPS2.DI
 
             var recoveryFolderPath = Path.Combine(Paths.Recovery, Path.GetRandomFileName());
             var rsm = new RecoveryStorageManager(recoveryFolderPath);
-            FileStorageManager.Default = rsm;
+            FileStorageManager.Current = rsm;
+            ScannedImage.ConfigureBackingStorage<IFileStorage>();
             StorageManager.ImageMetadataFactory = rsm;
-
-
-            StorageManager.RegisterConverters(new GdiConverters());
-            Transform.RegisterTransformers(typeof(GdiImage), new GdiTransformers());
         }
     }
 }

@@ -7,12 +7,12 @@ namespace NAPS2.Images.Storage
 {
     public class FileStorageManager
     {
-        private static FileStorageManager _default = new FileStorageManager();
+        private static FileStorageManager _current = new FileStorageManager();
 
-        public static FileStorageManager Default
+        public static FileStorageManager Current
         {
-            get => _default;
-            set => _default = value ?? throw new ArgumentNullException(nameof(value));
+            get => _current;
+            set => _current = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public virtual string NextFilePath() => Path.Combine(Paths.Temp, Path.GetRandomFileName());

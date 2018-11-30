@@ -387,12 +387,12 @@ namespace NAPS2.WinForms
                 else
                 {
                     // TODO: Make nicer.
-                    ((RecoveryStorageManager)FileStorageManager.Default).DisableRecoveryCleanup = true;
+                    ((RecoveryStorageManager)FileStorageManager.Current).DisableRecoveryCleanup = true;
                 }
             }
             else if (changeTracker.HasUnsavedChanges)
             {
-                if (e.CloseReason == CloseReason.UserClosing && !((RecoveryStorageManager)FileStorageManager.Default).DisableRecoveryCleanup)
+                if (e.CloseReason == CloseReason.UserClosing && !((RecoveryStorageManager)FileStorageManager.Current).DisableRecoveryCleanup)
                 {
                     var result = MessageBox.Show(MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
@@ -407,7 +407,7 @@ namespace NAPS2.WinForms
                 }
                 else
                 {
-                    ((RecoveryStorageManager)FileStorageManager.Default).DisableRecoveryCleanup = true;
+                    ((RecoveryStorageManager)FileStorageManager.Current).DisableRecoveryCleanup = true;
                 }
             }
 

@@ -125,7 +125,7 @@ namespace NAPS2.Update
                 waitHandle.Set();
             }
             // TODO: Simplify
-            ((RecoveryStorageManager)FileStorageManager.Default).DisableRecoveryCleanup = true;
+            ((RecoveryStorageManager)FileStorageManager.Current).DisableRecoveryCleanup = true;
             Application.OpenForms.OfType<Form>().FirstOrDefault()?.Close();
         }
 

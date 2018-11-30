@@ -2,19 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NAPS2.Images.Transforms;
 
 namespace NAPS2.Images.Storage
 {
     public static class StorageManager
     {
-        // TODO: Maybe move the initialization to Lib.Common
-
-        public static Type PreferredBackingStorageType { get; set; } = typeof(FileStorage);
-
+        // TODO: Have this been configured elsewhere. Also make it a single LOC to configure.
         public static Type PreferredImageType { get; set; } = typeof(GdiImage);
-
-        public static HashSet<Type> BackingStorageTypes { get; set; } = new HashSet<Type> { typeof(FileStorage), typeof(PdfFileStorage) };
 
         public static IImageFactory ImageFactory { get; set; } = new GdiImageFactory();
 
@@ -40,20 +34,11 @@ namespace NAPS2.Images.Storage
             }
         }
 
-        public static IStorage ConvertToBacking(IStorage storage, StorageConvertParams convertParams)
-        {
-            if (BackingStorageTypes.Contains(storage.GetType()))
-            {
-                return storage;
-            }
-            return Convert(storage, PreferredBackingStorageType, convertParams);
-        }
-
         public static IImage ConvertToImage(IStorage storage, StorageConvertParams convertParams)
         {
-            if (storage is IImage memStorage)
+            if (storage is IImage image)
             {
-                return memStorage;
+                return image;
             }
             return (IImage)Convert(storage, PreferredImageType, convertParams);
         }
@@ -70,7 +55,7 @@ namespace NAPS2.Images.Storage
 
         public static IStorage Convert(IStorage storage, Type type, StorageConvertParams convertParams)
         {
-            if (storage.GetType() == type)
+            if (type.IsInstanceOfType(storage))
             {
                 return storage;
             }
@@ -82,7 +67,7 @@ namespace NAPS2.Images.Storage
             }
             catch (KeyNotFoundException)
             {
-                throw new ArgumentException($"No converter exists from {storage.GetType().Name} to {PreferredBackingStorageType.Name}");
+                throw new ArgumentException($"No converter exists from {storage.GetType().Name} to {type.Name}");
             }
         }
     }
