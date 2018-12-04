@@ -350,7 +350,6 @@
     <Compile Include="Dependencies\PlatformSupport.cs" />
     <Compile Include="Images\AutoDeskew.cs" />
     <Compile Include="Operation\OperationProgress.cs" />
-    <Compile Include="Images\ScannedImageRenderer.cs" />
     <Compile Include="Dependencies\DownloadFormat.cs" />
     <Compile Include="Dependencies\DownloadInfo.cs" />
     <Compile Include="Ocr\Language.cs" />

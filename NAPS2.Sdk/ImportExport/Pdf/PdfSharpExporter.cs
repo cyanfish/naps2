@@ -23,6 +23,7 @@ using PdfSharp.Pdf.Security;
 
 namespace NAPS2.ImportExport.Pdf
 {
+    // TODO: Avoid Task.Result use here (and elsewhere)
     public class PdfSharpExporter : IPdfExporter
     {
         static PdfSharpExporter()
@@ -33,12 +34,18 @@ namespace NAPS2.ImportExport.Pdf
             }
         }
         
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly MemoryStreamRenderer memoryStreamRenderer;
         private readonly OcrRequestQueue ocrRequestQueue;
 
-        public PdfSharpExporter(ScannedImageRenderer scannedImageRenderer, OcrRequestQueue ocrRequestQueue)
+        public PdfSharpExporter()
         {
-            this.scannedImageRenderer = scannedImageRenderer;
+            memoryStreamRenderer = new MemoryStreamRenderer();
+            ocrRequestQueue = OcrRequestQueue.Default;
+        }
+
+        public PdfSharpExporter(MemoryStreamRenderer memoryStreamRenderer, OcrRequestQueue ocrRequestQueue)
+        {
+            this.memoryStreamRenderer = memoryStreamRenderer;
             this.ocrRequestQueue = ocrRequestQueue;
         }
 
@@ -142,7 +149,7 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 else
                 {
-                    using (Stream stream = scannedImageRenderer.RenderToStream(snapshot).Result)
+                    using (Stream stream = memoryStreamRenderer.Render(snapshot).Result)
                     using (var img = XImage.FromStream(stream))
                     {
                         if (cancelToken.IsCancellationRequested)
@@ -195,7 +202,7 @@ namespace NAPS2.ImportExport.Pdf
 
                 string tempImageFilePath = Path.Combine(Paths.Temp, Path.GetRandomFileName());
 
-                using (Stream stream = scannedImageRenderer.RenderToStream(snapshot).Result)
+                using (Stream stream = memoryStreamRenderer.Render(snapshot).Result)
                 using (var img = XImage.FromStream(stream))
                 {
                     if (cancelToken.IsCancellationRequested)

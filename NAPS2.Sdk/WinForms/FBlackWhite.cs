@@ -10,8 +10,8 @@ namespace NAPS2.WinForms
 {
     partial class FBlackWhite : ImageForm
     {
-        public FBlackWhite(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
-            : base(changeTracker, scannedImageRenderer)
+        public FBlackWhite(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+            : base(changeTracker, bitmapRenderer)
         {
             InitializeComponent();
             ActiveControl = txtThreshold;

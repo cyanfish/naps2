@@ -8,18 +8,17 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {
     public class TiffHelper
     {
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly BitmapRenderer bitmapRenderer;
 
-        public TiffHelper(ScannedImageRenderer scannedImageRenderer)
+        public TiffHelper(BitmapRenderer bitmapRenderer)
         {
-            this.scannedImageRenderer = scannedImageRenderer;
+            this.bitmapRenderer = bitmapRenderer;
         }
 
         public async Task<bool> SaveMultipage(List<ScannedImage.Snapshot> snapshots, string location, TiffCompression compression, ProgressHandler progressCallback, CancellationToken cancelToken)
@@ -41,7 +40,7 @@ namespace NAPS2.ImportExport.Images
                     var iparams = new EncoderParameters(1);
                     Encoder iparam = Encoder.Compression;
                     // TODO: More generic (?)
-                    using (var bitmap = ((GdiImage)await scannedImageRenderer.Render(snapshots[0])).Bitmap)
+                    using (var bitmap = await bitmapRenderer.Render(snapshots[0]))
                     {
                         ValidateBitmap(bitmap);
                         var iparamPara = new EncoderParameter(iparam, (long)GetEncoderValue(compression, bitmap));
@@ -56,7 +55,7 @@ namespace NAPS2.ImportExport.Images
                     var compressionEncoder = Encoder.Compression;
 
                     File.Delete(location);
-                    using (var bitmap0 = ((GdiImage)await scannedImageRenderer.Render(snapshots[0])).Bitmap)
+                    using (var bitmap0 = await bitmapRenderer.Render(snapshots[0]))
                     {
                         ValidateBitmap(bitmap0);
                         encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap0));
@@ -76,7 +75,7 @@ namespace NAPS2.ImportExport.Images
                                 return false;
                             }
 
-                            using (var bitmap = ((GdiImage)await scannedImageRenderer.Render(snapshots[i])).Bitmap)
+                            using (var bitmap = await bitmapRenderer.Render(snapshots[i]))
                             {
                                 ValidateBitmap(bitmap);
                                 encoderParams.Param[0] = new EncoderParameter(compressionEncoder, (long)GetEncoderValue(compression, bitmap));

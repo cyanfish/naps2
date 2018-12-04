@@ -27,17 +27,15 @@ namespace NAPS2.ImportExport.Pdf
     {
         private readonly IErrorOutput errorOutput;
         private readonly IPdfPasswordProvider pdfPasswordProvider;
-        private readonly ThumbnailRenderer thumbnailRenderer;
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly ImageRenderer imageRenderer;
         private readonly IPdfRenderer pdfRenderer;
         private readonly IComponentInstallPrompt componentInstallPrompt;
 
-        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ThumbnailRenderer thumbnailRenderer, ScannedImageRenderer scannedImageRenderer, IPdfRenderer pdfRenderer, IComponentInstallPrompt componentInstallPrompt)
+        public PdfSharpImporter(IErrorOutput errorOutput, IPdfPasswordProvider pdfPasswordProvider, ImageRenderer imageRenderer, IPdfRenderer pdfRenderer, IComponentInstallPrompt componentInstallPrompt)
         {
             this.errorOutput = errorOutput;
             this.pdfPasswordProvider = pdfPasswordProvider;
-            this.thumbnailRenderer = thumbnailRenderer;
-            this.scannedImageRenderer = scannedImageRenderer;
+            this.imageRenderer = imageRenderer;
             this.pdfRenderer = pdfRenderer;
             this.componentInstallPrompt = componentInstallPrompt;
         }
@@ -192,7 +190,7 @@ namespace NAPS2.ImportExport.Pdf
             var image = new ScannedImage(new PdfFileStorage(pdfPath));
             if (!importParams.NoThumbnails || importParams.DetectPatchCodes)
             {
-                using (var bitmap = await scannedImageRenderer.Render(image))
+                using (var bitmap = await imageRenderer.Render(image))
                 {
                     if (!importParams.NoThumbnails)
                     {

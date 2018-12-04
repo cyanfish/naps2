@@ -20,8 +20,8 @@ namespace NAPS2.WinForms
         private bool guideExists;
         private Point guideStart, guideEnd;
 
-        public FRotate(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
-            : base(changeTracker, scannedImageRenderer)
+        public FRotate(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+            : base(changeTracker, bitmapRenderer)
         {
             InitializeComponent();
             txtAngle.Text += '\u00B0';

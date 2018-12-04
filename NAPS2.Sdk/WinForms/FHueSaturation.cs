@@ -10,8 +10,8 @@ namespace NAPS2.WinForms
 {
     partial class FHueSaturation : ImageForm
     {
-        public FHueSaturation(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
-            : base(changeTracker, scannedImageRenderer)
+        public FHueSaturation(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+            : base(changeTracker, bitmapRenderer)
         {
             InitializeComponent();
             ActiveControl = txtHue;

@@ -10,8 +10,8 @@ namespace NAPS2.WinForms
 {
     partial class FSharpen : ImageForm
     {
-        public FSharpen(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
-            : base(changeTracker, scannedImageRenderer)
+        public FSharpen(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
+            : base(changeTracker, bitmapRenderer)
         {
             InitializeComponent();
             ActiveControl = txtSharpen;

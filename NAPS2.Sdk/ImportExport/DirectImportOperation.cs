@@ -14,11 +14,11 @@ namespace NAPS2.ImportExport
 {
     public class DirectImportOperation : OperationBase
     {
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly ImageRenderer imageRenderer;
 
-        public DirectImportOperation(ScannedImageRenderer scannedImageRenderer)
+        public DirectImportOperation(ImageRenderer imageRenderer)
         {
-            this.scannedImageRenderer = scannedImageRenderer;
+            this.imageRenderer = imageRenderer;
 
             AllowCancel = true;
             AllowBackground = true;
@@ -50,7 +50,7 @@ namespace NAPS2.ImportExport
                             img.AddTransform(transform);
                         }
                         // TODO: Don't bother, here, in recovery, etc.
-                        img.SetThumbnail(Transform.Perform(await scannedImageRenderer.Render(img), new ThumbnailTransform()));
+                        img.SetThumbnail(Transform.Perform(await imageRenderer.Render(img), new ThumbnailTransform()));
                         imageCallback(img);
 
                         Status.CurrentProgress++;

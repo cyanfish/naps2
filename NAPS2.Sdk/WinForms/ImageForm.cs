@@ -14,7 +14,7 @@ namespace NAPS2.WinForms
     partial class ImageForm : FormBase
     {
         private readonly ChangeTracker changeTracker;
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly BitmapRenderer bitmapRenderer;
 
         protected Bitmap workingImage, workingImage2;
         private bool initComplete;
@@ -29,10 +29,10 @@ namespace NAPS2.WinForms
             InitializeComponent();
         }
 
-        protected ImageForm(ChangeTracker changeTracker, ScannedImageRenderer scannedImageRenderer)
+        protected ImageForm(ChangeTracker changeTracker, BitmapRenderer bitmapRenderer)
         {
             this.changeTracker = changeTracker;
-            this.scannedImageRenderer = scannedImageRenderer;
+            this.bitmapRenderer = bitmapRenderer;
             InitializeComponent();
         }
 
@@ -92,7 +92,7 @@ namespace NAPS2.WinForms
             Size = new Size(600, 600);
 
             var maxDimen = Screen.AllScreens.Max(s => Math.Max(s.WorkingArea.Height, s.WorkingArea.Width));
-            workingImage = ((GdiImage)await scannedImageRenderer.Render(Image, maxDimen * 2)).Bitmap;
+            workingImage = await bitmapRenderer.Render(Image, maxDimen * 2);
             if (closed)
             {
                 workingImage?.Dispose();

@@ -46,16 +46,16 @@ namespace NAPS2.WinForms
         private ToolStripButton tsHueSaturation;
         private ToolStripButton tsBlackWhite;
         private ToolStripButton tsSharpen;
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly BitmapRenderer bitmapRenderer;
         private readonly KeyboardShortcutManager ksm;
         private readonly OperationProgress operationProgress;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, BitmapRenderer scannedImageRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
             this.exportHelper = exportHelper;
-            this.scannedImageRenderer = scannedImageRenderer;
+            this.bitmapRenderer = bitmapRenderer;
             this.ksm = ksm;
             this.operationProgress = operationProgress;
             InitializeComponent();
@@ -109,8 +109,7 @@ namespace NAPS2.WinForms
         {
             tiffViewer1.Image?.Dispose();
             tiffViewer1.Image = null;
-            var newImage = await scannedImageRenderer.Render(ImageList.Images[ImageIndex]);
-            tiffViewer1.Image = ((GdiImage)newImage).Bitmap;
+            tiffViewer1.Image = await bitmapRenderer.Render(ImageList.Images[ImageIndex]);
         }
 
         protected override void Dispose(bool disposing)

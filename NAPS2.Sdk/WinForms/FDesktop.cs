@@ -53,7 +53,8 @@ namespace NAPS2.WinForms
         private readonly KeyboardShortcutManager ksm;
         private readonly ThumbnailRenderer thumbnailRenderer;
         private readonly WinFormsExportHelper exportHelper;
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly BitmapRenderer bitmapRenderer;
+        private readonly ImageRenderer imageRenderer;
         private readonly NotificationManager notify;
         private readonly CultureInitializer cultureInitializer;
         private readonly IWorkerServiceFactory workerServiceFactory;
@@ -74,7 +75,7 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
+        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
         {
             this.stringWrapper = stringWrapper;
             this.recoveryManager = recoveryManager;
@@ -88,7 +89,8 @@ namespace NAPS2.WinForms
             this.ksm = ksm;
             this.thumbnailRenderer = thumbnailRenderer;
             this.exportHelper = exportHelper;
-            this.scannedImageRenderer = scannedImageRenderer;
+            this.bitmapRenderer = bitmapRenderer;
+            this.imageRenderer = imageRenderer;
             this.notify = notify;
             this.cultureInitializer = cultureInitializer;
             this.workerServiceFactory = workerServiceFactory;
@@ -1703,7 +1705,7 @@ namespace NAPS2.WinForms
             }
             if (includeBitmap)
             {
-                using (var firstBitmap = ((GdiImage)await scannedImageRenderer.Render(imageList[0])).Bitmap)
+                using (var firstBitmap = await bitmapRenderer.Render(imageList[0]))
                 {
                     ido.SetData(DataFormats.Bitmap, true, new Bitmap(firstBitmap));
                     ido.SetData(DataFormats.Rtf, true, await RtfEncodeImages(firstBitmap, imageList));
@@ -1724,7 +1726,7 @@ namespace NAPS2.WinForms
             }
             foreach (var img in images.Skip(1))
             {
-                using (var bitmap = ((GdiImage)await scannedImageRenderer.Render(img)).Bitmap)
+                using (var bitmap = await bitmapRenderer.Render(img))
                 {
                     // TODO: Is this the right format?
                     if (!AppendRtfEncodedImage(bitmap, bitmap.RawFormat, sb, true))
@@ -1861,7 +1863,7 @@ namespace NAPS2.WinForms
                         {
                             var thumb = worker != null
                                 ? StorageManager.ImageFactory.Decode(new MemoryStream(worker.Service.RenderThumbnail(snapshot, thumbnailList1.ThumbnailSize.Height)), ".jpg")
-                                : scannedImageRenderer.Render(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
+                                : imageRenderer.Render(snapshot, thumbnailList1.ThumbnailSize.Height).Result;
 
                             if (!ThumbnailStillNeedsRendering(next))
                             {

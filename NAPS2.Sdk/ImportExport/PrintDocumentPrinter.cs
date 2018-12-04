@@ -16,11 +16,11 @@ namespace NAPS2.ImportExport
 {
     public class PrintDocumentPrinter : IScannedImagePrinter
     {
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly ImageRenderer imageRenderer;
 
-        public PrintDocumentPrinter(ScannedImageRenderer scannedImageRenderer)
+        public PrintDocumentPrinter(ImageRenderer imageRenderer)
         {
-            this.scannedImageRenderer = scannedImageRenderer;
+            this.imageRenderer = imageRenderer;
         }
 
         public async Task<bool> PromptToPrint(List<ScannedImage> images, List<ScannedImage> selectedImages)
@@ -82,7 +82,7 @@ namespace NAPS2.ImportExport
                     int i = 0;
                     printDocument.PrintPage += (sender, e) =>
                     {
-                        var image = Task.Factory.StartNew(() => scannedImageRenderer.Render(imagesToPrint[i])).Unwrap().Result;
+                        var image = Task.Factory.StartNew(() => imageRenderer.Render(imagesToPrint[i])).Unwrap().Result;
                         try
                         {
                             var pb = e.PageBounds;

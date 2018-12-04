@@ -12,23 +12,23 @@ using NAPS2.Lang.Resources;
 using NAPS2.Logging;
 using NAPS2.Operation;
 using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.ImportExport.Images
 {
+    // TODO: Avoid GDI dependency
     public class SaveImagesOperation : OperationBase
     {
         private readonly ImageSettingsContainer imageSettingsContainer;
         private readonly IOverwritePrompt overwritePrompt;
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly BitmapRenderer bitmapRenderer;
         private readonly TiffHelper tiffHelper;
 
-        public SaveImagesOperation(ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, ScannedImageRenderer scannedImageRenderer, TiffHelper tiffHelper)
+        public SaveImagesOperation(ImageSettingsContainer imageSettingsContainer, IOverwritePrompt overwritePrompt, BitmapRenderer bitmapRenderer, TiffHelper tiffHelper)
         {
             this.imageSettingsContainer = imageSettingsContainer;
             this.overwritePrompt = overwritePrompt;
-            this.scannedImageRenderer = scannedImageRenderer;
+            this.bitmapRenderer = bitmapRenderer;
             this.tiffHelper = tiffHelper;
 
             ProgressTitle = MiscResources.SaveImagesProgress;
@@ -175,14 +175,14 @@ namespace NAPS2.ImportExport.Images
                 var encoderParams = new EncoderParameters(1);
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
                 // TODO: Something more generic
-                using (Bitmap bitmap = ((GdiImage) await scannedImageRenderer.Render(snapshot)).Bitmap)
+                using (Bitmap bitmap = await bitmapRenderer.Render(snapshot))
                 {
                     bitmap.Save(path, encoder, encoderParams);
                 }
             }
             else
             {
-                using (Bitmap bitmap = ((GdiImage)await scannedImageRenderer.Render(snapshot)).Bitmap)
+                using (Bitmap bitmap = await bitmapRenderer.Render(snapshot))
                 {
                     bitmap.Save(path, format);
                 }
