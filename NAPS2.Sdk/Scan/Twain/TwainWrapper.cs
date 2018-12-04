@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -23,8 +21,7 @@ namespace NAPS2.Scan.Twain
     public class TwainWrapper
     {
         private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
-
-        private readonly IFormFactory formFactory;
+        
         private readonly BlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
 
@@ -46,9 +43,14 @@ namespace NAPS2.Scan.Twain
 #endif
         }
 
-        public TwainWrapper(IFormFactory formFactory, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
+        public TwainWrapper()
         {
-            this.formFactory = formFactory;
+            blankDetector = BlankDetector.Default;
+            scannedImageHelper = new ScannedImageHelper();
+        }
+
+        public TwainWrapper(BlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
+        {
             this.blankDetector = blankDetector;
             this.scannedImageHelper = scannedImageHelper;
         }
@@ -118,13 +120,13 @@ namespace NAPS2.Scan.Twain
             }
             if (twainImpl == TwainImpl.Legacy)
             {
-                Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, formFactory, source);
+                Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, source);
                 return;
             }
 
             PlatformInfo.Current.PreferNewDSM = twainImpl != TwainImpl.OldDsm;
             var session = new TwainSession(TwainAppId);
-            var twainForm = Invoker.Current.InvokeGet(() => scanParams.NoUI ? null : formFactory.Create<FTwainGui>());
+            var twainForm = Invoker.Current.InvokeGet(() => scanParams.NoUI ? null : new FTwainGui());
             Exception error = null;
             bool cancel = false;
             DataSource ds = null;

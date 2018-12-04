@@ -54,7 +54,7 @@ namespace NAPS2.Scan.Twain.Legacy
             return result;
         }
 
-        public static void Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, IFormFactory formFactory, ScannedImageSource.Concrete source)
+        public static void Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, ScannedImageSource.Concrete source)
         {
             var tw = new Twain();
             if (!tw.Init(pForm.Handle))
@@ -65,7 +65,7 @@ namespace NAPS2.Scan.Twain.Legacy
             {
                 throw new DeviceNotFoundException();
             }
-            var form = formFactory.Create<FTwainGui>();
+            var form = new FTwainGui();
             var mf = new TwainMessageFilter(settings, tw, form);
             form.ShowDialog(pForm);
             foreach (var b in mf.Bitmaps)

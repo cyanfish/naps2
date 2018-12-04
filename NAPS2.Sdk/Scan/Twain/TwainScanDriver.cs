@@ -13,13 +13,17 @@ namespace NAPS2.Scan.Twain
     {
         public const string DRIVER_NAME = "twain";
         
-        private readonly IWorkerServiceFactory workerServiceFactory;
         private readonly TwainWrapper twainWrapper;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public TwainScanDriver(IWorkerServiceFactory workerServiceFactory, TwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper)
+        public TwainScanDriver()
         {
-            this.workerServiceFactory = workerServiceFactory;
+            twainWrapper = new TwainWrapper();
+            scannedImageHelper = new ScannedImageHelper();
+        }
+
+        public TwainScanDriver(TwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper)
+        {
             this.twainWrapper = twainWrapper;
             this.scannedImageHelper = scannedImageHelper;
         }
@@ -41,7 +45,7 @@ namespace NAPS2.Scan.Twain
             var twainImpl = ScanProfile?.TwainImpl ?? TwainImpl.Default;
             if (UseWorker)
             {
-                using(var worker = workerServiceFactory.Create())
+                using(var worker = WorkerManager.Factory.Create())
                 {
                     return worker.Service.TwainGetDeviceList(twainImpl);
                 }
@@ -55,7 +59,7 @@ namespace NAPS2.Scan.Twain
             {
                 if (UseWorker)
                 {
-                    using (var worker = workerServiceFactory.Create())
+                    using (var worker = WorkerManager.Factory.Create())
                     {
                         worker.Callback.ImageCallback += (img, tempPath) =>
                         {
