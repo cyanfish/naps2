@@ -61,8 +61,7 @@ namespace NAPS2.DI.Modules
             Bind<EmailSettingsContainer>().ToSelf().InSingletonScope();
 
             // Host
-            Bind<IWorkerServiceFactory>().To<NinjectWorkerServiceFactory>();
-            Bind<WorkerContext>().ToMethod(ctx => WorkerManager.NextWorker());
+            Bind<IWorkerServiceFactory>().ToMethod(ctx => WorkerManager.Factory);
 
             // Misc
             Bind<IFormFactory>().To<NinjectFormFactory>();
@@ -71,7 +70,7 @@ namespace NAPS2.DI.Modules
             Bind<ILogger>().To<NLogLogger>().InSingletonScope();
             Bind<ChangeTracker>().ToSelf().InSingletonScope();
             Bind<StillImage>().ToSelf().InSingletonScope();
-            Bind<IBlankDetector>().To<ThresholdBlankDetector>();
+            Bind<BlankDetector>().To<ThresholdBlankDetector>();
             Bind<IAutoSave>().To<AutoSave>();
 
             StaticConfiguration.Initialize();

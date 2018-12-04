@@ -17,13 +17,6 @@ namespace NAPS2.Scan
     /// </summary>
     public abstract class ScanDriverBase : IScanDriver
     {
-        private readonly IFormFactory formFactory;
-
-        protected ScanDriverBase(IFormFactory formFactory)
-        {
-            this.formFactory = formFactory;
-        }
-
         public abstract string DriverName { get; }
 
         public abstract bool IsSupported { get; }
@@ -71,8 +64,10 @@ namespace NAPS2.Scan
                 throw new NoDevicesFoundException();
             }
 
-            var form = formFactory.Create<FSelectDevice>();
-            form.DeviceList = deviceList;
+            var form = new FSelectDevice
+            {
+                DeviceList = deviceList
+            };
             form.ShowDialog();
             return form.SelectedDevice;
         }
@@ -121,7 +116,7 @@ namespace NAPS2.Scan
             {
                 throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan() without NoUI.");
             }
-            
+
             var source = new ScannedImageSource.Concrete();
             Task.Factory.StartNew(async () =>
             {

@@ -2,25 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using NAPS2.Recovery;
 using NAPS2.Images.Storage;
-using NAPS2.Worker;
-using Ninject;
 
-namespace NAPS2.DI
+namespace NAPS2.Worker
 {
-    public class NinjectWorkerServiceFactory : IWorkerServiceFactory
+    public class WorkerServiceFactory : IWorkerServiceFactory
     {
-        private readonly IKernel kernel;
-
-        public NinjectWorkerServiceFactory(IKernel kernel)
-        {
-            this.kernel = kernel;
-        }
-
         public WorkerContext Create()
         {
-            var worker = kernel.Get<WorkerContext>();
+            var worker = WorkerManager.NextWorker();
             try
             {
                 // TODO: Simplify
@@ -29,7 +19,7 @@ namespace NAPS2.DI
             catch (EndpointNotFoundException)
             {
                 // Retry once
-                worker = kernel.Get<WorkerContext>();
+                worker = WorkerManager.NextWorker();
                 worker.Service.Init(((RecoveryStorageManager)FileStorageManager.Current).RecoveryFolderPath);
             }
             return worker;

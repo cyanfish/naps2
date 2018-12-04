@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Logging;
-using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Images;
 using NAPS2.Util;
@@ -23,7 +20,6 @@ namespace NAPS2.ClientServer
         private readonly IFormFactory formFactory;
 
         public ProxiedScanDriver(ClientContextFactory clientContextFactory, IFormFactory formFactory, ScannedImageHelper scannedImageHelper)
-            : base(formFactory)
         {
             this.clientContextFactory = clientContextFactory;
             this.formFactory = formFactory;

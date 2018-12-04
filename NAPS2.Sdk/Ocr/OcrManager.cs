@@ -11,6 +11,8 @@ namespace NAPS2.Ocr
 
         private static OcrManager _default;
 
+        public static bool HasDefault => _default != null;
+
         public static OcrManager Default
         {
             // TODO: Verify package info

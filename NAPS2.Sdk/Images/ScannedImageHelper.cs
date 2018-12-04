@@ -102,18 +102,30 @@ namespace NAPS2.Images
             }
             return tempFilePath;
         }
-
-        private readonly IOperationFactory operationFactory;
+        
         private readonly IOperationProgress operationProgress;
         private readonly OcrRequestQueue ocrRequestQueue;
-        private readonly OcrManager ocrManager;
+        private readonly BlankDetector blankDetector;
 
-        public ScannedImageHelper(IOperationFactory operationFactory, IOperationProgress operationProgress, OcrRequestQueue ocrRequestQueue, OcrManager ocrManager)
+        public ScannedImageHelper() : this(new StubOperationProgress())
         {
-            this.operationFactory = operationFactory;
+        }
+
+        public ScannedImageHelper(IOperationProgress operationProgress)
+        {
+            this.operationProgress = operationProgress;
+            if (OcrManager.HasDefault)
+            {
+                ocrRequestQueue = new OcrRequestQueue(OcrManager.Default, operationProgress);
+            }
+            blankDetector = BlankDetector.Default;
+        }
+
+        public ScannedImageHelper(IOperationProgress operationProgress, OcrRequestQueue ocrRequestQueue, BlankDetector blankDetector)
+        {
             this.operationProgress = operationProgress;
             this.ocrRequestQueue = ocrRequestQueue;
-            this.ocrManager = ocrManager;
+            this.blankDetector = blankDetector;
         }
 
         public IImage PostProcessStep1(IImage output, ScanProfile profile, bool supportsNativeUI = true)
@@ -123,8 +135,7 @@ namespace NAPS2.Images
             {
                 scaleFactor = profile.AfterScanScale.ToIntScaleFactor();
             }
-            // TODO: Scale
-            var result = output;//ImageScaleHelper.ScaleImage(output, scaleFactor);
+            var result = Transform.Perform(output, new ScaleTransform(scaleFactor));
 
             if ((!profile.UseNativeUI || !supportsNativeUI) && (profile.ForcePageSize || profile.ForcePageSizeCrop))
             {
@@ -202,7 +213,7 @@ namespace NAPS2.Images
             }
             if (profile.AutoDeskew)
             {
-                var op = operationFactory.Create<DeskewOperation>();
+                var op = new DeskewOperation();
                 if (op.Start(new[] { scannedImage }))
                 {
                     operationProgress.ShowProgress(op);
@@ -217,7 +228,11 @@ namespace NAPS2.Images
 
         public bool ShouldDoBackgroundOcr(ScanParams scanParams)
         {
-            bool ocrEnabled = ocrManager.DefaultParams != null;
+            if (ocrRequestQueue == null)
+            {
+                return false;
+            }
+            bool ocrEnabled = OcrManager.Default.DefaultParams != null;
             bool afterScanning = AppConfig.Current.OcrState == OcrState.Enabled && AppConfig.Current.OcrDefaultAfterScanning
                                  || AppConfig.Current.OcrState == OcrState.UserConfig &&
                                  (UserConfig.Current.OcrAfterScanning ?? AppConfig.Current.OcrDefaultAfterScanning);
@@ -261,6 +276,24 @@ namespace NAPS2.Images
             {
                 image = Transform.Perform(image, transform);
                 scannedImage.SetThumbnail(Transform.Perform(image, new ThumbnailTransform()));
+            }
+        }
+
+        public ScannedImage PostProcess(IImage output, int pageNumber, ScanProfile scanProfile, ScanParams scanParams)
+        {
+            using (var result = PostProcessStep1(output, scanProfile))
+            {
+                if (blankDetector.ExcludePage(result, scanProfile))
+                {
+                    return null;
+                }
+
+                ScanBitDepth bitDepth = scanProfile.UseNativeUI ? ScanBitDepth.C24Bit : scanProfile.BitDepth;
+                var image = new ScannedImage(result, bitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
+                string tempPath = SaveForBackgroundOcr(result, scanParams);
+                RunBackgroundOcr(image, scanParams, tempPath);
+                return image;
             }
         }
     }

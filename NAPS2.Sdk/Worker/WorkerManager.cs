@@ -119,5 +119,14 @@ namespace NAPS2.Worker
                 StartWorkerService();
             }
         }
+
+        // TODO: This should not be set by default
+        private static IWorkerServiceFactory _factory = new WorkerServiceFactory(); 
+
+        public static IWorkerServiceFactory Factory
+        {
+            get => _factory;
+            set => _factory = value ?? throw new ArgumentNullException(nameof(value));
+        }
     }
 }

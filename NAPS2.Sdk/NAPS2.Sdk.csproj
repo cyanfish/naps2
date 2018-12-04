@@ -187,6 +187,7 @@
     <Compile Include="Ocr\Tesseract304Engine.cs" />
     <Compile Include="Ocr\Tesseract302Engine.cs" />
     <Compile Include="Operation\OperationProgressType.cs" />
+    <Compile Include="Operation\StubOperationProgress.cs" />
     <Compile Include="Platform\ISystemCompat.cs" />
     <Compile Include="Platform\LinuxSystemCompat.cs" />
     <Compile Include="Platform\PlatformCompat.cs" />
@@ -361,7 +362,7 @@
     <Compile Include="Scan\Batch\BatchScanPerformer.cs" />
     <Compile Include="Scan\Batch\BatchSettings.cs" />
     <Compile Include="Scan\Exceptions\NoDuplexSupportException.cs" />
-    <Compile Include="Images\IBlankDetector.cs" />
+    <Compile Include="Images\BlankDetector.cs" />
     <Compile Include="Images\ThresholdBlankDetector.cs" />
     <Compile Include="Images\Transforms\BlackWhiteTransform.cs" />
     <Compile Include="Images\Transforms\ColorHelper.cs" />
@@ -773,6 +774,7 @@
     <Compile Include="WinForms\WinFormsOverwritePrompt.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Worker\WorkerServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientCreds.resx">

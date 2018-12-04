@@ -13,11 +13,15 @@ namespace NAPS2.Images
 {
     public class DeskewOperation : OperationBase
     {
-        private readonly ScannedImageRenderer scannedImageRenderer;
+        private readonly ImageRenderer imageRenderer;
 
-        public DeskewOperation(ScannedImageRenderer scannedImageRenderer)
+        public DeskewOperation() : this(new ImageRenderer())
         {
-            this.scannedImageRenderer = scannedImageRenderer;
+        }
+
+        public DeskewOperation(ImageRenderer imageRenderer)
+        {
+            this.imageRenderer = imageRenderer;
 
             AllowCancel = true;
             AllowBackground = true;
@@ -42,7 +46,7 @@ namespace NAPS2.Images
                         return null;
                     }
                     memoryLimitingSem.WaitOne();
-                    var bitmap = scannedImageRenderer.Render(img).Result;
+                    var bitmap = imageRenderer.Render(img).Result;
                     try
                     {
                         if (CancelToken.IsCancellationRequested)

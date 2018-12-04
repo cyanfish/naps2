@@ -15,7 +15,18 @@ namespace NAPS2.Images
         public async Task<List<ScannedImage>> ToList()
         {
             var list = new List<ScannedImage>();
-            await ForEach(image => list.Add(image));
+            try
+            {
+                await ForEach(image => list.Add(image));
+            }
+            catch (Exception)
+            {
+                foreach (var image in list)
+                {
+                    image.Dispose();
+                }
+                throw;
+            }
             return list;
         }
 
@@ -25,6 +36,15 @@ namespace NAPS2.Images
             while ((image = await Next()) != null)
             {
                 action(image);
+            }
+        }
+
+        public async Task ForEach(Func<ScannedImage, Task> action)
+        {
+            ScannedImage image;
+            while ((image = await Next()) != null)
+            {
+                await action(image);
             }
         }
 

@@ -9,6 +9,7 @@ using NAPS2.Util;
 
 namespace NAPS2.WinForms
 {
+    // TODO: Remove UserConfig dependency from reusable forms
     public class FormBase : Form, IInvoker
     {
         private bool loaded;
@@ -34,18 +35,7 @@ namespace NAPS2.WinForms
 
         #region Helper Properties
 
-        private List<FormState> FormStates
-        {
-            get
-            {
-                if (UserConfig.Manager == null)
-                {
-                    // Should only occur with the designer
-                    return new List<FormState>();
-                }
-                return UserConfig.Current.FormStates;
-            }
-        }
+        private List<FormState> FormStates => UserConfig.Current.FormStates;
 
         private FormState FormState
         {

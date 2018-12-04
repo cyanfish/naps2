@@ -25,7 +25,7 @@ namespace NAPS2.Scan.Twain
         private static readonly TWIdentity TwainAppId = TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
 
         private readonly IFormFactory formFactory;
-        private readonly IBlankDetector blankDetector;
+        private readonly BlankDetector blankDetector;
         private readonly ScannedImageHelper scannedImageHelper;
 
         static TwainWrapper()
@@ -46,7 +46,7 @@ namespace NAPS2.Scan.Twain
 #endif
         }
 
-        public TwainWrapper(IFormFactory formFactory, IBlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
+        public TwainWrapper(IFormFactory formFactory, BlankDetector blankDetector, ScannedImageHelper scannedImageHelper)
         {
             this.formFactory = formFactory;
             this.blankDetector = blankDetector;

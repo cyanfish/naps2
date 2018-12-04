@@ -8,22 +8,28 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
 using NAPS2.Scan.Wia.Native;
 using NAPS2.Util;
-using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Wia
 {
     public class WiaScanDriver : ScanDriverBase
     {
         public const string DRIVER_NAME = "wia";
-
-        private readonly IOperationFactory operationFactory;
+        
         private readonly IOperationProgress operationProgress;
+        private readonly ScannedImageHelper scannedImageHelper;
 
-        public WiaScanDriver(IFormFactory formFactory, IOperationFactory operationFactory, IOperationProgress operationProgress)
-            : base(formFactory)
+        public WiaScanDriver() : this(new StubOperationProgress())
         {
-            this.operationFactory = operationFactory;
+        }
+
+        public WiaScanDriver(IOperationProgress operationProgress) : this(operationProgress, new ScannedImageHelper(operationProgress))
+        {
+        }
+
+        public WiaScanDriver(IOperationProgress operationProgress, ScannedImageHelper scannedImageHelper)
+        {
             this.operationProgress = operationProgress;
+            this.scannedImageHelper = scannedImageHelper;
         }
 
         public override string DriverName => DRIVER_NAME;
@@ -69,7 +75,7 @@ namespace NAPS2.Scan.Wia
 
         protected override async Task ScanInternal(ScannedImageSource.Concrete source)
         {
-            var op = operationFactory.Create<WiaScanOperation>();
+            var op = new WiaScanOperation(scannedImageHelper);
             using (CancelToken.Register(op.Cancel))
             {
                 op.Start(ScanProfile, ScanParams, DialogParent, source);

@@ -12,7 +12,8 @@ namespace NAPS2.Images.Storage
         static GdiImage()
         {
             StorageManager.RegisterConverters(new GdiConverters());
-            Transform.RegisterTransformers(typeof(GdiImage), new GdiTransformers());
+            StorageManager.RegisterImageFactory<GdiImage>(new GdiImageFactory());
+            Transform.RegisterTransformers<GdiImage>(new GdiTransformers());
         }
 
         public GdiImage(Bitmap bitmap)

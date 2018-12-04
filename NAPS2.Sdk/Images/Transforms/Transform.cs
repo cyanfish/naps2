@@ -22,14 +22,9 @@ namespace NAPS2.Images.Transforms
         /// Enumerates all methods on transformerObj that have a TransformerAttribute and registers them
         /// for future use in Transform.Perform and Transform.PerformAll with the specified image type.
         /// </summary>
-        /// <param name="imageType"></param>
         /// <param name="transformerObj"></param>
-        public static void RegisterTransformers(Type imageType, object transformerObj)
+        public static void RegisterTransformers<TImage>(object transformerObj) where TImage : IImage
         {
-            if (!typeof(IImage).IsAssignableFrom(imageType))
-            {
-                throw new ArgumentException($"The image type must implement {nameof(IImage)}.", nameof(imageType));
-            }
             foreach (var method in transformerObj.GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(TransformerAttribute), true).Any()))
             {
                 var methodParams = method.GetParameters();
@@ -37,10 +32,10 @@ namespace NAPS2.Images.Transforms
                 var transformType = methodParams[1].ParameterType;
                 if (methodParams.Length == 2 &&
                     typeof(IImage).IsAssignableFrom(method.ReturnType) &&
-                    storageType.IsAssignableFrom(imageType) &&
+                    storageType.IsAssignableFrom(typeof(TImage)) &&
                     typeof(Transform).IsAssignableFrom(transformType))
                 {
-                    Transformers.Add((imageType, transformType), (transformerObj, method));
+                    Transformers[(typeof(TImage), transformType)] = (transformerObj, method);
                 }
             }
         }

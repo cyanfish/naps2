@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using NAPS2.Images.Storage;
@@ -9,7 +7,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Images
 {
-    public class ThresholdBlankDetector : IBlankDetector
+    public class ThresholdBlankDetector : BlankDetector
     {
         // If the pixel value (0-255) >= white_threshold, then it counts as a white pixel.
         private const int WHITE_THRESHOLD_MIN = 1;
@@ -18,7 +16,7 @@ namespace NAPS2.Images
         private const double COVERAGE_THRESHOLD_MIN = 0.00;
         private const double COVERAGE_THRESHOLD_MAX = 0.01;
 
-        public bool IsBlank(IImage image, int whiteThresholdNorm, int coverageThresholdNorm)
+        public override bool IsBlank(IImage image, int whiteThresholdNorm, int coverageThresholdNorm)
         {
             if (image.PixelFormat == StoragePixelFormat.BW1)
             {
@@ -71,7 +69,7 @@ namespace NAPS2.Images
             return coverage < coverageThreshold;
         }
 
-        public bool ExcludePage(IImage image, ScanProfile scanProfile)
+        public override bool ExcludePage(IImage image, ScanProfile scanProfile)
         {
             return scanProfile.ExcludeBlankPages && IsBlank(image, scanProfile.BlankPageWhiteThreshold, scanProfile.BlankPageCoverageThreshold);
         }

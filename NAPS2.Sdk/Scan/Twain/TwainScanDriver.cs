@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using NAPS2.Platform;
 using NAPS2.Images;
 using NAPS2.Util;
-using NAPS2.WinForms;
 using NAPS2.Worker;
 
 namespace NAPS2.Scan.Twain
@@ -18,8 +17,7 @@ namespace NAPS2.Scan.Twain
         private readonly TwainWrapper twainWrapper;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public TwainScanDriver(IWorkerServiceFactory workerServiceFactory, TwainWrapper twainWrapper, IFormFactory formFactory, ScannedImageHelper scannedImageHelper)
-            : base(formFactory)
+        public TwainScanDriver(IWorkerServiceFactory workerServiceFactory, TwainWrapper twainWrapper, ScannedImageHelper scannedImageHelper)
         {
             this.workerServiceFactory = workerServiceFactory;
             this.twainWrapper = twainWrapper;

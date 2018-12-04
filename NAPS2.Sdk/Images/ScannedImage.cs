@@ -17,7 +17,7 @@ namespace NAPS2.Images
             BackingStorageType = typeof(TStorage);
         }
 
-        public static Type BackingStorageType { get; private set; } = typeof(IImage);
+        public static Type BackingStorageType { get; private set; } = typeof(IStorage);
 
         private IImage thumbnail;
         private int thumbnailState;
