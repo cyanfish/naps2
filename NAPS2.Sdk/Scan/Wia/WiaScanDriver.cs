@@ -15,18 +15,16 @@ namespace NAPS2.Scan.Wia
     {
         public const string DRIVER_NAME = "wia";
         
-        private readonly IOperationProgress operationProgress;
+        private readonly OperationProgress operationProgress;
         private readonly ScannedImageHelper scannedImageHelper;
 
-        public WiaScanDriver() : this(new StubOperationProgress())
+        public WiaScanDriver()
         {
+            operationProgress = OperationProgress.Default;
+            scannedImageHelper = new ScannedImageHelper();
         }
 
-        public WiaScanDriver(IOperationProgress operationProgress) : this(operationProgress, new ScannedImageHelper(operationProgress))
-        {
-        }
-
-        public WiaScanDriver(IOperationProgress operationProgress, ScannedImageHelper scannedImageHelper)
+        public WiaScanDriver(OperationProgress operationProgress, ScannedImageHelper scannedImageHelper)
         {
             this.operationProgress = operationProgress;
             this.scannedImageHelper = scannedImageHelper;

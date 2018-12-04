@@ -24,9 +24,9 @@ namespace NAPS2.ImportExport
         private readonly OcrManager ocrManager;
         private readonly IErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
-        private readonly IOperationProgress operationProgress;
+        private readonly OperationProgress operationProgress;
 
-        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, DialogHelper dialogHelper, IOperationProgress operationProgress)
+        public AutoSave(IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IErrorOutput errorOutput, DialogHelper dialogHelper, OperationProgress operationProgress)
         {
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;

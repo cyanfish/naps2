@@ -8,10 +8,10 @@ namespace NAPS2.WinForms
 {
     public partial class OperationProgressNotifyWidget : NotifyWidgetBase
     {
-        private readonly IOperationProgress operationProgress;
+        private readonly OperationProgress operationProgress;
         private readonly IOperation op;
 
-        public OperationProgressNotifyWidget(IOperationProgress operationProgress, IOperation op)
+        public OperationProgressNotifyWidget(OperationProgress operationProgress, IOperation op)
         {
             InitializeComponent();
 

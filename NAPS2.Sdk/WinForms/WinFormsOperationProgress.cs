@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
@@ -9,7 +8,7 @@ using NAPS2.Operation;
 
 namespace NAPS2.WinForms
 {
-    public class WinFormsOperationProgress : IOperationProgress
+    public class WinFormsOperationProgress : OperationProgress
     {
         private readonly IFormFactory formFactory;
         private readonly NotificationManager notificationManager;
@@ -22,7 +21,7 @@ namespace NAPS2.WinForms
             this.notificationManager = notificationManager;
         }
 
-        public void Attach(IOperation op)
+        public override void Attach(IOperation op)
         {
             lock (this)
             {
@@ -35,7 +34,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void ShowProgress(IOperation op)
+        public override void ShowProgress(IOperation op)
         {
             if (UserConfig.Current.BackgroundOperations.Contains(op.GetType().Name))
             {
@@ -47,7 +46,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void ShowModalProgress(IOperation op)
+        public override void ShowModalProgress(IOperation op)
         {
             Attach(op);
 
@@ -67,7 +66,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void ShowBackgroundProgress(IOperation op)
+        public override void ShowBackgroundProgress(IOperation op)
         {
             Attach(op);
 
@@ -80,7 +79,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar)
+        public override void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar)
         {
             var status = op.Status ?? new OperationStatus();
             textLabel.Text = status.StatusText;
@@ -119,7 +118,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public List<IOperation> ActiveOperations
+        public override List<IOperation> ActiveOperations
         {
             get
             {

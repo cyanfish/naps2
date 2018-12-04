@@ -48,9 +48,9 @@ namespace NAPS2.WinForms
         private ToolStripButton tsSharpen;
         private readonly ScannedImageRenderer scannedImageRenderer;
         private readonly KeyboardShortcutManager ksm;
-        private readonly IOperationProgress operationProgress;
+        private readonly OperationProgress operationProgress;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, KeyboardShortcutManager ksm, IOperationProgress operationProgress)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, ScannedImageRenderer scannedImageRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;

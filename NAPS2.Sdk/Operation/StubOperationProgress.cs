@@ -5,26 +5,26 @@ using System.Windows.Forms;
 
 namespace NAPS2.Operation
 {
-    public class StubOperationProgress : IOperationProgress
+    public class StubOperationProgress : OperationProgress
     {
-        public void Attach(IOperation op)
+        public override void Attach(IOperation op)
         {
         }
 
-        public void ShowProgress(IOperation op)
+        public override void ShowProgress(IOperation op)
         {
         }
 
-        public void ShowModalProgress(IOperation op)
+        public override void ShowModalProgress(IOperation op)
         {
         }
 
-        public void ShowBackgroundProgress(IOperation op)
+        public override void ShowBackgroundProgress(IOperation op)
         {
         }
 
-        public void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar) => throw new NotSupportedException();
+        public override void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar) => throw new NotSupportedException();
 
-        public List<IOperation> ActiveOperations => throw new NotSupportedException();
+        public override List<IOperation> ActiveOperations => throw new NotSupportedException();
     }
 }

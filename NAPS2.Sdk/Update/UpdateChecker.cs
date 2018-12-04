@@ -21,9 +21,9 @@ namespace NAPS2.Update
 #endif
 
         private readonly IOperationFactory operationFactory;
-        private readonly IOperationProgress operationProgress;
+        private readonly OperationProgress operationProgress;
 
-        public UpdateChecker(IOperationFactory operationFactory, IOperationProgress operationProgress)
+        public UpdateChecker(IOperationFactory operationFactory, OperationProgress operationProgress)
         {
             this.operationFactory = operationFactory;
             this.operationProgress = operationProgress;

@@ -13,17 +13,29 @@ namespace NAPS2.Ocr
 {
     public class OcrRequestQueue
     {
+        private static OcrRequestQueue _default;
+
+        public static OcrRequestQueue Default
+        {
+            get => _default ?? (_default = new OcrRequestQueue());
+            set => _default = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
         private readonly Dictionary<OcrRequestParams, OcrRequest> requestCache = new Dictionary<OcrRequestParams, OcrRequest>();
-        private readonly Semaphore queueWaitHandle = new Semaphore(0, Int32.MaxValue);
+        private readonly Semaphore queueWaitHandle = new Semaphore(0, int.MaxValue);
         private List<Task> workerTasks = new List<Task>();
         private CancellationTokenSource workerCts = new CancellationTokenSource();
 
         private readonly OcrManager ocrManager;
-        private readonly IOperationProgress operationProgress;
+        private readonly OperationProgress operationProgress;
 
         private OcrOperation currentOp;
 
-        public OcrRequestQueue(OcrManager ocrManager, IOperationProgress operationProgress)
+        public OcrRequestQueue() : this(OcrManager.Default, OperationProgress.Default)
+        {
+        }
+
+        public OcrRequestQueue(OcrManager ocrManager, OperationProgress operationProgress)
         {
             this.ocrManager = ocrManager;
             this.operationProgress = operationProgress;
@@ -219,7 +231,7 @@ namespace NAPS2.Ocr
                 while (true)
                 {
                     // Wait for a queued ocr request to become available
-                    WaitHandle.WaitAny(new[] {queueWaitHandle, cts.Token.WaitHandle});
+                    WaitHandle.WaitAny(new[] { queueWaitHandle, cts.Token.WaitHandle });
                     if (cts.IsCancellationRequested)
                     {
                         return;

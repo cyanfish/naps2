@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Operation;
 using NAPS2.Update;
@@ -50,7 +49,7 @@ namespace NAPS2.WinForms
             Show(new DonatePromptNotifyWidget());
         }
 
-        public void OperationProgress(IOperationProgress opModalProgress, IOperation op)
+        public void OperationProgress(OperationProgress opModalProgress, IOperation op)
         {
             Show(new OperationProgressNotifyWidget(opModalProgress, op));
         }

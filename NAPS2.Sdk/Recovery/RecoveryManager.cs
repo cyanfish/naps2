@@ -20,9 +20,9 @@ namespace NAPS2.Recovery
     {
         private readonly IFormFactory formFactory;
         private readonly ScannedImageRenderer scannedImageRenderer;
-        private readonly IOperationProgress operationProgress;
+        private readonly OperationProgress operationProgress;
 
-        public RecoveryManager(IFormFactory formFactory, ScannedImageRenderer scannedImageRenderer, IOperationProgress operationProgress)
+        public RecoveryManager(IFormFactory formFactory, ScannedImageRenderer scannedImageRenderer, OperationProgress operationProgress)
         {
             this.formFactory = formFactory;
             this.scannedImageRenderer = scannedImageRenderer;

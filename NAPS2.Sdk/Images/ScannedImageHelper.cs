@@ -103,25 +103,18 @@ namespace NAPS2.Images
             return tempFilePath;
         }
         
-        private readonly IOperationProgress operationProgress;
+        private readonly OperationProgress operationProgress;
         private readonly OcrRequestQueue ocrRequestQueue;
         private readonly BlankDetector blankDetector;
 
-        public ScannedImageHelper() : this(new StubOperationProgress())
+        public ScannedImageHelper()
         {
-        }
-
-        public ScannedImageHelper(IOperationProgress operationProgress)
-        {
-            this.operationProgress = operationProgress;
-            if (OcrManager.HasDefault)
-            {
-                ocrRequestQueue = new OcrRequestQueue(OcrManager.Default, operationProgress);
-            }
+            operationProgress = OperationProgress.Default;
+            ocrRequestQueue = OcrRequestQueue.Default;
             blankDetector = BlankDetector.Default;
         }
 
-        public ScannedImageHelper(IOperationProgress operationProgress, OcrRequestQueue ocrRequestQueue, BlankDetector blankDetector)
+        public ScannedImageHelper(OperationProgress operationProgress, OcrRequestQueue ocrRequestQueue, BlankDetector blankDetector)
         {
             this.operationProgress = operationProgress;
             this.ocrRequestQueue = ocrRequestQueue;
