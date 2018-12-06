@@ -24,11 +24,8 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Kwaliteit afbeelding</value>
   </data>
-  <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-    <value>Wachten tussen scans (WIA)</value>
-  </data>
-  <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-    <value>Probeer opnieuw na mislukt (WIA)</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Wia Version:</value>
   </data>
   <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
     <value>Bijsnijden naar paginagrootte</value>

@@ -22,7 +22,7 @@
     <value>&amp;Prekliči</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>Uporaba OCR zahteva prenos jezikov, ki jih boste uporabljali pri skeniranju.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>Ocenjena velikost prenosa: {0} MB</value>

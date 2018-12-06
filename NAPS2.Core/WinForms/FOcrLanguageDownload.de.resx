@@ -22,7 +22,7 @@
     <value>&amp;Abbrechen</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>Um die Texterkennung verwenden zu können, müssen die benötigten Sprachen einzeln heruntergeladen werden.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>Geschätzte Download-Größe: {0} MB</value>

@@ -24,11 +24,8 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Attēla kvalitāte</value>
   </data>
-  <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-    <value>Aizture starp skenēšanām (WIA)</value>
-  </data>
-  <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-    <value>Atkārtot ja kļūda (WIA)</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Wia Version:</value>
   </data>
   <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
     <value>Apgriezt līdz lappuses izmēram</value>

@@ -319,7 +319,7 @@
     <value>Download Needed</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>මෙම PDF ගොනුව ලබාගැනීමට අමතර උපාංගයක් අවශ්‍යය. එය දැන්ම බාගත කරන්න ඔබ කැමතිද?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Are you sure you want to cancel the batch scan?</value>
@@ -386,5 +386,11 @@
   </data>
   <data name="ListeningOnPort" xml:space="preserve">
     <value>Listening on port {0}</value>
+  </data>
+  <data name="ScanProgressPage" xml:space="preserve">
+    <value>Scanning page {0}...</value>
+  </data>
+  <data name="AcquiringData" xml:space="preserve">
+    <value>දත්ත ලබාගනිමින් පවතී...</value>
   </data>
 </root>

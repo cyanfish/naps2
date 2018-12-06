@@ -31,7 +31,7 @@
     <value>Подстановка</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>При высоком качестве JPEG (80+) рекомендуется увеличить параметр \"Максимальное качество\" в настройках профиля для получения наилучших результатов сканирования..</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Пропустить запрос на сохранение</value>

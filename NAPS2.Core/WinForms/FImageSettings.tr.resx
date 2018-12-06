@@ -31,7 +31,7 @@
     <value>Yer tutucular</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Yüksek JPEG kalitesi için (80+), ayrıca en iyi sonuçlar için profilinizdeki Resim Kalitesi'ni yükseltin.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Kaydetme istemini atla</value>

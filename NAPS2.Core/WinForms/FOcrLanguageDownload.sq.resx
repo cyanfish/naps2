@@ -22,7 +22,7 @@
     <value>&amp;Anulo</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>Përdorimi i OCR ju kërkon të shkarkoni çdo gjuhë që dëshironi të skanoni.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>Madhësia e vlerësuar e shkarkimit: {0} MB</value>

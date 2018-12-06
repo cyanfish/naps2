@@ -22,7 +22,7 @@
     <value>&amp;Atšaukti</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>Teksto atpažinimo funkcijai reikia atsisiųsti visų reikalingų kalbų paketus.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>Numatomas atsiuntimo dydis: {0} MB</value>

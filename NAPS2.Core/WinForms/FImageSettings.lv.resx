@@ -31,7 +31,7 @@
     <value>Vietrāži</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Ja iestatīta augsta JPEG kvalitāte (80+), paaugstini iestatījumu Attēla kvalitāte arī profilā, lai iegūtu labāko rezultātu.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Izlaist saglabāšanas dialogu</value>

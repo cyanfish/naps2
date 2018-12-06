@@ -150,4 +150,7 @@
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
+  <data name="WiaVersion_Default" xml:space="preserve">
+    <value>Öntanımlı</value>
+  </data>
 </root>

@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblPrompt.Text" xml:space="preserve">
-    <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+    <value>Υπάρχουν {0} εικόνες που σαρώθηκαν στις {1} και ώρα {2} οι οποίες ενδέχεται να μην έχουν αποθηκευτεί. Θέλετε να ανακτηθούν;</value>
   </data>
   <data name="btnRecover.Text" xml:space="preserve">
     <value>&amp;Ανάκτηση</value>

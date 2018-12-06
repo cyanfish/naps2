@@ -22,7 +22,7 @@
     <value>&amp;Прекини</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>Коришћење ОЦР-а захтева да преузмете сваки језик који желите да скенирате.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>Процењена величина преузимања: {0} MB</value>

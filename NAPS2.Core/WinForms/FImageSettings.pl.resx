@@ -31,7 +31,7 @@
     <value>Symbole zastępcze</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Ponadto zwiększ Jakość obrazu w swoim profilu, dla wysokiej jakości JPEG (80+), aby uzyskać najlepsze rezultaty.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Pomiń monit zapisu</value>

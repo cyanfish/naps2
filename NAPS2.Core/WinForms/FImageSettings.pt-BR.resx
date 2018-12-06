@@ -31,7 +31,7 @@
     <value>Substituições</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Para altas qualidades de JPEG (80+), aumente também a Qualidade da Imagem no seu Perfil para obter melhores resultados.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Pular pedido de salvar</value>

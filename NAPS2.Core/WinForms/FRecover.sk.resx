@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblPrompt.Text" xml:space="preserve">
-    <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+    <value>{0} snímkov odskenovaných na {1} v {2} zostalo neuložených a sú obnoviteľné. Obnoviť?</value>
   </data>
   <data name="btnRecover.Text" xml:space="preserve">
     <value>&amp;Obnoviť</value>

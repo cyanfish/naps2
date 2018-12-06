@@ -22,7 +22,7 @@
     <value>&amp;Annulla</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>L'uso dell'OCR richiede che venga scaricata ogni lingua che vuoi far riconoscere.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>Dimensione stimata del download: {0} MB</value>

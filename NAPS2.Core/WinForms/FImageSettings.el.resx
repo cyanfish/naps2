@@ -31,7 +31,7 @@
     <value>Δεσμευτικά Θέσεων (Placeholders)</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Για υψηλές ποιότητες JPEG (80+), η Ποιότητα Εικόνας μπορεί να αυξηθεί από τις ρυθμίσεις προφίλ.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Χωρίς προτροπή αποθήκευσης</value>

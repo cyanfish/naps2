@@ -31,7 +31,7 @@
     <value>Zástupné znaky</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Pro nejlepší výsledky při vysokých kvalitách JPEG (80+) zvyšte ve svém profilu Kvalitu obrázku.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Přeskočit dotaz na uložení</value>
