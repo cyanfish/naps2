@@ -67,6 +67,7 @@ msgid "About"
 msgstr ""
 
 #: FScanProgress.resx$$this.Text$Message
+#: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data"
 msgstr ""
 
@@ -463,6 +464,7 @@ msgstr ""
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
 msgid "Default"
 msgstr ""
 
@@ -473,10 +475,6 @@ msgstr ""
 
 #: FDesktop.resx$tsDeinterleave.Text$Message
 msgid "Deinterleave"
-msgstr ""
-
-#: FAdvancedScanSettings.resx$cbWiaDelayBetweenScans.Text$Message
-msgid "Delay between scans (WIA)"
 msgstr ""
 
 #: FDesktop.resx$ctxDelete.Text$Message
@@ -553,6 +551,7 @@ msgid "Edit"
 msgstr ""
 
 #: FDesktop.resx$tsdEmailPDF.Text$Message
+#: MiscResources.resx$EmailPdf$Message
 msgid "Email PDF"
 msgstr ""
 
@@ -1035,6 +1034,7 @@ msgid "Previous"
 msgstr ""
 
 #: FDesktop.resx$tsPrint.Text$Message
+#: MiscResources.resx$Print$Message
 msgid "Print"
 msgstr ""
 
@@ -1108,10 +1108,6 @@ msgstr ""
 msgid "Restore Defaults"
 msgstr ""
 
-#: FAdvancedScanSettings.resx$cbWiaRetryOnFailure.Text$Message
-msgid "Retry on failure (WIA)"
-msgstr ""
-
 #: FDesktop.resx$tsReverse.Text$Message
 msgid "Reverse"
 msgstr ""
@@ -1157,6 +1153,7 @@ msgid "Save Image"
 msgstr ""
 
 #: FDesktop.resx$tsdSaveImages.Text$Message
+#: MiscResources.resx$SaveImages$Message
 msgid "Save Images"
 msgstr ""
 
@@ -1166,6 +1163,7 @@ msgstr ""
 
 #: FDesktop.resx$tsdSavePDF.Text$Message
 #: FViewer.resx$tsSavePDF.Text$Message
+#: MiscResources.resx$SavePdf$Message
 msgid "Save PDF"
 msgstr ""
 
@@ -1216,6 +1214,7 @@ msgstr ""
 #: FScanProgress.resx$labelPage.Text$Message
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanPageProgress$Message
+#: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}"
 msgstr ""
 
@@ -1459,6 +1458,10 @@ msgstr ""
 
 #: FAdvancedScanSettings.resx$label2.Text$Message
 msgid "White Threshold"
+msgstr ""
+
+#: FAdvancedScanSettings.resx$label4.Text$Message
+msgid "Wia Version"
 msgstr ""
 
 #: FPageSize.resx$labelX.Text$Message
