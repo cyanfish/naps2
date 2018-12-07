@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using NAPS2.Platform;
 using NAPS2.Util;
 
 namespace NAPS2.Scan.Images.Transforms
@@ -23,18 +25,32 @@ namespace NAPS2.Scan.Images.Transforms
             double xScale = bitmap.Width / (double)(OriginalWidth ?? bitmap.Width),
                 yScale = bitmap.Height / (double)(OriginalHeight ?? bitmap.Height);
 
+            int x = (int)Math.Round(Left * xScale);
+            int y = (int)Math.Round(Top * yScale);
             int width = Math.Max(bitmap.Width - (int)Math.Round((Left + Right) * xScale), 1);
             int height = Math.Max(bitmap.Height - (int)Math.Round((Top + Bottom) * yScale), 1);
-            var result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            result.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
-            using (var g = Graphics.FromImage(result))
+
+            if (PlatformCompat.System.CanUseWin32 && (bitmap.PixelFormat == PixelFormat.Format24bppRgb || bitmap.PixelFormat == PixelFormat.Format32bppArgb))
             {
-                g.Clear(Color.White);
-                g.DrawImage(bitmap, new Rectangle((int)Math.Round(-Left * xScale), (int)Math.Round(-Top * yScale), bitmap.Width, bitmap.Height));
+                var result = new Bitmap(width, height, bitmap.PixelFormat);
+                UnsafeImageOps.RowWiseCopy(bitmap, result, x, y, 0, 0, width, height);
+                bitmap.Dispose();
+                return result;
             }
-            OptimizePixelFormat(bitmap, ref result);
-            bitmap.Dispose();
-            return result;
+            else
+            {
+                var result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+                result.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+                using (var g = Graphics.FromImage(result))
+                {
+                    g.Clear(Color.White);
+                    g.DrawImage(bitmap, new Rectangle(-x, -y, bitmap.Width, bitmap.Height));
+                }
+
+                OptimizePixelFormat(bitmap, ref result);
+                bitmap.Dispose();
+                return result;
+            }
         }
 
         public override bool CanSimplify(Transform other) => other is CropTransform other2

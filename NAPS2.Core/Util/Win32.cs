@@ -37,6 +37,9 @@ namespace NAPS2.Util
         [DllImport("kernel32.dll")]
         public static extern IntPtr GetProcAddress(IntPtr module, string procName);
 
+        [DllImport("kernel32.dll", EntryPoint = "RtlMoveMemory")]
+        public static extern void CopyMemory(IntPtr dst, IntPtr src, uint len);
+
         public enum ShowWindowCommands
         {
             Hide = 0,

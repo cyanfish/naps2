@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using NAPS2.Util;
 
@@ -199,6 +200,28 @@ namespace NAPS2.Scan.Images.Transforms
             });
 
             bitmap.UnlockBits(bitmapData);
+        }
+
+        public static void RowWiseCopy(Bitmap src, Bitmap dst, int x1, int y1, int x2, int y2, int w, int h)
+        {
+            int bytesPerPixel = GetBytesPerPixel(src);
+
+            var srcData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite, src.PixelFormat);
+            int srcStride = Math.Abs(srcData.Stride);
+
+            var dstData = dst.LockBits(new Rectangle(0, 0, dst.Width, dst.Height), ImageLockMode.ReadWrite, dst.PixelFormat);
+            int dstStride = Math.Abs(dstData.Stride);
+            
+            for (int y = 0; y < h; y++)
+            {
+                var srcPtr = srcData.Scan0 + srcStride * (y1 + y) + x1 * bytesPerPixel;
+                var dstPtr = dstData.Scan0 + dstStride * (y2 + y) + x2 * bytesPerPixel;
+                var len = (uint)(w * bytesPerPixel);
+                Win32.CopyMemory(dstPtr, srcPtr, len);
+            }
+
+            src.UnlockBits(srcData);
+            dst.UnlockBits(dstData);
         }
 
         private static int GetBytesPerPixel(Bitmap bitmap)
