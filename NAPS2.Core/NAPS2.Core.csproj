@@ -226,6 +226,7 @@
     <Compile Include="Update\UpdateOperation.cs" />
     <Compile Include="Update\UpdateInfo.cs" />
     <Compile Include="Update\UpdateChecker.cs" />
+    <Compile Include="Util\DebugTimer.cs" />
     <Compile Include="Util\DefaultInvoker.cs" />
     <Compile Include="Util\DeferredAction.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
