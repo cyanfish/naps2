@@ -202,26 +202,57 @@ namespace NAPS2.Scan.Images.Transforms
             bitmap.UnlockBits(bitmapData);
         }
 
-        public static void RowWiseCopy(Bitmap src, Bitmap dst, int x1, int y1, int x2, int y2, int w, int h)
+        public static unsafe void RowWiseCopy(Bitmap src, Bitmap dst, int x1, int y1, int x2, int y2, int w, int h)
         {
-            int bytesPerPixel = GetBytesPerPixel(src);
-
-            var srcData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite, src.PixelFormat);
-            int srcStride = Math.Abs(srcData.Stride);
-
-            var dstData = dst.LockBits(new Rectangle(0, 0, dst.Width, dst.Height), ImageLockMode.ReadWrite, dst.PixelFormat);
-            int dstStride = Math.Abs(dstData.Stride);
-            
-            for (int y = 0; y < h; y++)
+            if (src.PixelFormat == PixelFormat.Format1bppIndexed)
             {
-                var srcPtr = srcData.Scan0 + srcStride * (y1 + y) + x1 * bytesPerPixel;
-                var dstPtr = dstData.Scan0 + dstStride * (y2 + y) + x2 * bytesPerPixel;
-                var len = (uint)(w * bytesPerPixel);
-                Win32.CopyMemory(dstPtr, srcPtr, len);
-            }
+                // 1bpp copy requires bit shifting, and we therefore must copy ourselves
+                var srcData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite, src.PixelFormat);
+                int srcStride = Math.Abs(srcData.Stride);
 
-            src.UnlockBits(srcData);
-            dst.UnlockBits(dstData);
+                var dstData = dst.LockBits(new Rectangle(0, 0, dst.Width, dst.Height), ImageLockMode.ReadWrite, dst.PixelFormat);
+                int dstStride = Math.Abs(dstData.Stride);
+
+                int shift1 = (x2 - x1) % 8;
+                int shift2 = (x1 - x2) % 8;
+
+                for (int y = 0; y < h; y++)
+                {
+                    byte* srcRow = (byte*)(srcData.Scan0 + srcStride * (y1 + y));
+                    byte* dstRow = (byte*)(dstData.Scan0 + dstStride * (y2 + y));
+                    for (int x = 0; x < w; x++)
+                    {
+                        byte* srcPixel = srcRow + (x + x1 + 7) / 8;
+                        byte* dstPixel = dstRow + (x + x2 + 7) / 8;
+                        *dstPixel = (byte)((*srcPixel << shift1) | (*(srcPixel + 1) << shift2));
+                    }
+                }
+
+                src.UnlockBits(srcData);
+                dst.UnlockBits(dstData);
+            }
+            else
+            {
+                // Byte-aligned copy can be optimized with a fast Win32 memcpy operation
+                int bytesPerPixel = GetBytesPerPixel(src);
+
+                var srcData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite, src.PixelFormat);
+                int srcStride = Math.Abs(srcData.Stride);
+
+                var dstData = dst.LockBits(new Rectangle(0, 0, dst.Width, dst.Height), ImageLockMode.ReadWrite, dst.PixelFormat);
+                int dstStride = Math.Abs(dstData.Stride);
+
+                for (int y = 0; y < h; y++)
+                {
+                    var srcPtr = srcData.Scan0 + srcStride * (y1 + y) + x1 * bytesPerPixel;
+                    var dstPtr = dstData.Scan0 + dstStride * (y2 + y) + x2 * bytesPerPixel;
+                    var len = (uint)(w * bytesPerPixel);
+                    Win32.CopyMemory(dstPtr, srcPtr, len);
+                }
+
+                src.UnlockBits(srcData);
+                dst.UnlockBits(dstData);
+            }
         }
 
         private static int GetBytesPerPixel(Bitmap bitmap)

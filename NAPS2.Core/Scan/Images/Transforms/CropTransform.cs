@@ -30,9 +30,14 @@ namespace NAPS2.Scan.Images.Transforms
             int width = Math.Max(bitmap.Width - (int)Math.Round((Left + Right) * xScale), 1);
             int height = Math.Max(bitmap.Height - (int)Math.Round((Top + Bottom) * yScale), 1);
 
-            if (PlatformCompat.System.CanUseWin32 && (bitmap.PixelFormat == PixelFormat.Format24bppRgb || bitmap.PixelFormat == PixelFormat.Format32bppArgb))
+            if (PlatformCompat.System.CanUseWin32)
             {
                 var result = new Bitmap(width, height, bitmap.PixelFormat);
+                if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
+                {
+                    result.Palette.Entries[0] = bitmap.Palette.Entries[0];
+                    result.Palette.Entries[1] = bitmap.Palette.Entries[1];
+                }
                 UnsafeImageOps.RowWiseCopy(bitmap, result, x, y, 0, 0, width, height);
                 bitmap.Dispose();
                 return result;
