@@ -30,32 +30,16 @@ namespace NAPS2.Scan.Images.Transforms
             int width = Math.Max(bitmap.Width - (int)Math.Round((Left + Right) * xScale), 1);
             int height = Math.Max(bitmap.Height - (int)Math.Round((Top + Bottom) * yScale), 1);
 
-            if (PlatformCompat.System.CanUseWin32)
+            var result = new Bitmap(width, height, bitmap.PixelFormat);
+            result.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+            if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
             {
-                var result = new Bitmap(width, height, bitmap.PixelFormat);
-                if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
-                {
-                    result.Palette.Entries[0] = bitmap.Palette.Entries[0];
-                    result.Palette.Entries[1] = bitmap.Palette.Entries[1];
-                }
-                UnsafeImageOps.RowWiseCopy(bitmap, result, x, y, 0, 0, width, height);
-                bitmap.Dispose();
-                return result;
+                result.Palette.Entries[0] = bitmap.Palette.Entries[0];
+                result.Palette.Entries[1] = bitmap.Palette.Entries[1];
             }
-            else
-            {
-                var result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-                result.SafeSetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
-                using (var g = Graphics.FromImage(result))
-                {
-                    g.Clear(Color.White);
-                    g.DrawImage(bitmap, new Rectangle(-x, -y, bitmap.Width, bitmap.Height));
-                }
-
-                OptimizePixelFormat(bitmap, ref result);
-                bitmap.Dispose();
-                return result;
-            }
+            UnsafeImageOps.RowWiseCopy(bitmap, result, x, y, 0, 0, width, height);
+            bitmap.Dispose();
+            return result;
         }
 
         public override bool CanSimplify(Transform other) => other is CropTransform other2
