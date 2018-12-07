@@ -202,7 +202,7 @@ namespace NAPS2.Scan.Images.Transforms
             bitmap.UnlockBits(bitmapData);
         }
 
-        public static unsafe void RowWiseCopy(Bitmap src, Bitmap dst, int x1, int y1, int x2, int y2, int w, int h)
+        public static unsafe void RowWiseCopy(Bitmap src, Bitmap dst, int x1, int y1, int w, int h)
         {
             bool bitPerPixel = src.PixelFormat == PixelFormat.Format1bppIndexed;
             int bytesPerPixel = bitPerPixel ? 0 : GetBytesPerPixel(src);
@@ -216,20 +216,39 @@ namespace NAPS2.Scan.Images.Transforms
             if (bitPerPixel)
             {
                 // 1bpp copy requires bit shifting
-                int shift1 = (x2 - x1) % 8;
-                int shift2 = (x1 - x2) % 8;
+                int shift1 = x1 % 8;
+                int shift2 = 8 - shift1;
+
+                int bytes = (w + 7) / 8;
+                int bytesExceptLast = bytes - 1;
 
                 PartitionRows(h, (start, end) =>
                 {
                     for (int y = start; y < end; y++)
                     {
-                        byte* srcRow = (byte*) (srcData.Scan0 + srcStride * (y1 + y));
-                        byte* dstRow = (byte*) (dstData.Scan0 + dstStride * (y2 + y));
-                        for (int x = 0; x < w; x++)
+                        byte* srcRow = (byte*)(srcData.Scan0 + srcStride * (y1 + y) + (x1 + 7) / 8);
+                        byte* dstRow = (byte*)(dstData.Scan0 + dstStride * y);
+                        
+                        for (int x = 0; x < bytesExceptLast; x++)
                         {
-                            byte* srcPixel = srcRow + (x + x1 + 7) / 8;
-                            byte* dstPixel = dstRow + (x + x2 + 7) / 8;
-                            *dstPixel = (byte) ((*srcPixel << shift1) | (*(srcPixel + 1) << shift2));
+                            byte* srcPtr = srcRow + x;
+                            byte* dstPtr = dstRow + x;
+                            *dstPtr = (byte)((*srcPtr << shift1) | (*(srcPtr + 1) >> shift2));
+                        }
+                        if (w > 0)
+                        {
+                            byte* srcPtr = srcRow + bytesExceptLast;
+                            byte* dstPtr = dstRow + bytesExceptLast;
+                            if (shift2 == 8)
+                            {
+                                *dstPtr = *srcPtr;
+                            }
+                            else
+                            {
+                                *dstPtr = (byte)((*srcPtr << shift1) | (*(srcPtr + 1) >> shift2));
+                            }
+                            byte mask = (byte)(0xFF << (w % 8));
+                            *dstPtr = (byte)(*dstPtr & mask);
                         }
                     }
                 });
@@ -241,11 +260,12 @@ namespace NAPS2.Scan.Images.Transforms
                 {
                     for (int y = start; y < end; y++)
                     {
-                        byte* srcPtrB = (byte*) (srcData.Scan0 + srcStride * (y1 + y) + x1 * bytesPerPixel);
-                        byte* dstPtrB = (byte*) (dstData.Scan0 + dstStride * (y2 + y) + x2 * bytesPerPixel);
-                        long* srcPtrL = (long*) srcPtrB;
-                        long* dstPtrL = (long*) dstPtrB;
+                        byte* srcPtrB = (byte*)(srcData.Scan0 + srcStride * (y1 + y) + x1 * bytesPerPixel);
+                        byte* dstPtrB = (byte*)(dstData.Scan0 + dstStride * y);
+                        long* srcPtrL = (long*)srcPtrB;
+                        long* dstPtrL = (long*)dstPtrB;
                         var len = w * bytesPerPixel;
+
                         // Copy via longs for better bandwidth
                         for (int i = 0; i < len / 8; i++)
                         {

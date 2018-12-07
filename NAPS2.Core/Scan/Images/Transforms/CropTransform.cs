@@ -37,7 +37,7 @@ namespace NAPS2.Scan.Images.Transforms
                 result.Palette.Entries[0] = bitmap.Palette.Entries[0];
                 result.Palette.Entries[1] = bitmap.Palette.Entries[1];
             }
-            UnsafeImageOps.RowWiseCopy(bitmap, result, x, y, 0, 0, width, height);
+            UnsafeImageOps.RowWiseCopy(bitmap, result, x, y, width, height);
             bitmap.Dispose();
             return result;
         }
