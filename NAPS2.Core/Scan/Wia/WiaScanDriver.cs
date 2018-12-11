@@ -72,7 +72,7 @@ namespace NAPS2.Scan.Wia
             var op = operationFactory.Create<WiaScanOperation>();
             using (CancelToken.Register(op.Cancel))
             {
-                op.Start(ScanProfile, ScanParams, DialogParent, source);
+                op.Start(ScanProfile, ScanDevice, ScanParams, DialogParent, source);
                 Invoker.Current.SafeInvoke(() =>
                 {
                     if (ScanParams.Modal)

@@ -45,16 +45,19 @@ namespace NAPS2.Scan.Wia
 
         private ScanProfile ScanProfile { get; set; }
 
+        private ScanDevice ScanDevice { get; set; }
+
         private ScanParams ScanParams { get; set; }
 
         private IWin32Window DialogParent { get; set; }
 
-        public bool Start(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ScannedImageSource.Concrete source)
+        public bool Start(ScanProfile scanProfile, ScanDevice scanDevice, ScanParams scanParams, IWin32Window dialogParent, ScannedImageSource.Concrete source)
         {
             ScanProfile = scanProfile;
+            ScanDevice = scanDevice;
             ScanParams = scanParams;
             DialogParent = dialogParent;
-            ProgressTitle = ScanProfile.Device?.Name;
+            ProgressTitle = ScanDevice.Name;
             Status = new OperationStatus
             {
                 StatusText = ScanProfile.PaperSource == ScanSource.Glass
@@ -102,7 +105,7 @@ namespace NAPS2.Scan.Wia
         private void Scan(ScannedImageSource.Concrete source)
         {
             using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
-            using (var device = deviceManager.FindDevice(ScanProfile.Device.ID))
+            using (var device = deviceManager.FindDevice(ScanDevice.ID))
             {
                 if (device.Version == WiaVersion.Wia20 && ScanProfile.UseNativeUI)
                 {
