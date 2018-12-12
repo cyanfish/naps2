@@ -44,10 +44,6 @@ namespace NAPS2.Scan
             {
                 throw new DriverNotSupportedException();
             }
-            if (DialogParent == null)
-            {
-                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling PromptForDevice().");
-            }
             try
             {
                 return PromptForDeviceInternal();
@@ -116,10 +112,6 @@ namespace NAPS2.Scan
             if (ScanDevice == null)
             {
                 throw new InvalidOperationException("IScanDriver.ScanDevice must be specified before calling Scan().");
-            }
-            if (DialogParent == null && !ScanParams.NoUI)
-            {
-                throw new InvalidOperationException("IScanDriver.DialogParent must be specified before calling Scan() without NoUI.");
             }
             
             var source = new ScannedImageSource.Concrete();

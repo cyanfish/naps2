@@ -30,7 +30,7 @@ namespace NAPS2.WinForms
         private void DisplayProgress()
         {
             var lblNumberRight = lblNumber.Right;
-            operationProgress.RenderStatus(op, lblTitle, lblNumber, progressBar);
+            WinFormsOperationProgress.RenderStatus(op, lblTitle, lblNumber, progressBar);
             if (op.Status?.IndeterminateProgress != true)
             {
                 // Don't display the number if the progress bar is precise

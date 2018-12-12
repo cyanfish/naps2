@@ -36,7 +36,7 @@ namespace NAPS2.Scan.Wia
             {
                 using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
                 {
-                    using (var device = deviceManager.PromptForDevice(DialogParent.Handle))
+                    using (var device = deviceManager.PromptForDevice(DialogParent?.Handle ?? IntPtr.Zero))
                     {
                         if (device == null)
                         {

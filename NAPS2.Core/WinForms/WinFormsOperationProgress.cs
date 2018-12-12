@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Lang.Resources;
@@ -82,7 +81,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar)
+        public static void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar)
         {
             var status = op.Status ?? new OperationStatus();
             textLabel.Text = status.StatusText;
