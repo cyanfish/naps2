@@ -18,7 +18,7 @@ if ([string]::IsNullOrEmpty($LanguageCode)) {
 	}
 }
 Invoke-WebRequest -Uri $PoUrl -OutFile "$SolutionRoot\NAPS2.Sdk\Lang\po\$LanguageCode.po"
-Update-Lang $LanguageCode
+.\Update-Resources.ps1 $LanguageCode
 
 # Rebuild NAPS2
 

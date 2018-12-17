@@ -31,7 +31,7 @@
     <value>プレースホルダー</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>80以上の高画質JPEGを得るためには、プロファイル内の画質設定をあげてください。.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>保存確認をスキップ</value>

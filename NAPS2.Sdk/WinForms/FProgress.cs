@@ -69,7 +69,7 @@ namespace NAPS2.WinForms
 
         private void DisplayProgress()
         {
-            operationProgress.RenderStatus(Operation, labelStatus, labelNumber, progressBar);
+            WinFormsOperationProgress.RenderStatus(Operation, labelStatus, labelNumber, progressBar);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

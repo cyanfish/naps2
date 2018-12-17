@@ -22,7 +22,7 @@
     <value>&amp;Отказ</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>За използването на OCR е нужно да свалите всеки от езиците, които искате да сканирате .</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>Приблизителен размер за сваляне: {0} MB</value>

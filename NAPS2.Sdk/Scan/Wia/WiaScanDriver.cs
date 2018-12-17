@@ -40,7 +40,7 @@ namespace NAPS2.Scan.Wia
             {
                 using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
                 {
-                    using (var device = deviceManager.PromptForDevice(DialogParent.Handle))
+                    using (var device = deviceManager.PromptForDevice(DialogParent?.Handle ?? IntPtr.Zero))
                     {
                         if (device == null)
                         {
@@ -76,7 +76,7 @@ namespace NAPS2.Scan.Wia
             var op = new WiaScanOperation(scannedImageHelper);
             using (CancelToken.Register(op.Cancel))
             {
-                op.Start(ScanProfile, ScanParams, DialogParent, source);
+                op.Start(ScanProfile, ScanDevice, ScanParams, DialogParent, source);
                 Invoker.Current.SafeInvoke(() =>
                 {
                     if (ScanParams.Modal)

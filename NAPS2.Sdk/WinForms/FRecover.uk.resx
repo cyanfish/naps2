@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblPrompt.Text" xml:space="preserve">
-    <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
+    <value>Зображення ({0} шт.), відскановані на {1} в {2}, можливо не були збережені та можуть бути відновлені. Бажаєте їх відновити?</value>
   </data>
   <data name="btnRecover.Text" xml:space="preserve">
     <value>&amp;Відновити</value>

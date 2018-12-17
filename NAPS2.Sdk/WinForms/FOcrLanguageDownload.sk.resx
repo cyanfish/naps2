@@ -22,7 +22,7 @@
     <value>&amp;Zrušiť</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>Použitie OCR vyžaduje prevzatie takej jazykovej sady, v akej je skenovaný obsah.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>Približná veľkosť preberania: {0} MB</value>

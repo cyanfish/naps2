@@ -258,6 +258,7 @@
     <Compile Include="Update\UpdateOperation.cs" />
     <Compile Include="Update\UpdateInfo.cs" />
     <Compile Include="Update\UpdateChecker.cs" />
+    <Compile Include="Util\DebugTimer.cs" />
     <Compile Include="Util\DefaultInvoker.cs" />
     <Compile Include="Util\DeferredAction.cs" />
     <Compile Include="Util\ExceptionExtensions.cs" />
@@ -5531,6 +5532,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.it.resx">
       <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\OperationProgressNotifyWidget.ja.resx">
       <DependentUpon>OperationProgressNotifyWidget.cs</DependentUpon>

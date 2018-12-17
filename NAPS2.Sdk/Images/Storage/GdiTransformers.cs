@@ -297,18 +297,19 @@ namespace NAPS2.Images.Storage
             double xScale = image.Width / (double)(transform.OriginalWidth ?? image.Width),
                 yScale = image.Height / (double)(transform.OriginalHeight ?? image.Height);
 
+            int x = (int)Math.Round(transform.Left * xScale);
+            int y = (int)Math.Round(transform.Top * yScale);
             int width = Math.Max(image.Width - (int)Math.Round((transform.Left + transform.Right) * xScale), 1);
             int height = Math.Max(image.Height - (int)Math.Round((transform.Top + transform.Bottom) * yScale), 1);
-            var result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            var result = new Bitmap(width, height, image.Bitmap.PixelFormat);
             result.SafeSetResolution(image.HorizontalResolution, image.VerticalResolution);
-            using (var g = Graphics.FromImage(result))
+            if (image.Bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
             {
-                g.Clear(Color.White);
-                int x = (int) Math.Round(-transform.Left * xScale);
-                int y = (int) Math.Round(-transform.Top * yScale);
-                g.DrawImage(image.Bitmap, new Rectangle(x, y, image.Width, image.Height));
+                result.Palette.Entries[0] = image.Bitmap.Palette.Entries[0];
+                result.Palette.Entries[1] = image.Bitmap.Palette.Entries[1];
             }
-            OptimizePixelFormat(image.Bitmap, ref result);
+            UnsafeImageOps.RowWiseCopy(image.Bitmap, result, x, y, width, height);
             image.Dispose();
             return new GdiImage(result);
         }

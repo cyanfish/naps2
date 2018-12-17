@@ -24,11 +24,8 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>图像质量</value>
   </data>
-  <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-    <value>每次扫描之间的间隔 (WIA)</value>
-  </data>
-  <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-    <value>失败时重试 (WIA)</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Wia Version:</value>
   </data>
   <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
     <value>裁剪到纸张大小</value>

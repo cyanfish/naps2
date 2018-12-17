@@ -31,7 +31,7 @@
     <value>Marcadores de posición</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Para calidades JPEG altas (más de 80), incremente también la calidad de imagen en su perfil para obtener los mejores resultados.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Omitir aviso de guardado</value>

@@ -31,7 +31,7 @@
     <value>Plassholdar</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>For høg JPEG kvalitet (80+), auk også bildekvalitet i profilen for å få best resultat.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Hopp over lagre-spørsmål</value>

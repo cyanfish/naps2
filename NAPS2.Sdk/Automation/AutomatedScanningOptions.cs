@@ -33,8 +33,11 @@ namespace NAPS2.Automation
 
         [Option("importpassword", HelpText = "The password to use to import one or more encrypted PDF files.")]
         public string ImportPassword { get; set; }
+        
+        [Option("progress", HelpText = "Display a graphical window for scanning progress.")]
+        public bool Progress { get; set; }
 
-        [Option('v', "verbose", HelpText = "Display progress information." +
+        [Option('v', "verbose", HelpText = "Display progress information in the console." +
                                            " If not specified, no output is displayed if the scan is successful.")]
         public bool Verbose { get; set; }
 

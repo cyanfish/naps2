@@ -22,7 +22,7 @@
     <value>&amp;إلغاء</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>استخدام التعرف الضوئي على الحروف OCR يتطلب منك تحميل كل لغة تريد مسحها ضوئيا.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>حجم التنزيل المقدّر: {0} ميغابايت</value>

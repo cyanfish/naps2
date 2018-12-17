@@ -79,7 +79,7 @@ namespace NAPS2.WinForms
             }
         }
 
-        public override void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar)
+        public static void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar)
         {
             var status = op.Status ?? new OperationStatus();
             textLabel.Text = status.StatusText;

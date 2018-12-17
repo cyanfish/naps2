@@ -22,24 +22,36 @@ namespace NAPS2.Localization
             using (var reader = new StreamReader(poFile))
             {
                 string line;
-                while ((line = reader.ReadLine()) != null)
+                string NextLine() => line = reader.ReadLine()?.Trim();
+                while (NextLine() != null)
                 {
-                    line = line.Trim();
-                    if (line.StartsWith("msgid", StringComparison.InvariantCulture))
+                    if (!line.StartsWith("msgid", StringComparison.InvariantCulture))
                     {
-                        var original = line.Substring(7, line.Length - 8);
-                        line = reader.ReadLine();
-                        if (line == null || !line.StartsWith("msgstr", StringComparison.InvariantCulture))
-                        {
-                            continue;
-                        }
-                        var translated = line.Substring(8, line.Length - 9);
-                        Strings[original] = new TranslatableString
-                        {
-                            Original = original,
-                            Translation = translated
-                        };
+                        continue;
                     }
+
+                    string original = line.Substring(7, line.Length - 8);
+                    while (NextLine() != null && line.StartsWith("\"", StringComparison.InvariantCulture))
+                    {
+                        original += line.Substring(1, line.Length - 2);
+                    }
+
+                    if (line == null || !line.StartsWith("msgstr", StringComparison.InvariantCulture))
+                    {
+                        continue;
+                    }
+
+                    string translated = line.Substring(8, line.Length - 9);
+                    while (NextLine() != null && line.StartsWith("\"", StringComparison.InvariantCulture))
+                    {
+                        translated += line.Substring(1, line.Length - 2);
+                    }
+
+                    Strings[original] = new TranslatableString
+                    {
+                        Original = original,
+                        Translation = translated
+                    };
                 }
             }
         }

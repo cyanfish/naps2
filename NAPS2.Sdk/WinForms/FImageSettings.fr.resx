@@ -31,7 +31,7 @@
     <value>Chaînes de substitution</value>
   </data>
   <data name="lblWarning.Text" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>En JPEG haute qualité (80+), augmenter aussi la Qualité d'Image dans le profil pour de meilleurs résultats.</value>
   </data>
   <data name="cbSkipSavePrompt.Text" xml:space="preserve">
     <value>Ignorer l'invite d'enregistrement</value>

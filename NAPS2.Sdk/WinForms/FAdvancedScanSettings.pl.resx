@@ -24,11 +24,8 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Jakość obrazu</value>
   </data>
-  <data name="cbWiaDelayBetweenScans.Text" xml:space="preserve">
-    <value>Opóźnienie między skanami (WIA)</value>
-  </data>
-  <data name="cbWiaRetryOnFailure.Text" xml:space="preserve">
-    <value>Ponów przy niepowodzeniu (WIA)</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Wia Version:</value>
   </data>
   <data name="cbForcePageSizeCrop.Text" xml:space="preserve">
     <value>Przytnij do rozmiaru strony</value>

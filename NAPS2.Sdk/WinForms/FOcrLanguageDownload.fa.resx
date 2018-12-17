@@ -22,7 +22,7 @@
     <value>&amp;لغو</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>برای استفاده از OCR نیاز است هر زبانی را که می‌خواهید اسکن کنید را دانلود کنید.</value>
   </data>
   <data name="labelSizeEstimate.Text" xml:space="preserve">
     <value>تخمین حجم دانلود: {0} مگابایت</value>

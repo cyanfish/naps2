@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using NAPS2.Util;
 
@@ -199,6 +200,88 @@ namespace NAPS2.Images.Transforms
             });
 
             bitmap.UnlockBits(bitmapData);
+        }
+
+        public static unsafe void RowWiseCopy(Bitmap src, Bitmap dst, int x1, int y1, int w, int h)
+        {
+            bool bitPerPixel = src.PixelFormat == PixelFormat.Format1bppIndexed;
+            int bytesPerPixel = bitPerPixel ? 0 : GetBytesPerPixel(src);
+
+            var srcData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite, src.PixelFormat);
+            int srcStride = Math.Abs(srcData.Stride);
+
+            var dstData = dst.LockBits(new Rectangle(0, 0, dst.Width, dst.Height), ImageLockMode.ReadWrite, dst.PixelFormat);
+            int dstStride = Math.Abs(dstData.Stride);
+
+            if (bitPerPixel)
+            {
+                // 1bpp copy requires bit shifting
+                int shift1 = x1 % 8;
+                int shift2 = 8 - shift1;
+
+                int bytes = (w + 7) / 8;
+                int bytesExceptLast = bytes - 1;
+
+                PartitionRows(h, (start, end) =>
+                {
+                    for (int y = start; y < end; y++)
+                    {
+                        byte* srcRow = (byte*)(srcData.Scan0 + srcStride * (y1 + y) + (x1 + 7) / 8);
+                        byte* dstRow = (byte*)(dstData.Scan0 + dstStride * y);
+                        
+                        for (int x = 0; x < bytesExceptLast; x++)
+                        {
+                            byte* srcPtr = srcRow + x;
+                            byte* dstPtr = dstRow + x;
+                            *dstPtr = (byte)((*srcPtr << shift1) | (*(srcPtr + 1) >> shift2));
+                        }
+                        if (w > 0)
+                        {
+                            byte* srcPtr = srcRow + bytesExceptLast;
+                            byte* dstPtr = dstRow + bytesExceptLast;
+                            if (shift2 == 8)
+                            {
+                                *dstPtr = *srcPtr;
+                            }
+                            else
+                            {
+                                *dstPtr = (byte)((*srcPtr << shift1) | (*(srcPtr + 1) >> shift2));
+                            }
+                            byte mask = (byte)(0xFF << (w % 8));
+                            *dstPtr = (byte)(*dstPtr & mask);
+                        }
+                    }
+                });
+            }
+            else
+            {
+                // Byte-aligned copy is a bit simpler
+                PartitionRows(h, (start, end) =>
+                {
+                    for (int y = start; y < end; y++)
+                    {
+                        byte* srcPtrB = (byte*)(srcData.Scan0 + srcStride * (y1 + y) + x1 * bytesPerPixel);
+                        byte* dstPtrB = (byte*)(dstData.Scan0 + dstStride * y);
+                        long* srcPtrL = (long*)srcPtrB;
+                        long* dstPtrL = (long*)dstPtrB;
+                        var len = w * bytesPerPixel;
+
+                        // Copy via longs for better bandwidth
+                        for (int i = 0; i < len / 8; i++)
+                        {
+                            *(dstPtrL + i) = *(srcPtrL + i);
+                        }
+                        // Then copy any leftovers one byte at a time
+                        for (int i = len / 8 * 8; i < len; i++)
+                        {
+                            *(dstPtrB + i) = *(srcPtrB + i);
+                        }
+                    }
+                });
+            }
+
+            src.UnlockBits(srcData);
+            dst.UnlockBits(dstData);
         }
 
         private static int GetBytesPerPixel(Bitmap bitmap)
