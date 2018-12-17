@@ -7,24 +7,26 @@ namespace NAPS2.Ocr
 {
     public class OcrManager
     {
-        private readonly List<IOcrEngine> engines;
-
-        private static OcrManager _default;
-
-        public static bool HasDefault => _default != null;
+        private static OcrManager _default = new OcrManager();
 
         public static OcrManager Default
         {
-            // TODO: Verify package info
-            get => _default ?? throw new InvalidOperationException(
-                       "OcrManager.Default must be initialized first. You can do one of the following: " +
-                       "(a) Install the NAPS2.Sdk.Windows.Tesseract package. " +
-                       "(b) Use OcrManager.SystemPathOnly. " +
-                       "(c) Create an instance of OcrManager with your own configuration.");
+            get => _default;
             set => _default = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public static OcrManager SystemPathOnly { get; } = new OcrManager(new[] { new TesseractSystemEngine() });
+        private readonly List<IOcrEngine> engines;
+
+        /// <summary>
+        /// Creates a new instance of OcrManager that only looks for Tesseract on the system path.
+        /// </summary>
+        public OcrManager()
+        {
+            engines = new List<IOcrEngine>
+            {
+                new TesseractSystemEngine()
+            };
+        }
 
         /// <summary>
         /// Creates a new instance of OcrManager with the specified engines. The order of engines is important; preferred/newer first.
