@@ -23,8 +23,6 @@ namespace NAPS2.Operation
         {
         }
 
-        public override void RenderStatus(IOperation op, Label textLabel, Label numberLabel, ProgressBar progressBar) => throw new NotSupportedException();
-
         public override List<IOperation> ActiveOperations => throw new NotSupportedException();
     }
 }
