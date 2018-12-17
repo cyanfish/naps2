@@ -14,8 +14,9 @@ namespace NAPS2.Sdk.Samples
     {
         public static async Task Run()
         {
-            // We configure scanned images to be stored in GDI+ format.
-            // This uses System.Drawing.Bitmap internally.
+            // We configure scanned images to be stored in GDI+ format, which uses
+            // System.Drawing.Bitmap internally. This is for illustration purposes;
+            // GdiImage is already the default.
             StorageManager.ConfigureImageType<GdiImage>();
 
             // To select a device and scan, you need a driver.
@@ -25,7 +26,7 @@ namespace NAPS2.Sdk.Samples
 
             // For the purpose of this sample, we arbitrarily pick the first scanning device.
             // You probably want to let the user select one. Use IScanDriver.PromptForDevice()
-            // to show a device prompt. This may use Windows Forms for some drivers.
+            // to show a device prompt. This may start a Windows Forms event loop.
             ScanDevice device = driver.GetDeviceList().First();
 
             // Configure basic scanning options (these are usually presented to the user)
@@ -52,10 +53,10 @@ namespace NAPS2.Sdk.Samples
 
             // ScannedImageSource has several different methods to help you consume images.
             // ForEach allows you to asynchronously process images as they arrive.
-            await imageSource.ForEach(async image =>
+            await imageSource.ForEach(async scannedImage =>
             {
-                using (image)
-                using (Bitmap bitmap = await renderer.Render(image))
+                using (scannedImage)
+                using (Bitmap bitmap = await renderer.Render(scannedImage))
                 {
                     // TODO: Do something with the bitmap
                 }

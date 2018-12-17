@@ -37,15 +37,15 @@ namespace NAPS2.Sdk.Samples
             // excessive amount of memory, since it is all stored on disk until rendered.
             // This is just for illustration purposes; in real code you usually want to
             // process images as they come rather than waiting for the full scan.
-            List<ScannedImage> images = await driver.Scan().ToList();
+            List<ScannedImage> scannedImages = await driver.Scan().ToList();
 
             try
             {
                 BitmapRenderer renderer = new BitmapRenderer();
-                foreach (var image in images)
+                foreach (var scannedImage in scannedImages)
                 {
                     // This seamlessly loads the image data from disk.
-                    using (Bitmap bitmap = await renderer.Render(image))
+                    using (Bitmap bitmap = await renderer.Render(scannedImage))
                     {
                         // TODO: Do something with the bitmap
                     }
@@ -53,10 +53,10 @@ namespace NAPS2.Sdk.Samples
             }
             finally
             {
-                foreach (var image in images)
+                foreach (var scannedImage in scannedImages)
                 {
                     // This cleanly deletes any data from the filesystem.
-                    image.Dispose();
+                    scannedImage.Dispose();
                 }
             }
         }
