@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}</ProjectGuid>
+    <ProjectGuid>{AC67D0DB-F980-456C-9E91-654CB4989736}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NAPS2.Setup2</RootNamespace>
@@ -31,7 +31,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Build-Test.ps1" />
@@ -45,9 +54,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>LanguageComponents.tt</DependentUpon>
     </None>
+    <None Include="lib\64\NAPS2.WIA.dll" />
+    <None Include="lib\64\twaindsm.dll" />
+    <None Include="lib\dbg\64\NAPS2.WIA.dll" />
+    <None Include="lib\dbg\NAPS2.WIA.dll" />
+    <None Include="lib\NAPS2.WIA.dll" />
+    <None Include="lib\NTwain.dll" />
+    <None Include="lib\PdfSharp.dll" />
+    <None Include="lib\twaindsm.dll" />
     <None Include="license.rtf" />
     <None Include="naps2.ps1" />
-    <None Include="NAPS2.Setup.projitems" />
     <None Include="ps.bat" />
     <None Include="Publish-NAPS2.ps1" />
     <None Include="setup.iss" />

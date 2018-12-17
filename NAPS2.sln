@@ -37,14 +37,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Server", "NAPS2.A
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NAPS2.Sdk.NativeWia", "NAPS2.Sdk.NativeWia\NAPS2.Sdk.NativeWia.vcxproj", "{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NAPS2.Setup", "NAPS2.Setup\NAPS2.Setup.csproj", "{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk.Samples", "NAPS2.Sdk.Samples\NAPS2.Sdk.Samples.csproj", "{1165EE3A-5EE1-462B-8D9F-975D66710F1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Setup", "NAPS2.Setup\NAPS2.Setup.csproj", "{AC67D0DB-F980-456C-9E91-654CB4989736}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		NAPS2.Setup\NAPS2.Setup.projitems*{c12acb2c-184f-4cbd-9fbc-ce1331cf592e}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		DebugLang|x86 = DebugLang|x86
@@ -152,12 +149,6 @@ Global
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerEXE|x86.ActiveCfg = Release|Win32
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.InstallerMSI|x86.ActiveCfg = Release|Win32
 		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Standalone|x86.ActiveCfg = Release|Win32
-		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.DebugLang|x86.ActiveCfg = Debug|Any CPU
-		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.InstallerEXE|x86.ActiveCfg = Debug|Any CPU
-		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.InstallerMSI|x86.ActiveCfg = Debug|Any CPU
-		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.Standalone|x86.ActiveCfg = Debug|Any CPU
-		{C12ACB2C-184F-4CBD-9FBC-CE1331CF592E}.Standalone|x86.Build.0 = Debug|Any CPU
 		{1165EE3A-5EE1-462B-8D9F-975D66710F1A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{1165EE3A-5EE1-462B-8D9F-975D66710F1A}.Debug|x86.Build.0 = Debug|Any CPU
 		{1165EE3A-5EE1-462B-8D9F-975D66710F1A}.DebugLang|x86.ActiveCfg = Debug|Any CPU
@@ -168,6 +159,11 @@ Global
 		{1165EE3A-5EE1-462B-8D9F-975D66710F1A}.InstallerMSI|x86.Build.0 = Release|Any CPU
 		{1165EE3A-5EE1-462B-8D9F-975D66710F1A}.Standalone|x86.ActiveCfg = Release|Any CPU
 		{1165EE3A-5EE1-462B-8D9F-975D66710F1A}.Standalone|x86.Build.0 = Release|Any CPU
+		{AC67D0DB-F980-456C-9E91-654CB4989736}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC67D0DB-F980-456C-9E91-654CB4989736}.DebugLang|x86.ActiveCfg = Debug|Any CPU
+		{AC67D0DB-F980-456C-9E91-654CB4989736}.InstallerEXE|x86.ActiveCfg = Release|Any CPU
+		{AC67D0DB-F980-456C-9E91-654CB4989736}.InstallerMSI|x86.ActiveCfg = Release|Any CPU
+		{AC67D0DB-F980-456C-9E91-654CB4989736}.Standalone|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
