@@ -12,6 +12,13 @@ namespace NAPS2.Images
     {
         public abstract Task<ScannedImage> Next();
 
+        // TODO: Maybe make everything else an extension method?
+        // TODO: I wonder if it's possible to match this signature to IAsyncEnumerable so it can be used as-is...
+        // TODO: This should also have Dispose() that cleans up any further images that have not been processed (?).
+
+        // TODO: Perhaps this should simply function as a proper IAsyncEnumerable. Have a cached list. Enumerators have an index to the list. A monitor/wait system.
+        // TODO: One issue, though: How to handle exceptions?
+
         public async Task<List<ScannedImage>> ToList()
         {
             var list = new List<ScannedImage>();
@@ -72,6 +79,8 @@ namespace NAPS2.Images
             }
         }
 
+        // TODO: Make this a bit cleaner. Perhaps something more akin to the CancellationTokenSource/CancellationToken pattern.
+        // TODO: Keep implementations internal as needed, perhaps with static factory methods?
         public class Concrete : ScannedImageSource
         {
             private readonly BlockingCollection<ScannedImage> collection = new BlockingCollection<ScannedImage>();

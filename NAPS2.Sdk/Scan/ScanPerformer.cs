@@ -33,6 +33,21 @@ namespace NAPS2.Scan
             this.profileManager = profileManager;
         }
 
+        // TODO: Convert IScanDriver/ScanDriverBase to just a base class, ScanDriver
+        // TODO: Move additional logic (auto save, event logging, device prompting) to the driver base class
+        // TODO: Not sure what to do with the error handling still. Maybe make that a separate overload/option in ScanPerformer.
+        // TODO: Maybe move the IScanDriver properties to parameters
+        // TODO: Make ScanPerformer return a ScannedImageSource (adding more impls if necessary), and have consumers do "await source.ForEach(callback)"
+        // TODO: Bascially the only thing ScanPerformer should do is delegate to the correct driver.
+        // TODO: Probably ISaveNotify should follow the static default/injected pattern so it doesn't have to be a parameter.
+        // TODO: Use a handle pointer rather than IWin32Window for DialogParent
+
+        // Isn't this so much cleaner?
+        public ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify,
             Action<ScannedImage> imageCallback, CancellationToken cancelToken = default)
         {
