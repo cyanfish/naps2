@@ -5,8 +5,11 @@ using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAPS2.Config;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
+using NAPS2.Lang.Resources;
+using NAPS2.Logging;
 using NAPS2.WinForms;
 using NAPS2.Worker;
 
@@ -20,18 +23,8 @@ namespace NAPS2.Scan
         public abstract string DriverName { get; }
 
         public abstract bool IsSupported { get; }
-
-        public ScanProfile ScanProfile { get; set; }
-
-        public ScanParams ScanParams { get; set; }
-
-        public ScanDevice ScanDevice { get; set; }
-
-        public IWin32Window DialogParent { get; set; }
-
-        public CancellationToken CancelToken { get; set; }
-
-        public ScanDevice PromptForDevice()
+        
+        public ScanDevice PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
         {
             if (!IsSupported)
             {
@@ -39,7 +32,7 @@ namespace NAPS2.Scan
             }
             try
             {
-                return PromptForDeviceInternal();
+                return PromptForDeviceInternal(scanProfile, dialogParent);
             }
             catch (ScanDriverException)
             {
@@ -51,9 +44,9 @@ namespace NAPS2.Scan
             }
         }
 
-        protected virtual ScanDevice PromptForDeviceInternal()
+        protected virtual ScanDevice PromptForDeviceInternal(ScanProfile scanProfile, IntPtr dialogParent)
         {
-            var deviceList = GetDeviceList();
+            var deviceList = GetDeviceList(scanProfile);
 
             if (!deviceList.Any())
             {
@@ -68,7 +61,7 @@ namespace NAPS2.Scan
             return form.SelectedDevice;
         }
 
-        public List<ScanDevice> GetDeviceList()
+        public List<ScanDevice> GetDeviceList(ScanProfile scanProfile)
         {
             if (!IsSupported)
             {
@@ -76,7 +69,7 @@ namespace NAPS2.Scan
             }
             try
             {
-                return GetDeviceListInternal();
+                return GetDeviceListInternal(scanProfile);
             }
             catch (ScanDriverException)
             {
@@ -88,25 +81,21 @@ namespace NAPS2.Scan
             }
         }
 
-        protected abstract List<ScanDevice> GetDeviceListInternal();
+        protected abstract List<ScanDevice> GetDeviceListInternal(ScanProfile scanProfile);
 
-        public ScannedImageSource Scan()
+        public ScannedImageSource Scan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default)
         {
             if (!IsSupported)
             {
                 throw new DriverNotSupportedException();
             }
-            if (ScanProfile == null)
+            if (scanProfile == null)
             {
-                throw new InvalidOperationException("IScanDriver.ScanProfile must be specified before calling Scan().");
+                throw new ArgumentNullException(nameof(scanProfile));
             }
-            if (ScanParams == null)
+            if (scanParams == null)
             {
-                throw new InvalidOperationException("IScanDriver.ScanParams must be specified before calling Scan().");
-            }
-            if (ScanDevice == null)
-            {
-                throw new InvalidOperationException("IScanDriver.ScanDevice must be specified before calling Scan().");
+                throw new ArgumentNullException(nameof(scanParams));
             }
 
             var source = new ScannedImageSource.Concrete();
@@ -114,8 +103,27 @@ namespace NAPS2.Scan
             {
                 try
                 {
-                    await ScanInternal(source);
+                    int imageCount = 0;
+                    source.OnPut += (sender, args) => imageCount++;
+
+                    var device = GetScanDevice(scanProfile);
+                    if (device != null)
+                    {
+                        await ScanInternal(source, device, scanProfile, scanParams, dialogParent, cancelToken);
+                    }
                     source.Done();
+
+                    if (imageCount > 0)
+                    {
+                        Log.Event(EventType.Scan, new EventParams
+                        {
+                            Name = MiscResources.Scan,
+                            Pages = imageCount,
+                            DeviceName = scanProfile.Device?.Name,
+                            ProfileName = scanProfile.DisplayName,
+                            BitDepth = scanProfile.BitDepth.Description()
+                        });
+                    }
                 }
                 catch (ScanDriverException e)
                 {
@@ -133,6 +141,74 @@ namespace NAPS2.Scan
             return source;
         }
 
-        protected abstract Task ScanInternal(ScannedImageSource.Concrete source);
+        private void AutoSaveStuff()
+        {
+            // TODO
+            //bool doAutoSave = !scanParams.NoAutoSave && !AppConfig.Current.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
+            //if (doAutoSave)
+            //{
+            //    if (scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
+            //    {
+            //        // Auto save without piping images
+            //        var images = await source.ToList();
+            //        if (await autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
+            //        {
+            //            foreach (ScannedImage img in images)
+            //            {
+            //                img.Dispose();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            // Fallback in case auto save failed; pipe all the images back at once
+            //            foreach (ScannedImage img in images)
+            //            {
+            //                imageCallback(img);
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
+            //        var images = new List<ScannedImage>();
+            //        await source.ForEach(scannedImage =>
+            //        {
+            //            imageCallback(scannedImage);
+            //            images.Add(scannedImage);
+            //        });
+            //        await autoSave.Save(scanProfile.AutoSaveSettings, images, notify);
+            //    }
+            //}
+            //else
+            //{
+            //    // No auto save, so just pipe images back as we get them
+            //    await source.ForEach(imageCallback);
+            //}
+        }
+
+        private ScanDevice GetScanDevice(ScanProfile scanProfile)
+        {
+            if (scanProfile.Device != null)
+            {
+                // The profile has a device specified, so use it
+                return scanProfile.Device;
+            }
+
+            // The profile has no device specified, so prompt the user to choose one
+            var device = PromptForDevice(scanProfile);
+            if (device == null)
+            {
+                // User cancelled
+                return null;
+            }
+            if (AppConfig.Current.AlwaysRememberDevice)
+            {
+                scanProfile.Device = device;
+                ProfileManager.Current.Save();
+            }
+            return device;
+        }
+
+        protected abstract Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken);
     }
 }

@@ -89,7 +89,7 @@ namespace NAPS2.Worker
                 await Task.Factory.StartNew(() =>
                 {
                     var imagePathDict = new Dictionary<ScannedImage, string>();
-                    twainWrapper.Scan(hwnd == IntPtr.Zero ? null : new Win32Window(hwnd), scanDevice, scanProfile, scanParams, twainScanCts.Token,
+                    twainWrapper.Scan(hwnd, scanDevice, scanProfile, scanParams, twainScanCts.Token,
                         new WorkerImageSource(Callback, imagePathDict), (img, _, path) => imagePathDict.Add(img, path));
                 }, TaskCreationOptions.LongRunning);
             }

@@ -11,6 +11,7 @@ using NAPS2.Ocr;
 using NAPS2.Platform;
 using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
+using NAPS2.Scan;
 using NLog;
 
 namespace NAPS2.DI
@@ -28,6 +29,7 @@ namespace NAPS2.DI
             Debug.Listeners.Add(new NLogTraceListener());
 #endif
 
+            ProfileManager.Current = new ProfileManager("profiles.xml", Paths.AppData, Paths.Executable, () => new List<ScanProfile>());
             UserConfig.Manager = new ConfigManager<UserConfig>("config.xml", Paths.AppData, Paths.Executable, UserConfig.Create);
             AppConfig.Manager = new ConfigManager<AppConfig>("appsettings.xml", Paths.Executable, null, AppConfig.Create);
 

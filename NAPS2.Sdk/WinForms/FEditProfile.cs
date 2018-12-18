@@ -227,9 +227,7 @@ namespace NAPS2.WinForms
             var driver = driverFactory.Create(driverName);
             try
             {
-                driver.DialogParent = this;
-                driver.ScanProfile = ScanProfile;
-                ScanDevice device = driver.PromptForDevice();
+                ScanDevice device = driver.PromptForDevice(ScanProfile, Handle);
                 if (device != null)
                 {
                     if (string.IsNullOrEmpty(txtName.Text) ||

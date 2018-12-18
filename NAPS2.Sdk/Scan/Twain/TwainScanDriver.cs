@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Platform;
 using NAPS2.Images;
@@ -32,18 +33,18 @@ namespace NAPS2.Scan.Twain
 
         public override bool IsSupported => PlatformCompat.System.IsTwainDriverSupported;
         
-        private bool UseWorker => ScanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
+        private bool UseWorker(ScanProfile scanProfile) => scanProfile.TwainImpl != TwainImpl.X64 && Environment.Is64BitProcess && PlatformCompat.Runtime.UseWorker;
         
-        protected override List<ScanDevice> GetDeviceListInternal()
+        protected override List<ScanDevice> GetDeviceListInternal(ScanProfile scanProfile)
         {
             // Exclude WIA proxy devices since NAPS2 already supports WIA
-            return GetFullDeviceList().Where(x => !x.ID.StartsWith("WIA-", StringComparison.InvariantCulture)).ToList();
+            return GetFullDeviceList(scanProfile).Where(x => !x.ID.StartsWith("WIA-", StringComparison.InvariantCulture)).ToList();
         }
 
-        private IEnumerable<ScanDevice> GetFullDeviceList()
+        private IEnumerable<ScanDevice> GetFullDeviceList(ScanProfile scanProfile)
         {
-            var twainImpl = ScanProfile?.TwainImpl ?? TwainImpl.Default;
-            if (UseWorker)
+            var twainImpl = scanProfile?.TwainImpl ?? TwainImpl.Default;
+            if (UseWorker(scanProfile))
             {
                 using(var worker = WorkerManager.Factory.Create())
                 {
@@ -53,26 +54,26 @@ namespace NAPS2.Scan.Twain
             return twainWrapper.GetDeviceList(twainImpl);
         }
 
-        protected override async Task ScanInternal(ScannedImageSource.Concrete source)
+        protected override async Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             await Task.Factory.StartNew(async () =>
             {
-                if (UseWorker)
+                if (UseWorker(scanProfile))
                 {
                     using (var worker = WorkerManager.Factory.Create())
                     {
                         worker.Callback.ImageCallback += (img, tempPath) =>
                         {
-                            if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, ScanParams, tempPath);
+                            if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, scanParams, tempPath);
                             source.Put(img);
                         };
-                        CancelToken.Register(worker.Service.CancelTwainScan);
-                        await worker.Service.TwainScan(ScanDevice, ScanProfile, ScanParams, DialogParent?.SafeHandle() ?? IntPtr.Zero);
+                        cancelToken.Register(worker.Service.CancelTwainScan);
+                        await worker.Service.TwainScan(scanDevice, scanProfile, scanParams, dialogParent);
                     }
                 }
                 else
                 {
-                    twainWrapper.Scan(DialogParent, ScanDevice, ScanProfile, ScanParams, CancelToken, source, scannedImageHelper.RunBackgroundOcr);
+                    twainWrapper.Scan(dialogParent, scanDevice, scanProfile, scanParams, cancelToken, source, scannedImageHelper.RunBackgroundOcr);
                 }
             }, TaskCreationOptions.LongRunning).Unwrap();
         }

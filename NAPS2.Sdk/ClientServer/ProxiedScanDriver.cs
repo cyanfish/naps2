@@ -16,40 +16,32 @@ namespace NAPS2.ClientServer
         public const string DRIVER_NAME = "proxy";
 
         private readonly ClientContextFactory clientContextFactory;
-        private readonly ScannedImageHelper scannedImageHelper;
-        private readonly IFormFactory formFactory;
 
-        public ProxiedScanDriver(ClientContextFactory clientContextFactory, IFormFactory formFactory, ScannedImageHelper scannedImageHelper)
+        public ProxiedScanDriver(ClientContextFactory clientContextFactory)
         {
             this.clientContextFactory = clientContextFactory;
-            this.formFactory = formFactory;
-            this.scannedImageHelper = scannedImageHelper;
         }
 
         public override string DriverName => DRIVER_NAME;
 
         public override bool IsSupported => true;
 
-        protected override List<ScanDevice> GetDeviceListInternal()
+        protected override List<ScanDevice> GetDeviceListInternal(ScanProfile scanProfile)
         {
-            if (ScanProfile == null)
+            if (scanProfile?.ProxyConfig == null)
             {
-                throw new InvalidOperationException("ScanProfile must be set before calling methods on ProxiedScanDriver.");
-            }
-            if (ScanProfile.ProxyConfig == null)
-            {
-                throw new InvalidOperationException("ScanProfile.ProxyConfig must be specified to use ProxiedScanDriver.");
+                throw new ArgumentException("ScanProfile.ProxyConfig must be specified to use ProxiedScanDriver.", nameof(scanProfile));
             }
 
-            using (var client = clientContextFactory.Create(ScanProfile.ProxyConfig))
+            using (var client = clientContextFactory.Create(scanProfile.ProxyConfig))
             {
-                return client.Service.GetDeviceList(ScanProfile);
+                return client.Service.GetDeviceList(scanProfile);
             }
         }
 
-        protected override Task ScanInternal(ScannedImageSource.Concrete source)
+        protected override Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
-            if (ScanProfile.ProxyConfig == null)
+            if (scanProfile.ProxyConfig == null)
             {
                 throw new InvalidOperationException("ScanProfile.ProxyConfig must be specified to use ProxiedScanDriver.");
             }
@@ -58,10 +50,10 @@ namespace NAPS2.ClientServer
             {
                 try
                 {
-                    using (var client = clientContextFactory.Create(ScanProfile.ProxyConfig))
+                    using (var client = clientContextFactory.Create(scanProfile.ProxyConfig))
                     {
-                        var noUi = ScanParams.NoUI;
-                        FScanProgress form = Invoker.Current.InvokeGet(() => noUi ? null : formFactory.Create<FScanProgress>());
+                        var noUi = scanParams.NoUI;
+                        FScanProgress form = Invoker.Current.InvokeGet(() => noUi ? null : new FScanProgress());
                         int pageNumber = 1;
                         var sem = new Semaphore(0, int.MaxValue);
 
@@ -92,7 +84,7 @@ namespace NAPS2.ClientServer
                             }
                         };
 
-                        var scanTask = client.Service.Scan(ScanProfile, ScanParams).ContinueWith(t =>
+                        var scanTask = client.Service.Scan(scanProfile, scanParams).ContinueWith(t =>
                         {
                             for (int i = 0; i < t.Result; i++)
                             {
@@ -106,13 +98,13 @@ namespace NAPS2.ClientServer
                             form.AsyncTransfer = async () => await scanTask;
                             form.CancelToken.Register(client.Service.CancelScan);
                         }
-                        CancelToken.Register(client.Service.CancelScan);
+                        cancelToken.Register(client.Service.CancelScan);
 
                         if (noUi)
                         {
                             await scanTask;
                         }
-                        else if (ScanParams.Modal)
+                        else if (scanParams.Modal)
                         {
                             Invoker.Current.SafeInvoke(() => form.ShowDialog());
                         }

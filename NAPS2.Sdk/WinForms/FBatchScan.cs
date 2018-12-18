@@ -21,8 +21,7 @@ namespace NAPS2.WinForms
     public partial class FBatchScan : FormBase
     {
         public const string PATCH_CODE_INFO_URL = "http://www.naps2.com/doc-batch-scan.html#patch-t";
-
-        private readonly IProfileManager profileManager;
+        
         private readonly BatchScanPerformer batchScanPerformer;
         private readonly IErrorOutput errorOutput;
         private readonly DialogHelper dialogHelper;
@@ -30,9 +29,8 @@ namespace NAPS2.WinForms
         private bool batchRunning;
         private CancellationTokenSource cts = new CancellationTokenSource();
 
-        public FBatchScan(IProfileManager profileManager, BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, DialogHelper dialogHelper)
+        public FBatchScan(BatchScanPerformer batchScanPerformer, IErrorOutput errorOutput, DialogHelper dialogHelper)
         {
-            this.profileManager = profileManager;
             this.batchScanPerformer = batchScanPerformer;
             this.errorOutput = errorOutput;
             this.dialogHelper = dialogHelper;
@@ -56,7 +54,7 @@ namespace NAPS2.WinForms
                     .RightToForm()
                 .Activate();
 
-            btnAddProfile.Enabled = !(AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
+            btnAddProfile.Enabled = !(AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked));
 
             ConditionalControls.LockHeight(this);
 
@@ -142,15 +140,15 @@ namespace NAPS2.WinForms
         private void UpdateProfiles()
         {
             comboProfile.Items.Clear();
-            comboProfile.Items.AddRange(profileManager.Profiles.Cast<object>().ToArray());
+            comboProfile.Items.AddRange(ProfileManager.Current.Profiles.Cast<object>().ToArray());
             if (BatchSettings.ProfileDisplayName != null &&
-                profileManager.Profiles.Any(x => x.DisplayName == BatchSettings.ProfileDisplayName))
+                ProfileManager.Current.Profiles.Any(x => x.DisplayName == BatchSettings.ProfileDisplayName))
             {
                 comboProfile.Text = BatchSettings.ProfileDisplayName;
             }
-            else if (profileManager.DefaultProfile != null)
+            else if (ProfileManager.Current.DefaultProfile != null)
             {
-                comboProfile.Text = profileManager.DefaultProfile.DisplayName;
+                comboProfile.Text = ProfileManager.Current.DefaultProfile.DisplayName;
             }
             else
             {
@@ -214,8 +212,8 @@ namespace NAPS2.WinForms
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    profileManager.Profiles[comboProfile.SelectedIndex] = fedit.ScanProfile;
-                    profileManager.Save();
+                    ProfileManager.Current.Profiles[comboProfile.SelectedIndex] = fedit.ScanProfile;
+                    ProfileManager.Current.Save();
                     BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName;
                     UpdateProfiles();
                 }
@@ -224,15 +222,15 @@ namespace NAPS2.WinForms
 
         private void btnAddProfile_Click(object sender, EventArgs e)
         {
-            if (!(AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked)))
+            if (!(AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked)))
             {
                 var fedit = FormFactory.Create<FEditProfile>();
                 fedit.ScanProfile = AppConfig.Current.DefaultProfileSettings ?? new ScanProfile {Version = ScanProfile.CURRENT_VERSION};
                 fedit.ShowDialog();
                 if (fedit.Result)
                 {
-                    profileManager.Profiles.Add(fedit.ScanProfile);
-                    profileManager.Save();
+                    ProfileManager.Current.Profiles.Add(fedit.ScanProfile);
+                    ProfileManager.Current.Save();
                     BatchSettings.ProfileDisplayName = fedit.ScanProfile.DisplayName;
                     UpdateProfiles();
                 }

@@ -29,14 +29,14 @@ namespace NAPS2.Scan.Stub
 
         public CancellationToken CancelToken { get; set; }
 
-        public ScanDevice PromptForDevice() => new ScanDevice("test", "Test Scanner");
+        public ScanDevice PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent) => new ScanDevice("test", "Test Scanner");
 
-        public List<ScanDevice> GetDeviceList() => new List<ScanDevice>
+        public List<ScanDevice> GetDeviceList(ScanProfile scanProfile) => new List<ScanDevice>
         {
             new ScanDevice("test", "Test Scanner")
         };
 
-        public ScannedImageSource Scan()
+        public ScannedImageSource Scan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             var source = new ScannedImageSource.Concrete();
             Task.Factory.StartNew(() =>

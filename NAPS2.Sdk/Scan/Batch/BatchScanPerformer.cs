@@ -15,6 +15,7 @@ using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Images;
 using NAPS2.Scan.Twain;
+using NAPS2.Util;
 using NAPS2.WinForms;
 
 namespace NAPS2.Scan.Batch
@@ -22,17 +23,15 @@ namespace NAPS2.Scan.Batch
     public class BatchScanPerformer
     {
         private readonly IScanPerformer scanPerformer;
-        private readonly IProfileManager profileManager;
         private readonly IPdfExporter pdfExporter;
         private readonly IOperationFactory operationFactory;
         private readonly PdfSettingsContainer pdfSettingsContainer;
         private readonly OcrManager ocrManager;
         private readonly IFormFactory formFactory;
 
-        public BatchScanPerformer(IScanPerformer scanPerformer, IProfileManager profileManager, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
+        public BatchScanPerformer(IScanPerformer scanPerformer, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
         {
             this.scanPerformer = scanPerformer;
-            this.profileManager = profileManager;
             this.pdfExporter = pdfExporter;
             this.operationFactory = operationFactory;
             this.pdfSettingsContainer = pdfSettingsContainer;
@@ -42,7 +41,7 @@ namespace NAPS2.Scan.Batch
 
         public async Task PerformBatchScan(BatchSettings settings, FormBase batchForm, Action<ScannedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
         {
-            var state = new BatchState(scanPerformer, profileManager, pdfExporter, operationFactory, pdfSettingsContainer, ocrManager, formFactory)
+            var state = new BatchState(scanPerformer, pdfExporter, operationFactory, pdfSettingsContainer, ocrManager, formFactory)
             {
                 Settings = settings,
                 ProgressCallback = progressCallback,
@@ -56,7 +55,6 @@ namespace NAPS2.Scan.Batch
         private class BatchState
         {
             private readonly IScanPerformer scanPerformer;
-            private readonly IProfileManager profileManager;
             private readonly IPdfExporter pdfExporter;
             private readonly IOperationFactory operationFactory;
             private readonly PdfSettingsContainer pdfSettingsContainer;
@@ -67,10 +65,9 @@ namespace NAPS2.Scan.Batch
             private ScanParams scanParams;
             private List<List<ScannedImage>> scans;
 
-            public BatchState(IScanPerformer scanPerformer, IProfileManager profileManager, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
+            public BatchState(IScanPerformer scanPerformer, IPdfExporter pdfExporter, IOperationFactory operationFactory, PdfSettingsContainer pdfSettingsContainer, OcrManager ocrManager, IFormFactory formFactory)
             {
                 this.scanPerformer = scanPerformer;
-                this.profileManager = profileManager;
                 this.pdfExporter = pdfExporter;
                 this.operationFactory = operationFactory;
                 this.pdfSettingsContainer = pdfSettingsContainer;
@@ -90,7 +87,7 @@ namespace NAPS2.Scan.Batch
 
             public async Task Do()
             {
-                profile = profileManager.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
+                profile = ProfileManager.Current.Profiles.First(x => x.DisplayName == Settings.ProfileDisplayName);
                 scanParams = new ScanParams
                 {
                     DetectPatchCodes = Settings.OutputType == BatchOutputType.MultipleFiles && Settings.SaveSeparator == SaveSeparator.PatchT,
@@ -203,14 +200,15 @@ namespace NAPS2.Scan.Batch
 
             private async Task DoScan(int scanNumber, List<ScannedImage> scan, int pageNumber)
             {
-                await scanPerformer.PerformScan(profile, scanParams, BatchForm, null, image =>
+                var source = scanPerformer.PerformScan(profile, scanParams, BatchForm.SafeHandle(), CancelToken);
+                await source.ForEach(image =>
                 {
                     scan.Add(image);
                     CancelToken.ThrowIfCancellationRequested();
                     ProgressCallback(scanNumber == -1
                         ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
                         : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-                }, CancelToken);
+                });
             }
 
             private bool PromptForNextScan()

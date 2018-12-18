@@ -88,7 +88,11 @@ namespace NAPS2.Images
 
             private Exception exception;
 
-            public virtual void Put(ScannedImage image) => collection.Add(image);
+            public virtual void Put(ScannedImage image)
+            {
+                collection.Add(image);
+                OnPut?.Invoke(this, EventArgs.Empty);
+            }
 
             public void Done() => collection.CompleteAdding();
 
@@ -116,6 +120,8 @@ namespace NAPS2.Images
                     return null;
                 }
             });
+
+            public event EventHandler OnPut;
         }
     }
 }

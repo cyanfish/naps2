@@ -23,12 +23,12 @@ namespace NAPS2.Sdk.Samples
             
             IScanDriver driver = new WiaScanDriver();
             ScanDevice device = driver.GetDeviceList().First();
-            driver.ScanProfile = new ScanProfile
+            ScanProfile scanProfile = new ScanProfile
             {
                 Device = device,
                 Resolution = ScanDpi.Dpi300
             };
-            driver.ScanParams = new ScanParams
+            ScanParams scanParams = new ScanParams
             {
                 NoUI = true
             };
@@ -37,7 +37,7 @@ namespace NAPS2.Sdk.Samples
             // excessive amount of memory, since it is all stored on disk until rendered.
             // This is just for illustration purposes; in real code you usually want to
             // process images as they come rather than waiting for the full scan.
-            List<ScannedImage> scannedImages = await driver.Scan().ToList();
+            List<ScannedImage> scannedImages = await driver.Scan(scanProfile, scanParams).ToList();
 
             try
             {

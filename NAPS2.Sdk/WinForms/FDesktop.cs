@@ -44,7 +44,6 @@ namespace NAPS2.WinForms
         private readonly StringWrapper stringWrapper;
         private readonly RecoveryManager recoveryManager;
         private readonly OcrManager ocrManager;
-        private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IScannedImagePrinter scannedImagePrinter;
         private readonly ChangeTracker changeTracker;
@@ -75,12 +74,11 @@ namespace NAPS2.WinForms
 
         #region Initialization and Culture
 
-        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrManager ocrManager, IProfileManager profileManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
+        public FDesktop(StringWrapper stringWrapper, RecoveryManager recoveryManager, OcrManager ocrManager, IScanPerformer scanPerformer, IScannedImagePrinter scannedImagePrinter, ChangeTracker changeTracker, StillImage stillImage, IOperationFactory operationFactory, KeyboardShortcutManager ksm, ThumbnailRenderer thumbnailRenderer, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, ImageRenderer imageRenderer, NotificationManager notify, CultureInitializer cultureInitializer, IWorkerServiceFactory workerServiceFactory, OperationProgress operationProgress, UpdateChecker updateChecker)
         {
             this.stringWrapper = stringWrapper;
             this.recoveryManager = recoveryManager;
             this.ocrManager = ocrManager;
-            this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.scannedImagePrinter = scannedImagePrinter;
             this.changeTracker = changeTracker;
@@ -461,20 +459,20 @@ namespace NAPS2.WinForms
         {
             Activate();
             ScanProfile profile;
-            if (profileManager.DefaultProfile?.Device?.ID == deviceID)
+            if (ProfileManager.Current.DefaultProfile?.Device?.ID == deviceID)
             {
                 // Try to use the default profile if it has the right device
-                profile = profileManager.DefaultProfile;
+                profile = ProfileManager.Current.DefaultProfile;
             }
             else
             {
                 // Otherwise just pick any old profile with the right device
                 // Not sure if this is the best way to do it, but it's hard to prioritize profiles
-                profile = profileManager.Profiles.FirstOrDefault(x => x.Device != null && x.Device.ID == deviceID);
+                profile = ProfileManager.Current.Profiles.FirstOrDefault(x => x.Device != null && x.Device.ID == deviceID);
             }
             if (profile == null)
             {
-                if (AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked))
+                if (AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked))
                 {
                     return;
                 }
@@ -501,28 +499,30 @@ namespace NAPS2.WinForms
                     return;
                 }
                 profile = editSettingsForm.ScanProfile;
-                profileManager.Profiles.Add(profile);
-                profileManager.DefaultProfile = profile;
-                profileManager.Save();
+                ProfileManager.Current.Profiles.Add(profile);
+                ProfileManager.Current.DefaultProfile = profile;
+                ProfileManager.Current.Save();
 
                 UpdateScanButton();
             }
             if (profile != null)
             {
                 // We got a profile, yay, so we can actually do the scan now
-                await scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage());
+                var source = scanPerformer.PerformScan(profile, new ScanParams(), Handle);
+                await source.ForEach(ReceiveScannedImage());
                 Activate();
             }
         }
 
         private async Task ScanDefault()
         {
-            if (profileManager.DefaultProfile != null)
+            if (ProfileManager.Current.DefaultProfile != null)
             {
-                await scanPerformer.PerformScan(profileManager.DefaultProfile, new ScanParams(), this, notify, ReceiveScannedImage());
+                var source = scanPerformer.PerformScan(ProfileManager.Current.DefaultProfile, new ScanParams(), Handle);
+                await source.ForEach(ReceiveScannedImage());
                 Activate();
             }
-            else if (profileManager.Profiles.Count == 0)
+            else if (ProfileManager.Current.Profiles.Count == 0)
             {
                 await ScanWithNewProfile();
             }
@@ -541,13 +541,14 @@ namespace NAPS2.WinForms
             {
                 return;
             }
-            profileManager.Profiles.Add(editSettingsForm.ScanProfile);
-            profileManager.DefaultProfile = editSettingsForm.ScanProfile;
-            profileManager.Save();
+            ProfileManager.Current.Profiles.Add(editSettingsForm.ScanProfile);
+            ProfileManager.Current.DefaultProfile = editSettingsForm.ScanProfile;
+            ProfileManager.Current.Save();
 
             UpdateScanButton();
 
-            await scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), this, notify, ReceiveScannedImage());
+            var source = scanPerformer.PerformScan(editSettingsForm.ScanProfile, new ScanParams(), Handle);
+            await source.ForEach(ReceiveScannedImage());
             Activate();
         }
 
@@ -707,7 +708,7 @@ namespace NAPS2.WinForms
             // Other
             btnZoomIn.Enabled = imageList.Images.Any() && UserConfig.Current.ThumbnailSize < ThumbnailRenderer.MAX_SIZE;
             btnZoomOut.Enabled = imageList.Images.Any() && UserConfig.Current.ThumbnailSize > ThumbnailRenderer.MIN_SIZE;
-            tsNewProfile.Enabled = !(AppConfig.Current.NoUserProfiles && profileManager.Profiles.Any(x => x.IsLocked));
+            tsNewProfile.Enabled = !(AppConfig.Current.NoUserProfiles && ProfileManager.Current.Profiles.Any(x => x.IsLocked));
 
             if (PlatformCompat.Runtime.RefreshListViewAfterChange)
             {
@@ -727,9 +728,9 @@ namespace NAPS2.WinForms
             }
 
             // Populate the dropdown
-            var defaultProfile = profileManager.DefaultProfile;
+            var defaultProfile = ProfileManager.Current.DefaultProfile;
             int i = 1;
-            foreach (var profile in profileManager.Profiles)
+            foreach (var profile in ProfileManager.Current.Profiles)
             {
                 var item = new ToolStripMenuItem
                 {
@@ -740,12 +741,13 @@ namespace NAPS2.WinForms
                 AssignProfileShortcut(i, item);
                 item.Click += async (sender, args) =>
                 {
-                    profileManager.DefaultProfile = profile;
-                    profileManager.Save();
+                    ProfileManager.Current.DefaultProfile = profile;
+                    ProfileManager.Current.Save();
 
                     UpdateScanButton();
 
-                    await scanPerformer.PerformScan(profile, new ScanParams(), this, notify, ReceiveScannedImage());
+                    var source = scanPerformer.PerformScan(profile, new ScanParams(), Handle);
+                    await source.ForEach(ReceiveScannedImage());
                     Activate();
                 };
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, item);
@@ -753,7 +755,7 @@ namespace NAPS2.WinForms
                 i++;
             }
 
-            if (profileManager.Profiles.Any())
+            if (ProfileManager.Current.Profiles.Any())
             {
                 tsScan.DropDownItems.Insert(tsScan.DropDownItems.Count - staticButtonCount, new ToolStripSeparator());
             }

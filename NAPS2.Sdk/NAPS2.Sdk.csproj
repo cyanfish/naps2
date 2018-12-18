@@ -158,6 +158,7 @@
     <Compile Include="ClientServer\ScanService.cs" />
     <Compile Include="ClientServer\ServerDiscovery.cs" />
     <Compile Include="Config\StubConfigManager.cs" />
+    <Compile Include="Config\StubProfileManager.cs" />
     <Compile Include="Dependencies\DownloadMirror.cs" />
     <Compile Include="Dependencies\MultiFileExternalComponent.cs" />
     <Compile Include="Dependencies\IExternalComponent.cs" />

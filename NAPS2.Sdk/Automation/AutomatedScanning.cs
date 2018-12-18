@@ -26,7 +26,6 @@ namespace NAPS2.Automation
     public class AutomatedScanning
     {
         private readonly IEmailProviderFactory emailProviderFactory;
-        private readonly IProfileManager profileManager;
         private readonly IScanPerformer scanPerformer;
         private readonly IErrorOutput errorOutput;
         private readonly IScannedImageImporter scannedImageImporter;
@@ -44,10 +43,9 @@ namespace NAPS2.Automation
         private List<string> actualOutputPaths;
         private OcrParams ocrParams;
 
-        public AutomatedScanning(AutomatedScanningOptions options, IProfileManager profileManager, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory)
+        public AutomatedScanning(AutomatedScanningOptions options, IScanPerformer scanPerformer, IErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory, IScannedImageImporter scannedImageImporter, PdfSettingsContainer pdfSettingsContainer, ImageSettingsContainer imageSettingsContainer, IOperationFactory operationFactory, OcrManager ocrManager, IFormFactory formFactory)
         {
             this.options = options;
-            this.profileManager = profileManager;
             this.scanPerformer = scanPerformer;
             this.errorOutput = errorOutput;
             this.emailProviderFactory = emailProviderFactory;
@@ -593,7 +591,8 @@ namespace NAPS2.Automation
                     DoOcr = ocrParams?.LanguageCode != null,
                     OcrParams = ocrParams
                 };
-                await scanPerformer.PerformScan(profile, scanParams, null, null, ReceiveScannedImage);
+                var source = scanPerformer.PerformScan(profile, scanParams);
+                await source.ForEach(ReceiveScannedImage);
                 OutputVerbose(ConsoleResources.PagesScanned, pagesScanned);
             }
         }
@@ -605,13 +604,13 @@ namespace NAPS2.Automation
                 if (options.ProfileName == null)
                 {
                     // If no profile is specified, use the default (if there is one)
-                    profile = profileManager.Profiles.Single(x => x.IsDefault);
+                    profile = ProfileManager.Current.Profiles.Single(x => x.IsDefault);
                 }
                 else
                 {
                     // Use the profile with the specified name (try case-sensitive first, then case-insensitive)
-                    profile = profileManager.Profiles.FirstOrDefault(x => x.DisplayName == options.ProfileName) ??
-                              profileManager.Profiles.First(x => x.DisplayName.ToLower() == options.ProfileName.ToLower());
+                    profile = ProfileManager.Current.Profiles.FirstOrDefault(x => x.DisplayName == options.ProfileName) ??
+                              ProfileManager.Current.Profiles.First(x => x.DisplayName.ToLower() == options.ProfileName.ToLower());
                 }
             }
             catch (InvalidOperationException)

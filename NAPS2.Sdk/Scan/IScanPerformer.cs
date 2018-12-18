@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using NAPS2.Images;
-using NAPS2.Util;
 
 namespace NAPS2.Scan
 {
@@ -15,7 +12,6 @@ namespace NAPS2.Scan
     /// </summary>
     public interface IScanPerformer
     {
-        Task PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify, Action<ScannedImage> imageCallback,
-            CancellationToken cancelToken = default);
+        ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default);
     }
 }

@@ -11,8 +11,16 @@ namespace NAPS2.Config
 {
     public class ProfileManager : ConfigManager<List<ScanProfile>>, IProfileManager
     {
-        public ProfileManager()
-            : base("profiles.xml", Paths.AppData, Paths.Executable, () => new List<ScanProfile>())
+        private static IProfileManager _current = new StubProfileManager();
+
+        public static IProfileManager Current
+        {
+            get => _current;
+            set => _current = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        public ProfileManager(string indexFileName, string recoveryFolderPath, string secondaryFolder, Func<List<ScanProfile>> factory)
+            : base(indexFileName, recoveryFolderPath, secondaryFolder, factory)
         {
         }
 

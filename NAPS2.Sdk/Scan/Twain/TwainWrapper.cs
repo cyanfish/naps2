@@ -89,7 +89,7 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        public void Scan(IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
+        public void Scan(IntPtr dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
             CancellationToken cancelToken, ScannedImageSource.Concrete source, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
         {
             try
@@ -111,16 +111,16 @@ namespace NAPS2.Scan.Twain
             }
         }
 
-        private void InternalScan(TwainImpl twainImpl, IWin32Window dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
+        private void InternalScan(TwainImpl twainImpl, IntPtr dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
             CancellationToken cancelToken, ScannedImageSource.Concrete source, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
         {
-            if (dialogParent == null)
+            if (dialogParent == IntPtr.Zero)
             {
-                dialogParent = new BackgroundForm();
+                dialogParent = new BackgroundForm().Handle;
             }
             if (twainImpl == TwainImpl.Legacy)
             {
-                Legacy.TwainApi.Scan(scanProfile, scanDevice, dialogParent, source);
+                Legacy.TwainApi.Scan(scanProfile, scanDevice, new Win32Window(dialogParent), source);
                 return;
             }
 
@@ -289,12 +289,12 @@ namespace NAPS2.Scan.Twain
             else if (!scanParams.Modal)
             {
                 Debug.WriteLine("NAPS2.TW - Init with non-modal form");
-                Invoker.Current.Invoke(() => twainForm.Show(dialogParent));
+                Invoker.Current.Invoke(() => twainForm.Show(new Win32Window(dialogParent)));
             }
             else
             {
                 Debug.WriteLine("NAPS2.TW - Init with modal form");
-                Invoker.Current.Invoke(() => twainForm.ShowDialog(dialogParent));
+                Invoker.Current.Invoke(() => twainForm.ShowDialog(new Win32Window(dialogParent)));
             }
             waitHandle.WaitOne();
             Debug.WriteLine("NAPS2.TW - Operation complete");

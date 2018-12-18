@@ -41,29 +41,29 @@ namespace NAPS2.Scan.Sane
 
         public override bool IsSupported => PlatformCompat.System.IsSaneDriverSupported;
 
-        protected override List<ScanDevice> GetDeviceListInternal()
+        protected override List<ScanDevice> GetDeviceListInternal(ScanProfile scanProfile)
         {
             return saneWrapper.GetDeviceList().ToList();
         }
 
-        protected override async Task ScanInternal(ScannedImageSource.Concrete source)
+        protected override async Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             // TODO: Test ADF
-            var options = new Lazy<KeyValueScanOptions>(GetOptions);
+            var options = new Lazy<KeyValueScanOptions>(() => GetOptions(scanProfile, scanDevice));
             int pageNumber = 1;
-            var (img, done) = await Transfer(options, pageNumber);
+            var (img, done) = await Transfer(options, pageNumber, scanProfile, scanParams, scanDevice, cancelToken);
             if (img != null)
             {
                 source.Put(img);
             }
 
-            if (!done && ScanProfile.PaperSource != ScanSource.Glass)
+            if (!done && scanProfile.PaperSource != ScanSource.Glass)
             {
                 try
                 {
                     while (true)
                     {
-                        (img, done) = await Transfer(options, ++pageNumber);
+                        (img, done) = await Transfer(options, ++pageNumber, scanProfile, scanParams, scanDevice, cancelToken);
                         if (done)
                         {
                             break;
@@ -81,10 +81,10 @@ namespace NAPS2.Scan.Sane
             }
         }
 
-        private KeyValueScanOptions GetOptions()
+        private KeyValueScanOptions GetOptions(ScanProfile scanProfile, ScanDevice scanDevice)
         {
-            var saneOptions = SaneOptionCache.GetOrSet(ScanDevice.ID, () => saneWrapper.GetOptions(ScanDevice.ID));
-            var options = new KeyValueScanOptions(ScanProfile.KeyValueOptions ?? new KeyValueScanOptions());
+            var saneOptions = SaneOptionCache.GetOrSet(scanDevice.ID, () => saneWrapper.GetOptions(scanDevice.ID));
+            var options = new KeyValueScanOptions(scanProfile.KeyValueOptions ?? new KeyValueScanOptions());
 
             bool ChooseStringOption(string name, Func<string, bool> match)
             {
@@ -138,11 +138,11 @@ namespace NAPS2.Scan.Sane
             bool IsFeederChoice(string choice) => new[] { "adf", "feeder", "simplex" }.Any(x => choice.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
             bool IsDuplexChoice(string choice) => choice.IndexOf("duplex", StringComparison.InvariantCultureIgnoreCase) >= 0;
 
-            if (ScanProfile.PaperSource == ScanSource.Glass)
+            if (scanProfile.PaperSource == ScanSource.Glass)
             {
                 ChooseStringOption("--source", IsFlatbedChoice);
             }
-            else if (ScanProfile.PaperSource == ScanSource.Feeder)
+            else if (scanProfile.PaperSource == ScanSource.Feeder)
             {
                 if (!ChooseStringOption("--source", x => IsFeederChoice(x) && !IsDuplexChoice(x)) &&
                     !ChooseStringOption("--source", IsFeederChoice) &&
@@ -151,7 +151,7 @@ namespace NAPS2.Scan.Sane
                     throw new NoFeederSupportException();
                 }
             }
-            else if (ScanProfile.PaperSource == ScanSource.Duplex)
+            else if (scanProfile.PaperSource == ScanSource.Duplex)
             {
                 if (!ChooseStringOption("--source", IsDuplexChoice))
                 {
@@ -159,27 +159,27 @@ namespace NAPS2.Scan.Sane
                 }
             }
 
-            if (ScanProfile.BitDepth == ScanBitDepth.C24Bit)
+            if (scanProfile.BitDepth == ScanBitDepth.C24Bit)
             {
                 ChooseStringOption("--mode", x => x == "Color");
                 ChooseNumericOption("--depth", 8);
             }
-            else if (ScanProfile.BitDepth == ScanBitDepth.Grayscale)
+            else if (scanProfile.BitDepth == ScanBitDepth.Grayscale)
             {
                 ChooseStringOption("--mode", x => x == "Gray");
                 ChooseNumericOption("--depth", 8);
             }
-            else if (ScanProfile.BitDepth == ScanBitDepth.BlackWhite)
+            else if (scanProfile.BitDepth == ScanBitDepth.BlackWhite)
             {
                 if (!ChooseStringOption("--mode", x => x == "Lineart"))
                 {
                     ChooseStringOption("--mode", x => x == "Halftone");
                 }
                 ChooseNumericOption("--depth", 1);
-                ChooseNumericOption("--threshold", (-ScanProfile.Brightness + 1000) / 20m);
+                ChooseNumericOption("--threshold", (-scanProfile.Brightness + 1000) / 20m);
             }
 
-            var pageDimens = ScanProfile.PageSize.PageDimensions() ?? ScanProfile.CustomPageSize;
+            var pageDimens = scanProfile.PageSize.PageDimensions() ?? scanProfile.CustomPageSize;
             if (pageDimens != null)
             {
                 var width = pageDimens.WidthInMm();
@@ -190,11 +190,11 @@ namespace NAPS2.Scan.Sane
                 var maxHeight = saneOptions.Get("-t")?.Range?.Max;
                 if (maxWidth != null)
                 {
-                    if (ScanProfile.PageAlign == ScanHorizontalAlign.Center)
+                    if (scanProfile.PageAlign == ScanHorizontalAlign.Center)
                     {
                         ChooseNumericOption("-l", (maxWidth.Value - width) / 2);
                     }
-                    else if (ScanProfile.PageAlign == ScanHorizontalAlign.Right)
+                    else if (scanProfile.PageAlign == ScanHorizontalAlign.Right)
                     {
                         ChooseNumericOption("-l", maxWidth.Value - width);
                     }
@@ -209,7 +209,7 @@ namespace NAPS2.Scan.Sane
                 }
             }
 
-            var dpi = ScanProfile.Resolution.ToIntDpi();
+            var dpi = scanProfile.Resolution.ToIntDpi();
             if (!ChooseNumericOption("--resolution", dpi))
             {
                 ChooseNumericOption("--x-resolution", dpi);
@@ -219,20 +219,20 @@ namespace NAPS2.Scan.Sane
             return options;
         }
 
-        private async Task<(ScannedImage, bool)> Transfer(Lazy<KeyValueScanOptions> options, int pageNumber)
+        private async Task<(ScannedImage, bool)> Transfer(Lazy<KeyValueScanOptions> options, int pageNumber, ScanProfile scanProfile, ScanParams scanParams, ScanDevice scanDevice, CancellationToken cancelToken)
         {
             return await Task.Factory.StartNew(() =>
             {
                 Stream stream;
-                if (ScanParams.NoUI)
+                if (scanParams.NoUI)
                 {
-                    stream = saneWrapper.ScanOne(ScanDevice.ID, options.Value, null, CancelToken);
+                    stream = saneWrapper.ScanOne(scanDevice.ID, options.Value, null, cancelToken);
                 }
                 else
                 {
                     var form = formFactory.Create<FScanProgress>();
-                    var unifiedCancelToken = CancellationTokenSource.CreateLinkedTokenSource(form.CancelToken, CancelToken).Token;
-                    form.Transfer = () => saneWrapper.ScanOne(ScanDevice.ID, options.Value, form.OnProgress, unifiedCancelToken);
+                    var unifiedCancelToken = CancellationTokenSource.CreateLinkedTokenSource(form.CancelToken, cancelToken).Token;
+                    form.Transfer = () => saneWrapper.ScanOne(scanDevice.ID, options.Value, form.OnProgress, unifiedCancelToken);
                     form.PageNumber = pageNumber;
                     ((FormBase)Application.OpenForms[0]).SafeInvoke(() => form.ShowDialog());
 
@@ -254,21 +254,21 @@ namespace NAPS2.Scan.Sane
                 }
                 using (stream)
                 using (var output = StorageManager.ImageFactory.Decode(stream, ".bmp"))
-                using (var result = scannedImageHelper.PostProcessStep1(output, ScanProfile, false))
+                using (var result = scannedImageHelper.PostProcessStep1(output, scanProfile, false))
                 {
-                    if (blankDetector.ExcludePage(result, ScanProfile))
+                    if (blankDetector.ExcludePage(result, scanProfile))
                     {
                         return (null, false);
                     }
 
                     // By converting to 1bpp here we avoid the Win32 call in the BitmapHelper conversion
                     // This converter also has the side effect of working even if the scanner doesn't support Lineart
-                    using (var encoded = ScanProfile.BitDepth == ScanBitDepth.BlackWhite ? Transform.Perform(result, new BlackWhiteTransform(-ScanProfile.Brightness)) : result)
+                    using (var encoded = scanProfile.BitDepth == ScanBitDepth.BlackWhite ? Transform.Perform(result, new BlackWhiteTransform(-scanProfile.Brightness)) : result)
                     {
-                        var image = new ScannedImage(encoded, ScanProfile.BitDepth, ScanProfile.MaxQuality, ScanProfile.Quality);
-                        scannedImageHelper.PostProcessStep2(image, result, ScanProfile, ScanParams, 1, false);
-                        string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, ScanParams);
-                        scannedImageHelper.RunBackgroundOcr(image, ScanParams, tempPath);
+                        var image = new ScannedImage(encoded, scanProfile.BitDepth, scanProfile.MaxQuality, scanProfile.Quality);
+                        scannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, 1, false);
+                        string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, scanParams);
+                        scannedImageHelper.RunBackgroundOcr(image, scanParams, tempPath);
                         return (image, false);
                     }
                 }

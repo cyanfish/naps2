@@ -23,119 +23,26 @@ namespace NAPS2.Scan
         private readonly IScanDriverFactory driverFactory;
         private readonly IErrorOutput errorOutput;
         private readonly IAutoSave autoSave;
-        private readonly IProfileManager profileManager;
 
-        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave, IProfileManager profileManager)
+        public ScanPerformer(IScanDriverFactory driverFactory, IErrorOutput errorOutput, IAutoSave autoSave)
         {
             this.driverFactory = driverFactory;
             this.errorOutput = errorOutput;
             this.autoSave = autoSave;
-            this.profileManager = profileManager;
         }
-
-        // TODO: Convert IScanDriver/ScanDriverBase to just a base class, ScanDriver
+        
         // TODO: Move additional logic (auto save, event logging, device prompting) to the driver base class
         // TODO: Not sure what to do with the error handling still. Maybe make that a separate overload/option in ScanPerformer.
-        // TODO: Maybe move the IScanDriver properties to parameters
         // TODO: Make ScanPerformer return a ScannedImageSource (adding more impls if necessary), and have consumers do "await source.ForEach(callback)"
         // TODO: Bascially the only thing ScanPerformer should do is delegate to the correct driver.
         // TODO: Probably ISaveNotify should follow the static default/injected pattern so it doesn't have to be a parameter.
-        // TODO: Use a handle pointer rather than IWin32Window for DialogParent
-
-        // Isn't this so much cleaner?
+        
         public ScannedImageSource PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task PerformScan(ScanProfile scanProfile, ScanParams scanParams, IWin32Window dialogParent, ISaveNotify notify,
-            Action<ScannedImage> imageCallback, CancellationToken cancelToken = default)
-        {
             var driver = driverFactory.Create(scanProfile.DriverName);
-            driver.DialogParent = dialogParent;
-            driver.ScanProfile = scanProfile;
-            driver.ScanParams = scanParams;
-            driver.CancelToken = cancelToken;
             try
             {
-                if (scanProfile.Device == null)
-                {
-                    // The profile has no device specified, so prompt the user to choose one
-                    var device = driver.PromptForDevice();
-                    if (device == null)
-                    {
-                        // User cancelled
-                        return;
-                    }
-                    if (AppConfig.Current.AlwaysRememberDevice)
-                    {
-                        scanProfile.Device = device;
-                        profileManager.Save();
-                    }
-                    driver.ScanDevice = device;
-                }
-                else
-                {
-                    // The profile has a device specified, so use it
-                    driver.ScanDevice = scanProfile.Device;
-                }
-
-                // Start the scan
-                int imageCount = 0;
-                var source = driver.Scan().Then(img => imageCount++);
-
-                bool doAutoSave = !scanParams.NoAutoSave && !AppConfig.Current.DisableAutoSave && scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null;
-                if (doAutoSave)
-                {
-                    if (scanProfile.AutoSaveSettings.ClearImagesAfterSaving)
-                    {
-                        // Auto save without piping images
-                        var images = await source.ToList();
-                        if (await autoSave.Save(scanProfile.AutoSaveSettings, images, notify))
-                        {
-                            foreach (ScannedImage img in images)
-                            {
-                                img.Dispose();
-                            }
-                        }
-                        else
-                        {
-                            // Fallback in case auto save failed; pipe all the images back at once
-                            foreach (ScannedImage img in images)
-                            {
-                                imageCallback(img);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // Basic auto save, so keep track of images as we pipe them and try to auto save afterwards
-                        var images = new List<ScannedImage>();
-                        await source.ForEach(scannedImage =>
-                        {
-                            imageCallback(scannedImage);
-                            images.Add(scannedImage);
-                        });
-                        await autoSave.Save(scanProfile.AutoSaveSettings, images, notify);
-                    }
-                }
-                else
-                {
-                    // No auto save, so just pipe images back as we get them
-                    await source.ForEach(imageCallback);
-                }
-
-                if (imageCount > 0)
-                {
-                    Log.Event(EventType.Scan, new EventParams
-                    {
-                        Name = MiscResources.Scan,
-                        Pages = imageCount,
-                        DeviceName = scanProfile.Device?.Name,
-                        ProfileName = scanProfile.DisplayName,
-                        BitDepth = scanProfile.BitDepth.Description()
-                    });
-                }
+                return driver.Scan(scanProfile, scanParams, dialogParent, cancelToken);
             }
             catch (ScanDriverException e)
             {
@@ -148,6 +55,8 @@ namespace NAPS2.Scan
                 {
                     errorOutput.DisplayError(e.Message);
                 }
+                // TODO: How does this error handling work with returned ScannedImageSource?
+                throw new NotImplementedException();
             }
         }
     }

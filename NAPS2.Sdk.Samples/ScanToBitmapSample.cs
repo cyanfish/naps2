@@ -30,21 +30,21 @@ namespace NAPS2.Sdk.Samples
             ScanDevice device = driver.GetDeviceList().First();
 
             // Configure basic scanning options (these are usually presented to the user)
-            driver.ScanProfile = new ScanProfile
+            ScanProfile scanProfile = new ScanProfile
             {
                 Device = device,
                 Resolution = ScanDpi.Dpi300
             };
 
             // Configure meta scanning options
-            driver.ScanParams = new ScanParams
+            ScanParams scanParams = new ScanParams
             {
                 NoUI = true
             };
 
             // This starts the scan and immediately returns with an object that asynchronously
             // receives the results of the scan.
-            ScannedImageSource imageSource = driver.Scan();
+            ScannedImageSource imageSource = driver.Scan(scanProfile, scanParams);
 
             // To change a ScannedImage object into a Bitmap object we need a renderer.
             // Since our backing storage already uses a Bitmap, this is a fairly trivial operation.

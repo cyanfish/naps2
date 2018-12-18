@@ -58,8 +58,7 @@ namespace NAPS2.ClientServer
                 scanProfile.DriverName = scanProfile.ProxyDriverName;
             }
             var driver = scanDriverFactory.Create(scanProfile.DriverName);
-            driver.ScanProfile = scanProfile;
-            return driver.GetDeviceList();
+            return driver.GetDeviceList(scanProfile);
         }
 
         public async Task<int> Scan(ScanProfile scanProfile, ScanParams scanParams)
@@ -87,7 +86,8 @@ namespace NAPS2.ClientServer
             var callback = OperationContext.Current.GetCallbackChannel<IScanCallback>();
 
             int pages = 0;
-            await scanPerformer.PerformScan(scanProfile, internalParams, null, null, image =>
+            var source = scanPerformer.PerformScan(scanProfile, internalParams, cancelToken: scanCts.Token);
+            await source.ForEach(image =>
             {
                 // TODO: Should stream this
                 // TODO: Also should think about avoiding the intermediate filesystem
@@ -106,7 +106,7 @@ namespace NAPS2.ClientServer
                     //callback.ImageReceived(imageBytes, sanitizedIndexImage);
                     //pages++;
                 }
-            }, scanCts.Token);
+            });
             return pages;
         }
 

@@ -54,9 +54,9 @@ namespace NAPS2.Scan.Wia
 
         private ScanParams ScanParams { get; set; }
 
-        private IWin32Window DialogParent { get; set; }
+        private IntPtr DialogParent { get; set; }
 
-        public bool Start(ScanProfile scanProfile, ScanDevice scanDevice, ScanParams scanParams, IWin32Window dialogParent, ScannedImageSource.Concrete source)
+        public bool Start(ScanProfile scanProfile, ScanDevice scanDevice, ScanParams scanParams, IntPtr dialogParent, ScannedImageSource.Concrete source)
         {
             ScanProfile = scanProfile;
             ScanDevice = scanDevice;
@@ -161,9 +161,8 @@ namespace NAPS2.Scan.Wia
         {
             // WIA 2.0 doesn't support normal transfers with native UI.
             // Instead we need to have it write the scans to a set of files and load those.
-
-            var hwnd = Invoker.Current.InvokeGet(() => DialogParent.Handle);
-            var paths = deviceManager.PromptForImage(hwnd, device);
+            
+            var paths = deviceManager.PromptForImage(DialogParent, device);
 
             if (paths == null)
             {
@@ -264,14 +263,13 @@ namespace NAPS2.Scan.Wia
         {
             if (ScanProfile.UseNativeUI)
             {
-                var hwnd = Invoker.Current.InvokeGet(() => DialogParent.Handle);
                 bool useWorker = Environment.Is64BitProcess && device.Version == WiaVersion.Wia10;
                 if (useWorker)
                 {
                     WiaConfiguration config;
                     using (var worker = workerServiceFactory.Create())
                     {
-                        config = worker.Service.Wia10NativeUI(device.Id(), hwnd);
+                        config = worker.Service.Wia10NativeUI(device.Id(), DialogParent);
                     }
                     var item = device.FindSubItem(config.ItemName);
                     device.Properties.DeserializeEditable(device.Properties.Delta(config.DeviceProps));
@@ -280,7 +278,7 @@ namespace NAPS2.Scan.Wia
                 }
                 else
                 {
-                    return device.PromptToConfigure(hwnd);
+                    return device.PromptToConfigure(DialogParent);
                 }
             }
             else if (device.Version == WiaVersion.Wia10)

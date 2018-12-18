@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Operation;
 using NAPS2.Platform;
@@ -34,13 +35,13 @@ namespace NAPS2.Scan.Wia
 
         public override bool IsSupported => PlatformCompat.System.IsWiaDriverSupported;
 
-        protected override ScanDevice PromptForDeviceInternal()
+        protected override ScanDevice PromptForDeviceInternal(ScanProfile scanProfile, IntPtr dialogParent)
         {
             try
             {
-                using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
+                using (var deviceManager = new WiaDeviceManager(scanProfile.WiaVersion))
                 {
-                    using (var device = deviceManager.PromptForDevice(DialogParent?.Handle ?? IntPtr.Zero))
+                    using (var device = deviceManager.PromptForDevice(dialogParent))
                     {
                         if (device == null)
                         {
@@ -57,9 +58,9 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        protected override List<ScanDevice> GetDeviceListInternal()
+        protected override List<ScanDevice> GetDeviceListInternal(ScanProfile scanProfile)
         {
-            using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
+            using (var deviceManager = new WiaDeviceManager(scanProfile?.WiaVersion ?? WiaVersion.Default))
             {
                 return deviceManager.GetDeviceInfos().Select(deviceInfo =>
                 {
@@ -71,15 +72,15 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        protected override async Task ScanInternal(ScannedImageSource.Concrete source)
+        protected override async Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             var op = new WiaScanOperation(scannedImageHelper);
-            using (CancelToken.Register(op.Cancel))
+            using (cancelToken.Register(op.Cancel))
             {
-                op.Start(ScanProfile, ScanDevice, ScanParams, DialogParent, source);
+                op.Start(scanProfile, scanDevice, scanParams, dialogParent, source);
                 Invoker.Current.SafeInvoke(() =>
                 {
-                    if (ScanParams.Modal)
+                    if (scanParams.Modal)
                     {
                         operationProgress.ShowModalProgress(op);
                     }

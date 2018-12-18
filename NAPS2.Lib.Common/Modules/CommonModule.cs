@@ -55,7 +55,6 @@ namespace NAPS2.DI.Modules
             Bind<IScanDriver>().To<ProxiedScanDriver>().InSingletonScope().Named(ProxiedScanDriver.DRIVER_NAME);
 
             // Config
-            Bind<IProfileManager>().To<ProfileManager>().InSingletonScope();
             Bind<PdfSettingsContainer>().ToSelf().InSingletonScope();
             Bind<ImageSettingsContainer>().ToSelf().InSingletonScope();
             Bind<EmailSettingsContainer>().ToSelf().InSingletonScope();
