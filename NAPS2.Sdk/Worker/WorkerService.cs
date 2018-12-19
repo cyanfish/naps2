@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -8,14 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
-using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
 using NAPS2.Scan.Twain;
 using NAPS2.Scan.Wia;
 using NAPS2.Scan.Wia.Native;
-using NAPS2.Util;
 
 namespace NAPS2.Worker
 {

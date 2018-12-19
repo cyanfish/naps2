@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using NAPS2.Logging;
-using NAPS2.Util;
 
 namespace NAPS2
 {

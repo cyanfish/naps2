@@ -14,7 +14,6 @@ using NAPS2.Lang.Resources;
 using NAPS2.Ocr;
 using NAPS2.Operation;
 using NAPS2.Images;
-using NAPS2.Scan.Twain;
 using NAPS2.Util;
 using NAPS2.WinForms;
 

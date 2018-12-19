@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using NAPS2.Platform;
-using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Scan.Sane;
 using NAPS2.Scan.Twain;

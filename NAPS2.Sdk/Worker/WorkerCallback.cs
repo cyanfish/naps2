@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using NAPS2.Recovery;
 using NAPS2.Images;
-using NAPS2.Images.Storage;
 
 namespace NAPS2.Worker
 {

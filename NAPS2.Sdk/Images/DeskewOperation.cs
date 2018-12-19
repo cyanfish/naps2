@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
-using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
 using NAPS2.Lang.Resources;
 using NAPS2.Operation;

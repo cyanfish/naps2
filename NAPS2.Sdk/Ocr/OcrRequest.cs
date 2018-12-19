@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using NAPS2.Images;
 
 namespace NAPS2.Ocr
 {

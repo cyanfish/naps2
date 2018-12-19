@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using NAPS2.Logging;
-using NAPS2.Util;
 
 namespace NAPS2.Worker
 {

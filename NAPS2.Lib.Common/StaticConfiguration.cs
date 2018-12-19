@@ -10,7 +10,6 @@ using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Platform;
 using NAPS2.Images.Storage;
-using NAPS2.Images.Transforms;
 using NAPS2.Scan;
 using NLog;
 

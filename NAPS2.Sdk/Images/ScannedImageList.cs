@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
-using NAPS2.Images.Storage;
 using NAPS2.Images.Transforms;
-using NAPS2.Recovery;
 using NAPS2.Util;
 
 namespace NAPS2.Images

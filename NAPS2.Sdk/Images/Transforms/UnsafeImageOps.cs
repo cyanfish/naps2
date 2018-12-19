@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using NAPS2.Util;
 

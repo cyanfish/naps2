@@ -9,7 +9,6 @@ using System.Xml.Linq;
 using NAPS2.Config;
 using NAPS2.Dependencies;
 using NAPS2.Logging;
-using NAPS2.Util;
 
 namespace NAPS2.Ocr
 {

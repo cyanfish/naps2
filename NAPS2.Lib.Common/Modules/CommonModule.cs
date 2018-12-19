@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using NAPS2.ClientServer;
-using NAPS2.Config;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.ImportExport.Pdf;
-using NAPS2.Logging;
 using NAPS2.Ocr;
 using NAPS2.Operation;
-using NAPS2.Platform;
 using NAPS2.Scan;
 using NAPS2.Images;
 using NAPS2.Scan.Sane;
