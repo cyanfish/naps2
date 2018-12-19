@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +10,6 @@ using NAPS2.Lang.Resources;
 using NAPS2.Operation;
 using NAPS2.Platform;
 using NAPS2.Images;
-using NAPS2.Images.Storage;
 using NAPS2.Util;
 
 namespace NAPS2.WinForms
@@ -50,7 +48,7 @@ namespace NAPS2.WinForms
         private readonly KeyboardShortcutManager ksm;
         private readonly OperationProgress operationProgress;
 
-        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, BitmapRenderer scannedImageRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress)
+        public FViewer(ChangeTracker changeTracker, IOperationFactory operationFactory, WinFormsExportHelper exportHelper, BitmapRenderer bitmapRenderer, KeyboardShortcutManager ksm, OperationProgress operationProgress)
         {
             this.changeTracker = changeTracker;
             this.operationFactory = operationFactory;
