@@ -39,7 +39,7 @@ namespace NAPS2.ClientServer
             }
         }
 
-        protected override Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
+        protected override Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             if (scanProfile.ProxyConfig == null)
             {

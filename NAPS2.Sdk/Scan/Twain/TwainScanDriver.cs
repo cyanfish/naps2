@@ -54,7 +54,7 @@ namespace NAPS2.Scan.Twain
             return twainWrapper.GetDeviceList(twainImpl);
         }
 
-        protected override async Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
+        protected override async Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             await Task.Factory.StartNew(async () =>
             {
@@ -65,7 +65,7 @@ namespace NAPS2.Scan.Twain
                         worker.Callback.ImageCallback += (img, tempPath) =>
                         {
                             if (tempPath != null) scannedImageHelper.RunBackgroundOcr(img, scanParams, tempPath);
-                            source.Put(img);
+                            sink.PutImage(img);
                         };
                         cancelToken.Register(worker.Service.CancelTwainScan);
                         await worker.Service.TwainScan(scanDevice, scanProfile, scanParams, dialogParent);
@@ -73,7 +73,7 @@ namespace NAPS2.Scan.Twain
                 }
                 else
                 {
-                    twainWrapper.Scan(dialogParent, scanDevice, scanProfile, scanParams, cancelToken, source, scannedImageHelper.RunBackgroundOcr);
+                    twainWrapper.Scan(dialogParent, scanDevice, scanProfile, scanParams, cancelToken, sink, scannedImageHelper.RunBackgroundOcr);
                 }
             }, TaskCreationOptions.LongRunning).Unwrap();
         }

@@ -54,7 +54,7 @@ namespace NAPS2.Scan.Twain.Legacy
             return result;
         }
 
-        public static void Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, ScannedImageSource.Concrete source)
+        public static void Scan(ScanProfile settings, ScanDevice device, IWin32Window pForm, ScannedImageSink sink)
         {
             var tw = new Twain();
             if (!tw.Init(pForm.Handle))
@@ -70,7 +70,7 @@ namespace NAPS2.Scan.Twain.Legacy
             form.ShowDialog(pForm);
             foreach (var b in mf.Bitmaps)
             {
-                source.Put(b);
+                sink.PutImage(b);
             }
         }
 

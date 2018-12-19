@@ -72,12 +72,12 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        protected override async Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
+        protected override async Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             var op = new WiaScanOperation(scannedImageHelper);
             using (cancelToken.Register(op.Cancel))
             {
-                op.Start(scanProfile, scanDevice, scanParams, dialogParent, source);
+                op.Start(scanProfile, scanDevice, scanParams, dialogParent, sink);
                 Invoker.Current.SafeInvoke(() =>
                 {
                     if (scanParams.Modal)

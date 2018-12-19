@@ -90,7 +90,7 @@ namespace NAPS2.Worker
                 {
                     var imagePathDict = new Dictionary<ScannedImage, string>();
                     twainWrapper.Scan(hwnd, scanDevice, scanProfile, scanParams, twainScanCts.Token,
-                        new WorkerImageSource(Callback, imagePathDict), (img, _, path) => imagePathDict.Add(img, path));
+                        new WorkerImageSink(Callback, imagePathDict), (img, _, path) => imagePathDict.Add(img, path));
                 }, TaskCreationOptions.LongRunning);
             }
             catch (ScanDriverException e)
@@ -126,19 +126,21 @@ namespace NAPS2.Worker
 
         public IWorkerCallback Callback { get; set; }
 
-        private class WorkerImageSource : ScannedImageSource.Concrete
+        private class WorkerImageSink : ScannedImageSink
         {
             private readonly IWorkerCallback callback;
             private readonly Dictionary<ScannedImage, string> imagePathDict;
 
-            public WorkerImageSource(IWorkerCallback callback, Dictionary<ScannedImage, string> imagePathDict)
+            public WorkerImageSink(IWorkerCallback callback, Dictionary<ScannedImage, string> imagePathDict)
             {
                 this.callback = callback;
                 this.imagePathDict = imagePathDict;
             }
 
-            public override void Put(ScannedImage image)
+            public override void PutImage(ScannedImage image)
             {
+                // TODO: Ideally this shouldn't be inheriting ScannedImageSink, some other cleaner mechanism
+
                 // TODO
                 //MemoryStream stream = null;
                 //var thumb = image.GetThumbnail();

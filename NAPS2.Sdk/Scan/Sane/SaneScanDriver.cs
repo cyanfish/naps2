@@ -46,7 +46,7 @@ namespace NAPS2.Scan.Sane
             return saneWrapper.GetDeviceList().ToList();
         }
 
-        protected override async Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
+        protected override async Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken)
         {
             // TODO: Test ADF
             var options = new Lazy<KeyValueScanOptions>(() => GetOptions(scanProfile, scanDevice));
@@ -54,7 +54,7 @@ namespace NAPS2.Scan.Sane
             var (img, done) = await Transfer(options, pageNumber, scanProfile, scanParams, scanDevice, cancelToken);
             if (img != null)
             {
-                source.Put(img);
+                sink.PutImage(img);
             }
 
             if (!done && scanProfile.PaperSource != ScanSource.Glass)
@@ -70,7 +70,7 @@ namespace NAPS2.Scan.Sane
                         }
                         if (img != null)
                         {
-                            source.Put(img);
+                            sink.PutImage(img);
                         }
                     }
                 }

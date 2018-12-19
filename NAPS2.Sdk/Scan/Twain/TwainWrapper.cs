@@ -90,11 +90,11 @@ namespace NAPS2.Scan.Twain
         }
 
         public void Scan(IntPtr dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
-            CancellationToken cancelToken, ScannedImageSource.Concrete source, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
+            CancellationToken cancelToken, ScannedImageSink sink, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
         {
             try
             {
-                InternalScan(scanProfile.TwainImpl, dialogParent, scanDevice, scanProfile, scanParams, cancelToken, source, runBackgroundOcr);
+                InternalScan(scanProfile.TwainImpl, dialogParent, scanDevice, scanProfile, scanParams, cancelToken, sink, runBackgroundOcr);
             }
             catch (DeviceNotFoundException)
             {
@@ -102,7 +102,7 @@ namespace NAPS2.Scan.Twain
                 {
                     // Fall back to OldDsm in case of no devices
                     // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
-                    InternalScan(TwainImpl.OldDsm, dialogParent, scanDevice, scanProfile, scanParams, cancelToken, source, runBackgroundOcr);
+                    InternalScan(TwainImpl.OldDsm, dialogParent, scanDevice, scanProfile, scanParams, cancelToken, sink, runBackgroundOcr);
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace NAPS2.Scan.Twain
         }
 
         private void InternalScan(TwainImpl twainImpl, IntPtr dialogParent, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams,
-            CancellationToken cancelToken, ScannedImageSource.Concrete source, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
+            CancellationToken cancelToken, ScannedImageSink sink, Action<ScannedImage, ScanParams, string> runBackgroundOcr)
         {
             if (dialogParent == IntPtr.Zero)
             {
@@ -120,7 +120,7 @@ namespace NAPS2.Scan.Twain
             }
             if (twainImpl == TwainImpl.Legacy)
             {
-                Legacy.TwainApi.Scan(scanProfile, scanDevice, new Win32Window(dialogParent), source);
+                Legacy.TwainApi.Scan(scanProfile, scanDevice, new Win32Window(dialogParent), sink);
                 return;
             }
 
@@ -176,7 +176,7 @@ namespace NAPS2.Scan.Twain
                             scannedImageHelper.PostProcessStep2(image, result, scanProfile, scanParams, pageNumber);
                             string tempPath = scannedImageHelper.SaveForBackgroundOcr(result, scanParams);
                             runBackgroundOcr(image, scanParams, tempPath);
-                            source.Put(image);
+                            sink.PutImage(image);
                         }
                     }
                 }

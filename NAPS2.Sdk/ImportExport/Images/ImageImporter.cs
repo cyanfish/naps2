@@ -25,14 +25,14 @@ namespace NAPS2.ImportExport.Images
 
         public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            var source = new ScannedImageSource.Concrete();
+            var sink = new ScannedImageSink();
             Task.Factory.StartNew(() =>
             {
                 try
                 {
                     if (cancelToken.IsCancellationRequested)
                     {
-                        source.Done();
+                        sink.SetCompleted();
                         return;
                     }
 
@@ -57,7 +57,7 @@ namespace NAPS2.ImportExport.Images
                             progressCallback(i++, frameCount);
                             if (cancelToken.IsCancellationRequested)
                             {
-                                source.Done();
+                                sink.SetCompleted();
                                 return;
                             }
                             
@@ -72,20 +72,20 @@ namespace NAPS2.ImportExport.Images
                                 image.PatchCode = PatchCodeDetector.Detect(frame);
                             }
 
-                            source.Put(image);
+                            sink.PutImage(image);
                         }
 
                         progressCallback(frameCount, frameCount);
                     }
 
-                    source.Done();
+                    sink.SetCompleted();
                 }
                 catch(Exception e)
                 {
-                    source.Error(e);
+                    sink.SetError(e);
                 }
             }, TaskCreationOptions.LongRunning);
-            return source;
+            return sink.AsSource();
         }
     }
 }

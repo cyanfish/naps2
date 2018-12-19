@@ -42,12 +42,12 @@ namespace NAPS2.ImportExport.Pdf
 
         public ScannedImageSource Import(string filePath, ImportParams importParams, ProgressHandler progressCallback, CancellationToken cancelToken)
         {
-            var source = new ScannedImageSource.Concrete();
+            var sink = new ScannedImageSink();
             Task.Factory.StartNew(async () =>
             {
                 if (cancelToken.IsCancellationRequested)
                 {
-                    source.Done();
+                    sink.SetCompleted();
                 }
 
                 int passwordAttempts = 0;
@@ -68,7 +68,7 @@ namespace NAPS2.ImportExport.Pdf
                         && !document.SecuritySettings.PermitExtractContent)
                     {
                         errorOutput.DisplayError(string.Format(MiscResources.PdfNoPermissionToExtractContent, Path.GetFileName(filePath)));
-                        source.Done();
+                        sink.SetCompleted();
                     }
 
                     var pages = importParams.Slice.Indices(document.PageCount)
@@ -84,14 +84,14 @@ namespace NAPS2.ImportExport.Pdf
                         pdfRenderer.ThrowIfCantRender();
                         foreach (var page in pages)
                         {
-                            source.Put(await ExportRawPdfPage(page, importParams));
+                            sink.PutImage(await ExportRawPdfPage(page, importParams));
                         }
                     }
                     else
                     {
                         foreach (var page in pages)
                         {
-                            await GetImagesFromPage(page, importParams, source);
+                            await GetImagesFromPage(page, importParams, sink);
                         }
                     }
                 }
@@ -110,17 +110,17 @@ namespace NAPS2.ImportExport.Pdf
                 }
                 finally
                 {
-                    source.Done();
+                    sink.SetCompleted();
                 }
             }, TaskCreationOptions.LongRunning);
-            return source;
+            return sink.AsSource();
         }
 
-        private async Task GetImagesFromPage(PdfPage page, ImportParams importParams, ScannedImageSource.Concrete source)
+        private async Task GetImagesFromPage(PdfPage page, ImportParams importParams, ScannedImageSink sink)
         {
             if (page.CustomValues.Elements.ContainsKey("/NAPS2ImportedPage"))
             {
-                source.Put(await ExportRawPdfPage(page, importParams));
+                sink.PutImage(await ExportRawPdfPage(page, importParams));
                 return;
             }
 
@@ -147,12 +147,12 @@ namespace NAPS2.ImportExport.Pdf
                         string[] arrayElements = elementAsArray.Elements.Select(x => x.ToString()).ToArray();
                         if (arrayElements.Length == 2)
                         {
-                            source.Put(DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams));
+                            sink.PutImage(DecodeImage(arrayElements[1], page, xObject, Filtering.Decode(xObject.Stream.Value, arrayElements[0]), importParams));
                         }
                     }
                     else if (elementAsName != null)
                     {
-                        source.Put(DecodeImage(elementAsName.Value, page, xObject, xObject.Stream.Value, importParams));
+                        sink.PutImage(DecodeImage(elementAsName.Value, page, xObject, xObject.Stream.Value, importParams));
                     }
                     else
                     {

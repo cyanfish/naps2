@@ -4,7 +4,6 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using NAPS2.Config;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Images;
@@ -98,47 +97,45 @@ namespace NAPS2.Scan
                 throw new ArgumentNullException(nameof(scanParams));
             }
 
-            var source = new ScannedImageSource.Concrete();
+            var sink = new ScannedImageSink();
             Task.Factory.StartNew(async () =>
             {
                 try
                 {
-                    int imageCount = 0;
-                    source.OnPut += (sender, args) => imageCount++;
-
                     var device = GetScanDevice(scanProfile);
                     if (device != null)
                     {
-                        await ScanInternal(source, device, scanProfile, scanParams, dialogParent, cancelToken);
+                        await ScanInternal(sink, device, scanProfile, scanParams, dialogParent, cancelToken);
                     }
-                    source.Done();
 
-                    if (imageCount > 0)
+                    if (sink.ImageCount > 0)
                     {
                         Log.Event(EventType.Scan, new EventParams
                         {
                             Name = MiscResources.Scan,
-                            Pages = imageCount,
+                            Pages = sink.ImageCount,
                             DeviceName = scanProfile.Device?.Name,
                             ProfileName = scanProfile.DisplayName,
                             BitDepth = scanProfile.BitDepth.Description()
                         });
                     }
+
+                    sink.SetCompleted();
                 }
                 catch (ScanDriverException e)
                 {
-                    source.Error(e);
+                    sink.SetError(e);
                 }
                 catch (FaultException<ScanDriverExceptionDetail> e)
                 {
-                    source.Error(e.Detail.Exception);
+                    sink.SetError(e.Detail.Exception);
                 }
                 catch (Exception e)
                 {
-                    source.Error(new ScanDriverUnknownException(e));
+                    sink.SetError(new ScanDriverUnknownException(e));
                 }
             }, TaskCreationOptions.LongRunning);
-            return source;
+            return sink.AsSource();
         }
 
         private void AutoSaveStuff()
@@ -209,6 +206,6 @@ namespace NAPS2.Scan
             return device;
         }
 
-        protected abstract Task ScanInternal(ScannedImageSource.Concrete source, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken);
+        protected abstract Task ScanInternal(ScannedImageSink sink, ScanDevice scanDevice, ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent, CancellationToken cancelToken);
     }
 }

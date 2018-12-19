@@ -56,7 +56,7 @@ namespace NAPS2.Scan.Wia
 
         private IntPtr DialogParent { get; set; }
 
-        public bool Start(ScanProfile scanProfile, ScanDevice scanDevice, ScanParams scanParams, IntPtr dialogParent, ScannedImageSource.Concrete source)
+        public bool Start(ScanProfile scanProfile, ScanDevice scanDevice, ScanParams scanParams, IntPtr dialogParent, ScannedImageSink sink)
         {
             ScanProfile = scanProfile;
             ScanDevice = scanDevice;
@@ -83,7 +83,7 @@ namespace NAPS2.Scan.Wia
                     try
                     {
                         smoothProgress.Reset();
-                        Scan(source);
+                        Scan(sink);
                     }
                     catch (WiaException e)
                     {
@@ -107,14 +107,14 @@ namespace NAPS2.Scan.Wia
             return true;
         }
 
-        private void Scan(ScannedImageSource.Concrete source)
+        private void Scan(ScannedImageSink sink)
         {
             using (var deviceManager = new WiaDeviceManager(ScanProfile.WiaVersion))
             using (var device = deviceManager.FindDevice(ScanDevice.ID))
             {
                 if (device.Version == WiaVersion.Wia20 && ScanProfile.UseNativeUI)
                 {
-                    DoWia20NativeTransfer(source, deviceManager, device);
+                    DoWia20NativeTransfer(sink, deviceManager, device);
                     return;
                 }
 
@@ -125,7 +125,7 @@ namespace NAPS2.Scan.Wia
                         return;
                     }
 
-                    DoTransfer(source, device, item);
+                    DoTransfer(sink, device, item);
                 }
             }
         }
@@ -145,19 +145,19 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void ProduceImage(ScannedImageSource.Concrete source, IImage output, ref int pageNumber)
+        private void ProduceImage(ScannedImageSink sink, IImage output, ref int pageNumber)
         {
             var image = scannedImageHelper.PostProcess(output, pageNumber, ScanProfile, ScanParams);
             if (image != null)
             {
-                source.Put(image);
+                sink.PutImage(image);
             }
 
             pageNumber++;
             InitNextPageProgress(pageNumber);
         }
 
-        private void DoWia20NativeTransfer(ScannedImageSource.Concrete source, WiaDeviceManager deviceManager, WiaDevice device)
+        private void DoWia20NativeTransfer(ScannedImageSink sink, WiaDeviceManager deviceManager, WiaDevice device)
         {
             // WIA 2.0 doesn't support normal transfers with native UI.
             // Instead we need to have it write the scans to a set of files and load those.
@@ -182,7 +182,7 @@ namespace NAPS2.Scan.Wia
                         {
                             using (storage)
                             {
-                                ProduceImage(source, storage, ref pageNumber);
+                                ProduceImage(sink, storage, ref pageNumber);
                             }
                         }
                     }
@@ -204,7 +204,7 @@ namespace NAPS2.Scan.Wia
             }
         }
 
-        private void DoTransfer(ScannedImageSource.Concrete source, WiaDevice device, WiaItem item)
+        private void DoTransfer(ScannedImageSink sink, WiaDevice device, WiaItem item)
         {
             if (ScanProfile.PaperSource != ScanSource.Glass && !device.SupportsFeeder())
             {
@@ -228,7 +228,7 @@ namespace NAPS2.Scan.Wia
                         using (args.Stream)
                         using (var storage = StorageManager.ImageFactory.Decode(args.Stream, ".bmp"))
                         {
-                            ProduceImage(source, storage, ref pageNumber);
+                            ProduceImage(sink, storage, ref pageNumber);
                         }
                     }
                     catch (Exception e)
